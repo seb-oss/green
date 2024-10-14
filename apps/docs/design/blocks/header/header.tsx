@@ -3,8 +3,9 @@
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { ThemeProviderContext } from '$/theme/provider'
-
 import dynamic from 'next/dynamic'
+
+import './header.css'
 
 const GdsContainer = dynamic(
   () => import('@sebgroup/green-react/src/core/container'),
@@ -67,7 +68,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
   const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
 
   return (
-    <header style={{ position: 'sticky', top: 0 }}>
+    <header className="header">
       <GdsContainer margin="auto" padding="m; m{m l}" inset="0 0 auto 0">
         <GdsFlex justify-content="space-between" align-items="center">
           <GdsFlex flex="1" display="flex">
@@ -81,7 +82,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
             flex="1"
             align-items="center"
             justify-content="center; >m{flex-start}"
-            style={{ paddingLeft: 110 }}
+            padding-inline="110px 0"
           >
             <IconBrandSeb />
           </GdsFlex>

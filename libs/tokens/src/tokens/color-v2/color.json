@@ -511,49 +511,49 @@
           "dark-hover": {
             "value": "#ffffff",
             "darkValue": "#ffffff",
-            "alpha": "10%",
+            "alpha": ".1",
             "type": "color"
           },
           "dark-pressed": {
             "value": "#ffffff",
             "darkValue": "#ffffff",
-            "alpha": "20%",
+            "alpha": ".2",
             "type": "color"
           },
           "light-hover": {
             "value": "#1b1b1b",
             "darkValue": "#d7d7d7",
-            "alpha": "10%",
+            "alpha": ".1",
             "type": "color"
           },
           "light-pressed": {
             "value": "#1b1b1b",
             "darkValue": "#d7d7d7",
-            "alpha": "20%",
+            "alpha": ".2",
             "type": "color"
           },
           "positive-hover": {
             "value": "#35723d",
             "darkValue": "#54b561",
-            "alpha": "10%",
+            "alpha": ".1",
             "type": "color"
           },
           "positive-pressed": {
             "value": "#35723d",
             "darkValue": "#54b561",
-            "alpha": "20%",
+            "alpha": ".2",
             "type": "color"
           },
           "negative-hover": {
             "value": "#a63e2a",
             "darkValue": "#ee8375",
-            "alpha": "10%",
+            "alpha": ".1",
             "type": "color"
           },
           "negative-pressed": {
             "value": "#a63e2a",
             "darkValue": "#ee8375",
-            "alpha": "20%",
+            "alpha": ".2",
             "type": "color"
           }
         }

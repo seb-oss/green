@@ -3,9 +3,8 @@
 import React, { createContext, useEffect, useState } from 'react'
 import Cmdk from '@/cmdk'
 import Favicon from '@/favicon/favicon'
-// import { ThemeProvider as NextThemesProvider } from 'next-themes'
-// import { type ThemeProviderProps } from 'next-themes/dist/types'
 import { Toaster } from 'sonner'
+import { usePathname } from 'next/navigation'
 
 type ThemeProviderContextType = {
   isOpen: boolean
@@ -25,26 +24,25 @@ export const ThemeProviderContext = createContext<ThemeProviderContextType>({
   },
 })
 
-export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [isOpen, setIsOpen] = useState(false)
   const [isNavOpen, setNavOpen] = useState(false)
+
+  const pathname = usePathname()
 
   const toggleCmd = () => {
     setIsOpen((prevOpen) => !prevOpen)
   }
 
   const toggleNav = () => {
-    setNavOpen((prevNavOpen) => {
-      const newNavOpen = !prevNavOpen
-      localStorage.setItem('navOpen', newNavOpen ? 'true' : 'false')
-      return newNavOpen
-    })
+    setNavOpen((prevNavOpen) => !prevNavOpen)
   }
 
   useEffect(() => {
-    const navOpen = localStorage.getItem('navOpen')
-    setNavOpen(navOpen === 'true')
+    setNavOpen(false)
+  }, [pathname])
 
+  useEffect(() => {
     const handleMKey = (e: {
       stopPropagation(): void
       key: string

@@ -1,9 +1,40 @@
 .menu {
   height: 100vh;
+  position: fixed;
+  transform: translate(-100%);
+  transition: transform 400ms var(--gds-sys-motion-easing-ease-out);
+
+  &.menu--open {
+    transform: translate(0);
+  }
+
+  & [gds-element='gds-card'] {
+    position: relative;
+  }
+
+  & .menu__close-button {
+    position: absolute;
+    top: var(--gds-space-s);
+    right: var(--gds-space-s);
+
+    @media screen and (min-width: 64rem) {
+      display: none;
+    }
+  }
+
+  a {
+    padding: var(--gds-space-xs);
+    border-radius: 0.25rem;
+
+    &:hover {
+      border-radius: 0.25rem;
+    }
+  }
 
   @media screen and (min-width: 64rem) {
     top: 0;
     position: sticky;
     max-height: 100vh;
+    transform: none;
   }
 }

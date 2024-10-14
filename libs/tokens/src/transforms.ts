@@ -1,13 +1,16 @@
 import * as StyleDictionary from 'style-dictionary'
 import * as tinycolor from 'tinycolor2'
 
-const transforms: Record<string, StyleDictionary.Named<StyleDictionary.Transform<unknown>>> = {
+const transforms: Record<
+  string,
+  StyleDictionary.Named<StyleDictionary.Transform<unknown>>
+> = {
   'name/figma': {
     name: 'name/figma',
     type: 'name',
     transformer: (token: StyleDictionary.DesignToken) => {
       return token.path.slice(1, token.path.length).join('/')
-    }
+    },
   },
   'size/px': {
     name: 'size/px',
@@ -17,7 +20,7 @@ const transforms: Record<string, StyleDictionary.Named<StyleDictionary.Transform
     },
     transformer: function (prop) {
       return `${prop.original.value}px`
-    }
+    },
   },
   // For use with css `mix-color` function
   'color/mix-blend': {
@@ -46,7 +49,7 @@ const transforms: Record<string, StyleDictionary.Named<StyleDictionary.Transform
       }
 
       return `#${value.toHex()} ${toMixBlend(token.alpha)}`
-    }
+    },
   },
   'color/alpha': {
     name: 'color/alpha',
@@ -72,20 +75,20 @@ const transforms: Record<string, StyleDictionary.Named<StyleDictionary.Transform
       }
 
       return value.setAlpha(token.alpha).toString()
-    }
+    },
   },
   'green/color/UIColorSwift': {
     name: 'green/color/UIColorSwift',
     type: 'value',
-    matcher: token => token.path.includes('color'),
+    matcher: (token) => token.path.includes('color'),
     transformer: function (token) {
       const { r, g, b, a } = tinycolor(token.value).toRgb()
       const rFixed = (r / 255.0).toFixed(3)
       const gFixed = (g / 255.0).toFixed(3)
       const bFixed = (b / 255.0).toFixed(3)
       return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${a})`
-    }
-  }
+    },
+  },
 }
 
 export default transforms

@@ -10,11 +10,7 @@ import { ThemeProvider } from '$/theme/provider'
 import Script from 'next/script'
 import { useEffect, useState, useContext } from 'react'
 import dynamic from 'next/dynamic'
-//import { ThemeProviderContext } from '$/theme/provider'
-
-const GdsTheme = dynamic(() => import('@sebgroup/green-react/src/core/theme'), {
-  ssr: false,
-})
+import '#/global.css'
 
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
   ssr: false,
@@ -81,24 +77,17 @@ export default function RootLayout({
       })
   }, [colorScheme, setColorScheme])
 
-  //const { toggleNav, isNavOpen } = useContext(ThemeProviderContext)
-
   return (
     <html lang="en" suppressHydrationWarning gds-theme={colorScheme}>
       <body>
-        <ThemeProvider
-          attribute="theme"
-          defaultTheme="system"
-          enableColorScheme={false}
-          enableSystem
-        >
+        <ThemeProvider>
           <GdsFlex gap="l">
             <Menu />
             <GdsFlex flex-direction="column" gap="l" width="100%">
               <Header />
               <GdsContainer padding="0 m; >m{0 l 0 0}">
-                <GdsContainer max-width="1088px" margin="auto">
-                  {children}
+                <GdsContainer max-width="1152px" margin="auto">
+                  <main>{children}</main>
                 </GdsContainer>
               </GdsContainer>
             </GdsFlex>

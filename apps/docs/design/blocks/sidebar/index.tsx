@@ -2,19 +2,23 @@ import Dev, { isDev } from '$/dev/dev'
 import { allComponents, Component } from 'content'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
 import dynamic from 'next/dynamic'
 import './style.css'
+import classNames from 'classnames'
+import { ThemeProviderContext } from '$/theme/provider'
 
 const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'))
+const GdsButton = dynamic(() => import('@sebgroup/green-react/src/core/button'))
+const IconCrossSmall = dynamic(() =>
+  import('@sebgroup/green-react/src/lib/icon/icons/IconCrossSmall').then(
+    (mod) => mod.IconCrossSmall,
+  ),
+)
 
-export default function Sidebar({
-  isNavOpen,
-}: {
-  isNavOpen: boolean
-  toggleNav: () => void
-}) {
+export default function Sidebar() {
+  const { isNavOpen, toggleNav } = useContext(ThemeProviderContext)
   const path = usePathname()
   const filteredComponents = allComponents.filter(
     (component) => component._raw.sourceFileName === 'index.mdx',
@@ -38,14 +42,28 @@ export default function Sidebar({
   }
 
   return (
-    <GdsFlex className="menu" padding="l">
+    <GdsFlex
+      className={classNames('menu', { 'menu--open': isNavOpen })}
+      padding="m; m{l}"
+      position="fixed; m{sticky}"
+      z-index="999"
+    >
       <GdsCard
         width="250px"
-        padding="m l"
+        padding="m"
         background="primary"
         border-radius="s"
+        shadow="l; m{none}"
       >
-        <nav className="menu">
+        <GdsButton
+          className="menu__close-button"
+          rank="secondary"
+          size="small"
+          onClick={() => toggleNav()}
+        >
+          <IconCrossSmall />
+        </GdsButton>
+        <nav>
           <GdsFlex gap="s" flex-direction="column">
             <Link
               className={path === '/components' ? 'active' : ''}

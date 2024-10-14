@@ -7,32 +7,44 @@ import { allComponents } from 'content'
 import dynamic from 'next/dynamic'
 
 const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'), {
-  ssr: false
+  ssr: false,
+})
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
+
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+  ssr: false,
 })
 
 import './component-list.css'
 
-export default function ComponentList({ title }: { title: string }) {
-  const components = allComponents
-    .filter(component => {
-      if (component._raw.sourceFileName !== 'index.mdx') {
-        return false
-      }
-      if (component.private && !isDev) {
-        return false
-      }
-      return true
-    })
-    .sort((a, b) => a.title.localeCompare(b.title))
+const components = allComponents
+  .filter((component) => {
+    if (component._raw.sourceFileName !== 'index.mdx') {
+      return false
+    }
+    if (component.private && !isDev) {
+      return false
+    }
+    return true
+  })
+  .sort((a, b) => a.title.localeCompare(b.title))
 
+export default function ComponentList({ title }: { title: string }) {
   return (
-    <section className="component-list">
-      {title && <h2>{title}</h2>}
-      <GdsGrid columns="2; m{1} l{3}" gap="m">
+    <GdsFlex gap="l" flex-direction="column">
+      {title && (
+        <GdsText tag="h2" font-size="heading-l" font-weight="book">
+          {title}
+        </GdsText>
+      )}
+      <GdsGrid columns="1; xs{2} l{3}" gap="m">
         {components.map((component, idx) => (
           <ComponentCard key={idx} {...component} />
         ))}
       </GdsGrid>
-    </section>
+    </GdsFlex>
   )
 }
