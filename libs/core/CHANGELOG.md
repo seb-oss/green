@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.7
+
+### Patch Changes
+
+- 3709a4f: **Video, IMG, Divider:** Fixed all display content issues and flex gap cashing
+
 ## 1.44.6
 
 ### Patch Changes
