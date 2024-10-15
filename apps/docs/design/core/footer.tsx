@@ -14,14 +14,14 @@ export default function Footer() {
   return (
     <GdsFlex
       flex-direction="column"
-      padding="2xl"
-      gap="8xl"
+      padding="6xl 2xl"
+      gap="5xl"
       border="4xs/primary 0 0 0"
     >
       <GdsFlex>
         <GdsText tag="h2">Green Design System</GdsText>
       </GdsFlex>
-      <GdsFlex gap="4xl">
+      <GdsFlex gap="8xl">
         <GdsFlex gap="xl" flex-direction="column">
           <Link href="/about">About</Link>
           <Link href="/foundation">Foundation</Link>
