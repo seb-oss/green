@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    display: contents;
+    display: block;
   }
 
   hr {
