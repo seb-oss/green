@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.2
+
+### Patch Changes
+
+- 3fa31fd: **Scoped Elements:** Refactor the element lookup table as a global singleton rather than a module-scoped object.
+
 ## 1.44.1
 
 ### Patch Changes
