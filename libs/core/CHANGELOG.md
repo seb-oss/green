@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.6
+
+### Patch Changes
+
+- f3171b4: adding correct easing to ripple nad releasing tokens
+
 ## 1.44.5
 
 ### Patch Changes
