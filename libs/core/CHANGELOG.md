@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.4
+
+### Patch Changes
+
+- 9161c53: **gds-text:** pass props to host instead of tag and remove isolate prop
+
 ## 1.44.3
 
 ### Patch Changes
