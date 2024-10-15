@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/fonts",
   "version": "2.0.0",
-  "description": "SEB font",
+  "description": "Font files and CSS for SEB SansSerif",
   "main": "fonts.scss",
   "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
   "scripts": {
@@ -12,7 +12,7 @@
     "clean": "rimraf css"
   },
   "homepage": "https://seb.io",
-  "license": "MIT",
+  "license": "LicenseRef-LICENSE",
   "bugs": {
     "url": "https://github.com/seb-oss/green/"
   },
