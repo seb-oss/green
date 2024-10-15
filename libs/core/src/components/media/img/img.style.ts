@@ -3,9 +3,6 @@ import { css } from 'lit'
 const style = css`
   :host {
     display: block;
-  }
-
-  figure {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
