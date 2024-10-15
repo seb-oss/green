@@ -2,6 +2,7 @@
 
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsText from '@sebgroup/green-react/src/core/text'
+import GdsButton from '@sebgroup/green-react/src/core/button'
 import Link from 'next/link'
 
 export default function Footer() {
@@ -35,7 +36,13 @@ export default function Footer() {
           <Link href="https://seb.se/">SEB.se</Link>
         </GdsFlex>
       </GdsFlex>
-      <GdsFlex>{text}</GdsFlex>
+      <GdsFlex justify-content="space-between" align-items="center">
+        {text}
+
+        <GdsButton data-cc="c-settings" rank="tertiary">
+          Cookie preferences
+        </GdsButton>
+      </GdsFlex>
     </GdsFlex>
   )
 }
