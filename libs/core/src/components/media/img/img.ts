@@ -44,7 +44,6 @@ export class GdsImg extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'aspect-ratio',
-    selector: 'figure',
     valueTemplate: (v) => v,
   })
   'aspect-ratio'?: string
@@ -80,7 +79,6 @@ export class GdsImg extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'inset',
-    selector: 'figure',
     valueTemplate: (v) => v,
   })
   inset?: string
@@ -121,7 +119,6 @@ export class GdsImg extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'opacity',
-    selector: 'figure',
     valueTemplate: (v) => v,
   })
   opacity?: string
@@ -190,12 +187,12 @@ export class GdsImg extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    selector: 'figure',
     valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   'border-radius'?: string
 
   render() {
-    return html`<figure><img src="${this.src}" alt="${this.alt}" /></figure>`
+    return html`<img src="${this.src}" alt="${this.alt}" />`
+    // return html`<figure><img src="${this.src}" alt="${this.alt}" /></figure>`
   }
 }

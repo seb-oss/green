@@ -45,7 +45,6 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'aspect-ratio',
-    selector: 'figure',
     valueTemplate: (v) => v,
   })
   'aspect-ratio'?: string
@@ -81,7 +80,6 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'inset',
-    selector: 'figure',
     valueTemplate: (v) => v,
   })
   inset?: string
@@ -121,7 +119,6 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'opacity',
-    selector: 'figure',
     valueTemplate: (v) => v,
   })
   opacity?: string
@@ -181,7 +178,6 @@ export class GdsVideo extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    selector: 'figure',
     valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   'border-radius'?: string
@@ -208,7 +204,7 @@ export class GdsVideo extends GdsElement {
   }
 
   render() {
-    return html`<figure><video></video></figure>`
+    return html`<video></video>`
   }
 
   firstUpdated() {
