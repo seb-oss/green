@@ -9,6 +9,7 @@ import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import { Provider } from '$/provider/provider'
 
 import '#/global.css'
+import Footer from 'core/footer'
 
 export default function RootLayout({
   children,
@@ -26,6 +27,7 @@ export default function RootLayout({
                 {children}
                 <Consent />
               </Main>
+              <Footer />
             </GdsFlex>
           </Fonts>
         </Provider>

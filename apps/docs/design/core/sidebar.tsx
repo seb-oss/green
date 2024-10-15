@@ -85,8 +85,6 @@ export default function Sidebar({
     }))
   }
 
-  // console.log('path', isNavOpen)
-
   return (
     <GdsFlex
       padding="l"
