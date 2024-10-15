@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.0
+
+### Minor Changes
+
+- aa0ec78: **Motion:** new tokens added for motion, removing old ones
+
 ## 0.8.0
 
 ### Minor Changes
