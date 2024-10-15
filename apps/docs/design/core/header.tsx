@@ -37,6 +37,7 @@ export default function Header() {
         align-items="center"
         height="72px"
         border="0 0 4xs/primary 0"
+        padding="0 l"
       >
         <GdsMenuButton onClick={toggleNav}>
           {isNavOpen === true ? (

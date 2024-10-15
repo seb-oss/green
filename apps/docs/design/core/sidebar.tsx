@@ -87,7 +87,7 @@ export default function Sidebar({
 
   return (
     <GdsFlex
-      padding="l"
+      padding="xl xl xl 2xl"
       border="0 4xs/primary 0 0"
       min-width="300px"
       min-height="100vh"

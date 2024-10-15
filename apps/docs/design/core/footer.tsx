@@ -14,7 +14,7 @@ export default function Footer() {
   return (
     <GdsFlex
       flex-direction="column"
-      padding="4xl"
+      padding="2xl"
       gap="8xl"
       border="4xs/primary 0 0 0"
     >
