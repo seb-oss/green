@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.5
+
+### Patch Changes
+
+- aa0ec78: **Ripple:** removing old ripple animation tokens
+
 ## 1.44.4
 
 ### Patch Changes
