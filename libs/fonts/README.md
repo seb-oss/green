@@ -18,7 +18,8 @@ Add `fonts.scss` or `fonts.css` to your project.
 
 ## Legal notice and usage
 
-Please note that SEB SansSerif is licensed to SEB and that the font is not intended for use without the SEB brand which is a registered trademark.
+The typeface is the property of SEB Group and protected by copyright law. It may not be used by others without prior written permission. If you have any questions regarding SEB SansSerif please contact SEB Marketing and Communications.
+
 For questions regarding use please contact corporateidentity@seb.se.
 
 ## Support
