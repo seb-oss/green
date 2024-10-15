@@ -1,5 +1,11 @@
 # @sebgroup/fonts
 
+## 2.0.1
+
+### Patch Changes
+
+- d38f94e: Add licence
+
 ## 2.0.0
 
 ### Major Changes
