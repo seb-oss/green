@@ -1,10 +1,10 @@
 ## Green Design System Fonts
 
-This repository contains SEBs primary font SEB Sans Serif.
+This repository contains SEBs primary font SEB SansSerif.
 
-## Demo
+This package contains the GDS version of SEB SansSerif (`SEB SansSerif GDS`), which is intended for use in a web context with the Green Design System. The package also contains an older version called `SEBSansSerif` which is considered deprecated.
 
-A demo is available [here](https://sebgroup.github.io/fonts/) (please note that this package only contains the font and font weights, not the css for font sizes).
+The two version differ slightly in line-height, kerning and available weights.
 
 ## Getting started
 
@@ -18,7 +18,7 @@ Add `fonts.scss` or `fonts.css` to your project.
 
 ## Legal notice and usage
 
-Please note that SEB Sans Serif is licensed to SEB and that the font is not intended for use without the SEB brand which is a registered trademark.
+Please note that SEB SansSerif is licensed to SEB and that the font is not intended for use without the SEB brand which is a registered trademark.
 For questions regarding use please contact corporateidentity@seb.se.
 
 ## Support
