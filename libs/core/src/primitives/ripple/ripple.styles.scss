@@ -1,7 +1,7 @@
 :host {
   --gds-ripple-motion-name: ripple;
-  --gds-ripple-motion: var(--gds-ripple-motion-name) 1.2s ease 0s 1 normal none
-    running;
+  --gds-ripple-motion: var(--gds-ripple-motion-name) 1.2s
+    cubic-bezier(0.46, 0.03, 0.52, 0.96) 0s 1 normal none running;
   border-radius: var(--gds-space-max);
   contain: strict;
   display: flex;
