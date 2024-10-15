@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.2
+
+### Patch Changes
+
+- 2e6b5f0: trigger release
+
 ## 0.9.1
 
 ### Patch Changes
