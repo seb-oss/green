@@ -5,12 +5,9 @@ const style = css`
     display: block;
   }
 
-  * {
-    margin: unset;
-    font-weight: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    text-wrap: inherit;
+  [tag] {
+    margin: 0;
+    padding: 0;
   }
 
   h1.no-size-set {
