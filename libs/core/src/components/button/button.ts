@@ -175,13 +175,12 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   // Check if the button is an icon button.
   #mainSlotChange = () => {
-    const assignedNodes = (this._mainSlot?.assignedNodes() ??
-      []) as GdsElement[]
+    const assignedElements = this._mainSlot?.assignedElements() ?? []
 
     this.#isIconButton =
-      assignedNodes.length === 1 &&
-      assignedNodes.some((node) =>
-        node.nodeName.toLowerCase().startsWith('gds-icon'),
+      assignedElements.length === 1 &&
+      assignedElements.some((element) =>
+        element.tagName.toLowerCase().startsWith('gds-icon'),
       )
 
     this.requestUpdate()
