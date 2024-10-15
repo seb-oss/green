@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.44.3
+
+### Patch Changes
+
+- ea478ef: **Button:** Fix icon button not finding the node
+- 98db232: **Styling:** remove display:contents
+
 ## 1.44.2
 
 ### Patch Changes
