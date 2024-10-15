@@ -1,9 +1,10 @@
 'use client'
 
+import Link from 'next/link'
+
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsText from '@sebgroup/green-react/src/core/text'
 import GdsButton from '@sebgroup/green-react/src/core/button'
-import Link from 'next/link'
 
 export default function Footer() {
   const year = new Date().getFullYear()
