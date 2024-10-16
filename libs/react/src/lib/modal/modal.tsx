@@ -62,8 +62,7 @@ const ModalHeader = ({
   return (
     <div className="header">
       <h3 id={id}>{header}</h3>
-      <button className="close" onClick={handleClose}>
-        <span className="sr-only">Close</span>
+      <button className="close" onClick={handleClose} aria-label="Close">
         <i></i>
       </button>
     </div>

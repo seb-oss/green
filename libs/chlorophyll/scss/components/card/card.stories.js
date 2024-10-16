@@ -11,7 +11,7 @@ const Template = ({
       heading || closeButton
         ? `<header>
       <h3>${heading}</h3>
-      ${closeButton ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>` : ''}
+      ${closeButton ? `<button class="close" type="button" aria-label="Close"><i></i></button>` : ''}
      </header>`
         : ''
     }

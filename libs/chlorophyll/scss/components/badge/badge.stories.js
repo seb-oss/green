@@ -4,8 +4,7 @@ const Template = ({ variant, dismissible, text }) => {
       <strong>${text}</strong>
       ${
         dismissible
-          ? `<button class="close">
-          <span class="sr-only">Remove</span>
+          ? `<button class="close" aria-label="Remove">
           <i></i>
         </button>`
           : ``

@@ -22,7 +22,7 @@ const Template = ({
     </div>
     ${
       closeButton
-        ? `<button class="close" type="button"><span class="sr-only">Close</span><i></i></button>`
+        ? `<button class="close" type="button" aria-label="Close"><i></i></button>`
         : ''
     }
     ${
