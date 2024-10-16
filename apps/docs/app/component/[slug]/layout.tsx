@@ -124,7 +124,7 @@ export default function ComponentLayout({
         </Pattern>
       </gds-cell>
       <Taber component={url_path} links={links} />
-      {tocComponent}
+      {/* {tocComponent} */}
       <footer>
         Last updated: <br />
         <time dateTime={last_edited} title="Last updated">
