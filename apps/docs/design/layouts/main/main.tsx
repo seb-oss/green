@@ -12,7 +12,13 @@ export default function Main({ children }: { children: React.ReactNode }) {
   return (
     <GdsFlex>
       {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
-      <GdsFlex padding="4xl" flex-direction="column">
+      <GdsFlex
+        padding="4xl"
+        flex-direction="column"
+        max-width="1440px"
+        margin="0 auto"
+        gap="4xl"
+      >
         {children}
       </GdsFlex>
     </GdsFlex>
