@@ -1,4 +1,3 @@
-import Dev, { isDev } from '$/dev/dev'
 import { allComponents, Component } from 'content'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
