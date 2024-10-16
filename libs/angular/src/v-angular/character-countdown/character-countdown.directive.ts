@@ -1,10 +1,10 @@
 import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core'
 
 @Directive({
-  selector: '[ngvCharacterCountdown]',
+  selector: '[nggvCharacterCountdown]',
 })
 export class CharacterCountdownDirective {
-  @Input('ngvCharacterCountdown')
+  @Input('nggvCharacterCountdown')
   set maxlength(value: number | undefined) {
     if (!!value && !Number.isNaN(value)) {
       this._maxlength = value
@@ -21,7 +21,7 @@ export class CharacterCountdownDirective {
     }
   }
 
-  @Input('ngvCharacterCountdownCurrentLength')
+  @Input('nggvCharacterCountdownCurrentLength')
   set currentLength(value: number) {
     this._currentLength = value ?? 0
     this.updateContext()

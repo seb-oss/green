@@ -46,6 +46,7 @@ export class GdsFlex extends GdsContainer {
       const rowGap = values[1] || colGap
       return `gap: ${colGap} ${rowGap};`
     },
+    cacheOverrideKey: 'flex',
   })
   gap?: string
 

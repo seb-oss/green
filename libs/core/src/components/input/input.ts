@@ -6,8 +6,6 @@ import { when } from 'lit/directives/when.js'
 import { choose } from 'lit/directives/choose.js'
 import { msg } from '@lit/localize'
 
-import { constrainSlots } from '../../utils/helpers'
-import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
 import { gdsCustomElement, html } from '../../scoping'
@@ -119,12 +117,10 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   connectedCallback(): void {
     super.connectedCallback()
-    this._setAutoHeight()
   }
 
   disconnectedCallback() {
@@ -286,14 +282,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     )
   }
 
-  @watch('value')
-  private _setAutoHeight() {
-    this.elInputAsync.then((element) => {
-      const lines = (element.value.split('\n').length || 1).toString()
-      element?.style.setProperty('--_lines', lines.toString())
-    })
-  }
-
   #handleFieldClick = () => {
     this.elInputAsync.then((el) => el.focus())
   }
@@ -319,11 +307,7 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   #renderSlotTrail() {
     return html`
-      <slot
-        name="trail"
-        gds-allow="gds-badge"
-        @slotchange=${this.#handleSlotChange}
-      ></slot>
+      <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
     `
   }
 

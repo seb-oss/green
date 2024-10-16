@@ -6,10 +6,10 @@ import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvDropdownListComponent } from './dropdown-list.component'
 
 @Directive({
-  selector: '[ngvTooltip]',
+  selector: '[nggvTooltip]',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
   inputs: [
-    'ngvTooltip',
+    'nggvTooltip',
     'thook',
     'placement',
     'shown',

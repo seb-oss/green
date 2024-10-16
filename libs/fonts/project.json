@@ -18,6 +18,11 @@
             "input": "libs/fonts",
             "glob": "**/scss/**",
             "output": "/"
+          },
+          {
+            "input": "libs/fonts",
+            "glob": "(README.md|LICENCE)",
+            "output": "."
           }
         ],
         "main": "",

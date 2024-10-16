@@ -43,8 +43,8 @@ export class GdsGrid extends GdsContainer {
    */
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
-      const colGap = values[0]
-      const rowGap = values[1] || colGap
+      const rowGap = values[0]
+      const colGap = values[1] || rowGap
       return `--_gap-column: ${colGap}; --_gap-row: ${rowGap};`
     },
   })

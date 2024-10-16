@@ -2,15 +2,12 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    display: contents;
+    display: block;
   }
 
-  * {
-    margin: unset;
-    font-weight: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    text-wrap: inherit;
+  [tag] {
+    margin: 0;
+    padding: 0;
   }
 
   h1.no-size-set {

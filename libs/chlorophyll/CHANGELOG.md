@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.6.7
+
+### Patch Changes
+
+- Updated dependencies [04316c7]
+  - @sebgroup/fonts@2.0.0
+
+## 3.6.6
+
+### Patch Changes
+
+- 62cde4b: fixing correct default typography for heading elements
+
+## 3.6.5
+
+### Patch Changes
+
+- d98aa7a: fixed color of close button in alert button
+- 5ca3740: change transparentize to color.adjust
+
 ## 3.6.4
 
 ### Patch Changes

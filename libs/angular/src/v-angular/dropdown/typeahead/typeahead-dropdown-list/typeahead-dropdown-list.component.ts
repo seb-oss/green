@@ -91,11 +91,11 @@ export class NgvTypeaheadDropdownListComponent
 
   /** @Internal Expand the dropdown when input receives focus. If no state, set empty string in input */
   private handleFocusChanges() {
-    this.hostComponent.ngvFocus
+    this.hostComponent.nggvFocus
       .asObservable()
       .pipe(takeUntil(this._destroy$))
       .subscribe(() => {
-        if (!this.state) this.hostComponent.ngvInput.emit('')
+        if (!this.state) this.hostComponent.nggvInput.emit('')
         this.setExpanded(true)
         this.subscribeToOutsideClickEvent()
       })

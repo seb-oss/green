@@ -2,10 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    display: contents;
-  }
-
-  figure {
+    display: block;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
