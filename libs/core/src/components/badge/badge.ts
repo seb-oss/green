@@ -87,8 +87,6 @@ export class GdsBadge extends GdsElement {
         : 'l'
       : 'xs'
 
-    const inlineSize = this.mainSlotOccupied ? 'l' : 'xs'
-
     return html`<gds-flex
       level="3"
       background=${background}
@@ -100,7 +98,6 @@ export class GdsBadge extends GdsElement {
       border-radius="${this.notification ? 'max' : '2xs'}"
       block-size="${blockSize}"
       width="max-content"
-      inline-size="${inlineSize}"
       font-size="${this.size === 'small' || this.notification
         ? 'detail-xs'
         : 'detail-s'}"

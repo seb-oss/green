@@ -1,3 +1,4 @@
+import { classMap } from 'lit/directives/class-map.js'
 import { html, unsafeStatic } from 'lit/static-html.js'
 import { property } from 'lit/decorators.js'
 import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
@@ -5,7 +6,7 @@ import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 
-import TextCSS from './text.style'
+import textStyles from './text.style'
 
 /**
  * `gds-text` is a custom element that provides a flexible text system.
@@ -17,7 +18,7 @@ import TextCSS from './text.style'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  static styles = [tokens, TextCSS]
+  static styles = [tokens, textStyles]
 
   /**
    * The level of the container can be used to apply background and color styles from the corresponding level.
@@ -78,7 +79,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
-    selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
@@ -109,22 +109,9 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'margin',
-    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   margin?: string
-
-  /**
-   * Controls the 'isolation of the text.
-   * Supports all the default 'isolation values.
-   *
-   * @property isolation
-   */
-  @styleExpressionProperty({
-    selector: '[tag]',
-    valueTemplate: (v) => v,
-  })
-  'isolation'?: string
 
   /**
    * Controls the text-wrap property of the text.
@@ -134,7 +121,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-wrap',
-    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   'text-wrap'?: string
@@ -147,7 +133,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-transform',
-    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   'text-transform'?: string
@@ -166,7 +151,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'max-width',
-    selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
   'max-width'?: string
@@ -179,7 +163,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'min-width',
-    selector: '[tag]',
     valueTemplate: (v) => `${v}ch`,
   })
   'min-width'?: string
@@ -192,7 +175,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'text-align',
-    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   'text-align'?: string
@@ -204,7 +186,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: '--_lines',
-    selector: '[tag]',
     valueTemplate: (v) => v,
   })
   lines?: number
@@ -222,7 +203,6 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'color',
-    selector: '[tag]',
     valueTemplate: function (v) {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
@@ -237,6 +217,11 @@ export class GdsText extends GdsElement {
   render() {
     const TAG_ENCODE = encodeURI(this.tag)
     const TAG = unsafeStatic(TAG_ENCODE)
-    return html`<${TAG} tag><slot></slot></${TAG}>`
+    const classes = {
+      'no-size-set': !this['font-size'],
+      'no-weight-set': !this['font-weight'],
+      'lines-set': !!this.lines,
+    }
+    return html`<${TAG} tag class=${classMap(classes)}><slot></slot></${TAG}>`
   }
 }

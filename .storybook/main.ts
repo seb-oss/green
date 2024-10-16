@@ -19,7 +19,10 @@ const config: Omit<StorybookConfig, 'framework'> = {
               console.log('Font directory does not exist. Copying fonts...')
               await new Promise((resolve) =>
                 copyfiles(
-                  ['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'],
+                  [
+                    'node_modules/@sebgroup/fonts/fonts/SEBSansSerif/*',
+                    'dist/fonts/SEBSansSerif',
+                  ],
                   { up: true },
                   resolve,
                 ),

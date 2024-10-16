@@ -115,6 +115,13 @@ export default {
 export const Default = {
   render: Template.bind({}),
   name: 'Default',
+  
+
+  args: {
+    label: 'Slider label text in one line',
+    instruction: 'Element instruction',
+    value: 0,
+  },
 }
 
 export const Textbox = {
@@ -122,6 +129,9 @@ export const Textbox = {
   name: 'Textbox',
 
   args: {
+    label: 'Slider label text in one line',
+    instruction: 'Element instruction',
+    value: 50,
     hasTextbox: true,
   },
 }
@@ -131,6 +141,9 @@ export const UnitTextbox = {
   name: 'UnitTextbox',
 
   args: {
+    label: 'Slider label text in one line',
+    instruction: 'Element instruction',
+    value: 50,
     hasTextbox: true,
     unitLabel: 'kr',
     showMinMax: true,
@@ -142,6 +155,9 @@ export const Error = {
   name: 'Error',
 
   args: {
+    label: 'Slider label text in one line',
+    instruction: 'Element instruction',
+    value: 50,
     hasTextbox: true,
     errorMessage: 'Error text can be quite long',
   },
@@ -152,7 +168,24 @@ export const Disabled = {
   name: 'Disabled',
 
   args: {
+    label: 'Slider label text in one line',
+    instruction: 'Element instruction',
+    value: 50,
     hasTextbox: true,
     disabled: true,
+  },
+}
+
+export const HighNumber = {
+  render: Template.bind({}),
+  name: 'HighNumber',
+
+  args: {
+    label: 'Slider label text in one line',
+    instruction: 'Element instruction',
+    min: 3000,
+    max: 15000,
+    value: 5000,
+    hasTextbox: true,
   },
 }

@@ -1,5 +1,31 @@
 # Changelog
 
+## 4.6.4
+
+### Patch Changes
+
+- 06f5077: **V-Angular:** Fix icon import paths
+
+## 4.6.3
+
+### Patch Changes
+
+- d6f652d: **V-Angular:** fixing selector and imported modules
+- Updated dependencies [aab2665]
+- Updated dependencies [aab2665]
+- Updated dependencies [cb2d08c]
+  - @sebgroup/green-core@1.43.4
+
+## 4.6.2
+
+### Patch Changes
+
+- 05c1eab: rename ngv to nggv
+- 05c1eab: updated v-angular exports
+- Updated dependencies [69f1894]
+- Updated dependencies [916a2ef]
+  - @sebgroup/green-core@1.43.0
+
 ## 4.6.1
 
 ### Patch Changes

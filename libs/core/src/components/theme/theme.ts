@@ -35,7 +35,7 @@ export class GdsTheme extends GdsElement {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-theme')
     this._dynamicStylesController.inject(
-      'tokens',
+      'dark',
       unsafeCSS(`:host {${colorV2Dark}}`),
     )
   }
@@ -49,12 +49,12 @@ export class GdsTheme extends GdsElement {
   private _onColorSchemeChange() {
     if (this.colorScheme === 'dark') {
       this._dynamicStylesController.inject(
-        'tokens',
+        'dark',
         unsafeCSS(`:host { ${colorV2Dark}}`),
       )
     } else {
       this._dynamicStylesController.inject(
-        'tokens',
+        'light',
         unsafeCSS(`:host { ${colorV2Light}}`),
       )
     }

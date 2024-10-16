@@ -31,7 +31,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         *ngIf="!isAsync"
         class="nggv-lib-custom-input"
         [formControl]="control"
-        [ngvInputMask]="inputMask"
+        [nggvInputMask]="inputMask"
         [placeholder]="placeholder"
       />
     `,
@@ -52,14 +52,18 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
 
   @Component({
     template: `
-      <input class="date" [ngvInputMask]="dateMask" [formControl]="dateFC" />
-      <input class="ip" [ngvInputMask]="ipAddressMask" [formControl]="ipFC" />
+      <input class="date" [nggvInputMask]="dateMask" [formControl]="dateFC" />
+      <input class="ip" [nggvInputMask]="ipAddressMask" [formControl]="ipFC" />
       <input
         class="initDate"
-        [ngvInputMask]="dateMask"
+        [nggvInputMask]="dateMask"
         [formControl]="initDateFC"
       />
-      <input class="phone" [ngvInputMask]="phoneMask" [formControl]="phoneFC" />
+      <input
+        class="phone"
+        [nggvInputMask]="phoneMask"
+        [formControl]="phoneFC"
+      />
       <nggv-lib-custom-input
         [control]="dateFCCustom"
         [inputMask]="dateMask"
@@ -244,7 +248,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
 describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
   @Component({
     template: `
-      <input class="ip" [ngvInputMask]="ipAddressMask" [formControl]="ipFC" />
+      <input class="ip" [nggvInputMask]="ipAddressMask" [formControl]="ipFC" />
     `,
   })
   class ChangeDetectionTestComponent {

@@ -62,7 +62,6 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: '--_size',
-    selector: 'hr',
     valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   size?: string
@@ -81,12 +80,11 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'opacity',
-    selector: 'hr',
     valueTemplate: (v) => v,
   })
   opacity?: string
 
   render() {
-    return html`<hr />`
+    return html``
   }
 }

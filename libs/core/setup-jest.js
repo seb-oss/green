@@ -35,3 +35,10 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: jest.fn(),
   })),
 })
+
+global.IntersectionObserver = class IntersectionObserver {
+  constructor() {}
+  observe() {}
+  disconnect() {}
+  unobserve() {}
+}

@@ -5,7 +5,11 @@ const style = css`
 
   @layer icon {
     :host {
-      display: contents;
+      display: inline-block;
+    }
+
+    svg {
+      display: block;
     }
   }
 `

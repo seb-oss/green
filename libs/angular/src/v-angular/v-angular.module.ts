@@ -15,6 +15,7 @@ import { NgvRadioModule } from './radio'
 import { NgvTextareaModule } from './textarea'
 import { NgvTooltipModule } from './tooltip'
 import { NgvTypeaheadModule } from './dropdown/typeahead/typeahead.module'
+import { NggCharacterCountdownDirectiveModule } from './character-countdown/character-countdown.module'
 
 @NgModule({
   declarations: [],
@@ -24,6 +25,7 @@ import { NgvTypeaheadModule } from './dropdown/typeahead/typeahead.module'
     NgvBreadcrumbsModule,
     NgvButtonModule,
     NgvCardModule,
+    NggCharacterCountdownDirectiveModule,
     NgvCheckboxModule,
     NgvDropdownModule,
     NgvI18nModule,
@@ -37,4 +39,4 @@ import { NgvTypeaheadModule } from './dropdown/typeahead/typeahead.module'
     NgvTypeaheadModule,
   ],
 })
-export class NggModule {}
+export class NggvModule {}
