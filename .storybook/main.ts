@@ -20,8 +20,8 @@ const config: Omit<StorybookConfig, 'framework'> = {
               await new Promise((resolve) =>
                 copyfiles(
                   [
-                    'node_modules/@sebgroup/fonts/fonts/SEBSansSerifGDS/*',
-                    'dist/fonts/SEBSansSerifGDS',
+                    'node_modules/@sebgroup/fonts/fonts/SEBSansSerif/*',
+                    'dist/fonts/SEBSansSerif',
                   ],
                   { up: true },
                   resolve,
