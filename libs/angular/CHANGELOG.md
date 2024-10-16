@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.6.4
+
+### Patch Changes
+
+- 06f5077: **V-Angular:** Fix icon import paths
+
 ## 4.6.3
 
 ### Patch Changes
