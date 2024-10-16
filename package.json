@@ -19,8 +19,7 @@
     "format:write": "nx format:write",
     "format:check": "nx format:check",
     "help": "nx help",
-    "postinstall": "npm run copy-fonts && patch-package",
-    "copy-fonts": "copyfiles dist/libs/fonts/fonts/**/* dist/fonts -f",
+    "postinstall": "patch-package",
     "changeset:publish": "npm run build:libs && npx changeset publish",
     "new": "node apps/docs/utils/create/create.js"
   },
