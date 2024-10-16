@@ -7,8 +7,7 @@ const Template = ({ children, ...props }) => <Card {...props}>{children}</Card>
 const Header = () => (
   <>
     <h3>Card Headline</h3>
-    <Button variant="close">
-      <span className="sr-only">Close</span>
+    <Button variant="close" aria-label="Close">
       <i></i>
     </Button>
   </>
