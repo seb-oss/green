@@ -1,6 +1,7 @@
 'use client'
 
 import { allComponents } from 'content'
+import Link from 'next/link'
 
 import GdsBadge from '@sebgroup/green-react/src/core/badge'
 import GdsButton from '@sebgroup/green-react/src/core/button'
@@ -9,28 +10,32 @@ import GdsCoachmark from '@sebgroup/green-react/src/core/coachmark'
 import GdsContextMenu from '@sebgroup/green-react/src/core/context-menu'
 import GdsDatepicker from '@sebgroup/green-react/src/core/datepicker'
 import GdsDropdown from '@sebgroup/green-react/src/core/dropdown'
+import GdsDivider from '@sebgroup/green-react/src/core/divider'
 import GdsFilterChips from '@sebgroup/green-react/src/core/filter-chips'
-import GdsGroupedList from '@sebgroup/green-react/src/core/grouped-list'
-import GdsListItem from '@sebgroup/green-react/src/core/list-item'
 import GdsInput from '@sebgroup/green-react/src/core/input'
 import GdsMenuButton from '@sebgroup/green-react/src/core/menu-button'
-import GdsBackdrop from '@sebgroup/green-react/src/core/backdrop'
+import GdsMenuItem from '@sebgroup/green-react/src/core/menu-item'
+import GdsMask from '@sebgroup/green-react/src/core/mask'
 import GdsPopover from '@sebgroup/green-react/src/core/popover'
-import GdsRadioGroup from '@sebgroup/green-react/src/core/radio-group'
 import GdsSegmentedControl from '@sebgroup/green-react/src/core/segmented-control'
 import GdsTextarea from '@sebgroup/green-react/src/core/input'
-import GdsTheme from '@sebgroup/green-react/src/core/theme'
 import GdsFab from '@sebgroup/green-react/src/core/fab'
 import GdsText from '@sebgroup/green-react/src/core/text'
 import GdsFilterChip from '@sebgroup/green-react/src/core/filter-chip'
 import GdsCard from '@sebgroup/green-react/src/core/card'
-import GdsContainer from '@sebgroup/green-react/src/core/container'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsOption from '@sebgroup/green-react/src/core/option'
 import GdsGrid from '@sebgroup/green-react/src/core/grid'
-import GdsImg from '@sebgroup/green-react/src/core/img'
-import GdsVideo from '@sebgroup/green-react/src/core/video'
 import GdsSegment from '@sebgroup/green-react/src/core/segment'
-import Link from 'next/link'
+import GdsSignal from '@sebgroup/green-react/src/core/signal'
+
+import { IconCreditCard } from '@sebgroup/green-react/src/lib/icon/icons/IconCreditCard'
+import { IconRocket } from '@sebgroup/green-react/src/lib/icon/icons/IconRocket'
+import { IconMagnifyingGlass } from '@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass'
+import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
+import { IconChevronRight } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronRight'
+import { IconPlusSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconPlusSmall'
+import { IconPin } from '@sebgroup/green-react/src/lib/icon/icons/IconPin'
 
 export default function Components({ title }: { title: string }) {
   const components = allComponents
@@ -49,7 +54,7 @@ export default function Components({ title }: { title: string }) {
     <GdsFlex gap="m" flex-direction="column">
       {title && <GdsText tag="h2">{title}</GdsText>}
       {/* //   <ComponentCard key={idx} {...component} /> */}
-      <GdsGrid columns="2; m{1} l{3}" gap="m">
+      <GdsGrid columns="2; m{1} l{3}" gap="xl">
         {/* {components.map((component, idx) => (
           <GdsFlex key={idx} align-items="center">
             <GdsText tag="h3">{component.title}</GdsText>
@@ -68,7 +73,7 @@ export default function Components({ title }: { title: string }) {
             >
               <GdsBadge variant="notice">Badge</GdsBadge>
               <GdsBadge variant="positive" notification>
-                999<gds-icon-plus-small slot="trail"></gds-icon-plus-small>
+                999 <IconPlusSmall slot="trail"></IconPlusSmall>
               </GdsBadge>
             </GdsFlex>
             <GdsDivider padding="s" opacity="0.2"></GdsDivider>
@@ -79,7 +84,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Badge</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -94,7 +99,8 @@ export default function Components({ title }: { title: string }) {
               min-height="200px"
             >
               <GdsButton>
-                <gds-icon-credit-card slot="lead"></gds-icon-credit-card>Primary
+                <IconCreditCard slot="lead"></IconCreditCard>
+                Primary
               </GdsButton>
             </GdsFlex>
             <GdsDivider padding="s" opacity="0.2"></GdsDivider>
@@ -105,7 +111,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Button</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -137,7 +143,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">FAB</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -166,7 +172,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Filter Chips</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -182,7 +188,7 @@ export default function Components({ title }: { title: string }) {
               position="relative"
               gap="s"
             >
-              <gds-icon-rocket width="42" height="42"></gds-icon-rocket>
+              <IconRocket width="42" height="42"></IconRocket>
             </GdsFlex>
             <GdsDivider padding="s" opacity="0.2"></GdsDivider>
             <Link href="?path=/docs/docs-components-icon--docs">
@@ -192,7 +198,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Icon</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -208,7 +214,7 @@ export default function Components({ title }: { title: string }) {
               gap="s"
             >
               <GdsMenuButton>
-                <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
+                <IconMagnifyingGlass slot="lead"></IconMagnifyingGlass>
                 Search
               </GdsMenuButton>
             </GdsFlex>
@@ -220,7 +226,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Menu Button</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -251,7 +257,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Segmented Control</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -268,8 +274,8 @@ export default function Components({ title }: { title: string }) {
             >
               <GdsPopover>
                 <GdsButton rank="secondary" slot="trigger">
-                  Popover{' '}
-                  <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+                  Popover
+                  <IconChevronBottom slot="trail"></IconChevronBottom>
                 </GdsButton>
                 <GdsFlex padding="xl">
                   <GdsText>Popover content</GdsText>
@@ -284,7 +290,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Popover</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -313,7 +319,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Dropdown</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -332,7 +338,7 @@ export default function Components({ title }: { title: string }) {
               <GdsFlex max-width="80%">
                 <GdsInput label="Input" value=" " clearable>
                   {' '}
-                  <gds-icon-credit-card slot="lead"></gds-icon-credit-card>{' '}
+                  <IconCreditCard slot="lead"></IconCreditCard>{' '}
                 </GdsInput>
               </GdsFlex>
             </GdsFlex>
@@ -344,7 +350,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Input</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -372,7 +378,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Textarea</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -400,7 +406,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Datepicker</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -422,9 +428,7 @@ export default function Components({ title }: { title: string }) {
                 position="absolute"
                 z-index="4"
                 pointer-events="none"
-              >
-                {' '}
-              </GdsMask>
+              />
               <GdsCalendar></GdsCalendar>
             </GdsFlex>
             <GdsDivider padding="s" opacity="0.2"></GdsDivider>
@@ -435,7 +439,7 @@ export default function Components({ title }: { title: string }) {
                 align-items="center"
               >
                 <GdsText tag="h5">Calendar</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -451,7 +455,7 @@ export default function Components({ title }: { title: string }) {
               position="relative"
             >
               <GdsFlex id="target" align-items="center" gap="s">
-                <gds-icon-pin></gds-icon-pin>
+                <IconPin></IconPin>
                 <GdsText>Coachmark</GdsText>
               </GdsFlex>
               <GdsCoachmark target="target" placement="bottom">
@@ -459,14 +463,14 @@ export default function Components({ title }: { title: string }) {
               </GdsCoachmark>
             </GdsFlex>
             <GdsDivider padding="s" opacity="0.2"></GdsDivider>
-            <Link href="?path=/docs/docs-components-coachmark--docs">
+            <Link href="/">
               <GdsFlex
                 padding="s"
                 justify-content="space-between"
                 align-items="center"
               >
                 <GdsText tag="h5">Coachmark</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
@@ -488,14 +492,14 @@ export default function Components({ title }: { title: string }) {
               </GdsContextMenu>
             </GdsFlex>
             <GdsDivider padding="s" opacity="0.2"></GdsDivider>
-            <Link href="../?path=/docs/docs-components-context-menu--docs">
+            <Link href="/">
               <GdsFlex
                 padding="s"
                 justify-content="space-between"
                 align-items="center"
               >
                 <GdsText tag="h5">Context Menu</GdsText>
-                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                <IconChevronRight width="16"></IconChevronRight>
               </GdsFlex>
             </Link>
           </GdsFlex>
