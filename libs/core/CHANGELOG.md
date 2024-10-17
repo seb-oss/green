@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.8
+
+### Patch Changes
+
+- 66b36b8: **Button:** Fixes color on the secondary button
+
 ## 1.44.7
 
 ### Patch Changes
