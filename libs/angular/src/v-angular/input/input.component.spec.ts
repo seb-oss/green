@@ -1,12 +1,6 @@
 import '../core/core.globals'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import {
-  FormControl,
-  FormsModule,
-  NgControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms'
+import { FormControl, FormsModule, NgControl, ReactiveFormsModule, Validators } from '@angular/forms'
 import { By } from '@angular/platform-browser'
 // import chalk from 'chalk'
 //import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
@@ -33,9 +27,7 @@ describe('[NgvCore]', () => {
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [NgvInputComponent, CharacterCountdownDirective],
-        providers: [
-          { provide: NgControl, useValue: { control: new FormControl() } },
-        ],
+        providers: [{ provide: NgControl, useValue: { control: new FormControl() } }],
         imports: [
           FormsModule,
           ReactiveFormsModule,
@@ -43,11 +35,11 @@ describe('[NgvCore]', () => {
             langs: { en },
             translocoConfig: {
               availableLangs: ['en'],
-              defaultLang: 'en',
+              defaultLang: 'en'
             },
-            preloadLangs: true,
-          }),
-        ],
+            preloadLangs: true
+          })
+        ]
       }).compileComponents()
     }))
 
@@ -69,9 +61,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeTruthy()
       })
 
@@ -83,9 +73,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeTruthy()
       })
 
@@ -100,9 +88,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeTruthy()
       })
 
@@ -114,9 +100,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeFalsy()
       })
 
@@ -128,9 +112,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeFalsy()
       })
 
@@ -143,9 +125,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeFalsy()
       })
 
@@ -159,9 +139,7 @@ describe('[NgvCore]', () => {
         fixture.detectChanges()
 
         // query for optional label class
-        const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
-        )
+        const optionalLabel = fixture.debugElement.query(By.css('.sdv-field-label--optional'))
         expect(optionalLabel).toBeFalsy()
       })
     })

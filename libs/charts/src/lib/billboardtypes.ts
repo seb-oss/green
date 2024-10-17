@@ -3,9 +3,7 @@ import { ArrayOrString, Chart, PrimitiveArray } from 'billboard.js'
 export interface ChartSettingsUpdate {
   append?: boolean
   url?: string
-  json?:
-    | [{ [key: string]: string | number }]
-    | { [key: string]: string[] | number[] }
+  json?: [{ [key: string]: string | number }] | { [key: string]: string[] | number[] }
   rows?: PrimitiveArray[]
   columns?: PrimitiveArray[]
   data?: Array<{ [key: string]: number }>

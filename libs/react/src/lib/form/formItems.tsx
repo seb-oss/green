@@ -10,19 +10,14 @@ export interface FormItemsProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
-export const FormItems: React.FC<FormItemsProps> = ({
-  children,
-  name,
-  validate,
-  onChange: _onFormItemsChanged,
-}) => {
+export const FormItems: React.FC<FormItemsProps> = ({ children, name, validate, onChange: _onFormItemsChanged }) => {
   const { values, setValues, setErrors, setFields, errors } = useFormContext()
 
   React.useEffect(() => {
     /* eslint-disable-next-line */
     setFields((fields: Record<string, any>) => ({
       ...fields,
-      [name]: validate?.rules,
+      [name]: validate?.rules
     }))
 
     /* eslint-disable-next-line */
@@ -56,11 +51,11 @@ export const FormItems: React.FC<FormItemsProps> = ({
       checked
         ? setValues((values: Record<string, any>) => ({
             ...values,
-            [name]: value,
+            [name]: value
           }))
         : setValues((values: Record<string, any>) => ({
             ...values,
-            [name]: null,
+            [name]: null
           }))
     } else {
       inputValue = value
@@ -71,7 +66,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
     validateInputValue(
       { value: inputValue as string, name, type, checked },
       validate?.rules as ValidatorRules,
-      setErrors,
+      setErrors
     )
   }
 
@@ -86,7 +81,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
       }
 
       onChange(event)
-    },
+    }
   })
 }
 

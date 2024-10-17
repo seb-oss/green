@@ -1,9 +1,6 @@
 import { property } from 'lit/decorators.js'
 
-import {
-  gdsCustomElement,
-  html,
-} from '../../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import { GdsElement } from '../../../gds-element'
 
@@ -30,7 +27,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS display values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   display = 'block'
 
@@ -50,7 +47,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS `place-items` values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'place-items'?: string
 
@@ -59,7 +56,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS `place-content` values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'place-content'?: string
 
@@ -90,10 +87,7 @@ export class GdsContainer extends GdsElement {
       }
 
       // Function to construct the CSS variable string
-      const constructCssVariable = (
-        level: string,
-        colorName: string,
-      ): string => {
+      const constructCssVariable = (level: string, colorName: string): string => {
         return `var(--gds-color-l${level}-content-${colorName})`
       }
 
@@ -110,7 +104,7 @@ export class GdsContainer extends GdsElement {
 
       // Return the computed color value
       return getColorValue(colorInput, transparency)
-    },
+    }
   })
   color?: string
 
@@ -149,10 +143,7 @@ export class GdsContainer extends GdsElement {
       }
 
       // Determine the background color
-      const getBackgroundColor = (
-        color: string,
-        transparency?: string,
-      ): string => {
+      const getBackgroundColor = (color: string, transparency?: string): string => {
         if (isCustomColor(color)) {
           return transparency
             ? `color-mix(in srgb, ${color} ${parseFloat(transparency) * 100}%, transparent 0%)`
@@ -164,7 +155,7 @@ export class GdsContainer extends GdsElement {
 
       // Return the computed background color
       return getBackgroundColor(colorInput, transparency)
-    },
+    }
   })
   background?: string
 
@@ -209,10 +200,7 @@ export class GdsContainer extends GdsElement {
       }
 
       // Function to construct the CSS variable string for border color
-      const constructBorderColorVariable = (
-        level: string,
-        color: string,
-      ): string => {
+      const constructBorderColorVariable = (level: string, color: string): string => {
         return `var(--gds-color-l${level}-border-${color})`
       }
 
@@ -238,7 +226,7 @@ export class GdsContainer extends GdsElement {
         border-bottom: ${bottom}; 
         border-left: ${left};
       `
-    },
+    }
   })
   border?: string
 
@@ -259,10 +247,7 @@ export class GdsContainer extends GdsElement {
       }
 
       // Function to construct the CSS variable string for border color
-      const constructBorderColorVariable = (
-        level: string,
-        color: string,
-      ): string => {
+      const constructBorderColorVariable = (level: string, color: string): string => {
         return `var(--gds-color-l${level}-border-${color})`
       }
 
@@ -288,7 +273,7 @@ export class GdsContainer extends GdsElement {
         border-bottom-color: ${bottom}; 
         border-left-color: ${left};
       `
-    },
+    }
   })
   'border-color'?: string
 
@@ -306,7 +291,7 @@ export class GdsContainer extends GdsElement {
         border-left-width: ${left};
         border-style: solid;
       `
-    },
+    }
   })
   'border-width'?: string
 
@@ -334,7 +319,7 @@ export class GdsContainer extends GdsElement {
    *
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: v => `var(--gds-space-${v})`
   })
   'border-radius'?: string
 
@@ -348,7 +333,7 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   opacity?: string
 
@@ -387,7 +372,7 @@ export class GdsContainer extends GdsElement {
    * Supports all the default margin values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => {
+    valueTemplate: v => {
       return v === 'auto' ? 'auto' : `var(--gds-space-${v})`
     },
     styleTemplate: (_prop, values) => {
@@ -399,7 +384,7 @@ export class GdsContainer extends GdsElement {
       const left = values.length > 3 ? transformValue(values[3]) : right
 
       return `margin: ${top} ${right} ${bottom} ${left};`
-    },
+    }
   })
   margin?: string
 
@@ -408,7 +393,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS position values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   position?: string
 
@@ -417,7 +402,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS inset values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   inset?: string
 
@@ -426,7 +411,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS overflow values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   overflow?: string
 
@@ -449,7 +434,7 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`
   })
   'grid-column'?: string
 
@@ -473,7 +458,7 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`
   })
   'grid-row'?: string
 
@@ -484,7 +469,7 @@ export class GdsContainer extends GdsElement {
    * @property height
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   height?: string
 
@@ -495,7 +480,7 @@ export class GdsContainer extends GdsElement {
    * @property max-height
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'max-height'?: string
 
@@ -506,7 +491,7 @@ export class GdsContainer extends GdsElement {
    * @property min-height
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'min-height'?: string
 
@@ -535,7 +520,7 @@ export class GdsContainer extends GdsElement {
    *  @property width
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   width?: string
 
@@ -546,7 +531,7 @@ export class GdsContainer extends GdsElement {
    * @property max-width
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'max-width'?: string
 
@@ -557,7 +542,7 @@ export class GdsContainer extends GdsElement {
    * @property min-width
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'min-width'?: string
 
@@ -575,7 +560,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS cursor values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   cursor?: string
 
@@ -586,7 +571,7 @@ export class GdsContainer extends GdsElement {
    * @property pointer-events
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'pointer-events'?: string
 
@@ -597,7 +582,7 @@ export class GdsContainer extends GdsElement {
    * @property user-select
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'user-select'?: string
 
@@ -606,7 +591,7 @@ export class GdsContainer extends GdsElement {
    * Supports all valid CSS z-index values.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'z-index'?: string
 
@@ -617,7 +602,7 @@ export class GdsContainer extends GdsElement {
    * @property transform
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   transform?: string
 
@@ -628,7 +613,7 @@ export class GdsContainer extends GdsElement {
    * @property transform-style
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'transform-style'?: string
 
@@ -639,7 +624,7 @@ export class GdsContainer extends GdsElement {
    * @property transition
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   transition?: string
 
@@ -650,7 +635,7 @@ export class GdsContainer extends GdsElement {
    * @property transition-behavior
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   'transition-behavior'?: string
 
@@ -661,7 +646,7 @@ export class GdsContainer extends GdsElement {
    * @property animation
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
+    valueTemplate: v => v
   })
   animation?: string
 
@@ -703,13 +688,13 @@ export class GdsContainer extends GdsElement {
    * @property 'font-size'
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
+    valueTemplate: v => `${v}`,
     styleTemplate: (prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
       const styleLine = `line-height: var(--gds-text-line-height-${size});`
       return styleSize + styleLine
-    },
+    }
   })
   'font-size'?: string
 
@@ -721,7 +706,7 @@ export class GdsContainer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'font-weight',
-    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+    valueTemplate: v => `var(--gds-text-weight-${v})`
   })
   'font-weight'?: string
 

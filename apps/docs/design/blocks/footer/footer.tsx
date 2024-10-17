@@ -11,13 +11,7 @@ export default function Footer() {
 
   return (
     <footer className="main-footer" padding-block="large">
-      <Grid
-        columns={1}
-        mobile={2}
-        tablet={3}
-        gapBlock="large"
-        paddingInline="medium"
-      >
+      <Grid columns={1} mobile={2} tablet={3} gapBlock="large" paddingInline="medium">
         <h2>Green Design System</h2>
         <Grid columns={5} justify-content="start" fluid>
           <nav>
@@ -65,11 +59,7 @@ export default function Footer() {
         </Grid>
         <Flex justify-content="between" wrap="wrap" directionMobile="column">
           <span>{text}</span>
-          <button
-            type="button"
-            data-cc="c-settings"
-            className="cookie-preferences"
-          >
+          <button type="button" data-cc="c-settings" className="cookie-preferences">
             Cookie preferences
           </button>
         </Flex>

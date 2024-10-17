@@ -2,13 +2,11 @@ import Button from '../button/button'
 import { TextInput } from '../input/input'
 import { Group } from './group'
 
-const Template = ({ children, ...props }) => (
-  <Group {...props}>{children}</Group>
-)
+const Template = ({ children, ...props }) => <Group {...props}>{children}</Group>
 
 export default {
   title: 'Components/Form/Group',
-  component: Group,
+  component: Group
 }
 
 export const Default = {
@@ -16,15 +14,12 @@ export const Default = {
   name: 'Basic Group',
 
   parameters: {
-    componentIds: ['component-form-group'],
+    componentIds: ['component-form-group']
   },
 
   args: {
-    children: [
-      <TextInput placeholder="Input field" />,
-      <Button>Normal button</Button>,
-    ],
-  },
+    children: [<TextInput placeholder="Input field" />, <Button>Normal button</Button>]
+  }
 }
 
 export const StaticText = {
@@ -34,11 +29,8 @@ export const StaticText = {
   args: {
     groupBorder: true,
     groupFocus: true,
-    children: [
-      <TextInput placeholder="First input field" />,
-      <span className="form-text">kr</span>,
-    ],
-  },
+    children: [<TextInput placeholder="First input field" />, <span className="form-text">kr</span>]
+  }
 }
 
 export const Error = {
@@ -49,9 +41,6 @@ export const Error = {
     groupBorder: true,
     groupFocus: true,
     error: 'Error message',
-    children: [
-      <TextInput placeholder="First input field" />,
-      <span className="form-text">kr</span>,
-    ],
-  },
+    children: [<TextInput placeholder="First input field" />, <span className="form-text">kr</span>]
+  }
 }

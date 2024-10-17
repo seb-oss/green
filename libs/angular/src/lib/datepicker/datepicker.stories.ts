@@ -1,13 +1,7 @@
 // Datepicker.stories.ts
 import { startOfYear, subYears } from 'date-fns'
 import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms'
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
 import { dateValidator, NggDatepickerComponent } from './datepicker.component'
 import { NggDatepickerModule } from './datepicker.module'
 
@@ -16,33 +10,33 @@ export default {
   component: NggDatepickerComponent,
   decorators: [
     moduleMetadata({
-      imports: [FormsModule, ReactiveFormsModule, NggDatepickerModule],
-    }),
+      imports: [FormsModule, ReactiveFormsModule, NggDatepickerModule]
+    })
   ],
   parameters: {
-    componentIds: ['component-datepicker'],
+    componentIds: ['component-datepicker']
   },
   // More on argTypes: https://storybook.js.org/docs/angular/api/argtypes
   argTypes: {
     value: {
-      control: 'date',
+      control: 'date'
     },
     options: {
       control: {
-        type: 'object',
-      },
-    },
-  },
+        type: 'object'
+      }
+    }
+  }
 } as Meta<NggDatepickerComponent>
 
-const Template: StoryFn<NggDatepickerComponent> = (args) => ({
-  props: args,
+const Template: StoryFn<NggDatepickerComponent> = args => ({
+  props: args
 })
 
 export const Simple = Template.bind({})
 Simple.args = {
   value: '10/10/2021',
-  label: 'Date',
+  label: 'Date'
 }
 
 export const CustomOptions = Template.bind({})
@@ -54,19 +48,19 @@ CustomOptions.args = {
     minDate: startOfYear(subYears(new Date(), 100)),
     maxDate: new Date(),
     showWeeks: true,
-    dateFormat: 'd/m/y',
-  },
+    dateFormat: 'd/m/y'
+  }
 }
 
-const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
+const FormControlTemplate: StoryFn<NggDatepickerComponent> = args => {
   const validationForm = new FormGroup({
     date: new FormControl(undefined, [
       Validators.required,
       dateValidator({
         min: args.options?.minDate,
-        max: args.options?.maxDate,
-      }),
-    ]),
+        max: args.options?.maxDate
+      })
+    ])
   })
 
   const save = (form: any) => {
@@ -129,8 +123,8 @@ const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
     props: {
       ...args,
       validationForm,
-      save,
-    },
+      save
+    }
   }
 }
 
@@ -140,6 +134,6 @@ Form.args = {
   options: {
     minDate: startOfYear(subYears(new Date(), 100)),
     maxDate: new Date(),
-    showWeeks: true,
-  },
+    showWeeks: true
+  }
 }

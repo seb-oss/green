@@ -14,6 +14,12 @@ import Content from '&/content/content'
 import { allComponents } from 'content'
 import { format, parseISO } from 'date-fns'
 
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsCard from '@sebgroup/green-react/src/core/card'
+import GdsText from '@sebgroup/green-react/src/core/text'
+import GdsBadge from '@sebgroup/green-react/src/core/badge'
+import GdsContainer from '@sebgroup/green-react/src/core/container'
+
 export default function ComponentLayout({
   children,
   params,
@@ -34,8 +40,6 @@ export default function ComponentLayout({
   const componentCode = getComponent('/code')
   const componentDesign = getComponent('/design')
   const componentUXText = getComponent('/ux-text')
-
-  console.log('component', componentCode?.private)
 
   if (!component) {
     notFound()
@@ -96,55 +100,54 @@ export default function ComponentLayout({
   ]
 
   return (
-    <Content layout="component" key={global_id}>
-      <Grid columns={1} paddingBlock="small" paddingInline="small">
-        <Trail
-          home={'Home'}
-          separator={<span> / </span>}
-          activeClass="active"
-          slug={slug}
-        />
-        <Grid columns={6} tablet={2} mobile={1} gapBlock="small">
-          <gds-cell span="4" className="content">
-            <Grid columns={1} gapBlock="small">
-              <div>
-                <h1 className="gds-fs-headline-large">{title}</h1>
-                <p>{summary}</p>
-              </div>
-              <Flex wrap="wrap" gap="small">
-                <Badge title="Status" label={status} />
-                <Tags title="Tags" tags={tagsArray} max={3} />
-              </Flex>
-            </Grid>
-          </gds-cell>
-          <gds-cell span="2">
-            <Pattern>
-              {preview?.trim() ?? '' ? (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: `${preview}`,
-                  }}
-                />
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: figma_hero_svg.svg }} />
-              )}
-            </Pattern>
-          </gds-cell>
-        </Grid>
-        <Taber component={url_path} links={links} />
-        <Grid columns={12} gapInline="small" paddingBlock="small">
-          <Cell span="10">
-            <div className="gds-prose">{children}</div>
-          </Cell>
-          <Cell span="2">{tocComponent}</Cell>
-        </Grid>
-        <footer>
-          Last updated: <br />
-          <time dateTime={last_edited} title="Last updated">
-            {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
-          </time>
-        </footer>
-      </Grid>
-    </Content>
+    <>
+      <Trail
+        home={'Home'}
+        separator={<span> / </span>}
+        activeClass="active"
+        slug={slug}
+      />
+
+      <GdsFlex justify-content="space-between" align-items="flex-start">
+        <GdsFlex flex-direction="column">
+          <h1 className="gds-fs-headline-large">{title}</h1>
+          <p>{summary}</p>
+        </GdsFlex>
+        {/* <GdsCard level="2" background="secondary" border-radius="s"> */}
+        <GdsContainer level="2" background="primary">
+          <GdsFlex align-items="flex-start" gap="xl" min-width="400px">
+            <GdsFlex flex-direction="column">
+              <GdsText>Status</GdsText>
+              <GdsBadge>{status}</GdsBadge>
+            </GdsFlex>
+            <GdsFlex flex-direction="column">
+              <GdsText>Tags</GdsText>
+              <GdsText>{tagsArray}</GdsText>
+            </GdsFlex>
+          </GdsFlex>
+        </GdsContainer>
+        {/* </GdsCard> */}
+      </GdsFlex>
+      <gds-cell span="2">
+        <Pattern>
+          {(preview?.trim() ?? '') ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: `${preview}`,
+              }}
+            />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: figma_hero_svg.svg }} />
+          )}
+        </Pattern>
+      </gds-cell>
+      <Taber component={url_path} links={links} />
+      <footer>
+        Last updated: <br />
+        <time dateTime={last_edited} title="Last updated">
+          {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
+        </time>
+      </footer>
+    </>
   )
 }

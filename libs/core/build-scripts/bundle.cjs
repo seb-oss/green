@@ -12,12 +12,11 @@ esbuild.build({
     esp.sassPlugin({
       type: 'css-text',
       async transform(source, resolveDir) {
-        const { css } = await postcss([
-          autoprefixer,
-          postcssPresetEnv({ stage: false }),
-        ]).process(source, { from: undefined })
+        const { css } = await postcss([autoprefixer, postcssPresetEnv({ stage: false })]).process(source, {
+          from: undefined
+        })
         return css
-      },
-    }),
-  ],
+      }
+    })
+  ]
 })

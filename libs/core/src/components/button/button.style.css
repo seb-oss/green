@@ -115,19 +115,11 @@
     color: var(--gds-color-l3-content-tertiary);
 
     &:hover {
-      background-color: color-mix(
-        in srgb,
-        transparent,
-        var(--gds-color-l3-states-light-hover)
-      );
+      background-color: color-mix(in srgb, transparent, var(--gds-color-l3-states-light-hover));
     }
 
     &:active {
-      background-color: color-mix(
-        in srgb,
-        transparent,
-        var(--gds-color-l3-states-light-pressed)
-      );
+      background-color: color-mix(in srgb, transparent, var(--gds-color-l3-states-light-pressed));
     }
   }
 }
@@ -200,19 +192,11 @@
       color: var(--gds-color-l3-content-positive);
 
       &:hover {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-positive-hover)
-        );
+        background-color: color-mix(in srgb, transparent, var(--gds-color-l3-states-positive-hover));
       }
 
       &:active {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-positive-pressed)
-        );
+        background-color: color-mix(in srgb, transparent, var(--gds-color-l3-states-positive-pressed));
       }
     }
   }
@@ -262,19 +246,11 @@
       color: var(--gds-color-l3-content-negative);
 
       &:hover {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-negative-hover)
-        );
+        background-color: color-mix(in srgb, transparent, var(--gds-color-l3-states-negative-hover));
       }
 
       &:active {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-negative-pressed)
-        );
+        background-color: color-mix(in srgb, transparent, var(--gds-color-l3-states-negative-pressed));
       }
     }
   }

@@ -27,16 +27,10 @@ const components = {
   Pattern,
   Spacer,
   Grid,
-  Story,
+  Story
 }
 
-export function Mdx({
-  code,
-  globals,
-}: {
-  code: string
-  globals: Record<string, any>
-}) {
+export function Mdx({ code, globals }: { code: string; globals: Record<string, any> }) {
   const Component = useMDXComponent(code, globals)
 
   return <Component components={components} />

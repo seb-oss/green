@@ -1,9 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-} from 'react'
+import React, { useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { createComponent } from '@lit/react'
 import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
@@ -16,7 +11,7 @@ export const CoreDatepicker = createComponent({
   tagName: getScopedTagName('gds-datepicker'),
   elementClass: GdsDatepicker,
   events: { onchange: 'change' },
-  react: React,
+  react: React
 })
 
 export type DatepickerOptions = {
@@ -131,17 +126,13 @@ export const Datepicker = forwardRef(
       currentDate,
       ...props
     }: DatepickerOptions,
-    ref,
+    ref
   ) => {
     if (currentDate && !value) value = currentDate
     if (selectedDate && !value) value = selectedDate
 
-    const min = minDate
-      ? minDate
-      : new Date(new Date().getFullYear() - 10, 0, 1)
-    const max = maxDate
-      ? maxDate
-      : new Date(new Date().getFullYear() + 10, 0, 1)
+    const min = minDate ? minDate : new Date(new Date().getFullYear() - 10, 0, 1)
+    const max = maxDate ? maxDate : new Date(new Date().getFullYear() + 10, 0, 1)
 
     const onChangeHandler = (e: any) => {
       if (onChange) {
@@ -174,7 +165,7 @@ export const Datepicker = forwardRef(
         />
       </div>
     )
-  },
+  }
 )
 
 export default Datepicker

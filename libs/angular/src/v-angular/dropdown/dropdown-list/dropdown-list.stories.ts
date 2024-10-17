@@ -1,19 +1,10 @@
 import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormControl,
-} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms'
 
 import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NgvTooltipDirective } from '../../tooltip/tooltip.directive'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
 import { NgvInputComponent } from '../../input/input.component'
 import { NgvDropdownListComponent } from './dropdown-list.component'
@@ -32,13 +23,13 @@ export default {
   component: NgvDropdownListComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NgvI18nModule)]
     }),
     moduleMetadata({
       declarations: [NgvInputComponent, NgvTooltipDirective],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
-    }),
-  ],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule]
+    })
+  ]
 } as Meta
 
 const options = [
@@ -49,7 +40,7 @@ const options = [
     proxyId: 'string',
     name: 'Radiohjälpen',
     bicfi: 'bicno',
-    label: 'Radiohjälpen: pg',
+    label: 'Radiohjälpen: pg'
   },
   {
     key: JSON.stringify({ accountNo: '123456', type: 'bg' }),
@@ -58,8 +49,8 @@ const options = [
     proxyId: 'string',
     name: 'Radiohjälpen',
     bicfi: 'bicno',
-    label: 'Radiohjälpen: bg',
-  },
+    label: 'Radiohjälpen: bg'
+  }
 ]
 
 type StoryArgs = NgvDropdownListComponent & WithExtras
@@ -93,14 +84,14 @@ const Template: StoryFn<StoryArgs> = (args: any) => {
       ...args,
       formControl,
       onSelectedValueChanged,
-      expanded,
-    },
+      expanded
+    }
   }
 }
 
 const primaryArgs = {
   options,
-  keyUp: {},
+  keyUp: {}
 }
 
 export const Primary = Template.bind({}, primaryArgs as any)

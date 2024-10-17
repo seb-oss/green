@@ -1,34 +1,38 @@
 <ng-container>
-    <div class="input-wrapper"
-        [ngClass]="{ 'expanded': expanded, 'collapsed': !expanded }"
-        [ngStyle]="{ 'height.px': buttonHeight }"
-        (click)="$event.stopPropagation();">
-        <!-- INPUT FIELD -->
-        <div class="input-group">
-            <input #input
-                [id]="id + '-input'"
-                class="sdv-field"
-                [attr.type]="type"
-                [attr.name]="name"
-                [attr.required]="required"
-                [attr.email]="email"
-                [min]="min"
-                [max]="max"
-                [step]="step"
-                [attr.maxlength]="maxlength"
-                [attr.minlength]="minlength"
-                [pattern]="pattern"
-                [disabled]="disabled"
-                [autocomplete]="autocomplete"
-                [autofocus]="autofocus"
-                [readOnly]="readonly"
-                [attr.role]="role"
-                [attr.placeholder]="placeholder"
-                [attr.aria-label]="description"
-                [value]="state"
-                (input)="onInput($event)"
-                (focus)="onFocus($event)"
-                (blur)="onBlur($event)" />
-        </div>
+  <div
+    class="input-wrapper"
+    [ngClass]="{ expanded: expanded, collapsed: !expanded }"
+    [ngStyle]="{ 'height.px': buttonHeight }"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- INPUT FIELD -->
+    <div class="input-group">
+      <input
+        #input
+        [id]="id + '-input'"
+        class="sdv-field"
+        [attr.type]="type"
+        [attr.name]="name"
+        [attr.required]="required"
+        [attr.email]="email"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [attr.maxlength]="maxlength"
+        [attr.minlength]="minlength"
+        [pattern]="pattern"
+        [disabled]="disabled"
+        [autocomplete]="autocomplete"
+        [autofocus]="autofocus"
+        [readOnly]="readonly"
+        [attr.role]="role"
+        [attr.placeholder]="placeholder"
+        [attr.aria-label]="description"
+        [value]="state"
+        (input)="onInput($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+      />
     </div>
+  </div>
 </ng-container>

@@ -4,10 +4,7 @@ import { state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import {
-  ListboxKbNavController,
-  ListboxKbNavigation,
-} from '../../controllers/listbox-kb-nav-controller'
+import { ListboxKbNavController, ListboxKbNavigation } from '../../controllers/listbox-kb-nav-controller'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 import { TransitionalStyles } from '../../transitional-styles'
 
@@ -45,9 +42,7 @@ export class GdsMenu extends GdsElement implements ListboxKbNavigation {
 
     return (
       (unwrap(this.#slotRef.value).assignedElements() as GdsMenuItem[]).filter(
-        (o) =>
-          !o.hasAttribute('isplaceholder') &&
-          o.gdsElementName === 'gds-menu-item',
+        o => !o.hasAttribute('isplaceholder') && o.gdsElementName === 'gds-menu-item'
       ) || []
     )
   }

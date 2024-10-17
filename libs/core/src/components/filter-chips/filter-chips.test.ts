@@ -1,24 +1,13 @@
 import { expect } from '@esm-bundle/chai'
-import {
-  fixture,
-  html as testingHtml,
-  waitUntil,
-  assert,
-} from '@open-wc/testing'
+import { fixture, html as testingHtml, waitUntil, assert } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '@sebgroup/green-core/components/filter-chips'
-import type {
-  GdsFilterChips,
-  GdsFilterChip,
-} from '@sebgroup/green-core/components/filter-chips'
+import type { GdsFilterChips, GdsFilterChip } from '@sebgroup/green-core/components/filter-chips'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -35,11 +24,11 @@ describe('<gds-filter-chips>', () => {
           <gds-filter-chip>Chip 1</gds-filter-chip>
           <gds-filter-chip>Chip 2</gds-filter-chip>
           <gds-filter-chip>Chip 3</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       await assert.isAccessible(el, {
-        ignoredRules: ['aria-required-children'],
+        ignoredRules: ['aria-required-children']
       })
     })
   })
@@ -51,7 +40,7 @@ describe('<gds-filter-chips>', () => {
           <gds-filter-chip value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip value="2" id="chip">Chip 2</gds-filter-chip>
           <gds-filter-chip value="3">Chip 3</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chip = el.querySelector('#chip') as GdsFilterChip
@@ -64,7 +53,7 @@ describe('<gds-filter-chips>', () => {
           <gds-filter-chip value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip value="2" id="chip1">Chip 2</gds-filter-chip>
           <gds-filter-chip value="3" id="chip2">Chip 3</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
@@ -78,7 +67,7 @@ describe('<gds-filter-chips>', () => {
         html`<gds-filter-chips label="filter">
           <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chips = el.chips
@@ -92,7 +81,7 @@ describe('<gds-filter-chips>', () => {
         html`<gds-filter-chips label="filter">
           <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
@@ -112,7 +101,7 @@ describe('<gds-filter-chips>', () => {
         html`<gds-filter-chips row-collapse label="filter">
           <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       expect(el.rowCollapse).to.be.true
@@ -125,7 +114,7 @@ describe('<gds-filter-chips>', () => {
         html`<gds-filter-chips label="filter">
           <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
@@ -140,7 +129,7 @@ describe('<gds-filter-chips>', () => {
         html`<gds-filter-chips label="filter">
           <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip
@@ -158,7 +147,7 @@ describe('<gds-filter-chips>', () => {
         html`<gds-filter-chips multiple label="filter">
           <gds-filter-chip id="chip1" value="1">Chip 1</gds-filter-chip>
           <gds-filter-chip id="chip2" value="2">Chip 2</gds-filter-chip>
-        </gds-filter-chips>`,
+        </gds-filter-chips>`
       )
       await el.updateComplete
       const chip1 = el.querySelector('#chip1') as GdsFilterChip

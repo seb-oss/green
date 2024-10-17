@@ -11,22 +11,14 @@ interface InputTargetType {
 export const validateInputValue = (
   target: InputTargetType,
   rules: ValidatorRules,
-  setError: React.Dispatch<React.SetStateAction<Record<string, any>>>,
+  setError: React.Dispatch<React.SetStateAction<Record<string, any>>>
 ) => {
-  const errorMessage: string | undefined = validateInputValueErrors(
-    rules,
-    target,
-  ) as string
-  errorMessage
-    ? setErrorInsert(setError, target.name)
-    : setErrorRemove(setError, target.name)
+  const errorMessage: string | undefined = validateInputValueErrors(rules, target) as string
+  errorMessage ? setErrorInsert(setError, target.name) : setErrorRemove(setError, target.name)
   return errorMessage
 }
 
-const validateInputValueErrors = (
-  rules: ValidatorRules,
-  target: InputTargetType,
-) => {
+const validateInputValueErrors = (rules: ValidatorRules, target: InputTargetType) => {
   const { value } = target
 
   if (rules?.custom instanceof Function) {
@@ -36,24 +28,18 @@ const validateInputValueErrors = (
 }
 
 /* eslint-disable-next-line */
-const setErrorInsert = (
-  setError: React.Dispatch<React.SetStateAction<Record<string, any>>>,
-  name: string,
-) => {
+const setErrorInsert = (setError: React.Dispatch<React.SetStateAction<Record<string, any>>>, name: string) => {
   /* eslint-disable-next-line */
   setError((errors: Record<string, any>) => {
     return {
       ...errors,
-      [name]: true,
+      [name]: true
     }
   })
 }
 
 /* eslint-disable-next-line */
-const setErrorRemove = (
-  setError: React.Dispatch<React.SetStateAction<Record<string, any>>>,
-  name: string,
-) => {
+const setErrorRemove = (setError: React.Dispatch<React.SetStateAction<Record<string, any>>>, name: string) => {
   /* eslint-disable-next-line */
   setError((errors: Record<string, any>) => {
     /* eslint-disable-next-line */
@@ -66,9 +52,7 @@ const setErrorRemove = (
 const validateTextInputValues = (value: string, rules: ValidatorRules) => {
   switch (rules?.type) {
     case 'Required': {
-      return value === '' || value === undefined || value === null
-        ? 'error'
-        : null
+      return value === '' || value === undefined || value === null ? 'error' : null
     }
     default: {
       return

@@ -6,15 +6,9 @@ import sinon from 'sinon'
 import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/context-menu'
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
 
-import type {
-  GdsContextMenu,
-  GdsMenuItem,
-} from '@sebgroup/green-core/components/context-menu'
+import type { GdsContextMenu, GdsMenuItem } from '@sebgroup/green-core/components/context-menu'
 import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsMenu } from '@sebgroup/green-core/primitives/menu'
 
@@ -30,9 +24,7 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      const popover = el.shadowRoot!.querySelector<HTMLElement>(
-        getScopedTagName('gds-popover'),
-      )!
+      const popover = el.shadowRoot!.querySelector<HTMLElement>(getScopedTagName('gds-popover'))!
 
       await expect(popover.hidden).to.be.false
     })
@@ -72,9 +64,7 @@ describe('<gds-context-menu>', () => {
       const spy = sinon.spy()
       el.addEventListener('click', spy)
 
-      const item = el.querySelector<GdsMenuItem>(
-        getScopedTagName('gds-menu-item'),
-      )!
+      const item = el.querySelector<GdsMenuItem>(getScopedTagName('gds-menu-item'))!
       await clickOnElement(item)
 
       await expect(spy).to.have.been.calledOnce
@@ -91,14 +81,9 @@ describe('<gds-context-menu>', () => {
           <gds-menu-item>Item 3</gds-menu-item>
         </gds-context-menu>
       `)
-      const popover = el.shadowRoot!.querySelector<GdsPopover>(
-        getScopedTagName('gds-popover'),
-      )!
-      const menu = el.shadowRoot!.querySelector<GdsMenu>(
-        getScopedTagName('gds-menu'),
-      )!
-      const button =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('#trigger')!
+      const popover = el.shadowRoot!.querySelector<GdsPopover>(getScopedTagName('gds-popover'))!
+      const menu = el.shadowRoot!.querySelector<GdsMenu>(getScopedTagName('gds-menu'))!
+      const button = el.shadowRoot!.querySelector<HTMLButtonElement>('#trigger')!
 
       await expect(button.getAttribute('aria-label')).to.equal('Button label')
       await expect(popover.label).to.equal('Context label')
@@ -118,9 +103,7 @@ describe('<gds-context-menu>', () => {
       const spy = sinon.spy()
       el.addEventListener('gds-menu-item-click', spy)
 
-      const item = el.querySelector<GdsMenuItem>(
-        getScopedTagName('gds-menu-item'),
-      )!
+      const item = el.querySelector<GdsMenuItem>(getScopedTagName('gds-menu-item'))!
       item.focus()
       await sendKeys({ press: 'Enter' })
 
@@ -141,9 +124,7 @@ describe('<gds-context-menu>', () => {
       const spy = sinon.spy()
       el.addEventListener('gds-menu-item-click', spy)
 
-      const item = el.querySelector<GdsMenuItem>(
-        getScopedTagName('gds-menu-item'),
-      )!
+      const item = el.querySelector<GdsMenuItem>(getScopedTagName('gds-menu-item'))!
       item.focus()
       await sendKeys({ press: 'Space' })
 
@@ -161,9 +142,7 @@ describe('<gds-context-menu>', () => {
       `)
       await aTimeout(0)
 
-      const item = el.querySelector<GdsMenuItem>(
-        getScopedTagName('gds-menu-item'),
-      )!
+      const item = el.querySelector<GdsMenuItem>(getScopedTagName('gds-menu-item'))!
       item.focus()
       await sendKeys({ press: 'Tab' })
 

@@ -1,5 +1,4 @@
 import { Mdx } from '@/mdx'
-import isDev from '$/dev/dev'
 import { allComponents } from 'content'
 import type { Metadata, ResolvingMetadata } from 'next'
 import Head from 'next/head'
@@ -28,7 +27,7 @@ export async function generateMetadata(
     if (component.url_path !== '/component/' + slug) {
       return false
     }
-    if (component.private && !isDev) {
+    if (component.private) {
       return false
     }
     return true

@@ -35,14 +35,7 @@ export interface SliderProps {
   onChange?: (value: number) => void
   enableClamping?: boolean
   onClamp?: (value: number) => void
-  enterKeyHint?:
-    | 'enter'
-    | 'done'
-    | 'go'
-    | 'next'
-    | 'previous'
-    | 'search'
-    | 'send'
+  enterKeyHint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'
 
   /**
    * @deprecated Use `value` instead

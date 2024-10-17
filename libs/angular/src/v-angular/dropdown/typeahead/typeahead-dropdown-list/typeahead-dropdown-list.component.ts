@@ -1,13 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Inject,
-  Input,
-  OnDestroy,
-  OnInit,
-  Optional,
-  SkipSelf,
-} from '@angular/core'
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, Optional, SkipSelf } from '@angular/core'
 
 import { fromEvent, Subject, takeUntil } from 'rxjs'
 
@@ -23,13 +14,10 @@ import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
   templateUrl: '../../dropdown-list/dropdown-list.component.html',
   styleUrls: [
     '../typeahead-dropdown-list/typeahead-dropdown-list.component.scss',
-    '../../dropdown-list/dropdown-list.component.scss',
-  ],
+    '../../dropdown-list/dropdown-list.component.scss'
+  ]
 })
-export class NgvTypeaheadDropdownListComponent
-  extends NgvDropdownListComponent
-  implements OnInit, OnDestroy
-{
+export class NgvTypeaheadDropdownListComponent extends NgvDropdownListComponent implements OnInit, OnDestroy {
   @Input() hostComponent!: NgvInputComponent
 
   /** Formats each item that is displayed as an option. Only applies format if the option if it implement Option interface. */
@@ -45,7 +33,7 @@ export class NgvTypeaheadDropdownListComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    private element: ElementRef,
+    private element: ElementRef
   ) {
     super(translocoScope)
   }
@@ -74,19 +62,17 @@ export class NgvTypeaheadDropdownListComponent
             this.setExpanded(false)
             this.onClickSubscription?.unsubscribe()
           }
-        },
+        }
       })
   }
 
   /** @Internal Update state of the host-input to reflect the selected value */
   private handleSelectedValueChanges() {
-    this.selectedValueChanged
-      .pipe(takeUntil(this._destroy$))
-      .subscribe((selected) => {
-        if (this.hostComponent.inputRef) {
-          this.hostComponent.state = `${this.formatSelected(selected)}`
-        }
-      })
+    this.selectedValueChanged.pipe(takeUntil(this._destroy$)).subscribe(selected => {
+      if (this.hostComponent.inputRef) {
+        this.hostComponent.state = `${this.formatSelected(selected)}`
+      }
+    })
   }
 
   /** @Internal Expand the dropdown when input receives focus. If no state, set empty string in input */

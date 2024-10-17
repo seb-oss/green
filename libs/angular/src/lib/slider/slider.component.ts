@@ -6,14 +6,10 @@ import {
   OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
+  SimpleChanges
 } from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
-import {
-  getSliderTrackBackground,
-  randomId,
-  sliderColors,
-} from '@sebgroup/extract'
+import { getSliderTrackBackground, randomId, sliderColors } from '@sebgroup/extract'
 
 interface SliderStyle {
   background?: string
@@ -26,14 +22,12 @@ interface SliderStyle {
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: NggSliderComponent,
-      multi: true,
-    },
+      multi: true
+    }
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class NggSliderComponent
-  implements ControlValueAccessor, OnInit, OnChanges
-{
+export class NggSliderComponent implements ControlValueAccessor, OnInit, OnChanges {
   @Input() name = `${randomId()}-slider`
   @Input() min = 0
   @Input() max = 100
@@ -46,14 +40,7 @@ export class NggSliderComponent
   @Input() unitLabel = 'kr'
   @Input() disabled = false
   @Input() value = 0
-  @Input() enterkeyhint?:
-    | 'enter'
-    | 'done'
-    | 'go'
-    | 'next'
-    | 'previous'
-    | 'search'
-    | 'send'
+  @Input() enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'
 
   @Output() sliderChange = new EventEmitter<number>()
   @Output() sliderTouch = new EventEmitter<boolean>()
@@ -67,11 +54,7 @@ export class NggSliderComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (
-      ['min', 'max', 'value'].some((x: string) =>
-        Object.prototype.hasOwnProperty.call(changes, x),
-      )
-    ) {
+    if (['min', 'max', 'value'].some((x: string) => Object.prototype.hasOwnProperty.call(changes, x))) {
       this.setTrackBackground()
     }
   }

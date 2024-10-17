@@ -5,15 +5,9 @@ import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
 import '@sebgroup/green-core/components/popover'
-import type {
-  GdsPopover,
-  GdsBackdrop,
-} from '@sebgroup/green-core/components/popover'
+import type { GdsPopover, GdsBackdrop } from '@sebgroup/green-core/components/popover'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -29,7 +23,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
       await expect(el).to.be.accessible()
@@ -40,7 +34,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -53,7 +47,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover>
           <div slot="trigger" aria-haspopup="menu">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -66,7 +60,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -82,7 +76,7 @@ describe('<gds-popover>', () => {
         html`<div id="trigger">Trigger</div>
           <gds-popover id="popover">
             <div>Content</div>
-          </gds-popover>`,
+          </gds-popover>`
       )
       const el = document.querySelector('#popover') as GdsPopover
       await el.updateComplete
@@ -109,7 +103,7 @@ describe('<gds-popover>', () => {
             <div>Content</div>
           </gds-popover>
           <gds-backdrop id="backdrop"></gds-backdrop>
-        </div>`,
+        </div>`
       )
       await el.updateComplete
 
@@ -123,7 +117,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -135,7 +129,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open nonmodal>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -149,7 +143,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -163,7 +157,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -177,7 +171,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -190,7 +184,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -203,7 +197,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover>
           <button slot="trigger">Trigger</button>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -219,7 +213,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover>
           <button slot="trigger">Trigger</button>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 
@@ -235,7 +229,7 @@ describe('<gds-popover>', () => {
         html`<gds-popover open>
           <div slot="trigger">Trigger</div>
           <div>Content</div>
-        </gds-popover>`,
+        </gds-popover>`
       )
       await el.updateComplete
 

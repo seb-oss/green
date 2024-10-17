@@ -1,12 +1,10 @@
 import Button from './button'
 
-const Template = ({ children, ...props }) => (
-  <Button {...props}>{children}</Button>
-)
+const Template = ({ children, ...props }) => <Button {...props}>{children}</Button>
 
 export default {
   title: 'Components/Form/Button',
-  component: Button,
+  component: Button
 }
 
 export const Default = {
@@ -14,10 +12,10 @@ export const Default = {
   name: 'Button',
 
   parameters: {
-    componentIds: ['component-button'],
+    componentIds: ['component-button']
   },
 
   args: {
-    children: 'Button',
-  },
+    children: 'Button'
+  }
 }

@@ -4,10 +4,7 @@ import styles from './segmented-control.trans.styles.css?inline'
 import * as Segment from './segment/segment.trans.styles'
 
 export function register() {
-  TransitionalStyles.instance.register(
-    'gds-segmented-control',
-    styles.toString(),
-  )
+  TransitionalStyles.instance.register('gds-segmented-control', styles.toString())
   Segment.register()
 }
 

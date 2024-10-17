@@ -53,6 +53,7 @@ const SEBSansSerif = localFont({
       style: 'italic',
     },
   ],
+  display: 'block',
   variable: '--gds-font-family',
 })
 export const fontVariable = SEBSansSerif.variable

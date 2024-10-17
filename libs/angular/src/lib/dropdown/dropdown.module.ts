@@ -6,17 +6,9 @@ import { NggDropdownButtonDirective } from './dropdown-button.directive'
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 
 @NgModule({
-  declarations: [
-    NggDropdownComponent,
-    NggDropdownOptionDirective,
-    NggDropdownButtonDirective,
-  ],
+  declarations: [NggDropdownComponent, NggDropdownOptionDirective, NggDropdownButtonDirective],
   imports: [CommonModule, NggCoreWrapperModule],
-  exports: [
-    NggDropdownComponent,
-    NggDropdownOptionDirective,
-    NggDropdownButtonDirective,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [NggDropdownComponent, NggDropdownOptionDirective, NggDropdownButtonDirective],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class NggDropdownModule {}

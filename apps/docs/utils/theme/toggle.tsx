@@ -2,11 +2,9 @@
 
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { useTheme } from 'next-themes'
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
 
   const Light = () => (
     <svg viewBox="0 0 24 24">

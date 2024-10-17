@@ -4,8 +4,6 @@ interface TextProps {
   children: ReactNode
 }
 
-export const Text = ({ children }: TextProps) => (
-  <span className="form-text">{children}</span>
-)
+export const Text = ({ children }: TextProps) => <span className="form-text">{children}</span>
 
 export default Text

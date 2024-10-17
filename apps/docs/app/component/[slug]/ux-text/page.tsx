@@ -8,20 +8,15 @@ type Props = {
 }
 
 export async function generateStaticParams() {
-  return allComponents.map((component) => ({
-    slug: component.url_path.replace('/component/', ''),
+  return allComponents.map(component => ({
+    slug: component.url_path.replace('/component/', '')
   }))
 }
 
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
   const { slug } = params
 
-  const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug,
-  )
+  const component = allComponents.find(component => component.url_path === '/component/' + slug)
 
   if (!component) {
     notFound()
@@ -29,16 +24,14 @@ export async function generateMetadata(
 
   return {
     title: 'UX text - ' + component.title + ' — Green Design System',
-    description: component.summary,
+    description: component.summary
   }
 }
 
 export default function Code({ params }: { params: { slug: string } }) {
   const { slug } = params
 
-  const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug + '/ux-text',
-  )
+  const component = allComponents.find(component => component.url_path === '/component/' + slug + '/ux-text')
 
   if (!component) {
     notFound()
