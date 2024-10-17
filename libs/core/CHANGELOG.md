@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.9
+
+### Patch Changes
+
+- 16d03dd: **Button:** Use book weight
+
 ## 1.44.8
 
 ### Patch Changes

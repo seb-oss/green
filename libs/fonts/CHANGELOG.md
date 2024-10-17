@@ -1,5 +1,11 @@
 # @sebgroup/fonts
 
+## 2.0.2
+
+### Patch Changes
+
+- 16d03dd: **fonts:** Fix the WOFF2 format
+
 ## 2.0.1
 
 ### Patch Changes
