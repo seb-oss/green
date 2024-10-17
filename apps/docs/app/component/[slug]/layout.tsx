@@ -14,6 +14,12 @@ import Content from '&/content/content'
 import { allComponents } from 'content'
 import { format, parseISO } from 'date-fns'
 
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsCard from '@sebgroup/green-react/src/core/card'
+import GdsText from '@sebgroup/green-react/src/core/text'
+import GdsBadge from '@sebgroup/green-react/src/core/badge'
+import GdsContainer from '@sebgroup/green-react/src/core/container'
+
 export default function ComponentLayout({
   children,
   params,
@@ -102,14 +108,26 @@ export default function ComponentLayout({
         slug={slug}
       />
 
-      <div>
-        <h1 className="gds-fs-headline-large">{title}</h1>
-        <p>{summary}</p>
-      </div>
-      <Flex wrap="wrap" gap="small">
-        <Badge title="Status" label={status} />
-        <Tags title="Tags" tags={tagsArray} max={3} />
-      </Flex>
+      <GdsFlex justify-content="space-between" align-items="flex-start">
+        <GdsFlex flex-direction="column">
+          <h1 className="gds-fs-headline-large">{title}</h1>
+          <p>{summary}</p>
+        </GdsFlex>
+        {/* <GdsCard level="2" background="secondary" border-radius="s"> */}
+        <GdsContainer level="2" background="primary">
+          <GdsFlex align-items="flex-start" gap="xl" min-width="400px">
+            <GdsFlex flex-direction="column">
+              <GdsText>Status</GdsText>
+              <GdsBadge>{status}</GdsBadge>
+            </GdsFlex>
+            <GdsFlex flex-direction="column">
+              <GdsText>Tags</GdsText>
+              <GdsText>{tagsArray}</GdsText>
+            </GdsFlex>
+          </GdsFlex>
+        </GdsContainer>
+        {/* </GdsCard> */}
+      </GdsFlex>
       <gds-cell span="2">
         <Pattern>
           {(preview?.trim() ?? '') ? (
@@ -124,7 +142,6 @@ export default function ComponentLayout({
         </Pattern>
       </gds-cell>
       <Taber component={url_path} links={links} />
-      {/* {tocComponent} */}
       <footer>
         Last updated: <br />
         <time dateTime={last_edited} title="Last updated">

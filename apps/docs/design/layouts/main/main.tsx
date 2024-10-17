@@ -15,7 +15,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
       <GdsFlex
         padding="4xl"
         flex-direction="column"
-        max-width="1440px"
+        width="1440px"
         margin="0 auto"
         gap="4xl"
       >
