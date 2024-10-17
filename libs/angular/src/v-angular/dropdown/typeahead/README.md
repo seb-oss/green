@@ -7,7 +7,7 @@ The provided operator function filters options among options and return a list o
 
 ## Inputs
 
-- `@Input() ngvTypeahead: OperatorFunction<string, T[]> | undefined)`: The operator function that filters options based on user input
+- `@Input() nggvTypeahead: OperatorFunction<string, T[]> | undefined)`: The operator function that filters options based on user input
 - `@Input() resultFormatter?: (option: OptionBase<Option<K, V>>) => string`: Formats each item that is displayed as an option.
 - `@Input() selectedFormatter?: (selected: OptionBase<Option<K, V>>) => string`: Formats the selected item in the input when dropdown is opened. If no function is provided, it will display the value of the selected objects label property
 - `@Input() hostComponent!: InputComponent | DropdownComponent`: A reference to the hostcomponent.
@@ -45,7 +45,7 @@ import { TypeaheadDirective } from '@sebgroup/nggv-core';
 <!-- consumer.component.html -->
 <nggv-dropdown
     #dropdownElement
-    [ngvTypeahead]="typeaheadFunction"
+    [nggvTypeahead]="typeaheadFunction"
     [selectedFormatter]="selectedFormatter"
     [resultFormatter]="resultFormatter"
     [allowUnselect]="allowUnselect"
@@ -54,7 +54,7 @@ import { TypeaheadDirective } from '@sebgroup/nggv-core';
 </nggv-dropdown>
 <nggv-input
     #inputElement
-    [ngvTypeahead]="typeaheadFunction"
+    [nggvTypeahead]="typeaheadFunction"
     [selectedFormatter]="selectedFormatter"
     [resultFormatter]="resultFormatter"
     [allowUnselect]="allowUnselect"

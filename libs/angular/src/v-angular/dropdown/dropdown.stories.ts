@@ -394,7 +394,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         [formControl]="formControl"
         [locked]="locked"
         [displayDisabledAsLocked]="displayDisabledAsLocked"
-        [ngvTypeahead]="searchFunction"
+        [nggvTypeahead]="searchFunction"
         [selectedFormatter]="selectedFormatter"
         [resultFormatter]="resultFormatter"
         [allowUnselect]="true"
@@ -628,7 +628,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
           [options]="options"
           [allowUnselect]="allowUnselect"
           [unselectLabel]="unselectLabel"
-          [ngvTypeahead]="searchFunction"
+          [nggvTypeahead]="searchFunction"
           [resultFormatter]="resultFormatter"
           [selectedFormatter]="selectedFormatter">
 

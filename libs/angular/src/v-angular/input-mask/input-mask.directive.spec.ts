@@ -1,5 +1,18 @@
-import { ApplicationRef, Component, forwardRef, Input, OnInit, PLATFORM_ID } from '@angular/core'
-import { FormControl, FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators } from '@angular/forms'
+import {
+  ApplicationRef,
+  Component,
+  forwardRef,
+  Input,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core'
+import {
+  FormControl,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
 import { CommonModule } from '@angular/common'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
@@ -18,10 +31,10 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         *ngIf="!isAsync"
         class="nggv-lib-custom-input"
         [formControl]="control"
-        [ngvInputMask]="inputMask"
+        [nggvInputMask]="inputMask"
         [placeholder]="placeholder"
       />
-    `
+    `,
   })
   class CustomInputComponent implements OnInit {
     @Input() control!: FormControl
@@ -39,17 +52,25 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
 
   @Component({
     template: `
-      <input class="date" [ngvInputMask]="dateMask" [formControl]="dateFC" />
-      <input class="ip" [ngvInputMask]="ipAddressMask" [formControl]="ipFC" />
-      <input class="initDate" [ngvInputMask]="dateMask" [formControl]="initDateFC" />
-      <input class="phone" [ngvInputMask]="phoneMask" [formControl]="phoneFC" />
+      <input class="date" [nggvInputMask]="dateMask" [formControl]="dateFC" />
+      <input class="ip" [nggvInputMask]="ipAddressMask" [formControl]="ipFC" />
+      <input
+        class="initDate"
+        [nggvInputMask]="dateMask"
+        [formControl]="initDateFC"
+      />
+      <input
+        class="phone"
+        [nggvInputMask]="phoneMask"
+        [formControl]="phoneFC"
+      />
       <nggv-lib-custom-input
         [control]="dateFCCustom"
         [inputMask]="dateMask"
         [isAsync]="isAsync"
         placeholder="Date"
       ></nggv-lib-custom-input>
-    `
+    `,
   })
   class TestComponent {
     dateMask = createMask<Date>({
@@ -61,7 +82,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         const month = +values[1] - 1
         const day = +values[0]
         return new Date(year, month, day)
-      }
+      },
     })
     dateFC = new FormControl('', [Validators.required])
     initDateFC = new FormControl('28/02/1988')
@@ -79,11 +100,16 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
   let component: TestComponent
   let fixture: ComponentFixture<TestComponent>
 
-  const inputField = (selector: string): HTMLInputElement => fixture.debugElement.nativeElement.querySelector(selector)
-  const updateInput = async (element: HTMLInputElement | string, value: string | null) => {
+  const inputField = (selector: string): HTMLInputElement =>
+    fixture.debugElement.nativeElement.querySelector(selector)
+  const updateInput = async (
+    element: HTMLInputElement | string,
+    value: string | null,
+  ) => {
     if (!element) return
 
-    const target: HTMLInputElement = typeof element === 'string' ? inputField(element) : element
+    const target: HTMLInputElement =
+      typeof element === 'string' ? inputField(element) : element
 
     if (!target) return
 
@@ -110,21 +136,21 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         FormsModule,
         BrowserModule,
         ReactiveFormsModule,
-        NgvInputMaskModule.forRoot({ isAsync: true })
+        NgvInputMaskModule.forRoot({ isAsync: true }),
       ],
       providers: [
         InputMaskConfig,
         { provide: PLATFORM_ID, useValue: 'browser' },
         {
           provide: INPUT_MASK_CONFIG,
-          useClass: InputMaskConfig
+          useClass: InputMaskConfig,
         },
         {
           provide: NG_VALUE_ACCESSOR,
           useExisting: forwardRef(() => NgvInputMaskDirective),
-          multi: true
-        }
-      ]
+          multi: true,
+        },
+      ],
     }).compileComponents()
 
     fixture = TestBed.createComponent(TestComponent)
@@ -205,7 +231,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
     component.isAsync = false
     fixture.detectChanges()
 
-    await new Promise(r => setTimeout(r, 1000))
+    await new Promise((r) => setTimeout(r, 1000))
 
     input = inputField('.nggv-lib-custom-input')
     component.dateFCCustom.setValue('28/02/1988')
@@ -221,14 +247,17 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
 
 describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
   @Component({
-    template: ` <input class="ip" [ngvInputMask]="ipAddressMask" [formControl]="ipFC" /> `
+    template: `
+      <input class="ip" [nggvInputMask]="ipAddressMask" [formControl]="ipFC" />
+    `,
   })
   class ChangeDetectionTestComponent {
     ipAddressMask = createMask({ alias: 'ip' })
     ipFC = new FormControl('')
   }
 
-  const inputField = (selector: string): HTMLInputElement => fixture.debugElement.nativeElement.querySelector(selector)
+  const inputField = (selector: string): HTMLInputElement =>
+    fixture.debugElement.nativeElement.querySelector(selector)
 
   let component: ChangeDetectionTestComponent
   let fixture: ComponentFixture<ChangeDetectionTestComponent>
@@ -241,21 +270,21 @@ describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
         FormsModule,
         BrowserModule,
         ReactiveFormsModule,
-        NgvInputMaskModule.forRoot({ isAsync: true })
+        NgvInputMaskModule.forRoot({ isAsync: true }),
       ],
       providers: [
         InputMaskConfig,
         { provide: PLATFORM_ID, useValue: 'browser' },
         {
           provide: INPUT_MASK_CONFIG,
-          useClass: InputMaskConfig
+          useClass: InputMaskConfig,
         },
         {
           provide: NG_VALUE_ACCESSOR,
           useExisting: forwardRef(() => NgvInputMaskDirective),
-          multi: true
-        }
-      ]
+          multi: true,
+        },
+      ],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ChangeDetectionTestComponent)

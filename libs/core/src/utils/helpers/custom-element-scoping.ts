@@ -58,9 +58,51 @@
 
 import { html as litHtml } from 'lit'
 import { customElement } from 'lit/decorators.js'
+import { GdsElement } from '../../gds-element'
 
 export const VER_SUFFIX = '-gdsvsuffix'
-const elementLookupTable = new Map<string, string>()
+
+declare global {
+  var __gdsElementLookupTable: { [VER_SUFFIX]: Map<string, string> } // eslint-disable-line no-var
+}
+
+export class ScopedElementRegistry {
+  static get instance() {
+    if (!globalThis.__gdsElementLookupTable?.[VER_SUFFIX])
+      globalThis.__gdsElementLookupTable = {
+        ...globalThis.__gdsElementLookupTable,
+        [VER_SUFFIX]: new Map<string, string>(),
+      }
+
+    return globalThis.__gdsElementLookupTable[VER_SUFFIX]
+  }
+}
+
+function scopedCustomElement(tagName: string) {
+  const versionedTagName = tagName + VER_SUFFIX
+  ScopedElementRegistry.instance.set(tagName, versionedTagName)
+
+  return function (constructor: any) {
+    constructor.prototype.gdsElementName = tagName
+
+    // Bail out if the element is already registered
+    if (customElements.get(versionedTagName))
+      return (_constructor: GdsElement) => false
+
+    return customElement(versionedTagName)(constructor) as any
+  }
+}
+
+function unscopedCustomElement(tagName: string) {
+  // We still need to add elements to the lookup table since we use this lookup table to
+  // validate a custom element even though we are not using scoping
+  ScopedElementRegistry.instance.set(tagName, tagName)
+
+  return function (constructor: any) {
+    constructor.prototype.gdsElementName = tagName
+    return customElement(tagName)(constructor)
+  }
+}
 
 /**
  * Class decorator factory that defines the decorated class as a custom element, and registers
@@ -79,21 +121,9 @@ const elementLookupTable = new Map<string, string>()
  */
 export const gdsCustomElement = (tagName: string) => {
   if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
-    /**
-     * We still need to add elements to the lookup table since we use this lookup table to
-     * validate a custom element even though we are not using scoping
-     */
-    elementLookupTable.set(tagName, tagName)
-    return customElement(tagName)
+    return unscopedCustomElement(tagName)
   }
-
-  const versionedTagName = tagName + VER_SUFFIX
-  elementLookupTable.set(tagName, versionedTagName)
-
-  // Bail out if the element is already registered
-  if (customElements.get(versionedTagName)) return (_classOrDescriptor: any) => false
-
-  return customElement(versionedTagName)
+  return scopedCustomElement(tagName)
 }
 
 /**
@@ -103,7 +133,10 @@ export const gdsCustomElement = (tagName: string) => {
  * since it expects the same TemplateStringArray instance to be passed in each time.
  */
 const templateCache = new WeakMap<TemplateStringsArray, string[]>()
-function applyElementScoping(strings: TemplateStringsArray, ...values: any[]): [string[], ...any[]] {
+function applyElementScoping(
+  strings: TemplateStringsArray,
+  ...values: any[]
+): [string[], ...any[]] {
   let modstrings = templateCache.get(strings)
 
   if (!modstrings) {
@@ -116,8 +149,8 @@ function applyElementScoping(strings: TemplateStringsArray, ...values: any[]): [
 }
 
 const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
-  inStr.map(s => {
-    for (const [key, value] of elementLookupTable.entries()) {
+  inStr.map((s) => {
+    for (const [key, value] of ScopedElementRegistry.instance.entries()) {
       // Match the key, as long as it is not followed by a dash or lowercase letter.
       // The key `gds-menu` should only match `gds-menu` and not `gds-menu-item` or `gds-menuitem`, for example.
       s = s.replace(new RegExp(`${key}(?![-a-z])`, 'mg'), value)
@@ -129,7 +162,9 @@ const replaceTags = (inStr: TemplateStringsArray | readonly string[]) =>
  * Template tag factory that creates a new template tag, which rewrites all custom element names from the
  * lookup table to include the version suffix, and then passes the template on to the provided template tag.
  */
-export function htmlTemplateTagFactory(extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any) {
+export function htmlTemplateTagFactory(
+  extendedTag: (strings: TemplateStringsArray, ...values: any[]) => any,
+) {
   return (strings: TemplateStringsArray, ...values: any[]) => {
     if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
       return extendedTag(strings, ...values)
@@ -151,7 +186,7 @@ export const html = htmlTemplateTagFactory(litHtml)
  * @param tagName The tag name to scope
  */
 export function getScopedTagName(tagName: string) {
-  return elementLookupTable.get(tagName) ?? tagName
+  return ScopedElementRegistry.instance.get(tagName) ?? tagName
 }
 
 /**
@@ -159,7 +194,9 @@ export function getScopedTagName(tagName: string) {
  * @param tagName The scoped tag name to unscope
  */
 export function getUnscopedTagName(tagName: string) {
-  return [...elementLookupTable.entries()].find(([, value]) => value === tagName)?.[0]
+  return [...ScopedElementRegistry.instance.entries()].find(
+    ([, value]) => value === tagName,
+  )?.[0]
 }
 
 export default {}

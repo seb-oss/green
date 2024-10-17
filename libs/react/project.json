@@ -56,7 +56,14 @@
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "dependencies": true
+        },
+        "tokens:build"
+      ]
     },
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
@@ -73,7 +80,7 @@
       },
       "dependsOn": [
         {
-          "target": "build-with-types-and-scoping",
+          "target": "build",
           "dependencies": true
         },
         "tokens:build"
@@ -93,7 +100,7 @@
       },
       "dependsOn": [
         {
-          "target": "build-with-types-and-scoping",
+          "target": "build",
           "dependencies": true
         },
         "tokens:build"

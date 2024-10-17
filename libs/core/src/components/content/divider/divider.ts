@@ -1,5 +1,8 @@
 import { property } from 'lit/decorators.js'
-import { gdsCustomElement, html } from '../../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+} from '../../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../../gds-element'
 import { tokens } from '../../../tokens.style'
 import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
@@ -33,14 +36,14 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'color',
-    valueTemplate: v => {
+    valueTemplate: (v) => {
       const [colorName, transparency] = v.split('/')
       if (transparency) {
         return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
       } else {
         return `var(--gds-sys-color-${colorName})`
       }
-    }
+    },
   })
   color?: string
 
@@ -59,8 +62,7 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: '--_size',
-    selector: 'hr',
-    valueTemplate: v => `var(--gds-space-${v})`
+    valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   size?: string
 
@@ -78,12 +80,11 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'opacity',
-    selector: 'hr',
-    valueTemplate: v => v
+    valueTemplate: (v) => v,
   })
   opacity?: string
 
   render() {
-    return html`<hr />`
+    return html``
   }
 }

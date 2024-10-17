@@ -4,7 +4,6 @@ import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { constrainSlots } from '../../utils/helpers/constrain-slots'
 import { forwardAttributes } from '../../utils/directives'
 import { TransitionalStyles } from '../../transitional-styles'
 import '../../primitives/ripple'
@@ -40,7 +39,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
    */
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   /**
@@ -110,7 +109,6 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   connectedCallback(): void {
@@ -138,7 +136,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       negative: this.variant === 'negative',
       primary: this.rank === 'primary',
       secondary: this.rank === 'secondary',
-      tertiary: this.rank === 'tertiary'
+      tertiary: this.rank === 'tertiary',
     }
 
     const tag = this.#isLink ? literal`a` : literal`button`
@@ -155,7 +153,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         download=${ifDefined(this.#isLink ? this.download : undefined)}
         part="_button"
         @click="${this.#handleClick}"
-        ${forwardAttributes(attr => attr.name.startsWith('gds-aria') || attr.name === 'gds-role')}
+        ${forwardAttributes((attr) => attr.name.startsWith('gds-aria') || attr.name === 'gds-role')}
       >
         <slot name="lead"></slot>
         <slot @slotchange=${this.#mainSlotChange}></slot>
@@ -171,10 +169,13 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   // Check if the button is an icon button.
   #mainSlotChange = () => {
-    const assignedNodes = (this._mainSlot?.assignedNodes() ?? []) as GdsElement[]
+    const assignedElements = this._mainSlot?.assignedElements() ?? []
 
     this.#isIconButton =
-      assignedNodes.length === 1 && assignedNodes.some(node => node.nodeName.toLowerCase().startsWith('gds-icon'))
+      assignedElements.length === 1 &&
+      assignedElements.some((element) =>
+        element.tagName.toLowerCase().startsWith('gds-icon'),
+      )
 
     this.requestUpdate()
   }
@@ -184,8 +185,8 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       new CustomEvent('gds-click', {
         bubbles: true,
         composed: true,
-        detail: e
-      })
+        detail: e,
+      }),
     )
 
     if (this.form && !this.#isLink) {

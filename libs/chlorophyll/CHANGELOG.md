@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.7
+
+### Patch Changes
+
+- Updated dependencies [04316c7]
+  - @sebgroup/fonts@2.0.0
+
 ## 3.6.6
 
 ### Patch Changes

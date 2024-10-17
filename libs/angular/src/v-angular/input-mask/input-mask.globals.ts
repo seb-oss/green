@@ -5,7 +5,7 @@ export {}
 declare global {
   interface Window {
     /** Counter for unique identifiers */
-    ngv: {
+    nggv: {
       ids: { [namespace: string]: number; default: number }
       nextId: (namespace?: string) => string
     }
@@ -14,8 +14,8 @@ declare global {
 
 ;(() => {
   // Make sure there is an incremental ID each component can use
-  if (typeof window !== 'undefined' && !window.ngv) {
-    window.ngv = {
+  if (typeof window !== 'undefined' && !window.nggv) {
+    window.nggv = {
       ids: { default: -1 },
       nextId(namespace = 'default'): string {
         let id = this.ids[namespace] || 0

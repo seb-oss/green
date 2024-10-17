@@ -11,6 +11,7 @@
 @layer core {
   :host {
     display: inline-block;
+    max-width: 100%;
   }
 
   .button {
@@ -40,6 +41,7 @@
     text-decoration: none;
     transition-property: color, border-color;
     transition: all 0.4s;
+    max-width: 100%;
 
     &:focus {
       outline-color: color-mix(in srgb, currentcolor, #000 100%);
@@ -70,7 +72,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      max-width: 20ch;
     }
   }
 }

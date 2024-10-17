@@ -49,7 +49,7 @@ export class NgvBaseControlValueAccessorComponent
   /* ATTRIBUTES */
 
   /** Id of the host element and is accessible by the children, automatically generated if not provided. */
-  @HostBinding('attr.id') @Input() id = (window as any).ngv?.nextId()
+  @HostBinding('attr.id') @Input() id = (window as any).nggv?.nextId()
   /** Name of the child input element. */
   @Input() name?: string
   /**
@@ -147,9 +147,9 @@ export class NgvBaseControlValueAccessorComponent
   /* TRIGGERS */
 
   /** Emits focus events triggered by the child elements. */
-  @Output() readonly ngvFocus = new EventEmitter()
+  @Output() readonly nggvFocus = new EventEmitter()
   /** Emits focus events triggered by the child elements. */
-  @Output() readonly ngvBlur = new EventEmitter()
+  @Output() readonly nggvBlur = new EventEmitter()
 
   /* VALUE HANDLERS */
 
@@ -230,7 +230,7 @@ export class NgvBaseControlValueAccessorComponent
   onFocus(event: Event) {
     event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true)
     this.focused = true
-    this.ngvFocus.emit(event)
+    this.nggvFocus.emit(event)
   }
 
   /** @internal */
@@ -238,7 +238,7 @@ export class NgvBaseControlValueAccessorComponent
     event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true)
     this.onTouched()
     this.focused = false
-    this.ngvBlur.emit(event)
+    this.nggvBlur.emit(event)
   }
 
   /** Sets the focus on the actual input element. */

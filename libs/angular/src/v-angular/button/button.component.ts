@@ -60,7 +60,7 @@ export class NgvButtonComponent extends NgvBaseControlValueAccessorComponent imp
   /** Emits click events triggered by the button or link.
    * Use instead of click to avoid triggering events on disabled buttons and links.
    */
-  @Output() ngvClick = new EventEmitter()
+  @Output() nggvClick = new EventEmitter()
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
@@ -100,6 +100,6 @@ export class NgvButtonComponent extends NgvBaseControlValueAccessorComponent imp
   /** @internal */
   onClick(event: Event) {
     if (this.disabled) return
-    this.ngvClick.emit(event)
+    this.nggvClick.emit(event)
   }
 }

@@ -5,10 +5,12 @@ import _Inputmask from 'inputmask'
 
 import type { InputmaskOptions } from './input-mask.types'
 
-const InputmaskStatic = (_Inputmask as unknown as { default?: Inputmask.Static }).default || _Inputmask
+const InputmaskStatic =
+  (_Inputmask as unknown as { default?: Inputmask.Static }).default ||
+  _Inputmask
 
 @Pipe({
-  name: 'ngvInputMaskFormat'
+  name: 'nggvInputMaskFormat',
 })
 export class InputMaskFormatPipe implements PipeTransform {
   transform<T = any>(value: any, options: InputmaskOptions<T>): any {

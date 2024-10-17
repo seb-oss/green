@@ -9,7 +9,7 @@ import {
   OnInit,
   Optional,
   Output,
-  Self
+  Self,
 } from '@angular/core'
 import { NgControl, UntypedFormControl } from '@angular/forms'
 
@@ -28,9 +28,12 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 @Component({
   selector: 'nggv-input',
   templateUrl: './input.component.html',
-  styleUrls: ['./input.component.scss']
+  styleUrls: ['./input.component.scss'],
 })
-export class NgvInputComponent extends NgvBaseControlValueAccessorComponent implements OnInit, OnDestroy {
+export class NgvInputComponent
+  extends NgvBaseControlValueAccessorComponent
+  implements OnInit, OnDestroy
+{
   /** Adding .gds-form-item as a class to host element */
   @HostBinding('class') class = 'gds-form-item'
   /** Special property used for selecting DOM elements during automated UI testing. */
@@ -96,7 +99,7 @@ export class NgvInputComponent extends NgvBaseControlValueAccessorComponent impl
 
   /** Pattern the value must match to be valid. */
   @Input() pattern = ''
-  /** Amount of time to wait until emitting (ngvINput) event */
+  /** Amount of time to wait until emitting (nggvINput) event */
   @Input() debounceTime = 500
   /**
    * @deprecated
@@ -123,7 +126,7 @@ export class NgvInputComponent extends NgvBaseControlValueAccessorComponent impl
   }
 
   /** Emits every time the value of the inner input field changes, independantly of updates on the formcontroller */
-  @Output() ngvInput = new EventEmitter<any>()
+  @Output() nggvInput = new EventEmitter<any>()
 
   private _formControl = new UntypedFormControl()
   get control(): UntypedFormControl {
@@ -145,16 +148,18 @@ export class NgvInputComponent extends NgvBaseControlValueAccessorComponent impl
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }
 
   ngOnInit() {
     super.ngOnInit()
-    this.inputChange$.pipe(takeUntil(this._destroy$), debounceTime(this.debounceTime)).subscribe(inputValue => {
-      this.ngvInput.emit(inputValue)
-    })
+    this.inputChange$
+      .pipe(takeUntil(this._destroy$), debounceTime(this.debounceTime))
+      .subscribe((inputValue) => {
+        this.nggvInput.emit(inputValue)
+      })
   }
 
   ngOnDestroy(): void {

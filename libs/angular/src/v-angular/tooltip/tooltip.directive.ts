@@ -10,7 +10,7 @@ import {
   Output,
   Renderer2,
   SimpleChange,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core'
 
 export type Placement = 'top' | 'right' | 'bottom' | 'left'
@@ -29,11 +29,13 @@ type Position = {
  * https://designlibrary.sebgroup.com/components/component-tooltip
  */
 @Directive({
-  selector: '[ngvTooltip]'
+  selector: '[nggvTooltip]',
 })
-export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy {
+export class NgvTooltipDirective
+  implements AfterViewInit, OnChanges, OnDestroy
+{
   /** The text that will be shown in the tooltip. */
-  @Input() ngvTooltip?: string
+  @Input() nggvTooltip?: string
   /** Special property used for selecting DOM elements during automated UI testing. */
   @Input() thook = 'tooltip'
   /** The side of the anchor which the tooltip will be rendered.
@@ -50,9 +52,9 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
   @Input() maxWidth = 343
 
   /** Emits a show event triggered changing visibility state of the tooltip. */
-  @Output() ngvShow = new EventEmitter<HTMLElement>()
+  @Output() nggvShow = new EventEmitter<HTMLElement>()
   /** Emits a hide event triggered changing visibility state of the tooltip. */
-  @Output() ngvHide = new EventEmitter<HTMLElement>()
+  @Output() nggvHide = new EventEmitter<HTMLElement>()
 
   /** @internal */
   protected timeout = 0
@@ -71,12 +73,16 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
 
   /** @internal Check if changes should trigger a re-render */
   static shouldUpdate(change: SimpleChange) {
-    return change && !change.firstChange && change.previousValue !== change.currentValue
+    return (
+      change &&
+      !change.firstChange &&
+      change.previousValue !== change.currentValue
+    )
   }
 
   constructor(
     private anchorElementRef: ElementRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
   ) {
     this.anchorElement = this.anchorElementRef.nativeElement
     this.parentElement = document.body
@@ -89,7 +95,7 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      NgvTooltipDirective.shouldUpdate(changes.ngvTooltip) ||
+      NgvTooltipDirective.shouldUpdate(changes.nggvTooltip) ||
       NgvTooltipDirective.shouldUpdate(changes.placement) ||
       NgvTooltipDirective.shouldUpdate(changes.thook)
     ) {
@@ -137,18 +143,18 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
    */
   show(recreate = false) {
     // Require tooltip text to create
-    if (!this.ngvTooltip || this.ngvTooltip.length === 0) return
+    if (!this.nggvTooltip || this.nggvTooltip.length === 0) return
 
     if (recreate || !this.tooltipElement) {
       this.hide(true)
-      this.create(this.ngvTooltip)
+      this.create(this.nggvTooltip)
     } else {
       this.renderer.appendChild(this.parentElement, this.tooltipElement)
     }
 
     this.updatePosition()
     this.shown = true
-    this.ngvShow.emit(this.tooltipElement)
+    this.nggvShow.emit(this.tooltipElement)
   }
 
   /**
@@ -161,7 +167,7 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
       this.renderer.removeChild(this.parentElement, this.tooltipElement)
     if (destroy) this.destroy()
     this.shown = false
-    this.ngvHide.emit(this.tooltipElement)
+    this.nggvHide.emit(this.tooltipElement)
   }
 
   /**
@@ -179,13 +185,19 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
     this.renderer.setStyle(this.tooltipElement, 'padding', '.5rem 1rem')
     const relativeMaxWidth = this.pxToRem(this.maxWidth)
     this.renderer.setStyle(this.tooltipElement, 'max-width', relativeMaxWidth)
-    this.renderer.appendChild(this.tooltipElement, this.renderer.createText(text))
+    this.renderer.appendChild(
+      this.tooltipElement,
+      this.renderer.createText(text),
+    )
 
     // add tooltip to DOM
     this.renderer.appendChild(this.parentElement, this.tooltipElement)
 
     this.arrowElement = this.renderer.createElement('div')
-    this.renderer.addClass(this.arrowElement, `gds-tooltip__arrow-${this.placement}`)
+    this.renderer.addClass(
+      this.arrowElement,
+      `gds-tooltip__arrow-${this.placement}`,
+    )
 
     // add arrow to tooltip element
     this.renderer.appendChild(this.tooltipElement, this.arrowElement)
@@ -206,18 +218,36 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
    */
   updatePosition() {
     if (!this.tooltipElement || !this.arrowElement) return
-    const scrollPos = window.pageYOffset || document.documentElement.scrollTop || this.parentElement.scrollTop || 0
+    const scrollPos =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      this.parentElement.scrollTop ||
+      0
     const anchorRect = this.anchorElement.getBoundingClientRect()
     const tooltipRect = this.tooltipElement.getBoundingClientRect()
     const arrowRect = this.arrowElement.getBoundingClientRect()
 
     switch (this.placement) {
       case 'top':
-        this.alignVertical(true, scrollPos, anchorRect, tooltipRect.width, tooltipRect.height, arrowRect.width)
+        this.alignVertical(
+          true,
+          scrollPos,
+          anchorRect,
+          tooltipRect.width,
+          tooltipRect.height,
+          arrowRect.width,
+        )
         break
 
       case 'bottom':
-        this.alignVertical(false, scrollPos, anchorRect, tooltipRect.width, tooltipRect.height, arrowRect.width)
+        this.alignVertical(
+          false,
+          scrollPos,
+          anchorRect,
+          tooltipRect.width,
+          tooltipRect.height,
+          arrowRect.width,
+        )
         break
 
       case 'left':
@@ -243,14 +273,15 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
     anchor: DOMRect,
     tooltipWidth: number,
     tooltipHeight: number,
-    arrowWidth: number
+    arrowWidth: number,
   ) {
     const width = this.parentElement.clientWidth
     const anchorMidX = anchor.left + anchor.width / 2
     const tooltip: Position = {}
     const arrow: Position = {}
 
-    if (above) tooltip.top = anchor.top - tooltipHeight - this.offset + scrollPos
+    if (above)
+      tooltip.top = anchor.top - tooltipHeight - this.offset + scrollPos
     else tooltip.top = anchor.bottom + this.offset + scrollPos
 
     if (anchorMidX < width / 2) {
@@ -268,7 +299,12 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
    * @internal
    * Calculates and set the position of the tooltip when the placement is `left` or `right`.
    */
-  alignHorizontal(before: boolean, scrollPos: number, anchor: DOMRect, tooltipHeight: number) {
+  alignHorizontal(
+    before: boolean,
+    scrollPos: number,
+    anchor: DOMRect,
+    tooltipHeight: number,
+  ) {
     const width = this.parentElement.clientWidth
     const top = anchor.top + (anchor.height - tooltipHeight) / 2 + scrollPos
     const tooltip: Position = { top }
@@ -299,7 +335,9 @@ export class NgvTooltipDirective implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   private pxToRem(value: number): string {
-    const fontSizePx = window?.getComputedStyle(this.parentElement)?.getPropertyValue('font-size')
+    const fontSizePx = window
+      ?.getComputedStyle(this.parentElement)
+      ?.getPropertyValue('font-size')
     const fontSizeNumberMatch = fontSizePx?.match(/\d{1,}/)
     const fontSize = fontSizeNumberMatch ? +fontSizeNumberMatch[0] : 16
     const remValue = value / fontSize

@@ -31,7 +31,7 @@
         {{ state }}
       </ng-container>
       <ng-container *ngIf="!!inputMask">
-        {{ state | ngvInputMaskFormat: inputMask }}
+        {{ state | nggvInputMaskFormat: inputMask }}
       </ng-container>
     </ng-container>
   </div>
@@ -89,7 +89,7 @@
         [attr.placeholder]="placeholder"
         [attr.aria-label]="description"
         [attr.aria-describedby]="id + '-message'"
-        [ngvInputMask]="inputMask"
+        [nggvInputMask]="inputMask"
         [formControl]="control"
       />
     </div>
@@ -117,7 +117,7 @@
 
     <ng-container *ngIf="!inputMask && hasMaxLength && showCharacterCountdown">
       <span
-        *ngvCharacterCountdown="
+        *nggvCharacterCountdown="
           maxlength;
           currentLength: (inputRef?.nativeElement?.value ?? '').length;
           charactersLeft as charactersLeft

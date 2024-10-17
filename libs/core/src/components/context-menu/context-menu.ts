@@ -4,9 +4,11 @@ import { classMap } from 'lit/directives/class-map.js'
 import { property, queryAsync } from 'lit/decorators.js'
 import { Placement } from '@floating-ui/dom'
 
-import { gdsCustomElement, html } from '../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
 import { GdsElement } from '../../gds-element'
-import { constrainSlots } from '../../utils/helpers'
 import { TransitionalStyles } from '../../transitional-styles'
 
 import styles from './context-menu.styles'
@@ -33,7 +35,7 @@ export class GdsContextMenu extends GdsElement {
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   /**
@@ -46,7 +48,7 @@ export class GdsContextMenu extends GdsElement {
    * The label for the trigger button.
    */
   @property({
-    attribute: 'button-label'
+    attribute: 'button-label',
   })
   buttonLabel: string = msg('Open context menu')
 
@@ -55,7 +57,7 @@ export class GdsContextMenu extends GdsElement {
    */
   @property({
     attribute: 'show-label',
-    type: Boolean
+    type: Boolean,
   })
   showLabel = false
 
@@ -76,18 +78,17 @@ export class GdsContextMenu extends GdsElement {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   connectedCallback() {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-context-menu')
 
-    this.addEventListener('keydown', e => {
+    this.addEventListener('keydown', (e) => {
       if (this.open && e.key == 'Tab') {
         e.preventDefault()
         this.open = false
-        this.elTriggerBtn.then(el => el.focus())
+        this.elTriggerBtn.then((el) => el.focus())
       }
     })
   }
@@ -120,8 +121,11 @@ export class GdsContextMenu extends GdsElement {
         .placement=${this.placement}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
-        <gds-menu aria-label=${this.label ?? this.buttonLabel} @gds-menu-item-click=${this.#handleItemClick}>
-          <slot allow="gds-menu-item gds-menu-heading"></slot>
+        <gds-menu
+          aria-label=${this.label ?? this.buttonLabel}
+          @gds-menu-item-click=${this.#handleItemClick}
+        >
+          <slot></slot>
         </gds-menu>
       </gds-popover>`
   }

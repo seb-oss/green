@@ -605,7 +605,7 @@ const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (args: an
     template: /*html*/ `
       <nggv-input class="toggle"
         [label]="label"
-        [ngvTypeahead]="searchFunction"
+        [nggvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
         [autocomplete]="'off'">

@@ -1,5 +1,77 @@
 # Changelog
 
+## 1.44.7
+
+### Patch Changes
+
+- 3709a4f: **Video, IMG, Divider:** Fixed all display content issues and flex gap cashing
+
+## 1.44.6
+
+### Patch Changes
+
+- f3171b4: adding correct easing to ripple nad releasing tokens
+
+## 1.44.5
+
+### Patch Changes
+
+- aa0ec78: **Ripple:** removing old ripple animation tokens
+
+## 1.44.4
+
+### Patch Changes
+
+- 9161c53: **gds-text:** pass props to host instead of tag and remove isolate prop
+
+## 1.44.3
+
+### Patch Changes
+
+- ea478ef: **Button:** Fix icon button not finding the node
+- 98db232: **Styling:** remove display:contents
+
+## 1.44.2
+
+### Patch Changes
+
+- 3fa31fd: **Scoped Elements:** Refactor the element lookup table as a global singleton rather than a module-scoped object.
+
+## 1.44.1
+
+### Patch Changes
+
+- 7cc2863: **Slot constraints:** Fix issue when using custom element names
+- 2ce164f: **Dropdown:** Scroll into view after `updateComplete`
+- a71fd2e: **Dropdown:** searching for options is now done oninput event instead of keydown
+- 4750979: **Dropdown:** fixing so that selected item scrolls into view on open
+
+## 1.44.0
+
+### Minor Changes
+
+- 7410021: **Segmented Control:** Add support for variable width segments. Fixes #1603
+
+  This change refactors a large chunk of the Segmented Control implementation:
+
+  - Rewrite layout code to use `css-scroll-snap`
+  - Remove `seg-min-width`
+  - Add style expression properties to `gds-segment` for size control
+
+  A side-effect of this change is that segments will no longer align to the right end of the control when they overflow.
+
+### Patch Changes
+
+- 27d8575: **Scoping:** Refactor how the `gds-element` attribute gets set
+
+## 1.43.4
+
+### Patch Changes
+
+- aab2665: **Icon:** Remove `display: contents`
+- aab2665: **Button:** Fix max-width issue
+- cb2d08c: **Grid:** switching gap to have <row-value> <column-value> as css spec https://developer.mozilla.org/en-US/docs/Web/CSS/gap#values
+
 ## 1.43.3
 
 ### Patch Changes

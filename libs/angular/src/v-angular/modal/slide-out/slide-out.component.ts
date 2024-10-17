@@ -106,10 +106,10 @@ export class NgvSlideOutComponent implements OnInit {
   }
 
   /** Will emit true on closing event. */
-  @Output() ngvCloseEvent = new EventEmitter<boolean>()
-  @Output() ngvPositiveEvent = new EventEmitter<void>()
-  @Output() ngvNeutralEvent = new EventEmitter<void>()
-  @Output() ngvNegativeEvent = new EventEmitter<void>()
+  @Output() nggvCloseEvent = new EventEmitter<boolean>()
+  @Output() nggvPositiveEvent = new EventEmitter<void>()
+  @Output() nggvNeutralEvent = new EventEmitter<void>()
+  @Output() nggvNegativeEvent = new EventEmitter<void>()
 
   private previous: HTMLElement | undefined
   private firstFocusable: HTMLElement | undefined
@@ -130,13 +130,13 @@ export class NgvSlideOutComponent implements OnInit {
     event.preventDefault()
     switch (action) {
       case 'positive':
-        this.ngvPositiveEvent.emit()
+        this.nggvPositiveEvent.emit()
         break
       case 'neutral':
-        this.ngvNeutralEvent.emit()
+        this.nggvNeutralEvent.emit()
         break
       case 'negative':
-        this.ngvNegativeEvent.emit()
+        this.nggvNegativeEvent.emit()
         break
     }
     this.close(event, 'action')
@@ -156,7 +156,7 @@ export class NgvSlideOutComponent implements OnInit {
   }
 
   /**
-   * Called on a modal element. Closes the modal and emits a `ngvCloseEvent`. Sets focus to the lats focused element if an element was sent in to open function.
+   * Called on a modal element. Closes the modal and emits a `nggvCloseEvent`. Sets focus to the lats focused element if an element was sent in to open function.
    *
    * @param event
    * @param initiator
@@ -166,7 +166,7 @@ export class NgvSlideOutComponent implements OnInit {
   close(event?: Event, initiator?: string): void {
     if (initiator === 'host' && event instanceof MouseEvent && event.target !== event.currentTarget) return
     if (this.shown && this.closable) {
-      this.ngvCloseEvent.emit(this.shown)
+      this.nggvCloseEvent.emit(this.shown)
       this.shown = false
       window.setTimeout(() => {
         if (this.previous) this.previous.focus()

@@ -35,8 +35,8 @@ describe('SlideOutComponent', () => {
       expect(preventDefaultSpy).toHaveBeenCalled()
     })
 
-    it('should emit ngvPositiveEvent when action is "positive"', () => {
-      const emitSpy = jest.spyOn(component.ngvPositiveEvent, 'emit')
+    it('should emit nggvPositiveEvent when action is "positive"', () => {
+      const emitSpy = jest.spyOn(component.nggvPositiveEvent, 'emit')
       const event = new Event('click')
 
       component.onAction(event, 'positive')
@@ -44,8 +44,8 @@ describe('SlideOutComponent', () => {
       expect(emitSpy).toHaveBeenCalled()
     })
 
-    it('should emit ngvNeutralEvent when action is "neutral"', () => {
-      const emitSpy = jest.spyOn(component.ngvNeutralEvent, 'emit')
+    it('should emit nggvNeutralEvent when action is "neutral"', () => {
+      const emitSpy = jest.spyOn(component.nggvNeutralEvent, 'emit')
       const event = new Event('click')
 
       component.onAction(event, 'neutral')
@@ -53,8 +53,8 @@ describe('SlideOutComponent', () => {
       expect(emitSpy).toHaveBeenCalled()
     })
 
-    it('should emit ngvNegativeEvent when action is "negative"', () => {
-      const emitSpy = jest.spyOn(component.ngvNegativeEvent, 'emit')
+    it('should emit nggvNegativeEvent when action is "negative"', () => {
+      const emitSpy = jest.spyOn(component.nggvNegativeEvent, 'emit')
       const event = new Event('click')
 
       component.onAction(event, 'negative')

@@ -1,6 +1,5 @@
 import { state } from 'lit/decorators.js'
 import { DynamicStylesController } from './dynamic-styles'
-import { getUnscopedTagName } from './scoping'
 import { LitElement } from 'lit'
 
 // This nis needed to support legacy decorators. Once we upgrade to TC39 standard decorators across the lib, we can remove this.
@@ -14,7 +13,7 @@ export class GdsElement extends LitElement {
    * @attribute gds-element
    * @readonly
    */
-  gdsElementName = ''
+  gdsElementName?: string
 
   /**
    * Whether the element is using transitional styles.
@@ -33,10 +32,8 @@ export class GdsElement extends LitElement {
     this._dynamicStylesController = new DynamicStylesController(this)
   }
 
-  // TODO: This is slow. We need to find a more efficient way of setting the gds-element attribute.
   connectedCallback(): void {
     super.connectedCallback()
-    this.gdsElementName = getUnscopedTagName(this.tagName.toLowerCase()) || this.gdsElementName
-    this.setAttribute('gds-element', this.gdsElementName)
+    this.setAttribute('gds-element', this.gdsElementName?.toString() || '')
   }
 }

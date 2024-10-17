@@ -40,12 +40,12 @@
       [attr.aria-disabled]="option.disabled"
       [attr.aria-selected]="option.key === selectedValue?.key && !!selectedValue?.key"
       [attr.aria-focus]="option.key === state?.key && !option.disabled"
-      [ngvTooltip]="isOverflow(liElem) ? t(option.label) : undefined"
+      [nggvTooltip]="isOverflow(liElem) ? t(option.label) : undefined"
       (click)="updateState(option, $event)"
     >
       <ng-template *ngTemplateOutlet="basicOptionContentTpl; context: { $implicit: option }"> </ng-template>
     </li>
-    <!-- Checking overflow on custom templates do not work skip adding ngvToolTip if custom template is provided -->
+    <!-- Checking overflow on custom templates do not work skip adding nggvToolTip if custom template is provided -->
     <li
       #optionRefs
       *ngIf="!!optionContentTpl"

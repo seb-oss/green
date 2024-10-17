@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common'
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { TranslocoModule } from '@ngneat/transloco'
@@ -15,11 +21,11 @@ import { NgvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.com
 
   selector: 'nggv-input',
   // eslint-disable-next-line @angular-eslint/no-outputs-metadata-property
-  outputs: ['ngvFocus']
+  outputs: ['nggvFocus'],
 })
 export class InputStubComponent {
-  @Output() ngvFocus: EventEmitter<boolean> = new EventEmitter()
-  @Output() ngvInput: EventEmitter<string> = new EventEmitter()
+  @Output() nggvFocus: EventEmitter<boolean> = new EventEmitter()
+  @Output() nggvInput: EventEmitter<string> = new EventEmitter()
   @ViewChild('input', { static: true, read: ElementRef }) inputRef?: ElementRef
 
   constructor() {
@@ -38,7 +44,7 @@ describe('[NgvCore]', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({
         declarations: [NgvTypeaheadDropdownListComponent, InputStubComponent],
-        imports: [CommonModule, TranslocoModule, NgvI18nTestModule]
+        imports: [CommonModule, TranslocoModule, NgvI18nTestModule],
       })
       fixture = TestBed.createComponent(NgvTypeaheadDropdownListComponent)
       await fixture.whenStable()
@@ -54,19 +60,22 @@ describe('[NgvCore]', () => {
     describe('handleFocusChanges', () => {
       it('emits empty string if no state exists', () => {
         component.state = undefined
-        const spy = jest.spyOn(component.hostComponent.ngvInput, 'emit')
+        const spy = jest.spyOn(component.hostComponent.nggvInput, 'emit')
         fixture.detectChanges()
-        component.hostComponent.ngvFocus.next({ event: 'focusDummy' })
+        component.hostComponent.nggvFocus.next({ event: 'focusDummy' })
         expect(spy).toHaveBeenCalledWith('')
       })
 
       it('does not emits if no state exists and set expanded', () => {
         component.state = { key: '111', label: 'label123' }
-        const emitSpy = jest.spyOn(component.hostComponent.ngvInput, 'emit')
+        const emitSpy = jest.spyOn(component.hostComponent.nggvInput, 'emit')
         const expandedSpy = jest.spyOn(component, 'setExpanded')
-        const outisdeSpy = jest.spyOn(component as any, 'subscribeToOutsideClickEvent')
+        const outisdeSpy = jest.spyOn(
+          component as any,
+          'subscribeToOutsideClickEvent',
+        )
         fixture.detectChanges()
-        component.hostComponent.ngvFocus.next({ event: 'focusDummy' })
+        component.hostComponent.nggvFocus.next({ event: 'focusDummy' })
         expect(emitSpy).not.toHaveBeenCalled()
         expect(expandedSpy).toHaveBeenCalledWith(true)
         expect(outisdeSpy).toHaveBeenCalled()
@@ -83,21 +92,28 @@ describe('[NgvCore]', () => {
         ${{ key: 0, label: 'Real string' }}          | ${'Real string'}
         ${{ key: '', label: 'Real string' }}         | ${'Real string'}
         ${{ key: 'real key', label: 'Real string' }} | ${'Real string'}
-      `('return $expectedValue when value is $value', ({ value, expectedValue }) => {
-        const res = (component as any).formatSelected(value)
-        expect(res).toStrictEqual(expectedValue)
-      })
+      `(
+        'return $expectedValue when value is $value',
+        ({ value, expectedValue }) => {
+          const res = (component as any).formatSelected(value)
+          expect(res).toStrictEqual(expectedValue)
+        },
+      )
 
       it.each`
         value                                                 | expectedValue
         ${{ key: 'real key', label: 'Real string' }}          | ${'REAL STRING'}
         ${{ key: 'real key', wrongLabelProp: 'Real string' }} | ${''}
-      `('return $expectedValue when value is $value', ({ value, expectedValue }) => {
-        const formatterFunc = (v: { key: any; label: string }) => v.label?.toUpperCase()
-        component.selectedFormatter = formatterFunc
-        const res = (component as any).formatSelected(value)
-        expect(res).toStrictEqual(expectedValue)
-      })
+      `(
+        'return $expectedValue when value is $value',
+        ({ value, expectedValue }) => {
+          const formatterFunc = (v: { key: any; label: string }) =>
+            v.label?.toUpperCase()
+          component.selectedFormatter = formatterFunc
+          const res = (component as any).formatSelected(value)
+          expect(res).toStrictEqual(expectedValue)
+        },
+      )
     })
   })
 })

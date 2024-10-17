@@ -56,7 +56,7 @@ const Template: StoryFn<NgvButtonComponent & StoryClickable> = (args: any) => ({
         [href]="href"
         [disabled]="disabled"
         [buttonStyle]="buttonStyle"
-        (ngvClick)="clickAction(text + ' clicked!')">
+        (nggvClick)="clickAction(text + ' clicked!')">
         {{ text }}
       </nggv-button>
     </div>`,
