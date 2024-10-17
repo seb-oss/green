@@ -29,7 +29,7 @@
     font-family: inherit;
     font-size: var(--gds-text-size-detail-m);
     line-height: var(--gds-text-line-height-detail-m);
-    font-weight: var(--gds-text-weight-regular);
+    font-weight: var(--gds-text-weight-book);
     gap: var(--gds-space-s);
     outline-color: transparent;
     outline-offset: var(--gds-space-3xs);

@@ -5571,6 +5571,11 @@
   dependencies:
     "@sebgroup/fonts" "^1.1.0"
 
+"@sebgroup/fonts@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@sebgroup/fonts/-/fonts-1.1.0.tgz#97f6001aa61f9803c580b38c85f44c70c99bde72"
+  integrity sha512-AkEmzHjRgs0KV1btGwrn+CTEP1uY7zoQGSEmBy6+ZbMlZPquTresdbbh5hvsQ1JYoMzy8hcLz8VPSsw07ZT8yQ==
+
 "@shuding/opentype.js@1.4.0-beta.0":
   version "1.4.0-beta.0"
   resolved "https://registry.yarnpkg.com/@shuding/opentype.js/-/opentype.js-1.4.0-beta.0.tgz#5d1e7e9e056f546aad41df1c5043f8f85d39e24b"
