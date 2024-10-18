@@ -164,6 +164,7 @@ const formats: Record<string, Format> = {
           const adjustedName = token.name
             .replace(/(\d)-/, '$1')
             .replace('sys-', '')
+            .replace('viewport', 'vp')
           return Object.assign({}, token, {
             name: adjustedName,
             value: `${token.value}px`,
