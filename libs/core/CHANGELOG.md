@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.44.10
+
+### Patch Changes
+
+- feb5aa0: **Tokens:** Added viewport tokens
+
+## 1.44.9
+
+### Patch Changes
+
+- 16d03dd: **Button:** Use book weight
+
+## 1.44.8
+
+### Patch Changes
+
+- 66b36b8: **Button:** Fixes color on the secondary button
+
 ## 1.44.7
 
 ### Patch Changes
