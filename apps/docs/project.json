@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/docs",
@@ -16,6 +18,11 @@
             "input": "dist/libs/core/src",
             "glob": "index.bundle.js",
             "output": "./core-out"
+          },
+          {
+            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "glob": "**/*.woff2",
+            "output": "./fonts/SEBSansSerifGDS"
           }
         ]
       },
@@ -25,7 +32,9 @@
         },
         "production": {}
       },
-      "dependsOn": ["core:build-bundle-src"]
+      "dependsOn": [
+        "core:build-bundle-src"
+      ]
     },
     "serve": {
       "executor": "@nx/next:server",
@@ -38,6 +47,11 @@
             "input": "dist/libs/core/src",
             "glob": "index.bundle.js",
             "output": "./core-out"
+          },
+          {
+            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "glob": "**/*.woff2",
+            "output": "./fonts/SEBSansSerifGDS"
           }
         ]
       },
@@ -51,7 +65,9 @@
           "dev": false
         }
       },
-      "dependsOn": ["core:build-bundle-src"]
+      "dependsOn": [
+        "core:build-bundle-src"
+      ]
     },
     "export": {
       "executor": "@nx/next:export",
@@ -61,7 +77,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/docs/jest.config.ts"
       }
