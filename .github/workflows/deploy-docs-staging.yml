@@ -73,15 +73,13 @@ jobs:
           FIGMA_PROJECT_ID: ${{ secrets.FIGMA_PROJECT_ID_STAGING }}
           NEXT_PUBLIC_DEV_ENV: ${{ secrets.NEXT_PUBLIC_DEV_ENV }}
 
-      - name: Debug
-        run: ls -la ./dist/apps/docs/.next
-
       - name: Upload next build
         uses: actions/upload-artifact@v4
         with:
           name: nextbuild
           path: ./dist/apps/docs/.next/*
           if-no-files-found: error
+          include-hidden-files: true
 
       - name: Upload public folder
         uses: actions/upload-artifact@v4
