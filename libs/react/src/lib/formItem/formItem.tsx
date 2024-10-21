@@ -105,6 +105,7 @@ export const FormItem = ({
             size="small"
             aria-expanded={isExpanded}
             aria-controls={`${inputId}-expandable-info`}
+            aria-label={expandableInfoButtonLabel}
             onClick={async (event) => {
               if (!isExpanded) {
                 setIsHidden(false)
