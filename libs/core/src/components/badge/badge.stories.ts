@@ -1,9 +1,9 @@
 import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
-import '../layout/grid/index.js'
-import '../layout/flex/index.js'
-import '../content/divider/index.js'
+import '../grid/index.js'
+import '../flex/index.js'
+import '../divider/index.js'
 import '../icon/icons/circle-info.js'
 import '../icon/icons/circle-check.js'
 import '../icon/icons/plus-small.ts'
@@ -32,7 +32,7 @@ import '../icon/icons/plus-small.ts'
  * ```
  */
 const meta: Meta = {
-  title: 'Docs/Components/Badge',
+  title: 'Components/Badge',
   component: 'gds-badge',
   parameters: {
     layout: 'centered',

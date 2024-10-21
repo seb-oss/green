@@ -15,7 +15,7 @@ import './index.ts'
  * field, and it also suports both single and multiple selection.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Dropdown',
+  title: 'Components/Dropdown',
   component: 'gds-dropdown',
   subcomponents: { Option: 'gds-option' },
   parameters: {

@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html as staticHTML, literal, unsafeStatic } from 'lit/static-html.js'
 
 import './icons/index.ts'
-import '../layout/grid/index.ts'
-import '../layout/container/index.ts'
-import '../layout/flex'
+import '../grid/index.ts'
+import '../container/index.ts'
+import '../flex'
 import { html } from 'lit'
 import './icon.stories.css'
 import * as Icons from './icons'
@@ -21,7 +21,7 @@ import * as Icons from './icons'
  * ```
  */
 const meta: Meta = {
-  title: 'Docs/Components/Icon',
+  title: 'Components/Icon',
   component: 'gds-icon-bank',
   tags: ['autodocs'],
 }
