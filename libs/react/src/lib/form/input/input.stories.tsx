@@ -35,6 +35,7 @@ export const WithExpandableInfo = {
   args: {
     label: 'Label',
     expandableInfo: 'Some info text',
+    expandableInfoButtonLabel: 'Show more info',
   },
 }
 
