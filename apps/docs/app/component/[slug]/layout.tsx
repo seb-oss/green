@@ -35,8 +35,6 @@ export default function ComponentLayout({
   const componentDesign = getComponent('/design')
   const componentUXText = getComponent('/ux-text')
 
-  console.log('component', componentCode?.private)
-
   if (!component) {
     notFound()
   }
@@ -119,7 +117,7 @@ export default function ComponentLayout({
           </gds-cell>
           <gds-cell span="2">
             <Pattern>
-              {preview?.trim() ?? '' ? (
+              {(preview?.trim() ?? '') ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: `${preview}`,
