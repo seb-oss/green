@@ -12,7 +12,7 @@ export default function Hero({
 }) {
   return (
     <GdsFlex flex-direction="column" max-width="100ch" gap="2xl">
-      <GdsText tag="h1" font-size="display-2xl" font-weight="book">
+      <GdsText tag="div" font-size="display-2xl" font-weight="book">
         {heading}
       </GdsText>
       {preamble && (

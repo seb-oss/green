@@ -13,6 +13,7 @@ import GdsBadge from '@sebgroup/green-react/src/core/badge'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
 import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
+import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
 
 const menu = [
   {
@@ -26,6 +27,7 @@ const menu = [
         title: component.title,
         path: component.url_path,
         badge: component.status || undefined,
+        private: component.private ? true : false,
       })),
   },
   {
@@ -36,6 +38,7 @@ const menu = [
         title: 'Accessibility',
         path: '/foundation/accessibility',
         badge: undefined,
+        private: false,
       },
     ],
   },
@@ -47,16 +50,19 @@ const menu = [
         title: 'General',
         path: '/ux-writing/general',
         badge: undefined,
+        private: false,
       },
       {
         title: 'English',
         path: '/ux-writing/english',
         badge: undefined,
+        private: false,
       },
       {
         title: 'Swedish',
         path: '/ux-writing/swedish',
         badge: undefined,
+        private: false,
       },
     ],
   },
@@ -68,11 +74,13 @@ const menu = [
         title: 'Changelog',
         path: '/changelog',
         badge: undefined,
+        private: false,
       },
       {
         title: 'Status',
         path: '/status',
         badge: undefined,
+        private: false,
       },
     ],
   },
@@ -131,22 +139,33 @@ export default function Sidebar({
           </GdsFlex>
           {visibleSublinks[menuItem.title] && (
             <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
-              {menuItem.subLinks.map((subLink, subIdx) => (
-                <Link
-                  key={subIdx}
-                  className={path === subLink.path ? 'active' : ''}
-                  href={subLink.path}
-                >
-                  <GdsFlex justify-content="space-between">
-                    {subLink.title}
-                    {subLink.badge && (
-                      <GdsBadge variant="notice" size="small">
-                        {subLink.badge}
-                      </GdsBadge>
-                    )}
-                  </GdsFlex>
-                </Link>
-              ))}
+              {menuItem.subLinks.map((subLink, subIdx) => {
+                // Log the index and private status
+                console.log(`Index: ${subIdx}, Private: ${subLink.private}`)
+
+                return (
+                  <Link
+                    key={subIdx}
+                    className={path === subLink.path ? 'active' : ''}
+                    href={subLink.path}
+                  >
+                    <GdsFlex justify-content="space-between">
+                      {subLink.title}
+                      <GdsFlex align-items="center" gap="xs">
+                        {subLink.private && (
+                          <IconEyeSlash width="12" height="12" />
+                        )}
+                        {subLink.badge && (
+                          <GdsBadge variant="notice" size="small">
+                            {subLink.badge}
+                          </GdsBadge>
+                        )}
+                      </GdsFlex>
+                      {/* {subLink.private ? <div>P</div> : null} */}
+                    </GdsFlex>
+                  </Link>
+                )
+              })}
             </GdsFlex>
           )}
         </GdsFlex>
