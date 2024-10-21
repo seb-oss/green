@@ -61,7 +61,8 @@ $button-danger-border: tokens.get(tokens.$red, 0);
     }
 
     /* stylelint-disable */
-    :host([variant='negative']:not([rank='secondary'], [rank='tertiary'])) .button,
+    :host([variant='negative']:not([rank='secondary'], [rank='tertiary']))
+      .button,
     :host([variant='negative'][rank='primary']) .button {
       @include button.danger-bg();
     }

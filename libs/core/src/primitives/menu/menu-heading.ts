@@ -14,7 +14,9 @@ export class GdsMenuHeading extends GdsElement {
 
     this.setAttribute('inert', 'true')
 
-    this.updateComplete.then(() => TransitionalStyles.instance.apply(this, 'gds-menu-heading'))
+    this.updateComplete.then(() =>
+      TransitionalStyles.instance.apply(this, 'gds-menu-heading'),
+    )
   }
 
   render() {

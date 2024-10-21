@@ -10,7 +10,7 @@ export const standardBreakpoints = {
   sm: '(min-width: 576px)',
   md: '(min-width: 768px)',
   lg: '(min-width: 1024px)',
-  xl: '(min-width: 1280px)'
+  xl: '(min-width: 1280px)',
 }
 
 /**
@@ -34,7 +34,7 @@ export function watchMediaQuery(q: string) {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     _propertyKey: string,
-    descriptor: TypedPropertyDescriptor<Handler>
+    descriptor: TypedPropertyDescriptor<Handler>,
   ) => {
     const mediaQuery = window.matchMedia(q)
 

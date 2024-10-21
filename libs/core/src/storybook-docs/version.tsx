@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const version = ({ pack }) => {
   const [version, setVersion] = useState('0.0.0')
@@ -7,7 +6,9 @@ const version = ({ pack }) => {
   useEffect(() => {
     const fetchVersion = async () => {
       try {
-        const response = await fetch(`https://registry.npmjs.org/${pack}/latest`)
+        const response = await fetch(
+          `https://registry.npmjs.org/${pack}/latest`,
+        )
         const data = await response.json()
         setVersion(data.version)
       } catch (error) {

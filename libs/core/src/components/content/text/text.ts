@@ -80,8 +80,6 @@ export class GdsText extends GdsElement {
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
     styleTemplate: (prop, values) => {
-      console.log(values)
-
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
       const styleLine = `line-height: var(--gds-text-line-height-${size});`

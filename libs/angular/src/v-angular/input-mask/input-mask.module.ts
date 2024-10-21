@@ -10,15 +10,17 @@ import { NgvInputMaskDirective } from './input-mask.directive'
   providers: [
     {
       provide: INPUT_MASK_CONFIG,
-      useClass: InputMaskConfig
-    }
-  ]
+      useClass: InputMaskConfig,
+    },
+  ],
 })
 export class NgvInputMaskModule {
-  static forRoot(config?: Partial<InputMaskConfig>): ModuleWithProviders<NgvInputMaskModule> {
+  static forRoot(
+    config?: Partial<InputMaskConfig>,
+  ): ModuleWithProviders<NgvInputMaskModule> {
     return {
       ngModule: NgvInputMaskModule,
-      providers: [{ provide: INPUT_MASK_CONFIG, useValue: config }]
+      providers: [{ provide: INPUT_MASK_CONFIG, useValue: config }],
     }
   }
 }

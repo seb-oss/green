@@ -9,11 +9,21 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core'
-import { trigger, query, style, animate, transition, group } from '@angular/animations'
+import {
+  trigger,
+  query,
+  style,
+  animate,
+  transition,
+  group,
+} from '@angular/animations'
 import { ModalType, Size } from '@sebgroup/extract'
-import { ConfigurableFocusTrap, ConfigurableFocusTrapFactory } from '@angular/cdk/a11y'
+import {
+  ConfigurableFocusTrap,
+  ConfigurableFocusTrapFactory,
+} from '@angular/cdk/a11y'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import { NggModalHeaderDirective } from './modal-header.directive'
 import { NggModalFooterDirective } from './modal-footer.directive'
@@ -27,35 +37,55 @@ import { NggModalFooterDirective } from './modal-footer.directive'
     trigger('modalAnimation', [
       transition(':enter', [
         query('aside', style({ transform: 'translateX(100%)' }), {
-          optional: true
+          optional: true,
         }),
         query('.backdrop, [role=dialog]', style({ opacity: '0' }), {
-          optional: true
+          optional: true,
         }),
         group([
-          query('aside', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(0)' })), {
-            optional: true
-          }),
-          query('.backdrop, [role=dialog]', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '1' })), {
-            optional: true
-          })
-        ])
+          query(
+            'aside',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(0)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '1' }),
+            ),
+            { optional: true },
+          ),
+        ]),
       ]),
       transition(':leave', [
         query('aside', style({ transform: 'translateX(0)' }), {
-          optional: true
+          optional: true,
         }),
         group([
-          query('aside', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(100%)' })), {
-            optional: true
-          }),
-          query('.backdrop, [role=dialog]', animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '0' })), {
-            optional: true
-          })
-        ])
-      ])
-    ])
-  ]
+          query(
+            'aside',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(100%)' }),
+            ),
+            { optional: true },
+          ),
+          query(
+            '.backdrop, [role=dialog]',
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '0' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
@@ -95,10 +125,10 @@ export class NggModalComponent implements OnDestroy, OnInit {
 
       if (this.disableBodyScroll) {
         disableBodyScroll(this.ref.nativeElement, {
-          allowTouchMove: el => {
+          allowTouchMove: (el) => {
             // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
             return this.ref.nativeElement.contains(el)
-          }
+          },
         })
       }
     } else {
@@ -109,10 +139,14 @@ export class NggModalComponent implements OnDestroy, OnInit {
     }
   }
 
-  @Output() public isOpenChange: EventEmitter<boolean> = new EventEmitter<boolean>()
-  @Output() public closed: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
-  @Output() public confirm: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
-  @Output() public dismiss: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+  @Output() public isOpenChange: EventEmitter<boolean> =
+    new EventEmitter<boolean>()
+  @Output() public closed: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
+  @Output() public confirm: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
+  @Output() public dismiss: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
 
   @HostBinding('class.open') get open() {
     return this.isOpen
@@ -131,9 +165,11 @@ export class NggModalComponent implements OnDestroy, OnInit {
 
   constructor(
     private ref: ElementRef<HTMLElement>,
-    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory
+    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory,
   ) {
-    this.configurableFocusTrap = this.configurableFocusTrapFactory.create(this.ref.nativeElement)
+    this.configurableFocusTrap = this.configurableFocusTrapFactory.create(
+      this.ref.nativeElement,
+    )
   }
 
   ngOnInit(): void {
@@ -193,11 +229,15 @@ export class NggModalComponent implements OnDestroy, OnInit {
   styleUrls: ['./modal.component.scss'],
   template: `
     <h3 data-testid="modal-header-text">{{ header }}</h3>
-    <button data-testid="modal-close-button" class="close" (click)="this.handleClose($event)">
+    <button
+      data-testid="modal-close-button"
+      class="close"
+      (click)="this.handleClose($event)"
+    >
       <span className="sr-only">Close</span>
       <i></i>
     </button>
-  `
+  `,
 })
 export class NggModalHeaderComponent {
   @Input() header?: string
@@ -212,7 +252,7 @@ export class NggModalHeaderComponent {
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: '[ngg-modal-body]',
   styleUrls: ['./modal.component.scss'],
-  template: `<ng-content></ng-content>`
+  template: `<ng-content></ng-content>`,
 })
 export class NggModalBodyComponent {}
 
@@ -237,7 +277,7 @@ export class NggModalBodyComponent {}
     >
       {{ confirmLabel }}
     </button>
-  `
+  `,
 })
 export class NggModalFooterComponent {
   @Input() dismissLabel?: string

@@ -1,10 +1,17 @@
 import React from 'react'
 import classnames from 'classnames'
-import { SortedColumn, TableContext, TableState } from './context/TableContextProvider'
+import {
+  SortedColumn,
+  TableContext,
+  TableState,
+} from './context/TableContextProvider'
 
 export type TableProps = JSX.IntrinsicElements['table'] & {
   /** callback when row is selected */
-  onRowSelect?: (event: React.ChangeEvent<HTMLInputElement>, rowKey: string) => void
+  onRowSelect?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    rowKey: string,
+  ) => void
   /** callback when row is expanded */
   onRowExpand?: (isExpanded: boolean, rowKey: string) => void
   /** callback when column is sorted */
@@ -16,12 +23,19 @@ export type TableProps = JSX.IntrinsicElements['table'] & {
 export const Table = React.memo(
   React.forwardRef(
     (
-      { onRowSelect, onRowExpand, onSort, sortedColumn = null, className, ...props }: TableProps,
-      ref: React.ForwardedRef<HTMLTableElement>
+      {
+        onRowSelect,
+        onRowExpand,
+        onSort,
+        sortedColumn = null,
+        className,
+        ...props
+      }: TableProps,
+      ref: React.ForwardedRef<HTMLTableElement>,
     ): React.ReactElement<void> => {
       const [tableState, setTableState] = React.useState<TableState>({
         expandedRows: [],
-        sortedColumn
+        sortedColumn,
       })
       return (
         <TableContext.Provider
@@ -30,12 +44,16 @@ export const Table = React.memo(
             onSort,
             onRowSelect,
             onRowExpand,
-            setTableState
+            setTableState,
           }}
         >
-          <table {...props} className={classnames('table', className)} ref={ref} />
+          <table
+            {...props}
+            className={classnames('table', className)}
+            ref={ref}
+          />
         </TableContext.Provider>
       )
-    }
-  )
+    },
+  ),
 )

@@ -2,13 +2,13 @@ import ValueList from './valueList'
 
 const meta: Meta = {
   title: 'Components/Lists/ValueList',
-  component: ValueList
+  component: ValueList,
 }
 
 export default meta
 
 export const Primary = {
-  render: props => (
+  render: (props) => (
     <ValueList.List {...props}>
       <ValueList.Label>Ni vill sälja</ValueList.Label>
       <ValueList.Value>Fritidshus</ValueList.Value>
@@ -23,5 +23,5 @@ export const Primary = {
       <ValueList.Label>Kontantinsats från överskottet</ValueList.Label>
       <ValueList.Value>375 000 kr</ValueList.Value>
     </ValueList.List>
-  )
+  ),
 }

@@ -15,7 +15,7 @@ import {
   Output,
   Self,
   TemplateRef,
-  ViewChild
+  ViewChild,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -23,7 +23,7 @@ import {
   NgControl,
   ValidationErrors,
   Validator,
-  Validators
+  Validators,
 } from '@angular/forms'
 
 import { Observable, Subject } from 'rxjs'
@@ -100,9 +100,13 @@ export class NgvBaseControlValueAccessorComponent
 
     // if required can be determined from the control => return control.required
     if (this.ngControl?.control?.validator) {
-      const validator = this.ngControl?.control?.validator({} as AbstractControl)
+      const validator = this.ngControl?.control?.validator(
+        {} as AbstractControl,
+      )
       // returns true for any error that starts with required
-      return Object.keys(validator ?? {}).some(key => key.startsWith('required'))
+      return Object.keys(validator ?? {}).some((key) =>
+        key.startsWith('required'),
+      )
     }
 
     return
@@ -116,7 +120,9 @@ export class NgvBaseControlValueAccessorComponent
   /** The component has the invalid state, usually decorating the elements red and shows the first error. */
   get invalid(): boolean {
     if (this._invalid === true || this._invalid === false) return this._invalid
-    return !!this.ngControl?.control?.invalid && this.ngControl?.control?.touched
+    return (
+      !!this.ngControl?.control?.invalid && this.ngControl?.control?.touched
+    )
   }
 
   private _valid: boolean | undefined = undefined
@@ -140,7 +146,8 @@ export class NgvBaseControlValueAccessorComponent
   }
   /** The component has the disabled state, usually muting the colors and removes interaction. */
   get disabled(): boolean {
-    if (this._disabled === true || this._disabled === false) return this._disabled
+    if (this._disabled === true || this._disabled === false)
+      return this._disabled
     return !!this.ngControl?.control?.disabled
   }
 
@@ -182,7 +189,7 @@ export class NgvBaseControlValueAccessorComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     if (this.ngControl) {
       // Note: we provide the value accessor through here, instead of
@@ -196,7 +203,9 @@ export class NgvBaseControlValueAccessorComponent
   // eslint-disable-next-line @angular-eslint/contextual-lifecycle
   ngOnInit(): void {
     if (this.ngControl && this.ngControl.control) {
-      this.ngControl.control.setValidators(Validators.compose([this.ngControl.control.validator, this.validate]))
+      this.ngControl.control.setValidators(
+        Validators.compose([this.ngControl.control.validator, this.validate]),
+      )
     }
 
     // if reset observable has been passed, subscribe after updates
@@ -206,7 +215,7 @@ export class NgvBaseControlValueAccessorComponent
         this.state = this.defaultValue
         this.onChange(this.state)
         this.cdr.detectChanges()
-      }
+      },
     })
   }
 
@@ -228,14 +237,18 @@ export class NgvBaseControlValueAccessorComponent
 
   /** @internal */
   onFocus(event: Event) {
-    event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true)
+    event.stopPropagation
+      ? event.stopPropagation()
+      : (event.cancelBubble = true)
     this.focused = true
     this.nggvFocus.emit(event)
   }
 
   /** @internal */
   onBlur(event: Event) {
-    event.stopPropagation ? event.stopPropagation() : (event.cancelBubble = true)
+    event.stopPropagation
+      ? event.stopPropagation()
+      : (event.cancelBubble = true)
     this.onTouched()
     this.focused = false
     this.nggvBlur.emit(event)

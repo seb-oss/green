@@ -23,7 +23,11 @@ const angleDown: JSX.Element = (
   </svg>
 )
 const angleRightIcon: JSX.Element = (
-  <svg name="angle-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512">
+  <svg
+    name="angle-right"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 192 512"
+  >
     <path d="M166.9 264.5l-117.8 116c-4.7 4.7-12.3 4.7-17 0l-7.1-7.1c-4.7-4.7-4.7-12.3 0-17L127.3 256 25.1 155.6c-4.7-4.7-4.7-12.3 0-17l7.1-7.1c4.7-4.7 12.3-4.7 17 0l117.8 116c4.6 4.7 4.6 12.3-.1 17z" />
   </svg>
 )
@@ -44,7 +48,7 @@ const TableRow = React.forwardRef(
       collapseButtonProps = {},
       ...props
     }: TableRowProps,
-    ref: React.ForwardedRef<HTMLTableRowElement>
+    ref: React.ForwardedRef<HTMLTableRowElement>,
   ) => {
     const tableContext = useTableContext()
     const [uniqueId, setUniqueId] = React.useState<string>(uniqueKey as string)
@@ -54,7 +58,9 @@ const TableRow = React.forwardRef(
     const [columnProps, setColumnProps] = React.useState<
       Omit<TableHeaderCellProps, 'ref'> | Omit<TableCellProps, 'ref'> | null
     >(null)
-    const [expandedRows, setExpandedRows] = React.useState<Array<string>>(tableContext.tableState?.expandedRows || [])
+    const [expandedRows, setExpandedRows] = React.useState<Array<string>>(
+      tableContext.tableState?.expandedRows || [],
+    )
     const headerId: string = useId()
 
     /** initiate default expanded row */
@@ -69,7 +75,7 @@ const TableRow = React.forwardRef(
       }
       tableContext.setTableState({
         ...tableContext.tableState,
-        expandedRows: newExpandedRows
+        expandedRows: newExpandedRows,
       })
       setExpandedRows(newExpandedRows)
     }, [isExpanded, uniqueId])
@@ -113,18 +119,28 @@ const TableRow = React.forwardRef(
           'sub-row': isSubRow,
           expanded: isExpanded,
           collapsible: isParentRow && !!tableContext.onRowExpand,
-          show: isShown
+          show: isShown,
         })}
       >
         {!!tableContext.onRowExpand && (
-          <Cell {...columnProps} className={classnames({ 'collapse-control': isParentRow })}>
+          <Cell
+            {...columnProps}
+            className={classnames({ 'collapse-control': isParentRow })}
+          >
             {isParentRow && (
               <button
                 {...collapseButtonProps}
-                className={classnames('collapse-btn', collapseButtonProps.className)}
-                onClick={() => tableContext?.onRowExpand?.(!isExpanded, uniqueId)}
+                className={classnames(
+                  'collapse-btn',
+                  collapseButtonProps.className,
+                )}
+                onClick={() =>
+                  tableContext?.onRowExpand?.(!isExpanded, uniqueId)
+                }
               >
-                <div className="icon-holder">{expanded ? angleDown : angleRightIcon}</div>
+                <div className="icon-holder">
+                  {expanded ? angleDown : angleRightIcon}
+                </div>
               </button>
             )}
           </Cell>
@@ -133,7 +149,7 @@ const TableRow = React.forwardRef(
           <Cell
             {...columnProps}
             className={classnames({
-              'select-control': !(hideSelect || isSubRow)
+              'select-control': !(hideSelect || isSubRow),
             })}
           >
             {!(hideSelect || isSubRow) && (
@@ -160,7 +176,7 @@ const TableRow = React.forwardRef(
         {props.children}
       </tr>
     )
-  }
+  },
 )
 
 TableRow.displayName = 'TableRow'

@@ -16,7 +16,7 @@ describe('ButtonGroup', () => {
     render(
       <ButtonGroup>
         <Button>Hello</Button>
-      </ButtonGroup>
+      </ButtonGroup>,
     )
 
     expect(screen.getAllByRole('button')).toHaveLength(1)

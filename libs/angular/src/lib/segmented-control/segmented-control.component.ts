@@ -18,7 +18,7 @@ export interface SegmentedControl {
     </div>
   `,
   styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggSegmentedControlComponent {
   @Input() $controls: Observable<Array<SegmentedControl>> | undefined

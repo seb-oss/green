@@ -10,7 +10,7 @@ describe('Component: Table cell', () => {
             <TableCell>TableCell</TableCell>
           </tr>
         </tbody>
-      </table>
+      </table>,
     )
     expect(screen.getByText('TableCell')).toBeInTheDocument()
   })

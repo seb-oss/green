@@ -1,7 +1,12 @@
 import '../core/core.globals'
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
-import { FormControl, FormsModule, NgControl, ReactiveFormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormsModule,
+  NgControl,
+  ReactiveFormsModule,
+} from '@angular/forms'
 
 import { TranslocoTestingModule } from '@ngneat/transloco'
 import en from '../i18n/i18n.json'
@@ -27,12 +32,12 @@ describe('[NgvCore]', () => {
             langs: { en },
             translocoConfig: {
               availableLangs: ['en'],
-              defaultLang: 'en'
+              defaultLang: 'en',
             },
-            preloadLangs: true
-          })
+            preloadLangs: true,
+          }),
         ],
-        providers: [{ provide: NgControl, useValue: new FormControl() }]
+        providers: [{ provide: NgControl, useValue: new FormControl() }],
       }).compileComponents()
 
       fixture = TestBed.createComponent(NgvCheckboxComponent)

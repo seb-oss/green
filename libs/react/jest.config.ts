@@ -10,14 +10,16 @@ export default {
       'babel-jest',
       {
         presets: ['@nx/react/babel'],
-        plugins: [['@babel/plugin-transform-class-static-block', { loose: true }]]
-      }
-    ]
+        plugins: [
+          ['@babel/plugin-transform-class-static-block', { loose: true }],
+        ],
+      },
+    ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/react',
   setupFilesAfterEnv: ['@testing-library/jest-dom/extend-expect'],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: '<rootDir>/../..'
-  })
+    prefix: '<rootDir>/../..',
+  }),
 }

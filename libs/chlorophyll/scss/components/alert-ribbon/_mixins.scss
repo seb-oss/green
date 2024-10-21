@@ -9,31 +9,35 @@ $variants: (
   'info': (
     color: hsl(var(--sg-intent-info-hsl-contrast)),
     border-color: transparent,
-    link-outline-color: hsla(var(--sg-intent-info-hsl-contrast), link.$outline-opacity),
+    link-outline-color:
+      hsla(var(--sg-intent-info-hsl-contrast), link.$outline-opacity),
     background: hsl(var(--sg-intent-info-hsl)),
-    ghost-button-type: 'light'
+    ghost-button-type: 'light',
   ),
   'success': (
     color: var(--gds-ref-pallet-base000),
     border-color: transparent,
-    link-outline-color: hsla(var(--sg-intent-success-hsl-contrast), link.$outline-opacity),
+    link-outline-color:
+      hsla(var(--sg-intent-success-hsl-contrast), link.$outline-opacity),
     background: hsl(var(--sg-intent-success-hsl)),
-    ghost-button-type: 'light'
+    ghost-button-type: 'light',
   ),
   'warning': (
     color: hsl(var(--sg-intent-warning-hsl-contrast)),
     border-color: transparent,
-    link-outline-color: hsla(var(--sg-intent-warning-hsl-contrast), link.$outline-opacity),
+    link-outline-color:
+      hsla(var(--sg-intent-warning-hsl-contrast), link.$outline-opacity),
     background: hsl(var(--sg-intent-warning-hsl)),
-    ghost-button-type: 'dark'
+    ghost-button-type: 'dark',
   ),
   'danger': (
     color: hsl(var(--sg-intent-critical-hsl-contrast)),
     border-color: transparent,
-    link-outline-color: hsla(var(--sg-intent-critical-hsl-contrast), link.$outline-opacity),
+    link-outline-color:
+      hsla(var(--sg-intent-critical-hsl-contrast), link.$outline-opacity),
     background: hsl(var(--sg-intent-critical-hsl)),
-    ghost-button-type: 'light'
-  )
+    ghost-button-type: 'light',
+  ),
 );
 
 $background: hsl(var(--sg-intent-neutral-hsl));
@@ -41,7 +45,10 @@ $border-radius: 0;
 $border: solid 1px var(--border-color);
 $close-bg-hover: var(--sg-hsl-black);
 $color: var(--text-primary-color);
-$link-outline-color: hsla(var(--sg-intent-neutral-hsl-contrast), link.$outline-opacity);
+$link-outline-color: hsla(
+  var(--sg-intent-neutral-hsl-contrast),
+  link.$outline-opacity
+);
 
 @mixin alert-ribbon {
   --background: #{$background};
@@ -171,7 +178,16 @@ $link-outline-color: hsla(var(--sg-intent-neutral-hsl-contrast), link.$outline-o
     > button,
     > button[type='button'],
     > .button {
-      &:not(.primary, .ghost, .close, .link, [type='submit'], :disabled, .disabled, [aria-disabled]) {
+      &:not(
+          .primary,
+          .ghost,
+          .close,
+          .link,
+          [type='submit'],
+          :disabled,
+          .disabled,
+          [aria-disabled]
+        ) {
         @include button.ghost-dark();
         //force small size TODO: improve how to do sizing with mixin
         min-height: 2rem;
@@ -230,7 +246,16 @@ $link-outline-color: hsla(var(--sg-intent-neutral-hsl-contrast), link.$outline-o
     > button,
     > button[type='button'],
     > .button {
-      &:not(.primary, .ghost, .close, .link, [type='submit'], :disabled, .disabled, [aria-disabled]) {
+      &:not(
+          .primary,
+          .ghost,
+          .close,
+          .link,
+          [type='submit'],
+          :disabled,
+          .disabled,
+          [aria-disabled]
+        ) {
         @if ($ghost-button-type == 'light') {
           @include button.ghost-light();
         } @else {

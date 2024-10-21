@@ -21,7 +21,7 @@ describe('SegmentedControl', () => {
         <Segment>Button 1</Segment>
         <Segment>Button 2</Segment>
         <Segment>Button 3</Segment>
-      </SegmentedControl>
+      </SegmentedControl>,
     )
     expect(screen.getAllByText(/Button/)).toHaveLength(3)
   })

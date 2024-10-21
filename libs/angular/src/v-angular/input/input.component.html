@@ -5,12 +5,17 @@
   [attr.for]="id + '-input'"
   *transloco="let t; read: scope"
 >
-  <ng-template *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"></ng-template>
+  <ng-template
+    *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+  ></ng-template>
   <ng-template #basicLabelContentTpl>
     <!-- to trigger css:empty if no label was added -->
     <ng-container *ngIf="label">
       {{ label }}
-      <span *ngIf="optional === true || (required !== true && optional !== false)" class="sdv-field-label--optional">
+      <span
+        *ngIf="optional === true || (required !== true && optional !== false)"
+        class="sdv-field-label--optional"
+      >
         ({{ t('label.optional') }})
       </span>
     </ng-container>
@@ -24,7 +29,13 @@
 
 <!-- LOCKED INPUT -->
 <ng-container *ngIf="locked">
-  <div [id]="id + '-input'" class="nggv-field--locked" [attr.name]="name" [attr.value]="state" [attr.role]="role">
+  <div
+    [id]="id + '-input'"
+    class="nggv-field--locked"
+    [attr.name]="name"
+    [attr.value]="state"
+    [attr.role]="role"
+  >
     <span *ngIf="!state" class="unset-state">-</span>
     <ng-container *ngIf="state">
       <ng-container *ngIf="!inputMask">
@@ -76,7 +87,10 @@
     </div>
 
     <!-- INPUT FIELD WITH MASK -->
-    <div class="input-group" *ngIf="!!inputMask && (hideInput$ | async) === false">
+    <div
+      class="input-group"
+      *ngIf="!!inputMask && (hideInput$ | async) === false"
+    >
       <input
         #input
         [id]="id + '-input'"
@@ -101,7 +115,10 @@
   </div>
 
   <!-- ERRORS -->
-  <div class="gds-form-item__footer error-wrapper" *transloco="let t; read: scope">
+  <div
+    class="gds-form-item__footer error-wrapper"
+    *transloco="let t; read: scope"
+  >
     <span
       class="form-info form-info--error"
       [attr.id]="id + '-message'"

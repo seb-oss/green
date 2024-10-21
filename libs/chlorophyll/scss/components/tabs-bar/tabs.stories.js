@@ -30,11 +30,11 @@ export default {
   title: 'Components/Tabs',
 
   parameters: {
-    componentIds: ['component-tab']
-  }
+    componentIds: ['component-tab'],
+  },
 }
 
 export const Tabs = {
   render: Template.bind({}),
-  name: 'Tabs'
+  name: 'Tabs',
 }

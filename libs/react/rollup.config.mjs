@@ -2,12 +2,17 @@ import glob from 'glob'
 import path from 'node:path'
 
 const inputs = Object.fromEntries(
-  glob.sync('libs/react/src/**/!(*.spec|*.test|*.stories).ts?(x)').map(file => [
-    // This remove `libs/react` as well as the file extension from each
-    // file, so e.g. libs/react/src/lib/nested/foo.js becomes src/lib/nested/foo
-    path.relative('libs/react', file.slice(0, file.length - path.extname(file).length)),
-    file
-  ])
+  glob
+    .sync('libs/react/src/**/!(*.spec|*.test|*.stories).ts?(x)')
+    .map((file) => [
+      // This remove `libs/react` as well as the file extension from each
+      // file, so e.g. libs/react/src/lib/nested/foo.js becomes src/lib/nested/foo
+      path.relative(
+        'libs/react',
+        file.slice(0, file.length - path.extname(file).length),
+      ),
+      file,
+    ]),
 )
 
 export default function getRollupOptions(options) {
@@ -16,7 +21,7 @@ export default function getRollupOptions(options) {
     ...options.output,
     dir: 'dist/libs/react',
     entryFileNames: '[name].js',
-    chunkFileNames: '[name].js'
+    chunkFileNames: '[name].js',
   }
 
   // Removing the `dts-bundle` plugin gets rid of `The emitted file "..." overwrites a previously emitted file of the same name` warnings
@@ -28,7 +33,9 @@ export default function getRollupOptions(options) {
   //
   // Leaving this comment here for posterity.
   //
-  options.plugins = options.plugins.filter(plugin => plugin.name !== 'dts-bundle')
+  options.plugins = options.plugins.filter(
+    (plugin) => plugin.name !== 'dts-bundle',
+  )
 
   return options
 }

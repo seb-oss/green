@@ -13,7 +13,10 @@ import { GdsFormControlElement } from '../form/form-control'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
-import { dateArrayConverter, dateConverter } from '../../utils/helpers/attribute-converters'
+import {
+  dateArrayConverter,
+  dateConverter,
+} from '../../utils/helpers/attribute-converters'
 
 import '../popover'
 import type { GdsPopover } from '../popover'
@@ -59,7 +62,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   get type() {
@@ -125,7 +128,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    */
   @property()
   get dateformat() {
-    return this._dateFormatLayout.layout.map(f => f.token).join(this._dateFormatLayout.delimiter)
+    return this._dateFormatLayout.layout
+      .map((f) => f.token)
+      .join(this._dateFormatLayout.delimiter)
   }
   set dateformat(dateformat: string) {
     this._dateFormatLayout = this.#parseDateFormat(dateformat)
@@ -148,7 +153,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * is closed, the value will be undefined.
    */
   async getFocusedDate(): Promise<Date | undefined> {
-    if (this.open) return this._elCalendar.then(el => el.focusedDate)
+    if (this.open) return this._elCalendar.then((el) => el.focusedDate)
     else return undefined
   }
 
@@ -171,7 +176,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * Inteded for use in integration tests.
    */
   async test_getDateCell(dayNumber: number) {
-    return this._elCalendar.then(el => el.getDateCell(dayNumber))
+    return this._elCalendar.then((el) => el.getDateCell(dayNumber))
   }
 
   @state()
@@ -208,7 +213,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   render() {
     return html`${when(
         this.label && !this.hideLabel,
-        () => html`<label for="spinner-0" id="label">${this.label}</label>`
+        () => html`<label for="spinner-0" id="label">${this.label}</label>`,
       )}
 
       <div class="form-info"><slot name="sub-label"></slot></div>
@@ -220,7 +225,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
       >
-        <div class=${classMap({ input: true, 'is-placeholder': !this.value })} @focusout=${this.#handleFieldFocusOut}>
+        <div
+          class=${classMap({ input: true, 'is-placeholder': !this.value })}
+          @focusout=${this.#handleFieldFocusOut}
+        >
           ${join(
             map(
               this._dateFormatLayout.layout,
@@ -235,15 +243,16 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                   aria-label=${this.#getSpinnerLabel(f.name)}
                   aria-describedby="label"
                   @keydown=${this.#handleSpinnerKeydown}
-                  @change=${(e: CustomEvent) => this.#handleSpinnerChange(e.detail.value, f.name)}
+                  @change=${(e: CustomEvent) =>
+                    this.#handleSpinnerChange(e.detail.value, f.name)}
                   @focus=${this.#handleSpinnerFocus}
                   @touchend=${(e: MouseEvent) => {
                     this.open = true
                     e.preventDefault()
                   }}
-                ></gds-date-part-spinner>`
+                ></gds-date-part-spinner>`,
             ),
-            html`<span>${this._dateFormatLayout.delimiter}</span>`
+            html`<span>${this._dateFormatLayout.delimiter}</span>`,
           )}
         </div>
         <button
@@ -276,7 +285,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @focusin=${async (e: FocusEvent) => {
           const isPopover = (e.target as GdsPopover)?.id === 'calendar-popover'
           if (!isPopover) return
-          this._elCalendar.then(cal => cal.focus())
+          this._elCalendar.then((cal) => cal.focus())
         }}
       >
         <div class="header">
@@ -321,8 +330,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           >
             ${repeat(
               this.#years,
-              year => year,
-              year => html`<gds-option value=${year}>${year}</gds-option>`
+              (year) => year,
+              (year) => html`<gds-option value=${year}>${year}</gds-option>`,
             )}
           </gds-dropdown>
           <gds-button
@@ -403,14 +412,19 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
     return html`${when(
       buttonTxt.length > 0,
-      () => html`<gds-button rank="tertiary" size="small" @click=${buttonAction}> ${buttonTxt} </gds-button>`,
-      () => nothing
+      () =>
+        html`<gds-button rank="tertiary" size="small" @click=${buttonAction}>
+          ${buttonTxt}
+        </gds-button>`,
+      () => nothing,
     )}`
   }
 
   #focusDate(d: Date) {
     const focusDate = new Date(d)
-    this._elCalendar.then(el => (el.focusedDate = focusDate)).then(this.#handleCalendarFocusChange)
+    this._elCalendar
+      .then((el) => (el.focusedDate = focusDate))
+      .then(this.#handleCalendarFocusChange)
   }
 
   @watch('value')
@@ -420,7 +434,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       this.#spinnerState = {
         year: 'yyyy',
         month: 'mm',
-        day: 'dd'
+        day: 'dd',
       }
       return
     }
@@ -440,7 +454,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   private _handleOpenChange() {
     if (this.open) {
       this.#valueOnOpen = this.value
-      this._elCalendar.then(el => el.focus())
+      this._elCalendar.then((el) => el.focus())
     }
   }
 
@@ -448,7 +462,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const labels = {
       year: msg('Year'),
       month: msg('Month'),
-      day: msg('Day')
+      day: msg('Day'),
     }
     return labels[name]
   }
@@ -457,7 +471,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const min = {
       year: 1900,
       month: 1,
-      day: 1
+      day: 1,
     }
     return min[name]
   }
@@ -466,7 +480,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     const max = {
       year: 9999,
       month: 12,
-      day: 31
+      day: 31,
     }
     return max[name]
   }
@@ -474,21 +488,21 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #dispatchChangeEvent() {
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: { value: this.value }
-      })
+        detail: { value: this.value },
+      }),
     )
   }
 
   #dispatchInputEvent() {
     this.dispatchEvent(
       new CustomEvent('input', {
-        detail: { value: this.value }
-      })
+        detail: { value: this.value },
+      }),
     )
   }
 
   #handleFieldFocusOut = (e: FocusEvent) => {
-    this._elTrigger.then(_ => {
+    this._elTrigger.then((_) => {
       const parent = (e.relatedTarget as HTMLElement)?.parentElement
       if (parent === e.target) return
       document.getSelection()?.removeAllRanges()
@@ -496,7 +510,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleSpinnerFocus = (e: FocusEvent) => {
-    this._elTrigger.then(field => {
+    this._elTrigger.then((field) => {
       document.getSelection()?.removeAllRanges()
       const range = new Range()
       range.setStart(field.firstChild!, 0)
@@ -506,7 +520,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardCopy = (e: ClipboardEvent) => {
-    this._elField.then(field => {
+    this._elField.then((field) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       e.clipboardData?.setData('text/plain', this.displayValue)
@@ -527,9 +541,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       const parts = pasted.split(this._dateFormatLayout.delimiter)
       if (parts.length === 3) {
         const layout = this._dateFormatLayout.layout
-        const year = parseInt(parts[layout.findIndex(f => f.token === 'y')])
-        const month = parseInt(parts[layout.findIndex(f => f.token === 'm')]) - 1
-        const day = parseInt(parts[layout.findIndex(f => f.token === 'd')])
+        const year = parseInt(parts[layout.findIndex((f) => f.token === 'y')])
+        const month =
+          parseInt(parts[layout.findIndex((f) => f.token === 'm')]) - 1
+        const day = parseInt(parts[layout.findIndex((f) => f.token === 'd')])
         if (!isNaN(year) && !isNaN(month) && !isNaN(day)) {
           pastedDate = new Date(`${year}-${month + 1}-${day}`)
         }
@@ -597,7 +612,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
     if (e.detail.reason === 'close') {
       const calValue = (await this._elCalendar).value
-      const hasChanged = !isSameDay(calValue || new Date(0), this.#valueOnOpen || new Date(0))
+      const hasChanged = !isSameDay(
+        calValue || new Date(0),
+        this.#valueOnOpen || new Date(0),
+      )
       if (hasChanged) {
         this.value = calValue
         this.#dispatchChangeEvent()
@@ -614,7 +632,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
-    const index = Array.from(this._elSpinners).findIndex(spinner => spinner === e.target)
+    const index = Array.from(this._elSpinners).findIndex(
+      (spinner) => spinner === e.target,
+    )
     if (e.key === 'ArrowRight') {
       const next = this._elSpinners[index + 1]
       if (next) next.focus()
@@ -631,18 +651,19 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #parseDateFormat(dateformat: string): DateFormatLayout {
     const delimiter = dateformat.replace(/[a-z0-9]/gi, '')[0]
     const format = dateformat.split(delimiter)
-    const year = format.findIndex(f => f === 'y')
-    const month = format.findIndex(f => f === 'm')
-    const day = format.findIndex(f => f === 'd')
+    const year = format.findIndex((f) => f === 'y')
+    const month = format.findIndex((f) => f === 'm')
+    const day = format.findIndex((f) => f === 'd')
 
-    if (year === -1 || month === -1 || day === -1) throw new Error('Invalid date format for <gds-datepicker>')
+    if (year === -1 || month === -1 || day === -1)
+      throw new Error('Invalid date format for <gds-datepicker>')
 
     const ordered = [year, month, day].sort((a, b) => a - b)
     const orderedFormat = ordered
-      .map(i => format[i])
-      .map(f => ({
+      .map((i) => format[i])
+      .map((f) => ({
         token: f,
-        name: f === 'y' ? 'year' : f === 'm' ? 'month' : 'day'
+        name: f === 'y' ? 'year' : f === 'm' ? 'month' : 'day',
       })) as DateFormatLayout['layout']
 
     return { delimiter, layout: orderedFormat }
@@ -670,7 +691,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #spinnerState = {
     year: 'yyyy',
     month: 'mm',
-    day: 'dd'
+    day: 'dd',
   }
 
   /**
@@ -685,12 +706,15 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       *[Symbol.iterator]() {
         if (isOutsideRange) yield valueYear
         for (let i = minYear; i <= maxYear; i++) yield i
-      }
+      },
     }
   }
 
   get #isValueOutsideRange() {
     if (!this.value) return false
-    return this.value.getFullYear() < this.min.getFullYear() || this.value.getFullYear() > this.max.getFullYear()
+    return (
+      this.value.getFullYear() < this.min.getFullYear() ||
+      this.value.getFullYear() > this.max.getFullYear()
+    )
   }
 }

@@ -23,7 +23,7 @@ export function resizeObserver() {
   return <ElemClass extends LitElement>(
     proto: ElemClass,
     propertyKey: string,
-    descriptor: TypedPropertyDescriptor<Handler>
+    descriptor: TypedPropertyDescriptor<Handler>,
   ) => {
     const connectedCallback = proto.connectedCallback
     const disconnectedCallback = proto.disconnectedCallback
@@ -35,7 +35,8 @@ export function resizeObserver() {
       this.__resizeObserver_tids = this.__resizeObserver_tids || {}
 
       this.__resizeObservers[propertyKey] = new ResizeObserver(() => {
-        this.__resizeObserver_tids[propertyKey] && clearTimeout(this.__resizeObserver_tids[propertyKey])
+        this.__resizeObserver_tids[propertyKey] &&
+          clearTimeout(this.__resizeObserver_tids[propertyKey])
         this.__resizeObserver_tids[propertyKey] = setTimeout(() => {
           descriptor.value?.call(this)
         }, 20)

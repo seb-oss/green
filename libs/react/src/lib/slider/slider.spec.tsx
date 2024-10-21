@@ -85,9 +85,18 @@ describe('Slider', () => {
   it('should emit min value when input field is set to empty', () => {
     const onChange = jest.fn()
     const { container } = render(
-      <Slider label={'label'} hasTextbox={true} value={50} min={10} max={60} onChange={onChange} />
+      <Slider
+        label={'label'}
+        hasTextbox={true}
+        value={50}
+        min={10}
+        max={60}
+        onChange={onChange}
+      />,
     )
-    const inputField = container.querySelector('input[type=text]') as HTMLInputElement
+    const inputField = container.querySelector(
+      'input[type=text]',
+    ) as HTMLInputElement
     fireEvent.blur(inputField, { target: { value: '' } })
     expect(onChange).toBeCalledWith(10)
   })

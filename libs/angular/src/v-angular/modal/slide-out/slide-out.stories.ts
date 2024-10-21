@@ -3,7 +3,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { importProvidersFrom } from '@angular/core'
 
 import { NgvI18nModule } from '../../i18n/i18n.module'
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
 import { NgvSlideOutComponent } from './slide-out.component'
 
@@ -17,30 +22,30 @@ export default {
   component: NgvSlideOutComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)]
+      providers: [importProvidersFrom(NgvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, BrowserAnimationsModule, NgvI18nModule]
-    })
+      imports: [CommonModule, BrowserAnimationsModule, NgvI18nModule],
+    }),
   ],
   argTypes: {
     side: {
       control: {
         type: 'inline-radio',
-        options: ['left', 'right']
-      }
+        options: ['left', 'right'],
+      },
     },
     action: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     outsideContent: {
       table: {
-        disable: true
-      }
-    }
-  }
+        disable: true,
+      },
+    },
+  },
 } as Meta
 
 const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
@@ -57,7 +62,7 @@ const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
     </nggv-slideout-modal>
     <button class="sdv-button" (click)="slideOut.open()">Open slide-out</button>
     `,
-  props: args
+  props: args,
 })
 
 export const Primary = Template.bind({})
@@ -67,24 +72,24 @@ Primary.args = {
   buttons: {
     negative: 'button_cancel',
     neutral: 'button_apply',
-    positive: 'button_save'
+    positive: 'button_save',
   },
   side: 'right',
   title: 'Modal title',
   content: 'Some content in the content div.\n\nSupports line breaks',
-  action: ((closed: boolean) => console.log('is closed?', closed)) as any
+  action: ((closed: boolean) => console.log('is closed?', closed)) as any,
 }
 
 export const WithSlottedContent = Template.bind({})
 WithSlottedContent.args = {
   ...Primary.args,
   title: 'Modal title for with slotted content',
-  outsideContent: true
+  outsideContent: true,
 }
 
 export const WithAutoWidthEnabled = Template.bind({})
 WithAutoWidthEnabled.args = {
   ...Primary.args,
   title: 'Modal title for wider modal',
-  autoWidth: true
+  autoWidth: true,
 }

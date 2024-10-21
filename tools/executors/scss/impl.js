@@ -25,7 +25,9 @@ var __awaiter =
         }
       }
       function step(result) {
-        result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected)
+        result.done
+          ? resolve(result.value)
+          : adopt(result.value).then(fulfilled, rejected)
       }
       step((generator = generator.apply(thisArg, _arguments || [])).next())
     })
@@ -40,7 +42,7 @@ var __generator =
           return t[1]
         },
         trys: [],
-        ops: []
+        ops: [],
       },
       f,
       y,
@@ -66,7 +68,12 @@ var __generator =
           if (
             ((f = 1),
             y &&
-              (t = op[0] & 2 ? y['return'] : op[0] ? y['throw'] || ((t = y['return']) && t.call(y), 0) : y.next) &&
+              (t =
+                op[0] & 2
+                  ? y['return']
+                  : op[0]
+                    ? y['throw'] || ((t = y['return']) && t.call(y), 0)
+                    : y.next) &&
               !(t = t.call(y, op[1])).done)
           )
             return t
@@ -89,7 +96,10 @@ var __generator =
               _.trys.pop()
               continue
             default:
-              if (!((t = _.trys), (t = t.length > 0 && t[t.length - 1])) && (op[0] === 6 || op[0] === 2)) {
+              if (
+                !((t = _.trys), (t = t.length > 0 && t[t.length - 1])) &&
+                (op[0] === 6 || op[0] === 2)
+              ) {
                 _ = 0
                 continue
               }
@@ -125,12 +135,14 @@ var __generator =
 var __asyncValues =
   (this && this.__asyncValues) ||
   function (o) {
-    if (!Symbol.asyncIterator) throw new TypeError('Symbol.asyncIterator is not defined.')
+    if (!Symbol.asyncIterator)
+      throw new TypeError('Symbol.asyncIterator is not defined.')
     var m = o[Symbol.asyncIterator],
       i
     return m
       ? m.call(o)
-      : ((o = typeof __values === 'function' ? __values(o) : o[Symbol.iterator]()),
+      : ((o =
+          typeof __values === 'function' ? __values(o) : o[Symbol.iterator]()),
         (i = {}),
         verb('next'),
         verb('throw'),
@@ -169,7 +181,11 @@ function multipleExecutor(options, context) {
           _c = (_b = Promise).race
           return [
             4 /*yield*/,
-            (0, devkit_1.runExecutor)({ project: context.projectName, target: 'compile-scss' }, {}, context)
+            (0, devkit_1.runExecutor)(
+              { project: context.projectName, target: 'compile-scss' },
+              {},
+              context,
+            ),
           ]
         case 1:
           _d = [_e.sent()]
@@ -177,46 +193,10 @@ function multipleExecutor(options, context) {
           return [
             4 /*yield*/,
             new Promise(function (resolve) {
-              return copyfiles(['libs/' + context.projectName + '/*.md', options.outputPath], { up: 2 }, resolve)
-            })
-              ['catch'](function (_) {
-                return [{ success: false }]
-              })
-              .then(function (_) {
-                return [{ success: true }]
-              })
-          ]
-        case 2:
-          _d = _d.concat([
-            // copy readme and changelog
-            _e.sent()
-          ])
-          // copy package json
-          return [
-            4 /*yield*/,
-            new Promise(function (resolve) {
-              return copyfiles([options.packageJson, options.outputPath], { up: 2 }, resolve)
-            })
-              ['catch'](function (_) {
-                return [{ success: false }]
-              })
-              .then(function (_) {
-                return [{ success: true }]
-              })
-          ]
-        case 3:
-          _d = _d.concat([
-            // copy package json
-            _e.sent()
-          ])
-          // copy scss files
-          return [
-            4 /*yield*/,
-            new Promise(function (resolve) {
               return copyfiles(
-                ['libs/' + context.projectName + '/scss/**/*.scss', '' + options.outputPath],
+                ['libs/' + context.projectName + '/*.md', options.outputPath],
                 { up: 2 },
-                resolve
+                resolve,
               )
             })
               ['catch'](function (_) {
@@ -224,7 +204,54 @@ function multipleExecutor(options, context) {
               })
               .then(function (_) {
                 return [{ success: true }]
+              }),
+          ]
+        case 2:
+          _d = _d.concat([
+            // copy readme and changelog
+            _e.sent(),
+          ])
+          // copy package json
+          return [
+            4 /*yield*/,
+            new Promise(function (resolve) {
+              return copyfiles(
+                [options.packageJson, options.outputPath],
+                { up: 2 },
+                resolve,
+              )
+            })
+              ['catch'](function (_) {
+                return [{ success: false }]
               })
+              .then(function (_) {
+                return [{ success: true }]
+              }),
+          ]
+        case 3:
+          _d = _d.concat([
+            // copy package json
+            _e.sent(),
+          ])
+          // copy scss files
+          return [
+            4 /*yield*/,
+            new Promise(function (resolve) {
+              return copyfiles(
+                [
+                  'libs/' + context.projectName + '/scss/**/*.scss',
+                  '' + options.outputPath,
+                ],
+                { up: 2 },
+                resolve,
+              )
+            })
+              ['catch'](function (_) {
+                return [{ success: false }]
+              })
+              .then(function (_) {
+                return [{ success: true }]
+              }),
           ]
         case 4:
           return [
@@ -232,9 +259,9 @@ function multipleExecutor(options, context) {
             _c.apply(_b, [
               _d.concat([
                 // copy scss files
-                _e.sent()
-              ])
-            ])
+                _e.sent(),
+              ]),
+            ]),
           ]
         case 5:
           result = _e.sent()
@@ -246,7 +273,8 @@ function multipleExecutor(options, context) {
         case 7:
           return [4 /*yield*/, result_1.next()]
         case 8:
-          if (!((result_1_1 = _e.sent()), !result_1_1.done)) return [3 /*break*/, 10]
+          if (!((result_1_1 = _e.sent()), !result_1_1.done))
+            return [3 /*break*/, 10]
           res = result_1_1.value
           if (!res.success) return [2 /*return*/, res]
           _e.label = 9
@@ -260,7 +288,8 @@ function multipleExecutor(options, context) {
           return [3 /*break*/, 17]
         case 12:
           _e.trys.push([12, , 15, 16])
-          if (!(result_1_1 && !result_1_1.done && (_a = result_1['return']))) return [3 /*break*/, 14]
+          if (!(result_1_1 && !result_1_1.done && (_a = result_1['return'])))
+            return [3 /*break*/, 14]
           return [4 /*yield*/, _a.call(result_1)]
         case 13:
           _e.sent()

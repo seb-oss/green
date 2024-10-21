@@ -15,7 +15,7 @@ $utilities: map-merge(
     'align': (
       property: vertical-align,
       class: align,
-      values: baseline top middle bottom text-bottom text-top
+      values: baseline top middle bottom text-bottom text-top,
     ),
     'float': (
       responsive: true,
@@ -23,8 +23,8 @@ $utilities: map-merge(
       values: (
         start: left,
         end: right,
-        none: none
-      )
+        none: none,
+      ),
     ),
     'opacity': (
       property: opacity,
@@ -33,56 +33,57 @@ $utilities: map-merge(
         25: 0.25,
         50: 0.5,
         75: 0.75,
-        100: 1
-      )
+        100: 1,
+      ),
     ),
     'overflow': (
       property: overflow,
-      values: auto hidden visible scroll
+      values: auto hidden visible scroll,
     ),
     'display': (
       responsive: true,
       print: true,
       property: display,
       class: d,
-      values: inline inline-block block grid table table-row table-cell flex inline-flex none
+      values: inline inline-block block grid table table-row table-cell flex
+        inline-flex none,
     ),
     'border': (
       property: border,
       values: (
         null: newTokens.$border-width solid newTokens.$border-color,
-        0: 0
-      )
+        0: 0,
+      ),
     ),
     'border-top': (
       property: border-top,
       values: (
         null: newTokens.$border-width solid newTokens.$border-color,
-        0: 0
-      )
+        0: 0,
+      ),
     ),
     'border-end': (
       property: border-right,
       class: border-end,
       values: (
         null: newTokens.$border-width solid newTokens.$border-color,
-        0: 0
-      )
+        0: 0,
+      ),
     ),
     'border-bottom': (
       property: border-bottom,
       values: (
         null: newTokens.$border-width solid newTokens.$border-color,
-        0: 0
-      )
+        0: 0,
+      ),
     ),
     'border-start': (
       property: border-left,
       class: border-start,
       values: (
         null: newTokens.$border-width solid newTokens.$border-color,
-        0: 0
-      )
+        0: 0,
+      ),
     ),
     'border-color': (
       property: border-color,
@@ -91,14 +92,14 @@ $utilities: map-merge(
         map-merge(
           map.get(newTokens.$intent, 'light'),
           (
-            'white': newTokens.$white
+            'white': newTokens.$white,
           )
-        )
+        ),
     ),
     'border-width': (
       property: border-width,
       class: border,
-      values: newTokens.$border-width
+      values: newTokens.$border-width,
     ),
     'width': (
       property: width,
@@ -108,29 +109,29 @@ $utilities: map-merge(
         50: 50%,
         75: 75%,
         100: 100%,
-        auto: auto
-      )
+        auto: auto,
+      ),
     ),
     'max-width': (
       property: max-width,
       class: mw,
       values: (
-        100: 100%
-      )
+        100: 100%,
+      ),
     ),
     'viewport-width': (
       property: width,
       class: vw,
       values: (
-        100: 100vw
-      )
+        100: 100vw,
+      ),
     ),
     'min-viewport-width': (
       property: min-width,
       class: min-vw,
       values: (
-        100: 100vw
-      )
+        100: 100vw,
+      ),
     ),
     'height': (
       property: height,
@@ -140,42 +141,42 @@ $utilities: map-merge(
         50: 50%,
         75: 75%,
         100: 100%,
-        auto: auto
-      )
+        auto: auto,
+      ),
     ),
     'max-height': (
       property: max-height,
       class: mh,
       values: (
-        100: 100%
-      )
+        100: 100%,
+      ),
     ),
     'viewport-height': (
       property: height,
       class: vh,
       values: (
-        100: 100vh
-      )
+        100: 100vh,
+      ),
     ),
     'min-viewport-height': (
       property: min-height,
       class: min-vh,
       values: (
-        100: 100vh
-      )
+        100: 100vh,
+      ),
     ),
     'flex': (
       responsive: true,
       property: flex,
       values: (
-        fill: 1 1 auto
-      )
+        fill: 1 1 auto,
+      ),
     ),
     'flex-direction': (
       responsive: true,
       property: flex-direction,
       class: flex,
-      values: row column row-reverse column-reverse
+      values: row column row-reverse column-reverse,
     ),
     'flex-grow': (
       responsive: true,
@@ -183,8 +184,8 @@ $utilities: map-merge(
       class: flex,
       values: (
         grow-0: 0,
-        grow-1: 1
-      )
+        grow-1: 1,
+      ),
     ),
     'flex-shrink': (
       responsive: true,
@@ -192,14 +193,14 @@ $utilities: map-merge(
       class: flex,
       values: (
         shrink-0: 0,
-        shrink-1: 1
-      )
+        shrink-1: 1,
+      ),
     ),
     'flex-wrap': (
       responsive: true,
       property: flex-wrap,
       class: flex,
-      values: wrap nowrap wrap-reverse
+      values: wrap nowrap wrap-reverse,
     ),
     'justify-content': (
       responsive: true,
@@ -210,8 +211,8 @@ $utilities: map-merge(
         center: center,
         between: space-between,
         around: space-around,
-        evenly: space-evenly
-      )
+        evenly: space-evenly,
+      ),
     ),
     'align-items': (
       responsive: true,
@@ -221,8 +222,8 @@ $utilities: map-merge(
         end: flex-end,
         center: center,
         baseline: baseline,
-        stretch: stretch
-      )
+        stretch: stretch,
+      ),
     ),
     'align-content': (
       responsive: true,
@@ -233,8 +234,8 @@ $utilities: map-merge(
         center: center,
         between: space-between,
         around: space-around,
-        stretch: stretch
-      )
+        stretch: stretch,
+      ),
     ),
     'align-self': (
       responsive: true,
@@ -245,8 +246,8 @@ $utilities: map-merge(
         end: flex-end,
         center: center,
         baseline: baseline,
-        stretch: stretch
-      )
+        stretch: stretch,
+      ),
     ),
     'order': (
       responsive: true,
@@ -259,8 +260,8 @@ $utilities: map-merge(
         3: 3,
         4: 4,
         5: 5,
-        last: 6
-      )
+        last: 6,
+      ),
     ),
     'margin': (
       responsive: true,
@@ -270,9 +271,9 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'margin-x': (
       responsive: true,
@@ -282,9 +283,9 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'margin-y': (
       responsive: true,
@@ -294,9 +295,9 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'margin-top': (
       responsive: true,
@@ -306,9 +307,9 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'margin-end': (
       responsive: true,
@@ -318,9 +319,9 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'margin-bottom': (
       responsive: true,
@@ -330,9 +331,9 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'margin-start': (
       responsive: true,
@@ -342,111 +343,111 @@ $utilities: map-merge(
         map-merge(
           tokens.$spacing,
           (
-            auto: auto
+            auto: auto,
           )
-        )
+        ),
     ),
     'negative-margin': (
       responsive: true,
       property: margin,
       class: m,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'negative-margin-x': (
       responsive: true,
       property: margin-right margin-left,
       class: mx,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'negative-margin-y': (
       responsive: true,
       property: margin-top margin-bottom,
       class: my,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'negative-margin-top': (
       responsive: true,
       property: margin-top,
       class: mt,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'negative-margin-end': (
       responsive: true,
       property: margin-right,
       class: me,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'negative-margin-bottom': (
       responsive: true,
       property: margin-bottom,
       class: mb,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'negative-margin-start': (
       responsive: true,
       property: margin-left,
       class: ms,
-      values: tokens.$negative-spacing
+      values: tokens.$negative-spacing,
     ),
     'padding': (
       responsive: true,
       property: padding,
       class: p,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'padding-x': (
       responsive: true,
       property: padding-right padding-left,
       class: px,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'padding-y': (
       responsive: true,
       property: padding-top padding-bottom,
       class: py,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'padding-top': (
       responsive: true,
       property: padding-top,
       class: pt,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'padding-end': (
       responsive: true,
       property: padding-right,
       class: pe,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'padding-bottom': (
       responsive: true,
       property: padding-bottom,
       class: pb,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'padding-start': (
       responsive: true,
       property: padding-left,
       class: ps,
-      values: tokens.$spacing
+      values: tokens.$spacing,
     ),
     'font-family': (
       property: font-family,
       class: font,
       values: (
-        monospace: var(--#{tokens.$variable-prefix}font-monospace)
-      )
+        monospace: var(--#{tokens.$variable-prefix}font-monospace),
+      ),
     ),
     'font-size': (
       rfs: true,
       property: font-size,
       class: fs,
-      values: tokens.$font-sizes
+      values: tokens.$font-sizes,
     ),
     'font-style': (
       property: font-style,
       class: fst,
-      values: italic normal
+      values: italic normal,
     ),
     'font-weight': (
       property: font-weight,
@@ -456,8 +457,8 @@ $utilities: map-merge(
         lighter: tokens.$font-weight-lighter,
         normal: tokens.$font-weight-normal,
         bold: tokens.$font-weight-bold,
-        bolder: tokens.$font-weight-bolder
-      )
+        bolder: tokens.$font-weight-bolder,
+      ),
     ),
     'line-height': (
       property: line-height,
@@ -466,8 +467,8 @@ $utilities: map-merge(
         1: 1,
         sm: tokens.$line-height-sm,
         base: tokens.$line-height-base,
-        lg: tokens.$line-height-lg
-      )
+        lg: tokens.$line-height-lg,
+      ),
     ),
     'text-align': (
       responsive: true,
@@ -476,33 +477,33 @@ $utilities: map-merge(
       values: (
         start: left,
         end: right,
-        center: center
-      )
+        center: center,
+      ),
     ),
     'text-decoration': (
       property: text-decoration,
-      values: none underline line-through
+      values: none underline line-through,
     ),
     'text-transform': (
       property: text-transform,
       class: text,
-      values: lowercase uppercase capitalize
+      values: lowercase uppercase capitalize,
     ),
     'white-space': (
       property: white-space,
       class: text,
       values: (
         wrap: normal,
-        nowrap: nowrap
-      )
+        nowrap: nowrap,
+      ),
     ),
     'word-wrap': (
       property: word-wrap word-break,
       class: text,
       values: (
-        break: break-word
+        break: break-word,
       ),
-      rtl: false
+      rtl: false,
     ),
     /*'color': (
       property: color,
@@ -524,8 +525,8 @@ $utilities: map-merge(
           25: 0.25,
           50: 0.5,
           75: 0.75,
-          100: 1
-        )
+          100: 1,
+        ),
       ),
     /*'background-color': (
       property: background-color,
@@ -550,24 +551,24 @@ $utilities: map-merge(
           25: 0.25,
           50: 0.5,
           75: 0.75,
-          100: 1
-        )
+          100: 1,
+        ),
       ),
     'gradient': (
       property: background-image,
       class: bg,
       values: (
-        gradient: var(--#{tokens.$variable-prefix}gradient)
-      )
+        gradient: var(--#{tokens.$variable-prefix}gradient),
+      ),
     ),
     'user-select': (
       property: user-select,
-      values: all auto none
+      values: all auto none,
     ),
     'pointer-events': (
       property: pointer-events,
       class: pe,
-      values: none auto
+      values: none auto,
     ),
     'rounded': (
       property: border-radius,
@@ -576,45 +577,45 @@ $utilities: map-merge(
         null: newTokens.$border-radius,
         0: 0,
         circle: 50%,
-        pill: 50rem
-      )
+        pill: 50rem,
+      ),
     ),
     'rounded-top': (
       property: border-top-left-radius border-top-right-radius,
       class: rounded-top,
       values: (
-        null: newTokens.$border-radius
-      )
+        null: newTokens.$border-radius,
+      ),
     ),
     'rounded-end': (
       property: border-top-right-radius border-bottom-right-radius,
       class: rounded-end,
       values: (
-        null: newTokens.$border-radius
-      )
+        null: newTokens.$border-radius,
+      ),
     ),
     'rounded-bottom': (
       property: border-bottom-right-radius border-bottom-left-radius,
       class: rounded-bottom,
       values: (
-        null: newTokens.$border-radius
-      )
+        null: newTokens.$border-radius,
+      ),
     ),
     'rounded-start': (
       property: border-bottom-left-radius border-top-left-radius,
       class: rounded-start,
       values: (
-        null: newTokens.$border-radius
-      )
+        null: newTokens.$border-radius,
+      ),
     ),
     'visibility': (
       property: visibility,
       class: null,
       values: (
         visible: visible,
-        invisible: hidden
-      )
-    )
+        invisible: hidden,
+      ),
+    ),
   ),
   $utilities
 );

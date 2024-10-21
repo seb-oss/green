@@ -5,6 +5,11 @@
     "declaration": true,
     "types": []
   },
-  "include": ["**/*.ts", "**/*.css"],
-  "exclude": ["**/*.test.ts", "**/*.react.ts", "**/*.stories.ts", "**/*.stories.js"]
+  "include": ["**/*.ts", "**/*.css" ],
+  "exclude": [
+    "**/*.test.ts",
+    "**/*.react.ts",
+    "**/*.stories.ts",
+    "**/*.stories.js"
+  ]
 }

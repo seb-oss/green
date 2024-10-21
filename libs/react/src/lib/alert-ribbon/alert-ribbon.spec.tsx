@@ -16,10 +16,12 @@ describe('AlertRibbon', () => {
     render(
       <AlertRibbon type="warning" role="alert">
         AlertRibbon
-      </AlertRibbon>
+      </AlertRibbon>,
     )
 
-    expect(screen.getByRole('alert').classList.contains('warning')).toEqual(true)
+    expect(screen.getByRole('alert').classList.contains('warning')).toEqual(
+      true,
+    )
   })
   it('renders content', () => {
     render(<AlertRibbon>AlertRibbon</AlertRibbon>)
@@ -37,7 +39,9 @@ describe('AlertRibbon', () => {
     render(<AlertRibbon header={'header'}>AlertRibbon</AlertRibbon>)
 
     expect(screen.getByText('header').tagName).toEqual('SPAN')
-    expect(screen.getByText('header').classList.contains('header')).toEqual(true)
+    expect(screen.getByText('header').classList.contains('header')).toEqual(
+      true,
+    )
   })
 
   it('renders footer', () => {
@@ -50,7 +54,7 @@ describe('AlertRibbon', () => {
     render(
       <AlertRibbon isCloseable={false} role="alert" header={<Header />}>
         AlertRibbon
-      </AlertRibbon>
+      </AlertRibbon>,
     )
 
     expect(screen.getByRole('alert')).not.toContain(<button />)
@@ -60,10 +64,12 @@ describe('AlertRibbon', () => {
     render(
       <AlertRibbon isCloseable={true} closeAriaLabel={'Close message'}>
         AlertRibbon
-      </AlertRibbon>
+      </AlertRibbon>,
     )
 
     expect(screen.getByLabelText('Close message').tagName).toEqual('BUTTON')
-    expect(screen.getByLabelText('Close message').classList.contains('close')).toEqual(true)
+    expect(
+      screen.getByLabelText('Close message').classList.contains('close'),
+    ).toEqual(true)
   })
 })

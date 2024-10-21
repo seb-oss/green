@@ -2,17 +2,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core'
 
 @Component({
   selector: 'ngg-in-page-wizard-step-card',
-  templateUrl: './in-page-wizard-step-card.component.html'
+  templateUrl: './in-page-wizard-step-card.component.html',
 })
 export class NggInPageWizardStepCardComponent {
   @Output()
-  readonly handleNextClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+  readonly handleNextClick: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
 
   @Output()
-  readonly handleEditClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
+  readonly handleEditClick: EventEmitter<MouseEvent> =
+    new EventEmitter<MouseEvent>()
 
   @Input() public stepIsValid = () => {
-    return true
+    return true;
   }
 
   @Input() public stepText = ''
@@ -38,10 +40,10 @@ export class NggInPageWizardStepCardComponent {
   }
   handleOnNextBtnClick(event: MouseEvent) {
     if (this.stepIsValid()) {
-      this.isActive = false
-      this.isCompleted = true
+      this.isActive = false;
+      this.isCompleted = true;
     }
-
+    
     this.handleNextClick.emit(event)
   }
 }

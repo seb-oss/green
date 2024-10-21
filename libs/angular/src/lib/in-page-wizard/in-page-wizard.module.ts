@@ -6,6 +6,6 @@ import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.com
 @NgModule({
   declarations: [NggInPageWizardStepCardComponent],
   imports: [CommonModule],
-  exports: [NggInPageWizardStepCardComponent]
+  exports: [NggInPageWizardStepCardComponent],
 })
 export class NggInPageWizardModule {}

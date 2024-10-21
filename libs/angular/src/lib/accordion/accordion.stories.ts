@@ -7,12 +7,12 @@ export default {
   component: NggAccordionComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggAccordionModule]
-    })
+      imports: [NggAccordionModule],
+    }),
   ],
   parameters: {
-    componentIds: ['component-accordion']
-  }
+    componentIds: ['component-accordion'],
+  },
 } as Meta<NggAccordionComponent>
 
 const Template: StoryFn<NggAccordionComponent> = () => {
@@ -29,7 +29,7 @@ const Template: StoryFn<NggAccordionComponent> = () => {
               <p>This is the content of the second section</p>
             </div>
         </ngg-accordion>
-        `
+        `,
   }
 }
 
@@ -47,7 +47,7 @@ const NoSubHeadersTemplate: StoryFn<NggAccordionComponent> = () => {
               <p>This is the content of the second section</p>
             </div>
         </ngg-accordion>
-        `
+        `,
   }
 }
 
@@ -98,7 +98,7 @@ const CheckBoxTemplate: StoryFn<NggAccordionComponent> = () => {
           </div>
           </div>
       </ngg-accordion>
-      `
+      `,
   }
 }
 

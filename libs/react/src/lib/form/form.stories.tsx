@@ -9,7 +9,7 @@ import {
   Text,
   FormItems,
   RadioGroup,
-  RadioButton
+  RadioButton,
 } from './'
 import AlertRibbon from '../alert-ribbon/alert-ribbon'
 
@@ -46,8 +46,8 @@ const Template = ({ children, ...props }) => (
     <div className="row">
       <div className="col-12">
         <AlertRibbon type="info" header="" isCloseable={false}>
-          Alert content placed inside a paragraph. Inline link will inherit color from alert to make sure contrast is
-          applied.
+          Alert content placed inside a paragraph. Inline link will inherit
+          color from alert to make sure contrast is applied.
         </AlertRibbon>
       </div>
     </div>
@@ -59,7 +59,7 @@ const Template = ({ children, ...props }) => (
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <TextInput id="namedField" label="Person name" />
@@ -71,7 +71,7 @@ const Template = ({ children, ...props }) => (
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <NumberInput label="Numeric field" min={-1} max={10} step={2} />
@@ -83,7 +83,7 @@ const Template = ({ children, ...props }) => (
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <EmailInput label="Email field" />
@@ -98,7 +98,7 @@ const Template = ({ children, ...props }) => (
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <Checkbox label="Some checkbox" value="checkme" />
@@ -130,7 +130,7 @@ const Template = ({ children, ...props }) => (
           validate={{
             message: 'Required',
             indicator: 'error',
-            rules: { type: 'Required' }
+            rules: { type: 'Required' },
           }}
         >
           <RadioGroup label="Groups">
@@ -156,7 +156,7 @@ const Template = ({ children, ...props }) => (
 
 export default {
   title: 'Components/Form',
-  component: Form
+  component: Form,
 }
 
 export const Default = {
@@ -164,8 +164,8 @@ export const Default = {
   name: 'Form',
 
   args: {
-    onFormSubmit: values => {
+    onFormSubmit: (values) => {
       alert('You have submitted these values: ' + JSON.stringify(values))
-    }
-  }
+    },
+  },
 }

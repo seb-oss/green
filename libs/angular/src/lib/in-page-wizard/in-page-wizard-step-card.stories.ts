@@ -7,17 +7,17 @@ export default {
   component: NggInPageWizardStepCardComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggInPageWizardModule]
-    })
+      imports: [NggInPageWizardModule],
+    }),
   ],
   argTypes: {},
   parameters: {
     controls: { isActive: true, isCompleted: true, disableNext: false },
-    componentIds: ['component-inpagewizard']
-  }
+    componentIds: ['component-inpagewizard'],
+  },
 } as Meta<NggInPageWizardStepCardComponent>
 
-const Template: StoryFn<NggInPageWizardStepCardComponent> = args => {
+const Template: StoryFn<NggInPageWizardStepCardComponent> = (args) => {
   const noop = () => {
     return
   }
@@ -46,8 +46,8 @@ const Template: StoryFn<NggInPageWizardStepCardComponent> = args => {
   `,
     props: {
       ...args,
-      noop
-    }
+      noop,
+    },
   }
 }
 
@@ -55,17 +55,17 @@ export const Default = Template.bind({})
 Default.args = {
   isActive: true,
   isCompleted: false,
-  disableNext: false
+  disableNext: false,
 }
 
 export const DisableNext = Template.bind({})
 DisableNext.args = {
   isActive: true,
   isCompleted: false,
-  disableNext: true
+  disableNext: true,
 }
 
-const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = args => {
+const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = (args) => {
   const noop = () => {
     return
   }
@@ -127,8 +127,8 @@ const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = args => {
   `,
     props: {
       ...args,
-      noop
-    }
+      noop,
+    },
   }
 }
 export const Multiple = TemplateMultiple.bind({})

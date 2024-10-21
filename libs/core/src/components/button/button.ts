@@ -153,12 +153,18 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         download=${ifDefined(this.#isLink ? this.download : undefined)}
         part="_button"
         @click="${this.#handleClick}"
-        ${forwardAttributes((attr) => attr.name.startsWith('gds-aria') || attr.name === 'gds-role')}
+        ${forwardAttributes(
+          (attr) =>
+            attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
+        )}
       >
         <slot name="lead"></slot>
         <slot @slotchange=${this.#mainSlotChange}></slot>
         <slot name="trail"></slot>
-        ${when(!this._isUsingTransitionalStyles, () => html`<gds-ripple part="_ripple"></gds-ripple>`)}
+        ${when(
+          !this._isUsingTransitionalStyles,
+          () => html`<gds-ripple part="_ripple"></gds-ripple>`,
+        )}
         </${tag}>
         `
   }

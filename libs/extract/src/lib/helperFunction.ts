@@ -34,4 +34,5 @@ export const debounce = (func: () => void, ms: number) => {
   }
 }
 
-export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms))
+export const delay = (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))

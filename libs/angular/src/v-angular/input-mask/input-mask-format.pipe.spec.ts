@@ -1,11 +1,11 @@
-import { InputMaskFormatPipe } from './input-mask-format.pipe'
+import { InputMaskFormatPipe } from './input-mask-format.pipe';
 
 describe('[NgvInputMask]', () => {
   // ----------------------------------------------------------------------------
   // InputMaskFormatPipe - constructor()
   // ----------------------------------------------------------------------------
 
-  let pipe: InputMaskFormatPipe
+  let pipe: InputMaskFormatPipe;
 
   const dateFormats = [
     'yyyy-mm-dd',
@@ -18,38 +18,38 @@ describe('[NgvInputMask]', () => {
     'yyyy.mm.dd.',
     'yyyy.mm.dd',
     'mm.dd.yyyy',
-    'dd/mm yyyy'
-  ]
+    'dd/mm yyyy',
+  ];
 
-  const dateMasks = dateFormats.map(format => ({
+  const dateMasks = dateFormats.map((format) => ({
     alias: 'datetime',
-    inputFormat: format
-  }))
+    inputFormat: format,
+  }));
 
   beforeEach(() => {
-    pipe = new InputMaskFormatPipe()
-  })
+    pipe = new InputMaskFormatPipe();
+  });
 
   describe('InputMaskFormatPipe - constructor()', () => {
     it('creates an instance', () => {
-      expect(pipe).toBeTruthy()
-    })
+      expect(pipe).toBeTruthy();
+    });
 
     const numericMask1 = {
       alias: 'numeric',
       groupSeparator: ' ',
       radixPoint: ',',
       digits: 2,
-      digitsOptional: false
-    }
+      digitsOptional: false,
+    };
 
     const numericMask2 = {
       alias: 'numeric',
       groupSeparator: ',',
       radixPoint: '.',
       digits: 2,
-      digitsOptional: false
-    }
+      digitsOptional: false,
+    };
 
     it.each`
       value                     | config             | expected
@@ -72,7 +72,7 @@ describe('[NgvInputMask]', () => {
       ${100213.95}              | ${numericMask1}    | ${'100 213,95'}
       ${100213.95}              | ${numericMask2}    | ${'100,213.95'}
     `(`value '$value' returns: '$expected'`, ({ value, config, expected }) => {
-      expect(pipe.transform(value, config)).toEqual(expected)
-    })
-  })
-})
+      expect(pipe.transform(value, config)).toEqual(expected);
+    });
+  });
+});

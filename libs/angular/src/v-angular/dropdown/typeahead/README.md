@@ -77,11 +77,7 @@ import { TypeaheadDirective } from '@sebgroup/nggv-core';
   this.typeaheadFunction = (value$: Observable<string>) =>
     value$.pipe(
       debounceTime(150),
-      map(input =>
-        accounts.filter(
-          (car: Car) => option.make?.toUpperCase().includes(input?.toUpperCase()) || option.modelName?.includes(input)
-        )
-      )
+      map((input) => accounts.filter((car: Car) => option.make?.toUpperCase().includes(input?.toUpperCase()) || option.modelName?.includes(input))),
     )
 
   this.selectedFormatter = (car: Car) => car?.modelName

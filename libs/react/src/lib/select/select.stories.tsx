@@ -1,6 +1,8 @@
 import { Select, Option, OptionGroup } from './select'
 
-const Template = ({ children, ...props }) => <Select {...props}>{children}</Select>
+const Template = ({ children, ...props }) => (
+  <Select {...props}>{children}</Select>
+)
 
 export default {
   title: 'Components/Select',
@@ -12,20 +14,20 @@ export default {
 
       type: {
         name: 'string',
-        required: false
+        required: false,
       },
 
       description: 'Id for select element',
 
       table: {
         type: {
-          summary: 'string'
-        }
+          summary: 'string',
+        },
       },
 
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
 
     className: {
@@ -33,20 +35,20 @@ export default {
 
       type: {
         name: 'string',
-        required: false
+        required: false,
       },
 
       description: 'Label for the select element',
 
       table: {
         type: {
-          summary: 'string'
-        }
+          summary: 'string',
+        },
       },
 
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
 
     label: {
@@ -54,7 +56,7 @@ export default {
 
       type: {
         name: 'string',
-        required: false
+        required: false,
       },
 
       defaultValue: 'Select label',
@@ -62,13 +64,13 @@ export default {
 
       table: {
         type: {
-          summary: 'string'
-        }
+          summary: 'string',
+        },
       },
 
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
 
     labelInformation: {
@@ -76,7 +78,7 @@ export default {
 
       type: {
         name: 'string',
-        required: false
+        required: false,
       },
 
       defaultValue: 'Select label information',
@@ -84,13 +86,13 @@ export default {
 
       table: {
         type: {
-          summary: 'string'
-        }
+          summary: 'string',
+        },
       },
 
       control: {
-        type: 'text'
-      }
+        type: 'text',
+      },
     },
 
     children: {
@@ -98,42 +100,43 @@ export default {
 
       type: {
         name: 'ReactNode',
-        required: false
+        required: false,
       },
 
       description: 'Children of Select component, should be SelectOptions',
 
       table: {
         type: {
-          summary: 'ReactNode'
-        }
+          summary: 'ReactNode',
+        },
       },
 
       control: {
-        type: null
-      }
+        type: null,
+      },
     },
 
     name: {
       name: 'name',
 
       type: {
-        name: 'string'
+        name: 'string',
       },
 
-      description: 'This will be used for the name attribute on the select element',
+      description:
+        'This will be used for the name attribute on the select element',
 
       table: {
         type: {
-          summary: 'string'
-        }
+          summary: 'string',
+        },
       },
 
       control: {
-        type: 'text'
-      }
-    }
-  }
+        type: 'text',
+      },
+    },
+  },
 }
 
 export const WithOptions = {
@@ -154,8 +157,8 @@ export const WithOptions = {
       </>
     ),
 
-    name: 'my-select'
-  }
+    name: 'my-select',
+  },
 }
 
 export const WithPlaceholder = {
@@ -174,8 +177,8 @@ export const WithPlaceholder = {
         <Option value={3}>Label 3</Option>
         <Option value={4}>Label 4</Option>
       </>
-    )
-  }
+    ),
+  },
 }
 
 export const WithOptionGroups = {
@@ -198,8 +201,8 @@ export const WithOptionGroups = {
           <Option value={4}>Label 4</Option>
         </OptionGroup>
       </>
-    )
-  }
+    ),
+  },
 }
 
 export const WithDisabledGroup = {
@@ -222,8 +225,8 @@ export const WithDisabledGroup = {
           <Option value={4}>Label 4</Option>
         </OptionGroup>
       </>
-    )
-  }
+    ),
+  },
 }
 
 export const WithValidation = {
@@ -235,7 +238,7 @@ export const WithValidation = {
 
     validator: {
       indicator: 'error',
-      message: 'You need to select how many live in your house'
+      message: 'You need to select how many live in your house',
     },
 
     children: (
@@ -245,8 +248,8 @@ export const WithValidation = {
         <Option value={3}>Label 3</Option>
         <Option value={4}>Label 4</Option>
       </>
-    )
-  }
+    ),
+  },
 }
 
 export const ExpandableInformation = {
@@ -271,6 +274,6 @@ export const ExpandableInformation = {
         <Option value={7}>7</Option>
         <Option value={8}>8</Option>
       </>
-    )
-  }
+    ),
+  },
 }

@@ -7,30 +7,30 @@ export default {
   component: NggBadgeComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggBadgeModule]
-    })
+      imports: [NggBadgeModule],
+    }),
   ],
   argTypes: {
     badgeType: {
       options: ['info', 'success', 'warning', 'danger', 'light', 'dark'],
       control: 'radio',
       name: 'Badge Type',
-      defaultValue: 'info'
-    }
+      defaultValue: 'info',
+    },
   },
   parameters: {
-    componentIds: ['component-badge']
-  }
+    componentIds: ['component-badge'],
+  },
 } as Meta<NggBadgeComponent>
 
-const Template: StoryFn<NggBadgeComponent> = args => ({
+const Template: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
     <span ngg-badge [badgeType]="badgeType" [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>
     `,
-  props: args
+  props: args,
 })
 
-const BadgesTemplate: StoryFn<NggBadgeComponent> = args => ({
+const BadgesTemplate: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
     <div class="d-flex justify-content-between">
       <span ngg-badge >Badge</span>
@@ -42,17 +42,17 @@ const BadgesTemplate: StoryFn<NggBadgeComponent> = args => ({
       <span ngg-badge badgeType="dark">Badge</span>
     </div>
     `,
-  props: args
+  props: args,
 })
 
 export const Multiple = BadgesTemplate.bind({})
 export const Default = Template.bind({})
 Default.args = {
-  badgeType: 'success'
+  badgeType: 'success',
 }
 
 export const Custom = Template.bind({})
 Custom.args = {
   customColor: '#062BCC',
-  customBackgroundColor: '#E6F5FF'
+  customBackgroundColor: '#E6F5FF',
 }

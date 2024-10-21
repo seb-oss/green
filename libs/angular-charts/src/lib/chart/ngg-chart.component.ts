@@ -5,16 +5,23 @@ import {
   Component,
   ElementRef,
   Input,
-  ViewChild
+  ViewChild,
 } from '@angular/core'
 import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
 
 @Component({
   selector: 'ngg-chart',
-  template: ` <div class="chart" [class.fit-height]="chart?.settings?.style?.fitHeightToParent">
+  template: ` <div
+    class="chart"
+    [class.fit-height]="chart?.settings?.style?.fitHeightToParent"
+  >
     <div #chartRef [class]="theme"></div>
     <ng-container *ngIf="chart?.info?.legend as legend">
-      <div class="legend-container" [class]="legend.placement" *ngIf="legend.placement !== 'none'">
+      <div
+        class="legend-container"
+        [class]="legend.placement"
+        *ngIf="legend.placement !== 'none'"
+      >
         <ul class="legend">
           <li
             *ngFor="let item of legend.items"
@@ -29,7 +36,7 @@ import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
       </div>
     </ng-container>
   </div>`,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggChartComponent implements AfterViewInit {
   @ViewChild('chartRef') _chartElementRef: ElementRef | undefined
@@ -58,7 +65,7 @@ export class NggChartComponent implements AfterViewInit {
     if (this.settings && this.settings.data && this._chartElementRef) {
       this.setChart({
         settings: this.settings,
-        chartElement: this._chartElementRef?.nativeElement
+        chartElement: this._chartElementRef?.nativeElement,
       })
     }
   }
@@ -71,7 +78,7 @@ export class NggChartComponent implements AfterViewInit {
     if (this.settings && this._chartElementRef) {
       this.setChart({
         settings: this.settings,
-        chartElement: this._chartElementRef?.nativeElement
+        chartElement: this._chartElementRef?.nativeElement,
       })
     }
   }

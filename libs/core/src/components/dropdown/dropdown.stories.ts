@@ -19,9 +19,9 @@ const meta: Meta = {
   component: 'gds-dropdown',
   subcomponents: { Option: 'gds-option' },
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -30,14 +30,14 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   argTypes: {
     options: {
-      control: { type: 'array' }
-    }
+      control: { type: 'array' },
+    },
   },
   args: {
     innerHTML: `<gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
@@ -47,12 +47,12 @@ const DefaultParams: Story = {
 <gds-option value="prometheus-1">Prometheus</gds-option>
 <gds-option value="discovery-1">Discovery</gds-option>
 <gds-option value="columbia-1">Columbia</gds-option>`,
-    label: 'Select an option'
-  }
+    label: 'Select an option',
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -60,7 +60,7 @@ export const Basic: Story = {
  */
 export const OptionHeadings: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-dropdown
       onchange="document.getElementById('selected-value').innerText = event.target.value"
       label="Select a starship"
@@ -85,7 +85,7 @@ export const OptionHeadings: Story = {
     </gds-dropdown>
     <br />
     <div>Selected starship: <span id="selected-value"></span></div>
-  `
+  `,
 }
 
 /**
@@ -95,8 +95,10 @@ export const OptionHeadings: Story = {
 export const CustomTrigger: Story = {
   ...DefaultParams,
   name: 'Custom trigger content',
-  render: args => html`
-    <gds-dropdown onchange="document.getElementById('trigger-value').innerText = event.target.value">
+  render: (args) => html`
+    <gds-dropdown
+      onchange="document.getElementById('trigger-value').innerText = event.target.value"
+    >
       <div slot="trigger">
         <b>Selected: </b>
         <span id="trigger-value">v1</span>
@@ -105,7 +107,7 @@ export const CustomTrigger: Story = {
       <gds-option value="v2">Value 2</gds-option>
       <gds-option value="v3">Value 3</gds-option>
     </gds-dropdown>
-  `
+  `,
 }
 
 /**
@@ -115,9 +117,11 @@ export const CustomTrigger: Story = {
 export const SyncedPopoverWidth: Story = {
   ...DefaultParams,
   name: 'Synced popover width',
-  render: args => html`
+  render: (args) => html`
     <gds-dropdown sync-popover-width style="width: 200px">
-      <gds-option value="1701-D-1"> Enterprise 1701-D is a starship from the TNG series </gds-option>
+      <gds-option value="1701-D-1">
+        Enterprise 1701-D is a starship from the TNG series
+      </gds-option>
       <gds-option value="falcon-1">Millenium Falcon</gds-option>
       <gds-option value="defiant-1">Defiant</gds-option>
       <gds-option value="voyager-1">Voyager</gds-option>
@@ -125,7 +129,7 @@ export const SyncedPopoverWidth: Story = {
       <gds-option value="discovery-1">Discovery</gds-option>
       <gds-option value="columbia-1">Columbia</gds-option>
     </gds-dropdown>
-  `
+  `,
 }
 
 /**
@@ -133,7 +137,7 @@ export const SyncedPopoverWidth: Story = {
  */
 export const Size: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-dropdown size="small" label="Select tech">
       <gds-option value="">Select tech</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
@@ -143,7 +147,7 @@ export const Size: Story = {
       <gds-option value="cryonics">Cryonics</gds-option>
       <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
-  `
+  `,
 }
 
 /**
@@ -155,7 +159,7 @@ export const Size: Story = {
  */
 export const HiddenLabel: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-dropdown size="small" label="Select tech" hide-label>
       <gds-option value="">Select tech</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
@@ -165,7 +169,7 @@ export const HiddenLabel: Story = {
       <gds-option value="cryonics">Cryonics</gds-option>
       <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
-  `
+  `,
 }
 
 /**
@@ -175,7 +179,7 @@ export const HiddenLabel: Story = {
  */
 export const PlaceholderOptions: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-dropdown size="small" label="Select tech" hide-label>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
@@ -185,7 +189,7 @@ export const PlaceholderOptions: Story = {
       <gds-option value="cryonics">Cryonics</gds-option>
       <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
-  `
+  `,
 }
 
 /**
@@ -193,7 +197,7 @@ export const PlaceholderOptions: Story = {
  */
 export const Searchable: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-dropdown size="small" label="Select tech" searchable hide-label>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
@@ -225,7 +229,7 @@ export const Searchable: Story = {
       <gds-option value="cybersecurity">Cybersecurity</gds-option>
       <gds-option value="biometrics">Biometrics</gds-option>
     </gds-dropdown>
-  `
+  `,
 }
 
 /**
@@ -233,8 +237,14 @@ export const Searchable: Story = {
  */
 export const Multiple: Story = {
   ...DefaultParams,
-  render: args => html`
-    <gds-dropdown size="small" label="Select tech" searchable multiple hide-label>
+  render: (args) => html`
+    <gds-dropdown
+      size="small"
+      label="Select tech"
+      searchable
+      multiple
+      hide-label
+    >
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -243,5 +253,5 @@ export const Multiple: Story = {
       <gds-option value="cryonics">Cryonics</gds-option>
       <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
-  `
+  `,
 }

@@ -29,7 +29,7 @@ Values for light mode are used by default.
     '600': $grey-600,
     '700': $grey-700,
     '800': $grey-800,
-    '900': $grey-900
+    '900': $grey-900,
   ),
   $bg-level-0: #eeeeee,
   $bg-level-1: $white,
@@ -39,7 +39,7 @@ Values for light mode are used by default.
     '0': $bg-level-0,
     '1': $bg-level-1,
     '2': $bg-level-2,
-    '3': $bg-level-3
+    '3': $bg-level-3,
   )
   /* colors */,
   $blue-0: #41b0ee,
@@ -79,28 +79,28 @@ Values for light mode are used by default.
     'red-2': $red-2,
     'purple-0': $purple-0,
     'purple-1': $purple-1,
-    'purple-2': $purple-2
+    'purple-2': $purple-2,
   )
   /* disabled */,
   $disabled-background: $grey-100,
   $disabled-color: $grey-500,
   $_disabled: (
     'background': $disabled-background,
-    'color': $disabled-color
+    'color': $disabled-color,
   )
   /* text */,
   $text-primary: $grey-800,
   $text-secondary: $grey-800,
   $_text: (
     'primary': $text-primary,
-    'secondary': $text-secondary
+    'secondary': $text-secondary,
   )
   /* form */,
   $form-control-bg: $white,
   $form-control-bg-disabled: #eeeeee,
   $_form: (
     control-bg: $form-control-bg,
-    control-bg-disabled: $form-control-bg-disabled
+    control-bg-disabled: $form-control-bg-disabled,
   )
   /* border */,
   $border-color: var(--gds-ref-pallet-base600),
@@ -112,25 +112,31 @@ Values for light mode are used by default.
     'color': $border-color,
     'width': $border-width,
     'width-50': math.div($border-width, 2),
-    'radius': $border-radius
+    'radius': $border-radius,
   )
   /* intent */,
-  $intent-neutral: nth(functions.desired-color-combination($white, $grey-200), 1),
+  $intent-neutral:
+    nth(functions.desired-color-combination($white, $grey-200), 1),
   $intent-info: nth(functions.desired-color-combination($white, $blue-2), 1),
   $intent-success: nth(functions.desired-color-combination($white, $green-2), 1),
-  $intent-warning: nth(functions.desired-color-combination($white, $yellow-0), 1),
+  $intent-warning:
+    nth(functions.desired-color-combination($white, $yellow-0), 1),
   $intent-critical: nth(functions.desired-color-combination($white, $red-1), 1),
   $_intent: (
     'neutral-hsl': functions.stripped-hsl($intent-neutral),
-    'neutral-hsl-contrast': functions.stripped-hsl(functions.most-legible-color($intent-neutral)),
+    'neutral-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-neutral)),
     'info-hsl': functions.stripped-hsl($intent-info),
-    'info-hsl-contrast': functions.stripped-hsl(functions.most-legible-color($intent-info)),
+    'info-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-info)),
     'success-hsl': functions.stripped-hsl($intent-success),
     'success-hsl-contrast': functions.stripped-hsl($white),
     'warning-hsl': functions.stripped-hsl($intent-warning),
-    'warning-hsl-contrast': functions.stripped-hsl(functions.most-legible-color($intent-warning)),
+    'warning-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-warning)),
     'critical-hsl': functions.stripped-hsl($intent-critical),
-    'critical-hsl-contrast': functions.stripped-hsl(functions.most-legible-color($intent-critical))
+    'critical-hsl-contrast':
+      functions.stripped-hsl(functions.most-legible-color($intent-critical)),
   )
   /* global */,
   $box-shadow-0: 0,
@@ -157,7 +163,7 @@ Values for light mode are used by default.
     'modal-backdrop': $z-index-modal-backdrop,
     'modal': $z-index-modal,
     'popover': $z-index-popover,
-    'tooltip': $z-index-tooltip
+    'tooltip': $z-index-tooltip,
   )
   /* table */,
   $table-header-background: $grey-900,
@@ -176,14 +182,14 @@ Values for light mode are used by default.
     'border-width': $table-border-width,
     'border-color': $table-border-color,
     'sort-icon-color': $table-sort-icon-color,
-    'sort-icon-color-active': $table-sort-icon-color-active
+    'sort-icon-color-active': $table-sort-icon-color-active,
   )
   /* skeleton-loader */,
   $skeleton-loader-highlight: $grey-300,
   $skeleton-loader-background: $grey-100,
   $_skeleton-loader: (
     highlight-color: $skeleton-loader-highlight,
-    background-color: $skeleton-loader-background
+    background-color: $skeleton-loader-background,
   )
   /* modal */,
   $modal-bg: $bg-level-2,
@@ -192,7 +198,7 @@ Values for light mode are used by default.
   $_modal: (
     'background': $modal-bg,
     'box-shadow': $modal-box-shadow,
-    'backdrop-background': $modal-backdrop-background
+    'backdrop-background': $modal-backdrop-background,
   )
   /* popover */,
   $popover-box-shadow: $box-shadow-1,
@@ -201,7 +207,7 @@ Values for light mode are used by default.
   $_popover: (
     'box-shadow': $popover-box-shadow,
     'background': $popover-background,
-    'border-color': $popover-border-color
+    'border-color': $popover-border-color,
   )
   /* card */,
   $card-box-shadow: $box-shadow-1,
@@ -216,7 +222,7 @@ Values for light mode are used by default.
     'heading-color': $card-heading-color,
     'color': $card-color,
     'border': $card-border,
-    'border-radius': $card-border-radius
+    'border-radius': $card-border-radius,
   )
 ) {
   /* generate css variables */
@@ -227,7 +233,10 @@ Values for light mode are used by default.
   @include _generate-variables(functions.hsl-map($_colors), 'sg-hsl');
   @include _generate-variables($_greys, 'sg-grey');
   @include _generate-variables($_intent, 'sg-intent');
-  @include _generate-variables(functions.hsl-map($_disabled), 'sg-hsl-disabled');
+  @include _generate-variables(
+    functions.hsl-map($_disabled),
+    'sg-hsl-disabled'
+  );
   @include _generate-variables($_bg-level, 'sg-bg-level');
   @include _generate-variables($_table, 'sg-table');
   @include _generate-variables($_skeleton-loader, 'sg-skeleton-loader');

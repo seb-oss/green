@@ -8,6 +8,6 @@ import { NgvExternalLinkDirectiveModule } from '@sebgroup/green-angular/src/v-an
 @NgModule({
   declarations: [NgvButtonComponent],
   imports: [CommonModule, NgvExternalLinkDirectiveModule, RouterModule],
-  exports: [NgvButtonComponent]
+  exports: [NgvButtonComponent],
 })
 export class NgvButtonModule {}

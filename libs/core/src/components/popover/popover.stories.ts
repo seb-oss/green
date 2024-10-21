@@ -16,9 +16,9 @@ const meta: Meta = {
   title: 'Docs/Components/Popover',
   component: 'gds-popover',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -27,9 +27,9 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   args: {
     innerHTML: `
@@ -43,8 +43,8 @@ const DefaultParams: Story = {
   </div>
 `,
     calcMaxWidth: () => '300px',
-    placement: 'bottom-center'
-  }
+    placement: 'bottom-center',
+  },
 }
 
 /**
@@ -54,7 +54,7 @@ const DefaultParams: Story = {
  * properties. This is useful when the trigger and anchor needs to be different elements.
  */
 export const Usage: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -91,5 +91,5 @@ export const Customization: Story = {
         </gds-popover>
     </gds-card>
     <gds-backdrop id="my-backdrop"></gds-backdrop>
-</gds-container>`
+</gds-container>`,
 }

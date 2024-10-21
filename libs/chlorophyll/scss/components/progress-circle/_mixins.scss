@@ -1,25 +1,25 @@
 $variants: (
   'success': (
-    background: hsl(var(--sg-intent-success-hsl))
+    background: hsl(var(--sg-intent-success-hsl)),
   ),
   'warning': (
-    background: hsl(var(--sg-intent-warning-hsl))
+    background: hsl(var(--sg-intent-warning-hsl)),
   ),
   'info': (
-    background: hsl(var(--sg-intent-info-hsl))
+    background: hsl(var(--sg-intent-info-hsl)),
   ),
   'danger': (
-    background: hsl(var(--sg-intent-critical-hsl))
+    background: hsl(var(--sg-intent-critical-hsl)),
   ),
   'light': (
-    background: hsl(var(--sg-hsl-light))
+    background: hsl(var(--sg-hsl-light)),
   ),
   'dark': (
-    background: hsl(var(--sg-hsl-dark))
+    background: hsl(var(--sg-hsl-dark)),
   ),
   'disabled': (
-    background: var(--sg-grey-500)
-  )
+    background: var(--sg-grey-500),
+  ),
 );
 
 @mixin background-variant($background) {

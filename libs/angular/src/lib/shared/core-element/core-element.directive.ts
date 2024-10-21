@@ -7,13 +7,13 @@ import {
   Renderer2,
   TemplateRef,
   ViewContainerRef,
-  inject
+  inject,
 } from '@angular/core'
 
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @Directive({
-  selector: '[nggCoreElement]'
+  selector: '[nggCoreElement]',
 })
 export class NggCoreElementDirective implements OnInit {
   private viewRef: EmbeddedViewRef<any> | null = null

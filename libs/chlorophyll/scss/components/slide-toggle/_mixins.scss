@@ -80,7 +80,8 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
 @mixin add-slide-toggle-state-checked {
   //                                            Padding
   $thumb_pressed_translateX: $_track_width - (0.125rem * 2) - $_thumb_width;
-  $thumb_pressed_translateX_mobile: $_track_width_mobile - (0.125rem * 2) - $_thumb_width_mobile;
+  $thumb_pressed_translateX_mobile: $_track_width_mobile - (0.125rem * 2) -
+    $_thumb_width_mobile;
 
   background: $_track_color_pressed;
 
@@ -113,7 +114,9 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
     }
     @media (hover: hover) {
       &:hover::after {
-        transform: translateX($thumb_pressed_translateX_mobile - $_thumb_hover_nudge);
+        transform: translateX(
+          $thumb_pressed_translateX_mobile - $_thumb_hover_nudge
+        );
         transition: $_thumb_transition_time;
       }
     }

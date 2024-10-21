@@ -13,7 +13,12 @@ export const Accordion = ({ items }: AccordionInterface) => {
     <div className="accordion">
       {items &&
         items.map((item, index) => (
-          <AccordionItem key={`accordion-${uuid}-${index}`} item={item} index={index} uuid={uuid} />
+          <AccordionItem
+            key={`accordion-${uuid}-${index}`}
+            item={item}
+            index={index}
+            uuid={uuid}
+          />
         ))}
     </div>
   )

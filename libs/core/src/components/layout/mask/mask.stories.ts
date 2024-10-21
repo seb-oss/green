@@ -18,7 +18,7 @@ import '../../icon/icons/circles-three.js'
 const meta: Meta = {
   title: 'Docs/Layout/Mask',
   component: 'gds-mask',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -27,19 +27,28 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
-  }
+    controls: { expanded: true },
+  },
 }
 
 export const Card: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-grid columns="xs{1} m{2} l{2}" gap="l">
       <gds-card overflow="hidden">
-        <gds-flex display="flex" gap="0" flex-direction="column" align-items="stretch">
-          <gds-container position="relative" border-radius="s" overflow="hidden">
+        <gds-flex
+          display="flex"
+          gap="0"
+          flex-direction="column"
+          align-items="stretch"
+        >
+          <gds-container
+            position="relative"
+            border-radius="s"
+            overflow="hidden"
+          >
             <gds-img
               src="https://github.com/user-attachments/assets/fdbfca17-c5b7-43cc-b846-6e1ab68e5d69"
               aspect-ratio="1/1"
@@ -59,10 +68,20 @@ export const Card: Story = {
               </gds-container>
             </gds-mask>
           </gds-container>
-          <gds-flex flex-direction="column" padding="s{xs} m{l} l{l}" align-items="flex-start" gap="l">
+          <gds-flex
+            flex-direction="column"
+            padding="s{xs} m{l} l{l}"
+            align-items="flex-start"
+            gap="l"
+          >
             <gds-flex gap="s" flex-direction="column">
-              <gds-text font-size="body-l"> Sector by sector. Industry by industry. </gds-text>
-              <gds-text tag="p"> Together with our clients, we're accelerating the sustainable transition. </gds-text>
+              <gds-text font-size="body-l">
+                Sector by sector. Industry by industry.
+              </gds-text>
+              <gds-text tag="p">
+                Together with our clients, we're accelerating the sustainable
+                transition.
+              </gds-text>
             </gds-flex>
             <gds-divider opacity="0.2"></gds-divider>
             <gds-button>Client stories</gds-button>
@@ -80,7 +99,11 @@ export const Card: Story = {
             muted
             loop
           ></gds-video>
-          <gds-mask mask-image="top" background-color="tertiary/0.6" position="absolute">
+          <gds-mask
+            mask-image="top"
+            background-color="tertiary/0.6"
+            position="absolute"
+          >
             <gds-flex
               flex-direction="column"
               justify-content="flex-end"
@@ -92,7 +115,9 @@ export const Card: Story = {
             >
               <gds-container>
                 <gds-text tag="h3"> Sustainable Practices </gds-text>
-                <gds-text font-size="body-m"> Promoting Eco-Friendly Solutions </gds-text>
+                <gds-text font-size="body-m">
+                  Promoting Eco-Friendly Solutions
+                </gds-text>
               </gds-container>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Get Involved</gds-button>
@@ -105,5 +130,5 @@ export const Card: Story = {
         </gds-flex>
       </gds-card>
     </gds-grid>
-  `
+  `,
 }

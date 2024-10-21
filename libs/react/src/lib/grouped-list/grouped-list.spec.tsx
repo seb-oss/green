@@ -8,7 +8,7 @@ describe('GroupedList', () => {
         <ListItem>Item 1</ListItem>
         <ListItem>Item 2</ListItem>
         <ListItem>Item 3</ListItem>
-      </GroupedList>
+      </GroupedList>,
     )
 
     const item1 = screen.getByText('Item 1')

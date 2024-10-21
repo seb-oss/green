@@ -3,7 +3,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
 @Component({
   selector: 'nggv-typeahead-highlight',
   templateUrl: './typeahead-highlight.component.html',
-  styleUrls: ['./typeahead-highlight.component.scss']
+  styleUrls: ['./typeahead-highlight.component.scss'],
 })
 export class NgvTypeaheadHighlightComponent implements OnChanges {
   /** The text that is displayed in the dropdown list */
@@ -26,8 +26,10 @@ export class NgvTypeaheadHighlightComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     const { textContent, textToHighlight } = changes
-    if (textContent?.currentValue != null) this.text = `${textContent.currentValue}`
-    if (textToHighlight?.currentValue != null) this.input = `${textToHighlight.currentValue}`
+    if (textContent?.currentValue != null)
+      this.text = `${textContent.currentValue}`
+    if (textToHighlight?.currentValue != null)
+      this.input = `${textToHighlight.currentValue}`
     this.updateValues()
   }
 
@@ -58,7 +60,10 @@ export class NgvTypeaheadHighlightComponent implements OnChanges {
    * @param splittedInput the input splitted in an array
    * @returns { start: number, end: number } Indexes of where the match starts and ends in the text displatyed
    */
-  private getHighlightedPart(splittedText: string[], splittedInput: string[]): { start: number; end: number } {
+  private getHighlightedPart(
+    splittedText: string[],
+    splittedInput: string[],
+  ): { start: number; end: number } {
     let start = -1
     let end = -1
 

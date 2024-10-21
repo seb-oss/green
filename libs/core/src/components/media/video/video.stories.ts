@@ -8,7 +8,7 @@ import { html } from 'lit'
 const meta: Meta = {
   title: 'Docs/Media/Video',
   component: 'gds-video',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -17,9 +17,9 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   args: {
     ratio: '16/9',
@@ -32,10 +32,10 @@ const DefaultParams: Story = {
     muted: true,
     playsinline: true,
     loop: true,
-    events: 'none'
-  }
+    events: 'none',
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }

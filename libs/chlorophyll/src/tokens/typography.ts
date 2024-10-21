@@ -7,20 +7,20 @@ export type Weight = 'light' | 'regular' | 'medium' | 'bold'
 export const fonts: Record<Weight, Font> = {
   light: {
     family: 'SEBSansSerif',
-    weight: '300'
+    weight: '300',
   },
   regular: {
     family: 'SEBSansSerif',
-    weight: '400'
+    weight: '400',
   },
   medium: {
     family: 'SEBSansSerif',
-    weight: '500'
+    weight: '500',
   },
   bold: {
     family: 'SEBSansSerif',
-    weight: '700'
-  }
+    weight: '700',
+  },
 }
 
 export interface TypeScale {
@@ -47,141 +47,141 @@ export const typography: Record<Screen, Typography> = {
     display: {
       ...fonts.regular,
       size: '96px',
-      lineHeight: '100px'
+      lineHeight: '100px',
     },
     h1: {
       ...fonts.regular,
       size: '48px',
-      lineHeight: '56px'
+      lineHeight: '56px',
     },
     h2: {
       ...fonts.regular,
       size: '32px',
-      lineHeight: '40px'
+      lineHeight: '40px',
     },
     h3: {
       ...fonts.regular,
       size: '24px',
-      lineHeight: '32px'
+      lineHeight: '32px',
     },
     h4: {
       ...fonts.regular,
       size: '20px',
-      lineHeight: '28px'
+      lineHeight: '28px',
     },
     h5: {
       ...fonts.medium,
       size: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
     },
     h6: {
       ...fonts.medium,
       size: '14px',
-      lineHeight: '20px'
+      lineHeight: '20px',
     },
     body: {
       ...fonts.regular,
       size: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
     },
     link: {
       ...fonts.medium,
       size: '16px',
-      lineHeight: '24px'
-    }
+      lineHeight: '24px',
+    },
   },
   tablet: {
     display: {
       ...fonts.regular,
       size: '64px',
-      lineHeight: '72px'
+      lineHeight: '72px',
     },
     h1: {
       ...fonts.regular,
       size: '40px',
-      lineHeight: '48px'
+      lineHeight: '48px',
     },
     h2: {
       ...fonts.regular,
       size: '24px',
-      lineHeight: '32px'
+      lineHeight: '32px',
     },
     h3: {
       ...fonts.regular,
       size: '20px',
-      lineHeight: '28px'
+      lineHeight: '28px',
     },
     h4: {
       ...fonts.regular,
       size: '20px',
-      lineHeight: '28px'
+      lineHeight: '28px',
     },
     h5: {
       ...fonts.medium,
       size: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
     },
     h6: {
       ...fonts.medium,
       size: '14px',
-      lineHeight: '20px'
+      lineHeight: '20px',
     },
     body: {
       ...fonts.regular,
       size: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
     },
     link: {
       ...fonts.medium,
       size: '16px',
-      lineHeight: '24px'
-    }
+      lineHeight: '24px',
+    },
   },
   mobile: {
     display: {
       ...fonts.regular,
       size: '48px',
-      lineHeight: '56px'
+      lineHeight: '56px',
     },
     h1: {
       ...fonts.regular,
       size: '32px',
-      lineHeight: '40px'
+      lineHeight: '40px',
     },
     h2: {
       ...fonts.regular,
       size: '24px',
-      lineHeight: '32px'
+      lineHeight: '32px',
     },
     h3: {
       ...fonts.regular,
       size: '20px',
-      lineHeight: '28px'
+      lineHeight: '28px',
     },
     h4: {
       ...fonts.regular,
       size: '20px',
-      lineHeight: '28px'
+      lineHeight: '28px',
     },
     h5: {
       ...fonts.medium,
       size: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
     },
     h6: {
       ...fonts.medium,
       size: '14px',
-      lineHeight: '20px'
+      lineHeight: '20px',
     },
     body: {
       ...fonts.regular,
       size: '16px',
-      lineHeight: '24px'
+      lineHeight: '24px',
     },
     link: {
       ...fonts.medium,
       size: '16px',
-      lineHeight: '24px'
-    }
-  }
+      lineHeight: '24px',
+    },
+  },
 }

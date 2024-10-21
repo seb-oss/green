@@ -6,20 +6,33 @@
     tabindex="-1"
     [attr.data-thook]="thook + '-options'"
     [attr.aria-labelledby]="id + '-label'"
-    [attr.aria-activedescendant]="state ? id + '-option-' + state?.key : undefined"
+    [attr.aria-activedescendant]="
+      state ? id + '-option-' + state?.key : undefined
+    "
   >
     <ng-container *ngFor="let item of options">
       <!-- OPTION -->
       <ng-container *ngIf="!isGroup(item)">
-        <ng-template *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"></ng-template>
+        <ng-template
+          *ngTemplateOutlet="listItemTemplate; context: { $implicit: item }"
+        ></ng-template>
       </ng-container>
 
       <!-- OPTION GROUP -->
-      <li class="gds-dropdown__options__label group" [attr.data-thook]="thook + '-option-group'" *ngIf="isGroup(item)">
+      <li
+        class="gds-dropdown__options__label group"
+        [attr.data-thook]="thook + '-option-group'"
+        *ngIf="isGroup(item)"
+      >
         <div class="sdv-list__label">{{ t(item.label) }}</div>
         <ul [attr.aria-disabled]="item.disabled">
           <ng-container *ngFor="let option of castGroup(item).options">
-            <ng-template *ngTemplateOutlet="listItemTemplate; context: { $implicit: option }"></ng-template>
+            <ng-template
+              *ngTemplateOutlet="
+                listItemTemplate;
+                context: { $implicit: option }
+              "
+            ></ng-template>
           </ng-container>
         </ul>
       </li>
@@ -38,12 +51,20 @@
       #liElem
       [attr.data-thook]="thook + '-option-' + option.key"
       [attr.aria-disabled]="option.disabled"
-      [attr.aria-selected]="option.key === selectedValue?.key && !!selectedValue?.key"
+      [attr.aria-selected]="
+        option.key === selectedValue?.key && !!selectedValue?.key
+      "
       [attr.aria-focus]="option.key === state?.key && !option.disabled"
       [nggvTooltip]="isOverflow(liElem) ? t(option.label) : undefined"
       (click)="updateState(option, $event)"
     >
-      <ng-template *ngTemplateOutlet="basicOptionContentTpl; context: { $implicit: option }"> </ng-template>
+      <ng-template
+        *ngTemplateOutlet="
+          basicOptionContentTpl;
+          context: { $implicit: option }
+        "
+      >
+      </ng-template>
     </li>
     <!-- Checking overflow on custom templates do not work skip adding nggvToolTip if custom template is provided -->
     <li
@@ -56,11 +77,16 @@
       #liElem
       [attr.data-thook]="thook + '-option-' + option.key"
       [attr.aria-disabled]="option.disabled"
-      [attr.aria-selected]="option.key === selectedValue?.key && !!selectedValue?.key"
+      [attr.aria-selected]="
+        option.key === selectedValue?.key && !!selectedValue?.key
+      "
       [attr.aria-focus]="option.key === state?.key && !option.disabled"
       (click)="updateState(option, $event)"
     >
-      <ng-template *ngTemplateOutlet="optionContentTpl; context: { $implicit: option }"> </ng-template>
+      <ng-template
+        *ngTemplateOutlet="optionContentTpl; context: { $implicit: option }"
+      >
+      </ng-template>
     </li>
   </ng-template>
 

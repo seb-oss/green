@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { componentWrapperDecorator, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import {
+  componentWrapperDecorator,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 import { NgvCardComponent } from './card.component'
 
 export default {
@@ -9,17 +14,19 @@ export default {
   decorators: [
     moduleMetadata({
       imports: [CommonModule],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
-    componentWrapperDecorator(story => `<div style="width: 20rem">${story}</div>`)
-  ]
+    componentWrapperDecorator(
+      (story) => `<div style="width: 20rem">${story}</div>`,
+    ),
+  ],
 } as Meta
 
 const BasicTemplate: StoryFn<NgvCardComponent> = () => ({
   template: /*html*/ `
     <nggv-card>
       Basic card
-    </ngv-card>`
+    </nggv-card>`,
 })
 
 const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
@@ -31,7 +38,7 @@ const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
         <div class="card-column"> Column 3 </div>
         <div class="card-column"> Column 4 </div>
       </div>
-    </ngv-card>`
+    </nggv-card>`,
 })
 
 const TemplateWithDivider: StoryFn<NgvCardComponent> = () => ({
@@ -53,7 +60,7 @@ const TemplateWithDivider: StoryFn<NgvCardComponent> = () => ({
         <div class="card-column"> Sum </div>
         <div class="card-column"> 33,00 € </div>
       </div>
-    </ngv-card>`
+    </nggv-card>`,
 })
 
 export const Basic = BasicTemplate.bind({})

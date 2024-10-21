@@ -8,7 +8,7 @@ describe('Component: FlexBox', () => {
     alignSelf: 'auto',
     justifyContent: 'start',
     flexDirection: 'column',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   }
 
   it('Should render', () => {
@@ -18,9 +18,11 @@ describe('Component: FlexBox', () => {
 
   it('Should render props', () => {
     render(<Flexbox {...flexboxProps}>i am child</Flexbox>)
-    const className: string = screen.getByText('i am child').getAttribute('class') as string
+    const className: string = screen
+      .getByText('i am child')
+      .getAttribute('class') as string
     expect(className).toBe(
-      'd-flex align-items-start align-content-start align-self-auto justify-content-start flex-column flex-wrap'
+      'd-flex align-items-start align-content-start align-self-auto justify-content-start flex-column flex-wrap',
     )
   })
 
@@ -28,8 +30,10 @@ describe('Component: FlexBox', () => {
     render(
       <Flexbox className="customName" {...flexboxProps}>
         i am child
-      </Flexbox>
+      </Flexbox>,
     )
-    expect(screen.getByText('i am child').getAttribute('class')).toContain('customName')
+    expect(screen.getByText('i am child').getAttribute('class')).toContain(
+      'customName',
+    )
   })
 })

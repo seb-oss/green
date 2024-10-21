@@ -24,8 +24,8 @@ export { targetLocales }
 export const gdsInitLocalization = (
   { extraLocales, extraTemplates }: LocalizationConfig = {
     extraLocales: [],
-    extraTemplates: new Map()
-  }
+    extraTemplates: new Map(),
+  },
 ) => {
   const _targetLocales = [...targetLocales] as string[]
 
@@ -46,6 +46,6 @@ export const gdsInitLocalization = (
         return localModule
       }
       return Promise.reject(new Error(`Locale ${locale} not found`))
-    }
+    },
   })
 }

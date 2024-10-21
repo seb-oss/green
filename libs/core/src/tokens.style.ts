@@ -24,10 +24,7 @@ const tokens = [
 
 // TODO: Consider more efficient way to apply tokens
 const tokesStyleSheets = new CSSStyleSheet()
-tokesStyleSheets.replaceSync(`
-  :root, :root[gds-theme="light"] { ${colorV2Light} }
-  :root[gds-theme="dark"] { ${colorV2Dark} }
-  `)
+tokesStyleSheets.replaceSync(`:root { ${colorV2Light} }`)
 document.adoptedStyleSheets = [
   ...(document.adoptedStyleSheets || []),
   tokesStyleSheets,

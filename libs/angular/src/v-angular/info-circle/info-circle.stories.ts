@@ -10,9 +10,9 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [NgvInfoCircleComponent],
-      imports: [CommonModule, NgvTooltipModule]
-    })
-  ]
+      imports: [CommonModule, NgvTooltipModule],
+    }),
+  ],
 } as Meta
 
 type StoryArgs = NgvInfoCircleComponent
@@ -24,12 +24,12 @@ const Template: StoryFn<StoryArgs> = (args: StoryArgs) => ({
     [info]="info">
     </nggv-info-circle>
   </div>`,
-  props: { ...args }
+  props: { ...args },
 })
 
 export const Primary = Template.bind({})
 
 Primary.args = {
   info: 'Very informative and supporting text',
-  thook: 'help-text'
+  thook: 'help-text',
 }

@@ -38,11 +38,13 @@ $greyScale: map-get(newTokens.$grey, light);
     $sides: (
       'top',
       'right',
-      'left'
+      'left',
     )
   );
 
-  @include common.add-hover-state(map-get($greyScale, 1000)); // This is actually Base800
+  @include common.add-hover-state(
+    map-get($greyScale, 1000)
+  ); // This is actually Base800
 
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
@@ -65,7 +67,7 @@ $greyScale: map-get(newTokens.$grey, light);
   &:not(.gds-tabs--fluid)::after {
     @include common.add-border(
       $sides: (
-        'bottom'
+        'bottom',
       )
     );
     @include common.add-border-color();

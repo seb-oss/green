@@ -5,7 +5,7 @@ const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 export default {
   title: 'Components/Form/Checkbox',
   component: Checkbox,
-  args: {}
+  args: {},
 }
 
 export const Default = {
@@ -13,11 +13,11 @@ export const Default = {
   name: 'Checkbox',
 
   parameters: {
-    componentIds: ['component-checkbox']
+    componentIds: ['component-checkbox'],
   },
 
   args: {
     label: 'Checkbox input',
-    defaultChecked: false
-  }
+    defaultChecked: false,
+  },
 }

@@ -11,7 +11,7 @@ describe('[NgvModal]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvFoldOutComponent]
+        declarations: [NgvFoldOutComponent],
       }).compileComponents()
     }))
 

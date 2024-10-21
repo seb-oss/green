@@ -7,7 +7,7 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 const GdsIconArrowRight = createComponent({
   tagName: getScopedTagName('gds-icon-arrow-right'),
   elementClass: IconArrowRight,
-  react: React
+  react: React,
 })
 
 const Template = ({ ...props }) => <Link {...props} />
@@ -18,9 +18,9 @@ export default {
 
   argTypes: {
     button: {
-      options: [undefined, 'primary', 'secondary', 'ghost']
-    }
-  }
+      options: [undefined, 'primary', 'secondary', 'ghost'],
+    },
+  },
 }
 
 export const Default = {
@@ -28,13 +28,13 @@ export const Default = {
   name: 'Link',
 
   parameters: {
-    componentIds: ['component-inlinelinks']
+    componentIds: ['component-inlinelinks'],
   },
 
   args: {
     children: 'Go to seb.se',
-    href: 'https://seb.se'
-  }
+    href: 'https://seb.se',
+  },
 }
 
 export const OnBackground = {
@@ -58,7 +58,7 @@ export const OnBackground = {
         <Link href="https://seb.se">Go to seb.se in red</Link>
       </div>
     </div>
-  )
+  ),
 }
 
 export const AsButton = {
@@ -74,7 +74,7 @@ export const AsButton = {
         Go to seb.se as ghost button
       </Link>
     </div>
-  )
+  ),
 }
 
 export const Secondary = {
@@ -85,5 +85,5 @@ export const Secondary = {
         <GdsIconArrowRight />
       </Link>
     </div>
-  )
+  ),
 }

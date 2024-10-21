@@ -10,7 +10,7 @@ export class GdsRadioGroup extends LitElement {
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true
+    delegatesFocus: true,
   }
 
   // Private members
@@ -43,14 +43,20 @@ export class GdsRadioGroup extends LitElement {
   update(changedProperties: Map<PropertyKey, unknown>) {
     super.update(changedProperties)
     if (!this.inputElement) {
-      this.inputElement = this.shadowRoot?.getElementById('radio') as HTMLInputElement
+      this.inputElement = this.shadowRoot?.getElementById(
+        'radio',
+      ) as HTMLInputElement
     }
     this.reflectAttributesToInput()
   }
 
   render() {
     return html`
-      <fieldset class="gds-radio-group" role="radiogroup" aria-labelledby="label">
+      <fieldset
+        class="gds-radio-group"
+        role="radiogroup"
+        aria-labelledby="label"
+      >
         <label>${this.label}</label>
         <slot></slot>
       </fieldset>

@@ -1,10 +1,19 @@
-import { findByLabelText, fireEvent, render, screen, act } from '@testing-library/react'
+import {
+  findByLabelText,
+  fireEvent,
+  render,
+  screen,
+  act,
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { FormItems, TextInput } from '.'
 import * as FormContext from './formContext'
 
 describe('FormItems Component', () => {
-  const mockFormContext: jest.SpyInstance = jest.spyOn(FormContext, 'useFormContext')
+  const mockFormContext: jest.SpyInstance = jest.spyOn(
+    FormContext,
+    'useFormContext',
+  )
 
   beforeEach(() => {
     mockFormContext.mockImplementation(() => ({
@@ -12,7 +21,7 @@ describe('FormItems Component', () => {
       setErrors: jest.fn(),
       setFields: jest.fn(),
       errors: null,
-      values: null
+      values: null,
     }))
   })
 
@@ -20,7 +29,7 @@ describe('FormItems Component', () => {
     const { container } = render(
       <FormItems name="text">
         <TextInput label="Some field" />
-      </FormItems>
+      </FormItems>,
     )
 
     const textInput = await findByLabelText(container, 'Some field')
@@ -33,19 +42,19 @@ describe('FormItems Component', () => {
     mockFormContext.mockImplementation(() => ({
       setValues: mockFn,
       setFields: jest.fn(),
-      setErrors: mockFn
+      setErrors: mockFn,
     }))
     const { container } = render(
       <FormItems name="text">
         <TextInput label="Some field" />
-      </FormItems>
+      </FormItems>,
     )
 
     const input = await findByLabelText(container, 'Some field')
 
     await act(async () => {
       fireEvent.change(input as HTMLInputElement, {
-        target: { value: 'new value' }
+        target: { value: 'new value' },
       })
     })
 
@@ -59,7 +68,7 @@ describe('FormItems Component', () => {
     render(
       <FormItems name="text" onChange={mockFn}>
         <TextInput label="Some field" />
-      </FormItems>
+      </FormItems>,
     )
     expect(mockFn).not.toBeCalled()
     await act(async () => {

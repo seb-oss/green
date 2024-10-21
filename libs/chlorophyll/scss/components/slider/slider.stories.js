@@ -31,23 +31,23 @@ export default {
   title: 'Components/Slider',
 
   parameters: {
-    componentIds: ['component-slider']
+    componentIds: ['component-slider'],
   },
 
   argTypes: {
     unitLabel: {
-      control: 'text'
+      control: 'text',
     },
 
     showMinMax: {
-      control: 'boolean'
-    }
-  }
+      control: 'boolean',
+    },
+  },
 }
 
 export const Slider = {
   render: Template.bind({}),
-  name: 'Slider'
+  name: 'Slider',
 }
 
 export const SliderWithUnitLabel = {
@@ -55,6 +55,6 @@ export const SliderWithUnitLabel = {
   name: 'Slider with unit label',
 
   args: {
-    unitLabel: 'Kr'
-  }
+    unitLabel: 'Kr',
+  },
 }

@@ -9,7 +9,8 @@ input {
 }
 
 [id='explode']:checked ~ .gds-levels {
-  transform: rotateX(-24deg) rotateY(32deg) rotateX(90deg) translate3d(0, 0, calc(-100px));
+  transform: rotateX(-24deg) rotateY(32deg) rotateX(90deg)
+    translate3d(0, 0, calc(-100px));
   transition:
     transform 4s 0s,
     background 4s 0s;

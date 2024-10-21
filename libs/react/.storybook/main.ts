@@ -6,8 +6,8 @@ const config: StorybookConfig = {
   ...defaultConfig,
   framework: {
     name: '@storybook/react-webpack5',
-    options: {}
-  }
+    options: {},
+  },
 }
 
 config.addons?.push('@nx/react/plugins/storybook')

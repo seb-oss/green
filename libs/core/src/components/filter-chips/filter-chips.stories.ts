@@ -14,9 +14,9 @@ const meta: Meta = {
   component: 'gds-filter-chips',
   //subcomponents: { FilterChip: 'gds-filter-chip' },
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -25,24 +25,24 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   argTypes: {
     chips: {
-      control: { type: 'array' }
-    }
+      control: { type: 'array' },
+    },
   },
   args: {
     innerHTML: `<gds-filter-chip value="1">Item 1</gds-filter-chip>
 <gds-filter-chip value="2">Item 2</gds-filter-chip>
-<gds-filter-chip value="3">Item 3</gds-filter-chip>`
-  }
+<gds-filter-chip value="3">Item 3</gds-filter-chip>`,
+  },
 }
 
 export const Basic: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -61,7 +61,7 @@ export const Basic: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-filter-chips
       value="top-news"
       label="Pick news channel"
@@ -79,7 +79,7 @@ export const Usage: Story = {
     <div style={{ marginTop: '1rem' }}>
       Selected: <span id="sel">top-news</span>
     </div>
-  `
+  `,
 }
 
 /**
@@ -88,16 +88,22 @@ export const Usage: Story = {
  */
 export const MultiSelect: Story = {
   ...DefaultParams,
-  render: args => html`
-    <gds-filter-chips value="top-news,global" label="Pick news channels" multiple>
+  render: (args) => html`
+    <gds-filter-chips
+      value="top-news,global"
+      label="Pick news channels"
+      multiple
+    >
       <gds-filter-chip value="all">All</gds-filter-chip>
       <gds-filter-chip value="top-news">Top news</gds-filter-chip>
       <gds-filter-chip value="division">Division</gds-filter-chip>
       <gds-filter-chip value="global">Global</gds-filter-chip>
       <gds-filter-chip value="country">Country</gds-filter-chip>
-      <gds-filter-chip value="lcfi"> Large Corporate & Financial Institutions </gds-filter-chip>
+      <gds-filter-chip value="lcfi">
+        Large Corporate & Financial Institutions
+      </gds-filter-chip>
     </gds-filter-chips>
-  `
+  `,
 }
 
 /**
@@ -107,14 +113,16 @@ export const MultiSelect: Story = {
  */
 export const RowCollapse: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <gds-filter-chips value="top-news" label="Pick news channel" row-collapse>
       <gds-filter-chip value="all">All</gds-filter-chip>
       <gds-filter-chip value="top-news">Top news</gds-filter-chip>
       <gds-filter-chip value="division">Division</gds-filter-chip>
       <gds-filter-chip value="global">Global</gds-filter-chip>
       <gds-filter-chip value="country">Country</gds-filter-chip>
-      <gds-filter-chip value="lcfi"> Large Corporate & Financial Institutions </gds-filter-chip>
+      <gds-filter-chip value="lcfi">
+        Large Corporate & Financial Institutions
+      </gds-filter-chip>
     </gds-filter-chips>
-  `
+  `,
 }

@@ -1,7 +1,12 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
 import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link'
 import { NgvButtonComponent, ButtonStyle } from './button.component'
@@ -20,31 +25,31 @@ export default {
   component: NgvButtonComponent,
   decorators: [
     applicationConfig({
-      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
     moduleMetadata({
       imports: [CommonModule, RouterTestingModule],
-      declarations: [NgvExternalLinkDirective]
-    })
+      declarations: [NgvExternalLinkDirective],
+    }),
   ],
   argTypes: {
     type: {
       control: {
         type: 'select',
-        options: ['button', 'submit', 'reset', 'link']
-      }
+        options: ['button', 'submit', 'reset', 'link'],
+      },
     },
     buttonStyle: {
       table: {
-        disable: true
-      }
+        disable: true,
+      },
     },
     clickAction: {
       table: {
-        disable: true
-      }
-    }
-  }
+        disable: true,
+      },
+    },
+  },
 } as Meta
 
 const Template: StoryFn<NgvButtonComponent & StoryClickable> = (args: any) => ({
@@ -72,58 +77,58 @@ const Template: StoryFn<NgvButtonComponent & StoryClickable> = (args: any) => ({
     }
     .button-wrapper--GhostDark {
       background-color: #ffc500;
-    }`
+    }`,
   ],
-  props: args
+  props: args,
 })
 
 export const Primary = Template.bind({})
 Primary.args = {
   buttonStyle: ButtonStyle.Primary,
   text: getButtonText(ButtonStyle.Primary),
-  clickAction: console.log
+  clickAction: console.log,
 }
 
 export const Secondary = Template.bind({})
 Secondary.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Secondary,
-  text: getButtonText(ButtonStyle.Secondary)
+  text: getButtonText(ButtonStyle.Secondary),
 }
 
 export const Alternative = Template.bind({})
 Alternative.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Alternative,
-  text: getButtonText(ButtonStyle.Alternative)
+  text: getButtonText(ButtonStyle.Alternative),
 }
 
 export const Delete = Template.bind({})
 Delete.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Delete,
-  text: getButtonText(ButtonStyle.Delete)
+  text: getButtonText(ButtonStyle.Delete),
 }
 
 export const DeleteConfirm = Template.bind({})
 DeleteConfirm.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.DeleteConfirm,
-  text: getButtonText(ButtonStyle.DeleteConfirm)
+  text: getButtonText(ButtonStyle.DeleteConfirm),
 }
 
 export const Ghost = Template.bind({})
 Ghost.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.Ghost,
-  text: getButtonText(ButtonStyle.Ghost)
+  text: getButtonText(ButtonStyle.Ghost),
 }
 
 export const GhostDark = Template.bind({})
 GhostDark.args = {
   ...Primary.args,
   buttonStyle: ButtonStyle.GhostDark,
-  text: getButtonText(ButtonStyle.GhostDark)
+  text: getButtonText(ButtonStyle.GhostDark),
 }
 
 export const Link = Template.bind({})
@@ -132,5 +137,5 @@ Link.args = {
   type: 'link',
   href: 'https://seb.se',
   buttonStyle: ButtonStyle.Link,
-  text: getButtonText(ButtonStyle.Link)
+  text: getButtonText(ButtonStyle.Link),
 }

@@ -5,6 +5,6 @@ import { NggOnScrollDirective } from './on-scroll.directive'
 @NgModule({
   declarations: [NggOnScrollDirective],
   imports: [CommonModule],
-  exports: [NggOnScrollDirective]
+  exports: [NggOnScrollDirective],
 })
 export class NggSharedModule {}

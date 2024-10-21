@@ -18,8 +18,8 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
         new FocusEvent('gds-blur', {
           bubbles: true,
           composed: true,
-          relatedTarget: e.relatedTarget
-        })
+          relatedTarget: e.relatedTarget,
+        }),
       )
     }
 
@@ -28,8 +28,8 @@ export const Focusable = <T extends Constructor<LitElement>>(superClass: T) => {
         new FocusEvent('gds-focus', {
           bubbles: true,
           composed: true,
-          relatedTarget: e.relatedTarget
-        })
+          relatedTarget: e.relatedTarget,
+        }),
       )
     }
   }

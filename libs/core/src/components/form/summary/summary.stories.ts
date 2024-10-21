@@ -24,9 +24,9 @@ const meta: Meta = {
   title: 'Docs/Components/Form/Validation/Summary',
   component: 'gds-form-summary',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -35,10 +35,10 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
-  }
+    controls: { expanded: true },
+  },
 }
 
 /**
@@ -48,7 +48,7 @@ const DefaultParams: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
-  render: args =>
+  render: (args) =>
     html`<form style="width: 450px">
       <gds-flex flex-direction="column" gap="m">
         <gds-dropdown
@@ -58,9 +58,11 @@ export const Usage: Story = {
               if (el.value !== 'cat')
                 return [
                   { ...el.validity, valid: false, customError: true },
-                  el.value === undefined ? 'An astronaut is required' : 'Only cats can pilot rockets!'
+                  el.value === undefined
+                    ? 'An astronaut is required'
+                    : 'Only cats can pilot rockets!',
                 ]
-            }
+            },
           }}
         >
           <gds-option>Pick your astronaut</gds-option>
@@ -73,8 +75,11 @@ export const Usage: Story = {
           .validator=${{
             validate: (el: any) => {
               if (el.value === undefined)
-                return [{ ...el.validity, valid: false, customError: true }, 'A date is required']
-            }
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A date is required',
+                ]
+            },
           }}
         ></gds-datepicker>
         <gds-input
@@ -82,8 +87,11 @@ export const Usage: Story = {
           .validator=${{
             validate: (el: any) => {
               if (el.value === '')
-                return [{ ...el.validity, valid: false, customError: true }, 'A designation is required']
-            }
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A designation is required',
+                ]
+            },
           }}
         ></gds-input>
         <gds-container margin="s 0 s">
@@ -97,5 +105,5 @@ export const Usage: Story = {
           <gds-button type="reset">Reset</gds-button>
         </gds-flex>
       </gds-flex>
-    </form>`
+    </form>`,
 }

@@ -17,7 +17,7 @@ import { html } from 'lit'
 const meta: Meta = {
   title: 'Docs/Content/Text',
   component: 'gds-text',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -26,9 +26,9 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   argTypes: {
     size: {
@@ -55,32 +55,44 @@ const DefaultParams: Story = {
         'preamble-l',
         'preamble-m',
         'preamble-s',
-        'preamble-xs'
+        'preamble-xs',
       ],
-      control: { type: 'select' }
+      control: { type: 'select' },
     },
     tag: {
-      options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span', 'em', 'mark', 'strong'],
-      control: { type: 'select' }
+      options: [
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'p',
+        'span',
+        'em',
+        'mark',
+        'strong',
+      ],
+      control: { type: 'select' },
     },
     wrap: {
       options: ['balance', 'nowrap', 'pretty', 'wrap'],
-      control: { type: 'select' }
+      control: { type: 'select' },
     },
     length: {
-      control: { type: 'number' }
+      control: { type: 'number' },
     },
     min: {
-      control: { type: 'number' }
+      control: { type: 'number' },
     },
     align: {
       options: ['left', 'center', 'right', 'justify'],
-      control: { type: 'select' }
+      control: { type: 'select' },
     },
     font: {
-      control: { type: 'string' }
-    }
-  }
+      control: { type: 'string' },
+    },
+  },
 }
 
 /**
@@ -96,7 +108,7 @@ const DefaultParams: Story = {
 export const Card: Story = {
   ...DefaultParams,
   name: 'Tags',
-  render: args =>
+  render: (args) =>
     html`<gds-flex flex-direction="column" gap="2xl">
       <gds-flex flex-direction="column" gap="m">
         <gds-text>Span ( Default )</gds-text>
@@ -107,27 +119,27 @@ export const Card: Story = {
         <gds-text tag="small">small</gds-text>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
-        <gds-text .tag=${'h1'}>H1</gds-text>
-        <gds-text .tag=${'h2'}>H2</gds-text>
-        <gds-text .tag=${'h3'}>H3</gds-text>
-        <gds-text .tag=${'h4'}>H4</gds-text>
-        <gds-text .tag=${'h5'}>H5</gds-text>
-        <gds-text .tag=${'h6'}>H6</gds-text>
+        <gds-text tag="h1">H1</gds-text>
+        <gds-text tag="h2">H2</gds-text>
+        <gds-text tag="h3">H3</gds-text>
+        <gds-text tag="h4">H4</gds-text>
+        <gds-text tag="h5">H5</gds-text>
+        <gds-text tag="h6">H6</gds-text>
       </gds-flex>
-    </gds-flex>`
+    </gds-flex>`,
 }
 
 export const Weight: Story = {
   ...DefaultParams,
   name: 'Weight',
-  render: args =>
+  render: (args) =>
     html`<gds-flex flex-direction="column" gap="m">
       <gds-text weight="bold">Bold (700)</gds-text>
       <gds-text weight="medium">Medium (500)</gds-text>
       <gds-text weight="book">Book (450)</gds-text>
       <gds-text weight="regular">Regular (400)</gds-text>
       <gds-text weight="light">Light (300)</gds-text>
-    </gds-flex>`
+    </gds-flex>`,
 }
 
 /**
@@ -138,7 +150,7 @@ export const Weight: Story = {
  */
 export const Heading: Story = {
   name: 'Heading',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-text tag="h6">H6: Heading 2XS</gds-text>
       <gds-text tag="h5">H5: Heading XS</gds-text>
@@ -147,34 +159,34 @@ export const Heading: Story = {
       <gds-text tag="h2">H2: Heading Large</gds-text>
       <gds-text tag="h1">H1: Heading Extra Large</gds-text>
     </gds-flex>
-  `
+  `,
 }
 
 export const Detail: Story = {
   name: 'Detail',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text .font-size={'detail-xs'}>Detail Extra Small</gds-text>
-      <gds-text .font-size={'detail-s'}>Detail Small</gds-text>
-      <gds-text .font-size={'detail-m'}>Detail Medium</gds-text>
+      <gds-text font-size="detail-xs">Detail Extra Small</gds-text>
+      <gds-text font-size="detail-s">Detail Small</gds-text>
+      <gds-text font-size="detail-m">Detail Medium</gds-text>
     </gds-flex>
-  `
+  `,
 }
 
 export const Body: Story = {
   name: 'Body',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="body-s">Body Small</gds-text>
       <gds-text font-size="body-m">Body Medium</gds-text>
       <gds-text font-size="body-l">Body Large</gds-text>
     </gds-flex>
-  `
+  `,
 }
 
 export const Display: Story = {
   name: 'Display',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="display-s">Display Small</gds-text>
       <gds-text font-size="display-m">Display Medium</gds-text>
@@ -182,12 +194,12 @@ export const Display: Story = {
       <gds-text font-size="display-xl">Display XL</gds-text>
       <gds-text font-size="display-2xl">Display 2XL</gds-text>
     </gds-flex>
-  `
+  `,
 }
 
 export const Preamble: Story = {
   name: 'Preamble',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-text font-size="preamble-xs">Preamble Extra Small</gds-text>
       <gds-text font-size="preamble-s">Preamble Small</gds-text>
@@ -196,7 +208,7 @@ export const Preamble: Story = {
       <gds-text font-size="preamble-xl">Preamble XL</gds-text>
       <gds-text font-size="preamble-2xl">Preamble 2XL</gds-text>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -204,23 +216,25 @@ export const Preamble: Story = {
  */
 export const Lines: Story = {
   name: 'Line Clamp',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="2xl">
       <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
         <gds-text font-size="body-s">Lines:2</gds-text>
         <gds-text font-size="display-s" lines="2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
         <gds-divider></gds-divider>
         <gds-text font-size="body-s">Lines:3</gds-text>
         <gds-text font-size="display-m" lines="3">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
@@ -228,14 +242,16 @@ export const Lines: Story = {
         <gds-divider></gds-divider>
         <gds-text font-size="body-s">Lines:4</gds-text>
         <gds-text font-size="display-l" lines="4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
           incididunt ut labore et dolore magna aliqua.
         </gds-text>
       </gds-flex>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -248,11 +264,20 @@ export const Lines: Story = {
 
 export const Color: Story = {
   name: 'Color',
-  render: args => html`
+  render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
       <gds-theme color-scheme="dark">
-        <gds-flex level="1" background="primary" border-radius="xs" padding="xl" display="flex" flex-direction="column">
-          <gds-text level="1" color="primary" font-size="body-s"> Color: Content Primary </gds-text>
+        <gds-flex
+          level="1"
+          background="primary"
+          border-radius="xs"
+          padding="xl"
+          display="flex"
+          flex-direction="column"
+        >
+          <gds-text level="1" color="primary" font-size="body-s">
+            Color: Content Primary
+          </gds-text>
         </gds-flex>
         <gds-flex
           level="1"
@@ -262,7 +287,9 @@ export const Color: Story = {
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="secondary" font-size="body-m"> Color: Content Secondary </gds-text>
+          <gds-text level="1" color="secondary" font-size="body-m">
+            Color: Content Secondary
+          </gds-text>
         </gds-flex>
         <gds-flex
           level="1"
@@ -272,9 +299,11 @@ export const Color: Story = {
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="tertiary" font-size="body-l"> Color: Content Tertiary </gds-text>
+          <gds-text level="1" color="tertiary" font-size="body-l">
+            Color: Content Tertiary
+          </gds-text>
         </gds-flex>
       </gds-theme>
     </gds-flex>
-  `
+  `,
 }

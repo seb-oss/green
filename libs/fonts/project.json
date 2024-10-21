@@ -36,7 +36,9 @@
       "defaultConfiguration": "production",
       "dependsOn": ["build-base"],
       "options": {
-        "commands": ["sass libs/fonts/scss/seb-fonts.scss dist/libs/fonts/css/seb-fonts.css"]
+        "commands": [
+          "sass libs/fonts/scss/seb-fonts.scss dist/libs/fonts/css/seb-fonts.css"
+        ]
       }
     }
   }

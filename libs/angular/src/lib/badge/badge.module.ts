@@ -6,6 +6,6 @@ import { NggBadgeComponent } from './badge.component'
 @NgModule({
   declarations: [NggBadgeComponent],
   imports: [CommonModule],
-  exports: [NggBadgeComponent]
+  exports: [NggBadgeComponent],
 })
 export class NggBadgeModule {}

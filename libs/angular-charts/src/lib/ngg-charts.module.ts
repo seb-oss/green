@@ -5,6 +5,6 @@ import { NggChartComponent } from './chart/ngg-chart.component'
 @NgModule({
   imports: [CommonModule],
   declarations: [NggChartComponent],
-  exports: [NggChartComponent]
+  exports: [NggChartComponent],
 })
 export class NggChartsModule {}

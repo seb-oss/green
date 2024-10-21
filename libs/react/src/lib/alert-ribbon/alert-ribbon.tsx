@@ -25,7 +25,7 @@ export function AlertRibbon({
   onClose,
   role,
   'aria-live': ariaLive,
-  closeAriaLabel
+  closeAriaLabel,
 }: AlertRibbonProps) {
   const [closeButton, setCloseButton] = useState<ReactNode>()
   useEffect(() => {
@@ -37,14 +37,14 @@ export function AlertRibbon({
           <button className="close">
             <span className="sr-only">{closeText}</span>
             <i></i>
-          </button>
+          </button>,
         )
       else
         setCloseButton(
           <button className="close">
             <span className="sr-only">Close</span>
             <i></i>
-          </button>
+          </button>,
         )
     }
   }, [isCloseable, closeText])
@@ -66,7 +66,11 @@ export function AlertRibbon({
       return null
     }
 
-    return React.isValidElement(header) ? header : <span className="header">{header}</span>
+    return React.isValidElement(header) ? (
+      header
+    ) : (
+      <span className="header">{header}</span>
+    )
   }
 
   return (
@@ -81,7 +85,7 @@ export function AlertRibbon({
           className="close"
           type="button"
           aria-label={closeAriaLabel ?? 'Close alert'}
-          onClick={event => {
+          onClick={(event) => {
             onClose && onClose(event)
           }}
         >

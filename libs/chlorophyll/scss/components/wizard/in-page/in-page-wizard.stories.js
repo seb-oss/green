@@ -1,6 +1,8 @@
 const Template = ({ isCompleted, isStarted, stepText, title, content }) => {
   return `
-    <section class="gds-in-page-wizard-step-card card${isCompleted ? ' completed' : ''}${isStarted ? ' active' : ''}">
+    <section class="gds-in-page-wizard-step-card card${
+      isCompleted ? ' completed' : ''
+    }${isStarted ? ' active' : ''}">
       <header class="gds-in-page-wizard-step-card__header">
         <div class="gds-in-page-wizard-step-card__header__icon">
             <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><path d="M17.6203 6.60836L9.40014 14.8285L6.37976 11.8081C6.23332 11.6617 5.99588 11.6617 5.84942 11.8081L4.96554 12.692C4.8191 12.8384 4.8191 13.0759 4.96554 13.2223L9.13495 17.3917C9.28138 17.5382 9.51882 17.5382 9.66529 17.3917L19.0344 8.02258C19.1809 7.87614 19.1809 7.63871 19.0344 7.49224L18.1506 6.60836C18.0041 6.46193 17.7667 6.46193 17.6203 6.60836Z" fill="white"></path></svg>
@@ -43,30 +45,30 @@ export default {
   title: 'Components/Wizard/In-page Wizard',
 
   parameters: {
-    componentIds: ['component-inpagewizard']
+    componentIds: ['component-inpagewizard'],
   },
 
   argTypes: {
     isCompleted: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     isStarted: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     stepText: {
-      control: 'text'
+      control: 'text',
     },
 
     title: {
-      control: 'text'
+      control: 'text',
     },
 
     content: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const InPageWizardStepCard = {
@@ -78,14 +80,14 @@ export const InPageWizardStepCard = {
     isStarted: false,
     stepText: 'Step 1 of 6',
     title: 'Title',
-    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`
+    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
   },
 
   parameters: {
     docs: {
-      disable: true
-    }
-  }
+      disable: true,
+    },
+  },
 }
 
 export const CompletedStep = {
@@ -97,8 +99,8 @@ export const CompletedStep = {
     isStarted: false,
     stepText: 'Step 1 of 6',
     title: 'Title',
-    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`
-  }
+    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
+  },
 }
 
 export const CurrentStep = {
@@ -120,8 +122,8 @@ export const CurrentStep = {
           <label for="inputInvalid">Input label</label>
           <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
           <input id="inputInvalid" type="text" />
-        </div>`
-  }
+        </div>`,
+  },
 }
 
 export const NotStartedStep = {
@@ -133,6 +135,6 @@ export const NotStartedStep = {
     isStarted: false,
     stepText: 'Step 3 of 6',
     title: 'Title',
-    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`
-  }
+    content: `<dl class="gds-list"><dt>Sub title</dt><dd>Sub section text</dd><dt>Sub title</dt><dd>Sub section text</dd></dl>`,
+  },
 }

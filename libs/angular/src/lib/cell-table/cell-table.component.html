@@ -31,7 +31,10 @@
                 [row]="header.label"
                 [valueType]="getTableHeaderListValueFromNonMain(header)"
                 role="columnheader"
-                *ngFor="let header of headerNoneMain(headerList); trackBy: KeySelector"
+                *ngFor="
+                  let header of headerNoneMain(headerList);
+                  trackBy: KeySelector
+                "
               ></div>
             </div>
           </div>
@@ -46,13 +49,20 @@
                 [valueType]="getTableHeaderListValueFromNonMain(header)"
                 [attr.valueType]="header.valueType"
                 role="cell"
-                *ngFor="let header of headerNoneMain(headerList); trackBy: KeySelector"
+                *ngFor="
+                  let header of headerNoneMain(headerList);
+                  trackBy: KeySelector
+                "
               ></div>
             </div>
           </div>
         </div>
       </div>
-      <div *ngIf="clickableRows" role="row" class="d-grid align-items-center ms-4 me-4 cell-table--arrow-container">
+      <div
+        *ngIf="clickableRows"
+        role="row"
+        class="d-grid align-items-center ms-4 me-4 cell-table--arrow-container"
+      >
         <div role="cell">
           <div
             role="button"

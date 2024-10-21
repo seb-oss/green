@@ -32,14 +32,16 @@ describe('Component: Table header cell', () => {
       setTableState: setTableStateFn,
       onRowSelect: null,
       onRowExpand: null,
-      onSort: sortFn
+      onSort: sortFn,
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableHeader accessor="test">child</WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
-    await user.click(document.body.querySelector('.sg-table-sort') as HTMLElement)
+    await user.click(
+      document.body.querySelector('.sg-table-sort') as HTMLElement,
+    )
     expect(setTableStateFn).toBeCalled()
     expect(sortFn).toBeCalled()
   })
@@ -51,25 +53,27 @@ describe('Component: Table header cell', () => {
     const mockProviderValue: any = {
       tableState: {
         sortedColumn: { accessor: 'test', sortDirection: SortDirection.ASC },
-        expandedRows: []
+        expandedRows: [],
       },
       setTableState: setTableStateFn,
       onRowSelect: null,
       onRowExpand: null,
-      onSort: sortFn
+      onSort: sortFn,
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableHeader accessor="test">child</WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
-    await user.click(document.body.querySelector('.sg-table-sort') as HTMLElement)
+    await user.click(
+      document.body.querySelector('.sg-table-sort') as HTMLElement,
+    )
     expect(setTableStateFn).toBeCalledWith({
       ...mockProviderValue.tableState,
       sortedColumn: {
         ...mockProviderValue.tableState.sortedColumn,
-        sortDirection: SortDirection.DESC
-      }
+        sortDirection: SortDirection.DESC,
+      },
     })
     expect(sortFn).toBeCalled()
   })
@@ -82,18 +86,18 @@ describe('Component: Table header cell', () => {
       setTableState: setTableStateFn,
       onRowSelect: null,
       onRowExpand: null,
-      onSort: sortFn
+      onSort: sortFn,
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableHeader accessor="test" sortDirection={SortDirection.ASC}>
           child
         </WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
     expect(setTableStateFn).toBeCalledWith({
       ...mockProviderValue.tableState,
-      sortedColumn: { accessor: 'test', sortDirection: SortDirection.ASC }
+      sortedColumn: { accessor: 'test', sortDirection: SortDirection.ASC },
     })
   })
 
@@ -103,20 +107,22 @@ describe('Component: Table header cell', () => {
     const mockProviderValue: any = {
       tableState: {
         sortedColumn: { accessor: 'test', sortDirection: SortDirection.ASC },
-        expandedRows: []
+        expandedRows: [],
       },
       setTableState: setTableStateFn,
       onRowSelect: null,
       onRowExpand: null,
-      onSort: sortFn
+      onSort: sortFn,
     }
     render(
       <TableContext.Provider value={mockProviderValue}>
         <WrapperTableHeader disableSort accessor="test">
           child
         </WrapperTableHeader>
-      </TableContext.Provider>
+      </TableContext.Provider>,
     )
-    expect(document.body.querySelector('th')?.classList.contains('sortable')).toBeFalsy()
+    expect(
+      document.body.querySelector('th')?.classList.contains('sortable'),
+    ).toBeFalsy()
   })
 })

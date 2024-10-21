@@ -33,7 +33,9 @@ $size: 220px;
   }
 
   .inner-circle {
-    @include mixins.use-circle(functions.get-inner-circle-size($size, $ring-width));
+    @include mixins.use-circle(
+      functions.get-inner-circle-size($size, $ring-width)
+    );
     display: flex;
     flex-direction: column;
     justify-content: center;

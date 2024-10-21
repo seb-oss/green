@@ -24,5 +24,5 @@ export const PaginationI18n: IPaginationI18n = {
   jumpToPageLabel: 'Go to page',
   getPageLabel: (index: number) => {
     return `Page ${index + 1}`
-  }
+  },
 }

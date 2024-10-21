@@ -26,7 +26,7 @@ const Footer = () => (
 
 export default {
   title: 'Components/Card',
-  component: Card
+  component: Card,
 }
 
 export const Default = {
@@ -34,12 +34,12 @@ export const Default = {
   name: 'Card',
 
   parameters: {
-    componentIds: ['component-card']
+    componentIds: ['component-card'],
   },
 
   args: {
     header: <Header />,
     footer: <Footer />,
-    children: 'Card content'
-  }
+    children: 'Card content',
+  },
 }

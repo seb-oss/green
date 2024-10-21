@@ -42,7 +42,7 @@ export class TransitionalStyles {
     if (!globalThis.__gdsTransitionalStyles?.[VER_SUFFIX])
       globalThis.__gdsTransitionalStyles = {
         ...globalThis.__gdsTransitionalStyles,
-        [VER_SUFFIX]: new TransitionalStyles()
+        [VER_SUFFIX]: new TransitionalStyles(),
       }
 
     return globalThis.__gdsTransitionalStyles[VER_SUFFIX]

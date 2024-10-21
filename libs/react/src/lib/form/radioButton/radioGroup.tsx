@@ -1,10 +1,17 @@
 import React, { useState, useRef, ChangeEvent } from 'react'
-import { IValidator, randomId, IExpandableInformation, ILabelAndLabelInformation } from '@sebgroup/extract'
+import {
+  IValidator,
+  randomId,
+  IExpandableInformation,
+  ILabelAndLabelInformation,
+} from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import classNames from 'classnames'
 import { RadioButtonProps } from './radioButton'
 
-export interface RadioGroupProps extends IExpandableInformation, ILabelAndLabelInformation {
+export interface RadioGroupProps
+  extends IExpandableInformation,
+    ILabelAndLabelInformation {
   label?: string
   title?: string
   valueSelected?: string
@@ -31,12 +38,18 @@ export const RadioGroup = ({
   onChange,
   name: propName = randomId(),
   horizontal,
-  children
+  children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
-  if (title) console.warn('"title" prop is deprecated. Please use "label" instead.')
-  if (description) console.warn('"description" prop is deprecated. Please use "labelInformation" instead.')
+  if (title)
+    console.warn('"title" prop is deprecated. Please use "label" instead.')
+  if (description)
+    console.warn(
+      '"description" prop is deprecated. Please use "labelInformation" instead.',
+    )
 
-  const [selected, setSelected] = useState<string | undefined>(valueSelected ?? defaultSelected)
+  const [selected, setSelected] = useState<string | undefined>(
+    valueSelected ?? defaultSelected,
+  )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
   const [name] = useState(propName)
   const [uniqueId] = useState(randomId())
@@ -58,7 +71,8 @@ export const RadioGroup = ({
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
-      const form: HTMLFormElement = radioBtnRef?.current?.form as HTMLFormElement
+      const form: HTMLFormElement = radioBtnRef?.current
+        ?.form as HTMLFormElement
       const resetListener = () => {
         setSelected(undefined)
       }
@@ -80,34 +94,38 @@ export const RadioGroup = ({
     label: labelFromTitle,
     expandableInfo,
     expandableInfoButtonLabel,
-    role: 'radiogroup'
+    role: 'radiogroup',
   }
 
   const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
-    'gds-radio-group-wrapper--horizontal': horizontal
+    'gds-radio-group-wrapper--horizontal': horizontal,
   })
 
   const describedBy = classNames({
-    [`${uniqueId}_message`]: validator?.message !== undefined && validator.message.length > 0,
+    [`${uniqueId}_message`]:
+      validator?.message !== undefined && validator.message.length > 0,
     [`${uniqueId}_info`]: labelInformation,
-    [`gds-expandable-info-${uniqueId}`]: expandableInfo
+    [`gds-expandable-info-${uniqueId}`]: expandableInfo,
   })
 
   return (
     <FormItem {...formItemProps} inputId={uniqueId}>
       <div className={radioGroupWrapperClassNames}>
-        {React.Children.map(children as React.ReactElement, (radioButton: React.ReactElement<RadioButtonProps>) => {
-          return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
-            ? React.cloneElement(radioButton, {
-                'aria-describedby': describedBy,
-                validator: validator,
-                onChange: handleOnChange,
-                checked: selected === radioButton.props.value,
-                name,
-                ref: radioBtnRef
-              })
-            : radioButton
-        })}
+        {React.Children.map(
+          children as React.ReactElement,
+          (radioButton: React.ReactElement<RadioButtonProps>) => {
+            return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
+              ? React.cloneElement(radioButton, {
+                  'aria-describedby': describedBy,
+                  validator: validator,
+                  onChange: handleOnChange,
+                  checked: selected === radioButton.props.value,
+                  name,
+                  ref: radioBtnRef,
+                })
+              : radioButton
+          },
+        )}
       </div>
     </FormItem>
   )

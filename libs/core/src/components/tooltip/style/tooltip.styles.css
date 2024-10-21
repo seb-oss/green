@@ -6,7 +6,11 @@
       --gds-tooltip-bg-color: #000;
       --gds-tooltip-bg-alpha: 90%;
       --gds-tooltip-fs: 14px;
-      --gds-tooltip-bg: color-mix(in srgb, var(--gds-tooltip-bg-color) var(--gds-tooltip-bg-alpha), transparent);
+      --gds-tooltip-bg: color-mix(
+        in srgb,
+        var(--gds-tooltip-bg-color) var(--gds-tooltip-bg-alpha),
+        transparent
+      );
       --gds-tooltip-color: #fff;
       --gds-tooltip-offset: 8px;
       --gds-tooltip-arrow: 6px;
@@ -18,7 +22,10 @@
 
     @media (prefers-color-scheme: dark) {
       :host {
-        --gds-tooltip-color-bg: var(--gds-tooltip-color-bg-dark, var(--gds-color-grey-20));
+        --gds-tooltip-color-bg: var(
+          --gds-tooltip-color-bg-dark,
+          var(--gds-color-grey-20)
+        );
       }
     }
   }
@@ -142,14 +149,32 @@
     }
 
     @layer trigger {
-      &:hover:is(:not([position]), [position^='up'], [position^='down'])::before,
-      &:hover:is(:not([position]), [position^='up'], [position^='down'])::after {
-        animation: gds-tooltip-animation-y 300ms var(--gds-tooltip-transition-easing) forwards;
+      &:hover:is(
+          :not([position]),
+          [position^='up'],
+          [position^='down']
+        )::before,
+      &:hover:is(
+          :not([position]),
+          [position^='up'],
+          [position^='down']
+        )::after {
+        animation: gds-tooltip-animation-y 300ms
+          var(--gds-tooltip-transition-easing) forwards;
       }
 
-      &:hover:is(:not([position]), [position^='left'], [position^='right'])::before,
-      &:hover:is(:not([position]), [position^='left'], [position^='right'])::after {
-        animation: gds-tooltip-animation-h 300ms var(--gds-tooltip-transition-easing) forwards;
+      &:hover:is(
+          :not([position]),
+          [position^='left'],
+          [position^='right']
+        )::before,
+      &:hover:is(
+          :not([position]),
+          [position^='left'],
+          [position^='right']
+        )::after {
+        animation: gds-tooltip-animation-h 300ms
+          var(--gds-tooltip-transition-easing) forwards;
       }
     }
   }

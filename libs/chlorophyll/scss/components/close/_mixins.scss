@@ -91,11 +91,19 @@ $close-icon-color: var(--text-primary-color);
 
   @include common.media-breakpoint-up('md') {
     &:not(:disabled, .disabled):hover > i {
-      background: color-mix(in srgb, var(--gds-sys-color-font) 10%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--gds-sys-color-font) 10%,
+        transparent
+      );
     }
 
     &:not(:disabled, .disabled):hover:active > i {
-      background: color-mix(in srgb, var(--gds-sys-color-font) 20%, transparent);
+      background: color-mix(
+        in srgb,
+        var(--gds-sys-color-font) 20%,
+        transparent
+      );
     }
   }
 }

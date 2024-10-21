@@ -1,7 +1,8 @@
 @use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 @use '../../../../chlorophyll/scss/components/button/mixins' as button;
 @use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as validation;
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
 @use '../../../../chlorophyll/scss/tokens' as tokens;
 
 :host {

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core'
 import { BadgeType } from '@sebgroup/extract'
 
 @Component({
@@ -14,7 +22,7 @@ import { BadgeType } from '@sebgroup/extract'
       <i></i>
     </button>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggBadgeComponent implements OnInit {
   /** The color of the component */

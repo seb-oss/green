@@ -6,28 +6,28 @@
 $variants: (
   'info': (
     color: hsl(var(--sg-intent-info-hsl-contrast)),
-    background: hsl(var(--sg-intent-info-hsl))
+    background: hsl(var(--sg-intent-info-hsl)),
   ),
   'success': (
     color: hsl(var(--sg-intent-success-hsl-contrast)),
-    background: hsl(var(--sg-intent-success-hsl))
+    background: hsl(var(--sg-intent-success-hsl)),
   ),
   'warning': (
     color: hsl(var(--sg-intent-warning-hsl-contrast)),
-    background: hsl(var(--sg-intent-warning-hsl))
+    background: hsl(var(--sg-intent-warning-hsl)),
   ),
   'danger': (
     color: hsl(var(--sg-intent-critical-hsl-contrast)),
-    background: hsl(var(--sg-intent-critical-hsl))
+    background: hsl(var(--sg-intent-critical-hsl)),
   ),
   'light': (
     color: hsl(var(--sg-hsl-light-contrast)),
-    background: hsl(var(--sg-hsl-light))
+    background: hsl(var(--sg-hsl-light)),
   ),
   'dark': (
     color: hsl(var(--sg-hsl-dark-contrast)),
-    background: hsl(var(--sg-hsl-dark))
-  )
+    background: hsl(var(--sg-hsl-dark)),
+  ),
 );
 
 $height: 24px;

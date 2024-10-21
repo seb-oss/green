@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil, assert } from '@open-wc/testing'
+import {
+  fixture,
+  html as testingHtml,
+  waitUntil,
+  assert,
+} from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
@@ -10,7 +15,10 @@ import type { GdsFormSummary } from '@sebgroup/green-core/components/form/summar
 import '@sebgroup/green-core/components/dropdown'
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
-import { htmlTemplateTagFactory, getScopedTagName } from '@sebgroup/green-core/scoping'
+import {
+  htmlTemplateTagFactory,
+  getScopedTagName,
+} from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -26,7 +34,7 @@ describe('<gds-form-summary>', () => {
         html`<form>
           <gds-dropdown .invalid=${true} label="Dropdown"></gds-dropdown>
           <gds-form-summary id="summary"></gds-form-summary>
-        </form>`
+        </form>`,
       )
       const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
       await summaryEl.updateComplete
@@ -36,7 +44,9 @@ describe('<gds-form-summary>', () => {
 
   describe('Rendering', () => {
     it('should render', async () => {
-      const el = await fixture<GdsFormSummary>(html`<gds-form-summary></gds-form-summary>`)
+      const el = await fixture<GdsFormSummary>(
+        html`<gds-form-summary></gds-form-summary>`,
+      )
       await el.updateComplete
       expect(el).to.exist
     })
@@ -44,9 +54,13 @@ describe('<gds-form-summary>', () => {
     it('should render list items', async () => {
       const formEl = await fixture(
         html`<form>
-          <gds-dropdown .invalid=${true} label="Dropdown label" id="dropdown"></gds-dropdown>
+          <gds-dropdown
+            .invalid=${true}
+            label="Dropdown label"
+            id="dropdown"
+          ></gds-dropdown>
           <gds-form-summary id="summary"></gds-form-summary>
-        </form>`
+        </form>`,
       )
       const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
       const dropdownEl = formEl.querySelector('#dropdown') as GdsDropdown
@@ -57,7 +71,9 @@ describe('<gds-form-summary>', () => {
       console.log(formEl)
 
       expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
-      expect(summaryEl.shadowRoot?.querySelector('li')?.textContent).to.equal('Dropdown label')
+      expect(summaryEl.shadowRoot?.querySelector('li')?.textContent).to.equal(
+        'Dropdown label',
+      )
     })
   })
 })

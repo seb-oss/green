@@ -4,7 +4,9 @@
     "name": "Default",
     "title": "Components/Sortable list",
     "customParams": {
-      "componentIds": ["sortable-list"]
+      "componentIds": [
+        "sortable-list"
+      ]
     }
   },
   {
@@ -12,7 +14,9 @@
     "name": "With Custom suffix template",
     "title": "Components/Sortable list",
     "customParams": {
-      "componentIds": ["sortable-list"]
+      "componentIds": [
+        "sortable-list"
+      ]
     }
   },
   {
@@ -20,7 +24,9 @@
     "name": "Separate Unchecked List",
     "title": "Components/Sortable list",
     "customParams": {
-      "componentIds": ["sortable-list"]
+      "componentIds": [
+        "sortable-list"
+      ]
     }
   },
   {
@@ -28,7 +34,9 @@
     "name": "Read Only",
     "title": "Components/Sortable list",
     "customParams": {
-      "componentIds": ["sortable-list"]
+      "componentIds": [
+        "sortable-list"
+      ]
     }
   },
   {
@@ -36,7 +44,9 @@
     "name": "Disabled reordering and displaying drag handle",
     "title": "Components/Sortable list",
     "customParams": {
-      "componentIds": ["sortable-list"]
+      "componentIds": [
+        "sortable-list"
+      ]
     }
   },
   {
@@ -44,7 +54,9 @@
     "name": "Minimal",
     "title": "Components/Sortable list",
     "customParams": {
-      "componentIds": ["sortable-list"]
+      "componentIds": [
+        "sortable-list"
+      ]
     }
   },
   {
@@ -52,7 +64,9 @@
     "name": "Default",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": ["component-slider"]
+      "componentIds": [
+        "component-slider"
+      ]
     }
   },
   {
@@ -60,7 +74,9 @@
     "name": "Textbox",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": ["component-slider"]
+      "componentIds": [
+        "component-slider"
+      ]
     }
   },
   {
@@ -68,7 +84,9 @@
     "name": "Unit Textbox",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": ["component-slider"]
+      "componentIds": [
+        "component-slider"
+      ]
     }
   },
   {
@@ -76,7 +94,9 @@
     "name": "Error",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": ["component-slider"]
+      "componentIds": [
+        "component-slider"
+      ]
     }
   },
   {
@@ -84,7 +104,9 @@
     "name": "Disabled",
     "title": "Components/Slider",
     "customParams": {
-      "componentIds": ["component-slider"]
+      "componentIds": [
+        "component-slider"
+      ]
     }
   },
   {
@@ -92,7 +114,9 @@
     "name": "With Router",
     "title": "Components/Segmented control",
     "customParams": {
-      "componentIds": ["component-segmented-control"]
+      "componentIds": [
+        "component-segmented-control"
+      ]
     }
   },
   {
@@ -106,7 +130,9 @@
     "name": "Default",
     "title": "Components/Navigation/Pagination",
     "customParams": {
-      "componentIds": ["component-pagination"]
+      "componentIds": [
+        "component-pagination"
+      ]
     }
   },
   {
@@ -114,7 +140,12 @@
     "name": "Default",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": ["component-dialogue", "component-slideout", "component-foldout", "component-takeover"]
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
     }
   },
   {
@@ -122,7 +153,12 @@
     "name": "Slideout",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": ["component-dialogue", "component-slideout", "component-foldout", "component-takeover"]
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
     }
   },
   {
@@ -130,7 +166,12 @@
     "name": "Takeover",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": ["component-dialogue", "component-slideout", "component-foldout", "component-takeover"]
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
     }
   },
   {
@@ -138,7 +179,12 @@
     "name": "Custom",
     "title": "Components/Modal",
     "customParams": {
-      "componentIds": ["component-dialogue", "component-slideout", "component-foldout", "component-takeover"]
+      "componentIds": [
+        "component-dialogue",
+        "component-slideout",
+        "component-foldout",
+        "component-takeover"
+      ]
     }
   },
   {
@@ -146,7 +192,9 @@
     "name": "Default",
     "title": "Components/Wizard/In page wizard step card",
     "customParams": {
-      "componentIds": ["component-inpagewizard"]
+      "componentIds": [
+        "component-inpagewizard"
+      ]
     }
   },
   {
@@ -154,7 +202,9 @@
     "name": "Disable Next",
     "title": "Components/Wizard/In page wizard step card",
     "customParams": {
-      "componentIds": ["component-inpagewizard"]
+      "componentIds": [
+        "component-inpagewizard"
+      ]
     }
   },
   {
@@ -162,7 +212,9 @@
     "name": "Multiple",
     "title": "Components/Wizard/In page wizard step card",
     "customParams": {
-      "componentIds": ["component-inpagewizard"]
+      "componentIds": [
+        "component-inpagewizard"
+      ]
     }
   },
   {
@@ -182,7 +234,9 @@
     "name": "Select",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -190,7 +244,9 @@
     "name": "Small",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -198,7 +254,9 @@
     "name": "Test",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -206,7 +264,9 @@
     "name": "Multi Select",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -214,7 +274,9 @@
     "name": "Searchable",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -222,7 +284,9 @@
     "name": "Custom Option",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -230,7 +294,9 @@
     "name": "Form",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -238,7 +304,9 @@
     "name": "Form With Reset",
     "title": "Components/Dropdown",
     "customParams": {
-      "componentIds": ["component-dropdown"]
+      "componentIds": [
+        "component-dropdown"
+      ]
     }
   },
   {
@@ -246,7 +314,9 @@
     "name": "Simple",
     "title": "Components/Datepicker",
     "customParams": {
-      "componentIds": ["component-datepicker"]
+      "componentIds": [
+        "component-datepicker"
+      ]
     }
   },
   {
@@ -254,7 +324,9 @@
     "name": "Custom Options",
     "title": "Components/Datepicker",
     "customParams": {
-      "componentIds": ["component-datepicker"]
+      "componentIds": [
+        "component-datepicker"
+      ]
     }
   },
   {
@@ -262,7 +334,9 @@
     "name": "Form",
     "title": "Components/Datepicker",
     "customParams": {
-      "componentIds": ["component-datepicker"]
+      "componentIds": [
+        "component-datepicker"
+      ]
     }
   },
   {
@@ -270,7 +344,9 @@
     "name": "Default",
     "title": "Components/Context Menu",
     "customParams": {
-      "componentIds": ["component-context-menu"]
+      "componentIds": [
+        "component-context-menu"
+      ]
     }
   },
   {
@@ -278,7 +354,9 @@
     "name": "With Label",
     "title": "Components/Context Menu",
     "customParams": {
-      "componentIds": ["component-context-menu"]
+      "componentIds": [
+        "component-context-menu"
+      ]
     }
   },
   {
@@ -286,7 +364,9 @@
     "name": "Right To Left",
     "title": "Components/Context Menu",
     "customParams": {
-      "componentIds": ["component-context-menu"]
+      "componentIds": [
+        "component-context-menu"
+      ]
     }
   },
   {
@@ -294,7 +374,9 @@
     "name": "Custom Template Default",
     "title": "Components/Context Menu",
     "customParams": {
-      "componentIds": ["component-context-menu"]
+      "componentIds": [
+        "component-context-menu"
+      ]
     }
   },
   {
@@ -302,7 +384,9 @@
     "name": "Position Relative",
     "title": "Components/Context Menu",
     "customParams": {
-      "componentIds": ["component-context-menu"]
+      "componentIds": [
+        "component-context-menu"
+      ]
     }
   },
   {
@@ -310,7 +394,9 @@
     "name": "Default",
     "title": "Components/Cell Table",
     "customParams": {
-      "componentIds": ["components-cell-table"]
+      "componentIds": [
+        "components-cell-table"
+      ]
     }
   },
   {
@@ -318,7 +404,9 @@
     "name": "Default",
     "title": "Components/Form/Button",
     "customParams": {
-      "componentIds": ["component-button"]
+      "componentIds": [
+        "component-button"
+      ]
     }
   },
   {
@@ -326,7 +414,9 @@
     "name": "Types",
     "title": "Components/Form/Button",
     "customParams": {
-      "componentIds": ["component-button"]
+      "componentIds": [
+        "component-button"
+      ]
     }
   },
   {
@@ -334,7 +424,9 @@
     "name": "Variants",
     "title": "Components/Form/Button",
     "customParams": {
-      "componentIds": ["component-button"]
+      "componentIds": [
+        "component-button"
+      ]
     }
   },
   {
@@ -342,7 +434,9 @@
     "name": "Sizes",
     "title": "Components/Form/Button",
     "customParams": {
-      "componentIds": ["component-button"]
+      "componentIds": [
+        "component-button"
+      ]
     }
   },
   {
@@ -350,7 +444,9 @@
     "name": "Multiple",
     "title": "Components/Badge",
     "customParams": {
-      "componentIds": ["component-badge"]
+      "componentIds": [
+        "component-badge"
+      ]
     }
   },
   {
@@ -358,7 +454,9 @@
     "name": "Default",
     "title": "Components/Badge",
     "customParams": {
-      "componentIds": ["component-badge"]
+      "componentIds": [
+        "component-badge"
+      ]
     }
   },
   {
@@ -366,7 +464,9 @@
     "name": "Custom",
     "title": "Components/Badge",
     "customParams": {
-      "componentIds": ["component-badge"]
+      "componentIds": [
+        "component-badge"
+      ]
     }
   },
   {
@@ -374,7 +474,9 @@
     "name": "Simple",
     "title": "Components/Accordion",
     "customParams": {
-      "componentIds": ["component-accordion"]
+      "componentIds": [
+        "component-accordion"
+      ]
     }
   },
   {
@@ -382,7 +484,9 @@
     "name": "Nosubheaders",
     "title": "Components/Accordion",
     "customParams": {
-      "componentIds": ["component-accordion"]
+      "componentIds": [
+        "component-accordion"
+      ]
     }
   },
   {
@@ -390,7 +494,9 @@
     "name": "Closeothers",
     "title": "Components/Accordion",
     "customParams": {
-      "componentIds": ["component-accordion"]
+      "componentIds": [
+        "component-accordion"
+      ]
     }
   },
   {
@@ -410,7 +516,9 @@
     "name": "Default",
     "title": "Components/Form/Input",
     "customParams": {
-      "componentIds": ["component-input"]
+      "componentIds": [
+        "component-input"
+      ]
     }
   },
   {
@@ -418,7 +526,9 @@
     "name": "Template Driven",
     "title": "Components/Form/Input",
     "customParams": {
-      "componentIds": ["component-input"]
+      "componentIds": [
+        "component-input"
+      ]
     }
   },
   {
@@ -426,7 +536,9 @@
     "name": "Reactive Forms",
     "title": "Components/Form/Input",
     "customParams": {
-      "componentIds": ["component-input"]
+      "componentIds": [
+        "component-input"
+      ]
     }
   }
 ]

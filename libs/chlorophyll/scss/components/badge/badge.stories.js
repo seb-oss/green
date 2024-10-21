@@ -17,23 +17,23 @@ export default {
   title: 'Components/Badge',
 
   parameters: {
-    componentIds: ['component-badge']
+    componentIds: ['component-badge'],
   },
 
   argTypes: {
     variant: {
       control: 'select',
-      options: ['', 'info', 'success', 'warning', 'danger', 'light', 'dark']
+      options: ['', 'info', 'success', 'warning', 'danger', 'light', 'dark'],
     },
 
     dismissible: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     text: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const Badge = {
@@ -42,12 +42,12 @@ export const Badge = {
 
   args: {
     text: 'Badge',
-    dismissible: false
+    dismissible: false,
   },
 
   parameters: {
     docs: {
-      disable: true
-    }
-  }
+      disable: true,
+    },
+  },
 }

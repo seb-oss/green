@@ -11,7 +11,7 @@ describe('SlideOutComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NgvSlideOutComponent],
-      imports: [NgvI18nTestModule]
+      imports: [NgvI18nTestModule],
     }).compileComponents()
   }))
 

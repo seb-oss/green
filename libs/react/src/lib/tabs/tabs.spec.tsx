@@ -7,7 +7,7 @@ const list: IList[] = [
   { text: 'Page 3', href: '#' },
   { text: 'Page 4', href: '#' },
   { text: 'Page 5' },
-  { text: 'Page 6', disabled: true }
+  { text: 'Page 6', disabled: true },
 ]
 
 describe('Tabs only allow text as content', () => {
@@ -15,7 +15,9 @@ describe('Tabs only allow text as content', () => {
     render(<Tabs list={list}></Tabs>)
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag).toBeTruthy()
-    anchorTag?.map((tags, index) => expect(tags.textContent).toBe(list[index].text))
+    anchorTag?.map((tags, index) =>
+      expect(tags.textContent).toBe(list[index].text),
+    )
   })
 
   it('onClick changes selectedTab', () => {
@@ -26,7 +28,9 @@ describe('Tabs only allow text as content', () => {
   })
 
   it('OnClick should fire tabOnChange function', () => {
-    const onTabChange: jest.Mock = jest.fn().mockImplementation((value: number) => value)
+    const onTabChange: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: number) => value)
     render(<Tabs list={list} onTabChange={onTabChange}></Tabs>)
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     fireEvent.click(anchorTag[1])
@@ -59,10 +63,10 @@ const tabList: TabProps[] = [
       <div>
         <div>Page 4 Content</div>
       </div>
-    )
+    ),
   },
   { title: 'Page 5', children: <>Page 5 is a Component</> },
-  { title: 'Page 6', disabled: true }
+  { title: 'Page 6', disabled: true },
 ]
 
 describe('Tabs allow components as content', () => {
@@ -74,7 +78,7 @@ describe('Tabs allow components as content', () => {
             {tab.children}
           </Tab>
         ))}
-      </Tabs>
+      </Tabs>,
     )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag).toBeTruthy()
@@ -91,7 +95,7 @@ describe('Tabs allow components as content', () => {
         <Tab title="Selected" selected>
           Tab is selected
         </Tab>
-      </Tabs>
+      </Tabs>,
     )
     const tabsContent: HTMLElement[] = screen.getAllByRole('tabpanel')
 
@@ -107,10 +111,10 @@ describe('Tabs allow components as content', () => {
             {tab.children}
           </Tab>
         ))}
-      </Tabs>
+      </Tabs>,
     )
     const tabsContent: HTMLElement[] = screen.getAllByRole('tabpanel', {
-      hidden: true
+      hidden: true,
     })
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
 
@@ -122,7 +126,9 @@ describe('Tabs allow components as content', () => {
     })
     const clickedTab = 2
     fireEvent.click(anchorTag[clickedTab])
-    expect(tabsContent[clickedTab].textContent).toBe(tabList[clickedTab].children)
+    expect(tabsContent[clickedTab].textContent).toBe(
+      tabList[clickedTab].children,
+    )
 
     tabsContent?.forEach((tab, index) => {
       if (index !== clickedTab) expect(tab.textContent).toBe('')
@@ -137,7 +143,7 @@ describe('Tabs allow components as content', () => {
             {tab.children}
           </Tab>
         ))}
-      </Tabs>
+      </Tabs>,
     )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     fireEvent.click(anchorTag[1])
@@ -145,13 +151,15 @@ describe('Tabs allow components as content', () => {
   })
 
   it('OnClick should fire tabOnChange function', () => {
-    const onTabChange: jest.Mock = jest.fn().mockImplementation((value: number) => value)
+    const onTabChange: jest.Mock = jest
+      .fn()
+      .mockImplementation((value: number) => value)
     render(
       <Tabs onTabChange={onTabChange}>
         {tabList.map((tab, index) => (
           <Tab key={`tab-${index}`} {...tab}></Tab>
         ))}
-      </Tabs>
+      </Tabs>,
     )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     fireEvent.click(anchorTag[1])
@@ -167,7 +175,7 @@ describe('Tabs allow components as content', () => {
             {tab.children}
           </Tab>
         ))}
-      </Tabs>
+      </Tabs>,
     )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag[4].getAttribute('aria-disabled')).toBe(null)
@@ -183,7 +191,7 @@ describe('Tabs allow components as content', () => {
             {tab.children}
           </Tab>
         ))}
-      </Tabs>
+      </Tabs>,
     )
     const anchorTag: HTMLAnchorElement[] = screen.getAllByRole('tab')
     expect(anchorTag[4].getAttribute('href')).toBe('#')

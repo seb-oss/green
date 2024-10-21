@@ -1,5 +1,10 @@
 import { fromEvent, Observable } from 'rxjs'
-import { distinctUntilChanged, map, shareReplay, startWith } from 'rxjs/operators'
+import {
+  distinctUntilChanged,
+  map,
+  shareReplay,
+  startWith,
+} from 'rxjs/operators'
 export type ViewportSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 /** viewportSize$ - Observable for viewport size
@@ -18,7 +23,7 @@ export const viewportSize$ =
       new Observable()
     : // Otherwise, continue as normal
       fromEvent<UIEvent>(window, 'resize').pipe(
-        map(event => (event.target as Window).innerWidth),
+        map((event) => (event.target as Window).innerWidth),
         startWith(window.innerWidth),
         map((viewportWidth): ViewportSize => {
           if (viewportWidth < 576) {
@@ -36,13 +41,13 @@ export const viewportSize$ =
           }
         }),
         distinctUntilChanged(),
-        shareReplay(1)
+        shareReplay(1),
       )
 
 /** isMobileViewport$ - Observable for mobile viewport based on screen size
  * @returns Observable<boolean>
  */
 export const isMobileViewport$ = viewportSize$.pipe(
-  map(viewportSize => viewportSize === 'xs'),
-  distinctUntilChanged()
+  map((viewportSize) => viewportSize === 'xs'),
+  distinctUntilChanged(),
 )

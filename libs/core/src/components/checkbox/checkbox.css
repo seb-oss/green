@@ -24,7 +24,8 @@
     appearance: none;
     aspect-ratio: 1/1;
     background-color: var(--gds-checkbox-bg-color);
-    border: var(--gds-checkbox-border-width) solid var(--gds-checkbox-border-color);
+    border: var(--gds-checkbox-border-width) solid
+      var(--gds-checkbox-border-color);
     border-radius: var(--gds-checkbox-border-radius);
     box-sizing: border-box;
     cursor: pointer;
@@ -36,7 +37,8 @@
     width: 16px;
 
     &::after {
-      border: var(--gds-checkbox-border-width) solid var(--gds-checkbox-color-tick);
+      border: var(--gds-checkbox-border-width) solid
+        var(--gds-checkbox-color-tick);
       border-left: 0;
       border-top: 0;
       box-sizing: border-box;

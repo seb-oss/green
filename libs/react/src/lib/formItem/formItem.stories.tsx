@@ -19,7 +19,7 @@ const Template = () => {
 
 export default {
   title: 'Components/FormItem',
-  component: FormItem
+  component: FormItem,
 }
 
 export const TextInput = {
@@ -27,13 +27,13 @@ export const TextInput = {
   name: 'TextInput',
 
   parameters: {
-    componentIds: ['component-input']
+    componentIds: ['component-input'],
   },
 
   args: {
     label: 'Text input',
-    info: 'Input some text here'
-  }
+    info: 'Input some text here',
+  },
 }
 
 export const ExpandableInformation = {
@@ -46,7 +46,7 @@ export const ExpandableInformation = {
     />
   ),
 
-  name: 'Expandable information'
+  name: 'Expandable information',
 }
 
 export const ExpandableInformationJsx = {
@@ -56,12 +56,13 @@ export const ExpandableInformationJsx = {
       info="För att du ska kunna få låna pengar behöver vi veta hur mycket"
       expandableInfo={
         <>
-          Using JSX here is useful if you need to include for example a<a href="#">link</a>
+          Using JSX here is useful if you need to include for example a
+          <a href="#">link</a>
         </>
       }
       expandableInfoButtonLabel="Toggle additional information"
     />
   ),
 
-  name: 'Expandable information JSX'
+  name: 'Expandable information JSX',
 }

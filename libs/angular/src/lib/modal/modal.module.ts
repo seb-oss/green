@@ -5,7 +5,7 @@ import {
   NggModalBodyComponent,
   NggModalComponent,
   NggModalFooterComponent,
-  NggModalHeaderComponent
+  NggModalHeaderComponent,
 } from './modal.component'
 import { NggModalHeaderDirective } from './modal-header.directive'
 import { NggModalFooterDirective } from './modal-footer.directive'
@@ -16,14 +16,18 @@ const DECLARATIONS = [
   NggModalBodyComponent,
   NggModalFooterComponent,
   NggModalHeaderDirective,
-  NggModalFooterDirective
+  NggModalFooterDirective,
 ]
 
-const EXPORTS = [NggModalComponent, NggModalHeaderDirective, NggModalFooterDirective]
+const EXPORTS = [
+  NggModalComponent,
+  NggModalHeaderDirective,
+  NggModalFooterDirective,
+]
 
 @NgModule({
   imports: [A11yModule, CommonModule],
   exports: EXPORTS,
-  declarations: DECLARATIONS
+  declarations: DECLARATIONS,
 })
 export class NggModalModule {}

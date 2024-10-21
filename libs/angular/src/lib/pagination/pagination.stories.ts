@@ -7,26 +7,26 @@ export default {
   component: NggPaginationComponent,
   decorators: [
     moduleMetadata({
-      imports: [NggPaginationModule]
-    })
+      imports: [NggPaginationModule],
+    }),
   ],
   parameters: {
-    componentIds: ['component-pagination']
+    componentIds: ['component-pagination'],
   },
   argTypes: {
     size: {
       options: ['small', 'large'],
-      control: { type: 'radio' }
-    }
-  }
+      control: { type: 'radio' },
+    },
+  },
 } as Meta<NggPaginationComponent>
 
-const Template: StoryFn<NggPaginationComponent> = args => {
+const Template: StoryFn<NggPaginationComponent> = (args) => {
   return {
     template: `
     <ngg-pagination [size]="size" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [displayPages]="displayPages"></ngg-pagination>
     `,
-    props: args
+    props: args,
   }
 }
 
@@ -36,5 +36,5 @@ Default.args = {
   pageSize: 10,
   pageIndex: 4,
   displayPages: 5,
-  size: 'small'
+  size: 'small',
 }

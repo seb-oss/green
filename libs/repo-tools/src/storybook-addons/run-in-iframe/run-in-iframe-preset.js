@@ -7,8 +7,8 @@ module.exports = {
     config.plugins.push(
       new InjectPlugin(function () {
         return fs.readFileSync(path.resolve(__dirname, `./run-in-iframe.js`))
-      })
+      }),
     )
     return config
-  }
+  },
 }

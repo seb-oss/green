@@ -7,7 +7,7 @@ describe('Value List', () => {
       <ValueList.List>
         <ValueList.Label>Label</ValueList.Label>
         <ValueList.Value>Value</ValueList.Value>
-      </ValueList.List>
+      </ValueList.List>,
     )
 
     expect(screen.getByText('Label').tagName).toEqual('DT')
@@ -19,9 +19,11 @@ describe('Value List', () => {
       <ValueList.List inverted>
         <ValueList.Label>Label</ValueList.Label>
         <ValueList.Value>Value</ValueList.Value>
-      </ValueList.List>
+      </ValueList.List>,
     )
 
-    expect(container.querySelector('dl')?.classList.contains('gds-list--inverted')).toEqual(true)
+    expect(
+      container.querySelector('dl')?.classList.contains('gds-list--inverted'),
+    ).toEqual(true)
   })
 })

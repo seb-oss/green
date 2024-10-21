@@ -13,20 +13,20 @@ $outline-opacity: 0.35;
 $variants: (
   'info': (
     color: tokens.$intent-info-color,
-    fadable-color: tokens.$intent-info-fadable-color
+    fadable-color: tokens.$intent-info-fadable-color,
   ),
   'success': (
     color: tokens.$intent-success-color,
-    fadable-color: tokens.$intent-success-fadable-color
+    fadable-color: tokens.$intent-success-fadable-color,
   ),
   'warning': (
     color: tokens.$intent-warning-color,
-    fadable-color: tokens.$intent-warning-fadable-color
+    fadable-color: tokens.$intent-warning-fadable-color,
   ),
   'danger': (
     color: tokens.$intent-danger-color,
-    fadable-color: tokens.$intent-danger-fadable-color
-  )
+    fadable-color: tokens.$intent-danger-fadable-color,
+  ),
 );
 
 @mixin base {

@@ -7,7 +7,12 @@ import { NgvInputMaskModule } from '@sebgroup/green-angular/src/v-angular/input-
 
 @NgModule({
   declarations: [NgvInputComponent],
-  imports: [CommonModule, NgvI18nModule, NgvInputMaskModule, ReactiveFormsModule],
-  exports: [NgvInputComponent]
+  imports: [
+    CommonModule,
+    NgvI18nModule,
+    NgvInputMaskModule,
+    ReactiveFormsModule,
+  ],
+  exports: [NgvInputComponent],
 })
 export class NgvInputModule {}

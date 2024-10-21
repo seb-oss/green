@@ -9,7 +9,7 @@ import {
   hide,
   flip,
   autoUpdate,
-  Placement
+  Placement,
 } from '@floating-ui/dom'
 import { ref, createRef, Ref } from 'lit/directives/ref.js'
 import styles from './coachmark.styles'
@@ -63,11 +63,11 @@ export class GdsCoachmark extends GdsElement {
    * The default computed visibility, based on visibility and overlap of the target element, is supplied as the third argument.
    */
   @property({ attribute: false })
-  computeVisibility: (self: GdsCoachmark, target: HTMLElement, computedVisibility: boolean) => boolean = (
-    _self,
-    _target,
-    computedVisibility
-  ) => computedVisibility
+  computeVisibility: (
+    self: GdsCoachmark,
+    target: HTMLElement,
+    computedVisibility: boolean,
+  ) => boolean = (_self, _target, computedVisibility) => computedVisibility
 
   /**
    * The resolved targeted element (readonly)
@@ -95,7 +95,7 @@ export class GdsCoachmark extends GdsElement {
       }, 400)
     })
 
-    document.addEventListener('keydown', event => {
+    document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && this._isVisible) {
         this.#closeCoachMark()
       }
@@ -105,7 +105,7 @@ export class GdsCoachmark extends GdsElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     document.removeEventListener('click', this.#closeCoachMark)
-    document.removeEventListener('keydown', event => {
+    document.removeEventListener('keydown', (event) => {
       if (event.key === 'Escape' && this._isVisible) {
         this.#closeCoachMark()
       }
@@ -128,8 +128,8 @@ export class GdsCoachmark extends GdsElement {
       new CustomEvent('gds-ui-state', {
         detail: { open: this._isVisible, reason: 'closed' },
         bubbles: false,
-        composed: false
-      })
+        composed: false,
+      }),
     )
   }
 
@@ -185,8 +185,10 @@ export class GdsCoachmark extends GdsElement {
 
   #isElementOutsideView(element: HTMLElement) {
     const elementRect = element.getBoundingClientRect()
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight
+    const windowWidth =
+      window.innerWidth || document.documentElement.clientWidth
     return (
       elementRect.top + elementRect.height < 0 ||
       elementRect.top > windowHeight ||
@@ -195,13 +197,17 @@ export class GdsCoachmark extends GdsElement {
     )
   }
 
-  async #computeTooltipPosition(targetedEl: HTMLElement, componentEl: HTMLElement, arrowEl: HTMLElement) {
+  async #computeTooltipPosition(
+    targetedEl: HTMLElement,
+    componentEl: HTMLElement,
+    arrowEl: HTMLElement,
+  ) {
     return computePosition(targetedEl, componentEl, {
       placement: this.placement,
       middleware: [
         offset(() => ({
           mainAxis: 16,
-          alignmentAxis: 16
+          alignmentAxis: 16,
         })),
         {
           name: 'detectOverflow',
@@ -212,22 +218,22 @@ export class GdsCoachmark extends GdsElement {
               altBoundary: true,
               padding: {
                 top: 167,
-                left: 20
-              }
+                left: 20,
+              },
             })
             return {
-              data: overflow
+              data: overflow,
             }
-          }
+          },
         },
         shift({ padding: 16 }),
         flip(),
         hide(),
         arrow({
           padding: 16,
-          element: arrowEl
-        })
-      ]
+          element: arrowEl,
+        }),
+      ],
     })
   }
 
@@ -236,9 +242,16 @@ export class GdsCoachmark extends GdsElement {
 
     const isOutOfBound = this.#isElementOutsideView(this.targetElement)
     const targetIsVisible = this.targetElement.checkVisibility()
-    const isOverlapping = this.overlappedBy.length === 0 ? false : this.#checkOverlap(this.overlappedBy)
+    const isOverlapping =
+      this.overlappedBy.length === 0
+        ? false
+        : this.#checkOverlap(this.overlappedBy)
 
-    return this.computeVisibility(this, this.targetElement, !isOverlapping && !isOutOfBound && targetIsVisible)
+    return this.computeVisibility(
+      this,
+      this.targetElement,
+      !isOverlapping && !isOutOfBound && targetIsVisible,
+    )
   }
 
   async #updateCoachmarks() {
@@ -250,32 +263,34 @@ export class GdsCoachmark extends GdsElement {
 
     try {
       this.#autoUpdateCleanupFn = autoUpdate(targetEl, componentEl, () => {
-        this.#computeTooltipPosition(targetEl, componentEl, arrowEl).then(({ x, y, middlewareData, placement }) => {
-          if (this.#shouldTooltipBeVisible()) {
-            this._isVisible = true
-            Object.assign(componentEl.style, {
-              visibility: 'visible',
-              opacity: 1,
-              left: `${x}px`,
-              top: `${y}px`
-            })
-            if (middlewareData.arrow) {
-              const { x, y } = middlewareData.arrow
-              arrowEl.removeAttribute('class')
-              arrowEl.classList.add('arrow-' + placement)
-              Object.assign(arrowEl.style, {
-                left: x != null ? `${x}px` : '',
-                top: y != null ? `${y}px` : ''
+        this.#computeTooltipPosition(targetEl, componentEl, arrowEl).then(
+          ({ x, y, middlewareData, placement }) => {
+            if (this.#shouldTooltipBeVisible()) {
+              this._isVisible = true
+              Object.assign(componentEl.style, {
+                visibility: 'visible',
+                opacity: 1,
+                left: `${x}px`,
+                top: `${y}px`,
+              })
+              if (middlewareData.arrow) {
+                const { x, y } = middlewareData.arrow
+                arrowEl.removeAttribute('class')
+                arrowEl.classList.add('arrow-' + placement)
+                Object.assign(arrowEl.style, {
+                  left: x != null ? `${x}px` : '',
+                  top: y != null ? `${y}px` : '',
+                })
+              }
+            } else {
+              this._isVisible = false
+              Object.assign(componentEl.style, {
+                visibility: 'hidden',
+                opacity: 0,
               })
             }
-          } else {
-            this._isVisible = false
-            Object.assign(componentEl.style, {
-              visibility: 'hidden',
-              opacity: 0
-            })
-          }
-        })
+          },
+        )
       })
     } catch (error) {
       console.warn('failed to render tooltips')
@@ -290,12 +305,17 @@ export class GdsCoachmark extends GdsElement {
     return html`${when(
       this.target.length > 0,
       () => html`
-        <div role="dialog" id="body" aria-label=${this.label} ${ref(this.#cardRef) as HTMLElement}>
+        <div
+          role="dialog"
+          id="body"
+          aria-label=${this.label}
+          ${ref(this.#cardRef) as HTMLElement}
+        >
           <slot></slot>
           <div id="arrow" ${ref(this.#arrowRef) as HTMLElement}></div>
         </div>
       `,
-      () => html``
+      () => html``,
     )}`
   }
 }

@@ -10,11 +10,11 @@ describe('Dropdown', () => {
       options: [
         { label: 'A', value: 1 },
         { label: 'B', value: 2, selected: true },
-        { label: 'C', value: 3 }
-      ]
+        { label: 'C', value: 3 },
+      ],
     }
     component = await render(NggDropdownComponent, {
-      componentProperties: { ...props }
+      componentProperties: { ...props },
     })
 
     component.fixture.detectChanges()
@@ -24,11 +24,15 @@ describe('Dropdown', () => {
   })
 
   it('returns correct display value', fakeAsync(() => {
-    expect((component.fixture.componentInstance as any).displayTextByValue(2)).toBe('B')
+    expect(
+      (component.fixture.componentInstance as any).displayTextByValue(2),
+    ).toBe('B')
   }))
 
   it('returns correct option by value', () => {
-    expect((component.fixture.componentInstance as any).optionByValue(3)).toEqual({ label: 'C', value: 3 })
+    expect(
+      (component.fixture.componentInstance as any).optionByValue(3),
+    ).toEqual({ label: 'C', value: 3 })
   })
 
   it('uses correct default slected value', async () => {
@@ -36,10 +40,8 @@ describe('Dropdown', () => {
   })
 
   it('return correct selected option', () => {
-    expect((component.fixture.componentInstance as any).selectedOption).toEqual({
-      label: 'B',
-      value: 2,
-      selected: true
-    })
+    expect((component.fixture.componentInstance as any).selectedOption).toEqual(
+      { label: 'B', value: 2, selected: true },
+    )
   })
 })

@@ -4,7 +4,7 @@ const Template = ({ ...props }) => <Badge {...props} />
 
 export default {
   title: 'Components/Badge',
-  component: Badge
+  component: Badge,
 }
 
 export const Default = {
@@ -12,12 +12,12 @@ export const Default = {
   name: 'Badge',
 
   parameters: {
-    componentIds: ['component-badge']
+    componentIds: ['component-badge'],
   },
 
   args: {
     children: 'Primary',
     badgeType: 'info',
-    isCloseable: false
-  }
+    isCloseable: false,
+  },
 }

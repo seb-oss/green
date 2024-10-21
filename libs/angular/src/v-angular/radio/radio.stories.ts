@@ -3,7 +3,12 @@ import { importProvidersFrom } from '@angular/core'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
 
 import { NgvRadioComponent } from './radio.component'
 
@@ -18,15 +23,17 @@ export default {
 
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)]
+      providers: [importProvidersFrom(NgvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule]
-    })
-  ]
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+    }),
+  ],
 } as Meta<NgvRadioComponent>
 
-const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (args: any) => ({
+const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
+  args: any,
+) => ({
   template: /*html*/ `
     <nggv-radio
       [label]="label"
@@ -51,11 +58,13 @@ const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (args: any) =>
     </nggv-radio>
   `,
   props: {
-    ...args
-  }
+    ...args,
+  },
 })
 
-const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (args: NgvRadioComponent & any) => {
+const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
+  args: NgvRadioComponent & any,
+) => {
   const ctrl = new FormControl(args.selected)
   ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
@@ -96,8 +105,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (args: NgvRadi
     props: {
       ...args,
       formControl: ctrl,
-      disableFn: toggleDisableField
-    }
+      disableFn: toggleDisableField,
+    },
   }
 }
 
@@ -105,18 +114,18 @@ export const Primary = Template.bind({})
 Primary.args = {
   label: 'Radio label',
   name: 'radio',
-  selected: 'radio2'
+  selected: 'radio2',
 }
 
 export const WithLockedInput = TemplateWithFormControl.bind({})
 WithLockedInput.args = {
   ...Primary.args,
-  locked: false
+  locked: false,
 }
 
 export const WithDisplayDisabledAsLocked = TemplateWithFormControl.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
   locked: false,
-  displayDisabledAsLocked: true
+  displayDisabledAsLocked: true,
 }

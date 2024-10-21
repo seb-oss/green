@@ -1,10 +1,17 @@
 <!-- LOCKED INPUT -->
 <div *ngIf="locked && state" class="sdv-field-checkbox-wrap">
-  <div [id]="id + '-checkbox'" class="ngv-field--locked" [attr.name]="name" [attr.value]="value">
+  <div
+    [id]="id + '-checkbox'"
+    class="nggv-field--locked"
+    [attr.name]="name"
+    [attr.value]="value"
+  >
     <ng-container *ngIf="!labelContentTpl">
       {{ label }}
     </ng-container>
-    <ng-template *ngTemplateOutlet="labelContentTpl ?? null; context: { $implicit: value }"></ng-template>
+    <ng-template
+      *ngTemplateOutlet="labelContentTpl ?? null; context: { $implicit: value }"
+    ></ng-template>
   </div>
 </div>
 
@@ -12,7 +19,12 @@
 <ng-container *ngIf="!locked">
   <div class="sdv-field-checkbox-wrap">
     <!-- CHECKBOX FIELD -->
-    <label [id]="id + '-label'" [attr.for]="id + '-checkbox'" class="form-control" *transloco="let t; read: scope">
+    <label
+      [id]="id + '-label'"
+      [attr.for]="id + '-checkbox'"
+      class="form-control"
+      *transloco="let t; read: scope"
+    >
       <input
         #input
         type="checkbox"
@@ -30,12 +42,16 @@
         (blur)="onBlur($event)"
       />
       <!-- LABEL -->
-      <ng-template *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"></ng-template>
+      <ng-template
+        *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+      ></ng-template>
       <ng-template #basicLabelContentTpl>
         <!-- to trigger css:empty if no label was added -->
         <ng-container *ngIf="label">
           <span
-            *ngIf="optional === true || (required !== true && optional !== false)"
+            *ngIf="
+              optional === true || (required !== true && optional !== false)
+            "
             class="sdv-field-label--optional"
           >
             ({{ t('label.optional') }})

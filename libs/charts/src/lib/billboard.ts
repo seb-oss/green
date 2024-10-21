@@ -8,10 +8,17 @@ import bb, {
   line,
   pie,
   PointOptions,
-  spline
+  spline,
 } from 'billboard.js'
 import { ChartSettingsUpdate } from './billboardtypes'
-import { Chart, ChartArgs, ChartInfo, ChartSettings, ChartType, ChartUpdateArgs } from './types'
+import {
+  Chart,
+  ChartArgs,
+  ChartInfo,
+  ChartSettings,
+  ChartType,
+  ChartUpdateArgs,
+} from './types'
 import { tmplTooltip } from './templates'
 
 export const init = () => {
@@ -26,38 +33,43 @@ export const init = () => {
 }
 
 // TODO: This createOption function should be more of a billboard config with sensible defaults adder rather than being passed a Green Charts settings object that then is converted to a billboard config.
-export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptions => {
-  const columns = settings.data.map(d => [d.name, ...d.values])
+export const createOptions = ({
+  settings,
+  chartElement,
+}: ChartArgs): ChartOptions => {
+  const columns = settings.data.map((d) => [d.name, ...d.values])
 
   const defaultType: ChartType = settings.type || 'bar'
 
   const types = settings.data.reduce(
     (res, d) => ({
       ...res,
-      [d.name]: d.type || defaultType
+      [d.name]: d.type || defaultType,
     }),
-    {}
+    {},
   )
   const axes = settings.data.reduce(
     (res, d) => ({
       ...res,
-      [d.name]: d.axis || 'y'
+      [d.name]: d.axis || 'y',
     }),
-    {}
+    {},
   )
 
   const color = Object.assign({}, settings.style?.color)
 
-  const defaultTooltipNumberFormat = (num: number) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  const defaultTooltipNumberFormat = (num: number) =>
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
-  const defaultTooltipPercentageFormat = (ratio: number) => `${Number((ratio * 100).toFixed(2))}%`
+  const defaultTooltipPercentageFormat = (ratio: number) =>
+    `${Number((ratio * 100).toFixed(2))}%`
 
   const options: ChartOptions = {
     bindto: chartElement,
     data: {
       columns,
       types,
-      axes
+      axes,
     },
     legend: { show: false },
     tooltip: {
@@ -67,15 +79,16 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
           if (typeof formatOverride === 'function') {
             return formatOverride(value, ratio, id, index)
           }
-          if (typeof ratio == 'number') return defaultTooltipPercentageFormat(ratio)
+          if (typeof ratio == 'number')
+            return defaultTooltipPercentageFormat(ratio)
           else {
             return defaultTooltipNumberFormat(value)
           }
-        }
+        },
       },
-      contents: { template: tmplTooltip }
+      contents: { template: tmplTooltip },
     },
-    color
+    color,
   }
 
   let hasY2Axis = false
@@ -86,8 +99,8 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
     options.axis = {
       ...(options.axis || {}),
       y2: {
-        show: true
-      }
+        show: true,
+      },
     }
   }
 
@@ -97,15 +110,15 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
 
     if (settings?.style.point.show === 'focus') {
       pointSetting = {
-        focus: { only: true }
+        focus: { only: true },
       }
     } else {
       pointSetting = {
-        show: settings?.style.point.show
+        show: settings?.style.point.show,
       }
     }
     options.point = {
-      ...pointSetting
+      ...pointSetting,
     }
   }
 
@@ -118,7 +131,7 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
       axesSetting = {
         y: { show: false },
         y2: { show: false },
-        x: { show: false }
+        x: { show: false },
       }
     } else {
       axesSetting = Object.entries(settings?.style.axis).reduce(
@@ -126,21 +139,24 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
           ...axes,
           [axis]: {
             ...(axes[<'y' | 'y2' | 'x'>axis] || {}),
-            ...((settings?.ticksCount || settings?.stepSize || settings?.values || settings?.format) && {
+            ...((settings?.ticksCount ||
+              settings?.stepSize ||
+              settings?.values ||
+              settings?.format) && {
               tick: {
                 ...(settings?.ticksCount && {
-                  count: settings?.ticksCount
+                  count: settings?.ticksCount,
                 }),
                 ...(settings?.stepSize && {
-                  stepSize: settings?.stepSize
+                  stepSize: settings?.stepSize,
                 }),
                 ...(settings?.values && {
-                  values: settings.values
+                  values: settings.values,
                 }),
                 ...(settings?.format && {
-                  format: settings.format
-                })
-              }
+                  format: settings.format,
+                }),
+              },
             }),
             show: settings?.show === false ? false : true,
             label: settings?.label,
@@ -148,17 +164,17 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
             max: settings?.max,
             padding: settings?.padding,
             height: settings?.height,
-            ...(axis === 'y' || axis === 'x' ? { clipPath: false } : {})
-          }
+            ...(axis === 'y' || axis === 'x' ? { clipPath: false } : {}),
+          },
         }),
         {
-          ...(options.axis || {})
-        }
+          ...(options.axis || {}),
+        },
       )
     }
     options.axis = {
       ...options.axis,
-      ...axesSetting
+      ...axesSetting,
     }
   }
 
@@ -179,10 +195,10 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
         lines: [
           {
             value: 0,
-            class: 'base-line'
-          }
-        ]
-      }
+            class: 'base-line',
+          },
+        ],
+      },
     }
   }
 
@@ -192,42 +208,51 @@ export const createOptions = ({ settings, chartElement }: ChartArgs): ChartOptio
       x: {
         ...(options?.axis?.x || {}),
         type: 'category',
-        categories: settings.categories
-      }
+        categories: settings.categories,
+      },
     }
   }
   return options
 }
 
-export const createUpdate = ({ settings, chartElement }: ChartUpdateArgs): ChartSettingsUpdate => {
+export const createUpdate = ({
+  settings,
+  chartElement,
+}: ChartUpdateArgs): ChartSettingsUpdate => {
   // const oldOptions = createOptions(oldSettings)
   const newOptions = createOptions({ settings, chartElement })
   const data = newOptions.data || {}
 
   const update: ChartSettingsUpdate = {
     columns: data.columns || [],
-    types: data.types || {}
+    types: data.types || {},
   }
   if (settings.categories) update.categories = settings.categories
 
   return update
 }
 
-export const createInfo = (settings: ChartSettings, chart: BBChart): ChartInfo => {
+export const createInfo = (
+  settings: ChartSettings,
+  chart: BBChart,
+): ChartInfo => {
   const info: Partial<ChartInfo> = {
     legend: {
-      items: settings.data.map(d => ({
+      items: settings.data.map((d) => ({
         title: d.name,
-        color: chart.color(d.name)
+        color: chart.color(d.name),
       })),
-      placement: settings.legend || 'none'
-    }
+      placement: settings.legend || 'none',
+    },
   }
 
   // expose values for axis unless hidden
-  if (settings.style?.axis === true || (settings.style?.axis !== false && settings.style?.axis?.x?.show !== false)) {
+  if (
+    settings.style?.axis === true ||
+    (settings.style?.axis !== false && settings.style?.axis?.x?.show !== false)
+  ) {
     info.xAxis = {
-      ticks: chart.categories()?.map(text => ({ text }))
+      ticks: chart.categories()?.map((text) => ({ text })),
     }
   }
 
@@ -242,17 +267,17 @@ export const create = ({ settings, chartElement }: ChartArgs): Chart => {
   const wrapper: Chart = {
     settings,
     info,
-    focus: targetIds => chart.focus(targetIds),
-    revert: targetIds => chart.revert(targetIds),
-    toggle: targetIds => chart.toggle(targetIds),
-    update: () => null as unknown as Chart
+    focus: (targetIds) => chart.focus(targetIds),
+    revert: (targetIds) => chart.revert(targetIds),
+    toggle: (targetIds) => chart.toggle(targetIds),
+    update: () => null as unknown as Chart,
   }
 
   const update = ({ settings, chartElement }: ChartArgs): Chart => {
     const newOptions = createUpdate({
       settings,
       chartElement,
-      oldSettings: wrapper.settings
+      oldSettings: wrapper.settings,
     })
     chart.load(newOptions)
     const info = createInfo(settings, chart)

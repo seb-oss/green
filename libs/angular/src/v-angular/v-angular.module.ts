@@ -36,7 +36,7 @@ import { NggCharacterCountdownDirectiveModule } from './character-countdown/char
     NgvRadioModule,
     NgvTextareaModule,
     NgvTooltipModule,
-    NgvTypeaheadModule
-  ]
+    NgvTypeaheadModule,
+  ],
 })
 export class NggvModule {}

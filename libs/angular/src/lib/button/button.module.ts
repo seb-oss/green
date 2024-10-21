@@ -6,6 +6,6 @@ import { NggButtonComponent } from './button.component'
 @NgModule({
   declarations: [NggButtonComponent],
   imports: [CommonModule],
-  exports: [NggButtonComponent]
+  exports: [NggButtonComponent],
 })
 export class NggButtonModule {}

@@ -22,14 +22,18 @@ function toKebabCase(str: string): string {
   return str.toLowerCase().replace(/\s+/g, '-')
 }
 
-export async function coreComponentGenerator(tree: Tree, options: CoreComponentGeneratorSchema) {
-  const componentRoot = `libs/core/src/` + options.componentType + 's/' + toKebabCase(options.name)
+export async function coreComponentGenerator(
+  tree: Tree,
+  options: CoreComponentGeneratorSchema,
+) {
+  const componentRoot =
+    `libs/core/src/` + options.componentType + 's/' + toKebabCase(options.name)
   generateFiles(tree, path.join(__dirname, 'files'), componentRoot, {
     ...options,
     toCamelCase,
     toPascalCase,
     toKebabCase,
-    fileName: toKebabCase(options.name)
+    fileName: toKebabCase(options.name),
   })
   await formatFiles(tree)
 }

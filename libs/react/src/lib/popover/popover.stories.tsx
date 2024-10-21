@@ -5,7 +5,7 @@ import { Button } from '../form'
 
 export default {
   title: 'Components/Popover',
-  component: Popover
+  component: Popover,
 } as Meta
 
 export const Default = () => (

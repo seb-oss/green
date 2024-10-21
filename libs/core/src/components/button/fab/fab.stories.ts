@@ -17,7 +17,7 @@ import { DefaultParams as ButtonDefaultParams } from '../button.stories'
 const meta: Meta = {
   title: 'Docs/Components/Button/FAB',
   component: 'gds-fab',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -29,18 +29,18 @@ const DefaultParams: Story = {
     docs: {
       source: { format: true, type: 'dynamic' },
       story: {
-        height: '200px'
-      }
+        height: '200px',
+      },
     },
-    controls: { expanded: true }
+    controls: { expanded: true },
   },
   args: {
-    innerHTML: `See what's new! <gds-signal slot="trail"></gds-signal>`
-  }
+    innerHTML: `See what's new! <gds-signal slot="trail"></gds-signal>`,
+  },
 }
 
 export const Usage: Story = {
-  ...DefaultParams
+  ...DefaultParams,
 }
 
 /**
@@ -54,20 +54,28 @@ export const RanksAndVariants: Story = {
   name: 'Signal ',
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: [] }
+    controls: { include: [] },
   },
-  render: args => html`
+  render: (args) => html`
     <gds-flex height="600px">
-      <gds-fab inset="auto 100px 300px auto"> Primary <gds-signal slot="trail"></gds-signal> </gds-fab>
+      <gds-fab inset="auto 100px 300px auto">
+        Primary <gds-signal slot="trail"></gds-signal>
+      </gds-fab>
       <gds-fab inset="auto 100px 200px auto" rank="secondary">
         Secondary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab inset="auto 100px 100px auto" rank="tertiary"> Tertiary <gds-signal slot="trail"></gds-signal> </gds-fab>
+      <gds-fab inset="auto 100px 100px auto" rank="tertiary">
+        Tertiary <gds-signal slot="trail"></gds-signal>
+      </gds-fab>
 
       <gds-fab inset="auto 300px 300px auto" variant="positive">
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab inset="auto 300px 200px auto" variant="positive" rank="secondary">
+      <gds-fab
+        inset="auto 300px 200px auto"
+        variant="positive"
+        rank="secondary"
+      >
         Secondary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
       <gds-fab inset="auto 300px 100px auto" variant="positive" rank="tertiary">
@@ -77,14 +85,18 @@ export const RanksAndVariants: Story = {
       <gds-fab inset="auto 500px 300px auto" variant="negative">
         Primary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
-      <gds-fab inset="auto 500px 200px auto" variant="negative" rank="secondary">
+      <gds-fab
+        inset="auto 500px 200px auto"
+        variant="negative"
+        rank="secondary"
+      >
         Secondary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
       <gds-fab inset="auto 500px 100px auto" variant="negative" rank="tertiary">
         Tertiary <gds-signal slot="trail"></gds-signal>
       </gds-fab>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -96,9 +108,9 @@ export const IconButton: Story = {
   name: 'Icon Button',
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: [] }
+    controls: { include: [] },
   },
-  render: args => html`
+  render: (args) => html`
     <gds-flex height="600px">
       <gds-fab inset="auto 100px 300px auto">
         <gds-icon-bubbles></gds-icon-bubbles>
@@ -113,24 +125,44 @@ export const IconButton: Story = {
       <gds-fab inset="auto 300px 300px auto" size="medium" variant="positive">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
-      <gds-fab inset="auto 300px 200px auto" size="medium" variant="positive" rank="secondary">
+      <gds-fab
+        inset="auto 300px 200px auto"
+        size="medium"
+        variant="positive"
+        rank="secondary"
+      >
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
-      <gds-fab inset="auto 300px 100px auto" size="medium" variant="positive" rank="tertiary">
+      <gds-fab
+        inset="auto 300px 100px auto"
+        size="medium"
+        variant="positive"
+        rank="tertiary"
+      >
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
 
       <gds-fab inset="auto 500px 300px auto" size="small" variant="negative">
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
-      <gds-fab inset="auto 500px 200px auto" size="small" variant="negative" rank="secondary">
+      <gds-fab
+        inset="auto 500px 200px auto"
+        size="small"
+        variant="negative"
+        rank="secondary"
+      >
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
-      <gds-fab inset="auto 500px 100px auto" size="small" variant="negative" rank="tertiary">
+      <gds-fab
+        inset="auto 500px 100px auto"
+        size="small"
+        variant="negative"
+        rank="tertiary"
+      >
         <gds-icon-bubbles></gds-icon-bubbles>
       </gds-fab>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -144,14 +176,14 @@ export const Color: Story = {
   name: 'Color',
   parameters: {
     ...DefaultParams.parameters,
-    controls: { include: [] }
+    controls: { include: [] },
   },
-  render: args => html`
+  render: (args) => html`
     <gds-flex height="300px">
       <gds-fab inset="auto 48px 48px auto" rank="primary">
         Secondary
         <gds-signal slot="trail" level="3" color="positive"></gds-signal>
       </gds-fab>
     </gds-flex>
-  `
+  `,
 }

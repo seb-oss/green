@@ -1,6 +1,12 @@
 // Dropdown.stories.ts
 import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms'
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms'
 import { NggDropdownModule } from './dropdown.module'
 import { NggDropdownComponent } from './dropdown.component'
 import { of } from 'rxjs'
@@ -11,17 +17,17 @@ export default {
   component: NggDropdownComponent,
   decorators: [
     moduleMetadata({
-      imports: [FormsModule, ReactiveFormsModule, NggDropdownModule]
-    })
+      imports: [FormsModule, ReactiveFormsModule, NggDropdownModule],
+    }),
   ],
   parameters: {
-    componentIds: ['component-dropdown']
-  }
+    componentIds: ['component-dropdown'],
+  },
 } as Meta<NggDropdownComponent>
 
-const Template: StoryFn<NggDropdownComponent> = args => ({
+const Template: StoryFn<NggDropdownComponent> = (args) => ({
   template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
-  props: args
+  props: args,
 })
 
 export const Select = Template.bind({})
@@ -37,8 +43,8 @@ Select.args = {
   options: [
     { label: 'Tacos', value: 'tacos' },
     { label: 'Pizza', value: 'pizza' },
-    { label: 'Sushi', value: 'sushi' }
-  ]
+    { label: 'Sushi', value: 'sushi' },
+  ],
 }
 
 export const Small = Template.bind({})
@@ -55,8 +61,8 @@ Small.args = {
   options: [
     { label: 'Tacos', value: 'tacos' },
     { label: 'Pizza', value: 'pizza' },
-    { label: 'Sushi', value: 'sushi' }
-  ]
+    { label: 'Sushi', value: 'sushi' },
+  ],
 }
 
 export const RenderWithSelectedOption = Template.bind({})
@@ -72,8 +78,8 @@ RenderWithSelectedOption.args = {
   options: [
     { label: 'Tacos', value: 'tacos' },
     { label: 'Pizza', value: 'pizza' },
-    { label: 'Im selected', value: 'sushi', selected: true }
-  ]
+    { label: 'Im selected', value: 'sushi', selected: true },
+  ],
 }
 
 export const Test = Template.bind({})
@@ -98,8 +104,8 @@ Test.args = {
     { label: 'Kyoto Ramen', value: 'kyoto' },
     { label: 'Sriracha Ramen', value: 'sriracha' },
     { label: 'Kimchi Ramen', value: 'kimchi' },
-    { label: 'Hakodate Ramen', value: 'hakodate' }
-  ]
+    { label: 'Hakodate Ramen', value: 'hakodate' },
+  ],
 }
 
 export const MultiSelect = Template.bind({})
@@ -115,8 +121,8 @@ MultiSelect.args = {
   options: [
     { name: 'Tacos', value: 'tacos' },
     { name: 'Pizza', value: 'pizza' },
-    { name: 'Sushi', value: 'sushi' }
-  ]
+    { name: 'Sushi', value: 'sushi' },
+  ],
 }
 
 export const Searchable = Template.bind({})
@@ -139,14 +145,16 @@ Searchable.args = {
     { name: 'Kyoto Ramen', value: 'kyoto' },
     { name: 'Sriracha Ramen', value: 'sriracha' },
     { name: 'Kimchi Ramen', value: 'kimchi' },
-    { name: 'Hakodate Ramen', value: 'hakodate' }
-  ]
+    { name: 'Hakodate Ramen', value: 'hakodate' },
+  ],
 }
 
-const CustomOptionTemplate: StoryFn<NggDropdownComponent> = args => {
+const CustomOptionTemplate: StoryFn<NggDropdownComponent> = (args) => {
   args.compareWith = (o1: any, o2: any) => o1.id === o2.id
   args.searchFilter = (search: string, value: any) =>
-    ['kitchen', 'id'].some(key => value[key].toLowerCase().includes(search.toLowerCase()))
+    ['kitchen', 'id'].some((key) =>
+      value[key].toLowerCase().includes(search.toLowerCase()),
+    )
   return {
     component: NggDropdownComponent,
     template: `
@@ -176,7 +184,7 @@ const CustomOptionTemplate: StoryFn<NggDropdownComponent> = args => {
       </ng-template>
     </ngg-dropdown>
     `,
-    props: args
+    props: args,
   }
 }
 
@@ -195,112 +203,112 @@ CustomOption.args = {
       name: 'Tacos',
       val: {
         id: 'tacos',
-        kitchen: 'mexican'
-      }
+        kitchen: 'mexican',
+      },
     },
     {
       name: 'Pizza',
       val: {
         id: 'pizza',
-        kitchen: 'italian'
-      }
+        kitchen: 'italian',
+      },
     },
     {
       name: 'Sushi',
       val: {
         id: 'sushi',
-        kitchen: 'japanese'
-      }
-    }
-  ]
+        kitchen: 'japanese',
+      },
+    },
+  ],
 }
 
-const FormControlTemplate: StoryFn<NggDropdownComponent> = args => {
+const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
   const validationForm = new FormGroup({
-    country: new FormControl(undefined, [Validators.required])
+    country: new FormControl(undefined, [Validators.required]),
   })
 
   const options$ = of([
     {
       label: 'Sweden',
-      value: 'sweden'
+      value: 'sweden',
     },
     {
       label: 'Denmark',
-      value: 'denmark'
+      value: 'denmark',
     },
     {
       label: 'Finland',
-      value: 'Finland'
+      value: 'Finland',
     },
     {
       label: 'Norway',
-      value: 'norway'
+      value: 'norway',
     },
     {
       label: 'England',
-      value: 'england'
+      value: 'england',
     },
     {
       label: 'Germany',
-      value: 'germany'
+      value: 'germany',
     },
     {
       label: 'Estonia',
-      value: 'estonia'
+      value: 'estonia',
     },
     {
       label: 'Lithuania',
-      value: 'lithuania'
+      value: 'lithuania',
     },
     {
       label: 'Belarus',
-      value: 'belarus'
+      value: 'belarus',
     },
     {
       label: 'Latvia',
-      value: 'latvia'
+      value: 'latvia',
     },
     {
       label: 'Greece',
-      value: 'greece'
+      value: 'greece',
     },
     {
       label: 'Italy',
-      value: 'italy'
+      value: 'italy',
     },
     {
       label: 'Austria',
-      value: 'austria'
+      value: 'austria',
     },
     {
       label: 'Switzerland',
-      value: 'switzerland'
+      value: 'switzerland',
     },
     {
       label: 'Netherlands',
-      value: 'netherlands'
+      value: 'netherlands',
     },
     {
       label: 'Belgium',
-      value: 'belgium'
+      value: 'belgium',
     },
     {
       label: 'France',
-      value: 'france'
+      value: 'france',
     },
     {
       label: 'Spain',
-      value: 'spain'
+      value: 'spain',
     },
     {
       label: 'Portugal',
-      value: 'portugal'
+      value: 'portugal',
     },
     {
       label: 'Poland',
-      value: 'poland'
-    }
+      value: 'poland',
+    },
   ]).pipe(delay(3000))
 
   const save = (form: any) => {
@@ -340,28 +348,28 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = args => {
       ...args,
       validationForm,
       options$,
-      save
-    }
+      save,
+    },
   }
 }
 
 export const Form = FormControlTemplate.bind({})
 Form.args = {}
 
-const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = args => {
+const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
   const validationFormAdvance = new FormGroup({
-    country: new FormControl(undefined, [Validators.required])
+    country: new FormControl(undefined, [Validators.required]),
   })
 
   const options$ = of([
     {
       label: 'Sweden',
-      value: { country: 'sweden', id: '1' }
+      value: { country: 'sweden', id: '1' },
     },
     {
       label: 'Australia',
-      value: { country: 'Australia', id: '2' }
-    }
+      value: { country: 'Australia', id: '2' },
+    },
   ]).pipe(delay(3000))
 
   const save = (form: any) => {
@@ -403,8 +411,8 @@ const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = args => {
       ...args,
       validationFormAdvance,
       options$,
-      save
-    }
+      save,
+    },
   }
 }
 

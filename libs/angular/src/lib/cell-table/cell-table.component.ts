@@ -6,18 +6,23 @@ import {
   Input,
   Output,
   QueryList,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core'
-import { TableHeaderListItem, TableHeaderListValueType, TableRow } from './cell-table.types'
+import {
+  TableHeaderListItem,
+  TableHeaderListValueType,
+  TableRow,
+} from './cell-table.types'
 
 @Component({
   selector: 'ngg-cell-table',
   templateUrl: './cell-table.component.html',
   styleUrls: ['./cell-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NggCellTableComponent {
-  @ViewChildren('items') items: QueryList<ElementRef> = new QueryList<ElementRef>()
+  @ViewChildren('items') items: QueryList<ElementRef> =
+    new QueryList<ElementRef>()
 
   /** Cell min-width to force same width on small screens */
   @Input() minWidth?: number
@@ -53,35 +58,37 @@ export class NggCellTableComponent {
   }
 
   getValueTypeFromMain = (): TableHeaderListValueType => {
-    const getMain = this.headerList.find(x => x.main)
+    const getMain = this.headerList.find((x) => x.main)
     if (getMain) return getMain.valueType || ''
     return ''
   }
 
-  getTableHeaderListValueFromNonMain = (header: TableHeaderListItem): TableHeaderListValueType => {
+  getTableHeaderListValueFromNonMain = (
+    header: TableHeaderListItem,
+  ): TableHeaderListValueType => {
     if (header.valueType) return header.valueType || ''
     return ''
   }
 
   mainHeader = (row: TableRow) => {
-    const getMain = this.headerList.find(x => x.main)
+    const getMain = this.headerList.find((x) => x.main)
     if (row && getMain) {
       return {
         value: row[getMain.tableKeySelector],
         valueType: getMain.valueType || 'string',
-        tableKeySelector: getMain.tableKeySelector
+        tableKeySelector: getMain.tableKeySelector,
       }
     }
     return {
       value: '-',
       valueType: 'string',
-      tableKeySelector: '-'
+      tableKeySelector: '-',
     }
   }
 
   headerNoneMain = (headers: TableHeaderListItem[]) => {
-    if (this.overflowReverse) return headers.filter(x => !x.main).reverse()
-    return headers.filter(x => !x.main)
+    if (this.overflowReverse) return headers.filter((x) => !x.main).reverse()
+    return headers.filter((x) => !x.main)
   }
 
   getTableKeySelector = (row: TableRow) => {

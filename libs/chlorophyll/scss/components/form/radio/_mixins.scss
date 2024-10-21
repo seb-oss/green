@@ -70,7 +70,8 @@ $invalid-color: tokens.$intent-danger-background;
 
   /* Checked Hover state */
   #{$selector}:hover #{$radio-selector}:checked:not(.disabled, :disabled) ~ i {
-    box-shadow: inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-checked-hover);
+    box-shadow: inset 0px 0px 0px 0.05rem
+      var(--gds-comp-radio-border-checked-hover);
 
     &::after {
       background-color: var(--gds-comp-radio-dot-checked-hover);
@@ -98,7 +99,8 @@ $invalid-color: tokens.$intent-danger-background;
   #{$selector} #{$radio-selector}.disabled {
     ~ i {
       background-color: var(--gds-comp-radio-container-background-disabled);
-      box-shadow: inset 0px 0px 0px 0.05rem var(--gds-comp-radio-border-disabled);
+      box-shadow: inset 0px 0px 0px 0.05rem
+        var(--gds-comp-radio-border-disabled);
     }
 
     ~ span {

@@ -6,7 +6,14 @@ import { IconProps } from '../../types/props'
  * @deprecated
  * This component is deprecated. Use `Edit` instead from `@sebgroup/green-react`.
  */
-export const Edit = ({ focusable = false, title, fill = 'white', width = 24, height = 24, ...props }: IconProps) => {
+export const Edit = ({
+  focusable = false,
+  title,
+  fill = 'white',
+  width = 24,
+  height = 24,
+  ...props
+}: IconProps) => {
   let id
   if (title) id = randomId()
   return (

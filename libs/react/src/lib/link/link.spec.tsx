@@ -15,7 +15,7 @@ describe('Link', () => {
     render(
       <Link href="https://test.com/" role="menuitem">
         Foo
-      </Link>
+      </Link>,
     )
     const link: HTMLAnchorElement = screen.getByText('Foo')
     expect(link.getAttribute('role')).toEqual('menuitem')

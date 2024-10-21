@@ -25,27 +25,27 @@ export default {
   title: 'Components/Form/Elements/Radio button',
 
   parameters: {
-    componentIds: ['component-radiobutton']
+    componentIds: ['component-radiobutton'],
   },
 
   argTypes: {
     validation: {
       control: 'select',
-      options: ['', 'is-valid', 'is-invalid']
+      options: ['', 'is-valid', 'is-invalid'],
     },
 
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     text1: {
-      control: 'text'
+      control: 'text',
     },
 
     text2: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const Radiobutton = {
@@ -55,6 +55,6 @@ export const Radiobutton = {
   args: {
     text1: 'Radiobutton 1',
     text2: 'Radiobutton 2',
-    enabled: true
-  }
+    enabled: true,
+  },
 }

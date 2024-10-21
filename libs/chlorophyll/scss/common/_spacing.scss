@@ -6,24 +6,30 @@
   margin: map.get(tokens.$spacing, $size) functions.is-important($important);
 }
 @mixin margin-start($size, $important: false) {
-  margin-left: map.get(tokens.$spacing, $size) functions.is-important($important);
+  margin-left: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 @mixin margin-end($size, $important: false) {
-  margin-right: map.get(tokens.$spacing, $size) functions.is-important($important);
+  margin-right: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 @mixin margin-top($size, $important: false) {
   margin-top: map.get(tokens.$spacing, $size) functions.is-important($important);
 }
 @mixin margin-bottom($size, $important: false) {
-  margin-bottom: map.get(tokens.$spacing, $size) functions.is-important($important);
+  margin-bottom: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 @mixin margin-horizontal($size, $important: false) {
-  margin-left: map.get(tokens.$spacing, $size) functions.is-important($important);
-  margin-right: map.get(tokens.$spacing, $size) functions.is-important($important);
+  margin-left: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
+  margin-right: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin margin-vertical($size, $important: false) {
-  margin-bottom: map.get(tokens.$spacing, $size) functions.is-important($important);
+  margin-bottom: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
   margin-top: map.get(tokens.$spacing, $size) functions.is-important($important);
 }
 
@@ -32,29 +38,37 @@
 }
 
 @mixin padding-start($size, $important: false) {
-  padding-left: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-left: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin padding-end($size, $important: false) {
-  padding-right: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-right: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin padding-top($size, $important: false) {
-  padding-top: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-top: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin padding-bottom($size, $important: false) {
-  padding-bottom: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-bottom: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin padding-horizontal($size, $important: false) {
-  padding-left: map.get(tokens.$spacing, $size) functions.is-important($important);
-  padding-right: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-left: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
+  padding-right: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin padding-vertical($size, $important: false) {
-  padding-bottom: map.get(tokens.$spacing, $size) functions.is-important($important);
-  padding-top: map.get(tokens.$spacing, $size) functions.is-important($important);
+  padding-bottom: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
+  padding-top: map.get(tokens.$spacing, $size)
+    functions.is-important($important);
 }
 
 @mixin min-width($size, $important: false) {

@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, HostBinding, Inject, Input, Optional, Self } from '@angular/core'
+import {
+  ChangeDetectorRef,
+  Component,
+  HostBinding,
+  Inject,
+  Input,
+  Optional,
+  Self,
+} from '@angular/core'
 import { NgControl } from '@angular/forms'
 
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
@@ -9,7 +17,7 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 @Component({
   selector: 'nggv-textarea',
   templateUrl: './textarea.component.html',
-  styleUrls: ['./textarea.component.scss']
+  styleUrls: ['./textarea.component.scss'],
 })
 export class NgvTextareaComponent extends NgvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
@@ -69,7 +77,7 @@ export class NgvTextareaComponent extends NgvBaseControlValueAccessorComponent {
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }

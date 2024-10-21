@@ -4,7 +4,7 @@ const TextAreaTemplate = ({ ...props }) => <TextArea {...props} />
 
 export default {
   title: 'Components/Form/TextArea',
-  component: TextArea
+  component: TextArea,
 }
 
 export const Default = {
@@ -12,12 +12,12 @@ export const Default = {
   name: 'TextArea',
 
   parameters: {
-    componentIds: ['component-textarea']
+    componentIds: ['component-textarea'],
   },
 
   args: {
-    label: 'Text Area'
-  }
+    label: 'Text Area',
+  },
 }
 
 export const LabelInformation = {
@@ -25,8 +25,8 @@ export const LabelInformation = {
   name: 'Label Information',
   args: {
     label: 'Text Area',
-    info: 'Label Information'
-  }
+    info: 'Label Information',
+  },
 }
 
 export const ExpandableInformation = {
@@ -34,8 +34,8 @@ export const ExpandableInformation = {
   name: 'Expandable Information',
   args: {
     label: 'Text Area',
-    expandableInfo: 'Expandable Information'
-  }
+    expandableInfo: 'Expandable Information',
+  },
 }
 
 export const MaxLength = {
@@ -43,8 +43,8 @@ export const MaxLength = {
   name: 'Max Length',
   args: {
     label: 'Text Area',
-    maxLength: 100
-  }
+    maxLength: 100,
+  },
 }
 
 export const MoreRows = {
@@ -52,8 +52,8 @@ export const MoreRows = {
   name: 'More Rows',
   args: {
     label: 'Text Area',
-    rows: 10
-  }
+    rows: 10,
+  },
 }
 
 export const ErrorMessage = {
@@ -63,9 +63,9 @@ export const ErrorMessage = {
     label: 'Error message',
     validator: {
       indicator: 'error',
-      message: 'Error message text'
-    }
-  }
+      message: 'Error message text',
+    },
+  },
 }
 
 export const Everything = {
@@ -79,8 +79,8 @@ export const Everything = {
     rows: 4,
     validator: {
       indicator: 'error',
-      message: 'Error message'
+      message: 'Error message',
     },
-    placeholder: 'Placeholder'
-  }
+    placeholder: 'Placeholder',
+  },
 }

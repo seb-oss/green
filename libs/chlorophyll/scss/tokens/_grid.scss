@@ -20,7 +20,10 @@ $grid-breakpoints: (
 );
 
 @include functions.assert-ascending($grid-breakpoints, '$grid-breakpoints');
-@include functions.assert-starts-at-zero($grid-breakpoints, '$grid-breakpoints');
+@include functions.assert-starts-at-zero(
+  $grid-breakpoints,
+  '$grid-breakpoints'
+);
 
 // Grid columns
 //

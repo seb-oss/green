@@ -7,6 +7,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 @NgModule({
   imports: [CommonModule, FormsModule, DragDropModule],
   exports: [NggSortableListComponent],
-  declarations: [NggSortableListComponent]
+  declarations: [NggSortableListComponent],
 })
 export class NggSortableListModule {}

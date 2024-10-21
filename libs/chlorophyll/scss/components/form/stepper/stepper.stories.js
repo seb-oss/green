@@ -19,27 +19,27 @@ export default {
   title: 'Components/Form/Elements/Stepper',
 
   parameters: {
-    componentIds: ['component-stepper']
+    componentIds: ['component-stepper'],
   },
 
   argTypes: {
     validation: {
       control: 'select',
-      options: ['', 'is-valid', 'is-invalid']
+      options: ['', 'is-valid', 'is-invalid'],
     },
 
     enabled: {
-      control: 'boolean'
+      control: 'boolean',
     },
 
     text: {
-      control: 'text'
+      control: 'text',
     },
 
     formInfo: {
-      control: 'text'
-    }
-  }
+      control: 'text',
+    },
+  },
 }
 
 export const Stepper = {
@@ -48,7 +48,8 @@ export const Stepper = {
 
   args: {
     text: 'Stepper label',
-    formInfo: 'Lorem ipsum very long description of stepper and what should be entered',
-    enabled: true
-  }
+    formInfo:
+      'Lorem ipsum very long description of stepper and what should be entered',
+    enabled: true,
+  },
 }

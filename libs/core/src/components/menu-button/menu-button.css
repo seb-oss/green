@@ -61,7 +61,11 @@
     line-height: var(--_line-height);
 
     &:focus-visible {
-      outline-color: color-mix(in srgb, var(--_color-outline), transparent var(--_color-outline-alpha));
+      outline-color: color-mix(
+        in srgb,
+        var(--_color-outline),
+        transparent var(--_color-outline-alpha)
+      );
       border-radius: 2px;
       overflow: visible;
     }

@@ -4,7 +4,7 @@ import type { StorybookConfig } from '@storybook/angular'
 
 const config: StorybookConfig = {
   ...defaultConfig,
-  framework: '@storybook/angular'
+  framework: '@storybook/angular',
 }
 
 export default config

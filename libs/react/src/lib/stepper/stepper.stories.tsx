@@ -1,10 +1,10 @@
 import { Stepper, StepperProps } from './stepper'
 
-const Template = props => <Stepper {...props} />
+const Template = (props) => <Stepper {...props} />
 
 export default {
   title: 'Components/Stepper',
-  component: Stepper
+  component: Stepper,
 }
 
 export const Default = {
@@ -12,25 +12,25 @@ export const Default = {
   name: 'Stepper',
 
   parameters: {
-    componentIds: ['component-stepper']
+    componentIds: ['component-stepper'],
   },
 
   args: {
     label: 'Label',
-    description: 'Label information'
-  }
+    description: 'Label information',
+  },
 }
 
 export const BasicStepper = {
   name: 'Basic stepper',
 
   args: {
-    label: 'Label'
-  }
+    label: 'Label',
+  },
 }
 
 export const PrimitiveStepper = {
-  name: 'Primitive Stepper'
+  name: 'Primitive Stepper',
 }
 
 export const StepperValidation = {
@@ -41,7 +41,7 @@ export const StepperValidation = {
 
     validator: {
       message: 'Must be a number',
-      indicator: 'error'
-    }
-  }
+      indicator: 'error',
+    },
+  },
 }

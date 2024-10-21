@@ -52,8 +52,10 @@ export class GdsFormSummary extends GdsElement {
   }
 
   render() {
-    const formControlElements = Array.from(this.form?.elements || []) as GdsFormControlElement[]
-    const errors = formControlElements.filter(e => e.invalid)
+    const formControlElements = Array.from(
+      this.form?.elements || [],
+    ) as GdsFormControlElement[]
+    const errors = formControlElements.filter((e) => e.invalid)
     return when(
       errors.length > 0,
       () =>
@@ -63,19 +65,21 @@ export class GdsFormSummary extends GdsElement {
               <gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
             </gds-container>
             <gds-container >
-            ${msg(str`There are ${errors.length} errors to correct before you can continue:`)}
+            ${msg(
+              str`There are ${errors.length} errors to correct before you can continue:`,
+            )}
             <ul>
               ${errors.map(
                 (el: GdsFormControlElement) =>
                   html`<li><a href @click=${(e: MouseEvent) => {
                     e.preventDefault()
                     el.focus()
-                  }}>${el.label}</li>`
+                  }}>${el.label}</li>`,
               )}
             </ul>
           </gds-container>
         <gds-flex>
-      </gds-card>`
+      </gds-card>`,
     )
   }
 }

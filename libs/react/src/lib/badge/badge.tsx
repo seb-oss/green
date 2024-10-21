@@ -49,12 +49,16 @@ export function Badge({
       className={`badge ${type}`}
       style={{
         color: customColor,
-        backgroundColor: customBackgroundColor
+        backgroundColor: customBackgroundColor,
       }}
     >
       <strong>{children}</strong>
       {isCloseable && (
-        <button type="button" className="close" onClick={() => setIsClosed(true)}>
+        <button
+          type="button"
+          className="close"
+          onClick={() => setIsClosed(true)}
+        >
           {closeText}
           <i></i>
         </button>

@@ -1,4 +1,11 @@
-export type ProgressCircleThemes = 'success' | 'warning' | 'info' | 'danger' | 'light' | 'dark' | 'disabled'
+export type ProgressCircleThemes =
+  | 'success'
+  | 'warning'
+  | 'info'
+  | 'danger'
+  | 'light'
+  | 'dark'
+  | 'disabled'
 
 /**
  * @param percent value

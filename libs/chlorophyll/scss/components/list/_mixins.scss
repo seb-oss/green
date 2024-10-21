@@ -10,9 +10,17 @@ $_border-color: var(--gds-ref-pallet-base200);
 
 @mixin add-check-icon($color) {
   @if $color == green {
-    content: common.str-replace(common.str-replace($check-icon, color, $check-icon-color), '#', '%23');
+    content: common.str-replace(
+      common.str-replace($check-icon, color, $check-icon-color),
+      '#',
+      '%23'
+    );
   } @else if $color == black {
-    content: common.str-replace(common.str-replace($check-icon, color, $check-icon-color-black), '#', '%23');
+    content: common.str-replace(
+      common.str-replace($check-icon, color, $check-icon-color-black),
+      '#',
+      '%23'
+    );
   }
 }
 

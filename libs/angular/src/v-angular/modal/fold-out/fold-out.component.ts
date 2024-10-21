@@ -6,7 +6,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
-  ViewChild
+  ViewChild,
 } from '@angular/core'
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 import { fromEvent, Subscription } from 'rxjs'
@@ -15,7 +15,7 @@ import { filter, map } from 'rxjs/operators'
 @Component({
   selector: 'nggv-fold-out',
   templateUrl: './fold-out.component.html',
-  styleUrls: ['./fold-out.component.scss']
+  styleUrls: ['./fold-out.component.scss'],
 })
 export class NgvFoldOutComponent implements OnDestroy {
   /** Special property used for selecting DOM elements during automated UI testing. */
@@ -52,11 +52,14 @@ export class NgvFoldOutComponent implements OnDestroy {
   subscribeToOutsideClickEvent(): void {
     this.onClickSubscription = fromEvent(document, 'click').subscribe({
       next: (event: Event) => {
-        if (this.shown && !this.inputRef?.nativeElement.contains(event.target)) {
+        if (
+          this.shown &&
+          !this.inputRef?.nativeElement.contains(event.target)
+        ) {
           this.toggleVisibility()
           this.onClickSubscription?.unsubscribe()
         }
-      }
+      },
     })
   }
 }

@@ -9,8 +9,18 @@ import { NgvButtonModule } from '@sebgroup/green-angular/src/v-angular/button'
 
 @NgModule({
   imports: [CommonModule, NgvButtonModule],
-  declarations: [NgvDialogComponent, NgvSlideOutComponent, NgvFoldOutComponent, NgvFoldOutOptionDirective],
-  exports: [NgvDialogComponent, NgvSlideOutComponent, NgvFoldOutComponent, NgvFoldOutOptionDirective],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  declarations: [
+    NgvDialogComponent,
+    NgvSlideOutComponent,
+    NgvFoldOutComponent,
+    NgvFoldOutOptionDirective,
+  ],
+  exports: [
+    NgvDialogComponent,
+    NgvSlideOutComponent,
+    NgvFoldOutComponent,
+    NgvFoldOutOptionDirective,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class NgvModalModule {}

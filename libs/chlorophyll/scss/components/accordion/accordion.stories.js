@@ -57,11 +57,11 @@ export default {
   title: 'Components/Accordion',
 
   parameters: {
-    componentIds: ['component-accordion']
-  }
+    componentIds: ['component-accordion'],
+  },
 }
 
 export const Accordion = {
   render: Template.bind({}),
-  name: 'Accordion'
+  name: 'Accordion',
 }

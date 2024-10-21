@@ -1,12 +1,15 @@
 const fs = require('fs').promises
 const path = require('path')
 
-const regularDir = path.resolve(__dirname, '../src/components/icon/assets/regular')
+const regularDir = path.resolve(
+  __dirname,
+  '../src/components/icon/assets/regular',
+)
 const solidDir = path.resolve(__dirname, '../src/components/icon/assets/solid')
 const outputDir = path.resolve(__dirname, '../src/components/icon/icons')
 
 function delay(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 function toKebabCase(str) {
@@ -65,19 +68,42 @@ async function renameFiles() {
 
       // Rename the files in the regular and solid directories
       try {
-        await fs.rename(path.join(regularDir, file), path.join(regularDir, `${newName}.svg`))
-        console.log(`%cRenamed ${oldName} to ${newName} in regular directory`, 'color: green')
-        const regularSvg = await replaceInFile(path.join(regularDir, `${newName}.svg`))
-        console.log(`%cReplaced #353531 with currentColor in ${newName}.svg in regular directory`, 'color: blue')
+        await fs.rename(
+          path.join(regularDir, file),
+          path.join(regularDir, `${newName}.svg`),
+        )
+        console.log(
+          `%cRenamed ${oldName} to ${newName} in regular directory`,
+          'color: green',
+        )
+        const regularSvg = await replaceInFile(
+          path.join(regularDir, `${newName}.svg`),
+        )
+        console.log(
+          `%cReplaced #353531 with currentColor in ${newName}.svg in regular directory`,
+          'color: blue',
+        )
 
         let solidSvg = ''
         try {
-          await fs.rename(path.join(solidDir, file), path.join(solidDir, `${newName}.svg`))
-          console.log(`%cRenamed ${oldName} to ${newName} in solid directory`, 'color: green')
+          await fs.rename(
+            path.join(solidDir, file),
+            path.join(solidDir, `${newName}.svg`),
+          )
+          console.log(
+            `%cRenamed ${oldName} to ${newName} in solid directory`,
+            'color: green',
+          )
           solidSvg = await replaceInFile(path.join(solidDir, `${newName}.svg`))
-          console.log(`%cReplaced #353531 with currentColor in ${newName}.svg in solid directory`, 'color: blue')
+          console.log(
+            `%cReplaced #353531 with currentColor in ${newName}.svg in solid directory`,
+            'color: blue',
+          )
         } catch (error) {
-          console.warn(`%cFailed to rename ${oldName} in solid directory. Error: ${error.message}`, 'color: orange')
+          console.warn(
+            `%cFailed to rename ${oldName} in solid directory. Error: ${error.message}`,
+            'color: orange',
+          )
         }
 
         const tsContent = generateTsContent(newName, regularSvg, solidSvg)
@@ -90,7 +116,10 @@ async function renameFiles() {
         // Delay before moving to the next file
         await delay(1000) // 1 second delay
       } catch (error) {
-        console.error(`%cFailed to rename ${oldName} in regular directory. Error: ${error.message}`, 'color: red')
+        console.error(
+          `%cFailed to rename ${oldName} in regular directory. Error: ${error.message}`,
+          'color: red',
+        )
         continue // Skip to the next file
       }
     }

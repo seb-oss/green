@@ -19,7 +19,7 @@ const Template = () => (
 
 export default {
   title: 'Components/Breadcrumb',
-  component: Breadcrumb
+  component: Breadcrumb,
 }
 
 export const Default = {
@@ -27,6 +27,6 @@ export const Default = {
   name: 'Breadcrumb',
 
   parameters: {
-    componentIds: ['component-breadcrumb']
-  }
+    componentIds: ['component-breadcrumb'],
+  },
 }

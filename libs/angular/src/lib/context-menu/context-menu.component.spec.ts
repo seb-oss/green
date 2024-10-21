@@ -14,7 +14,7 @@ describe('NggContextMenuComponent', () => {
     window.ResizeObserver = jest.fn(() => ({
       observe: jest.fn(),
       disconnect: jest.fn(),
-      unobserve: jest.fn()
+      unobserve: jest.fn(),
     }))
 
     component = await render(NggContextMenuComponent, {
@@ -22,11 +22,11 @@ describe('NggContextMenuComponent', () => {
         closeOnScroll: true,
         menuItems: [
           { value: 'a', label: 'Option a' },
-          { value: 'b', label: 'Option b' }
-        ]
+          { value: 'b', label: 'Option b' },
+        ],
       },
       providers: [{ provide: ON_SCROLL_TOKEN, useValue: closeContextMenu }],
-      imports: [NggContextMenuModule]
+      imports: [NggContextMenuModule],
     })
 
     ctxMenuElements = await component.findAllByTestId('context-menu')

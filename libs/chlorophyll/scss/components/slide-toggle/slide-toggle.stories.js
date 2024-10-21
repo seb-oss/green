@@ -11,18 +11,18 @@ export default {
   title: 'Components/Slide Toggle',
 
   parameters: {
-    componentIds: ['component-slidetoggle']
+    componentIds: ['component-slidetoggle'],
   },
 
   argTypes: {
     label: {
-      control: 'text'
+      control: 'text',
     },
 
     checked: {
-      control: 'boolean'
-    }
-  }
+      control: 'boolean',
+    },
+  },
 }
 
 export const SlideToggle = {
@@ -31,6 +31,6 @@ export const SlideToggle = {
 
   args: {
     label: 'Toggle me',
-    checked: false
-  }
+    checked: false,
+  },
 }

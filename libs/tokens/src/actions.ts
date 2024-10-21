@@ -13,6 +13,6 @@ export default {
       console.log('Cleaning assets directory')
       console.log(config)
       fs.removeSync(config.buildPath + '../package.json')
-    }
-  }
+    },
+  },
 }

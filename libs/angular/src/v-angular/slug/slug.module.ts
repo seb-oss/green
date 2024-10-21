@@ -6,6 +6,6 @@ import { SlugPipe } from './slug.pipe'
 @NgModule({
   declarations: [SlugPipe],
   imports: [CommonModule],
-  exports: [SlugPipe]
+  exports: [SlugPipe],
 })
 export class NggSlugPipeModule {}

@@ -18,12 +18,14 @@ describe('Card', () => {
     render(
       <Card header={<Header />} footer={<Footer />}>
         Hello
-      </Card>
+      </Card>,
     )
 
     expect(screen.getByRole('heading').textContent).toEqual('Card Headline')
     expect(screen.getByText('Hello')).toBeDefined()
-    expect(screen.getAllByRole('button')[0].textContent).toContain('Default button')
+    expect(screen.getAllByRole('button')[0].textContent).toContain(
+      'Default button',
+    )
     expect(screen.getAllByRole('button')[1].textContent).toContain('Primary')
   })
   it('doesnt render header, content and footer', () => {

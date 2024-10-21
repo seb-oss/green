@@ -8,7 +8,7 @@ import {
   OnDestroy,
   OnInit,
   Optional,
-  Self
+  Self,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 
@@ -35,18 +35,22 @@ export class NgvRadioControlRegistry {
   }
 
   select(radio: NgvRadioComponent) {
-    this._radios.forEach(controlPair => {
+    this._radios.forEach((controlPair) => {
       if (this._isSameGroup(controlPair, radio) && controlPair[1] !== radio) {
         controlPair[1].writeValue(radio.value)
       }
     })
   }
 
-  private _isSameGroup(controlPair: [NgControl, NgvRadioComponent], radio: NgvRadioComponent) {
+  private _isSameGroup(
+    controlPair: [NgControl, NgvRadioComponent],
+    radio: NgvRadioComponent,
+  ) {
     if (!controlPair[0].control) return false
     return (
       //@ts-expect-error internal properties not exposed
-      controlPair[0]._parent === radio.ngControl._parent && controlPair[1].name === radio.name
+      controlPair[0]._parent === radio.ngControl._parent &&
+      controlPair[1].name === radio.name
     )
   }
 }
@@ -59,9 +63,12 @@ export class NgvRadioControlRegistry {
   selector: 'nggv-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
-  providers: [NgvRadioControlRegistry]
+  providers: [NgvRadioControlRegistry],
 })
-export class NgvRadioComponent extends NgvBaseControlValueAccessorComponent implements OnInit, OnDestroy {
+export class NgvRadioComponent
+  extends NgvBaseControlValueAccessorComponent
+  implements OnInit, OnDestroy
+{
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'radio'
 
@@ -80,7 +87,7 @@ export class NgvRadioComponent extends NgvBaseControlValueAccessorComponent impl
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
     protected registry: NgvRadioControlRegistry,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }
@@ -119,7 +126,11 @@ export class NgvRadioComponent extends NgvBaseControlValueAccessorComponent impl
 
   /** Checks that the name properties match and updates name property if only formControlName is given. */
   private _checkName(): void {
-    if (this.name && this.formControlName && this.name !== this.formControlName) {
+    if (
+      this.name &&
+      this.formControlName &&
+      this.name !== this.formControlName
+    ) {
       throw new Error(`
       If you define both a name and a formControlName attribute on your radio button, their values
       must match. Ex: <input type="radio" formControlName="food" name="food">

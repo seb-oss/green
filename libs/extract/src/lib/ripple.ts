@@ -7,8 +7,14 @@ export const handleGdsRippleEffect = (e: MouseEvent) => {
   const targetRect = targetElement.getBoundingClientRect()
 
   // Set the ripple effect position
-  targetElement.style.setProperty('--gds-ripple-top', `${e.clientY - targetRect.top}px`)
-  targetElement.style.setProperty('--gds-ripple-left', `${e.clientX - targetRect.left}px`)
+  targetElement.style.setProperty(
+    '--gds-ripple-top',
+    `${e.clientY - targetRect.top}px`,
+  )
+  targetElement.style.setProperty(
+    '--gds-ripple-left',
+    `${e.clientX - targetRect.left}px`,
+  )
 
   // Add and remove the ripple effect class
   targetElement.classList.remove('gds-ripple-effect')

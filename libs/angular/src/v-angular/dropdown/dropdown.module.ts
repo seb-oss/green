@@ -9,6 +9,6 @@ import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 @NgModule({
   declarations: [NgvDropdownComponent, NgvDropdownListComponent],
   imports: [CommonModule, NgvTypeaheadModule, NgvTooltipModule, NgvI18nModule],
-  exports: [NgvDropdownComponent, NgvDropdownListComponent]
+  exports: [NgvDropdownComponent, NgvDropdownListComponent],
 })
 export class NgvDropdownModule {}

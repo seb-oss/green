@@ -37,11 +37,11 @@ export default {
   title: 'Components/Breadcrumb',
 
   parameters: {
-    componentIds: ['component-Breadcrumb']
-  }
+    componentIds: ['component-Breadcrumb'],
+  },
 }
 
 export const Breadcrumb = {
   render: Template.bind({}),
-  name: 'Breadcrumb'
+  name: 'Breadcrumb',
 }

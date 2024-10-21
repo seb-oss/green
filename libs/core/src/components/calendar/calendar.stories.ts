@@ -12,9 +12,9 @@ const meta: Meta = {
   component: 'gds-calendar',
   parameters: {
     layout: 'centered',
-    disabledWeekends: true
+    disabledWeekends: true,
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -23,25 +23,31 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
     controls: {
-      expanded: true
-    }
+      expanded: true,
+    },
   },
-  args: {}
+  args: {},
 }
 
 export const Basic: Story = {
   ...DefaultParams,
   args: {
-    label: 'Calendar'
-  }
+    label: 'Calendar',
+  },
 }
 
 export const Minimal: Story = {
   ...DefaultParams,
-  render: args => html` <gds-calendar label="Pick a day" hideDayNames="true" hideExtraneousDays="true"></gds-calendar> `
+  render: (args) => html`
+    <gds-calendar
+      label="Pick a day"
+      hideDayNames="true"
+      hideExtraneousDays="true"
+    ></gds-calendar>
+  `,
 }
 
 /**
@@ -54,7 +60,7 @@ export const Minimal: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
-  render: args => html`
+  render: (args) => html`
     <div style="width: 320px">
       <gds-grid gap="m">
         <gds-dropdown id="year" label="Year" size="small">
@@ -91,17 +97,17 @@ export const Usage: Story = {
       const customizedDates = [
         {
           date: new Date('2024-06-04'),
-          color: 'var(--intent-danger-background)'
+          color: 'var(--intent-danger-background)',
         },
         {
           date: new Date('2024-06-06'),
           color: 'var(--intent-danger-background)',
-          indicator: 'dot'
+          indicator: 'dot',
         },
         {
           date: new Date('2024-07-06'),
-          disabled: true
-        }
+          disabled: true,
+        },
       ]
 
       function setYear(e) {
@@ -119,7 +125,8 @@ export const Usage: Story = {
 
       function onCalChange() {
         const selectedDate = cal.value
-        document.getElementById('selected-date').innerText = selectedDate.toDateString()
+        document.getElementById('selected-date').innerText =
+          selectedDate.toDateString()
       }
 
       cal.addEventListener('gds-date-focused', onCalFocusChange)
@@ -132,5 +139,5 @@ export const Usage: Story = {
       month.addEventListener('change', setMonth)
       month.value = String(cal.focusedMonth)
     </script>
-  `
+  `,
 }

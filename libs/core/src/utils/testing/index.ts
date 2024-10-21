@@ -1,6 +1,11 @@
 import { sendMouse } from '@web/test-runner-commands'
 
-function determineMousePosition(el: Element, position: string, offsetX: number, offsetY: number) {
+function determineMousePosition(
+  el: Element,
+  position: string,
+  offsetX: number,
+  offsetY: number,
+) {
   const { x, y, width, height } = el.getBoundingClientRect()
   const centerX = Math.floor(x + window.scrollX + width / 2)
   const centerY = Math.floor(y + window.scrollY + height / 2)
@@ -43,9 +48,14 @@ export async function clickOnElement(
   /** The horizontal offset to apply to the position when clicking */
   offsetX = 0,
   /** The vertical offset to apply to the position when clicking */
-  offsetY = 0
+  offsetY = 0,
 ) {
-  const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY)
+  const { clickX, clickY } = determineMousePosition(
+    el,
+    position,
+    offsetX,
+    offsetY,
+  )
 
   await sendMouse({ type: 'click', position: [clickX, clickY] })
 }
@@ -59,9 +69,14 @@ export async function moveMouseOnElement(
   /** The horizontal offset to apply to the position when clicking */
   offsetX = 0,
   /** The vertical offset to apply to the position when clicking */
-  offsetY = 0
+  offsetY = 0,
 ) {
-  const { clickX, clickY } = determineMousePosition(el, position, offsetX, offsetY)
+  const { clickX, clickY } = determineMousePosition(
+    el,
+    position,
+    offsetX,
+    offsetY,
+  )
 
   await sendMouse({ type: 'move', position: [clickX, clickY] })
 }
@@ -73,18 +88,24 @@ export async function dragElement(
   /** The horizontal distance to drag in pixels */
   deltaX = 0,
   /** The vertical distance to drag in pixels */
-  deltaY = 0
+  deltaY = 0,
 ): Promise<void> {
   await moveMouseOnElement(el)
   await sendMouse({ type: 'down' })
-  const { clickX, clickY } = determineMousePosition(el, 'center', deltaX, deltaY)
+  const { clickX, clickY } = determineMousePosition(
+    el,
+    'center',
+    deltaX,
+    deltaY,
+  )
   await sendMouse({ type: 'move', position: [clickX, clickY] })
   await sendMouse({ type: 'up' })
 }
 
 export function isWebKit() {
   return (
-    navigator.userAgent.toLowerCase().indexOf('safari') > -1 && navigator.userAgent.toLowerCase().indexOf('chrome') < 0
+    navigator.userAgent.toLowerCase().indexOf('safari') > -1 &&
+    navigator.userAgent.toLowerCase().indexOf('chrome') < 0
   )
 }
 

@@ -23,7 +23,7 @@ import * as Icons from './icons'
 const meta: Meta = {
   title: 'Docs/Components/Icon',
   component: 'gds-icon-bank',
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -32,10 +32,10 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
-    controls: { expanded: true }
-  }
+    controls: { expanded: true },
+  },
 }
 
 export const Basic: Story = {
@@ -43,8 +43,8 @@ export const Basic: Story = {
   args: {
     solid: false,
     width: 24,
-    height: 24
-  }
+    height: 24,
+  },
 }
 
 /**
@@ -64,12 +64,14 @@ window.addEventListener('click', (e: MouseEvent) => {
 
 window.addEventListener('DOMContentLoaded', () => {
   const searchBox = document.getElementById('icon-search') as HTMLInputElement
-  const icons = Array.from(document.querySelectorAll('#solids [gds-element^="gds-icon-"]'))
+  const icons = Array.from(
+    document.querySelectorAll('#solids [gds-element^="gds-icon-"]'),
+  )
 
   searchBox.addEventListener('keyup', () => {
     const searchTerm = searchBox.value.toLowerCase()
 
-    icons.forEach(icon => {
+    icons.forEach((icon) => {
       const iconNameAttr = icon.getAttribute('gds-element')
       if (iconNameAttr) {
         const iconName = iconNameAttr.toLowerCase().replace('gds-icon-', '')
@@ -106,8 +108,8 @@ window.addEventListener('DOMContentLoaded', () => {
 export const IconsRegular: Story = {
   ...DefaultParams,
   name: 'Regular icons',
-  render: args => {
-    const iconElements = Object.keys(Icons).map(iconName => {
+  render: (args) => {
+    const iconElements = Object.keys(Icons).map((iconName) => {
       const IconComponent = Icons[iconName]
       const tagName = IconComponent._name
         ? literal`gds-icon-${unsafeStatic(IconComponent._name)}`
@@ -118,10 +120,16 @@ export const IconsRegular: Story = {
     return html`
       <gds-flex flex-direction="column" gap="xl" id="solids">
         <input type="text" id="icon-search" placeholder="Search Icons" />
-        <gds-grid columns="s{2} m{4} l{4}" gap="s{xl} m{xl} l{xl}" class="icon-preview"> ${iconElements} </gds-grid>
+        <gds-grid
+          columns="s{2} m{4} l{4}"
+          gap="s{xl} m{xl} l{xl}"
+          class="icon-preview"
+        >
+          ${iconElements}
+        </gds-grid>
       </gds-flex>
     `
-  }
+  },
 }
 
 /**
@@ -133,11 +141,15 @@ export const IconsRegular: Story = {
 export const IconsSolid: Story = {
   ...DefaultParams,
   name: 'Solid icons',
-  render: args => html`
-    <gds-grid columns="s{2} m{4} l{4}" gap="s{xl} m{xl} l{xl}" class="icon-preview">
+  render: (args) => html`
+    <gds-grid
+      columns="s{2} m{4} l{4}"
+      gap="s{xl} m{xl} l{xl}"
+      class="icon-preview"
+    >
       <gds-icon-airplane-up solid></gds-icon-airplane-up>
     </gds-grid>
-  `
+  `,
 }
 
 /**
@@ -147,9 +159,9 @@ export const IconsSolid: Story = {
 export const Brands: Story = {
   ...DefaultParams,
   name: 'Brands',
-  render: args => {
+  render: (args) => {
     const BRANDS = Object.keys(Icons)
-      .map(iconName => {
+      .map((iconName) => {
         const IconComponent = Icons[iconName]
         if (!IconComponent._name.includes('brand')) {
           return null
@@ -160,9 +172,15 @@ export const Brands: Story = {
       .filter(Boolean) // Filter out null values
 
     return html`
-      <gds-grid columns="s{2} m{4} l{4}" gap="s{xl} m{xl} l{xl}" class="icon-preview"> ${BRANDS} </gds-grid>
+      <gds-grid
+        columns="s{2} m{4} l{4}"
+        gap="s{xl} m{xl} l{xl}"
+        class="icon-preview"
+      >
+        ${BRANDS}
+      </gds-grid>
     `
-  }
+  },
 }
 
 /**
@@ -172,15 +190,24 @@ export const Brands: Story = {
 export const IconsSize: Story = {
   ...DefaultParams,
   name: 'Sizing',
-  render: args => html`
+  render: (args) => html`
     <gds-icon-robot width="84" height="84"></gds-icon-robot>
     <gds-icon-rocket width="84" height="84"></gds-icon-rocket>
     <gds-icon-school width="84" height="84"></gds-icon-school>
     <gds-icon-settings-gear width="84" height="84"></gds-icon-settings-gear>
-    <gds-icon-settings-slider-hor width="84" height="84"></gds-icon-settings-slider-hor>
-    <gds-icon-settings-slider-three width="84" height="84"></gds-icon-settings-slider-three>
-    <gds-icon-settings-slider-ver width="84" height="84"></gds-icon-settings-slider-ver>
-  `
+    <gds-icon-settings-slider-hor
+      width="84"
+      height="84"
+    ></gds-icon-settings-slider-hor>
+    <gds-icon-settings-slider-three
+      width="84"
+      height="84"
+    ></gds-icon-settings-slider-three>
+    <gds-icon-settings-slider-ver
+      width="84"
+      height="84"
+    ></gds-icon-settings-slider-ver>
+  `,
 }
 
 /**
@@ -190,11 +217,11 @@ export const IconsSize: Story = {
 export const IconsStroke: Story = {
   ...DefaultParams,
   name: 'Stroke',
-  render: args => html`
+  render: (args) => html`
     <gds-icon-robot stroke="2" height="42"></gds-icon-robot>
     <gds-icon-rocket stroke="2" height="42"></gds-icon-rocket>
     <gds-icon-school stroke="2" height="42"></gds-icon-school>
-  `
+  `,
 }
 
 /**
@@ -204,5 +231,5 @@ export const IconsStroke: Story = {
 export const IconsLabel: Story = {
   ...DefaultParams,
   name: 'Accessible Label',
-  render: args => html`<gds-icon-rocket label="Rocket" />`
+  render: (args) => html`<gds-icon-rocket label="Rocket" />`,
 }

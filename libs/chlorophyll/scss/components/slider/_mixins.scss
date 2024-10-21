@@ -51,7 +51,13 @@ $browser-thumb-classes: '-webkit-slider-thumb', '-moz-range-thumb';
   -webkit-appearance: none;
   width: 100%;
   height: $track-height;
-  background: linear-gradient(to right, $dark-blue-2 0%, $dark-blue-2 0%, $track-color 0%, $track-color 100%);
+  background: linear-gradient(
+    to right,
+    $dark-blue-2 0%,
+    $dark-blue-2 0%,
+    $track-color 0%,
+    $track-color 100%
+  );
   border-radius: $track-border-radius;
 
   @each $browser in $browser-thumb-classes {

@@ -9,7 +9,7 @@ import {
   Output,
   Self,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
@@ -22,14 +22,15 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 @Component({
   selector: 'nggv-checkbox',
   templateUrl: './checkbox.component.html',
-  styleUrls: ['./checkbox.component.scss']
+  styleUrls: ['./checkbox.component.scss'],
 })
 export class NgvCheckboxComponent extends NgvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'checkbox'
   @Input() optionalLabel = 'Optional'
 
-  @Output() readonly valueChange: EventEmitter<string> = new EventEmitter<string>()
+  @Output() readonly valueChange: EventEmitter<string> =
+    new EventEmitter<string>()
 
   constructor(
     @Self()
@@ -38,7 +39,7 @@ export class NgvCheckboxComponent extends NgvBaseControlValueAccessorComponent {
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected cdr: ChangeDetectorRef
+    protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }
@@ -61,7 +62,7 @@ export class NgvCheckboxComponent extends NgvBaseControlValueAccessorComponent {
   /** Registers a callback function that is called when the child input element's value changes. */
   registerOnChange(fn: (checked: any) => any) {
     // Override default to update registry
-    this.onChange = checked => {
+    this.onChange = (checked) => {
       const output = checked ? this.value : null
       fn(output)
       this.valueChange.emit(output)

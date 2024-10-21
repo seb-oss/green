@@ -29,7 +29,7 @@ describe('Button', () => {
     render(
       <Button variant="primary" ref={ref}>
         Label
-      </Button>
+      </Button>,
     )
 
     expect(ref.current).toBeInstanceOf(HTMLButtonElement)

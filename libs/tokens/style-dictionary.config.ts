@@ -48,7 +48,7 @@ const config: StyleDictionary.Config = {
         'size/rem',
         'color/css',
         'name/cti/kebab',
-        'color/mix-blend'
+        'color/mix-blend',
       ],
       buildPath: 'internal/',
       prefix: 'gds-',
@@ -61,8 +61,8 @@ const config: StyleDictionary.Config = {
             return token?.attributes?.type === 'color'
           },
           options: {
-            selector: ':host'
-          }
+            selector: ':host',
+          },
         },
         {
           destination: 'theme/light.css',
@@ -71,8 +71,8 @@ const config: StyleDictionary.Config = {
           options: {
             colorScheme: 'light',
             outputReferences: false,
-            selector: ':host'
-          }
+            selector: ':host',
+          },
         },
         {
           destination: 'theme/dark.css',
@@ -81,8 +81,8 @@ const config: StyleDictionary.Config = {
           options: {
             colorScheme: 'dark',
             outputReferences: false,
-            selector: ':host'
-          }
+            selector: ':host',
+          },
         },
         {
           destination: 'light.css',
@@ -90,9 +90,9 @@ const config: StyleDictionary.Config = {
           filter: 'color-scheme',
           options: {
             colorScheme: 'light',
-            outputReferences: false
+            outputReferences: false,
             // selector: '.light',
-          }
+          },
         },
         {
           destination: 'dark.css',
@@ -100,9 +100,9 @@ const config: StyleDictionary.Config = {
           filter: 'color-scheme',
           options: {
             colorScheme: 'dark',
-            outputReferences: false
+            outputReferences: false,
             // selector: ':host',
-          }
+          },
         },
         {
           destination: 'size.css',
@@ -112,8 +112,8 @@ const config: StyleDictionary.Config = {
             return token.type === 'float' && token.path.includes('space')
           },
           options: {
-            outputReferences: true
-          }
+            outputReferences: true,
+          },
         },
         {
           destination: 'viewport.css',
@@ -134,8 +134,8 @@ const config: StyleDictionary.Config = {
             return token.type === 'float' && token.path.includes('typography')
           },
           options: {
-            outputReferences: true
-          }
+            outputReferences: true,
+          },
         },
         {
           destination: 'shadow.css',
@@ -144,8 +144,8 @@ const config: StyleDictionary.Config = {
             return token.path.includes('shadow')
           },
           options: {
-            outputReferences: true
-          }
+            outputReferences: true,
+          },
         },
         {
           destination: 'motion.css',
@@ -153,10 +153,10 @@ const config: StyleDictionary.Config = {
           filter: 'isMotion',
           options: {
             outputReferences: true,
-            selector: ':host'
-          }
-        }
-      ]
+            selector: ':host',
+          },
+        },
+      ],
     },
     css: {
       transforms: [
@@ -167,7 +167,7 @@ const config: StyleDictionary.Config = {
         'size/px',
         'color/css',
         'name/cti/kebab',
-        'color/alpha'
+        'color/alpha',
       ],
       buildPath: 'css/',
       prefix: 'gds-',
@@ -175,46 +175,46 @@ const config: StyleDictionary.Config = {
         {
           destination: 'pallet.css',
           format: 'css/variables',
-          filter: 'is2023Ref'
+          filter: 'is2023Ref',
         },
         {
           destination: 'light.css',
           format: 'css/theme',
           filter: 'is2023Color',
           options: {
-            colorScheme: 'light'
-          }
+            colorScheme: 'light',
+          },
         },
         {
           destination: 'dark.css',
           format: 'css/theme',
           filter: 'is2023Color',
           options: {
-            colorScheme: 'dark'
-          }
+            colorScheme: 'dark',
+          },
         },
         {
           destination: 'pallet-2016.css',
           format: 'css/variables',
-          filter: 'is2016Ref'
+          filter: 'is2016Ref',
         },
         {
           destination: 'light-2016.css',
           format: 'css/theme',
           filter: 'is2016Color',
           options: {
-            colorScheme: 'light'
-          }
+            colorScheme: 'light',
+          },
         },
         {
           destination: 'dark-2016.css',
           format: 'css/theme',
           filter: 'is2016Color',
           options: {
-            colorScheme: 'dark'
-          }
-        }
-      ]
+            colorScheme: 'dark',
+          },
+        },
+      ],
     },
     scss: {
       transforms: [
@@ -225,7 +225,7 @@ const config: StyleDictionary.Config = {
         'size/rem',
         'size/px',
         'color/css',
-        'color/alpha'
+        'color/alpha',
       ],
       buildPath: 'scss/',
       prefix: 'gds-',
@@ -233,99 +233,105 @@ const config: StyleDictionary.Config = {
         {
           destination: '_pallet.scss',
           format: 'scss/variables',
-          filter: 'is2016Ref'
+          filter: 'is2016Ref',
         },
         {
           destination: '_light.scss',
           format: 'scss/variables',
           filter: 'is2023Color',
           options: {
-            colorScheme: 'light'
-          }
+            colorScheme: 'light',
+          },
         },
         {
           destination: '_dark.scss',
           format: 'scss/variables',
           filter: 'is2023Color',
           options: {
-            colorScheme: 'dark'
-          }
+            colorScheme: 'dark',
+          },
         },
         {
           destination: '_mixin-sys.scss',
           format: 'scss/mixin',
-          filter: 'is2023MotionColor'
+          filter: 'is2023MotionColor',
         },
         {
           destination: '_mixin-ref.scss',
           format: 'scss/mixin',
-          filter: 'is2023Ref'
+          filter: 'is2023Ref',
         },
         {
           destination: '_pallet-2016.scss',
           format: 'scss/variables',
           filter: 'is2016Pallet',
           options: {
-            outputReferences: false
-          }
+            outputReferences: false,
+          },
         },
         {
           destination: '_light-2016.scss',
           format: 'scss/variables',
           filter: 'is2016Color',
           options: {
-            outputReferences: false
-          }
+            outputReferences: false,
+          },
         },
         {
           destination: '_dark-2016.scss',
           format: 'scss/variables',
           filter: 'is2016Color',
           options: {
-            outputReferences: false
-          }
+            outputReferences: false,
+          },
         },
         {
           destination: '_mixin-sys-light-2016.scss',
           format: 'scss/mixin',
           options: {
-            colorScheme: 'light'
+            colorScheme: 'light',
           },
-          filter: 'is2016Color'
+          filter: 'is2016Color',
         },
 
         {
           destination: '_mixin-sys-dark-2016.scss',
           format: 'scss/mixin',
           options: {
-            colorScheme: 'dark'
+            colorScheme: 'dark',
           },
-          filter: 'is2016Color'
+          filter: 'is2016Color',
         },
         {
           destination: '_mixin-ref-2016.scss',
           format: 'scss/mixin',
-          filter: 'is2016Ref'
-        }
-      ]
+          filter: 'is2016Ref',
+        },
+      ],
     },
     js: {
       //transformGroup: 'js',
-      transforms: ['attribute/cti', 'name/cti/pascal', 'size/rem', 'color/hex', 'color/alpha'],
+      transforms: [
+        'attribute/cti',
+        'name/cti/pascal',
+        'size/rem',
+        'color/hex',
+        'color/alpha',
+      ],
       buildPath: 'js/',
       prefix: 'gds',
       files: [
         {
           destination: 'ref-tokens.js',
           format: 'javascript/module',
-          filter: 'is2023Ref'
+          filter: 'is2023Ref',
         },
         {
           destination: 'sys-tokens.js',
           format: 'javascript/module',
-          filter: 'is2023Sys'
-        }
-      ]
+          filter: 'is2023Sys',
+        },
+      ],
     },
     figma: {
       buildPath: 'figma/',
@@ -335,7 +341,7 @@ const config: StyleDictionary.Config = {
           format: 'json/figma',
           destination: 'figma-colours-2023.json',
           options: {
-            outputReferences: true
+            outputReferences: true,
           },
           filter: function (token) {
             // Figma currently supports Variables with color, float, boolean or string values.
@@ -345,20 +351,20 @@ const config: StyleDictionary.Config = {
               return false
             }
 
-            const isColour = token.path?.some(item => {
+            const isColour = token.path?.some((item) => {
               return ['color', 'colour'].includes(item)
             })
 
             if (isColour) {
               return true
             }
-          }
+          },
         },
         {
           format: 'json/figma',
           destination: 'figma-density-2023.json',
           options: {
-            outputReferences: true
+            outputReferences: true,
           },
           filter: function (token) {
             // Figma currently supports Variables with color, float, boolean or string values.
@@ -368,18 +374,18 @@ const config: StyleDictionary.Config = {
 
             if (token.path?.includes('typography')) return false
 
-            const isDensity = token.path?.some(item => {
+            const isDensity = token.path?.some((item) => {
               return ['size', 'space'].includes(item)
             })
 
             if (isDensity) return true
-          }
+          },
         },
         {
           format: 'json/figma',
           destination: 'figma-typography-2023.json',
           options: {
-            outputReferences: true
+            outputReferences: true,
           },
           filter: function (token) {
             // Figma currently supports Variables with color, float, boolean or string values.
@@ -388,13 +394,13 @@ const config: StyleDictionary.Config = {
             if (token.version === '2016') return false
 
             if (token.path?.includes('typography')) return true
-          }
+          },
         },
         {
           format: 'json/figma',
           destination: 'variables-colours-2016.json',
           options: {
-            outputReferences: true
+            outputReferences: true,
           },
           filter: function (token) {
             // Figma currently supports Variables with color, float, boolean or string values.
@@ -402,12 +408,14 @@ const config: StyleDictionary.Config = {
 
             if (token.version !== '2016') return false
 
-            const isColour = token.path?.some(item => ['color', 'colour'].includes(item))
+            const isColour = token.path?.some((item) =>
+              ['color', 'colour'].includes(item),
+            )
 
             if (isColour) return true
-          }
-        }
-      ]
+          },
+        },
+      ],
     },
     ios: {
       buildPath: 'ios/',
@@ -423,7 +431,7 @@ const config: StyleDictionary.Config = {
         'content/swift/literal',
         'asset/swift/literal',
         'size/swift/remToCGFloat',
-        'font/swift/literal'
+        'font/swift/literal',
       ],
       files: [
         {
@@ -433,8 +441,8 @@ const config: StyleDictionary.Config = {
           options: {
             platformVersion: '15',
             targets: [swiftPackageName],
-            resources: ['Assets']
-          }
+            resources: ['Assets'],
+          },
         },
         {
           destination: swiftSourcePath + 'Colors/LightModeColors.swift',
@@ -444,8 +452,8 @@ const config: StyleDictionary.Config = {
           packageName: swiftPackageName,
           options: {
             type: 'color',
-            colorScheme: 'light'
-          }
+            colorScheme: 'light',
+          },
         },
         {
           destination: swiftSourcePath + 'Colors/DarkModeColors.swift',
@@ -455,8 +463,8 @@ const config: StyleDictionary.Config = {
           packageName: swiftPackageName,
           options: {
             type: 'color',
-            colorScheme: 'dark'
-          }
+            colorScheme: 'dark',
+          },
         },
         {
           destination: swiftSourcePath + '/Colors/UIColors.swift',
@@ -469,8 +477,8 @@ const config: StyleDictionary.Config = {
             colorType: 'uiKitDynamicProvider',
             import: ['UIKit'],
             lightModeObjectName: 'LightModeColors',
-            darkModeObjectName: 'DarkModeColors'
-          }
+            darkModeObjectName: 'DarkModeColors',
+          },
         },
         {
           destination: swiftSourcePath + '/Colors/Colors.swift',
@@ -482,8 +490,8 @@ const config: StyleDictionary.Config = {
             type: 'color',
             colorType: 'swiftUiReferenceToUiKit',
             import: ['SwiftUI'],
-            uiKitObjectName: 'UIColors'
-          }
+            uiKitObjectName: 'UIColors',
+          },
         },
         {
           destination: swiftSourcePath + 'Dimensions.swift',
@@ -492,8 +500,8 @@ const config: StyleDictionary.Config = {
           className: 'Dimensions',
           packageName: swiftPackageName,
           options: {
-            type: 'sys'
-          }
+            type: 'sys',
+          },
         },
         {
           destination: swiftSourcePath + 'Radii.swift',
@@ -502,10 +510,10 @@ const config: StyleDictionary.Config = {
           className: 'Radii',
           packageName: swiftPackageName,
           options: {
-            type: 'sys'
-          }
-        }
-      ]
+            type: 'sys',
+          },
+        },
+      ],
     },
     android: {
       buildPath: 'android/',
@@ -517,8 +525,8 @@ const config: StyleDictionary.Config = {
           filter: 'is2023Color',
           options: {
             colorScheme: 'light',
-            resourceType: 'color'
-          }
+            resourceType: 'color',
+          },
         },
         {
           destination: 'dark-colors.xml',
@@ -526,28 +534,28 @@ const config: StyleDictionary.Config = {
           filter: 'is2023Color',
           options: {
             colorScheme: 'dark',
-            resourceType: 'color'
-          }
+            resourceType: 'color',
+          },
         },
         {
           destination: 'dimensions.xml',
           format: 'green/android-resources',
           filter: 'is2023Size',
           options: {
-            resourceType: 'size'
-          }
+            resourceType: 'size',
+          },
         },
         {
           destination: 'radii.xml',
           format: 'green/android-resources',
           filter: 'is2023Radii',
           options: {
-            resourceType: 'number'
-          }
-        }
-      ]
-    }
-  }
+            resourceType: 'number',
+          },
+        },
+      ],
+    },
+  },
 }
 
 export default config

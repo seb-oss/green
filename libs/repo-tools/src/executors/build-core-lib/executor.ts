@@ -9,7 +9,10 @@ import type { ExecutorContext } from '@nx/devkit'
 import { copyAssets } from '@nx/js'
 import { removeSync } from 'fs-extra'
 
-export default async function runExecutor(options: BuildCoreLibExecutorSchema, context: ExecutorContext) {
+export default async function runExecutor(
+  options: BuildCoreLibExecutorSchema,
+  context: ExecutorContext,
+) {
   removeSync(options.outputPath)
 
   await copyAssets(options, context)
@@ -20,7 +23,9 @@ export default async function runExecutor(options: BuildCoreLibExecutorSchema, c
       './libs/core/src',
 
       // Components
-      ...glob.sync('./libs/core/src/components/**/!(*.test|*.style|*.styles|*.stories).ts'),
+      ...glob.sync(
+        './libs/core/src/components/**/!(*.test|*.style|*.styles|*.stories).ts',
+      ),
 
       // Transitional styles
       ...glob.sync('./libs/core/src/components/**/*.trans.styles.ts'),
@@ -28,12 +33,14 @@ export default async function runExecutor(options: BuildCoreLibExecutorSchema, c
       // Primitives
       // These are considered internal, but it is somtimes neccessary to
       // import directly, for example in our tests.
-      ...glob.sync('./libs/core/src/primitives/**/!(*.test|*.style|*.styles|*.stories).ts'),
+      ...glob.sync(
+        './libs/core/src/primitives/**/!(*.test|*.style|*.styles|*.stories).ts',
+      ),
 
       // Utils
       ...glob.sync('./libs/core/src/localization.ts'),
       ...glob.sync('./libs/core/src/transitional-styles.ts'),
-      ...glob.sync('./libs/core/src/scoping.ts')
+      ...glob.sync('./libs/core/src/scoping.ts'),
     ],
     chunkNames: 'chunks/[name].[hash]',
     splitting: true,
@@ -46,22 +53,23 @@ export default async function runExecutor(options: BuildCoreLibExecutorSchema, c
     outbase: './libs/core/src',
     format: 'esm',
     define: {
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': '"production"',
     },
     plugins: [
       sassPlugin({
         type: 'css-text',
         async transform(source, _resolveDir) {
-          const { css } = await postcss([autoprefixer, postcssPresetEnv({ stage: false })]).process(source, {
-            from: undefined
-          })
+          const { css } = await postcss([
+            autoprefixer,
+            postcssPresetEnv({ stage: false }),
+          ]).process(source, { from: undefined })
           return css
-        }
-      })
-    ]
+        },
+      }),
+    ],
   })
 
   return {
-    success: true
+    success: true,
   }
 }

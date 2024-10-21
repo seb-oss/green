@@ -10,7 +10,7 @@ const MockComponent = () => {
         validate={{
           message: 'fill in',
           indicator: 'error',
-          rules: { type: 'Required' }
+          rules: { type: 'Required' },
         }}
       >
         <TextInput label="Text input" />
@@ -26,7 +26,7 @@ describe('FormContext', () => {
     render(
       <FormProvider>
         <MockComponent />
-      </FormProvider>
+      </FormProvider>,
     )
     expect(screen.getByText('Text input')).not.toBeNull()
   })
@@ -35,7 +35,7 @@ describe('FormContext', () => {
     render(
       <FormProvider>
         <MockComponent />
-      </FormProvider>
+      </FormProvider>,
     )
     expect(screen.queryByText('fill in')).toBeNull()
     fireEvent.click(screen.getByText('submit'))
@@ -46,12 +46,12 @@ describe('FormContext', () => {
     const { container } = render(
       <FormProvider>
         <MockComponent />
-      </FormProvider>
+      </FormProvider>,
     )
     fireEvent.click(screen.getByText('submit'))
     expect(screen.queryByText('fill in')).not.toBeNull()
     fireEvent.change(container.querySelector('input') as HTMLInputElement, {
-      target: { value: 'i am value' }
+      target: { value: 'i am value' },
     })
     expect(screen.queryByText('fill in')).toBeNull()
   })
@@ -60,7 +60,7 @@ describe('FormContext', () => {
     render(
       <FormProvider>
         <MockComponent />
-      </FormProvider>
+      </FormProvider>,
     )
     fireEvent.click(screen.getByText('submit'))
     expect(screen.queryByText('fill in')).not.toBeNull()

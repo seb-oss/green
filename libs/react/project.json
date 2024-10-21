@@ -16,7 +16,7 @@
     "rollup": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],
-      "dependsOn": ["^build", "core:make-react"],
+      "dependsOn": ["^build"],
       "cache": true,
       "inputs": ["{projectRoot}/**/*"],
       "options": {
@@ -25,7 +25,10 @@
         "project": "libs/react/package.json",
         "entryFile": "libs/react/src/index.ts",
         "external": ["react/jsx-runtime"],
-        "rollupConfig": ["@nx/react/plugins/bundle-rollup", "libs/react/rollup.config.mjs"],
+        "rollupConfig": [
+          "@nx/react/plugins/bundle-rollup",
+          "libs/react/rollup.config.mjs"
+        ],
         "assets": [
           {
             "glob": "(README.md)",

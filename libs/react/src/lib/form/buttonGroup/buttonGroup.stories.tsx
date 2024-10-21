@@ -10,7 +10,7 @@ const Template = ({ children, ...props }) => (
 
 export default {
   title: 'Components/Form/ButtonGroup',
-  component: ButtonGroup
+  component: ButtonGroup,
 }
 
 export const Default = {
@@ -18,11 +18,11 @@ export const Default = {
   name: 'Button Group',
 
   parameters: {
-    componentIds: ['component-segmented-control']
+    componentIds: ['component-segmented-control'],
   },
 
   args: {
     variant: 'ghost',
-    selectedIndex: 1
-  }
+    selectedIndex: 1,
+  },
 }

@@ -9,49 +9,51 @@ import { of } from 'rxjs'
 import { Component, importProvidersFrom } from '@angular/core'
 
 @Component({
-  template: ` <p class="mt-4">Option A</p> `
+  template: ` <p class="mt-4">Option A</p> `,
 })
 class OptionAComponent {}
 
 @Component({
-  template: ` <p class="mt-4">Option B</p> `
+  template: ` <p class="mt-4">Option B</p> `,
 })
 class OptionBComponent {}
 
 const routes: Routes = [
   {
     path: 'option-a',
-    component: OptionAComponent
+    component: OptionAComponent,
   },
   {
     path: 'option-b',
-    component: OptionBComponent
-  }
+    component: OptionBComponent,
+  },
 ]
 
 export default {
   title: 'Components/Segmented control',
   component: NggSegmentedControlComponent,
   parameters: {
-    componentIds: ['component-segmented-control']
+    componentIds: ['component-segmented-control'],
   },
   decorators: [
     moduleMetadata({
       declarations: [OptionAComponent, OptionBComponent],
-      imports: [CommonModule]
+      imports: [CommonModule],
     }),
     applicationConfig({
-      providers: [importProvidersFrom(RouterModule.forRoot([]))]
+      providers: [importProvidersFrom(RouterModule.forRoot([]))],
     }),
-    componentWrapperDecorator(story => `${story}<router-outlet></router-outlet>`)
-  ]
+    componentWrapperDecorator(
+      (story) => `${story}<router-outlet></router-outlet>`,
+    ),
+  ],
 } as Meta
 
 export const WithRouter = () => ({
   props: {
     $controls: of([
       { text: 'Option A', url: '/option-a' },
-      { text: 'Option B', url: '/option-b' }
-    ])
-  }
+      { text: 'Option B', url: '/option-b' },
+    ]),
+  },
 })

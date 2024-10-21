@@ -7,15 +7,20 @@
  * - `setupFilesAfterEnv` that mocks some browser APIs that are used by the web components
  */
 module.exports = {
-  apply: config => {
+  apply: (config) => {
     const transformIgnorePatterns = [
       'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs/)',
-      ...(config.transformIgnorePatterns || [])
+      ...(config.transformIgnorePatterns || []),
     ]
-    config.transformIgnorePatterns = [transformIgnorePatterns.join('&')]
+    config.transformIgnorePatterns = [
+      transformIgnorePatterns.join('&')
+    ]
 
-    config.setupFilesAfterEnv = [...(config.setupFilesAfterEnv || []), __dirname + '/setup-jest.js']
+    config.setupFilesAfterEnv = [
+      ...(config.setupFilesAfterEnv || []),
+      __dirname + '/setup-jest.js',
+    ]
 
     return config
-  }
+  },
 }

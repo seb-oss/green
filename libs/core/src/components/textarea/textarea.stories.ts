@@ -29,9 +29,9 @@ const meta: Meta = {
   title: 'Docs/Components/Form/Textarea',
   component: 'gds-textarea',
   parameters: {
-    layout: 'centered'
+    layout: 'centered',
   },
-  tags: ['autodocs']
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -40,15 +40,15 @@ type Story = StoryObj
 const DefaultParams: Story = {
   parameters: {
     docs: {
-      source: { format: true, type: 'dynamic' }
+      source: { format: true, type: 'dynamic' },
     },
     controls: {
-      expanded: true
-    }
+      expanded: true,
+    },
   },
   args: {
-    label: 'Label text'
-  }
+    label: 'Label text',
+  },
 }
 
 export const Default: Story = {
@@ -56,9 +56,12 @@ export const Default: Story = {
   name: 'Default',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea label="Label" supporting-text="Supporting text."></gds-textarea>
+      <gds-textarea
+        label="Label"
+        supporting-text="Supporting text."
+      ></gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -80,7 +83,7 @@ export const Lead: Story = {
         <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
       </gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -97,11 +100,16 @@ export const Trail: Story = {
   name: 'Slot: Trail',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea label="Label" supporting-text="Label support text" value="Example value" clearable>
+      <gds-textarea
+        label="Label"
+        supporting-text="Label support text"
+        value="Example value"
+        clearable
+      >
         <gds-badge variant="information" slot="trail">SEK</gds-badge>
       </gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -118,10 +126,16 @@ export const Length: Story = {
   name: 'Length',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea label="Label" supporting-text="Label support text" value="Example value" maxLength="20" clearable>
+      <gds-textarea
+        label="Label"
+        supporting-text="Label support text"
+        value="Example value"
+        maxLength="20"
+        clearable
+      >
       </gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -148,7 +162,7 @@ export const Rows: Story = {
       >
       </gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -176,17 +190,23 @@ export const Resize: Story = {
           <gds-text>Resize: False</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
-        <gds-textarea label="Label" supporting-text="Label support text" resize="false"> </gds-textarea>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resize="false"
+        >
+        </gds-textarea>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1" gap="l">
         <gds-flex flex-direction="column" gap="s">
           <gds-text>Resize: True</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
-        <gds-textarea label="Label" supporting-text="Label support text"> </gds-textarea>
+        <gds-textarea label="Label" supporting-text="Label support text">
+        </gds-textarea>
       </gds-flex>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -203,9 +223,13 @@ export const Clearable: Story = {
   name: 'Clearable',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea label="Label text" value="Clear this text" clearable></gds-textarea>
+      <gds-textarea
+        label="Label text"
+        value="Clear this text"
+        clearable
+      ></gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -222,9 +246,12 @@ export const SupportingText: Story = {
   name: 'Supporting Text',
   render: () => html`
     <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea label="Label" supporting-text="Supporting text"></gds-textarea>
+      <gds-textarea
+        label="Label"
+        supporting-text="Supporting text"
+      ></gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -253,18 +280,22 @@ export const ExtendedSupportingText: Story = {
     <gds-flex gap="xl" width="800px">
       <gds-textarea label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-textarea>
-      <gds-textarea label="Label text" supporting-text="Supporting text" show-extended-supporting-text>
+      <gds-textarea
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
         <span slot="extended-supporting-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-textarea>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -313,26 +344,26 @@ export const Validation: Story = {
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'Error message.'
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'The value must be 12 characters long.'
+                  'The value must be 12 characters long.',
                 ]
-            }
+            },
           }}
         >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
           <span slot="extended-supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </span>
         </gds-textarea>
         <gds-textarea
@@ -349,20 +380,20 @@ export const Validation: Story = {
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'Error message.'
+                  'Error message.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
                   {
                     ...el.validity,
                     valid: false,
-                    customError: true
+                    customError: true,
                   },
-                  'The value must be 12 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                  'The value must be 12 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
                 ]
-            }
+            },
           }}
           clearable
         >
@@ -370,7 +401,7 @@ export const Validation: Story = {
         </gds-textarea>
       </gds-flex>
     </gds-flex>
-  `
+  `,
 }
 
 /**
@@ -390,9 +421,15 @@ export const Disabled: Story = {
       <gds-textarea label="Label" disabled supporting-text="Support text">
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       </gds-textarea>
-      <gds-textarea label="Label" disabled supporting-text="Support text" value="Disabled with value" clearable>
+      <gds-textarea
+        label="Label"
+        disabled
+        supporting-text="Support text"
+        value="Disabled with value"
+        clearable
+      >
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
       </gds-textarea>
     </gds-flex>
-  `
+  `,
 }

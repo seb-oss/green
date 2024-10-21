@@ -42,7 +42,7 @@ export class GdsBadge extends GdsElement {
   @property({
     attribute: 'disabled',
     type: Boolean,
-    reflect: true
+    reflect: true,
   })
   disabled = false
 
@@ -55,7 +55,7 @@ export class GdsBadge extends GdsElement {
   @property({
     attribute: 'notification',
     type: Boolean,
-    reflect: true
+    reflect: true,
   })
   notification = false
 
@@ -73,11 +73,19 @@ export class GdsBadge extends GdsElement {
         ? (this as GdsBadge).variant
         : (this as GdsBadge).variant + '-badge'
 
-    const color = this.disabled ? 'disabled' : this.notification ? 'primary' : (this as GdsBadge).variant
+    const color = this.disabled
+      ? 'disabled'
+      : this.notification
+        ? 'primary'
+        : (this as GdsBadge).variant
 
     const padding = this.size === 'small' || this.notification ? '2xs' : 'xs'
 
-    const blockSize = this.mainSlotOccupied ? (this.size === 'small' || this.notification ? 'm' : 'l') : 'xs'
+    const blockSize = this.mainSlotOccupied
+      ? this.size === 'small' || this.notification
+        ? 'm'
+        : 'l'
+      : 'xs'
 
     return html`<gds-flex
       level="3"
@@ -96,7 +104,8 @@ export class GdsBadge extends GdsElement {
       pointer-events=${this.disabled ? 'none' : 'auto'}
       user-select="${this.disabled ? 'none' : 'auto'}"
     >
-      ${this.#renderLeadSlot()} ${this.#renderMainSlot()} ${this.#renderTrailSlot()}
+      ${this.#renderLeadSlot()} ${this.#renderMainSlot()}
+      ${this.#renderTrailSlot()}
     </gds-flex>`
   }
 
@@ -116,8 +125,9 @@ export class GdsBadge extends GdsElement {
     this.mainSlotOccupied =
       assignedNodes.length > 0 &&
       assignedNodes.some(
-        node =>
-          node.nodeType === Node.ELEMENT_NODE || (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== '')
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
   }
 

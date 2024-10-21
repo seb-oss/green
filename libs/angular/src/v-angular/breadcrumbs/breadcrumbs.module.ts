@@ -8,6 +8,6 @@ import { NgvExternalLinkDirectiveModule } from '@sebgroup/green-angular/src/v-an
 @NgModule({
   declarations: [NgvBreadcrumbsComponent],
   imports: [CommonModule, NgvExternalLinkDirectiveModule, RouterModule],
-  exports: [NgvBreadcrumbsComponent]
+  exports: [NgvBreadcrumbsComponent],
 })
 export class NgvBreadcrumbsModule {}

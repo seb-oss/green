@@ -1,4 +1,4 @@
-export const handleRippleEffect = e => {
+export const handleRippleEffect = (e) => {
   try {
     const rect = e.target.getBoundingClientRect()
     const setStyleProps = document.documentElement.style
@@ -13,13 +13,13 @@ export const handleRippleEffect = e => {
   }
 }
 
-export const handleChipSelection = e => {
+export const handleChipSelection = (e) => {
   e.target.classList.toggle('gds-filter-chip__action')
   e.target.classList.toggle('gds-filter-chip__action-selected')
   handleRippleEffect(e)
 }
 
-export const handleChipRemoval = e => {
+export const handleChipRemoval = (e) => {
   e.target.classList.toggle('gds-filter-chip__action')
   e.target.classList.toggle('gds-filter-chip__action-remove')
   handleRippleEffect(e)

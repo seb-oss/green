@@ -1,8 +1,17 @@
-import { forwardRef, ButtonHTMLAttributes, DetailedHTMLProps, ForwardedRef } from 'react'
+import {
+  forwardRef,
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  ForwardedRef,
+} from 'react'
 import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'
 
-export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
+export interface ButtonProps
+  extends DetailedHTMLProps<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   /** Button styling. Available options: 'primary', 'secondary', 'ghost' and 'tertiary'. */
   variant?: ButtonVariant
   /** Styling button as active or not */
@@ -15,12 +24,20 @@ export interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTML
 
 export const Button = forwardRef(
   (
-    { className, variant, active = false, type = 'button', size, testId, ...props }: ButtonProps,
-    ref: ForwardedRef<HTMLButtonElement>
+    {
+      className,
+      variant,
+      active = false,
+      type = 'button',
+      size,
+      testId,
+      ...props
+    }: ButtonProps,
+    ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const buttonClassName =
       classNames(className, variant, size, {
-        active: active
+        active: active,
       }) || undefined
 
     return variant == 'close' ? (
@@ -34,9 +51,15 @@ export const Button = forwardRef(
         <i></i>
       </button>
     ) : (
-      <button className={buttonClassName} type={type} data-testid={testId} ref={ref} {...props} />
+      <button
+        className={buttonClassName}
+        type={type}
+        data-testid={testId}
+        ref={ref}
+        {...props}
+      />
     )
-  }
+  },
 )
 
 export default Button

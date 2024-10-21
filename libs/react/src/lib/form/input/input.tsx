@@ -7,9 +7,14 @@ import {
   useState,
   ReactNode,
   forwardRef,
-  ForwardedRef
+  ForwardedRef,
 } from 'react'
-import { IExpandableInformation, IValidator, randomId, validateClassName } from '@sebgroup/extract'
+import {
+  IExpandableInformation,
+  IValidator,
+  randomId,
+  validateClassName,
+} from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import Group from '../group/group'
 import classNames from 'classnames'
@@ -62,7 +67,7 @@ export const Input = forwardRef(
       required,
       ...props
     }: InputProps,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLInputElement>,
   ) => {
     const [uuid] = useState(id)
     const [localValue, setLocalValue] = useState(value)
@@ -77,7 +82,10 @@ export const Input = forwardRef(
         const formattedValue = formatter ? formatter(value) : value
         const nrAddedChars = formattedValue.length - value.length
         const updateCaretPosition = nrAddedChars !== 0
-        const newSelectionStart = updateCaretPosition && selectionStart ? selectionStart + nrAddedChars : selectionStart
+        const newSelectionStart =
+          updateCaretPosition && selectionStart
+            ? selectionStart + nrAddedChars
+            : selectionStart
 
         // Fixes bug: React loses caret position when you format the input value
         window.requestAnimationFrame(() => {
@@ -89,19 +97,22 @@ export const Input = forwardRef(
         if (onChange) onChange(event)
         if (onChangeInput) onChangeInput(formattedValue)
       },
-      [formatter, setLocalValue, onChange, onChangeInput]
+      [formatter, setLocalValue, onChange, onChangeInput],
     )
 
     const showSimpleInput = !label && !info && !expandableInfo
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_group-message`]: !showSimpleInput && validator?.message !== undefined && validator.message.length > 0,
+      [`${uuid}_group-message`]:
+        !showSimpleInput &&
+        validator?.message !== undefined &&
+        validator.message.length > 0,
       [`${uuid}_info`]: !showSimpleInput && info,
-      [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo
+      [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
     })
 
     const inputClassName = classNames(className, {
-      [validateClassName(validator?.indicator)]: validator
+      [validateClassName(validator?.indicator)]: validator,
     })
 
     const input = (
@@ -136,7 +147,12 @@ export const Input = forwardRef(
         role={role}
       >
         <div className="gds-input-wrapper">
-          <Group groupBorder groupFocus error={validator?.message} id={`${uuid}_group`}>
+          <Group
+            groupBorder
+            groupFocus
+            error={validator?.message}
+            id={`${uuid}_group`}
+          >
             {input}
             {unit && <span className={spanClassName}>{unit}</span>}
             {children}
@@ -144,20 +160,26 @@ export const Input = forwardRef(
         </div>
       </FormItem>
     )
-  }
+  },
 )
 
-export const TextInput = forwardRef((props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
-  return <Input type="text" {...props} ref={ref} />
-})
+export const TextInput = forwardRef(
+  (props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
+    return <Input type="text" {...props} ref={ref} />
+  },
+)
 
-export const EmailInput = forwardRef((props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
-  return <Input type="email" {...props} ref={ref} />
-})
+export const EmailInput = forwardRef(
+  (props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
+    return <Input type="email" {...props} ref={ref} />
+  },
+)
 
-export const NumberInput = forwardRef((props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
-  return <Input type="number" {...props} ref={ref} />
-})
+export const NumberInput = forwardRef(
+  (props: Omit<InputProps, 'type'>, ref: ForwardedRef<HTMLInputElement>) => {
+    return <Input type="number" {...props} ref={ref} />
+  },
+)
 
 // For backwards compatibility
 export { RadioButton } from '../radioButton/radioButton'

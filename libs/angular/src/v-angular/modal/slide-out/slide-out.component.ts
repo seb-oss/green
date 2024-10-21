@@ -1,6 +1,22 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core'
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core'
 
-import { trigger, query, style, animate, transition, group } from '@angular/animations'
+import {
+  trigger,
+  query,
+  style,
+  animate,
+  transition,
+  group,
+} from '@angular/animations'
 
 // import { faTimes } from '@fortawesome/pro-regular-svg-icons';
 
@@ -26,43 +42,55 @@ import { DialogButtons } from '../modal.types'
     trigger('modalAnimation', [
       transition(':enter', [
         query('.gds-slide-out', style({ transform: 'translateX(100%)' }), {
-          optional: true
+          optional: true,
         }),
         query('.gds-backdrop, [role=dialog]', style({ opacity: '0' }), {
-          optional: true
+          optional: true,
         }),
         group([
           query(
             '.gds-slide-out',
-            animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(0)' })),
-            { optional: true }
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(0)' }),
+            ),
+            { optional: true },
           ),
           query(
             '.gds-backdrop, [role=dialog]',
-            animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '1' })),
-            { optional: true }
-          )
-        ])
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '1' }),
+            ),
+            { optional: true },
+          ),
+        ]),
       ]),
       transition(':leave', [
         query('.gds-slide-out', style({ transform: 'translateX(0)' }), {
-          optional: true
+          optional: true,
         }),
         group([
           query(
             '.gds-slide-out',
-            animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ transform: 'translateX(100%)' })),
-            { optional: true }
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ transform: 'translateX(100%)' }),
+            ),
+            { optional: true },
           ),
           query(
             '.gds-backdrop, [role=dialog]',
-            animate('350ms cubic-bezier(0.33, 1, 0.68, 1)', style({ opacity: '0' })),
-            { optional: true }
-          )
-        ])
-      ])
-    ])
-  ]
+            animate(
+              '350ms cubic-bezier(0.33, 1, 0.68, 1)',
+              style({ opacity: '0' }),
+            ),
+            { optional: true },
+          ),
+        ]),
+      ]),
+    ]),
+  ],
 })
 export class NgvSlideOutComponent implements OnInit {
   /** @internal */
@@ -164,7 +192,12 @@ export class NgvSlideOutComponent implements OnInit {
   @HostListener('click', ['$event', '"host"'])
   @HostListener('document:keydown.escape', ['$event'])
   close(event?: Event, initiator?: string): void {
-    if (initiator === 'host' && event instanceof MouseEvent && event.target !== event.currentTarget) return
+    if (
+      initiator === 'host' &&
+      event instanceof MouseEvent &&
+      event.target !== event.currentTarget
+    )
+      return
     if (this.shown && this.closable) {
       this.nggvCloseEvent.emit(this.shown)
       this.shown = false
@@ -181,13 +214,19 @@ export class NgvSlideOutComponent implements OnInit {
     if (event.key !== 'Tab') return
     if (event.shiftKey) {
       // shift + tab
-      if (this.lastFocusable && document.activeElement === this.firstFocusable) {
+      if (
+        this.lastFocusable &&
+        document.activeElement === this.firstFocusable
+      ) {
         this.lastFocusable.focus()
         event.preventDefault()
       }
     } else {
       // tab
-      if (this.firstFocusable && document.activeElement === this.lastFocusable) {
+      if (
+        this.firstFocusable &&
+        document.activeElement === this.lastFocusable
+      ) {
         this.firstFocusable.focus()
         event.preventDefault()
       }
@@ -198,7 +237,7 @@ export class NgvSlideOutComponent implements OnInit {
     window.setTimeout(() => {
       if (!this.slideOutRef) return
       const focusable = this.slideOutRef.nativeElement.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
       )
       this.firstFocusable = focusable[0]
       this.lastFocusable = focusable[focusable.length - 1]
