@@ -1,6 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { notFound, usePathname } from 'next/navigation'
+import dynamic from 'next/dynamic'
+
 import Badge from '@/badge/badge'
 import Flex from '@/flex/flex'
 import Cell from '@/grid/cell'
@@ -55,6 +58,7 @@ export default function ComponentLayout({
     summary,
     figma_hero_svg,
     preview,
+    pathSegments,
   } = component
 
   const pathsAndComponents = [
@@ -99,6 +103,20 @@ export default function ComponentLayout({
     },
   ]
 
+  const getDynamicComponent = (c: string) =>
+    dynamic(
+      () =>
+        import(`../../../design/example/${c}`).catch(() => {
+          return () => <></>
+        }),
+      {
+        ssr: false,
+        loading: () => <p>Loading...</p>,
+      },
+    )
+
+  const Preview = getDynamicComponent(url_path.replace('/component/', ''))
+
   return (
     <>
       <Trail
@@ -113,7 +131,6 @@ export default function ComponentLayout({
           <h1 className="gds-fs-headline-large">{title}</h1>
           <p>{summary}</p>
         </GdsFlex>
-        {/* <GdsCard level="2" background="secondary" border-radius="s"> */}
         <GdsContainer level="2" background="primary">
           <GdsFlex align-items="flex-start" gap="xl" min-width="400px">
             <GdsFlex flex-direction="column">
@@ -126,21 +143,20 @@ export default function ComponentLayout({
             </GdsFlex>
           </GdsFlex>
         </GdsContainer>
-        {/* </GdsCard> */}
       </GdsFlex>
-      <gds-cell span="2">
-        <Pattern>
-          {(preview?.trim() ?? '') ? (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: `${preview}`,
-              }}
-            />
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: figma_hero_svg.svg }} />
-          )}
-        </Pattern>
-      </gds-cell>
+      <GdsFlex
+        level="2"
+        border="4xs/primary"
+        padding="2xl"
+        border-radius="m"
+        background="primary"
+        gap="xl"
+        align-items="center"
+        justify-content="center"
+        height="420px"
+      >
+        <Preview />
+      </GdsFlex>
       <Taber component={url_path} links={links} />
       <footer>
         Last updated: <br />
