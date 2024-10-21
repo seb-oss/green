@@ -1,9 +1,10 @@
 import React from 'react'
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsMask from '@sebgroup/green-react/src/core/mask'
 import GdsCalendar from '@sebgroup/green-react/src/core/calendar'
 
 const Calendar = () => (
-  <>
+  <GdsFlex position="relative" height="200px">
     <GdsMask
       inset="0"
       mask-image="top"
@@ -13,7 +14,7 @@ const Calendar = () => (
       pointer-events="none"
     ></GdsMask>
     <GdsCalendar></GdsCalendar>
-  </>
+  </GdsFlex>
 )
 
 export default Calendar

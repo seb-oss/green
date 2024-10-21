@@ -102,7 +102,11 @@ export default function Components({ title }: { title: string }) {
                   </GdsFlex>
                 )}
                 <GdsDivider padding="s" opacity="0.2"></GdsDivider>
-                <GdsFlex z-index="18" background="primary" min-width="100%">
+                <GdsFlex
+                  z-index="18"
+                  background="secondary; hover:primary"
+                  min-width="100%"
+                >
                   <Link href={component.url_path} style={{ minWidth: '100%' }}>
                     <GdsFlex
                       padding="s"
