@@ -24,6 +24,7 @@
       "#/*": ["apps/docs/design/styles/*"],
       "&/*": ["apps/docs/design/layouts/*"],
       "m/*": ["apps/docs/design/mdx/*"],
+      "example/*": ["apps/docs/design/example/*"],
       "$/*": ["apps/docs/utils/*"],
       "public/*": ["apps/docs/public/*"],
       "@sebgroup/extract": ["libs/extract/src/index.ts"],
