@@ -21,7 +21,7 @@ import '../../icon/icons/rocket.ts'
  * linking it to the corresponding form element.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Validation/Summary',
+  title: 'Components/Form/Validation/Summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',

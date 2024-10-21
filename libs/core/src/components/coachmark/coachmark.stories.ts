@@ -19,7 +19,7 @@ import './index.ts'
  *
  */
 const meta: Meta = {
-  title: 'Docs/Components/Coachmark',
+  title: 'Components/Coachmark',
   component: 'gds-coachmark',
   parameters: {
     layout: 'centered',

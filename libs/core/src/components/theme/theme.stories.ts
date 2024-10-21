@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
-import '../media/img'
-import '../media/video'
-import '../layout/card'
-import '../layout/container'
-import '../layout/flex'
-import '../content/text'
-import '../content/divider'
+import '../img'
+import '../video'
+import '../card'
+import '../container'
+import '../flex'
+import '../text'
+import '../divider'
 import '../icon/icons/arrow-down.js'
 import '../icon/icons/arrow-right.js'
 import '../icon/icons/circles-three.js'
@@ -54,7 +54,7 @@ import { html } from 'lit'
  */
 
 const meta: Meta = {
-  title: 'Docs/Theme',
+  title: 'Components/Theme',
   component: 'gds-theme',
   tags: ['autodocs'],
 }
