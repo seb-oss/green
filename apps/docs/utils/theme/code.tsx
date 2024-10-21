@@ -16,19 +16,17 @@ interface CustomOptions extends Options {
 
 function addCopyButton() {
   return (tree: any) => {
-    visit(tree, 'code', (node) => {
+    visit(tree, 'code', node => {
       node.children.push({
         type: 'element',
         tagName: 'button',
         properties: {
           className: ['copy-button'],
           onclick: `navigator.clipboard.writeText(${JSON.stringify(
-            node.children
-              .map((child: { value: any }) => child.value)
-              .join('\n'),
-          )}).then(() => alert('Code copied!')).catch((error) => console.error('Error copying code: ', error))`,
+            node.children.map((child: { value: any }) => child.value).join('\n')
+          )}).then(() => alert('Code copied!')).catch((error) => console.error('Error copying code: ', error))`
         },
-        children: [{ type: 'text', value: 'Copy' }],
+        children: [{ type: 'text', value: 'Copy' }]
       })
     })
   }
@@ -42,7 +40,7 @@ export function rehypePrettyCodeClasses() {
         Boolean(
           node.tagName === 'code' &&
             Object.keys(node.properties).length === 0 &&
-            node.children.some((n: any) => n.type === 'text'),
+            node.children.some((n: any) => n.type === 'text')
         ),
       (node: any) => {
         const textNode = node.children.find((n: any) => n.type === 'text')
@@ -52,57 +50,31 @@ export function rehypePrettyCodeClasses() {
         textNode.children = [{ type: 'text', value: textNode.value }]
         node.properties.className = [INLINE_BLOCK]
         node.tagName = 'span'
-      },
+      }
     )
 
     visit(
       tree,
-      (node: any) =>
-        Boolean(
-          typeof node?.properties?.['data-rehype-pretty-code-fragment'] !==
-            'undefined',
-        ),
+      (node: any) => Boolean(typeof node?.properties?.['data-rehype-pretty-code-fragment'] !== 'undefined'),
       (node: any) => {
         if (node.tagName === 'span') {
-          node.properties.className = [
-            ...(node.properties.className || []),
-            INLINE_BLOCK,
-          ]
-          node.children[0].properties.className = [
-            ...(node.children[0].properties.className || []),
-            INLINE_CODE,
-          ]
+          node.properties.className = [...(node.properties.className || []), INLINE_BLOCK]
+          node.children[0].properties.className = [...(node.children[0].properties.className || []), INLINE_CODE]
 
           return node
         }
 
         if (node.tagName === 'div') {
-          node.properties.className = [
-            ...(node.properties.className || []),
-            BLOCK,
-          ]
+          node.properties.className = [...(node.properties.className || []), BLOCK]
           node.children = node.children.map((node: any) => {
-            if (
-              node.tagName === 'div' &&
-              typeof node.properties?.['data-rehype-pretty-code-title'] !==
-                'undefined'
-            ) {
-              node.properties.className = [
-                ...(node.properties.className || []),
-                TITLE,
-              ]
+            if (node.tagName === 'div' && typeof node.properties?.['data-rehype-pretty-code-title'] !== 'undefined') {
+              node.properties.className = [...(node.properties.className || []), TITLE]
             }
             if (node.tagName === 'pre') {
               node.properties.className = [PRE]
               if (node.children[0].tagName === 'code') {
-                node.children[0].properties.className = [
-                  ...(node.children[0].properties.className || []),
-                  CODE,
-                ]
-                if (
-                  typeof node.children[0].properties['data-line-numbers'] !==
-                  'undefined'
-                ) {
+                node.children[0].properties.className = [...(node.children[0].properties.className || []), CODE]
+                if (typeof node.children[0].properties['data-line-numbers'] !== 'undefined') {
                   node.children[0].properties.className.push(NUMBERED_LINES)
                 }
               }
@@ -113,7 +85,7 @@ export function rehypePrettyCodeClasses() {
 
           return node
         }
-      },
+      }
     )
   }
 }
@@ -123,7 +95,7 @@ export const rehypePrettyCodeOptions: Partial<CustomOptions> = {
   theme: 'one-dark-pro',
   tokensMap: {
     fn: 'entity.name.function',
-    objKey: 'meta.object-literal.key',
+    objKey: 'meta.object-literal.key'
   },
   onVisitLine(node) {
     if (node.children.length === 0) {
@@ -132,5 +104,5 @@ export const rehypePrettyCodeOptions: Partial<CustomOptions> = {
     node.properties.className = ['']
   },
   copyButton: true,
-  plugins: [addCopyButton], // Include your custom plugins here
+  plugins: [addCopyButton] // Include your custom plugins here
 }
