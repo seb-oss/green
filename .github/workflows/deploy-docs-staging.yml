@@ -73,7 +73,7 @@ jobs:
           FIGMA_PROJECT_ID: ${{ secrets.FIGMA_PROJECT_ID_STAGING }}
           NEXT_PUBLIC_DEV_ENV: ${{ secrets.NEXT_PUBLIC_DEV_ENV }}
 
-      - run: ls
+      - run: ls ./dist/apps/docs/
 
       - name: Upload next build
         uses: actions/upload-artifact@v4
