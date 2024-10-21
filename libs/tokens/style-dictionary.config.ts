@@ -116,6 +116,17 @@ const config: StyleDictionary.Config = {
           }
         },
         {
+          destination: 'viewport.css',
+          format: 'viewport',
+          filter: function (token) {
+            // Check if the token type is 'float' and the path includes 'space'
+            return token.type === 'float' && token.path.includes('viewport')
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
+        {
           destination: 'text.css',
           format: 'text',
           filter: function (token) {

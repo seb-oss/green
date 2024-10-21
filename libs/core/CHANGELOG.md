@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.44.10
+
+### Patch Changes
+
+- feb5aa0: **Tokens:** Added viewport tokens
+
 ## 1.44.9
 
 ### Patch Changes
