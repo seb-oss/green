@@ -232,9 +232,9 @@ export class NggModalComponent implements OnDestroy, OnInit {
     <button
       data-testid="modal-close-button"
       class="close"
+      aria-label="Close"
       (click)="this.handleClose($event)"
     >
-      <span className="sr-only">Close</span>
       <i></i>
     </button>
   `,

@@ -1,7 +1,6 @@
 const Template = () => {
   return `
-    <button class="close" type="button">
-      <span class="sr-only">Close</span>
+    <button class="close" type="button" aria-label="Close">
       <i></i>
     </button>
   `
