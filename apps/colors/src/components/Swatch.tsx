@@ -15,7 +15,7 @@ const Swatch = ({ color, tone }: ISwatch) => {
         alignItems: 'center',
         flexDirection: 'column',
         fontSize: 12,
-        cursor: 'pointer'
+        cursor: 'pointer',
       }}
       onClick={() => {
         navigator.clipboard.writeText(color)

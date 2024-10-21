@@ -7,6 +7,6 @@ import { NggChartsModule } from '@sebgroup/green-angular-charts'
 
 @NgModule({
   declarations: [GreenChartsComponent],
-  imports: [CommonModule, NggChartsModule, GreenChartsRoutingModule]
+  imports: [CommonModule, NggChartsModule, GreenChartsRoutingModule],
 })
 export class GreenChartsModule {}

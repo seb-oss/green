@@ -7,7 +7,9 @@
   "targets": {
     "build": {
       "executor": "@nx/webpack:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/core-lib-dev",
@@ -15,10 +17,14 @@
         "main": "apps/core-lib-dev/src/main.ts",
         "tsConfig": "apps/core-lib-dev/tsconfig.app.json",
         "webpackConfig": "apps/core-lib-dev/webpack.config.js",
-        "assets": ["apps/core-lib-dev/src/assets"],
+        "assets": [
+          "apps/core-lib-dev/src/assets"
+        ],
         "index": "apps/core-lib-dev/src/index.html",
         "baseHref": "/",
-        "styles": ["apps/core-lib-dev/src/styles.scss"],
+        "styles": [
+          "apps/core-lib-dev/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -40,7 +46,9 @@
     },
     "serve": {
       "executor": "@nx/webpack:dev-server",
-      "inputs": ["core"],
+      "inputs": [
+        "core"
+      ],
       "options": {
         "buildTarget": "core-lib-dev:build",
         "port": 4210,
@@ -57,7 +65,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/core-lib-dev/jest.config.ts"
       }

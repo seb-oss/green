@@ -5,12 +5,12 @@ import { PaginationComponent } from './pagination.component'
 const routes: Routes = [
   {
     path: '',
-    component: PaginationComponent
-  }
+    component: PaginationComponent,
+  },
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PaginationRoutingModule {}

@@ -8,6 +8,6 @@ import { NggCellTableModule } from '@sebgroup/green-angular'
 @NgModule({
   declarations: [TableComponent],
   imports: [CommonModule, NggCellTableModule, TableRoutingModule],
-  exports: []
+  exports: [],
 })
 export class TableModule {}

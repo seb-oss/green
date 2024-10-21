@@ -29,23 +29,23 @@ export class CalendarExample extends LitElement {
     {
       date: new Date(`${YEAR_MONTH}-07`),
       indicator: 'dot',
-      color: 'var(--intent-danger-background)'
+      color: 'var(--intent-danger-background)',
     },
     {
       date: new Date(`${YEAR_MONTH}-12`),
       indicator: 'dot',
-      color: 'var(--intent-danger-background)'
+      color: 'var(--intent-danger-background)',
     },
     {
       date: new Date(`${YEAR_MONTH}-24`),
       indicator: 'dot',
-      color: 'var(--intent-danger-background)'
+      color: 'var(--intent-danger-background)',
     },
     {
       date: new Date(`${YEAR_MONTH}-21`),
       indicator: 'dot',
-      disabled: true
-    }
+      disabled: true,
+    },
   ]
 
   render() {
@@ -64,7 +64,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.disabledWeekends}
-            @change=${e => (this.disabledWeekends = e.target.checked)} /><span
+            @change=${(e) => (this.disabledWeekends = e.target.checked)} /><span
             >Disable weekends</span
           ><i
         ></i></label>
@@ -72,7 +72,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showWeekNumbers}
-            @change=${e => (this.showWeekNumbers = e.target.checked)} /><span
+            @change=${(e) => (this.showWeekNumbers = e.target.checked)} /><span
             >Show week numbers</span
           ><i
         ></i></label>
@@ -80,7 +80,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showCustomizedDates}
-            @change=${e => (this.showCustomizedDates = e.target.checked)} /><span
+            @change=${(e) => (this.showCustomizedDates = e.target.checked)} /><span
             >Show customized dates</span
           ><i
         ></i></label>

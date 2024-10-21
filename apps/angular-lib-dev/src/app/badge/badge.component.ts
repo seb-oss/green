@@ -3,7 +3,7 @@ import { BadgeType } from '@sebgroup/extract'
 
 @Component({
   selector: 'green-badge',
-  templateUrl: './badge.component.html'
+  templateUrl: './badge.component.html',
 })
 export class BadgeComponent implements OnInit {
   badges: Array<{ text: string; type?: BadgeType }> = []
@@ -17,7 +17,7 @@ export class BadgeComponent implements OnInit {
       { text: 'Badge 3', type: 'success' },
       { text: 'Badge 4', type: 'light' },
       { text: 'Badge 5', type: 'dark' },
-      { text: 'Badge 6' }
+      { text: 'Badge 6' },
     ]
   }
 

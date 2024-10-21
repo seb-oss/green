@@ -1,4 +1,7 @@
 {
-  "presets": ["@babel/preset-typescript", ["@babel/preset-env", { "targets": "defaults" }]],
+  "presets": [
+    "@babel/preset-typescript",
+    ["@babel/preset-env", { "targets": "defaults" }]
+  ],
   "plugins": [["@babel/plugin-proposal-decorators", { "version": "2023-05" }]]
 }

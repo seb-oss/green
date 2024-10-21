@@ -6,22 +6,26 @@ const routes: Routes = [
   {
     path: 'charts',
     data: { name: 'Charts' },
-    loadChildren: () => import('./green-charts/green-charts.module').then(m => m.GreenChartsModule)
+    loadChildren: () =>
+      import('./green-charts/green-charts.module').then(
+        (m) => m.GreenChartsModule,
+      ),
   },
   {
     path: 'bootstrap',
     data: { name: 'Bootstrap' },
-    loadChildren: () => import('./bootstrap/bootstrap.module').then(m => m.BootstrapModule)
+    loadChildren: () =>
+      import('./bootstrap/bootstrap.module').then((m) => m.BootstrapModule),
   },
-  { path: '**', redirectTo: 'buttons' }
+  { path: '**', redirectTo: 'buttons' },
 ]
 
 const routerOptions: ExtraOptions = {
-  anchorScrolling: 'enabled'
+  anchorScrolling: 'enabled',
 }
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, routerOptions)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

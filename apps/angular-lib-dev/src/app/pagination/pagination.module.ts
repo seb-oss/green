@@ -8,6 +8,6 @@ import { NggPaginationModule } from '@sebgroup/green-angular'
 @NgModule({
   declarations: [PaginationComponent],
   imports: [CommonModule, NggPaginationModule, PaginationRoutingModule],
-  exports: []
+  exports: [],
 })
 export class PaginationModule {}

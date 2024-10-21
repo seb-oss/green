@@ -7,43 +7,43 @@ import { DropdownOption, DropdownTexts } from '@sebgroup/green-angular'
 @Component({
   selector: 'green-dropdown',
   templateUrl: './dropdown.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownComponent {
   texts: DropdownTexts = {
     placeholder: 'Select',
-    searchPlaceholder: 'Search'
+    searchPlaceholder: 'Search',
   }
 
   options: DropdownOption[] = [
     {
       label: 'Tacos',
-      value: 'tacos'
+      value: 'tacos',
     },
     {
       label: 'Pizza',
-      value: 'pizza'
+      value: 'pizza',
     },
     {
       label: 'Sushi',
-      value: 'sushi'
-    }
+      value: 'sushi',
+    },
   ]
 
   optionsWithInitial: DropdownOption[] = [
     {
       label: 'Tacos',
-      value: 'tacos'
+      value: 'tacos',
     },
     {
       label: 'Pizza',
       value: 'pizza',
-      selected: true
+      selected: true,
     },
     {
       label: 'Sushi',
-      value: 'sushi'
-    }
+      value: 'sushi',
+    },
   ]
 
   customOptionsInitial: DropdownOption[] = [
@@ -51,25 +51,25 @@ export class DropdownComponent {
       name: 'Tacos',
       val: {
         id: 'tacos',
-        kitchen: 'mexican'
-      }
+        kitchen: 'mexican',
+      },
     },
     {
       name: 'Pizza',
       val: {
         id: 'pizza',
-        kitchen: 'italian'
+        kitchen: 'italian',
       },
-      selected: true
+      selected: true,
     },
     {
       name: 'Sushi',
       val: {
         id: 'sushi',
-        kitchen: 'japanese'
+        kitchen: 'japanese',
       },
-      selected: true
-    }
+      selected: true,
+    },
   ]
 
   customOptions: DropdownOption[] = [
@@ -77,118 +77,118 @@ export class DropdownComponent {
       name: 'Tacos',
       val: {
         id: 'tacos',
-        kitchen: 'mexican'
-      }
+        kitchen: 'mexican',
+      },
     },
     {
       name: 'Pizza',
       val: {
         id: 'pizza',
-        kitchen: 'italian'
-      }
+        kitchen: 'italian',
+      },
     },
     {
       name: 'Sushi',
       val: {
         id: 'sushi',
-        kitchen: 'japanese'
-      }
-    }
+        kitchen: 'japanese',
+      },
+    },
   ]
 
   dropdownForm = this._fb.group({
     select1: undefined,
     select2: 'pizza',
     select3: [[this.options[2].value]],
-    select4: undefined
+    select4: undefined,
   })
 
   options$ = of([
     {
       name: 'Sweden',
-      value: 'sweden'
+      value: 'sweden',
     },
     {
       name: 'Denmark',
-      value: 'denmark'
+      value: 'denmark',
     },
     {
       name: 'Finland',
-      value: 'Finland'
+      value: 'Finland',
     },
     {
       name: 'Norway',
-      value: 'norway'
+      value: 'norway',
     },
     {
       name: 'England',
-      value: 'england'
+      value: 'england',
     },
     {
       name: 'Germany',
-      value: 'germany'
+      value: 'germany',
     },
     {
       name: 'Estonia',
-      value: 'estonia'
+      value: 'estonia',
     },
     {
       name: 'Lithuania',
-      value: 'lithuania'
+      value: 'lithuania',
     },
     {
       name: 'Belarus',
-      value: 'belarus'
+      value: 'belarus',
     },
     {
       name: 'Latvia',
-      value: 'latvia'
+      value: 'latvia',
     },
     {
       name: 'Greece',
-      value: 'greece'
+      value: 'greece',
     },
     {
       name: 'Italy',
-      value: 'italy'
+      value: 'italy',
     },
     {
       name: 'Austria',
-      value: 'austria'
+      value: 'austria',
     },
     {
       name: 'Switzerland',
-      value: 'switzerland'
+      value: 'switzerland',
     },
     {
       name: 'Netherlands',
-      value: 'netherlands'
+      value: 'netherlands',
     },
     {
       name: 'Belgium',
-      value: 'belgium'
+      value: 'belgium',
     },
     {
       name: 'France',
-      value: 'france'
+      value: 'france',
     },
     {
       name: 'Spain',
-      value: 'spain'
+      value: 'spain',
     },
     {
       name: 'Portugal',
-      value: 'portugal'
+      value: 'portugal',
     },
     {
       name: 'Poland',
-      value: 'poland'
-    }
+      value: 'poland',
+    },
   ]).pipe(delay(3000))
 
   validationForm = this._fb.group({
     country: ['sweden', [Validators.required]],
-    otherCountries: [null, [Validators.required, Validators.minLength(2)]]
+    otherCountries: [null, [Validators.required, Validators.minLength(2)]],
   })
 
   dropdownValue0: string | undefined = 'sushi'

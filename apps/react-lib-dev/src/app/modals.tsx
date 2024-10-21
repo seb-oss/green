@@ -10,18 +10,32 @@ export const Modals = () => {
   return (
     <>
       <Button onClick={() => setIsOpen(true)}>Open Slideout</Button>
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} type="slideout" preventBackdropClose>
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        type="slideout"
+        preventBackdropClose
+      >
         This is a modal
       </Modal>
       <Button onClick={() => setIsDialogOpen(true)}>Open Dialog</Button>
       {createPortal(
-        <Modal isOpen={isDialogOpen} onClose={() => setIsDialogOpen(false)} preventBackdropClose>
+        <Modal
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          preventBackdropClose
+        >
           This is a modal
         </Modal>,
-        document.body
+        document.body,
       )}
       <Button onClick={() => setIsTakeover(true)}>Open Takeover</Button>
-      <Modal type="takeover" isOpen={isTakeover} onClose={() => setIsTakeover(false)} preventBackdropClose>
+      <Modal
+        type="takeover"
+        isOpen={isTakeover}
+        onClose={() => setIsTakeover(false)}
+        preventBackdropClose
+      >
         This is a modal
       </Modal>
     </>

@@ -46,33 +46,51 @@
       [isValid]="ngForm.submitted ? date.valid : null"
     >
       <!-- Hint text when not submitted -->
-      <ng-container data-form-info *ngIf="!ngForm['submitted']">Select date</ng-container>
+      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+        >Select date</ng-container
+      >
       <ng-container data-form-info *ngIf="ngForm['submitted']">
         <!-- Text when form control contains one or more errors -->
         <ng-container *ngIf="date.errors as errors">
           <!-- Text for each error (only one will be displayed at a time) -->
           <ng-container *ngIf="errors['required']">Select a date</ng-container>
-          <ng-container *ngIf="errors['validDate'] === true">Enter valid date</ng-container>
-          <ng-container *ngIf="errors['validDate'] && errors['validDate']['minDate']"
-            >Enter date after {{ errors['validDate']['minDate'] | date: 'shortDate' }}</ng-container
+          <ng-container *ngIf="errors['validDate'] === true"
+            >Enter valid date</ng-container
           >
-          <ng-container *ngIf="errors['validDate'] && errors['validDate']['maxDate']"
-            >Enter date before {{ errors['validDate']['maxDate'] | date: 'shortDate' }}</ng-container
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['minDate']"
+            >Enter date after
+            {{
+              errors['validDate']['minDate'] | date: 'shortDate'
+            }}</ng-container
+          >
+          <ng-container
+            *ngIf="errors['validDate'] && errors['validDate']['maxDate']"
+            >Enter date before
+            {{
+              errors['validDate']['maxDate'] | date: 'shortDate'
+            }}</ng-container
           >
         </ng-container>
       </ng-container>
     </ngg-datepicker>
   </ng-container>
-  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">Save</button>
+  <button type="submit" [disabled]="ngForm.submitted && validationForm.invalid">
+    Save
+  </button>
   <button (click)="validationForm.reset()">Reset</button>
 </form>
 <code>
   <h5 class="mb-0">Form data</h5>
-  <div>Submitted: {{ ngForm.submitted }} Invalid: {{ validationForm.invalid }}</div>
+  <div>
+    Submitted: {{ ngForm.submitted }} Invalid: {{ validationForm.invalid }}
+  </div>
   <h5 class="mb-0">Values</h5>
   <div>
     {{ validationForm.value | json }}
   </div>
   <h5 class="mb-0">Errors</h5>
-  <div *ngFor="let f of validationForm.controls | keyvalue">{{ f.key }}:{{ f.value.errors | json }}</div>
+  <div *ngFor="let f of validationForm.controls | keyvalue">
+    {{ f.key }}:{{ f.value.errors | json }}
+  </div>
 </code>

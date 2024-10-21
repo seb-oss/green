@@ -5,12 +5,12 @@ import { SortableListComponent } from './sortable-list.component'
 const routes: Routes = [
   {
     path: '',
-    component: SortableListComponent
-  }
+    component: SortableListComponent,
+  },
 ]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SortableListRoutingModule {}

@@ -7,6 +7,6 @@ import { NggBadgeModule } from '@sebgroup/green-angular'
 
 @NgModule({
   declarations: [BadgeComponent],
-  imports: [CommonModule, BadgeRoutingModule, NggBadgeModule]
+  imports: [CommonModule, BadgeRoutingModule, NggBadgeModule],
 })
 export class BadgeModule {}

@@ -5,7 +5,7 @@ import { DropdownOption } from '@sebgroup/green-angular'
 @Component({
   selector: 'green-modal',
   templateUrl: './modals.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalsComponent {
   public defaultModalIsOpen = false
@@ -19,43 +19,43 @@ export class ModalsComponent {
   public countries: DropdownOption[] = [
     {
       name: 'Sweden',
-      value: 'sweden'
+      value: 'sweden',
     },
     {
       name: 'Denmark',
-      value: 'denmark'
+      value: 'denmark',
     },
     {
       name: 'Finland',
-      value: 'Finland'
+      value: 'Finland',
     },
     {
       name: 'Norway',
-      value: 'norway'
+      value: 'norway',
     },
     {
       name: 'England',
-      value: 'england'
+      value: 'england',
     },
     {
       name: 'Germany',
-      value: 'germany'
+      value: 'germany',
     },
     {
       name: 'Estonia',
-      value: 'estonia'
+      value: 'estonia',
     },
     {
       name: 'Lithuania',
-      value: 'lithuania'
+      value: 'lithuania',
     },
     {
       name: 'Belarus',
-      value: 'belarus'
+      value: 'belarus',
     },
     {
       name: 'Latvia',
-      value: 'latvia'
-    }
+      value: 'latvia',
+    },
   ]
 }
