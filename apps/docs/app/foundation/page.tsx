@@ -147,7 +147,7 @@ export default function Foundation() {
                   and the experience we want to build, and swiftly make changes
                   as needed.
                 </p>
-                <Spacing flex-direction="vertical" size={8} />
+                <Spacing direction="vertical" size={8} />
                 <Accordion>
                   <AccordionItem
                     id="timeless"
@@ -231,7 +231,7 @@ export default function Foundation() {
                   Empowering designers and developers with versatile, accessible
                   and coherent components.
                 </p>
-                <Spacing flex-direction="vertical" size={8} />
+                <Spacing direction="vertical" size={8} />
                 <Accordion>
                   <AccordionItem
                     id="features"

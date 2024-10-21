@@ -140,7 +140,7 @@ export default function About() {
                 with coaching sessions tailored for both design intricacies and
                 development challenges.
               </p>
-              <Spacing flex-direction="vertical" size={8} />
+              <Spacing direction="vertical" size={8} />
               <Accordion>
                 <AccordionItem label="Figma libraries" labelElementLevel={3}>
                   <p>
@@ -190,7 +190,7 @@ export default function About() {
                     where you bring your questions and problems and discuss them
                     with members from the Green Design System team.
                   </p>
-                  <Spacing flex-direction="vertical" size={7} />
+                  <Spacing direction="vertical" size={7} />
                   <ul>
                     <li>
                       – Book
