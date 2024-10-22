@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
-import ComponentList from '@/component-list/component-list'
-import Grid from '@/grid/grid'
 import Hero from 'core/hero'
-import RessourcesList from '@/resources-list/resources-list'
 import Components from 'core/components'
 
 export const metadata: Metadata = {
