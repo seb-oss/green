@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { allComponents, Component } from 'content'
 import Dev, { isDev } from '$/dev/dev'
+import { allComponents, Component } from 'content'
 
 import './style.css'
 

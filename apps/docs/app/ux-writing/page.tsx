@@ -1,13 +1,12 @@
 'use client'
 
-import TOC from '@/toc/toc'
-
-import './style.css'
-
 import Cell from '@/grid/cell'
 import Grid from '@/grid/grid'
 import Spacer from '@/spacer/spacer'
+import TOC from '@/toc/toc'
 import Content from '&/content/content'
+
+import './style.css'
 
 const tocHeading = [
   {

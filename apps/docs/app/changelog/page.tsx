@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { allChangelogs, Changelog } from 'content'
 import Layout from '&/changelog'
+import { allChangelogs, Changelog } from 'content'
 import { compareDesc, format, parseISO } from 'date-fns'
 
 function ChangelogCard(changelog: Changelog) {
