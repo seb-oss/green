@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.6.5
+
+### Patch Changes
+
+- bf9e150: Accordion - Can set aria-level in angular
+- Updated dependencies [500beae]
+  - @sebgroup/green-core@1.45.0
+
 ## 4.6.4
 
 ### Patch Changes

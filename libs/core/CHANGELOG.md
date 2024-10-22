@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.45.0
+
+### Minor Changes
+
+- 500beae: **Folder Structure:** Refactor to a flat structure. Affects import paths of layout, content and media components, as well as the FAB button.
+
 ## 1.44.10
 
 ### Patch Changes
