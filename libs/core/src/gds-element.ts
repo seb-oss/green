@@ -3,7 +3,7 @@ import { DynamicStylesController } from './dynamic-styles'
 import { LitElement } from 'lit'
 
 // This nis needed to support legacy decorators. Once we upgrade to TC39 standard decorators across the lib, we can remove this.
-// More info: https://lit.dev/docs/components/decorators/#decorator-versions
+// More info: https://lit.dev/Components/decorators/#decorator-versions
 import 'reflect-metadata'
 
 export class GdsElement extends LitElement {

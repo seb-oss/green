@@ -31,6 +31,9 @@ node_modules
 /dist/
 /apps/docs/public/core-out/
 
+# Green Core React wrappers
+/libs/react/src/core
+
 # misc
 /.sass-cache
 /connect.lock

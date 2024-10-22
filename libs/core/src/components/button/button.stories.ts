@@ -1,10 +1,10 @@
 import { html, nothing } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
-import '../layout/grid/index.js'
-import '../content/text/index.js'
-import '../content/divider/index.js'
-import '../layout/flex/index.js'
+import '../grid/index.js'
+import '../text/index.js'
+import '../divider/index.js'
+import '../flex/index.js'
 import '../icon/icons/credit-card.js'
 import '../icon/icons/circle-x.js'
 import '../icon/icons/chevron-top.js'
@@ -19,7 +19,7 @@ import '../icon/icons/arrow-right.js'
  * A good rule of thumb is to use only one primary action in each context.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Button',
+  title: 'Components/Button',
   component: 'gds-button',
   parameters: {
     layout: 'centered',

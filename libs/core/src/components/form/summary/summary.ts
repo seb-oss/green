@@ -5,9 +5,9 @@ import { GdsFormControlElement } from '../form-control'
 import { GdsElement } from '../../../gds-element'
 import { gdsCustomElement, html } from '../../../scoping'
 
-import '../../layout/container/index'
-import '../../layout/card/index'
-import '../../layout/flex/index'
+import '../../container/index'
+import '../../card/index'
+import '../../flex/index'
 import '../../icon/icons/triangle-exclamation'
 
 @gdsCustomElement('gds-form-summary')

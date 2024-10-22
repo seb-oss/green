@@ -2,8 +2,8 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 import '../badge'
-import '../layout/flex'
-import '../content/divider'
+import '../flex'
+import '../divider'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 import '../icon/icons/people-profile.ts'
@@ -23,7 +23,7 @@ import '../icon/icons/people-profile.ts'
  * @status beta
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Input',
+  title: 'Components/Input',
   component: 'gds-input',
   parameters: {
     layout: 'centered',
