@@ -79,6 +79,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
+    selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
