@@ -4,6 +4,8 @@ const config = {
   singleQuote: true,
   importOrder: [
     '^(react)',
+    '^(next)',
+    '^(content)',
     '^(lit)|^(@lit)',
     '<THIRD_PARTY_MODULES>',
     '',
