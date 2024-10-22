@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconHomeEnergyTwo = createComponent({
   tagName: getScopedTagName('gds-icon-home-energy-two'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

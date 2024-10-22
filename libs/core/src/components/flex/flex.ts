@@ -1,12 +1,11 @@
+import { tokens } from '../../tokens.style'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { tokens } from '../../tokens.style'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-
-import FlexCSS from './flex.style'
 import { GdsContainer } from '../container'
+import FlexCSS from './flex.style'
 
 /**
  * The `gds-flex` component is a flex element that can be used to wrap other components and control the layout of its children.

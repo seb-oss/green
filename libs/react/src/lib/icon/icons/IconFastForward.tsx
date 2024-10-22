@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconFastForward = createComponent({
   tagName: getScopedTagName('gds-icon-fast-forward'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

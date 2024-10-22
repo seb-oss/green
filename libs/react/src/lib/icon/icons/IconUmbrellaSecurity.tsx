@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconUmbrellaSecurity = createComponent({
   tagName: getScopedTagName('gds-icon-umbrella-security'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

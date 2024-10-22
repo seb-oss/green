@@ -1,6 +1,7 @@
 import React from 'react'
-import AccordionItem, { AccordionItemInterface } from './accordion-item'
 import { randomId } from '@sebgroup/extract'
+
+import AccordionItem, { AccordionItemInterface } from './accordion-item'
 
 export interface AccordionInterface {
   items: AccordionItemInterface[]

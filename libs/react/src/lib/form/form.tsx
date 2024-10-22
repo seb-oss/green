@@ -1,5 +1,6 @@
-import { FormDirection, Size } from '@sebgroup/extract'
 import { HTMLProps, ReactNode } from 'react'
+import { FormDirection, Size } from '@sebgroup/extract'
+
 import { FormProvider } from './formContext'
 
 export interface FormProps extends HTMLProps<HTMLFormElement> {

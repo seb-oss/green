@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconLineChartTwo = createComponent({
   tagName: getScopedTagName('gds-icon-line-chart-two'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

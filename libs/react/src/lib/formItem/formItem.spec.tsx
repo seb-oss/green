@@ -1,7 +1,8 @@
-import { render, screen, act } from '@testing-library/react'
-import { FormItem } from './formItem'
 import { IValidator } from '@sebgroup/extract'
+import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
+import { FormItem } from './formItem'
 
 const formItemProps = {
   label: 'Number of installments',

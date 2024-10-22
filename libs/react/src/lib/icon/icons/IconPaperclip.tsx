@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPaperclip = createComponent({
   tagName: getScopedTagName('gds-icon-paperclip'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconVerticalAlignmentRight = createComponent({
   tagName: getScopedTagName('gds-icon-vertical-alignment-right'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

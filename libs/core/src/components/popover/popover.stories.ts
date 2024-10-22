@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { html } from '../../scoping.ts'
+
 import './index.ts'
 import '../button/index.ts'
 import '../grouped-list/index.ts'

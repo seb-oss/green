@@ -6,9 +6,10 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import { ChevronDown } from '../icons'
-import { FormItem } from '../formItem'
 import classNames from 'classnames'
+
+import { FormItem } from '../formItem'
+import { ChevronDown } from '../icons'
 
 export interface SelectProps
   extends IExpandableInformation,

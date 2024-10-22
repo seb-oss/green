@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconFolderAddRight = createComponent({
   tagName: getScopedTagName('gds-icon-folder-add-right'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconMegaphone = createComponent({
   tagName: getScopedTagName('gds-icon-megaphone'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

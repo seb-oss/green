@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core'
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { Observable } from 'rxjs'
+
 export interface SegmentedControl {
   url: string
   text: Observable<string> | string

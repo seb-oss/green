@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconTrendingOne = createComponent({
   tagName: getScopedTagName('gds-icon-trending-one'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

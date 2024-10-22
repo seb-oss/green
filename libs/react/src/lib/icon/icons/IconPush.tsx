@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPush = createComponent({
   tagName: getScopedTagName('gds-icon-push'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

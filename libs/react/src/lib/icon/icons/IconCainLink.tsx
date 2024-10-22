@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconCainLink = createComponent({
   tagName: getScopedTagName('gds-icon-cain-link'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

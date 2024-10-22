@@ -1,8 +1,9 @@
-import { fireEvent, render, screen, act } from '@testing-library/react'
-import * as FormContext from './formContext'
 import React from 'react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+
 import { FormItems, RadioGroup, TextInput } from '.'
 import Form from './form'
+import * as FormContext from './formContext'
 import { Checkbox, RadioButton } from './input/input'
 
 type MockComponentProps = {

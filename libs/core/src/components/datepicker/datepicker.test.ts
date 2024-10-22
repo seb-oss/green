@@ -1,9 +1,9 @@
 import { expect } from '@esm-bundle/chai'
 import {
+  aTimeout,
   fixture,
   html as testingHtml,
   waitUntil,
-  aTimeout,
 } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
@@ -12,16 +12,17 @@ import { clickOnElement, isWebKit, onlyDate } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/datepicker'
 import '@sebgroup/green-core/components/icon/icons/calendar'
-import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
 
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
 
-import { GdsPopover } from '@sebgroup/green-core/components/popover'
+import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
+
 import { GdsDatePartSpinner } from './date-part-spinner'
-import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

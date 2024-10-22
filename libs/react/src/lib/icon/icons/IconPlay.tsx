@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPlay = createComponent({
   tagName: getScopedTagName('gds-icon-play'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

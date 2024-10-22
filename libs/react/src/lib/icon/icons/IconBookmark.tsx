@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconBookmark = createComponent({
   tagName: getScopedTagName('gds-icon-bookmark'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconReceiptBill = createComponent({
   tagName: getScopedTagName('gds-icon-receipt-bill'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

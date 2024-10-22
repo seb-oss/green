@@ -1,22 +1,24 @@
 import { property } from 'lit/decorators.js'
-import { Ref, createRef, ref } from 'lit/directives/ref.js'
+import { createRef, Ref, ref } from 'lit/directives/ref.js'
 
 import { GdsElement } from '../../gds-element'
 import { TransitionalStyles } from '../../transitional-styles'
-import '../../primitives/listbox/option'
-import type {
-  GdsOption,
-  OptionsContainer,
-} from '../../primitives/listbox/option'
 
-import style from './listbox.styles'
-import { watch } from '../../utils/decorators/watch'
-import { html, gdsCustomElement } from '../../scoping'
+import '../../primitives/listbox/option'
+
 import {
   ListboxKbNavController,
   ListboxKbNavigation,
 } from '../../controllers/listbox-kb-nav-controller'
+import { gdsCustomElement, html } from '../../scoping'
+import { watch } from '../../utils/decorators/watch'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
+import style from './listbox.styles'
+
+import type {
+  GdsOption,
+  OptionsContainer,
+} from '../../primitives/listbox/option'
 
 /**
  * @element gds-listbox

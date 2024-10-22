@@ -1,9 +1,9 @@
-import { IValidator, validateClassName, IndicatorType } from '@sebgroup/extract'
 import {
   ChangeEventHandler,
   DetailedHTMLProps,
   InputHTMLAttributes,
 } from 'react'
+import { IndicatorType, IValidator, validateClassName } from '@sebgroup/extract'
 
 export interface StepperProps
   extends DetailedHTMLProps<

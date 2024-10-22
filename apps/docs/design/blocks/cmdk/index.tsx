@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import Link from 'next/link'
 import {
   allChangelogs,
   allComponents,
@@ -10,6 +9,7 @@ import {
   allPosts,
 } from 'content'
 import Fuse from 'fuse.js'
+import Link from 'next/link'
 
 import './style.css'
 

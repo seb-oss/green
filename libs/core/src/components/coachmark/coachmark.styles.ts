@@ -1,4 +1,5 @@
 import { css } from 'lit'
+
 //To do later: add classes for light theme
 const style = css`
   #body {

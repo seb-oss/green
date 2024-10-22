@@ -8,14 +8,12 @@ import {
   Optional,
   SkipSelf,
 } from '@angular/core'
-
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
+import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 import { fromEvent, Subject, takeUntil } from 'rxjs'
 
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-
-import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
 import { NgvDropdownListComponent } from '../../dropdown-list/dropdown-list.component'
-import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 
 // Use dropdownList template and combine stylesheets
 @Component({

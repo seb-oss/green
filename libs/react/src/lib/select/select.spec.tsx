@@ -1,7 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import { Select, OptionGroup, Option } from './select'
 import userEvent from '@testing-library/user-event'
+
+import { Option, OptionGroup, Select } from './select'
 
 describe('Select', () => {
   it('renders ', function () {

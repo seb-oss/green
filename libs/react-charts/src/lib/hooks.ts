@@ -1,3 +1,4 @@
+import { RefObject, useEffect, useState } from 'react'
 import {
   Chart,
   ChartArgs,
@@ -5,7 +6,6 @@ import {
   ChartSettings,
   create,
 } from '@sebgroup/green-charts'
-import { RefObject, useEffect, useState } from 'react'
 
 interface ChartProps {
   chartRef: RefObject<HTMLDivElement>

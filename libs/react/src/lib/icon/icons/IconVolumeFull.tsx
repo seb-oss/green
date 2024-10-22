@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconVolumeFull = createComponent({
   tagName: getScopedTagName('gds-icon-volume-full'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

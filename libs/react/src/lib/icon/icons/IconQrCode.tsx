@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconQrCode = createComponent({
   tagName: getScopedTagName('gds-icon-qr-code'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

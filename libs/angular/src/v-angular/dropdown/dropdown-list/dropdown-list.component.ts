@@ -15,17 +15,14 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core'
-
-import { Subject, Subscription } from 'rxjs'
-import scrollIntoView from 'scroll-into-view-if-needed'
-
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-
 import {
   DropdownUtils,
   Option,
   OptionBase,
 } from '@sebgroup/green-angular/src/v-angular/core'
+import { Subject, Subscription } from 'rxjs'
+import scrollIntoView from 'scroll-into-view-if-needed'
 
 @Component({
   selector: 'nggv-dropdown-list',

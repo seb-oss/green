@@ -1,10 +1,11 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { NgvDropdownComponent } from './dropdown.component'
-import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
-import { NgvTypeaheadModule } from './typeahead/typeahead.module'
-import { NgvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
+import { NgModule } from '@angular/core'
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NgvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
+
+import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NgvDropdownComponent } from './dropdown.component'
+import { NgvTypeaheadModule } from './typeahead/typeahead.module'
 
 @NgModule({
   declarations: [NgvDropdownComponent, NgvDropdownListComponent],

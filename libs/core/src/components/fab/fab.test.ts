@@ -1,16 +1,18 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
+import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+
 import '@sebgroup/green-core/components/fab'
-import type { GdsFab } from '@sebgroup/green-core/components/fab'
 
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+
+import type { GdsFab } from '@sebgroup/green-core/components/fab'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

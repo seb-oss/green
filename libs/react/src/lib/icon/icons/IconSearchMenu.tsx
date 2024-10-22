@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconSearchMenu = createComponent({
   tagName: getScopedTagName('gds-icon-search-menu'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

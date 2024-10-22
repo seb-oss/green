@@ -12,7 +12,8 @@ import {
   Output,
   ViewContainerRef,
 } from '@angular/core'
-
+import { Option, OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
+import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 import {
   distinctUntilChanged,
   from,
@@ -24,9 +25,7 @@ import {
   withLatestFrom,
 } from 'rxjs'
 
-import { Option, OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
 import { NgvDropdownComponent } from '../dropdown.component'
-import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 import { NgvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
 import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
 

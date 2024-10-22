@@ -1,5 +1,6 @@
-import * as Icons from './icons/index'
 import { useState } from 'react'
+
+import * as Icons from './icons/index'
 import { IconBank, IconRocket } from './icons/index'
 
 const Template = (props) => {

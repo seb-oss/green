@@ -1,6 +1,6 @@
-import { Modal, Button } from '@sebgroup/green-react'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
+import { Button, Modal } from '@sebgroup/green-react'
 
 export const Modals = () => {
   const [isOpen, setIsOpen] = useState(false)

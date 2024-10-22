@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPencelLine = createComponent({
   tagName: getScopedTagName('gds-icon-pencel-line'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

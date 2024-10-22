@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common'
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { importProvidersFrom } from '@angular/core'
-
-import { NgvI18nModule } from '../../i18n/i18n.module'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {
   applicationConfig,
   Meta,
@@ -10,6 +8,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
+import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NgvSlideOutComponent } from './slide-out.component'
 
 interface WithExtras {

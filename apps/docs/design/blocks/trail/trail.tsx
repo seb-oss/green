@@ -1,9 +1,9 @@
 'use client'
 
 import React, { ReactNode } from 'react'
+import { allComponents } from 'content'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { allComponents } from 'content'
 
 import './style.css'
 

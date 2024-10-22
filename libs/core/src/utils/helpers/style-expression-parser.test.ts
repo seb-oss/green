@@ -1,5 +1,6 @@
 import { expect } from '@esm-bundle/chai'
-import { tokenize, parse, toCss } from './style-expression-parser'
+
+import { parse, toCss, tokenize } from './style-expression-parser'
 
 describe('style-expression-parser', () => {
   it('should tokenize', () => {

@@ -1,7 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { NggDatepickerComponent } from './datepicker.component'
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+
+import { NggDatepickerComponent } from './datepicker.component'
 
 @NgModule({
   declarations: [NggDatepickerComponent],

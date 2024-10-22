@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconGraduateCap = createComponent({
   tagName: getScopedTagName('gds-icon-graduate-cap'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

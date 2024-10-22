@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPhoneDynamicIsland = createComponent({
   tagName: getScopedTagName('gds-icon-phone-dynamic-island'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -7,7 +7,6 @@ import '@sebgroup/green-core/components/layout/card/index.js'
 import '@sebgroup/green-core/components/datepicker/index.js'
 import '@sebgroup/green-core/components/dropdown/index.js'
 import '@sebgroup/green-core/components/form/summary/index.js'
-
 import '@sebgroup/green-core/components/coachmark/index.js'
 import '@sebgroup/green-core/components/button/fab/index.js'
 

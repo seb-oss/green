@@ -1,8 +1,10 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+
 import '@sebgroup/green-core/components/text'
-import type { GdsSpacer } from '@sebgroup/green-core/components/spacer'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+
+import type { GdsSpacer } from '@sebgroup/green-core/components/spacer'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

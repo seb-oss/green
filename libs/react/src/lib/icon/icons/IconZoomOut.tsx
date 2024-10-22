@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconZoomOut = createComponent({
   tagName: getScopedTagName('gds-icon-zoom-out'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

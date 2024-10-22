@@ -1,5 +1,5 @@
-import { Dictionary, Platform } from 'style-dictionary'
 import * as fs from 'fs-extra'
+import { Dictionary, Platform } from 'style-dictionary'
 
 export default {
   copy_package_json: {

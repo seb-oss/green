@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconDotGridOneVertical = createComponent({
   tagName: getScopedTagName('gds-icon-dot-grid-one-vertical'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

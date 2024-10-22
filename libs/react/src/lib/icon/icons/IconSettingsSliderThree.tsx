@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconSettingsSliderThree = createComponent({
   tagName: getScopedTagName('gds-icon-settings-slider-three'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

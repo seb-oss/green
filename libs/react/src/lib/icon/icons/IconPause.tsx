@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPause = createComponent({
   tagName: getScopedTagName('gds-icon-pause'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

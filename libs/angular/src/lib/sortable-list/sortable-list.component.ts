@@ -1,4 +1,9 @@
 import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop'
+import {
   Component,
   ElementRef,
   EventEmitter,
@@ -7,11 +12,6 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core'
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop'
 
 export interface SortableListItem {
   id: any

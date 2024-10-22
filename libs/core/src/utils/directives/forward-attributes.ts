@@ -1,5 +1,10 @@
-import { Directive, PartInfo, PartType, directive } from 'lit/directive.js'
-import { ElementPart } from 'lit/directive.js'
+import {
+  Directive,
+  directive,
+  ElementPart,
+  PartInfo,
+  PartType,
+} from 'lit/directive.js'
 import { nothing } from 'lit/html.js'
 
 /**

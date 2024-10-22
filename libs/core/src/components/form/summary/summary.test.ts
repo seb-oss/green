@@ -1,24 +1,27 @@
 import { expect } from '@esm-bundle/chai'
 import {
+  assert,
   fixture,
   html as testingHtml,
   waitUntil,
-  assert,
 } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
+import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+
 import '@sebgroup/green-core/components/form/summary'
+
 import type { GdsFormSummary } from '@sebgroup/green-core/components/form/summary'
 
 import '@sebgroup/green-core/components/dropdown'
-import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+
+import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

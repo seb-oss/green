@@ -1,24 +1,25 @@
+import { msg } from '@lit/localize'
 import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { msg } from '@lit/localize'
 import {
-  computePosition,
   autoUpdate,
-  offset,
+  computePosition,
   flip,
-  Placement,
   Middleware,
+  offset,
+  Placement,
 } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
-import { watch, watchMediaQuery } from '../../utils/decorators'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
+import { watch, watchMediaQuery } from '../../utils/decorators'
 
 import '../icon/icons/cross-small'
 
 import styles from './popover.styles'
+
 import type { GdsBackdrop } from './backdrop'
 
 /**

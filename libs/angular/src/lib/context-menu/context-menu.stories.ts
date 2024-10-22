@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggContextMenuComponent } from './context-menu.component'
 import { NggContextMenuModule } from './context-menu.module'
 

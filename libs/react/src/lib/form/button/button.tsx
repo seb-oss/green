@@ -1,8 +1,8 @@
 import {
-  forwardRef,
   ButtonHTMLAttributes,
   DetailedHTMLProps,
   ForwardedRef,
+  forwardRef,
 } from 'react'
 import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'

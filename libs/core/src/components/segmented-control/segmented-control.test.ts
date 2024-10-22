@@ -1,22 +1,24 @@
 import { expect } from '@esm-bundle/chai'
 import {
+  aTimeout,
   fixture,
   html as testingHtml,
-  aTimeout,
   waitUntil,
 } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement } from '../../utils/testing'
 import sinon from 'sinon'
 
-import '@sebgroup/green-core/components/segmented-control'
-import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
-import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
+import { clickOnElement } from '../../utils/testing'
 
+import '@sebgroup/green-core/components/segmented-control'
+
+import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+
+import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

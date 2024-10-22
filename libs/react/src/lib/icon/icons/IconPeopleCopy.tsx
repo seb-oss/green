@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPeopleCopy = createComponent({
   tagName: getScopedTagName('gds-icon-people-copy'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

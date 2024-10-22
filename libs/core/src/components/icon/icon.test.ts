@@ -1,7 +1,7 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
-import { IconArchive } from './icons/archive'
-
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+
+import { IconArchive } from './icons/archive'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

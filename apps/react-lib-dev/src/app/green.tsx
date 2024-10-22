@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { IValidator } from '@sebgroup/extract'
 import {
   Card,
   Dropdown,
@@ -9,8 +11,6 @@ import {
   Stepper,
   TextInput,
 } from '@sebgroup/green-react'
-import { useState } from 'react'
-import { IValidator } from '@sebgroup/extract'
 
 const dropDownKeyValueArray = [
   {

@@ -7,7 +7,6 @@ import {
   tick,
   waitForAsync,
 } from '@angular/core/testing'
-
 import { TranslocoModule } from '@ngneat/transloco'
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 

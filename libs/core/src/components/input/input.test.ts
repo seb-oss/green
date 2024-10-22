@@ -1,13 +1,13 @@
 import { expect } from '@esm-bundle/chai'
 import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
 import { clickOnElement } from '../../utils/testing'
 
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-
 import '@sebgroup/green-core/components/input/index.js'
+
 import type { GdsInput } from '@sebgroup/green-core/components/input/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)

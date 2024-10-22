@@ -13,9 +13,7 @@ const config = {
     '',
     '<TYPES>^[./|../]',
   ],
-  importOrderSeparation: true,
   importOrderParserPlugins: ['typescript', 'jsx', 'decorators-legacy'],
-  importOrderMergeDuplicateImports: true,
   plugins: ['@ianvs/prettier-plugin-sort-imports'],
 }
 

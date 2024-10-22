@@ -1,17 +1,17 @@
-import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { when } from 'lit/directives/when.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { HTMLTemplateResult } from 'lit'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { unsafeHTML } from 'lit/directives/unsafe-html.js'
+import { when } from 'lit/directives/when.js'
 
-import { watch } from '../../utils/decorators/watch'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
+import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
-  html,
   getScopedTagName,
+  html,
 } from '../../utils/helpers/custom-element-scoping'
 
 import '../icon/icons/chevron-bottom'
@@ -23,14 +23,14 @@ import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox/option'
+
 import '../popover'
 import '../button'
 
-import { GdsFormControlElement } from '../form/form-control'
-
 import { tokens } from '../../tokens.style'
-import styles from './dropdown.styles'
 import { TransitionalStyles } from '../../transitional-styles'
+import { GdsFormControlElement } from '../form/form-control'
+import styles from './dropdown.styles'
 
 /**
  * @element gds-dropdown

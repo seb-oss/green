@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconChevronTop = createComponent({
   tagName: getScopedTagName('gds-icon-chevron-top'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconSquareBehindSquare = createComponent({
   tagName: getScopedTagName('gds-icon-square-behind-square'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

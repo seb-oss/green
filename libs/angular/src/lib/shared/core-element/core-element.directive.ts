@@ -3,13 +3,12 @@ import {
   ChangeDetectorRef,
   Directive,
   EmbeddedViewRef,
+  inject,
   OnInit,
   Renderer2,
   TemplateRef,
   ViewContainerRef,
-  inject,
 } from '@angular/core'
-
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @Directive({

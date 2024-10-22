@@ -1,6 +1,6 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { RouterTestingModule } from '@angular/router/testing'
-
+import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link'
 import {
   applicationConfig,
   Meta,
@@ -8,8 +8,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link'
-import { NgvButtonComponent, ButtonStyle } from './button.component'
+import { ButtonStyle, NgvButtonComponent } from './button.component'
 
 interface StoryClickable {
   text: string

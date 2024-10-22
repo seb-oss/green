@@ -1,9 +1,10 @@
-import { TableRow } from './TableRow'
-import { TableContext } from '../../context/TableContextProvider'
-import { render, screen } from '@testing-library/react'
 import { PropsWithChildren } from 'react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup'
+
+import { TableContext } from '../../context/TableContextProvider'
+import { TableRow } from './TableRow'
 
 describe('Component: Table row', () => {
   function WrapperTableRow({ children }: PropsWithChildren<unknown>) {

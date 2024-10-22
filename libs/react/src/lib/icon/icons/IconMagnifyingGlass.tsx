@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconMagnifyingGlass = createComponent({
   tagName: getScopedTagName('gds-icon-magnifying-glass'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

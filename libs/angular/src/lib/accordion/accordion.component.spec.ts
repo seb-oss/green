@@ -1,9 +1,10 @@
 import { Component } from '@angular/core'
-import { render, RenderResult, waitFor } from '@testing-library/angular'
 import { By } from '@angular/platform-browser'
-import { NggAccordionComponent } from './accordion.component'
-import { NggAccordionListItemComponent } from './accordion-list-item.component'
+import { render, RenderResult, waitFor } from '@testing-library/angular'
 import { Subject } from 'rxjs'
+
+import { NggAccordionListItemComponent } from './accordion-list-item.component'
+import { NggAccordionComponent } from './accordion.component'
 
 describe(NggAccordionComponent.name, () => {
   let fakeComponent: RenderResult<NggFakeAccordionComponent>

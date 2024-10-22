@@ -1,10 +1,9 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
-
 import {
   GdsContextMenu,
-  GdsMenuItem,
   GdsMenuHeading,
+  GdsMenuItem,
 } from '@sebgroup/green-core/components/context-menu/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'

@@ -1,4 +1,10 @@
-import { IconButton } from '../form'
+import React, {
+  PropsWithChildren,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
 import {
   debounce,
   delay,
@@ -8,15 +14,10 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import React, {
-  PropsWithChildren,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
-import { InfoCircle, Times } from '../icons'
 import classNames from 'classnames'
+
+import { IconButton } from '../form'
+import { InfoCircle, Times } from '../icons'
 
 interface FormItemProps
   extends IExpandableInformation,

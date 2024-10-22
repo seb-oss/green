@@ -1,4 +1,16 @@
 import {
+  animate,
+  group,
+  query,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations'
+import {
+  ConfigurableFocusTrap,
+  ConfigurableFocusTrapFactory,
+} from '@angular/cdk/a11y'
+import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -11,22 +23,11 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import {
-  trigger,
-  query,
-  style,
-  animate,
-  transition,
-  group,
-} from '@angular/animations'
 import { ModalType, Size } from '@sebgroup/extract'
-import {
-  ConfigurableFocusTrap,
-  ConfigurableFocusTrapFactory,
-} from '@angular/cdk/a11y'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
-import { NggModalHeaderDirective } from './modal-header.directive'
+
 import { NggModalFooterDirective } from './modal-footer.directive'
+import { NggModalHeaderDirective } from './modal-header.directive'
 
 @Component({
   selector: 'ngg-modal',

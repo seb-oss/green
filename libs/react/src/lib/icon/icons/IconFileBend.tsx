@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconFileBend = createComponent({
   tagName: getScopedTagName('gds-icon-file-bend'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

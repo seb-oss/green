@@ -1,10 +1,12 @@
 import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+
 import { GdsElement } from '../../gds-element'
+import { html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import { html } from '../../scoping'
+import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import BadgeCSS from './badge.style'
+
 /**
  * `gds-badge`
  *

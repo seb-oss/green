@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import { SortableListItem, SortableListGroup } from '@sebgroup/green-angular'
+import { SortableListGroup, SortableListItem } from '@sebgroup/green-angular'
 
 @Component({
   templateUrl: './sortable-list.component.html',

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconBubbleText = createComponent({
   tagName: getScopedTagName('gds-icon-bubble-text'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

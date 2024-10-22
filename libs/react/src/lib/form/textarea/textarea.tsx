@@ -1,21 +1,23 @@
 import {
+  ChangeEvent,
+  DetailedHTMLProps,
+  forwardRef,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react'
+import {
   IExpandableInformation,
   IValidator,
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import {
-  ChangeEvent,
-  DetailedHTMLProps,
-  ReactNode,
-  forwardRef,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
-import type { ForwardedRef } from 'react'
-import { FormItem } from '../../formItem'
 import classNames from 'classnames'
+
+import type { ForwardedRef } from 'react'
+
+import { FormItem } from '../../formItem'
 
 export interface ITextAreaProps
   extends IExpandableInformation,

@@ -1,6 +1,7 @@
-import { moduleMetadata, Meta, StoryFn } from '@storybook/angular'
-import { NggProgressCircleModule } from './progress-circle.module'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggProgressCircleComponent } from './progress-circle.component'
+import { NggProgressCircleModule } from './progress-circle.module'
 
 export default {
   title: 'Components/Progress Circle',

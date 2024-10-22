@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconVolumeOff = createComponent({
   tagName: getScopedTagName('gds-icon-volume-off'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

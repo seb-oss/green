@@ -1,5 +1,7 @@
 import { randomId } from '@sebgroup/extract'
+
 import { IconProps } from '../../types/props'
+
 /**
  * @deprecated
  * This component is deprecated. Use the `gds-icon-bankid` component instead from `@sebgroup/green-react`.

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconArrowRotateCounterClockwise = createComponent({
   tagName: getScopedTagName('gds-icon-arrow-rotate-counter-clockwise'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -5,25 +5,24 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
 } from '@angular/forms'
-
-import { debounceTime, map, Observable } from 'rxjs'
-import { NgvI18nModule } from '../i18n/i18n.module'
-import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
 import {
   applicationConfig,
   Meta,
   moduleMetadata,
   StoryFn,
 } from '@storybook/angular'
+import { debounceTime, map, Observable } from 'rxjs'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { DropdownUtils, Option } from '../core/core.utils'
-import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NgvI18nModule } from '../i18n/i18n.module'
 import { NgvInputComponent } from '../input/input.component'
+import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
+import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NgvDropdownComponent } from './dropdown.component'
 import { NgvTypeaheadHighlightComponent } from './typeahead/typeahead-highlight/typeahead-highlight.component'
 import { NgvTypeaheadInputComponent } from './typeahead/typeahead-input/typeahead-input.component'
 import { NgvTypeaheadDirective } from './typeahead/typeahead.directive'
-import { NgvDropdownComponent } from './dropdown.component'
 
 interface WithExtras {
   ngModel: string

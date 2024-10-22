@@ -1,4 +1,5 @@
-import { render, fireEvent, screen } from '@testing-library/angular'
+import { fireEvent, render, screen } from '@testing-library/angular'
+
 import { NggPaginationComponent } from './pagination.component'
 
 describe('Pagination', () => {

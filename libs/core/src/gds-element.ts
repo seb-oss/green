@@ -1,6 +1,7 @@
-import { state } from 'lit/decorators.js'
-import { DynamicStylesController } from './dynamic-styles'
 import { LitElement } from 'lit'
+import { state } from 'lit/decorators.js'
+
+import { DynamicStylesController } from './dynamic-styles'
 
 // This nis needed to support legacy decorators. Once we upgrade to TC39 standard decorators across the lib, we can remove this.
 // More info: https://lit.dev/Components/decorators/#decorator-versions

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconCirclePlaceholderOn = createComponent({
   tagName: getScopedTagName('gds-icon-circle-placeholder-on'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconBrandAppStore = createComponent({
   tagName: getScopedTagName('gds-icon-brand-app-store'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

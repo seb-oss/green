@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconWarningSign = createComponent({
   tagName: getScopedTagName('gds-icon-warning-sign'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

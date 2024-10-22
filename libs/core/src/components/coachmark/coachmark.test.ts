@@ -7,10 +7,12 @@ import {
 } from '@open-wc/testing'
 
 import '@sebgroup/green-core/components/coachmark'
-import type { GdsCoachmark } from '@sebgroup/green-core/components/coachmark'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { sendKeys } from '@web/test-runner-commands'
+
+import type { GdsCoachmark } from '@sebgroup/green-core/components/coachmark'
+
 import { clickOnElement } from '../../utils/testing'
 
 const html = htmlTemplateTagFactory(testingHtml)

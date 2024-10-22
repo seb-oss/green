@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconFolderUpload = createComponent({
   tagName: getScopedTagName('gds-icon-folder-upload'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -8,7 +8,9 @@ import TOC from '@/toc/toc'
 import Image from 'next/image'
 import MetallicSurfaceImage from 'public/content/metallic-surface.jpg'
 import CirclesImage from 'public/content/tonality-circles.jpg'
+
 import './style.css'
+
 import Cell from '@/grid/cell'
 import Content from '&/content/content'
 

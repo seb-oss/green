@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconFloppyDisk = createComponent({
   tagName: getScopedTagName('gds-icon-floppy-disk'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

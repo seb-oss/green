@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconTrendingFour = createComponent({
   tagName: getScopedTagName('gds-icon-trending-four'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

@@ -1,7 +1,8 @@
-import { LitElement, html, unsafeCSS } from 'lit'
+import { html, LitElement, unsafeCSS } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
+
 // import styles from './radio.css'
 
 @customElement('gds-radio-group')

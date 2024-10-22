@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconMoon = createComponent({
   tagName: getScopedTagName('gds-icon-moon'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

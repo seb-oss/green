@@ -1,19 +1,21 @@
+import { msg } from '@lit/localize'
 import { TemplateResult } from 'lit'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { until } from 'lit/directives/until.js'
-import { nothing } from 'lit/html.js'
-import { when } from 'lit/directives/when.js'
 import { choose } from 'lit/directives/choose.js'
-import { msg } from '@lit/localize'
+import { until } from 'lit/directives/until.js'
+import { when } from 'lit/directives/when.js'
+import { nothing } from 'lit/html.js'
 
+import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
-import { gdsCustomElement, html } from '../../scoping'
+
 import '../flex'
+
 import { tokens } from '../../tokens.style'
-import { styles } from './textarea.styles'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { styles } from './textarea.styles'
 
 // Local Components
 import '../icon/icons/cross-small'

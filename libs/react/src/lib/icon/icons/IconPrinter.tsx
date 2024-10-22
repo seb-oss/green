@@ -6,5 +6,5 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 export const IconPrinter = createComponent({
   tagName: getScopedTagName('gds-icon-printer'),
   elementClass: Icon,
-  react: React
+  react: React,
 })

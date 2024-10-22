@@ -1,4 +1,5 @@
 import * as StyleDictionary from 'style-dictionary'
+
 import actions from './src/actions'
 import filters from './src/filters'
 import formats from './src/formats'
