@@ -10,6 +10,8 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import DividerCSS from './divider.style'
 
 /**
+ * @element gds-divider
+ *
  * The `gds-divider`  is a custom element that provides a flexible divider system.
  * It can be used to create a divider with different styles and configurations.
  * The divider can be customized with different properties like color and size

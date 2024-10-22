@@ -5,6 +5,9 @@ import { tokens } from '../../tokens.style'
 import { GdsFlex } from '../flex'
 import MaskCSS from './mask.style'
 
+/**
+ * @element gds-mask
+ */
 @gdsCustomElement('gds-mask')
 export class GdsMask extends GdsFlex {
   static styles = [tokens, MaskCSS]

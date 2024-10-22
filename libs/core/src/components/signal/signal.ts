@@ -6,6 +6,9 @@ import { tokens } from '../../tokens.style'
 
 import SignalCSS from './signal.style'
 
+/**
+ * @element gds-signal
+ */
 @gdsCustomElement('gds-signal')
 export class GdsSignal extends GdsElement {
   static styles = [tokens, SignalCSS]

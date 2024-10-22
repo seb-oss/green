@@ -6,6 +6,9 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 
+/**
+ * @element gds-spacer
+ */
 @gdsCustomElement('gds-spacer')
 export class GdsSpacer extends GdsElement {
   static styles = [tokens]
