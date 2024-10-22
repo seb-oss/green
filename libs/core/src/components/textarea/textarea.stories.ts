@@ -2,8 +2,8 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 import '../badge/index.ts'
-import '../layout/flex/index.ts'
-import '../content/divider/index.ts'
+import '../flex/index.ts'
+import '../divider/index.ts'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 
@@ -26,7 +26,7 @@ import '../icon/icons/magnifying-glass.ts'
  *
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Textarea',
+  title: 'Components/Textarea',
   component: 'gds-textarea',
   parameters: {
     layout: 'centered',

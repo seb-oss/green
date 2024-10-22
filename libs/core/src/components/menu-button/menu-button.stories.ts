@@ -4,8 +4,8 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping'
 import './menu-button'
 import '../popover/popover.js'
-import '../layout/flex/flex.js'
-import '../layout/card/card.js'
+import '../flex/flex.js'
+import '../card/card.js'
 
 import '../icon/icons/magnifying-glass.js'
 import '../icon/icons/bell.js'
@@ -15,7 +15,7 @@ import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 
 const meta: Meta = {
-  title: 'Docs/Components/Menu button',
+  title: 'Components/Menu button',
   component: 'gds-menu-button',
   parameters: {
     layout: 'centered',

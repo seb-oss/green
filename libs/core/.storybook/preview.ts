@@ -11,7 +11,7 @@ import './fonts.scss'
 
 import '../src/components/theme/index.js'
 import '../src/components/button/index.js'
-import '../src/components/layout/grid/index.js'
+import '../src/components/grid/index.js'
 
 setCustomElementsManifest(customElements)
 
@@ -43,6 +43,8 @@ export default {
           'Green Design System',
           'Get started',
           'Docs',
+          'Components',
+          'Style',
           ['Components', 'Layout', 'Media', 'Content', 'Style'],
           'Concepts',
           ['Architecture'],
