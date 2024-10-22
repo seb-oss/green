@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconSquareX as Icon } from '@sebgroup/green-core/components/icon/icons/square-x.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

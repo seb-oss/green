@@ -5,15 +5,14 @@ import {
   html as testingHtml,
   waitUntil,
 } from '@open-wc/testing'
-
-import '@sebgroup/green-core/components/coachmark'
-
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { sendKeys } from '@web/test-runner-commands'
 
 import type { GdsCoachmark } from '@sebgroup/green-core/components/coachmark'
 
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { clickOnElement } from '../../utils/testing'
+
+import '@sebgroup/green-core/components/coachmark'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

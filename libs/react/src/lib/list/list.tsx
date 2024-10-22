@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react'
-import { ListType } from '@sebgroup/extract'
 
+import { ListType } from '@sebgroup/extract'
 import ListItem from './listItem'
 
 export interface ListProps

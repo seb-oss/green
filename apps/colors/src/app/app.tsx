@@ -6,9 +6,9 @@ import {
   hexFromArgb,
   TonalPalette,
 } from '@material/material-color-utilities'
-import { Card, Navbar, Slider, TextInput } from '@sebgroup/green-react'
 import { setDate } from 'date-fns/fp'
 
+import { Card, Navbar, Slider, TextInput } from '@sebgroup/green-react'
 import { Swatch } from '../components'
 
 // An array that's looped over to generate a pallet of different tones

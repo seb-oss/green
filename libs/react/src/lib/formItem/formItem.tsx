@@ -5,6 +5,8 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import classNames from 'classnames'
+
 import {
   debounce,
   delay,
@@ -14,8 +16,6 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import classNames from 'classnames'
-
 import { IconButton } from '../form'
 import { InfoCircle, Times } from '../icons'
 

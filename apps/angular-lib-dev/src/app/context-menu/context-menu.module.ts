@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { NggContextMenuModule } from '@sebgroup/green-angular'
 
+import { NggContextMenuModule } from '@sebgroup/green-angular'
 import { ContextMenuRoutingModule } from './context-menu-routing.module'
 import { ContextMenuComponent } from './context-menu.component'
 

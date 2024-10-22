@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconHomeRoof as Icon } from '@sebgroup/green-core/components/icon/icons/home-roof.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

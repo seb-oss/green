@@ -1,7 +1,7 @@
 import { forwardRef, HTMLProps } from 'react'
-import { IValidator, validateClassName } from '@sebgroup/extract'
 import classNames from 'classnames'
 
+import { IValidator, validateClassName } from '@sebgroup/extract'
 import useInput from '../useInput'
 
 export interface RadioButtonProps extends HTMLProps<HTMLInputElement> {

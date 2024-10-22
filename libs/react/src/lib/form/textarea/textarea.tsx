@@ -7,16 +7,16 @@ import {
   useEffect,
   useState,
 } from 'react'
+import classNames from 'classnames'
+
+import type { ForwardedRef } from 'react'
+
 import {
   IExpandableInformation,
   IValidator,
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import classNames from 'classnames'
-
-import type { ForwardedRef } from 'react'
-
 import { FormItem } from '../../formItem'
 
 export interface ITextAreaProps

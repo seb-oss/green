@@ -27,6 +27,7 @@ But that said, the components in Green Core are just regular Web Components, so 
 
 ```ts
 import { css, customElement, LitElement } from 'lit'
+
 // Transitional styles applies the current 2016 design language to the components
 import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
 // This custom `html` template literal tag from Green Core extends the default `lit-html` tag to handle element version scoping.
@@ -104,6 +105,7 @@ Here is an example:
 ```ts
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { GdsButton } from '@sebgroup/green-core/component/button/index.js'
 import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'

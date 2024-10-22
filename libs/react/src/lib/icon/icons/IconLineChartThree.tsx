@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconLineChartThree as Icon } from '@sebgroup/green-core/components/icon/icons/line-chart-three.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

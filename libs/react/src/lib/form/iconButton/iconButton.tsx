@@ -1,6 +1,6 @@
 import { ForwardedRef, forwardRef, MouseEvent, ReactNode } from 'react'
-import { ButtonType } from '@sebgroup/extract'
 
+import { ButtonType } from '@sebgroup/extract'
 import { Button, ButtonProps } from '../button/button'
 
 export const IconButton = forwardRef(

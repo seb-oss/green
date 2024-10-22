@@ -1,7 +1,7 @@
-import { IValidator } from '@sebgroup/extract'
 import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { IValidator } from '@sebgroup/extract'
 import { FormItem } from './formItem'
 
 const formItemProps = {

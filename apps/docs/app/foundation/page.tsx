@@ -1,11 +1,11 @@
 'use client'
 
+import Image from 'next/image'
 import { Accordion, AccordionItem } from '@/accordion'
 import Grid from '@/grid/grid'
 import Hero from '@/hero/hero'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
-import Image from 'next/image'
 import MetallicSurfaceImage from 'public/content/metallic-surface.jpg'
 import CirclesImage from 'public/content/tonality-circles.jpg'
 

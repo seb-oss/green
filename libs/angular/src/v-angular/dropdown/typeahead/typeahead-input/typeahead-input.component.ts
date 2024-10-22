@@ -13,10 +13,10 @@ import {
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
-import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
-import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 import { takeUntil } from 'rxjs'
 
+import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
+import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
 import { NgvDropdownComponent } from '../../dropdown.component'
 
 @Component({

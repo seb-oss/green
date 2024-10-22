@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import Flex from '@/flex/flex'
 import Grid from '@/grid/grid'
-import Link from 'next/link'
 
 import '@/footer/footer.css'
 

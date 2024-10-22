@@ -1,7 +1,7 @@
+import { notFound } from 'next/navigation'
+import { allChangelogs } from 'content'
 import { Mdx } from '@/mdx'
 import Layout from '&/changelog'
-import { allChangelogs } from 'content'
-import { notFound } from 'next/navigation'
 
 export const generateStaticParams = (): any => {
   return allChangelogs.map((changelog) => ({

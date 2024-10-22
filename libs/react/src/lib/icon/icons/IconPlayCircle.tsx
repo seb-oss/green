@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconPlayCircle as Icon } from '@sebgroup/green-core/components/icon/icons/play-circle.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

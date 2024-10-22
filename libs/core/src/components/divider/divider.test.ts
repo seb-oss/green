@@ -1,10 +1,10 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
 
-import '@sebgroup/green-core/components/text'
+import type { GdsDivider } from '@sebgroup/green-core/components/divider'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import type { GdsDivider } from '@sebgroup/green-core/components/divider'
+import '@sebgroup/green-core/components/text'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

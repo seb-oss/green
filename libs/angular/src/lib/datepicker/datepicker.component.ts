@@ -14,8 +14,9 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
-import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
+
+import { randomId } from '@sebgroup/extract'
 
 import '@sebgroup/green-core/components/datepicker/index.js'
 

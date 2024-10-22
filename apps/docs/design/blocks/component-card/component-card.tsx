@@ -1,8 +1,8 @@
 'use client'
 
+import { Component } from 'content'
 import Card from '@/card/card'
 import Pattern from '@/pattern/pattern'
-import { Component } from 'content'
 
 import '@/component-card/component-card.css'
 

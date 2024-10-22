@@ -4,8 +4,9 @@ import {
   ForwardedRef,
   forwardRef,
 } from 'react'
-import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'
+
+import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 
 export interface ButtonProps
   extends DetailedHTMLProps<

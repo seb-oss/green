@@ -2,8 +2,8 @@ import './modal.globals'
 
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
-import { NgvButtonModule } from '@sebgroup/green-angular/src/v-angular/button'
 
+import { NgvButtonModule } from '@sebgroup/green-angular/src/v-angular/button'
 import { NgvDialogComponent } from './dialog/dialog.component'
 import { NgvFoldOutComponent } from './fold-out/fold-out.component'
 import { NgvFoldOutOptionDirective } from './fold-out/fold-out.directive'

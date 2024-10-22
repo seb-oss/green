@@ -1,22 +1,20 @@
 import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { HTMLTemplateResult } from 'lit'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 
+import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
-  getScopedTagName,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-
-import '../icon/icons/chevron-bottom'
-import '../icon/icons/checkmark'
-import '../../primitives/listbox'
+import { GdsFormControlElement } from '../form/form-control'
+import styles from './dropdown.styles'
 
 import type { GdsListbox } from '../../primitives/listbox'
 import type {
@@ -26,11 +24,9 @@ import type {
 
 import '../popover'
 import '../button'
-
-import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
-import { GdsFormControlElement } from '../form/form-control'
-import styles from './dropdown.styles'
+import '../icon/icons/chevron-bottom'
+import '../icon/icons/checkmark'
+import '../../primitives/listbox'
 
 /**
  * @element gds-dropdown

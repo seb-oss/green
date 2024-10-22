@@ -9,12 +9,11 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsFormControlElement } from '../form/form-control'
-
-import './filter-chip'
-
 import { styles } from './filter-chips.styles'
 
 import type { GdsFilterChip } from './filter-chip'
+
+import './filter-chip'
 
 /**
  * @element gds-filter-chips

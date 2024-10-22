@@ -7,15 +7,13 @@ import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { gdsCustomElement, html } from '../../scoping'
+import { tokens } from '../../tokens.style'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
-
-import '../flex'
-
-import { tokens } from '../../tokens.style'
 import { styles } from './input.styles'
 
 // Local Components
+import '../flex'
 import '../icon/icons/cross-small'
 import '../icon/icons/circle-info'
 import '../icon/icons/triangle-exclamation'

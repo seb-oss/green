@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconMaintenance as Icon } from '@sebgroup/green-core/components/icon/icons/maintenance.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

@@ -13,8 +13,6 @@ import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { GdsFormControlElement } from '../form/form-control'
 import style from './button.style.css?inline'
 
-import type { GdsElement } from '../../gds-element'
-
 import '../../primitives/ripple'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.

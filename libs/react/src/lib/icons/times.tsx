@@ -1,5 +1,4 @@
 import { randomId } from '@sebgroup/extract'
-
 import { IconProps } from '../../types/props'
 
 export const Times = ({ focusable = false, title }: IconProps) => {

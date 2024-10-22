@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import Grid from '@/grid/grid'
 import Content from '&/content/content'
-import Link from 'next/link'
 
 import type { Metadata } from 'next'
 

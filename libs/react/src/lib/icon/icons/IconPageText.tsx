@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconPageText as Icon } from '@sebgroup/green-core/components/icon/icons/page-text.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

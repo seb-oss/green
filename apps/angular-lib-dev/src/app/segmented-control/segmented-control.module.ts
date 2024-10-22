@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { NggSegmentedControlModule } from '@sebgroup/green-angular'
 
+import { NggSegmentedControlModule } from '@sebgroup/green-angular'
 import { OptionAComponent } from './option-a/option-a.component'
 import { OptionBComponent } from './option-b/option-b.component'
 import { SegmentedControlRoutingModule } from './segmented-control-routing.module'

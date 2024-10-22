@@ -15,12 +15,11 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch, watchMediaQuery } from '../../utils/decorators'
-
-import '../icon/icons/cross-small'
-
 import styles from './popover.styles'
 
 import type { GdsBackdrop } from './backdrop'
+
+import '../icon/icons/cross-small'
 
 /**
  * @element gds-popover

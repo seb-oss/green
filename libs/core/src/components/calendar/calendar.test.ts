@@ -1,15 +1,14 @@
 import { expect } from '@esm-bundle/chai'
 import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
-
-import { onlyDate } from '../../utils/testing'
-
-import '@sebgroup/green-core/components/calendar'
-
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { addDays, addMonths, subMonths } from 'date-fns'
 
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { onlyDate } from '../../utils/testing'
+
 import type { GdsCalendar } from './calendar'
+
+import '@sebgroup/green-core/components/calendar'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

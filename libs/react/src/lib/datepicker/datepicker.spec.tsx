@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import exp from 'constants'
 import React from 'react'
-import { GdsDatepicker } from '@sebgroup/green-core'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { act, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { formatISO } from 'date-fns'
 
+import { GdsDatepicker } from '@sebgroup/green-core'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { Datepicker } from './datepicker'
 
 const tick = (ms?: number) => new Promise<void>((r) => setTimeout(r, ms || 0))

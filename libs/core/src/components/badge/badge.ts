@@ -1,9 +1,8 @@
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { html } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import BadgeCSS from './badge.style'
 

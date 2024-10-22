@@ -1,7 +1,7 @@
 import React from 'react'
-import { GdsDatePicker } from '@sebgroup/green-core'
 import { Meta, StoryObj } from '@storybook/react'
 
+import { GdsDatePicker } from '@sebgroup/green-core'
 import Datepicker from './datepicker'
 
 type Story = StoryObj<typeof Datepicker>

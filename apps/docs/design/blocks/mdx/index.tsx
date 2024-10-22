@@ -1,9 +1,9 @@
 'use client'
 
 import * as React from 'react'
+import { useMDXComponent } from 'next-contentlayer/hooks'
 import Grid from '@/grid/grid'
 import Spacer from '@/spacer/spacer'
-import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import Pattern from '../pattern/pattern'
 import Col from './col/col'

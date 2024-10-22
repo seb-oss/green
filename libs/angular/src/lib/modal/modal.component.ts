@@ -23,9 +23,9 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-import { ModalType, Size } from '@sebgroup/extract'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 
+import { ModalType, Size } from '@sebgroup/extract'
 import { NggModalFooterDirective } from './modal-footer.directive'
 import { NggModalHeaderDirective } from './modal-header.directive'
 

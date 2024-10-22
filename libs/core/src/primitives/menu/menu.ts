@@ -1,5 +1,3 @@
-import { HTMLTemplateResult } from 'lit'
-import { state } from 'lit/decorators.js'
 import { createRef, Ref, ref } from 'lit/directives/ref.js'
 
 import {
@@ -11,9 +9,9 @@ import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 
-import '../../primitives/menu/menu-item'
-
 import type { GdsMenuItem } from '../../primitives/menu/menu-item'
+
+import '../../primitives/menu/menu-item'
 
 /**
  * @element gds-menu

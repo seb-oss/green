@@ -1,5 +1,5 @@
-import Grid from '@/grid/grid'
 import Image from 'next/image'
+import Grid from '@/grid/grid'
 
 import type { Metadata } from 'next'
 

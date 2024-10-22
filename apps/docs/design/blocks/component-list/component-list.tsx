@@ -1,9 +1,9 @@
 'use client'
 
+import { allComponents } from 'content'
 import ComponentCard from '@/component-card/component-card'
 import Grid from '@/grid/grid'
 import isDev from '$/dev/dev'
-import { allComponents } from 'content'
 
 import './component-list.css'
 

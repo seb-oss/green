@@ -1,10 +1,10 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
 
-import '@sebgroup/green-core/components/grid'
+import type { GdsGrid } from '@sebgroup/green-core/components/grid'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import type { GdsGrid } from '@sebgroup/green-core/components/grid'
+import '@sebgroup/green-core/components/grid'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

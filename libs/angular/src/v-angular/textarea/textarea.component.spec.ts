@@ -8,8 +8,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 import { TranslocoModule } from '@ngneat/transloco'
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { NgvTextareaComponent } from './textarea.component'
 

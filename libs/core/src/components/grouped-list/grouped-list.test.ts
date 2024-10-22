@@ -1,11 +1,11 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
 
-import '@sebgroup/green-core/components/grouped-list'
+import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import type { GdsGroupedList } from '@sebgroup/green-core/components/grouped-list'
+import '@sebgroup/green-core/components/grouped-list'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

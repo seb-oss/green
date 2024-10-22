@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconCrossSmall as Icon } from '@sebgroup/green-core/components/icon/icons/cross-small.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

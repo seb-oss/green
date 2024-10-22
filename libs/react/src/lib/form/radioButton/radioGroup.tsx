@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useRef, useState } from 'react'
+import classNames from 'classnames'
+
 import {
   IExpandableInformation,
   ILabelAndLabelInformation,
   IValidator,
   randomId,
 } from '@sebgroup/extract'
-import classNames from 'classnames'
-
 import { FormItem } from '../../formItem'
 import { RadioButtonProps } from './radioButton'
 

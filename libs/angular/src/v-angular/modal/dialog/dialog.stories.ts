@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common'
+
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 
 import '../modal.globals'

@@ -1,7 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react'
-import { ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'
 
+import { ButtonVariant } from '@sebgroup/extract'
 import { Group } from '../'
 import { Button, ButtonProps } from '../button/button'
 

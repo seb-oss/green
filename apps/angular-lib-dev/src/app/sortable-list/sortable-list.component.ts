@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+
 import { SortableListGroup, SortableListItem } from '@sebgroup/green-angular'
 
 @Component({

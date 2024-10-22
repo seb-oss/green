@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+
 import {
   NggDatepickerModule,
   NggDropdownModule,
   NggModalModule,
 } from '@sebgroup/green-angular'
-
 import { ModalsRoutingModule } from './modals-routing.module'
 import { ModalsComponent } from './modals.component'
 

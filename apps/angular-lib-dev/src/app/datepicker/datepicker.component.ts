@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { startOfYear, subYears } from 'date-fns'
+
 import { DatepickerOptions, dateValidator } from '@sebgroup/green-angular'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
-import { startOfYear, subYears } from 'date-fns'
 
 const { setLocale } = gdsInitLocalization()
 

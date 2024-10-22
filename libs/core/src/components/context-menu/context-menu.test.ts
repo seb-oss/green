@@ -3,9 +3,10 @@ import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
-import { clickOnElement } from '../../utils/testing'
-
-import '@sebgroup/green-core/components/context-menu'
+import type {
+  GdsContextMenu,
+  GdsMenuItem,
+} from '@sebgroup/green-core/components/context-menu'
 
 import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import { GdsMenu } from '@sebgroup/green-core/primitives/menu'
@@ -13,11 +14,9 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing'
 
-import type {
-  GdsContextMenu,
-  GdsMenuItem,
-} from '@sebgroup/green-core/components/context-menu'
+import '@sebgroup/green-core/components/context-menu'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

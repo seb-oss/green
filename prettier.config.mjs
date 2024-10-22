@@ -11,6 +11,7 @@ const config = {
     '',
     '<TYPES>',
     '',
+    '^(@sebgroup)',
     '^[./|../]',
     '',
     '<TYPES>^[./|../]',

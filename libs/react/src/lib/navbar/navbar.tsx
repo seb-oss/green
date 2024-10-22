@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode, useEffect, useState } from 'react'
-import { NavbarVariant } from '@sebgroup/extract'
 
+import { NavbarVariant } from '@sebgroup/extract'
 import Link from '../link/link'
 
 export interface NavProps extends HTMLAttributes<HTMLElement> {

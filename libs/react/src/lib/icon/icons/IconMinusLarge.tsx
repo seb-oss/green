@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconMinusLarge as Icon } from '@sebgroup/green-core/components/icon/icons/minus-large.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

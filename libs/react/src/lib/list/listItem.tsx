@@ -1,6 +1,6 @@
 import React, { HTMLAttributes, ReactNode } from 'react'
-import { ListType } from '@sebgroup/extract'
 
+import { ListType } from '@sebgroup/extract'
 import { TableListProps } from './list'
 
 interface ListItemProps extends HTMLAttributes<HTMLLIElement> {

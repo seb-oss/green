@@ -9,14 +9,14 @@ import {
   useEffect,
   useState,
 } from 'react'
+import classNames from 'classnames'
+
 import {
   IExpandableInformation,
   IValidator,
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import classNames from 'classnames'
-
 import { FormItem } from '../../formItem'
 import Group from '../group/group'
 

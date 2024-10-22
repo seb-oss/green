@@ -17,6 +17,8 @@ import {
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { fromEvent, Subscription } from 'rxjs'
+
 import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 import {
   DropdownUtils,
@@ -24,7 +26,6 @@ import {
   OptionBase,
   OptionGroup,
 } from '@sebgroup/green-angular/src/v-angular/core'
-import { fromEvent, Subscription } from 'rxjs'
 
 /**
  * A dropdown allows the user to select an option from a list.

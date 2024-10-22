@@ -1,7 +1,7 @@
-import { IValidator } from '@sebgroup/extract'
 import { fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
+import { IValidator } from '@sebgroup/extract'
 import { RadioButton } from '../input/input'
 import RadioGroup from './radioGroup'
 

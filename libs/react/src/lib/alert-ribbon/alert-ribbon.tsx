@@ -1,6 +1,6 @@
 import React, { AriaAttributes, ReactNode, useEffect, useState } from 'react'
-import { AlertRibbonType } from '@sebgroup/extract'
 
+import { AlertRibbonType } from '@sebgroup/extract'
 import { Check, SquareExclamation, SquareInfo } from '../icons'
 
 export interface AlertRibbonProps {

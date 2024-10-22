@@ -3,6 +3,7 @@ import {
   DetailedHTMLProps,
   InputHTMLAttributes,
 } from 'react'
+
 import { IndicatorType, IValidator, validateClassName } from '@sebgroup/extract'
 
 export interface StepperProps

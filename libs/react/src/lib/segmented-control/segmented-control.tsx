@@ -1,10 +1,11 @@
 import React, { ReactNode } from 'react'
 import { createComponent } from '@lit/react'
+import classNames from 'classnames'
+
 import { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control/index.js'
 import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment/index.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import classNames from 'classnames'
 
 registerTransitionalStyles()
 

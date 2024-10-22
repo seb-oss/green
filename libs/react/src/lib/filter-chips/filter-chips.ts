@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { register as registerTranistionalStyles } from '@sebgroup/green-core/components/filter-chips/filter-chips.trans.styles.js'
 import {
   GdsFilterChip,

@@ -7,7 +7,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import { ModalType, randomId, Size } from '@sebgroup/extract'
 import {
   clearAllBodyScrollLocks,
   disableBodyScroll,
@@ -15,6 +14,7 @@ import {
 } from 'body-scroll-lock'
 import classNames from 'classnames'
 
+import { ModalType, randomId, Size } from '@sebgroup/extract'
 import Button from '../form/button/button'
 
 type ModalEventListener = (

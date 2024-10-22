@@ -7,18 +7,16 @@ import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { gdsCustomElement, html } from '../../scoping'
+import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
-
-import '../flex'
-
-import { tokens } from '../../tokens.style'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { styles } from './textarea.styles'
 
 // Local Components
 import '../icon/icons/cross-small'
+import '../flex'
 import '../icon/icons/circle-info'
 import '../icon/icons/triangle-exclamation'
 import '../flex'

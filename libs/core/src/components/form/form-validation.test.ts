@@ -12,12 +12,12 @@ import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dropdown'
 
+import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-
-import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

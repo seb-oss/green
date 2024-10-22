@@ -1,6 +1,3 @@
-import { HTMLTemplateResult } from 'lit'
-import { state } from 'lit/decorators.js'
-
 import { GdsElement } from '../../gds-element'
 import { Focusable } from '../../mixins/focusable'
 import { gdsCustomElement, html } from '../../scoping'

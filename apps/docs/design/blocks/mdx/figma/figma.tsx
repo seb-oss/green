@@ -1,9 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import Pattern from '@/pattern/pattern'
-import { allComponents } from 'content'
 import { usePathname } from 'next/navigation'
+import { allComponents } from 'content'
+import Pattern from '@/pattern/pattern'
 
 interface FigmaProps {
   caption?: string

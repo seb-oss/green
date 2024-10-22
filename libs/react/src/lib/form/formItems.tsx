@@ -1,6 +1,6 @@
 import React from 'react'
-import { IValidator, ValidatorRules } from '@sebgroup/extract'
 
+import { IValidator, ValidatorRules } from '@sebgroup/extract'
 import { useFormContext } from './formContext'
 import { validateInputValue } from './validateInput'
 

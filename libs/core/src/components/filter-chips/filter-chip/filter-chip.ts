@@ -8,14 +8,12 @@ import {
   getScopedTagName,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-
-import '../../button'
+import { styles } from './filter-chip.styles'
 
 import type { GdsButton } from '../../button'
 
+import '../../button'
 import '../../icon/icons/checkmark.js'
-
-import { styles } from './filter-chip.styles'
 
 /**
  * @element gds-filter-chip

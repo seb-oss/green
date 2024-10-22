@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconBatteryLoading as Icon } from '@sebgroup/green-core/components/icon/icons/battery-loading.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

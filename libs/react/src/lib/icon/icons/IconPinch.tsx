@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconPinch as Icon } from '@sebgroup/green-core/components/icon/icons/pinch.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 

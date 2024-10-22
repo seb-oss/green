@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import classNames from 'classnames'
+
 import {
   IExpandableInformation,
   ILabelAndLabelInformation,
@@ -6,8 +8,6 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import classNames from 'classnames'
-
 import { FormItem } from '../formItem'
 import { ChevronDown } from '../icons'
 

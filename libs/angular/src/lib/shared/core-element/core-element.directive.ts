@@ -9,6 +9,7 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core'
+
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @Directive({

@@ -1,5 +1,6 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
+
 import { IconGlobus as Icon } from '@sebgroup/green-core/components/icon/icons/globus.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
