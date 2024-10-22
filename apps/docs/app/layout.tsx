@@ -5,7 +5,7 @@ import Main from '&/main/main'
 import Consent from '@/consent/consent'
 import Fonts from '$/fonts/fonts'
 import Header from 'core/header'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import { GdsFlex } from '@sebgroup/green-react/core/flex'
 import { Provider } from '$/provider/provider'
 
 import '#/global.css'

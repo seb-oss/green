@@ -3,11 +3,11 @@
 import Link from 'next/link'
 import { allComponents } from 'content'
 
-import GdsDivider from '@sebgroup/green-react/src/core/divider'
-import GdsText from '@sebgroup/green-react/src/core/text'
-import GdsCard from '@sebgroup/green-react/src/core/card'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsGrid from '@sebgroup/green-react/src/core/grid'
+import { GdsDivider } from '@sebgroup/green-react/core/divider'
+import { GdsText } from '@sebgroup/green-react/core/text'
+import { GdsCard } from '@sebgroup/green-react/core/card'
+import { GdsFlex } from '@sebgroup/green-react/core/flex'
+import { GdsGrid } from '@sebgroup/green-react/core/grid'
 
 import { IconChevronRight } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronRight'
 
