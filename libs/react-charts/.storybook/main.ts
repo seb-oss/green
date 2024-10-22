@@ -1,6 +1,6 @@
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import type { StorybookConfig } from '@storybook/react-webpack5'
 
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import defaultConfig from '../../../.storybook/main'
 
 const config: StorybookConfig = {
