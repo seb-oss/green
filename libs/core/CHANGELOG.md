@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.45.1
+
+### Patch Changes
+
+- 1b731d6: **Menu Button:** Increase the ga to 8px to match design on Menu Button
+
 ## 1.45.0
 
 ### Minor Changes
