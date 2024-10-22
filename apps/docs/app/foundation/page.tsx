@@ -136,7 +136,7 @@ export default function Foundation() {
                   designers and developers with design assets and code. Together we can focus on the user and the
                   experience we want to build, and swiftly make changes as needed.
                 </p>
-                <Spacing flex-direction="vertical" size={8} />
+                <Spacing direction="vertical" size={8} />
                 <Accordion>
                   <AccordionItem id="timeless" label="Timeless" labelElementLevel={3}>
                     <p>
@@ -194,7 +194,7 @@ export default function Foundation() {
                   The Green Design System ensures a unified visual experience. Empowering designers and developers with
                   versatile, accessible and coherent components.
                 </p>
-                <Spacing flex-direction="vertical" size={8} />
+                <Spacing direction="vertical" size={8} />
                 <Accordion>
                   <AccordionItem id="features" label="Consistency" labelElementLevel={3}>
                     <p>
