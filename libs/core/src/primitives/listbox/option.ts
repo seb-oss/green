@@ -21,7 +21,6 @@ export interface OptionsContainer extends HTMLElement {
 
 /**
  * @element gds-option
- * @internal
  *
  * A listbox option is an option in a listbox widget.
  * This primitive corresponds to the aria `option` role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/option_role

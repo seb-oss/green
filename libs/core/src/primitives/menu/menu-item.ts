@@ -10,7 +10,6 @@ import styles from '../listbox/option.styles'
 
 /**
  * @element gds-menu-item
- * @internal
  */
 @gdsCustomElement('gds-menu-item')
 export class GdsMenuItem extends Focusable(GdsElement) {
