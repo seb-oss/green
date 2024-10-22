@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
+import { allComponents } from 'content'
 import { Mdx } from '@/mdx'
 import isDev from '$/dev/dev'
-import { allComponents } from 'content'
 
 import type { Metadata, ResolvingMetadata } from 'next'
 
