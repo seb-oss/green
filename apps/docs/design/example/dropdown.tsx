@@ -1,8 +1,10 @@
-import React from 'react'
-import GdsDropdown from '@sebgroup/green-react/src/core/dropdown'
-import GdsOption from '@sebgroup/green-react/src/core/option'
+'use client'
 
-const Button = () => (
+import React from 'react'
+import { GdsDropdown } from '@sebgroup/green-react/core/dropdown'
+import { GdsOption } from '@sebgroup/green-react/core/option'
+
+const Dropdown = () => (
   <>
     <GdsDropdown>
       <GdsOption value="1">Dropdown</GdsOption>
@@ -11,4 +13,4 @@ const Button = () => (
   </>
 )
 
-export default Button
+export default Dropdown

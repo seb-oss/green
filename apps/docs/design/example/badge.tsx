@@ -1,6 +1,7 @@
-// badge.example.ts
+'use client'
+
 import React from 'react'
-import GdsBadge from '@sebgroup/green-react/src/core/badge'
+import { GdsBadge } from '@sebgroup/green-react/core/badge'
 import { IconPlusSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconPlusSmall'
 
 const Badge = () => (

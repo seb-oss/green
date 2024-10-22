@@ -1,7 +1,9 @@
+'use client'
+
 import React from 'react'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsMask from '@sebgroup/green-react/src/core/mask'
-import GdsCalendar from '@sebgroup/green-react/src/core/calendar'
+import { GdsFlex } from '@sebgroup/green-react/core/flex'
+import { GdsMask } from '@sebgroup/green-react/core/mask'
+import { GdsCalendar } from '@sebgroup/green-react/core/calendar'
 
 const Calendar = () => (
   <GdsFlex position="relative" height="200px">

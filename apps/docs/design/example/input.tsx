@@ -1,5 +1,7 @@
+'use client'
+
 import React from 'react'
-import GdsInput from '@sebgroup/green-react/src/core/input'
+import { GdsInput } from '@sebgroup/green-react/core/input'
 import { IconCreditCard } from '@sebgroup/green-react/src/lib/icon/icons/IconCreditCard'
 
 const Input = () => (

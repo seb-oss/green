@@ -1,6 +1,8 @@
+'use client'
+
 import React from 'react'
-import GdsContextMenu from '@sebgroup/green-react/src/core/context-menu'
-import GdsMenuItem from '@sebgroup/green-react/src/core/menu-item'
+import { GdsContextMenu } from '@sebgroup/green-react/core/context-menu'
+import { GdsMenuItem } from '@sebgroup/green-react/core/menu-item'
 
 const ContextMenu = () => (
   <>

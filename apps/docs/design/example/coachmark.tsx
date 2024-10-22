@@ -1,7 +1,9 @@
+'use client'
+
 import React from 'react'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsText from '@sebgroup/green-react/src/core/text'
-import GdsCoachmark from '@sebgroup/green-react/src/core/coachmark'
+import { GdsFlex } from '@sebgroup/green-react/core/flex'
+import { GdsText } from '@sebgroup/green-react/core/text'
+import { GdsCoachmark } from '@sebgroup/green-react/core/coachmark'
 import { IconPin } from '@sebgroup/green-react/src/lib/icon/icons/IconPin'
 
 const Coachmark = () => (
