@@ -4,8 +4,8 @@ import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
-import '@sebgroup/green-core/components/button/fab'
-import type { GdsFab } from '@sebgroup/green-core/components/button/fab'
+import '@sebgroup/green-core/components/fab'
+import type { GdsFab } from '@sebgroup/green-core/components/fab'
 
 import {
   htmlTemplateTagFactory,
