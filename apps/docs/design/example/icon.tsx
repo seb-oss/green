@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { IconRocket } from '@sebgroup/green-react/src/lib/icon/icons/IconRocket'
 

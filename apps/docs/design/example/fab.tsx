@@ -1,7 +1,8 @@
-// badge.example.ts
+'use client'
+
 import React from 'react'
-import GdsFab from '@sebgroup/green-react/src/core/fab'
-import GdsSignal from '@sebgroup/green-react/src/core/signal'
+import { GdsFab } from '@sebgroup/green-react/core/fab'
+import { GdsSignal } from '@sebgroup/green-react/core/signal'
 
 const FAB = () => (
   <>

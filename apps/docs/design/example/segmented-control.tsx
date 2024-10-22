@@ -1,6 +1,8 @@
+'use client'
+
 import React from 'react'
-import GdsSegmentedControl from '@sebgroup/green-react/src/core/segmented-control'
-import GdsSegment from '@sebgroup/green-react/src/core/segment'
+import { GdsSegmentedControl } from '@sebgroup/green-react/core/segmented-control'
+import { GdsSegment } from '@sebgroup/green-react/core/segment'
 
 const SegmentedControl = () => (
   <>

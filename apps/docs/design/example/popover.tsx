@@ -1,8 +1,10 @@
+'use client'
+
 import React from 'react'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsText from '@sebgroup/green-react/src/core/text'
-import GdsPopover from '@sebgroup/green-react/src/core/popover'
-import GdsButton from '@sebgroup/green-react/src/core/button'
+import { GdsFlex } from '@sebgroup/green-react/core/flex'
+import { GdsText } from '@sebgroup/green-react/core/text'
+import { GdsPopover } from '@sebgroup/green-react/core/popover'
+import { GdsButton } from '@sebgroup/green-react/core/button'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 
 const Popover = () => (

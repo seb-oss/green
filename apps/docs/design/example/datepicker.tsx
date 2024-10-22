@@ -1,5 +1,7 @@
+'use client'
+
 import React from 'react'
-import GdsDatepicker from '@sebgroup/green-react/src/core/datepicker'
+import { GdsDatepicker } from '@sebgroup/green-react/core/datepicker'
 
 const Datepicker = () => (
   <>
