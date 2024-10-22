@@ -76,11 +76,16 @@
     display: contents !important;
   }
 
-  .sidebar-item a {
+  .sidebar-item a,
+  .sidebar-item button {
     padding: 0 !important;
   }
 
   .sidebar-item a > div:not(.gds-item) {
+    display: none !important;
+  }
+
+  .sidebar-item button > div:not(.gds-item) {
     display: none !important;
   }
 
