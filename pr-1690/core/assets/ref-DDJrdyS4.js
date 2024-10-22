@@ -1,5 +1,0 @@
-import{E as o}from"./lit-element-C_s9q329.js";import{f as n}from"./async-directive-D5OLKesb.js";import{e as r}from"./directive-CF8sV3Lr.js";/**
- * @license
- * Copyright 2020 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */const Y=()=>new c;class c{}const e=new WeakMap,p=r(class extends n{render(t){return o}update(t,[i]){var h;const s=i!==this.Y;return s&&this.Y!==void 0&&this.rt(void 0),(s||this.lt!==this.ct)&&(this.Y=i,this.ht=(h=t.options)==null?void 0:h.host,this.rt(this.ct=t.element)),o}rt(t){if(this.isConnected||(t=void 0),typeof this.Y=="function"){const i=this.ht??globalThis;let s=e.get(i);s===void 0&&(s=new WeakMap,e.set(i,s)),s.get(this.Y)!==void 0&&this.Y.call(this.ht,void 0),s.set(this.Y,t),t!==void 0&&this.Y.call(this.ht,t)}else this.Y.value=t}get lt(){var t,i;return typeof this.Y=="function"?(t=e.get(this.ht??globalThis))==null?void 0:t.get(this.Y):(i=this.Y)==null?void 0:i.value}disconnected(){this.lt===this.ct&&this.rt(void 0)}reconnected(){this.rt(this.ct)}});export{Y as e,p as n};
