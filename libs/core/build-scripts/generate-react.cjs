@@ -69,7 +69,7 @@ for (const component of filteredComponents) {
     )
     .then((formattedSource) => {
       index.push(
-        `export { default as ${component.name} } from './${tagWithoutPrefix}/index.js';`,
+        `export { default as ${component.name} } from './${tagWithoutPrefix}';`,
       )
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
