@@ -25,7 +25,7 @@
         },
         "production": {}
       },
-      "dependsOn": ["core:build-bundle-src"]
+      "dependsOn": ["react:generate-core-wrappers"]
     },
     "serve": {
       "executor": "@nx/next:server",
@@ -51,7 +51,7 @@
           "dev": false
         }
       },
-      "dependsOn": ["core:build-bundle-src"]
+      "dependsOn": ["react:generate-core-wrappers"]
     },
     "export": {
       "executor": "@nx/next:export",

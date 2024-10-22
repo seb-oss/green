@@ -4,7 +4,25 @@ import { Meta, Markdown } from '@storybook/addon-docs'
 
 # Code conventions for Green Core
 
-## GdsElement
+## Naming convention
+
+### File names
+
+File names should always be written in kebab-case, and should reflect the name of the component or feature that the file contains. For example, a file containing a button component should be named `gds-button.ts`.
+
+### Prefix names
+
+Names should be prefixed with `Gds` to indicate that they are part of a Green Component library. This is to avoid naming conflicts with other libraries or custom code.
+
+### Class names
+
+Class names should be written in PascalCase, and should reflect the name of the component or feature that the class represents. For example, a class representing a button component should be named `GdsButton`. 
+
+### Custom element names
+
+Custom element names should be written in kebab-case, and should reflect the name of the component that the class represents. For example, a class representing a button component should be named `gds-button`.
+
+## Always extend GdsElement
 
 All components in Green Core should extend the `GdsElement` base class. Among some other minor things, this class adds the standard `gds-element` attribute to all components. Check the source code for more details.
 
