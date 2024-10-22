@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.20.0
+
+### Minor Changes
+
+- 8c24cec: **IconButton:** Refactor to use `Button` internally and support same features as Button
+
+### Patch Changes
+
+- 8c24cec: **Input:** Fix `expandableInfoButtonLabel`
+
 ## 3.19.0
 
 ### Minor Changes
