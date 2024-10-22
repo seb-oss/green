@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import Script from 'next/script'
 import Alert from '@/alert/aler'
 import Consent from '@/consent/consent'
 import Footer from '@/footer/footer'
@@ -9,7 +10,6 @@ import Article from '&/article/article'
 import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
 import { ThemeProvider } from '$/theme/provider'
-import Script from 'next/script'
 
 export default function RootLayout({
   children,

@@ -1,7 +1,7 @@
-import { Mdx } from '@/mdx'
-import { allComponents } from 'content'
 import { notFound } from 'next/navigation'
 import Script from 'next/script'
+import { Mdx } from '@/mdx'
+import { allComponents } from 'content'
 
 import type { Metadata, ResolvingMetadata } from 'next'
 

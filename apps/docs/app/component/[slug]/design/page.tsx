@@ -1,6 +1,6 @@
+import { notFound } from 'next/navigation'
 import { Mdx } from '@/mdx'
 import { allComponents } from 'content'
-import { notFound } from 'next/navigation'
 
 import type { Metadata, ResolvingMetadata } from 'next'
 
