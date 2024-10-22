@@ -8,6 +8,7 @@ import { randomId } from '@sebgroup/extract'
 })
 export class NggAccordionListItemComponent {
   @Input() public id: string = randomId()
+  @Input() public labelElementLevel = 2
   @Input() public listItemHeader = ''
   @Input() public listItemSubHeader = ''
   @Output() public expandedChange: EventEmitter<NggAccordionListItemComponent> =

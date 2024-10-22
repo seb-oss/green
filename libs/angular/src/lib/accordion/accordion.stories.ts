@@ -25,7 +25,7 @@ const Template: StoryFn<NggAccordionComponent> = () => {
             <div ngg-accordion-list-item listItemHeader="Second accordion heading" listItemSubHeader="Second accordion sublabel">
                 <p>This is the content of the second section</p>
             </div>
-            <div ngg-accordion-list-item listItemHeader="Third accordion heading" listItemSubHeader="Third accordion sublabel">
+            <div ngg-accordion-list-item labelElementLevel="3" listItemHeader="Third accordion heading - aria-level 3" listItemSubHeader="Third accordion sublabel">
               <p>This is the content of the second section</p>
             </div>
         </ngg-accordion>
