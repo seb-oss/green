@@ -21,6 +21,11 @@ export default {
   },
 }
 
+/**
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/chlorophyll/scss/components/form/input)
+ * &nbsp;|&nbsp;
+ * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-input)
+ */
 export const Input = {
   render: (args) => `
     <div class="form-group">
