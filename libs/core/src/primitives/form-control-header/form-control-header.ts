@@ -65,6 +65,7 @@ export class GdsFormControlHeader extends GdsElement {
         size="small"
         rank="tertiary"
         label="${msg('Show more information')}"
+        gds-aria-expanded="${this.showExtendedSupportingText}"
         @click=${this.#handleExtSupTxtBtnClick}
       >
         <gds-icon-circle-info ?solid=${this.showExtendedSupportingText} />
@@ -95,7 +96,7 @@ export class GdsFormControlHeader extends GdsElement {
   #renderExtSupTxt() {
     return html`
       <div
-        class="extended-supporting-text"
+        id="extended-supporting-text"
         aria-hidden="${this.showExtendedSupportingText ? 'false' : 'true'}"
         ?inert=${!this.showExtendedSupportingText}
       >

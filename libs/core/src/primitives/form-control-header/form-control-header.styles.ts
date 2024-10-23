@@ -27,7 +27,7 @@ export const styles = css`
       }
     }
 
-    .extended-supporting-text {
+    #extended-supporting-text {
       opacity: 1;
       transition: var(--_transition);
       font-size: var(--gds-text-size-body-s);
