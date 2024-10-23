@@ -38,18 +38,7 @@ export default function ComponentLayout({
     notFound()
   }
 
-  const {
-    title,
-    url_path,
-    tags,
-    status,
-    global_id,
-    last_edited,
-    summary,
-    figma_hero_svg,
-    preview,
-    pathSegments,
-  } = component
+  const { title, url_path, tags, status, last_edited, summary } = component
 
   const pathsAndComponents = [
     { path: '/accessibility', component: componentA11y },
@@ -108,76 +97,85 @@ export default function ComponentLayout({
   const Preview = getDynamicComponent(url_path.replace('/component/', ''))
 
   return (
-    <GdsFlex max-width="80ch" flex-direction="column">
+    <>
       <Trail
         home={'Home'}
         separator={<span> / </span>}
         activeClass="active"
         slug={slug}
       />
-
-      <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
-        <GdsFlex
-          justify-content="space-between"
-          align-items="flex-start"
-          gap="xl"
-        >
-          <GdsFlex flex-direction="column">
-            <GdsText tag="h1">{title}</GdsText>
-            <GdsText tag="p" text-wrap="balance">
-              {summary}
-            </GdsText>
-          </GdsFlex>
-          <GdsFlex
-            align-items="flex-start"
-            gap="s"
-            border-radius="s"
-            padding="m"
-            level="1"
-            background="secondary"
-            border="4xs/primary"
-            flex-direction="column"
-            width="40ch"
-          >
-            <GdsFlex flex-direction="column">
-              <GdsText tag="small">Status</GdsText>
-              <GdsBadge variant="notice" size="small">
-                {status}
-              </GdsBadge>
-            </GdsFlex>
-            <GdsFlex flex-direction="column">
-              <GdsText tag="small">Tags</GdsText>
-              <GdsFlex>
-                {tagsArray.map((tag, index) => (
-                  <Link key={index} href={`#${tag}`}>
-                    {tag}
-                  </Link>
-                ))}
+      <GdsFlex gap="4xl">
+        <GdsFlex max-width="80ch" flex-direction="column">
+          <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
+            <GdsFlex
+              justify-content="space-between"
+              align-items="flex-start"
+              gap="xl"
+            >
+              <GdsFlex flex-direction="column" gap="xs">
+                <GdsText tag="h1">{title}</GdsText>
+                <GdsText tag="p" text-wrap="balance">
+                  {summary}
+                </GdsText>
+                <GdsBadge variant="notice" size="small">
+                  {status}
+                </GdsBadge>
               </GdsFlex>
+              {/*
+              <GdsFlex
+                align-items="flex-start"
+                gap="s"
+                border-radius="s"
+                padding="m"
+                level="1"
+                background="secondary"
+                border="4xs/primary"
+                flex-direction="column"
+                width="40ch"
+              >
+                <GdsFlex flex-direction="column">
+                  <GdsText tag="small">Status</GdsText>
+                  <GdsBadge variant="notice" size="small">
+                    {status}
+                  </GdsBadge>
+                </GdsFlex>
+             <GdsFlex flex-direction="column">
+                  <GdsText tag="small">Tags</GdsText>
+                  <GdsFlex>
+                    {tagsArray.map((tag, index) => (
+                      <Link key={index} href={`#${tag}`}>
+                        {tag}
+                      </Link>
+                    ))}
+                  </GdsFlex>
+                </GdsFlex>
+              </GdsFlex>
+                 */}
+            </GdsFlex>
+            <GdsFlex
+              border="4xs/primary"
+              padding="2xl"
+              border-radius="m"
+              background="secondary"
+              gap="xl"
+              align-items="center"
+              justify-content="center"
+              height="420px"
+            >
+              <Preview />
             </GdsFlex>
           </GdsFlex>
+          <Taber component={url_path} links={links} />
+          {children}
+          <footer>
+            Last updated: <br />
+            <time dateTime={last_edited} title="Last updated">
+              {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
+            </time>
+          </footer>
         </GdsFlex>
-        <GdsFlex
-          border="4xs/primary"
-          padding="2xl"
-          border-radius="m"
-          background="secondary"
-          gap="xl"
-          align-items="center"
-          justify-content="center"
-          height="420px"
-        >
-          <Preview />
-        </GdsFlex>
+        <GdsFlex>{tocComponent}</GdsFlex>
       </GdsFlex>
-      <Taber component={url_path} links={links} />
-      {children}
-      <footer>
-        Last updated: <br />
-        <time dateTime={last_edited} title="Last updated">
-          {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
-        </time>
-      </footer>
-    </GdsFlex>
+    </>
   )
 }

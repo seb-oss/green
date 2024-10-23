@@ -1,33 +1,31 @@
 'use client'
 
 import Link from 'next/link'
-import { allComponents } from 'content'
-
-import { GdsDivider } from '@sebgroup/green-react/core/divider'
-import { GdsText } from '@sebgroup/green-react/core/text'
 import { GdsCard } from '@sebgroup/green-react/core/card'
+import { GdsDivider } from '@sebgroup/green-react/core/divider'
 import { GdsFlex } from '@sebgroup/green-react/core/flex'
 import { GdsGrid } from '@sebgroup/green-react/core/grid'
-
+import { GdsText } from '@sebgroup/green-react/core/text'
 import { IconChevronRight } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronRight'
-
+import Dev, { isDev } from '$/env/env'
+import { allComponents } from 'content'
 // Examples
 
 import Badge from 'example/badge'
 import Button from 'example/button'
-import FAB from 'example/fab'
-import FilterChips from 'example/filter-chips'
-import Icon from 'example/icon'
-import MenuButton from 'example/menu-button'
-import SegmentedControl from 'example/segmented-control'
-import Popover from 'example/popover'
-import Dropdown from 'example/dropdown'
-import Input from 'example/input'
-import Textarea from 'example/textarea'
-import Datepicker from 'example/datepicker'
 import Calendar from 'example/calendar'
 import Coachmark from 'example/coachmark'
 import ContextMenu from 'example/context-menu'
+import Datepicker from 'example/datepicker'
+import Dropdown from 'example/dropdown'
+import FAB from 'example/fab'
+import FilterChips from 'example/filter-chips'
+import Icon from 'example/icon'
+import Input from 'example/input'
+import MenuButton from 'example/menu-button'
+import Popover from 'example/popover'
+import SegmentedControl from 'example/segmented-control'
+import Textarea from 'example/textarea'
 
 const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Badge: Badge,
@@ -53,7 +51,7 @@ export default function Components({ title }: { title: string }) {
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }
-      if (component.private) {
+      if (component.private && !isDev) {
         return true
       }
       return true
