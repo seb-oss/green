@@ -2,18 +2,16 @@
 
 import React, { useRef, useState } from 'react'
 import Link from 'next/link'
-import Dev, { isDev } from '$/env/env'
-import { allComponents, Component } from 'content'
 import { usePathname } from 'next/navigation'
-
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsButton from '@sebgroup/green-react/src/core/button'
 import GdsBadge from '@sebgroup/green-react/src/core/badge'
-
+import GdsButton from '@sebgroup/green-react/src/core/button'
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
-import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
 import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
+import Dev, { isDev } from '$/env/env'
+import { allComponents, Component } from 'content'
 
 const menu = [
   {
@@ -161,7 +159,6 @@ export default function Sidebar({
                           </GdsBadge>
                         )}
                       </GdsFlex>
-                      {/* {subLink.private ? <div>P</div> : null} */}
                     </GdsFlex>
                   </Link>
                 )

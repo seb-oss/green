@@ -1,18 +1,17 @@
 'use client'
 
-import { notFound, usePathname } from 'next/navigation'
 import dynamic from 'next/dynamic'
-
+import Link from 'next/link'
+import { notFound, usePathname } from 'next/navigation'
 import Taber from '@/taber'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
-import { allComponents } from 'content'
-import { format, parseISO } from 'date-fns'
-
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsText from '@sebgroup/green-react/src/core/text'
 import GdsBadge from '@sebgroup/green-react/src/core/badge'
 import GdsContainer from '@sebgroup/green-react/src/core/container'
+import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsText from '@sebgroup/green-react/src/core/text'
+import { allComponents } from 'content'
+import { format, parseISO } from 'date-fns'
 
 export default function ComponentLayout({
   children,
@@ -109,7 +108,7 @@ export default function ComponentLayout({
   const Preview = getDynamicComponent(url_path.replace('/component/', ''))
 
   return (
-    <>
+    <GdsFlex max-width="80ch" flex-direction="column">
       <Trail
         home={'Home'}
         separator={<span> / </span>}
@@ -117,44 +116,68 @@ export default function ComponentLayout({
         slug={slug}
       />
 
-      <GdsFlex justify-content="space-between" align-items="flex-start">
-        <GdsFlex flex-direction="column">
-          <h1 className="gds-fs-headline-large">{title}</h1>
-          <p>{summary}</p>
-        </GdsFlex>
-        <GdsContainer level="2" background="primary">
-          <GdsFlex align-items="flex-start" gap="xl" min-width="400px">
+      <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
+        <GdsFlex
+          justify-content="space-between"
+          align-items="flex-start"
+          gap="xl"
+        >
+          <GdsFlex flex-direction="column">
+            <GdsText tag="h1">{title}</GdsText>
+            <GdsText tag="p" text-wrap="balance">
+              {summary}
+            </GdsText>
+          </GdsFlex>
+          <GdsFlex
+            align-items="flex-start"
+            gap="s"
+            border-radius="s"
+            padding="m"
+            level="1"
+            background="secondary"
+            border="4xs/primary"
+            flex-direction="column"
+            width="40ch"
+          >
             <GdsFlex flex-direction="column">
-              <GdsText>Status</GdsText>
-              <GdsBadge>{status}</GdsBadge>
+              <GdsText tag="small">Status</GdsText>
+              <GdsBadge variant="notice" size="small">
+                {status}
+              </GdsBadge>
             </GdsFlex>
             <GdsFlex flex-direction="column">
-              <GdsText>Tags</GdsText>
-              <GdsText>{tagsArray}</GdsText>
+              <GdsText tag="small">Tags</GdsText>
+              <GdsFlex>
+                {tagsArray.map((tag, index) => (
+                  <Link key={index} href={`#${tag}`}>
+                    {tag}
+                  </Link>
+                ))}
+              </GdsFlex>
             </GdsFlex>
           </GdsFlex>
-        </GdsContainer>
-      </GdsFlex>
-      <GdsFlex
-        level="2"
-        border="4xs/primary"
-        padding="2xl"
-        border-radius="m"
-        background="primary"
-        gap="xl"
-        align-items="center"
-        justify-content="center"
-        height="420px"
-      >
-        <Preview />
+        </GdsFlex>
+        <GdsFlex
+          border="4xs/primary"
+          padding="2xl"
+          border-radius="m"
+          background="secondary"
+          gap="xl"
+          align-items="center"
+          justify-content="center"
+          height="420px"
+        >
+          <Preview />
+        </GdsFlex>
       </GdsFlex>
       <Taber component={url_path} links={links} />
+      {children}
       <footer>
         Last updated: <br />
         <time dateTime={last_edited} title="Last updated">
           {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
         </time>
       </footer>
-    </>
+    </GdsFlex>
   )
 }
