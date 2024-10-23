@@ -1,13 +1,12 @@
 import { property } from 'lit/decorators.js'
 
+import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import { GdsElement } from '../../gds-element'
-
-import { tokens } from '../../tokens.style'
 import ContainerCSS from './container.style'
 
 /**
@@ -42,7 +41,9 @@ export class GdsContainer extends GdsElement {
    * @property level
    *
    * */
-  @property()
+  @styleExpressionProperty({
+    cacheOverrideKey: 'container-level',
+  })
   level = '2'
 
   /**
