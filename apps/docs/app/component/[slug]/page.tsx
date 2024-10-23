@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
 import { Mdx } from '@/mdx'
+import Dev, { isDev } from '$/env/env'
 import { allComponents } from 'content'
 
 import type { Metadata, ResolvingMetadata } from 'next'
@@ -29,7 +30,7 @@ export async function generateMetadata(
     if (component.url_path !== '/component/' + slug) {
       return false
     }
-    if (component.private) {
+    if (component.private && !isDev) {
       return false
     }
     return true

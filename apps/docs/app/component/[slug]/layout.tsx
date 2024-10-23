@@ -105,7 +105,7 @@ export default function ComponentLayout({
         slug={slug}
       />
       <GdsFlex gap="4xl">
-        <GdsFlex max-width="80ch" flex-direction="column">
+        <GdsFlex width="80ch" flex-direction="column">
           <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
             <GdsFlex
               justify-content="space-between"

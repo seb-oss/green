@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import GdsBadge from '@sebgroup/green-react/src/core/badge'
 import GdsButton from '@sebgroup/green-react/src/core/button'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
+import GdsText from '@sebgroup/green-react/src/core/text'
 import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
@@ -139,7 +140,7 @@ export default function Sidebar({
             <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
               {menuItem.subLinks.map((subLink, subIdx) => {
                 // Log the index and private status
-                console.log(`Index: ${subIdx}, Private: ${subLink.private}`)
+                // console.log(`Index: ${subIdx}, Private: ${subLink.private}`)
 
                 return (
                   <Link
@@ -148,7 +149,9 @@ export default function Sidebar({
                     href={subLink.path}
                   >
                     <GdsFlex justify-content="space-between">
-                      {subLink.title}
+                      <GdsText text-decoration="underline">
+                        {subLink.title}
+                      </GdsText>
                       <GdsFlex align-items="center" gap="xs">
                         {subLink.private && (
                           <IconEyeSlash width="12" height="12" />
