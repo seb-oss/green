@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.45.2
+
+### Patch Changes
+
+- b9324f5: **Container:** Add cacheOverrideKey for level property to avoid conflicts when same component is needed in different levels on same page
+
 ## 1.45.1
 
 ### Patch Changes
