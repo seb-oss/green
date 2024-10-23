@@ -97,6 +97,7 @@ export class GdsFormControlHeader extends GdsElement {
       <div
         class="extended-supporting-text"
         aria-hidden="${this.showExtendedSupportingText ? 'false' : 'true'}"
+        ?inert=${!this.showExtendedSupportingText}
       >
         <slot
           name="extended-supporting-text"
