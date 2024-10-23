@@ -1,16 +1,12 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import sinon from 'sinon'
 
-import '@sebgroup/green-core/components/form-control-header'
-import type { GdsForm-Control-Header } from '@sebgroup/green-core/components/form-control-header'
+import type { GdsFormControlHeader } from '@sebgroup/green-core/components/form-control-header'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+
+import '@sebgroup/green-core/primitives/form-control-header'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -24,25 +20,51 @@ describe('<gds-form-control-header>', () => {
 
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      const el = await fixture<GdsForm-Control-Header>(
+      const el = await fixture<GdsFormControlHeader>(
         html`<gds-form-control-header></gds-form-control-header>`,
       )
-      await el.updateComplete
       await expect(el).to.be.accessible()
     })
   })
 
   describe('API', () => {
-    // Add actual API tests here!
-    it('should have API tests', async () => {
-      expect(false).to.be.true
+    it('should fire a gds-ui-state event when the extended supporting text is toggled', async () => {
+      const el = await fixture<GdsFormControlHeader>(
+        html`<gds-form-control-header>
+          <label slot="label">Label</label>
+          <span slot="extended-supporting-text">Supporting text</span>
+        </gds-form-control-header>`,
+      )
+      const button = el.shadowRoot?.querySelector('[gds-element=gds-button]')
+      expect(button).to.exist
+      const eventSpy = sinon.spy()
+      el.addEventListener('gds-ui-state', eventSpy)
+      button?.click()
+      await el.updateComplete
+      expect(eventSpy).to.have.been.calledOnce
     })
   })
 
   describe('Interactions', () => {
-    // Add actual interaction tests here! (things like keyboard nav, clicking on things behave as expected, etc)
-    it('should have Interaction tests', async () => {
-      expect(false).to.be.true
+    it('should show the extended supporting text when the button is clicked', async () => {
+      const el = await fixture<GdsFormControlHeader>(
+        html`<gds-form-control-header>
+          <label slot="label">Label</label>
+          <span slot="extended-supporting-text">Supporting text</span>
+        </gds-form-control-header>`,
+      )
+
+      await aTimeout(0)
+      await el.updateComplete
+
+      const button = el.shadowRoot?.querySelector('[gds-element=gds-button]')
+      expect(button).to.exist
+      button?.click()
+      await el.updateComplete
+      const extSupTxt = el.shadowRoot?.querySelector(
+        '.extended-supporting-text',
+      )
+      expect(extSupTxt).to.exist
     })
   })
 })

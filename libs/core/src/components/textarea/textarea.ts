@@ -132,9 +132,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
 
-  @queryAsync('slot[name="extended-supporting-text"]')
-  private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
-
   @state()
   trailSlotOccupied = false
 
@@ -170,7 +167,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return html`
       <gds-form-control-header>
         <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text">${this.supportingText}</span>
+        <span slot="supporting-text" id="supporting-text"
+          >${this.supportingText}</span
+        >
         <slot
           name="extended-supporting-text"
           slot="extended-supporting-text"

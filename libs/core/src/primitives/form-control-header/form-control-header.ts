@@ -9,11 +9,16 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { styles } from './form-control-header.styles'
 
+import '../../components/button'
 import '../../components/icon/icons/circle-info'
 import '../../components/card'
 
 /**
  * @element gds-form-control-header
+ *
+ * @slot label - The label of the form control.
+ * @slot supporting-text - The supporting text of the form control.
+ * @slot extended-supporting-text - The extended supporting text, or "Show more info" card, of the form control.
  */
 @gdsCustomElement('gds-form-control-header')
 export class GdsFormControlHeader extends GdsElement {
