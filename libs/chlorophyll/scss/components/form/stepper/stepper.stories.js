@@ -1,41 +1,20 @@
-const Template = ({ validation, enabled, text, formInfo }) => {
-  const attrValidation = validation ? validation : ``
-  const attrEnabled = enabled ? `` : `disabled`
-  const hasExtraInfo = formInfo.length > 0
-  return `
-    <div class="form-group">
-        <label for="stepperInput">${text}</label>
-        ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
-        <div class="group group-border group-stepper ${attrValidation} ${attrEnabled}">
-            <button class="tertiary" ${attrEnabled}>-</button>
-            <input id="stepperInput" type="number" placeholder="0" ${attrEnabled} />
-            <button class="tertiary" ${attrEnabled}>+</button>
-        </div>
-        <span class="form-info">${validation ? validation : 'Neutral'}</span>
-    </div>`
-}
-
 export default {
-  title: 'Components/Form/Elements/Stepper',
-
+  title: 'Components/Stepper',
+  tags: ['autodocs'],
   parameters: {
     componentIds: ['component-stepper'],
   },
-
   argTypes: {
     validation: {
       control: 'select',
       options: ['', 'is-valid', 'is-invalid'],
     },
-
-    enabled: {
+    disabled: {
       control: 'boolean',
     },
-
     text: {
       control: 'text',
     },
-
     formInfo: {
       control: 'text',
     },
@@ -43,13 +22,20 @@ export default {
 }
 
 export const Stepper = {
-  render: Template.bind({}),
-  name: 'Stepper',
-
+  render: (args) => `
+    <div class="form-group">
+        <label for="stepperInput">${args.text}</label>
+        ${args.formInfo ? '<span class="form-info">' + args.formInfo + '</span>' : ''}
+        <div class="group group-border group-stepper ${args.validation} ${args.disabled}">
+            <button class="tertiary" ${args.attrEnabled}>-</button>
+            <input id="stepperInput" type="number" placeholder="0" ${args.attrEnabled} />
+            <button class="tertiary" ${args.attrEnabled}>+</button>
+        </div>
+        <span class="form-info">${args.validation ? args.validation : 'Neutral'}</span>
+    </div>`,
   args: {
     text: 'Stepper label',
-    formInfo:
-      'Lorem ipsum very long description of stepper and what should be entered',
+    formInfo: 'Lorem ipsum very long supporting text of what should be entered',
     enabled: true,
   },
 }

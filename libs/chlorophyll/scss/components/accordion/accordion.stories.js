@@ -1,6 +1,5 @@
 export default {
   title: 'Components/Accordion',
-  component: 'accordion',
   tags: ['autodocs'],
   parameters: {
     componentIds: ['component-accordion'],
@@ -21,7 +20,8 @@ export default {
  *
  */
 export const Accordion = {
-  render: () => `<div class="accordion">
+  render: () => `
+  <div class="accordion">
       <div>
         <div role="heading" aria-level="2">
           <button id="accordion-1-id" aria-expanded="true">
