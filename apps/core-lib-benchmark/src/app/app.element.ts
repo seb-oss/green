@@ -1,5 +1,5 @@
-import { LitElement, css } from 'lit'
 import { Router, Routes } from '@lit-labs/router'
+import { css, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping.js'
