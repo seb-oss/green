@@ -41,7 +41,9 @@ export class GdsContainer extends GdsElement {
    * @property level
    *
    * */
-  @property()
+  @styleExpressionProperty({
+    cacheOverrideKey: 'container-level',
+  })
   level = '2'
 
   /**
