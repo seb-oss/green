@@ -1,7 +1,9 @@
+import * as fs from 'fs'
+
 import type { StorybookConfig } from '@storybook/angular'
+
 const EventHooksPlugin = require('event-hooks-webpack-plugin')
 const copyfiles = require('copyfiles')
-import * as fs from 'fs'
 
 const config: Omit<StorybookConfig, 'framework'> = {
   stories: ['../src/**/*.mdx', '../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
@@ -20,7 +22,7 @@ const config: Omit<StorybookConfig, 'framework'> = {
               await new Promise((resolve) =>
                 copyfiles(
                   [
-                    'node_modules/@sebgroup/fonts/fonts/SEBSansSerif/*',
+                    'libs/fonts/fonts/SEBSansSerif/*',
                     'dist/fonts/SEBSansSerif',
                   ],
                   { up: true },
