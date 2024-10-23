@@ -1,5 +1,5 @@
 import { msg } from '@lit/localize'
-import { property, state } from 'lit/decorators.js'
+import { property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -36,6 +36,9 @@ export class GdsFormControlHeader extends GdsElement {
   @state()
   private _hasExtendedSupportingText = false
 
+  @query('.extended-supporting-text')
+  private _extendedSupportingText?: HTMLElement
+
   render() {
     return html`
       <div id="label-row">
@@ -71,6 +74,15 @@ export class GdsFormControlHeader extends GdsElement {
 
   #handleExtSupTxtBtnClick = () => {
     this.showExtendedSupportingText = !this.showExtendedSupportingText
+
+    // Set max-height to the height of the slotted content
+    this._extendedSupportingText?.style.setProperty(
+      '--_max-height',
+      this.showExtendedSupportingText
+        ? `${this._extendedSupportingText.scrollHeight}px`
+        : '0',
+    )
+
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         bubbles: true,
@@ -82,21 +94,15 @@ export class GdsFormControlHeader extends GdsElement {
 
   #renderExtSupTxt() {
     return html`
-      <gds-card
-        level="3"
+      <div
         class="extended-supporting-text"
-        padding="s m"
-        margin="2xs 0 0 0"
-        border-radius="xs"
-        background="secondary"
-        color="tertiary"
-        display="${this.showExtendedSupportingText ? 'block' : 'none'}"
+        aria-hidden="${this.showExtendedSupportingText ? 'false' : 'true'}"
       >
         <slot
           name="extended-supporting-text"
           @slotchange=${this.#handleExtSupTxtSlotChange}
         ></slot>
-      </gds-card>
+      </div>
     `
   }
 }
