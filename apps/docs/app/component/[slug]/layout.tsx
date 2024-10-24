@@ -119,6 +119,9 @@ export default function ComponentLayout({
                 <GdsBadge variant="notice" size="small">
                   {status}
                 </GdsBadge>
+                <GdsFlex level="3" background="tertiary">
+                  Test for Level 3
+                </GdsFlex>
               </GdsFlex>
               {/*
               <GdsFlex
