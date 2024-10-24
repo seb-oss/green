@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
 import Image from 'next/image'
 import Grid from '@/grid/grid'
+
+import type { Metadata } from 'next'
 
 import './style.css'
 

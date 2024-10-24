@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { NggSegmentedControlComponent } from './segmented-control.component'
+import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
+
+import { NggSegmentedControlComponent } from './segmented-control.component'
 
 @NgModule({
   declarations: [NggSegmentedControlComponent],

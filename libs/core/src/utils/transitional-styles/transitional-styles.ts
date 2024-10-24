@@ -1,20 +1,20 @@
 import { unsafeCSS } from 'lit'
-import { GdsElement } from '../../gds-element'
-import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
-import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 // Only import components here. Primitives should be imported from the components that use them.
 // Also, if a component depens, remember to import transitional styles for teh child component in
 // the parent component. Check how datepicker handles dropdown for an example.
 
 import * as Button from '../../components/button/button.trans.styles'
-import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as ContextMenu from '../../components/context-menu/context-menu.trans.styles'
 import * as Datepicker from '../../components/datepicker/datepicker.trans.styles'
+import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
+import * as FilterChips from '../../components/filter-chips/filter-chips.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
-import * as FilterChips from '../../components/filter-chips/filter-chips.trans.styles'
 import * as Theme from '../../components/theme/theme.trans.styles'
+import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
+import { GdsElement } from '../../gds-element'
+import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 /**
  * Registers transitional styles for all components.

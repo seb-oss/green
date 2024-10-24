@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { GroupedList, ListItem } from './grouped-list'
 
 const Template = ({ children, ...props }) => (

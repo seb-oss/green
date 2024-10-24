@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+
 import { NgvTooltipDirective } from '@sebgroup/green-angular/src/v-angular/tooltip'
 import { NgvInfoCircleComponent } from './info-circle.component'
 

@@ -1,6 +1,6 @@
-import { Navbar, Tabs, Tab, AlertRibbon, Badge } from '@sebgroup/green-react'
-import { FormExample } from './form'
+import { AlertRibbon, Badge, Navbar, Tab, Tabs } from '@sebgroup/green-react'
 import { AlertRibbons } from './alert-ribbons'
+import { FormExample } from './form'
 import { Modals } from './modals'
 
 export function App() {

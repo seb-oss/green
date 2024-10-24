@@ -11,9 +11,10 @@ import {
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import '../core/core.globals'
-import { NgvDropdownComponent } from './dropdown.component'
+
 import { DropdownUtils, Option } from '../core/core.utils'
 import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NgvDropdownComponent } from './dropdown.component'
 
 @Component({
   selector: 'nggv-dropdown-list',

@@ -1,42 +1,38 @@
+import { msg } from '@lit/localize'
+import { nothing } from 'lit'
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { join } from 'lit/directives/join.js'
-import { when } from 'lit/directives/when.js'
-import { until } from 'lit/directives/until.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
-import { classMap } from 'lit/directives/class-map.js'
-import { nothing } from 'lit'
-import { msg } from '@lit/localize'
+import { until } from 'lit/directives/until.js'
+import { when } from 'lit/directives/when.js'
 import { isSameDay } from 'date-fns'
 
-import { GdsFormControlElement } from '../form/form-control'
 import { gdsCustomElement, html } from '../../scoping'
+import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
 import {
   dateArrayConverter,
   dateConverter,
 } from '../../utils/helpers/attribute-converters'
+import { GdsFormControlElement } from '../form/form-control'
+import { styles } from './datepicker.styles'
 
-import '../popover'
-import type { GdsPopover } from '../popover'
-
-import '../calendar'
-import type { GdsCalendar } from '../calendar'
-
-import '../../components/dropdown'
 import type { GdsDropdown } from '../../components/dropdown'
-
-import './date-part-spinner'
+import type { GdsCalendar } from '../calendar'
+import type { GdsPopover } from '../popover'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import '../../components/button'
+import '../../components/dropdown'
+import '../calendar'
 import '../icon/icons/calendar'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
-
-import { tokens } from '../../tokens.style'
-import { styles } from './datepicker.styles'
+import '../popover'
+import './date-part-spinner'
 
 type DatePart = 'year' | 'month' | 'day'
 

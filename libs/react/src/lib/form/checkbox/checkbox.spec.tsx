@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react'
-import { Checkbox } from './checkbox'
 import React from 'react'
+import { render, screen } from '@testing-library/react'
+
+import { Checkbox } from './checkbox'
 
 describe('Checkbox', () => {
   it('ref becomes checkbox input element', () => {

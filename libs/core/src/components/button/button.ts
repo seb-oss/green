@@ -1,7 +1,13 @@
 import { nothing, unsafeCSS } from 'lit'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
+import { when } from 'lit/directives/when.js'
+import { literal, html as staticHtml } from 'lit/static-html.js'
+
+import { html as customElementHtml, gdsCustomElement } from '../../scoping'
+import { tokens } from '../../tokens.style'
 import { when } from 'lit/directives/when.js'
 import { literal, html as staticHtml } from 'lit/static-html.js'
 
@@ -12,6 +18,9 @@ import { observeLightDOM } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { GdsFormControlElement } from '../form/form-control'
+import style from './button.style.css?inline'
+
+import '../../primitives/ripple'
 import style from './button.style.css?inline'
 
 import '../../primitives/ripple'

@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { SortDirection } from '../table-typings'
 
 export interface SortedColumn<T = any> {

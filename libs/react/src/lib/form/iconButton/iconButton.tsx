@@ -1,4 +1,5 @@
-import { ReactNode, MouseEvent, forwardRef, ForwardedRef } from 'react'
+import { ForwardedRef, forwardRef, MouseEvent, ReactNode } from 'react'
+
 import { ButtonType } from '@sebgroup/extract'
 import { Button, ButtonProps } from '../button/button'
 

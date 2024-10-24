@@ -1,7 +1,8 @@
 import { css } from 'lit'
+import { property } from 'lit/decorators.js'
+
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import { property } from 'lit/decorators.js'
 
 /**
  * @element gds-backdrop

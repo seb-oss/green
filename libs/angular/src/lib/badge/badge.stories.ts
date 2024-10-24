@@ -1,6 +1,7 @@
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
-import { NggBadgeModule } from './badge.module'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggBadgeComponent } from './badge.component'
+import { NggBadgeModule } from './badge.module'
 
 export default {
   title: 'Components/Badge',

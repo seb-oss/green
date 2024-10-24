@@ -1,13 +1,15 @@
-import { BuildCoreLibExecutorSchema } from './schema'
-import * as esbuild from 'esbuild'
-import * as glob from 'glob'
-import { sassPlugin } from 'esbuild-sass-plugin'
-import postcss from 'postcss'
-import * as autoprefixer from 'autoprefixer'
-import * as postcssPresetEnv from 'postcss-preset-env'
-import type { ExecutorContext } from '@nx/devkit'
 import { copyAssets } from '@nx/js'
+import * as autoprefixer from 'autoprefixer'
+import * as esbuild from 'esbuild'
+import { sassPlugin } from 'esbuild-sass-plugin'
 import { removeSync } from 'fs-extra'
+import * as glob from 'glob'
+import postcss from 'postcss'
+import * as postcssPresetEnv from 'postcss-preset-env'
+
+import type { ExecutorContext } from '@nx/devkit'
+
+import { BuildCoreLibExecutorSchema } from './schema'
 
 export default async function runExecutor(
   options: BuildCoreLibExecutorSchema,

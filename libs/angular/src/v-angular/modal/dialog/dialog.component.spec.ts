@@ -3,7 +3,6 @@ import '../modal.globals'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-
 import { NgvDialogComponent } from './dialog.component'
 
 describe('[NgvModal]', () => {

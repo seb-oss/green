@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-
 import { NgvSlideOutComponent } from './slide-out.component'
 
 describe('SlideOutComponent', () => {

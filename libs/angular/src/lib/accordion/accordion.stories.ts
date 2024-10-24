@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggAccordionComponent } from './accordion.component'
 import { NggAccordionModule } from './accordion.module'
 

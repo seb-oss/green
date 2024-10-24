@@ -1,4 +1,12 @@
 import {
+  animate,
+  group,
+  query,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations'
+import {
   Component,
   ElementRef,
   EventEmitter,
@@ -8,15 +16,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-
-import {
-  trigger,
-  query,
-  style,
-  animate,
-  transition,
-  group,
-} from '@angular/animations'
 
 // import { faTimes } from '@fortawesome/pro-regular-svg-icons';
 

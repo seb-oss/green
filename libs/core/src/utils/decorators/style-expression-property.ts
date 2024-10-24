@@ -1,8 +1,9 @@
 import { CSSResult, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { GdsElement } from 'src/gds-element'
+
+import { parse, toCss, tokenize } from '../helpers/style-expression-parser'
 import { watch } from './watch'
-import { tokenize, parse, toCss } from '../helpers/style-expression-parser'
 
 /**
  * Options for `@styleExpressionProperty`.

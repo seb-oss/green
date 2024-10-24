@@ -1,11 +1,11 @@
+import { css, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
+
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import { TransitionalStyles } from '../../transitional-styles'
-import { css, unsafeCSS } from 'lit'
-import { watch } from '../../utils/decorators'
-
 import { colorV2Dark, colorV2Light } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators'
 
 /**
  * @element gds-theme

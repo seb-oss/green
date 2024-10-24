@@ -1,15 +1,16 @@
 'use client'
 
+import Image from 'next/image'
+import Link from 'next/link'
 import { Accordion, AccordionItem } from '@/accordion'
+import Grid from '@/grid/grid'
 import Hero from '@/hero/hero'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
-import Image from 'next/image'
-import Link from 'next/link'
-import './style.css'
-import Grid from '@/grid/grid'
 import Content from '&/content/content'
 import WoodsCabinImage from 'public/content/woods-cabin.png'
+
+import './style.css'
 
 const tocHeading = [
   {

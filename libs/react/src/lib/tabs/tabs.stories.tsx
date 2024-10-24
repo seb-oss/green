@@ -1,6 +1,7 @@
 import React from 'react'
-import { Tabs, Tab } from './tabs'
+
 import { Card } from '../card'
+import { Tab, Tabs } from './tabs'
 
 const Template = ({ children, ...props }) => (
   <Card>

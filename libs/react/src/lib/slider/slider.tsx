@@ -1,10 +1,10 @@
 import React from 'react'
+
 import {
   getSliderTrackBackground,
   randomId,
   sliderColors,
 } from '@sebgroup/extract'
-
 import { SliderProps } from '../../types'
 
 const InputWrapper = ({

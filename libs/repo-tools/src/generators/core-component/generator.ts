@@ -1,5 +1,6 @@
-import { formatFiles, generateFiles, Tree } from '@nx/devkit'
 import * as path from 'path'
+import { formatFiles, generateFiles, Tree } from '@nx/devkit'
+
 import { CoreComponentGeneratorSchema } from './schema'
 
 function toCamelCase(str: string): string {

@@ -1,7 +1,10 @@
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggCoreWrapperModule } from '../shared/core-element/core-element.module'
+
 import '@sebgroup/green-core/components/grouped-list/index.js'
+
 import * as GroupedListTransStyles from '@sebgroup/green-core/components/grouped-list/grouped-list.trans.styles.js'
 
 GroupedListTransStyles.register()

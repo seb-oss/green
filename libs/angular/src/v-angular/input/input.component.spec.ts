@@ -1,4 +1,5 @@
 import '../core/core.globals'
+
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
   FormControl,
@@ -12,9 +13,9 @@ import { By } from '@angular/platform-browser'
 //import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import { TranslocoTestingModule } from '@ngneat/transloco'
-import en from '../i18n/i18n.json'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
+import en from '../i18n/i18n.json'
 import { NgvInputComponent } from './input.component'
 
 // const member = (name: any) => chalk.blueBright(`${name}`)

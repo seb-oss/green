@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
+
 import { NggChartComponent } from './chart/ngg-chart.component'
 
 @NgModule({

@@ -1,12 +1,13 @@
 import React from 'react'
+
+import { TextInput } from '../form/input/input'
+import { TextArea } from '../form/textarea/textarea'
+import { GroupedList, ListItem } from '../grouped-list'
+import { IconCheckmark } from '../icon/icons/IconCheckmark'
 import {
   InPageWizardStepCard,
   InPageWizardStepCardProps,
 } from './inPageWizardStepCard'
-import { IconCheckmark } from '../icon/icons/IconCheckmark'
-import { GroupedList, ListItem } from '../grouped-list'
-import { TextInput } from '../form/input/input'
-import { TextArea } from '../form/textarea/textarea'
 
 const Template = ({ children, ...props }: InPageWizardStepCardProps) => (
   <InPageWizardStepCard {...props}>{children}</InPageWizardStepCard>

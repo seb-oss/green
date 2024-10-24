@@ -1,12 +1,12 @@
-import puppeteer from 'puppeteer'
 import { spawn } from 'node:child_process'
-import { exit } from 'node:process'
 import { readFile } from 'node:fs/promises'
+import { exit } from 'node:process'
+import puppeteer from 'puppeteer'
 
 import {
-  getScriptingDur,
-  getRenderingDur,
   getPaintDur,
+  getRenderingDur,
+  getScriptingDur,
 } from './lib/trace-parsing.mjs'
 
 const bench_param = process.argv[2]
