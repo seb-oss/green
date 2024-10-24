@@ -23,7 +23,6 @@ files.forEach((file) => {
 
   let frontmatter = `---
 title: ${title}
-global_id: ${buttonName}${file}
 date: ${new Date().toISOString().split('T')[0]}
 ---\n`
 
@@ -33,10 +32,7 @@ date: ${new Date().toISOString().split('T')[0]}
 title: ${title}
 summary: ${title} Summary
 date: ${new Date().toISOString().split('T')[0]}
-global_id: ${buttonName}index
 status: work in progress
-tags: 
-node: 
 ---\n`
   }
 

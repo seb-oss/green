@@ -6,6 +6,9 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import SignalCSS from './signal.style'
 
+/**
+ * @element gds-signal
+ */
 @gdsCustomElement('gds-signal')
 export class GdsSignal extends GdsElement {
   static styles = [tokens, SignalCSS]

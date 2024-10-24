@@ -6,6 +6,9 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 
+/**
+ * @element gds-spacer
+ */
 @gdsCustomElement('gds-spacer')
 export class GdsSpacer extends GdsElement {
   static styles = [tokens]

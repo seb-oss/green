@@ -85,7 +85,7 @@ export class GdsInput extends GdsFormControlElement<string> {
    * The maximum number of characters allowed in the field.
    */
   @property({ type: Number })
-  maxlength = Number.MAX_SAFE_INTEGER
+  maxlength: number = Number.MAX_SAFE_INTEGER
 
   /**
    * The variant of the input field. The default variant displays a label, supporting text, and
@@ -101,7 +101,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   variant: 'default' | 'floating-label' = 'default'
 
   @property({ type: String })
-  size: 'default' | 'small' = 'default'
+  size: 'large' | 'small' = 'large'
 
   @queryAsync('input')
   private elInputAsync!: Promise<HTMLInputElement>

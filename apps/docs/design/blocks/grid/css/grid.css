@@ -1,4 +1,4 @@
-@layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
+/* @layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
 
 @layer grid {
   :root {
@@ -27,16 +27,11 @@
       --gds-grid-col-width: 200px;
       --gap-count: calc(var(--gds-grid-col-count) - 1);
       --total-gap-width: calc(var(--gap-count) * var(--gds-grid-col-gap));
-      --gds-grid-col-width-max: calc(
-        (100% - var(--total-gap-width)) / var(--gds-grid-col-count)
-      );
+      --gds-grid-col-width-max: calc((100% - var(--total-gap-width)) / var(--gds-grid-col-count));
 
       grid-template-columns: repeat(
         auto-fill,
-        minmax(
-          max(var(--gds-grid-col-width), var(--gds-grid-col-width-max)),
-          1fr
-        )
+        minmax(max(var(--gds-grid-col-width), var(--gds-grid-col-width-max)), 1fr)
       );
       text-wrap: balance;
     }
@@ -52,4 +47,4 @@
       max-width: max-content;
     }
   }
-}
+} */

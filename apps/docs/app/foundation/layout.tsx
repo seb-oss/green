@@ -6,17 +6,13 @@ export const metadata: Metadata = {
   description:
     'Green Design System, a framework designed to bring unity, efficiency, and coherent perspective to our digital experiences. Over time it will grow and evolve but always reflect our design philosophy. User needs first, being forefront and with confidence.',
   alternates: {
-    canonical: '/foundation',
+    canonical: '/foundation'
   },
   openGraph: {
-    images: '/og?title=Foundation',
-  },
+    images: '/og?title=Foundation'
+  }
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return children
 }

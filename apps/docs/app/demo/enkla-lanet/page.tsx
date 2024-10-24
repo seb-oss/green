@@ -17,7 +17,7 @@ export default function EnklaLanet() {
       <p>WARNING: This is a demo only!</p>
 
       <Grid
-        columns={2}
+        columns="2"
         gapBlock="large"
         gapInline="large"
         paddingBlock="medium"

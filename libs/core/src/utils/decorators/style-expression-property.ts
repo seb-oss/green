@@ -72,7 +72,9 @@ export function styleExpressionProperty(
         this['__' + String(descriptor)] = newValue
         await this.updateComplete
 
-        const styleKey = sel + prop + newValue + cacheKey
+        // Take the level prop into account if it exists
+        const lvl = (this as any).level ?? 0
+        const styleKey = sel + prop + newValue + lvl + cacheKey
 
         if (styleCache.has(styleKey)) {
           ;(this as GdsElement)._dynamicStylesController.inject(

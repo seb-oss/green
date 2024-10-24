@@ -7,15 +7,17 @@
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/docs",
         "assets": [
           {
-            "input": "dist/libs/core/src",
-            "glob": "index.bundle.js",
-            "output": "./core-out"
+            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "glob": "**/*.woff2",
+            "output": "./fonts/SEBSansSerifGDS"
           }
         ]
       },
@@ -25,7 +27,9 @@
         },
         "production": {}
       },
-      "dependsOn": ["react:generate-core-wrappers"]
+      "dependsOn": [
+        "react:generate-core-wrappers"
+      ]
     },
     "serve": {
       "executor": "@nx/next:server",
@@ -35,9 +39,9 @@
         "dev": true,
         "assets": [
           {
-            "input": "dist/libs/core/src",
-            "glob": "index.bundle.js",
-            "output": "./core-out"
+            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "glob": "**/*.woff2",
+            "output": "./fonts/SEBSansSerifGDS"
           }
         ]
       },
@@ -51,7 +55,9 @@
           "dev": false
         }
       },
-      "dependsOn": ["react:generate-core-wrappers"]
+      "dependsOn": [
+        "react:generate-core-wrappers"
+      ]
     },
     "export": {
       "executor": "@nx/next:export",
@@ -61,7 +67,9 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
       "options": {
         "jestConfig": "apps/docs/jest.config.ts"
       }

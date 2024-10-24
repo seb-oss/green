@@ -3,6 +3,7 @@ const path = require('path')
 const prettier = require('prettier')
 const prettierConfig = import('../../../prettier.config.mjs')
 const { getAllComponents } = require('./shared.cjs')
+//const { inspect } = require('util')
 
 const reactDir = path.join('./libs/react/src/core')
 
@@ -45,10 +46,10 @@ for (const component of filteredComponents) {
         import { createComponent } from '@lit/react';
         import { getScopedTagName } from '@sebgroup/green-core/scoping'
         import { ${component.name} } from '@sebgroup/green-core/${importPath}';
-  
+
         const tagName = getScopedTagName('${component.tagName}')
         //${component.name}.define('${component.tagName}')
-  
+
         ${jsDoc}
         const reactWrapper = createComponent({
           tagName,
@@ -59,7 +60,7 @@ for (const component of filteredComponents) {
           },
           displayName: "${component.name}"
         })
-  
+
         export default reactWrapper
       `,
       Object.assign(prettierConfig, {
@@ -68,7 +69,7 @@ for (const component of filteredComponents) {
     )
     .then((formattedSource) => {
       index.push(
-        `export { default as ${component.name} } from './${tagWithoutPrefix}/index.js';`,
+        `export { default as ${component.name} } from './${tagWithoutPrefix}';`,
       )
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')

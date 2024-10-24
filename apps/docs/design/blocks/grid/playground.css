@@ -9,10 +9,7 @@
   --grid-demo-aside: 280px;
   --grid-demo-gap: 20px;
 
-  width: calc(
-    var(--grid-demo-preview) + var(--grid-demo-aside) + var(--grid-demo-gap) +
-      var(--grid-demo-padding) * 2
-  );
+  width: calc(var(--grid-demo-preview) + var(--grid-demo-aside) + var(--grid-demo-gap) + var(--grid-demo-padding) * 2);
 
   gap: var(--grid-demo--gap);
   padding: var(--grid-demo-padding);
