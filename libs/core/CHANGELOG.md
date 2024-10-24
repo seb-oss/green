@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.45.3
+
+### Patch Changes
+
+- 05228f9: **Container:** Revert back the caching on levels
+
 ## 1.45.2
 
 ### Patch Changes
