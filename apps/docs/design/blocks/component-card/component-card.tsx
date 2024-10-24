@@ -1,17 +1,15 @@
 'use client'
 
-import Card from '@/card/card'
-import Pattern from '@/pattern/pattern'
-import { Component } from 'content'
-
 import dynamic from 'next/dynamic'
+import { Component } from 'content'
+import Pattern from '@/pattern/pattern'
 
 const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'), {
-  ssr: false
+  ssr: false,
 })
 
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
-  ssr: false
+  ssr: false,
 })
 
 export default function ComponentCard(component: Component) {

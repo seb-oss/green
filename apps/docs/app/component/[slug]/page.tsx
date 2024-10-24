@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
-import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
-import { isDev } from '$/env/env'
 import { allComponents } from 'content'
+import { isDev } from '$/env/env'
 import { Mdx } from 'core/mdx'
 
 import type { Metadata, ResolvingMetadata } from 'next'
@@ -13,7 +12,11 @@ type Props = {
   params: { slug: string }
 }
 
-export const generateStaticParams = (): any => {
+type ComponentParams = {
+  slug: string
+}
+
+export const generateStaticParams = (): ComponentParams[] => {
   return allComponents.map((component) => ({
     slug: component.url_path.replace('/component/', ''),
   }))

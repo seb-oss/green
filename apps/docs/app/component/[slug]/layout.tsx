@@ -1,16 +1,16 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { notFound, usePathname } from 'next/navigation'
+import { allComponents } from 'content'
 import Taber from '@/taber'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
+import { format, parseISO } from 'date-fns'
+
 import GdsBadge from '@sebgroup/green-react/src/core/badge'
 import GdsFlex from '@sebgroup/green-react/src/core/flex'
 import GdsText from '@sebgroup/green-react/src/core/text'
-import { allComponents } from 'content'
-import { format, parseISO } from 'date-fns'
 
 export default function ComponentLayout({
   children,
@@ -55,7 +55,7 @@ export default function ComponentLayout({
     }
   }
 
-  const tagsArray = tags ? tags.split(', ') : []
+  // const tagsArray = tags ? tags.split(', ') : []
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },

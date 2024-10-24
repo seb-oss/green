@@ -1,5 +1,4 @@
 import { notFound } from 'next/navigation'
-import Script from 'next/script'
 import { allComponents } from 'content'
 import { Mdx } from 'core/mdx'
 

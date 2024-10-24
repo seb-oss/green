@@ -1,8 +1,9 @@
-import { allComponents, Component } from 'content'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import React, { useRef } from 'react'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { allComponents } from 'content'
+
 import './style.css'
 
 const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
@@ -71,9 +72,8 @@ export default function Sidebar({
             >
               Foundation
             </Link>
-            <Dev></Dev>
 
-            <Dev>
+            {/* <Dev>
               <nav>
                 <Link
                   className={
@@ -85,15 +85,15 @@ export default function Sidebar({
                   Accessibility
                 </Link>
               </nav>
-            </Dev>
+            </Dev> */}
 
-            <Link
+            {/* <Link
               rank={path == '/ux-writing' ? 'primary' : 'tertiary'}
               href="/ux-writing"
               onClick={checkIfMenuShouldClose}
             >
               UX writing
-            </Link>
+            </Link> */}
 
             <Link
               className={path == '/about' ? 'active' : ''}
