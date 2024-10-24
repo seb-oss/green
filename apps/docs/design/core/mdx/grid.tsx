@@ -8,5 +8,9 @@ type Props = {
 }
 
 export default function Grid({ children, ...props }: Props) {
-  return <GdsGrid {...props}>{children}</GdsGrid>
+  return (
+    <GdsGrid gap="l" {...props}>
+      {children}
+    </GdsGrid>
+  )
 }

@@ -104,7 +104,7 @@ export default function ComponentLayout({
         slug={slug}
       />
       <GdsFlex gap="4xl">
-        <GdsFlex width="80ch" flex-direction="column">
+        <GdsFlex width="80ch" flex-direction="column" gap="2xl">
           <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
             <GdsFlex
               justify-content="space-between"
@@ -165,7 +165,9 @@ export default function ComponentLayout({
             </GdsFlex>
           </GdsFlex>
           <Taber component={url_path} links={links} />
-          {children}
+          <GdsFlex flex-direction="column" gap="xl">
+            {children}
+          </GdsFlex>
           <footer>
             Last updated: <br />
             <time dateTime={last_edited} title="Last updated">
