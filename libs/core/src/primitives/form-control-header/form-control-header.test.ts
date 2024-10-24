@@ -62,7 +62,7 @@ describe('<gds-form-control-header>', () => {
       button?.click()
       await el.updateComplete
       const extSupTxt = el.shadowRoot?.querySelector(
-        '.extended-supporting-text',
+        '#extended-supporting-text',
       )
       expect(extSupTxt).to.exist
     })
