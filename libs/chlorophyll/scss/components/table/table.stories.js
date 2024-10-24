@@ -1,30 +1,19 @@
-import { Meta, Canvas } from '@storybook/blocks'
+import { Canvas, Meta } from '@storybook/blocks'
 
-<Meta
-  title="Components/Table"
-  parameters={{
+export default {
+  title: 'Components/Table',
+  tags: ['autodocs'],
+  parameters: {
     componentIds: ['component-table'],
-  }}
-/>
+  },
+}
 
-# Table
-
-<div role="alert" class="info mb-7 mt-5">
-  <main>
-    <h3>Missing JavaScript!</h3>
-
-    <p>
-      Please note that the examples below just represent the html markup and
-      some features like sorting won't work without JavaScript.
-    </p>
-  </main>
-</div>
-
-### Simple table example
-
-A simple table, just add class `table` to table element to get correct styling.
-
-<table class="table">
+/**
+ * A simple table, just add class `table` to table element to get correct styling.
+ */
+export const Table = {
+  render: () => `
+  <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -56,16 +45,62 @@ A simple table, just add class `table` to table element to get correct styling.
       <td>Hulk</td>
     </tr>
   </tbody>
-</table>
+</table>`,
+}
 
-### Table with sorting, caption and checkboxes
+export const WithSorting = {
+  render: () => `
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Superhero</th>
+    </tr>
+  </thead>
 
-The example below shows the markup needed to get a table with sorting and checkboxes.
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Peter</td>
+      <td>Parker</td>
+      <td>Spider-Man</td>
+    </tr>
 
-<div class="overflow-auto">
+    <tr>
+      <th scope="row">2</th>
+      <td>John</td>
+      <td>Wayne</td>
+      <td>Batman</td>
+    </tr>
+
+    <tr>
+      <th scope="row">3</th>
+      <td>Bruce</td>
+      <td>Banner</td>
+      <td>Hulk</td>
+    </tr>
+  </tbody>
+</table>`,
+}
+
+/**
+ * The following examples illustrate two ways to handle table presentation on small screens using pure CSS.
+ *
+ * ```css
+ * @media (max-width: 576px) {
+ *   .table-mobile tbody button.size-sm {
+ *      font-size: 1rem;
+ *      padding: .75rem 1rem;
+ *   }
+ * }
+ * ```
+ */
+export const Responsive = {
+  render: () => `
   <table class="table text-nowrap">
     <caption>Sortable table example with un-styled caption</caption>
-
     <thead>
       <tr>
         <th scope="col">
@@ -223,29 +258,15 @@ The example below shows the markup needed to get a table with sorting and checkb
         </td>
       </tr>
     </tbody>
-  </table>
-</div>
+  </table>`,
+}
 
-## Responsive table examples
-
-The following examples illustrate two ways to handle table presentation on small screens using pure CSS.
-
-<style>
-  {`
-    @media (max-width: 576px) {
-      .table-mobile tbody button.size-sm {
-         font-size: 1rem;
-         padding: .75rem 1rem !important;
-      }
-    }
-  `}
-</style>
-
-### Turn table into list
-
-Add `table-mobile` class to table and `data-label` attributes with column header to each table cell to display the table as a list on small screens. The table header scrolls horizontally and becomes sticky on small screens too (not visible in here in storybook due to the nature of how storybook renders these examples).
-
-<table class="table-mobile table">
+/**
+ * Add `table-mobile` class to table and `data-label` attributes with column header to each table cell to display the table as a list on small screens. The table header scrolls horizontally and becomes sticky on small screens too (not visible in here in storybook due to the nature of how storybook renders these examples).
+ */
+export const TableToList = {
+  render: () => `
+  <table class="table-mobile table">
   <thead>
     <tr>
       <th scope="col">First Name</th>
@@ -284,13 +305,15 @@ Add `table-mobile` class to table and `data-label` attributes with column header
       </td>
     </tr>
   </tbody>
-</table>
+</table>`,
+}
 
-### Overflow
-
-Wrap the table in a div with the class `overflow-auto` to add scroll when table is wider than its container.
-
-<div class="overflow-auto">
+/**
+ * Wrap the table in a div with the class `overflow-auto` to add scroll when table is wider than its container.
+ */
+export const OverFlow = {
+  render: () => `
+  <div class="overflow-auto">
   <table class="table text-nowrap">
     <thead>
       <tr>
@@ -340,4 +363,5 @@ Wrap the table in a div with the class `overflow-auto` to add scroll when table 
       </tr>
     </tbody>
   </table>
-</div>
+</div>`,
+}
