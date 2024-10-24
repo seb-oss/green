@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
-import Hero from 'core/hero'
 import Components from 'core/components'
+import Hero from 'core/hero'
+
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io'),
@@ -25,7 +26,7 @@ export default function Home() {
       <Components title="Components" />
       {/* <ComponentList title="Components" /> */}
       {/* <RessourcesList title="Resources" /> */}
-      {/* <Grid columns={2} tablet={1} mobile={1} gapBlock="small">
+      {/* <Grid columns="2" tablet={1} mobile={1} gapBlock="small">
         <h2>Empowering designers and developers</h2>
         <p className="gds-fs-headline-small color-secondary">
           A framework with accessibility and usability rooted at its core, Green

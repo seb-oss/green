@@ -43,18 +43,18 @@ Buttons exist in three different prios, Primary, Secondary and Tertiary
 Each prio button can be one of the following variants: Neutral, Positive and Negative
 
 <Pattern height="240">
-  <Grid columns={1} gapBlock="small">
-    <Grid columns={3} contentInline="auto" justify-content="center">
+  <Grid columns={1} gap="s">
+    <Grid columns="3" contentInline="auto" justify-content="center">
       <gds-button set="neutral">Submit</gds-button>
       <gds-button set="positive">Approve</gds-button>
       <gds-button set="negative">Revoke</gds-button>
     </Grid>
-    <Grid columns={3} contentInline="auto" justify-content="center">
+    <Grid columns="3" contentInline="auto" justify-content="center">
       <gds-button variant="secondary" set="neutral">Submit</gds-button>
       <gds-button variant="secondary" set="positive">Approve</gds-button>
       <gds-button variant="secondary" set="negative">Revoke</gds-button>
     </Grid>
-    <Grid columns={3} contentInline="auto" justify-content="center">
+    <Grid columns="3" contentInline="auto" justify-content="center">
       <gds-button variant="tertiary" set="neutral">Submit</gds-button>
       <gds-button variant="tertiary" set="positive">Approve</gds-button>
       <gds-button variant="tertiary" set="negative">Revoke</gds-button>
@@ -87,7 +87,7 @@ Buttons exist in three different prios, Primary, Secondary and Tertiary
 
 
 <Pattern height="240">
-  <Grid columns={3} contentInline="auto" justify-content="center">
+  <Grid columns="3" contentInline="auto" justify-content="center">
     <gds-button variant="primary"><gds-icon slot="lead" name="send" />Send payment</gds-button>
     <gds-button variant="secondary"><gds-icon slot="trail" name="arrow-up" />Upload</gds-button>
     <gds-button variant="tertiary"><gds-icon slot="lead" name="arrow-down" />Download</gds-button>
@@ -105,7 +105,7 @@ Buttons exist in three different prios, Primary, Secondary and Tertiary
 Buttons can be small, medium or large. The default size is medium.
 
 <Pattern height="240">
-   <Grid columns={3} contentInline="auto" justify-content="center">
+   <Grid columns="3" contentInline="auto" justify-content="center">
     <gds-button size="small">Small</gds-button>
     <gds-button>Medium</gds-button>
     <gds-button size="large">Large</gds-button>
@@ -123,7 +123,7 @@ Buttons can be small, medium or large. The default size is medium.
 If a single gds-icon is the only child of a button, it will render as a circular icon button.
 
 <Pattern height="240">
-   <Grid columns={3} contentInline="auto" justify-content="center">
+   <Grid columns="3" contentInline="auto" justify-content="center">
     <gds-button size="small">
       <gds-icon name="arrow" />
     </gds-button>
@@ -147,7 +147,7 @@ If a single gds-icon is the only child of a button, it will render as a circular
 We don't encourage to use components with a disabled state but the button can be disabled if needed
 
 <Pattern height="240">
-  <Grid columns={3} contentInline="auto" justify-content="center">
+  <Grid columns="3" contentInline="auto" justify-content="center">
     <gds-button variant="primary" disabled>Send payment</gds-button>
     <gds-button variant="secondary" disabled>Cancel</gds-button>
     <gds-button variant="tertiary" disabled>More</gds-button>
