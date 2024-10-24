@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common'
 import {
   ApplicationRef,
   Component,
@@ -6,6 +7,7 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
   FormControl,
   FormsModule,
@@ -14,14 +16,12 @@ import {
   Validators,
 } from '@angular/forms'
 import { BrowserModule } from '@angular/platform-browser'
-import { CommonModule } from '@angular/common'
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { NgvInputMaskModule } from './input-mask.module'
-import { createMask } from './constants'
-import { InputmaskOptions } from './input-mask.types'
 import { INPUT_MASK_CONFIG, InputMaskConfig } from './config'
+import { createMask } from './constants'
 import { NgvInputMaskDirective } from './input-mask.directive'
+import { NgvInputMaskModule } from './input-mask.module'
+import { InputmaskOptions } from './input-mask.types'
 
 describe('[NgvInputMask] -> InputMaskDirective', () => {
   @Component({

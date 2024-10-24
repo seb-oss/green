@@ -1,18 +1,19 @@
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { GdsFormControlElement } from '../form/form-control'
+
+import { resizeObserver } from '../../utils/decorators/resize-observer'
+import { watch } from '../../utils/decorators/watch'
+import { stringArrayConverter } from '../../utils/helpers/attribute-converters'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { resizeObserver } from '../../utils/decorators/resize-observer'
-import { watch } from '../../utils/decorators/watch'
-import { stringArrayConverter } from '../../utils/helpers/attribute-converters'
+import { GdsFormControlElement } from '../form/form-control'
+import { styles } from './filter-chips.styles'
 
-import './filter-chip'
 import type { GdsFilterChip } from './filter-chip'
 
-import { styles } from './filter-chips.styles'
+import './filter-chip'
 
 /**
  * @element gds-filter-chips

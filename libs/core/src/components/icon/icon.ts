@@ -1,8 +1,8 @@
 import { html } from 'lit'
 import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { GdsElement } from '../../gds-element'
 
+import { GdsElement } from '../../gds-element'
 import IconCSS from './icon.style'
 
 export abstract class GdsIcon extends GdsElement {

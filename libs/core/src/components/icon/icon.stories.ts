@@ -1,12 +1,16 @@
+import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
-import { html as staticHTML, literal, unsafeStatic } from 'lit/static-html.js'
 
 import './icons/index.ts'
 import '../grid/index.ts'
 import '../container/index.ts'
 import '../flex'
+
 import { html } from 'lit'
+
 import './icon.stories.css'
+
 import * as Icons from './icons'
 
 /**

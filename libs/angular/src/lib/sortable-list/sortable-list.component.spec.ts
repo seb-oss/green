@@ -1,9 +1,10 @@
+import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
+
 import {
   NggSortableListComponent,
   SortableListItem,
 } from './sortable-list.component'
-import { CdkDragDrop, DragDropModule } from '@angular/cdk/drag-drop'
 
 describe('NggSortableListComponent', () => {
   let component: NggSortableListComponent

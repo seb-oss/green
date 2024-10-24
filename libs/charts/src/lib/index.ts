@@ -1,5 +1,6 @@
-export * from './types'
 import { create, init } from './billboard'
+
+export * from './types'
 
 init()
 

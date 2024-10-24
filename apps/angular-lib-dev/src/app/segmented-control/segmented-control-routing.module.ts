@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { SegmentedControlComponent } from './segmented-control.component'
+
 import { OptionAComponent } from './option-a/option-a.component'
 import { OptionBComponent } from './option-b/option-b.component'
+import { SegmentedControlComponent } from './segmented-control.component'
 
 const routes: Routes = [
   {

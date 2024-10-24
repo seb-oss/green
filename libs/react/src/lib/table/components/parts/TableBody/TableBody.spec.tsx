@@ -1,7 +1,8 @@
 import React from 'react'
-import { TableBody } from './TableBody'
-import { TableRow } from '../TableRow'
 import { render } from '@testing-library/react'
+
+import { TableRow } from '../TableRow'
+import { TableBody } from './TableBody'
 
 describe('Component: Table body', () => {
   it('Should render correctly', () => {

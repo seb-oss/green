@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { TableRowProps } from '../TableRow'
 
 export type TableHeaderProps = JSX.IntrinsicElements['thead']

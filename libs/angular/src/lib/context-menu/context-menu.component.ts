@@ -1,13 +1,18 @@
 import {
-  Input,
-  Output,
   Component,
-  ViewChild,
   ElementRef,
   EventEmitter,
+  Input,
+  Output,
   TemplateRef,
+  ViewChild,
 } from '@angular/core'
+
 import { DropdownOption } from '@sebgroup/green-angular/src/lib/dropdown'
+
+import '@sebgroup/green-core/components/context-menu/index.js'
+
+import * as ContextMenuTransStyles from '@sebgroup/green-core/components/context-menu/context-menu.trans.styles.js'
 
 /**
  * MenuItems extends DropDown option and adds the posibility to pass a custom template for just one item.
@@ -15,9 +20,6 @@ import { DropdownOption } from '@sebgroup/green-angular/src/lib/dropdown'
 interface MenuItems extends DropdownOption {
   template?: TemplateRef<unknown>
 }
-
-import '@sebgroup/green-core/components/context-menu/index.js'
-import * as ContextMenuTransStyles from '@sebgroup/green-core/components/context-menu/context-menu.trans.styles.js'
 
 @Component({
   selector: 'ngg-context-menu',

@@ -1,12 +1,17 @@
 // Segmented-controls.stories.ts
 
-import { Meta, applicationConfig } from '@storybook/angular'
-import { NggSegmentedControlComponent } from './segmented-control.component'
-import { componentWrapperDecorator, moduleMetadata } from '@storybook/angular'
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
-import { RouterModule, Routes } from '@angular/router'
-import { of } from 'rxjs'
 import { Component, importProvidersFrom } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import {
+  applicationConfig,
+  componentWrapperDecorator,
+  Meta,
+  moduleMetadata,
+} from '@storybook/angular'
+import { of } from 'rxjs'
+
+import { NggSegmentedControlComponent } from './segmented-control.component'
 
 @Component({
   template: ` <p class="mt-4">Option A</p> `,

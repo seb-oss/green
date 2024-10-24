@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react'
-import Card from './card'
+
 import Button from '../form/button/button'
+import Card from './card'
+
 describe('Card', () => {
   const Header = () => <h3>Card Headline</h3>
 

@@ -1,6 +1,5 @@
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { RouterTestingModule } from '@angular/router/testing'
-
 import {
   applicationConfig,
   Meta,

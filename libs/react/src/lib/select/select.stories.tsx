@@ -1,4 +1,4 @@
-import { Select, Option, OptionGroup } from './select'
+import { Option, OptionGroup, Select } from './select'
 
 const Template = ({ children, ...props }) => (
   <Select {...props}>{children}</Select>

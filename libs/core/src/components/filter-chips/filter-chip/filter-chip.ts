@@ -1,18 +1,19 @@
 import { property, queryAsync } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+
 import { GdsElement } from '../../../gds-element'
 import { TransitionalStyles } from '../../../transitional-styles'
 import {
   gdsCustomElement,
-  html,
   getScopedTagName,
+  html,
 } from '../../../utils/helpers/custom-element-scoping'
+import { styles } from './filter-chip.styles'
+
+import type { GdsButton } from '../../button'
 
 import '../../button'
-import type { GdsButton } from '../../button'
 import '../../icon/icons/checkmark.js'
-
-import { styles } from './filter-chip.styles'
 
 /**
  * @element gds-filter-chip

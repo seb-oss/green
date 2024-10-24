@@ -7,6 +7,7 @@ import {
   QueryList,
 } from '@angular/core'
 import { Observable, Subscription } from 'rxjs'
+
 import { NggAccordionListItemComponent } from './accordion-list-item.component'
 
 @Component({

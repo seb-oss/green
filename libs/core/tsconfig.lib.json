@@ -5,7 +5,7 @@
     "declaration": true,
     "types": []
   },
-  "include": ["**/*.ts", "**/*.css" ],
+  "include": ["**/*.ts", "**/*.css"],
   "exclude": [
     "**/*.test.ts",
     "**/*.react.ts",

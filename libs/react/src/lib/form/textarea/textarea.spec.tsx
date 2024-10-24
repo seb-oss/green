@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { render, screen, act } from '@testing-library/react'
-import { TextArea } from './textarea'
-import userEvent from '@testing-library/user-event'
 import { ChangeEvent, createRef } from 'react'
+import { act, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
+import { TextArea } from './textarea'
 
 describe('TextArea', () => {
   it('renders', () => {

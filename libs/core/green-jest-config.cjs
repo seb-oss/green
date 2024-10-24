@@ -12,9 +12,7 @@ module.exports = {
       'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs/)',
       ...(config.transformIgnorePatterns || []),
     ]
-    config.transformIgnorePatterns = [
-      transformIgnorePatterns.join('&')
-    ]
+    config.transformIgnorePatterns = [transformIgnorePatterns.join('&')]
 
     config.setupFilesAfterEnv = [
       ...(config.setupFilesAfterEnv || []),

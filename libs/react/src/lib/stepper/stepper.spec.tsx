@@ -1,7 +1,8 @@
+import { ChangeEvent } from 'react'
 import { render, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import { Stepper, StepperProps } from './stepper'
-import { ChangeEvent } from 'react'
 
 jest.setTimeout(50000)
 

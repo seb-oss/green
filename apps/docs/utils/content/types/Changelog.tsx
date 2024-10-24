@@ -1,4 +1,5 @@
 import { defineDocumentType } from '@contentlayer/source-files'
+
 import { getLastEditedDate, urlFromFilePath } from '../utils'
 
 export type DocHeading = { level: 1 | 2 | 3; title: string }

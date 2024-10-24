@@ -1,7 +1,7 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
+import menuHeadingStyles from '../menu/menu-heading.trans.styles.scss?inline'
 import listboxStyles from './listbox.trans.styles.scss?inline'
 import optionStyles from './option.trans.styles.scss?inline'
-import menuHeadingStyles from '../menu/menu-heading.trans.styles.scss?inline'
 
 export function register() {
   TransitionalStyles.instance.register('gds-listbox', listboxStyles.toString())

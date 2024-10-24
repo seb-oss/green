@@ -1,6 +1,7 @@
 import { PropsWithChildren, ReactNode } from 'react'
-import { Edit, Check } from '../icons'
 import classNames from 'classnames'
+
+import { Check, Edit } from '../icons'
 
 export interface InPageWizardStepCardProps extends PropsWithChildren {
   /** Sub title for the title indicating 'Step X of Y'. */

@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react'
-import AlertRibbon from './alert-ribbon'
+
 import Button from '../form/button/button'
+import AlertRibbon from './alert-ribbon'
 
 describe('AlertRibbon', () => {
   const Header = () => <h3>Card Headline</h3>

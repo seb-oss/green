@@ -1,4 +1,5 @@
 import { Component, HostBinding, Input } from '@angular/core'
+
 import {
   calculateDegrees,
   ProgressCircleThemes,

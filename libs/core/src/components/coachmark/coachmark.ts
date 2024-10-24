@@ -1,20 +1,21 @@
 import { property, state } from 'lit/decorators.js'
-import { gdsCustomElement, html } from '../../scoping'
+import { createRef, ref, Ref } from 'lit/directives/ref.js'
+import { when } from 'lit/directives/when.js'
 import {
+  arrow,
+  autoUpdate,
   computePosition,
   detectOverflow,
-  arrow,
-  shift,
-  offset,
-  hide,
   flip,
-  autoUpdate,
+  hide,
+  offset,
   Placement,
+  shift,
 } from '@floating-ui/dom'
-import { ref, createRef, Ref } from 'lit/directives/ref.js'
-import styles from './coachmark.styles'
-import { when } from 'lit/directives/when.js'
+
 import { GdsElement } from '../../gds-element'
+import { gdsCustomElement, html } from '../../scoping'
+import styles from './coachmark.styles'
 
 /**
  * @element gds-coachmark

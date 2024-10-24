@@ -9,6 +9,7 @@ import {
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
 import '../core/core.globals'
+
 import { NgvRadioComponent } from './radio.component'
 
 describe('[NgvCore]', () => {

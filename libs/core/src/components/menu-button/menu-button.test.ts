@@ -1,16 +1,17 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { clickOnElement } from '../../utils/testing/index.js'
+
+import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing/index.js'
 
 import '@sebgroup/green-core/components/menu-button'
-import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 import '@sebgroup/green-core/components/icon'
 
 const html = htmlTemplateTagFactory(testingHtml)
