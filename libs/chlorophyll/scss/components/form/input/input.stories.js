@@ -1,47 +1,39 @@
-const Template = ({ validation, enabled, text, formInfo }) => {
-  const attrValidation = validation ? `class="${validation}" ` : ``
-  const attrEnabled = enabled ? `` : `disabled`
-  const hasExtraInfo = formInfo.length > 0
-  return `
-    <div class="form-group">
-      <label for="inputInvalid">${text}</label>
-      ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
-      <input id="inputInvalid" type="text" ${attrValidation} ${attrEnabled} />
-      <span class="form-info">${validation ? validation : 'Neutral'}</span>
-    </div>`
-}
-
 export default {
-  title: 'Components/Form/Elements/Input',
-
+  title: 'Components/Input',
+  tags: ['autodocs'],
   parameters: {
     componentIds: ['component-input'],
   },
-
   argTypes: {
     validation: {
       control: 'select',
       options: ['', 'is-valid', 'is-invalid'],
     },
-
     enabled: {
       control: 'boolean',
     },
-
     text: {
       control: 'text',
     },
-
     formInfo: {
       control: 'text',
     },
   },
 }
 
+/**
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/chlorophyll/scss/components/form/input)
+ * &nbsp;|&nbsp;
+ * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-input)
+ */
 export const Input = {
-  render: Template.bind({}),
-  name: 'Input',
-
+  render: (args) => `
+    <div class="form-group">
+      <label for="inputInvalid">${args.text}</label>
+      ${args.formInfo ? '<span class="form-info">' + args.formInfo + '</span>' : ''}
+      <input id="inputInvalid" type="text" ${args.validation ? 'class="' + args.validation + '"' : ''} ${args.disabled ? 'disabled' : ''} />
+      <span class="form-info">${args.validation ? args.validation : ''}</span>
+    </div>`,
   args: {
     text: 'Input label',
     formInfo:
