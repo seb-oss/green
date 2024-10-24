@@ -1,6 +1,7 @@
-import { moduleMetadata, Meta, StoryFn } from '@storybook/angular'
-import { NggInPageWizardModule } from './in-page-wizard.module'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
+import { NggInPageWizardModule } from './in-page-wizard.module'
 
 export default {
   title: 'Components/Wizard/In page wizard step card',

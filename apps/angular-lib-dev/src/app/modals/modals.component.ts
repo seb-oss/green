@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
+
 import { ModalType } from '@sebgroup/extract'
 import { DropdownOption } from '@sebgroup/green-angular'
 

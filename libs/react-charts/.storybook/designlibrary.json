@@ -4,9 +4,7 @@
     "name": "Simple Bar",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {
@@ -14,9 +12,7 @@
     "name": "Pie",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {
@@ -24,9 +20,7 @@
     "name": "Donut",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {
@@ -34,9 +28,7 @@
     "name": "Lines",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {
@@ -44,9 +36,7 @@
     "name": "Splines",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {
@@ -54,9 +44,7 @@
     "name": "Mixed",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {
@@ -64,9 +52,7 @@
     "name": "Custom Colours",
     "title": "Chart",
     "customParams": {
-      "componentIds": [
-        "component-chart"
-      ]
+      "componentIds": ["component-chart"]
     }
   },
   {

@@ -1,8 +1,9 @@
-import type { Metadata, ResolvingMetadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Mdx } from '@/mdx'
-import { allComponents } from 'content'
 import Script from 'next/script'
+import { allComponents } from 'content'
+import { Mdx } from '@/mdx'
+
+import type { Metadata, ResolvingMetadata } from 'next'
 
 type Props = {
   params: { slug: string }

@@ -1,20 +1,19 @@
 import { nothing, unsafeCSS } from 'lit'
-import { html as staticHtml, literal } from 'lit/static-html.js'
 import { property, query } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { forwardAttributes } from '../../utils/directives'
-import { TransitionalStyles } from '../../transitional-styles'
-import '../../primitives/ripple'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { when } from 'lit/directives/when.js'
+import { literal, html as staticHtml } from 'lit/static-html.js'
 
+import { html as customElementHtml, gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import style from './button.style.css?inline'
-
-import { gdsCustomElement, html as customElementHtml } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
+import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { GdsFormControlElement } from '../form/form-control'
-import type { GdsElement } from '../../gds-element'
+import style from './button.style.css?inline'
+
+import '../../primitives/ripple'
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)

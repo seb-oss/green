@@ -1,7 +1,6 @@
 import { gdsCustomElement } from '../../scoping'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { GdsButton } from '../button'
-
 import styles from './fab.styles'
 
 /**

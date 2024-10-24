@@ -6,8 +6,6 @@ import {
   UntypedFormControl,
   Validators,
 } from '@angular/forms'
-
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import {
   applicationConfig,
   Meta,
@@ -16,6 +14,7 @@ import {
 } from '@storybook/angular'
 
 import { CharacterCountdownDirective } from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
+import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvTextareaComponent } from './textarea.component'
 
 export default {

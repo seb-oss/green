@@ -1,5 +1,4 @@
-import { ArrayOrString } from 'billboard.js'
-import { ChartOptions } from 'billboard.js'
+import { ArrayOrString, ChartOptions } from 'billboard.js'
 
 export type ChartType = 'area' | 'bar' | 'donut' | 'line' | 'spline' | 'pie'
 export type LegendPlacement = 'top' | 'right' | 'none'

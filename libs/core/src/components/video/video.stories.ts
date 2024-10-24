@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './video'
+
 import { html } from 'lit'
 
 /**

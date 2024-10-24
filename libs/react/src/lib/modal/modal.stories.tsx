@@ -1,7 +1,8 @@
 import React from 'react'
-import Modal, { ModalProps } from './modal'
-import { Meta, Story } from '@storybook/react/types-6-0'
 import { useArgs } from '@storybook/preview-api'
+import { Meta, Story } from '@storybook/react/types-6-0'
+
+import Modal, { ModalProps } from './modal'
 
 const Template: Story<ModalProps> = (props) => {
   const [{ isOpen }, updateArgs] = useArgs()

@@ -1,7 +1,8 @@
-import { TableHeader } from './TableHeader'
+import { render } from '@testing-library/react'
+
 import { TableContext } from '../../context/TableContextProvider'
 import { TableRow } from '../TableRow'
-import { render } from '@testing-library/react'
+import { TableHeader } from './TableHeader'
 
 describe('Component: Table header', () => {
   it('Should render correctly', () => {

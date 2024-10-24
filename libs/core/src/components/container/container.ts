@@ -232,9 +232,9 @@ export class GdsContainer extends GdsElement {
       const left = values.length > 3 ? values[3] : top
 
       return `
-        border-top: ${top}; 
-        border-right: ${right}; 
-        border-bottom: ${bottom}; 
+        border-top: ${top};
+        border-right: ${right};
+        border-bottom: ${bottom};
         border-left: ${left};
       `
     },
@@ -282,9 +282,9 @@ export class GdsContainer extends GdsElement {
       const left = values.length > 3 ? values[3] : top
 
       return `
-        border-top-color: ${top}; 
-        border-right-color: ${right}; 
-        border-bottom-color: ${bottom}; 
+        border-top-color: ${top};
+        border-right-color: ${right};
+        border-bottom-color: ${bottom};
         border-left-color: ${left};
       `
     },
@@ -299,9 +299,9 @@ export class GdsContainer extends GdsElement {
       const left = values.length > 3 ? values[3] : top
 
       return `
-        border-top-width: ${top}; 
-        border-right-width: ${right}; 
-        border-bottom-width: ${bottom}; 
+        border-top-width: ${top};
+        border-right-width: ${right};
+        border-bottom-width: ${bottom};
         border-left-width: ${left};
         border-style: solid;
       `

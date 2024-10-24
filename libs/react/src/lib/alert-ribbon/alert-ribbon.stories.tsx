@@ -1,5 +1,5 @@
-import AlertRibbon from './alert-ribbon'
 import { Button } from '../form/button/button'
+import AlertRibbon from './alert-ribbon'
 
 const Template = ({ children, ...props }) => (
   <AlertRibbon {...props}>{children}</AlertRibbon>

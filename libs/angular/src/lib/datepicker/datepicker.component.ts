@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
-  ChangeDetectorRef,
 } from '@angular/core'
 import {
   AbstractControl,
@@ -14,10 +14,12 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms'
-import { randomId } from '@sebgroup/extract'
 import { endOfDay, startOfDay } from 'date-fns'
 
+import { randomId } from '@sebgroup/extract'
+
 import '@sebgroup/green-core/components/datepicker/index.js'
+
 import * as DatepickerTransStyles from '@sebgroup/green-core/components/datepicker/datepicker.trans.styles.js'
 
 export interface Attributes {

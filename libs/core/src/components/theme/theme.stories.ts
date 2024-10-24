@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import '../img'
 import '../video'
 import '../card'
@@ -9,6 +10,7 @@ import '../divider'
 import '../icon/icons/arrow-down.js'
 import '../icon/icons/arrow-right.js'
 import '../icon/icons/circles-three.js'
+
 import { html } from 'lit'
 
 /**

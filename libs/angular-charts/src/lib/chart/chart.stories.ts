@@ -1,9 +1,10 @@
-import { moduleMetadata, StoryFn } from '@storybook/angular'
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
-import { NggChartComponent } from './ngg-chart.component'
+import { moduleMetadata, StoryFn } from '@storybook/angular'
 import { of } from 'rxjs'
+
 import { NggChartsModule } from '../ngg-charts.module'
+import { NggChartComponent } from './ngg-chart.component'
 
 export default {
   title: 'Chart',

@@ -4,7 +4,8 @@
 // Run it like this: `npx tsx libs/core/src/utils/helpers/style-expression-parser-tester.ts`
 
 import { inspect } from 'util'
-import { tokenize, parse, toCss } from './style-expression-parser'
+
+import { parse, toCss, tokenize } from './style-expression-parser'
 
 const expression = 'block; hover:flex; xl { focus:block; flex }'
 const ast = parse(tokenize(expression))

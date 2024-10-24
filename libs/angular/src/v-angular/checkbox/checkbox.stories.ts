@@ -6,15 +6,13 @@ import {
   UntypedFormControl,
   UntypedFormGroup,
 } from '@angular/forms'
-
-import { delay } from 'rxjs/operators'
-
 import {
   applicationConfig,
   Meta,
   moduleMetadata,
   StoryFn,
 } from '@storybook/angular'
+import { delay } from 'rxjs/operators'
 
 import { NgvI18nModule } from '../i18n'
 import { NgvCheckboxComponent } from './checkbox.component'

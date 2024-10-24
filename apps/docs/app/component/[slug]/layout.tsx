@@ -1,6 +1,7 @@
 'use client'
 
 import { notFound, usePathname } from 'next/navigation'
+import { allComponents } from 'content'
 import Badge from '@/badge/badge'
 import Flex from '@/flex/flex'
 import Cell from '@/grid/cell'
@@ -11,7 +12,6 @@ import Tags from '@/tags-list/tags'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
 import Content from '&/content/content'
-import { allComponents } from 'content'
 import { format, parseISO } from 'date-fns'
 
 export default function ComponentLayout({
@@ -119,7 +119,7 @@ export default function ComponentLayout({
           </gds-cell>
           <gds-cell span="2">
             <Pattern>
-              {preview?.trim() ?? '' ? (
+              {(preview?.trim() ?? '') ? (
                 <div
                   dangerouslySetInnerHTML={{
                     __html: `${preview}`,

@@ -1,6 +1,7 @@
 /** @type {import('vite').UserConfig} */
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+
 export default defineConfig({
   build: {
     outDir: 'public/playground-elements',

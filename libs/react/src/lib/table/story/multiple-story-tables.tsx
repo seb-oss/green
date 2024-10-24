@@ -1,16 +1,17 @@
 import React, { ReactNode } from 'react'
+
 import {
-  Table,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableHeaderCell,
-  TableCell,
-  SortedColumn,
-  sortArray,
-  onRowSelect,
-  TableHeaderCellProps,
   GenericTableRow,
+  onRowSelect,
+  sortArray,
+  SortedColumn,
+  Table,
+  TableBody,
+  TableCell,
+  TableHeader,
+  TableHeaderCell,
+  TableHeaderCellProps,
+  TableRow,
 } from '../components'
 
 interface SuperHeroData {

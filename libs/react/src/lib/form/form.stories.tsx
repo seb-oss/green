@@ -1,17 +1,17 @@
+import AlertRibbon from '../alert-ribbon/alert-ribbon'
 import {
-  Form,
-  TextInput,
-  EmailInput,
-  NumberInput,
   Button,
   ButtonGroup,
   Checkbox,
-  Text,
+  EmailInput,
+  Form,
   FormItems,
-  RadioGroup,
+  NumberInput,
   RadioButton,
+  RadioGroup,
+  Text,
+  TextInput,
 } from './'
-import AlertRibbon from '../alert-ribbon/alert-ribbon'
 
 const Styles = () => (
   <style>

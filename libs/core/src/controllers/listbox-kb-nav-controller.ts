@@ -22,7 +22,7 @@ export class ListboxKbNavController implements ReactiveController {
   host: ListboxKbNavigation
 
   constructor(host: ListboxKbNavigation) {
-    (this.host = host).addController(this)
+    ;(this.host = host).addController(this)
   }
 
   hostConnected() {

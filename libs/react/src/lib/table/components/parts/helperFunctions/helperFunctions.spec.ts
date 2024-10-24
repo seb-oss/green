@@ -1,15 +1,17 @@
 import {
-  filterArrayByColumns,
-  searchTextByColumns,
-  sortArray,
-  sumCols,
-} from './helperFunctions'
-import {
   FilterColumn,
   GenericTableRow,
   SortDirection,
 } from '../../table-typings'
-import { onRowSelect, paginate, RowSelectOutput } from './helperFunctions'
+import {
+  filterArrayByColumns,
+  onRowSelect,
+  paginate,
+  RowSelectOutput,
+  searchTextByColumns,
+  sortArray,
+  sumCols,
+} from './helperFunctions'
 
 type Data = {
   name: string

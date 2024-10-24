@@ -20,11 +20,12 @@ import {
   NgControl,
   Validator,
 } from '@angular/forms'
-
-import type Inputmask from 'inputmask'
 import _Inputmask from 'inputmask'
 
+import type Inputmask from 'inputmask'
+
 import { INPUT_MASK_CONFIG, InputMaskConfig } from './config'
+
 import type { InputmaskOptions } from './input-mask.types'
 
 const InputmaskConstructor =

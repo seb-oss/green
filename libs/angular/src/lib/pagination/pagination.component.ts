@@ -1,12 +1,13 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
   ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
   OnChanges,
+  Output,
   SimpleChanges,
 } from '@angular/core'
+
 import {
   IPaginationEvent,
   IPaginationI18n,

@@ -1,9 +1,12 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 
 // Needed for components that only have 2016 style so far
 import { registerTransitionalStyles } from '../../transitional-styles.ts'
+
 registerTransitionalStyles()
 
 /**

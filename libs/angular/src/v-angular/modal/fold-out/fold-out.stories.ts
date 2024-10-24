@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NgvI18nModule } from '../../i18n/i18n.module'
-import { NggCoreWrapperModule } from '../../../lib/shared'
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
+import { NggCoreWrapperModule } from '../../../lib/shared'
+import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NgvFoldOutComponent } from './fold-out.component'
 import { NgvFoldOutOptionDirective } from './fold-out.directive'
 import { exampleAlt, examplePrimary } from './fold-out.examples'
