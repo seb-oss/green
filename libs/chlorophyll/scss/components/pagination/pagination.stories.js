@@ -1,6 +1,20 @@
-const Template = ({ size }) => {
-  return `
-    <nav class="pagination ${size}" role="navigation" aria-label="Pagination">
+export default {
+  title: 'Components/Pagination',
+  tags: ['autodocs'],
+  parameters: {
+    componentIds: ['component-pagination'],
+  },
+  argTypes: {
+    size: {
+      control: 'select',
+      options: ['', 'small'],
+    },
+  },
+}
+
+export const Pagination = {
+  render: (args) => `
+    <nav class="pagination ${args.size}" role="navigation" aria-label="Pagination">
     <ul class="gds-reset">
       <li>
         <a href="page/4" aria-label="Previous Page" class="gds-reset">
@@ -54,28 +68,5 @@ const Template = ({ size }) => {
         </a>
       </li>
     </ul>
-  </nav>`
-}
-
-export default {
-  title: 'Components/Navigation/Pagination',
-
-  parameters: {
-    componentIds: ['component-pagination'],
-  },
-}
-
-export const Pagination = {
-  render: Template.bind({}),
-  name: 'Pagination',
-
-  args: {
-    size: 'small',
-  },
-
-  parameters: {
-    docs: {
-      disable: true,
-    },
-  },
+  </nav>`,
 }

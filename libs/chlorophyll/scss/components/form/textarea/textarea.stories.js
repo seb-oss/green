@@ -1,37 +1,20 @@
-const Template = ({ validation, enabled, text, formInfo }) => {
-  const attrValidation = validation ? `class="${validation}" ` : ``
-  const attrEnabled = enabled ? `` : `disabled`
-  const hasExtraInfo = formInfo.length > 0
-  return `
-    <div class="form-group">
-      <label for="exampleTextarea">${text}</label>
-      ${hasExtraInfo ? '<span class="form-info">' + formInfo + '</span>' : ''}
-      <textarea id="exampleTextarea" ${attrValidation} ${attrEnabled}></textarea>
-      <span class="form-info">${validation ? validation : 'Neutral'}</span>
-    </div>`
-}
-
 export default {
-  title: 'Components/Form/Elements/Textarea',
-
+  title: 'Components/Textarea',
+  tags: ['autodocs'],
   parameters: {
     componentIds: ['component-input'],
   },
-
   argTypes: {
     validation: {
       control: 'select',
       options: ['', 'is-valid', 'is-invalid'],
     },
-
-    enabled: {
+    disabled: {
       control: 'boolean',
     },
-
-    text: {
+    label: {
       control: 'text',
     },
-
     formInfo: {
       control: 'text',
     },
@@ -39,13 +22,16 @@ export default {
 }
 
 export const Textarea = {
-  render: Template.bind({}),
-  name: 'Textarea',
-
+  render: (args) => `
+    <div class="form-group">
+      <label for="exampleTextarea">${args.label}</label>
+      ${args.formInfo ? '<span class="form-info">' + args.formInfo + '</span>' : ''}
+      <textarea id="exampleTextarea" class="${args.validation}" ${args.disabled}></textarea>
+      <span class="form-info">${args.validation ? args.validation : 'Neutral'}</span>
+    </div>`,
   args: {
-    text: 'Textarea label',
+    label: 'Textarea label',
     formInfo:
       'Lorem ipsum very long description of textarea and what should be entered',
-    enabled: true,
   },
 }
