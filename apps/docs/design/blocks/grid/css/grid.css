@@ -1,4 +1,4 @@
-@layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
+/* @layer grid, grid.desktop, grid.tablet, grid.mobile, grid.span, grid.space, grid.align, grid.debug;
 
 @layer grid {
   :root {
@@ -47,4 +47,4 @@
       max-width: max-content;
     }
   }
-}
+} */

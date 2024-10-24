@@ -1,10 +1,12 @@
-import React, { ReactNode } from 'react'
-import { GdsGrid } from '@sebgroup/green-react/core/components/grid/grid'
+'use client'
 
-type DontProps = {
+import React, { ReactNode } from 'react'
+import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
+
+type Props = {
   children: ReactNode
 }
 
-export default function Do({ children }: DontProps) {
-  return <GdsGrid>{children}</GdsGrid>
+export default function Grid({ children, ...props }: Props) {
+  return <GdsGrid {...props}>{children}</GdsGrid>
 }

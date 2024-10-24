@@ -1,18 +1,20 @@
 import { notFound } from 'next/navigation'
-import { Mdx } from '@/mdx'
+import { Mdx } from '@/_DISABLE_mdx'
 import Layout from '&/changelog'
 import { allChangelogs } from 'content'
 
 export const generateStaticParams = (): any => {
-  return allChangelogs.map(changelog => ({
-    slug: changelog.url_path.replace('/changelog/', '')
+  return allChangelogs.map((changelog) => ({
+    slug: changelog.url_path.replace('/changelog/', ''),
   }))
 }
 
 export default function Changelog({ params }: { params: { slug: string } }) {
   const { slug } = params
 
-  const changelog = allChangelogs.find(changelog => changelog.url_path === '/changelog/' + slug)
+  const changelog = allChangelogs.find(
+    (changelog) => changelog.url_path === '/changelog/' + slug,
+  )
 
   if (!changelog) {
     notFound()
