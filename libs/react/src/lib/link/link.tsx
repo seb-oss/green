@@ -1,6 +1,7 @@
 import { HTMLProps, PropsWithChildren } from 'react'
-import { ButtonVariant } from '@sebgroup/extract'
 import classNames from 'classnames'
+
+import { ButtonVariant } from '@sebgroup/extract'
 
 interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   button?: boolean | ButtonVariant

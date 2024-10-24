@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { TableRowProps } from '../TableRow/TableRow'
 
 export type TableBodyProps = JSX.IntrinsicElements['tbody']

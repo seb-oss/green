@@ -7,10 +7,9 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms'
-
 import { TranslocoTestingModule } from '@ngneat/transloco'
-import en from '../i18n/i18n.json'
 
+import en from '../i18n/i18n.json'
 import { NgvCheckboxComponent } from './checkbox.component'
 
 describe('[NgvCore]', () => {

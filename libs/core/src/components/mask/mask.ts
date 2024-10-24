@@ -1,7 +1,8 @@
 import { html } from 'lit/static-html.js'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+
 import { tokens } from '../../tokens.style'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsFlex } from '../flex'
 import MaskCSS from './mask.style'
 

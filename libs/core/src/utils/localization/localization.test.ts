@@ -1,5 +1,6 @@
 import { expect } from '@esm-bundle/chai'
 import { aTimeout } from '@open-wc/testing'
+
 import '@sebgroup/green-core'
 
 import { gdsInitLocalization } from './localization'

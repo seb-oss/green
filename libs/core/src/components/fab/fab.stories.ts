@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { html } from '../../scoping.ts'
+
 import './index.ts'
 import '../icon/icons/chevron-bottom.ts'
 import '../icon/icons/bubbles.ts'
 import '../signal/index.ts'
+
 import { DefaultParams as ButtonDefaultParams } from '../button/button.stories.ts'
 
 /**

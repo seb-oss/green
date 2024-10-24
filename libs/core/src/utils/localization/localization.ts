@@ -1,4 +1,5 @@
 import { configureLocalization } from '@lit/localize'
+
 import { sourceLocale, targetLocales } from '../../generated/locale-codes'
 import * as templates_sv from '../../generated/locales/sv'
 

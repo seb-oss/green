@@ -1,28 +1,28 @@
+import { msg } from '@lit/localize'
 import { html } from 'lit'
+import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import { property, query } from 'lit/decorators.js'
-import { msg } from '@lit/localize'
 import {
   addDays,
+  addMonths,
+  getWeek,
   isSameDay,
   isSameMonth,
-  getWeek,
-  subMonths,
-  addMonths,
   lastDayOfMonth,
   setHours,
+  subMonths,
 } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
-import { TransitionalStyles } from '../../transitional-styles'
-import { renderMonthGridView } from './functions'
-import { watch } from '../../utils/decorators/watch'
-
-import style from './calendar.styles'
 import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators/watch'
+import style from './calendar.styles'
+import { renderMonthGridView } from './functions'
+
 /**
  * Used to customize the appearance of a date in the calendar.
  */

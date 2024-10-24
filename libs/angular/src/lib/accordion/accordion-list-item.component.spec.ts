@@ -4,6 +4,7 @@ import {
   RenderResult,
   waitFor,
 } from '@testing-library/angular'
+
 import { NggAccordionListItemComponent } from './accordion-list-item.component'
 
 describe(NggAccordionListItemComponent.name, () => {

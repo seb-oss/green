@@ -1,4 +1,5 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggButtonComponent } from './button.component'
 import { NggButtonModule } from './button.module'
 

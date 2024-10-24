@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggCellTableComponent } from './cell-table.component'
 import { NggCellTableModule } from './cell-table.module'
 

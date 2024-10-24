@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+
 import { NgvFoldOutComponent } from './fold-out.component'
 
 describe('[NgvModal]', () => {

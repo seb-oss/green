@@ -1,7 +1,8 @@
-import type { Metadata } from 'next'
 import Grid from '@/grid/grid'
 import GridPlayground from '@/grid/playground'
 import Content from '&/content/content'
+
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io/demo/grid'),

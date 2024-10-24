@@ -1,7 +1,8 @@
-import { expect } from '@esm-bundle/chai'
 import { css } from 'lit'
-import { DynamicStylesController } from './dynamic-styles-controller'
+import { expect } from '@esm-bundle/chai'
+
 import { GdsElement } from '../gds-element'
+import { DynamicStylesController } from './dynamic-styles-controller'
 
 class TestGdsElement extends GdsElement {
   controller: DynamicStylesController

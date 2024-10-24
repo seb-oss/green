@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
-
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import {
   applicationConfig,
   Meta,
@@ -10,6 +8,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
+import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvRadioComponent } from './radio.component'
 
 interface StoryInputListener {

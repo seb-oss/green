@@ -1,6 +1,8 @@
 import { html } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import '../index.ts'
 
 /**

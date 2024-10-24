@@ -5,6 +5,7 @@ import {
   shareReplay,
   startWith,
 } from 'rxjs/operators'
+
 export type ViewportSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
 
 /** viewportSize$ - Observable for viewport size

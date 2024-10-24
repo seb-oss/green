@@ -2,7 +2,6 @@ import { Directive } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-
 import { NgvDropdownListComponent } from './dropdown-list.component'
 
 @Directive({

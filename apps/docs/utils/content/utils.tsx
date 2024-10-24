@@ -1,5 +1,6 @@
 import * as fs from 'node:fs/promises'
 import path from 'node:path'
+
 import type { DocumentGen } from 'contentlayer/core'
 
 export const contentDirPath = 'content'

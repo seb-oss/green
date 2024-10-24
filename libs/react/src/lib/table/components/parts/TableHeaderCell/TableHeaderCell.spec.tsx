@@ -1,9 +1,10 @@
-import { TableHeaderCell, TableHeaderCellProps } from './TableHeaderCell'
-import { TableContext } from '../../context/TableContextProvider'
-import { SortDirection } from '../../table-typings'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { UserEvent } from '@testing-library/user-event/dist/types/setup/setup'
+
+import { TableContext } from '../../context/TableContextProvider'
+import { SortDirection } from '../../table-typings'
+import { TableHeaderCell, TableHeaderCellProps } from './TableHeaderCell'
 
 describe('Component: Table header cell', () => {
   function WrapperTableHeader(props: Omit<TableHeaderCellProps, 'ref'> = {}) {

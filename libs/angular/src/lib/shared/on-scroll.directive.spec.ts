@@ -3,6 +3,7 @@ import { TestBed } from '@angular/core/testing'
 import { By } from '@angular/platform-browser'
 import { fireEvent } from '@testing-library/angular'
 import { Subject } from 'rxjs'
+
 import { NggOnScrollDirective, ON_SCROLL_TOKEN } from './on-scroll.directive'
 
 @Component({

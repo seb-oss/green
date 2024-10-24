@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 
-import { SortableListComponent } from './sortable-list.component'
-import { SortableListRoutingModule } from './sortable-list-routing.module'
 import { NggSortableListModule } from '@sebgroup/green-angular'
+import { SortableListRoutingModule } from './sortable-list-routing.module'
+import { SortableListComponent } from './sortable-list.component'
 
 @NgModule({
   declarations: [SortableListComponent],

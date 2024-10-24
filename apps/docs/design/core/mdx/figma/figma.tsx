@@ -2,8 +2,8 @@
 
 import * as React from 'react'
 import { usePathname } from 'next/navigation'
-import Pattern from '@/pattern/pattern'
 import { allComponents } from 'content'
+import Pattern from '@/pattern/pattern'
 
 interface FigmaProps {
   caption?: string

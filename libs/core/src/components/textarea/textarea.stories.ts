@@ -1,5 +1,7 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 import '../badge/index.ts'
 import '../flex/index.ts'

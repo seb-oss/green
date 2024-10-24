@@ -1,14 +1,14 @@
 import * as fs from 'fs'
+import { color } from '@storybook/theming'
 import * as _template from 'lodash.template'
-import * as swift from './templates/ios/swift.tokens'
-
 import {
   Format,
+  formatHelpers,
   Options,
   TransformedToken,
-  formatHelpers,
 } from 'style-dictionary'
-import { color } from '@storybook/theming'
+
+import * as swift from './templates/ios/swift.tokens'
 
 const {
   fileHeader,

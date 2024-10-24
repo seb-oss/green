@@ -1,5 +1,5 @@
-import { ButtonGroup } from './buttonGroup'
 import { Button } from '../button/button'
+import { ButtonGroup } from './buttonGroup'
 
 const Template = ({ children, ...props }) => (
   <ButtonGroup {...props}>

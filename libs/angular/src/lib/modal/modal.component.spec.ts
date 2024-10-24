@@ -1,6 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/angular'
-import * as bodyScrollLock from 'body-scroll-lock'
 import { createMock } from '@testing-library/angular/jest-utils'
+import * as bodyScrollLock from 'body-scroll-lock'
+
 import {
   NggModalBodyComponent,
   NggModalComponent,
