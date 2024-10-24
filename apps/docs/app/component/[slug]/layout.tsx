@@ -85,7 +85,7 @@ export default function ComponentLayout({
     dynamic(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
-          return () => <></>
+          return
         }),
       {
         ssr: false,
