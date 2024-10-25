@@ -55,11 +55,13 @@ export class GdsCard extends GdsContainer {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
-    styleTemplate: (_prop, v) => `
-      --_border-color: var(--gds-color-l2-background-${v});
-      --_background-color: var(--gds-color-l2-background-${v});
-      --_color: var(--gds-color-l2-content-${v});
-      `,
+    styleTemplate: function (_prop, v) {
+      return `
+      --_border-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
+      --_background-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
+      --_color: var(--gds-color-l${(this as GdsCard).level}-content-${v});
+      `
+    },
   })
   variant = 'primary' /// This sets variables that are used in the default styles. Any other SEPs will override.
 
