@@ -36,7 +36,7 @@ export class GdsFormControlHeader extends GdsElement {
   @state()
   private _hasExtendedSupportingText = false
 
-  @query('.extended-supporting-text')
+  @query('#extended-supporting-text')
   private _extendedSupportingText?: HTMLElement
 
   render() {
