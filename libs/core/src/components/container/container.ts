@@ -367,7 +367,7 @@ export class GdsContainer extends GdsElement {
    * You can apply padding in each side like this:
    *
    * ```html
-   * <gds-flex padding="xl"></gds-flex>
+   * <gds-container padding="xl"></gds-container>
    * ```
    *
    * `xl` in this case will be applied to all breakpoints and sides.
@@ -375,7 +375,7 @@ export class GdsContainer extends GdsElement {
    * Padding also support breakpoint syntax like this:
    *
    * ```html
-   * <gds-flex padding="xs{s} m{m} l{xl}"></gds-flex>
+   * <gds-container padding="xs{s} m{m} l{xl}"></gds-container>
    * ```
    *
    * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
