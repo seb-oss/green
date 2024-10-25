@@ -58,33 +58,35 @@ export const Variants: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-flex gap="l" flex-direction="column">
-      <gds-flex gap="l" flex-direction="column">
-        <gds-text tag="h3">Light mode</gds-text>
-        <gds-grid columns="3" gap="l">
-          <gds-card variant="primary">Primary</gds-card>
-          <gds-card variant="secondary" border-color="secondary"
-            >Secondary</gds-card
-          >
-          <gds-card variant="tertiary">Tertiary</gds-card>
-        </gds-grid>
-        <gds-grid columns="5" gap="l">
-          <gds-card variant="positive">Positive</gds-card>
-          <gds-card variant="negative">Negative</gds-card>
-          <gds-card variant="notice">Notice</gds-card>
-          <gds-card variant="warning">Warning</gds-card>
-          <gds-card variant="information">Information</gds-card>
-        </gds-grid>
-        <gds-grid columns="4" gap="l">
-          <gds-card variant="copper-01">Copper 01</gds-card>
-          <gds-card variant="copper-02">Copper 02</gds-card>
-          <gds-card variant="purple-01">Purple 01</gds-card>
-          <gds-card variant="purple-02">Purple 02</gds-card>
-          <gds-card variant="green-01">Green 01</gds-card>
-          <gds-card variant="green-02">Green 02</gds-card>
-          <gds-card variant="blue-01">Blue 01</gds-card>
-          <gds-card variant="blue-02">Blue 02</gds-card>
-        </gds-grid>
-      </gds-flex>
+      <gds-card variant="secondary" border-color="primary">
+        <gds-flex gap="l" flex-direction="column">
+          <gds-text tag="h3">Light mode</gds-text>
+          <gds-grid columns="3" gap="l">
+            <gds-card variant="primary">Primary</gds-card>
+            <gds-card variant="secondary" border-color="secondary"
+              >Secondary</gds-card
+            >
+            <gds-card variant="tertiary">Tertiary</gds-card>
+          </gds-grid>
+          <gds-grid columns="5" gap="l">
+            <gds-card variant="positive">Positive</gds-card>
+            <gds-card variant="negative">Negative</gds-card>
+            <gds-card variant="notice">Notice</gds-card>
+            <gds-card variant="warning">Warning</gds-card>
+            <gds-card variant="information">Information</gds-card>
+          </gds-grid>
+          <gds-grid columns="4" gap="l">
+            <gds-card variant="copper-01">Copper 01</gds-card>
+            <gds-card variant="copper-02">Copper 02</gds-card>
+            <gds-card variant="purple-01">Purple 01</gds-card>
+            <gds-card variant="purple-02">Purple 02</gds-card>
+            <gds-card variant="green-01">Green 01</gds-card>
+            <gds-card variant="green-02">Green 02</gds-card>
+            <gds-card variant="blue-01">Blue 01</gds-card>
+            <gds-card variant="blue-02">Blue 02</gds-card>
+          </gds-grid>
+        </gds-flex>
+      </gds-card>
       <gds-theme color-scheme="dark">
         <gds-card>
           <gds-flex gap="l" flex-direction="column">
