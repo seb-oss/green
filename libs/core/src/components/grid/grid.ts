@@ -63,6 +63,53 @@ export class GdsGrid extends GdsContainer {
   })
   'auto-columns'?: string
 
+  /**
+   * Controls the grid-column property of the flex.
+   * Supports all valid CSS grid-column values.
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * ```html
+   * <gds-flex grid-column="2 / -1"></gds-flex>
+   * ```
+   *
+   * The above example will apply the grid-column style of `2 / -1`.
+   * The column can be applied to the flex using shorthand like grid-column="1 / 2"
+   *
+   * The column also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-flex grid-column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  'grid-column'?: string
+
+  /**
+   * Controls the grid-row property of the flex.
+   * Supports all valid CSS grid-row values.
+   *
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * ```html
+   * <gds-flex grid-row="2 / -1"></gds-flex>
+   * ```
+   *
+   * The above example will apply the grid-row style of `2 / -1`.
+   * The row can be applied to the flex using shorthand like grid-row="1 / 2"
+   *
+   * The row also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-flex grid-row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  'grid-row'?: string
+
   constructor() {
     super()
     this.display = 'grid'
