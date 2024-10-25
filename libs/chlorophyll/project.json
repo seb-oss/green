@@ -6,21 +6,9 @@
   "targets": {
     "build": {
       "executor": "./tools/executors/scss:build-lib",
-      "dependsOn": ["copy-fonts"],
       "options": {
         "packageJson": "libs/chlorophyll/package.json",
         "outputPath": "dist/libs/chlorophyll"
-      }
-    },
-    "copy-fonts": {
-      "executor": "nx:run-commands",
-      "outputs": ["{options.outputDir}/fonts"],
-      "options": {
-        "commands": [
-          {
-            "command": "npm run copy-fonts"
-          }
-        ]
       }
     },
     "compile-scss": {

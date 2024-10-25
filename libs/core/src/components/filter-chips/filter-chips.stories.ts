@@ -1,5 +1,7 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 
 /**
@@ -10,7 +12,7 @@ import './index.ts'
  * The filter chips component allows users to quickly refine the result of data they want to be presented on the page.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Filter Chips',
+  title: 'Components/Filter Chips',
   component: 'gds-filter-chips',
   //subcomponents: { FilterChip: 'gds-filter-chip' },
   parameters: {

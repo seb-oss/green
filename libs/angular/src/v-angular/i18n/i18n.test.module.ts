@@ -3,15 +3,15 @@ import { NgModule, Pipe, PipeTransform } from '@angular/core'
 import {
   HashMap,
   Translation,
+  TRANSLOCO_FALLBACK_STRATEGY,
+  TRANSLOCO_INTERCEPTOR,
+  TRANSLOCO_MISSING_HANDLER,
+  TRANSLOCO_TRANSPILER,
   TranslocoConfig,
   TranslocoFallbackStrategy,
   TranslocoInterceptor,
   TranslocoMissingHandler,
   TranslocoTranspilerFunction,
-  TRANSLOCO_FALLBACK_STRATEGY,
-  TRANSLOCO_INTERCEPTOR,
-  TRANSLOCO_MISSING_HANDLER,
-  TRANSLOCO_TRANSPILER,
 } from '@ngneat/transloco'
 
 @Pipe({ name: 'transloco' })

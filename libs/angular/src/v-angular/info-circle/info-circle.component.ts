@@ -1,5 +1,6 @@
 import { Component, HostBinding, Input } from '@angular/core'
-import '@sebgroup/green-core/components/icon/icons/circle-info'
+
+import '@sebgroup/green-core/components/icon/icons/circle-info.js'
 
 /**
  * A button that will present an explanation to a problem/question.

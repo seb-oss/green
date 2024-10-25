@@ -1,6 +1,8 @@
 import { html } from 'lit'
 import { repeat } from 'lit/directives/repeat.js'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import '../index.ts'
 
 /**
@@ -11,7 +13,7 @@ import '../index.ts'
  * The filter chip is a sub-component of the filter chips component, and should generally not be used on its own.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Filter Chips/Filter Chip',
+  title: 'Components/Filter Chips/Filter Chip',
   component: 'gds-filter-chip',
   parameters: {
     layout: 'centered',

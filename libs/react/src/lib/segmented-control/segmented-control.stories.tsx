@@ -1,5 +1,6 @@
-import { SegmentedControl, Segment } from './segmented-control'
 import { provideProtractorTestingSupport } from '@angular/platform-browser'
+
+import { Segment, SegmentedControl } from './segmented-control'
 
 const Template = (props) => (
   <SegmentedControl {...props}>

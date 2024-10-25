@@ -102,9 +102,6 @@
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
     },
-    "copy-fonts": {
-      "dependsOn": ["fonts:build"]
-    },
     "@nx/vite:test": {
       "cache": true,
       "inputs": ["default", "^production"]

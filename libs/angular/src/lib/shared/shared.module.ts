@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
+
 import { NggOnScrollDirective } from './on-scroll.directive'
 
 @NgModule({

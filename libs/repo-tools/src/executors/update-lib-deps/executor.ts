@@ -1,6 +1,7 @@
-import type { ExecutorContext } from '@nx/devkit'
-import { writeFile } from 'node:fs/promises'
 import { readFileSync } from 'node:fs'
+import { writeFile } from 'node:fs/promises'
+
+import type { ExecutorContext } from '@nx/devkit'
 
 type DepSpecs = {
   [name: string]: string

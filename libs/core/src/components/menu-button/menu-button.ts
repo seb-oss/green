@@ -3,10 +3,10 @@ import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { literal, html as staticHtml } from 'lit/static-html.js'
+
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
-
 import style from './menu-button.css?inline'
 
 /**

@@ -1,7 +1,6 @@
-import { LitElement, css } from 'lit'
+import { css, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-
 import { html } from '@sebgroup/green-core/scoping.js'
 
 @customElement('css-layout-1')

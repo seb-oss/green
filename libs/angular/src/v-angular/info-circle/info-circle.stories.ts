@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
-import { NgvTooltipModule } from '../tooltip/tooltip.module'
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
+import { NgvTooltipModule } from '../tooltip/tooltip.module'
 import { NgvInfoCircleComponent } from './info-circle.component'
 
 export default {

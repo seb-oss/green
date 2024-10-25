@@ -1,5 +1,7 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 
 /**
@@ -19,7 +21,7 @@ import './index.ts'
  * Clicking the calendar icon opens a popover with a calendar view where a date can be chosen.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Datepicker',
+  title: 'Components/Datepicker',
   component: 'gds-datepicker',
   parameters: {
     layout: 'centered',

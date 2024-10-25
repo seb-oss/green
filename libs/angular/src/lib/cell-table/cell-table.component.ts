@@ -8,6 +8,7 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core'
+
 import {
   TableHeaderListItem,
   TableHeaderListValueType,

@@ -1,32 +1,14 @@
-import { ReactNode, MouseEvent, forwardRef, ForwardedRef } from 'react'
-import { ButtonType } from '@sebgroup/extract'
+import { ForwardedRef, forwardRef, MouseEvent, ReactNode } from 'react'
 
-interface IconButtonInterface {
-  children: ReactNode
-  type?: ButtonType
-  onClick: (event: MouseEvent) => void
-  'aria-expanded'?: boolean
-  'aria-controls'?: string
-  size?: 'small' | 'normal'
-  title?: string
-}
+import { ButtonType } from '@sebgroup/extract'
+import { Button, ButtonProps } from '../button/button'
 
 export const IconButton = forwardRef(
-  (
-    { children, onClick, ...props }: IconButtonInterface,
-    ref: ForwardedRef<HTMLButtonElement>,
-  ) => {
+  (props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
     return (
-      <button
-        className={`icon ${props.size === 'small' && 'small'}`}
-        onClick={onClick}
-        aria-controls={props['aria-controls']}
-        aria-expanded={props['aria-expanded']}
-        type={props.type ?? 'button'}
-        ref={ref}
-      >
-        {children}
-      </button>
+      <Button {...props} className={`icon`} ref={ref}>
+        {props.children}
+      </Button>
     )
   },
 )

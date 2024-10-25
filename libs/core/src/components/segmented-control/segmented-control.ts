@@ -1,19 +1,20 @@
-import { unsafeCSS } from 'lit'
-import { query, state, property } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
+import { unsafeCSS } from 'lit'
+import { property, query, state } from 'lit/decorators.js'
+
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
 import { gdsCustomElement, html } from '../../scoping'
-import { watch } from '../../utils/decorators/watch'
+import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
+import { watch } from '../../utils/decorators/watch'
+import style from './segmented-control.style.css?inline'
+
+import type { GdsSegment } from './segment'
 
 import './segment'
-import type { GdsSegment } from './segment'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
-
-import { tokens } from '../../tokens.style'
-import style from './segmented-control.style.css?inline'
 
 const debounce = (fn: () => void, delay: number) => {
   let timeoutId: NodeJS.Timeout

@@ -11,7 +11,14 @@
       "options": {
         "command": "npx copyfiles -f libs/react/package.json dist/libs/react"
       },
-      "dependsOn": ["rollup"]
+      "dependsOn": ["rollup", "generate-core-wrappers"]
+    },
+    "generate-core-wrappers": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["core:build-custom-elements-json"],
+      "options": {
+        "command": "node libs/core/build-scripts/generate-react.cjs"
+      }
     },
     "rollup": {
       "executor": "@nx/rollup:rollup",
@@ -52,14 +59,21 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4400,
+        "port": 4401,
         "configDir": "libs/react/.storybook"
       },
       "configurations": {
         "ci": {
           "quiet": true
         }
-      }
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "dependencies": true
+        },
+        "tokens:build"
+      ]
     },
     "build-nx-storybook": {
       "executor": "@nrwl/storybook:build",
@@ -76,7 +90,7 @@
       },
       "dependsOn": [
         {
-          "target": "build-with-types-and-scoping",
+          "target": "build",
           "dependencies": true
         },
         "tokens:build"
@@ -96,7 +110,7 @@
       },
       "dependsOn": [
         {
-          "target": "build-with-types-and-scoping",
+          "target": "build",
           "dependencies": true
         },
         "tokens:build"

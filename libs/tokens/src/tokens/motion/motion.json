@@ -2,36 +2,44 @@
   "sys": {
     "motion": {
       "easing": {
-        "value": "cubic-bezier(0.46, 0.03, 0.52, 0.96)",
-        "type": "string"
+        "ease-in": {
+          "value": "cubic-bezier(0.64, 0, 0.78, 0)",
+          "type": "string"
+        },
+        "ease-in-out": {
+          "value": "cubic-bezier(0.83, 0, 0.17, 1)",
+          "type": "string"
+        },
+        "ease-out": {
+          "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "type": "string"
+        },
+        "linear": {
+          "value": "cubic-bezier(0, 0, 1, 1)",
+          "type": "string"
+        }
       },
       "duration": {
-        "value": "1.2s",
-        "type": "string"
-      },
-      "timing-function": {
-        "value": "ease",
-        "type": "string"
-      },
-      "delay": {
-        "value": "0s",
-        "type": "string"
-      },
-      "iteration-count": {
-        "value": "1",
-        "type": "string"
-      },
-      "direction": {
-        "value": "normal",
-        "type": "string"
-      },
-      "fill-mode": {
-        "value": "none",
-        "type": "string"
-      },
-      "play-state": {
-        "value": "running",
-        "type": "string"
+        "fastest": {
+          "value": ".2s",
+          "type": "string"
+        },
+        "fast": {
+          "value": ".4s",
+          "type": "string"
+        },
+        "default": {
+          "value": ".5s",
+          "type": "string"
+        },
+        "slow": {
+          "value": "1s",
+          "type": "string"
+        },
+        "slowest": {
+          "value": "1.5s",
+          "type": "string"
+        }
       }
     }
   }

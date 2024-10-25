@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 
-import { ModalsRoutingModule } from './modals-routing.module'
-import { ModalsComponent } from './modals.component'
 import {
+  NggDatepickerModule,
   NggDropdownModule,
   NggModalModule,
-  NggDatepickerModule,
 } from '@sebgroup/green-angular'
+import { ModalsRoutingModule } from './modals-routing.module'
+import { ModalsComponent } from './modals.component'
 
 @NgModule({
   declarations: [ModalsComponent],

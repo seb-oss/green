@@ -1,11 +1,11 @@
+import { html, TemplateResult } from 'lit'
 import {
-  startOfMonth,
-  endOfMonth,
   addDays,
-  eachWeekOfInterval,
   eachDayOfInterval,
+  eachWeekOfInterval,
+  endOfMonth,
+  startOfMonth,
 } from 'date-fns'
-import { TemplateResult, html } from 'lit'
 
 export type Week = {
   days: Date[]

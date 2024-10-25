@@ -1,5 +1,78 @@
 # Changelog
 
+## 1.45.3
+
+### Patch Changes
+
+- 05228f9: **Container:** Revert back the caching on levels
+
+## 1.45.2
+
+### Patch Changes
+
+- b9324f5: **Container:** Add cacheOverrideKey for level property to avoid conflicts when same component is needed in different levels on same page
+
+## 1.45.1
+
+### Patch Changes
+
+- 1b731d6: **Menu Button:** Increase the ga to 8px to match design on Menu Button
+
+## 1.45.0
+
+### Minor Changes
+
+- 500beae: **Folder Structure:** Refactor to a flat structure. Affects import paths of layout, content and media components, as well as the FAB button.
+
+## 1.44.10
+
+### Patch Changes
+
+- feb5aa0: **Tokens:** Added viewport tokens
+
+## 1.44.9
+
+### Patch Changes
+
+- 16d03dd: **Button:** Use book weight
+
+## 1.44.8
+
+### Patch Changes
+
+- 66b36b8: **Button:** Fixes color on the secondary button
+
+## 1.44.7
+
+### Patch Changes
+
+- 3709a4f: **Video, IMG, Divider:** Fixed all display content issues and flex gap cashing
+
+## 1.44.6
+
+### Patch Changes
+
+- f3171b4: adding correct easing to ripple nad releasing tokens
+
+## 1.44.5
+
+### Patch Changes
+
+- aa0ec78: **Ripple:** removing old ripple animation tokens
+
+## 1.44.4
+
+### Patch Changes
+
+- 9161c53: **gds-text:** pass props to host instead of tag and remove isolate prop
+
+## 1.44.3
+
+### Patch Changes
+
+- ea478ef: **Button:** Fix icon button not finding the node
+- 98db232: **Styling:** remove display:contents
+
 ## 1.44.2
 
 ### Patch Changes

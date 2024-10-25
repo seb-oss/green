@@ -1,4 +1,5 @@
-import { Story, Meta } from '@storybook/react'
+import { Meta, Story } from '@storybook/react'
+
 import { Chart, ChartProps } from './chart'
 
 export default {

@@ -115,7 +115,6 @@ export default {
 export const Default = {
   render: Template.bind({}),
   name: 'Default',
-  
 
   args: {
     label: 'Slider label text in one line',

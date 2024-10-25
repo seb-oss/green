@@ -8,7 +8,9 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core'
-import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal'
+
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
+
 import { fromEvent, Subscription } from 'rxjs'
 import { filter, map } from 'rxjs/operators'
 

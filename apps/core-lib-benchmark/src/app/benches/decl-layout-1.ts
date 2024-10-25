@@ -1,12 +1,11 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { repeat } from 'lit/directives/repeat.js'
-
 import { html } from '@sebgroup/green-core/scoping.js'
 
-import '@sebgroup/green-core/components/layout/container/index.js'
-import '@sebgroup/green-core/components/layout/flex/index.js'
-import '@sebgroup/green-core/components/layout/card/index.js'
+import '@sebgroup/green-core/components/container/index.js'
+import '@sebgroup/green-core/components/flex/index.js'
+import '@sebgroup/green-core/components/card/index.js'
 
 @customElement('decl-layout-1')
 export class DeclLayout1 extends LitElement {

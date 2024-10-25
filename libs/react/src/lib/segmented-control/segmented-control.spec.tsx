@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
-import { SegmentedControl, Segment } from './segmented-control'
+
+import { Segment, SegmentedControl } from './segmented-control'
 
 class ResizeObserver {
   observe() {

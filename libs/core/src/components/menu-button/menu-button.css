@@ -2,7 +2,7 @@
 
 @layer tokens {
   :host {
-    --_gap: 4px;
+    --_gap: 8px;
 
     --_padding-inline: var(--gds-space-m);
     --_padding-block: var(--gds-space-xs);

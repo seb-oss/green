@@ -7,6 +7,7 @@ import {
   Input,
   ViewChild,
 } from '@angular/core'
+
 import { Chart, ChartArgs, ChartSettings, create } from '@sebgroup/green-charts'
 
 @Component({

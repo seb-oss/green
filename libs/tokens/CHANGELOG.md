@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.3
+
+### Patch Changes
+
+- feb5aa0: **Viewport:** Tokens added
+
+## 0.9.2
+
+### Patch Changes
+
+- 2e6b5f0: trigger release
+
+## 0.9.1
+
+### Patch Changes
+
+- f3171b4: adding correct easing to ripple nad releasing tokens
+
+## 0.9.0
+
+### Minor Changes
+
+- aa0ec78: **Motion:** new tokens added for motion, removing old ones
+
 ## 0.8.0
 
 ### Minor Changes

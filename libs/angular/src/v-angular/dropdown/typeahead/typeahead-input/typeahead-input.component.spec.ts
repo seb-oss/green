@@ -7,10 +7,9 @@ import {
   tick,
   waitForAsync,
 } from '@angular/core/testing'
-
 import { TranslocoModule } from '@ngneat/transloco'
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
+import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvDropdownComponent } from '../../../dropdown/dropdown.component'
 import { NgvInputComponent } from '../../../input/input.component'
 import { NgvTypeaheadInputComponent } from './typeahead-input.component'

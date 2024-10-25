@@ -1,5 +1,4 @@
 // Dropdown.stories.ts
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import {
   FormControl,
   FormGroup,
@@ -7,10 +6,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { NggDropdownModule } from './dropdown.module'
-import { NggDropdownComponent } from './dropdown.component'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
+
+import { NggDropdownComponent } from './dropdown.component'
+import { NggDropdownModule } from './dropdown.module'
 
 export default {
   title: 'Components/Dropdown',

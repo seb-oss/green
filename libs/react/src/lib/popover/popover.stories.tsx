@@ -1,7 +1,8 @@
 import React from 'react'
 import { Meta } from '@storybook/react'
-import { Popover } from './popover'
+
 import { Button } from '../form'
+import { Popover } from './popover'
 
 export default {
   title: 'Components/Popover',

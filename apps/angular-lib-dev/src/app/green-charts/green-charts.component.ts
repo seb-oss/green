@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+
 import { ChartSettings } from '@sebgroup/green-charts'
 
 @Component({

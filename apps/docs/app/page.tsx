@@ -1,9 +1,10 @@
-import type { Metadata } from 'next'
 import ComponentList from '@/component-list/component-list'
 import Grid from '@/grid/grid'
 import Hero from '@/hero/hero'
 import RessourcesList from '@/resources-list/resources-list'
 import Content from '&/content/content'
+
+import type { Metadata } from 'next'
 
 import './page.css'
 

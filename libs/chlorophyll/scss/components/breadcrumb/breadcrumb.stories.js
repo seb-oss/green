@@ -1,5 +1,20 @@
-const Template = ({}) => {
-  return `
+export default {
+  title: 'Components/Breadcrumb',
+  tags: ['autodocs'],
+  parameters: {
+    componentIds: ['component-Breadcrumb'],
+  },
+}
+
+/**
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/chlorophyll/scss/components/breadcrumb)
+ * &nbsp;|&nbsp;
+ * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-breadcrumbs)
+ *
+ * Displays the path to the current resource using a hierarchy of links.
+ */
+export const Breadcrumb = {
+  render: () => `
     <ul class="breadcrumb">
       <li><a href="">Cart</a></li>
       <li class="icon">
@@ -30,18 +45,5 @@ const Template = ({}) => {
       </li>
       <li>Payment</li>
    </ul>   
-    `
-}
-
-export default {
-  title: 'Components/Breadcrumb',
-
-  parameters: {
-    componentIds: ['component-Breadcrumb'],
-  },
-}
-
-export const Breadcrumb = {
-  render: Template.bind({}),
-  name: 'Breadcrumb',
+    `,
 }

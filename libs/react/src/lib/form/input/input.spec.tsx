@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { render, screen, fireEvent, act } from '@testing-library/react'
 import React, { useState } from 'react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
 import {
   Checkbox,
   EmailInput,
   NumberInput,
-  TextInput,
   RadioButton,
+  TextInput,
 } from './input'
-import userEvent from '@testing-library/user-event'
 
 describe('Inputs', () => {
   describe('Checkbox', () => {

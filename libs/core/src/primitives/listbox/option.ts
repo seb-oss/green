@@ -1,16 +1,14 @@
 import { property } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
+
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
-
-import { gdsCustomElement, html } from '../../scoping'
-
-import style from './option.styles'
-
-import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
+import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators'
+import style from './option.styles'
 
 import '../../components/icon/icons/checkmark'
 

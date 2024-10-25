@@ -1,29 +1,22 @@
-import { TemplateResult } from 'lit'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { until } from 'lit/directives/until.js'
-import { nothing } from 'lit/html.js'
-import { when } from 'lit/directives/when.js'
-import { choose } from 'lit/directives/choose.js'
 import { msg } from '@lit/localize'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { choose } from 'lit/directives/choose.js'
+import { when } from 'lit/directives/when.js'
+import { nothing } from 'lit/html.js'
 
+import { gdsCustomElement, html } from '../../scoping'
+import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
-import { gdsCustomElement, html } from '../../scoping'
-import '../layout/flex'
-import { tokens } from '../../tokens.style'
 import { styles } from './textarea.styles'
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 
 // Local Components
+import '../../primitives/form-control-header'
+import '../../primitives/form-control-footer'
 import '../icon/icons/cross-small'
-import '../icon/icons/circle-info'
-import '../icon/icons/triangle-exclamation'
-import '../layout/flex'
-import '../layout/container'
-import '../layout/card'
-import '../content/text'
-import '../badge'
+import '../flex'
 import '../button'
 
 /**
@@ -139,9 +132,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
 
-  @queryAsync('slot[name="extended-supporting-text"]')
-  private elExtendedSupportingTextSlot!: Promise<HTMLSlotElement>
-
   @state()
   trailSlotOccupied = false
 
@@ -175,107 +165,56 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #renderDefault() {
     return html`
+      <gds-form-control-header>
+        <label for="input" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text"
+          >${this.supportingText}</span
+        >
+        <slot
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>
+
       <gds-flex
-        flex-direction="column"
-        width="100%"
+        position="relative"
+        align-items="flex-start"
+        justify-content="center"
         gap="xs"
         level="3"
-        user-select="${this.disabled ? 'none' : 'auto'}"
-        pointer-events="${this.disabled ? 'none' : 'auto'}"
-        color="${this.disabled
+        padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
+        border-radius="xs"
+        .background=${this.disabled
           ? 'disabled'
           : this.invalid
-            ? 'negative'
-            : 'tertiary'}"
+            ? 'negative-secondary'
+            : 'secondary'}
+        .border=${this.disabled
+          ? ''
+          : this.invalid
+            ? '4xs/negative'
+            : '4xs/secondary'}
+        class="field ${this.invalid ? 'invalid' : ''}"
+        @click=${this.#handleFieldClick}
+        cursor="text"
       >
-        <gds-flex
-          class="head"
-          align-items="center"
-          justify-content="space-between"
-          padding="3xs 0 0 0"
-        >
-          <gds-flex flex-direction="column">
-            <gds-text font-weight="book" font-size="detail-m">
-              <label for="input"> ${this.label} </label>
-            </gds-text>
-            ${when(this.supportingText, () => this.#renderSupportingText())}
-          </gds-flex>
-          ${until(this.#asyncRenderExtendedSupportingTextButton(), nothing)}
+        ${this.#renderSlotLead()} ${this.#renderNativeTextarea()}
+
+        <gds-flex gap="xs" align-items="center" block-size="l">
+          ${this.#renderClearButton()} ${this.#renderSlotTrail()}
         </gds-flex>
-
-        ${this.#renderExtendedSupportingText()}
-
-        <gds-flex
-          position="relative"
-          align-items="flex-start"
-          justify-content="center"
-          gap="xs"
-          level="3"
-          padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
-          border-radius="xs"
-          .background=${this.disabled
-            ? 'disabled'
-            : this.invalid
-              ? 'negative-secondary'
-              : 'secondary'}
-          .border=${this.disabled
-            ? ''
-            : this.invalid
-              ? '4xs/negative'
-              : '4xs/secondary'}
-          class="field ${this.invalid ? 'invalid' : ''}"
-          @click=${this.#handleFieldClick}
-          cursor="text"
-        >
-          ${this.#renderSlotLead()} ${this.#renderNativeTextarea()}
-
-          <gds-flex gap="xs" align-items="center" block-size="l">
-            ${this.#renderClearButton()} ${this.#renderSlotTrail()}
-          </gds-flex>
-          ${when(
-            this.resize === 'auto',
-            () => this.#renderResizeHandle(),
-            () => nothing,
-          )}
-        </gds-flex>
-
-        <gds-flex
-          class="foot"
-          align-items="flex-start"
-          justify-content="space-between"
-          aria-live="polite"
-          gap="xl"
-        >
-          ${when(
-            this.invalid,
-            () => html`
-              <gds-flex align-items="flex-start" gap="xs" margin="2xs 0 0 0">
-                <gds-flex min-width="18px">
-                  <gds-icon-triangle-exclamation width="18" height="18" solid>
-                  </gds-icon-triangle-exclamation>
-                </gds-flex>
-                <gds-text
-                  tag="span"
-                  font-size="detail-s"
-                  font-weight="book"
-                  class="error-text"
-                >
-                  ${this.validationMessage}
-                </gds-text>
-              </gds-flex>
-            `,
-          )}
-          <gds-flex
-            margin="0 0 0 auto"
-            min-width="4ch"
-            justify-content="flex-end"
-          >
-            ${when(this.#shouldShowRemainingChars, () =>
-              this.#renderRemainingCharsBadge(),
-            )}
-          </gds-flex>
-        </gds-flex>
+        ${when(
+          this.resize === 'auto',
+          () => this.#renderResizeHandle(),
+          () => nothing,
+        )}
       </gds-flex>
+
+      <gds-form-control-footer
+        .charCounter=${this.#shouldShowRemainingChars &&
+        this.maxlength - this.value.length}
+        .validationMessage=${this.invalid && this.validationMessage}
+      ></gds-form-control-footer>
     `
   }
 
@@ -318,17 +257,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
-  }
-
-  #handleSupportingTextBtnClick = () => {
-    this.showExtendedSupportingText = !this.showExtendedSupportingText
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        bubbles: true,
-        composed: true,
-        detail: this.showExtendedSupportingText,
-      }),
-    )
   }
 
   #renderSlotLead() {
@@ -434,48 +362,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     `
   }
 
-  #renderSupportingText() {
-    return html`
-      <gds-text
-        level="3"
-        font-size="detail-m"
-        .color="${this.disabled
-          ? 'disabled'
-          : this.invalid
-            ? 'negative'
-            : 'tertiary'}"
-        class="supporting-text"
-        id="supporting-text"
-      >
-        ${this.supportingText}
-      </gds-text>
-    `
-  }
-
-  #renderExtendedSupportingText() {
-    return html`
-      <gds-card
-        level="3"
-        display="${this.showExtendedSupportingText ? 'block' : 'none'}"
-        class="extended-supporting-text"
-        padding="s m"
-        border-radius="xs"
-        background="secondary"
-        color="tertiary"
-      >
-        <gds-text
-          font-size="body-s"
-          display="${this.showExtendedSupportingText ? 'block' : 'none'}"
-        >
-          <slot
-            name="extended-supporting-text"
-            @slotchange=${() => this.requestUpdate()}
-          ></slot>
-        </gds-text>
-      </gds-card>
-    `
-  }
-
   #renderClearButton() {
     if (this.clearable && this.value.length > 0)
       return html`
@@ -495,39 +381,5 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   get #shouldShowRemainingChars() {
     return this.maxlength < Number.MAX_SAFE_INTEGER
-  }
-
-  #renderRemainingCharsBadge() {
-    const remaining = this.maxlength - this.value.length
-    let variant
-    if (remaining < 0) {
-      variant = 'negative'
-    } else if (remaining < 20) {
-      variant = 'warning'
-    } else {
-      variant = 'positive'
-    }
-    return html`<gds-badge variant="${variant}">${remaining}</gds-badge>`
-  }
-
-  /**
-   * Returns a promise that resolves when the DOM query for the extended supporting text slot has resolved.
-   * If the slot is empty, an empty template is returned, otherwise the support text toggle button is returned.
-   */
-  async #asyncRenderExtendedSupportingTextButton(): Promise<TemplateResult> {
-    return this.elExtendedSupportingTextSlot.then((slot) => {
-      if (slot && slot.assignedElements().length > 0)
-        return html`
-          <gds-button
-            size="small"
-            rank="tertiary"
-            label="${msg('Show extended supporting text')}"
-            @click=${this.#handleSupportingTextBtnClick}
-          >
-            <gds-icon-circle-info ?solid=${this.showExtendedSupportingText} />
-          </gds-button>
-        `
-      else return nothing
-    })
   }
 }

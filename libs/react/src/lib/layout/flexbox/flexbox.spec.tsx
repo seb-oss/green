@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+
 import Flexbox, { FlexboxProps } from './flexbox'
 
 describe('Component: FlexBox', () => {

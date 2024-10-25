@@ -5,9 +5,6 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
 } from '@angular/forms'
-
-import { NgvI18nModule } from '../../i18n/i18n.module'
-import { NgvTooltipDirective } from '../../tooltip/tooltip.directive'
 import {
   applicationConfig,
   Meta,
@@ -15,7 +12,9 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
+import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NgvInputComponent } from '../../input/input.component'
+import { NgvTooltipDirective } from '../../tooltip/tooltip.directive'
 import { NgvDropdownListComponent } from './dropdown-list.component'
 
 interface WithExtras {

@@ -1,24 +1,16 @@
 import { expect } from '@esm-bundle/chai'
-import {
-  fixture,
-  html as testingHtml,
-  waitUntil,
-  assert,
-} from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import { assert, fixture, html as testingHtml } from '@open-wc/testing'
 import sinon from 'sinon'
 
-import '@sebgroup/green-core/components/filter-chips'
 import type {
-  GdsFilterChips,
   GdsFilterChip,
+  GdsFilterChips,
 } from '@sebgroup/green-core/components/filter-chips'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing'
+
+import '@sebgroup/green-core/components/filter-chips'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

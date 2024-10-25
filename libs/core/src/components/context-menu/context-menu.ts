@@ -1,16 +1,15 @@
-import { nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { classMap } from 'lit/directives/class-map.js'
+import { nothing } from 'lit'
 import { property, queryAsync } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { Placement } from '@floating-ui/dom'
 
+import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
-
 import styles from './context-menu.styles'
 
 import '../../primitives/menu'
