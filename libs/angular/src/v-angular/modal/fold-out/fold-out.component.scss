@@ -1,10 +1,11 @@
 @use 'sass:math';
-@use '../../../../../chlorophyll/scss/components/button/mixins' as button;
-@use '../../../../../chlorophyll/scss/components/card/mixins' as card;
-@use '../../../../../chlorophyll/scss/components/icon';
-@use '../../../../../chlorophyll/scss/tokens/shame' as tokens;
-@use '../../../../../chlorophyll/scss/common';
-@use '../../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../../chlorophyll/src/scss/components/button/mixins' as button;
+@use '../../../../../chlorophyll/src/scss/components/card/mixins' as card;
+@use '../../../../../chlorophyll/src/scss/components/icon';
+@use '../../../../../chlorophyll/src/scss/tokens/shame' as tokens;
+@use '../../../../../chlorophyll/src/scss/common';
+@use '../../../../../chlorophyll/src/scss/components/dropdown/mixins' as
+  dropdown;
 
 :host {
   .flex-right {

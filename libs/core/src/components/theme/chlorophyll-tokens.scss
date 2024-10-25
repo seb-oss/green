@@ -1,8 +1,8 @@
-@use '../../../../chlorophyll/scss/tokens/shame' as tokens;
-@use '../../../../chlorophyll/scss/tokens/colors' as colors;
-@use '../../../../chlorophyll/scss/tokens/shape' as shape;
-@use '../../../../chlorophyll/scss/tokens/components' as components;
-@use '../../../../chlorophyll/scss/components/themes/mixins' as theme_mixins;
+@use '../../../../chlorophyll/src/scss/tokens/shame' as tokens;
+@use '../../../../chlorophyll/src/scss/tokens/colors' as colors;
+@use '../../../../chlorophyll/src/scss/tokens/shape' as shape;
+@use '../../../../chlorophyll/src/scss/tokens/components' as components;
+@use '../../../../chlorophyll/src/scss/components/themes/mixins' as theme_mixins;
 
 :host {
   display: contents;

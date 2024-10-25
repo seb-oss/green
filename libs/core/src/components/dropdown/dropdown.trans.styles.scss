@@ -1,9 +1,9 @@
-@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
-@use '../../../../chlorophyll/scss/components/button/mixins' as button;
-@use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+@use '../../../../chlorophyll/src/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/src/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/src/scss/components/form/input/mixins' as input;
+@use '../../../../chlorophyll/src/scss/components/form/validation/mixins' as
   validation;
-@use '../../../../chlorophyll/scss/tokens' as tokens;
+@use '../../../../chlorophyll/src/scss/tokens' as tokens;
 
 @layer base, reset, transitional-styles;
 

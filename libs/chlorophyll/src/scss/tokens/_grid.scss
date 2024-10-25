@@ -1,0 +1,31 @@
+@use './spacing';
+@use '../common/functions';
+
+/* Grid breakpoints */
+
+/* Define the minimum dimensions at which your layout will change, */
+
+/* adapting to different screen sizes, for use in media queries. */
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36em,
+  md: 48em,
+  lg: 62em,
+  xl: 75em,
+  xxl: 87.5em,
+);
+
+@include functions.assert-ascending($grid-breakpoints, '$grid-breakpoints');
+@include functions.assert-starts-at-zero(
+  $grid-breakpoints,
+  '$grid-breakpoints'
+);
+
+/* Grid columns */
+
+/* Set the number of columns and specify the width of the gutters. */
+$grid-columns: 12;
+$grid-gutter-width: 1rem;
+$grid-row-columns: 6;
+$gutters: spacing.$spacing;

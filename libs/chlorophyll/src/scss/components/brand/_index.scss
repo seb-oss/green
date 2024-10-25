@@ -1,0 +1,5 @@
+@use 'mixins';
+
+.brand {
+  @include mixins.add-brand;
+}

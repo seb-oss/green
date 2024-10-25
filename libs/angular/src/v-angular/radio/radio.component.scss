@@ -1,5 +1,5 @@
-@use '../../../../chlorophyll/scss/components/form/radio/mixins' as mixins;
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as common;
+@use '../../../../chlorophyll/src/scss/components/form/radio/mixins' as mixins;
+@use '../../../../chlorophyll/src/scss/components/form/common/mixins' as common;
 
 :host {
   .nggv-field--locked {

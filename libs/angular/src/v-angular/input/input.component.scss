@@ -1,5 +1,6 @@
-@use '../../../../chlorophyll/scss/components/form/input/mixins';
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
+@use '../../../../chlorophyll/src/scss/components/form/input/mixins';
+@use '../../../../chlorophyll/src/scss/components/form/common/mixins' as
+  form-group;
 
 :host {
   &.gds-form-item {

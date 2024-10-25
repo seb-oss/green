@@ -1,5 +1,5 @@
-@use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
-@use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
+@use '../../../../../chlorophyll/src/scss/components/modal/mixins' as mixins;
+@use '../../../../../chlorophyll/src/scss/components/backdrop' as backdrop;
 
 :host {
   @include mixins.dialog-modal-wrapper();

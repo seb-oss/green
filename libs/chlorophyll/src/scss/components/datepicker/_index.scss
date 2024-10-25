@@ -1,0 +1,17 @@
+@use 'mixins';
+
+@use '../../components/popover';
+@use '../../components/utility';
+@use '../../components/icon';
+
+.sg-date {
+  @include mixins.calendar;
+}
+
+.popover-datepicker {
+  --z-index: var(--sg-z-index-datepicker);
+}
+
+.sg-date-range {
+  @include mixins.calendar-range;
+}

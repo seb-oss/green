@@ -1,7 +1,7 @@
-@use '../../chlorophyll/scss/tokens/shame' as tokens;
-@use '../../chlorophyll/scss/common/spacing' as common;
-@use '../../chlorophyll/scss/common/breakpoints' as breakpoints;
-@use '../../chlorophyll/scss/components/list';
+@use '../../chlorophyll/src/scss/tokens/shame' as tokens;
+@use '../../chlorophyll/src/scss/common/spacing' as common;
+@use '../../chlorophyll/src/scss/common/breakpoints' as breakpoints;
+@use '../../chlorophyll/src/scss/components/list';
 $font-family: tokens.$font-family-sans-serif;
 $axis-color: #8c8c8c;
 

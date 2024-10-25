@@ -1,6 +1,7 @@
-@use '../../../../../chlorophyll/scss/common';
-@use '../../../../../chlorophyll/scss/components/list/mixins' as list;
-@use '../../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../../chlorophyll/src/scss/common';
+@use '../../../../../chlorophyll/src/scss/components/list/mixins' as list;
+@use '../../../../../chlorophyll/src/scss/components/dropdown/mixins' as
+  dropdown;
 
 :host {
   position: absolute;

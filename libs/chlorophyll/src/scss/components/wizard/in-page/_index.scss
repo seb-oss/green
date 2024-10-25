@@ -1,0 +1,5 @@
+@use 'mixins';
+
+.gds-in-page-wizard-step-card {
+  @include mixins.add-in-page-wizard;
+}

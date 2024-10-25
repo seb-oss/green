@@ -1,4 +1,4 @@
-@use '../../../../chlorophyll/scss/components/card/mixins' as mixins;
+@use '../../../../chlorophyll/src/scss/components/card/mixins' as mixins;
 
 :host {
   @include mixins.card();

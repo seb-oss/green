@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+
+input[type='range'] {
+  @include add-range-input-styles;
+}
+
+.gds-slider {
+  &-label-container {
+    @include add-slider-label-container-styles;
+  }
+
+  &-error-info {
+    @include add-slider-error-styles;
+  }
+
+  &-min-max {
+    @include add-min-max-styles;
+  }
+}

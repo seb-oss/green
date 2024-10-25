@@ -10,6 +10,11 @@
       "implementation": "./src/executors/build-core-lib/executor",
       "schema": "./src/executors/build-core-lib/schema.json",
       "description": "build-core-lib executor"
+    },
+    "build-chlorophyll": {
+      "implementation": "./src/executors/build-chlorophyll/executor",
+      "schema": "./src/executors/build-chlorophyll/schema.json",
+      "description": "builds the chlorophyll css package"
     }
   }
 }

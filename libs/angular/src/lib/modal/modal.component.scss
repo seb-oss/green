@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use '../../../../chlorophyll/scss/tokens' as *;
+@use '../../../../chlorophyll/src/scss/tokens' as *;
 
 :host.open {
   height: 100vh;

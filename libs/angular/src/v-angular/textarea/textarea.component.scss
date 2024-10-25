@@ -1,5 +1,7 @@
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
-@use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
+@use '../../../../chlorophyll/src/scss/components/form/common/mixins' as
+  form-group;
+@use '../../../../chlorophyll/src/scss/components/form/textarea/mixins' as
+  mixins;
 
 :host {
   @include mixins.add-textarea();

@@ -1,7 +1,7 @@
-@use '../../../../chlorophyll/scss/components/button/mixins' as button;
-@use '../../../../chlorophyll/scss/components/icon';
-@use '../../../../chlorophyll/scss/tokens/shame' as tokens;
-@use '../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/src/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/src/scss/components/icon';
+@use '../../../../chlorophyll/src/scss/tokens/shame' as tokens;
+@use '../../../../chlorophyll/src/scss/common';
 
 $button-danger-border: tokens.get(tokens.$red, 0);
 

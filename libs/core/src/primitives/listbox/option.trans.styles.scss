@@ -1,5 +1,5 @@
-@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
-@use '../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/src/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/src/scss/common';
 
 @layer base, reset, transitional-styles;
 

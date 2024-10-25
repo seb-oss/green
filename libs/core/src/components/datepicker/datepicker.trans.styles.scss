@@ -1,7 +1,7 @@
-@use '../../../../chlorophyll/scss/common';
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+@use '../../../../chlorophyll/src/scss/common';
+@use '../../../../chlorophyll/src/scss/components/form/validation/mixins' as
   validation;
-@use '../../../../chlorophyll/scss/tokens' as tokens;
+@use '../../../../chlorophyll/src/scss/tokens' as tokens;
 
 @layer base, reset, transitional-styles;
 

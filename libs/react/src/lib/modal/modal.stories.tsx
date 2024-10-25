@@ -1,10 +1,10 @@
 import React from 'react'
 import { useArgs } from '@storybook/preview-api'
-import { Meta, Story } from '@storybook/react/types-6-0'
+import type { Meta, StoryFn } from '@storybook/react'
 
 import Modal, { ModalProps } from './modal'
 
-const Template: Story<ModalProps> = (props) => {
+const Template: StoryFn<ModalProps> = (props) => {
   const [{ isOpen }, updateArgs] = useArgs()
   const handleClose = () => {
     updateArgs({ isOpen: false })
@@ -34,7 +34,7 @@ const Template: Story<ModalProps> = (props) => {
   )
 }
 
-export const ModalDefault: Story<ModalProps> = Template.bind({})
+export const ModalDefault: StoryFn<ModalProps> = Template.bind({})
 ModalDefault.args = {
   type: 'default',
   header: 'Default Modal',
@@ -43,7 +43,7 @@ ModalDefault.args = {
   dismiss: 'Nope',
 }
 
-export const SlideOutSmall: Story<ModalProps> = Template.bind({})
+export const SlideOutSmall: StoryFn<ModalProps> = Template.bind({})
 SlideOutSmall.args = {
   type: 'slideout',
   header: 'SlideOut Modal',
@@ -53,7 +53,7 @@ SlideOutSmall.args = {
   size: 'sm',
 }
 
-export const SlideOutMedium: Story<ModalProps> = Template.bind({})
+export const SlideOutMedium: StoryFn<ModalProps> = Template.bind({})
 SlideOutMedium.args = {
   type: 'slideout',
   header: 'SlideOut Modal',
@@ -63,7 +63,7 @@ SlideOutMedium.args = {
   size: 'md',
 }
 
-export const SlideOutLarge: Story<ModalProps> = Template.bind({})
+export const SlideOutLarge: StoryFn<ModalProps> = Template.bind({})
 SlideOutLarge.args = {
   type: 'slideout',
   header: 'SlideOut Modal',
@@ -73,7 +73,7 @@ SlideOutLarge.args = {
   size: 'lg',
 }
 
-export const TakeOver: Story<ModalProps> = Template.bind({})
+export const TakeOver: StoryFn<ModalProps> = Template.bind({})
 TakeOver.args = {
   type: 'takeover',
   header: 'TakeOver Modal',
