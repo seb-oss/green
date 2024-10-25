@@ -686,6 +686,53 @@ export class GdsContainer extends GdsElement {
   })
   'font-weight'?: string
 
+  /**
+   * Controls the grid-column property.
+   * Supports all valid CSS grid-column values.
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * ```html
+   * <gds-container grid-column="2 / -1"></gds-container>
+   * ```
+   *
+   * The above example will apply the grid-column style of `2 / -1`.
+   * The column can be applied using shorthand like grid-column="1 / 2"
+   *
+   * The column also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-container grid-column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-container>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  'grid-column'?: string
+
+  /**
+   * Controls the grid-row property.
+   * Supports all valid CSS grid-row values.
+   *
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * ```html
+   * <gds-container grid-row="2 / -1"></gds-container>
+   * ```
+   *
+   * The above example will apply the grid-row style of `2 / -1`.
+   * The row can be applied using shorthand like grid-row="1 / 2"
+   *
+   * The row also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-container grid-row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-container>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  'grid-row'?: string
+
   render() {
     return html`<slot></slot>`
   }
