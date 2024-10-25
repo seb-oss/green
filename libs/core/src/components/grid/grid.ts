@@ -64,7 +64,7 @@ export class GdsGrid extends GdsContainer {
   'auto-columns'?: string
 
   /**
-   * Controls the grid-column property of the flex.
+   * Controls the grid-column property.
    * Supports all valid CSS grid-column values.
    * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
    *
@@ -87,7 +87,7 @@ export class GdsGrid extends GdsContainer {
   'grid-column'?: string
 
   /**
-   * Controls the grid-row property of the flex.
+   * Controls the grid-row property.
    * Supports all valid CSS grid-row values.
    *
    * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
