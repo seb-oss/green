@@ -10,7 +10,7 @@ export const Template = ({ ...props }) => <Badge {...props} />
 
 Simple Badge Component
 
-<Story of={BadgeStories.Default} />
+<Canvas of={BadgeStories.Default} />
 
 #
 
@@ -18,21 +18,13 @@ Simple Badge Component
 
 Badges are available in a number of different variants. Please note that the colors used in the examples below are not final yet.
 
-<Canvas>
-  <div className="badge-container">
-    <Badge>Badge</Badge>
-    <Badge badgeType="info">Information</Badge>
-    <Badge badgeType="success">Success</Badge>
-    <Badge badgeType="warning">Warning</Badge>
-    <Badge badgeType="danger">Danger</Badge>
-    <Badge badgeType="light">Light</Badge>
-    <Badge badgeType="dark">Dark</Badge>
-
-    <Badge customColor="#062BCC" customBackgroundColor="#E6F5FF">
-      Custom
-    </Badge>
-  </div>
-</Canvas>
+<Canvas of={BadgeStories.Default} />
+<Canvas of={BadgeStories.Info} />
+<Canvas of={BadgeStories.Success} />
+<Canvas of={BadgeStories.Warning} />
+<Canvas of={BadgeStories.Danger} />
+<Canvas of={BadgeStories.Light} />
+<Canvas of={BadgeStories.Dark} />
 
 # Props
 
