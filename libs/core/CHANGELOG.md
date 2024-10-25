@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.46.0
+
+### Minor Changes
+
+- 5147399: **Card:** Card now has default styling and a `variant` prop to simplyfy setting card colors
+
+### Patch Changes
+
+- 5147399: **Declarative Layour:** Include level in cache key
+- 400676b: **Button:** Forwarded attributes will now update internally when changed
+- 400676b: **Form Controls:** The form control header/footer pattern is now captured in reusable primitives.
+- 6ebe461: **Form Controls:** Fix extended supporting text animation
+
 ## 1.45.3
 
 ### Patch Changes
