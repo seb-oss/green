@@ -1,0 +1,27 @@
+@mixin add-color-tokens() {
+  --gds-ref-color-white: #ffffff;
+  --gds-ref-color-black: #000000;
+
+  --gds-ref-pallet-base000: hsl(0 0% 100%);
+  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
+  --gds-ref-pallet-base200: hsl(0, 0%, 91%);
+  --gds-ref-pallet-base300: hsl(0, 0%, 87%);
+  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
+  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
+  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
+  --gds-ref-pallet-base700: hsl(0, 0%, 29%);
+  --gds-ref-pallet-base800: hsl(0, 0%, 20%);
+  --gds-ref-pallet-base900: hsl(0, 0%, 10%);
+  --gds-ref-pallet-base1000: hsl(0 0% 0%);
+
+  --gds-sys-color-blue: #41b0ee;
+  --gds-sys-color-blue-dark-1: #0092e1;
+  --gds-sys-color-blue-dark-2: #007ac7;
+
+  --gds-sys-color-surface: var(--gds-ref-pallet-base000);
+  --gds-sys-color-base: var(--gds-ref-pallet-base800);
+  --gds-sys-color-font: var(--gds-ref-pallet-base800);
+  --gds-sys-color-base-container: var(--gds-ref-pallet-base500);
+
+  --gds-sys-color-focus-outline: var(--gds-ref-pallet-base1000);
+}

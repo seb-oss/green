@@ -1,0 +1,23 @@
+@use '../common/functions/bootstrap-functions' as functions;
+@use 'sass:map';
+$enable-negative-margins: true;
+$spacing: (
+  0: 0,
+  1: 0.125rem,
+  2: 0.25rem,
+  3: 0.5rem,
+  4: 0.75rem,
+  5: 1rem,
+  6: 1.5rem,
+  7: 2rem,
+  8: 4rem,
+  9: 6rem,
+  10: 8rem,
+);
+
+$container-padding-x: map.get($spacing, 4);
+$negative-spacing: if(
+  $enable-negative-margins,
+  functions.negativify-map($spacing),
+  null
+) !default;
