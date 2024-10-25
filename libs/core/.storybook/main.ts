@@ -1,5 +1,5 @@
 /* eslint-disable @nx/enforce-module-boundaries */
-import type { StorybookConfig } from '@storybook/web-components-webpack5'
+import type { StorybookConfig } from '@storybook/web-components-vite'
 
 const config: StorybookConfig = {
   //...defaultConfig,
