@@ -1,5 +1,11 @@
 # Changelog
 
+## 4.6.6
+
+### Patch Changes
+
+- d00298d: Fixed missing countdown in v-angular input and textarea components. Fixed v-angular dropdown styling issues.
+
 ## 4.6.5
 
 ### Patch Changes
