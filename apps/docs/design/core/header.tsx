@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 'use client'
 
 import React, { useContext, useEffect, useState } from 'react'
@@ -8,11 +9,11 @@ import { Context } from '$/provider/provider'
 // import GdsContainer from '@sebgroup/green-react/src/core/container'
 // import GdsFlex from '@sebgroup/green-react/src/core/flex'
 // import GdsMenuButton from '@sebgroup/green-react/src/core/menu-button'
-import { IconBarsThree } from '@sebgroup/green-react/src/lib/icon/icons/IconBarsThree'
-import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
-import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb'
-import { IconCrossLarge } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge'
-import { IconMagnifyingGlass } from '@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass'
+// import { IconBarsThree } from '@sebgroup/green-react/src/lib/icon/icons/IconBarsThree'
+// import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
+// import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb'
+// import { IconCrossLarge } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge'
+// import { IconMagnifyingGlass } from '@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass'
 
 const GdsContainer = dynamic(
   () => import('@sebgroup/green-react/src/core/container'),
@@ -27,6 +28,52 @@ const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
 
 const GdsMenuButton = dynamic(
   () => import('@sebgroup/green-react/src/core/menu-button'),
+  {
+    ssr: false,
+  },
+)
+
+const IconBarsThree = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconBarsThree').then(
+      (mod) => mod.IconBarsThree,
+    ),
+  {
+    ssr: false,
+  },
+)
+const IconBrandGithub = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub').then(
+      (mod) => mod.IconBrandGithub,
+    ),
+  {
+    ssr: false,
+  },
+)
+const IconBrandSeb = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb').then(
+      (mod) => mod.IconBrandSeb,
+    ),
+  {
+    ssr: false,
+  },
+)
+const IconCrossLarge = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge').then(
+      (mod) => mod.IconCrossLarge,
+    ),
+  {
+    ssr: false,
+  },
+)
+const IconMagnifyingGlass = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass').then(
+      (mod) => mod.IconMagnifyingGlass,
+    ),
   {
     ssr: false,
   },

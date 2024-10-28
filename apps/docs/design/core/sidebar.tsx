@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 'use client'
 
 import React, { useRef, useState } from 'react'
@@ -11,10 +12,9 @@ import Dev, { isDev } from '$/env/env'
 // import GdsButton from '@sebgroup/green-react/src/core/button'
 // import GdsFlex from '@sebgroup/green-react/src/core/flex'
 // import GdsText from '@sebgroup/green-react/src/core/text'
-import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
-import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
-import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
-
+// import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
+// import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
+// import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
 // import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
 
 const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
@@ -25,6 +25,35 @@ const IconEyeSlash = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash').then(
       (mod) => mod.IconEyeSlash,
+    ),
+  {
+    ssr: false,
+  },
+)
+const IconCainLink = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconCainLink').then(
+      (mod) => mod.IconCainLink,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+const IconChevronBottom = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom').then(
+      (mod) => mod.IconChevronBottom,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+const IconChevronTop = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconChevronTop').then(
+      (mod) => mod.IconChevronTop,
     ),
   {
     ssr: false,

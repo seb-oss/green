@@ -1,13 +1,12 @@
+// eslint-disable-next-line
 'use client'
 
 import * as React from 'react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
+import dynamic from 'next/dynamic'
 import Spacer from '@/spacer/spacer'
-import { GdsFlex } from '@sebgroup/green-react/core/flex/flex'
-import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
-import { GdsDivider, GdsText } from '@sebgroup/green-react/core/text/text'
 
-// import Col from './col/col'
+// Local components
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma/figma'
@@ -19,6 +18,27 @@ import Pattern from './pattern/pattern'
 import Row from './row/row'
 import Section from './section'
 import Story from './story/story'
+
+// import { GdsFlex } from '@sebgroup/green-react/core/flex/flex'
+// import { GdsDivider } from '@sebgroup/green-react/core/GdsDivider/GdsDivider'
+// import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
+// import { GdsText } from '@sebgroup/green-react/core/text/text'
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
+const GdsDivider = dynamic(
+  () => import('@sebgroup/green-react/src/core/divider'),
+  {
+    ssr: false,
+  },
+)
+const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'), {
+  ssr: false,
+})
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+  ssr: false,
+})
 
 const components = {
   Figma,
