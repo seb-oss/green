@@ -1,15 +1,20 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import Script from 'next/script'
-import Main from '&/main/main'
 import Consent from '@/consent/consent'
+import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
-import Header from 'core/header'
-import { GdsFlex } from '@sebgroup/green-react/core/flex'
+// import { GdsFlex } from '@sebgroup/green-react/core/flex'
 import { Provider } from '$/provider/provider'
+import Footer from 'core/footer'
+import Header from 'core/header'
 
 import '#/global.css'
-import Footer from 'core/footer'
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
 
 export default function RootLayout({
   children,

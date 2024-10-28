@@ -1,6 +1,5 @@
 'use client'
 
-/* eslint-disable */
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
@@ -9,9 +8,21 @@ import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
 import { format, parseISO } from 'date-fns'
 
-import GdsBadge from '@sebgroup/green-react/src/core/badge'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsText from '@sebgroup/green-react/src/core/text'
+// import GdsBadge from '@sebgroup/green-react/src/core/badge'
+// import GdsFlex from '@sebgroup/green-react/src/core/flex'
+// import GdsText from '@sebgroup/green-react/src/core/text'
+
+const GdsBadge = dynamic(() => import('@sebgroup/green-react/src/core/badge'), {
+  ssr: false,
+})
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
+
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/badge'), {
+  ssr: false,
+})
 
 export default function ComponentLayout({
   children,

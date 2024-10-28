@@ -1,7 +1,6 @@
 'use client'
 
-import React, { createContext, useState, useEffect } from 'react'
-
+import React, { createContext, useEffect, useState } from 'react'
 import { ThemeProvider as NextThemesProvider } from 'next-themes'
 import { type ThemeProviderProps } from 'next-themes/dist/types'
 import { Toaster } from 'sonner'
@@ -15,7 +14,9 @@ interface ContextProps {
 export const Context = createContext<ContextProps>({
   loading: true,
   isNavOpen: false,
-  toggleNav: () => {},
+  toggleNav: () => {
+    console.warn('toggleNav function is not implemented')
+  },
 })
 
 export function Provider({ children, ...props }: ThemeProviderProps) {
