@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.46.1
+
+### Patch Changes
+
+- a269b32: **Text:** Pass font size to tag instead of the host
+- a269b32: Minor updates on Mask, Divider, Text and Spacer
+
 ## 1.46.0
 
 ### Minor Changes
