@@ -30,12 +30,7 @@ const GdsDivider = dynamic(
     ssr: false,
   },
 )
-const GdsGrid = dynamic(
-  () => import('@sebgroup/green-react/core/grid').then((mod) => mod.GdsGrid),
-  {
-    ssr: false,
-  },
-)
+
 const GdsText = dynamic(
   () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
   {
