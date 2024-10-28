@@ -35,7 +35,7 @@
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "npx stylelint libs/chlorophyll/**/*.scss"
+        "command": "npx stylelint libs/chlorophyll/src/**/*.scss"
       }
     },
     "test": {

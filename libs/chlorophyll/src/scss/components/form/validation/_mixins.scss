@@ -42,7 +42,7 @@ $_border-width: var(--sg-border-width);
   @include common.font-scale(1);
   display: inline-block;
   line-height: 1.25rem;
-  color: tokens.$text-primary-color; //map-get(tokens.$grey, 3);
+  color: tokens.$text-primary-color;
   width: 100%;
 }
 
