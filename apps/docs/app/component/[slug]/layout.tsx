@@ -97,7 +97,9 @@ export default function ComponentLayout({
     dynamic(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
-          return () => <div>Example</div>
+          const ExampleComponent = () => <div>Example</div>
+          ExampleComponent.displayName = 'ExampleComponent'
+          return ExampleComponent
         }),
       {
         ssr: false,
