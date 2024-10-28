@@ -6,6 +6,7 @@ import { allComponents } from 'content'
 import Taber from '@/taber'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
+import Pattern from 'core/pattern/pattern'
 import { format, parseISO } from 'date-fns'
 
 const GdsBadge = dynamic(
@@ -174,12 +175,14 @@ export default function ComponentLayout({
               border="4xs/primary"
               padding="2xl"
               border-radius="m"
-              background="secondary"
               gap="xl"
               align-items="center"
               justify-content="center"
               height="420px"
+              position="relative"
+              overflow="hidden"
             >
+              <Pattern />
               <Preview />
             </GdsFlex>
           </GdsFlex>
