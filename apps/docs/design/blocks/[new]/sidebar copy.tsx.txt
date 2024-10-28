@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import GdsContainer from '@sebgroup/green-react/src/core/container'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsButton from '@sebgroup/green-react/src/core/button'
+import GdsContainer from '@sebgroup/green-react/core/container'
+import GdsFlex from '@sebgroup/green-react/core/flex'
+import GdsButton from '@sebgroup/green-react/core/button'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
 import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'

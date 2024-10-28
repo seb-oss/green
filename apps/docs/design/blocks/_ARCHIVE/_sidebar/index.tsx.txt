@@ -6,8 +6,8 @@ import { allComponents } from 'content'
 
 import './style.css'
 
-const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'))
+const GdsCard = dynamic(() => import('@sebgroup/green-react/core/card'))
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'))
 
 export default function Sidebar({
   isNavOpen,

@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React from 'react'
@@ -7,7 +6,7 @@ import dynamic from 'next/dynamic'
 // import { GdsTextarea } from '@sebgroup/green-react/core/textarea'
 
 const GdsTextarea = dynamic(
-  () => import('@sebgroup/green-react/src/core/textarea'),
+  () => import('@sebgroup/green-react/core/textarea'),
   {
     ssr: false,
   },

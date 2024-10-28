@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React from 'react'
@@ -7,12 +6,9 @@ import dynamic from 'next/dynamic'
 // import { GdsButton } from '@sebgroup/green-react/core/button'
 // import { IconCreditCard } from '@sebgroup/green-react/src/lib/icon/icons/IconCreditCard'
 
-const GdsButton = dynamic(
-  () => import('@sebgroup/green-react/src/core/button'),
-  {
-    ssr: false,
-  },
-)
+const GdsButton = dynamic(() => import('@sebgroup/green-react/core/button'), {
+  ssr: false,
+})
 
 const IconCreditCard = dynamic(
   () =>

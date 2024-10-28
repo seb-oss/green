@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import dynamic from 'next/dynamic'
@@ -13,7 +12,7 @@ import Header from 'core/header'
 
 import '#/global.css'
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
 

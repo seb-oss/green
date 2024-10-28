@@ -2,15 +2,15 @@
 
 import dynamic from 'next/dynamic'
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false
 })
 
-const GdsContainer = dynamic(() => import('@sebgroup/green-react/src/core/container'), {
+const GdsContainer = dynamic(() => import('@sebgroup/green-react/core/container'), {
   ssr: false
 })
 
-const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
   ssr: false
 })
 

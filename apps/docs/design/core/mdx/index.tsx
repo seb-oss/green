@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import * as React from 'react'
@@ -24,19 +23,16 @@ import Story from './story/story'
 // import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
 // import { GdsText } from '@sebgroup/green-react/core/text/text'
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
-const GdsDivider = dynamic(
-  () => import('@sebgroup/green-react/src/core/divider'),
-  {
-    ssr: false,
-  },
-)
-const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'), {
+const GdsDivider = dynamic(() => import('@sebgroup/green-react/core/divider'), {
   ssr: false,
 })
-const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+const GdsGrid = dynamic(() => import('@sebgroup/green-react/core/grid'), {
+  ssr: false,
+})
+const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
   ssr: false,
 })
 

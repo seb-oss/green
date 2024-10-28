@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React, { useRef, useState } from 'react'
@@ -8,16 +7,16 @@ import { usePathname } from 'next/navigation'
 import { allComponents, Component } from 'content'
 import Dev, { isDev } from '$/env/env'
 
-// import GdsBadge from '@sebgroup/green-react/src/core/badge'
-// import GdsButton from '@sebgroup/green-react/src/core/button'
-// import GdsFlex from '@sebgroup/green-react/src/core/flex'
-// import GdsText from '@sebgroup/green-react/src/core/text'
+// import GdsBadge from '@sebgroup/green-react/core/badge'
+// import GdsButton from '@sebgroup/green-react/core/button'
+// import GdsFlex from '@sebgroup/green-react/core/flex'
+// import GdsText from '@sebgroup/green-react/core/text'
 // import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
 // import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 // import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
 // import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
 
@@ -60,18 +59,15 @@ const IconChevronTop = dynamic(
   },
 )
 
-const GdsBadge = dynamic(() => import('@sebgroup/green-react/src/core/badge'), {
+const GdsBadge = dynamic(() => import('@sebgroup/green-react/core/badge'), {
   ssr: false,
 })
 
-const GdsButton = dynamic(
-  () => import('@sebgroup/green-react/src/core/button'),
-  {
-    ssr: false,
-  },
-)
+const GdsButton = dynamic(() => import('@sebgroup/green-react/core/button'), {
+  ssr: false,
+})
 
-const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
   ssr: false,
 })
 

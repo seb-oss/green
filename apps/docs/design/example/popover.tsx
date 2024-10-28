@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React from 'react'
@@ -10,25 +9,19 @@ import dynamic from 'next/dynamic'
 // import { GdsText } from '@sebgroup/green-react/core/text'
 // import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
 
-const GdsButton = dynamic(
-  () => import('@sebgroup/green-react/src/core/button'),
-  {
-    ssr: false,
-  },
-)
+const GdsButton = dynamic(() => import('@sebgroup/green-react/core/button'), {
+  ssr: false,
+})
 
-const GdsPopover = dynamic(
-  () => import('@sebgroup/green-react/src/core/popover'),
-  {
-    ssr: false,
-  },
-)
+const GdsPopover = dynamic(() => import('@sebgroup/green-react/core/popover'), {
+  ssr: false,
+})
 
-const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
   ssr: false,
 })
 

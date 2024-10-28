@@ -1,25 +1,21 @@
-// eslint-disable-next-line
 'use client'
 
 /* eslint-disable */
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-// import GdsButton from '@sebgroup/green-react/src/core/button'
-// import GdsFlex from '@sebgroup/green-react/src/core/flex'
-// import GdsText from '@sebgroup/green-react/src/core/text'
+// import GdsButton from '@sebgroup/green-react/core/button'
+// import GdsFlex from '@sebgroup/green-react/core/flex'
+// import GdsText from '@sebgroup/green-react/core/text'
 
-const GdsButton = dynamic(
-  () => import('@sebgroup/green-react/src/core/button'),
-  {
-    ssr: false,
-  },
-)
-
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsButton = dynamic(() => import('@sebgroup/green-react/core/button'), {
   ssr: false,
 })
-const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
+  ssr: false,
+})
+const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
   ssr: false,
 })
 

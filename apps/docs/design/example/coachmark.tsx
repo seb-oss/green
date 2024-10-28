@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React from 'react'
@@ -9,15 +8,15 @@ import dynamic from 'next/dynamic'
 // import { GdsText } from '@sebgroup/green-react/core/text'
 // import { IconPin } from '@sebgroup/green-react/src/lib/icon/icons/IconPin'
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
 
-const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
   ssr: false,
 })
 const GdsCoachmark = dynamic(
-  () => import('@sebgroup/green-react/src/core/coachmark'),
+  () => import('@sebgroup/green-react/core/coachmark'),
   {
     ssr: false,
   },

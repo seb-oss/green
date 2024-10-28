@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import Components from 'core/components'
 import Hero from 'core/hero'
 

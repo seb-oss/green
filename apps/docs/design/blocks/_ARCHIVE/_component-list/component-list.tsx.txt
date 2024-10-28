@@ -6,7 +6,7 @@ import ComponentCard from '@/_ARCHIVE/_component-card/component-card'
 
 import './component-list.css'
 
-const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'), {
+const GdsGrid = dynamic(() => import('@sebgroup/green-react/core/grid'), {
   ssr: false,
 })
 

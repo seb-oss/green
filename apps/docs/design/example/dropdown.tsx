@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React from 'react'
@@ -8,18 +7,15 @@ import dynamic from 'next/dynamic'
 // import { GdsOption } from '@sebgroup/green-react/core/option'
 
 const GdsDropdown = dynamic(
-  () => import('@sebgroup/green-react/src/core/dropdown'),
+  () => import('@sebgroup/green-react/core/dropdown'),
   {
     ssr: false,
   },
 )
 
-const GdsOption = dynamic(
-  () => import('@sebgroup/green-react/src/core/option'),
-  {
-    ssr: false,
-  },
-)
+const GdsOption = dynamic(() => import('@sebgroup/green-react/core/option'), {
+  ssr: false,
+})
 
 const Dropdown = () => (
   <>

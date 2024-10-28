@@ -4,11 +4,11 @@ import dynamic from 'next/dynamic'
 import { Component } from 'content'
 import Pattern from '@/pattern/pattern'
 
-const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'), {
+const GdsCard = dynamic(() => import('@sebgroup/green-react/core/card'), {
   ssr: false,
 })
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
 

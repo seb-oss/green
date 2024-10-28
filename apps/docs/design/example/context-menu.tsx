@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React from 'react'
@@ -8,14 +7,14 @@ import dynamic from 'next/dynamic'
 // import { GdsMenuItem } from '@sebgroup/green-react/core/menu-item'
 
 const GdsContextMenu = dynamic(
-  () => import('@sebgroup/green-react/src/core/context-menu'),
+  () => import('@sebgroup/green-react/core/context-menu'),
   {
     ssr: false,
   },
 )
 
 const GdsMenuItem = dynamic(
-  () => import('@sebgroup/green-react/src/core/menu-item'),
+  () => import('@sebgroup/green-react/core/menu-item'),
   {
     ssr: false,
   },

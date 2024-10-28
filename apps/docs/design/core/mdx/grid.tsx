@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 'use client'
 
 import React, { ReactNode } from 'react'
@@ -6,7 +5,7 @@ import dynamic from 'next/dynamic'
 
 // import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
 
-const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'), {
+const GdsGrid = dynamic(() => import('@sebgroup/green-react/core/grid'), {
   ssr: false,
 })
 

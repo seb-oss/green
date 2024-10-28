@@ -7,18 +7,18 @@ import { ThemeProviderContext } from '$/theme/provider'
 import dynamic from 'next/dynamic'
 
 const GdsContainer = dynamic(
-  () => import('@sebgroup/green-react/src/core/container'),
+  () => import('@sebgroup/green-react/core/container'),
   {
     ssr: false,
   },
 )
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
   ssr: false,
 })
 
 const GdsButton = dynamic(
-  () => import('@sebgroup/green-react/src/core/button'),
+  () => import('@sebgroup/green-react/core/button'),
   {
     ssr: false,
   },
