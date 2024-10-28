@@ -1,3 +1,5 @@
+import { css } from 'lit'
+
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import {
@@ -7,11 +9,10 @@ import {
 import { GdsContainer } from '../container'
 
 /**
- * The `gds-card` is a custom element that provides a flexible card system.
- * It can be used to create a card with different styles and configurations.
- * The card can be customized with different properties like shadow, border, radius, and background.
- * It is designed to be used in different scenarios like displaying content, images, or other elements.
- * It can be used in combination with other elements like `gds-grid`, `gds-container`, `gds-img`, `gds-text` etc.
+ *  A container for content representing a single entity. e.g. a contact, article, or task.
+ *
+ * `gds-card` inherits all properties from `gds-container`, but comes with some predefined defaults
+ * and a shortcut property for specifiying different card variants.
  *
  * @element gds-card
  * @status beta
@@ -19,23 +20,23 @@ import { GdsContainer } from '../container'
  */
 @gdsCustomElement('gds-card')
 export class GdsCard extends GdsContainer {
-  static styles = [tokens]
+  static styles = [
+    tokens,
+    css`
+      :host {
+        border-color: var(--_border-color);
+        background-color: var(--_background-color);
+        color: var(--_color);
+      }
+    `,
+  ]
 
   /**
-   * Controls the box-shadow property of the card.
+   * Controls the box-shadow property.
    *
-   * Shadow styles are as specified on the design system that range from xl-2xl, can be used like this:
+   * These are the available values you can use to define shadow size
    *
-   * ```html
-   * <gds-card shadow="s{xs} m{xs} l{s}"></gds-card>
-   * ```
-   * The above example will apply the shadow style of xs for small devices, xs for medium devices, and s for large devices.
-   *
-   * The shadow styles are predfied on the tokens and will be applied automativally based on the token value.
-   *
-   * These are the available values you can use to define shadow
-   *
-   * `XS`, `S`, `M`, `L`, `XL`
+   * `xs`, `s`, `m`, `l`, `xl`
    *
    */
   @styleExpressionProperty({
@@ -43,6 +44,35 @@ export class GdsCard extends GdsContainer {
     valueTemplate: (v) => `var(--gds-shadow-${v})`,
   })
   shadow?: string
+
+  /**
+   * Shortcut for setting the border, background and text color of the card to the specified color variant, such as 'primary', 'secondary', 'tertiary', etc.
+   *
+   * You can find all available variants in the L2 section of the [Color System documentation page](./?path=/docs/style-colors--docs)
+   *
+   * Supports Style Expression syntax for setting the value responsively.
+   *
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    styleTemplate: function (_prop, v) {
+      return `
+      --_border-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
+      --_background-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
+      --_color: var(--gds-color-l${(this as GdsCard).level}-content-${v});
+      `
+    },
+  })
+  variant = 'primary' /// This sets variables that are used in the default styles. Any other SEPs will override.
+
+  constructor() {
+    super()
+
+    // Default values for cards
+    this.padding = 's; m{l}'
+    this['border-radius'] = 'xs; m{s}'
+    this['border-width'] = '4xs'
+  }
 
   render() {
     return html`<slot></slot>`

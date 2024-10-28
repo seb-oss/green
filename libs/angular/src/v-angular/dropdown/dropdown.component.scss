@@ -44,6 +44,11 @@
   }
 
   .dropdown {
+    width: 100%;
     position: relative;
+
+    nggv-dropdown-list {
+      width: 100%;
+    }
   }
 }

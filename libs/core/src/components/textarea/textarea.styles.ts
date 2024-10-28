@@ -29,9 +29,17 @@ export const styles = css`
     }
 
     :host {
+      display: flex;
+      flex-direction: column;
       width: 100%;
       contain: layout;
       isolation: isolate;
+      gap: var(--gds-space-xs);
+    }
+
+    :host([disabled]) {
+      color: var(--gds-color-l3-content-disabled);
+      pointer-events: none;
     }
 
     :host([size='small']) textarea {
@@ -106,17 +114,6 @@ export const styles = css`
       display: flex;
     }
 
-    .extended-supporting-text {
-      opacity: 1;
-      translate: 0;
-      transition: var(--_transition);
-
-      @starting-style {
-        opacity: 0;
-        translate: 0 2px;
-      }
-    }
-
     .resize-handle {
       &:hover,
       &:active {
@@ -142,6 +139,5 @@ export const styles = css`
   }
 
   @layer simplified {
-    // ...
   }
 `

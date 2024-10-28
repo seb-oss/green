@@ -1,60 +1,51 @@
-const Template = ({ validation, enabled, text1, text2 }) => {
-  const attrValidation = validation ? `class="${validation}" ` : ``
-  const attrEnabled = enabled ? `` : `disabled`
-  return `
-  <form>
-    <div class="form-group">
-      <fieldset>
-        <legend>Radio group</legend>
-        <div>
-          <label class="form-control">
-            <input type="radio" name="default" ${attrValidation} ${attrEnabled} />
-            <span>${text1}</span><i></i>
-          </label>
-          <label class="form-control">
-            <input type="radio" name="default" checked ${attrValidation} ${attrEnabled} />
-            <span>${text2}</span><i></i>
-          </label>
-        </div>
-      </fieldset>
-    </div>
-  </form>`
-}
-
 export default {
-  title: 'Components/Form/Elements/Radio button',
-
+  title: 'Components/Radio button',
+  tags: ['autodocs'],
   parameters: {
     componentIds: ['component-radiobutton'],
   },
-
   argTypes: {
     validation: {
       control: 'select',
       options: ['', 'is-valid', 'is-invalid'],
     },
-
-    enabled: {
+    disabled: {
       control: 'boolean',
     },
-
-    text1: {
+    legend: {
       control: 'text',
     },
-
-    text2: {
+    firstLabel: {
+      control: 'text',
+    },
+    secondLabel: {
       control: 'text',
     },
   },
 }
 
 export const Radiobutton = {
-  render: Template.bind({}),
-  name: 'Radiobutton',
-
+  render: (args) => `
+  <form>
+    <div class="form-group">
+      <fieldset>
+        <legend>${args.legend}</legend>
+        <div>
+          <label class="form-control">
+            <input type="radio" name="default" class="${args.validation}" ${args.disabled} />
+            <span>${args.firstLabel}</span><i></i>
+          </label>
+          <label class="form-control">
+            <input type="radio" name="default" checked class="${args.validation}" ${args.disabled} />
+            <span>${args.secondLabel}</span><i></i>
+          </label>
+        </div>
+      </fieldset>
+    </div>
+  </form>`,
   args: {
-    text1: 'Radiobutton 1',
-    text2: 'Radiobutton 2',
+    firstLabel: 'First label',
+    secondLabel: 'Second label',
     enabled: true,
   },
 }
