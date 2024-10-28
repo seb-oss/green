@@ -8,6 +8,7 @@ import { literal, html as staticHtml } from 'lit/static-html.js'
 import { html as customElementHtml, gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
+import { observeLightDOM } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { GdsFormControlElement } from '../form/form-control'
@@ -201,5 +202,15 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         this.form.reset()
       }
     }
+  }
+
+  @observeLightDOM({
+    attributes: true,
+    childList: false,
+    subtree: false,
+    characterData: false,
+  })
+  private _attributeChanged() {
+    this.requestUpdate()
   }
 }
