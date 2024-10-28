@@ -289,30 +289,24 @@ export const CardBorder: Story = {
   name: 'Border Style',
   render: (args) =>
     html` <gds-grid columns="5" gap="l">
-      <gds-card shadow="s" border-radius="0 0 m m" border="4xs 0 0 0">
-        <gds-flex padding="2xl" align-items="center" justify-content="center">
-          Top
-        </gds-flex>
+      <gds-card variant="primary" border-radius="0 0 m m" border="4xs 0 0 0">
+        <gds-flex align-items="center" justify-content="center"> Top </gds-flex>
       </gds-card>
-      <gds-card shadow="s" border-radius="m 0 0 m" border="0 4xs 0 0">
-        <gds-flex padding="2xl" align-items="center" justify-content="center"
-          >Right</gds-flex
-        >
+      <gds-card variant="primary" border-radius="m 0 0 m" border="0 4xs 0 0">
+        <gds-flex align-items="center" justify-content="center">Right</gds-flex>
       </gds-card>
-      <gds-card shadow="s" border-radius="m m 0 0" border="0 0 4xs 0">
-        <gds-flex padding="2xl" align-items="center" justify-content="center">
+      <gds-card variant="primary" border-radius="m m 0 0" border="0 0 4xs 0">
+        <gds-flex align-items="center" justify-content="center">
           Bottom
         </gds-flex>
       </gds-card>
-      <gds-card shadow="s" border-radius="0 m m 0" border="0 0 0 4xs">
-        <gds-flex padding="2xl" align-items="center" justify-content="center">
+      <gds-card variant="primary" border-radius="0 m m 0" border="0 0 0 4xs">
+        <gds-flex align-items="center" justify-content="center">
           Left
         </gds-flex>
       </gds-card>
-      <gds-card shadow="s" border-radius="m" border="4xs">
-        <gds-flex padding="2xl" align-items="center" justify-content="center">
-          All
-        </gds-flex>
+      <gds-card variant="primary" border-radius="m" border="4xs">
+        <gds-flex align-items="center" justify-content="center"> All </gds-flex>
       </gds-card>
     </gds-grid>`,
 }
@@ -363,38 +357,38 @@ export const CardRadius: Story = {
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="2xs">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >2XS</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          2XS
+        </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 xs 0 xs">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >XS</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          XS
+        </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 s 0 s">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >S</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          S
+        </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 m 0 m">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >M</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          M
+        </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 l 0 l">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >L</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          L
+        </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="xl">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >XL</gds-flex
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          XL</gds-flex
         >
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="max">
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >MAX</gds-flex
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          MAX</gds-flex
         >
       </gds-card>
     </gds-grid>`,
@@ -426,46 +420,51 @@ export const Cardshadow: Story = {
         padding="s{xs} m{l} l{l}"
         shadow="s{xs} m{xs} l{xs}"
         border-radius="xs"
+        variant="secondary"
       >
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >XS</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          XS
+        </gds-flex>
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
         shadow="s{s} m{s} l{s}"
         border-radius="xs"
+        variant="secondary"
       >
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >S</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          S
+        </gds-flex>
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
         shadow="s{m} m{m} l{m}"
         border-radius="xs"
+        variant="secondary"
       >
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >M</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          M
+        </gds-flex>
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
         shadow="s{l} m{l} l{l}"
         border-radius="xs"
+        variant="secondary"
       >
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >L</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          L
+        </gds-flex>
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
         shadow="s{xl} m{xl} l{xl}"
         border-radius="xs"
+        variant="secondary"
       >
-        <gds-flex display="flex" align-items="center" justify-content="center"
-          >XL</gds-flex
-        >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          XL
+        </gds-flex>
       </gds-card>
     </gds-grid>`,
 }
@@ -486,7 +485,7 @@ export const CardGrid: Story = {
   render: (args) =>
     html` <gds-grid columns="4" gap="l">
       <gds-container>
-        <gds-card shadow="l{m} m{m} s{m}" border-radius="xs">
+        <gds-card border-radius="xs">
           <gds-flex gap="m" flex-direction="column" align-items="flex-start">
             <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
               Sidebar
@@ -500,7 +499,7 @@ export const CardGrid: Story = {
         </gds-card>
       </gds-container>
       <gds-container grid-column="2 / -1" grid-row="1 / -1" display="flex">
-        <gds-card shadow="l{m} m{m} s{m}" border-radius="xs">
+        <gds-card border-radius="xs">
           <gds-flex
             flex-direction="column"
             align-items="flex-start"
@@ -512,8 +511,8 @@ export const CardGrid: Story = {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
-            <gds-text font-size="body-m"
-              >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            <gds-text font-size="body-m">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua.
@@ -523,7 +522,7 @@ export const CardGrid: Story = {
         </gds-card>
       </gds-container>
       <gds-container grid-column="1 / -1">
-        <gds-card shadow="l{m} m{m} s{m}" border-radius="xs">
+        <gds-card border-radius="xs">
           <gds-flex
             flex-direction="column"
             align-items="flex-start"

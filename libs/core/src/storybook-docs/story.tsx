@@ -7,9 +7,23 @@ interface StoryProps {
 
 const Story = ({ path, children }: StoryProps) => {
   return (
-    <a href={path} style={{ all: 'unset', cursor: 'pointer' }}>
-      {children}
-    </a>
+    <>
+      <style>{`
+        .story-link {
+          all: unset;
+          cursor: pointer;
+          color: currentColor;  
+          text-decoration: none; 
+
+          &:hover {
+            background-color: #fff;
+          }
+        }
+      `}</style>
+      <a href={path} className="story-link">
+        {children}
+      </a>
+    </>
   )
 }
 
