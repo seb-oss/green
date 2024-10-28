@@ -5,11 +5,12 @@ import dynamic from 'next/dynamic'
 import { Context } from '$/provider/provider'
 import Sidebar from 'core/sidebar'
 
-// import GdsFlex from '@sebgroup/green-react/core/flex'
-
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
 export default function Main({ children }: { children: React.ReactNode }) {
   const { toggleNav, isNavOpen } = useContext(Context)

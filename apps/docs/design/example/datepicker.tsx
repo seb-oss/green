@@ -3,10 +3,11 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsDatepicker } from '@sebgroup/green-react/core/datepicker'
-
 const GdsDatepicker = dynamic(
-  () => import('@sebgroup/green-react/core/datepicker'),
+  () =>
+    import('@sebgroup/green-react/core/datepicker').then(
+      (mod) => mod.GdsDatepicker,
+    ),
   {
     ssr: false,
   },

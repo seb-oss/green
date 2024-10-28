@@ -3,10 +3,11 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsTextarea } from '@sebgroup/green-react/core/textarea'
-
 const GdsTextarea = dynamic(
-  () => import('@sebgroup/green-react/core/textarea'),
+  () =>
+    import('@sebgroup/green-react/core/textarea').then(
+      (mod) => mod.GdsTextarea,
+    ),
   {
     ssr: false,
   },

@@ -3,12 +3,12 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsInput } from '@sebgroup/green-react/core/input'
-// import { IconCreditCard } from '@sebgroup/green-react/src/lib/icon/icons/IconCreditCard'
-
-const GdsInput = dynamic(() => import('@sebgroup/green-react/core/input'), {
-  ssr: false,
-})
+const GdsInput = dynamic(
+  () => import('@sebgroup/green-react/core/input').then((mod) => mod.GdsInput),
+  {
+    ssr: false,
+  },
+)
 
 const IconCreditCard = dynamic(
   () =>

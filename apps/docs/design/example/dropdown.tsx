@@ -3,19 +3,23 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsDropdown } from '@sebgroup/green-react/core/dropdown'
-// import { GdsOption } from '@sebgroup/green-react/core/option'
-
 const GdsDropdown = dynamic(
-  () => import('@sebgroup/green-react/core/dropdown'),
+  () =>
+    import('@sebgroup/green-react/core/dropdown').then(
+      (mod) => mod.GdsDropdown,
+    ),
   {
     ssr: false,
   },
 )
 
-const GdsOption = dynamic(() => import('@sebgroup/green-react/core/option'), {
-  ssr: false,
-})
+const GdsOption = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/option').then((mod) => mod.GdsOption),
+  {
+    ssr: false,
+  },
+)
 
 const Dropdown = () => (
   <>

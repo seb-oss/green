@@ -3,11 +3,11 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsMenuButton } from '@sebgroup/green-react/core/menu-button'
-// import { IconMagnifyingGlass } from '@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass'
-
 const GdsMenuButton = dynamic(
-  () => import('@sebgroup/green-react/core/menu-button'),
+  () =>
+    import('@sebgroup/green-react/core/menu-button').then(
+      (mod) => mod.GdsMenuButton,
+    ),
   {
     ssr: false,
   },

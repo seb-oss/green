@@ -3,20 +3,25 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsCoachmark } from '@sebgroup/green-react/core/coachmark'
-// import { GdsFlex } from '@sebgroup/green-react/core/flex'
-// import { GdsText } from '@sebgroup/green-react/core/text'
-// import { IconPin } from '@sebgroup/green-react/src/lib/icon/icons/IconPin'
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
 const GdsCoachmark = dynamic(
-  () => import('@sebgroup/green-react/core/coachmark'),
+  () =>
+    import('@sebgroup/green-react/core/coachmark').then(
+      (mod) => mod.GdsCoachmark,
+    ),
   {
     ssr: false,
   },

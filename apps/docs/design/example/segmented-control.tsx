@@ -3,15 +3,19 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsSegment } from '@sebgroup/green-react/core/segment'
-// import { GdsSegmentedControl } from '@sebgroup/green-react/core/segmented-control'
-
-const GdsSegment = dynamic(() => import('@sebgroup/green-react/core/segment'), {
-  ssr: false,
-})
+const GdsSegment = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/segment').then((mod) => mod.GdsSegment),
+  {
+    ssr: false,
+  },
+)
 
 const GdsSegmentedControl = dynamic(
-  () => import('@sebgroup/green-react/core/segmented-control'),
+  () =>
+    import('@sebgroup/green-react/core/segmented-control').then(
+      (mod) => mod.GdsSegmentedControl,
+    ),
   {
     ssr: false,
   },

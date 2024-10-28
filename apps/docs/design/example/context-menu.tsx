@@ -3,18 +3,21 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsContextMenu } from '@sebgroup/green-react/core/context-menu'
-// import { GdsMenuItem } from '@sebgroup/green-react/core/menu-item'
-
 const GdsContextMenu = dynamic(
-  () => import('@sebgroup/green-react/core/context-menu'),
+  () =>
+    import('@sebgroup/green-react/core/context-menu').then(
+      (mod) => mod.GdsContextMenu,
+    ),
   {
     ssr: false,
   },
 )
 
 const GdsMenuItem = dynamic(
-  () => import('@sebgroup/green-react/core/menu-item'),
+  () =>
+    import('@sebgroup/green-react/core/menu-item').then(
+      (mod) => mod.GdsMenuItem,
+    ),
   {
     ssr: false,
   },

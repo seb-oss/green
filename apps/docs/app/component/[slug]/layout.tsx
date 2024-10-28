@@ -8,21 +8,26 @@ import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
 import { format, parseISO } from 'date-fns'
 
-// import GdsBadge from '@sebgroup/green-react/core/badge'
-// import GdsFlex from '@sebgroup/green-react/core/flex'
-// import GdsText from '@sebgroup/green-react/core/text'
+const GdsBadge = dynamic(
+  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
+  {
+    ssr: false,
+  },
+)
 
-const GdsBadge = dynamic(() => import('@sebgroup/green-react/core/badge'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
-
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
 export default function ComponentLayout({
   children,
@@ -93,21 +98,21 @@ export default function ComponentLayout({
     },
   ]
 
-  const getDynamicComponent = (c: string) =>
-    dynamic(
-      () =>
-        import(`../../../design/example/${c}`).catch(() => {
-          const ExampleComponent = () => <div>Example</div>
-          ExampleComponent.displayName = 'ExampleComponent'
-          return ExampleComponent
-        }),
-      {
-        ssr: false,
-        loading: () => <p>Loading...</p>,
-      },
-    )
+  // const getDynamicComponent = (c: string) =>
+  //   dynamic(
+  //     () =>
+  //       import(`../../../design/example/${c}`).catch(() => {
+  //         const ExampleComponent = () => <div>Example</div>
+  //         ExampleComponent.displayName = 'ExampleComponent'
+  //         return ExampleComponent
+  //       }),
+  //     {
+  //       ssr: false,
+  //       loading: () => <p>Loading...</p>,
+  //     },
+  //   )
 
-  const Preview = getDynamicComponent(url_path.replace('/component/', ''))
+  // const Preview = getDynamicComponent(url_path.replace('/component/', ''))
 
   return (
     <>
@@ -175,7 +180,7 @@ export default function ComponentLayout({
               justify-content="center"
               height="420px"
             >
-              <Preview />
+              {/* <Preview /> */}
             </GdsFlex>
           </GdsFlex>
           <Taber component={url_path} links={links} />
