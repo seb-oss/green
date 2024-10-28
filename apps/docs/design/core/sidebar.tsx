@@ -1,18 +1,50 @@
 'use client'
 
 import React, { useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import GdsBadge from '@sebgroup/green-react/src/core/badge'
-import GdsButton from '@sebgroup/green-react/src/core/button'
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsText from '@sebgroup/green-react/src/core/text'
+import { allComponents, Component } from 'content'
+import Dev, { isDev } from '$/env/env'
+
+// import GdsBadge from '@sebgroup/green-react/src/core/badge'
+// import GdsButton from '@sebgroup/green-react/src/core/button'
+// import GdsFlex from '@sebgroup/green-react/src/core/flex'
+// import GdsText from '@sebgroup/green-react/src/core/text'
 import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
 import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
 import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
-import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
-import Dev, { isDev } from '$/env/env'
-import { allComponents, Component } from 'content'
+
+// import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
+
+const IconEyeSlash = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash').then(
+      (mod) => mod.IconEyeSlash,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+const GdsBadge = dynamic(() => import('@sebgroup/green-react/src/core/badge'), {
+  ssr: false,
+})
+
+const GdsButton = dynamic(
+  () => import('@sebgroup/green-react/src/core/button'),
+  {
+    ssr: false,
+  },
+)
+
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+  ssr: false,
+})
 
 const menu = [
   {

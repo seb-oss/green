@@ -1,7 +1,17 @@
 'use client'
 
-import GdsFlex from '@sebgroup/green-react/src/core/flex'
-import GdsText from '@sebgroup/green-react/src/core/text'
+import dynamic from 'next/dynamic'
+
+// import GdsFlex from '@sebgroup/green-react/src/core/flex'
+// import GdsText from '@sebgroup/green-react/src/core/text'
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
+
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+  ssr: false,
+})
 
 export default function Hero({
   heading,

@@ -5,7 +5,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import Grid from '@/grid/grid'
 import Spacer from '@/spacer/spacer'
 
-import Pattern from '../pattern/pattern'
+import Pattern from '../../pattern/pattern'
 import Col from './col/col'
 import Do from './do/do'
 import Dont from './dont/dont'
@@ -28,10 +28,16 @@ const components = {
   Pattern,
   Spacer,
   Grid,
-  Story
+  Story,
 }
 
-export function Mdx({ code, globals }: { code: string; globals: Record<string, any> }) {
+export function Mdx({
+  code,
+  globals,
+}: {
+  code: string
+  globals: Record<string, any>
+}) {
   const Component = useMDXComponent(code, globals)
 
   return <Component components={components} />

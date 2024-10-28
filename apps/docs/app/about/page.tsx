@@ -2,8 +2,8 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import Hero from '@/_hero/hero'
 import { Accordion, AccordionItem } from '@/accordion'
-import Hero from '@/hero/hero'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
 

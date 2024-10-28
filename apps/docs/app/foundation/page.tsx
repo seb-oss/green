@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
+import Hero from '@/_hero/hero'
 import { Accordion, AccordionItem } from '@/accordion'
 import Grid from '@/grid/grid'
-import Hero from '@/hero/hero'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
 import MetallicSurfaceImage from 'public/content/metallic-surface.jpg'

@@ -1,14 +1,14 @@
 'use client'
 
-import ComponentCard from '@/component-card/component-card'
-import { allComponents } from 'content'
 import dynamic from 'next/dynamic'
+import { allComponents } from 'content'
+import ComponentCard from '@/_ARCHIVE/_component-card/component-card'
+
+import './component-list.css'
 
 const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'), {
   ssr: false,
 })
-
-import './component-list.css'
 
 export default function ComponentList({ title }: { title: string }) {
   const components = allComponents

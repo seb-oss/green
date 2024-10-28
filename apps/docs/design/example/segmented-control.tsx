@@ -1,8 +1,24 @@
 'use client'
 
 import React from 'react'
-import { GdsSegmentedControl } from '@sebgroup/green-react/core/segmented-control'
-import { GdsSegment } from '@sebgroup/green-react/core/segment'
+import dynamic from 'next/dynamic'
+
+// import { GdsSegment } from '@sebgroup/green-react/core/segment'
+// import { GdsSegmentedControl } from '@sebgroup/green-react/core/segmented-control'
+
+const GdsSegment = dynamic(
+  () => import('@sebgroup/green-react/src/core/segment'),
+  {
+    ssr: false,
+  },
+)
+
+const GdsSegmentedControl = dynamic(
+  () => import('@sebgroup/green-react/src/core/segmented-control'),
+  {
+    ssr: false,
+  },
+)
 
 const SegmentedControl = () => (
   <>

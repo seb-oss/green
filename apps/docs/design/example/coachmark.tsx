@@ -1,10 +1,36 @@
 'use client'
 
 import React from 'react'
-import { GdsFlex } from '@sebgroup/green-react/core/flex'
-import { GdsText } from '@sebgroup/green-react/core/text'
-import { GdsCoachmark } from '@sebgroup/green-react/core/coachmark'
-import { IconPin } from '@sebgroup/green-react/src/lib/icon/icons/IconPin'
+import dynamic from 'next/dynamic'
+
+// import { GdsCoachmark } from '@sebgroup/green-react/core/coachmark'
+// import { GdsFlex } from '@sebgroup/green-react/core/flex'
+// import { GdsText } from '@sebgroup/green-react/core/text'
+// import { IconPin } from '@sebgroup/green-react/src/lib/icon/icons/IconPin'
+
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'), {
+  ssr: false,
+})
+
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'), {
+  ssr: false,
+})
+const GdsCoachmark = dynamic(
+  () => import('@sebgroup/green-react/src/core/coachmark'),
+  {
+    ssr: false,
+  },
+)
+
+const IconPin = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconPin').then(
+      (mod) => mod.IconPin,
+    ),
+  {
+    ssr: false,
+  },
+)
 
 const Coachmark = () => (
   <>

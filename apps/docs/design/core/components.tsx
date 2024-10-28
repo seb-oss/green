@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable */
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
@@ -19,12 +21,30 @@ import Popover from 'example/popover'
 import SegmentedControl from 'example/segmented-control'
 import Textarea from 'example/textarea'
 
-import { GdsCard } from '@sebgroup/green-react/core/card'
-import { GdsDivider } from '@sebgroup/green-react/core/divider'
-import { GdsFlex } from '@sebgroup/green-react/core/flex'
-import { GdsGrid } from '@sebgroup/green-react/core/grid'
-import { GdsText } from '@sebgroup/green-react/core/text'
+// import { GdsCard } from '@sebgroup/green-react/core/card'
+// import { GdsDivider } from '@sebgroup/green-react/core/divider'
+// import { GdsFlex } from '@sebgroup/green-react/core/flex'
+// import { GdsGrid } from '@sebgroup/green-react/core/grid'
+// import { GdsText } from '@sebgroup/green-react/core/text'
 import { IconChevronRight } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronRight'
+
+const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'))
+const GdsDivider = dynamic(
+  () => import('@sebgroup/green-react/src/core/divider'),
+)
+const GdsFlex = dynamic(() => import('@sebgroup/green-react/src/core/flex'))
+const GdsGrid = dynamic(() => import('@sebgroup/green-react/src/core/grid'))
+const GdsText = dynamic(() => import('@sebgroup/green-react/src/core/text'))
+
+// const IconChevronRight = dynamic(
+//   () => import('@sebgroup/green-react/src/lib/icon/icons/IconChevronRight'),
+//   {
+//     ssr: false,
+//   },
+// )
+// const GdsCard = dynamic(() => import('@sebgroup/green-react/src/core/card'), {
+//   ssr: false,
+// })
 
 const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Badge: Badge,

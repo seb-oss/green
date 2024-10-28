@@ -1,5 +1,6 @@
 'use client'
 
+/* eslint-disable */
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
@@ -85,7 +86,7 @@ export default function ComponentLayout({
     dynamic(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
-          return
+          return () => <div>Example</div>
         }),
       {
         ssr: false,
@@ -119,9 +120,6 @@ export default function ComponentLayout({
                 <GdsBadge variant="notice" size="small">
                   {status}
                 </GdsBadge>
-                <GdsFlex level="3" background="tertiary">
-                  Test for Level 3
-                </GdsFlex>
               </GdsFlex>
               {/*
               <GdsFlex

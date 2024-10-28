@@ -1,8 +1,24 @@
 'use client'
 
 import React from 'react'
-import { GdsDropdown } from '@sebgroup/green-react/core/dropdown'
-import { GdsOption } from '@sebgroup/green-react/core/option'
+import dynamic from 'next/dynamic'
+
+// import { GdsDropdown } from '@sebgroup/green-react/core/dropdown'
+// import { GdsOption } from '@sebgroup/green-react/core/option'
+
+const GdsDropdown = dynamic(
+  () => import('@sebgroup/green-react/src/core/dropdown'),
+  {
+    ssr: false,
+  },
+)
+
+const GdsOption = dynamic(
+  () => import('@sebgroup/green-react/src/core/option'),
+  {
+    ssr: false,
+  },
+)
 
 const Dropdown = () => (
   <>

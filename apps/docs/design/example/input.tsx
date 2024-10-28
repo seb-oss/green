@@ -1,8 +1,24 @@
 'use client'
 
 import React from 'react'
-import { GdsInput } from '@sebgroup/green-react/core/input'
-import { IconCreditCard } from '@sebgroup/green-react/src/lib/icon/icons/IconCreditCard'
+import dynamic from 'next/dynamic'
+
+// import { GdsInput } from '@sebgroup/green-react/core/input'
+// import { IconCreditCard } from '@sebgroup/green-react/src/lib/icon/icons/IconCreditCard'
+
+const GdsInput = dynamic(() => import('@sebgroup/green-react/src/core/input'), {
+  ssr: false,
+})
+
+const IconCreditCard = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconCreditCard').then(
+      (mod) => mod.IconCreditCard,
+    ),
+  {
+    ssr: false,
+  },
+)
 
 const Input = () => (
   <>
