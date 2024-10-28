@@ -5,17 +5,13 @@ export const metadata: Metadata = {
   title: 'Swedish - UX writing — Green ',
   description: 'Green Design System',
   alternates: {
-    canonical: '/ux-writing/swedish',
+    canonical: '/ux-writing/swedish'
   },
   openGraph: {
-    images: '/og?title=UX Writing Swedish',
-  },
+    images: '/og?title=UX Writing Swedish'
+  }
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return children
 }

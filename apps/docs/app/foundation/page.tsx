@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
+import Hero from '@/_hero/hero'
 import { Accordion, AccordionItem } from '@/accordion'
 import Grid from '@/grid/grid'
-import Hero from '@/hero/hero'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
 import MetallicSurfaceImage from 'public/content/metallic-surface.jpg'
@@ -103,7 +103,7 @@ export default function Foundation() {
               heading="Foundation"
               preamble="Green Design System, a framework designed to bring unity, efficiency, and coherent perspective to our digital experiences. Over time it will grow and evolve but always reflect our design philosophy. User needs first, being forefront and with confidence."
             />
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="our-purpose" className="heading-medium">
                 Our purpose
               </h2>
@@ -115,7 +115,7 @@ export default function Foundation() {
                 confidence.
               </p>
             </Grid>
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="tonality" className="heading-medium">
                 Tonality
               </h2>
@@ -137,7 +137,7 @@ export default function Foundation() {
                 aspectRatio: '16 / 9',
               }}
             />
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="visual-style" className="heading-medium">
                 Visual style
               </h2>
@@ -149,7 +149,7 @@ export default function Foundation() {
                   and the experience we want to build, and swiftly make changes
                   as needed.
                 </p>
-                <Spacing flex-direction="vertical" size={8} />
+                <Spacing direction="vertical" size={8} />
                 <Accordion>
                   <AccordionItem
                     id="timeless"
@@ -223,7 +223,7 @@ export default function Foundation() {
                 aspectRatio: '16 / 9',
               }}
             />
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="features" className="heading-medium">
                 Features
               </h2>
@@ -233,7 +233,7 @@ export default function Foundation() {
                   Empowering designers and developers with versatile, accessible
                   and coherent components.
                 </p>
-                <Spacing flex-direction="vertical" size={8} />
+                <Spacing direction="vertical" size={8} />
                 <Accordion>
                   <AccordionItem
                     id="features"

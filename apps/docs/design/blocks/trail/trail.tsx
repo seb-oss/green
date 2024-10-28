@@ -16,17 +16,13 @@ type TrailTypes = {
 
 const Trail = ({ home, separator, activeClass, slug }: TrailTypes) => {
   const paths = usePathname()
-  const pathNames = paths.split('/').filter((path) => path)
+  const pathNames = paths.split('/').filter(path => path)
 
   const getComponent = (path: string) =>
-    allComponents.find(
-      (component) => component.url_path === `/component/${slug}${path}`,
-    )
+    allComponents.find(component => component.url_path === `/component/${slug}${path}`)
 
   const getCurrentComponent = (path: string) =>
-    allComponents.find(
-      (component) => component.url_path === `/component/${slug}`,
-    )
+    allComponents.find(component => component.url_path === `/component/${slug}`)
 
   const lastPath = pathNames.pop()
   const lastPathComponent = getComponent(`/${lastPath}`)

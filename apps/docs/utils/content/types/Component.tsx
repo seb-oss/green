@@ -17,19 +17,12 @@ export const Component = defineDocumentType(() => ({
   filePathPattern: `component/**/*.mdx`,
   contentType: 'mdx',
   fields: {
-    global_id: {
-      type: 'string',
-      description:
-        'Random ID to uniquely identify this doc, even after it moves',
-      required: true,
-    },
     title: { type: 'string', required: true },
     summary: { type: 'string', required: false },
     date: { type: 'date', required: false },
     tags: { type: 'string', required: false },
     status: { type: 'string', required: false },
     node: { type: 'string', required: false },
-    preview: { type: 'string', required: false },
     private: { type: 'boolean', required: false },
   },
   computedFields: {
@@ -132,9 +125,7 @@ export const Component = defineDocumentType(() => ({
 
         try {
           const response = await axios.get(
-            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(
-              ',',
-            )}&format=svg`,
+            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(',')}&format=svg`,
             {
               headers: {
                 'X-Figma-Token': figmaAccessKey,

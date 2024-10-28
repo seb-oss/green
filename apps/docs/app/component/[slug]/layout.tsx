@@ -1,18 +1,33 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import Badge from '@/badge/badge'
-import Flex from '@/flex/flex'
-import Cell from '@/grid/cell'
-import Grid from '@/grid/grid'
-import Pattern from '@/pattern/pattern'
 import Taber from '@/taber'
-import Tags from '@/tags-list/tags'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
-import Content from '&/content/content'
 import { format, parseISO } from 'date-fns'
+
+const GdsBadge = dynamic(
+  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
+  {
+    ssr: false,
+  },
+)
+
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
+
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
 export default function ComponentLayout({
   children,
@@ -35,23 +50,11 @@ export default function ComponentLayout({
   const componentDesign = getComponent('/design')
   const componentUXText = getComponent('/ux-text')
 
-  console.log('component', componentCode?.private)
-
   if (!component) {
     notFound()
   }
 
-  const {
-    title,
-    url_path,
-    tags,
-    status,
-    global_id,
-    last_edited,
-    summary,
-    figma_hero_svg,
-    preview,
-  } = component
+  const { title, url_path, tags, status, last_edited, summary } = component
 
   const pathsAndComponents = [
     { path: '/accessibility', component: componentA11y },
@@ -69,7 +72,7 @@ export default function ComponentLayout({
     }
   }
 
-  const tagsArray = tags ? tags.split(', ') : []
+  // const tagsArray = tags ? tags.split(', ') : []
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },
@@ -95,56 +98,104 @@ export default function ComponentLayout({
     },
   ]
 
+  // const getDynamicComponent = (c: string) =>
+  //   dynamic(
+  //     () =>
+  //       import(`../../../design/example/${c}`).catch(() => {
+  //         const ExampleComponent = () => <div>Example</div>
+  //         ExampleComponent.displayName = 'ExampleComponent'
+  //         return ExampleComponent
+  //       }),
+  //     {
+  //       ssr: false,
+  //       loading: () => <p>Loading...</p>,
+  //     },
+  //   )
+
+  // const Preview = getDynamicComponent(url_path.replace('/component/', ''))
+
   return (
-    <Content layout="component" key={global_id}>
-      <Grid columns={1} paddingBlock="small" paddingInline="small">
-        <Trail
-          home={'Home'}
-          separator={<span> / </span>}
-          activeClass="active"
-          slug={slug}
-        />
-        <Grid columns={6} tablet={2} mobile={1} gapBlock="small">
-          <gds-cell span="4" className="content">
-            <Grid columns={1} gapBlock="small">
-              <div>
-                <h1 className="gds-fs-headline-large">{title}</h1>
-                <p>{summary}</p>
-              </div>
-              <Flex wrap="wrap" gap="small">
-                <Badge title="Status" label={status} />
-                <Tags title="Tags" tags={tagsArray} max={3} />
-              </Flex>
-            </Grid>
-          </gds-cell>
-          <gds-cell span="2">
-            <Pattern>
-              {(preview?.trim() ?? '') ? (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: `${preview}`,
-                  }}
-                />
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: figma_hero_svg.svg }} />
-              )}
-            </Pattern>
-          </gds-cell>
-        </Grid>
-        <Taber component={url_path} links={links} />
-        <Grid columns={12} gapInline="small" paddingBlock="small">
-          <Cell span="10">
-            <div className="gds-prose">{children}</div>
-          </Cell>
-          <Cell span="2">{tocComponent}</Cell>
-        </Grid>
-        <footer>
-          Last updated: <br />
-          <time dateTime={last_edited} title="Last updated">
-            {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
-          </time>
-        </footer>
-      </Grid>
-    </Content>
+    <>
+      <Trail
+        home={'Home'}
+        separator={<span> / </span>}
+        activeClass="active"
+        slug={slug}
+      />
+      <GdsFlex gap="4xl">
+        <GdsFlex width="80ch" flex-direction="column" gap="2xl">
+          <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
+            <GdsFlex
+              justify-content="space-between"
+              align-items="flex-start"
+              gap="xl"
+            >
+              <GdsFlex flex-direction="column" gap="xs">
+                <GdsText tag="h1">{title}</GdsText>
+                <GdsText tag="p" text-wrap="balance">
+                  {summary}
+                </GdsText>
+                <GdsBadge variant="notice" size="small">
+                  {status}
+                </GdsBadge>
+              </GdsFlex>
+              {/*
+              <GdsFlex
+                align-items="flex-start"
+                gap="s"
+                border-radius="s"
+                padding="m"
+                level="1"
+                background="secondary"
+                border="4xs/primary"
+                flex-direction="column"
+                width="40ch"
+              >
+                <GdsFlex flex-direction="column">
+                  <GdsText tag="small">Status</GdsText>
+                  <GdsBadge variant="notice" size="small">
+                    {status}
+                  </GdsBadge>
+                </GdsFlex>
+             <GdsFlex flex-direction="column">
+                  <GdsText tag="small">Tags</GdsText>
+                  <GdsFlex>
+                    {tagsArray.map((tag, index) => (
+                      <Link key={index} href={`#${tag}`}>
+                        {tag}
+                      </Link>
+                    ))}
+                  </GdsFlex>
+                </GdsFlex>
+              </GdsFlex>
+                 */}
+            </GdsFlex>
+            <GdsFlex
+              border="4xs/primary"
+              padding="2xl"
+              border-radius="m"
+              background="secondary"
+              gap="xl"
+              align-items="center"
+              justify-content="center"
+              height="420px"
+            >
+              {/* <Preview /> */}
+            </GdsFlex>
+          </GdsFlex>
+          <Taber component={url_path} links={links} />
+          <GdsFlex flex-direction="column" gap="xl">
+            {children}
+          </GdsFlex>
+          <footer>
+            Last updated: <br />
+            <time dateTime={last_edited} title="Last updated">
+              {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
+            </time>
+          </footer>
+        </GdsFlex>
+        <GdsFlex>{tocComponent}</GdsFlex>
+      </GdsFlex>
+    </>
   )
 }

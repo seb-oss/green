@@ -2,17 +2,14 @@
 title: Input
 summary: Text fields allow users to enter text into a UI. They typically appear in forms and dialogs.
 date: 2023-12-22
-global_id: inputinput
-status: work in progress
-tags: form
-node: 606-6849
-# preview: <gds-input name="my-text" type="email" label="Label goes here" supporting-text="Supporting text goes here" clearable required >
+status: BETA
+private: true
 ---
 
 ## Overview 
 
-Input are used to let the user enter text or numbers in a form.Optional field indicator. We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "optional" next to the label with the field.
-
+### Usage
+Input are used to let the user enter text or numbers in a form. 
 
 <Spacer size="medium" decorated />
 
@@ -20,138 +17,116 @@ Input are used to let the user enter text or numbers in a form.Optional field in
 To be able to use forms in all context's we provide two versions of input fields.
 
 - **Default** (Label outside): Includes all the features we need in complex forms.
-- **Contained**: gives a more clean look but doesn't work for longer labels and can only be used in specific contexts.
+- **Floating label**  (Label inside): gives a more clean look but doesn't work for longer labels and can only be used in specific contexts.
 
-<Grid columns={2}>
-    <Figma node="606-10125" caption="Default, label outside." />
-    <Figma node="606-10127" caption="Contained." />
+<Grid columns="2">
+    <Figma node="606-10125" caption="Default variant." />
+    <Figma node="606-10127" caption="Floating label variant." />
 </Grid>
 
 
 <Spacer size="medium" decorated />
 
-### Sets
-To be able to use forms in all context's we provide 2 versions of input fields.
-
-- Regular text field
-- Multi lined text field, Multiple lines. Some text fields require a lot more text to be entered. A simple example would be description of a payment. For this we use the multi-line version of the input-field. This is often known as a text area or free text. Counter. For some fields it's critical that users know the limitations. Counters start at the max and count down to zero. When the counter comes close to zero the appearance shifts to red to warn the user before the fields stops accepting input.
-
-<Grid columns={2}>
-    <Figma node="606-10336" caption="Regular text field." />
-    <Figma node="606-10338" caption="Free text field." />
-</Grid>
-
-
-<Spacer size="medium" decorated />
-
-<Grid columns={2}>
+<Grid columns="2">
 <div>
 ### Sizes
-The input fields come in two sizes.
+The input field comes in two sizes.
 
-- **Normal**: used in most cases.
+- **Large**: the default size and used in most cases.
 - **Small**: used in tables and in some special cases where the space is very limited.
 </div>
-<Figma node="606-10448" caption="Normal and small" />
+<Figma node="606-10448" caption="Large and small size." />
 </Grid>
 
 <Spacer size="medium" decorated />
 
 ## Features
 
-<Grid columns={2}>
+### General features
+
+TODO:
+Feature	Default	Floating label
+Label	✅	✅
+Support text	✅	❌
+Field error	✅	✅
+Dynamic information	✅	❌
+Contextual help	✅	❌
+Optional indicator	✅	✅
+
+<Grid columns="2">
 
 <div>
-### Label
-All input fields need a label. Keep the label short and to the point.
+### Counter
+For fields that have a limit of characters allowed a counter may be added to guide users into how many characters are left to use. Indicator starts with the maximum characters allowed displayed. As the user starts typing the numbers decrease. When a limit is reached the indicator turns yellow. If users write too many characters the counter becomes red. If a user ignores this and tries to submit an error will be indicated on the field stating that the max has been reached.
 </div>
 
 <Figma node="607-10627" />
 </Grid>
 
-<Grid columns={2}>
+<Grid columns="2">
 <div>
-### Label support text
-Use this to explain how to fill the field. This may be an instruction of how to count or what to include. Limit the instructions to details that all or most users need.
+### Clearable
+To make it easy for users to clear a field an x-icon may be added at the end of the field. If used, this icon is the first in the trailing slot close to the input it's removing when pressed.
 </div>
 <Figma node="607-10706" caption="Label support text visible." />
 </Grid>
 
-<Grid columns={2}>
+<Grid columns="2">
 <div>
-### Field help
-We can provide three types of help in relation to input fields
-- Instruction text: Additional instruction of how to think, what we expect, or what format is required.
-- Contextual help: Either as a tooltip, extended help that increase the size of the field with more instructions, or a slide-out with helptext.
-- Error text: If users fail in filling the field with correct information, the last help is the error text that can guide to a solution based on the entered information.
+### Placeholder
+AVOID using placeholder text (also know as watermark). They tend to confuse users, thinking the field is already filled with data. Instructions should not be placed here, since they disappear as the field is filled with data. Use the support text instead to describe what's supposed to be entered.
 </div>
 <Figma node="609-10726" caption="Field instruction visible." />
 </Grid>
 
-<Grid columns={2}>
+<Grid columns="2">
 <div>
-### Field error
-Errors that are related to a field are displayed right next to the field. The field is highlighted with a error message about the problem underneath. 
-The field validation should be done as soon as possible, but not while still editing the information.
+### Autocomplete
+Input text can be used with auto complete to help users who have limited literacy or who write in a foreign language.
 </div>
 <Figma node="768-6848" caption="Field error" />
 </Grid>
 
-<Grid columns={2}>
+<Grid columns="2">
 <div>
-### Field counter
-For some fields it's critical that users know the limitations of the number of characters allowed. Counters start at the max and count down to zero. When the counter comes close to zero the appearance shifts to red to warn the user before the fields stops accepting input.
+### Input with button
+Input fields can be grouped with a button. This is used if they have a very strong relationship inside a form. For example, fetching information from a database, signing up to a newsletter, etc. In a mobile viewport, the group is seen as one module and shares the width.
 </div>
 <Figma node="609-10804" caption="Field counter" />
 </Grid>
 
-<Grid columns={2}>
+<Grid columns="2">
 <div>
-### Dynamic information
+### Search field
 
-Used to perform comparative calculations next to the field. For example if users fill out salary after taxes, the dynamic information may show the salary before taxes.
+The search field's work pretty much the same way as normal input fields, but we have some rules for icon-usage.
+- Leading icon: used when the icon is only an ornament to signify that this is a search-field. 
+- Trailing icon: used when the icon is also working as a button, users can click the icon to perform the search.
 </div>
 
 <Figma node="619-6291" caption="Example on dynamic information" />
-</Grid>
-
-<Grid columns={2}>
-<div>
-### Static data
-
-Sometimes you may want to output data from the system inside a form, but it's hard from the system an may not be changed. Then we output that data in plain text, formatted the same way as the form in general. Don't use disabled fields.
-</div>
-<Figma node="619-6359" caption="Example on static data" />
-</Grid>
-
-<Grid columns={2}>
-<div>
-### Auto complete
-Input text can be used with auto complete to help users who have limited literacy or who write in a foreign language.Sometimes you may want to output data from the system inside a form, but it's hard from the system an may not be changed. Then we output that data in plain text, formatted the same way as the form in general. Don't use disabled fields.
-</div>
-<Figma node="619-6406" caption="Example on autocomplete" />
 </Grid>
 
 <Spacer size="medium" decorated />
 
 ## Do’s and dont’s
 
-<Grid columns={2}>
-<div>
+<Grid columns="2">
+<Column>
 **Do**
 
 - Use "optional" to mark optional fields.
-</div>
+</Column>
 
-<div>
+<Column>
 **Don’t**
 
 - Use asterix for indicate mandatory fields.
 - Avoid using watermarks or placeholders. 
-</div>
+</Column>
 </Grid>
 
-<Grid columns={2}>
+<Grid columns="2">
     <Do><Figma node="647-6126" /></Do>
     <Dont><Figma node="647-6129" /></Dont>
     <Dont><Figma node="619-6615" /></Dont>

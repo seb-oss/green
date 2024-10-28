@@ -116,7 +116,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * The label of the form control.
    */
   @property()
-  label?: string
+  label = ''
 
   /**
    * Get or set the value of the form control.

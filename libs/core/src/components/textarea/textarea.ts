@@ -23,7 +23,7 @@ import '../button'
  * @summary A custom input element that can be used in forms.
  * @status beta
  *
- * @element gds-input
+ * @element gds-textarea
  *.
  * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
  * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
