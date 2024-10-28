@@ -1,24 +1,18 @@
 'use client'
 
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { allComponents, Component } from 'content'
-import Dev, { isDev } from '$/env/env'
+import { allComponents } from 'content'
+import { isDev } from '$/env/env'
 
-// import GdsBadge from '@sebgroup/green-react/core/badge'
-// import GdsButton from '@sebgroup/green-react/core/button'
-// import GdsFlex from '@sebgroup/green-react/core/flex'
-// import GdsText from '@sebgroup/green-react/core/text'
-// import { IconCainLink } from '@sebgroup/green-react/src/lib/icon/icons/IconCainLink'
-// import { IconChevronBottom } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom'
-// import { IconChevronTop } from '@sebgroup/green-react/src/lib/icon/icons/IconChevronTop'
-// import { IconEyeSlash } from '@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash'
-
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
 const IconEyeSlash = dynamic(
   () =>
@@ -59,17 +53,26 @@ const IconChevronTop = dynamic(
   },
 )
 
-const GdsBadge = dynamic(() => import('@sebgroup/green-react/core/badge'), {
-  ssr: false,
-})
+const GdsBadge = dynamic(
+  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
+  {
+    ssr: false,
+  },
+)
+const GdsButton = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/button').then((mod) => mod.GdsButton),
+  {
+    ssr: false,
+  },
+)
 
-const GdsButton = dynamic(() => import('@sebgroup/green-react/core/button'), {
-  ssr: false,
-})
-
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
 const menu = [
   {

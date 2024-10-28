@@ -45,6 +45,7 @@ const GdsGrid = dynamic(
     ssr: false,
   },
 )
+
 const GdsText = dynamic(
   () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
   {

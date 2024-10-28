@@ -3,22 +3,28 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsCalendar } from '@sebgroup/green-react/core/calendar'
-// import { GdsFlex } from '@sebgroup/green-react/core/flex'
-// import { GdsMask } from '@sebgroup/green-react/core/mask'
-
 const GdsCalendar = dynamic(
-  () => import('@sebgroup/green-react/core/calendar'),
+  () =>
+    import('@sebgroup/green-react/core/calendar').then(
+      (mod) => mod.GdsCalendar,
+    ),
   {
     ssr: false,
   },
 )
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
-const GdsMask = dynamic(() => import('@sebgroup/green-react/core/mask'), {
-  ssr: false,
-})
+
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
+const GdsMask = dynamic(
+  () => import('@sebgroup/green-react/core/mask').then((mod) => mod.GdsMask),
+  {
+    ssr: false,
+  },
+)
 
 const Calendar = () => (
   <GdsFlex position="relative" height="200px">

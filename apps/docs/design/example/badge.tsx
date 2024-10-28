@@ -3,12 +3,12 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsBadge } from '@sebgroup/green-react/core/badge'
-// import { IconPlusSmall } from '@sebgroup/green-react/src/lib/icon/icons/IconPlusSmall'
-
-const GdsBadge = dynamic(() => import('@sebgroup/green-react/core/badge'), {
-  ssr: false,
-})
+const GdsBadge = dynamic(
+  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
+  {
+    ssr: false,
+  },
+)
 
 const IconPlusSmall = dynamic(
   () =>

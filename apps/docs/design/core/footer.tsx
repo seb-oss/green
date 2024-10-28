@@ -1,23 +1,29 @@
 'use client'
 
-/* eslint-disable */
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
-// import GdsButton from '@sebgroup/green-react/core/button'
-// import GdsFlex from '@sebgroup/green-react/core/flex'
-// import GdsText from '@sebgroup/green-react/core/text'
+const GdsButton = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/button').then((mod) => mod.GdsButton),
+  {
+    ssr: false,
+  },
+)
 
-const GdsButton = dynamic(() => import('@sebgroup/green-react/core/button'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
 export default function Footer() {
   const year = new Date().getFullYear()

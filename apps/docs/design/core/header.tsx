@@ -5,28 +5,28 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { Context } from '$/provider/provider'
 
-// import GdsContainer from '@sebgroup/green-react/core/container'
-// import GdsFlex from '@sebgroup/green-react/core/flex'
-// import GdsMenuButton from '@sebgroup/green-react/core/menu-button'
-// import { IconBarsThree } from '@sebgroup/green-react/src/lib/icon/icons/IconBarsThree'
-// import { IconBrandGithub } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub'
-// import { IconBrandSeb } from '@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb'
-// import { IconCrossLarge } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge'
-// import { IconMagnifyingGlass } from '@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass'
-
 const GdsContainer = dynamic(
-  () => import('@sebgroup/green-react/core/container'),
+  () =>
+    import('@sebgroup/green-react/core/container').then(
+      (mod) => mod.GdsContainer,
+    ),
   {
     ssr: false,
   },
 )
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
 const GdsMenuButton = dynamic(
-  () => import('@sebgroup/green-react/core/menu-button'),
+  () =>
+    import('@sebgroup/green-react/core/menu-button').then(
+      (mod) => mod.GdsMenuButton,
+    ),
   {
     ssr: false,
   },
