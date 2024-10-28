@@ -14,34 +14,39 @@ import Grid from './grid'
 import IMG from './image/image'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
-import Row from './row/row'
 import Section from './section'
 import Story from './story/story'
 
-// import { GdsFlex } from '@sebgroup/green-react/core/flex/flex'
-// import { GdsDivider } from '@sebgroup/green-react/core/GdsDivider/GdsDivider'
-// import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
-// import { GdsText } from '@sebgroup/green-react/core/text/text'
-
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
-const GdsDivider = dynamic(() => import('@sebgroup/green-react/core/divider'), {
-  ssr: false,
-})
-const GdsGrid = dynamic(() => import('@sebgroup/green-react/core/grid'), {
-  ssr: false,
-})
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
+const GdsDivider = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/divider').then((mod) => mod.GdsDivider),
+  {
+    ssr: false,
+  },
+)
+const GdsGrid = dynamic(
+  () => import('@sebgroup/green-react/core/grid').then((mod) => mod.GdsGrid),
+  {
+    ssr: false,
+  },
+)
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
 const components = {
   Figma,
   FigmaProto,
   Image: IMG,
-  // Row,
-  // Col,
   Do,
   Dont,
   SE,
@@ -58,20 +63,20 @@ const components = {
   //     </>
   //   )
   // },
-  p: (props: any) => <GdsText tag="p" {...props} />,
-  h1: (props: any) => <GdsText tag="h1" {...props} />,
-  h2: (props: any) => <GdsText tag="h2" {...props} />,
-  h3: (props: any) => <GdsText tag="h3" {...props} />,
-  h4: (props: any) => <GdsText tag="h4" {...props} />,
-  h5: (props: any) => <GdsText tag="h5" {...props} />,
-  hr: (props: any) => <GdsDivider {...props} />,
-  Column: (props: any) => (
+  p: (props: object) => <GdsText tag="p" {...props} />,
+  h1: (props: object) => <GdsText tag="h1" {...props} />,
+  h2: (props: object) => <GdsText tag="h2" {...props} />,
+  h3: (props: object) => <GdsText tag="h3" {...props} />,
+  h4: (props: object) => <GdsText tag="h4" {...props} />,
+  h5: (props: object) => <GdsText tag="h5" {...props} />,
+  hr: (props: object) => <GdsDivider {...props} />,
+  Column: (props: object) => (
     <GdsFlex flex-direction="column" gap="xs" {...props} />
   ),
-  Row: (props: any) => <GdsFlex {...props} />,
+  Row: (props: object) => <GdsFlex {...props} />,
   Section: Section,
-  ul: (props: any) => <GdsText margin="0" tag="ul" gap="xs" {...props} />,
-  li: (props: any) => <GdsText margin="0" tag="li" {...props} />,
+  ul: (props: object) => <GdsText margin="0" tag="ul" gap="xs" {...props} />,
+  li: (props: object) => <GdsText margin="0" tag="li" {...props} />,
 }
 
 export function Mdx({

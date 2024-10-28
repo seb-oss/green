@@ -4,3 +4,26 @@ date: 2024-10-16
 ---
 
 # Code
+
+A badge is a small status or notification indicator that can be used to display a message or status.
+
+Features:
+- **Variants**: The badge supports multiple variants including information, notice, positive, warning, and negative, allowing for different contextual uses.
+- **Slots**: The badge includes a **lead** slot for adding leading content such as icons, enhancing the visual representation.
+- **Disabled State**: The badge can be disabled, making it non-interactive and visually indicating its disabled state.
+- **Size Control**: The badge size can be controlled via the **size** property, with options for **default** and **small**.
+
+<section>
+Example usage:
+
+```html
+<gds-badge variant="positive">
+    <gds-icon-rocket slot="lead"></gds-icon-rocket>
+    Launch
+</gds-badge>
+```
+</section>
+
+## Variants 
+
+<Story component='badge' id="variants" />

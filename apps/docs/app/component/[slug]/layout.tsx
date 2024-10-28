@@ -98,21 +98,21 @@ export default function ComponentLayout({
     },
   ]
 
-  // const getDynamicComponent = (c: string) =>
-  //   dynamic(
-  //     () =>
-  //       import(`../../../design/example/${c}`).catch(() => {
-  //         const ExampleComponent = () => <div>Example</div>
-  //         ExampleComponent.displayName = 'ExampleComponent'
-  //         return ExampleComponent
-  //       }),
-  //     {
-  //       ssr: false,
-  //       loading: () => <p>Loading...</p>,
-  //     },
-  //   )
+  const getDynamicComponent = (c: string) =>
+    dynamic(
+      () =>
+        import(`../../../design/example/${c}`).catch(() => {
+          const ExampleComponent = () => <div>Example</div>
+          ExampleComponent.displayName = 'ExampleComponent'
+          return ExampleComponent
+        }),
+      {
+        ssr: false,
+        loading: () => <p>Loading...</p>,
+      },
+    )
 
-  // const Preview = getDynamicComponent(url_path.replace('/component/', ''))
+  const Preview = getDynamicComponent(url_path.replace('/component/', ''))
 
   return (
     <>
@@ -180,7 +180,7 @@ export default function ComponentLayout({
               justify-content="center"
               height="420px"
             >
-              {/* <Preview /> */}
+              <Preview />
             </GdsFlex>
           </GdsFlex>
           <Taber component={url_path} links={links} />
