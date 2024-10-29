@@ -10,11 +10,13 @@ import Calendar from 'example/calendar'
 import Coachmark from 'example/coachmark'
 import ContextMenu from 'example/context-menu'
 import Datepicker from 'example/datepicker'
+import Divider from 'example/divider'
 import Dropdown from 'example/dropdown'
 import FAB from 'example/fab'
 import FilterChips from 'example/filter-chips'
 import Icon from 'example/icon'
 import Input from 'example/input'
+import Mask from 'example/mask'
 import MenuButton from 'example/menu-button'
 import Popover from 'example/popover'
 import SegmentedControl from 'example/segmented-control'
@@ -73,11 +75,13 @@ const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   'Segmented Control': SegmentedControl,
   Popover: Popover,
   Dropdown: Dropdown,
+  Divider: Divider,
   Input: Input,
   Textarea: Textarea,
   Datepicker: Datepicker,
   Calendar: Calendar,
   Coachmark: Coachmark,
+  Mask: Mask,
   'Context Menu': ContextMenu,
 }
 
@@ -106,6 +110,7 @@ export default function Components({ title }: { title: string }) {
               border="4xs/primary"
               border-radius="s"
               overflow="hidden"
+              padding="0"
             >
               <GdsFlex flex-direction="column">
                 {component.title === 'Calendar' ? (

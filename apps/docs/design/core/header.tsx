@@ -127,7 +127,7 @@ export default function Header() {
             <IconMagnifyingGlass slot="trail" />
           </GdsMenuButton>
           <GdsMenuButton>
-            <IconBrandGithub slot="trail" />
+            <IconBrandGithub />
           </GdsMenuButton>
         </GdsFlex>
       </GdsFlex>
