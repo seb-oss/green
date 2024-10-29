@@ -57,8 +57,8 @@ export default function Header() {
         </GdsContainer>
         <GdsFlex height="100%" padding="0 l">
           <GdsMenuButton>
-            Search
-            <IconMagnifyingGlass slot="trail" />
+            <IconMagnifyingGlass slot="lead" />
+            {isWindows ? '/' : '⌘K'}
           </GdsMenuButton>
           <GdsMenuButton>
             <IconBrandGithub />
