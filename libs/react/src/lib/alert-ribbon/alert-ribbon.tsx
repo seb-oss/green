@@ -35,15 +35,13 @@ export function AlertRibbon({
     } else {
       if (closeText)
         setCloseButton(
-          <button className="close">
-            <span className="sr-only">{closeText}</span>
+          <button className="close" aria-label={closeText}>
             <i></i>
           </button>,
         )
       else
         setCloseButton(
-          <button className="close">
-            <span className="sr-only">Close</span>
+          <button className="close" aria-label="Close">
             <i></i>
           </button>,
         )
@@ -85,7 +83,7 @@ export function AlertRibbon({
         <button
           className="close"
           type="button"
-          aria-label={closeAriaLabel ?? 'Close alert'}
+          aria-label={closeText ?? 'Close alert'}
           onClick={(event) => {
             onClose && onClose(event)
           }}
