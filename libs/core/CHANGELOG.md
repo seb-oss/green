@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.46.2
+
+### Patch Changes
+
+- 4143c5f: **Segmented Control:** Fix scrolling issue
+
 ## 1.46.1
 
 ### Patch Changes
