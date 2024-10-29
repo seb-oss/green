@@ -738,6 +738,17 @@ export class GdsContainer extends GdsElement {
   })
   'grid-row'?: string
 
+  /**
+   * Controls the `flex` property.
+   * Supports all valid CSS `flex` values.
+   *
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/flex
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  flex?: string
+
   render() {
     return html`<slot></slot>`
   }
