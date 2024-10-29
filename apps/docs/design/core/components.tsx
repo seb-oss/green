@@ -25,6 +25,7 @@ import Mask from 'example/mask'
 import MenuButton from 'example/menu-button'
 import Popover from 'example/popover'
 import SegmentedControl from 'example/segmented-control'
+import Spacer from 'example/spacer'
 import Text from 'example/text'
 import Textarea from 'example/textarea'
 import Validation from 'example/validation'
@@ -97,6 +98,7 @@ const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Text: Text,
   Video: Video,
   Flex: Flex,
+  Spacer: Spacer,
   Validation: Validation,
   'Context Menu': ContextMenu,
 }
@@ -141,6 +143,7 @@ export default function Components({ title }: { title: string }) {
                 ) : component.title === 'Calendar' ||
                   component.title === 'Image' ||
                   component.title === 'Mask' ||
+                  component.title === 'Spacer' ||
                   component.title === 'Video' ? (
                   Preview ? (
                     <Preview />
