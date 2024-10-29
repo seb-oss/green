@@ -22,6 +22,7 @@
 
     ul {
       margin-block-end: var(--gds-gap-m);
+      padding: 0; 
     }
 
     li + li {

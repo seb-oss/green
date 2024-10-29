@@ -3,22 +3,26 @@
 import React, { ReactNode } from 'react'
 import dynamic from 'next/dynamic'
 
-// import { GdsCard } from '@sebgroup/green-react/core/card/card'
-// import { GdsFlex } from '@sebgroup/green-react/core/flex/flex'
-// import { GdsText } from '@sebgroup/green-react/core/text/text'
-// import { IconCrossLarge } from '@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge'
+const GdsCard = dynamic(
+  () => import('@sebgroup/green-react/core/card').then((mod) => mod.GdsCard),
+  {
+    ssr: false,
+  },
+)
 
-const GdsCard = dynamic(() => import('@sebgroup/green-react/core/card'), {
-  ssr: false,
-})
+const GdsFlex = dynamic(
+  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
+  {
+    ssr: false,
+  },
+)
 
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
-
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
+const GdsText = dynamic(
+  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
 
 const IconCrossLarge = dynamic(
   () =>
@@ -42,6 +46,8 @@ export default function Dont({ children }: DontProps) {
       background="negative"
       height="max-content"
       level="2"
+      padding="0"
+      overflow="hidden"
     >
       {children}
       <GdsFlex align-items="center" gap="s" padding="xs m">
