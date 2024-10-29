@@ -1,82 +1,16 @@
 'use client'
 
 import React, { useContext, useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import { GdsContainer, GdsFlex, GdsMenuButton } from '$/import/components'
+import {
+  IconBarsThree,
+  IconBrandGithub,
+  IconBrandSeb,
+  IconCrossLarge,
+  IconMagnifyingGlass,
+} from '$/import/icons'
 import { Context } from '$/provider/provider'
-
-const GdsContainer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/container').then(
-      (mod) => mod.GdsContainer,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsMenuButton = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/menu-button').then(
-      (mod) => mod.GdsMenuButton,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const IconBarsThree = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconBarsThree').then(
-      (mod) => mod.IconBarsThree,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconBrandGithub = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub').then(
-      (mod) => mod.IconBrandGithub,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconBrandSeb = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb').then(
-      (mod) => mod.IconBrandSeb,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconCrossLarge = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge').then(
-      (mod) => mod.IconCrossLarge,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconMagnifyingGlass = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass').then(
-      (mod) => mod.IconMagnifyingGlass,
-    ),
-  {
-    ssr: false,
-  },
-)
 
 export default function Header() {
   const { toggleNav, isNavOpen } = useContext(Context)

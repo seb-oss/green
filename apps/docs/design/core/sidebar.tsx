@@ -1,78 +1,17 @@
 'use client'
 
-import React, { useState } from 'react'
-import dynamic from 'next/dynamic'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const IconEyeSlash = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconEyeSlash').then(
-      (mod) => mod.IconEyeSlash,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconCainLink = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconCainLink').then(
-      (mod) => mod.IconCainLink,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const IconChevronBottom = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom').then(
-      (mod) => mod.IconChevronBottom,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const IconChevronTop = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconChevronTop').then(
-      (mod) => mod.IconChevronTop,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const GdsBadge = dynamic(
-  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
-  {
-    ssr: false,
-  },
-)
-const GdsButton = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/button').then((mod) => mod.GdsButton),
-  {
-    ssr: false,
-  },
-)
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
+import { GdsBadge, GdsButton, GdsFlex, GdsText } from '$/import/components'
+import {
+  IconCainLink,
+  IconChevronBottom,
+  IconChevronTop,
+  IconEyeSlash,
+} from '$/import/icons'
 
 const menu = [
   {
@@ -155,6 +94,19 @@ export default function Sidebar({
   const [visibleSublinks, setVisibleSublinks] = useState<{
     [key: string]: boolean
   }>({})
+
+  useEffect(() => {
+    const initialVisibleSublinks: { [key: string]: boolean } = {}
+    menu.forEach((menuItem) => {
+      if (
+        path === menuItem.path ||
+        menuItem.subLinks.some((subLink) => path.includes(subLink.path))
+      ) {
+        initialVisibleSublinks[menuItem.title] = true
+      }
+    })
+    setVisibleSublinks(initialVisibleSublinks)
+  }, [path])
 
   const toggleSublinkVisibility = (key: string) => {
     setVisibleSublinks((prev) => ({
