@@ -27,6 +27,7 @@ import Popover from 'example/popover'
 import SegmentedControl from 'example/segmented-control'
 import Text from 'example/text'
 import Textarea from 'example/textarea'
+import Validation from 'example/validation'
 import Video from 'example/video'
 
 const GdsCard = dynamic(
@@ -96,6 +97,7 @@ const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Text: Text,
   Video: Video,
   Flex: Flex,
+  Validation: Validation,
   'Context Menu': ContextMenu,
 }
 
