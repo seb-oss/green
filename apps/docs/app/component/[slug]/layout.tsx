@@ -6,29 +6,9 @@ import { allComponents } from 'content'
 import Taber from '@/taber'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
+import { GdsBadge, GdsFlex, GdsText } from '$/import/components'
 import Pattern from 'core/pattern'
 import { format, parseISO } from 'date-fns'
-
-const GdsBadge = dynamic(
-  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
-  {
-    ssr: false,
-  },
-)
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
 
 export default function ComponentLayout({
   children,

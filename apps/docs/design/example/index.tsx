@@ -1,5 +1,6 @@
 export { default as Badge } from './badge'
 export { default as Button } from './button'
+export { default as Breadcrumb } from './breadcrumb'
 export { default as Calendar } from './calendar'
 export { default as Card } from './card'
 export { default as Coachmark } from './coachmark'
