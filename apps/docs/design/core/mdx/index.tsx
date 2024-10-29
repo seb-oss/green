@@ -8,12 +8,12 @@ import Spacer from '@/spacer/spacer'
 // Local components
 import Do from './do'
 import Dont from './dont'
-import Figma from './figma/figma'
-import FigmaProto from './figma/figmaProto'
+import Figma from './figma'
 import Grid from './grid'
 import IMG from './image/image'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
+import Prototype from './prototype'
 import Section from './section'
 import Story from './story/story'
 
@@ -38,28 +38,9 @@ const GdsText = dynamic(
   },
 )
 
-const GdsGroupedList = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/grouped-list').then(
-      (mod) => mod.GdsGroupedList,
-    ),
-  {
-    ssr: false,
-  },
-)
-const GdsListItem = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/list-item').then(
-      (mod) => mod.GdsListItem,
-    ),
-  {
-    ssr: false,
-  },
-)
-
 const components = {
   Figma,
-  FigmaProto,
+  Prototype,
   Image: IMG,
   Do,
   Dont,

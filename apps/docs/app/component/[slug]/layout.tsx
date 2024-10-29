@@ -6,7 +6,7 @@ import { allComponents } from 'content'
 import Taber from '@/taber'
 import TOC from '@/toc/toc'
 import Trail from '@/trail/trail'
-import Pattern from 'core/pattern/pattern'
+import Pattern from 'core/pattern'
 import { format, parseISO } from 'date-fns'
 
 const GdsBadge = dynamic(

@@ -130,10 +130,12 @@ export default function Components({ title }: { title: string }) {
                     align-items="flex-start"
                     justify-content="center"
                     padding="0"
+                    background="secondary"
                   >
                     {Preview ? <Preview /> : null}
                   </GdsFlex>
-                ) : component.title === 'Image' ||
+                ) : component.title === 'Calendar' ||
+                  component.title === 'Image' ||
                   component.title === 'Mask' ||
                   component.title === 'Video' ? (
                   Preview ? (
