@@ -120,14 +120,14 @@ export default function Sidebar({
       padding="xl xl xl 2xl"
       border="0 4xs/primary 0 0"
       min-width="300px"
-      max-height="calc(100vh - 72px)"
-      height="100vh"
+      height="calc(100vh - 72px)"
       align-items="flex-start"
       flex-direction="column"
       gap="l"
       position="sticky"
       top="72px"
       inset="72px 0 0 0"
+      overflow="hidden auto"
     >
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
@@ -186,7 +186,12 @@ export default function Sidebar({
           )}
         </GdsFlex>
       ))}
-      <GdsFlex margin="auto 0 0 0" min-width="100%" justify-content="stretch">
+      <GdsFlex
+        margin="auto 0 0 0"
+        min-width="100%"
+        justify-content="stretch"
+        padding="0 s 0 0"
+      >
         <Link
           href="https://designlibrary.sebgroup.com/"
           target="_blank"
