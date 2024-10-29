@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import Hero from '@/_hero/hero'
 import { Accordion, AccordionItem } from '@/accordion'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
+import Hero from 'core/hero'
 
 import './style.css'
 

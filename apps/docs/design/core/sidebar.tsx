@@ -124,6 +124,8 @@ export default function Sidebar({
       align-items="flex-start"
       flex-direction="column"
       gap="l"
+      position="sticky"
+      top="72px"
     >
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
