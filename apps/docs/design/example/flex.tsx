@@ -1,21 +1,6 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsCard = dynamic(
-  () => import('@sebgroup/green-react/core/card').then((mod) => mod.GdsCard),
-  {
-    ssr: false,
-  },
-)
+import { GdsCard, GdsFlex } from '$/import/components'
 
 const cardProps = [
   { width: '10px', height: '40px' },

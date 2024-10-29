@@ -12,7 +12,7 @@ const Calendar = () => (
       z-index="4"
       pointer-events="none"
     ></GdsMask>
-    <GdsCalendar></GdsCalendar>
+    <GdsCalendar />
   </GdsFlex>
 )
 

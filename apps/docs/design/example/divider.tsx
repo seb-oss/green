@@ -5,7 +5,7 @@ import { GdsDivider, GdsFlex } from '$/import/components'
 
 const Divider = () => (
   <GdsFlex min-width="200px">
-    <GdsDivider></GdsDivider>
+    <GdsDivider />
   </GdsFlex>
 )
 

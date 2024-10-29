@@ -1,23 +1,6 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsVideo = dynamic(
-  () => import('@sebgroup/green-react/core/video').then((mod) => mod.GdsVideo),
-  {
-    ssr: false,
-  },
-)
-const GdsContainer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/container').then(
-      (mod) => mod.GdsContainer,
-    ),
-  {
-    ssr: false,
-  },
-)
+import { GdsVideo } from '$/import/components'
 
 const Video = () => (
   <GdsVideo
@@ -28,7 +11,7 @@ const Video = () => (
     autoplay
     loop
     playsinline
-  ></GdsVideo>
+  />
 )
 
 export default Video

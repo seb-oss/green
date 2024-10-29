@@ -1,20 +1,6 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsGrid = dynamic(
-  () => import('@sebgroup/green-react/core/grid').then((mod) => mod.GdsGrid),
-  {
-    ssr: false,
-  },
-)
-const GdsCard = dynamic(
-  () => import('@sebgroup/green-react/core/card').then((mod) => mod.GdsCard),
-  {
-    ssr: false,
-  },
-)
+import { GdsCard, GdsGrid } from '$/import/components'
 
 const Card = () => (
   <GdsGrid columns="3" gap="xs">

@@ -5,7 +5,7 @@ import { IconCreditCard } from '$/import/icons'
 
 const Button = () => (
   <GdsButton>
-    <IconCreditCard slot="lead"></IconCreditCard>
+    <IconCreditCard slot="lead" />
     Primary
   </GdsButton>
 )

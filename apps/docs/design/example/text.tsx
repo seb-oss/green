@@ -1,20 +1,6 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
+import { GdsFlex, GdsText } from '$/import/components'
 
 const Text = () => (
   <GdsFlex flex-direction="column">

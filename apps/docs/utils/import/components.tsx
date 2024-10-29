@@ -180,3 +180,68 @@ export const GdsFilterChip = dynamic(
     ssr: false,
   },
 )
+
+export const GdsImg = dynamic(
+  () => import('@sebgroup/green-react/core/img').then((mod) => mod.GdsImg),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsInput = dynamic(
+  () => import('@sebgroup/green-react/core/input').then((mod) => mod.GdsInput),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsPopover = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/popover').then((mod) => mod.GdsPopover),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsSegment = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/segment').then((mod) => mod.GdsSegment),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsSegmentedControl = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/segmented-control').then(
+      (mod) => mod.GdsSegmentedControl,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsSpacer = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/spacer').then((mod) => mod.GdsSpacer),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsTextarea = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/textarea').then(
+      (mod) => mod.GdsTextarea,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsVideo = dynamic(
+  () => import('@sebgroup/green-react/core/video').then((mod) => mod.GdsVideo),
+  {
+    ssr: false,
+  },
+)

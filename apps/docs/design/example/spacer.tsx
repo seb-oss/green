@@ -1,30 +1,6 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsSpacer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/spacer').then((mod) => mod.GdsSpacer),
-  {
-    ssr: false,
-  },
-)
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-const GdsContainer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/container').then(
-      (mod) => mod.GdsContainer,
-    ),
-  {
-    ssr: false,
-  },
-)
+import { GdsContainer, GdsFlex, GdsSpacer } from '$/import/components'
 
 const Spacer = () => (
   <GdsFlex

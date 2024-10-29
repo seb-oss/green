@@ -129,3 +129,23 @@ export const IconCreditCard = dynamic(
     ssr: false,
   },
 )
+
+export const IconRocket = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconRocket').then(
+      (mod) => mod.IconRocket,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconArrowDown = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconArrowDown').then(
+      (mod) => mod.IconArrowDown,
+    ),
+  {
+    ssr: false,
+  },
+)

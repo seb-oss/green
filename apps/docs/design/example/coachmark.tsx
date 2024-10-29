@@ -6,7 +6,7 @@ import { IconPin } from '$/import/icons'
 const Coachmark = () => (
   <>
     <GdsFlex id="target" align-items="center" gap="s">
-      <IconPin></IconPin>
+      <IconPin />
       <GdsText>Coachmark</GdsText>
     </GdsFlex>
     <GdsCoachmark target="target" placement="bottom">

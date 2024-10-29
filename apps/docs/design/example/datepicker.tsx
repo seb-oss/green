@@ -2,6 +2,6 @@
 
 import { GdsDatepicker } from '$/import/components'
 
-const Datepicker = () => <GdsDatepicker></GdsDatepicker>
+const Datepicker = () => <GdsDatepicker />
 
 export default Datepicker
