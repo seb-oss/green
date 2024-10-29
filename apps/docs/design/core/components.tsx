@@ -24,6 +24,7 @@ import Mask from 'example/mask'
 import MenuButton from 'example/menu-button'
 import Popover from 'example/popover'
 import SegmentedControl from 'example/segmented-control'
+import Text from 'example/text'
 import Textarea from 'example/textarea'
 import Video from 'example/video'
 
@@ -91,6 +92,7 @@ const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Card: Card,
   Grid: Grid,
   Image: Image,
+  Text: Text,
   Video: Video,
   'Context Menu': ContextMenu,
 }
