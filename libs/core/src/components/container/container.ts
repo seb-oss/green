@@ -396,7 +396,12 @@ export class GdsContainer extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => {
-      return v === 'auto' ? 'auto' : `var(--gds-space-${v})`
+      const sign = v.startsWith('-') ? 'neg' : 'pos'
+      const val =
+        sign == 'pos'
+          ? `var(--gds-space-${v})`
+          : `calc(var(--gds-space-${v.substring(1)}) * -1)`
+      return v === 'auto' ? 'auto' : val
     },
     styleTemplate: (_prop, values) => {
       const transformValue = (v: string) => (v === 'auto' ? 'auto' : `${v}`)
