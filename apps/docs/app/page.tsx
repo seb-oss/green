@@ -1,5 +1,5 @@
-import { GdsGrid } from '$/import/components'
 import Components from 'core/components'
+import Empower from 'core/empower'
 import Hero from 'core/hero'
 import Ressources from 'core/resources'
 
@@ -27,17 +27,7 @@ export default function Home() {
       />
       <Components title="Components" />
       <Ressources title="Resources" />
-      {/* <ComponentList title="Components" /> */}
-      {/* <RessourcesList title="Resources" /> */}
-      {/* <GdsGrid columns="s{1} m{1} l{2}" gap="s">
-        <h2>Empowering designers and developers</h2>
-        <p className="gds-fs-headline-small color-secondary">
-          A framework with accessibility and usability rooted at its core, Green
-          Design System empowers designers and developers to create with speed
-          and precision. It ensures a seamless and consistent visual experience
-          across our entire product suite.
-        </p>
-      </GdsGrid> */}
+      <Empower title="Empowering designers and developers" />
     </>
   )
 }
