@@ -3,11 +3,11 @@
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import Taber from '@/taber'
-import TOC from '@/toc/toc'
-import Trail from '@/trail/trail'
 import { GdsBadge, GdsFlex, GdsText } from '$/import/components'
 import Pattern from 'core/pattern'
+import Taber from 'core/taber'
+import TOC from 'core/toc'
+import Trail from 'core/trail'
 import { format, parseISO } from 'date-fns'
 
 export default function ComponentLayout({
@@ -96,7 +96,12 @@ export default function ComponentLayout({
   const Preview = getDynamicComponent(url_path.replace('/component/', ''))
 
   return (
-    <>
+    <GdsFlex
+      flex-direction="column"
+      max-width="max-content"
+      justify-content="center"
+      margin="0 auto"
+    >
       <Trail
         home={'Home'}
         separator={<span> / </span>}
@@ -179,6 +184,6 @@ export default function ComponentLayout({
         </GdsFlex>
         <GdsFlex>{tocComponent}</GdsFlex>
       </GdsFlex>
-    </>
+    </GdsFlex>
   )
 }
