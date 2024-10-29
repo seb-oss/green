@@ -1,14 +1,6 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsCard = dynamic(
-  () => import('@sebgroup/green-react/core/card').then((mod) => mod.GdsCard),
-  {
-    ssr: false,
-  },
-)
+import { GdsCard } from '$/import/components'
 
 const Card = () => (
   <>

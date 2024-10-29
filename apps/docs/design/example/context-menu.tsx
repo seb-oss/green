@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import { GdsContextMenu, GdsMenuItem } from '$/import/components'
 
 const ContextMenu = () => (

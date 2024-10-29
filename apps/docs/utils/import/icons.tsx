@@ -99,3 +99,33 @@ export const IconMagnifyingGlass = dynamic(
     ssr: false,
   },
 )
+
+export const IconPin = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconPin').then(
+      (mod) => mod.IconPin,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconPlusSmall = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconPlusSmall').then(
+      (mod) => mod.IconPlusSmall,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconCreditCard = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconCreditCard').then(
+      (mod) => mod.IconCreditCard,
+    ),
+  {
+    ssr: false,
+  },
+)

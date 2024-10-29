@@ -90,3 +90,93 @@ export const GdsMenuItem = dynamic(
     ssr: false,
   },
 )
+
+export const GdsCoachmark = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/coachmark').then(
+      (mod) => mod.GdsCoachmark,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsCalendar = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/calendar').then(
+      (mod) => mod.GdsCalendar,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsMask = dynamic(
+  () => import('@sebgroup/green-react/core/mask').then((mod) => mod.GdsMask),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsDatepicker = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/datepicker').then(
+      (mod) => mod.GdsDatepicker,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsDropdown = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/dropdown').then(
+      (mod) => mod.GdsDropdown,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsOption = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/option').then((mod) => mod.GdsOption),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsFab = dynamic(
+  () => import('@sebgroup/green-react/core/fab').then((mod) => mod.GdsFab),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsSignal = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/signal').then((mod) => mod.GdsSignal),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsFilterChips = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/filter-chips').then(
+      (mod) => mod.GdsFilterChips,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsFilterChip = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/filter-chip').then(
+      (mod) => mod.GdsFilterChip,
+    ),
+  {
+    ssr: false,
+  },
+)
