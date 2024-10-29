@@ -1,29 +1,7 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-
-const GdsButton = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/button').then((mod) => mod.GdsButton),
-  {
-    ssr: false,
-  },
-)
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
+import { GdsButton, GdsFlex, GdsText } from '$/import/components'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -58,7 +36,6 @@ export default function Footer() {
       </GdsFlex>
       <GdsFlex justify-content="space-between" align-items="center">
         {text}
-
         <GdsButton data-cc="c-settings" rank="tertiary">
           Cookie preferences
         </GdsButton>

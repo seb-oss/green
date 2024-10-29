@@ -20,6 +20,16 @@ export const IconCainLink = dynamic(
   },
 )
 
+export const IconChevronRight = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconChevronRight').then(
+      (mod) => mod.IconChevronRight,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 export const IconChevronBottom = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconChevronBottom').then(

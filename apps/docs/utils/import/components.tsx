@@ -24,9 +24,31 @@ export const GdsBadge = dynamic(
   },
 )
 
+export const GdsCard = dynamic(
+  () => import('@sebgroup/green-react/core/card').then((mod) => mod.GdsCard),
+  {
+    ssr: false,
+  },
+)
+
 export const GdsButton = dynamic(
   () =>
     import('@sebgroup/green-react/core/button').then((mod) => mod.GdsButton),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsDivider = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/divider').then((mod) => mod.GdsDivider),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsGrid = dynamic(
+  () => import('@sebgroup/green-react/core/grid').then((mod) => mod.GdsGrid),
   {
     ssr: false,
   },
