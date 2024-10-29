@@ -70,3 +70,23 @@ export const GdsMenuButton = dynamic(
     ssr: false,
   },
 )
+
+export const GdsContextMenu = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/context-menu').then(
+      (mod) => mod.GdsContextMenu,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsMenuItem = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/menu-item').then(
+      (mod) => mod.GdsMenuItem,
+    ),
+  {
+    ssr: false,
+  },
+)
