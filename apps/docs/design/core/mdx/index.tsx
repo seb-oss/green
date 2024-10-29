@@ -2,8 +2,8 @@
 
 import * as React from 'react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import dynamic from 'next/dynamic'
 import Spacer from '@/spacer/spacer'
+import { GdsDivider, GdsFlex, GdsText } from '$/import/components'
 
 // Local components
 import Do from './do'
@@ -16,27 +16,6 @@ import Pattern from './pattern/pattern'
 import Prototype from './prototype'
 import Section from './section'
 import Story from './story/story'
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-const GdsDivider = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/divider').then((mod) => mod.GdsDivider),
-  {
-    ssr: false,
-  },
-)
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
 
 const components = {
   Figma,

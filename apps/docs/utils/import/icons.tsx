@@ -80,16 +80,6 @@ export const IconBrandSeb = dynamic(
   },
 )
 
-export const IconCrossLarge = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge').then(
-      (mod) => mod.IconCrossLarge,
-    ),
-  {
-    ssr: false,
-  },
-)
-
 export const IconMagnifyingGlass = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass').then(
@@ -144,6 +134,26 @@ export const IconArrowDown = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconArrowDown').then(
       (mod) => mod.IconArrowDown,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconCrossLarge = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge').then(
+      (mod) => mod.IconCrossLarge,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconCheckmark = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconCheckmark').then(
+      (mod) => mod.IconCheckmark,
     ),
   {
     ssr: false,
