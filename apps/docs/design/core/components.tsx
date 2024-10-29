@@ -7,20 +7,25 @@ import { isDev } from '$/env/env'
 import Badge from 'example/badge'
 import Button from 'example/button'
 import Calendar from 'example/calendar'
+import Card from 'example/card'
 import Coachmark from 'example/coachmark'
+import Container from 'example/container'
 import ContextMenu from 'example/context-menu'
 import Datepicker from 'example/datepicker'
 import Divider from 'example/divider'
 import Dropdown from 'example/dropdown'
 import FAB from 'example/fab'
 import FilterChips from 'example/filter-chips'
+import Grid from 'example/grid'
 import Icon from 'example/icon'
+import Image from 'example/image'
 import Input from 'example/input'
 import Mask from 'example/mask'
 import MenuButton from 'example/menu-button'
 import Popover from 'example/popover'
 import SegmentedControl from 'example/segmented-control'
 import Textarea from 'example/textarea'
+import Video from 'example/video'
 
 const GdsCard = dynamic(
   () => import('@sebgroup/green-react/core/card').then((mod) => mod.GdsCard),
@@ -82,6 +87,11 @@ const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Calendar: Calendar,
   Coachmark: Coachmark,
   Mask: Mask,
+  Container: Container,
+  Card: Card,
+  Grid: Grid,
+  Image: Image,
+  Video: Video,
   'Context Menu': ContextMenu,
 }
 
@@ -121,6 +131,12 @@ export default function Components({ title }: { title: string }) {
                   >
                     {Preview ? <Preview /> : null}
                   </GdsFlex>
+                ) : component.title === 'Image' ||
+                  component.title === 'Mask' ||
+                  component.title === 'Video' ? (
+                  Preview ? (
+                    <Preview />
+                  ) : null
                 ) : (
                   <GdsFlex
                     align-items="center"

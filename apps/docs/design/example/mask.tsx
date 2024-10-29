@@ -50,11 +50,12 @@ const IconArrowDown = dynamic(
 )
 
 const Mask = () => (
-  <GdsContainer position="relative" border-radius="s" overflow="hidden">
+  <GdsContainer position="relative" overflow="hidden">
     <GdsImg
-      src="https://github.com/user-attachments/assets/fdbfca17-c5b7-43cc-b846-6e1ab68e5d69"
-      aspect-ratio="1/1"
+      src="/example/mask.jpg"
+      aspect-ratio="16/9"
       object-fit="cover"
+      height="200px"
     ></GdsImg>
     <GdsMask
       mask-image="top"

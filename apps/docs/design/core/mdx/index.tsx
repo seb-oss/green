@@ -38,6 +38,25 @@ const GdsText = dynamic(
   },
 )
 
+const GdsGroupedList = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/grouped-list').then(
+      (mod) => mod.GdsGroupedList,
+    ),
+  {
+    ssr: false,
+  },
+)
+const GdsListItem = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/list-item').then(
+      (mod) => mod.GdsListItem,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 const components = {
   Figma,
   FigmaProto,
@@ -70,8 +89,8 @@ const components = {
   ),
   Row: (props: object) => <GdsFlex {...props} />,
   Section: Section,
-  ul: (props: object) => <GdsText margin="0" tag="ul" gap="xs" {...props} />,
-  li: (props: object) => <GdsText margin="0" tag="li" {...props} />,
+  ul: (props: object) => <ul {...props} />,
+  li: (props: object) => <li {...props} />,
 }
 
 export function Mdx({
