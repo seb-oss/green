@@ -16,6 +16,7 @@ import Divider from 'example/divider'
 import Dropdown from 'example/dropdown'
 import FAB from 'example/fab'
 import FilterChips from 'example/filter-chips'
+import Flex from 'example/flex'
 import Grid from 'example/grid'
 import Icon from 'example/icon'
 import Image from 'example/image'
@@ -94,6 +95,7 @@ const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
   Image: Image,
   Text: Text,
   Video: Video,
+  Flex: Flex,
   'Context Menu': ContextMenu,
 }
 
