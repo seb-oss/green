@@ -131,6 +131,7 @@ export function CMD({
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 function Home({ searchComponents }: { searchComponents: Function }) {
   return (
     <>
@@ -182,7 +183,12 @@ function Components() {
     <>
       {components.map((component, idx) => {
         return (
-          <Item key={idx} onSelect={() => {}}>
+          <Item
+            key={idx}
+            onSelect={() => {
+              console.log('Selected:', component.title)
+            }}
+          >
             {component.title}
           </Item>
         )
@@ -200,7 +206,9 @@ function Components() {
 function Item({
   children,
   shortcut,
-  onSelect = () => {},
+  onSelect = () => {
+    console.log('Selected:', children)
+  },
 }: {
   children: React.ReactNode
   shortcut?: string
