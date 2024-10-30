@@ -25,7 +25,6 @@ export function registerGlobalScrollLockStyles() {
  * without premature unlocking.
  */
 export function lockBodyScrolling(lockingEl: HTMLElement) {
-  console.log('lockingEl', lockingEl)
   locks.add(lockingEl)
 
   // When the first lock is created, set the scroll lock size to match the scrollbar's width to prevent content from

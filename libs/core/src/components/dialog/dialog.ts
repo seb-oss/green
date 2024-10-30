@@ -2,6 +2,7 @@ import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
+import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
   html,
@@ -32,29 +33,11 @@ export class GdsDialog extends GdsElement {
   static styles = [styles]
 
   /**
-   * Whether the dialog is open.
+   * Whether the dialog is open. The state of the dialog can be controlled either
+   * by setting this property or by calling the `show()` and `close()` methods.
    */
   @property({ type: Boolean, reflect: true })
-  get open() {
-    return this.#open
-  }
-  set open(value: boolean) {
-    this.#open = value
-    this.updateComplete.then(() => {
-      if (value === true) {
-        this.#returnValue = undefined
-        this.updateComplete.then(() => {
-          if (!this._elDialog) return
-          this._elDialog.showModal()
-          lockBodyScrolling(this._elDialog)
-        })
-      } else {
-        this.#returnValue = 'open-prop-false'
-        this._elDialog?.close(this.#returnValue)
-      }
-    })
-  }
-  #open = false
+  open = false
 
   /**
    * The dialog's heading.
@@ -83,20 +66,25 @@ export class GdsDialog extends GdsElement {
   private _elTriggerSlot: HTMLSlotElement | undefined
 
   /**
+   * Opens the dialog.
+   */
+  show() {
+    this.open = true
+    this.#dispatchShowEvent()
+  }
+
+  /**
    * Closes the dialog.
    * @param returnValue - The value to return when the dialog is closed.
    */
-  close = (returnValue: any) => {
-    if (!this._elDialog) return
-
+  close(returnValue: any) {
     this.#returnValue = returnValue
-    this.#open = false
+    this.open = false
+  }
 
-    this._elDialog.close(returnValue ?? 'close-method')
-    unlockBodyScrolling(this._elDialog)
-
-    this.#emitCloseEvent()
-    this.requestUpdate()
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    unlockBodyScrolling(this)
   }
 
   render() {
@@ -166,20 +154,31 @@ export class GdsDialog extends GdsElement {
       )}`
   }
 
+  @watch('open', { waitUntilFirstUpdate: true })
+  private _handleOpenChange() {
+    if (this.open) {
+      this.#returnValue = undefined
+      this.updateComplete.then(() => {
+        this._elDialog?.showModal()
+        lockBodyScrolling(this)
+      })
+    } else {
+      this.#returnValue = this.#returnValue || 'prop-change'
+      this._elDialog?.close(this.#returnValue)
+      unlockBodyScrolling(this)
+      this.requestUpdate('open')
+    }
+  }
+
   #handleNativeClose = (e: Event) => {
     const dialog = e.target as HTMLDialogElement
     const returnValue = dialog.returnValue
 
-    this.#open = false
-
-    if (!returnValue) {
-      unlockBodyScrolling(dialog)
-      this.#returnValue = 'native-close'
-      this.#emitCloseEvent()
-    }
+    this.close(returnValue || 'native-close')
+    this.#dispatchCloseEvent()
   }
 
-  #emitCloseEvent = () => {
+  #dispatchCloseEvent = () => {
     this.dispatchEvent(
       new CustomEvent('gds-close', {
         detail: this.#returnValue,
@@ -218,8 +217,6 @@ export class GdsDialog extends GdsElement {
   }
 
   #handleTriggerClick = (e: MouseEvent) => {
-    e.preventDefault()
-    this.open = true
-    this.#dispatchShowEvent()
+    this.show()
   }
 }

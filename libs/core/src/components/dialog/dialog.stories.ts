@@ -37,6 +37,8 @@ export const Default: Story = {
       </gds-dialog>
       <gds-dialog
         @gds-close=${console.log}
+        @gds-show=${console.log}
+        @gds-ui-state=${console.log}
         heading="Dialog heading"
         variant="slide-out"
         id="my-dialog"
