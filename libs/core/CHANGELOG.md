@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.47.1
+
+### Patch Changes
+
+- c533689: **Form controls:** Add nullcheck in `formAssociatedCallback`
+
 ## 1.47.0
 
 ### Minor Changes
