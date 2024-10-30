@@ -184,8 +184,8 @@ export abstract class GdsFormControlElement<ValueT = any>
     this.value = undefined
   }
 
-  formAssociatedCallback(form: HTMLFormElement) {
-    form.addEventListener('submit', this._handleFormSubmit.bind(this))
+  formAssociatedCallback(form?: HTMLFormElement) {
+    form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 
   protected _handleFormSubmit(e: Event) {
