@@ -51,34 +51,28 @@ export class GdsDialog extends GdsElement {
   @property()
   variant: 'default' | 'slide-out' = 'default'
 
-  /**
-   * This value is set when the dialog is closed.
-   */
-  get returnValue() {
-    return this.#returnValue
-  }
-  #returnValue: any
-
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
 
   @query('slot[name="trigger"]')
   private _elTriggerSlot: HTMLSlotElement | undefined
 
+  #returnValue: any
+
   /**
    * Opens the dialog.
    */
-  show() {
+  show(reason?: string) {
     this.open = true
-    this.#dispatchShowEvent()
+    reason && this.#dispatchShowEvent(reason)
   }
 
   /**
    * Closes the dialog.
    * @param returnValue - The value to return when the dialog is closed.
    */
-  close(returnValue: any) {
-    this.#returnValue = returnValue
+  close(reason: string) {
+    this.#returnValue = reason
     this.open = false
   }
 
@@ -117,6 +111,7 @@ export class GdsDialog extends GdsElement {
               >
                 <h2 id="heading">${this.heading}</h2>
                 <gds-button
+                  id="close-btn"
                   rank="secondary"
                   size="small"
                   @click=${() => this.close('btn-close')}
@@ -154,7 +149,7 @@ export class GdsDialog extends GdsElement {
       )}`
   }
 
-  @watch('open', { waitUntilFirstUpdate: true })
+  @watch('open')
   private _handleOpenChange() {
     if (this.open) {
       this.#returnValue = undefined
@@ -175,34 +170,36 @@ export class GdsDialog extends GdsElement {
     const returnValue = dialog.returnValue
 
     this.close(returnValue || 'native-close')
-    this.#dispatchCloseEvent()
+
+    if (returnValue !== 'prop-change') this.#dispatchCloseEvent(returnValue)
   }
 
-  #dispatchCloseEvent = () => {
+  #dispatchCloseEvent = (reason?: string) => {
     this.dispatchEvent(
       new CustomEvent('gds-close', {
-        detail: this.#returnValue,
+        detail: reason,
         bubbles: false,
         composed: false,
       }),
     )
-    this.#dispatchUiStateEvent()
+    this.#dispatchUiStateEvent(reason)
   }
 
-  #dispatchShowEvent = () => {
+  #dispatchShowEvent = (reason?: string) => {
     this.dispatchEvent(
       new CustomEvent('gds-show', {
+        detail: reason,
         bubbles: false,
         composed: false,
       }),
     )
-    this.#dispatchUiStateEvent()
+    this.#dispatchUiStateEvent(reason)
   }
 
-  #dispatchUiStateEvent = () => {
+  #dispatchUiStateEvent = (reason?: string) => {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
-        detail: { open: this.open },
+        detail: { reason, open: this.open },
         bubbles: false,
         composed: false,
       }),
@@ -217,6 +214,6 @@ export class GdsDialog extends GdsElement {
   }
 
   #handleTriggerClick = (e: MouseEvent) => {
-    this.show()
+    this.show('slotted-trigger')
   }
 }
