@@ -181,6 +181,18 @@ export class GdsText extends GdsElement {
   'text-align'?: string
 
   /**
+   * Controls the text-decoration property of the text.
+   * Supports all valid CSS text-decoration values.
+   *
+   * @property text-decoration
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: '[tag]',
+  })
+  'text-decoration'?: string
+
+  /**
    * Controls the number of lines it should show.
    *
    * @property lines

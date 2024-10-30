@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.47.1
+
+### Patch Changes
+
+- c533689: **Form controls:** Add nullcheck in `formAssociatedCallback`
+
+## 1.47.0
+
+### Minor Changes
+
+- 2c90cdf: **Text:** Add text decoration property with default CSS values and offset
+
 ## 1.46.2
 
 ### Patch Changes
