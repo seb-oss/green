@@ -149,7 +149,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                 </GdsButton>
               </GdsFlex>
               {openSections[item[0].slug] && (
-                <GdsFlex flex-direction="column" padding="0 0 0 s" gap="xs">
+                <GdsFlex flex-direction="column" margin="0 0 0 2xs">
                   {item.slice(1).map((heading) => (
                     <Link
                       key={`#${heading.slug}`}
@@ -160,15 +160,20 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                       onClick={() => handleClick(heading.slug)}
                       passHref
                     >
-                      <GdsText
-                        font-size="body-s"
-                        color="secondary"
-                        text-decoration={
-                          activeId === heading.slug ? 'underline' : 'none'
-                        }
+                      <GdsFlex
+                        border={`0 0 0 ${activeId === heading.slug ? '4xs/secondary' : '4xs/primary'}`}
+                        padding="xs m"
                       >
-                        {heading.text}
-                      </GdsText>
+                        <GdsText
+                          font-size="body-s"
+                          color="secondary"
+                          text-decoration={
+                            activeId === heading.slug ? 'underline' : 'none'
+                          }
+                        >
+                          {heading.text}
+                        </GdsText>
+                      </GdsFlex>
                     </Link>
                   ))}
                 </GdsFlex>
