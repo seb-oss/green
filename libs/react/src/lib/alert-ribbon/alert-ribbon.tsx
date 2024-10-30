@@ -83,7 +83,7 @@ export function AlertRibbon({
         <button
           className="close"
           type="button"
-          aria-label={closeText ?? 'Close alert'}
+          aria-label={closeAriaLabel ?? closeText ?? 'Close alert'}
           onClick={(event) => {
             onClose && onClose(event)
           }}
