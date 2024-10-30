@@ -95,6 +95,12 @@ export default function Sidebar({
     [key: string]: boolean
   }>({})
 
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
+
+  useEffect(() => {
+    return () => setHoveredLink(null)
+  }, [])
+
   useEffect(() => {
     const initialVisibleSublinks: { [key: string]: boolean } = {}
     menu.forEach((menuItem) => {
@@ -135,8 +141,20 @@ export default function Sidebar({
             <Link
               className={path === menuItem.path ? 'active' : ''}
               href={menuItem.path}
+              onMouseEnter={() =>
+                setHoveredLink(menuItem.path + menuItem.title)
+              }
+              onMouseLeave={() => setHoveredLink(null)}
             >
-              {menuItem.title}
+              <GdsText
+                text-decoration={
+                  hoveredLink === menuItem.path + menuItem.title
+                    ? 'underline'
+                    : 'none'
+                }
+              >
+                {menuItem.title}
+              </GdsText>
             </Link>
             {menuItem.subLinks.length > 0 && (
               <GdsButton
@@ -163,9 +181,19 @@ export default function Sidebar({
                     key={subIdx}
                     className={path === subLink.path ? 'active' : ''}
                     href={subLink.path}
+                    onMouseEnter={() =>
+                      setHoveredLink(subLink.path + subLink.title)
+                    }
+                    onMouseLeave={() => setHoveredLink(null)}
                   >
                     <GdsFlex justify-content="space-between">
-                      <GdsText text-decoration="underline">
+                      <GdsText
+                        text-decoration={
+                          hoveredLink === subLink.path + subLink.title
+                            ? 'underline'
+                            : 'none'
+                        }
+                      >
                         {subLink.title}
                       </GdsText>
                       <GdsFlex align-items="center" gap="xs">
