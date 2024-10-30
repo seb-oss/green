@@ -188,19 +188,9 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
+    selector: '[tag]',
   })
   'text-decoration'?: string
-
-  /**
-   * Controls the text-underline-offset property of the text.
-   * Supports all valid CSS text-underline-offset values.
-   *
-   * @property text-underline-offset
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'text-underline-offset'?: string
 
   /**
    * Controls the number of lines it should show.
