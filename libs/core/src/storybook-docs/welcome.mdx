@@ -13,6 +13,7 @@ import '../components/input/input'
 import '../components/mask/mask'
 import '../components/textarea/textarea'
 import '../components/text/text'
+import '../components/link/link'
 import '../components/menu-button/menu-button'
 import '../components/popover/popover'
 import '../components/context-menu/context-menu'
@@ -28,6 +29,7 @@ import '../components/icon/icons/magnifying-glass'
 import '../components/icon/icons/chevron-bottom'
 import '../components/icon/icons/chevron-right'
 import '../components/icon/icons/plus-small'
+import '../components/icon/icons/arrow-right'
 import '../components/signal/signal'
 
 import Version from './version';
@@ -161,6 +163,20 @@ import Story from './story';
                         <Story path="./?path=/docs/components-menu-button--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Menu Button</gds-text>
+                                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                            </gds-flex>
+                        </Story>
+                    </gds-flex>
+                </gds-card>
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
+                    <gds-flex flex-direction="column">
+                        <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px"  gap="s">
+                            <gds-link>Link text <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right></gds-link>
+                        </gds-flex>
+                        <gds-divider padding="s" opacity="0.2"></gds-divider>
+                        <Story path="./?path=/docs/components-menu-button--docs" >
+                            <gds-flex padding="s" justify-content="space-between" align-items="center">
+                                <gds-text tag="h5">Link</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
                             </gds-flex>
                         </Story>
