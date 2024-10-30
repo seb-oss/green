@@ -14,7 +14,7 @@ import { Context } from '$/provider/provider'
 import { ThemeToggle } from '$/theme/toggle'
 
 export const Header = forwardRef(({ ...props }, ref) => {
-  const { toggleNav, isNavOpen } = useContext(Context)
+  const { toggleNav, isNavOpen, toggleCmd } = useContext(Context)
   const [isWindows, setIsWindows] = useState(false)
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
           </Link>
         </GdsContainer>
         <GdsFlex height="100%" padding="0 l">
-          <GdsMenuButton>
+          <GdsMenuButton onClick={toggleCmd}>
             <IconMagnifyingGlass slot="lead" />
             {isWindows ? '/' : '⌘K'}
           </GdsMenuButton>

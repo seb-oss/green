@@ -9,6 +9,7 @@ interface ContextProps {
   loading: boolean
   isNavOpen: boolean
   toggleNav: () => void
+  toggleCmd: () => void
   theme: string
   setTheme: (theme: string) => void
 }
@@ -19,6 +20,9 @@ export const Context = createContext<ContextProps>({
   isNavOpen: false,
   toggleNav: () => {
     console.warn('toggleNav function is not implemented')
+  },
+  toggleCmd: () => {
+    console.warn('toggleCmd function is not implemented')
   },
   theme: 'light',
   setTheme: () => {
@@ -85,6 +89,7 @@ export function Provider({
     loading,
     isNavOpen,
     toggleNav,
+    toggleCmd,
     theme,
     setTheme,
   }
