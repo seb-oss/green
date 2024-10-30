@@ -12,22 +12,9 @@ export function registerGlobalScrollLockStyles() {
   GlobalStylesRegistry.instance.injectGlobalStyles(
     'dialog-scroll-lock',
     css`
-      @supports (scrollbar-gutter: stable) {
-        .gds-scroll-lock {
-          scrollbar-gutter: var(--gds-scroll-lock-gutter) !important;
-        }
-
-        .gds-scroll-lock body {
-          overflow: hidden !important;
-        }
-      }
-
-      /** This can go away once Safari has scrollbar-gutter support. */
-      @supports not (scrollbar-gutter: stable) {
-        .gds-scroll-lock body {
-          padding-right: var(--gds-scroll-lock-size) !important;
-          overflow: hidden !important;
-        }
+      .gds-scroll-lock body {
+        padding-right: var(--gds-scroll-lock-size) !important;
+        overflow: hidden !important;
       }
     `,
   )
