@@ -37,7 +37,6 @@ export class GdsDialog extends GdsElement {
       } else {
         this.#returnValue = 'open-prop-false'
         this._elDialog?.close(this.#returnValue)
-        this.#emitCloseEvent()
       }
     })
   }
@@ -175,11 +174,23 @@ export class GdsDialog extends GdsElement {
         composed: false,
       }),
     )
+    this.#dispatchUiStateEvent()
   }
 
-  #emitShowEvent = () => {
+  #dispatchShowEvent = () => {
     this.dispatchEvent(
       new CustomEvent('gds-show', {
+        bubbles: false,
+        composed: false,
+      }),
+    )
+    this.#dispatchUiStateEvent()
+  }
+
+  #dispatchUiStateEvent = () => {
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        detail: { open: this.open },
         bubbles: false,
         composed: false,
       }),
@@ -196,6 +207,6 @@ export class GdsDialog extends GdsElement {
   #handleTriggerClick = (e: MouseEvent) => {
     e.preventDefault()
     this.open = true
-    this.#emitShowEvent()
+    this.#dispatchShowEvent()
   }
 }
