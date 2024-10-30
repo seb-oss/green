@@ -1,9 +1,11 @@
 'use client'
 
 import React, { createContext, useEffect, useState } from 'react'
+import { CMD } from 'core/cmd'
 import { Toaster } from 'sonner'
 
 interface ContextProps {
+  isOpen: boolean
   loading: boolean
   isNavOpen: boolean
   toggleNav: () => void
@@ -12,6 +14,7 @@ interface ContextProps {
 }
 
 export const Context = createContext<ContextProps>({
+  isOpen: false,
   loading: true,
   isNavOpen: false,
   toggleNav: () => {
@@ -35,6 +38,7 @@ export function Provider({
   theme?: string
   setTheme?: (theme: string) => void
 }) {
+  const [isOpen, setIsOpen] = useState(false)
   const [loading, setLoading] = useState(true)
   const [isNavOpen, setNavOpen] = useState(false)
 
@@ -44,6 +48,10 @@ export function Provider({
       localStorage.setItem('navOpen', newNavOpen ? 'true' : 'false')
       return newNavOpen
     })
+  }
+
+  const toggleCmd = () => {
+    setIsOpen((prevOpen) => !prevOpen)
   }
 
   useEffect(() => {
@@ -73,6 +81,7 @@ export function Provider({
   }, [])
 
   const value = {
+    isOpen,
     loading,
     isNavOpen,
     toggleNav,
@@ -91,6 +100,7 @@ export function Provider({
         closeButton={true}
         duration={4428}
       />
+      <CMD isOpen={isOpen} toggleCmd={toggleCmd} />
     </Context.Provider>
   )
 }
