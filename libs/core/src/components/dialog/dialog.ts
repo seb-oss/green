@@ -1,8 +1,7 @@
-import { property, query, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
@@ -98,12 +97,6 @@ export class GdsDialog extends GdsElement {
 
     this.#emitCloseEvent()
     this.requestUpdate()
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback()
-
-    TransitionalStyles.instance.apply(this, 'gds-dialog')
   }
 
   render() {
