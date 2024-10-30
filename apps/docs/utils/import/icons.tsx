@@ -159,3 +159,23 @@ export const IconCheckmark = dynamic(
     ssr: false,
   },
 )
+
+export const IconMoon = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconMoon').then(
+      (mod) => mod.IconMoon,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconSun = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconSun').then(
+      (mod) => mod.IconSun,
+    ),
+  {
+    ssr: false,
+  },
+)

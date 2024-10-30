@@ -1,17 +1,17 @@
 'use client'
 
 import * as React from 'react'
-import { useEffect, useState } from 'react'
-import { useTheme } from 'next-themes'
-import { GdsMenuButton } from '$/import/components'
+import { useContext, useEffect, useState } from 'react'
+import { GdsContainer, GdsMenuButton } from '$/import/components'
+import { IconMoon, IconSun } from '$/import/icons'
+import { Context } from '$/provider/provider'
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useContext(Context)
 
-  const Light = () => <div>Light</div>
-
-  const Dark = () => <div>Dark</div>
+  const Light = () => <IconSun />
+  const Dark = () => <IconMoon />
 
   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -42,7 +42,9 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <GdsMenuButton aria-label="Toggle Light Theme">
-        <Light />
+        <GdsContainer min-width="24px">
+          <Light />
+        </GdsContainer>
       </GdsMenuButton>
     )
   }
@@ -52,7 +54,9 @@ export function ThemeToggle() {
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
       aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
     >
-      {theme === 'dark' ? <Light /> : <Dark />}
+      <GdsContainer min-width="24px">
+        {theme === 'dark' ? <Light /> : <Dark />}
+      </GdsContainer>
     </GdsMenuButton>
   )
 }

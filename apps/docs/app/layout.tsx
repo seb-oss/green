@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+// import { useTheme } from 'next-themes'
 import Script from 'next/script'
 import Consent from '@/consent/consent'
 import Main from '&/main/main'
@@ -18,6 +19,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // const { theme = 'light', setTheme } = useTheme()
   const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>(
     window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: light)').matches
@@ -70,10 +72,10 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning gds-theme={colorScheme}>
       <body>
         <Provider
-          attribute="theme"
-          defaultTheme="system"
-          enableColorScheme={false}
-          enableSystem
+          theme={colorScheme}
+          setTheme={(theme: string) =>
+            setColorScheme(theme as 'light' | 'dark' | 'auto')
+          }
         >
           <Favicon />
           <Fonts>

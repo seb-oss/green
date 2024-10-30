@@ -245,3 +245,10 @@ export const GdsVideo = dynamic(
     ssr: false,
   },
 )
+
+export const GdsTheme = dynamic(
+  () => import('@sebgroup/green-react/core/theme').then((mod) => mod.GdsTheme),
+  {
+    ssr: false,
+  },
+)

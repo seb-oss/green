@@ -61,7 +61,10 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <IconMagnifyingGlass slot="lead" />
             {isWindows ? '/' : '⌘K'}
           </GdsMenuButton>
-          <GdsMenuButton>
+          <GdsMenuButton
+            href="https://github.com/sebgroup/green"
+            target="_blank"
+          >
             <IconBrandGithub />
           </GdsMenuButton>
           <ThemeToggle />

@@ -1,14 +1,14 @@
 'use client'
 
 import React, { createContext, useEffect, useState } from 'react'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { type ThemeProviderProps } from 'next-themes/dist/types'
 import { Toaster } from 'sonner'
 
 interface ContextProps {
   loading: boolean
   isNavOpen: boolean
   toggleNav: () => void
+  theme: string
+  setTheme: (theme: string) => void
 }
 
 export const Context = createContext<ContextProps>({
@@ -17,9 +17,24 @@ export const Context = createContext<ContextProps>({
   toggleNav: () => {
     console.warn('toggleNav function is not implemented')
   },
+  theme: 'light',
+  setTheme: () => {
+    console.warn('setTheme function is not implemented')
+  },
 })
 
-export function Provider({ children, ...props }: ThemeProviderProps) {
+export function Provider({
+  children,
+  theme = 'light',
+  setTheme = () => {
+    console.warn('setTheme function is not implemented')
+  },
+  ...props
+}: {
+  children: React.ReactNode
+  theme?: string
+  setTheme?: (theme: string) => void
+}) {
   const [loading, setLoading] = useState(true)
   const [isNavOpen, setNavOpen] = useState(false)
 
@@ -61,21 +76,21 @@ export function Provider({ children, ...props }: ThemeProviderProps) {
     loading,
     isNavOpen,
     toggleNav,
+    theme,
+    setTheme,
   }
 
   return (
-    <NextThemesProvider {...props}>
-      <Context.Provider value={value}>
-        {children}
-        <Toaster
-          richColors
-          theme="light"
-          position="bottom-center"
-          expand={false}
-          closeButton={true}
-          duration={4428}
-        />
-      </Context.Provider>
-    </NextThemesProvider>
+    <Context.Provider value={value}>
+      {children}
+      <Toaster
+        richColors
+        theme="light"
+        position="bottom-center"
+        expand={false}
+        closeButton={true}
+        duration={4428}
+      />
+    </Context.Provider>
   )
 }
