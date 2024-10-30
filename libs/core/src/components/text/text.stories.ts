@@ -311,7 +311,20 @@ export const Color: Story = {
 }
 
 /**
+ * `gds-text` component has a `text-decoration` property that will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
  *
+ * Also supports offset for the underline with `text-underline-offset` property.
+ *
+ * e.g.
+ *
+ * ```html
+ * <gds-text
+ *    text-underline-offset="0.2lh"
+ *    text-decoration="currentcolor wavy underline"
+ *  >
+ *    Wavy Underline
+ *  </gds-text>
+ * ```
  */
 export const Decoration: Story = {
   ...DefaultParams,
