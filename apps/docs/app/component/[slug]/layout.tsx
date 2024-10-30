@@ -5,9 +5,9 @@ import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { GdsBadge, GdsFlex, GdsText } from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
+import Navigator from 'core/navigator'
 import Pattern from 'core/pattern'
 import Taber from 'core/taber'
-import TOC from 'core/toc'
 import { format, parseISO } from 'date-fns'
 
 export default function ComponentLayout({
@@ -44,11 +44,11 @@ export default function ComponentLayout({
     { path: '/ux-text', component: componentUXText },
   ]
 
-  let tocComponent = <TOC headings={component?.headings} component={title} />
+  let TOC = <Navigator headings={component?.headings} component={title} />
 
   for (const { path, component } of pathsAndComponents) {
     if (pathName.includes(path)) {
-      tocComponent = <TOC headings={component?.headings} component={title} />
+      TOC = <Navigator headings={component?.headings} component={title} />
       break
     }
   }
@@ -181,7 +181,7 @@ export default function ComponentLayout({
             </time>
           </footer>
         </GdsFlex>
-        <GdsFlex>{tocComponent}</GdsFlex>
+        <GdsFlex>{TOC}</GdsFlex>
       </GdsFlex>
     </GdsFlex>
   )

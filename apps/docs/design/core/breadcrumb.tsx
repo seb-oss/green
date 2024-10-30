@@ -13,7 +13,7 @@ type TrailTypes = {
   slug?: string
 }
 
-const Trail = ({ home, separator, activeClass, slug }: TrailTypes) => {
+const Breadcrumbs = ({ home, separator, activeClass, slug }: TrailTypes) => {
   const paths = usePathname()
   const pathNames = paths.split('/').filter((path) => path)
 
@@ -64,4 +64,4 @@ const Trail = ({ home, separator, activeClass, slug }: TrailTypes) => {
   )
 }
 
-export default Trail
+export default Breadcrumbs
