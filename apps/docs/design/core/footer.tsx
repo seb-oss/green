@@ -3,6 +3,44 @@
 import Link from 'next/link'
 import { GdsButton, GdsFlex, GdsText } from '$/import/components'
 
+const menuItems = [
+  {
+    title: 'About',
+    path: '/about',
+  },
+  {
+    title: 'Foundation',
+    path: '/foundation',
+  },
+  {
+    title: 'Components',
+    path: '/components',
+  },
+  {
+    title: 'Github',
+    path: 'https://github.com/seb-oss/green',
+    external: true,
+  },
+  {
+    title: 'Changelog',
+    path: '/changelog',
+  },
+  {
+    title: 'Status',
+    path: '/status',
+  },
+  {
+    title: 'SEB Group',
+    path: 'https://sebgroup.com/',
+    external: true,
+  },
+  {
+    title: 'SEB.se',
+    path: 'https://seb.se/',
+    external: true,
+  },
+]
+
 export default function Footer() {
   const year = new Date().getFullYear()
   const symbol = '\u00A9'
@@ -20,18 +58,43 @@ export default function Footer() {
       </GdsFlex>
       <GdsFlex gap="8xl">
         <GdsFlex gap="xl" flex-direction="column">
-          <Link href="/about">About</Link>
-          <Link href="/foundation">Foundation</Link>
-          <Link href="/components">Components</Link>
+          {menuItems.slice(0, 3).map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.path}
+              target={item.external ? '_blank' : '_self'}
+            >
+              <GdsText font-weight="book" text-decoration="underline">
+                {item.title}
+              </GdsText>
+            </Link>
+          ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
-          <Link href="https://github.com/seb-oss/green">Github</Link>
-          <Link href="/changelog">Changelog</Link>
-          <Link href="/status">Status</Link>
+          {menuItems.slice(3, 6).map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.path}
+              target={item.external ? '_blank' : '_self'}
+            >
+              <GdsText font-weight="book" text-decoration="underline">
+                {item.title}
+              </GdsText>
+            </Link>
+          ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
-          <Link href="https://sebgroup.com/">SEB Group</Link>
-          <Link href="https://seb.se/">SEB.se</Link>
+          {menuItems.slice(6).map((item, idx) => (
+            <Link
+              key={idx}
+              href={item.path}
+              target={item.external ? '_blank' : '_self'}
+            >
+              <GdsText font-weight="book" text-decoration="underline">
+                {item.title}
+              </GdsText>
+            </Link>
+          ))}
         </GdsFlex>
       </GdsFlex>
       <GdsFlex justify-content="space-between" align-items="center">
