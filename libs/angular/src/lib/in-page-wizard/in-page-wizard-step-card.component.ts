@@ -14,7 +14,7 @@ export class NggInPageWizardStepCardComponent {
     new EventEmitter<MouseEvent>()
 
   @Input() public stepIsValid = () => {
-    return true;
+    return true
   }
 
   @Input() public stepText = ''
@@ -40,10 +40,10 @@ export class NggInPageWizardStepCardComponent {
   }
   handleOnNextBtnClick(event: MouseEvent) {
     if (this.stepIsValid()) {
-      this.isActive = false;
-      this.isCompleted = true;
+      this.isActive = false
+      this.isCompleted = true
     }
-    
+
     this.handleNextClick.emit(event)
   }
 }

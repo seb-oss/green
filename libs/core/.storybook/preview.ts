@@ -1,17 +1,15 @@
-import { setCustomElementsManifest } from '@storybook/web-components'
-import { LitElement, html } from 'lit'
+import { html, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
+import { setCustomElementsManifest } from '@storybook/web-components'
 
-import DocTemplate from './DocTemplate.mdx'
 import customElements from '../custom-elements.json'
-
 import { registerTransitionalStyles } from '../src/transitional-styles.ts'
+import DocTemplate from './DocTemplate.mdx'
 
 import './fonts.scss'
-
 import '../src/components/theme/index.js'
 import '../src/components/button/index.js'
-import '../src/components/layout/grid/index.js'
+import '../src/components/grid/index.js'
 
 setCustomElementsManifest(customElements)
 
@@ -43,6 +41,8 @@ export default {
           'Green Design System',
           'Get started',
           'Docs',
+          'Components',
+          'Style',
           ['Components', 'Layout', 'Media', 'Content', 'Style'],
           'Concepts',
           ['Architecture'],

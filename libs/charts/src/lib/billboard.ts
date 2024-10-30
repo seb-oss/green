@@ -10,7 +10,9 @@ import bb, {
   PointOptions,
   spline,
 } from 'billboard.js'
+
 import { ChartSettingsUpdate } from './billboardtypes'
+import { tmplTooltip } from './templates'
 import {
   Chart,
   ChartArgs,
@@ -19,7 +21,6 @@ import {
   ChartType,
   ChartUpdateArgs,
 } from './types'
-import { tmplTooltip } from './templates'
 
 export const init = () => {
   if (!line) return // for some reason these functions do not work in Jest

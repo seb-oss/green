@@ -1,5 +1,6 @@
-import { RenderResult, render } from '@testing-library/angular'
+import { render, RenderResult } from '@testing-library/angular'
 import { Subject } from 'rxjs'
+
 import { ON_SCROLL_TOKEN } from '../shared/on-scroll.directive'
 import { NggContextMenuComponent } from './context-menu.component'
 import { NggContextMenuModule } from './context-menu.module'

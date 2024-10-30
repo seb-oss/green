@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import Layout from '&/status'
 import { allComponents } from 'content'
+import Layout from '&/status'
 import { format, parseISO } from 'date-fns'
 
 export default function Status() {
@@ -13,7 +13,7 @@ export default function Status() {
       </header>
       <ul>
         {allComponents
-          .filter((component) => component._raw.sourceFileName === 'index.mdx')
+          .filter(component => component._raw.sourceFileName === 'index.mdx')
           .map((component, index) => (
             <li key={`key-${index}`}>
               <Link href={component.url_path} title="Component">
@@ -21,8 +21,7 @@ export default function Status() {
               </Link>
               <div title="Status">{component.status}</div>
               <time dateTime={component.date}>
-                {component.date &&
-                  format(parseISO(component.date), 'LLLL d, yyyy')}
+                {component.date && format(parseISO(component.date), 'LLLL d, yyyy')}
               </time>
             </li>
           ))}

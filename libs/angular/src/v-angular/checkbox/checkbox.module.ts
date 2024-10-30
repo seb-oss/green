@@ -1,8 +1,8 @@
-import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { NgModule } from '@angular/core'
 
-import { NgvCheckboxComponent } from './checkbox.component'
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NgvCheckboxComponent } from './checkbox.component'
 
 @NgModule({
   declarations: [NgvCheckboxComponent],

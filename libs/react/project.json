@@ -11,7 +11,14 @@
       "options": {
         "command": "npx copyfiles -f libs/react/package.json dist/libs/react"
       },
-      "dependsOn": ["rollup"]
+      "dependsOn": ["rollup", "generate-core-wrappers"]
+    },
+    "generate-core-wrappers": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["core:build-custom-elements-json"],
+      "options": {
+        "command": "node libs/core/build-scripts/generate-react.cjs"
+      }
     },
     "rollup": {
       "executor": "@nx/rollup:rollup",
@@ -45,6 +52,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/react"],
+      "dependsOn": ["core:build"],
       "options": {
         "jestConfig": "libs/react/jest.config.ts"
       }
@@ -52,7 +60,7 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4400,
+        "port": 4401,
         "configDir": "libs/react/.storybook"
       },
       "configurations": {

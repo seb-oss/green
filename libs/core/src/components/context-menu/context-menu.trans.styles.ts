@@ -1,8 +1,7 @@
-import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './context-menu.trans.styles.scss?inline'
-
-import * as Popover from '../popover/popover.trans.styles'
 import * as Listbox from '../../primitives/listbox/listbox.trans.styles'
+import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
+import * as Popover from '../popover/popover.trans.styles'
+import styles from './context-menu.trans.styles.scss?inline'
 
 export function register() {
   TransitionalStyles.instance.register('gds-context-menu', styles.toString())

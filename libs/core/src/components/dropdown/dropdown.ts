@@ -1,36 +1,32 @@
+import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
-import { classMap } from 'lit/directives/class-map.js'
-import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { HTMLTemplateResult } from 'lit'
 
-import { watch } from '../../utils/decorators/watch'
+import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
+import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
   html,
-  getScopedTagName,
 } from '../../utils/helpers/custom-element-scoping'
-
-import '../icon/icons/chevron-bottom'
-import '../icon/icons/checkmark'
-import '../../primitives/listbox'
+import { GdsFormControlElement } from '../form/form-control'
+import styles from './dropdown.styles'
 
 import type { GdsListbox } from '../../primitives/listbox'
 import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox/option'
+
 import '../popover'
 import '../button'
-
-import { GdsFormControlElement } from '../form/form-control'
-
-import { tokens } from '../../tokens.style'
-import styles from './dropdown.styles'
-import { TransitionalStyles } from '../../transitional-styles'
+import '../icon/icons/chevron-bottom'
+import '../icon/icons/checkmark'
+import '../../primitives/listbox'
 
 /**
  * @element gds-dropdown

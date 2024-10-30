@@ -1,17 +1,17 @@
 import {
   Table,
-  TableHeader,
   TableBody,
-  TableRow,
-  TableHeaderCell,
   TableCell,
+  TableHeader,
+  TableHeaderCell,
+  TableRow,
 } from '../components'
 import {
-  SortableTable,
-  SelectableTable,
-  ExpandableTable,
   columnData,
+  ExpandableTable,
   rowData,
+  SelectableTable,
+  SortableTable,
 } from './multiple-story-tables'
 
 const Template = () => {

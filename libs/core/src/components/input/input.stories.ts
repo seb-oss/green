@@ -1,38 +1,51 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
+import type { GdsInput } from './index.ts'
+
 import '../badge'
-import '../layout/flex'
-import '../content/divider'
+import '../flex'
+import '../divider'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 import '../icon/icons/people-profile.ts'
 
 /**
  *
- * Input fields allow users to enter text into a UI. They typically appear in forms and dialogs.
- *
- * Some features of the input field include:
- * - Two different sizes, `small` and `default`
- * - Built-in support for form validation
- * - Slots for `lead` and `trail` icons
- * - `Supporting` and `Extended` text
- * - `Clearable` input fields
- * - `Length` validation
+ * Input are used to let the user enter text or numbers in a form.
  *
  * @status beta
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Input',
+  title: 'Components/Input',
   component: 'gds-input',
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    // 👇 All Button stories expect a label arg
+    value: {
+      control: 'text',
+    },
+    variant: {
+      options: ['default'],
+      control: { type: 'select' },
+    },
+    size: {
+      options: ['large', 'small'],
+      control: { type: 'select' },
+    },
+    invalid: {
+      control: 'boolean',
+    },
+  },
 }
 
 export default meta
-type Story = StoryObj
+type Story = StoryObj<GdsInput>
 
 const DefaultParams: Story = {
   parameters: {
@@ -44,21 +57,18 @@ const DefaultParams: Story = {
     },
   },
   args: {
-    label: 'Label text',
-    textarea: false,
+    label: 'Label',
+    variant: 'default',
+    size: 'large',
+    supportingText: 'Label support text.',
+    innerHTML:
+      '<gds-icon-people-profile slot="lead"></gds-icon-people-profile>',
   },
 }
 
 export const Default: Story = {
   ...DefaultParams,
   name: 'Default',
-  render: () => html`
-    <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-input label="Label" supporting-text="Supporting text.">
-        <gds-icon-people-profile slot="lead"></gds-icon-people-profile>
-      </gds-input>
-    </gds-flex>
-  `,
 }
 
 /**

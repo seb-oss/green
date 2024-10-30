@@ -1,11 +1,12 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
+
 import { html } from '@sebgroup/green-core/scoping'
+
+import './login.css'
 
 const coverOne = `https://github.com/user-attachments/assets/b8ee5060-b5dd-40b4-b626-aefbd960ec35`
 const coverTwo = `https://github.com/user-attachments/assets/1c038c0b-b468-48d2-b171-092534b3a0e2`
-
-import './login.css'
 
 @customElement('gds-login')
 export class CardExample extends LitElement {

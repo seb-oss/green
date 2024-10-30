@@ -1,14 +1,14 @@
 import * as fs from 'fs'
+import { color } from '@storybook/theming'
 import * as _template from 'lodash.template'
-import * as swift from './templates/ios/swift.tokens'
-
 import {
   Format,
+  formatHelpers,
   Options,
   TransformedToken,
-  formatHelpers,
 } from 'style-dictionary'
-import { color } from '@storybook/theming'
+
+import * as swift from './templates/ios/swift.tokens'
 
 const {
   fileHeader,
@@ -129,6 +129,42 @@ const formats: Record<string, Format> = {
           const adjustedName = token.name
             .replace(/(\d)-/, '$1')
             .replace('sys-', '')
+          return Object.assign({}, token, {
+            name: adjustedName,
+            value: `${token.value}px`,
+            original: { value: `${token.value}px` },
+          })
+        } else {
+          return token
+        }
+      })
+
+      return (
+        formatHelpers.fileHeader({ file: args.file }) +
+        `${options.selector} {\n` +
+        formatHelpers.formattedVariables({
+          format: 'css',
+          dictionary,
+          outputReferences: options.outputReferences,
+        }) +
+        `\n}\n`
+      )
+    },
+  },
+  viewport: {
+    name: 'viewport',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign({ selector: ':host' }, args.options)
+
+      // Map each token
+      dictionary.allTokens = dictionary.allTokens.map((token) => {
+        if (token.path[0] === 'sys' && token.path[1] === 'viewport') {
+          // Adjust token name to remove hyphen after numbers
+          const adjustedName = token.name
+            .replace(/(\d)-/, '$1')
+            .replace('sys-', '')
+            .replace('viewport', 'vp')
           return Object.assign({}, token, {
             name: adjustedName,
             value: `${token.value}px`,

@@ -1,14 +1,15 @@
+import { A11yModule } from '@angular/cdk/a11y'
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
-import { A11yModule } from '@angular/cdk/a11y'
+
+import { NggModalFooterDirective } from './modal-footer.directive'
+import { NggModalHeaderDirective } from './modal-header.directive'
 import {
   NggModalBodyComponent,
   NggModalComponent,
   NggModalFooterComponent,
   NggModalHeaderComponent,
 } from './modal.component'
-import { NggModalHeaderDirective } from './modal-header.directive'
-import { NggModalFooterDirective } from './modal-footer.directive'
 
 const DECLARATIONS = [
   NggModalComponent,

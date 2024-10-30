@@ -14,14 +14,15 @@ import {
 } from '@angular/core'
 import {
   ControlValueAccessor,
-  NgControl,
   NG_VALUE_ACCESSOR,
+  NgControl,
 } from '@angular/forms'
 
-import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
+import { NggDropdownOptionDirective } from './dropdown-option.directive'
 
 import '@sebgroup/green-core/components/dropdown/index.js'
+
 import type {
   GdsDropdown,
   GdsOption,

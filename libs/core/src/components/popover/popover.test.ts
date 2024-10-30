@@ -1,19 +1,16 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
-import sinon from 'sinon'
+import { sendKeys } from '@web/test-runner-commands'
 
-import '@sebgroup/green-core/components/popover'
 import type {
-  GdsPopover,
   GdsBackdrop,
+  GdsPopover,
 } from '@sebgroup/green-core/components/popover'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing'
+
+import '@sebgroup/green-core/components/popover'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

@@ -1,8 +1,8 @@
-import { property } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
+import { property } from 'lit/decorators.js'
 
-import { watch } from '../../utils/decorators'
 import { GdsElement } from '../../gds-element'
+import { watch } from '../../utils/decorators'
 
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null
@@ -116,7 +116,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * The label of the form control.
    */
   @property()
-  label?: string
+  label = ''
 
   /**
    * Get or set the value of the form control.
@@ -184,8 +184,8 @@ export abstract class GdsFormControlElement<ValueT = any>
     this.value = undefined
   }
 
-  formAssociatedCallback(form: HTMLFormElement) {
-    form.addEventListener('submit', this._handleFormSubmit.bind(this))
+  formAssociatedCallback(form?: HTMLFormElement) {
+    form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 
   protected _handleFormSubmit(e: Event) {

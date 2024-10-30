@@ -1,13 +1,11 @@
 import {
   File,
+  formatHelpers,
   Options,
   TransformedToken,
-  formatHelpers,
 } from 'style-dictionary'
 
-const {
-  fileHeader,
-} = formatHelpers
+const { fileHeader } = formatHelpers
 
 export type TokenTreeProperty = {
   name: string
@@ -29,13 +27,15 @@ export const staticPropertyFormatter = (
   options: Options,
   valueFormatter: (token) => string,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
-  return function(token, indent): string {
+  return function (token, indent): string {
     let value = valueFormatter(token.token)
     const equalityIndex = value.indexOf('=')
     if (equalityIndex > 0) {
       value = value.slice(equalityIndex + 1)
     }
-    return indent + options.accessControl + 'static let ' + token.name + ' =' + value
+    return (
+      indent + options.accessControl + 'static let ' + token.name + ' =' + value
+    )
   }
 }
 
@@ -43,12 +43,28 @@ export const swiftUiColorReferencePropertyFormatter = (
   uiKitObjectName: string,
   options: Options,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
-  return function(token, indent): string {
-    const path = token.path.slice(0, token.path.length - 1).map((pathComponent) => {
-      return pathComponent[0].toUpperCase() + pathComponent.slice(1)
-    }).join('.') + '.' + token.name
-    
-    return indent + options.accessControl + 'static let ' + token.name + ' = Color(uiColor: ' + uiKitObjectName + '.' + path + ')'
+  return function (token, indent): string {
+    const path =
+      token.path
+        .slice(0, token.path.length - 1)
+        .map((pathComponent) => {
+          return pathComponent[0].toUpperCase() + pathComponent.slice(1)
+        })
+        .join('.') +
+      '.' +
+      token.name
+
+    return (
+      indent +
+      options.accessControl +
+      'static let ' +
+      token.name +
+      ' = Color(uiColor: ' +
+      uiKitObjectName +
+      '.' +
+      path +
+      ')'
+    )
   }
 }
 
@@ -57,18 +73,44 @@ export const uiKitColorReferencePropertyFormatter = (
   darkModeObjectName: string,
   options: Options,
 ): ((token: TokenTreeProperty, indent: string) => string) => {
-  return function(token, indent): string {
-    const path = token.path.slice(0, token.path.length - 1).map((pathComponent) => {
-      return pathComponent[0].toUpperCase() + pathComponent.slice(1)
-    }).join('.') + '.' + token.name
-    
-    return indent + options.accessControl + 'static var ' + token.name + ': UIColor {\n'
-    + indent + '    return UIColor { (traits) -> UIColor in\n'
-    + indent + '        return traits.userInterfaceStyle == .dark ?\n'
-    + indent + '           ' + darkModeObjectName + '.' + path + ' :\n'
-    + indent + '           ' + lightModeObjectName + '.' + path + '\n'
-    + indent + '    }\n'
-    + indent + '}\n';
+  return function (token, indent): string {
+    const path =
+      token.path
+        .slice(0, token.path.length - 1)
+        .map((pathComponent) => {
+          return pathComponent[0].toUpperCase() + pathComponent.slice(1)
+        })
+        .join('.') +
+      '.' +
+      token.name
+
+    return (
+      indent +
+      options.accessControl +
+      'static var ' +
+      token.name +
+      ': UIColor {\n' +
+      indent +
+      '    return UIColor { (traits) -> UIColor in\n' +
+      indent +
+      '        return traits.userInterfaceStyle == .dark ?\n' +
+      indent +
+      '           ' +
+      darkModeObjectName +
+      '.' +
+      path +
+      ' :\n' +
+      indent +
+      '           ' +
+      lightModeObjectName +
+      '.' +
+      path +
+      '\n' +
+      indent +
+      '    }\n' +
+      indent +
+      '}\n'
+    )
   }
 }
 
@@ -78,7 +120,7 @@ export const treeFromTokens = (
   ignorePathUpToValue?: string,
 ): TokenTree => {
   let tree = null
-  tokens.forEach(token => {
+  tokens.forEach((token) => {
     let usablePath
     if (ignorePathUpToValue) {
       const index = token.path.indexOf(ignorePathUpToValue)
@@ -95,7 +137,10 @@ export const treeFromTokens = (
       let result = pathComponent
       let index = -1
       while ((index = result.indexOf('-')) > -1) {
-        result = result.slice(0, index) + result[index + 1].toUpperCase() + result.slice(index + 2)
+        result =
+          result.slice(0, index) +
+          result[index + 1].toUpperCase() +
+          result.slice(index + 2)
       }
       return result
     })
@@ -113,14 +158,17 @@ export const fileContentFromTree = (
 ): string => {
   // Headers and imports
   let result = '//\n// ' + file.destination + '\n//\n'
-  result += fileHeader({file, commentStyle: 'short'})
-  result += options.import.map(function(item) {
-    return 'import ' + item
-  }).join('\n')
+  result += fileHeader({ file, commentStyle: 'short' })
+  result += options.import
+    .map(function (item) {
+      return 'import ' + item
+    })
+    .join('\n')
   result += '\n\n'
 
   // File contents
-  result += options.accessControl + options.objectType + ' ' + file.className + ' {\n'
+  result +=
+    options.accessControl + options.objectType + ' ' + file.className + ' {\n'
   result += swiftObjectFromTree(tree, options, propertyFormatter, 1)
   result += '}\n'
 
@@ -133,23 +181,34 @@ const swiftObjectFromTree = (
   propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
   indent: number,
 ): string => {
-  let result = ""
-  const indentString = "    ".repeat(indent)
+  let result = ''
+  const indentString = '    '.repeat(indent)
 
-  tree.branches.forEach(branch => {
+  tree.branches.forEach((branch) => {
     let name
     if (branch.name.length > 1) {
       name = branch.name[0].toUpperCase() + branch.name.slice(1)
     } else {
       name = branch.name.toUpperCase()
     }
-    result += indentString + options.accessControl + options.objectType + ' ' + name + ' {\n'
+    result +=
+      indentString +
+      options.accessControl +
+      options.objectType +
+      ' ' +
+      name +
+      ' {\n'
     // Increase indent for each subnode to make the contents easy to read
-    result += swiftObjectFromTree(branch.tree, options, propertyFormatter, indent + 1)
+    result += swiftObjectFromTree(
+      branch.tree,
+      options,
+      propertyFormatter,
+      indent + 1,
+    )
     result += indentString + '}\n'
   })
 
-  tree.properties.forEach(property => {
+  tree.properties.forEach((property) => {
     result += propertyFormatter(property, indentString) + '\n'
   })
   return result
@@ -164,7 +223,7 @@ const placeTokenInTree = (
   if (!tree) {
     tree = {
       properties: [],
-      branches: []
+      branches: [],
     }
   }
 
@@ -187,7 +246,7 @@ const placeTokenInTree = (
     tree.properties.push({
       name: name,
       path: fullPath,
-      token: token
+      token: token,
     })
     return tree
   }
@@ -204,11 +263,16 @@ const placeTokenInTree = (
   } else {
     isNewBranch = true
   }
-  treeFromBranch = placeTokenInTree(token, remainingPath, fullPath, treeFromBranch)
+  treeFromBranch = placeTokenInTree(
+    token,
+    remainingPath,
+    fullPath,
+    treeFromBranch,
+  )
   if (isNewBranch) {
     tree.branches.push({
       name: name,
-      tree: treeFromBranch
+      tree: treeFromBranch,
     })
   }
   return tree

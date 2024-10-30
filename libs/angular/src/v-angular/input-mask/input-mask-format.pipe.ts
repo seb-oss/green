@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core'
+import _Inputmask from 'inputmask'
 
 import type Inputmask from 'inputmask'
-import _Inputmask from 'inputmask'
 
 import type { InputmaskOptions } from './input-mask.types'
 

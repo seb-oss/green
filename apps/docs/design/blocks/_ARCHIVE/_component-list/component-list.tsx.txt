@@ -1,0 +1,36 @@
+'use client'
+
+import dynamic from 'next/dynamic'
+import { allComponents } from 'content'
+import ComponentCard from '@/_ARCHIVE/_component-card/component-card'
+
+import './component-list.css'
+
+const GdsGrid = dynamic(() => import('@sebgroup/green-react/core/grid'), {
+  ssr: false,
+})
+
+export default function ComponentList({ title }: { title: string }) {
+  const components = allComponents
+    .filter((component) => {
+      if (component._raw.sourceFileName !== 'index.mdx') {
+        return false
+      }
+      if (component.private) {
+        return false
+      }
+      return true
+    })
+    .sort((a, b) => a.title.localeCompare(b.title))
+
+  return (
+    <section className="component-list">
+      {title && <h2>{title}</h2>}
+      <GdsGrid columns="2; m{1} l{3}" gap="m">
+        {components.map((component, idx) => (
+          <ComponentCard key={idx} {...component} />
+        ))}
+      </GdsGrid>
+    </section>
+  )
+}

@@ -1,8 +1,8 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
-  ContentChild,
   Component,
+  ContentChild,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -25,11 +25,9 @@ import {
   Validator,
   Validators,
 } from '@angular/forms'
-
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 import { Observable, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
 @Injectable() // Workaround for Compodoc https://github.com/compodoc/compodoc/issues/984
 @Component({ template: '' }) // Required with Angular ivy compiler

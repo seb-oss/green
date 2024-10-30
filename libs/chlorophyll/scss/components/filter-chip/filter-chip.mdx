@@ -1,58 +1,25 @@
-import { Meta, Story, Canvas } from '@storybook/blocks'
-import { handleChipSelection, handleChipRemoval } from './config'
-
-export const Template = () => {
-  return `Filter Chips should be used from <a href="https://storybook.seb.io/latest/angular/?path=/docs/components-filter-chips--default#filter-chips">Angular</a>, <a href="https://storybook.seb.io/latest/react/?path=/docs/components-filter-chips--page#filter-chips">React</a> or <a href="https://storybook.seb.io/latest/core/?path=/docs/components-filter-chips--page">Core</a> (Web Components, framework agnostic)`
-}
+import { Meta } from '@storybook/blocks'
 
 <Meta
-  title="Components/Filter Chip"
+  title="Components/Filter chip"
   parameters={{
-    componentIds: ['component-filter-chip'],
-  }}
-  argTypes={{
-    label: { conrol: 'text' },
-    languageDir: {
-      options: ['RTL', 'LTR'],
-      control: { type: 'radio' },
-    },
-    isSelected: {
-      control: {
-        type: 'boolean',
-        options: [false, true],
-      },
-    },
-    isRemovable: {
-      control: {
-        type: 'boolean',
-        options: [false, true],
-      },
-    },
+    componentIds: ['component-dropdown'],
   }}
 />
 
-# Filter Chips
+# Filter chip
 
 <div role="alert" class="warning mb-7 mt-5 w-100">
   <main>
     <h3>Not available in Chlorophyll!</h3>
-
     <p>
       This component component requires a Javascript implementation, and cannot
       be used with only CSS. Check out one of Greens framework implmentations
       instead!
     </p>
-
     <p>
-      Filter Chips is available in{' '}
-
-      <a href="https://storybook.seb.io/latest/angular/?path=/docs/components-filter-chips--default#filter-chips">
-        Angular
-      </a>
-
-      , <a href="https://storybook.seb.io/latest/react/?path=/docs/components-filter-chips--page#filter-chips">
-      React
-      </a> or <a href="https://storybook.seb.io/latest/core/?path=/docs/components-filter-chips--page">as a web component</a>
+      Filter Chips is available in
+      <a href="https://storybook.seb.io/latest/angular/?path=/docs/components-filter-chips--default#filter-chips">Angular</a>, <a href="https://storybook.seb.io/latest/react/?path=/docs/components-filter-chips--page#filter-chips">React</a> or <a href="https://storybook.seb.io/latest/core/?path=/docs/components-filter-chips--page">as a web component</a>
     </p>
   </main>
 </div>

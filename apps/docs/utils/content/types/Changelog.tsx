@@ -1,4 +1,5 @@
 import { defineDocumentType } from '@contentlayer/source-files'
+
 import { getLastEditedDate, urlFromFilePath } from '../utils'
 
 export type DocHeading = { level: 1 | 2 | 3; title: string }
@@ -8,12 +9,6 @@ export const Changelog = defineDocumentType(() => ({
   filePathPattern: `changelog/**/*.mdx`,
   contentType: 'mdx',
   fields: {
-    global_id: {
-      type: 'string',
-      description:
-        'Random ID to uniquely identify this doc, even after it moves',
-      required: true,
-    },
     version: { type: 'string', required: true },
     title: { type: 'string', required: true },
     summary: { type: 'string', required: false },

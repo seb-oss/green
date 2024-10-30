@@ -1,16 +1,14 @@
 import { property } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
+
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
-
-import { gdsCustomElement, html } from '../../scoping'
-
-import style from './option.styles'
-
-import { watch } from '../../utils/decorators'
 import { Focusable } from '../../mixins/focusable'
+import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators'
+import style from './option.styles'
 
 import '../../components/icon/icons/checkmark'
 
@@ -21,7 +19,6 @@ export interface OptionsContainer extends HTMLElement {
 
 /**
  * @element gds-option
- * @internal
  *
  * A listbox option is an option in a listbox widget.
  * This primitive corresponds to the aria `option` role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/option_role

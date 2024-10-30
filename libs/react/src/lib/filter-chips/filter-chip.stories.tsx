@@ -1,4 +1,4 @@
-import { FilterChips, FilterChip } from './filter-chips'
+import { FilterChip, FilterChips } from './filter-chips'
 
 const Template = ({ children, ...props }) => (
   <FilterChips {...props}>{children}</FilterChips>

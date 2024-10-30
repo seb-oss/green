@@ -1,12 +1,14 @@
 'use client'
 
-import { Accordion, AccordionItem } from '@/accordion'
-import Hero from '@/hero/hero'
-import Spacing from '@/spacing'
-import TOC from '@/toc/toc'
 import Image from 'next/image'
 import Link from 'next/link'
+import Hero from '@/_hero/hero'
+import { Accordion, AccordionItem } from '@/accordion'
+import Spacing from '@/spacing'
+import TOC from '@/toc/toc'
+
 import './style.css'
+
 import Grid from '@/grid/grid'
 import Content from '&/content/content'
 import WoodsCabinImage from 'public/content/woods-cabin.png'
@@ -43,7 +45,7 @@ export default function About() {
   return (
     <Content layout="content">
       <Grid
-        columns={2}
+        columns="2"
         paddingBlock="large"
         paddingInline="large"
         gapInline="large"
@@ -54,7 +56,7 @@ export default function About() {
             heading="About"
             preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
           />
-          <Grid columns={2}>
+          <Grid columns="2">
             <h2 id="what-is-green" className="heading-medium">
               What is Green?
             </h2>
@@ -115,7 +117,7 @@ export default function About() {
               aspectRatio: '16 / 9',
             }}
           />
-          <Grid columns={2}>
+          <Grid columns="2">
             <h2 id="how-green-works" className="heading-medium">
               How Green works
             </h2>
@@ -127,7 +129,7 @@ export default function About() {
               andcode.
             </p>
           </Grid>
-          <Grid columns={2}>
+          <Grid columns="2">
             <h2 id="maintaining-and-educating" className="heading-medium">
               Maintaining and educating
             </h2>
@@ -140,7 +142,7 @@ export default function About() {
                 with coaching sessions tailored for both design intricacies and
                 development challenges.
               </p>
-              <Spacing flex-direction="vertical" size={8} />
+              <Spacing direction="vertical" size={8} />
               <Accordion>
                 <AccordionItem label="Figma libraries" labelElementLevel={3}>
                   <p>
@@ -190,7 +192,7 @@ export default function About() {
                     where you bring your questions and problems and discuss them
                     with members from the Green Design System team.
                   </p>
-                  <Spacing flex-direction="vertical" size={7} />
+                  <Spacing direction="vertical" size={7} />
                   <ul>
                     <li>
                       – Book
@@ -215,7 +217,7 @@ export default function About() {
               </Accordion>
             </div>
           </Grid>
-          <Grid columns={2}>
+          <Grid columns="2">
             <h2 id="built-on-contributions" className="heading-medium">
               Built on contributions
             </h2>
@@ -224,7 +226,7 @@ export default function About() {
                 possible. That can be everything from insights regarding a specific component or pull requests with a complete feature
                 or a design updates in a Figma branch.`}</p>
           </Grid>
-          <Grid columns={2}>
+          <Grid columns="2">
             <h2 id="contact-us" className="heading-medium">
               Contact us
             </h2>

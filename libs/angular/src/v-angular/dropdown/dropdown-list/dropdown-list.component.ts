@@ -15,11 +15,9 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core'
-
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 import { Subject, Subscription } from 'rxjs'
 import scrollIntoView from 'scroll-into-view-if-needed'
-
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
 
 import {
   DropdownUtils,

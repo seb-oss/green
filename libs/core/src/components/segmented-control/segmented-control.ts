@@ -1,19 +1,20 @@
-import { unsafeCSS } from 'lit'
-import { query, state, property } from 'lit/decorators.js'
 import { msg } from '@lit/localize'
+import { unsafeCSS } from 'lit'
+import { property, query, state } from 'lit/decorators.js'
+
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
 import { gdsCustomElement, html } from '../../scoping'
-import { watch } from '../../utils/decorators/watch'
+import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
+import { watch } from '../../utils/decorators/watch'
+import style from './segmented-control.style.css?inline'
+
+import type { GdsSegment } from './segment'
 
 import './segment'
-import type { GdsSegment } from './segment'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
-
-import { tokens } from '../../tokens.style'
-import style from './segmented-control.style.css?inline'
 
 const debounce = (fn: () => void, delay: number) => {
   let timeoutId: NodeJS.Timeout
@@ -159,18 +160,18 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #scrollLeft = () => {
     const nextLeftOutOfView = this.segments.filter(
-      (s, i, arr) => arr[i + 2]?.isVisible && !s.isVisible,
+      (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
     )[0]
 
-    nextLeftOutOfView.scrollIntoView()
+    this._elTrack.scrollLeft = nextLeftOutOfView.offsetLeft
   }
 
   #scrollRight = () => {
     const nextRightOutOfView = this.segments
-      .filter((s, i, arr) => arr[i - 2]?.isVisible && !s.isVisible)
+      .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
 
-    nextRightOutOfView.scrollIntoView()
+    this._elTrack.scrollLeft = nextRightOutOfView.offsetLeft
   }
 
   // Updates the visibility of the scroll buttons
@@ -226,7 +227,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       if (selectedSegment) {
         this.segments.forEach((s) => (s.selected = false))
         selectedSegment.selected = true
-        selectedSegment.scrollIntoView()
+        this._elTrack.scrollLeft = selectedSegment.offsetLeft
       }
     })
   }

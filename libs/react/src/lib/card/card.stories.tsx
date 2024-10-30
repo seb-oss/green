@@ -1,6 +1,6 @@
-import Card from './card'
 import Button from '../form/button/button'
 import Link from '../link/link'
+import Card from './card'
 
 const Template = ({ children, ...props }) => <Card {...props}>{children}</Card>
 

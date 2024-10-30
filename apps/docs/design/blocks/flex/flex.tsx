@@ -31,7 +31,7 @@ export default function Flex({
   direction,
   directionTablet,
   directionMobile,
-  gap,
+  gap
 }: FlexProps) {
   let className = 'gds-flex'
   if (justify) {

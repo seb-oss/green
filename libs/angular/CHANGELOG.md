@@ -1,5 +1,19 @@
 # Changelog
 
+## 4.6.6
+
+### Patch Changes
+
+- d00298d: Fixed missing countdown in v-angular input and textarea components. Fixed v-angular dropdown styling issues.
+
+## 4.6.5
+
+### Patch Changes
+
+- bf9e150: Accordion - Can set aria-level in angular
+- Updated dependencies [500beae]
+  - @sebgroup/green-core@1.45.0
+
 ## 4.6.4
 
 ### Patch Changes

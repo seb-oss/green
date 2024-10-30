@@ -1,14 +1,16 @@
 import {
-  DetailedHTMLProps,
   ChangeEvent,
+  DetailedHTMLProps,
+  ForwardedRef,
+  forwardRef,
   InputHTMLAttributes,
+  ReactNode,
   useCallback,
   useEffect,
   useState,
-  ReactNode,
-  forwardRef,
-  ForwardedRef,
 } from 'react'
+import classNames from 'classnames'
+
 import {
   IExpandableInformation,
   IValidator,
@@ -17,7 +19,6 @@ import {
 } from '@sebgroup/extract'
 import { FormItem } from '../../formItem'
 import Group from '../group/group'
-import classNames from 'classnames'
 
 export interface InputProps
   extends IExpandableInformation,

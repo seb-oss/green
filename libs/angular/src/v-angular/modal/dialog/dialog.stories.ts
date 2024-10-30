@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common'
+
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+
 import '../modal.globals'
-import { importProvidersFrom, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NgvI18nModule } from '../../i18n/i18n.module'
+
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   applicationConfig,
   Meta,
@@ -10,6 +12,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
+import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NgvDialogComponent } from './dialog.component'
 
 export default {

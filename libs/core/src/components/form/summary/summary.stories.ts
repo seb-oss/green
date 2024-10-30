@@ -1,7 +1,8 @@
 import { html } from 'lit'
-import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.ts'
 
+import type { Meta, StoryObj } from '@storybook/web-components'
+
+import './index.ts'
 import '../../datepicker/index.ts'
 import '../../dropdown/index.ts'
 import '../../input/index.ts'
@@ -21,7 +22,7 @@ import '../../icon/icons/rocket.ts'
  * linking it to the corresponding form element.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Form/Validation/Summary',
+  title: 'Components/Form/Validation/Summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',

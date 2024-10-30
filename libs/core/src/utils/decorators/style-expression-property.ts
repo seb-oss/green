@@ -1,8 +1,9 @@
 import { CSSResult, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { GdsElement } from 'src/gds-element'
+
+import { parse, toCss, tokenize } from '../helpers/style-expression-parser'
 import { watch } from './watch'
-import { tokenize, parse, toCss } from '../helpers/style-expression-parser'
 
 /**
  * Options for `@styleExpressionProperty`.
@@ -71,7 +72,9 @@ export function styleExpressionProperty(
         this['__' + String(descriptor)] = newValue
         await this.updateComplete
 
-        const styleKey = sel + prop + newValue + cacheKey
+        // If the element has level defined, we need to use it in the cache key
+        const lvl = (this as any).level ?? '0'
+        const styleKey = sel + prop + newValue + lvl + cacheKey
 
         if (styleCache.has(styleKey)) {
           ;(this as GdsElement)._dynamicStylesController.inject(

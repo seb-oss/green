@@ -1,5 +1,85 @@
 # Changelog
 
+## 1.47.1
+
+### Patch Changes
+
+- c533689: **Form controls:** Add nullcheck in `formAssociatedCallback`
+
+## 1.47.0
+
+### Minor Changes
+
+- 2c90cdf: **Text:** Add text decoration property with default CSS values and offset
+
+## 1.46.2
+
+### Patch Changes
+
+- 4143c5f: **Segmented Control:** Fix scrolling issue
+
+## 1.46.1
+
+### Patch Changes
+
+- a269b32: **Text:** Pass font size to tag instead of the host
+- a269b32: Minor updates on Mask, Divider, Text and Spacer
+
+## 1.46.0
+
+### Minor Changes
+
+- 5147399: **Card:** Card now has default styling and a `variant` prop to simplyfy setting card colors
+
+### Patch Changes
+
+- 5147399: **Declarative Layour:** Include level in cache key
+- 400676b: **Button:** Forwarded attributes will now update internally when changed
+- 400676b: **Form Controls:** The form control header/footer pattern is now captured in reusable primitives.
+- 6ebe461: **Form Controls:** Fix extended supporting text animation
+
+## 1.45.3
+
+### Patch Changes
+
+- 05228f9: **Container:** Revert back the caching on levels
+
+## 1.45.2
+
+### Patch Changes
+
+- b9324f5: **Container:** Add cacheOverrideKey for level property to avoid conflicts when same component is needed in different levels on same page
+
+## 1.45.1
+
+### Patch Changes
+
+- 1b731d6: **Menu Button:** Increase the ga to 8px to match design on Menu Button
+
+## 1.45.0
+
+### Minor Changes
+
+- 500beae: **Folder Structure:** Refactor to a flat structure. Affects import paths of layout, content and media components, as well as the FAB button.
+
+## 1.44.10
+
+### Patch Changes
+
+- feb5aa0: **Tokens:** Added viewport tokens
+
+## 1.44.9
+
+### Patch Changes
+
+- 16d03dd: **Button:** Use book weight
+
+## 1.44.8
+
+### Patch Changes
+
+- 66b36b8: **Button:** Fixes color on the secondary button
+
 ## 1.44.7
 
 ### Patch Changes

@@ -1,16 +1,11 @@
-import { HTMLTemplateResult } from 'lit'
-import { state } from 'lit/decorators.js'
-
 import { GdsElement } from '../../gds-element'
 import { Focusable } from '../../mixins/focusable'
-import { TransitionalStyles } from '../../transitional-styles'
 import { gdsCustomElement, html } from '../../scoping'
-
+import { TransitionalStyles } from '../../transitional-styles'
 import styles from '../listbox/option.styles'
 
 /**
  * @element gds-menu-item
- * @internal
  */
 @gdsCustomElement('gds-menu-item')
 export class GdsMenuItem extends Focusable(GdsElement) {

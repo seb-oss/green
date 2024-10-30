@@ -1,6 +1,6 @@
-import { FormItem } from './formItem'
-import { Select, Option } from '../select'
 import { NumberInput } from '../form/input/input'
+import { Option, Select } from '../select'
+import { FormItem } from './formItem'
 
 const Template = () => {
   return (

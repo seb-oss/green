@@ -1,6 +1,7 @@
-import { ChartOptions, Chart, Axis } from 'billboard.js'
+import { Axis, Chart, ChartOptions } from 'billboard.js'
+
+import { createInfo, createOptions } from './billboard'
 import { ChartSettings, Legend } from './types'
-import { createOptions, createInfo } from './billboard'
 
 describe('billboard', () => {
   describe('createOptions', () => {

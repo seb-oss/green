@@ -4,6 +4,7 @@ import {
   HostBinding,
   Input,
 } from '@angular/core'
+
 import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
 
 @Component({

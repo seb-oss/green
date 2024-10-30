@@ -1,6 +1,4 @@
 // Datepicker.stories.ts
-import { startOfYear, subYears } from 'date-fns'
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import {
   FormControl,
   FormGroup,
@@ -8,6 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { startOfYear, subYears } from 'date-fns'
+
 import { dateValidator, NggDatepickerComponent } from './datepicker.component'
 import { NggDatepickerModule } from './datepicker.module'
 

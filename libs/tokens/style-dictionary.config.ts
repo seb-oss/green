@@ -1,4 +1,5 @@
 import * as StyleDictionary from 'style-dictionary'
+
 import actions from './src/actions'
 import filters from './src/filters'
 import formats from './src/formats'
@@ -110,6 +111,17 @@ const config: StyleDictionary.Config = {
           filter: function (token) {
             // Check if the token type is 'float' and the path includes 'space'
             return token.type === 'float' && token.path.includes('space')
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
+        {
+          destination: 'viewport.css',
+          format: 'viewport',
+          filter: function (token) {
+            // Check if the token type is 'float' and the path includes 'space'
+            return token.type === 'float' && token.path.includes('viewport')
           },
           options: {
             outputReferences: true,

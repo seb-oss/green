@@ -1,4 +1,5 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggPaginationComponent } from './pagination.component'
 import { NggPaginationModule } from './pagination.module'
 

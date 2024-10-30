@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
 import Image from 'next/image'
 import Grid from '@/grid/grid'
+
+import type { Metadata } from 'next'
 
 import './style.css'
 
@@ -16,7 +17,7 @@ export default function EnklaLanet() {
       <p>WARNING: This is a demo only!</p>
 
       <Grid
-        columns={2}
+        columns="2"
         gapBlock="large"
         gapInline="large"
         paddingBlock="medium"
