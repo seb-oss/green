@@ -309,3 +309,35 @@ export const Color: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ *
+ */
+export const Decoration: Story = {
+  ...DefaultParams,
+  name: 'Decoration',
+  render: (args) =>
+    html`<gds-flex flex-direction="column" gap="m">
+      <gds-text text-underline-offset="0.2lh" text-decoration="underline">
+        Underline
+      </gds-text>
+      <gds-text text-underline-offset="0.2lh" text-decoration="overline">
+        Overline
+      </gds-text>
+      <gds-text text-underline-offset="0.2lh" text-decoration="line-through">
+        Line Through
+      </gds-text>
+      <gds-text
+        text-underline-offset="0.2lh"
+        text-decoration="underline dotted"
+      >
+        Dotted
+      </gds-text>
+      <gds-text
+        text-underline-offset="0.2lh"
+        text-decoration="currentcolor wavy underline"
+      >
+        Wavy Underline
+      </gds-text>
+    </gds-flex>`,
+}
