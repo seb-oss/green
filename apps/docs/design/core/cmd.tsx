@@ -1,6 +1,9 @@
 'use client'
 
 import React from 'react'
+import { allComponents } from 'content'
+import { isDev } from '$/env/env'
+import { GdsBadge } from '$/import/components'
 import { Command } from 'cmdk'
 
 import './cmd.css'
@@ -103,9 +106,10 @@ export function CMD({
       >
         <div>
           {pages.map((p) => (
-            <div key={p} cmdk-vercel-badge="">
+            <GdsBadge key={p} cmdk-vercel-badge="">
+              {/* <GdsBadge key={p} cmdk-vercel-badge=""> */}
               {p}
-            </div>
+            </GdsBadge>
           ))}
         </div>
         <Command.Input
@@ -118,51 +122,77 @@ export function CMD({
         <Command.List>
           <Command.Empty>No results found.</Command.Empty>
           {activePage === 'home' && (
-            <Home searchProjects={() => setPages([...pages, 'projects'])} />
+            <Home searchComponents={() => setPages([...pages, 'components'])} />
           )}
-          {activePage === 'projects' && <Projects />}
+          {activePage === 'components' && <Components />}
         </Command.List>
       </Command.Dialog>
     </>
   )
 }
 
-function Home({ searchProjects }: { searchProjects: Function }) {
+function Home({ searchComponents }: { searchComponents: Function }) {
   return (
     <>
-      <Command.Group heading="Projects">
+      <Command.Group heading="Components">
         <Item
           shortcut="S P"
           onSelect={() => {
-            searchProjects()
+            searchComponents()
           }}
         >
-          Search Projects...
+          Search Components...
         </Item>
-        <Item>Create New Project...</Item>
       </Command.Group>
-      <Command.Group heading="Teams">
-        <Item shortcut="⇧ P">Search Teams...</Item>
-        <Item>Create New Team...</Item>
+      <Command.Group heading="Styling">
+        <Item shortcut="⇧ D">Colors</Item>
+        <Item>Size</Item>
+        <Item>Typography</Item>
       </Command.Group>
-      <Command.Group heading="Help">
-        <Item shortcut="⇧ D">Search Docs...</Item>
-        <Item>Send Feedback...</Item>
-        <Item>Contact Support</Item>
+      <Command.Group heading="Foundation">
+        <Item shortcut="⇧ A">Accesibility</Item>
+      </Command.Group>
+      <Command.Group heading="UX writing">
+        <Item shortcut="⇧ G">General</Item>
+        <Item shortcut="⇧ E">English</Item>
+        <Item shortcut="⇧ S">Swedish</Item>
+      </Command.Group>
+      <Command.Group heading="About">
+        <Item shortcut="⇧ C">Changelog</Item>
+        <Item shortcut="⇧ L">Status</Item>
       </Command.Group>
     </>
   )
 }
 
-function Projects() {
+function Components() {
+  const components = allComponents
+    .filter((component) => {
+      if (component._raw.sourceFileName !== 'index.mdx') {
+        return false
+      }
+      if (component.private && !isDev) {
+        return true
+      }
+      return true
+    })
+    .sort((a, b) => a.title.localeCompare(b.title))
+
   return (
     <>
-      <Item>Project 1</Item>
-      <Item>Project 2</Item>
-      <Item>Project 3</Item>
-      <Item>Project 4</Item>
-      <Item>Project 5</Item>
-      <Item>Project 6</Item>
+      {components.map((component, idx) => {
+        return (
+          <Item key={idx} onSelect={() => {}}>
+            {component.title}
+          </Item>
+        )
+      })}
+      {/* // <Item>Project 1</Item>
+      // <Item>Project 2</Item>
+      // <Item>Project 3</Item>
+      // <Item>Project 4</Item>
+      // <Item>Project 5</Item>
+      // <Item>Project 6</Item> */}
     </>
   )
 }

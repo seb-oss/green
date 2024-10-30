@@ -11,6 +11,9 @@
   transition: transform 100ms ease;
   outline: none;
   z-index: 100;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 12px;
 }
 
 [cmdk-root] {
@@ -74,8 +77,8 @@
   transition-property: none;
 
   &[data-selected="true"] {
-    background: var(--grayA3);
-    color: var(--gray12);
+    background: #000;
+    color: #fff;
   }
 
   &[data-disabled="true"] {
@@ -146,11 +149,12 @@
 [cmdk-group-heading] {
   user-select: none;
   font-size: 12px;
-  color: var(--gray11);
+  color: currentColor;
   padding: 0 8px;
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  opacity: 0.4;
 }
 
 [cmdk-empty] {
@@ -183,7 +187,7 @@
   width: 100vw;
   height: 100vh;
   backdrop-filter: blur(28px);
-  background-color: var(--color-backdrop);
+  background-color: rgba(0, 0, 0, 0.2);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
