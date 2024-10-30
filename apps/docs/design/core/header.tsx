@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { GdsContainer, GdsFlex, GdsMenuButton } from '$/import/components'
 import {
@@ -11,8 +11,9 @@ import {
   IconMagnifyingGlass,
 } from '$/import/icons'
 import { Context } from '$/provider/provider'
+import { ThemeToggle } from '$/theme/toggle'
 
-export default function Header() {
+export const Header = forwardRef(({ ...props }, ref) => {
   const { toggleNav, isNavOpen } = useContext(Context)
   const [isWindows, setIsWindows] = useState(false)
 
@@ -63,8 +64,13 @@ export default function Header() {
           <GdsMenuButton>
             <IconBrandGithub />
           </GdsMenuButton>
+          <ThemeToggle />
         </GdsFlex>
       </GdsFlex>
     </GdsContainer>
   )
-}
+})
+
+Header.displayName = 'Header'
+
+export default Header

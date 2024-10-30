@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import Consent from '@/consent/consent'
 import Main from '&/main/main'
@@ -18,6 +18,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>(
+    window.matchMedia &&
+      window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark',
+  )
+
   useEffect(() => {
     const callCC = () => {
       let cc
@@ -51,13 +58,24 @@ export default function RootLayout({
         clearTimeout(timer)
       }
     }
-  }, [])
+
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (event) => {
+        setColorScheme(event.matches ? 'dark' : 'light')
+      })
+  }, [colorScheme, setColorScheme])
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning gds-theme={colorScheme}>
       <body>
-        <Favicon />
-        <Provider>
+        <Provider
+          attribute="theme"
+          defaultTheme="system"
+          enableColorScheme={false}
+          enableSystem
+        >
+          <Favicon />
           <Fonts>
             <GdsFlex flex-direction="column">
               <Header />
