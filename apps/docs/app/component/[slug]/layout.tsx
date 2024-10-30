@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { GdsBadge, GdsFlex, GdsText } from '$/import/components'
+import Breadcrumb from 'core/breadcrumb'
 import Pattern from 'core/pattern'
 import Taber from 'core/taber'
 import TOC from 'core/toc'
-import Trail from 'core/trail'
 import { format, parseISO } from 'date-fns'
 
 export default function ComponentLayout({
@@ -102,10 +102,9 @@ export default function ComponentLayout({
       justify-content="center"
       margin="0 auto"
     >
-      <Trail
+      <Breadcrumb
         home={'Home'}
-        separator={<span> / </span>}
-        activeClass="active"
+        separator={<GdsText font-size="body-s"> / </GdsText>}
         slug={slug}
       />
       <GdsFlex gap="4xl">
