@@ -47,7 +47,7 @@ export const styles = css`
       height: 100vh;
       inset: 0 0 0 auto;
       @starting-style {
-        transform: translateX(16px);
+        transform: translateX(96px);
       }
     }
 
