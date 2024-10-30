@@ -13,13 +13,13 @@ import style from './link.css?inline'
  * @element gds-link
  * @status beta
  *
- * @slot - Content to be displayed as the button label.
+ * @slot main - Content to be displayed as the link string.
  * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.
  * @slot trail - An optional slot that allows a `gds-icon` element to be placed after the label.
  *
- * @event click - Fired when the button is clicked.
+ * @event click - Fired when the link is clicked.
  *
- * @csspart main-slot - The main slot of the button, between the lead and trail slots.
+ * @csspart main-slot - The main slot of the link, between the lead and trail slots.
  */
 @gdsCustomElement('gds-link')
 export class GdsLink extends GdsElement {
@@ -29,18 +29,6 @@ export class GdsLink extends GdsElement {
     mode: 'open',
     delegatesFocus: true,
   }
-
-  /**
-   * Whether the link is disabled.
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false
-
-  /**
-   * The label of the link. Use this to add an accessible label to the button when no text is provided in the default slot.
-   */
-  @property()
-  label = ''
 
   /**
    * When set, the underlying button will be rendered as an anchor element.
@@ -67,16 +55,10 @@ export class GdsLink extends GdsElement {
   download?: string
 
   /**
-   * The label of the link. Use this to add an accessible label to the button when no text is provided in the default slot.
+   * Whether the link is disabled.
    */
   @property({ type: Boolean, reflect: true })
-  compact = false
-
-  /**
-   * Whether the menu button is selected
-   */
-  @property({ type: Boolean, reflect: true })
-  selected = false
+  disabled = false
 
   constructor() {
     super()
@@ -84,32 +66,22 @@ export class GdsLink extends GdsElement {
 
   render() {
     const classes = {
-      button: true,
-      selected: this.selected,
-      compact: this.compact,
+      disabled: this.disabled,
     }
 
-    const tag = this.#isLink ? literal`a` : literal`button`
-
     return staticHtml`
-      <${tag}
+      <a
         class="${classMap(classes)}"
-        ?disabled="${this.disabled}"
-        aria-label="${this.label}"
-        href=${ifDefined(this.#isLink ? this.href : undefined)}
-        target=${ifDefined(this.#isLink ? this.target : undefined)}
-        rel=${ifDefined(this.#isLink ? this.rel || this.#defaultRel : undefined)}
-        download=${ifDefined(this.#isLink ? this.download : undefined)}
+        href=${ifDefined(this.href)}
+        target=${ifDefined(this.target)}
+        rel=${ifDefined(this.rel || this.#defaultRel)}
+        download=${ifDefined(this.download)}
       >
         <slot name="lead"></slot>
         <slot part="main-slot"></slot>
         <slot name="trail"></slot>
-      </${tag}>
+      </a>
     `
-  }
-
-  get #isLink() {
-    return this.href.length > 0
   }
 
   get #defaultRel() {

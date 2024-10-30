@@ -12,6 +12,8 @@ import '../icon/icons/star.js'
 import '../icon/icons/people.js'
 import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
+import '../icon/icons/arrow-right.js'
+import '../icon/icons/cain-link.js'
 
 const meta: Meta = {
   title: 'Components/Link',
@@ -38,14 +40,42 @@ const DefaultParams: Story = {
   },
 }
 
-export const Basic: Story = {
+// export const Basic: Story = {
+//   ...DefaultParams,
+// }
+
+/**
+ *
+ */
+export const Lead: Story = {
   ...DefaultParams,
+  render: () =>
+    html` <gds-link>
+      <gds-icon-cain-link slot="lead"></gds-icon-cain-link>
+      Link text
+    </gds-link>`,
 }
 
 /**
  *
  */
-export const Text: Story = {
+export const Trail: Story = {
   ...DefaultParams,
-  render: () => html`<gds-menu-button>Search</gds-menu-button>`,
+  render: () =>
+    html` <gds-link>
+      Link text
+      <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+    </gds-link>`,
+}
+
+/**
+ *
+ */
+export const Disabled: Story = {
+  ...DefaultParams,
+  render: () =>
+    html` <gds-link disabled>
+      Link text
+      <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+    </gds-link>`,
 }
