@@ -8,14 +8,25 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { styles } from './dialog.styles'
+import {
+  lockBodyScrolling,
+  registerGlobalScrollLockStyles,
+  unlockBodyScrolling,
+} from './scroll-lock'
 
 import '../button'
 import '../card'
 import '../flex'
 import '../icon/icons/cross-large'
 
+registerGlobalScrollLockStyles()
+
 /**
  * @element gds-dialog
+ *
+ * @fires gds-ui-state - Fired when the dialog is opened or closed
+ * @fires gds-close - Fired when the dialog is closed
+ * @fires gds-show - Fired when the dialog is opened
  */
 @gdsCustomElement('gds-dialog')
 export class GdsDialog extends GdsElement {
@@ -33,7 +44,11 @@ export class GdsDialog extends GdsElement {
     this.updateComplete.then(() => {
       if (value === true) {
         this.#returnValue = undefined
-        this.updateComplete.then(() => this._elDialog?.showModal())
+        this.updateComplete.then(() => {
+          if (!this._elDialog) return
+          this._elDialog.showModal()
+          lockBodyScrolling(this._elDialog)
+        })
       } else {
         this.#returnValue = 'open-prop-false'
         this._elDialog?.close(this.#returnValue)
@@ -73,9 +88,14 @@ export class GdsDialog extends GdsElement {
    * @param returnValue - The value to return when the dialog is closed.
    */
   close = (returnValue: any) => {
+    if (!this._elDialog) return
+
     this.#returnValue = returnValue
     this.#open = false
-    this._elDialog?.close(returnValue ?? 'close-method')
+
+    this._elDialog.close(returnValue ?? 'close-method')
+    unlockBodyScrolling(this._elDialog)
+
     this.#emitCloseEvent()
     this.requestUpdate()
   }
@@ -158,9 +178,9 @@ export class GdsDialog extends GdsElement {
     const returnValue = dialog.returnValue
 
     this.#open = false
-    this.requestUpdate()
 
     if (!returnValue) {
+      unlockBodyScrolling(dialog)
       this.#returnValue = 'native-close'
       this.#emitCloseEvent()
     }
