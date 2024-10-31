@@ -19,14 +19,20 @@ import '../card'
 import '../flex'
 import '../icon/icons/cross-large'
 
+import { msg } from '@lit/localize'
+
 registerGlobalScrollLockStyles()
 
 /**
  * @element gds-dialog
  *
- * @fires gds-ui-state - Fired when the dialog is opened or closed
- * @fires gds-close - Fired when the dialog is closed
- * @fires gds-show - Fired when the dialog is opened
+ * @event gds-ui-state - Fired when the dialog is opened or closed
+ * @event gds-close - Fired when the dialog is closed
+ * @event gds-show - Fired when the dialog is opened
+ *
+ * @slot - The content of the dialog
+ * @slot trigger - The trigger button for the dialog
+ * @slot footer - The footer of the dialog
  */
 @gdsCustomElement('gds-dialog')
 export class GdsDialog extends GdsElement {
@@ -114,6 +120,7 @@ export class GdsDialog extends GdsElement {
                   id="close-btn"
                   rank="secondary"
                   size="small"
+                  label=${msg('Close')}
                   @click=${() => this.close('btn-close')}
                   ><gds-icon-cross-large></gds-icon-cross-large
                 ></gds-button>
@@ -137,7 +144,7 @@ export class GdsDialog extends GdsElement {
                     value="cancel"
                     @click=${() => this.close('btn-cancel')}
                     rank="secondary"
-                    >Cancel</gds-button
+                    >${msg('Cancel')}</gds-button
                   >
                   <gds-button value="ok" @click=${() => this.close('btn-ok')}
                     >Ok</gds-button
