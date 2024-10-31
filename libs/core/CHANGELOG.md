@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.48.0
+
+### Minor Changes
+
+- 474856a: **Rich text:** Add `gds-rich-text` component
+- 5bc49c8: **Dialog:** Add `gds-dialog` to Green Core
+
 ## 1.47.1
 
 ### Patch Changes
