@@ -71,7 +71,7 @@ Have a look at the links below if you're not sure how to open a PR.
 
 _If you are an SEB Employee opening a PR it's always good to notify the Green team through an SEB communication channel so we know who to turn to if we have questions regarding the PR._
 
-1. [Fork](https://github.com/sebgroup/green/fork) and clone the repository.
+1. [Fork](https://github.com/seb-oss/green/fork) and clone the repository.
 1. Make sure you fulfill the technical pre-requisites
 
 - Node LTS version. Check here for supported versions: https://nodejs.org/en/about/previous-releases
@@ -83,7 +83,7 @@ _If you are an SEB Employee opening a PR it's always good to notify the Green te
 1. Write the tests, write the code, and make sure the tests pass.
 1. Commit your changes
 1. Add a changeset by running `npx changeset`
-1. Push to your fork and [submit a pull request](https://github.com/sebgroup/green/pulls).
+1. Push to your fork and [submit a pull request](https://github.com/seb-oss/green/pulls).
 1. Pat your self on the back and wait for your pull request to be reviewed and merged.
 
 Here are a few things you can do that will increase the likelihood of your pull request being accepted:

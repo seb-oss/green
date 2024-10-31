@@ -1,0 +1,81 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Stepper, StepperProps } from './stepper'
+import * as StepperStories from './stepper.stories';
+
+export const Template = (props) => <Stepper {...props} />
+
+<Meta of={StepperStories} />
+
+# Stepper
+
+<Canvas of={StepperStories.Default} />
+
+A stepper makes it easier to input values that are in a narrow range.
+
+## Basic stepper
+
+Create a basic Stepper that can be placed within a form by passing a label. The component has a `form-group` wrapping to simplify form building.
+
+<Canvas of={StepperStories.BasicStepper} />
+
+The Stepper currently only works in *controlled* mode, meaning that you app needs to handle all state.
+Here's a basic example:
+
+```jsx
+const [value, setValue] = useState(0)
+
+return (
+  <Stepper
+    label="Label"
+    value={value}
+    onChange={(e) => setValue(e.target.value)}
+    onIncrease={() => setValue(value + 1)}
+    onDecrease={() => setValue(value - 1)}
+  />
+)
+```
+
+## Primitive stepper
+
+By omitting `label`, `description` and `statusMessage` props we don't wrap the component in a `form-group` and you can use it more unrestricted.
+
+<Canvas of={StepperStories.PrimitiveStepper} />
+
+We can then custom build our `form-group`as needed.
+
+***If using the component in this way you have to handle rendering of error messages yourself***.
+
+<div className="form-group">
+  <label htmlFor="multiple-steppers" className="mb-5">
+    How many people will live in your new home?
+  </label>
+
+  <div id="multiple-steppers" className="horizontal">
+    <div>
+      <div>
+        <div className="form-info">Adults</div>
+
+        <Stepper />
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <div className="form-info">Children under 18</div>
+
+        <Stepper />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+## Validation
+
+<Canvas of={StepperStories.StepperValidation} />
+
+## Properties
+
+Note: Many of these are default HTMLInput props, and may not be relevant for this component.
+
+<Controls />

@@ -11,15 +11,9 @@ export default function Footer() {
 
   return (
     <footer className="main-footer" padding-block="large">
-      <Grid
-        columns={1}
-        mobile={2}
-        tablet={3}
-        gapBlock="large"
-        paddingInline="medium"
-      >
+      <Grid columns={1} mobile={2} tablet={3} gapBlock="large" paddingInline="medium">
         <h2>Green Design System</h2>
-        <Grid columns={5} justify="start" fluid>
+        <Grid columns={5} justify-content="start" fluid>
           <nav>
             <ul>
               <Grid columns={1} gapBlock="small">
@@ -39,7 +33,7 @@ export default function Footer() {
             <ul>
               <Grid columns={1} gapBlock="small">
                 <li>
-                  <Link href="https://github.com/sebgroup/green">Github</Link>
+                  <Link href="https://github.com/seb-oss/green">Github</Link>
                 </li>
                 <li>
                   <Link href="/changelog">Changelog</Link>
@@ -63,13 +57,9 @@ export default function Footer() {
             </ul>
           </nav>
         </Grid>
-        <Flex justify="between" wrap="wrap" directionMobile="column">
+        <Flex justify-content="between" wrap="wrap" directionMobile="column">
           <span>{text}</span>
-          <button
-            type="button"
-            data-cc="c-settings"
-            className="cookie-preferences"
-          >
+          <button type="button" data-cc="c-settings" className="cookie-preferences">
             Cookie preferences
           </button>
         </Flex>

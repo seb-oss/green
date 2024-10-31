@@ -1,6 +1,4 @@
 // Datepicker.stories.ts
-import { startOfYear, subYears } from 'date-fns'
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import {
   FormControl,
   FormGroup,
@@ -8,6 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+import { startOfYear, subYears } from 'date-fns'
+
 import { dateValidator, NggDatepickerComponent } from './datepicker.component'
 import { NggDatepickerModule } from './datepicker.module'
 
@@ -35,9 +36,7 @@ export default {
   },
 } as Meta<NggDatepickerComponent>
 
-const Template: StoryFn<NggDatepickerComponent> = (
-  args: NggDatepickerComponent,
-) => ({
+const Template: StoryFn<NggDatepickerComponent> = (args) => ({
   props: args,
 })
 
@@ -60,9 +59,7 @@ CustomOptions.args = {
   },
 }
 
-const FormControlTemplate: StoryFn<NggDatepickerComponent> = (
-  args: NggDatepickerComponent,
-) => {
+const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
   const validationForm = new FormGroup({
     date: new FormControl(undefined, [
       Validators.required,

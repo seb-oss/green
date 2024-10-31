@@ -16,7 +16,7 @@
       --gds-tooltip-arrow: 6px;
       --gds-tooltip-radii: 8px;
       --gds-tooltip-transition-easing: var(--gds-sys-transition-easing);
-      display: contents;
+      display: inline-block;
       position: relative;
     }
 

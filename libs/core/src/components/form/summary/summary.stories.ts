@@ -1,20 +1,15 @@
 import { html } from 'lit'
-import type { Meta, StoryObj } from '@storybook/web-components'
-import './index.ts'
 
+import type { Meta, StoryObj } from '@storybook/web-components'
+
+import './index.ts'
 import '../../datepicker/index.ts'
 import '../../dropdown/index.ts'
+import '../../input/index.ts'
 import '../../icon/icons/rocket.ts'
 
-import * as themeTransStyles from '../../theme/theme.trans.styles.ts'
-import * as ddTransStyles from '../../dropdown/dropdown.trans.styles.ts'
-import * as dpTransStyles from '../../datepicker/datepicker.trans.styles.ts'
-themeTransStyles.register()
-ddTransStyles.register()
-dpTransStyles.register()
-
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/form/summary)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form/summary)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-errorsummary)
  *
@@ -27,7 +22,7 @@ dpTransStyles.register()
  * linking it to the corresponding form element.
  */
 const meta: Meta = {
-  title: 'Docs/Form validation/Summary',
+  title: 'Components/Form/Validation/Summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',
@@ -56,44 +51,60 @@ export const Usage: Story = {
   ...DefaultParams,
   render: (args) =>
     html`<form style="width: 450px">
-      <gds-dropdown
-        label="Astronaut"
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value !== 'cat')
-              return [
-                { ...el.validity, valid: false, customError: true },
-                el.value === undefined
-                  ? 'An astronaut is required'
-                  : 'Only cats can pilot rockets!',
-              ]
-          },
-        }}
-      >
-        <gds-option>Pick your astronaut</gds-option>
-        <gds-option value="dog">Dog</gds-option>
-        <gds-option value="cat">Cat</gds-option>
-        <gds-option value="fish">Fish</gds-option>
-      </gds-dropdown>
-      <gds-datepicker
-        label="Launch date"
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value === undefined)
-              return [
-                { ...el.validity, valid: false, customError: true },
-                'A date is required',
-              ]
-          },
-        }}
-      ></gds-datepicker>
-      <gds-container margin="s 0 s">
-        <gds-form-summary></gds-form-summary>
-      </gds-container>
-      <gds-button type="submit">
-        Launch
-        <gds-icon-rocket slot="trail"></gds-icon-rocket>
-      </gds-button>
-      <gds-button type="reset">Reset</gds-button>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-dropdown
+          label="Astronaut"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value !== 'cat')
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  el.value === undefined
+                    ? 'An astronaut is required'
+                    : 'Only cats can pilot rockets!',
+                ]
+            },
+          }}
+        >
+          <gds-option>Pick your astronaut</gds-option>
+          <gds-option value="dog">Dog</gds-option>
+          <gds-option value="cat">Cat</gds-option>
+          <gds-option value="fish">Fish</gds-option>
+        </gds-dropdown>
+        <gds-datepicker
+          label="Launch date"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === undefined)
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A date is required',
+                ]
+            },
+          }}
+        ></gds-datepicker>
+        <gds-input
+          label="Designation"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A designation is required',
+                ]
+            },
+          }}
+        ></gds-input>
+        <gds-container margin="s 0 s">
+          <gds-form-summary></gds-form-summary>
+        </gds-container>
+        <gds-flex gap="m">
+          <gds-button type="submit">
+            Launch
+            <gds-icon-rocket slot="trail"></gds-icon-rocket>
+          </gds-button>
+          <gds-button type="reset">Reset</gds-button>
+        </gds-flex>
+      </gds-flex>
     </form>`,
 }

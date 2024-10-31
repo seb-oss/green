@@ -1,0 +1,31 @@
+import { Meta, Story, Canvas, ArgTypes } from '@storybook/blocks'
+import Badge from './badge'
+import * as BadgeStories from './badge.stories';
+
+export const Template = ({ ...props }) => <Badge {...props} />
+
+<Meta of={BadgeStories} />
+
+# Badge
+
+Simple Badge Component
+
+<Canvas of={BadgeStories.Default} />
+
+#
+
+### Types
+
+Badges are available in a number of different variants. Please note that the colors used in the examples below are not final yet.
+
+<Canvas of={BadgeStories.Default} />
+<Canvas of={BadgeStories.Info} />
+<Canvas of={BadgeStories.Success} />
+<Canvas of={BadgeStories.Warning} />
+<Canvas of={BadgeStories.Danger} />
+<Canvas of={BadgeStories.Light} />
+<Canvas of={BadgeStories.Dark} />
+
+# Props
+
+<ArgTypes />

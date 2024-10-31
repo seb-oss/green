@@ -1,6 +1,7 @@
 {
   "presets": ["@babel/preset-env", ["@nx/react/babel"]],
   "plugins": [
-    ["@babel/plugin-transform-private-property-in-object", { "loose": true }]
+    ["@babel/plugin-transform-private-property-in-object", { "loose": true }],
+    ["@babel/plugin-transform-private-methods", { "loose": true }]
   ]
 }

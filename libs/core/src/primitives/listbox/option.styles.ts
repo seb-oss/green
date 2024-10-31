@@ -5,7 +5,7 @@ const style = css`
 
   @layer base {
     :host(:not(:last-child)) {
-      border-bottom: 1px solid var(--gds-sys-color-stroke-stroke-variant2);
+      border-bottom: 1px solid var(--gds-sys-color-border-stroke-variant2);
     }
 
     :host div {

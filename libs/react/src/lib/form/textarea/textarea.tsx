@@ -1,19 +1,23 @@
 import {
-  IExpandableInformation,
-  IValidator,
-  randomId,
-  validateClassName,
-} from '@sebgroup/extract'
-import {
   ChangeEvent,
   DetailedHTMLProps,
+  forwardRef,
   ReactNode,
   useCallback,
   useEffect,
   useState,
 } from 'react'
-import { FormItem } from '../../formItem'
 import classNames from 'classnames'
+
+import type { ForwardedRef } from 'react'
+
+import {
+  IExpandableInformation,
+  IValidator,
+  randomId,
+  validateClassName,
+} from '@sebgroup/extract'
+import { FormItem } from '../../formItem'
 
 export interface ITextAreaProps
   extends IExpandableInformation,
@@ -33,85 +37,91 @@ export interface ITextAreaProps
   value?: string
 }
 
-export const TextArea = ({
-  'aria-describedby': ariaDescribedBy,
-  autoComplete = 'off',
-  className,
-  expandableInfo,
-  expandableInfoButtonLabel,
-  id = randomId(),
-  label,
-  info,
-  onChange,
-  role,
-  rows = 4,
-  validator,
-  value,
-  testId: dataTestId,
-  maxLength,
-  required,
-  ...props
-}: ITextAreaProps) => {
-  const [uuid] = useState(id)
-  const [localValue, setLocalValue] = useState(value)
+export const TextArea = forwardRef(
+  (
+    {
+      'aria-describedby': ariaDescribedBy,
+      autoComplete = 'off',
+      className,
+      expandableInfo,
+      expandableInfoButtonLabel,
+      id = randomId(),
+      label,
+      info,
+      onChange,
+      role,
+      rows = 4,
+      validator,
+      value,
+      testId: dataTestId,
+      maxLength,
+      required,
+      ...props
+    }: ITextAreaProps,
+    ref: ForwardedRef<HTMLTextAreaElement>,
+  ) => {
+    const [uuid] = useState(id)
+    const [localValue, setLocalValue] = useState(value)
 
-  useEffect(() => {
-    setLocalValue(value)
-  }, [value])
+    useEffect(() => {
+      setLocalValue(value)
+    }, [value])
 
-  const handleChange = useCallback(
-    (event: ChangeEvent<HTMLTextAreaElement>) => {
-      setLocalValue(event.target.value)
-      if (onChange) onChange(event)
-    },
-    [setLocalValue, onChange],
-  )
+    const handleChange = useCallback(
+      (event: ChangeEvent<HTMLTextAreaElement>) => {
+        setLocalValue(event.target.value)
+        if (onChange) onChange(event)
+      },
+      [setLocalValue, onChange],
+    )
 
-  const describedBy = classNames(ariaDescribedBy, {
-    [`gds-expandable-info-${uuid}`]: expandableInfo,
-    [`${uuid}_info`]: info,
-    [`${uuid}_message`]:
-      validator?.message !== undefined && validator.message.length > 0,
-  })
+    const describedBy = classNames(ariaDescribedBy, {
+      [`gds-expandable-info-${uuid}`]: expandableInfo,
+      [`${uuid}_info`]: info,
+      [`${uuid}_message`]:
+        validator?.message !== undefined && validator.message.length > 0,
+    })
 
-  const inputClassName =
-    classNames(className, {
-      [validateClassName(validator?.indicator)]: validator,
-    }) || undefined
+    const inputClassName =
+      classNames(className, {
+        [validateClassName(validator?.indicator)]: validator,
+      }) || undefined
 
-  const rightAlignedFooterInfo = maxLength
-    ? `${localValue?.length || 0}/${maxLength}`
-    : undefined
+    const rightAlignedFooterInfo = maxLength
+      ? `${localValue?.length || 0}/${maxLength}`
+      : undefined
 
-  return (
-    <FormItem
-      expandableInfo={expandableInfo}
-      expandableInfoButtonLabel={expandableInfoButtonLabel}
-      inputId={uuid}
-      label={label}
-      labelInformation={info}
-      role={role}
-      validator={validator}
-      rightAlignedFooterInfo={rightAlignedFooterInfo}
-    >
-      <div className="gds-input-wrapper">
-        <textarea
-          aria-describedby={describedBy || undefined}
-          aria-invalid={validator?.indicator === 'error'}
-          aria-required={required}
-          autoComplete={autoComplete}
-          className={inputClassName || undefined}
-          id={uuid}
-          onChange={handleChange}
-          role={role}
-          rows={rows}
-          value={localValue}
-          data-testid={dataTestId}
-          maxLength={maxLength}
-          required={required}
-          {...props}
-        />
-      </div>
-    </FormItem>
-  )
-}
+    return (
+      <FormItem
+        expandableInfo={expandableInfo}
+        expandableInfoButtonLabel={expandableInfoButtonLabel}
+        inputId={uuid}
+        label={label}
+        labelInformation={info}
+        role={role}
+        validator={validator}
+        rightAlignedFooterInfo={rightAlignedFooterInfo}
+      >
+        <div className="gds-input-wrapper">
+          <textarea
+            aria-describedby={describedBy || undefined}
+            aria-invalid={validator?.indicator === 'error'}
+            aria-required={required}
+            autoComplete={autoComplete}
+            className={inputClassName || undefined}
+            id={uuid}
+            onChange={handleChange}
+            role={role}
+            rows={rows}
+            value={localValue}
+            data-testid={dataTestId}
+            maxLength={maxLength}
+            required={required}
+            ref={ref}
+            {...props}
+          />
+        </div>
+      </FormItem>
+    )
+  },
+)

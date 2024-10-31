@@ -1,0 +1,24 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { ButtonGroup } from './buttonGroup'
+import { Button } from '../button/button'
+import * as ButtonGroupStories from './buttonGroup.stories';
+
+export const Template = ({ children, ...props }) => (
+  <ButtonGroup {...props}>
+    <Button>Button 1</Button>
+    <Button>Button 2</Button>
+  </ButtonGroup>
+)
+
+<Meta of={ButtonGroupStories} />
+
+# Buttons aka button group
+
+Grouping Button Components
+
+<Canvas of={ButtonGroupStories.Default} />
+
+### Sizes
+
+You can add the class `size-sm` to the button group to make the buttons smaller.
+

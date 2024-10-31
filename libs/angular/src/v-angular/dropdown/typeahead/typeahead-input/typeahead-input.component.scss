@@ -1,0 +1,33 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 2.625em);
+
+  .input-wrapper {
+    border: none;
+    box-shadow: none;
+
+    &.expanded {
+      display: flex;
+
+      .input-group input.sdv-field {
+        height: 100%;
+        width: 100%;
+        min-height: unset;
+        margin-left: 1px;
+
+        border: none;
+        box-shadow: none;
+      }
+    }
+
+    &.collapsed {
+      display: none;
+    }
+
+    .input-group {
+      width: 100%;
+    }
+  }
+}

@@ -2,84 +2,96 @@
   "sys": {
     "typography": {
       "size": {
-        "display-large": {
-          "value": "82",
-          "type": "float"
-        },
-        "display-medium": {
-          "value": "64",
-          "type": "float"
-        },
-        "display-small": {
-          "value": "40",
-          "type": "float"
-        },
-        "headline-large": {
+        "heading-xl": {
           "value": "32",
           "type": "float"
         },
-        "headline-medium": {
+        "heading-l": {
           "value": "28",
           "type": "float"
         },
-        "headline-small": {
+        "heading-m": {
           "value": "24",
           "type": "float"
         },
-        "title-large": {
-          "value": "22",
+        "heading-s": {
+          "value": "20",
           "type": "float"
         },
-        "title-medium": {
+        "heading-xs": {
           "value": "16",
           "type": "float"
         },
-        "title-small": {
+        "heading-2xl": {
           "value": "14",
           "type": "float"
         },
-        "body-large": {
+        "detail-m": {
           "value": "16",
           "type": "float"
         },
-        "body-medium": {
+        "detail-s": {
           "value": "14",
           "type": "float"
         },
-        "body-small": {
+        "detail-xs": {
           "value": "12",
           "type": "float"
         },
-        "label-large": {
+        "body-l": {
+          "value": "20",
+          "type": "float"
+        },
+        "body-m": {
           "value": "16",
           "type": "float"
         },
-        "label-medium": {
+        "body-s": {
           "value": "14",
           "type": "float"
         },
-        "label-small": {
-          "value": "12",
+        "display-2xl": {
+          "value": "82",
           "type": "float"
         },
-        "label-information-large": {
+        "display-xl": {
+          "value": "64",
+          "type": "float"
+        },
+        "display-l": {
+          "value": "48",
+          "type": "float"
+        },
+        "display-m": {
+          "value": "36",
+          "type": "float"
+        },
+        "display-s": {
+          "value": "32",
+          "type": "float"
+        },
+        "preamble-2xl": {
+          "value": "32",
+          "type": "float"
+        },
+        "preamble-xl": {
+          "value": "28",
+          "type": "float"
+        },
+        "preamble-l": {
+          "value": "24",
+          "type": "float"
+        },
+        "preamble-m": {
+          "value": "20",
+          "type": "float"
+        },
+        "preamble-s": {
+          "value": "18",
+          "type": "float"
+        },
+        "preamble-xs": {
           "value": "16",
-          "type": "float"
-        },
-        "label-information-medium": {
-          "value": "14",
-          "type": "float"
-        },
-        "label-input-large": {
-          "value": "16",
-          "type": "float"
-        },
-        "label-input-medium": {
-          "value": "14",
-          "type": "float"
-        },
-        "label-overline": {
-          "value": "14",
           "type": "float"
         }
       }

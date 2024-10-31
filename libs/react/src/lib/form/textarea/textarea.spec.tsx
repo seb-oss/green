@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { render, screen, act } from '@testing-library/react'
-import { TextArea } from './textarea'
+import { ChangeEvent, createRef } from 'react'
+import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { ChangeEvent } from 'react'
+
+import { TextArea } from './textarea'
 
 describe('TextArea', () => {
   it('renders', () => {
@@ -31,8 +32,8 @@ describe('TextArea', () => {
     render(<TextArea label="Label" onChange={mockFn} />)
 
     const inputElement = await screen.findByLabelText('Label')
-    await act(async () => user.click(inputElement))
-    await act(async () => user.keyboard('cat'))
+    await act(async () => await user.click(inputElement))
+    await act(async () => await user.keyboard('cat'))
 
     expect(mockFn).toBeCalled()
     expect(mockFn).lastReturnedWith('cat')
@@ -53,8 +54,8 @@ describe('TextArea', () => {
 
     expect(inputElement).toHaveValue('12345')
 
-    await user.click(inputElement)
-    await user.keyboard('GDS')
+    await act(async () => await user.click(inputElement))
+    await act(async () => await user.keyboard('GDS'))
     expect(mockFn).toHaveBeenCalledTimes(3)
     expect(mockFn).toHaveBeenNthCalledWith(1, '12345G')
     expect(mockFn).toHaveBeenNthCalledWith(2, '12345GD')
@@ -108,5 +109,12 @@ describe('TextArea', () => {
       />,
     )
     expect(screen.getByText('valid message')).toBeVisible()
+  })
+
+  it('ref becomes button element', () => {
+    const ref = createRef<HTMLTextAreaElement>()
+    render(<TextArea label="label" ref={ref} />)
+
+    expect(ref.current).toBeInstanceOf(HTMLTextAreaElement)
   })
 })

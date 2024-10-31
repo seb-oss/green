@@ -1,0 +1,91 @@
+import { Meta, Story, Canvas, ArgTypes } from '@storybook/blocks'
+import AlertRibbon from './alert-ribbon'
+import { Button } from '../form/button/button'
+import * as AlertRibbonStories from './alert-ribbon.stories';
+
+export const Template = ({ children, ...props }) => (
+  <AlertRibbon {...props}>{children}</AlertRibbon>
+)
+
+export const Footer = () => (
+  <>
+    <Button>Stäng</Button>
+  </>
+)
+
+export const FooterInfo = () => (
+  <>
+    <Button>Info button</Button>
+  </>
+)
+
+export const FooterSuccess = () => (
+  <>
+    <Button>Success button</Button>
+  </>
+)
+
+export const FooterWarning = () => (
+  <>
+    <Button>Warning button</Button>
+  </>
+)
+
+export const FooterDanger = () => (
+  <>
+    <Button>Danger button</Button>
+  </>
+)
+
+<Meta of={AlertRibbonStories} />
+
+# Alert ribbon
+
+Simple Alert ribbon component
+
+<Story of={AlertRibbonStories.Default} />
+
+#
+
+## Types
+
+Set a alert type for color coded alerts. Please note that inline links can only be in the end of the AlertRibbon in Figma/Design Library so this code might be utpdated to that.
+
+<Canvas of={AlertRibbonStories.Info} />
+
+<Canvas of={AlertRibbonStories.Success} />
+
+<Canvas of={AlertRibbonStories.Warning} />
+
+<Canvas of={AlertRibbonStories.Danger} />
+
+## AlertRibbon with Close button
+
+Close button icon
+
+<Canvas of={AlertRibbonStories.InfoWithCloseButton} />
+
+<Canvas of={AlertRibbonStories.SuccessWithCloseButton} />
+
+<Canvas of={AlertRibbonStories.WarningWithCloseButton} />
+
+<Canvas of={AlertRibbonStories.DangerWithCloseButton} />
+
+<Canvas of={AlertRibbonStories.InfoWithCustomCloseButton} />
+
+
+## AlertRibbon with Footer Buttons
+
+Button components can be passed in as a footer
+
+<Canvas of={AlertRibbonStories.InfoWithFooterButtons} />
+
+<Canvas of={AlertRibbonStories.SuccessWithFooterButtons} />
+
+<Canvas of={AlertRibbonStories.WarningWithFooterButtons} />
+
+<Canvas of={AlertRibbonStories.DangerWithFooterButtons} />
+
+## Props
+
+<ArgTypes />

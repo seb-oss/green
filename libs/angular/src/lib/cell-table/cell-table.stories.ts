@@ -1,4 +1,5 @@
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggCellTableComponent } from './cell-table.component'
 import { NggCellTableModule } from './cell-table.module'
 
@@ -43,15 +44,13 @@ export default {
   argTypes: {
     rows: { control: 'object' },
     headerList: { control: 'object' },
-    className: { control: 'string' },
+    className: { control: 'text' },
     clickableRows: { control: 'boolean' },
-    clickLabel: { control: 'string' },
+    clickLabel: { control: 'text' },
   },
 } as Meta<NggCellTableComponent>
 
-const Template: StoryFn<NggCellTableComponent> = (
-  args: NggCellTableComponent,
-) => {
+const Template: StoryFn<NggCellTableComponent> = (args) => {
   return {
     template: `
       <ngg-cell-table [rows]="rows" [headerList]="headerList" [className]="className" [clickableRows]="clickableRows" [clickLabel]="clickLabel">

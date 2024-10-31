@@ -1,0 +1,37 @@
+<button
+  #input
+  [ngClass]="buttonClasses"
+  [id]="id + '-button'"
+  [attr.name]="name"
+  [attr.value]="value"
+  [type]="type"
+  [autofocus]="autofocus"
+  [disabled]="disabled"
+  [attr.aria-label]="description"
+  (click)="onClick($event)"
+  (focus)="onFocus($event)"
+  (blur)="onBlur($event)"
+  *ngIf="type !== 'link'"
+>
+  <ng-container *ngTemplateOutlet="contentRef"></ng-container>
+</button>
+
+<a
+  #input
+  [ngClass]="buttonClasses"
+  role="button"
+  [id]="id + '-link'"
+  [routerLink]="href"
+  [external]="external"
+  [attr.aria-label]="description"
+  (click)="onClick($event)"
+  (focus)="onFocus($event)"
+  (blur)="onBlur($event)"
+  *ngIf="type === 'link'"
+>
+  <ng-container *ngTemplateOutlet="contentRef"></ng-container>
+</a>
+
+<ng-template #contentRef>
+  <ng-content></ng-content>
+</ng-template>

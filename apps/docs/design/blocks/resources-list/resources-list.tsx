@@ -25,41 +25,26 @@ type Resource = {
 
 const resources: Resource[] = [
   {
-    href: 'https://github.com/sebgroup/green',
+    href: 'https://github.com/seb-oss/green',
     target: '_blank',
     caption: 'Github',
-    text: 'Start contributing now!',
+    text: 'Start contributing now!'
   },
   {
     href: 'https://brand.seb.se/point/en/seb/',
     target: '_blank',
     caption: 'Media Bank & Brand Guidelines',
-    text: 'SEB Brand Hub',
-  },
+    text: 'SEB Brand Hub'
+  }
 ]
 
-export default function RessourcesList({
-  title,
-}: {
-  title: string
-}): JSX.Element {
+export default function RessourcesList({ title }: { title: string }): JSX.Element {
   return (
     <section className="resources-list">
       {title && <h2>{title}</h2>}
-      <Grid
-        columns={3}
-        mobile={1}
-        tablet={1}
-        gapInline="medium"
-        gapBlock="medium"
-      >
+      <Grid columns={3} mobile={1} tablet={1} gapInline="medium" gapBlock="medium">
         {resources.map((resource, index) => (
-          <Card
-            key={index}
-            href={resource.href}
-            target={resource.target}
-            variant="cta"
-          >
+          <Card key={index} href={resource.href} target={resource.target} variant="cta">
             <div className="gds-card-title" data-caption={resource.caption}>
               {resource.text}
             </div>

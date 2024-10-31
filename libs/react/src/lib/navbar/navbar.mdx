@@ -1,0 +1,37 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import Navbar from './navbar'
+import * as NavbarStories from './navbar.stories';
+
+export const Template = ({ children, ...props }) => (
+  <Navbar {...props}>{children}</Navbar>
+)
+
+# Navbar
+
+Simple navbar component.
+
+<Meta of={NavbarStories} />
+
+## Variants
+
+### Transparent
+
+<Canvas of={NavbarStories.Transparent} />
+
+### Light
+
+<Canvas of={NavbarStories.Light} />
+
+### Dark
+
+<Canvas of={NavbarStories.Dark} />
+
+## Content
+
+### Light navbar with grid and additional content
+
+<Canvas of={NavbarStories.Content} />
+
+#### Available props
+
+<Controls />

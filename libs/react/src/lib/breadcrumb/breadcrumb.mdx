@@ -1,0 +1,56 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Breadcrumb, BreadcrumbItem } from './breadcrumb'
+import * as BreadcrumbStories from './breadcrumb.stories';
+
+export const Template = () => (
+  <div className="card">
+    <Breadcrumb>
+      <BreadcrumbItem>
+        <a href="">Home</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <a href="">Cart</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem>
+        <a href="">Shopping</a>
+      </BreadcrumbItem>
+      <BreadcrumbItem>Billing</BreadcrumbItem>
+    </Breadcrumb>
+  </div>
+)
+
+<Meta of={BreadcrumbStories} />
+
+# Breadcrumb
+
+Displays the path to the current resource using a hierarchy of links.
+
+<Story of={BreadcrumbStories.Default} />
+
+<br />
+
+<br />
+
+## Usage
+
+```typescript
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+} from '@sebgroup/green-react/src/lib/breadcrumbs'
+```
+
+```tsx
+<Breadcrumb>
+  <BreadcrumbItem>
+    <a href="/home">Home</a>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <a href="/home/cart">Cart</a>
+  </BreadcrumbItem>
+  <BreadcrumbItem>
+    <a href="/home/cart/shopping">Shopping</a>
+  </BreadcrumbItem>
+  <BreadcrumbItem>Billing</BreadcrumbItem>
+</Breadcrumb>
+```

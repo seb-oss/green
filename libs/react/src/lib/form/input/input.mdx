@@ -1,0 +1,81 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { Input } from './input'
+import * as InputStories from './input.stories';
+
+export const InputTemplate = ({ ...props }) => <Input {...props} />
+
+<Meta of={InputStories} />
+
+# Input
+
+## Input without FormItem
+
+If an input is requested without a label, info or expandable info, then a pure input is rendered. Can be used together with the Group component.
+
+<Canvas of={InputStories.Default} />
+
+## Input with FormItem
+
+As soon as one of the properties `label`, `info` or `expandable` info are set, the input will be be surrounded by a FormItem.
+
+### Label Information
+
+<Canvas of={InputStories.WithFormInfo} />
+
+### Expandable Information
+
+<Canvas of={InputStories.WithExpandableInfo} />
+
+### Unit label
+
+<Canvas of={InputStories.UnitLabel} />
+
+### Formatter
+
+A formatting callback that takes the current value as an argument and returns the formatted value can be supplied to the Input.
+The returned value will be displayed in the field and outputted in the onChange callback.
+
+The following is just an example. Test thoroughly for your use case before using in production!
+
+```tsx
+<Input
+    label="Input"
+    info="Formats input as swedish number"
+    maxLength={8}
+    unit="Kr"
+    formatter={(value) => {
+      const trimmedValue = value.replace('\u00A0', '').replace('\xa0', '')
+      return !trimmedValue || isNaN(Number(trimmedValue))
+        ? value
+        : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
+    }}
+  />
+```
+<Input
+    label="Input"
+    info="Formats input as swedish number"
+    maxLength={8}
+    unit="Kr"
+    formatter={(value) => {
+      const trimmedValue = value.replace('\u00A0', '').replace('\xa0', '')
+      return !trimmedValue || isNaN(Number(trimmedValue))
+        ? value
+        : new Intl.NumberFormat('sv-SE').format(Number(trimmedValue))
+    }}
+  />
+
+### Validation
+
+A `validator`, despite it's name, does not add validation. It's simply a way to add an error message to the field.
+
+
+<Canvas of={InputStories.Validator} />
+
+
+### Everything On
+
+<Canvas of={InputStories.Everything} />
+
+## Properties
+
+<Controls />

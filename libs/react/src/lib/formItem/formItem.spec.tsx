@@ -1,7 +1,8 @@
-import { render, screen } from '@testing-library/react'
-import { FormItem } from './formItem'
-import { IValidator } from '@sebgroup/extract'
+import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
+import { IValidator } from '@sebgroup/extract'
+import { FormItem } from './formItem'
 
 const formItemProps = {
   label: 'Number of installments',
@@ -55,7 +56,9 @@ describe('FormItem', () => {
       </FormItem>,
     )
     expect(screen.getByText(formItemProps.expandableInfo)).not.toBeVisible()
-    await userEvent.click(screen.getByRole('button'))
+    await act(async () => {
+      await userEvent.click(screen.getByRole('button'))
+    })
     expect(screen.getByText(formItemProps.expandableInfo)).toBeVisible()
   })
 

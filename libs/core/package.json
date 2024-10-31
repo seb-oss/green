@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "1.36.0",
+  "version": "1.48.0",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
@@ -9,12 +9,12 @@
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/"
+    "url": "https://github.com/seb-oss/green/"
   },
   "homepage": "https://storybook.seb.io/latest/core/",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
+    "url": "git+https://github.com/seb-oss/green.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

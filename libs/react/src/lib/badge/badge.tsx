@@ -1,4 +1,5 @@
 import React, { HTMLProps, ReactNode } from 'react'
+
 import { BadgeType } from '@sebgroup/extract'
 
 export interface BadgeProps extends HTMLProps<HTMLSpanElement> {

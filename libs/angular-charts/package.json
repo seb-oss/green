@@ -14,7 +14,7 @@
   "description": "Angular charts wrapper built on top of @sebgroup/green-charts.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
+    "url": "git+https://github.com/seb-oss/green.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -25,7 +25,7 @@
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/angular"
+    "url": "https://github.com/seb-oss/green/labels/angular"
   },
   "homepage": "https://storybook.seb.io/latest/angular-charts/"
 }

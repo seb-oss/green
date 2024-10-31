@@ -1,13 +1,16 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 
 // Needed for components that only have 2016 style so far
 import { registerTransitionalStyles } from '../../transitional-styles.ts'
+
 registerTransitionalStyles()
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/context-menu)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
  *
@@ -16,7 +19,7 @@ registerTransitionalStyles()
  * displays a list of choices, one choice per line.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Context Menu',
+  title: 'Components/Context Menu',
   component: 'gds-context-menu',
   subcomponents: { MenuItem: 'gds-menu-item' },
   parameters: {

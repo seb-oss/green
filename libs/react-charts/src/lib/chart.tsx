@@ -1,4 +1,5 @@
 import { CSSProperties, useRef } from 'react'
+
 import { ChartSettings } from '@sebgroup/green-charts'
 import { useChart } from './hooks'
 

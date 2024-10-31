@@ -1,29 +1,30 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { render, screen, fireEvent, act } from '@testing-library/react'
 import React, { useState } from 'react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+
 import {
   Checkbox,
   EmailInput,
   NumberInput,
-  TextInput,
   RadioButton,
+  TextInput,
 } from './input'
-import userEvent from '@testing-library/user-event'
 
 describe('Inputs', () => {
   describe('Checkbox', () => {
     it('renders', () => {
-      render(<Checkbox checked />)
+      render(<Checkbox defaultChecked />)
 
       expect(screen.getByRole('checkbox')).toBeVisible()
     })
     it('has the correct value', () => {
-      render(<Checkbox checked />)
+      render(<Checkbox defaultChecked />)
 
       expect(screen.getByRole('checkbox')).toBeChecked()
     })
     it('has the correct label', () => {
-      render(<Checkbox label="Input" checked />)
+      render(<Checkbox label="Input" defaultChecked />)
 
       expect(screen.getByLabelText('Input')).toBeChecked()
     })
@@ -42,6 +43,11 @@ describe('Inputs', () => {
       form.reset()
 
       expect(screen.getByLabelText('Input')).not.toBeChecked()
+    })
+    it('gets the correct ref', () => {
+      const ref = React.createRef<HTMLInputElement>()
+      render(<Checkbox ref={ref} />)
+      expect(ref.current).toBeInstanceOf(HTMLInputElement)
     })
   })
   describe('EmailInput', () => {
@@ -76,6 +82,11 @@ describe('Inputs', () => {
 
       expect(screen.getByLabelText('Input')).toHaveValue('')
     })
+    it('gets the correct ref', () => {
+      const ref = React.createRef<HTMLInputElement>()
+      render(<EmailInput ref={ref} />)
+      expect(ref.current).toBeInstanceOf(HTMLInputElement)
+    })
   })
   describe('NumberInput', () => {
     it('renders', () => {
@@ -108,6 +119,11 @@ describe('Inputs', () => {
       form.reset()
 
       expect(screen.getByLabelText('Input')).toHaveValue(null)
+    })
+    it('gets the correct ref', () => {
+      const ref = React.createRef<HTMLInputElement>()
+      render(<NumberInput ref={ref} />)
+      expect(ref.current).toBeInstanceOf(HTMLInputElement)
     })
   })
   describe('TextInput', () => {
@@ -142,8 +158,8 @@ describe('Inputs', () => {
       )
 
       const inputElement = await screen.findByTestId('text-input')
-      await act(async () => user.click(inputElement))
-      await act(async () => user.keyboard('cat'))
+      await act(async () => await user.click(inputElement))
+      await act(async () => await user.keyboard('cat'))
 
       expect(mockFn).toBeCalled()
       expect(mockFn).lastReturnedWith('cat')
@@ -159,8 +175,8 @@ describe('Inputs', () => {
       render(<TextInput testId="text-input" onChange={mockFn} />)
       const inputElement = await screen.findByTestId('text-input')
 
-      await act(async () => user.click(inputElement))
-      await act(async () => user.keyboard('GDS'))
+      await act(async () => await user.click(inputElement))
+      await act(async () => await user.keyboard('GDS'))
 
       expect(mockFn).toBeCalledTimes(3)
     })
@@ -185,8 +201,8 @@ describe('Inputs', () => {
 
       expect(inputElement.value).toEqual('12345')
 
-      await user.click(inputElement)
-      await user.keyboard('GDS')
+      await act(async () => await user.click(inputElement))
+      await act(async () => await user.keyboard('GDS'))
       expect(mockFn).toHaveBeenCalledTimes(3)
       expect(mockFn).toHaveBeenNthCalledWith(1, '12345G')
       expect(mockFn).toHaveBeenNthCalledWith(2, '12345GD')
@@ -196,8 +212,6 @@ describe('Inputs', () => {
     })
 
     it('value can be changed to empty string', async () => {
-      const user = userEvent.setup()
-
       const mockFn = jest.fn()
 
       const { rerender } = render(
@@ -237,6 +251,12 @@ describe('Inputs', () => {
 
       expect(screen.getByLabelText('Input')).toHaveValue('')
     })
+  })
+
+  it('gets the correct ref', () => {
+    const ref = React.createRef<HTMLInputElement>()
+    render(<TextInput ref={ref} />)
+    expect(ref.current).toBeInstanceOf(HTMLInputElement)
   })
 })
 
@@ -282,6 +302,11 @@ describe('Component: RadioButton', () => {
       />,
     )
     expect(container.querySelectorAll('.is-invalid')).toHaveLength(1)
+  })
+  it('gets the correct ref', () => {
+    const ref = React.createRef<HTMLInputElement>()
+    render(<RadioButton ref={ref} label="label" value="true" />)
+    expect(ref.current).toBeInstanceOf(HTMLInputElement)
   })
 })
 

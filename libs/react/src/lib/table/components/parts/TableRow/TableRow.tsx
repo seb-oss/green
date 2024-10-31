@@ -1,8 +1,9 @@
 import React, { useId } from 'react'
 import classnames from 'classnames'
-import { TableHeaderCell, TableHeaderCellProps } from '../TableHeaderCell'
-import { TableCell, TableCellProps } from '../TableCell'
+
 import { useTableContext } from '../../context/TableContextProvider'
+import { TableCell, TableCellProps } from '../TableCell'
+import { TableHeaderCell, TableHeaderCellProps } from '../TableHeaderCell'
 
 export type TableRowProps = JSX.IntrinsicElements['tr'] & {
   checked?: boolean

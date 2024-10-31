@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
-import { NggContextMenuComponent } from './context-menu.component'
+
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggContextMenuComponent } from './context-menu.component'
 
 @NgModule({
   declarations: [NggContextMenuComponent],

@@ -1,27 +1,20 @@
 import { expect } from '@esm-bundle/chai'
-import {
-  fixture,
-  html as testingHtml,
-  waitUntil,
-  aTimeout,
-} from '@open-wc/testing'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
-import { clickOnElement, isWebKit, onlyDate } from '../../utils/testing'
+import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
+
+import { GdsPopover } from '@sebgroup/green-core/components/popover'
+import {
+  getScopedTagName,
+  htmlTemplateTagFactory,
+} from '@sebgroup/green-core/scoping'
+import { clickOnElement, onlyDate } from '../../utils/testing'
+import { GdsDatePartSpinner } from './date-part-spinner'
 
 import '@sebgroup/green-core/components/datepicker'
 import '@sebgroup/green-core/components/icon/icons/calendar'
-import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
-
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
-
-import { GdsPopover } from '@sebgroup/green-core/components/popover'
-import { GdsDatePartSpinner } from './date-part-spinner'
-import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

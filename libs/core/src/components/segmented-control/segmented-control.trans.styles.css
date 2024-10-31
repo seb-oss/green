@@ -25,21 +25,17 @@
       display: flex;
       flex-grow: 0;
       flex-shrink: 1;
-      overflow: hidden;
+      scroll-snap-type: inline mandatory;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
+      overflow-x: scroll;
       position: relative;
       width: 100%;
+      scrollbar-width: none;
     }
 
-    #segments {
-      box-sizing: border-box;
-      display: inline-flex;
-      position: relative;
-      transition: 0.2s;
-      z-index: 1;
-    }
-
-    #segments > * {
-      flex: 1 1 auto;
+    #track::-webkit-scrollbar {
+      display: none;
     }
 
     #btn-prev,
@@ -56,6 +52,9 @@
       height: 100%;
       justify-content: center;
       width: 2.5rem;
+      z-index: 2;
+      position: absolute;
+      transition: 0.2s;
 
       @media (pointer: fine) {
         &:hover {
@@ -67,6 +66,18 @@
     #btn-prev {
       border-right: 1px solid #333;
     }
+    #btn-next {
+      border-left: 1px solid #333;
+      right: 0;
+    }
+
+    #btn-prev[aria-hidden='true'],
+    #btn-next[aria-hidden='true'] {
+      opacity: 0;
+      width: 0;
+      margin: 0;
+      padding: 0;
+    }
 
     :host([size='small']) #btn-prev,
     :host([size='small']) #btn-next {
@@ -77,6 +88,8 @@
       flex-grow: 1;
       flex-shrink: 0;
       z-index: 1;
+      scroll-margin: 0 2.5rem;
+      scroll-snap-align: start;
     }
 
     #indicator {

@@ -1,5 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import {
+  act,
+  findByLabelText,
+  fireEvent,
+  render,
+  screen,
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import { FormItems, TextInput } from '.'
 import * as FormContext from './formContext'
 
@@ -19,17 +26,19 @@ describe('FormItems Component', () => {
     }))
   })
 
-  it('Should render', () => {
+  it('Should render', async () => {
     const { container } = render(
       <FormItems name="text">
         <TextInput label="Some field" />
       </FormItems>,
     )
-    expect(screen.getByText('Some field')).not.toBeNull()
+
+    const textInput = await findByLabelText(container, 'Some field')
+    expect(textInput).not.toBeNull()
     expect(container.querySelector('input')?.getAttribute('name')).toBe('text')
   })
 
-  it('Should fire onChangeText', () => {
+  it('Should fire onChangeText', async () => {
     const mockFn: jest.Mock = jest.fn()
     mockFormContext.mockImplementation(() => ({
       setValues: mockFn,
@@ -41,9 +50,15 @@ describe('FormItems Component', () => {
         <TextInput label="Some field" />
       </FormItems>,
     )
-    fireEvent.change(container.querySelector('input') as HTMLInputElement, {
-      target: { value: 'new value' },
+
+    const input = await findByLabelText(container, 'Some field')
+
+    await act(async () => {
+      fireEvent.change(input as HTMLInputElement, {
+        target: { value: 'new value' },
+      })
     })
+
     expect(mockFn).toBeCalledTimes(2)
   })
 
@@ -57,7 +72,9 @@ describe('FormItems Component', () => {
       </FormItems>,
     )
     expect(mockFn).not.toBeCalled()
-    await user.type(screen.getByRole('textbox'), inputText)
+    await act(async () => {
+      await user.type(screen.getByRole('textbox'), inputText)
+    })
     expect(mockFn).toBeCalledTimes(inputText.length)
   })
 })

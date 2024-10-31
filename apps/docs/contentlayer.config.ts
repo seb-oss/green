@@ -3,6 +3,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
+
 import * as documentTypes from './utils/content/types'
 import { rehypePrettyCodeOptions } from './utils/theme/code'
 
@@ -19,13 +20,13 @@ export default makeSource({
         {
           behavior: 'wrap',
           properties: {
-            className: ['anchor'],
-          },
-        },
-      ],
-    ],
+            className: ['anchor']
+          }
+        }
+      ]
+    ]
   },
-  onSuccess: async (importData) => {
+  onSuccess: async importData => {
     const { allDocuments } = await importData()
-  },
+  }
 })

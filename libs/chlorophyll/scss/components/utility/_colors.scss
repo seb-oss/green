@@ -49,6 +49,7 @@ $colors: (
     contrast: null,
   ),
 );
+
 @each $key, $variant in $colors {
   .text-#{$key} {
     color: map.get($variant, 'color') !important;

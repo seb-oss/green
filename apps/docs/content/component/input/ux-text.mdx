@@ -1,8 +1,162 @@
 ---
 title: UX text
-global_id: uxtextinput
 date: 2023-12-22
 ---
 
-## Coming soon
-This page will be updated with information soon.
+## UX text
+
+
+<Grid columns="2">
+<div>
+
+## Input field default 
+
+Our default input field has the label outside the field. This input field includes all the features we need in complex forms, and therefore it’s the most common.
+
+</div>
+<Figma node="4110-5969" caption="The default text input" />
+</Grid>
+
+### Labels
+The same text principles can be used for labels, radio button texts, choices in drop-down menus, headings, page titles, navigation texts, link texts, and other short texts.
+
+#### Single-word or complete sentence
+The texts should be as short as possible. Labels can contain single-words, complete sentences or query format.
+
+<Grid columns="2" gap="s">
+    <Figma node="4175-3485" caption="Single-word example (Eng)" />
+    <Figma node="4175-3504" caption="Single-word example (Swe)" />
+    <Figma node="4175-3541" caption="Complete sentence example (Eng)" />
+    <Figma node="4175-3544" caption="Complete sentence example (Swe)" />
+    <Figma node="4175-3579" caption="Query format example (Eng)" />
+    <Figma node="4175-3582" caption="Query format example (Swe)" />
+</Grid>
+
+#### Skip the verb in the label
+You don’t need to use verbs such as Enter, Fill in, Write, or Choose in the label. For instance it’s shorter and easier to read Recipient’s name instead of Fill in the recipient’s name.
+
+<Grid columns="2" gap="s">
+<div>
+
+### Label support text
+
+Use the label support text to explain the label more in detail. Use only if the label isn’t clear enough. Explain what the customer needs to know to fill in the field or understand the data displayed. Be brief.
+
+</div>
+<Figma node="4194-3481" caption="The label support text." />
+</Grid>
+
+<Grid columns="2" gap="s">
+<div>
+
+### Placeholder text
+
+Don’t use placeholder text. Since the placeholder text lies within the input field and disappears when the user starts entering text, it’s not very accessible. If the user needs information about how to fill in the field, use the label support text instead. 
+
+</div>
+<Do><Figma node="4175-3617" /></Do>
+</Grid>
+
+### Amounts and periods
+It’s easier to read text in the label or label support text than text within the field.
+
+<Grid columns="2" gap="s">
+<div>
+
+#### No need to show kronor
+
+If the customer can’t enter different currencies – we don’t show the currency in the field. 
+
+The currency is not necessary to be included in the label either. We specify if another currency is asked for instead.
+
+</div>
+<Do><Figma node="4175-3687" /></Do>
+
+<div>
+
+#### If you do write kr
+
+If you, for some reason, still want to show kronor in the field and abbreviate it to kr, remember that it will be read out by a screen reader just as you write it. Make sure that your text kr is read out as ”kronor”.
+
+</div>
+<Do><Figma node="4175-3723" /></Do>
+</Grid>
+
+#### Don’t write periods in the field
+
+Don't write periods such as months or years in the field. Instead, write month or year in the label. This is more accessible.
+
+<Grid columns="2" gap="s">
+<Do><Figma node="4175-3838" /></Do>
+<Dont><Figma node="4175-3876" /></Dont>
+</Grid>
+
+### Labels do’s and dont’s
+
+<Grid columns="2" gap="s">
+<div>
+
+**Do**
+- Use single words, complete sentences or the query format for the label. 
+- If needed, use the label support text to explain the field. 
+- The texts should be brief, clear, and informative. 
+</div>
+<div>
+**Don't**
+- Do not use verbs in the label. 
+- Do not use placeholder text. 
+- Do not use too many characters. 
+</div>
+</Grid>
+
+### Error handling
+There is not much space adjacent to the input field. Therefore, provide a constructive suggestion on how to solve the problem instead of telling what the customer has done wrong.
+
+<u>More about validation errors</u> (in the future)
+
+<Spacer size="medium" />
+
+## Input field contained
+
+This variant of the input field, with the label inside the field and label support text below, should only be used when the label is a single word or kept in one line, such as E-mail address or Personal identity number. 
+
+If an error occurs, the label support text will be replaced with the error message. Therefore, it’s important that the error message includes the label text and the information in the label support text.
+
+
+<Grid columns="2" gap="s">
+<Figma node="4175-3997" caption="Input field contained, enabled and filled." />
+<Figma node="4175-4107" caption="Input field contained, enabled and filled in error state." />
+</Grid>
+
+### Do’s and dont’s input field contained
+
+<Grid columns="2" gap="s">
+<div>
+**Do**
+- Mobile number
+</div>
+<div>
+**Don't**
+- How much do you want to save each month?
+</div>
+<Do><Figma node="4176-4289" /></Do>
+<Dont><Figma node="4176-4293" /></Dont>
+</Grid>
+
+## Default or contained?
+
+Since our forms mostly contain inputs with labels that need to be a sentence rather than only a single word, most contexts should use the regular input field. The label also often needs supporting text and this is much more user friendly in the default variant.
+
+Before you choose think about this:
+
+- Will there be any fields with longer labels? 
+- Will my labels need the supporting text in some cases?
+
+or
+
+- Is my form only a short one with simple single word label inputs?
+- Do the labels talk for themselves and don’t need the supporting text? If an error occurs, the label support text will be replaced with the error text.
+
+<div>
+**Remember – Don’t mix the two variants in the same context!**
+</div>

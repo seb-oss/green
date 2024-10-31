@@ -53,6 +53,7 @@ export class AppModule {}
 <Markdown>{`
 | Input             | Type     | Description                                                                                                                                              |
 | :---------------- | :------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| labelElementLevel | \`integer\` | What aria-level (heading level) the accordion has. Can have value 1-6. Default 2.                                                                       |
 | listItemHeader    | \`string\` | The header of the expandable section. Will always be displayed regardless if the content is collapsed or expanded                                        |
 | listItemSubHeader | \`string\` | The subheader of the expandable section. Will always be displayed with a smaller font than the header regardless if the content is collapsed or expanded |
 | expandAll         | \`string\` | The sub header of the expandable section. Will always be displayed regardless if the content is collapsed or expanded                                    |
@@ -72,25 +73,19 @@ export class AppModule {}
 
 Simple paragraph content in each section. All sections can be expanded at once since the _closeOthers_ input property is set to false.
 
-<Canvas>
-  <Story id="components-accordion--simple" />
-</Canvas>
+<Canvas of={Stories.Simple} />
 
 ### No sub headers
 
 Simple paragraph content in each section with subheaders emitted.
 
-<Canvas>
-  <Story id="components-accordion--nosubheaders" />
-</Canvas>
+<Canvas of={Stories.Nosubheaders} />
 
 ### Checkbox content
 
 Each section contains a set of options with checkboxes, just to illustrate that any content can be contained in each Accordion List Item. Also, expanding one section closes the others since _closeOthers_ input property is set to true.
 
-<Canvas>
-  <Story id="components-accordion--closeothers" />
-</Canvas>
+<Canvas of={Stories.Closeothers} />
 
 ### Usage of expandAll input
 

@@ -1,0 +1,13 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { IconButton } from './iconButton'
+import * as IconButtonStories from './iconButton.stories';
+
+export const Template = ({ children, ...props }) => (
+  <IconButton {...props}>{children}</IconButton>
+)
+
+<Meta of={IconButtonStories} />
+
+# Icon button
+
+<Story of={IconButtonStories.Default} />

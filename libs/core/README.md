@@ -1,5 +1,5 @@
 <div align="center">
-<img width="600" alt="green-core" src="https://github.com/sebgroup/green/assets/11420341/5d4b25fd-0633-498c-b50f-70f07c01ac16">
+<img width="600" alt="green-core" src="https://github.com/seb-oss/green/assets/11420341/5d4b25fd-0633-498c-b50f-70f07c01ac16">
 <h1>@sebgroup/green-core</h1>
 <p>Green Core is a carefully crafted set of Web Components that lays the foundation for the Green Design System.</p>
 </div>
@@ -28,11 +28,10 @@ But that said, the components in Green Core are just regular Web Components, so 
 ```ts
 import { css, customElement, LitElement } from 'lit'
 
-// This custom `html` template literal tag from Green Core extends the default `lit-html` tag to handle element version scoping.
-import { html } from '@sebgroup/green-core/scoping'
-
 // Transitional styles applies the current 2016 design language to the components
 import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+// This custom `html` template literal tag from Green Core extends the default `lit-html` tag to handle element version scoping.
+import { html } from '@sebgroup/green-core/scoping'
 
 // Import the components that you need
 import '@sebgroup/green-core/components/button/index.js'
@@ -83,6 +82,7 @@ import '@sebgroup/green-core/components/button/index.js'
 
 // Transitional styles
 import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+
 ButtonStyles.register()
 ```
 
@@ -107,9 +107,9 @@ import React from 'react'
 import { createComponent } from '@lit/react'
 
 import { GdsButton } from '@sebgroup/green-core/component/button/index.js'
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
 ButtonStyles.register()
 
 export const Button = createComponent({

@@ -1,0 +1,41 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { TextArea } from './textarea'
+import * as TextareaStories from './textarea.stories';
+
+export const TextAreaTemplate = ({ ...props }) => <TextArea {...props} />
+
+<Meta of={TextareaStories} />
+
+# Text Area
+
+## Default
+
+<Canvas of={TextareaStories.Default} />
+
+## Label Information
+
+<Canvas of={TextareaStories.LabelInformation} />
+
+## Expandable Information
+
+<Canvas of={TextareaStories.ExpandableInformation} />
+
+## Max Length
+
+<Canvas of={TextareaStories.MaxLength} />
+
+## More Rows
+
+<Canvas of={TextareaStories.MoreRows} />
+
+## Validation
+
+<Canvas of={TextareaStories.ErrorMessage} />
+
+## Everything On
+
+<Canvas of={TextareaStories.Everything} />
+
+## Properties
+
+<Controls />

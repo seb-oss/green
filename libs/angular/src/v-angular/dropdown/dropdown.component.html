@@ -1,0 +1,105 @@
+<!-- LABEL -->
+<ng-container *transloco="let t; read: scope">
+  <label [id]="id + '-label'" class="hide-if-empty" [attr.for]="id + '-toggle'">
+    <ng-template
+      *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+    ></ng-template>
+    <ng-template #basicLabelContentTpl>
+      <!-- to trigger css:empty if no label was added -->
+      <ng-container *ngIf="label">
+        {{ label }}
+        <span
+          *ngIf="optional === true || (required !== true && optional !== false)"
+          class="sdv-field-label--optional"
+        >
+          ({{ t('label.optional') }})
+        </span>
+      </ng-container>
+    </ng-template>
+  </label>
+
+  <!-- DESCRIPTION -->
+  <div class="description">{{ description }}</div>
+
+  <!-- LOCKED INPUT -->
+  <ng-container *ngIf="locked">
+    <div
+      [id]="id + '-input'"
+      class="nggv-field--locked"
+      [attr.name]="name"
+      [attr.value]="state"
+      [attr.role]="role"
+      [attr.aria-labelledby]="id + '-label ' + id + '-input'"
+    >
+      <span *ngIf="!state" class="unset-state">-</span>
+      <ng-container *ngIf="state">
+        <ng-template
+          *ngTemplateOutlet="
+            selectedContentTpl || defaultSelectedContentTpl;
+            context: { $implicit: state }
+          "
+        >
+        </ng-template>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <!-- INPUT -->
+  <ng-container *ngIf="!locked">
+    <div #input [id]="id + '-input'" class="dropdown">
+      <button
+        [id]="id + '-toggle'"
+        [disabled]="disabled"
+        type="button"
+        class="nggv-field-dropdown__label toggle"
+        [class.nggv-field--error]="invalid"
+        aria-haspopup="listbox"
+        [attr.data-thook]="thook + '-toggle'"
+        [attr.aria-expanded]="expanded"
+        [attr.aria-labelledby]="id + '-label ' + id + '-toggle'"
+        (click)="toggleDropdown()"
+      >
+        <ng-template
+          *ngTemplateOutlet="
+            selectedContentTpl || defaultSelectedContentTpl;
+            context: { $implicit: state }
+          "
+        >
+        </ng-template>
+      </button>
+
+      <nggv-dropdown-list
+        #dropDownList
+        [options]="options"
+        [scrollOffset]="scrollOffset"
+        [state]="state"
+        [expanded]="expanded"
+        [optionContentTpl]="optionContentTpl"
+        [textToHighlight]="textToHighlight"
+        (selectedValueChanged)="onSelectChange($event)"
+      >
+      </nggv-dropdown-list>
+    </div>
+    <!-- ERRORS -->
+    <label
+      class="sdv-field-notice sdv-field-notice--error"
+      [attr.for]="id + '-input'"
+      *ngIf="invalid && (error || ngControl?.invalid)"
+    >
+      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <ng-template #errorsRef>
+        <span *ngIf="firstError as error">
+          {{ t('error.field' + error?.code, error?.params) }}
+        </span>
+      </ng-template>
+    </label>
+
+    <!-- CHILDREN -->
+    <ng-content></ng-content>
+  </ng-container>
+
+  <ng-template #defaultSelectedContentTpl let-state>
+    <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
+    {{ state?.key != null && state?.label ? t(state.label) : placeholder }}
+  </ng-template>
+</ng-container>

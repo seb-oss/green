@@ -1,9 +1,9 @@
-import { html, LitElement } from 'lit'
+import { html } from 'lit'
 import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
-import { GdsElement } from '../../gds-element'
 
-import IconCSS from './icon.style.css'
+import { GdsElement } from '../../gds-element'
+import IconCSS from './icon.style'
 
 export abstract class GdsIcon extends GdsElement {
   static styles = [IconCSS]
@@ -49,7 +49,7 @@ export abstract class GdsIcon extends GdsElement {
   protected static _solidSVG?: string
 
   render() {
-    const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'seb'
+    const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'brand-seb'
 
     const width = isSebIcon
       ? '55'

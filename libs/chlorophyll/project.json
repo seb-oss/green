@@ -6,21 +6,9 @@
   "targets": {
     "build": {
       "executor": "./tools/executors/scss:build-lib",
-      "dependsOn": ["copy-fonts"],
       "options": {
         "packageJson": "libs/chlorophyll/package.json",
         "outputPath": "dist/libs/chlorophyll"
-      }
-    },
-    "copy-fonts": {
-      "executor": "nx:run-commands",
-      "outputs": ["{options.outputDir}/fonts"],
-      "options": {
-        "commands": [
-          {
-            "command": "yarn copy-fonts"
-          }
-        ]
       }
     },
     "compile-scss": {
@@ -80,6 +68,12 @@
         "ci": {
           "quiet": true
         }
+      }
+    },
+    "copy-designlibrary-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles -f libs/chlorophyll/.storybook/designlibrary.json dist/storybook/chlorophyll"
       }
     },
     "update-dependencies": {

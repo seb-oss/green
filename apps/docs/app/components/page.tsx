@@ -1,13 +1,7 @@
-import ComponentList from '@/component-list/component-list'
-import Grid from '@/grid/grid'
-import Content from '&/content/content'
+'use client'
+
+import ComponentList from '@/_ARCHIVE/_component-list/component-list'
 
 export default function Components() {
-  return (
-    <Content layout="content">
-      <Grid columns={1} paddingBlock="large" paddingInline="large">
-        <ComponentList title="Components" />
-      </Grid>
-    </Content>
-  )
+  return <ComponentList title="Components" />
 }

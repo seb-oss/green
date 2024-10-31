@@ -1,6 +1,7 @@
-import { moduleMetadata, Meta, StoryFn } from '@storybook/angular'
-import { NggInPageWizardModule } from './in-page-wizard.module'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggInPageWizardStepCardComponent } from './in-page-wizard-step-card.component'
+import { NggInPageWizardModule } from './in-page-wizard.module'
 
 export default {
   title: 'Components/Wizard/In page wizard step card',
@@ -17,9 +18,7 @@ export default {
   },
 } as Meta<NggInPageWizardStepCardComponent>
 
-const Template: StoryFn<NggInPageWizardStepCardComponent> = (
-  args: NggInPageWizardStepCardComponent,
-) => {
+const Template: StoryFn<NggInPageWizardStepCardComponent> = (args) => {
   const noop = () => {
     return
   }
@@ -67,9 +66,7 @@ DisableNext.args = {
   disableNext: true,
 }
 
-const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = (
-  args: NggInPageWizardStepCardComponent,
-) => {
+const TemplateMultiple: StoryFn<NggInPageWizardStepCardComponent> = (args) => {
   const noop = () => {
     return
   }

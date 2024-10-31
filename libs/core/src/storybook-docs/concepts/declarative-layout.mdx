@@ -82,8 +82,17 @@ a CSS variable. For example: `padding="xs; l {m xl m xl}"`
 When no media query is specified, it is the same as setting the breakpoint to 0. So, `padding="0 {m}"` is equivalent
 to `padding="m"`.
 
-Semicolon `;` is used to separate media queries, but is only mandatory when the shorthand 0 breakpoint is used, as
-in the first example above.
+### Pseudo selectors
+
+Psudeo selectors can be added to any media query as a separate value sequence. For example:
+
+```html
+<gds-container padding="xs; hover: s; l { s; hover: m }">
+  <!-- Any HTML element can go as children -->
+</gds-container>
+```
+
+In the above example, the padding will be `xs` by default, `s` on hover, `m` in `l` viewports, and `m` on hover in `l` viewports.
 
 For more examples, see the stories under Components/Layout.
 

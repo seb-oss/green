@@ -1,0 +1,71 @@
+import { Meta, Story, Canvas, Controls, Markdown } from '@storybook/blocks'
+import { Slider } from './slider'
+import * as SliderStories from './slider.stories';
+
+export const Template = (props) => <Slider {...props} />
+
+# Slider
+
+A slider to experiment and adjust values with.
+
+## Description
+
+The component allows for easy adjustments of a value and check the updated result immediately.
+
+## Usage
+
+On pages where the user can experiment or adjust values in a scale, such as "How much can I borrow?".
+
+## Slider Options
+
+### Props
+
+<Markdown>
+  {`
+  | Prop          | Type                                       | Description                                                                                                                        |
+  | :------------ | :----------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+  | name?         | \`string\`                                   | Name of the input element                                                                                                          |
+  | value?        | \`number\`                                   | Value of the input element                                                                                                         |
+  | min           | \`number\`                                   | The greatest value in the range of permitted values. Default is 0                                                                  |
+  | max           | \`number\`                                   | The lowest value in the range of permitted values. Default is 100                                                                  |
+  | showMinMax?   | \`boolean\`                                  | Whether or not to show min and max values. Default is false                                                                        |
+  | minMaxFormat? | \`(value: string, unit?: string) => string\` | Formatting function for min and max labels.                                                                                        |
+  | step          | \`number\`                                   | The number that specifies the granularity that the value must adhere to. Default is 1                                              |
+  | label?        | \`string\`                                   | Label for the input element                                                                                                        |
+  | instruction?  | \`string\`                                   | Input element instruction                                                                                                          |
+  | disabled      | \`boolean\`                                  | Whether or not the input is disabled. Default is false                                                                             |
+  | hasTextbox    | \`boolean\`                                  | Whether or not should have input textbox along with the slider. Default is false                                                   |
+  | unitLabel     | \`string\`                                   | Set this to a string, for example \`kr\`, to show a unit label next to the input field                                               |
+  | errorMessage? | \`string\`                                   | Error message for invalid inputs                                                                                                   |
+  | onChange?     | \`(value: number) => void\`                  | Callback function that is fired when the value changes. The new value is provided as a paramter to the callback function           |
+  | onClamp?      | \`(unclamped: number) => void\`              | Callback function that is fired when the value is clamped. The unclamped value is provided as a parameter to the callback function |
+  `}
+</Markdown>
+
+<Meta of={SliderStories} />
+
+## Examples
+
+### Default
+
+<Canvas of={SliderStories.Default} />
+
+### With textbox
+
+<Canvas of={SliderStories.Textbox} />
+
+### With textbox with unit label and min max labels
+
+<Canvas of={SliderStories.UnitTextbox} />
+
+### With error message
+
+<Canvas of={SliderStories.Error} />
+
+### Disabled
+
+<Canvas of={SliderStories.Disabled} />
+
+### Showing high numbers
+
+<Canvas of={SliderStories.HighNumber} />

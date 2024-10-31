@@ -1,0 +1,673 @@
+import { Meta, Canvas } from '@storybook/blocks'
+
+<Meta title="Use cases/Dark mode/Forms" />
+
+<div class="d-flex">
+  <main class="light-mode bg-color p-4">
+    <div class="mx-auto my-6" style={{ maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <h1>Light mode (default)</h1>
+      <p class="mb-5">Lorem ipsum text</p>
+
+      <div class="mb-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" required value="Foo bar" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Example with individual borders</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border">
+                <input id="inputValid1" type="text" required />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio1" checked />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio1" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button">Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" required value="Foo bar" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Example with individual borders</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border">
+                <input id="inputValid1" type="text" required />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio2" checked />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio2" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button">Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="elevation-2 mt-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" required value="Foo bar" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Example with individual borders</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border">
+                <input id="inputValid1" type="text" required />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio3" checked />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio3" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button">Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <main class="dark-mode bg-color p-4">
+    <div class="mx-auto my-6" style={{ maxWidth: '768px', marginLeft: 'auto', marginRight: 'auto' }}>
+      <h1>Dark mode</h1>
+      <p class="mb-5">Lorem ipsum text</p>
+
+      <div class="mb-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" required value="Foo bar" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Example with individual borders</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border">
+                <input id="inputValid1" type="text" required />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio4" checked />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio4" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button">Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" required value="Foo bar" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Example with individual borders</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border">
+                <input id="inputValid1" type="text" required />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio5" checked />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" name="radio5" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button">Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="elevation-2 mt-6">
+        <div class="card-body">
+          <form class="mw-xs">
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <input id="inputValid1" type="text" required value="Foo bar" />
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Example with individual borders</span>
+
+              <div class="group">
+                <input id="inputValid1" type="text" required placeholder="Placeholder" />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="inputValid">Input group label</label>
+              <span class="form-info">Lorem ipsum group description</span>
+
+              <div class="group group-border">
+                <input id="inputValid1" type="text" required />
+
+                <input id="inputValid2" type="text" required />
+
+                <button type="button">Button</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="checkboxGroupHelp1">
+                <legend>Invalid checkbox group</legend>
+
+                <span id="checkboxGroupHelp1" class="form-info">
+                  Checkbox group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="checkbox" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" required />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="checkbox" checked="true" required />
+
+                  <span>Three</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="form-group">
+              <fieldset aria-describedby="radioGroupHelp1">
+                <legend>Radio group</legend>
+
+                <span id="radioGroupHelp1" class="form-info">
+                  Radio group description
+                </span>
+
+                <label class="form-control">
+                  <input required type="radio" checked name="radio6" />
+
+                  <span>One</span>
+
+                  <i />
+                </label>
+
+                <label class="form-control">
+                  <input required type="radio" required name="radio6" />
+
+                  <span>Two</span>
+
+                  <i />
+                </label>
+              </fieldset>
+            </div>
+
+            <div class="row justify-content-end">
+              <div class="col col-sm-auto">
+                <button type="button">Cancel</button>
+              </div>
+
+              <div class="col col-sm-auto">
+                <button type="submit">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

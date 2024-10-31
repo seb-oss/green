@@ -5,9 +5,9 @@
   box-sizing: border-box;
   contain: layout;
   display: inline-flex;
-  gap: 0.25rem;
   height: 3rem;
-  max-width: 100%;
+  width: 100%;
+  position: relative;
   overflow: hidden;
 }
 
@@ -18,24 +18,23 @@
 #track {
   box-sizing: border-box;
   display: flex;
-  flex-grow: 0;
-  flex-shrink: 1;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-}
-
-#segments {
-  box-sizing: border-box;
-  display: inline-flex;
+  flex-grow: 1;
+  scroll-snap-type: inline mandatory;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  overflow-x: scroll;
   gap: 0.25rem;
   position: relative;
-  transition: 0.2s;
-  z-index: 1;
+  scrollbar-width: none;
+}
+
+#track::-webkit-scrollbar {
+  display: none;
 }
 
 #btn-prev,
 #btn-next {
+  box-sizing: border-box;
   align-items: center;
   appearance: none;
   aspect-ratio: 1;
@@ -49,6 +48,9 @@
   height: 100%;
   justify-content: center;
   width: 2.5rem;
+  transition: 0.2s;
+  z-index: 2;
+  position: absolute;
 
   @media (pointer: fine) {
     &:hover {
@@ -60,6 +62,21 @@
     }
   }
 }
+#btn-prev {
+  margin: 0 0.25rem 0 0;
+}
+#btn-next {
+  margin: 0 0 0 0.25rem;
+  right: 0;
+}
+
+#btn-prev[aria-hidden='true'],
+#btn-next[aria-hidden='true'] {
+  opacity: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
+}
 
 :host([size='small']) #btn-prev,
 :host([size='small']) #btn-next {
@@ -70,6 +87,8 @@
   flex-grow: 1;
   flex-shrink: 0;
   z-index: 1;
+  scroll-margin: 0 2.75rem;
+  scroll-snap-align: start;
 }
 
 #indicator {
@@ -78,6 +97,7 @@
   height: 100%;
   left: 0;
   position: absolute;
+  z-index: 0;
   transition:
     transform 0.2s,
     width 0.2s;

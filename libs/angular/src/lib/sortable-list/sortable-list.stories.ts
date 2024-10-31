@@ -1,11 +1,12 @@
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
-import {
-  SortableListItem,
-  NggSortableListComponent,
-} from './sortable-list.component'
+import { DragDropModule } from '@angular/cdk/drag-drop'
 import { CommonModule } from '@angular/common'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { DragDropModule } from '@angular/cdk/drag-drop'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
+import {
+  NggSortableListComponent,
+  SortableListItem,
+} from './sortable-list.component'
 
 export default {
   title: 'Components/Sortable list',
@@ -76,7 +77,7 @@ export default {
       name: 'suffixTemplate',
       description: 'Custom template for displaying suffixes.',
       control: {
-        type: 'none',
+        type: 'object',
       },
     },
   },
@@ -85,7 +86,7 @@ export default {
 const createTemplate = (
   suffixTemplate = false,
 ): StoryFn<NggSortableListComponent> => {
-  return (args: NggSortableListComponent) => ({
+  return (args) => ({
     template: `
       ${
         suffixTemplate

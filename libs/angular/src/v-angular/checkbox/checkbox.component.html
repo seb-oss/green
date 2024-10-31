@@ -1,0 +1,84 @@
+<!-- LOCKED INPUT -->
+<div *ngIf="locked && state" class="sdv-field-checkbox-wrap">
+  <div
+    [id]="id + '-checkbox'"
+    class="nggv-field--locked"
+    [attr.name]="name"
+    [attr.value]="value"
+  >
+    <ng-container *ngIf="!labelContentTpl">
+      {{ label }}
+    </ng-container>
+    <ng-template
+      *ngTemplateOutlet="labelContentTpl ?? null; context: { $implicit: value }"
+    ></ng-template>
+  </div>
+</div>
+
+<!-- INPUT WRAPPER -->
+<ng-container *ngIf="!locked">
+  <div class="sdv-field-checkbox-wrap">
+    <!-- CHECKBOX FIELD -->
+    <label
+      [id]="id + '-label'"
+      [attr.for]="id + '-checkbox'"
+      class="form-control"
+      *transloco="let t; read: scope"
+    >
+      <input
+        #input
+        type="checkbox"
+        [id]="id + '-checkbox'"
+        [attr.name]="name"
+        [attr.value]="value"
+        [attr.required]="required"
+        [disabled]="disabled"
+        [autofocus]="autofocus"
+        [attr.aria-label]="description"
+        [checked]="state"
+        (click)="$event.stopPropagation()"
+        (change)="onInputChange($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+      />
+      <!-- LABEL -->
+      <ng-template
+        *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+      ></ng-template>
+      <ng-template #basicLabelContentTpl>
+        <!-- to trigger css:empty if no label was added -->
+        <ng-container *ngIf="label">
+          <span
+            *ngIf="
+              optional === true || (required !== true && optional !== false)
+            "
+            class="sdv-field-label--optional"
+          >
+            ({{ t('label.optional') }})
+          </span>
+          <span>{{ label }}</span>
+        </ng-container>
+      </ng-template>
+      <i></i>
+    </label>
+  </div>
+
+  <!-- ERRORS -->
+  <ng-container *transloco="let t; read: scope">
+    <label
+      class="sdv-field-notice sdv-field-notice--error"
+      [attr.for]="id + '-checkbox'"
+      *ngIf="invalid && (error || ngControl?.invalid)"
+    >
+      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <ng-template #errorsRef>
+        <span *ngIf="firstError as error">
+          {{ t('error.field' + error?.code, error?.params) }}
+        </span>
+      </ng-template>
+    </label>
+  </ng-container>
+
+  <!-- CHILDREN -->
+  <ng-content></ng-content>
+</ng-container>

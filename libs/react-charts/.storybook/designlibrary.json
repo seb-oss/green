@@ -1,0 +1,88 @@
+[
+  {
+    "id": "chart--simple-bar",
+    "name": "Simple Bar",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--pie",
+    "name": "Pie",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--donut",
+    "name": "Donut",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--lines",
+    "name": "Lines",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--splines",
+    "name": "Splines",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--mixed",
+    "name": "Mixed",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--custom-colours",
+    "name": "Custom Colours",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "use-cases-lighthouse-1--bar-chart",
+    "name": "Bar chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-lighthouse-1--bar-chart-with-negative",
+    "name": "Bar chart with negative",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-lighthouse-1--pie-chart",
+    "name": "Pie chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-lighthouse-1--splines-chart",
+    "name": "Splines chart",
+    "title": "Use cases/Lighthouse 1",
+    "customParams": {}
+  },
+  {
+    "id": "getting-started--getting-started",
+    "name": "Getting started",
+    "title": "Getting started",
+    "customParams": {}
+  }
+]

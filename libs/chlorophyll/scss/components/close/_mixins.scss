@@ -18,6 +18,18 @@ $close-bg-active: var(--grey-500);
 $close-icon-color: var(--text-primary-color);
 
 @mixin close {
+  font-size: 0;
+  background: var(--gds-sys-color-surface);
+  border: 0;
+  border-radius: 50%;
+  content: '';
+  cursor: pointer;
+  display: flex;
+  font-family: inherit;
+  height: $close-height;
+  position: relative;
+  width: $close-width;
+
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {
     &:not(:disabled):not(.disabled) {
@@ -42,18 +54,6 @@ $close-icon-color: var(--text-primary-color);
       }
     }
   }
-
-  font-size: 0;
-  background: $close-bg;
-  border: 0;
-  border-radius: 50%;
-  content: '';
-  cursor: pointer;
-  display: flex;
-  font-family: inherit;
-  height: $close-height;
-  position: relative;
-  width: $close-width;
 
   @include common.add-focus('visible', 'i');
 

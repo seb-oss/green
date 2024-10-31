@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import exp from 'constants'
+import React from 'react'
 import { act, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { formatISO } from 'date-fns'
-import { Datepicker } from './datepicker'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
+
 import { GdsDatepicker } from '@sebgroup/green-core'
-import exp from 'constants'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { Datepicker } from './datepicker'
 
 const tick = (ms?: number) => new Promise<void>((r) => setTimeout(r, ms || 0))
 
@@ -43,5 +45,17 @@ describe('Datepicker', () => {
         ?.shadowRoot?.querySelector('slot[name="message"]')
         ?.assignedNodes()[0].textContent,
     ).toEqual('My custom message')
+  })
+
+  it('gets the correct ref element', async () => {
+    const ref = React.createRef<GdsDatepicker>()
+    const { container } = render(<Datepicker ref={ref} />)
+    await act(() => tick())
+
+    const gdsDatepicker = (await container?.querySelector(
+      getScopedTagName('gds-datepicker'),
+    )) as GdsDatepicker
+
+    expect(ref.current).toEqual(gdsDatepicker)
   })
 })

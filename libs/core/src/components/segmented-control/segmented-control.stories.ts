@@ -1,18 +1,20 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/segmented-control)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/segmented-control)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-segmented-control)
  *
  * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Segmented Control',
+  title: 'Components/Segmented Control',
   component: 'gds-segmented-control',
-  subcomponents: { MenuItem: 'gds-segment' },
+  subcomponents: { GdsSegment: 'gds-segment' },
   parameters: {
     layout: 'centered',
   },
@@ -82,21 +84,24 @@ export const Small: Story = {
 }
 
 /**
- * The size of the segments can be configured using the `seg-min-width` attribute. This influences
- * how many segments will be visible at the same time. If you have long segment labels and want to
- * avoid concatenation, you can increase the `seg-min-width` attribute. But keep in mind that the
- * best practice is to keep the segment labels short.
+ * Segments can have different widths depending on the content, and if there are too many
+ * segments to fit in the container, scroll buttons will appear to the left and/or right.
+ *
+ * Segment with can also be controlled individually on the segments using the `width`,
+ * `min-width` and `max-width` Style Expression properties.
  */
 export const SegmentSize: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div style="max-width: 800px">
-      <gds-segmented-control seg-min-width="200" value="3">
-        <gds-segment value="1">First</gds-segment>
-        <gds-segment value="2">Unusually long label text</gds-segment>
-        <gds-segment value="3">Third</gds-segment>
-        <gds-segment value="4">Fourth</gds-segment>
-        <gds-segment value="5">Fifth</gds-segment>
+    <div style="width:90vw; max-width: 500px;">
+      <gds-segmented-control value="1">
+        <gds-segment value="1" min-width="200px">Min-width</gds-segment>
+        <gds-segment value="flaschenabfüllmaschine" max-width="150px"
+          >Flaschenabfüllmaschine</gds-segment
+        >
+        <gds-segment value="longlonglong">Long long label</gds-segment>
+        <gds-segment value="longlabel">An even longer long label</gds-segment>
+        <gds-segment value="pinetrees">Pinetrees</gds-segment>
       </gds-segmented-control>
     </div>
   `,

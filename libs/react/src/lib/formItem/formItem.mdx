@@ -1,0 +1,21 @@
+import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
+import { FormItem } from './formItem'
+import { Select, Option } from '../select'
+import { NumberInput } from '../form/input/input'
+import * as FormItemStories from './formItem.stories';
+
+<Meta of={FormItemStories} />
+
+# FormItem
+
+<Canvas of={FormItemStories.TextInput} />
+
+### Expandable information
+
+<Canvas of={FormItemStories.ExpandableInformation} />
+
+Expandable information can also be used with JSX:
+
+<Canvas of={FormItemStories.ExpandableInformationJsx} />
+
+<Controls />

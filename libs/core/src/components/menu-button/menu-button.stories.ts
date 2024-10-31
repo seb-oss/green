@@ -2,11 +2,11 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 // import { html } from 'lit';
 import { html } from '../../scoping'
+
 import './menu-button'
 import '../popover/popover.js'
-import '../layout/flex/flex.js'
-import '../layout/card/card.js'
-
+import '../flex/flex.js'
+import '../card/card.js'
 import '../icon/icons/magnifying-glass.js'
 import '../icon/icons/bell.js'
 import '../icon/icons/star.js'
@@ -15,7 +15,7 @@ import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 
 const meta: Meta = {
-  title: 'Docs/Components/Menu button',
+  title: 'Components/Menu button',
   component: 'gds-menu-button',
   parameters: {
     layout: 'centered',
@@ -77,7 +77,7 @@ export const Example_menu_bar: Story = {
       display="flex"
       height="50px"
       width="700px"
-      border="0 0 4xs/base300 0"
+      border="0 0 4xs/primary 0"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button>
@@ -85,7 +85,7 @@ export const Example_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
         <gds-menu-button>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
@@ -119,7 +119,7 @@ export const Compact_menu_bar: Story = {
     html`<gds-card
         display="flex"
         width="700px"
-        border="0 0 4xs/base300 0"
+        border="0 0 4xs/primary 0"
         background="base-white"
       >
       <div style="flex-basis:50%;">
@@ -128,7 +128,7 @@ export const Compact_menu_bar: Story = {
           Search
         </gds-menu-button>
       </div>
-      <gds-flex style="flex-basis:50%;" justify="flex-end">
+      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
         <gds-menu-button compact>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification

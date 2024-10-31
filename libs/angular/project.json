@@ -37,7 +37,7 @@
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
-        "port": 4400,
+        "port": 4402,
         "configDir": "libs/angular/.storybook",
         "browserTarget": "angular:build-storybook",
         "compodoc": false,
@@ -70,6 +70,12 @@
         }
       },
       "dependsOn": ["core:build-with-types"]
+    },
+    "copy-designlibrary-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles -f libs/angular/.storybook/designlibrary.json dist/storybook/angular"
+      }
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",

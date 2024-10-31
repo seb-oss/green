@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core'
-import { TableHeaderListValueType } from './cell-table.types'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
+
+import { TableHeaderListValueType } from './cell-table.types'
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

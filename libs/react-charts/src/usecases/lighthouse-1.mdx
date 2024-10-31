@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { Chart } from '../'
+import * as Lighthouse1Stories from './lighthouse-1.stories';
+
+export const Template = (args) => <Chart {...args} />
+
+<Meta of={Lighthouse1Stories} />
+
+# Lighthouse: Use case 1
+
+## Bar chart
+
+<Canvas>
+  <Story of={Lighthouse1Stories.BarChart} />
+
+  <Story of={Lighthouse1Stories.BarChartWithNegative} />
+</Canvas>
+
+## Pie chart
+
+<Canvas>
+  <Story of={Lighthouse1Stories.PieChart} />
+</Canvas>
+
+## Splines chart
+
+<Canvas>
+  <Story of={Lighthouse1Stories.SplinesChart} />
+</Canvas>

@@ -76,6 +76,12 @@
         }
       }
     },
+    "copy-designlibrary-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles -f libs/react-charts/.storybook/designlibrary.json dist/storybook/react-charts"
+      }
+    },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}

@@ -1,6 +1,5 @@
 :host {
   display: flex;
-  transition: 0.2s;
   z-index: 1;
 }
 
@@ -21,6 +20,7 @@ button {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 100%;
+  transition: 0.1s;
 
   &:disabled {
     cursor: not-allowed;
@@ -29,7 +29,7 @@ button {
 }
 
 @media (pointer: fine) {
-  button:hover {
+  :host(:not([selected])) button:hover {
     background-color: color-mix(
       in srgb,
       var(--gds-sys-color-state-layers-state-black-dim1),

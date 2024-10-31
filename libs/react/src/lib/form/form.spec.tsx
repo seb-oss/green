@@ -1,8 +1,9 @@
-import { fireEvent, render, screen } from '@testing-library/react'
-import * as FormContext from './formContext'
 import React from 'react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+
 import { FormItems, RadioGroup, TextInput } from '.'
 import Form from './form'
+import * as FormContext from './formContext'
 import { Checkbox, RadioButton } from './input/input'
 
 type MockComponentProps = {
@@ -20,7 +21,7 @@ const MockComponent = ({ mockOnSubmit }: MockComponentProps) => (
         rules: { type: 'Required' },
       }}
     >
-      <TextInput label="Text field" placeholder="eg: cat" />
+      <TextInput label="Text field" placeholder="eg: cat" value={''} />
     </FormItems>
     <button type="submit">submit</button>
     <button type="reset">reset</button>
@@ -57,29 +58,31 @@ describe('Form component', () => {
     expect(screen.queryByText('fill in blank')).toBeVisible()
   })
 
-  it('Should validate when form is submitted', () => {
+  it('Should validate when form is submitted', async () => {
     render(<MockComponent />)
     expect(screen.queryByText('fill in blank')).toBeNull()
-    fireEvent.click(screen.getByText('submit'))
+    await act(async () => await fireEvent.click(screen.getByText('submit')))
     expect(screen.queryByText('fill in blank')).toBeVisible()
   })
 
-  it('Should reset forms input value', () => {
+  it('Should reset forms input value', async () => {
     const { container } = render(<MockComponent />)
-    fireEvent.change(container.querySelector('input') as HTMLInputElement, {
-      target: { value: 'value' },
-    })
+    await act(() =>
+      fireEvent.change(container.querySelector('input') as HTMLInputElement, {
+        target: { value: 'value' },
+      }),
+    )
     expect(container.querySelector('input')?.value).toBe('value')
     fireEvent.click(screen.getByText('reset'))
     expect(container.querySelector('input')?.value).toBe('')
   })
 
-  it('Should reset forms input error', () => {
+  it('Should reset forms input error', async () => {
     render(<MockComponent />)
     expect(screen.queryByText('fill in blank')).toBeNull()
-    fireEvent.click(screen.getByText('submit'))
+    await act(() => fireEvent.click(screen.getByText('submit')))
     expect(screen.queryByText('fill in blank')).not.toBeNull()
-    fireEvent.click(screen.getByText('reset'))
+    await act(() => fireEvent.click(screen.getByText('reset')))
     expect(screen.queryByText('fill in blank')).toBeNull()
   })
 
@@ -89,25 +92,27 @@ describe('Form component', () => {
       .fn()
       .mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
-    fireEvent.change(screen.getByPlaceholderText('eg: cat'), {
-      target: { value: 'cat cat' },
-    })
-    fireEvent.click(screen.getByText('submit'))
+    await act(() =>
+      fireEvent.change(screen.getByPlaceholderText('eg: cat'), {
+        target: { value: 'cat cat' },
+      }),
+    )
+    await act(() => fireEvent.click(screen.getByText('submit')))
     expect(mockFn).toBeCalled()
     expect(mockFn).toBeCalledWith({ text: 'cat cat' })
   })
 
-  it('Should call not onSubmitForm fn when input empty', () => {
+  it('Should call not onSubmitForm fn when input empty', async () => {
     /* eslint-disable-next-line */
     const mockFn: jest.Mock = jest
       .fn()
       .mockImplementation((value: any) => value)
     render(<MockComponent mockOnSubmit={mockFn} />)
-    fireEvent.click(screen.getByText('submit'))
+    await act(() => fireEvent.click(screen.getByText('submit')))
     expect(mockFn).not.toBeCalled()
   })
 
-  it('Should validate checkbox', () => {
+  it('Should validate checkbox', async () => {
     render(
       <Form>
         <FormItems
@@ -118,17 +123,16 @@ describe('Form component', () => {
             rules: { type: 'Required' },
           }}
         >
-          <Checkbox label="checkbox" value="checkme" />
+          <Checkbox label="checkbox" />
         </FormItems>
       </Form>,
     )
     expect(screen.queryByText('required')).toBeNull()
-    fireEvent.click(screen.getByText('checkbox'))
-    fireEvent.click(screen.getByText('checkbox'))
+    await act(() => fireEvent.click(screen.getByText('checkbox')))
     expect(screen.queryByText('required')).not.toBeNull()
   })
 
-  it('Should validate radio group', () => {
+  it('Should validate radio group', async () => {
     render(
       <Form>
         <FormItems
@@ -148,11 +152,11 @@ describe('Form component', () => {
       </Form>,
     )
     expect(screen.queryByText('required')).toBeNull()
-    fireEvent.click(screen.getByText('submit'))
+    await act(() => fireEvent.click(screen.getByText('submit')))
     expect(screen.queryByText('required')).not.toBeNull()
   })
 
-  it('Should remove inputs and useEffect cleanup should run', () => {
+  it('Should remove inputs and useEffect cleanup should run', async () => {
     const mockFn: jest.Mock = jest.fn().mockImplementation((value) => value())
     const mockFormContext: jest.SpyInstance = jest.spyOn(
       FormContext,
@@ -162,8 +166,8 @@ describe('Form component', () => {
       setValues: mockFn,
       setErrors: mockFn,
       setFields: mockFn,
-      errors: null,
-      values: null,
+      errors: undefined,
+      values: undefined,
     }))
     const MockComponent = () => {
       const [hide, setHide] = React.useState(true)
@@ -184,7 +188,7 @@ describe('Form component', () => {
     render(<MockComponent />)
     expect(mockFn).toBeCalledTimes(1)
     expect(screen.getByText('text')).toBeVisible()
-    fireEvent.click(screen.getByText('click'))
+    await act(() => fireEvent.click(screen.getByText('click')))
     expect(screen.queryByText('text')).toBeNull()
     expect(mockFn).toBeCalledTimes(4)
   })

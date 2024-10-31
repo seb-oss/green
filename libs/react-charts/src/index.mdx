@@ -1,0 +1,57 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { Chart } from '.'
+import * as IndexStories from './index.stories';
+
+export const Template = (args) => <Chart {...args} />
+
+<Meta of={IndexStories} />
+
+# Getting started with charts in React
+
+First, install the `@sebgroup/green-react-charts` package:
+
+```bash
+npm install @sebgroup/green-react-charts
+```
+
+or add with Yarn:
+
+```bash
+yarn add @sebgroup/green-react-charts
+```
+
+Then you need to import the base styles for charts. Without these, the charts will look broken and not render correctly.
+The `~@sebgroup/green-charts` package should have been installed as a dependency when you installed `@sebgroup/green-react-charts`.
+
+```scss
+@use '~@sebgroup/green-charts/scss';
+```
+
+Then you can start using the Chart react component:
+
+```typescript
+import { Chart, ChartSettings } from '@sebgroup/green-react-charts'
+
+export const MyChart = () => {
+  const settings: ChartSettings = {
+    data: [
+      {
+        name: 'Score card',
+        values: [12, 9, 3, 1],
+      },
+    ],
+    categories: [
+      'Signerade avtal (SEB)',
+      'Påbörjade trials (Oxceed)',
+      'Aktiverade prenumerationer',
+      'Avslutade prenumerationer (endast efter avslutad ordinarie pren.)',
+    ],
+  }
+
+  return <Chart settings={settings} />
+}
+```
+
+<Canvas>
+  <Story of={IndexStories.GettingStarted} />
+</Canvas>

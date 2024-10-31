@@ -1,10 +1,10 @@
-import { state } from 'lit/decorators.js'
-import { DynamicStylesController } from './dynamic-styles'
-import { getUnscopedTagName } from './scoping'
 import { LitElement } from 'lit'
+import { state } from 'lit/decorators.js'
+
+import { DynamicStylesController } from './controllers/dynamic-styles-controller'
 
 // This nis needed to support legacy decorators. Once we upgrade to TC39 standard decorators across the lib, we can remove this.
-// More info: https://lit.dev/docs/components/decorators/#decorator-versions
+// More info: https://lit.dev/Components/decorators/#decorator-versions
 import 'reflect-metadata'
 
 export class GdsElement extends LitElement {
@@ -14,7 +14,7 @@ export class GdsElement extends LitElement {
    * @attribute gds-element
    * @readonly
    */
-  gdsElementName = ''
+  gdsElementName?: string
 
   /**
    * Whether the element is using transitional styles.
@@ -35,8 +35,6 @@ export class GdsElement extends LitElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.gdsElementName =
-      getUnscopedTagName(this.tagName.toLowerCase()) || this.gdsElementName
-    this.setAttribute('gds-element', this.gdsElementName)
+    this.setAttribute('gds-element', this.gdsElementName?.toString() || '')
   }
 }

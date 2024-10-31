@@ -1,21 +1,22 @@
 import { nothing, unsafeCSS } from 'lit'
-import { html as staticHtml, literal } from 'lit/static-html.js'
 import { property, query } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { constrainSlots } from '../../utils/helpers/constrain-slots'
-import { forwardAttributes } from '../../utils/directives'
-import { TransitionalStyles } from '../../transitional-styles'
-import '../../primitives/ripple'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { when } from 'lit/directives/when.js'
+import { literal, html as staticHtml } from 'lit/static-html.js'
 
+import { html as customElementHtml, gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import style from './button.style.css?inline'
-
-import { gdsCustomElement, html as customElementHtml } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
+import { observeLightDOM } from '../../utils/decorators'
+import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import { GdsFormControlElement } from '../form/form-control'
-import type { GdsElement } from '../../gds-element'
+import style from './button.style.css?inline'
+
+import '../../primitives/ripple'
+
+const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
@@ -71,7 +72,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
    * Sets the size of the button. Defaults to "small".
    */
   @property({ reflect: true })
-  size: 'small' | 'medium' | 'large' = 'medium'
+  size: 'xs' | 'small' | 'medium' | 'large' = 'medium'
 
   /**
    * The label of the button. Use this to add an accessible label to the button when no text is provided in the default slot.
@@ -110,7 +111,6 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   connectedCallback(): void {
@@ -157,7 +157,9 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         @click="${this.#handleClick}"
         ${forwardAttributes(
           (attr) =>
-            attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
+            attr.name.startsWith('gds-aria') ||
+            attr.name === 'gds-role' ||
+            ariaForwards.includes(attr.name),
         )}
       >
         <slot name="lead"></slot>
@@ -167,8 +169,8 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
           !this._isUsingTransitionalStyles,
           () => html`<gds-ripple part="_ripple"></gds-ripple>`,
         )}
-      </${tag}>
-    `
+        </${tag}>
+        `
   }
 
   protected _getValidityAnchor(): HTMLElement {
@@ -177,13 +179,12 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   // Check if the button is an icon button.
   #mainSlotChange = () => {
-    const assignedNodes = (this._mainSlot?.assignedNodes() ??
-      []) as GdsElement[]
+    const assignedElements = this._mainSlot?.assignedElements() ?? []
 
     this.#isIconButton =
-      assignedNodes.length === 1 &&
-      assignedNodes.some((node) =>
-        node.nodeName.toLowerCase().startsWith('gds-icon'),
+      assignedElements.length === 1 &&
+      assignedElements.some((element) =>
+        element.tagName.toLowerCase().startsWith('gds-icon'),
       )
 
     this.requestUpdate()
@@ -205,5 +206,15 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         this.form.reset()
       }
     }
+  }
+
+  @observeLightDOM({
+    attributes: true,
+    childList: false,
+    subtree: false,
+    characterData: false,
+  })
+  private _attributeChanged() {
+    this.requestUpdate()
   }
 }

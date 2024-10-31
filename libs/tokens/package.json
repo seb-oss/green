@@ -1,11 +1,11 @@
 {
   "name": "@sebgroup/green-tokens",
-  "version": "0.6.0",
+  "version": "0.9.3",
   "dependencies": {},
   "description": "Design tokens for Green Design System",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
+    "url": "git+https://github.com/seb-oss/green.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -19,7 +19,7 @@
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/tokens"
+    "url": "https://github.com/seb-oss/green/labels/tokens"
   },
   "homepage": "https://storybook.seb.io"
 }

@@ -1,17 +1,14 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement } from '../../utils/testing'
+import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 import sinon from 'sinon'
 
-import '@sebgroup/green-core/components/segmented-control'
 import type { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control'
-import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
 
-import {
-  htmlTemplateTagFactory,
-  getScopedTagName,
-} from '@sebgroup/green-core/scoping'
+import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing'
+
+import '@sebgroup/green-core/components/segmented-control'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -93,48 +90,55 @@ describe('<gds-segmented-control>', () => {
       expect(spy).to.have.been.calledOnce
     })
 
-    it('should set the segMinWidth property based on the seg-min-width attribute', async () => {
-      const el = await fixture<GdsSegmentedControl>(
-        html`<gds-segmented-control
-          seg-min-width="120"
-        ></gds-segmented-control>`,
-      )
-      expect(el.segMinWidth).to.equal(120)
-    })
-
     it('renders the next button when segments overflow', async () => {
       const el = await fixture<GdsSegmentedControl>(html`
-        <gds-segmented-control seg-min-width="120" style="max-width: 300px">
-          <gds-segment>Segment 1</gds-segment>
-          <gds-segment>Segment 2</gds-segment>
-          <gds-segment>Segment 3</gds-segment>
-          <gds-segment>Segment 4</gds-segment>
+        <gds-segmented-control style="max-width: 300px">
+          <gds-segment min-width="100px">Segment 1</gds-segment>
+          <gds-segment min-width="100px">Segment 2</gds-segment>
+          <gds-segment min-width="100px">Segment 3</gds-segment>
+          <gds-segment min-width="100px">Segment 4</gds-segment>
         </gds-segmented-control>
       `)
 
       await el.updateComplete
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
-      expect(nextButton).to.exist
+      waitUntil(() => nextButton?.getAttribute('aria-hidden') === 'false')
     })
 
     it('renders the prev button when segments overflow', async () => {
       const el = await fixture<GdsSegmentedControl>(html`
-        <gds-segmented-control seg-min-width="120" style="max-width: 300px">
-          <gds-segment>Segment 1</gds-segment>
-          <gds-segment>Segment 2</gds-segment>
-          <gds-segment>Segment 3</gds-segment>
-          <gds-segment>Segment 4</gds-segment>
+        <gds-segmented-control style="max-width: 300px">
+          <gds-segment min-width="100px">Segment 1</gds-segment>
+          <gds-segment min-width="100px">Segment 2</gds-segment>
+          <gds-segment min-width="100px">Segment 3</gds-segment>
+          <gds-segment min-width="100px">Segment 4</gds-segment>
         </gds-segmented-control>
       `)
 
       await el.updateComplete
 
       const nextButton = el.shadowRoot?.querySelector('#btn-next')
+      waitUntil(() => nextButton?.getAttribute('aria-hidden') === 'false')
       clickOnElement(nextButton as HTMLElement)
-      await aTimeout(100)
+
       const prevButton = el.shadowRoot?.querySelector('#btn-prev')
-      expect(prevButton).to.exist
+      waitUntil(() => prevButton?.getAttribute('aria-hidden') === 'false')
+    })
+
+    it('<gds-segment> should support min-width, max-width and width style expression properties', async () => {
+      const el = await fixture<GdsSegmentedControl>(html`
+        <gds-segmented-control style="max-width: 300px">
+          <gds-segment min-width="100px">Segment 1</gds-segment>
+          <gds-segment max-width="200px">Segment 2</gds-segment>
+          <gds-segment width="150px">Segment 3</gds-segment>
+        </gds-segmented-control>
+      `)
+
+      const segments = el.segments
+      expect(segments[0]['min-width']).to.equal('100px')
+      expect(segments[1]['max-width']).to.equal('200px')
+      expect(segments[2]['width']).to.equal('150px')
     })
   })
 })

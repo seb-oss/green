@@ -1,10 +1,11 @@
+import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
+
 import { GdsElement } from '../../../gds-element'
 import { gdsCustomElement, html } from '../../../scoping'
-import { TransitionalStyles } from '../../../transitional-styles'
-import { unsafeCSS } from 'lit'
-
 import { tokens } from '../../../tokens.style'
+import { TransitionalStyles } from '../../../transitional-styles'
+import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
 import style from './segment.style.css?inline'
 
 /**
@@ -33,6 +34,38 @@ export class GdsSegment<ValueT = any> extends GdsElement {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
+
+  /**
+   * Controls the `min-width` css property of the segment.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'min-width'?: string
+
+  /**
+   * Controls the `max-width` css property of the segment.
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'max-width'?: string
+
+  /**
+   * Controls the `width` css property of the segment.
+   */
+  @styleExpressionProperty()
+  width?: string
+
+  /**
+   * Whether the segment is currently visible.
+   */
+  get isVisible() {
+    return this._isVisible
+  }
+  // This is deliberatly not marked as private, since we're setting it from the parent component,
+  // but it is not meant to be set by the consumer.
+  _isVisible = true
 
   connectedCallback(): void {
     super.connectedCallback()

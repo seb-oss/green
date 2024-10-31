@@ -9,12 +9,6 @@ export const Post = defineDocumentType(() => ({
   filePathPattern: `blog/**/*.mdx`,
   contentType: 'mdx',
   fields: {
-    global_id: {
-      type: 'string',
-      description:
-        'Random ID to uniquely identify this doc, even after it moves',
-      required: true,
-    },
     title: { type: 'string', required: true },
     date: { type: 'date', required: true },
     author: { type: 'string', required: false },

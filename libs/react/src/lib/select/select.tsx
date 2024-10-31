@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import classNames from 'classnames'
+
 import {
   IExpandableInformation,
   ILabelAndLabelInformation,
@@ -6,9 +8,8 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import { ChevronDown } from '../icons'
 import { FormItem } from '../formItem'
-import classNames from 'classnames'
+import { ChevronDown } from '../icons'
 
 export interface SelectProps
   extends IExpandableInformation,

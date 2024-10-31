@@ -13,7 +13,7 @@
 /* add use-green scope i.e. ability to use (`.use-green`) */
 @use './libs/chlorophyll/scss/components/use-green-scope';
 
-/* add color palettes for charts, temporary workaround for https://github.com/sebgroup/green/issues/357  */
+/* add color palettes for charts, temporary workaround for https://github.com/seb-oss/green/issues/357  */
 @use './libs/charts/scss/mixins' as chart-mixins;
 @include chart-mixins.add-color-palettes;
 

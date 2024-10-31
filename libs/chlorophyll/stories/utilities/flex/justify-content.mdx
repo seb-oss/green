@@ -1,0 +1,71 @@
+import { Meta, Canvas } from '@storybook/blocks'
+
+<Meta title="Utilities/Flexbox/Justify content" />
+
+# Flexbox justify content
+
+This utility class can be applied to elements with `display: flex` or `display: inline-flex`. Some common cases include `.row`, `.d-flex` etc.
+
+**Class:** `justify-content-{breakpoint}-{value}` <br />
+**Values:** `start`,`between`,`center`,`evenly`,`around`,`end` <br />
+**Responsive:** true
+
+## Examples
+
+### Responsive
+
+Distribute available space between flex items by default and justify items to end on medium screens and up.
+
+<div class="d-flex justify-content-between justify-content-md-end">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>
+
+### Start
+
+<div class="d-flex justify-content-start">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>
+
+### Between
+
+<div class="d-flex justify-content-between">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>
+
+### Center
+
+<div class="d-flex justify-content-center">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>
+
+### Evenly
+
+<div class="d-flex justify-content-evenly">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>
+
+### Around
+
+<div class="d-flex justify-content-around">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>
+
+### End
+
+<div class="d-flex justify-content-end">
+  <div class="p-3 border border-info">Item 1</div>
+  <div class="p-3 border border-info">Item 2</div>
+  <div class="p-3 border border-info">Item 3</div>
+</div>

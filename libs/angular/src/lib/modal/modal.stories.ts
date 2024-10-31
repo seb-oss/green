@@ -1,8 +1,10 @@
-import type { Meta, StoryObj } from '@storybook/angular'
-import { moduleMetadata } from '@storybook/angular'
-import { NggModalModule } from './modal.module'
-import { NggModalComponent } from './modal.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { moduleMetadata } from '@storybook/angular'
+
+import type { Meta, StoryObj } from '@storybook/angular'
+
+import { NggModalComponent } from './modal.component'
+import { NggModalModule } from './modal.module'
 
 const meta: Meta<NggModalComponent> = {
   title: 'Components/Modal',
@@ -26,7 +28,7 @@ export default meta
 
 type Story = StoryObj<NggModalComponent>
 
-const RenderTemplate = (args: NggModalComponent) => ({
+const RenderTemplate = (args: any) => ({
   template: `
     <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" [size]="size" (closed)="isOpen = false">
       <p>Modal Body</p>

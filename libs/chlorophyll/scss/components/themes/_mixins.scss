@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:math';
+@use 'sass:color';
 @use '../../common/functions';
 
 /* Mixin for adding themes,
@@ -103,7 +104,7 @@ Values for light mode are used by default.
   )
   /* border */,
   $border-color: var(--gds-ref-pallet-base600),
-  // transparentize($black, 0.83),
+  // color.adjust($black, $alpha: -0.83),
   // #CECECE against white
   $border-width: 1px,
   $border-radius: 0.25rem,
@@ -306,8 +307,8 @@ Values for light mode are used by default.
     $text-primary: $grey-100,
     $text-secondary: $grey-200,
     $border-color: $grey-200,
-    $form-control-bg: #{transparentize(#000000, 0.9)},
-    $form-control-bg-disabled: transparentize(#ffffff, 0.98),
+    $form-control-bg: #{color.adjust(#000000, $alpha: -0.9)},
+    $form-control-bg-disabled: color.adjust(#ffffff, $alpha: -0.98),
     $skeleton-loader-highlight: $grey-400,
     $skeleton-loader-background: $grey-600
   );

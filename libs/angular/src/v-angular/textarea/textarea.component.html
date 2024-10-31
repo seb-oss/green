@@ -1,0 +1,101 @@
+<!-- LABEL -->
+<label
+  [id]="id + '-label'"
+  class="sdv-field-label hide-if-empty"
+  [attr.for]="id + '-textarea'"
+  *transloco="let t; read: scope"
+>
+  <ng-template
+    *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+  ></ng-template>
+  <ng-template #basicLabelContentTpl>
+    <!-- to trigger css:empty if no label was added -->
+    <ng-container *ngIf="label">
+      {{ label }}
+      <span
+        *ngIf="optional === true || (required !== true && optional !== false)"
+        class="sdv-field-label--optional"
+      >
+        ({{ t('label.optional') }})
+      </span>
+    </ng-container>
+  </ng-template>
+</label>
+
+<!-- DESCRIPTION -->
+<div class="sdv-field-label--small description">{{ description }}</div>
+
+<!-- LOCKED INPUT -->
+<ng-container *ngIf="locked">
+  <div
+    [id]="id + '-textarea'"
+    class="nggv-field--locked"
+    [attr.name]="name"
+    [attr.value]="state"
+    [attr.role]="role"
+  >
+    <span *ngIf="!state" class="unset-state">-</span>
+    <ng-container *ngIf="state">
+      {{ state }}
+    </ng-container>
+  </div>
+</ng-container>
+
+<!-- INPUT FIELD -->
+<ng-container *ngIf="!locked">
+  <textarea
+    #input
+    [id]="id + '-textarea'"
+    class="sdv-field"
+    [ngClass]="{ 'no-resize': !!rows }"
+    [class.nggv-field--error]="invalid"
+    [attr.name]="name"
+    [attr.required]="required"
+    [disabled]="disabled"
+    [autofocus]="autofocus"
+    [readOnly]="readonly"
+    [attr.maxlength]="maxlength"
+    [attr.minlength]="minlength"
+    [attr.role]="role"
+    [attr.rows]="rows"
+    [attr.placeholder]="placeholder"
+    [attr.aria-label]="description"
+    [value]="state"
+    (input)="onInput($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+  ></textarea>
+
+  <!-- ERRORS -->
+  <div class="error-wrapper" *transloco="let t; read: scope">
+    <label
+      class="sdv-field-notice sdv-field-notice--error"
+      [attr.for]="id + '-textarea'"
+      *ngIf="invalid && (error || ngControl?.invalid)"
+    >
+      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <ng-template #errorsRef>
+        <span *ngIf="firstError as error">
+          {{ t('error.field' + error?.code, error?.params) }}
+        </span>
+      </ng-template>
+    </label>
+
+    <ng-container *ngIf="hasMaxLength">
+      <label
+        *nggvCharacterCountdown="
+          maxlength;
+          currentLength: (inputRef?.nativeElement?.value ?? '').length;
+          charactersLeft as charactersLeft
+        "
+        class="sdv-field-notice"
+        style="text-align: right"
+      >
+        {{ charactersLeft }} {{ t('label.maxlength') }}
+      </label>
+    </ng-container>
+  </div>
+
+  <!-- CHILDREN -->
+  <ng-content></ng-content>
+</ng-container>

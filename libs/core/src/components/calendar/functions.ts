@@ -1,11 +1,11 @@
+import { html, TemplateResult } from 'lit'
 import {
-  startOfMonth,
-  endOfMonth,
   addDays,
-  eachWeekOfInterval,
   eachDayOfInterval,
+  eachWeekOfInterval,
+  endOfMonth,
+  startOfMonth,
 } from 'date-fns'
-import { TemplateResult, html } from 'lit'
 
 export type Week = {
   days: Date[]
@@ -21,6 +21,11 @@ export function renderMonthGridView(
     { start: monthStart, end: monthEnd },
     { weekStartsOn: 1 },
   )
+
+  // pad `weeks` so that we always render 6 rows
+  while (weeks.length < 6) {
+    weeks.push(addDays(weeks[weeks.length - 1], 7))
+  }
 
   return html`${template(
     weeks.map((weekStartDay) => ({

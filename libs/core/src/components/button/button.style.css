@@ -1,93 +1,51 @@
-@layer tokens, a11y, core, ranks, sizes, variants, disabled;
-
-@layer tokens {
-  :host {
-    --_gap: var(--gds-space-m);
-
-    --_transition: var(--gds-sys-transition);
-
-    --_padding-inline: var(--gds-space-l);
-    --_padding-block: var(--gds-space-m);
-
-    --_border-radius: var(--gds-space-max);
-    --_border-width: 1px;
-    --_border-style: solid;
-
-    --_color-bg: var(--gds-sys-color-content-content);
-    --_color-text: var(--gds-sys-color-content-content-inverse);
-    --_color-border: var(--gds-sys-color-stroke-stroke);
-
-    --_color-outline-alpha: 60%;
-    --_color-outline: var(--_color-border);
-
-    /* These state layer variables can be variant to the correct state layer token in
-    * the rank and variant specific styles. It will be blended with `--_color-bg`
-    * for the `background-color` rule. */
-    --_state-layer-hover: var(--gds-sys-color-state-layers-state-black);
-    --_state-layer-active: var(--gds-sys-color-state-layers-state-black-shade);
-
-    --gds-sys-transition-properties: color;
-
-    contain: layout;
-    display: inline-block;
-    isolation: isolate;
-    max-width: 100%;
-  }
-}
+@layer tokens, core, a11y, ranks, sizes, variants, disabled;
 
 @layer a11y {
-  @media (prefers-color-scheme: dark) {
-    /* TODO */
-  }
   @media (prefers-reduced-motion: reduce) {
-    :host {
-      --_transition: none;
+    .button {
+      transition: none;
     }
   }
 }
 
 @layer core {
-  .button {
-    --gds-sys-transition-properties: color !important;
+  :host {
+    display: inline-block;
+    max-width: 100%;
+  }
 
-    align-items: center;
-    background-color: var(--_color-bg);
-    block-size: 100%;
-    border-color: var(--_color-border);
-    border-radius: var(--_border-radius);
-    border-style: var(--_border-style);
-    border-width: var(--_border-width);
-    box-sizing: border-box;
-    color: var(--_color-text);
-    color-scheme: dark light;
-    cursor: pointer;
+  .button {
+    --_block-size: var(--gds-space-3xl);
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    block-size: var(--_block-size);
+    background-color: var(--gds-color-l3-background-primary);
+    color: var(--gds-color-l3-content-primary);
+    border-radius: var(--gds-space-max);
     font-family: inherit;
-    font-size: 1rem;
-    font-weight: 400;
-    gap: var(--_gap);
-    height: var(--_size);
-    inline-size: 100%;
-    justify-content: space-between;
-    justify-items: center;
-    line-height: 1.25;
+    font-size: var(--gds-text-size-detail-m);
+    line-height: var(--gds-text-line-height-detail-m);
+    font-weight: var(--gds-text-weight-book);
+    gap: var(--gds-space-s);
     outline-color: transparent;
-    outline-offset: 2px;
+    outline-offset: var(--gds-space-3xs);
     outline-style: solid;
-    outline-width: 2px;
-    padding-block: var(--_padding-block);
-    padding-inline: var(--_padding-inline);
+    outline-width: var(--gds-space-3xs);
+    padding-block: var(--gds-space-s);
+    padding-inline: var(--gds-space-l);
     position: relative;
     text-decoration: none;
-    transition: var(--_transition);
     transition-property: color, border-color;
+    transition: all 0.4s;
+    max-width: 100%;
+    width: 100%;
 
     &:focus {
-      outline-color: color-mix(
-        in srgb,
-        var(--_color-outline),
-        transparent var(--_color-outline-alpha)
-      );
+      outline-color: color-mix(in srgb, currentcolor, #000 100%);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -97,213 +55,228 @@
     &:hover {
       background-color: color-mix(
         in srgb,
-        var(--_color-bg),
-        var(--_state-layer-hover)
-      );
-      border-color: color-mix(
-        in srgb,
-        var(--_color-border),
-        var(--_state-layer-hover)
+        var(--gds-color-l3-background-primary),
+        var(--gds-color-l3-states-dark-hover)
       );
     }
 
     &:active {
       background-color: color-mix(
         in srgb,
-        var(--_color-bg),
-        var(--_state-layer-active)
-      );
-      border-color: color-mix(
-        in srgb,
-        var(--_color-border),
-        var(--_state-layer-active)
+        var(--gds-color-l3-background-primary),
+        var(--gds-color-l3-states-dark-pressed)
       );
     }
-  }
 
-  .button slot:not([name]) {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    &:not(.circle) slot:not([name]) {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
+}
 
-  .button.icon slot {
-    display: contents;
-  }
+/* High specificity */
+.button.circle {
+  aspect-ratio: 1/1;
+  padding: 0;
+}
+
+.button:disabled {
+  pointer-events: none;
+  background-color: var(--gds-color-l3-background-disabled);
+  color: var(--gds-color-l3-content-disabled);
 }
 
 @layer ranks {
   :host([rank*='secondary']) .button {
-    --_color-bg: var(--gds-sys-color-content-content-inverse);
-    --_color-text: var(--gds-sys-color-content-content);
-    --_color-border: var(--gds-sys-color-stroke-stroke);
+    background-color: var(--gds-color-l3-background-secondary);
+    color: var(--gds-color-l3-content-tertiary);
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-secondary),
+        var(--gds-color-l3-states-light-hover)
+      );
+    }
 
     &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-black-dim1);
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-secondary),
+        var(--gds-color-l3-states-light-pressed)
+      );
     }
   }
 
   :host([rank*='tertiary']) .button {
-    --_color-bg: transparent;
-    --_color-text: var(--gds-sys-color-content-content);
-    --_color-border: transparent;
+    background-color: transparent;
+    color: var(--gds-color-l3-content-tertiary);
 
     &:hover {
-      --_color-border: var(--gds-sys-color-stroke-stroke);
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-color-l3-states-light-hover)
+      );
     }
 
     &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-black-dim1);
-      --_color-border: var(--gds-sys-color-stroke-stroke);
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-color-l3-states-light-pressed)
+      );
     }
-  }
-
-  .button.circle {
-    display: flex;
-    align-items: center;
-    height: var(--_size);
-    width: var(--_size);
-    aspect-ratio: 1/1;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
   }
 }
 
 @layer sizes {
+  :host([size='xs']) .button {
+    --_block-size: var(--gds-space-l);
+    font-size: var(--gds-text-size-detail-s);
+    line-height: var(--gds-text-line-height-detail-s);
+    padding-inline: var(--gds-space-m);
+  }
+
   :host([size='small']) .button {
-    --_padding-inline: var(--gds-space-l);
-    --_padding-block: var(--gds-space-s);
-    --_size: 2rem;
-    font-size: 0.875rem;
+    --_block-size: var(--gds-space-xl);
+    font-size: var(--gds-text-size-detail-s);
+    line-height: var(--gds-text-line-height-detail-s);
+    padding-inline: var(--gds-space-m);
   }
 
   :host([size='medium']) .button {
-    --_padding-inline: var(--gds-space-l);
-    --_padding-block: var(--gds-space-m);
-    --_size: 2.5rem;
-  }
-
-  :host([size='large']) .button {
-    --_padding-inline: var(--gds-space-xl);
-    --_padding-block: var(--gds-space-m);
-    --_size: 3rem;
+    --_block-size: var(--gds-space-2xl);
+    font-size: var(--gds-text-size-detail-m);
+    line-height: var(--gds-text-line-height-detail-m);
   }
 }
 
 @layer variants {
-  :host([rank='primary'][variant='positive']) .button {
-    --_bg: var(--gds-sys-color-container-container-positive);
-    --_color-bg: var(--_bg);
-    --_color-border: var(--_bg);
+  .positive {
+    background-color: var(--gds-color-l3-background-positive);
 
     &:hover {
-      --_state-layer-hover: var(--gds-sys-color-state-layers-state-black-dim1);
-    }
-
-    &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-black-dim2);
-    }
-
-    &:focus {
-      --_color-outline: var(--_bg);
-    }
-  }
-
-  :host([rank='secondary'][variant='positive']) .button {
-    --_color-bg: var(--gds-sys-color-content-content-inverse);
-    --_color-text: var(--gds-sys-color-content-content-positive);
-    --_color-border: var(--gds-sys-color-stroke-stroke-positive);
-
-    &:hover {
-      --_state-layer-hover: var(--gds-sys-color-state-layers-state-positive);
-    }
-
-    &:active {
-      --_state-layer-active: var(
-        --gds-sys-color-state-layers-state-positive-dim
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-positive),
+        var(--gds-color-l3-states-dark-hover)
       );
     }
-  }
-
-  :host([rank='tertiary'][variant='positive']) .button {
-    --_color-bg: transparent;
-    --_color-text: var(--gds-sys-color-content-content-positive);
-    --_color-border: transparent;
-
-    &:hover {
-      --_state-layer-hover: var(--gds-sys-color-state-layers-state-positive);
-      --_color-border: var(--gds-sys-color-stroke-stroke-positive);
-    }
 
     &:active {
-      --_state-layer-active: var(
-        --gds-sys-color-state-layers-state-positive-dim
-      );
-      --_color-border: var(--gds-sys-color-stroke-stroke-positive);
-    }
-  }
-
-  :host([rank='primary'][variant='negative']) .button {
-    --_bg: var(--gds-sys-color-container-container-negative);
-    --_color-bg: var(--_bg);
-    --_color-text: var(--gds-sys-color-status-negative-on-negative);
-    --_color-border: var(--_bg);
-
-    &:hover {
-      --_state-layer-hover: var(--gds-sys-color-state-layers-state-black-dim1);
-    }
-
-    &:active {
-      --_state-layer-active: var(--gds-sys-color-state-layers-state-black-dim2);
-    }
-
-    &:focus {
-      --_color-outline: var(--_bg);
-    }
-  }
-
-  :host([rank='secondary'][variant='negative']) .button {
-    --_color-bg: var(--gds-sys-color-content-content-inverse);
-    --_color-text: var(--gds-sys-color-content-content-negative);
-    --_color-border: var(--gds-sys-color-stroke-stroke-negative);
-
-    &:hover {
-      --_state-layer-hover: var(--gds-sys-color-state-layers-state-negative);
-    }
-
-    &:active {
-      --_state-layer-active: var(
-        --gds-sys-color-state-layers-state-negative-dim
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-positive),
+        var(--gds-color-l3-states-dark-pressed)
       );
     }
+
+    &.secondary {
+      background-color: var(--gds-color-l3-background-positive-secondary);
+      color: var(--gds-color-l3-content-positive);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-positive-secondary),
+          var(--gds-color-l3-states-positive-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-positive-secondary),
+          var(--gds-color-l3-states-positive-pressed)
+        );
+      }
+    }
+
+    &.tertiary {
+      background-color: transparent;
+      color: var(--gds-color-l3-content-positive);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-positive-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-positive-pressed)
+        );
+      }
+    }
   }
 
-  :host([rank='tertiary'][variant='negative']) .button {
-    --_color-bg: transparent;
-    --_color-text: var(--gds-sys-color-content-content-negative);
-    --_color-border: transparent;
+  .negative {
+    background-color: var(--gds-color-l3-background-negative);
 
     &:hover {
-      --_state-layer-hover: var(--gds-sys-color-state-layers-state-negative);
-      --_color-border: var(--gds-sys-color-stroke-stroke-negative);
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-negative),
+        var(--gds-color-l3-states-dark-hover)
+      );
     }
 
     &:active {
-      --_state-layer-active: var(
-        --gds-sys-color-state-layers-state-negative-dim
+      background-color: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-negative),
+        var(--gds-color-l3-states-dark-pressed)
       );
-      --_color-border: var(--gds-sys-color-stroke-stroke-negative);
     }
-  }
-}
 
-@layer disabled {
-  .button:disabled {
-    --_color-bg: var(--gds-sys-color-container-container-disabled);
-    border-color: var(--_color-bg);
-    color: var(--gds-sys-color-content-content-disabled);
-    pointer-events: none;
+    &.secondary {
+      background-color: var(--gds-color-l3-background-negative-secondary);
+      color: var(--gds-color-l3-content-negative);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-negative-secondary),
+          var(--gds-color-l3-states-negative-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-negative-secondary),
+          var(--gds-color-l3-states-negative-pressed)
+        );
+      }
+    }
+
+    &.tertiary {
+      background-color: transparent;
+      color: var(--gds-color-l3-content-negative);
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-negative-hover)
+        );
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-negative-pressed)
+        );
+      }
+    }
   }
 }

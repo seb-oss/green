@@ -2,9 +2,10 @@
 
 import { useEffect } from 'react'
 
+import 'vanilla-cookieconsent'
+
 import pluginConfig from './config'
 
-import 'vanilla-cookieconsent'
 import './style.css'
 
 declare global {

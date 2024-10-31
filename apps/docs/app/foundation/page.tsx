@@ -1,14 +1,16 @@
 'use client'
 
+import Image from 'next/image'
+import Hero from '@/_hero/hero'
 import { Accordion, AccordionItem } from '@/accordion'
 import Grid from '@/grid/grid'
-import Hero from '@/hero/hero'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
-import Image from 'next/image'
 import MetallicSurfaceImage from 'public/content/metallic-surface.jpg'
 import CirclesImage from 'public/content/tonality-circles.jpg'
+
 import './style.css'
+
 import Cell from '@/grid/cell'
 import Content from '&/content/content'
 
@@ -101,7 +103,7 @@ export default function Foundation() {
               heading="Foundation"
               preamble="Green Design System, a framework designed to bring unity, efficiency, and coherent perspective to our digital experiences. Over time it will grow and evolve but always reflect our design philosophy. User needs first, being forefront and with confidence."
             />
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="our-purpose" className="heading-medium">
                 Our purpose
               </h2>
@@ -113,7 +115,7 @@ export default function Foundation() {
                 confidence.
               </p>
             </Grid>
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="tonality" className="heading-medium">
                 Tonality
               </h2>
@@ -135,7 +137,7 @@ export default function Foundation() {
                 aspectRatio: '16 / 9',
               }}
             />
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="visual-style" className="heading-medium">
                 Visual style
               </h2>
@@ -221,7 +223,7 @@ export default function Foundation() {
                 aspectRatio: '16 / 9',
               }}
             />
-            <Grid columns={2}>
+            <Grid columns="2">
               <h2 id="features" className="heading-medium">
                 Features
               </h2>

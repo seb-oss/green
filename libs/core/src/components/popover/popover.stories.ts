@@ -1,19 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { html } from '../../scoping.ts'
+
 import './index.ts'
 import '../button/index.ts'
 import '../grouped-list/index.ts'
 import '../icon/icons/chevron-bottom.ts'
-import '../layout/flex/flex.js'
-import '../layout/card/card.js'
+import '../flex/flex.js'
+import '../card/card.js'
 import '../menu-button/index.ts'
 
 /**
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Popover',
+  title: 'Components/Popover',
   component: 'gds-popover',
   parameters: {
     layout: 'centered',
@@ -66,7 +67,7 @@ export const Customization: Story = {
     html`<gds-container width="700px" height="250px"><gds-card
         display="flex"
         width="720px"
-        border="0 0 4xs/base300 0"
+        border="0 0 4xs/primary 0"
         position="fixed"
         background="base-white"
         style="left: 0; top: 0; z-index: 1000;"

@@ -1,0 +1,58 @@
+import { Meta, Story, Canvas, Markdown } from '@storybook/blocks'
+import Accordion from './accordion'
+import * as AccordionStories from './accordion.stories';
+
+export const Template = (args) => <Accordion {...args} />
+
+<Meta of={AccordionStories} />
+
+# Accordion
+
+An accordion lets users show and hide sections of related content on a page.
+
+<Story of={AccordionStories.Default} />
+
+<br />
+
+## Description
+
+Accordions can make information processing more effective. Best suited for plain text, lists, tables and inline links. A good example for use could be a FAQ and Terms and conditions.
+
+## Usage
+
+Use the accordions to "hide" information that users doesn't necessarily need to read or only need to read occasionally. If the majority of users will read it, it should be visible.
+
+## Props
+
+<Markdown>
+  {`
+  | Prop  | Type                            | Description                    |
+  | :---- | :------------------------------ | :----------------------------- |
+  | items | \`Array<AccordionItemInterface>\` | List of items in the accordion |
+  `}
+</Markdown>
+
+### AccordionItemInterface
+
+<Markdown>
+  {`
+  | Key            | Type                                                           |
+  | :--------------| :------------------------------------------------------------- |
+  | label          | \`string\`                                                       |
+  | subLabel       | \`string\`                                                       |
+  | content        | \`JSXElement\`                                                   |
+  | onClick?       | \`(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void\` |
+  | onOpen?        | \`(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void\` |
+  | onClose?       | \`(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void\` |
+  | defaultOpen?   | \`boolean\` |
+  | customLabel    | \`ReactNode\`                                                 |
+  `}
+</Markdown>
+
+## Example
+
+<Canvas>
+  {/* <Story id="components-accordion--accordion" /> is deprecated, please migrate it to <Story of={referenceToStory} /> see: https://storybook.js.org/migration-guides/7.0 */}
+
+  <Story id="components-accordion--accordion" />
+</Canvas>

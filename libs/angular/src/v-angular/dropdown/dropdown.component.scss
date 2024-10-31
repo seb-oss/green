@@ -1,0 +1,54 @@
+@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
+@use '../../../../chlorophyll/scss/tokens' as tokens;
+
+:host {
+  label {
+    display: block;
+    font-weight: 500;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+
+  .description {
+    margin-bottom: 0.5rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
+
+  button {
+    @include button.reset();
+    @include button.base();
+    @include button.secondary();
+    @include dropdown.dropdown-trigger();
+
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1.125;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+
+    width: 100%;
+
+    &.small {
+      font-size: 0.875rem;
+    }
+
+    &:hover {
+      background: var(--grey-400);
+    }
+  }
+
+  .dropdown {
+    width: 100%;
+    position: relative;
+
+    nggv-dropdown-list {
+      width: 100%;
+    }
+  }
+}

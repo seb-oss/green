@@ -4,3 +4,8 @@
 /coverage
 
 /.nx/cache
+**/*.mdx
+
+/.nx/workspace-data
+
+/apps/core-lib-benchmark

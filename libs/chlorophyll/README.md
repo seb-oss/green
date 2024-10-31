@@ -1,5 +1,5 @@
 <div align="center">
-<img width="600" alt="chlorophyll" src="https://github.com/sebgroup/green/assets/11420341/8368cfdf-5335-42b3-9a7f-b03fd0d6433b">
+<img width="600" alt="chlorophyll" src="https://github.com/seb-oss/green/assets/11420341/8368cfdf-5335-42b3-9a7f-b03fd0d6433b">
 <h1>@sebgroup/green-core</h1>
 <p>
 Chlorophyll a styling framework for Green Design System front-end components. It is primarily used to style the components in the React and Angular libraries, but also contains grid and utility classes.
@@ -60,10 +60,10 @@ To find all components, possible modifiers and information on when to use them, 
 
 ### Missing components and/or help
 
-If you cannot find the component you're looking for and/or want help switching to Green, see information on [Green pilots](https://github.com/sebgroup/green)
+If you cannot find the component you're looking for and/or want help switching to Green, see information on [Green pilots](https://github.com/seb-oss/green)
 
-If you are up and running with Green and want to contribute a new component, see [Contributions](https://github.com/sebgroup/green/CONTRIBUTING.md)
+If you are up and running with Green and want to contribute a new component, see [Contributions](https://github.com/seb-oss/green/CONTRIBUTING.md)
 
 ## Contribute
 
-This is part of a monorepo. If you want to contribute, see [Green](https://github.com/sebgroup/green)
+This is part of a monorepo. If you want to contribute, see [Green](https://github.com/seb-oss/green)

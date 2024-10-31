@@ -3,8 +3,6 @@ import { customElement, state } from 'lit/decorators.js'
 import { html } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/datepicker/index.js'
-import * as DatepickerTransitionalStyles from '@sebgroup/green-core/components/datepicker/datepicker.trans.styles.js'
-DatepickerTransitionalStyles.register()
 
 @customElement('datepicker-example')
 export class CalendarExample extends LitElement {

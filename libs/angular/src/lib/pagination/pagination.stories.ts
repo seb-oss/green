@@ -1,4 +1,5 @@
-import { StoryFn, Meta, moduleMetadata } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggPaginationComponent } from './pagination.component'
 import { NggPaginationModule } from './pagination.module'
 
@@ -21,9 +22,7 @@ export default {
   },
 } as Meta<NggPaginationComponent>
 
-const Template: StoryFn<NggPaginationComponent> = (
-  args: NggPaginationComponent,
-) => {
+const Template: StoryFn<NggPaginationComponent> = (args) => {
   return {
     template: `
     <ngg-pagination [size]="size" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [displayPages]="displayPages"></ngg-pagination>

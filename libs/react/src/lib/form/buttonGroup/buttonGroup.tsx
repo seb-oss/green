@@ -1,8 +1,9 @@
 import { ReactElement, useEffect, useState } from 'react'
-import { ButtonVariant } from '@sebgroup/extract'
-import { Button, ButtonProps } from '../button/button'
-import { Group } from '../'
 import classNames from 'classnames'
+
+import { ButtonVariant } from '@sebgroup/extract'
+import { Group } from '../'
+import { Button, ButtonProps } from '../button/button'
 
 interface ButtonGroupProps {
   children: ReactElement<ButtonProps> | ReactElement<ButtonProps>[]
@@ -48,8 +49,8 @@ export const ButtonGroup = ({
 
   return (
     <Group data-label="button-group" id={id}>
-      {buttons.map((props) => (
-        <Button key={props.key} {...props} />
+      {buttons.map(({ key, ...props }) => (
+        <Button key={key} {...props} />
       ))}
     </Group>
   )

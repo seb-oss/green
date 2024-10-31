@@ -90,7 +90,7 @@ export default {
   },
 } as Meta<NggSliderComponent>
 
-const Template: StoryFn<NggSliderComponent> = (args: NggSliderComponent) => {
+const Template: StoryFn<NggSliderComponent> = (args) => {
   return {
     template: `
       <ngg-slider

@@ -2,10 +2,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "strictlyOrderedTargets": [
-          "build",
-          "release"
-        ]
+        "strictlyOrderedTargets": ["build", "release"]
       }
     }
   },
@@ -54,37 +51,25 @@
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
   "targetDefaults": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ],
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"],
       "cache": true
     },
     "build-src": {
-      "dependsOn": [
-        "^build"
-      ],
-      "inputs": [
-        "production",
-        "^production"
-      ]
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "rollup": {
+      "dependsOn": ["^rollup"],
+      "inputs": ["production", "^production"],
+      "cache": true
     },
     "test": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ],
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true
     },
     "lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ],
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
     },
     "build-storybook": {
@@ -98,18 +83,10 @@
       "cache": true
     },
     "build-nx-storybook": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/.storybook/**/*"
-      ]
+      "inputs": ["default", "^production", "{workspaceRoot}/.storybook/**/*"]
     },
     "@nx/jest:jest": {
-      "inputs": [
-        "default",
-        "^production",
-        "{workspaceRoot}/jest.preset.js"
-      ],
+      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true,
       "options": {
         "passWithNoTests": true
@@ -122,32 +99,29 @@
       }
     },
     "@nx/eslint:lint": {
-      "inputs": [
-        "default",
-        "{workspaceRoot}/.eslintrc.json"
-      ],
+      "inputs": ["default", "{workspaceRoot}/.eslintrc.json"],
       "cache": true
     },
-    "copy-fonts": {
-      "dependsOn": [
-        "fonts:build"
-      ]
+    "@nx/vite:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
+    },
+    "@nx/vite:build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "e2e": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "namedInputs": {
-    "default": [
-      "{projectRoot}/**/*",
-      "sharedGlobals"
-    ],
-    "sharedGlobals": [
-      "{workspaceRoot}/babel.config.json"
-    ],
-    "fonts": [
-      "{workspaceRoot}/dist/fonts"
-    ],
-    "core": [
-      "{workspaceRoot}/dist/libs/core/src"
-    ],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": ["{workspaceRoot}/babel.config.json"],
+    "fonts": ["{workspaceRoot}/dist/fonts"],
+    "core": ["{workspaceRoot}/dist/libs/core/src"],
+    "extract": ["{workspaceRoot}/dist/libs/extract"],
     "production": [
       "default",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
@@ -157,7 +131,10 @@
       "!{projectRoot}/.storybook/**/*",
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)",
       "!{projectRoot}/src/test-setup.[jt]s",
-      "!{projectRoot}/tsconfig.storybook.json"
+      "!{projectRoot}/tsconfig.storybook.json",
+      "!{projectRoot}/cypress/**/*",
+      "!{projectRoot}/**/*.cy.[jt]s?(x)",
+      "!{projectRoot}/cypress.config.[jt]s"
     ]
   },
   "neverConnectToCloud": true,

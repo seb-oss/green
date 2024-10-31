@@ -6,13 +6,13 @@ import * as Stories from './context-menu.stories.ts'
 
 # Context Menu
 
-[Source code](https://github.com/sebgroup/green/tree/main/libs/angular/src/lib/context-menu)
+[Source code](https://github.com/seb-oss/green/tree/main/libs/angular/src/lib/context-menu)
 &nbsp;|&nbsp;
 [Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
 
 ## Overview
 
-The context menu is a clickable button that opens a menu where you can find the action connected to an area or item. This component uses the [Green Core Context Menu](https://github.com/sebgroup/green/tree/main/libs/core/src/components/context-menu) component under the hood.
+The context menu is a clickable button that opens a menu where you can find the action connected to an area or item. This component uses the [Green Core Context Menu](https://github.com/seb-oss/green/tree/main/libs/core/src/components/context-menu) component under the hood.
 
 ## Importing module
 
@@ -47,35 +47,25 @@ Then use the following in your templates to use the component:
 
 ### Default
 
-<Canvas>
-  <Story id="components-context-menu--default" />
-</Canvas>
+<Canvas of={Stories.Default} />
 
 ### With label
 
-<Canvas>
-  <Story id="components-context-menu--with-label" />
-</Canvas>
+<Canvas of={Stories.WithLabel} />
 
 ### Right to left
 
-<Canvas>
-  <Story id="components-context-menu--right-to-left" />
-</Canvas>
+<Canvas of={Stories.RightToLeft} />
 
 ### Custom template
 
 You can alter the look of a menu item by providing a custom template to the `menuItemTemplate`input. The template will be provided with the `item` object as context. You can also alter what's should be rendered in the button by providing a custom template to the `menuAnchorTemplate` input.
 
-<Canvas>
-  <Story id="components-context-menu--custom-template-default" />
-</Canvas>
+<Canvas of={Stories.CustomTemplateDefault} />
 
 ### Relative position
 
-<Canvas>
-  <Story id="components-context-menu--position-relative" />
-</Canvas>
+<Canvas of={Stories.PositionRelative} />
 
 ## Component API
 

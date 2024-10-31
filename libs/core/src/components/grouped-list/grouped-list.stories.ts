@@ -1,13 +1,16 @@
 import { html } from 'lit'
+
 import type { Meta, StoryObj } from '@storybook/web-components'
+
 import './index.ts'
 
 // Needed for components that only have 2016 style so far
 import { registerTransitionalStyles } from '../../transitional-styles.ts'
+
 registerTransitionalStyles()
 
 /**
- * [Source code](https://github.com/sebgroup/green/tree/main/libs/core/src/components/grouped-list)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/grouped-list)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-list)
  *
@@ -15,7 +18,7 @@ registerTransitionalStyles()
  * heading and they may have a link or button added to act on the data being displayed.
  */
 const meta: Meta = {
-  title: 'Docs/Components/Grouped List',
+  title: 'Components/Grouped List',
   component: 'gds-grouped-list',
   subcomponents: { ListItem: 'gds-list-item' },
   parameters: {

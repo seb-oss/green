@@ -1,12 +1,15 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-
   "plugins": ["@nx", "import"],
   "rules": {
+    "@typescript-eslint/no-extra-semi": "off",
     "import/no-extraneous-dependencies": [
       "error",
-      { "devDependencies": false, "optionalDependencies": false }
+      {
+        "devDependencies": false,
+        "optionalDependencies": false
+      }
     ]
   },
   "overrides": [
@@ -25,13 +28,16 @@
               }
             ]
           }
-        ]
+        ],
+        "@typescript-eslint/no-extra-semi": "off"
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nx/typescript", "prettier"],
-      "rules": {}
+      "rules": {
+        "no-extra-semi": "off"
+      }
     },
     {
       "files": [
@@ -51,7 +57,10 @@
     {
       "files": ["*.js", "*.jsx"],
       "extends": ["plugin:@nx/javascript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
+      }
     },
     {
       "files": "*.json",

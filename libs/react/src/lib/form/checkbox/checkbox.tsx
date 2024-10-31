@@ -1,6 +1,13 @@
-import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
+import {
+  FormEventHandler,
+  ForwardedRef,
+  forwardRef,
+  HTMLProps,
+  useState,
+} from 'react'
 import classNames from 'classnames'
-import { FormEventHandler, HTMLProps, useState } from 'react'
+
+import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */
@@ -15,55 +22,61 @@ export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   onChange?: FormEventHandler<HTMLInputElement>
 }
 
-export const Checkbox = ({
-  'aria-describedby': ariaDescribedBy,
-  id = randomId(),
-  label,
-  validator,
-  testId,
-  required,
-  className,
-  ...props
-}: CheckboxProps) => {
-  const [uuid] = useState(id)
+export const Checkbox = forwardRef(
+  (
+    {
+      'aria-describedby': ariaDescribedBy,
+      id = randomId(),
+      label,
+      validator,
+      testId,
+      required,
+      className,
+      ...props
+    }: CheckboxProps,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    const [uuid] = useState(id)
 
-  const validationClassName = validateClassName(validator?.indicator)
+    const validationClassName = validateClassName(validator?.indicator)
 
-  const labelClassNames = classNames('form-control', {
-    [validationClassName]: validator,
-  })
+    const labelClassNames = classNames('form-control', {
+      [validationClassName]: validator,
+    })
 
-  const inputClassNames = classNames(className, {
-    [validationClassName]: validator,
-  })
+    const inputClassNames = classNames(className, {
+      [validationClassName]: validator,
+    })
 
-  const describedBy = classNames(ariaDescribedBy, {
-    [`${uuid}_message`]:
-      validator?.message !== undefined && validator.message.length > 0,
-  })
+    const describedBy = classNames(ariaDescribedBy, {
+      [`${uuid}_message`]:
+        validator?.message !== undefined && validator.message.length > 0,
+    })
 
-  return (
-    <div className="form-group">
-      <label htmlFor={uuid} className={labelClassNames}>
-        {label}
-        <input
-          aria-describedby={describedBy || undefined}
-          aria-invalid={validator?.indicator === 'error'}
-          aria-required={required}
-          className={inputClassNames || undefined}
-          type="checkbox"
-          data-testid={testId}
-          id={uuid}
-          required={required}
-          {...props}
-        />
-        <i />
-      </label>
-      {validator && (
-        <span className="form-info" id={`${uuid}_message`}>
-          {validator.message}
-        </span>
-      )}
-    </div>
-  )
-}
+    return (
+      <div className="form-group">
+        <label htmlFor={uuid} className={labelClassNames}>
+          {label}
+          <input
+            aria-describedby={describedBy || undefined}
+            aria-invalid={validator?.indicator === 'error'}
+            aria-required={required}
+            className={inputClassNames || undefined}
+            type="checkbox"
+            data-testid={testId}
+            id={uuid}
+            required={required}
+            ref={ref}
+            {...props}
+          />
+          <i />
+        </label>
+        {validator && (
+          <span className="form-info" id={`${uuid}_message`}>
+            {validator.message}
+          </span>
+        )}
+      </div>
+    )
+  },
+)

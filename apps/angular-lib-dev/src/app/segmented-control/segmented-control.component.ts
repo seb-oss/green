@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { Observable, of } from 'rxjs'
+
 // eslint-disable-next-line
 import { SegmentedControl } from '@sebgroup/green-angular'
 

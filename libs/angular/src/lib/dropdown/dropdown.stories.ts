@@ -1,5 +1,4 @@
 // Dropdown.stories.ts
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import {
   FormControl,
   FormGroup,
@@ -7,10 +6,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms'
-import { NggDropdownModule } from './dropdown.module'
-import { NggDropdownComponent } from './dropdown.component'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
+
+import { NggDropdownComponent } from './dropdown.component'
+import { NggDropdownModule } from './dropdown.module'
 
 export default {
   title: 'Components/Dropdown',
@@ -25,9 +26,7 @@ export default {
   },
 } as Meta<NggDropdownComponent>
 
-const Template: StoryFn<NggDropdownComponent> = (
-  args: NggDropdownComponent,
-) => ({
+const Template: StoryFn<NggDropdownComponent> = (args) => ({
   template: `<ngg-dropdown [texts]="texts" [options]="options" [(value)]="value" [loop]="loop" [multiSelect]="multiSelect" [searchable]="searchable" [useValue]="useValue" [display]="display" [size]="size" [id]="id"></ngg-dropdown>`,
   props: args,
 })
@@ -151,9 +150,7 @@ Searchable.args = {
   ],
 }
 
-const CustomOptionTemplate: StoryFn<NggDropdownComponent> = (
-  args: NggDropdownComponent,
-) => {
+const CustomOptionTemplate: StoryFn<NggDropdownComponent> = (args) => {
   args.compareWith = (o1: any, o2: any) => o1.id === o2.id
   args.searchFilter = (search: string, value: any) =>
     ['kitchen', 'id'].some((key) =>
@@ -227,9 +224,7 @@ CustomOption.args = {
   ],
 }
 
-const FormControlTemplate: StoryFn<NggDropdownComponent> = (
-  args: NggDropdownComponent,
-) => {
+const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
   const validationForm = new FormGroup({
     country: new FormControl(undefined, [Validators.required]),
   })
@@ -362,9 +357,7 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = (
 export const Form = FormControlTemplate.bind({})
 Form.args = {}
 
-const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (
-  args: NggDropdownComponent,
-) => {
+const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
   const validationFormAdvance = new FormGroup({
     country: new FormControl(undefined, [Validators.required]),
   })

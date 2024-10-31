@@ -10,6 +10,12 @@ export default {
       return 'darkValue' in token
     },
   },
+  // 'color-scheme': {
+  //   name: 'color-scheme',
+  //   matcher: function (token) {
+  //     return 'value' in token && 'darkValue' in token && 'alpha' in token
+  //   },
+  // },
   'dark-mode': {
     name: 'dark-mode',
     matcher: function (token) {

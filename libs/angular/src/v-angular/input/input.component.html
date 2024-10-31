@@ -1,0 +1,149 @@
+<!-- LABEL -->
+<label
+  [id]="id + '-label'"
+  class="sdv-field-label hide-if-empty"
+  [attr.for]="id + '-input'"
+  *transloco="let t; read: scope"
+>
+  <ng-template
+    *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+  ></ng-template>
+  <ng-template #basicLabelContentTpl>
+    <!-- to trigger css:empty if no label was added -->
+    <ng-container *ngIf="label">
+      {{ label }}
+      <span
+        *ngIf="optional === true || (required !== true && optional !== false)"
+        class="sdv-field-label--optional"
+      >
+        ({{ t('label.optional') }})
+      </span>
+    </ng-container>
+  </ng-template>
+</label>
+
+<!-- DESCRIPTION -->
+<div class="form-info description hide-if-empty">
+  {{ description }}
+</div>
+
+<!-- LOCKED INPUT -->
+<ng-container *ngIf="locked">
+  <div
+    [id]="id + '-input'"
+    class="nggv-field--locked"
+    [attr.name]="name"
+    [attr.value]="state"
+    [attr.role]="role"
+  >
+    <span *ngIf="!state" class="unset-state">-</span>
+    <ng-container *ngIf="state">
+      <ng-container *ngIf="!inputMask">
+        {{ state }}
+      </ng-container>
+      <ng-container *ngIf="!!inputMask">
+        {{ state | nggvInputMaskFormat: inputMask }}
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-container>
+
+<!-- INPUT WRAPPER -->
+<ng-container *ngIf="!locked">
+  <div class="gds-input-wrapper" [class.nggv-field--error]="invalid">
+    <div class="input-group-prefix hide-if-empty">
+      <ng-content select="[slot='prefix']"></ng-content>
+    </div>
+
+    <!-- INPUT FIELD -->
+    <div class="input-group" *ngIf="!inputMask">
+      <input
+        #input
+        [id]="id + '-input'"
+        class="sdv-field"
+        [attr.type]="type"
+        [attr.name]="name"
+        [attr.required]="required"
+        [attr.email]="email"
+        [attr.aria-describedby]="id + '-message'"
+        [min]="min"
+        [max]="max"
+        [step]="step"
+        [attr.maxlength]="maxlength"
+        [attr.minlength]="minlength"
+        [pattern]="pattern"
+        [disabled]="disabled"
+        [autocomplete]="autocomplete"
+        [autofocus]="autofocus"
+        [readOnly]="readonly"
+        [attr.role]="role"
+        [attr.placeholder]="placeholder"
+        [attr.aria-label]="description"
+        [value]="state"
+        (input)="onInput($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+      />
+    </div>
+
+    <!-- INPUT FIELD WITH MASK -->
+    <div
+      class="input-group"
+      *ngIf="!!inputMask && (hideInput$ | async) === false"
+    >
+      <input
+        #input
+        [id]="id + '-input'"
+        class="sdv-field"
+        autocomplete="off"
+        [attr.name]="name"
+        [attr.required]="required"
+        [readOnly]="readonly"
+        [attr.role]="role"
+        [attr.placeholder]="placeholder"
+        [attr.aria-label]="description"
+        [attr.aria-describedby]="id + '-message'"
+        [nggvInputMask]="inputMask"
+        [formControl]="control"
+      />
+    </div>
+
+    <div class="input-group-suffix hide-if-empty">
+      <ng-content select="[slot='suffix']"></ng-content>
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <!-- ERRORS -->
+  <div
+    class="gds-form-item__footer error-wrapper"
+    *transloco="let t; read: scope"
+  >
+    <span
+      class="form-info form-info--error"
+      [attr.id]="id + '-message'"
+      *ngIf="invalid && (error || ngControl?.invalid)"
+    >
+      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <ng-template #errorsRef>
+        <span *ngIf="firstError as error">
+          {{ t('error.field' + error?.code, error?.params) }}
+        </span>
+      </ng-template>
+    </span>
+
+    <ng-container *ngIf="!inputMask && hasMaxLength && showCharacterCountdown">
+      <span
+        *nggvCharacterCountdown="
+          maxlength;
+          currentLength: (inputRef?.nativeElement?.value ?? '').length;
+          charactersLeft as charactersLeft
+        "
+        class="form-info"
+        style="text-align: right"
+      >
+        {{ charactersLeft }} {{ t('label.maxlength') }}
+      </span>
+    </ng-container>
+  </div>
+</ng-container>

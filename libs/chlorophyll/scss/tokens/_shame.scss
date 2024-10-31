@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:color';
 @use '../common/functions';
 @function get($property, $value, $theme: light) {
   @return map.get(map.get($property, $theme), $value);
@@ -49,8 +50,8 @@ $font-weight-normal: 400;
 $font-weight-bold: 500;
 $font-weight-bolder: 800;
 
-$font-family-sans-serif: 'SEBSansSerif', sans-serif, 'Helvetica Neue', Helvetica,
-  Arial !default;
+$font-family-sans-serif: 'SEB SansSerif GDS', 'SEBSansSerif', sans-serif,
+  'Helvetica Neue', Helvetica, Arial !default;
 $root-font-size: 16px !default;
 $base-font-size: 1rem !default; // relative to root element font size (html)
 $font-path: '../fonts' !default;
@@ -178,11 +179,11 @@ $disabled: (
     'primary-border': var(--gds-ref-pallet-base500),
   ),
   dark: (
-    'background': transparentize($white, 0.98),
-    'color': transparentize($white, 0.93),
+    'background': color.adjust($white, $alpha: -0.98),
+    'color': color.adjust($white, $alpha: -0.93),
     'border': get($grey, 400, 'dark'),
-    'primary-background': transparentize($white, 0.98),
-    'primary-color': transparentize($white, 0.93),
+    'primary-background': color.adjust($white, $alpha: -0.98),
+    'primary-color': color.adjust($white, $alpha: -0.93),
     'primary-border': get($grey, 400, 'dark'),
   ),
 );
@@ -271,8 +272,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 /* stylelint-disable */
 @mixin dark-mode() {
   --heading-primary-color: #{$white};
-  --text-primary-color: #{transparentize($white, 0.1)};
-  --text-secondary-color: #{transparentize($white, 0.4)};
+  --text-primary-color: #{color.adjust($white, $alpha: -0.1)};
+  --text-secondary-color: #{color.adjust($white, $alpha: -0.4)};
   --text-disabled-color: #{get($disabled, 'color', 'dark')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color', 'dark')};
   --border-color: #{get($grey, 500, 'dark')};
@@ -311,8 +312,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --text-secondary-color: #{get($grey, 800, 'light')};
   --text-disabled-color: var(--gds-ref-pallet-base600);
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
-  --border-color: #{transparentize($black, 0.83)}; // #CECECE against white
-  --border-secondary-color: #{transparentize($black, 0.9)};
+  --border-color: #{color.adjust($black, $alpha: -0.83)}; // #CECECE against white
+  --border-secondary-color: #{color.adjust($black, $alpha: -0.9)};
   --border-disabled-color: #{get($disabled, 'border')};
   --border-primary-disabled-color: #{get($disabled, 'primary-border')};
   --border-color-invalid: #{get($intent, 'danger')};

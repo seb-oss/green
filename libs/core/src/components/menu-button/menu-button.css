@@ -2,7 +2,7 @@
 
 @layer tokens {
   :host {
-    --_gap: 4px;
+    --_gap: 8px;
 
     --_padding-inline: var(--gds-space-m);
     --_padding-block: var(--gds-space-xs);
@@ -12,7 +12,7 @@
     --_color-border: transparent;
 
     --_color-outline-alpha: 60%;
-    --_color-outline: var(--gds-sys-color-stroke-stroke);
+    --_color-outline: var(--gds-sys-color-border-stroke);
 
     --_font-size: 1rem;
     --_font-weight: 400;

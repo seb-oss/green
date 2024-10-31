@@ -1,0 +1,78 @@
+import { Meta } from '@storybook/addon-docs'
+
+<Meta title="Get started" />
+
+# Angular Green
+
+## Install
+
+If you are using the latest version of Angular, you can simply install `@sebgroup/green-angular` like this:
+
+```
+npm install @sebgroup/green-angular --save
+```
+
+However, because `@sebgroup/green-angular` has a peer dependency to `@angular/cdk`, and Angular is very picky about which versions go together, if you use an older version of Angular you need to explicitly install the matching version of `@angular/cdk` as well.
+
+For example, for Angular 14:
+
+```
+npm install @angular/cdk@~14.0.0 @sebgroup/green-angular --save
+```
+
+Currently, our aim is to support the LTS version of Angular as well as the current latest version.
+
+## Import module
+
+Each component in Green Angular is exported as a separate module. We recommend importing only the component modules that you need:
+
+```ts
+import { NggDropdownModule } from '@sebgroup/green-angular/src/lib/dropdown'
+import { NggContextMenuModule } from '@sebgroup/green-angular/src/lib/context-menu'
+
+@NgModule({
+  declarations: [...],
+  imports: [
+    ...
+    NggDropdownModule,
+    NggContextMenuModule
+  ],
+  exports: [
+    NggModule
+  ]
+})
+export class SharedModule {}
+```
+
+## Import styling
+
+We recommend setting up your Angular project to use scss (SASS) for css preprocessing.
+
+Once configured to use scss, it's just a matter of including the scss to your main styles file, typically it would be `styles.scss` located at the root of the `src` folder unless you've changed it.
+
+### Add scss
+
+`{project}/src/styles.scss`
+
+```css
+// import base styles from @sebgroup/chlorophyll
+@use '@sebgroup/chlorophyll/scss';
+```
+
+**Note:** Depending on you bundler, you may need to configure the font path by setting the `$font-path` variable:
+
+```scss
+@use '@sebgroup/chlorophyll/scss' with (
+  $font-path: '@sebgroup/fonts/fonts'
+);
+```
+
+### Selective imports
+
+I you are only using a few components, it's better to selectively import the components you need. This will reduce the size of the final css bundle.
+
+Check out the example on [this page](https://storybook.seb.io/latest/chlorophyll/?path=/docs/get-started-use--page).
+
+## Have other needs?
+
+More examples and use cases coming soon! In the meantime create an [issue over at github](https://github.com/seb-oss/green/issues)

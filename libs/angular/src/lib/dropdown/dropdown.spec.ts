@@ -1,6 +1,7 @@
+import { fakeAsync } from '@angular/core/testing'
 import { render, RenderResult } from '@testing-library/angular'
+
 import { NggDropdownComponent } from './dropdown.component'
-import { fakeAsync, tick } from '@angular/core/testing'
 
 describe('Dropdown', () => {
   let component: RenderResult<NggDropdownComponent>

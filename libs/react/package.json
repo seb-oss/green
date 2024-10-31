@@ -1,32 +1,35 @@
 {
   "name": "@sebgroup/green-react",
-  "version": "3.14.1",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
+  "version": "3.20.1",
   "peerDependencies": {
     "react": "^17 || ^18",
     "react-dom": "^17 || ^18"
   },
   "dependencies": {
-    "@sebgroup/green-core": "^1.35.0",
-    "@sebgroup/chlorophyll": "^3.4.1",
+    "@sebgroup/green-core": "^1.41.3",
+    "@sebgroup/chlorophyll": "^3.6.8",
     "@sebgroup/extract": "^3.0.1",
     "@lit/react": "^1.0.2",
-    "classnames": "^2.3.2"
+    "classnames": "^2.3.2",
+    "body-scroll-lock": "^3.1.5"
   },
   "description": "React components built on top of @sebgroup/chlorophyll.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebgroup/green.git"
+    "url": "git+https://github.com/seb-oss/green.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public",
     "directory": "../../dist/libs/react"
   },
-  "author": "SEB Open Source <opensource@seb.se> (https://github.com/sebgroup)",
+  "author": "SEB Open Source <opensource@seb.se> (https://github.com/seb-oss)",
   "contributors": [],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/sebgroup/green/labels/react"
+    "url": "https://github.com/seb-oss/green/labels/react"
   },
   "homepage": "https://storybook.seb.io/latest/react/"
 }

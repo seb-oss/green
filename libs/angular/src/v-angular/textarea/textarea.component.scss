@@ -1,0 +1,67 @@
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
+@use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
+
+:host {
+  @include mixins.add-textarea();
+
+  label:not(.sdv-field-notice) {
+    @include form-group.add-label;
+    margin-bottom: 0.5rem;
+  }
+
+  label:is(.sdv-field-label) {
+    margin-bottom: 0.5rem;
+  }
+
+  .hide-if-empty:empty {
+    display: none;
+  }
+
+  .unset-state {
+    padding-left: 0.5rem;
+  }
+
+  .sdv-field-label--optional {
+    font-weight: 400;
+  }
+
+  // .nggv-field--error {
+  //   //@include nggv.text-field--error();
+  // }
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .description {
+    margin-bottom: 0.5rem;
+  }
+
+  .error-wrapper {
+    margin-top: 0.5rem;
+    //@include nggv.text-field--error-wrapper();
+  }
+
+  .no-resize {
+    resize: none;
+    /* Width */
+    //$_10px: functions.vanilla-px-to-rem(10, 16);
+    //$_3px: functions.vanilla-px-to-rem(3, 16);
+
+    &::-webkit-scrollbar {
+      -webkit-appearance: none;
+      //width: $_10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      //border: solid $_3px transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      //box-shadow: inset 0 0 $_10px $_10px colors.$vanilla-color-grey5;
+      //border: solid $_3px transparent;
+      border-radius: 0.5rem;
+    }
+  }
+}

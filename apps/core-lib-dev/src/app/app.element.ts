@@ -6,15 +6,30 @@ import { html } from '@sebgroup/green-core/scoping'
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 
-import '@sebgroup/green-core/components/icon/icons/flag.js'
-import '@sebgroup/green-core/components/segmented-control/index.js'
+import '@sebgroup/green-core/components/content/text/index.js'
 import '@sebgroup/green-core/components/context-menu/index.js'
+import '@sebgroup/green-core/components/icon/icons/arrow-right.js'
+import '@sebgroup/green-core/components/icon/icons/flag.js'
+import '@sebgroup/green-core/components/icon/icons/growth.js'
+import '@sebgroup/green-core/components/icon/icons/seb.js'
+import '@sebgroup/green-core/components/icon/icons/bars-three.js'
+import '@sebgroup/green-core/components/icon/icons/globus.js'
+import '@sebgroup/green-core/components/input/index.js'
+import '@sebgroup/green-core/components/theme/index.js'
+import '@sebgroup/green-core/components/layout/card/index.js'
+import '@sebgroup/green-core/components/layout/flex/index.js'
+import '@sebgroup/green-core/components/layout/grid/index.js'
+import '@sebgroup/green-core/components/media/img/index.js'
+import '@sebgroup/green-core/components/media/video/index.js'
+import '@sebgroup/green-core/components/menu-button/index.js'
+import '@sebgroup/green-core/components/segmented-control/index.js'
 
+import '../components/header'
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
-import './card.element'
+import './login/login.element'
 
 const { setLocale, getLocale } = gdsInitLocalization()
 
@@ -36,11 +51,11 @@ export class AppElement extends LitElement {
   accessor lang = 'sv'
 
   @state()
-  accessor currentView = 'form-validation'
+  accessor currentView = 'login'
 
   connectedCallback() {
     super.connectedCallback()
-    // registerTransitionalStyles()
+    this.addEventListener('view-change', this.handleViewChange as EventListener)
     this.setLang(getLocale())
   }
 
@@ -49,39 +64,27 @@ export class AppElement extends LitElement {
     setLocale(lang)
   }
 
+  disconnectedCallback() {
+    this.removeEventListener(
+      'view-change',
+      this.handleViewChange as EventListener,
+    )
+    super.disconnectedCallback()
+  }
+
+  private handleViewChange(event: CustomEvent) {
+    this.currentView = event.detail.view
+  }
+
   render() {
     return html`
       <gds-theme color-scheme="light">
-        <div class="container">
-          <div style="display: flex; justify-content: space-between;">
-            <h1 class="mb-5">Green Core test app</h1>
-            <gds-context-menu>
-              <span slot="trigger"
-                >Lang: ${this.lang} <gds-icon-flag></gds-icon-flag
-              ></span>
-              <gds-menu-item @click=${() => this.setLang('sv')}
-                >SV</gds-menu-item
-              >
-              <gds-menu-item @click=${() => this.setLang('en')}
-                >EN</gds-menu-item
-              >
-            </gds-context-menu>
-          </div>
-
-          <gds-segmented-control
-            .value=${this.currentView}
-            @change=${(e: CustomEvent) =>
-              (this.currentView = (e.target as any).value)}
-            style="margin-bottom: 1rem; width: 100%;"
-          >
-            <gds-segment value="form-validation">Form validation</gds-segment>
-            <gds-segment value="datepicker">Datepicker</gds-segment>
-            <gds-segment value="calendar">Calendar</gds-segment>
-            <gds-segment value="card">Card</gds-segment>
-          </gds-segmented-control>
+        <gds-header></gds-header>
+        <gds-container padding="s{0} m{s} l{4xl}">
           ${choose(
             this.currentView,
             [
+              ['login', () => html`<gds-login></gds-login>`],
               [
                 'form-validation',
                 () => html`<form-validation></form-validation>`,
@@ -91,11 +94,10 @@ export class AppElement extends LitElement {
                 () => html`<datepicker-example></datepicker-example>`,
               ],
               ['calendar', () => html`<calendar-example></calendar-example>`],
-              ['card', () => html`<card-example></card-example>`],
             ],
             () => html`No view selected`,
           )}
-        </div>
+        </gds-container>
       </gds-theme>
     `
   }

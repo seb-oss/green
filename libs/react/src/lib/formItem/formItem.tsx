@@ -1,4 +1,12 @@
-import { IconButton } from '../form'
+import React, {
+  PropsWithChildren,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react'
+import classNames from 'classnames'
+
 import {
   debounce,
   delay,
@@ -8,15 +16,8 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
-import React, {
-  PropsWithChildren,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react'
+import { IconButton } from '../form'
 import { InfoCircle, Times } from '../icons'
-import classNames from 'classnames'
 
 interface FormItemProps
   extends IExpandableInformation,
@@ -105,6 +106,7 @@ export const FormItem = ({
             size="small"
             aria-expanded={isExpanded}
             aria-controls={`${inputId}-expandable-info`}
+            aria-label={expandableInfoButtonLabel}
             onClick={async (event) => {
               if (!isExpanded) {
                 setIsHidden(false)

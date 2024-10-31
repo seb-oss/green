@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import { Meta, StoryFn, moduleMetadata } from '@storybook/angular'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggContextMenuComponent } from './context-menu.component'
 import { NggContextMenuModule } from './context-menu.module'
 
@@ -23,9 +24,7 @@ export default {
   },
 } as Meta<NggContextMenuComponent>
 
-const Template: StoryFn<NggContextMenuComponent> = (
-  args: NggContextMenuComponent,
-) => ({
+const Template: StoryFn<NggContextMenuComponent> = (args) => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -47,9 +46,7 @@ Default.args = {
   ],
 }
 
-const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (
-  args: NggContextMenuComponent,
-) => ({
+const WithLabelTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -83,9 +80,7 @@ RightToLeft.args = {
   ],
 }
 
-const CustomTemplate: StoryFn<NggContextMenuComponent> = (
-  args: NggContextMenuComponent,
-) => ({
+const CustomTemplate: StoryFn<NggContextMenuComponent> = (args) => ({
   component: NggContextMenuComponent,
   props: args,
   template: `
@@ -122,9 +117,7 @@ CustomTemplateDefault.args = {
   ],
 }
 
-const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (
-  args: NggContextMenuComponent,
-) => ({
+const TemplatePositionRelative: StoryFn<NggContextMenuComponent> = (args) => ({
   component: NggContextMenuComponent,
   props: args,
   template: `

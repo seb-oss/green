@@ -1,0 +1,120 @@
+[
+  {
+    "id": "chart--simple-bar",
+    "name": "Simple Bar",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--empty-chart",
+    "name": "Empty Chart",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--observable-simple-bar",
+    "name": "Observable Simple Bar",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--pie",
+    "name": "Pie",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--donut",
+    "name": "Donut",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--lines",
+    "name": "Lines",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--hide-axes",
+    "name": "Hide Axes",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--splines",
+    "name": "Splines",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--mixed",
+    "name": "Mixed",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--mixed-second-y",
+    "name": "Mixed Second Y",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--fit-to-height",
+    "name": "Fit to height of parent",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--custom-tick-values",
+    "name": "Custom Tick Values",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--mixed-graph-with-negative-values",
+    "name": "Mixed Graph With Negative Values",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "chart--custom-colours",
+    "name": "Custom Colours",
+    "title": "Chart",
+    "customParams": {
+      "componentIds": ["component-chart"]
+    }
+  },
+  {
+    "id": "get-started--page",
+    "name": "Page",
+    "title": "Get started",
+    "customParams": {}
+  }
+]

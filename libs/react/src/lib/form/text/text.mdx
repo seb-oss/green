@@ -1,0 +1,13 @@
+import { Meta, Story, Canvas } from '@storybook/blocks'
+import { Text } from './text'
+import * as TextStories from './text.stories';
+
+export const TextInputTempalte = ({ children }) => <Text>{children}</Text>
+
+<Meta of={TextStories} />
+
+# Text
+
+<Canvas>
+  <Story of={TextStories.Default} />
+</Canvas>

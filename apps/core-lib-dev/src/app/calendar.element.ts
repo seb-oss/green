@@ -3,8 +3,8 @@ import { customElement, state } from 'lit/decorators.js'
 import { html } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/calendar/index.js'
-import * as CalendarTransitionalStyles from '@sebgroup/green-core/components/calendar/calendar.trans.styles.js'
-CalendarTransitionalStyles.register()
+
+const YEAR_MONTH = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
 
 @customElement('calendar-example')
 export class CalendarExample extends LitElement {
@@ -27,22 +27,22 @@ export class CalendarExample extends LitElement {
 
   #customizedDates = [
     {
-      date: new Date('2024-06-12'),
+      date: new Date(`${YEAR_MONTH}-07`),
       indicator: 'dot',
       color: 'var(--intent-danger-background)',
     },
     {
-      date: new Date('2024-06-13'),
+      date: new Date(`${YEAR_MONTH}-12`),
       indicator: 'dot',
       color: 'var(--intent-danger-background)',
     },
     {
-      date: new Date('2024-06-24'),
+      date: new Date(`${YEAR_MONTH}-24`),
       indicator: 'dot',
       color: 'var(--intent-danger-background)',
     },
     {
-      date: new Date('2024-06-07'),
+      date: new Date(`${YEAR_MONTH}-21`),
       indicator: 'dot',
       disabled: true,
     },

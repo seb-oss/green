@@ -1,10 +1,12 @@
-import type { StorybookConfig } from '@storybook/angular'
-const EventHooksPlugin = require('event-hooks-webpack-plugin')
-const copyfiles = require('copyfiles')
 import * as fs from 'fs'
 
+import type { StorybookConfig } from '@storybook/angular'
+
+const EventHooksPlugin = require('event-hooks-webpack-plugin')
+const copyfiles = require('copyfiles')
+
 const config: Omit<StorybookConfig, 'framework'> = {
-  stories: ['../src/**/*.mdx', '../**/*.stories.@(js|jsx|ts|tsx|mdx)'],
+  stories: ['../src/**/*.mdx', '../**/*.@(mdx|stories.@(js|jsx|ts|tsx))'],
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-docs',
@@ -19,7 +21,10 @@ const config: Omit<StorybookConfig, 'framework'> = {
               console.log('Font directory does not exist. Copying fonts...')
               await new Promise((resolve) =>
                 copyfiles(
-                  ['node_modules/@sebgroup/fonts/fonts/**/*', 'dist/fonts'],
+                  [
+                    'node_modules/@sebgroup/fonts/fonts/SEBSansSerif/*',
+                    'dist/fonts/SEBSansSerif',
+                  ],
                   { up: true },
                   resolve,
                 ),

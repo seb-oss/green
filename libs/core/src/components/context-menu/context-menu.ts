@@ -1,17 +1,15 @@
-import { nothing } from 'lit'
 import { msg } from '@lit/localize'
-import { classMap } from 'lit/directives/class-map.js'
+import { nothing } from 'lit'
 import { property, queryAsync } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { Placement } from '@floating-ui/dom'
 
+import { GdsElement } from '../../gds-element'
+import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsElement } from '../../gds-element'
-import { constrainSlots } from '../../utils/helpers'
-import { TransitionalStyles } from '../../transitional-styles'
-
 import styles from './context-menu.styles'
 
 import '../../primitives/menu'
@@ -79,7 +77,6 @@ export class GdsContextMenu extends GdsElement {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   connectedCallback() {
@@ -105,7 +102,7 @@ export class GdsContextMenu extends GdsElement {
         aria-expanded=${this.open}
       >
         <slot name="trigger">
-          ${this.showLabel ? this.buttonLabel ?? this.label : nothing}
+          ${this.showLabel ? (this.buttonLabel ?? this.label) : nothing}
           <svg width="24" height="24" viewBox="0 0 24 24">
             <path
               d="M14 12C14 13.1042 13.1042 14 12 14C10.8958 14 10 13.1042 10 12C10 10.8958 10.8958 10 12 10C13.1042 10 14 10.8958 14 12ZM19 10C17.8958 10 17 10.8958 17 12C17 13.1042 17.8958 14 19 14C20.1042 14 21 13.1042 21 12C21 10.8958 20.1042 10 19 10ZM5 10C3.89583 10 3 10.8958 3 12C3 13.1042 3.89583 14 5 14C6.10417 14 7 13.1042 7 12C7 10.8958 6.10417 10 5 10Z"
@@ -127,7 +124,7 @@ export class GdsContextMenu extends GdsElement {
           aria-label=${this.label ?? this.buttonLabel}
           @gds-menu-item-click=${this.#handleItemClick}
         >
-          <slot allow="gds-menu-item gds-menu-heading"></slot>
+          <slot></slot>
         </gds-menu>
       </gds-popover>`
   }

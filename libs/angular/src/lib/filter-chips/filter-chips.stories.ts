@@ -1,6 +1,8 @@
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import '@sebgroup/green-core/components/filter-chips/index.js'
+
 import { NggCoreWrapperModule } from '../shared/core-element/core-element.module'
 
 export default {

@@ -1,15 +1,15 @@
 import React from 'react'
-import Datepicker from './datepicker'
 import { Meta, StoryObj } from '@storybook/react'
-import { GdsDatePicker } from '@sebgroup/green-core'
-import { validate } from 'webpack'
 
-type Story = StoryObj<GdsDatePicker>
+import { GdsDatePicker } from '@sebgroup/green-core'
+import Datepicker from './datepicker'
+
+type Story = StoryObj<typeof Datepicker>
 
 /**
  * Date pickers are used when users need to enter a date. The user can enter the date as text, but the date picker also allows the user to select the date in a visual representation of a calendar.
  */
-const meta: Meta<GdsDatePicker> = {
+const meta: Meta<typeof Datepicker> = {
   title: 'Components/Datepicker',
   component: Datepicker,
   argTypes: {},
@@ -36,21 +36,21 @@ export const Default: Story = {
  *      if (el.value !== 'correctValue') {
  *        // And return a validator array
  *        return [
- *                {
- *                  badInput: true,
- *                  customError: true,
- *                  patternMismatch: true,
- *                  rangeOverflow: true,
- *                  rangeUnderflow: true,
- *                  stepMismatch: true,
- *                  tooLong: true,
- *                  tooShort: true,
- *                  typeMismatch: true,
- *                  valid: false,
- *                  valueMissing: true,
- *                },
- *                'My custom validation message',
- *          ] : [ValidityState, string]
+ *            {
+ *              badInput: true,
+ *              customError: true,
+ *              patternMismatch: true,
+ *              rangeOverflow: true,
+ *              rangeUnderflow: true,
+ *              stepMismatch: true,
+ *              tooLong: true,
+ *              tooShort: true,
+ *              typeMismatch: true,
+ *              valid: false,
+ *              valueMissing: true,
+ *            },
+ *            'My custom validation message',
+ *      ] : [ValidityState, string]
  * }}} />
  *
  *
@@ -58,7 +58,6 @@ export const Default: Story = {
  *
  * For more information on validation in Green Core, see the [Form Validation](https://storybook.seb.io/latest/core/?path=/docs/docs-form-validation-documentation--docs) example.
  */
-
 export const Validation: Story = {
   args: {
     label: 'Choose date',
@@ -85,9 +84,11 @@ export const Validation: Story = {
           ]
         }
       },
+      disabled: true,
     },
     value: new Date(),
     testId: 'test',
+    ref: React.createRef(),
   },
   render: (args) => <Datepicker {...args} />,
 }

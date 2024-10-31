@@ -1,25 +1,25 @@
-import { html, unsafeCSS } from 'lit'
+import { msg } from '@lit/localize'
+import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { msg } from '@lit/localize'
 import {
-  computePosition,
   autoUpdate,
-  offset,
+  computePosition,
   flip,
-  Placement,
   Middleware,
+  offset,
+  Placement,
 } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
-import { watch, watchMediaQuery } from '../../utils/decorators'
-import { gdsCustomElement } from '../../scoping'
+import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
+import { watch, watchMediaQuery } from '../../utils/decorators'
+import styles from './popover.styles'
+
+import type { GdsBackdrop } from './backdrop'
 
 import '../icon/icons/cross-small'
-
-import styles from './popover.styles'
-import type { GdsBackdrop } from './backdrop'
 
 /**
  * @element gds-popover
@@ -274,6 +274,8 @@ export class GdsPopover extends GdsElement {
 
   @watch('open')
   private _handleOpenChange() {
+    const clickOutsideTarget =
+      (this.nonmodal ? this.#backdropEl : this._elDialog) || document
     this.updateComplete.then(() => {
       this._trigger?.setAttribute('aria-expanded', String(this.open))
       if (this.open) {
@@ -291,12 +293,19 @@ export class GdsPopover extends GdsElement {
 
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(
-          () => document.addEventListener('click', this.#handleClickOutside),
+          () =>
+            clickOutsideTarget.addEventListener(
+              'click',
+              this.#handleClickOutside,
+            ),
           0,
         )
       } else {
         this._elDialog?.close()
-        document.removeEventListener('click', this.#handleClickOutside)
+        clickOutsideTarget.removeEventListener(
+          'click',
+          this.#handleClickOutside,
+        )
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })

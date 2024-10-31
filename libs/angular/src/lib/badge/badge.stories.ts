@@ -1,6 +1,7 @@
-import { moduleMetadata, StoryFn, Meta } from '@storybook/angular'
-import { NggBadgeModule } from './badge.module'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
+
 import { NggBadgeComponent } from './badge.component'
+import { NggBadgeModule } from './badge.module'
 
 export default {
   title: 'Components/Badge',
@@ -23,16 +24,14 @@ export default {
   },
 } as Meta<NggBadgeComponent>
 
-const Template: StoryFn<NggBadgeComponent> = (args: NggBadgeComponent) => ({
+const Template: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
     <span ngg-badge [badgeType]="badgeType" [customColor]="customColor" [customBackgroundColor]="customBackgroundColor">Badge</span>
     `,
   props: args,
 })
 
-const BadgesTemplate: StoryFn<NggBadgeComponent> = (
-  args: NggBadgeComponent,
-) => ({
+const BadgesTemplate: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
     <div class="d-flex justify-content-between">
       <span ngg-badge >Badge</span>

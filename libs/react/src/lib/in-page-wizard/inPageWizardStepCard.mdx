@@ -1,0 +1,49 @@
+import { Controls, Meta, Story, Canvas } from '@storybook/blocks'
+import { InPageWizardStepCard } from './inPageWizardStepCard'
+import { GroupedList, ListItem } from '../grouped-list'
+import { TextInput } from '../form/input/input.tsx'
+import { TextArea } from '../form'
+import { Check } from '../icons'
+import * as InPageWizardStepCardStories from './inPageWizardStepCard.stories';
+
+export const Template = ({ children, ...props }) => (
+  <InPageWizardStepCard {...props}>{children}</InPageWizardStepCard>
+)
+
+<Meta of={InPageWizardStepCardStories} />
+
+# InPageWizardStepCard
+
+With InPageWizardStepCard it is possible for a user to quickly create wizard steps. Status for each step has to be provided so that it has the correct styles and renders correct.
+
+## Default
+
+<Canvas of={InPageWizardStepCardStories.Default} />
+
+## Next button text
+
+<Canvas of={InPageWizardStepCardStories.NextButtonText} />
+
+## Next button icon
+
+<Canvas of={InPageWizardStepCardStories.NextButtonIcon} />
+
+## Hidden footer
+
+<Canvas of={InPageWizardStepCardStories.HiddenFooter} />
+
+## Edit button text
+
+<Canvas of={InPageWizardStepCardStories.EditText} />
+
+## Status
+
+<Canvas of={InPageWizardStepCardStories.Status} />
+
+## Example
+
+<Canvas of={InPageWizardStepCardStories.Example} />
+
+## Properties
+
+<Controls />

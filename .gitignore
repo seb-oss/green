@@ -31,6 +31,9 @@ node_modules
 /dist/
 /apps/docs/public/core-out/
 
+# Green Core React wrappers
+/libs/react/src/core
+
 # misc
 /.sass-cache
 /connect.lock
@@ -62,5 +65,9 @@ next-env.d.ts
 custom-elements.json
 storybook.log
 
-# Components 
+# Components
 icon.list.mdx
+
+# Migrations
+migrations.json
+storybook-migration-summary.md

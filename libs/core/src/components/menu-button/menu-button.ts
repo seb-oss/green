@@ -3,11 +3,10 @@ import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { literal, html as staticHtml } from 'lit/static-html.js'
+
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
-import { constrainSlots } from '../../utils/helpers'
 import { tokens } from '../../tokens.style'
-
 import style from './menu-button.css?inline'
 
 /**
@@ -19,9 +18,11 @@ import style from './menu-button.css?inline'
  * @slot trail - An optional slot that allows a `gds-icon` element to be placed after the label.
  *
  * @event click - Fired when the button is clicked.
+ *
+ * @csspart main-slot - The main slot of the button, between the lead and trail slots.
  */
 @gdsCustomElement('gds-menu-button')
-export class MenuButton extends GdsElement {
+export class GdsMenuButton extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
   static shadowRootOptions: ShadowRootInit = {
@@ -79,7 +80,6 @@ export class MenuButton extends GdsElement {
 
   constructor() {
     super()
-    constrainSlots(this)
   }
 
   render() {
@@ -102,7 +102,7 @@ export class MenuButton extends GdsElement {
         download=${ifDefined(this.#isLink ? this.download : undefined)}
       >
         <slot name="lead"></slot>
-        <slot></slot>
+        <slot part="main-slot"></slot>
         <slot name="trail"></slot>
       </${tag}>
     `

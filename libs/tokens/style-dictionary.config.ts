@@ -1,4 +1,5 @@
 import * as StyleDictionary from 'style-dictionary'
+
 import actions from './src/actions'
 import filters from './src/filters'
 import formats from './src/formats'
@@ -85,6 +86,26 @@ const config: StyleDictionary.Config = {
           },
         },
         {
+          destination: 'light.css',
+          format: 'color/v2',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'light',
+            outputReferences: false,
+            // selector: '.light',
+          },
+        },
+        {
+          destination: 'dark.css',
+          format: 'color/v2',
+          filter: 'color-scheme',
+          options: {
+            colorScheme: 'dark',
+            outputReferences: false,
+            // selector: ':host',
+          },
+        },
+        {
           destination: 'size.css',
           format: 'size',
           filter: function (token) {
@@ -96,11 +117,32 @@ const config: StyleDictionary.Config = {
           },
         },
         {
+          destination: 'viewport.css',
+          format: 'viewport',
+          filter: function (token) {
+            // Check if the token type is 'float' and the path includes 'space'
+            return token.type === 'float' && token.path.includes('viewport')
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
+        {
           destination: 'text.css',
           format: 'text',
           filter: function (token) {
             // Check if the token type is 'float' and the path includes 'space'
             return token.type === 'float' && token.path.includes('typography')
+          },
+          options: {
+            outputReferences: true,
+          },
+        },
+        {
+          destination: 'shadow.css',
+          format: 'shadow',
+          filter: function (token) {
+            return token.path.includes('shadow')
           },
           options: {
             outputReferences: true,
@@ -401,7 +443,7 @@ const config: StyleDictionary.Config = {
             platformVersion: '15',
             targets: [swiftPackageName],
             resources: ['Assets'],
-          }
+          },
         },
         {
           destination: swiftSourcePath + 'Colors/LightModeColors.swift',
@@ -434,10 +476,10 @@ const config: StyleDictionary.Config = {
           options: {
             type: 'color',
             colorType: 'uiKitDynamicProvider',
-            import: ["UIKit"],
+            import: ['UIKit'],
             lightModeObjectName: 'LightModeColors',
             darkModeObjectName: 'DarkModeColors',
-          }
+          },
         },
         {
           destination: swiftSourcePath + '/Colors/Colors.swift',
@@ -448,9 +490,9 @@ const config: StyleDictionary.Config = {
           options: {
             type: 'color',
             colorType: 'swiftUiReferenceToUiKit',
-            import: ["SwiftUI"],
+            import: ['SwiftUI'],
             uiKitObjectName: 'UIColors',
-          }
+          },
         },
         {
           destination: swiftSourcePath + 'Dimensions.swift',
@@ -459,8 +501,8 @@ const config: StyleDictionary.Config = {
           className: 'Dimensions',
           packageName: swiftPackageName,
           options: {
-            type: 'sys'
-          }
+            type: 'sys',
+          },
         },
         {
           destination: swiftSourcePath + 'Radii.swift',
@@ -469,8 +511,8 @@ const config: StyleDictionary.Config = {
           className: 'Radii',
           packageName: swiftPackageName,
           options: {
-            type: 'sys'
-          }
+            type: 'sys',
+          },
         },
       ],
     },

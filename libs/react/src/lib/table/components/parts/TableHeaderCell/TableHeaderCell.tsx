@@ -1,11 +1,12 @@
 import React from 'react'
 import classnames from 'classnames'
-import { SortDirection } from '../../table-typings'
+
 import {
   SortedColumn,
   TableContextType,
   useTableContext,
 } from '../../context/TableContextProvider'
+import { SortDirection } from '../../table-typings'
 
 export type TableHeaderCellProps<T = any> = JSX.IntrinsicElements['th'] & {
   accessor?: keyof T

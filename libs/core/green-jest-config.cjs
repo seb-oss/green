@@ -6,13 +6,13 @@
  * - `transformIgnorePatterns` to ignore transforming certain Green and Lit files
  * - `setupFilesAfterEnv` that mocks some browser APIs that are used by the web components
  */
-
 module.exports = {
   apply: (config) => {
-    config.transformIgnorePatterns = [
-      ...(config.transformIgnorePatterns || []),
+    const transformIgnorePatterns = [
       'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs/)',
+      ...(config.transformIgnorePatterns || []),
     ]
+    config.transformIgnorePatterns = [transformIgnorePatterns.join('&')]
 
     config.setupFilesAfterEnv = [
       ...(config.setupFilesAfterEnv || []),

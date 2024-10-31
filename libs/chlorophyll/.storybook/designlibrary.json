@@ -1,0 +1,512 @@
+[
+  {
+    "id": "frameworks--page",
+    "name": "Page",
+    "title": "Frameworks",
+    "customParams": {}
+  },
+  {
+    "id": "components-wizard-in-page-wizard--in-page-wizard-step-card",
+    "name": "In-page Wizard Step Card",
+    "title": "Components/Wizard/In-page Wizard",
+    "customParams": {
+      "componentIds": ["component-inpagewizard"]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard--completed-step",
+    "name": "Completed step",
+    "title": "Components/Wizard/In-page Wizard",
+    "customParams": {
+      "componentIds": ["component-inpagewizard"]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard--current-step",
+    "name": "Current step",
+    "title": "Components/Wizard/In-page Wizard",
+    "customParams": {
+      "componentIds": ["component-inpagewizard"]
+    }
+  },
+  {
+    "id": "components-wizard-in-page-wizard--not-started-step",
+    "name": "Not started step",
+    "title": "Components/Wizard/In-page Wizard",
+    "customParams": {
+      "componentIds": ["component-inpagewizard"]
+    }
+  },
+  {
+    "id": "components-form-elements-textarea--textarea",
+    "name": "Textarea",
+    "title": "Components/Form/Elements/Textarea",
+    "customParams": {
+      "componentIds": ["component-input"]
+    }
+  },
+  {
+    "id": "components-form-elements-stepper--stepper",
+    "name": "Stepper",
+    "title": "Components/Form/Elements/Stepper",
+    "customParams": {
+      "componentIds": ["component-stepper"]
+    }
+  },
+  {
+    "id": "components-form-elements-radio-button--radiobutton",
+    "name": "Radiobutton",
+    "title": "Components/Form/Elements/Radio button",
+    "customParams": {
+      "componentIds": ["component-radiobutton"]
+    }
+  },
+  {
+    "id": "components-form-elements-input--input",
+    "name": "Input",
+    "title": "Components/Form/Elements/Input",
+    "customParams": {
+      "componentIds": ["component-input"]
+    }
+  },
+  {
+    "id": "components-form-elements-group--page",
+    "name": "Page",
+    "title": "Components/Form/Elements/Group",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-elements-text--page",
+    "name": "Page",
+    "title": "Components/Form/Elements/Text",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-elements-info--page",
+    "name": "Page",
+    "title": "Components/Form/Elements/Info",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-elements-checkbox--checkbox",
+    "name": "Checkbox",
+    "title": "Components/Form/Elements/Checkbox",
+    "customParams": {
+      "componentIds": ["component-checkbox"]
+    }
+  },
+  {
+    "id": "utilities-spacing-padding--page",
+    "name": "Page",
+    "title": "Utilities/Spacing/Padding",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-spacing-margin--page",
+    "name": "Page",
+    "title": "Utilities/Spacing/Margin",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-flexbox-order--page",
+    "name": "Page",
+    "title": "Utilities/Flexbox/Order",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-flexbox-justify-content--page",
+    "name": "Page",
+    "title": "Utilities/Flexbox/Justify content",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-flexbox-align-self--page",
+    "name": "Page",
+    "title": "Utilities/Flexbox/Align self",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-flexbox-align-items--page",
+    "name": "Page",
+    "title": "Utilities/Flexbox/Align items",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-flexbox-align-content--page",
+    "name": "Page",
+    "title": "Utilities/Flexbox/Align content",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-mixing-frameworks-use-green-with-bootstrap--page",
+    "name": "Page",
+    "title": "Use cases/Mixing frameworks/Use Green with Bootstrap",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-use-green-for-mfe-in-shell-application--page",
+    "name": "Page",
+    "title": "Use cases/Use Green for MFE in shell application",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-mixing-frameworks-introduction--page",
+    "name": "Page",
+    "title": "Use cases/Mixing frameworks/Introduction",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-dark-mode-login--page",
+    "name": "Page",
+    "title": "Use cases/Dark mode/Login",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-dark-mode-forms--page",
+    "name": "Page",
+    "title": "Use cases/Dark mode/Forms",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-dark-mode-disabled-forms--page",
+    "name": "Page",
+    "title": "Use cases/Dark mode/Disabled forms",
+    "customParams": {}
+  },
+  {
+    "id": "use-cases-dark-mode-use-preferred-color-scheme--page",
+    "name": "Page",
+    "title": "Use cases/Dark mode/Use preferred color scheme",
+    "customParams": {}
+  },
+  {
+    "id": "css-typography--page",
+    "name": "Page",
+    "title": "CSS/Typography",
+    "customParams": {}
+  },
+  {
+    "id": "components-tabs--tabs",
+    "name": "Tabs",
+    "title": "Components/Tabs",
+    "customParams": {
+      "componentIds": ["component-tab"]
+    }
+  },
+  {
+    "id": "components-table--page",
+    "name": "Page",
+    "title": "Components/Table",
+    "customParams": {
+      "componentIds": ["component-table"]
+    }
+  },
+  {
+    "id": "components-spinner--spinner",
+    "name": "Spinner",
+    "title": "Components/Spinner",
+    "customParams": {
+      "componentIds": ["component-spinners"]
+    }
+  },
+  {
+    "id": "components-slider--slider",
+    "name": "Slider",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": ["component-slider"]
+    }
+  },
+  {
+    "id": "components-slider--slider-with-unit-label",
+    "name": "Slider with unit label",
+    "title": "Components/Slider",
+    "customParams": {
+      "componentIds": ["component-slider"]
+    }
+  },
+  {
+    "id": "components-slide-toggle--slide-toggle",
+    "name": "Slide Toggle",
+    "title": "Components/Slide Toggle",
+    "customParams": {
+      "componentIds": ["component-slidetoggle"]
+    }
+  },
+  {
+    "id": "components-skeleton-loader--page",
+    "name": "Page",
+    "title": "Components/Skeleton loader",
+    "customParams": {
+      "componentIds": ["component-skeleton-loader"]
+    }
+  },
+  {
+    "id": "components-navigation-pagination--pagination",
+    "name": "Pagination",
+    "title": "Components/Navigation/Pagination",
+    "customParams": {
+      "componentIds": ["component-pagination"]
+    }
+  },
+  {
+    "id": "components-navigation-navbar--navbar",
+    "name": "Navbar",
+    "title": "Components/Navigation/Navbar",
+    "customParams": {
+      "componentIds": []
+    }
+  },
+  {
+    "id": "components-modal--dialogue",
+    "name": "Dialogue",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": ["component-dialogue"]
+    }
+  },
+  {
+    "id": "components-modal--slide-out",
+    "name": "Slide-out",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": ["component-slideout"]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-768",
+    "name": "Slide-out 768",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": ["component-slideout"]
+    }
+  },
+  {
+    "id": "components-modal--slide-out-960",
+    "name": "Slide-out 960",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": ["component-slideout"]
+    }
+  },
+  {
+    "id": "components-modal--takeover",
+    "name": "Takeover",
+    "title": "Components/Modal",
+    "customParams": {
+      "componentIds": ["component-takeover"]
+    }
+  },
+  {
+    "id": "components-list--page",
+    "name": "Page",
+    "title": "Components/List",
+    "customParams": {
+      "componentIds": ["component-list"]
+    }
+  },
+  {
+    "id": "components-links--page",
+    "name": "Page",
+    "title": "Components/Links",
+    "customParams": {
+      "componentIds": ["component-inlinelinks"]
+    }
+  },
+  {
+    "id": "components-icons--page",
+    "name": "Page",
+    "title": "Components/Icons",
+    "customParams": {}
+  },
+  {
+    "id": "css-grid--page",
+    "name": "Page",
+    "title": "CSS/Grid",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-concepts-validation--page",
+    "name": "Page",
+    "title": "Components/Form/Concepts/Validation",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-concepts-sizing--page",
+    "name": "Page",
+    "title": "Components/Form/Concepts/Sizing",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-concepts-structure--page",
+    "name": "Page",
+    "title": "Components/Form/Concepts/Structure",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-concepts-layout--page",
+    "name": "Page",
+    "title": "Components/Form/Concepts/Layout",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-introduction--page",
+    "name": "Page",
+    "title": "Components/Form/Introduction",
+    "customParams": {}
+  },
+  {
+    "id": "components-form-concepts-disabled--page",
+    "name": "Page",
+    "title": "Components/Form/Concepts/Disabled",
+    "customParams": {}
+  },
+  {
+    "id": "components-filter-chip--filter-chip",
+    "name": "Filter Chip",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": ["component-filter-chip"]
+    }
+  },
+  {
+    "id": "components-filter-chip--selected",
+    "name": "Selected",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": ["component-filter-chip"]
+    }
+  },
+  {
+    "id": "components-filter-chip--removable",
+    "name": "Removable",
+    "title": "Components/Filter Chip",
+    "customParams": {
+      "componentIds": ["component-filter-chip"]
+    }
+  },
+  {
+    "id": "components-dropdown--dropdown",
+    "name": "Dropdown",
+    "title": "Components/Dropdown",
+    "customParams": {
+      "componentIds": ["component-dropdown"]
+    }
+  },
+  {
+    "id": "components-datepicker--datepicker",
+    "name": "Datepicker",
+    "title": "Components/Datepicker",
+    "customParams": {
+      "componentIds": ["component-datepicker"]
+    }
+  },
+  {
+    "id": "components-close-button--close-button",
+    "name": "Close button",
+    "title": "Components/Close button",
+    "customParams": {
+      "componentIds": ["component-close-button"]
+    }
+  },
+  {
+    "id": "components-card--card",
+    "name": "Card",
+    "title": "Components/Card",
+    "customParams": {
+      "componentIds": ["component-card"]
+    }
+  },
+  {
+    "id": "components-form-elements-button--button",
+    "name": "Button",
+    "title": "Components/Form/Elements/Button",
+    "customParams": {
+      "componentIds": ["component-button"]
+    }
+  },
+  {
+    "id": "components-badge--badge",
+    "name": "Badge",
+    "title": "Components/Badge",
+    "customParams": {
+      "componentIds": ["component-badge"]
+    }
+  },
+  {
+    "id": "components-alert-ribbon--alert-ribbon",
+    "name": "Alert ribbon",
+    "title": "Components/Alert ribbon",
+    "customParams": {
+      "componentIds": ["component-alertribbon"]
+    }
+  },
+  {
+    "id": "components-accordion--accordion",
+    "name": "Accordion",
+    "title": "Components/Accordion",
+    "customParams": {
+      "componentIds": ["component-accordion"]
+    }
+  },
+  {
+    "id": "utilities-text--page",
+    "name": "Page",
+    "title": "Utilities/Text",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-colors--page",
+    "name": "Page",
+    "title": "Utilities/Colors",
+    "customParams": {}
+  },
+  {
+    "id": "utilities-border--page",
+    "name": "Page",
+    "title": "Utilities/Border",
+    "customParams": {}
+  },
+  {
+    "id": "templates-login--page",
+    "name": "Page",
+    "title": "Templates/Login",
+    "customParams": {}
+  },
+  {
+    "id": "get-started-use--page",
+    "name": "Page",
+    "title": "Get started/Use",
+    "customParams": {}
+  },
+  {
+    "id": "get-started-install--page",
+    "name": "Page",
+    "title": "Get started/Install",
+    "customParams": {}
+  },
+  {
+    "id": "frameworks--page",
+    "name": "Page",
+    "title": "Frameworks",
+    "customParams": {}
+  },
+  {
+    "id": "css-spacing--page",
+    "name": "Page",
+    "title": "CSS/Spacing",
+    "customParams": {}
+  },
+  {
+    "id": "components-charts--page",
+    "name": "Page",
+    "title": "Components/Charts",
+    "customParams": {}
+  },
+  {
+    "id": "introduction--page",
+    "name": "Page",
+    "title": "Introduction",
+    "customParams": {}
+  }
+]

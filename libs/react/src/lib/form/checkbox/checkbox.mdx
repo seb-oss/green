@@ -1,0 +1,74 @@
+import { Controls, Meta, Story, Canvas } from '@storybook/blocks'
+import { Checkbox } from './checkbox'
+import * as CheckboxStories from './checkbox.stories';
+
+export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
+
+<Meta of={CheckboxStories} />
+
+# Checkbox
+
+## Basic
+
+<Canvas of={CheckboxStories.Default} />
+
+## Checked state
+
+You control the state of the checkbox by setting the `checked` prop to true or false. You can use the `onChange` handler to listen to user input and update state in your app accordingly.
+
+```tsx
+function RobotCheckComponent () {
+  const [isRobot, setIsRobot] = useState<boolean>()
+
+  return (
+    <Checkbox
+      label="Check this if you are a robot"
+      checked={isRobot}
+      onChange={(event) => { setIsRobot(event.target.checked) }
+    />
+  )
+}
+```
+
+## States and variants checkbox
+
+
+<form>
+  <Checkbox label="Normal unchecked" />
+
+  <Checkbox label="Normal checked" checked />
+
+  <Checkbox
+    label="Invalid unchecked"
+    validator={{
+      indicator: 'error',
+      message: 'Invalid',
+    }}
+  />
+
+  <Checkbox
+    label="Invalid checked"
+    validator={{
+      indicator: 'error',
+      message: 'Invalid',
+    }}
+    checked
+  />
+</form>
+
+## Validation
+
+```jsx
+<Checkbox
+  label="Invalid checked"
+  validator={{
+    indicator: 'error',
+    message: 'Error',
+  }}
+  checked
+/>
+```
+
+## Properties
+
+<Controls />

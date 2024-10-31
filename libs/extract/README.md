@@ -1,6 +1,6 @@
 # `@sebgroup/extract`
 
-Extract is considered deprectaed in favor of implementing shared functionality as Web Components. See https://github.com/sebgroup/green/tree/main/libs/core
+Extract is considered deprectaed in favor of implementing shared functionality as Web Components. See https://github.com/seb-oss/green/tree/main/libs/core
 
 ---
 
@@ -16,7 +16,7 @@ then extracting the common logic.
 Step one is always creating CSS and HTML for your component in Chlorophyll.
 We use Storybook to visualise the component in various states so that we can
 track progress and continuously check that it adheres to design guidelines.
-Read more in https://github.com/sebgroup/green/libs/chlorophyll
+Read more in https://github.com/seb-oss/green/libs/chlorophyll
 
 ### Interaction and data
 

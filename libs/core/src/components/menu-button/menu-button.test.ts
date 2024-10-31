@@ -1,16 +1,17 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { clickOnElement } from '../../utils/testing/index.js'
+
+import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing/index.js'
 
 import '@sebgroup/green-core/components/menu-button'
-import type { GdsMenuButton } from '@sebgroup/green-core/components/menu-button'
 import '@sebgroup/green-core/components/icon'
 
 const html = htmlTemplateTagFactory(testingHtml)
@@ -31,7 +32,7 @@ describe('<gds-menu-button>', () => {
 
     it('should render link', async () => {
       const el = await fixture<GdsMenuButton>(
-        html`<gds-menu-button href="https://github.com/sebgroup/green"
+        html`<gds-menu-button href="https://github.com/seb-oss/green"
           >Link</gds-menu-button
         >`,
       )
@@ -112,7 +113,7 @@ describe('<gds-menu-button>', () => {
     it('should support link attributes', async () => {
       const el = await fixture<GdsMenuButton>(
         html`<gds-menu-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_self"
           rel="noopener"
           download
@@ -123,7 +124,7 @@ describe('<gds-menu-button>', () => {
       const shadowButton = el.shadowRoot?.querySelector('a')
 
       expect(shadowButton?.getAttribute('href')).to.equal(
-        'https://github.com/sebgroup/green',
+        'https://github.com/seb-oss/green',
       )
       expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
       expect(shadowButton?.getAttribute('target')).to.equal('_self')
@@ -143,7 +144,7 @@ describe('<gds-menu-button>', () => {
     })
     it('should pass axe smoketest for button link', async () => {
       const el = await fixture<GdsMenuButton>(
-        html`<gds-menu-button href="https://github.com/sebgroup/green">
+        html`<gds-menu-button href="https://github.com/seb-oss/green">
           Test link
         </gds-menu-button>`,
       )
@@ -192,7 +193,7 @@ describe('<gds-menu-button>', () => {
     it('should apply a secure rel attribute by default', async () => {
       const el = await fixture<GdsMenuButton>(
         html`<gds-menu-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_blank"
         >
           Test link

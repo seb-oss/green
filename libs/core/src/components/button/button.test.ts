@@ -1,16 +1,17 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, aTimeout } from '@open-wc/testing'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
-import { clickOnElement } from '../../utils/testing/index.js'
+
+import type { GdsButton } from '@sebgroup/green-core/components/button'
 
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing/index.js'
 
 import '@sebgroup/green-core/components/button'
-import type { GdsButton } from '@sebgroup/green-core/components/button'
 import '@sebgroup/green-core/components/icon'
 
 const html = htmlTemplateTagFactory(testingHtml)
@@ -29,7 +30,7 @@ describe('<gds-button>', () => {
 
     it('should render link', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button href="https://github.com/sebgroup/green"
+        html`<gds-button href="https://github.com/seb-oss/green"
           >Link</gds-button
         >`,
       )
@@ -57,10 +58,11 @@ describe('<gds-button>', () => {
   describe('API', () => {
     it('should fire click event', async () => {
       const el = await fixture<GdsButton>(html`<gds-button>Button</gds-button>`)
+      const button = el.shadowRoot.querySelector('button') // get the button element from the shadow dom
       const spy = sinon.spy()
-      el.addEventListener('click', spy)
+      button.addEventListener('click', spy)
 
-      await clickOnElement(el)
+      await clickOnElement(button)
 
       expect(spy.calledOnce).to.be.true
     })
@@ -79,7 +81,7 @@ describe('<gds-button>', () => {
     })
 
     it('should submit form when type is submit', async () => {
-      const el = await fixture<GdsButton>(
+      const el = await fixture<HTMLFormElement>(
         html`<form action="javascript:;">
           <gds-button type="submit">Button</gds-button>
         </form>`,
@@ -91,13 +93,19 @@ describe('<gds-button>', () => {
       const spy = sinon.spy()
       el.addEventListener('submit', spy)
 
-      await clickOnElement(button)
+      // Select button from the shadow DOM
+      const shadowButton = button.shadowRoot?.querySelector('button')
+      if (shadowButton) {
+        await clickOnElement(shadowButton)
+      } else {
+        await clickOnElement(button)
+      }
 
       expect(spy.calledOnce).to.be.true
     })
 
     it('should reset form when type is reset', async () => {
-      const el = await fixture<GdsButton>(
+      const el = await fixture<HTMLFormElement>(
         html`<form action="javascript:;">
           <gds-button type="reset">Button</gds-button>
         </form>`,
@@ -109,7 +117,13 @@ describe('<gds-button>', () => {
       const spy = sinon.spy()
       el.addEventListener('reset', spy)
 
-      await clickOnElement(button)
+      // Select button from the shadow DOM
+      const shadowButton = button.shadowRoot?.querySelector('button')
+      if (shadowButton) {
+        await clickOnElement(shadowButton)
+      } else {
+        await clickOnElement(button)
+      }
 
       expect(spy.calledOnce).to.be.true
     })
@@ -175,7 +189,7 @@ describe('<gds-button>', () => {
     it('should support link attributes', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_self"
           rel="noopener"
           download
@@ -186,7 +200,7 @@ describe('<gds-button>', () => {
       const shadowButton = el.shadowRoot?.querySelector('a')
 
       expect(shadowButton?.getAttribute('href')).to.equal(
-        'https://github.com/sebgroup/green',
+        'https://github.com/seb-oss/green',
       )
       expect(shadowButton?.getAttribute('rel')).to.equal('noopener')
       expect(shadowButton?.getAttribute('target')).to.equal('_self')
@@ -219,7 +233,7 @@ describe('<gds-button>', () => {
     })
     it('should pass axe smoketest for button link', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button href="https://github.com/sebgroup/green">
+        html`<gds-button href="https://github.com/seb-oss/green">
           Test link
         </gds-button>`,
       )
@@ -266,7 +280,7 @@ describe('<gds-button>', () => {
     it('should apply a secure rel attribute by default', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
-          href="https://github.com/sebgroup/green"
+          href="https://github.com/seb-oss/green"
           target="_blank"
         >
           Test link

@@ -1,5 +1,6 @@
 import { act, render, RenderResult, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+
 import { Dropdown, DropdownProps } from './dropdown'
 
 const tick = (t = 0) => new Promise<void>((r) => setTimeout(r, t))
