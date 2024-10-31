@@ -40,9 +40,9 @@ const DefaultParams: Story = {
   },
 }
 
-// export const Basic: Story = {
-//   ...DefaultParams,
-// }
+export const Basic: Story = {
+  ...DefaultParams,
+}
 
 /**
  *

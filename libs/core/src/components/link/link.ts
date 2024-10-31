@@ -1,8 +1,7 @@
 import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { literal, html as staticHtml } from 'lit/static-html.js'
+import { html as staticHtml } from 'lit/static-html.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
@@ -19,7 +18,6 @@ import style from './link.css?inline'
  *
  * @event click - Fired when the link is clicked.
  *
- * @csspart main-slot - The main slot of the link, between the lead and trail slots.
  */
 @gdsCustomElement('gds-link')
 export class GdsLink extends GdsElement {
@@ -67,7 +65,7 @@ export class GdsLink extends GdsElement {
         download=${ifDefined(this.download)}
       >
         <slot name="lead"></slot>
-        <slot part="main-slot"></slot>
+        <slot></slot>
         <slot name="trail"></slot>
       </a>
     `
