@@ -15,6 +15,7 @@ const betaItems = {
   Media: true,
   Content: true,
   Style: true,
+  'Rich Text': true,
 }
 
 addons.setConfig({
