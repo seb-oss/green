@@ -217,6 +217,7 @@ export class GdsDialog extends GdsElement {
     if (this._elTriggerSlot && this._elTriggerSlot.assignedElements()[0]) {
       const trigger = this._elTriggerSlot.assignedElements()[0] as HTMLElement
       trigger?.addEventListener('click', this.#handleTriggerClick)
+      trigger?.setAttribute('aria-haspopup', 'dialog')
     }
   }
 

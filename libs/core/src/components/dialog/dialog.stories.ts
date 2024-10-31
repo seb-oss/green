@@ -60,13 +60,17 @@ export const SlideOut: Story = {
 
 /**
  * You can also open and close the dialog programmatically by calling the `show()` and `close()` methods.
+ * In this case you should add `aria-haspopup="dialog"` to the trigger element. Slotted triggers will get
+ * this attribute automatically.
  *
  * Inside the dialog, you can use the `slot="footer"` to add buttons to the footer of the dialog.
  */
 export const CustomButtons: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-button onclick="document.getElementById('my-dialog').show()"
+    html`<gds-button
+        aria-haspopup="dialog"
+        onclick="document.getElementById('my-dialog').show()"
         >Open dialog</gds-button
       >
       <gds-dialog heading="Dialog heading" id="my-dialog">
