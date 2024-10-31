@@ -14,6 +14,8 @@
     text-decoration: underline;
     text-underline-offset: 0.2lh;
     color: currentColor;
+    outline-offset: 4px;
+    outline-color: currentColor;
 
     &:hover {
       text-decoration: none;
