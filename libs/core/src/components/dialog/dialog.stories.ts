@@ -11,6 +11,8 @@ import type { GdsDialog } from './dialog'
  * to provide critical information or ask for a decision. Dialogs disable
  * all app functionality when they appear, and remain on screen until confirmed,
  * dismissed, or a required action has been taken.
+ *
+ * @beta
  */
 const meta: Meta = {
   title: 'Components/Dialog',
