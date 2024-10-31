@@ -6,6 +6,7 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
 /**
@@ -18,7 +19,7 @@ import textStyles from './text.style'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  static styles = [tokens, textStyles]
+  static styles = [tokens, defaultStyles, textStyles]
 
   /**
    * The level of the container can be used to apply background and color styles from the corresponding level.
