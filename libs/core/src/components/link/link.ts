@@ -54,24 +54,13 @@ export class GdsLink extends GdsElement {
   @property()
   download?: string
 
-  /**
-   * Whether the link is disabled.
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false
-
   constructor() {
     super()
   }
 
   render() {
-    const classes = {
-      disabled: this.disabled,
-    }
-
     return staticHtml`
       <a
-        class="${classMap(classes)}"
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel || this.#defaultRel)}

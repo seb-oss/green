@@ -21,10 +21,5 @@
     &:hover {
       text-decoration: none;
     }
-    
-    &.disabled {
-      pointer-events: none;
-      color: var(--gds-color-l3-content-disabled);
-    }
   }
 }
