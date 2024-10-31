@@ -25,7 +25,7 @@ registerGlobalScrollLockStyles()
 
 /**
  * @element gds-dialog
- * @beta
+ * @status beta
  *
  * @event gds-ui-state - Fired when the dialog is opened or closed
  * @event gds-close - Fired when the dialog is closed
