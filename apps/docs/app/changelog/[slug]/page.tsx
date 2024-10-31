@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { allChangelogs } from 'content'
-import { GdsFlex } from '$/import/components'
+import { GdsFlex, GdsText } from '$/import/components'
 import { Mdx } from 'core/mdx'
 
 import type { Metadata, ResolvingMetadata } from 'next'
@@ -61,7 +61,7 @@ export default function Changelog({ params }: { params: { slug: string } }) {
   return (
     <GdsFlex>
       <GdsFlex max-width="80ch" flex-direction="column" gap="xl">
-        <GdsFlex id={changelog.version}>
+        <GdsFlex id={changelog.version} flex-direction="column">
           <GdsText>{changelog.title}</GdsText>
           <Mdx code={body.code} globals={{ slug }} />
         </GdsFlex>
