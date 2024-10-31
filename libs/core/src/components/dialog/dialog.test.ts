@@ -77,6 +77,14 @@ describe('<gds-dialog>', () => {
       await waitUntil(() => !el.open)
       expect(closeSpy).to.not.have.been.called
     })
+
+    it('should set the heading when the heading attribute is set', async () => {
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog heading="Test" open>Content</gds-dialog>`,
+      )
+      const heading = el.shadowRoot?.querySelector('h2')
+      expect(heading?.textContent).to.equal('Test')
+    })
   })
 
   describe('Interactions', () => {
