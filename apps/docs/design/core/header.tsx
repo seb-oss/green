@@ -36,7 +36,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
         align-items="center"
         height="72px"
         border="0 0 4xs/primary 0"
-        padding="0 l"
+        padding="0 0 0 l"
       >
         <GdsMenuButton onClick={toggleNav}>
           {isNavOpen === true ? (
