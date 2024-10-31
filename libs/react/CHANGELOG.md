@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.20.1
+
+### Patch Changes
+
+- 5f337ca: Alert Ribbon Close Button fix
+- Updated dependencies [5f337ca]
+  - @sebgroup/chlorophyll@3.6.8
+
 ## 3.20.0
 
 ### Minor Changes
