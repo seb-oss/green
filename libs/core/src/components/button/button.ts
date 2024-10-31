@@ -16,6 +16,8 @@ import style from './button.style.css?inline'
 
 import '../../primitives/ripple'
 
+const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
+
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
 
@@ -155,7 +157,9 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         @click="${this.#handleClick}"
         ${forwardAttributes(
           (attr) =>
-            attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
+            attr.name.startsWith('gds-aria') ||
+            attr.name === 'gds-role' ||
+            ariaForwards.includes(attr.name),
         )}
       >
         <slot name="lead"></slot>
