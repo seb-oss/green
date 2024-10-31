@@ -136,11 +136,11 @@ export const Weight: Story = {
   name: 'Weight',
   render: (args) =>
     html`<gds-flex flex-direction="column" gap="m">
-      <gds-text weight="bold">Bold (700)</gds-text>
-      <gds-text weight="medium">Medium (500)</gds-text>
-      <gds-text weight="book">Book (450)</gds-text>
-      <gds-text weight="regular">Regular (400)</gds-text>
-      <gds-text weight="light">Light (300)</gds-text>
+      <gds-text font-weight="bold">Bold (700)</gds-text>
+      <gds-text font-weight="medium">Medium (500)</gds-text>
+      <gds-text font-weight="book">Book (450)</gds-text>
+      <gds-text font-weight="regular">Regular (400)</gds-text>
+      <gds-text font-weight="light">Light (300)</gds-text>
     </gds-flex>`,
 }
 
@@ -154,12 +154,12 @@ export const Heading: Story = {
   name: 'Heading',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text tag="h6">H6: Heading 2XS</gds-text>
-      <gds-text tag="h5">H5: Heading XS</gds-text>
-      <gds-text tag="h4">H4: Heading Small</gds-text>
-      <gds-text tag="h3">H3: Heading Medium</gds-text>
-      <gds-text tag="h2">H2: Heading Large</gds-text>
-      <gds-text tag="h1">H1: Heading Extra Large</gds-text>
+      <gds-text tag="h6">H6: heading-2xs</gds-text>
+      <gds-text tag="h5">H5: heading-xs</gds-text>
+      <gds-text tag="h4">H4: heading-s</gds-text>
+      <gds-text tag="h3">H3: heading-m</gds-text>
+      <gds-text tag="h2">H2: heading-l</gds-text>
+      <gds-text tag="h1">H1: heading-xl</gds-text>
     </gds-flex>
   `,
 }
@@ -168,9 +168,9 @@ export const Detail: Story = {
   name: 'Detail',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="detail-xs">Detail Extra Small</gds-text>
-      <gds-text font-size="detail-s">Detail Small</gds-text>
-      <gds-text font-size="detail-m">Detail Medium</gds-text>
+      <gds-text font-size="detail-xs">detail-xs</gds-text>
+      <gds-text font-size="detail-s">detail-s</gds-text>
+      <gds-text font-size="detail-m">detail-m"</gds-text>
     </gds-flex>
   `,
 }
@@ -179,9 +179,9 @@ export const Body: Story = {
   name: 'Body',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="body-s">Body Small</gds-text>
-      <gds-text font-size="body-m">Body Medium</gds-text>
-      <gds-text font-size="body-l">Body Large</gds-text>
+      <gds-text font-size="body-s">body-s</gds-text>
+      <gds-text font-size="body-m">body-m</gds-text>
+      <gds-text font-size="body-l">body-l</gds-text>
     </gds-flex>
   `,
 }
@@ -190,11 +190,11 @@ export const Display: Story = {
   name: 'Display',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="display-s">Display Small</gds-text>
-      <gds-text font-size="display-m">Display Medium</gds-text>
-      <gds-text font-size="display-l">Display Large</gds-text>
-      <gds-text font-size="display-xl">Display XL</gds-text>
-      <gds-text font-size="display-2xl">Display 2XL</gds-text>
+      <gds-text font-size="display-s">display-s</gds-text>
+      <gds-text font-size="display-m">display-m</gds-text>
+      <gds-text font-size="display-l">display-l</gds-text>
+      <gds-text font-size="display-xl">display-xl</gds-text>
+      <gds-text font-size="display-2xl">display-2xl</gds-text>
     </gds-flex>
   `,
 }
@@ -203,12 +203,12 @@ export const Preamble: Story = {
   name: 'Preamble',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="preamble-xs">Preamble Extra Small</gds-text>
-      <gds-text font-size="preamble-s">Preamble Small</gds-text>
-      <gds-text font-size="preamble-m">Preamble Medium</gds-text>
-      <gds-text font-size="preamble-l">Preamble Large</gds-text>
-      <gds-text font-size="preamble-xl">Preamble XL</gds-text>
-      <gds-text font-size="preamble-2xl">Preamble 2XL</gds-text>
+      <gds-text font-size="preamble-xs">preamble-xs</gds-text>
+      <gds-text font-size="preamble-s">preamble-s</gds-text>
+      <gds-text font-size="preamble-m">preamble-m</gds-text>
+      <gds-text font-size="preamble-l">preamble-l</gds-text>
+      <gds-text font-size="preamble-xl">preamble-xl</gds-text>
+      <gds-text font-size="preamble-2xl">preamble-2xl</gds-text>
     </gds-flex>
   `,
 }
@@ -308,4 +308,33 @@ export const Color: Story = {
       </gds-theme>
     </gds-flex>
   `,
+}
+
+/**
+ * `gds-text` component has a `text-decoration` property that will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
+ *
+ *
+ * e.g.
+ *
+ * ```html
+ * <gds-text
+ *    text-decoration="currentcolor wavy underline"
+ *  >
+ *    Wavy Underline
+ *  </gds-text>
+ * ```
+ */
+export const Decoration: Story = {
+  ...DefaultParams,
+  name: 'Decoration',
+  render: (args) =>
+    html`<gds-flex flex-direction="column" gap="m">
+      <gds-text text-decoration="underline"> Underline </gds-text>
+      <gds-text text-decoration="overline"> Overline </gds-text>
+      <gds-text text-decoration="line-through"> Line Through </gds-text>
+      <gds-text text-decoration="underline dotted"> Dotted </gds-text>
+      <gds-text text-decoration="currentcolor wavy underline">
+        Wavy Underline
+      </gds-text>
+    </gds-flex>`,
 }

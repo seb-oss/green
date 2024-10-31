@@ -338,7 +338,7 @@ export class GdsContainer extends GdsElement {
    *
    *  * These are the available values you can use to define Border Radius
    *
-   * `0, 4XS, 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL, 7XL, 8XL, MAX`
+   * `0, 4xs, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, 8xl, max`
    *
    */
   @styleExpressionProperty({
