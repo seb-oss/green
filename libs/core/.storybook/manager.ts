@@ -33,6 +33,7 @@ const betaItems = {
   Grid: true,
   'Grouped List': true,
   Icon: true,
+  Link: true,
   Image: true,
   Mask: true,
   'Menu button': true,
