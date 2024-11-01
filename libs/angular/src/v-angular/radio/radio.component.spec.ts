@@ -5,6 +5,7 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms'
+import { TranslocoModule } from '@jsverse/transloco'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
@@ -24,7 +25,12 @@ describe('[NgvCore]', () => {
       TestBed.configureTestingModule({
         declarations: [NgvRadioComponent],
         providers: [{ provide: NgControl, useValue: new FormControl() }],
-        imports: [FormsModule, ReactiveFormsModule, NgvI18nTestModule],
+        imports: [
+          FormsModule,
+          ReactiveFormsModule,
+          TranslocoModule,
+          NgvI18nTestModule,
+        ],
       }).compileComponents()
     }))
 
