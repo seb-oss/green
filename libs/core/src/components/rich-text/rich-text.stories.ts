@@ -177,3 +177,49 @@ export const Headings: Story = {
     </gds-rich-text>
   `,
 }
+
+/**
+ * `gds-rich-text` can be used to wrap generic HTML content and apply typography styles.
+ * It supports out of the box all heading styles from h1 to h6 based on the green design system typography styles.
+ */
+export const Lists: Story = {
+  ...DefaultParams,
+  name: 'Lists',
+  render: (args) => html`
+    <gds-rich-text>
+      <h2>Key Technologies in Space Exploration</h2>
+      <ul>
+        <li>Rocket propulsion systems</li>
+        <li>Life support systems</li>
+        <li>Communication satellites</li>
+        <li>Space habitats and modules</li>
+        <li>Robotic exploration rovers</li>
+        <li>Advanced materials for spacecraft</li>
+      </ul>
+
+      <h2>Major Milestones in Space Exploration</h2>
+      <ol>
+        <li>Launch of Sputnik 1 (1957) - The first artificial satellite.</li>
+        <li>
+          First human in space (Yuri Gagarin, 1961) - Historic manned
+          spaceflight.
+        </li>
+        <li>
+          Apollo 11 Moon landing (1969) - First humans to walk on the Moon.
+        </li>
+        <li>
+          Launch of the Space Shuttle (1981) - Introduction of reusable
+          spacecraft.
+        </li>
+        <li>
+          Mars Rover Curiosity landing (2012) - Advanced exploration of the
+          Martian surface.
+        </li>
+        <li>
+          Launch of the James Webb Space Telescope (2021) - Next-generation
+          space observatory.
+        </li>
+      </ol>
+    </gds-rich-text>
+  `,
+}
