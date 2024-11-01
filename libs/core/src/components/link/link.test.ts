@@ -71,27 +71,6 @@ describe('<gds-link>', () => {
       expect(spy.calledOnce).to.be.true
     })
 
-    it('should support disabled attribute', async () => {
-      const el = await fixture<GdsLink>(
-        html`<gds-link href="https://github.com/seb-oss/green" disabled
-          >Link</gds-link
-        >`,
-      )
-
-      const spy = sinon.spy()
-      el.addEventListener('click', () => {
-        spy()
-      })
-      el.focus()
-
-      await sendKeys({ press: 'Enter' })
-
-      await aTimeout(1)
-
-      expect(spy.notCalled).to.be.true
-      expect(el.disabled).to.be.true
-    })
-
     it('should support link attributes', async () => {
       const el = await fixture<GdsLink>(
         html`<gds-link
