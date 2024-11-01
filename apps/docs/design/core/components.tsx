@@ -37,8 +37,8 @@ export default function Components({ title }: { title: string }) {
       {title && <GdsText tag="h2">{title}</GdsText>}
       <GdsGrid columns="2; m{1} l{3}" gap="xl">
         {components.map((component, idx) => {
-          // const Preview = EXAMPLE[component.title]
-          const Preview = examples[component.title.replace(' ', '')]
+          const PATH = component.title.replace(' ', '')
+          const Preview = examples[PATH]
           return (
             <GdsCard
               key={idx}
