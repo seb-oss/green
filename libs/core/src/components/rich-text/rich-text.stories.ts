@@ -179,8 +179,8 @@ export const Headings: Story = {
 }
 
 /**
- * `gds-rich-text` can be used to wrap generic HTML content and apply typography styles.
- * It supports out of the box all heading styles from h1 to h6 based on the green design system typography styles.
+ * `gds-rich-text` has built-in support for ordered and unordered lists.
+ * It applies consistent spacing and typography styles to list items.
  */
 export const Lists: Story = {
   ...DefaultParams,
@@ -220,6 +220,31 @@ export const Lists: Story = {
           space observatory.
         </li>
       </ol>
+    </gds-rich-text>
+  `,
+}
+
+/**
+ * `gds-rich-text` has built-in support for details html element.
+ *
+ * The details element is a disclosure widget from HTML5 that can be used to hide or show additional content.
+ */
+export const Details: Story = {
+  ...DefaultParams,
+  name: 'Lists',
+  render: (args) => html`
+    <gds-rich-text>
+      <h3>Research Areas</h3>
+      <details>
+        <summary>Click to expand research focus areas</summary>
+        <p>The SS Endeavor will focus on the following research areas:</p>
+        <ul>
+          <li>Astrobiology</li>
+          <li>Exoplanetary geology</li>
+          <li>Astrophysics and cosmology</li>
+          <li>Space weather and its effects on technology</li>
+        </ul>
+      </details>
     </gds-rich-text>
   `,
 }
