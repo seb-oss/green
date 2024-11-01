@@ -231,7 +231,7 @@ export const Lists: Story = {
  */
 export const Details: Story = {
   ...DefaultParams,
-  name: 'Lists',
+  name: 'Details',
   render: (args) => html`
     <gds-rich-text>
       <h3>Research Areas</h3>
@@ -245,6 +245,99 @@ export const Details: Story = {
           <li>Space weather and its effects on technology</li>
         </ul>
       </details>
+    </gds-rich-text>
+  `,
+}
+
+/**
+ * `gds-rich-text` has built-in support for inline formatting tags such as `s`, `mark`, `strong`,`small` and `em`.
+ */
+export const Formatting: Story = {
+  ...DefaultParams,
+  name: 'Formatting',
+  render: (args) => html`
+    <gds-rich-text>
+      <h3>Key Concepts in Space Exploration</h3>
+      <p>
+        The field of space exploration is constantly evolving. It is essential
+        to understand the <strong>fundamental principles</strong> that guide our
+        missions. For example, <mark>propulsion technology</mark> is crucial for
+        <em>successful space travel</em>. Moreover, the study of
+        <s>black holes</s> has revealed significant insights into the
+        <small>nature of the universe</small>.
+      </p>
+      <p>
+        As we continue to explore the cosmos,
+        <strong>collaboration</strong> among international space agencies is
+        vital. Together, we can achieve <mark>greater advancements</mark> in our
+        understanding of the universe.
+      </p>
+    </gds-rich-text>
+  `,
+}
+
+/**
+ * `gds-rich-text` has built-in support for tables.
+ */
+export const Table: Story = {
+  ...DefaultParams,
+  name: 'Table',
+  render: (args) => html`
+    <gds-rich-text>
+      <h2>Significant Space Missions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Mission Name</th>
+            <th>Launch</th>
+            <th>Objectives</th>
+            <th>Outcomes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Apollo 11</td>
+            <td>1969</td>
+            <td>First manned Moon landing</td>
+            <td>
+              Successful lunar landing; Neil Armstrong and Buzz Aldrin walked on
+              the Moon.
+            </td>
+          </tr>
+          <tr>
+            <td>Voyager 1</td>
+            <td>1977</td>
+            <td>Explore outer planets and interstellar space</td>
+            <td>
+              Provided detailed images of Jupiter and Saturn; currently in
+              interstellar space.
+            </td>
+          </tr>
+          <tr>
+            <td>Hubble Space Telescope</td>
+            <td>1990</td>
+            <td>Observe distant galaxies and cosmic phenomena</td>
+            <td>
+              Revolutionized astronomy; provided stunning images and data.
+            </td>
+          </tr>
+          <tr>
+            <td>Curiosity Rover</td>
+            <td>2011</td>
+            <td>Explore Mars' surface and assess habitability</td>
+            <td>
+              Confirmed the presence of water; conducted extensive geological
+              analysis.
+            </td>
+          </tr>
+          <tr>
+            <td>James Webb Space Telescope</td>
+            <td>2021</td>
+            <td>Observe the early universe and exoplanets</td>
+            <td>Expected to provide unprecedented insights into the cosmos.</td>
+          </tr>
+        </tbody>
+      </table>
     </gds-rich-text>
   `,
 }
