@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.49.0
+
+### Minor Changes
+
+- fedbf7a: **Link:** Add new component `gds-link` with predefined styles V1
+
+### Patch Changes
+
+- 807b8c4: **Link:** Fix the link test
+
 ## 1.48.1
 
 ### Patch Changes
