@@ -250,6 +250,58 @@ export const Details: Story = {
 }
 
 /**
+ * `gds-rich-text` has built-in support blockquote element.
+ */
+export const Blockquote: Story = {
+  ...DefaultParams,
+  name: 'Blockquote',
+  render: (args) => html`
+    <gds-rich-text>
+      <h2>Inspirational Quotes from Space Exploration Pioneers</h2>
+
+      <blockquote>
+        <p>
+          "That's one small step for [a] man, one giant leap for mankind."
+          <cite>— Neil Armstrong, Apollo 11 Astronaut</cite>
+        </p>
+      </blockquote>
+
+      <blockquote>
+        <p>
+          "The important achievement of Apollo was demonstrating that humanity
+          is not forever chained to this planet and our visions go rather
+          further than that and our opportunities are unlimited."
+          <cite>— Neil Armstrong</cite>
+        </p>
+      </blockquote>
+
+      <blockquote>
+        <p>
+          "To confine our attention to terrestrial matters would be to limit the
+          human spirit."
+          <cite>— Stephen Hawking, Theoretical Physicist</cite>
+        </p>
+      </blockquote>
+
+      <blockquote>
+        <p>
+          "The Earth is the cradle of humanity, but mankind cannot stay in the
+          cradle forever."
+          <cite>— Konstantin Tsiolkovsky, Rocket Scientist</cite>
+        </p>
+      </blockquote>
+
+      <blockquote>
+        <p>
+          "I don't want to be an astronaut. I want to be a space explorer."
+          <cite>— Chris Hadfield, Astronaut</cite>
+        </p>
+      </blockquote>
+    </gds-rich-text>
+  `,
+}
+
+/**
  * `gds-rich-text` has built-in support for inline formatting tags such as `s`, `mark`, `strong`,`small` and `em`.
  */
 export const Formatting: Story = {
