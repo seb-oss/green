@@ -12,7 +12,7 @@ import './list-item'
 
 /**
  * @element gds-grouped-list
- * @status beta
+ * @status stable
  *
  * Grouped lists are used to list many datapoints with labels in a structured way.
  */
