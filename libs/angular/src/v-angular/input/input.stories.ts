@@ -14,7 +14,7 @@ import {
   TranslocoLoader,
   TranslocoModule,
   TranslocoService,
-} from '@ngneat/transloco'
+} from '@jsverse/transloco'
 import {
   applicationConfig,
   Meta,
