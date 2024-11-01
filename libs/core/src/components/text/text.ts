@@ -6,6 +6,7 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
 /**
@@ -18,7 +19,7 @@ import textStyles from './text.style'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsElement {
-  static styles = [tokens, textStyles]
+  static styles = [tokens, defaultStyles, textStyles]
 
   /**
    * The level of the container can be used to apply background and color styles from the corresponding level.
@@ -79,6 +80,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
+    selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
@@ -180,13 +182,31 @@ export class GdsText extends GdsElement {
   'text-align'?: string
 
   /**
+   * Controls the text-decoration property of the text.
+   * Supports all valid CSS text-decoration values.
+   *
+   * @property text-decoration
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: '[tag]',
+  })
+  'text-decoration'?: string
+
+  /**
    * Controls the number of lines it should show.
    *
    * @property lines
    */
   @styleExpressionProperty({
-    property: '--_lines',
     valueTemplate: (v) => v,
+    styleTemplate: (_prop, values) => {
+      return `overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: ${values[0]};
+      -webkit-box-orient: vertical;`
+    },
   })
   lines?: number
 
@@ -215,13 +235,7 @@ export class GdsText extends GdsElement {
   color?: string
 
   render() {
-    const TAG_ENCODE = encodeURI(this.tag)
-    const TAG = unsafeStatic(TAG_ENCODE)
-    const classes = {
-      'no-size-set': !this['font-size'],
-      'no-weight-set': !this['font-weight'],
-      'lines-set': !!this.lines,
-    }
-    return html`<${TAG} tag class=${classMap(classes)}><slot></slot></${TAG}>`
+    const TAG = unsafeStatic(encodeURI(this.tag))
+    return html`<${TAG} tag><slot></slot></${TAG}>`
   }
 }

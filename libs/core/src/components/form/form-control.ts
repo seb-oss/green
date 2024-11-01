@@ -116,7 +116,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * The label of the form control.
    */
   @property()
-  label?: string
+  label = ''
 
   /**
    * Get or set the value of the form control.
@@ -184,8 +184,8 @@ export abstract class GdsFormControlElement<ValueT = any>
     this.value = undefined
   }
 
-  formAssociatedCallback(form: HTMLFormElement) {
-    form.addEventListener('submit', this._handleFormSubmit.bind(this))
+  formAssociatedCallback(form?: HTMLFormElement) {
+    form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 
   protected _handleFormSubmit(e: Event) {

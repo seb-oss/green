@@ -1,9 +1,13 @@
 import { notFound } from 'next/navigation'
 import { allChangelogs } from 'content'
-import { Mdx } from '@/mdx'
 import Layout from '&/changelog'
+import { Mdx } from 'core/mdx'
 
-export const generateStaticParams = (): any => {
+type ChangelogParams = {
+  slug: string
+}
+
+export const generateStaticParams = (): ChangelogParams[] => {
   return allChangelogs.map((changelog) => ({
     slug: changelog.url_path.replace('/changelog/', ''),
   }))

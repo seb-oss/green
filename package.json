@@ -77,7 +77,7 @@
     "mdx-mermaid": "^2.0.0",
     "merge": "^2.1.1",
     "mermaid": "^10.9.3",
-    "next": "14.2.10",
+    "next": "14.2.15",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "patch-package": "^8.0.0",

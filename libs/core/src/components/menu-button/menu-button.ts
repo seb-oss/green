@@ -7,7 +7,7 @@ import { literal, html as staticHtml } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import style from './menu-button.css?inline'
+import MenuButtonCSS from './menu-button.styles'
 
 /**
  * @element gds-menu-button
@@ -23,7 +23,7 @@ import style from './menu-button.css?inline'
  */
 @gdsCustomElement('gds-menu-button')
 export class GdsMenuButton extends GdsElement {
-  static styles = [tokens, unsafeCSS(style)]
+  static styles = [tokens, unsafeCSS(MenuButtonCSS)]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',

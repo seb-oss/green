@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.20.2
+
+### Patch Changes
+
+- 2b58b66: Modal react close button fix
+- Updated dependencies [de5d0f2]
+  - @sebgroup/green-core@1.48.1
+
+## 3.20.1
+
+### Patch Changes
+
+- 5f337ca: Alert Ribbon Close Button fix
+- Updated dependencies [5f337ca]
+  - @sebgroup/chlorophyll@3.6.8
+
 ## 3.20.0
 
 ### Minor Changes

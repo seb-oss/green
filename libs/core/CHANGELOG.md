@@ -1,5 +1,43 @@
 # Changelog
 
+## 1.48.1
+
+### Patch Changes
+
+- de5d0f2: **Rich Text:** Patch padding on rich text figure
+
+## 1.48.0
+
+### Minor Changes
+
+- 474856a: **Rich text:** Add `gds-rich-text` component
+- 5bc49c8: **Dialog:** Add `gds-dialog` to Green Core
+
+## 1.47.1
+
+### Patch Changes
+
+- c533689: **Form controls:** Add nullcheck in `formAssociatedCallback`
+
+## 1.47.0
+
+### Minor Changes
+
+- 2c90cdf: **Text:** Add text decoration property with default CSS values and offset
+
+## 1.46.2
+
+### Patch Changes
+
+- 4143c5f: **Segmented Control:** Fix scrolling issue
+
+## 1.46.1
+
+### Patch Changes
+
+- a269b32: **Text:** Pass font size to tag instead of the host
+- a269b32: Minor updates on Mask, Divider, Text and Spacer
+
 ## 1.46.0
 
 ### Minor Changes

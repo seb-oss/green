@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Grid from '@/grid/grid'
 import Content from '&/content/content'
 
 import type { Metadata } from 'next'
@@ -17,15 +16,8 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <Content layout="home">
-      <Grid
-        columns={1}
-        gapBlock="large"
-        paddingInline="large"
-        paddingBlock="large"
-      >
-        <h1 className="heading-medium">404 - Page Not Found</h1>
-        <Link href={'/'}>Go back</Link>
-      </Grid>
+      <h1 className="heading-medium">404 - Page Not Found</h1>
+      <Link href={'/'}>Go back</Link>
     </Content>
   )
 }

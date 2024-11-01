@@ -39,6 +39,7 @@ export const ModalDefault: Story<ModalProps> = Template.bind({})
 ModalDefault.args = {
   type: 'default',
   header: 'Default Modal',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -47,7 +48,8 @@ ModalDefault.args = {
 export const SlideOutSmall: Story<ModalProps> = Template.bind({})
 SlideOutSmall.args = {
   type: 'slideout',
-  header: 'SlideOut Modal',
+  header: 'SlideOut Modal - Small',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -57,7 +59,8 @@ SlideOutSmall.args = {
 export const SlideOutMedium: Story<ModalProps> = Template.bind({})
 SlideOutMedium.args = {
   type: 'slideout',
-  header: 'SlideOut Modal',
+  header: 'SlideOut Modal - Medium',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -67,7 +70,8 @@ SlideOutMedium.args = {
 export const SlideOutLarge: Story<ModalProps> = Template.bind({})
 SlideOutLarge.args = {
   type: 'slideout',
-  header: 'SlideOut Modal',
+  header: 'SlideOut Modal - Large',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -78,6 +82,7 @@ export const TakeOver: Story<ModalProps> = Template.bind({})
 TakeOver.args = {
   type: 'takeover',
   header: 'TakeOver Modal',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',

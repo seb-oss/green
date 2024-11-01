@@ -13,6 +13,8 @@ import '../components/input/input'
 import '../components/mask/mask'
 import '../components/textarea/textarea'
 import '../components/text/text'
+import '../components/rich-text/rich-text'
+import '../components/link/link'
 import '../components/menu-button/menu-button'
 import '../components/popover/popover'
 import '../components/context-menu/context-menu'
@@ -24,10 +26,12 @@ import '../components/icon/icons/brand-green'
 import '../components/icon/icons/brand-seb'
 import '../components/icon/icons/credit-card'
 import '../components/icon/icons/rocket'
+import '../components/icon/icons/pin'
 import '../components/icon/icons/magnifying-glass'
 import '../components/icon/icons/chevron-bottom'
 import '../components/icon/icons/chevron-right'
 import '../components/icon/icons/plus-small'
+import '../components/icon/icons/arrow-right'
 import '../components/signal/signal'
 
 import Version from './version';
@@ -37,7 +41,7 @@ import Story from './story';
 
 <gds-theme>
     <gds-flex flex-direction="column" gap="4xl">
-        <gds-card  border-radius="m" padding="0 l">
+        <gds-flex padding="0 l">
             <gds-flex
                 min-width="100%"
                 justify-content="center"
@@ -70,19 +74,19 @@ import Story from './story';
                     <gds-icon-brand-seb width="40" height="40"></gds-icon-brand-seb>
                 </gds-flex>
             </gds-flex>
-        </gds-card>
+        </gds-flex>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex flex-direction="column" gap="s">
             <gds-text tag="h2">Components</gds-text>
             <gds-grid columns="3" gap="l">
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" gap="xl">
                             <gds-badge variant="notice">Badge</gds-badge>
                             <gds-badge variant="positive" notification>999<gds-icon-plus-small slot="trail"></gds-icon-plus-small></gds-badge>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-badge--docs" >
+                        <Story path="./?path=/docs/components-badge--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Badge</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -90,13 +94,13 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px">
                             <gds-button><gds-icon-credit-card slot="lead"></gds-icon-credit-card>Primary</gds-button>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-button--docs" >
+                        <Story path="./?path=/docs/components-button--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Button</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -104,13 +108,13 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative">
                             <gds-fab variant="positive" inset="0" rank="secondary" position="relative">Secondary <gds-signal slot="trail"></gds-signal></gds-fab>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-button-fab--docs" >
+                        <Story path="./?path=/docs/components-button-fab--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">FAB</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -118,7 +122,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                             <gds-filter-chips
@@ -130,7 +134,7 @@ import Story from './story';
                             </gds-filter-chips>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-filter-chips--docs" >
+                        <Story path="./?path=/docs/components-filter-chips--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Filter Chips</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -138,13 +142,13 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                             <gds-icon-rocket width="42" height="42"></gds-icon-rocket>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-icon--docs" >
+                        <Story path="./?path=/docs/components-icon--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Icon</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -152,13 +156,13 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px"  gap="s">
                             <gds-menu-button><gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>Search</gds-menu-button>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-menu-button--docs" >
+                        <Story path="./?path=/docs/components-menu-button--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Menu Button</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -166,7 +170,39 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
+                    <gds-flex flex-direction="column">
+                        <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px"  gap="s">
+                            <gds-link>Link text <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right></gds-link>
+                        </gds-flex>
+                        <gds-divider padding="s" opacity="0.2"></gds-divider>
+                        <Story path="./?path=/docs/components-link--docs" >
+                            <gds-flex padding="s" justify-content="space-between" align-items="center">
+                                <gds-text tag="h5">Link</gds-text>
+                                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                            </gds-flex>
+                        </Story>
+                    </gds-flex>
+                </gds-card>
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
+                    <gds-flex flex-direction="column">
+                        <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px"  gap="s">
+                            <gds-rich-text>
+                                <h4>Rich <small>text</small> <mark>Exploration</mark></h4> 
+                                <p>State-of-the-art exploration <s>ship</s> vessel designed to <strong>traverse</strong> the vastness of space. </p>
+                                <ul><li>Item 1</li></ul>
+                            </gds-rich-text>
+                        </gds-flex>
+                        <gds-divider padding="s" opacity="0.2"></gds-divider>
+                        <Story path="./?path=/docs/components-rich-text--docs" >
+                            <gds-flex padding="s" justify-content="space-between" align-items="center">
+                                <gds-text tag="h5">Rich text</gds-text>
+                                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                            </gds-flex>
+                        </Story>
+                    </gds-flex>
+                </gds-card>
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                         <gds-flex max-width="200px">
@@ -174,7 +210,7 @@ import Story from './story';
                         </gds-flex>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-segmented-control--docs" >
+                        <Story path="./?path=/docs/components-segmented-control--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Segmented Control</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -182,13 +218,13 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" gap="s">
                             <gds-popover><gds-button rank="secondary" slot="trigger">Popover <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom></gds-button><gds-flex padding="xl"><gds-text >Popover content</gds-text></gds-flex></gds-popover>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-popover--docs" >
+                        <Story path="./?path=/docs/components-popover--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Popover</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -196,7 +232,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                             <gds-dropdown >
@@ -205,7 +241,7 @@ import Story from './story';
                             </gds-dropdown>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-form-dropdown--docs" >
+                        <Story path="./?path=/docs/components-form-dropdown--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Dropdown</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -213,7 +249,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                         <gds-flex max-width="80%">
@@ -221,7 +257,7 @@ import Story from './story';
                         </gds-flex>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-form-input--docs" >
+                        <Story path="./?path=/docs/components-form-input--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Input</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -229,7 +265,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                             <gds-flex max-width="80%">
@@ -237,7 +273,7 @@ import Story from './story';
                            </gds-flex>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-form-textarea--docs" >
+                        <Story path="./?path=/docs/components-form-textarea--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Textarea</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -245,7 +281,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px" position="relative" gap="s">
                             <gds-flex max-width="80%">
@@ -253,7 +289,7 @@ import Story from './story';
                            </gds-flex>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-form-datepicker--docs" >
+                        <Story path="./?path=/docs/components-form-datepicker--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Datepicker</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -261,7 +297,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="flex-start" justify-content="center"   background="primary/0" overflow="hidden" height="200px" position="relative">
                             <gds-mask inset="0" mask-image="top" background-color="secondary/0.96"
@@ -269,7 +305,7 @@ import Story from './story';
                                 <gds-calendar></gds-calendar>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-calendar--docs" >
+                        <Story path="./?path=/docs/components-calendar--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Calendar</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -277,13 +313,10 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center"   background="primary/0" overflow="hidden" height="200px" position="relative">
-                            <gds-flex
-                                id="target"
-                                align-items="center"
-                                gap="s">
+                            <gds-flex id="target" align-items="center" gap="s">
                                 <gds-icon-pin></gds-icon-pin>
                                 <gds-text>Coachmark</gds-text>
                             </gds-flex>
@@ -292,7 +325,7 @@ import Story from './story';
                             </gds-coachmark>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-coachmark--docs" >
+                        <Story path="./?path=/docs/components-coachmark--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Coachmark</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
@@ -300,7 +333,7 @@ import Story from './story';
                         </Story>
                     </gds-flex>
                 </gds-card>
-                <gds-card border="4xs/primary" border-radius="s" overflow="hidden">
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
                     <gds-flex flex-direction="column">
                         <gds-flex align-items="center" justify-content="center"   background="primary/0" overflow="hidden" height="200px" position="relative">
                             <gds-context-menu>
@@ -310,7 +343,7 @@ import Story from './story';
                             </gds-context-menu>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/docs-components-context-menu--docs" >
+                        <Story path="./?path=/docs/components-context-menu--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Context Menu</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>

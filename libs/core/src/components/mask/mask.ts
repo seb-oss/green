@@ -6,6 +6,9 @@ import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsFlex } from '../flex'
 import MaskCSS from './mask.style'
 
+/**
+ * @element gds-mask
+ */
 @gdsCustomElement('gds-mask')
 export class GdsMask extends GdsFlex {
   static styles = [tokens, MaskCSS]
