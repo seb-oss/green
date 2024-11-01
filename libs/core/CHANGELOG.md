@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.49.1
+
+### Patch Changes
+
+- cdaa840: **iOS15:** Fix library wide crash on iOS/Safari 15.x
+
 ## 1.49.0
 
 ### Minor Changes
