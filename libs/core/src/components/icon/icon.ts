@@ -5,6 +5,10 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { GdsElement } from '../../gds-element'
 import IconCSS from './icon.style'
 
+/**
+ * @element gds-icon
+ * @status stable
+ */
 export abstract class GdsIcon extends GdsElement {
   static styles = [IconCSS]
 
