@@ -280,3 +280,27 @@ export const Length: Story = {
     </div>
   `,
 }
+
+/**
+ * Some aria attributes are forwarded to the inner button element by default, but if you want to force a certain
+ * aria-attribute on the inner button, you can use the `gds-aria-*` attributes on the `gds-button` element.
+ *
+ * Also note that `label` will render as `aria-label` on the inner button element.
+ */
+export const Aria: Story = {
+  ...DefaultParams,
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: () => html`
+    <gds-button
+      label="This is a button"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      gds-aria-description="This is a description"
+    >
+      Aria button
+    </gds-button>
+  `,
+}
