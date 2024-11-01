@@ -32,4 +32,32 @@ describe('<gds-rich-text>', () => {
       expect(el.shadowRoot?.querySelector('p')?.textContent).to.equal('Text 2')
     })
   })
+
+  describe('API', () => {
+    it('should set and get the content of the shadowRoot from innerHTML', async () => {
+      const el: GdsRichText = await fixture(
+        html`<gds-rich-text></gds-rich-text>`,
+      )
+      el.innerHTML = '<p>Text</p>'
+      expect(el.shadowRoot?.querySelector('p')?.textContent).to.equal('Text')
+      expect(el.innerHTML).to.equal('<p>Text</p>')
+    })
+
+    it('should forward querySelector to the shadowRoot', async () => {
+      const el: GdsRichText = await fixture(
+        html`<gds-rich-text><p>Text</p></gds-rich-text>`,
+      )
+      expect(el.querySelector('p')?.textContent).to.equal('Text')
+    })
+
+    it('should forward querySelectorAll to the shadowRoot', async () => {
+      const el: GdsRichText = await fixture(
+        html`<gds-rich-text
+          ><p>Text</p>
+          <p>Text 2</p></gds-rich-text
+        >`,
+      )
+      expect(el.querySelectorAll('p')).to.have.lengthOf(2)
+    })
+  })
 })
