@@ -33,6 +33,14 @@ export const GdsCard = dynamic(
   },
 )
 
+export const GdsDialog = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/dialog').then((mod) => mod.GdsDialog),
+  {
+    ssr: false,
+  },
+)
+
 export const GdsButton = dynamic(
   () =>
     import('@sebgroup/green-react/core/button').then((mod) => mod.GdsButton),
