@@ -20,7 +20,7 @@ describe('<gds-link>', () => {
   describe('Rendering', () => {
     it('should render link', async () => {
       const el = await fixture<GdsLink>(
-        html`<gds-link href="https://github.com/seb-oss/green">Link</gds-link>`,
+        html`<gds-link href="javascript:;">Link</gds-link>`,
       )
 
       await el.updateComplete
@@ -59,7 +59,7 @@ describe('<gds-link>', () => {
   describe('API', () => {
     it('should fire click event', async () => {
       const el = await fixture<GdsLink>(
-        html`<gds-link href="https://github.com/seb-oss/green">Link</gds-link>`,
+        html`<gds-link href="javascript:;">Link</gds-link>`,
       )
       const spy = sinon.spy()
       el.addEventListener('click', (): void => {
@@ -74,7 +74,7 @@ describe('<gds-link>', () => {
     it('should support link attributes', async () => {
       const el = await fixture<GdsLink>(
         html`<gds-link
-          href="https://github.com/seb-oss/green"
+          href="javascript:;"
           target="_self"
           rel="noopener"
           download
@@ -84,9 +84,7 @@ describe('<gds-link>', () => {
 
       const shadowLink = el.shadowRoot?.querySelector('a')
 
-      expect(shadowLink?.getAttribute('href')).to.equal(
-        'https://github.com/seb-oss/green',
-      )
+      expect(shadowLink?.getAttribute('href')).to.equal('javascript:;')
       expect(shadowLink?.getAttribute('rel')).to.equal('noopener')
       expect(shadowLink?.getAttribute('target')).to.equal('_self')
       expect(shadowLink?.hasAttribute('download')).to.equal(true)
@@ -96,9 +94,7 @@ describe('<gds-link>', () => {
   describe('Accessibility', () => {
     it('should pass axe smoketest for link', async () => {
       const el = await fixture<GdsLink>(
-        html`<gds-link href="https://github.com/seb-oss/green"
-          >Test link</gds-link
-        >`,
+        html`<gds-link href="javascript:;">Test link</gds-link>`,
       )
 
       await expect(el).to.be.accessible()
@@ -106,7 +102,7 @@ describe('<gds-link>', () => {
 
     it('should fire click event when pressing enter', async () => {
       const el = await fixture<GdsLink>(
-        html`<gds-link href="https://github.com/seb-oss/green">Link</gds-link>`,
+        html`<gds-link href="javascript:;">Link</gds-link>`,
       )
       const spy = sinon.spy()
       el.addEventListener('click', (event: { preventDefault: () => void }) => {
@@ -124,11 +120,7 @@ describe('<gds-link>', () => {
 
     it('should be possible to tab to the link', async () => {
       const el = await fixture<GdsLink>(
-        html`<div>
-          <input /><gds-link href="https://github.com/seb-oss/green"
-            >Link</gds-link
-          >
-        </div>`,
+        html`<div><input /><gds-link href="javascript:;">Link</gds-link></div>`,
       )
       const input = el.querySelector('input') as HTMLInputElement
       const link = el.querySelector(getScopedTagName('gds-link')) as GdsLink
@@ -151,7 +143,7 @@ describe('<gds-link>', () => {
   describe('Security', () => {
     it('should apply a secure rel attribute by default', async () => {
       const el = await fixture<GdsLink>(
-        html`<gds-link href="https://github.com/seb-oss/green" target="_blank">
+        html`<gds-link href="javascript:;" target="_blank">
           Test link
         </gds-link>`,
       )
