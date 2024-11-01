@@ -56,8 +56,25 @@ export const GdsGrid = dynamic(
   },
 )
 
+export const GdsLink = dynamic(
+  () => import('@sebgroup/green-react/core/link').then((mod) => mod.GdsLink),
+  {
+    ssr: false,
+  },
+)
+
 export const GdsText = dynamic(
   () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsRichText = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/rich-text').then(
+      (mod) => mod.GdsRichText,
+    ),
   {
     ssr: false,
   },
