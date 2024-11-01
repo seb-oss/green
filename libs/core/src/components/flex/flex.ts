@@ -5,7 +5,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsContainer } from '../container'
-import FlexCSS from './flex.style'
+import FlexCSS from './flex.styles'
 
 /**
  * The `gds-flex` component is a flex element that can be used to wrap other components and control the layout of its children.

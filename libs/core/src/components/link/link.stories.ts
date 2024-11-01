@@ -35,8 +35,7 @@ const DefaultParams: Story = {
     controls: { expanded: true },
   },
   args: {
-    innerHTML: `<gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
-    Search`,
+    innerHTML: `Link text`,
   },
 }
 
@@ -45,7 +44,7 @@ export const Basic: Story = {
 }
 
 /**
- *
+ * A link component with a leading icon.
  */
 export const Lead: Story = {
   ...DefaultParams,
@@ -57,24 +56,12 @@ export const Lead: Story = {
 }
 
 /**
- *
+ * A link component with a trailing icon.
  */
 export const Trail: Story = {
   ...DefaultParams,
   render: () =>
     html` <gds-link>
-      Link text
-      <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-    </gds-link>`,
-}
-
-/**
- *
- */
-export const Disabled: Story = {
-  ...DefaultParams,
-  render: () =>
-    html` <gds-link disabled>
       Link text
       <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
     </gds-link>`,

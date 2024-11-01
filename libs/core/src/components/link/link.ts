@@ -6,7 +6,7 @@ import { html as staticHtml } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import style from './link.css?inline'
+import style from './link.styles'
 
 /**
  * @element gds-link
