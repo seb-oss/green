@@ -13,6 +13,7 @@ import '../components/input/input'
 import '../components/mask/mask'
 import '../components/textarea/textarea'
 import '../components/text/text'
+import '../components/rich-text/rich-text'
 import '../components/link/link'
 import '../components/menu-button/menu-button'
 import '../components/popover/popover'
@@ -175,9 +176,27 @@ import Story from './story';
                             <gds-link>Link text <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right></gds-link>
                         </gds-flex>
                         <gds-divider padding="s" opacity="0.2"></gds-divider>
-                        <Story path="./?path=/docs/components-menu-button--docs" >
+                        <Story path="./?path=/docs/components-link--docs" >
                             <gds-flex padding="s" justify-content="space-between" align-items="center">
                                 <gds-text tag="h5">Link</gds-text>
+                                <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
+                            </gds-flex>
+                        </Story>
+                    </gds-flex>
+                </gds-card>
+                <gds-card border="4xs/primary" border-radius="s" overflow="hidden" padding="0">
+                    <gds-flex flex-direction="column">
+                        <gds-flex align-items="center" justify-content="center" padding="l s" background="primary/0.4" min-height="200px"  gap="s">
+                            <gds-rich-text>
+                                <h4>Rich <small>text</small> <mark>Exploration</mark></h4> 
+                                <p>State-of-the-art exploration <s>ship</s> vessel designed to <strong>traverse</strong> the vastness of space. </p>
+                                <ul><li>Item 1</li></ul>
+                            </gds-rich-text>
+                        </gds-flex>
+                        <gds-divider padding="s" opacity="0.2"></gds-divider>
+                        <Story path="./?path=/docs/components-rich-text--docs" >
+                            <gds-flex padding="s" justify-content="space-between" align-items="center">
+                                <gds-text tag="h5">Rich text</gds-text>
                                 <gds-icon-chevron-right width="16"></gds-icon-chevron-right>
                             </gds-flex>
                         </Story>
