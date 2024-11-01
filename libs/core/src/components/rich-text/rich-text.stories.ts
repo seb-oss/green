@@ -14,6 +14,8 @@ import { html } from '../../scoping'
  * A typical use case for this component is to wrap a block of HTML content output from a CMS or other source
  * that you want to apply the design system typography to.
  *
+ * It supports out of the box all heading styles, paragraphs, lists, blockquotes, figures, tables, and more.
+ *
  * @status beta
  *
  */
@@ -154,5 +156,24 @@ export const Basic: Story = {
         </table>
       </gds-rich-text>
     </gds-card>
+  `,
+}
+
+/**
+ * `gds-rich-text` can be used to wrap generic HTML content and apply typography styles.
+ * It supports out of the box all heading styles from h1 to h6 based on the green design system typography styles.
+ */
+export const Headings: Story = {
+  ...DefaultParams,
+  name: 'Headings',
+  render: (args) => html`
+    <gds-rich-text>
+      <h1>The Starship SS Endeavor Exploration Class</h1>
+      <h2>Mission Alpha Centauri Deep Space Exploration</h2>
+      <h3>Rocket Falcon Heavy Launch Vehicle</h3>
+      <h4>Engine Raptor Next-Gen Propulsion</h4>
+      <h5>Module Dragon Crew Transport</h5>
+      <h6>Satellite Starlink Global Internet</h6>
+    </gds-rich-text>
   `,
 }
