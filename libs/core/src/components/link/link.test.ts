@@ -109,7 +109,8 @@ describe('<gds-link>', () => {
         html`<gds-link href="https://github.com/seb-oss/green">Link</gds-link>`,
       )
       const spy = sinon.spy()
-      el.addEventListener('click', () => {
+      el.addEventListener('click', (event: { preventDefault: () => void }) => {
+        event.preventDefault()
         spy()
       })
       el.focus()
