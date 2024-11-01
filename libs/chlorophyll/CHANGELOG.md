@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.8
+
+### Patch Changes
+
+- 5f337ca: Alert Ribbon Close Button fix
+
 ## 3.6.7
 
 ### Patch Changes

@@ -44,7 +44,7 @@ describe('Modal', () => {
   it('Should close modal with header close button click', () => {
     render(<MockModal />)
     expect(screen.getByText('This is a modal body')).toBeInTheDocument()
-    fireEvent.click(screen.getByText('Close'))
+    fireEvent.click(screen.getByLabelText('Close Modal'))
     expect(screen.queryByText('This is a modal body')).toBe(null)
   })
 

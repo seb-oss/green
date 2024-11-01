@@ -358,37 +358,37 @@ export const CardRadius: Story = {
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="2xs">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          2XS
+          2xs
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 xs 0 xs">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          XS
+          xs
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 s 0 s">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          S
+          s
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 m 0 m">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          M
+          m
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="0 l 0 l">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          L
+          l
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="xl">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          XL</gds-flex
+          xl</gds-flex
         >
       </gds-card>
       <gds-card variant="tertiary" padding="xl" border-radius="max">
         <gds-flex display="flex" align-items="center" justify-content="center">
-          MAX</gds-flex
+          max</gds-flex
         >
       </gds-card>
     </gds-grid>`,
@@ -463,7 +463,7 @@ export const Cardshadow: Story = {
         variant="secondary"
       >
         <gds-flex display="flex" align-items="center" justify-content="center">
-          XL
+          xl
         </gds-flex>
       </gds-card>
     </gds-grid>`,
