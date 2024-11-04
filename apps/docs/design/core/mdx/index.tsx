@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import Spacer from '@/spacer/spacer'
-import { GdsDivider, GdsFlex, GdsText } from '$/import/components'
+import { GdsDivider, GdsFlex, GdsRichText, GdsText } from '$/import/components'
 
 // Local components
 import Do from './do'
@@ -37,13 +37,13 @@ const components = {
   //     </>
   //   )
   // },
-  p: (props: object) => <GdsText tag="p" {...props} />,
-  h1: (props: object) => <GdsText tag="h1" {...props} />,
-  h2: (props: object) => <GdsText tag="h2" {...props} />,
-  h3: (props: object) => <GdsText tag="h3" {...props} />,
-  h4: (props: object) => <GdsText tag="h4" {...props} />,
-  h5: (props: object) => <GdsText tag="h5" {...props} />,
-  hr: (props: object) => <GdsDivider {...props} />,
+  // p: (props: object) => <GdsText tag="p" {...props} />,
+  // h1: (props: object) => <GdsText tag="h1" {...props} />,
+  // h2: (props: object) => <GdsText tag="h2" {...props} />,
+  // h3: (props: object) => <GdsText tag="h3" {...props} />,
+  // h4: (props: object) => <GdsText tag="h4" {...props} />,
+  // h5: (props: object) => <GdsText tag="h5" {...props} />,
+  // hr: (props: object) => <GdsDivider {...props} />,
   Column: (props: object) => (
     <GdsFlex flex-direction="column" gap="xs" {...props} />
   ),
@@ -62,36 +62,9 @@ export function Mdx({
 }) {
   const Component = useMDXComponent(code, globals)
 
-  // State to hold grouped content
-  const [contentGroups, setContentGroups] = React.useState<React.ReactNode[][]>(
-    [],
+  return (
+    <GdsRichText>
+      <Component components={components} />
+    </GdsRichText>
   )
-
-  React.useEffect(() => {
-    const groups: React.ReactNode[][] = []
-    let currentGroup: React.ReactNode[] = []
-
-    // Render the component to get the children
-    const renderedContent = <Component components={components} />
-
-    React.Children.forEach(renderedContent.props.children, (child) => {
-      if (React.isValidElement(child)) {
-        if (child.type === components.h2) {
-          if (currentGroup.length) {
-            groups.push(currentGroup)
-            currentGroup = []
-          }
-        }
-        currentGroup.push(child)
-      }
-    })
-
-    if (currentGroup.length) {
-      groups.push(currentGroup)
-    }
-
-    setContentGroups(groups)
-  }, [Component])
-
-  return <Component components={components} />
 }
