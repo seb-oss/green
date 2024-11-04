@@ -12,6 +12,7 @@ import '../src/components/button/index.js'
 import '../src/components/grid/index.js'
 
 setCustomElementsManifest(customElements)
+registerTransitionalStyles()
 
 export const globalTypes = {
   style: {
@@ -59,9 +60,9 @@ export default {
         context.globals.previousStyle = '2023' // Default to 2023
       }
 
-      const style = context.globals.style || '2023'
+      const designVersion = context.globals.style || '2023'
 
-      if (style === '2016') {
+      if (designVersion === '2016') {
         if (context.globals.previousStyle !== '2016') {
           registerTransitionalStyles()
         }
@@ -71,9 +72,11 @@ export default {
         }
       }
 
-      context.globals.previousStyle = style
+      context.globals.previousStyle = designVersion
 
-      return html`<gds-theme>${storyFn()}</gds-theme>`
+      return html`<gds-theme .designVersion=${designVersion}
+        >${storyFn()}</gds-theme
+      >`
     },
   ],
 }
