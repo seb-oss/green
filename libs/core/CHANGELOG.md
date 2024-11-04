@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.50.0
+
+### Minor Changes
+
+- 23c8827: **Link:** Add secondary variant with reversed underline
+
 ## 1.49.1
 
 ### Patch Changes

@@ -23,6 +23,7 @@ import '../icon/icons/cross-small'
 
 /**
  * @element gds-popover
+ * @status stable
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
