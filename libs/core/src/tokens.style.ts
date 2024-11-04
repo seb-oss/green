@@ -27,8 +27,12 @@ const tokens = [
 GlobalStylesRegistry.instance.injectGlobalStyles(
   'root-tokens',
   css`
-    :root {
+    :root,
+    :root[gds-theme='light'] {
       ${unsafeCSS(colorV2Light)}
+    }
+    :root[gds-theme='dark'] {
+      ${unsafeCSS(colorV2Dark)}
     }
   `,
 )
