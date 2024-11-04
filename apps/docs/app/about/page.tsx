@@ -2,9 +2,9 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Accordion, AccordionItem } from '@/accordion'
 import Spacing from '@/spacing'
 import TOC from '@/toc/toc'
+import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
 
 import './style.css'
