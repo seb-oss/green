@@ -5,7 +5,13 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsButton, GdsFlex, GdsText } from '$/import/components'
+import {
+  GdsBadge,
+  GdsButton,
+  GdsFlex,
+  GdsLink,
+  GdsText,
+} from '$/import/components'
 import {
   IconCainLink,
   IconChevronBottom,
@@ -138,24 +144,7 @@ export default function Sidebar({
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
           <GdsFlex align-items="center" justify-content="space-between">
-            <Link
-              className={path === menuItem.path ? 'active' : ''}
-              href={menuItem.path}
-              onMouseEnter={() =>
-                setHoveredLink(menuItem.path + menuItem.title)
-              }
-              onMouseLeave={() => setHoveredLink(null)}
-            >
-              <GdsText
-                text-decoration={
-                  hoveredLink === menuItem.path + menuItem.title
-                    ? 'underline'
-                    : 'none'
-                }
-              >
-                {menuItem.title}
-              </GdsText>
-            </Link>
+            <GdsLink href={menuItem.path}>{menuItem.title}</GdsLink>
             {menuItem.subLinks.length > 0 && (
               <GdsButton
                 rank="tertiary"
@@ -173,41 +162,20 @@ export default function Sidebar({
           {visibleSublinks[menuItem.title] && (
             <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
               {menuItem.subLinks.map((subLink, subIdx) => {
-                // Log the index and private status
-                // console.log(`Index: ${subIdx}, Private: ${subLink.private}`)
-
                 return (
-                  <Link
-                    key={subIdx}
-                    className={path === subLink.path ? 'active' : ''}
-                    href={subLink.path}
-                    onMouseEnter={() =>
-                      setHoveredLink(subLink.path + subLink.title)
-                    }
-                    onMouseLeave={() => setHoveredLink(null)}
-                  >
-                    <GdsFlex justify-content="space-between">
-                      <GdsText
-                        text-decoration={
-                          hoveredLink === subLink.path + subLink.title
-                            ? 'underline'
-                            : 'none'
-                        }
-                      >
-                        {subLink.title}
-                      </GdsText>
-                      <GdsFlex align-items="center" gap="xs">
-                        {subLink.private && (
-                          <IconEyeSlash width="12" height="12" />
-                        )}
-                        {subLink.badge && (
-                          <GdsBadge variant="notice" size="small">
-                            {subLink.badge}
-                          </GdsBadge>
-                        )}
-                      </GdsFlex>
+                  <GdsFlex key={subIdx} justify-content="space-between">
+                    <GdsLink href={subLink.path}>{subLink.title}</GdsLink>
+                    <GdsFlex align-items="center" gap="xs">
+                      {subLink.private && (
+                        <IconEyeSlash width="12" height="12" />
+                      )}
+                      {subLink.badge && (
+                        <GdsBadge variant="notice" size="small">
+                          {subLink.badge}
+                        </GdsBadge>
+                      )}
                     </GdsFlex>
-                  </Link>
+                  </GdsFlex>
                 )
               })}
             </GdsFlex>
@@ -220,16 +188,16 @@ export default function Sidebar({
         justify-content="stretch"
         padding="0 s 0 0"
       >
-        <Link
-          href="https://designlibrary.sebgroup.com/"
-          target="_blank"
-          style={{ minInlineSize: '100%' }}
+        <GdsFlex
+          align-items="center"
+          justify-content="space-between"
+          width="100%"
         >
-          <GdsFlex align-items="center" justify-content="space-between">
-            Design Library
-            <IconCainLink />
-          </GdsFlex>
-        </Link>
+          <GdsLink href="https://designlibrary.sebgroup.com/" target="_blank">
+            <span>Design Library</span>
+          </GdsLink>
+          <IconCainLink />
+        </GdsFlex>
       </GdsFlex>
     </GdsFlex>
   )

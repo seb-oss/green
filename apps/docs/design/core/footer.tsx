@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { GdsButton, GdsFlex, GdsText } from '$/import/components'
+import { GdsButton, GdsFlex, GdsLink, GdsText } from '$/import/components'
 
 const menuItems = [
   {
@@ -59,41 +59,35 @@ export default function Footer() {
       <GdsFlex gap="8xl">
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(0, 3).map((item, idx) => (
-            <Link
+            <GdsLink
               key={idx}
               href={item.path}
               target={item.external ? '_blank' : '_self'}
             >
-              <GdsText font-weight="book" text-decoration="underline">
-                {item.title}
-              </GdsText>
-            </Link>
+              {item.title}
+            </GdsLink>
           ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(3, 6).map((item, idx) => (
-            <Link
+            <GdsLink
               key={idx}
               href={item.path}
               target={item.external ? '_blank' : '_self'}
             >
-              <GdsText font-weight="book" text-decoration="underline">
-                {item.title}
-              </GdsText>
-            </Link>
+              {item.title}
+            </GdsLink>
           ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(6).map((item, idx) => (
-            <Link
+            <GdsLink
               key={idx}
               href={item.path}
               target={item.external ? '_blank' : '_self'}
             >
-              <GdsText font-weight="book" text-decoration="underline">
-                {item.title}
-              </GdsText>
-            </Link>
+              {item.title}
+            </GdsLink>
           ))}
         </GdsFlex>
       </GdsFlex>
