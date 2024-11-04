@@ -3,7 +3,7 @@
 import React from 'react'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge } from '$/import/components'
+import { GdsBadge, GdsButton, GdsDialog, GdsInput } from '$/import/components'
 import { Command } from 'cmdk'
 
 import './cmd.css'
@@ -107,7 +107,6 @@ export function CMD({
         <div>
           {pages.map((p) => (
             <GdsBadge key={p} cmdk-vercel-badge="">
-              {/* <GdsBadge key={p} cmdk-vercel-badge=""> */}
               {p}
             </GdsBadge>
           ))}
