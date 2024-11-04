@@ -43,6 +43,27 @@ export class DynamicStylesController implements ReactiveController {
   }
 
   /**
+   * Clears the styles for a particular key.
+   *
+   * @param key - The key of the styles to clear.
+   */
+  clear(key: string) {
+    if (this.#useLegacyStylesheets) {
+      const styleEl = this.#legacyStyleSheets.get(key)
+      styleEl?.remove()
+      this.#legacyStyleSheets.delete(key)
+    } else {
+      this.#styleSheets.delete(key)
+      if (this.host.shadowRoot) {
+        this.host.shadowRoot.adoptedStyleSheets = [
+          ...this.#initialStyleSheets,
+          ...Array.from(this.#styleSheets.values()),
+        ]
+      }
+    }
+  }
+
+  /**
    * Clears all styles of the component, including any initial styles.
    */
   clearAll() {
