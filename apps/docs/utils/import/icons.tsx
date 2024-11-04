@@ -110,6 +110,26 @@ export const IconPlusSmall = dynamic(
   },
 )
 
+export const IconPlusLarge = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconPlusLarge').then(
+      (mod) => mod.IconPlusLarge,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconMinusLarge = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconMinusLarge').then(
+      (mod) => mod.IconMinusLarge,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 export const IconCreditCard = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconCreditCard').then(

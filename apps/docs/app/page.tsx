@@ -25,6 +25,7 @@ export default function Home() {
         heading="Designed to bring unity to our digital experiences."
         preamble="Green Design System is more than a polished user interface, its places the user at the very forefront of design, usability and accessibility."
       />
+
       <Components title="Components" />
       <Ressources title="Resources" />
       <Empower title="Empowering designers and developers" />
