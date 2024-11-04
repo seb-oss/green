@@ -1,5 +1,6 @@
 import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { html as staticHtml } from 'lit/static-html.js'
 
@@ -52,17 +53,28 @@ export class GdsLink extends GdsElement {
   @property()
   download?: string
 
+  /**
+   * Defines the link variants
+   */
+  @property()
+  variant: 'default' | 'secondary' = 'default'
+
   constructor() {
     super()
   }
 
   render() {
+    const CLASSES = {
+      secondary: this.variant === 'secondary',
+    }
+
     return staticHtml`
       <a
         href=${ifDefined(this.href)}
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel || this.#defaultRel)}
         download=${ifDefined(this.download)}
+        class=${classMap(CLASSES)}
       >
         <slot name="lead"></slot>
         <slot></slot>
