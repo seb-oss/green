@@ -144,7 +144,9 @@ export default function Sidebar({
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
           <GdsFlex align-items="center" justify-content="space-between">
-            <GdsLink href={menuItem.path}>{menuItem.title}</GdsLink>
+            <GdsLink href={menuItem.path} variant="secondary">
+              {menuItem.title}
+            </GdsLink>
             {menuItem.subLinks.length > 0 && (
               <GdsButton
                 rank="tertiary"
@@ -164,7 +166,9 @@ export default function Sidebar({
               {menuItem.subLinks.map((subLink, subIdx) => {
                 return (
                   <GdsFlex key={subIdx} justify-content="space-between">
-                    <GdsLink href={subLink.path}>{subLink.title}</GdsLink>
+                    <GdsLink href={subLink.path} variant="secondary">
+                      {subLink.title}
+                    </GdsLink>
                     <GdsFlex align-items="center" gap="xs">
                       {subLink.private && (
                         <IconEyeSlash width="12" height="12" />
@@ -193,7 +197,11 @@ export default function Sidebar({
           justify-content="space-between"
           width="100%"
         >
-          <GdsLink href="https://designlibrary.sebgroup.com/" target="_blank">
+          <GdsLink
+            href="https://designlibrary.sebgroup.com/"
+            target="_blank"
+            variant="secondary"
+          >
             <span>Design Library</span>
           </GdsLink>
           <IconCainLink />
