@@ -8,7 +8,10 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 
+import { TranslocoModule } from '@jsverse/transloco'
+
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NgvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
 
 import '../core/core.globals'
 
@@ -35,7 +38,7 @@ describe('[NgvCore]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvDropdownComponent, DropdownListStubComponent],
+        declarations: [NgvDropdownComponent],
         providers: [
           { provide: NgControl, useValue: { control: new FormControl() } },
           {
@@ -48,7 +51,9 @@ describe('[NgvCore]', () => {
           CommonModule,
           FormsModule,
           ReactiveFormsModule,
+          TranslocoModule,
           NgvI18nTestModule,
+          NgvTooltipModule,
         ],
       }).compileComponents()
 
