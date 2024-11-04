@@ -11,6 +11,7 @@ import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as FilterChips from '../../components/filter-chips/filter-chips.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
+import { GdsTheme } from '../../components/theme/theme'
 import * as Theme from '../../components/theme/theme.trans.styles'
 import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
 import { GdsElement } from '../../gds-element'
@@ -67,7 +68,24 @@ export class TransitionalStyles {
     const element = this.#elements.get(styleKey)
     if (!element || !element.shadowRoot) return
 
-    element._dynamicStylesController.clearAll()
+    let currentRoot = element.getRootNode()
+    let closestGdsTheme = element.closest('[gds-element=gds-theme]')
+    while (closestGdsTheme === null && currentRoot !== document) {
+      closestGdsTheme = (currentRoot as ShadowRoot).host.closest('gds-theme')
+      currentRoot = (currentRoot as ShadowRoot).host.getRootNode()
+    }
+
+    if (closestGdsTheme) {
+      const theme = closestGdsTheme as GdsTheme
+      if (theme.designVersion === '2023') {
+        console.log('Removing transitional styles for 2023')
+        element._isUsingTransitionalStyles = false
+        element._dynamicStylesController.clear('t-styles')
+        return
+      }
+    }
+
+    element._dynamicStylesController.clear('t-styles')
     element._dynamicStylesController.inject('t-styles', unsafeCSS(sheet))
     element._isUsingTransitionalStyles = true
   }
