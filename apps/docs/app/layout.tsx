@@ -1,13 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-// import { useTheme } from 'next-themes'
+import { useContext, useEffect, useState } from 'react'
 import Script from 'next/script'
 import Consent from '@/consent/consent'
 import Main from '&/main/main'
 import Fonts from '$/fonts/fonts'
 import { GdsFlex } from '$/import/components'
-import { Provider } from '$/provider/provider'
+import { Context, Provider } from '$/provider/provider'
 import Favicon from 'core/favicon'
 import Footer from 'core/footer'
 import Header from 'core/header'
@@ -19,13 +18,8 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const { theme = 'light', setTheme } = useTheme()
-  const [colorScheme, setColorScheme] = useState<'light' | 'dark' | 'auto'>(
-    window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: light)').matches
-      ? 'light'
-      : 'dark',
-  )
+  const { theme } = useContext(Context)
+  const [currentTheme, setCurrentTheme] = useState(theme)
 
   useEffect(() => {
     const callCC = () => {
@@ -60,23 +54,16 @@ export default function RootLayout({
         clearTimeout(timer)
       }
     }
+  }, [])
 
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (event) => {
-        setColorScheme(event.matches ? 'dark' : 'light')
-      })
-  }, [colorScheme, setColorScheme])
+  useEffect(() => {
+    setCurrentTheme(theme)
+  }, [theme])
 
   return (
-    <html lang="en" suppressHydrationWarning gds-theme={colorScheme}>
+    <html lang="en" suppressHydrationWarning gds-theme={currentTheme}>
       <body>
-        <Provider
-          theme={colorScheme}
-          setTheme={(theme: string) =>
-            setColorScheme(theme as 'light' | 'dark' | 'auto')
-          }
-        >
+        <Provider>
           <Favicon />
           <Fonts>
             <GdsFlex flex-direction="column">

@@ -5,18 +5,20 @@ import { CMD } from 'core/cmd'
 import { Toaster } from 'sonner'
 
 interface ContextProps {
+  theme: 'light' | 'dark' | 'auto'
+  setTheme: (theme: 'light' | 'dark' | 'auto') => void
   isOpen: boolean
-  loading: boolean
   isNavOpen: boolean
   toggleNav: () => void
   toggleCmd: () => void
-  theme: string
-  setTheme: (theme: string) => void
 }
 
 export const Context = createContext<ContextProps>({
+  theme: 'light',
+  setTheme: () => {
+    console.warn('setTheme function is not implemented')
+  },
   isOpen: false,
-  loading: true,
   isNavOpen: false,
   toggleNav: () => {
     console.warn('toggleNav function is not implemented')
@@ -24,26 +26,15 @@ export const Context = createContext<ContextProps>({
   toggleCmd: () => {
     console.warn('toggleCmd function is not implemented')
   },
-  theme: 'light',
-  setTheme: () => {
-    console.warn('setTheme function is not implemented')
-  },
 })
 
-export function Provider({
-  children,
-  theme = 'light',
-  setTheme = () => {
-    console.warn('setTheme function is not implemented')
-  },
-  ...props
-}: {
-  children: React.ReactNode
-  theme?: string
-  setTheme?: (theme: string) => void
-}) {
+export function Provider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>(
+    window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light'
+      : 'dark',
+  )
   const [isOpen, setIsOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
   const [isNavOpen, setNavOpen] = useState(false)
 
   const toggleNav = () => {
@@ -84,14 +75,26 @@ export function Provider({
     }
   }, [])
 
+  useEffect(() => {
+    const handleThemeChange = (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? 'light' : 'dark')
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    mediaQuery.addEventListener('change', handleThemeChange)
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleThemeChange)
+    }
+  }, [])
+
   const value = {
+    theme,
+    setTheme,
     isOpen,
-    loading,
     isNavOpen,
     toggleNav,
     toggleCmd,
-    theme,
-    setTheme,
   }
 
   return (

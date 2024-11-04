@@ -35,6 +35,7 @@ export function ThemeToggle() {
   function isHTMLElement(target: EventTarget | null): target is HTMLElement {
     return target instanceof HTMLElement
   }
+
   useEffect(() => {
     setMounted(true)
   }, [])
