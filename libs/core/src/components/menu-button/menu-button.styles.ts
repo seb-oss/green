@@ -5,17 +5,14 @@ const style = css`
 
   @layer tokens {
     :host {
-      --_gap: 8px;
+      --_gap: var(--gds-space-xs);
 
       --_padding-inline: var(--gds-space-m);
       --_padding-block: var(--gds-space-xs);
 
       --_color-bg: transparent;
-      --_color-text: var(--gds-sys-color-primary-text);
+      --_color-text: var(--gds-color-l3-content-tertiary);
       --_color-border: transparent;
-
-      --_color-outline-alpha: 60%;
-      --_color-outline: var(--gds-sys-color-border-stroke);
 
       --_font-size: 1rem;
       --_font-weight: 400;
@@ -64,11 +61,7 @@ const style = css`
       line-height: var(--_line-height);
 
       &:focus-visible {
-        outline-color: color-mix(
-          in srgb,
-          var(--_color-outline),
-          transparent var(--_color-outline-alpha)
-        );
+        outline-color: color-mix(in srgb, currentcolor, #000 100%);
         border-radius: 2px;
         overflow: visible;
       }
@@ -76,12 +69,22 @@ const style = css`
       &:hover,
       &.selected:hover,
       &:active {
-        --_color-bg: var(--gds-sys-color-base200);
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-hover)
+        );
+        // --_color-bg: var(--gds-sys-color-base200);
         --_color-border: var(--gds-sys-color-base600);
       }
 
       &.selected {
-        --_color-bg: var(--gds-sys-color-base100);
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-hover)
+        );
+        // --_color-bg: var(--gds-sys-color-base100);
         --_color-border: var(--gds-sys-color-base700);
       }
 
