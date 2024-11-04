@@ -29,11 +29,7 @@ export const Context = createContext<ContextProps>({
 })
 
 export function Provider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>(
-    window.matchMedia('(prefers-color-scheme: light)').matches
-      ? 'light'
-      : 'dark',
-  )
+  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('light')
   const [isOpen, setIsOpen] = useState(false)
   const [isNavOpen, setNavOpen] = useState(false)
 
@@ -76,17 +72,32 @@ export function Provider({ children }: { children: React.ReactNode }) {
   }, [])
 
   useEffect(() => {
-    const handleThemeChange = (event: MediaQueryListEvent) => {
-      setTheme(event.matches ? 'light' : 'dark')
-    }
+    if (typeof window !== 'undefined') {
+      const initialTheme = window.matchMedia('(prefers-color-scheme: light)')
+        .matches
+        ? 'light'
+        : 'dark'
+      setTheme(initialTheme)
+      document.documentElement.setAttribute('gds-theme', initialTheme)
 
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    mediaQuery.addEventListener('change', handleThemeChange)
+      const handleThemeChange = (event: MediaQueryListEvent) => {
+        const newTheme = event.matches ? 'light' : 'dark'
+        setTheme(newTheme)
+        document.documentElement.setAttribute('gds-theme', newTheme)
+      }
 
-    return () => {
-      mediaQuery.removeEventListener('change', handleThemeChange)
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      mediaQuery.addEventListener('change', handleThemeChange)
+
+      return () => {
+        mediaQuery.removeEventListener('change', handleThemeChange)
+      }
     }
   }, [])
+
+  useEffect(() => {
+    document.documentElement.setAttribute('gds-theme', theme)
+  }, [theme])
 
   const value = {
     theme,
