@@ -31,6 +31,12 @@ export class GdsTheme extends GdsElement {
   @property({ reflect: true, attribute: 'color-scheme' })
   colorScheme: 'light' | 'dark' | 'auto' = 'light'
 
+  /**
+   * The design version to use. Can be `16` or `23`.
+   */
+  @property({ reflect: true, attribute: 'design-version' })
+  designVersion: '2016' | '2023' = '2016'
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-theme')
