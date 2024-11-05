@@ -51,7 +51,6 @@ export class TransitionalStyles {
 
   #styles = new Map<string, string>()
   #elements = new Map<string, GdsElement>()
-
   #useLegacyStylesheets = !supportsConstructedStylesheets()
 
   apply(element: GdsElement, styleKey: string) {
@@ -65,9 +64,27 @@ export class TransitionalStyles {
   }
 
   applyToElement(styleKey: string, sheet: string) {
+    // element will only exist in the elements map if transitional styles have been
+    // registered for it. If it doesn't exist, we can bail out early.
     const element = this.#elements.get(styleKey)
     if (!element || !element.shadowRoot) return
 
+    // Functions for applying and clearing transitional styles, used below
+    const applyTransitional = () => {
+      element._dynamicStylesController.clear('t-styles')
+      element._dynamicStylesController.inject('t-styles', unsafeCSS(sheet))
+      element._isUsingTransitionalStyles = true
+    }
+    const clearTransitional = () => {
+      element._isUsingTransitionalStyles = false
+      element._dynamicStylesController.clear('t-styles')
+    }
+
+    // If a `gds-theme` element is present higher up in the DOM, we want its
+    // `designVersion` property to control whether transitional styles are applied
+    // to the element.
+
+    // Find the closest `gds-theme` parent, if present
     let currentRoot = element.getRootNode()
     let closestGdsTheme = element.closest('[gds-element=gds-theme]')
     while (closestGdsTheme === null && currentRoot !== document) {
@@ -75,19 +92,33 @@ export class TransitionalStyles {
       currentRoot = (currentRoot as ShadowRoot).host.getRootNode()
     }
 
+    // If we found a `gds-theme` parent, check if it's set to 2023 styles, in which case
+    // we will remove any transitional styles and then bail out.
     if (closestGdsTheme) {
       const theme = closestGdsTheme as GdsTheme
+
+      // If the designVersion is changed dynamically, we also need to update the styles
+      const updateStyles = () => {
+        if (theme.designVersion === '2023') {
+          clearTransitional()
+        } else {
+          applyTransitional()
+        }
+      }
+      theme.addEventListener('gds-design-version-changed', updateStyles)
+      element.addEventListener('gds-element-disconnected', () =>
+        theme.removeEventListener('gds-design-version-changed', updateStyles),
+      )
+
       if (theme.designVersion === '2023') {
-        console.log('Removing transitional styles for 2023')
-        element._isUsingTransitionalStyles = false
-        element._dynamicStylesController.clear('t-styles')
+        clearTransitional()
         return
       }
     }
 
-    element._dynamicStylesController.clear('t-styles')
-    element._dynamicStylesController.inject('t-styles', unsafeCSS(sheet))
-    element._isUsingTransitionalStyles = true
+    // If we didn't find a `gds-theme` parent, or if it's set to 2016 styles, we will apply
+    // the transitional styles.
+    applyTransitional()
   }
 
   register(name: string, styles: string) {

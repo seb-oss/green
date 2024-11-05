@@ -9,6 +9,7 @@ import { watch } from '../../utils/decorators'
 
 /**
  * @element gds-theme
+ * @status beta
  *
  * A component that provides CSS variables for a part of the DOM tree.
  * Every descendant of this component will inherit the CSS variables
@@ -16,7 +17,9 @@ import { watch } from '../../utils/decorators'
  *
  * @slot - The content to apply the theme to.
  *
- * @status beta
+ * @event gds-color-scheme-changed - Fired when the color scheme changes.
+ * @event gds-design-version-changed - Fired when the design version changes.
+ *
  */
 @gdsCustomElement('gds-theme')
 export class GdsTheme extends GdsElement {
@@ -64,5 +67,20 @@ export class GdsTheme extends GdsElement {
         unsafeCSS(`:host { ${colorV2Light}}`),
       )
     }
+
+    this.dispatchEvent(
+      new CustomEvent('gds-color-scheme-changed', {
+        detail: { colorScheme: this.colorScheme },
+      }),
+    )
+  }
+
+  @watch('designVersion')
+  private _onDesignVersionChange() {
+    this.dispatchEvent(
+      new CustomEvent('gds-design-version-changed', {
+        detail: { designVersion: this.designVersion },
+      }),
+    )
   }
 }
