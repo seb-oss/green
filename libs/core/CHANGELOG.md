@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.51.0
+
+### Minor Changes
+
+- 92187bd: **Flex:** Add the `flex-wrap` property
+
 ## 1.50.0
 
 ### Minor Changes
