@@ -1,10 +1,9 @@
 'use client'
 
 import React, { ReactNode } from 'react'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import { GdsFlex, GdsText } from '$/import/components'
+import { GdsFlex, GdsLink, GdsText } from '$/import/components'
 
 type TrailTypes = {
   home: ReactNode
@@ -33,31 +32,31 @@ const Breadcrumbs = ({ home, separator, activeClass, slug }: TrailTypes) => {
 
   return (
     <GdsFlex gap="s" align-items="center" margin="0 0 2xl 0">
-      <Link href={'/'}>
+      <GdsLink href={'/'}>
         <GdsText font-size="body-s" text-decoration="underline">
           {home}
         </GdsText>
-      </Link>
+      </GdsLink>
       {separator}
-      <Link href={'/components'}>
+      <GdsLink href={'/components'}>
         <GdsText font-size="body-s" text-decoration="underline">
           Component
         </GdsText>
-      </Link>
+      </GdsLink>
       {slug && (
         <>
           {separator}
-          <Link href={'/component/' + slug}>
+          <GdsLink href={'/component/' + slug}>
             <GdsText font-size="body-s">{currentComponent?.title}</GdsText>
-          </Link>
+          </GdsLink>
         </>
       )}
       {lastPathComponent && (
         <>
           {separator}
-          <Link href={'/'}>
+          <GdsLink href={'/'}>
             <GdsText font-size="body-s">{lastPathComponent?.title}</GdsText>
-          </Link>
+          </GdsLink>
         </>
       )}
     </GdsFlex>
