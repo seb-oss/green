@@ -12,7 +12,7 @@
     "rxjs": ">=6.6.7",
     "body-scroll-lock": "^3.1.5",
     "date-fns": "^2.28.0",
-    "@ngneat/transloco": "^6.0.4",
+    "@jsverse/transloco": "^7.5.0",
     "inputmask": "^5.0.6",
     "scroll-into-view-if-needed": "^2.2.31"
   },

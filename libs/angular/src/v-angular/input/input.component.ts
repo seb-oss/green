@@ -12,7 +12,7 @@ import {
   Self,
 } from '@angular/core'
 import { NgControl, UntypedFormControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { Subject } from 'rxjs'
 import { debounceTime, takeUntil } from 'rxjs/operators'
 
