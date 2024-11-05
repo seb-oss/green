@@ -6,7 +6,7 @@ $valid-color: tokens.$intent-success-background;
 $invalid-color: tokens.$intent-danger-background;
 
 @mixin add-checkbox(
-  $selector: 'label.form-control',
+  $selector: 'label.gds-form-control',
   $checkbox-selector: 'input[type="checkbox"]',
   $validated-selector: '.was-validated'
 ) {

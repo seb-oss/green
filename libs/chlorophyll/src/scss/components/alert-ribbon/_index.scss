@@ -1,7 +1,6 @@
 @use 'mixins';
 
-div[role='alert'],
-.alert-ribbon {
+.gds-alert-ribbon {
   // add base styles for alert-ribbon
   @include mixins.alert-ribbon();
 }

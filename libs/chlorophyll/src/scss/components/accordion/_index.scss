@@ -1,5 +1,5 @@
 @use './mixins';
 
-.accordion {
+.gds-accordion {
   @include mixins.add-accordion;
 }

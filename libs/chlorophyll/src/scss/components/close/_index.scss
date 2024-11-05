@@ -1,6 +1,6 @@
 @use 'mixins';
 
 // close
-.close {
+.gds-close {
   @include mixins.close;
 }

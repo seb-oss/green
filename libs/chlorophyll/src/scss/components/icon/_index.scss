@@ -1,4 +1,5 @@
 @use 'mixins';
-i.sg-icon {
+
+.gds-icon {
   @include mixins.add-icons;
 }

@@ -1,19 +1,18 @@
 @use 'mixins';
 
-form,
-.form {
+.gds-form {
   @include mixins.add-form;
 }
 
-.horizontal {
+.gds-form-horizontal {
   @include mixins.horizontal-layout;
 }
 
-.form-control {
+.gds-form-control {
   @include mixins.add-form-control;
 }
 
-.form-group {
+.gds-form-group {
   @include mixins.add-form-group;
 }
 
@@ -21,16 +20,14 @@ form,
   @include mixins.add-form-item;
 }
 
-.form-info {
+.gds-form-info {
   @include mixins.add-form-info;
 }
 
-.form-text {
+.gds-form-text {
   @include mixins.add-form-text;
 }
 
-label,
-.label,
-legend {
+.gds-label {
   @include mixins.add-label();
 }

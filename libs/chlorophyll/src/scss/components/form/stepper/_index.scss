@@ -1,14 +1,14 @@
 @use '../../../common';
 @use 'mixins';
 
-.stepper-wrapper {
+.gds-stepper-wrapper {
   width: fit-content;
 
-  .group-stepper {
+  .gds-group-stepper {
     margin-bottom: 0.5rem;
   }
 }
 
-.group-stepper {
+.gds-group-stepper {
   @include mixins.add-stepper;
 }

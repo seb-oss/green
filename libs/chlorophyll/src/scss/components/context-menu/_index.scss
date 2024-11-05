@@ -3,11 +3,11 @@
 @use '../../components/popover';
 @use '../../components/icon';
 
-.context-menu-overlay {
+.gds-context-menu-overlay {
   @include mixins.add-context-menu-overlay();
 }
 
-.popover-context-menu {
+.gds-popover-context-menu {
   pointer-events: auto;
 
   @include common.media-breakpoint-up('sm') {

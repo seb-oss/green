@@ -6,11 +6,11 @@
 @use '../../components/popover';
 @use '../../components/utility';
 
-button[aria-haspopup='listbox'] {
+.gds-dropdown {
   @include mixins.dropdown-trigger();
 }
 
-.popover-dropdown {
+.gds-dropdown-popover {
   --z-index: var(--sg-z-index-dropdown);
 
   .hidden {

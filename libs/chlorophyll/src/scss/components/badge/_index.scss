@@ -4,7 +4,7 @@
 // badge has a dependency on close for dismissible badge
 @use '../close';
 
-.badge {
+.gds-badge {
   // add base styles for badge
   @include mixins.badge();
 

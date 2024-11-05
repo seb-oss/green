@@ -1,19 +1,11 @@
 @forward 'tokens';
 @use 'mixins';
 
-ul:not(.legend, .gds-reset) {
+ul.gds-list {
   @include mixins.base-list();
 }
 
-ul:not(
-    .check,
-    .table,
-    [role='listbox'],
-    [role='menu'],
-    .x-axis,
-    .legend,
-    .gds-reset
-  ) {
+ul.gds-bullet-list {
   @include mixins.bullet-list();
 }
 

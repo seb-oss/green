@@ -5,14 +5,12 @@ a:not(:link, :visited, .gds-reset) {
   @include mixins.disabled;
 }
 
-a:link:not(.button, [role='tab'], .gds-reset, .gds-link-arrow),
-a:visited:not(.button, [role='tab'], .gds-reset, .gds-link-arrow),
-.link {
+.gds-link:not(.gds-button) {
   @include mixins.underline;
   @include mixins.base;
 }
 
-a.button {
+a.gds-button {
   @include mixins.button;
 }
 
@@ -28,22 +26,6 @@ a.gds-link-underline {
   @include mixins.arrow;
 }
 
-/*
-TODO:
-
-Specify style on hover only
-  @media (hover: none) {
-    // Do the style here
-  }
-
-Enable Text smoothing
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-
-*/
-
-// TODO: maybe move elsewhere?
 @each $variant, $colors in mixins.$variants {
   [class*='-#{$variant}'] {
     @include mixins.variant(currentColor);

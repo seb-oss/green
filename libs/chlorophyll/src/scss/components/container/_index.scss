@@ -15,9 +15,9 @@ $container-max-widths: (
 
 @if tokens.$enable-grid-classes {
   // Single container class with breakpoint max-widths
-  .container,
+  .gds-container,
     // 100% wide container at all breakpoints
-  .container-fluid,
+  .gds-container-fluid,
   %container-fluid {
     @include mixins.make-container();
   }
@@ -44,7 +44,7 @@ $container-max-widths: (
         }
       }
     }
-    .container-#{$breakpoint} {
+    .gds-container-#{$breakpoint} {
       @extend %container-fluid !optional;
     }
   }
