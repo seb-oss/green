@@ -71,13 +71,14 @@ export class TransitionalStyles {
 
     // Functions for applying and clearing transitional styles, used below
     const applyTransitional = () => {
-      element._dynamicStylesController.clear('t-styles')
+      element._dynamicStylesController.clearInitial()
       element._dynamicStylesController.inject('t-styles', unsafeCSS(sheet))
       element._isUsingTransitionalStyles = true
     }
     const clearTransitional = () => {
       element._isUsingTransitionalStyles = false
       element._dynamicStylesController.clear('t-styles')
+      element._dynamicStylesController.restoreInitial()
     }
 
     // If a `gds-theme` element is present higher up in the DOM, we want its
