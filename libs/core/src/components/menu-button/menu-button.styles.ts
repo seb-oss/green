@@ -1,7 +1,7 @@
 import { css } from 'lit'
 
 const style = css`
-  @layer tokens, a11y, core, variants, sizes, sets, disabled;
+  @layer tokens, a11y, core, disabled, variants, sizes, sets;
 
   @layer tokens {
     :host {
@@ -49,7 +49,7 @@ const style = css`
       justify-content: space-between;
       justify-items: center;
       outline-color: transparent;
-      outline-offset: 2px;
+      outline-offset: -2px;
       outline-style: solid;
       outline-width: 2px;
       padding-block: var(--_padding-block);
@@ -61,9 +61,10 @@ const style = css`
       line-height: var(--_line-height);
 
       &:focus-visible {
-        outline-color: color-mix(in srgb, currentcolor, #000 100%);
-        border-radius: 2px;
+        outline-color: currentColor;
+        border-radius: 6px;
         overflow: visible;
+        border-color: transparent;
       }
 
       &:hover,
@@ -74,8 +75,7 @@ const style = css`
           transparent,
           var(--gds-color-l3-states-light-hover)
         );
-        // --_color-bg: var(--gds-sys-color-base200);
-        --_color-border: var(--gds-sys-color-base600);
+        --_color-border: var(--gds-color-l3-border-secondary);
       }
 
       &.selected {
@@ -84,8 +84,7 @@ const style = css`
           transparent,
           var(--gds-color-l3-states-light-hover)
         );
-        // --_color-bg: var(--gds-sys-color-base100);
-        --_color-border: var(--gds-sys-color-base700);
+        --_color-border: var(--gds-color-l3-border-primary);
       }
 
       slot:not([name]) {
@@ -117,13 +116,10 @@ const style = css`
     }
   }
 
-  @layer disabled {
-    :disabled {
-      --_color-bg: var(--gds-sys-color-container-container-disabled);
-      border-color: var(--_color-bg);
-      color: var(--gds-sys-color-content-content-disabled);
-      pointer-events: none;
-    }
+  :disabled {
+    border-color: var(--_color-bg);
+    color: var(--gds-color-l3-content-disabled);
+    pointer-events: none;
   }
 `
 export default style
