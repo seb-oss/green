@@ -16,7 +16,7 @@ import {
   TemplateRef,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { fromEvent, Subscription } from 'rxjs'
 
 import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'

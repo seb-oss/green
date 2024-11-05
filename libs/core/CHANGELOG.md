@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.52.0
+
+### Minor Changes
+
+- f58733a: **Menu Button:** Use new leveled colors for light and dark mode, impove focus style and update stories
+
 ## 1.51.0
 
 ### Minor Changes

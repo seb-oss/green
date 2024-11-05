@@ -9,7 +9,7 @@ import {
   TranslocoMissingHandlerData,
   TranslocoModule,
   TranslocoTranspiler,
-} from '@ngneat/transloco'
+} from '@jsverse/transloco';
 import { delay, lastValueFrom, of } from 'rxjs'
 
 import defaultLang from './i18n.json'
@@ -25,12 +25,13 @@ export class NgvMissingHandler implements TranslocoMissingHandler {
       /^((?:\w+)(?<!label|heading|button|alt|link|title|href|fieldhelp|error|text|image|list)(?:\.))/,
       '',
     )
-    const transpiledKey = this.transpiler.transpile(
-      defaultLang[keyWithoutLocale as keyof typeof defaultLang],
+    const transpileParams = {
+      value: defaultLang[keyWithoutLocale as keyof typeof defaultLang],
       params,
-      {},
-      keyWithoutLocale,
-    )
+      translation: {},
+      key: keyWithoutLocale,
+    };
+    const transpiledKey = this.transpiler.transpile(transpileParams);
     return transpiledKey || withoutScope
   }
 }
