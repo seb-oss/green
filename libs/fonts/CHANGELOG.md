@@ -17,3 +17,5 @@
 ### Major Changes
 
 - 04316c7: **SEB SansSerif GDS:** A new version of SEB's typeface has been added as seperate font files: **SEB SansSerif GDS**. It addresses a line-height issue, improved kerning and an added font-weight: Book.
+- **BREAKING CHANGE:** The folder structure in the package has changed in this release. Before, the files where in `@sebgroup/fonts/fonts/*`, now they are in `@sebgroup/fonts/fonts/SEBSansSerif/*`, and the new font is in
+`@sebgroup/fonts/fonts/SEBSansSerifGDS/*`

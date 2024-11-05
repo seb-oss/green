@@ -131,6 +131,16 @@ export class GdsFlex extends GdsContainer {
   })
   'flex-direction'?: string
 
+  /**
+   * Controls the flex-wrap property of the flex.
+   * Supports all valid CSS flex-wrap values.
+   */
+  @styleExpressionProperty({
+    property: 'flex-wrap',
+    valueTemplate: (v) => v,
+  })
+  'flex-wrap'?: string
+
   connectedCallback(): void {
     super.connectedCallback()
     this.display = 'flex'
