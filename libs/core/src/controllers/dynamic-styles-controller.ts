@@ -6,6 +6,7 @@ export class DynamicStylesController implements ReactiveController {
   host: GdsElement
   #useLegacyStylesheets = !supportsConstructedStylesheets()
   #initialStyleSheets: CSSStyleSheet[] = []
+  #initialStyleSheetsCopy: CSSStyleSheet[] = []
   #styleSheets = new Map<string, CSSStyleSheet>()
   #legacyStyleSheets = new Map<string, HTMLStyleElement>()
 
@@ -19,6 +20,7 @@ export class DynamicStylesController implements ReactiveController {
       this.#initialStyleSheets = [
         ...(this.host.shadowRoot.adoptedStyleSheets || []),
       ]
+      this.#initialStyleSheetsCopy = [...this.#initialStyleSheets]
     }
   }
 
@@ -89,6 +91,42 @@ export class DynamicStylesController implements ReactiveController {
         this.host.shadowRoot.adoptedStyleSheets = []
         this.#styleSheets.clear()
         this.#initialStyleSheets = []
+      }
+    }
+  }
+
+  /**
+   * Clears the initial styles of the component, but keeps any injected styles.
+   */
+  clearInitial() {
+    if (this.#useLegacyStylesheets) {
+      this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
+      this.#legacyStyleSheets.clear()
+    } else {
+      if (this.host.shadowRoot) {
+        this.#initialStyleSheets = []
+        this.host.shadowRoot.adoptedStyleSheets = [
+          ...Array.from(this.#styleSheets.values()),
+        ]
+      }
+    }
+  }
+
+  /**
+   * Restores the initial styles of the component, and keeps any injected styles.
+   */
+  restoreInitial() {
+    if (this.#useLegacyStylesheets) {
+      this.#legacyStyleSheets.forEach((styleEl, key) => {
+        this.#applyStylesLegacy(key, styleEl.textContent || '')
+      })
+    } else {
+      if (this.host.shadowRoot) {
+        this.#initialStyleSheets = [...this.#initialStyleSheetsCopy]
+        this.host.shadowRoot.adoptedStyleSheets = [
+          ...this.#initialStyleSheets,
+          ...Array.from(this.#styleSheets.values()),
+        ]
       }
     }
   }
