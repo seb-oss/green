@@ -1,3 +1,4 @@
+@layer base {
 :host {
   background-color: var(--gds-sys-color-container-container-dim1);
   border: 0.25rem solid var(--gds-sys-color-container-container-dim1);
@@ -102,4 +103,5 @@
     transform 0.2s,
     width 0.2s;
   z-index: 0;
+}
 }
