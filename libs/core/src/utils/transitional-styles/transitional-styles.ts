@@ -85,10 +85,13 @@ export class TransitionalStyles {
     // to the element.
 
     // Find the closest `gds-theme` parent, if present
+    const gdsThemeSelector = '[gds-element=gds-theme]'
     let currentRoot = element.getRootNode()
-    let closestGdsTheme = element.closest('[gds-element=gds-theme]')
+    let closestGdsTheme = element.closest(gdsThemeSelector)
     while (closestGdsTheme === null && currentRoot !== document) {
-      closestGdsTheme = (currentRoot as ShadowRoot).host.closest('gds-theme')
+      closestGdsTheme = (currentRoot as ShadowRoot).host.closest(
+        gdsThemeSelector,
+      )
       currentRoot = (currentRoot as ShadowRoot).host.getRootNode()
     }
 
