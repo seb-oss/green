@@ -8,7 +8,7 @@ import {
   Optional,
   SkipSelf,
 } from '@angular/core'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { fromEvent, Subject, takeUntil } from 'rxjs'
 
 import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
