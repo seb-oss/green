@@ -1,7 +1,7 @@
 import { css } from 'lit'
 
 const style = css`
-  @layer tokens, a11y, core, disabled, variants, sizes, sets;
+  @layer tokens, core, a11y, disabled, variants, sizes, sets;
 
   @layer tokens {
     :host {
@@ -59,6 +59,8 @@ const style = css`
       font-size: var(--_font-size);
       font-weight: var(--_font-weight);
       line-height: var(--_line-height);
+      transition-property: color, border-color;
+      transition: all 0.4s;
 
       &:focus-visible {
         outline-color: currentColor;
@@ -120,6 +122,14 @@ const style = css`
     border-color: var(--_color-bg);
     color: var(--gds-color-l3-content-disabled);
     pointer-events: none;
+  }
+
+  @layer a11y {
+    @media (prefers-reduced-motion: reduce) {
+      .button {
+        transition: none;
+      }
+    }
   }
 `
 export default style
