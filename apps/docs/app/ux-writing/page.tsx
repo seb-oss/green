@@ -48,6 +48,7 @@ export default function Writing() {
       <Hero
         heading="UX writing and our guidelines"
         preamble="Regardless of where, when or how the customer meets us, the experience of SEB must be the same because each meeting contributes to how we are perceived. A positive customer experience opens the door to new business. This is particularly important in texts aimed at customers. Mistakes affect the reader's concentration on the content and understanding of the text. Because our texts are correct, our credibility with customers and other visitors (=potential customers) increases."
+        compact
       />
       <GdsFlex gap="8xl">
         <GdsFlex flex-direction="column" gap="4xl">
