@@ -23,6 +23,17 @@ export class DynamicStylesController implements ReactiveController {
   }
 
   /**
+   * Checks if the controller has a particular key.
+   *
+   * @param key - The style key to check.
+   */
+  has(key: string) {
+    return this.#useLegacyStylesheets
+      ? this.#legacyStyleSheets.has(key)
+      : this.#styleSheets.has(key)
+  }
+
+  /**
    * Injects CSS into the host element's shadow root. The key is used to
    * identify the styles and can be used to update the styles later. If
    * you need to clear style for a particular key, you can call `inject`
