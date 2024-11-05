@@ -1,36 +1,28 @@
-// libs/utils/consentScript.ts
+'use client'
 
-export const loadConsentScript = () => {
-  const callCC = () => {
-    let cc
-    try {
-      cc = (window as any).initCookieConsent()
-    } catch (error) {
-      console.error(error)
-    }
-    if (cc) {
-      cc.run({})
-    }
-  }
+import { useEffect } from 'react'
 
-  if (
-    location.hostname === 'seb.io' &&
-    document.cookie
-      .split('; ')
-      .find((row) => row.startsWith('GDS Cookie Consent'))
-  ) {
-    const script = document.createElement('script')
-    script.src =
-      'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
-    script.type = 'application/javascript'
-    document.head.appendChild(script)
+import 'vanilla-cookieconsent'
 
-    const timer = setTimeout(() => {
-      callCC()
-    }, 1000)
+import pluginConfig from './config'
 
-    return () => {
-      clearTimeout(timer)
-    }
+import './consent.css'
+
+declare global {
+  interface Window {
+    CookieConsentApi: any
   }
 }
+
+const Consent = () => {
+  useEffect(() => {
+    if (!document.getElementById('cc--main')) {
+      window.CookieConsentApi = window.initCookieConsent()
+      window.CookieConsentApi.run(pluginConfig)
+    }
+  }, [])
+
+  return null
+}
+
+export default Consent
