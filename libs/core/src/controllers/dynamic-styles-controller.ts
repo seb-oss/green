@@ -5,10 +5,13 @@ import { GdsElement } from '../gds-element'
 export class DynamicStylesController implements ReactiveController {
   host: GdsElement
   #useLegacyStylesheets = !supportsConstructedStylesheets()
+  #initialized = false
   #initialStyleSheets: CSSStyleSheet[] = []
   #initialStyleSheetsCopy: CSSStyleSheet[] = []
   #styleSheets = new Map<string, CSSStyleSheet>()
   #legacyStyleSheets = new Map<string, HTMLStyleElement>()
+  #initialLegacyStyleSheets: HTMLStyleElement[] = []
+  #initialLegacyStyleSheetsCopy: HTMLStyleElement[] = []
 
   constructor(host: GdsElement) {
     this.host = host
@@ -16,12 +19,7 @@ export class DynamicStylesController implements ReactiveController {
   }
 
   hostConnected() {
-    if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
-      this.#initialStyleSheets = [
-        ...(this.host.shadowRoot.adoptedStyleSheets || []),
-      ]
-      this.#initialStyleSheetsCopy = [...this.#initialStyleSheets]
-    }
+    this.#init()
   }
 
   /**
@@ -42,17 +40,11 @@ export class DynamicStylesController implements ReactiveController {
    * with an empty string as the `styles` parameter.
    *
    * @param key - A unique key to identify the styles.
-   * @param styles - The CSSResult to inject.
+   * @param cssResult - The CSSResult to inject.
    */
-  inject(key: string, styles: CSSResult) {
-    if (this.#useLegacyStylesheets) {
-      const cssText = Array.isArray(styles)
-        ? styles.map((style) => style.toString()).join('')
-        : styles.toString()
-      this.#applyStylesLegacy(key, cssText)
-    } else {
-      styles.styleSheet && this.#applyStyles(key, styles.styleSheet)
-    }
+  inject(key: string, cssResult: CSSResult) {
+    this.#addStyles(key, cssResult)
+    this.#commit()
   }
 
   /**
@@ -67,13 +59,8 @@ export class DynamicStylesController implements ReactiveController {
       this.#legacyStyleSheets.delete(key)
     } else {
       this.#styleSheets.delete(key)
-      if (this.host.shadowRoot) {
-        this.host.shadowRoot.adoptedStyleSheets = [
-          ...this.#initialStyleSheets,
-          ...Array.from(this.#styleSheets.values()),
-        ]
-      }
     }
+    this.#commit()
   }
 
   /**
@@ -82,10 +69,9 @@ export class DynamicStylesController implements ReactiveController {
   clearAll() {
     if (this.#useLegacyStylesheets) {
       this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.host.shadowRoot
-        ?.querySelectorAll('style')
-        .forEach((style) => (style.innerHTML = ''))
+      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
       this.#legacyStyleSheets.clear()
+      this.#initialLegacyStyleSheets = []
     } else {
       if (this.host.shadowRoot) {
         this.host.shadowRoot.adoptedStyleSheets = []
@@ -100,16 +86,12 @@ export class DynamicStylesController implements ReactiveController {
    */
   clearInitial() {
     if (this.#useLegacyStylesheets) {
-      this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.#legacyStyleSheets.clear()
+      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
+      this.#initialLegacyStyleSheets = []
     } else {
-      if (this.host.shadowRoot) {
-        this.#initialStyleSheets = []
-        this.host.shadowRoot.adoptedStyleSheets = [
-          ...Array.from(this.#styleSheets.values()),
-        ]
-      }
+      this.#initialStyleSheets = []
     }
+    this.#commit()
   }
 
   /**
@@ -117,41 +99,68 @@ export class DynamicStylesController implements ReactiveController {
    */
   restoreInitial() {
     if (this.#useLegacyStylesheets) {
-      this.#legacyStyleSheets.forEach((styleEl, key) => {
-        this.#applyStylesLegacy(key, styleEl.textContent || '')
+      this.#initialLegacyStyleSheetsCopy.forEach((styleEl) => {
+        this.#initialLegacyStyleSheets.push(
+          styleEl.cloneNode(true) as HTMLStyleElement,
+        )
       })
     } else {
-      if (this.host.shadowRoot) {
-        this.#initialStyleSheets = [...this.#initialStyleSheetsCopy]
-        this.host.shadowRoot.adoptedStyleSheets = [
-          ...this.#initialStyleSheets,
-          ...Array.from(this.#styleSheets.values()),
+      this.#initialStyleSheets = [...this.#initialStyleSheetsCopy]
+    }
+    this.#commit()
+  }
+
+  #addStyles(key: string, cssResult: CSSResult) {
+    if (this.#useLegacyStylesheets) {
+      let styleEl = this.#legacyStyleSheets.get(key)
+      if (!styleEl) {
+        styleEl = document.createElement('style')
+        this.#legacyStyleSheets.set(key, styleEl)
+      }
+      styleEl.textContent = cssResult.cssText
+    } else {
+      if (!this.host.shadowRoot || !cssResult.styleSheet) return
+      this.#styleSheets.set(key, cssResult.styleSheet)
+    }
+  }
+
+  #commit() {
+    if (this.#useLegacyStylesheets) {
+      if (!this.host.shadowRoot) return
+      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+        style.remove()
+      })
+      this.#legacyStyleSheets.forEach((styleEl) => {
+        this.host.shadowRoot?.appendChild(styleEl)
+      })
+    } else {
+      if (!this.host.shadowRoot) return
+      this.host.shadowRoot.adoptedStyleSheets = [
+        ...this.#initialStyleSheets,
+        ...Array.from(this.#styleSheets.values()),
+      ]
+    }
+  }
+
+  #init() {
+    if (this.#initialized) return
+    if (this.#useLegacyStylesheets) {
+      if (!this.host.shadowRoot) return
+      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+        this.#initialLegacyStyleSheets.push(style)
+        this.#initialLegacyStyleSheetsCopy.push(
+          style.cloneNode(true) as HTMLStyleElement,
+        )
+      })
+    } else {
+      if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
+        this.#initialStyleSheets = [
+          ...(this.host.shadowRoot.adoptedStyleSheets || []),
         ]
+        this.#initialStyleSheetsCopy = [...this.#initialStyleSheets]
       }
     }
-  }
-
-  #applyStylesLegacy(key: string, cssText: string) {
-    let styleEl = this.#legacyStyleSheets.get(key)
-
-    if (!styleEl) {
-      styleEl = document.createElement('style')
-      this.#legacyStyleSheets.set(key, styleEl)
-    }
-
-    styleEl.textContent = cssText
-    this.host.shadowRoot?.appendChild(styleEl)
-  }
-
-  #applyStyles(key: string, styleSheet: CSSStyleSheet) {
-    if (!this.host.shadowRoot) return
-
-    this.#styleSheets.set(key, styleSheet)
-
-    this.host.shadowRoot.adoptedStyleSheets = [
-      ...this.#initialStyleSheets,
-      ...Array.from(this.#styleSheets.values()),
-    ]
+    this.#initialized = true
   }
 }
 
