@@ -28,12 +28,15 @@ export const styles = css`
 
   p {
     margin-bottom: 1lh;
+    max-width: 80ch;
   }
 
   blockquote {
     margin: unset;
+    margin-block: 2lh;
     border-left: 0.2rem solid currentColor;
-    padding-left: 1ch;
+    padding-left: 2ch;
+    max-width: 40ch;
   }
 
   s {
@@ -78,6 +81,7 @@ export const styles = css`
   }
   figcaption {
     font-size: smaller;
+    margin-block-start: 0.4lh;
   }
 
   /*
@@ -85,17 +89,28 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
+    border: var(--default-border);
+    border-radius: var(--gds-space-s);
   }
   th {
     font-weight: var(--gds-text-weight-book);
     text-align: left;
     border-bottom: var(--default-border);
+    border-left: transparent;
+    border-right: transparent;
+    color: var(--gds-color-l3-content-secondary);
   }
+
+  th:not(:last-child) {
+    border-right: var(--default-border);
+  }
+
   th,
   td {
-    padding: 0.3lh 0.6ch;
+    padding: 0.3lh 2ch;
   }
   td:not(:last-child) {
     border-right: var(--default-border);
