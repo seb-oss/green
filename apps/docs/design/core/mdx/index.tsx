@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import Spacer from '@/spacer/spacer'
-import { GdsDivider, GdsFlex, GdsRichText, GdsText } from '$/import/components'
+import { GdsDivider, GdsFlex, GdsRichText } from '$/import/components'
 
 // Local components
 import Do from './do'
@@ -25,7 +24,7 @@ const components = {
   Dont,
   SE,
   Pattern,
-  Spacer,
+  Spacer: (props: object) => <GdsDivider {...props} />,
   Grid,
   Story,
   // PP: ({ children, ...props }: { children: React.ReactNode }) => {
