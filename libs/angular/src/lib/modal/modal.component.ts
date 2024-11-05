@@ -91,7 +91,7 @@ import { NggModalHeaderDirective } from './modal-header.directive'
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
   @Input() public header?: string
-  @Input() public closeText?: string
+  @Input() public closeText: string = "Close Modal"
   @Input() public confirmLabel?: string
   @Input() public dismissLabel?: string
   @Input() public size?: Size
