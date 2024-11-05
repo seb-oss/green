@@ -4,6 +4,9 @@ global.CSSStyleSheet.prototype.replaceSync = (k) => false
 global.HTMLElement.prototype.attachInternals = () => {
   return new global.ElementInternals()
 }
+global.HTMLElement.prototype.closest = () => {
+  return null
+}
 
 global.ElementInternals = function () {}
 global.ElementInternals.prototype.setValidity = () => {}
