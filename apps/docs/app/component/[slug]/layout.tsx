@@ -120,9 +120,11 @@ export default function ComponentLayout({
                 <GdsText tag="p" text-wrap="balance">
                   {summary}
                 </GdsText>
-                <GdsBadge variant="notice" size="small">
-                  {status}
-                </GdsBadge>
+                {status && (
+                  <GdsBadge variant="notice" size="small">
+                    {status}
+                  </GdsBadge>
+                )}
               </GdsFlex>
             </GdsFlex>
             <GdsFlex
@@ -135,8 +137,9 @@ export default function ComponentLayout({
               height="420px"
               position="relative"
               overflow="hidden"
+              background="primary"
             >
-              <Pattern />
+              {/* <Pattern /> */}
               <Preview />
             </GdsFlex>
           </GdsFlex>
