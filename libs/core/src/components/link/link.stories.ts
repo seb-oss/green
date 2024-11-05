@@ -66,3 +66,15 @@ export const Trail: Story = {
       <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
     </gds-link>`,
 }
+
+/**
+ * A link component has a secondary variant that reverts the underline behavior.
+ */
+export const Variants: Story = {
+  ...DefaultParams,
+  render: () =>
+    html` <gds-link variant="secondary">
+      Link text
+      <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+    </gds-link>`,
+}
