@@ -88,7 +88,9 @@ export default function Foundation() {
       <GdsFlex gap="8xl">
         <GdsFlex gap="4xl" flex-direction="column">
           <GdsGrid columns="2">
-            <GdsText tag="h2">Our purpose</GdsText>
+            <GdsText tag="h2" id="our-purpose">
+              Our purpose
+            </GdsText>
             <GdsText font-size="body-l" color="secondary">
               Green Design System, a framework designed to bring unity,
               efficiency, and coherent perspective to our digital experiences.
@@ -97,7 +99,9 @@ export default function Foundation() {
             </GdsText>
           </GdsGrid>
           <GdsGrid columns="2">
-            <GdsText tag="h2">Tonality</GdsText>
+            <GdsText tag="h2" id="tonality">
+              Tonality
+            </GdsText>
             <GdsText font-size="body-l" color="secondary">
               Our tonality is a voice that speaks to the user, we do not scream,
               but when needed we raise our voice to be heard. The balance in
@@ -113,7 +117,9 @@ export default function Foundation() {
             aspect-ratio="16 / 9"
           />
           <GdsGrid columns="2">
-            <GdsText tag="h2">Visual style</GdsText>
+            <GdsText tag="h2" id="visual-style">
+              Visual style
+            </GdsText>
             <GdsFlex flex-direction="column" gap="xl">
               <GdsText font-size="body-l" color="secondary">
                 This design language is a direct descendant and part of the
@@ -191,7 +197,9 @@ export default function Foundation() {
             aspect-ratio="16 / 9"
           />
           <GdsGrid columns="2">
-            <GdsText tag="h2">Features</GdsText>
+            <GdsText tag="h2" id="features">
+              Features
+            </GdsText>
             <GdsFlex flex-direction="column" gap="xl">
               <GdsText font-size="body-l" color="secondary">
                 The Green Design System ensures a unified visual experience.

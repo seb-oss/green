@@ -53,7 +53,7 @@ export default function Writing() {
       <GdsFlex gap="8xl">
         <GdsFlex flex-direction="column" gap="4xl">
           <GdsRichText font-size="body-l" color="secondary">
-            <h2>Written ID – our tone of voice</h2>
+            <h2 id="written-id">Written ID – our tone of voice</h2>
             {`SEB's Written ID is our guiding light, and it forms the basis for
               all our communication, including UX writing. Our communication
               must show that we live and operate according to our language keys:`}
@@ -85,7 +85,7 @@ export default function Writing() {
             </p>
           </GdsRichText>
           <GdsRichText>
-            <h2>UX writing in SEB</h2>
+            <h2 id="what-is-ux-writing">UX writing in SEB</h2>
             <h3>
               What is UX writing and how will good UX texts help our customers?
             </h3>
@@ -115,7 +115,7 @@ export default function Writing() {
               without unnecessary thresholds.
             </p>
 
-            <h3>UX writing in SEB is:</h3>
+            <h3 id="ux-writing-in-seb-is">UX writing in SEB is:</h3>
             <ul>
               <li>
                 Consistent – we strive to use the same word for the same item,
@@ -128,7 +128,7 @@ export default function Writing() {
               <li>Helpful – we prevent mistakes and setbacks.</li>
             </ul>
 
-            <h3>Few examples of UX texts:</h3>
+            <h3 id="a-few-examples">Few examples of UX texts:</h3>
             <ul>
               <li>Labels and headings</li>
               <li>Menus</li>
@@ -142,7 +142,7 @@ export default function Writing() {
               <li>Disclaimer texts </li>
             </ul>
 
-            <h3>Translate texts from Swedish to English</h3>
+            <h3 id="translate-text">Translate texts from Swedish to English</h3>
 
             <p>
               If you need to translate Swedish texts into English, the bank has

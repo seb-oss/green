@@ -1,17 +1,10 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import {
-  GdsBadge,
-  GdsButton,
-  GdsFlex,
-  GdsLink,
-  GdsText,
-} from '$/import/components'
+import { GdsBadge, GdsButton, GdsFlex, GdsLink } from '$/import/components'
 import {
   IconCainLink,
   IconChevronBottom,
@@ -72,7 +65,7 @@ const menu = [
   },
   {
     title: 'About',
-    path: '/foundation',
+    path: '/about',
     subLinks: [
       {
         title: 'Changelog',
