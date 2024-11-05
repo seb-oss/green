@@ -12,7 +12,7 @@ import { By } from '@angular/platform-browser'
 // import chalk from 'chalk'
 //import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 
-import { TranslocoTestingModule } from '@ngneat/transloco'
+import { TranslocoTestingModule } from '@jsverse/transloco'
 
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import en from '../i18n/i18n.json'

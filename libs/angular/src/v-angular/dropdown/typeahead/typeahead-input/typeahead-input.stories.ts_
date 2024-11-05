@@ -9,7 +9,7 @@ import { delay, distinctUntilChanged, lastValueFrom, of } from 'rxjs';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faInfoCircle } from '@fortawesome/pro-regular-svg-icons';
-import { TranslocoLoader, TranslocoService } from '@ngneat/transloco';
+import { TranslocoLoader, TranslocoService } from '@jsverse/transloco';
 import { NgvI18nModule } from '@sebgroup/nggv-i18n';
 import { NgvInputMaskModule } from '@sebgroup/nggv-input-mask';
 import { TooltipDirective } from '@sebgroup/nggv-tooltip';
