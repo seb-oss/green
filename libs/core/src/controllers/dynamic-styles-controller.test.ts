@@ -62,4 +62,26 @@ describe('DynamicStylesController', () => {
     const styleElement = element.shadowRoot?.querySelector('style')
     expect(styleElement).to.not.exist
   })
+
+  it('clears styles for a specific key', () => {
+    const styles = css`
+      div {
+        color: red;
+      }
+    `
+    controller.inject('test', styles)
+    controller.clear('test')
+    const styleElement = element.shadowRoot?.querySelector('style')
+    expect(styleElement).to.not.exist
+  })
+
+  it('returns true if a key exists', () => {
+    const styles = css`
+      div {
+        color: red;
+      }
+    `
+    controller.inject('test', styles)
+    expect(controller.has('test')).to.be.true
+  })
 })
