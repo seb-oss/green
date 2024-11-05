@@ -73,15 +73,10 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem('theme') as
-        | 'light'
-        | 'dark'
-        | 'auto'
-      const initialTheme =
-        storedTheme ||
-        (window.matchMedia('(prefers-color-scheme: light)').matches
-          ? 'light'
-          : 'dark')
+      const initialTheme = window.matchMedia('(prefers-color-scheme: light)')
+        .matches
+        ? 'light'
+        : 'dark'
       setTheme(initialTheme)
       document.documentElement.setAttribute('gds-theme', initialTheme)
 
@@ -89,7 +84,6 @@ export function Provider({ children }: { children: React.ReactNode }) {
         const newTheme = event.matches ? 'light' : 'dark'
         setTheme(newTheme)
         document.documentElement.setAttribute('gds-theme', newTheme)
-        localStorage.setItem('theme', newTheme)
       }
 
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
@@ -103,7 +97,6 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.setAttribute('gds-theme', theme)
-    localStorage.setItem('theme', theme)
   }, [theme])
 
   const value = {

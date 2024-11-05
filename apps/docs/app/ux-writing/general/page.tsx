@@ -1,9 +1,17 @@
-import Layout from '&/status'
+'use client'
+
+import { GdsFlex, GdsGrid } from '$/import/components'
+import Hero from 'core/hero'
 
 export default function Status() {
   return (
-    <Layout>
-      <h1>UX writing Universal</h1>
-    </Layout>
+    <GdsFlex flex-direction="column" gap="6xl">
+      <Hero heading="UX writing Universal" preamble="" />
+      <GdsFlex gap="8xl">
+        <GdsFlex gap="4xl" flex-direction="column">
+          <GdsGrid columns="2"></GdsGrid>
+        </GdsFlex>
+      </GdsFlex>
+    </GdsFlex>
   )
 }

@@ -124,36 +124,6 @@ export default function ComponentLayout({
                   {status}
                 </GdsBadge>
               </GdsFlex>
-              {/*
-              <GdsFlex
-                align-items="flex-start"
-                gap="s"
-                border-radius="s"
-                padding="m"
-                level="1"
-                background="secondary"
-                border="4xs/primary"
-                flex-direction="column"
-                width="40ch"
-              >
-                <GdsFlex flex-direction="column">
-                  <GdsText tag="small">Status</GdsText>
-                  <GdsBadge variant="notice" size="small">
-                    {status}
-                  </GdsBadge>
-                </GdsFlex>
-             <GdsFlex flex-direction="column">
-                  <GdsText tag="small">Tags</GdsText>
-                  <GdsFlex>
-                    {tagsArray.map((tag, index) => (
-                      <Link key={index} href={`#${tag}`}>
-                        {tag}
-                      </Link>
-                    ))}
-                  </GdsFlex>
-                </GdsFlex>
-              </GdsFlex>
-                 */}
             </GdsFlex>
             <GdsFlex
               border="4xs/primary"
