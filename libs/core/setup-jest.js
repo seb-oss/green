@@ -8,8 +8,8 @@ global.HTMLElement.prototype.attachInternals = () => {
 global.ElementInternals = function () {}
 global.ElementInternals.prototype.setValidity = () => {}
 global.ElementInternals.prototype.setFormValue = () => {}
-global.ElementInternals.prototype.validity = {
-  valid: true,
+global.ElementInternals.prototype.validity = () => {
+  valid: true
 }
 global.ElementInternals.prototype.checkValidity = () => {}
 global.ElementInternals.prototype.reportValidity = () => {}
