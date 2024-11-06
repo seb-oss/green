@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.53.0
+
+### Minor Changes
+
+- 277d0d4: **Core Tokens:** Enable light and dark mode tokens on root based on `gds-theme` attribute
+
 ## 1.52.0
 
 ### Minor Changes
