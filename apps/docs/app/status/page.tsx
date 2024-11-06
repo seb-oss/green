@@ -1,12 +1,12 @@
 'use client'
 
-import Link from 'next/link'
 import { allComponents } from 'content'
 import {
   GdsBadge,
   GdsDivider,
   GdsFlex,
   GdsGrid,
+  GdsLink,
   GdsText,
 } from '$/import/components'
 import { format, parseISO } from 'date-fns'
@@ -24,12 +24,18 @@ export default function Status() {
         .filter((component) => component._raw.sourceFileName === 'index.mdx')
         .map((component, index) => (
           <GdsGrid columns="3" gap="xl" key={`key-${index}`}>
-            <GdsFlex>
-              <Link href={component.url_path} title="Component">
-                {component.title}
-              </Link>
-            </GdsFlex>
-            <GdsBadge variant="notice">{component.status}</GdsBadge>
+            <GdsLink
+              href={component.url_path}
+              title="Component"
+              variant="secondary"
+            >
+              {component.title}
+            </GdsLink>
+            {component.status ? (
+              <GdsBadge variant="notice">{component.status}</GdsBadge>
+            ) : (
+              <div></div>
+            )}
             <GdsText font-size="body-s" color="secondary">
               <time dateTime={component.date}>
                 {component.date &&

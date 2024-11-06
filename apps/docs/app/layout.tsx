@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import Script from 'next/script'
 import Main from '&/main'
 import Consent from '$/consent/consent'
+import useCookieConsent from '$/consent/useCookieConsent'
 import Fonts from '$/fonts/fonts'
 import { GdsFlex } from '$/import/components'
 import { Provider } from '$/provider/provider'
@@ -18,38 +19,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  useCookieConsent()
+
   useEffect(() => {
-    const callCC = () => {
-      let cc
-      try {
-        cc = (window as any).initCookieConsent()
-      } catch (error) {
-        console.error(error)
-      }
-      if (cc) {
-        cc.run({})
-      }
-    }
-
-    if (
-      location.hostname === 'seb.io' &&
-      document.cookie
-        .split('; ')
-        .find((row) => row.startsWith('GDS Cookie Consent'))
-    ) {
-      const script = document.createElement('script')
-      script.src =
-        'https://content.seb.se/dsc/da/launch/public/30e54a9d6c99/f9d07ef22744/launch-89d260357525.min.js'
-      script.type = 'application/javascript'
-      document.head.appendChild(script)
-
-      const timer = setTimeout(() => {
-        callCC()
-      }, 1000)
-
-      return () => {
-        clearTimeout(timer)
-      }
+    const storedTheme = localStorage.getItem('theme')
+    if (storedTheme) {
+      document.documentElement.setAttribute('gds-theme', storedTheme)
     }
   }, [])
 

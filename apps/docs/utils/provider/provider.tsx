@@ -11,6 +11,7 @@ interface ContextProps {
   isNavOpen: boolean
   toggleNav: () => void
   toggleCmd: () => void
+  toggleTheme: () => void
 }
 
 export const Context = createContext<ContextProps>({
@@ -25,6 +26,9 @@ export const Context = createContext<ContextProps>({
   },
   toggleCmd: () => {
     console.warn('toggleCmd function is not implemented')
+  },
+  toggleTheme: () => {
+    console.warn('toggleTheme function is not implemented')
   },
 })
 
@@ -43,6 +47,15 @@ export function Provider({ children }: { children: React.ReactNode }) {
 
   const toggleCmd = () => {
     setIsOpen((prevOpen) => !prevOpen)
+  }
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', newTheme)
+      document.documentElement.setAttribute('gds-theme', newTheme)
+      return newTheme
+    })
   }
 
   useEffect(() => {
@@ -71,45 +84,6 @@ export function Provider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedTheme = localStorage.getItem('theme') as
-        | 'light'
-        | 'dark'
-        | 'auto'
-      if (storedTheme) {
-        setTheme(storedTheme)
-        document.documentElement.setAttribute('gds-theme', storedTheme)
-      } else {
-        const initialTheme = window.matchMedia('(prefers-color-scheme: light)')
-          .matches
-          ? 'light'
-          : 'dark'
-        setTheme(initialTheme)
-        document.documentElement.setAttribute('gds-theme', initialTheme)
-      }
-
-      const handleThemeChange = (event: MediaQueryListEvent) => {
-        const newTheme = event.matches ? 'light' : 'dark'
-        setTheme(newTheme)
-        document.documentElement.setAttribute('gds-theme', newTheme)
-        localStorage.setItem('theme', newTheme)
-      }
-
-      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      mediaQuery.addEventListener('change', handleThemeChange)
-
-      return () => {
-        mediaQuery.removeEventListener('change', handleThemeChange)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    document.documentElement.setAttribute('gds-theme', theme)
-    localStorage.setItem('theme', theme)
-  }, [theme])
-
   const value = {
     theme,
     setTheme,
@@ -117,6 +91,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
     isNavOpen,
     toggleNav,
     toggleCmd,
+    toggleTheme,
   }
 
   return (
