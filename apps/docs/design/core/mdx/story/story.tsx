@@ -36,10 +36,11 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
   return (
     <iframe
       ref={iframeRef}
+      key="story-iframe"
       src={`https://storybook.seb.io/latest/core/iframe.html?viewMode=story&id=components-${component}--${id}`}
       onLoad={handleLoad}
       height={height}
       className="story"
-    ></iframe>
+    />
   )
 }
