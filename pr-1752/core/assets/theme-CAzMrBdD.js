@@ -1,5 +1,0 @@
-import{i,r as n}from"./lit-element-C_s9q329.js";import{n as p,g as d,G as f,h as y}from"./custom-element-scoping-CpYtbs9r.js";import{c as m,a as C}from"./tokens.style-CkFfbDVg.js";import{T as _}from"./transitional-styles-Cc5JwJ9o.js";import{w as g}from"./watch-tFciLXSI.js";var u=Object.defineProperty,S=Object.getOwnPropertyDescriptor,a=(h,o,s,r)=>{for(var e=r>1?void 0:r?S(o,s):o,l=h.length-1,c;l>=0;l--)(c=h[l])&&(e=(r?c(o,s,e):c(e))||e);return r&&e&&u(o,s,e),e};let t=class extends f{constructor(){super(...arguments),this.colorScheme="light"}connectedCallback(){super.connectedCallback(),_.instance.apply(this,"gds-theme"),this._dynamicStylesController.inject("dark",n(`:host {${m}}`))}render(){return y`<slot></slot>`}_onColorSchemeChange(){this.colorScheme==="dark"?this._dynamicStylesController.inject("dark",n(`:host { ${m}}`)):this._dynamicStylesController.inject("light",n(`:host { ${C}}`))}};t.styles=i`
-    :host {
-      display: contents;
-    }
-  `;a([p({reflect:!0,attribute:"color-scheme"})],t.prototype,"colorScheme",2);a([g("colorScheme")],t.prototype,"_onColorSchemeChange",1);t=a([d("gds-theme")],t);
