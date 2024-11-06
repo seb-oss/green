@@ -1,7 +1,10 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
+import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 import { html } from '@sebgroup/green-core/scoping'
+
+const { setLocale, getLocale } = gdsInitLocalization()
 
 @customElement('gds-header')
 export class GdsHeader extends LitElement {
@@ -83,8 +86,8 @@ export class GdsHeader extends LitElement {
               Language
               <gds-icon-globus></gds-icon-globus>
             </gds-flex>
-            <gds-menu-item>EN</gds-menu-item>
-            <gds-menu-item>SV</gds-menu-item>
+            <gds-menu-item @click=${() => setLocale('en')}>EN</gds-menu-item>
+            <gds-menu-item @click=${() => setLocale('sv')}>SV</gds-menu-item>
           </gds-context-menu>
         </gds-flex>
       </gds-flex>
