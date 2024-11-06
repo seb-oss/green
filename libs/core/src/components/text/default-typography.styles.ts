@@ -5,6 +5,7 @@ export const defaultStyles = css`
     a:link {
       color: currentColor;
       text-undeline-offset: 0.2lh;
+      font-weight: var(--gds-text-weight-book);
     }
 
     h1 {
