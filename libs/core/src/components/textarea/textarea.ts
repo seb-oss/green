@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 import { when } from 'lit/directives/when.js'
@@ -31,6 +31,7 @@ import '../button'
  *       displayed in a panel when the user clicks the info button.
  */
 @gdsCustomElement('gds-textarea')
+@localized()
 export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 

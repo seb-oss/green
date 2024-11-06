@@ -1,31 +1,49 @@
-import Link from 'next/link'
+'use client'
+
 import { allComponents } from 'content'
-import Layout from '&/status'
+import {
+  GdsBadge,
+  GdsDivider,
+  GdsFlex,
+  GdsGrid,
+  GdsLink,
+  GdsText,
+} from '$/import/components'
 import { format, parseISO } from 'date-fns'
 
 export default function Status() {
   return (
-    <Layout>
-      <header>
-        <div>Component</div>
-        <div>Status</div>
-        <div>Last update</div>
-      </header>
-      <ul>
-        {allComponents
-          .filter(component => component._raw.sourceFileName === 'index.mdx')
-          .map((component, index) => (
-            <li key={`key-${index}`}>
-              <Link href={component.url_path} title="Component">
-                {component.title}
-              </Link>
-              <div title="Status">{component.status}</div>
+    <GdsFlex flex-direction="column" gap="xl" max-width="80ch">
+      <GdsGrid columns="3" gap="xl">
+        <GdsText tag="h4">Component</GdsText>
+        <GdsText tag="h4">Status</GdsText>
+        <GdsText tag="h4">Last update</GdsText>
+      </GdsGrid>
+      <GdsDivider opacity="0.2" />
+      {allComponents
+        .filter((component) => component._raw.sourceFileName === 'index.mdx')
+        .map((component, index) => (
+          <GdsGrid columns="3" gap="xl" key={`key-${index}`}>
+            <GdsLink
+              href={component.url_path}
+              title="Component"
+              variant="secondary"
+            >
+              {component.title}
+            </GdsLink>
+            {component.status ? (
+              <GdsBadge variant="notice">{component.status}</GdsBadge>
+            ) : (
+              <div></div>
+            )}
+            <GdsText font-size="body-s" color="secondary">
               <time dateTime={component.date}>
-                {component.date && format(parseISO(component.date), 'LLLL d, yyyy')}
+                {component.date &&
+                  format(parseISO(component.date), 'LLLL d, yyyy')}
               </time>
-            </li>
-          ))}
-      </ul>
-    </Layout>
+            </GdsText>
+          </GdsGrid>
+        ))}
+    </GdsFlex>
   )
 }

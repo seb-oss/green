@@ -1,26 +1,40 @@
 'use client'
 
 import React, { createContext, useEffect, useState } from 'react'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
-import { type ThemeProviderProps } from 'next-themes/dist/types'
+import { CMD } from 'core/cmd'
 import { Toaster } from 'sonner'
 
 interface ContextProps {
-  loading: boolean
+  theme: 'light' | 'dark' | 'auto'
+  setTheme: (theme: 'light' | 'dark' | 'auto') => void
+  isOpen: boolean
   isNavOpen: boolean
   toggleNav: () => void
+  toggleCmd: () => void
+  toggleTheme: () => void
 }
 
 export const Context = createContext<ContextProps>({
-  loading: true,
+  theme: 'light',
+  setTheme: () => {
+    console.warn('setTheme function is not implemented')
+  },
+  isOpen: false,
   isNavOpen: false,
   toggleNav: () => {
     console.warn('toggleNav function is not implemented')
   },
+  toggleCmd: () => {
+    console.warn('toggleCmd function is not implemented')
+  },
+  toggleTheme: () => {
+    console.warn('toggleTheme function is not implemented')
+  },
 })
 
-export function Provider({ children, ...props }: ThemeProviderProps) {
-  const [loading, setLoading] = useState(true)
+export function Provider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<'light' | 'dark' | 'auto'>('light')
+  const [isOpen, setIsOpen] = useState(false)
   const [isNavOpen, setNavOpen] = useState(false)
 
   const toggleNav = () => {
@@ -28,6 +42,19 @@ export function Provider({ children, ...props }: ThemeProviderProps) {
       const newNavOpen = !prevNavOpen
       localStorage.setItem('navOpen', newNavOpen ? 'true' : 'false')
       return newNavOpen
+    })
+  }
+
+  const toggleCmd = () => {
+    setIsOpen((prevOpen) => !prevOpen)
+  }
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === 'light' ? 'dark' : 'light'
+      localStorage.setItem('theme', newTheme)
+      document.documentElement.setAttribute('gds-theme', newTheme)
+      return newTheme
     })
   }
 
@@ -58,24 +85,27 @@ export function Provider({ children, ...props }: ThemeProviderProps) {
   }, [])
 
   const value = {
-    loading,
+    theme,
+    setTheme,
+    isOpen,
     isNavOpen,
     toggleNav,
+    toggleCmd,
+    toggleTheme,
   }
 
   return (
-    <NextThemesProvider {...props}>
-      <Context.Provider value={value}>
-        {children}
-        <Toaster
-          richColors
-          theme="light"
-          position="bottom-center"
-          expand={false}
-          closeButton={true}
-          duration={4428}
-        />
-      </Context.Provider>
-    </NextThemesProvider>
+    <Context.Provider value={value}>
+      {children}
+      <Toaster
+        richColors
+        theme="light"
+        position="bottom-center"
+        expand={false}
+        closeButton={true}
+        duration={4428}
+      />
+      <CMD isOpen={isOpen} toggleCmd={toggleCmd} />
+    </Context.Provider>
   )
 }

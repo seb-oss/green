@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
@@ -21,6 +21,7 @@ import '../../components/card'
  * @slot extended-supporting-text - The extended supporting text, or "Show more info" card, of the form control.
  */
 @gdsCustomElement('gds-form-control-header')
+@localized()
 export class GdsFormControlHeader extends GdsElement {
   static styles = [styles]
 

@@ -3,31 +3,11 @@
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import Taber from '@/taber'
-import TOC from '@/toc/toc'
-import Trail from '@/trail/trail'
+import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
+import Breadcrumb from 'core/breadcrumb'
+import Navigator from 'core/navigator'
+import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'
-
-const GdsBadge = dynamic(
-  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
-  {
-    ssr: false,
-  },
-)
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
 
 export default function ComponentLayout({
   children,
@@ -63,11 +43,11 @@ export default function ComponentLayout({
     { path: '/ux-text', component: componentUXText },
   ]
 
-  let tocComponent = <TOC headings={component?.headings} component={title} />
+  let TOC = <Navigator headings={component?.headings} component={title} />
 
   for (const { path, component } of pathsAndComponents) {
     if (pathName.includes(path)) {
-      tocComponent = <TOC headings={component?.headings} component={title} />
+      TOC = <Navigator headings={component?.headings} component={title} />
       break
     }
   }
@@ -98,28 +78,32 @@ export default function ComponentLayout({
     },
   ]
 
-  // const getDynamicComponent = (c: string) =>
-  //   dynamic(
-  //     () =>
-  //       import(`../../../design/example/${c}`).catch(() => {
-  //         const ExampleComponent = () => <div>Example</div>
-  //         ExampleComponent.displayName = 'ExampleComponent'
-  //         return ExampleComponent
-  //       }),
-  //     {
-  //       ssr: false,
-  //       loading: () => <p>Loading...</p>,
-  //     },
-  //   )
+  const getDynamicComponent = (c: string) =>
+    dynamic(
+      () =>
+        import(`../../../design/example/${c}`).catch(() => {
+          const ExampleComponent = () => <div>Example</div>
+          ExampleComponent.displayName = 'ExampleComponent'
+          return ExampleComponent
+        }),
+      {
+        ssr: false,
+        loading: () => <p>Loading...</p>,
+      },
+    )
 
-  // const Preview = getDynamicComponent(url_path.replace('/component/', ''))
+  const Preview = getDynamicComponent(url_path.replace('/component/', ''))
 
   return (
-    <>
-      <Trail
+    <GdsFlex
+      flex-direction="column"
+      max-width="max-content"
+      justify-content="center"
+      margin="0 auto"
+    >
+      <Breadcrumb
         home={'Home'}
-        separator={<span> / </span>}
-        activeClass="active"
+        separator={<GdsText font-size="body-s"> / </GdsText>}
         slug={slug}
       />
       <GdsFlex gap="4xl">
@@ -135,53 +119,23 @@ export default function ComponentLayout({
                 <GdsText tag="p" text-wrap="balance">
                   {summary}
                 </GdsText>
-                <GdsBadge variant="notice" size="small">
-                  {status}
-                </GdsBadge>
-              </GdsFlex>
-              {/*
-              <GdsFlex
-                align-items="flex-start"
-                gap="s"
-                border-radius="s"
-                padding="m"
-                level="1"
-                background="secondary"
-                border="4xs/primary"
-                flex-direction="column"
-                width="40ch"
-              >
-                <GdsFlex flex-direction="column">
-                  <GdsText tag="small">Status</GdsText>
+                {status && (
                   <GdsBadge variant="notice" size="small">
                     {status}
                   </GdsBadge>
-                </GdsFlex>
-             <GdsFlex flex-direction="column">
-                  <GdsText tag="small">Tags</GdsText>
-                  <GdsFlex>
-                    {tagsArray.map((tag, index) => (
-                      <Link key={index} href={`#${tag}`}>
-                        {tag}
-                      </Link>
-                    ))}
-                  </GdsFlex>
-                </GdsFlex>
+                )}
               </GdsFlex>
-                 */}
             </GdsFlex>
-            <GdsFlex
-              border="4xs/primary"
-              padding="2xl"
-              border-radius="m"
-              background="secondary"
-              gap="xl"
-              align-items="center"
-              justify-content="center"
-              height="420px"
-            >
-              {/* <Preview /> */}
-            </GdsFlex>
+            <GdsCard>
+              <GdsFlex
+                gap="xl"
+                align-items="center"
+                justify-content="center"
+                height="360px"
+              >
+                <Preview />
+              </GdsFlex>
+            </GdsCard>
           </GdsFlex>
           <Taber component={url_path} links={links} />
           <GdsFlex flex-direction="column" gap="xl">
@@ -194,8 +148,8 @@ export default function ComponentLayout({
             </time>
           </footer>
         </GdsFlex>
-        <GdsFlex>{tocComponent}</GdsFlex>
+        <GdsFlex>{TOC}</GdsFlex>
       </GdsFlex>
-    </>
+    </GdsFlex>
   )
 }
