@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.54.1
+
+### Patch Changes
+
+- 4e47020: **Testing:** Add additional `ElementInternals` mocks for Jest. Fixes #1679
+
 ## 1.54.0
 
 ### Minor Changes
