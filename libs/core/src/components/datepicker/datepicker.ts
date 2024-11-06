@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -54,6 +54,7 @@ type DateFormatLayout = {
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-datepicker')
+@localized()
 export class GdsDatepicker extends GdsFormControlElement<Date> {
   static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {

@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 
@@ -35,6 +35,7 @@ const debounce = (fn: () => void, delay: number) => {
  * @event changed - Fires when the selected segment is changed
  */
 @gdsCustomElement('gds-segmented-control')
+@localized()
 export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 

@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -37,6 +37,7 @@ import '../icon/icons/cross-small'
  * @slot trigger - Trigger element for the popover. If this slot is occupied, the popover will listen to keydown and click events on the trigger and automtaiclly open when clicked or when the trigger is focused and `ArrowDown` is pressed.
  */
 @gdsCustomElement('gds-popover')
+@localized()
 export class GdsPopover extends GdsElement {
   static styles = unsafeCSS(styles)
 
