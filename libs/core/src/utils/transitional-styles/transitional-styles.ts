@@ -90,10 +90,10 @@ export class TransitionalStyles {
     let currentRoot = element.getRootNode()
     let closestGdsTheme = element.closest(gdsThemeSelector)
     while (closestGdsTheme === null && currentRoot !== document) {
-      closestGdsTheme = (currentRoot as ShadowRoot).host.closest(
+      closestGdsTheme = (currentRoot as ShadowRoot).host?.closest(
         gdsThemeSelector,
       )
-      currentRoot = (currentRoot as ShadowRoot).host.getRootNode()
+      currentRoot = (currentRoot as ShadowRoot).host?.getRootNode()
     }
 
     // If we found a `gds-theme` parent, check if it's set to 2023 styles, in which case
