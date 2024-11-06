@@ -16,7 +16,7 @@ registerTransitionalStyles()
 
 export const globalTypes = {
   style: {
-    name: 'Change Style',
+    name: 'Change design version',
     defaultValue: '2023',
     toolbar: {
       icon: 'lightning',
@@ -55,35 +55,10 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
-      // Initialize previousStyle if it doesn't exist
-      if (typeof context.globals.previousStyle === 'undefined') {
-        context.globals.previousStyle = '2023' // Default to 2023
-      }
-
-      const designVersion = context.globals.style || '2023'
-
-      if (designVersion === '2016') {
-        if (context.globals.previousStyle !== '2016') {
-          registerTransitionalStyles()
-        }
-      } else {
-        if (context.globals.previousStyle === '2016') {
-          document.location.reload()
-        }
-      }
-
-      context.globals.previousStyle = designVersion
-
-      return html`<gds-theme .designVersion=${designVersion}
+      ;(window as any).gdsStyle = context.globals.style
+      return html`<gds-theme .designVersion=${context.globals.style}
         >${storyFn()}</gds-theme
       >`
     },
   ],
-}
-
-@customElement('transitional-styles-toggle')
-class TransitionalStylesToggle extends LitElement {
-  protected createRenderRoot() {
-    return this
-  }
 }
