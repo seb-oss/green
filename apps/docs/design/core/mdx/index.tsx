@@ -14,7 +14,7 @@ import SE from './lang/se'
 import Pattern from './pattern/pattern'
 import Prototype from './prototype'
 import Section from './section'
-import Story from './story/story'
+import Story from './story'
 
 const components = {
   Figma,
@@ -24,7 +24,7 @@ const components = {
   Dont,
   SE,
   Pattern,
-  Spacer: (props: object) => <GdsDivider {...props} />,
+  GdsDivider: (props: object) => <GdsDivider {...props} />,
   Grid,
   Story,
   // PP: ({ children, ...props }: { children: React.ReactNode }) => {
