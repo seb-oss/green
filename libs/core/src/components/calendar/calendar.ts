@@ -197,7 +197,6 @@ export class GdsCalendar extends GdsElement {
 
     this.addEventListener('keydown', this.#handleKeyDown)
     window.addEventListener('lit-localize-status', (e: CustomEvent) => {
-      console.log(e.detail)
       if (e.detail.status === 'ready')
         this._currentLocale = e.detail.readyLocale
     })
