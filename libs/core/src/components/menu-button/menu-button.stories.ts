@@ -7,6 +7,7 @@ import './menu-button'
 import '../popover/popover.js'
 import '../flex/flex.js'
 import '../card/card.js'
+import '../theme/theme.js'
 import '../icon/icons/magnifying-glass.js'
 import '../icon/icons/bell.js'
 import '../icon/icons/star.js'
@@ -75,8 +76,10 @@ export const Example_menu_bar: Story = {
   render: () =>
     html`<gds-card
       display="flex"
-      height="50px"
+      height="70px"
       width="700px"
+      padding="0"
+      border-radius="0"
       border="0 0 4xs/primary 0"
     >
       <div style="flex-basis:50%;">
@@ -116,32 +119,33 @@ export const Example_menu_bar: Story = {
 export const Compact_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-card
-        display="flex"
-        width="700px"
-        border="0 0 4xs/primary 0"
-        background="base-white"
-      >
-      <div style="flex-basis:50%;">
+    html`<gds-flex
+      width="700px"
+      background="primary"
+      border="0 0 3xs/secondary 0"
+      align-items="center"
+    >
+      <gds-flex flex="1">
         <gds-menu-button compact>
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
           Search
         </gds-menu-button>
-      </div>
-      <gds-flex style="flex-basis:50%;" justify-content="flex-end">
+      </gds-flex>
+      <gds-flex justify-content="flex-end">
         <gds-menu-button compact>
           <gds-icon-bell slot="trail"></gds-icon-bell>
           Notification
-        </gds-menu-button compact>
+        </gds-menu-button>
         <gds-popover>
-          <gds-menu-button compact slot="trigger">
+          <gds-menu-button slot="trigger" compact>
             <gds-icon-people slot="trail"></gds-icon-people>
             Profile
           </gds-menu-button>
           <div style="padding: 1rem;">Profile stuff</div>
         </gds-popover>
         <gds-menu-button
-        compact
+          compact
+          selected
           href="https://github.com/seb-oss/green"
           target="_blank"
         >
@@ -151,6 +155,97 @@ export const Compact_menu_bar: Story = {
           External link
         </gds-menu-button>
       </gds-flex>
-    </gds-card>
-    `,
+    </gds-flex>`,
+}
+
+/**
+ * Same as above, but using the compact style. This is mainly intended for use in a mobile viewport.
+ */
+export const Dark: Story = {
+  ...DefaultParams,
+  name: 'Dark Mode',
+  render: () => html`
+    <gds-flex flex-direction="column" gap="l">
+      <gds-theme color-scheme="dark">
+        <gds-flex
+          width="700px"
+          background="primary"
+          height="80px"
+          border="0 0 3xs/secondary 0"
+        >
+          <gds-flex flex="1">
+            <gds-menu-button>
+              <gds-icon-magnifying-glass
+                slot="lead"
+              ></gds-icon-magnifying-glass>
+              Search
+            </gds-menu-button>
+          </gds-flex>
+          <gds-flex>
+            <gds-menu-button>
+              <gds-icon-bell slot="trail"></gds-icon-bell>
+              Notification
+            </gds-menu-button>
+            <gds-popover>
+              <gds-menu-button slot="trigger">
+                <gds-icon-people slot="trail"></gds-icon-people>
+                Profile
+              </gds-menu-button>
+              <div style="padding: 1rem;">Profile stuff</div>
+            </gds-popover>
+            <gds-menu-button
+              selected
+              href="https://github.com/seb-oss/green"
+              target="_blank"
+            >
+              <gds-icon-square-arrow-top-right
+                slot="trail"
+              ></gds-icon-square-arrow-top-right>
+              External link
+            </gds-menu-button>
+          </gds-flex>
+        </gds-flex>
+      </gds-theme>
+      <gds-theme color-scheme="light">
+        <gds-flex
+          width="700px"
+          background="primary"
+          height="80px"
+          border="0 0 3xs/secondary 0"
+        >
+          <gds-flex flex="1">
+            <gds-menu-button>
+              <gds-icon-magnifying-glass
+                slot="lead"
+              ></gds-icon-magnifying-glass>
+              Search
+            </gds-menu-button>
+          </gds-flex>
+          <gds-flex style="flex-basis:50%;" justify-content="flex-end">
+            <gds-menu-button>
+              <gds-icon-bell slot="trail"></gds-icon-bell>
+              Notification
+            </gds-menu-button>
+            <gds-popover>
+              <gds-menu-button slot="trigger">
+                <gds-icon-people slot="trail"></gds-icon-people>
+                Profile
+              </gds-menu-button>
+              <div style="padding: 1rem;">Profile stuff</div>
+            </gds-popover>
+            <gds-menu-button
+              selected
+              href="https://github.com/seb-oss/green"
+              target="_blank"
+            >
+              <gds-icon-square-arrow-top-right
+                slot="trail"
+              ></gds-icon-square-arrow-top-right>
+              External link
+            </gds-menu-button>
+          </gds-flex>
+        </gds-flex>
+      </gds-theme>
+    </gds-flex>
+  `,
 }

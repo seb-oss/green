@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.53.0
+
+### Minor Changes
+
+- 277d0d4: **Core Tokens:** Enable light and dark mode tokens on root based on `gds-theme` attribute
+
+## 1.52.0
+
+### Minor Changes
+
+- f58733a: **Menu Button:** Use new leveled colors for light and dark mode, impove focus style and update stories
+
 ## 1.51.0
 
 ### Minor Changes
