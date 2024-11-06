@@ -31,35 +31,27 @@ const Breadcrumbs = ({ home, separator, activeClass, slug }: TrailTypes) => {
   const currentComponent = getCurrentComponent(`/${slug}`)
 
   return (
-    <GdsFlex gap="s" align-items="center" margin="0 0 2xl 0">
-      <GdsLink href={'/'}>
-        <GdsText font-size="body-s" text-decoration="underline">
-          {home}
-        </GdsText>
-      </GdsLink>
-      {separator}
-      <GdsLink href={'/components'}>
-        <GdsText font-size="body-s" text-decoration="underline">
-          Component
-        </GdsText>
-      </GdsLink>
-      {slug && (
-        <>
-          {separator}
-          <GdsLink href={'/component/' + slug}>
-            <GdsText font-size="body-s">{currentComponent?.title}</GdsText>
-          </GdsLink>
-        </>
-      )}
-      {lastPathComponent && (
-        <>
-          {separator}
-          <GdsLink href={'/'}>
-            <GdsText font-size="body-s">{lastPathComponent?.title}</GdsText>
-          </GdsLink>
-        </>
-      )}
-    </GdsFlex>
+    <GdsText font-size="detail-xs">
+      <GdsFlex gap="s" align-items="center" margin="0 0 2xl 0">
+        <GdsLink href={'/'}>{home}</GdsLink>
+        {separator}
+        <GdsLink href={'/components'}>Component</GdsLink>
+        {slug && (
+          <>
+            {separator}
+            <GdsLink href={'/component/' + slug}>
+              {currentComponent?.title}
+            </GdsLink>
+          </>
+        )}
+        {lastPathComponent && (
+          <>
+            {separator}
+            <GdsLink href={'/'}>{lastPathComponent?.title}</GdsLink>
+          </>
+        )}
+      </GdsFlex>
+    </GdsText>
   )
 }
 
