@@ -1,5 +1,63 @@
 # Changelog
 
+## 1.54.1
+
+### Patch Changes
+
+- 4e47020: **Testing:** Add additional `ElementInternals` mocks for Jest. Fixes #1679
+
+## 1.54.0
+
+### Minor Changes
+
+- 9b001a9: **Rich Text:** Add details/accordion styling, improve paragraphs and spacing on blockquote, figure etc
+
+### Patch Changes
+
+- 7d4d945: **Datepicker:** Use aria live for error message, and announce form-info and sub-label in `aria-describedby`. Fixes #1274
+- 7d4d945: **Calendar:** Date labels now follows active lit-localize locale. Fixes #1274
+- 7d4d945: **Localization:** All localized components should now re-render automatically when active locale is changed
+
+## 1.53.0
+
+### Minor Changes
+
+- 277d0d4: **Core Tokens:** Enable light and dark mode tokens on root based on `gds-theme` attribute
+
+## 1.52.0
+
+### Minor Changes
+
+- f58733a: **Menu Button:** Use new leveled colors for light and dark mode, impove focus style and update stories
+
+## 1.51.0
+
+### Minor Changes
+
+- 92187bd: **Flex:** Add the `flex-wrap` property
+
+## 1.50.0
+
+### Minor Changes
+
+- 23c8827: **Link:** Add secondary variant with reversed underline
+
+## 1.49.1
+
+### Patch Changes
+
+- cdaa840: **iOS15:** Fix library wide crash on iOS/Safari 15.x
+
+## 1.49.0
+
+### Minor Changes
+
+- fedbf7a: **Link:** Add new component `gds-link` with predefined styles V1
+
+### Patch Changes
+
+- 807b8c4: **Link:** Fix the link test
+
 ## 1.48.1
 
 ### Patch Changes

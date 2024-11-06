@@ -1,12 +1,13 @@
 @layer core {
   @layer layout.component {
     [data-rehype-pretty-code-fragment] {
-      margin-top: 1lh;
+      /* margin-top: 1lh; */
       pre {
         border-radius: 8px;
         padding: 1lh;
         overflow-x: scroll;
         border: 1px solid hsla(222, 11%, 24%, 1) !important;
+        margin: none;
       }
 
       pre:has([data-line-numbers]) {

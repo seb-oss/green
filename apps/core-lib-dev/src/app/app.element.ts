@@ -4,9 +4,8 @@ import { choose } from 'lit/directives/choose.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
-import { gdsInitLocalization } from '@sebgroup/green-core/localization'
 
-import '@sebgroup/green-core/components/content/text/index.js'
+import '@sebgroup/green-core/components/text/index.js'
 import '@sebgroup/green-core/components/context-menu/index.js'
 import '@sebgroup/green-core/components/icon/icons/arrow-right.js'
 import '@sebgroup/green-core/components/icon/icons/flag.js'
@@ -16,11 +15,11 @@ import '@sebgroup/green-core/components/icon/icons/bars-three.js'
 import '@sebgroup/green-core/components/icon/icons/globus.js'
 import '@sebgroup/green-core/components/input/index.js'
 import '@sebgroup/green-core/components/theme/index.js'
-import '@sebgroup/green-core/components/layout/card/index.js'
-import '@sebgroup/green-core/components/layout/flex/index.js'
-import '@sebgroup/green-core/components/layout/grid/index.js'
-import '@sebgroup/green-core/components/media/img/index.js'
-import '@sebgroup/green-core/components/media/video/index.js'
+import '@sebgroup/green-core/components/card/index.js'
+import '@sebgroup/green-core/components/flex/index.js'
+import '@sebgroup/green-core/components/grid/index.js'
+import '@sebgroup/green-core/components/img/index.js'
+import '@sebgroup/green-core/components/video/index.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 
@@ -30,8 +29,6 @@ import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
 import './login/login.element'
-
-const { setLocale, getLocale } = gdsInitLocalization()
 
 export class AppElement extends LitElement {
   static styles = css`
@@ -48,20 +45,11 @@ export class AppElement extends LitElement {
   accessor popoverOpen: boolean = false
 
   @state()
-  accessor lang = 'sv'
-
-  @state()
   accessor currentView = 'login'
 
   connectedCallback() {
     super.connectedCallback()
     this.addEventListener('view-change', this.handleViewChange as EventListener)
-    this.setLang(getLocale())
-  }
-
-  setLang(lang: string) {
-    this.lang = lang
-    setLocale(lang)
   }
 
   disconnectedCallback() {

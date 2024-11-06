@@ -6,6 +6,7 @@ export const styles = css`
     line-height: var(--gds-text-line-height-body-m);
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
+    letter-spacing: 0.0125rem;
   }
 
   :host > :first-child {
@@ -28,12 +29,15 @@ export const styles = css`
 
   p {
     margin-bottom: 1lh;
+    max-width: 80ch;
   }
 
   blockquote {
     margin: unset;
+    margin-block: 2lh;
     border-left: 0.2rem solid currentColor;
-    padding-left: 1ch;
+    padding-left: 2ch;
+    max-width: 40ch;
   }
 
   s {
@@ -78,6 +82,7 @@ export const styles = css`
   }
   figcaption {
     font-size: smaller;
+    margin-block-start: 0.4lh;
   }
 
   /*
@@ -85,17 +90,28 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
+    border: var(--default-border);
+    border-radius: var(--gds-space-s);
   }
   th {
     font-weight: var(--gds-text-weight-book);
     text-align: left;
     border-bottom: var(--default-border);
+    border-left: transparent;
+    border-right: transparent;
+    color: var(--gds-color-l3-content-secondary);
   }
+
+  th:not(:last-child) {
+    border-right: var(--default-border);
+  }
+
   th,
   td {
-    padding: 0.3lh 0.6ch;
+    padding: 0.3lh 2ch;
   }
   td:not(:last-child) {
     border-right: var(--default-border);
@@ -109,23 +125,53 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   details {
-    border: var(--default-border);
-    border-radius: var(--gds-space-xs);
-    padding: 0.5em 0.5em 0;
+    border-top: solid var(--gds-space-4xs) var(--gds-color-l3-border-tertiary);
+    font-size: var(--gds-text-size-body-m);
+    line-height: var(--gds-text-line-height-body-m);
+    color: var(--gds-color-l2-content-secondary);
   }
 
   summary {
-    font-weight: var(--gds-text-weight-book);
-    margin: -0.5em -0.5em 0;
-    padding: 0.5em;
+    font-weight: var(--gds-text-weight-regular);
+    list-style: none;
+    padding: 0.4lh 0.2ch;
+    font-size: var(--gds-text-size-body-l);
+    line-height: var(--gds-text-line-height-body-l);
+    color: var(--gds-color-l2-content-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    outline-offset: var(--gds-space-2xs);
+    outline-color: currentColor;
+
+    &:focus-visible {
+      border-radius: var(--gds-space-2xs);
+    }
+  }
+
+  summary::after {
+    content: '+';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    font-weight: var(--gds-text-weight-regular);
+    font-size: var(--gds-text-size-body-l);
+  }
+
+  details[open] summary::after {
+    content: '-';
   }
 
   details[open] {
-    padding: 0.5em;
+    margin-bottom: 1lh;
   }
 
   details[open] summary {
-    border-bottom: var(--default-border);
-    margin-bottom: 0.5em;
+    border-bottom: var(--gds-space-4xs) solid
+      var(--gds-color-l3-border-tertiary);
   }
 `

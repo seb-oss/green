@@ -1,9 +1,0 @@
-.menu {
-  height: 100vh;
-
-  @media screen and (min-width: 64rem) {
-    top: 0;
-    position: sticky;
-    max-height: 100vh;
-  }
-}

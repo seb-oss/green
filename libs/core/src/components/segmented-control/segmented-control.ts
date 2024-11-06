@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 
@@ -26,15 +26,16 @@ const debounce = (fn: () => void, delay: number) => {
 
 /**
  * @element gds-segmented-control
- * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+ * @status stable
  *
- * @status beta
+ * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  *
  * @slot - Segments to display in the control
  *
  * @event changed - Fires when the selected segment is changed
  */
 @gdsCustomElement('gds-segmented-control')
+@localized()
 export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
