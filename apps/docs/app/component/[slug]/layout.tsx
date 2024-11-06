@@ -3,10 +3,9 @@
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import { GdsBadge, GdsFlex, GdsText } from '$/import/components'
+import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
 import Navigator from 'core/navigator'
-import Pattern from 'core/pattern'
 import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'
 
@@ -127,21 +126,16 @@ export default function ComponentLayout({
                 )}
               </GdsFlex>
             </GdsFlex>
-            <GdsFlex
-              border="4xs/primary"
-              padding="2xl"
-              border-radius="m"
-              gap="xl"
-              align-items="center"
-              justify-content="center"
-              height="420px"
-              position="relative"
-              overflow="hidden"
-              background="primary"
-            >
-              {/* <Pattern /> */}
-              <Preview />
-            </GdsFlex>
+            <GdsCard>
+              <GdsFlex
+                gap="xl"
+                align-items="center"
+                justify-content="center"
+                height="360px"
+              >
+                <Preview />
+              </GdsFlex>
+            </GdsCard>
           </GdsFlex>
           <Taber component={url_path} links={links} />
           <GdsFlex flex-direction="column" gap="xl">

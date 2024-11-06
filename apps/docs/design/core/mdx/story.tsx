@@ -2,8 +2,7 @@
 
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
-
-import './story.css'
+import { GdsCard } from '$/import/components'
 
 interface StoryProps {
   component?: string
@@ -34,13 +33,27 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
   }, [])
 
   return (
-    <iframe
-      ref={iframeRef}
-      key="story-iframe"
-      src={`https://storybook.seb.io/latest/core/iframe.html?viewMode=story&id=components-${component}--${id}`}
-      onLoad={handleLoad}
-      height={height}
-      className="story"
-    />
+    <GdsCard>
+      <iframe
+        ref={iframeRef}
+        key="story-iframe"
+        src={`https://storybook.seb.io/latest/core/iframe.html?viewMode=story&id=components-${component}--${id}`}
+        onLoad={handleLoad}
+        height={height}
+        className="story"
+      />
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .story {
+              width: 100%;
+              height: 100%;
+              border: 0;  
+              min-height: 360px; 
+            }
+          `,
+        }}
+      />
+    </GdsCard>
   )
 }
