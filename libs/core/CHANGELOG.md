@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.54.0
+
+### Minor Changes
+
+- 9b001a9: **Rich Text:** Add details/accordion styling, improve paragraphs and spacing on blockquote, figure etc
+
+### Patch Changes
+
+- 7d4d945: **Datepicker:** Use aria live for error message, and announce form-info and sub-label in `aria-describedby`. Fixes #1274
+- 7d4d945: **Calendar:** Date labels now follows active lit-localize locale. Fixes #1274
+- 7d4d945: **Localization:** All localized components should now re-render automatically when active locale is changed
+
 ## 1.53.0
 
 ### Minor Changes
