@@ -21,7 +21,9 @@ export function ThemeToggle() {
         (event.target as HTMLElement).tagName !== 'INPUT' &&
         (event.target as HTMLElement).tagName !== 'TEXTAREA'
       ) {
-        setTheme(theme === 'light' ? 'dark' : 'light')
+        const newTheme = theme === 'light' ? 'dark' : 'light'
+        setTheme(newTheme)
+        localStorage.setItem('theme', newTheme)
       }
     }
 
@@ -52,7 +54,11 @@ export function ThemeToggle() {
   return (
     <GdsMenuButton
       className="theme"
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      onClick={() => {
+        const newTheme = theme === 'light' ? 'dark' : 'light'
+        setTheme(newTheme)
+        localStorage.setItem('theme', newTheme)
+      }}
       aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
     >
       <GdsContainer min-width="24px">
