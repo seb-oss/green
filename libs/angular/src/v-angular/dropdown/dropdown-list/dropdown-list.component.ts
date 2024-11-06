@@ -15,7 +15,7 @@ import {
   TemplateRef,
   ViewChildren,
 } from '@angular/core'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { Subject, Subscription } from 'rxjs'
 import scrollIntoView from 'scroll-into-view-if-needed'
 

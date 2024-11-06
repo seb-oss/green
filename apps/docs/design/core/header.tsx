@@ -1,85 +1,20 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react'
-import dynamic from 'next/dynamic'
+import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
+import { GdsContainer, GdsFlex, GdsMenuButton } from '$/import/components'
+import {
+  IconBarsThree,
+  IconBrandGithub,
+  IconBrandSeb,
+  IconCrossLarge,
+  IconMagnifyingGlass,
+} from '$/import/icons'
 import { Context } from '$/provider/provider'
+import { ThemeToggle } from '$/theme/toggle'
 
-const GdsContainer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/container').then(
-      (mod) => mod.GdsContainer,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsMenuButton = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/menu-button').then(
-      (mod) => mod.GdsMenuButton,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const IconBarsThree = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconBarsThree').then(
-      (mod) => mod.IconBarsThree,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconBrandGithub = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandGithub').then(
-      (mod) => mod.IconBrandGithub,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconBrandSeb = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandSeb').then(
-      (mod) => mod.IconBrandSeb,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconCrossLarge = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconCrossLarge').then(
-      (mod) => mod.IconCrossLarge,
-    ),
-  {
-    ssr: false,
-  },
-)
-const IconMagnifyingGlass = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconMagnifyingGlass').then(
-      (mod) => mod.IconMagnifyingGlass,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-export default function Header() {
-  const { toggleNav, isNavOpen } = useContext(Context)
+export const Header = forwardRef(({ ...props }, ref) => {
+  const { toggleNav, isNavOpen, toggleCmd } = useContext(Context)
   const [isWindows, setIsWindows] = useState(false)
 
   useEffect(() => {
@@ -101,7 +36,7 @@ export default function Header() {
         align-items="center"
         height="72px"
         border="0 0 4xs/primary 0"
-        padding="0 l"
+        padding="0 0 0 l"
       >
         <GdsMenuButton onClick={toggleNav}>
           {isNavOpen === true ? (
@@ -122,15 +57,23 @@ export default function Header() {
           </Link>
         </GdsContainer>
         <GdsFlex height="100%" padding="0 l">
-          <GdsMenuButton>
-            Search
-            <IconMagnifyingGlass slot="trail" />
+          <GdsMenuButton onClick={toggleCmd}>
+            <IconMagnifyingGlass slot="lead" />
+            {isWindows ? '/' : '⌘K'}
           </GdsMenuButton>
-          <GdsMenuButton>
-            <IconBrandGithub slot="trail" />
+          <GdsMenuButton
+            href="https://github.com/sebgroup/green"
+            target="_blank"
+          >
+            <IconBrandGithub />
           </GdsMenuButton>
+          <ThemeToggle />
         </GdsFlex>
       </GdsFlex>
     </GdsContainer>
   )
-}
+})
+
+Header.displayName = 'Header'
+
+export default Header

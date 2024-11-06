@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -54,6 +54,7 @@ type DateFormatLayout = {
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-datepicker')
+@localized()
 export class GdsDatepicker extends GdsFormControlElement<Date> {
   static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
@@ -212,7 +213,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         () => html`<label for="spinner-0" id="label">${this.label}</label>`,
       )}
 
-      <div class="form-info"><slot name="sub-label"></slot></div>
+      <div class="form-info" id="sub-label"><slot name="sub-label"></slot></div>
 
       <div
         class=${classMap({ field: true, small: this.size === 'small' })}
@@ -237,7 +238,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
-                  aria-describedby="label"
+                  aria-describedby="label sub-label message"
                   @keydown=${this.#handleSpinnerKeydown}
                   @change=${(e: CustomEvent) =>
                     this.#handleSpinnerChange(e.detail.value, f.name)}
@@ -264,7 +265,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         </button>
       </div>
 
-      <div class="form-info">
+      <div class="form-info" aria-live="polite" id="message">
         <slot name="message">${this.validationMessage}</slot>
       </div>
 

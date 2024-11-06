@@ -11,6 +11,10 @@ global.ElementInternals.prototype.setFormValue = () => {}
 global.ElementInternals.prototype.validity = () => {
   valid: true
 }
+global.ElementInternals.prototype.checkValidity = () => {}
+global.ElementInternals.prototype.reportValidity = () => {}
+global.ElementInternals.prototype.willValidate = () => {}
+global.ElementInternals.prototype.validationMessage = ''
 
 window.matchMedia = () => {
   return {
