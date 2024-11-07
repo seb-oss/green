@@ -51,7 +51,7 @@ export const defaultStyles = css`
     p,
     li {
       font-size: var(--gds-text-size-body-m);
-      line-height: var(--gds-text-line-height-body-m);
+      line-height: 22px;
     }
 
     strong {

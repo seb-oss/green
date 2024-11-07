@@ -89,7 +89,11 @@ export const Card: Story = {
         </p>
         <h2>Specifications</h2>
         <ul>
-          <li>Length: 150 meters</li>
+          <li>
+            Length: 150 meters Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+          </li>
           <li>Width: 50 meters</li>
           <li>Height: 30 meters</li>
           <li>Crew Capacity: 100 personnel</li>
@@ -116,7 +120,6 @@ export const Card: Story = {
             <li>Space weather and its effects on technology</li>
           </ul>
         </details>
-
         <details name="named-details">
           <summary>Exploration Objectives</summary>
           <p>
@@ -132,7 +135,6 @@ export const Card: Story = {
             <li>Understanding the dynamics of asteroid belts</li>
           </ul>
         </details>
-
         <details name="named-details">
           <summary>Technological Innovations</summary>
           <p>
@@ -149,7 +151,6 @@ export const Card: Story = {
             <li>Innovative life support systems for long-duration missions</li>
           </ul>
         </details>
-
         <p>
           In summary, the <strong>SS Endeavor</strong> is poised to lead
           humanity's next great leap into the cosmos.

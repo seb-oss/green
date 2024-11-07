@@ -47,28 +47,11 @@ export const styles = css`
     margin-top: 0;
   }
 
-  // h2 {
-  //   margin-bottom: var(--gds-space-xs);
-  // }
-
-  // h3 {
-  //   margin-bottom: var(--gds-space-2xs);
-  // }
-
-  // h1 {
-  //   margin-bottom: var(--gds-space-xs);
-  // }
-
-  // Consider to do this some other way
-
   p {
     margin: 0;
     margin-bottom: var(--gds-space-xs);
     max-width: 80ch;
-    line-height: 22px;
   }
-
-  // tests
 
   blockquote {
     margin: unset;
@@ -206,11 +189,22 @@ export const styles = css`
   }
 
   details[open] {
-    margin-bottom: 1lh;
+    border-bottom: var(--gds-space-4xs) solid
+      var(--gds-color-l3-border-tertiary);
+    padding-bottom: 0.4lh;
   }
 
   details[open] summary {
+    margin-bottom: 0.4lh;
+  }
+
+  details[open] + details {
+    border: none;
+  }
+
+  details:last-of-type {
     border-bottom: var(--gds-space-4xs) solid
       var(--gds-color-l3-border-tertiary);
+    margin-bottom: var(--gds-space-xl);
   }
 `
