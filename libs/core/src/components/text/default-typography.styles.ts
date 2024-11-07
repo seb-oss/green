@@ -8,6 +8,10 @@ export const defaultStyles = css`
       font-weight: var(--gds-text-weight-book);
     }
 
+    a:visited {
+      color: currentColor;
+    }
+
     h1 {
       font-size: var(--gds-text-size-heading-xl);
       line-height: var(--gds-text-line-height-heading-xl);
@@ -52,6 +56,12 @@ export const defaultStyles = css`
 
     strong {
       font-weight: var(--gds-text-weight-medium);
+    }
+
+    iframe {
+      border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
+      border-radius: var(--gds-space-xs);
+      min-width: 100%;
     }
   }
 `

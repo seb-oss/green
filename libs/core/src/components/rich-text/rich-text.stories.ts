@@ -46,6 +46,10 @@ export const Card: Story = {
         <h1>
           The Starship <small>SS Endeavor</small> <mark>Exploration Class</mark>
         </h1>
+        <iframe src="https://seb.io"></iframe>
+
+        <br />
+        <a href="#">Link</a>
         <p>
           The <strong>SS Endeavor</strong> is a state-of-the-art exploration
           class starship designed for deep space missions. Equipped with
