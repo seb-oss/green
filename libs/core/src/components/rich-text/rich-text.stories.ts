@@ -507,7 +507,7 @@ export const Basic: Story = {
   ...DefaultParams,
   name: 'Rich Text',
   render: (args) => html`
-    <gds-card variant="tertiary">
+    <gds-card variant="notice">
       <gds-rich-text>
         <h1>
           The Starship <small>SS Endeavor</small> <mark>Exploration Class</mark>

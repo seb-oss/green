@@ -149,7 +149,8 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   details {
-    border-top: solid var(--gds-space-4xs) var(--gds-color-l3-border-tertiary);
+    border-top: solid var(--gds-space-4xs)
+      color-mix(in srgb, currentColor, transparent 90%);
     font-size: var(--gds-text-size-body-m);
     line-height: var(--gds-text-line-height-body-m);
   }
@@ -196,9 +197,9 @@ export const styles = css`
 
   details[open] {
     border-bottom: var(--gds-space-4xs) solid
-      var(--gds-color-l3-border-tertiary);
+      color-mix(in srgb, currentColor, transparent 95%);
     padding-bottom: 0.4lh;
-    background: color-mix(in srgb, currentColor, transparent 95%);
+    background: color-mix(in srgb, currentColor, transparent 90%);
   }
 
   details[open] > *:not(summary) {
@@ -215,7 +216,7 @@ export const styles = css`
 
   details:last-of-type {
     border-bottom: var(--gds-space-4xs) solid
-      var(--gds-color-l3-border-tertiary);
+      color-mix(in srgb, currentColor, transparent 90%);
     margin-bottom: var(--gds-space-xl);
   }
 `
