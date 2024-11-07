@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.55.0
+
+### Minor Changes
+
+- ca68597: **GdsTheme**: Add `design-version` property for granular control over transitional styles
+
+### Patch Changes
+
+- ca68597: **Segmented Control:** Transitional styles fix for legacy browsers
+
 ## 1.54.1
 
 ### Patch Changes
