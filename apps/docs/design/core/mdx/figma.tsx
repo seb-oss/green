@@ -1,20 +1,18 @@
 'use client'
 
-// import * as React from 'react'
 import React, { useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { GdsCard } from '$/import/components'
 
-// import Pattern from 'core/pattern'
-
 interface FigmaProps {
   caption?: string
   node?: string
   height?: string
+  [key: string]: any
 }
 
-export default function Figma({ caption, node, height }: FigmaProps) {
+export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
   const slug = usePathname()
   const component = allComponents.find(
     (component) => component.url_path === slug,
@@ -27,7 +25,7 @@ export default function Figma({ caption, node, height }: FigmaProps) {
   const figureRef = useRef<HTMLElement | null>(null)
 
   return (
-    <GdsCard>
+    <GdsCard {...rest}>
       <style
         dangerouslySetInnerHTML={{
           __html: `

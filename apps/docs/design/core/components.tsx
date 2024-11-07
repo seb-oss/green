@@ -19,9 +19,17 @@ type ExampleComponents = {
 
 const examples: ExampleComponents = EXAMPLES
 
-export default function Components({ title }: { title: string }) {
+interface ComponentsProps {
+  title: string
+  tag?: string
+}
+
+export default function Components({ title, tag }: ComponentsProps) {
   const components = allComponents
     .filter((component) => {
+      if (tag && !component.tags?.split(', ').includes(tag)) {
+        return false
+      }
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }

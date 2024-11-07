@@ -3,7 +3,13 @@
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
+import {
+  GdsBadge,
+  GdsCard,
+  GdsFlex,
+  GdsLink,
+  GdsText,
+} from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
@@ -52,7 +58,7 @@ export default function ComponentLayout({
     }
   }
 
-  // const tagsArray = tags ? tags.split(', ') : []
+  const tagsArray = tags ? tags.split(', ') : []
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },
@@ -124,6 +130,18 @@ export default function ComponentLayout({
                     {status}
                   </GdsBadge>
                 )}
+                <GdsFlex gap="s">
+                  {tagsArray.map((tag) => (
+                    <GdsLink
+                      href={`/tag/` + tag}
+                      key={tag}
+                      variant="primary"
+                      size="small"
+                    >
+                      {tag}
+                    </GdsLink>
+                  ))}
+                </GdsFlex>
               </GdsFlex>
             </GdsFlex>
             <GdsCard>
