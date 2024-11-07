@@ -45,12 +45,14 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-            .story {
-              width: 100%;
-              height: 100%;
-              border: 0;  
-              min-height: 360px; 
-            }
+            @scope {
+                .story {
+                  width: 100%;
+                  height: 100%;
+                  border: 0;  
+                  min-height: 360px; 
+                }
+              }
           `,
         }}
       />

@@ -31,8 +31,11 @@ export default function Figma({ caption, node, height }: FigmaProps) {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-            svg {
-            width: 100%;}
+            @scope {
+              svg {
+                width: 100%;
+              }
+            }
           `,
         }}
       />
@@ -40,7 +43,6 @@ export default function Figma({ caption, node, height }: FigmaProps) {
         ref={figureRef}
         dangerouslySetInnerHTML={{ __html: svgSource?.svg }}
       />
-
       {/* {caption} */}
       {/* {height} */}
       {/* {svgSource?.svg} */}
