@@ -1,24 +1,7 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
-
-const GdsBadge = dynamic(
-  () => import('@sebgroup/green-react/core/badge').then((mod) => mod.GdsBadge),
-  {
-    ssr: false,
-  },
-)
-
-const IconPlusSmall = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconPlusSmall').then(
-      (mod) => mod.IconPlusSmall,
-    ),
-  {
-    ssr: false,
-  },
-)
+import { GdsBadge } from '$/import/components'
+import { IconPlusSmall } from '$/import/icons'
 
 const Badge = () => (
   <>

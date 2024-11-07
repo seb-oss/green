@@ -1,5 +1,0 @@
-.toc-sidebar {
-  position: sticky;
-  top: calc(var(--header-height) + 80px);
-  max-width: max-content;
-}
