@@ -55,7 +55,6 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
-      ;(window as any).gdsStyle = context.globals.style
       return html`<gds-theme .designVersion=${context.globals.style}
         >${storyFn()}</gds-theme
       >`
