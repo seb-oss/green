@@ -1,13 +1,7 @@
 'use client'
 
 import React, { ReactNode } from 'react'
-import dynamic from 'next/dynamic'
-
-// import { GdsGrid } from '@sebgroup/green-react/core/grid/grid'
-
-const GdsGrid = dynamic(() => import('@sebgroup/green-react/core/grid'), {
-  ssr: false,
-})
+import { GdsGrid } from '$/import/components'
 
 type Props = {
   children: ReactNode

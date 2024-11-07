@@ -1,30 +1,24 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
-
-const GdsText = dynamic(
-  () => import('@sebgroup/green-react/core/text').then((mod) => mod.GdsText),
-  {
-    ssr: false,
-  },
-)
+import { GdsFlex, GdsText } from '$/import/components'
 
 export default function Hero({
   heading,
   preamble,
+  compact,
 }: {
   heading: string
   preamble?: string
+  compact?: boolean
 }) {
   return (
-    <GdsFlex flex-direction="column" max-width="100ch" gap="2xl">
+    <GdsFlex
+      flex-direction="column"
+      max-width="100ch"
+      gap="2xl"
+      min-height={compact ? '20vh' : 'calc(100vh - 220px)'}
+      justify-content="flex-end"
+    >
       <GdsText tag="h1" font-size="display-2xl" font-weight="book">
         {heading}
       </GdsText>

@@ -1,32 +1,38 @@
 'use client'
 
-import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
 import Script from 'next/script'
-import Consent from '@/consent/consent'
-import Main from '&/main/main'
+import Main from '&/main'
+import Consent from '$/consent/consent'
+import useCookieConsent from '$/consent/useCookieConsent'
 import Fonts from '$/fonts/fonts'
+import { GdsFlex } from '$/import/components'
 import { Provider } from '$/provider/provider'
+import Favicon from 'core/favicon'
 import Footer from 'core/footer'
 import Header from 'core/header'
 
 import '#/global.css'
-
-const GdsFlex = dynamic(
-  () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
-  {
-    ssr: false,
-  },
-)
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  useCookieConsent()
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme')
+    if (storedTheme) {
+      document.documentElement.setAttribute('gds-theme', storedTheme)
+    }
+  }, [])
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
         <Provider>
+          <Favicon />
           <Fonts>
             <GdsFlex flex-direction="column">
               <Header />

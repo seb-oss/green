@@ -1,10 +1,4 @@
 @import 'reset.css';
-@import 'tokens.css';
-@import 'motion.css';
-@import 'typography.css';
-@import 'utilities.css';
-@import 'responsive.css';
-@import 'syntax.css';
 
 @layer core {
   html {
@@ -37,19 +31,6 @@
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: 100%;
     font-family: var(--gds-font-family);
-  }
-
-  * {
-    &:focus-visible {
-      outline-offset: 2px;
-      outline-color: currentColor;
-      outline-width: 2px;
-      outline-style: solid;
-    }
-  }
-
-  figure {
-    margin: 0;
   }
 
   @layer blocks;
