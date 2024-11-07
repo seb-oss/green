@@ -199,7 +199,7 @@ export const styles = css`
     border-bottom: var(--gds-space-4xs) solid
       color-mix(in srgb, currentColor, transparent 95%);
     padding-bottom: 0.4lh;
-    background: color-mix(in srgb, currentColor, transparent 90%);
+    background: color-mix(in srgb, currentColor, transparent 95%);
   }
 
   details[open] > *:not(summary) {
