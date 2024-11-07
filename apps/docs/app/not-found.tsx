@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import Content from '&/content/content'
+import { GdsContainer, GdsFlex, GdsLink, GdsText } from '$/import/components'
 
 import type { Metadata } from 'next'
 
@@ -15,9 +14,12 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Content layout="home">
-      <h1 className="heading-medium">404 - Page Not Found</h1>
-      <Link href={'/'}>Go back</Link>
-    </Content>
+    <GdsFlex flex-direction="column" gap="4xl">
+      <GdsContainer>
+        <GdsText font-size="display-2xl">404</GdsText>
+        <GdsText tag="h1">Page Not Found</GdsText>
+      </GdsContainer>
+      <GdsLink href={'/'}>Go back</GdsLink>
+    </GdsFlex>
   )
 }

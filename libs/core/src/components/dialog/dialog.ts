@@ -1,3 +1,4 @@
+import { localized, msg } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
@@ -19,8 +20,6 @@ import '../card'
 import '../flex'
 import '../icon/icons/cross-large'
 
-import { msg } from '@lit/localize'
-
 registerGlobalScrollLockStyles()
 
 /**
@@ -36,6 +35,7 @@ registerGlobalScrollLockStyles()
  * @slot footer - The footer of the dialog
  */
 @gdsCustomElement('gds-dialog')
+@localized()
 export class GdsDialog extends GdsElement {
   static styles = [styles]
 

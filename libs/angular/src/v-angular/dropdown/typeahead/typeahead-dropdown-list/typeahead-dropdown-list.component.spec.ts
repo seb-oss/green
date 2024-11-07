@@ -7,7 +7,7 @@ import {
   ViewChild,
 } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
-import { TranslocoModule } from '@ngneat/transloco'
+import { TranslocoModule } from '@jsverse/transloco'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvInputComponent } from '../../../input/input.component'

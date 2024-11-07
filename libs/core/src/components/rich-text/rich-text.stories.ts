@@ -101,8 +101,8 @@ export const Card: Story = {
           <li>Test new technologies in real-world scenarios.</li>
         </ol>
         <h3>Research Areas</h3>
-        <details>
-          <summary>Click to expand research focus areas</summary>
+        <details name="named-details">
+          <summary>Focus Areas</summary>
           <p>The SS Endeavor will focus on the following research areas:</p>
           <ul>
             <li>Astrobiology</li>
@@ -111,6 +111,40 @@ export const Card: Story = {
             <li>Space weather and its effects on technology</li>
           </ul>
         </details>
+
+        <details name="named-details">
+          <summary>Exploration Objectives</summary>
+          <p>
+            The SS Endeavor aims to achieve significant breakthroughs in the
+            following exploration objectives:
+          </p>
+          <ul>
+            <li>
+              Mapping the surface of Mars for potential human colonization
+            </li>
+            <li>Studying the atmospheres of gas giants</li>
+            <li>Investigating the potential for life on Europa</li>
+            <li>Understanding the dynamics of asteroid belts</li>
+          </ul>
+        </details>
+
+        <details name="named-details">
+          <summary>Technological Innovations</summary>
+          <p>
+            The SS Endeavor will develop and implement cutting-edge technologies
+            in these areas:
+          </p>
+          <ul>
+            <li>Advanced propulsion systems for deep space travel</li>
+            <li>Autonomous robotic systems for planetary exploration</li>
+            <li>
+              Next-generation communication systems for interstellar data
+              transmission
+            </li>
+            <li>Innovative life support systems for long-duration missions</li>
+          </ul>
+        </details>
+
         <p>
           In summary, the <strong>SS Endeavor</strong> is poised to lead
           humanity's next great leap into the cosmos.

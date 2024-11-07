@@ -1,6 +1,6 @@
 'use client'
 
-import ComponentList from '@/_ARCHIVE/_component-list/component-list'
+import ComponentList from 'core/components'
 
 export default function Components() {
   return <ComponentList title="Components" />
