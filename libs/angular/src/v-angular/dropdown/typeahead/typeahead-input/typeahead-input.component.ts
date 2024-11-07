@@ -12,7 +12,7 @@ import {
   Self,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { takeUntil } from 'rxjs'
 
 import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'

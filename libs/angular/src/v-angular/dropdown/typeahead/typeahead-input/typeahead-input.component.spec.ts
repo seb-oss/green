@@ -7,7 +7,7 @@ import {
   tick,
   waitForAsync,
 } from '@angular/core/testing'
-import { TranslocoModule } from '@ngneat/transloco'
+import { TranslocoModule } from '@jsverse/transloco'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvDropdownComponent } from '../../../dropdown/dropdown.component'

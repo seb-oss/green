@@ -7,7 +7,7 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms'
-import { TranslocoModule } from '@ngneat/transloco'
+import { TranslocoModule } from '@jsverse/transloco'
 
 import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
