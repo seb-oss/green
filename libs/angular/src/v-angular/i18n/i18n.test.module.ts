@@ -12,7 +12,7 @@ import {
   TranslocoInterceptor,
   TranslocoMissingHandler,
   TranslocoTranspilerFunction,
-} from '@ngneat/transloco'
+} from '@jsverse/transloco'
 
 @Pipe({ name: 'transloco' })
 export class TranslocoMockPipe implements PipeTransform {

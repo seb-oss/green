@@ -1,22 +1,7 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
+import { GdsTextarea } from '$/import/components'
 
-const GdsTextarea = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/textarea').then(
-      (mod) => mod.GdsTextarea,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const Textarea = () => (
-  <>
-    <GdsTextarea label="Textarea"></GdsTextarea>
-  </>
-)
+const Textarea = () => <GdsTextarea label="Textarea" />
 
 export default Textarea

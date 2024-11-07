@@ -24,7 +24,7 @@ const html = stripWhitespace(customElementHtml)
 /**
  * @element gds-button
  * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
- * @status beta
+ * @status stable
  *
  * @slot - Content to be displayed as the button label.
  * @slot lead - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed before the label.

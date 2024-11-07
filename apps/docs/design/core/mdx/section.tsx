@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import { GdsFlex } from '@sebgroup/green-react/core/flex/flex'
+import { GdsFlex } from '$/import/components'
 
 type SectionProps = {
   children: ReactNode

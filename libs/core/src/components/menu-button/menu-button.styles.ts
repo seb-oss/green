@@ -1,21 +1,18 @@
 import { css } from 'lit'
 
 const style = css`
-  @layer tokens, a11y, core, variants, sizes, sets, disabled;
+  @layer tokens, core, a11y, disabled, variants, sizes, sets;
 
   @layer tokens {
     :host {
-      --_gap: 8px;
+      --_gap: var(--gds-space-xs);
 
       --_padding-inline: var(--gds-space-m);
       --_padding-block: var(--gds-space-xs);
 
       --_color-bg: transparent;
-      --_color-text: var(--gds-sys-color-primary-text);
+      --_color-text: var(--gds-color-l3-content-tertiary);
       --_color-border: transparent;
-
-      --_color-outline-alpha: 60%;
-      --_color-outline: var(--gds-sys-color-border-stroke);
 
       --_font-size: 1rem;
       --_font-weight: 400;
@@ -52,7 +49,7 @@ const style = css`
       justify-content: space-between;
       justify-items: center;
       outline-color: transparent;
-      outline-offset: 2px;
+      outline-offset: -2px;
       outline-style: solid;
       outline-width: 2px;
       padding-block: var(--_padding-block);
@@ -62,27 +59,34 @@ const style = css`
       font-size: var(--_font-size);
       font-weight: var(--_font-weight);
       line-height: var(--_line-height);
+      transition-property: color, border-color;
+      transition: all 0.4s;
 
       &:focus-visible {
-        outline-color: color-mix(
-          in srgb,
-          var(--_color-outline),
-          transparent var(--_color-outline-alpha)
-        );
-        border-radius: 2px;
+        outline-color: currentColor;
+        border-radius: 6px;
         overflow: visible;
+        border-color: transparent;
       }
 
       &:hover,
       &.selected:hover,
       &:active {
-        --_color-bg: var(--gds-sys-color-base200);
-        --_color-border: var(--gds-sys-color-base600);
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-hover)
+        );
+        --_color-border: var(--gds-color-l3-border-secondary);
       }
 
       &.selected {
-        --_color-bg: var(--gds-sys-color-base100);
-        --_color-border: var(--gds-sys-color-base700);
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-hover)
+        );
+        --_color-border: var(--gds-color-l3-border-primary);
       }
 
       slot:not([name]) {
@@ -114,12 +118,17 @@ const style = css`
     }
   }
 
-  @layer disabled {
-    :disabled {
-      --_color-bg: var(--gds-sys-color-container-container-disabled);
-      border-color: var(--_color-bg);
-      color: var(--gds-sys-color-content-content-disabled);
-      pointer-events: none;
+  :disabled {
+    border-color: var(--_color-bg);
+    color: var(--gds-color-l3-content-disabled);
+    pointer-events: none;
+  }
+
+  @layer a11y {
+    @media (prefers-reduced-motion: reduce) {
+      .button {
+        transition: none;
+      }
     }
   }
 `

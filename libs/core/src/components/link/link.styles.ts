@@ -24,6 +24,14 @@ const style = css`
       &:hover {
         text-decoration: none;
       }
+
+      &.secondary {
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 `

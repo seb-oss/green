@@ -25,7 +25,7 @@ export default {
     'jest-preset-angular/build/serializers/html-comment',
   ],
   transformIgnorePatterns: [
-    'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs|@ngneat|flat|chalk)',
+    'node_modules/(?!.*.mjs$|@sebgroup/green-react|@sebgroup/extract|@sebgroup/green-core|lit-element|lit-html|lit|@lit|@lit-labs|@jsverse|flat|chalk)',
   ],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '/node_modules/'],
 }

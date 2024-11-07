@@ -17,6 +17,9 @@ import '../../icon/icons/checkmark.js'
 
 /**
  * @element gds-filter-chip
+ * @status stable
+ *
+ * * @slot Content of the Filter chip
  */
 @gdsCustomElement('gds-filter-chip')
 export class GdsFilterChip<ValueT = any> extends GdsElement {
