@@ -125,14 +125,17 @@ export default function Sidebar({
       padding="xl xl xl 2xl"
       border="0 4xs/primary 0 0"
       min-width="300px"
-      height="calc(100vh - 72px)"
+      height="s{100vh} calc(100vh - 72px)"
       align-items="flex-start"
       flex-direction="column"
       gap="l"
-      position="sticky"
+      position="xs{fixed} s{fixed} m{sticky}"
       top="72px"
       inset="72px 0 0 0"
       overflow="hidden auto"
+      background="primary"
+      z-index="100"
+      level="1"
     >
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">

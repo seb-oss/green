@@ -9,7 +9,10 @@ export default function Main({ children }: { children: React.ReactNode }) {
   const { toggleNav, isNavOpen } = useContext(Context)
 
   return (
-    <GdsFlex align-items="flex-start" flex-direction="row">
+    <GdsFlex
+      align-items="flex-start"
+      flex-direction="xs{column} s{column} l{row}"
+    >
       {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
       <GdsFlex
         padding="4xl"

@@ -47,7 +47,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
           Menu
         </GdsMenuButton>
         <GdsContainer
-          position="absolute"
+          position="m{relative} absolute"
           margin="0 auto"
           inset="auto 0"
           max-width="max-content"
