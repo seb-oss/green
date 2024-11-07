@@ -19,11 +19,18 @@ export default function Hero({
       min-height={compact ? '20vh' : 'calc(100vh - 220px)'}
       justify-content="flex-end"
     >
-      <GdsText tag="h1" font-size="display-2xl" font-weight="book">
+      <GdsText
+        tag="h1"
+        font-size="display-s; m{display-xl} l{display-2xl}"
+        font-weight="book"
+      >
         {heading}
       </GdsText>
       {preamble && (
-        <GdsText font-size="heading-l" color="secondary">
+        <GdsText
+          font-size="heading-s; m{heading-m} l{heading-l}"
+          color="secondary"
+        >
           {preamble}
         </GdsText>
       )}
