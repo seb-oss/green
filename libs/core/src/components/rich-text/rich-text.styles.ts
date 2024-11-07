@@ -117,7 +117,9 @@ export const styles = css`
     width: 100%;
     border: var(--default-border);
     border-radius: var(--gds-space-s);
+    margin-top: var(--gds-space-xl);
   }
+
   th {
     font-weight: var(--gds-text-weight-book);
     text-align: left;
@@ -150,7 +152,6 @@ export const styles = css`
     border-top: solid var(--gds-space-4xs) var(--gds-color-l3-border-tertiary);
     font-size: var(--gds-text-size-body-m);
     line-height: var(--gds-text-line-height-body-m);
-    color: var(--gds-color-l2-content-secondary);
   }
 
   summary {
@@ -159,7 +160,7 @@ export const styles = css`
     padding: 0.4lh 0.2ch;
     font-size: var(--gds-text-size-body-l);
     line-height: var(--gds-text-line-height-body-l);
-    color: var(--gds-color-l2-content-primary);
+    color: currentColor;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -167,10 +168,15 @@ export const styles = css`
     user-select: none;
     outline-offset: var(--gds-space-2xs);
     outline-color: currentColor;
+    padding-inline: var(--gds-space-m);
 
     &:focus-visible {
       border-radius: var(--gds-space-2xs);
     }
+  }
+
+  details:hover summary {
+    background: color-mix(in srgb, currentColor, transparent 95%);
   }
 
   summary::after {
@@ -192,6 +198,11 @@ export const styles = css`
     border-bottom: var(--gds-space-4xs) solid
       var(--gds-color-l3-border-tertiary);
     padding-bottom: 0.4lh;
+    background: color-mix(in srgb, currentColor, transparent 95%);
+  }
+
+  details[open] > *:not(summary) {
+    margin-left: var(--gds-space-m);
   }
 
   details[open] summary {
