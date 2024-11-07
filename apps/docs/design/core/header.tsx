@@ -34,9 +34,9 @@ export const Header = forwardRef(({ ...props }, ref) => {
         justify-content="space-between"
         min-width="100%"
         align-items="center"
-        height="72px"
+        height="60px"
         border="0 0 4xs/primary 0"
-        padding="0 0 0 l"
+        padding="0 0 0 xs"
       >
         <GdsMenuButton onClick={toggleNav}>
           {isNavOpen === true ? (
@@ -56,7 +56,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <IconBrandSeb />
           </Link>
         </GdsContainer>
-        <GdsFlex height="100%" padding="0 l">
+        <GdsFlex height="100%" padding="0 xs">
           <GdsMenuButton onClick={toggleCmd}>
             <IconMagnifyingGlass slot="lead" />
             {isWindows ? '/' : '⌘K'}

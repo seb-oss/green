@@ -1,0 +1,13 @@
+.sidebar-link {
+  font-weight: 450;
+  border-radius: 0.5rem;
+  padding: var(--gds-space-xs) var(--gds-space-s);
+}
+
+.sidebar-link--sub {
+  padding-left: var(--gds-space-s);
+}
+
+.sidebar-link:hover {
+  background-color: var(--gds-color-l2-background-primary);
+}

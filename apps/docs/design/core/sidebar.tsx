@@ -1,16 +1,14 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsButton, GdsFlex, GdsLink } from '$/import/components'
-import {
-  IconCainLink,
-  IconChevronBottom,
-  IconChevronTop,
-  IconEyeSlash,
-} from '$/import/icons'
+import { GdsBadge, GdsFlex } from '$/import/components'
+import { IconCainLink, IconEyeSlash } from '$/import/icons'
+
+import './sidebar.css'
 
 const menu = [
   {
@@ -94,12 +92,6 @@ export default function Sidebar({
     [key: string]: boolean
   }>({})
 
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
-
-  useEffect(() => {
-    return () => setHoveredLink(null)
-  }, [])
-
   useEffect(() => {
     const initialVisibleSublinks: { [key: string]: boolean } = {}
     menu.forEach((menuItem) => {
@@ -113,92 +105,78 @@ export default function Sidebar({
     setVisibleSublinks(initialVisibleSublinks)
   }, [path])
 
-  const toggleSublinkVisibility = (key: string) => {
-    setVisibleSublinks((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }))
-  }
-
   return (
     <GdsFlex
-      padding="xl xl xl 2xl"
+      padding="m s"
       border="0 4xs/primary 0 0"
       min-width="300px"
-      height="calc(100vh - 72px)"
+      height="calc(100vh - 60px)"
       align-items="flex-start"
       flex-direction="column"
-      gap="l"
+      gap="xs"
       position="sticky"
-      top="72px"
-      inset="72px 0 0 0"
+      top="60px"
+      inset="60px 0 0 0"
       overflow="hidden auto"
     >
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
-          <GdsFlex align-items="center" justify-content="space-between">
-            <GdsLink href={menuItem.path} variant="secondary">
-              {menuItem.title}
-            </GdsLink>
-            {menuItem.subLinks.length > 0 && (
-              <GdsButton
-                rank="tertiary"
-                aria-label="Expand"
-                onClick={() => toggleSublinkVisibility(menuItem.title)}
-              >
-                {visibleSublinks[menuItem.title] ? (
-                  <IconChevronTop />
-                ) : (
-                  <IconChevronBottom />
-                )}
-              </GdsButton>
-            )}
-          </GdsFlex>
+          <Link href={menuItem.path} className="sidebar-link">
+            {menuItem.title}
+          </Link>
           {visibleSublinks[menuItem.title] && (
-            <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
+            <GdsFlex flex-direction="column">
               {menuItem.subLinks.map((subLink, subIdx) => {
                 return (
-                  <GdsFlex key={subIdx} justify-content="space-between">
-                    <GdsLink href={subLink.path} variant="secondary">
-                      {subLink.title}
-                    </GdsLink>
-                    <GdsFlex align-items="center" gap="xs">
-                      {subLink.private && (
-                        <IconEyeSlash width="12" height="12" />
-                      )}
-                      {subLink.badge && (
-                        <GdsBadge variant="notice" size="small">
-                          {subLink.badge}
-                        </GdsBadge>
-                      )}
+                  <Link
+                    href={subLink.path}
+                    className="sidebar-link sidebar-link--sub"
+                    key={subIdx}
+                  >
+                    <GdsFlex
+                      key={subIdx}
+                      justify-content="space-between"
+                      gap="xs"
+                    >
+                      <GdsFlex align-items="center" gap="xs">
+                        <GdsFlex align-items="center" width="12px">
+                          {subLink.private && (
+                            <IconEyeSlash width="12" height="12" />
+                          )}
+                        </GdsFlex>
+                        {subLink.title}
+                      </GdsFlex>
+
+                      <GdsFlex align-items="center" gap="xs">
+                        {subLink.badge && (
+                          <GdsBadge variant="notice" size="small">
+                            {subLink.badge}
+                          </GdsBadge>
+                        )}
+                      </GdsFlex>
                     </GdsFlex>
-                  </GdsFlex>
+                  </Link>
                 )
               })}
             </GdsFlex>
           )}
         </GdsFlex>
       ))}
-      <GdsFlex
-        margin="auto 0 0 0"
-        min-width="100%"
-        justify-content="stretch"
-        padding="0 s 0 0"
-      >
-        <GdsFlex
-          align-items="center"
-          justify-content="space-between"
-          width="100%"
+      <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
+        <Link
+          href="https://designlibrary.sebgroup.com/"
+          target="_blank"
+          className="sidebar-link"
         >
-          <GdsLink
-            href="https://designlibrary.sebgroup.com/"
-            target="_blank"
-            variant="secondary"
+          <GdsFlex
+            align-items="center"
+            justify-content="space-between"
+            width="100%"
           >
             <span>Design Library</span>
-          </GdsLink>
-          <IconCainLink />
-        </GdsFlex>
+            <IconCainLink />
+          </GdsFlex>
+        </Link>
       </GdsFlex>
     </GdsFlex>
   )
