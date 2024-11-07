@@ -126,7 +126,7 @@ export const styles = css`
     border-bottom: var(--default-border);
     border-left: transparent;
     border-right: transparent;
-    color: var(--gds-color-l3-content-secondary);
+    color: currentColor;
   }
 
   th:not(:last-child) {
