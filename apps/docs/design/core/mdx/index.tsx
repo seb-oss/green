@@ -2,7 +2,12 @@
 
 import * as React from 'react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { GdsDivider, GdsFlex, GdsRichText } from '$/import/components'
+import {
+  GdsButton,
+  GdsDivider,
+  GdsFlex,
+  GdsRichText,
+} from '$/import/components'
 
 // Local components
 import Do from './do'
@@ -24,6 +29,7 @@ const components = {
   Dont,
   SE,
   Pattern,
+  GdsButton: (props: object) => <GdsButton {...props} />,
   GdsDivider: (props: object) => <GdsDivider {...props} />,
   Grid,
   Story,

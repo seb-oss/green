@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './rich-text'
 import '../divider'
 import '../card'
+import '../container'
+import '../text'
 
 import { html } from '../../scoping'
 
@@ -46,19 +48,18 @@ export const Card: Story = {
         <h1>
           The Starship <small>SS Endeavor</small> <mark>Exploration Class</mark>
         </h1>
-        <iframe src="https://seb.io"></iframe>
-
-        <br />
-        <a href="#">Link</a>
+        <iframe src="https://example.com/" height="400"></iframe>
+        <h2>Heading one</h2>
+        <h3>Heading test</h3>
         <p>
           The <strong>SS Endeavor</strong> is a state-of-the-art exploration
           class starship designed for deep space missions. Equipped with
           advanced technology and robust systems, it aims to expand our
-          understanding of the universe. <br /><br />
-          With a focus on <em>interstellar travel</em>, the SS Endeavor features
-          a unique propulsion system that allows for faster-than-light travel.
-          Its mission is to explore uncharted territories and gather data on
-          distant celestial bodies.
+          understanding of the universe. With a focus on
+          <em>interstellar travel</em>, the SS Endeavor features a unique
+          propulsion system that allows for faster-than-light travel. Its
+          mission is to explore uncharted territories and gather data on distant
+          celestial bodies. <a href="#">Link</a>
         </p>
         <figure>
           <img src="https://placehold.co/600x400" alt="SS Endeavor Starship" />
@@ -206,12 +207,67 @@ export const Headings: Story = {
   name: 'Headings',
   render: (args) => html`
     <gds-rich-text>
-      <h1>The Starship SS Endeavor Exploration Class</h1>
+      <!-- <h1>The Starship SS Endeavor Exploration Class</h1>
       <h2>Mission Alpha Centauri Deep Space Exploration</h2>
       <h3>Rocket Falcon Heavy Launch Vehicle</h3>
       <h4>Engine Raptor Next-Gen Propulsion</h4>
       <h5>Module Dragon Crew Transport</h5>
-      <h6>Satellite Starlink Global Internet</h6>
+      <h6>Satellite Starlink Global Internet</h6> -->
+
+      <h1>Heading 1</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h2>Heading 2</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h3>Heading 3</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h4>Heading 4</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h5>Heading 5</h5>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h6>Heading 6</h6>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
     </gds-rich-text>
   `,
 }

@@ -13,24 +13,62 @@ export const styles = css`
     margin-top: 0;
   }
 
-  /*
-  * typography
-  * -----------------------------------------------------------
-  */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    margin-top: 0.6lh;
-    margin-bottom: 0.3lh;
+    margin-top: var(--gds-space-2xl);
+    margin-bottom: var(--gds-space-xs);
   }
 
-  p {
-    margin-bottom: 1lh;
-    max-width: 80ch;
+  h1 + h2 {
+    margin-top: 0;
   }
+
+  h2 + h3 {
+    margin-top: 0;
+  }
+
+  h3 + h4 {
+    margin-top: 0;
+  }
+
+  h4 + h5 {
+    margin-top: 0;
+  }
+
+  h4 + h5 {
+    margin-top: 0;
+  }
+
+  h5 + h6 {
+    margin-top: 0;
+  }
+
+  // h2 {
+  //   margin-bottom: var(--gds-space-xs);
+  // }
+
+  // h3 {
+  //   margin-bottom: var(--gds-space-2xs);
+  // }
+
+  // h1 {
+  //   margin-bottom: var(--gds-space-xs);
+  // }
+
+  // Consider to do this some other way
+
+  p {
+    margin: 0;
+    margin-bottom: var(--gds-space-xs);
+    max-width: 80ch;
+    line-height: 22px;
+  }
+
+  // tests
 
   blockquote {
     margin: unset;
@@ -76,13 +114,14 @@ export const styles = css`
   figure {
     margin: 0;
     padding: 0;
+    margin-top: var(--gds-space-xl);
     & img {
       display: block;
     }
   }
   figcaption {
     font-size: smaller;
-    margin-block-start: 0.4lh;
+    margin-block-start: var(--gds-space-xs);
   }
 
   /*

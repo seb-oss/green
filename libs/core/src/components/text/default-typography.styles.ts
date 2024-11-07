@@ -4,7 +4,7 @@ export const defaultStyles = css`
   @layer defaults {
     a:link {
       color: currentColor;
-      text-undeline-offset: 0.2lh;
+      text-underline-offset: 0.1lh;
       font-weight: var(--gds-text-weight-book);
     }
 
@@ -62,6 +62,7 @@ export const defaultStyles = css`
       border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
       border-radius: var(--gds-space-xs);
       min-width: 100%;
+      margin-bottom: var(--gds-space-l);
     }
   }
 `
