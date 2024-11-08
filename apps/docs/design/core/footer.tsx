@@ -59,13 +59,11 @@ export default function Footer() {
       <GdsFlex gap="8xl">
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(0, 3).map((item, idx) => (
-            <GdsLink
-              key={idx}
-              href={item.path}
-              target={item.external ? '_blank' : '_self'}
-            >
-              {item.title}
-            </GdsLink>
+            <Link href={item.path} passHref legacyBehavior key={idx}>
+              <GdsLink target={item.external ? '_blank' : '_self'}>
+                {item.title}
+              </GdsLink>
+            </Link>
           ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
