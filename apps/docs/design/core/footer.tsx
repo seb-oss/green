@@ -1,7 +1,8 @@
 'use client'
 
-import Link from 'next/link'
+// import Link from 'next/link'
 import { GdsButton, GdsFlex, GdsLink, GdsText } from '$/import/components'
+import Link from 'core/link'
 
 const menuItems = [
   {
@@ -59,33 +60,37 @@ export default function Footer() {
       <GdsFlex gap="8xl">
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(0, 3).map((item, idx) => (
-            <Link href={item.path} passHref legacyBehavior key={idx}>
-              <GdsLink target={item.external ? '_blank' : '_self'}>
-                {item.title}
-              </GdsLink>
+            <Link
+              href={item.path}
+              target={item.external ? '_blank' : '_self'}
+              key={idx}
+            >
+              {/* <GdsLink target={item.external ? '_blank' : '_self'}> */}
+              {item.title}
+              {/* </GdsLink> */}
             </Link>
           ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(3, 6).map((item, idx) => (
-            <GdsLink
+            <Link
               key={idx}
               href={item.path}
               target={item.external ? '_blank' : '_self'}
             >
               {item.title}
-            </GdsLink>
+            </Link>
           ))}
         </GdsFlex>
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(6).map((item, idx) => (
-            <GdsLink
+            <Link
               key={idx}
               href={item.path}
               target={item.external ? '_blank' : '_self'}
             >
               {item.title}
-            </GdsLink>
+            </Link>
           ))}
         </GdsFlex>
       </GdsFlex>
