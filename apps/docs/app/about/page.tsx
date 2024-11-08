@@ -4,12 +4,12 @@ import {
   GdsFlex,
   GdsGrid,
   GdsImg,
-  GdsLink,
   GdsRichText,
   GdsText,
 } from '$/import/components'
 import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
+import Link from 'core/link'
 import TOC from 'core/navigator'
 
 const HEADINGS = [
@@ -168,21 +168,21 @@ export default function About() {
                     <ul>
                       <li>
                         {`Book `}
-                        <GdsLink
+                        <Link
                           href="https://teams.microsoft.com/l/entity/0d820ecd-def2-4297-adad-78056cde7c78/_djb2_msteams_prefix_4065088102?context=%7B%22channelId%22%3A%2219%3A33f450cae2764531930c4eca19aa4c26%40thread.tacv2%22%7D&groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                           target="_blank"
                         >
                           Green Coaching
-                        </GdsLink>
+                        </Link>
                       </li>
                       <li>
                         {`Book `}
-                        <GdsLink
+                        <Link
                           href="https://teams.microsoft.com/l/entity/0d820ecd-def2-4297-adad-78056cde7c78/_djb2_msteams_prefix_43486807?context=%7B%22channelId%22%3A%2219%3A33f450cae2764531930c4eca19aa4c26%40thread.tacv2%22%7D&groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                           target="_blank"
                         >
                           CX Coaching
-                        </GdsLink>
+                        </Link>
                       </li>
                     </ul>
                   </GdsRichText>
@@ -210,22 +210,22 @@ export default function About() {
                 <ul>
                   <li>
                     {`Ask in our `}
-                    <GdsLink
+                    <Link
                       href="https://teams.microsoft.com/l/team/19%3aR-yrtyItfX3RWEyU8WrCyVy6u-eqWxYPbY1w2O7UVPs1%40thread.tacv2/conversations?groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                       target="_blank"
                     >
                       Teams channel
-                    </GdsLink>
+                    </Link>
                   </li>
                   <li>
                     {`Post an `}
-                    <GdsLink href="">issue on Github</GdsLink>
+                    <Link href="">issue on Github</Link>
                   </li>
                   <li>
                     {`Email us at `}
-                    <GdsLink href="mailtogreendesignsystem@seb.se">
+                    <Link href="mailtogreendesignsystem@seb.se">
                       greendesignsystem@seb.se
-                    </GdsLink>
+                    </Link>
                   </li>
                 </ul>
               </GdsRichText>

@@ -4,13 +4,14 @@ import React, { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsButton, GdsFlex, GdsLink } from '$/import/components'
+import { GdsBadge, GdsButton, GdsFlex } from '$/import/components'
 import {
   IconCainLink,
   IconChevronBottom,
   IconChevronTop,
   IconEyeSlash,
 } from '$/import/icons'
+import Link from 'core/link'
 
 const menu = [
   {
@@ -140,9 +141,9 @@ export default function Sidebar({
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
           <GdsFlex align-items="center" justify-content="space-between">
-            <GdsLink href={menuItem.path} variant="secondary">
+            <Link href={menuItem.path} variant="secondary">
               {menuItem.title}
-            </GdsLink>
+            </Link>
             {menuItem.subLinks.length > 0 && (
               <GdsButton
                 rank="tertiary"
@@ -162,9 +163,9 @@ export default function Sidebar({
               {menuItem.subLinks.map((subLink, subIdx) => {
                 return (
                   <GdsFlex key={subIdx} justify-content="space-between">
-                    <GdsLink href={subLink.path} variant="secondary">
+                    <Link href={subLink.path} variant="secondary">
                       {subLink.title}
-                    </GdsLink>
+                    </Link>
                     <GdsFlex align-items="center" gap="xs">
                       {subLink.private && (
                         <IconEyeSlash width="12" height="12" />
@@ -193,13 +194,13 @@ export default function Sidebar({
           justify-content="space-between"
           width="100%"
         >
-          <GdsLink
+          <Link
             href="https://designlibrary.sebgroup.com/"
             target="_blank"
             variant="secondary"
           >
             <span>Design Library</span>
-          </GdsLink>
+          </Link>
           <IconCainLink />
         </GdsFlex>
       </GdsFlex>

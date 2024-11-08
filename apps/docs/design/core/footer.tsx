@@ -1,7 +1,6 @@
 'use client'
 
-// import Link from 'next/link'
-import { GdsButton, GdsFlex, GdsLink, GdsText } from '$/import/components'
+import { GdsButton, GdsFlex, GdsText } from '$/import/components'
 import Link from 'core/link'
 
 const menuItems = [
@@ -65,9 +64,7 @@ export default function Footer() {
               target={item.external ? '_blank' : '_self'}
               key={idx}
             >
-              {/* <GdsLink target={item.external ? '_blank' : '_self'}> */}
               {item.title}
-              {/* </GdsLink> */}
             </Link>
           ))}
         </GdsFlex>

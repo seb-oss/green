@@ -3,14 +3,9 @@
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import {
-  GdsBadge,
-  GdsCard,
-  GdsFlex,
-  GdsLink,
-  GdsText,
-} from '$/import/components'
+import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
+import Link from 'core/link'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'
@@ -88,13 +83,13 @@ export default function ComponentLayout({
     dynamic(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
-          const ExampleComponent = () => <div>Example</div>
+          const ExampleComponent = () => <div>Example not created</div>
           ExampleComponent.displayName = 'ExampleComponent'
           return ExampleComponent
         }),
       {
         ssr: false,
-        loading: () => <p>Loading...</p>,
+        loading: () => '',
       },
     )
 
@@ -132,14 +127,14 @@ export default function ComponentLayout({
                 )}
                 <GdsFlex gap="s">
                   {tagsArray.map((tag) => (
-                    <GdsLink
+                    <Link
                       href={`/tag/` + tag}
                       key={tag}
                       variant="primary"
                       size="small"
                     >
                       {tag}
-                    </GdsLink>
+                    </Link>
                   ))}
                 </GdsFlex>
               </GdsFlex>

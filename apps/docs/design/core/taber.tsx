@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { GdsFlex, GdsMenuButton } from '$/import/components'
+import { GdsFlex } from '$/import/components'
+import Link from 'core/link'
 
-interface Link {
+interface LinkInterface {
   path: string
   label: string
   isPrivate: boolean
@@ -13,7 +13,7 @@ interface Link {
 
 interface TaberProps {
   component: string
-  links: Link[]
+  links: LinkInterface[]
 }
 
 export default function Taber({ component, links }: TaberProps) {
@@ -31,13 +31,14 @@ export default function Taber({ component, links }: TaberProps) {
       {links.map(
         ({ path, label, isPrivate }) =>
           !isPrivate && (
-            <GdsMenuButton
+            <Link
               key={path}
               href={component + path}
               selected={pathName === component + path}
+              menu
             >
               {label}
-            </GdsMenuButton>
+            </Link>
           ),
       )}
     </GdsFlex>

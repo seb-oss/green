@@ -1,10 +1,13 @@
+'use client'
+
 import React from 'react'
 import { default as NextLink } from 'next/link'
-import { GdsLink } from '$/import/components'
+import { GdsLink, GdsMenuButton } from '$/import/components'
 
 interface CustomLinkProps {
   onClick?: React.MouseEventHandler<HTMLAnchorElement>
   href: string
+  menu?: boolean
   children: React.ReactNode
   [key: string]: unknown
 }
@@ -12,12 +15,20 @@ interface CustomLinkProps {
 const CustomLink: React.ForwardRefRenderFunction<
   HTMLAnchorElement,
   CustomLinkProps
-> = ({ onClick, href, children, ...rest }, ref) => {
-  return (
-    <GdsLink href={href} onClick={onClick} ref={ref} {...rest}>
-      {children}
-    </GdsLink>
-  )
+> = ({ onClick, href, children, menu, ...rest }, ref) => {
+  if (menu) {
+    return (
+      <GdsMenuButton href={href} onClick={onClick} ref={ref} {...rest}>
+        {children}
+      </GdsMenuButton>
+    )
+  } else {
+    return (
+      <GdsLink href={href} onClick={onClick} ref={ref} {...rest}>
+        {children}
+      </GdsLink>
+    )
+  }
 }
 
 const ForwardedCustomLink = React.forwardRef(CustomLink)
