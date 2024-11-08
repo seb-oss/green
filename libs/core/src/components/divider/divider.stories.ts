@@ -14,6 +14,8 @@ import { html } from 'lit'
  * The divider can be customized with different properties like color and size.
  *
  * @status beta
+ *
+ * > Divider should not be used as a border for a container. In that case, use the border property of the container instead.
  */
 const meta: Meta = {
   title: 'Components/Divider',
@@ -93,42 +95,69 @@ export const Color: Story = {
 }
 
 /**
- * The `gds-divider` with different sizes
+ * Custom color
+ * In addition to color tokens you can still use custom colors in cases when you need to use a color that is not part of the design system.
  *
  * Example:
  *
  * ```html
- * <gds-divider size="xl"></gds-divider>
- * <gds-divider size="2xl"></gds-divider>
- * <gds-divider size="4xl"></gds-divider>
- * <gds-divider size="6xl"></gds-divider>
+ * <gds-divider color="#fc0"></gds-divider>
  * ```
  *
- * It accepts all the [size tokens from the design system](?path=/docs/style-size--docs).
- *
- * > The size property doesn't affect the size of the border itself but the space around the divider.
  */
-export const Size: Story = {
+export const Custom: Story = {
   ...DefaultParams,
-  name: 'Size',
+  name: 'Color Custom',
   render: (args) =>
     html` <gds-flex flex-direction="column" gap="xl">
-      <gds-card>
-        <gds-flex flex-direction="column">
-          <gds-text>Size: 2xl</gds-text>
-          <gds-divider color="primary" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-      <gds-card>
-        <gds-flex flex-direction="column">
-          <gds-text>Size: 4xl</gds-text>
-          <gds-divider color="secondary" size="4xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>Size: 6xl</gds-text>
-          <gds-divider color="tertiary" size="6xl"></gds-divider>
+          <gds-text>Custom Color: #fc0</gds-text>
+          <gds-divider color="#fc0" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card>
+        <gds-flex flex-direction="column">
+          <gds-text>Custom Color: #2561ad</gds-text>
+          <gds-divider color="#2561ad" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+    </gds-flex>`,
+}
+
+/**
+ * Color property acceps alpha values
+ * It can be used with variable colors from the design system or custom colors.
+ *
+ * Example:
+ * ```html
+ * <gds-divider color="#2561ad/0.2"></gds-divider>
+ * <gds-divider color="primary/0.2"></gds-divider>
+ * ```
+ *
+ * The alpha value should be between 0 and 1.
+ */
+export const Alpha: Story = {
+  ...DefaultParams,
+  name: 'Color Alpha',
+  render: (args) =>
+    html` <gds-flex flex-direction="column" gap="xl">
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>
+            Token with alpha: <br />
+            <code>primary/0.4</code>
+          </gds-text>
+          <gds-divider color="primary/0.4" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card>
+        <gds-flex flex-direction="column">
+          <gds-text>
+            Custom color with alpha: <br />
+            <code>#2561ad/0.2</code>
+          </gds-text>
+          <gds-divider color="#2561ad/0.2" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,
@@ -167,6 +196,48 @@ export const Opacity: Story = {
         <gds-flex flex-direction="column">
           <gds-text>Opacity: 0.2</gds-text>
           <gds-divider color="tertiary" size="6xl" opacity="0.2"></gds-divider>
+        </gds-flex>
+      </gds-card>
+    </gds-flex>`,
+}
+
+/**
+ * The `gds-divider` with different sizes
+ *
+ * Example:
+ *
+ * ```html
+ * <gds-divider size="xl"></gds-divider>
+ * <gds-divider size="2xl"></gds-divider>
+ * <gds-divider size="4xl"></gds-divider>
+ * <gds-divider size="6xl"></gds-divider>
+ * ```
+ *
+ * It accepts all the [size tokens from the design system](?path=/docs/style-size--docs).
+ *
+ * > The size property doesn't affect the size of the border itself but the space around the divider.
+ */
+export const Size: Story = {
+  ...DefaultParams,
+  name: 'Size',
+  render: (args) =>
+    html` <gds-flex flex-direction="column" gap="xl">
+      <gds-card>
+        <gds-flex flex-direction="column">
+          <gds-text>Size: 2xl</gds-text>
+          <gds-divider color="primary" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card>
+        <gds-flex flex-direction="column">
+          <gds-text>Size: 4xl</gds-text>
+          <gds-divider color="secondary" size="4xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>Size: 6xl</gds-text>
+          <gds-divider color="tertiary" size="6xl"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,
