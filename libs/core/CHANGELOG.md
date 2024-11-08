@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.55.1
+
+### Patch Changes
+
+- d55952a: **Divider:** Update the color property to accept the new values and improve the documentation
+
 ## 1.55.0
 
 ### Minor Changes
