@@ -8,6 +8,12 @@ import { html } from 'lit'
 
 /**
  * The `gds-divider`
+ *
+ * The divider component is used to separate content in a meaningful way.
+ *
+ * The divider can be customized with different properties like color and size.
+ *
+ * @status beta
  */
 const meta: Meta = {
   title: 'Components/Divider',
@@ -99,6 +105,8 @@ export const Color: Story = {
  * ```
  *
  * It accepts all the [size tokens from the design system](?path=/docs/style-size--docs).
+ *
+ * > The size property doesn't affect the size of the border itself but the space around the divider.
  */
 export const Size: Story = {
   ...DefaultParams,
@@ -107,32 +115,58 @@ export const Size: Story = {
     html` <gds-flex flex-direction="column" gap="xl">
       <gds-card>
         <gds-flex flex-direction="column">
-          <gds-text>Primary</gds-text>
+          <gds-text>Size: 2xl</gds-text>
           <gds-divider color="primary" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card>
         <gds-flex flex-direction="column">
-          <gds-text>Secondary</gds-text>
-          <gds-divider color="secondary" size="2xl"></gds-divider>
+          <gds-text>Size: 4xl</gds-text>
+          <gds-divider color="secondary" size="4xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>Tertiary</gds-text>
-          <gds-divider color="tertiary" size="2xl"></gds-divider>
+          <gds-text>Size: 6xl</gds-text>
+          <gds-divider color="tertiary" size="6xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+    </gds-flex>`,
+}
+
+/**
+ * In addition to the color and size properties, the divider component also supports the opacity property.
+ *
+ * Example:
+ *
+ * ```html
+ * <gds-divider opacity="0.2"></gds-divider>
+ * <gds-divider opacity="0.4"></gds-divider>
+ * <gds-divider opacity="0.6"></gds-divider>
+ * <gds-divider opacity="0.8"></gds-divider>
+ * ```
+ */
+export const Opacity: Story = {
+  ...DefaultParams,
+  name: 'Opacity',
+  render: (args) =>
+    html` <gds-flex flex-direction="column" gap="xl">
+      <gds-card>
+        <gds-flex flex-direction="column">
+          <gds-text>Opacity: 0.6</gds-text>
+          <gds-divider color="primary" size="2xl" opacity="0.6"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card>
         <gds-flex flex-direction="column">
-          <gds-text>Quarternary</gds-text>
-          <gds-divider color="quarternary" size="2xl"></gds-divider>
+          <gds-text>Opacity: 0.3</gds-text>
+          <gds-divider color="secondary" size="4xl" opacity="0.4"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>Inversed</gds-text>
-          <gds-divider color="inversed" size="2xl"></gds-divider>
+          <gds-text>Opacity: 0.2</gds-text>
+          <gds-divider color="tertiary" size="6xl" opacity="0.2"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,
