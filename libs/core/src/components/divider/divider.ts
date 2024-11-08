@@ -127,6 +127,6 @@ export class GdsDivider extends GdsElement {
   opacity?: string
 
   render() {
-    return html``
+    return html`<hr />`
   }
 }
