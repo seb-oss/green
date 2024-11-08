@@ -58,6 +58,7 @@ export interface DropdownArgs {
   /** Whether to disable the mobile styles */
   disableMobileStyles?: boolean
 
+  /** Event handler for when the dropdown is opened or closed */
   onGdsUiState?: (e: CustomEvent) => void
 }
 export interface DropdownTexts {
@@ -107,7 +108,7 @@ export const Dropdown = ({
   value,
   syncPopoverWidth,
   disableMobileStyles,
-  onGdsUiState = () => {},
+  onGdsUiState,
   ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
@@ -146,7 +147,7 @@ export const Dropdown = ({
         hideLabel={props.hideLabel}
         maxHeight={props.maxHeight}
         disableMobileStyles={disableMobileStyles}
-        onGdsUiState={(e: Event) => onGdsUiState(e as CustomEvent)}
+        onGdsUiState={(e: Event) => onGdsUiState?.(e as CustomEvent)}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}
