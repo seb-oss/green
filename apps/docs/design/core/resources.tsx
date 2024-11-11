@@ -47,8 +47,12 @@ export default function Resources({ title }: { title: string }): JSX.Element {
       <GdsGrid columns="3" gap="m">
         {resources.map((resource, index) => (
           <Link href={resource.href} key={index} target={resource.target}>
-            <GdsCard variant="primary">
-              <GdsFlex justify-cotnent="space-between" width="100%">
+            <GdsCard variant="primary" padding="m l">
+              <GdsFlex
+                justify-cotnent="space-between"
+                align-items="center"
+                width="100%"
+              >
                 <GdsFlex flex-direction="column" flex="1">
                   <GdsText font-size="body-s">{resource.caption}</GdsText>
                   <GdsText font-size="body-l">{resource.text}</GdsText>
