@@ -36,12 +36,8 @@ export interface ElementProps {
 
 export interface DatepickerOptions {
   label?: string
-  locale?: string
   currentDate?: Date | string
   selectedDate?: Date | string
-  closeOnSelect?: boolean
-  useCurrentTime?: boolean
-  weekName?: { abbr: string; displayText: string }
   showWeeks?: boolean
   minDate?: Date
   maxDate?: Date
