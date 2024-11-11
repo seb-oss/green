@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.0.0
+
+### Major Changes
+
+- 54ec646: Upgrade minimum supported version to Angular 17
+- 54ec646: **Datepicker:** Remove deprecated props from `DatepickerOptions`
+- 54ec646: **Context Menu:** Remove deprecated input `closeOnScroll`
+- 54ec646: **Dropdown:** Remove deprecated input `fixedPlacement`
+- 54ec646: **Dropdown:** Remove some deprecated props from `DropdownTexts`
+
 ## 4.6.7
 
 ### Patch Changes
