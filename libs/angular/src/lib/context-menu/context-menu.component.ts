@@ -47,12 +47,6 @@ export class NggContextMenuComponent {
   @Input() menuAnchorTemplate: TemplateRef<unknown> | null = null
 
   /**
-   * @deprecated
-   * This property no longer has any effect and will be removed in a future version.
-   */
-  @Input() closeOnScroll = false
-
-  /**
    * Emits when a menu item is clicked.
    */
   @Output() contextMenuItemClicked: EventEmitter<DropdownOption> =
