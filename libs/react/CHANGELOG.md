@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.21.0
+
+### Minor Changes
+
+- 1347472: **Modal:** Make bodyScrollLock optional through prop. Fixes #1742
+- 1347472: **Dropdown:** Expose `gds-ui-state` event through wrapper
+
 ## 3.20.2
 
 ### Patch Changes
