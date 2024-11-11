@@ -129,7 +129,7 @@ MultiSelect.args = {
 export const Searchable = Template.bind({})
 Searchable.args = {
   id: '',
-  texts: { placeholder: 'Select meal(s)', searchPlaceholder: 'Search meal' },
+  texts: { placeholder: 'Select meal(s)' },
   value: '',
   loop: true,
   multiSelect: false,
