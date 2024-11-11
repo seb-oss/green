@@ -12,7 +12,7 @@ import { IconChevronRight } from '$/import/icons'
 
 function Chevron() {
   return (
-    <GdsButton rank="tertiary">
+    <GdsButton rank="secondary">
       <IconChevronRight />
     </GdsButton>
   )
@@ -40,13 +40,13 @@ const resources: Resource[] = [
   },
 ]
 
-export default function Ressources({ title }: { title: string }): JSX.Element {
+export default function Resources({ title }: { title: string }): JSX.Element {
   return (
     <GdsFlex flex-direction="column">
       {title && <h2>{title}</h2>}
       <GdsGrid columns="3" gap="m">
         {resources.map((resource, index) => (
-          <Link href={resource} key={index} target={resource.target}>
+          <Link href={resource.href} key={index} target={resource.target}>
             <GdsCard variant="primary">
               <GdsFlex justify-cotnent="space-between" width="100%">
                 <GdsFlex flex-direction="column" flex="1">

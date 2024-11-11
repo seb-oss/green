@@ -1,7 +1,7 @@
 import Components from 'core/components'
 import Empower from 'core/empower'
 import Hero from 'core/hero'
-import Ressources from 'core/resources'
+import Resources from 'core/resources'
 
 import type { Metadata } from 'next'
 
@@ -27,7 +27,7 @@ export default function Home() {
       />
 
       <Components title="Components" />
-      <Ressources title="Resources" />
+      <Resources title="Resources" />
       <Empower title="Empowering designers and developers" />
     </>
   )
