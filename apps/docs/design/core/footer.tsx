@@ -49,14 +49,14 @@ export default function Footer() {
   return (
     <GdsFlex
       flex-direction="column"
-      padding="6xl 2xl"
-      gap="5xl"
+      padding="2xl; s{6xl 2xl}"
+      gap="2xl; s{5xl}"
       border="4xs/primary 0 0 0"
     >
       <GdsFlex>
         <GdsText tag="h2">Green Design System</GdsText>
       </GdsFlex>
-      <GdsFlex gap="8xl">
+      <GdsFlex gap="2xl; s{8xl}" flex-direction="column; s{row}">
         <GdsFlex gap="xl" flex-direction="column">
           {menuItems.slice(0, 3).map((item, idx) => (
             <Link

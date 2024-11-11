@@ -44,7 +44,7 @@ export default function Resources({ title }: { title: string }): JSX.Element {
   return (
     <GdsFlex flex-direction="column">
       {title && <h2>{title}</h2>}
-      <GdsGrid columns="3" gap="m">
+      <GdsGrid columns="1; m{3}" gap="m">
         {resources.map((resource, index) => (
           <Link href={resource.href} key={index} target={resource.target}>
             <GdsCard variant="primary" padding="m l">

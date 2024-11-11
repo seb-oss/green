@@ -15,8 +15,8 @@ export default function Hero({
     <GdsFlex
       flex-direction="column"
       max-width="100ch"
-      gap="2xl"
-      min-height={compact ? '20vh' : 'calc(100vh - 220px)'}
+      gap="l; s{2xl}"
+      min-height={compact ? '20vh' : '20vh; s{calc(100vh - 220px)}'}
       justify-content="flex-end"
     >
       <GdsText

@@ -130,7 +130,7 @@ export default function Sidebar({
       align-items="flex-start"
       flex-direction="column"
       gap="l"
-      position="xs{fixed} s{fixed} m{sticky}"
+      position="fixed; xs{fixed} s{sticky} m{sticky}"
       top="72px"
       inset="72px 0 0 0"
       overflow="hidden auto"
