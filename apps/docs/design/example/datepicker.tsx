@@ -1,22 +1,7 @@
 'use client'
 
-import React from 'react'
-import dynamic from 'next/dynamic'
+import { GdsDatepicker } from '$/import/components'
 
-const GdsDatepicker = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/datepicker').then(
-      (mod) => mod.GdsDatepicker,
-    ),
-  {
-    ssr: false,
-  },
-)
-
-const Datepicker = () => (
-  <>
-    <GdsDatepicker></GdsDatepicker>
-  </>
-)
+const Datepicker = () => <GdsDatepicker />
 
 export default Datepicker

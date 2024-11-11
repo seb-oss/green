@@ -57,6 +57,9 @@ export interface DropdownArgs {
 
   /** Whether to disable the mobile styles */
   disableMobileStyles?: boolean
+
+  /** Event handler for when the dropdown is opened or closed */
+  onGdsUiState?: (e: CustomEvent) => void
 }
 export interface DropdownTexts {
   placeholder?: string
@@ -74,7 +77,7 @@ registerTransitionalStyles()
 export const CoreDropdown = createComponent({
   tagName: getScopedTagName('gds-dropdown'),
   elementClass: GdsDropdown,
-  events: { onchange: 'change' },
+  events: { onChange: 'change', onGdsUiState: 'gds-ui-state' },
   react: React,
 })
 
@@ -105,6 +108,7 @@ export const Dropdown = ({
   value,
   syncPopoverWidth,
   disableMobileStyles,
+  onGdsUiState,
   ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
@@ -133,7 +137,7 @@ export const Dropdown = ({
         label={label}
         searchable={searchable}
         multiple={multiSelect}
-        onchange={handleOnChange}
+        onChange={handleOnChange}
         invalid={validator?.indicator === 'error'}
         compareWith={compareWithAdapter}
         value={value}
@@ -143,6 +147,7 @@ export const Dropdown = ({
         hideLabel={props.hideLabel}
         maxHeight={props.maxHeight}
         disableMobileStyles={disableMobileStyles}
+        onGdsUiState={(e: Event) => onGdsUiState?.(e as CustomEvent)}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
         {validator && <span slot="message">{validator.message}</span>}

@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/green-angular",
-  "version": "4.6.6",
+  "version": "4.6.7",
   "peerDependencies": {
     "@angular/cdk": ">=16.2.14",
     "@angular/common": ">=16.2.12",
@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@sebgroup/green-core": "^1.45.0",
-    "@sebgroup/chlorophyll": "^3.6.4",
+    "@sebgroup/chlorophyll": "^3.6.9",
     "@sebgroup/extract": "^3.0.2",
     "tslib": "^2.3.1"
   },

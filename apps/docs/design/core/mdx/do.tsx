@@ -1,34 +1,8 @@
 'use client'
 
 import React, { ReactNode } from 'react'
-import dynamic from 'next/dynamic'
-
-// import { GdsCard } from '@sebgroup/green-react/core/card/card'
-// import { GdsFlex } from '@sebgroup/green-react/core/flex/flex'
-// import { GdsText } from '@sebgroup/green-react/core/text/text'
-// import { IconCheckmark } from '@sebgroup/green-react/src/lib/icon/icons/IconCheckmark'
-
-const GdsCard = dynamic(() => import('@sebgroup/green-react/core/card'), {
-  ssr: false,
-})
-
-const GdsFlex = dynamic(() => import('@sebgroup/green-react/core/flex'), {
-  ssr: false,
-})
-
-const GdsText = dynamic(() => import('@sebgroup/green-react/core/text'), {
-  ssr: false,
-})
-
-const IconCheckmark = dynamic(
-  () =>
-    import('@sebgroup/green-react/src/lib/icon/icons/IconCheckmark').then(
-      (mod) => mod.IconCheckmark,
-    ),
-  {
-    ssr: false,
-  },
-)
+import { GdsCard, GdsFlex, GdsText } from '$/import/components'
+import { IconCheckmark } from '$/import/icons'
 
 type DoProps = {
   children: ReactNode
@@ -41,6 +15,8 @@ export default function Do({ children }: DoProps) {
       border-radius="s"
       background="positive"
       height="max-content"
+      padding="0"
+      overflow="hidden"
     >
       {children}
       <GdsFlex
