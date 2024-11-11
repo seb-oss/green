@@ -47,7 +47,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
           Menu
         </GdsMenuButton>
         <GdsContainer
-          position="m{relative} absolute"
+          position="absolute"
           margin="0 auto"
           inset="auto 0"
           max-width="max-content"
@@ -57,10 +57,12 @@ export const Header = forwardRef(({ ...props }, ref) => {
           </Link>
         </GdsContainer>
         <GdsFlex height="100%" padding="0 l">
-          <GdsMenuButton onClick={toggleCmd}>
-            <IconMagnifyingGlass slot="lead" />
-            {isWindows ? '/' : '⌘K'}
-          </GdsMenuButton>
+          <GdsContainer display="none; l{block}">
+            <GdsMenuButton onClick={toggleCmd}>
+              <IconMagnifyingGlass slot="lead" />
+              {isWindows ? '/' : '⌘K'}
+            </GdsMenuButton>
+          </GdsContainer>
           <GdsMenuButton
             href="https://github.com/sebgroup/green"
             target="_blank"
