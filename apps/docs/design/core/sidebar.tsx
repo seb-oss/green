@@ -134,9 +134,9 @@ export default function Sidebar({
       top="72px"
       inset="72px 0 0 0"
       overflow="hidden auto"
-      background="secondary"
       z-index="100"
       level="2"
+      background="secondary"
     >
       {menu.map((menuItem, idx) => (
         <GdsFlex key={idx} flex-direction="column" min-width="100%">
