@@ -5,8 +5,15 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsFlex } from '$/import/components'
-import { IconCainLink, IconEyeSlash } from '$/import/icons'
+import { GdsBadge, GdsCard, GdsFlex } from '$/import/components'
+import {
+  IconBrandGreen,
+  IconCainLink,
+  IconEyeSlash,
+  IconSquareGridCircle,
+  IconSquareInfo,
+  IconTextEdit,
+} from '$/import/icons'
 
 import './sidebar.css'
 
@@ -14,6 +21,7 @@ const menu = [
   {
     title: 'Components',
     path: '/components',
+    icon: <IconSquareGridCircle />,
     subLinks: allComponents
       .filter((component) => component._raw.sourceFileName === 'index.mdx')
       .filter((component) => !(component.private && !isDev))
@@ -28,6 +36,7 @@ const menu = [
   {
     title: 'Foundation',
     path: '/foundation',
+    icon: <IconBrandGreen />,
     subLinks: [
       {
         title: 'Accessibility',
@@ -40,6 +49,7 @@ const menu = [
   {
     title: 'UX Writing',
     path: '/ux-writing',
+    icon: <IconTextEdit />,
     subLinks: [
       {
         title: 'General',
@@ -64,6 +74,7 @@ const menu = [
   {
     title: 'About',
     path: '/about',
+    icon: <IconSquareInfo />,
     subLinks: [
       {
         title: 'Changelog',
@@ -88,45 +99,63 @@ export default function Sidebar({
   toggleNav?: () => void
 }) {
   const path = usePathname()
-  const [visibleSublinks, setVisibleSublinks] = useState<{
-    [key: string]: boolean
-  }>({})
 
-  useEffect(() => {
-    const initialVisibleSublinks: { [key: string]: boolean } = {}
-    menu.forEach((menuItem) => {
-      if (
-        path === menuItem.path ||
-        menuItem.subLinks.some((subLink) => path.includes(subLink.path))
-      ) {
-        initialVisibleSublinks[menuItem.title] = true
-      }
-    })
-    setVisibleSublinks(initialVisibleSublinks)
-  }, [path])
+  // const [visibleSublinks, setVisibleSublinks] = useState<{
+  //   [key: string]: boolean
+  // }>({})
+
+  // useEffect(() => {
+  //   const initialVisibleSublinks: { [key: string]: boolean } = {}
+  //   menu.forEach((menuItem) => {
+  //     if (
+  //       path === menuItem.path ||
+  //       menuItem.subLinks.some((subLink) => path.includes(subLink.path))
+  //     ) {
+  //       initialVisibleSublinks[menuItem.title] = true
+  //     }
+  //   })
+  //   setVisibleSublinks(initialVisibleSublinks)
+  // }, [path])
 
   return (
     <GdsFlex
-      padding="m s"
-      border="0 4xs/primary 0 0"
-      min-width="300px"
-      height="calc(100vh - 60px)"
-      align-items="flex-start"
       flex-direction="column"
-      gap="xs"
+      padding="s"
       position="sticky"
       top="60px"
+      gap="s"
       inset="60px 0 0 0"
-      overflow="hidden auto"
+      max-height="calc(100vh - 60px)"
     >
-      {menu.map((menuItem, idx) => (
-        <GdsFlex key={idx} flex-direction="column" min-width="100%">
-          <Link href={menuItem.path} className="sidebar-link">
-            {menuItem.title}
-          </Link>
-          {visibleSublinks[menuItem.title] && (
-            <GdsFlex flex-direction="column">
-              {menuItem.subLinks.map((subLink, subIdx) => {
+      <GdsCard padding="xs" min-width="300px">
+        <GdsFlex
+          align-items="flex-start"
+          flex-direction="column"
+          gap="xs"
+          overflow="hidden auto"
+        >
+          {menu.map((menuItem, idx) => (
+            <GdsFlex key={idx} flex-direction="column" min-width="100%">
+              <Link
+                href={menuItem.path}
+                className={`sidebar-link ${menuItem.path === path ? 'active' : ''}`}
+              >
+                <GdsFlex align-content="center" gap="s">
+                  {menuItem.icon && menuItem.icon}
+                  {menuItem.title}
+                </GdsFlex>
+              </Link>
+            </GdsFlex>
+          ))}
+        </GdsFlex>
+      </GdsCard>
+
+      {menu.filter((item) => item.path === path)[0] && (
+        <GdsCard padding="xs" min-width="300px" overflow="scroll">
+          <GdsFlex flex-direction="column">
+            {menu
+              .filter((item) => item.path === path)[0]
+              .subLinks.map((subLink, subIdx) => {
                 return (
                   <Link
                     href={subLink.path}
@@ -158,26 +187,28 @@ export default function Sidebar({
                   </Link>
                 )
               })}
-            </GdsFlex>
-          )}
-        </GdsFlex>
-      ))}
-      <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
-        <Link
-          href="https://designlibrary.sebgroup.com/"
-          target="_blank"
-          className="sidebar-link"
-        >
-          <GdsFlex
-            align-items="center"
-            justify-content="space-between"
-            width="100%"
-          >
-            <span>Design Library</span>
-            <IconCainLink />
           </GdsFlex>
-        </Link>
-      </GdsFlex>
+        </GdsCard>
+      )}
+
+      <GdsCard padding="xs" min-width="300px">
+        <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
+          <Link
+            href="https://designlibrary.sebgroup.com/"
+            target="_blank"
+            className="sidebar-link"
+          >
+            <GdsFlex
+              align-items="center"
+              justify-content="space-between"
+              width="100%"
+            >
+              <span>Design Library</span>
+              <IconCainLink />
+            </GdsFlex>
+          </Link>
+        </GdsFlex>
+      </GdsCard>
     </GdsFlex>
   )
 }

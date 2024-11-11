@@ -9,5 +9,13 @@
 }
 
 .sidebar-link:hover {
-  background-color: var(--gds-color-l2-background-primary);
+  background-color: var(--gds-color-l3-states-light-hover);
+}
+
+.sidebar-link:active {
+  background-color: var(--gds-color-l3-states-light-pressed);
+}
+
+.sidebar-link.active {
+  background-color: var(--gds-color-l3-background-secondary);
 }

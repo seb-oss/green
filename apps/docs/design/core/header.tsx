@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { GdsContainer, GdsFlex, GdsMenuButton } from '$/import/components'
+import { GdsButton, GdsContainer, GdsFlex } from '$/import/components'
 import {
   IconBarsThree,
   IconBrandGithub,
@@ -35,17 +35,16 @@ export const Header = forwardRef(({ ...props }, ref) => {
         min-width="100%"
         align-items="center"
         height="60px"
-        border="0 0 4xs/primary 0"
-        padding="0 0 0 xs"
+        padding="0 0 0 s"
       >
-        <GdsMenuButton onClick={toggleNav}>
+        <GdsButton onClick={toggleNav} rank="tertiary">
           {isNavOpen === true ? (
             <IconCrossLarge slot="lead" />
           ) : (
             <IconBarsThree slot="lead" />
           )}
           Menu
-        </GdsMenuButton>
+        </GdsButton>
         <GdsContainer
           position="absolute"
           margin="0 auto"
@@ -56,17 +55,18 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <IconBrandSeb />
           </Link>
         </GdsContainer>
-        <GdsFlex height="100%" padding="0 xs">
-          <GdsMenuButton onClick={toggleCmd}>
+        <GdsFlex height="100%" padding="0 xs" align-items="center" gap="s">
+          <GdsButton onClick={toggleCmd} rank="tertiary">
             <IconMagnifyingGlass slot="lead" />
             {isWindows ? '/' : '⌘K'}
-          </GdsMenuButton>
-          <GdsMenuButton
+          </GdsButton>
+          <GdsButton
             href="https://github.com/sebgroup/green"
             target="_blank"
+            rank="tertiary"
           >
             <IconBrandGithub />
-          </GdsMenuButton>
+          </GdsButton>
           <ThemeToggle />
         </GdsFlex>
       </GdsFlex>
