@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.9
+
+### Patch Changes
+
+- e03df6f: Modal close min width fix
+
 ## 3.6.8
 
 ### Patch Changes

@@ -24,27 +24,67 @@ export class GdsDivider extends GdsElement {
   static styles = [tokens, DividerCSS]
 
   /**
+   * The level of the divider is used to resolve the color tokens from the corresponding level.
+   * Check the [Color System documentation page](./?path=/docs/style-colors--docs) for more information.
+   *
+   * Default value for `gds-divider` is set to `2`.
+   *
+   * @property level
+   *
+   * */
+  @property()
+  level = '2'
+
+  /**
    * Controls the color property of the divider.
    * Supports all the color tokens from the design system.
    *
    * You can apply color like this:
    *
    * ```html
-   * <gds-divider color="base400"></gds-divider>
+   * <gds-divider color="primary"></gds-divider>
    * ```
    *
    * The above example will apply the color style of base400.
    *
    */
   @styleExpressionProperty({
-    property: 'color',
-    valueTemplate: (v) => {
-      const [colorName, transparency] = v.split('/')
-      if (transparency) {
-        return `color-mix(in srgb, var(--gds-sys-color-${colorName}) ${parseFloat(transparency) * 100}%, transparent 0%)`
-      } else {
-        return `var(--gds-sys-color-${colorName})`
+    valueTemplate: function (v: string) {
+      const [colorInput, transparency] = v.split('/')
+
+      // Helper function to determine if a color is custom
+      const isCustomColor = (color: string): boolean => {
+        const trimmedColor = color.trim()
+        return (
+          trimmedColor.startsWith('#') || // Hex color
+          trimmedColor.startsWith('rgb(') || // RGB color
+          trimmedColor.startsWith('rgba(') || // RGBA color
+          trimmedColor.startsWith('hsl(') || // HSL color
+          trimmedColor.startsWith('hsla(') // HSLA color
+        )
       }
+
+      // Function to construct the CSS variable string
+      const constructCssVariable = (
+        level: string,
+        colorName: string,
+      ): string => {
+        return `var(--gds-color-l${level}-border-${colorName})`
+      }
+
+      // Determine the color value
+      const getColorValue = (color: string, transparency?: string): string => {
+        if (isCustomColor(color)) {
+          return transparency
+            ? `color-mix(in srgb, ${color} ${parseFloat(transparency) * 100}%, transparent 0%)`
+            : color // Use the custom color directly
+        } else {
+          return constructCssVariable((this as GdsDivider).level, color)
+        }
+      }
+
+      // Return the computed color value
+      return getColorValue(colorInput, transparency)
     },
   })
   color?: string
@@ -87,6 +127,6 @@ export class GdsDivider extends GdsElement {
   opacity?: string
 
   render() {
-    return html``
+    return html`<hr />`
   }
 }
