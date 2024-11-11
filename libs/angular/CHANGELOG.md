@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.6.7
+
+### Patch Changes
+
+- 1c8b959: **Accordion:** fixed button to only be marked as heading, not it's content
+- Updated dependencies [e03df6f]
+  - @sebgroup/chlorophyll@3.6.9
+
 ## 4.6.6
 
 ### Patch Changes

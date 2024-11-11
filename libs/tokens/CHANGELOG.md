@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.0
+
+### Minor Changes
+
+- b4cbd53: **2016 color tokens:** new tokens for 2016 colors
+
 ## 0.9.3
 
 ### Patch Changes
