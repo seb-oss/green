@@ -12,6 +12,7 @@
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
+      "dependsOn": ["fonts:build", "core:build"],
       "options": {
         "outputPath": "dist/apps/core-lib-dev",
         "compiler": "babel",
