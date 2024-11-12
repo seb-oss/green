@@ -9,8 +9,10 @@ import '@sebgroup/green-core/components/grid/index.js'
 import '@sebgroup/green-core/components/icon/icons/arrow-left-right.js'
 import '@sebgroup/green-core/components/icon/icons/plus-large.js'
 import '@sebgroup/green-core/components/icon/icons/calendar.js'
+import '@sebgroup/green-core/components/mask/mask.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
 import './dashboard.css'
+import '../../components/accounts'
 
 @customElement('gds-dashboard')
 export class CardExample extends LitElement {
@@ -47,7 +49,7 @@ export class CardExample extends LitElement {
           </gds-flex>
         </gds-flex>
         <gds-grid columns="3" gap="xl">
-          <gds-card>[CONTENT GOES HERE]</gds-card>
+          <gds-accounts></gds-accounts>
           <gds-card>[CONTENT GOES HERE]</gds-card>
           <gds-card>[CONTENT GOES HERE]</gds-card>
         </gds-grid>

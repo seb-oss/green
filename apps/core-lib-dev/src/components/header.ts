@@ -33,33 +33,6 @@ export class GdsHeader extends LitElement {
         position="relative"
         height="4rem"
       >
-        <gds-container display="xs{flex} s{flex} m{flex} l{none}">
-          <gds-context-menu>
-            <gds-flex align-items="center" gap="s" slot="trigger">
-              Menu
-              <gds-icon-bars-three></gds-icon-bars-three>
-            </gds-flex>
-            <gds-menu-item
-              @click=${() => this.handleButtonClick('theme-pages')}
-            >
-              Theme Pages
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('login')}>
-              Login
-            </gds-menu-item>
-            <gds-menu-item
-              @click=${() => this.handleButtonClick('form-validation')}
-            >
-              Validation
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('datepicker')}>
-              Datepicker
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('calendar')}>
-              Calendar
-            </gds-menu-item>
-          </gds-context-menu>
-        </gds-container>
         <gds-flex
           justify-content="space-between"
           display="xs{none} s{none} m{none} l{flex}"

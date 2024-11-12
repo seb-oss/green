@@ -77,9 +77,9 @@ export class AppElement extends LitElement {
 
   private handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === '\\') {
-      const themeElement = this.querySelector('[gds-element="gds-theme"]')
+      const themeElement = this.querySelector('html')
       if (themeElement) {
-        const currentScheme = themeElement.getAttribute('color-scheme')
+        const currentScheme = themeElement.getAttribute('gds-theme')
         themeElement.setAttribute(
           'color-scheme',
           currentScheme === 'light' ? 'dark' : 'light'
