@@ -76,9 +76,15 @@ export class GdsHeader extends LitElement {
               Dashboard
             </gds-menu-button>
           </gds-flex>
-          <gds-flex align-items="center" gap="s" margin="0 m 0 ">
+          <gds-flex align-items="center" gap="l" margin="0 m 0 ">
             <gds-icon-magnifying-glass></gds-icon-magnifying-glass>
             <gds-icon-bell></gds-icon-bell>
+            <gds-img
+              src="https://placehold.co/80x80/000000/FFFFFF/png?text=S"
+              border-radius="max"
+              width="24px"
+              height="24px"
+            ></gds-img>
             <gds-icon-calendar></gds-icon-calendar>
             <!-- <gds-context-menu>
               <gds-flex align-items="center" gap="s" slot="trigger">
