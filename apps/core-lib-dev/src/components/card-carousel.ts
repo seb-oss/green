@@ -1,12 +1,13 @@
-import { css, customElement, html, LitElement, property } from 'lit-element'
+import { LitElement } from 'lit'
+import { customElement } from 'lit/decorators.js'
 
-@customElement('card-carousel')
+import { html } from '@sebgroup/green-core/scoping'
+
+@customElement('tp-card-carousel')
 export class CardCarousel extends LitElement {
-  @property({ type: Array }) cards: Array<string> = []
-
   render() {
     return html`
-            <gds-card variant="copper-01" padding="s">
+    <gds-card variant="copper-01" padding="s">
         <gds-flex
           padding="l"
           align-items="center"

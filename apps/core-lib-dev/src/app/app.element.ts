@@ -13,6 +13,7 @@ import '@sebgroup/green-core/components/icon/icons/growth.js'
 import '@sebgroup/green-core/components/icon/icons/bars-three.js'
 import '@sebgroup/green-core/components/icon/icons/globus.js'
 import '@sebgroup/green-core/components/icon/icons/checklist.js'
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 // Icons for Theme Pages
 import '@sebgroup/green-core/components/icon/icons/bars-two.js'
 import '@sebgroup/green-core/components/icon/icons/brand-seb.js'
@@ -54,7 +55,7 @@ export class AppElement extends LitElement {
   accessor popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'onboarding'
+  accessor currentView = 'dashboard'
 
   connectedCallback() {
     super.connectedCallback()
@@ -96,8 +97,8 @@ export class AppElement extends LitElement {
           ${choose(
             this.currentView,
             [
-              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
               ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
+              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
               ['login', () => html`<gds-login></gds-login>`],
               [
                 'form-validation',
