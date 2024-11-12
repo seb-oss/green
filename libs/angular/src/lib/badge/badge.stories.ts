@@ -33,14 +33,14 @@ const Template: StoryFn<NggBadgeComponent> = (args) => ({
 
 const BadgesTemplate: StoryFn<NggBadgeComponent> = (args) => ({
   template: `
-    <div class="d-flex justify-content-between">
+    <div class="d-flex flex-wrap" style="gap: 1rem;">
       <span ngg-badge >Badge</span>
-      <span ngg-badge badgeType="info">Badge</span>
-      <span ngg-badge badgeType="success">Badge</span>
-      <span ngg-badge badgeType="warning">Badge</span>
-      <span ngg-badge badgeType="danger">Badge</span>
-      <span ngg-badge badgeType="light">Badge</span>
-      <span ngg-badge badgeType="dark">Badge</span>
+      <span ngg-badge badgeType="info">Info Badge</span>
+      <span ngg-badge badgeType="success">Success Badge</span>
+      <span ngg-badge badgeType="warning">Warning Badge</span>
+      <span ngg-badge badgeType="danger">Danger Badge</span>
+      <span ngg-badge badgeType="light">Light Badge</span>
+      <span ngg-badge badgeType="dark">Dark Badge</span>
     </div>
     `,
   props: args,
