@@ -68,6 +68,11 @@ export class GdsHeader extends LitElement {
             <gds-menu-button
               @click=${() => this.handleButtonClick('onboarding')}
             >
+              <gds-icon-bars-two></gds-icon-bars-two>
+            </gds-menu-button>
+            <gds-menu-button
+              @click=${() => this.handleButtonClick('onboarding')}
+            >
               Onboarding
             </gds-menu-button>
             <gds-menu-button
