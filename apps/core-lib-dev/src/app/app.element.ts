@@ -13,6 +13,12 @@ import '@sebgroup/green-core/components/icon/icons/growth.js'
 import '@sebgroup/green-core/components/icon/icons/seb.js'
 import '@sebgroup/green-core/components/icon/icons/bars-three.js'
 import '@sebgroup/green-core/components/icon/icons/globus.js'
+// Icons for Theme Pages
+import '@sebgroup/green-core/components/icon/icons/bars-two.js'
+import '@sebgroup/green-core/components/icon/icons/bell.js'
+import '@sebgroup/green-core/components/icon/icons/calendar.js'
+import '@sebgroup/green-core/components/icon/icons/magnifying-glass.js'
+// 
 import '@sebgroup/green-core/components/input/index.js'
 import '@sebgroup/green-core/components/theme/index.js'
 import '@sebgroup/green-core/components/card/index.js'

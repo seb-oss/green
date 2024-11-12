@@ -16,6 +16,6 @@ export class CardExample extends LitElement {
   }
 
   render() {
-    return html` <gds-flex justify-content="center"> First Page </gds-flex> `
+    return html` <gds-flex justify-content="center"> Onboarding </gds-flex> `
   }
 }

@@ -76,15 +76,18 @@ export class GdsHeader extends LitElement {
               Dashboard
             </gds-menu-button>
           </gds-flex>
-          <gds-flex align-items="center" margin="0 m 0 ">
-            <gds-context-menu>
+          <gds-flex align-items="center" gap="s" margin="0 m 0 ">
+            <gds-icon-magnifying-glass></gds-icon-magnifying-glass>
+            <gds-icon-bell></gds-icon-bell>
+            <gds-icon-calendar></gds-icon-calendar>
+            <!-- <gds-context-menu>
               <gds-flex align-items="center" gap="s" slot="trigger">
                 Language
                 <gds-icon-globus></gds-icon-globus>
               </gds-flex>
               <gds-menu-item @click=${() => setLocale('en')}>EN</gds-menu-item>
               <gds-menu-item @click=${() => setLocale('sv')}>SV</gds-menu-item>
-            </gds-context-menu>
+            </gds-context-menu> -->
           </gds-flex>
         </gds-flex>
       </gds-flex>
