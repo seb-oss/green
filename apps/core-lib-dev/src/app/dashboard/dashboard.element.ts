@@ -51,7 +51,7 @@ export class CardExample extends LitElement {
         <gds-grid columns="3" gap="xl">
           <gds-card>[CONTENT GOES HERE]</gds-card>
           <gds-card>[CONTENT GOES HERE]</gds-card>
-          <gds-flex flex-direction="column">
+          <gds-flex flex-direction="column" gap="m">
             <tp-savings-outside></tp-savings-outside>
             <tp-savings-goal></tp-savings-goal>
           </gds-flex>
