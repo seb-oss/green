@@ -5,10 +5,14 @@
   "sourceRoot": "apps/core-lib-dev/src",
   "tags": [],
   "targets": {
+    "build-app": {
+      "dependsOn": ["build"]
+    },
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
+      "dependsOn": ["fonts:build", "core:build"],
       "options": {
         "outputPath": "dist/apps/core-lib-dev",
         "compiler": "babel",
@@ -17,7 +21,6 @@
         "webpackConfig": "apps/core-lib-dev/webpack.config.js",
         "assets": ["apps/core-lib-dev/src/assets"],
         "index": "apps/core-lib-dev/src/index.html",
-        "baseHref": "/",
         "styles": ["apps/core-lib-dev/src/styles.scss"],
         "scripts": []
       },
