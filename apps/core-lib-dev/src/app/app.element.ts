@@ -58,6 +58,7 @@ export class AppElement extends LitElement {
   connectedCallback() {
     super.connectedCallback()
     this.addEventListener('view-change', this.handleViewChange as EventListener)
+    document.addEventListener('keydown', this.handleKeyDown)
   }
 
   disconnectedCallback() {
@@ -65,11 +66,25 @@ export class AppElement extends LitElement {
       'view-change',
       this.handleViewChange as EventListener,
     )
+    document.removeEventListener('keydown', this.handleKeyDown)
     super.disconnectedCallback()
   }
 
   private handleViewChange(event: CustomEvent) {
     this.currentView = event.detail.view
+  }
+
+  private handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === '\\') {
+      const themeElement = this.querySelector('[gds-element="gds-theme"]')
+      if (themeElement) {
+        const currentScheme = themeElement.getAttribute('color-scheme')
+        themeElement.setAttribute(
+          'color-scheme',
+          currentScheme === 'light' ? 'dark' : 'light'
+        )
+      }
+    }
   }
 
   render() {

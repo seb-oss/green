@@ -81,7 +81,13 @@ export class GdsHeader extends LitElement {
               Dashboard
             </gds-menu-button>
           </gds-flex>
-          <gds-flex align-items="center">
+          <gds-flex
+            position="absolute"
+            inset="0"
+            margin="0 auto"
+            align-items="center"
+            max-width="max-content"
+          >
             <gds-icon-brand-seb></gds-icon-brand-seb>
           </gds-flex>
           <gds-flex align-items="center" gap="l" margin="0 m 0 ">
