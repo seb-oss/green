@@ -12,6 +12,7 @@ import '@sebgroup/green-core/components/icon/icons/flag.js'
 import '@sebgroup/green-core/components/icon/icons/growth.js'
 import '@sebgroup/green-core/components/icon/icons/bars-three.js'
 import '@sebgroup/green-core/components/icon/icons/globus.js'
+import '@sebgroup/green-core/components/icon/icons/checklist.js'
 // Icons for Theme Pages
 import '@sebgroup/green-core/components/icon/icons/bars-two.js'
 import '@sebgroup/green-core/components/icon/icons/brand-seb.js'

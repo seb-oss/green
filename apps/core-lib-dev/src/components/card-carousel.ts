@@ -1,23 +1,12 @@
-import { LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { css, customElement, html, LitElement, property } from 'lit-element'
 
-import { html } from '@sebgroup/green-core/scoping'
-
-import './onboarding.css'
-
-@customElement('gds-onboarding')
-export class CardExample extends LitElement {
-  protected createRenderRoot() {
-    return this
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-  }
+@customElement('card-carousel')
+export class CardCarousel extends LitElement {
+  @property({ type: Array }) cards: Array<string> = []
 
   render() {
-    return html` <gds-flex gap="lg">
-      <gds-card variant="copper-01" padding="s">
+    return html`
+            <gds-card variant="copper-01" padding="s">
         <gds-flex
           padding="l"
           align-items="center"
@@ -38,6 +27,7 @@ export class CardExample extends LitElement {
           </gds-flex>
         </gds-card>
       </gds-card>
-    </gds-flex>`
+    </gds-flex>
+        `
   }
 }

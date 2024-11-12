@@ -16,6 +16,19 @@ export class CardExample extends LitElement {
   }
 
   render() {
-    return html` <gds-flex justify-content="center"> Dashboarde </gds-flex> `
+    return html` 
+    <gds-flex gap="xs">
+      <gds-card variant="copper-01" padding="s">
+
+          <gds-text></gds-text>
+          <gds-button>Button</gds-button>
+        </gds-card>
+      </gds-card>
+      <gds-card variant="copper-01">
+          <gds-card variant="secondary"></gds-card>
+          <gds-button>Button</gds-button>
+        </gds-card>
+      </gds-card>
+    </gds-flex>`
   }
 }
