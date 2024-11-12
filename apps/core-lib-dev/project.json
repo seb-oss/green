@@ -44,6 +44,7 @@
     "serve": {
       "executor": "@nx/webpack:dev-server",
       "inputs": ["core"],
+      "dependsOn": ["tokens:build, fonts:build, core:build"],
       "options": {
         "buildTarget": "core-lib-dev:build",
         "port": 4210,
