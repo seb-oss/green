@@ -37,4 +37,14 @@ export class GdsElement extends LitElement {
     super.connectedCallback()
     this.setAttribute('gds-element', this.gdsElementName?.toString() || '')
   }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.dispatchEvent(
+      new CustomEvent('gds-element-disconnected', {
+        bubbles: true,
+        composed: false,
+      }),
+    )
+  }
 }

@@ -3,6 +3,9 @@ import { css } from 'lit'
 const style = css`
   :host {
     display: block;
+  }
+
+  hr {
     border-radius: 200px;
     background: currentColor;
     font-size: 0;

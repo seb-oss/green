@@ -140,5 +140,6 @@
   "neverConnectToCloud": true,
   "parallel": 3,
   "useInferencePlugins": false,
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "useLegacyCache": true
 }
