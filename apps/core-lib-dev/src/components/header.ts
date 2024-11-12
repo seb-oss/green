@@ -59,46 +59,33 @@ export class GdsHeader extends LitElement {
             </gds-menu-item>
           </gds-context-menu>
         </gds-container>
-        <gds-container display="xs{none} s{none} m{none} l{flex}">
-          <gds-menu-button
-            @click=${() => this.handleButtonClick('theme-pages')}
-          >
-            Theme Pages
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('login')}>
-            Login
-          </gds-menu-button>
-          <gds-menu-button
-            @click=${() => this.handleButtonClick('form-validation')}
-          >
-            Validation
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('datepicker')}>
-            Datepicker
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
-            Calendar
-          </gds-menu-button>
-        </gds-container>
         <gds-flex
-          position="2xs{relative} l{absolute}"
-          inset="auto 0"
-          margin="0 auto"
-          width="max-content"
-          height="4rem"
-          align-items="center"
+          justify-content="space-between"
+          display="xs{none} s{none} m{none} l{flex}"
+          width="100%"
         >
-          <gds-icon-brands-seb></gds-icon-brands-seb>
-        </gds-flex>
-        <gds-flex align-items="center" margin="0 m 0 0">
-          <gds-context-menu>
-            <gds-flex align-items="center" gap="s" slot="trigger">
-              Language
-              <gds-icon-globus></gds-icon-globus>
-            </gds-flex>
-            <gds-menu-item @click=${() => setLocale('en')}>EN</gds-menu-item>
-            <gds-menu-item @click=${() => setLocale('sv')}>SV</gds-menu-item>
-          </gds-context-menu>
+          <gds-flex>
+            <gds-menu-button
+              @click=${() => this.handleButtonClick('onboarding')}
+            >
+              Onboarding
+            </gds-menu-button>
+            <gds-menu-button
+              @click=${() => this.handleButtonClick('dashboard')}
+            >
+              Dashboard
+            </gds-menu-button>
+          </gds-flex>
+          <gds-flex align-items="center" margin="0 m 0 ">
+            <gds-context-menu>
+              <gds-flex align-items="center" gap="s" slot="trigger">
+                Language
+                <gds-icon-globus></gds-icon-globus>
+              </gds-flex>
+              <gds-menu-item @click=${() => setLocale('en')}>EN</gds-menu-item>
+              <gds-menu-item @click=${() => setLocale('sv')}>SV</gds-menu-item>
+            </gds-context-menu>
+          </gds-flex>
         </gds-flex>
       </gds-flex>
     `

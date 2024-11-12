@@ -3,9 +3,9 @@ import { customElement } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
-import './theme-pages.css'
+import './onboarding.css'
 
-@customElement('gds-theme-pages')
+@customElement('gds-onboarding')
 export class CardExample extends LitElement {
   protected createRenderRoot() {
     return this
@@ -16,6 +16,6 @@ export class CardExample extends LitElement {
   }
 
   render() {
-    return html` <gds-flex justify-content="center"> Theme pages </gds-flex> `
+    return html` <gds-flex justify-content="center"> First Page </gds-flex> `
   }
 }

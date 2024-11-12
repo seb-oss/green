@@ -29,7 +29,8 @@ import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
 import './login/login.element'
-import './theme-pages/theme-pages.element'
+import './onboarding/onboarding.element'
+import './dashboard/dashboard.element'
 
 export class AppElement extends LitElement {
   static styles = css`
@@ -46,7 +47,7 @@ export class AppElement extends LitElement {
   accessor popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'theme-pages'
+  accessor currentView = 'onboarding'
 
   connectedCallback() {
     super.connectedCallback()
@@ -73,7 +74,8 @@ export class AppElement extends LitElement {
           ${choose(
             this.currentView,
             [
-              ['theme-pages', () => html`<gds-theme-pages></gds-theme-pages>`],
+              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
+              ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
               ['login', () => html`<gds-login></gds-login>`],
               [
                 'form-validation',
