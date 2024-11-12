@@ -3,9 +3,9 @@ import { customElement } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
-import './theme.css'
+import './theme-pages.css'
 
-@customElement('gds-theme')
+@customElement('gds-theme-pages')
 export class CardExample extends LitElement {
   protected createRenderRoot() {
     return this

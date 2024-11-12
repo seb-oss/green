@@ -38,6 +38,11 @@ export class GdsHeader extends LitElement {
               Menu
               <gds-icon-bars-three></gds-icon-bars-three>
             </gds-flex>
+            <gds-menu-item
+              @click=${() => this.handleButtonClick('theme-pages')}
+            >
+              Theme Pages
+            </gds-menu-item>
             <gds-menu-item @click=${() => this.handleButtonClick('login')}>
               Login
             </gds-menu-item>
@@ -55,6 +60,11 @@ export class GdsHeader extends LitElement {
           </gds-context-menu>
         </gds-container>
         <gds-container display="xs{none} s{none} m{none} l{flex}">
+          <gds-menu-button
+            @click=${() => this.handleButtonClick('theme-pages')}
+          >
+            Theme Pages
+          </gds-menu-button>
           <gds-menu-button @click=${() => this.handleButtonClick('login')}>
             Login
           </gds-menu-button>
