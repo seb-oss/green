@@ -25,7 +25,7 @@ export class GdsHeader extends LitElement {
   render() {
     return html`
       <gds-flex
-        align-items="center"
+        align-items="stretch"
         width="100%"
         justify-content="space-between"
         background="l1-background-primary"
@@ -76,7 +76,9 @@ export class GdsHeader extends LitElement {
               Dashboard
             </gds-menu-button>
           </gds-flex>
-          <gds-icon-brand-seb></gds-icon-brand-seb>
+          <gds-flex align-items="center">
+            <gds-icon-brand-seb></gds-icon-brand-seb>
+          </gds-flex>
           <gds-flex align-items="center" gap="l" margin="0 m 0 ">
             <gds-icon-magnifying-glass></gds-icon-magnifying-glass>
             <gds-icon-bell></gds-icon-bell>
