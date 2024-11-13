@@ -1,5 +1,6 @@
 import { LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
+import { nothing } from 'lit/html.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
@@ -14,6 +15,9 @@ export class TPCard extends LitElement {
   connectedCallback() {
     super.connectedCallback()
   }
+
+  @state()
+  accessor footerSlotOccupied = false
 
   render() {
     return html`
@@ -37,4 +41,5 @@ export class TPCard extends LitElement {
       </gds-card>
     `
   }
+  
 }
