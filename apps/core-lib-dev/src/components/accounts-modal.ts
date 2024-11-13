@@ -74,6 +74,12 @@ export class TPAccountsModal extends LitElement {
             opacity: 0;
             transform: translateX(100%);
           }
+
+          @media screen and (max-width: 768px) {
+            @starting-style {
+              transform: translateY(100%);
+            }
+          }
         }
 
       </style>
@@ -99,21 +105,20 @@ export class TPAccountsModal extends LitElement {
       </tp-card>
       ${this.isModalOpen
         ? html`
-            <gds-container
+            <gds-flex
               position="fixed"
               inset="0"
               background="#00000040"
               z-index="20"
+              align-items="flex-end"
+              flex-direction="row; m{column}"
               >
               <gds-container
-              width="25vw"
-              background="#fef5f3"
-             
+                width="100%; m{25vw}"
+                background="#fef5f3"
                 level="2"
-                margin="0 0 0 auto"
-                height="100%"
-              transition="all 0.2s"
-                
+                height="90vh; m{100%}"
+                transition="all 0.2s"
                 class="actionsheet"
 
               >
@@ -135,7 +140,7 @@ export class TPAccountsModal extends LitElement {
                   <gds-card variant="secondary">THIS</gds-card>
                 </gds-flex>
               </gds-container>
-            </gds-container>
+            </gds-flex>
           `
         : nothing}
     `
