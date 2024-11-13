@@ -17,8 +17,8 @@ export class TPCard extends LitElement {
 
   render() {
     return html`
-      <gds-card>
-        <gds-flex flex-direction="column" gap="xl">
+      <gds-card background="secondary" padding="0">
+        <gds-flex flex-direction="column" gap="xl" padding="l">
           <gds-flex justify-content="space-between" align-items="center">
             <slot name="header"></slot>
             <slot name="action"></slot>
@@ -26,9 +26,13 @@ export class TPCard extends LitElement {
           <gds-flex flex-direction="column" gap="m">
             <slot></slot>
           </gds-flex>
-          <gds-flex justify-content="flex-start" align-items="center">
-            <slot name="footer"></slot>
-          </gds-flex>
+        </gds-flex>
+        <gds-flex
+          border="4xs/primary 0 0 0"
+          flex-direction="column"
+          padding="m l m m"
+        >
+          <slot name="footer"></slot>
         </gds-flex>
       </gds-card>
     `
