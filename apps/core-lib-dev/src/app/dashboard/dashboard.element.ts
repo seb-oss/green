@@ -16,6 +16,7 @@ import '@sebgroup/green-core/components/icon/icons/knife-spoon.js'
 import '@sebgroup/green-core/components/icon/icons/arrow-out-of-box.js'
 import '@sebgroup/green-core/components/mask/mask.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
+import '../../components/jit'
 import './dashboard.css'
 import '../../components/accounts'
 import '../../common/card'
@@ -158,8 +159,9 @@ export class CardExample extends LitElement {
             <gds-button slot="footer">Se alla</gds-button>
           </tp-card>
           <gds-card>[CONTENT GOES HERE]</gds-card>
-          <gds-card>[CONTENT GOES HERE]</gds-card>
+          <gds-jit></gds-jit>
         </gds-grid>
+        <tp-news-widget></tp-news-widget>
       </gds-flex>
     `
   }
