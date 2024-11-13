@@ -30,8 +30,7 @@ export class TPSteps extends LitElement {
           position: relative;
           scrollbar-width: none;
           background: #fff;
-          min-height: 40vh;
-          padding: var(--space);
+          padding-inline: var(--space);
           box-sizing: border-box;
         }
 
@@ -42,21 +41,43 @@ export class TPSteps extends LitElement {
           min-inline-size: calc(var(--width) / (var(--steps) - 1));
         }
       </style>
-      <gds-flex flex-direction="column" background="secondary">
+      <gds-flex
+        flex-direction="column"
+        background="secondary"
+        padding="xl 0"
+        gap="xl"
+      >
         <div class="steps">
-          <tp-step></tp-step>
-          <tp-step></tp-step>
-          <tp-step></tp-step>
-          <tp-step></tp-step>
+          <tp-step id="step-1"></tp-step>
+          <tp-step id="step-2"></tp-step>
+          <tp-step id="step-3"></tp-step>
+          <tp-step id="step-4"></tp-step>
         </div>
-        <gds-flex align-items="center" justify-content="center">
-          <gds-container
-            border-radius="max"
-            width="6px"
-            height="6px"
-            level="3"
-            background="positive"
-          ></gds-container>
+        <gds-flex align-items="center" justify-content="center" gap="3xs">
+          <a href="#step-1">
+            <gds-container
+              border-radius="max"
+              width="6px"
+              height="6px"
+              level="3"
+              background="positive; hover:primary"
+              cursor="pointer"
+              transition="all 0.4s"
+              transform="hover:scale(1.2)"
+            ></gds-container>
+          </a>
+          <a href="#step-2">
+            <gds-container
+              border-radius="max"
+              width="6px"
+              height="6px"
+              level="3"
+              background="positive; hover:primary"
+              cursor="pointer"
+              transition="all 0.4s"
+              transform="hover:scale(1.2)"
+            ></gds-container>
+          </a>
         </gds-flex>
       </gds-flex>
     `

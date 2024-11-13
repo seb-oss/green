@@ -1,5 +1,5 @@
 import { LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, property } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
@@ -12,14 +12,39 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 
 @customElement('tp-step')
 export class TPStep extends LitElement {
+
+  @property({ type: String })
+  accessor id: string
+
   render() {
     return html`
       <style>
         :host {
           display: contents;
         }
+        .step {
+          animation-name: tp-scale, tp-scale;
+          animation-fill-mode: both;
+          animation-timing-function: ease-in-out;
+          animation-direction: normal, reverse;
+          animation-timeline: view(x);
+          animation-range:
+            entry 0% entry 60vw,
+            exit -40vw exit 40vw;
+          scale: 1;
+          opacity: 1;
+          filter: blur(0px);
+        }
+
+        @keyframes tp-scale {
+          0% {
+            scale: 0.8;
+            opacity: 0.4;
+            filter: blur(14px);
+          }
+        }
       </style>
-      <gds-card part="step" padding="xs" background="#f3efeb">
+      <gds-card id=${this.id} part="step" class="step" padding="xs" background="#f3efeb">
         <gds-flex
           align-items="center"
           justify-content="space-between"
