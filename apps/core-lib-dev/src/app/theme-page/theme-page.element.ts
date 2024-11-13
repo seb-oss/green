@@ -16,6 +16,7 @@ import '../../components/savings-goal'
 import '../../components/carousel-pink'
 import '../../components/savings-outside'
 import '../../components/news-widget'
+import '../../components/savings-calculator'
 import './style.css'
 import { PageHeader } from './page-header'
 
@@ -47,7 +48,7 @@ export class ThemePage extends LitElement {
               gap="l"
             >
               <tp-accounts></tp-accounts>
-             
+
               <gds-card variant="notice" height="200px" border="4xs"
                 >Expenses</gds-card
               >
@@ -144,7 +145,7 @@ export class ThemePage extends LitElement {
               </p>
               <p><gds-button>Start saving</gds-button></p>
             </gds-rich-text>
-            <gds-card variant="negative" height="400px" border="4xs"></gds-card>
+            <tp-savings-calc></tp-savings-calc>
           </gds-grid>
         `)}
 
@@ -170,7 +171,7 @@ export class ThemePage extends LitElement {
           <gds-card variant="negative" height="300px" border="4xs"></gds-card>
         </gds-grid>
 
-        
+
           <tp-news-widget></tp-news-widget>
 
 
