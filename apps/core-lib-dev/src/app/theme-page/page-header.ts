@@ -42,10 +42,11 @@ export class PageHeader extends LitElement {
           >
         </gds-flex>
         <gds-flex gap="xs" justify-content="center">
+         <!-- <tp-quicklinks></tp-quicklinks> -->
           <gds-button rank="secondary">
             <gds-icon-arrow-left-right></gds-icon-arrow-left-right>
           </gds-button>
-          <gds-button rank="secondary">
+          <gds-button rank="secondary" title="test">
             <gds-icon-plus-large></gds-icon-plus-large>
           </gds-button>
           <gds-button rank="secondary">

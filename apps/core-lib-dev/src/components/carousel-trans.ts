@@ -63,7 +63,7 @@ export class GdsCarousel extends LitElement {
           background: transparent;
         }
       </style>
-      <gds-card variant="primary" padding="0 0 m 0"
+      <gds-card variant="secondary" padding="0 0 m 0"
         ><gds-flex padding="m m 0 m" justify-content="space-between"
           ><gds-text font-size="preamble-s" tag="h3">Transaktioner</gds-text
           ><gds-theme color-scheme="light"

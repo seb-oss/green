@@ -26,6 +26,7 @@ import './dashboard.css'
 import '../../components/savings-outside'
 import '../../components/savings-goal'
 import '../../components/accounts'
+import '../../components/carousel-trans'
 import '../../components/cards'
 import '../../components/transactions'
 import '../../common/card'
@@ -70,6 +71,7 @@ export class CardExample extends LitElement {
           <tp-transactions></tp-transactions>
           <tp-accounts></tp-accounts>
           <tp-cards></tp-cards>
+          <gds-carousel-trans></gds-carousel-trans>
           <gds-flex flex-direction="column" gap="m">
             <tp-savings-outside></tp-savings-outside>
             <tp-savings-goal></tp-savings-goal>

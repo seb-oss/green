@@ -10,6 +10,11 @@ import '@sebgroup/green-core/components/grid/index.js'
 import '@sebgroup/green-core/components/rich-text/index.js'
 import './page-header'
 import '../../components/jit'
+import '../../components/cards'
+import '../../components/quicklinks'
+import '../../components/savings-goal'
+import '../../components/savings-outside'
+import '../../components/news-widget'
 import './style.css'
 import { PageHeader } from './page-header'
 
@@ -39,9 +44,8 @@ export class ThemePage extends LitElement {
               flex-direction="column"
               gap="l"
             >
-              <gds-card variant="notice" height="350px" border="4xs"
-                >Accounts</gds-card
-              >
+              <tp-accounts></tp-accounts>
+             
               <gds-card variant="notice" height="200px" border="4xs"
                 >Expenses</gds-card
               >
@@ -51,14 +55,15 @@ export class ThemePage extends LitElement {
               flex-direction="column"
               gap="l"
             >
-              ${when(this.pageHeader?.viewOptions.hasCards, () => html`<gds-card variant="notice" height="250px" border="4xs"
-                >Cards</gds-card
-              >`, () => html`<gds-card variant="negative" height="250px" border="4xs"
-                >Cards</gds-card
+              ${when(this.pageHeader?.viewOptions.hasCards, () => html`<tp-cards></tp-cards>`, () => html` <gds-card variant="negative" height="250px" border="4xs"
+                >Get some cards!</gds-card
               >`)}
-              <gds-card variant="notice" height="300px" border="4xs"
-                >Transactions</gds-card
-              >
+              <gds-container display="none; m{block}">
+                <tp-transactions></tp-transactions>
+              </gds-container>
+              <gds-container display="block; m{none}">
+                <gds-carousel-trans></gds-carousel-trans>
+              </gds-container>
             </gds-flex>
             <gds-flex
               grid-column="1; m{10 / span 3}"
@@ -68,9 +73,7 @@ export class ThemePage extends LitElement {
               <gds-card variant="notice" height="220px" border="4xs"
               >Todo</gds-card
               >
-              <gds-card variant="notice" height="100px" border="4xs"
-              >Appointment</gds-card
-              >
+              <gds-jit></gds-jit>
             </gds-flex>
           </gds-grid>
         `)}
@@ -93,15 +96,8 @@ export class ThemePage extends LitElement {
               flex-direction="column"
               gap="l"
             >
-              <gds-card variant="notice" height="100px" border="4xs"
-                >Savings goal</gds-card
-              >
-              <gds-card variant="notice" height="100px" border="4xs"
-                >Savings goal</gds-card
-              >
-              <gds-card variant="notice" height="200px" border="4xs"
-                >Savings chart</gds-card
-              >
+              <tp-savings-goal></tp-savings-goal>
+              <tp-savings-outside></tp-savings-outside>
             </gds-flex>
           </gds-grid>
         `)}
@@ -171,6 +167,11 @@ export class ThemePage extends LitElement {
           </gds-rich-text>
           <gds-card variant="negative" height="300px" border="4xs"></gds-card>
         </gds-grid>
+
+        
+          <tp-news-widget></tp-news-widget>
+
+
       </gds-flex>
     `
   }
