@@ -23,6 +23,8 @@ import '@sebgroup/green-core/components/mask/mask.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
 import '../../components/jit'
 import './dashboard.css'
+import '../../components/savings-outside'
+import '../../components/savings-goal'
 import '../../components/accounts'
 import '../../common/card'
 import '../../common/list-item'
@@ -486,7 +488,15 @@ export class CardExample extends LitElement {
             </tp-list-item>
           </tp-card>
           <gds-card>[CONTENT GOES HERE]</gds-card>
+          <<<<<<< HEAD
+          <gds-card>[CONTENT GOES HERE]</gds-card>
+          <gds-flex flex-direction="column" gap="m">
+            <tp-savings-outside></tp-savings-outside>
+            <tp-savings-goal></tp-savings-goal>
+          </gds-flex>
+          =======
           <gds-jit></gds-jit>
+          >>>>>>> theme-pages
         </gds-grid>
 
         <gds-card max-width="max-content">
