@@ -16,6 +16,7 @@ import '../../components/savings-goal'
 import '../../components/carousel-pink'
 import '../../components/savings-outside'
 import '../../components/news-widget'
+import '../../components/savings-calculator'
 import './style.css'
 import { PageHeader } from './page-header'
 
@@ -37,7 +38,7 @@ export class ThemePage extends LitElement {
       <gds-flex gap="3xl" flex-direction="column">
         <tp-page-header style="flex:1" @view-options-change=${() => { console.log('asdasd'); this.requestUpdate()}}></tp-page-header>
 
-        <tp-carousel-pink></tp-carousel-pink>
+
         <!-- (Blue) Main dashboard section -->
         ${when(this.pageHeader?.viewOptions.hasAccounts, () => html`
           <gds-grid columns="1; m{12}" gap="l">
@@ -47,7 +48,7 @@ export class ThemePage extends LitElement {
               gap="l"
             >
               <tp-accounts></tp-accounts>
-             
+
               <gds-card variant="notice" height="200px" border="4xs"
                 >Expenses</gds-card
               >
@@ -106,16 +107,7 @@ export class ThemePage extends LitElement {
 
         <!-- (Pink) Dream State, get started cards -->
         ${when(!this.pageHeader?.viewOptions.hasSavings && !this.pageHeader?.viewOptions.hasAccounts, () => html`
-          <gds-grid columns="1; m{2}" gap="l" max-width="800px" margin="0 auto">
-            <gds-card variant="negative" height="300px" border="4xs">s</gds-card>
-            <gds-card variant="negative" height="300px" border="4xs">s</gds-card>
-            <!-- <gds-card
-              variant="negative; hover: green-01"
-              height="300px"
-              border="4xs"
-              opacity=".25"
-            >s</gds-card> -->
-          </gds-grid>
+          <tp-carousel-pink></tp-carousel-pink>
           <gds-flex gap="xs" justify-content="center">
             <gds-card
               variant="green-02"
@@ -144,7 +136,7 @@ export class ThemePage extends LitElement {
               </p>
               <p><gds-button>Start saving</gds-button></p>
             </gds-rich-text>
-            <gds-card variant="negative" height="400px" border="4xs"></gds-card>
+            <tp-savings-calc></tp-savings-calc>
           </gds-grid>
         `)}
 
@@ -170,7 +162,7 @@ export class ThemePage extends LitElement {
           <gds-card variant="negative" height="300px" border="4xs"></gds-card>
         </gds-grid>
 
-        
+
           <tp-news-widget></tp-news-widget>
 
 
