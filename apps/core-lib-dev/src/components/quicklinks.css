@@ -1,0 +1,15 @@
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  text-decoration: none;
+  cursor: crosshair;
+}
+
+a:-webkit-any-link {
+  color: -webkit-link;
+  text-decoration: none;
+  cursor: auto;
+}
