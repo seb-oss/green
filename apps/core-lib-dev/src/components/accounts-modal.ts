@@ -6,6 +6,7 @@ import { html } from '@sebgroup/green-core/scoping'
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/text/index.js'
+import '@sebgroup/green-core/components/icon/icons/cross-small.js'
 import '@sebgroup/green-core/components/button/index.js'
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 import './step-bullet'
@@ -117,18 +118,21 @@ export class TPAccountsModal extends LitElement {
 
               >
 
-
+                 <gds-flex padding="l" width="100%" justify-content="flex-end">
+                    <gds-button @click=${this.closeModal} rank="tertiary">
+                      <gds-icon-cross-small></gds-icon-cross-small>
+                    </gds-button>
+                  </gds-flex>
                 <gds-flex
                   flex-direction="column"
+                  justify-content="center"
                   align-items="center"
-                  padding="4xl"
+                  padding="l"
                   gap="2xl"
                 >
-                  <gds-flex>
-                    <gds-button @click=${this.closeModal}>Close</gds-button>
-                  </gds-flex>
+                
                   <gds-card variant="negative" max-width="max-content">ICA</gds-card>
-                  <gds-card variant="secondary" width="100%">THIS</gds-card>
+                  <gds-card variant="secondary">THIS</gds-card>
                 </gds-flex>
               </gds-container>
             </gds-container>
