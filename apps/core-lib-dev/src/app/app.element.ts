@@ -97,7 +97,8 @@ export class AppElement extends LitElement {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-        <gds-container padding="s; l{4xl}">
+        <gds-container >
+        <!-- <gds-container padding="s; l{4xl}"> -->
           ${choose(
             this.currentView,
             [

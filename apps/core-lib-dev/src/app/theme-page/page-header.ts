@@ -28,7 +28,7 @@ export class PageHeader extends LitElement {
 
   render() {
     return html`
-      <gds-flex justify-content="space-between" flex-direction="row" gap="l">
+      <gds-flex justify-content="space-between" flex-direction="row" gap="l" padding="4xl">
         <gds-flex flex-direction="row; s{column}" align-items="center">
           <gds-text tag="h1" font-size="heading-s; s{heading-l}"
             >Hey Josephine!</gds-text
