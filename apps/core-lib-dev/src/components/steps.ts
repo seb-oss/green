@@ -1,5 +1,5 @@
 import { LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, query } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
@@ -10,9 +10,39 @@ import '@sebgroup/green-core/components/container/index.js'
 import '@sebgroup/green-core/components/text/index.js'
 import '@sebgroup/green-core/components/icon/icons/checklist.js'
 import './step.ts'
+import './step-bullet.ts'
 
 @customElement('tp-steps')
 export class TPSteps extends LitElement {
+  @query('.steps')
+  accessor stepsContainer!: HTMLElement
+
+  firstUpdated() {
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    const bullets = this.shadowRoot!.querySelectorAll('tp-step-bullet');
+    bullets.forEach(bullet => {
+      bullet.addEventListener('click', this.handleBulletClick.bind(this));
+    });
+  }
+
+  handleBulletClick(event: Event) {
+    const bullet = event.currentTarget as HTMLElement;
+    const stepName = bullet.getAttribute('step');
+    const step = this.shadowRoot!.querySelector(`tp-step[name="${stepName}"]::part(step)`);
+    if (step) {
+      step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Update active state of bullets
+    const bullets = this.shadowRoot!.querySelectorAll('tp-step-bullet');
+    bullets.forEach(b => b.removeAttribute('active'));
+    bullet.setAttribute('active', '');
+  }
+
+
   render() {
     return html`
       <style>
@@ -29,7 +59,6 @@ export class TPSteps extends LitElement {
           gap: 32px;
           position: relative;
           scrollbar-width: none;
-          background: #fff;
           padding-inline: var(--space);
           box-sizing: border-box;
         }
@@ -41,43 +70,18 @@ export class TPSteps extends LitElement {
           min-inline-size: calc(var(--width) / (var(--steps) - 1));
         }
       </style>
-      <gds-flex
-        flex-direction="column"
-        background="secondary"
-        padding="xl 0"
-        gap="xl"
-      >
+      <gds-flex flex-direction="column" padding="xl 0" gap="xl">
         <div class="steps">
-          <tp-step id="step-1"></tp-step>
-          <tp-step id="step-2"></tp-step>
-          <tp-step id="step-3"></tp-step>
-          <tp-step id="step-4"></tp-step>
+          <tp-step name="s1"></tp-step>
+          <tp-step name="s2"></tp-step>
+          <tp-step name="s3"></tp-step>
+          <tp-step name="s4"></tp-step>
         </div>
-        <gds-flex align-items="center" justify-content="center" gap="3xs">
-          <a href="#step-1">
-            <gds-container
-              border-radius="max"
-              width="6px"
-              height="6px"
-              level="3"
-              background="positive; hover:primary"
-              cursor="pointer"
-              transition="all 0.4s"
-              transform="hover:scale(1.2)"
-            ></gds-container>
-          </a>
-          <a href="#step-2">
-            <gds-container
-              border-radius="max"
-              width="6px"
-              height="6px"
-              level="3"
-              background="positive; hover:primary"
-              cursor="pointer"
-              transition="all 0.4s"
-              transform="hover:scale(1.2)"
-            ></gds-container>
-          </a>
+        <gds-flex align-items="center" justify-content="center" gap="2xs">
+          <tp-step-bullet step="s1"></tp-step-bullet>
+          <tp-step-bullet step="s2" active></tp-step-bullet>
+          <tp-step-bullet step="s3"></tp-step-bullet>
+          <tp-step-bullet step="s4"></tp-step-bullet>
         </gds-flex>
       </gds-flex>
     `

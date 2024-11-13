@@ -14,7 +14,7 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 export class TPStep extends LitElement {
 
   @property({ type: String })
-  accessor id: string
+  accessor name: string
 
   render() {
     return html`
