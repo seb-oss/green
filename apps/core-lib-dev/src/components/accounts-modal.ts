@@ -21,12 +21,16 @@ export class TPAccountsModal extends LitElement {
     this.isModalOpen = true
   }
 
+  private closeModal() {
+    this.isModalOpen = false
+  }
+
   private handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       this.isModalOpen = false
     }
   }
-  
+
   connectedCallback() {
     super.connectedCallback()
     window.addEventListener('keydown', this.handleKeyDown.bind(this))
@@ -41,7 +45,7 @@ export class TPAccountsModal extends LitElement {
     return html`
       <style>
         :host {
-          --steps: 4;
+          --steps: 3;
           --space: var(--gds-space-xl);
         }
 
@@ -56,17 +60,18 @@ export class TPAccountsModal extends LitElement {
           box-sizing: border-box;
         }
 
-        tp-step::part(step) {
+        tp-accounts-card::part(account) {
           scroll-snap-align: center;
           scroll-margin-inline-start: var(--space);
-          --width: calc(100vw - var(--space) * (var(--steps) + 2));
+          --width: calc(100% - var(--space) * (var(--steps) - 1));
           min-inline-size: calc(var(--width) / (var(--steps) - 1));
+          aspect-ratio: 3 / 2;
         }
 
         .actionsheet {
           @starting-style {
             opacity: 0;
-            transform: translateX(100%);   
+            transform: translateX(100%);
           }
         }
 
@@ -98,11 +103,11 @@ export class TPAccountsModal extends LitElement {
               inset="0"
               background="#00000040"
               z-index="20"
-              
-            >
+              >
               <gds-container
-                width="25vw"
-                background="#fef5f3"
+              width="25vw"
+              background="#fef5f3"
+             
                 level="2"
                 margin="0 0 0 auto"
                 height="100%"
@@ -111,12 +116,17 @@ export class TPAccountsModal extends LitElement {
                 class="actionsheet"
 
               >
+
+
                 <gds-flex
                   flex-direction="column"
                   align-items="center"
                   padding="4xl"
                   gap="2xl"
                 >
+                  <gds-flex>
+                    <gds-button @click=${this.closeModal}>Close</gds-button>
+                  </gds-flex>
                   <gds-card variant="negative" max-width="max-content">ICA</gds-card>
                   <gds-card variant="secondary" width="100%">THIS</gds-card>
                 </gds-flex>
