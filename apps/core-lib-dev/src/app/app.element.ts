@@ -20,18 +20,21 @@ import '@sebgroup/green-core/components/icon/icons/brand-seb.js'
 import '@sebgroup/green-core/components/icon/icons/bell.js'
 import '@sebgroup/green-core/components/icon/icons/calendar.js'
 import '@sebgroup/green-core/components/icon/icons/magnifying-glass.js'
-// 
+//
 import '@sebgroup/green-core/components/input/index.js'
 import '@sebgroup/green-core/components/theme/index.js'
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/grid/index.js'
+import '@sebgroup/green-core/components/link/index.js'
 import '@sebgroup/green-core/components/img/index.js'
 import '@sebgroup/green-core/components/video/index.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 
 import '../components/header'
+import '../components/quicklinks'
+import '../components/news-widget'
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
@@ -39,6 +42,7 @@ import './calendar.element'
 import './login/login.element'
 import './onboarding/onboarding.element'
 import './dashboard/dashboard.element'
+import './theme-page/theme-page.element'
 
 export class AppElement extends LitElement {
   static styles = css`
@@ -78,9 +82,9 @@ export class AppElement extends LitElement {
 
   private handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === '\\') {
-      const themeElement = this.querySelector('[gds-element="gds-theme"]')
+      const themeElement = this.querySelector('html')
       if (themeElement) {
-        const currentScheme = themeElement.getAttribute('color-scheme')
+        const currentScheme = themeElement.getAttribute('gds-theme')
         themeElement.setAttribute(
           'color-scheme',
           currentScheme === 'light' ? 'dark' : 'light'
@@ -93,10 +97,12 @@ export class AppElement extends LitElement {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-        <gds-container padding="s{0} m{s} l{4xl}">
+        <gds-container padding="s; l{4xl}">
           ${choose(
             this.currentView,
             [
+              ['theme-page', () => html`<tp-theme-page></tp-theme-page>`],
+              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
               ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
               ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
               ['login', () => html`<gds-login></gds-login>`],

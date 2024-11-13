@@ -25,7 +25,6 @@ export class GdsHeader extends LitElement {
   render() {
     return html`
       <gds-flex
-        level="2"
         align-items="stretch"
         width="100%"
         justify-content="space-between"
@@ -33,16 +32,13 @@ export class GdsHeader extends LitElement {
         position="relative"
         height="4rem"
       >
-        <gds-container display="xs{flex} s{flex} m{flex} l{none}">
+        <gds-flex align-items="center">
           <gds-context-menu>
             <gds-flex align-items="center" gap="s" slot="trigger">
-              Menu
               <gds-icon-bars-three></gds-icon-bars-three>
             </gds-flex>
-            <gds-menu-item
-              @click=${() => this.handleButtonClick('theme-pages')}
-            >
-              Theme Pages
+            <gds-menu-item @click=${() => this.handleButtonClick('theme-page')}>
+              Theme Page
             </gds-menu-item>
             <gds-menu-item @click=${() => this.handleButtonClick('login')}>
               Login
@@ -59,13 +55,9 @@ export class GdsHeader extends LitElement {
               Calendar
             </gds-menu-item>
           </gds-context-menu>
-        </gds-container>
-        <gds-flex
-          justify-content="space-between"
-          display="xs{none} s{none} m{none} l{flex}"
-          width="100%"
-        >
-          <gds-flex>
+        </gds-flex>
+        <gds-flex justify-content="space-between" width="100%">
+          <gds-flex display="none">
             <gds-menu-button
               @click=${() => this.handleButtonClick('onboarding')}
             >
@@ -91,7 +83,7 @@ export class GdsHeader extends LitElement {
           >
             <gds-icon-brand-seb></gds-icon-brand-seb>
           </gds-flex>
-          <gds-flex align-items="center" gap="l" margin="0 m 0 ">
+          <gds-flex align-items="center" gap="l" margin="0 m 0 " display="none">
             <gds-icon-magnifying-glass></gds-icon-magnifying-glass>
             <gds-icon-bell></gds-icon-bell>
             <gds-img
