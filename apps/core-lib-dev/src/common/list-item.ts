@@ -19,17 +19,7 @@ export class TPCard extends LitElement {
     return html`
       <gds-flex gap="s">
         <gds-flex>
-          <gds-flex
-            level="3"
-            width="40px"
-            height="40px"
-            background="secondary"
-            border-radius="max"
-            align-items="center"
-            justify-content="center"
-          >
-            <slot name="icon"></slot>
-          </gds-flex>
+          <slot name="icon"></slot>
         </gds-flex>
         <gds-flex flex="1">
           <slot></slot>
