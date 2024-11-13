@@ -19,7 +19,7 @@ import '@sebgroup/green-core/components/icon/icons/brand-seb.js'
 import '@sebgroup/green-core/components/icon/icons/bell.js'
 import '@sebgroup/green-core/components/icon/icons/calendar.js'
 import '@sebgroup/green-core/components/icon/icons/magnifying-glass.js'
-// 
+//
 import '@sebgroup/green-core/components/input/index.js'
 import '@sebgroup/green-core/components/theme/index.js'
 import '@sebgroup/green-core/components/card/index.js'
@@ -38,6 +38,7 @@ import './calendar.element'
 import './login/login.element'
 import './onboarding/onboarding.element'
 import './dashboard/dashboard.element'
+import './theme-page/theme-page.element'
 
 export class AppElement extends LitElement {
   static styles = css`
@@ -54,7 +55,7 @@ export class AppElement extends LitElement {
   accessor popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'dashboard'
+  accessor currentView = 'theme-page'
 
   connectedCallback() {
     super.connectedCallback()
@@ -92,10 +93,11 @@ export class AppElement extends LitElement {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-        <gds-container padding="s{0} m{s} l{4xl}">
+        <gds-container padding="s; l{4xl}">
           ${choose(
             this.currentView,
             [
+              ['theme-page', () => html`<tp-theme-page></tp-theme-page>`],
               ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
               ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
               ['login', () => html`<gds-login></gds-login>`],
