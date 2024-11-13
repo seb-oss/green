@@ -1,9 +1,8 @@
-import { css, customElement, html, LitElement, property } from 'lit-element'
+import {html, LitElement } from 'lit'
+import { customElement } from 'lit/decorators'
 
 @customElement('card-carousel')
 export class CardCarousel extends LitElement {
-  @property({ type: Array }) cards: Array<string> = []
-
   render() {
     return html`
             <gds-card variant="copper-01" padding="s">

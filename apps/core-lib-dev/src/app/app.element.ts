@@ -54,7 +54,7 @@ export class AppElement extends LitElement {
   accessor popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'onboarding'
+  accessor currentView = 'dashboard'
 
   connectedCallback() {
     super.connectedCallback()

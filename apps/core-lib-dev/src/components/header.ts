@@ -25,10 +25,11 @@ export class GdsHeader extends LitElement {
   render() {
     return html`
       <gds-flex
+        level="2"
         align-items="stretch"
         width="100%"
         justify-content="space-between"
-        background="l1-background-primary"
+        background="primary"
         position="relative"
         height="4rem"
       >
