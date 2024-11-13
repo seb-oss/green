@@ -85,8 +85,8 @@ export class PageHeader extends LitElement {
               </label>
             </gds-menu-item>
             <gds-menu-item>
-              <label class="form-control"
-                >Has cards
+              <label class="form-control">
+                Has cards
                 <input type="checkbox" @change=${(e) => (this.#setViewOptions({...this.viewOptions, hasCards: e.target.checked}))} />
                 <i></i>
               </label>

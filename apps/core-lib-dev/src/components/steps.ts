@@ -9,8 +9,8 @@ import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/container/index.js'
 import '@sebgroup/green-core/components/text/index.js'
 import '@sebgroup/green-core/components/icon/icons/checklist.js'
-import './step.ts'
-import './step-bullet.ts'
+import './step'
+import './step-bullet'
 
 @customElement('tp-steps')
 export class TPSteps extends LitElement {

@@ -11,6 +11,8 @@ import '@sebgroup/green-core/components/rich-text/index.js'
 import './page-header'
 import '../../components/jit'
 import '../../components/cards'
+import '../../components/accounts'
+import '../../components/accounts-modal'
 import '../../components/quicklinks'
 import '../../components/steps'
 import '../../components/savings-goal'
@@ -40,13 +42,14 @@ export class ThemePage extends LitElement {
         <tp-page-header style="flex:1" @view-options-change=${() => { console.log('asdasd'); this.requestUpdate()}}></tp-page-header>
 
         <!-- (Blue) Main dashboard section -->
-        ${when(this.pageHeader?.viewOptions.hasAccounts, () => html`
+        ${when(!this.pageHeader?.viewOptions.hasAccounts, () => html`
           <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
             <gds-flex
               grid-column="1; m{1 / span 5}"
               flex-direction="column"
               gap="l"
             >
+              <tp-accounts-modal></tp-accounts-modal>
               <tp-accounts></tp-accounts>
 
               <gds-card variant="notice" height="200px" border="4xs"

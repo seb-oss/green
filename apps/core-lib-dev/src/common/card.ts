@@ -1,6 +1,5 @@
-import { LitElement } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
-import { nothing } from 'lit/html.js'
+import { LitElement, nothing } from 'lit'
+import { customElement, property, state } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
@@ -12,18 +11,22 @@ import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 
 @customElement('tp-card')
 export class TPCard extends LitElement {
-  connectedCallback() {
-    super.connectedCallback()
-  }
 
-  @state()
-  accessor footerSlotOccupied = false
+    @state()
+    accessor footerSlotOccupied = false
+
+    @property({ type: Boolean })
+    accessor wide = false
+    
+    connectedCallback() {
+        super.connectedCallback(); 
+    }
 
   render() {
     return html`
       <gds-card background="secondary" padding="0" shadow="s">
-        <gds-flex flex-direction="column" gap="xl" padding="l">
-          <gds-flex justify-content="space-between" align-items="center">
+        <gds-flex flex-direction="column" gap="xl" padding=${this.wide ? '' : 'l'}>
+          <gds-flex justify-content="space-between" align-items="center" padding=${this.wide ? 'l l 0 l' : ''}>
             <slot name="header"></slot>
             <slot name="action"></slot>
           </gds-flex>
@@ -31,15 +34,19 @@ export class TPCard extends LitElement {
             <slot></slot>
           </gds-flex>
         </gds-flex>
-        <gds-flex
-          border="4xs/primary 0 0 0"
-          flex-direction="column"
-          padding="m l m m"
-        >
-          <slot name="footer"></slot>
-        </gds-flex>
+        ${this.#renderFooterSlot()}
       </gds-card>
     `
   }
-  
+
+  #renderFooterSlot() {
+    return html`
+          <gds-flex
+            border="4xs/primary 0 0 0"
+            flex-direction="column"
+            padding="m l m m" 
+          >
+            <slot name="footer"></slot>
+          </gds-flex>`
+  }
 }
