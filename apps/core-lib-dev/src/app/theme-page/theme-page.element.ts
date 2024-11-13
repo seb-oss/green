@@ -13,6 +13,7 @@ import '../../components/jit'
 import '../../components/cards'
 import '../../components/quicklinks'
 import '../../components/savings-goal'
+import '../../components/carousel-pink'
 import '../../components/savings-outside'
 import '../../components/news-widget'
 import './style.css'
@@ -36,6 +37,7 @@ export class ThemePage extends LitElement {
       <gds-flex gap="3xl" flex-direction="column">
         <tp-page-header style="flex:1" @view-options-change=${() => { console.log('asdasd'); this.requestUpdate()}}></tp-page-header>
 
+        <tp-carousel-pink></tp-carousel-pink>
         <!-- (Blue) Main dashboard section -->
         ${when(this.pageHeader?.viewOptions.hasAccounts, () => html`
           <gds-grid columns="1; m{12}" gap="l">
