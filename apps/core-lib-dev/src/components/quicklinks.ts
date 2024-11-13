@@ -16,8 +16,6 @@ export class TpQuicklinks extends LitElement {
         columns="3"
         gap="m"
         level="2"
-        background="secondary"
-        padding="l m m"
         border-bottom-left-radius="m"
         border-bottom-right-radius="m"
         max-width="max-content"
