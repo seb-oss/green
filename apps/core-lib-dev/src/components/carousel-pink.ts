@@ -14,7 +14,7 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 export class TPCarouselPink extends LitElement {
   render() {
     return html`
-      <gds-grid columns="3" gap="xl">
+      <gds-grid columns="2" gap="xl" max-width="800px" margin="0 auto">
         <gds-card padding="xs" background="#f3efeb">
           <gds-flex
             align-items="center"

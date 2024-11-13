@@ -38,7 +38,7 @@ export class ThemePage extends LitElement {
       <gds-flex gap="3xl" flex-direction="column">
         <tp-page-header style="flex:1" @view-options-change=${() => { console.log('asdasd'); this.requestUpdate()}}></tp-page-header>
 
-        <tp-carousel-pink></tp-carousel-pink>
+
         <!-- (Blue) Main dashboard section -->
         ${when(this.pageHeader?.viewOptions.hasAccounts, () => html`
           <gds-grid columns="1; m{12}" gap="l">
@@ -107,16 +107,7 @@ export class ThemePage extends LitElement {
 
         <!-- (Pink) Dream State, get started cards -->
         ${when(!this.pageHeader?.viewOptions.hasSavings && !this.pageHeader?.viewOptions.hasAccounts, () => html`
-          <gds-grid columns="1; m{2}" gap="l" max-width="800px" margin="0 auto">
-            <gds-card variant="negative" height="300px" border="4xs">s</gds-card>
-            <gds-card variant="negative" height="300px" border="4xs">s</gds-card>
-            <!-- <gds-card
-              variant="negative; hover: green-01"
-              height="300px"
-              border="4xs"
-              opacity=".25"
-            >s</gds-card> -->
-          </gds-grid>
+          <tp-carousel-pink></tp-carousel-pink>
           <gds-flex gap="xs" justify-content="center">
             <gds-card
               variant="green-02"
