@@ -52,6 +52,7 @@ export class CardExample extends LitElement {
           <gds-card>[CONTENT GOES HERE]</gds-card>
           <gds-jit></gds-jit>
         </gds-grid>
+        <tp-news-widget></tp-news-widget>
       </gds-flex>
     `
   }
