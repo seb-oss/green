@@ -43,7 +43,7 @@ export class TPCarouselPink extends LitElement {
       </style>
       <div class="container">
         <div class="carousel">
-          <gds-flex flex="0 0 calc(100vw/3)" class="snap">
+          <gds-flex flex="0 0 calc(100vw/2); l{0 0 calc(100vw/3)}" class="snap">
             <gds-card padding="xs" background="#f3efeb">
               <gds-flex
                 align-items="center"
