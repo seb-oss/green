@@ -33,15 +33,15 @@ export class PageHeader extends LitElement {
           <gds-text tag="h1" font-size="heading-s; s{display-l}">
             Hey Josephine!
           </gds-text>
-          <gds-flex gap="2xs">
+          <gds-flex >
             <gds-text
               tag="h2"
               font-size="display-l"
               color="secondary"
             >
-              Let’s set up your 
+              Let’s set up your
             </gds-text>
-            <gds-text level="1" tag="p" color="positive" font-size="display-l">everyday view!</gds-text>
+            <gds-text level="1" tag="p" color="positive" font-size="display-l">&nbsp; everyday view!</gds-text>
           </gds-flex>
         </gds-flex>
         <gds-flex gap="xs" justify-content="center">

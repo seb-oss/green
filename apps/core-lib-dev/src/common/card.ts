@@ -13,13 +13,20 @@ import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 export class TPCard extends LitElement {
 
     @state()
-    accessor footerSlotOccupied = false
+    accessor hideFooter = false
 
     @property({ type: Boolean })
     accessor wide = false
+
+    @state()
+    accessor footerSlotOccupied = false
     
     connectedCallback() {
         super.connectedCallback(); 
+    }
+
+    constructor() {
+      super()
     }
 
   render() {
@@ -40,13 +47,25 @@ export class TPCard extends LitElement {
   }
 
   #renderFooterSlot() {
-    return html`
+    return html`<div style="display: ${this.footerSlotOccupied ? '' : 'none'}">
           <gds-flex
             border="4xs/primary 0 0 0"
             flex-direction="column"
             padding="m l m m" 
           >
-            <slot name="footer"></slot>
-          </gds-flex>`
+            <slot name="footer" @slotchange=${this.#handleSlotChange}></slot>
+          </gds-flex></div>`
+  }
+
+  #handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.footerSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
   }
 }
