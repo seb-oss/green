@@ -12,6 +12,7 @@ import './page-header'
 import '../../components/jit'
 import '../../components/cards'
 import '../../components/quicklinks'
+import '../../components/steps'
 import '../../components/savings-goal'
 import '../../components/carousel-pink'
 import '../../components/savings-outside'
@@ -108,6 +109,7 @@ export class ThemePage extends LitElement {
 
         <!-- (Pink) Dream State, get started cards -->
         ${when(!this.pageHeader?.viewOptions.hasSavings && !this.pageHeader?.viewOptions.hasAccounts, () => html`
+          <tp-steps></tp-steps>
           <tp-carousel-pink></tp-carousel-pink>
           <gds-flex gap="xs" justify-content="center">
             <gds-card
