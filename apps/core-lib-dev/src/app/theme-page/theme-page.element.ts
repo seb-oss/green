@@ -38,10 +38,9 @@ export class ThemePage extends LitElement {
       <gds-flex gap="3xl" flex-direction="column">
         <tp-page-header style="flex:1" @view-options-change=${() => { console.log('asdasd'); this.requestUpdate()}}></tp-page-header>
 
-
         <!-- (Blue) Main dashboard section -->
         ${when(this.pageHeader?.viewOptions.hasAccounts, () => html`
-          <gds-grid columns="1; m{12}" gap="l">
+          <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
             <gds-flex
               grid-column="1; m{1 / span 5}"
               flex-direction="column"
@@ -83,26 +82,28 @@ export class ThemePage extends LitElement {
 
         <!-- (Blue) Savings section -->
          ${when(this.pageHeader?.viewOptions.hasSavings, () => html`
-          <gds-text tag="h2" font-size="heading-l">Savings</gds-text>
-          <gds-grid columns="1; m{12}" gap="l">
-            <gds-flex
-              grid-column="1; m{1 / span 8}"
-              flex-direction="column"
-              gap="l"
-            >
-              <gds-card variant="notice" height="400px" border="4xs"
-                >My savings</gds-card
+          <gds-flex padding="0 s; l{0 4xl}" gap="l" flex-direction="column">
+            <gds-text tag="h2" font-size="heading-l">Savings</gds-text>
+            <gds-grid columns="1; m{12}" gap="l">
+              <gds-flex
+                grid-column="1; m{1 / span 8}"
+                flex-direction="column"
+                gap="l"
               >
-            </gds-flex>
-            <gds-flex
-              grid-column="1; m{9 / span 4}"
-              flex-direction="column"
-              gap="l"
-            >
-              <tp-savings-goal></tp-savings-goal>
-              <tp-savings-outside></tp-savings-outside>
-            </gds-flex>
-          </gds-grid>
+                <gds-card variant="notice" height="400px" border="4xs"
+                  >My savings</gds-card
+                >
+              </gds-flex>
+              <gds-flex
+                grid-column="1; m{9 / span 4}"
+                flex-direction="column"
+                gap="l"
+              >
+                <tp-savings-goal></tp-savings-goal>
+                <tp-savings-outside></tp-savings-outside>
+              </gds-flex>
+            </gds-grid>
+          </gds-container>
         `)}
 
         <!-- (Pink) Dream State, get started cards -->
