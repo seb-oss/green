@@ -1,5 +1,5 @@
-import { LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { LitElement, nothing } from 'lit'
+import { customElement, state } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping'
 
@@ -13,6 +13,30 @@ import './accounts-card'
 
 @customElement('tp-accounts-modal')
 export class TPAccountsModal extends LitElement {
+
+  @state()
+  accessor isModalOpen = false
+
+  private handleCardClick() {
+    this.isModalOpen = true
+  }
+
+  private handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      this.isModalOpen = false
+    }
+  }
+  
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('keydown', this.handleKeyDown.bind(this))
+  }
+
+  disconnectedCallback() {
+    window.removeEventListener('keydown', this.handleKeyDown.bind(this))
+    super.disconnectedCallback()
+  }
+
   render() {
     return html`
       <style>
@@ -38,18 +62,26 @@ export class TPAccountsModal extends LitElement {
           --width: calc(100vw - var(--space) * (var(--steps) + 2));
           min-inline-size: calc(var(--width) / (var(--steps) - 1));
         }
+
+        .actionsheet {
+          @starting-style {
+            opacity: 0;
+            transform: translateX(100%);   
+          }
+        }
+
       </style>
-      <tp-card wide hideFooter>
+      <tp-card wide>
         <gds-text slot="header" font-size="heading-s">Accounts</gds-text>
         <gds-button slot="action" size="small" rank="tertiary">
           <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
         </gds-button>
         <gds-flex flex-direction="column" gap="l" padding="0 0 l 0">
           <div class="car" gap="s">
-            <tp-accounts-card name="negative">ICA</tp-accounts-card>
-            <tp-accounts-card name="notice">THIS</tp-accounts-card>
-            <tp-accounts-card name="green-01">THAT</tp-accounts-card>
-            <tp-accounts-card name="copper-01">Coppa</tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="negative">ICA</tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="notice">THIS</tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="green-01">THAT</tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="copper-01">Coppa</tp-accounts-card>
           </div>
           <gds-flex align-items="center" justify-content="center" gap="2xs">
             <tp-step-bullet step="s1"></tp-step-bullet>
@@ -59,6 +91,39 @@ export class TPAccountsModal extends LitElement {
           </gds-flex>
         </gds-flex>
       </tp-card>
+      ${this.isModalOpen
+        ? html`
+            <gds-container
+              position="fixed"
+              inset="0"
+              background="#00000040"
+              z-index="20"
+              
+            >
+              <gds-container
+                width="25vw"
+                background="#fef5f3"
+                level="2"
+                margin="0 0 0 auto"
+                height="100%"
+              transition="all 0.2s"
+                
+                class="actionsheet"
+
+              >
+                <gds-flex
+                  flex-direction="column"
+                  align-items="center"
+                  padding="4xl"
+                  gap="2xl"
+                >
+                  <gds-card variant="negative" max-width="max-content">ICA</gds-card>
+                  <gds-card variant="secondary" width="100%">THIS</gds-card>
+                </gds-flex>
+              </gds-container>
+            </gds-container>
+          `
+        : nothing}
     `
   }
 }
