@@ -110,21 +110,6 @@ export class ThemePage extends LitElement {
         <!-- (Pink) Dream State, get started cards -->
         ${when(!this.pageHeader?.viewOptions.hasSavings && !this.pageHeader?.viewOptions.hasAccounts, () => html`
           <tp-steps></tp-steps>
-          <tp-carousel-pink></tp-carousel-pink>
-          <gds-flex gap="xs" justify-content="center">
-            <gds-card
-              variant="green-02"
-              padding="0"
-              width="4px"
-              height="4px"
-            ></gds-card>
-            <gds-card
-              variant="green-02"
-              padding="0"
-              width="70px"
-              height="4px"
-            ></gds-card>
-          </gds-flex>
         `)}
 
         <!-- (Pink) Dream State, savings calculator -->
