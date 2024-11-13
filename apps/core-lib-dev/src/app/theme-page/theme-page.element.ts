@@ -42,7 +42,7 @@ export class ThemePage extends LitElement {
         <tp-page-header style="flex:1" @view-options-change=${() => { console.log('asdasd'); this.requestUpdate()}}></tp-page-header>
 
         <!-- (Blue) Main dashboard section -->
-        ${when(!this.pageHeader?.viewOptions.hasAccounts, () => html`
+        ${when(this.pageHeader?.viewOptions.hasAccounts, () => html`
           <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
             <gds-flex
               grid-column="1; m{1 / span 5}"
