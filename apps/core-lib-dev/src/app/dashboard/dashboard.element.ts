@@ -59,8 +59,39 @@ export class CardExample extends LitElement {
             <gds-button slot="action" size="small" rank="tertiary">
               <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
             </gds-button>
-            <tp-list-item></tp-list-item>
-            <tp-list-item></tp-list-item>
+            <tp-list-item>
+              <gds-icon-credit-card
+                width="20"
+                height="20"
+                slot="icon"
+              ></gds-icon-credit-card>
+              <gds-flex
+                flex-direction="column"
+                gap="xs"
+                border="0 0 4xs/primary 0"
+                padding="0 0 m 0"
+                flex="1"
+              >
+                <gds-flex align-items="center" justify-content="space-between">
+                  <gds-flex flex-direction="column">
+                    <gds-text font-size="detail-m">John Doe</gds-text>
+                    <gds-text font-size="detail-s" color="secondary">
+                      5896 13 000 20
+                    </gds-text>
+                  </gds-flex>
+                  <gds-flex flex-direction="column" align-items="flex-end">
+                    <gds-text font-size="detail-m">10 000,00</gds-text>
+                    <gds-text font-size="detail-s" color="secondary">
+                      5 december
+                    </gds-text>
+                  </gds-flex>
+                </gds-flex>
+                <gds-badge variant="warning">
+                  Det saknas pengar för nästa dragning.
+                </gds-badge>
+              </gds-flex>
+            </tp-list-item>
+            <tp-list-item> </tp-list-item>
             <tp-list-item></tp-list-item>
             <tp-list-item></tp-list-item>
             <tp-list-item></tp-list-item>
