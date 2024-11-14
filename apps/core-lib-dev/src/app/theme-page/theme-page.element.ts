@@ -46,58 +46,55 @@ export class ThemePage extends LitElement {
 
   render() {
     return html`
-      <gds-flex gap="3xl" flex-direction="column" >
-        <tp-page-header style="flex:1" @view-options-change=${() => {
-          console.log('asdasd')
-          this.requestUpdate()
-        }}></tp-page-header>
+      <gds-flex flex-direction="column">
+        <gds-container margin="0 0 3xl 0">
+          <tp-page-header style="flex:1" @view-options-change=${() => this.requestUpdate()}></tp-page-header>
+        </gds-container>
 
 <gds-container padding="0 s">
         <!-- (Blue) Main dashboard section -->
-        ${when(
-          this.pageHeader?.viewOptions.hasAccounts,
-          () => html`
-            <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
-              <gds-flex
-                grid-column="1; m{1 / span 5}"
-                flex-direction="column"
-                gap="l"
-              >
-                <tp-accounts-modal></tp-accounts-modal>
-                <tp-accounts></tp-accounts>
-                <tp-expenses></tp-expenses>
-              </gds-flex>
-              <gds-flex
-                grid-column="1; m{6 / span 4}"
-                flex-direction="column"
-                gap="l"
-              >
-                ${when(
-                  this.pageHeader?.viewOptions.hasCards,
-                  () => html`<tp-cards></tp-cards>`,
-                  () => html` <tp-empty-card></tp-empty-card> `,
-                )}
-                <gds-container display="none; m{block}">
-                  <tp-transactions></tp-transactions>
-                </gds-container>
-                <gds-container display="block; m{none}">
-                  <gds-carousel-trans></gds-carousel-trans>
-                </gds-container>
-              </gds-flex>
-              <gds-flex
-                grid-column="1; m{10 / span 3}"
-                flex-direction="column"
-                gap="l"
-              >
-                <tp-todos></tp-todos>
-                <gds-jit></gds-jit>
-              </gds-flex>
-            </gds-grid>
-          `,
-        )}
+        ${!!this.pageHeader?.viewOptions.hasAccounts}
+        <tp-page-section .show=${!!this.pageHeader?.viewOptions.hasAccounts}>
+          <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
+            <gds-flex
+              grid-column="1; m{1 / span 5}"
+              flex-direction="column"
+              gap="l"
+            >
+              <tp-accounts-modal></tp-accounts-modal>
+              <tp-accounts></tp-accounts>
+              <tp-expenses></tp-expenses>
+            </gds-flex>
+            <gds-flex
+              grid-column="1; m{6 / span 4}"
+              flex-direction="column"
+              gap="l"
+            >
+              ${when(
+                this.pageHeader?.viewOptions.hasCards,
+                () => html`<tp-cards></tp-cards>`,
+                () => html` <tp-empty-card></tp-empty-card> `,
+              )}
+              <gds-container display="none; m{block}">
+                <tp-transactions></tp-transactions>
+              </gds-container>
+              <gds-container display="block; m{none}">
+                <gds-carousel-trans></gds-carousel-trans>
+              </gds-container>
+            </gds-flex>
+            <gds-flex
+              grid-column="1; m{10 / span 3}"
+              flex-direction="column"
+              gap="l"
+            >
+              <tp-todos></tp-todos>
+              <gds-jit></gds-jit>
+            </gds-flex>
+          </gds-grid>
+        </tp-page-section>
 
         <!-- (Blue) Savings section -->
-          <tp-page-section ?show=${this.pageHeader?.viewOptions.hasSavings}>
+        <tp-page-section .show=${!!this.pageHeader?.viewOptions.hasSavings}>
           <gds-flex padding="0 s; l{0 4xl}" gap="l" flex-direction="column">
             <gds-text tag="h2" font-size="heading-l">Savings</gds-text>
             <gds-grid columns="1; m{12}" gap="l">
@@ -121,41 +118,43 @@ export class ThemePage extends LitElement {
         </tp-page-section>
 
         <!-- (Pink) Dream State, get started cards -->
-        ${when(
+        <tp-page-section .show=${
           !this.pageHeader?.viewOptions.hasSavings &&
-            !this.pageHeader?.viewOptions.hasAccounts,
-          () => html` <tp-steps></tp-steps> `,
-        )}
+          !this.pageHeader?.viewOptions.hasAccounts
+        }>
+          <tp-steps></tp-steps>
+        </tp-page-section>
 
-        <gds-grid  columns="1; m{2}" max-width="1200px" margin="0 auto" gap="l">
-          <tp-empty-konton></tp-empty-konton>
-          <tp-empty-card></tp-empty-card>
-        </gds-grid>
+        <tp-page-section .show=${true}>
+          <gds-grid  columns="1; m{2}" max-width="1200px" margin="0 auto" gap="l">
+            <tp-empty-konton></tp-empty-konton>
+            <tp-empty-card></tp-empty-card>
+          </gds-grid>
+        </tp-page-section>
+
         <!-- (Pink) Dream State, savings calculator -->
-        ${when(
-          !this.pageHeader?.viewOptions.hasSavings,
-          () => html`
-            <gds-grid
-              columns="1; m{2}"
-              gap="l"
-              max-width="800px"
-              margin="0 auto"
-            >
-              <gds-rich-text>
-                <h3>What are you dreaming about?</h3>
-                <p>
-                  Oavsett om det är att ha en buffert, en resa eller en trygg
-                  pension, är NU den bästa tiden att starta ett sparande. Testa
-                  och se hur snabbt du kan spara ihop till dina mål.
-                </p>
-                <p><gds-button>Start saving</gds-button></p>
-              </gds-rich-text>
-              <tp-savings-calc></tp-savings-calc>
-            </gds-grid>
-          `,
-        )}
+        <tp-page-section .show=${!this.pageHeader?.viewOptions.hasSavings}>
+          <gds-grid
+            columns="1; m{2}"
+            gap="l"
+            max-width="800px"
+            margin="0 auto"
+          >
+            <gds-rich-text>
+              <h3>What are you dreaming about?</h3>
+              <p>
+                Oavsett om det är att ha en buffert, en resa eller en trygg
+                pension, är NU den bästa tiden att starta ett sparande. Testa
+                och se hur snabbt du kan spara ihop till dina mål.
+              </p>
+              <p><gds-button>Start saving</gds-button></p>
+            </gds-rich-text>
+            <tp-savings-calc></tp-savings-calc>
+          </gds-grid>
+        </tp-page-section>
 
         <!-- (Pink) Dream State, testimonials -->
+        <tp-page-section show>
         <gds-grid columns="1; m{2}" gap="l"  max-width="800px" margin="0 auto">
           <gds-rich-text>
             <h3>What are you dreaming about?</h3>
@@ -176,9 +175,12 @@ export class ThemePage extends LitElement {
           </gds-rich-text>
           <gds-card variant="negative" height="300px" border="4xs"></gds-card>
         </gds-grid>
+        </tp-page-section>
 
-        <tp-news-widget></tp-news-widget>
-      </gds-conainer>
+        <tp-page-section .show=${true}>
+          <tp-news-widget></tp-news-widget>
+        </tp-page-section>
+
       </gds-flex>
     `
   }
