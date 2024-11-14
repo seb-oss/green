@@ -36,7 +36,7 @@ export class ThemePage extends LitElement {
   }
 
   @query('tp-page-header')
-  pageHeader: PageHeader
+  pageHeader!: PageHeader
 
   connectedCallback() {
     super.connectedCallback()

@@ -13,6 +13,8 @@ import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
 import '../../components/jit'
 import './style.css'
 
+import { ChangeEvent } from 'react'
+
 @customElement('tp-page-header')
 export class PageHeader extends LitElement {
   protected createRenderRoot() {
@@ -85,7 +87,7 @@ export class PageHeader extends LitElement {
                   >Has accounts
                   <input
                     type="checkbox"
-                    @change=${(e) =>
+                    @change=${(e: any) =>
                       this.#setViewOptions({
                         ...this.viewOptions,
                         hasAccounts: e.target.checked,
@@ -99,7 +101,7 @@ export class PageHeader extends LitElement {
                   >Has savings
                   <input
                     type="checkbox"
-                    @change=${(e) =>
+                    @change=${(e: any) =>
                       this.#setViewOptions({
                         ...this.viewOptions,
                         hasSavings: e.target.checked,
@@ -113,7 +115,7 @@ export class PageHeader extends LitElement {
                   Has cards
                   <input
                     type="checkbox"
-                    @change=${(e) =>
+                    @change=${(e: any) =>
                       this.#setViewOptions({
                         ...this.viewOptions,
                         hasCards: e.target.checked,
