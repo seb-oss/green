@@ -57,7 +57,7 @@ export class AppElement extends LitElement {
   popoverOpen: boolean = false
 
   @state()
-  currentView = 'theme-page'
+  currentView = 'dashboard'
 
   connectedCallback() {
     super.connectedCallback()
