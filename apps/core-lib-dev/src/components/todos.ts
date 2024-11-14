@@ -56,7 +56,7 @@ export class TpTodos extends LitElement {
 
   renderTodo(todo: Todo) {
     return html`<gds-card
-      variant="primary; hover: information"
+      variant="secondary; hover:information"
       width="100%"
       padding="m"
       shadow="s"

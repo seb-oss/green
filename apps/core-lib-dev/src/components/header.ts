@@ -28,7 +28,7 @@ export class GdsHeader extends LitElement {
         :host {
           position: sticky;
           top: 0;
-          z-index: 1000;
+          z-index: 4;
         }
       </style>
       <gds-flex

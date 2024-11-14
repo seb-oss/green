@@ -84,7 +84,7 @@ export class TPAccountsModal extends LitElement {
 
       </style>
       <tp-card wide>
-        <gds-text slot="header" font-size="heading-s">Accounts</gds-text>
+        <gds-text slot="header" font-size="heading-s">Transaction</gds-text>
         <gds-button slot="action" size="small" rank="tertiary">
           <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
         </gds-button>
