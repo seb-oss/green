@@ -21,6 +21,10 @@ export class TPEmptyCard extends LitElement {
 
   render() {
     return html` <style>
+
+      :host {
+        display: ${this.isVisible ? 'block' : 'none'};
+      }
         .card {
           aspect-ratio: 1.58 / 1;
         }
@@ -71,8 +75,6 @@ export class TPEmptyCard extends LitElement {
               </gds-flex>
             </gds-card>
           `
-        : html`
-          <gds-card variant="information" class="empty" ></gds-card>
-        `}`
+        : nothing}`
   }
 }

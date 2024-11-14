@@ -16,6 +16,15 @@ export class TPStep extends LitElement {
   @property({ type: String })
   accessor name: string
 
+  @property({ type: String })
+  accessor title: string
+
+  @property({ type: String })
+  accessor description: string
+
+  @property({ type: String })
+  accessor label: string
+
   render() {
     return html`
       <style>
@@ -40,7 +49,7 @@ export class TPStep extends LitElement {
           0% {
             scale: 0.8;
             opacity: 0.4;
-            filter: blur(14px);
+            /* filter: blur(14px); */
           }
         }
       </style>
@@ -50,7 +59,7 @@ export class TPStep extends LitElement {
           justify-content="space-between"
           padding="xl"
         >
-          <gds-text>Kom igång här!</gds-text>
+          <gds-text>${this.title}</gds-text>
           <gds-flex
             width="40px"
             height="40px"
@@ -59,7 +68,7 @@ export class TPStep extends LitElement {
             border-radius="max"
             background="#f7f5f3"
           >
-            <gds-icon-checklist></gds-icon-checklist>
+            <slot name="icon"></slot>
           </gds-flex>
         </gds-flex>
         <gds-flex
@@ -71,9 +80,10 @@ export class TPStep extends LitElement {
           border-radius="s"
         >
           <gds-text font-size="preamble-xs">
-            Få en översikt av dina konton, transaktioner, debit och kreditkort.
+            ${this.description}
+            
           </gds-text>
-          <gds-button size="small">Skaffa Enkla vardagen</gds-button>
+          <gds-button size="small">${this.label}</gds-button>
         </gds-flex>
       </gds-card>
     `
