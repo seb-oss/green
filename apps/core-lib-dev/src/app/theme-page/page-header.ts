@@ -13,8 +13,6 @@ import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
 import '../../components/jit'
 import './style.css'
 
-import { ChangeEvent } from 'react'
-
 @customElement('tp-page-header')
 export class PageHeader extends LitElement {
   protected createRenderRoot() {

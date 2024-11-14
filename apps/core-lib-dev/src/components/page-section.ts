@@ -1,4 +1,4 @@
-import { LitElement } from 'lit'
+import { css, LitElement } from 'lit'
 import { customElement, property, query } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping.js'
@@ -9,25 +9,36 @@ import { watch } from '@sebgroup/green-core/utils/decorators/watch.js'
 
 @customElement('tp-page-section')
 export class PageSection extends LitElement {
-  @property()
-  show: boolean = true
+  static styles = css`
+    :host {
+      transition: all 0.3s;
+      overflow: hidden;
+    }
+  `
 
-  @query('#container')
-  container?: HTMLDivElement
+  @property()
+  show: boolean = false
 
   render() {
-    return html`<div id="container">
-      <slot></slot>
-    </div>`
+    return html`<slot
+      @slotchange=${() => {
+        setTimeout(() => this.onShowChange(), 0)
+      }}
+    ></slot>`
   }
 
-  @watch('show')
+  @watch('show', { waitUntilFirstUpdate: true })
   onShowChange() {
-    if (!this.container) return
+    console.log('show', this.show)
+    const height = this.scrollHeight
     if (this.show) {
-      this.container.style.display = ''
+      this.style.height = `${height}px`
+      this.style.opacity = '1'
+      this.style.marginBottom = 'var(--gds-space-3xl)'
     } else {
-      this.container.style.display = 'none'
+      this.style.height = '0'
+      this.style.opacity = '0'
+      this.style.marginBottom = '0'
     }
   }
 }
