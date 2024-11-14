@@ -6,7 +6,7 @@ type BreakpointValues = { sel: string; values: string[] }
 type BreakpointData = { breakpoint: string; values: BreakpointValues[] }
 type BreakpointTree = BreakpointData[]
 
-export const viewportBreakpoints: Record<string, string> = {
+const viewportBreakpoints: Record<string, string> = {
   '0': '0px',
   '2xs': '320px',
   xs: '425px',

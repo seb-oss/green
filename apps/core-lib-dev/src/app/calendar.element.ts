@@ -1,7 +1,6 @@
 import { LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-
-import { html } from '@sebgroup/green-core/scoping.js'
+import { html } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/calendar/index.js'
 
@@ -18,13 +17,13 @@ export class CalendarExample extends LitElement {
   }
 
   @state()
-  disabledWeekends = false
+  accessor disabledWeekends = false
 
   @state()
-  showWeekNumbers = false
+  accessor showWeekNumbers = false
 
   @state()
-  showCustomizedDates = false
+  accessor showCustomizedDates = false
 
   #customizedDates = [
     {
