@@ -29,12 +29,15 @@ export class GdsHeader extends LitElement {
           position: sticky;
           top: 0;
           z-index: 4;
-          background-color: rgba(255, 255, 255, 0.8);
+          background-color: color-mix(
+            in srgb,
+            var(--gds-color-l2-background-secondary),
+            transparent 20%
+          );
           display: block;
           backdrop-filter: blur(10px);
         }
       </style>
-      <!-- background="primary" -->
       <gds-flex
         align-items="stretch"
         width="100%"
