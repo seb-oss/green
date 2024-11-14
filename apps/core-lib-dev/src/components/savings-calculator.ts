@@ -27,7 +27,7 @@ export class SavingsCalc extends LitElement {
           <gds-input
             label="How much can you save per month?"
             value=${this.amountPerMonth}
-            @input=${(e) => (this.amountPerMonth = e.currentTarget.value)}
+            @input=${(e: any) => (this.amountPerMonth = e.currentTarget.value)}
           ></gds-input>
           ${SLIDER_SVG}
         </div>
@@ -35,7 +35,7 @@ export class SavingsCalc extends LitElement {
           <gds-input
             label="How many years do you want to save?"
             value=${this.years}
-            @input=${(e) => (this.years = e.currentTarget.value)}
+            @input=${(e: any) => (this.years = e.currentTarget.value)}
           ></gds-input>
           ${SLIDER_SVG}
         </div>
