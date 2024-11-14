@@ -34,13 +34,7 @@ export class TPAccounts extends LitElement {
             <gds-icon-credit-card width="20" height="20"></gds-icon-credit-card>
           </gds-flex>
 
-          <gds-flex
-            flex-direction="column"
-            gap="xs"
-            border="0 0 4xs/primary 0"
-            padding="0 0 m 0"
-            flex="1"
-          >
+          <gds-flex flex-direction="column" gap="xs" flex="1">
             <gds-flex align-items="center" justify-content="space-between">
               <gds-flex flex-direction="column">
                 <gds-text font-size="detail-m">ISK account</gds-text>
@@ -76,13 +70,7 @@ export class TPAccounts extends LitElement {
               height="20"
             ></gds-icon-suitcase-work>
           </gds-flex>
-          <gds-flex
-            flex-direction="column"
-            gap="xs"
-            border="0 0 4xs/primary 0"
-            padding="0 0 m 0"
-            flex="1"
-          >
+          <gds-flex flex-direction="column" gap="xs" flex="1">
             <gds-flex align-items="center" justify-content="space-between">
               <gds-flex flex-direction="column">
                 <gds-text font-size="detail-m">Salary</gds-text>

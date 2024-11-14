@@ -29,13 +29,7 @@ export class TPTransactions extends LitElement {
             <gds-icon-knife-spoon width="20" height="20"></gds-icon-knife-spoon>
           </gds-flex>
 
-          <gds-flex
-            flex-direction="column"
-            gap="xs"
-            border="0 0 4xs/primary 0"
-            padding="0 0 m 0"
-            flex="1"
-          >
+          <gds-flex flex-direction="column" gap="xs" flex="1">
             <gds-flex align-items="center" justify-content="space-between">
               <gds-flex flex-direction="column">
                 <gds-text font-size="detail-m">Mäster Anders</gds-text>
@@ -66,13 +60,7 @@ export class TPTransactions extends LitElement {
           >
             <gds-icon-fashion width="20" height="20"></gds-icon-fashion>
           </gds-flex>
-          <gds-flex
-            flex-direction="column"
-            gap="xs"
-            border="0 0 4xs/primary 0"
-            padding="0 0 m 0"
-            flex="1"
-          >
+          <gds-flex flex-direction="column" gap="xs" flex="1">
             <gds-flex align-items="center" justify-content="space-between">
               <gds-flex flex-direction="column">
                 <gds-text font-size="detail-m">ACNE</gds-text>

@@ -6,6 +6,7 @@ import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
+import '@sebgroup/green-core/components/container/index.js'
 import '@sebgroup/green-core/components/grid/index.js'
 import '@sebgroup/green-core/components/rich-text/index.js'
 import './page-header'
@@ -24,6 +25,7 @@ import '../../components/todos'
 import '../../components/empty-konton'
 import '../../components/empty-card'
 import '../../components/expenses'
+import '../../components/savings'
 import '../../components/page-section'
 import './style.css'
 
@@ -44,12 +46,13 @@ export class ThemePage extends LitElement {
 
   render() {
     return html`
-      <gds-flex gap="3xl" flex-direction="column">
+      <gds-flex gap="3xl" flex-direction="column" >
         <tp-page-header style="flex:1" @view-options-change=${() => {
           console.log('asdasd')
           this.requestUpdate()
         }}></tp-page-header>
 
+<gds-container padding="0 s">
         <!-- (Blue) Main dashboard section -->
         ${when(
           this.pageHeader?.viewOptions.hasAccounts,
@@ -103,9 +106,7 @@ export class ThemePage extends LitElement {
                 flex-direction="column"
                 gap="l"
               >
-                <gds-card variant="notice" height="400px" border="4xs"
-                  >My savings</gds-card
-                >
+                <tp-savings></tp-savings>
               </gds-flex>
               <gds-flex
                 grid-column="1; m{9 / span 4}"
@@ -116,7 +117,7 @@ export class ThemePage extends LitElement {
                 <tp-savings-outside></tp-savings-outside>
               </gds-flex>
             </gds-grid>
-          </gds-container>
+          </gds-flex>
         </tp-page-section>
 
         <!-- (Pink) Dream State, get started cards -->
@@ -176,10 +177,8 @@ export class ThemePage extends LitElement {
           <gds-card variant="negative" height="300px" border="4xs"></gds-card>
         </gds-grid>
 
-
-          <tp-news-widget></tp-news-widget>
-
-
+        <tp-news-widget></tp-news-widget>
+      </gds-conainer>
       </gds-flex>
     `
   }

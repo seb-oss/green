@@ -35,7 +35,7 @@ export class TPCard extends LitElement {
     return html`
       <style>
         .main-slot {
-          display: ${this.mainSlotOccupied ? 'block' : 'none'};
+          display: ${this.mainSlotOccupied ? 'flex' : 'none'};
         }
       </style>
       <gds-card background="secondary" padding="0" shadow="s">
@@ -84,7 +84,7 @@ export class TPCard extends LitElement {
   }
 
   #renderMainSlot() {
-    return html`<gds-flex class="main-slot" flex-direction="column" gap="m">
+    return html`<gds-flex class="main-slot" flex-direction="column" gap="l">
       <slot @slotchange=${this.#handleMainSlotChange}></slot>
     </gds-flex>`
   }
