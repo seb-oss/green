@@ -35,9 +35,11 @@ export class TpExpenses extends LitElement {
 
   @state()
   status = '+3 567,00'
+
   expand() {
     this.isExpanded = !this.isExpanded
   }
+
   renderIcon() {
     if (this.isExpanded) {
       return html`<gds-icon-chevron-top></gds-icon-chevron-top>`
