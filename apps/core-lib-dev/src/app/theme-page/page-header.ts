@@ -28,18 +28,21 @@ export class PageHeader extends LitElement {
 
   render() {
     return html`
-      <gds-flex justify-content="space-between" flex-direction="row" gap="l">
-        <gds-flex flex-direction="row; s{column}" align-items="center">
-          <gds-text tag="h1" font-size="heading-s; s{heading-l}"
-            >Hey Josephine!</gds-text
-          >
-          <gds-text
-            display="none; s{block}"
-            tag="h2"
-            font-size="heading-s; s{heading-l}"
-            color="secondary"
-            >Whats going on?</gds-text
-          >
+      <gds-flex justify-content="space-between" flex-direction="row" gap="l" padding="4xl 4xl 0 4xl">
+        <gds-flex flex-direction="column" >
+          <gds-text tag="h1" font-size="heading-s; s{display-l}">
+            Hey Josephine!
+          </gds-text>
+          <gds-flex >
+            <gds-text
+              tag="h2"
+              font-size="display-l"
+              color="secondary"
+            >
+              Let’s set up your
+            </gds-text>
+            <gds-text level="1" tag="p" color="positive" font-size="display-l">&nbsp; everyday view!</gds-text>
+          </gds-flex>
         </gds-flex>
         <gds-flex gap="xs" justify-content="center">
          <!-- <tp-quicklinks></tp-quicklinks> -->
@@ -82,8 +85,8 @@ export class PageHeader extends LitElement {
               </label>
             </gds-menu-item>
             <gds-menu-item>
-              <label class="form-control"
-                >Has cards
+              <label class="form-control">
+                Has cards
                 <input type="checkbox" @change=${(e) => (this.#setViewOptions({...this.viewOptions, hasCards: e.target.checked}))} />
                 <i></i>
               </label>

@@ -31,6 +31,7 @@ export class GdsHeader extends LitElement {
         background="primary"
         position="relative"
         height="4rem"
+        level="1"
       >
         <gds-flex align-items="center">
           <gds-context-menu>
