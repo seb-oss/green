@@ -57,7 +57,7 @@ export class GdsLink extends GdsElement {
    * Defines the link variants
    */
   @property()
-  variant: 'default' | 'secondary' = 'default'
+  variant: 'default' | 'secondary' | 'hidden' = 'default'
 
   constructor() {
     super()
@@ -66,6 +66,7 @@ export class GdsLink extends GdsElement {
   render() {
     const CLASSES = {
       secondary: this.variant === 'secondary',
+      hidden: this.variant === 'hidden',
     }
 
     return staticHtml`

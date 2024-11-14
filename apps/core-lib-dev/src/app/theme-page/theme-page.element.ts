@@ -20,6 +20,7 @@ import '../../components/carousel-pink'
 import '../../components/savings-outside'
 import '../../components/news-widget'
 import '../../components/savings-calculator'
+import '../../components/todos'
 import './style.css'
 import { PageHeader } from './page-header'
 
@@ -76,9 +77,7 @@ export class ThemePage extends LitElement {
               flex-direction="column"
               gap="l"
               >
-              <gds-card variant="notice" height="220px" border="4xs"
-              >Todo</gds-card
-              >
+              <tp-todos></tp-todos>
               <gds-jit></gds-jit>
             </gds-flex>
           </gds-grid>
