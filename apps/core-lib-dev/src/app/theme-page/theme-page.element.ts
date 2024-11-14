@@ -21,6 +21,7 @@ import '../../components/savings-outside'
 import '../../components/news-widget'
 import '../../components/savings-calculator'
 import '../../components/todos'
+import '../../components/empty-konton'
 import './style.css'
 import { PageHeader } from './page-header'
 
@@ -114,6 +115,9 @@ export class ThemePage extends LitElement {
           <tp-steps></tp-steps>
         `)}
 
+        <gds-grid columns="2" max-width="800px" margin="0 auto" gap="l">
+          <tp-empty-konton></tp-empty-konton>
+        </gds-grid>
         <!-- (Pink) Dream State, savings calculator -->
         ${when(!this.pageHeader?.viewOptions.hasSavings, () => html`
           <gds-grid columns="1; m{2}" gap="l"  max-width="800px" margin="0 auto">
