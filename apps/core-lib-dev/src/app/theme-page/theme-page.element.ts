@@ -57,7 +57,7 @@ export class ThemePage extends LitElement {
           <tp-page-header style="flex:1" @view-options-change=${() => this.requestUpdate()}></tp-page-header>
         </gds-container>
 
-      <gds-container padding="0 s">
+      <gds-container padding="0 2xs; m{0 s}">
         <!-- (Blue) Main dashboard section -->
         <tp-page-section .show=${this.hasAccounts}>
           <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
