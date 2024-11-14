@@ -1,4 +1,4 @@
-import { LitElement } from 'lit'
+import { css, LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
@@ -6,11 +6,24 @@ import { html } from '@sebgroup/green-core/scoping'
 
 @customElement('tp-savings')
 export class TpSavingsWidget extends LitElement {
+  private isMobile: boolean = window.innerWidth <= 768
+  private isCollapsed: boolean = false
+
   connectedCallback() {
     super.connectedCallback()
+    window.addEventListener('resize', this.updateIsMobile)
   }
 
-  private isCollapsed: boolean = true
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('resize', this.updateIsMobile)
+  }
+
+  private updateIsMobile = () => {
+    this.isMobile = window.innerWidth <= 768
+    console.log('ismobile: ', this.isMobile)
+    this.requestUpdate()
+  }
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed
@@ -18,7 +31,9 @@ export class TpSavingsWidget extends LitElement {
   }
 
   render() {
-    return html` <gds-text tag="h2" font-size="heading-m">Spara</gds-text>
+    return html` <gds-text tag="h2" font-size="heading-m"
+        >Spara ${this.isMobile ? 'ismobile' : 'notmobile'}</gds-text
+      >
       <tp-card gap=${this.isCollapsed ? '0' : 'xl'}>
         <!-- Header -->
         <gds-flex level="2" slot="header" flex-direction="row">
@@ -32,15 +47,13 @@ export class TpSavingsWidget extends LitElement {
           slot="action"
           justify-content="center"
           align-items="center"
-          gap="m"
+          gap="s"
         >
           <gds-flex flex-direction="column">
-            <gds-text font-size="detail-s" color="secondary"
+            <gds-text font-size="detail-s" color="secondary" text-align="right"
               >Utveckling</gds-text
             >
-            <gds-text font-size="heading-m" color="content-positive"
-              >15,45%</gds-text
-            >
+            <gds-text font-size="heading-m" color="positive">+15,45%</gds-text>
           </gds-flex>
 
           <gds-button

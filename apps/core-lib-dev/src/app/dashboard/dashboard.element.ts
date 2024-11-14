@@ -82,9 +82,11 @@ export class CardExample extends LitElement {
           <tp-quicklinks></tp-quicklinks>
         </gds-card>
 
-        <gds-grid columns="2" gap="l">
+        <!-- <gds-grid columns="2" gap="l">
           <tp-savings></tp-savings>
-        </gds-grid>
+        </gds-grid> -->
+
+        <tp-savings></tp-savings>
 
         <tp-news-widget></tp-news-widget>
       </gds-flex>
