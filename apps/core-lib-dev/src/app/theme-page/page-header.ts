@@ -66,7 +66,7 @@ export class PageHeader extends LitElement {
               </gds-button>
 
               <gds-popover>
-                <div slot="trigger">
+                <div slot="trigger" style="max-height: 48px">
                   <gds-container display="s{none}">
                     <gds-button rank="secondary">
                       <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
