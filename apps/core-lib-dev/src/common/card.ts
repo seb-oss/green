@@ -20,6 +20,9 @@ export class TPCard extends LitElement {
   @state()
   footerSlotOccupied = false
 
+  @state()
+  mainSlotOccupied = false
+
   connectedCallback() {
     super.connectedCallback()
   }
@@ -30,6 +33,11 @@ export class TPCard extends LitElement {
 
   render() {
     return html`
+      <style>
+        .main-slot {
+          display: ${this.mainSlotOccupied ? 'block' : 'none'};
+        }
+      </style>
       <gds-card background="secondary" padding="0" shadow="s">
         <gds-flex
           flex-direction="column"
@@ -44,9 +52,7 @@ export class TPCard extends LitElement {
             <slot name="header"></slot>
             <slot name="action"></slot>
           </gds-flex>
-          <gds-flex flex-direction="column" gap="m">
-            <slot></slot>
-          </gds-flex>
+          ${this.#renderMainSlot()}
         </gds-flex>
         ${this.#renderFooterSlot()}
       </gds-card>
@@ -69,6 +75,24 @@ export class TPCard extends LitElement {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
     this.footerSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
+  }
+
+  #renderMainSlot() {
+    return html`<gds-flex class="main-slot" flex-direction="column" gap="m">
+      <slot @slotchange=${this.#handleMainSlotChange}></slot>
+    </gds-flex>`
+  }
+
+  #handleMainSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.mainSlotOccupied =
       assignedNodes.length > 0 &&
       assignedNodes.some(
         (node) =>

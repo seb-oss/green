@@ -27,6 +27,7 @@ import '../../components/todos'
 import './dashboard.css'
 import '../../components/savings-outside'
 import '../../components/savings-goal'
+import '../../components/savings'
 import '../../components/accounts'
 import '../../components/carousel-trans'
 import '../../components/cards'
@@ -84,6 +85,13 @@ export class CardExample extends LitElement {
         <gds-card max-width="max-content">
           <tp-quicklinks></tp-quicklinks>
         </gds-card>
+
+        <!-- <gds-grid columns="2" gap="l">
+          <tp-savings></tp-savings>
+        </gds-grid> -->
+
+        <tp-savings></tp-savings>
+
         <tp-news-widget></tp-news-widget>
       </gds-flex>
     `
