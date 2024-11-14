@@ -96,6 +96,14 @@ export class TPSteps extends LitElement {
             <gds-icon-checklist slot="icon"></gds-icon-checklist>
           </tp-step>
           <tp-step
+            title="Länka dina andra banker"
+            description="Allt för att göra din vardagsekonomi överskådlig."
+            label="Länka konto"
+            name="s4"
+          >
+            <gds-icon-bank slot="icon"></gds-icon-bank>
+          </tp-step>
+          <tp-step
             title="Börja spara"
             description="Vi hjälper dig att ta första steget mot en stabil och säker ekonomisk framtid."
             label="Öppna ett sparkonto"
@@ -110,14 +118,6 @@ export class TPSteps extends LitElement {
             name="s3"
           >
             <gds-icon-pencil-wave slot="icon"></gds-icon-pencil-wave>
-          </tp-step>
-          <tp-step
-            title="Länka dina andra banker"
-            description="Allt för att göra din vardagsekonomi överskådlig."
-            label="Länka konto"
-            name="s4"
-          >
-            <gds-icon-bank slot="icon"></gds-icon-bank>
           </tp-step>
         </div>
         <gds-flex align-items="center" justify-content="center" gap="2xs">

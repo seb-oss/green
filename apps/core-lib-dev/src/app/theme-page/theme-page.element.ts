@@ -40,6 +40,12 @@ export class ThemePage extends LitElement {
   @query('tp-page-header')
   pageHeader!: PageHeader
 
+  @property()
+  hasExternalAccounts = false
+
+  @property()
+  hasAccounts = false
+
   connectedCallback() {
     super.connectedCallback()
   }
@@ -53,7 +59,7 @@ export class ThemePage extends LitElement {
 
       <gds-container padding="0 s">
         <!-- (Blue) Main dashboard section -->
-        <tp-page-section .show=${!!this.pageHeader?.viewOptions.hasAccounts}>
+        <tp-page-section .show=${this.hasAccounts}>
           <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
             <gds-flex
               grid-column="1; m{1 / span 5}"
@@ -121,12 +127,12 @@ export class ThemePage extends LitElement {
           !this.pageHeader?.viewOptions.hasSavings &&
           !this.pageHeader?.viewOptions.hasAccounts
         }>
-          <tp-steps></tp-steps>
+          <tp-steps @click=${() => (this.hasExternalAccounts = true)}></tp-steps>
         </tp-page-section>
 
-        <tp-page-section .show=${true}>
+        <tp-page-section .show=${this.hasExternalAccounts}>
           <gds-grid  columns="1; m{2}" max-width="1200px" margin="0 auto" gap="l">
-            <tp-empty-konton></tp-empty-konton>
+            <tp-empty-konton @click=${() => (this.hasAccounts = true)}></tp-empty-konton>
             <tp-empty-card></tp-empty-card>
           </gds-grid>
         </tp-page-section>

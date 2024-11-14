@@ -15,6 +15,7 @@ export class PageSection extends LitElement {
       display: block;
       transition: all 0.5s;
       overflow: hidden;
+      padding-bottom: 2px;
     }
   `
 
@@ -38,6 +39,9 @@ export class PageSection extends LitElement {
       this.style.height = `${height}px`
       this.style.opacity = '1'
       this.style.marginBottom = 'var(--gds-space-3xl)'
+      setTimeout(() => {
+        this.style.height = 'auto'
+      }, 500)
     } else {
       this.style.height = '0'
       this.style.opacity = '0'
