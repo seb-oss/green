@@ -17,7 +17,6 @@ import '../../components/savings-outside'
 import '../../components/news-widget'
 import './style.css'
 import { PageHeader } from './page-header'
-import '../../components/expenses'
 @customElement('tp-theme-page')
 export class ThemePage extends LitElement {
   protected createRenderRoot() {
@@ -105,7 +104,6 @@ export class ThemePage extends LitElement {
         <!-- (Pink) Dream State, get started cards -->
         ${when(!this.pageHeader?.viewOptions.hasSavings && !this.pageHeader?.viewOptions.hasAccounts, () => html`
           <gds-grid columns="1; m{2}" gap="l" max-width="800px" margin="0 auto">
-            <tp-expenses></tp-expenses>
             <gds-card variant="negative" height="300px" border="4xs">s</gds-card>
             <gds-card variant="negative" height="300px" border="4xs">s</gds-card>
             <!-- <gds-card
