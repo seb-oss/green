@@ -73,33 +73,50 @@ export class TPSteps extends LitElement {
           --width: calc(100vw - var(--space) * (var(--steps) + 2));
           min-inline-size: calc(var(--width) / (var(--steps) - 1));
         }
+
+        @media screen and (max-width: 768px) {
+          .steps {
+            padding-inline: 0;
+            gap: 0;
+          }
+          tp-step::part(step) {
+            min-width: 80vw;
+            scroll-margin-inline-start: 0;
+          }
+        }
       </style>
       <gds-flex flex-direction="column" padding="xl 0" gap="xl">
         <div class="steps">
-          <tp-step 
-            title="Kom igång här!" 
-            description="Få en översikt av dina konton, transaktioner, debit och kreditkort." label="Skaffa Enkla vardagen" 
-            name="s1">
+          <tp-step
+            title="Kom igång här!"
+            description="Få en översikt av dina konton, transaktioner, debit och kreditkort."
+            label="Skaffa Enkla vardagen"
+            name="s1"
+          >
             <gds-icon-checklist slot="icon"></gds-icon-checklist>
           </tp-step>
-          <tp-step 
-            title="Börja spara" 
-            description="Vi hjälper dig att ta första steget mot en stabil och säker ekonomisk framtid." label="Öppna ett sparkonto" 
-            name="s2">
+          <tp-step
+            title="Börja spara"
+            description="Vi hjälper dig att ta första steget mot en stabil och säker ekonomisk framtid."
+            label="Öppna ett sparkonto"
+            name="s2"
+          >
             <gds-icon-piggy-bank slot="icon"></gds-icon-piggy-bank>
           </tp-step>
-          <tp-step 
-            title="Vi vill lära känna dig" 
-            description="För att vi ska kunna guida dig till en trygg ekonomi behöver vi ställa lite frågor. Det tar bara ett par minuter." 
-            label="Svara på frågor" 
-            name="s3">
+          <tp-step
+            title="Vi vill lära känna dig"
+            description="För att vi ska kunna guida dig till en trygg ekonomi behöver vi ställa lite frågor. Det tar bara ett par minuter."
+            label="Svara på frågor"
+            name="s3"
+          >
             <gds-icon-pencil-wave slot="icon"></gds-icon-pencil-wave>
           </tp-step>
-          <tp-step 
-            title="Länka dina andra banker" 
-            description="Allt för att göra din vardagsekonomi överskådlig." 
-            label="Länka konto" 
-            name="s4"> 
+          <tp-step
+            title="Länka dina andra banker"
+            description="Allt för att göra din vardagsekonomi överskådlig."
+            label="Länka konto"
+            name="s4"
+          >
             <gds-icon-bank slot="icon"></gds-icon-bank>
           </tp-step>
         </div>
