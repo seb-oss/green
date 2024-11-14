@@ -49,7 +49,6 @@ export class TpSavingsWidget extends LitElement {
             size="small"
             rank="tertiary"
             @click=${() => this.toggleCollapse()}
-            display="none"
           >
             ${when(
               !this.isCollapsed,
