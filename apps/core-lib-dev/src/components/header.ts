@@ -4,7 +4,7 @@ import { customElement } from 'lit/decorators.js'
 import { gdsInitLocalization } from '@sebgroup/green-core/localization.js'
 import { html } from '@sebgroup/green-core/scoping.js'
 
-const { setLocale, getLocale } = gdsInitLocalization()
+const { setLocale } = gdsInitLocalization()
 
 @customElement('gds-header')
 export class GdsHeader extends LitElement {

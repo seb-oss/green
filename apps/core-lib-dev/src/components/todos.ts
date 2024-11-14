@@ -93,12 +93,12 @@ export class TpTodos extends LitElement {
     setTimeout(() => {
       this.style.setProperty(
         '--todo-height',
-        `${this.todo.getBoundingClientRect().height}px`,
+        `${this.todo?.getBoundingClientRect().height}px`,
       )
     }, 0)
   }
 
-  onRef(ref?: GdsLink) {
+  onRef(ref?: Element) {
     if (ref) {
       ref.classList.add('loaded')
     }

@@ -1,5 +1,3 @@
-import { tr } from 'date-fns/locale'
-
 type Tokens = string[]
 type BreakpointSpecifier = { condition: string; value: string }[]
 type BreakpointValues = { sel: string; values: string[] }

@@ -13,16 +13,16 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 @customElement('tp-step')
 export class TPStep extends LitElement {
   @property({ type: String })
-  name: string
+  name?: string
 
   @property({ type: String })
-  title: string
+  title!: string
 
   @property({ type: String })
-  description: string
+  description?: string
 
   @property({ type: String })
-  label: string
+  label?: string
 
   render() {
     return html`

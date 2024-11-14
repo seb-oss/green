@@ -8,7 +8,7 @@ import '@sebgroup/green-core/components/container/index.js'
 @customElement('tp-step-bullet')
 export class TPStepBullet extends LitElement {
   @property({ type: Boolean })
-  active: false
+  active = false
 
   render() {
     return html`

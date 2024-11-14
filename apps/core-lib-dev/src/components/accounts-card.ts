@@ -13,7 +13,7 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 @customElement('tp-accounts-card')
 export class TPAccountsModalCard extends LitElement {
   @property({ type: String })
-  name: string
+  name?: string
 
   render() {
     return html`
