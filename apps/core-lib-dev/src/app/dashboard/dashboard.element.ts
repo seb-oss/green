@@ -22,7 +22,7 @@ import '@sebgroup/green-core/components/icon/icons/arrow-out-of-box.js'
 import '@sebgroup/green-core/components/mask/mask.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
 import '../../components/jit'
-import '../../components/news-widget'
+import '../../components/news'
 import '../../components/todos'
 import './dashboard.css'
 import '../../components/savings-outside'
@@ -92,7 +92,7 @@ export class CardExample extends LitElement {
 
         <tp-savings></tp-savings>
 
-        <tp-news-widget></tp-news-widget>
+        <tp-news></tp-news>
       </gds-flex>
     `
   }
