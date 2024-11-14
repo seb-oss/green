@@ -96,29 +96,29 @@ export class AppElement extends LitElement {
   render() {
     return html`
       <gds-theme color-scheme="light">
-        <gds-header></gds-header>
-        <gds-container>
-          ${choose(
-            this.currentView,
-            [
-              ['theme-page', () => html`<tp-theme-page></tp-theme-page>`],
-              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
-              ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
-              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
-              ['login', () => html`<gds-login></gds-login>`],
+          <gds-header></gds-header>
+          <gds-container>
+            ${choose(
+              this.currentView,
               [
-                'form-validation',
-                () => html`<form-validation></form-validation>`,
+                ['theme-page', () => html`<tp-theme-page></tp-theme-page>`],
+                ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
+                ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
+                ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
+                ['login', () => html`<gds-login></gds-login>`],
+                [
+                  'form-validation',
+                  () => html`<form-validation></form-validation>`,
+                ],
+                [
+                  'datepicker',
+                  () => html`<datepicker-example></datepicker-example>`,
+                ],
+                ['calendar', () => html`<calendar-example></calendar-example>`],
               ],
-              [
-                'datepicker',
-                () => html`<datepicker-example></datepicker-example>`,
-              ],
-              ['calendar', () => html`<calendar-example></calendar-example>`],
-            ],
-            () => html`No view selected`,
-          )}
-        </gds-container>
+              () => html`No view selected`,
+            )}
+          </gds-container>
       </gds-theme>
     `
   }
