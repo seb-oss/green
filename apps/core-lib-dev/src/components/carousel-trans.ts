@@ -77,11 +77,13 @@ export class GdsCarousel extends LitElement {
           gap="s"
           width="100%"
         >
-          <gds-card class="item" padding="0" min-width="40%">
+          <gds-card level="1" class="item" padding="0" min-width="40%">
             <gds-flex place-items="center" flex-direction="column">
-              <gds-card padding="0 0 m 0">${this.renderIca()}</gds-card>
+              <gds-card level="1" padding="0 0 m 0"
+                >${this.renderIca()}</gds-card
+              >
               <gds-text font-size="detail-s" tag="p">Livsmedel</gds-text
-              ><gds-card padding="0" margin="3xs 0 2xs 0"
+              ><gds-card level="1" padding="0" margin="3xs 0 2xs 0"
                 ><gds-text font-size="detail-m" tag="p"
                   >ICA Sabbatsberg</gds-text
                 ></gds-card
@@ -91,11 +93,13 @@ export class GdsCarousel extends LitElement {
               ></gds-flex
             ></gds-card
           >
-          <gds-card class="item" padding="0" min-width="40%">
+          <gds-card level="1" class="item" padding="0" min-width="40%">
             <gds-flex place-items="center" flex-direction="column">
-              <gds-card padding="0 0 m 0">${this.renderSwish()}</gds-card>
+              <gds-card level="1" padding="0 0 m 0"
+                >${this.renderSwish()}</gds-card
+              >
               <gds-text font-size="detail-s">Inkomst</gds-text>
-              <gds-card padding="0" margin="2xs 0 0 0">
+              <gds-card level="1" padding="0" margin="2xs 0 0 0">
                 <gds-text font-size="detail-m">Swish Tobbe</gds-text>
               </gds-card>
               <gds-text color="positive" font-size="detail-m"
@@ -103,11 +107,13 @@ export class GdsCarousel extends LitElement {
               ></gds-flex
             ></gds-card
           >
-          <gds-card class="item" padding="0" min-width="40%">
+          <gds-card level="1" class="item" padding="0" min-width="40%">
             <gds-flex place-items="center" flex-direction="column">
-              <gds-card padding="0 0 m 0">${this.renderIca()}</gds-card>
+              <gds-card level="1" padding="0 0 m 0"
+                >${this.renderIca()}</gds-card
+              >
               <gds-text font-size="detail-s" tag="p">Livsmedel</gds-text
-              ><gds-card padding="0" margin="3xs 0 2xs 0"
+              ><gds-card level="1" padding="0" margin="3xs 0 2xs 0"
                 ><gds-text font-size="detail-m" tag="p"
                   >ICA Sabbatsberg</gds-text
                 ></gds-card
@@ -117,11 +123,13 @@ export class GdsCarousel extends LitElement {
               ></gds-flex
             ></gds-card
           >
-          <gds-card class="item" padding="0" min-width="40%">
+          <gds-card level="1" class="item" padding="0" min-width="40%">
             <gds-flex place-items="center" flex-direction="column">
-              <gds-card padding="0 0 m 0">${this.renderIca()}</gds-card>
+              <gds-card level="1" padding="0 0 m 0"
+                >${this.renderIca()}</gds-card
+              >
               <gds-text font-size="detail-s">Livsmedel</gds-text>
-              <gds-card padding="0" margin="2xs 0 0 0">
+              <gds-card level="1" padding="0" margin="2xs 0 0 0">
                 <gds-text font-size="detail-m">ICA Sabbatsberg</gds-text>
               </gds-card>
               <gds-text font-size="detail-m">-488,00</gds-text></gds-flex

@@ -203,7 +203,15 @@ export class TpExpenses extends LitElement {
               ${this.status}</gds-text
               ></gds-flex
             > </gds-flex
-          ><gds-flex></gds-flex></gds-flex></gds-flex></gds-flex>
+          ><gds-flex></gds-flex></gds-flex></gds-flex> <gds-flex margin="l 0 0 0" justify-content="center">
+            <gds-flex flex-direction="column" gap="m">
+                <gds-text text-align="center" font-size="heading-xs">You spend less money on food than before! <br>How about saving a little extra each <br> in a savings account?</gds-text>
+                    <gds-flex gap="m" flex-direction="row"><gds-button href="http://seb.se" rank="secondary" variant="positive">Not right now</gds-button>
+                        <gds-button rank="primary" href="http://seb.se" variant="positive" >Save more</gds-button>
+                    </gds-flex>
+                </gds-flex>
+            </gds-flex>
+          </gds-flex></gds-flex></gds-flex>
     </tp-card>`
   }
 }
