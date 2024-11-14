@@ -18,6 +18,9 @@ export class TPCard extends LitElement {
     @property({ type: Boolean })
     accessor wide = false
 
+    @property({ type: String })
+    accessor gap = 'xl'
+
     @state()
     accessor footerSlotOccupied = false
     
@@ -32,7 +35,7 @@ export class TPCard extends LitElement {
   render() {
     return html`
       <gds-card background="secondary" padding="0" shadow="s">
-        <gds-flex flex-direction="column" gap="xl" padding=${this.wide ? '' : 'l'}>
+        <gds-flex flex-direction="column" gap=${this.gap} padding=${this.wide ? '' : 'l'}>
           <gds-flex justify-content="space-between" align-items="center" padding=${this.wide ? 'l l 0 l' : ''}>
             <slot name="header"></slot>
             <slot name="action"></slot>
