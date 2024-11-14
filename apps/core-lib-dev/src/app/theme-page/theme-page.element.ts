@@ -25,7 +25,6 @@ import '../../components/empty-konton'
 import '../../components/empty-card'
 import './style.css'
 import { PageHeader } from './page-header'
-
 @customElement('tp-theme-page')
 export class ThemePage extends LitElement {
   protected createRenderRoot() {
