@@ -10,7 +10,7 @@ import '@sebgroup/green-core/components/icon/icons/home-open.js'
 import '@sebgroup/green-core/components/icon/icons/fashion.js'
 import '../common/card'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 @customElement('tp-expenses')
 export class TpExpenses extends LitElement {
@@ -35,22 +35,31 @@ export class TpExpenses extends LitElement {
 
   @state()
   status = '+3 567,00'
+
   expand() {
     this.isExpanded = !this.isExpanded
   }
+
   renderIcon() {
     if (this.isExpanded) {
       return html`<gds-icon-chevron-top></gds-icon-chevron-top>`
     }
     return html`<gds-icon-chevron-bottom></gds-icon-chevron-bottom>`
   }
-  renderCategory(_label, _amount, _amountDiff, _status) {
+
+  renderCategory(
+    _label: string,
+    _amount: string,
+    _amountDiff: string,
+    _status: string,
+  ) {
     this.activeCategory = _label
     this.label = _label
     this.amount = _amount
     this.amountDiff = _amountDiff
     this.status = _status
   }
+
   render() {
     return html`<tp-card>
       <gds-text slot="header" font-size="preamble-s" tag="h3"
@@ -85,7 +94,7 @@ export class TpExpenses extends LitElement {
                 >${this.renderIcon()}</gds-button></gds-theme></gds-flex></gds-flex
       ></gds-flex>
       <style>
-       
+
         .Nöje{
             height: 5.75rem;
             width: 1rem;
@@ -176,8 +185,8 @@ export class TpExpenses extends LitElement {
                 <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory === 'Livstil' ? 'active' : ''} Livstil"></span><gds-text><gds-theme color-scheme="light">
               <gds-button  @click="${() => this.renderCategory('Livstil', '4 000,00', 'Ökat', '+5200,00')}" rank="${this.activeCategory === 'Livstil' ? 'primary' : 'secondary'}"
                 ><gds-icon-fashion class=""></gds-icon-fashion></gds-button></gds-theme></gds-text></gds-flex>
-                
-       
+
+
 
       </gds-flex>
       <gds-flex justify-content="space-between" flex-direction="row">
