@@ -15,7 +15,8 @@
       "options": {
         "main": "apps/core-lib-dev/src/main.ts",
         "entryPoint": "apps/core-lib-dev/src/main.ts",
-        "outputPath": "dist/apps/core-lib-dev"
+        "outputPath": "dist/apps/core-lib-dev",
+        "base": ""
       },
       "configurations": {
         "development": {
