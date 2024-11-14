@@ -8,7 +8,6 @@ import '@sebgroup/green-core/components/icon/icons/rocket.js'
 import '@sebgroup/green-core/components/icon/icons/store.js'
 import '@sebgroup/green-core/components/icon/icons/home-open.js'
 import '@sebgroup/green-core/components/icon/icons/fashion.js'
-
 import '../common/card'
 
 import { html } from '@sebgroup/green-core/scoping'
@@ -18,35 +17,40 @@ export class TpExpenses extends LitElement {
   connectedCallback() {
     super.connectedCallback()
   }
-    @state()
-    accessor activeCategory = 'Nöje'
-    @state()
-    accessor isExpanded = false
-    @state()
-    accessor label = 'Nöje'
-    @state()
-    accessor amount = '13 523,00'
-    @state()
-    accessor amountDiff = 'Ökat'
-    @state()
-    accessor status = '+3 567,00'
+
+  @state()
+  activeCategory = 'Nöje'
+
+  @state()
+  isExpanded = false
+
+  @state()
+  label = 'Nöje'
+
+  @state()
+  amount = '13 523,00'
+
+  @state()
+  amountDiff = 'Ökat'
+
+  @state()
+  status = '+3 567,00'
   expand() {
     this.isExpanded = !this.isExpanded
+  }
+  renderIcon() {
+    if (this.isExpanded) {
+      return html`<gds-icon-chevron-top></gds-icon-chevron-top>`
     }
-    renderIcon() {
-        if (this.isExpanded) {
-            return html `<gds-icon-chevron-top></gds-icon-chevron-top>`
-        }
-        return html `<gds-icon-chevron-bottom></gds-icon-chevron-bottom>`
-    }
-    renderCategory( _label, _amount, _amountDiff, _status) {
-        this.activeCategory = _label
-        this.label = _label
-        this.amount = _amount
-        this.amountDiff = _amountDiff
-        this.status = _status
-
-    }
+    return html`<gds-icon-chevron-bottom></gds-icon-chevron-bottom>`
+  }
+  renderCategory(_label, _amount, _amountDiff, _status) {
+    this.activeCategory = _label
+    this.label = _label
+    this.amount = _amount
+    this.amountDiff = _amountDiff
+    this.status = _status
+  }
   render() {
     return html`<tp-card>
       <gds-text slot="header" font-size="preamble-s" tag="h3"
@@ -155,22 +159,22 @@ export class TpExpenses extends LitElement {
             transform: scaleY(1);
         }
       </style>
-      <gds-flex class="${this.isExpanded ? 'open':''} wrapper" flex-direction="column"  overflow="hidden">
+      <gds-flex class="${this.isExpanded ? 'open' : ''} wrapper" flex-direction="column"  overflow="hidden">
       <gds-flex margin="0 0 l 0" align-items="baseline" justify-content="space-between">
-        <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory==='Nöje' ? 'active' : ''} Nöje"></span><gds-text><gds-theme color-scheme="light">
-              <gds-button  @click="${() => this.renderCategory('Nöje','13 523,00','Ökat','+3 567,00')}" rank="${this.activeCategory==='Nöje'? 'primary' : 'secondary'}"
+        <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory === 'Nöje' ? 'active' : ''} Nöje"></span><gds-text><gds-theme color-scheme="light">
+              <gds-button  @click="${() => this.renderCategory('Nöje', '13 523,00', 'Ökat', '+3 567,00')}" rank="${this.activeCategory === 'Nöje' ? 'primary' : 'secondary'}"
                 ><gds-icon-rocket class=""></gds-icon-rocket></gds-button></gds-theme></gds-text></gds-flex>
-                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory==='Mat' ? 'active' : ''} Mat"></span><gds-text><gds-theme color-scheme="light">
-              <gds-button  @click="${() => this.renderCategory('Mat','11 000,00','Ökat','+500,00')}" rank="${this.activeCategory==='Mat'? 'primary' : 'secondary'}"
+                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory === 'Mat' ? 'active' : ''} Mat"></span><gds-text><gds-theme color-scheme="light">
+              <gds-button  @click="${() => this.renderCategory('Mat', '11 000,00', 'Ökat', '+500,00')}" rank="${this.activeCategory === 'Mat' ? 'primary' : 'secondary'}"
                 ><gds-icon-store class=""></gds-icon-store></gds-button></gds-theme></gds-text></gds-flex>
-                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory==='Boende' ? 'active' : ''} Boende"></span><gds-text><gds-theme color-scheme="light">
-              <gds-button  @click="${() => this.renderCategory('Boende','10 000,00','Minskat','-500,00')}" rank="${this.activeCategory==='Boende'? 'primary' : 'secondary'}"
+                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory === 'Boende' ? 'active' : ''} Boende"></span><gds-text><gds-theme color-scheme="light">
+              <gds-button  @click="${() => this.renderCategory('Boende', '10 000,00', 'Minskat', '-500,00')}" rank="${this.activeCategory === 'Boende' ? 'primary' : 'secondary'}"
                 ><gds-icon-home-open class=""></gds-icon-home-open></gds-button></gds-theme></gds-text></gds-flex>
-                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory==='Stuga' ? 'active' : ''} Stuga"></span><gds-text><gds-theme color-scheme="light">
-              <gds-button  @click="${() => this.renderCategory('Stuga','8 000,00','Minskat','-250,00')}" rank="${this.activeCategory==='Stuga'? 'primary' : 'secondary'}"
+                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory === 'Stuga' ? 'active' : ''} Stuga"></span><gds-text><gds-theme color-scheme="light">
+              <gds-button  @click="${() => this.renderCategory('Stuga', '8 000,00', 'Minskat', '-250,00')}" rank="${this.activeCategory === 'Stuga' ? 'primary' : 'secondary'}"
                 ><gds-icon-home-open class=""></gds-icon-home-open></gds-button></gds-theme></gds-text></gds-flex>
-                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory==='Livstil' ? 'active' : ''} Livstil"></span><gds-text><gds-theme color-scheme="light">
-              <gds-button  @click="${() => this.renderCategory('Livstil','4 000,00','Ökat','+5200,00')}" rank="${this.activeCategory==='Livstil'? 'primary' : 'secondary'}"
+                <gds-flex place-items="center"gap="s"flex-direction="column"><span class="${this.activeCategory === 'Livstil' ? 'active' : ''} Livstil"></span><gds-text><gds-theme color-scheme="light">
+              <gds-button  @click="${() => this.renderCategory('Livstil', '4 000,00', 'Ökat', '+5200,00')}" rank="${this.activeCategory === 'Livstil' ? 'primary' : 'secondary'}"
                 ><gds-icon-fashion class=""></gds-icon-fashion></gds-button></gds-theme></gds-text></gds-flex>
                 
        

@@ -16,13 +16,13 @@ export class TPStep extends LitElement {
   name: string
 
   @property({ type: String })
-  accessor title: string
+  title: string
 
   @property({ type: String })
-  accessor description: string
+  description: string
 
   @property({ type: String })
-  accessor label: string
+  label: string
 
   render() {
     return html`
@@ -84,10 +84,7 @@ export class TPStep extends LitElement {
           align-items="flex-start"
           border-radius="s"
         >
-          <gds-text font-size="preamble-xs">
-            ${this.description}
-            
-          </gds-text>
+          <gds-text font-size="preamble-xs"> ${this.description} </gds-text>
           <gds-button size="small">${this.label}</gds-button>
         </gds-flex>
       </gds-card>
