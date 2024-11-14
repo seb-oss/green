@@ -18,7 +18,7 @@ export class TpQuicklinks extends LitElement {
           display: contents;
         }
       </style>
-      <gds-grid columns="3" gap="m" auto-columns="120">
+      <gds-grid columns="3" gap="m">
         <gds-card variant="secondary" level="3">
           <gds-flex flex-direction="column" align-items="center" gap="2xs">
             <gds-icon-credit-card height="16"></gds-icon-credit-card>
