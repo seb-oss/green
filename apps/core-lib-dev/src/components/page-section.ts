@@ -5,6 +5,7 @@ import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 
+import { resizeObserver } from '@sebgroup/green-core/utils/decorators/resize-observer.js'
 import { watch } from '@sebgroup/green-core/utils/decorators/watch.js'
 
 @customElement('tp-page-section')
@@ -12,7 +13,7 @@ export class PageSection extends LitElement {
   static styles = css`
     :host {
       display: block;
-      transition: all 0.3s;
+      transition: all 0.5s;
       overflow: hidden;
     }
   `
@@ -29,6 +30,7 @@ export class PageSection extends LitElement {
   }
 
   @watch('show', { waitUntilFirstUpdate: true })
+  @resizeObserver()
   onShowChange() {
     console.log('show', this.show)
     const height = this.scrollHeight
