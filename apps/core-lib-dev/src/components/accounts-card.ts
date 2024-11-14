@@ -28,8 +28,8 @@ export class TPAccountsModalCard extends LitElement {
           animation-direction: normal, reverse;
           animation-timeline: view(x);
           animation-range:
-            entry 0% entry 60%,
-            exit -40% exit 40%;
+            entry 0% entry 20%,
+            exit -20% exit 20%;
           scale: 1;
           opacity: 1;
           filter: blur(0px);
