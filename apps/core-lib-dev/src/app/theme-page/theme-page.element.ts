@@ -19,7 +19,7 @@ import '../../components/steps'
 import '../../components/savings-goal'
 import '../../components/carousel-pink'
 import '../../components/savings-outside'
-import '../../components/news-widget'
+import '../../components/news'
 import '../../components/savings-calculator'
 import '../../components/todos'
 import '../../components/empty-konton'
@@ -176,9 +176,18 @@ export class ThemePage extends LitElement {
           </gds-grid>
         </tp-page-section>
 
-        <tp-page-section .show=${true}>
-          <tp-news-widget></tp-news-widget>
+        <tp-page-section .show=${
+          this.pageHeader?.viewOptions.hasAccounts ||
+          this.pageHeader?.viewOptions.hasSavings
+        }>
+          <gds-flex flex-direction="column" gap="l">
+              <gds-text tag="h2" font-size="heading-m">Inspiration</gds-text>
+              <gds-grid columns="1; s{2} m{3}">
+                <tp-news></tp-news>
+              </gds-grid>
+            </gds-flex>
         </tp-page-section>
+
 
       </gds-flex>
     `
