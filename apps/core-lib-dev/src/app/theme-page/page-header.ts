@@ -29,7 +29,7 @@ export class PageHeader extends LitElement {
   render() {
     return html`
       <gds-container display="block; m{none}">
-        <gds-card variant="secondary" border-radius="0 0 s s">
+        <gds-card variant="secondary" padding="m s" border-radius="0 0 s s">
           <tp-quicklinks></tp-quicklinks>
         </gds-card>
       </gds-container>
