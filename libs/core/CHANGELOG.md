@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.56.0
+
+### Minor Changes
+
+- 333023a: **Text:** Extend GdsContainer and remove local margin prop
+
+### Patch Changes
+
+- 333023a: **Flex:** Fix issue with how default display value is set
+- 333023a: **Tokens:** Dont't include faulty theme tokens
+
 ## 1.55.1
 
 ### Patch Changes
