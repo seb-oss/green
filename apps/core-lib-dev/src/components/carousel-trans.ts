@@ -7,7 +7,7 @@ import swishLogo from '../assets/swish.svg'
 
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 @customElement('gds-carousel-trans')
 export class GdsCarousel extends LitElement {

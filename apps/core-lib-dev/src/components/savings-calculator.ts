@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/text/index.js'
 
@@ -12,36 +12,33 @@ export class SavingsCalc extends LitElement {
   }
 
   @state()
-  accessor amountPerMonth = 500
+  amountPerMonth = 500
 
   @state()
-  accessor years = 5
+  years = 5
 
   @state()
-  accessor total = '26 325'
+  total = '26 325'
 
   render() {
-    return html`<gds-card
-      variant="secondary"
-      border-color="primary"
-    >
-    <gds-flex gap="l" flex-direction="column">
-      <div>
-        <gds-input
-          label="How much can you save per month?"
-          value=${this.amountPerMonth}
-          @input=${e => this.amountPerMonth = e.currentTarget.value}
-        ></gds-input>
-        ${SLIDER_SVG}
-      </div>
-      <div>
-        <gds-input
-          label="How many years do you want to save?"
-          value=${this.years}
-          @input=${e => this.years = e.currentTarget.value}
-        ></gds-input>
-        ${SLIDER_SVG}
-      </div>
+    return html`<gds-card variant="secondary" border-color="primary">
+      <gds-flex gap="l" flex-direction="column">
+        <div>
+          <gds-input
+            label="How much can you save per month?"
+            value=${this.amountPerMonth}
+            @input=${(e) => (this.amountPerMonth = e.currentTarget.value)}
+          ></gds-input>
+          ${SLIDER_SVG}
+        </div>
+        <div>
+          <gds-input
+            label="How many years do you want to save?"
+            value=${this.years}
+            @input=${(e) => (this.years = e.currentTarget.value)}
+          ></gds-input>
+          ${SLIDER_SVG}
+        </div>
       </gds-flex>
 
       <gds-text
@@ -50,7 +47,7 @@ export class SavingsCalc extends LitElement {
         text-align="center"
         margin="l 0 0 0"
       >
-      ${this.amountPerMonth} kr/mån i ${this.years} år
+        ${this.amountPerMonth} kr/mån i ${this.years} år
       </gds-text>
       <gds-text
         font-size="display-l"

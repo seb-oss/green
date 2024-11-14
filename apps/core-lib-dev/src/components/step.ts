@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/button/index.js'
 import '@sebgroup/green-core/components/card/index.js'
@@ -12,9 +12,8 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 
 @customElement('tp-step')
 export class TPStep extends LitElement {
-
   @property({ type: String })
-  accessor name: string
+  name: string
 
   @property({ type: String })
   accessor title: string
@@ -53,7 +52,13 @@ export class TPStep extends LitElement {
           }
         }
       </style>
-      <gds-card id=${this.id} part="step" class="step" padding="xs" background="#f3efeb">
+      <gds-card
+        id=${this.id}
+        part="step"
+        class="step"
+        padding="xs"
+        background="#f3efeb"
+      >
         <gds-flex
           align-items="center"
           justify-content="space-between"

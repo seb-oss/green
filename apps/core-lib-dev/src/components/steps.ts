@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, query } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/button/index.js'
 import '@sebgroup/green-core/components/card/index.js'
@@ -18,33 +18,34 @@ import './step-bullet'
 @customElement('tp-steps')
 export class TPSteps extends LitElement {
   @query('.steps')
-  accessor stepsContainer!: HTMLElement
+  stepsContainer!: HTMLElement
 
   firstUpdated() {
-    this.addEventListeners();
+    this.addEventListeners()
   }
 
   addEventListeners() {
-    const bullets = this.shadowRoot!.querySelectorAll('tp-step-bullet');
-    bullets.forEach(bullet => {
-      bullet.addEventListener('click', this.handleBulletClick.bind(this));
-    });
+    const bullets = this.shadowRoot!.querySelectorAll('tp-step-bullet')
+    bullets.forEach((bullet) => {
+      bullet.addEventListener('click', this.handleBulletClick.bind(this))
+    })
   }
 
   handleBulletClick(event: Event) {
-    const bullet = event.currentTarget as HTMLElement;
-    const stepName = bullet.getAttribute('step');
-    const step = this.shadowRoot!.querySelector(`tp-step[name="${stepName}"]::part(step)`);
+    const bullet = event.currentTarget as HTMLElement
+    const stepName = bullet.getAttribute('step')
+    const step = this.shadowRoot!.querySelector(
+      `tp-step[name="${stepName}"]::part(step)`,
+    )
     if (step) {
-      step.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      step.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
 
     // Update active state of bullets
-    const bullets = this.shadowRoot!.querySelectorAll('tp-step-bullet');
-    bullets.forEach(b => b.removeAttribute('active'));
-    bullet.setAttribute('active', '');
+    const bullets = this.shadowRoot!.querySelectorAll('tp-step-bullet')
+    bullets.forEach((b) => b.removeAttribute('active'))
+    bullet.setAttribute('active', '')
   }
-
 
   render() {
     return html`
