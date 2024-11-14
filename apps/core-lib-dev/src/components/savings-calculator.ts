@@ -62,7 +62,7 @@ export class SavingsCalc extends LitElement {
 }
 
 const SLIDER_SVG = html` <svg
-  width="368"
+  width="100%"
   height="32"
   viewBox="0 0 368 32"
   fill="none"

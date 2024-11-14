@@ -182,13 +182,11 @@ export class ThemePage extends LitElement {
           </gds-grid>
         </tp-page-section>
 
-        <tp-page-section .show=${
-          this.pageHeader?.viewOptions.hasAccounts ||
-          this.pageHeader?.viewOptions.hasSavings
-        }>
-          <gds-flex flex-direction="column" gap="l">
+        <tp-page-section .show=${true}>
+          <gds-flex flex-direction="column" gap="l" max-width="800px" margin="0 auto" >
               <gds-text tag="h2" font-size="heading-m">Inspiration</gds-text>
-              <gds-grid columns="1; s{2} m{3}">
+              <gds-grid columns="1; m{2}" gap="l">
+                <tp-news></tp-news>
                 <tp-news></tp-news>
               </gds-grid>
             </gds-flex>
