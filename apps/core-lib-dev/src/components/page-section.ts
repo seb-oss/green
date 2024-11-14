@@ -13,7 +13,7 @@ export class PageSection extends LitElement {
   show: boolean = true
 
   @query('#container')
-  container: HTMLDivElement
+  container?: HTMLDivElement
 
   render() {
     return html`<div id="container">
@@ -23,6 +23,7 @@ export class PageSection extends LitElement {
 
   @watch('show')
   onShowChange() {
+    if (!this.container) return
     if (this.show) {
       this.container.style.display = ''
     } else {
