@@ -11,6 +11,7 @@ import { watch } from '@sebgroup/green-core/utils/decorators/watch.js'
 export class PageSection extends LitElement {
   static styles = css`
     :host {
+      display: block;
       transition: all 0.3s;
       overflow: hidden;
     }

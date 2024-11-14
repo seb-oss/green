@@ -51,9 +51,8 @@ export class ThemePage extends LitElement {
           <tp-page-header style="flex:1" @view-options-change=${() => this.requestUpdate()}></tp-page-header>
         </gds-container>
 
-<gds-container padding="0 s">
+      <gds-container padding="0 s">
         <!-- (Blue) Main dashboard section -->
-        ${!!this.pageHeader?.viewOptions.hasAccounts}
         <tp-page-section .show=${!!this.pageHeader?.viewOptions.hasAccounts}>
           <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
             <gds-flex
@@ -155,26 +154,26 @@ export class ThemePage extends LitElement {
 
         <!-- (Pink) Dream State, testimonials -->
         <tp-page-section show>
-        <gds-grid columns="1; m{2}" gap="l"  max-width="800px" margin="0 auto">
-          <gds-rich-text>
-            <h3>What are you dreaming about?</h3>
-            <p>
-              Oavsett om det är att ha en buffert, en resa eller en trygg
-              pension, är NU den bästa tiden att starta ett sparande. Testa och
-              se hur snabbt du kan spara ihop till dina mål.
-            </p>
-            <p style="line-height:48px">
-              <gds-button rank="secondary">Christmas</gds-button>
-              <gds-button rank="secondary">Vacation</gds-button>
-              <gds-button rank="secondary">Pension</gds-button>
-              <gds-button rank="secondary">Birthday</gds-button>
-              <gds-button rank="secondary">House</gds-button>
-              <gds-button rank="secondary">Car</gds-button>
-              <gds-button rank="secondary">Boat</gds-button>
-            </p>
-          </gds-rich-text>
-          <gds-card variant="negative" height="300px" border="4xs"></gds-card>
-        </gds-grid>
+          <gds-grid columns="1; m{2}" gap="l"  max-width="800px" margin="0 auto">
+            <gds-rich-text>
+              <h3>What are you dreaming about?</h3>
+              <p>
+                Oavsett om det är att ha en buffert, en resa eller en trygg
+                pension, är NU den bästa tiden att starta ett sparande. Testa och
+                se hur snabbt du kan spara ihop till dina mål.
+              </p>
+              <p style="line-height:48px">
+                <gds-button rank="secondary">Christmas</gds-button>
+                <gds-button rank="secondary">Vacation</gds-button>
+                <gds-button rank="secondary">Pension</gds-button>
+                <gds-button rank="secondary">Birthday</gds-button>
+                <gds-button rank="secondary">House</gds-button>
+                <gds-button rank="secondary">Car</gds-button>
+                <gds-button rank="secondary">Boat</gds-button>
+              </p>
+            </gds-rich-text>
+            <gds-card variant="negative" height="300px" border="4xs"></gds-card>
+          </gds-grid>
         </tp-page-section>
 
         <tp-page-section .show=${true}>
