@@ -10,7 +10,7 @@ import '@sebgroup/green-core/components/button/index.js'
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 
 @customElement('tp-empty-konton')
-export class TPAccounts extends LitElement {
+export class TPEmptyKonton extends LitElement {
   render() {
     return html`
       <tp-card>
