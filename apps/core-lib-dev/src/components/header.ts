@@ -1,8 +1,8 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { gdsInitLocalization } from '@sebgroup/green-core/localization'
-import { html } from '@sebgroup/green-core/scoping'
+import { gdsInitLocalization } from '@sebgroup/green-core/localization.js'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 const { setLocale, getLocale } = gdsInitLocalization()
 
@@ -24,16 +24,29 @@ export class GdsHeader extends LitElement {
 
   render() {
     return html`
+      <style>
+        :host {
+          position: sticky;
+          top: 0;
+          z-index: 4;
+          background-color: color-mix(
+            in srgb,
+            var(--gds-color-l2-background-secondary),
+            transparent 20%
+          );
+          display: block;
+          backdrop-filter: blur(10px);
+        }
+      </style>
       <gds-flex
         align-items="stretch"
         width="100%"
         justify-content="space-between"
-        background="primary"
         position="relative"
         height="4rem"
         level="1"
       >
-        <gds-flex align-items="center">
+        <gds-flex align-items="center" padding="xl">
           <gds-context-menu>
             <gds-flex align-items="center" gap="s" slot="trigger">
               <gds-icon-bars-three></gds-icon-bars-three>

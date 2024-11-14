@@ -2,7 +2,8 @@ import { css, LitElement } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
+
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 import '@sebgroup/green-core/components/text/index.js'
@@ -31,11 +32,7 @@ import '@sebgroup/green-core/components/img/index.js'
 import '@sebgroup/green-core/components/video/index.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
-
 import '../components/header'
-import '../components/quicklinks'
-import '../components/news-widget'
-import '../components/savings'
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
@@ -57,10 +54,10 @@ export class AppElement extends LitElement {
   }
 
   @property()
-  accessor popoverOpen: boolean = false
+  popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'theme-page'
+  currentView = 'theme-page'
 
   connectedCallback() {
     super.connectedCallback()
@@ -88,7 +85,7 @@ export class AppElement extends LitElement {
         const currentScheme = themeElement.getAttribute('gds-theme')
         themeElement.setAttribute(
           'color-scheme',
-          currentScheme === 'light' ? 'dark' : 'light'
+          currentScheme === 'light' ? 'dark' : 'light',
         )
       }
     }

@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/badge/index.js'
 import '@sebgroup/green-core/components/card/index.js'
@@ -22,6 +22,8 @@ import '@sebgroup/green-core/components/icon/icons/arrow-out-of-box.js'
 import '@sebgroup/green-core/components/mask/mask.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-bottom.js'
 import '../../components/jit'
+import '../../components/news-widget'
+import '../../components/todos'
 import './dashboard.css'
 import '../../components/savings-outside'
 import '../../components/savings-goal'
@@ -67,9 +69,10 @@ export class CardExample extends LitElement {
             </gds-button>
           </gds-flex>
         </gds-flex>
-        <gds-grid columns="3" gap="xl">
+        <gds-grid columns="1; s{3}" gap="xl">
           <tp-transactions></tp-transactions>
           <tp-accounts></tp-accounts>
+          <tp-todos></tp-todos>
           <tp-cards></tp-cards>
           <gds-carousel-trans></gds-carousel-trans>
           <gds-flex flex-direction="column" gap="m">

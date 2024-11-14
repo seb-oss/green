@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js'
 
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 @customElement('gds-jit')
 export class GdsJit extends LitElement {
