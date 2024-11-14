@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/icon/icons/credit-card.js'
 import '@sebgroup/green-core/components/icon/icons/arrow-rotate-right-left.js'

@@ -1,7 +1,7 @@
 import { LitElement, nothing } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
@@ -13,7 +13,7 @@ import '@sebgroup/green-core/components/icon/icons/brand-seb.js'
 @customElement('tp-empty-card')
 export class TPEmptyCard extends LitElement {
   @state()
-  accessor isVisible = true
+  isVisible = true
 
   private handleCloseClick() {
     this.isVisible = false
@@ -21,10 +21,9 @@ export class TPEmptyCard extends LitElement {
 
   render() {
     return html` <style>
-
-      :host {
-        display: ${this.isVisible ? 'block' : 'none'};
-      }
+        :host {
+          display: ${this.isVisible ? 'block' : 'none'};
+        }
         .card {
           aspect-ratio: 1.58 / 1;
         }

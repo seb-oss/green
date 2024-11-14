@@ -2,7 +2,8 @@ import { css, LitElement } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
+
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 import '@sebgroup/green-core/components/text/index.js'
@@ -31,9 +32,7 @@ import '@sebgroup/green-core/components/img/index.js'
 import '@sebgroup/green-core/components/video/index.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
-
 import '../components/header'
-
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
@@ -55,10 +54,10 @@ export class AppElement extends LitElement {
   }
 
   @property()
-  accessor popoverOpen: boolean = false
+  popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'theme-page'
+  currentView = 'theme-page'
 
   connectedCallback() {
     super.connectedCallback()
@@ -86,7 +85,7 @@ export class AppElement extends LitElement {
         const currentScheme = themeElement.getAttribute('gds-theme')
         themeElement.setAttribute(
           'color-scheme',
-          currentScheme === 'light' ? 'dark' : 'light'
+          currentScheme === 'light' ? 'dark' : 'light',
         )
       }
     }
@@ -95,29 +94,29 @@ export class AppElement extends LitElement {
   render() {
     return html`
       <gds-theme color-scheme="light">
-          <gds-header></gds-header>
-          <gds-container>
-            ${choose(
-              this.currentView,
+        <gds-header></gds-header>
+        <gds-container>
+          ${choose(
+            this.currentView,
+            [
+              ['theme-page', () => html`<tp-theme-page></tp-theme-page>`],
+              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
+              ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
+              ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
+              ['login', () => html`<gds-login></gds-login>`],
               [
-                ['theme-page', () => html`<tp-theme-page></tp-theme-page>`],
-                ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
-                ['dashboard', () => html`<gds-dashboard></gds-dashboard>`],
-                ['onboarding', () => html`<gds-onboarding></gds-onboarding>`],
-                ['login', () => html`<gds-login></gds-login>`],
-                [
-                  'form-validation',
-                  () => html`<form-validation></form-validation>`,
-                ],
-                [
-                  'datepicker',
-                  () => html`<datepicker-example></datepicker-example>`,
-                ],
-                ['calendar', () => html`<calendar-example></calendar-example>`],
+                'form-validation',
+                () => html`<form-validation></form-validation>`,
               ],
-              () => html`No view selected`,
-            )}
-          </gds-container>
+              [
+                'datepicker',
+                () => html`<datepicker-example></datepicker-example>`,
+              ],
+              ['calendar', () => html`<calendar-example></calendar-example>`],
+            ],
+            () => html`No view selected`,
+          )}
+        </gds-container>
       </gds-theme>
     `
   }

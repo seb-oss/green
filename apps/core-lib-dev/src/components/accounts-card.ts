@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/button/index.js'
 import '@sebgroup/green-core/components/card/index.js'
@@ -12,9 +12,8 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 
 @customElement('tp-accounts-card')
 export class TPAccountsModalCard extends LitElement {
-
   @property({ type: String })
-  accessor name: string
+  name: string
 
   render() {
     return html`
@@ -44,12 +43,8 @@ export class TPAccountsModalCard extends LitElement {
           }
         }
       </style>
-      <gds-card variant=${this.name} part="account" class="account" >
-        <gds-flex
-          align-items="center"
-          justify-content="center"
-          padding="xl"
-        >
+      <gds-card variant=${this.name} part="account" class="account">
+        <gds-flex align-items="center" justify-content="center" padding="xl">
           <slot></slot>
         </gds-flex>
       </gds-card>

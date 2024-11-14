@@ -43,6 +43,7 @@ export default async function runExecutor(
       ...glob.sync('./libs/core/src/localization.ts'),
       ...glob.sync('./libs/core/src/transitional-styles.ts'),
       ...glob.sync('./libs/core/src/scoping.ts'),
+      ...glob.sync('./libs/core/src/utils/decorators/watch.ts'),
     ],
     chunkNames: 'chunks/[name].[hash]',
     splitting: true,
