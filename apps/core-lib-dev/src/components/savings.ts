@@ -77,7 +77,10 @@ export class TpSavingsWidget extends LitElement {
               id="test"
             >
               <gds-flex flex-direction="column">
-                <gds-text>Värdepapper</gds-text>
+                <gds-text color="secondary" display="block; s{none}"
+                  >Värdepapper</gds-text
+                >
+                <gds-text display="none; s{block}">Värdepapper</gds-text>
                 <gds-container display="block; s{none}">
                   <gds-text>56 789,00</gds-text>
                 </gds-container>
@@ -140,7 +143,10 @@ export class TpSavingsWidget extends LitElement {
               gap="xl"
             >
               <gds-flex flex-direction="column">
-                <gds-text>Aktier</gds-text>
+                <gds-text color="secondary" display="block; s{none}"
+                  >Aktier</gds-text
+                >
+                <gds-text display="none; s{block}">Aktier</gds-text>
                 <gds-container display="block; s{none}">
                   <gds-text>159 200,00</gds-text>
                 </gds-container>
@@ -203,7 +209,10 @@ export class TpSavingsWidget extends LitElement {
               gap="xl"
             >
               <gds-flex flex-direction="column">
-                <gds-text>Konto</gds-text>
+                <gds-text color="secondary" display="block; s{none}"
+                  >Konto</gds-text
+                >
+                <gds-text display="none; s{block}">Konto</gds-text>
                 <gds-container display="block; s{none}">
                   <gds-text>467 200,00</gds-text>
                 </gds-container>
@@ -266,7 +275,10 @@ export class TpSavingsWidget extends LitElement {
               gap="xl"
             >
               <gds-flex flex-direction="column">
-                <gds-text>Kapitalförsäkring</gds-text>
+                <gds-text color="secondary" display="block; s{none}"
+                  >Kapitalförsäkring</gds-text
+                >
+                <gds-text display="none; s{block}">Kapitalförsäkring</gds-text>
                 <gds-container display="block; s{none}">
                   <gds-text>359 200,00</gds-text>
                 </gds-container>
@@ -329,7 +341,10 @@ export class TpSavingsWidget extends LitElement {
               gap="xl"
             >
               <gds-flex flex-direction="column">
-                <gds-text>Pensionsförsäkring</gds-text>
+                <gds-text color="secondary" display="block; s{none}"
+                  >Pensionsförsäkring</gds-text
+                >
+                <gds-text display="none; s{block}">Pensionsförsäkring</gds-text>
                 <gds-container display="block; s{none}">
                   <gds-text>634 000,00</gds-text>
                 </gds-container>
