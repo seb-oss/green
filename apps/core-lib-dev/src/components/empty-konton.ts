@@ -23,7 +23,7 @@ export class TPAccounts extends LitElement {
         </gds-button>
         <!-- /Header -->
 
-        <gds-flex padding="2xl 0">
+        <gds-flex padding="2xl 0" align-items="center" justify-content="center">
           <gds-flex
             flex-direction="column"
             align-items="center"
@@ -85,6 +85,8 @@ export class TPAccounts extends LitElement {
               font-size="heading-xs"
               font-weight="book"
               text-align="center"
+              max-width="32"
+              text-wrap="balance"
             >
               Få en översikt av dina konton i SEB, transaktioner, debit och
               kreditkort.

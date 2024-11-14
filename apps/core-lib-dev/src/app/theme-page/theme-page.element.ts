@@ -115,7 +115,7 @@ export class ThemePage extends LitElement {
           <tp-steps></tp-steps>
         `)}
 
-        <gds-grid columns="2" max-width="800px" margin="0 auto" gap="l">
+        <gds-grid columns="2" max-width="1200px" margin="0 auto" gap="l">
           <tp-empty-konton></tp-empty-konton>
         </gds-grid>
         <!-- (Pink) Dream State, savings calculator -->
