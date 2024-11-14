@@ -17,34 +17,49 @@ export class TpExpenses extends LitElement {
   connectedCallback() {
     super.connectedCallback()
   }
+
   @state()
   activeCategory = 'Nöje'
+
   @state()
   isExpanded = false
+
   @state()
   label = 'Nöje'
+
   @state()
   amount = '13 523,00'
+
   @state()
   amountDiff = 'Ökat'
+
   @state()
   status = '+3 567,00'
+
   expand() {
     this.isExpanded = !this.isExpanded
   }
+
   renderIcon() {
     if (this.isExpanded) {
       return html`<gds-icon-chevron-top></gds-icon-chevron-top>`
     }
     return html`<gds-icon-chevron-bottom></gds-icon-chevron-bottom>`
   }
-  renderCategory(_label, _amount, _amountDiff, _status) {
+
+  renderCategory(
+    _label: string,
+    _amount: string,
+    _amountDiff: string,
+    _status: string,
+  ) {
     this.activeCategory = _label
     this.label = _label
     this.amount = _amount
     this.amountDiff = _amountDiff
     this.status = _status
   }
+
   render() {
     return html`<tp-card>
       <gds-text slot="header" font-size="preamble-s" tag="h3"
