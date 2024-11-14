@@ -14,11 +14,36 @@ import '@sebgroup/green-core/components/icon/icons/brand-seb.js'
 export class TPEmptyCard extends LitElement {
   render() {
     return html`
+      <style>
+        .card {
+          aspect-ratio: 1.58 / 1;
+        }
+      </style>
       <gds-card variant="secondary" shadow="s">
-        <gds-flex padding="xl" width="100%">
-          <gds-card variant="copper-01" width="100%" height="200px">
+        <gds-flex
+          padding="2xl; m{4xl}"
+          width="100%"
+          flex-direction="column"
+          align-items="center"
+          gap="l"
+        >
+          <gds-card class="card" variant="copper-01" width="100%; m{60%}">
             <gds-icon-brand-seb width="55" height="24"></gds-icon-brand-seb>
           </gds-card>
+
+          <gds-text
+            text-wrap="balance"
+            max-width="40"
+            font-weight="book"
+            font-size="heading-xs"
+            color="primary"
+            text-align="center"
+          >
+            Få en översikt av dina konton i SEB, transaktioner, debit och
+            kreditkort.
+          </gds-text>
+
+          <gds-button> Skaffa kreditkort </gds-button>
         </gds-flex>
       </gds-card>
     `
