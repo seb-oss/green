@@ -33,8 +33,7 @@ import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 
 import '../components/header'
-import '../components/quicklinks'
-import '../components/news-widget'
+
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
