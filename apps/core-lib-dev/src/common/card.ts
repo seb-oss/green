@@ -38,7 +38,7 @@ export class TPCard extends LitElement {
           display: ${this.mainSlotOccupied ? 'flex' : 'none'};
         }
       </style>
-      <gds-card background="secondary" padding="0" shadow="s">
+      <gds-card background="secondary" padding="0" shadow="s" border="none">
         <gds-flex
           flex-direction="column"
           gap="xl"

@@ -10,7 +10,7 @@ export class TpSavingsGoal extends LitElement {
   }
 
   render() {
-    return html`<gds-card variant="secondary" padding="2xs 0">
+    return html`<gds-card variant="secondary" shadow="s" padding="2xs 0">
       <gds-flex flex-direction="column" gap="m" padding="xs m">
         <gds-flex gap="s" align-items="center" justify-content="space-between">
           <gds-text font-size="preamble-s">Sparmål</gds-text>

@@ -10,7 +10,7 @@ export class TpSavingsOutside extends LitElement {
   }
 
   render() {
-    return html` <gds-card variant="secondary" padding="l">
+    return html` <gds-card variant="secondary" shadow="s" padding="l">
       <gds-flex flex-direction="column" gap="m">
         <gds-flex gap="s" align>
           <gds-container>
