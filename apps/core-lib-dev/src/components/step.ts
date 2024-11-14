@@ -48,7 +48,6 @@ export class TPStep extends LitElement {
           0% {
             scale: 0.8;
             opacity: 0.4;
-            /* filter: blur(14px); */
           }
         }
       </style>
