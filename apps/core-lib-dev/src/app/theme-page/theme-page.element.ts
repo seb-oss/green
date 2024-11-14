@@ -23,6 +23,7 @@ import '../../components/savings-calculator'
 import '../../components/todos'
 import '../../components/empty-konton'
 import '../../components/empty-card'
+import '../../components/expenses'
 import './style.css'
 import { PageHeader } from './page-header'
 @customElement('tp-theme-page')
@@ -53,19 +54,16 @@ export class ThemePage extends LitElement {
             >
               <tp-accounts-modal></tp-accounts-modal>
               <tp-accounts></tp-accounts>
-
-              <gds-card variant="notice" height="200px" border="4xs"
-                >Expenses</gds-card
-              >
+              <tp-expenses></tp-expenses>
             </gds-flex>
             <gds-flex
               grid-column="1; m{6 / span 4}"
               flex-direction="column"
               gap="l"
             >
-              ${when(this.pageHeader?.viewOptions.hasCards, () => html`<tp-cards></tp-cards>`, () => html` <gds-card variant="negative" height="250px" border="4xs"
-                >Get some cards!</gds-card
-              >`)}
+              ${when(this.pageHeader?.viewOptions.hasCards, () => html`<tp-cards></tp-cards>`, () => html` 
+                <tp-empty-card></tp-empty-card>
+              `)}
               <gds-container display="none; m{block}">
                 <tp-transactions></tp-transactions>
               </gds-container>
