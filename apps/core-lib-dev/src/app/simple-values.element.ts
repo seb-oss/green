@@ -45,13 +45,13 @@ export class SimpleValues extends HTMLElement {
 
     const dropdown = this.querySelector('#dropdown') as GdsDropdown
 
-    dropdown.addEventListener('change', (e: CustomEvent) => {
+    dropdown.addEventListener('change', (e: any) => {
       console.log('Value changed: ', e.detail.value)
       console.log('dropdown', dropdown.options)
       console.log('dd name', dropdown.name)
     })
 
-    dropdown.addEventListener('gds-ui-state', (e: CustomEvent) =>
+    dropdown.addEventListener('gds-ui-state', (e: any) =>
       console.log('UI state changed: ', e.detail),
     )
 

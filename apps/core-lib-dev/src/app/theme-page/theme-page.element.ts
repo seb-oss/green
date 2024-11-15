@@ -46,6 +46,12 @@ export class ThemePage extends LitElement {
   @property()
   hasAccounts = false
 
+  @property()
+  hasCards = false
+
+  @property()
+  hasSavings = false
+
   connectedCallback() {
     super.connectedCallback()
   }
@@ -54,10 +60,14 @@ export class ThemePage extends LitElement {
     return html`
       <gds-flex flex-direction="column">
         <gds-container margin="0 0 3xl 0">
-          <tp-page-header style="flex:1" @view-options-change=${() => this.requestUpdate()}></tp-page-header>
+          <tp-page-header style="flex:1" @view-options-change=${() => {
+            this.hasAccounts = this.pageHeader.viewOptions.hasAccounts
+            this.hasCards = this.pageHeader.viewOptions.hasCards
+            this.hasSavings = this.pageHeader.viewOptions.hasSavings
+          }}></tp-page-header>
         </gds-container>
 
-      <gds-container padding="0 s">
+      <gds-container padding="0 2xs; m{0 s}">
         <!-- (Blue) Main dashboard section -->
         <tp-page-section .show=${this.hasAccounts}>
           <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}">
@@ -76,9 +86,13 @@ export class ThemePage extends LitElement {
               gap="l"
             >
               ${when(
-                this.pageHeader?.viewOptions.hasCards,
+                this.hasCards,
                 () => html`<tp-cards></tp-cards>`,
-                () => html` <tp-empty-card></tp-empty-card> `,
+                () => html`
+                  <tp-empty-card
+                    @click=${() => (this.hasCards = true)}
+                  ></tp-empty-card>
+                `,
               )}
               <gds-container display="none; m{block}">
                 <tp-transactions></tp-transactions>
@@ -99,7 +113,7 @@ export class ThemePage extends LitElement {
         </tp-page-section>
 
         <!-- (Blue) Savings section -->
-        <tp-page-section .show=${!!this.pageHeader?.viewOptions.hasSavings}>
+        <tp-page-section .show=${this.hasSavings}>
           <gds-flex padding="0 s; l{0 4xl}" gap="l" flex-direction="column">
             <gds-text tag="h2" font-size="heading-l">Savings</gds-text>
             <gds-grid columns="1; m{12}" gap="l">

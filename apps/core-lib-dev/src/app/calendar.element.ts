@@ -65,7 +65,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.disabledWeekends}
-            @change=${(e) => (this.disabledWeekends = e.target.checked)} /><span
+            @change=${(e: any) => (this.disabledWeekends = e.target.checked)} /><span
             >Disable weekends</span
           ><i
         ></i></label>
@@ -73,7 +73,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showWeekNumbers}
-            @change=${(e) => (this.showWeekNumbers = e.target.checked)} /><span
+            @change=${(e: any) => (this.showWeekNumbers = e.target.checked)} /><span
             >Show week numbers</span
           ><i
         ></i></label>
@@ -81,7 +81,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showCustomizedDates}
-            @change=${(e) => (this.showCustomizedDates = e.target.checked)} /><span
+            @change=${(e: any) => (this.showCustomizedDates = e.target.checked)} /><span
             >Show customized dates</span
           ><i
         ></i></label>

@@ -1,6 +1,6 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { LitElement } from 'lit'
-import { customElement, property, queryAsync } from 'lit/decorators.js'
+import { customElement, queryAsync } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping.js'
 
@@ -39,8 +39,7 @@ export class TpNewsItem extends LitElement {
     const dialog = await this.dialogElement
 
     if (!dialog) return
-
-    document.startViewTransition(() => {
+    ;(document as any).startViewTransition(() => {
       dialog.showModal()
       lockBodyScrolling(dialog)
     })
