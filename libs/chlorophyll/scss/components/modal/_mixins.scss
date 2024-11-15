@@ -50,6 +50,7 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
     // TODO: calculate margin (height of close minus height of h3 divided by 2)
     + .close {
       margin: -7px;
+      min-width: 2rem;
     }
   }
 }
