@@ -120,7 +120,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
           ></gds-input>`,
         )
         const changeSpy = sinon.spy()
-        el.addEventListener('input-cleared', changeSpy)
+        el.addEventListener('gds-input-cleared', changeSpy)
         expect(changeSpy).to.have.been.calledOnce
       })
     })
