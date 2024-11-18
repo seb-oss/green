@@ -111,6 +111,18 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
         expect(clearButtonEl).to.exist
       })
+      it('should fire an input event when search has been cleared', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input
+            variant="${variant}"
+            clearable
+            value="My value"
+          ></gds-input>`,
+        )
+        const changeSpy = sinon.spy()
+        el.addEventListener('input-cleared', changeSpy)
+        expect(changeSpy).to.have.been.calledOnce
+      })
     })
 
     describe('Interactions', async () => {

@@ -220,6 +220,12 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
+    this.dispatchEvent(
+      new Event('input-cleared', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   #renderSlotLead() {
