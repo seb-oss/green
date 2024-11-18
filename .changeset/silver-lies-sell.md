@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-core': major
+'@sebgroup/green-core': minor
 ---
 
-Add event to be dispatched when clearing gds-input
+**Input:** Add event to be dispatched when clearing gds-input
