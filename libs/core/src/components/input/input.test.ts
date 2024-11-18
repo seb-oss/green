@@ -121,6 +121,10 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
         const changeSpy = sinon.spy()
         el.addEventListener('gds-input-cleared', changeSpy)
+        const clearButtonEl = el.shadowRoot?.querySelector(
+          '.field [label="Clear input"]',
+        )
+        clearButtonEl.click()
         expect(changeSpy).to.have.been.calledOnce
       })
     })
