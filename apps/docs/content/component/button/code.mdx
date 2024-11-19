@@ -3,94 +3,33 @@ title: Code
 date: 2023-12-22
 ---
 
-## Code
-
-### Examples
-
-#### Default button
-
-The defaut button har the prio primary and is the variant normal.
+## Basic
 
 <Story component='button' id="basic" />
 
-```html
-<gds-button>Send payment</gds-button>
-```
+## Variants
 
-#### Prio
+<Story component='button' id="ranks-and-variants" />
 
-Buttons exist in three different prios, Primary, Secondary and Tertiary
+## Sizes 
 
-<Story component='button' id="ranks-and-variants" /> 
+<Story component='button' id="sizes" />
 
+## Lead and Trail Icons
 
-```html
-<gds-button prio="primary">Send payment</gds-button>
-<gds-button prio="secondary">Cancel</gds-button>
-<gds-button prio="tertiary">More</gds-button>
-```
+<Story component='button' id="with-icon" />
 
-#### Variants
+## Icon Button
+<Story component='button' id="icon-button" />
 
-Each prio button can be one of the following variants: Neutral, Positive and Negative
+## Disabled 
+<Story component='button' id="disabled" />
 
- 
-```html showLineNumbers {1-4}
-<!-- Primary -->
-<gds-button variant="neutral">Submit</gds-button>
-<gds-button variant="positive">Approve</gds-button>
-<gds-button variant="negative">Revoke</gds-button>
+## Link 
+<Story component='button' id="link" />
 
-<!-- Secondary -->
+## Length 
+<Story component='button' id="length" />
 
-<gds-button prio="secondary" variant="neutral">Submit</gds-button>
-<gds-button prio="secondary" variant="positive">Approve</gds-button>
-<gds-button prio="secondary" variant="negative">Revoke</gds-button>
-
-<!-- Tertiary -->
-
-<gds-button prio="tertiary" variant="neutral">Submit</gds-button>
-<gds-button prio="tertiary" variant="positive">Approve</gds-button>
-<gds-button prio="tertiary" variant="negative">Revoke</gds-button>
-
-````
-
-#### Icons
-
-Buttons exist in three different prios, Primary, Secondary and Tertiary
-
-```html
-<gds-button prio="primary"><gds-icon slot="lead" name="send" />Send payment</gds-button>
-<gds-button prio="secondary"><gds-icon slot="trail" name="arrow-up" />Upload</gds-button>
-<gds-button prio="primary"><gds-icon slot="lead" name="arrow-down" />Download</gds-button>
-````
-
-#### Sizes
-
-Buttons can be small, medium or large. The default size is medium.
-
-```html
-<gds-button size="small">Small</gds-button>
-<gds-button>Medium</gds-button>
-<gds-button size="large">Large</gds-button>
-```
-
-#### Icon button
-
-If a single gds-icon is the only child of a button, it will render as a circular icon button.
-
-```html
-<gds-button size="small"><gds-icon name="arrow" /></gds-button>
-<gds-button><gds-icon name="arrow" /></gds-button>
-<gds-button size="large"><gds-icon name="arrow" /></gds-button>
-```
-
-#### Disabled
-
-We don't encourage to use components with a disabled state but the button can be disabled if needed
-
-```html
-<gds-button prio="primary" disabled>Send payment</gds-button>
-<gds-button prio="secondary" disabled>Cancel</gds-button>
-<gds-button prio="tertiary" disabled>More</gds-button>
-```
+## Aria 
+<Story component='button' id="aria" />
