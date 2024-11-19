@@ -374,6 +374,47 @@ const formats: Record<string, Format> = {
       )
     },
   },
+  'scss/variables': {
+    name: 'scss/variables',
+    formatter: function (args) {
+      const dictionary = Object.assign({}, args.dictionary)
+      const options = Object.assign(
+        { colorScheme: 'light' },
+        args.options,
+      )
+
+      const { colorScheme, name, outputReferences } = options
+
+      if (colorScheme === 'dark') {
+        // Override each token"s `value` with `darkValue`
+        dictionary.allTokens = dictionary.allTokens.map((token) => {
+          const { darkValue } = token
+          // Only override if the token has a darkValue and that you"ve passed in colorScheme: "dark" in the file options.
+          if (darkValue && colorScheme === 'dark') {
+            return Object.assign({}, token, {
+              value: token['darkValue'],
+              //Also need to override the original value for outputReferences: false to work
+              original: { value: token.original['darkValue'] },
+            })
+          } else {
+            return token
+          }
+        })
+      }
+
+      // Use the built-in format but with our customized dictionary object
+      // so it will output the darkValue instead of the value
+      // return format[format]({ ...args, dictionary })
+      return (
+        formatHelpers.fileHeader({ file: args.file }),
+        formatHelpers.formattedVariables({
+          format: 'sass',
+          dictionary,
+          outputReferences,
+        })
+      )
+    },
+  },
   'green/ios-swift-package': {
     name: 'green/ios-swift-package',
     formatter: function ({ options, file }) {
