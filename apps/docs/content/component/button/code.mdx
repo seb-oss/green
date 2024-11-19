@@ -8,28 +8,35 @@ date: 2023-12-22
 <Story component='button' id="basic" />
 
 ## Variants
-
+Buttons can have different ranks and variants. The rank defines the visual importance of the button, while the variant defines the intent of the button.
 <Story component='button' id="ranks-and-variants" />
 
 ## Sizes 
-
+Buttons can be <code>small</code>, <code>medium</code> or <code>large</code>. The default size is medium.
 <Story component='button' id="sizes" />
 
 ## Lead and Trail Icons
-
+Buttons can have an icon on the left or right side of the text. These are called leading or trailing icons, and are added by placing a gds-icon component in either the <code>lead</code> or <code>trail</code> slot.
 <Story component='button' id="with-icon" />
 
 ## Icon Button
+If a single gds-icon is the only child of a button, it will render as a circular icon button.
 <Story component='button' id="icon-button" />
 
 ## Disabled 
+The buttons support a disabled state, but in general, it should not be used. It can be hard for the user to understand why the button is disabled, so it is often better to keep the button clickable and then show an error message instead.
 <Story component='button' id="disabled" />
 
 ## Link 
+A link styled as a button.
 <Story component='button' id="link" />
 
 ## Length 
+Text content will get truncated if it does not fit.
 <Story component='button' id="length" />
 
 ## Aria 
+Some aria attributes are forwarded to the inner button element by default, but if you want to force a certain aria-attribute on the inner button, you can use the gds-aria-* attributes on the gds-button element.
+
+Also note that label will render as aria-label on the inner button element.
 <Story component='button' id="aria" />

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
-import { GdsCard } from '$/import/components'
+import { GdsCard, GdsSpacer } from '$/import/components'
 
 interface StoryProps {
   component?: string
@@ -33,7 +33,7 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
   }, [])
 
   return (
-    <GdsCard>
+    <GdsCard margin="0 0 4xl 0">
       <iframe
         ref={iframeRef}
         key="story-iframe"
@@ -50,7 +50,7 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
                 width: 100%;
                 height: 100%;
                 border: 0;  
-                min-height: 360px; 
+                min-height: 360px;
               }
             }
           `,
