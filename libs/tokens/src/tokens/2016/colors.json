@@ -262,8 +262,8 @@
         "version": "2016"
       },
       "dark-blue--1": {
-        "value": "{ref.color.blue-200}",
-        "darkValue": "{ref.color.blue-100}",
+        "value": "{ref.color.blue-500}",
+        "darkValue": "{ref.color.blue-300}",
         "type": "color",
         "version": "2016"
       },
