@@ -3,7 +3,6 @@ import '../../components/container/container'
 import '../../components/card/card'
 import '../../components/flex/flex'
 import '../../components/text/text'
-import '../../components/divider/divider'
 
 import sizeTokens from '../../../../tokens/src/tokens/size.json';
 
@@ -22,8 +21,7 @@ The spacing scale is used for margin, padding, gap, radius and all the spacing v
     <gds-flex gap="l" padding="xs" align-items="center" justify-content="stretch" overflow="hidden">
         <gds-card variant="secondary" width="60px" padding="s">
             <gds-flex align-items="center" justify-content="center" flex-direction="column">
-                <gds-text>{size}</gds-text>
-                <gds-divider></gds-divider>
+                <gds-text>{size.toLowerCase()}</gds-text>
                 <gds-text color="secondary/0.4">{value}px</gds-text>
             </gds-flex>
         </gds-card>
