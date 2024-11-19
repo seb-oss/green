@@ -284,6 +284,7 @@ const config: StyleDictionary.Config = {
           filter: 'is2016Color',
           options: {
             outputReferences: false,
+            colorScheme: 'dark',
           },
         },
         {
