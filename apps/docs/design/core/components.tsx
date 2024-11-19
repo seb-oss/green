@@ -61,9 +61,9 @@ export default function Components({ title, tag }: ComponentsProps) {
                     align-items="flex-start"
                     justify-content="center"
                     padding="0"
-                    background="secondary"
+                    background="primary"
                   >
-                    {Preview ? <Preview /> : null}
+                    {Preview ? <Preview cover={true} /> : null}
                   </GdsFlex>
                 ) : component.title === 'Calendar' ||
                   component.title === 'Image' ||
