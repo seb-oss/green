@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.10
+
+### Patch Changes
+
+- 7ba5610: Hover on focused qhost button now have visible text
+
 ## 3.6.9
 
 ### Patch Changes

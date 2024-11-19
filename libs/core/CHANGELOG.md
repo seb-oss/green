@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.56.0
+
+### Minor Changes
+
+- 7d40f57: **Input:** Add event to be dispatched when clearing gds-input
+
 ## 1.55.1
 
 ### Patch Changes
