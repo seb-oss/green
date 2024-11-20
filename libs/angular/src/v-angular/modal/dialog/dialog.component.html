@@ -7,7 +7,7 @@
   [attr.aria-labelledby]="dialogTitleId"
   [attr.aria-describedby]="dialogBodyId"
 >
-  <header class="sdv-modal-dialog__heading">
+  <header class="modal-dialog__heading">
     <h3 [attr.id]="dialogTitleId">{{ t(heading || title || '') }}</h3>
     <button
       type="button"
@@ -23,13 +23,13 @@
       ></gds-icon-cross-small>
     </button>
   </header>
-  <section class="sdv-modal-dialog__body" [attr.id]="dialogBodyId">
+  <section class="modal-dialog__body" [attr.id]="dialogBodyId">
     <div [innerHtml]="content"></div>
     <ng-content></ng-content>
   </section>
-  <footer class="sdv-modal-dialog__actions">
+  <footer class="modal-dialog__actions">
     <button
-      class="sdv-button sdv-button-delete"
+      class="danger"
       type="reset"
       [attr.data-thook]="'dialog-' + (_buttons?.negative || 'negative')"
       (click)="onAction($event, 'negative')"
@@ -39,7 +39,7 @@
       {{ t(_buttons.negative) }}
     </button>
     <button
-      class="sdv-button sdv-button-secondary"
+      class="secondary"
       type="button"
       [attr.data-thook]="'dialog-' + (_buttons?.neutral || 'neutral')"
       (click)="onAction($event, 'neutral')"
@@ -49,7 +49,7 @@
       {{ t(_buttons.neutral) }}
     </button>
     <button
-      class="sdv-button"
+      class="submit"
       type="submit"
       [attr.data-thook]="'dialog-' + (_buttons?.positive || 'positive')"
       (click)="onAction($event, 'positive')"

@@ -1,6 +1,6 @@
 @use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
-
+@use '@sebgroup/chlorophyll/scss/components/button';
 :host {
   @include mixins.dialog-modal-wrapper();
 
@@ -9,7 +9,8 @@
     @include mixins.dialog-modal();
   }
 
-  .sdv-modal-dialog__heading {
+  .modal-dialog__heading {
+    box-sizing: border-box;
     @include mixins.modal-header();
 
     button {
@@ -18,8 +19,12 @@
     }
   }
 
-  .sdv-modal-dialog__body {
+  .modal-dialog__body {
     @include mixins.modal-body();
+  }
+
+  .modal-dialog__actions, .modal-dialog__heading, .modal-dialog__body {
+    box-sizing: border-box;
   }
 
   .sdv-modal-backdrop {
