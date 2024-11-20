@@ -351,7 +351,7 @@ export const CardRadius: Story = {
   name: 'Border Radius',
   render: (args) =>
     html`<gds-grid columns="8" gap="l">
-      <gds-card variant="tertiary" padding="xl">
+      <gds-card variant="tertiary" padding="xl" border-radius="0">
         <gds-flex display="flex" align-items="center" justify-content="center">
           0
         </gds-flex>

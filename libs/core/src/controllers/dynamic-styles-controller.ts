@@ -5,9 +5,13 @@ import { GdsElement } from '../gds-element'
 export class DynamicStylesController implements ReactiveController {
   host: GdsElement
   #useLegacyStylesheets = !supportsConstructedStylesheets()
+  #initialized = false
   #initialStyleSheets: CSSStyleSheet[] = []
+  #initialStyleSheetsCopy: CSSStyleSheet[] = []
   #styleSheets = new Map<string, CSSStyleSheet>()
   #legacyStyleSheets = new Map<string, HTMLStyleElement>()
+  #initialLegacyStyleSheets: HTMLStyleElement[] = []
+  #initialLegacyStyleSheetsCopy: HTMLStyleElement[] = []
 
   constructor(host: GdsElement) {
     this.host = host
@@ -15,11 +19,18 @@ export class DynamicStylesController implements ReactiveController {
   }
 
   hostConnected() {
-    if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
-      this.#initialStyleSheets = [
-        ...(this.host.shadowRoot.adoptedStyleSheets || []),
-      ]
-    }
+    this.#init()
+  }
+
+  /**
+   * Checks if the controller has a particular key.
+   *
+   * @param key - The style key to check.
+   */
+  has(key: string) {
+    return this.#useLegacyStylesheets
+      ? this.#legacyStyleSheets.has(key)
+      : this.#styleSheets.has(key)
   }
 
   /**
@@ -29,17 +40,27 @@ export class DynamicStylesController implements ReactiveController {
    * with an empty string as the `styles` parameter.
    *
    * @param key - A unique key to identify the styles.
-   * @param styles - The CSSResult to inject.
+   * @param cssResult - The CSSResult to inject.
    */
-  inject(key: string, styles: CSSResult) {
+  inject(key: string, cssResult: CSSResult) {
+    this.#addStyles(key, cssResult)
+    this.#commit()
+  }
+
+  /**
+   * Clears the styles for a particular key.
+   *
+   * @param key - The key of the styles to clear.
+   */
+  clear(key: string) {
     if (this.#useLegacyStylesheets) {
-      const cssText = Array.isArray(styles)
-        ? styles.map((style) => style.toString()).join('')
-        : styles.toString()
-      this.#applyStylesLegacy(key, cssText)
+      const styleEl = this.#legacyStyleSheets.get(key)
+      styleEl?.remove()
+      this.#legacyStyleSheets.delete(key)
     } else {
-      styles.styleSheet && this.#applyStyles(key, styles.styleSheet)
+      this.#styleSheets.delete(key)
     }
+    this.#commit()
   }
 
   /**
@@ -48,10 +69,9 @@ export class DynamicStylesController implements ReactiveController {
   clearAll() {
     if (this.#useLegacyStylesheets) {
       this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.host.shadowRoot
-        ?.querySelectorAll('style')
-        .forEach((style) => (style.innerHTML = ''))
+      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
       this.#legacyStyleSheets.clear()
+      this.#initialLegacyStyleSheets = []
     } else {
       if (this.host.shadowRoot) {
         this.host.shadowRoot.adoptedStyleSheets = []
@@ -61,27 +81,86 @@ export class DynamicStylesController implements ReactiveController {
     }
   }
 
-  #applyStylesLegacy(key: string, cssText: string) {
-    let styleEl = this.#legacyStyleSheets.get(key)
-
-    if (!styleEl) {
-      styleEl = document.createElement('style')
-      this.#legacyStyleSheets.set(key, styleEl)
+  /**
+   * Clears the initial styles of the component, but keeps any injected styles.
+   */
+  clearInitial() {
+    if (this.#useLegacyStylesheets) {
+      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
+      this.#initialLegacyStyleSheets = []
+    } else {
+      this.#initialStyleSheets = []
     }
-
-    styleEl.textContent = cssText
-    this.host.shadowRoot?.appendChild(styleEl)
+    this.#commit()
   }
 
-  #applyStyles(key: string, styleSheet: CSSStyleSheet) {
-    if (!this.host.shadowRoot) return
+  /**
+   * Restores the initial styles of the component, and keeps any injected styles.
+   */
+  restoreInitial() {
+    if (this.#useLegacyStylesheets) {
+      this.#initialLegacyStyleSheetsCopy.forEach((styleEl) => {
+        this.#initialLegacyStyleSheets.push(
+          styleEl.cloneNode(true) as HTMLStyleElement,
+        )
+      })
+    } else {
+      this.#initialStyleSheets = [...this.#initialStyleSheetsCopy]
+    }
+    this.#commit()
+  }
 
-    this.#styleSheets.set(key, styleSheet)
+  #addStyles(key: string, cssResult: CSSResult) {
+    if (this.#useLegacyStylesheets) {
+      let styleEl = this.#legacyStyleSheets.get(key)
+      if (!styleEl) {
+        styleEl = document.createElement('style')
+        this.#legacyStyleSheets.set(key, styleEl)
+      }
+      styleEl.textContent = cssResult.cssText
+    } else {
+      if (!this.host.shadowRoot || !cssResult.styleSheet) return
+      this.#styleSheets.set(key, cssResult.styleSheet)
+    }
+  }
 
-    this.host.shadowRoot.adoptedStyleSheets = [
-      ...this.#initialStyleSheets,
-      ...Array.from(this.#styleSheets.values()),
-    ]
+  #commit() {
+    if (this.#useLegacyStylesheets) {
+      if (!this.host.shadowRoot) return
+      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+        style.remove()
+      })
+      this.#legacyStyleSheets.forEach((styleEl) => {
+        this.host.shadowRoot?.appendChild(styleEl)
+      })
+    } else {
+      if (!this.host.shadowRoot) return
+      this.host.shadowRoot.adoptedStyleSheets = [
+        ...this.#initialStyleSheets,
+        ...Array.from(this.#styleSheets.values()),
+      ]
+    }
+  }
+
+  #init() {
+    if (this.#initialized) return
+    if (this.#useLegacyStylesheets) {
+      if (!this.host.shadowRoot) return
+      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+        this.#initialLegacyStyleSheets.push(style)
+        this.#initialLegacyStyleSheetsCopy.push(
+          style.cloneNode(true) as HTMLStyleElement,
+        )
+      })
+    } else {
+      if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {
+        this.#initialStyleSheets = [
+          ...(this.host.shadowRoot.adoptedStyleSheets || []),
+        ]
+        this.#initialStyleSheetsCopy = [...this.#initialStyleSheets]
+      }
+    }
+    this.#initialized = true
   }
 }
 
