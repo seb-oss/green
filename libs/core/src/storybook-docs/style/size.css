@@ -1,0 +1,4 @@
+.sbdocs.sbdocs-content:has(#size) {
+  max-width: 100%;
+  padding: 40px;
+}
