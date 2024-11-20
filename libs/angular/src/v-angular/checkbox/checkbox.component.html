@@ -1,5 +1,5 @@
 <!-- LOCKED INPUT -->
-<div *ngIf="locked && state" class="">
+<div *ngIf="locked && state">
   <div
     [id]="id + '-checkbox'"
     class="nggv-field--locked"
@@ -17,7 +17,7 @@
 
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
-  <div class="">
+  <div>
     <!-- CHECKBOX FIELD -->
     <label
       [id]="id + '-label'"

@@ -1,5 +1,5 @@
 <!-- LOCKED INPUT -->
-<div *ngIf="locked && state" class="">
+<div *ngIf="locked && state">
   <div
     [id]="id + '-radio'"
     class="nggv-field--locked"
@@ -15,7 +15,7 @@
 
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
-  <div class="">
+  <div>
     <!-- RADIO BUTTON FIELD -->
     <label [attr.for]="id + '-radio'" class="form-control">
       <input

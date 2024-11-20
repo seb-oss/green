@@ -1,6 +1,6 @@
 @use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
-@use '@sebgroup/chlorophyll/scss/components/button';
+@use '../../../../../chlorophyll/scss/components/button';
 
 :host {
   .gds-slide-out {
