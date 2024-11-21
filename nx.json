@@ -65,7 +65,7 @@
       "cache": true
     },
     "test": {
-      "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"],
+      "inputs": ["default", "core", "^production", "{workspaceRoot}/jest.preset.js"],
       "cache": true
     },
     "lint": {

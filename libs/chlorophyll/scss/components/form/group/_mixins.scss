@@ -149,7 +149,7 @@ $_background: input.$background;
       background: $_background;
     }
 
-    &.ghost:not(.active):focus-visible {
+    &.ghost:not(.active, :hover):focus-visible {
       color: var(--gds-sys-color-font);
     }
 

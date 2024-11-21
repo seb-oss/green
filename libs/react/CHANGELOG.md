@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.22.0
+
+### Minor Changes
+
+- c1cba06: **Dropdown:** Pass `required` prop down to Core component
+
+### Patch Changes
+
+- Updated dependencies [7ba5610]
+  - @sebgroup/chlorophyll@3.6.10
+
 ## 3.21.0
 
 ### Minor Changes

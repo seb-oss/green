@@ -88,7 +88,8 @@ export const CoreOption = createComponent({
 })
 
 export interface DropdownProps extends DropdownArgs {
-  onChange?: OnChange
+  onChange?: OnChange,
+  required?: boolean,
 }
 
 export const Dropdown = ({
@@ -109,6 +110,7 @@ export const Dropdown = ({
   syncPopoverWidth,
   disableMobileStyles,
   onGdsUiState,
+  required,
   ...props
 }: DropdownProps) => {
   const handleOnChange = (e: any) => {
@@ -147,6 +149,7 @@ export const Dropdown = ({
         hideLabel={props.hideLabel}
         maxHeight={props.maxHeight}
         disableMobileStyles={disableMobileStyles}
+        required={required}
         onGdsUiState={(e: Event) => onGdsUiState?.(e as CustomEvent)}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
