@@ -6,6 +6,8 @@ import { tokens } from '../../tokens.style'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import BadgeCSS from './badge.style'
 
+import '../flex'
+
 /**
  * `gds-badge`
  *
