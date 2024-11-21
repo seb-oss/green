@@ -32,6 +32,7 @@ const DefaultParams: Story = {
       source: { format: true, type: 'dynamic' },
       story: {
         height: '200px',
+        position: 'relative',
       },
     },
     controls: { expanded: true },
