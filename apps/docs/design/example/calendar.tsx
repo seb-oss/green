@@ -7,7 +7,7 @@ const Calendar = ({ cover }: { cover: boolean }) => (
     position="relative"
     height={cover ? '200px' : ''}
     width="100%"
-    align-items="center"
+    align-items="flex-start"
     justify-content="center"
   >
     {cover && (
