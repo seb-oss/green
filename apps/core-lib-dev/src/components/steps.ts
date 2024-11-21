@@ -85,7 +85,7 @@ export class TPSteps extends LitElement {
           }
         }
       </style>
-      <gds-flex flex-direction="column" padding="xl 0" gap="xl">
+      <gds-flex flex-direction="column" padding="0; l{xl 0}" gap="xl">
         <div class="steps">
           <tp-step
             title="Kom igång här!"

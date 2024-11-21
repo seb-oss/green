@@ -1,4 +1,4 @@
-import { LitElement } from 'lit'
+import { css, LitElement } from 'lit'
 import { customElement, property } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping.js'
@@ -12,6 +12,44 @@ import '@sebgroup/green-core/components/icon/icons/checklist.js'
 
 @customElement('tp-step')
 export class TPStep extends LitElement {
+  static styles = css`
+    :host {
+      display: contents;
+    }
+    .step {
+      animation-name: tp-scale, tp-scale;
+      animation-fill-mode: both;
+      animation-timing-function: ease-in-out;
+      animation-direction: normal, reverse;
+      animation-timeline: view(x);
+      animation-range:
+        entry 0% entry 60vw,
+        exit -40vw exit 40vw;
+      scale: 1;
+      opacity: 1;
+      filter: blur(0px);
+
+      @media (max-width: 768px) {
+        animation-range:
+          entry 0% entry 60vw,
+          exit -10vw exit 100vw;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .step:first-child {
+        margin-left: 10vw;
+      }
+    }
+
+    @keyframes tp-scale {
+      0% {
+        scale: 0.8;
+        opacity: 0.4;
+      }
+    }
+  `
+
   @property({ type: String })
   name?: string
 
@@ -26,31 +64,6 @@ export class TPStep extends LitElement {
 
   render() {
     return html`
-      <style>
-        :host {
-          display: contents;
-        }
-        .step {
-          animation-name: tp-scale, tp-scale;
-          animation-fill-mode: both;
-          animation-timing-function: ease-in-out;
-          animation-direction: normal, reverse;
-          animation-timeline: view(x);
-          animation-range:
-            entry 0% entry 60vw,
-            exit -40vw exit 40vw;
-          scale: 1;
-          opacity: 1;
-          filter: blur(0px);
-        }
-
-        @keyframes tp-scale {
-          0% {
-            scale: 0.8;
-            opacity: 0.4;
-          }
-        }
-      </style>
       <gds-card
         id=${this.id}
         part="step"
