@@ -112,7 +112,7 @@ var nl=e=>{throw TypeError(e)};var il=(e,t,s)=>t.has(e)||nl("Cannot "+s);var wt=
   }
 `,bg={0:"0px","2xs":"320px",xs:"425px",s:"768px",m:"1024px",l:"1280px",xl:"1440px","2xl":"2560px","3xl":"3840px","4xl":"4320px","5xl":"6016px","6xl":"7680px"},xg=/^([<|>]=?)?([0-9a-z]+)/,Ad=["{","}",";",":",","],$l=[" ","/n"];function yg(e){const t=[];let s="";for(let r=0;r<e.length;r++){const o=e[r];if($l.includes(o)||(s+=o),Ad.includes(o)){t.push(s.slice(0,-1)),t.push(o),s="";continue}if($l.includes(o)||r===e.length-1){t.push(s),s="";continue}}return t.filter(r=>r!=="")}function wg(e){var t;const s=[];let r={breakpoint:"-",values:[]};const o=()=>({sel:"",values:[]});let n=o();for(const i of e){if(!Ad.includes(i)){n.values.push(i);continue}if(i==="{"&&(r={breakpoint:n.values.join(","),values:[]},n=o()),i===";"&&(s.length===0&&s.push(r),n.values.length>0&&(r.values.push(n),n=o())),i===":"){const l=(t=n.values.pop())!=null?t:"";n.sel=l}r&&i==="}"&&(r.values.push(n),n=o(),s.push(r))}return n.values.length>0&&r.values.push(n),s.length===0&&s.push(r),s}function _g(e){return e.split(",").map(s=>{const r=s.trim().match(xg);if(!r)throw new Error(`Invalid breakpoint specifier: ${s}`);return{condition:r[1],value:r[2]}})}function Cg(e,t,s,r=n=>n,o=(n,i)=>`${n}: ${i.join(" ")};`){let n="";for(const i of s){const g=`@media ${(i.breakpoint==="-"?[{condition:">=",value:"0"}]:_g(i.breakpoint)).map(v=>{var p,x;return`(${(p=v.condition)!=null&&p.includes("<")?"max-width":"min-width"}: ${(x=bg[v.value])!=null?x:v.value})`}).join(" and ")} {${i.values.map(v=>{let p=e;v.sel.length>0&&(p=e===":host"?`:host(:${v.sel})`:`${e}:${v.sel}`);const x=o(t,v.values.map(r));return v.sel==="hover"?`@media (hover: hover) {${p}{${x}}}`:`${p}{${x}}`}).join("")}}`;n+=g}return n}var un=new Map;function y(e){return(t,s)=>{var r,o,n,i;const l=(r=e==null?void 0:e.selector)!=null?r:":host",d=(o=e==null?void 0:e.property)!=null?o:String(s),g=(n=e==null?void 0:e.valueTemplate)!=null?n:x=>`var(--gds-space-${x}, 0)`,v=e==null?void 0:e.styleTemplate,p=(i=e==null?void 0:e.cacheOverrideKey)!=null?i:"0";h({attribute:e==null?void 0:e.attribute,noAccessor:!0})(t,s),Object.defineProperty(t,s,{get:function(){return this["__"+String(s)]},set:async function(x){var w;this["__"+String(s)]=x,await this.updateComplete;const $=(w=this.level)!=null?w:"0",M=l+d+x+$+p;if(un.has(M)){this._dynamicStylesController.inject(`sep_${String(s)}`,un.get(M));return}const P=wg(yg(x)),z=Cg(l,d,P,g.bind(this),v==null?void 0:v.bind(this)),F=J(z);un.set(M,F),this._dynamicStylesController.inject(`sep_${String(s)}`,F)}})}}var Ve,_o,Qe,Co,At,Pe,ct,ko,_n,Od,Yt,ws,Cn,Ld,kg=class{constructor(e){f(this,_n),f(this,Yt),f(this,Cn),f(this,Ve,!ma()),f(this,_o,!1),f(this,Qe,[]),f(this,Co,[]),f(this,At,new Map),f(this,Pe,new Map),f(this,ct,[]),f(this,ko,[]),this.host=e,this.host.addController(this)}hostConnected(){C(this,Cn,Ld).call(this)}has(e){return c(this,Ve)?c(this,Pe).has(e):c(this,At).has(e)}inject(e,t){C(this,_n,Od).call(this,e,t),C(this,Yt,ws).call(this)}clear(e){if(c(this,Ve)){const t=c(this,Pe).get(e);t==null||t.remove(),c(this,Pe).delete(e)}else c(this,At).delete(e);C(this,Yt,ws).call(this)}clearAll(){c(this,Ve)?(c(this,Pe).forEach(e=>e.remove()),c(this,ct).forEach(e=>e.remove()),c(this,Pe).clear(),Z(this,ct,[])):this.host.shadowRoot&&(this.host.shadowRoot.adoptedStyleSheets=[],c(this,At).clear(),Z(this,Qe,[]))}clearInitial(){c(this,Ve)?(c(this,ct).forEach(e=>e.remove()),Z(this,ct,[])):Z(this,Qe,[]),C(this,Yt,ws).call(this)}restoreInitial(){c(this,Ve)?c(this,ko).forEach(e=>{c(this,ct).push(e.cloneNode(!0))}):Z(this,Qe,[...c(this,Co)]),C(this,Yt,ws).call(this)}};Ve=new WeakMap;_o=new WeakMap;Qe=new WeakMap;Co=new WeakMap;At=new WeakMap;Pe=new WeakMap;ct=new WeakMap;ko=new WeakMap;_n=new WeakSet;Od=function(e,t){if(c(this,Ve)){let s=c(this,Pe).get(e);s||(s=document.createElement("style"),c(this,Pe).set(e,s)),s.textContent=t.cssText}else{if(!this.host.shadowRoot||!t.styleSheet)return;c(this,At).set(e,t.styleSheet)}};Yt=new WeakSet;ws=function(){if(c(this,Ve)){if(!this.host.shadowRoot)return;this.host.shadowRoot.querySelectorAll("style").forEach(e=>{e.remove()}),c(this,Pe).forEach(e=>{var t;(t=this.host.shadowRoot)==null||t.appendChild(e)})}else{if(!this.host.shadowRoot)return;this.host.shadowRoot.adoptedStyleSheets=[...c(this,Qe),...Array.from(c(this,At).values())]}};Cn=new WeakSet;Ld=function(){if(!c(this,_o)){if(c(this,Ve)){if(!this.host.shadowRoot)return;this.host.shadowRoot.querySelectorAll("style").forEach(e=>{c(this,ct).push(e),c(this,ko).push(e.cloneNode(!0))})}else this.host.shadowRoot&&c(this,Qe).length===0&&(Z(this,Qe,[...this.host.shadowRoot.adoptedStyleSheets||[]]),Z(this,Co,[...c(this,Qe)]));Z(this,_o,!0)}};function ma(){try{return new CSSStyleSheet,!0}catch{return!1}}var kn,$o,So,ba,$n,Dd,Sn,zd,$g=class Vd{constructor(){f(this,$n),f(this,Sn),f(this,kn,!ma()),f(this,$o,new Map),f(this,So,new Map),f(this,ba,document.adoptedStyleSheets||[])}static get instance(){return globalThis.__gdsGlobalStylesRegistry||(globalThis.__gdsGlobalStylesRegistry=new Vd),globalThis.__gdsGlobalStylesRegistry}injectGlobalStyles(t,s){if(c(this,kn)){const r=Array.isArray(s)?s.map(o=>o.toString()).join(""):s.toString();C(this,$n,Dd).call(this,t,r)}else s.styleSheet&&C(this,Sn,zd).call(this,t,s.styleSheet)}};kn=new WeakMap;$o=new WeakMap;So=new WeakMap;ba=new WeakMap;$n=new WeakSet;Dd=function(e,t){let s=c(this,So).get(e);s||(s=document.createElement("style"),c(this,So).set(e,s)),s.textContent=t,document.head.appendChild(s)};Sn=new WeakSet;zd=function(e,t){c(this,$o).set(e,t),document.adoptedStyleSheets=[...c(this,ba),...Array.from(c(this,$o).values())]};var Sg=$g,Mn=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 color-scheme: dark;
@@ -223,7 +223,7 @@ color-scheme: dark;
   --gds-color-l3-states-negative-pressed: #ee8375 20%;
 `,Pd=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 color-scheme: light;
@@ -334,7 +334,7 @@ color-scheme: light;
   --gds-color-l3-states-negative-pressed: #a63e2a 20%;
 `,Mg=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 :host {
@@ -350,7 +350,7 @@ color-scheme: light;
 }
 `,Eg=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 :host {
@@ -509,7 +509,7 @@ color-scheme: light;
 }
 `,Tg=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 :host {
@@ -521,7 +521,7 @@ color-scheme: light;
 }
 `,Ag=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 :host {
@@ -545,7 +545,7 @@ color-scheme: light;
 }
 `,Og=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 :host {
@@ -603,7 +603,7 @@ color-scheme: light;
 }
 `,Lg=`/**
  * Do not edit directly
- * Generated on Thu, 21 Nov 2024 09:52:52 GMT
+ * Generated on Thu, 21 Nov 2024 10:11:59 GMT
  */
 
 :host {
@@ -5126,36 +5126,40 @@ div.gds-ripple-effect {
     :host {
       display: contents;
     }
-    .step {
-      animation-name: tp-scale, tp-scale;
-      animation-fill-mode: both;
-      animation-timing-function: ease-in-out;
-      animation-direction: normal, reverse;
-      animation-timeline: view(x);
-      animation-range:
-        entry 0% entry 60vw,
-        exit -40vw exit 40vw;
-      scale: 1;
-      opacity: 1;
-      filter: blur(0px);
-
-      @media (max-width: 768px) {
+    @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+      .step {
+        animation-name: tp-scale, tp-scale;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+        animation-direction: normal, reverse;
+        animation-timeline: view(x);
         animation-range:
           entry 0% entry 60vw,
-          exit -10vw exit 100vw;
+          exit -40vw exit 40vw;
+        scale: 1;
+        opacity: 1;
+        filter: blur(0px);
+
+        @media (max-width: 768px) {
+          animation-range:
+            entry 0% entry 60vw,
+            exit -10vw exit 100vw;
+        }
+      }
+
+      @keyframes tp-scale {
+        0% {
+          scale: 0.8;
+          opacity: 0.4;
+        }
       }
     }
-
     @media (max-width: 768px) {
       .step:first-child {
         margin-left: 10vw;
       }
-    }
-
-    @keyframes tp-scale {
-      0% {
-        scale: 0.8;
-        opacity: 0.4;
+      .step:last-child {
+        margin-right: 10vw;
       }
     }
   `;Nr([h({type:String})],Ft.prototype,"name",2);Nr([h({type:String})],Ft.prototype,"title",2);Nr([h({type:String})],Ft.prototype,"description",2);Nr([h({type:String})],Ft.prototype,"label",2);Ft=Nr([R("tp-step")],Ft);var tf=Object.defineProperty,sf=Object.getOwnPropertyDescriptor,y1=(e,t,s,r)=>{for(var o=r>1?void 0:r?sf(t,s):t,n=e.length-1,i;n>=0;n--)(i=e[n])&&(o=(r?i(t,s,o):i(o))||o);return r&&o&&tf(t,s,o),o};let oa=class extends D{firstUpdated(){this.addEventListeners()}addEventListeners(){this.shadowRoot.querySelectorAll("tp-step-bullet").forEach(t=>{t.addEventListener("click",this.handleBulletClick.bind(this))})}handleBulletClick(e){const t=e.currentTarget,s=t.getAttribute("step"),r=this.shadowRoot.querySelector(`tp-step[name="${s}"]::part(step)`);r&&r.scrollIntoView({behavior:"smooth",block:"center"}),this.shadowRoot.querySelectorAll("tp-step-bullet").forEach(n=>n.removeAttribute("active")),t.setAttribute("active","")}render(){return m`
