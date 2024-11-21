@@ -26,20 +26,21 @@ export class TPAccountsModalCard extends LitElement {
           animation-fill-mode: both;
           animation-timing-function: ease-in-out;
           animation-direction: normal, reverse;
-          animation-timeline: view(x);
+          /* animation-timeline: view(x);
           animation-range:
             entry 0% entry 20%,
-            exit -20% exit 20%;
+            exit -20% exit 20%; */
           scale: 1;
           opacity: 1;
           filter: blur(0px);
+          /* scroll-margin-inline-start: 200px; */
         }
 
         @keyframes tp-scale {
           0% {
-            scale: 0.8;
+            /* scale: 0.8; */
             opacity: 0.4;
-            filter: blur(14px);
+            /* filter: blur(14px); */
           }
         }
       </style>

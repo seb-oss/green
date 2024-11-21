@@ -58,14 +58,17 @@ export class TPAccountsModal extends LitElement {
           position: relative;
           scrollbar-width: none;
           box-sizing: border-box;
+          scroll-margin-inline-start: 200px;
+          padding-inline: 100px;
         }
 
         tp-accounts-card::part(account) {
           scroll-snap-align: center;
-          scroll-margin-inline-start: var(--space);
-          --width: calc(100% - var(--space) * (var(--steps) - 1));
+          width: 200px;
+          /* scroll-margin-inline-start: var(--space); */
+          /* --width: calc(100% - var(--space) * (var(--steps) - 1));
           min-inline-size: calc(var(--width) / (var(--steps) - 1));
-          aspect-ratio: 3 / 2;
+          aspect-ratio: 3 / 2; */
         }
 
         .actionsheet {
@@ -88,18 +91,18 @@ export class TPAccountsModal extends LitElement {
         </gds-button>
         <gds-flex flex-direction="column" gap="l" padding="0 0 l 0">
           <div class="car" gap="s">
-            <tp-accounts-card @click=${this.handleCardClick} name="negative"
-              >ICA</tp-accounts-card
-            >
-            <tp-accounts-card @click=${this.handleCardClick} name="notice"
-              >THIS</tp-accounts-card
-            >
-            <tp-accounts-card @click=${this.handleCardClick} name="green-01"
-              >THAT</tp-accounts-card
-            >
-            <tp-accounts-card @click=${this.handleCardClick} name="copper-01"
-              >Coppa</tp-accounts-card
-            >
+            <tp-accounts-card @click=${this.handleCardClick} name="negative">
+              ICA
+            </tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="notice">
+              THIS
+            </tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="green-01">
+              THAT
+            </tp-accounts-card>
+            <tp-accounts-card @click=${this.handleCardClick} name="copper-01">
+              Coppa
+            </tp-accounts-card>
           </div>
           <gds-flex align-items="center" justify-content="center" gap="2xs">
             <tp-step-bullet step="s1"></tp-step-bullet>
