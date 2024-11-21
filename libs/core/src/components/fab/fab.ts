@@ -54,7 +54,6 @@ export class GdsFab extends GdsButton {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
-    selector: '[part="_button"]',
   })
   'z-index'?: string
 

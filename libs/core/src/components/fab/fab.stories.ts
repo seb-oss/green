@@ -190,3 +190,59 @@ export const Color: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * You can position the FAB using the `inset` property.
+ * It takes all the default CSS inset values.
+ *
+ * e.g
+ *
+ * ```html
+ * <gds-fab inset="auto 48px 48px auto">
+ *    I'm a FAB
+ * </gds-fab>
+ * ```
+ */
+
+export const Position: Story = {
+  ...DefaultParams,
+  name: 'Position',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-flex height="300px">
+      <gds-fab inset="auto 48px 48px auto"> I'm a FAB </gds-fab>
+    </gds-flex>
+  `,
+}
+
+/**
+ * To change the z order fo the FAB you can use the `z-index` property.
+ * It takes all the default CSS `z-index` values.
+ *
+ * e.g
+ *
+ * ```html
+ * <gds-fab inset="auto 48px 48px auto" z-index="20">
+ *    Show above all
+ * </gds-fab>
+ * ```
+ */
+
+export const ZIndex: Story = {
+  ...DefaultParams,
+  name: 'z-index',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-flex height="300px">
+      <gds-fab inset="auto 48px 48px auto" z-index="20" rank="secondary">
+        Show aboce other things
+      </gds-fab>
+    </gds-flex>
+  `,
+}
