@@ -60,6 +60,18 @@ export class GdsBadge extends GdsElement {
   })
   notification = false
 
+  /**
+   * Indicates whether the badge is rounded.
+   *
+   * @property {boolean} rounded - Controls the border radius of the badge.
+   */
+  @property({
+    attribute: 'rounded',
+    type: Boolean,
+    reflect: true,
+  })
+  rounded = false
+
   @state()
   mainSlotOccupied = false
 
@@ -96,7 +108,7 @@ export class GdsBadge extends GdsElement {
       align-items="center"
       justify-content="flex-start"
       padding-inline="${padding}"
-      border-radius="${this.notification ? 'max' : '2xs'}"
+      border-radius="${this.notification || this.rounded ? 'max' : '2xs'}"
       block-size="${blockSize}"
       width="max-content"
       font-size="${this.size === 'small' || this.notification

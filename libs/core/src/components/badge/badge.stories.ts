@@ -340,3 +340,57 @@ export const Notification: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * The `Rounded` story demonstrates the use of the `gds-badge` component with the `rounded` property.
+ *
+ * When set to `true`, the badge will have fully rounded corners.
+ *
+ * Example usage:
+ *
+ * ```html
+ * <gds-badge rounded variant="information"> 01 </gds-badge>
+ * ```
+ *
+ * @property {boolean} rounded - Controls the border radius of the badge.
+ */
+
+export const Rounded: Story = {
+  name: 'Rounded',
+  parameters: {},
+
+  render: (args) => html`
+    <gds-flex gap="xl" flex-direction="column">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Rounded Default</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-flex gap="xl">
+          <gds-badge rounded variant="information"> 01 </gds-badge>
+          <gds-badge rounded variant="notice"> 02 </gds-badge>
+          <gds-badge rounded variant="positive"> 03 </gds-badge>
+          <gds-badge rounded variant="warning"> 04 </gds-badge>
+          <gds-badge rounded variant="negative"> 05 </gds-badge>
+          <gds-badge rounded variant="negative" disabled> 06 </gds-badge>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Rounded Small</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-flex gap="xl">
+          <gds-badge rounded size="small" variant="information"> 01 </gds-badge>
+          <gds-badge rounded size="small" variant="notice"> 02 </gds-badge>
+          <gds-badge rounded size="small" variant="positive"> 03 </gds-badge>
+          <gds-badge rounded size="small" variant="warning"> 04 </gds-badge>
+          <gds-badge rounded size="small" variant="negative"> 05 </gds-badge>
+          <gds-badge rounded size="small" variant="negative" disabled>
+            06
+          </gds-badge>
+        </gds-flex>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
