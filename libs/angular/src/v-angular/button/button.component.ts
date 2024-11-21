@@ -40,7 +40,7 @@ export enum ButtonStyle {
  * https://designlibrary.sebgroup.com/components/component-button
  */
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'nggv-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
