@@ -21,31 +21,45 @@ export class TPAccountsModalCard extends LitElement {
         :host {
           display: contents;
         }
+
         .account {
-          animation-name: tp-scale, tp-scale;
+          scroll-snap-align: center;
+          min-width: calc(100vw - 100px);
+          animation-name: tp-card, tp-card;
           animation-fill-mode: both;
           animation-timing-function: ease-in-out;
           animation-direction: normal, reverse;
-          /* animation-timeline: view(x);
+          animation-timeline: view(x);
           animation-range:
-            entry 0% entry 20%,
-            exit -20% exit 20%; */
-          scale: 1;
-          opacity: 1;
-          filter: blur(0px);
-          /* scroll-margin-inline-start: 200px; */
+            entry 100px entry -100px,
+            exit -100px exit 100px;
+
+          svg {
+            width: 100%;
+          }
         }
 
-        @keyframes tp-scale {
+        @keyframes tp-card {
           0% {
-            /* scale: 0.8; */
+            scale: 0.8;
             opacity: 0.4;
-            /* filter: blur(14px); */
           }
         }
       </style>
-      <gds-card variant=${this.name} part="account" class="account">
-        <gds-flex align-items="center" justify-content="center" padding="xl">
+      <gds-card
+        variant=${this.name}
+        part="account"
+        class="account"
+        padding="0"
+        border="0"
+      >
+        <gds-flex
+          align-items="center"
+          justify-content="center"
+          padding="l"
+          flex-direction="column"
+          gap="l"
+        >
           <slot></slot>
         </gds-flex>
       </gds-card>
