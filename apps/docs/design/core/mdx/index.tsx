@@ -71,10 +71,10 @@ export function Mdx({
 
   return (
     <>
-      {/* <GdsRichText key={uniqueId}> */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
+      <GdsRichText key={uniqueId}>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             @scope {
               pre {
                 padding: 20px;
@@ -84,10 +84,10 @@ export function Mdx({
               }
             }
           `,
-        }}
-      />
-      <Component components={components} />
-      {/* </GdsRichText> */}
+          }}
+        />
+        <Component components={components} />
+      </GdsRichText>
     </>
   )
 }

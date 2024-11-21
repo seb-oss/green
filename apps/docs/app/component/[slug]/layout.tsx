@@ -157,11 +157,9 @@ export default function ComponentLayout({
               </GdsFlex>
             </GdsCard>
           </GdsFlex>
-          <GdsContainer display="none; m{contents}">
-            <Taber component={url_path} links={links} />
-          </GdsContainer>
+          <Taber component={url_path} links={links} />
           <GdsFlex flex-direction="column" gap="xl">
-            <GdsRichText>{children}</GdsRichText>
+            {children}
           </GdsFlex>
           <footer>
             Last updated: <br />

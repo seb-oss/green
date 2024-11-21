@@ -18,13 +18,23 @@ const CustomLink: React.ForwardRefRenderFunction<
 > = ({ onClick, href, children, menu, ...rest }, ref) => {
   if (menu) {
     return (
-      <GdsMenuButton href={href} onClick={onClick} ref={ref} {...rest}>
+      <GdsMenuButton
+        href={href}
+        onClick={onClick}
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        {...rest}
+      >
         {children}
       </GdsMenuButton>
     )
   } else {
     return (
-      <GdsLink href={href} onClick={onClick} ref={ref} {...rest}>
+      <GdsLink
+        href={href}
+        onClick={onClick}
+        ref={ref as React.Ref<HTMLAnchorElement>}
+        {...rest}
+      >
         {children}
       </GdsLink>
     )
