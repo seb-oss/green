@@ -103,7 +103,7 @@
     "storybook": "8.2.9",
     "swiped-events": "^1.1.6",
     "tslib": "^2.3.1",
-    "vanilla-cookieconsent": "^2.9.2",
+    "vanilla-cookieconsent": "^3.0.1",
     "webpack-inject-plugin": "^1.5.5",
     "zone.js": "0.12.0"
   },
