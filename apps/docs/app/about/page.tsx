@@ -42,14 +42,14 @@ const HEADINGS = [
 
 export default function About() {
   return (
-    <GdsFlex flex-direction="column" gap="6xl">
+    <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
       <Hero
         heading="About"
         preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
       />
-      <GdsFlex gap="8xl">
-        <GdsFlex gap="8xl" flex-direction="column">
-          <GdsGrid columns="2">
+      <GdsFlex gap="4xl; m{8xl}">
+        <GdsFlex gap="2xl; m{4xl}" flex-direction="column">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="what-is-green">
               What is Green?
             </GdsText>
@@ -88,7 +88,7 @@ export default function About() {
             object-fit="cover"
             aspect-ratio="16 / 9"
           />
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="how-green-works">
               How Green works
             </GdsText>
@@ -100,7 +100,7 @@ export default function About() {
               andcode.
             </GdsText>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="maintaining-and-educating">
               Maintaining and educating
             </GdsText>
@@ -190,7 +190,7 @@ export default function About() {
               </Accordion>
             </GdsFlex>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="build-on-contributions">
               Built on contributions
             </GdsText>
@@ -198,7 +198,7 @@ export default function About() {
               {`Green Design System is built on contributions from everyone. Product teams at SEB have the best knowledge what their product's end user needs. That's why it's vital that everyone contributes with what's possible. That can be everything from insights regarding a specific component or pull requests with a complete feature or a design updates in a Figma branch.`}
             </GdsText>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="contact-us">
               Contact us
             </GdsText>
@@ -232,7 +232,7 @@ export default function About() {
             </GdsFlex>
           </GdsGrid>
         </GdsFlex>
-        <GdsFlex min-width="240px">
+        <GdsFlex display="none; m{flex}" min-width="240px">
           <TOC headings={HEADINGS} component={'About'} />
         </GdsFlex>
       </GdsFlex>
