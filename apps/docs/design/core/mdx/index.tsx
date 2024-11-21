@@ -8,6 +8,7 @@ import {
   GdsRichText,
   GdsSpacer,
 } from '$/import/components'
+import { v4 as uuidv4 } from 'uuid'
 
 // Local components
 import Do from './do'
@@ -66,9 +67,11 @@ export function Mdx({
   globals: Record<string, any>
 }) {
   const Component = useMDXComponent(code, globals)
+  const uniqueId = React.useMemo(() => uuidv4(), [])
 
   return (
-    <GdsRichText>
+    <>
+      {/* <GdsRichText key={uniqueId}> */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -84,6 +87,7 @@ export function Mdx({
         }}
       />
       <Component components={components} />
-    </GdsRichText>
+      {/* </GdsRichText> */}
+    </>
   )
 }

@@ -3,7 +3,14 @@
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
+import {
+  GdsBadge,
+  GdsCard,
+  GdsContainer,
+  GdsFlex,
+  GdsRichText,
+  GdsText,
+} from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
 import Link from 'core/link'
 import Navigator from 'core/navigator'
@@ -108,7 +115,7 @@ export default function ComponentLayout({
         slug={slug}
       />
       <GdsFlex gap="4xl">
-        <GdsFlex width="80ch" flex-direction="column" gap="2xl">
+        <GdsFlex width="100%; m{80ch}" flex-direction="column" gap="2xl">
           <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
             <GdsFlex
               justify-content="space-between"
@@ -150,9 +157,11 @@ export default function ComponentLayout({
               </GdsFlex>
             </GdsCard>
           </GdsFlex>
-          <Taber component={url_path} links={links} />
+          <GdsContainer display="none; m{contents}">
+            <Taber component={url_path} links={links} />
+          </GdsContainer>
           <GdsFlex flex-direction="column" gap="xl">
-            {children}
+            <GdsRichText>{children}</GdsRichText>
           </GdsFlex>
           <footer>
             Last updated: <br />
@@ -161,7 +170,7 @@ export default function ComponentLayout({
             </time>
           </footer>
         </GdsFlex>
-        <GdsFlex>{TOC}</GdsFlex>
+        <GdsFlex display="none; m{flex}">{TOC}</GdsFlex>
       </GdsFlex>
     </GdsFlex>
   )
