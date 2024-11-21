@@ -6,6 +6,8 @@ import { tokens } from '../../tokens.style'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import BadgeCSS from './badge.style'
 
+import '@sebgroup/green-core/components/flex'
+
 /**
  * `gds-badge`
  *
