@@ -16,36 +16,40 @@ export class TPStep extends LitElement {
     :host {
       display: contents;
     }
-    .step {
-      animation-name: tp-scale, tp-scale;
-      animation-fill-mode: both;
-      animation-timing-function: ease-in-out;
-      animation-direction: normal, reverse;
-      animation-timeline: view(x);
-      animation-range:
-        entry 0% entry 60vw,
-        exit -40vw exit 40vw;
-      scale: 1;
-      opacity: 1;
-      filter: blur(0px);
-
-      @media (max-width: 768px) {
+    @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+      .step {
+        animation-name: tp-scale, tp-scale;
+        animation-fill-mode: both;
+        animation-timing-function: ease-in-out;
+        animation-direction: normal, reverse;
+        animation-timeline: view(x);
         animation-range:
           entry 0% entry 60vw,
-          exit -10vw exit 100vw;
+          exit -40vw exit 40vw;
+        scale: 1;
+        opacity: 1;
+        filter: blur(0px);
+
+        @media (max-width: 768px) {
+          animation-range:
+            entry 0% entry 60vw,
+            exit -10vw exit 100vw;
+        }
+      }
+
+      @keyframes tp-scale {
+        0% {
+          scale: 0.8;
+          opacity: 0.4;
+        }
       }
     }
-
     @media (max-width: 768px) {
       .step:first-child {
         margin-left: 10vw;
       }
-    }
-
-    @keyframes tp-scale {
-      0% {
-        scale: 0.8;
-        opacity: 0.4;
+      .step:last-child {
+        margin-right: 10vw;
       }
     }
   `
