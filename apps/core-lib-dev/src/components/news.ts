@@ -138,22 +138,20 @@ export class TpNewsItem extends LitElement {
     super.connectedCallback()
   }
 
-  @queryAsync('.news')
-  newsElement?: Promise<GdsCard>
-
   @queryAsync('dialog')
   dialogElement?: Promise<HTMLDialogElement>
 
-  @state()
-  private open = false
+  // @state()
+  // private open = false
 
   async #handleClick() {
     const dialog = await this.dialogElement
 
     if (!dialog) return
 
-    document.startViewTransition(() => {
-      this.open = true
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(document as any).startViewTransition(() => {
+      // this.open = true
       dialog.showModal()
       lockBodyScrolling(dialog)
     })
@@ -164,8 +162,9 @@ export class TpNewsItem extends LitElement {
 
     if (!dialog) return
 
-    document.startViewTransition(() => {
-      this.open = false
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(document as any).startViewTransition(() => {
+      // this.open = false
       dialog.close()
       unlockBodyScrolling(dialog)
     })
