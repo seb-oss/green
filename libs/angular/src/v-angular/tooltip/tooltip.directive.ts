@@ -48,6 +48,8 @@ export class NgvTooltipDirective
   @Input() offset = 10
   /** How frequently the tooltip will be re-rendered when the page size changes. */
   @Input() resizeThrottle = 50
+  /** Id of tooltip element. */
+  @Input() tooltipId?: string
   /** Numeric max-width for tooltip. */
   @Input() maxWidth = 343
 
@@ -117,12 +119,15 @@ export class NgvTooltipDirective
 
   /** @internal */
   @HostListener('mouseenter')
+  @HostListener('focus')
   onMouseEnter() {
     this.show()
   }
 
   /** @internal */
   @HostListener('mouseleave')
+  @HostListener('blur')
+  @HostListener('keyup.escape')
   onMouseLeave() {
     this.hide()
   }
@@ -163,8 +168,9 @@ export class NgvTooltipDirective
    */
   hide(destroy = false) {
     if (!this.tooltipElement) return
-    if (this.parentElement.contains(this.tooltipElement))
-      this.renderer.removeChild(this.parentElement, this.tooltipElement)
+    if (this.parentElement.contains(this.tooltipElement)) {
+      this.renderer.removeChild(this.parentElement, this.tooltipElement);
+    }
     if (destroy) this.destroy()
     this.shown = false
     this.nggvHide.emit(this.tooltipElement)
@@ -179,6 +185,10 @@ export class NgvTooltipDirective
     this.tooltipElement = this.renderer.createElement('div')
     this.renderer.addClass(this.tooltipElement, 'gds-tooltip')
     this.renderer.setAttribute(this.tooltipElement, 'data-thook', this.thook)
+    this.renderer.setAttribute(this.tooltipElement, 'role', 'tooltip');
+    if (this.tooltipId) {
+      this.renderer.setAttribute(this.tooltipElement, 'id', this.tooltipId);
+    }
     this.renderer.setStyle(this.tooltipElement, 'position', 'absolute')
     this.renderer.setStyle(this.tooltipElement, 'z-index', '1040')
     this.renderer.setStyle(this.tooltipElement, 'border-radius', '.25rem')
