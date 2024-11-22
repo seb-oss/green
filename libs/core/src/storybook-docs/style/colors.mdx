@@ -170,14 +170,14 @@ The color system is divided into three levels:
     </gds-container>
   </gds-flex>
 
-  ## Working with the color system and Declarative Layout
+  ## Working with the color system and [Declarative Layout](/docs/concepts-declarative-layout--docs)
 
   Components in Green will automatically use color value from the appropriate level
   for that component, based on the type of the component. However, nesting levels in the DOM
   will not automatically affect the color level. For example, nesting a card inside another
   card will still use the level 2 color for the inner card by default.
 
-  When using the declarative layout system in Green, you will typically only need to
+  When using the [declarative layout](/docs/concepts-declarative-layout--docs) system in Green, you will typically only need to
   set the color variant. The exact color value will get resolved automatically.
 
   For example, setting the background property of a `<gds-card>` will select the
