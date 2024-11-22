@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.57.0
+
+### Minor Changes
+
+- 2b8089c: **Container:** Add `box-sizing` to prevent box model from groing more than max of content
+
+### Patch Changes
+
+- 11acd29: **FAB:** Fix width issue inherited from `gds-button`, now set's the `max-width:max-content`
+
 ## 1.56.0
 
 ### Minor Changes
