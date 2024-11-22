@@ -11,7 +11,7 @@ This makes it easier to maintain and update the design system and helps to
 ensure consistency across the components in the system and the products
 that use them.
 
-Tokens are  commonly reffered to as <em>variables</em>, and these terms
+Tokens are  commonly referred to as <em>variables</em>, and these terms
 can be used interchangeably for the most parts. The distiction is mainly an
 abstract one, with the term <em>token</em> meaning the design value itself,
 whereas <em>variable</em> often refers to the concrete implementation in code. In
@@ -48,8 +48,11 @@ let's briefly go over how to access them.
 In CSS, you can access the tokens by using the `var()` function. If you are not familiar
 with CSS variables, you can [read more about them on MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties).
 
-By default, tokens are registered on the `:host` selector of every component, so in order to access them, the element you are styling
-needs to be a child to a Green component. If a parent of your element is one of the declarative layout components for Green
+By default, tokens are defined on the `:host` selector of every component, so in order to access them, the element you are styling
+needs to be a child to a Green component. CSS variables, as opposed to other CSS properties, propagates down across shadow DOM boundaries,
+so when they are defined on the `:host` selector of a component, they are available to all children of that component.
+
+If a parent of your element is one of the declarative layout components from Green
 (ie, container, flex, grid or card), you're already covered, but if not, you can use `<gds-theme>` for this purpose. `<gds-theme>` does not
 add any visible layout to the page, but it provides access to all the CSS variables. The theme component can also be used to toggle
 between light and dark mode, as well as setting the design version to be used by its descendants. You can [read more about the theme component here](/docs/components-theme--docs).
