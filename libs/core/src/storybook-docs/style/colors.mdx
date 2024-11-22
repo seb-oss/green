@@ -54,22 +54,22 @@ The color system is divided into three levels:
         flex-direction="column"
         gap="s"
       >
-        <gds-flex align-items="center" gap="xs">
-          <gds-icon-square-behind-square></gds-icon-square-behind-square>
+        <gds-button rank="secondary" onclick="let cb = document.getElementById('explode'); cb.checked = !cb.checked">
+          <gds-icon-square-behind-square slot="lead"></gds-icon-square-behind-square>
           <label htmlFor="explode">Exploded View</label>
-        </gds-flex>
-        <gds-flex align-items="center" gap="xs">
-          <gds-icon-focus-square></gds-icon-focus-square>
+        </gds-button>
+        <gds-button rank="secondary" onclick="let cb = document.getElementById('video'); cb.checked = !cb.checked">
+          <gds-icon-focus-square slot="lead"></gds-icon-focus-square>
           <label htmlFor="video">Reveal Background</label>
-        </gds-flex>
-        <gds-flex align-items="center" gap="xs">
-          <gds-icon-eye-slash></gds-icon-eye-slash>
+        </gds-button>
+        <gds-button rank="secondary" onclick="let cb = document.getElementById('hide'); cb.checked = !cb.checked">
+          <gds-icon-eye-slash slot="lead"></gds-icon-eye-slash>
           <label htmlFor="hide">Hide Video</label>
-        </gds-flex>
-        <gds-flex align-items="center" gap="xs">
-          <gds-icon-square-placeholder></gds-icon-square-placeholder>
+        </gds-button>
+        <gds-button rank="secondary" onclick="let cb = document.getElementById('mask'); cb.checked = !cb.checked">
+          <gds-icon-square-placeholder slot="lead"></gds-icon-square-placeholder>
           <label htmlFor="mask">Mask</label>
-        </gds-flex>
+        </gds-button>
     </gds-flex>
 
       <input type="checkbox" id="explode" name="explode" />
