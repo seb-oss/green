@@ -23,7 +23,6 @@ import './pill-input'
 import './rates'
 import './content-cards'
 
-import { GdsCard } from '@sebgroup/green-core/components/card/index.js'
 import {
   lockBodyScrolling,
   registerGlobalScrollLockStyles,
@@ -147,9 +146,8 @@ export class TpNewsItem extends LitElement {
   async #handleClick() {
     const dialog = await this.dialogElement
 
-    if (!dialog) return
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (!dialog)
+      return // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(document as any).startViewTransition(() => {
       // this.open = true
       dialog.showModal()
@@ -160,9 +158,8 @@ export class TpNewsItem extends LitElement {
   async #handleCloseModal() {
     const dialog = await this.dialogElement
 
-    if (!dialog) return
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    if (!dialog)
+      return // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ;(document as any).startViewTransition(() => {
       // this.open = false
       dialog.close()
