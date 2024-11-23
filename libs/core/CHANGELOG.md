@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.58.0
+
+### Minor Changes
+
+- 694a88f: **Badge:** Add new boolean prop `rounded` to have fully rounded border radius when used on form elements such as input
+
+### Patch Changes
+
+- ed505c8: **Badge:** Add missing import for dependency `gds-flex`
+
 ## 1.57.0
 
 ### Minor Changes

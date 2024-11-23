@@ -4,12 +4,12 @@ import {
   GdsFlex,
   GdsGrid,
   GdsImg,
-  GdsLink,
   GdsRichText,
   GdsText,
 } from '$/import/components'
 import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
+import Link from 'core/link'
 import TOC from 'core/navigator'
 
 const HEADINGS = [
@@ -42,14 +42,14 @@ const HEADINGS = [
 
 export default function About() {
   return (
-    <GdsFlex flex-direction="column" gap="6xl">
+    <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
       <Hero
         heading="About"
         preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
       />
-      <GdsFlex gap="8xl">
-        <GdsFlex gap="8xl" flex-direction="column">
-          <GdsGrid columns="2">
+      <GdsFlex gap="4xl; m{8xl}">
+        <GdsFlex gap="2xl; m{4xl}" flex-direction="column">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="what-is-green">
               What is Green?
             </GdsText>
@@ -88,7 +88,7 @@ export default function About() {
             object-fit="cover"
             aspect-ratio="16 / 9"
           />
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="how-green-works">
               How Green works
             </GdsText>
@@ -100,7 +100,7 @@ export default function About() {
               andcode.
             </GdsText>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="maintaining-and-educating">
               Maintaining and educating
             </GdsText>
@@ -168,21 +168,21 @@ export default function About() {
                     <ul>
                       <li>
                         {`Book `}
-                        <GdsLink
+                        <Link
                           href="https://teams.microsoft.com/l/entity/0d820ecd-def2-4297-adad-78056cde7c78/_djb2_msteams_prefix_4065088102?context=%7B%22channelId%22%3A%2219%3A33f450cae2764531930c4eca19aa4c26%40thread.tacv2%22%7D&groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                           target="_blank"
                         >
                           Green Coaching
-                        </GdsLink>
+                        </Link>
                       </li>
                       <li>
                         {`Book `}
-                        <GdsLink
+                        <Link
                           href="https://teams.microsoft.com/l/entity/0d820ecd-def2-4297-adad-78056cde7c78/_djb2_msteams_prefix_43486807?context=%7B%22channelId%22%3A%2219%3A33f450cae2764531930c4eca19aa4c26%40thread.tacv2%22%7D&groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                           target="_blank"
                         >
                           CX Coaching
-                        </GdsLink>
+                        </Link>
                       </li>
                     </ul>
                   </GdsRichText>
@@ -190,7 +190,7 @@ export default function About() {
               </Accordion>
             </GdsFlex>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="build-on-contributions">
               Built on contributions
             </GdsText>
@@ -198,7 +198,7 @@ export default function About() {
               {`Green Design System is built on contributions from everyone. Product teams at SEB have the best knowledge what their product's end user needs. That's why it's vital that everyone contributes with what's possible. That can be everything from insights regarding a specific component or pull requests with a complete feature or a design updates in a Figma branch.`}
             </GdsText>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="contact-us">
               Contact us
             </GdsText>
@@ -210,29 +210,29 @@ export default function About() {
                 <ul>
                   <li>
                     {`Ask in our `}
-                    <GdsLink
+                    <Link
                       href="https://teams.microsoft.com/l/team/19%3aR-yrtyItfX3RWEyU8WrCyVy6u-eqWxYPbY1w2O7UVPs1%40thread.tacv2/conversations?groupId=3ad3eb8f-ab23-44e6-9b61-d08fee172513&tenantId=9a8ff9e3-0e35-4620-a724-e9834dc50b51"
                       target="_blank"
                     >
                       Teams channel
-                    </GdsLink>
+                    </Link>
                   </li>
                   <li>
                     {`Post an `}
-                    <GdsLink href="">issue on Github</GdsLink>
+                    <Link href="">issue on Github</Link>
                   </li>
                   <li>
                     {`Email us at `}
-                    <GdsLink href="mailtogreendesignsystem@seb.se">
+                    <Link href="mailtogreendesignsystem@seb.se">
                       greendesignsystem@seb.se
-                    </GdsLink>
+                    </Link>
                   </li>
                 </ul>
               </GdsRichText>
             </GdsFlex>
           </GdsGrid>
         </GdsFlex>
-        <GdsFlex min-width="240px">
+        <GdsFlex display="none; m{flex}" min-width="240px">
           <TOC headings={HEADINGS} component={'About'} />
         </GdsFlex>
       </GdsFlex>

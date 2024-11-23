@@ -1,12 +1,12 @@
 import { createRef, Ref, ref } from 'lit/directives/ref.js'
 
-import {
-  ListboxKbNavController,
-  ListboxKbNavigation,
-} from '../../controllers/listbox-kb-nav-controller'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
+import {
+  ListboxKbNavController,
+  ListboxKbNavigation,
+} from '../../utils/controllers/listbox-kb-nav-controller'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 
 import type { GdsMenuItem } from '../../primitives/menu/menu-item'
