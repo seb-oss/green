@@ -2,7 +2,13 @@
 
 import * as React from 'react'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { GdsDivider, GdsFlex, GdsRichText } from '$/import/components'
+import {
+  GdsDivider,
+  GdsFlex,
+  GdsRichText,
+  GdsSpacer,
+} from '$/import/components'
+import { v4 as uuidv4 } from 'uuid'
 
 // Local components
 import Do from './do'
@@ -43,6 +49,7 @@ const components = {
   // h4: (props: object) => <GdsText tag="h4" {...props} />,
   // h5: (props: object) => <GdsText tag="h5" {...props} />,
   // hr: (props: object) => <GdsDivider {...props} />,
+  br: (props: object) => <GdsSpacer {...props} />,
   Column: (props: object) => (
     <GdsFlex flex-direction="column" gap="xs" {...props} />
   ),
@@ -60,10 +67,27 @@ export function Mdx({
   globals: Record<string, any>
 }) {
   const Component = useMDXComponent(code, globals)
+  const uniqueId = React.useMemo(() => uuidv4(), [])
 
   return (
-    <GdsRichText>
-      <Component components={components} />
-    </GdsRichText>
+    <>
+      <GdsRichText key={uniqueId}>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
+            @scope {
+              pre {
+                padding: 20px;
+                border-radius: 8px;
+                overflow-x: auto;
+                scrollbar-width: thin;
+              }
+            }
+          `,
+          }}
+        />
+        <Component components={components} />
+      </GdsRichText>
+    </>
   )
 }

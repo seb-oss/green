@@ -30,7 +30,7 @@
   padding: 0;
 
   &:not(.completed, .active) {
-    color: var(--gds-ref-pallet-base500);
+    color: var(--gds-sys-color-font);
   }
 
   .review-content {
