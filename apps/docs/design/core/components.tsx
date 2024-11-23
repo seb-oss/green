@@ -19,9 +19,17 @@ type ExampleComponents = {
 
 const examples: ExampleComponents = EXAMPLES
 
-export default function Components({ title }: { title: string }) {
+interface ComponentsProps {
+  title: string
+  tag?: string
+}
+
+export default function Components({ title, tag }: ComponentsProps) {
   const components = allComponents
     .filter((component) => {
+      if (tag && !component.tags?.split(', ').includes(tag)) {
+        return false
+      }
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }
@@ -35,7 +43,7 @@ export default function Components({ title }: { title: string }) {
   return (
     <GdsFlex gap="m" flex-direction="column">
       {title && <GdsText tag="h2">{title}</GdsText>}
-      <GdsGrid columns="2; m{1} l{3}" gap="xl">
+      <GdsGrid columns="1; xs{2} s{2} m{3}" gap="s; s{xl}">
         {components.map((component, idx) => {
           const PATH = component.title.replace(' ', '')
           const Preview = examples[PATH]
@@ -53,9 +61,9 @@ export default function Components({ title }: { title: string }) {
                     align-items="flex-start"
                     justify-content="center"
                     padding="0"
-                    background="secondary"
+                    background="primary"
                   >
-                    {Preview ? <Preview /> : null}
+                    {Preview ? <Preview cover={true} /> : null}
                   </GdsFlex>
                 ) : component.title === 'Calendar' ||
                   component.title === 'Image' ||

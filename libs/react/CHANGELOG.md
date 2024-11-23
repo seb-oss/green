@@ -1,5 +1,23 @@
 # Changelog
 
+## 3.22.0
+
+### Minor Changes
+
+- c1cba06: **Dropdown:** Pass `required` prop down to Core component
+
+### Patch Changes
+
+- Updated dependencies [7ba5610]
+  - @sebgroup/chlorophyll@3.6.10
+
+## 3.21.0
+
+### Minor Changes
+
+- 1347472: **Modal:** Make bodyScrollLock optional through prop. Fixes #1742
+- 1347472: **Dropdown:** Expose `gds-ui-state` event through wrapper
+
 ## 3.20.2
 
 ### Patch Changes

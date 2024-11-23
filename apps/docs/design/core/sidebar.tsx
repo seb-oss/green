@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
@@ -14,6 +14,7 @@ import {
   IconSquareInfo,
   IconTextEdit,
 } from '$/import/icons'
+import Link from 'core/link'
 
 import './sidebar.css'
 
@@ -119,6 +120,11 @@ export default function Sidebar({
 
   return (
     <GdsFlex
+      padding="xl xl xl 2xl"
+      border="0 4xs/primary 0 0"
+      min-width="300px"
+      height="calc(100vh - 72px)"
+      align-items="flex-start"
       flex-direction="column"
       padding="s"
       position="sticky"

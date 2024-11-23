@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.10.1
+
+### Patch Changes
+
+- f75fe5e: **SCSS:** Fix dark mode variables for 2016
+
+  **Colors:** Fix `dark-blue-1` for 2016
+
+## 0.10.0
+
+### Minor Changes
+
+- b4cbd53: **2016 color tokens:** new tokens for 2016 colors
+
 ## 0.9.3
 
 ### Patch Changes

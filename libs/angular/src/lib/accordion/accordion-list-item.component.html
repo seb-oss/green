@@ -25,17 +25,17 @@
         />
       </svg>
     </button>
-    <div
-      role="region"
-      [hidden]="!this.isExpanded"
-      [ngStyle]="{ height: this.contentHeight }"
-      [id]="id + '_section'"
-      [attr.aria-labelledby]="id + '_header'"
-      data-testid="accordion-list-item-content"
-    >
-      <div>
-        <ng-content></ng-content>
-      </div>
+  </div>
+  <div
+    role="region"
+    [hidden]="!this.isExpanded"
+    [ngStyle]="{ height: this.contentHeight }"
+    [id]="id + '_section'"
+    [attr.aria-labelledby]="id + '_header'"
+    data-testid="accordion-list-item-content"
+  >
+    <div>
+      <ng-content></ng-content>
     </div>
   </div>
 </ng-container>

@@ -37,9 +37,6 @@ export interface DropdownTexts {
   select?: string
   selected?: string
   placeholder?: string
-  searchPlaceholder?: string
-  close?: string
-  optionsDescription?: string
 }
 export interface DropdownOption {
   label?: string
@@ -77,9 +74,6 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() hideLabel?: boolean
   @Input() maxHeight?: number = 500
   @Input() disableMobileStyles?: boolean
-
-  /** @deprecated */
-  @Input() fixedPlacement?: DropdownPlacements
 
   //
   @Input() set options(value: DropdownOption[] | undefined) {
@@ -206,10 +200,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
     }
 
     this.texts = {
-      close: this.texts?.close ?? 'Close',
-      optionsDescription: this.texts?.optionsDescription ?? 'Options',
       placeholder: this.texts?.placeholder ?? 'Select',
-      searchPlaceholder: this.texts?.searchPlaceholder ?? 'Search',
       selected: this.texts?.selected ?? 'selected',
       select: this.displayTextByValue(this._value),
     }

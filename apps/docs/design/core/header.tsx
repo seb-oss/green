@@ -35,7 +35,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
         min-width="100%"
         align-items="center"
         height="60px"
-        padding="0 0 0 s"
+        border="0 0 4xs/primary 0"
       >
         <GdsButton onClick={toggleNav} rank="tertiary">
           {isNavOpen === true ? (
@@ -55,12 +55,14 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <IconBrandSeb />
           </Link>
         </GdsContainer>
-        <GdsFlex height="100%" padding="0 xs" align-items="center" gap="s">
-          <GdsButton onClick={toggleCmd} rank="tertiary">
-            <IconMagnifyingGlass slot="lead" />
-            {isWindows ? '/' : '⌘K'}
-          </GdsButton>
-          <GdsButton
+        <GdsFlex height="100%" padding="0; s{0 l}">
+          <GdsContainer display="none; s{block}">
+            <GdsMenuButton onClick={toggleCmd}>
+              <IconMagnifyingGlass slot="lead" />
+              {isWindows ? '/' : '⌘K'}
+            </GdsMenuButton>
+          </GdsContainer>
+          <GdsMenuButton
             href="https://github.com/sebgroup/green"
             target="_blank"
             rank="tertiary"
