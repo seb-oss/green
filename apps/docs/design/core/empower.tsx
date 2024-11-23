@@ -5,7 +5,7 @@ import { GdsFlex, GdsGrid, GdsText } from '$/import/components'
 export default function Empower({ title }: { title: string }): JSX.Element {
   return (
     <GdsFlex flex-direction="column">
-      <GdsGrid columns="s{1} m{1} l{2}" gap="m">
+      <GdsGrid columns="1; l{2}" gap="m">
         {title && (
           <GdsText tag="h2" margin="0">
             {title}

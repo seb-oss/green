@@ -1,6 +1,6 @@
 import { CSSResult } from 'lit'
 
-import { supportsConstructedStylesheets } from '../controllers/dynamic-styles-controller'
+import { supportsConstructedStylesheets } from '../utils/controllers/dynamic-styles-controller'
 
 declare global {
   var __gdsGlobalStylesRegistry: GlobalStylesRegistry // eslint-disable-line no-var

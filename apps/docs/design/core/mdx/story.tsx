@@ -10,7 +10,7 @@ interface StoryProps {
   height?: string
 }
 
-export default function FigmaProto({ component, id, height }: StoryProps) {
+export default function Story({ component, id, height, ...props }: StoryProps) {
   const [isLoading, setIsLoading] = useState(true)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
@@ -33,7 +33,7 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
   }, [])
 
   return (
-    <GdsCard>
+    <GdsCard margin="0 0 4xl 0" {...props}>
       <iframe
         ref={iframeRef}
         key="story-iframe"
@@ -45,11 +45,13 @@ export default function FigmaProto({ component, id, height }: StoryProps) {
       <style
         dangerouslySetInnerHTML={{
           __html: `
-            .story {
-              width: 100%;
-              height: 100%;
-              border: 0;  
-              min-height: 360px; 
+            @scope {
+              .story {
+                width: 100%;
+                height: 100%;
+                border: 0;  
+                min-height: 360px;
+              }
             }
           `,
         }}
