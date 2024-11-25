@@ -189,9 +189,10 @@ export default function Sidebar() {
                       justify-content="space-between"
                       padding="xs s"
                       gap="xs"
+                      width="100%"
                     >
-                      <GdsFlex align-items="center" gap="xs">
-                        <GdsFlex align-items="center" width="12px">
+                      <GdsFlex align-items="center" gap="s">
+                        <GdsFlex align-items="center" width="19px">
                           {subLink.private && (
                             <IconEyeSlash width="12" height="12" />
                           )}

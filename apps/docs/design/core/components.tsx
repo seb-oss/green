@@ -42,8 +42,12 @@ export default function Components({ title, tag }: ComponentsProps) {
 
   return (
     <GdsFlex gap="m" flex-direction="column">
-      {title && <GdsText tag="h2">{title}</GdsText>}
-      <GdsGrid columns="1; xs{2} s{2} m{3}" gap="s; s{xl}">
+      {title && (
+        <GdsText tag="h2" font-size="display-l" margin="0 0 xl 0">
+          {title}
+        </GdsText>
+      )}
+      <GdsGrid columns="1; xs{2} s{2} m{2}" gap="s; s{xl}">
         {components.map((component, idx) => {
           const PATH = component.title.replace(' ', '')
           const Preview = examples[PATH]

@@ -43,12 +43,12 @@ const HEADINGS = [
 export default function About() {
   return (
     <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
-      <Hero
-        heading="About"
-        preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
-      />
-      <GdsFlex gap="4xl; m{8xl}">
-        <GdsFlex gap="2xl; m{4xl}" flex-direction="column">
+      <GdsFlex gap="4xl; m{l}" margin="0 auto">
+        <GdsFlex gap="2xl; m{4xl}" flex-direction="column" max-width="80ch">
+          <Hero
+            heading="About"
+            preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
+          />
           <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="what-is-green">
               What is Green?

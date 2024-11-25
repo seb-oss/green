@@ -13,7 +13,7 @@ interface Heading {
 
 interface TOCProps {
   headings: Heading[]
-  component: string
+  component?: string
 }
 
 const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
