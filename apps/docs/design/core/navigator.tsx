@@ -21,6 +21,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
   const [openSections, setOpenSections] = useState<{ [key: string]: boolean }>(
     {},
   )
+
   const observer = useRef<IntersectionObserver | null>(null)
 
   useEffect(() => {

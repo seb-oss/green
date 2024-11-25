@@ -15,7 +15,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
     >
       {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
       <GdsFlex
-        padding="0 s; s{0 l}"
+        padding="s; s{l} m{0 l}"
         flex-direction="column"
         width="100%; m{960px} l{calc(80ch + var(--gds-space-l) + 240px)}"
         margin="0 auto"

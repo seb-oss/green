@@ -2,7 +2,7 @@
 
 import ComponentList from 'core/components'
 
-import { GdsFlex } from '@sebgroup/green-react/core/*'
+import { GdsFlex, GdsText } from '@sebgroup/green-react/core/*'
 
 export default function Components() {
   return (

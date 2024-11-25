@@ -13,11 +13,7 @@ export default function Hero({
 }) {
   return (
     <GdsFlex flex-direction="column" gap="l; s{2xl}">
-      <GdsText
-        tag="h1"
-        font-size="display-s; m{display-l} l{display-l}"
-        font-weight="book"
-      >
+      <GdsText tag="h1" font-size="display-s; m{display-m}">
         {heading}
       </GdsText>
       {preamble && (

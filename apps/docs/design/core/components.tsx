@@ -43,7 +43,7 @@ export default function Components({ title, tag }: ComponentsProps) {
   return (
     <GdsFlex gap="m" flex-direction="column">
       {title && (
-        <GdsText tag="h2" font-size="display-l" margin="0 0 xl 0">
+        <GdsText tag="h1" font-size="display-s; m{display-m}" margin="0 0 xl 0">
           {title}
         </GdsText>
       )}

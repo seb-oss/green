@@ -105,8 +105,7 @@ export default function Foundation() {
             Our tonality is a voice that speaks to the user, we do not scream,
             but when needed we raise our voice to be heard. The balance in
             volume allows us to point the user in the right direction, wave to
-            get noticed or whisper when needed. A picture of a cabin in the
-            woods
+            get noticed or whisper when needed.
           </GdsText>
         </GdsFlex>
         <GdsImg

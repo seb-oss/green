@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
@@ -12,6 +12,7 @@ import {
   IconSquareInfo,
   IconTextEdit,
 } from '$/import/icons'
+import { Context } from '$/provider/provider'
 import Link from 'core/link'
 
 import './sidebar.css'
@@ -96,8 +97,11 @@ export default function Sidebar() {
 
   const [hasScrolled, setHasScrolled] = useState(false)
 
+  const { toggleNav } = useContext(Context)
+
   const activeMenuItem = menu.find((item) => {
     const urlArr = path.split('/')
+
     const about = ['foundation', 'change']
 
     if (urlArr.includes('component') || urlArr.includes('components')) {
@@ -105,9 +109,6 @@ export default function Sidebar() {
         return true
       }
     }
-
-    console.log(urlArr)
-    console.log(item.path.split('/'))
 
     return path === item.path
   })
@@ -151,6 +152,9 @@ export default function Sidebar() {
                   href={menuItem.path}
                   className={`sidebar-link ${menuItem.path === path ? 'active' : ''}`}
                   variant="hidden"
+                  onClick={() => {
+                    window.innerWidth < 1024 && toggleNav()
+                  }}
                 >
                   <GdsFlex align-content="center" gap="s" padding="xs s">
                     {menuItem.icon && menuItem.icon}
@@ -182,6 +186,9 @@ export default function Sidebar() {
                     className={`sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
                     key={subIdx}
                     variant="hidden"
+                    onClick={() => {
+                      window.innerWidth < 1024 && toggleNav()
+                    }}
                   >
                     <GdsFlex
                       key={subIdx}
