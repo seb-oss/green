@@ -105,12 +105,12 @@ export default function ComponentLayout({
   return (
     <GdsFlex
       flex-direction="column"
-      max-width="max-content"
+      width="100%"
       justify-content="center"
       margin="0 auto"
     >
       <GdsFlex gap="l">
-        <GdsFlex width="100%; m{80ch}" flex-direction="column" gap="2xl">
+        <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
           <Breadcrumb
             home={'Home'}
             separator={<GdsText font-size="body-s"> / </GdsText>}

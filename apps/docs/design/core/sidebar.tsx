@@ -142,7 +142,7 @@ export default function Sidebar() {
           <GdsFlex
             align-items="flex-start"
             flex-direction="column"
-            gap="xs"
+            gap="4xs"
             overflow="hidden auto"
           >
             {menu.map((menuItem, idx) => (
@@ -161,7 +161,6 @@ export default function Sidebar() {
             ))}
           </GdsFlex>
         </GdsContainer>
-
         <GdsContainer
           padding="xs"
           overflow="scroll"

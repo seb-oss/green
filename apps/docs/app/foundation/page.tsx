@@ -1,6 +1,6 @@
 'use client'
 
-import { GdsFlex, GdsGrid, GdsImg, GdsText } from '$/import/components'
+import { GdsFlex, GdsImg, GdsText } from '$/import/components'
 import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
 import TOC from 'core/navigator'
@@ -86,7 +86,7 @@ export default function Foundation() {
           heading="Foundation"
           preamble="Green Design System, a framework designed to bring unity, efficiency, and coherent perspective to our digital experiences. Over time it will grow and evolve but always reflect our design philosophy. User needs first, being forefront and with confidence."
         />
-        <GdsGrid columns="1; m{2}">
+        <GdsFlex gap="m" flex-direction="column">
           <GdsText tag="h2" id="our-purpose">
             Our purpose
           </GdsText>
@@ -96,8 +96,8 @@ export default function Foundation() {
             Over time it will grow and evolve but always reflect our design
             philosophy. User needs first, being forefront and with confidence.
           </GdsText>
-        </GdsGrid>
-        <GdsGrid columns="1; m{2}">
+        </GdsFlex>
+        <GdsFlex gap="m" flex-direction="column">
           <GdsText tag="h2" id="tonality">
             Tonality
           </GdsText>
@@ -108,14 +108,14 @@ export default function Foundation() {
             get noticed or whisper when needed. A picture of a cabin in the
             woods
           </GdsText>
-        </GdsGrid>
+        </GdsFlex>
         <GdsImg
           src="/content/tonality-circles.jpg"
           alt="A picture of a cabin in the woods"
           object-fit="cover"
           aspect-ratio="16 / 9"
         />
-        <GdsGrid columns="1; m{2}">
+        <GdsFlex gap="m" flex-direction="column">
           <GdsText tag="h2" id="visual-style">
             Visual style
           </GdsText>
@@ -187,14 +187,14 @@ export default function Foundation() {
               </AccordionItem>
             </Accordion>
           </GdsFlex>
-        </GdsGrid>
+        </GdsFlex>
         <GdsImg
           src="/content/metallic-surface.jpg"
           alt="Metallic surface"
           object-fit="cover"
           aspect-ratio="16 / 9"
         />
-        <GdsGrid columns="1; m{2}">
+        <GdsFlex gap="m" flex-direction="column">
           <GdsText tag="h2" id="features">
             Features
           </GdsText>
@@ -273,7 +273,7 @@ export default function Foundation() {
               </AccordionItem>
             </Accordion>
           </GdsFlex>
-        </GdsGrid>
+        </GdsFlex>
       </GdsFlex>
       <GdsFlex display="none; m{flex}" min-width="240px">
         <TOC headings={HEADINGS} />
