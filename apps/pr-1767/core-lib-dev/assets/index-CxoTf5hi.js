@@ -112,7 +112,7 @@ var Tl=e=>{throw TypeError(e)};var Al=(e,t,s)=>t.has(e)||Tl("Cannot "+s);var $t=
   }
 `,Z1={0:"0px","2xs":"320px",xs:"425px",s:"768px",m:"1024px",l:"1280px",xl:"1440px","2xl":"2560px","3xl":"3840px","4xl":"4320px","5xl":"6016px","6xl":"7680px"},U1=/^([<|>]=?)?([0-9a-z]+)/,tc=["{","}",";",":",","],ql=[" ","/n"];function Y1(e){const t=[];let s="";for(let o=0;o<e.length;o++){const r=e[o];if(ql.includes(r)||(s+=r),tc.includes(r)){t.push(s.slice(0,-1)),t.push(r),s="";continue}if(ql.includes(r)||o===e.length-1){t.push(s),s="";continue}}return t.filter(o=>o!=="")}function q1(e){var t;const s=[];let o={breakpoint:"-",values:[]};const r=()=>({sel:"",values:[]});let n=r();for(const i of e){if(!tc.includes(i)){n.values.push(i);continue}if(i==="{"&&(o={breakpoint:n.values.join(","),values:[]},n=r()),i===";"&&(s.length===0&&s.push(o),n.values.length>0&&(o.values.push(n),n=r())),i===":"){const l=(t=n.values.pop())!=null?t:"";n.sel=l}o&&i==="}"&&(o.values.push(n),n=r(),s.push(o))}return n.values.length>0&&o.values.push(n),s.length===0&&s.push(o),s}function K1(e){return e.split(",").map(s=>{const o=s.trim().match(U1);if(!o)throw new Error(`Invalid breakpoint specifier: ${s}`);return{condition:o[1],value:o[2]}})}function X1(e,t,s,o=n=>n,r=(n,i)=>`${n}: ${i.join(" ")};`){let n="";for(const i of s){const p=`@media ${(i.breakpoint==="-"?[{condition:">=",value:"0"}]:K1(i.breakpoint)).map(b=>{var h,x;return`(${(h=b.condition)!=null&&h.includes("<")?"max-width":"min-width"}: ${(x=Z1[b.value])!=null?x:b.value})`}).join(" and ")} {${i.values.map(b=>{let h=e;b.sel.length>0&&(h=e===":host"?`:host(:${b.sel})`:`${e}:${b.sel}`);const x=r(t,b.values.map(o));return b.sel==="hover"?`@media (hover: hover) {${h}{${x}}}`:`${h}{${x}}`}).join("")}}`;n+=p}return n}var Vn=new Map;function y(e){return(t,s)=>{var o,r,n,i;const l=(o=e==null?void 0:e.selector)!=null?o:":host",d=(r=e==null?void 0:e.property)!=null?r:String(s),p=(n=e==null?void 0:e.valueTemplate)!=null?n:x=>`var(--gds-space-${x}, 0)`,b=e==null?void 0:e.styleTemplate,h=(i=e==null?void 0:e.cacheOverrideKey)!=null?i:"0";g({attribute:e==null?void 0:e.attribute,noAccessor:!0})(t,s),Object.defineProperty(t,s,{get:function(){return this["__"+String(s)]},set:async function(x){var w;this["__"+String(s)]=x,await this.updateComplete;const $=(w=this.level)!=null?w:"0",E=l+d+x+$+h;if(Vn.has(E)){this._dynamicStylesController.inject(`sep_${String(s)}`,Vn.get(E));return}const j=q1(Y1(x)),H=X1(l,d,j,p.bind(this),b==null?void 0:b.bind(this)),R=G(H);Vn.set(E,R),this._dynamicStylesController.inject(`sep_${String(s)}`,R)}})}}var Ve,Fr,Qe,jr,zt,Pe,gt,Wr,Nn,sc,ts,Ls,Gn,oc,J1=class{constructor(e){f(this,Nn),f(this,ts),f(this,Gn),f(this,Ve,!Ba()),f(this,Fr,!1),f(this,Qe,[]),f(this,jr,[]),f(this,zt,new Map),f(this,Pe,new Map),f(this,gt,[]),f(this,Wr,[]),this.host=e,this.host.addController(this)}hostConnected(){C(this,Gn,oc).call(this)}has(e){return c(this,Ve)?c(this,Pe).has(e):c(this,zt).has(e)}inject(e,t){C(this,Nn,sc).call(this,e,t),C(this,ts,Ls).call(this)}clear(e){if(c(this,Ve)){const t=c(this,Pe).get(e);t==null||t.remove(),c(this,Pe).delete(e)}else c(this,zt).delete(e);C(this,ts,Ls).call(this)}clearAll(){c(this,Ve)?(c(this,Pe).forEach(e=>e.remove()),c(this,gt).forEach(e=>e.remove()),c(this,Pe).clear(),U(this,gt,[])):this.host.shadowRoot&&(this.host.shadowRoot.adoptedStyleSheets=[],c(this,zt).clear(),U(this,Qe,[]))}clearInitial(){c(this,Ve)?(c(this,gt).forEach(e=>e.remove()),U(this,gt,[])):U(this,Qe,[]),C(this,ts,Ls).call(this)}restoreInitial(){c(this,Ve)?c(this,Wr).forEach(e=>{c(this,gt).push(e.cloneNode(!0))}):U(this,Qe,[...c(this,jr)]),C(this,ts,Ls).call(this)}};Ve=new WeakMap;Fr=new WeakMap;Qe=new WeakMap;jr=new WeakMap;zt=new WeakMap;Pe=new WeakMap;gt=new WeakMap;Wr=new WeakMap;Nn=new WeakSet;sc=function(e,t){if(c(this,Ve)){let s=c(this,Pe).get(e);s||(s=document.createElement("style"),c(this,Pe).set(e,s)),s.textContent=t.cssText}else{if(!this.host.shadowRoot||!t.styleSheet)return;c(this,zt).set(e,t.styleSheet)}};ts=new WeakSet;Ls=function(){if(c(this,Ve)){if(!this.host.shadowRoot)return;this.host.shadowRoot.querySelectorAll("style").forEach(e=>{e.remove()}),c(this,Pe).forEach(e=>{var t;(t=this.host.shadowRoot)==null||t.appendChild(e)})}else{if(!this.host.shadowRoot)return;this.host.shadowRoot.adoptedStyleSheets=[...c(this,Qe),...Array.from(c(this,zt).values())]}};Gn=new WeakSet;oc=function(){if(!c(this,Fr)){if(c(this,Ve)){if(!this.host.shadowRoot)return;this.host.shadowRoot.querySelectorAll("style").forEach(e=>{c(this,gt).push(e),c(this,Wr).push(e.cloneNode(!0))})}else this.host.shadowRoot&&c(this,Qe).length===0&&(U(this,Qe,[...this.host.shadowRoot.adoptedStyleSheets||[]]),U(this,jr,[...c(this,Qe)]));U(this,Fr,!0)}};function Ba(){try{return new CSSStyleSheet,!0}catch{return!1}}var Zn,Rr,Br,Ia,Un,rc,Yn,nc,Q1=class ic{constructor(){f(this,Un),f(this,Yn),f(this,Zn,!Ba()),f(this,Rr,new Map),f(this,Br,new Map),f(this,Ia,document.adoptedStyleSheets||[])}static get instance(){return globalThis.__gdsGlobalStylesRegistry||(globalThis.__gdsGlobalStylesRegistry=new ic),globalThis.__gdsGlobalStylesRegistry}injectGlobalStyles(t,s){if(c(this,Zn)){const o=Array.isArray(s)?s.map(r=>r.toString()).join(""):s.toString();C(this,Un,rc).call(this,t,o)}else s.styleSheet&&C(this,Yn,nc).call(this,t,s.styleSheet)}};Zn=new WeakMap;Rr=new WeakMap;Br=new WeakMap;Ia=new WeakMap;Un=new WeakSet;rc=function(e,t){let s=c(this,Br).get(e);s||(s=document.createElement("style"),c(this,Br).set(e,s)),s.textContent=t,document.head.appendChild(s)};Yn=new WeakSet;nc=function(e,t){c(this,Rr).set(e,t),document.adoptedStyleSheets=[...c(this,Ia),...Array.from(c(this,Rr).values())]};var ep=Q1,qn=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 color-scheme: dark;
@@ -223,7 +223,7 @@ color-scheme: dark;
   --gds-color-l3-states-negative-pressed: #ee8375 20%;
 `,ac=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 color-scheme: light;
@@ -334,7 +334,7 @@ color-scheme: light;
   --gds-color-l3-states-negative-pressed: #a63e2a 20%;
 `,tp=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 :host {
@@ -350,7 +350,7 @@ color-scheme: light;
 }
 `,sp=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 :host {
@@ -509,7 +509,7 @@ color-scheme: light;
 }
 `,op=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 :host {
@@ -521,7 +521,7 @@ color-scheme: light;
 }
 `,rp=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 :host {
@@ -545,7 +545,7 @@ color-scheme: light;
 }
 `,np=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 :host {
@@ -603,7 +603,7 @@ color-scheme: light;
 }
 `,ip=`/**
  * Do not edit directly
- * Generated on Mon, 25 Nov 2024 19:38:15 GMT
+ * Generated on Mon, 25 Nov 2024 19:50:34 GMT
  */
 
 :host {
