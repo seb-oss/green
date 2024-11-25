@@ -13,7 +13,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
       align-items="flex-start"
       flex-direction="xs{column} s{column} m{row}"
     >
-      {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
+      {isNavOpen && <Sidebar />}
       <GdsFlex
         padding="s; s{l} m{0 l}"
         flex-direction="column"

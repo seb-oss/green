@@ -96,7 +96,7 @@ export default function Components({ title, tag }: ComponentsProps) {
                     </GdsFlex>
                   </GdsFlex>
                 )}
-                <GdsDivider padding="s" opacity="0.2"></GdsDivider>
+                <GdsDivider opacity="0.2"></GdsDivider>
                 <GdsFlex
                   z-index="18"
                   background="secondary; hover:primary"
@@ -110,7 +110,7 @@ export default function Components({ title, tag }: ComponentsProps) {
                       min-width="100%"
                     >
                       <GdsText tag="h5">{component.title}</GdsText>
-                      <IconChevronRight width="16"></IconChevronRight>
+                      <IconChevronRight></IconChevronRight>
                     </GdsFlex>
                   </Link>
                 </GdsFlex>

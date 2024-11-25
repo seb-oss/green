@@ -96,7 +96,6 @@ export default function ComponentLayout({
         }),
       {
         ssr: false,
-        loading: () => '',
       },
     )
 

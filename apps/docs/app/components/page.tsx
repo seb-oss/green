@@ -1,8 +1,7 @@
 'use client'
 
+import { GdsFlex } from '$/import/components'
 import ComponentList from 'core/components'
-
-import { GdsFlex, GdsText } from '@sebgroup/green-react/core/*'
 
 export default function Components() {
   return (

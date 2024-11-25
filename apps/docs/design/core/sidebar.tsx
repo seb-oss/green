@@ -15,6 +15,8 @@ import {
 import { Context } from '$/provider/provider'
 import Link from 'core/link'
 
+import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
+
 import './sidebar.css'
 
 const menu = [
@@ -169,7 +171,7 @@ export default function Sidebar() {
           padding="xs"
           overflow="scroll"
           onScroll={(e) => {
-            if (e.target.scrollTop === 0) {
+            if ((e.target as GdsContainerCore).scrollTop === 0) {
               setHasScrolled(false)
             } else {
               if (hasScrolled) return
@@ -200,7 +202,7 @@ export default function Sidebar() {
                       <GdsFlex align-items="center" gap="s">
                         <GdsFlex align-items="center" width="19px">
                           {subLink.private && (
-                            <IconEyeSlash width="12" height="12" />
+                            <IconEyeSlash width={12} height={12} />
                           )}
                         </GdsFlex>
                         {subLink.title}
