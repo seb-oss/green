@@ -2,7 +2,12 @@
 
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { GdsButton, GdsContainer, GdsFlex } from '$/import/components'
+import {
+  GdsButton,
+  GdsContainer,
+  GdsFlex,
+  GdsMenuButton,
+} from '$/import/components'
 import {
   IconBarsThree,
   IconBrandGithub,
@@ -35,7 +40,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
         min-width="100%"
         align-items="center"
         height="60px"
-        border="0 0 4xs/primary 0"
+        padding-inline="s"
       >
         <GdsButton onClick={toggleNav} rank="tertiary">
           {isNavOpen === true ? (
@@ -55,14 +60,19 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <IconBrandSeb />
           </Link>
         </GdsContainer>
-        <GdsFlex height="100%" padding="0; s{0 l}">
+        <GdsFlex
+          height="100%"
+          padding="0; s{0 l}"
+          align-items="center"
+          gap="2xs"
+        >
           <GdsContainer display="none; s{block}">
-            <GdsMenuButton onClick={toggleCmd}>
+            <GdsButton onClick={toggleCmd} rank="tertiary">
               <IconMagnifyingGlass slot="lead" />
               {isWindows ? '/' : '⌘K'}
-            </GdsMenuButton>
+            </GdsButton>
           </GdsContainer>
-          <GdsMenuButton
+          <GdsButton
             href="https://github.com/sebgroup/green"
             target="_blank"
             rank="tertiary"

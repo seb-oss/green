@@ -1,14 +1,12 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-// import Link from 'next/link'
+import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsCard, GdsFlex } from '$/import/components'
+import { GdsBadge, GdsCard, GdsContainer, GdsFlex } from '$/import/components'
 import {
   IconBrandGreen,
-  IconCainLink,
   IconEyeSlash,
   IconSquareGridCircle,
   IconSquareInfo,
@@ -39,12 +37,12 @@ const menu = [
     path: '/foundation',
     icon: <IconBrandGreen />,
     subLinks: [
-      {
-        title: 'Accessibility',
-        path: '/foundation/accessibility',
-        badge: undefined,
-        private: false,
-      },
+      // {
+      //   title: 'Accessibility',
+      //   path: '/foundation/accessibility',
+      //   badge: undefined,
+      //   private: false,
+      // },
     ],
   },
   {
@@ -52,24 +50,24 @@ const menu = [
     path: '/ux-writing',
     icon: <IconTextEdit />,
     subLinks: [
-      {
-        title: 'General',
-        path: '/ux-writing/general',
-        badge: undefined,
-        private: false,
-      },
-      {
-        title: 'English',
-        path: '/ux-writing/english',
-        badge: undefined,
-        private: false,
-      },
-      {
-        title: 'Swedish',
-        path: '/ux-writing/swedish',
-        badge: undefined,
-        private: false,
-      },
+      // {
+      //   title: 'General',
+      //   path: '/ux-writing/general',
+      //   badge: undefined,
+      //   private: false,
+      // },
+      // {
+      //   title: 'English',
+      //   path: '/ux-writing/english',
+      //   badge: undefined,
+      //   private: false,
+      // },
+      // {
+      //   title: 'Swedish',
+      //   path: '/ux-writing/swedish',
+      //   badge: undefined,
+      //   private: false,
+      // },
     ],
   },
   {
@@ -77,100 +75,119 @@ const menu = [
     path: '/about',
     icon: <IconSquareInfo />,
     subLinks: [
-      {
-        title: 'Changelog',
-        path: '/changelog',
-        badge: undefined,
-        private: false,
-      },
-      {
-        title: 'Status',
-        path: '/status',
-        badge: undefined,
-        private: false,
-      },
+      // {
+      //   title: 'Changelog',
+      //   path: '/changelog',
+      //   badge: undefined,
+      //   private: false,
+      // },
+      // {
+      //   title: 'Status',
+      //   path: '/status',
+      //   badge: undefined,
+      //   private: false,
+      // },
     ],
   },
 ]
 
-export default function Sidebar({
-  isNavOpen,
-}: {
-  isNavOpen?: boolean
-  toggleNav?: () => void
-}) {
+export default function Sidebar() {
   const path = usePathname()
 
-  // const [visibleSublinks, setVisibleSublinks] = useState<{
-  //   [key: string]: boolean
-  // }>({})
+  const [hasScrolled, setHasScrolled] = useState(false)
 
-  // useEffect(() => {
-  //   const initialVisibleSublinks: { [key: string]: boolean } = {}
-  //   menu.forEach((menuItem) => {
-  //     if (
-  //       path === menuItem.path ||
-  //       menuItem.subLinks.some((subLink) => path.includes(subLink.path))
-  //     ) {
-  //       initialVisibleSublinks[menuItem.title] = true
-  //     }
-  //   })
-  //   setVisibleSublinks(initialVisibleSublinks)
-  // }, [path])
+  const activeMenuItem = menu.find((item) => {
+    const urlArr = path.split('/')
+    const about = ['foundation', 'change']
+
+    if (urlArr.includes('component') || urlArr.includes('components')) {
+      if (item.path.includes('component')) {
+        return true
+      }
+    }
+
+    console.log(urlArr)
+    console.log(item.path.split('/'))
+
+    return path === item.path
+  })
 
   return (
-    <GdsFlex
-      padding="xl xl xl 2xl"
-      border="0 4xs/primary 0 0"
-      min-width="300px"
+    <GdsCard
       height="calc(100vh - 72px)"
       align-items="flex-start"
       flex-direction="column"
-      padding="s"
-      position="sticky"
-      top="60px"
-      gap="s"
+      margin="0 s; m{0 0 0 s}"
+      z-index="99999"
+      padding="none"
+      position="fixed; m{sticky}"
       inset="60px 0 0 0"
       max-height="calc(100vh - 60px)"
+      overflow="hidden"
+      min-width="270px"
     >
-      <GdsCard padding="xs" min-width="300px">
-        <GdsFlex
-          align-items="flex-start"
-          flex-direction="column"
-          gap="xs"
-          overflow="hidden auto"
+      <GdsFlex flex-direction="column" max-height="100%">
+        <GdsContainer
+          padding="xs"
+          min-width="250px"
+          border="0 0 4xs 0"
+          border-color="primary"
+          style={{
+            boxShadow: hasScrolled
+              ? '0px 0px 8px 4px #00000015, 0px 3px 2px 0px #00000005'
+              : 'none',
+            transition: 'box-shadow .25s ease-out',
+          }}
         >
-          {menu.map((menuItem, idx) => (
-            <GdsFlex key={idx} flex-direction="column" min-width="100%">
-              <Link
-                href={menuItem.path}
-                className={`sidebar-link ${menuItem.path === path ? 'active' : ''}`}
-              >
-                <GdsFlex align-content="center" gap="s">
-                  {menuItem.icon && menuItem.icon}
-                  {menuItem.title}
-                </GdsFlex>
-              </Link>
-            </GdsFlex>
-          ))}
-        </GdsFlex>
-      </GdsCard>
+          <GdsFlex
+            align-items="flex-start"
+            flex-direction="column"
+            gap="xs"
+            overflow="hidden auto"
+          >
+            {menu.map((menuItem, idx) => (
+              <GdsFlex key={idx} flex-direction="column" min-width="100%">
+                <Link
+                  href={menuItem.path}
+                  className={`sidebar-link ${menuItem.path === path ? 'active' : ''}`}
+                  variant="hidden"
+                >
+                  <GdsFlex align-content="center" gap="s" padding="xs s">
+                    {menuItem.icon && menuItem.icon}
+                    {menuItem.title}
+                  </GdsFlex>
+                </Link>
+              </GdsFlex>
+            ))}
+          </GdsFlex>
+        </GdsContainer>
 
-      {menu.filter((item) => item.path === path)[0] && (
-        <GdsCard padding="xs" min-width="300px" overflow="scroll">
-          <GdsFlex flex-direction="column">
-            {menu
-              .filter((item) => item.path === path)[0]
-              .subLinks.map((subLink, subIdx) => {
+        <GdsContainer
+          padding="xs"
+          overflow="scroll"
+          onScroll={(e) => {
+            if (e.target.scrollTop === 0) {
+              setHasScrolled(false)
+            } else {
+              if (hasScrolled) return
+              setHasScrolled(true)
+            }
+          }}
+        >
+          <GdsFlex flex-direction="column" gap="4xs">
+            {activeMenuItem &&
+              activeMenuItem.subLinks.map((subLink, subIdx) => {
                 return (
                   <Link
                     href={subLink.path}
-                    className="sidebar-link sidebar-link--sub"
+                    className={`sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
                     key={subIdx}
+                    variant="hidden"
                   >
                     <GdsFlex
                       key={subIdx}
                       justify-content="space-between"
+                      padding="xs s"
                       gap="xs"
                     >
                       <GdsFlex align-items="center" gap="xs">
@@ -194,27 +211,28 @@ export default function Sidebar({
                 )
               })}
           </GdsFlex>
-        </GdsCard>
-      )}
+        </GdsContainer>
 
-      <GdsCard padding="xs" min-width="300px">
-        <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
-          <Link
-            href="https://designlibrary.sebgroup.com/"
-            target="_blank"
-            className="sidebar-link"
-          >
-            <GdsFlex
-              align-items="center"
-              justify-content="space-between"
-              width="100%"
+        {/* <GdsContainer padding="xs" min-width="250px">
+          <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
+            <Link
+              href="https://designlibrary.sebgroup.com/"
+              target="_blank"
+              className="sidebar-link"
+              variant="hidden"
             >
-              <span>Design Library</span>
-              <IconCainLink />
-            </GdsFlex>
-          </Link>
-        </GdsFlex>
-      </GdsCard>
-    </GdsFlex>
+              <GdsFlex
+                align-items="center"
+                justify-content="space-between"
+                width="100%"
+              >
+                <span>Design Library</span>
+                <IconCainLink />
+              </GdsFlex>
+            </Link>
+          </GdsFlex>
+        </GdsContainer> */}
+      </GdsFlex>
+    </GdsCard>
   )
 }

@@ -1,7 +1,6 @@
 .sidebar-link {
   font-weight: 450;
   border-radius: 0.5rem;
-  padding: var(--gds-space-xs) var(--gds-space-s);
 }
 
 .sidebar-link--sub {
@@ -9,11 +8,19 @@
 }
 
 .sidebar-link:hover {
-  background-color: var(--gds-color-l3-states-light-hover);
+  background-color: color-mix(
+    in srgb,
+    var(--gds-color-l2-background-secondary),
+    var(--gds-color-l3-states-light-hover)
+  );
 }
 
 .sidebar-link:active {
-  background-color: var(--gds-color-l3-states-light-pressed);
+  background-color: color-mix(
+    in srgb,
+    var(--gds-color-l2-background-secondary),
+    var(--gds-color-l3-states-light-pressed)
+  );
 }
 
 .sidebar-link.active {

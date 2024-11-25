@@ -11,11 +11,11 @@ export default function Main({ children }: { children: React.ReactNode }) {
   return (
     <GdsFlex
       align-items="flex-start"
-      flex-direction="xs{column} s{column} l{row}"
+      flex-direction="xs{column} s{column} m{row}"
     >
       {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
       <GdsFlex
-        padding="l; s{4xl}"
+        padding="l; s{0 s 0 l}"
         flex-direction="column"
         width="100%; s{2} m{3} l{1440px}"
         margin="0 auto"

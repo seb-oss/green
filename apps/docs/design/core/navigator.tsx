@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { GdsButton, GdsFlex, GdsText } from '$/import/components'
+import { GdsButton, GdsCard, GdsFlex, GdsText } from '$/import/components'
 import { IconChevronBottom, IconChevronTop } from '$/import/icons'
 
 interface Heading {
@@ -86,123 +86,122 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
     <GdsFlex
       flex-direction="column"
       position="sticky"
-      inset="120px 0 0 0"
+      inset="60px 0 0 0"
       overflow="hidden auto"
       max-height="calc(100vh - 72px)"
-      width="200px"
+      width="100%"
     >
-      <GdsText tag="span">On this page</GdsText>
-      <GdsFlex flex-direction="column" gap="m">
-        <Link
-          key={`#top`}
-          href={`#top`}
-          data-id={'top'}
-          data-level={'1'}
-          onClick={() => handleClick('top')}
-          passHref
-        >
-          <GdsText font-size="body-s" color="secondary">
-            {component}
-          </GdsText>
-        </Link>
-        {groupedHeadings.map((item, index) =>
-          Array.isArray(item) ? (
-            <GdsFlex
-              flex-direction="column"
-              key={index}
-              open={
-                item.some((heading) => heading.slug === activeId) ||
-                openSections[item[0].slug]
-              }
-            >
-              <GdsFlex justify-content="space-between" align-items="center">
+      <GdsCard padding="m">
+        <GdsText tag="span" font-size="heading-xs" margin="0 0 s">
+          On this page
+        </GdsText>
+        <GdsFlex flex-direction="column" gap="xs">
+          <Link
+            key={`#top`}
+            href={`#top`}
+            data-id={'top'}
+            data-level={'1'}
+            onClick={() => handleClick('top')}
+            passHref
+          >
+            <GdsText font-size="body-s">{component}</GdsText>
+          </Link>
+          {groupedHeadings.map((item, index) =>
+            Array.isArray(item) ? (
+              <GdsFlex
+                flex-direction="column"
+                key={index}
+                // open={
+                //   item.some((heading) => heading.slug === activeId) ||
+                //   openSections[item[0].slug]
+                // }
+              >
+                <GdsFlex justify-content="space-between" align-items="center">
+                  <Link
+                    key={`#${item[0].slug}`}
+                    href={`#${item[0].slug}`}
+                    className={`toc-link ${activeId === item[0].slug ? 'active' : ''}`}
+                    data-id={item[0].slug}
+                    data-level={item[0].level}
+                    onClick={() => handleClick(item[0].slug)}
+                    passHref
+                  >
+                    <GdsText
+                      font-size="body-s"
+                      text-wrap="balance"
+                      text-decoration={
+                        activeId === item[0].slug ? 'underline' : 'none'
+                      }
+                    >
+                      {item[0].text}
+                    </GdsText>
+                  </Link>
+                  <GdsButton
+                    size="small"
+                    rank="tertiary"
+                    onClick={() => toggleSection(item[0].slug)}
+                  >
+                    {openSections[item[0].slug] ? (
+                      <IconChevronTop />
+                    ) : (
+                      <IconChevronBottom />
+                    )}
+                  </GdsButton>
+                </GdsFlex>
+                {openSections[item[0].slug] && (
+                  <GdsFlex flex-direction="column" margin="0 0 0 2xs">
+                    {item.slice(1).map((heading) => (
+                      <Link
+                        key={`#${heading.slug}`}
+                        href={`#${heading.slug}`}
+                        className={`toc-link ${activeId === heading.slug ? 'active' : ''}`}
+                        data-id={heading.slug}
+                        data-level={heading.level}
+                        onClick={() => handleClick(heading.slug)}
+                        passHref
+                      >
+                        <GdsFlex
+                          border={`0 0 0 ${activeId === heading.slug ? '4xs/secondary' : '4xs/primary'}`}
+                          padding="xs m"
+                        >
+                          <GdsText
+                            font-size="body-s"
+                            text-decoration={
+                              activeId === heading.slug ? 'underline' : 'none'
+                            }
+                          >
+                            {heading.text}
+                          </GdsText>
+                        </GdsFlex>
+                      </Link>
+                    ))}
+                  </GdsFlex>
+                )}
+              </GdsFlex>
+            ) : (
+              <GdsFlex key={`#${item.slug}`}>
                 <Link
-                  key={`#${item[0].slug}`}
-                  href={`#${item[0].slug}`}
-                  className={`toc-link ${activeId === item[0].slug ? 'active' : ''}`}
-                  data-id={item[0].slug}
-                  data-level={item[0].level}
-                  onClick={() => handleClick(item[0].slug)}
+                  href={`#${item.slug}`}
+                  className={`toc-link ${activeId === item.slug ? 'active' : ''}`}
+                  data-id={item.slug}
+                  data-level={item.level}
+                  onClick={() => handleClick(item.slug)}
                   passHref
                 >
                   <GdsText
-                    font-size="body-s"
-                    color="secondary"
-                    text-wrap="balance"
                     text-decoration={
-                      activeId === item[0].slug ? 'underline' : 'none'
+                      activeId === item.slug ? 'underline' : 'none'
                     }
+                    font-size="body-s"
                   >
-                    {item[0].text}
+                    {item.text}
                   </GdsText>
                 </Link>
-                <GdsButton
-                  size="small"
-                  rank="tertiary"
-                  onClick={() => toggleSection(item[0].slug)}
-                >
-                  {openSections[item[0].slug] ? (
-                    <IconChevronTop />
-                  ) : (
-                    <IconChevronBottom />
-                  )}
-                </GdsButton>
               </GdsFlex>
-              {openSections[item[0].slug] && (
-                <GdsFlex flex-direction="column" margin="0 0 0 2xs">
-                  {item.slice(1).map((heading) => (
-                    <Link
-                      key={`#${heading.slug}`}
-                      href={`#${heading.slug}`}
-                      className={`toc-link ${activeId === heading.slug ? 'active' : ''}`}
-                      data-id={heading.slug}
-                      data-level={heading.level}
-                      onClick={() => handleClick(heading.slug)}
-                      passHref
-                    >
-                      <GdsFlex
-                        border={`0 0 0 ${activeId === heading.slug ? '4xs/secondary' : '4xs/primary'}`}
-                        padding="xs m"
-                      >
-                        <GdsText
-                          font-size="body-s"
-                          color="secondary"
-                          text-decoration={
-                            activeId === heading.slug ? 'underline' : 'none'
-                          }
-                        >
-                          {heading.text}
-                        </GdsText>
-                      </GdsFlex>
-                    </Link>
-                  ))}
-                </GdsFlex>
-              )}
-            </GdsFlex>
-          ) : (
-            <GdsFlex key={`#${item.slug}`}>
-              <Link
-                href={`#${item.slug}`}
-                className={`toc-link ${activeId === item.slug ? 'active' : ''}`}
-                data-id={item.slug}
-                data-level={item.level}
-                onClick={() => handleClick(item.slug)}
-                passHref
-              >
-                <GdsText
-                  text-decoration={
-                    activeId === item.slug ? 'underline' : 'none'
-                  }
-                  font-size="body-s"
-                  color="secondary"
-                >
-                  {item.text}
-                </GdsText>
-              </Link>
-            </GdsFlex>
-          ),
-        )}
-      </GdsFlex>
+            ),
+          )}
+        </GdsFlex>
+      </GdsCard>
     </GdsFlex>
   )
 }
