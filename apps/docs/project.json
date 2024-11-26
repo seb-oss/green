@@ -7,9 +7,7 @@
   "targets": {
     "build": {
       "executor": "@nx/next:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/docs",
@@ -27,9 +25,7 @@
         },
         "production": {}
       },
-      "dependsOn": [
-        "react:generate-core-wrappers"
-      ]
+      "dependsOn": ["core:build", "react:generate-core-wrappers"]
     },
     "serve": {
       "executor": "@nx/next:server",
@@ -55,9 +51,7 @@
           "dev": false
         }
       },
-      "dependsOn": [
-        "react:generate-core-wrappers"
-      ]
+      "dependsOn": ["core:build", "react:generate-core-wrappers"]
     },
     "export": {
       "executor": "@nx/next:export",
@@ -67,9 +61,7 @@
     },
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "apps/docs/jest.config.ts"
       }

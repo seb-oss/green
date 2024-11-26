@@ -11,13 +11,13 @@ export default function Main({ children }: { children: React.ReactNode }) {
   return (
     <GdsFlex
       align-items="flex-start"
-      flex-direction="xs{column} s{column} l{row}"
+      flex-direction="xs{column} s{column} m{row}"
     >
-      {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
+      {isNavOpen && <Sidebar />}
       <GdsFlex
-        padding="l; s{4xl}"
+        padding="s; s{l} m{0 l}"
         flex-direction="column"
-        width="100%; s{2} m{3} l{1440px}"
+        width="100%; m{960px} l{calc(80ch + var(--gds-space-l) + 240px)}"
         margin="0 auto"
         gap="2xl; s{8xl}"
       >

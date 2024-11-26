@@ -15,7 +15,7 @@ const style = css`
       --_color-border: transparent;
 
       --_font-size: 1rem;
-      --_font-weight: 400;
+      --_font-weight: 450;
       --_line-height: 1.25;
 
       display: inline-block;
