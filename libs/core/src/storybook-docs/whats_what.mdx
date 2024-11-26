@@ -69,6 +69,15 @@ To facilitate the transition from the old design to the new, a mechanism called 
 
 The Chlorophyll CSS library only contains the old 2016 design, and since the goal is to have all component styles and implementations in the Core library, the styles in here will be gradually phased out. This is why the Chlorophyll box is greyed out in the diagram above.
 
+### Web Components
+
+All the components in Green Core is implemented as [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components) using the [Lit](https://lit.dev/) library. This means that they are framework agnostic and can be used with any framework, or even without a framework. The components makes use of [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) to encapsulate their styles and behavior, so they won't interfere with the rest of your application.
+
+The reason the components use Shadow DOM is twofold:
+
+- Provide style encapsulation to protect against conflicts which often occurs in a micro-frontend environment
+- Put constraints on the design itself. When a feature is missing, it is important that it is implemented in the Design System and designed according to brand guidelines following all the principles that are in place. If every team/developer were to add their own tweaks, consistency goes out the window. So while this restriction can be seen as a limitation and be inconvientent at times, it serves an important purpose in the larger context of the Design System.
+
 ### Fonts
 
 The fonts are not imported automatically in the Core library, so you need to add this yourself. There are plenty of strategies for how static files like fonts are handled and hosted, and often they are already loaded and avaible in the shells, so we want to leave this part up to you.
