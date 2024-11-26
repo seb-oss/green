@@ -24,21 +24,26 @@ export class TPAccountsModalCard extends LitElement {
 
         .account {
           scroll-snap-align: center;
-          min-width: 246px;
-          animation-name: tp-card, tp-card;
-          animation-fill-mode: both;
-          animation-timing-function: ease-in-out;
-          animation-direction: normal, reverse;
-          animation-timeline: view(x);
-          animation-range:
-            entry 0% entry 60vw,
-            exit -40vw exit 40vw;
+          width: 246px;
           transition: all 248ms;
           scale: 1;
           opacity: 1;
 
           svg {
-            width: 100%;
+            width: 80%;
+            height: auto;
+          }
+
+          @supports (animation-timeline: view(x)) and
+            (animation-range: entry 0% entry 60vw) {
+            animation-name: tp-card, tp-card;
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
+            animation-direction: normal, reverse;
+            animation-timeline: view(x);
+            animation-range:
+              entry 0% entry 60vw,
+              exit -20vw exit 40vw;
           }
         }
 

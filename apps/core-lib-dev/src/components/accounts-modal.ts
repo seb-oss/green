@@ -79,9 +79,10 @@ export class TPAccountsModal extends LitElement {
               <tp-accounts-card @click=${this.handleCardClick} name="positive">
                 <gds-card
                   display="flex"
-                  width="48px"
-                  height="48px"
-                  variant="positive"
+                  width="43px"
+                  height="43px"
+                  background="#bad8bd"
+                  border="none"
                   level="3"
                   align-tiems="center"
                   padding="xs"
@@ -111,23 +112,29 @@ export class TPAccountsModal extends LitElement {
                 </gds-card>
                 <gds-flex
                   flex-direction="column"
-                  gap="4xs"
+                  gap="2xs"
                   align-items="center"
                 >
-                  <gds-text
-                    font-size="detail-s"
-                    font-weight="book"
-                    color="secondary"
+                  <gds-flex
+                    flex-direction="column"
+                    gap="3xs"
+                    align-items="center"
                   >
-                    Livsmedel
-                  </gds-text>
-                  <gds-text
-                    font-size="detail-m"
-                    font-weight="book"
-                    color="primary"
-                  >
-                    Systembolaget
-                  </gds-text>
+                    <gds-text
+                      font-size="detail-s"
+                      font-weight="book"
+                      color="secondary"
+                    >
+                      Livsmedel
+                    </gds-text>
+                    <gds-text
+                      font-size="detail-m"
+                      font-weight="book"
+                      color="primary"
+                    >
+                      Systembolaget
+                    </gds-text>
+                  </gds-flex>
                   <gds-text
                     font-size="detail-m"
                     font-weight="book"
@@ -137,14 +144,123 @@ export class TPAccountsModal extends LitElement {
                   </gds-text>
                 </gds-flex>
               </tp-accounts-card>
-              <tp-accounts-card @click=${this.handleCardClick} name="notice">
-                THIS
+              <tp-accounts-card @click=${this.handleCardClick} name="negative">
+                <gds-card
+                  width="43px"
+                  height="43px"
+                  background="#f1dfdc"
+                  border="none"
+                  level="3"
+                  padding="xs"
+                  box-sizing="border-box"
+                >
+                  <gds-flex
+                    align-items="center"
+                    justify-content="center"
+                    height="100%"
+                  >
+                    <svg fill="none" width="28" height="18" viewBox="0 0 48 25">
+                      <path
+                        fill="#E3000B"
+                        fill-rule="evenodd"
+                        d="M34.4756.986356 47.8582 24.4723h-6.7799l-1.4712-2.5524h-6.7445l2.3575-4.1389h2.0295l-2.7828-4.9099-2.9158 5.0961c-.4582.7976-.9218 1.4977-1.3737 2.1004-2.2246 2.9335-5.8317 4.8124-9.8376 4.8124-6.7178 0-12.23039-5.3176-12.23039-11.8759 0-6.55836 5.46819-11.87594 12.23039-11.87594 2.2955 0 4.3604.6062 6.1596 1.62186l-2.8804 5.06942c-.9944-.58372-2.1261-.89265-3.2792-.89512-3.4387 0-6.2215 2.71196-6.2215 6.05318 0 3.3501 2.7828 6.0532 6.2215 6.0532 1.87 0 3.4033-.7649 4.52-1.8789.4918-.4777 1.0458-1.2762 1.2142-1.5598L34.4579.880005l.0177.106351ZM0 24.4723V1.60674h5.96455V24.4723H0Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </gds-flex>
+                </gds-card>
+                <gds-flex
+                  flex-direction="column"
+                  gap="2xs"
+                  align-items="center"
+                >
+                  <gds-flex
+                    flex-direction="column"
+                    gap="3xs"
+                    align-items="center"
+                  >
+                    <gds-text
+                      font-size="detail-s"
+                      font-weight="book"
+                      color="secondary"
+                    >
+                      Livsmedel
+                    </gds-text>
+                    <gds-text
+                      font-size="detail-m"
+                      font-weight="book"
+                      color="primary"
+                    >
+                      ICA Sabbatsberg
+                    </gds-text>
+                  </gds-flex>
+                  <gds-text
+                    font-size="detail-m"
+                    font-weight="book"
+                    color="primary"
+                  >
+                    –942,85
+                  </gds-text>
+                </gds-flex>
               </tp-accounts-card>
-              <tp-accounts-card @click=${this.handleCardClick} name="green-01">
-                THAT
-              </tp-accounts-card>
-              <tp-accounts-card @click=${this.handleCardClick} name="copper-01">
-                Coppa
+              <tp-accounts-card @click=${this.handleCardClick} name="primary">
+                <gds-card
+                  width="43px"
+                  height="43px"
+                  background="#ffffff"
+                  border="none"
+                  level="3"
+                  padding="xs"
+                  box-sizing="border-box"
+                >
+                  <gds-flex
+                    align-items="center"
+                    justify-content="center"
+                    height="100%"
+                  >
+                    <svg fill="none" width="28" height="18" viewBox="0 0 48 25">
+                      <path
+                        fill="#E3000B"
+                        fill-rule="evenodd"
+                        d="M34.4756.986356 47.8582 24.4723h-6.7799l-1.4712-2.5524h-6.7445l2.3575-4.1389h2.0295l-2.7828-4.9099-2.9158 5.0961c-.4582.7976-.9218 1.4977-1.3737 2.1004-2.2246 2.9335-5.8317 4.8124-9.8376 4.8124-6.7178 0-12.23039-5.3176-12.23039-11.8759 0-6.55836 5.46819-11.87594 12.23039-11.87594 2.2955 0 4.3604.6062 6.1596 1.62186l-2.8804 5.06942c-.9944-.58372-2.1261-.89265-3.2792-.89512-3.4387 0-6.2215 2.71196-6.2215 6.05318 0 3.3501 2.7828 6.0532 6.2215 6.0532 1.87 0 3.4033-.7649 4.52-1.8789.4918-.4777 1.0458-1.2762 1.2142-1.5598L34.4579.880005l.0177.106351ZM0 24.4723V1.60674h5.96455V24.4723H0Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </gds-flex>
+                </gds-card>
+                <gds-flex
+                  flex-direction="column"
+                  gap="2xs"
+                  align-items="center"
+                >
+                  <gds-flex
+                    flex-direction="column"
+                    gap="3xs"
+                    align-items="center"
+                  >
+                    <gds-text
+                      font-size="detail-s"
+                      font-weight="book"
+                      color="secondary"
+                    >
+                      Shopping
+                    </gds-text>
+                    <gds-text
+                      font-size="detail-m"
+                      font-weight="book"
+                      color="primary"
+                    >
+                      Acne Studios
+                    </gds-text>
+                  </gds-flex>
+                  <gds-text
+                    font-size="detail-m"
+                    font-weight="book"
+                    color="primary"
+                  >
+                    –345,50
+                  </gds-text>
+                </gds-flex>
               </tp-accounts-card>
               <gds-container width="100px"></gds-container>
             </gds-flex>
