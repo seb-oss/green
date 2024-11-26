@@ -92,7 +92,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
       max-height="calc(100vh - 72px)"
       width="100%"
     >
-      <GdsCard padding="m">
+      <GdsCard padding="m" max-height="max-content">
         <GdsText tag="span" font-size="heading-xs" margin="0 0 s">
           On this page
         </GdsText>
