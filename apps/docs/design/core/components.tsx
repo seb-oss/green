@@ -33,8 +33,8 @@ export default function Components({ title, tag }: ComponentsProps) {
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }
-      if (component.private && !isDev) {
-        return true
+      if (!isDev && component.private) {
+        return false
       }
       return true
     })
