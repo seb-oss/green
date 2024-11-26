@@ -1,0 +1,76 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+import { SBMermaid } from '../../.storybook/blocks/Mermaid'
+
+<Meta title="What's what?" />
+
+# What's what?
+
+Green Design System is a collection of components, styles, documentation and guidelines that help you build web applications that are consistent with the SEB brand.
+
+It contains a lot of stuff, some of it legacy, and it can be quite daunting to understand how everything fits together at first. This page will give you a high-level overview of the different parts of the design system, and how they relate to each other.
+
+The system is made available, roughly speaking, through these different resources:
+
+- **[seb.io](https://seb.io/):** The main documentation website for the design system. Here you can find the things like design guidelines, accessibility guidelines, and other higher-level resources.
+- **NPM packages:** The actual code that you import to build web experiences.
+- **Storybooks:** Lower-level code documentation and examples. Here you can find API-docs and example component usage, as well as architectural documentation and coding guidelines.
+- **[GitHub monorepo](https://github.com/seb-oss/green):** This is where the source code for all of the above is stored. The repo is public and open source, so anyone can browse the code  to better understand it and even contribute.
+
+## NPM packages and Storybooks
+
+Green has currently has components libraries for React and Angular, underpinned by a library of framework agnostic Web Components called Green Core, as well as a design token package, a fonts package and a CSS package.
+
+Here's an overvw over all the packages:
+
+- **@sebgroup/green-core:** The core library of Web Components (this Storybook)
+- **@sebgroup/green-react:** The React library ([React Storybook](https://storybook.seb.io/latest/react))
+- **@sebgroup/green-angular:** The Angular library ([Angular Storybook](https://storybook.seb.io/latest/angular))
+- **@sebgroup/green-tokens:** Design tokens
+- **@sebgroup/fonts:** Includes the SEB SansSerif font
+- **@sebgroup/chlorophyll:** Green (legacy) CSS library ([Chlorophyll Storybook](https://storybook.seb.io/latest/chlorophyll))
+- **@sebgroup/extract:** A deprecated library with some shared functions and utilities for React and Angular
+
+Here is a rough diagram of how all of this fits together:
+
+<SBMermaid
+  chart={`flowchart TD
+    style CP opacity:0.5,color:#888
+    style E opacity:0.5,color:#888
+    style APP fill:#fff,stroke:#666
+    CP[<b>Chlorophyll</b><br><i><small>@sebgroup/chlorophyll</small></i>]-.->A
+    E[<b>Extract</b><br><i><small>@sebgroup/extract</small></i>]-.->A
+    E-.->R
+    CP-.->R
+    F[<b>Fonts</b><br><i><small>@sebgroup/fonts</small></i>]---->APP
+    WC[<b>Green Core</b><br><i><small>@sebgroup/green-core</small></i>]-->APP
+    DT[<b>Design Tokens</b><br><i><small>@sebgroup/green-tokens</small></i>]-->WC
+    DT-.->CP
+    WC-->A[<b>Angular</b><br><i><small>@sebgroup/green-angular</small></i>]-->APP
+    WC-->R[<b>React</b><br><i><small>@sebgroup/green-react</small></i>]-->APP
+    APP(<b>Your app</b><br><i><small>Using Angular, React, Other or no framework</small></i>)
+`}
+></SBMermaid>
+
+### Legacy
+
+The Angular and React libraries are older than the Core library, and a gradual process of migration is in progress. This means that some components are still only available in the Angular and/or React libraries. The goal is to eventually have all components available in the Core library, and at that point the Angular and React libraries will only contain some framework-specific wrappers and helpers where needed.
+
+Some of the older components in React and Angular have been updated internally to use the Core components, while retaining old API.
+
+### Design update, 2016 -> 2023
+
+At the same time, a move to a never version of the design itself is also in progress. The new design is referred to as '2023', and is being implemented only in the Core package.
+
+### Transitional styles
+
+To facilitate the transition from the old design to the new, a mechanism called 'transitional styles' has been implemented in the Core library. It allows to components to have the new design by default, but the old design can optionally be imported to allow smoother transition for applications. You can read more about this in [Concepts/Transitaional Styles](/docs/concepts-transitional-styles--docs)
+
+### Chlorophyll
+
+The Chlorophyll CSS library only contains the old 2016 design, and since the goal is to have all component styles and implementations in the Core library, the styles in here will be gradually phased out. This is why the Chlorophyll box is greyed out in the diagram above.
+
+### Fonts
+
+The fonts are not imported automatically in the Core library, so you need to add this yourself. There are plenty of strategies for how static files like fonts are handled and hosted, and often they are already loaded and avaible in the shells, so we want to leave this part up to you.
+
+The CSS `font-family` property is inherited though shadow DOM boundaries, so the components will render whichever font is set by their parent.
