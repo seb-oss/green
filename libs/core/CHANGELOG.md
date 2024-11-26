@@ -1,5 +1,35 @@
 # Changelog
 
+## 1.59.0
+
+### Minor Changes
+
+- f2492d2: **GdsTheme:** Include all 2023 CSS variables instead of only colors
+
+### Patch Changes
+
+- f2492d2: **GdsTheme:** Fix issue with changing `color-scheme`
+
+## 1.58.0
+
+### Minor Changes
+
+- 694a88f: **Badge:** Add new boolean prop `rounded` to have fully rounded border radius when used on form elements such as input
+
+### Patch Changes
+
+- ed505c8: **Badge:** Add missing import for dependency `gds-flex`
+
+## 1.57.0
+
+### Minor Changes
+
+- 2b8089c: **Container:** Add `box-sizing` to prevent box model from groing more than max of content
+
+### Patch Changes
+
+- 11acd29: **FAB:** Fix width issue inherited from `gds-button`, now set's the `max-width:max-content`
+
 ## 1.56.0
 
 ### Minor Changes

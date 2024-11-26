@@ -537,6 +537,17 @@ export class GdsContainer extends GdsElement {
   'inline-size'?: string
 
   /**
+   * Controls the `box-sizing` property.
+   * Supports only token
+   *
+   * @property box-sizing
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'box-sizing'?: string
+
+  /**
    * Controls the cursor property.
    * Supports all valid CSS cursor values.
    */
