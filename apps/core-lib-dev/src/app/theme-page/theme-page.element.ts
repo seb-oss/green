@@ -70,9 +70,6 @@ export class ThemePage extends LitElement {
 
         <gds-flex flex-direction="column" gap="xl" padding="xs">
           <tp-accounts-modal></tp-accounts-modal>
-          <!-- <tp-transactions></tp-transactions> -->
-          <!-- <tp-accounts></tp-accounts> -->
-          <!-- <gds-carousel-trans></gds-carousel-trans> -->
         </gds-flex>
 
       <gds-container padding="0 2xs; m{0 s}">

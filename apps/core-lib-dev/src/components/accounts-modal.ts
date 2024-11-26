@@ -7,6 +7,9 @@ import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/text/index.js'
 import '@sebgroup/green-core/components/icon/icons/cross-small.js'
+import '@sebgroup/green-core/components/icon/icons/knife-spoon.js'
+import '@sebgroup/green-core/components/icon/icons/settings-slider-ver.js'
+import '@sebgroup/green-core/components/icon/icons/arrow-right-up-circle.js'
 import '@sebgroup/green-core/components/button/index.js'
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 import './step-bullet'
@@ -430,12 +433,16 @@ export class TPAccountsModal extends LitElement {
                 width="100%; m{25vw}"
                 background="#fef5f3"
                 level="2"
-                height="90vh; m{100%}"
-                transition="all 0.2s"
+                height="100vh; m{100%}"
+                transition="all 0.2s ease-in-out"
                 class="actionsheet"
               >
                 <gds-flex padding="l" width="100%" justify-content="flex-end">
-                  <gds-button @click=${this.closeModal} rank="tertiary">
+                  <gds-button
+                    @click=${this.closeModal}
+                    rank="tertiary"
+                    variant="negative"
+                  >
                     <gds-icon-cross-small></gds-icon-cross-small>
                   </gds-button>
                 </gds-flex>
@@ -444,12 +451,165 @@ export class TPAccountsModal extends LitElement {
                   justify-content="center"
                   align-items="center"
                   padding="l"
-                  gap="2xl"
+                  gap="m"
                 >
-                  <gds-card variant="negative" max-width="max-content"
-                    >ICA</gds-card
+                  <gds-card
+                    width="43px"
+                    height="43px"
+                    background="#f1dfdc"
+                    border="none"
+                    level="3"
+                    padding="xs"
+                    box-sizing="border-box"
                   >
-                  <gds-card variant="secondary">THIS</gds-card>
+                    <gds-flex
+                      align-items="center"
+                      justify-content="center"
+                      height="100%"
+                    >
+                      <svg
+                        fill="none"
+                        width="28"
+                        height="18"
+                        viewBox="0 0 48 25"
+                      >
+                        <path
+                          fill="#E3000B"
+                          fill-rule="evenodd"
+                          d="M34.4756.986356 47.8582 24.4723h-6.7799l-1.4712-2.5524h-6.7445l2.3575-4.1389h2.0295l-2.7828-4.9099-2.9158 5.0961c-.4582.7976-.9218 1.4977-1.3737 2.1004-2.2246 2.9335-5.8317 4.8124-9.8376 4.8124-6.7178 0-12.23039-5.3176-12.23039-11.8759 0-6.55836 5.46819-11.87594 12.23039-11.87594 2.2955 0 4.3604.6062 6.1596 1.62186l-2.8804 5.06942c-.9944-.58372-2.1261-.89265-3.2792-.89512-3.4387 0-6.2215 2.71196-6.2215 6.05318 0 3.3501 2.7828 6.0532 6.2215 6.0532 1.87 0 3.4033-.7649 4.52-1.8789.4918-.4777 1.0458-1.2762 1.2142-1.5598L34.4579.880005l.0177.106351ZM0 24.4723V1.60674h5.96455V24.4723H0Z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </gds-flex>
+                  </gds-card>
+                  <gds-flex
+                    flex-direction="column"
+                    gap="2xs"
+                    align-items="center"
+                  >
+                    <gds-text
+                      font-size="detail-m"
+                      font-weight="book"
+                      color="primary"
+                    >
+                      ICA Sabbatsberg
+                    </gds-text>
+                    <gds-text
+                      font-size="detail-m"
+                      font-weight="book"
+                      color="primary"
+                    >
+                      –942,85
+                    </gds-text>
+                  </gds-flex>
+                  <gds-card
+                    variant="secondary"
+                    width="100%"
+                    border-radius="s"
+                    color="primary"
+                  >
+                    <gds-flex gap="l" align-items="center" j>
+                      <gds-icon-knife-spoon
+                        width="24"
+                        height="24"
+                      ></gds-icon-knife-spoon>
+                      <gds-flex flex-direction="column" margin="0 auto 0 0">
+                        <gds-text
+                          font-weight="book"
+                          font-size="detail-s"
+                          color="secondary"
+                        >
+                          Kategori
+                        </gds-text>
+                        <gds-text font-weight="book" font-size="detail-m"
+                          >Livsmedel</gds-text
+                        >
+                      </gds-flex>
+                      <gds-icon-settings-slider-ver
+                        width="24"
+                        height="24"
+                      ></gds-icon-settings-slider-ver>
+                    </gds-flex>
+                  </gds-card>
+                  <gds-card
+                    variant="secondary"
+                    width="100%"
+                    border-radius="s"
+                    color="primary"
+                  >
+                    <gds-flex gap="l" align-items="flex-start">
+                      <gds-flex
+                        height="40px"
+                        width="40px"
+                        align-items="center"
+                        justify-content="center"
+                      >
+                        <gds-icon-knife-spoon
+                          width="24"
+                          height="24"
+                        ></gds-icon-knife-spoon>
+                      </gds-flex>
+
+                      <gds-flex
+                        flex-direction="column"
+                        margin="0 auto 0 0"
+                        gap="xs"
+                      >
+                        <gds-flex flex-direction="column">
+                          <gds-text
+                            font-weight="book"
+                            font-size="detail-s"
+                            color="secondary"
+                          >
+                            Totalt livsmedel oktober
+                          </gds-text>
+                          <gds-text font-weight="book" font-size="detail-m">
+                            –13 567,00
+                          </gds-text>
+                        </gds-flex>
+                        <gds-flex gap="xs">
+                          <gds-button size="small" rank="secondary">
+                            Nah, thanks
+                          </gds-button>
+                          <gds-button size="small">Show me more</gds-button>
+                        </gds-flex>
+                      </gds-flex>
+                      <gds-flex
+                        align-items="center"
+                        gap="xs"
+                        height="40px"
+                        width="80px"
+                      >
+                        <gds-icon-arrow-right-up-circle
+                          width="24"
+                          height="24"
+                        ></gds-icon-arrow-right-up-circle>
+                        <gds-flex color="primary"> +5 % </gds-flex>
+                      </gds-flex>
+                    </gds-flex>
+                  </gds-card>
+                  <gds-card variant="secondary" color="primary" width="100%">
+                    <gds-flex flex-direction="column" gap="l" padding="s">
+                      <gds-flex justify-content="space-between">
+                        <gds-text font-size="detail-s">Köpdatum</gds-text>
+                        <gds-text font-size="detail-s" font-weight="book">
+                          10 november 2024
+                        </gds-text>
+                      </gds-flex>
+                      <gds-flex justify-content="space-between">
+                        <gds-text font-size="detail-s">Typ </gds-text>
+                        <gds-text font-size="detail-s" font-weight="book">
+                          korttransaktion
+                        </gds-text>
+                      </gds-flex>
+                      <gds-flex justify-content="space-between">
+                        <gds-text font-size="detail-s">Verifikat</gds-text>
+                        <gds-text font-size="detail-s" font-weight="book">
+                          5267541645
+                        </gds-text>
+                      </gds-flex>
+                    </gds-flex>
+                  </gds-card>
                 </gds-flex>
               </gds-container>
             </gds-flex>
