@@ -39,7 +39,7 @@ import '@sebgroup/green-core/components/button/index.js'
 
 ## Component is not styled correctly
 
-I'm trying to get 2016 design
+### I'm trying to get 2016 design
 
 <details>
 First, check that you have loaded and registered Transistional Styles accoring to the examples in the [Welcome](https://storybook.seb.io/latest/core/?path=/docs/welcome--docs) docs.
@@ -77,25 +77,26 @@ Then use it in your template:
 ```
 </details>
 
-I'm trying to get 2023 design
+### I'm trying to get 2023 design
 
 <details>
-The 2023 design is the default design for Green Core components, so if you are not seeing the correct styling, there might be a few different reasons:
+The 2023 design is the default design for Green Core components, so if you are not seeing the correct styling, here are some things to check.
 
-- Transitional Styles are loaded for the component. This will override the 2023 styles with 2016 styles.
-- The component is an older one that has not been updated to the 2023 design yet.
+If all instances of the component should use 2023 design in your app, then check that Transitional Styles **are not** loaded for the component at all. If they are, they will override the 2023 styles with 2016 styles. In this case, you can simply remove the importing and registering of the transitional styles. This way, the component will simply use it's built-in default 2023 styles.
 
-To solve the first problem, and if all instances of a component should use 2023 design in your app, you can simply omit importing and registering the transitional styles. This way, the component will simply use it's built-in 2023 styles.
-
-If you need granular control over which components should use 2023 design and which should use 2016 design, you can use the `<gds-theme>` component to override the transitional styles for specific components.
+If some instances still need to have 2016 style, the situation is somewhat different. In this case, you need to keep the transitional styles, but you can use the `<gds-theme>` component to override the transitional styles for specific components.
 
 ```html
 <gds-theme design-version="2023">
-  <!-- Green Core components here will use 2023, even if Transitional Styles are loaded -->
+  <!-- Green Core components here will use 2023, even if they have transitional styles loaded -->
 </gds-theme>
 ```
 
-The second issue is a bit more complex, since the component may need to be updated or a new one written. Reach out to the Green Core team for help with this.
+#### It's still not working...
+If it's an older component, it could be that it doesn't have the 2023 design yet.
+In this case, since the component may need to be updated or a new one written, reach out to the Green Core team for help.
+
+Also, all of the information here only applies to components from the `@sebgroup/green-core` package. If you are using components from the Angular or React package that still only use Chlorophyll styling, this does not apply.
 </details>
 
 ## Errors in the console
