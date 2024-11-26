@@ -4,8 +4,11 @@ import React from 'react'
 import { default as NextLink } from 'next/link'
 import { GdsLink, GdsMenuButton } from '$/import/components'
 
+import { GdsLink as GdsLinkCore } from '@sebgroup/green-core/components/link'
+import { GdsMenuButton as GdsMenuButtonCore } from '@sebgroup/green-core/components/menu-button'
+
 interface CustomLinkProps {
-  onClick?: React.MouseEventHandler<HTMLAnchorElement>
+  onClick?: (e: Event) => void
   href: string
   menu?: boolean
   children: React.ReactNode
@@ -13,28 +16,18 @@ interface CustomLinkProps {
 }
 
 const CustomLink: React.ForwardRefRenderFunction<
-  HTMLAnchorElement,
+  GdsLinkCore & GdsMenuButtonCore,
   CustomLinkProps
 > = ({ onClick, href, children, menu, ...rest }, ref) => {
   if (menu) {
     return (
-      <GdsMenuButton
-        href={href}
-        onClick={onClick}
-        ref={ref as React.Ref<HTMLAnchorElement>}
-        {...rest}
-      >
+      <GdsMenuButton href={href} onClick={onClick} ref={ref} {...rest}>
         {children}
       </GdsMenuButton>
     )
   } else {
     return (
-      <GdsLink
-        href={href}
-        onClick={onClick}
-        ref={ref as React.Ref<HTMLAnchorElement>}
-        {...rest}
-      >
+      <GdsLink href={href} onClick={onClick} ref={ref} {...rest}>
         {children}
       </GdsLink>
     )
