@@ -3,6 +3,11 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
+import '../container'
+import '../text'
+import '../link'
+import '../flex'
+import '../card'
 import '../icon/icons/chevron-bottom.ts'
 import '../icon/icons/bubbles.ts'
 import '../signal/index.ts'
@@ -219,16 +224,11 @@ export const Position: Story = {
 }
 
 /**
- * To change the z order fo the FAB you can use the `z-index` property.
- * It takes all the default CSS `z-index` values.
+ * The z order of the FAB is set by default to `1050`.
  *
- * e.g
+ * This is recommended to keep the FAB above other elements.
  *
- * ```html
- * <gds-fab inset="auto 48px 48px auto" z-index="20">
- *    Show above all
- * </gds-fab>
- * ```
+ * If you want to change the z-index, that should be done in the CSS or wrap FAB in a container with a higher z-index value.
  */
 
 export const ZIndex: Story = {
@@ -239,10 +239,73 @@ export const ZIndex: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-flex height="300px">
-      <gds-fab inset="auto 48px 48px auto" z-index="20" rank="secondary">
-        Show aboce other things
-      </gds-fab>
+    <gds-flex
+      height="400px"
+      flex-direction="column"
+      gap="4xl"
+      padding="0"
+      overflow="hidden scroll"
+      border-radius="s"
+    >
+      <gds-fab inset="auto 40px 40px auto"> Show above other things </gds-fab>
+      <gds-container
+        border-radius="s"
+        width="100%"
+        height="max-content"
+        background="notice"
+        padding="4xl"
+      >
+        <gds-flex gap="xl">
+          <gds-flex
+            flex-direction="column"
+            gap="xl"
+            flex="1"
+            align-items="flex-start"
+            padding="m 0 0 0"
+          >
+            <gds-text tag="h1"> Title example </gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-link href="#" variant="secondary">
+              <gds-icon-credit-card></gds-icon-credit-card> Click me!
+            </gds-link>
+          </gds-flex>
+          <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
+        </gds-flex>
+      </gds-container>
+      <gds-container
+        border-radius="s"
+        width="100%"
+        height="max-content"
+        background="notice"
+        padding="4xl"
+      >
+        <gds-flex gap="xl">
+          <gds-flex
+            flex-direction="column"
+            gap="xl"
+            flex="1"
+            align-items="flex-start"
+            padding="m 0 0 0"
+          >
+            <gds-text tag="h1"> Title example </gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-link href="#" variant="secondary">
+              <gds-icon-credit-card></gds-icon-credit-card> Click me!
+            </gds-link>
+          </gds-flex>
+          <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
+        </gds-flex>
+      </gds-container>
     </gds-flex>
   `,
 }

@@ -43,19 +43,8 @@ export class GdsFab extends GdsButton {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
-    selector: '[part="_button"]',
   })
   inset?: string
-
-  /**
-   * The `z-index` of the FAB.
-   *
-   * Accepts any valid CSS z-index values.
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'z-index'?: string
 
   connectedCallback() {
     super.connectedCallback()
