@@ -142,12 +142,7 @@ export default function Sidebar() {
             transition: 'box-shadow .25s ease-out',
           }}
         >
-          <GdsFlex
-            align-items="flex-start"
-            flex-direction="column"
-            gap="4xs"
-            overflow="hidden auto"
-          >
+          <GdsFlex align-items="flex-start" flex-direction="column" gap="4xs">
             {menu.map((menuItem, idx) => (
               <GdsFlex key={idx} flex-direction="column" min-width="100%">
                 <Link
