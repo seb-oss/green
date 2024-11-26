@@ -98,7 +98,7 @@ export default function Components({ title, tag }: ComponentsProps) {
                 )}
                 <GdsDivider opacity="0.2"></GdsDivider>
                 <GdsFlex
-                  z-index="18"
+                  z-index="2"
                   background="secondary; hover:primary"
                   min-width="100%"
                 >

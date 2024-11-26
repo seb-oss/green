@@ -121,7 +121,7 @@ export default function Sidebar() {
       align-items="flex-start"
       flex-direction="column"
       margin="0 s; m{0 0 0 s}"
-      z-index="99999"
+      z-index="99"
       padding="none"
       position="fixed; m{sticky}"
       inset="60px 0 0 0"

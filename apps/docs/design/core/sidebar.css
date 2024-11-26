@@ -3,9 +3,6 @@
   border-radius: 0.5rem;
 }
 
-.sidebar-link--sub {
-}
-
 .sidebar-link:hover {
   background-color: color-mix(
     in srgb,
