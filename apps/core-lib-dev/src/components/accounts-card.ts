@@ -24,15 +24,18 @@ export class TPAccountsModalCard extends LitElement {
 
         .account {
           scroll-snap-align: center;
-          min-width: calc(100vw - 100px);
+          min-width: 246px;
           animation-name: tp-card, tp-card;
           animation-fill-mode: both;
           animation-timing-function: ease-in-out;
           animation-direction: normal, reverse;
           animation-timeline: view(x);
           animation-range:
-            entry 100px entry -100px,
-            exit -100px exit 100px;
+            entry 0% entry 60vw,
+            exit -40vw exit 40vw;
+          transition: all 248ms;
+          scale: 1;
+          opacity: 1;
 
           svg {
             width: 100%;
