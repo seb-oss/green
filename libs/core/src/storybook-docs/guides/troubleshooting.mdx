@@ -39,6 +39,9 @@ import '@sebgroup/green-core/components/button/index.js'
 
 ## Component is not styled correctly
 
+I'm trying to get 2016 design
+
+<details>
 First, check that you have loaded and registered Transistional Styles accoring to the examples in the [Welcome](https://storybook.seb.io/latest/core/?path=/docs/welcome--docs) docs.
 
 If you are still having issues, continue reading.
@@ -51,7 +54,7 @@ When you already have the Chlorophyll CSS loaded on the page, this is usually no
 There are two ways to solve it:
 
 - Make sure that the Chlorophyll CSS is loaded on the page. This can be done by importing SCSS or precompiled CSS from the `@sebgroup/chlorophyll` package.
-- Use the (currently experimental) `<gds-theme>` component. This component will automatically load the Chlorophyll CSS variables, and make sure that they are in scope.
+- Use the `<gds-theme>` component. This component will automatically load the Chlorophyll CSS variables, and make sure that they are in scope.
 
   You can use the `<gds-theme>` component like this:
 
@@ -72,6 +75,28 @@ Then use it in your template:
   <!-- Green Core components here -->
 </gds-theme>
 ```
+</details>
+
+I'm trying to get 2023 design
+
+<details>
+The 2023 design is the default design for Green Core components, so if you are not seeing the correct styling, there might be a few different reasons:
+
+- Transitional Styles are loaded for the component. This will override the 2023 styles with 2016 styles.
+- The component is an older one that has not been updated to the 2023 design yet.
+
+To solve the first problem, and if all instances of a component should use 2023 design in your app, you can simply omit importing and registering the transitional styles. This way, the component will simply use it's built-in 2023 styles.
+
+If you need granular control over which components should use 2023 design and which should use 2016 design, you can use the `<gds-theme>` component to override the transitional styles for specific components.
+
+```html
+<gds-theme design-version="2023">
+  <!-- Green Core components here will use 2023, even if Transitional Styles are loaded -->
+</gds-theme>
+```
+
+The second issue is a bit more complex, since the component may need to be updated or a new one written. Reach out to the Green Core team for help with this.
+</details>
 
 ## Errors in the console
 
