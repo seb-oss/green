@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.59.0
+
+### Minor Changes
+
+- f2492d2: **GdsTheme:** Include all 2023 CSS variables instead of only colors
+
+### Patch Changes
+
+- f2492d2: **GdsTheme:** Fix issue with changing `color-scheme`
+
 ## 1.58.0
 
 ### Minor Changes
