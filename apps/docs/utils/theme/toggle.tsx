@@ -38,6 +38,7 @@ export function ThemeToggle() {
       }}
       aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
       rank="tertiary"
+      size="small"
     >
       {theme === 'dark' ? <Light /> : <Dark />}
     </GdsButton>

@@ -79,6 +79,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
             href="https://github.com/sebgroup/green"
             target="_blank"
             rank="tertiary"
+            size="small"
           >
             <IconBrandGithub />
           </GdsButton>

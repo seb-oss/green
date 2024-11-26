@@ -137,17 +137,23 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                       {item[0].text}
                     </GdsText>
                   </Link>
-                  <GdsButton
-                    size="small"
-                    rank="tertiary"
-                    onClick={() => toggleSection(item[0].slug)}
-                  >
-                    {openSections[item[0].slug] ? (
+                  {openSections[item[0].slug] ? (
+                    <GdsButton
+                      size="small"
+                      rank="tertiary"
+                      onClick={() => toggleSection(item[0].slug)}
+                    >
                       <IconChevronTop />
-                    ) : (
+                    </GdsButton>
+                  ) : (
+                    <GdsButton
+                      size="small"
+                      rank="tertiary"
+                      onClick={() => toggleSection(item[0].slug)}
+                    >
                       <IconChevronBottom />
-                    )}
-                  </GdsButton>
+                    </GdsButton>
+                  )}
                 </GdsFlex>
                 {openSections[item[0].slug] && (
                   <GdsFlex flex-direction="column" margin="0 0 0 2xs">
