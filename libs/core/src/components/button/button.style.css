@@ -10,7 +10,7 @@
 
 @layer core {
   :host {
-    display: inline-block;
+    display: inline-flex;
     max-width: 100%;
   }
 
@@ -42,6 +42,7 @@
     transition-property: color, border-colorm, background;
     transition-duration: 0.4s;
     max-width: 100%;
+    flex: 1;
 
     &:focus {
       outline-color: color-mix(in srgb, currentcolor, #000 100%);
