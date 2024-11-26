@@ -42,14 +42,17 @@ export const Header = forwardRef(({ ...props }, ref) => {
         height="60px"
         padding-inline="s"
       >
-        <GdsButton onClick={toggleNav} rank="tertiary" size="small">
-          {isNavOpen === true ? (
+        {isNavOpen === true ? (
+          <GdsButton onClick={toggleNav} rank="tertiary" size="small">
             <IconCrossLarge slot="lead" />
-          ) : (
+            Menu
+          </GdsButton>
+        ) : (
+          <GdsButton onClick={toggleNav} rank="tertiary" size="small">
             <IconBarsThree slot="lead" />
-          )}
-          Menu
-        </GdsButton>
+            Menu
+          </GdsButton>
+        )}
         <GdsContainer
           position="absolute"
           margin="0 auto"

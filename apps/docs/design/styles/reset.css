@@ -88,4 +88,10 @@
       }
     }
   }
+
+  /* TO FIX */
+  ::part(_button) {
+    background-color: red;
+    min-width: 32px;
+  }
 }
