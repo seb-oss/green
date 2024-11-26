@@ -16,26 +16,27 @@
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
   <div class="sdv-field-radio-wrap">
-    <!-- RADIO BUTTON FIELD -->
-    <label [attr.for]="id + '-radio'" class="form-control">
-      <input
-        #input
-        type="radio"
-        [attr.id]="id + '-radio'"
-        [attr.name]="name"
-        [attr.value]="value"
-        [attr.required]="required"
-        [disabled]="disabled"
-        [autofocus]="autofocus"
-        [attr.aria-label]="description"
-        [checked]="state"
-        (click)="$event.stopPropagation()"
-        (change)="onInputChange($event)"
-        (focus)="onFocus($event)"
-        (blur)="onBlur($event)"
-      />
 
-      <!-- LABEL -->
+    <!-- RADIO BUTTON FIELD -->
+    <input
+      #input
+      type="radio"
+      [attr.id]="id + '-radio'"
+      [attr.name]="name"
+      [attr.value]="value"
+      [attr.required]="required"
+      [disabled]="disabled"
+      [autofocus]="autofocus"
+      [attr.aria-label]="description"
+      [checked]="state"
+      (click)="$event.stopPropagation()"
+      (change)="onInputChange($event)"
+      (focus)="onFocus($event)"
+      (blur)="onBlur($event)"
+    />
+
+    <!-- LABEL -->
+    <label [attr.for]="id + '-radio'">
       {{ label }}
       <ng-template
         *ngTemplateOutlet="
@@ -43,23 +44,45 @@
           context: { $implicit: value }
         "
       ></ng-template>
-      <i></i>
     </label>
   </div>
 
   <!-- ERRORS -->
-  <ng-container *transloco="let t; read: scope">
-    <label
-      class="sdv-field-notice sdv-field-notice--error"
+  <ng-container
+    *ngIf="invalid && (error || ngControl?.invalid) && (!errorList || !errorList.length)"
+  >
+    <label class="sdv-field-notice sdv-field-notice--error"
       [attr.for]="id + '-radio'"
-      *ngIf="invalid && (error || ngControl?.invalid)"
-    >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
-      <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
-          {{ t('error.field' + error?.code, error?.params) }}
+      *transloco="let t; read: scope">
+      <span class="error-item">
+        <span class="error-item--icon"
+          *ngIf="withErrorIcon"><fa-icon [icon]="warningIcon"></fa-icon>
         </span>
-      </ng-template>
+        <span *ngIf="error; else errorsRef"
+          class="error-item--text"
+          [attr.data-thook]="thook + '-errorlabel'">{{error}}</span>
+        <ng-template #errorsRef>
+          <span *ngIf="firstError as error"
+            class="error-item--text"
+            [attr.data-thook]="thook + '-errorlabel'">
+            {{ t('error.field' + error?.code, error?.params) }}
+          </span>
+        </ng-template>
+      </span>
+    </label>
+  </ng-container>
+
+  <ng-container *ngFor="let error of (errorList ?? []); let i = index">
+    <label class="sdv-field-notice sdv-field-notice--error"
+      [attr.for]="id + '-radio'"
+      *ngIf="invalid && error">
+      <span class="error-item">
+        <span class="error-item--icon"
+          *ngIf="withErrorIcon"><fa-icon [icon]="warningIcon"></fa-icon>
+        </span>
+        <span class="error-item--text"
+          [attr.data-thook]="thook + '-errorlabel-' + i">{{error}}</span>
+      </span>
     </label>
   </ng-container>
 
