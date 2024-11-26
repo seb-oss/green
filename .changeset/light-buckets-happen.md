@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-**Button:** remove `max-width` and `transition` on all props affecting the width
+**Button:** remove `width` and remove `transition` on all props keep it specific instead.

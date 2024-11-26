@@ -41,7 +41,7 @@
     text-decoration: none;
     transition-property: color, border-colorm, background;
     transition-duration: 0.4s;
-    width: 100%;
+    max-width: 100%;
 
     &:focus {
       outline-color: color-mix(in srgb, currentcolor, #000 100%);
