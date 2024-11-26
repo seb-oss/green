@@ -58,6 +58,11 @@ export class TPAccountsModal extends LitElement {
         }
 
         .actionsheet {
+          transition: all 0.2s cubic-bezier(0.65, 0.05, 0.36, 1);
+          overflow-x: hidden;
+          overflow-y: auto;
+          overscroll-behavior: contain;
+
           @starting-style {
             opacity: 0;
             transform: translateX(100%);
@@ -434,7 +439,6 @@ export class TPAccountsModal extends LitElement {
                 background="#fef5f3"
                 level="2"
                 height="100vh; m{100%}"
-                transition="all 0.2s ease-in-out"
                 class="actionsheet"
               >
                 <gds-flex padding="l" width="100%" justify-content="flex-end">
