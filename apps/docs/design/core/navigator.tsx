@@ -2,8 +2,14 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { GdsButton, GdsCard, GdsFlex, GdsText } from '$/import/components'
-import { IconChevronBottom, IconChevronTop } from '$/import/icons'
+import {
+  GdsButton,
+  GdsCard,
+  GdsContainer,
+  GdsFlex,
+  GdsText,
+} from '$/import/components'
+import { IconChevronTop } from '$/import/icons'
 
 interface Heading {
   slug: string
@@ -137,7 +143,11 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                       {item[0].text}
                     </GdsText>
                   </Link>
-                  {openSections[item[0].slug] ? (
+                  <GdsContainer
+                    transform={
+                      openSections[item[0].slug] ? 'scaleY(-1)' : 'none'
+                    }
+                  >
                     <GdsButton
                       size="small"
                       rank="tertiary"
@@ -145,15 +155,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                     >
                       <IconChevronTop />
                     </GdsButton>
-                  ) : (
-                    <GdsButton
-                      size="small"
-                      rank="tertiary"
-                      onClick={() => toggleSection(item[0].slug)}
-                    >
-                      <IconChevronBottom />
-                    </GdsButton>
-                  )}
+                  </GdsContainer>
                 </GdsFlex>
                 {openSections[item[0].slug] && (
                   <GdsFlex flex-direction="column" margin="0 0 0 2xs">
