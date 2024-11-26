@@ -35,6 +35,7 @@
     "./localization": "./localization.js",
     "./jest-config": "./green-jest-config.cjs",
     "./components/*": "./components/*",
-    "./_primitives/*": "./primitives/*"
+    "./_primitives/*": "./primitives/*",
+    "./decorators/*": "./utils/decorators/*"
   }
 }
