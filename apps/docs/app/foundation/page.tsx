@@ -80,14 +80,14 @@ const HEADINGS = [
 
 export default function Foundation() {
   return (
-    <GdsFlex flex-direction="column" gap="6xl">
+    <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
       <Hero
         heading="Foundation"
         preamble="Green Design System, a framework designed to bring unity, efficiency, and coherent perspective to our digital experiences. Over time it will grow and evolve but always reflect our design philosophy. User needs first, being forefront and with confidence."
       />
-      <GdsFlex gap="8xl">
-        <GdsFlex gap="4xl" flex-direction="column">
-          <GdsGrid columns="2">
+      <GdsFlex gap="4xl; m{8xl}">
+        <GdsFlex gap="2xl; m{4xl}" flex-direction="column">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="our-purpose">
               Our purpose
             </GdsText>
@@ -98,7 +98,7 @@ export default function Foundation() {
               philosophy. User needs first, being forefront and with confidence.
             </GdsText>
           </GdsGrid>
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="tonality">
               Tonality
             </GdsText>
@@ -116,7 +116,7 @@ export default function Foundation() {
             object-fit="cover"
             aspect-ratio="16 / 9"
           />
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="visual-style">
               Visual style
             </GdsText>
@@ -196,7 +196,7 @@ export default function Foundation() {
             object-fit="cover"
             aspect-ratio="16 / 9"
           />
-          <GdsGrid columns="2">
+          <GdsGrid columns="1; m{2}">
             <GdsText tag="h2" id="features">
               Features
             </GdsText>
@@ -277,7 +277,7 @@ export default function Foundation() {
             </GdsFlex>
           </GdsGrid>
         </GdsFlex>
-        <GdsFlex min-width="240px">
+        <GdsFlex display="none; m{flex}" min-width="240px">
           <TOC headings={HEADINGS} component={'About'} />
         </GdsFlex>
       </GdsFlex>

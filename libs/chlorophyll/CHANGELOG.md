@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.11
+
+### Patch Changes
+
+- c185f41: Fixed contrast for inactive in-page wizard step card
+
 ## 3.6.10
 
 ### Patch Changes

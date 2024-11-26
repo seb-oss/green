@@ -13,8 +13,8 @@ import * as GroupedList from '../../components/grouped-list/grouped-list.trans.s
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import { GdsTheme } from '../../components/theme/theme'
 import * as Theme from '../../components/theme/theme.trans.styles'
-import { supportsConstructedStylesheets } from '../../controllers/dynamic-styles-controller'
 import { GdsElement } from '../../gds-element'
+import { supportsConstructedStylesheets } from '../../utils/controllers/dynamic-styles-controller'
 import { VER_SUFFIX } from '../helpers/custom-element-scoping'
 
 /**

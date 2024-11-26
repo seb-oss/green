@@ -6,7 +6,7 @@ date: 2023-12-22
 ## Design
 
 Each button type has fully rounded corners. This creates a cohesive and consistent visual language within our design system. The differentiation in colour, border, and background helps users to easily distinguish between primary, secondary, and tertiary actions, contributing to a more intuitive and user-friendly interface.
-<Grid columns="3">
+<Grid columns="1; s{2} m{3}">
 <Figma node="258-2977" caption="A primary button has a solid container." />
 <Figma node="258-2986" caption="A secondary button has a transparent container and 1 px border." />
 <Figma node="258-2989" caption="A tertiary button has transparent container and no border." />
@@ -26,7 +26,9 @@ A button consists of a container, a text, and an optional leading or trailing el
 <Figma node="258-3056" caption="Container, text, leading and trailing element." />
 </Grid>
 
-<Grid columns="3">
+<GdsDivider size="4xl" opacity="0.2" />
+
+<Grid columns="1; s{2} m{3}">
     <div>
         <Figma node="264-6654" caption="Text" />
 
@@ -123,7 +125,7 @@ A button consists of a container, a text, and an optional leading or trailing el
 
 An icon positioned at the beginning is known as a leading element, the one at the end of the text is referred to as a trailing element. Both types of elements share common purposes, offering visual cues and improving the user interface. 
 
-<Grid columns="2">
+<Grid columns="1; s{2}">
 <div>
 ### Leading element
 
@@ -135,8 +137,9 @@ a search icon + text *Search* and arrow to bottom icon + text *Download*.
 <Figma node="266-7387" caption="Leading elements that support the button text." />
 </Grid>
 
+<br size="xl" />
 
-<Grid columns="2">
+<Grid columns="1; s{2}">
 <div>
 ### Trailing element
 
