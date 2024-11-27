@@ -69,7 +69,7 @@ export class FAB extends LitElement {
           overscroll-behavior: contain;
           z-index: 1999;
           background-color: rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(4px);
+          /* backdrop-filter: blur(4px); */
           opacity: 0;
           pointer-events: none;
           visibility: hidden;
@@ -106,6 +106,7 @@ export class FAB extends LitElement {
           transition-delay: 200ms;
           opacity: 0;
           transform: translateX(100%);
+          backdrop-filter: blur(10px);
 
           &.open {
             transform: translateX(0%);
@@ -144,6 +145,7 @@ export class FAB extends LitElement {
             width="100%; m{40ch}"
             class=${'options' + ' ' + (this.isModalOpen === true ? 'open' : '')}
             border-radius="0; m{xs}"
+            background="#ffffff/0.8"
           >
             <gds-flex flex="1" justify-content="flex-end">
               <gds-button @click=${this.closeModal} rank="secondary">
