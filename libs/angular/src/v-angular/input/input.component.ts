@@ -36,7 +36,7 @@ export class NgvInputComponent
   /** Adding .gds-form-item as a class to host element */
   @HostBinding('class') class = 'gds-form-item'
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'input'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'input'
   /** Type of input field. Should avoid types that modify field too much such as range. */
   @Input() type = 'text'
   /** Text shown before input has a written value. */

@@ -20,7 +20,7 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 })
 export class NgvTextareaComponent extends NgvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'textarea'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'textarea'
   /** Text shown before input has a written value. */
   @Input() placeholder?: string
   /** If set to true, the value will not be editable. */
