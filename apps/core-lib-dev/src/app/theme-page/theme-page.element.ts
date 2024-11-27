@@ -30,6 +30,7 @@ import '../../components/page-section'
 import '../../components/fab'
 import './style.css'
 
+import { FAB } from '../../components/fab'
 import { PageHeader } from './page-header'
 
 @customElement('tp-theme-page')
@@ -40,6 +41,9 @@ export class ThemePage extends LitElement {
 
   @query('tp-page-header')
   pageHeader!: PageHeader
+
+  @query('tp-fab')
+  FAB!: FAB
 
   @property()
   hasExternalAccounts = false
@@ -61,16 +65,21 @@ export class ThemePage extends LitElement {
     return html`
       <gds-flex flex-direction="column">
         <gds-container margin="0 0 3xl 0">
-          <tp-page-header
-            style="flex:1"
-            @view-options-change=${() => {
-              this.hasAccounts = this.pageHeader.viewOptions.hasAccounts
-              this.hasCards = this.pageHeader.viewOptions.hasCards
-              this.hasSavings = this.pageHeader.viewOptions.hasSavings
-            }}
-          ></tp-page-header>
+          <tp-page-header style="flex:1"></tp-page-header>
+          <!-- @view-options-change=${() => {
+            this.hasAccounts = this.pageHeader.viewOptions.hasAccounts
+            this.hasCards = this.pageHeader.viewOptions.hasCards
+            this.hasSavings = this.pageHeader.viewOptions.hasSavings
+          }} -->
         </gds-container>
-        <tp-fab></tp-fab>
+        <tp-fab
+          @view-options-change=${() => {
+            this.hasAccounts = this.FAB.viewOptions.hasAccounts
+            this.hasCards = this.FAB.viewOptions.hasCards
+            this.hasSavings = this.FAB.viewOptions.hasSavings
+          }}
+        >
+        </tp-fab>
         <!-- (Pink) Dream State, get started cards -->
         <tp-page-section
           .show=${!this.pageHeader?.viewOptions.hasSavings &&

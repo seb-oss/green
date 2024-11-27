@@ -20,7 +20,18 @@ import '@sebgroup/green-core/components/fab/index.js'
 import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
 
 @customElement('tp-fab')
-export class TPFAB extends LitElement {
+export class FAB extends LitElement {
+  protected createRenderRoot() {
+    return this
+  }
+
+  @state()
+  viewOptions = {
+    hasAccounts: false,
+    hasSavings: false,
+    hasCards: false,
+  }
+
   @state()
   isModalOpen = false
 
@@ -57,7 +68,8 @@ export class TPFAB extends LitElement {
           overflow-y: auto;
           overscroll-behavior: contain;
           z-index: 1999;
-
+          background-color: rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(4px);
           opacity: 0;
           pointer-events: none;
           visibility: hidden;
@@ -79,30 +91,58 @@ export class TPFAB extends LitElement {
           } */
         }
 
-        .fab::part(_button) {
+        /* .fab::part(_button) {
           z-index: 2000 !important;
+        } */
+
+        .BT::part(_button) {
+          justify-content: flex-start;
+          padding: 10px;
+          min-height: max-content;
         }
       </style>
 
-      <gds-container
+      <gds-flex
         class=${'actionsheet' + ' ' + (this.isModalOpen === true ? 'open' : '')}
         position="fixed"
         inset="0"
         width="100%"
         height="100%"
         @click=${this.handleCardClick}
+        overflow="hidden"
       >
-        <gds-mask background="#0000004a" width="100%" height="100%">
-          <gds-flex justify-content="flex-end" width="100%" padding="xs">
-            <gds-card>
-              <gds-flex flex="1" justify-content="flex-end">
-                <gds-button @click=${this.closeModal} rank="secondary">
-                  <gds-icon-cross-large></gds-icon-cross-large>
-                </gds-button>
-              </gds-flex>
+        <gds-flex
+          justify-content="flex-end"
+          width="100%"
+          max-height="calc(100% - 64px)"
+          padding="xs"
+          flex="1"
+        >
+          <gds-card height="100%">
+            <gds-flex flex="1" justify-content="flex-end">
+              <gds-button @click=${this.closeModal} rank="secondary">
+                <gds-icon-cross-large></gds-icon-cross-large>
+              </gds-button>
+            </gds-flex>
+            <gds-flex
+              flex-direction="column"
+              min-width="40ch"
+              gap="m"
+              flex="1"
+              overflow="auto"
+            >
+              <!-- <slot></slot> -->
 
-              <gds-flex flex-direction="column" min-width="40ch" gap="m">
-                <gds-flex align-items="center" gap="s">
+              <gds-button
+                class="BT"
+                rank="tertiary"
+                @click=${() =>
+                  this.#setViewOptions({
+                    ...this.viewOptions,
+                    hasAccounts: !this.viewOptions.hasAccounts,
+                  })}
+              >
+                <gds-flex align-items="center" gap="s" cursor="pointer">
                   <gds-flex
                     level="3"
                     border-radius="max"
@@ -114,9 +154,19 @@ export class TPFAB extends LitElement {
                   >
                     <gds-icon-arrow-rotate-right-left></gds-icon-arrow-rotate-right-left>
                   </gds-flex>
-                  <gds-text>Flytta pengar</gds-text>
+                  <gds-text>Accounts</gds-text>
                 </gds-flex>
-                <gds-flex align-items="center" gap="s">
+              </gds-button>
+              <gds-button
+                class="BT"
+                rank="tertiary"
+                @click=${() =>
+                  this.#setViewOptions({
+                    ...this.viewOptions,
+                    hasSavings: !this.viewOptions.hasSavings,
+                  })}
+              >
+                <gds-flex align-items="center" gap="s" cursor="pointer">
                   <gds-flex
                     level="3"
                     border-radius="max"
@@ -128,17 +178,52 @@ export class TPFAB extends LitElement {
                   >
                     <gds-icon-credit-card></gds-icon-credit-card>
                   </gds-flex>
-                  <gds-text>Hantera kort</gds-text>
+                  <gds-text>Savings</gds-text>
                 </gds-flex>
-              </gds-flex>
-            </gds-card>
-          </gds-flex>
-        </gds-mask>
-      </gds-container>
+              </gds-button>
+              <gds-button
+                class="BT"
+                rank="tertiary"
+                @click=${() =>
+                  this.#setViewOptions({
+                    ...this.viewOptions,
+                    hasCards: !this.viewOptions.hasCards,
+                  })}
+              >
+                <gds-flex align-items="center" gap="s" cursor="pointer">
+                  <gds-flex
+                    level="3"
+                    border-radius="max"
+                    background="secondary"
+                    width="40px"
+                    height="40px"
+                    align-items="center"
+                    justify-content="center"
+                  >
+                    <gds-icon-credit-card></gds-icon-credit-card>
+                  </gds-flex>
+                  <gds-text>Cards</gds-text>
+                </gds-flex>
+              </gds-button>
+            </gds-flex>
+          </gds-card>
+        </gds-flex>
+      </gds-flex>
 
       <gds-fab class="fab" @click=${this.handleCardClick}>
         <gds-icon-plus-large></gds-icon-plus-large>
       </gds-fab>
     `
+  }
+
+  #setViewOptions(options: any) {
+    this.viewOptions = options
+    this.dispatchEvent(
+      new CustomEvent('view-options-change', {
+        detail: { view: options },
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 }
