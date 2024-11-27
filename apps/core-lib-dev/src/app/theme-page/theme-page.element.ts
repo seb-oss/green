@@ -114,7 +114,7 @@ export class ThemePage extends LitElement {
                 gap="l"
               >
                 <tp-accounts-modal></tp-accounts-modal>
-                <tp-accounts></tp-accounts>
+                <!-- <tp-accounts></tp-accounts> -->
                 <tp-expenses></tp-expenses>
               </gds-flex>
               <gds-flex

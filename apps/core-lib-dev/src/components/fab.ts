@@ -102,17 +102,22 @@ export class FAB extends LitElement {
         }
 
         .options {
-          transform: translateX(100%);
           transition: transform 240ms;
           transition-delay: 200ms;
           opacity: 0;
+          transform: translateX(100%);
 
           &.open {
             transform: translateX(0%);
             opacity: 1;
+          }
 
-            @media screen and (max-width: 768px) {
-              transform: translateY(100%);
+          @media screen and (max-width: 768px) {
+            transform: translateY(100%);
+
+            &.open {
+              transform: translateY(0%);
+              opacity: 1;
             }
           }
         }
@@ -131,12 +136,14 @@ export class FAB extends LitElement {
           justify-content="flex-end"
           width="100%"
           max-height="calc(100% - 12px)"
-          padding="xs"
+          padding="0; m{xs}"
           flex="1"
         >
           <gds-card
             height="100%"
+            width="100%; m{40ch}"
             class=${'options' + ' ' + (this.isModalOpen === true ? 'open' : '')}
+            border-radius="0; m{xs}"
           >
             <gds-flex flex="1" justify-content="flex-end">
               <gds-button @click=${this.closeModal} rank="secondary">
@@ -145,10 +152,10 @@ export class FAB extends LitElement {
             </gds-flex>
             <gds-flex
               flex-direction="column"
-              min-width="40ch"
               gap="m"
               flex="1"
               overflow="auto"
+              padding="8xl 0 0 0"
             >
               <!-- <slot></slot> -->
 

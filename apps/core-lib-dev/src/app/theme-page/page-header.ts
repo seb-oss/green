@@ -65,65 +65,67 @@ export class PageHeader extends LitElement {
                 <gds-icon-calendar></gds-icon-calendar>
               </gds-button>
 
-              <gds-popover>
-                <div slot="trigger" style="max-height: 48px">
-                  <gds-container display="s{none}">
-                    <gds-button rank="secondary">
-                      <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-                    </gds-button>
-                  </gds-container>
-                  <gds-container display="none; s{block}">
-                    <gds-button rank="secondary">
-                      Shortcuts
-                      <gds-icon-chevron-bottom
-                        slot="trail"
-                      ></gds-icon-chevron-bottom>
-                    </gds-button>
-                  </gds-container>
-                </div>
-                <gds-menu-item>
-                  <label class="form-control"
-                    >Has accounts
-                    <input
-                      type="checkbox"
-                      @change=${(e: any) =>
-                        this.#setViewOptions({
-                          ...this.viewOptions,
-                          hasAccounts: e.target.checked,
-                        })}
-                    />
-                    <i></i>
-                  </label>
-                </gds-menu-item>
-                <gds-menu-item>
-                  <label class="form-control"
-                    >Has savings
-                    <input
-                      type="checkbox"
-                      @change=${(e: any) =>
-                        this.#setViewOptions({
-                          ...this.viewOptions,
-                          hasSavings: e.target.checked,
-                        })}
-                    />
-                    <i></i>
-                  </label>
-                </gds-menu-item>
-                <gds-menu-item>
-                  <label class="form-control">
-                    Has cards
-                    <input
-                      type="checkbox"
-                      @change=${(e: any) =>
-                        this.#setViewOptions({
-                          ...this.viewOptions,
-                          hasCards: e.target.checked,
-                        })}
-                    />
-                    <i></i>
-                  </label>
-                </gds-menu-item>
-              </gds-popover>
+              <gds-container display="none">
+                <gds-popover>
+                  <div slot="trigger" style="max-height: 48px">
+                    <gds-container display="s{none}">
+                      <gds-button rank="secondary">
+                        <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
+                      </gds-button>
+                    </gds-container>
+                    <gds-container display="none; s{block}">
+                      <gds-button rank="secondary">
+                        Shortcuts
+                        <gds-icon-chevron-bottom
+                          slot="trail"
+                        ></gds-icon-chevron-bottom>
+                      </gds-button>
+                    </gds-container>
+                  </div>
+                  <gds-menu-item>
+                    <label class="form-control"
+                      >Has accounts
+                      <input
+                        type="checkbox"
+                        @change=${(e: any) =>
+                          this.#setViewOptions({
+                            ...this.viewOptions,
+                            hasAccounts: e.target.checked,
+                          })}
+                      />
+                      <i></i>
+                    </label>
+                  </gds-menu-item>
+                  <gds-menu-item>
+                    <label class="form-control"
+                      >Has savings
+                      <input
+                        type="checkbox"
+                        @change=${(e: any) =>
+                          this.#setViewOptions({
+                            ...this.viewOptions,
+                            hasSavings: e.target.checked,
+                          })}
+                      />
+                      <i></i>
+                    </label>
+                  </gds-menu-item>
+                  <gds-menu-item>
+                    <label class="form-control">
+                      Has cards
+                      <input
+                        type="checkbox"
+                        @change=${(e: any) =>
+                          this.#setViewOptions({
+                            ...this.viewOptions,
+                            hasCards: e.target.checked,
+                          })}
+                      />
+                      <i></i>
+                    </label>
+                  </gds-menu-item>
+                </gds-popover>
+              </gds-container>
             </gds-flex>
           </gds-flex>
         </gds-flex>
