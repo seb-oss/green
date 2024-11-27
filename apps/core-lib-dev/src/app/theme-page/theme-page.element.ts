@@ -27,6 +27,7 @@ import '../../components/empty-card'
 import '../../components/expenses'
 import '../../components/savings'
 import '../../components/page-section'
+import '../../components/fab'
 import './style.css'
 
 import { PageHeader } from './page-header'
@@ -69,6 +70,7 @@ export class ThemePage extends LitElement {
             }}
           ></tp-page-header>
         </gds-container>
+        <tp-fab></tp-fab>
         <!-- (Pink) Dream State, get started cards -->
         <tp-page-section
           .show=${!this.pageHeader?.viewOptions.hasSavings &&
