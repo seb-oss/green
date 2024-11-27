@@ -12,6 +12,22 @@
   },
   "files": [],
   "include": [],
+  "paths": {
+    "@sebgroup/extract": ["libs/extract/src/index.ts"],
+    "@sebgroup/fonts": ["libs/fonts/"],
+    "@sebgroup/fonts/*": ["libs/fonts/*"],
+    "@sebgroup/green-angular": ["libs/angular/src/index.ts"],
+    "@sebgroup/green-angular-charts": ["libs/angular-charts/src/index.ts"],
+    "@sebgroup/green-angular-dev/*": ["apps/angular-lib-dev/*"],
+    "@sebgroup/green-angular/*": ["libs/angular/*"],
+    "@sebgroup/green-charts": ["libs/charts/src/index.ts"],
+    "@sebgroup/green-core": ["dist/libs/core/src"],
+    "@sebgroup/green-core/*": ["dist/libs/core/src/*"],
+    "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"],
+    "@sebgroup/green-tokens": ["dist/libs/tokens"],
+    "@sebgroup/green-tokens/*": ["dist/libs/tokens/*"],
+    "@sebgroup/repo-tools": ["dist/repo-tools/src/index.ts"]
+  },
   "references": [
     {
       "path": "./tsconfig.lib.json"

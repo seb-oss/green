@@ -10,7 +10,7 @@
 
 @layer core {
   :host {
-    display: inline-block;
+    display: inline-flex;
     max-width: 100%;
   }
 
@@ -39,10 +39,10 @@
     padding-inline: var(--gds-space-l);
     position: relative;
     text-decoration: none;
-    transition-property: color, border-color;
-    transition: all 0.4s;
+    transition-property: color, border-colorm, background;
+    transition-duration: 0.4s;
     max-width: 100%;
-    width: 100%;
+    flex: 1;
 
     &:focus {
       outline-color: color-mix(in srgb, currentcolor, #000 100%);
@@ -81,6 +81,7 @@
 .button.circle {
   aspect-ratio: 1/1;
   padding: 0;
+  min-block-size: var(--_block-size);
 }
 
 .button:disabled {

@@ -9,14 +9,17 @@ export default function Main({ children }: { children: React.ReactNode }) {
   const { toggleNav, isNavOpen } = useContext(Context)
 
   return (
-    <GdsFlex align-items="flex-start" flex-direction="row">
-      {isNavOpen && <Sidebar toggleNav={toggleNav} isNavOpen={isNavOpen} />}
+    <GdsFlex
+      align-items="flex-start"
+      flex-direction="xs{column} s{column} m{row}"
+    >
+      {isNavOpen && <Sidebar />}
       <GdsFlex
-        padding="4xl"
+        padding="s; s{l} m{0 l}"
         flex-direction="column"
-        width="1440px"
+        width="100%; m{960px} l{calc(80ch + var(--gds-space-l) + 240px)}"
         margin="0 auto"
-        gap="8xl"
+        gap="2xl; s{8xl}"
       >
         {children}
       </GdsFlex>
