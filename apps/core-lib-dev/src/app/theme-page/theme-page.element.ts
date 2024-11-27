@@ -103,7 +103,7 @@ export class ThemePage extends LitElement {
             <tp-empty-card></tp-empty-card>
           </gds-grid>
         </tp-page-section>
-
+        <tp-accounts-modal></tp-accounts-modal>
         <gds-container padding="0 2xs; m{0 s}">
           <!-- (Blue) Main dashboard section -->
           <tp-page-section .show=${this.hasAccounts}>

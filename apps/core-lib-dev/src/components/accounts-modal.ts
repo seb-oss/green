@@ -83,7 +83,7 @@ export class TPAccountsModal extends LitElement {
           </gds-button>
           <gds-flex flex-direction="column" gap="l" padding="0 0 l 0">
             <div class="car">
-              <gds-flex gap="2">
+              <gds-flex gap="xs">
                 <gds-container width="100px"></gds-container>
                 <tp-accounts-card
                   @click=${this.handleCardClick}

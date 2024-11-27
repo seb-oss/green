@@ -24,7 +24,10 @@ export class TPAccountsModalCard extends LitElement {
 
         .account {
           scroll-snap-align: center;
-          width: 246px;
+          width: 70vw;
+          min-height: max-content;
+          padding: var(--gds-space-l);
+          /* aspect-ratio: 1.5; */
           transition: all 248ms;
           scale: 1;
           opacity: 1;
@@ -34,17 +37,17 @@ export class TPAccountsModalCard extends LitElement {
             height: auto;
           }
 
-          @supports (animation-timeline: view(x)) and
-            (animation-range: entry 0% entry 60vw) {
-            animation-name: tp-card, tp-card;
-            animation-fill-mode: both;
-            animation-timing-function: ease-in-out;
-            animation-direction: normal, reverse;
-            animation-timeline: view(x);
-            animation-range:
-              entry 0% entry 60vw,
-              exit -20vw exit 40vw;
-          }
+          /* @supports (animation-timeline: view(x)) and
+            (animation-range: entry 0% entry 60vw) { */
+          animation-name: tp-card, tp-card;
+          animation-fill-mode: both;
+          animation-timing-function: ease-in-out;
+          animation-direction: normal, reverse;
+          animation-timeline: view(x);
+          animation-range:
+            entry 0% entry 60vw,
+            exit -20vw exit 40vw;
+          /* } */
         }
 
         @keyframes tp-card {
@@ -67,6 +70,7 @@ export class TPAccountsModalCard extends LitElement {
           padding="l"
           flex-direction="column"
           gap="l"
+          height="100%"
         >
           <slot></slot>
         </gds-flex>
