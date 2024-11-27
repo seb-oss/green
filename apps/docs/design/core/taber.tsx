@@ -22,16 +22,19 @@ export default function Taber({ component, links }: TaberProps) {
   const pathName = usePathname()
 
   return (
-    <>
-      <GdsFlex
-        position="sticky"
-        inset="70px 0 0 0"
-        margin="0"
-        background="secondary"
-        border="0 0 4xs/secondary 0"
-        height="60px"
-        display="none; m{flex}"
-      >
+    <GdsCard
+      padding="0"
+      overflow="hidden"
+      position="sticky"
+      inset="60px 0 0 0"
+      z-index="99999"
+      margin="0"
+      height="60px"
+      display="none; m{flex}"
+      border-radius="xs"
+      border="0"
+    >
+      <GdsFlex>
         {links.map(
           ({ path, label, isPrivate }) =>
             !isPrivate && (
@@ -66,6 +69,6 @@ export default function Taber({ component, links }: TaberProps) {
           </AccordionItem>
         </Accordion>
       </GdsContainer>
-    </>
+    </GdsCard>
   )
 }
