@@ -39,10 +39,10 @@ export class FAB extends LitElement {
     this.isModalOpen = true
   }
 
-  private closeModal() {
+  private closeModal(event: Event) {
+    event.stopPropagation()
     this.isModalOpen = false
   }
-
   private handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Escape') {
       this.isModalOpen = false
@@ -91,14 +91,30 @@ export class FAB extends LitElement {
           } */
         }
 
-        /* .fab::part(_button) {
-          z-index: 2000 !important;
-        } */
+        .fab::part(_button) {
+          z-index: 1080 !important;
+        }
 
         .BT::part(_button) {
           justify-content: flex-start;
           padding: 10px;
           min-height: max-content;
+        }
+
+        .options {
+          transform: translateX(100%);
+          transition: transform 240ms;
+          transition-delay: 200ms;
+          opacity: 0;
+
+          &.open {
+            transform: translateX(0%);
+            opacity: 1;
+
+            @media screen and (max-width: 768px) {
+              transform: translateY(100%);
+            }
+          }
         }
       </style>
 
@@ -114,11 +130,14 @@ export class FAB extends LitElement {
         <gds-flex
           justify-content="flex-end"
           width="100%"
-          max-height="calc(100% - 64px)"
+          max-height="calc(100% - 12px)"
           padding="xs"
           flex="1"
         >
-          <gds-card height="100%">
+          <gds-card
+            height="100%"
+            class=${'options' + ' ' + (this.isModalOpen === true ? 'open' : '')}
+          >
             <gds-flex flex="1" justify-content="flex-end">
               <gds-button @click=${this.closeModal} rank="secondary">
                 <gds-icon-cross-large></gds-icon-cross-large>
