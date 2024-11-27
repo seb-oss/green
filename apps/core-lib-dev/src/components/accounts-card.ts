@@ -37,17 +37,21 @@ export class TPAccountsModalCard extends LitElement {
             height: auto;
           }
 
-          /* @supports (animation-timeline: view(x)) and
-            (animation-range: entry 0% entry 60vw) { */
-          animation-name: tp-card, tp-card;
-          animation-fill-mode: both;
-          animation-timing-function: ease-in-out;
-          animation-direction: normal, reverse;
-          animation-timeline: view(x);
-          animation-range:
-            entry 0% entry 60vw,
-            exit -20vw exit 40vw;
-          /* } */
+          @media screen and (max-width: 768px) {
+            width: 50vw;
+          }
+
+          @supports (animation-timeline: view(x)) and
+            (animation-range: entry 0% entry 60vw) {
+            animation-name: tp-card, tp-card;
+            animation-fill-mode: both;
+            animation-timing-function: ease-in-out;
+            animation-direction: normal, reverse;
+            animation-timeline: view(x);
+            animation-range:
+              entry 0% entry 60vw,
+              exit -20vw exit 40vw;
+          }
         }
 
         @keyframes tp-card {

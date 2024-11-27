@@ -21,7 +21,12 @@ export class SavingsCalc extends LitElement {
   total = '26 325'
 
   render() {
-    return html`<gds-card variant="secondary" border-color="primary">
+    return html`<gds-card
+      variant="secondary"
+      shadow="s"
+      border="none"
+      padding="l"
+    >
       <gds-flex gap="l" flex-direction="column">
         <div>
           <gds-input

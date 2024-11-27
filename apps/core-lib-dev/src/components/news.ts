@@ -38,7 +38,8 @@ export class TpNewsItem extends LitElement {
   static styles = css`
     @keyframes news--inview {
       from {
-        scale: 0.75;
+        /* scale: 0.75; */
+        opacity: 0;
       }
     }
     .news {

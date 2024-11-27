@@ -46,10 +46,10 @@ export class TPStep extends LitElement {
     }
     @media (max-width: 768px) {
       .step:first-child {
-        margin-left: 10vw;
+        margin-left: 5vw;
       }
       .step:last-child {
-        margin-right: 10vw;
+        margin-right: 5vw;
       }
     }
   `

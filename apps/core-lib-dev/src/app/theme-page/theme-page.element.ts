@@ -98,7 +98,7 @@ export class ThemePage extends LitElement {
             max-width="1200px"
             margin="0 auto"
             gap="l"
-            padding="2xl 2xl l 2xl; m{2xl}"
+            padding="m; s{2xl 2xl l 2xl}; m{2xl}"
           >
             <tp-empty-konton
               @click=${() => (this.hasAccounts = true)}
@@ -107,15 +107,15 @@ export class ThemePage extends LitElement {
           </gds-grid>
         </tp-page-section>
         <gds-flex
-          padding="0 2xl 2xl 2xl; m{2xl}"
-          gap="4xl"
+          padding="m; s{0 2xl 2xl 2xl}; m{2xl}"
+          gap="l; m{4xl}"
           flex-direction="column"
         >
           <!-- (Blue) Main dashboard section -->
           <tp-page-section .show=${this.hasAccounts}>
             <!-- <gds-grid columns="1; m{12}" gap="l" padding="0 s; l{0 4xl}"> -->
             <!-- <gds-grid columns="2; m{12}" gap="l"> -->
-            <gds-grid columns="1; m{12}" gap="l">
+            <gds-grid display="contents; m{grid}" columns="1; m{12}" gap="l">
               <gds-flex
                 grid-column="1; m{1 / span 5}"
                 flex-direction="column"

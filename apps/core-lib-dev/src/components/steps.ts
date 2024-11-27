@@ -80,12 +80,12 @@ export class TPSteps extends LitElement {
             gap: 0;
           }
           tp-step::part(step) {
-            min-width: 80vw;
+            min-width: 90vw;
             scroll-margin-inline-start: 0;
           }
         }
       </style>
-      <gds-flex flex-direction="column" padding="0; l{xl 0}" gap="xl">
+      <gds-flex flex-direction="column" padding="0 0 xl 0; l{xl 0}" gap="xl">
         <div class="steps">
           <tp-step
             title="Kom igång här!"
