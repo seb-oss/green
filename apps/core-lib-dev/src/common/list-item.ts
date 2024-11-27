@@ -25,9 +25,10 @@ export class TPCard extends LitElement {
           <slot></slot>
         </gds-flex>
         <gds-flex>
-          <gds-button size="small" rank="tertiary">
+          <slot name="action"></slot>
+          <!-- <gds-button size="small" rank="tertiary">
             <gds-icon-chevron-right></gds-icon-chevron-right>
-          </gds-button>
+          </gds-button> -->
         </gds-flex>
       </gds-flex>
     `

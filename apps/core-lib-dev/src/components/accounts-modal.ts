@@ -76,7 +76,7 @@ export class TPAccountsModal extends LitElement {
       </style>
       <!-- <gds-container display="block; m{none}" min-width="100%"> -->
       <!-- <gds-container display="block; m{none}"> -->
-      <gds-container>
+      <gds-container display="block; m{none}">
         <tp-card wide>
           <gds-text slot="header" font-size="heading-s">Transaction</gds-text>
           <gds-button slot="action" size="small" rank="tertiary">
@@ -346,6 +346,14 @@ export class TPAccountsModal extends LitElement {
                 </gds-flex>
               </gds-flex>
             </gds-flex>
+            <gds-button
+              size="small"
+              rank="tertiary"
+              slot="action"
+              @click=${this.handleCardClick}
+            >
+              <gds-icon-chevron-right></gds-icon-chevron-right>
+            </gds-button>
           </tp-list-item>
           <tp-list-item>
             <gds-flex
@@ -377,6 +385,14 @@ export class TPAccountsModal extends LitElement {
                 </gds-flex>
               </gds-flex>
             </gds-flex>
+            <gds-button
+              size="small"
+              rank="tertiary"
+              slot="action"
+              @click=${this.handleCardClick}
+            >
+              <gds-icon-chevron-right></gds-icon-chevron-right>
+            </gds-button>
           </tp-list-item>
           <tp-list-item>
             <gds-flex
@@ -414,6 +430,14 @@ export class TPAccountsModal extends LitElement {
                 </gds-flex>
               </gds-flex>
             </gds-flex>
+            <gds-button
+              size="small"
+              rank="tertiary"
+              slot="action"
+              @click=${this.handleCardClick}
+            >
+              <gds-icon-chevron-right></gds-icon-chevron-right>
+            </gds-button>
           </tp-list-item>
 
           <!-- Footer -->
@@ -441,7 +465,7 @@ export class TPAccountsModal extends LitElement {
               flex-direction="row; m{column}"
             >
               <gds-container
-                width="100%; m{25vw}"
+                width="100%; m{max-content}"
                 background="#fef5f3"
                 level="2"
                 height="100vh; m{100%}"
@@ -456,13 +480,7 @@ export class TPAccountsModal extends LitElement {
                     <gds-icon-cross-small></gds-icon-cross-small>
                   </gds-button>
                 </gds-flex>
-                <gds-flex
-                  flex-direction="column"
-                  justify-content="center"
-                  align-items="center"
-                  padding="l"
-                  gap="m"
-                >
+                <gds-flex flex-direction="column" padding="l" gap="m">
                   <gds-card
                     width="43px"
                     height="43px"
@@ -471,6 +489,7 @@ export class TPAccountsModal extends LitElement {
                     level="3"
                     padding="xs"
                     box-sizing="border-box"
+                    margin="0 auto"
                   >
                     <gds-flex
                       align-items="center"
@@ -514,7 +533,6 @@ export class TPAccountsModal extends LitElement {
                   </gds-flex>
                   <gds-card
                     variant="secondary"
-                    width="100%"
                     border-radius="s"
                     color="primary"
                   >
@@ -543,7 +561,6 @@ export class TPAccountsModal extends LitElement {
                   </gds-card>
                   <gds-card
                     variant="secondary"
-                    width="100%"
                     border-radius="s"
                     color="primary"
                   >
@@ -598,7 +615,7 @@ export class TPAccountsModal extends LitElement {
                       </gds-flex>
                     </gds-flex>
                   </gds-card>
-                  <gds-card variant="secondary" color="primary" width="100%">
+                  <gds-card variant="secondary" color="primary">
                     <gds-flex flex-direction="column" gap="l" padding="s">
                       <gds-flex justify-content="space-between">
                         <gds-text font-size="detail-s">Köpdatum</gds-text>
