@@ -51,7 +51,6 @@ export class TPAccountsModal extends LitElement {
           display: flex;
           overflow-x: scroll;
           scroll-snap-type: x mandatory;
-          width: 100%;
           position: relative;
           scrollbar-width: none;
           box-sizing: border-box;
@@ -75,13 +74,20 @@ export class TPAccountsModal extends LitElement {
           }
         }
       </style>
-      <gds-container display="block; m{none}">
+      <!-- <gds-container display="block; m{none}" min-width="100%"> -->
+      <!-- <gds-container display="block; m{none}"> -->
+      <gds-container>
         <tp-card wide>
           <gds-text slot="header" font-size="heading-s">Transaction</gds-text>
           <gds-button slot="action" size="small" rank="tertiary">
             <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
           </gds-button>
-          <gds-flex flex-direction="column" gap="l" padding="0 0 l 0">
+          <gds-flex
+            flex-direction="column"
+            gap="l"
+            padding="0 0 l 0"
+            class="container"
+          >
             <div class="car">
               <gds-flex gap="xs">
                 <gds-container width="100px"></gds-container>

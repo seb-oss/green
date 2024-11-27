@@ -12,10 +12,10 @@ import { watch } from '@sebgroup/green-core/utils/decorators/watch.js'
 export class PageSection extends LitElement {
   static styles = css`
     :host {
-      display: block;
-      transition: all 0.5s;
-      overflow: hidden;
-      padding-bottom: 2px;
+      display: contents;
+      /* transition: all 0.5s; */
+      /* overflow: hidden; */
+      /* padding-bottom: 2px; */
     }
   `
 
@@ -33,19 +33,21 @@ export class PageSection extends LitElement {
   @watch('show', { waitUntilFirstUpdate: true })
   @resizeObserver()
   onShowChange() {
-    console.log('show', this.show)
-    const height = this.scrollHeight
+    // console.log('show', this.show)
+    // const height = this.scrollHeight
     if (this.show) {
-      this.style.height = `${height}px`
-      this.style.opacity = '1'
-      this.style.marginBottom = 'var(--gds-space-3xl)'
-      setTimeout(() => {
-        this.style.height = 'auto'
-      }, 500)
+      this.style.display = `contents`
+      // this.style.height = `${height}px`
+      // this.style.opacity = '1'
+      // this.style.marginBottom = 'var(--gds-space-3xl)'
+      // setTimeout(() => {
+      //   this.style.height = 'auto'
+      // }, 500)
     } else {
-      this.style.height = '0'
-      this.style.opacity = '0'
-      this.style.marginBottom = '0'
+      this.style.display = `none`
+      // this.style.height = '0'
+      // this.style.opacity = '0'
+      // this.style.marginBottom = '0'
     }
   }
 }

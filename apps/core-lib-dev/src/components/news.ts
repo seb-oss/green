@@ -12,6 +12,7 @@ import '@sebgroup/green-core/components/grid/index.js'
 import '@sebgroup/green-core/components/img/index.js'
 import '@sebgroup/green-core/components/mask/index.js'
 import '@sebgroup/green-core/components/text/index.js'
+import '@sebgroup/green-core/components/theme/index.js'
 import '../../../../libs/core/src/primitives/ripple'
 import '@sebgroup/green-core/components/icon/icons/cross-small.js'
 import '@sebgroup/green-core/components/icon/icons/home-open.js'
@@ -62,7 +63,6 @@ export class TpNewsItem extends LitElement {
     dialog {
       border: none;
       opacity: 1;
-
       padding: 0;
       @media (max-width: 768px) {
         margin: 0;
@@ -168,7 +168,8 @@ export class TpNewsItem extends LitElement {
   }
 
   render() {
-    return html` <dialog
+    return html`
+      <dialog
         @click=${async (e: MouseEvent) => {
           const dialog = await this.dialogElement
 
@@ -178,24 +179,20 @@ export class TpNewsItem extends LitElement {
         }}
       >
         <gds-theme color-scheme="dark">
-          <gds-card
-            level="1"
-            height="100%"
-            padding="0"
-            border="0"
-            border-radius="0"
-          >
+          <gds-card level="1" height="100%" padding="0" border="0">
             <gds-flex flex-direction="column" gap="xl">
               <div class="grid">
                 <div class="button">
-                  <gds-button
-                    rank="secondary"
-                    variant="neutral"
-                    size="small"
-                    @click="${this.#handleCloseModal}"
-                  >
-                    <gds-icon-cross-small></gds-icon-cross-small>
-                  </gds-button>
+                  <gds-theme>
+                    <gds-button
+                      rank="secondary"
+                      variant="neutral"
+                      size="small"
+                      @click="${this.#handleCloseModal}"
+                    >
+                      <gds-icon-cross-small></gds-icon-cross-small>
+                    </gds-button>
+                  </gds-theme>
                 </div>
                 <gds-flex flex-direction="column" gap="xl">
                   <gds-video
@@ -292,7 +289,8 @@ export class TpNewsItem extends LitElement {
             ></gds-container>
           </gds-flex>
         </gds-flex>
-      </gds-card>`
+      </gds-card>
+    `
   }
 }
 
