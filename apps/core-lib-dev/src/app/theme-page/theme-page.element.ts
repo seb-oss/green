@@ -67,6 +67,11 @@ export class ThemePage extends LitElement {
           }}></tp-page-header>
         </gds-container>
 
+
+        <gds-flex flex-direction="column" gap="xl" padding="xs">
+          <tp-accounts-modal></tp-accounts-modal>
+        </gds-flex>
+
       <gds-container padding="0 2xs; m{0 s}">
         <!-- (Blue) Main dashboard section -->
         <tp-page-section .show=${this.hasAccounts}>
