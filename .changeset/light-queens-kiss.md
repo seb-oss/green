@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Fix datepicker label lineheight
+**Datepicker:** Fix label line-height in transitional styles
