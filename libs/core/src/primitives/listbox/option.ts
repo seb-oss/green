@@ -3,11 +3,11 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-import { Focusable } from '../../mixins/focusable'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
+import { Focusable } from '../../utils/mixins/focusable'
 import style from './option.styles'
 
 import '../../components/icon/icons/checkmark'

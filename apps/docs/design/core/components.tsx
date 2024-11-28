@@ -19,14 +19,22 @@ type ExampleComponents = {
 
 const examples: ExampleComponents = EXAMPLES
 
-export default function Components({ title }: { title: string }) {
+interface ComponentsProps {
+  title: string
+  tag?: string
+}
+
+export default function Components({ title, tag }: ComponentsProps) {
   const components = allComponents
     .filter((component) => {
+      if (tag && !component.tags?.split(', ').includes(tag)) {
+        return false
+      }
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }
-      if (component.private && !isDev) {
-        return true
+      if (!isDev && component.private) {
+        return false
       }
       return true
     })
@@ -34,8 +42,12 @@ export default function Components({ title }: { title: string }) {
 
   return (
     <GdsFlex gap="m" flex-direction="column">
-      {title && <GdsText tag="h2">{title}</GdsText>}
-      <GdsGrid columns="2; m{1} l{3}" gap="xl">
+      {title && (
+        <GdsText tag="h1" font-size="display-s; m{display-m}" margin="0 0 xl 0">
+          {title}
+        </GdsText>
+      )}
+      <GdsGrid columns="1; xs{2} s{2} m{2}" gap="s; s{xl}">
         {components.map((component, idx) => {
           const PATH = component.title.replace(' ', '')
           const Preview = examples[PATH]
@@ -53,9 +65,9 @@ export default function Components({ title }: { title: string }) {
                     align-items="flex-start"
                     justify-content="center"
                     padding="0"
-                    background="secondary"
+                    background="primary"
                   >
-                    {Preview ? <Preview /> : null}
+                    {Preview ? <Preview cover={true} /> : null}
                   </GdsFlex>
                 ) : component.title === 'Calendar' ||
                   component.title === 'Image' ||
@@ -84,9 +96,9 @@ export default function Components({ title }: { title: string }) {
                     </GdsFlex>
                   </GdsFlex>
                 )}
-                <GdsDivider padding="s" opacity="0.2"></GdsDivider>
+                <GdsDivider opacity="0.2"></GdsDivider>
                 <GdsFlex
-                  z-index="18"
+                  z-index="2"
                   background="secondary; hover:primary"
                   min-width="100%"
                 >
@@ -98,7 +110,7 @@ export default function Components({ title }: { title: string }) {
                       min-width="100%"
                     >
                       <GdsText tag="h5">{component.title}</GdsText>
-                      <IconChevronRight width="16"></IconChevronRight>
+                      <IconChevronRight></IconChevronRight>
                     </GdsFlex>
                   </Link>
                 </GdsFlex>
