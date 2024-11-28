@@ -98,14 +98,16 @@
   flex: 1; /* Gör alla knappar lika stora */
   /* padding: 10px; */
   margin-top: 0;
+  font-weight: 450;
 }
 
 #cc-main .cm__btns {
   /* border-top: 1px solid var(--gds-color-l2-border-primary); */
+  border-top: none;
 }
 
 #cc-main .cm__body {
-  padding: var(--gds-space-m, 0);
+  padding: var(--gds-space-l, 0);
 }
 
 #cc-main .cm__texts {
@@ -125,6 +127,7 @@
 
 #cc-main .cm__title + .cm__desc {
   margin-top: 0;
+  font-weight: 450;
 }
 
 #cc-main .cm__btns,
