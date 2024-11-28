@@ -12,18 +12,15 @@ export default function Hero({
   compact?: boolean
 }) {
   return (
-    <GdsFlex
-      flex-direction="column"
-      max-width="100ch"
-      gap="2xl"
-      min-height={compact ? '20vh' : 'calc(100vh - 220px)'}
-      justify-content="flex-end"
-    >
-      <GdsText tag="h1" font-size="display-2xl" font-weight="book">
+    <GdsFlex flex-direction="column" gap="l; s{2xl}">
+      <GdsText tag="h1" font-size="display-s; m{display-m}">
         {heading}
       </GdsText>
       {preamble && (
-        <GdsText font-size="heading-l" color="secondary">
+        <GdsText
+          font-size="heading-s; m{heading-m} l{heading-m}"
+          color="secondary"
+        >
           {preamble}
         </GdsText>
       )}
