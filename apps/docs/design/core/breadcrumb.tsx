@@ -33,7 +33,7 @@ const Breadcrumbs = ({ home, separator, activeClass, slug }: TrailTypes) => {
 
   return (
     <GdsText font-size="detail-xs">
-      <GdsFlex gap="s" align-items="center">
+      <GdsFlex gap="s" align-items="center" margin="0 0 2xl 0">
         <Link href={'/'}>{home}</Link>
         {separator}
         <Link href={'/components'}>Component</Link>

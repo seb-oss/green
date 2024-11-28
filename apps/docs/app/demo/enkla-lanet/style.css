@@ -1,0 +1,26 @@
+/* img.figure {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+.enkla {
+  min-width: 100%;
+  gds-grid {
+    width: 100%;
+  }
+
+  img {
+    border-radius: 8px;
+  }
+
+  form {
+    border: 1px solid color-mix(in srgb, currentcolor, transparent 92%);
+    border-radius: 8px;
+    padding: 20px;
+  }
+}
+
+gds-grid {
+  margin-inline: auto;
+}
