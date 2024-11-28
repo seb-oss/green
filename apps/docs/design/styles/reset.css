@@ -87,10 +87,5 @@
         stroke-linejoin: round;
       }
     }
-
-    ::part(_button).circle {
-      block-size: 32px !important;
-      inline-size: 32px !important;
-    }
   }
 }

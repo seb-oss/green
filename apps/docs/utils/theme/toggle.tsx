@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useContext } from 'react'
-import { GdsButton, GdsContainer } from '$/import/components'
+import { GdsContainer, GdsMenuButton } from '$/import/components'
 import { IconMoon, IconSun } from '$/import/icons'
 import { Context } from '$/provider/provider'
 
@@ -32,15 +32,15 @@ export function ThemeToggle() {
   }, [toggleTheme])
 
   return (
-    <GdsButton
+    <GdsMenuButton
       onClick={() => {
         toggleTheme()
       }}
       aria-label={`Toggle ${theme === 'dark' ? 'Light' : 'Dark'} Theme`}
-      rank="tertiary"
-      size="small"
     >
-      {theme === 'dark' ? <Light /> : <Dark />}
-    </GdsButton>
+      <GdsContainer min-width="24px">
+        {theme === 'dark' ? <Light /> : <Dark />}
+      </GdsContainer>
+    </GdsMenuButton>
   )
 }

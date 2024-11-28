@@ -49,11 +49,11 @@ export default function Footer() {
   return (
     <GdsFlex
       flex-direction="column"
-      padding="l 0;"
+      padding="2xl; s{6xl 2xl}"
       gap="2xl; s{5xl}"
       border="4xs/primary 0 0 0"
     >
-      {/* <GdsFlex>
+      <GdsFlex>
         <GdsText tag="h2">Green Design System</GdsText>
       </GdsFlex>
       <GdsFlex gap="2xl; s{8xl}" flex-direction="column; s{row}">
@@ -90,7 +90,7 @@ export default function Footer() {
             </Link>
           ))}
         </GdsFlex>
-      </GdsFlex> */}
+      </GdsFlex>
       <GdsFlex justify-content="space-between" align-items="center">
         {text}
         <GdsButton data-cc="c-settings" rank="tertiary">

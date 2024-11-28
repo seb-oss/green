@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import { GdsButton, GdsContainer, GdsFlex, GdsText } from '$/import/components'
 import { IconMinusLarge, IconPlusLarge } from '$/import/icons'
 
-import { GdsButton as GdsButtonCore } from '@sebgroup/green-core/components/button'
-import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
-
 export function Accordion({ children }: { children: React.ReactNode }) {
   return <div className="gds-accordion">{children}</div>
 }
@@ -24,30 +21,9 @@ export interface AccordionItemInterface {
    * */
   labelElementLevel: 2 | 3 | 4 | 5 | 6
   id?: string
-  onClick?: (
-    e:
-      | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
-          MouseEvent
-        >
-      | Event,
-  ) => void
-  onOpen?: (
-    e:
-      | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
-          MouseEvent
-        >
-      | Event,
-  ) => void
-  onClose?: (
-    e:
-      | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
-          MouseEvent
-        >
-      | Event,
-  ) => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 const AccordionItemIcon = ({ isOpen }: { isOpen: boolean }) => {
@@ -72,9 +48,7 @@ export function AccordionItem({
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOnClick = (
-    event:
-      | React.MouseEvent<GdsContainerCore | GdsButtonCore, MouseEvent>
-      | Event,
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     onClick && onClick(event)
     setIsOpen((state) => {

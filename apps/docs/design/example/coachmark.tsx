@@ -9,7 +9,7 @@ const Coachmark = () => (
       <IconPin />
       <GdsText>Coachmark</GdsText>
     </GdsFlex>
-    <GdsCoachmark target={['target']} placement="bottom">
+    <GdsCoachmark target="target" placement="bottom">
       This is the coachmark content.
     </GdsCoachmark>
   </>
