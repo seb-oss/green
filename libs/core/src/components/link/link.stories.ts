@@ -88,12 +88,12 @@ export const TextDecoration: Story = {
     <gds-flex gap="4xl" width="600px" flex-direction="column">
       <gds-flex gap="xl">
         <gds-flex flex-direction="column" gap="m" flex="1">
-          <gds-text tag="small">Underlined</gds-text>
+          <gds-text tag="small">Link with Underline</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
           <gds-link text-decoration="underline"> Link text </gds-link>
         </gds-flex>
         <gds-flex flex-direction="column" gap="m" flex="1">
-          <gds-text tag="small">No Underline</gds-text>
+          <gds-text tag="small">Link without Underline</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
           <gds-link text-decoration="none"> Link text </gds-link>
         </gds-flex>
@@ -101,7 +101,7 @@ export const TextDecoration: Story = {
 
       <gds-flex gap="xl">
         <gds-flex flex-direction="column" gap="m" flex="1">
-          <gds-text tag="small">Underline Hover + Icon</gds-text>
+          <gds-text tag="small">Link with Underline on Hover and Icon</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
           <gds-link variant="secondary">
             Link text
@@ -110,7 +110,7 @@ export const TextDecoration: Story = {
         </gds-flex>
 
         <gds-flex flex-direction="column" gap="m" flex="1">
-          <gds-text tag="small">No underline on hover</gds-text>
+          <gds-text tag="small">Link with No Underline on Hover</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
           <gds-link text-decoration="underline; hover:none">
             Link text
