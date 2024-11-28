@@ -39,8 +39,8 @@ export default function RootLayout({
               <Main>
                 {children}
                 <Consent />
+                <Footer />
               </Main>
-              <Footer />
             </GdsFlex>
           </Fonts>
         </Provider>
