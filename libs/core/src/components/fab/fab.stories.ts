@@ -207,6 +207,17 @@ export const Color: Story = {
  *    I'm a FAB
  * </gds-fab>
  * ```
+ *
+ * And also the `position` property can be set to use any valid CSS position values.
+ *
+ * e.g
+ *
+ * ```html
+ * <gds-fab position="absolute">
+ *    Absolute Position
+ * </gds-fab>
+ * ```
+ *
  */
 
 export const Position: Story = {
@@ -218,7 +229,9 @@ export const Position: Story = {
   },
   render: (args) => html`
     <gds-flex height="300px">
-      <gds-fab inset="auto 48px 48px auto"> I'm a FAB </gds-fab>
+      <gds-fab inset="auto 48px 48px auto" position="absolute">
+        I'm a FAB
+      </gds-fab>
     </gds-flex>
   `,
 }
