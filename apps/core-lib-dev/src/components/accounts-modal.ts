@@ -61,6 +61,7 @@ export class TPAccountsModal extends LitElement {
           overflow-x: hidden;
           overflow-y: auto;
           overscroll-behavior: contain;
+          z-index: 2000;
 
           @starting-style {
             opacity: 0;
@@ -76,7 +77,7 @@ export class TPAccountsModal extends LitElement {
       </style>
       <!-- <gds-container display="block; m{none}" min-width="100%"> -->
       <!-- <gds-container display="block; m{none}"> -->
-      <gds-container display="block; m{none}">
+      <gds-container display="block; m{none}" z-index="2000">
         <tp-card wide>
           <gds-text slot="header" font-size="heading-s">Transaction</gds-text>
           <gds-button slot="action" size="small" rank="tertiary">

@@ -92,7 +92,7 @@ export class FAB extends LitElement {
         }
 
         .fab::part(_button) {
-          z-index: 1080 !important;
+          z-index: 2;
           margin: 0 auto;
         }
 
@@ -149,7 +149,11 @@ export class FAB extends LitElement {
             background="#ffffff/0.8"
           >
             <gds-flex flex="1" justify-content="flex-end">
-              <gds-button @click=${this.closeModal} rank="secondary">
+              <gds-button
+                @click=${this.closeModal}
+                rank="secondary"
+                size="small"
+              >
                 <gds-icon-cross-large></gds-icon-cross-large>
               </gds-button>
             </gds-flex>
