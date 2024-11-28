@@ -14,5 +14,9 @@
     @include common.add-form-control();
   }
 
+  .error-item {
+    @include mixins.text-field--error-item();
+  }
+
   @include mixins.add-radio();
 }

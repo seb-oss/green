@@ -56,7 +56,7 @@
       *transloco="let t; read: scope">
       <span class="error-item">
         <span class="error-item--icon"
-          *ngIf="withErrorIcon"><fa-icon [icon]="warningIcon"></fa-icon>
+          *ngIf="withErrorIcon"><gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
         </span>
         <span *ngIf="error; else errorsRef"
           class="error-item--text"
@@ -78,7 +78,7 @@
       *ngIf="invalid && error">
       <span class="error-item">
         <span class="error-item--icon"
-          *ngIf="withErrorIcon"><fa-icon [icon]="warningIcon"></fa-icon>
+          *ngIf="withErrorIcon"><gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
         </span>
         <span class="error-item--text"
           [attr.data-thook]="thook + '-errorlabel-' + i">{{error}}</span>
