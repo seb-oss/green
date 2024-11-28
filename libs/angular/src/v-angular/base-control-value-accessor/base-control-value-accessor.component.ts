@@ -32,7 +32,6 @@ import {
 } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
-import { faTriangleExclamation } from '@fortawesome/pro-regular-svg-icons'
 import {
   TRANSLOCO_SCOPE,
   TranslocoScope,
@@ -187,8 +186,6 @@ export class NgvBaseControlValueAccessorComponent
 
   /* OTHER VARIABLES */
   scope: string | undefined
-  /** @internal */
-  warningIcon = faTriangleExclamation
 
   /* LIFE CYCLE VARIABLES */
 
