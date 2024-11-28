@@ -6,6 +6,8 @@ import './link.js'
 import '../popover/popover.js'
 import '../flex/flex.js'
 import '../card/card.js'
+import '../text/text.js'
+import '../divider/divider.js'
 import '../icon/icons/magnifying-glass.js'
 import '../icon/icons/bell.js'
 import '../icon/icons/star.js'
@@ -36,6 +38,7 @@ const DefaultParams: Story = {
   },
   args: {
     innerHTML: `Link text`,
+    // 'text-decoration': 'underline',
   },
 }
 
@@ -68,13 +71,33 @@ export const Trail: Story = {
 }
 
 /**
- * A link component has a secondary variant that reverts the underline behavior.
+ * A link component has a `text-decoration` property that accepts all valid CSS `text-decoration` values.
+ *
+ * It also supports setting `text-decoration` or disable on hover by using the `hover:` prefix.
+ *
+ * ```html
+ * <gds-link text-decoration="hover:underline">Underline on Hover</gds-link>
+ * ```
  */
-export const Variants: Story = {
+export const TextDecoration: Story = {
   ...DefaultParams,
-  render: () =>
-    html` <gds-link variant="secondary">
-      Link text
-      <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-    </gds-link>`,
+  name: 'Text Decoration',
+  render: () => html`
+    <gds-flex gap="xl" width="400px">
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-text>With Icon</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-link variant="secondary">
+          Link text
+          <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+        </gds-link>
+      </gds-flex>
+
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-text>With Icon</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-link text-decoration="none; hover:underline">xasdasdasd</gds-link>
+      </gds-flex>
+    </gds-flex>
+  `,
 }

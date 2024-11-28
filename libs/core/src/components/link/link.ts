@@ -7,6 +7,7 @@ import { html as staticHtml } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import style from './link.styles'
 
 /**
@@ -58,6 +59,22 @@ export class GdsLink extends GdsElement {
    */
   @property()
   variant: 'default' | 'secondary' = 'default'
+
+  /**
+   * Controls the text-decoration property of the link.
+   * Supports all valid CSS text-decoration values.
+   *
+   * Setting `text-decoration` on hover you can do it like this:
+   * ```html
+   * <gds-link text-decoration="hover:underline">Underline on Hover</gds-link>
+   * ```
+   * @property text-decoration
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: 'a',
+  })
+  'text-decoration'?: string
 
   constructor() {
     super()
