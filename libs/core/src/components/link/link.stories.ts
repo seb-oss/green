@@ -38,7 +38,6 @@ const DefaultParams: Story = {
   },
   args: {
     innerHTML: `Link text`,
-    // 'text-decoration': 'underline',
   },
 }
 
@@ -51,6 +50,7 @@ export const Basic: Story = {
  */
 export const Lead: Story = {
   ...DefaultParams,
+  name: 'Icon: Lead',
   render: () =>
     html` <gds-link>
       <gds-icon-cain-link slot="lead"></gds-icon-cain-link>
@@ -63,6 +63,7 @@ export const Lead: Story = {
  */
 export const Trail: Story = {
   ...DefaultParams,
+  name: 'Icon: Trail',
   render: () =>
     html` <gds-link>
       Link text
@@ -103,7 +104,7 @@ export const TextDecoration: Story = {
         <gds-flex flex-direction="column" gap="m" flex="1">
           <gds-text tag="small">Link with Underline on Hover and Icon</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
-          <gds-link variant="secondary">
+          <gds-link>
             Link text
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-link>
