@@ -96,7 +96,6 @@ export default function ComponentLayout({
         }),
       {
         ssr: false,
-        loading: () => '',
       },
     )
 
@@ -105,17 +104,17 @@ export default function ComponentLayout({
   return (
     <GdsFlex
       flex-direction="column"
-      max-width="max-content"
+      width="100%"
       justify-content="center"
       margin="0 auto"
     >
-      <Breadcrumb
-        home={'Home'}
-        separator={<GdsText font-size="body-s"> / </GdsText>}
-        slug={slug}
-      />
-      <GdsFlex gap="4xl">
-        <GdsFlex width="100%; m{80ch}" flex-direction="column" gap="2xl">
+      <GdsFlex gap="l">
+        <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
+          <Breadcrumb
+            home={'Home'}
+            separator={<GdsText font-size="body-s"> / </GdsText>}
+            slug={slug}
+          />
           <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
             <GdsFlex
               justify-content="space-between"
@@ -168,7 +167,9 @@ export default function ComponentLayout({
             </time>
           </footer>
         </GdsFlex>
-        <GdsFlex display="none; m{flex}">{TOC}</GdsFlex>
+        <GdsFlex display="none; l{flex}" width="232px">
+          {TOC}
+        </GdsFlex>
       </GdsFlex>
     </GdsFlex>
   )

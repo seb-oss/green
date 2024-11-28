@@ -25,7 +25,7 @@ export default function Do({ children }: DoProps) {
         gap="s"
         padding="xs m"
       >
-        <IconCheckmark height="14" />
+        <IconCheckmark />
         <GdsText tag="small" font-weight="book">
           DO
         </GdsText>

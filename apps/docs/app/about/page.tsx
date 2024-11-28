@@ -1,12 +1,6 @@
 'use client'
 
-import {
-  GdsFlex,
-  GdsGrid,
-  GdsImg,
-  GdsRichText,
-  GdsText,
-} from '$/import/components'
+import { GdsFlex, GdsImg, GdsRichText, GdsText } from '$/import/components'
 import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
 import Link from 'core/link'
@@ -43,52 +37,52 @@ const HEADINGS = [
 export default function About() {
   return (
     <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
-      <Hero
-        heading="About"
-        preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
-      />
-      <GdsFlex gap="4xl; m{8xl}">
-        <GdsFlex gap="2xl; m{4xl}" flex-direction="column">
-          <GdsGrid columns="1; m{2}">
+      <GdsFlex gap="4xl; m{l}" margin="0 auto">
+        <GdsFlex gap="2xl; m{4xl}" flex-direction="column" max-width="80ch">
+          <Hero
+            heading="About"
+            preamble="Green Design System is the design system for Skandinaviska Enskilda Banken to make it easier and faster to build beautiful digital products and experiences under the SEB brand."
+          />
+
+          <GdsFlex flex-direction="column" gap="xl">
             <GdsText tag="h2" id="what-is-green">
               What is Green?
             </GdsText>
-            <GdsFlex flex-direction="column" gap="xl">
-              <GdsText font-size="body-l" color="secondary">
-                Green Design System is a set of standards to manage design at
-                scale by reducing redundancy while creating a shared language
-                and visual consistency across different pages and channels.
-              </GdsText>
-              <GdsText font-size="body-l" color="secondary">
-                In order to have velocity when building digital products and
-                keep a cohesive user experience cross channels and platforms
-                designers and developers should use the Green Design System.
-              </GdsText>
-              <GdsText font-size="body-l" color="secondary">
-                By using pre-built components for design tools and front-end
-                frameworks the time teams spend designing and building is
-                minimized. Instead of spending time on building and re-building
-                the same components in multiple teams, teams can spend that time
-                on addressing specific user needs to improve user experience.
-              </GdsText>
-              <GdsText font-size="body-l" color="secondary">
-                {`The design system is called Green as an homage to SEB being
+            <GdsText font-size="body-l" color="secondary">
+              Green Design System is a set of standards to manage design at
+              scale by reducing redundancy while creating a shared language and
+              visual consistency across different pages and channels.
+            </GdsText>
+            <GdsText font-size="body-l" color="secondary">
+              In order to have velocity when building digital products and keep
+              a cohesive user experience cross channels and platforms designers
+              and developers should use the Green Design System.
+            </GdsText>
+            <GdsText font-size="body-l" color="secondary">
+              By using pre-built components for design tools and front-end
+              frameworks the time teams spend designing and building is
+              minimized. Instead of spending time on building and re-building
+              the same components in multiple teams, teams can spend that time
+              on addressing specific user needs to improve user experience.
+            </GdsText>
+            <GdsText font-size="body-l" color="secondary">
+              {`The design system is called Green as an homage to SEB being
                 viewed as the green bank with green as a primary colour for the
                 brand and the bank. The bank also plays a great role in the
                 transition to anet zero societyand has a focus
                 onsustainabilityand helping it's clients to become more
                 sustainable. The design system initative was also seen as
                 aGreenfieldproject.`}
-              </GdsText>
-            </GdsFlex>
-          </GdsGrid>
+            </GdsText>
+          </GdsFlex>
+
           <GdsImg
             src="/content/woods-cabin.png"
             alt="Wooden cabin in the woods"
             object-fit="cover"
             aspect-ratio="16 / 9"
           />
-          <GdsGrid columns="1; m{2}">
+          <GdsFlex gap="l" flex-direction="column">
             <GdsText tag="h2" id="how-green-works">
               How Green works
             </GdsText>
@@ -99,8 +93,8 @@ export default function About() {
               contributors contribute to the design system with insights, design
               andcode.
             </GdsText>
-          </GdsGrid>
-          <GdsGrid columns="1; m{2}">
+          </GdsFlex>
+          <GdsFlex gap="l" flex-direction="column">
             <GdsText tag="h2" id="maintaining-and-educating">
               Maintaining and educating
             </GdsText>
@@ -189,16 +183,16 @@ export default function About() {
                 </AccordionItem>
               </Accordion>
             </GdsFlex>
-          </GdsGrid>
-          <GdsGrid columns="1; m{2}">
+          </GdsFlex>
+          <GdsFlex gap="l" flex-direction="column">
             <GdsText tag="h2" id="build-on-contributions">
               Built on contributions
             </GdsText>
             <GdsText font-size="body-l" color="secondary">
               {`Green Design System is built on contributions from everyone. Product teams at SEB have the best knowledge what their product's end user needs. That's why it's vital that everyone contributes with what's possible. That can be everything from insights regarding a specific component or pull requests with a complete feature or a design updates in a Figma branch.`}
             </GdsText>
-          </GdsGrid>
-          <GdsGrid columns="1; m{2}">
+          </GdsFlex>
+          <GdsFlex gap="l" flex-direction="column">
             <GdsText tag="h2" id="contact-us">
               Contact us
             </GdsText>
@@ -230,7 +224,7 @@ export default function About() {
                 </ul>
               </GdsRichText>
             </GdsFlex>
-          </GdsGrid>
+          </GdsFlex>
         </GdsFlex>
         <GdsFlex display="none; m{flex}" min-width="240px">
           <TOC headings={HEADINGS} component={'About'} />
