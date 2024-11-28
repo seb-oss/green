@@ -5,73 +5,61 @@
   "sourceRoot": "apps/core-lib-dev/src",
   "tags": [],
   "targets": {
-    "build-app": {
-      "dependsOn": ["build"]
-    },
     "build": {
-      "executor": "@nx/vite:build",
+      "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "main": "apps/core-lib-dev/src/main.ts",
-        "entryPoint": "apps/core-lib-dev/src/main.ts",
         "outputPath": "dist/apps/core-lib-dev",
-        "base": ""
+        "compiler": "babel",
+        "main": "apps/core-lib-dev/src/main.ts",
+        "tsConfig": "apps/core-lib-dev/tsconfig.app.json",
+        "webpackConfig": "apps/core-lib-dev/webpack.config.js",
+        "assets": ["apps/core-lib-dev/src/assets"],
+        "index": "apps/core-lib-dev/src/index.html",
+        "baseHref": "/",
+        "styles": ["apps/core-lib-dev/src/styles.scss"],
+        "scripts": []
       },
       "configurations": {
-        "development": {
-          "mode": "development"
-        },
         "production": {
-          "mode": "production"
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/core-lib-dev/src/environments/environment.ts",
+              "with": "apps/core-lib-dev/src/environments/environment.prod.ts"
+            }
+          ]
         }
       }
     },
     "serve": {
-      "executor": "@nx/vite:dev-server",
-      "defaultConfiguration": "development",
+      "executor": "@nx/webpack:dev-server",
+      "inputs": ["core"],
       "options": {
-        "buildTarget": "core-lib-dev:build"
+        "buildTarget": "core-lib-dev:build",
+        "port": 4210,
+        "host": "0.0.0.0"
       },
       "configurations": {
-        "development": {
-          "buildTarget": "core-lib-dev:build:development",
-          "hmr": true
-        },
-        "production": {
-          "buildTarget": "core-lib-dev:build:production",
-          "hmr": false
-        }
-      }
-    },
-    "preview": {
-      "dependsOn": ["build"],
-      "executor": "@nx/vite:preview-server",
-      "defaultConfiguration": "development",
-      "options": {
-        "buildTarget": "core-lib-dev:build"
-      },
-      "configurations": {
-        "development": {
-          "buildTarget": "core-lib-dev:build:development"
-        },
         "production": {
           "buildTarget": "core-lib-dev:build:production"
         }
       }
     },
-    "collect-trace": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "node apps/core-lib-dev/scripts/puppeteer-trace.mjs"
-      }
+    "lint": {
+      "executor": "@nx/eslint:lint"
     },
-    "serve-static": {
-      "executor": "@nx/web:file-server",
-      "dependsOn": ["build"],
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "buildTarget": "core-lib-dev:build",
-        "spa": true
+        "jestConfig": "apps/core-lib-dev/jest.config.ts"
       }
     }
   }

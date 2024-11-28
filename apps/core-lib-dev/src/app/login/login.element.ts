@@ -1,11 +1,11 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping.js'
+import { html } from '@sebgroup/green-core/scoping'
 
 import './login.css'
 
-//const coverOne = `https://github.com/user-attachments/assets/b8ee5060-b5dd-40b4-b626-aefbd960ec35`
+const coverOne = `https://github.com/user-attachments/assets/b8ee5060-b5dd-40b4-b626-aefbd960ec35`
 const coverTwo = `https://github.com/user-attachments/assets/1c038c0b-b468-48d2-b171-092534b3a0e2`
 
 @customElement('gds-login')
@@ -139,7 +139,6 @@ export class CardExample extends LitElement {
                               },
                               'Personnumret måste vara 12 siffror.',
                             ]
-                          return
                         },
                       }}
                     ></gds-input>
@@ -177,7 +176,6 @@ export class CardExample extends LitElement {
                               },
                               'Koden måste vara 6 siffror.',
                             ]
-                          return
                         },
                       }}
                     ></gds-input>

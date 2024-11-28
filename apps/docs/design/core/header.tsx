@@ -32,7 +32,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
       level="1"
       position="sticky"
       inset="0"
-      z-index="100"
+      z-index="1100"
       background="primary"
     >
       <GdsFlex
