@@ -2,7 +2,12 @@
 
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import Link from 'next/link'
-import { GdsContainer, GdsFlex, GdsMenuButton } from '$/import/components'
+import {
+  GdsButton,
+  GdsContainer,
+  GdsFlex,
+  GdsMenuButton,
+} from '$/import/components'
 import {
   IconBarsThree,
   IconBrandGithub,
@@ -27,24 +32,27 @@ export const Header = forwardRef(({ ...props }, ref) => {
       level="1"
       position="sticky"
       inset="0"
-      z-index="100"
+      z-index="1100"
       background="primary"
     >
       <GdsFlex
         justify-content="space-between"
         min-width="100%"
         align-items="center"
-        height="72px"
-        border="0 0 4xs/primary 0"
+        height="60px"
+        padding-inline="s"
       >
-        <GdsMenuButton onClick={toggleNav}>
-          {isNavOpen === true ? (
+        {isNavOpen === true ? (
+          <GdsButton onClick={toggleNav} rank="tertiary" size="small">
             <IconCrossLarge slot="lead" />
-          ) : (
+            Menu
+          </GdsButton>
+        ) : (
+          <GdsButton onClick={toggleNav} rank="tertiary" size="small">
             <IconBarsThree slot="lead" />
-          )}
-          Menu
-        </GdsMenuButton>
+            Menu
+          </GdsButton>
+        )}
         <GdsContainer
           position="absolute"
           margin="0 auto"
@@ -55,19 +63,26 @@ export const Header = forwardRef(({ ...props }, ref) => {
             <IconBrandSeb />
           </Link>
         </GdsContainer>
-        <GdsFlex height="100%" padding="0; s{0 l}">
+        <GdsFlex
+          height="100%"
+          padding="0; s{0 l}"
+          align-items="center"
+          gap="2xs"
+        >
           <GdsContainer display="none; s{block}">
-            <GdsMenuButton onClick={toggleCmd}>
+            <GdsButton onClick={toggleCmd} rank="tertiary" size="small">
               <IconMagnifyingGlass slot="lead" />
               {isWindows ? '/' : '⌘K'}
-            </GdsMenuButton>
+            </GdsButton>
           </GdsContainer>
-          <GdsMenuButton
+          <GdsButton
             href="https://github.com/sebgroup/green"
             target="_blank"
+            rank="tertiary"
+            size="small"
           >
             <IconBrandGithub />
-          </GdsMenuButton>
+          </GdsButton>
           <ThemeToggle />
         </GdsFlex>
       </GdsFlex>
