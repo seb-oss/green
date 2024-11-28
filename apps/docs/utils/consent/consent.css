@@ -1,14 +1,7 @@
 :root {
-
   /* Gds styling for the Cookieconsent */
-  --gds-color-l3-background-primary: #1b1b1b;
-  --gds-color-l3-content-primary: #ffffff;
 
-
-
-  --cc-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  --cc-font-family: var(--gds-font-family);
   --cc-font-size: 16px;
   --cc-bg: #fff;
   --cc-z-index: 2147483647;
@@ -70,16 +63,73 @@
 
 /* The css for the Cookie Consent */
 
+#cc-main .cm__title {
+  color: var(--gds-color-l2-content-secondary);
+  margin: 0px;
+  padding: 0px;
+  font-size: 22px;
+  font-weight: 450;
+  margin-bottom: var(--gds-space-m, 0);
+}
+
+#cc-main .cm {
+  border-radius: var(--gds-space-s);
+  box-shadow: var(--gds-shadow-xl);
+  border: 1px solid var(--gds-color-l2-border-primary);
+}
+
 #cc-main .cm__btn-group {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  gap: 15px;
+  margin-top: var(--gds-space-m);
+}
+
+#cc-main .cm__btn + .cm__btn {
+  margin-top: 0;
+  font-family: var(--gds-font-family);
 }
 
 #cc-main .cm__btn {
   background-color: var(--gds-color-l3-background-primary);
-  border-radius: 20px;
+  border-radius: var(--gds-space-max);
   color: var(--gds-color-l3-content-primary);
-  font-family: inherit;
+  font-family: var(--gds-font-family);
+  flex: 1; /* Gör alla knappar lika stora */
+  /* padding: 10px; */
+  margin-top: 0;
+}
+
+#cc-main .cm__btns {
+  /* border-top: 1px solid var(--gds-color-l2-border-primary); */
+}
+
+#cc-main .cm__body {
+  padding: var(--gds-space-m, 0);
+}
+
+#cc-main .cm__texts {
+  padding: 0;
+  margin-bottom: var(--gds-space-m, 0);
+}
+
+#cc-main .cm__desc,
+#cc-main .cm__title {
+  padding: 0;
+}
+
+#cc-main .cm__desc {
+  padding-bottom: 0;
+  /* line-height: 0; */
+}
+
+#cc-main .cm__title + .cm__desc {
+  margin-top: 0;
+}
+
+#cc-main .cm__btns,
+#cc-main .cm__links {
+  padding: 0;
 }
 
 .cc_div *,
@@ -294,7 +344,7 @@
   -o-user-select: none;
   user-select: none;
 }
-#c-bns button + button,
+/* #c-bns button + button,
 #s-c-bn,
 #s-cnt button + button {
   float: right;
@@ -313,7 +363,7 @@
   background: var(--cc-btn-secondary-hover-bg);
   color: #2d4156;
   color: var(--cc-btn-secondary-hover-text);
-}
+} */
 #s-cnt {
   display: table;
   height: 100%;
