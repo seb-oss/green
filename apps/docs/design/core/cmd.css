@@ -10,7 +10,7 @@
   animation: scaleIn 200ms ease;
   transition: transform 100ms ease;
   outline: none;
-  z-index: 100;
+  z-index: 1050;
   background-color: #fff;
   padding: 40px;
   border-radius: 12px;
@@ -76,12 +76,12 @@
   transition: all 150ms ease;
   transition-property: none;
 
-  &[data-selected="true"] {
+  &[data-selected='true'] {
     background: #000;
     color: #fff;
   }
 
-  &[data-disabled="true"] {
+  &[data-disabled='true'] {
     color: var(--gray8);
     cursor: not-allowed;
   }
@@ -186,12 +186,12 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(28px);
+  backdrop-filter: blur(8px);
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: 0;
+  z-index: 999;
   transition: all 624ms ease;
 
   &.open {
