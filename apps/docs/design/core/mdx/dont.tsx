@@ -21,7 +21,7 @@ export default function Dont({ children }: DontProps) {
     >
       {children}
       <GdsFlex align-items="center" gap="s" padding="xs m">
-        <IconCrossLarge />
+        <IconCrossLarge height="14" />
         <GdsText tag="small" font-weight="book">
           {"DON'T"}
         </GdsText>

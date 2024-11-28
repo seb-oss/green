@@ -6,7 +6,6 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { GdsContainer } from '../container'
 import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
@@ -19,7 +18,7 @@ import textStyles from './text.style'
  *
  */
 @gdsCustomElement('gds-text')
-export class GdsText extends GdsContainer {
+export class GdsText extends GdsElement {
   static styles = [tokens, defaultStyles, textStyles]
 
   /**
@@ -103,6 +102,18 @@ export class GdsText extends GdsContainer {
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   'font-weight'?: string
+
+  /**
+   * Controls the margin of the text.
+   * Supports all the default margin values.
+   *
+   * @property margin
+   */
+  @styleExpressionProperty({
+    property: 'margin',
+    valueTemplate: (v) => v,
+  })
+  margin?: string
 
   /**
    * Controls the text-wrap property of the text.

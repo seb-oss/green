@@ -32,10 +32,6 @@ const style = css`
           text-decoration: underline;
         }
       }
-
-      &.hidden {
-        text-decoration: none;
-      }
     }
   }
 `

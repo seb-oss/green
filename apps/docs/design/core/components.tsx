@@ -33,8 +33,8 @@ export default function Components({ title, tag }: ComponentsProps) {
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }
-      if (!isDev && component.private) {
-        return false
+      if (component.private && !isDev) {
+        return true
       }
       return true
     })
@@ -42,12 +42,8 @@ export default function Components({ title, tag }: ComponentsProps) {
 
   return (
     <GdsFlex gap="m" flex-direction="column">
-      {title && (
-        <GdsText tag="h1" font-size="display-s; m{display-m}" margin="0 0 xl 0">
-          {title}
-        </GdsText>
-      )}
-      <GdsGrid columns="1; xs{2} s{2} m{2}" gap="s; s{xl}">
+      {title && <GdsText tag="h2">{title}</GdsText>}
+      <GdsGrid columns="1; xs{2} s{2} m{3}" gap="s; s{xl}">
         {components.map((component, idx) => {
           const PATH = component.title.replace(' ', '')
           const Preview = examples[PATH]
@@ -96,9 +92,9 @@ export default function Components({ title, tag }: ComponentsProps) {
                     </GdsFlex>
                   </GdsFlex>
                 )}
-                <GdsDivider opacity="0.2"></GdsDivider>
+                <GdsDivider padding="s" opacity="0.2"></GdsDivider>
                 <GdsFlex
-                  z-index="2"
+                  z-index="18"
                   background="secondary; hover:primary"
                   min-width="100%"
                 >
@@ -110,7 +106,7 @@ export default function Components({ title, tag }: ComponentsProps) {
                       min-width="100%"
                     >
                       <GdsText tag="h5">{component.title}</GdsText>
-                      <IconChevronRight></IconChevronRight>
+                      <IconChevronRight width="16"></IconChevronRight>
                     </GdsFlex>
                   </Link>
                 </GdsFlex>
