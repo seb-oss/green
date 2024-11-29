@@ -81,7 +81,7 @@
 #cc-main .cm__btn-group {
   display: flex;
   /* justify-content: space-between; */
-  gap: 15px;
+  gap: var(--gds-space-m, 0);
   margin-top: var(--gds-space-m);
 }
 
@@ -99,6 +99,11 @@
   /* padding: 10px; */
   margin-top: 0;
   font-weight: 450;
+  font-size: var(--gds-text-size-detail-m);
+}
+
+#cc-main .cm__btn:hover {
+  background-color: color-mix(in srgb, var(--gds-color-l3-background-primary), var(--gds-color-l3-states-dark-hover));
 }
 
 #cc-main .cm__btns {
@@ -128,6 +133,7 @@
 #cc-main .cm__title + .cm__desc {
   margin-top: 0;
   font-weight: 450;
+  font-size: var(--gds-text-size-detail-m);
 }
 
 #cc-main .cm__btns,
