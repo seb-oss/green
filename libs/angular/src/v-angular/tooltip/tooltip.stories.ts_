@@ -45,6 +45,15 @@ const Template: StoryFn<NgvTooltipDirective> = (args: NgvTooltipDirective) => ({
   props: args,
 });
 
+const TemplateAccessible: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+  /* spell-checker: disable */
+  template: /*html*/ `
+  <button ${argsToAttr(args)} aria-describedby="accessible-tooltip">Hover me</button>
+  `,
+  /* spell-checker: enable */
+  props: args,
+});
+
 export const Top = Template.bind({});
 Top.args = {
   nggvTooltip: 'This is a tooltip with a really long text that should always be visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -72,4 +81,13 @@ Right.args = {
   ...Top.args,
   nggvTooltip: 'This is a tooltip with a long text that should attempt to be visible',
   placement: 'right',
+};
+
+export const Accessible = TemplateAccessible.bind({});
+Accessible.args = {
+  ...Top.args,
+  nggvTooltip: 'This is a tooltip with a long text that should attempt to be visible',
+  placement: 'right',
+  shown: false,
+  tooltipId: 'accessible-tooltip',
 };

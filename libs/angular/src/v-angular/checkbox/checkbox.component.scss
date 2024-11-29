@@ -9,4 +9,8 @@
   .form-control {
     @include form-mixins.add-form-control;
   }
+
+  .error-item {
+    @include form-mixins.text-field--error-item();
+  }
 }
