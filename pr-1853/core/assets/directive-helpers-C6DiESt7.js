@@ -1,5 +1,0 @@
-import{Z as p}from"./lit-element-C_s9q329.js";/**
- * @license
- * Copyright 2020 Google LLC
- * SPDX-License-Identifier: BSD-3-Clause
- */const{I:d}=p,o=e=>e===null||typeof e!="object"&&typeof e!="function",B=(e,i)=>i===void 0?(e==null?void 0:e._$litType$)!==void 0:(e==null?void 0:e._$litType$)===i,b=e=>e.strings===void 0,c=()=>document.createComment(""),g=(e,i,t)=>{var n;const A=e._$AA.parentNode,_=i===void 0?e._$AB:i._$AA;if(t===void 0){const r=A.insertBefore(c(),_),s=A.insertBefore(c(),_);t=new d(r,s,e,e.options)}else{const r=t._$AB.nextSibling,s=t._$AM,f=s!==e;if(f){let $;(n=t._$AQ)==null||n.call(t,e),t._$AM=e,t._$AP!==void 0&&($=e._$AU)!==s._$AU&&t._$AP($)}if(r!==_||f){let $=t._$AA;for(;$!==r;){const l=$.nextSibling;A.insertBefore($,_),$=l}}}return t},u=(e,i,t=e)=>(e._$AI(i,t),e),v={},x=(e,i=v)=>e._$AH=i,y=e=>e._$AH,S=e=>{var A;(A=e._$AP)==null||A.call(e,!1,!0);let i=e._$AA;const t=e._$AB.nextSibling;for(;i!==t;){const _=i.nextSibling;i.remove(),i=_}};export{S as M,B as e,b as f,o as i,x as m,y as p,g as r,u as v};
