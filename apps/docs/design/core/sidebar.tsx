@@ -144,7 +144,6 @@ export default function Sidebar() {
                     href={subLink.path}
                     className={`fade-in sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
                     key={subIdx}
-                    variant="hidden"
                     onClick={() => {
                       window.innerWidth < 1024 && toggleNav()
                     }}
