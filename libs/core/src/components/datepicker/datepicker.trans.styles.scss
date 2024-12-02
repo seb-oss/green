@@ -88,7 +88,7 @@
       &:focus {
         background: color-mix(
           in srgb,
-          var(--gds-sys-color-blue) 50%,
+          var(--gds-color-l3-content-notice) 50%,
           transparent
         );
         outline: none;
