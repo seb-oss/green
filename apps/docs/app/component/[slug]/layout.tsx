@@ -122,8 +122,14 @@ export default function ComponentLayout({
               gap="xl"
             >
               <GdsFlex flex-direction="column" gap="xs">
-                <GdsText tag="h1">{title}</GdsText>
-                <GdsText tag="p" text-wrap="balance">
+                <GdsText tag="h1" className="transition-element fade-in">
+                  {title}
+                </GdsText>
+                <GdsText
+                  tag="p"
+                  text-wrap="balance"
+                  className="fade-in delay-200"
+                >
                   {summary}
                 </GdsText>
                 {status && (
@@ -145,12 +151,13 @@ export default function ComponentLayout({
                 </GdsFlex>
               </GdsFlex>
             </GdsFlex>
-            <GdsCard>
+            <GdsCard className="transition-element">
               <GdsFlex
                 gap="xl"
                 align-items="center"
                 justify-content="center"
                 height="360px"
+                className="transition-element delay-200"
               >
                 <Preview />
               </GdsFlex>

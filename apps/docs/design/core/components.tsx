@@ -58,6 +58,7 @@ export default function Components({ title, tag }: ComponentsProps) {
               border-radius="s"
               overflow="hidden"
               padding="0"
+              className="transition-element"
             >
               <GdsFlex flex-direction="column">
                 {component.title === 'Calendar' ? (

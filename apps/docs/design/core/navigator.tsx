@@ -97,6 +97,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
       overflow="hidden auto"
       max-height="calc(100vh - 72px)"
       width="100%"
+      className="transition-element"
     >
       <GdsCard padding="m" max-height="max-content">
         <GdsText tag="span" font-size="heading-xs" margin="0 0 s">

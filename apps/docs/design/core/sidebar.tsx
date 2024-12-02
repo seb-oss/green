@@ -89,6 +89,7 @@ export default function Sidebar() {
       max-height="calc(100vh - 60px)"
       overflow="hidden"
       min-width="270px"
+      className="sidebar-transition"
     >
       <GdsFlex flex-direction="column" max-height="100%">
         <GdsContainer
@@ -108,7 +109,7 @@ export default function Sidebar() {
               <GdsFlex key={idx} flex-direction="column" min-width="100%">
                 <Link
                   href={menuItem.path}
-                  className={`sidebar-link ${menuItem.path === path ? 'active' : ''}`}
+                  className={`fade-in sidebar-link ${menuItem.path === path ? 'active' : ''}`}
                   variant="secondary"
                   onClick={() => {
                     window.innerWidth < 1024 && toggleNav()
@@ -142,7 +143,7 @@ export default function Sidebar() {
                 return (
                   <Link
                     href={subLink.path}
-                    className={`sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
+                    className={`fade-in sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
                     key={subIdx}
                     variant="hidden"
                     onClick={() => {
