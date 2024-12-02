@@ -1,7 +1,6 @@
 'use client'
 
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
-import Link from 'next/link'
 import {
   GdsButton,
   GdsContainer,
@@ -18,6 +17,7 @@ import {
 } from '$/import/icons'
 import { Context } from '$/provider/provider'
 import { ThemeToggle } from '$/theme/toggle'
+import Link from 'core/link'
 
 export const Header = forwardRef(({ ...props }, ref) => {
   const { toggleNav, isNavOpen, toggleCmd } = useContext(Context)

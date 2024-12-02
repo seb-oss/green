@@ -114,7 +114,6 @@ export default function Sidebar() {
                   onClick={() => {
                     window.innerWidth < 1024 && toggleNav()
                   }}
-                  text-decoration="none"
                 >
                   <GdsFlex align-content="center" gap="s" padding="xs s">
                     {menuItem.icon && menuItem.icon}
@@ -149,7 +148,6 @@ export default function Sidebar() {
                     onClick={() => {
                       window.innerWidth < 1024 && toggleNav()
                     }}
-                    text-decoration="none"
                   >
                     <GdsFlex
                       key={subIdx}

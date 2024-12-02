@@ -41,7 +41,7 @@ export default function Components({ title, tag }: ComponentsProps) {
     .sort((a, b) => a.title.localeCompare(b.title))
 
   return (
-    <GdsFlex gap="m" flex-direction="column">
+    <GdsFlex gap="m" flex-direction="column" min-width="100%">
       {title && (
         <GdsText tag="h1" font-size="display-s; m{display-m}" margin="0 0 xl 0">
           {title}
