@@ -2,7 +2,7 @@
 
 import { useContext } from 'react'
 import { usePathname } from 'next/navigation'
-import { GdsFlex } from '$/import/components'
+import { GdsFlex, GdsSpacer } from '$/import/components'
 import { Context } from '$/provider/provider'
 import Sidebar from 'core/sidebar'
 
@@ -31,7 +31,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
     >
       {isNavOpen && <Sidebar />}
       <GdsFlex
-        padding="s; s{l} m{0 l}"
+        padding="s; s{l} m{l l 0 m}"
         flex-direction="column"
         width={`100%; m{960px} l{${MAX_WIDTH}}`}
         margin="0 auto"
