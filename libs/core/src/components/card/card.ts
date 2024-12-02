@@ -58,7 +58,7 @@ export class GdsCard extends GdsContainer {
     styleTemplate: function (_prop, v) {
       return `
       --_border-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
-      --_background-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
+      --_background-color: var(--gds-color-l${(this as GdsCard).level}-border-${v});
       --_color: var(--gds-color-l${(this as GdsCard).level}-content-${v});
       `
     },
