@@ -70,7 +70,7 @@ const style = css`
       align-items: center;
       justify-content: center;
       height: 1lh;
-      width: auto;
+      width: 1lh;
       box-sizing: border-box;
       position: relative;
       aspect-ratio: 1/1;
@@ -83,7 +83,7 @@ const style = css`
 
         gds-icon-checkmark {
           &::part(icon) {
-            color: red;
+            color: var(--gds-color-l2-content-tertiary);
             stroke-width: var(--gds-space-2xs);
           }
         }
