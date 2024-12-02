@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { Link } from 'next-view-transitions'
 import { default as NextLink } from 'next/link'
 import { GdsLink, GdsMenuButton } from '$/import/components'
 
@@ -36,12 +37,12 @@ const CustomLink: React.ForwardRefRenderFunction<
 
 const ForwardedCustomLink = React.forwardRef(CustomLink)
 
-const Link: React.FC<CustomLinkProps> = ({ href, ...rest }) => {
+const LinkWrapper: React.FC<CustomLinkProps> = ({ href, ...rest }) => {
   return (
-    <NextLink href={href} passHref legacyBehavior>
+    <Link href={href} passHref legacyBehavior>
       <ForwardedCustomLink {...rest} />
-    </NextLink>
+    </Link>
   )
 }
 
-export default Link
+export default LinkWrapper
