@@ -82,7 +82,7 @@ export default function Sidebar() {
       align-items="flex-start"
       flex-direction="column"
       margin="0 s; m{0 0 0 s}"
-      z-index="99"
+      z-index="2"
       padding="none"
       position="fixed; m{sticky}"
       inset="60px 0 0 0"
@@ -90,6 +90,7 @@ export default function Sidebar() {
       overflow="hidden"
       min-width="270px"
       className="sidebar-transition"
+      variant="primary"
     >
       <GdsFlex flex-direction="column" max-height="100%">
         <GdsContainer

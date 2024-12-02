@@ -25,10 +25,10 @@
 
 .sidebar-transition {
   view-transition-name: sidebar-transition;
-  transition: all 242ms;
+  /* transition: transform 242ms; */
 
-  @starting-style {
+  /* @starting-style {
     opacity: 0;
     transform: translateX(-40px);
-  }
+  } */
 }
