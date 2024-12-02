@@ -1,9 +1,9 @@
-::view-transition-old(gds) {
+::view-transition-old(gds-transition) {
   animation: fade-out 0.8s ease-in-out;
 }
 
-::view-transition-new(gds) {
-  animation: fade-in-up 0.4s ease-in-out;
+::view-transition-new(gds-transition) {
+  animation: fade-in 0.4s ease-in-out;
 }
 
 @keyframes fade-out {
@@ -82,12 +82,12 @@
 }
 
 .transition-element {
-  view-transition-name: gds;
+  view-transition-name: gds-transition;
   transition: all 242ms;
 
   @starting-style {
     opacity: 0;
-    translate: 0 14px;
+    translate: 0 8px;
   }
 }
 
