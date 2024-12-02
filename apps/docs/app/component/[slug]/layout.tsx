@@ -137,12 +137,7 @@ export default function ComponentLayout({
                 )}
                 <GdsFlex gap="s">
                   {tagsArray.map((tag) => (
-                    <Link
-                      href={`/tag/` + tag}
-                      key={tag}
-                      variant="primary"
-                      size="small"
-                    >
+                    <Link href={`/tag/` + tag} key={tag}>
                       {tag}
                     </Link>
                   ))}
