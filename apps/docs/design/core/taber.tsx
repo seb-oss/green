@@ -72,11 +72,7 @@ export default function Taber({ component, links }: TaberProps) {
               {links.map(
                 ({ path, label, isPrivate }) =>
                   !isPrivate && (
-                    <Link
-                      key={path}
-                      href={component + path}
-                      selected={pathName === component + path}
-                    >
+                    <Link key={path} href={component + path}>
                       {label}
                     </Link>
                   ),
