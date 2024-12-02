@@ -113,22 +113,20 @@ export function CMD({
           }
         }}
       >
-        <GdsFlex>
-          <Command.Input
-            autoFocus
-            placeholder="What do you need?"
-            onValueChange={(value) => {
-              setInputValue(value)
-            }}
-          />
-          {/* <div>
+        <Command.Input
+          autoFocus
+          placeholder="What do you need?"
+          onValueChange={(value) => {
+            setInputValue(value)
+          }}
+        />
+        {/* <div>
             {pages.map((p) => (
               <GdsBadge key={p} cmdk-vercel-badge="">
                 {p}
               </GdsBadge>
             ))}
           </div> */}
-        </GdsFlex>
         <Command.List>
           <Command.Empty>No results found.</Command.Empty>
           {activePage === 'home' && (
