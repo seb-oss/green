@@ -7,7 +7,7 @@ const style = css`
     :host {
       display: flex;
       flex-direction: column;
-      color: var(--gds-sys-color-base800);
+      color: var(--gds-color-l3-content-tertiary);
       font-family: inherit;
     }
 
@@ -17,18 +17,21 @@ const style = css`
       justify-content: space-between;
       gap: var(--gds-space-m);
       height: var(--gds-space-3xl);
-      border: var(--gds-space-4xs) solid #6f6f6f;
+      border-style: solid;
+      border-width: var(--gds-space-4xs);
       border-radius: var(--gds-space-xs);
       padding-inline: var(--gds-space-m);
       cursor: pointer;
       box-sizing: border-box;
       font-size: var(--gds-space-m);
       font-family: inherit;
-
-      // TODO: Update colors to use tokens
-      border-color: #6f6f6f;
-      color: #1b1b1b;
-      background-color: #e2e2e2;
+      border-color: var(--gds-color-l3-border-secondary);
+      color: var(--gds-color-l3-content-tertiary);
+      background-color: var(--gds-color-l3-background-secondary);
+      transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s;
 
       &.small {
         height: var(--gds-space-xl);
@@ -42,8 +45,14 @@ const style = css`
         }
       }
 
-      &:hover {
-        background-color: #cecece;
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-secondary),
+            var(--gds-color-l3-states-light-hover)
+          );
+        }
       }
 
       .icon {
@@ -83,24 +92,26 @@ const style = css`
       line-height: inherit;
       border: none;
       outline: none;
-      color: var(--gds-sys-color-base800);
-      border-bottom: 1px solid var(--gds-sys-color-base400);
+      color: var(--gds-color-l3-content-disabled);
+      border-color: var(--gds-color-l3-border-tertiary);
+      border-width: 0 0 var(--gds-space-4xs) 0;
+      border-style: solid;
       width: 100%;
       padding: var(--gds-space-m);
-      font-weight: var(--gds-text-weight-book);
+      font-weight: var(--gds-text-weight-regular);
       flex: 1;
       box-sizing: border-box;
       font-family: inherit;
 
       &:focus {
-        border-color: var(--gds-sys-color-base800);
+        border-color: var(--gds-color-l3-border-secondary);
+        color: var(--gds-color-l3-content-tertiary);
       }
 
       &::placeholder {
-        color: currrentColor;
         font-family: inherit;
         font-weight: var(--gds-text-weight-book);
-        color: var(--gds-sys-color-base800);
+        color: var(--gds-color-l3-content-disabled);
       }
     }
   }
