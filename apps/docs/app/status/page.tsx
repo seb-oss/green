@@ -6,9 +6,9 @@ import {
   GdsDivider,
   GdsFlex,
   GdsGrid,
-  GdsLink,
   GdsText,
 } from '$/import/components'
+import Link from 'core/link'
 import { format, parseISO } from 'date-fns'
 
 export default function Status() {
@@ -24,13 +24,13 @@ export default function Status() {
         .filter((component) => component._raw.sourceFileName === 'index.mdx')
         .map((component, index) => (
           <GdsGrid columns="3" gap="xl" key={`key-${index}`}>
-            <GdsLink
+            <Link
               href={component.url_path}
               title="Component"
               variant="secondary"
             >
               {component.title}
-            </GdsLink>
+            </Link>
             {component.status ? (
               <GdsBadge variant="notice">{component.status}</GdsBadge>
             ) : (

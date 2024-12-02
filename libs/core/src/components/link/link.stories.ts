@@ -6,6 +6,8 @@ import './link.js'
 import '../popover/popover.js'
 import '../flex/flex.js'
 import '../card/card.js'
+import '../text/text.js'
+import '../divider/divider.js'
 import '../icon/icons/magnifying-glass.js'
 import '../icon/icons/bell.js'
 import '../icon/icons/star.js'
@@ -48,6 +50,7 @@ export const Basic: Story = {
  */
 export const Lead: Story = {
   ...DefaultParams,
+  name: 'Icon: Lead',
   render: () =>
     html` <gds-link>
       <gds-icon-cain-link slot="lead"></gds-icon-cain-link>
@@ -60,6 +63,7 @@ export const Lead: Story = {
  */
 export const Trail: Story = {
   ...DefaultParams,
+  name: 'Icon: Trail',
   render: () =>
     html` <gds-link>
       Link text
@@ -68,13 +72,52 @@ export const Trail: Story = {
 }
 
 /**
- * A link component has a secondary variant that reverts the underline behavior.
+ * A link component has a `text-decoration` property that accepts all valid CSS `text-decoration` values.
+ *
+ * It also supports setting `text-decoration` or disable on hover by using the `hover:` prefix.
+ *
+ * ```html
+ * <gds-link text-decoration="hover:none">
+ *    Underline on Hover
+ * </gds-link>
+ * ```
  */
-export const Variants: Story = {
+export const TextDecoration: Story = {
   ...DefaultParams,
-  render: () =>
-    html` <gds-link variant="secondary">
-      Link text
-      <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-    </gds-link>`,
+  name: 'Text Decoration',
+  render: () => html`
+    <gds-flex gap="4xl" width="600px" flex-direction="column">
+      <gds-flex gap="xl">
+        <gds-flex flex-direction="column" gap="m" flex="1">
+          <gds-text tag="small">Link with Underline</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+          <gds-link text-decoration="underline"> Link text </gds-link>
+        </gds-flex>
+        <gds-flex flex-direction="column" gap="m" flex="1">
+          <gds-text tag="small">Link without Underline</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+          <gds-link text-decoration="none"> Link text </gds-link>
+        </gds-flex>
+      </gds-flex>
+
+      <gds-flex gap="xl">
+        <gds-flex flex-direction="column" gap="m" flex="1">
+          <gds-text tag="small">Link with Underline on Hover and Icon</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+          <gds-link>
+            Link text
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-link>
+        </gds-flex>
+
+        <gds-flex flex-direction="column" gap="m" flex="1">
+          <gds-text tag="small">Link with No Underline on Hover</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+          <gds-link text-decoration="underline; hover:none">
+            Link text
+          </gds-link>
+        </gds-flex>
+      </gds-flex>
+    </gds-flex>
+  `,
 }
