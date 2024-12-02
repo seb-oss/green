@@ -39,58 +39,19 @@ const menu = [
     title: 'Foundation',
     path: '/foundation',
     icon: <IconBrandGreen />,
-    subLinks: [
-      // {
-      //   title: 'Accessibility',
-      //   path: '/foundation/accessibility',
-      //   badge: undefined,
-      //   private: false,
-      // },
-    ],
+    subLinks: [],
   },
   {
     title: 'UX Writing',
     path: '/ux-writing',
     icon: <IconTextEdit />,
-    subLinks: [
-      // {
-      //   title: 'General',
-      //   path: '/ux-writing/general',
-      //   badge: undefined,
-      //   private: false,
-      // },
-      // {
-      //   title: 'English',
-      //   path: '/ux-writing/english',
-      //   badge: undefined,
-      //   private: false,
-      // },
-      // {
-      //   title: 'Swedish',
-      //   path: '/ux-writing/swedish',
-      //   badge: undefined,
-      //   private: false,
-      // },
-    ],
+    subLinks: [],
   },
   {
     title: 'About',
     path: '/about',
     icon: <IconSquareInfo />,
-    subLinks: [
-      // {
-      //   title: 'Changelog',
-      //   path: '/changelog',
-      //   badge: undefined,
-      //   private: false,
-      // },
-      // {
-      //   title: 'Status',
-      //   path: '/status',
-      //   badge: undefined,
-      //   private: false,
-      // },
-    ],
+    subLinks: [],
   },
 ]
 
@@ -218,26 +179,6 @@ export default function Sidebar() {
               })}
           </GdsFlex>
         </GdsContainer>
-
-        {/* <GdsContainer padding="xs" min-width="250px">
-          <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
-            <Link
-              href="https://designlibrary.sebgroup.com/"
-              target="_blank"
-              className="sidebar-link"
-              variant="hidden"
-            >
-              <GdsFlex
-                align-items="center"
-                justify-content="space-between"
-                width="100%"
-              >
-                <span>Design Library</span>
-                <IconCainLink />
-              </GdsFlex>
-            </Link>
-          </GdsFlex>
-        </GdsContainer> */}
       </GdsFlex>
     </GdsCard>
   )
