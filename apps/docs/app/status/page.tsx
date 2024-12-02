@@ -24,11 +24,7 @@ export default function Status() {
         .filter((component) => component._raw.sourceFileName === 'index.mdx')
         .map((component, index) => (
           <GdsGrid columns="3" gap="xl" key={`key-${index}`}>
-            <Link
-              href={component.url_path}
-              title="Component"
-              variant="secondary"
-            >
+            <Link href={component.url_path} title="Component">
               {component.title}
             </Link>
             {component.status ? (
