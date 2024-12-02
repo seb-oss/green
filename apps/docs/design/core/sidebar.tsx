@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useContext, useState } from 'react'
+import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
@@ -13,7 +14,6 @@ import {
   IconTextEdit,
 } from '$/import/icons'
 import { Context } from '$/provider/provider'
-import Link from 'core/link'
 
 import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
 

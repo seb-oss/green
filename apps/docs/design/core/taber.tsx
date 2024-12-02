@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { useTransitionRouter } from 'next-view-transitions'
+import { Link, useTransitionRouter } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import {
   GdsCard,
@@ -10,7 +10,6 @@ import {
   GdsMenuButton,
   GdsText,
 } from '$/import/components'
-import Link from 'core/link'
 
 import { Accordion, AccordionItem } from './accordion'
 

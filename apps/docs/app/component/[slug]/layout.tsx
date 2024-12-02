@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
@@ -12,7 +13,6 @@ import {
   GdsText,
 } from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
-import Link from 'core/link'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'

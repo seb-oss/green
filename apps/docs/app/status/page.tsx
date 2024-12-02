@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from 'next-view-transitions'
 import { allComponents } from 'content'
 import {
   GdsBadge,
@@ -8,7 +9,6 @@ import {
   GdsGrid,
   GdsText,
 } from '$/import/components'
-import Link from 'core/link'
 import { format, parseISO } from 'date-fns'
 
 export default function Status() {
