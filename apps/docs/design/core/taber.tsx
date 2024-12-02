@@ -1,8 +1,15 @@
 'use client'
 
 import React from 'react'
+import { useTransitionRouter } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
-import { GdsCard, GdsContainer, GdsFlex, GdsText } from '$/import/components'
+import {
+  GdsCard,
+  GdsContainer,
+  GdsFlex,
+  GdsMenuButton,
+  GdsText,
+} from '$/import/components'
 import Link from 'core/link'
 
 import { Accordion, AccordionItem } from './accordion'
@@ -20,7 +27,7 @@ interface TaberProps {
 
 export default function Taber({ component, links }: TaberProps) {
   const pathName = usePathname()
-
+  const router = useTransitionRouter()
   return (
     <GdsCard
       padding="0"
@@ -38,14 +45,24 @@ export default function Taber({ component, links }: TaberProps) {
         {links.map(
           ({ path, label, isPrivate }) =>
             !isPrivate && (
-              <Link
+              <GdsMenuButton
                 key={path}
-                href={component + path}
+                onClick={() => {
+                  router.push(component + path)
+                }}
                 selected={pathName === component + path}
-                menu
               >
                 {label}
-              </Link>
+              </GdsMenuButton>
+              //  {/*
+              //   <Link
+              //   key={path}
+              //   href={component + path}
+              //   selected={pathName === component + path}
+              //   menu
+              // >
+              // // {label}
+              // </Link> */}
             ),
         )}
       </GdsFlex>

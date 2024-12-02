@@ -1,9 +1,17 @@
-::view-transition-old(gds-transition) {
+.transition-element {
+  view-transition-name: gds;
+}
+
+::view-transition-old(gds) {
   animation: fade-out 0.8s ease-in-out;
 }
 
-::view-transition-new(gds-transition) {
-  animation: fade-in 0.4s ease-in-out;
+::view-transition-new(gds) {
+  animation: fade-in-up 0.4s ease-in-out;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
 }
 
 @keyframes fade-out {
@@ -79,18 +87,4 @@
     animation: fade-in 0.8s ease-in-out forwards;
     opacity: 0;
   }
-}
-
-.transition-element {
-  view-transition-name: gds-transition;
-  transition: all 242ms;
-
-  @starting-style {
-    opacity: 0;
-    translate: 0 8px;
-  }
-}
-
-.delay-200 {
-  transition-delay: 200ms;
 }

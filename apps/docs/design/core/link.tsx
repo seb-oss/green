@@ -1,47 +1,47 @@
 'use client'
 
 import React from 'react'
-// import { Link } from 'next-view-transitions'
-import { default as NextLink } from 'next/link'
-import { GdsLink, GdsMenuButton } from '$/import/components'
+import { Link } from 'next-view-transitions'
+import { GdsLink } from '$/import/components'
 
-import { GdsLink as GdsLinkCore } from '@sebgroup/green-core/components/link'
-import { GdsMenuButton as GdsMenuButtonCore } from '@sebgroup/green-core/components/menu-button'
+// import { default as NextLink } from 'next/link'
+// import { GdsLink, GdsMenuButton } from '$/import/components'
 
-interface CustomLinkProps {
-  onClick?: (e: Event) => void
-  href: string
-  menu?: boolean
-  children: React.ReactNode
-  [key: string]: unknown
-}
+// import { GdsLink as GdsLinkCore } from '@sebgroup/green-core/components/link'
 
-const CustomLink: React.ForwardRefRenderFunction<
-  GdsLinkCore & GdsMenuButtonCore,
-  CustomLinkProps
-> = ({ onClick, href, children, menu, ...rest }, ref) => {
-  if (menu) {
-    return (
-      <GdsMenuButton href={href} onClick={onClick} ref={ref} {...rest}>
-        {children}
-      </GdsMenuButton>
-    )
-  } else {
-    return (
-      <GdsLink href={href} onClick={onClick} ref={ref} {...rest}>
-        {children}
-      </GdsLink>
-    )
-  }
-}
+// interface CustomLinkProps {
+//   onClick?: React.MouseEventHandler<HTMLAnchorElement>
+//   href: string
+//   menu?: boolean
+//   children: React.ReactNode
+//   [key: string]: unknown
+// }
 
-const ForwardedCustomLink = React.forwardRef(CustomLink)
+// const CustomLink: React.ForwardRefRenderFunction<
+//   HTMLAnchorElement,
+//   CustomLinkProps
+// > = ({ onClick, href, children, menu, ...rest }, ref) => {
+//   return (
+//     <GdsLink href={href} onClick={onClick} ref={ref} {...rest}>
+//       {children}
+//     </GdsLink>
+//   )
+// }
 
-const LinkWrapper: React.FC<CustomLinkProps> = ({ href, ...rest }) => {
+// const ForwardedCustomLink = React.forwardRef(CustomLink)
+
+const LinkWrapper: React.FC<CustomLinkProps> = ({
+  children,
+  href,
+  ...rest
+}) => {
   return (
-    <NextLink href={href} passHref legacyBehavior>
-      <ForwardedCustomLink {...rest} />
-    </NextLink>
+    <Link href={href} {...rest}>
+      {/* <Link href={href} passHref legacyBehavior> */}
+      {/* <ForwardedCustomLink {...rest} /> */}
+      {/* <GdsLink {...rest} /> */}
+      {children}
+    </Link>
   )
 }
 
