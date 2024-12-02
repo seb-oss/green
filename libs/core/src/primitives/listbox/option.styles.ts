@@ -5,7 +5,7 @@ const style = css`
 
   @layer base {
     :host(:not(:last-child)) {
-      border-bottom: 1px solid var(--gds-sys-color-border-stroke-variant2);
+      border-bottom: 1px solid var(--gds-color-l2-border-primary);
     }
 
     :host div {
@@ -21,22 +21,44 @@ const style = css`
       gap: 1ch;
       max-width: 100%;
       box-sizing: border-box;
+      position: relative;
+      transition:
+        background-color 0.2s,
+        border-color 0.2s,
+        color 0.2s,
+        outline-color 422ms;
+
+      &::before {
+        content: ' ';
+        display: flex;
+        inset: var(--gds-space-2xs);
+        position: absolute;
+        border: var(--gds-space-3xs) solid currentColor;
+        border-radius: var(--gds-space-xs);
+        opacity: 0;
+        visitility: hidden;
+        pointer-events: none;
+        transition: opacity 422ms;
+      }
     }
 
-    :host([highlighted]) div {
-      background-color: var(--gds-sys-color-container-container-shade1);
-      color: var(--gds-sys-color-content-content-inverse);
+    :host([highlighted]) {
+      background-color: var(--gds-color-l2-background-tertiary);
+      color: var(--gds-color-l2-content-tertiary);
     }
 
     :host(:hover:not([highlighted])) div {
-      background-color: var(--gds-sys-color-container-container-dim1);
+      background-color: var(--gds-color-l3-background-secondary);
     }
 
     :host(:focus-visible) {
-      outline: auto;
-      outline-offset: -6px;
-      outline-color: currentColor;
-      outline-width: 2px;
+      outline: none;
+
+      div::before {
+        inset: var(--gds-space-2xs);
+        opacity: 1;
+        visivility: visible;
+      }
     }
 
     :host([aria-hidden='true']) div {
@@ -61,7 +83,7 @@ const style = css`
 
         gds-icon-checkmark {
           &::part(icon) {
-            color: var(--gds-sys-color-base-white);
+            color: red;
             stroke-width: var(--gds-space-2xs);
           }
         }

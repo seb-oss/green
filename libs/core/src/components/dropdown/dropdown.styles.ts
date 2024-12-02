@@ -28,10 +28,22 @@ const style = css`
       border-color: var(--gds-color-l3-border-secondary);
       color: var(--gds-color-l3-content-tertiary);
       background-color: var(--gds-color-l3-background-secondary);
+      outline-color: transparent;
+      outline-offset: var(--gds-space-3xs);
+      outline-style: solid;
+      outline-width: var(--gds-space-3xs);
       transition:
         background-color 0.2s,
         border-color 0.2s,
         color 0.2s;
+
+      &:focus {
+        outline-color: color-mix(in srgb, currentcolor, #000 100%);
+
+        &:not(:focus-visible) {
+          outline-color: transparent;
+        }
+      }
 
       &.small {
         height: var(--gds-space-xl);
