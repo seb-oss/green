@@ -47,7 +47,7 @@ export default function Components({ title, tag }: ComponentsProps) {
           {title}
         </GdsText>
       )}
-      <GdsGrid columns="1; xs{2} s{2} m{2}" gap="s; s{xl}">
+      <GdsGrid columns="1; xs{2} s{2} m{2} l{3}" gap="s; s{xl}">
         {components.map((component, idx) => {
           const PATH = component.title.replace(' ', '')
           const Preview = examples[PATH]
