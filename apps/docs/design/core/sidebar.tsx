@@ -111,7 +111,6 @@ export default function Sidebar() {
                 <Link
                   href={menuItem.path}
                   className={`fade-in sidebar-link ${menuItem.path === path ? 'active' : ''}`}
-                  variant="secondary"
                   onClick={() => {
                     window.innerWidth < 1024 && toggleNav()
                   }}

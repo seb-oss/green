@@ -46,9 +46,7 @@ const Breadcrumbs = ({ home, separator, activeClass, slug }: TrailTypes) => {
         {lastPathComponent && (
           <>
             {separator}
-            <Link href={'/'} variant="secondary">
-              {lastPathComponent?.title}
-            </Link>
+            <Link href={'/'}>{lastPathComponent?.title}</Link>
           </>
         )}
       </GdsFlex>
