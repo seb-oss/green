@@ -33,6 +33,8 @@ export default async function updateDeps(
   const updatedPkgJson = getLibPkgJson(libName)
   updatedPkgJson.version = `${updatedPkgJson.version}-${label}.${timestamp}`
 
+  console.info(`Versioned ${libName} as ${updatedPkgJson.version}`)
+
   // Write updated package.json to file
   try {
     await writeFile(
