@@ -13,21 +13,6 @@ const pluginConfig = {
     analytics: {},
   },
 
-  // onFirstAction: function (user_preferences, cookie) {
-  //   const analyticsEnabled =
-  //     window.CookieConsentApi.allowedCategory('analytics')
-  // },
-
-  // onAccept: function (cookie) {
-  //   if (window.CookieConsentApi.allowedCategory('analytics')) {
-  //     // ...
-  //   }
-  // },
-
-  // onChange: function (cookie, changed_preferences) {
-  //   // ...
-  // },
-
   language: {
     default: 'en',
     translations: {
@@ -35,7 +20,7 @@ const pluginConfig = {
         consentModal: {
           title: 'We use cookies',
           description:
-            'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent. <button type="button" data-cc="c-settings" class="cc-link">Let me choose</button>',
+            'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.',
           acceptAllBtn: 'Accept all',
           acceptNecessaryBtn: 'Reject all',
         },

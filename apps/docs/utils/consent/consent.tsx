@@ -14,11 +14,6 @@ const Consent = () => {
 
   return (
     <GdsTheme id="cookie-consent">
-      {/* <GdsFlex align-items="center" justify-content="center" >
-      <GdsText>We use cookies to improve your experience</GdsText>
-      <GdsButton>Accept</GdsButton>
-      <GdsButton>Reject</GdsButton>
-    </GdsFlex> */}
     </GdsTheme>
   )
 }
