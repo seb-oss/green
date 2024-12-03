@@ -2,6 +2,11 @@ import { NgModule } from '@angular/core'
 import { ExtraOptions, RouterModule, Routes } from '@angular/router'
 
 const routes: Routes = [
+  {
+    path: 'form',
+    data: { name: 'Form' },
+    loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
+  },
   { path: '', redirectTo: 'segmented-control', pathMatch: 'full' },
   {
     path: 'segmented-control',
@@ -17,6 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pagination/pagination.module').then((m) => m.PaginationModule),
   },
+
   {
     path: 'dropdown',
     data: { name: 'Dropdown' },

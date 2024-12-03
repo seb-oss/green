@@ -13,7 +13,7 @@ import { DropdownOption, DropdownTexts } from '@sebgroup/green-angular'
 export class DropdownComponent {
   texts: DropdownTexts = {
     placeholder: 'Select',
-    searchPlaceholder: 'Search',
+    // searchPlaceholder: 'Search',
   }
 
   options: DropdownOption[] = [
