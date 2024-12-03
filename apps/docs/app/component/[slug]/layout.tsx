@@ -1,5 +1,6 @@
 'use client'
 
+import { Link } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
@@ -12,7 +13,6 @@ import {
   GdsText,
 } from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
-import Link from 'core/link'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'
@@ -123,7 +123,11 @@ export default function ComponentLayout({
             >
               <GdsFlex flex-direction="column" gap="xs">
                 <GdsText tag="h1">{title}</GdsText>
-                <GdsText tag="p" text-wrap="balance">
+                <GdsText
+                  tag="p"
+                  text-wrap="balance"
+                  className="fade-in delay-200"
+                >
                   {summary}
                 </GdsText>
                 {status && (
@@ -133,12 +137,7 @@ export default function ComponentLayout({
                 )}
                 <GdsFlex gap="s">
                   {tagsArray.map((tag) => (
-                    <Link
-                      href={`/tag/` + tag}
-                      key={tag}
-                      variant="primary"
-                      size="small"
-                    >
+                    <Link href={`/tag/` + tag} key={tag}>
                       {tag}
                     </Link>
                   ))}

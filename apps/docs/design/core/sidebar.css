@@ -22,3 +22,13 @@
 .sidebar-link.active {
   background-color: var(--gds-color-l3-background-secondary);
 }
+
+.sidebar-transition {
+  view-transition-name: sidebar-transition;
+  /* transition: transform 242ms; */
+
+  /* @starting-style {
+    opacity: 0;
+    transform: translateX(-40px);
+  } */
+}
