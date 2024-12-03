@@ -10,6 +10,11 @@
       "implementation": "./src/executors/build-core-lib/executor",
       "schema": "./src/executors/build-core-lib/schema.json",
       "description": "build-core-lib executor"
+    },
+    "version-as-snapshot": {
+      "implementation": "./src/executors/version-as-snapshot/executor",
+      "schema": "./src/executors/version-as-snapshot/schema.json",
+      "description": "Update version in package.json to snapshot version"
     }
   }
 }
