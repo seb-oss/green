@@ -4,6 +4,11 @@
   "title": "Version as snapshot",
   "description": "Update version in package.json to snapshot version",
   "type": "object",
-  "properties": {},
+  "properties": {
+    "label": {
+      "type": "string",
+      "description": "Snapshot label - will produce a version string like `x.x.x-{label}.timestamp`"
+    }
+  },
   "required": []
 }

@@ -14,19 +14,24 @@ type PackageJsonPartial = {
   peerDependencies?: DepSpecs
 }
 
-type NotUsed = Record<string, never>
+type ExecutorOptions = {
+  label: string
+}
 
 export default async function updateDeps(
-  _: NotUsed,
+  options: ExecutorOptions,
   context: ExecutorContext,
 ): Promise<{ success: boolean }> {
   console.info(`Executing "version-as-snapshot"...`)
 
   const libName = context.projectName || ''
 
+  const timestamp = new Date().toISOString().replace(/[^0-9]/g, '')
+  const label = options.label || 'snapshot'
+
   // Generate updated package.json
   const updatedPkgJson = getLibPkgJson(libName)
-  updatedPkgJson.version = `${updatedPkgJson.version}-SNAPSHOT`
+  updatedPkgJson.version = `${updatedPkgJson.version}-${label}.${timestamp}`
 
   // Write updated package.json to file
   try {
