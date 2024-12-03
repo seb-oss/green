@@ -141,6 +141,13 @@
   padding: 0;
 }
 
+@media screen and (max-width: 640px) {
+  #cc-main .cm {
+      flex-direction: column !important;
+      padding: 0;
+  }
+}
+
 .cc_div *,
 .cc_div :after,
 .cc_div :before,
