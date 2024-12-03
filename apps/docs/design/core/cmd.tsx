@@ -1,9 +1,18 @@
 'use client'
 
-import React from 'react'
-import { allComponents } from 'content'
+import React, { useContext } from 'react'
+import { useTransitionRouter } from 'next-view-transitions'
+import { allComponents, allDocuments } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsButton, GdsDialog, GdsInput } from '$/import/components'
+import {
+  GdsBadge,
+  GdsButton,
+  GdsDialog,
+  GdsFlex,
+  GdsInput,
+} from '$/import/components'
+import { Context } from '$/provider/provider'
+// import { toggleCmd } from '$/provider/provider'
 import { Command } from 'cmdk'
 
 import './cmd.css'
@@ -104,13 +113,6 @@ export function CMD({
           }
         }}
       >
-        <div>
-          {pages.map((p) => (
-            <GdsBadge key={p} cmdk-vercel-badge="">
-              {p}
-            </GdsBadge>
-          ))}
-        </div>
         <Command.Input
           autoFocus
           placeholder="What do you need?"
@@ -118,6 +120,13 @@ export function CMD({
             setInputValue(value)
           }}
         />
+        {/* <div>
+            {pages.map((p) => (
+              <GdsBadge key={p} cmdk-vercel-badge="">
+                {p}
+              </GdsBadge>
+            ))}
+          </div> */}
         <Command.List>
           <Command.Empty>No results found.</Command.Empty>
           {activePage === 'home' && (
@@ -132,24 +141,79 @@ export function CMD({
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function Home({ searchComponents }: { searchComponents: Function }) {
+  console.log('content', allDocuments)
+
+  const components = allComponents
+    .filter((component) => {
+      if (component._raw.sourceFileName !== 'index.mdx') {
+        return false
+      }
+      if (!isDev && component.private) {
+        return false
+      }
+      return true
+    })
+    .sort((a, b) => a.title.localeCompare(b.title))
+
+  const router = useTransitionRouter()
+  const { toggleCmd } = useContext(Context)
   return (
     <>
       <Command.Group heading="Components">
+        {/* <Item
+        // shortcut="S P"
+        onSelect={() => {
+          searchComponents()
+        }}
+      >
+        Search Components...
+      </Item> */}
+
+        {components.map((component, idx) => {
+          return (
+            <Item
+              key={idx}
+              // onClick={() => {
+              //   router.push(component + path)
+              // }}
+              onSelect={() => {
+                router.push(component.url_path || ``)
+                toggleCmd()
+                // console.log('Selected:', component.title)
+              }}
+            >
+              {component.title}
+            </Item>
+          )
+        })}
+      </Command.Group>
+      <Command.Group heading="Pages">
         <Item
-          shortcut="S P"
           onSelect={() => {
-            searchComponents()
+            router.push('/foundation')
+            toggleCmd()
           }}
         >
-          Search Components...
+          Foundation
+        </Item>
+        <Item
+          onSelect={() => {
+            router.push('/ux-writing')
+            toggleCmd()
+          }}
+        >
+          UX Writing
+        </Item>
+        <Item
+          onSelect={() => {
+            router.push('/about')
+            toggleCmd()
+          }}
+        >
+          About
         </Item>
       </Command.Group>
-      <Command.Group heading="Styling">
-        <Item shortcut="⇧ D">Colors</Item>
-        <Item>Size</Item>
-        <Item>Typography</Item>
-      </Command.Group>
-      <Command.Group heading="Foundation">
+      {/* <Command.Group heading="Foundation">
         <Item shortcut="⇧ A">Accesibility</Item>
       </Command.Group>
       <Command.Group heading="UX writing">
@@ -160,7 +224,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
       <Command.Group heading="About">
         <Item shortcut="⇧ C">Changelog</Item>
         <Item shortcut="⇧ L">Status</Item>
-      </Command.Group>
+      </Command.Group> */}
     </>
   )
 }
@@ -171,8 +235,8 @@ function Components() {
       if (component._raw.sourceFileName !== 'index.mdx') {
         return false
       }
-      if (component.private && !isDev) {
-        return true
+      if (!isDev && component.private) {
+        return false
       }
       return true
     })

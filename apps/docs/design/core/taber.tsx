@@ -1,9 +1,15 @@
 'use client'
 
 import React from 'react'
+import { Link, useTransitionRouter } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
-import { GdsCard, GdsContainer, GdsFlex, GdsText } from '$/import/components'
-import Link from 'core/link'
+import {
+  GdsCard,
+  GdsContainer,
+  GdsFlex,
+  GdsMenuButton,
+  GdsText,
+} from '$/import/components'
 
 import { Accordion, AccordionItem } from './accordion'
 
@@ -20,14 +26,14 @@ interface TaberProps {
 
 export default function Taber({ component, links }: TaberProps) {
   const pathName = usePathname()
-
+  const router = useTransitionRouter()
   return (
     <GdsCard
       padding="0"
       overflow="hidden"
       position="sticky"
       inset="60px 0 0 0"
-      z-index="99999"
+      z-index="999"
       margin="0"
       height="60px"
       display="none; m{flex}"
@@ -38,14 +44,24 @@ export default function Taber({ component, links }: TaberProps) {
         {links.map(
           ({ path, label, isPrivate }) =>
             !isPrivate && (
-              <Link
+              <GdsMenuButton
                 key={path}
-                href={component + path}
+                onClick={() => {
+                  router.push(component + path)
+                }}
                 selected={pathName === component + path}
-                menu
               >
                 {label}
-              </Link>
+              </GdsMenuButton>
+              //  {/*
+              //   <Link
+              //   key={path}
+              //   href={component + path}
+              //   selected={pathName === component + path}
+              //   menu
+              // >
+              // // {label}
+              // </Link> */}
             ),
         )}
       </GdsFlex>
@@ -56,11 +72,7 @@ export default function Taber({ component, links }: TaberProps) {
               {links.map(
                 ({ path, label, isPrivate }) =>
                   !isPrivate && (
-                    <Link
-                      key={path}
-                      href={component + path}
-                      selected={pathName === component + path}
-                    >
+                    <Link key={path} href={component + path}>
                       {label}
                     </Link>
                   ),
