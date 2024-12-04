@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/chlorophyll/src",
   "projectType": "library",
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "./tools/executors/scss:build-lib",

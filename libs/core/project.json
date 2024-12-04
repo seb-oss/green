@@ -4,6 +4,7 @@
   "sourceRoot": "libs/core/src",
   "projectType": "library",
   "implicitDependencies": ["tokens"],
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -144,7 +145,10 @@
     "version-as-snapshot": {
       "executor": "@sebgroup/repo-tools:version-as-snapshot",
       "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
+      "options": {}
     }
-  },
-  "tags": []
+  }
 }

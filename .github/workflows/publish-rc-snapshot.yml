@@ -40,10 +40,10 @@ jobs:
         run: yarn install --prefer-offline --frozen-lockfile --silent
 
       - name: Set snapshot versions
-        run: yarn nx affected -t version-as-snapshot --base=main --head=HEAD --label=rc
+        run: yarn nx affected -t version-as-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
 
       - name: Build libs
-        run: yarn nx affected -t build --base=main --head=HEAD
+        run: yarn nx affected -t build --exclude='*,!tag:lib' --base=main --head=HEAD
 
       - name: Publish snapshots
-        run: yarn nx affected -t publish --base=main --head=HEAD --label=rc
+        run: yarn nx affected -t publish --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
