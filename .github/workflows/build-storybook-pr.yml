@@ -38,6 +38,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - if: github.ref != 'refs/heads/main'
+        run: git rev-parse --verify main || git remote set-branches origin main && git fetch --depth 1 origin main && git branch main origin/main
+
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
