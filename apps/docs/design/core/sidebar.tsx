@@ -1,21 +1,29 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsButton, GdsFlex, GdsLink } from '$/import/components'
+import { GdsBadge, GdsCard, GdsContainer, GdsFlex } from '$/import/components'
 import {
-  IconCainLink,
-  IconChevronBottom,
-  IconChevronTop,
+  IconBrandGreen,
   IconEyeSlash,
+  IconSquareGridCircle,
+  IconSquareInfo,
+  IconTextEdit,
 } from '$/import/icons'
+import { Context } from '$/provider/provider'
+
+import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
+
+import './sidebar.css'
 
 const menu = [
   {
     title: 'Components',
     path: '/components',
+    icon: <IconSquareGridCircle />,
     subLinks: allComponents
       .filter((component) => component._raw.sourceFileName === 'index.mdx')
       .filter((component) => !(component.private && !isDev))
@@ -30,176 +38,146 @@ const menu = [
   {
     title: 'Foundation',
     path: '/foundation',
-    subLinks: [
-      {
-        title: 'Accessibility',
-        path: '/foundation/accessibility',
-        badge: undefined,
-        private: false,
-      },
-    ],
+    icon: <IconBrandGreen />,
+    subLinks: [],
   },
   {
     title: 'UX Writing',
     path: '/ux-writing',
-    subLinks: [
-      {
-        title: 'General',
-        path: '/ux-writing/general',
-        badge: undefined,
-        private: false,
-      },
-      {
-        title: 'English',
-        path: '/ux-writing/english',
-        badge: undefined,
-        private: false,
-      },
-      {
-        title: 'Swedish',
-        path: '/ux-writing/swedish',
-        badge: undefined,
-        private: false,
-      },
-    ],
+    icon: <IconTextEdit />,
+    subLinks: [],
   },
   {
     title: 'About',
     path: '/about',
-    subLinks: [
-      {
-        title: 'Changelog',
-        path: '/changelog',
-        badge: undefined,
-        private: false,
-      },
-      {
-        title: 'Status',
-        path: '/status',
-        badge: undefined,
-        private: false,
-      },
-    ],
+    icon: <IconSquareInfo />,
+    subLinks: [],
   },
 ]
 
-export default function Sidebar({
-  isNavOpen,
-}: {
-  isNavOpen?: boolean
-  toggleNav?: () => void
-}) {
+export default function Sidebar() {
   const path = usePathname()
-  const [visibleSublinks, setVisibleSublinks] = useState<{
-    [key: string]: boolean
-  }>({})
 
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null)
+  const [hasScrolled, setHasScrolled] = useState(false)
 
-  useEffect(() => {
-    return () => setHoveredLink(null)
-  }, [])
+  const { toggleNav } = useContext(Context)
 
-  useEffect(() => {
-    const initialVisibleSublinks: { [key: string]: boolean } = {}
-    menu.forEach((menuItem) => {
-      if (
-        path === menuItem.path ||
-        menuItem.subLinks.some((subLink) => path.includes(subLink.path))
-      ) {
-        initialVisibleSublinks[menuItem.title] = true
+  const activeMenuItem = menu.find((item) => {
+    const urlArr = path.split('/')
+
+    const about = ['foundation', 'change']
+
+    if (urlArr.includes('component') || urlArr.includes('components')) {
+      if (item.path.includes('component')) {
+        return true
       }
-    })
-    setVisibleSublinks(initialVisibleSublinks)
-  }, [path])
+    }
 
-  const toggleSublinkVisibility = (key: string) => {
-    setVisibleSublinks((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }))
-  }
+    return path === item.path
+  })
 
   return (
-    <GdsFlex
-      padding="xl xl xl 2xl"
-      border="0 4xs/primary 0 0"
-      min-width="300px"
+    <GdsCard
       height="calc(100vh - 72px)"
       align-items="flex-start"
       flex-direction="column"
-      gap="l"
-      position="sticky"
-      top="72px"
-      inset="72px 0 0 0"
-      overflow="hidden auto"
+      margin="0 s; m{0 0 0 s}"
+      z-index="2"
+      padding="none"
+      position="fixed; m{sticky}"
+      inset="60px 0 0 0"
+      max-height="calc(100vh - 60px)"
+      overflow="hidden"
+      min-width="270px"
+      className="sidebar-transition"
+      variant="primary"
     >
-      {menu.map((menuItem, idx) => (
-        <GdsFlex key={idx} flex-direction="column" min-width="100%">
-          <GdsFlex align-items="center" justify-content="space-between">
-            <GdsLink href={menuItem.path} variant="secondary">
-              {menuItem.title}
-            </GdsLink>
-            {menuItem.subLinks.length > 0 && (
-              <GdsButton
-                rank="tertiary"
-                aria-label="Expand"
-                onClick={() => toggleSublinkVisibility(menuItem.title)}
-              >
-                {visibleSublinks[menuItem.title] ? (
-                  <IconChevronTop />
-                ) : (
-                  <IconChevronBottom />
-                )}
-              </GdsButton>
-            )}
-          </GdsFlex>
-          {visibleSublinks[menuItem.title] && (
-            <GdsFlex flex-direction="column" gap="m" padding="m m 0 m">
-              {menuItem.subLinks.map((subLink, subIdx) => {
-                return (
-                  <GdsFlex key={subIdx} justify-content="space-between">
-                    <GdsLink href={subLink.path} variant="secondary">
-                      {subLink.title}
-                    </GdsLink>
-                    <GdsFlex align-items="center" gap="xs">
-                      {subLink.private && (
-                        <IconEyeSlash width="12" height="12" />
-                      )}
-                      {subLink.badge && (
-                        <GdsBadge variant="notice" size="small">
-                          {subLink.badge}
-                        </GdsBadge>
-                      )}
-                    </GdsFlex>
+      <GdsFlex flex-direction="column" max-height="100%">
+        <GdsContainer
+          padding="xs"
+          min-width="250px"
+          border="0 0 4xs 0"
+          border-color="primary"
+          style={{
+            boxShadow: hasScrolled
+              ? '0px 0px 8px 4px #00000015, 0px 3px 2px 0px #00000005'
+              : 'none',
+            transition: 'box-shadow .25s ease-out',
+          }}
+        >
+          <GdsFlex align-items="flex-start" flex-direction="column" gap="4xs">
+            {menu.map((menuItem, idx) => (
+              <GdsFlex key={idx} flex-direction="column" min-width="100%">
+                <Link
+                  href={menuItem.path}
+                  className={`fade-in sidebar-link ${menuItem.path === path ? 'active' : ''}`}
+                  onClick={() => {
+                    window.innerWidth < 1024 && toggleNav()
+                  }}
+                >
+                  <GdsFlex align-content="center" gap="s" padding="xs s">
+                    {menuItem.icon && menuItem.icon}
+                    {menuItem.title}
                   </GdsFlex>
+                </Link>
+              </GdsFlex>
+            ))}
+          </GdsFlex>
+        </GdsContainer>
+        <GdsContainer
+          padding="xs"
+          overflow="scroll"
+          onScroll={(e) => {
+            if ((e.target as GdsContainerCore).scrollTop === 0) {
+              setHasScrolled(false)
+            } else {
+              if (hasScrolled) return
+              setHasScrolled(true)
+            }
+          }}
+        >
+          <GdsFlex flex-direction="column" gap="4xs">
+            {activeMenuItem &&
+              activeMenuItem.subLinks.map((subLink, subIdx) => {
+                return (
+                  <Link
+                    href={subLink.path}
+                    className={`fade-in sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
+                    key={subIdx}
+                    onClick={() => {
+                      window.innerWidth < 1024 && toggleNav()
+                    }}
+                  >
+                    <GdsFlex
+                      key={subIdx}
+                      justify-content="space-between"
+                      padding="xs s"
+                      gap="xs"
+                      width="100%"
+                    >
+                      <GdsFlex align-items="center" gap="s">
+                        <GdsFlex align-items="center" width="19px">
+                          {subLink.private && (
+                            <IconEyeSlash width={12} height={12} />
+                          )}
+                        </GdsFlex>
+                        {subLink.title}
+                      </GdsFlex>
+
+                      <GdsFlex align-items="center" gap="xs">
+                        {subLink.badge && (
+                          <GdsBadge variant="notice" size="small">
+                            {subLink.badge}
+                          </GdsBadge>
+                        )}
+                      </GdsFlex>
+                    </GdsFlex>
+                  </Link>
                 )
               })}
-            </GdsFlex>
-          )}
-        </GdsFlex>
-      ))}
-      <GdsFlex
-        margin="auto 0 0 0"
-        min-width="100%"
-        justify-content="stretch"
-        padding="0 s 0 0"
-      >
-        <GdsFlex
-          align-items="center"
-          justify-content="space-between"
-          width="100%"
-        >
-          <GdsLink
-            href="https://designlibrary.sebgroup.com/"
-            target="_blank"
-            variant="secondary"
-          >
-            <span>Design Library</span>
-          </GdsLink>
-          <IconCainLink />
-        </GdsFlex>
+          </GdsFlex>
+        </GdsContainer>
       </GdsFlex>
-    </GdsFlex>
+    </GdsCard>
   )
 }

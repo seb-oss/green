@@ -1,9 +1,17 @@
 'use client'
 
+import { Link } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
+import {
+  GdsBadge,
+  GdsCard,
+  GdsContainer,
+  GdsFlex,
+  GdsRichText,
+  GdsText,
+} from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
@@ -52,7 +60,7 @@ export default function ComponentLayout({
     }
   }
 
-  // const tagsArray = tags ? tags.split(', ') : []
+  const tagsArray = tags ? tags.split(', ') : []
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },
@@ -82,13 +90,12 @@ export default function ComponentLayout({
     dynamic(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
-          const ExampleComponent = () => <div>Example</div>
+          const ExampleComponent = () => <div>Example not created</div>
           ExampleComponent.displayName = 'ExampleComponent'
           return ExampleComponent
         }),
       {
         ssr: false,
-        loading: () => <p>Loading...</p>,
       },
     )
 
@@ -97,17 +104,17 @@ export default function ComponentLayout({
   return (
     <GdsFlex
       flex-direction="column"
-      max-width="max-content"
+      width="100%"
       justify-content="center"
       margin="0 auto"
     >
-      <Breadcrumb
-        home={'Home'}
-        separator={<GdsText font-size="body-s"> / </GdsText>}
-        slug={slug}
-      />
-      <GdsFlex gap="4xl">
-        <GdsFlex width="80ch" flex-direction="column" gap="2xl">
+      <GdsFlex gap="l">
+        <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
+          <Breadcrumb
+            home={'Home'}
+            separator={<GdsText font-size="body-s"> / </GdsText>}
+            slug={slug}
+          />
           <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
             <GdsFlex
               justify-content="space-between"
@@ -116,7 +123,11 @@ export default function ComponentLayout({
             >
               <GdsFlex flex-direction="column" gap="xs">
                 <GdsText tag="h1">{title}</GdsText>
-                <GdsText tag="p" text-wrap="balance">
+                <GdsText
+                  tag="p"
+                  text-wrap="balance"
+                  className="fade-in delay-200"
+                >
                   {summary}
                 </GdsText>
                 {status && (
@@ -124,6 +135,13 @@ export default function ComponentLayout({
                     {status}
                   </GdsBadge>
                 )}
+                <GdsFlex gap="s">
+                  {tagsArray.map((tag) => (
+                    <Link href={`/tag/` + tag} key={tag}>
+                      {tag}
+                    </Link>
+                  ))}
+                </GdsFlex>
               </GdsFlex>
             </GdsFlex>
             <GdsCard>
@@ -148,7 +166,9 @@ export default function ComponentLayout({
             </time>
           </footer>
         </GdsFlex>
-        <GdsFlex>{TOC}</GdsFlex>
+        <GdsFlex display="none; l{flex}" width="232px">
+          {TOC}
+        </GdsFlex>
       </GdsFlex>
     </GdsFlex>
   )

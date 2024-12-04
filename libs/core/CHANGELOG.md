@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.60.0
+
+### Minor Changes
+
+- 87b9ce0: **Link:** Use `text-decoration` prop to enable underline style instead of variants
+
+## 1.59.1
+
+### Patch Changes
+
+- eea8929: **FAB:** Pass position to host instead of internal button
+- caa5de7: **Button:** remove `width` and remove `transition` on all props keep it specific instead and add `min-block-size` on icon button.
+- 6fa9154: **Datepicker:** Fix label line-height in transitional styles
+- 1a8e4be: **FAB:** Add default `z-index`
+
+## 1.59.0
+
+### Minor Changes
+
+- f2492d2: **GdsTheme:** Include all 2023 CSS variables instead of only colors
+
+### Patch Changes
+
+- f2492d2: **GdsTheme:** Fix issue with changing `color-scheme`
+
+## 1.58.0
+
+### Minor Changes
+
+- 694a88f: **Badge:** Add new boolean prop `rounded` to have fully rounded border radius when used on form elements such as input
+
+### Patch Changes
+
+- ed505c8: **Badge:** Add missing import for dependency `gds-flex`
+
 ## 1.57.0
 
 ### Minor Changes

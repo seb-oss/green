@@ -16,12 +16,13 @@ describe('GdsTheme', () => {
       const element = await fixture<GdsTheme>(html`<gds-theme></gds-theme>`)
       await element.updateComplete
 
-      expect(element._dynamicStylesController.has('light')).to.be.true
-
       element.colorScheme = 'dark'
       await element.updateComplete
 
-      expect(element._dynamicStylesController.has('dark')).to.be.true
+      expect(element._dynamicStylesController.has('color-scheme')).to.be.true
+      expect(window.getComputedStyle(element).colorScheme).to.have.string(
+        'dark',
+      )
     })
 
     it('should dispatch an event when setting `designVersion`', async () => {

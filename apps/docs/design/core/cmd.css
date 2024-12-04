@@ -10,7 +10,7 @@
   animation: scaleIn 200ms ease;
   transition: transform 100ms ease;
   outline: none;
-  z-index: 100;
+  z-index: 99999;
   background-color: #fff;
   padding: 40px;
   border-radius: 12px;
@@ -29,24 +29,27 @@
 }
 
 [cmdk-input] {
-  font-family: var(--font-sans);
+  font-family: inherit;
   border: none;
   width: 100%;
   font-size: 17px;
-  padding: 8px 8px 16px 8px;
+  /* padding: 8px 8px 16px 8px; */
+  padding: 16px;
   outline: none;
   background: var(--bg);
   color: var(--gray12);
-  border-bottom: 1px solid var(--gray6);
+  background-color: hsla(0, 0%, 84%, 0.2);
+  border: 1px solid hsla(0, 0%, 84%, 0.4);
   margin-bottom: 16px;
-  border-radius: 0;
+  border-radius: 12px;
+  box-sizing: border-box;
 
   &::placeholder {
     color: var(--gray9);
   }
 }
 
-[cmdk-vercel-badge] {
+/* [cmdk-vercel-badge] {
   height: 20px;
   background: var(--grayA3);
   display: inline-flex;
@@ -59,7 +62,7 @@
   user-select: none;
   text-transform: capitalize;
   font-weight: 500;
-}
+} */
 
 [cmdk-item] {
   content-visibility: auto;
@@ -76,12 +79,12 @@
   transition: all 150ms ease;
   transition-property: none;
 
-  &[data-selected="true"] {
+  &[data-selected='true'] {
     background: #000;
     color: #fff;
   }
 
-  &[data-disabled="true"] {
+  &[data-disabled='true'] {
     color: var(--gray8);
     cursor: not-allowed;
   }
@@ -186,12 +189,12 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(28px);
+  /* backdrop-filter: blur(8px); */
   background-color: rgba(0, 0, 0, 0.2);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  z-index: 0;
+  z-index: 9999;
   transition: all 624ms ease;
 
   &.open {
