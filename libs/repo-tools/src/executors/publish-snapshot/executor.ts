@@ -25,11 +25,11 @@ export default async function publishSnapshot(
   const pkgJson = getLibPkgJson(libName)
   const version = pkgJson.version
   const versionParts = version.split('-')
-  const [snapshotLabel, _] = versionParts
   if (versionParts.length !== 2) {
     console.error(`Version ${version} is not a snapshot version`)
     return { success: false }
   }
+  const [snapshotLabel, _] = versionParts[1].split('.')
   if (snapshotLabel !== label) {
     console.error(`Snapshot version ${version} does not match label ${label}`)
     return { success: false }
