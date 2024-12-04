@@ -46,4 +46,27 @@ jobs:
         run: yarn nx affected -t build --exclude='*,!tag:lib' --base=main --head=HEAD
 
       - name: Publish snapshots
+        id: publish-snapshots
         run: yarn nx affected -t publish-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
+
+      - name: Comment status
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Release Candidate snapshots published to NPM :rocket: :package: :tada:
+
+                Version: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION }}
+
+              Install latest RC snapshot by running:
+              \`\`\`
+              npm install @sebgroup/package-name@rc
+              \`\`\`
+
+              :information_source: Please note that these are intended for testing purposes only.`
+              `
+            })

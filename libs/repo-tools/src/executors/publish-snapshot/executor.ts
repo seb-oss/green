@@ -1,4 +1,4 @@
-import { spawn } from 'node:child_process'
+import { exec, spawn } from 'node:child_process'
 import { readFileSync } from 'node:fs'
 
 import type { ExecutorContext } from '@nx/devkit'
@@ -57,6 +57,7 @@ export default async function publishSnapshot(
 
   if (exitCode === 0) {
     console.info(`Published ${libName} as ${version}`)
+    exec(`echo "SNAPSHOT_VERSION=${version}" >> $GITHUB_OUTPUT`)
     return { success: true }
   } else {
     console.error(`Failed to publish ${libName} as ${version}`)
