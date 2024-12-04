@@ -67,6 +67,6 @@ jobs:
               npm install @sebgroup/package-name@rc
               \`\`\`
 
-              :information_source: Please note that these are intended for testing purposes only.`
+              :information_source: Please note that these are intended for testing purposes only.
               `
             })
