@@ -50,15 +50,18 @@ export default async function publishSnapshot(
   npmProcess.stderr.on('data', (data) => {
     console.error(data.toString())
   })
-  npmProcess.on('close', (code) => {
-    if (code === 0) {
-      console.info(`Published ${libName} as ${version}`)
-      return { success: true }
-    } else {
-      console.error(`Failed to publish ${libName} as ${version}`)
-      return { success: false }
-    }
+
+  const exitCode = await new Promise((resolve, reject) => {
+    npmProcess.on('close', resolve)
   })
+
+  if (exitCode === 0) {
+    console.info(`Published ${libName} as ${version}`)
+    return { success: true }
+  } else {
+    console.error(`Failed to publish ${libName} as ${version}`)
+    return { success: false }
+  }
 }
 
 function getLibPkgJson(libName: string): PackageJsonPartial {
