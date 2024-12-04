@@ -16,6 +16,9 @@ jobs:
         with:
           app-id: ${{ secrets.GREEN_BOT_APP_ID }}
           private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+          repositories: |
+            green
+            green-testbed
 
       - name: Checkout Repo
         uses: actions/checkout@v4
