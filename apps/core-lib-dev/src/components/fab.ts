@@ -1,4 +1,4 @@
-import { LitElement, nothing } from 'lit'
+import { LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 
 import { html } from '@sebgroup/green-core/scoping.js'
