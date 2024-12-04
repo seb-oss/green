@@ -46,4 +46,4 @@ jobs:
         run: yarn nx affected -t build --exclude='*,!tag:lib' --base=main --head=HEAD
 
       - name: Publish snapshots
-        run: yarn nx affected -t publish --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
+        run: yarn nx affected -t publish-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
