@@ -3,22 +3,15 @@ import { writeFile } from 'node:fs/promises'
 
 import type { ExecutorContext } from '@nx/devkit'
 
-type DepSpecs = {
-  [name: string]: string
-}
-
-type PackageJsonPartial = {
-  name: string
+interface PackageJsonPartial {
   version: string
-  dependencies?: DepSpecs
-  peerDependencies?: DepSpecs
 }
 
-type ExecutorOptions = {
+interface ExecutorOptions {
   label: string
 }
 
-export default async function updateDeps(
+export default async function versionAsSnapshot(
   options: ExecutorOptions,
   context: ExecutorContext,
 ): Promise<{ success: boolean }> {

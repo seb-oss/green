@@ -86,6 +86,10 @@
       "executor": "@sebgroup/repo-tools:version-as-snapshot",
       "options": {}
     },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
+      "options": {}
+    },
     "test-storybook": {
       "executor": "nx:run-commands",
       "options": {
