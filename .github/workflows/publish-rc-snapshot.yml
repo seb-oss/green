@@ -58,14 +58,18 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `Release Candidate snapshots published to NPM :rocket: :package: :tada:
+              body: `Hello! New release candidate snapshots published to NPM! :rocket: :package: :tada:
 
-                Version: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION }}
+              Version info:
+
+                @sebgroup/green-core: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CORE }}
+                @sebgroup/green-angular: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_ANGULAR }}
+                @sebgroup/green-react: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_REACT }}
+                @sebgroup/chlorophyll: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CHLOROPHYLL }}
 
               Install latest RC snapshot by running:
-              \`\`\`
-              npm install @sebgroup/package-name@rc
-              \`\`\`
+
+                npm install @sebgroup/package-name@rc
 
               :information_source: Please note that these are intended for testing purposes only.
               `
