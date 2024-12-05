@@ -7,7 +7,6 @@ import motionTokens from '../../../dist/libs/tokens/internal/motion.css?inline'
 import shadowTokens from '../../../dist/libs/tokens/internal/shadow.css?inline'
 import sizeTokens from '../../../dist/libs/tokens/internal/size.css?inline'
 import textTokens from '../../../dist/libs/tokens/internal/text.css?inline'
-import viewportTokens from '../../../dist/libs/tokens/internal/viewport.css?inline'
 import { GlobalStylesRegistry } from './utils/global-styles'
 
 const tokens = [
@@ -15,7 +14,6 @@ const tokens = [
   unsafeCSS(textTokens),
   unsafeCSS(motionTokens),
   unsafeCSS(shadowTokens),
-  unsafeCSS(viewportTokens),
 ]
 
 // Apply a set of default tokens to the root element
