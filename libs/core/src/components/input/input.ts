@@ -144,8 +144,23 @@ export class GdsInput extends GdsFormControlElement<string> {
       </gds-form-control-header>
       <gds-field-base>
         <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-        <gds-badge variant="information" rounded slot="lead"> 20 </gds-badge>
-        <span>Input</span>
+        <gds-badge variant="notice" rounded slot="lead"> 20 </gds-badge>
+        <input
+          @input=${this.#handleOnInput}
+          @change=${this.#handleOnChange}
+          style="${this.invalid
+            ? 'color: var(--gds-color-l3-content-negative);'
+            : this.disabled
+              ? 'color: currentColor;pointer-events:none;'
+              : null}"
+          .value=${this.value}
+          id="input"
+          ?disabled=${this.disabled}
+          aria-describedby="supporting-text"
+          aria-invalid=${this.invalid}
+          placeholder=" "
+          ${forwardAttributes(this.#forwardableAttrs)}
+        />
         <gds-button
           size="small"
           rank="tertiary"

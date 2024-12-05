@@ -25,7 +25,7 @@ export class GdsFieldBase extends GdsElement {
         align-items="center"
         justify-content="space-between"
         gap="xs"
-        padding="xs"
+        padding="s m"
         min-block-size="3xl"
         block-size="3xl"
         border-radius="xs"
@@ -35,13 +35,13 @@ export class GdsFieldBase extends GdsElement {
         cursor="text"
         color="tertiary"
       >
-        <gds-flex align-items="center" gap="xs">
+        <gds-flex align-items="center" justify-content="center" gap="xs">
           <slot name="lead"></slot>
         </gds-flex>
         <gds-flex align-items="center" flex="1">
           <slot></slot>
         </gds-flex>
-        <gds-flex align-items="center" gap="xs">
+        <gds-flex align-items="center" justify-content="center" gap="xs">
           <slot name="trail"></slot>
         </gds-flex>
       </gds-flex>
