@@ -11,6 +11,13 @@ import {
   GdsFlex,
   GdsInput,
 } from '$/import/components'
+import {
+  IconBrandGreen,
+  IconEyeSlash,
+  IconSquareGridCircle,
+  IconSquareInfo,
+  IconTextEdit,
+} from '$/import/icons'
 import { Context } from '$/provider/provider'
 // import { toggleCmd } from '$/provider/provider'
 import { Command } from 'cmdk'
@@ -168,7 +175,6 @@ function Home({ searchComponents }: { searchComponents: Function }) {
       >
         Search Components...
       </Item> */}
-
         {components.map((component, idx) => {
           return (
             <Item
@@ -182,7 +188,30 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                 // console.log('Selected:', component.title)
               }}
             >
-              {component.title}
+              <GdsFlex
+                width="100%"
+                justify-content="space-between"
+                align-items="center"
+              >
+                <GdsFlex gap="xs" align-items="center">
+                  <GdsFlex
+                    width="24px"
+                    height="24px"
+                    align-items="center"
+                    justify-content="center"
+                  >
+                    {component.private && (
+                      <IconEyeSlash width={12} height={12} />
+                    )}
+                  </GdsFlex>
+                  {component.title}
+                </GdsFlex>
+                {component.status && (
+                  <GdsBadge variant="notice" size="small">
+                    {component.status}
+                  </GdsBadge>
+                )}
+              </GdsFlex>
             </Item>
           )
         })}
