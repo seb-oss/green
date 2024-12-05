@@ -11,7 +11,8 @@ import { styles } from './input.styles'
 
 // Local Components
 import '../../primitives/form-control-header'
-import '../../primitives/form-control-footer'
+import '../../primitives/form-control-header'
+import '../../primitives/field-base'
 import '../icon/icons/cross-small'
 import '../flex'
 import '../button'
@@ -133,15 +134,30 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <gds-form-control-header class="size-${this.size}">
         <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text"
-          >${this.supportingText}</span
-        >
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
         <slot
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
       </gds-form-control-header>
-
+      <gds-field-base>
+        <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+        <gds-badge variant="information" rounded slot="lead"> 20 </gds-badge>
+        <span>Input</span>
+        <gds-button
+          size="small"
+          rank="tertiary"
+          variant=""
+          ?disabled="${this.disabled}"
+          label="${msg('Clear input')}"
+          slot="trail"
+        >
+          <gds-icon-cross-small />
+        </gds-button>
+        <gds-badge variant="information" slot="trail">USD</gds-badge>
+      </gds-field-base>
       <gds-flex
         level="3"
         position="relative"

@@ -1,6 +1,7 @@
 export * from '../primitives/listbox/option'
 export * from '../primitives/menu/menu-heading'
 export * from '../primitives/menu/menu-item'
+export * from '../primitives/field-base'
 export * from './button/button'
 export * from './badge/badge'
 export * from './menu-button/menu-button'
