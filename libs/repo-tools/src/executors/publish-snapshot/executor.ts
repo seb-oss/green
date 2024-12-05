@@ -39,7 +39,7 @@ export default async function publishSnapshot(
   console.info(`Publishing ${libName} as ${version}...`)
   const npmProcess = spawn(
     'npm',
-    ['publish', '--tag', label, '--access=public', '--dry-run'],
+    ['publish', '--tag', label, '--access=public'],
     {
       cwd: `libs/${libName}`,
     },
