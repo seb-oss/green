@@ -6,7 +6,7 @@ export type DocHeading = { level: 1 | 2 | 3; title: string }
 
 export const Page = defineDocumentType(() => ({
   name: 'Page',
-  filePathPattern: `pages/**/*.mdx`,
+  filePathPattern: `page/**/*.mdx`,
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
