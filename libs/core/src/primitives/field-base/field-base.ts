@@ -118,26 +118,29 @@ export class GdsFieldBase extends GdsElement {
       )
   }
 
-  #handleLeadSlotChange(event: Event) {
+  #handleSlotChange(slotName: 'lead' | 'trail', event: Event) {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
-    this.leadSlotOccupied =
+    const slotOccupied =
       assignedNodes.length > 0 &&
       assignedNodes.some(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE ||
           (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
+
+    if (slotName === 'lead') {
+      this.leadSlotOccupied = slotOccupied
+    } else if (slotName === 'trail') {
+      this.trailSlotOccupied = slotOccupied
+    }
   }
 
   #renderSlotLead() {
-    return html` <gds-flex
-      align-items="center"
-      justify-content="center"
-      gap="xs"
-    >
-      <slot name="lead" @slotchange=${this.#handleLeadSlotChange}></slot>
-    </gds-flex>`
+    return html` <slot
+      name="lead"
+      @slotchange=${(e: Event) => this.#handleSlotChange('lead', e)}
+    ></slot>`
   }
 
   #renderSlotBase() {
@@ -148,9 +151,10 @@ export class GdsFieldBase extends GdsElement {
 
   #renderSlotTrail() {
     return html`
-      <gds-flex align-items="center" justify-content="center" gap="xs">
-        <slot name="trail" @slotchange=${this.#handleTrailSlotChange}></slot>
-      </gds-flex>
+      <slot
+        name="trail"
+        @slotchange=${(e: Event) => this.#handleSlotChange('trail', e)}
+      ></slot>
     `
   }
 }
