@@ -29,6 +29,7 @@ import '../button'
  * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
  *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
  */
 @gdsCustomElement('gds-textarea')
 @localized()
@@ -258,6 +259,18 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
+    this.dispatchEvent(
+      new Event('gds-input-cleared', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   #renderSlotLead() {

@@ -227,6 +227,12 @@ export class GdsInput extends GdsFormControlElement<string> {
         composed: true,
       }),
     )
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   #renderSlotLead() {
