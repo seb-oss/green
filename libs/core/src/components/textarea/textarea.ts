@@ -215,7 +215,8 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       <gds-form-control-footer
         .charCounter=${this.#shouldShowRemainingChars &&
         this.maxlength - this.value.length}
-        .validationMessage=${this.invalid && this.validationMessage}
+        .validationMessage=${this.invalid &&
+        (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
     `
   }

@@ -185,7 +185,8 @@ export class GdsInput extends GdsFormControlElement<string> {
         class="size-${this.size}"
         .charCounter=${this.#shouldShowRemainingChars &&
         this.maxlength - this.value.length}
-        .validationMessage=${this.invalid && this.validationMessage}
+        .validationMessage=${this.invalid &&
+        (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
     `
   }
