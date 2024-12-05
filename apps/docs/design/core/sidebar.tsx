@@ -81,12 +81,12 @@ export default function Sidebar() {
       height="calc(100vh - 72px)"
       align-items="flex-start"
       flex-direction="column"
-      margin="0 s; m{0 0 0 s}"
+      margin="0 s; m{s 0 0 s}"
       z-index="2"
       padding="none"
       position="fixed; m{sticky}"
-      inset="60px 0 0 0"
-      max-height="calc(100vh - 60px)"
+      inset="70px 0 0 0"
+      max-height="calc(100vh - 90px)"
       overflow="hidden"
       min-width="270px"
       className="sidebar-transition"
@@ -98,6 +98,7 @@ export default function Sidebar() {
           min-width="250px"
           border="0 0 4xs 0"
           border-color="primary"
+          class="nobar"
           style={{
             boxShadow: hasScrolled
               ? '0px 0px 8px 4px #00000015, 0px 3px 2px 0px #00000005'

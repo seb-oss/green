@@ -136,7 +136,8 @@ export function CMD({
 // eslint-disable-next-line @typescript-eslint/ban-types
 function Home({ searchComponents }: { searchComponents: Function }) {
   console.log('content', allDocuments)
-
+  const [searchTerm, setSearchTerm] = useState('')
+  
   const components = allComponents
     .filter((component) => {
       if (component._raw.sourceFileName !== 'index.mdx') {
@@ -159,11 +160,21 @@ function Home({ searchComponents }: { searchComponents: Function }) {
     })
     .sort((a, b) => a.title.localeCompare(b.title))
 
+  const filteredPages = pages.filter((page) => {
+    const lowerCaseSearchTerm = inputValue.toLowerCase()
+    const titleMatch = page.title.toLowerCase().includes(lowerCaseSearchTerm)
+    const contentMatch = page.body.raw
+      .toLowerCase()
+      .includes(lowerCaseSearchTerm)
+    return titleMatch || contentMatch
+  })
+
   const router = useTransitionRouter()
   const { toggleCmd } = useContext(Context)
   return (
     <>
-      {/* <Item
+      <Command.Group heading="Components">
+        {/* <Item
         // shortcut="S P"
         onSelect={() => {
           searchComponents()
@@ -171,43 +182,6 @@ function Home({ searchComponents }: { searchComponents: Function }) {
       >
         Search Components...
       </Item> */}
-
-      <Command.Group heading="Pages">
-        {pages.map((page, idx) => {
-          const IconComponent = iconMapping[page.icon]
-
-          return (
-            <GdsFlex key={idx} flex-direction="column">
-              <Item
-                onSelect={() => {
-                  const urlPath = page.url_path.replace('/page', '')
-                  router.push(urlPath || ``)
-                  toggleCmd()
-                }}
-              >
-                <GdsFlex
-                  width="100%"
-                  justify-content="space-between"
-                  align-items="center"
-                >
-                  <GdsFlex gap="xs" align-items="center">
-                    <GdsFlex
-                      width="24px"
-                      height="24px"
-                      align-items="center"
-                      justify-content="center"
-                    >
-                      {IconComponent ? <IconComponent /> : null}
-                    </GdsFlex>
-                    <GdsText>{page.title}</GdsText>
-                  </GdsFlex>
-                </GdsFlex>
-              </Item>
-            </GdsFlex>
-          )
-        })}
-      </Command.Group>
-      <Command.Group heading="Components">
         {components.map((component, idx) => {
           return (
             <GdsFlex key={idx} flex-direction="column">
@@ -254,6 +228,77 @@ function Home({ searchComponents }: { searchComponents: Function }) {
           )
         })}
       </Command.Group>
+      <Command.Group heading="Pages">
+        {filteredPages.map((page, idx) => {
+          const IconComponent = iconMapping[page.icon]
+
+          return (
+            <GdsFlex key={idx} flex-direction="column">
+              <Item
+                onSelect={() => {
+                  router.push(page.url_path || ``)
+                  toggleCmd()
+                }}
+              >
+                <GdsFlex
+                  width="100%"
+                  justify-content="space-between"
+                  align-items="center"
+                >
+                  <GdsFlex gap="xs" align-items="center">
+                    <GdsFlex
+                      width="24px"
+                      height="24px"
+                      align-items="center"
+                      justify-content="center"
+                    >
+                      {IconComponent ? <IconComponent /> : null}
+                    </GdsFlex>
+                    <GdsText>{page.title}</GdsText>
+                  </GdsFlex>
+                </GdsFlex>
+              </Item>
+            </GdsFlex>
+          )
+        })}
+        {/* 
+        <Item
+          onSelect={() => {
+            router.push('/foundation')
+            toggleCmd()
+          }}
+        >
+          Foundation
+        </Item>
+        <Item
+          onSelect={() => {
+            router.push('/ux-writing')
+            toggleCmd()
+          }}
+        >
+          UX Writing
+        </Item>
+        <Item
+          onSelect={() => {
+            router.push('/about')
+            toggleCmd()
+          }}
+        >
+          About
+        </Item> */}
+      </Command.Group>
+      {/* <Command.Group heading="Foundation">
+        <Item shortcut="⇧ A">Accesibility</Item>
+      </Command.Group>
+      <Command.Group heading="UX writing">
+        <Item shortcut="⇧ G">General</Item>
+        <Item shortcut="⇧ E">English</Item>
+        <Item shortcut="⇧ S">Swedish</Item>
+      </Command.Group>
+      <Command.Group heading="About">
+        <Item shortcut="⇧ C">Changelog</Item>
+        <Item shortcut="⇧ L">Status</Item>
+      </Command.Group> */}
     </>
   )
 }

@@ -13,6 +13,7 @@ import {
   GdsText,
 } from '$/import/components'
 import Breadcrumb from 'core/breadcrumb'
+import Loading from 'core/loading'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'
@@ -86,16 +87,30 @@ export default function ComponentLayout({
     },
   ]
 
+  const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms))
+
   const getDynamicComponent = (c: string) =>
     dynamic(
       () =>
-        import(`../../../design/example/${c}`).catch(() => {
-          const ExampleComponent = () => <div>Example not created</div>
-          ExampleComponent.displayName = 'ExampleComponent'
-          return ExampleComponent
-        }),
+        delay(200) // Introduce a delay of 2 seconds
+          .then(() => import(`../../../design/example/${c}`))
+          .then((mod) => {
+            const Component = mod.default
+            const WrappedComponent = (props) => (
+              <Component {...props} className="fade-in" />
+            )
+            WrappedComponent.displayName = `DynamicComponent(${c})`
+            return WrappedComponent
+          })
+          .catch(() => {
+            const ExampleComponent = () => <div>Example not created</div>
+            ExampleComponent.displayName = 'ExampleComponent'
+            return ExampleComponent
+          }),
       {
         ssr: false,
+        // loading: () => <Loading />,
       },
     )
 

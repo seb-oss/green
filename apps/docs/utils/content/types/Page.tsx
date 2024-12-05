@@ -10,6 +10,7 @@ export const Page = defineDocumentType(() => ({
   contentType: 'mdx',
   fields: {
     title: { type: 'string', required: true },
+    icon: { type: 'string', required: false },
   },
   computedFields: {
     url_path: {
