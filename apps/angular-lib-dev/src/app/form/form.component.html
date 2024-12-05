@@ -1,0 +1,36 @@
+<h1>Form</h1>
+
+<form [formGroup]="simpleForm">
+  <gds-flex *nggCoreElement flex-direction="column" width="800px">
+    <gds-input
+      *nggCoreElement
+      ngDefaultControl
+      formControlName="name"
+      label="Name"
+      clearable
+    ></gds-input>
+    <gds-input
+      *nggCoreElement
+      ngDefaultControl
+      formControlName="email"
+      label="Email"
+      type="email"
+      clearable
+    ></gds-input>
+    <gds-textarea
+      *nggCoreElement
+      ngDefaultControl
+      formControlName="description"
+      label="Description"
+      clearable
+    >
+    </gds-textarea>
+    <div>
+      <gds-button *nggCoreElement type="submit">Submit</gds-button>
+    </div>
+  </gds-flex>
+</form>
+
+<p>Name: {{ simpleForm.get('name')?.value }}</p>
+<p>Email: {{ simpleForm.get('email')?.value }}</p>
+<p>Description: {{ simpleForm.get('description')?.value }}</p>
