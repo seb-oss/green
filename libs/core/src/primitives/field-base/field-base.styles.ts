@@ -10,6 +10,7 @@ export const styles = css`
 
     * {
       box-sizing: border-box;
+      user-select: none;
     }
 
     .field {
@@ -20,9 +21,28 @@ export const styles = css`
       outline-width: var(--gds-space-3xs);
       outline-offset: var(--gds-space-3xs);
 
-      &:focus-within {
-        border-color: var(--gds-color-l3-border-primary);
+      &.focused {
         outline-color: currentColor;
+      }
+    }
+
+    @media (hover: hover) {
+      .field {
+        &:hover {
+          background: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-secondary),
+            var(--gds-color-l3-states-light-hover)
+          );
+        }
+
+        &.invalid:hover {
+          background: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-negative-secondary),
+            var(--gds-color-l3-states-negative-hover)
+          );
+        }
       }
     }
 

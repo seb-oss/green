@@ -1,5 +1,6 @@
 import { localized, msg } from '@lit/localize'
-import { property, query, state } from 'lit/decorators.js'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -11,13 +12,37 @@ import { styles } from './field-base.styles'
 
 /**
  * @element gds-field-base
+ * @status beta
  */
 @gdsCustomElement('gds-field-base')
 @localized()
 export class GdsFieldBase extends GdsElement {
   static styles = [styles]
 
+  @query('slot:not([name])')
+  private mainSlotElement!: HTMLSlotElement
+
+  @state()
+  private isFocused = false
+
+  constructor() {
+    super()
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+  }
+
   render() {
+    const CLASSES = {
+      field: true,
+      focused: this.isFocused,
+    }
+
     return html`
       <gds-flex
         level="3"
@@ -30,20 +55,73 @@ export class GdsFieldBase extends GdsElement {
         block-size="3xl"
         border-radius="xs"
         background="secondary"
-        border="4xs/secondary"
-        class="field"
+        border=${this.isFocused ? '4xs/primary' : '4xs/secondary'}
+        @click=${this.#handleFieldClick}
+        class=${classMap(CLASSES)}
         cursor="text"
         color="tertiary"
       >
-        <gds-flex align-items="center" justify-content="center" gap="xs">
-          <slot name="lead"></slot>
-        </gds-flex>
-        <gds-flex align-items="center" flex="1">
-          <slot></slot>
-        </gds-flex>
-        <gds-flex align-items="center" justify-content="center" gap="xs">
-          <slot name="trail"></slot>
-        </gds-flex>
+        ${this.#renderSlotLead()} ${this.#renderSlotBase()}
+        ${this.#renderSlotTrail()}
+      </gds-flex>
+    `
+  }
+
+  #handleFieldClick = () => {
+    console.log('click', this.mainSlotElement)
+    const assignedElements = this.mainSlotElement.assignedElements({
+      flatten: true,
+    })
+    const inputElement = assignedElements.find(
+      (node) =>
+        node instanceof HTMLInputElement ||
+        node instanceof HTMLTextAreaElement ||
+        node instanceof HTMLSelectElement,
+    ) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+
+    if (inputElement) {
+      inputElement.focus()
+      this.isFocused = true
+      inputElement.addEventListener('blur', this.#handleFieldBlur)
+    }
+  }
+
+  #handleFieldBlur = () => {
+    this.isFocused = false
+  }
+
+  #handleSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.trailSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
+  }
+
+  #renderSlotLead() {
+    return html` <gds-flex
+      align-items="center"
+      justify-content="center"
+      gap="xs"
+    >
+      <slot name="lead" @slotchange=${this.#handleSlotChange}></slot>
+    </gds-flex>`
+  }
+
+  #renderSlotBase() {
+    return html` <gds-flex align-items="center" flex="1">
+      <slot @slotchange=${this.#handleSlotChange}></slot>
+    </gds-flex>`
+  }
+
+  #renderSlotTrail() {
+    return html`
+      <gds-flex align-items="center" justify-content="center" gap="xs">
+        <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
       </gds-flex>
     `
   }
