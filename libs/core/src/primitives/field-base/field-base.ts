@@ -19,11 +19,20 @@ import { styles } from './field-base.styles'
 export class GdsFieldBase extends GdsElement {
   static styles = [styles]
 
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
   @query('slot:not([name])')
   private mainSlotElement!: HTMLSlotElement
 
   @state()
   private isFocused = false
+
+  @state()
+  leadSlotOccupied = false
+
+  @state()
+  trailSlotOccupied = false
 
   constructor() {
     super()
@@ -43,6 +52,9 @@ export class GdsFieldBase extends GdsElement {
       focused: this.isFocused,
     }
 
+    // TODO:
+    // - Add a11y attributes
+    // - Check if is invalid or disabled and apply the style
     return html`
       <gds-flex
         level="3"
@@ -50,9 +62,13 @@ export class GdsFieldBase extends GdsElement {
         align-items="center"
         justify-content="space-between"
         gap="xs"
-        padding="s m"
-        min-block-size="3xl"
-        block-size="3xl"
+        padding="${this.size === 'small'
+          ? 'xs s'
+          : !this.trailSlotOccupied
+            ? 'xs xs xs m'
+            : 'xs m'}"
+        min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
+        block-size="${this.size === 'small' ? 'xl' : '3xl'}"
         border-radius="xs"
         background="secondary"
         border=${this.isFocused ? '4xs/primary' : '4xs/secondary'}
@@ -90,10 +106,22 @@ export class GdsFieldBase extends GdsElement {
     this.isFocused = false
   }
 
-  #handleSlotChange(event: Event) {
+  #handleTrailSlotChange(event: Event) {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
     this.trailSlotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
+  }
+
+  #handleLeadSlotChange(event: Event) {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    this.leadSlotOccupied =
       assignedNodes.length > 0 &&
       assignedNodes.some(
         (node) =>
@@ -108,20 +136,20 @@ export class GdsFieldBase extends GdsElement {
       justify-content="center"
       gap="xs"
     >
-      <slot name="lead" @slotchange=${this.#handleSlotChange}></slot>
+      <slot name="lead" @slotchange=${this.#handleLeadSlotChange}></slot>
     </gds-flex>`
   }
 
   #renderSlotBase() {
     return html` <gds-flex align-items="center" flex="1">
-      <slot @slotchange=${this.#handleSlotChange}></slot>
+      <slot></slot>
     </gds-flex>`
   }
 
   #renderSlotTrail() {
     return html`
       <gds-flex align-items="center" justify-content="center" gap="xs">
-        <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
+        <slot name="trail" @slotchange=${this.#handleTrailSlotChange}></slot>
       </gds-flex>
     `
   }
