@@ -1,10 +1,11 @@
 'use client'
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useTransitionRouter } from 'next-view-transitions'
-import { allComponents, allDocuments, allPages } from 'content'
+import dynamic from 'next/dynamic'
+import { allComponents, allPages } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsFlex, GdsText } from '$/import/components'
+import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
 import { IconEyeSlash } from '$/import/icons'
 import iconMapping from '$/import/icons.map'
 import { Context } from '$/provider/provider'
@@ -21,6 +22,7 @@ export function CMD({
 }) {
   const ref = React.useRef<HTMLDivElement | null>(null)
   const [inputValue, setInputValue] = React.useState('')
+
   const [pages, setPages] = React.useState<string[]>(['home'])
   const activePage = pages[pages.length - 1]
   const isHome = activePage === 'home'
@@ -135,7 +137,7 @@ export function CMD({
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 function Home({ searchComponents }: { searchComponents: Function }) {
-  console.log('content', allDocuments)
+  const [selectedComponent, setSelectedComponent] = React.useState('')
 
   const components = allComponents
     .filter((component) => {
@@ -151,16 +153,61 @@ function Home({ searchComponents }: { searchComponents: Function }) {
 
   const pages = allPages
     .filter((page) => {
-      // if (page._raw.sourceFileName !== 'index.mdx') {
-      //   return false
-      // }
-
       return true
     })
     .sort((a, b) => a.title.localeCompare(b.title))
 
   const router = useTransitionRouter()
   const { toggleCmd } = useContext(Context)
+
+  const getDynamicComponent = (c: string) =>
+    dynamic(
+      () =>
+        import(`../example/${c}`)
+          .then((mod) => mod.default)
+          .catch(() => {
+            const ExampleComponent = () => <div>Example not created</div>
+            ExampleComponent.displayName = 'ExampleComponent'
+            return ExampleComponent
+          }),
+      {
+        ssr: false,
+      },
+    )
+
+  const Preview = selectedComponent
+    ? getDynamicComponent(selectedComponent)
+    : null
+
+  useEffect(() => {
+    const items = document.querySelectorAll('[cmdk-item]')
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-selected'
+        ) {
+          const target = mutation.target as HTMLElement
+          const isSelected = target.getAttribute('data-selected') === 'true'
+          if (isSelected) {
+            const value = target.getAttribute('data-value')
+            if (value) {
+              setSelectedComponent(value)
+            }
+          }
+        }
+      })
+    })
+
+    items.forEach((item) => {
+      observer.observe(item, { attributes: true })
+    })
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
+
   return (
     <>
       {/* <Item
@@ -184,6 +231,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                   router.push(urlPath || ``)
                   toggleCmd()
                 }}
+                value={page.body.raw}
               >
                 <GdsFlex
                   width="100%"
@@ -208,51 +256,71 @@ function Home({ searchComponents }: { searchComponents: Function }) {
         })}
       </Command.Group>
       <Command.Group heading="Components">
-        {components.map((component, idx) => {
-          return (
-            <GdsFlex key={idx} flex-direction="column">
-              <Item
-                // onClick={() => {
-                //   router.push(component + path)
-                // }}
-                onSelect={() => {
-                  router.push(component.url_path || ``)
-                  toggleCmd()
-                  // console.log('Selected:', component.title)
-                }}
-              >
-                <GdsFlex
-                  width="100%"
-                  justify-content="space-between"
-                  align-items="center"
-                >
-                  <GdsFlex gap="xs" align-items="center">
+        <GdsFlex gap="xs" width="100%" align-items="flex-start">
+          <GdsFlex flex-direction="column" flex="1">
+            {components.map((component, idx) => {
+              console.log('component', selectedComponent)
+              return (
+                <GdsFlex key={idx} flex-direction="column">
+                  <Item
+                    onSelect={() => {
+                      setSelectedComponent(
+                        component.url_path.replace('/component/', ''),
+                      )
+                      // router.push(component.url_path || ``)
+                      // toggleCmd()
+                    }}
+                    value={component.url_path.replace('/component/', '')}
+                  >
                     <GdsFlex
-                      width="24px"
-                      height="24px"
+                      width="100%"
+                      justify-content="space-between"
                       align-items="center"
-                      justify-content="center"
-                      opacity="0.4"
                     >
-                      {component.private && (
-                        <IconEyeSlash width={12} height={12} />
+                      <GdsFlex gap="xs" align-items="center">
+                        <GdsFlex
+                          width="24px"
+                          height="24px"
+                          align-items="center"
+                          justify-content="center"
+                          opacity="0.4"
+                        >
+                          {component.private && (
+                            <IconEyeSlash width={12} height={12} />
+                          )}
+                        </GdsFlex>
+                        <GdsText>{component.title}</GdsText>
+                      </GdsFlex>
+                      {component.status && (
+                        <GdsBadge variant="notice" size="small">
+                          {component.status}
+                        </GdsBadge>
                       )}
                     </GdsFlex>
-                    <GdsText>{component.title}</GdsText>
-                  </GdsFlex>
-                  {component.status && (
-                    <GdsBadge variant="notice" size="small">
-                      {component.status}
-                    </GdsBadge>
-                  )}
+                  </Item>
                 </GdsFlex>
-              </Item>
-              {/* <GdsCard>
-                <GdsText>{component.summary}</GdsText>
-              </GdsCard> */}
+              )
+            })}
+          </GdsFlex>
+          <GdsCard
+            position="sticky"
+            inset="0"
+            aspect-ratio="1:1"
+            width="250px"
+            height="250px"
+            flex="1"
+          >
+            <GdsFlex
+              align-items="center"
+              justify-content="center"
+              flex="1"
+              height="100%"
+              gap="xl"
+            >
+              {Preview && <Preview cover />}
             </GdsFlex>
-          )
-        })}
+          </GdsCard>
+        </GdsFlex>
       </Command.Group>
     </>
   )
@@ -301,13 +369,15 @@ function Item({
   onSelect = () => {
     console.log('Selected:', children)
   },
+  value,
 }: {
   children: React.ReactNode
   shortcut?: string
   onSelect?: (value: string) => void
+  value?: string
 }) {
   return (
-    <Command.Item onSelect={onSelect}>
+    <Command.Item value={value} onSelect={onSelect}>
       {children}
       {shortcut && (
         <div cmdk-vercel-shortcuts="">
