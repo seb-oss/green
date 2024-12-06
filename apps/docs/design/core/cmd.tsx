@@ -8,6 +8,7 @@ import { isDev } from '$/env/env'
 import {
   GdsBadge,
   GdsCard,
+  GdsDivider,
   GdsFlex,
   GdsText,
   GdsTheme,
@@ -16,6 +17,9 @@ import { IconEyeSlash, IconMagnifyingGlass } from '$/import/icons'
 import iconMapping from '$/import/icons.map'
 import { Context } from '$/provider/provider'
 import { Command } from 'cmdk'
+import { toast, Toaster } from 'sonner'
+
+import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
 import './cmd.css'
 
@@ -225,6 +229,24 @@ function Home({ searchComponents }: { searchComponents: Function }) {
     }
   }, [])
 
+  const transformIconName = (iconName: string): string => {
+    return iconName
+      .replace(/^Icon/, '') // Remove the "Icon" prefix
+      .replace(/([A-Z])/g, ' $1') // Add space before each capital letter
+      .trim() // Remove leading space
+  }
+
+  const handleIconClick = (clipboardText: string) => {
+    navigator.clipboard
+      .writeText(clipboardText)
+      .then(() => {
+        toast.success('Copied!')
+      })
+      .catch((error) => {
+        console.error('Error copying text: ', error)
+      })
+  }
+
   return (
     <>
       {/* <Item
@@ -345,6 +367,33 @@ function Home({ searchComponents }: { searchComponents: Function }) {
             </GdsFlex>
           </GdsCard>
         </GdsFlex>
+      </Command.Group>
+      <Command.Group heading="Icons">
+        {Object.keys(ICONS).map((iconName, idx) => {
+          const IconComponent = ICONS[iconName]
+          return (
+            <GdsFlex key={idx} flex-direction="column">
+              <Item
+                onSelect={() => {
+                  handleIconClick(iconName)
+                }}
+                value={iconName}
+              >
+                <GdsFlex gap="xs" align-items="center">
+                  <GdsFlex
+                    width="24px"
+                    height="24px"
+                    align-items="center"
+                    justify-content="center"
+                  >
+                    <IconComponent />
+                  </GdsFlex>
+                  <span>{transformIconName(iconName)}</span>
+                </GdsFlex>
+              </Item>
+            </GdsFlex>
+          )
+        })}
       </Command.Group>
     </>
   )
