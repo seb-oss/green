@@ -47,6 +47,36 @@ export const parseCssVariables = (css) => {
   return variables
 }
 
+// utils/parseCssVariables.js
+const parseTypographySizes = (css) => {
+  const fontSizes = {}
+  const lineHeights = {}
+  const fontWeights = {}
+
+  // Regular expression to match CSS variables
+  const regex = /(--[a-zA-Z0-9-]+):\s*([^;]+)/g
+
+  let match
+  while ((match = regex.exec(css)) !== null) {
+    const property = match[1]
+    const value = match[2].trim()
+
+    // Separate font sizes and line heights
+    if (property.startsWith('--gds-text-size-')) {
+      const key = property.replace('--gds-text-size-', '')
+      fontSizes[key] = value
+    } else if (property.startsWith('--gds-text-line-height-')) {
+      const key = property.replace('--gds-text-line-height-', '')
+      lineHeights[key] = value
+    } else if (property.startsWith('--gds-text-weight-')) {
+      const key = property.replace('--gds-text-weight-', '')
+      fontWeights[key] = value
+    }
+  }
+
+  return { fontSizes, lineHeights, fontWeights }
+}
+
 export function CMD({
   isOpen,
   toggleCmd,
@@ -304,6 +334,34 @@ function Home({ searchComponents }: { searchComponents: Function }) {
     fetchCssVariables()
   }, [])
 
+  // Font sizes
+
+  const [textTokensMap, setTextTokensMap] = useState({
+    fontSizes: {},
+    lineHeights: {},
+    fontWeights: {},
+  })
+
+  useEffect(() => {
+    const fetchTextTokens = async () => {
+      try {
+        // Fetch the CSS file
+        const response = await fetch(
+          'https://esm.sh/@sebgroup/green-tokens@0.10.1/internal/text.css',
+        ) // Adjust the path to your CSS file
+        const css = await response.text()
+
+        // Parse the CSS variables
+        const cssVariables = parseTypographySizes(css)
+        setTextTokensMap(cssVariables)
+      } catch (error) {
+        console.error('Error fetching CSS file:', error)
+      }
+    }
+
+    fetchTextTokens()
+  }, [])
+
   return (
     <>
       {/* <Item
@@ -503,6 +561,74 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                 </GdsFlex>
               </GdsBadge>
               <GdsText font-size="detail-xs">{value}</GdsText>
+            </GdsFlex>
+          </Item>
+        ))}
+      </Command.Group>
+      <Command.Group heading="Typography Tokens">
+        {Object.entries(textTokensMap.fontSizes).map(([key, value], idx) => {
+          const lineHeight = textTokensMap.lineHeights[key] || 'N/A' // Get line height if available
+          return (
+            <Item
+              key={idx}
+              onSelect={() => {
+                console.log(`Selected: ${key.replace('--gds-text-size-', '')}`)
+              }}
+              value={key}
+              keywords={[
+                key.replace('--gds-text-size-', ''),
+                value,
+                lineHeight,
+                'typography',
+                'text',
+              ]}
+            >
+              <GdsFlex
+                gap="xs"
+                align-items="center"
+                justify-content="flex-start"
+                width="100%"
+                gap="s"
+              >
+                <GdsBadge variant="positive">
+                  {key.replace('--gds-text-size-', '')}
+                </GdsBadge>
+                <GdsText font-size="detail-xs">
+                  {value}/{lineHeight}
+                </GdsText>
+              </GdsFlex>
+            </Item>
+          )
+        })}
+      </Command.Group>
+      <Command.Group heading="Font Weights">
+        {Object.entries(textTokensMap.fontWeights).map(([key, value], idx) => (
+          <Item
+            key={idx}
+            onSelect={() => {
+              console.log(`Selected: ${key.replace('--gds-text-weight-', '')}`)
+            }}
+            value={key}
+            keywords={[
+              key.replace('--gds-text-weight-', ''),
+              value,
+              'typography',
+              'text',
+            ]}
+          >
+            <GdsFlex
+              gap="xs"
+              align-items="center"
+              justify-content="flex-start"
+              width="100%"
+              gap="s"
+            >
+              <GdsText
+                font-weight={key.replace('--gds-text-weight-', '')}
+                text-transform="capitalize"
+              >
+                {value} · {key.replace('--gds-text-weight-', '')}
+              </GdsText>
             </GdsFlex>
           </Item>
         ))}
