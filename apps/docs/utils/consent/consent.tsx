@@ -1,28 +1,21 @@
-'use client'
-
 import { useEffect } from 'react'
-
-import 'vanilla-cookieconsent'
+import { GdsTheme } from '$/import/components'
+import * as CookieConsent from 'vanilla-cookieconsent'
 
 import pluginConfig from './config'
 
+import 'vanilla-cookieconsent/dist/cookieconsent.css'
 import './consent.css'
-
-declare global {
-  interface Window {
-    CookieConsentApi: any
-  }
-}
 
 const Consent = () => {
   useEffect(() => {
-    if (!document.getElementById('cc--main')) {
-      window.CookieConsentApi = window.initCookieConsent()
-      window.CookieConsentApi.run(pluginConfig)
-    }
-  }, [])
+    CookieConsent.run(pluginConfig)
+  }, [CookieConsent, pluginConfig])
 
-  return null
+  return (
+    <GdsTheme id="cookie-consent">
+    </GdsTheme>
+  )
 }
 
 export default Consent
