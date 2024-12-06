@@ -572,7 +572,11 @@ function Home({ searchComponents }: { searchComponents: Function }) {
             <Item
               key={idx}
               onSelect={() => {
-                console.log(`Selected: ${key.replace('--gds-text-size-', '')}`)
+                navigator.clipboard
+                  .writeText(key.replace('--gds-text-size-', ''))
+                  .then(() => {
+                    toast.success('Copied!')
+                  })
               }}
               value={key}
               keywords={[
@@ -606,7 +610,11 @@ function Home({ searchComponents }: { searchComponents: Function }) {
           <Item
             key={idx}
             onSelect={() => {
-              console.log(`Selected: ${key.replace('--gds-text-weight-', '')}`)
+              navigator.clipboard
+                .writeText(key.replace('--gds-text-weight-', ''))
+                .then(() => {
+                  toast.success('Copied!')
+                })
             }}
             value={key}
             keywords={[
