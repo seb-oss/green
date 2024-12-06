@@ -71,6 +71,11 @@ const routes: Routes = [
         (m) => m.SortableListModule,
       ),
   },
+  {
+    path: 'form',
+    data: { name: 'Form' },
+    loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 
