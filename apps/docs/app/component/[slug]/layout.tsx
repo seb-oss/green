@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Link } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
 import { notFound, usePathname } from 'next/navigation'
@@ -37,7 +38,7 @@ export default function ComponentLayout({
 }) {
   const { slug } = params
   const pathName = usePathname()
-
+  const [searchTerm, setSearchTerm] = useState('')
   const getComponent = (path: string) =>
     allComponents.find(
       (component) => component.url_path === `/component/${slug}${path}`,
@@ -144,6 +145,26 @@ export default function ComponentLayout({
       })
   }
 
+  const fuzzySearch = (term: string, text: string): boolean => {
+    const termLower = term.toLowerCase()
+    const textLower = text.toLowerCase()
+    let termIndex = 0
+    let textIndex = 0
+
+    while (termIndex < termLower.length && textIndex < textLower.length) {
+      if (termLower[termIndex] === textLower[textIndex]) {
+        termIndex++
+      }
+      textIndex++
+    }
+
+    return termIndex === termLower.length
+  }
+
+  const filteredIcons = Object.keys(ICONS).filter((iconName) =>
+    fuzzySearch(searchTerm, transformIconName(iconName)),
+  )
+
   if (component.url_path === '/component/icon') {
     // console.log('ICONS', ICONS)
     // toast.success("Copied!")
@@ -155,22 +176,24 @@ export default function ComponentLayout({
         margin="0 auto"
         gap="xl"
       >
-        <GdsFlex gap="l" flex-direction="column">
-          <GdsInput clearable>
-            <IconMagnifyingGlass height="24" slot="lead" />
-          </GdsInput>
-          {/* <GdsFilterChips>
+        <GdsContainer position="sticky" inset="58px 0 0 0">
+          <GdsFlex gap="l" flex-direction="column">
+            <GdsInput clearable onKeyUp={(e) => setSearchTerm(e.target.value)}>
+              <IconMagnifyingGlass height="24" slot="lead" />
+            </GdsInput>
+            {/* <GdsFilterChips>
             <GdsFilterChip value="1">Solid</GdsFilterChip>
             <GdsFilterChip value="2">Regular</GdsFilterChip>
           </GdsFilterChips> */}
-        </GdsFlex>
+          </GdsFlex>
+        </GdsContainer>
         {/* <GdsDivider opacity="0.2" /> */}
         <GdsGrid columns="5" gap="m">
-          {Object.keys(ICONS).map((iconName) => {
+          {filteredIcons.map((iconName) => {
             const IconComponent = ICONS[iconName]
             return (
               <GdsCard
-                level="3"
+                level="2"
                 key={iconName}
                 flex-direction="column"
                 align-items="center"
@@ -178,7 +201,8 @@ export default function ComponentLayout({
                 padding="xs"
                 title={transformIconName(iconName)}
                 variant="secondary"
-                background="hover:tertiary"
+                background="hover:primary"
+                border-color="primary"
               >
                 <GdsFlex
                   background="secondary"
