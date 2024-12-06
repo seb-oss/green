@@ -29,19 +29,15 @@
   font-family: inherit;
   border: none;
   width: 100%;
-  font-size: 17px;
-  padding: 16px;
+  height: var(--gds-space-2xl);
+  font-size: var(--gds-space-m);
   outline: none;
-  background: var(--gds-color-l3-background-primary);
   color: var(--gds-color-l3-content-tertiary);
-  background-color: hsla(0, 0%, 84%, 0.2);
-  border: 1px solid hsla(0, 0%, 84%, 0.4);
-  margin-bottom: 16px;
-  border-radius: 12px;
   box-sizing: border-box;
+  background: transparent;
 
   &::placeholder {
-    color: var(--gray9);
+    color: var(--gds-color-l3-content-secondary);
   }
 }
 
@@ -76,8 +72,8 @@
   transition-property: none;
 
   &[data-selected='true'] {
-    background: var(--gds-color-l3-background-secondary);
-    color: var(--gds-color-l3-content-tertiary);
+    background: var(--gds-color-l3-background-primary);
+    color: var(--gds-color-l3-content-primary);
   }
 
   &[data-disabled='true'] {

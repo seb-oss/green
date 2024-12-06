@@ -12,7 +12,7 @@ import {
   GdsText,
   GdsTheme,
 } from '$/import/components'
-import { IconEyeSlash } from '$/import/icons'
+import { IconEyeSlash, IconMagnifyingGlass } from '$/import/icons'
 import iconMapping from '$/import/icons.map'
 import { Context } from '$/provider/provider'
 import { Command } from 'cmdk'
@@ -121,13 +121,18 @@ export function CMD({
           }
         }}
       >
-        <Command.Input
-          autoFocus
-          placeholder="What do you need?"
-          onValueChange={(value) => {
-            setInputValue(value)
-          }}
-        />
+        <GdsCard padding="xs m" margin="0 0 m 0">
+          <GdsFlex align-items="center" gap="s">
+            <IconMagnifyingGlass />
+            <Command.Input
+              autoFocus
+              placeholder="Search components, pages and tokens..."
+              onValueChange={(value) => {
+                setInputValue(value)
+              }}
+            />
+          </GdsFlex>
+        </GdsCard>
         {/* <div>
             {pages.map((p) => (
               <GdsBadge key={p} cmdk-vercel-badge="">
@@ -303,7 +308,6 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                           height="24px"
                           align-items="center"
                           justify-content="center"
-                          opacity="0.4"
                         >
                           {component.private && (
                             <IconEyeSlash width={12} height={12} />
