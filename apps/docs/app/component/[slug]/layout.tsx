@@ -166,7 +166,7 @@ export default function ComponentLayout({
                 setSearchTerm((e.target as HTMLInputElement).value)
               }
             >
-              <IconMagnifyingGlass height="24" slot="lead" />
+              <IconMagnifyingGlass height={24} slot="lead" />
             </GdsInput>
             {/* <GdsFilterChips>
             <GdsFilterChip value="1">Solid</GdsFilterChip>
@@ -184,7 +184,6 @@ export default function ComponentLayout({
                 key={iconName}
                 flex-direction="column"
                 align-items="center"
-                gap="s"
                 padding="xs"
                 title={transformIconName(iconName)}
                 variant="secondary"
@@ -202,7 +201,7 @@ export default function ComponentLayout({
                   data-clipboard-text={`<${iconName}></${iconName}>`}
                   onClick={() => handleIconClick(`<${iconName}></${iconName}>`)}
                 >
-                  <IconComponent height="24" />
+                  <IconComponent height={24} />
                 </GdsFlex>
                 <GdsFlex
                   align-items="center"
@@ -219,7 +218,7 @@ export default function ComponentLayout({
                       handleIconClick(`<${iconName}></${iconName}>`)
                     }
                   >
-                    <IconSquareBehindSquare height="12" />
+                    <IconSquareBehindSquare height={12} />
                   </GdsButton>
                 </GdsFlex>
               </GdsCard>
