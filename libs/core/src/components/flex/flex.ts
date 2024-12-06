@@ -141,8 +141,8 @@ export class GdsFlex extends GdsContainer {
   })
   'flex-wrap'?: string
 
-  connectedCallback(): void {
-    super.connectedCallback()
+  constructor() {
+    super()
     this.display = 'flex'
   }
 

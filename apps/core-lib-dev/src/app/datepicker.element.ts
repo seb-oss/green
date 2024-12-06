@@ -1,6 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
-import { html } from '@sebgroup/green-core/scoping'
+
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/datepicker/index.js'
 
@@ -15,10 +16,10 @@ export class CalendarExample extends LitElement {
   }
 
   @state()
-  accessor disabledWeekends = false
+  disabledWeekends = false
 
   @state()
-  accessor showWeekNumbers = false
+  showWeekNumbers = false
 
   render() {
     return html` <div style="width:320px; margin: 8rem auto;">
@@ -34,7 +35,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.disabledWeekends}
-            @change=${(e) => (this.disabledWeekends = e.target.checked)} /><span
+            @change=${(e: any) => (this.disabledWeekends = e.target.checked)} /><span
             >Disable weekends</span
           ><i
         ></i></label>
@@ -42,7 +43,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showWeekNumbers}
-            @change=${(e) => (this.showWeekNumbers = e.target.checked)} /><span
+            @change=${(e: any) => (this.showWeekNumbers = e.target.checked)} /><span
             >Show week numbers</span
           ><i
         ></i></label>

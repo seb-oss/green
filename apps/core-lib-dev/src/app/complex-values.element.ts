@@ -5,7 +5,7 @@ import {
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
-} from '@sebgroup/green-core/scoping'
+} from '@sebgroup/green-core/scoping.js'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),

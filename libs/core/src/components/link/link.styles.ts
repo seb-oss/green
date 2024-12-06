@@ -30,6 +30,10 @@ const style = css`
           text-underline-offset: 0.08lh;
         }
       }
+
+      &.hidden {
+        text-decoration: none;
+      }
     }
   }
 `

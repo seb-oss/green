@@ -1,0 +1,59 @@
+name: Triggered deploy of apps
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v3
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile --silent
+
+      - name: Get branch name
+        shell: bash
+        run: echo "branch=${GITHUB_REF}" >> "$GITHUB_OUTPUT"
+        id: branch
+
+      - name: Determine deploy target
+        shell: bash
+        run: |
+          if [[ "${{ steps.branch.outputs.branch }}" == "main" ]]; then
+            echo "target=latest" >> "$GITHUB_OUTPUT"
+          else
+            echo "target=pr-${{ github.event.number }}" >> "$GITHUB_OUTPUT"
+          fi
+        id: target
+
+      - name: Build apps
+        run: yarn run nx run-many --target build-app --all
+
+      - name: Deploy apps to GitHub Pages
+
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages # The branch the action should deploy to.
+          folder: dist/apps # The folder the action should deploy.
+          target-folder: apps/${{ steps.target.outputs.target }} # The folder the action should deploy to.

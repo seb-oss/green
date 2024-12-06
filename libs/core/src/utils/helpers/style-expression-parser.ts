@@ -1,12 +1,10 @@
-import { tr } from 'date-fns/locale'
-
 type Tokens = string[]
 type BreakpointSpecifier = { condition: string; value: string }[]
 type BreakpointValues = { sel: string; values: string[] }
 type BreakpointData = { breakpoint: string; values: BreakpointValues[] }
 type BreakpointTree = BreakpointData[]
 
-const viewportBreakpoints: Record<string, string> = {
+export const viewportBreakpoints: Record<string, string> = {
   '0': '0px',
   '2xs': '320px',
   xs: '425px',

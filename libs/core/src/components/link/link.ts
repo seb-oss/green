@@ -64,6 +64,7 @@ export class GdsLink extends GdsElement {
    * ```
    * @property text-decoration
    */
+
   @styleExpressionProperty({
     valueTemplate: (v) => v,
     selector: 'a',
