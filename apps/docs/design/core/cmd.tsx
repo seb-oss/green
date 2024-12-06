@@ -5,7 +5,13 @@ import { useTransitionRouter } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
 import { allComponents, allPages } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsCard, GdsFlex, GdsText } from '$/import/components'
+import {
+  GdsBadge,
+  GdsCard,
+  GdsFlex,
+  GdsText,
+  GdsTheme,
+} from '$/import/components'
 import { IconEyeSlash } from '$/import/icons'
 import iconMapping from '$/import/icons.map'
 import { Context } from '$/provider/provider'
@@ -22,10 +28,10 @@ export function CMD({
 }) {
   const ref = React.useRef<HTMLDivElement | null>(null)
   const [inputValue, setInputValue] = React.useState('')
-
   const [pages, setPages] = React.useState<string[]>(['home'])
   const activePage = pages[pages.length - 1]
   const isHome = activePage === 'home'
+  const { theme } = useContext(Context)
 
   // Toggle the menu when ⌘K is pressed
   React.useEffect(() => {
@@ -82,16 +88,22 @@ export function CMD({
   }
 
   const backDrop = ['backdrop', isOpen ? 'open' : null].filter(Boolean)
+  const containerElement = React.useRef(null)
 
   return (
     <>
       <div className={backDrop.join(' ')}></div>
+      <GdsTheme color-scheme={theme}>
+        <div ref={containerElement} />
+      </GdsTheme>
       <Command.Dialog
         ref={ref}
         open={isOpen}
         onOpenChange={toggleCmd}
-        className="dark"
+        // className="dark"
+        container={containerElement.current}
         label="Global Command Menu"
+        disablePointerSelection
         loop
         onKeyDown={(e: React.KeyboardEvent) => {
           if (e.key === 'Enter') {
@@ -259,7 +271,10 @@ function Home({ searchComponents }: { searchComponents: Function }) {
         <GdsFlex gap="xs" width="100%" align-items="flex-start">
           <GdsFlex flex-direction="column" flex="1">
             {components.map((component, idx) => {
-              console.log('component', selectedComponent)
+              // console.log('component', selectedComponent)
+              const tags = component.tags
+              const tagsArray = tags ? tags.split(', ') : []
+
               return (
                 <GdsFlex key={idx} flex-direction="column">
                   <Item
@@ -267,10 +282,15 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                       setSelectedComponent(
                         component.url_path.replace('/component/', ''),
                       )
-                      // router.push(component.url_path || ``)
-                      // toggleCmd()
+                      router.push(component.url_path || ``)
+                      toggleCmd()
                     }}
+                    data-component={component.url_path.replace(
+                      '/component/',
+                      '',
+                    )}
                     value={component.url_path.replace('/component/', '')}
+                    keywords={tagsArray}
                   >
                     <GdsFlex
                       width="100%"
@@ -307,7 +327,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
             inset="0"
             aspect-ratio="1:1"
             width="250px"
-            height="250px"
+            height="280px"
             flex="1"
           >
             <GdsFlex
@@ -370,14 +390,16 @@ function Item({
     console.log('Selected:', children)
   },
   value,
+  keywords,
 }: {
   children: React.ReactNode
   shortcut?: string
   onSelect?: (value: string) => void
   value?: string
+  keywords?: string[]
 }) {
   return (
-    <Command.Item value={value} onSelect={onSelect}>
+    <Command.Item value={value} keywords={keywords} onSelect={onSelect}>
       {children}
       {shortcut && (
         <div cmdk-vercel-shortcuts="">

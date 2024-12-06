@@ -11,21 +11,18 @@
   transition: transform 100ms ease;
   outline: none;
   z-index: 99999;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 12px;
 }
 
 [cmdk-root] {
   width: 100%;
-  padding: 8px;
-  border-radius: var(--dialog-br);
-  background: var(--dialog-bg);
-  box-shadow: var(--dialog-bs);
-  border: 1px solid var(--dialog-bc);
-  overflow: hidden;
+  padding: var(--gds-space-l);
+  border-radius: var(--gds-space-m);
+  box-shadow: var(--gds-shadow-s);
+  border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
   transition: transform 100ms ease;
   outline: none;
+  background-color: var(--gds-color-l1-background-primary);
+  box-sizing: border-box;
 }
 
 [cmdk-input] {
@@ -33,11 +30,10 @@
   border: none;
   width: 100%;
   font-size: 17px;
-  /* padding: 8px 8px 16px 8px; */
   padding: 16px;
   outline: none;
-  background: var(--bg);
-  color: var(--gray12);
+  background: var(--gds-color-l3-background-primary);
+  color: var(--gds-color-l3-content-tertiary);
   background-color: hsla(0, 0%, 84%, 0.2);
   border: 1px solid hsla(0, 0%, 84%, 0.4);
   margin-bottom: 16px;
@@ -80,18 +76,18 @@
   transition-property: none;
 
   &[data-selected='true'] {
-    background: #000;
-    color: #fff;
+    background: var(--gds-color-l3-background-secondary);
+    color: var(--gds-color-l3-content-tertiary);
   }
 
   &[data-disabled='true'] {
-    color: var(--gray8);
+    /* color: var(--gds-color-l3-background-primary); */
     cursor: not-allowed;
   }
 
   &:active {
     transition-property: background;
-    background: var(--gray4);
+    background: var(--gds-color-l3-background-primary);
   }
 
   & + [cmdk-item] {
@@ -189,16 +185,15 @@
   display: flex;
   width: 100vw;
   height: 100vh;
-  /* backdrop-filter: blur(8px); */
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #000;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
   z-index: 9999;
-  transition: all 624ms ease;
+  transition: opacity 124ms;
 
   &.open {
-    opacity: 1;
+    opacity: 0.8;
     visibility: visible;
     pointer-events: auto;
   }
