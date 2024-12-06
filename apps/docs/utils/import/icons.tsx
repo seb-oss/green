@@ -50,6 +50,16 @@ export const IconChevronTop = dynamic(
   },
 )
 
+export const IconBook = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconBook').then(
+      (mod) => mod.IconBook,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 export const IconBarsThree = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconBarsThree').then(
