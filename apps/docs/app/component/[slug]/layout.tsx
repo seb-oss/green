@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 'use client'
 
 import { useState } from 'react'
@@ -10,22 +11,17 @@ import {
   GdsButton,
   GdsCard,
   GdsContainer,
-  GdsDivider,
-  GdsFilterChip,
-  GdsFilterChips,
   GdsFlex,
   GdsGrid,
   GdsInput,
-  GdsRichText,
   GdsText,
 } from '$/import/components'
 import { IconMagnifyingGlass, IconSquareBehindSquare } from '$/import/icons'
 import Breadcrumb from 'core/breadcrumb'
-import Loading from 'core/loading'
 import Navigator from 'core/navigator'
 import Taber from 'core/taber'
 import { format, parseISO } from 'date-fns'
-import { toast, Toaster } from 'sonner'
+import { toast } from 'sonner'
 
 import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
@@ -98,30 +94,16 @@ export default function ComponentLayout({
     },
   ]
 
-  const delay = (ms: number) =>
-    new Promise((resolve) => setTimeout(resolve, ms))
-
   const getDynamicComponent = (c: string) =>
     dynamic(
       () =>
-        delay(200) // Introduce a delay of 2 seconds
-          .then(() => import(`../../../design/example/${c}`))
-          .then((mod) => {
-            const Component = mod.default
-            const WrappedComponent = (props) => (
-              <Component {...props} className="fade-in" />
-            )
-            WrappedComponent.displayName = `DynamicComponent(${c})`
-            return WrappedComponent
-          })
-          .catch(() => {
-            const ExampleComponent = () => <div>Example not created</div>
-            ExampleComponent.displayName = 'ExampleComponent'
-            return ExampleComponent
-          }),
+        import(`../../../design/example/${c}`).catch(() => {
+          const ExampleComponent = () => <div>Example</div>
+          ExampleComponent.displayName = 'ExampleComponent'
+          return ExampleComponent
+        }),
       {
         ssr: false,
-        // loading: () => <Loading />,
       },
     )
 
@@ -178,7 +160,12 @@ export default function ComponentLayout({
       >
         <GdsContainer position="sticky" inset="58px 0 0 0">
           <GdsFlex gap="l" flex-direction="column">
-            <GdsInput clearable onKeyUp={(e) => setSearchTerm(e.target.value)}>
+            <GdsInput
+              clearable
+              onKeyUp={(e) =>
+                setSearchTerm((e.target as HTMLInputElement).value)
+              }
+            >
               <IconMagnifyingGlass height="24" slot="lead" />
             </GdsInput>
             {/* <GdsFilterChips>
@@ -190,7 +177,7 @@ export default function ComponentLayout({
         {/* <GdsDivider opacity="0.2" /> */}
         <GdsGrid columns="5" gap="m">
           {filteredIcons.map((iconName) => {
-            const IconComponent = ICONS[iconName]
+            const IconComponent = (ICONS as any)[iconName]
             return (
               <GdsCard
                 level="2"

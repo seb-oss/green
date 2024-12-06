@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 'use client'
 
 import React, { useContext, useEffect, useState } from 'react'
@@ -9,30 +10,23 @@ import {
   GdsBadge,
   GdsButton,
   GdsCard,
-  GdsDivider,
   GdsFlex,
-  GdsLink,
   GdsText,
   GdsTheme,
 } from '$/import/components'
-import {
-  IconBook,
-  IconChevronRight,
-  IconEyeSlash,
-  IconMagnifyingGlass,
-} from '$/import/icons'
+import { IconBook, IconEyeSlash, IconMagnifyingGlass } from '$/import/icons'
 import iconMapping from '$/import/icons.map'
 import { Context } from '$/provider/provider'
 import { Command } from 'cmdk'
-import { toast, Toaster } from 'sonner'
+import { toast } from 'sonner'
 
 import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
 import './cmd.css'
 
 // utils/parseCssVariables.js
-export const parseCssVariables = (css) => {
-  const variables = {}
+export const parseCssVariables = (css: string) => {
+  const variables: { [key: string]: string } = {}
 
   // Regular expression to match CSS variables
   const regex = /(--[a-zA-Z0-9-]+):\s*([^;]+)/g
@@ -48,10 +42,10 @@ export const parseCssVariables = (css) => {
 }
 
 // utils/parseCssVariables.js
-const parseTypographySizes = (css) => {
-  const fontSizes = {}
-  const lineHeights = {}
-  const fontWeights = {}
+const parseTypographySizes = (css: string) => {
+  const fontSizes: { [key: string]: string } = {}
+  const lineHeights: { [key: string]: string } = {}
+  const fontWeights: { [key: string]: string } = {}
 
   // Regular expression to match CSS variables
   const regex = /(--[a-zA-Z0-9-]+):\s*([^;]+)/g
@@ -159,7 +153,7 @@ export function CMD({
         open={isOpen}
         onOpenChange={toggleCmd}
         // className="dark"
-        container={containerElement.current}
+        container={containerElement.current || undefined}
         label="Global Command Menu"
         disablePointerSelection
         loop
@@ -336,7 +330,11 @@ function Home({ searchComponents }: { searchComponents: Function }) {
 
   // Font sizes
 
-  const [textTokensMap, setTextTokensMap] = useState({
+  const [textTokensMap, setTextTokensMap] = useState<{
+    fontSizes: { [key: string]: string }
+    lineHeights: { [key: string]: string }
+    fontWeights: { [key: string]: string }
+  }>({
     fontSizes: {},
     lineHeights: {},
     fontWeights: {},
@@ -375,7 +373,9 @@ function Home({ searchComponents }: { searchComponents: Function }) {
 
       <Command.Group heading="Pages">
         {pages.map((page, idx) => {
-          const IconComponent = iconMapping[page.icon]
+          const IconComponent = page.icon
+            ? iconMapping[page.icon as keyof typeof iconMapping]
+            : null
 
           return (
             <GdsFlex key={idx} flex-direction="column">
@@ -509,7 +509,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
       </Command.Group>
       <Command.Group heading="Icons">
         {Object.keys(ICONS).map((iconName, idx) => {
-          const IconComponent = ICONS[iconName]
+          const IconComponent = ICONS[iconName as keyof typeof ICONS]
           return (
             <GdsFlex key={idx} flex-direction="column">
               <Item
@@ -560,7 +560,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                   {token.replace('--gds-space-', '')}
                 </GdsFlex>
               </GdsBadge>
-              <GdsText font-size="detail-xs">{value}</GdsText>
+              <GdsText font-size="detail-xs">{value as string}</GdsText>
             </GdsFlex>
           </Item>
         ))}
