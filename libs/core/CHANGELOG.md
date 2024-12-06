@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.60.1
+
+### Patch Changes
+
+- d144d6b: **Icon:** Fix all icons fill from black to currentColor like the rest so it gets the content color instead
+
 ## 1.60.0
 
 ### Minor Changes
