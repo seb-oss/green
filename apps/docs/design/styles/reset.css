@@ -111,3 +111,9 @@
     }
   }
 }
+
+[data-sonner-toaster] [data-icon] svg {
+  fill: currentColor !important;
+  stroke: #fff !important;
+  stroke-width: 0 !important;
+}

@@ -230,6 +230,16 @@ export const IconSquareGridCircle = dynamic(
   },
 )
 
+export const IconSquareBehindSquare = dynamic(
+  () =>
+    import(
+      '@sebgroup/green-react/src/lib/icon/icons/IconSquareBehindSquare'
+    ).then((mod) => mod.IconSquareBehindSquare),
+  {
+    ssr: false,
+  },
+)
+
 export const IconBrandGreen = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconBrandGreen').then(
