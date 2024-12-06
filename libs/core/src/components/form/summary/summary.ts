@@ -9,14 +9,11 @@ import { GdsFormControlElement } from '../form-control'
 import '../../container/index'
 import '../../card/index'
 import '../../flex/index'
-import '../../icon/icons/triangle-exclamation'
+import '../../text/index'
 
 @gdsCustomElement('gds-form-summary')
 export class GdsFormSummary extends GdsElement {
   static styles = css`
-    :host {
-      font-weight: 500;
-    }
     ul {
       list-style-type: none;
       margin: 1rem 0 0;
@@ -26,8 +23,7 @@ export class GdsFormSummary extends GdsElement {
       margin: 0.5rem 0;
     }
     a {
-      color: var(--gds-sys-color-primary-text);
-      font-weight: 500;
+      color: inherit;
     }
   `
 
@@ -60,15 +56,13 @@ export class GdsFormSummary extends GdsElement {
     return when(
       errors.length > 0,
       () =>
-        html`<gds-card level="3" border="4xs/negative" border-radius="2xs" padding="m" color="error-text">
-          <gds-flex gap="s" level=="3" color="negative">
-            <gds-container>
-              <gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
-            </gds-container>
-            <gds-container >
-            ${msg(
-              str`There are ${errors.length} errors to correct before you can continue:`,
-            )}
+        html`<gds-card level="2" border="4xs/negative" border-radius="xs" padding="l" background="negative" color="negative">
+          <gds-flex gap="s"></gds-flex>
+            <gds-text font-size="heading-xs" font-weight="book">
+              ${msg(
+                str`There are ${errors.length} errors to correct before you can continue:`,
+              )}
+            </gds-text>
             <ul>
               ${errors.map(
                 (el: GdsFormControlElement) =>
@@ -78,7 +72,6 @@ export class GdsFormSummary extends GdsElement {
                   }}>${el.label}</li>`,
               )}
             </ul>
-          </gds-container>
         <gds-flex>
       </gds-card>`,
     )

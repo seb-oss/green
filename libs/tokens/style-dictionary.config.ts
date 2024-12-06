@@ -55,37 +55,6 @@ const config: StyleDictionary.Config = {
       prefix: 'gds-',
       files: [
         {
-          destination: 'pallet.css',
-          format: 'css/variables',
-          filter: function (token) {
-            if ('darkValue' in token) return false
-            return token?.attributes?.type === 'color'
-          },
-          options: {
-            selector: ':host',
-          },
-        },
-        {
-          destination: 'theme/light.css',
-          format: 'css/theme',
-          filter: 'color-scheme',
-          options: {
-            colorScheme: 'light',
-            outputReferences: false,
-            selector: ':host',
-          },
-        },
-        {
-          destination: 'theme/dark.css',
-          format: 'css/theme',
-          filter: 'color-scheme',
-          options: {
-            colorScheme: 'dark',
-            outputReferences: false,
-            selector: ':host',
-          },
-        },
-        {
           destination: 'light.css',
           format: 'color/v2',
           filter: 'color-scheme',

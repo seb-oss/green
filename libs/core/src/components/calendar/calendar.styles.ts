@@ -21,7 +21,6 @@ const style = css`
       th {
         height: var(--gds-space-2xl);
         width: var(--gds-space-2xl);
-        background: var(--gds-sys-color-container-container-bright);
         box-sizing: border-box;
         text-align: center;
         font-weight: normal;
@@ -48,18 +47,17 @@ const style = css`
 
         &:not(.disabled):hover,
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-base800);
+          background: var(--gds-color-l2-background-tertiary);
           cursor: pointer;
-          color: var(--gds-sys-color-base-white);
+          color: var(--gds-color-l2-content-tertiary);
         }
 
         &.today {
-          border-color: var(--gds-sys-color-base800);
+          border-color: var(--gds-color-l2-background-tertiary);
         }
 
         &.disabled {
-          background-color: var(--gds-sys-color-base100);
-          color: var(--gds-sys-color-base500);
+          color: var(--gds-color-l3-content-disabled);
           cursor: not-allowed;
         }
 

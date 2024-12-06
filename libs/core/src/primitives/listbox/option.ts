@@ -124,7 +124,11 @@ export class GdsOption extends Focusable(GdsElement) {
     const checkbox = html`
       <span class="checkbox ${classMap({ checked: this.selected })}">
         ${this.selected
-          ? html`<gds-icon-checkmark stroke="4"></gds-icon-checkmark>`
+          ? html`<gds-icon-checkmark
+              width="10"
+              height="10"
+              stroke="4"
+            ></gds-icon-checkmark>`
           : ''}
       </span>
     `
