@@ -184,7 +184,6 @@ export default function ComponentLayout({
                 key={iconName}
                 flex-direction="column"
                 align-items="center"
-                gap="s"
                 padding="xs"
                 title={transformIconName(iconName)}
                 variant="secondary"

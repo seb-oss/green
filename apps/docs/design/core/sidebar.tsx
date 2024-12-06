@@ -98,7 +98,6 @@ export default function Sidebar() {
           min-width="250px"
           border="0 0 4xs 0"
           border-color="primary"
-          class="nobar"
           style={{
             boxShadow: hasScrolled
               ? '0px 0px 8px 4px #00000015, 0px 3px 2px 0px #00000005'

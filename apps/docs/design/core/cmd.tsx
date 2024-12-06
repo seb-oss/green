@@ -490,7 +490,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                 width="100%"
                 height="100%"
               >
-                {Preview && <Preview cover />}
+                {Preview && <Preview />}
               </GdsFlex>
               <GdsButton
                 rank="tertiary"
@@ -542,16 +542,15 @@ function Home({ searchComponents }: { searchComponents: Function }) {
               handleIconClick(token.replace('--gds-space-', ''))
             }}
             value={token}
-            keywords={[token.replace('--gds-space-', ''), value]}
+            keywords={[token.replace('--gds-space-', ''), value as string]}
           >
             <GdsFlex
-              gap="xs"
               align-items="center"
               justify-content="flex-start"
               width="100%"
               gap="s"
             >
-              <GdsBadge variant="notice" width="4ch">
+              <GdsBadge variant="notice">
                 <GdsFlex
                   width="4ch"
                   align-items="center"
@@ -588,7 +587,6 @@ function Home({ searchComponents }: { searchComponents: Function }) {
               ]}
             >
               <GdsFlex
-                gap="xs"
                 align-items="center"
                 justify-content="flex-start"
                 width="100%"
@@ -625,7 +623,6 @@ function Home({ searchComponents }: { searchComponents: Function }) {
             ]}
           >
             <GdsFlex
-              gap="xs"
               align-items="center"
               justify-content="flex-start"
               width="100%"

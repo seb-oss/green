@@ -32,7 +32,3 @@
     transform: translateX(-40px);
   } */
 }
-
-.nobar {
-  scrollbar-width: none;
-}
