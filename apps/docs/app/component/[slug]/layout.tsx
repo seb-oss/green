@@ -164,18 +164,21 @@ export default function ComponentLayout({
             <GdsFilterChip value="2">Regular</GdsFilterChip>
           </GdsFilterChips> */}
         </GdsFlex>
-        <GdsDivider opacity="0.2" />
+        {/* <GdsDivider opacity="0.2" /> */}
         <GdsGrid columns="5" gap="m">
           {Object.keys(ICONS).map((iconName) => {
             const IconComponent = ICONS[iconName]
             return (
               <GdsCard
+                level="3"
                 key={iconName}
                 flex-direction="column"
                 align-items="center"
                 gap="s"
                 padding="xs"
                 title={transformIconName(iconName)}
+                variant="secondary"
+                background="hover:tertiary"
               >
                 <GdsFlex
                   background="secondary"
