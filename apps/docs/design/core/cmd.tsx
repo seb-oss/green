@@ -1,23 +1,81 @@
 'use client'
 
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useTransitionRouter } from 'next-view-transitions'
 import dynamic from 'next/dynamic'
 import { allComponents, allPages } from 'content'
 import { isDev } from '$/env/env'
 import {
   GdsBadge,
+  GdsButton,
   GdsCard,
+  GdsDivider,
   GdsFlex,
+  GdsLink,
   GdsText,
   GdsTheme,
 } from '$/import/components'
-import { IconEyeSlash, IconMagnifyingGlass } from '$/import/icons'
+import {
+  IconBook,
+  IconChevronRight,
+  IconEyeSlash,
+  IconMagnifyingGlass,
+} from '$/import/icons'
 import iconMapping from '$/import/icons.map'
 import { Context } from '$/provider/provider'
 import { Command } from 'cmdk'
+import { toast, Toaster } from 'sonner'
+
+import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
 import './cmd.css'
+
+// utils/parseCssVariables.js
+export const parseCssVariables = (css) => {
+  const variables = {}
+
+  // Regular expression to match CSS variables
+  const regex = /(--[a-zA-Z0-9-]+):\s*([^;]+)/g
+
+  let match
+  while ((match = regex.exec(css)) !== null) {
+    const property = match[1]
+    const value = match[2].trim()
+    variables[property] = value
+  }
+
+  return variables
+}
+
+// utils/parseCssVariables.js
+const parseTypographySizes = (css) => {
+  const fontSizes = {}
+  const lineHeights = {}
+  const fontWeights = {}
+
+  // Regular expression to match CSS variables
+  const regex = /(--[a-zA-Z0-9-]+):\s*([^;]+)/g
+
+  let match
+  while ((match = regex.exec(css)) !== null) {
+    const property = match[1]
+    const value = match[2].trim()
+
+    // Separate font sizes and line heights
+    if (property.startsWith('--gds-text-size-')) {
+      const key = property.replace('--gds-text-size-', '')
+      fontSizes[key] = value
+    } else if (property.startsWith('--gds-text-line-height-')) {
+      const key = property.replace('--gds-text-line-height-', '')
+      lineHeights[key] = value
+    } else if (property.startsWith('--gds-text-weight-')) {
+      const key = property.replace('--gds-text-weight-', '')
+      fontWeights[key] = value
+    }
+  }
+
+  return { fontSizes, lineHeights, fontWeights }
+}
 
 export function CMD({
   isOpen,
@@ -225,6 +283,85 @@ function Home({ searchComponents }: { searchComponents: Function }) {
     }
   }, [])
 
+  const transformIconName = (iconName: string): string => {
+    return iconName
+      .replace(/^Icon/, '') // Remove the "Icon" prefix
+      .replace(/([A-Z])/g, ' $1') // Add space before each capital letter
+      .trim() // Remove leading space
+  }
+
+  const handleIconClick = (clipboardText: string) => {
+    navigator.clipboard
+      .writeText(clipboardText)
+      .then(() => {
+        toast.success('Copied!')
+      })
+      .catch((error) => {
+        console.error('Error copying text: ', error)
+      })
+  }
+
+  const handleTokenClick = (clipboardText: string) => {
+    navigator.clipboard
+      .writeText(clipboardText)
+      .then(() => {
+        toast.success('Copied!')
+      })
+      .catch((error) => {
+        console.error('Error copying text: ', error)
+      })
+  }
+
+  const [sizeTokensMap, setSizeTokensMap] = useState({})
+
+  useEffect(() => {
+    const fetchCssVariables = async () => {
+      try {
+        // Fetch the CSS file
+        const response = await fetch(
+          'https://esm.sh/@sebgroup/green-tokens@0.10.1/internal/size.css',
+        ) // Adjust the path to your CSS file
+        const css = await response.text()
+
+        // Parse the CSS variables
+        const cssVariables = parseCssVariables(css)
+        setSizeTokensMap(cssVariables)
+      } catch (error) {
+        console.error('Error fetching CSS file:', error)
+      }
+    }
+
+    fetchCssVariables()
+  }, [])
+
+  // Font sizes
+
+  const [textTokensMap, setTextTokensMap] = useState({
+    fontSizes: {},
+    lineHeights: {},
+    fontWeights: {},
+  })
+
+  useEffect(() => {
+    const fetchTextTokens = async () => {
+      try {
+        // Fetch the CSS file
+        const response = await fetch(
+          'https://esm.sh/@sebgroup/green-tokens@0.10.1/internal/text.css',
+        ) // Adjust the path to your CSS file
+        const css = await response.text()
+
+        // Parse the CSS variables
+        const cssVariables = parseTypographySizes(css)
+        setTextTokensMap(cssVariables)
+      } catch (error) {
+        console.error('Error fetching CSS file:', error)
+      }
+    }
+
+    fetchTextTokens()
+  }, [])
+
   return (
     <>
       {/* <Item
@@ -287,8 +424,8 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                       setSelectedComponent(
                         component.url_path.replace('/component/', ''),
                       )
-                      router.push(component.url_path || ``)
-                      toggleCmd()
+                      // router.push(component.url_path || ``)
+                      // toggleCmd()
                     }}
                     data-component={component.url_path.replace(
                       '/component/',
@@ -302,7 +439,13 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                       justify-content="space-between"
                       align-items="center"
                     >
+                      {component.title}
                       <GdsFlex gap="xs" align-items="center">
+                        {component.status && (
+                          <GdsBadge variant="notice" size="small">
+                            {component.status}
+                          </GdsBadge>
+                        )}
                         <GdsFlex
                           width="24px"
                           height="24px"
@@ -313,13 +456,7 @@ function Home({ searchComponents }: { searchComponents: Function }) {
                             <IconEyeSlash width={12} height={12} />
                           )}
                         </GdsFlex>
-                        <GdsText>{component.title}</GdsText>
                       </GdsFlex>
-                      {component.status && (
-                        <GdsBadge variant="notice" size="small">
-                          {component.status}
-                        </GdsBadge>
-                      )}
                     </GdsFlex>
                   </Item>
                 </GdsFlex>
@@ -329,22 +466,180 @@ function Home({ searchComponents }: { searchComponents: Function }) {
           <GdsCard
             position="sticky"
             inset="0"
-            aspect-ratio="1:1"
             width="250px"
-            height="280px"
+            height="260px"
             flex="1"
+            padding="s m"
           >
             <GdsFlex
-              align-items="center"
-              justify-content="center"
+              flex-direction="column"
+              align-items="flex-start"
+              justify-content="flex-start"
               flex="1"
               height="100%"
-              gap="xl"
+              gap="s"
             >
-              {Preview && <Preview cover />}
+              <GdsText font-size="detail-xs">Preview</GdsText>
+              <GdsFlex
+                align-items="center"
+                justify-content="center"
+                flex="1"
+                gap="xl"
+                border-radius="xs"
+                background="secondary"
+                width="100%"
+                height="100%"
+              >
+                {Preview && <Preview cover />}
+              </GdsFlex>
+              <GdsButton
+                rank="tertiary"
+                size="small"
+                onClick={() => {
+                  router.push('/component/' + selectedComponent || ``)
+                  toggleCmd()
+                }}
+              >
+                <IconBook slot="lead" />
+                Documentation
+              </GdsButton>
             </GdsFlex>
           </GdsCard>
         </GdsFlex>
+      </Command.Group>
+      <Command.Group heading="Icons">
+        {Object.keys(ICONS).map((iconName, idx) => {
+          const IconComponent = ICONS[iconName]
+          return (
+            <GdsFlex key={idx} flex-direction="column">
+              <Item
+                onSelect={() => {
+                  handleIconClick(iconName)
+                }}
+                value={iconName}
+              >
+                <GdsFlex gap="xs" align-items="center">
+                  <GdsFlex
+                    width="24px"
+                    height="24px"
+                    align-items="center"
+                    justify-content="center"
+                  >
+                    <IconComponent />
+                  </GdsFlex>
+                  <span>{transformIconName(iconName)}</span>
+                </GdsFlex>
+              </Item>
+            </GdsFlex>
+          )
+        })}
+      </Command.Group>
+      <Command.Group heading="Size Tokens">
+        {Object.entries(sizeTokensMap).map(([token, value], idx) => (
+          <Item
+            key={idx}
+            onSelect={() => {
+              handleIconClick(token.replace('--gds-space-', ''))
+            }}
+            value={token}
+            keywords={[token.replace('--gds-space-', ''), value]}
+          >
+            <GdsFlex
+              gap="xs"
+              align-items="center"
+              justify-content="flex-start"
+              width="100%"
+              gap="s"
+            >
+              <GdsBadge variant="notice" width="4ch">
+                <GdsFlex
+                  width="4ch"
+                  align-items="center"
+                  justify-content="center"
+                >
+                  {token.replace('--gds-space-', '')}
+                </GdsFlex>
+              </GdsBadge>
+              <GdsText font-size="detail-xs">{value}</GdsText>
+            </GdsFlex>
+          </Item>
+        ))}
+      </Command.Group>
+      <Command.Group heading="Typography Tokens">
+        {Object.entries(textTokensMap.fontSizes).map(([key, value], idx) => {
+          const lineHeight = textTokensMap.lineHeights[key] || 'N/A' // Get line height if available
+          return (
+            <Item
+              key={idx}
+              onSelect={() => {
+                navigator.clipboard
+                  .writeText(key.replace('--gds-text-size-', ''))
+                  .then(() => {
+                    toast.success('Copied!')
+                  })
+              }}
+              value={key}
+              keywords={[
+                key.replace('--gds-text-size-', ''),
+                value,
+                lineHeight,
+                'typography',
+                'text',
+              ]}
+            >
+              <GdsFlex
+                gap="xs"
+                align-items="center"
+                justify-content="flex-start"
+                width="100%"
+                gap="s"
+              >
+                <GdsBadge variant="positive">
+                  {key.replace('--gds-text-size-', '')}
+                </GdsBadge>
+                <GdsText font-size="detail-xs">
+                  {value}/{lineHeight}
+                </GdsText>
+              </GdsFlex>
+            </Item>
+          )
+        })}
+      </Command.Group>
+      <Command.Group heading="Font Weights">
+        {Object.entries(textTokensMap.fontWeights).map(([key, value], idx) => (
+          <Item
+            key={idx}
+            onSelect={() => {
+              navigator.clipboard
+                .writeText(key.replace('--gds-text-weight-', ''))
+                .then(() => {
+                  toast.success('Copied!')
+                })
+            }}
+            value={key}
+            keywords={[
+              key.replace('--gds-text-weight-', ''),
+              value,
+              'typography',
+              'text',
+            ]}
+          >
+            <GdsFlex
+              gap="xs"
+              align-items="center"
+              justify-content="flex-start"
+              width="100%"
+              gap="s"
+            >
+              <GdsText
+                font-weight={key.replace('--gds-text-weight-', '')}
+                text-transform="capitalize"
+              >
+                {value} · {key.replace('--gds-text-weight-', '')}
+              </GdsText>
+            </GdsFlex>
+          </Item>
+        ))}
       </Command.Group>
     </>
   )
@@ -377,12 +672,6 @@ function Components() {
           </Item>
         )
       })}
-      {/* // <Item>Project 1</Item>
-      // <Item>Project 2</Item>
-      // <Item>Project 3</Item>
-      // <Item>Project 4</Item>
-      // <Item>Project 5</Item>
-      // <Item>Project 6</Item> */}
     </>
   )
 }

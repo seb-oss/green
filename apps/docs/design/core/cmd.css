@@ -1,9 +1,9 @@
 [cmdk-dialog] {
   position: fixed;
-  top: 15%;
+  top: 10%;
   left: 50%;
   width: 100%;
-  max-width: 640px;
+  max-width: 820px;
   transform: translateX(-50%);
   overflow: hidden;
   transform-origin: left;
@@ -97,8 +97,8 @@
 }
 
 [cmdk-list] {
-  height: min(330px, calc(var(--cmdk-list-height)));
-  max-height: 400px;
+  height: min(480px, calc(var(--cmdk-list-height)));
+  max-height: 60vh;
   overflow: auto;
   overscroll-behavior: contain;
   transition: 100ms ease;
