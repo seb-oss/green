@@ -93,7 +93,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
     <GdsFlex
       flex-direction="column"
       position="sticky"
-      inset="60px 0 0 0"
+      inset="70px 0 0 0"
       overflow="hidden auto"
       max-height="calc(100vh - 72px)"
       width="100%"
