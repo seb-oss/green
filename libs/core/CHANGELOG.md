@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.61.0
+
+### Minor Changes
+
+- 47957aa: **Tokens:** Remove Color Tokens V1, update all components to use the new color tokens
+
 ## 1.60.1
 
 ### Patch Changes
