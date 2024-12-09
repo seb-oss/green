@@ -569,6 +569,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.value = e.detail
     this.open = false
     this.#dispatchChangeEvent()
+    this.#dispatchInputEvent()
   }
 
   #handleMonthChange = (e: CustomEvent) => {
