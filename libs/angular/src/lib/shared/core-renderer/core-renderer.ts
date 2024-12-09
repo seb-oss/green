@@ -13,7 +13,6 @@ export class NggCoreRenderer implements Renderer2 {
   constructor(private delegate: Renderer2) {}
 
   createElement(name: string, namespace?: string | null): any {
-    console.log('createElement', name)
     const scopedName = name.startsWith('gds-') ? getScopedTagName(name) : name
     return this.delegate.createElement(scopedName, namespace)
   }
