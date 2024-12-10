@@ -49,7 +49,7 @@ export class GdsFieldBase extends GdsElement {
   render() {
     const CLASSES = {
       field: true,
-      focused: this.isFocused,
+      // focused: this.isFocused,
     }
 
     // TODO:

@@ -21,7 +21,7 @@ export const styles = css`
       outline-width: var(--gds-space-3xs);
       outline-offset: var(--gds-space-3xs);
 
-      &.focused {
+      &:focus-within {
         outline-color: currentColor;
       }
     }

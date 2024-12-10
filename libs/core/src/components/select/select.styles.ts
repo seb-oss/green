@@ -13,7 +13,6 @@ export const styles = css`
       border: none;
       font: inherit;
       flex: 1;
-      overflow: hidden;
       opacity: 0;
       position: absolute;
       z-index: 1;
@@ -25,7 +24,7 @@ export const styles = css`
       flex: 1;
     }
 
-    :host(.select-opened) [slot='trail'] {
+    :host(:focus-within) [slot='trail'] {
       transform: scaleY(-1);
     }
   }

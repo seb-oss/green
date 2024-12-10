@@ -34,11 +34,12 @@ export class GdsSelect extends GdsElement {
       ) as HTMLSelectElement
     }
 
+    // Reconsider this part to remove
     if (spanElement && selectElement) {
       slotElement.addEventListener('change', () => {
         const selectedOption = selectElement.selectedOptions[0]
         spanElement.textContent = selectedOption.textContent
-        selectElement.blur()
+        // selectElement.blur()
       })
 
       selectElement.addEventListener('focus', () => {
@@ -69,7 +70,7 @@ export class GdsSelect extends GdsElement {
         <slot name="lead" slot="lead"></slot>
         <label>${this.placeholder || 'Select'}</label>
         <slot></slot>
-        <gds-button rank="tertiary" size="small" slot="trail">
+        <gds-button tabindex="-1" rank="tertiary" size="small" slot="trail">
           <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
         </gds-button>
       </gds-field-base>
