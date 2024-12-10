@@ -71,6 +71,7 @@ p {
 
   .cm__btn-group {
     flex-direction: column;
+    gap: var(--gds-space-m);
 
   }
 
@@ -94,6 +95,6 @@ p {
 
   #cc-main .cm__btn {
     flex: 1;
-    margin: 0 0.5rem;
+    margin-right: var(--gds-space-m);
   }
 }
