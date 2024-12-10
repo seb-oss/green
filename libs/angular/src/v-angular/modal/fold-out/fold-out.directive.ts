@@ -4,5 +4,5 @@ import { Directive, HostBinding } from '@angular/core'
   selector: '[nggvOption]',
 })
 export class NgvFoldOutOptionDirective {
-  @HostBinding('class.sdv-field-dropdown__options__label') baseClass = true
+  @HostBinding('class.nggv-field-dropdown__options__label') baseClass = true
 }

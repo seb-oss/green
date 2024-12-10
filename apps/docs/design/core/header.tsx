@@ -1,11 +1,12 @@
 'use client'
 
 import React, { forwardRef, useContext, useEffect, useState } from 'react'
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import {
   GdsButton,
   GdsContainer,
   GdsFlex,
+  GdsMask,
   GdsMenuButton,
 } from '$/import/components'
 import {
@@ -28,13 +29,16 @@ export const Header = forwardRef(({ ...props }, ref) => {
   }, [])
 
   return (
-    <GdsContainer
-      level="1"
-      position="sticky"
-      inset="0"
-      z-index="1100"
-      background="primary"
-    >
+    <GdsContainer level="1" position="sticky" inset="0" z-index="1100">
+      <GdsMask
+        background-color="secondary/0.8"
+        backdrop-filter="blur(4px)"
+        position="absolute"
+        inset="0"
+        mask-size="cover"
+        level="2"
+        pointer-events="none"
+      />
       <GdsFlex
         justify-content="space-between"
         min-width="100%"
