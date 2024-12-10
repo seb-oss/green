@@ -5,14 +5,12 @@
     <form [formGroup]="simpleForm">
       <gds-flex flex-direction="column" gap="m">
         <gds-input
-          nggCoreControl
           formControlName="name"
           label="Name"
           clearable
           [errorMessage]="getError(simpleForm.get('name'))"
         ></gds-input>
         <gds-input
-          nggCoreControl
           formControlName="email"
           label="Email"
           type="email"
@@ -20,7 +18,6 @@
           clearable
         ></gds-input>
         <gds-dropdown
-          nggCoreControl
           formControlName="dropdown"
           label="Dropdown"
           [errorMessage]="getError(simpleForm.get('dropdown'))"
@@ -31,13 +28,11 @@
           <gds-option value="Option 3">Option 3</gds-option>
         </gds-dropdown>
         <gds-datepicker
-          nggCoreControl
           formControlName="date"
           label="Date"
           [errorMessage]="getError(simpleForm.get('date'))"
         ></gds-datepicker>
         <gds-textarea
-          nggCoreControl
           formControlName="description"
           label="Description"
           [errorMessage]="getError(simpleForm.get('description'))"
