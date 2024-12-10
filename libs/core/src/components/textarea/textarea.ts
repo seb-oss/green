@@ -15,6 +15,7 @@ import { styles } from './textarea.styles'
 // Local Components
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
+import '../../primitives/field-base'
 import '../icon/icons/cross-small'
 import '../flex'
 import '../button'
@@ -168,9 +169,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return html`
       <gds-form-control-header>
         <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text"
-          >${this.supportingText}</span
-        >
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
         <slot
           name="extended-supporting-text"
           slot="extended-supporting-text"
