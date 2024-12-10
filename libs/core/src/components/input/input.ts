@@ -34,7 +34,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   @property()
-  value = ''
+  value? = ''
 
   /**
    * The label displayed above the field
@@ -184,7 +184,7 @@ export class GdsInput extends GdsFormControlElement<string> {
       <gds-form-control-footer
         class="size-${this.size}"
         .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - this.value.length}
+        this.maxlength - (this.value?.length || 0)}
         .validationMessage=${this.invalid &&
         (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
@@ -280,7 +280,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderClearButton() {
-    if (this.clearable && this.value.length > 0)
+    if (this.clearable && (this.value?.length || 0) > 0)
       return html`
         <gds-button
           size="${this.size === 'small' ? 'xs' : 'small'}"

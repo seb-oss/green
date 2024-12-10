@@ -37,7 +37,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   @property()
-  value = ''
+  value? = ''
 
   /**
    * The label displayed above the field
@@ -214,7 +214,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
       <gds-form-control-footer
         .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - this.value.length}
+        this.maxlength - (this.value?.length || 0)}
         .validationMessage=${this.invalid &&
         (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
@@ -378,7 +378,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderClearButton() {
-    if (this.clearable && this.value.length > 0)
+    if (this.clearable && (this.value?.length || 0) > 0)
       return html`
         <gds-button
           size="small"
