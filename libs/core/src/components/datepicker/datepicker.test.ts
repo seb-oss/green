@@ -10,7 +10,8 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement, onlyDate } from '../../utils/testing'
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { clickOnElement, onlyDate, isWebKit } from '../../utils/testing'
 import { GdsDatePartSpinner } from './date-part-spinner'
 
 import '@sebgroup/green-core/components/datepicker'
@@ -512,6 +513,35 @@ describe('<gds-datepicker>', () => {
       await expect(onlyDate(el.value!)).to.equal(
         onlyDate(new Date('2024-01-01')),
       )
+    })
+
+    it('should not overflow the year when trying to increase max year', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2034-12-10" min="2014-01-01" max="2034-12-31" open></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
+      
+      let keyPress = 'Shift+Tab'
+      if (isWebKit()) {
+        keyPress = 'Shift+Alt+Tab'
+      }
+      
+      await sendKeys({
+        press: keyPress,
+      })
+    
+      await sendKeys({
+      press: 'Enter',
+      })
+      
+      await aTimeout(0)
+      await yearDropdown.updateComplete
+      
+      await expect(yearDropdown.value).to.equal('2034')
     })
   })
 })
