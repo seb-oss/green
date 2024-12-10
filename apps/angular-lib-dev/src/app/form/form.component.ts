@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  NonNullableFormBuilder,
   Validators,
 } from '@angular/forms'
 
@@ -25,13 +26,18 @@ import '@sebgroup/green-core/components/theme/index.js'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent {
-  simpleForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    description: new FormControl(''),
-    dropdown: new FormControl(''),
-    date: new FormControl<Date | undefined>(undefined),
-  })
+  constructor(private fb: NonNullableFormBuilder) {}
+
+  simpleForm = this.fb.group(
+    {
+      name: ['', Validators.required],
+      email: ['', Validators.required],
+      description: ['', Validators.required],
+      dropdown: ['', Validators.required],
+      date: [undefined as Date | undefined, Validators.required],
+    },
+    // { updateOn: 'submit' },
+  )
 
   getError(control: AbstractControl | null) {
     if (control?.hasError('required')) return 'Field is required'

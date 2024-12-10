@@ -1,88 +1,67 @@
 <h1 style="margin-bottom: 2rem">Form example using Green Core components</h1>
 
-<gds-flex *nggCoreElement gap="l" max-width="1000px" margin="0 auto">
-  <gds-card *nggCoreElement variant="primary" flex="1">
+<gds-flex gap="l" max-width="1000px" margin="0 auto">
+  <gds-card variant="primary" flex="1">
     <form [formGroup]="simpleForm">
-      <gds-flex *nggCoreElement flex-direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
         <gds-input
-          *nggCoreElement
-          ngDefaultControl
+          nggCoreControl
           formControlName="name"
           label="Name"
-          required
-          minlength="4"
           clearable
-          [invalid]="simpleForm.get('name')?.invalid"
           [errorMessage]="getError(simpleForm.get('name'))"
         ></gds-input>
         <gds-input
-          *nggCoreElement
-          ngDefaultControl
+          nggCoreControl
           formControlName="email"
           label="Email"
           type="email"
-          [invalid]="simpleForm.get('email')?.invalid"
           [errorMessage]="getError(simpleForm.get('email'))"
-          required
           clearable
         ></gds-input>
         <gds-dropdown
-          *nggCoreElement
-          ngDefaultControl
+          nggCoreControl
           formControlName="dropdown"
           label="Dropdown"
-          [invalid]="simpleForm.get('dropdown')?.invalid"
           [errorMessage]="getError(simpleForm.get('dropdown'))"
-          required
         >
-          <gds-option *nggCoreElement value="">Select option</gds-option>
-          <gds-option *nggCoreElement value="Option 1">Option 1</gds-option>
-          <gds-option *nggCoreElement value="Option 2">Option 2</gds-option>
-          <gds-option *nggCoreElement value="Option 3">Option 3</gds-option>
+          <gds-option value="">Select option</gds-option>
+          <gds-option value="Option 1">Option 1</gds-option>
+          <gds-option value="Option 2">Option 2</gds-option>
+          <gds-option value="Option 3">Option 3</gds-option>
         </gds-dropdown>
         <gds-datepicker
-          *nggCoreElement
-          ngDefaultControl
+          nggCoreControl
           formControlName="date"
           label="Date"
-          [invalid]="simpleForm.get('date')?.invalid"
           [errorMessage]="getError(simpleForm.get('date'))"
-          required
         ></gds-datepicker>
         <gds-textarea
-          *nggCoreElement
-          ngDefaultControl
+          nggCoreControl
           formControlName="description"
           label="Description"
-          [invalid]="simpleForm.get('description')?.invalid"
           [errorMessage]="getError(simpleForm.get('description'))"
-          required
-          maxlength="20"
           clearable
         >
         </gds-textarea>
-        <gds-flex *nggCoreElement gap="m">
-          <gds-button *nggCoreElement type="submit">Submit</gds-button>
-          <gds-button *nggCoreElement type="reset" rank="secondary"
-            >Reset</gds-button
-          >
+        <gds-flex gap="m">
+          <gds-button type="submit">Submit</gds-button>
+          <gds-button type="reset" rank="secondary">Reset</gds-button>
         </gds-flex>
-        <!-- <gds-form-summary *nggCoreElement></gds-form-summary> -->
+        <!-- <gds-form-summary></gds-form-summary> -->
       </gds-flex>
     </form>
   </gds-card>
 
-  <gds-flex *nggCoreElement flex="1">
-    <gds-rich-text *nggCoreElement>
+  <gds-flex flex="1">
+    <gds-rich-text>
       <table>
         <tr>
           <th>Name</th>
           <td>
             {{ simpleForm.get('name')?.value }}
-            <ng-container *ngIf="simpleForm.get('name')?.invalid"
-              ><gds-text *nggCoreElement color="negative"
-                >(invalid)</gds-text
-              ></ng-container
+            <gds-text *ngIf="simpleForm.get('name')?.invalid" color="negative"
+              >(invalid)</gds-text
             >
           </td>
         </tr>
@@ -90,10 +69,8 @@
           <th>Email</th>
           <td>
             {{ simpleForm.get('email')?.value }}
-            <ng-container *ngIf="simpleForm.get('email')?.invalid"
-              ><gds-text *nggCoreElement color="negative"
-                >(invalid)</gds-text
-              ></ng-container
+            <gds-text *ngIf="simpleForm.get('email')?.invalid" color="negative"
+              >(invalid)</gds-text
             >
           </td>
         </tr>
@@ -101,10 +78,10 @@
           <th>Dropdown</th>
           <td>
             {{ simpleForm.get('dropdown')?.value }}
-            <ng-container *ngIf="simpleForm.get('dropdown')?.invalid"
-              ><gds-text *nggCoreElement color="negative"
-                >(invalid)</gds-text
-              ></ng-container
+            <gds-text
+              *ngIf="simpleForm.get('dropdown')?.invalid"
+              color="negative"
+              >(invalid)</gds-text
             >
           </td>
         </tr>
@@ -112,10 +89,8 @@
           <th>Date</th>
           <td>
             {{ simpleForm.get('date')?.value }}
-            <ng-container *ngIf="simpleForm.get('date')?.invalid"
-              ><gds-text *nggCoreElement color="negative"
-                >(invalid)</gds-text
-              ></ng-container
+            <gds-text *ngIf="simpleForm.get('date')?.invalid" color="negative"
+              >(invalid)</gds-text
             >
           </td>
         </tr>
@@ -123,10 +98,10 @@
           <th>Description</th>
           <td>
             {{ simpleForm.get('description')?.value }}
-            <ng-container *ngIf="simpleForm.get('description')?.invalid"
-              ><gds-text *nggCoreElement color="negative"
-                >(invalid)</gds-text
-              ></ng-container
+            <gds-text
+              *ngIf="simpleForm.get('description')?.invalid"
+              color="negative"
+              >(invalid)</gds-text
             >
           </td>
         </tr>
