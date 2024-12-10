@@ -4,8 +4,9 @@ import * as CookieConsent from 'vanilla-cookieconsent'
 
 import pluginConfig from './config'
 
-import 'vanilla-cookieconsent/dist/cookieconsent.css'
-import './consent.css'
+// import 'vanilla-cookieconsent/dist/cookieconsent.css'
+// import './consent.css'
+import './consentnew.css'
 
 const Consent = () => {
   useEffect(() => {

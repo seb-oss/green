@@ -1,0 +1,99 @@
+:root {
+  /* GDS Styling Variables */
+  --cc-font-family: var(--gds-font-family);
+  --cc-font-size: 16px;
+  --cc-bg: #fff;
+
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+/* Main Consent Modal Styling */
+#cc-main {
+  font-family: var(--cc-font-family);
+  color: var(--cc-text);
+  background: var(--cc-bg);
+  z-index: 2147483647;
+  position: fixed;
+  border-radius: var(--gds-space-s);
+  box-shadow: var(--gds-shadow-l);
+  border: 1px solid var(--gds-color-l2-border-primary);
+  padding: var(--gds-space-xl, 0);
+}
+
+/* Title and Body Styling */
+#cc-main .cm__title {
+  color: var(--gds-color-l2-content-secondary);
+  font-size: 1.25rem;
+  font-weight: 450;
+}
+
+#cc-main .cm__desc {
+  color: var(--gds-color-l2-content-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 450;
+  margin-top: var(--gds-space-l);
+  margin-bottom: var(--gds-space-l);
+}
+
+/* Button Styling */
+#cc-main .cm__btn {
+  background-color: var(--gds-color-l3-background-primary);
+  border-radius: var(--gds-space-max);
+  color: var(--gds-color-l3-content-primary);
+  font-family: var(--gds-font-family);
+  flex: 1;
+  /* Gör alla knappar lika stora */
+  border: none;
+  padding-block: var(--gds-space-s);
+  padding-inline: var(--gds-space-l);
+  margin-top: 0;
+  font-weight: 450;
+  font-size: var(--gds-text-size-detail-m);
+}
+
+#cc-main .cm__btn:hover {
+  background-color: color-mix(in srgb, var(--gds-color-l3-background-primary), var(--gds-color-l3-states-dark-hover));
+}
+
+/* Responsiveness */
+@media screen and (max-width: 640px) {
+  #cc-main {
+    padding: var(--gds-space-xl);
+  }
+
+  .cm__btn-group {
+    flex-direction: column;
+
+  }
+
+  #cc-main .cm__btn {
+    width: 100%;
+    margin-bottom: var(--gds-space-m);
+  }
+}
+
+@media screen and (min-width: 641px) {
+  #cc-main {
+    max-width: 500px;
+    border-radius: var(--gds-space-s);
+    box-shadow: var(--gds-shadow-m);
+  }
+
+  #cc-main .cm__btn-group {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  #cc-main .cm__btn {
+    flex: 1;
+    margin: 0 0.5rem;
+  }
+}
