@@ -1,10 +1,11 @@
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { localized } from '@lit/localize'
+import { property } from 'lit/decorators.js'
 
-import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './select.styles'
 
 import '../button/button'
@@ -13,16 +14,28 @@ import '../icon/icons/chevron-bottom'
 
 /**
  * @element gds-select
+ * @status beta
  */
 @gdsCustomElement('gds-select')
-export class GdsSelect extends GdsElement {
+@localized()
+export class GdsSelect extends GdsFormControlElement<string> {
   static styles = [styles]
 
   @property()
   placeholder = ''
 
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
+  @property({
+    attribute: 'disabled',
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
   firstUpdated() {
-    const spanElement = this.shadowRoot?.querySelector('label')
+    const labelElement = this.shadowRoot?.querySelector('label')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
     let selectElement: HTMLSelectElement | null = null
 
@@ -34,43 +47,36 @@ export class GdsSelect extends GdsElement {
       ) as HTMLSelectElement
     }
 
-    // Reconsider this part to remove
-    if (spanElement && selectElement) {
+    if (labelElement && selectElement) {
       slotElement.addEventListener('change', () => {
         const selectedOption = selectElement.selectedOptions[0]
-        spanElement.textContent = selectedOption.textContent
-        // selectElement.blur()
-      })
-
-      selectElement.addEventListener('focus', () => {
-        this.classList.add('select-focused')
-      })
-
-      selectElement.addEventListener('blur', () => {
-        this.classList.remove('select-focused')
-      })
-
-      // New event listener to detect when the select is opened
-      selectElement.addEventListener('mousedown', () => {
-        this.classList.add('select-opened')
-      })
-
-      // Add a global click event to detect when the select is closed
-      document.addEventListener('click', (event) => {
-        if (selectElement && !selectElement.contains(event.target as Node)) {
-          this.classList.remove('select-opened')
-        }
+        labelElement.textContent = selectedOption.textContent
       })
     }
   }
 
+  protected _getValidityAnchor(): HTMLElement {
+    return this.shadowRoot?.querySelector('select') as HTMLElement
+  }
+
   render() {
     return html`
-      <gds-field-base>
+      <gds-field-base
+        .size=${this.size}
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
+      >
         <slot name="lead" slot="lead"></slot>
         <label>${this.placeholder || 'Select'}</label>
         <slot></slot>
-        <gds-button tabindex="-1" rank="tertiary" size="small" slot="trail">
+        <gds-button
+          tabindex="-1"
+          size="${this.size === 'small' ? 'small' : ''}"
+          rank="tertiary"
+          variant="${this.invalid ? 'negative' : ''}"
+          ?disabled="${this.disabled}"
+          slot="trail"
+        >
           <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
         </gds-button>
       </gds-field-base>

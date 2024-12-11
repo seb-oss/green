@@ -95,6 +95,7 @@ export class GdsFieldBase extends GdsElement {
         class=${classMap(CLASSES)}
         @click=${this.#handleFieldClick}
         cursor="text"
+        pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
           ? 'disabled'
           : this.invalid
