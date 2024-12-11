@@ -86,8 +86,7 @@ export const FormExample = () => {
 
   return (
     <>
-      <h2>This is a form</h2>
-      <p>If you are developing a React app this is a great form to work on.</p>
+      <h2>This is a form using mainly legacy Green React components</h2>
 
       <Form onFormSubmit={(value) => console.log(value)}>
         <div className="d-flex" style={{ gap: '1rem' }}>

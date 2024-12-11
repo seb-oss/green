@@ -1,7 +1,7 @@
 import { Meta, Markdown } from '@storybook/addon-docs'
 
 <Meta title="Get started" />
- 
+
 ## Install
 
 ```bash
@@ -64,7 +64,7 @@ In your module:
 
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule } from '@sebgroup/green-angular'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 
 @NgModule({
     // Add the NggCoreWrapperModule to the `imports` array
@@ -84,7 +84,7 @@ import * as ButtonStyles from '@sebgroup/green-core/components/button/button.tra
 ButtonStyles.register()
 ```
 
-Use the webcomponent in your template with the `*nggCoreElement` directive.
+Use the web component in your template with the `*nggCoreElement` directive.
 
 In your template:
 
@@ -93,6 +93,35 @@ In your template:
 ```
 
 The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same pupose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
+
+#### Alternative custom renderer
+
+If you are using a lot of web components, it can feel a bit cluttered with all the `*nggCoreElement` directives. In that case you can use `NggCoreRenderer` instead. This will automatically add scoping to all `<gds-*>` elements in the template.
+
+In your module:
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA, RendererFactory2 } from '@angular/core'
+import { NggCoreRendererFactory } from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+    // Provide the NggCoreRenderer as a custom renderer
+    providers: [
+      {
+        provide: RendererFactory2,
+        useClass: NggCoreRendererFactory,
+      },
+    ],
+    // CUSTOM_ELEMENTS_SCHEMA is still needed
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+Now you can use Green Core components in your template without any special directive:
+
+```html
+<gds-button>Click me!</gds-button>
+```
 
 ### Using React
 
@@ -119,4 +148,3 @@ export const Button = createComponent({
 ```
 
 Then you can just use `<Button />` like a regular React component.
- 

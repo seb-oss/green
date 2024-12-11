@@ -1,6 +1,7 @@
 import { AlertRibbon, Badge, Navbar, Tab, Tabs } from '@sebgroup/green-react'
 import { AlertRibbons } from './alert-ribbons'
 import { FormExample } from './form'
+import { GreenCoreFormExample } from './green-core-form'
 import { Modals } from './modals'
 
 export function App() {
@@ -12,9 +13,14 @@ export function App() {
           <div className="col">
             <h1>React sample app</h1>
             <Tabs>
-              <Tab title={'Form'}>
+              <Tab title={'Form (legacy)'}>
                 <div className="pt-5">
                   <FormExample />
+                </div>
+              </Tab>
+              <Tab title={'Green Core Form'}>
+                <div className="pt-5">
+                  <GreenCoreFormExample />
                 </div>
               </Tab>
               <Tab title={'Alert ribbons'}>

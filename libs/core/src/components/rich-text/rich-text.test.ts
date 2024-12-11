@@ -17,10 +17,19 @@ describe('<gds-rich-text>', () => {
       expect(el).to.be.ok
     })
 
-    it('should capture the DOM sub-tree into the shadowRoot', async () => {
+    it('should clone the DOM sub-tree into the shadowRoot in default `clone` mode', async () => {
       const el: GdsRichText = await fixture(
         html`<gds-rich-text><p>Text</p></gds-rich-text>`,
       )
+      expect(el.querySelector('p')).to.be.ok
+      expect(el.shadowRoot?.querySelector('p')).to.be.ok
+    })
+
+    it('should move the DOM sub-tree into the shadowRoot in `move` mode', async () => {
+      const el: GdsRichText = await fixture(
+        html`<gds-rich-text captureMode="move"><p>Text</p></gds-rich-text>`,
+      )
+      expect(el.childNodes.length).to.equal(0)
       expect(el.shadowRoot?.querySelector('p')).to.be.ok
     })
 
