@@ -4,8 +4,15 @@ export const styles = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host {
-      min-width: 100%;
-      height: max-content;
+      /* min-width: 100%;
+      height: max-content; */
+
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      contain: layout;
+      isolation: isolate;
+      gap: var(--gds-space-xs);
     }
 
     ::slotted(select) {

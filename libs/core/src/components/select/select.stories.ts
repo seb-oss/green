@@ -67,7 +67,15 @@ export const Option: Story = {
   name: 'Option',
   render: () => html`
     <gds-flex>
-      <gds-select placeholder="Science Fields">
+      <gds-select
+        placeholder="Science Fields"
+        label="Label text"
+        supporting-text="Supporting text"
+      >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
         <gds-icon-square-grid-circle slot="lead"></gds-icon-square-grid-circle>
         <select>
           <optgroup label="Astronomy">

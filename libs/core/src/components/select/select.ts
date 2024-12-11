@@ -9,9 +9,11 @@ import {
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './select.styles'
 
-import '../button/button'
+import '../../primitives/form-control-header'
+import '../../primitives/form-control-header'
 import '../../primitives/field-base/field-base'
 import '../icon/icons/chevron-bottom'
+import '../button/button'
 
 /**
  * @element gds-select
@@ -24,6 +26,28 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   @property()
   placeholder = ''
+
+  /**
+   * The label displayed above the field
+   */
+  @property()
+  label = ''
+
+  /**
+   * The supporting text displayed between the label and the field itself
+   */
+  @property({ attribute: 'supporting-text' })
+  supportingText = ''
+
+  /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
 
   @property({ type: String })
   size: 'large' | 'small' = 'large'
@@ -77,6 +101,17 @@ export class GdsSelect extends GdsFormControlElement<string> {
     }
 
     return html`
+      <gds-form-control-header class="size-${this.size}">
+        <label for="input" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+        <slot
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>
+
       <gds-field-base
         .size=${this.size}
         .disabled=${this.disabled}
@@ -86,6 +121,11 @@ export class GdsSelect extends GdsFormControlElement<string> {
       >
         ${this.#renderFieldContents()}
       </gds-field-base>
+
+      <gds-form-control-footer
+        class="size-${this.size}"
+        .validationMessage=${this.invalid && this.validationMessage}
+      ></gds-form-control-footer>
     `
   }
 
