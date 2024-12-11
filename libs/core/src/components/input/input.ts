@@ -197,10 +197,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     )
   }
 
-  #renderSlotLead() {
-    return html` <slot slot="lead" name="lead"></slot> `
-  }
-
   #renderFieldContents() {
     const elements = [
       this.#renderSlotLead(),
@@ -210,6 +206,10 @@ export class GdsInput extends GdsFormControlElement<string> {
     ]
 
     return elements.map((element) => html`${element}`)
+  }
+
+  #renderSlotLead() {
+    return html` <slot slot="lead" name="lead"></slot> `
   }
 
   #renderSlotTrail() {

@@ -1,9 +1,23 @@
 import { css } from 'lit'
 
 export const styles = css`
-  @layer base, reset;
+  @layer base, a11y;
+
+  @layer a11y {
+    @media (prefers-reduced-motion: reduce) {
+      :host {
+        --_transition: none;
+      }
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      :host {
+        --_transparency: 1;
+      }
+    }
+  }
+
   @layer base {
-    /* Field Base Style */
     :host {
       --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
     }
