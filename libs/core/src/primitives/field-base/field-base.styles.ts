@@ -18,7 +18,7 @@ export const styles = css`
     }
 
     .field {
-      transition-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: background-color, border-color, outline-color;
       position: relative;
