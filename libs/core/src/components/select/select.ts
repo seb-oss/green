@@ -66,20 +66,44 @@ export class GdsSelect extends GdsFormControlElement<string> {
         .disabled=${this.disabled}
         .invalid=${this.invalid}
       >
-        <slot name="lead" slot="lead"></slot>
-        <label>${this.placeholder || 'Select'}</label>
-        <slot></slot>
-        <gds-button
-          tabindex="-1"
-          size="${this.size === 'small' ? 'small' : ''}"
-          rank="tertiary"
-          variant="${this.invalid ? 'negative' : ''}"
-          ?disabled="${this.disabled}"
-          slot="trail"
-        >
-          <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-        </gds-button>
+        ${this.#renderFieldContents()}
       </gds-field-base>
+    `
+  }
+
+  #renderFieldContents() {
+    const elements = [
+      this.#renderSlotLead(),
+      this.#renderMainSlot(),
+      this.#renderSlotTrail(),
+    ]
+
+    return elements.map((element) => html`${element}`)
+  }
+
+  #renderSlotLead() {
+    return html` <slot name="lead" slot="lead"></slot> `
+  }
+
+  #renderMainSlot() {
+    return html`
+      <label>${this.placeholder || 'Select'}</label>
+      <slot></slot>
+    `
+  }
+
+  #renderSlotTrail() {
+    return html`
+      <gds-button
+        tabindex="-1"
+        size="${this.size === 'small' ? 'small' : ''}"
+        rank="tertiary"
+        variant="${this.invalid ? 'negative' : ''}"
+        ?disabled="${this.disabled}"
+        slot="trail"
+      >
+        <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
+      </gds-button>
     `
   }
 }
