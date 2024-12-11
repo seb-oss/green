@@ -10,7 +10,9 @@ import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement, onlyDate } from '../../utils/testing'
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
+import { GdsButton } from '@sebgroup/green-core/components/button'
+import { clickOnElement, onlyDate, isWebKit } from '../../utils/testing'
 import { GdsDatePartSpinner } from './date-part-spinner'
 
 import '@sebgroup/green-core/components/datepicker'
@@ -512,6 +514,57 @@ describe('<gds-datepicker>', () => {
       await expect(onlyDate(el.value!)).to.equal(
         onlyDate(new Date('2024-01-01')),
       )
+    })
+
+    it('should not overflow the year when trying to increase max year', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2034-12-10" min="2014-01-01" max="2034-12-31" open></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
+      )!
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
+      const nextMonthButton = el.shadowRoot!.querySelector<GdsButton>(
+        `${getScopedTagName('gds-button')}[aria-label="Next month"]`,
+      )!
+      
+      nextMonthButton.click()
+      
+      await aTimeout(0)
+      await yearDropdown.updateComplete
+      
+      await expect(monthDropdown.value).to.equal('11')
+      await expect(yearDropdown.value).to.equal('2034')
+    })
+
+    it('should not overflow the year when trying to decrease min year', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2014-01-10" min="2014-01-01" max="2034-12-31" open></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
+      )!
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
+      const prevMonthButton = el.shadowRoot!.querySelector<GdsButton>(
+        `${getScopedTagName('gds-button')}[aria-label="Previous month"]`,
+      )!
+      
+      prevMonthButton.click()
+      
+      await aTimeout(0)
+      await monthDropdown.updateComplete
+      await yearDropdown.updateComplete
+      
+      await expect(monthDropdown.value).to.equal('0')
+      await expect(yearDropdown.value).to.equal('2014')
     })
   })
 })
