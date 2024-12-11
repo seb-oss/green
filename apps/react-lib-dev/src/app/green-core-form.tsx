@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { createComponent } from '@lit/react'
 import { set } from 'date-fns'
 
+// Import all web components from Green Core
 import { GdsButton } from '@sebgroup/green-core/components/button/index.js'
 import { GdsCard } from '@sebgroup/green-core/components/card/index.js'
 import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
@@ -17,7 +18,9 @@ import {
 import { GdsInput } from '@sebgroup/green-core/components/input/index.js'
 import { GdsRichText } from '@sebgroup/green-core/components/rich-text/index.js'
 import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
+// In this example, we are importing the GdsTheme component to set the design version to 2023
 import { GdsTheme } from '@sebgroup/green-core/components/theme/index.js'
+// This is used to get the correct element name when creating the wrappers below
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 // Regster React wrappers
@@ -100,6 +103,8 @@ const CoreRichText = createComponent({
   react: React,
 })
 
+// This type represents or form data model
+// In this example, we represent the field value and error state as a simple tuple
 type FormData = {
   name: [string, errorState]
   email: [string, errorState]
@@ -108,18 +113,20 @@ type FormData = {
   description: [string, errorState]
 }
 
-type errorState = {
-  valid: boolean
-}
+type errorState = boolean
 
+// We can use this empty state as the initial value, and when the form is reset
 const initialFormState: FormData = {
-  name: ['', { valid: false }],
-  email: ['', { valid: false }],
-  fruit: [undefined, { valid: false }],
-  date: [undefined, { valid: false }],
-  description: ['', { valid: false }],
+  name: ['', false],
+  email: ['', false],
+  fruit: [undefined, false],
+  date: [undefined, false],
+  description: ['', false],
 }
 
+// This is a simple validator that checks that the field is not empty
+// The `valiedate` function returns a tuple with a standard ValidityState object (https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) and an error message string.
+// You can read more about validators here: https://storybook.seb.io/latest/core/?path=/docs/components-form-validation-documentation--docs
 const requiredValidator: GdsValidator = {
   validate: (el: GdsFormControlElement) => {
     if (!el.value)
@@ -154,18 +161,27 @@ export const GreenCoreFormExample = () => {
             <CoreFlex gap="m" flex-direction="column">
               <CoreInput
                 label={'Name'}
+                //
+                // Control the value through the value prop, just like you would with a regular HTML input
                 value={formData.name[0]}
-                validator={requiredValidator}
+                //
+                // And update React state in the onChange callback
                 onChange={(e) =>
                   setFormData({
                     ...formData,
                     name: [
                       (e.currentTarget as GdsInput).value || '',
-                      { valid: (e.currentTarget as GdsInput).validity.valid },
+                      (e.currentTarget as GdsInput).validity.valid,
+                      // ^ here we can use the native validity state from the element.
+                      // This will be updated by the validator behind the scenes
                     ],
                   })
                 }
+                //
+                // Add the validator as a prop
+                validator={requiredValidator}
               />
+              {/* Then we repeat the same setup for the other controls */}
               <CoreInput
                 label={'Email'}
                 value={formData.email[0]}
@@ -175,7 +191,7 @@ export const GreenCoreFormExample = () => {
                     ...formData,
                     email: [
                       (e.currentTarget as GdsInput).value || '',
-                      { valid: (e.currentTarget as GdsInput).validity.valid },
+                      (e.currentTarget as GdsInput).validity.valid,
                     ],
                   })
                 }
@@ -189,9 +205,7 @@ export const GreenCoreFormExample = () => {
                     ...formData,
                     fruit: [
                       (e.currentTarget as GdsDropdown).value || '',
-                      {
-                        valid: (e.currentTarget as GdsDropdown).validity.valid,
-                      },
+                      (e.currentTarget as GdsDropdown).validity.valid,
                     ],
                   })
                 }
@@ -210,10 +224,7 @@ export const GreenCoreFormExample = () => {
                     ...formData,
                     date: [
                       (e.currentTarget as GdsDatepicker).value || undefined,
-                      {
-                        valid: (e.currentTarget as GdsDatepicker).validity
-                          .valid,
-                      },
+                      (e.currentTarget as GdsDatepicker).validity.valid,
                     ],
                   })
                 }
@@ -227,9 +238,7 @@ export const GreenCoreFormExample = () => {
                     ...formData,
                     description: [
                       (e.currentTarget as GdsTextarea).value || '',
-                      {
-                        valid: (e.currentTarget as GdsTextarea).validity.valid,
-                      },
+                      (e.currentTarget as GdsTextarea).validity.valid,
                     ],
                   })
                 }
@@ -248,32 +257,33 @@ export const GreenCoreFormExample = () => {
 
         <CoreFlex flex="1">
           <CoreRichText style={{ flex: '1' }}>
+            <h3>Reflected React state</h3>
             <table>
               <tbody>
                 <tr>
                   <th>Name</th>
                   <td>{formData.name[0]}</td>
-                  <td>Valid: {formData.name[1].valid ? '✅' : '❌'}</td>
+                  <td>Valid: {formData.name[1] ? '✅' : '❌'}</td>
                 </tr>
                 <tr>
                   <th>Email</th>
                   <td>{formData.email[0]}</td>
-                  <td>Valid: {formData.email[1].valid ? '✅' : '❌'}</td>
+                  <td>Valid: {formData.email[1] ? '✅' : '❌'}</td>
                 </tr>
                 <tr>
                   <th>Dropdown</th>
                   <td>{formData.fruit[0]}</td>
-                  <td>Valid: {formData.fruit[1].valid ? '✅' : '❌'}</td>
+                  <td>Valid: {formData.fruit[1] ? '✅' : '❌'}</td>
                 </tr>
                 <tr>
                   <th>Date</th>
                   <td>{formData.date[0]?.toLocaleDateString()}</td>
-                  <td>Valid: {formData.date[1].valid ? '✅' : '❌'}</td>
+                  <td>Valid: {formData.date[1] ? '✅' : '❌'}</td>
                 </tr>
                 <tr>
                   <th>Description</th>
                   <td>{formData.description[0]}</td>
-                  <td>Valid: {formData.description[1].valid ? '✅' : '❌'}</td>
+                  <td>Valid: {formData.description[1] ? '✅' : '❌'}</td>
                 </tr>
               </tbody>
             </table>
