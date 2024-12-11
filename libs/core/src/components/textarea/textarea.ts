@@ -178,7 +178,21 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         ></slot>
       </gds-form-control-header>
 
-      <gds-flex
+      <gds-field-base
+        .size=${this.size}
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
+        align-items="flex-start"
+      >
+        ${this.#renderFieldContents()}
+        ${when(
+          this.resize === 'auto',
+          () => this.#renderResizeHandle(),
+          () => nothing,
+        )}
+      </gds-field-base>
+
+      <!-- <gds-flex
         position="relative"
         align-items="flex-start"
         justify-content="center"
@@ -187,15 +201,15 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
         border-radius="xs"
         .background=${this.disabled
-          ? 'disabled'
-          : this.invalid
-            ? 'negative-secondary'
-            : 'secondary'}
+        ? 'disabled'
+        : this.invalid
+          ? 'negative-secondary'
+          : 'secondary'}
         .border=${this.disabled
-          ? ''
-          : this.invalid
-            ? '4xs/negative'
-            : '4xs/secondary'}
+        ? ''
+        : this.invalid
+          ? '4xs/negative'
+          : '4xs/secondary'}
         class="field ${this.invalid ? 'invalid' : ''}"
         @click=${this.#handleFieldClick}
         cursor="text"
@@ -206,11 +220,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           ${this.#renderClearButton()} ${this.#renderSlotTrail()}
         </gds-flex>
         ${when(
-          this.resize === 'auto',
-          () => this.#renderResizeHandle(),
-          () => nothing,
-        )}
-      </gds-flex>
+        this.resize === 'auto',
+        () => this.#renderResizeHandle(),
+        () => nothing,
+      )}
+      </gds-flex> -->
 
       <gds-form-control-footer
         .charCounter=${this.#shouldShowRemainingChars &&
@@ -261,13 +275,28 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     this.value = ''
   }
 
+  #renderFieldContents() {
+    const elements = [
+      this.#renderSlotLead(),
+      this.#renderNativeTextarea(),
+      this.#renderClearButton(),
+      this.#renderSlotTrail(),
+    ]
+
+    return elements.map((element) => html`${element}`)
+  }
+
   #renderSlotLead() {
-    return html` <slot name="lead"></slot> `
+    return html` <slot slot="lead" name="lead"></slot> `
   }
 
   #renderSlotTrail() {
     return html`
-      <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
+      <slot
+        slot="trail"
+        name="trail"
+        @slotchange=${this.#handleSlotChange}
+      ></slot>
     `
   }
 
@@ -374,6 +403,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
+          slot="action"
         >
           <gds-icon-cross-small />
         </gds-button>

@@ -23,6 +23,9 @@ export class GdsFieldBase extends GdsElement {
   size: 'large' | 'small' = 'large'
 
   @property({ type: String })
+  'align-items': 'center' | 'flex-start' = 'center'
+
+  @property({ type: String })
   height: '3xl'
 
   @property({
@@ -81,11 +84,11 @@ export class GdsFieldBase extends GdsElement {
       <gds-flex
         level="3"
         position="relative"
-        align-items=${this.height ? 'flex-start' : 'center'}
+        align-items=${this['align-items']}
         justify-content="space-between"
         gap="${this.size === 'small' ? '2xs' : 'xs'}"
-        padding="${this.height
-          ? 's'
+        padding="${this['align-items']
+          ? 's s s m'
           : this.size === 'small'
             ? 'xs s'
             : !this.trailSlotOccupied || !this.actionSlotOccupied

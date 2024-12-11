@@ -201,7 +201,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     const elements = [
       this.#renderSlotLead(),
       this.#renderNativeInput(),
-      this.#renderClearButton(),
+      this.#renderSlotAction(),
       this.#renderSlotTrail(),
     ]
 
@@ -255,7 +255,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     `
   }
 
-  #renderClearButton() {
+  #renderSlotAction() {
     if (this.clearable && this.value.length > 0)
       return html`
         <gds-button

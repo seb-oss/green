@@ -117,6 +117,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
         .disabled=${this.disabled}
         .invalid=${this.invalid}
         height=${this.multiple ? 'max-content' : ''}
+        align-items=${this.multiple ? 'flex-start' : 'center'}
         class=${classMap(CLASSES)}
       >
         ${this.#renderFieldContents()}
