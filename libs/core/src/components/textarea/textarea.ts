@@ -192,40 +192,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         )}
       </gds-field-base>
 
-      <!-- <gds-flex
-        position="relative"
-        align-items="flex-start"
-        justify-content="center"
-        gap="xs"
-        level="3"
-        padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
-        border-radius="xs"
-        .background=${this.disabled
-        ? 'disabled'
-        : this.invalid
-          ? 'negative-secondary'
-          : 'secondary'}
-        .border=${this.disabled
-        ? ''
-        : this.invalid
-          ? '4xs/negative'
-          : '4xs/secondary'}
-        class="field ${this.invalid ? 'invalid' : ''}"
-        @click=${this.#handleFieldClick}
-        cursor="text"
-      >
-        ${this.#renderSlotLead()} ${this.#renderNativeTextarea()}
-
-        <gds-flex gap="xs" align-items="center" block-size="l">
-          ${this.#renderClearButton()} ${this.#renderSlotTrail()}
-        </gds-flex>
-        ${when(
-        this.resize === 'auto',
-        () => this.#renderResizeHandle(),
-        () => nothing,
-      )}
-      </gds-flex> -->
-
       <gds-form-control-footer
         .charCounter=${this.#shouldShowRemainingChars &&
         this.maxlength - this.value.length}

@@ -37,52 +37,6 @@ export const styles = css`
       gap: var(--gds-space-xs);
     }
 
-    :host([disabled]) {
-      color: var(--gds-color-l3-content-disabled);
-      pointer-events: none;
-    }
-
-    :host([size='small']) textarea {
-      font-size: var(--gds-text-size-detail-s);
-      line-height: var(--gds-text-line-height-detail-s);
-    }
-
-    .field {
-      transition: var(--_transition);
-      position: relative;
-      outline: 2px solid transparent;
-      outline-offset: 2px;
-
-      &:has(textarea:focus-visible) {
-        border-color: var(--gds-color-l3-border-primary);
-        outline-color: currentColor;
-      }
-
-      &.invalid:has(textarea:focus-visible) {
-        border-color: var(--gds-color-l3-border-negative);
-      }
-    }
-
-    @media (hover: hover) {
-      .field {
-        &:hover {
-          background: color-mix(
-            in srgb,
-            var(--gds-color-l3-background-secondary),
-            var(--gds-color-l3-states-light-hover)
-          );
-        }
-
-        &.invalid:hover {
-          background: color-mix(
-            in srgb,
-            var(--gds-color-l3-background-negative-secondary),
-            var(--gds-color-l3-states-negative-hover)
-          );
-        }
-      }
-    }
-
     textarea {
       appearance: none;
       background-color: transparent;
@@ -112,6 +66,10 @@ export const styles = css`
     slot[name='lead']::slotted(*) {
       min-width: var(--gds-space-l);
       display: flex;
+    }
+
+    [align-items] ::part(_button) {
+      margin-top: calc(var(--gds-space-2xs) * -1);
     }
 
     .resize-handle {
