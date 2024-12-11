@@ -34,7 +34,7 @@
         </button>
       </header>
 
-      <section id="sdv-modal-body">
+      <section id="modal-body">
         <div class="gds-slide-out__content hide-if-empty">
           <div *ngIf="content" [innerHtml]="content"></div>
           <ng-content></ng-content>
@@ -42,7 +42,7 @@
         <ng-content select="[slot='outside-content']"></ng-content>
       </section>
 
-      <footer class="sdv-modal-dialog__actions">
+      <footer class="modal-dialog__actions">
         <button
           class="danger"
           type="reset"
