@@ -30,7 +30,7 @@ type Story = StoryObj<NggModalComponent>
 
 const RenderTemplate = (args: any) => ({
   template: `
-    <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" [size]="size" (closed)="isOpen = false">
+    <ngg-modal [modalType]="modalType" [closeText]="closeText" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="false" [hideFooter]="false" [size]="size" (closed)="isOpen = false">
       <p>Modal Body</p>
     </ngg-modal>
     <button (click)="isOpen = true">Open Modal</button>
@@ -44,6 +44,7 @@ const RenderTemplate = (args: any) => ({
 export const Default: Story = {
   args: {
     header: 'Header',
+    closeText: 'Close Modal',
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
     trapFocus: false,
@@ -56,6 +57,7 @@ export const Slideout = {
   args: {
     modalType: 'slideout',
     header: 'Header',
+    closeText: 'Close Slideout',
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
     trapFocus: false,
@@ -67,6 +69,7 @@ export const Takeover = {
   args: {
     modalType: 'takeover',
     header: 'Header',
+    closeText: 'Close Takeover',
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
     trapFocus: false,
@@ -77,6 +80,7 @@ export const Takeover = {
 export const Custom = {
   args: {
     header: 'Header',
+    closeText: 'Close Custom',
     dismissLabel: 'Secondary',
     confirmLabel: 'Primary',
     trapFocus: false,
@@ -91,7 +95,7 @@ export const Custom = {
         isOpen,
       },
       template: `
-      <ngg-modal [modalType]="modalType" [header]="header" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
+      <ngg-modal [modalType]="modalType" [header]="header" [closeText]="closeText" [isOpen]="isOpen" [confirmLabel]="confirmLabel" [dismissLabel]="dismissLabel" [trapFocus]="trapFocus" [hideHeader]="hideHeader" [hideFooter]="hideFooter" (closed)="isOpen = false">
         <ng-container nggModalHeader>
           <div style="display:flex;align-items:center;">
             <h3>{{header}}</h3>
