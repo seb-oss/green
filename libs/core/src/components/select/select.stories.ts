@@ -38,7 +38,12 @@ export const select: Story = {
   name: 'select',
   args: {
     placeholder: 'Science Themes',
+    label: 'Label text',
+    supportingText: 'Supporting text',
     innerHTML: `
+      <span slot="extended-supporting-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </span>
       <gds-icon-books slot="lead"></gds-icon-books>
       <select>
           <optgroup label="Physics">
@@ -100,7 +105,16 @@ export const Disabled: Story = {
   name: 'Disabled',
   render: () => html`
     <gds-flex>
-      <gds-select disabled placeholder="Space Missions">
+      <gds-select
+        disabled
+        placeholder="Space Missions"
+        label="Label text"
+        supporting-text="Supporting text"
+      >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
         <gds-icon-lightning slot="lead"></gds-icon-lightning>
         <select></select>
       </gds-select>
@@ -141,7 +155,13 @@ export const Validation: Story = {
           },
         }}
         placeholder="Space Technologies"
+        label="Label text"
+        supporting-text="Supporting text"
       >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         <select>
           <optgroup label="Propulsion">
@@ -168,7 +188,16 @@ export const Size: Story = {
   name: 'Size',
   render: () => html`
     <gds-flex>
-      <gds-select size="small" placeholder="Space Agencies">
+      <gds-select
+        size="small"
+        placeholder="Space Agencies"
+        label="Label text"
+        supporting-text="Supporting text"
+      >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
         <gds-icon-bank slot="lead"></gds-icon-bank>
         <select>
           <optgroup label="International">
@@ -193,7 +222,15 @@ export const Multiple: Story = {
   name: 'Multiple',
   render: () => html`
     <gds-flex>
-      <gds-select placeholder="Space Phenomena">
+      <gds-select
+        placeholder="Space Phenomena"
+        label="Label text"
+        supporting-text="Supporting text"
+      >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
         <gds-icon-sun slot="lead"></gds-icon-sun>
         <select multiple>
           <option value="black-holes">Black Holes</option>
@@ -216,7 +253,15 @@ export const SelectSize: Story = {
   name: 'Select Size',
   render: () => html`
     <gds-flex>
-      <gds-select placeholder="Space Exploration">
+      <gds-select
+        placeholder="Space Exploration"
+        label="Label text"
+        supporting-text="Supporting text"
+      >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
         <gds-icon-compass-round slot="lead"></gds-icon-compass-round>
         <select multiple size="14">
           <optgroup label="Mars Missions">

@@ -6,7 +6,7 @@ export const styles = css`
     :host {
       /* min-width: 100%;
       height: max-content; */
-
+      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
       width: 100%;
@@ -29,6 +29,7 @@ export const styles = css`
       z-index: 1;
       inset: 0;
       line-height: 1.4;
+      font-weight: 400 !important;
 
       &::-ms-expand {
         display: none;

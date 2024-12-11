@@ -66,7 +66,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
   private selectElementSize?: number
 
   firstUpdated() {
-    const labelElement = this.shadowRoot?.querySelector('label')
+    const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
     let selectElement: HTMLSelectElement | null = null
 
@@ -146,7 +146,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
   #renderMainSlot() {
     if (!this.multiple) {
       return html`
-        <label>${this.placeholder || 'Select'}</label>
+        <label id="placeholder">${this.placeholder || 'Select'}</label>
         <slot></slot>
       `
     } else {
