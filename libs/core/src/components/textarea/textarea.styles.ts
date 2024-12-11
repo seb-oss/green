@@ -1,27 +1,7 @@
 import { css } from 'lit'
 
 export const styles = css`
-  @layer tokens, a11y, base, simplified;
-
-  @layer tokens {
-    :host {
-      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1), height 0s;
-    }
-  }
-
-  @layer a11y {
-    @media (prefers-reduced-motion: reduce) {
-      :host {
-        --_transition: none;
-      }
-    }
-
-    @media (prefers-reduced-transparency: reduce) {
-      :host {
-        --_transparency: 1;
-      }
-    }
-  }
+  @layer base, simplified;
 
   @layer base {
     * {

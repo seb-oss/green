@@ -150,12 +150,6 @@ export class GdsDropdown<ValueT = any>
   size: 'medium' | 'small' = 'medium'
 
   /**
-   * Whether to hide the label.
-   */
-  @property({ type: Boolean, attribute: 'hide-label' })
-  hideLabel = false
-
-  /**
    * Whether to disable the mobile styles.
    */
   @property()
@@ -247,17 +241,6 @@ export class GdsDropdown<ValueT = any>
         ></slot>
       </gds-form-control-header>
 
-      <!-- 
-      
-      ${when(
-        this.label && !this.hideLabel,
-        () => html`<label for="trigger">${this.label}</label>`,
-      )}  
-        
-      <span class="form-info"><slot name="sub-label"></slot></span>
-      
-      -->
-
       <gds-popover
         .label=${this.label}
         .open=${this.open}
@@ -282,33 +265,13 @@ export class GdsDropdown<ValueT = any>
           aria-label="${this.label}"
         >
           <slot name="lead" slot="lead"></slot>
-          <slot name="trigger">
-            <button>${unsafeHTML(this.displayValue)}</button>
-          </slot>
-          <!-- <span>${unsafeHTML(this.displayValue)}</span> -->
+          <button>
+            <slot name="trigger">
+              <span> ${unsafeHTML(this.displayValue)} </span>
+            </slot>
+          </button>
           <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
         </gds-field-base>
-
-        <!-- <button
-            id="trigger"
-            name="trigger"
-            aria-haspopup="listbox"
-            slot="trigger"
-            role="combobox"
-            aria-owns="listbox"
-            aria-controls="listbox"
-            aria-expanded="${this.open}"
-            aria-label="${this.label}"
-            part="trigger"
-            class=${classMap({ small: this.size === 'small' })}
-          >
-            <slot name="trigger">
-              <span>${unsafeHTML(this.displayValue)}</span>
-            </slot>
-            <div class="icon">
-              <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-            </div>
-          </button> -->
 
         ${when(
           this.searchable,
@@ -333,10 +296,6 @@ export class GdsDropdown<ValueT = any>
           <slot></slot>
         </gds-listbox>
       </gds-popover>
-
-      <!-- <span class="form-info"
-        ><slot name="message">${this.validationMessage}</slot></span
-      > -->
 
       <gds-form-control-footer
         .validationMessage=${this.invalid && this.validationMessage}

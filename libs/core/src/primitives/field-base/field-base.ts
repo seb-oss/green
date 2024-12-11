@@ -26,7 +26,7 @@ export class GdsFieldBase extends GdsElement {
   'align-items': 'center' | 'flex-start' = 'center'
 
   @property({ type: String })
-  height: '3xl'
+  height: ''
 
   @property({
     attribute: 'disabled',
@@ -80,6 +80,10 @@ export class GdsFieldBase extends GdsElement {
       focused: this.isFocused,
     }
 
+    // min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
+    // block-size="${this.size === 'small' ? 'xl' : this.height ? '' : '3xl'}"
+    // height="${this.height}"
+
     return html`
       <gds-flex
         level="3"
@@ -87,7 +91,7 @@ export class GdsFieldBase extends GdsElement {
         align-items=${this['align-items']}
         justify-content="space-between"
         gap="${this.size === 'small' ? '2xs' : 'xs'}"
-        padding="${this['align-items']
+        padding="${this['align-items'] === 'flex-start'
           ? 's s s m'
           : this.size === 'small'
             ? 'xs s'
@@ -95,8 +99,7 @@ export class GdsFieldBase extends GdsElement {
               ? 'xs xs xs m'
               : 'xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-        block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-        height="${this.height}"
+        .height="${this.height}"
         border-radius="xs"
         .background=${this.disabled
           ? 'disabled'
@@ -191,7 +194,8 @@ export class GdsFieldBase extends GdsElement {
     return html` <gds-flex
       align-items="center"
       flex="1"
-      height=${this.height ? 'max-content' : null}
+      .height=${this.height ? 'max-content' : null}
+      overflow="hidden"
     >
       <slot
         @slotchange=${(e: Event) => this.#handleSlotChange('main', e)}

@@ -4,7 +4,6 @@ export const styles = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host {
-      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
       width: 100%;

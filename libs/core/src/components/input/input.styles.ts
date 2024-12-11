@@ -15,7 +15,6 @@ export const styles = css`
       contain: layout;
       isolation: isolate;
       gap: var(--gds-space-xs);
-      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     :host([disabled]) {

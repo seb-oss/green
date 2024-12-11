@@ -5,30 +5,22 @@ export const styles = css`
 
   @layer a11y {
     @media (prefers-reduced-motion: reduce) {
-      :host {
-        --_transition: none;
-      }
-    }
-
-    @media (prefers-reduced-transparency: reduce) {
-      :host {
-        --_transparency: 1;
+      .field {
+        transition: none;
       }
     }
   }
 
   @layer base {
-    :host {
-      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
     * {
       box-sizing: border-box;
       user-select: none;
     }
 
     .field {
-      transition: var(--_transition);
+      transition-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 368ms;
+      transition-property: background-color, border-color, outline-color;
       position: relative;
       outline-style: solid;
       outline-color: transparent;

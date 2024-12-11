@@ -169,7 +169,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       </gds-form-control-header>
 
       <gds-field-base
-        .size=${this.size}
         .disabled=${this.disabled}
         .invalid=${this.invalid}
         align-items="flex-start"
