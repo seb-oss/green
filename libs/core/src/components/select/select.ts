@@ -1,5 +1,6 @@
 import { localized } from '@lit/localize'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 
 import {
   gdsCustomElement,
@@ -34,6 +35,12 @@ export class GdsSelect extends GdsFormControlElement<string> {
   })
   disabled = false
 
+  @property({ type: Boolean })
+  private multiple = false
+
+  @property({ type: Number })
+  private selectElementSize?: number
+
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
@@ -45,6 +52,11 @@ export class GdsSelect extends GdsFormControlElement<string> {
         (node) =>
           node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
       ) as HTMLSelectElement
+
+      if (selectElement) {
+        this.multiple = selectElement.multiple
+        this.selectElementSize = selectElement.size || undefined
+      }
     }
 
     if (labelElement && selectElement) {
@@ -60,11 +72,17 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   render() {
+    const CLASSES = {
+      multiple: this.multiple,
+    }
+
     return html`
       <gds-field-base
         .size=${this.size}
         .disabled=${this.disabled}
         .invalid=${this.invalid}
+        height=${this.multiple ? 'max-content' : ''}
+        class=${classMap(CLASSES)}
       >
         ${this.#renderFieldContents()}
       </gds-field-base>
@@ -86,24 +104,30 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   #renderMainSlot() {
-    return html`
-      <label>${this.placeholder || 'Select'}</label>
-      <slot></slot>
-    `
+    if (!this.multiple) {
+      return html`
+        <label>${this.placeholder || 'Select'}</label>
+        <slot></slot>
+      `
+    } else {
+      return html` <slot></slot> `
+    }
   }
 
   #renderChevron() {
-    return html`
-      <gds-button
-        tabindex="-1"
-        size="small"
-        rank="tertiary"
-        variant="${this.invalid ? 'negative' : ''}"
-        ?disabled="${this.disabled}"
-        slot="action"
-      >
-        <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-      </gds-button>
-    `
+    if (!this.multiple) {
+      return html`
+        <gds-button
+          tabindex="-1"
+          size="small"
+          rank="tertiary"
+          variant="${this.invalid ? 'negative' : ''}"
+          ?disabled="${this.disabled}"
+          slot="action"
+        >
+          <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
+        </gds-button>
+      `
+    }
   }
 }

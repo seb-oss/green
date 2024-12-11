@@ -5,6 +5,7 @@ export const styles = css`
   @layer base {
     :host {
       min-width: 100%;
+      height: max-content;
     }
 
     ::slotted(select) {
@@ -13,11 +14,23 @@ export const styles = css`
       border: none;
       font: inherit;
       flex: 1;
+      box-sizing: border-box;
+      background: transparent;
+      height: 100%;
       opacity: 0;
       position: absolute;
       z-index: 1;
       inset: 0;
-      box-sizing: border-box;
+      line-height: 1.4;
+
+      &::-ms-expand {
+        display: none;
+      }
+    }
+
+    .multiple ::slotted(select) {
+      opacity: 1;
+      position: relative;
     }
 
     label {

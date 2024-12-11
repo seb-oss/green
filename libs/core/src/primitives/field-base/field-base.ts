@@ -22,6 +22,9 @@ export class GdsFieldBase extends GdsElement {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
+  @property({ type: String })
+  height: '3xl'
+
   @property({
     attribute: 'disabled',
     type: Boolean,
@@ -73,22 +76,24 @@ export class GdsFieldBase extends GdsElement {
       invalid: this.invalid,
       focused: this.isFocused,
     }
-    console.log('Trail slot', this.trailSlotOccupied)
 
     return html`
       <gds-flex
         level="3"
         position="relative"
-        align-items="center"
+        align-items=${this.height ? 'flex-start' : 'center'}
         justify-content="space-between"
         gap="${this.size === 'small' ? '2xs' : 'xs'}"
-        padding="${this.size === 'small'
-          ? 'xs s'
-          : !this.trailSlotOccupied || !this.actionSlotOccupied
-            ? 'xs xs xs m'
-            : 'xs m'}"
+        padding="${this.height
+          ? 's'
+          : this.size === 'small'
+            ? 'xs s'
+            : !this.trailSlotOccupied || !this.actionSlotOccupied
+              ? 'xs xs xs m'
+              : 'xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-        block-size="${this.size === 'small' ? 'xl' : '3xl'}"
+        block-size="${this.size === 'small' ? 'xl' : ''}"
+        height="${this.height}"
         border-radius="xs"
         .background=${this.disabled
           ? 'disabled'
@@ -180,7 +185,11 @@ export class GdsFieldBase extends GdsElement {
   }
 
   #renderSlotBase() {
-    return html` <gds-flex align-items="center" flex="1">
+    return html` <gds-flex
+      align-items="center"
+      flex="1"
+      height=${this.height ? 'max-content' : null}
+    >
       <slot
         @slotchange=${(e: Event) => this.#handleSlotChange('main', e)}
       ></slot>
