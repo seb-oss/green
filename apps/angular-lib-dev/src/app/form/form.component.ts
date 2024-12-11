@@ -28,17 +28,17 @@ import '@sebgroup/green-core/components/theme/index.js'
 export class FormComponent {
   constructor(private fb: NonNullableFormBuilder) {}
 
-  simpleForm = this.fb.group(
-    {
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      description: ['', Validators.required],
-      dropdown: ['', Validators.required],
-      date: [undefined as Date | undefined, Validators.required],
-    },
-    // { updateOn: 'submit' },
-  )
+  // Set up a basic reactive form using the NonNullableFormBuilder
+  simpleForm = this.fb.group({
+    name: ['', Validators.required],
+    email: ['', Validators.required],
+    description: ['', Validators.required],
+    dropdown: ['', Validators.required],
+    date: [undefined as Date | undefined, Validators.required],
+  })
 
+  // This is a helper function we can call from our template to get a sutible error message for differnt
+  // types of errors
   getError(control: AbstractControl | null) {
     if (control?.hasError('required')) return 'Field is required'
     if (control?.hasError('minlength')) return 'Field is too short'
