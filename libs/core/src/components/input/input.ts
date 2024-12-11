@@ -265,6 +265,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
+          slot="action"
         >
           <gds-icon-cross-small />
         </gds-button>

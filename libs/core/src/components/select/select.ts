@@ -75,7 +75,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
     const elements = [
       this.#renderSlotLead(),
       this.#renderMainSlot(),
-      this.#renderSlotTrail(),
+      this.#renderChevron(),
     ]
 
     return elements.map((element) => html`${element}`)
@@ -92,15 +92,15 @@ export class GdsSelect extends GdsFormControlElement<string> {
     `
   }
 
-  #renderSlotTrail() {
+  #renderChevron() {
     return html`
       <gds-button
         tabindex="-1"
-        size="${this.size === 'small' ? 'small' : ''}"
+        size="small"
         rank="tertiary"
         variant="${this.invalid ? 'negative' : ''}"
         ?disabled="${this.disabled}"
-        slot="trail"
+        slot="action"
       >
         <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
       </gds-button>

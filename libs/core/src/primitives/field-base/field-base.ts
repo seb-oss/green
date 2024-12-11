@@ -44,16 +44,27 @@ export class GdsFieldBase extends GdsElement {
   @state()
   trailSlotOccupied = false
 
+  @state()
+  actionSlotOccupied = false
+
   constructor() {
     super()
   }
 
   connectedCallback(): void {
     super.connectedCallback()
+    this.mainSlotElement.addEventListener(
+      'slotchange',
+      this.#handleSlotChange.bind(this, 'main'),
+    )
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
+    this.mainSlotElement.removeEventListener(
+      'slotchange',
+      this.#handleSlotChange.bind(this, 'main'),
+    )
   }
 
   render() {
@@ -62,11 +73,8 @@ export class GdsFieldBase extends GdsElement {
       invalid: this.invalid,
       focused: this.isFocused,
     }
+    console.log('Trail slot', this.trailSlotOccupied)
 
-    // TODO:
-    // - Add a11y attributes
-    // - Check if is invalid or disabled and apply the style
-    // border=${this.isFocused ? '4xs/primary' : '4xs/secondary'}
     return html`
       <gds-flex
         level="3"
@@ -76,7 +84,7 @@ export class GdsFieldBase extends GdsElement {
         gap="${this.size === 'small' ? '2xs' : 'xs'}"
         padding="${this.size === 'small'
           ? 'xs s'
-          : !this.trailSlotOccupied
+          : !this.trailSlotOccupied || !this.actionSlotOccupied
             ? 'xs xs xs m'
             : 'xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
@@ -102,14 +110,12 @@ export class GdsFieldBase extends GdsElement {
             ? 'negative'
             : 'tertiary'}"
       >
-        ${this.#renderSlotLead()} ${this.#renderSlotBase()}
-        ${this.#renderSlotTrail()}
+        ${this.#renderFieldContents()}
       </gds-flex>
     `
   }
 
   #handleFieldClick = () => {
-    console.log('click', this.mainSlotElement)
     const assignedElements = this.mainSlotElement.assignedElements({
       flatten: true,
     })
@@ -131,19 +137,10 @@ export class GdsFieldBase extends GdsElement {
     this.isFocused = false
   }
 
-  #handleTrailSlotChange(event: Event) {
-    const slot = event.target as HTMLSlotElement
-    const assignedNodes = slot.assignedNodes({ flatten: true })
-    this.trailSlotOccupied =
-      assignedNodes.length > 0 &&
-      assignedNodes.some(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE ||
-          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
-      )
-  }
-
-  #handleSlotChange(slotName: 'lead' | 'trail', event: Event) {
+  #handleSlotChange(
+    slotName: 'lead' | 'trail' | 'action' | 'main',
+    event: Event,
+  ) {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
     const slotOccupied =
@@ -153,12 +150,26 @@ export class GdsFieldBase extends GdsElement {
           node.nodeType === Node.ELEMENT_NODE ||
           (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
-
     if (slotName === 'lead') {
       this.leadSlotOccupied = slotOccupied
     } else if (slotName === 'trail') {
       this.trailSlotOccupied = slotOccupied
+    } else if (slotName === 'action') {
+      this.actionSlotOccupied = slotOccupied
+    } else if (slotName === 'main') {
+      // Handle main slot change if needed
     }
+  }
+
+  #renderFieldContents() {
+    const elements = [
+      this.#renderSlotLead(),
+      this.#renderSlotBase(),
+      this.#renderSlotAction(),
+      this.#renderSlotTrail(),
+    ]
+
+    return elements.map((element) => html`${element}`)
   }
 
   #renderSlotLead() {
@@ -170,8 +181,19 @@ export class GdsFieldBase extends GdsElement {
 
   #renderSlotBase() {
     return html` <gds-flex align-items="center" flex="1">
-      <slot></slot>
+      <slot
+        @slotchange=${(e: Event) => this.#handleSlotChange('main', e)}
+      ></slot>
     </gds-flex>`
+  }
+
+  #renderSlotAction() {
+    return html`
+      <slot
+        name="action"
+        @slotchange=${(e: Event) => this.#handleSlotChange('action', e)}
+      ></slot>
+    `
   }
 
   #renderSlotTrail() {
