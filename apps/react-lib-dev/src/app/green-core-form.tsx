@@ -180,6 +180,12 @@ export const GreenCoreFormExample = () => {
                 //
                 // Add the validator as a prop
                 validator={requiredValidator}
+                //
+                // If we want to react to a validation error, we can also listen to the native
+                // invalid event. Note, however, that this event only fires when the element becomes invalid,
+                // and not when it becomes valid again.
+                // (The event also needs to be registered in the wrapper, check at the top of this file)
+                onInvalid={(e) => console.log('Invalid', e)}
               />
               {/* Then we repeat the same setup for the other controls */}
               <CoreInput
