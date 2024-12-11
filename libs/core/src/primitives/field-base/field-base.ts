@@ -95,7 +95,7 @@ export class GdsFieldBase extends GdsElement {
               ? 'xs xs xs m'
               : 'xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-        block-size="${this.size === 'small' ? 'xl' : ''}"
+        block-size="${this.size === 'small' ? 'xl' : '3xl'}"
         height="${this.height}"
         border-radius="xs"
         .background=${this.disabled

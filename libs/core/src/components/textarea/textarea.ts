@@ -70,16 +70,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   supportingText = ''
 
   /**
-   * Whether the supporting text should be displayed or not.
-   */
-  @property({
-    attribute: 'show-extended-supporting-text',
-    type: Boolean,
-    reflect: true,
-  })
-  showExtendedSupportingText = false
-
-  /**
    * If the input is Disabled
    */
   @property({

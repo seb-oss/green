@@ -5,13 +5,35 @@ const style = css`
 
   @layer base {
     :host {
-      display: flex;
+      /* display: flex;
       flex-direction: column;
       color: var(--gds-color-l3-content-tertiary);
+      font-family: inherit; */
+
+      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      contain: layout;
+      isolation: isolate;
+      gap: var(--gds-space-xs);
       font-family: inherit;
     }
 
     button {
+      /* width: 100%;
+      height: 100%;
+      flex: 1;
+      appearance: none;
+      border: none;
+      background: none;
+      font: inherit;
+      outline: none; */
+      display: contents;
+      font: inherit;
+    }
+
+    /* button {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -79,9 +101,9 @@ const style = css`
       &[aria-expanded='true'] ::part(icon) {
         transform: scaleY(-1);
       }
-    }
+    } */
 
-    slot[name='trigger'] > span {
+    /* slot[name='trigger'] > span {
       display: block;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -94,7 +116,7 @@ const style = css`
       font-weight: var(--gds-text-weight-book);
       padding-block: var(--gds-space-2xs);
       font-family: inherit;
-    }
+    } */
 
     input[type='text'] {
       border-radius: var(--gds-space-xs);

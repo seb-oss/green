@@ -39,16 +39,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
-  /**
-   * Whether the supporting text should be displayed or not.
-   */
-  @property({
-    attribute: 'show-extended-supporting-text',
-    type: Boolean,
-    reflect: true,
-  })
-  showExtendedSupportingText = false
-
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
