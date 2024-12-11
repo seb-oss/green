@@ -1,7 +1,7 @@
 'use client'
 
+import { Link } from 'next-view-transitions'
 import { GdsButton, GdsFlex, GdsText } from '$/import/components'
-import Link from 'core/link'
 
 const menuItems = [
   {

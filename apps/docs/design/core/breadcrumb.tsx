@@ -1,10 +1,10 @@
 'use client'
 
 import React, { ReactNode } from 'react'
+import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { GdsFlex, GdsText } from '$/import/components'
-import Link from 'core/link'
 
 type TrailTypes = {
   home: ReactNode
@@ -46,9 +46,7 @@ const Breadcrumbs = ({ home, separator, activeClass, slug }: TrailTypes) => {
         {lastPathComponent && (
           <>
             {separator}
-            <Link href={'/'} variant="secondary">
-              {lastPathComponent?.title}
-            </Link>
+            <Link href={'/'}>{lastPathComponent?.title}</Link>
           </>
         )}
       </GdsFlex>

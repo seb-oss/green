@@ -1,5 +1,5 @@
+import { Link } from 'next-view-transitions'
 import { GdsContainer, GdsFlex, GdsText } from '$/import/components'
-import Link from 'core/link'
 
 import type { Metadata } from 'next'
 
