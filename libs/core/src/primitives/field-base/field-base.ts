@@ -1,8 +1,7 @@
-import { localized, msg } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { localized } from '@lit/localize'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
-import { GdsFormControlElement } from '../../components/form/form-control'
 import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
