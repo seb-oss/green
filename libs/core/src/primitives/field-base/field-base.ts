@@ -1,8 +1,8 @@
 import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { when } from 'lit/directives/when.js'
 
+import { GdsFormControlElement } from '../../components/form/form-control'
 import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
@@ -21,6 +21,16 @@ export class GdsFieldBase extends GdsElement {
 
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  @property({
+    attribute: 'disabled',
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
+  @property({ type: Boolean })
+  invalid?: boolean
 
   @query('slot:not([name])')
   private mainSlotElement!: HTMLSlotElement
@@ -49,19 +59,21 @@ export class GdsFieldBase extends GdsElement {
   render() {
     const CLASSES = {
       field: true,
-      // focused: this.isFocused,
+      invalid: this.invalid,
+      focused: this.isFocused,
     }
 
     // TODO:
     // - Add a11y attributes
     // - Check if is invalid or disabled and apply the style
+    // border=${this.isFocused ? '4xs/primary' : '4xs/secondary'}
     return html`
       <gds-flex
         level="3"
         position="relative"
         align-items="center"
         justify-content="space-between"
-        gap="xs"
+        gap="${this.size === 'small' ? '2xs' : 'xs'}"
         padding="${this.size === 'small'
           ? 'xs s'
           : !this.trailSlotOccupied
@@ -70,12 +82,24 @@ export class GdsFieldBase extends GdsElement {
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
         block-size="${this.size === 'small' ? 'xl' : '3xl'}"
         border-radius="xs"
-        background="secondary"
-        border=${this.isFocused ? '4xs/primary' : '4xs/secondary'}
-        @click=${this.#handleFieldClick}
+        .background=${this.disabled
+          ? 'disabled'
+          : this.invalid
+            ? 'negative-secondary'
+            : 'secondary'}
+        .border=${this.disabled
+          ? ''
+          : this.invalid
+            ? '4xs/negative'
+            : '4xs/secondary'}
         class=${classMap(CLASSES)}
+        @click=${this.#handleFieldClick}
         cursor="text"
-        color="tertiary"
+        color="${this.disabled
+          ? 'disabled'
+          : this.invalid
+            ? 'negative'
+            : 'tertiary'}"
       >
         ${this.#renderSlotLead()} ${this.#renderSlotBase()}
         ${this.#renderSlotTrail()}
