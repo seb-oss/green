@@ -4,8 +4,6 @@ export const styles = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host {
-      /* min-width: 100%;
-      height: max-content; */
       --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
       display: flex;
       flex-direction: column;
@@ -28,8 +26,6 @@ export const styles = css`
       position: absolute;
       z-index: 1;
       inset: 0;
-      line-height: 1.4;
-      font-weight: 400 !important;
 
       &::-ms-expand {
         display: none;
@@ -43,10 +39,6 @@ export const styles = css`
 
     label {
       flex: 1;
-    }
-
-    :host(:focus-within) [slot='trail'] {
-      transform: scaleY(-1);
     }
   }
 `

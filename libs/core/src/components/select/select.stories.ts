@@ -132,28 +132,6 @@ export const Validation: Story = {
     <gds-flex>
       <gds-select
         .invalid=${true}
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value === '')
-              return [
-                {
-                  ...el.validity,
-                  valid: false,
-                  customError: true,
-                },
-                'Error message.',
-              ]
-            else if (el.value.length !== 12 || isNaN(el.value))
-              return [
-                {
-                  ...el.validity,
-                  valid: false,
-                  customError: true,
-                },
-                'The value must be 12 characters long.',
-              ]
-          },
-        }}
         placeholder="Space Technologies"
         label="Label text"
         supporting-text="Supporting text"
