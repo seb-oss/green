@@ -1,0 +1,134 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Components/Form/Angular" />
+
+# Using Green Core form controls with Angular
+
+The form control component from Green Core can be used in Angular, either with just the standard Angular funntionality, or using helper directives from the Green Angular library.
+
+Let's look at `<gds-input>` as an example in this guide. The same principles apply to all form controls in Green Core.
+
+The most basic way to use a form control is to just include it in the template like this:
+
+```html
+<gds-input *nggCoreElement label="My label"></gds-input>
+```
+*Ps. Check [Get Started](/docs/get-started--docs) for details on how to import and set up the stuff you need.*
+
+Of course, this is not very useful by itself. You probably want to bind the control to a datamodel of some kind too.
+
+## Reactive forms
+
+The recommended way to use form controls in Angular is to use reactive forms. This is a way to define the form in the component code, and bind the form controls to the form model.
+
+You bind form controls to the form model by using the `formControlName` directive. Here is an example of how to use `<gds-input>` in a reactive form:
+
+```html
+<form [formGroup]="myForm">
+  <gds-input
+    *nggCoreElement
+    label="My label"
+    formControlName="myInput">
+  </gds-input>
+</form>
+```
+
+Except, in this case, Angular has no idea what a `<gds-input>` is. So this won\t actually do anything. To get around this, you could add the `ngDefaultControl` directive to tell Angular that it can just pretend that `<gds-input>` is a regular input element:
+
+```html
+<form [formGroup]="myForm">
+  <gds-input
+    *nggCoreElement
+    ngDefaultControl
+    label="My label"
+    formControlName="myInput">
+  </gds-input>
+</form>
+```
+
+Now we're talking! The form model get's updated when the input is changed, just like you would expect!
+
+### Validation
+
+Ok, great! But what about validation?
+
+Reactive form validators can be specified either in the form model, or directly in the template. Here is an example of how to add a required validator to the input:
+
+```html
+<form [formGroup]="myForm">
+  <gds-input
+    *nggCoreElement
+    ngDefaultControl
+    label="My label"
+    formControlName="myInput"
+    required>
+  </gds-input>
+</form>
+```
+
+Now the form control will be invalid if the input is empty.
+
+But hold on. Why is the error state not reflected in the rendered input?
+
+That's because the control needs to have it's `invalid` property set to `true` for the error state to be shown:
+
+```html
+<form [formGroup]="myForm">
+  <gds-input
+    *nggCoreElement
+    ngDefaultControl
+    label="My label"
+    formControlName="myInput"
+    required
+    [invalid]="myForm.get('myInput').invalid">
+  </gds-input>
+</form>
+```
+
+Finally, you may also want to display an actual error message text:
+
+```html
+<form [formGroup]="myForm">
+  <gds-input
+    *nggCoreElement
+    ngDefaultControl
+    label="My label"
+    formControlName="myInput"
+    required
+    [invalid]="myForm.get('myInput').invalid"
+    errorMessage="This field is required">
+  </gds-input>
+</form>
+```
+
+### Using NggCoreRenderer and NggCoreFormsModule
+
+As you can see, even this basic example is starting to get a bit cluttered at this point, with all the different attributes and directives. To make it a bit cleaner, you can use some helper features from Green Angular.
+
+First, you can change your module from using the NggCoreWrapperModule to using the NggCoreRendererFactory. This will automatically handle scoping, so that you can get rid of the `*nggCoreElement` directive.
+
+Secondly, you can import Green Angular's `NggCoreFormsModule`. This will add a custom controlValueAccesor to green core form controls, so that you can use them in reactive forms without the need for the `ngDefaultControl` directive. It will also handle the invalid state automatically.
+
+With these two changes, the template will look like this:
+
+```html
+<form [formGroup]="myForm">
+  <gds-input
+    label="My label"
+    formControlName="myInput"
+    required
+    errorMessage="This field is required">
+  </gds-input>
+</form>
+```
+
+Much cleaner!
+
+
+## Template-driven forms
+
+TODO
+
+## Green Core built-in validation features
+
+TODO
