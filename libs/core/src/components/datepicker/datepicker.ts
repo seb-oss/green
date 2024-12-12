@@ -29,6 +29,7 @@ import '../../components/button'
 import '../../components/dropdown'
 import '../calendar'
 import '../icon/icons/calendar'
+import '../icon/icons/calender-add'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
 import '../popover'
@@ -243,34 +244,51 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         .size=${this.size}
         .disabled=${this.disabled}
         .invalid=${this.invalid}
+        @click=${this.#handleFieldClick}
+        @copy=${this.#handleClipboardCopy}
+        @paste=${this.#handleClipboardPaste}
       >
-        <main>
-          ${join(
-            map(
-              this._dateFormatLayout.layout,
-              (f, i) =>
-                html`<gds-date-part-spinner
-                  id="spinner-${i}"
-                  class="spinner"
-                  .length=${f.token === 'y' ? 4 : 2}
-                  .value=${this.#spinnerState[f.name]}
-                  aria-valuemin=${this.#getMinSpinnerValue(f.name)}
-                  aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
-                  aria-label=${this.#getSpinnerLabel(f.name)}
-                  aria-describedby="label sub-label message"
-                  @keydown=${this.#handleSpinnerKeydown}
-                  @change=${(e: CustomEvent) =>
-                    this.#handleSpinnerChange(e.detail.value, f.name)}
-                  @focus=${this.#handleSpinnerFocus}
-                  @touchend=${(e: MouseEvent) => {
-                    this.open = true
-                    e.preventDefault()
-                  }}
-                ></gds-date-part-spinner>`,
-            ),
-            html`<span>${this._dateFormatLayout.delimiter}</span>`,
-          )}
-        </main>
+        <!-- <div> -->
+        ${join(
+          map(
+            this._dateFormatLayout.layout,
+            (f, i) =>
+              html`<gds-date-part-spinner
+                id="spinner-${i}"
+                class="spinner"
+                .length=${f.token === 'y' ? 4 : 2}
+                .value=${this.#spinnerState[f.name]}
+                aria-valuemin=${this.#getMinSpinnerValue(f.name)}
+                aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
+                aria-label=${this.#getSpinnerLabel(f.name)}
+                aria-describedby="label sub-label message"
+                @keydown=${this.#handleSpinnerKeydown}
+                @change=${(e: CustomEvent) =>
+                  this.#handleSpinnerChange(e.detail.value, f.name)}
+                @focus=${this.#handleSpinnerFocus}
+                @touchend=${(e: MouseEvent) => {
+                  this.open = true
+                  e.preventDefault()
+                }}
+              ></gds-date-part-spinner>`,
+          ),
+          html`<span>${this._dateFormatLayout.delimiter}</span>`,
+        )}
+        <!-- </div> -->
+        <gds-button
+          id="calendar-button"
+          slot="action"
+          size="small"
+          rank="tertiary"
+          aria-label="${msg('Open calendar modal')}"
+          aria-haspopup="menu"
+          aria-expanded=${this.open}
+          aria-controls="calendar-popover"
+          aria-describedby="label"
+          .disabled=${this.disabled}
+        >
+          <gds-icon-calender-add></gds-icon-calender-add>
+        </gds-button>
       </gds-field-base>
 
       <gds-form-control-footer
@@ -335,9 +353,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         </button>
       </div>
 
-      <div class="form-info" aria-live="polite" id="message">
+      <!-- <div class="form-info" aria-live="polite" id="message">
         <slot name="message">${this.validationMessage}</slot>
-      </div>
+      </div> -->
 
       <gds-popover
         .triggerRef=${this._elTrigger}
