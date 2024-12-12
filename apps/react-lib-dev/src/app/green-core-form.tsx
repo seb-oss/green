@@ -125,7 +125,7 @@ const initialFormState: FormData = {
 }
 
 // This is a simple validator that checks that the field is not empty
-// The `valiedate` function returns a tuple with a standard ValidityState object (https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) and an error message string.
+// The `validate` function returns a tuple with a standard ValidityState object (https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) and an error message string.
 // You can read more about validators here: https://storybook.seb.io/latest/core/?path=/docs/components-form-validation-documentation--docs
 const requiredValidator: GdsValidator = {
   validate: (el: GdsFormControlElement) => {
