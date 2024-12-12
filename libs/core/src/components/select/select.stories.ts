@@ -46,20 +46,20 @@ export const select: Story = {
       </span>
       <gds-icon-books slot="lead"></gds-icon-books>
       <select>
-          <optgroup label="Physics">
-            <option value="quantum-mechanics">Quantum Mechanics</option>
-            <option value="relativity">Relativity</option>
-          </optgroup>
-          <optgroup label="Chemistry">
-            <option value="organic-chemistry">Organic Chemistry</option>
-            <option value="inorganic-chemistry">Inorganic Chemistry</option>
-          </optgroup>
-          <optgroup label="Biology">
-            <option value="genetics">Genetics</option>
-            <option value="microbiology">Microbiology</option>
-            <option value="ecology">Ecology</option>
-          </optgroup>
-        </select>
+        <optgroup label="Physics">
+          <option value="quantum-mechanics">Quantum Mechanics</option>
+          <option value="relativity">Relativity</option>
+        </optgroup>
+        <optgroup label="Chemistry">
+          <option value="organic-chemistry">Organic Chemistry</option>
+          <option value="inorganic-chemistry">Inorganic Chemistry</option>
+        </optgroup>
+        <optgroup label="Biology">
+          <option value="genetics">Genetics</option>
+          <option value="microbiology">Microbiology</option>
+          <option value="ecology">Ecology</option>
+        </optgroup>
+      </select>
     `,
   },
 }

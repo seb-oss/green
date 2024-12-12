@@ -98,6 +98,25 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   label = ''
 
   /**
+   * The supporting text displayed between the label and the field itself
+   */
+  @property({ attribute: 'supporting-text' })
+  supportingText = ''
+
+  /**
+   * Whether to use the small variant of the datepicker field.
+   */
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
+  @property({
+    attribute: 'disabled',
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
+  /**
    * Whether to show a column of week numbers in the calendar.
    */
   @property({ type: Boolean, attribute: 'show-week-numbers' })
@@ -106,8 +125,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   /**
    * Whether to use the small variant of the datepicker field.
    */
-  @property()
-  size: 'small' | 'medium' = 'medium'
+  // @property()
+  // size: 'small' | 'medium' = 'medium'
 
   /**
    * Whether to hide the label above the input field.
@@ -208,12 +227,63 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   render() {
-    return html`${when(
+    return html`
+      <gds-form-control-header class="size-${this.size}">
+        <label for="input" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+        <slot
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>
+
+      <gds-field-base
+        .size=${this.size}
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
+      >
+        <main>
+          ${join(
+            map(
+              this._dateFormatLayout.layout,
+              (f, i) =>
+                html`<gds-date-part-spinner
+                  id="spinner-${i}"
+                  class="spinner"
+                  .length=${f.token === 'y' ? 4 : 2}
+                  .value=${this.#spinnerState[f.name]}
+                  aria-valuemin=${this.#getMinSpinnerValue(f.name)}
+                  aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
+                  aria-label=${this.#getSpinnerLabel(f.name)}
+                  aria-describedby="label sub-label message"
+                  @keydown=${this.#handleSpinnerKeydown}
+                  @change=${(e: CustomEvent) =>
+                    this.#handleSpinnerChange(e.detail.value, f.name)}
+                  @focus=${this.#handleSpinnerFocus}
+                  @touchend=${(e: MouseEvent) => {
+                    this.open = true
+                    e.preventDefault()
+                  }}
+                ></gds-date-part-spinner>`,
+            ),
+            html`<span>${this._dateFormatLayout.delimiter}</span>`,
+          )}
+        </main>
+      </gds-field-base>
+
+      <gds-form-control-footer
+        class="size-${this.size}"
+        .validationMessage=${this.invalid ? this.validationMessage : undefined}
+      ></gds-form-control-footer>
+
+      <!-- ${when(
         this.label && !this.hideLabel,
         () => html`<label for="spinner-0" id="label">${this.label}</label>`,
-      )}
+      )} -->
 
-      <div class="form-info" id="sub-label"><slot name="sub-label"></slot></div>
+      <!-- <div class="form-info" id="sub-label"><slot name="sub-label"></slot></div> -->
 
       <div
         class=${classMap({ field: true, small: this.size === 'small' })}
@@ -380,7 +450,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             ${msg('Today')}
           </gds-button>
         </div>
-      </gds-popover> `
+      </gds-popover>
+    `
   }
 
   protected _getValidityAnchor(): HTMLElement {

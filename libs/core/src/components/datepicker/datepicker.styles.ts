@@ -5,9 +5,13 @@ export const styles = css`
 
   @layer base {
     :host {
-      font-family: inherit;
       display: flex;
       flex-direction: column;
+      width: 100%;
+      contain: layout;
+      isolation: isolate;
+      gap: var(--gds-space-xs);
+      font-family: inherit;
     }
 
     .header {
