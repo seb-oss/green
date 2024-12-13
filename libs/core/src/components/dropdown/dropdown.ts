@@ -270,7 +270,7 @@ export class GdsDropdown<ValueT = any>
               <span> ${unsafeHTML(this.displayValue)} </span>
             </slot>
           </button>
-          <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
+          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(

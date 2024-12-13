@@ -94,9 +94,10 @@ export class GdsFieldBase extends GdsElement {
           ? 's s s m'
           : this.size === 'small'
             ? 'xs s'
-            : !this.trailSlotOccupied || !this.actionSlotOccupied
-              ? 'xs xs xs m'
-              : 'xs m'}"
+            : this.trailSlotOccupied === true ||
+                this.actionSlotOccupied === false
+              ? 'xs m'
+              : 'xs xs xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
         .height="${this.height}"
         border-radius="xs"
