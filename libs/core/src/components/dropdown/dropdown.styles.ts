@@ -57,7 +57,7 @@ const style = css`
       }
     }
 
-    [aria-expanded='true'] [slot='action'] {
+    [aria-expanded='true'] [slot='trail'] {
       transform: scaleY(-1);
     }
   }
