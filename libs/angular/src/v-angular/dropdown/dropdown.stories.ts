@@ -1,3 +1,5 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
