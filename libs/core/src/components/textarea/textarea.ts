@@ -171,7 +171,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       <gds-field-base
         .disabled=${this.disabled}
         .invalid=${this.invalid}
-        align-items="flex-start"
+        multiline
       >
         ${this.#renderFieldContents()}
         ${when(

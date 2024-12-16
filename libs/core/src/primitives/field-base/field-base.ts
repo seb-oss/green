@@ -21,11 +21,8 @@ export class GdsFieldBase extends GdsElement {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
-  @property({ type: String })
-  'align-items': 'center' | 'flex-start' = 'center'
-
-  @property({ type: String })
-  height: '' | undefined
+  @property({ type: Boolean })
+  multiline = false
 
   @property({
     attribute: 'disabled',
@@ -79,18 +76,14 @@ export class GdsFieldBase extends GdsElement {
       focused: this.isFocused,
     }
 
-    // min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-    // block-size="${this.size === 'small' ? 'xl' : this.height ? '' : '3xl'}"
-    // height="${this.height}"
-
     return html`
       <gds-flex
         level="3"
         position="relative"
-        align-items=${this['align-items']}
+        align-items=${this.multiline ? 'flex-start' : 'center'}
         justify-content="space-between"
         gap="${this.size === 'small' ? '2xs' : 'xs'}"
-        padding="${this['align-items'] === 'flex-start'
+        padding="${this.multiline
           ? 's s s m'
           : this.size === 'small'
             ? 'xs s'
@@ -99,7 +92,7 @@ export class GdsFieldBase extends GdsElement {
               ? 'xs m'
               : 'xs xs xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-        .height="${this.height}"
+        .height="${this.multiline ? 'max-content' : ''}"
         border-radius="xs"
         .background=${this.disabled
           ? 'disabled'
@@ -194,7 +187,7 @@ export class GdsFieldBase extends GdsElement {
     return html` <gds-flex
       align-items="center"
       flex="1"
-      .height=${this.height ? 'max-content' : ''}
+      .height=${this.multiline ? 'max-content' : ''}
       overflow="hidden"
     >
       <slot
