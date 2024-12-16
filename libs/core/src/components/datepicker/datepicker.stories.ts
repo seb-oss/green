@@ -43,12 +43,6 @@ const DefaultParams: Story = {
   },
   args: {
     label: 'Pick a date',
-    supportingText: 'Supporting text',
-    innherHTML: `
-      <span slot="extended-supporting-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </span>
-      <gds-icon-books slot="lead"></gds-icon-books>
-      `,
   },
 }
 
@@ -138,22 +132,6 @@ export const InputFieldSize: Story = {
       label="A small datepicker"
       hide-label
       size="small"
-    ></gds-datepicker>
-  `,
-}
-
-/**
- * Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
- */
-export const DisabledField: Story = {
-  ...DefaultParams,
-  name: 'Disabled',
-  render: (args) => html`
-    <gds-datepicker
-      label="Using min and max dates"
-      min="2022-11-11"
-      max="2024-02-20"
-      disabled
     ></gds-datepicker>
   `,
 }
