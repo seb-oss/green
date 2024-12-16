@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, state } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping.js'
+import { html } from '@sebgroup/green-core/scoping'
 
 import '@sebgroup/green-core/components/card/index.js'
 //import '@sebgroup/green-core/components/input/index.js'
@@ -39,7 +39,6 @@ export class FormValidationExample extends LitElement {
                   { ...el.validity, valid: false, customError: true },
                   'This field is required',
                 ]
-              return
             },
           }}
         ></gds-datepicker>
@@ -53,7 +52,6 @@ export class FormValidationExample extends LitElement {
                   { ...el.validity, valid: false, customError: true },
                   'Only cats are allowed!',
                 ]
-              return
             },
           }}
         >

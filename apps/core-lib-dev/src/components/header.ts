@@ -1,10 +1,10 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { gdsInitLocalization } from '@sebgroup/green-core/localization.js'
-import { html } from '@sebgroup/green-core/scoping.js'
+import { gdsInitLocalization } from '@sebgroup/green-core/localization'
+import { html } from '@sebgroup/green-core/scoping'
 
-const { setLocale } = gdsInitLocalization()
+const { setLocale, getLocale } = gdsInitLocalization()
 
 @customElement('gds-header')
 export class GdsHeader extends LitElement {
@@ -24,36 +24,20 @@ export class GdsHeader extends LitElement {
 
   render() {
     return html`
-      <style>
-        :host {
-          position: sticky;
-          top: 0;
-          z-index: 4;
-          background-color: color-mix(
-            in srgb,
-            var(--gds-color-l2-background-secondary),
-            transparent 20%
-          );
-          display: block;
-          backdrop-filter: blur(10px);
-        }
-      </style>
       <gds-flex
         align-items="stretch"
         width="100%"
         justify-content="space-between"
+        background="l1-background-primary"
         position="relative"
         height="4rem"
-        level="1"
       >
-        <gds-flex align-items="center" padding="xl">
+        <gds-container display="xs{flex} s{flex} m{flex} l{none}">
           <gds-context-menu>
             <gds-flex align-items="center" gap="s" slot="trigger">
+              Menu
               <gds-icon-bars-three></gds-icon-bars-three>
             </gds-flex>
-            <gds-menu-item @click=${() => this.handleButtonClick('theme-page')}>
-              Theme Page
-            </gds-menu-item>
             <gds-menu-item @click=${() => this.handleButtonClick('login')}>
               Login
             </gds-menu-item>
@@ -69,53 +53,42 @@ export class GdsHeader extends LitElement {
               Calendar
             </gds-menu-item>
           </gds-context-menu>
-        </gds-flex>
-        <gds-flex justify-content="space-between" width="100%">
-          <gds-flex display="none">
-            <gds-menu-button
-              @click=${() => this.handleButtonClick('onboarding')}
-            >
-              <gds-icon-bars-two></gds-icon-bars-two>
-            </gds-menu-button>
-            <gds-menu-button
-              @click=${() => this.handleButtonClick('onboarding')}
-            >
-              Onboarding
-            </gds-menu-button>
-            <gds-menu-button
-              @click=${() => this.handleButtonClick('dashboard')}
-            >
-              Dashboard
-            </gds-menu-button>
-          </gds-flex>
-          <gds-flex
-            position="absolute"
-            inset="0"
-            margin="0 auto"
-            align-items="center"
-            max-width="max-content"
+        </gds-container>
+        <gds-container display="xs{none} s{none} m{none} l{flex}">
+          <gds-menu-button @click=${() => this.handleButtonClick('login')}>
+            Login
+          </gds-menu-button>
+          <gds-menu-button
+            @click=${() => this.handleButtonClick('form-validation')}
           >
-            <gds-icon-brand-seb></gds-icon-brand-seb>
-          </gds-flex>
-          <gds-flex align-items="center" gap="l" margin="0 m 0 " display="none">
-            <gds-icon-magnifying-glass></gds-icon-magnifying-glass>
-            <gds-icon-bell></gds-icon-bell>
-            <gds-img
-              src="https://placehold.co/80x80/000000/FFFFFF/png?text=S"
-              border-radius="max"
-              width="24px"
-              height="24px"
-            ></gds-img>
-            <gds-icon-calendar></gds-icon-calendar>
-            <!-- <gds-context-menu>
-              <gds-flex align-items="center" gap="s" slot="trigger">
-                Language
-                <gds-icon-globus></gds-icon-globus>
-              </gds-flex>
-              <gds-menu-item @click=${() => setLocale('en')}>EN</gds-menu-item>
-              <gds-menu-item @click=${() => setLocale('sv')}>SV</gds-menu-item>
-            </gds-context-menu> -->
-          </gds-flex>
+            Validation
+          </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('datepicker')}>
+            Datepicker
+          </gds-menu-button>
+          <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
+            Calendar
+          </gds-menu-button>
+        </gds-container>
+        <gds-flex
+          position="2xs{relative} l{absolute}"
+          inset="auto 0"
+          margin="0 auto"
+          width="max-content"
+          height="4rem"
+          align-items="center"
+        >
+          <gds-icon-brands-seb></gds-icon-brands-seb>
+        </gds-flex>
+        <gds-flex align-items="center" margin="0 m 0 0">
+          <gds-context-menu>
+            <gds-flex align-items="center" gap="s" slot="trigger">
+              Language
+              <gds-icon-globus></gds-icon-globus>
+            </gds-flex>
+            <gds-menu-item @click=${() => setLocale('en')}>EN</gds-menu-item>
+            <gds-menu-item @click=${() => setLocale('sv')}>SV</gds-menu-item>
+          </gds-context-menu>
         </gds-flex>
       </gds-flex>
     `

@@ -1,3 +1,7 @@
 {
-  "presets": [["@nx/js/babel", { "useBuiltIns": "usage" }]]
+  "presets": [
+    "@babel/preset-typescript",
+    ["@babel/preset-env", { "targets": "defaults" }]
+  ],
+  "plugins": [["@babel/plugin-proposal-decorators", { "version": "2023-05" }]]
 }

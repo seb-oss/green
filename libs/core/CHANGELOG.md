@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.60.1
+
+### Patch Changes
+
+- d144d6b: **Icon:** Fix all icons fill from black to currentColor like the rest so it gets the content color instead
+
+## 1.60.0
+
+### Minor Changes
+
+- 87b9ce0: **Link:** Use `text-decoration` prop to enable underline style instead of variants
+
+## 1.59.1
+
+### Patch Changes
+
+- eea8929: **FAB:** Pass position to host instead of internal button
+- caa5de7: **Button:** remove `width` and remove `transition` on all props keep it specific instead and add `min-block-size` on icon button.
+- 6fa9154: **Datepicker:** Fix label line-height in transitional styles
+- 1a8e4be: **FAB:** Add default `z-index`
+
 ## 1.59.0
 
 ### Minor Changes

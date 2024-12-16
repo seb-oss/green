@@ -1,6 +1,6 @@
 <!-- LABEL -->
 <ng-container *transloco="let t; read: scope">
-  <label [id]="id + '-label'" class="hide-if-empty" [attr.for]="id + '-toggle'">
+  <label [id]="id + '-label'" class="sdv-field-label hide-if-empty" [attr.for]="id + '-toggle'">
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
     ></ng-template>
