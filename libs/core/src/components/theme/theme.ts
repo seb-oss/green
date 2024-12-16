@@ -3,7 +3,7 @@ import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import { colorV2Dark, colorV2Light, tokens } from '../../tokens.style'
+import { colorsDark, colorsLight, tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
 
@@ -48,7 +48,7 @@ export class GdsTheme extends GdsElement {
     TransitionalStyles.instance.apply(this, 'gds-theme')
     this._dynamicStylesController.inject(
       'dark',
-      unsafeCSS(`:host {${colorV2Dark}}`),
+      unsafeCSS(`:host {${colorsDark}}`),
     )
   }
 
@@ -62,12 +62,12 @@ export class GdsTheme extends GdsElement {
     if (this.colorScheme === 'dark') {
       this._dynamicStylesController.inject(
         'color-scheme',
-        unsafeCSS(`:host { ${colorV2Dark}}`),
+        unsafeCSS(`:host { ${colorsDark}}`),
       )
     } else {
       this._dynamicStylesController.inject(
         'color-scheme',
-        unsafeCSS(`:host { ${colorV2Light}}`),
+        unsafeCSS(`:host { ${colorsLight}}`),
       )
     }
 

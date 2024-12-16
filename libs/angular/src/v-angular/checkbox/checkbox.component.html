@@ -19,10 +19,16 @@
     </div>
   </div>
 
-  <!-- INPUT WRAPPER -->
-  <ng-container *ngIf="!locked">
-    <div class="sdv-field-checkbox-wrap">
-      <!-- CHECKBOX FIELD -->
+<!-- INPUT WRAPPER -->
+<ng-container *ngIf="!locked">
+  <div>
+    <!-- CHECKBOX FIELD -->
+    <label
+      [id]="id + '-label'"
+      [attr.for]="id + '-checkbox'"
+      class="form-control"
+      *transloco="let t; read: scope"
+    >
       <input
         #input
         type="checkbox"

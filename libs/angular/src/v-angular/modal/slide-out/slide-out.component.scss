@@ -1,5 +1,6 @@
 @use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
+@use '../../../../../chlorophyll/scss/components/button';
 
 :host {
   .gds-slide-out {
@@ -23,6 +24,10 @@
 
   .gds-slide-out__content {
     @include mixins.modal-body();
+  }
+
+  .modal-dialog__actions, .gds-slide-out__header, .modal-body, .gds-slide-out__content {
+    box-sizing: border-box;
   }
 
   #sdv-modal-body {
