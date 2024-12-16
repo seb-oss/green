@@ -11,8 +11,7 @@ import { styles } from './input.styles'
 
 // Local Components
 import '../../primitives/form-control-header'
-import '../../primitives/form-control-header'
-import '../../primitives/field-base'
+import '../../primitives/form-control-footer'
 import '../icon/icons/cross-small'
 import '../flex'
 import '../button'
@@ -134,21 +133,54 @@ export class GdsInput extends GdsFormControlElement<string> {
     return html`
       <gds-form-control-header class="size-${this.size}">
         <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
+        <span slot="supporting-text" id="supporting-text"
+          >${this.supportingText}</span
+        >
         <slot
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
       </gds-form-control-header>
-      <gds-field-base
-        .size=${this.size}
-        .disabled=${this.disabled}
-        .invalid=${this.invalid}
+
+      <gds-flex
+        level="3"
+        position="relative"
+        align-items="center"
+        justify-content="center"
+        gap="${this.size === 'small' ? '2xs' : 'xs'}"
+        padding="${this.size === 'small'
+          ? 'xs s'
+          : !this.trailSlotOccupied
+            ? 'xs xs xs m'
+            : 'xs m'}"
+        min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
+        block-size="${this.size === 'small' ? 'xl' : '3xl'}"
+        border-radius="xs"
+        .background=${this.disabled
+          ? 'disabled'
+          : this.invalid
+            ? 'negative-secondary'
+            : 'secondary'}
+        .border=${this.disabled
+          ? ''
+          : this.invalid
+            ? '4xs/negative'
+            : '4xs/secondary'}
+        class="field ${this.invalid ? 'invalid' : ''}"
+        @click=${this.#handleFieldClick}
+        cursor="text"
+        color="${this.disabled
+          ? 'disabled'
+          : this.invalid
+            ? 'negative'
+            : 'tertiary'}"
       >
-        ${this.#renderFieldContents()}
-      </gds-field-base>
+        ${this.#renderSlotLead()} ${this.#renderNativeInput()}
+        <gds-flex gap="xs" align-items="center">
+          ${this.#renderClearButton()} ${this.#renderSlotTrail()}
+        </gds-flex>
+      </gds-flex>
+
       <gds-form-control-footer
         class="size-${this.size}"
         .charCounter=${this.#shouldShowRemainingChars &&
@@ -197,28 +229,13 @@ export class GdsInput extends GdsFormControlElement<string> {
     )
   }
 
-  #renderFieldContents() {
-    const elements = [
-      this.#renderSlotLead(),
-      this.#renderNativeInput(),
-      this.#renderSlotAction(),
-      this.#renderSlotTrail(),
-    ]
-
-    return elements.map((element) => html`${element}`)
-  }
-
   #renderSlotLead() {
-    return html` <slot slot="lead" name="lead"></slot> `
+    return html` <slot name="lead"></slot> `
   }
 
   #renderSlotTrail() {
     return html`
-      <slot
-        slot="trail"
-        name="trail"
-        @slotchange=${this.#handleSlotChange}
-      ></slot>
+      <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
     `
   }
 
@@ -255,7 +272,7 @@ export class GdsInput extends GdsFormControlElement<string> {
     `
   }
 
-  #renderSlotAction() {
+  #renderClearButton() {
     if (this.clearable && this.value.length > 0)
       return html`
         <gds-button
@@ -265,7 +282,6 @@ export class GdsInput extends GdsFormControlElement<string> {
           ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
-          slot="action"
         >
           <gds-icon-cross-small />
         </gds-button>
