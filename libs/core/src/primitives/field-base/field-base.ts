@@ -38,9 +38,6 @@ export class GdsFieldBase extends GdsElement {
   private mainSlotElement!: HTMLSlotElement
 
   @state()
-  private isFocused = false
-
-  @state()
   leadSlotOccupied = false
 
   @state()
@@ -73,7 +70,6 @@ export class GdsFieldBase extends GdsElement {
     const CLASSES = {
       field: true,
       invalid: this.invalid ?? false,
-      focused: this.isFocused,
     }
 
     return html`
@@ -105,7 +101,6 @@ export class GdsFieldBase extends GdsElement {
             ? '4xs/negative'
             : '4xs/secondary'}
         class=${classMap(CLASSES)}
-        @click=${this.#handleFieldClick}
         cursor="text"
         pointer-events="${this.disabled ? 'none' : 'auto'}"
         color="${this.disabled
@@ -117,28 +112,6 @@ export class GdsFieldBase extends GdsElement {
         ${this.#renderFieldContents()}
       </gds-flex>
     `
-  }
-
-  #handleFieldClick = () => {
-    const assignedElements = this.mainSlotElement.assignedElements({
-      flatten: true,
-    })
-    const inputElement = assignedElements.find(
-      (node) =>
-        node instanceof HTMLInputElement ||
-        node instanceof HTMLTextAreaElement ||
-        node instanceof HTMLSelectElement,
-    ) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-
-    if (inputElement) {
-      inputElement.focus()
-      this.isFocused = true
-      inputElement.addEventListener('blur', this.#handleFieldBlur)
-    }
-  }
-
-  #handleFieldBlur = () => {
-    this.isFocused = false
   }
 
   #handleSlotChange(
