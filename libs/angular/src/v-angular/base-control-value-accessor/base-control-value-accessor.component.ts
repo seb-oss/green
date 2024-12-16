@@ -25,17 +25,9 @@ import {
   Validator,
   Validators,
 } from '@angular/forms'
-
-import {
-  Observable,
-  Subject,
-} from 'rxjs'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
+import { Observable, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
-
-import {
-  TRANSLOCO_SCOPE,
-  TranslocoScope,
-} from '@jsverse/transloco'
 
 @Injectable() // Workaround for Compodoc https://github.com/compodoc/compodoc/issues/984
 @Directive() // Required with Angular ivy compiler
@@ -118,7 +110,7 @@ export class NgvBaseControlValueAccessorComponent
       // returns true for any error that starts with required
       return Object.keys(validator ?? {}).some((key) =>
         key.startsWith('required'),
-    )
+      )
     }
 
     return
@@ -159,7 +151,7 @@ export class NgvBaseControlValueAccessorComponent
   /** The component has the disabled state, usually muting the colors and removes interaction. */
   get disabled(): boolean {
     if (this._disabled === true || this._disabled === false)
-       return this._disabled
+      return this._disabled
     return !!this.ngControl?.control?.disabled
   }
 

@@ -61,6 +61,7 @@
     [attr.placeholder]="placeholder"
     [attr.aria-label]="description"
     [value]="state"
+    title=""
     (input)="onInput($event)"
     (focus)="onFocus($event)"
     (blur)="onBlur($event)"
@@ -71,8 +72,14 @@
     <label
       class="sdv-field-notice sdv-field-notice--error"
       [attr.for]="id + '-textarea'"
-      *ngIf="invalid && (error || ngControl?.invalid)"
+      *ngIf="invalid && (error || ngControl?.invalid) && (!errorList || !errorList.length)"
     >
+    <ng-container *ngIf="withErrorIcon"
+    ><gds-icon-triangle-exclamation
+      width="16" height="16"
+      *nggCoreElement
+    ></gds-icon-triangle-exclamation>
+  </ng-container>
       <span *ngIf="error; else errorsRef">{{ error }}</span>
       <ng-template #errorsRef>
         <span *ngIf="firstError as error">

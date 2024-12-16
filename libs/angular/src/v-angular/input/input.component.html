@@ -23,7 +23,7 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="form-info description hide-if-empty">
+<div class="form-info description hide-if-empty" *ngIf="descriptionIsVisible">
   {{ description }}
 </div>
 
@@ -72,6 +72,7 @@
         [attr.maxlength]="maxlength"
         [attr.minlength]="minlength"
         [pattern]="pattern"
+        title=""
         [disabled]="disabled"
         [autocomplete]="autocomplete"
         [autofocus]="autofocus"
@@ -104,6 +105,7 @@
         [attr.aria-label]="description"
         [attr.aria-describedby]="id + '-message'"
         [nggvInputMask]="inputMask"
+        title=""
         [formControl]="control"
       />
     </div>
@@ -121,12 +123,29 @@
   >
     <span
       class="form-info form-info--error"
-      [attr.id]="id + '-message'"
-      *ngIf="invalid && (error || ngControl?.invalid)"
+      [attr.for]="id + '-input'"
+      *ngIf="
+        invalid &&
+        (error || ngControl?.invalid) &&
+        (!errorList || !errorList.length)
+      "
     >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <ng-container *ngIf="withErrorIcon"
+        ><gds-icon-triangle-exclamation
+          width="16" height="16"
+          *nggCoreElement
+        ></gds-icon-triangle-exclamation>
+      </ng-container>
+      <span
+        *ngIf="error; else errorsRef"
+        [attr.data-thook]="thook + '-errorlabel'"
+        >{{ error }}</span
+      >
       <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>

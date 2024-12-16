@@ -6,6 +6,11 @@ import {
   UntypedFormControl,
   Validators,
 } from '@angular/forms'
+
+import {
+  CharacterCountdownDirective,
+} from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
+import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import {
   applicationConfig,
   Meta,
@@ -13,8 +18,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { CharacterCountdownDirective } from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggCoreWrapperModule } from '../../lib/shared'
 import { NgvTextareaComponent } from './textarea.component'
 
 export default {
@@ -26,7 +30,7 @@ export default {
     }),
     moduleMetadata({
       declarations: [CharacterCountdownDirective],
-      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule],
+      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule, NggCoreWrapperModule],
     }),
   ],
 } as Meta
@@ -54,7 +58,8 @@ const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
         [maxlength]="maxlength"
         [rows]="rows"
         [locked]="locked"
-        [displayDisabledAsLocked]="displayDisabledAsLocked">
+        [displayDisabledAsLocked]="displayDisabledAsLocked"
+        [withErrorIcon]="withErrorIcon">
       </nggv-textarea>
       <div style="margin-top: 1rem">
         <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -83,6 +88,7 @@ WithErrorAndCountdown.args = {
   ...Primary.args,
   invalid: true,
   error: 'this is a test error',
+  withErrorIcon: true
 }
 
 export const WithFixedRows = Template.bind({})

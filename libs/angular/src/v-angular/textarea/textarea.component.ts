@@ -1,3 +1,5 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import {
   ChangeDetectorRef,
   Component,
@@ -8,9 +10,11 @@ import {
   Self,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
+import {
+  NgvBaseControlValueAccessorComponent,
+} from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({
