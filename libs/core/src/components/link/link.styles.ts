@@ -14,27 +14,21 @@ const style = css`
       display: flex;
       align-items: center;
       gap: 1ch;
-      text-decoration: underline;
+      text-decoration: none;
       text-underline-offset: 0.2lh;
       color: currentColor;
       outline-offset: 4px;
       outline-color: currentColor;
       font-weight: var(--gds-text-weight-book);
+      transition: all 0.2s ease-in-out;
 
       &:hover {
-        text-decoration: none;
-      }
+        text-decoration: underline;
+        text-underline-offset: 0.16lh;
 
-      &.secondary {
-        text-decoration: none;
-
-        &:hover {
-          text-decoration: underline;
+        &:active {
+          text-underline-offset: 0.08lh;
         }
-      }
-
-      &.hidden {
-        text-decoration: none;
       }
     }
   }
