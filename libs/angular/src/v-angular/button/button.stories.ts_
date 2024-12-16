@@ -11,8 +11,8 @@ import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/
 import { ButtonStyle, NgvButtonComponent } from './button.component'
 
 interface StoryClickable {
-  text: string
   clickAction: (event: Event) => void
+  text: string
 }
 
 const getButtonText = (type: ButtonStyle): string => {

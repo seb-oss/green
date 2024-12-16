@@ -1,8 +1,8 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
-  Component,
   ContentChild,
+  Directive,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -25,12 +25,20 @@ import {
   Validator,
   Validators,
 } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
-import { Observable, Subject } from 'rxjs'
+
+import {
+  Observable,
+  Subject,
+} from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
+import {
+  TRANSLOCO_SCOPE,
+  TranslocoScope,
+} from '@jsverse/transloco'
+
 @Injectable() // Workaround for Compodoc https://github.com/compodoc/compodoc/issues/984
-@Component({ template: '' }) // Required with Angular ivy compiler
+@Directive() // Required with Angular ivy compiler
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NgvBaseControlValueAccessorComponent
   implements AfterViewInit, OnInit, OnDestroy, ControlValueAccessor, Validator
@@ -61,8 +69,14 @@ export class NgvBaseControlValueAccessorComponent
   @Input() value: any
   /** An error string to be shown under invalid inputs. Overwrites any form errors. */
   @Input() error?: string
+  /** A list of errors string to be shown under invalid inputs. Overwrites any form errors. */
+  @Input() errorList?: string[]
+  /** Adds an icon before each error message. */
+  @Input() withErrorIcon?: boolean = false
   /** Description of the child input element. Both visibly and as `aria-label`. */
   @Input() description?: string
+  /** Determines if the label used to display the "description" text will be rendered to DOM */
+  @Input() descriptionIsVisible = true
   /** If set to true, the browser will try to automatically set focus to the child input element. */
   @Input() autofocus = false
   /** Deafult value of the child input element. Used when resetting child element. */
@@ -104,7 +118,7 @@ export class NgvBaseControlValueAccessorComponent
       // returns true for any error that starts with required
       return Object.keys(validator ?? {}).some((key) =>
         key.startsWith('required'),
-      )
+    )
     }
 
     return
@@ -145,7 +159,7 @@ export class NgvBaseControlValueAccessorComponent
   /** The component has the disabled state, usually muting the colors and removes interaction. */
   get disabled(): boolean {
     if (this._disabled === true || this._disabled === false)
-      return this._disabled
+       return this._disabled
     return !!this.ngControl?.control?.disabled
   }
 

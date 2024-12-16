@@ -1,3 +1,5 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import {
   ChangeDetectorRef,
   Component,
@@ -5,16 +7,19 @@ import {
   HostBinding,
   Inject,
   Input,
-  OnChanges,
   Optional,
   Output,
   Self,
-  SimpleChanges,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import {
+  TRANSLOCO_SCOPE,
+  TranslocoScope,
+} from '@jsverse/transloco'
+import {
+  NgvBaseControlValueAccessorComponent,
+} from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Checkboxes allow a user to toggle an option on or off, or make multiple choices in a set of available options.
