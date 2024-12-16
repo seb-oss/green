@@ -1,5 +1,7 @@
 @use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 @use '../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/scss/components/icon';
+@use '../../../../chlorophyll/scss/common';
 @use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
 @use '../../../../chlorophyll/scss/components/form/validation/mixins' as
   validation;
@@ -40,6 +42,16 @@
 
     &:hover {
       background: var(--grey-400);
+    }
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+    }
+
+    .form-info--error {
+      color: var(--intent-danger-background, #9f000a);
     }
   }
 

@@ -91,4 +91,15 @@
   .gds-dropdown__options__label[highlighted] {
     color: #fff;
   }
+
+  li + .group {
+    padding-top: 0;
+  }
+
+  .nggv-group-label {
+    cursor: pointer;
+    background-color: #e7e7e4;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+  }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -13,6 +13,7 @@ import {
 } from '@storybook/angular'
 import { debounceTime, map, Observable } from 'rxjs'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { DropdownUtils, Option } from '../core/core.utils'
 import { NgvI18nModule } from '../i18n/i18n.module'
@@ -54,11 +55,13 @@ export default {
       ],
       imports: [
         CommonModule,
+        NggCoreWrapperModule,
         FormsModule,
         ReactiveFormsModule,
         NgvI18nModule,
         NgvTypeaheadDirective,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta
@@ -207,7 +210,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
 }
 
 const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
-  const accounts = [
+  const options = [
     {
       key: 'se50000000001',
       label: null,
@@ -241,6 +244,12 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
       currency: 'EUR',
     },
   ]
+  const accounts = [
+    {
+      label: 'My own accounts',
+      options,
+    },
+  ]
   const fc = new UntypedFormControl()
   const toggleDisableField = () => {
     if (fc.disabled) return fc.enable()
@@ -256,6 +265,11 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         [formControl]="formControl"
         [locked]="locked"
         [displayDisabledAsLocked]="displayDisabledAsLocked">
+
+        <ng-template let-item #groupLabelTpl>
+          <div style="background-color: salmon; padding-left: 1rem"><pre>My custom group label</pre></div>
+        </ng-template>
+
         <ng-template let-selected #selectedTpl>
           <div *ngIf="selected?.key" class="account-option">
             <div class="account-option--label" style="font-weight: 500;">
@@ -420,6 +434,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         [resultFormatter]="resultFormatter"
         [allowUnselect]="true"
         [unselectLabel]="unselectLabel"
+        [emptyOptionLabel]="emptyOptionLabel"
         (filterPhraseChange)="handlefilterPhraseChange($event)">
 
         <ng-template let-selected #selectedTpl>
@@ -666,6 +681,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
       placeholder: 'Choose',
       allowUnselect: true,
       unselectLabel: 'Unselect',
+      emptyOptionLabel: 'No matching options',
       searchFunction: (value$: Observable<string>) =>
         value$.pipe(
           debounceTime(300),
