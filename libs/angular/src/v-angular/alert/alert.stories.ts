@@ -25,7 +25,7 @@ export default {
 
 const Template: StoryFn<AlertComponent> = (args) => ({
   template: /*html*/ `
-    <ngv-alert
+    <nggv-alert
       [type]="type"
       [title]="title"
       [body]="body"
@@ -36,7 +36,7 @@ const Template: StoryFn<AlertComponent> = (args) => ({
       (clickLink)="onLink()"
       (clickAction)="onAction()"
       >
-    ></ngv-alert>`,
+    ></nggv-alert>`,
   props: args,
 })
 
