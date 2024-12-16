@@ -22,6 +22,8 @@ import { NgvRadioModule } from './radio'
 import { NgvTextareaModule } from './textarea'
 import { NgvTooltipModule } from './tooltip'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared';
+
 @NgModule({
   declarations: [],
   imports: [CommonModule],
@@ -42,6 +44,7 @@ import { NgvTooltipModule } from './tooltip'
     NgvTextareaModule,
     NgvTooltipModule,
     NgvTypeaheadModule,
+    NggCoreWrapperModule
   ],
 })
 export class NggvModule {}

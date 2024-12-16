@@ -104,6 +104,7 @@
     "swiped-events": "^1.1.6",
     "tslib": "^2.3.1",
     "vanilla-cookieconsent": "^2.9.2",
+    "next-view-transitions": "^0.3.2",
     "webpack-inject-plugin": "^1.5.5",
     "zone.js": "0.12.0"
   },
