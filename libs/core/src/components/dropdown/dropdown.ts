@@ -150,6 +150,12 @@ export class GdsDropdown<ValueT = any>
   size: 'medium' | 'small' = 'medium'
 
   /**
+   * Whether to hide the label.
+   */
+  @property({ type: Boolean, attribute: 'hide-label' })
+  hideLabel = false
+
+  /**
    * Whether to disable the mobile styles.
    */
   @property()
@@ -230,17 +236,21 @@ export class GdsDropdown<ValueT = any>
 
   render() {
     return html`
-      <gds-form-control-header>
-        <label for="trigger" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-        <slot
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
-      </gds-form-control-header>
-
+      ${when(
+        !this.hideLabel,
+        () => html`
+          <gds-form-control-header>
+            <label for="trigger" slot="label">${this.label}</label>
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+          </gds-form-control-header>
+        `,
+      )}
       <gds-popover
         .label=${this.label}
         .open=${this.open}
@@ -297,9 +307,14 @@ export class GdsDropdown<ValueT = any>
         </gds-listbox>
       </gds-popover>
 
-      <gds-form-control-footer
-        .validationMessage=${this.invalid && this.validationMessage}
-      ></gds-form-control-footer>
+      ${when(
+        !this.hideLabel,
+        () => html`
+          <gds-form-control-footer
+            .validationMessage=${this.invalid && this.validationMessage}
+          ></gds-form-control-footer>
+        `,
+      )}
     `
   }
 
