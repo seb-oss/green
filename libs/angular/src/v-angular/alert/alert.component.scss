@@ -1,0 +1,13 @@
+@use '@sebgroup/chlorophyll/scss/components/alert-ribbon';
+@use '@sebgroup/chlorophyll/scss/components/button';
+@use '@sebgroup/chlorophyll/scss/components/close';
+
+:host {
+  .alert-container {
+    box-sizing: border-box;
+    width: 100%;
+    a {
+      cursor: pointer;
+    }
+  }
+}
