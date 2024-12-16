@@ -1,7 +1,12 @@
 import '../core/core.globals'
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  importProvidersFrom,
+} from '@angular/core'
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -10,17 +15,7 @@ import {
   Validators,
 } from '@angular/forms'
 import { RouterTestingModule } from '@angular/router/testing'
-import {
-  TranslocoLoader,
-  TranslocoModule,
-  TranslocoService,
-} from '@jsverse/transloco'
-import {
-  applicationConfig,
-  Meta,
-  moduleMetadata,
-  StoryFn,
-} from '@storybook/angular'
+
 import {
   debounceTime,
   delay,
@@ -32,15 +27,38 @@ import {
   tap,
 } from 'rxjs'
 
+import {
+  TranslocoLoader,
+  TranslocoModule,
+  TranslocoService,
+} from '@jsverse/transloco'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
+
 import { NgvButtonComponent } from '../button/button.component'
-import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
+import {
+  CharacterCountdownDirective,
+} from '../character-countdown/character-countdown.directive'
 import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
 import { DropdownUtils } from '../core/core.utils'
-import { NgvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
+import {
+  NgvDropdownListComponent,
+} from '../dropdown/dropdown-list/dropdown-list.component'
 import { NgvDropdownComponent } from '../dropdown/dropdown.component'
-import { NgvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
-import { NgvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
-import { NgvExternalLinkDirective } from '../external-link/external-link.directive'
+import {
+  NgvTypeaheadDropdownListComponent,
+} from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import {
+  NgvTypeaheadDirective,
+} from '../dropdown/typeahead/typeahead.directive'
+import {
+  NgvExternalLinkDirective,
+} from '../external-link/external-link.directive'
 import { NgvI18nModule } from '../i18n/i18n.module'
 import { NgvInfoCircleComponent } from '../info-circle/info-circle.component'
 import { createMask, NgvInputMaskModule } from '../input-mask'
@@ -106,6 +124,7 @@ const meta: Meta<NgvInputComponent> = {
         },
         DropdownUtils,
       ],
+      
     }),
     moduleMetadata({
       declarations: [
@@ -126,7 +145,9 @@ const meta: Meta<NgvInputComponent> = {
         RouterTestingModule,
         NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
         TranslocoModule,
+        NggCoreWrapperModule
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 }
@@ -167,7 +188,8 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
       [optional]="optional"
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
-      [formControl]="formControl">
+      [formControl]="formControl"
+      [withErrorIcon]="withErrorIcon">
     </nggv-input>
     <div style="margin-top: 1rem">
       <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -193,6 +215,7 @@ Primary.args = {
   optional: false,
   disabled: false,
   invalid: false,
+  withErrorIcon: true
 }
 
 export const WithFormControl = TemplateWithFormControl.bind({})
@@ -242,6 +265,7 @@ WithCustomError.args = {
   ...Primary.args,
   invalid: true,
   error: 'Validation failed on server',
+  withErrorIcon: true
 }
 
 export const WithCustomLabel = TemplateWithCustomLabel.bind({})
