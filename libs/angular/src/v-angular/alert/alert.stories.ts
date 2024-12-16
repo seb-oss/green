@@ -10,7 +10,7 @@ import { AlertComponent } from './alert.component'
 import { AlertType } from './alert.models'
 
 export default {
-  title: 'Alert/Alert',
+  title: 'V-Angular/Alert',
   component: AlertComponent,
   decorators: [
     moduleMetadata({
