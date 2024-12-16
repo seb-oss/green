@@ -248,33 +248,35 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
       >
-        <!-- <div> -->
-        ${join(
-          map(
-            this._dateFormatLayout.layout,
-            (f, i) =>
-              html`<gds-date-part-spinner
-                id="spinner-${i}"
-                class="spinner"
-                .length=${f.token === 'y' ? 4 : 2}
-                .value=${this.#spinnerState[f.name]}
-                aria-valuemin=${this.#getMinSpinnerValue(f.name)}
-                aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
-                aria-label=${this.#getSpinnerLabel(f.name)}
-                aria-describedby="label sub-label message"
-                @keydown=${this.#handleSpinnerKeydown}
-                @change=${(e: CustomEvent) =>
-                  this.#handleSpinnerChange(e.detail.value, f.name)}
-                @focus=${this.#handleSpinnerFocus}
-                @touchend=${(e: MouseEvent) => {
-                  this.open = true
-                  e.preventDefault()
-                }}
-              ></gds-date-part-spinner>`,
-          ),
-          html`<span>${this._dateFormatLayout.delimiter}</span>`,
-        )}
-        <!-- </div> -->
+        <div class="spinners">
+          ${join(
+            map(
+              this._dateFormatLayout.layout,
+              (f, i) =>
+                html`<gds-date-part-spinner
+                  id="spinner-${i}"
+                  class="spinner"
+                  .length=${f.token === 'y' ? 4 : 2}
+                  .value=${this.#spinnerState[f.name]}
+                  aria-valuemin=${this.#getMinSpinnerValue(f.name)}
+                  aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
+                  aria-label=${this.#getSpinnerLabel(f.name)}
+                  aria-describedby="label sub-label message"
+                  data-max-width=${this.#getMaxSpinnerValue(f.name).toString()
+                    .length}
+                  @keydown=${this.#handleSpinnerKeydown}
+                  @change=${(e: CustomEvent) =>
+                    this.#handleSpinnerChange(e.detail.value, f.name)}
+                  @focus=${this.#handleSpinnerFocus}
+                  @touchend=${(e: MouseEvent) => {
+                    this.open = true
+                    e.preventDefault()
+                  }}
+                ></gds-date-part-spinner>`,
+            ),
+            html`<span>${this._dateFormatLayout.delimiter}</span>`,
+          )}
+        </div>
         <gds-button
           id="calendar-button"
           slot="action"
