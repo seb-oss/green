@@ -231,7 +231,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   render() {
     return html`
       <gds-form-control-header class="size-${this.size}">
-        <label for="input" slot="label">${this.label}</label>
+        <label for="spinner-0" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
         </span>
@@ -240,7 +240,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           slot="extended-supporting-text"
         ></slot>
       </gds-form-control-header>
-
       <gds-field-base
         .size=${this.size}
         .disabled=${this.disabled}
@@ -299,67 +298,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         class="size-${this.size}"
         .validationMessage=${this.invalid ? this.validationMessage : undefined}
       ></gds-form-control-footer>
-
-      <!-- ${when(
-        this.label && !this.hideLabel,
-        () => html`<label for="spinner-0" id="label">${this.label}</label>`,
-      )} -->
-
-      <!-- <div class="form-info" id="sub-label"><slot name="sub-label"></slot></div> -->
-      <!-- 
-      <div
-        class=${classMap({ field: true, small: this.size === 'small' })}
-        id="field"
-        @click=${this.#handleFieldClick}
-        @copy=${this.#handleClipboardCopy}
-        @paste=${this.#handleClipboardPaste}
-      >
-        <div
-          class=${classMap({ input: true, 'is-placeholder': !this.value })}
-          @focusout=${this.#handleFieldFocusOut}
-        >
-          ${join(
-        map(
-          this._dateFormatLayout.layout,
-          (f, i) =>
-            html`<gds-date-part-spinner
-              id="spinner-${i}"
-              class="spinner"
-              .length=${f.token === 'y' ? 4 : 2}
-              .value=${this.#spinnerState[f.name]}
-              aria-valuemin=${this.#getMinSpinnerValue(f.name)}
-              aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
-              aria-label=${this.#getSpinnerLabel(f.name)}
-              aria-describedby="label sub-label message"
-              @keydown=${this.#handleSpinnerKeydown}
-              @change=${(e: CustomEvent) =>
-                this.#handleSpinnerChange(e.detail.value, f.name)}
-              @focus=${this.#handleSpinnerFocus}
-              @touchend=${(e: MouseEvent) => {
-                this.open = true
-                e.preventDefault()
-              }}
-            ></gds-date-part-spinner>`,
-        ),
-        html`<span>${this._dateFormatLayout.delimiter}</span>`,
-      )}
-        </div>
-        <button
-          id="calendar-button"
-          aria-label="${msg('Open calendar modal')}"
-          aria-haspopup="menu"
-          aria-expanded=${this.open}
-          aria-controls="calendar-popover"
-          aria-describedby="label"
-          size=${this.size}
-        >
-          <gds-icon-calendar></gds-icon-calendar>
-        </button>
-      </div> -->
-
-      <!-- <div class="form-info" aria-live="polite" id="message">
-        <slot name="message">${this.validationMessage}</slot>
-      </div> -->
 
       <gds-popover
         .triggerRef=${this._elTrigger}
