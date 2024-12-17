@@ -13,6 +13,8 @@ import {
   SimpleChanges,
 } from '@angular/core'
 
+import { tooltipArrowStyles, tooltipBoxStyles } from './tooltip.styles'
+
 export type Placement = 'top' | 'right' | 'bottom' | 'left'
 
 type Position = {
@@ -169,7 +171,7 @@ export class NgvTooltipDirective
   hide(destroy = false) {
     if (!this.tooltipElement) return
     if (this.parentElement.contains(this.tooltipElement)) {
-      this.renderer.removeChild(this.parentElement, this.tooltipElement);
+      this.renderer.removeChild(this.parentElement, this.tooltipElement)
     }
     if (destroy) this.destroy()
     this.shown = false
@@ -185,14 +187,18 @@ export class NgvTooltipDirective
     this.tooltipElement = this.renderer.createElement('div')
     this.renderer.addClass(this.tooltipElement, 'gds-tooltip')
     this.renderer.setAttribute(this.tooltipElement, 'data-thook', this.thook)
-    this.renderer.setAttribute(this.tooltipElement, 'role', 'tooltip');
+    this.renderer.setAttribute(this.tooltipElement, 'role', 'tooltip')
     if (this.tooltipId) {
-      this.renderer.setAttribute(this.tooltipElement, 'id', this.tooltipId);
+      this.renderer.setAttribute(this.tooltipElement, 'id', this.tooltipId)
     }
-    this.renderer.setStyle(this.tooltipElement, 'position', 'absolute')
-    this.renderer.setStyle(this.tooltipElement, 'z-index', '1040')
-    this.renderer.setStyle(this.tooltipElement, 'border-radius', '.25rem')
-    this.renderer.setStyle(this.tooltipElement, 'padding', '.5rem 1rem')
+    // set styling
+    Array.from(tooltipBoxStyles.entries()).forEach(([style, value]) => {
+      this.renderer.setStyle(this.tooltipElement, style, value)
+    })
+    // this.renderer.setStyle(this.tooltipElement, 'position', 'absolute')
+    // this.renderer.setStyle(this.tooltipElement, 'z-index', '1040')
+    // this.renderer.setStyle(this.tooltipElement, 'border-radius', '.25rem')
+    // this.renderer.setStyle(this.tooltipElement, 'padding', '.5rem 1rem')
     const relativeMaxWidth = this.pxToRem(this.maxWidth)
     this.renderer.setStyle(this.tooltipElement, 'max-width', relativeMaxWidth)
     this.renderer.appendChild(
@@ -341,6 +347,10 @@ export class NgvTooltipDirective
     Object.entries(arrow).forEach(([prop, value]) => {
       const position = this.pxToRem(value)
       this.renderer.setStyle(this.arrowElement, prop, position)
+    })
+
+    Array.from(tooltipArrowStyles.entries()).forEach(([style, value]) => {
+      this.renderer.setStyle(this.arrowElement, style, value)
     })
   }
 
