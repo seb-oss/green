@@ -51,7 +51,7 @@ p {
   border-radius: var(--gds-space-max);
   color: var(--gds-color-l3-content-primary);
   font-family: var(--gds-font-family);
-  flex: 1;
+  /* flex: 1; */
   /* Gör alla knappar lika stora */
   border: none;
   padding-block: var(--gds-space-s);
@@ -78,6 +78,8 @@ p {
 @media screen and (max-width: 640px) {
   #cc-main .cm {
     padding: var(--gds-space-xl);
+    inset: 35% 16px auto;
+    overflow: auto;
   }
 
   .cm__btn-group {
@@ -88,6 +90,8 @@ p {
 
   #cc-main .cm__btn {
     width: 100%;
+  }
+  #cc-main .cm__btn:not(:last-child) {
     margin-bottom: var(--gds-space-m);
   }
 }
@@ -100,12 +104,8 @@ p {
   }
 
   #cc-main .cm__btn-group {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  #cc-main .cm__btn {
-    flex: 1;
-    margin-right: var(--gds-space-m);
+    justify-content: start;
+    display: flex;
+    gap: var(--gds-space-m);
   }
 }
