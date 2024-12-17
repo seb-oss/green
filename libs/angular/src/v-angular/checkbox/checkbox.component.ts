@@ -5,11 +5,9 @@ import {
   HostBinding,
   Inject,
   Input,
-  OnChanges,
   Optional,
   Output,
   Self,
-  SimpleChanges,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'

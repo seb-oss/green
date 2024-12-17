@@ -110,6 +110,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           value="vanilla"
           formControlName="vanilla"
           [optional]="false"
+          [invalid]="invalid"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Vanilla 🍦</ng-template>
@@ -120,6 +121,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           value="strawberry"
           formControlName="strawberry"
           [optional]="false"
+          [invalid]="invalid"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Strawberry 🍧</ng-template>
@@ -130,6 +132,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           value="chocolate"
           formControlName="chocolate"
           [optional]="false"
+          [invalid]="invalid"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Chocolate 🍫</ng-template>
@@ -155,6 +158,7 @@ Single.args = {
   action: console.log,
   required: true,
   disabled: false,
+  invalid: false,
   locked: false,
 }
 

@@ -78,6 +78,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '1'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 1</ng-template>
     </nggv-radio>
@@ -86,6 +88,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '2'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 2</ng-template>
     </nggv-radio>
@@ -94,6 +98,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '3'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 3</ng-template>
     </nggv-radio>
@@ -114,6 +120,8 @@ Primary.args = {
   label: 'Radio label',
   name: 'radio',
   selected: 'radio2',
+  error: '',
+  invalid: false,
 }
 
 export const WithLockedInput = TemplateWithFormControl.bind({})
