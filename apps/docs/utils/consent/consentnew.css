@@ -15,7 +15,7 @@ p {
 }
 
 /* Main Consent Modal Styling */
-#cc-main {
+#cc-main .cm {
   font-family: var(--cc-font-family);
   color: var(--cc-text);
   background: var(--cc-bg);
@@ -25,6 +25,8 @@ p {
   box-shadow: var(--gds-shadow-l);
   border: 1px solid var(--gds-color-l2-border-primary);
   padding: var(--gds-space-xl, 0);
+  right: var(--gds-space-l);
+  bottom: var(--gds-space-l);
 }
 
 /* Title and Body Styling */
@@ -63,9 +65,18 @@ p {
   background-color: color-mix(in srgb, var(--gds-color-l3-background-primary), var(--gds-color-l3-states-dark-hover));
 }
 
+/* When aria-hidden="true" is set, hide the entire modal and the buttons */
+.cm[aria-hidden="true"] {
+  display: none; /* Hides the modal visually */
+}
+
+.cm[aria-hidden="true"] .cm__btns {
+  display: none; /* Hides the buttons */
+}
+
 /* Responsiveness */
 @media screen and (max-width: 640px) {
-  #cc-main {
+  #cc-main .cm {
     padding: var(--gds-space-xl);
   }
 
@@ -82,7 +93,7 @@ p {
 }
 
 @media screen and (min-width: 641px) {
-  #cc-main {
+  #cc-main .cm {
     max-width: 500px;
     border-radius: var(--gds-space-s);
     box-shadow: var(--gds-shadow-m);
