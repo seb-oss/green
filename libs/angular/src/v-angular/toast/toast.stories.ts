@@ -1,0 +1,86 @@
+import { CommonModule } from '@angular/common'
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  importProvidersFrom,
+} from '@angular/core'
+import { provideAnimations } from '@angular/platform-browser/animations'
+import {
+  applicationConfig,
+  componentWrapperDecorator,
+  Meta,
+  moduleMetadata,
+  StoryFn,
+} from '@storybook/angular'
+
+import { NggCoreWrapperModule } from '../../lib/shared'
+import { NgvI18nModule } from '../i18n'
+import { ToastComponent, ToastMessageService } from './index'
+import { MessageType } from './toast.models'
+
+@Component({
+  selector: 'nggv-toast-story',
+  template: `<nggv-toast> </nggv-toast>
+    <button (click)="addMessage(MessageType.Success, '', 'Sucesss')">
+      Success
+    </button>
+    <button
+      (click)="addMessage(MessageType.Error, '', 'Error', 'Error body text')"
+    >
+      Error
+    </button>
+    <button (click)="addMessage(MessageType.Warning, '', 'Warning')">
+      Warning
+    </button>
+    <button (click)="addMessage(MessageType.Information, '', 'Information')">
+      Information
+    </button>`,
+})
+class NgvToastStoryComponent {
+  constructor(public toastMessageService: ToastMessageService) {}
+
+  MessageType = MessageType
+
+  addMessage(
+    messageType: MessageType,
+    translocoScope: string,
+    titleText: string,
+    bodyText?: string,
+    timeout?: number,
+  ) {
+    this.toastMessageService.addMessage(
+      messageType,
+      translocoScope,
+      titleText,
+      bodyText,
+      timeout,
+    )
+  }
+}
+
+export default {
+  title: 'V-Angular/Toast',
+  component: NgvToastStoryComponent,
+  parameters: {
+    layout: 'padded',
+  },
+  decorators: [
+    applicationConfig({
+      providers: [provideAnimations(), importProvidersFrom(NgvI18nModule)],
+    }),
+    moduleMetadata({
+      declarations: [ToastComponent],
+      imports: [CommonModule, NgvI18nModule, NggCoreWrapperModule],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    }),
+    componentWrapperDecorator(
+      (story) => `<div style="height:10rem">${story}</div>`,
+    ),
+  ],
+} as Meta
+
+const Template: StoryFn<ToastComponent> = (args) => ({
+  props: args,
+})
+
+export const Primary = Template.bind({})
