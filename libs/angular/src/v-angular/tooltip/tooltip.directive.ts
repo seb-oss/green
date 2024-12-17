@@ -195,10 +195,6 @@ export class NgvTooltipDirective
     Array.from(tooltipBoxStyles.entries()).forEach(([style, value]) => {
       this.renderer.setStyle(this.tooltipElement, style, value)
     })
-    // this.renderer.setStyle(this.tooltipElement, 'position', 'absolute')
-    // this.renderer.setStyle(this.tooltipElement, 'z-index', '1040')
-    // this.renderer.setStyle(this.tooltipElement, 'border-radius', '.25rem')
-    // this.renderer.setStyle(this.tooltipElement, 'padding', '.5rem 1rem')
     const relativeMaxWidth = this.pxToRem(this.maxWidth)
     this.renderer.setStyle(this.tooltipElement, 'max-width', relativeMaxWidth)
     this.renderer.appendChild(
@@ -349,9 +345,11 @@ export class NgvTooltipDirective
       this.renderer.setStyle(this.arrowElement, prop, position)
     })
 
-    Array.from(tooltipArrowStyles.entries()).forEach(([style, value]) => {
-      this.renderer.setStyle(this.arrowElement, style, value)
-    })
+    Array.from(tooltipArrowStyles[this.placement].entries()).forEach(
+      ([style, value]) => {
+        this.renderer.setStyle(this.arrowElement, style, value)
+      },
+    )
   }
 
   private pxToRem(value: number): string {
