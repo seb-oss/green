@@ -49,7 +49,15 @@
     }
 
     .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
       color: #9f000a;
+
+      .error-icon {
+        margin-top: 0.128rem;
+        align-items: center;
+      }
     }
   }
 

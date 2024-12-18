@@ -1,6 +1,10 @@
 <!-- LABEL -->
 <ng-container *transloco="let t; read: scope">
-  <label [id]="id + '-label'" class="sdv-field-label hide-if-empty" [attr.for]="id + '-toggle'">
+  <label
+    [id]="id + '-label'"
+    class="sdv-field-label hide-if-empty"
+    [attr.for]="id + '-toggle'"
+  >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
     ></ng-template>
@@ -56,7 +60,9 @@
         aria-haspopup="listbox"
         [attr.data-thook]="thook + '-toggle'"
         [attr.aria-expanded]="expanded"
-        [attr.aria-labelledby]="ariaLabel ? null : id + '-label ' + id + '-toggle'"
+        [attr.aria-labelledby]="
+          ariaLabel ? null : id + '-label ' + id + '-toggle'
+        "
         [attr.aria-label]="ariaLabel || null"
         (click)="toggleDropdown()"
       >
@@ -90,17 +96,25 @@
         [attr.for]="id + '-input'"
         *ngIf="invalid && (error || ngControl?.invalid)"
       >
-        <gds-icon-triangle-exclamation
-          width="16"
-          height="16"
-          [solid]="true"
-          *nggCoreElement
-        ></gds-icon-triangle-exclamation>
-        <span *ngIf="error; else errorsRef" [attr.data-thook]="thook + '-errorlabel'">{{ error }}</span
+        <span class="error-icon">
+          <gds-icon-triangle-exclamation
+            width="16"
+            height="16"
+            [solid]="true"
+            *nggCoreElement
+          ></gds-icon-triangle-exclamation>
+        </span>
+        <span
+          *ngIf="error; else errorsRef"
+          [attr.data-thook]="thook + '-errorlabel'"
+          >{{ error }}</span
         >
       </span>
       <ng-template #errorsRef>
-        <span *ngIf="firstError as error" [attr.data-thook]="thook + '-errorlabel'">
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>

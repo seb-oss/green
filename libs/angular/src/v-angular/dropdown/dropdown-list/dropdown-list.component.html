@@ -25,7 +25,9 @@
         *ngIf="isGroup(item)"
       >
         <!-- group label template (default or custom) -->
-        <ng-template *ngTemplateOutlet="listGroupTemplate; context: { $implicit: item }"></ng-template>
+        <ng-template
+          *ngTemplateOutlet="listGroupTemplate; context: { $implicit: item }"
+        ></ng-template>
 
         <ul [attr.aria-disabled]="item.disabled" class="gds-reset">
           <ng-container *ngFor="let option of castGroup(item).options">
@@ -94,13 +96,17 @@
 
   <ng-template #listGroupTemplate let-item>
     <ng-container *ngIf="groupLabelTpl">
-      <ng-template *ngTemplateOutlet="groupLabelTpl; context: { $implicit: item }"></ng-template>
+      <ng-template
+        *ngTemplateOutlet="groupLabelTpl; context: { $implicit: item }"
+      ></ng-template>
     </ng-container>
     <ng-container *ngIf="!groupLabelTpl">
-      <ng-template *ngTemplateOutlet="basicGroupLabelTpl; context: { $implicit: item }"></ng-template>
+      <ng-template
+        *ngTemplateOutlet="basicGroupLabelTpl; context: { $implicit: item }"
+      ></ng-template>
     </ng-container>
   </ng-template>
-  
+
   <ng-template #basicOptionContentTpl let-option>
     <nggv-typeahead-highlight
       *ngIf="!!textToHighlight"
