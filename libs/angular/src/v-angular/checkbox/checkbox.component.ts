@@ -1,3 +1,5 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import {
   ChangeDetectorRef,
   Component,
@@ -25,7 +27,8 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
 })
 export class NgvCheckboxComponent extends NgvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'checkbox'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'checkbox'
   @Input() optionalLabel = 'Optional'
 
   @Output() readonly valueChange: EventEmitter<string> =

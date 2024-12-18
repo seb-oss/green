@@ -1,3 +1,5 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import {
   ChangeDetectorRef,
   Component,
@@ -69,7 +71,8 @@ export class NgvRadioComponent
   implements OnInit, OnDestroy
 {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'radio'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'radio'
 
   /** Syncs a FormControl in an existing FormGroup to a form control element by name. */
   @Input() formControlName?: string

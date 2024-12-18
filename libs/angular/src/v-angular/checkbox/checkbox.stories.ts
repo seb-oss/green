@@ -1,5 +1,7 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import { CommonModule } from '@angular/common'
-import { importProvidersFrom } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -14,6 +16,7 @@ import {
 } from '@storybook/angular'
 import { delay } from 'rxjs/operators'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { NgvI18nModule } from '../i18n'
 import { NgvCheckboxComponent } from './checkbox.component'
 
@@ -33,7 +36,14 @@ export default {
       providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
     }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgvI18nModule,
+        NggCoreWrapperModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta
@@ -48,6 +58,8 @@ const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
       [value]="value"
       [disabled]="disabled"
       [required]="required"
+      [invalid]="invalid"
+      [error]="error"
       [ngModel]="checked"
       (ngModelChange)="action($event)">
     </nggv-checkbox>`,
@@ -111,6 +123,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           formControlName="vanilla"
           [optional]="false"
           [invalid]="invalid"
+          [error]="error"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Vanilla 🍦</ng-template>
@@ -122,6 +135,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           formControlName="strawberry"
           [optional]="false"
           [invalid]="invalid"
+          [error]="error"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Strawberry 🍧</ng-template>
@@ -133,6 +147,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           formControlName="chocolate"
           [optional]="false"
           [invalid]="invalid"
+          [error]="error"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Chocolate 🍫</ng-template>
@@ -159,6 +174,7 @@ Single.args = {
   required: true,
   disabled: false,
   invalid: false,
+  error: '',
   locked: false,
 }
 
