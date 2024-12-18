@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Datepicker year overflow fix
+**Datepicker:** Year no longer loops around when incrementing past last available
