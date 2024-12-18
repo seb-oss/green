@@ -33,6 +33,8 @@ When transitional styles have been loaded for a component, it will apply to all 
 
 `gds-theme` gives you granual control over which parts of the application should use the 2023 design and which should use the 2016 design.
 
+***Note:** The 2016 styles expects some CSS variables from Chlorophyll to be present. In many cases, Chlorophyll is already used in the document, but in case it isn't, you can add these variables by using wrapping in `<gds-theme>`. You also need to import and register transitional styles for the gds-theme component in that case.*
+
 ## Info for library developers
 
 Transitional Styles consist of a few different parts:
