@@ -61,9 +61,9 @@ export class NgvBaseControlValueAccessorComponent
   @Input() value: any
   /** An error string to be shown under invalid inputs. Overwrites any form errors. */
   @Input() error?: string
-  /** A list of errors string to be shown under invalid inputs. Overwrites any form errors. */
+  /** @deprecated Only one error should be shown under each field. */
   @Input() errorList?: string[]
-  /** Adds an icon before each error message. */
+  /** @deprecated Icon is always added before error. */
   @Input() withErrorIcon?: boolean = false
   /** Description of the child input element. Both visibly and as `aria-label`. */
   @Input() description?: string
