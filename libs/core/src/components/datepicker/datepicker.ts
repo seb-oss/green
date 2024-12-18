@@ -426,6 +426,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   @watch('value')
   private _handleValueChange() {
+    if ((this.value as any) === '') this.value = undefined
+
     // Reset spinner state if value is unset
     if (!this.value) {
       this.#spinnerState = {
@@ -567,6 +569,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.value = e.detail
     this.open = false
     this.#dispatchChangeEvent()
+    this.#dispatchInputEvent()
   }
 
   #handleMonthChange = (e: CustomEvent) => {
@@ -684,6 +687,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.value = newDate
 
     this.#dispatchChangeEvent()
+    this.#dispatchInputEvent()
   }
 
   /**
