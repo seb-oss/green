@@ -30,7 +30,9 @@ import { css, customElement, LitElement } from 'lit'
 import { html } from '@sebgroup/green-core/scoping'
 
 // Transitional styles applies the current 2016 design language to the components
+// These two linies imports and registers the transitional styles for the button component
 import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
 
 // Import the components that you need
 import '@sebgroup/green-core/components/button/index.js'
@@ -41,9 +43,6 @@ export class MyApp extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
-
-    // Register transitional styles to get SEB's current visual design
-    ButtonStyles.register()
   }
 
   render() {
