@@ -124,18 +124,17 @@
     <span
       class="form-info form-info--error"
       [attr.for]="id + '-input'"
-      *ngIf="
-        invalid &&
-        (error || ngControl?.invalid) &&
-        (!errorList || !errorList.length)
-      "
+      *ngIf="invalid && (error || ngControl?.invalid)"
     >
-      <ng-container *ngIf="withErrorIcon"
-        ><gds-icon-triangle-exclamation
-          width="16" height="16"
+      <span class="error-icon">
+        <gds-icon-triangle-exclamation
+          width="16"
+          height="16"
+          solid="true"
           *nggCoreElement
         ></gds-icon-triangle-exclamation>
-      </ng-container>
+      </span>
+
       <span
         *ngIf="error; else errorsRef"
         [attr.data-thook]="thook + '-errorlabel'"

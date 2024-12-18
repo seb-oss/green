@@ -12,17 +12,13 @@ import {
   Self,
 } from '@angular/core'
 import { NgControl, UntypedFormControl } from '@angular/forms'
-
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { Subject } from 'rxjs'
 import { debounceTime, takeUntil } from 'rxjs/operators'
 
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
-import {
-  NgvBaseControlValueAccessorComponent,
-} from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
-import type {
-  InputmaskOptions,
-} from '@sebgroup/green-angular/src/v-angular/input-mask'
+import type { InputmaskOptions } from '@sebgroup/green-angular/src/v-angular/input-mask'
+
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Input fields allow users to add and edit text.
@@ -104,11 +100,6 @@ export class NgvInputComponent
   @Input() pattern = ''
   /** Amount of time to wait until emitting (nggvINput) event */
   @Input() debounceTime = 500
-  /**
-   * @deprecated
-   * Text to put in badge
-   */
-  @Input() badgeText = ''
 
   /** Settings for input mask if requested */
   private _inputMask!: InputmaskOptions<any>
