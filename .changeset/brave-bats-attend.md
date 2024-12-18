@@ -2,4 +2,4 @@
 '@sebgroup/green-angular': patch
 ---
 
-Angular modals custom close button label
+**Modals:** Add custom close button label
