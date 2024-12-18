@@ -1,7 +1,7 @@
 <style>
-  .gds-item.item-green-design-system {
+  .no-children {
     gap: 1ch;
-    padding: 10px 14px;
+    padding: 4px 14px;
     margin: unset;
   }
 
@@ -113,7 +113,7 @@
     padding-block: 2px;
   }
 
-  .depth-0:not(.item-green-design-system, .item-get-started) {
+  .depth-0:not(.no-children) {
     border-radius: 6px;
     padding-inline: 14px;
     padding-block: 8px;
@@ -169,8 +169,7 @@
     justify-content: flex-start;
   }
 
-  .item-green-design-system::after,
-  .item-get-started::after {
+  .no-children::after {
     display: none;
   }
 
@@ -195,7 +194,7 @@
     z-index: -1;
   }
 
-  .item-get-started {
+  #what-s-what--docs {
     margin-bottom: 14px;
   }
 </style>
