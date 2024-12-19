@@ -17,25 +17,25 @@
 <ng-container *ngIf="!locked">
   <div>
     <!-- RADIO BUTTON FIELD -->
-    <input
-      #input
-      type="radio"
-      [attr.id]="id + '-radio'"
-      [attr.name]="name"
-      [attr.value]="value"
-      [attr.required]="required"
-      [disabled]="disabled"
-      [autofocus]="autofocus"
-      [attr.aria-label]="description"
-      [checked]="state"
-      (click)="$event.stopPropagation()"
-      (change)="onInputChange($event)"
-      (focus)="onFocus($event)"
-      (blur)="onBlur($event)"
-    />
+    <label [attr.for]="id + '-radio'" class="form-control">
+      <input
+        #input
+        type="radio"
+        [attr.id]="id + '-radio'"
+        [attr.name]="name"
+        [attr.value]="value"
+        [attr.required]="required"
+        [disabled]="disabled"
+        [autofocus]="autofocus"
+        [attr.aria-label]="description"
+        [checked]="state"
+        (click)="$event.stopPropagation()"
+        (change)="onInputChange($event)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+      />
 
-    <!-- LABEL -->
-    <label [attr.for]="id + '-radio'">
+      <!-- LABEL -->
       {{ label }}
       <ng-template
         *ngTemplateOutlet="
@@ -43,46 +43,40 @@
           context: { $implicit: value }
         "
       ></ng-template>
+      <i></i>
     </label>
   </div>
 
   <!-- ERRORS -->
-  <ng-container
-    *ngIf="invalid && (error || ngControl?.invalid) && (!errorList || !errorList.length)"
-  >
-    <label class="sdv-field-notice sdv-field-notice--error"
+  <ng-container *transloco="let t; read: scope">
+    <div
+      class="form-info form-info--error"
       [attr.for]="id + '-radio'"
-      *transloco="let t; read: scope">
-      <span class="error-item">
-        <span class="error-item--icon"
-          *ngIf="withErrorIcon"><gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
-        </span>
-        <span *ngIf="error; else errorsRef"
-          class="error-item--text"
-          [attr.data-thook]="thook + '-errorlabel'">{{error}}</span>
-        <ng-template #errorsRef>
-          <span *ngIf="firstError as error"
-            class="error-item--text"
-            [attr.data-thook]="thook + '-errorlabel'">
-            {{ t('error.field' + error?.code, error?.params) }}
-          </span>
-        </ng-template>
+      *ngIf="invalid && (error || ngControl?.invalid)"
+    >
+      <span class="error-icon">
+        <gds-icon-triangle-exclamation
+          width="16"
+          height="16"
+          [solid]="true"
+          *nggCoreElement
+        ></gds-icon-triangle-exclamation>
       </span>
-    </label>
-  </ng-container>
-
-  <ng-container *ngFor="let error of (errorList ?? []); let i = index">
-    <label class="sdv-field-notice sdv-field-notice--error"
-      [attr.for]="id + '-radio'"
-      *ngIf="invalid && error">
-      <span class="error-item">
-        <span class="error-item--icon"
-          *ngIf="withErrorIcon"><gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
-        </span>
-        <span class="error-item--text"
-          [attr.data-thook]="thook + '-errorlabel-' + i">{{error}}</span>
+      <span
+        *ngIf="error; else errorsRef"
+        [attr.data-thook]="thook + '-errorlabel'"
+      >
+        {{ error }}
       </span>
-    </label>
+      <ng-template #errorsRef>
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
+          {{ t('error.field' + error?.code, error?.params) }}
+        </span>
+      </ng-template>
+    </div>
   </ng-container>
 
   <!-- CHILDREN -->
