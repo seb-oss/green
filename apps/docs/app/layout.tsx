@@ -15,6 +15,8 @@ import Header from 'core/header'
 
 import '#/global.css'
 
+import Snowflakes from 'magic-snowflakes'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,6 +29,14 @@ export default function RootLayout({
     if (storedTheme) {
       document.documentElement.setAttribute('gds-theme', storedTheme)
     }
+    new Snowflakes({
+      color: '#ffffff',
+      container: document.querySelector('body') as any,
+      count: 100,
+      maxSize: 100,
+      minOpacity: 0.3,
+      maxOpacity: 0.9,
+    })
   }, [])
 
   return (
