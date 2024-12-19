@@ -1,12 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common'
+import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
-import { Meta, moduleMetadata, StoryFn } from '@storybook/angular';
-
-import { NgvTooltipDirective } from './tooltip.directive';
+import { NgvTooltipDirective } from './tooltip.directive'
 
 export default {
-  title: 'Tooltip/Tooltip',
-  // component: TooltipDirective,
+  title: 'V-Angular/Tooltip',
   decorators: [
     moduleMetadata({
       declarations: [NgvTooltipDirective],
@@ -21,14 +19,16 @@ export default {
       },
     },
   },
-} as Meta;
+} as Meta
 
 const argsToAttr = (args: any) =>
   Object.keys(args)
     .map((attr) => `[${attr}]="${attr}"`)
-    .join(' ');
+    .join(' ')
 
-const Template: StoryFn<NgvTooltipDirective> = (args: NgvTooltipDirective) => ({
+const Template: StoryFn<NgvTooltipDirective> = (
+  args: NgvTooltipDirective & any,
+) => ({
   /* spell-checker: disable */
   template: /*html*/ `
     <p>Mauris tristique, nisi eu ultricies pellentesque, ligula neque ornare dolor, sit amet feugiat augue neque in dui.
@@ -42,52 +42,58 @@ const Template: StoryFn<NgvTooltipDirective> = (args: NgvTooltipDirective) => ({
       lorem. Nulla et ornare quam.</p>
     `,
   /* spell-checker: enable */
-  props: args,
-});
+  props: { ...args },
+})
 
-const TemplateAccessible: StoryFn<TooltipDirective> = (args: TooltipDirective) => ({
+const TemplateAccessible: StoryFn<NgvTooltipDirective> = (
+  args: NgvTooltipDirective & any,
+) => ({
   /* spell-checker: disable */
   template: /*html*/ `
   <button ${argsToAttr(args)} aria-describedby="accessible-tooltip">Hover me</button>
   `,
   /* spell-checker: enable */
-  props: args,
-});
+  props: { ...args },
+})
 
-export const Top = Template.bind({});
+export const Top = Template.bind({})
 Top.args = {
-  nggvTooltip: 'This is a tooltip with a really long text that should always be visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  nggvTooltip:
+    'This is a tooltip with a really long text that should always be visible. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   placement: 'top',
   offset: 10,
   shown: true,
   resizeThrottle: 50,
-};
+}
 
-export const Bottom = Template.bind({});
+export const Bottom = Template.bind({})
 Bottom.args = {
   ...Top.args,
   placement: 'bottom',
-};
+}
 
-export const Left = Template.bind({});
+export const Left = Template.bind({})
 Left.args = {
   ...Top.args,
-  nggvTooltip: 'This is a tooltip with a long text that should attempt to be visible',
+  nggvTooltip:
+    'This is a tooltip with a long text that should attempt to be visible',
   placement: 'left',
-};
+}
 
-export const Right = Template.bind({});
+export const Right = Template.bind({})
 Right.args = {
   ...Top.args,
-  nggvTooltip: 'This is a tooltip with a long text that should attempt to be visible',
+  nggvTooltip:
+    'This is a tooltip with a long text that should attempt to be visible',
   placement: 'right',
-};
+}
 
-export const Accessible = TemplateAccessible.bind({});
+export const Accessible = TemplateAccessible.bind({})
 Accessible.args = {
   ...Top.args,
-  nggvTooltip: 'This is a tooltip with a long text that should attempt to be visible',
+  nggvTooltip:
+    'This is a tooltip with a long text that should attempt to be visible',
   placement: 'right',
   shown: false,
   tooltipId: 'accessible-tooltip',
-};
+}
