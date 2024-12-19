@@ -1,23 +1,19 @@
 <!-- LOCKED INPUT -->
-<ng-container *transloco="let t; read: scope">
-  <div *ngIf="locked && state" class="sdv-field-checkbox-wrap">
-    <div
-      [id]="id + '-checkbox'"
-      class="nggv-field--locked"
-      [attr.name]="name"
-      [attr.value]="value"
-    >
-      <ng-container *ngIf="!labelContentTpl">
-        {{ label }}
-      </ng-container>
-      <ng-template
-        *ngTemplateOutlet="
-          labelContentTpl ?? null;
-          context: { $implicit: value }
-        "
-      ></ng-template>
-    </div>
+<div *ngIf="locked && state">
+  <div
+    [id]="id + '-checkbox'"
+    class="nggv-field--locked"
+    [attr.name]="name"
+    [attr.value]="value"
+  >
+    <ng-container *ngIf="!labelContentTpl">
+      {{ label }}
+    </ng-container>
+    <ng-template
+      *ngTemplateOutlet="labelContentTpl ?? null; context: { $implicit: value }"
+    ></ng-template>
   </div>
+</div>
 
 <!-- INPUT WRAPPER -->
 <ng-container *ngIf="!locked">
@@ -45,84 +41,60 @@
         (focus)="onFocus($event)"
         (blur)="onBlur($event)"
       />
-
       <!-- LABEL -->
-      <label [id]="id + '-label'" [attr.for]="id + '-checkbox'">
-        <ng-template
-          *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
-        ></ng-template>
-        <ng-template #basicLabelContentTpl>
-          <!-- to trigger css:empty if no label was added -->
-          <ng-container *ngIf="label">
-            {{ label }}
-            <span
-              *ngIf="
-                optional === true || (required !== true && optional !== false)
-              "
-              class="sdv-field-label--optional"
-            >
-              ({{ t('label.optional') }})
-            </span>
-          </ng-container>
-        </ng-template>
-      </label>
-    </div>
+      <ng-template
+        *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+      ></ng-template>
+      <ng-template #basicLabelContentTpl>
+        <!-- to trigger css:empty if no label was added -->
+        <ng-container *ngIf="label">
+          <span
+            *ngIf="
+              optional === true || (required !== true && optional !== false)
+            "
+            class="sdv-field-label--optional"
+          >
+            ({{ t('label.optional') }})
+          </span>
+          <span>{{ label }}</span>
+        </ng-container>
+      </ng-template>
+      <i></i>
+    </label>
+  </div>
 
-    <!-- ERRORS -->
-    <ng-container
-      *ngIf="
-        invalid &&
-        (error || ngControl?.invalid) &&
-        (!errorList || !errorList.length)
-      "
+  <!-- ERRORS -->
+  <ng-container *transloco="let t; read: scope">
+    <div
+      class="form-info form-info--error"
+      [attr.for]="id + '-checkbox'"
+      *ngIf="invalid && (error || ngControl?.invalid)"
     >
-      <label
-        class="sdv-field-notice sdv-field-notice--error"
-        [attr.for]="id + '-checkbox'"
+      <span class="error-icon">
+        <gds-icon-triangle-exclamation
+          width="16"
+          height="16"
+          [solid]="true"
+          *nggCoreElement
+        ></gds-icon-triangle-exclamation>
+      </span>
+      <span
+        *ngIf="error; else errorsRef"
+        [attr.data-thook]="thook + '-errorlabel'"
       >
-        <span class="error-item">
-          <span class="error-item--icon" *ngIf="withErrorIcon"
-            ><gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
-          </span>
-          <span
-            *ngIf="error; else errorsRef"
-            class="error-item--text"
-            [attr.data-thook]="thook + '-errorlabel'"
-            >{{ error }}</span
-          >
-          <ng-template #errorsRef>
-            <span
-              *ngIf="firstError as error"
-              class="error-item--text"
-              [attr.data-thook]="thook + '-errorlabel'"
-            >
-              {{ t('error.field' + error?.code, error?.params) }}
-            </span>
-          </ng-template>
+        {{ error }}
+      </span>
+      <ng-template #errorsRef>
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
+          {{ t('error.field' + error?.code, error?.params) }}
         </span>
-      </label>
-    </ng-container>
-
-    <ng-container *ngFor="let error of errorList ?? []; let i = index">
-      <label
-        class="sdv-field-notice sdv-field-notice--error"
-        [attr.for]="id + '-checkbox'"
-        *ngIf="invalid && error"
-      >
-        <span class="error-item">
-          <span class="error-item--icon" *ngIf="withErrorIcon"
-            ><gds-icon-triangle-exclamation></gds-icon-triangle-exclamation>
-          </span>
-          <span
-            class="error-item--text"
-            [attr.data-thook]="thook + '-errorlabel-' + i"
-            >{{ error }}</span
-          >
-        </span>
-      </label>
-    </ng-container>
-
-    <!-- CHILDREN -->
-    <ng-content></ng-content>
+      </ng-template>
+    </div>
   </ng-container>
+
+  <!-- CHILDREN -->
+  <ng-content></ng-content>
 </ng-container>
