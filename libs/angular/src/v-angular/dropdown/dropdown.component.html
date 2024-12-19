@@ -1,6 +1,10 @@
 <!-- LABEL -->
 <ng-container *transloco="let t; read: scope">
-  <label [id]="id + '-label'" class="sdv-field-label hide-if-empty" [attr.for]="id + '-toggle'">
+  <label
+    [id]="id + '-label'"
+    class="sdv-field-label hide-if-empty"
+    [attr.for]="id + '-toggle'"
+  >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
     ></ng-template>
@@ -56,7 +60,10 @@
         aria-haspopup="listbox"
         [attr.data-thook]="thook + '-toggle'"
         [attr.aria-expanded]="expanded"
-        [attr.aria-labelledby]="id + '-label ' + id + '-toggle'"
+        [attr.aria-labelledby]="
+          ariaLabel ? null : id + '-label ' + id + '-toggle'
+        "
+        [attr.aria-label]="ariaLabel || null"
         (click)="toggleDropdown()"
       >
         <ng-template
@@ -75,24 +82,43 @@
         [state]="state"
         [expanded]="expanded"
         [optionContentTpl]="optionContentTpl"
+        [groupLabelTpl]="groupLabelTpl"
         [textToHighlight]="textToHighlight"
+        (closed)="setExpanded(false)"
         (selectedValueChanged)="onSelectChange($event)"
       >
       </nggv-dropdown-list>
     </div>
     <!-- ERRORS -->
-    <label
-      class="sdv-field-notice sdv-field-notice--error"
-      [attr.for]="id + '-input'"
-      *ngIf="invalid && (error || ngControl?.invalid)"
-    >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
+    <div class="gds-form-item__footer error-wrapper">
+      <span
+        class="form-info form-info--error"
+        [attr.for]="id + '-input'"
+        *ngIf="invalid && (error || ngControl?.invalid)"
+      >
+        <span class="error-icon">
+          <gds-icon-triangle-exclamation
+            width="16"
+            height="16"
+            [solid]="true"
+            *nggCoreElement
+          ></gds-icon-triangle-exclamation>
+        </span>
+        <span
+          *ngIf="error; else errorsRef"
+          [attr.data-thook]="thook + '-errorlabel'"
+          >{{ error }}</span
+        >
+      </span>
       <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>
-    </label>
+    </div>
 
     <!-- CHILDREN -->
     <ng-content></ng-content>
