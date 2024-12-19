@@ -13,14 +13,9 @@ import {
   SimpleChanges,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import {
-  TRANSLOCO_SCOPE,
-  TranslocoScope,
-} from '@jsverse/transloco'
-import {
-  NgvBaseControlValueAccessorComponent,
-} from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 export type ButtonTypes = 'button' | 'submit' | 'reset' | 'link'
 
@@ -50,7 +45,8 @@ export class NgvButtonComponent
   implements OnInit, OnChanges
 {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'button'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'button'
   /** Type of button to one of button|submit|reset|link, where link creates an anchor tag. */
   @Input() type: ButtonTypes = 'button'
   /** Style of the button to one of Primary|Secondary|Alternative|Delete|DeleteConfirm|Ghost|GhostDark|Link. */

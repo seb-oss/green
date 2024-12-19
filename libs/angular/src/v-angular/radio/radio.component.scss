@@ -14,9 +14,29 @@
     @include common.add-form-control();
   }
 
-  .error-item {
-    @include mixins.text-field--error-item();
+  @include mixins.add-radio();
+
+  .form-info {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
   }
 
-  @include mixins.add-radio();
+  .form-info {
+    font-weight: 500;
+    padding-left: 1rem;
+    margin-top: -0.25rem;
+  }
+
+  .form-info--error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    color: #9f000a;
+
+    .error-icon {
+      margin-top: 0.128rem;
+      align-items: center;
+    }
+  }
 }

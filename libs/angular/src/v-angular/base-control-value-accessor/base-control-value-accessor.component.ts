@@ -1,8 +1,8 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
+  Component,
   ContentChild,
-  Directive,
   ElementRef,
   EventEmitter,
   HostBinding,
@@ -30,7 +30,7 @@ import { Observable, Subject } from 'rxjs'
 import { takeUntil } from 'rxjs/operators'
 
 @Injectable() // Workaround for Compodoc https://github.com/compodoc/compodoc/issues/984
-@Directive() // Required with Angular ivy compiler
+@Component({ template: '' }) // Required with Angular ivy compiler
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export class NgvBaseControlValueAccessorComponent
   implements AfterViewInit, OnInit, OnDestroy, ControlValueAccessor, Validator

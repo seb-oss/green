@@ -43,6 +43,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   @Input() scrollOffset = 24
 
   @Input() optionContentTpl: TemplateRef<OptionBase<any>> | undefined
+  @Input() groupLabelTpl: TemplateRef<OptionBase<any>> | undefined
 
   /** @internal List of references to the option elements. */
   @ViewChildren('optionRefs') optionRefs:
@@ -58,6 +59,13 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   @Input() options!: any[]
 
   @Input() textToHighlight?: string
+
+  /**
+   * Used to control if "selectedValueChanged" only should emit distinct changes, or each time a value is selected
+   * When true, value is not emitted if there's no distinct change
+   * When false, value is emitted every time an option is selected
+   * */
+  @Input() onlyEmitDistinctChanges = true
 
   @Output() selectedValueChanged = new EventEmitter<any>()
 
@@ -111,9 +119,15 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   updateState(option: any, event: Event) {
     if (option.disabled) return
 
-    this.selectedValue = option
-    this.state = option
-    this.selectedValueChanged.emit(option)
+    if (
+      !this.onlyEmitDistinctChanges ||
+      !this.dropdownUtils.deepEqual(this.selectedValue, option)
+    ) {
+      this.selectedValue = option
+      this.state = option
+      this.selectedValueChanged.emit(option)
+    }
+
     this.setExpanded(false)
     event.stopPropagation()
   }
@@ -217,10 +231,12 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
     let option
 
     switch (event.key) {
+      case 'Tab':
       case 'Escape':
         this.setExpanded(false)
         this.closed.emit()
         break
+      case 'Space': // Select the currently chosen value
       case 'Enter': // Select the currently chosen value
         option = options[this.activeIndex]
         this.updateState(option, event)

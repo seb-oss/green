@@ -13,14 +13,9 @@ import {
   Self,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import {
-  TRANSLOCO_SCOPE,
-  TranslocoScope,
-} from '@jsverse/transloco'
-import {
-  NgvBaseControlValueAccessorComponent,
-} from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /** @internal Internal class used to uncheck radio buttons with the matching name. */
 @Injectable()
@@ -76,7 +71,8 @@ export class NgvRadioComponent
   implements OnInit, OnDestroy
 {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'radio'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'radio'
 
   /** Syncs a FormControl in an existing FormGroup to a form control element by name. */
   @Input() formControlName?: string
