@@ -44,7 +44,7 @@ import { NgvButtonComponent } from '../button/button.component'
 import {
   CharacterCountdownDirective,
 } from '../character-countdown/character-countdown.directive'
-// import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
+import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
 import { DropdownUtils } from '../core/core.utils'
 import {
   NgvDropdownListComponent,
@@ -132,7 +132,7 @@ const meta: Meta<NgvInputComponent> = {
         NgvDropdownComponent,
         NgvDropdownListComponent,
         NgvTypeaheadDropdownListComponent,
-        // NgvCheckboxComponent,
+        NgvCheckboxComponent,
         NgvTooltipDirective,
         NgvInfoCircleComponent,
         CharacterCountdownDirective,
@@ -297,7 +297,7 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
     description="Default"
     [invalid]="invalid">
   </nggv-input>
-  <!--<nggv-input label="Prefix"
+  <nggv-input label="Prefix"
     type="text"
     description="Prefix with checkbox"
     [invalid]="invalid">
@@ -306,7 +306,7 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
       label="Selected"
       [value]="true">
     </nggv-checkbox>
-  </nggv-input> -->
+  </nggv-input>
 
   <nggv-input label="Suffix"
     type="text"
