@@ -61,8 +61,14 @@ export class NgvBaseControlValueAccessorComponent
   @Input() value: any
   /** An error string to be shown under invalid inputs. Overwrites any form errors. */
   @Input() error?: string
+  /** @deprecated Only one error should be shown under each field. */
+  @Input() errorList?: string[]
+  /** @deprecated Icon is always added before error. */
+  @Input() withErrorIcon?: boolean = false
   /** Description of the child input element. Both visibly and as `aria-label`. */
   @Input() description?: string
+  /** Determines if the label used to display the "description" text will be rendered to DOM */
+  @Input() descriptionIsVisible = true
   /** If set to true, the browser will try to automatically set focus to the child input element. */
   @Input() autofocus = false
   /** Deafult value of the child input element. Used when resetting child element. */

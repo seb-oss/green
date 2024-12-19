@@ -15,6 +15,7 @@ import {
 
 import { CharacterCountdownDirective } from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggCoreWrapperModule } from '../../lib/shared'
 import { NgvTextareaComponent } from './textarea.component'
 
 export default {
@@ -26,7 +27,13 @@ export default {
     }),
     moduleMetadata({
       declarations: [CharacterCountdownDirective],
-      imports: [CommonModule, FormsModule, NgvI18nModule, ReactiveFormsModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        NgvI18nModule,
+        ReactiveFormsModule,
+        NggCoreWrapperModule,
+      ],
     }),
   ],
 } as Meta
@@ -49,7 +56,9 @@ const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
       <nggv-textarea
         [formControl]="formControl"
         [label]="label"
+        [description]="description"
         [invalid]="invalid"
+        [error]="error"
         [placeholder]="placeholder"
         [maxlength]="maxlength"
         [rows]="rows"
@@ -81,6 +90,7 @@ Primary.args = {
 export const WithErrorAndCountdown = Template.bind({})
 WithErrorAndCountdown.args = {
   ...Primary.args,
+  description: 'This is a field description',
   invalid: true,
   error: 'this is a test error',
 }

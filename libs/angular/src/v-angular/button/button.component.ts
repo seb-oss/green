@@ -4,7 +4,6 @@ import {
   EventEmitter,
   HostBinding,
   Inject,
-  InjectionToken,
   Input,
   OnChanges,
   OnInit,
@@ -46,7 +45,8 @@ export class NgvButtonComponent
   implements OnInit, OnChanges
 {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'button'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'button'
   /** Type of button to one of button|submit|reset|link, where link creates an anchor tag. */
   @Input() type: ButtonTypes = 'button'
   /** Style of the button to one of Primary|Secondary|Alternative|Delete|DeleteConfirm|Ghost|GhostDark|Link. */
