@@ -13,6 +13,10 @@
   bottom: var(--gds-space-l);
   padding: var(--gds-space-xl);
   inset: 35% 8px auto;
+  transition: translate 0.3s ease;
+  @starting-style {
+    translate: 0 -40px;
+  }
 
 }
 
@@ -21,9 +25,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999; /* Ensure it's above other elements */
   inset: 0;
-  /* @starting-style {
-    background-color: ;
-  } */
+  transition: opacity 0.3s ease;
+  @starting-style {
+    opacity: 0;
+  }
 }
 
 .cm__btn-group {
