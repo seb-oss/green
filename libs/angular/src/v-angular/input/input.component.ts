@@ -100,11 +100,6 @@ export class NgvInputComponent
   @Input() pattern = ''
   /** Amount of time to wait until emitting (nggvINput) event */
   @Input() debounceTime = 500
-  /**
-   * @deprecated
-   * Text to put in badge
-   */
-  @Input() badgeText = ''
 
   /** Settings for input mask if requested */
   private _inputMask!: InputmaskOptions<any>

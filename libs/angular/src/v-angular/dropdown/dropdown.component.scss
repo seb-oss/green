@@ -39,7 +39,25 @@
     }
 
     &:hover {
-      background: var(--grey-400);
+      background: #e7e7e7;
+    }
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+    }
+
+    .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        margin-top: 0.128rem;
+        align-items: center;
+      }
     }
   }
 
