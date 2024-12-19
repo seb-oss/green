@@ -100,6 +100,10 @@
         background-color: #f8f8f8 !important;
         color: #adadad;
       }
+
+      @media (max-width: 35.98em) {
+        min-width: initial;
+      }
     }
 
     input[type='text'] {

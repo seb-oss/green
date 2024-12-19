@@ -3,6 +3,8 @@
 @use '../../../../../chlorophyll/scss/components/button';
 
 :host {
+  --sg-border-radius: 4px;
+  --sg-modal-background: #fff;
   .gds-slide-out {
     @include mixins.modal();
     @include mixins.aside-modal();
@@ -26,7 +28,10 @@
     @include mixins.modal-body();
   }
 
-  .modal-dialog__actions, .gds-slide-out__header, .modal-body, .gds-slide-out__content {
+  .modal-dialog__actions,
+  .gds-slide-out__header,
+  .modal-body,
+  .gds-slide-out__content {
     box-sizing: border-box;
   }
 

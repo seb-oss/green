@@ -30,7 +30,7 @@ const routes = [
 ]
 
 export default {
-  title: 'Tab/Horizontal',
+  title: 'V-Angular/Tabs',
   component: TabsComponent,
   parameters: {
     layout: 'padded',

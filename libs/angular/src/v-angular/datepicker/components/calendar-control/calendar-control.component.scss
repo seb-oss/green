@@ -57,5 +57,9 @@
     &:hover {
       background-color: #e9e9e9;
     }
+
+    @media (max-width: 35.98em) {
+      min-width: initial;
+    }
   }
 }
