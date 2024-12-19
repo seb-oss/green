@@ -22,7 +22,7 @@ const pluginConfig = {
           description:
             'Hi, this website uses essential cookies to ensure its proper operation and tracking cookies to understand how you interact with it. The latter will be set only after consent.',
           acceptAllBtn: 'Accept all',
-          acceptNecessaryBtn: 'Reject all',
+          acceptNecessaryBtn: 'Accept only necessary',
         },
         preferencesModal: {
           title: 'Manage cookie preferences',
