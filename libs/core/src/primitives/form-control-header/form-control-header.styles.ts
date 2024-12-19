@@ -29,7 +29,9 @@ export const styles = css`
 
     #extended-supporting-text {
       opacity: 1;
-      transition: var(--_transition);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      transition-duration: 368ms;
+      transition-property: all;
       font-size: var(--gds-text-size-body-s);
       line-height: var(--gds-text-line-height-body-s);
       border-radius: var(--gds-space-xs);

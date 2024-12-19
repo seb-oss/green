@@ -25,10 +25,12 @@ import type { GdsCalendar } from '../calendar'
 import type { GdsPopover } from '../popover'
 import type { GdsDatePartSpinner } from './date-part-spinner'
 
+import '../../components/flex'
 import '../../components/button'
 import '../../components/dropdown'
 import '../calendar'
 import '../icon/icons/calendar'
+import '../icon/icons/calender-add'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
 import '../popover'
@@ -98,6 +100,25 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   label = ''
 
   /**
+   * The supporting text displayed between the label and the field itself
+   */
+  @property({ attribute: 'supporting-text' })
+  supportingText = ''
+
+  /**
+   * Whether to use the small variant of the datepicker field.
+   */
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
+  @property({
+    attribute: 'disabled',
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
+  /**
    * Whether to show a column of week numbers in the calendar.
    */
   @property({ type: Boolean, attribute: 'show-week-numbers' })
@@ -106,8 +127,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   /**
    * Whether to use the small variant of the datepicker field.
    */
-  @property()
-  size: 'small' | 'medium' = 'medium'
+  // @property()
+  // size: 'small' | 'medium' = 'medium'
 
   /**
    * Whether to hide the label above the input field.
@@ -191,7 +212,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#calendar-button')
   private _elTrigger!: Promise<HTMLButtonElement>
 
-  @queryAsync('#field')
+  @queryAsync('#date-picker')
   private _elField!: Promise<HTMLDivElement>
 
   @queryAll('[role=spinbutton]')
@@ -208,24 +229,27 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   render() {
-    return html`${when(
-        this.label && !this.hideLabel,
-        () => html`<label for="spinner-0" id="label">${this.label}</label>`,
-      )}
-
-      <div class="form-info" id="sub-label"><slot name="sub-label"></slot></div>
-
-      <div
-        class=${classMap({ field: true, small: this.size === 'small' })}
-        id="field"
+    return html`
+      <gds-form-control-header class="size-${this.size}">
+        <label for="spinner-0" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+        <slot
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>
+      <gds-field-base
+        .size=${this.size}
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
+        id="date-picker"
       >
-        <div
-          class=${classMap({ input: true, 'is-placeholder': !this.value })}
-          @focusout=${this.#handleFieldFocusOut}
-        >
+        <div class="spinners">
           ${join(
             map(
               this._dateFormatLayout.layout,
@@ -239,6 +263,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
                   aria-describedby="label sub-label message"
+                  data-max-width=${this.#getMaxSpinnerValue(f.name).toString()
+                    .length}
                   @keydown=${this.#handleSpinnerKeydown}
                   @change=${(e: CustomEvent) =>
                     this.#handleSpinnerChange(e.detail.value, f.name)}
@@ -252,22 +278,26 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             html`<span>${this._dateFormatLayout.delimiter}</span>`,
           )}
         </div>
-        <button
+        <gds-button
           id="calendar-button"
+          slot="action"
+          size="small"
+          rank="tertiary"
           aria-label="${msg('Open calendar modal')}"
           aria-haspopup="menu"
           aria-expanded=${this.open}
           aria-controls="calendar-popover"
           aria-describedby="label"
-          size=${this.size}
+          .disabled=${this.disabled}
         >
-          <gds-icon-calendar></gds-icon-calendar>
-        </button>
-      </div>
+          <gds-icon-calender-add></gds-icon-calender-add>
+        </gds-button>
+      </gds-field-base>
 
-      <div class="form-info" aria-live="polite" id="message">
-        <slot name="message">${this.validationMessage}</slot>
-      </div>
+      <gds-form-control-footer
+        class="size-${this.size}"
+        .validationMessage=${this.invalid ? this.validationMessage : undefined}
+      ></gds-form-control-footer>
 
       <gds-popover
         .triggerRef=${this._elTrigger}
@@ -285,7 +315,12 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           this._elCalendar.then((cal) => cal.focus())
         }}
       >
-        <div class="header">
+        <gds-flex
+          align-items="center"
+          justify-content="space-between"
+          gap="s"
+          padding="m m 0 m"
+        >
           <gds-button
             @click=${this.#handleDecrementFocusedMonth}
             aria-label=${msg('Previous month')}
@@ -339,7 +374,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           >
             <gds-icon-chevron-right></gds-icon-chevron-right>
           </gds-button>
-        </div>
+        </gds-flex>
 
         <gds-calendar
           id="calendar"
@@ -355,7 +390,11 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           .disabledDates=${this.disabledDates}
         ></gds-calendar>
 
-        <div class="footer">
+        <gds-flex
+          align-items="center"
+          justify-content="space-between"
+          padding="0 m m m"
+        >
           <gds-button
             rank="tertiary"
             size="small"
@@ -379,8 +418,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           >
             ${msg('Today')}
           </gds-button>
-        </div>
-      </gds-popover> `
+        </gds-flex>
+      </gds-popover>
+    `
   }
 
   protected _getValidityAnchor(): HTMLElement {
