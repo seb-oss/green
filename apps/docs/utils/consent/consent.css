@@ -16,6 +16,16 @@
 
 }
 
+.show--consent .cm-wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999; /* Ensure it's above other elements */
+  inset: 0;
+  /* @starting-style {
+    background-color: ;
+  } */
+}
+
 .cm__btn-group {
   flex-direction: column;
   gap: var(--gds-space-m);
