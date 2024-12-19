@@ -1,3 +1,5 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import {
   ChangeDetectorRef,
   Component,
@@ -45,11 +47,14 @@ export class NgvDropdownComponent<
   extends NgvBaseControlValueAccessorComponent
   implements OnDestroy, OnChanges
 {
-  /** Custom template for displaying selected option. */
+  /** Custom template for displaying options and groups. */
   @ContentChild('selectedTpl', { read: TemplateRef }) selectedContentTpl:
     | TemplateRef<OptionBase<T>>
     | undefined
   @ContentChild('optionTpl', { read: TemplateRef }) optionContentTpl:
+    | TemplateRef<OptionBase<any>>
+    | undefined
+  @ContentChild('groupLabelTpl', { read: TemplateRef }) groupLabelTpl:
     | TemplateRef<OptionBase<any>>
     | undefined
 
@@ -58,6 +63,8 @@ export class NgvDropdownComponent<
 
   /** Text shown before an option is selected. */
   @Input() placeholder?: string
+  /** Specific value for aria-label. If not provided, label/labelTpl will be used. */
+  @Input() ariaLabel?: string
   /** List of {@link Option} and {@link OptionGroup} listed when dropdown is expanded. */
   @Input() set options(value: OptionBase<T>[]) {
     // update options

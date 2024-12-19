@@ -1,5 +1,7 @@
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import { CommonModule } from '@angular/common'
-import { importProvidersFrom } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   applicationConfig,
@@ -8,6 +10,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NgvRadioComponent } from './radio.component'
 
@@ -25,7 +28,14 @@ export default {
       providers: [importProvidersFrom(NgvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgvI18nModule,
+        NggCoreWrapperModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta<NgvRadioComponent>
@@ -78,6 +88,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '1'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 1</ng-template>
     </nggv-radio>
@@ -86,6 +98,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '2'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 2</ng-template>
     </nggv-radio>
@@ -94,6 +108,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '3'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 3</ng-template>
     </nggv-radio>
@@ -114,6 +130,8 @@ Primary.args = {
   label: 'Radio label',
   name: 'radio',
   selected: 'radio2',
+  error: '',
+  invalid: false,
 }
 
 export const WithLockedInput = TemplateWithFormControl.bind({})
