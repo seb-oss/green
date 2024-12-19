@@ -7,9 +7,3 @@
  */
 
 /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
-
-/**
- * @license Angular v17.3.12
- * (c) 2010-2024 Google LLC. https://angular.io/
- * License: MIT
- */
