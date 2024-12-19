@@ -175,8 +175,7 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
       [optional]="optional"
       [locked]="locked"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
-      [formControl]="formControl"
-      [withErrorIcon]="withErrorIcon">
+      [formControl]="formControl">
     </nggv-input>
     <div style="margin-top: 1rem">
       <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
@@ -202,7 +201,6 @@ Primary.args = {
   optional: false,
   disabled: false,
   invalid: false,
-  withErrorIcon: true,
 }
 
 export const WithFormControl = TemplateWithFormControl.bind({})
@@ -240,11 +238,10 @@ const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
 export const WithCustomErrorAndCountdown = TemplateWithError.bind({})
 WithCustomErrorAndCountdown.args = {
   ...Primary.args,
-  maxlength: 25,
+  maxLength: 25,
   showCharacterCountdown: true,
   invalid: true,
   error: 'this is an error message',
-  badgeText: 'SEB',
 }
 
 export const WithCustomError = TemplateWithError.bind({})
@@ -252,7 +249,6 @@ WithCustomError.args = {
   ...Primary.args,
   invalid: true,
   error: 'Validation failed on server',
-  withErrorIcon: true,
 }
 
 export const WithCustomLabel = TemplateWithCustomLabel.bind({})
