@@ -28,13 +28,13 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
+const Template: StoryFn<NgvFoldOutComponent> = (args: any) => ({
   template: /* html */ `
   <div class="story-wrapper">
     <nggv-fold-out [alignOptions]="alignOptions">
       <div nggvOption>View details</div>
       <div nggvOption>Sign payment</div>
-      <div nggvOption>Delete</div>
+      <div nggvOption class="delete-option">Delete</div>
     </nggv-fold-out>
   </div>`,
   styleUrls: ['./fold-out.stories.scss'],
@@ -42,19 +42,32 @@ const Template: StoryFn<NgvFoldOutComponent> = (args: NgvFoldOutComponent) => ({
 })
 
 const TemplateAlt: StoryFn<NgvFoldOutComponent> = (
-  args: NgvFoldOutComponent,
+  args: any,
 ) => ({
   template: /* html */ `
     <div class="story-wrapper--right-align">
       <nggv-fold-out [alignOptions]="alignOptions">
         <div nggvOption>View details</div>
         <div nggvOption>Sign payment</div>
-        <div nggvOption>Delete</div>
+        <div nggvOption class="delete-option">Delete</div>
       </nggv-fold-out>
     </div>`,
   styleUrls: ['./fold-out.stories.scss'],
   props: args,
 })
+
+const TemplateWithText: StoryFn<NgvFoldOutComponent> = (args: any) => ({
+  template: /* html */ `
+  <div class="story-wrapper">
+      <nggv-fold-out [text]="text">
+        <div nggvOption>View details</div>
+        <div nggvOption>Sign payment</div>
+        <div nggvOption class="delete-option">Delete</div>
+      </nggv-fold-out>
+    </div>`,
+  styleUrls: ['./fold-out.stories.scss'],
+  props: args,
+});
 
 export const Primary = Template.bind({})
 Primary.args = {
@@ -71,3 +84,11 @@ Alternative.args = {
 Alternative.parameters = {
   docs: { source: { code: exampleAlt } },
 }
+
+export const WithText = TemplateWithText.bind({});
+WithText.args = {
+  text: 'More',
+};
+WithText.parameters = {
+  docs: { source: { code: exampleAlt } },
+};

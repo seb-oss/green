@@ -7,6 +7,7 @@ import {
   Input,
   OnInit,
   Output,
+  Renderer2,
   ViewChild,
 } from '@angular/core'
 
@@ -27,11 +28,23 @@ export class NgvDialogComponent implements OnInit {
   @ViewChild('dialog') dialogRef: ElementRef | undefined
 
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'dialog'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'dialog'
   /** @internal */
   @HostBinding('class.sdv-modal-dialog') baseClass = true
   /** @internal Defines the default visibility state of the dialog. */
-  @HostBinding('class.-active') @Input() shown = false
+  @HostBinding('class.-active') _shown = false;
+  @Input() set shown(value: boolean) {
+    this._shown = value;
+    if (value) {
+      this.hideOverflow();
+    } else {
+      this.resetOverflow();
+    }
+  }
+  get shown() {
+    return this._shown;
+  }
+
   /** @internal */
   @HostBinding('attr.aria-hidden') get ariaHidden() {
     return !this.shown
@@ -53,9 +66,12 @@ export class NgvDialogComponent implements OnInit {
   @Input() payload: any = {}
 
   @Input() dialogTitleId!: string
-  @Input() dialogBodyId!: string
+  /** Pass the null if you don't want dialog body to be announced by the screen reader */
+  @Input() dialogBodyId!: string | null;
   /** It gives an ability for parent component to control if modal should be closed on esc button click. */
   @Input() closeModalOnEscape = true
+  /** Aria label for the Close button with "X" icon, in the header */
+  @Input() closeButtonAriaLabel?: string;
 
   _buttons: DialogButtons | undefined
   /** Buttons are defined as a key-value pair where key is one of "positive|neutral|negative" and value is the button label. */
@@ -74,13 +90,16 @@ export class NgvDialogComponent implements OnInit {
   protected _firstFocusable: HTMLElement | undefined
   protected _lastFocusable: HTMLElement | undefined
 
+  constructor(private renderer: Renderer2) {}
+
   ngOnInit() {
     this.dialogTitleId =
       this.dialogTitleId ?? 'sdv-dialog-title-' + window.nggv?.nextId()
-    this.dialogBodyId =
-      this.dialogBodyId ?? 'sdv-dialog-body-' + window.nggv?.nextId()
+    if (this.dialogBodyId !== null) {
+      this.dialogBodyId = this.dialogBodyId ?? 'sdv-dialog-body-' + window.nggv?.nextId();
+    }
 
-    this.shown = this.initiallyShown
+    this._shown = this.initiallyShown;
     if (this.shown) this._limitFocusable()
   }
 
@@ -106,8 +125,9 @@ export class NgvDialogComponent implements OnInit {
   }
 
   open(opener?: HTMLElement) {
-    this.shown = true
+    this._shown = true
     this._previous = opener || (document.activeElement as HTMLElement)
+    this.hideOverflow();
     this._limitFocusable()
     return true
   }
@@ -120,7 +140,7 @@ export class NgvDialogComponent implements OnInit {
       )
       this._firstFocusable = focusable[0]
       this._lastFocusable = focusable[focusable.length - 1]
-      if (this._lastFocusable) this._lastFocusable.focus()
+      if (this._firstFocusable) this._firstFocusable.focus();
     })
   }
 
@@ -137,7 +157,10 @@ export class NgvDialogComponent implements OnInit {
       }
       this.nggvCloseEvent.emit(emitEvent)
     }
-    this.shown = false
+
+    this.resetOverflow();
+
+    this._shown = false;
     window.setTimeout(() => {
       if (this._previous) this._previous.focus()
       this._previous = undefined
@@ -166,5 +189,14 @@ export class NgvDialogComponent implements OnInit {
         event.preventDefault()
       }
     }
+  }
+  
+  // to prevent background scrolling when modal is open
+  private hideOverflow(): void {
+    this.renderer.setStyle(document.body, 'overflow', 'hidden');
+  }
+
+  private resetOverflow(): void {
+    this.renderer.removeStyle(document.body, 'overflow');
   }
 }
