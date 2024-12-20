@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.61.0
+
+### Minor Changes
+
+- 15771a0: **Textarea**: Add `gds-input-cleared` event
+- 47957aa: **Tokens:** Remove Color Tokens V1, update all components to use the new color tokens
+- 15771a0: **Rich Text:** Add configurable `captureMode`, in order to increase framework compatibility
+
+### Patch Changes
+
+- 15771a0: **Dropdown:** Emit `input` event when value is changed
+- 15771a0: **Form controls:** Add property for manually controlling error message
+- a234635: **Datepicker:** Year no longer loops around when incrementing past last available
+- 15771a0: **Dateicker:** Dispatch input event on value changed from calendar popover
+- 15771a0: **Datepicker:** Dispatch `ìnput` event on spinner change
+- 15771a0: **Input & Textarea**: Dispatch `input` event when the control is cleared
+
 ## 1.60.1
 
 ### Patch Changes

@@ -2,7 +2,7 @@ import { expect } from '@esm-bundle/chai'
 import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import sinon from 'sinon'
 
-import type { GdsFieldBase } from '@sebgroup/green-core/components/field-base'
+import type { GdsFieldBase } from '@sebgroup/green-core/primitives/field-base'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
@@ -18,7 +18,7 @@ describe('<gds-field-base>', () => {
 
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      const el = await fixture<GdsFormControlHeader>(
+      const el = await fixture<GdsFieldBase>(
         html`<gds-field-base></gds-field-base>`,
       )
       await expect(el).to.be.accessible()

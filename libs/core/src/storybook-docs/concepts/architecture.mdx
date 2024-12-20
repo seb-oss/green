@@ -13,13 +13,14 @@ The Green architecture roughly looks something like this:
 
 <SBMermaid
   chart={`flowchart TD
+    DT[Design Tokens]---S
   subgraph Green Core
-    DT[Design Tokens]---AP
     M[Markup]---AP
     S[Styles]---AP
-    AP[Atomic Primitives]---|Composition|CP[Compound Primitives]---|Public API Boundry|WC[Web Components]
+    AP[Atomic Primitives]---|Composition|CP[Compound Primitives]---|-----Public API Boundry-----|WC[Web Components]
   end
   WC---A[Angular]
+  WC---DC[Direct Consumption]
   WC---R[React]
 `}
 ></SBMermaid>

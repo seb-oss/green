@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.12
+
+### Patch Changes
+
+- 85759d1: Wizard next button icon alignment fix
+
 ## 3.6.11
 
 ### Patch Changes
