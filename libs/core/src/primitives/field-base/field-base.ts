@@ -70,22 +70,6 @@ export class GdsFieldBase extends GdsElement {
     super()
   }
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    this._mainSlotElement.addEventListener(
-      'slotchange',
-      this.#handleSlotChange.bind(this, 'main'),
-    )
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
-    this._mainSlotElement.removeEventListener(
-      'slotchange',
-      this.#handleSlotChange.bind(this, 'main'),
-    )
-  }
-
   render() {
     const CLASSES = {
       field: true,
@@ -134,10 +118,10 @@ export class GdsFieldBase extends GdsElement {
     `
   }
 
-  #handleSlotChange(
+  #handleSlotChange = (
     slotName: 'lead' | 'trail' | 'action' | 'main',
     event: Event,
-  ) {
+  ) => {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
     const slotOccupied =
