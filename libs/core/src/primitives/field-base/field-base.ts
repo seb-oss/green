@@ -12,18 +12,35 @@ import { styles } from './field-base.styles'
 /**
  * @element gds-field-base
  * @status beta
+ * @internal
+ *
+ * gds-field-base is a primitive that provides a reusable base structure for the "field" part of form controls in Green Core.
+ *
+ * @slot - Default slot for main content.
+ * @slot lead - Slot for leading content.
+ * @slot action - Slot for action content.
+ * @slot trail - Slot for trailing content.
  */
 @gdsCustomElement('gds-field-base')
 @localized()
 export class GdsFieldBase extends GdsElement {
   static styles = [styles]
 
+  /**
+   * The size of the field.
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
+  /**
+   * Whether the field is multiline (ie, textarea).
+   */
   @property({ type: Boolean })
   multiline = false
 
+  /**
+   * Whether the field is disabled.
+   */
   @property({
     attribute: 'disabled',
     type: Boolean,
@@ -31,6 +48,9 @@ export class GdsFieldBase extends GdsElement {
   })
   disabled = false
 
+  /**
+   * Whether the field is invalid.
+   */
   @property({ type: Boolean })
   invalid?: boolean
 
