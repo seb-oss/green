@@ -35,16 +35,16 @@ export class GdsFieldBase extends GdsElement {
   invalid?: boolean
 
   @query('slot:not([name])')
-  private mainSlotElement!: HTMLSlotElement
+  private _mainSlotElement!: HTMLSlotElement
 
   @state()
-  leadSlotOccupied = false
+  private _leadSlotOccupied = false
 
   @state()
-  trailSlotOccupied = false
+  private _trailSlotOccupied = false
 
   @state()
-  actionSlotOccupied = false
+  private _actionSlotOccupied = false
 
   constructor() {
     super()
@@ -52,7 +52,7 @@ export class GdsFieldBase extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    this.mainSlotElement.addEventListener(
+    this._mainSlotElement.addEventListener(
       'slotchange',
       this.#handleSlotChange.bind(this, 'main'),
     )
@@ -60,7 +60,7 @@ export class GdsFieldBase extends GdsElement {
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    this.mainSlotElement.removeEventListener(
+    this._mainSlotElement.removeEventListener(
       'slotchange',
       this.#handleSlotChange.bind(this, 'main'),
     )
@@ -83,8 +83,8 @@ export class GdsFieldBase extends GdsElement {
           ? 's s s m'
           : this.size === 'small'
             ? 'xs s'
-            : this.trailSlotOccupied === true ||
-                this.actionSlotOccupied === false
+            : this._trailSlotOccupied === true ||
+                this._actionSlotOccupied === false
               ? 'xs m'
               : 'xs xs xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
@@ -128,11 +128,11 @@ export class GdsFieldBase extends GdsElement {
           (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
     if (slotName === 'lead') {
-      this.leadSlotOccupied = slotOccupied
+      this._leadSlotOccupied = slotOccupied
     } else if (slotName === 'trail') {
-      this.trailSlotOccupied = slotOccupied
+      this._trailSlotOccupied = slotOccupied
     } else if (slotName === 'action') {
-      this.actionSlotOccupied = slotOccupied
+      this._actionSlotOccupied = slotOccupied
     } else if (slotName === 'main') {
       // Handle main slot change if needed
     }
