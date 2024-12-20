@@ -10,6 +10,7 @@ import {
 
 import { NgvI18nModule } from '../../i18n/i18n.module'
 import { NgvSlideOutComponent } from './slide-out.component'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 
 interface WithExtras {
   action: (val: any) => void
@@ -24,7 +25,7 @@ export default {
       providers: [importProvidersFrom(NgvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, BrowserAnimationsModule, NgvI18nModule],
+      imports: [CommonModule, BrowserAnimationsModule, NgvI18nModule, NggCoreWrapperModule],
     }),
   ],
   argTypes: {
@@ -67,6 +68,7 @@ const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
 export const Primary = Template.bind({})
 Primary.args = {
   initiallyShown: true,
+  autoWidth: false,
   closable: true,
   buttons: {
     negative: 'button_cancel',

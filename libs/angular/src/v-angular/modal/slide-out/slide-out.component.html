@@ -12,7 +12,7 @@
   >
     <div
       #slideOut
-      class="gds-slide-out"
+      class="modal-slide-out__container"
       [class.auto-width]="autoWidth"
       [class.entered]="shown"
       role="dialog"
@@ -20,15 +20,16 @@
       aria-labelledby="sdv-modal-title"
       aria-describedby="sdv-modal-body"
     >
-      <header class="gds-slide-out__header">
-        <h3 class="gds-slide-out__heading" id="sdv-modal-title">
+      <header class="modal-slide-out__heading">
+        <h3 id="sdv-modal-title">
           {{ heading || title || '' }}
         </h3>
         <button
           data-testid="modal-close-button"
-          class="close"
+          class="nggv-modal-slideout__close"
           (click)="this.close()"
-        >
+          [attr.aria-label]="closeButtonAriaLabel"
+          >
           <span className="sr-only">Close</span>
           <i></i>
         </button>
@@ -66,6 +67,7 @@
         </button>
 
         <button
+          class="primary"
           type="submit"
           [attr.data-thook]="'dialog-' + (_buttons?.positive || 'positive')"
           (click)="onAction($event, 'positive')"
@@ -78,7 +80,7 @@
     </div>
 
     <div
-      class="gds-backdrop"
+      class="nggv-backdrop"
       data-thook="slideout-backdrop"
       (click)="close()"
     ></div>
