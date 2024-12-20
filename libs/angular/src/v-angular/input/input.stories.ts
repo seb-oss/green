@@ -1,7 +1,12 @@
 import '../core/core.globals'
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  importProvidersFrom,
+} from '@angular/core'
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -32,6 +37,7 @@ import {
   tap,
 } from 'rxjs'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { NgvButtonComponent } from '../button/button.component'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
@@ -113,7 +119,7 @@ const meta: Meta<NgvInputComponent> = {
         NgvDropdownComponent,
         NgvDropdownListComponent,
         NgvTypeaheadDropdownListComponent,
-        NgvCheckboxComponent,
+        // NgvCheckboxComponent,
         NgvTooltipDirective,
         NgvInfoCircleComponent,
         CharacterCountdownDirective,
@@ -126,7 +132,9 @@ const meta: Meta<NgvInputComponent> = {
         RouterTestingModule,
         NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
         TranslocoModule,
+        NggCoreWrapperModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 }
@@ -230,11 +238,10 @@ const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
 export const WithCustomErrorAndCountdown = TemplateWithError.bind({})
 WithCustomErrorAndCountdown.args = {
   ...Primary.args,
-  maxlength: 25,
+  maxLength: 25,
   showCharacterCountdown: true,
   invalid: true,
   error: 'this is an error message',
-  badgeText: 'SEB',
 }
 
 export const WithCustomError = TemplateWithError.bind({})

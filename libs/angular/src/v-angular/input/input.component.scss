@@ -38,7 +38,15 @@
     }
 
     .form-info--error {
-      color: var(--intent-danger-background, #9f000a);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        margin-top: 0.128rem;
+        align-items: center;
+      }
     }
   }
 }
