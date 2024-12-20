@@ -41,6 +41,7 @@ export default {
         order: [
           'Green Design System',
           'Get started',
+          "What's what?",
           'Docs',
           'Components',
           'Style',
