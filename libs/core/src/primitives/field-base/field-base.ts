@@ -12,18 +12,35 @@ import { styles } from './field-base.styles'
 /**
  * @element gds-field-base
  * @status beta
+ * @internal
+ *
+ * gds-field-base is a primitive that provides a reusable base structure for the "field" part of form controls in Green Core.
+ *
+ * @slot - Default slot for main content.
+ * @slot lead - Slot for leading content.
+ * @slot action - Slot for action content.
+ * @slot trail - Slot for trailing content.
  */
 @gdsCustomElement('gds-field-base')
 @localized()
 export class GdsFieldBase extends GdsElement {
   static styles = [styles]
 
+  /**
+   * The size of the field.
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
+  /**
+   * Whether the field is multiline (ie, textarea).
+   */
   @property({ type: Boolean })
   multiline = false
 
+  /**
+   * Whether the field is disabled.
+   */
   @property({
     attribute: 'disabled',
     type: Boolean,
@@ -31,39 +48,26 @@ export class GdsFieldBase extends GdsElement {
   })
   disabled = false
 
+  /**
+   * Whether the field is invalid.
+   */
   @property({ type: Boolean })
   invalid?: boolean
 
   @query('slot:not([name])')
-  private mainSlotElement!: HTMLSlotElement
+  private _mainSlotElement!: HTMLSlotElement
 
   @state()
-  leadSlotOccupied = false
+  private _leadSlotOccupied = false
 
   @state()
-  trailSlotOccupied = false
+  private _trailSlotOccupied = false
 
   @state()
-  actionSlotOccupied = false
+  private _actionSlotOccupied = false
 
   constructor() {
     super()
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback()
-    this.mainSlotElement.addEventListener(
-      'slotchange',
-      this.#handleSlotChange.bind(this, 'main'),
-    )
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
-    this.mainSlotElement.removeEventListener(
-      'slotchange',
-      this.#handleSlotChange.bind(this, 'main'),
-    )
   }
 
   render() {
@@ -83,8 +87,8 @@ export class GdsFieldBase extends GdsElement {
           ? 's s s m'
           : this.size === 'small'
             ? 'xs s'
-            : this.trailSlotOccupied === true ||
-                this.actionSlotOccupied === false
+            : this._trailSlotOccupied === true ||
+                this._actionSlotOccupied === false
               ? 'xs m'
               : 'xs xs xs m'}"
         min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
@@ -114,10 +118,10 @@ export class GdsFieldBase extends GdsElement {
     `
   }
 
-  #handleSlotChange(
+  #handleSlotChange = (
     slotName: 'lead' | 'trail' | 'action' | 'main',
     event: Event,
-  ) {
+  ) => {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
     const slotOccupied =
@@ -128,11 +132,11 @@ export class GdsFieldBase extends GdsElement {
           (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
     if (slotName === 'lead') {
-      this.leadSlotOccupied = slotOccupied
+      this._leadSlotOccupied = slotOccupied
     } else if (slotName === 'trail') {
-      this.trailSlotOccupied = slotOccupied
+      this._trailSlotOccupied = slotOccupied
     } else if (slotName === 'action') {
-      this.actionSlotOccupied = slotOccupied
+      this._actionSlotOccupied = slotOccupied
     } else if (slotName === 'main') {
       // Handle main slot change if needed
     }

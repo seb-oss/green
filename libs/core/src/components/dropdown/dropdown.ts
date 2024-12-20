@@ -391,6 +391,9 @@ export class GdsDropdown<ValueT = any>
   #handleSearchFieldInput = (e: KeyboardEvent) => {
     if (!e.currentTarget) return
 
+    // We don't want this internal event to progate to the consumer
+    e.stopPropagation()
+
     const input = e.currentTarget as HTMLInputElement
     this.options.forEach((o) => (o.hidden = false))
 
@@ -445,6 +448,12 @@ export class GdsDropdown<ValueT = any>
       else {
         this.value = listbox.selection[0]?.value
         this.open = false
+        this.dispatchEvent(
+          new Event('input', {
+            bubbles: true,
+            composed: true,
+          }),
+        )
         setTimeout(() => this._elTriggerBtn?.focus(), 0)
       }
 
