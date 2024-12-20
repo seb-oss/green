@@ -91,6 +91,7 @@ import { NggModalHeaderDirective } from './modal-header.directive'
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
   @Input() public header?: string
+  @Input() public closeText = "Close Modal"
   @Input() public confirmLabel?: string
   @Input() public dismissLabel?: string
   @Input() public size?: Size
@@ -233,15 +234,16 @@ export class NggModalComponent implements OnDestroy, OnInit {
     <button
       data-testid="modal-close-button"
       class="close"
+      [attr.aria-label]="closeText"
       (click)="this.handleClose($event)"
     >
-      <span className="sr-only">Close</span>
       <i></i>
     </button>
   `,
 })
 export class NggModalHeaderComponent {
   @Input() header?: string
+  @Input() closeText?: string
   @Output() closed: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>()
 
   handleClose(event: MouseEvent) {

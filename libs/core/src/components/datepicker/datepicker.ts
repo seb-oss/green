@@ -426,6 +426,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   @watch('value')
   private _handleValueChange() {
+    if ((this.value as any) === '') this.value = undefined
+
     // Reset spinner state if value is unset
     if (!this.value) {
       this.#spinnerState = {
@@ -567,6 +569,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.value = e.detail
     this.open = false
     this.#dispatchChangeEvent()
+    this.#dispatchInputEvent()
   }
 
   #handleMonthChange = (e: CustomEvent) => {
@@ -580,16 +583,20 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
-    this._focusedMonth++
-    if (this._focusedMonth > 11) {
+    if (this._focusedMonth < 11) {
+      this._focusedMonth++
+    }
+    else if (this._focusedMonth == 11 && this._focusedYear != this.max.getFullYear()) {
       this._focusedMonth = 0
       this._focusedYear++
     }
   }
 
   #handleDecrementFocusedMonth = (_e: MouseEvent) => {
-    this._focusedMonth--
-    if (this._focusedMonth < 0) {
+    if (this._focusedMonth > 0) {
+      this._focusedMonth--
+    }
+    else if (this._focusedMonth == 0  && this._focusedYear != this.min.getFullYear()) {
       this._focusedMonth = 11
       this._focusedYear--
     }
@@ -680,6 +687,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     this.value = newDate
 
     this.#dispatchChangeEvent()
+    this.#dispatchInputEvent()
   }
 
   /**

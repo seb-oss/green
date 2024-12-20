@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.1.0
+
+### Minor Changes
+
+- 15771a0: **CoreElements**: Add a new custom renderer that adds the ability to use scoped core components without the `*nggCoreElement` directive
+
+### Patch Changes
+
+- f4ffadf: **Modals:** Add custom close button label
+- Updated dependencies [85759d1]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [a234635]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [47957aa]
+- Updated dependencies [15771a0]
+  - @sebgroup/chlorophyll@3.6.12
+  - @sebgroup/green-core@1.61.0
+
 ## 5.0.0
 
 ### Major Changes
