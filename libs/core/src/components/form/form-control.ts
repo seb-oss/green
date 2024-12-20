@@ -73,11 +73,21 @@ export abstract class GdsFormControlElement<ValueT = any>
     }
   }
 
+  /**
+   * A validator that can be used to validate the form control and set an error message.
+   */
   @property({ attribute: false })
   validator?: GdsValidator
 
   @property({ type: Boolean })
   required = false
+
+  /**
+   * This can be used to manually control the error message that will be displayed
+   * when the control is invalid.
+   */
+  @property()
+  errorMessage = ''
 
   /**
    * Validation state of the form control. Setting this to true triggers the invalid state of the control.
@@ -181,7 +191,8 @@ export abstract class GdsFormControlElement<ValueT = any>
   }
 
   formResetCallback() {
-    this.value = undefined
+    if (typeof this.value === 'string') (this.value as string) = ''
+    else this.value = undefined
   }
 
   formAssociatedCallback(form?: HTMLFormElement) {

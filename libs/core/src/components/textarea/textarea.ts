@@ -29,6 +29,7 @@ import '../button'
  * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
  *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
  */
 @gdsCustomElement('gds-textarea')
 @localized()
@@ -36,7 +37,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   @property()
-  value = ''
+  value? = ''
 
   /**
    * The label displayed above the field
@@ -213,8 +214,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
       <gds-form-control-footer
         .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - this.value.length}
-        .validationMessage=${this.invalid && this.validationMessage}
+        this.maxlength - (this.value?.length || 0)}
+        .validationMessage=${this.invalid &&
+        (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
     `
   }
@@ -258,6 +260,18 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
+    this.dispatchEvent(
+      new Event('gds-input-cleared', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   #renderSlotLead() {
@@ -364,7 +378,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderClearButton() {
-    if (this.clearable && this.value.length > 0)
+    if (this.clearable && (this.value?.length || 0) > 0)
       return html`
         <gds-button
           size="small"

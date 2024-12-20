@@ -3,6 +3,7 @@ import React from 'react'
 import { TextInput } from '../form/input/input'
 import { TextArea } from '../form/textarea/textarea'
 import { GroupedList, ListItem } from '../grouped-list'
+import { IconArrowDown } from '../icon/icons/IconArrowDown'
 import { IconCheckmark } from '../icon/icons/IconCheckmark'
 import {
   InPageWizardStepCard,
@@ -23,52 +24,63 @@ export const Default = {
   name: 'InPageWizardStepCard',
 
   args: {
-    children: 'Active step content',
+    children: 'Active step default content.',
     nextBtnText: 'Next',
     stepStatus: 'IsActive',
-    stepText: 'Active step text',
-    title: 'Active step title',
+    stepText: 'Active step default text',
+    title: 'Active step default title',
   },
 }
 
 export const NextButtonText = Template.bind({})
 NextButtonText.args = {
-  children: 'Active step content',
+  children: 'Active step textcontent.',
   nextBtnText: 'My next button text',
   stepStatus: 'IsActive',
-  stepText: 'Active step text',
-  title: 'Active step title',
+  stepText: 'Active step text text',
+  title: 'Active step text title',
 }
 
 export const NextButtonIcon = Template.bind({})
 NextButtonIcon.args = {
-  children: 'Active step content',
+  children: 'Active step icon content.',
   nextBtnText: 'Next',
   nextBtnIcon: <IconCheckmark />,
   stepStatus: 'IsActive',
-  stepText: 'Active step text',
-  title: 'Active step title',
+  stepText: 'Active step icon text',
+  title: 'Active step icon title',
 }
+
+export const NextButtonIconAlt = Template.bind({})
+NextButtonIconAlt.args = {
+  children: 'Active step alt icon content.',
+  nextBtnText: 'Next',
+  nextBtnIcon: <IconArrowDown />,
+  stepStatus: 'IsActive',
+  stepText: 'Active step alt icon text',
+  title: 'Active step alt icon title',
+}
+
 
 export const HiddenFooter = Template.bind({})
 HiddenFooter.args = {
-  children: 'Active step content',
+  children: 'Active step hidden footer content.',
   nextBtnText: 'Next',
   nextBtnIcon: <IconCheckmark />,
   stepStatus: 'IsActive',
-  stepText: 'Active step text',
-  title: 'Active step title',
+  stepText: 'Active step hidden footer text',
+  title: 'Active step hidden footer title',
   hideFooter: true,
 }
 
 export const EditText = Template.bind({})
 EditText.args = {
-  children: 'Completed step content',
+  children: 'Completed step edit button content.',
   nextBtnText: 'Next',
   editBtnText: 'Redigera',
   stepStatus: 'IsComplete',
-  stepText: 'Completed step text',
-  title: 'Completed step title',
+  stepText: 'Completed step edit button text',
+  title: 'Completed step edit button title',
 }
 
 export const Status = ({ children, ...props }) => (
