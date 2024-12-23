@@ -66,8 +66,8 @@ export const styles = css`
       height: max-content;
     }
 
-    .field.trailSlotOccupied,
-    .field:not(.actionSlotOccupied):not(.small) {
+    .field.trail-slot-occupied,
+    .field:not(.action-slot-occupied):not(.small) {
       padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
     }
 
