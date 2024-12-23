@@ -63,7 +63,6 @@ export class GdsInput extends GdsFormControlElement<string> {
    * If the input is Disabled
    */
   @property({
-    attribute: 'disabled',
     type: Boolean,
     reflect: true,
   })
@@ -146,6 +145,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         .size=${this.size}
         .disabled=${this.disabled}
         .invalid=${this.invalid}
+        @click=${this.#handleFieldClick}
       >
         ${this.#renderFieldContents()}
       </gds-field-base>
