@@ -11,7 +11,7 @@ import { styles } from './input.styles'
 
 // Local Components
 import '../../primitives/form-control-header'
-import '../../primitives/form-control-header'
+import '../../primitives/form-control-footer'
 import '../../primitives/field-base'
 import '../icon/icons/cross-small'
 import '../flex'
