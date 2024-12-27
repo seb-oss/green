@@ -17,6 +17,8 @@ import '../icon/icons/cross-small'
 import '../flex'
 import '../button'
 
+import type { GdsButton } from '../button'
+
 /**
  * @summary A custom input element that can be used in forms.
  * @status beta
@@ -106,6 +108,23 @@ export class GdsInput extends GdsFormControlElement<string> {
   @state()
   trailSlotOccupied = false
 
+  /**
+   * A reference to the clear button element. Returns null if there is no clear button.
+   * Intended for use in integration tests.
+   */
+  test_getClearButton() {
+    return this.shadowRoot?.querySelector<GdsButton>('#clear-button')
+  }
+
+  /**
+   * A reference to the field element. This does not refer to the ionoput element itself,
+   * but the wrapper that makes up the visual field.
+   * Intended for use in integration tests.
+   */
+  test_getFieldElement() {
+    return this.shadowRoot?.querySelector('#field')
+  }
+
   constructor() {
     super()
   }
@@ -146,6 +165,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         .disabled=${this.disabled}
         .invalid=${this.invalid}
         @click=${this.#handleFieldClick}
+        id="field"
       >
         ${this.#renderFieldContents()}
       </gds-field-base>
@@ -273,6 +293,7 @@ export class GdsInput extends GdsFormControlElement<string> {
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
           slot="action"
+          id="clear-button"
         >
           <gds-icon-cross-small />
         </gds-button>
