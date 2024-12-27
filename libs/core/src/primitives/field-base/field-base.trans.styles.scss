@@ -6,6 +6,7 @@
   @include common.add-border-color();
   @include common.add-focus('within');
   align-items: stretch;
+  gap: var(--gds-space-xs);
   background-color: var(--sg-form-control-bg);
   box-sizing: border-box;
   color: var(--sg-text-primary);
@@ -15,7 +16,7 @@
   align-items: center;
   padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs)
     calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
-  min-height: 2.75rem;
+  min-block-size: var(--gds-space-3xl);
 
   &:hover {
     background-color: var(--grey-200);
@@ -27,7 +28,28 @@
   }
 }
 
+.field:focus-within {
+  outline-color: currentColor;
+}
+
+.field.invalid {
+  border-color: var(--gds-color-l3-border-negative);
+  color: var(--gds-color-l3-content-negative);
+}
+
 .field.trail-slot-occupied,
 .field:not(.action-slot-occupied):not(.small) {
   padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+}
+
+.main-slot-wrap {
+  display: flex;
+  flex: 1;
+}
+
+slot[name='lead']::slotted([gds-element^='gds-icon-']) {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  min-width: var(--gds-space-l);
 }
