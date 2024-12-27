@@ -1,0 +1,33 @@
+@use '../../../../chlorophyll/scss/common';
+
+.field {
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-border-color();
+  @include common.add-focus('within');
+  align-items: stretch;
+  background-color: var(--sg-form-control-bg);
+  box-sizing: border-box;
+  color: var(--sg-text-primary);
+  cursor: text;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs)
+    calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+  min-height: 2.75rem;
+
+  &:hover {
+    background-color: var(--grey-200);
+  }
+
+  &.small {
+    font-size: 0.875rem;
+    min-height: 2rem;
+  }
+}
+
+.field.trail-slot-occupied,
+.field:not(.action-slot-occupied):not(.small) {
+  padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+}
