@@ -59,11 +59,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   })
   rows = 4
 
-  @state()
-  private lines = 4 // Default number of lines
-  private isDragging = false // Track dragging state
-  private lastMouseY = 0 // Store the last mouse Y position
-
   /**
    * The supporting text displayed between the label and the field itself
    */
@@ -130,7 +125,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   constructor() {
     super()
-    this.lines = 0
     this.resize = 'auto'
   }
 
@@ -219,8 +213,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @watch('value')
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
-      const lines = (element.value.split('\n').length || 1).toString()
-      element?.style.setProperty('--_lines', lines.toString())
+      this.rows = Math.max(this.rows, element.value.split('\n').length)
+      this.#resizeState.lines = Number(this.rows)
+      element?.style.setProperty('--_lines', this.rows.toString())
     })
   }
 
@@ -274,60 +269,59 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     if (resizeHandle) {
       resizeHandle.addEventListener(
         'mousedown',
-        this.#startDragging.bind(this) as EventListener,
+        this.#startDragging as EventListener,
       )
     }
   }
 
-  #startDragging(event: MouseEvent) {
+  // State for the resize handle action
+  #resizeState = {
+    isDragging: false,
+    startMouseY: 0,
+    lines: this.rows,
+    deltaLines: 0,
+    lineHeight: 0,
+  }
+
+  #startDragging = (event: MouseEvent) => {
     event.preventDefault() // Prevent default behavior
-    this.isDragging = true // Set dragging state to true
-    this.lastMouseY = event.clientY // Store the initial mouse position
-    document.addEventListener('mousemove', this.#onDrag.bind(this))
-    document.addEventListener('mouseup', this.#stopDragging.bind(this))
+    this.#resizeState.isDragging = true // Set dragging state to true
+    this.#resizeState.startMouseY = event.clientY // Store the initial mouse position
+    this.#resizeState.lineHeight = parseFloat(
+      getComputedStyle(this.elTextarea).lineHeight,
+    )
+    document.addEventListener('mousemove', this.#onDrag)
+    document.addEventListener('mouseup', this.#stopDragging)
   }
 
-  #onDrag(event: MouseEvent) {
-    if (!this.isDragging) return // If not dragging, return
-    const deltaY = event.clientY - this.lastMouseY // Calculate the movement in Y direction
+  #onDrag = (event: MouseEvent) => {
+    if (!this.#resizeState.isDragging) return // If not dragging, return
 
-    // Check if the movement exceeds the threshold (10 or 20 pixels)
-    if (Math.abs(deltaY) >= 20) {
-      if (deltaY > 0) {
-        // Dragging down, increase lines
-        this.lines += 1
-      } else {
-        // Dragging up, decrease lines
-        this.lines = Math.max(1, this.lines - 1) // Ensure lines do not go below 1
-      }
+    const deltaY = event.clientY - this.#resizeState.startMouseY // Calculate the movement in Y direction
+    this.#resizeState.deltaLines = Math.round(
+      deltaY / this.#resizeState.lineHeight,
+    ) // Calculate the number of lines to increase or decrease
 
-      this.elTextareaAsync.then((element) => {
-        element?.style.setProperty('--_lines', this.lines.toString())
-      })
-
-      // Update lastMouseY to the current position
-      this.lastMouseY = event.clientY
-    }
+    this.elTextareaAsync.then((element) => {
+      element?.style.setProperty(
+        '--_lines',
+        (this.#resizeState.lines + this.#resizeState.deltaLines).toString(),
+      )
+    })
   }
 
-  #stopDragging() {
-    this.isDragging = false // Set dragging state to false
-    document.removeEventListener('mousemove', this.#onDrag.bind(this))
-    document.removeEventListener('mouseup', this.#stopDragging.bind(this))
+  #stopDragging = () => {
+    this.#resizeState.isDragging = false // Set dragging state to false
+    this.#resizeState.lines += this.#resizeState.deltaLines // Update the number of lines
+    this.rows = this.#resizeState.lines // Update the rows attribute
+    this.#resizeState.deltaLines = 0
+    document.removeEventListener('mousemove', this.#onDrag)
+    document.removeEventListener('mouseup', this.#stopDragging)
   }
 
   #renderResizeHandle() {
     return html`
-      <gds-container
-        class="resize-handle"
-        position="absolute"
-        inset="auto auto -10px 0"
-        width="100%"
-        height="20px"
-        cursor="row-resize"
-        z-index="2"
-        @mousedown=${this.#startDragging}
-      ></gds-container>
+      <div class="resize-handle" @mousedown=${this.#startDragging}></div>
     `
   }
 

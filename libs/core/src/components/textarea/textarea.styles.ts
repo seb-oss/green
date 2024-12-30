@@ -53,6 +53,12 @@ export const styles = css`
     }
 
     .resize-handle {
+      position: absolute;
+      inset: auto auto -10px 0;
+      width: 100%;
+      height: 20px;
+      cursor: row-resize;
+      z-index: 2;
       &:hover,
       &:active {
         &::before {
