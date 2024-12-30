@@ -16,7 +16,7 @@
   align-items: center;
   padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs)
     calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
-  min-block-size: var(--gds-space-3xl);
+  min-block-size: 44px;
 
   &:hover {
     background-color: var(--grey-200);
@@ -26,6 +26,10 @@
     font-size: 0.875rem;
     min-height: 2rem;
   }
+}
+
+.field slot[name='action']::slotted(*) {
+  margin: -3px 0;
 }
 
 .field:focus-within {
