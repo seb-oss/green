@@ -19,6 +19,11 @@ import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/rich-text/index.js'
 import '@sebgroup/green-core/components/text/index.js'
 import '@sebgroup/green-core/components/theme/index.js'
+import '@sebgroup/green-core/components/segmented-control/index.js'
+
+import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
+
+registerTransitionalStyles()
 
 @Component({
   selector: 'green-form',
@@ -27,6 +32,12 @@ import '@sebgroup/green-core/components/theme/index.js'
 })
 export class FormComponent {
   constructor(private fb: NonNullableFormBuilder) {}
+
+  designVersion = '2023'
+
+  setDesignVersion(event: any) {
+    this.designVersion = event.target.value
+  }
 
   // Set up a basic reactive form using the NonNullableFormBuilder
   simpleForm = this.fb.group({
