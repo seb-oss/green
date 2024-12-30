@@ -28,6 +28,13 @@
   }
 }
 
+.field.multiline {
+  align-items: flex-start;
+  padding: calc(var(--gds-space-s) - 1px) var(--gds-space-s)
+    calc(var(--gds-space-s) - 1px) var(--gds-space-m);
+  height: max-content;
+}
+
 .field slot[name='action']::slotted(*) {
   margin: -3px 0;
 }
