@@ -41,6 +41,13 @@
   color: var(--gds-color-l3-content-negative);
 }
 
+.field.disabled {
+  background: var(--gds-color-l3-background-disabled);
+  color: var(--gds-color-l3-content-disabled);
+  border-color: transparent;
+  pointer-events: none;
+}
+
 .field.trail-slot-occupied,
 .field:not(.action-slot-occupied):not(.small) {
   padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
