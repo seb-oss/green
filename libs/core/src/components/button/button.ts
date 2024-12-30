@@ -132,6 +132,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       button: true,
       circle: this.#isIconButton,
       icon: this.#isIconButton,
+      xs: this.size === 'xs',
       small: this.size === 'small',
       large: this.size === 'large',
       positive: this.variant === 'positive',
