@@ -285,20 +285,18 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   #renderClearButton() {
     if (this.clearable && (this.value?.length || 0) > 0)
-      return html`
-        <gds-theme .designVersion=${'2023'} slot="action"
-          ><gds-button
-            size="${this.size === 'small' ? 'xs' : 'small'}"
-            rank="tertiary"
-            variant="${this.invalid ? 'negative' : ''}"
-            ?disabled="${this.disabled}"
-            label="${msg('Clear input')}"
-            @click=${this.#handleClearBtnClick}
-            id="clear-button"
-          >
-            <gds-icon-cross-small /> </gds-button
-        ></gds-theme>
-      `
+      return html`<gds-button
+        size="${this.size === 'small' ? 'xs' : 'small'}"
+        rank="tertiary"
+        variant="${this.invalid ? 'negative' : ''}"
+        ?disabled="${this.disabled}"
+        label="${msg('Clear input')}"
+        @click=${this.#handleClearBtnClick}
+        id="clear-button"
+        slot="action"
+      >
+        <gds-icon-cross-small />
+      </gds-button>`
     else return nothing
   }
 
