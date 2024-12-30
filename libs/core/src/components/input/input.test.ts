@@ -106,9 +106,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             value="My value"
           ></gds-input>`,
         )
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         expect(clearButtonEl).to.exist
       })
       it('should fire an input event when search has been cleared', async () => {
@@ -121,9 +119,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
         const changeSpy = sinon.spy()
         el.addEventListener('gds-input-cleared', changeSpy)
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
         expect(changeSpy).to.have.been.calledOnce
       })
@@ -138,9 +134,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             value="My value"
           ></gds-input>`,
         )
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
         expect(el.value).to.equal('')
       })
@@ -196,7 +190,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}"></gds-input>`,
         )
-        await clickOnElement(el.shadowRoot?.querySelector('.field') as Element)
+        await clickOnElement(el.test_getFieldElement())
         expect(document.activeElement).to.equal(el)
       })
 

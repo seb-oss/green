@@ -170,7 +170,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
   /**
    * A reference to a date cell element (<td>) inside the shadow root of the calendar primitive.
-   * Inteded for use in integration tests.
+   * Intended for use in integration tests.
    */
   async test_getDateCell(dayNumber: number) {
     return this._elCalendar.then((el) => el.getDateCell(dayNumber))
@@ -585,8 +585,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
     if (this._focusedMonth < 11) {
       this._focusedMonth++
-    }
-    else if (this._focusedMonth == 11 && this._focusedYear != this.max.getFullYear()) {
+    } else if (
+      this._focusedMonth == 11 &&
+      this._focusedYear != this.max.getFullYear()
+    ) {
       this._focusedMonth = 0
       this._focusedYear++
     }
@@ -595,8 +597,10 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   #handleDecrementFocusedMonth = (_e: MouseEvent) => {
     if (this._focusedMonth > 0) {
       this._focusedMonth--
-    }
-    else if (this._focusedMonth == 0  && this._focusedYear != this.min.getFullYear()) {
+    } else if (
+      this._focusedMonth == 0 &&
+      this._focusedYear != this.min.getFullYear()
+    ) {
       this._focusedMonth = 11
       this._focusedYear--
     }
