@@ -34,6 +34,7 @@
   }
 }
 
+
 .cm__btn-group {
   flex-direction: column;
   gap: var(--gds-space-m);
@@ -115,21 +116,31 @@
     */
   }
 
-/* Utgångsläge: overlay synlig */
-.cm .cm-wrapper {
-  transition: 
-  translate 0.3s ease, /* oförändrad från ursprunglig */
-  opacity 1.3s ease;   /* ny: fade in/out */
-  
-/* Grundvärden för fade-lösning */
-opacity: 1;
-visibility: visible; 
-}
 
-/* Om .cm har aria-hidden="true", sätt overlay -> opacity: 0 */
-.cm[aria-hidden="true"] .cm-wrapper {
-  opacity: 0;
-}
+/* ===================
+   2) Fade on the background .cm-wrapper
+   =================== */
+   .cm-wrapper {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    
+    /* Synlig från början */
+    opacity: 1;
+    visibility: visible;
+    
+    /* Transition för fade */
+    transition: opacity 1.3s ease, visibility 0s linear 0.3s;
+  }
+  
+  /* Fade out the background overlay 
+     when the modal .cm is aria-hidden */
+   .cm-wrapper:has(.cm[aria-hidden="true"]) {
+    opacity: 0;
+    visibility: hidden; /* fully hidden after 0.3s */
+  }
+
 
   
 
