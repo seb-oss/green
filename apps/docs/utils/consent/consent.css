@@ -13,6 +13,10 @@
   bottom: var(--gds-space-l);
   padding: var(--gds-space-xl);
   inset: 35% 8px auto;
+  transition: translate 0.3s ease;
+  @starting-style {
+    translate: 0 -40px;
+  }
 
 }
 
@@ -21,10 +25,15 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999; /* Ensure it's above other elements */
   inset: 0;
-  /* @starting-style {
-    background-color: ;
-  } */
+  transition: opacity 0.3s ease;
+  /* transition: all 1s ease;
+  rotate: 0deg; */
+  @starting-style {
+    opacity: 0;
+    /* rotate: 180deg; */
+  }
 }
+
 
 .cm__btn-group {
   flex-direction: column;
@@ -73,12 +82,68 @@
 
 /* When aria-hidden="true" is set, hide the entire modal and the buttons */
 .cm[aria-hidden="true"] {
-  display: none; /* Hides the modal visually */
+  visibility: hidden;
 }
 
 .cm[aria-hidden="true"] .cm__btns {
-  display: none; /* Hides the buttons */
+  visibility: hidden;
 }
+
+/* ============ ADDED LINES FOR FADE ============ */
+
+/* 1) Lägg till transition på opacity på samma .cm-element 
+   (kompletterar den redan befintliga "translate 0.3s ease") */
+   #cc-main .cm {
+    transition: 
+      translate 0.3s ease, /* oförändrad från ursprunglig */
+      opacity 1.3s ease;   /* ny: fade in/out */
+      
+    /* Grundvärden för fade-lösning */
+    opacity: 1;
+    visibility: visible; 
+  }
+  
+  /* 2) Vid aria-hidden="true" => fade out (opacity 0) */
+  #cc-main .cm[aria-hidden="true"] {
+    opacity: 0;            /* fade out */
+    /* pointer-events: none;  valfritt */
+    /* visibility: hidden;    valfritt */
+    /*
+      Om du vill att elementet ska bli helt otillgängligt när 
+      opaciteten nått 0, lägg till visibility: hidden;
+      samt ev. transition på visibility, t.ex.:
+      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    */
+  }
+
+
+/* ===================
+   2) Fade on the background .cm-wrapper
+   =================== */
+   .cm-wrapper {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    
+    /* Synlig från början */
+    opacity: 1;
+    visibility: visible;
+    
+    /* Transition för fade */
+    transition: opacity 1.3s ease, visibility 0s linear 0.3s;
+  }
+  
+  /* Fade out the background overlay 
+     when the modal .cm is aria-hidden */
+   .cm-wrapper:has(.cm[aria-hidden="true"]) {
+    opacity: 0;
+    visibility: hidden; /* fully hidden after 0.3s */
+  }
+
+
+  
+
 
 @media screen and (min-width: 640px) {
   #cc-main .cm {
