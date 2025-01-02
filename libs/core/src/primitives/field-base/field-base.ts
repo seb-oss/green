@@ -1,12 +1,11 @@
 import { localized } from '@lit/localize'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { map } from 'lit/directives/map.js'
 
 import { GdsElement } from '../../gds-element'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
+import { gdsCustomElement, html } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
 import { styles } from './field-base.styles'
 
 /**
@@ -29,7 +28,7 @@ export class GdsFieldBase extends GdsElement {
   /**
    * The size of the field.
    */
-  @property({ type: String })
+  @property()
   size: 'large' | 'small' = 'large'
 
   /**
@@ -42,7 +41,6 @@ export class GdsFieldBase extends GdsElement {
    * Whether the field is disabled.
    */
   @property({
-    attribute: 'disabled',
     type: Boolean,
     reflect: true,
   })
@@ -70,51 +68,26 @@ export class GdsFieldBase extends GdsElement {
     super()
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-field-base')
+  }
+
   render() {
-    const CLASSES = {
-      field: true,
+    const classes = {
       invalid: this.invalid ?? false,
+      multiline: this.multiline,
+      disabled: this.disabled,
+      'lead-slot-occupied': this._leadSlotOccupied,
+      'trail-slot-occupied': this._trailSlotOccupied,
+      'action-slot-occupied': this._actionSlotOccupied,
+      small: this.size === 'small',
     }
 
     return html`
-      <gds-flex
-        level="3"
-        position="relative"
-        align-items=${this.multiline ? 'flex-start' : 'center'}
-        justify-content="space-between"
-        gap="${this.size === 'small' ? '2xs' : 'xs'}"
-        padding="${this.multiline
-          ? 's s s m'
-          : this.size === 'small'
-            ? 'xs s'
-            : this._trailSlotOccupied === true ||
-                this._actionSlotOccupied === false
-              ? 'xs m'
-              : 'xs xs xs m'}"
-        min-block-size="${this.size === 'small' ? 'xl' : '3xl'}"
-        .height="${this.multiline ? 'max-content' : ''}"
-        border-radius="xs"
-        .background=${this.disabled
-          ? 'disabled'
-          : this.invalid
-            ? 'negative-secondary'
-            : 'secondary'}
-        .border=${this.disabled
-          ? ''
-          : this.invalid
-            ? '4xs/negative'
-            : '4xs/secondary'}
-        class=${classMap(CLASSES)}
-        cursor="text"
-        pointer-events="${this.disabled ? 'none' : 'auto'}"
-        color="${this.disabled
-          ? 'disabled'
-          : this.invalid
-            ? 'negative'
-            : 'tertiary'}"
-      >
+      <div class="field ${classMap(classes)}">
         ${this.#renderFieldContents()}
-      </gds-flex>
+      </div>
     `
   }
 
@@ -145,12 +118,12 @@ export class GdsFieldBase extends GdsElement {
   #renderFieldContents() {
     const elements = [
       this.#renderSlotLead(),
-      this.#renderSlotBase(),
+      this.#renderSlotMain(),
       this.#renderSlotAction(),
       this.#renderSlotTrail(),
     ]
 
-    return elements.map((element) => html`${element}`)
+    return html`${map(elements, (el) => el)}`
   }
 
   #renderSlotLead() {
@@ -160,17 +133,14 @@ export class GdsFieldBase extends GdsElement {
     ></slot>`
   }
 
-  #renderSlotBase() {
-    return html` <gds-flex
-      align-items="center"
-      flex="1"
-      .height=${this.multiline ? 'max-content' : ''}
-      overflow="hidden"
+  #renderSlotMain() {
+    return html`<div
+      class="main-slot-wrap ${classMap({ multiline: this.multiline })}"
     >
       <slot
         @slotchange=${(e: Event) => this.#handleSlotChange('main', e)}
       ></slot>
-    </gds-flex>`
+    </div>`
   }
 
   #renderSlotAction() {
