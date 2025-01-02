@@ -85,7 +85,7 @@ export class GdsFieldBase extends GdsElement {
     }
 
     return html`
-      <div class="field ${classMap(classes)}">
+      <div class="field ${classMap(classes)}" part="_base">
         ${this.#renderFieldContents()}
       </div>
     `
