@@ -49,7 +49,6 @@ export class GdsDropdown<ValueT = any>
   static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true,
   }
 
   get type() {
@@ -204,6 +203,22 @@ export class GdsDropdown<ValueT = any>
     return displayValue || this.placeholder?.innerHTML || ''
   }
 
+  /**
+   * Moves focus to this element.
+   */
+  focus() {
+    this._getValidityAnchor().focus()
+  }
+
+  /**
+   * A reference to the field element. This does not refer to the input element itself,
+   * but the wrapper that makes up the visual field.
+   * Intended for use in integration tests.
+   */
+  test_getFieldElement() {
+    return this.shadowRoot?.querySelector('#field')
+  }
+
   #optionElements?: NodeListOf<GdsOption>
 
   @query('#trigger')
@@ -254,8 +269,6 @@ export class GdsDropdown<ValueT = any>
           .size=${this.size}
           .disabled=${this.disabled}
           .invalid=${this.invalid}
-          id="trigger"
-          name="trigger"
           aria-haspopup="listbox"
           slot="trigger"
           role="combobox"
@@ -263,9 +276,10 @@ export class GdsDropdown<ValueT = any>
           aria-controls="listbox"
           aria-expanded="${this.open}"
           aria-label="${this.label}"
+          id="field"
         >
           <slot name="lead" slot="lead"></slot>
-          <button>
+          <button id="trigger" name="trigger">
             <slot name="trigger">
               <span>${unsafeHTML(this.displayValue)}</span>
             </slot>

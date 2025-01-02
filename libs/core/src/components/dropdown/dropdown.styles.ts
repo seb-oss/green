@@ -14,7 +14,7 @@ const style = css`
       --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    #trigger::part(_base) {
+    #field::part(_base) {
       cursor: pointer;
     }
 
