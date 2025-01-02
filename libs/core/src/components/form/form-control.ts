@@ -86,7 +86,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * This can be used to manually control the error message that will be displayed
    * when the control is invalid.
    */
-  @property()
+  @property({ attribute: 'error-message' })
   errorMessage = ''
 
   /**

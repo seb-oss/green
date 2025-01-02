@@ -311,7 +311,8 @@ export class GdsDropdown<ValueT = any>
         !this.hideLabel,
         () => html`
           <gds-form-control-footer
-            .validationMessage=${this.invalid && this.validationMessage}
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
           ></gds-form-control-footer>
         `,
       )}
