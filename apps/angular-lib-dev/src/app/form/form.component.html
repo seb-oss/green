@@ -16,7 +16,11 @@
     <div style="flex: 1"></div>
   </gds-flex>
   <gds-flex gap="l" max-width="1000px" margin="0 auto">
-    <gds-card variant="primary" flex="1">
+    <gds-card
+      variant="primary"
+      flex="1"
+      [class.card]="designVersion === '2016'"
+    >
       <form [formGroup]="simpleForm">
         <gds-flex flex-direction="column" gap="m">
           <!-- Because we've imported the NggCoreFormsModule, we can use the Green Core form controls
