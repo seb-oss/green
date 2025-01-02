@@ -120,8 +120,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
 
-  @state()
-  trailSlotOccupied = false
 
   constructor() {
     super()
@@ -254,17 +252,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderSlotLead() {
-    return html` <slot slot="lead" name="lead"></slot> `
+    return html`<slot slot="lead" name="lead"></slot>`
   }
 
   #renderSlotTrail() {
-    return html`
-      <slot
-        slot="trail"
-        name="trail"
-        @slotchange=${this.#handleSlotChange}
-      ></slot>
-    `
+    return html`<slot slot="trail" name="trail"></slot>`
   }
 
   #addResizeHandleListener() {
@@ -326,18 +318,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return html`
       <div class="resize-handle" @mousedown=${this.#startDragging}></div>
     `
-  }
-
-  #handleSlotChange(event: Event) {
-    const slot = event.target as HTMLSlotElement
-    const assignedNodes = slot.assignedNodes({ flatten: true })
-    this.trailSlotOccupied =
-      assignedNodes.length > 0 &&
-      assignedNodes.some(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE ||
-          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
-      )
   }
 
   #renderNativeTextarea() {
