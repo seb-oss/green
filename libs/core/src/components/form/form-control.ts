@@ -138,6 +138,15 @@ export abstract class GdsFormControlElement<ValueT = any>
   name = ''
 
   /**
+   * If the input is Disabled
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
+  /**
    * The form element that the form control is associated with.
    */
   get form() {

@@ -37,15 +37,6 @@ import type { GdsButton } from '../button'
 export class GdsInput extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
-  @property()
-  value? = ''
-
-  /**
-   * The label displayed above the field
-   */
-  @property()
-  label = ''
-
   /**
    * The supporting text displayed between the label and the field itself
    */
@@ -61,15 +52,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     reflect: true,
   })
   showExtendedSupportingText = false
-
-  /**
-   * If the input is Disabled
-   */
-  @property({
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
 
   /**
    * Whether the field should be clearable or not. Clearable fields will display a clear button when
@@ -125,6 +107,7 @@ export class GdsInput extends GdsFormControlElement<string> {
 
   constructor() {
     super()
+    this.value = ''
   }
 
   connectedCallback(): void {
