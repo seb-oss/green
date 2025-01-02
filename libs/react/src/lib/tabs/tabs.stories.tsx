@@ -25,8 +25,7 @@ export const Default = {
     children: [
       <Tab title={'Page 1'}>
         <>
-          <p>Tab content will only render when a tab is selected.</p>
-
+          <p className="pt-5">Tab content will only render when a tab is selected.</p>
           <p>
             If you need to pre-load data, do it separately outside of the
             component that is rendered in the tab.
@@ -35,13 +34,15 @@ export const Default = {
       </Tab>,
       <Tab title={'Page 2'}>
         <>
-          <h2>Page 2 is a component</h2>
-          <p>With more comlpex content</p>
+          <h2 className="pt-5">Page 2 is a component</h2>
+          <p className="pt-4">With more comlpex content.</p>
         </>
       </Tab>,
-      <Tab title={'Page 3'}>Page 3, simple text</Tab>,
+      <Tab title={'Page 3'}>
+        <p className="pt-5">Page 3, simple text content.</p>
+      </Tab>,
       <Tab title={'Page 4'}>
-        <>Page 4 Content</>
+        <p className="pt-5">Page 4, simple text content.</p>
       </Tab>,
     ],
   },
@@ -53,11 +54,17 @@ export const DefaultSelection = {
 
   args: {
     children: [
-      <Tab title={'Page 1'}>Page 1 Content</Tab>,
-      <Tab title={'Page 2'}>Page 2 Content</Tab>,
-      <Tab title={'Page 3'}>Page 3 Content</Tab>,
+      <Tab title={'Page 1'}>
+        <div className="pt-5">Page 1 Content, with spacing.</div>
+      </Tab>,
+      <Tab title={'Page 2'}>
+        <div className="pt-5">Page 2 Content, with spacing.</div>
+      </Tab>,
+      <Tab title={'Page 3'}>
+        Page 3 Content, no spacing.
+      </Tab>,
       <Tab title={'Page 4'} selected>
-        Page 4 Content set as selected{' '}
+        <div className="pt-5">Page 4 Content, set as selected.{' '}</div>
       </Tab>,
     ],
   },
@@ -69,13 +76,17 @@ export const DisabledTabs = {
 
   args: {
     children: [
-      <Tab title={'Page 1'}>Page 1 Content</Tab>,
-      <Tab title={'Page 2'}>Page 2 Content</Tab>,
+      <Tab title={'Page 1'}>
+        <div className="pt-5">Page 1 Content, with spacing.</div>
+      </Tab>,
+      <Tab title={'Page 2'}>
+        <div className="pt-5">Page 2 Content, with spacing.</div>
+      </Tab>,
       <Tab title={'Page 3'} disabled>
-        Page 3 Content
+        Page 3 Content.
       </Tab>,
       <Tab title={'Page 4'} disabled>
-        Page 4 Content
+        Page 4 Content.
       </Tab>,
     ],
   },
