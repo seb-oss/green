@@ -13,10 +13,23 @@ const style = css`
       font-family: inherit;
     }
 
+    #trigger::part(_base) {
+      cursor: pointer;
+    }
+
     button {
-      display: contents;
-      font: inherit;
-      width: 100%;
+      appearance: none;
+      background: transparent;
+      border-width: 0;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: currentColor;
+      cursor: pointer;
+    }
+
+    button:focus {
+      outline: none;
     }
 
     slot[name='trigger'] > span {

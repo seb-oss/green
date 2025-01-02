@@ -277,7 +277,7 @@ export class GdsDropdown<ValueT = any>
           <slot name="lead" slot="lead"></slot>
           <button>
             <slot name="trigger">
-              <span> ${unsafeHTML(this.displayValue)} </span>
+              <span>${unsafeHTML(this.displayValue)}</span>
             </slot>
           </button>
           <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
