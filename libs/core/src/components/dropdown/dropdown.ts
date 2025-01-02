@@ -211,7 +211,7 @@ export class GdsDropdown<ValueT = any>
   }
 
   /**
-   * A reference to the field element. This does not refer to the input element itself,
+   * A reference to the field element. This does not refer to the trigger button element itself,
    * but the wrapper that makes up the visual field.
    * Intended for use in integration tests.
    */

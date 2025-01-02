@@ -198,7 +198,7 @@ export const HiddenLabel: Story = {
 export const PlaceholderOptions: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech">
+    <gds-dropdown label="Select tech">
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -216,7 +216,7 @@ export const PlaceholderOptions: Story = {
 export const Searchable: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" searchable>
+    <gds-dropdown label="Select tech" searchable>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -256,7 +256,7 @@ export const Searchable: Story = {
 export const Multiple: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" searchable multiple>
+    <gds-dropdown label="Select tech" searchable multiple>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -272,7 +272,6 @@ export const Invalid: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-dropdown
-      size="small"
       label="Select tech"
       searchable
       aria-invalid="true"
@@ -292,7 +291,7 @@ export const Invalid: Story = {
 export const Disabled: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" searchable disabled>
+    <gds-dropdown label="Select tech" searchable disabled>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
