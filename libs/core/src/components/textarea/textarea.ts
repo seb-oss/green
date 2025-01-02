@@ -136,7 +136,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    this.#addResizeHandleListener()
+    // In the unlikely event the componet is disconnected in the middle of dragging,
+    // this will prevent dangling event listeners on `document`.
+    this.#stopDragging()
   }
 
   render() {
@@ -166,6 +168,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       <gds-field-base
         .disabled=${this.disabled}
         .invalid=${this.invalid}
+        @click=${this.#handleFieldClick}
         multiline
       >
         ${this.#renderFieldContents()}
