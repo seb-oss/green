@@ -110,14 +110,6 @@ export class GdsInput extends GdsFormControlElement<string> {
     this.value = ''
   }
 
-  connectedCallback(): void {
-    super.connectedCallback()
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
-  }
-
   render() {
     return html`${choose(this.variant, [
       ['default', () => this.#renderDefault()],
