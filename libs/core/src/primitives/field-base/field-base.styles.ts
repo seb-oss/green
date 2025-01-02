@@ -84,6 +84,10 @@ export const styles = css`
       color: var(--gds-color-l3-content-negative);
     }
 
+    slot:not([name])::slotted(*) {
+      color: currentColor;
+    }
+
     .main-slot-wrap {
       display: flex;
       flex: 1;
