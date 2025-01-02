@@ -278,8 +278,9 @@ export const Invalid: Story = {
       size="small"
       label="Select tech"
       searchable
-      invalid
+      aria-invalid="true"
       hide-label
+      error-message="This field is required"
     >
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
