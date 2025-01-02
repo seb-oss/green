@@ -270,3 +270,45 @@ export const Multiple: Story = {
     </gds-dropdown>
   `,
 }
+
+export const Invalid: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown
+      size="small"
+      label="Select tech"
+      searchable
+      invalid
+      hide-label
+    >
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+export const Disabled: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown
+      size="small"
+      label="Select tech"
+      searchable
+      disabled
+      hide-label
+    >
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
