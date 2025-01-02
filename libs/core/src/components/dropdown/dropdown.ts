@@ -1,18 +1,13 @@
-import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 
+import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
 import { GdsFormControlElement } from '../form/form-control'
 import styles from './dropdown.styles'
 
@@ -46,6 +41,7 @@ import '../button'
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-dropdown')
+@localized()
 export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
@@ -219,14 +215,8 @@ export class GdsDropdown<ValueT = any>
   @query('#searchinput')
   private _elSearchInput!: HTMLInputElement
 
-  constructor() {
-    super()
-    updateWhenLocaleChanges(this)
-  }
-
   connectedCallback() {
     super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-dropdown')
 
     this.updateComplete.then(() => {
       this._handleLightDOMChange()

@@ -16,7 +16,6 @@ import '../../primitives/field-base'
 import '../icon/icons/cross-small'
 import '../flex'
 import '../button'
-import '../theme'
 
 import type { GdsButton } from '../button'
 
