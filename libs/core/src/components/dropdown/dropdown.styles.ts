@@ -26,6 +26,12 @@ const style = css`
       line-height: inherit;
       color: currentColor;
       cursor: pointer;
+      padding: 0;
+      text-align: left;
+      flex: 0 1 100%;
+
+      /* This prevents overflow when the text is too long */
+      display: grid;
     }
 
     button:focus {

@@ -133,7 +133,11 @@ export const SyncedPopoverWidth: Story = {
   ...DefaultParams,
   name: 'Synced popover width',
   render: (args) => html`
-    <gds-dropdown sync-popover-width style="width: 200px">
+    <gds-dropdown
+      label="Synced popover width"
+      sync-popover-width
+      style="width: 200px"
+    >
       <gds-option value="1701-D-1">
         Enterprise 1701-D is a starship from the TNG series
       </gds-option>
