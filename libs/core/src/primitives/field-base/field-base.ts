@@ -78,6 +78,7 @@ export class GdsFieldBase extends GdsElement {
       invalid: this.invalid ?? false,
       multiline: this.multiline,
       disabled: this.disabled,
+      'lead-slot-occupied': this._leadSlotOccupied,
       'trail-slot-occupied': this._trailSlotOccupied,
       'action-slot-occupied': this._actionSlotOccupied,
       small: this.size === 'small',

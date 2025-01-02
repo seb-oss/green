@@ -106,9 +106,6 @@ export class GdsInput extends GdsFormControlElement<string> {
   @query('input')
   private elInput!: HTMLInputElement
 
-  @state()
-  trailSlotOccupied = false
-
   /**
    * A reference to the clear button element. Returns null if there is no clear button.
    * Intended for use in integration tests.
@@ -118,7 +115,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   /**
-   * A reference to the field element. This does not refer to the ionoput element itself,
+   * A reference to the field element. This does not refer to the input element itself,
    * but the wrapper that makes up the visual field.
    * Intended for use in integration tests.
    */
@@ -241,25 +238,7 @@ export class GdsInput extends GdsFormControlElement<string> {
   }
 
   #renderSlotTrail() {
-    return html`
-      <slot
-        slot="trail"
-        name="trail"
-        @slotchange=${this.#handleSlotChange}
-      ></slot>
-    `
-  }
-
-  #handleSlotChange(event: Event) {
-    const slot = event.target as HTMLSlotElement
-    const assignedNodes = slot.assignedNodes({ flatten: true })
-    this.trailSlotOccupied =
-      assignedNodes.length > 0 &&
-      assignedNodes.some(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE ||
-          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
-      )
+    return html`<slot slot="trail" name="trail"></slot>`
   }
 
   #renderNativeInput() {
@@ -267,11 +246,6 @@ export class GdsInput extends GdsFormControlElement<string> {
       <input
         @input=${this.#handleOnInput}
         @change=${this.#handleOnChange}
-        style="${this.invalid
-          ? 'color: var(--gds-color-l3-content-negative);'
-          : this.disabled
-            ? 'color: currentColor;pointer-events:none;'
-            : null}"
         .value=${this.value}
         id="input"
         ?disabled=${this.disabled}
