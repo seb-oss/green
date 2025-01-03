@@ -260,7 +260,9 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
                   }}
                 ></gds-date-part-spinner>`,
             ),
-            html`<span>${this._dateFormatLayout.delimiter}</span>`,
+            html`<span class="separator"
+              >${this._dateFormatLayout.delimiter}</span
+            >`,
           )}
         </div>
         <gds-button
