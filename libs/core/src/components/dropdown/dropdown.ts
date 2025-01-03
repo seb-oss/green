@@ -49,20 +49,10 @@ export class GdsDropdown<ValueT = any>
   implements OptionsContainer
 {
   static styles = [tokens, styles]
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-  }
 
   get type() {
     return 'gds-dropdown'
   }
-
-  /**
-   * The label of the dropdown.
-   * Will only render if this property is set to a non-empty string.
-   */
-  @property()
-  label = ''
 
   /**
    * The supporting text displayed between the label and the field itself
