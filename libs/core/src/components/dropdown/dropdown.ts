@@ -34,8 +34,10 @@ import '../button'
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
- * @slot sub-label - Renders between the label and the trigger button.
- * @slot message - Renders below the trigger button. Will be red if there is a validation error.
+ * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
+ * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
+ * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
  *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
@@ -47,20 +49,10 @@ export class GdsDropdown<ValueT = any>
   implements OptionsContainer
 {
   static styles = [tokens, styles]
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-  }
 
   get type() {
     return 'gds-dropdown'
   }
-
-  /**
-   * The label of the dropdown.
-   * Will only render if this property is set to a non-empty string.
-   */
-  @property()
-  label = ''
 
   /**
    * The supporting text displayed between the label and the field itself
@@ -246,13 +238,19 @@ export class GdsDropdown<ValueT = any>
         () => html`
           <gds-form-control-header>
             <label for="trigger" slot="label">${this.label}</label>
-            <span slot="supporting-text" id="supporting-text">
-              ${this.supportingText}
-            </span>
+            ${when(
+              this.supportingText.length > 0,
+              () =>
+                html`<span slot="supporting-text" id="supporting-text">
+                  ${this.supportingText}
+                </span>`,
+            )}
             <slot
               name="extended-supporting-text"
               slot="extended-supporting-text"
             ></slot>
+            <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
+            <slot name="sub-label" slot="supporting-text"></slot>
           </gds-form-control-header>
         `,
       )}
@@ -314,10 +312,22 @@ export class GdsDropdown<ValueT = any>
       ${when(
         !this.hideLabel,
         () => html`
-          <gds-form-control-footer
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
-          ></gds-form-control-footer>
+          <gds-form-control-footer class="size-${this.size}">
+            ${when(
+              this.invalid,
+              // @deprecated
+              // Wrapped in a slot for backwards compatibility with the deprecated message slot
+              // Remove for 2.0 release
+              () => html`
+                <slot name="message" slot="message">
+                  <gds-icon-triangle-exclamation
+                    solid
+                  ></gds-icon-triangle-exclamation>
+                  ${this.errorMessage || this.validationMessage}
+                </slot>
+              `,
+            )}
+          </gds-form-control-footer>
         `,
       )}
     `

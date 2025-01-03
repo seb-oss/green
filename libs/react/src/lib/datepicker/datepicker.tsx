@@ -128,6 +128,7 @@ export const Datepicker = forwardRef(
       showWeeks,
       testId,
       validator,
+      size,
       selectedDate,
       currentDate,
       ...props
@@ -171,6 +172,7 @@ export const Datepicker = forwardRef(
           onchange={onChangeHandler}
           value={value}
           ref={_ref}
+          size={size === 'small' ? 'small' : 'large'}
           {...props}
         />
       </div>
