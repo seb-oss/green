@@ -22,11 +22,6 @@ const style = css`
       max-width: 100%;
       box-sizing: border-box;
       position: relative;
-      transition:
-        background-color 0.2s,
-        border-color 0.2s,
-        color 0.2s,
-        outline-color 422ms;
 
       &::before {
         content: ' ';
@@ -38,7 +33,6 @@ const style = css`
         opacity: 0;
         visitility: hidden;
         pointer-events: none;
-        transition: opacity 422ms;
       }
     }
 

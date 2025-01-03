@@ -29,9 +29,7 @@ export const styles = css`
         calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
       min-block-size: var(--gds-space-3xl);
       outline-style: solid;
-      outline-color: transparent;
-      outline-width: var(--gds-space-3xs);
-      outline-offset: var(--gds-space-3xs);
+      outline-width: 0;
       border-radius: var(--gds-space-xs);
       background: var(--gds-color-l3-background-secondary);
       color: var(--gds-color-l3-content-tertiary);
@@ -43,6 +41,8 @@ export const styles = css`
     }
 
     .field:focus-within {
+      outline-width: var(--gds-space-3xs);
+      outline-offset: var(--gds-space-3xs);
       outline-color: currentColor;
     }
 
