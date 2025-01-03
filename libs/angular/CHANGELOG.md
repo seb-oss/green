@@ -1,5 +1,19 @@
 # Changelog
 
+## 5.1.1
+
+### Patch Changes
+
+- 4d8df8b: **NggCoreControlDirective:** Fix a missing public export
+- Updated dependencies [5e16375]
+- Updated dependencies [33b08a2]
+- Updated dependencies [40f905b]
+- Updated dependencies [f43d556]
+- Updated dependencies [4d8df8b]
+- Updated dependencies [f43d556]
+- Updated dependencies [5e16375]
+  - @sebgroup/green-core@1.62.0
+
 ## 5.1.0
 
 ### Minor Changes
