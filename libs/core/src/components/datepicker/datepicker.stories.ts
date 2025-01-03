@@ -142,6 +142,13 @@ export const InputFieldSize: Story = {
   `,
 }
 
+export const Invalid: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker label="Invalid date" aria-invalid="true"></gds-datepicker>
+  `,
+}
+
 /**
  * Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
  */
