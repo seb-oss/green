@@ -27,15 +27,17 @@ export class GdsFormControlFooter extends GdsElement {
   render() {
     return html`<div aria-live="polite">
       <div class="error-message">
-        ${when(
-          this.validationMessage,
-          () => html`
-            <gds-icon-triangle-exclamation
-              solid
-            ></gds-icon-triangle-exclamation>
-            ${this.validationMessage}
-          `,
-        )}
+        <slot name="message"
+          >${when(
+            this.validationMessage,
+            () => html`
+              <gds-icon-triangle-exclamation
+                solid
+              ></gds-icon-triangle-exclamation>
+              ${this.validationMessage}
+            `,
+          )}</slot
+        >
       </div>
       <div class="char-counter">
         ${when(Number.isInteger(this.charCounter), () =>

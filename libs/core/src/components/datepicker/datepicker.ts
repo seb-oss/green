@@ -49,9 +49,11 @@ type DateFormatLayout = {
  *
  * @status beta
  *
- * @slot message - Message to show below the input field. Will be red if there is a validation error.
- * @slot sub-label - Renders between the label and the trigger button.
- * *
+ * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
+ * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
+ * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
+ *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
@@ -59,10 +61,6 @@ type DateFormatLayout = {
 @localized()
 export class GdsDatepicker extends GdsFormControlElement<Date> {
   static styles = [tokens, styles]
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-    delegatesFocus: true,
-  }
 
   get type() {
     return 'gds-datepicker'
@@ -94,12 +92,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   open = false
 
   /**
-   * The label text displayed above the datepicker. This should always be set to a descriptive label.
-   */
-  @property()
-  label = ''
-
-  /**
    * The supporting text displayed between the label and the field itself
    */
   @property({ attribute: 'supporting-text' })
@@ -111,24 +103,11 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
-  @property({
-    attribute: 'disabled',
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
-
   /**
    * Whether to show a column of week numbers in the calendar.
    */
   @property({ type: Boolean, attribute: 'show-week-numbers' })
   showWeekNumbers = false
-
-  /**
-   * Whether to use the small variant of the datepicker field.
-   */
-  // @property()
-  // size: 'small' | 'medium' = 'medium'
 
   /**
    * Whether to hide the label above the input field.
@@ -232,13 +211,19 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     return html`
       <gds-form-control-header class="size-${this.size}">
         <label for="spinner-0" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
+        ${when(
+          this.supportingText.length > 0,
+          () =>
+            html`<span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>`,
+        )}
         <slot
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
+        <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
+        <slot name="sub-label" slot="supporting-text"></slot>
       </gds-form-control-header>
       <gds-field-base
         .size=${this.size}
@@ -294,10 +279,22 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         </gds-button>
       </gds-field-base>
 
-      <gds-form-control-footer
-        class="size-${this.size}"
-        .validationMessage=${this.invalid ? this.validationMessage : undefined}
-      ></gds-form-control-footer>
+      <gds-form-control-footer class="size-${this.size}">
+        ${when(
+          this.invalid,
+          // @deprecated
+          // Wrapped in a slot for backwards compatibility with the deprecated message slot
+          // Remove for 2.0 release
+          () => html`
+            <slot name="message" slot="message">
+              <gds-icon-triangle-exclamation
+                solid
+              ></gds-icon-triangle-exclamation>
+              ${this.errorMessage || this.validationMessage}
+            </slot>
+          `,
+        )}
+      </gds-form-control-footer>
 
       <gds-popover
         .triggerRef=${this._elTrigger}
