@@ -7,6 +7,10 @@ const style = css`
       display: contents;
     }
 
+    :host > div:not([hidden]) {
+      display: contents;
+    }
+
     :host([open]) dialog {
       opacity: 1;
       box-sizing: border-box;

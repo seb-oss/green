@@ -6,6 +6,7 @@ import { map } from 'lit/directives/map.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
+import { watch } from '../../utils/decorators/watch.js'
 import { styles } from './field-base.styles'
 
 /**
@@ -50,7 +51,7 @@ export class GdsFieldBase extends GdsElement {
    * Whether the field is invalid.
    */
   @property({ type: Boolean })
-  invalid?: boolean
+  invalid = false
 
   @query('slot:not([name])')
   private _mainSlotElement!: HTMLSlotElement
@@ -85,7 +86,7 @@ export class GdsFieldBase extends GdsElement {
     }
 
     return html`
-      <div class="field ${classMap(classes)}">
+      <div class="field ${classMap(classes)}" part="_base">
         ${this.#renderFieldContents()}
       </div>
     `
@@ -159,5 +160,14 @@ export class GdsFieldBase extends GdsElement {
         @slotchange=${(e: Event) => this.#handleSlotChange('trail', e)}
       ></slot>
     `
+  }
+
+  @watch('disabled')
+  private _handleDisabledChange() {
+    if (this.disabled) {
+      this.setAttribute('inert', '')
+    } else {
+      this.removeAttribute('inert')
+    }
   }
 }

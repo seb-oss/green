@@ -43,6 +43,12 @@ const DefaultParams: Story = {
   },
   args: {
     label: 'Pick a date',
+    supportingText: 'Supporting text',
+    innherHTML: `
+      <span slot="extended-supporting-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </span>
+      <gds-icon-books slot="lead"></gds-icon-books>
+      `,
   },
 }
 
@@ -51,24 +57,19 @@ export const Basic: Story = {
 }
 
 /**
- * The date picker takes a `label` attribute for setting the label text, and has two slots for adding
- * additional information.
- *
- * The `sub-label` slot sits between the label and the input, and the `message` slot sits below the
- * input. The `message` slot is used to display instructions and/or validation errors.
+ * The date picker takes a `label` attribute for setting the label text, and
+ * a `supporting-text` attribute for setting the supporting text below the label.
  *
  * When the value is changed by a user, a `change` event is fired.
  */
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-datepicker label="Using slots" onchange="console.log(this.value)">
-      <span slot="sub-label">
-        A sub-label can be added as additional description
-      </span>
-      <span slot="message">
-        Instructive message. Will turn red if there is a validation error
-      </span>
+    <gds-datepicker
+      label="Supporting text"
+      supporting-text="A supporting text can be added below the label"
+      onchange="console.log(this.value)"
+    >
     </gds-datepicker>
   `,
 }
@@ -132,6 +133,29 @@ export const InputFieldSize: Story = {
       label="A small datepicker"
       hide-label
       size="small"
+    ></gds-datepicker>
+  `,
+}
+
+export const Invalid: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker label="Invalid date" aria-invalid="true"></gds-datepicker>
+  `,
+}
+
+/**
+ * Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
+ */
+export const DisabledField: Story = {
+  ...DefaultParams,
+  name: 'Disabled',
+  render: (args) => html`
+    <gds-datepicker
+      label="Using min and max dates"
+      min="2022-11-11"
+      max="2024-02-20"
+      disabled
     ></gds-datepicker>
   `,
 }
