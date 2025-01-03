@@ -1,18 +1,13 @@
-import { msg, str, updateWhenLocaleChanges } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
+import { localized, msg, str, updateWhenLocaleChanges } from '@lit/localize'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 
+import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping'
 import { GdsFormControlElement } from '../form/form-control'
 import styles from './dropdown.styles'
 
@@ -22,11 +17,14 @@ import type {
   OptionsContainer,
 } from '../../primitives/listbox/option'
 
+import '../../primitives/form-control-header'
+import '../../primitives/form-control-footer'
+import '../../primitives/field-base'
+import '../../primitives/listbox'
+import '../icon/icons/checkmark'
+import '../icon/icons/chevron-bottom'
 import '../popover'
 import '../button'
-import '../icon/icons/chevron-bottom'
-import '../icon/icons/checkmark'
-import '../../primitives/listbox'
 
 /**
  * @element gds-dropdown
@@ -43,6 +41,7 @@ import '../../primitives/listbox'
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
 @gdsCustomElement('gds-dropdown')
+@localized()
 export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
@@ -50,7 +49,6 @@ export class GdsDropdown<ValueT = any>
   static styles = [tokens, styles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
-    delegatesFocus: true,
   }
 
   get type() {
@@ -63,6 +61,12 @@ export class GdsDropdown<ValueT = any>
    */
   @property()
   label = ''
+
+  /**
+   * The supporting text displayed between the label and the field itself
+   */
+  @property({ attribute: 'supporting-text' })
+  supportingText = ''
 
   /**
    * Sets the open state of the dropdown.
@@ -199,6 +203,22 @@ export class GdsDropdown<ValueT = any>
     return displayValue || this.placeholder?.innerHTML || ''
   }
 
+  /**
+   * Moves focus to this element.
+   */
+  focus() {
+    this._getValidityAnchor().focus()
+  }
+
+  /**
+   * A reference to the field element. This does not refer to the trigger button element itself,
+   * but the wrapper that makes up the visual field.
+   * Intended for use in integration tests.
+   */
+  test_getFieldElement() {
+    return this.shadowRoot?.querySelector('#field')
+  }
+
   #optionElements?: NodeListOf<GdsOption>
 
   @query('#trigger')
@@ -210,14 +230,8 @@ export class GdsDropdown<ValueT = any>
   @query('#searchinput')
   private _elSearchInput!: HTMLInputElement
 
-  constructor() {
-    super()
-    updateWhenLocaleChanges(this)
-  }
-
   connectedCallback() {
     super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-dropdown')
 
     this.updateComplete.then(() => {
       this._handleLightDOMChange()
@@ -228,12 +242,20 @@ export class GdsDropdown<ValueT = any>
   render() {
     return html`
       ${when(
-        this.label && !this.hideLabel,
-        () => html`<label for="trigger">${this.label}</label>`,
+        !this.hideLabel,
+        () => html`
+          <gds-form-control-header>
+            <label for="trigger" slot="label">${this.label}</label>
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+          </gds-form-control-header>
+        `,
       )}
-
-      <span class="form-info"><slot name="sub-label"></slot></span>
-
       <gds-popover
         .label=${this.label}
         .open=${this.open}
@@ -243,9 +265,10 @@ export class GdsDropdown<ValueT = any>
         .disableMobileStyles=${this.disableMobileStyles}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
-        <button
-          id="trigger"
-          name="trigger"
+        <gds-field-base
+          .size=${this.size}
+          .disabled=${this.disabled}
+          .invalid=${this.invalid}
           aria-haspopup="listbox"
           slot="trigger"
           role="combobox"
@@ -253,16 +276,17 @@ export class GdsDropdown<ValueT = any>
           aria-controls="listbox"
           aria-expanded="${this.open}"
           aria-label="${this.label}"
-          part="trigger"
-          class=${classMap({ small: this.size === 'small' })}
+          id="field"
         >
-          <slot name="trigger">
-            <span>${unsafeHTML(this.displayValue)}</span>
-          </slot>
-          <div class="icon">
-            <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-          </div>
-        </button>
+          <slot name="lead" slot="lead"></slot>
+          <button id="trigger" name="trigger">
+            <slot name="trigger">
+              <span>${unsafeHTML(this.displayValue)}</span>
+            </slot>
+          </button>
+          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+        </gds-field-base>
+
         ${when(
           this.searchable,
           () =>
@@ -287,9 +311,15 @@ export class GdsDropdown<ValueT = any>
         </gds-listbox>
       </gds-popover>
 
-      <span class="form-info"
-        ><slot name="message">${this.validationMessage}</slot></span
-      >
+      ${when(
+        !this.hideLabel,
+        () => html`
+          <gds-form-control-footer
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>
+        `,
+      )}
     `
   }
 

@@ -39,15 +39,6 @@ import type { GdsButton } from '../button'
 export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
-  @property()
-  value? = ''
-
-  /**
-   * The label displayed above the field
-   */
-  @property()
-  label = ''
-
   /**
    * Rows of the textarea
    */
@@ -68,16 +59,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   supportingText = ''
 
   /**
-   * If the input is Disabled
-   */
-  @property({
-    attribute: 'disabled',
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
-
-  /**
    * Whether the field should be clearable or not. Clearable fields will display a clear button when
    * the field has a value.
    */
@@ -95,7 +76,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
    *
    */
   @property()
-  resize = ''
+  resize = 'auto'
 
   /**
    * The maximum number of characters allowed in the field.
@@ -141,7 +122,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   constructor() {
     super()
-    this.resize = 'auto'
+    this.value = ''
   }
 
   connectedCallback(): void {
