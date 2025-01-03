@@ -6,7 +6,7 @@ import * as Popover from '../popover/popover.trans.styles'
 import styles from './datepicker.trans.styles.scss?inline'
 
 export function register() {
-  let tokensAndStyles =
+  const tokensAndStyles =
     styles.toString() + tokens.reduce((acc, token) => acc + token.cssText, '')
   TransitionalStyles.instance.register(
     'gds-datepicker',
