@@ -2,7 +2,7 @@
  * Public API Surface of tabs
  */
 
-export * from './lib/tab.directive';
-export * from './lib/tabs.component';
-export * from './lib/tabs.models';
-export * from './lib/tabs.module';
+export * from './tab.directive'
+export * from './tabs.component'
+export * from './tabs.models'
+export * from './tabs.module'

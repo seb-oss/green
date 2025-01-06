@@ -317,7 +317,8 @@ export class NggvDragDropComponent implements OnInit, OnDestroy {
   }
 
   /** @internal */
-  onConfirmRemove({ payload: file }: DialogEvent<LocalFile & APIFile>) {
+  onConfirmRemove(event: DialogEvent<LocalFile & APIFile>) {
+    const { payload: file } = event
     if (!file || !this.service) return
 
     // Abort upload and set local state to aborted to inform user

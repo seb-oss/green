@@ -1,16 +1,16 @@
 /*
  * Public API Surface of date-picker
  */
-export * from './lib/date-control-value-accessor/date-control-value-accessor.component';
-export * from './lib/components/calendar/calendar.component';
-export * from './lib/components/calendar-control/calendar-control.component';
-export * from './lib/components/date-input/date-input.component';
-export * from './lib/components/datepicker/datepicker.component';
-export * from './lib/directives/calendar-date.directive';
-export * from './lib/pipes/is-disabled.pipe';
-export * from './lib/pipes/matches.pipe';
-export * from './lib/models/dates';
-export * from './lib/datepicker.models';
-export * from './lib/datepicker.globals';
-export * from './lib/datepicker.module';
-export * from './lib/datepicker.utils';
+export * from './date-control-value-accessor/date-control-value-accessor.component'
+export * from './components/calendar/calendar.component'
+export * from './components/calendar-control/calendar-control.component'
+export * from './components/date-input/date-input.component'
+export * from './components/datepicker/datepicker.component'
+export * from './directives/calendar-date.directive'
+export * from './pipes/is-disabled.pipe'
+export * from './pipes/matches.pipe'
+export * from './models/dates'
+export * from './datepicker.models'
+export * from './datepicker.globals'
+export * from './datepicker.module'
+export * from './datepicker.utils'
