@@ -26,12 +26,12 @@
     font-weight: 400;
   }
 
-  .ngv-datepicker {
+  .nggv-datepicker {
     margin-top: 0.25rem;
     position: absolute;
   }
 
-  .ngv-field--error {
+  .nggv-field--error {
     @include ngv.text-field--error();
   }
 
@@ -39,7 +39,7 @@
     @include ngv.text-field--error-item();
   }
 
-  .ngv-field--locked {
+  .nggv-field--locked {
   }
 
   .error-item--text {
@@ -70,7 +70,7 @@
     height: 2.625rem;
     display: flex;
 
-    .ngv-button-date {
+    .nggv-button-date {
       --text-disabled-color: #adadad;
       @include button.base;
       @include button.ghost-dark;
@@ -114,7 +114,7 @@
       }
     }
 
-    .ngv-field-date {
+    .nggv-field-date {
       // Config
       $_height: 2.75rem;
       $_border-color-normal: #cecece;

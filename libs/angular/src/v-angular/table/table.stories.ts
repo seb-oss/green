@@ -63,7 +63,7 @@ const mockActions = {
 
 const TableStory: StoryFn<TableComponent<ColumnData>> = (args) => ({
   template: /*html*/ `
-    <ngv-table
+    <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
@@ -74,13 +74,13 @@ const TableStory: StoryFn<TableComponent<ColumnData>> = (args) => ({
       (ngvRowClick)="ngvRowClick($event)"
       (ngvRowSelect)="ngvRowSelect($event)"
       (ngvOrderBy)="ngvOrderBy($event)">
-    </ngv-table>`,
+    </nggv-table>`,
   props: args,
 })
 
 const TableStoryAlt: StoryFn<TableComponent<ColumnData>> = (args) => ({
   template: /*html*/ `
-    <ngv-table
+    <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
@@ -120,7 +120,7 @@ const TableStoryAlt: StoryFn<TableComponent<ColumnData>> = (args) => ({
         </tr>
       </ng-template>
 
-    </ngv-table>`,
+    </nggv-table>`,
   props: args,
 })
 
@@ -128,7 +128,7 @@ const TableStoryWithAppendedRows: StoryFn<
   TableComponent<ColumnDataWithErrorMessages>
 > = (args) => ({
   template: /*html*/ `
-    <ngv-table
+    <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
@@ -146,7 +146,7 @@ const TableStoryWithAppendedRows: StoryFn<
         </tr>
       </ng-template>
 
-    </ngv-table>`,
+    </nggv-table>`,
   props: args,
 })
 
@@ -215,7 +215,7 @@ const GlobalSortTableStory: StoryFn<TableComponent<ColumnData>> = (args) => {
 
   return {
     template: /*html*/ `
-    <ngv-table
+    <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
@@ -224,7 +224,7 @@ const GlobalSortTableStory: StoryFn<TableComponent<ColumnData>> = (args) => {
       (ngvRowClick)="ngvRowClick($event)"
       (ngvRowSelect)="ngvRowSelect($event)"
       (ngvOrderBy)="ngvOrderBy($event)">
-    </ngv-table>`,
+    </nggv-table>`,
     props: {
       ...args,
       ngvOrderBy: (value?: any) => filterData(value),

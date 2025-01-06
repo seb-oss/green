@@ -1,20 +1,25 @@
-import { Component, ViewChild } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { TableDirective, TableTemplateDirective } from './table.directive';
+import { Component, ViewChild } from '@angular/core'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-const tableColumnVerifyProperty = 'testProperty';
-const tableColumnTargetVerifyProperty = 'td';
+import { TableDirective, TableTemplateDirective } from './table.directive'
+
+const tableColumnVerifyProperty = 'testProperty'
+const tableColumnTargetVerifyProperty = 'td'
 
 @Component({
-  selector: 'ngv-directive-host',
+  selector: 'nggv-directive-host',
   template: /*html*/ `
-    <ng-template [tableColumn]="tableColumn" [tableColumnTarget]="tableColumnTarget"></ng-template>
+    <ng-template
+      [tableColumn]="tableColumn"
+      [tableColumnTarget]="tableColumnTarget"
+    ></ng-template>
   `,
 })
 class TestHostComponent {
-  @ViewChild(TableTemplateDirective, { static: true }) tableTemplate!: TableTemplateDirective;
-  tableColumn = tableColumnVerifyProperty;
-  tableColumnTarget = tableColumnTargetVerifyProperty;
+  @ViewChild(TableTemplateDirective, { static: true })
+  tableTemplate!: TableTemplateDirective
+  tableColumn = tableColumnVerifyProperty
+  tableColumnTarget = tableColumnTargetVerifyProperty
 }
 
 describe('[NgvTable]', () => {
@@ -23,44 +28,42 @@ describe('[NgvTable]', () => {
   // ----------------------------------------------------------------------------
   describe('TableDirective - constructor()', () => {
     it('should create an instance', () => {
-      const directive = new TableDirective();
-      expect(directive).toBeTruthy();
-    });
-  });
+      const directive = new TableDirective()
+      expect(directive).toBeTruthy()
+    })
+  })
 
   // ----------------------------------------------------------------------------
   // TableTemplateDirective - constructor()
   // ----------------------------------------------------------------------------
   describe('TableTemplateDirective - constructor()', () => {
-    let component: TestHostComponent;
-    let fixture: ComponentFixture<TestHostComponent>;
-    let directive: TableTemplateDirective;
+    let component: TestHostComponent
+    let fixture: ComponentFixture<TestHostComponent>
+    let directive: TableTemplateDirective
 
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestHostComponent, TableTemplateDirective],
-        }).compileComponents();
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestHostComponent, TableTemplateDirective],
+      }).compileComponents()
+    }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent<TestHostComponent>(TestHostComponent);
-      component = fixture.componentInstance;
-      directive = component.tableTemplate;
-      fixture.detectChanges();
-    });
+      fixture = TestBed.createComponent<TestHostComponent>(TestHostComponent)
+      component = fixture.componentInstance
+      directive = component.tableTemplate
+      fixture.detectChanges()
+    })
 
     it('should create an instance', () => {
-      expect(directive).toBeTruthy();
-    });
+      expect(directive).toBeTruthy()
+    })
 
     it(`tableColumn should have value '${tableColumnVerifyProperty}'`, () => {
-      expect(directive.tableColumn).toBe(tableColumnVerifyProperty);
-    });
+      expect(directive.tableColumn).toBe(tableColumnVerifyProperty)
+    })
 
     it(`tableColumnTarget should have value '${tableColumnTargetVerifyProperty}'`, () => {
-      expect(directive.tableColumnTarget).toBe(tableColumnTargetVerifyProperty);
-    });
-  });
-});
+      expect(directive.tableColumnTarget).toBe(tableColumnTargetVerifyProperty)
+    })
+  })
+})

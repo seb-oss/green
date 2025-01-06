@@ -14,7 +14,7 @@ import { PaginationComponent } from './pagination.component'
 @Component({
   selector: 'nggv-pagination-test',
   template: `
-    <ngv-pagination
+    <nggv-pagination
       [value]="value"
       [className]="className"
       (pageNumberChange)="setPagination($event)"
@@ -28,7 +28,7 @@ import { PaginationComponent } from './pagination.component'
       [nextText]="nextText"
       [useFirstAndLast]="useFirstAndLast"
       [previousText]="previousText"
-    ></ngv-pagination>
+    ></nggv-pagination>
   `,
 })
 class PaginationTestComponent {

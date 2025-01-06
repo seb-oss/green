@@ -31,7 +31,7 @@
   <ng-container *ngIf="locked">
     <div
       [id]="id + '-input'"
-      class="ngv-field--locked"
+      class="nggv-field--locked"
       [attr.name]="name"
       [attr.value]="state"
       [attr.role]="role"
@@ -50,8 +50,8 @@
       <input
         #input
         [id]="id + '-input'"
-        class="ngv-field-date"
-        [class.ngv-field--error]="invalid"
+        class="nggv-field-date"
+        [class.nggv-field--error]="invalid"
         type="text"
         autocomplete="off"
         [attr.name]="name"
@@ -72,8 +72,8 @@
       <button
         aria-label="toggle calendar"
         #toggleCalendarButton
-        class="ngv-button-date"
-        [class.ngv-field--error]="invalid"
+        class="nggv-button-date"
+        [class.nggv-field--error]="invalid"
         type="button"
         data-thook="toggle-calendar-button"
         (click)="toggleDatepicker()"
@@ -88,8 +88,8 @@
     </div>
 
     <!-- DATEPICKER -->
-    <div class="ngv-datepicker" *ngIf="shown">
-      <ngv-datepicker
+    <div class="nggv-datepicker" *ngIf="shown">
+      <nggv-datepicker
         #input
         [type]="type"
         [disableDates]="disableDates"
@@ -104,7 +104,7 @@
         (ngvDateChange)="onDateChange($event)"
       >
         <ng-content></ng-content>
-      </ngv-datepicker>
+      </nggv-datepicker>
     </div>
 
     <!-- ERRORS -->

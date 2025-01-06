@@ -16,7 +16,7 @@ const FileServiceStub: FileService = {
 } as FileService
 
 export const NgvDialogMock = Component({
-  selector: 'ngv-dialog',
+  selector: 'nggv-dialog',
   template: '',
   inputs: ['title', 'content', 'payload', 'buttons'],
 })(class _ {}) as any

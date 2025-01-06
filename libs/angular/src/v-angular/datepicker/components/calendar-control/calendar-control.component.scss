@@ -8,7 +8,7 @@
   align-items: center;
   gap: 0.25rem;
 
-  .ngv-calendar-select {
+  .nggv-calendar-select {
     --sg-border-radius: 4px;
     --sg-border-width: 1px;
     --sg-border-color: #868686;
@@ -37,8 +37,8 @@
     width: 6rem;
   }
 
-  button.ngv-prev-button,
-  button.ngv-next-button {
+  button.nggv-prev-button,
+  button.nggv-next-button {
     --sg-border-radius: 4px;
     --sg-border-width: 0;
     --sg-border-color: transparent;

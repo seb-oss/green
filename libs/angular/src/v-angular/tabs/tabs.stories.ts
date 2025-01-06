@@ -61,12 +61,12 @@ const argsToAttr = (args: any) =>
 
 const Template: StoryFn<TabsComponent> = (args) => ({
   template: /* html */ `
-  <ngv-tabs ${argsToAttr(args)}>
+  <nggv-tabs ${argsToAttr(args)}>
     <article tab="Tab 1">Occaecati enim provident. Et ut ratione. Est laborum enim possimus rerum et nesciunt.</article>
     <article tab="Tab 2" id="two" [active]="true">Praesentium autem quos eos enim doloribus quis cupiditate repudiandae labore. Harum commodi cumque maiores perspiciatis et. Vitae voluptas aspernatur aut perferendis debitis nam voluptatem velit.</article>
     <article tab="Tab 3" [disabled]="true"></article>
     <article tab="Tab <strong>4</strong>">Quibusdam eius voluptatem porro et totam qui odio nulla autem. Possimus vitae quisquam et totam natus magnam. Repellendus iusto maiores mollitia sunt neque et dolore eaque.</article>
-  </ngv-tabs>
+  </nggv-tabs>
   `,
   props: args,
 })

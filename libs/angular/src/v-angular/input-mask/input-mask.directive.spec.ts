@@ -19,8 +19,8 @@ import { BrowserModule } from '@angular/platform-browser'
 
 import { INPUT_MASK_CONFIG, InputMaskConfig } from './config'
 import { createMask } from './constants'
-import { NgvInputMaskDirective } from './input-mask.directive'
-import { NgvInputMaskModule } from './input-mask.module'
+import { NggvInputMaskDirective } from './input-mask.directive'
+import { NggvInputMaskModule } from './input-mask.module'
 import { InputmaskOptions } from './input-mask.types'
 
 describe('[NgvInputMask] -> InputMaskDirective', () => {
@@ -136,7 +136,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         FormsModule,
         BrowserModule,
         ReactiveFormsModule,
-        NgvInputMaskModule.forRoot({ isAsync: true }),
+        NggvInputMaskModule.forRoot({ isAsync: true }),
       ],
       providers: [
         InputMaskConfig,
@@ -147,7 +147,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
         },
         {
           provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => NgvInputMaskDirective),
+          useExisting: forwardRef(() => NggvInputMaskDirective),
           multi: true,
         },
       ],
@@ -270,7 +270,7 @@ describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
         FormsModule,
         BrowserModule,
         ReactiveFormsModule,
-        NgvInputMaskModule.forRoot({ isAsync: true }),
+        NggvInputMaskModule.forRoot({ isAsync: true }),
       ],
       providers: [
         InputMaskConfig,
@@ -281,7 +281,7 @@ describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
         },
         {
           provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => NgvInputMaskDirective),
+          useExisting: forwardRef(() => NggvInputMaskDirective),
           multi: true,
         },
       ],

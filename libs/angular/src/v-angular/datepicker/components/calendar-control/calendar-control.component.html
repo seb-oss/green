@@ -1,7 +1,7 @@
 <button
   *ngIf="type === 'normal'"
   data-thook="previous-month"
-  class="ngv-prev-button"
+  class="nggv-prev-button"
   (click)="viewPreviousMonth()"
 >
   <gds-icon-chevron-left *nggCoreElement></gds-icon-chevron-left>
@@ -9,7 +9,7 @@
 
 <ng-container [formGroup]="selectedCalendar">
   <select
-    class="sdv-field-dropdown-native ngv-calendar-select"
+    class="sdv-field-dropdown-native nggv-calendar-select"
     data-thook="select-month"
     formControlName="month"
   >
@@ -24,7 +24,7 @@
   </select>
 
   <select
-    class="sdv-field-dropdown-native ngv-calendar-select"
+    class="sdv-field-dropdown-native nggv-calendar-select"
     data-thook="select-year"
     formControlName="year"
   >
@@ -42,7 +42,7 @@
 <button
   *ngIf="type === 'normal'"
   data-thook="next-month"
-  class="ngv-next-button"
+  class="nggv-next-button"
   (click)="viewNextMonth()"
 >
   <gds-icon-chevron-right *nggCoreElement></gds-icon-chevron-right>

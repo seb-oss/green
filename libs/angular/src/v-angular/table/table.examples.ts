@@ -1,16 +1,16 @@
 export const examplePrimary = `
-import { TableColumn } from '@sebgroup/ngv-table';
+import { TableColumn } from '@sebgroup/nggv-table';
 
 @Component({
   selector: 'app-table-implementation',
   template: \`
-    <ngv-table
+    <nggv-table
       [tableColumns]="tableColumns"
       [tableData]="tableData"
       rowId="id"
       (rowClicked)="rowClicked($event)"
       (rowsSelected)="rowsSelected($event)">
-    </ngv-table>\`
+    </nggv-table>\`
 })
 export class TableImplementationComponent {
   tableColumns: Array<TableColumn> = [
@@ -39,12 +39,12 @@ export class TableImplementationComponent {
 
 export const exampleAlt = `
 import { OnInit } from '@angular/core';
-import { TableColumn } from '@sebgroup/ngv-table';
+import { TableColumn } from '@sebgroup/nggv-table';
 
 @Component({
   selector: 'app-table-implementation',
   template: \`
-    <ngv-table
+    <nggv-table
       [tableColumns]="tableColumns"
       [tableData]="tableData"
       rowId="id"
@@ -81,7 +81,7 @@ import { TableColumn } from '@sebgroup/ngv-table';
         </tr>
       </ng-template>
 
-    </ngv-table>\`
+    </nggv-table>\`
 })
 export class TableImplementationComponent implements OnInit {
   tableColumns: Array<TableColumn>;
@@ -113,12 +113,12 @@ export class TableImplementationComponent implements OnInit {
 }`
 
 export const exampleWithAppendedRows = `
-import { TableColumn } from '@sebgroup/ngv-table';
+import { TableColumn } from '@sebgroup/nggv-table';
 
 @Component({
   selector: 'app-table-implementation',
   template: \`
-    <ngv-table
+    <nggv-table
       [selectable]="selectable"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
@@ -136,7 +136,7 @@ import { TableColumn } from '@sebgroup/ngv-table';
         </tr>
       </ng-template>
 
-    </ngv-table>\`
+    </nggv-table>\`
 })
 export class TableImplementationComponent {
   tableColumns: Array<TableColumn> = [

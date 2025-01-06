@@ -1,13 +1,18 @@
 <ng-container *ngFor="let weekRow of dateMatrix">
-  <div class="ngv-calendar-row">
-    <button *ngFor="let date of weekRow" class="sdv-button sdv-button-alternative"
-      [attr.data-thook]="date | dateThook : (date | isDisabled : disableDateConfig)"
+  <div class="nggv-calendar-row">
+    <button
+      *ngFor="let date of weekRow"
+      class="sdv-button sdv-button-alternative"
+      [attr.data-thook]="
+        date | dateThook: (date | isDisabled: disableDateConfig)
+      "
       [attr.aria-label]="date"
       [calendarDate]="date"
       [notWithinMonth]="!(month === date?.getMonth())"
-      [selected]="date | matches : selected"
-      [disabled]="date | isDisabled : disableDateConfig"
-      (click)="clickDate(date)">
+      [selected]="date | matches: selected"
+      [disabled]="date | isDisabled: disableDateConfig"
+      (click)="clickDate(date)"
+    >
       {{ date | date: 'd' : undefined : locale }}
     </button>
   </div>

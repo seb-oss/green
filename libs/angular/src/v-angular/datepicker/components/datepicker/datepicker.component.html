@@ -1,30 +1,43 @@
 <!-- control for changing displayed calendar -->
-<ngv-calendar-control
+<nggv-calendar-control
   [activeCalendar]="activeCalendar"
   [locale]="locale"
   [type]="type"
-  (calendarChange)="changeActiveCalendar($event)">
-</ngv-calendar-control>
+  (calendarChange)="changeActiveCalendar($event)"
+>
+</nggv-calendar-control>
 
 <!-- label row for week -->
-<div class="ngv-weekday-row">
-  <span *ngFor="let weekday of weekdayArray">{{ weekday | date : 'EEE' : undefined : locale }}</span>
+<div class="nggv-weekday-row">
+  <span *ngFor="let weekday of weekdayArray">{{
+    weekday | date: 'EEE' : undefined : locale
+  }}</span>
 </div>
 
 <!-- outlet for active calendar -->
-<div class="ngv-calendar-view-container">
-  <ng-container *ngTemplateOutlet="calendarTemplate;
-    context: { calendar: activeCalendar, disableDates: disabledDatesForActiveMonth }">
+<div class="nggv-calendar-view-container">
+  <ng-container
+    *ngTemplateOutlet="
+      calendarTemplate;
+      context: {
+        calendar: activeCalendar,
+        disableDates: disabledDatesForActiveMonth,
+      }
+    "
+  >
   </ng-container>
 </div>
 
-<div *ngIf="type === 'extended'"
-  class="sdv-datepicker__controls">
+<div *ngIf="type === 'extended'" class="sdv-datepicker__controls">
   <ng-content></ng-content>
 </div>
 
-<ng-template #calendarTemplate let-calendar="calendar" let-disableDates="disableDates">
-  <ngv-calendar
+<ng-template
+  #calendarTemplate
+  let-calendar="calendar"
+  let-disableDates="disableDates"
+>
+  <nggv-calendar
     [year]="calendar.year"
     [month]="calendar.month"
     [type]="type"
@@ -37,6 +50,7 @@
     [disableWeekDays]="disableWeekDays"
     [minCalendarRows]="minCalendarRows"
     [firstDayOfWeek]="firstDayOfWeek"
-    (dateClick)="dateClickHandler($event)">
-  </ngv-calendar>
+    (dateClick)="dateClickHandler($event)"
+  >
+  </nggv-calendar>
 </ng-template>

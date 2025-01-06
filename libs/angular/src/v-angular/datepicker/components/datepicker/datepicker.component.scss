@@ -11,14 +11,14 @@
   display: block;
   box-shadow: 0px 0px 12px 0px #0000001a;
 
-  .ngv-calendar-view-container {
+  .nggv-calendar-view-container {
     border-top: 1px solid #f8f8f8;
     border-bottom: 1px solid #f8f8f8;
     padding: 0.125em;
     width: auto;
   }
 
-  .ngv-weekday-row {
+  .nggv-weekday-row {
     display: flex;
     font-family: 'SEBSansSerif', Arial, sans-serif;
 
@@ -44,7 +44,7 @@
     font-size: 0.875rem;
   }
 
-  .ngv-extended-controls {
+  .nggv-extended-controls {
     display: flex;
     padding: 0.5rem;
   }
