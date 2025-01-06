@@ -26,7 +26,6 @@ import {
   Validator,
   Validators,
 } from '@angular/forms'
-// import { faTriangleExclamation } from '@fortawesome/pro-regular-svg-icons';
 import {
   TRANSLOCO_SCOPE,
   TranslocoScope,

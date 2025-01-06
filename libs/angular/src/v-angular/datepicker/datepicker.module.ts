@@ -30,7 +30,7 @@ import { MatchesPipe } from './pipes/matches.pipe'
     FormsModule,
     ReactiveFormsModule,
     TranslocoModule,
-    NggvInputMaskModule.forRoot({ isAsync: true }),
+    NggvInputMaskModule,
     NggCoreWrapperModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

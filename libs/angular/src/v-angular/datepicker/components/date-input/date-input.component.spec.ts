@@ -10,6 +10,7 @@ import {
 } from '@angular/forms'
 
 import { NgvI18nTestModule } from '../../../i18n'
+import { NggvInputMaskModule } from '../../../input-mask'
 import * as dateModels from '../../models/dates'
 import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { DateInputComponent } from './date-input.component'
@@ -48,13 +49,11 @@ describe('[NgvDatepicker]', () => {
           },
         ],
       }).compileComponents()
-    }))
 
-    beforeEach(() => {
       fixture = TestBed.createComponent(DateInputHostComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
-    })
+    }))
 
     describe('constructor()', () => {
       it('should create', () => {
@@ -90,13 +89,13 @@ describe('[NgvDatepicker]', () => {
       it('should update placeholder based on dateLocale', () => {
         const mockLocale = 'en-US'
 
-        spyOn(dateModels, 'setDateFormatCharacters').and.callThrough()
+        jest.spyOn(dateModels, 'setDateFormatCharacters')
 
         component.fc.setValue(mockState)
         component.dateInput.dateLocale = mockLocale
         component.dateInput.updatePlaceholderAndMask()
 
-        expect(dateModels.setDateFormatCharacters).toBeCalledWith(
+        expect(dateModels.setDateFormatCharacters).toHaveBeenCalledWith(
           'mm/dd/yyyy',
           undefined,
         )
@@ -106,14 +105,14 @@ describe('[NgvDatepicker]', () => {
         const mockLocale = 'en-US'
         const defaultPlaceholder = 'yyyy-MM-dd'
 
-        spyOn(dateModels, 'setDateFormatCharacters').and.callThrough()
+        jest.spyOn(dateModels, 'setDateFormatCharacters')
 
         component.fc.setValue(mockState)
         component.dateInput.dateLocale = mockLocale
         component.dateInput.defaultPlaceholder = defaultPlaceholder
         component.dateInput.updatePlaceholderAndMask()
 
-        expect(dateModels.setDateFormatCharacters).toBeCalledWith(
+        expect(dateModels.setDateFormatCharacters).toHaveBeenCalledWith(
           defaultPlaceholder,
           undefined,
         )
@@ -127,14 +126,14 @@ describe('[NgvDatepicker]', () => {
         const mockDateFormat = 'yyyy-MM-dd'
         const mockLocale = 'en-US'
 
-        spyOn(dateModels, 'setDateFormatCharacters').and.callThrough()
+        jest.spyOn(dateModels, 'setDateFormatCharacters')
 
         component.fc.setValue(mockState)
         component.dateInput.dateFormat = mockDateFormat
         component.dateInput.locale = mockLocale
         component.dateInput.updateFormat()
 
-        expect(dateModels.setDateFormatCharacters).toBeCalledWith(
+        expect(dateModels.setDateFormatCharacters).toHaveBeenCalledWith(
           mockDateFormat.toLowerCase(),
           undefined,
         )
