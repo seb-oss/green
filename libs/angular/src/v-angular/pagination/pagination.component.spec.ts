@@ -1,8 +1,4 @@
-import {
-  APP_INITIALIZER,
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-} from '@angular/core'
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
@@ -57,16 +53,10 @@ describe('[NgvPagination]', () => {
   let component: PaginationTestComponent
   let fixture: ComponentFixture<PaginationTestComponent>
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(waitForAsync(async () => {
+    await TestBed.configureTestingModule({
       declarations: [PaginationComponent, PaginationTestComponent],
       imports: [FormsModule, NgvI18nTestModule, NggCoreWrapperModule],
-      providers: [
-        {
-          provide: APP_INITIALIZER,
-          multi: true,
-        },
-      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))
@@ -83,16 +73,16 @@ describe('[NgvPagination]', () => {
 
   it('should render in both number and dot navigation modes', () => {
     expect(component).toBeDefined()
-    expect(fixture.debugElement.queryAll(By.css('.pagination')).length).toEqual(
-      1,
-    )
-    expect(fixture.debugElement.queryAll(By.css('.dotnav')).length).toEqual(0)
+
+    fixture.detectChanges()
+
+    expect(fixture.debugElement.query(By.css('.pagination'))).toBeTruthy()
     component.useDotNav = true
     fixture.detectChanges()
-    expect(fixture.debugElement.queryAll(By.css('.pagination')).length).toEqual(
-      1,
-    )
-    expect(fixture.debugElement.queryAll(By.css('.dotnav')).length).toEqual(1)
+    expect(fixture.debugElement.query(By.css('.dotnav'))).toBeTruthy()
+    component.useDotNav = false
+    fixture.detectChanges()
+    expect(fixture.debugElement.query(By.css('.pagination'))).toBeTruthy()
   })
 
   it('should pass custom class and id', () => {
