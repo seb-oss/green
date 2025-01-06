@@ -1,6 +1,10 @@
 @use '../../../../chlorophyll/scss/components/button/mixins' as mixins;
 
 :host {
+  --sg-border-radius: 0.25rem;
+  --sg-border-width: 1px;
+  --sg-border-color: hsl(0, 0%, 53%);
+
   button,
   a {
     @include mixins.reset();

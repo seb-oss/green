@@ -1,10 +1,14 @@
 @use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
 @use '../../../../../chlorophyll/scss/components/button';
+@use '../../../../../chlorophyll/scss/components/close/mixins' as close;
 
 :host {
   --sg-border-radius: 4px;
   --sg-modal-background: #fff;
+  --gds-sys-color-font: #1a1a1a;
+  --gds-sys-shape-corner-round: 50%;
+
   .gds-slide-out {
     @include mixins.modal();
     @include mixins.aside-modal();
@@ -26,6 +30,10 @@
 
   .gds-slide-out__content {
     @include mixins.modal-body();
+  }
+
+  .close {
+    @include close.close;
   }
 
   .modal-dialog__actions,

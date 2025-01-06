@@ -49,7 +49,7 @@ import { NgvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive
 import { NgvExternalLinkDirective } from '../external-link/external-link.directive'
 import { NgvI18nModule } from '../i18n/i18n.module'
 import { NgvInfoCircleComponent } from '../info-circle/info-circle.component'
-import { createMask, NgvInputMaskModule } from '../input-mask'
+import { createMask, NggvInputMaskModule } from '../input-mask'
 import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
 import { NgvInputComponent } from './input.component'
 
@@ -119,7 +119,7 @@ const meta: Meta<NgvInputComponent> = {
         NgvDropdownComponent,
         NgvDropdownListComponent,
         NgvTypeaheadDropdownListComponent,
-        // NgvCheckboxComponent,
+        NgvCheckboxComponent,
         NgvTooltipDirective,
         NgvInfoCircleComponent,
         CharacterCountdownDirective,
@@ -130,7 +130,7 @@ const meta: Meta<NgvInputComponent> = {
         CommonModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
+        NggvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
         TranslocoModule,
         NggCoreWrapperModule,
       ],
