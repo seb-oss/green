@@ -367,10 +367,9 @@ export class NggvDragDropComponent implements OnInit, OnDestroy {
       // Remove file from service then locally for "completed" states
       case 'error':
       case 'done':
-        const asyncRemoveFile = this.service.removeFileFor
+        (this.service.removeFileFor
           ? this.service.removeFileFor(file)
-          : this.service.removeFile(file.id)
-        asyncRemoveFile
+          : this.service.removeFile(file.id))
           .subscribe({
             error: console.warn,
           })
@@ -396,17 +395,18 @@ export class NggvDragDropComponent implements OnInit, OnDestroy {
       case 'deleted':
       default:
         this.files.delete(file.id)
-        const event = pick(
-          file,
-          'uploadState',
-          'fileName',
-          'id',
-          'status',
-          'internalStatusReasonCode',
-          'statusReasonInformation',
-        )
-        event.uploadState = 'deleted'
-        this.stateChange.emit(event)
+        this.stateChange.emit({
+          ...pick(
+            file,
+            'uploadState',
+            'fileName',
+            'id',
+            'status',
+            'internalStatusReasonCode',
+            'statusReasonInformation',
+          ),
+          uploadState: 'deleted'
+        })
         break
     }
   }
