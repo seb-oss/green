@@ -2,6 +2,17 @@
 @use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 
 :host {
+  --sg-text-primary: #333;
+  --sg-form-control-bg: #fff;
+  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
+  --sg-border-radius: 4px;
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+
+  * {
+    box-sizing: border-box;
+  }
+
   &.gds-form-item {
     @include form-group.add-form-item();
   }
@@ -14,6 +25,8 @@
 
   input {
     width: 100%;
+    line-height: 18px;
+    font-size: 1rem;
   }
 
   .gds-input-wrapper {

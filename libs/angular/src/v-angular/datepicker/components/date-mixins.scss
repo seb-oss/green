@@ -1,0 +1,23 @@
+// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
+
+@mixin text-field--error() {
+  $_border-bottom: 0.125rem solid #d81a1a !important;
+
+  border-bottom: $_border-bottom;
+
+  &:focus,
+  &:active,
+  &:hover {
+    border-bottom: $_border-bottom;
+  }
+}
+
+@mixin text-field--error-item() {
+  &:has(span:first-child:nth-last-child(2)) {
+    display: flex;
+  }
+
+  &--icon {
+    padding-right: 0.75rem;
+  }
+}

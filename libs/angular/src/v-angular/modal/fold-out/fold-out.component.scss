@@ -7,6 +7,14 @@
 @use '../../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 
 :host {
+  --sg-z-index-popover: 999;
+  --sg-card-background: #fff;
+  --sg-card-border: 1px solid #e9e9e9;
+  --sg-card-border-radius: 4px;
+  --sg-border-radius: 4px;
+  --sg-card-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1019607843);
+  --grey-400: rgb(233, 233, 233);
+
   .flex-right {
     right: 0;
   }
@@ -22,6 +30,10 @@
     line-height: 0.75;
     padding-inline: 0.4375rem;
     width: auto;
+
+    @media (max-width: 35.98em) {
+      min-width: initial;
+    }
   }
 
   .gds-fold-out__popover {

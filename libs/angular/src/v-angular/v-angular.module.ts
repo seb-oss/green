@@ -1,28 +1,23 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import {
-  NgvBaseControlValueAccessorModule,
-} from './base-control-value-accessor'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NgvBaseControlValueAccessorModule } from './base-control-value-accessor'
 import { NgvBreadcrumbsModule } from './breadcrumbs'
 import { NgvButtonModule } from './button'
 import { NgvCardModule } from './card'
-import {
-  NggCharacterCountdownDirectiveModule,
-} from './character-countdown/character-countdown.module'
+import { NggCharacterCountdownDirectiveModule } from './character-countdown/character-countdown.module'
 import { NgvCheckboxModule } from './checkbox'
 import { NgvDropdownModule } from './dropdown'
 import { NgvTypeaheadModule } from './dropdown/typeahead/typeahead.module'
 import { NgvI18nModule } from './i18n'
 import { NgvInfoCircleModule } from './info-circle'
 import { NgvInputModule } from './input'
-import { NgvInputMaskModule } from './input-mask'
+import { NggvInputMaskModule } from './input-mask'
 import { NgvModalModule } from './modal'
 import { NgvRadioModule } from './radio'
 import { NgvTextareaModule } from './textarea'
 import { NgvTooltipModule } from './tooltip'
-
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared';
 
 @NgModule({
   declarations: [],
@@ -38,13 +33,13 @@ import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared';
     NgvI18nModule,
     NgvInfoCircleModule,
     NgvInputModule,
-    NgvInputMaskModule,
+    NggvInputMaskModule,
     NgvModalModule,
     NgvRadioModule,
     NgvTextareaModule,
     NgvTooltipModule,
     NgvTypeaheadModule,
-    NggCoreWrapperModule
+    NggCoreWrapperModule,
   ],
 })
 export class NggvModule {}
