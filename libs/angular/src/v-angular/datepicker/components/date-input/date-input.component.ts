@@ -197,7 +197,7 @@ export class DateInputComponent
         // but the event target path will still contain the parent element
         // if target has datepicker parent, keep listening
         const eventPath = event.composedPath()
-        const hasDatepickerParent: boolean = !!eventPath.find(
+        const hasDatepickerParent = !!eventPath.find(
           (e) => e === this.elementRef.nativeElement,
         )
         if (hasDatepickerParent) return
