@@ -280,11 +280,12 @@
       </ng-template>
       <ng-template #singleValidation>
         <div class="gds-progress-indicator indicator">
-          <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
+          <!-- eslint-disable @angular-eslint/template/eqeqeq -->
           <div
             class="gds-progress-indicator__step"
             [class.-done]="file.status == stateMap.validating"
           ></div>
+          <!-- eslint-enable @angular-eslint/template/eqeqeq -->
         </div>
       </ng-template>
     </div>
