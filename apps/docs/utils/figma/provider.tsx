@@ -42,6 +42,9 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({
         const images = response.data.images
         const imageUrl = Object.values(images)[0] as string
         const svgResponse = await axios.get(imageUrl)
+
+        console.log('Fetched Figma image:', images)
+
         return { node, svgContent: svgResponse.data }
       } catch (error) {
         console.error('Error fetching Figma image:', error)
