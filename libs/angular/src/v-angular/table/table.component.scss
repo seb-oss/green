@@ -75,6 +75,12 @@
         }
       }
 
+      input[type='checkbox'] {
+        accent-color: #fff;
+        width: 1rem;
+        height: 1rem;
+      }
+
       label {
         display: inline;
         padding: 0;
@@ -99,6 +105,14 @@
           margin: 0;
         }
       }
+    }
+  }
+
+  td.column__check {
+    input[type='checkbox'] {
+      accent-color: #1a1a1a;
+      width: 1rem;
+      height: 1rem;
     }
   }
 }
