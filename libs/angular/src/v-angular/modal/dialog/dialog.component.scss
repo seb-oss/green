@@ -14,7 +14,7 @@
 
   @include mixins.dialog-modal-wrapper();
 
-  .sdv-modal-dialog__container {
+  .gds-modal-dialog__container {
     @include mixins.modal();
     @include mixins.dialog-modal();
   }
@@ -39,7 +39,7 @@
     box-sizing: border-box;
   }
 
-  .sdv-modal-backdrop {
+  .gds-modal-backdrop {
     @include backdrop.add-backdrop(rgba(0, 0, 0, 0.35), 999);
   }
 }

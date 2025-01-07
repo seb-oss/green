@@ -2,7 +2,7 @@
 <ng-container *transloco="let t; read: scope">
   <label
     [id]="id + '-label'"
-    class="sdv-field-label hide-if-empty"
+    class="gds-field-label hide-if-empty"
     [attr.for]="id + '-input'"
   >
     <ng-template
@@ -14,7 +14,7 @@
         {{ label }}
         <span
           *ngIf="optional === true || (required !== true && optional !== false)"
-          class="sdv-field-label--optional"
+          class="gds-field-label--optional"
         >
           ({{ t('label.optional') }})
         </span>
@@ -23,7 +23,7 @@
   </label>
 
   <!-- DESCRIPTION -->
-  <div class="sdv-field-label--small description hide-if-empty">
+  <div class="gds-field-label--small description hide-if-empty">
     {{ description }}
   </div>
 
@@ -116,7 +116,7 @@
       "
     >
       <label
-        class="sdv-field-notice sdv-field-notice--error"
+        class="gds-field-notice gds-field-notice--error"
         [attr.for]="id + '-input'"
       >
         <span class="error-item">
@@ -148,7 +148,7 @@
 
     <ng-container *ngFor="let error of errorList ?? []">
       <label
-        class="sdv-field-notice sdv-field-notice--error"
+        class="gds-field-notice gds-field-notice--error"
         [attr.for]="id + '-input'"
         *ngIf="invalid && error"
       >

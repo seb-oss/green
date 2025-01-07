@@ -114,7 +114,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
   }
   return {
     template: /*html*/ `
-      <label class="sdv-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
+      <label class="gds-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
       <div [formGroup]="formGroup">
         <nggv-checkbox id="opt1"
           [name]="name"
@@ -154,7 +154,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
         </nggv-checkbox>
       </div>
       <div style="margin-top: 1rem">
-        <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+        <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
     `,
     props: {

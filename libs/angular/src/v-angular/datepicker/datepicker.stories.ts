@@ -217,8 +217,8 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
         </nggv-dateinput>
       </div>
       <div style="display: flex; justify-items: space-between; margin-top: 1rem">
-        <button class="sdv-button sdv-button-alternative" type="button" (click)="resetCtrl()">Reset input</button>
-        <button class="sdv-button" type="button" (click)="disableFn()">Toggle disable control</button>
+        <button class="gds-button gds-button-alternative" type="button" (click)="resetCtrl()">Reset input</button>
+        <button class="gds-button" type="button" (click)="disableFn()">Toggle disable control</button>
       </div>
     `,
     props: {
@@ -266,10 +266,10 @@ const TemplateWithFormGroup: StoryFn<DateStoryArgs & any> = (
         </nggv-dateinput>
       </div>
       <div style="margin-bottom: 0.5rem" [formGroup]="formGroup">
-        <label class="sdv-field-label">Other input label</label>
-        <input class="sdv-field" formControlName="textControl">
+        <label class="gds-field-label">Other input label</label>
+        <input class="gds-field" formControlName="textControl">
       </div>
-      <button class="sdv-button" type="button" (click)="setDefault()">Set Default</button>
+      <button class="gds-button" type="button" (click)="setDefault()">Set Default</button>
     `,
     props: {
       ...args,
@@ -332,10 +332,10 @@ const ExtendedTemplate: StoryFn<DateStoryArgs> = (args) => {
         [firstDayOfWeek]="firstDayOfWeek"
         [formControl]="formControl"
         >
-        <button class="sdv-button sdv-button-alternative sdv-button--small" (click)="emitToday('${new Date().toISOString()}'); datepicker.close()">
+        <button class="gds-button gds-button-alternative gds-button--small" (click)="emitToday('${new Date().toISOString()}'); datepicker.close()">
           Today
         </button>
-        <button class="sdv-button sdv-button-alternative sdv-button--small" (click)="emitOther()">
+        <button class="gds-button gds-button-alternative gds-button--small" (click)="emitOther()">
           Other action
         </button>
       </nggv-dateinput>
@@ -374,7 +374,7 @@ const TemplateWithTwoInputs: StoryFn<DateStoryArgs> = (args) => {
           [formControl]="formControl"
           >
         </nggv-dateinput>
-        <input class="sdv-field" style="margin-left: 1rem; width: 264px; height: 42px; margin-top: 2.5rem"/>
+        <input class="gds-field" style="margin-left: 1rem; width: 264px; height: 42px; margin-top: 2.5rem"/>
       </div>
     `,
     props: {

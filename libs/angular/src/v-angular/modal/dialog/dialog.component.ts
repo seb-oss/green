@@ -29,7 +29,7 @@ export class NgvDialogComponent implements OnInit {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'dialog'
   /** @internal */
-  @HostBinding('class.sdv-modal-dialog') baseClass = true
+  @HostBinding('class.gds-modal-dialog') baseClass = true
   /** @internal Defines the default visibility state of the dialog. */
   @HostBinding('class.-active') @Input() shown = false
   /** @internal */
@@ -76,9 +76,9 @@ export class NgvDialogComponent implements OnInit {
 
   ngOnInit() {
     this.dialogTitleId =
-      this.dialogTitleId ?? 'sdv-dialog-title-' + window.nggv?.nextId()
+      this.dialogTitleId ?? 'gds-dialog-title-' + window.nggv?.nextId()
     this.dialogBodyId =
-      this.dialogBodyId ?? 'sdv-dialog-body-' + window.nggv?.nextId()
+      this.dialogBodyId ?? 'gds-dialog-body-' + window.nggv?.nextId()
 
     this.shown = this.initiallyShown
     if (this.shown) this._limitFocusable()

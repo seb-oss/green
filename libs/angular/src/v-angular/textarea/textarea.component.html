@@ -1,7 +1,7 @@
 <!-- LABEL -->
 <label
   [id]="id + '-label'"
-  class="sdv-field-label hide-if-empty"
+  class="gds-field-label hide-if-empty"
   [attr.for]="id + '-textarea'"
   *transloco="let t; read: scope"
 >
@@ -14,7 +14,7 @@
       {{ label }}
       <span
         *ngIf="optional === true || (required !== true && optional !== false)"
-        class="sdv-field-label--optional"
+        class="gds-field-label--optional"
       >
         ({{ t('label.optional') }})
       </span>
@@ -48,7 +48,7 @@
   <textarea
     #input
     [id]="id + '-textarea'"
-    class="sdv-field"
+    class="gds-field"
     [ngClass]="{ 'no-resize': !!rows }"
     [class.nggv-field--error]="invalid"
     [attr.name]="name"
