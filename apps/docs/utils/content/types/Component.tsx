@@ -87,6 +87,7 @@ export const Component = defineDocumentType(() => ({
           )
 
           const images = response.data.images
+          console.log('images', images)
           const imageUrl = Object.values(images)[0] as string
 
           return fetch(imageUrl)
@@ -134,7 +135,7 @@ export const Component = defineDocumentType(() => ({
           )
 
           const images = response.data.images
-          // console.log("images", images)
+          console.log('images', response)
 
           const fetchPromises = Object.entries(images).map(
             ([node, imageUrl]) => {
@@ -149,7 +150,7 @@ export const Component = defineDocumentType(() => ({
                   }
                 })
                 .catch((error) => {
-                  // console.error(`Error fetching Figma SVG`, error)
+                  console.error(`Error fetching Figma SVG`, error)
                   return {
                     node: node,
                     svg: '',
@@ -161,7 +162,7 @@ export const Component = defineDocumentType(() => ({
           const svgData = await Promise.all(fetchPromises)
           return svgData
         } catch (error) {
-          // console.error("Error processing Figma SVGS:")
+          console.error('Error processing Figma SVGS:')
           return nodes.map((node) => ({
             node: node,
             svg: '',
