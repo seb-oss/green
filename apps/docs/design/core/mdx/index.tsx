@@ -5,6 +5,7 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import {
   GdsDivider,
   GdsFlex,
+  GdsGrid,
   GdsRichText,
   GdsSpacer,
 } from '$/import/components'
@@ -14,7 +15,6 @@ import { v4 as uuidv4 } from 'uuid'
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
-import Grid from './grid'
 import IMG from './image/image'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
@@ -31,17 +31,16 @@ const components = {
   SE,
   Pattern,
   GdsDivider: (props: object) => <GdsDivider {...props} />,
-  Grid,
   Story,
-  // PP: ({ children, ...props }: { children: React.ReactNode }) => {
-  //   return (
-  //     <>
-  //       <GdsText tag="p" {...props}>
-  //         {children}
-  //       </GdsText>
-  //     </>
-  //   )
-  // },
+  Grid: ({ children, ...props }: { children: React.ReactNode }) => {
+    return (
+      <>
+        <GdsGrid width="100%" gap="l" margin="m 0 0 0" {...props}>
+          {children}
+        </GdsGrid>
+      </>
+    )
+  },
   // p: (props: object) => <GdsText tag="p" {...props} />,
   // h1: (props: object) => <GdsText tag="h1" {...props} />,
   // h2: (props: object) => <GdsText tag="h2" {...props} />,
@@ -71,7 +70,7 @@ export function Mdx({
 
   return (
     <>
-      <GdsRichText key={uniqueId}>
+      <GdsRichText captureMode="move" key={uniqueId}>
         <style
           dangerouslySetInnerHTML={{
             __html: `

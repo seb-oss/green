@@ -14,6 +14,7 @@ import {
   GdsFlex,
   GdsGrid,
   GdsInput,
+  GdsRichText,
   GdsText,
 } from '$/import/components'
 import { IconMagnifyingGlass, IconSquareBehindSquare } from '$/import/icons'
@@ -187,11 +188,12 @@ export default function ComponentLayout({
                 padding="xs"
                 title={transformIconName(iconName)}
                 variant="secondary"
+                transition="all 482ms"
                 background="hover:primary"
-                border-color="primary"
+                border-color="primary; hover:secondary"
               >
                 <GdsFlex
-                  background="secondary"
+                  background="transparent"
                   align-items="center"
                   justify-content="center"
                   padding="m"
