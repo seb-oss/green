@@ -75,42 +75,73 @@ export const Component = defineDocumentType(() => ({
     figma_svgs: {
       type: 'json',
       resolve: async (doc) => {
-        try {
-          // Extract and filter valid node IDs
-          const regXHeader = /node="(?<node>.+?)"/g
-          const nodes = Array.from(doc.body.raw.matchAll(regXHeader))
-            .map((match) => match.groups?.node)
-            .filter((node): node is string => !!node && ID_REGEX.test(node))
+        const regXHeader = /node="(?<node>.+?)"/g // Regex to extract node IDs
+        const nodes = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+          (match) => match.groups?.node,
+        )
 
-          if (nodes.length === 0) return []
+        const validNodes = nodes.filter((node) => node && ID_REGEX.test(node))
 
-          // Get all image URLs in a single request
-          const { data: imageData } = await axios.get(
-            `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${nodes.join(',')}&format=svg`,
-            {
-              headers: {
-                'X-Figma-Token': FIGMA_ACCESS_KEY,
-              },
-            },
-          )
+        // const imagesResponse = await axios.get(
+        //   `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${validNodes}&format=svg`,
+        //   {
+        //     headers: {
+        //       'X-Figma-Token': FIGMA_ACCESS_KEY,
+        //     },
+        //   },
+        // )
 
-          // Fetch all SVGs in parallel
-          const svgPromises = Object.entries(imageData.images).map(
-            async ([nodeId, url]) => {
-              const { data: svgContent } = await axios.get(url as string)
-              return {
-                node: nodeId.replace(':', '-'),
-                svg: svgContent,
-                url: url as string,
-              }
-            },
-          )
+        const svgDataArray = []
 
-          return Promise.all(svgPromises)
-        } catch (error) {
-          console.error('Error fetching Figma SVGs:', error)
-          return []
+        for (const node of validNodes) {
+          svgDataArray.push({
+            node: node ? node.replace(':', '-') : '',
+            svg: node,
+            url: '',
+          })
         }
+
+        return svgDataArray
+        // // Construct the request URL only with valid IDs
+        // const idsQuery = validNodes.join(',')
+        // if (!idsQuery) {
+        //   console.warn('No valid nodes found for fetching SVGs.')
+        //   return [] // Return an empty array if no valid nodes found
+        // }
+
+        // // Fetch images for valid node IDs
+        // const imagesResponse = await axios.get(
+        //   `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${idsQuery}&format=svg`,
+        //   {
+        //     headers: {
+        //       'X-Figma-Token': FIGMA_ACCESS_KEY,
+        //     },
+        //   },
+        // )
+
+        // const svgDataArray = []
+
+        // // Process each valid node
+        // for (const node of validNodes) {
+        //   const imageUrl = imagesResponse.data.images[node]
+        //   if (imageUrl) {
+        //     const svgResponse = await fetch(imageUrl)
+        //     const svgData = await svgResponse.text()
+        //     svgDataArray.push({
+        //       node: node.replace(':', '-'), // Replace colon with hyphen
+        //       svg: svgData, // Add the SVG content here
+        //       url: imageUrl,
+        //     })
+        //   } else {
+        //     // If the image URL is not valid, push an empty entry
+        //     svgDataArray.push({ node, svg: '', url: '' })
+        //     console.warn(
+        //       `Node ${node} is not a valid node ID or returned no image.`,
+        //     )
+        //   }
+        // }
+
+        // return svgDataArray
       },
     },
   },
