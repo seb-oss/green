@@ -61,10 +61,11 @@ export function Mdx({
   const uniqueId = React.useMemo(() => uuidv4(), [])
 
   return (
-    <GdsRichText captureMode="move" key={uniqueId}>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
+    <>
+      <GdsRichText captureMode="move" key={uniqueId}>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             @scope {
               pre {
                 padding: 20px;
@@ -74,9 +75,10 @@ export function Mdx({
               }
             }
           `,
-        }}
-      />
-      <Component components={components} />
-    </GdsRichText>
+          }}
+        />
+        <Component components={components} />
+      </GdsRichText>
+    </>
   )
 }
