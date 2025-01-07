@@ -11,7 +11,6 @@ import {
 } from '$/import/components'
 import { v4 as uuidv4 } from 'uuid'
 
-// Local components
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
@@ -41,13 +40,6 @@ const components = {
       </>
     )
   },
-  // p: (props: object) => <GdsText tag="p" {...props} />,
-  // h1: (props: object) => <GdsText tag="h1" {...props} />,
-  // h2: (props: object) => <GdsText tag="h2" {...props} />,
-  // h3: (props: object) => <GdsText tag="h3" {...props} />,
-  // h4: (props: object) => <GdsText tag="h4" {...props} />,
-  // h5: (props: object) => <GdsText tag="h5" {...props} />,
-  // hr: (props: object) => <GdsDivider {...props} />,
   br: (props: object) => <GdsSpacer {...props} />,
   Column: (props: object) => (
     <GdsFlex flex-direction="column" gap="xs" {...props} />
@@ -69,11 +61,10 @@ export function Mdx({
   const uniqueId = React.useMemo(() => uuidv4(), [])
 
   return (
-    <>
-      <GdsRichText captureMode="move" key={uniqueId}>
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
+    <GdsRichText captureMode="move" key={uniqueId}>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
             @scope {
               pre {
                 padding: 20px;
@@ -83,10 +74,9 @@ export function Mdx({
               }
             }
           `,
-          }}
-        />
-        <Component components={components} />
-      </GdsRichText>
-    </>
+        }}
+      />
+      <Component components={components} />
+    </GdsRichText>
   )
 }
