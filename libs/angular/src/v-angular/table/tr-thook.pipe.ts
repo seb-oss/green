@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TrThookPipe implements PipeTransform {
   transform<V>(value: V, index: number, thookFn?: (rowData: V) => string): string {
     // call thook fn to set thook for active row
-    if (!!thookFn) {
+    if (thookFn != null) {
       return thookFn(value);
     }
 

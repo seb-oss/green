@@ -446,7 +446,7 @@ export abstract class DateControlValueAccessorComponent
     this.disabled = isDisabled
 
     // if displayDisabledAsLocked is enabled - update locked state based on disabled state
-    if (!!this.displayDisabledAsLocked) {
+    if (this.displayDisabledAsLocked) {
       this.locked = isDisabled
     }
   }

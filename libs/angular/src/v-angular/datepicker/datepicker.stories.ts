@@ -190,7 +190,7 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
   const resetSubj = new Subject()
   const resetFn = () => resetSubj.next(true)
   const toggleDisableField = () => {
-    if (!!dateFc.disabled) return dateFc.enable()
+    if (dateFc.disabled) return dateFc.enable()
     dateFc.disable()
   }
   // remove non-input args
