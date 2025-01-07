@@ -14,7 +14,6 @@ import {
   GdsFlex,
   GdsGrid,
   GdsInput,
-  GdsRichText,
   GdsText,
 } from '$/import/components'
 import { IconMagnifyingGlass, IconSquareBehindSquare } from '$/import/icons'
@@ -169,13 +168,8 @@ export default function ComponentLayout({
             >
               <IconMagnifyingGlass height={24} slot="lead" />
             </GdsInput>
-            {/* <GdsFilterChips>
-            <GdsFilterChip value="1">Solid</GdsFilterChip>
-            <GdsFilterChip value="2">Regular</GdsFilterChip>
-          </GdsFilterChips> */}
           </GdsFlex>
         </GdsContainer>
-        {/* <GdsDivider opacity="0.2" /> */}
         <GdsGrid columns="5" gap="m">
           {filteredIcons.map((iconName) => {
             const IconComponent = (ICONS as any)[iconName]

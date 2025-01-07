@@ -41,10 +41,6 @@ export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
         ref={figureRef}
         dangerouslySetInnerHTML={{ __html: svgSource?.svg }}
       />
-      {/* {caption} */}
-      {/* {height} */}
-      {/* {svgSource?.svg} */}
-      {/* <Pattern caption={caption} height={height} content={svgSource?.svg} /> */}
     </GdsCard>
   )
 }
