@@ -44,7 +44,7 @@ export const getSortedWeekDays = (firstDayOfWeek: WeekDay, startDate?: Date): Da
 export const generateDateMatrix = (
   month: number,
   year: number,
-  minWeeks: number = 5,
+  minWeeks = 5,
   firstDayOfWeek: WeekDay,
 ): Date[][] => {
   // generate a new matrix with 5 or 6 rows (depending on number of days in that month)

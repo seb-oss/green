@@ -428,7 +428,7 @@ export abstract class DateControlValueAccessorComponent
   }
 
   /** Registers a callback function that is called when the child input element's value changes. */
-  registerOnChange(fn: (value: any) => {}): void {
+  registerOnChange(fn: (value: any) => void): void {
     this.onChange = (value) => {
       // ensure emitted value is a string | null | undefined
       const emitValue = DateControlValueAccessorComponent.parseDateLike(value)
