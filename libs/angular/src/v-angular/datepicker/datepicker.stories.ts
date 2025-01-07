@@ -99,7 +99,7 @@ export default {
 type DateStoryArgs = DateInputComponent
 
 const notTomorrowValidator = (control: AbstractControl) => {
-  if (control.value == (null || '')) return null
+  if (control.value == null || control.value === '') return null
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
   const controlDate = new Date(control.value)
