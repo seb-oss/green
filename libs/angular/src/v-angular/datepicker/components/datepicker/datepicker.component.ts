@@ -63,8 +63,6 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy {
 
   private subs: Subscription[] = []
 
-  constructor() {}
-
   ngOnChanges(changes: SimpleChanges): void {
     if (
       changes.selected &&
