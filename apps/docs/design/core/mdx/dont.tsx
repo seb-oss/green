@@ -11,7 +11,7 @@ type DontProps = {
 export default function Dont({ children }: DontProps) {
   return (
     <GdsCard
-      border="4xs/#fcecea"
+      border="3xs/#fcecea"
       border-radius="s"
       background="negative"
       height="max-content"
@@ -20,10 +20,10 @@ export default function Dont({ children }: DontProps) {
       overflow="hidden"
     >
       {children}
-      <GdsFlex align-items="center" gap="s" padding="xs m">
-        <IconCrossLarge />
+      <GdsFlex color="negative" align-items="center" gap="s" padding="xs m">
+        <IconCrossLarge width={14} stroke={2} />
         <GdsText tag="small" font-weight="book">
-          {"DON'T"}
+          {"Don't"}
         </GdsText>
       </GdsFlex>
     </GdsCard>

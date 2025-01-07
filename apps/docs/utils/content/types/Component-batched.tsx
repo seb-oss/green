@@ -9,9 +9,8 @@ import { getLastEditedDate, urlFromFilePath } from '../utils'
 
 export type DocHeading = { level: 1 | 2 | 3; title: string }
 
-const FIGMA_ACCESS_KEY = process.env.FIGMA_ACCESS_KEY
-const FIGMA_PROJECT_ID = process.env.FIGMA_PROJECT_ID
-const ID_REGEX = /^\d{1,8}-\d{1,8}$/ // regex to match the ID format like "12345678-2234234"
+const figmaAccessKey = process.env.FIGMA_ACCESS_KEY
+const figmaProjectId = process.env.FIGMA_PROJECT_ID
 
 export const Component = defineDocumentType(() => ({
   name: 'Component',
@@ -75,41 +74,75 @@ export const Component = defineDocumentType(() => ({
     figma_svgs: {
       type: 'json',
       resolve: async (doc) => {
+        const regXHeader = /node="(?<node>.+?)"/g
+        const nodes = Array.from(doc.body.raw.matchAll(regXHeader)).map(
+          (match) => match.groups?.node,
+        )
+
+        // Check if there are nodes to process
+        if (nodes.length === 0) {
+          console.warn('No nodes found for fetching SVGs.')
+          return nodes.map((node) => ({
+            node: node,
+            svg: '',
+            url: '', // Return empty SVG if no nodes found
+          }))
+        }
+
         try {
-          // Extract and filter valid node IDs
-          const regXHeader = /node="(?<node>.+?)"/g
-          const nodes = Array.from(doc.body.raw.matchAll(regXHeader))
-            .map((match) => match.groups?.node)
-            .filter((node): node is string => !!node && ID_REGEX.test(node))
-
-          if (nodes.length === 0) return []
-
-          // Get all image URLs in a single request
-          const { data: imageData } = await axios.get(
-            `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${nodes.join(',')}&format=svg`,
+          // Fetch all images in one request
+          const response = await axios.get(
+            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(',')}&format=svg`,
             {
               headers: {
-                'X-Figma-Token': FIGMA_ACCESS_KEY,
+                'X-Figma-Token': figmaAccessKey,
               },
             },
           )
 
-          // Fetch all SVGs in parallel
-          const svgPromises = Object.entries(imageData.images).map(
-            async ([nodeId, url]) => {
-              const { data: svgContent } = await axios.get(url as string)
-              return {
-                node: nodeId.replace(':', '-'),
-                svg: svgContent,
-                url: url as string,
+          const images = response.data.images
+          console.log('Fetched images:', images)
+
+          // Fetch SVG data for all images
+          const fetchPromises = Object.entries(images).map(
+            async ([node, imageUrl]) => {
+              try {
+                const svgResponse = await fetch(imageUrl as string)
+                if (!svgResponse.ok) {
+                  throw new Error(
+                    `Failed to fetch SVG: ${svgResponse.statusText}`,
+                  )
+                }
+                const svgData = await svgResponse.text()
+                const nodeIdWithHyphen = node.replace(':', '-') // Replace the colon with a hyphen
+                return {
+                  node: nodeIdWithHyphen,
+                  svg: svgData,
+                  url: imageUrl,
+                }
+              } catch (error) {
+                console.error(
+                  `Error fetching Figma SVG for node ${node}:`,
+                  error,
+                )
+                return {
+                  node: node,
+                  svg: '',
+                  url: '', // Ensure url is empty if there's an error
+                }
               }
             },
           )
 
-          return Promise.all(svgPromises)
+          const svgData = await Promise.all(fetchPromises)
+          return svgData
         } catch (error) {
-          console.error('Error fetching Figma SVGs:', error)
-          return []
+          console.error('Error processing Figma SVGS:', error)
+          return nodes.map((node) => ({
+            node: node,
+            svg: '',
+            url: '', // Ensure url is empty if there's an error
+          }))
         }
       },
     },
