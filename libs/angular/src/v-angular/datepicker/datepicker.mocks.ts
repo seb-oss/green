@@ -46,7 +46,7 @@ export function weekendsFor(month: number): Array<Date> {
   return weekendArray;
 }
 
-let weekends: Array<Date | string> = [
+const weekends: Array<Date | string> = [
   ...weekendsFor(today.getMonth() - 2),
   ...weekendsFor(today.getMonth() - 1),
   ...weekendsFor(today.getMonth()),

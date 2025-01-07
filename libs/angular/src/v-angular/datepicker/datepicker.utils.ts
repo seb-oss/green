@@ -207,7 +207,7 @@ export const isAfter = (date: Date, controlDate: Date): boolean => {
  */
 export const isValid = (value: any): boolean => {
   // if value is type of string and can be parsed to a Date
-  let date = value && typeof value === 'string' && !isNaN(Date.parse(value)) ? new Date(value) : null;
+  const date = value && typeof value === 'string' && !isNaN(Date.parse(value)) ? new Date(value) : null;
 
   switch (true) {
     // if date or value is a valid date object - return valid
