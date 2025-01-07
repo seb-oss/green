@@ -91,7 +91,7 @@ import { DialogButtons } from '../modal.types'
     ]),
   ],
 })
-export class NgvSlideOutComponent implements OnInit {
+export class NggvSlideOutComponent implements OnInit {
   /** @internal */
   @ViewChild('slideOut') slideOutRef: ElementRef | undefined
 

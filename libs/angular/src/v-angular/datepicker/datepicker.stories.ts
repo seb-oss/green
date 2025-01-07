@@ -23,7 +23,7 @@ import {
 import { Subject } from 'rxjs'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
-import { NgvI18nModule } from '../i18n'
+import { NggvI18nModule } from '../i18n'
 import { NggvInputMaskModule } from '../input-mask'
 import { CalendarControlComponent } from './components/calendar-control/calendar-control.component'
 import { CalendarComponent } from './components/calendar/calendar.component'
@@ -46,7 +46,7 @@ export default {
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom(NgvI18nModule),
+        importProvidersFrom(NggvI18nModule),
         importProvidersFrom(NggvInputMaskModule.forRoot({ isAsync: true })),
       ],
     }),

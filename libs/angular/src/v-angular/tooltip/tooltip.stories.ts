@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common'
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
-import { NgvTooltipDirective } from './tooltip.directive'
+import { NggvTooltipDirective } from './tooltip.directive'
 
 export default {
   title: 'V-Angular/Tooltip',
   decorators: [
     moduleMetadata({
-      declarations: [NgvTooltipDirective],
+      declarations: [NggvTooltipDirective],
       imports: [CommonModule],
     }),
   ],
@@ -26,8 +26,8 @@ const argsToAttr = (args: any) =>
     .map((attr) => `[${attr}]="${attr}"`)
     .join(' ')
 
-const Template: StoryFn<NgvTooltipDirective> = (
-  args: NgvTooltipDirective & any,
+const Template: StoryFn<NggvTooltipDirective> = (
+  args: NggvTooltipDirective & any,
 ) => ({
   /* spell-checker: disable */
   template: /*html*/ `
@@ -45,8 +45,8 @@ const Template: StoryFn<NgvTooltipDirective> = (
   props: { ...args },
 })
 
-const TemplateAccessible: StoryFn<NgvTooltipDirective> = (
-  args: NgvTooltipDirective & any,
+const TemplateAccessible: StoryFn<NggvTooltipDirective> = (
+  args: NggvTooltipDirective & any,
 ) => ({
   /* spell-checker: disable */
   template: /*html*/ `

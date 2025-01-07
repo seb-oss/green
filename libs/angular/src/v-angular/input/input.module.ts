@@ -4,21 +4,21 @@ import { ReactiveFormsModule } from '@angular/forms'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { NggCharacterCountdownDirectiveModule } from '@sebgroup/green-angular/src/v-angular/character-countdown'
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NggvInputMaskModule } from '@sebgroup/green-angular/src/v-angular/input-mask'
-import { NgvInputComponent } from './input.component'
+import { NggvInputComponent } from './input.component'
 
 @NgModule({
-  declarations: [NgvInputComponent],
+  declarations: [NggvInputComponent],
   imports: [
     CommonModule,
-    NgvI18nModule,
+    NggvI18nModule,
     NggvInputMaskModule,
     ReactiveFormsModule,
     NggCharacterCountdownDirectiveModule,
     NggCoreWrapperModule,
   ],
-  exports: [NgvInputComponent],
+  exports: [NggvInputComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class NgvInputModule {}
+export class NggvInputModule {}

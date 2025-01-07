@@ -1,8 +1,4 @@
-import {
-  Component,
-  HostBinding,
-  Input,
-} from '@angular/core'
+import { Component, HostBinding, Input } from '@angular/core'
 
 type Breadcrumb = {
   /** Title shown for the breadcrumb link. */
@@ -18,9 +14,10 @@ type Breadcrumb = {
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
 })
-export class NgvBreadcrumbsComponent {
+export class NggvBreadcrumbsComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'breadcrumbs'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'breadcrumbs'
 
   /** List of breadcrumbs to present. */
   @Input() breadcrumbs!: Breadcrumb[]

@@ -17,4 +17,4 @@ import { ToastComponent } from './toast.component'
   exports: [ToastComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class NgvToastModule {}
+export class NggvToastModule {}

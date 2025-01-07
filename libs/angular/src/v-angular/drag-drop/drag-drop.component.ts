@@ -15,7 +15,7 @@ import { filter, retryWhen, switchMap, take, tap } from 'rxjs/operators'
 
 import {
   DialogEvent,
-  NgvDialogComponent,
+  NggvDialogComponent,
 } from '@sebgroup/green-angular/src/v-angular/modal'
 import {
   extendFile,
@@ -47,7 +47,7 @@ export type DragDropState = 'normal' | 'over' | 'uploading' | 'done'
 })
 export class NggvDragDropComponent implements OnInit, OnDestroy {
   /** @internal */
-  @ViewChild('deleteModalRef') deleteModalRef!: NgvDialogComponent
+  @ViewChild('deleteModalRef') deleteModalRef!: NggvDialogComponent
 
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =

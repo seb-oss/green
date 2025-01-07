@@ -1,13 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { HttpClientModule } from '@angular/common/http'
-import {
-  APP_INITIALIZER,
-  CUSTOM_ELEMENTS_SCHEMA,
-  importProvidersFrom,
-} from '@angular/core'
-// import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { faTimes } from '@fortawesome/pro-light-svg-icons';
-// import { faCheck, faCloudUpload } from '@fortawesome/pro-regular-svg-icons';
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   Translation,
   TranslocoLoader,
@@ -21,8 +14,8 @@ import {
 } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
-import { NgvI18nModule } from '../i18n'
-import { NgvModalModule } from '../modal'
+import { NggvI18nModule } from '../i18n'
+import { NggvModalModule } from '../modal'
 import { NggvDragDropComponent } from './drag-drop.component'
 import { MockFileService, mockStateMap } from './drag-drop.mock'
 import { ValuePipe } from './drag-drop.pipes'
@@ -49,7 +42,7 @@ export default {
   },
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
       declarations: [ValuePipe],
@@ -57,7 +50,7 @@ export default {
         CommonModule,
         HttpClientModule,
         TranslocoModule,
-        NgvModalModule,
+        NggvModalModule,
         NggCoreWrapperModule,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -70,6 +63,7 @@ const Template: StoryFn<NggvDragDropComponent> = (args) => ({
 })
 
 export const Primary = Template.bind({})
+
 Primary.args = {
   service: new MockFileService(),
   disableRemove: [],

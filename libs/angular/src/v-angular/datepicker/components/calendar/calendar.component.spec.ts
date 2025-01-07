@@ -9,7 +9,7 @@ import { IsDisabledPipe } from '../../pipes/is-disabled.pipe'
 import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { CalendarComponent } from './calendar.component'
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // CalendarComponent - constructor()
   // ----------------------------------------------------------------------------

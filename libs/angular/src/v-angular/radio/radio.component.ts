@@ -15,18 +15,18 @@ import {
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /** @internal Internal class used to uncheck radio buttons with the matching name. */
 @Injectable()
-export class NgvRadioControlRegistry {
+export class NggvRadioControlRegistry {
   private _radios: any[] = []
 
-  add(control: NgControl, radio: NgvRadioComponent) {
+  add(control: NgControl, radio: NggvRadioComponent) {
     this._radios.push([control, radio])
   }
 
-  remove(radio: NgvRadioComponent) {
+  remove(radio: NggvRadioComponent) {
     for (let i = this._radios.length - 1; i >= 0; --i) {
       if (this._radios[i][1] === radio) {
         this._radios.splice(i, 1)
@@ -35,7 +35,7 @@ export class NgvRadioControlRegistry {
     }
   }
 
-  select(radio: NgvRadioComponent) {
+  select(radio: NggvRadioComponent) {
     this._radios.forEach((controlPair) => {
       if (this._isSameGroup(controlPair, radio) && controlPair[1] !== radio) {
         controlPair[1].writeValue(radio.value)
@@ -44,8 +44,8 @@ export class NgvRadioControlRegistry {
   }
 
   private _isSameGroup(
-    controlPair: [NgControl, NgvRadioComponent],
-    radio: NgvRadioComponent,
+    controlPair: [NgControl, NggvRadioComponent],
+    radio: NggvRadioComponent,
   ) {
     if (!controlPair[0].control) return false
     return (
@@ -64,10 +64,10 @@ export class NgvRadioControlRegistry {
   selector: 'nggv-radio',
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
-  providers: [NgvRadioControlRegistry],
+  providers: [NggvRadioControlRegistry],
 })
-export class NgvRadioComponent
-  extends NgvBaseControlValueAccessorComponent
+export class NggvRadioComponent
+  extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
   /** Special property used for selecting DOM elements during automated UI testing. */
@@ -88,7 +88,7 @@ export class NgvRadioComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
-    protected registry: NgvRadioControlRegistry,
+    protected registry: NggvRadioControlRegistry,
     protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, cdr)

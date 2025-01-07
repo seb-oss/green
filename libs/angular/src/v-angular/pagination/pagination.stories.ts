@@ -15,7 +15,7 @@ import {
 import { of } from 'rxjs'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
-import { NgvI18nModule } from '../i18n'
+import { NggvI18nModule } from '../i18n'
 import { PaginationComponent } from './pagination.component'
 
 class TranslocoInlineLoader implements TranslocoLoader {
@@ -31,13 +31,13 @@ export default {
   component: PaginationComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
       imports: [
         CommonModule,
         FormsModule,
-        NgvI18nModule,
+        NggvI18nModule,
         TranslocoModule,
         NggCoreWrapperModule,
       ],

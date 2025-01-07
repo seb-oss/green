@@ -19,7 +19,7 @@ import { filter, map } from 'rxjs/operators'
   templateUrl: './fold-out.component.html',
   styleUrls: ['./fold-out.component.scss'],
 })
-export class NgvFoldOutComponent implements OnDestroy {
+export class NggvFoldOutComponent implements OnDestroy {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook = 'fold-out'
 

@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { NgvFoldOutComponent } from './fold-out.component'
+import { NggvFoldOutComponent } from './fold-out.component'
 
-describe('[NgvModal]', () => {
+describe('[NggvModal]', () => {
   // ----------------------------------------------------------------------------
   // FoldOutComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('FoldOutComponent - constructor()', () => {
-    let component: NgvFoldOutComponent
-    let fixture: ComponentFixture<NgvFoldOutComponent>
+    let component: NggvFoldOutComponent
+    let fixture: ComponentFixture<NggvFoldOutComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvFoldOutComponent],
+        declarations: [NggvFoldOutComponent],
       }).compileComponents()
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(NgvFoldOutComponent)
+      fixture = TestBed.createComponent(NggvFoldOutComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

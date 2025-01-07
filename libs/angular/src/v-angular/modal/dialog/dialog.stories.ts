@@ -12,24 +12,24 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvI18nModule } from '../../i18n/i18n.module'
-import { NgvDialogComponent } from './dialog.component'
+import { NggvI18nModule } from '../../i18n/i18n.module'
+import { NggvDialogComponent } from './dialog.component'
 
 export default {
   title: 'V-Angular/Dialog',
-  component: NgvDialogComponent,
+  component: NggvDialogComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, NgvI18nModule, NggCoreWrapperModule],
+      imports: [CommonModule, NggvI18nModule, NggCoreWrapperModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta
 
-const Template: StoryFn<NgvDialogComponent> = (args: any) => ({
+const Template: StoryFn<NggvDialogComponent> = (args: any) => ({
   props: args,
 })
 

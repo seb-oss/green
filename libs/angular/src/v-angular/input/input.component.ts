@@ -18,7 +18,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators'
 
 import type { InputmaskOptions } from '@sebgroup/green-angular/src/v-angular/input-mask'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Input fields allow users to add and edit text.
@@ -29,8 +29,8 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class NgvInputComponent
-  extends NgvBaseControlValueAccessorComponent
+export class NggvInputComponent
+  extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
   /** Adding .gds-form-item as a class to host element */

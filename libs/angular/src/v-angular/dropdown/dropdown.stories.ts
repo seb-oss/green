@@ -18,14 +18,14 @@ import { debounceTime, map, Observable } from 'rxjs'
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { DropdownUtils, Option } from '../core/core.utils'
-import { NgvI18nModule } from '../i18n/i18n.module'
-import { NgvInputComponent } from '../input/input.component'
-import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
-import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
-import { NgvDropdownComponent } from './dropdown.component'
-import { NgvTypeaheadHighlightComponent } from './typeahead/typeahead-highlight/typeahead-highlight.component'
-import { NgvTypeaheadInputComponent } from './typeahead/typeahead-input/typeahead-input.component'
-import { NgvTypeaheadDirective } from './typeahead/typeahead.directive'
+import { NggvI18nModule } from '../i18n/i18n.module'
+import { NggvInputComponent } from '../input/input.component'
+import { NggvTooltipDirective } from '../tooltip/tooltip.directive'
+import { NggvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NggvDropdownComponent } from './dropdown.component'
+import { NggvTypeaheadHighlightComponent } from './typeahead/typeahead-highlight/typeahead-highlight.component'
+import { NggvTypeaheadInputComponent } from './typeahead/typeahead-input/typeahead-input.component'
+import { NggvTypeaheadDirective } from './typeahead/typeahead.directive'
 
 interface WithExtras {
   ngModel: string
@@ -41,18 +41,18 @@ interface ExtendedOption<K, V> extends Option<K, V> {
 
 export default {
   title: 'V-Angular/Dropdown',
-  component: NgvDropdownComponent,
+  component: NggvDropdownComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule), DropdownUtils],
+      providers: [importProvidersFrom(NggvI18nModule), DropdownUtils],
     }),
     moduleMetadata({
       declarations: [
-        NgvDropdownListComponent,
-        NgvInputComponent,
-        NgvTypeaheadInputComponent,
-        NgvTypeaheadHighlightComponent,
-        NgvTooltipDirective,
+        NggvDropdownListComponent,
+        NggvInputComponent,
+        NggvTypeaheadInputComponent,
+        NggvTypeaheadHighlightComponent,
+        NggvTooltipDirective,
         CharacterCountdownDirective,
       ],
       imports: [
@@ -60,8 +60,8 @@ export default {
         NggCoreWrapperModule,
         FormsModule,
         ReactiveFormsModule,
-        NgvI18nModule,
-        NgvTypeaheadDirective,
+        NggvI18nModule,
+        NggvTypeaheadDirective,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
@@ -89,14 +89,14 @@ const options = [
   },
 ]
 
-type StoryArgs = NgvDropdownComponent<
+type StoryArgs = NggvDropdownComponent<
   string,
   string | null,
   ExtendedOption<string, string | null>
 > &
   WithExtras
 
-const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
+const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel)
   ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {

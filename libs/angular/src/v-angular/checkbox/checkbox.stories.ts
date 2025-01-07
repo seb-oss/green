@@ -17,8 +17,8 @@ import {
 import { delay } from 'rxjs/operators'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
-import { NgvI18nModule } from '../i18n'
-import { NgvCheckboxComponent } from './checkbox.component'
+import { NggvI18nModule } from '../i18n'
+import { NggvCheckboxComponent } from './checkbox.component'
 
 interface StoryInputListener {
   checked: boolean
@@ -30,17 +30,17 @@ interface StoryInputListener {
 
 export default {
   title: 'V-Angular/Checkbox',
-  component: NgvCheckboxComponent,
+  component: NggvCheckboxComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
+      providers: [importProvidersFrom(NggvI18nModule)], // Changes: removed
     }),
     moduleMetadata({
       imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgvI18nModule,
+        NggvI18nModule,
         NggCoreWrapperModule,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -48,7 +48,7 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
+const Template: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -66,7 +66,7 @@ const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
   props: args,
 })
 
-const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
+const TemplateAlt: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -88,8 +88,8 @@ const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
   props: args,
 })
 
-const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
-  args: NgvCheckboxComponent & any,
+const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
+  args: NggvCheckboxComponent & any,
 ) => {
   const grp = new UntypedFormGroup({
     vanilla: new UntypedFormControl(

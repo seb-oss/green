@@ -23,7 +23,7 @@ export interface DialogEvent<T = any> {
   styleUrls: ['./dialog.component.scss'],
   exportAs: 'dialog',
 })
-export class NgvDialogComponent implements OnInit {
+export class NggvDialogComponent implements OnInit {
   @ViewChild('dialog') dialogRef: ElementRef | undefined
 
   /** Special property used for selecting DOM elements during automated UI testing. */

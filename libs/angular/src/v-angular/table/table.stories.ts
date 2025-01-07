@@ -7,7 +7,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvI18nModule } from '../i18n'
+import { NggvI18nModule } from '../i18n'
 import { TableComponent } from './table.component'
 import {
   exampleAlt,
@@ -24,7 +24,7 @@ import {
   mockedAriaLabelsOrderBy,
   mockedFooterData,
 } from './table.mock'
-import { NgvTableModule } from './table.module'
+import { NggvTableModule } from './table.module'
 
 class TranslocoInlineLoader implements TranslocoLoader {
   getTranslation(_: string) {
@@ -40,10 +40,10 @@ export default {
   },
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
-      imports: [NgvTableModule, TranslocoModule],
+      imports: [NggvTableModule, TranslocoModule],
     }),
   ],
 } as Meta
