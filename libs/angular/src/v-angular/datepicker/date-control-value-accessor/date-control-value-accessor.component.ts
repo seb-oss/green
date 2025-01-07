@@ -215,9 +215,9 @@ export abstract class DateControlValueAccessorComponent
 
   /* VALUE HANDLERS */
   /** @internal */
-  protected onChange = (_: any) => {}
+  protected onChange = (_: any): void => {} // eslint-disable-line @typescript-eslint/no-empty-function
   /** @internal */
-  protected onTouched = () => {}
+  protected onTouched = (): void => {} // eslint-disable-line @typescript-eslint/no-empty-function
   /** @internal */
   protected onValidatorChange: () => void = () => null
   private _state: any = null
