@@ -1,14 +1,12 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
-import { match } from '../datepicker.utils';
+import { match } from '../datepicker.utils'
 
 @Pipe({
-  name: 'matches'
+  name: 'matches',
 })
 export class MatchesPipe implements PipeTransform {
-
   transform(value: Date, selected: Date | undefined): boolean {
-    return match(value, selected);
+    return match(value, selected)
   }
-
 }

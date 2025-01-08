@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common'
-
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
 import { SlugPipe } from './slug.pipe'

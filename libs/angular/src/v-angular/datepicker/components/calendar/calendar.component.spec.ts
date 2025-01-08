@@ -4,10 +4,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { Month } from '../../datepicker.models'
 import { generateDateMatrix } from '../../datepicker.utils'
-import { IsDisabledPipe } from '../../pipes/is-disabled.pipe'
-import { CalendarComponent } from './calendar.component'
 import { CalendarDateDirective } from '../../directives/calendar-date.directive'
+import { IsDisabledPipe } from '../../pipes/is-disabled.pipe'
 import { DateThookMockPipe, MatchesMockPipe } from '../../test/stubs'
+import { CalendarComponent } from './calendar.component'
 
 describe('[NgvDatepicker]', () => {
   // ----------------------------------------------------------------------------
@@ -32,7 +32,13 @@ describe('[NgvDatepicker]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [CalendarComponent, IsDisabledPipe, DateThookMockPipe, CalendarDateDirective, MatchesMockPipe],
+        declarations: [
+          CalendarComponent,
+          IsDisabledPipe,
+          DateThookMockPipe,
+          CalendarDateDirective,
+          MatchesMockPipe,
+        ],
       }).compileComponents()
     }))
 
@@ -68,17 +74,23 @@ describe('[NgvDatepicker]', () => {
       ${'closingTime'}     | ${closingTime}
     `(
       `for @Input() $inputName and value $inputValue`,
-      ({ inputName, inputValue }: { inputName: 'disableDates' | 'disableWeekDays' | 'firstValid' | 'lastValid' | 'closingTime'; inputValue: any }) => {
-        const dateMatrix = generateDateMatrix(
-          verifyMonth,
-          verifyYear,
-          5,
-          1
-        )
+      ({
+        inputName,
+        inputValue,
+      }: {
+        inputName:
+          | 'disableDates'
+          | 'disableWeekDays'
+          | 'firstValid'
+          | 'lastValid'
+          | 'closingTime'
+        inputValue: any
+      }) => {
+        const dateMatrix = generateDateMatrix(verifyMonth, verifyYear, 5, 1)
 
         it(`returns disabled for 'today'`, () => {
-          component.dateMatrix = dateMatrix;
-          component[inputName] = inputValue;
+          component.dateMatrix = dateMatrix
+          component[inputName] = inputValue
           fixture.detectChanges()
           const buttonDe = getDateButtonElement(verifyDate) as DebugElement
           expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')

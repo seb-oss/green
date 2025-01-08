@@ -1,17 +1,21 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core'
 
 @Pipe({
   name: 'trThook',
   standalone: true,
 })
 export class TrThookPipe implements PipeTransform {
-  transform<V>(value: V, index: number, thookFn?: (rowData: V) => string): string {
+  transform<V>(
+    value: V,
+    index: number,
+    thookFn?: (rowData: V) => string,
+  ): string {
     // call thook fn to set thook for active row
     if (thookFn != null) {
-      return thookFn(value);
+      return thookFn(value)
     }
 
     // default thook
-    return `table-row-${index}`;
+    return `table-row-${index}`
   }
 }
