@@ -1,0 +1,179 @@
+// @use 'node_modules/@sebgroup/vanilla/src/components/buttons/button-mixins' as buttons;
+// @use 'node_modules/@sebgroup/vanilla/src/components/inputs/common' as inputs;
+// @use 'node_modules/@sebgroup/vanilla/src/functions';
+@use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
+@use '@sebgroup/chlorophyll/scss/common';
+@use '../date-mixins' as ngv;
+// @use '../media';
+
+:host {
+  display: block;
+  position: relative;
+
+  @include common.media-breakpoint-down('md') {
+    min-width: 100%;
+  }
+
+  .hide-if-empty:empty {
+    display: none;
+  }
+
+  .unset-state {
+    padding-left: 0.5rem;
+  }
+
+  .sdv-field-label--optional {
+    font-weight: 400;
+  }
+
+  .nggv-datepicker {
+    margin-top: 0.25rem;
+    position: absolute;
+  }
+
+  .nggv-field--error {
+    @include ngv.text-field--error();
+  }
+
+  .error-item {
+    @include ngv.text-field--error-item();
+  }
+
+  .nggv-field--locked {
+  }
+
+  .error-item--text {
+    color: #bb000c;
+  }
+
+  .field-wrap {
+    $_height: 2.75rem;
+    $_border-color-normal: #868686;
+    //
+
+    border: 1px solid $_border-color-normal;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+
+    min-height: $_height;
+    line-height: 1.5;
+    font-size: 1rem;
+    font-family: 'SEBSansSerif', Arial, sans-serif;
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    height: 2.625rem;
+    display: flex;
+
+    .nggv-button-date {
+      --text-disabled-color: #adadad;
+      @include button.base;
+      @include button.ghost-dark;
+      @include common.media-breakpoint-down('md') {
+        width: 2.625rem;
+        height: 2.625rem;
+      }
+      background-color: transparent;
+      min-height: 2.5rem;
+      border: none;
+      border-radius: 3px;
+      width: 2.625rem;
+      height: 2.625rem;
+      min-width: 2.625rem;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      text-align: right;
+
+      &:focus {
+        outline-color: #1a1a1a;
+        outline-style: solid;
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+      }
+
+      &[disabled] {
+        background-color: #f8f8f8 !important;
+        color: #adadad;
+      }
+
+      @media (max-width: 35.98em) {
+        min-width: initial;
+      }
+    }
+
+    input[type='text'] {
+      &::-webkit-inner-spin-button,
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+      }
+    }
+
+    .nggv-field-date {
+      // Config
+      $_height: 2.75rem;
+      $_border-color-normal: #cecece;
+      //
+
+      border: 1px solid $_border-color-normal;
+      border-radius: 4px;
+      outline: none;
+      box-sizing: border-box;
+
+      min-height: $_height;
+      line-height: 1.5;
+      font-size: 1rem;
+      font-family: 'SEBSansSerif', Arial, sans-serif;
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      &:hover {
+        border-color: #41b0ee;
+      }
+
+      &:focus {
+        outline-color: #1a1a1a;
+        outline-style: solid;
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+      }
+
+      &:active {
+        border-color: $_border-color-normal;
+      }
+
+      &[disabled] {
+        background-color: #f8f8f8;
+        border-color: $_border-color-normal;
+
+        &::placeholder {
+          color: #cecece;
+        }
+      }
+      border: none;
+      min-height: 2.375rem;
+      width: 100%;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-left: 1rem;
+
+      &:not(:focus) {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      &:focus {
+        padding-right: 0;
+      }
+    }
+  }
+}

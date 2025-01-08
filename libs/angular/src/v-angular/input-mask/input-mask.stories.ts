@@ -7,7 +7,6 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
 } from '@angular/forms'
-
 // import { NgvI18nModule } from '@sebgroup/nggv-i18n';
 import {
   applicationConfig,
@@ -17,7 +16,7 @@ import {
 } from '@storybook/angular'
 
 import { createMask } from './constants'
-import { NgvInputMaskModule } from './input-mask.module'
+import { NggvInputMaskModule } from './input-mask.module'
 
 interface WithExtras {
   notice: string
@@ -168,13 +167,13 @@ class NgvInputMaskStoryComponent {
 }
 
 export default {
-  title: 'Input mask/Input mask',
+  title: 'V-Angular/Input mask',
   component: NgvInputMaskStoryComponent,
   decorators: [
     applicationConfig({
       providers: [
         // importProvidersFrom(NgvI18nModule),
-        importProvidersFrom(NgvInputMaskModule.forRoot({ isAsync: true })),
+        importProvidersFrom(NggvInputMaskModule.forRoot({ isAsync: true })),
       ],
     }),
     moduleMetadata({
@@ -183,7 +182,7 @@ export default {
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgvInputMaskModule,
+        NggvInputMaskModule,
       ],
     }),
   ],
