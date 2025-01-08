@@ -45,10 +45,6 @@
     @include mixins.modal-body();
   }
 
-  .close {
-    @include close.close;
-  }
-
   .modal-dialog__actions,
   .gds-slide-out__header,
   .modal-body,
@@ -61,6 +57,7 @@
   }
 
   .nggv-modal-slideout__close {
+    @include button.reset;
     @include close.close;
   }
 
@@ -68,6 +65,7 @@
     button {
       @include button.reset;
       @include button.base;
+      font-size: 1rem;
     }
     .primary {
       @include button.primary;

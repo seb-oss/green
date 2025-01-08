@@ -51,6 +51,7 @@
   }
 
   .nggv-modal-slideout__close {
+    @include button.reset;
     @include close.close;
   }
 
