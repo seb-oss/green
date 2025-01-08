@@ -38,7 +38,7 @@ export const extendFile = (
  */
 export const verifyAccept = (type: string, accept?: string) => {
   if (!accept) return true;
-  const regex = new RegExp(accept.replace(/\*/g, '.*').replace(/\s*\,\s*/g, '|'));
+  const regex = new RegExp(accept.replace(/\*/g, '.*').replace(/\s*,\s*/g, '|'));
   return regex.test(type);
 };
 

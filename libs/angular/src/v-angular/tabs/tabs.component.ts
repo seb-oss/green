@@ -90,7 +90,7 @@ export class TabsComponent
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (!!changes.tabs.currentValue) {
+    if (changes.tabs.currentValue) {
       // Update tabs on property updates
       this.updateFromInput()
     }

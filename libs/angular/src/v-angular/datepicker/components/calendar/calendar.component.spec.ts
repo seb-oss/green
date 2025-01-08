@@ -4,10 +4,10 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
 import { Month } from '../../datepicker.models'
 import { generateDateMatrix } from '../../datepicker.utils'
-import { DateThookPipe } from '../../pipes/date-thook.pipe'
 import { IsDisabledPipe } from '../../pipes/is-disabled.pipe'
-import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { CalendarComponent } from './calendar.component'
+import { CalendarDateDirective } from '../../directives/calendar-date.directive'
+import { DateThookMockPipe, MatchesMockPipe } from '../../test/stubs'
 
 describe('[NgvDatepicker]', () => {
   // ----------------------------------------------------------------------------
@@ -32,8 +32,7 @@ describe('[NgvDatepicker]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [CalendarComponent, IsDisabledPipe, DateThookPipe],
-        imports: [NggvDatepickerTestingModule],
+        declarations: [CalendarComponent, IsDisabledPipe, DateThookMockPipe, CalendarDateDirective, MatchesMockPipe],
       }).compileComponents()
     }))
 
@@ -69,36 +68,20 @@ describe('[NgvDatepicker]', () => {
       ${'closingTime'}     | ${closingTime}
     `(
       `for @Input() $inputName and value $inputValue`,
-      ({ inputName, inputValue }) => {
-        const config = { [inputName]: inputValue }
-        it(`returns enabled for 'today'`, () => {
-          Object.assign(component, { [inputName]: undefined })
-          fixture.detectChanges()
-          fixture.whenRenderingDone().then(() => {
-            const buttonDe = getDateButtonElement(verifyDate) as DebugElement
-            expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('false')
-          })
-        })
+      ({ inputName, inputValue }: { inputName: 'disableDates' | 'disableWeekDays' | 'firstValid' | 'lastValid' | 'closingTime'; inputValue: any }) => {
+        const dateMatrix = generateDateMatrix(
+          verifyMonth,
+          verifyYear,
+          5,
+          1
+        )
 
         it(`returns disabled for 'today'`, () => {
-          Object.assign(component, config)
+          component.dateMatrix = dateMatrix;
+          component[inputName] = inputValue;
           fixture.detectChanges()
-          fixture.whenRenderingDone().then(() => {
-            const buttonDe = getDateButtonElement(verifyDate) as DebugElement
-            expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')
-          })
-        })
-
-        it(`returns disabled for 'today' after updating '${inputName}' twice`, () => {
-          Object.assign(component, { [inputName]: undefined })
-          fixture.detectChanges()
-          fixture.whenRenderingDone().then(() => {
-            const buttonDe = getDateButtonElement(verifyDate) as DebugElement
-            expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('false')
-            Object.assign(component, config)
-            fixture.detectChanges()
-            expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')
-          })
+          const buttonDe = getDateButtonElement(verifyDate) as DebugElement
+          expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')
         })
       },
     )

@@ -202,7 +202,8 @@ WithAppendedRows.parameters = {
 }
 
 const GlobalSortTableStory: StoryFn<TableComponent<ColumnData>> = (args) => {
-  let tableData = [...args.tableData]
+  // is never reassigned. Use 'const' instead  prefer-const
+  const tableData = [...args.tableData]
   const filterData = (value: any) => {
     console.log('Using custom sort function')
     const { property, order } = value

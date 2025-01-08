@@ -1,6 +1,6 @@
 import '../../datepicker.globals'
 
-import { Component, ViewChild } from '@angular/core'
+import { Component, Directive, Input, ViewChild } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import {
   FormControl,
@@ -10,10 +10,16 @@ import {
 } from '@angular/forms'
 
 import { NgvI18nTestModule } from '../../../i18n'
-import { NggvInputMaskModule } from '../../../input-mask'
 import * as dateModels from '../../models/dates'
 import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { DateInputComponent } from './date-input.component'
+
+@Directive({
+  selector: '[nggvInputMask]',
+})
+class NggvInputMaskStubDirective {
+  @Input() nggvInputMask: any;
+}
 
 describe('[NgvDatepicker]', () => {
   // ----------------------------------------------------------------------------
@@ -35,7 +41,7 @@ describe('[NgvDatepicker]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [DateInputComponent, DateInputHostComponent],
+        declarations: [DateInputComponent, DateInputHostComponent, NggvInputMaskStubDirective],
         imports: [
           NggvDatepickerTestingModule,
           NgvI18nTestModule,

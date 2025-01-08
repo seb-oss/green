@@ -148,7 +148,7 @@ export class CalendarComponent implements OnChanges {
   getElementWithOffset(
     fromElement: HTMLElement | undefined,
     offsetDays: number,
-    returnOnlyEnabled: boolean = true,
+    returnOnlyEnabled = true,
   ): HTMLElement | undefined {
     if (!fromElement) return
     const fromIndex = this.dateButtonRefs

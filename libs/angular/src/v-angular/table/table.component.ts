@@ -256,8 +256,6 @@ export class TableComponent<T extends TableRow>
   private selected: string[] = []
   private subs: Subscription[] = []
 
-  constructor() {}
-
   ngOnChanges(changes: SimpleChanges) {
     // table data was updated and the rows should be selectable
     if (

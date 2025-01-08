@@ -245,7 +245,7 @@ export const getFormatDateMask = (
   const separator =
     separators.find((operator) => format.indexOf(operator) > -1) ?? '-'
   const dateObjects = format.split(separator)
-  let year: { key: string; index: number } = { key: 'year', index: 0 },
+  const year: { key: string; index: number } = { key: 'year', index: 0 },
     month: { key: string; index: number } = { key: 'month', index: 1 },
     day: { key: string; index: number } = { key: 'day', index: 2 }
 

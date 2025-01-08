@@ -215,9 +215,9 @@ export abstract class DateControlValueAccessorComponent
 
   /* VALUE HANDLERS */
   /** @internal */
-  protected onChange = (_: any) => {}
+  protected onChange = (_: any): void => {} // eslint-disable-line @typescript-eslint/no-empty-function
   /** @internal */
-  protected onTouched = () => {}
+  protected onTouched = (): void => {} // eslint-disable-line @typescript-eslint/no-empty-function
   /** @internal */
   protected onValidatorChange: () => void = () => null
   private _state: any = null
@@ -428,7 +428,7 @@ export abstract class DateControlValueAccessorComponent
   }
 
   /** Registers a callback function that is called when the child input element's value changes. */
-  registerOnChange(fn: (value: any) => {}): void {
+  registerOnChange(fn: (value: any) => void): void {
     this.onChange = (value) => {
       // ensure emitted value is a string | null | undefined
       const emitValue = DateControlValueAccessorComponent.parseDateLike(value)
@@ -446,7 +446,7 @@ export abstract class DateControlValueAccessorComponent
     this.disabled = isDisabled
 
     // if displayDisabledAsLocked is enabled - update locked state based on disabled state
-    if (!!this.displayDisabledAsLocked) {
+    if (this.displayDisabledAsLocked) {
       this.locked = isDisabled
     }
   }

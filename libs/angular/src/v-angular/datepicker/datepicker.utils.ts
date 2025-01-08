@@ -44,7 +44,7 @@ export const getSortedWeekDays = (firstDayOfWeek: WeekDay, startDate?: Date): Da
 export const generateDateMatrix = (
   month: number,
   year: number,
-  minWeeks: number = 5,
+  minWeeks = 5,
   firstDayOfWeek: WeekDay,
 ): Date[][] => {
   // generate a new matrix with 5 or 6 rows (depending on number of days in that month)
@@ -207,7 +207,7 @@ export const isAfter = (date: Date, controlDate: Date): boolean => {
  */
 export const isValid = (value: any): boolean => {
   // if value is type of string and can be parsed to a Date
-  let date = value && typeof value === 'string' && !isNaN(Date.parse(value)) ? new Date(value) : null;
+  const date = value && typeof value === 'string' && !isNaN(Date.parse(value)) ? new Date(value) : null;
 
   switch (true) {
     // if date or value is a valid date object - return valid
