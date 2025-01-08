@@ -64,7 +64,11 @@ export class DropdownUtils<
 
       switch (true) {
         case Array.isArray(original[key]) && Array.isArray(change[key]):
-          if (JSON.stringify(original[key].sort()) !== JSON.stringify(change[key].sort())) return false
+          if (
+            JSON.stringify(original[key].sort()) !==
+            JSON.stringify(change[key].sort())
+          )
+            return false
           break
         case typeof original[key] === 'function':
         case typeof change[key] === 'function':

@@ -18,7 +18,7 @@ import { DateInputComponent } from './date-input.component'
   selector: '[nggvInputMask]',
 })
 class NggvInputMaskStubDirective {
-  @Input() nggvInputMask: any;
+  @Input() nggvInputMask: any
 }
 
 describe('[NgvDatepicker]', () => {
@@ -41,7 +41,11 @@ describe('[NgvDatepicker]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [DateInputComponent, DateInputHostComponent, NggvInputMaskStubDirective],
+        declarations: [
+          DateInputComponent,
+          DateInputHostComponent,
+          NggvInputMaskStubDirective,
+        ],
         imports: [
           NggvDatepickerTestingModule,
           NgvI18nTestModule,

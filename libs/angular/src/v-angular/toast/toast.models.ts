@@ -1,11 +1,11 @@
 export interface ToastMessage {
-  type: MessageType;
-  translocoScope: string;
-  titleText: string;
-  bodyText?: string;
-  timeout?: number;
-  timeoutId?: number;
-  timeoutStartTime?: number;
+  type: MessageType
+  translocoScope: string
+  titleText: string
+  bodyText?: string
+  timeout?: number
+  timeoutId?: number
+  timeoutStartTime?: number
 }
 
 export enum MessageType {
