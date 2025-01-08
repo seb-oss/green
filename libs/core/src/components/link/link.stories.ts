@@ -52,10 +52,50 @@ export const Lead: Story = {
   ...DefaultParams,
   name: 'Icon: Lead',
   render: () =>
-    html` <gds-link>
+    html` <gds-link href="#test">
       <gds-icon-cain-link slot="lead"></gds-icon-cain-link>
       Link text
     </gds-link>`,
+}
+
+/**
+ * The `href` property determines the URL that the link will navigate to when clicked.
+ *
+ * If the `href` property is not set (i.e., it is an empty string), the component will still render as a link element (`<a>`),
+ * but it will not have a valid destination. This allows the component to maintain its visual appearance and
+ * styling as a link, while preventing any navigation. This behavior is useful for scenarios where you want
+ * the link to appear interactive (for example, to indicate a disabled state or for use in a JavaScript event handler),
+ * but without directing the user to a different page or resource.
+ *
+ * Additionally, this approach helps to avoid issues in single-page applications (SPAs) where links without valid `href`
+ * attributes can lead to unexpected navigation or errors in the routing logic.
+ */
+export const Href: Story = {
+  ...DefaultParams,
+  name: 'HREF',
+  render: () =>
+    html` <gds-flex gap="4xl" width="600px" flex-direction="column">
+      <gds-flex gap="xl">
+        <gds-flex flex-direction="column" gap="m" flex="1">
+          <gds-text tag="small">With <code>href</code></gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+          <gds-link text-decoration="underline" href="#test">
+            Link text
+          </gds-link>
+          <small>
+            <pre><code>&lt;gds-link href=&quot;#test&quot;&gt;...&lt;/gds-link&gt;</code></pre>
+          </small>
+        </gds-flex>
+        <gds-flex flex-direction="column" gap="m" flex="1">
+          <gds-text tag="small">Without <code>href</code></gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+          <gds-link text-decoration="underline"> Link text </gds-link>
+          <small>
+            <pre><code>&lt;gds-link&gt;...&lt;/gds-link&gt;</code></pre>
+          </small>
+        </gds-flex>
+      </gds-flex>
+    </gds-flex>`,
 }
 
 /**

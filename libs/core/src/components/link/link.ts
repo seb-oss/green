@@ -34,7 +34,7 @@ export class GdsLink extends GdsElement {
    * When set, the underlying button will be rendered as an anchor element.
    */
   @property()
-  href = ''
+  href?: string
 
   /**
    * Where to display the linked URL. Only used when href is present.
