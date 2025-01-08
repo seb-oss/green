@@ -1,9 +1,9 @@
 export interface AlertMessage {
-  type: AlertType;
-  titleText?: string;
-  bodyText?: string;
-  linkText?: string;
-  actionText?: string;
+  type: AlertType
+  titleText?: string
+  bodyText?: string
+  linkText?: string
+  actionText?: string
 }
 
 export enum AlertType {

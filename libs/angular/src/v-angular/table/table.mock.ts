@@ -1,19 +1,22 @@
-import { Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs'
 
-import { TableColumn } from './table.models';
+import { TableColumn } from './table.models'
 
 export type ColumnData = {
-  id: string;
-  name: string;
-  currency: string;
-  status: string;
-  bookedBalance: number;
-  datedBalance: number;
-  limit: number;
-  unauthorizedUsage: number;
-};
+  id: string
+  name: string
+  currency: string
+  status: string
+  bookedBalance: number
+  datedBalance: number
+  limit: number
+  unauthorizedUsage: number
+}
 
-export const columns: { primary: TableColumn<ColumnData>[]; alt: TableColumn<ColumnData>[] } = {
+export const columns: {
+  primary: TableColumn<ColumnData>[]
+  alt: TableColumn<ColumnData>[]
+} = {
   primary: [
     {
       property: 'name',
@@ -25,11 +28,27 @@ export const columns: { primary: TableColumn<ColumnData>[]; alt: TableColumn<Col
       property: 'currency',
       label: 'header.currency',
       sortable: true,
-      ariaLabelSortable: 'Activate to sort Currency column in {{sortOrder}} order',
+      ariaLabelSortable:
+        'Activate to sort Currency column in {{sortOrder}} order',
     },
-    { property: 'bookedBalance', label: 'header.bookedbalance', valueType: 'numeric', sortable: true },
-    { property: 'datedBalance', label: 'header.datedbalance', valueType: 'numeric', sortable: true },
-    { property: 'limit', label: 'header.limit', valueType: 'numeric', sortable: true },
+    {
+      property: 'bookedBalance',
+      label: 'header.bookedbalance',
+      valueType: 'numeric',
+      sortable: true,
+    },
+    {
+      property: 'datedBalance',
+      label: 'header.datedbalance',
+      valueType: 'numeric',
+      sortable: true,
+    },
+    {
+      property: 'limit',
+      label: 'header.limit',
+      valueType: 'numeric',
+      sortable: true,
+    },
     {
       property: 'unauthorizedUsage',
       label: 'header.unauthorizedusage',
@@ -41,10 +60,15 @@ export const columns: { primary: TableColumn<ColumnData>[]; alt: TableColumn<Col
   alt: [
     { property: 'name', label: 'header.name', sortable: true }, // col 1
     { property: 'currency', label: 'header.currency', sortable: true }, // col 2
-    { property: 'datedBalance', label: 'header.datedbalance', valueType: 'numeric', sortable: true }, // col 3
+    {
+      property: 'datedBalance',
+      label: 'header.datedbalance',
+      valueType: 'numeric',
+      sortable: true,
+    }, // col 3
     { property: 'status', label: 'header.status', sortable: true }, // col 4
   ],
-};
+}
 
 export const manifest: Observable<Record<string, string>> = of({
   'header.name': 'Name',
@@ -54,7 +78,7 @@ export const manifest: Observable<Record<string, string>> = of({
   'header.datedbalance': 'Value dated balance',
   'header.limit': 'Limit',
   'header.unauthorizedusage': 'Unauthorized usage',
-});
+})
 
 export const data: ColumnData[] = [
   {
@@ -107,9 +131,11 @@ export const data: ColumnData[] = [
     limit: 4003,
     unauthorizedUsage: 13,
   },
-];
+]
 
-export type ColumnDataWithErrorMessages = ColumnData & { errorMessages: string[] };
+export type ColumnDataWithErrorMessages = ColumnData & {
+  errorMessages: string[]
+}
 
 export const dataWithErrorMessages: ColumnDataWithErrorMessages[] = [
   {
@@ -145,13 +171,13 @@ export const dataWithErrorMessages: ColumnDataWithErrorMessages[] = [
     unauthorizedUsage: 0,
     errorMessages: ['Invalid Amount', 'Invalid Name'],
   },
-];
+]
 
 export const mockedFooterData = {
   totalBalance: 125000,
-};
+}
 
 export const mockedAriaLabelsOrderBy = {
   asc: 'Ascending',
   desc: 'Descending',
-};
+}

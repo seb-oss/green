@@ -1,7 +1,7 @@
-import { Observable, throwError, timer } from 'rxjs';
-import { finalize, mergeMap } from 'rxjs/operators';
+import { Observable, throwError, timer } from 'rxjs'
+import { finalize, mergeMap } from 'rxjs/operators'
 
-import { APIFile, LocalFile } from './drag-drop.models';
+import { APIFile, LocalFile } from './drag-drop.models'
 
 /**
  * Helper to extend the base file with {@link APIFile} defaults
@@ -19,7 +19,10 @@ export const extendFile = (
       status: '',
       statusReasonInformation: null,
       principal: '',
-      uploadDate: (file ? new Date(file.lastModified) : new Date()).toISOString(),
+      uploadDate: (file
+        ? new Date(file.lastModified)
+        : new Date()
+      ).toISOString(),
       registrarId: '',
       registrarName: '',
       progress: 0,
@@ -28,8 +31,8 @@ export const extendFile = (
       raw: file,
     } as LocalFile & APIFile,
     ...data,
-  );
-};
+  )
+}
 
 /**
  * Checks if file matches allowed mime types
@@ -37,33 +40,38 @@ export const extendFile = (
  * @param accept allowed mime types
  */
 export const verifyAccept = (type: string, accept?: string) => {
-  if (!accept) return true;
-  const regex = new RegExp(accept.replace(/\*/g, '.*').replace(/\s*,\s*/g, '|'));
-  return regex.test(type);
-};
+  if (!accept) return true
+  const regex = new RegExp(accept.replace(/\*/g, '.*').replace(/\s*,\s*/g, '|'))
+  return regex.test(type)
+}
 
 /**
  * Determines if browser supports drag and drop
  */
 export const isDragDropAvailable = () => {
-  const div = document.createElement('div');
+  const div = document.createElement('div')
   return (
-    ('draggable' in div || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window
-  );
-};
+    ('draggable' in div || ('ondragstart' in div && 'ondrop' in div)) &&
+    'FormData' in window &&
+    'FileReader' in window
+  )
+}
 
 /**
  * Pick only specified keys from a given object
  * @param keys keys to pick from a given object
  * @param object to extract keys from
  */
-export const pick = <T, K extends keyof T>(object: T, ...keys: K[]): Pick<T, K> => {
-  const copy: any = {};
+export const pick = <T, K extends keyof T>(
+  object: T,
+  ...keys: K[]
+): Pick<T, K> => {
+  const copy: any = {}
   keys.forEach((key) => {
-    copy[key] = object[key];
-  });
-  return copy;
-};
+    copy[key] = object[key]
+  })
+  return copy
+}
 
 /**
  * Will retry running the observable when an error occurs to a maximum limit, increasing delay between executions.
@@ -75,22 +83,31 @@ export const retryStrategy =
     scalingDuration = 1000,
     excludedStatusCodes = [],
   }: {
-    maxRetryAttempts?: number;
-    scalingDuration?: number;
-    excludedStatusCodes?: number[];
+    maxRetryAttempts?: number
+    scalingDuration?: number
+    excludedStatusCodes?: number[]
   } = {}) =>
   (attempts: Observable<any>) => {
     return attempts.pipe(
       mergeMap((error, i) => {
-        const retryAttempt = i + 1;
+        const retryAttempt = i + 1
         // if maximum number of retries have been met
         // or response is a status code we don't wish to retry, throw error
-        if (retryAttempt > maxRetryAttempts || excludedStatusCodes.find((e) => e === error.status)) {
-          return throwError(() => error);
+        if (
+          retryAttempt > maxRetryAttempts ||
+          excludedStatusCodes.find((e) => e === error.status)
+        ) {
+          return throwError(() => error)
         }
-        console.warn(`Attempt ${retryAttempt}: retrying in ${retryAttempt * scalingDuration}ms`);
-        return timer(retryAttempt * scalingDuration);
+        console.warn(
+          `Attempt ${retryAttempt}: retrying in ${retryAttempt * scalingDuration}ms`,
+        )
+        return timer(retryAttempt * scalingDuration)
       }),
-      finalize(() => console.warn(`Failed after ${maxRetryAttempts} retry attempts, standing down.`)),
-    );
-  };
+      finalize(() =>
+        console.warn(
+          `Failed after ${maxRetryAttempts} retry attempts, standing down.`,
+        ),
+      ),
+    )
+  }
