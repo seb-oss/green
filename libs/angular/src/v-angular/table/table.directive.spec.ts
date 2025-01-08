@@ -22,7 +22,7 @@ class TestHostComponent {
   tableColumnTarget = tableColumnTargetVerifyProperty
 }
 
-describe('[NgvTable]', () => {
+describe('[NggvTable]', () => {
   // ----------------------------------------------------------------------------
   // TableDirective - constructor()
   // ----------------------------------------------------------------------------

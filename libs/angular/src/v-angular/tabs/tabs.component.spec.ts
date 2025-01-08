@@ -3,7 +3,7 @@ import { Component } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
-import { NgvI18nTestModule } from '../i18n'
+import { NggvI18nTestModule } from '../i18n'
 import { TabDirective } from './tab.directive'
 import { TabsComponent } from './tabs.component'
 
@@ -20,7 +20,7 @@ import { TabsComponent } from './tabs.component'
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 class TabsTestWrapper {}
 
-describe('[NgvTabs]', () => {
+describe('[NggvTabs]', () => {
   // ----------------------------------------------------------------------------
   // TabsComponent - constructor()
   // ----------------------------------------------------------------------------
@@ -30,7 +30,7 @@ describe('[NgvTabs]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [CommonModule, NgvI18nTestModule, RouterTestingModule],
+        imports: [CommonModule, NggvI18nTestModule, RouterTestingModule],
         declarations: [TabsComponent, TabDirective, TabsTestWrapper],
       }).compileComponents()
     }))

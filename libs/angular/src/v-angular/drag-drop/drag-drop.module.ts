@@ -4,7 +4,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
 import { TRANSLOCO_SCOPE, TranslocoModule } from '@jsverse/transloco'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
-import { NgvModalModule } from '@sebgroup/green-angular/src/v-angular/modal'
+import { NggvModalModule } from '@sebgroup/green-angular/src/v-angular/modal'
 import { NggvDragDropComponent } from './drag-drop.component'
 import { ValuePipe } from './drag-drop.pipes'
 
@@ -12,7 +12,7 @@ import { ValuePipe } from './drag-drop.pipes'
   imports: [
     HttpClientModule,
     TranslocoModule,
-    NgvModalModule,
+    NggvModalModule,
     NggCoreWrapperModule,
     CommonModule,
   ],

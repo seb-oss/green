@@ -9,7 +9,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvI18nModule } from '../i18n'
+import { NggvI18nModule } from '../i18n'
 import { TabDirective } from './tab.directive'
 import { TabsComponent } from './tabs.component'
 
@@ -38,7 +38,7 @@ export default {
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom(NgvI18nModule),
+        importProvidersFrom(NggvI18nModule),
         { provide: APP_BASE_HREF, useValue: '/' },
         importProvidersFrom(RouterModule.forRoot(routes, { useHash: true })),
       ],

@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { By } from '@angular/platform-browser'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
-import { NgvI18nTestModule } from '../i18n'
+import { NggvI18nTestModule } from '../i18n'
 import { PaginationComponent } from './pagination.component'
 
 @Component({
@@ -49,14 +49,14 @@ class PaginationTestComponent {
   }
 }
 
-describe('[NgvPagination]', () => {
+describe('[NggvPagination]', () => {
   let component: PaginationTestComponent
   let fixture: ComponentFixture<PaginationTestComponent>
 
   beforeEach(waitForAsync(async () => {
     await TestBed.configureTestingModule({
       declarations: [PaginationComponent, PaginationTestComponent],
-      imports: [FormsModule, NgvI18nTestModule, NggCoreWrapperModule],
+      imports: [FormsModule, NggvI18nTestModule, NggCoreWrapperModule],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents()
   }))

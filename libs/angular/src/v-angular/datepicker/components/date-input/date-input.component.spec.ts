@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms'
 
-import { NgvI18nTestModule } from '../../../i18n'
+import { NggvI18nTestModule } from '../../../i18n'
 import * as dateModels from '../../models/dates'
 import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { DateInputComponent } from './date-input.component'
@@ -18,10 +18,10 @@ import { DateInputComponent } from './date-input.component'
   selector: '[nggvInputMask]',
 })
 class NggvInputMaskStubDirective {
-  @Input() nggvInputMask: any;
+  @Input() nggvInputMask: any
 }
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // DateInputComponent
   // ----------------------------------------------------------------------------
@@ -41,10 +41,14 @@ describe('[NgvDatepicker]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [DateInputComponent, DateInputHostComponent, NggvInputMaskStubDirective],
+        declarations: [
+          DateInputComponent,
+          DateInputHostComponent,
+          NggvInputMaskStubDirective,
+        ],
         imports: [
           NggvDatepickerTestingModule,
-          NgvI18nTestModule,
+          NggvI18nTestModule,
           FormsModule,
           ReactiveFormsModule,
         ],

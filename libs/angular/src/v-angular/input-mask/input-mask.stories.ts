@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   UntypedFormControl,
 } from '@angular/forms'
-// import { NgvI18nModule } from '@sebgroup/nggv-i18n';
+// import { NggvI18nModule } from '@sebgroup/nggv-i18n';
 import {
   applicationConfig,
   Meta,
@@ -132,7 +132,7 @@ interface WithExtras {
     `,
   ],
 })
-class NgvInputMaskStoryComponent {
+class NggvInputMaskStoryComponent {
   dateFC = new UntypedFormControl('')
   dateInputMask = createMask<Date>({
     alias: 'datetime',
@@ -168,16 +168,16 @@ class NgvInputMaskStoryComponent {
 
 export default {
   title: 'V-Angular/Input mask',
-  component: NgvInputMaskStoryComponent,
+  component: NggvInputMaskStoryComponent,
   decorators: [
     applicationConfig({
       providers: [
-        // importProvidersFrom(NgvI18nModule),
+        // importProvidersFrom(NggvI18nModule),
         importProvidersFrom(NggvInputMaskModule.forRoot({ isAsync: true })),
       ],
     }),
     moduleMetadata({
-      declarations: [NgvInputMaskStoryComponent],
+      declarations: [NggvInputMaskStoryComponent],
       imports: [
         CommonModule,
         FormsModule,
@@ -188,8 +188,8 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<NgvInputMaskStoryComponent & WithExtras> = (
-  args: NgvInputMaskStoryComponent & WithExtras,
+const Template: StoryFn<NggvInputMaskStoryComponent & WithExtras> = (
+  args: NggvInputMaskStoryComponent & WithExtras,
 ) => ({
   props: args,
 })
