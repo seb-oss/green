@@ -22,13 +22,14 @@ import {
   TranslocoService,
 } from '@jsverse/transloco'
 import { fromEvent, Observable, Subject } from 'rxjs'
-import { takeUntil } from 'rxjs/operators'
+import { startWith, takeUntil } from 'rxjs/operators'
 
 import { DateControlValueAccessorComponent } from '../../date-control-value-accessor/date-control-value-accessor.component'
 
 import type { CalendarType } from '../../datepicker.models'
 
 import '@sebgroup/green-core/components/icon/icons/calendar.js'
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 /**
  * Date pickers simplify the task of selecting a date in a visual representation of a calendar.
@@ -93,7 +94,7 @@ export class DateInputComponent
   shown = false
 
   /** @internal */
-  showInput$: Observable<boolean>
+  showInput$ = this.showInputDateSrc.asObservable().pipe(startWith(true))
 
   /** Observable for listening to clicks outside of the datepicker. */
   private documentClick$: Observable<Event> = fromEvent(document, 'click')
@@ -110,7 +111,7 @@ export class DateInputComponent
     protected cdr: ChangeDetectorRef,
   ) {
     super(ngControl, translocoScope, elementRef, cdr, transloco)
-    this.showInput$ = this.showInputDateSrc.asObservable()
+    // this.showInput$ = this.showInputDateSrc.asObservable()
   }
 
   ngOnDestroy(): void {

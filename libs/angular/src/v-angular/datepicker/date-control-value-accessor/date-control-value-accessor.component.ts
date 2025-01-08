@@ -204,7 +204,7 @@ export abstract class DateControlValueAccessorComponent
   @Input() dateLocale: string | undefined
 
   /** Toggler for showing or hiding the input field */
-  protected showInputDateSrc: Subject<boolean>
+  protected showInputDateSrc = new Subject<boolean>()
 
   /* TRIGGERS */
 
@@ -248,7 +248,6 @@ export abstract class DateControlValueAccessorComponent
       // the `providers` to avoid running into a circular import.
       this.ngControl.valueAccessor = this
     }
-    this.showInputDateSrc = new Subject()
 
     if (this.translocoScope) this.scope = this.translocoScope.toString()
   }

@@ -105,7 +105,7 @@ export class NggvInputMaskDirective<T = any>
     if (
       isPlatformServer(this.platformId) ||
       !this.nativeInputElement ||
-      !Object.keys(this.nggvInputMask).length
+      !Object.keys(this.nggvInputMask ?? {}).length
     ) {
       return
     }

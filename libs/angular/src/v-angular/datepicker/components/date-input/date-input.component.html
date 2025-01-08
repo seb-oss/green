@@ -45,7 +45,7 @@
 
   <!-- INPUT WRAPPER -->
   <ng-container *ngIf="!locked">
-    <div class="field-wrap">
+    <div class="field-wrap" *ngIf="showInput$ | async">
       <!-- INPUT FIELD -->
       <input
         #input
