@@ -9,7 +9,7 @@ import {
 
 import '@sebgroup/green-core/components/icon/icons/chevron-left.js'
 import '@sebgroup/green-core/components/icon/icons/chevron-right.js'
-import '@sebgroup/green-core/components/icon/icons/arrow-left.js'
+import '@sebgroup/green-core/components/icon/icons/arrow-right.js'
 
 /** The Pagination component is used to separate long sets of data so that it is easier for a user to consume information. To change the current page simply click on the page number. */
 @Component({
