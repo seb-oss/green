@@ -31,7 +31,9 @@ export class GdsLink extends GdsElement {
   }
 
   /**
-   * When set, the underlying button will be rendered as an anchor element.
+   * The `href` property determines the URL that the link will navigate to when clicked.
+   *
+   * If empty it will render as a link element (`<a>`) still but will not be clickable and the property will not be set on the element.
    */
   @property()
   href?: string
