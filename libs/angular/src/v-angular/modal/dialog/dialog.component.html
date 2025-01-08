@@ -1,5 +1,5 @@
 <div
-  class="sdv-modal-dialog__container"
+  class="modal-dialog__container"
   *transloco="let t"
   #dialog
   role="dialog"
@@ -10,17 +10,13 @@
   <header class="modal-dialog__heading">
     <h3 [attr.id]="dialogTitleId">{{ t(heading || title || '') }}</h3>
     <button
-      type="button"
       data-thook="dialog-close"
       (click)="onAction($event, 'close')"
       (keydown.enter)="onAction($event, 'close')"
-      class="close"
+      [attr.aria-label]="closeButtonAriaLabel"
+      class="nggv-modal-slideout__close"
     >
-      <gds-icon-cross-small
-        *nggCoreElement
-        width="24"
-        height="24"
-      ></gds-icon-cross-small>
+      <i></i>
     </button>
   </header>
   <section class="modal-dialog__body" [attr.id]="dialogBodyId">
@@ -61,4 +57,4 @@
   </footer>
 </div>
 
-<div class="sdv-modal-backdrop"></div>
+<div class="nggv-backdrop"></div>

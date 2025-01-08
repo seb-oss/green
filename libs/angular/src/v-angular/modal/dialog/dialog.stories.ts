@@ -36,6 +36,7 @@ const Template: StoryFn<NgvDialogComponent> = (args: any) => ({
 export const Primary = Template.bind({})
 Primary.args = {
   initiallyShown: true,
+  closeButtonAriaLabel: 'Close dialog',
   buttons: {
     negative: 'button_cancel',
     neutral: 'button_apply',
