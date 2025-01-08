@@ -3,7 +3,7 @@
     data-thook="fold-out-toggle"
     class="fold-out-button"
     [ngClass]="{'no-text': !text}"
-    (click)="toggleVisibility($event)"
+    (click)="toggleVisibility()"
     [attr.aria-expanded]="shown"
     [attr.aria-label]="ariaLabel">
     <ng-container *ngTemplateOutlet="text ? withText : default">
