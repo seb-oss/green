@@ -31,7 +31,7 @@ export class NggvDialogComponent implements OnInit {
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dialog'
   /** @internal */
-  @HostBinding('class.sdv-modal-dialog') baseClass = true
+  @HostBinding('class.gds-modal-dialog') baseClass = true
   /** @internal Defines the default visibility state of the dialog. */
   @HostBinding('class.-active') _shown = false
   @Input() set shown(value: boolean) {
@@ -95,10 +95,10 @@ export class NggvDialogComponent implements OnInit {
 
   ngOnInit() {
     this.dialogTitleId =
-      this.dialogTitleId ?? 'sdv-dialog-title-' + window.nggv?.nextId()
+      this.dialogTitleId ?? 'gds-dialog-title-' + window.nggv?.nextId()
     if (this.dialogBodyId !== null) {
       this.dialogBodyId =
-        this.dialogBodyId ?? 'sdv-dialog-body-' + window.nggv?.nextId()
+        this.dialogBodyId ?? 'gds-dialog-body-' + window.nggv?.nextId()
     }
 
     this._shown = this.initiallyShown

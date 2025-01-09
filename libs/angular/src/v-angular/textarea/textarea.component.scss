@@ -4,12 +4,12 @@
 :host {
   @include mixins.add-textarea();
 
-  label:not(.sdv-field-notice) {
+  label:not(.gds-field-notice) {
     @include form-group.add-label;
     margin-bottom: 0.5rem;
   }
 
-  label:is(.sdv-field-label) {
+  label:is(.gds-field-label) {
     margin-bottom: 0.5rem;
   }
 
@@ -21,7 +21,7 @@
     padding-left: 0.5rem;
   }
 
-  .sdv-field-label--optional {
+  .gds-field-label--optional {
     font-weight: 400;
   }
 

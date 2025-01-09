@@ -9,13 +9,13 @@
 
 <ng-container [formGroup]="selectedCalendar">
   <select
-    class="sdv-field-dropdown-native nggv-calendar-select"
+    class="gds-field-dropdown-native nggv-calendar-select"
     data-thook="select-month"
     formControlName="month"
   >
     <option
       *ngFor="let month of monthArray"
-      class="sdv-field-dropdown__label"
+      class="gds-field-dropdown__label"
       tabindex="0"
       [value]="month.getMonth()"
     >
@@ -24,13 +24,13 @@
   </select>
 
   <select
-    class="sdv-field-dropdown-native nggv-calendar-select"
+    class="gds-field-dropdown-native nggv-calendar-select"
     data-thook="select-year"
     formControlName="year"
   >
     <option
       *ngFor="let year of yearArray"
-      class="sdv-field-dropdown__label"
+      class="gds-field-dropdown__label"
       tabindex="0"
       [value]="year.getFullYear()"
     >

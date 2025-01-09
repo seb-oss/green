@@ -126,7 +126,7 @@ const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
         </nggv-dropdown>
 
         <div style="margin-top: 1rem">
-          <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+          <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
         </div>
       </div>`,
     props: {
@@ -184,8 +184,8 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
     template: /*html*/ `
       <div style="width: 264px">
         <div style="display: flex">
-          <button class="sdv-button" (click)="showAlt = !showAlt">Change options</button>
-          <button class="sdv-button sdv-button-alternative" (click)="resetFunc()">Reset to default</button>
+          <button class="gds-button" (click)="showAlt = !showAlt">Change options</button>
+          <button class="gds-button gds-button-alternative" (click)="resetFunc()">Reset to default</button>
         </div>
         <div>Value: {{ formControl.value }}</div>
         <nggv-dropdown
@@ -300,7 +300,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
 
       </nggv-dropdown>
       <div style="margin-top: 1rem">
-        <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+        <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
       `,
     styles: [
@@ -313,9 +313,9 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         padding-right: 0.5rem;
         width: 350px;
       }
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true'] .account-option--number {
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true'] .account-option--number {
         color: white;
       }
       .account-option--number,
@@ -477,7 +477,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
 
       </nggv-dropdown>
       <div style="margin-top: 1rem">
-        <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+        <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
       `,
     styles: [
@@ -490,9 +490,9 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         padding-right: 0.5rem;
         width: 350px;
       }
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true'] .account-option--number {
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true'] .account-option--number {
         color: white;
       }
       .account-option--number,

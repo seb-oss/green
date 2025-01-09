@@ -71,7 +71,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeTruthy()
       })
@@ -85,7 +85,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeTruthy()
       })
@@ -102,7 +102,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeTruthy()
       })
@@ -116,7 +116,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeFalsy()
       })
@@ -130,7 +130,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeFalsy()
       })
@@ -145,7 +145,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeFalsy()
       })
@@ -161,7 +161,7 @@ describe('[NggvCore]', () => {
 
         // query for optional label class
         const optionalLabel = fixture.debugElement.query(
-          By.css('.sdv-field-label--optional'),
+          By.css('.gds-field-label--optional'),
         )
         expect(optionalLabel).toBeFalsy()
       })
