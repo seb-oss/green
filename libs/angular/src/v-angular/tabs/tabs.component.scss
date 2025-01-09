@@ -16,6 +16,8 @@
     @include tabs.tab;
     gap: 0.25rem;
     transition: none;
+    font-size: 1rem;
+    font-family: inherit;
 
     &.-selected {
       box-sizing: border-box;
