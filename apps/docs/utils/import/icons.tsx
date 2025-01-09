@@ -250,6 +250,16 @@ export const IconSquareBehindSquare = dynamic(
   },
 )
 
+export const IconSquareCheck = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconSquareCheck').then(
+      (mod) => mod.IconSquareCheck,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 export const IconBrandGreen = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconBrandGreen').then(
