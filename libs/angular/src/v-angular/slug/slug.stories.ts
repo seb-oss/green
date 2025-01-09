@@ -24,7 +24,7 @@ export default {
 
 const Template: StoryFn<PipeInput> = (args: PipeInput) => ({
   template: `
-    <label class="sdv-field-label">Transformed value:</label>
+    <label class="gds-field-label">Transformed value:</label>
     <div class="pipe-result">
       {{ rawValue | slug }}
     </div>`,

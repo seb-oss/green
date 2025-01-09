@@ -178,7 +178,7 @@ const TemplateWithFormControl: StoryFn<
       [formControl]="formControl">
     </nggv-input>
     <div style="margin-top: 1rem">
-      <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+      <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
     </div>
     `,
     props: {

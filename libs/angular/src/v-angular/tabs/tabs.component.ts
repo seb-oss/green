@@ -28,7 +28,7 @@ export class TabsComponent
   implements OnChanges, OnInit, AfterContentInit, OnDestroy
 {
   /** @internal */
-  @HostBinding('class.sdv-tabs') baseClass = true
+  @HostBinding('class.gds-tabs') baseClass = true
 
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =

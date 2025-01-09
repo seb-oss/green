@@ -82,7 +82,7 @@ const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
   }
   return {
     template: /*html*/ `
-    <label class="sdv-field-label" style="margin-bottom: 0.25em">Field that displays disabled as locked</label>
+    <label class="gds-field-label" style="margin-bottom: 0.25em">Field that displays disabled as locked</label>
     <nggv-radio
       [name]="name"
       [value]="name + '1'"
@@ -114,7 +114,7 @@ const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
       <ng-template #labelTpl>{{label}} 3</ng-template>
     </nggv-radio>
     <div style="margin-top: 1rem">
-      <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+      <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
     </div>
   `,
     props: {
