@@ -28,4 +28,4 @@ import { TrThookPipe } from './tr-thook.pipe'
     TableAppendableRowsTemplateDirective,
   ],
 })
-export class NgvTableModule {}
+export class NggvTableModule {}

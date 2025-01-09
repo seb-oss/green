@@ -7,11 +7,11 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvCardComponent } from './card.component'
+import { NggvCardComponent } from './card.component'
 
 export default {
   title: 'V-Angular/Card',
-  component: NgvCardComponent,
+  component: NggvCardComponent,
   decorators: [
     moduleMetadata({
       imports: [CommonModule],
@@ -23,14 +23,14 @@ export default {
   ],
 } as Meta
 
-const BasicTemplate: StoryFn<NgvCardComponent> = () => ({
+const BasicTemplate: StoryFn<NggvCardComponent> = () => ({
   template: /*html*/ `
     <nggv-card>
       Basic card
     </nggv-card>`,
 })
 
-const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
+const TemplateWithColumns: StoryFn<NggvCardComponent> = () => ({
   template: /*html*/ `
     <nggv-card>
       <div class="card-row">
@@ -42,7 +42,7 @@ const TemplateWithColumns: StoryFn<NgvCardComponent> = () => ({
     </nggv-card>`,
 })
 
-const TemplateWithDivider: StoryFn<NgvCardComponent> = () => ({
+const TemplateWithDivider: StoryFn<NggvCardComponent> = () => ({
   template: /*html*/ `
     <nggv-card>
       <div class="card-row">

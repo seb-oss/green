@@ -21,7 +21,7 @@ import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { fromEvent, Subscription } from 'rxjs'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 import {
   DropdownUtils,
   Option,
@@ -39,12 +39,12 @@ import {
   templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
 })
-export class NgvDropdownComponent<
+export class NggvDropdownComponent<
     K = string | null | undefined,
     V = string | null | undefined,
     T extends Option<K, V> = Option<K, V>,
   >
-  extends NgvBaseControlValueAccessorComponent
+  extends NggvBaseControlValueAccessorComponent
   implements OnDestroy, OnChanges
 {
   /** Custom template for displaying options and groups. */

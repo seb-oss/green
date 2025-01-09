@@ -11,7 +11,7 @@ import { Component, HostBinding, Input } from '@angular/core'
   templateUrl: './info-circle.component.html',
   styleUrls: ['./info-circle.component.scss'],
 })
-export class NgvInfoCircleComponent {
+export class NggvInfoCircleComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'info'

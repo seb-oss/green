@@ -1,7 +1,7 @@
 import { DisableDateConfig } from '../datepicker.models'
 import { IsDisabledPipe } from './is-disabled.pipe'
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // IsDisabledPipe - constructor()
   // ----------------------------------------------------------------------------

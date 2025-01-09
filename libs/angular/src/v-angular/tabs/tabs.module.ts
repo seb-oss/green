@@ -11,4 +11,4 @@ import { TabsComponent } from './tabs.component'
   imports: [CommonModule, TranslocoModule, RouterModule],
   exports: [TabDirective, TabsComponent],
 })
-export class NgvTabsModule {}
+export class NggvTabsModule {}

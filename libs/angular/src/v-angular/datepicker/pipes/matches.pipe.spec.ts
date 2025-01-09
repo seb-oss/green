@@ -1,6 +1,6 @@
 import { MatchesPipe } from './matches.pipe'
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // MatchesPipe - constructor()
   // ----------------------------------------------------------------------------

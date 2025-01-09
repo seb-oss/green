@@ -2,7 +2,7 @@ import { Directive } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { NgvI18nTestModule } from '../i18n'
+import { NggvI18nTestModule } from '../i18n'
 import { TableComponent } from './table.component'
 import { TableColumn } from './table.models'
 
@@ -64,7 +64,7 @@ const data: MockData[] = [
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 class TableDirectiveMock {}
 
-describe('[NgvTable]', () => {
+describe('[NggvTable]', () => {
   // ----------------------------------------------------------------------------
   // TableComponent - constructor()
   // ----------------------------------------------------------------------------
@@ -74,7 +74,7 @@ describe('[NgvTable]', () => {
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [ReactiveFormsModule, NgvI18nTestModule],
+        imports: [ReactiveFormsModule, NggvI18nTestModule],
         declarations: [TableComponent, TableDirectiveMock],
       }).compileComponents()
     }))

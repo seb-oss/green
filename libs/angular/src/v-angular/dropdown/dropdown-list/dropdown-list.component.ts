@@ -30,7 +30,7 @@ import {
   templateUrl: './dropdown-list.component.html',
   styleUrls: ['./dropdown-list.component.scss'],
 })
-export class NgvDropdownListComponent implements OnInit, OnChanges {
+export class NggvDropdownListComponent implements OnInit, OnChanges {
   @Input() set expanded(state: boolean) {
     this.setExpanded(state)
   }

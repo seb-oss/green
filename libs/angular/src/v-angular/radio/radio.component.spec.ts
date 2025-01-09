@@ -7,29 +7,29 @@ import {
 } from '@angular/forms'
 import { TranslocoTestingModule } from '@jsverse/transloco'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import en from '../i18n/i18n.json'
 
 import '../core/core.globals'
 
-import { NgvRadioComponent } from './radio.component'
+import { NggvRadioComponent } from './radio.component'
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // RadioComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('RadioComponent - constructor()', () => {
-    let component: NgvRadioComponent
-    let fixture: ComponentFixture<NgvRadioComponent>
+    let component: NggvRadioComponent
+    let fixture: ComponentFixture<NggvRadioComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvRadioComponent],
+        declarations: [NggvRadioComponent],
         providers: [{ provide: NgControl, useValue: new FormControl() }],
         imports: [
           FormsModule,
           ReactiveFormsModule,
-          NgvI18nTestModule,
+          NggvI18nTestModule,
           TranslocoTestingModule.forRoot({
             langs: { en },
             translocoConfig: {
@@ -43,7 +43,7 @@ describe('[NgvCore]', () => {
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(NgvRadioComponent)
+      fixture = TestBed.createComponent(NggvRadioComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })
