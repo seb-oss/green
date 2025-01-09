@@ -4,7 +4,10 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   importProvidersFrom,
 } from '@angular/core'
-import { provideAnimations } from '@angular/platform-browser/animations'
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations'
 import {
   applicationConfig,
   componentWrapperDecorator,
@@ -70,7 +73,12 @@ export default {
     }),
     moduleMetadata({
       declarations: [ToastComponent],
-      imports: [CommonModule, NggvI18nModule, NggCoreWrapperModule],
+      imports: [
+        CommonModule,
+        NggvI18nModule,
+        NggCoreWrapperModule,
+        BrowserAnimationsModule,
+      ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
     componentWrapperDecorator(
