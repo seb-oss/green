@@ -1,10 +1,7 @@
-// @use 'node_modules/@sebgroup/vanilla/src/components/buttons/button-mixins' as buttons;
-// @use 'node_modules/@sebgroup/vanilla/src/components/inputs/common' as inputs;
-// @use 'node_modules/@sebgroup/vanilla/src/functions';
+@use '@sebgroup/chlorophyll/scss/components/form/common/mixins' as form-group;
 @use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
 @use '@sebgroup/chlorophyll/scss/common';
 @use '../date-mixins' as ngv;
-// @use '../media';
 
 :host {
   display: block;
@@ -22,8 +19,17 @@
     padding-left: 0.5rem;
   }
 
-  .sdv-field-label--optional {
-    font-weight: 400;
+  .gds-field-label {
+    @include form-group.add-label;
+    display: block;
+    &:is(label) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .gds-field-label--optional {
+    @include form-group.add-label;
+    margin-bottom: 0.5rem;
   }
 
   .nggv-datepicker {
