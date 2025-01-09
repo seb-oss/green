@@ -18,7 +18,7 @@ import { Directive, HostBinding, Input } from '@angular/core'
 })
 export class TabDirective {
   /** @internal */
-  @HostBinding('class.sdv-tabs__panel') baseClass = true
+  @HostBinding('class.gds-tabs__panel') baseClass = true
   /** @internal */
   @HostBinding('attr.role') role = 'tabpanel'
   /** Special property used for selecting DOM elements during automated UI testing. */

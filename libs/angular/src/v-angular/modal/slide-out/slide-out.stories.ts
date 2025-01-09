@@ -65,7 +65,7 @@ const Template: StoryFn<NggvSlideOutComponent & WithExtras> = (args: any) => ({
         This is a modal with extra wide content.
       </div>
     </nggv-slideout-modal>
-    <button class="sdv-button" (click)="slideOut.open()">Open slide-out</button>
+    <button class="gds-button" (click)="slideOut.open()">Open slide-out</button>
     `,
   props: args,
 })
