@@ -25,6 +25,8 @@ $transition-time: 200ms;
           width: 60px;
           box-sizing: border-box;
           border-radius: 3px;
+          font-size: 1rem;
+          font-family: inherit;
 
           &:focus {
             outline-color: #1a1a1a;
@@ -37,6 +39,8 @@ $transition-time: 200ms;
           border: 0;
           color: #1a1a1a;
           background-color: transparent;
+          font-size: 1rem;
+          font-family: inherit;
 
           &:focus {
             outline-color: #1a1a1a;
@@ -67,7 +71,9 @@ $transition-time: 200ms;
             color: #1a1a1a;
             border: none;
             border-radius: 4px;
-            font-size: 16px;
+
+            font-size: 1rem;
+            font-family: inherit;
 
             &.active {
               background-color: #1a1a1a;
@@ -81,12 +87,6 @@ $transition-time: 200ms;
             > .nav-action {
               margin: 0 auto;
               display: inline-flex;
-
-              > fa-icon {
-                width: 16px;
-                height: 16px;
-                fill: #1a1a1a;
-              }
             }
 
             &:focus {
