@@ -1,6 +1,6 @@
 import { DateThookPipe } from './date-thook.pipe'
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // DateThookPipe - constructor()
   // ----------------------------------------------------------------------------

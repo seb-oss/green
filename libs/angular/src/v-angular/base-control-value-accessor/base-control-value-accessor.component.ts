@@ -32,7 +32,7 @@ import { takeUntil } from 'rxjs/operators'
 @Injectable() // Workaround for Compodoc https://github.com/compodoc/compodoc/issues/984
 @Component({ template: '' }) // Required with Angular ivy compiler
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class NgvBaseControlValueAccessorComponent
+export class NggvBaseControlValueAccessorComponent
   implements AfterViewInit, OnInit, OnDestroy, ControlValueAccessor, Validator
 {
   /** Custom template for displaying the content of the label.

@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { CalendarControlComponent } from './calendar-control.component'
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // CalendarControlComponent - constructor()
   // ----------------------------------------------------------------------------

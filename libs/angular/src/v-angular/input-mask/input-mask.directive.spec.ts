@@ -23,7 +23,7 @@ import { NggvInputMaskDirective } from './input-mask.directive'
 import { NggvInputMaskModule } from './input-mask.module'
 import { InputmaskOptions } from './input-mask.types'
 
-describe('[NgvInputMask] -> InputMaskDirective', () => {
+describe('[NggvInputMask] -> InputMaskDirective', () => {
   @Component({
     selector: 'nggv-lib-custom-input',
     template: `
@@ -245,7 +245,7 @@ describe('[NgvInputMask] -> InputMaskDirective', () => {
   })
 })
 
-describe('[NgvInputMask] -> InputMaskDirective -> Change detection', () => {
+describe('[NggvInputMask] -> InputMaskDirective -> Change detection', () => {
   @Component({
     template: `
       <input class="ip" [nggvInputMask]="ipAddressMask" [formControl]="ipFC" />

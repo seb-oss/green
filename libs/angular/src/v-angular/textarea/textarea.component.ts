@@ -12,7 +12,7 @@ import {
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /** Textarea fields allow users to add and edit longer or multiple line text. */
 @Component({
@@ -20,9 +20,10 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
 })
-export class NgvTextareaComponent extends NgvBaseControlValueAccessorComponent {
+export class NggvTextareaComponent extends NggvBaseControlValueAccessorComponent {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'textarea'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'textarea'
   /** Text shown before input has a written value. */
   @Input() placeholder?: string
   /** If set to true, the value will not be editable. */

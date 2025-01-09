@@ -36,4 +36,4 @@ import { MatchesPipe } from './pipes/matches.pipe'
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [DateInputComponent, DatepickerComponent],
 })
-export class NgvDatepickerModule {}
+export class NggvDatepickerModule {}

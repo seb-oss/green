@@ -33,7 +33,7 @@ type Position = {
 @Directive({
   selector: '[nggvTooltip]',
 })
-export class NgvTooltipDirective
+export class NggvTooltipDirective
   implements AfterViewInit, OnChanges, OnDestroy
 {
   /** The text that will be shown in the tooltip. */
@@ -99,18 +99,18 @@ export class NgvTooltipDirective
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
-      NgvTooltipDirective.shouldUpdate(changes.nggvTooltip) ||
-      NgvTooltipDirective.shouldUpdate(changes.placement) ||
-      NgvTooltipDirective.shouldUpdate(changes.thook)
+      NggvTooltipDirective.shouldUpdate(changes.nggvTooltip) ||
+      NggvTooltipDirective.shouldUpdate(changes.placement) ||
+      NggvTooltipDirective.shouldUpdate(changes.thook)
     ) {
       this.shown ? this.show(true) : this.hide(true)
     }
 
-    if (NgvTooltipDirective.shouldUpdate(changes.shown)) {
+    if (NggvTooltipDirective.shouldUpdate(changes.shown)) {
       this.shown ? this.show() : this.hide()
     }
 
-    if (NgvTooltipDirective.shouldUpdate(changes.offset)) {
+    if (NggvTooltipDirective.shouldUpdate(changes.offset)) {
       this.updatePosition()
     }
   }

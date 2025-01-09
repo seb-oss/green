@@ -11,8 +11,8 @@ import {
 } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvRadioComponent } from './radio.component'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvRadioComponent } from './radio.component'
 
 interface StoryInputListener {
   selected: string
@@ -21,26 +21,26 @@ interface StoryInputListener {
 
 export default {
   title: 'V-Angular/Radio',
-  component: NgvRadioComponent,
+  component: NggvRadioComponent,
 
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
       imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        NgvI18nModule,
+        NggvI18nModule,
         NggCoreWrapperModule,
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
-} as Meta<NgvRadioComponent>
+} as Meta<NggvRadioComponent>
 
-const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
+const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -71,8 +71,8 @@ const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
   },
 })
 
-const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
-  args: NgvRadioComponent & any,
+const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
+  args: NggvRadioComponent & any,
 ) => {
   const ctrl = new FormControl(args.selected)
   ctrl.valueChanges.subscribe(console.log)

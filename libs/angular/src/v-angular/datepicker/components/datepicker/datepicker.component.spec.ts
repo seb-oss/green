@@ -5,7 +5,7 @@ import { CalendarMonth } from '../../datepicker.models'
 import { NggvDatepickerTestingModule } from '../../test/datepicker-testing.module'
 import { DatepickerComponent } from './datepicker.component'
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // CalendarControlComponent
   // ----------------------------------------------------------------------------

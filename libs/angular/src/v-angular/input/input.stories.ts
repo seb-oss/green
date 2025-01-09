@@ -38,20 +38,20 @@ import {
 } from 'rxjs'
 
 import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
-import { NgvButtonComponent } from '../button/button.component'
+import { NggvButtonComponent } from '../button/button.component'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
-import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
+import { NggvCheckboxComponent } from '../checkbox/checkbox.component'
 import { DropdownUtils } from '../core/core.utils'
-import { NgvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
-import { NgvDropdownComponent } from '../dropdown/dropdown.component'
-import { NgvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
-import { NgvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
-import { NgvExternalLinkDirective } from '../external-link/external-link.directive'
-import { NgvI18nModule } from '../i18n/i18n.module'
-import { NgvInfoCircleComponent } from '../info-circle/info-circle.component'
+import { NggvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
+import { NggvDropdownComponent } from '../dropdown/dropdown.component'
+import { NggvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { NggvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
+import { NggvExternalLinkDirective } from '../external-link/external-link.directive'
+import { NggvI18nModule } from '../i18n/i18n.module'
+import { NggvInfoCircleComponent } from '../info-circle/info-circle.component'
 import { createMask, NggvInputMaskModule } from '../input-mask'
-import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
-import { NgvInputComponent } from './input.component'
+import { NggvTooltipDirective } from '../tooltip/tooltip.directive'
+import { NggvInputComponent } from './input.component'
 
 interface WithExtras {
   notice: string
@@ -97,13 +97,13 @@ function translocoStorybookInitializer(translocoService: TranslocoService) {
   }
 }
 
-const meta: Meta<NgvInputComponent> = {
+const meta: Meta<NggvInputComponent> = {
   title: 'V-Angular/Input',
-  component: NgvInputComponent,
+  component: NggvInputComponent,
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom(NgvI18nModule),
+        importProvidersFrom(NggvI18nModule),
         {
           provide: APP_INITIALIZER,
           useFactory: translocoStorybookInitializer, // our initializer hook
@@ -115,18 +115,18 @@ const meta: Meta<NgvInputComponent> = {
     }),
     moduleMetadata({
       declarations: [
-        NgvButtonComponent,
-        NgvDropdownComponent,
-        NgvDropdownListComponent,
-        NgvTypeaheadDropdownListComponent,
-        NgvCheckboxComponent,
-        NgvTooltipDirective,
-        NgvInfoCircleComponent,
+        NggvButtonComponent,
+        NggvDropdownComponent,
+        NggvDropdownListComponent,
+        NggvTypeaheadDropdownListComponent,
+        NggvCheckboxComponent,
+        NggvTooltipDirective,
+        NggvInfoCircleComponent,
         CharacterCountdownDirective,
-        NgvExternalLinkDirective,
+        NggvExternalLinkDirective,
       ],
       imports: [
-        NgvTypeaheadDirective,
+        NggvTypeaheadDirective,
         CommonModule,
         ReactiveFormsModule,
         RouterTestingModule,
@@ -140,13 +140,13 @@ const meta: Meta<NgvInputComponent> = {
 }
 export default meta
 
-const Template: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
+const Template: StoryFn<NggvInputComponent & WithExtras> = (args: any) => ({
   props: args,
 })
 
-const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: any,
-) => {
+const TemplateWithFormControl: StoryFn<
+  NggvInputComponent & WithExtras & any
+> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel, [
     Validators.required,
     Validators.maxLength(12),
@@ -212,13 +212,13 @@ WithFormControl.args = {
   valid: undefined,
 }
 
-const TemplateWithError: StoryFn<NgvInputComponent & WithExtras> = (
+const TemplateWithError: StoryFn<NggvInputComponent & WithExtras> = (
   args: any,
 ) => ({
   props: { ...args },
 })
 
-const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
+const TemplateWithCustomLabel: StoryFn<NggvInputComponent & WithExtras> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -266,8 +266,8 @@ const resetObservable$ = new Observable((subscriber) => {
 })
 
 const TemplateWithPrefixAndOrSuffix: StoryFn<
-  NgvInputComponent & WithExtras & any
-> = (args: NgvInputComponent & WithExtras & any) => ({
+  NggvInputComponent & WithExtras & any
+> = (args: NggvInputComponent & WithExtras & any) => ({
   styles: [`.suffix-prefix-padding{ padding: 0.75em }`],
   template: /*html*/ `
   <h2>Prefix and/or suffix</h2>
@@ -347,8 +347,8 @@ WithPrefixAndOrSuffix.args = {
 }
 
 export const WithResetObservable: StoryFn<
-  NgvInputComponent & WithExtras & any
-> = (_args: NgvInputComponent & WithExtras & any) => {
+  NggvInputComponent & WithExtras & any
+> = (_args: NggvInputComponent & WithExtras & any) => {
   const formGroup = new UntypedFormGroup({
     resetForm: new UntypedFormControl('Annoying orange'),
   })
@@ -371,8 +371,8 @@ export const WithResetObservable: StoryFn<
   }
 }
 
-export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras & any,
+export const WithMaxLength: StoryFn<NggvInputComponent & WithExtras & any> = (
+  args: NggvInputComponent & WithExtras & any,
 ) => {
   const formGroup = new UntypedFormGroup({
     remittanceInformation: new UntypedFormControl(
@@ -438,8 +438,8 @@ let phoneFCValue = ''
 let licenseFCValue = ''
 let ipFCValue = ''
 
-const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras & any,
+const TemplateWithInputMask: StoryFn<NggvInputComponent & WithExtras & any> = (
+  args: NggvInputComponent & WithExtras & any,
 ) => {
   const dateFC = new UntypedFormControl(dateFCValue, [Validators.required])
   const emailFC = new UntypedFormControl(emailFCValue)
@@ -636,7 +636,7 @@ WithDisplayDisabledAsLocked.args = {
   displayDisabledAsLocked: true,
 }
 
-const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (
+const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
   args: any,
 ) => {
   const options = [

@@ -17,7 +17,7 @@ import {
 } from '@storybook/angular'
 
 import { NggCoreWrapperModule } from '../../lib/shared'
-import { NgvI18nModule } from '../i18n'
+import { NggvI18nModule } from '../i18n'
 import { ToastComponent, ToastMessageService } from './index'
 import { MessageType } from './toast.models'
 
@@ -39,7 +39,7 @@ import { MessageType } from './toast.models'
       Information
     </button>`,
 })
-class NgvToastStoryComponent {
+class NggvToastStoryComponent {
   constructor(public toastMessageService: ToastMessageService) {}
 
   MessageType = MessageType
@@ -63,19 +63,19 @@ class NgvToastStoryComponent {
 
 export default {
   title: 'V-Angular/Toast',
-  component: NgvToastStoryComponent,
+  component: NggvToastStoryComponent,
   parameters: {
     layout: 'padded',
   },
   decorators: [
     applicationConfig({
-      providers: [provideAnimations(), importProvidersFrom(NgvI18nModule)],
+      providers: [provideAnimations(), importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
       declarations: [ToastComponent],
       imports: [
         CommonModule,
-        NgvI18nModule,
+        NggvI18nModule,
         NggCoreWrapperModule,
         BrowserAnimationsModule,
       ],

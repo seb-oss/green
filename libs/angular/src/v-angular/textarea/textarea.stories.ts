@@ -14,23 +14,23 @@ import {
 } from '@storybook/angular'
 
 import { CharacterCountdownDirective } from '@sebgroup/green-angular/src/v-angular/character-countdown/character-countdown.directive'
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { NggCoreWrapperModule } from '../../lib/shared'
-import { NgvTextareaComponent } from './textarea.component'
+import { NggvTextareaComponent } from './textarea.component'
 
 export default {
   title: 'V-Angular/Textarea',
-  component: NgvTextareaComponent,
+  component: NggvTextareaComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
       declarations: [CharacterCountdownDirective],
       imports: [
         CommonModule,
         FormsModule,
-        NgvI18nModule,
+        NggvI18nModule,
         ReactiveFormsModule,
         NggCoreWrapperModule,
       ],
@@ -38,10 +38,12 @@ export default {
   ],
 } as Meta
 
-type TextareaComponentStory = StoryFn<NgvTextareaComponent & any>
+type TextareaComponentStory = StoryFn<NggvTextareaComponent & any>
 
 let formControlValue: any = undefined
-const Template: TextareaComponentStory = (args: NgvTextareaComponent & any) => {
+const Template: TextareaComponentStory = (
+  args: NggvTextareaComponent & any,
+) => {
   const formControl = new UntypedFormControl(formControlValue, [
     Validators.maxLength(140),
   ])

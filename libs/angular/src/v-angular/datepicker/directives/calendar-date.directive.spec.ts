@@ -18,7 +18,7 @@ class TestHostComponent {
   @Input() disable = false
 }
 
-describe('[NgvDatepicker]', () => {
+describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // CalendarDateDirective - constructor()
   // ----------------------------------------------------------------------------

@@ -24,16 +24,16 @@ import {
 } from 'rxjs'
 
 import { Option, OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
-import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
-import { NgvDropdownComponent } from '../dropdown.component'
-import { NgvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
-import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
+import { NggvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
+import { NggvDropdownComponent } from '../dropdown.component'
+import { NggvTypeaheadDropdownListComponent } from '../typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { NggvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
 
 @Directive({
   selector: 'nggv-input[nggvTypeahead], nggv-dropdown[nggvTypeahead]',
   standalone: true,
 })
-export class NgvTypeaheadDirective<
+export class NggvTypeaheadDirective<
     K = string | null | undefined,
     V = string | null | undefined,
     T extends Option<K, V> = Option<K, V>,
@@ -68,7 +68,7 @@ export class NgvTypeaheadDirective<
   @Output() filterPhraseChange = new EventEmitter<string>()
 
   /** Forward text inputs to apply the filter function*/
-  @HostListener('nggvInput', ['$event']) onNgvInput(event: any) {
+  @HostListener('nggvInput', ['$event']) onNggvInput(event: any) {
     this.inputValue$.next(event)
   }
 
@@ -86,13 +86,13 @@ export class NgvTypeaheadDirective<
     return { key: null, label: 'label.nomatchingoptions', disabled: true }
   }
 
-  /** Name of the component. nggv-dropdown if NgvDropdownComponent or nggv-input if NgvInputComponent */
+  /** Name of the component. nggv-dropdown if NggvDropdownComponent or nggv-input if NggvInputComponent */
   get localName() {
     return this.element.nativeElement.localName
   }
 
-  dropdownListComponent!: ComponentRef<NgvTypeaheadDropdownListComponent>
-  inputComponent!: ComponentRef<NgvTypeaheadInputComponent>
+  dropdownListComponent!: ComponentRef<NggvTypeaheadDropdownListComponent>
+  inputComponent!: ComponentRef<NggvTypeaheadInputComponent>
 
   private typeaheadFunction?: OperatorFunction<string, T[]>
   private inputValue$ = new Subject<any>()
@@ -102,8 +102,8 @@ export class NgvTypeaheadDirective<
   constructor(
     private viewContainerRef: ViewContainerRef,
     private element: ElementRef,
-    @Optional() @Host() private hostDropdown: NgvDropdownComponent,
-    @Optional() @Host() private hostInput: NgvInputComponent,
+    @Optional() @Host() private hostDropdown: NggvDropdownComponent,
+    @Optional() @Host() private hostInput: NggvInputComponent,
   ) {}
 
   ngOnInit() {
@@ -148,7 +148,7 @@ export class NgvTypeaheadDirective<
   private createInput() {
     // Create the input component
     this.inputComponent = this.viewContainerRef.createComponent(
-      NgvTypeaheadInputComponent,
+      NggvTypeaheadInputComponent,
     )
     // Forward necessary info to component
     this.inputComponent.setInput('hostComponent', this.hostDropdown)
@@ -163,7 +163,7 @@ export class NgvTypeaheadDirective<
   /** @internal Creates a nggv-dropdown-list if the host itself is a nggv-input */
   private createDropdownList() {
     this.dropdownListComponent = this.viewContainerRef.createComponent(
-      NgvTypeaheadDropdownListComponent,
+      NggvTypeaheadDropdownListComponent,
     )
     this.dropdownListComponent.setInput('hostComponent', this.hostInput)
   }
