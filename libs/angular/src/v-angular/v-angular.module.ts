@@ -36,6 +36,7 @@ import { NgvTooltipModule } from './tooltip'
     NggSlugPipeModule,
     NggvDragDropModule,
     NggvInputMaskModule,
+    NgvAlertModule,
     NgvBaseControlValueAccessorModule,
     NgvBreadcrumbsModule,
     NgvButtonModule,
