@@ -2,6 +2,13 @@
 @use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
 
 :host {
+  --sg-text-primary: #333;
+  --sg-form-control-bg: #fff;
+  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
+  --sg-border-radius: 4px;
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+
   @include mixins.add-textarea();
 
   label:not(.gds-field-notice) {
