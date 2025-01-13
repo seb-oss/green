@@ -24,7 +24,9 @@
   --sg-z-index-modal: 1050;
   --text-primary-color: rgb(51, 51, 51);
 
-  @include mixins.dialog-modal-wrapper();
+  .modal-dialog__wrapper {
+    @include mixins.dialog-modal-wrapper();
+  }
 
   .modal-dialog__container {
     @include mixins.modal();
