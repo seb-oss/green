@@ -33,7 +33,7 @@ export class NggvDialogComponent implements OnInit {
   /** @internal */
   @HostBinding('class.gds-modal-dialog') baseClass = true
   /** @internal Defines the default visibility state of the dialog. */
-  @HostBinding('class.-active') _shown = false
+  private _shown = false
   @Input() set shown(value: boolean) {
     this._shown = value
     if (value) {
