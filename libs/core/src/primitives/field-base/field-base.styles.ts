@@ -14,7 +14,6 @@ export const styles = css`
   @layer base {
     * {
       box-sizing: border-box;
-      user-select: none;
     }
 
     .field {

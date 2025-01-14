@@ -702,3 +702,30 @@ describe('<gds-dropdown multiple>', () => {
     await expect(el.displayValue).to.equal('Select values')
   })
 })
+
+describe('<gds-dropdown> accessibility', () => {
+  it('pass axe smoketest', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown">
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await expect(el).to.be.accessible()
+  })
+
+  it('should have a label for the trigger', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown">
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
+
+    await expect(label.getAttribute('for')).to.equal(trigger.id)
+  })
+})
