@@ -1,7 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { join } from 'lit/directives/join.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
@@ -210,7 +209,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   render() {
     return html`
       <gds-form-control-header class="size-${this.size}">
-        <label for="spinner-0" slot="label">${this.label}</label>
+        <label id="label" for="spinner-0" slot="label">${this.label}</label>
         ${when(
           this.supportingText.length > 0,
           () =>
@@ -219,11 +218,16 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             </span>`,
         )}
         <slot
+          id="supporting-text-slot"
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
         <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
-        <slot name="sub-label" slot="supporting-text"></slot>
+        <slot
+          id="sub-label-slot"
+          name="sub-label"
+          slot="supporting-text"
+        ></slot>
       </gds-form-control-header>
       <gds-field-base
         .size=${this.size}
@@ -241,13 +245,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (f, i) =>
                 html`<gds-date-part-spinner
                   id="spinner-${i}"
+                  aria-invalid="${this.invalid}"
                   class="spinner"
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#spinnerState[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
-                  aria-describedby="label sub-label message"
+                  aria-describedby="label supporting-text supporting-text-slot sub-label-slot message"
                   data-max-width=${this.#getMaxSpinnerValue(f.name).toString()
                     .length}
                   @keydown=${this.#handleSpinnerKeydown}
@@ -288,7 +293,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           // Wrapped in a slot for backwards compatibility with the deprecated message slot
           // Remove for 2.0 release
           () => html`
-            <slot name="message" slot="message">
+            <slot id="message" name="message" slot="message">
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>

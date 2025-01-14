@@ -576,4 +576,30 @@ describe('<gds-datepicker>', () => {
       await expect(yearDropdown.value).to.equal('2014')
     })
   })
+
+  describe('Accessibility', () => {
+    it('should pass axe smoketest', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2014-01-10"
+          min="2014-01-01"
+          max="2034-12-31"
+          open
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+      await expect(el).to.be.accessible({
+        ignoredRules: ['color-contrast'],
+      })
+    })
+
+    it('should have a label for #spinner-0', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker label="Date"></gds-datepicker>`,
+      )
+      const label =
+        el.shadowRoot!.querySelector<HTMLLabelElement>('[for="spinner-0"]')!
+      expect(label).to.exist
+    })
+  })
 })
