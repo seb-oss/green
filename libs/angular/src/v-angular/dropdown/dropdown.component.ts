@@ -59,7 +59,7 @@ export class NggvDropdownComponent<
     | undefined
 
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'dropdown'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'dropdown'
 
   /** Text shown before an option is selected. */
   @Input() placeholder?: string
