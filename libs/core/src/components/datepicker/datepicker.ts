@@ -563,7 +563,6 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardCopy = (e: ClipboardEvent) => {
-    console.log('clipboard copy')
     this._elFieldAsync.then((field) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
