@@ -157,7 +157,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * Get a string representation of the currently displayed value in the input field. The formatting will match the dateformat attribute.
    */
   get displayValue() {
-    return this._elInput.innerText.replace(/\s+/g, '')
+    return this._elField.innerText.replace(/\s+/g, '')
   }
 
   /**
@@ -190,14 +190,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#calendar-button')
   private _elTrigger!: Promise<HTMLButtonElement>
 
-  @queryAsync('#date-picker')
-  private _elField!: Promise<HTMLDivElement>
+  @queryAsync('#field')
+  private _elFieldAsync!: Promise<HTMLDivElement>
 
   @queryAll('[role=spinbutton]')
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
-  @query('.input')
-  private _elInput!: HTMLDivElement
+  @query('#field')
+  private _elField!: HTMLDivElement
 
   #valueOnOpen?: Date
 
@@ -236,7 +236,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
-        id="date-picker"
+        id="field"
       >
         <div class="spinners">
           ${join(
@@ -305,7 +305,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <gds-popover
         .triggerRef=${this._elTrigger}
-        .anchorRef=${this._elField}
+        .anchorRef=${this._elFieldAsync}
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
         label=${this.label}
@@ -563,7 +563,8 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardCopy = (e: ClipboardEvent) => {
-    this._elField.then((field) => {
+    console.log('clipboard copy')
+    this._elFieldAsync.then((field) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       e.clipboardData?.setData('text/plain', this.displayValue)
@@ -571,7 +572,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardPaste = (e: ClipboardEvent) => {
-    this._elField.then((field: HTMLElement) => {
+    this._elFieldAsync.then((field: HTMLElement) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       const pasted = e.clipboardData?.getData('text/plain')

@@ -38,7 +38,7 @@ export const styles = css`
       line-height: 1;
       text-align: center;
 
-      &:focus-visible {
+      &:focus {
         background-color: var(--gds-color-l3-background-primary);
         color: var(--gds-color-l3-content-primary);
       }
