@@ -168,13 +168,8 @@ export default function ComponentLayout({
             >
               <IconMagnifyingGlass height={24} slot="lead" />
             </GdsInput>
-            {/* <GdsFilterChips>
-            <GdsFilterChip value="1">Solid</GdsFilterChip>
-            <GdsFilterChip value="2">Regular</GdsFilterChip>
-          </GdsFilterChips> */}
           </GdsFlex>
         </GdsContainer>
-        {/* <GdsDivider opacity="0.2" /> */}
         <GdsGrid columns="5" gap="m">
           {filteredIcons.map((iconName) => {
             const IconComponent = (ICONS as any)[iconName]
@@ -187,11 +182,12 @@ export default function ComponentLayout({
                 padding="xs"
                 title={transformIconName(iconName)}
                 variant="secondary"
+                transition="all 482ms"
                 background="hover:primary"
-                border-color="primary"
+                border-color="primary; hover:secondary"
               >
                 <GdsFlex
-                  background="secondary"
+                  background="transparent"
                   align-items="center"
                   justify-content="center"
                   padding="m"
