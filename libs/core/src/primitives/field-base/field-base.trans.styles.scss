@@ -46,6 +46,10 @@
     padding-left: var(--gds-space-xs);
   }
 
+  .field.trail-slot-occupied {
+    padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+  }
+
   .field slot[name='action']::slotted(*) {
     margin: -3px 0 -3px -3px;
   }
