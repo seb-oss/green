@@ -295,7 +295,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           () => html`
             <slot id="message" name="message" slot="message">
               <gds-icon-triangle-exclamation
-                solid
+                ?solid=${!this._isUsingTransitionalStyles}
               ></gds-icon-triangle-exclamation>
               ${this.errorMessage || this.validationMessage}
             </slot>

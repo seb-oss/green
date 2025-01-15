@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
+import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
@@ -224,6 +225,7 @@ export class GdsDropdown<ValueT = any>
 
   connectedCallback() {
     super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-dropdown')
 
     this.updateComplete.then(() => {
       this._handleLightDOMChange()
@@ -329,7 +331,7 @@ export class GdsDropdown<ValueT = any>
               () => html`
                 <slot id="message" name="message" slot="message">
                   <gds-icon-triangle-exclamation
-                    solid
+                    ?solid=${!this._isUsingTransitionalStyles}
                   ></gds-icon-triangle-exclamation>
                   ${this.errorMessage || this.validationMessage}
                 </slot>
