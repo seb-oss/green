@@ -237,7 +237,7 @@ export class GdsDropdown<ValueT = any>
         !this.hideLabel,
         () => html`
           <gds-form-control-header>
-            <label for="trigger" slot="label">${this.label}</label>
+            <label id="label" for="trigger" slot="label">${this.label}</label>
             ${when(
               this.supportingText.length > 0,
               () =>
@@ -246,11 +246,12 @@ export class GdsDropdown<ValueT = any>
                 </span>`,
             )}
             <slot
+              id="extended-supporting-text"
               name="extended-supporting-text"
               slot="extended-supporting-text"
             ></slot>
             <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
-            <slot name="sub-label" slot="supporting-text"></slot>
+            <slot id="sub-label" name="sub-label" slot="supporting-text"></slot>
           </gds-form-control-header>
         `,
       )}
@@ -267,17 +268,24 @@ export class GdsDropdown<ValueT = any>
           .size=${this.size}
           .disabled=${this.disabled}
           .invalid=${this.invalid}
-          aria-haspopup="listbox"
           slot="trigger"
-          role="combobox"
-          aria-owns="listbox"
-          aria-controls="listbox"
-          aria-expanded="${this.open}"
-          aria-label="${this.label}"
           id="field"
         >
           <slot name="lead" slot="lead"></slot>
-          <button id="trigger" name="trigger">
+          <button
+            id="trigger"
+            role="combobox"
+            aria-expanded="${this.open}"
+            aria-owns="listbox"
+            aria-haspopup="listbox"
+            aria-controls="listbox"
+            name="trigger"
+            aria-label="${this.label} ${this.displayValue}"
+            aria-describedby="supporting-text extended-supporting-text sub-label message"
+            aria-invalid="${this.invalid}"
+            aria-required="${this.required}"
+            aria-disabled="${this.disabled}"
+          >
             <slot name="trigger">
               <span>${unsafeHTML(this.displayValue)}</span>
             </slot>
@@ -319,7 +327,7 @@ export class GdsDropdown<ValueT = any>
               // Wrapped in a slot for backwards compatibility with the deprecated message slot
               // Remove for 2.0 release
               () => html`
-                <slot name="message" slot="message">
+                <slot id="message" name="message" slot="message">
                   <gds-icon-triangle-exclamation
                     solid
                   ></gds-icon-triangle-exclamation>
