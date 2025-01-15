@@ -13,43 +13,31 @@
   bottom: var(--gds-space-l);
   padding: var(--gds-space-xl);
   inset: 35% 8px auto;
-  transition: translate 0.3s ease;
-  @starting-style {
-    translate: 0 -40px;
-  }
-
 }
 
-.show--consent .cm-wrapper {
+.cm-wrapper {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999; /* Ensure it's above other elements */
   inset: 0;
-  transition: opacity 0.3s ease;
-  /* transition: all 1s ease;
-  rotate: 0deg; */
-  @starting-style {
-    opacity: 0;
-    /* rotate: 180deg; */
-  }
+  opacity: 1;
+  visibility: visible;
 }
-
 
 .cm__btn-group {
   flex-direction: column;
   gap: var(--gds-space-m);
   display: flex;
-
 }
 
-#cc-main .cm__title {
+.cm__title {
   color: var(--gds-color-l2-content-secondary);
   font-size: 1.25rem;
   font-weight: 450;
   margin: 0;
 }
 
-#cc-main .cm__desc {
+.cm__desc {
   color: var(--gds-color-l2-content-secondary);
   font-size: 1rem;
   line-height: 1.5;
@@ -58,11 +46,7 @@
   margin-bottom: var(--gds-space-l);
 }
 
-#cm__desc {
-  margin: 0;
-}
-
-#cc-main .cm__btn {
+.cm__btn {
   background-color: var(--gds-color-l3-background-primary);
   border-radius: var(--gds-space-max);
   color: var(--gds-color-l3-content-primary);
@@ -73,91 +57,89 @@
   margin-top: 0;
   font-weight: 450;
   font-size: var(--gds-text-size-detail-m);
-  
 }
 
-#cc-main .cm__btn:hover {
-  background-color: color-mix(in srgb, var(--gds-color-l3-background-primary), var(--gds-color-l3-states-dark-hover));
+.cm__btn:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--gds-color-l3-background-primary),
+    var(--gds-color-l3-states-dark-hover)
+  );
 }
 
 /* When aria-hidden="true" is set, hide the entire modal and the buttons */
-.cm[aria-hidden="true"] {
+.cm[aria-hidden='true'] {
   visibility: hidden;
 }
 
-.cm[aria-hidden="true"] .cm__btns {
-  visibility: hidden;
+.cm[aria-hidden='true'] .cm__btns {
+  pointer-events: none;
 }
 
 /* ============ ADDED LINES FOR FADE ============ */
 
-/* 1) Lägg till transition på opacity på samma .cm-element 
-   (kompletterar den redan befintliga "translate 0.3s ease") */
-   #cc-main .cm {
-    transition: 
-      translate 0.3s ease, /* oförändrad från ursprunglig */
-      opacity 1.3s ease;   /* ny: fade in/out */
-      
-    /* Grundvärden för fade-lösning */
-    opacity: 1;
-    visibility: visible; 
-  }
-  
-  /* 2) Vid aria-hidden="true" => fade out (opacity 0) */
-  #cc-main .cm[aria-hidden="true"] {
-    opacity: 0;            /* fade out */
-    /* pointer-events: none;  valfritt */
-    /* visibility: hidden;    valfritt */
-    /*
-      Om du vill att elementet ska bli helt otillgängligt när 
-      opaciteten nått 0, lägg till visibility: hidden;
-      samt ev. transition på visibility, t.ex.:
-      transition: opacity 0.3s ease, visibility 0s linear 0.3s;
-    */
-  }
+/* Default state for backdrop */
+.cm-wrapper {
+  --duration: 0.3s;
 
+  transition:
+    opacity var(--duration) ease,
+    visibility var(--duration) ease;
+  visibility: hidden;
+  opacity: 0;
+}
 
-/* ===================
-   2) Fade on the background .cm-wrapper
-   =================== */
-   .cm-wrapper {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 9999;
-    
-    /* Synlig från början */
-    opacity: 1;
-    visibility: visible;
-    
-    /* Transition för fade */
-    transition: opacity 1.3s ease, visibility 0s linear 0.3s;
-  }
-  
-  /* Fade out the background overlay 
-     when the modal .cm is aria-hidden */
-   .cm-wrapper:has(.cm[aria-hidden="true"]) {
+/* Visible state for backdrop */
+.show--consent .cm-wrapper {
+  opacity: 1;
+  visibility: visible;
+
+  @starting-style {
     opacity: 0;
-    visibility: hidden; /* fully hidden after 0.3s */
   }
+}
 
+/* Default state for modal */
+.cm {
+  transition:
+    translate var(--duration) ease,
+    opacity var(--duration) ease,
+    visibility var(--duration) ease;
 
-  
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 -40px;
+}
 
+/* Visible state for modal */
+.show--consent .cm {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+
+  @starting-style {
+    translate: 0 -40px;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .cm-wrapper {
+    --duration: 0s;
+  }
+}
 
 @media screen and (min-width: 640px) {
-  #cc-main .cm {
+  .cm {
     max-width: 500px;
     border-radius: var(--gds-space-s);
     inset: 0;
     margin: auto;
     max-height: fit-content;
-
   }
 
-  #cc-main .cm__btn-group {
+  .cm__btn-group {
     justify-content: flex-start;
     flex-direction: row;
-
   }
 }
