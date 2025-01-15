@@ -23,7 +23,7 @@ export const styles = css`
       justify-content: space-between;
       gap: var(--gds-space-xs);
       padding-block: var(--gds-space-xs);
-      padding-inline: var(--gds-space-m);
+      padding-inline: var(--gds-space-m) var(--gds-space-s);
       min-block-size: var(--gds-space-3xl);
       block-size: var(--gds-space-3xl);
       outline-style: solid;
