@@ -1,7 +1,7 @@
-import { NgvTooltipDirective } from './tooltip.directive'
+import { NggvTooltipDirective } from './tooltip.directive'
 
 describe('TooltipDirective', () => {
   it('should be truthy', () => {
-    expect(NgvTooltipDirective).toBeTruthy()
+    expect(NggvTooltipDirective).toBeTruthy()
   })
 })

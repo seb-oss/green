@@ -9,13 +9,13 @@ import {
   TranslocoMissingHandlerData,
   TranslocoModule,
   TranslocoTranspiler,
-} from '@jsverse/transloco';
+} from '@jsverse/transloco'
 import { delay, lastValueFrom, of } from 'rxjs'
 
 import defaultLang from './i18n.json'
 
 @Injectable()
-export class NgvMissingHandler implements TranslocoMissingHandler {
+export class NggvMissingHandler implements TranslocoMissingHandler {
   constructor(
     @Inject(TRANSLOCO_TRANSPILER) private transpiler: TranslocoTranspiler,
   ) {}
@@ -30,8 +30,8 @@ export class NgvMissingHandler implements TranslocoMissingHandler {
       params,
       translation: {},
       key: keyWithoutLocale,
-    };
-    const transpiledKey = this.transpiler.transpile(transpileParams);
+    }
+    const transpiledKey = this.transpiler.transpile(transpileParams)
     return transpiledKey || withoutScope
   }
 }
@@ -74,8 +74,8 @@ class TranslocoInlineLoader implements TranslocoLoader {
       },
       loader: TranslocoInlineLoader,
     }),
-    provideTranslocoMissingHandler(NgvMissingHandler),
+    provideTranslocoMissingHandler(NggvMissingHandler),
   ],
   exports: [TranslocoModule],
 })
-export class NgvI18nModule {}
+export class NggvI18nModule {}
