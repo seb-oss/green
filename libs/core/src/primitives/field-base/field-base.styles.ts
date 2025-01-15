@@ -56,28 +56,11 @@ export const styles = css`
       block-size: var(--gds-space-xl);
     }
 
-    /* In Figma, the icon button overlaps 4px with the padding. The rule
-       below is there to replicate that so the field doesn't change height
-       when the action button appears */
-    .field.small slot[name='action']::slotted(*) {
-      margin: calc(var(--gds-space-xs) / -0.5) 0;
-    }
-
-    /* .field.trail-slot-occupied,
-    .field:not(.lead-slot-occupied),
-    .field:not(.action-slot-occupied):not(.small):not(.multiline) {
-      padding: var(--gds-space-xs) var(--gds-space-m);
-    } */
-
     .field.multiline {
       align-items: flex-start;
       padding: var(--gds-space-s);
       padding-inline-start: var(--gds-space-m);
       height: max-content;
-
-      /* slot[name='action']::slotted([gds-element]) {
-        margin-top: -4px;
-      } */
     }
 
     .field.disabled {
@@ -133,7 +116,7 @@ export const styles = css`
     }
 
     /* Experimental */
-    .left {
+    /* .left {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -145,6 +128,6 @@ export const styles = css`
       align-items: center;
       gap: 8px;
       height: 32px;
-    }
+    } */
   }
 `

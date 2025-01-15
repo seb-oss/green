@@ -118,7 +118,6 @@ export class GdsFieldBase extends GdsElement {
 
   #renderFieldContents() {
     const elements = [
-      '',
       this.#renderSlotLead(),
       this.#renderSlotMain(),
       this.#renderSlotAction(),
