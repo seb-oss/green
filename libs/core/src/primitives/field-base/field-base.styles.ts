@@ -23,11 +23,10 @@ export const styles = css`
       align-items: center;
       justify-content: space-between;
       gap: var(--gds-space-xs);
-      /* In Figma, the border overlaps with the padding, so we need to
-         subtract 1px to replicate this in CSS */
-      padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs)
-        calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+      padding-block: var(--gds-space-xs);
+      padding-inline: var(--gds-space-m);
       min-block-size: var(--gds-space-3xl);
+      block-size: var(--gds-space-3xl);
       outline-style: solid;
       outline-width: 0;
       border-radius: var(--gds-space-xs);
@@ -40,6 +39,10 @@ export const styles = css`
       transition-property: background-color, border-color, outline-color;
     }
 
+    .field.lead-slot-occupied {
+      padding-inline-start: var(--gds-space-s);
+    }
+
     .field:focus-within {
       outline-width: var(--gds-space-3xs);
       outline-offset: var(--gds-space-3xs);
@@ -50,6 +53,7 @@ export const styles = css`
       gap: var(--gds-space-2xs);
       padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs);
       min-block-size: var(--gds-space-xl);
+      block-size: var(--gds-space-xl);
     }
 
     /* In Figma, the icon button overlaps 4px with the padding. The rule
@@ -59,16 +63,21 @@ export const styles = css`
       margin: calc(var(--gds-space-xs) / -0.5) 0;
     }
 
+    /* .field.trail-slot-occupied,
+    .field:not(.lead-slot-occupied),
+    .field:not(.action-slot-occupied):not(.small):not(.multiline) {
+      padding: var(--gds-space-xs) var(--gds-space-m);
+    } */
+
     .field.multiline {
       align-items: flex-start;
-      padding: calc(var(--gds-space-s) - 1px) var(--gds-space-s)
-        calc(var(--gds-space-s) - 1px) var(--gds-space-m);
+      padding: var(--gds-space-s);
+      padding-inline-start: var(--gds-space-m);
       height: max-content;
-    }
 
-    .field.trail-slot-occupied,
-    .field:not(.action-slot-occupied):not(.small) {
-      padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+      /* slot[name='action']::slotted([gds-element]) {
+        margin-top: -4px;
+      } */
     }
 
     .field.disabled {
@@ -119,7 +128,23 @@ export const styles = css`
       align-items: center;
       justify-content: center;
       display: flex;
-      min-width: var(--gds-space-l);
+      inline-size: var(--gds-space-l);
+      block-size: var(--gds-space-l);
+    }
+
+    /* Experimental */
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 24px;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 32px;
     }
   }
 `

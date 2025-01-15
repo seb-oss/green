@@ -118,13 +118,21 @@ export class GdsFieldBase extends GdsElement {
 
   #renderFieldContents() {
     const elements = [
+      '',
       this.#renderSlotLead(),
       this.#renderSlotMain(),
       this.#renderSlotAction(),
       this.#renderSlotTrail(),
     ]
 
-    return html`${map(elements, (el) => el)}`
+    return html`${map(elements, (el) => el)}
+
+      <!-- <div class="left">
+        ${this.#renderSlotLead()} ${this.#renderSlotMain()}
+      </div>
+      <div class="right">
+        ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
+      </div>  --> `
   }
 
   #renderSlotLead() {
