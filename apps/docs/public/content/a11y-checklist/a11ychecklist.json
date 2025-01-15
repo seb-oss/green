@@ -1,0 +1,1820 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "sort": null,
+      "topic": "Inget ljud som stör",
+      "criteria": "1.4.2 Automatisk uppspelning av ljud",
+      "category": "Störigt / Skadligt",
+      "level": "A*",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Inget ljud som automatiskt spelas upp på ett sätt som stör användaren.",
+      "why": "Ljud som spelas upp automatiskt stör och kan försvåra för användaren att fokusera. Det är extra viktigt för personer med koncentrationssvårigheter och kognitiva svårigheter.",
+      "role": "UX",
+      "wcag": "1.4.2 Automatisk uppspelning av ljud",
+      "howToTest": {
+        "id": 1,
+        "title": "Inget ljud som stör",
+        "content": "Börja med att kontrollera om det finns ljudfiler eller video med ljud på sidan. Om det finns, kontrollera att inget spelas upp automatiskt. Här följer några alternativ:\n\n1. Ladda sidan och lyssna efter ljud som spelas upp automatiskt. Om du inte hör något ljud är den här punkten godkänd.\n\n2. Ladda sidan och titta på den aktiva sidans flik i webbläsarens flikfält. Kontrollera att det inte visas någon högtalarikon i fliken. Om ingen ikon visas är den här godkänd.\n\n3. Öppna webbläsarens utvecklarverktyg genom att trycka F12. Använd sökfunktion och sök efter `<audio>` eller `<video>`. Om du ser att något av dessa element finns i koden, kontrollera att attributet autoplay är satt till false."
+      }
+    },
+    {
+      "id": 2,
+      "sort": null,
+      "topic": "Inget rör sig automatiskt",
+      "criteria": "2.2.2 Paus, stopp, dölj",
+      "category": "Störigt / Skadligt",
+      "level": "A*",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.2 Tillräckligt med tid",
+      "statement": "Inget innehåll rör sig, blinkar eller scrollar automatiskt i mer än 5 sekunder. Gäller exempelvis video, animationer och bildspel. Undantag är animationer eller indikationer som visar att en sida eller innehåll laddas.",
+      "why": "Automatisk uppspelning stör och kan försvåra för användaren att fokusera. Det är extra viktigt för personer med koncentrationssvårigheter och kognitiva svårigheter.",
+      "role": "AD",
+      "wcag": "2.2.2 Paus, stopp, dölj",
+      "howToTest": {
+        "id": 2,
+        "title": "Inget rör sig automatiskt",
+        "content": "Börja med att kontrollera att om det finns något innehåll som rör sig, blinkar eller scrollar på sidan. Om det finns, kontrollera om det rör sig automatiskt, alltså utan att användaren aktivt har valt att något ska röra sig och hur länge rörelsen i så fall pågår. Om den pågår i mindre än 5 sekunder är den ett godkänt undantag.\n\n##### Video och animationer\nBörja med att kontrollera om det finns video eller andra animationer, exempelvis video utan ljud eller gif:ar på sidan.\n\nKontrollera att ingen video startar automatiskt eller körs i bakgrunden på sidan. Automatiskt innebär att något startar oberoende av vad användaren gör. Allt som rör sig ska vara en följd av vad användaren väljer att göra.\n\n##### Funktionella mikroanimationer\nExempel på en funktionell mikroanimation är när en varukorg blinkar till när användaren har lagt till en produkt. Det kan också vara en indikator som rör sig för att visa status, exempelvis en progressbar för ned- eller uppladdning av en fil.\n\n##### Godkända undantag\nFöljande exempel är godkända undantag. De får alltså blinka eller röra sig mer än fem sekunder.\n- Laddningsindikator som visar att en hel sida laddas, exempelvis en så kallad skeleton.\n\n- Textmarkör, en så kallad caret, som blinkar i ett inmatningsfält när fältet har fokus."
+      }
+    },
+    {
+      "id": 3,
+      "sort": null,
+      "topic": "Automatiska uppdateringar",
+      "criteria": "2.2.2 Paus, stopp, dölj",
+      "category": "Störigt / Skadligt",
+      "level": "A*",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.2 Tillräckligt med tid",
+      "statement": "Användaren kan pausa, stoppa, dölja eller kontrollera uppdateringsfrekvensen i innehåll som uppdateras automatiskt. Helst ska inget innehåll alls uppdateras automatiskt. Då undviker vi att distrahera användaren.",
+      "why": "Automatiska uppdateringar stör och kan försvåra för användaren att fokusera. Det är extra viktigt för personer med koncentrationssvårigheter och kognitiva svårigheter.",
+      "role": "UX / Utvecklare",
+      "wcag": "2.2.2 Paus, stopp, dölj",
+      "howToTest": {
+        "id": 3,
+        "title": "Automatiska uppdateringar",
+        "content": "1. Kontrollera om det finns innehåll på sidan som uppdateras och om det i så fall görs automatiskt. Automatiskt innebär här att innehåll läggs till, ändras eller försvinner av andra anledningar än att användaren själv har initierat ändringen. \n\n\tAtt sökresultat ändras efter att användaren har gjort en sökning är vedertaget, och ingår inte i det här kriteriet. Det handlar snarare om innehåll som ändras dynamiskt och om innehåll som ändras på grund av andra anledningar. Exempelvis efter ett visst tidsintervall, ändringar som görs av andra användare eller andra omständigheter.\n\n2. Om sådant innehåll finns, fundera på vilken typ av innehåll det är, genom att gå igenom kategorierna av uppdateringar nedan.\n\n##### Kritiska meddelanden\nBedöm allvarlighetsgraden. Om informationen är avgörande betydelse för användaren i det aktuella sammanhanget, visa informationen direkt.\nOm informationen är viktig men inte kan ses som kritisk, ge användaren informationen i samband med att användaren gör en ändring, exempelvis går till en annan sida.\n\n##### Tidsstyrda eller slumpmässiga ändringar\nUndvik den här typen av ändringar helt. Fundera istället på vad som är den viktigaste informationen och hur den kan presenteras för användaren på ett enkelt och meningsfullt sätt. Se till att det alltid finns tillräckligt med tid för användaren att ta till sig av informationen.\nInaktuell information\n\n##### Inaktuell information\nExempel på inaktuell information: väderinformation eller antalet lediga platser på ett event.\nÄr det nödvändigt att användaren får informationen direkt? Ibland räcker det att informationen uppdateras i samband med att användaren exempelvis laddar om eller går till en ny sida. Undvik att ladda om hela sidan.\n\n##### Innehåll som ändras i realtid\nExempel på innehåll som ändras i realtid: en chattfunktion eller kommentarer i sociala medier.\n1. Utgör en funktion sidans huvudsakliga innehåll?\n\n2. Är funktionen sekundär och visas parallellt med annat innehåll? <br><br> Bestäm vilket värde användaren har av att informationen visas. Behöver den visas just där och då? Kan det tas bort helt eller länkas till annan sida?\n\n3. Kan användaren pausa, stoppa eller dölja uppdateringar?\n\nKontrollera att det går att pausa, stoppa, dölja eller på annat sätt styra hur ofta uppdateringen sker.\n\nExempel: Användaren vill ändra inställningarna i en chatt. Användaren kan tillfälligt dölja chatten genom att inställningarna öppnas på en annan sida eller i en annan flik.\n\n "
+      }
+    },
+    {
+      "id": 4,
+      "sort": null,
+      "topic": "Max tre blinkningar per sekund",
+      "criteria": "2.3.1 / 2.3.2 Tre blinkningar",
+      "category": "Störigt / Skadligt",
+      "level": "A*",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.3 Orsaka inte anfall & fysiska reaktioner",
+      "statement": "Ingen del av innehållet blinkar på ett sätt som riskerar att trigga epileptiska anfall, det vill säga mer än tre gånger under en period på en sekund.",
+      "why": "Vi vill inte riskera att orsaka epileptiska anfall eller fysiska reaktioner hos våra användare.",
+      "role": "AD",
+      "wcag": "2.3.1 / 2.3.2 Tre blinkningar",
+      "howToTest": {
+        "id": 4,
+        "title": "Max tre blinkningar per sekund",
+        "content": "1. Kontrollera om det finns något innehåll som blinkar.\n\n2. Säkerställ att innehållet inte blinkar snabbare än tre gånger per sekund.\n\nVar extra uppmärksam med att visa video som innehåller diskotekslampor, pyroteknik, explosioner eller andra snabba hopp mellan ljus och mörker eller ljus i olika färger. Riskera aldrig att orsaka epileptiska anfall hos våra användare.\n"
+      }
+    },
+    {
+      "id": 5,
+      "sort": null,
+      "topic": "Använd inte Captcha",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Generellt",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "Captcha används aldrig. Captcha är en metod för att hindra robotar från att exempelvis fylla i formulär.",
+      "why": "Captcha exkluderar ofta personer med funktionsnedsättningar, exempelvis användare med nedsatt syn eller kognitiva funktionsnedsättningar.",
+      "role": "UX",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 48,
+        "title": "Använd inte Captcha",
+        "content": "1. Identifiera alla formulär på webbsidan eller i tjänsten.\n\n2. Kontrollera att inget av formulären innehåller en captcha-funktion som användaren måste passera för att kunna skicka formuläret.\n"
+      }
+    },
+    {
+      "id": 6,
+      "sort": null,
+      "topic": "Inga bilder med bara text",
+      "criteria": "1.4.5 Text i form av bild",
+      "category": "Generellt",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Det finns inga bilder på sidan som enbart innehåller text. Logotyper är undantag. Bilder med viss text kan vara okej om bilden för övrigt fyller ett visuellt syfte.",
+      "why": "Användare behöver kunna anpassa text utifrån sina behov. Text i bild är svårare att förstora eller anpassa.",
+      "role": "AD",
+      "wcag": "1.4.5 Text i form av bild",
+      "howToTest": {
+        "id": 55,
+        "title": "Inga bilder med bara text",
+        "content": "1. Identifiera alla bilder som innehåller text på den aktuella sidan. Logotyper utgör undantag.\n\n2. Kontrollera om bilder som innehåller text fyller ett visuellt syfte och om syftet återges i bildernas alt-texter i koden.\n\n3. Om bilder innehåller relativt mycket text, överväg att presentera innehållet som riktig text istället för text i bild."
+      }
+    },
+    {
+      "id": 7,
+      "sort": null,
+      "topic": "Flera olika sätt att navigera",
+      "criteria": "2.4.5 Flera olika sätt att navigera",
+      "category": "Generellt",
+      "level": "AA",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Det finns flera olika sätt att hitta till en tjänst eller en sida. Till exempel genom menyer, länkar, sökfunktion eller webbplatskarta. Sidor för bekräftelser eller som utgör ett steg i en process är undantag.",
+      "why": "Användare behöver kunna hitta innehåll på det sätt som passar dem. En del föredrar en innehållsförteckning eller att söka istället för att navigera i menyer.",
+      "role": "UX",
+      "wcag": "2.4.5 Flera olika sätt att navigera",
+      "howToTest": {
+        "id": 49,
+        "title": "Flera olika sätt att navigera",
+        "content": "1. Bedöm om den aktuella sidan 1) är en av många sidor på en webbplats, 2) är en sida som genererats som ett resultat av en uppgift, eller 3) är en del av en tjänst eller en process som användaren bara kan ta sig till genom att logga in.\n\n2. Gör följande:\n\n\t- Om det första påståendet ovan är sant, kontrollera på vilka sätt som användaren kan nå den aktuella sidan, exempelvis genom att söka eller att hitta sidan i en informationsstruktur från en meny.\n\t\n    - Om något av påståendena 2 eller 3 ovan är sant är denna punkt inte relevant eftersom resultatsidor eller sidor som utgör en del av en tjänst eller en process, eller sidor som kräver inloggning, inte omfattas av det här kravet.\n\n3. Om den aktuella sidan är en av många på en webbplats och användaren bara kan nå sidan på ett sätt, är detta krav inte uppfyllt.\n"
+      }
+    },
+    {
+      "id": 8,
+      "sort": null,
+      "topic": "Förebyggande av fel",
+      "criteria": "3.3.4 / 3.3.6 Förebyggande av fel",
+      "category": "Generellt",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "På sidor där användaren ska skicka in information ska ett eller flera av följande alternativ gälla:\n• användaren kan ångra sig och gå tillbaka\n• användaren kan kontrollera sin information och rätta eventuella fel\n• användaren kan förhandsgranska, ändra och bekräfta innan informationen sparas eller skickas in.",
+      "why": "Det är viktigt för våra användare och vår verksamhet att skydda användarna från allvarliga konsekvenser som orsakats av att de råkat göra ett misstag.",
+      "role": "UX",
+      "wcag": "3.3.4 / 3.3.6 Förebyggande av fel",
+      "howToTest": {
+        "id": 50,
+        "title": "Förebyggande av fel",
+        "content": "1. För tjänster eller webbsidor där användaren kan fylla i och skicka information, gör följande:\n\n2. Utför alla steg i tjänsten för att simulera att en användare utför en uppgift. För att undvika eventuella fel i bakomliggande system bör testdata användas här.\n\n3. Kontrollera om den aktuella tjänsten eller formulären på webbsidan avslutas med en knapp för att granska informationen i formuläret.\n\n4. Kontrollera att nästa steg i tjänsten tar användaren till en sida där användaren kan granska den information som den har angett i formuläret.\n\n5. Kontrollera att det finns en möjlighet för användaren att gå tillbaka och korrigera information som har blivit fel.\n"
+      }
+    },
+    {
+      "id": 9,
+      "sort": null,
+      "topic": "Justerbar tidsgräns för tjänster och sidor som kräver inloggning",
+      "criteria": "2.2.1 Justerbar tidsgräns",
+      "category": "Tid",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.2 Tillräckligt med tid",
+      "statement": "Om en tjänst kräver inloggning får användaren en varning innan den blir utloggad och har minst 20 sekunder på sig att förlänga inloggningstiden. Påståendet är sant om tjänsten använder myndighetens teknik för enkel inloggning och användarautentisering, så kallad single sign-on.",
+      "why": "Användare behöver olika lång tid på sig för att utföra en uppgift. Tidsgränser kan skapa stress och förvirring. De kan också göra att användaren går miste om information eller förlorar data.",
+      "role": "Utvecklare",
+      "wcag": "2.2.1 Justerbar tidsgräns",
+      "howToTest": {
+        "id": 51,
+        "title": "Justerbar tidsgräns för tjänster och sidor som kräver inloggning",
+        "content": "1. Logga in på den aktuella tjänsten och påbörja en uppgift, exempelvis genom att börja fylla i ett formulär.\n\n2. Överge uppgiften och låt sidan vara inaktiv.\n\n3. Om tjänsten loggar ut användaren efter en viss tid, kontrollera om det visas en varning innan användaren loggas ut.\n\n4. Kontrollera också om användaren har minst 20 sekunder på sig att förhindra utloggningen genom att förlänga inloggningstiden.\n"
+      }
+    },
+    {
+      "id": 10,
+      "sort": null,
+      "topic": "Justerbar tidsgräns för sidor som inte kräver inloggning",
+      "criteria": "2.2.1 Justerbar tidsgräns",
+      "category": "Tid",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.2 Tillräckligt med tid",
+      "statement": "Användaren kan vara kvar på sidan i över 20 timmar utan att skickas vidare till en annan sida, en så kallad redirect. Gäller tjänster som inte kräver att användaren loggar in.",
+      "why": "Användare behöver olika lång tid på sig för att utföra en uppgift. Tidsgränser kan skapa stress och förvirring. De kan också göra att användaren går miste om information eller förlorar data.",
+      "role": "Utvecklare",
+      "wcag": "2.2.1 Justerbar tidsgräns",
+      "howToTest": {
+        "id": 52,
+        "title": "Justerbar tidsgräns för sidor som inte kräver inloggning",
+        "content": "1. Påbörja en uppgift, exempelvis genom att fylla i ett formulär i en tjänst som inte kräver att användaren loggar in.\n\n2. Överge uppgiften och låt sidan vara inaktiv tillräckligt länge för att den övre gränsen för inaktivitet ska inträffa om det finns en övre tidsgräns.\n\n3. Kontrollera att användaren inte skickas vidare till en annan sida innan tidsgränsen har passerat. \n\nFör att inte behöva vänta ut en tidsgräns på över 20 timmar eller mer, kan du som utvecklare ange en kortare tidsgräns för att kontrollera att det som ska ske när tidsgränsen nås faktiskt sker. Exempelvis någon typ av varningsmeddelande eller att användaren skickas vidare till en annan sida.\n"
+      }
+    },
+    {
+      "id": 11,
+      "sort": null,
+      "topic": "Sidans titel",
+      "criteria": "2.4.2 Sidans titel",
+      "category": "Sida",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Alla sidor har en titel som beskriver sidans syfte eller innehåll. Sidtiteln anges i elementet <title> i sidans <head>-element.",
+      "why": "En beskrivande sidtitel hjälper användare att snabbt och enkelt avgöra om sidan är relevant utifrån deras behov. Beskrivande sidtitlar är också viktigt för sökmotoroptimering.",
+      "role": "UX / Redaktör",
+      "wcag": "2.4.2 Sidans titel",
+      "howToTest": {
+        "id": 5,
+        "title": "Sidans titel",
+        "content": "1. Gör en sökning på den aktuella webbsidan med exempelvis Google. Kopiera sidans webbadress, gå till sökfältet, klistra in webbadressen och sök. Den text som visas som en länkas i sökmotorns första sökträff är sidans titel.\n\n2. Granska koden på sidan genom att öppna webbläsarens utvecklingsverktyg genom att trycka på F12 eller högerklicka på ett objekt på sidan och välj ”Inspektera”. Nästan längst upp i sidans dokumentstruktur och innanför elementet `<head>`-sektionen finns sidans titel i elementet `<title>`.\n\n3. Granska texten som visas för den aktuella webbsidan i din webbläsares flikfält. I Google Chrome och Microsoft Edge visas flikfältet längst upp i webbläsarfönstret. Den text som visas i fliken är sidans titel. Om du hovrar över den aktuella fliken med din musmarkör visas en utökad tooltip som innehåller sidans titel.\n\t\n    Titeln ska innehålla sidans namn och gärna beskriva sidans ämne eller syfte. Den ska vara så unik som möjligt och vara specifik och innehålla den mest relevanta informationen först. På Arbetsförmedlingen skriver vi sidans namn följt av avsändarens namn. Exempel: \"Platsbanken - Sök lediga jobb - Arbetsförmedlingen\".\n"
+      }
+    },
+    {
+      "id": 12,
+      "sort": null,
+      "topic": "Sidans språk",
+      "criteria": "3.1.1 Sidans språk",
+      "category": "Sida",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.1 Gör texten läsbar (för människor och skärmläsare)",
+      "statement": "Varje sidas huvudspråk är angivet i koden. Huvudsakligt språk anges med attributet lang i elementet <html>.",
+      "why": "Rätt språkinställningar hjälper användare av uppläsande hjälpmedel att läsa upp innehållet med rätt uttal. Det underlättar även avstavning och automatisk översättning.",
+      "role": "Redaktör / Utvecklare",
+      "wcag": "3.1.1 Sidans språk",
+      "howToTest": {
+        "id": 6,
+        "title": "Sidans språk",
+        "content": "1. Granska koden på sidan genom att öppna webbläsarens utvecklingsverktyg genom att trycka på F12 eller högerklicka på ett objekt på sidan och välj ”Inspektera”. Längst upp i sidans dokumentstruktur finns elementet `<html>`. Kontrollera att elementet har attributet lang='sv'.\n\n2. Om sidans huvudsakliga språk är svenska ska attributet lang ha värdet “sv”. Exempel `<html lang='sv'>`.\n\n3. Om sidans huvudsakliga språk är ett annat språk än svenska behöver du använda ett korrekt värde för det språket. Hitta rätt språk på W3Docs. [ISO Language Codes på W3Docs](https://www.w3docs.com/learn-html/html-language-codes.html)\n\n4. Du kan också testa genom att använda en skärmläsare som Jaws, NVDA, Voice Over eller Talkback. Kontrollera att sidans innehåll läses upp på svenska, sidans huvudsakliga språk är svenska.\n"
+      }
+    },
+    {
+      "id": 13,
+      "sort": null,
+      "topic": "Semantisk sidstruktur med HTML",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Sida",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Varje sida är strukturerad med HTML-element som <main>, <nav>, <section>, <form>, <article>, <section> och <aside> för att beskriva syftet med sidans olika informationsområden.",
+      "why": "Struktur är grunden för god tillgänglighet. Semantiska HTML-element skapar landmärken i koden som gör det lättare för hjälpmedelsanvändare att orientera sig på webbsidan.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 7,
+        "title": "Semantisk sidstruktur med HTML",
+        "content": "Gå igenom elementen i listan nedan och kontrollera att innehållet i varje informationsområde på webbsidan omsluts av element som är relevanta för den aktuella sidan.\n\n| Element | Användning |\n| ------ | ------ |\n| `<header>`   | Webbplatsövergripande del. Innehåller vanligtvis logotyp, övergripande navigation och funktioner för sök och uppläsning.   |\n| `<nav>`   | Navigering exempelvis i toppen av sidan eller sidonavigering om sådan används.   |\n| `<main>`   | Sidans huvudsakliga innehåll. Inleds med en h1-rubrik.   |\n| `<article>`   | Används om sidan innehåller en eller flera delar med redaktionellt material.   |\n| `<aside>`   | Används om sidan exempelvis innehåller information i en högerspalt.   |\n| `<section>`   | Används för en del av innehållet, som en del av <main>. Börjar vanligtvis med en rubrik.   |\n| `<form>`   | Används för formulär. Ska omsluta hela formuläret.   |\n| `<footer>`   | Sajtövergripande del. Innehåller ofta kontaktuppgifter, avsändare, generell information om webbplatsen, tillgänglighetsredogörelse med mera.   |"
+      }
+    },
+    {
+      "id": 14,
+      "sort": null,
+      "topic": "Semantisk sidstruktur med attributet role",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Sida",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Informationsområden som innehåller sökformulär märks upp som landmärken i koden. Eftersom det saknas ett semantiskt HTML-element för sökformulär används ARIA-attributet role=”search”.",
+      "why": "Landmärken hjälper användare som navigerar med skärmläsare att orientera sig på en webbsida. Med hjälp av inbyggda kortkommandon i skärmläsare kan användare navigera mellan landmärken på en sida.\nSemantiska element i HTML är alltid att föredra, men i vissa situationer är istället ARIA-attributet role ett alternativ i <div>-element för att ge området ett syfte. Exempel: <div role=”main”>.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 8,
+        "title": "Semantisk sidstruktur med attributet role",
+        "content": "Om sidans dokumentstruktur helt saknar landmärken och det inte är möjligt att ändra dokumentstrukturen till elementen i föregående punkt, kan följande attribut och värden läggas till på element som omsluter sidans informationsområden. De ger då element som annars saknar semantik, exempelvis elementet `<div>`, ett syfte och skapar landmärken på sidan som hjälpmedelsanvändare att orientera sig efter.\nNotera att attributen och värdena nedan inte är nödvändiga om sidan redan har landmärken med html-element. Undantaget är role=”search” som saknar en motsvarighet som element.\n\n| Landmärke | Motsvarande element | Användning |\n| ------ | ------ | ------ |\n| `role=”banner”`   | `<header>`   | Webbplatsövergripande del. Innehåller vanligtvis logotyp, övergripande navigation och funktioner för sök och uppläsning.   |\n| `role=”search”`   | Motsvarighet saknas   | Används för sökformulär.   |\n| `role=”navigation”`   | `<nav>`   | Navigering exempelvis i toppen av sidan eller sidonavigering om sådan används.   |\n| `role=”main”`   | `<main>`   | Sidans huvudsakliga innehåll. Inleds med en h1-rubrik.   |\n| `role=”complementary”`   | `<aside>`   | Används om sidan exempelvis innehåller information i en högerspalt.   |\n| `role=”region”`   | `<section>`   | Används för en del av innehållet, som en del av <`main`>. Börjar vanligtvis med en rubrik.   |\n| `role=”form”`   | `<form>`   | Används för formulär. Ska omsluta hela formuläret.   |\n| `role=”contentinfo”`   | `<footer>` | Sajtövergripande del. Innehåller ofta kontaktuppgifter, avsändare, generell information om webbplatsen, tillgänglighetsredogörelse med mera.   |"
+      }
+    },
+    {
+      "id": 15,
+      "sort": null,
+      "topic": "Semantiska rubriker",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Rubriker",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Alla rubriker på en webbsida är korrekt uppmärkta med rubrikelementet <h> för att skapa semantiska rubriker. Det finns inga tomma rubrikelement och H-element används inte för sådant som inte är rubriker.",
+      "why": "Användare av uppläsande hjälpmedel kan navigera mellan rubriker och skumläsa sidans innehåll. Korrekt kodade rubriker bidrar också till ökad sökmotoroptimering.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 9,
+        "title": "Semantiska rubriker",
+        "content": "1. Gå igenom sidan eller skissen och bestäm vilka av sidans texter som fungerar som rubriker.\n\n2. Kontrollera att alla rubriker är uppmärkta som rubriker i koden med elementen `<h1>` till `<h6>`.\n\n3. Kontrollera att ingen rubrik på sidan märks upp med endast fetstil eller lite större text men saknar rubrik-element i koden.\n\n4. Kontrollera att det inte finns några tomma rubriker, alltså h-element som saknar textinnehåll.\n\n5. Kontrollera att det inte finns några rubrikelement som används för text som inte är eller fungerar som rubriker.\n"
+      }
+    },
+    {
+      "id": 16,
+      "sort": null,
+      "topic": "Logisk rubrikstruktur",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Rubriker",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Sidans rubriknivåer skapar en logisk och korrekt hierarkisk ordning. Rubrikstrukturen hoppar inte över rubriknivåer.",
+      "why": "Användare med uppläsande hjälpmedel kan navigera mellan rubriker och rubriknivåer och skumläsa sidans innehåll. Korrekta rubrikstrukturer bidrar också till sökmotoroptimering.",
+      "role": "UX",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 10,
+        "title": "Logisk rubrikstruktur",
+        "content": "1. Kontrollera att sidans första rubrik som beskriver dess huvudsakliga innehåll är uppmärkt med elementet `<h1>` för rubriknivå 1.\n\n2. Kontrollera att sidans resterande rubriker har en rubriknivå som motsvarar deras plats i innehållets struktur. Vanligtvis är alla underrubriker på en webbsida underordnad sidans huvudrubrik. Varje ny sektion på sidan inleds med en rubrik med elementet `<h2>` för rubriknivå 2. Det gäller så länge innehållet hör ihop med eller är sammankopplat med sidans huvudinnehåll.\n\n3. Innehåll som inte är underordnat sidans huvudrubrik utan utgör en del av webbplatsens generella information, kan inledas med en ny rubrik på nivå 1. Exempel är rubriker i webbplatsens sidfot som inte är underordnat den aktuella sidans huvudrubrik utan är ett eget område.\n"
+      }
+    },
+    {
+      "id": 17,
+      "sort": null,
+      "topic": "Beskrivande rubriker",
+      "criteria": "2.4.6 Rubriker och etiketter",
+      "category": "Rubriker",
+      "level": "AA",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Sidans rubriker är beskrivande och har en koppling till texten som följer.",
+      "why": "Beskrivande rubriker underlättar för alla att förstå och förutse vad sidans avsnitt handlar om. Det är extra viktigt för personer med lässvårigheter eller nedsatt korttidsminne.",
+      "role": "Copy / Redaktör",
+      "wcag": "2.4.6 Rubriker och etiketter",
+      "howToTest": {
+        "id": 53,
+        "title": "Beskrivande rubriker",
+        "content": "1. Identifiera huvudrubriker och underrubriker på sidan.\n\n2. Kontrollera att rubriker är beskrivande och har en tydlig koppling till innehållet.\n\n3. Testa med skärmläsare och använd kortkommandon i skärmläsaren för att visa skärmläsarens elementlista för rubriker. I vissa skärmläsare är kortkommandot Insert eller Caps Lock + F7. \n\n4. Gå igenom rubrikerna i listan och fundera över om du förstår vad rubrikerna representerar, helst utan att titta på innehållet på sidan."
+      }
+    },
+    {
+      "id": 18,
+      "sort": null,
+      "topic": "Betoningar och särskilt markerad text",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Innehåll",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Text med betoningar eller som utmärker sig visuellt är uppmärkt i koden. Elementet <strong> används istället för elementet <bold> för att markera fetstil.",
+      "why": "Hjälpmedelsanvändare kan ta del av hur text utmärker sig. Att markera text visuellt är inte tillräckligt eftersom hjälpmedel inte kan återge det för användaren.",
+      "role": "Redaktör / Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 54,
+        "title": "Betoningar och särskilt markerad text",
+        "content": "1. Gå igenom textinnehållet på sidan och kontrollera om det finns fetmarkerad text eller text som visuellt märks ut på att något annat sätt.\n\n2. Högerklicka på den markerade texten och välj “Inspektera” eller “Granska” i menyn.\n\n3. Kontrollera att texten är uppmärkt med elementet `<strong>` i koden, eller elementet `<em>` för kursiv text.\n\n4. Testa med skärmläsare och använd piltangenterna för att navigera och läsa i texten. Om inställningarna i skärmläsaren är satta att omfatta uppläsning av stil och betoning kommer skärmläsaren att annonsera markering av fet eller kursiv text. "
+      }
+    },
+    {
+      "id": 19,
+      "sort": null,
+      "topic": "Inte bara sensoriska kännetecken",
+      "criteria": "1.3.3 Sensoriska kännetecken",
+      "category": "Innehåll",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Hänvisningar till innehåll och komponenter förlitar sig inte endast på sensoriska kännetecken som form, storlek, färg eller placering. Istället för att skriva \"Tryck på den gröna knappen\" skriv exempelvis \"Tryck på den gröna knappen med texten Skicka\".",
+      "why": "Användare som inte ser något alls, har nedsatt syn eller nedsatt färgseende kan ha svårt att ta till sig information som presenteras med bara form, storlek, färg eller placering. Presentation av information i text underlättar för alla användare.",
+      "role": "Copy / Redaktör",
+      "wcag": "1.3.3 Sensoriska kännetecken",
+      "howToTest": {
+        "id": 56,
+        "title": "Inte bara sensoriska kännetecken",
+        "content": "1. För att kontrollera att innehållet på en sida inte baseras på färg, placering, storlek eller form, granska det utanför sin ursprungliga och visuella kontext.\n\n2. Kopiera textinnehållet på en helt tom sida och klistra in det i exempelvis Word eller ett annat ordbehandlingsprogram.\n\n3. Granska innehållet och försök ta reda på om det är begripligt utan det visuella sammanhanget.\n\n4. Om du upptäcker att färg, form, storlek och placering är nödvändigt för att förstå hänvisningar i innehållet, behöver du troligen omarbeta dessa.\n"
+      }
+    },
+    {
+      "id": 20,
+      "sort": null,
+      "topic": "Språkförändringar",
+      "criteria": "3.1.2 Språk för del av sida",
+      "category": "Innehåll",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.1 Gör texten läsbar (för människor och skärmläsare)",
+      "statement": "Ord, fraser och stycken som är på ett annat språk än sidans huvudspråk är uppmärkta med ett lang-attribut i koden.\nExempel:\n<p>\nOrdet hej på engelska är <span lang=”en”>Hello</span>.\n</p>",
+      "why": "Uppläsande hjälpmedel läser upp innehåll på ett avvikande språk med ett korrekt uttal.",
+      "role": "Redaktör / Utvecklare",
+      "wcag": "3.1.2 Språk för del av sida",
+      "howToTest": {
+        "id": 57,
+        "title": "Språkförändringar",
+        "content": "1. Utgå från en sida med textinnehåll på olika språk, eller en sida med ett huvudspråk och ett område med innehåll som avviker från huvudspråket.\n\n2. Starta en skärmläsare och använd piltangenterna för att navigera radvis i textinnehållet på sidan.\n\n3. Navigera mellan sidans olika områden för att ta reda på om skärmläsaren byter syntetisk röst för uppläsning av innehåll på olika språk.\n\n4. Om skärmläsaren inte byter röst för uppläsning när den påträffar textinnehåll med ett avvikande språk, öppna webbläsarens utvecklingsverktyg med F12.\n\n5. Granska områden med innehåll på språk som avviker från sidans huvudspråk. Om områdena, eller textstyckena, saknar attributet lang behöver ett sådant attribut läggas till för varje område. Om områdena ser ut att ha ett felaktigt värde i attributet lang, korrigera det i den ursprungliga koden.\n"
+      }
+    },
+    {
+      "id": 21,
+      "sort": null,
+      "topic": "Navigera med tangentbord",
+      "criteria": "2.1.1 Tangentbord räcker",
+      "category": "Använda tangentbord",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.1 Åtkomst med tangentbord",
+      "statement": "Det går att navigera på sidan och interagera med alla komponenter genom att enbart använda tangentbordet.",
+      "why": "Användare med nedsatt motorik kan ha svårt att använda mus och navigerar därför med tangentbord eller med andra hjälpmedel som bygger på samma mekanismer. Hjälpmedel som exempelvis skärmläsare är utvecklade för att styras med endast tangentbord.",
+      "role": "UX",
+      "wcag": "2.1.1 Tangentbord räcker",
+      "howToTest": {
+        "id": 11,
+        "title": "Navigera med tangentbord",
+        "content": "1. Ställ markören i webbläsarens adressfält och använd därefter varken mus eller touchpad. Navigera dig igenom hela sidan med tabbtangenten.\n\t- Tryck på Tabb för att navigera framåt.\n\t\n    - Tryck på Shift + Tabb för att navigera bakåt.\n    \n2. Kontrollera att det går att navigera till alla interaktiva objekt på sidan som länkar, knappar och formulärsfält. Du ska inte kunna navigera med tabbtangenten till rubriker eller brödtext.\n\n3. För varje interaktivt objekt, kontrollera att det går att aktivera komponenten.\n\t- Tryck på Enter för att aktivera en länk.\n    \n    - Tryck på Enter eller Mellanslag för att aktivera en knapp.\n\t\n    - Tryck på Mellanslag för att välja en kryssruta eller radioknapp.\n\t\n    - Tryck på Piltangenterna för att navigera mellan radioknappar, mellan valen i en dropdown-meny eller autocomplete-lista.\n"
+      }
+    },
+    {
+      "id": 22,
+      "sort": null,
+      "topic": "Ingen tangentbordsfälla",
+      "criteria": "2.1.2 Ingen tangentbordsfälla",
+      "category": "Använda tangentbord",
+      "level": "A*",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.1 Åtkomst med tangentbord",
+      "statement": "När användaren flyttar fokus till en komponent med tangentbordsnavigering kan fokus också flyttas bort från komponenten. Användaren fastnar aldrig med fokus på eller inuti en komponent.",
+      "why": "Användare som navigerar med tangentbord ska kunna komma åt interaktiva objekt på en webbsida och ska inte fastna någonstans.",
+      "role": "Utvecklare",
+      "wcag": "2.1.2 Ingen tangentbordsfälla",
+      "howToTest": {
+        "id": 12,
+        "title": "Ingen tangentbordsfälla",
+        "content": "1. Navigera igenom hela sidan med tabbtangenten tills att du åter står i webbläsarens adressfält. Säkerställ att fokus aldrig fastnar någonstans.\n\n2. Öppna en komponent. Kontrollera att det går att navigera ut ur komponenten och vidare till nästa komponent.\n\n3. Öppna ett modalt fönster. Kontrollera att det går att avbryta eller stänga modalen med tangentbordet och att du inte fastnar i den."
+      }
+    },
+    {
+      "id": 23,
+      "sort": null,
+      "topic": "Logisk fokusordning",
+      "criteria": "2.4.3 Logisk tabbordning",
+      "category": "Använda tangentbord",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Alla interagerbara objekt på en webbisda är placerade i en ordning som är logisk för användaren. Fokusordningen, alltså den ordning som användaren får fokus på objekt vid navigation med tabbtangenten, motsvarar hur objekten är ordnade visuellt så långt det är möjligt.",
+      "why": "En logisk fokusordning hjälper användare som navigerar med tangentbord på en webbsida eftersom fokus flyttas på ett förväntat sätt. Att fokusordningen är konsekvent med läsordningen gör att tjänsten uppfattas som förutsägbar och intuitiv.",
+      "role": "Utvecklare",
+      "wcag": "2.4.3 Logisk fokusordning",
+      "howToTest": {
+        "id": 13,
+        "title": "Logisk fokusordning",
+        "content": "##### Metod 1: Testa på egen hand\n\nNavigera igenom hela sidan med tabbtangenten och testa att tabbordningen följer sidans läsordning. Ordningen ska kännas intuitiv och förutsägbar.\n\n##### Metod 2: Testa med ett plugin\n\n1. Använd Chrome-pluginet “Accessibility Insight for Web”. Öppna plugin och välj ”Tab stops”\n\n2. Sätt markören i webbläsarens adressfält och navigera dig igenom sidan med tabbtangenten. När du navigerar mellan de interaktiva elementen på sidan visas deras ordning med en siffra i en cirkel och en linje mellan varje element.\n\n3. Titta på mönstret och se till att ordningen följer sidans läsordning och att det inte finns några \"korsade linjer\". <br><br> Om tabbordningen är korrekt ska inga linjer korsa varandra.\n\n##### Metod 3: Testa med en skärmläsare\n\nAnvänd skärmläsare och navigera dig igenom sidan med tabbtangenten. Tabbordningen ska följa den ordning som innehållet läses upp.\n\n##### Modala fönster och dialogrutor\n\n1. Öppna en modal och kontrollera att du får fokus inne i modalen.\n\n2. Kontrollera att det går att navigera mellan objekten inne i modalen och att fokus aldrig flyttas utanför den.\n\n3. Stäng modalen genom att trycka på Stäng-knappen eller Esc-tangenten.\n\n4. Kontrollera att fokus hamnar på rätt ställe efter att du stängt modalen.\n"
+      }
+    },
+    {
+      "id": 24,
+      "sort": null,
+      "topic": "Synligt fokus",
+      "criteria": "2.4.7 Synligt fokus",
+      "category": "Använda tangentbord",
+      "level": "AA",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "När en användare navigerar på en webbsida med tangentbord, framgår det tydligt vilket element som har fokus.",
+      "why": "Användare som navigerar med tangentbord ska visuellt kunna avgöra vilket objekt som har fokus och som de kan interagera med.",
+      "role": "AD",
+      "wcag": "2.4.7 Synligt fokus",
+      "howToTest": {
+        "id": 14,
+        "title": "Synligt fokus",
+        "content": "1. Kontrollera att fokusmarkören inte är dold. Vanliga misstag är att sätta outline till 0 eller none i sidans CSS-kod.\n\n2. Navigera igenom sidan med tabbtangenten. När du navigerar till ett objekt, kontrollera att det är tydligt markerat att det är just det objekt som har fokus.\n\n3. Om du använder helt egengjorda komponenter behöver du själv säkerställa att komponenten har synligt fokus.\n"
+      }
+    },
+    {
+      "id": 25,
+      "sort": null,
+      "topic": "Tangentbordsgenväg",
+      "criteria": "2.4.1 Hoppa över grupperat innehåll",
+      "category": "Använda tangentbord",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Överst på webbsidan finns en länk som låter användare som navigerar med tangentbord att hoppa över innehåll som upprepas på flera sidor, exempelvis menyer. Länken flyttar användarens fokus direkt till sidans huvudinnehåll.",
+      "why": "Användare som navigerar med tangentbord når huvudinnehållet på en webbsida snabbt och slipper navigera förbi samma navigationsområden varje gång användaren öppnar en ny sida.",
+      "role": "UX",
+      "wcag": "2.4.1 Hoppa över grupperat innehåll",
+      "howToTest": {
+        "id": 15,
+        "title": "Tangentbordsgenväg",
+        "content": "1. Ställ markören i webbläsarens adressfält. Tryck en gång på tabbtangenten. I vissa webbläsare kan du första behöva navigera förbi flera knappar i webbläsarens inbyggda gränssnitt, exempelvis bokmärken och favoriter.\n\n2. Kontrollera att en länk med länktexten 'Gå till sidans innehåll' eller liknande visas längst upp på sidan. Länken ska alltså vara det först interaktiva objektet på sidan och före sidans logotyp. Den ska bara vara synlig när den har fokus.\n\n3. Tryck på Enter för att aktivera länken. Fokus ska nu flyttas till sidans huvudinnehåll, oftast dess första H1-rubrik. Beroende på hur stort sidhuvudet är kan sidan kan scrolla ner lite så att huvudrubriken hamnar högst upp på den synliga delen av sidan.\n\n4. Navigera till nästa interaktiva objekt genom att trycka på tabbtangenten en gång till. Kontrollera att fokus då hamnar på nästa interaktiva objekt efter huvudrubriken.\n"
+      }
+    },
+    {
+      "id": 26,
+      "sort": null,
+      "topic": "Kortkommandon aktiveras inte med endast en tangent",
+      "criteria": "2.1.4 Entangentsgenvägar",
+      "category": "Använda tangentbord",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.1 Åtkomst med tangentbord",
+      "statement": "Webbsidan innehåller inga kortkommandon som aktiveras med endast en bokstav, siffra eller specialtecken. Om det finns kortkommandon krävs också en modifieringstangent, exempelvis Ctrl, Alt eller Caps-lock.",
+      "why": "Kortkommandon som bara består av ett tecken kan orsaka problem för användare som navigerar med röststyrning och för användare med nedsatt motorik som kan råka trycka på en tangent av misstag.",
+      "role": "UX",
+      "wcag": "2.1.4 Entangentsgenvägar",
+      "howToTest": {
+        "id": 58,
+        "title": "Kortkommandon aktiveras inte med endast en tangent",
+        "content": "Om inte kortkommandon har byggts in explicit, finns egentligen inget behov av att göra tester av denna punkt. Om webbsidan eller tjänsten som ska testas inte byggts av det egna teamet, och det är oklart huruvida kortkommandon har byggts in, testa genom att göra följande:\n\n1. Testa om det finns kortkommandon kopplade till alfabetiska tangenter genom att trycka på varje tangent i tur och ordning.\n\n2. Notera om det sker något i gränssnittet när tangenterna trycks ner.\n\n3. Gör samma test med numeriska tangenter och notera om det sker något i gränssnittet när tangenterna trycks ner.\n\n4. Om det sker något i gränssnittet när en tangent trycks ner, justera kortkommandot att inte aktiveras med enskilda bokstäver eller siffror. Lägg exempelvis till en eller flera moderingstangenter.\n"
+      }
+    },
+    {
+      "id": 27,
+      "sort": null,
+      "topic": "Förutsägbart fokus",
+      "criteria": "3.2.1 Förutsägbart vid fokus",
+      "category": "Förutsägbart",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.2 Gör innehåll förutsägbart",
+      "statement": "När användaren flyttar fokus till en komponent sker inga oväntade förändringar. Exempel på oväntade förändringar är att nya fönster öppnas, fokus flyttas, att användaren skickas till en annan sida eller att innehållet på sidan förändras.",
+      "why": "Ett gränssnitt uppfattas som mer förutsägbart av användare när vi undviker oväntade förändringar. Det underlättar särskilt för användare med nedsatt syn, kognition eller motorik.",
+      "role": "UX",
+      "wcag": "3.2.1 Förutsägbart vid fokus",
+      "howToTest": {
+        "id": 16,
+        "title": "Förutsägbart fokus",
+        "content": "Sätt fokus på en komponent, antingen genom att klicka på komponenten men helst genom att navigera till den med tabbtangenten. Kontrollera därefter följande:\n\n1. Inget nytt fönster eller ny modal öppnas\n\n2. Fokus är kvar på komponenten till dess att användaren väljer att flytta fokus\n\n3. Användaren är kvar på sidan\n\n4. Formulär skickas inte\n\n5. Det sker ingen större förändring av innehållet på sidan\n\nTesta gärna med användare för att kontrollera att allt som sker uppfattas som intuitivt och förväntat.\n"
+      }
+    },
+    {
+      "id": 28,
+      "sort": null,
+      "topic": "Innehåll visas inte endast vid hover eller fokus",
+      "criteria": "1.4.13 Innehåll som visas vid hover/fokus",
+      "category": "Förutsägbart",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Innehåll som aktiveras vid hover kan också aktiveras med fokus och tvärtom. Det finns minst ett tydligt sätt för användaren att stänga eller dölja innehållet. När användaren hovrar över innehållet döljs det inte förrän användaren själv väljer att stänga eller dölja det.",
+      "why": "Innehåll som bara visas vid hover ska även kunna visas för användare som navigerar med tangentbord. Användaren ska själv kunna kontrollera om innehållet ska visas och hur länge för att kunna ta del av det utifrån sina förutsättningar.",
+      "role": "UX",
+      "wcag": "1.4.13 Innehåll som visas vid hover/fokus",
+      "howToTest": {
+        "id": 17,
+        "title": "Innehåll visas inte endast vid hover eller fokus",
+        "content": "1. Navigera igenom sidan med tabbtangenten och kontrollera om ny information visas i anslutning till komponenter eller interaktiva objekt när de får fokus.\n\n2. Använd musmarkören och hovra över komponenter och interaktiva objekt. Kontrollera om ny information visas i anslutning till objekten vid hover.\n\n3. Jämför och kontrollera att information som läggs till vid komponenter och interaktiva objekt vid fokus eller hover är möjlig att få fram med båda navigationssätten. Innehåll ska inte förutsätta att användaren kan navigera med antingen tangentbord eller mus.\n\n4. Kontrollera att tooltips och liknande komponenter enbart visar extra information när användaren har valt att interagera med komponenten, exempelvis genom att klicka på komponenten eller trycka Enter när komponenten har fokus.\n"
+      }
+    },
+    {
+      "id": 29,
+      "sort": null,
+      "topic": "Inaktiva komponenter",
+      "criteria": "3.3.1 Identifiering av fel",
+      "category": "Förutsägbart",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Komponenter är aldrig inaktiva, det vill säga uppmärkta med attributet disabled. Komponenter som knappar, radioknappar och kryssrutor är alltid aktiva och går alltid att interagera med. Det finns en tydlig felhantering kopplad till komponenten när den inte fungerar och användaren inte kan gå vidare i ett flöde.",
+      "why": "Inaktiva komponenter, exempelvis knappar, är i praktiken osynliga för många användare. Det är därför svårt att förstå varför något som uppfattas som valbart ibland inte är det. Det är också svårt att utforma en knapp som är tydlig och inaktiv. Genom att koppla en tydlig felhantering till inaktiva knappar som inte är valbara i en viss situation, hjälper vi våra användare att förstå vad som är fel.",
+      "role": "UX",
+      "wcag": "3.3.1 Identifiering av fel",
+      "howToTest": {
+        "id": 18,
+        "title": "Inaktiva komponenter",
+        "content": "Gå igenom sidan och kontrollera att alla interaktiva komponenter går att använda. Det ska inte finnas någon komponent på sidan som är inaktiverad med attributet disable."
+      }
+    },
+    {
+      "id": 30,
+      "sort": null,
+      "topic": "Förutsägbar inmatning",
+      "criteria": "3.2.2 Förutsägbarhet vid inmatning",
+      "category": "Förutsägbart",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.2 Gör innehåll förutsägbart",
+      "statement": "När användaren ändrar en komponent, exempelvis skriver något i ett textfält eller gör ett val, sker inga oväntade förändringar. Exempel på oväntade förändringar är att nya fönster öppnas, fokus flyttas, att användaren skickas till en annan sida eller att formuläret skickas automatiskt.",
+      "why": "Användaren ska kunna veta var markören befinner sig för att undvika att skriva i fel fält eller göra ett felaktigt val. Förutsägbara funktioner underlättar för alla användare, men särskilt för användare med nedsatt syn eller kognition.",
+      "role": "UX",
+      "wcag": "3.2.2 Förutsägbarhet vid inmatning",
+      "howToTest": {
+        "id": 19,
+        "title": "Förutsägbar inmatning",
+        "content": "1. Granska alla komponenter på sidan som låter användaren välja ett värde eller mata in information.\n\n2. Gör ett val eller mata in information i varje komponent. Om det tillkommer nya fält som en konsekvens av ditt val eller den information som du har matat in, är det okej. Det är viktigt att den övergripande strukturen på sidan är den samma.\n\n3. Kontrollera att inga nya fönster öppnas utan förvarning när du exempelvis väljer en radioknapp, kryssruta eller gör ett val i en dropdownmeny.\n\n4. Kontrollera att fokus inte automatiskt flyttas till nästa komponent när du skriver in text eller gör ett val. Fokus ska vara kvar på samma komponent tills du väljer att flytta fokus. Om sidan laddas om när du gör ett val, exempelvis för att hämta ny data när du gör ett val i en dropdownmeny, ska fokus vara kvar på det valda elementet även efter att sidan har laddat färdigt.\n\n5. Kontrollera att formulär inte skickas automatiskt när du flyttar fokus från en komponent till en annan. Skriv in information i formulärets sista fält och navigera vidare med tabbtangenten. Fokus ska då flyttas till nästa komponent, som troligtvis är en knapp för att skicka. \n\n6. Kontrollera att det finns en knapp i formuläret för att skicka informationen till mottagaren och att . informationen skickas när du aktiverar knappen. Om formuläret innehåller fel visas ett felmeddelande.\n\n7. Testa gärna med användare för att säkerställa att allt som sker känns intuitivt och förväntat.\n"
+      }
+    },
+    {
+      "id": 31,
+      "sort": null,
+      "topic": "Porträtt- och landskapsläge",
+      "criteria": "1.3.4 Orientering",
+      "category": "Responsiv design",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Webbsidan eller tjänsten fungerar oavsett om användaren visar den i porträtt- eller landskapsläge. Gränssnittet kräver inte att skärmens riktning är låst.",
+      "why": "Användare med nedsatt motorik kan behöva montera fast sin dator, surfplatta eller telefon på exempelvis en rullstol eller ett stativ. Att själv välja det håll som passar bäst underlättar även för användare med nedsatt syn.",
+      "role": "UX",
+      "wcag": "1.3.4 Orientering",
+      "howToTest": {
+        "id": 59,
+        "title": "Porträtt- och landskapsläge",
+        "content": "Testa den aktuella webbsidan eller tjänsten med en mobil enhet, eller genom att göra följande:\n\n1. Starta webbläsarens utvecklingsverktyg med F12.\n\n2. Aktivera verktyget för att testa den aktuella webbsidan med mobilenheter.\n\n3. Välj en enhet att testa med, exempelvis iPone 12 Pro.\n\n4. Använd knappen för att rotera skärm för att testa om gränssnittet fungerar i porträtt- och landskapsläge."
+      }
+    },
+    {
+      "id": 32,
+      "sort": null,
+      "topic": "Flexibel layout",
+      "criteria": "1.4.10 Justering av layout",
+      "category": "Responsiv design",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Webbsidans layout är flexibel och responsiv, alltså följsam till storleken på användarens skärm. Innehållet kan visas med en skärmbredd på 320 pixlar utan att innehåll eller funktionalitet försvinner. Användaren behöver inte skrolla i mer än en riktning, om det inte finns särskilda skäl.",
+      "why": "Webbsidor med en följsam layout underlättar för användare som behöver förstora texten i ett gränssnitt och för alla användare som besöker en webbsida med en liten skärm.",
+      "role": "UX / AD / Utvecklare",
+      "wcag": "1.4.10 Justering av layout",
+      "howToTest": {
+        "id": 60,
+        "title": "Flexibel layout",
+        "content": "1. Testa den aktuella webbsidan eller tjänsten i mobila enheter med olika skärmbreddar.\n\n2. Justera bredden på webbläsarens fönster för att kontrollera hur innehållet på sidan förhåller sig till fönstrets bredd.\n\n3. Zooma i webbläsaren genom att trycka på Ctrl + (plus) och Ctrl - (minus). Ctrl 0 återställer zoomfunktionen till 100 %.\n"
+      }
+    },
+    {
+      "id": 33,
+      "sort": null,
+      "topic": "Läsordning vid olika skärmstorlekar",
+      "criteria": "1.3.2 Meningsfull ordning",
+      "category": "Responsiv design",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Innehållets ordning på en webbsida är korrekt oberoende av användarens skärmstorlek. Läsordningen påverkas inte av responsiv design och visas alltid så att innehållet är begripligt och logiskt.",
+      "why": "Skärmstorlek ska inte påverka användares möjligheter att ta del av innehåll på en webbsida. En meningsfull läsordning i innehållet underlättar för alla användare som besöker en webbsida med en smartphone eller enheter med såväl mindre som större skärmar.",
+      "role": "UX / AD",
+      "wcag": "1.3.2 Meningsfull ordning",
+      "howToTest": {
+        "id": 20,
+        "title": "Läsordning vid olika skärmstorlekar",
+        "content": "1. Läs igenom innehållet på sidan, utan hjälpmedel, på skärmar med olika storlekar, exempelvis dator, läsplatta och smartphone.\n\n2. Kontrollera att allt innehåll behåller sin logiska ordning så att dess betydelse bevaras, även om delar av innehållet flyttar sig. Var särskilt uppmärksam på faktarutor, tabeller och informationsområden som hänvisar till annat innehåll på samma sida.\n"
+      }
+    },
+    {
+      "id": 34,
+      "sort": null,
+      "topic": "Läsordning för hjälpmedel",
+      "criteria": "1.3.2 Meningsfull ordning",
+      "category": "Responsiv design",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Innehållets läsordning är logisk och korrekt för användare som navigerar med hjälpmedel. Innehållets ordning i koden överensstämmer med den visuella presentationen. CSS används inte för att ändra innehållets ordning.",
+      "why": "Användare som navigerar med hjälpmedel eller tangentbordsnavigation når innehåll på en webbsida enligt den ordning som innehåll är ordnat i koden. Det är därför viktigt att den stämmer överens med den visuella presentationen för att återges på ett logiskt och begripligt sätt.",
+      "role": "Utvecklare",
+      "wcag": "1.3.2 Meningsfull ordning",
+      "howToTest": {
+        "id": 21,
+        "title": "Läsordning för hjälpmedel",
+        "content": "1. Använd en skärmläsare och läs igenom allt innehåll på sidan.\n\n2. Kontrollera att läsordningen är korrekt och att skärmläsaren läser upp all text på ett logiskt och intuitivt sätt.\n\n3. Kontrollera också att skärmläsaren läser innehållet i samma ordning som det presenteras visuellt.\n"
+      }
+    },
+    {
+      "id": 35,
+      "sort": null,
+      "topic": "Inte bara färg",
+      "criteria": "1.4.1 Användning av färger",
+      "category": "Färg & form",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Färg används inte som det enda sättet att förmedla information till användaren. Färg kompletteras med exempelvis text, ikoner eller annan visuell utformning för att förmedla ett budskap.",
+      "why": "Användare med nedsatt färgseende ska kunna ta del av innehållet på en webbsida.",
+      "role": "UX / AD",
+      "wcag": "1.4.1 Användning av färger",
+      "howToTest": {
+        "id": 22,
+        "title": "Inte bara färg",
+        "content": "Gå igenom sidan och identifiera områden där färger används.\n\nKontrollera följande:\n\n1. Information som förmedlas med endast färg förmedlas även som text. \n\n2. Det finns en visuell markering som gör att innehåll i en avvikande färg skiljer sig från övrigt innehåll.\n\nDetta gör du enklast genom att testa hur sidan ser ut i gråskala. Säkerställ att all information och funktioner fortfarande är tydliga, även utan färger.\n"
+      }
+    },
+    {
+      "id": 36,
+      "sort": null,
+      "topic": "Ändra textstorlek",
+      "criteria": "1.4.4 Förändring av textstorlek",
+      "category": "Ändra storlek",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Användare kan förstora innehållet på en webbsida upp till 200 procent utan att använda hjälpmedel. Förstoringen ska inte orsaka att innehåll försvinner eller att funktionaliteten försämras. Innehållet ska kunna ändras när användaren trycker på CTRL + och CTRL -. Detta omfattar inte zoom-gester (pinch-to-zoom).",
+      "why": "Användare med nedsatt syn ska kunna förstora innehållet på en webbsida.",
+      "role": "Utvecklare",
+      "wcag": "1.4.4 Förändring av textstorlek",
+      "howToTest": {
+        "id": 23,
+        "title": "Ändra textstorlek",
+        "content": "Förstora innehållet genom att använda tangentbordet.\n\nAnvänd följande kortkommandon för att ändra storleken på texten på webbsidan:\n\n- CTRL och plus (+) för att öka textens storlek\n\n- CTRL och minus (-) för att minska textens storlek\n\n- CTRL och 0 för att återställa textens storlek\n\nNär du ökar eller minskar textens storlek kan du i sidans överkant se hur mycket du har förstorat textstorleken. Informationen visas bara i några sekunder men blir synligt igen varje gång du ändrar textens storlek.\n\n1. Förstora texten till 200 %.\n\n2. Kontrollera att texten verkligen har förstorats.\n\n3. Kontrollera att texten inte klipps av, trunkeras eller döljs jämfört med när texten inte är förstorad.\n\n4. Kontrollera att textstorleken i stilmallen (CSS) anges i relativa måttenheter. Öppna kodfönstret genom att trycka F12 eller högerklicka på exempelvis en rubrik på sidan och välj \"Inspektera\". Under fliken “Styles” letar du efter egenskaper som innehåller beskrivningen “size”. Egenskaper för storlek ska anges med enheten “em” eller “rem”.\n"
+      }
+    },
+    {
+      "id": 37,
+      "sort": null,
+      "topic": "Ändra textmellanrum",
+      "criteria": "1.4.12 Textmellanrum",
+      "category": "Ändra storlek",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Det går att öka avståndet mellan tecken, rader, stycken och ord utan att innehåll försvinner eller att funktionaliteten försämras. Följande minimikrav gäller:\n \n• teckenavstånd till minst 0,12 gånger teckensnittets storlek\n• avstånd mellan ord till minst 0,16 gånger teckensnittets storlek\n• radavstånd till minst 1,5 gånger teckensnittets storlek\n• avstånd mellan stycken till minst 2 gånger teckensnittets storlek",
+      "why": "Det är särskilt viktigt för användare med dyslexi eller nedsatt syn att kunna justera avstånd i text.",
+      "role": "Utvecklare",
+      "wcag": "1.4.12 Textmellanrum",
+      "howToTest": {
+        "id": 84,
+        "title": "Ändra textmellanrum",
+        "content": "Det enklaste sättet att testa dessa textförändringar är att använda ett så kallat bokmärke, eller bookmarklet. Använd exempelvis bokmärket “Text spacing bookmarklet” som finns på att hämta på Codepen. Gör så här:\n1. Gör en sökning på “Text spacing bookmarklet”.’\n\n2. Klicka på det första sökresultatet som borde vara hos Codepen.\n\n3. Inne på webbplatsen Codepen, dra länken \"Text spacing\" till bokmärkesfältet eller högerklicka på länken och välj \"Spara som bokmärke.\" Bokmärket kommer då att läggas till bland dina bokmärken i din webbläsarens bokmärkesfält.\n\n4. När du vill testa om textavstånd stöds på din sida, välj bokmärket “Text spacing” från ditt bokmärkesfält för att göra textändringarna.\n\n5. För att återställa, ladda om sidan.\n\nKontrollera följande och jämför hur texten ser ut utan några ändringar av textavståndet:\n- Radavståndet har ökat.\n\n- Avståndet mellan textstycken har ökat.\n\n- Avståndet mellan tecken har ökat.\n\n- Avståndet mellan två ord ökat.\n\n- Inga objekt på sidan, exempelvis texter, bilder eller knappar, överlappar eller /hamnar bakom något annat objekt på sidan.\n\n- Text klipps inte av eller trunkeras."
+      }
+    },
+    {
+      "id": 38,
+      "sort": null,
+      "topic": "Ångra klick eller tryck",
+      "criteria": "2.5.2 Ångra klick/pekoperation",
+      "category": "Använda mobil",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.5 Input Modalitet",
+      "statement": "Användaren kan alltid ångra ett påbörjat klick eller ett tryck på en touchskärm genom att flytta musmarkören eller att dra fingret bort från ett objekt. En handling genomförs alltså inte direkt när användaren trycker ner en knapp på sitt pekdon eller trycker ner fingret på skärmen. Handlingen slutförs istället när användaren lyfter sitt finger från sitt pekdon eller från skärmen.",
+      "why": "Möjligheten att kunna ångra ett påbörjat klick eller tryck på en touchskärm underlättar för alla användare som har råkat klicka eller trycka på fel objekt.",
+      "role": "Utvecklare",
+      "wcag": "2.5.2 Ångra klick/pekoperation",
+      "howToTest": {
+        "id": 61,
+        "title": "Ångra klick eller tryck",
+        "content": "1. Klicka på ett interaktivt objekt, exempelvis en knapp eller en länk, men håll nere vänster musknapp.\n\n2. Flytta markören bort från det interaktiva objektet. \n\n3. Släpp vänster musknapp.\n\n4. Om testet lyckas ska objektets funktion inte aktiveras. "
+      }
+    },
+    {
+      "id": 39,
+      "sort": null,
+      "topic": "Alternativ till komplexa rörelser",
+      "criteria": "2.5.1 Gester",
+      "category": "Använda mobil",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.5 Input Modalitet",
+      "statement": "Det finns alternativ till komplexa fingerrörelser. Funktioner som kräver flera fingrar eller sveprörelser är också möjliga att utföra på enklare sätt med endast ett finger. \nTill exempel en karta där användaren kan dra ihop/dra isär för att zooma så finns även +/-knappar som användaren kan klicka på.",
+      "why": "Alla har inte möjlighet att använda flera fingrar samtidigt till exempel på grund av motoriska nedsättningar. Komplexa rörelser är även svårt för ovana användare.",
+      "role": "UX",
+      "wcag": "2.5.1 Gester",
+      "howToTest": {
+        "id": 62,
+        "title": "Alternativ till komplexa rörelser",
+        "content": "Kontrollera att funktioner som bygger på gester kan aktiveras på ett alternativt sätt. Exempel är dra-och-släpp, karuseller, zoomfunktioner i kartor och objekt som kan flyttas i sidled för att visa fler funktioner."
+      }
+    },
+    {
+      "id": 40,
+      "sort": null,
+      "topic": "Alternativ till rörelsestyrning",
+      "criteria": "2.5.4 Rörelsestyrning",
+      "category": "Använda mobil",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.5 Input Modalitet",
+      "statement": "Det finns alternativ till styrning med handrörelser som aktiverar funktioner genom att användaren skakar, vrider eller rör vid enheten eller viftar framför den. Funktioner kan aktiveras på något annat sätt, exempelvis genom knappar i gränssnittet.",
+      "why": "Användare kan ha sin enhet monterad på ett stativ eller ha nedsatt motorik vilket hindrar dem från att aktivera funktioner med rörelser.",
+      "role": "UX",
+      "wcag": "2.5.4 Rörelsestyrning",
+      "howToTest": {
+        "id": 63,
+        "title": "Alternativ till rörelsestyrning",
+        "content": "Kontrollera att funktioner som bygger på rörelser kan aktiveras på ett alternativt sätt. Exempel är att användaren kan tilta en mobil enhet för att gå framåt eller bakåt i ett flöde eller att vifta med handen framför enhetens kamera för att navigera i en karta. "
+      }
+    },
+    {
+      "id": 41,
+      "sort": null,
+      "topic": "Inaktivering av rörelsestyrning",
+      "criteria": "2.5.4 Rörelsestyrning",
+      "category": "Använda mobil",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.5 Input Modalitet",
+      "statement": "Styrning med rörelser går att stänga av. Alla funktioner som aktiveras genom att användaren skakar, vrider, rör vid eller viftar framför enheten kan stängas av, för att undvika att användaren råkar aktivera dem av misstag.",
+      "why": "Användare kan ha sin enhet monterad på ett stativ eller ha nedsatt motorik vilket hindrar dem från att aktivera funktioner med rörelser. Styrning som bygger på rörelser kan också vara svåra för användare med ofrivilliga rörelser, spasmer eller ryckningar.",
+      "role": "UX",
+      "wcag": "2.5.4 Rörelsestyrning",
+      "howToTest": {
+        "id": 64,
+        "title": "Inaktivering av rörelsestyrning",
+        "content": "Kontrollera att rörelsestyrning kan stängas av i gränssnittet."
+      }
+    },
+    {
+      "id": 42,
+      "sort": null,
+      "topic": "Kontrast för text",
+      "criteria": "1.4.3 Kontrast Minimum",
+      "category": "Kontraster",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "All text har ett kontrastvärde på minst 4,5:1 mot bakgrunden. Det gäller även text i bilder i den mån det förekommer.",
+      "why": "Tillräckliga kontraster är viktigt för att alla användare ska kunna ta del av information på en webbsida, även användare med nedsatt syn eller kontrastseende.",
+      "role": "AD",
+      "wcag": "1.4.3 Kontrast Minimum",
+      "howToTest": {
+        "id": 30,
+        "title": "Kontrast för text",
+        "content": "##### Text mot bakgrund\n1. Granska all brödtext, text i bilder och text i komponenter på sidan.\n\n2. Kontrollera att text presenteras mot bakgrunder med tydlig kontrast till texten.\n\n3. Om du är osäker, gör följande:\n\t- Identifiera textens färg och färgen på bakgrunden där texten är placerad.\n    - Kontrollera att kontrasten mellan text och bakgrund är minst 4,5:1.\n\n##### Text i komponenter\nOm texten är i en interaktiv komponent:\n1. Kontrollera vilka olika tillstånd som komponenten kan befinna sig i.\n\n2. För varje tillstånd, gör följande:\n\t- Identifiera textens färg\n    - Identifiera bakgrundens färg\n    - Kontrollera att kontrastförhållandet mellan text och bakgrund är minst 4,5:1.\n"
+      }
+    },
+    {
+      "id": 43,
+      "sort": null,
+      "topic": "Kontrast för standardtillstånd i komponenter",
+      "criteria": "1.4.11 Kontrast för annat än text",
+      "category": "Kontraster",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Alla interaktiva komponenter har ett kontrastvärde på minst 3:1 mot bakgrunden eller intilliggande objekt. Komponenter bör också ha tydliga visuella gränser. Kravet på kontraster gäller i komponentens standardtillstånd (default state).",
+      "why": "Tillräckliga kontraster är viktiga för att alla användare ska kunna ta del av information och funktioner på en webbsida, även användare med nedsatt syn eller kontrastseende.",
+      "role": "AD",
+      "wcag": "1.4.11 Kontrast för annat än text",
+      "howToTest": {
+        "id": 31,
+        "title": "Kontrast för standardtillstånd i komponenter",
+        "content": "1. Identifiera sidans alla interaktiva komponenter.\n\n2. Kontrollera att komponenter är placerade mot bakgrunder med tydlig kontrast till komponenternas ramar eller bakgrundsfärg.\n\n3. Om du är osäker, gör följande:\n\n\t- Identifiera färgen i den angränsande bakgrunden.\n    - Identifiera komponentens bakgrundsfärg. Om komponenten har samma bakgrund som den angränsande bakgrunden, identifiera färgen på komponentens ram.\n    - Kontrollera att kontrastförhållandet mellan komponentens ram och den bakgrund där komponenten är placerad, är minst 3:1.\n"
+      }
+    },
+    {
+      "id": 44,
+      "sort": null,
+      "topic": "Kontrast för övriga tillstånd i komponenter",
+      "criteria": "1.4.11 Kontrast för annat än text",
+      "category": "Kontraster",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "När en komponent är i ett annat tillstånd (state) än standardtillståndet (default) har komponenten ett kontrastvärde på minst 3:1 mot mot bakgrunden eller intilliggande objekt. Exempel på tillstånd: focus, hover, selected, pressed, checked, besökt eller obesökt och expanderad eller ihopfälld.",
+      "why": "Tillräckliga kontraster är viktiga för att alla användare ska kunna ta del av information och funktioner på en webbsida, även användare med nedsatt syn eller kontrastseende.",
+      "role": "AD",
+      "wcag": "1.4.11 Kontrast för annat än text",
+      "howToTest": {
+        "id": 32,
+        "title": "Kontrast för övriga tillstånd i komponenter",
+        "content": "1. För alla interaktiva komponenter på sidan:\n\n2. Identifiera vilka tillstånd som komponenten kan befinna sig i.\n\n3. För varje tillstånd:\n\t- Ta reda på vad som utmärker tillståndet och identifiera färgen på komponentens ramar i det aktuella tillståndet.\n\t- Identifiera färgen på den intilliggande bakgrunden, inuti eller utanför komponenten.\n\t- Jämför de bägge färgerna och kontrollera att kontrastförhållandet mellan dem är minst 3:1.\n"
+      }
+    },
+    {
+      "id": 45,
+      "sort": null,
+      "topic": "Färger vid ändring av tillstånd i komponenter",
+      "criteria": "1.4.11 Kontrast för annat än text",
+      "category": "Kontraster",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "När en komponent ändrar tillstånd vid fokus eller hover gäller följande: * Oavsett komponentens tillstånd är alltid kontrastvärdet mellan komponentens ramar och bakgrund minst 3:1, eller 4,5:1 för komponentens text mot bakgrund. * Om endast färg framhäver att en komponent har fokus, är kontrastförhållandet mellan komponentens standardtillstånd och dess fokustillstånd minst 3:1.",
+      "why": "Kontraster ska inte bli sämre när en användare sätter fokus på en komponent eller hovrar över den med musmarkö. Om endast färg framhäver att en komponent har fokus, och har gått från ett tillstånd till ett annat, är kontraster viktiga för att användare med nedsatt syn eller färgseende ska kunna uppfatta att komponenten har fokus.",
+      "role": "AD",
+      "wcag": "1.4.11 Kontrast för annat än text",
+      "howToTest": {
+        "id": 65,
+        "title": "Färger vid ändring av tillstånd i komponenter",
+        "content": "1. Kontrollera vad som sker när en komponent ändrar status, exempelvis från standardtillstånd till fokuserat tillstånd.\n\n2. Om ändringen av komponentens tillstånd framhävs med endast färg, mät komponentens färger före och efter att tillståndet har ändrats.\n\n\t- För att låsa en komponent i ett visst tillstånd, tryck på F12 för att starta webbläsarens utvecklingsverktyg.\n    \n    - Leta reda på komponentens element i dokumentstrukturen, högerklicka på elementet och välj “Force state”.\n\n\t- Välj det tillstånd för vilket du vill låsa komponenten för att mäta dess kontrasterna mot bakgrunden. Exempelvis “:focus” eller “:focus-visible” för att låsa komponenten i det tillstånd då användaren har fokus på komponenten med tabbtangenten. \n\n3. Jämför färgernas kontrastförhållande och kontrollera att det är minst 3:1. \n"
+      }
+    },
+    {
+      "id": 46,
+      "sort": null,
+      "topic": "Kontrast för ikoner",
+      "criteria": "1.4.11 Kontrast för annat än text",
+      "category": "Kontraster",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.4 Urskiljningsbart",
+      "statement": "Oavsett komponentens tillstånd är alltid kontrastvärdet mellan komponentens ramar och bakgrund minst 3:1, eller 4,5:1 för komponentens text mot bakgrund.",
+      "why": "Tillräckliga kontraster är viktiga för att alla användare ska kunna ta del av information och funktioner på en webbsida, även användare med nedsatt syn eller kontrastseende.",
+      "role": "AD",
+      "wcag": "1.4.11 Kontrast för annat än text",
+      "howToTest": {
+        "id": 33,
+        "title": "Kontrast för ikoner",
+        "content": "1. Gå igenom sidan och hitta alla grafiska element.\n\n2. Kontrollera att ikoner presenteras mot bakgrunder med tydliga kontraster till ikonerna.\n\n3. Om du är osäker och för testning av andra grafiska element, gör följande:\n\n\t- Ta reda på vilka delar av det grafiska elementet som behövs för att förstå innehållet i symbolen/det grafiska elementet. För varje del:\n    \n    - Identifiera färgen på det grafiska elementet. (Om elementet består av flera färger, välj den med lägst kontrast.)\n\t\n    - Identifiera färgen på den intilliggande bakgrunden.\n\t\n    - Jämför de bägge färgerna och säkerställ att kontrasten mellan dem är minst 3:1.\n"
+      }
+    },
+    {
+      "id": 47,
+      "sort": null,
+      "topic": "Textalternativ för bilder",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Ikoner & bilder",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "Bilder och ikoner som förmedlar information har ett textalternativ som beskriver bilden eller ikonens budskap. Det textbaserade alternativet ska vara kortfattad och likvärdig med bilden. Det textbaserade alternativet anges i attributet alt.",
+      "why": "Användare med nedsatt syn som navigerar med skärmläsare ska kunna ta del av innehåll som förmedlas med grafik genom att skärmläsaren läser upp det textbaserade alternativet. Användare med både nedsatt syn och hörsel kan läsa textbaserade alternativ i punktskrift.",
+      "role": "UX / Redaktör",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 66,
+        "title": "Textalternativ för bilder",
+        "content": "1. Kontrollera att alla meningsbärande bilder på webbplatsen eller webbsidan har textbaserade alternativ, alltså en förklarande beskrivning i text i attributet alt. Ett sätt att testa alt-texter är att inaktivera visning av bilder i webbläsaren.\n\n\t- Google Chrome: Inställningar > Integritet och säkerhet > Webbplatsinställningar > Bilder > Tillåt inte att webbplatser visar bilder\n    \n    - Microsoft Edge: Inställningar > Cookies och webbplatsbehörigheter > Bilder > Inaktivera Visa alla.\n    \n    - Ett alternativ är att använda ett insticksprogram i webbläsaren för att inaktivera bilder, exempelvis Web Developer. \n\n2. Kontrollera att bildernas alt-texter är begripliga och att de beskriver syftet med bilderna på webbsidan.\n"
+      }
+    },
+    {
+      "id": 48,
+      "sort": null,
+      "topic": "Textalternativ för komplexa bilder",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Ikoner & bilder",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "Komplexa bilder, exempelvis kartor och diagram, har ett textbaserat alternativ i attributet alt som övergripande beskriver innehållet. Det finns även en mer utförlig beskrivning som vanlig text, antingen på samma sida och i direkt anslutning till bilden eller som en länk till en annan sida med en mer utförlig beskrivning i text. Exempel: Graf 4: Grafen visar utvecklingen av nystartade företag under det senaste året med en ökning på 10 procent i jämförelse med föregående år.",
+      "why": "Det kan vara svårt att göra kartor och grafer tillgängliga. Det kan vara bättre att flytta ut informationen från kartan och presentera den som vanlig text och låta kartan eller grafen utgöra ett grafiskt komplement, vilket underlättar för användare med dyslexi.",
+      "role": "UX / AD",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 67,
+        "title": "Textalternativ för komplexa bilder",
+        "content": "1. Kontrollera att alla komplexa meningsbärande bilder på webbplatsen eller webbsidan har textbaserade alternativ, alltså en förklarande beskrivning i text i attributet alt. Ett sätt att testa alt-texter är att inaktivera visning av bilder i webbläsaren.\n\n\t- Google Chrome: Inställningar > Integritet och säkerhet > Webbplatsinställningar > Bilder > Tillåt inte att webbplatser visar bilder.\n\n\t- Microsoft Edge: Inställningar > Cookies och webbplatsbehörigheter > Bilder > Inaktivera Visa alla.\n\n\t- Ett alternativ är att använda ett insticksprogram i webbläsaren för att inaktivera bilder, exempelvis Web Developer.\n\n2. Kontrollera att komplexa bilder som diagram, kartor och organisationsscheman har alt-texter som är begripliga och att de beskriver syftet med bilderna på webbsidan. \n "
+      }
+    },
+    {
+      "id": 49,
+      "sort": null,
+      "topic": "Dölj dekorativa bilder",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Ikoner & bilder",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "Dekorativa eller redundanta bilder och ikoner döljs för hjälpmedel. Med redundanta menas att bilden förmedlar samma information till användaren som en intilliggande text. Dekorativa bilder har tomma alt-attribut vilket får hjälpmedel att ignorera bilderna. Redundanta ikoner som är baserade på vektorgrafik döljs med attributet aria-hidden.",
+      "why": "Onödig och överflödig information är störande och tröttande för användare. Observera att attributet alt alltid måste finnas i img-element, även om bilden är dekorativ. Om alt-attributet saknas, och bilden inte döljs på något annat sätt, kan skärmläsare läsa upp bildens filnamn eller sökväg istället.",
+      "role": "UX / Utvecklare",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 68,
+        "title": "Dölj dekorativa bilder",
+        "content": "1. Kontrollera att alla bilder på webbplatsen eller webbsidan som inte är meningsbärande har tomma alt-attribut, alltså att de inte har en förklarande beskrivning i text i attributet alt. Tomma alt-attribut får hjälpmedel att ignorera bilder som är dekorativa. \n\n\t- Ett sätt att kontrollera hur alt-attributet används är att använda ett insticksprogram i webbläsaren för att inaktivera bilder, exempelvis Web Developer.\n    \n\t- Ett annat sätt är att granska bilderna i webbläsarens utvecklarverktyg. Högerklicka på bilden och välja “Inspektera” i Google Chrome eller “Granska” i Microsoft Edge. \n\n2. Om det finns bilder som helt saknar alt-attribut behöver de img-element som utgör bilderna i koden kompletteras med ett alt-attribut som saknar värde. Exempel: `<img src=”bildkälla” alt=””>`.\n"
+      }
+    },
+    {
+      "id": 50,
+      "sort": null,
+      "topic": "Text som beskriver ljud",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Ljud",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "För alla ljudklipp finns en text som kortfattat beskriver innehållet.",
+      "why": "Användare som navigerar med hjälpmedel ska kunna uppfatta när det finns ett ljudklipp och övergripande förstå vad innehåll i ljudklipp handlar om.",
+      "role": "UX / Copy / Redaktör",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 69,
+        "title": "Text som beskriver ljud",
+        "content": "Kontrollera att det på webbsidor som innehåller ljudklipp finns en text som beskriver innehåll som återges med endast ljud, exempelvis att ett ljudklipp är en podd och vad den handlar om."
+      }
+    },
+    {
+      "id": 51,
+      "sort": null,
+      "topic": "Textalternativ till förinspelat ljud",
+      "criteria": "1.2.1 Enbart ljud och video (förinspelat)",
+      "category": "Ljud",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.2 Texta och tolka ljud och video",
+      "statement": "Förinspelade ljudklipp, exempelvis poddar, har ett textalternativ som innehåller motsvarande information, exempelvis en text med transkribering. Textalternativet finns på samma sida som ljudklippet eller går att nå från en länk i direkt anslutning till ljudklippet.",
+      "why": "Användare med nedsatt hörsel eller som av andra anledningar har svårt att ta till sig information som presenteras med ljud kan istället läsa texten.",
+      "role": "UX / Producent",
+      "wcag": "1.2.1 Enbart ljud och video förinspelat",
+      "howToTest": {
+        "id": 70,
+        "title": "Textalternativ till förinspelat ljud",
+        "content": "1. Kontrollera att det på webbsidor som innehåller ljudklipp, exempelvis poddar, finns en text som utförligt beskriver innehållet i podden.\n\n\tBeskrivningen ska vara tillräckligt utförlig för att en person som inte kan uppfatta ljud ska kunna ta del av innehållet eller budskapet.\n\n2. Transkribering av podden är exempelvis ett bra alternativ.\n"
+      }
+    },
+    {
+      "id": 52,
+      "sort": null,
+      "topic": "Text som beskriver video",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Video",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "För alla videoklipp eller filmer finns en text som kortfattat beskriver innehållet.",
+      "why": "Användare som navigerar med hjälpmedel ska kunna uppfatta när det finns videoklipp och övergripande förstå vad innehåll i video handlar om.",
+      "role": "UX / Copy / Redaktör",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 71,
+        "title": "Text som beskriver video",
+        "content": "Kontrollera att det på webbsidor som innehåller videoklipp finns en text som beskriver innehåll som återges med endast video, exempelvis att innehållet är ett videoklipp och vad det handlar om."
+      }
+    },
+    {
+      "id": 53,
+      "sort": null,
+      "topic": "Textalternativ till förinspelad video",
+      "criteria": "1.2.1 Enbart ljud och video (förinspelat)",
+      "category": "Video",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.2 Texta och tolka ljud och video",
+      "statement": "Förinspelad video med eller utan ljud har ett textalternativ som innehåller motsvarande information, exempelvis en text med transkribering. Textalternativet finns på samma sida som videoklippet eller filmen eller går att nå från en länk i direkt anslutning till videoklippet.",
+      "why": "Användare med nedsatt syn eller som av andra anledningar har svårt att ta till sig information som presenteras visuellt i videoklipp eller filmer kan istället läsa texten.",
+      "role": "UX / Producent",
+      "wcag": "1.2.1 Enbart ljud och video förinspelat",
+      "howToTest": {
+        "id": 72,
+        "title": "Textalternativ till förinspelad video",
+        "content": "1. Kontrollera att det på webbsidor som innehåller förinspelad video med ljud, exempelvis filmer, finns en text som utförligt beskriver innehållet i filmen.\n\n\tBeskrivningen ska vara tillräckligt utförlig för att en person som inte kan uppfatta ljud eller video ska kunna ta del av innehållet eller budskapet.\n\n2. Transkribering av filmer är exempelvis ett bra alternativ.\n"
+      }
+    },
+    {
+      "id": 54,
+      "sort": null,
+      "topic": "Undertexter till video",
+      "criteria": "1.2.2 Texta rörligt material",
+      "category": "Video",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.2 Texta och tolka ljud och video",
+      "statement": "All förinspelad video har undertexter, så kallade captions. Undertexterna beskriver både tal och annat ljud som behövs för att förstå innehållet som exempelvis ljudeffekter, information om bakgrundsmusik, skratt och vem som pratar. Denna punkt gäller videor som publicerats efter 23 september 2020.",
+      "why": "Användare med nedsatt hörsel kan med hjälp av undertexter uppfatta innehåll som presenteras med ljud i videoklipp och filmer. Undertexter är även bra för användare med svenska som andraspråk. De är också bra för de som befinner sig i en miljö där de inte kan ha ljud aktiverat, exempelvis i kollektivtrafiken eller för att de saknar hörlurar.",
+      "role": "UX / Producent",
+      "wcag": "1.2.2 Texta rörligt material",
+      "howToTest": {
+        "id": 73,
+        "title": "Undertexter till video",
+        "content": "- Kontrollera att det på webbsidor som innehåller video, exempelvis filmer, för varje film finns undertexter som användaren själv kan aktivera.\n\n- I Arbetsförmedlingens mediespelare Screen9 finns undertexter under menyn “Textningsinställningar” i spelarens högra nedre hörn.\n\n- Menyn beskrivs med en ikon av en pratbubbla med tre små streck.\n\n- Kontrollera att undertexterna är synkroniserade med ljudet och att de stämmer med filmens innehåll."
+      }
+    },
+    {
+      "id": 55,
+      "sort": null,
+      "topic": "Syntolkning till video",
+      "criteria": "1.2.5 Syntolkning",
+      "category": "Video",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.2 Texta och tolka ljud och video",
+      "statement": "All förinspelad video har ett extra ljudspår som förklarar det visuella innehållet, så kallad syntolkning. Denna punkt gäller videor som publicerats efter 23 september 2020.",
+      "why": "Användare med nedsatt syn kan med hjälp av syntolkning uppfatta innehåll som presenteras visuellt i videoklipp eller filmer.",
+      "role": "UX / Producent",
+      "wcag": "1.2.5 Syntolkning",
+      "howToTest": {
+        "id": 74,
+        "title": "Syntolkning till video",
+        "content": "Kontrollera följande: \n- Att det på webbsidor som innehåller video, exempelvis filmer, för varje film finns syntolkning av innehåll som presenteras visuellt i filmen.\n\n- Att användaren själv kan aktivera och avaktivera syntolkning. I de flesta mediespelare finns syntolkning i en separat meny vid spelarens övriga kontroller. \n\n- Att syntolkningen är synkroniserad med det visuella innehållet och att beskrivningarna stämmer med filmens innehåll.\n"
+      }
+    },
+    {
+      "id": 56,
+      "sort": null,
+      "topic": "Semantiska länkar",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Komponenter - Länkar",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Alla länkar är uppmärkta med elementet <a> och har ett href-attribut. En länk förflyttar användaren till en ny plats på samma sida eller till en annan sida.",
+      "why": "Användare som navigerar med skärmläsare kan samla alla länkar på en webbsida i en länklista. Utifrån länklistan kan användaren navigera mellan länkar och aktivera länkar. De behöver alltid leda någonstans för att vara meningsfulla för användarna.",
+      "role": "Utvecklare",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 75,
+        "title": "Semantiska länkar",
+        "content": "##### Webbläsarens utvecklarverktyg\n1. Öppna webbläsarens utvecklarverktyg med F12. Välj fliken “Elements” om den inte redan är vald. \n\n2. Sätt fokus i den del av webbläsarfönstret där webbsidan visas som den är tänkt att möta användarna, alltså inte i kodvyn.\n\n3. Använd tabbtangenten för att navigera mellan länkar på webbsidan.\n\n4. Vid fokus på varje länk, högerklicka på länken och välj “Inspektera” i Chrome eller “Granska” i Edge. Kodvyn kommer då att skrolla fram till den aktuella länken så att du ser den i koden.\n\n5. Kontrollera att länken utgörs av ett `<a>`-element.\n\n##### Plugin:et Web Developer för Chrome\n1. I plugin:et Web Developer, välja fliken “Information” och välj sedan “Display Link Details”.\n\n2. Verktyget visar då href-attributen i samtliga länkar på sidan så att de kan granskas visuellt. \n\n3. Högerklicka på den aktuella länken och välj “Inspektera”.\n\n4. Kontrollera att länken utgörs av ett `<a>`-element.\n\n##### Om länkar inte går att nå med tabbtangenten\n1. Högerklicka på en länk som inte går att nå med tabbtangenten.\n\n2. Välj “Inspektera” i Chrome eller “Granska” i Edge.\n\n3. Kontrollera hur länken ser ut i koden. Om den inte är kodad med ett `<a>`-element kan den behövas kodas om."
+      }
+    },
+    {
+      "id": 57,
+      "sort": null,
+      "topic": "Synliga länktexter",
+      "criteria": "2.4.4 / 2.4.9 Länksyfte",
+      "category": "Komponenter - Länkar",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Länkar har synliga länktexter. Undantag är länkar i form av logotyper som exempelvis leder till webbplatsens startsida.",
+      "why": "Det behöver vara tydligt för användare vart en länk leder. Länkar utan text försvårar för alla användare.",
+      "role": "UX / Copy",
+      "wcag": "2.4.4 Länkars syfte (i sammanhang) / 2.4.9 Länkars syfte (endast länk)",
+      "howToTest": {
+        "id": 27,
+        "title": "Synliga länktexter",
+        "content": "1. Gå igenom alla länkar på sidan, inkluderat sådana som leder till andra sidor på samma webbplats, till andra delar av samma sida och länkar till andra webbplatser eller dokument.\n\n2. Kontrollera att länkarna har synliga länktexter.\n"
+      }
+    },
+    {
+      "id": 58,
+      "sort": null,
+      "topic": "Tydliga länktexter",
+      "criteria": "2.4.4 / 2.4.9 Länksyfte",
+      "category": "Komponenter - Länkar",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Länktexter är begripliga och kan tolkas även om länken tas ur sitt sammanhang. Länktexter som “Läs mer” och “Klicka här” används inte. I flöden är det ok att använda länktexter som \"Tillbaka\" men helst ska det framgå vad användaren går tillbaka till.. ",
+      "why": "Användare som navigerar med skärmläsare kan samla webbsidans alla länkar i en länklista. Därför behöver länktexter vara begripliga i sig själva för att användaren ska förstå dem i en samlad lista. Sammanhanget ska inte vara avgörande. När det gäller länkar går myndigheten lite längre än vad kravet gäller eftersom länkars mål ska vara logiska både i och utanför sitt sammanhang.",
+      "role": "UX / Copy",
+      "wcag": "2.4.4 Länkars syfte (i sammanhang) / 2.4.9 Länkars syfte (endast länk)",
+      "howToTest": {
+        "id": 28,
+        "title": "Tydliga länktexter",
+        "content": "1. Gå igenom alla länkar på sidan, inkluderat sådana som leder till andra sidor på samma webbplats, till andra delar av samma sida och länkar till andra webbplatser eller dokument.\n\n2. Kontrollera att alla länkar har tydliga länktexter som är begripliga utanför sitt sammanhang, alltså förklarande i sig själva.\n\nFör att hitta alla länkar på sidan kan du använda dig av en skärmläsare, exempelvis Jaws eller NVDA för Windows eller Voice Over för MacOS eller iOS.\n\nTesta gärna även med användare ur olika målgrupper för att säkerställa att länktexter är tydliga och lätta att förstå.\n"
+      }
+    },
+    {
+      "id": 59,
+      "sort": null,
+      "topic": "Länktexter för externa webbplatser och dokument",
+      "criteria": "2.4.4 / 2.4.9 Länksyfte",
+      "category": "Komponenter - Länkar",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Om en länk leder användaren till en extern sida utanför myndighetens webbplats, eller till ett dokument, framgår det tydligt av länkens utformning, både visuellt och som ett alternativ i text.",
+      "why": "Det kan av användare upplevas som oväntat att länkar leder till andra webbplatser eller till dokument som laddas ner. Sådan information ska därför framgå av länkens utformning för att användaren ska veta vad den har att vänta sig.",
+      "role": "UX / Copy",
+      "wcag": "2.4.4 Länkars syfte (i sammanhang) / 2.4.9 Länkars syfte (endast länk)",
+      "howToTest": {
+        "id": 29,
+        "title": "Länktexter för externa webbplatser och dokument",
+        "content": "1. Gå igenom alla länkar på sidan som leder till externa sidor utanför Arbetsförmedlingen.\n\n2. Kontrollera att det är tydligt för användaren att länken leder till en extern sida med en annan avsändare än Arbetsförmedlingen.\n\n3. Gå igenom alla länkar på sidan som leder till dokument.\n\n4. Kontrollera att länktexten beskriver vilken typ av dokument det är och dokumentets storlek.\n\n5. Kontrollera att det är tydligt när länkar och dokumentet öppnas i nya flikar eller om dokument laddas ner. Om ikoner används för att beskriva det, finns motsvarande information som text i koden för användare med hjälpmedel. "
+      }
+    },
+    {
+      "id": 60,
+      "sort": null,
+      "topic": "Namn för länkar utan text",
+      "criteria": "4.1.2 Namn, roll, värde",
+      "category": "Komponenter - Länkar",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Om en länk endast utgörs av en bild, exempelvis en logotyp, ska bildens textalternativ beskriva såväl bilden som länkens mål. Exempel: alt=\"Arbetsförmedlingens logotyp. Till startsidan.\".",
+      "why": "Länkar utan text ska generellt undvikas eftersom de är svåra att tolka. Att klicka på webbplatsens logotyp för att komma till startsidan är ett välkänt designmönster.",
+      "role": "UX / Copy",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 77,
+        "title": "Namn för länkar utan text",
+        "content": "1. Gå igenom sidans alla länkar som inte har någon synlig etikett.\n\n2. Kontrollera att länkar som saknar synliga etiketter utgör ett godkänt undantag från principen att alla länkar ska ha synlig text. Det kan exempelvis vara länkar i ett gränssnitt för smala skärmar.\n\n3. Kontrollera att länkar utan synliga etiketter istället har ett namn som hjälpmedel kan komma åt. Använd något av följande tillvägagångssätt:\n\t\n    - Granska länkarna i koden. Öppna webbläsarens utvecklingsverktyg genom att trycka på F12 eller \t\thögerklicka på en länk utan en synlig etikett och välj “Inspektera” i Chrome eller “Granska” i Edge. \t\tKontrollera att elementet för länken innehåller attributet aria-label med ett värde som beskriver \t\t\t\tlänkens mål.<br>\n    \t\n        Du kan också titta i utvecklingsverktygets tillgänglighetsträd. Välj “Accessibility” i den högra \t\t\t\t\tkolumnen. Under “Computed properties” hittar du egenskapen “Name”. Där ska du kunna se ett \t\t\t\tvärde i attributet aria-label.\n\t\n    - Testa med skärmläsare. Sätt fokus på en länk och kontrollera att skärmläsaren läser upp länkens \t\tmål."
+      }
+    },
+    {
+      "id": 61,
+      "sort": null,
+      "topic": "Semantiska knappar",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Komponenter - Knappar",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Knappar är uppmärkta med elementet <button>.",
+      "why": "Användare som navigerar med skärmläsare behöver få information om att ett objekt är en knapp och hur användaren kan interagera med objektet. Genom att använda standardkomponenter inkluderar vi inbyggd funktionalitet i objekt, vilket bidrar till minskad utvecklingstid för våra team.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 76,
+        "title": "Semantiska knappar",
+        "content": "##### Webbläsarens utvecklarverktyg\n1. Öppna webbläsarens utvecklarverktyg med F12. Välj fliken “Elements” om den inte redan är vald. \n\n2. Sätt fokus i den del av webbläsarfönstret där webbsidan visas som den är tänkt att möta användarna, alltså inte i kodvyn.\n\n3. Använd tabbtangenten för att navigera mellan knappar på webbsidan.\n\n4. Vid fokus på varje knapp, högerklicka på knappen och välj “Inspektera” i Chrome eller “Granska” i Edge. Kodvyn kommer då att skrolla fram till den aktuella knappen så att du ser den i koden.\n\n5. Kontrollera att knappen utgörs av ett `<button>`-element.\n\n##### Plugin:et Web Developer för Chrome\n1. I plugin:et Web Developer, välja fliken “Forms” och välj sedan “Display Form Details”.\n\n2. Verktyget visar då information om formulärobjekt på sidan så att de kan granskas visuellt. \n\n3. Kontrollera att formulärobjekt som ser ut och fungerar som knappar utgörs av `<button>`-element.\n\n##### Om länkar inte går att nå med tabbtangenten\n1. Högerklicka på en knapp som inte går att nå med tabbtangenten.\n\n2. Välj “Inspektera” i Chrome eller “Granska” i Edge.\n\n3. Kontrollera hur knappen ser ut i koden. Om den inte är kodad med ett `<button>`-element kan den behöva kodas om."
+      }
+    },
+    {
+      "id": 62,
+      "sort": null,
+      "topic": "Knappar med synlig text",
+      "criteria": "4.1.2 Namn, roll, värde",
+      "category": "Komponenter - Knappar",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Knappar har en synlig text som beskriver knappens syfte. Undantag är knappar i gränssnitt som optimeras för mobila plattformar om utrymmet är begränsat och det finns tydliga ikoner.",
+      "why": "Knappar utan text försvårar för alla användare att uppfatta knapparnas syfte.",
+      "role": "UX / Copy",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 34,
+        "title": "Knappar med synlig text",
+        "content": "1. Gå igenom sidans alla knappar som användaren kan interagera med.\n\n2. Kontrollera att knappar har synliga etiketter. Testa gärna med användare för att försäkra er om att beskrivningar av knappar är tydliga.\n\n3. Om knappar inte har en synliga etiketter, försök i första hand att lägga till en synlig etikett på knapparna.\n\n4. Om det inte är möjligt att lägga till synliga etiketter, kontrollera att ikoner i knappar är tydliga. Testa med användare för att försäkra er om att knapparnas funktion beskrivs tydligt även utan en etikett."
+      }
+    },
+    {
+      "id": 63,
+      "sort": null,
+      "topic": "Namn för knappar utan text",
+      "criteria": "4.1.2 Namn, roll, värde",
+      "category": "Komponenter - Knappar",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Om det finns knappar som saknar en synlig knapptext beskrivs knappars funktion med text i ett attribut som hjälpmedel kommer åt. Exempel: aria-label=\"Sök på webbplatsen\".",
+      "why": "Användare som navigerar med skärmläsare och inte uppfattar knappar visuellt, behöver kunna uppfatta vad knappar har för funktion.",
+      "role": "Copy / UX",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 35,
+        "title": "Namn för knappar utan synlig text",
+        "content": "1. Gå igenom sidans alla knappar som inte har någon synlig etikett.\n\n2. Kontrollera att knappar som saknar synliga etiketter utgör ett godkänt undantag från principen att alla knappar ska ha synlig text. Det kan exempelvis vara knappar i ett gränssnitt för smala skärmar.\n\n3. Kontrollera att knappar utan synliga etiketter istället har ett namn som hjälpmedel kan komma åt. Använd något av följande tillvägagångssätt:\n\n\t- Granska koden. Öppna webbläsarens utvecklingsverktyg genom att trycka på F12 eller högerklicka på en knapp som utan en synlig etikett och välj “Inspektera”. Kontrollera att elementet för knappen innehåller attributet aria-label med ett värde som beskriver knappens funktion.<br><br>\n    \tDu kan också titta i utvecklingsverktygets tillgänglighetsträd. Välj “Accessibility” i den högra kolumnen. Under “Computed properties” hittar du egenskapen “Name”. Där ska du kunna se värdet som sätts i attributet aria-label.\n\n\t- Testa med skärmläsare. Sätt fokus på komponenten och kontrollera att skärmläsaren läser upp knappens funktion.\n"
+      }
+    },
+    {
+      "id": 64,
+      "sort": null,
+      "topic": "Semantiska listor",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Komponenter - Listor",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Listor märks upp med elementen <ul> eller <ol>. Listornas innehåll märks upp med elementet (li). För ordnade eller numrerade listor används elementet <ol> för att beskriva numrerade steg (1, 2, 3…) och för oordnade eller onumrerade listor används elementet <ul> för att beskriva punktlistor.",
+      "why": "Listor behöver vara rätt uppmärkta för att hjälpmedelsanvändare ska kunna tolka dem. Om en lista endast är visuellt utformad är det svårt användare att navigera i dem och att förstå innehållets inbördes relationer.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 83,
+        "title": "Semantiska listor",
+        "content": "##### Granska i webbläsarens utvecklarverktyg\n1. Gå igenom numrerade och onumrerade listor i den aktuella tjänsten eller webbsidan. \n\n2. Högerklicka på det första objektet i listan och välj “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Kontrollera att varje objekt i varje lista omsluts av ett li-element.\n\n4. Kontrollera också att numrerade listor inleds med elementet ol och att onumrerade listor inleds med elementet ul.\n\n##### Testa med skärmläsare\n1. Starta en skärmläsare, exempelvis skärmläsaren NVDA\n\n2. Använd tangenten pil ner för att flytta skärmläsarens fokus radvis nedåt på sidan. Navigera fram till sidans första numrerade eller onumrerade lista.\n\n3. När fokus flyttas in i listan, kontrollera att skärmläsaren annonserar en lista. Skärmläsaren läser då upp något i stil med “lista” följt av antalet listobjekt som listan innehåller.\n\n4. När fokus flyttas ut ur listan är det förväntade att skärmläsaren annonserar att listan är slut.\n"
+      }
+    },
+    {
+      "id": 65,
+      "sort": null,
+      "topic": "Semantiska tabeller",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Komponenter - Tabeller",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Tabeller används endast för strukturerad data och är korrekt uppmärkta med elementen <table>, <tr> för tabellrad, <th> för tabellhuvud och <td> för dataceller.",
+      "why": "Tabeller behöver vara rätt uppmärkta så att användare med hjälpmedel kan navigera i dem och få dem upplästa på ett korrekt och strukturerat sätt.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 85,
+        "title": "Semantiska taballer",
+        "content": "##### Granska i webbläsarens utvecklingsverktyg\n1. Gå igenom tabeller i den aktuella tjänsten eller webbsidan. \n\n2. Högerklicka i den första cellen och välj “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Kontrollera att hela tabellen omsluts av ett table-element.\n\n4. Kontrollera också att tabellen har tabellrubriker som omsluts av elementet th.\n\n##### Testa med skärmläsare\n1. Starta en skärmläsare, exempelvis skärmläsaren NVDA\n\n2. Använd tangenten pil ner för att flytta skärmläsarens fokus radvis nedåt på sidan. Navigera fram till en tabell på den aktuella webbsidan.\n\n3. När fokus flyttas in i tabellen, kontrollera att skärmläsaren annonserar en tabell. Skärmläsaren läser då upp “tabell”. Vissa skärmläsare läser också upp hur många rader och kolumner som tabellen har. \n\n4. När fokus flyttas ut ur tabellen är det förväntade att skärmläsaren annonserar att tabellen är slut.\n\n"
+      }
+    },
+    {
+      "id": 66,
+      "sort": null,
+      "topic": "Tabeller har överskrifter",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Komponenter - Tabeller",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Tabeller har en överskrift i elementet <caption> som kort beskriver vilken information tabellen innehåller.",
+      "why": "Elementet <caption> hjälper användare som navigerar med hjälpmedel att navigera direkt till tabeller, identifiera dess innehåll och att ta ställning till om innehållet är av intresse.",
+      "role": "UX",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 86,
+        "title": "Tabeller har överskrifter",
+        "content": "##### Granska i webbläsarens utvecklingsverktyg\n1. Gå igenom tabeller i den aktuella tjänsten eller webbsidan. \n\n2. Högerklicka i den första cellen och välj “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Kontrollera att det första elementet efter elementet table är ett caption-element och att det innehåller en beskrivande rubrik till tabellen.\n\n##### Testa med skärmläsare\n1. Starta en skärmläsare, exempelvis skärmläsaren NVDA\n\n2. Använd tangenten pil ner för att flytta skärmläsarens fokus radvis nedåt på sidan. Navigera fram till en tabell på den aktuella webbsidan.\n\n3. När fokus flyttas in i tabellen, kontrollera att skärmläsaren annonserar en tabell och tabellens överskrift. Skärmläsaren läser då upp “tabell” följt av innehållet i caption-elementet.\n"
+      }
+    },
+    {
+      "id": 67,
+      "sort": null,
+      "topic": "Namn för iframes",
+      "criteria": "4.1.2 Namn, roll, värde",
+      "category": "Komponenter - Iframes",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Om iframes används beskrivs dem med text i attributet title.",
+      "why": "Användare som navigerar med skärmläsare använder beskrivningen i title-attributet för att uppfatta vad iframe-element innehåller.",
+      "role": "Utvecklare",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 87,
+        "title": "Namn för iframes",
+        "content": "##### Granska i webbläsarens utvecklarverktyg\n1. Öppna en webbsida eller en webbtjänst som innehåller en eller flera ramar.\n\n2. Högerklicka någonstans i det innehåll som läses in från en annan sida och som omsluts av elementet iframe. Klicka på “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Skrolla uppåt i dokumentstrukturen tills du hittar ett iframe-element.\n\n4. Kontrollera att iframe-elementet har en tydlig beskrivning av ramens innehåll i attributet title.\n\n##### Testa med skärmläsare\n1. Starta en skärmläsare, exempelvis skärmläsaren NVDA.\n\n2. Använd tabbtangenten för att navigera till ett objekt som ligger så nära innehållet i en ram som möjligt men inte inuti ramen, exempelvis till en länk eller ett formulärfält.\n\n3. Fortsätt att navigera nedåt i tjänsten eller webbsidan med pil ner för att nå innehållet i ramen.\n\n4. Kontrollera att skärmläsaren läser upp beskrivningen i iframe-elementets title-attribut när fokus flyttas in till innehållet i ramen.\n"
+      }
+    },
+    {
+      "id": 68,
+      "sort": null,
+      "topic": "Namn innehåller synlig text",
+      "criteria": "2.5.3 Etikett i namn",
+      "category": "Komponenter",
+      "level": "A",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.5 Input Modalitet",
+      "statement": "Den synliga texten som beskriver en komponent överensstämmer med det namn som komponenten har i koden och som hjälpmedel kommer åt. I fall då dessa namn inte kan ha samma innehåll börjar namnet i koden med den synliga texten.",
+      "why": "Användare som navigerar med röststyrning kan interagera med knappar och funktioner genom att exempelvis säga 'Klicka på Sök'. Om den synliga beskrivningen av en knapp inte motsvarar knappens beskrivning i koden fungerar inte kommandon med röststyrning.",
+      "role": "UX / Copy",
+      "wcag": "2.5.3 Etikett i namn",
+      "howToTest": {
+        "id": 36,
+        "title": "Namn innehåller synlig text",
+        "content": "1. Gå igenom sidans alla komponenter som har synliga etiketter.\n\n2. Jämför komponenternas synliga etiketter med de namn som komponenterna har i koden. Kontrollera att komponenternas namn i koden är likställt med eller inleds med komponenternas synliga etiketter. Använd något av följande tillvägagångssätt:\n\t- Granska knapparna i koden. Öppna webbläsarens utvecklingsverktyg genom att trycka på F12 eller högerklicka på en knapp och välj “Inspektera”. Kontrollera att knappelementet har attributet aria-label som beskriver knappens funktion.<br><br>\n\t\tDu kan också titta i utvecklingsverktygets tillgänglighetsträd. Välj Accessibility i den högra kolumnen. Under “Computed properties” hittar du egenskapen “Name”. Där ska du kunna se värdet som sätts i attributet aria-label.\n\n\t- Testa med skärmläsare. Sätt fokus på komponenten. Kontrollera att den beskrivning som skärmläsaren läser upp inleds på samma på sätt som knappens synliga etikett.\n"
+      }
+    },
+    {
+      "id": 69,
+      "sort": null,
+      "topic": "Grupper av radioknappar eller kryssrutor",
+      "criteria": "1.3.1 Information och relationer",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Formulärobjekt som hör ihop grupperas med elementet <fieldset>. Varje <fieldset> inleds med elementet <legend> som beskriver gruppens syfte. Elementen <fieldset> och <legend> används alltid i grupper med radioknappar och kryssrutor.",
+      "why": "Elementen <fieldset> och <legend> hjälper användare att förstå hur formulärobjekt hör ihop. De är särskilt viktiga i grupper av radioknappar och kryssrutor eftersom de hjälper användare att förstå vad som efterfrågas och vilka olika alternativ som användaren kan välja mellan. Elementen kan även användas för att gruppera inmatningsfält i långa formulär, exempelvis för att gruppera fält för hem- eller företagsadresser.",
+      "role": "UX / Utvecklare",
+      "wcag": "1.3.1 Information och relationer",
+      "howToTest": {
+        "id": 80,
+        "title": "Grupper av radioknappar eller kryssrutor",
+        "content": "##### Granska kodstruktur för grupperade formulärobjekt #####\n1. Gå igenom sidans alla formulärobjekt som är grupperade, det vill säga komponenter i formulär som hör ihop utifrån placering och struktur. Exempel är radioknappar och kryssrutor.\n\n2. Högerklicka på det första objektet i grupperingen och välj “Inspektera” i Google Chrome eller “Granska” i Microsoft Edge.\n\n3. I webbläsarens utvecklarverktyg, granska de element som omsluter formulärobjekt som hör ihop, exempelvis radioknappar och kryssrutor.\n\n4. Kontrollera att grupperingar av formulärobjekt omsluts av elementet fieldset och att det elementet inleds med ett legend-element som beskriver gruppen.\n\n##### Testa med skärmläsare #####\n1. Starta en skärmläsare på din dator, exempelvis skärmläsaren NVDA.\n\n2. Navigera radvis med pil ner på den aktuella sidan och navigera fram till en grupp av formulär.\n\n3. Kontrollera att skärmläsaren läser “gruppering” följt av texten i legend-elementet när fokus flyttas in i grupperingen.\n\n4. Navigera i grupperingen med pil ner och förbi det sista objektet för att lämna grupperingen.\n\n5. Kontrollera att skärmläsaren läser “lämnar gruppering” när fokus flyttas från det sista formulärobjektet."
+      }
+    },
+    {
+      "id": 70,
+      "sort": null,
+      "topic": "Autoifyllnad i inmatningsfält",
+      "criteria": "1.3.5 Ange standardsyfte",
+      "category": "Formulär",
+      "level": "AA",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "Inmatningsfält för personlig information kan kompletteras automatiskt för att hjälpa användaren att fylla i fälten snabbare. Fält som kan fyllas i automatiskt är uppmärkta med attributet autocomplete med ett värde som anger vilken typ av information det handlar om. Exempel på information som lämpar sig bra för automatisk ifyllnad är namn, telefonnummer, hemadress och e-postadress.",
+      "why": "Automatisk ifyllnad av formulär underlättar för användare med kognitiva svårigheter, särskilt användare med dyslexi men även utmattningssyndrom.",
+      "role": "UX / Utvecklare",
+      "wcag": "1.3.5 Ange standardsyfte",
+      "howToTest": {
+        "id": 88,
+        "title": "Automatisk ifyllnad i inmatningsfält",
+        "content": "1. Gå igenom alla formulär i tjänsten eller webbsidan.\n\n2. Högerklicka på ett formulärfält och klicka på “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Kontrollera att samtliga formulärfält där användaren kan mata in personlig information har attributet autocomplete med ett värde som motsvarar det innehåll som användaren kan ange. Exempel är värdet “email” i attributet autocomplete för fält där användaren kan ange en e-postadress. Giltiga värden för attributet autocomplete finns under kapitel 7 i Web Content Accessibility Guidelines (WCAG) 2.1. \n\n4. Kontrollera också att fält för information som exempelvis e-postadress, telefonnummer, webbadress eller lösenord har en typ för inmatning som motsvarar den information som användaren kan ange. Det anges med attributet type.\n"
+      }
+    },
+    {
+      "id": 71,
+      "sort": null,
+      "topic": "Synliga etiketter",
+      "criteria": "3.3.2 Etiketter och instruktioner",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Alla formulärobjekt har synliga etiketter i elementet <label>. Placeholdertexter är inte tillräckliga för att beskriva formulärobjekt eftersom de försvinner när användaren börjar skriva i ett fält.",
+      "why": "Synliga etiketter underlättar för alla användare men är särskilt viktigt för användare med kognitiva funktionsnedsättningar, nedsatt minnesförmåga eller inlärningssvårigheter.",
+      "role": "UX",
+      "wcag": "3.3.2 Etiketter och instruktioner",
+      "howToTest": {
+        "id": 89,
+        "title": "Synliga etiketter",
+        "content": "1. Gå igenom och granska alla formulärfält på den aktuella tjänsten eller webbsidan.\n\n2. Kontrollera att samtliga formulärfält har synliga etiketter som beskriver syftet med varje formulärfält. Etiketter ska inte utgöras av placeholder-texter inuti fälten som försvinner när fältet får fokus.\n"
+      }
+    },
+    {
+      "id": 72,
+      "sort": null,
+      "topic": "Placering av etikett",
+      "criteria": "3.3.2 Etiketter och instruktioner",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Etiketter är placerade så att det är tydligt vilket fält som etiketten beskriver.",
+      "why": "När etiketter är placerade där användaren förväntar sig att de ska vara blir det lättare att förstå formulär och att hitta fälten. Det gör det även lättare för användare som behöver förstora innehållet i formulär.",
+      "role": "UX / AD",
+      "wcag": "3.3.2 Etiketter och instruktioner",
+      "howToTest": {
+        "id": 82,
+        "title": "Placering av etikett",
+        "content": "1. Gå igenom alla formulär på den aktuella sidan eller i den aktuella tjänsten.\n\n2. Kontrollera att samtliga formulärobjekt har etiketter.\n\n3. Kontrollera att formulärobjektens etiketter är placerade i direkt anslutning till formulärobjekten så att det är lätta att uppfatta och att de inte kan förväxlas med andra fält."
+      }
+    },
+    {
+      "id": 73,
+      "sort": null,
+      "topic": "Etikett är kopplat till fält",
+      "criteria": "1.3.1 Information & Relationer",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.3 Innehåll kan presenteras på olika sätt",
+      "statement": "En etikett i elementet <label> associeras till det fält som etiketten beskriver. Att klicka på etiketten ger samma resultat som att klicka i eller på formulärobjektet. Exempel är att klicka på etiketten till höger om en kryssruta också markerar själva kryssrutan.",
+      "why": "Användare med uppläsande hjälpmedel uppfattar vilken etikett som hör ihop med vilket fält. Klickytor blir dessutom större, vilket hjälper användare som på grund av nedsatt motorik har svårt att klicka direkt på en kryssruta, radioknapp eller i ett fält.",
+      "role": "Utvecklare",
+      "wcag": "1.3.1 Information & Relationer",
+      "howToTest": {
+        "id": 90,
+        "title": "Etikett är kopplad till fält",
+        "content": "##### Granska i webbläsarens utvecklarverktyg\n1. Gå igenom alla formulärfält i tjänsten eller webbplatsen.\n\n2. Högerklicka på ett formulärfält och klicka på “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Kontrollera att det finns en association mellan det aktuella formulärfältet och den etikett som beskriver fältets syfte. Om etiketten exempelvis omsluts av ett label-element ska det ha ett for-attribut som refererar till det aktuella formulärfältets id-värde.\n\n##### Testa med skärmläsare\n1. Starta en skärmläsare, exempelvis skärmläsaren NVDA.\n\n2. Använd tabbtangenten för att navigera mellan formulärfält i tjänsten eller webbplatsen.\n\n3. Kontrollera att skärmläsaren läser upp den etikett som beskriver syftet med ett formulärfält. Den information som skärmläsaren läser upp ska ha samma innehåll som fältets synliga etikett.\n\n4. Om en skärmläsare inte läser upp formulärfältets etikett kan det bero på att det saknas en association mellan etiketten och det aktuella fältet. Om det label-element som omsluter formulärfältets etikett saknar ett for-attribut som refererar till formulärfältets id-värde finns ingen association mellan etiketten och fältet.\n\n"
+      }
+    },
+    {
+      "id": 74,
+      "sort": null,
+      "topic": "Obligatoriska fält",
+      "criteria": "3.3.2 Etiketter och instruktioner",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "I formulär framgår det tydligt vilka fält som är obligatoriska, genom att det står att fält är obligatoriska eller frivilliga i fältens etiketter. Obligatoriska fält har även attributet \"required\".",
+      "why": "Tydlig information om obligatoriska eller frivilliga fält hjälper användaren att uppfatta vilka fält som behöver fyllas i för att komma vidare.",
+      "role": "UX",
+      "wcag": "3.3.2 Etiketter och instruktioner",
+      "howToTest": {
+        "id": 91,
+        "title": "Obligatoriska fält",
+        "content": "##### Granska i webbläsarens utvecklarverktyg\n1. Gå igenom obligatoriska formulärfält i tjänsten eller webbplatsen.\n\n2. Högerklicka på ett obligatoriskt fält och klicka på “Granska” i Microsoft Edge eller “Inspektera” i Google Chrome.\n\n3. Kontrollera att obligatoriska fält märks upp med attributet required. Attributet ska inte ha något värde. \n\n4. Kontrollera också att fält som är uppmärkta med attributet required också visuellt beskrivs som obligatoriska.\n\n##### Testa med skärmläsare\n1. Starta en skärmläsare, exempelvis skärmläsaren NVDA.\n\n2. Använd tabbtangenten för att navigera mellan formulärfält i tjänsten eller webbplatsen.\n\n3. Navigera fram till ett obligatoriskt fält.\n\n4. Kontrollera att skärmläsaren läser upp att fältet är obligatoriskt. Det annonseras genom att skärmläsaren beskriver formulärfältet med “krävs” efter annan information om det aktuella fältet.\n\n5. Kontrollera också att information som beskriver att formulärfältet är obligatoriskt och som presenteras visuellt, också läses upp av skärmläsaren. \n\n\tOm en skärmläsare inte läser upp visuellt presenterad information om att ett formulärfält är obligatoriskt kan det bero på att det saknas en association mellan informationen och det aktuella fältet.\n"
+      }
+    },
+    {
+      "id": 75,
+      "sort": null,
+      "topic": "Information om obligatoriska fält",
+      "criteria": "3.3.2 Etiketter och instruktioner",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Formulär inleds med en text som informerar användaren om hur obligatoriska eller frivilliga fält markeras. Exempel: \"Alla obligatoriska fält är uppmärkta med (obligatoriskt)”.",
+      "why": "Tydlig information om hur obligatoriska eller frivilliga fält markeras hjälper användaren att uppfatta vilka fält som behöver fyllas i för att komma vidare.",
+      "role": "UX",
+      "wcag": "3.3.2 Etiketter och instruktioner",
+      "howToTest": {
+        "id": 92,
+        "title": "Information om obligatoriska fält",
+        "content": "Kontrollera att formulär som innehåller obligatoriska fält inleds med en information om att det finns obligatoriska fält och hur de i så fall märks ut."
+      }
+    },
+    {
+      "id": 76,
+      "sort": null,
+      "topic": "Olika format",
+      "criteria": "3.3.2 Etiketter och instruktioner",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Användaren kan mata in data i olika format. Datum kan skrivas som “ååmmdd” eller “åå-mm-dd”. Telefonnummer kan skrivas som “+4670…” eller “070…”.",
+      "why": "Användaren ska kunna fylla i information på ett intuitivt och enkelt sätt. Användaren ska inte behöva anpassa sig till krångliga format som bestämts av en databas. En teknik för att korrigera datum som användaren matar in så att det passar ett förväntat format är så kallade regular expressions.",
+      "role": "UX / Utvecklare",
+      "wcag": "3.3.2 Etiketter och instruktioner",
+      "howToTest": {
+        "id": 93,
+        "title": "Olika format",
+        "content": "1. Gå igenom formulärsfält för datum, personnummer, samordningsnummer, organisationsnummer, telefonnummer, e-postadress eller andra särskilda format i tjänsten eller webbsidan.\n\n2. Kontrollera om det är möjligt att mata in information i olika format i formulärfälten.\n\t\n    Om ett fält kräver ett särskilt format, kontrollera att det finns information om att det krävs ett särskilt format.\n"
+      }
+    },
+    {
+      "id": 77,
+      "sort": null,
+      "topic": "Information om format",
+      "criteria": "3.3.2 Etiketter och instruktioner",
+      "category": "Formulär",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Det framgår tydligt för användaren när det krävs ett särskilt format på den information som ska matas in i ett inmatningsfält.",
+      "why": "Tydlig information om särskilda format hjälper användaren att förstå hur information ska fyllas i vilket också hjälper användaren att undvika att göra fel.",
+      "role": "UX",
+      "wcag": "3.3.2 Etiketter och instruktioner",
+      "howToTest": {
+        "id": 81,
+        "title": "Information om format",
+        "content": "1. Granska inmatningsfält som kräver att användaren matar in information i ett specifikt format. Det kan vara person- eller organisationsnummer, kontonummer, postnummer eller telefonnummer.\n\n2. Kontrollera att det finns information som beskriver det förväntade formatet på ett tydligt sätt.\n\n3. Kontrollera att information om format associeras till det aktuella fältet. Exempelvis genom att bädda in informationen i fältets etikett, alltså i elementet label.\n\n##### Testa med skärmläsare #####\n1. Starta en skärmläsare på din dator, exempelvis skärmläsaren NVDA.\n\n2. Använd tabbtangenten för att navigera till ett fält som kräver ett särskilt format och där det finns instruktioner om hur formatet ska anges.\n\n3. Kontrollera att skärmläsaren läser instruktioner om format på ett tydligt sätt."
+      }
+    },
+    {
+      "id": 78,
+      "sort": null,
+      "topic": "Beskrivande rubriker och etiketter",
+      "criteria": "2.4.6 Rubriker och etiketter",
+      "category": "Formulär",
+      "level": "AA",
+      "principle": "2. Möjligt att kontrollera",
+      "guideline": "2.4 Hjälp användaren navigera, hitta innehåll och avgöra var de är",
+      "statement": "Etiketter är tydligt formulerade och beskriver den information som efterfrågas.",
+      "why": "Tydliga etiketter hjälper alla användare att fylla i formulär på rätt sätt. Det är extra viktigt för användare med nedsatt inlärningsförmåga eller andra kognitiva eller språkliga svårigheter.",
+      "role": "UX / Copy",
+      "wcag": "2.4.6 Rubriker och etiketter",
+      "howToTest": {
+        "id": 79,
+        "title": "Beskrivande rubriker och etiketter",
+        "content": "##### Testa med verktyget Web Developer, tillägg till Google Chrome:\n1. Gå till fliken “Information”\n\n2. Klicka på “Display Document Outline”\n\n3. Granska rubrikerna i fliken som öppnas i webbläsaren för att kontrollera att de är tydliga och beskrivande.\n\n##### Testa rubriker med skärmläsare\n1. Starta en skärmläsare, exempelvis NVDA.\n\n2. Öppna den sida du vill testa.\n\n3. Tryck kortkommandot Caps Lock + F7 för att öppna skärmläsarens elementverktyg.\n\n4. Tryck på alternativet “Rubriker” längst upp.\n\n5. Granska rubrikerna för att kontrollera att de är tydliga och begripliga.\n\n##### Testa etiketter med skärmläsare\n1. Upprepa steg 1 till 3 ovan om en skärmläsaren inte redan är startad.\n\n2. Tryck på alternativet “Formulärfält” eller “Knappar”.\n\n3. Granska etiketter på formulärfält och knappar för att kontrollera att de är tydliga och begripliga."
+      }
+    },
+    {
+      "id": 79,
+      "sort": null,
+      "topic": "Felhantering med direktvalidering",
+      "criteria": "3.3.1 Identifiering av fel",
+      "category": "Felhantering",
+      "level": "A",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Vid automatisk validering av inmatningsfält markeras fältet när det uppstår inmatningsfel och felet beskrivs med text för användaren. Inmatningsfält som innehåller fel har attributet aria-invalid=”true”.",
+      "why": "Det är viktigt att användare får information om vad som har blivit fel och kan åtgärda felet. Det blir också tydligt för alla användare vilket fält felet gäller.",
+      "role": "UX / Utvecklare",
+      "wcag": "3.3.1 Identifiering av fel",
+      "howToTest": {
+        "id": 37,
+        "title": "Felhantering med direktvalidering",
+        "content": "##### Navigering med tabbtangenten\n1. Identifiera var och när på sidan som det sker någon form av direktvalidering.\n\n2. Navigera igenom samtliga formulärfält med tabbtangenten, men skicka inte formuläret.\n\n3. Kontrollera att det inte sker någon validering när användaren tabbar förbi ett fält.\n\n##### Obligatoriska fält\n1. Interagera med formulärfält genom att skriva in något eller genom att göra ett val och radera det sedan.\n\n2. Lämna fältet och kontrollera att fältet valideras görs.\n\n##### Felaktig information\nGör ett avsiktligt fel i fält där användarens information valideras, exempelvis i fält för e-postadress eller personnummer.\n\n##### För varje fel som uppstår:\n1. Kontrollera att fältet markeras visuellt och att ett felmeddelande visas i text.\n\n2. Granska koden för fältet och kontrollera att fältet har attributet aria-invalid=”true”.\n\n3. Kontrollera i koden att felmeddelandet som visas är kopplat till fältet, exempelvis med attributet aria-describedby.\n"
+      }
+    },
+    {
+      "id": 80,
+      "sort": null,
+      "topic": "Statusmeddelande om fel vid direktvalidering",
+      "criteria": "4.1.3 Statusmeddelande",
+      "category": "Felhantering",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Användare med skärmläsare får information om fel utan att felmeddelandet får fokus.",
+      "why": "Användare som är fullt seende kan uppfatta felmeddelanden i andra områden än den plats där mus- eller textmarkör befinner sig, och utan att det felmeddelandet stör användaren. Det är viktigt att ge samma möjlighet till användare med nedsatt syn som navigerar med skärmläsare.",
+      "role": "Utvecklare",
+      "wcag": "4.1.3 Statusmeddelande",
+      "howToTest": {
+        "id": 38,
+        "title": "Statusmeddelande om fel vid direktvalidering",
+        "content": "1. Identifiera var och när på sidan som det sker någon form av direktvalidering.\n\n2. Kontrollera i koden att felmeddelandet har attributet `role=”alert”` eller att det element som felmeddelandet bäddas in i har attributet `aria-live=”assertive”`. Om attributet `role=”alert”` används, innebär det implicit att attributet `aria-live` används eftersom det nedärvs automatiskt till innehåll som märks upp med `role=”alert”`. \n\n3. Testa med en skärmläsare och återskapa det fel som resulterar i att felmeddelandet visas.\n\n4. Kontrollera att skärmläsaren läser upp felmeddelandet direkt och avbryter en eventuell pågående uppläsning av något annat.\n\n5. Kontrollera att fokus är kvar på komponenten där användaren är och inte automatiskt flyttas till felmeddelandet.\n"
+      }
+    },
+    {
+      "id": 81,
+      "sort": null,
+      "topic": "Felmeddelande med samtliga fel vid inskick",
+      "criteria": "3.3.1 Identifiering av fel",
+      "category": "Felhantering",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "När en användare försöker skicka in ett formulär som innehåller fel presenteras samtliga fel i en samlad lista längst upp i formuläret.",
+      "why": "Användaren ges en överblick över samtliga fel i formuläret och kan utifrån den åtgärda felen.",
+      "role": "UX",
+      "wcag": "3.3.1 Identifiering av fel",
+      "howToTest": {
+        "id": 39,
+        "title": "Felmeddelande om samtliga fel vid inskick",
+        "content": "1. Fyll i ett formulär på ett felaktigt sätt och klicka på “Skicka”.\n\n2. Kontrollera att varje fält som innehåller fel får en visuell markering och att ett felmeddelande visas vid varje felaktigt fält.\n\n3. Kontrollera att ett samlingsmeddelande med samtliga felmeddelanden visas längst upp i formuläret.\n"
+      }
+    },
+    {
+      "id": 82,
+      "sort": null,
+      "topic": "Meddelande om fel vid inskick",
+      "criteria": "3.3.1 Identifiering av fel",
+      "category": "Felhantering",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "När användaren försöker skicka in ett formulär som innehåller fel, informeras användaren med ett meddelande som får fokus.",
+      "why": "I det här fallet är felmeddelandet så centralt att fokus behöver flyttas till felmeddelandet. Det kan annars vara svårt för en användare som navigerar med skärmläsare att hitta meddelandet.",
+      "role": "Utvecklare",
+      "wcag": "3.3.1 Identifiering av fel",
+      "howToTest": {
+        "id": 40,
+        "title": "Meddelande om fel vid inskick",
+        "content": "1. Fyll i ett formulär på ett felaktigt sätt och klicka på “Skicka”.\n\n2. Kontrollera att fokus automatiskt flyttas till rubriken för det felmeddelande som samlar samtliga fel i formuläret.\n\n3. Testa med en skärmläsare för att kontrollera att skärmläsarens fokus automatiskt flyttas till början av sidan och läser upp rubriken för felmeddelandet.\n"
+      }
+    },
+    {
+      "id": 83,
+      "sort": null,
+      "topic": "Förslag vid fel",
+      "criteria": "3.3.3 Förslag vid felhantering",
+      "category": "Felhantering",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.3 Hjälp användare undvika och fixa till misstag",
+      "statement": "Om det finns kända förslag för korrigering av fel ges användaren sådana förslag, så länge det inte påverkar säkerheten på webbsidan.",
+      "why": "Tydliga förslag vid felhantering hjälper användare att förstå hur de ska korrigera fel som uppstår. Det är extra viktigt för användare med nedsatt inlärningsförmåga, koncentrationssvårigheter och utmattning som kan behöva extra hjälp.",
+      "role": "UX",
+      "wcag": "3.3.3 Förslag vid felhantering",
+      "howToTest": {
+        "id": 41,
+        "title": "Förslag vid fel",
+        "content": "##### Obligatoriska men tomma fält\n1. Försök att skicka in ett formulär utan att fylla i obligatoriska fält.\n\n2. Kontrollera att felmeddelanden som visas tydligt informerar om att fältet behöver fyllas i och inte får vara tomt.\n\n3. Testa gärna felmeddelanden med användare från olika målgrupper, inklusive personer med kognitiva funktionsnedsättningar.\n\n##### Fält som innehåller felaktiga uppgifter\n1. Fyll i ett formulär på ett felaktigt sätt.\n\n2. Kontrollera att felmeddelanden som visas tydligt informerar om vad som är fel och vad användaren ska göra för att rätta till felen.\n\n3. Testa gärna felmeddelanden med användare från olika målgrupper, inklusive personer med kognitiva funktionsnedsättningar.\n"
+      }
+    },
+    {
+      "id": 84,
+      "sort": null,
+      "topic": "Meddelande om positivt resultat",
+      "criteria": "4.1.3 Statusmeddelande",
+      "category": "Dynamiskt innehåll",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Användare som navigerar med skärmläsare får information vid positivt eller förväntat resultat, utan att meddelandet får fokus. Exempel är när användarens påbörjade arbete har sparats eller när användaren har skickat ett formulär. Information om positivt resultat gäller när kontexten inte ändras, alltså att användaren skickas till en ny sida som bekräftar att arbete sparats eller att ett formulär har skickats.",
+      "why": "Tydlig återkoppling om ett positivt resultat gör att användare blir medvetna om viktiga förändringar i innehållet på en webbsida på ett sätt som inte stör deras pågående arbete.",
+      "role": "Utvecklare",
+      "wcag": "4.1.3 Statusmeddelande",
+      "howToTest": {
+        "id": 42,
+        "title": "Meddelande om positivt resultat",
+        "content": "1. Identifiera alla meddelanden som informerar användaren om ett positivt, förväntat eller informativt resultat som inte är kritiskt.\n\n2. För varje meddelande, kontrollera att det element i koden som innehåller meddelandet har attributet `role=\"status\"` eller `aria-live=”polite”`. Om meddelandet är uppmärkt med attributet `role=”status”` behöver inte `aria-live=”polite”` läggas till eftersom det nedärvs implicit till områden med `role=”status”`.\n\n3. Testa med en skärmläsare och återskapa meddelanden genom att utföra en uppgift som ger ett positivt resultat.\n\n4. Kontrollera att skärmläsaren läser upp meddelandet för användaren utan att avbryta en redan pågående uppläsning av annat innehåll. Skärmläsaren ska läsa meddelandet när den pågående uppläsningen är klar.\n\n5. Kontrollera att fokus är kvar vid den komponent där användaren hade fokus då uppgiften utfördes och inte flyttas till ett meddelande om positivt resultat.\n"
+      }
+    },
+    {
+      "id": 85,
+      "sort": null,
+      "topic": "Innehåll som förändras dynamiskt",
+      "criteria": "4.1.3 Statusmeddelande",
+      "category": "Dynamiskt innehåll",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Användare som navigerar med skärmläsare får information om innehåll som uppdateras dynamiskt, utan att innehållet får fokus. Exempel är vid presentation av antalet träffar i en sökning, antalet sparade jobb eller att ett jobb har sparats.",
+      "why": "Tydlig återkoppling om att innehåll har uppdaterats gör att användare blir medvetna om viktiga förändringar i innehållet på en webbsida på ett sätt som inte stör deras pågående arbete.",
+      "role": "Utvecklare",
+      "wcag": "4.1.3 Statusmeddelande",
+      "howToTest": {
+        "id": 43,
+        "title": "Innehåll som uppdateras dynamiskt",
+        "content": "1. Identifiera innehåll på sidan som förändras när användaren gör någonting och som informerar användaren om sidans status.\n\n2. För varje förändring, kontrollera att det element i koden som innehåller information om sidans status har attributet `role=“status”` eller `aria-live=”polite”`. Om meddelandet är uppmärkt med attributet `role=”status”` behöver inte `aria-live=”polite”` läggas till eftersom det nedärvs implicit till områden med `role=”status”`.\n\n3. Testa med en skärmläsare och utför en uppgift som resulterar i att information ändras.\n\n4. Kontrollera att skärmläsaren läser upp informationen, inklusive förändringen, för användaren utan att avbryta en pågående uppläsning av innehåll. Skärmläsaren ska läsa meddelandet när den pågående uppläsningen är klar.\n\n5. Kontrollera att användaren får ta del av all relevant informationen. Exempel: “3 sparade annonser” istället för enbart “3”.\n\n6. Kontrollera att fokus är kvar vid den komponent där användaren där användaren hade fokus då uppgiften utfördes och inte flyttas till meddelandet om sidans status.\n"
+      }
+    },
+    {
+      "id": 86,
+      "sort": null,
+      "topic": "Meddelande om upptaget system",
+      "criteria": "4.1.3 Statusmeddelande",
+      "category": "Dynamiskt innehåll",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Användare som navigerar med skärmläsare får information om att systemet är upptaget, utan att meddelandet får fokus. Exempel är information om att sökresultat uppdateras eller att information hämtas från en databas.",
+      "why": "Tydlig återkoppling om att ett system arbetar gör att användare blir medvetna om viktiga förändringar i innehållet på en webbsida på ett sätt som inte stör deras pågående arbete.",
+      "role": "Utvecklare",
+      "wcag": "4.1.3 Statusmeddelande",
+      "howToTest": {
+        "id": 44,
+        "title": "Meddelande om upptaget system",
+        "content": "1. Identifiera situationer då systemet kan vara upptaget eller när användaren behöver vänta på att innehåll ska hämtas.\n\n2. Kontrollera att meddelanden om att systemet är upptaget läses upp av skärmläsare utan att avbryta en pågående uppläsning och utan att fokus flyttas till meddelanden om att systemet arbetar.\n\n3. När systemet inte längre är upptaget eller när innehåll har laddats in på sidan, kontrollera att information om vad som har skett kan uppfattas av skärmläsare. Kontrollera att båda eller ett av följande alternativ är uppfyllt.\n\n\t- Skärmläsaren läser upp ett visuellt dolt meddelande som lagts till dynamiskt i dokumentstrukturen och som informerar användaren om att systemet har arbetat klart, eller att innehåll har laddats in på sidan.\n\n\t- Skärmläsaren läser upp ett visuellt synligt meddelande som lagts till på sidan dynamiskt och som informerar användaren om att systemet har arbetat klart, eller att innehåll har laddats in på sidan.\n\n4. Kontrollera att även meddelanden om att systemet har arbetat klart läses upp av skärmläsare utan att avbryta en pågående uppläsning av annat innehåll och utan att fokus flyttas till meddelandet.\n"
+      }
+    },
+    {
+      "id": 87,
+      "sort": null,
+      "topic": "Roll för komponent",
+      "criteria": "4.1.2 Namn, roll, värde",
+      "category": "Komponenter",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Komponenter som inte är baserade på standardelement i html har attributet role som gör det möjligt för hjälpmedel att tolka komponenter på rätt sätt.",
+      "why": "Attributet role informerar hjälpmedel, exempelvis skärmläsare, om hur komponenten ska tolkas och hur användaren ska interagera med den. Om en komponent saknar attributet role förstår inte hjälpmedel vad en komponent är, vilket försvårar interaktionen för användaren.",
+      "role": "Utvecklare",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 45,
+        "title": "Roll för komponent",
+        "content": "##### För egenkodade komponenter och komponenter som inte är standardkomponenter i HTML\n1. Testa med en skärmläsare och navigera dig fram till komponenten med tabbtangenten.\n\n2. Kontrollera att skärmläsaren läser upp den roll som komponenten har och att rollen beskriver komponenten korrekt. Exempel: En komponent som ser ut och fungerar som en knapp beskrivs som en knapp av skärmläsaren. \n\n3. Använd kortkommandon i skärmläsaren för att ta fram skärmläsarens elementlista över olika typer av  element. I listan över formulärobjekt ska du kunna se vilka komponenter som skärmläsaren uppfattar som knappar och formulär. Kontrollera att den roll som knappen har i listan stämmer överens med komponentens funktion och beskriver den korrekt.\n\n##### För övriga interaktiva komponenter\n1. Öppna utvecklingsverktyget i din webbläsare med F12.\n\n2. Kontrollera att semantisk HTML används om det är möjligt. Exempel: Elementet `<button>` används för knappar som inte ligger i formulär.\n\n3. Kontrollera också att koden inte innehåller onödig redundans, exempelvis att attribut inte finns i dubbel uppsättning.\n"
+      }
+    },
+    {
+      "id": 88,
+      "sort": null,
+      "topic": "Värde för komponent",
+      "criteria": "4.1.2 Namn, roll, värde",
+      "category": "Komponenter",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Om en användare kan ändra tillstånd, egenskap eller värde i en komponent ska det värdet även återges på ett sätt som hjälpmedel, exempelvis skärmläsare, kan plocka upp. Ett exempel är att en komponent kan fällas ut och ihop. En sådan komponent ska ha attributet aria-expanded.",
+      "why": "Tillstånd, värden och egenskaper i komponenter behöver vara kompatibla med hjälpmedel för att alla användare ska kunna använda dem och ges en jämlik användarupplevelse.",
+      "role": "Utvecklare",
+      "wcag": "4.1.2 Namn, roll, värde",
+      "howToTest": {
+        "id": 46,
+        "title": "Värde för komponent",
+        "content": "1. Identifiera alla komponenter på sidan som kan ändras, exempelvis kryssrutor som kan kryssas eller inmatningsfält där användaren där användaren kan skriva in text.\n\n2. Testa med en skärmläsare. Navigera till varje komponent som du tidigare har identifierat och prova att ändra den med tangentbordet.\n\n3. Kontrollera att skärmläsaren tydligt informerar om förändringen. Exempelvis att skärmläsaren läser ”kryssruta markerad”.\n\n4. Kontrollera också följande:\n\t- Obligatoriska tillstånd och egenskaper för en typ av komponent omfattas\n\t\n    - Otillåtna tillstånd och egenskaper omfattas inte\n\t\n    - Tillstånd och egenskaper uppdateras och visar det aktuella tillståndet när komponenten ändras.\n"
+      }
+    },
+    {
+      "id": 89,
+      "sort": null,
+      "topic": "Osynligt innehåll döljs även för skärmläsare",
+      "criteria": "1.1.1 Innehåll som inte är text",
+      "category": "Komponenter",
+      "level": "A",
+      "principle": "1. Möjligt att uppfatta",
+      "guideline": "1.1 Textalternativ för allt som inte är text",
+      "statement": "Innehåll som döljs för seende användare ska även döljas för skärmläsare. Exempel är innehåll som döljs i en utfällbar yta som enbart ska vara synligt när användaren valt att visa innehållet. Använd attributet aria-hidden=\"true\".",
+      "why": "Användare som navigerar med skärmläsare ska inte behöva ta del av innehåll som döljs visuellt. Innehåll ska presenteras på samma sätt för alla användare, oavsett om användare kan se innehållet.",
+      "role": "Utvecklare",
+      "wcag": "1.1.1 Innehåll som inte är text",
+      "howToTest": {
+        "id": 47,
+        "title": "Osynligt innehåll döljs även för skärmläsare",
+        "content": "För att kontrollera om det finns dolda delar på sidan som inte döljs i koden, gör så här:\n1. Identifiera innehåll som ska vara synligt respektive dolt på sidan. Det kan exempelvis vara innehåll i expanderbara ytor, stängda menyer eller innehåll i flikar som inte har öppnats.\n\n2. Kontrollera att innehållet är dolt visuellt och i dokumentstrukturen.\n\n3. Testa med en skärmläsare och navigera dig fram till komponenten närmast före det dolda innehållet, exempelvis en menyknapp för en meny som är stängd.\n\n4. Navigera nedåt med piltangenterna eller tabbtangenten och kontrollera att skärmläsaren inte läser upp innehåll som är visuellt dolt på skärmen och att dessa delar inte heller går att komma åt med tabbtangenten.\n\n5. Gå igenom hela sidan med skärmläsare för att kontrollera att det inte finns något ytterligare innehåll som enbart döljs visuellt men inte för skärmläsare.\n"
+      }
+    },
+    {
+      "id": 90,
+      "sort": null,
+      "topic": "Rätt HTML-markup",
+      "criteria": "4.1.1 Se till att koden validerar",
+      "category": "Kodkvalite",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Alla HTML-element har kompletta start- och slut-taggar och är nästlade enligt specifikationer i aktuell kodstandard.",
+      "why": "Genom att följa kodstandarder bidrar vi till god kodkvalitet vilket gör kodens robust och säkerställer att alla användare kan använda tjänsten, oavsett vilka hjälpmedel de använder.",
+      "role": "Utvecklare",
+      "wcag": "4.1.1 Se till att koden validerar",
+      "howToTest": {
+        "id": 24,
+        "title": "Rätt HTML-markup",
+        "content": "1. Validera koden på hela sidan eller på utvalda delar. Använd exempelvis W3C’s validator för HTML. [W3C Markup Validator](https://validator.w3.org/)\n\n2. Kontrollera att det finns det finns start- och sluttaggar för element som kräver det.\n\n3. Kontrollera att det inte finns sluttaggar för element där sluttaggar inte ska användas.\n"
+      }
+    },
+    {
+      "id": 91,
+      "sort": null,
+      "topic": "Inga dubbla attribut",
+      "criteria": "4.1.1 Se till att koden validerar",
+      "category": "Kodkvalite",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Attribut anges bara en gång i varje HTML-element och ogiltiga attribut används inte.",
+      "why": "Genom att följa kodstandarder bidrar vi till god kodkvalitet vilket gör kodens robust och säkerställer att alla användare kan använda tjänsten, oavsett vilka hjälpmedel de använder.",
+      "role": "Utvecklare",
+      "wcag": "4.1.1 Se till att koden validerar",
+      "howToTest": {
+        "id": 25,
+        "title": "Inga dubbla attribut",
+        "content": "1. Granska koden på sidan manuellt eller validera koden på hela sidan eller på utvalda delar. Använd exempelvis W3C’s validator för HTML. Många utvecklingsverktyg varnar också när attribut återupprepas i ett och samma element. [W3C Markup Validator](https://validator.w3.org/)\n\n2. Kontrollera att attribut används endast en gång per element. Om attribut upprepas en eller flera gånger, ta bort de attribut som är överflödiga.\n"
+      }
+    },
+    {
+      "id": 92,
+      "sort": null,
+      "topic": "Unika ID-värden",
+      "criteria": "4.1.1 Se till att koden validerar",
+      "category": "Kodkvalite",
+      "level": "A",
+      "principle": "4. Robust",
+      "guideline": "4.1 Kompatibel med webläsare & hjälpmedel",
+      "statement": "Alla HTML-element har unika id, dvs ett id förekommer endast en gång på sidan.",
+      "why": "Genom att följa kodstandarder bidrar vi till god kodkvalitet vilket gör kodens robust och säkerställer att alla användare kan använda tjänsten, oavsett vilka hjälpmedel de använder.",
+      "role": "Utvecklare",
+      "wcag": "4.1.1 Se till att koden validerar",
+      "howToTest": {
+        "id": 26,
+        "title": "Unika id-värden",
+        "content": "1. Validera koden på hela sidan. Använd exempelvis W3C’s validator för HTML. Vissa utvecklingsverktyg varnar också när id-värden återanvänds i flera element. [W3C Markup Validator](https://validator.w3.org/)\n\n2. Kontrollera att alla id-värden är unika och används endast en gång på sidan. Var särskilt uppmärksam när samma komponent används flera gånger. Om id-värden upprepas en eller flera gånger, ange nya värden på de komponenter där id-värdet upprepas så att samtliga id-värden på sidan är unika.\n"
+      }
+    },
+    {
+      "id": 93,
+      "sort": null,
+      "topic": "Konsekvent navigering i tjänsten",
+      "criteria": "3.2.3 Konsekvent navigering",
+      "category": "Konsekvent",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.2 Gör innehåll förutsägbart",
+      "statement": "Navigeringsfunktioner som upprepas på flera sidor inom en tjänst presenteras på samma sätt och i samma inbördes ordning. Exempel är länkar mellan sidor, paginering i sökresultat eller val i menyer.",
+      "why": "När navigeringsfunktioner placeras på samma plats och i samma ordning på varje sida hjälper det användare att snabbt hitta vad de söker.",
+      "role": "UX",
+      "wcag": "3.2.3 Konsekvent navigering",
+      "howToTest": {
+        "id": 94,
+        "title": "Konsekvent navigering i tjänsten",
+        "content": "Granska navigationsfunktioner i webbtjänsten och kontrollera att den är placerad på samma plats och sorteras på samma sätt på tjänstens alla sidor."
+      }
+    },
+    {
+      "id": 94,
+      "sort": null,
+      "topic": "Konsekvent navigering på myndigheten",
+      "criteria": "3.2.3 Konsekvent navigering",
+      "category": "Konsekvent",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.2 Gör innehåll förutsägbart",
+      "statement": "Tjänsten följer myndighetens digitala riktlinjer för navigering. Kravet är uppfyllt om ni använder er av komponenter och designmönster i designsystemet.",
+      "why": "När navigeringsfunktioner placeras på samma plats och i samma ordning på varje sida hjälper det användare att snabbt hitta vad de söker.",
+      "role": "UX",
+      "wcag": "3.2.3 Konsekvent navigering",
+      "howToTest": null
+    },
+    {
+      "id": 95,
+      "sort": null,
+      "topic": "Konsekvent identifiering i tjänsten",
+      "criteria": "3.2.4 Konsekvent identifiering",
+      "category": "Konsekvent",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.2 Gör innehåll förutsägbart",
+      "statement": "Funktioner som finns på flera sidor inom en tjänst identifieras på ett konsekvent sätt. Exempel är att samma termer används för att beskriva knappar som gör samma sak.",
+      "why": "Användare kan lättare hitta och använda en funktion på alla sidor inom en tjänst där funktionen finns. Användare som navigerar med hjälpmedel får en mer förutsägbar upplevelse när textalternativ för funktioner anges konsekvent.",
+      "role": "UX / Copy",
+      "wcag": "3.2.4 Konsekvent identifiering",
+      "howToTest": {
+        "id": 95,
+        "title": "Konsekvent identifiering i tjänsten",
+        "content": "Granska hur funktioner benämns i webbtjänsten och kontrollera att de benämns på samma sätt på tjänstens alla sidor."
+      }
+    },
+    {
+      "id": 96,
+      "sort": null,
+      "topic": "Konsekvent identifiering på myndigheten",
+      "criteria": "3.2.4 Konsekvent identifiering",
+      "category": "Konsekvent",
+      "level": "AA",
+      "principle": "3. Möjligt att förstå",
+      "guideline": "3.2 Gör innehåll förutsägbart",
+      "statement": "Funktioner inom en tjänst identifieras på samma sätt som på andra ställen där funktionen används på webbplatsen. Exempel är när samma termer används för att beskriva knappar som gör samma sak. Kravet är uppfyllt om ni använder er av komponenter och designmönster i designsystemet.",
+      "why": "Användare kan lättare hitta och använda en funktion på alla sidor inom en tjänst där funktionen finns. Användare som navigerar med hjälpmedel får en mer förutsägbar upplevelse när textalternativ för funktioner anges konsekvent.",
+      "role": "UX / Copy",
+      "wcag": "3.2.4 Konsekvent identifiering",
+      "howToTest": null
+    }
+  ]
+}
