@@ -15,6 +15,10 @@ export const styles = css`
       min-width: 200px;
     }
 
+    ::part(_button) {
+      outline-offset: -2px;
+    }
+
     .spinners {
       display: flex;
       align-items: center;
