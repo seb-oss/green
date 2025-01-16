@@ -170,7 +170,12 @@ export const Lead: Story = {
 }
 
 /**
- * Disabled
+ * The `disabled` property can be set to disable the `gds-select` field.
+ * <br> e.g
+ *
+ * ```html
+ *<gds-select disabled> ... </gds-select>
+ * ```
  */
 export const Disabled: Story = {
   ...DefaultParams,
@@ -195,18 +200,40 @@ export const Disabled: Story = {
 }
 
 /**
- * Validation
+ * Select has built-in support for form validation.<br>The validation feature is built on top of the browsers native validation features, using `ElementInternals` and `Constraint Validation API`.
+ *
+ * Validation is configured by adding a validator to a form element.<br> A validator is an object that implements the `GdsValidator` interface:
+ *
+ * ```html
+ * <gds-select invalid></gds-select>
+ * ```
+ * **@property invalid** - Indicates that the select field contains an error.
+ *
  */
 export const Validation: Story = {
   ...DefaultParams,
   name: 'Validation',
   render: () => html`
     <gds-flex>
+      <!-- .invalid=${true} -->
       <gds-select
-        .invalid=${true}
         placeholder="Space Technologies"
         label="Label text"
         supporting-text="Supporting text"
+        .validator=${{
+          validate: (el: any) => {
+            if (el.value === '') {
+              return [
+                {
+                  ...el.validity,
+                  valid: false,
+                  customError: true,
+                },
+                'Please select an option.',
+              ]
+            }
+          },
+        }}
       >
         <span slot="extended-supporting-text"
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -214,6 +241,7 @@ export const Validation: Story = {
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         <select>
+          <option value="" selected>Incorrect Value</option>
           <optgroup label="Propulsion">
             <option value="ion-thrusters">Ion Thrusters</option>
             <option value="chemical-rockets">Chemical Rockets</option>
@@ -231,7 +259,12 @@ export const Validation: Story = {
 }
 
 /**
- * Disabled
+ * The `size` property can be set to 'small' to reduce the size of the select field.<br>
+ * **@property size** - The size of the select field.
+ *
+ * ```html
+ *  <gds-select size="small"></gds-select>
+ * ```
  */
 export const Size: Story = {
   ...DefaultParams,
@@ -266,6 +299,7 @@ export const Size: Story = {
 
 /**
  * Multiple
+ * The `multiple` attribute can be set to allow multiple options to be selected on the native `<select>` element.
  */
 export const Multiple: Story = {
   ...DefaultParams,
@@ -296,8 +330,17 @@ export const Multiple: Story = {
 }
 
 /**
- * Size
+ * The native `<select size="...">` to not be confused with property `size` <br> it is the native attribute that sets the number of visible options in a select element.
+ *
+ * ```html
+ *  <gds-select>
+ *  <select multiple size="14">
+ *    ...
+ *  </select>
+ * </gds-select>
+ * ```
  */
+
 export const SelectSize: Story = {
   ...DefaultParams,
   name: 'Select Size',

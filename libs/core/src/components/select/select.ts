@@ -61,7 +61,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
     let selectElement: HTMLSelectElement | null = null
 
     if (slotElement) {
-      const assignedNodes = slotElement.assignedNodes({ flatten: true })
+      const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
+        flatten: true,
+      })
       selectElement = assignedNodes.find(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
@@ -73,7 +75,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
       }
     }
 
-    if (labelElement && selectElement) {
+    if (labelElement && selectElement && slotElement) {
       slotElement.addEventListener('change', () => {
         const selectedOption = selectElement.selectedOptions[0]
         labelElement.textContent = selectedOption.textContent
@@ -82,7 +84,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   protected _getValidityAnchor(): HTMLElement {
-    return this.shadowRoot?.querySelector('select') as HTMLElement
+    return this.shadowRoot?.querySelector('SELECT') as HTMLElement
   }
 
   render() {
@@ -115,7 +117,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
       <gds-form-control-footer
         class="size-${this.size}"
-        .validationMessage=${this.invalid && this.validationMessage}
+        .validationMessage=${this.invalid ? this.validationMessage : undefined}
       ></gds-form-control-footer>
     `
   }
@@ -152,7 +154,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
           tabindex="-1"
           size="small"
           rank="tertiary"
-          variant="${this.invalid ? 'negative' : ''}"
+          variant="${this.invalid ? 'negative' : 'neutral'}"
           ?disabled="${this.disabled}"
           slot="action"
         >
