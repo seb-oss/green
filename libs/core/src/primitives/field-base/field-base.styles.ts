@@ -44,6 +44,10 @@ export const styles = css`
 
     .field.action-slot-occupied:not(.trail-slot-occupied) {
       padding-inline-end: var(--gds-space-s);
+
+      &.small {
+        padding-inline-end: var(--gds-space-xs);
+      }
     }
 
     .field:focus-within {

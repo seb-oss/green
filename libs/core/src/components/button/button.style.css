@@ -146,6 +146,7 @@
     font-size: var(--gds-text-size-detail-s);
     line-height: var(--gds-text-line-height-detail-s);
     padding-inline: var(--gds-space-m);
+    outline-offset: -1px;
   }
 
   :host([size='small']) .button {

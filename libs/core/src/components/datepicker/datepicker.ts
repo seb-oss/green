@@ -283,7 +283,15 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           aria-describedby="label"
           .disabled=${this.disabled}
         >
-          <gds-icon-calender-add></gds-icon-calender-add>
+          ${when(
+            this.size === 'small',
+            () =>
+              html`<gds-icon-calender-add
+                height="16"
+                stroke="2"
+              ></gds-icon-calender-add>`,
+            () => html`<gds-icon-calender-add></gds-icon-calender-add>`,
+          )}
         </gds-button>
       </gds-field-base>
 
