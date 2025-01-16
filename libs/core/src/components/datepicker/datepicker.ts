@@ -273,7 +273,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         <gds-button
           id="calendar-button"
           slot="action"
-          size="small"
+          size="${this.size === 'small' ? 'xs' : 'small'}"
           rank="tertiary"
           variant=${this.invalid ? 'negative' : ''}
           aria-label="${msg('Open calendar modal')}"
