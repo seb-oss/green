@@ -121,20 +121,5 @@ export const styles = css`
     .multiline slot[name='action']::slotted([gds-element]) {
       margin-top: -4px;
     }
-
-    /* Experimental */
-    /* .left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 24px;
-    }
-
-    .right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      height: 32px;
-    } */
   }
 `
