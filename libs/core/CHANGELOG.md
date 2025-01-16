@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.62.1
+
+### Patch Changes
+
+- eb6e18e: **Datepicker:** Fix calendar button size in small variant
+- eb6e18e: **Form error state (2016):** Styling alignments
+- eb6e18e: **Dropdown:** Fix chevron alignment in 2016 design
+
 ## 1.62.0
 
 ### Minor Changes
