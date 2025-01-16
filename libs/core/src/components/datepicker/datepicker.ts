@@ -275,6 +275,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           slot="action"
           size="${this.size === 'small' ? 'xs' : 'small'}"
           rank="tertiary"
+          variant=${this.invalid ? 'negative' : ''}
           aria-label="${msg('Open calendar modal')}"
           aria-haspopup="menu"
           aria-expanded=${this.open}
