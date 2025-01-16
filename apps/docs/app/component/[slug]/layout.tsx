@@ -25,6 +25,11 @@ import { toast } from 'sonner'
 
 import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
+// Dynamic component props
+type DynamicComponentProps = {
+  hero?: boolean // Define the hero prop
+}
+
 export default function ComponentLayout({
   children,
   params,
@@ -95,7 +100,7 @@ export default function ComponentLayout({
   ]
 
   const getDynamicComponent = (c: string) =>
-    dynamic(
+    dynamic<DynamicComponentProps>(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
           const ExampleComponent = () => <div>Example</div>
@@ -274,7 +279,7 @@ export default function ComponentLayout({
                   justify-content="center"
                   height="360px"
                 >
-                  <Preview />
+                  <Preview hero={true} />
                 </GdsFlex>
               </GdsCard>
             </GdsFlex>
