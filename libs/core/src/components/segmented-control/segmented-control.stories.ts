@@ -93,7 +93,7 @@ export const Small: Story = {
 export const SegmentSize: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div style="width:90vw; max-width: 500px;">
+    <div style="width:90vw; max-width: 556px;">
       <gds-segmented-control value="1">
         <gds-segment value="1" min-width="200px">Min-width</gds-segment>
         <gds-segment value="flaschenabfüllmaschine" max-width="150px"
