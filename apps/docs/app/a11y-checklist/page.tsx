@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react'
 import { GdsCard, GdsFlex } from '$/import/components'
 
+//import { Accordion } from '@sebgroup/green-react'
+
 // Definiera typen för objekten i checklistan
 
 interface HowToTest {
@@ -61,77 +63,43 @@ export default function A11yChecklist() {
   }, []) // Körs endast en gång när komponenten mountas
 
   return (
-    <GdsFlex
-      flex-direction="row"
-      justify-content="space-between"
-      align-items="space-between"
-      gap="2xl"
-      width="500px"
-    >
-      <h1>Accessibility Checklist</h1>
-      {error && <p>Error: {error}</p>} {/* Visa felmeddelande om det finns */}
+    <GdsFlex flex-direction="row">
       <ul>
         {items.map((item) => (
           <li key={item.id}>
-            <strong>{item.id}</strong>: {item.topic}
-            <p>{item.statement}</p>
-            <p>{item.why}</p>
+            <GdsFlex>
+              <strong>{item.id}</strong>: {item.topic}
+            </GdsFlex>
+            <GdsFlex
+              align-items="flex-start; m{center}"
+              justify-content="space-between"
+              flex-direction="column; m{row}"
+            >
+              <GdsFlex flex-direction="column">
+                <GdsFlex flex-direction="column">
+                  <p>{item.statement}</p>
+                  <p>{item.why}</p>
+                </GdsFlex>
+                <GdsCard>
+                  <details>
+                    <summary>Title of the accordion</summary>
+                    <GdsCard variant="secondary">
+                      <GdsFlex flex-direction="column" gap="m">
+                        <GdsFlex>{item.principle}</GdsFlex>
+                        <GdsFlex>{item.guideline}</GdsFlex>
+                      </GdsFlex>
+                    </GdsCard>
+                  </details>
+                </GdsCard>
+              </GdsFlex>
+              <GdsFlex flex-direction="column">
+                <input></input>
+                <textarea></textarea>
+              </GdsFlex>
+            </GdsFlex>
           </li>
         ))}
       </ul>
     </GdsFlex>
   )
 }
-
-// 'use client'
-
-// import { GdsCard, GdsFlex } from '$/import/components'
-// import { IconSquareCheck } from '$/import/icons'
-
-// //import { Checkbox } from '@sebgroup/green-react'
-
-// export default async function A11yChecklist() {
-//   const response = await fetch('/content/a11y-checklist/a11ychecklist.json')
-
-//   const items = await response.json()
-
-//   console.log(items.id)
-
-//   return (
-//     <GdsFlex
-//       flex-direction="column"
-//       justify-content="space-between"
-//       align-items="space-between"
-//       gap="2xl"
-//       width="500px"
-//     >
-//       <GdsCard>
-//         <GdsFlex align-items="center" justify-content="space-between">
-//           <GdsFlex>
-//             <IconSquareCheck />
-//             Isabelle
-//           </GdsFlex>
-//           <IconSquareCheck />
-//         </GdsFlex>
-//       </GdsCard>
-//       <GdsCard>
-//         <GdsFlex align-items="center" justify-content="space-between">
-//           <GdsFlex>
-//             <IconSquareCheck />
-//             Isabelle
-//           </GdsFlex>
-//           <IconSquareCheck />
-//         </GdsFlex>
-//       </GdsCard>
-//       <GdsCard>
-//         <GdsFlex align-items="center" justify-content="space-between">
-//           <GdsFlex>
-//             <IconSquareCheck />
-//             Isabelle
-//           </GdsFlex>
-//           <IconSquareCheck />
-//         </GdsFlex>
-//       </GdsCard>
-//     </GdsFlex>
-//   )
-// }
