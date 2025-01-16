@@ -1,9 +1,9 @@
 import { html } from 'lit'
-import { repeat } from 'lit/directives/repeat.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './index.ts'
+import '../icon/icons/push.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/dropdown)
@@ -42,14 +42,21 @@ const DefaultParams: Story = {
     },
   },
   args: {
-    innerHTML: `<gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
-<gds-option value="falcon-1">Millenium Falcon</gds-option>
-<gds-option value="defiant-1">Defiant</gds-option>
-<gds-option value="voyager-1">Voyager</gds-option>
-<gds-option value="prometheus-1">Prometheus</gds-option>
-<gds-option value="discovery-1">Discovery</gds-option>
-<gds-option value="columbia-1">Columbia</gds-option>`,
+    innerHTML: `
+      <span slot="extended-supporting-text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      </span>
+      <gds-icon-push slot="lead"></gds-icon-push>
+      <gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
+      <gds-option value="falcon-1">Millenium Falcon</gds-option>
+      <gds-option value="defiant-1">Defiant</gds-option>
+      <gds-option value="voyager-1">Voyager</gds-option>
+      <gds-option value="prometheus-1">Prometheus</gds-option>
+      <gds-option value="discovery-1">Discovery</gds-option>
+      <gds-option value="columbia-1">Columbia</gds-option>
+    `,
     label: 'Select an option',
+    supportingText: 'Label support text',
   },
 }
 
@@ -66,7 +73,12 @@ export const OptionHeadings: Story = {
     <gds-dropdown
       onchange="document.getElementById('selected-value').innerText = event.target.value"
       label="Select a starship"
+      supporting-text="Label support text"
     >
+      <span slot="extended-supporting-text"
+        >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </span>
       <gds-menu-heading>Space vehicles</gds-menu-heading>
       <gds-option value="1701-D-1">Enterprise 1701-D</gds-option>
       <gds-option value="falcon-1">Millenium Falcon</gds-option>
@@ -120,7 +132,11 @@ export const SyncedPopoverWidth: Story = {
   ...DefaultParams,
   name: 'Synced popover width',
   render: (args) => html`
-    <gds-dropdown sync-popover-width style="width: 200px">
+    <gds-dropdown
+      label="Synced popover width"
+      sync-popover-width
+      style="width: 200px"
+    >
       <gds-option value="1701-D-1">
         Enterprise 1701-D is a starship from the TNG series
       </gds-option>
@@ -182,7 +198,7 @@ export const HiddenLabel: Story = {
 export const PlaceholderOptions: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" hide-label>
+    <gds-dropdown label="Select tech">
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -200,7 +216,7 @@ export const PlaceholderOptions: Story = {
 export const Searchable: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" searchable hide-label>
+    <gds-dropdown label="Select tech" searchable>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -240,13 +256,42 @@ export const Searchable: Story = {
 export const Multiple: Story = {
   ...DefaultParams,
   render: (args) => html`
+    <gds-dropdown label="Select tech" searchable multiple>
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+export const Invalid: Story = {
+  ...DefaultParams,
+  render: (args) => html`
     <gds-dropdown
-      size="small"
       label="Select tech"
       searchable
-      multiple
-      hide-label
+      aria-invalid="true"
+      errorMessage="This field is required"
     >
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+export const Disabled: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown label="Select tech" searchable disabled>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>

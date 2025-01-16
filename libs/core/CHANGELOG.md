@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.62.0
+
+### Minor Changes
+
+- 5e16375: **Texarea:** Consolidate with Field Base
+- 40f905b: **Datepicker:** Consolidate with Field Base
+- f43d556: **Input:** Consolidate with Field Base
+- 4d8df8b: **Dropdown:** Consolidate with Field Base
+- f43d556: **Input:** Add transitional styles
+- 5e16375: **Textarea:** Add transitional styles
+
+### Patch Changes
+
+- 33b08a2: **Icon Button:** Update transitional styles
+- 93bac39: **Datepicker and Dropdown:** minor a11y improvements
+
 ## 1.61.0
 
 ### Minor Changes
