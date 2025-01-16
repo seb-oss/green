@@ -118,7 +118,7 @@ export const styles = css`
       block-size: var(--gds-space-l);
     }
 
-    slot[name='action']::slotted([gds-element]) {
+    .multiline slot[name='action']::slotted([gds-element]) {
       margin-top: -4px;
     }
 
