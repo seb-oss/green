@@ -59,7 +59,7 @@
   }
 
   .field.invalid {
-    border-bottom-color: var(--gds-color-l3-border-negative);
+    border-color: var(--gds-color-l3-border-negative);
     color: var(--gds-color-l3-content-negative);
     border-bottom-width: 2px;
   }

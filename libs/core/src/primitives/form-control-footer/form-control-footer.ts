@@ -2,7 +2,6 @@ import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
   html,
@@ -25,11 +24,6 @@ export class GdsFormControlFooter extends GdsElement {
   @property()
   validationMessage?: string
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-form-control-footer')
-  }
-
   render() {
     return html`<div aria-live="polite">
       <div class="error-message">
@@ -38,7 +32,7 @@ export class GdsFormControlFooter extends GdsElement {
             this.validationMessage,
             () => html`
               <gds-icon-triangle-exclamation
-                ?solid=${!this._isUsingTransitionalStyles}
+                solid
               ></gds-icon-triangle-exclamation>
               ${this.validationMessage}
             `,
