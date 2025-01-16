@@ -164,6 +164,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
     )[0]
 
+    if (!nextLeftOutOfView) return
+
     this._elTrack.scrollLeft -= nextLeftOutOfView.offsetWidth
   }
 
@@ -171,6 +173,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
     const nextRightOutOfView = this.segments
       .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
+
+    if (!nextRightOutOfView) return
 
     this._elTrack.scrollLeft += nextRightOutOfView.offsetWidth
   }
