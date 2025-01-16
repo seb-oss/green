@@ -42,6 +42,10 @@ export const styles = css`
       padding-inline-start: var(--gds-space-s);
     }
 
+    .field.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-space-s);
+    }
+
     .field:focus-within {
       outline-width: var(--gds-space-3xs);
       outline-offset: var(--gds-space-3xs);
@@ -112,6 +116,10 @@ export const styles = css`
       display: flex;
       inline-size: var(--gds-space-l);
       block-size: var(--gds-space-l);
+    }
+
+    slot[name='action']::slotted([gds-element]) {
+      margin-top: -4px;
     }
 
     /* Experimental */
