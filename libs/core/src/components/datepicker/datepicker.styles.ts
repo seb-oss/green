@@ -16,7 +16,7 @@ export const styles = css`
     }
 
     ::part(_button) {
-      outline-offset: -2px;
+      outline-offset: -1px;
     }
 
     .spinners {
@@ -24,7 +24,10 @@ export const styles = css`
       align-items: center;
       justify-content: flex-start;
       min-width: 10ch;
-      gap: var(--gds-space-2xs);
+      gap: var(--gds-space-4xs);
+      font-family: monospace;
+      font-size: var(--gds-text-size-detail-s);
+      font-weight: var(--gds-text-weight-regular);
     }
 
     .spinner {

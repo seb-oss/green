@@ -10,7 +10,13 @@ import '../icon/icons/compass-round.ts'
 import '../icon/icons/lightning.ts'
 import '../icon/icons/sun.ts'
 import '../icon/icons/square-grid-circle.ts'
+import '../icon/icons/brand-green.ts'
 import '../icon/icons/books.ts'
+
+/**
+ * The `Select` story demonstrates a default selection component with a placeholder and supporting text.
+ * <br>The component can be customized with a label, supporting text, and additional content.
+ */
 
 const meta: Meta = {
   title: 'Components/Select',
@@ -31,11 +37,23 @@ const DefaultParams: Story = {
 }
 
 /**
- * TODO: Add documentation
+ * ### Parameters
+ *
+ *-  **placeholder**: The placeholder text displayed before an option is selected (e.g., 'Science Themes').
+ *-  **label**: The label text displayed above the select field (e.g., 'Label text').
+ *-  **supportingText**: Additional text that provides context or instructions (e.g., 'Supporting text').
+ *-  **innerHTML**: The inner HTML content that defines the options within the select dropdown. It includes:
+ *- <strong>@slot</strong> 'extended-supporting-text'
+
+ * ```html
+ *  <span slot="extended-supporting-text">...</span>
+ * ```
+ *- An icon displayed alongside the select field.
+ *- Multiple option groups (e.g., Physics, Chemistry, Biology) with specific options.
  */
 export const select: Story = {
   ...DefaultParams,
-  name: 'select',
+  name: 'Select',
   args: {
     placeholder: 'Science Themes',
     label: 'Label text',
@@ -65,8 +83,33 @@ export const select: Story = {
 }
 
 /**
- * Select Option
+ *
+ * The select component can have options, and grouping is also possible, with support for all native select attributes.
+ *
+ * It is important to note that options must be wrapped within a native `<select>` element to ensure proper functionality and rendering. The `<gds-select>` component is designed to enhance the native select element by providing additional features such as labels, supporting text, and icons. However, the core functionality of selecting options relies on the native `<select>` element.
+ *
+ * By wrapping options in a native `<select>`, we leverage the inherent behavior of the select element, which allows for user interaction, selection management, and accessibility features. Without this wrapping, the options would not be recognized or rendered correctly, as the native select element is responsible for handling the display and selection of options.
+ *
+ * Therefore, it is essential to include the `<select>` element to maintain the expected behavior and ensure that the component functions as intended.
+ *
+ * e.g
+ *
+ * ```html
+ *    <gds-select>
+ *     <select>
+ *       <optgroup label="Astronomy">
+ *         <option value="cosmology">Cosmology</option>
+ *         <option value="astrophysics">Astrophysics</option>
+ *       </optgroup>
+ *     </select>
+ *   </gds-select>
+ * ```
  */
+
+/**
+ * > In web components using Shadow DOM, options cannot be placed directly within a slot of a custom element. The native `select` element requires its options to be part of its own DOM structure . If placed in a slot, options will not render due to Shadow DOM encapsulation.
+ */
+
 export const Option: Story = {
   ...DefaultParams,
   name: 'Option',
@@ -77,8 +120,8 @@ export const Option: Story = {
         label="Label text"
         supporting-text="Supporting text"
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-square-grid-circle slot="lead"></gds-icon-square-grid-circle>
@@ -91,6 +134,35 @@ export const Option: Story = {
             <option value="volcanology">Volcanology</option>
             <option value="seismology">Seismology</option>
           </optgroup>
+        </select>
+      </gds-select>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The lead icon is displayed to the left of the select field.
+ * <br>It can be used to provide additional context or to visually represent the select field's purpose.
+ * <br>It can be set by adding an icon component to the 'lead' slot.
+ */
+export const Lead: Story = {
+  ...DefaultParams,
+  name: 'Lead Icon',
+  render: () => html`
+    <gds-flex>
+      <gds-select
+        placeholder="Green Design System"
+        label="Label text"
+        supporting-text="Supporting text"
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+        <gds-icon-brand-green slot="lead"></gds-icon-brand-green>
+        <select>
+          <option value="green">Green Design System</option>
+          <option value="carbon">Carbon Design System</option>
         </select>
       </gds-select>
     </gds-flex>
