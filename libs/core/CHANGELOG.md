@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.62.2
+
+### Patch Changes
+
+- 12a3417: **Scoping:** Fix return type of `gdsCustomElement` decorator in bail-out code path
+
 ## 1.62.1
 
 ### Patch Changes
