@@ -43,9 +43,6 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
     TransitionalStyles.instance.apply(this, 'gds-filter-chip')
   }
 
-  @queryAsync(getScopedTagName('gds-button'))
-  private _button!: Promise<GdsButton>
-
   render() {
     const btnClasses = {
       'btn-p': !this.selected,
