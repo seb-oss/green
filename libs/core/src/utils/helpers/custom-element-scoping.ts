@@ -100,12 +100,7 @@ function scopedCustomElement(tagName: string): CustomElementDecorator {
     classOrTarget.prototype.gdsElementName = tagName
 
     // Bail out if the element is already registered
-    if (customElements.get(versionedTagName)) {
-      return (
-        classOrTarget: CustomElementClass | Constructor<GdsElement>,
-        context?: ClassDecoratorContext<Constructor<GdsElement>>,
-      ) => {}
-    }
+    if (customElements.get(versionedTagName)) return
 
     return customElement(versionedTagName)(
       classOrTarget,
