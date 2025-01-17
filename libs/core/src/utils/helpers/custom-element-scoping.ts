@@ -57,7 +57,7 @@
  */
 
 import { html as litHtml } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { customElement, CustomElementDecorator } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 
@@ -66,6 +66,16 @@ export const VER_SUFFIX = '-gdsvsuffix'
 declare global {
   var __gdsElementLookupTable: { [VER_SUFFIX]: Map<string, string> } // eslint-disable-line no-var
 }
+
+type Constructor<T> = {
+  // tslint:disable-next-line:no-any
+  new (...args: any[]): T
+}
+
+/**
+ * Allow for custom element classes with private constructors
+ */
+type CustomElementClass = Omit<typeof HTMLElement, 'new'>
 
 export class ScopedElementRegistry {
   static get instance() {
@@ -79,18 +89,28 @@ export class ScopedElementRegistry {
   }
 }
 
-function scopedCustomElement(tagName: string) {
+function scopedCustomElement(tagName: string): CustomElementDecorator {
   const versionedTagName = tagName + VER_SUFFIX
   ScopedElementRegistry.instance.set(tagName, versionedTagName)
 
-  return function (constructor: any) {
-    constructor.prototype.gdsElementName = tagName
+  return function (
+    classOrTarget: CustomElementClass | Constructor<GdsElement>,
+    context?: ClassDecoratorContext<Constructor<GdsElement>>,
+  ) {
+    classOrTarget.prototype.gdsElementName = tagName
 
     // Bail out if the element is already registered
-    if (customElements.get(versionedTagName))
-      return (_constructor: GdsElement) => false
+    if (customElements.get(versionedTagName)) {
+      return (
+        classOrTarget: CustomElementClass | Constructor<GdsElement>,
+        context?: ClassDecoratorContext<Constructor<GdsElement>>,
+      ) => {}
+    }
 
-    return customElement(versionedTagName)(constructor) as any
+    return customElement(versionedTagName)(
+      classOrTarget,
+      context as ClassDecoratorContext<Constructor<GdsElement>>,
+    )
   }
 }
 
