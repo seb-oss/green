@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.62.3
+
+### Patch Changes
+
+- c6d42ec: **Filter Chip**: Fix issue where filter chip is trying to register transitional styles for button
+
 ## 1.62.2
 
 ### Patch Changes
