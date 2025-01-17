@@ -145,6 +145,9 @@ export const Sizes: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        XS
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         Small
       </gds-button>
@@ -203,6 +206,9 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        <gds-icon-arrow-right />
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         <gds-icon-arrow-right />
       </gds-button>

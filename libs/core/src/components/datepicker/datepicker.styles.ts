@@ -15,12 +15,19 @@ export const styles = css`
       min-width: 200px;
     }
 
+    ::part(_button) {
+      outline-offset: -1px;
+    }
+
     .spinners {
       display: flex;
       align-items: center;
       justify-content: flex-start;
       min-width: 10ch;
-      gap: var(--gds-space-2xs);
+      gap: var(--gds-space-4xs);
+      font-family: monospace;
+      font-size: var(--gds-text-size-detail-s);
+      font-weight: var(--gds-text-weight-regular);
     }
 
     .spinner {
