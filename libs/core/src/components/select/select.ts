@@ -54,8 +54,21 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   @property({ type: Number })
   private selectElementSize?: number
+  private fieldBaseElement: HTMLElement | null = null
 
   private readonly selectId = `select-${Math.random().toString(36).substring(2, 11)}`
+
+  /**
+   * Public method for testing - gets the field base element
+   * @returns The field base element
+   */
+  getFieldElement(): HTMLElement | null {
+    if (!this.fieldBaseElement) {
+      this.fieldBaseElement =
+        this.shadowRoot?.querySelector('gds-field-base') || null
+    }
+    return this.fieldBaseElement
+  }
 
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label#placeholder')
@@ -71,13 +84,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
           node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
       ) as HTMLSelectElement
 
-      // if (selectElement) {
-      //   selectElement.setAttribute('aria-describedby', 'supporting-text')
-      //   selectElement.setAttribute('aria-labelledby', 'label-text')
-      //   this.multiple = selectElement.multiple
-      //   this.selectElementSize = selectElement.size || undefined
-      // }
-
       if (selectElement) {
         // Set a unique ID and aria-describedby
         selectElement.id = this.selectId
@@ -88,6 +94,16 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
         this.multiple = selectElement.multiple
         this.selectElementSize = selectElement.size || undefined
+
+        // Initialize fieldBaseElement
+        this.fieldBaseElement = this.getFieldElement()
+
+        // Add click handler
+        if (this.fieldBaseElement) {
+          this.fieldBaseElement.addEventListener('click', () => {
+            selectElement?.focus()
+          })
+        }
       }
     }
 
@@ -101,6 +117,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   protected _getValidityAnchor(): HTMLElement {
     return this.shadowRoot?.querySelector('SELECT') as HTMLElement
+  }
+
+  focus() {
+    selectElement?.focus()
   }
 
   render() {

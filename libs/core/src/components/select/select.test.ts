@@ -48,5 +48,16 @@ describe('<gds-select>', () => {
         supportingTextEl?.id,
       )
     })
+    it('should focus when clicking on the field', async () => {
+      const el = await fixture<GdsSelect>(html`
+        <gds-select>
+          <select></select>
+        </gds-select>
+      `)
+      await clickOnElement(el.getFieldElement())
+      await el.updateComplete
+      const select = el.querySelector('select')
+      expect(document.activeElement).to.equal(select)
+    })
   })
 })
