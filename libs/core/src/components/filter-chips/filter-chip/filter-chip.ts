@@ -41,12 +41,6 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
     super.connectedCallback()
     this.setAttribute('role', 'none')
     TransitionalStyles.instance.apply(this, 'gds-filter-chip')
-
-    // Apply transitional styles to the button if connectedCallback is called directly
-    // This is here mainly for the toggle feature in Storybook to work
-    this._button.then((btn) => {
-      TransitionalStyles.instance.apply(btn, 'gds-button')
-    })
   }
 
   @queryAsync(getScopedTagName('gds-button'))
