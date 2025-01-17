@@ -164,7 +164,9 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
     )[0]
 
-    this._elTrack.scrollLeft = nextLeftOutOfView.offsetLeft
+    if (!nextLeftOutOfView) return
+
+    this._elTrack.scrollLeft -= nextLeftOutOfView.offsetWidth
   }
 
   #scrollRight = () => {
@@ -172,7 +174,9 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
 
-    this._elTrack.scrollLeft = nextRightOutOfView.offsetLeft
+    if (!nextRightOutOfView) return
+
+    this._elTrack.scrollLeft += nextRightOutOfView.offsetWidth
   }
 
   // Updates the visibility of the scroll buttons
