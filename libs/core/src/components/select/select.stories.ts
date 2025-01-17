@@ -220,8 +220,10 @@ export const Validation: Story = {
         placeholder="Space Technologies"
         label="Label text"
         supporting-text="Supporting text"
+        .required=${true}
         .validator=${{
           validate: (el: any) => {
+            // Custom validation logic
             if (el.value === '') {
               return [
                 {
@@ -229,9 +231,10 @@ export const Validation: Story = {
                   valid: false,
                   customError: true,
                 },
-                'Please select an option.',
+                'Please select a valid option.',
               ]
             }
+            return [el.validity, '']
           },
         }}
       >

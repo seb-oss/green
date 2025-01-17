@@ -54,7 +54,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   @property({ type: Number })
   private selectElementSize?: number
-  private fieldBaseElement: HTMLElement | null = null
 
   private readonly selectId = `select-${Math.random().toString(36).substring(2, 11)}`
 
@@ -87,6 +86,13 @@ export class GdsSelect extends GdsFormControlElement<string> {
         this.addEventListener('click', () => {
           selectElement?.focus() // Focus the select element when the component is clicked
         })
+
+        // Add change event listener for validation
+        selectElement.addEventListener('change', () => {
+          if (selectElement) {
+            return this.validate(selectElement)
+          }
+        })
       }
     }
 
@@ -98,8 +104,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
     }
   }
 
-  protected _getValidityAnchor(): HTMLElement {
-    return this.shadowRoot?.querySelector('SELECT') as HTMLElement
+  validate(selectElement: HTMLSelectElement): any {
+    throw new Error('Method not implemented.')
   }
 
   /**
@@ -118,6 +124,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
       ) as HTMLSelectElement
     }
     return null
+  }
+
+  _getValidityAnchor(): HTMLElement {
+    return this.shadowRoot?.querySelector('SELECT') as HTMLElement
   }
 
   render() {
