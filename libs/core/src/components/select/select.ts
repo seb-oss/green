@@ -55,6 +55,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @property({ type: Number })
   private selectElementSize?: number
 
+  private readonly selectId = `select-${Math.random().toString(36).substring(2, 11)}`
+
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
@@ -69,7 +71,21 @@ export class GdsSelect extends GdsFormControlElement<string> {
           node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
       ) as HTMLSelectElement
 
+      // if (selectElement) {
+      //   selectElement.setAttribute('aria-describedby', 'supporting-text')
+      //   selectElement.setAttribute('aria-labelledby', 'label-text')
+      //   this.multiple = selectElement.multiple
+      //   this.selectElementSize = selectElement.size || undefined
+      // }
+
       if (selectElement) {
+        // Set a unique ID and aria-describedby
+        selectElement.id = this.selectId
+        selectElement.setAttribute('aria-describedby', 'supporting-text')
+
+        // Add name and aria-label
+        selectElement.setAttribute('aria-label', this.label)
+
         this.multiple = selectElement.multiple
         this.selectElementSize = selectElement.size || undefined
       }
@@ -94,7 +110,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
     return html`
       <gds-form-control-header class="size-${this.size}">
-        <label for="input" slot="label">${this.label}</label>
+        <label for="input" slot="label" id="label-text">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
         </span>
