@@ -58,18 +58,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   private readonly selectId = `select-${Math.random().toString(36).substring(2, 11)}`
 
-  /**
-   * Public method for testing - gets the field base element
-   * @returns The field base element
-   */
-  getFieldElement(): HTMLElement | null {
-    if (!this.fieldBaseElement) {
-      this.fieldBaseElement =
-        this.shadowRoot?.querySelector('gds-field-base') || null
-    }
-    return this.fieldBaseElement
-  }
-
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
@@ -95,15 +83,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
         this.multiple = selectElement.multiple
         this.selectElementSize = selectElement.size || undefined
 
-        // Initialize fieldBaseElement
-        this.fieldBaseElement = this.getFieldElement()
-
-        // Add click handler
-        if (this.fieldBaseElement) {
-          this.fieldBaseElement.addEventListener('click', () => {
-            selectElement?.focus()
-          })
-        }
+        // Add click handler to focus the select element
+        this.addEventListener('click', () => {
+          selectElement?.focus() // Focus the select element when the component is clicked
+        })
       }
     }
 
@@ -119,8 +102,22 @@ export class GdsSelect extends GdsFormControlElement<string> {
     return this.shadowRoot?.querySelector('SELECT') as HTMLElement
   }
 
-  focus() {
-    selectElement?.focus()
+  /**
+   * Public method to get the slotted select element
+   * @returns The slotted select element or null if not found
+   */
+  getSelectElement(): HTMLSelectElement | null {
+    const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
+    if (slotElement) {
+      const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
+        flatten: true,
+      })
+      return assignedNodes.find(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
+      ) as HTMLSelectElement
+    }
+    return null
   }
 
   render() {

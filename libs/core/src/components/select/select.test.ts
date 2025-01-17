@@ -48,16 +48,38 @@ describe('<gds-select>', () => {
         supportingTextEl?.id,
       )
     })
+
     it('should focus when clicking on the field', async () => {
+      // Create the select element first
+      const select = document.createElement('select')
+      select.innerHTML = '<option value="1">Option 1</option>'
+
+      // Create the component with the select element
       const el = await fixture<GdsSelect>(html`
-        <gds-select>
-          <select></select>
-        </gds-select>
+        <gds-select> ${select} </gds-select>
       `)
-      await clickOnElement(el.getFieldElement())
+
+      // Wait for component to be ready
       await el.updateComplete
-      const select = el.querySelector('select')
-      expect(document.activeElement).to.equal(select)
+
+      // Get the select element through the component method
+      const selectElement = el.getSelectElement()
+      expect(selectElement).to.not.be.null // Ensure the select element is present
+
+      // Manually dispatch click event on the component
+      el.dispatchEvent(
+        new MouseEvent('click', {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+        }),
+      )
+
+      // Wait for any updates
+      await el.updateComplete
+
+      // Check if the select element is focused
+      expect(document.activeElement).to.equal(selectElement)
     })
   })
 })
