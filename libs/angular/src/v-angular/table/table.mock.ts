@@ -27,7 +27,7 @@ export const columns: {
     {
       property: 'currency',
       label: 'header.currency',
-      sortable: true,
+      sortable: false,
       ariaLabelSortable:
         'Activate to sort Currency column in {{sortOrder}} order',
     },
@@ -35,7 +35,7 @@ export const columns: {
       property: 'bookedBalance',
       label: 'header.bookedbalance',
       valueType: 'numeric',
-      sortable: true,
+      sortable: false,
     },
     {
       property: 'datedBalance',

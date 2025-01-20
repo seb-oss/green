@@ -12,6 +12,7 @@
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-table-sort-icon-color-active: #fff;
   @include table.add-table();
+  width: 100%;
 
   border-bottom: none;
 
@@ -39,6 +40,8 @@
     background-color: rgba(0, 0, 0, 0);
     border: 0;
     font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
     padding: 0;
     cursor: pointer;
   }

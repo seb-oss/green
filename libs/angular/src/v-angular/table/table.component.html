@@ -1,3 +1,41 @@
+<ng-template #sortableThTemplate let-column>
+  <button class="sg-table-sort" *transloco="let t">
+    <ng-template #thButtonTemplate>
+      {{ t(column.label ?? '') }}
+    </ng-template>
+    <ng-container
+      *ngIf="
+        customHeaderTemplates.get(column.property) as thTemplate;
+        else thButtonTemplate
+      "
+    >
+      <ng-template
+        *ngTemplateOutlet="thTemplate || null; context: { $implicit: column }"
+      >
+      </ng-template>
+    </ng-container>
+  </button>
+</ng-template>
+
+<ng-template #notSortableThTemplate let-column>
+  <ng-template #defaultThTemplate>
+    <ng-container *transloco="let t">
+      {{ t(column.label ?? '') }}
+    </ng-container>
+  </ng-template>
+  <ng-container
+    *ngIf="
+      customHeaderTemplates.get(column.property) as thTemplate;
+      else defaultThTemplate
+    "
+  >
+    <ng-template
+      *ngTemplateOutlet="thTemplate || null; context: { $implicit: column }"
+    >
+    </ng-template>
+  </ng-container>
+</ng-template>
+
 <table class="gds-table" *transloco="let t">
   <!-- Table header -->
   <thead>
@@ -28,27 +66,24 @@
         [attr.aria-label]="getAriaLabel(column)"
         [attr.aria-sort]="column.order + 'ending'"
       >
-        <ng-container
-          *ngIf="
-            customHeaderTemplates.get(column.property) as thTemplate;
-            else defaultThTemplate
-          "
-        >
-          <!-- Cannot infer thTemplate as TemplateRef therefore null -->
-          <ng-template
+        <ng-container *ngIf="column.sortable">
+          <ng-container
             *ngTemplateOutlet="
-              thTemplate || null;
-              context: { $implicit: column }
+              sortableThTemplate;
+              context: { $implicit: column, column: column }
             "
           >
-          </ng-template>
+          </ng-container>
         </ng-container>
-
-        <ng-template #defaultThTemplate>
-          <button class="sg-table-sort">
-            {{ t(column.label ?? '') }}
-          </button>
-        </ng-template>
+        <ng-container *ngIf="!column.sortable">
+          <ng-container
+            *ngTemplateOutlet="
+              notSortableThTemplate;
+              context: { $implicit: column, column: column }
+            "
+          >
+          </ng-container>
+        </ng-container>
       </th>
     </tr>
   </thead>
