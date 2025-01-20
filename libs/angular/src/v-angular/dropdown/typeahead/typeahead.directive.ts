@@ -86,7 +86,11 @@ export class NggvTypeaheadDirective<
   }
 
   get emptyOption(): OptionBase<any> {
-    return { key: null, label: this.emptyOptionLabel || 'label.nomatchingoptions', disabled: true }
+    return {
+      key: null,
+      label: this.emptyOptionLabel || 'label.nomatchingoptions',
+      disabled: true,
+    }
   }
 
   /** Name of the component. nggv-dropdown if NggvDropdownComponent or nggv-input if NggvInputComponent */
@@ -141,7 +145,7 @@ export class NggvTypeaheadDirective<
       )
 
     // Trigger the pipe when this function have been called
-    this.inputValue$.next('');
+    this.inputValue$.next('')
   }
 
   /**
