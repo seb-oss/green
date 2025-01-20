@@ -19,6 +19,7 @@
     @include common.add-border-color();
     @include common.add-focus();
 
+    appearance: auto;
     background: #fff;
     color: #333;
     display: block;

@@ -1,7 +1,7 @@
 // @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
 
 @mixin text-field--error() {
-  $_border-bottom: 0.125rem solid #d81a1a !important;
+  $_border-bottom: 0.125rem solid #9f000a !important;
 
   border-bottom: $_border-bottom;
 
@@ -13,11 +13,6 @@
 }
 
 @mixin text-field--error-item() {
-  &:has(span:first-child:nth-last-child(2)) {
-    display: flex;
-  }
-
-  &--icon {
-    padding-right: 0.75rem;
-  }
+  display: flex;
+  gap: 0.5rem;
 }

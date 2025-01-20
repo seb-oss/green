@@ -45,13 +45,16 @@
 
   <!-- INPUT WRAPPER -->
   <ng-container *ngIf="!locked">
-    <div class="field-wrap" *ngIf="showInput$ | async">
+    <div
+      class="field-wrap"
+      [class.nggv-field--error]="invalid"
+      *ngIf="showInput$ | async"
+    >
       <!-- INPUT FIELD -->
       <input
         #input
         [id]="id + '-input'"
         class="nggv-field-date"
-        [class.nggv-field--error]="invalid"
         type="text"
         autocomplete="off"
         [attr.name]="name"
@@ -73,7 +76,6 @@
         aria-label="toggle calendar"
         #toggleCalendarButton
         class="nggv-button-date"
-        [class.nggv-field--error]="invalid"
         type="button"
         data-thook="toggle-calendar-button"
         (click)="toggleDatepicker()"
@@ -120,11 +122,12 @@
         [attr.for]="id + '-input'"
       >
         <span class="error-item">
-          <span class="error-item--icon" *ngIf="withErrorIcon">
+          <span class="error-item--icon">
             <gds-icon-triangle-exclamation
               *nggCoreElement
-              width="20"
-              height="20"
+              [solid]="true"
+              width="16"
+              height="16"
             ></gds-icon-triangle-exclamation>
           </span>
           <span
@@ -153,11 +156,12 @@
         *ngIf="invalid && error"
       >
         <span class="error-item">
-          <span class="error-item--icon" *ngIf="withErrorIcon">
+          <span class="error-item--icon">
             <gds-icon-triangle-exclamation
               *nggCoreElement
-              width="20"
-              height="20"
+              [solid]="true"
+              width="16"
+              height="16"
             ></gds-icon-triangle-exclamation>
           </span>
           <span
