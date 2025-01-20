@@ -24,7 +24,6 @@ export const CoreSegment = createComponent({
 
 export interface SegmentedControlProps {
   value?: string
-  segMinWidth?: number
   size?: 'small' | 'medium'
   onChange?: (event: Event) => void
   className?: string
@@ -36,6 +35,9 @@ export interface SegmentProps {
   className?: string
   disabled?: boolean
   children?: ReactNode | ReactNode[]
+  width?: string
+  'min-Width'?: string
+  'max-Width'?: string
 }
 
 const SegmentedControl: React.FC<SegmentedControlProps> = ({
