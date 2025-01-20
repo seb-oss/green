@@ -65,7 +65,7 @@ export class NggvTypeaheadDirective<
   @Input() unselectLabel?: string
 
   /** Custom label for the empty option */
-  @Input() emptyOptionLabel?: string;
+  @Input() emptyOptionLabel?: string
 
   /** Emits the entered string the user has written in the input */
   @Output() filterPhraseChange = new EventEmitter<string>()
@@ -111,7 +111,6 @@ export class NggvTypeaheadDirective<
 
   ngOnInit() {
     this.handleInputChanges()
-    this.inputValue$.next('')
 
     if (this.hostIsDropdown) this.createInput()
     else this.createDropdownList()
@@ -140,6 +139,9 @@ export class NggvTypeaheadDirective<
       .subscribe(([filteredValues, input]) =>
         this.setOptions(filteredValues, input),
       )
+
+    // Trigger the pipe when this function have been called
+    this.inputValue$.next('');
   }
 
   /**
@@ -185,8 +187,8 @@ export class NggvTypeaheadDirective<
       this.allowUnselect &&
       !input &&
       !(
-        Object.keys(filteredValues[0]).includes('key') &&
-        filteredValues[0].key == null
+        Object.keys(filteredValues[0] ?? {}).includes('key') &&
+        filteredValues[0]?.key == null
       )
     if (filteredValues.length === 0) {
       filteredValues = [this.emptyOption]
