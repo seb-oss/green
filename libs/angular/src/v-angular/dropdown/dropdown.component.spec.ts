@@ -7,17 +7,16 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms'
-
 import { TranslocoModule } from '@jsverse/transloco'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
+import { NggvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
 
 import '../core/core.globals'
 
 import { DropdownUtils, Option } from '../core/core.utils'
-import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
-import { NgvDropdownComponent } from './dropdown.component'
+import { NggvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NggvDropdownComponent } from './dropdown.component'
 
 @Component({
   selector: 'nggv-dropdown-list',
@@ -27,22 +26,22 @@ import { NgvDropdownComponent } from './dropdown.component'
 })
 class DropdownListStubComponent {}
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // DropdownComponent - constructor()
   // ----------------------------------------------------------------------------
 
   describe('DropdownComponent - constructor()', () => {
-    let component: NgvDropdownComponent
-    let fixture: ComponentFixture<NgvDropdownComponent>
+    let component: NggvDropdownComponent
+    let fixture: ComponentFixture<NggvDropdownComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvDropdownComponent],
+        declarations: [NggvDropdownComponent],
         providers: [
           { provide: NgControl, useValue: { control: new FormControl() } },
           {
-            provide: NgvDropdownListComponent,
+            provide: NggvDropdownListComponent,
             useValue: DropdownListStubComponent,
           },
           DropdownUtils,
@@ -52,13 +51,14 @@ describe('[NgvCore]', () => {
           FormsModule,
           ReactiveFormsModule,
           TranslocoModule,
-          NgvI18nTestModule,
-          NgvTooltipModule,
+          NggvI18nTestModule,
+          NggvTooltipModule,
         ],
       }).compileComponents()
 
-      fixture =
-        TestBed.createComponent<NgvDropdownComponent>(NgvDropdownComponent)
+      fixture = TestBed.createComponent<NggvDropdownComponent>(
+        NggvDropdownComponent,
+      )
       component = fixture.componentInstance
     }))
 

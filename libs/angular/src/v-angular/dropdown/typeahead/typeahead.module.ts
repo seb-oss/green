@@ -1,22 +1,22 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { NgvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
-import { NgvTypeaheadDropdownListComponent } from './typeahead-dropdown-list/typeahead-dropdown-list.component'
-import { NgvTypeaheadHighlightComponent } from './typeahead-highlight/typeahead-highlight.component'
-import { NgvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
+import { NggvTooltipModule } from '@sebgroup/green-angular/src/v-angular/tooltip'
+import { NggvTypeaheadDropdownListComponent } from './typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { NggvTypeaheadHighlightComponent } from './typeahead-highlight/typeahead-highlight.component'
+import { NggvTypeaheadInputComponent } from './typeahead-input/typeahead-input.component'
 
 @NgModule({
   declarations: [
-    NgvTypeaheadHighlightComponent,
-    NgvTypeaheadInputComponent,
-    NgvTypeaheadDropdownListComponent,
+    NggvTypeaheadHighlightComponent,
+    NggvTypeaheadInputComponent,
+    NggvTypeaheadDropdownListComponent,
   ],
-  imports: [CommonModule, NgvTooltipModule],
+  imports: [CommonModule, NggvTooltipModule],
   exports: [
-    NgvTypeaheadHighlightComponent,
-    NgvTypeaheadInputComponent,
-    NgvTypeaheadDropdownListComponent,
+    NggvTypeaheadHighlightComponent,
+    NggvTypeaheadInputComponent,
+    NggvTypeaheadDropdownListComponent,
   ],
 })
-export class NgvTypeaheadModule {}
+export class NggvTypeaheadModule {}

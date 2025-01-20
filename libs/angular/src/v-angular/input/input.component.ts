@@ -18,7 +18,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators'
 
 import type { InputmaskOptions } from '@sebgroup/green-angular/src/v-angular/input-mask'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Input fields allow users to add and edit text.
@@ -29,14 +29,15 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class NgvInputComponent
-  extends NgvBaseControlValueAccessorComponent
+export class NggvInputComponent
+  extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
   /** Adding .gds-form-item as a class to host element */
   @HostBinding('class') class = 'gds-form-item'
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'input'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'input'
   /** Type of input field. Should avoid types that modify field too much such as range. */
   @Input() type = 'text'
   /** Text shown before input has a written value. */
@@ -100,11 +101,6 @@ export class NgvInputComponent
   @Input() pattern = ''
   /** Amount of time to wait until emitting (nggvINput) event */
   @Input() debounceTime = 500
-  /**
-   * @deprecated
-   * Text to put in badge
-   */
-  @Input() badgeText = ''
 
   /** Settings for input mask if requested */
   private _inputMask!: InputmaskOptions<any>
@@ -168,7 +164,11 @@ export class NgvInputComponent
 
   writeValue(value: any) {
     // maxLength will only work with string values
-    if (value?.length && value.length > this.maxlength) {
+    if (
+      value?.length &&
+      value.length > this.maxlength &&
+      this.control.touched
+    ) {
       // cut value to match max length
       this.state = this.cutTextAfterMaxLength(value)
       if (value.length !== this.state.length) {

@@ -10,20 +10,20 @@ import { RouterTestingModule } from '@angular/router/testing'
 
 import '../core/core.globals'
 
-import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link/external-link.directive'
-import { NgvButtonComponent } from './button.component'
+import { NggvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link/external-link.directive'
+import { NggvButtonComponent } from './button.component'
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // ButtonComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('ButtonComponent - constructor()', () => {
-    let component: NgvButtonComponent
-    let fixture: ComponentFixture<NgvButtonComponent>
+    let component: NggvButtonComponent
+    let fixture: ComponentFixture<NggvButtonComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvButtonComponent, NgvExternalLinkDirective],
+        declarations: [NggvButtonComponent, NggvExternalLinkDirective],
         providers: [
           { provide: APP_BASE_HREF, useValue: '/' },
           { provide: NgControl, useValue: new FormControl() },
@@ -33,7 +33,7 @@ describe('[NgvCore]', () => {
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(NgvButtonComponent)
+      fixture = TestBed.createComponent(NggvButtonComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

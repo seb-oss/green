@@ -1,9 +1,3 @@
-@use 'node_modules/@sebgroup/vanilla/src/components/buttons/button-mixins.scss';
-
-.my-custom-class {
-  @include vanilla-button-delete;
-}
-
 .story-wrapper {
   display: flex;
   &--right-align {
