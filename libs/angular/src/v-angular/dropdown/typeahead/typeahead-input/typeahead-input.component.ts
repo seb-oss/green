@@ -79,7 +79,7 @@ export class NggvTypeaheadInputComponent
    */
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
-    if (event.code === 'Space') {
+    if (event.code === 'Space' && this.expanded) {
       event.preventDefault()
     }
   }
