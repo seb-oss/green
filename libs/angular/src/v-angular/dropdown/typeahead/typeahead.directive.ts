@@ -64,6 +64,9 @@ export class NggvTypeaheadDirective<
   /** Custom label for the unselect option */
   @Input() unselectLabel?: string
 
+  /** Custom label for the empty option */
+  @Input() emptyOptionLabel?: string
+
   /** Emits the entered string the user has written in the input */
   @Output() filterPhraseChange = new EventEmitter<string>()
 
@@ -83,7 +86,11 @@ export class NggvTypeaheadDirective<
   }
 
   get emptyOption(): OptionBase<any> {
-    return { key: null, label: 'label.nomatchingoptions', disabled: true }
+    return {
+      key: null,
+      label: this.emptyOptionLabel || 'label.nomatchingoptions',
+      disabled: true,
+    }
   }
 
   /** Name of the component. nggv-dropdown if NggvDropdownComponent or nggv-input if NggvInputComponent */
@@ -108,7 +115,6 @@ export class NggvTypeaheadDirective<
 
   ngOnInit() {
     this.handleInputChanges()
-    this.inputValue$.next('')
 
     if (this.hostIsDropdown) this.createInput()
     else this.createDropdownList()
@@ -137,6 +143,9 @@ export class NggvTypeaheadDirective<
       .subscribe(([filteredValues, input]) =>
         this.setOptions(filteredValues, input),
       )
+
+    // Trigger the pipe when this function have been called
+    this.inputValue$.next('')
   }
 
   /**
@@ -182,8 +191,8 @@ export class NggvTypeaheadDirective<
       this.allowUnselect &&
       !input &&
       !(
-        Object.keys(filteredValues[0]).includes('key') &&
-        filteredValues[0].key == null
+        Object.keys(filteredValues[0] ?? {}).includes('key') &&
+        filteredValues[0]?.key == null
       )
     if (filteredValues.length === 0) {
       filteredValues = [this.emptyOption]

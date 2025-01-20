@@ -56,6 +56,12 @@
     &:hover {
       background: #e7e7e7;
     }
+
+    &:active {
+      background: inherit;
+      color: inherit;
+      border-color: inherit;
+    }
   }
 
   .gds-form-item__footer {
