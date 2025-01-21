@@ -77,13 +77,9 @@ export class NggvTypeaheadInputComponent
    * Allow space to be inputted as text
    * @param event fired containing which key was released.
    */
-  @HostListener('document:keyup', ['$event', '$event.target'])
-  onKeyUp(event: KeyboardEvent, target: HTMLElement) {
-    if (
-      this.element.nativeElement.contains(target) &&
-      event.code === 'Space' &&
-      this.expanded
-    ) {
+  @HostListener('keyup', ['$event'])
+  onKeyUp(event: KeyboardEvent) {
+    if (event.code === 'Space' && this.expanded) {
       event.preventDefault()
     }
   }
