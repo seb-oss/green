@@ -47,6 +47,9 @@ export class NggvTypeaheadInputComponent
   /** Used to determine the height of the inputin html */
   buttonHeight?: number
 
+  /** @internal Used to determine wether the input has been moved or not */
+  inputMoved = false
+
   constructor(
     private element: ElementRef,
     private renderer2: Renderer2,
@@ -76,7 +79,7 @@ export class NggvTypeaheadInputComponent
    */
   @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
-    if (event.code === 'Space') {
+    if (event.code === 'Space' && this.expanded) {
       event.preventDefault()
     }
   }
@@ -98,6 +101,7 @@ export class NggvTypeaheadInputComponent
         // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
         this.buttonHeight =
           this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
+        this.inputMoved = true
       }
     }, 0)
   }
@@ -112,6 +116,10 @@ export class NggvTypeaheadInputComponent
       .pipe(takeUntil(this._destroy$))
       .subscribe((state) => {
         this.expanded = state
+
+        // Calling this function from onInit caused issues when DOM has not fully been initialized because of
+        // different CSS used to hide (but not remove) from DOM
+        if (!this.inputMoved) this.moveInput()
 
         if (this.expanded) {
           // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.
