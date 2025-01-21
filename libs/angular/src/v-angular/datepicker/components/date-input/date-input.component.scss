@@ -43,13 +43,18 @@
 
   .error-item {
     @include ngv.text-field--error-item();
+    color: #9f000a;
   }
 
   .nggv-field--locked {
   }
 
-  .error-item--text {
-    color: #bb000c;
+  .gds-field-notice {
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: 500;
   }
 
   .field-wrap {
