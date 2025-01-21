@@ -9,6 +9,8 @@
   --sg-border-radius: 0.25rem;
   --sg-border-width: 1px;
   --sg-border-color: #868686;
+  --text-primary-color: #333;
+  --sg-form-control-bg: #fff;
   --grey-000: hsl(0 0% 100%);
   --grey-100: hsl(0, 0%, 97%);
   --grey-200: hsl(0, 0%, 91%);
@@ -35,17 +37,16 @@
     width: 100%;
   }
 
+  .gds-field-label--optional {
+    font-weight: 400;
+  }
+
   button {
-    @include button.reset();
-    @include button.base();
-    @include button.secondary();
     @include dropdown.dropdown-trigger();
 
-    font-size: inherit;
+    font-size: 1rem;
     font-weight: normal;
     line-height: 1.125;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
 
     width: 100%;
 
@@ -62,11 +63,24 @@
       color: inherit;
       border-color: inherit;
     }
+    
+    &:disabled,
+    &.disabled {
+      --text-primary-color: var(--grey-600);
+      background: var(--grey-300);
+      color: var(--grey-600);
+      cursor: not-allowed;
+    }
+
+    &.nggv-field--error {
+      border-bottom: 2px solid #9f000a;
+    }
   }
 
   .gds-form-item__footer {
     .form-info {
       font-weight: 500;
+      font-size: 0.875rem;
     }
 
     .form-info--error {
