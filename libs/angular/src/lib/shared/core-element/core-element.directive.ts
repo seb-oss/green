@@ -30,7 +30,6 @@ export class NggCoreElementDirective implements OnInit {
 
       const originalCreateElement = this.renderer.createElement
       this.renderer.createElement = (name: string, _namespace: string) => {
-        console.log('createElement', getScopedTagName(name))
         return this.document.createElement(getScopedTagName(name))
       }
 
