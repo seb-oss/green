@@ -69,6 +69,7 @@ export function styleExpressionProperty(
         return this['__' + String(descriptor)]
       },
       set: async function (newValue) {
+        if (!newValue) return
         this['__' + String(descriptor)] = newValue
         await this.updateComplete
 
