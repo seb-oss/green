@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.62.3
+
+### Patch Changes
+
+- c6d42ec: **Filter Chip**: Fix issue where filter chip is trying to register transitional styles for button
+
+## 1.62.2
+
+### Patch Changes
+
+- 12a3417: **Scoping:** Fix return type of `gdsCustomElement` decorator in bail-out code path
+
 ## 1.62.1
 
 ### Patch Changes
