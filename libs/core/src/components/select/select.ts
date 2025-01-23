@@ -1,5 +1,5 @@
 import { localized } from '@lit/localize'
-import { property, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import {
@@ -10,7 +10,7 @@ import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './select.styles'
 
 import '../../primitives/form-control-header'
-import '../../primitives/form-control-header'
+import '../../primitives/form-control-footer'
 import '../../primitives/field-base/field-base'
 import '../icon/icons/chevron-bottom'
 import '../button/button'
@@ -27,15 +27,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @property()
   placeholder = ''
 
-  /**
-   * The label displayed above the field
-   */
   @property()
   label = ''
 
-  /**
-   * The supporting text displayed between the label and the field itself
-   */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
@@ -57,6 +51,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   private readonly selectId = `select-${Math.random().toString(36).substring(2, 11)}`
 
+  @query('select')
+  private selectElement!: HTMLSelectElement // Reference to the select element
+
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
@@ -76,10 +73,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
       })
     }
 
-    // Now you can find the select element in the Shadow DOM
-    const selectElement: HTMLSelectElement | null = this.shadowRoot
-      ? this.shadowRoot.querySelector('select')
-      : null
+    // Now you can find the select element in the select-container
+    const selectElement: HTMLSelectElement | null =
+      this.shadowRoot?.querySelector('.select-container select') || null
 
     if (selectElement) {
       // Set a unique ID and aria-describedby
@@ -89,20 +85,17 @@ export class GdsSelect extends GdsFormControlElement<string> {
       // Add name and aria-label
       selectElement.setAttribute('aria-label', this.label)
 
-      this.multiple = selectElement.multiple
-      this.selectElementSize = selectElement.size || undefined
+      // Sync the value with the form control's value property
+      this.value = selectElement.value
 
-      // Add click handler to focus the select element
-      this.addEventListener('click', () => {
-        selectElement?.focus() // Focus the select element when the component is clicked
-      })
-
-      // Add change event listener for validation
+      // Add event listener to validate on change
       selectElement.addEventListener('change', () => {
-        if (selectElement) {
-          return this.validate(selectElement)
-        }
+        this.value = selectElement.value // Update the value property
+        this.checkValidity() // Check validity on change
       })
+
+      // Set initial value
+      selectElement.value = this.value // Ensure the select element reflects the initial value
     }
 
     if (labelElement && selectElement) {
@@ -113,16 +106,12 @@ export class GdsSelect extends GdsFormControlElement<string> {
     }
   }
 
-  validate(selectElement: HTMLSelectElement): any {
-    throw new Error('Method not implemented.')
-  }
-
   /**
    * Public method to get the slotted select element
    * @returns The slotted select element or null if not found
    */
   getSelectElement(): HTMLSelectElement | null {
-    return this.shadowRoot ? this.shadowRoot.querySelector('select') : null
+    return this.shadowRoot?.querySelector('.select-container select') ?? null
   }
 
   _getValidityAnchor(): HTMLElement {
@@ -140,10 +129,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
         </span>
-        <slot
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
       </gds-form-control-header>
 
       <gds-field-base
@@ -159,7 +144,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
       <gds-form-control-footer
         class="size-${this.size}"
-        .validationMessage=${this.invalid ? this.validationMessage : undefined}
+        .validationMessage=${this.invalid &&
+        (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
     `
   }

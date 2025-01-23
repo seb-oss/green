@@ -223,18 +223,15 @@ export const Validation: Story = {
         .required=${true}
         .validator=${{
           validate: (el: any) => {
-            // Custom validation logic
-            if (el.value === '') {
+            if (el.value === '')
               return [
                 {
                   ...el.validity,
                   valid: false,
                   customError: true,
                 },
-                'Please select a valid option.',
+                'Error message.',
               ]
-            }
-            return [el.validity, '']
           },
         }}
       >
