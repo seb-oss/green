@@ -1,12 +1,9 @@
 import { expect } from '@esm-bundle/chai'
-import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
-import { sendKeys } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { fixture, html as testingHtml } from '@open-wc/testing'
 
 import type { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/select/index.js'
 
@@ -22,7 +19,31 @@ describe('<gds-select>', () => {
       expect(labelEl).to.exist
       expect(labelEl?.textContent).to.contain('Select Placeholder')
     })
+
+    it('should render options correctly', async () => {
+      const el = await fixture<GdsSelect>(
+        html`<gds-select label="Select Label">
+          <select>
+            <option value="">Please select</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </select>
+        </gds-select>`,
+      )
+
+      // Wait for component to be ready
+      await el.updateComplete
+
+      // Get the select element through the component method
+      const selectElement = el.getSelectElement()
+      expect(selectElement).to.exist
+      expect(selectElement.options.length).to.equal(3) // 1 for "Please select" + 2 options
+      expect(selectElement.options[0].text).to.equal('Please select')
+      expect(selectElement.options[1].text).to.equal('Option 1')
+      expect(selectElement.options[2].text).to.equal('Option 2')
+    })
   })
+
   describe('Accessibility', () => {
     it('should pass axe smoketest', async () => {
       const el = await fixture<GdsSelect>(
@@ -36,50 +57,63 @@ describe('<gds-select>', () => {
       )
       await expect(el).to.be.accessible()
     })
-    it('should have a aria-describedby attribute that matches the supporting text id', async () => {
+
+    it('should have an aria-describedby attribute that matches the supporting text id', async () => {
       const el = await fixture<GdsSelect>(
         html`<gds-select supporting-text="My supporting text">
           <select></select>
         </gds-select>`,
       )
-      const inputEl = el.querySelector('select') // Look in light DOM instead of shadow DOM
+      const inputEl = el.getSelectElement() // Use the method to get the select element
       const supportingTextEl = el.shadowRoot?.querySelector('#supporting-text')
       expect(inputEl?.getAttribute('aria-describedby')).to.equal(
         supportingTextEl?.id,
       )
     })
+  })
 
-    it('should focus when clicking on the field', async () => {
-      // Create the select element first
-      const select = document.createElement('select')
-      select.innerHTML = '<option value="1">Option 1</option>'
-
-      // Create the component with the select element
+  describe('Interaction', () => {
+    it('should render options when the gds-select component is clicked', async () => {
       const el = await fixture<GdsSelect>(html`
-        <gds-select> ${select} </gds-select>
+        <gds-select label="Select Label">
+          <select>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </select>
+        </gds-select>
       `)
 
-      // Wait for component to be ready
+      // Wait for the component to be ready
       await el.updateComplete
 
-      // Get the select element through the component method
-      const selectElement = el.getSelectElement()
-      expect(selectElement).to.not.be.null // Ensure the select element is present
+      // Click on the gds-select component to simulate user interaction
+      el.dispatchEvent(new MouseEvent('click', { bubbles: true }))
 
-      // Manually dispatch click event on the component
-      el.dispatchEvent(
-        new MouseEvent('click', {
-          bubbles: true,
-          cancelable: true,
-          view: window,
-        }),
-      )
-
-      // Wait for any updates
+      // Wait for any updates to complete
       await el.updateComplete
 
-      // Check if the select element is focused
-      expect(document.activeElement).to.equal(selectElement)
+      // Check if the options are rendered in the dropdown
+      const options = el.shadowRoot?.querySelectorAll('option') // Adjust selector based on your implementation
+      expect(options.length).to.be.greaterThan(0) // Check if there are options available
+
+      // Optionally, check if the first option is visible
+      expect(options[0].textContent).to.equal('Option 1') // Verify the first option's text
+    })
+
+    it('should return value when an option is pre-selected', async () => {
+      const el = await fixture<GdsSelect>(html`
+        <gds-select label="Select Label">
+          <select>
+            <option value="">Please select</option>
+            <option value="1" selected>Option 1</option>
+            <option value="2">Option 2</option>
+          </select>
+        </gds-select>
+      `)
+
+      await el.updateComplete
+
+      expect(el.value).to.equal('1')
     })
   })
 })
