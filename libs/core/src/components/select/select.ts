@@ -54,6 +54,11 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @query('select')
   private selectElement!: HTMLSelectElement // Reference to the select element
 
+  constructor() {
+    super()
+    this.value = ''
+  }
+
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
