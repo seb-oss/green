@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.62.5
+
+### Patch Changes
+
+- e18b5a8: **Utils:style-expression-property:** Safe guard falsy values
+
+## 1.62.4
+
+### Patch Changes
+
+- d359d06: **Button:** Fix width styling issue in 2016 design
+
 ## 1.62.3
 
 ### Patch Changes
