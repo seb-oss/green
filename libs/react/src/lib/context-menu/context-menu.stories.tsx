@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import { ContextMenu, MenuItem } from './context-menu'
 
 const Template = ({ children, ...props }) => (
