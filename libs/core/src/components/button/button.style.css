@@ -40,7 +40,7 @@
     position: relative;
     text-decoration: none;
     transition-property: color, border-colorm, background;
-    transition-duration: 0.4s;
+    transition-duration: 0.2s;
     max-width: 100%;
     flex: 1;
 
