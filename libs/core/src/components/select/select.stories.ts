@@ -215,8 +215,8 @@ export const Validation: Story = {
   name: 'Validation',
   render: () => html`
     <gds-flex>
-      <!-- .invalid=${true} -->
       <gds-select
+        .invalid=${true}
         placeholder="Space Technologies"
         label="Label text"
         supporting-text="Supporting text"

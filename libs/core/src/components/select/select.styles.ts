@@ -12,6 +12,7 @@ export const styles = css`
       gap: var(--gds-space-xs);
     }
 
+    select,
     ::slotted(select) {
       appearance: none;
       outline: none;

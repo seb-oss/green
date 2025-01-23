@@ -1,5 +1,5 @@
 import { localized } from '@lit/localize'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import {
@@ -60,44 +60,53 @@ export class GdsSelect extends GdsFormControlElement<string> {
   firstUpdated() {
     const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
-    let selectElement: HTMLSelectElement | null = null
 
+    // Move the content of the slot into the select-container
     if (slotElement) {
       const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
         flatten: true,
       })
-      selectElement = assignedNodes.find(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
-      ) as HTMLSelectElement
+      const selectContainer =
+        this.shadowRoot?.querySelector('.select-container')
 
-      if (selectElement) {
-        // Set a unique ID and aria-describedby
-        selectElement.id = this.selectId
-        selectElement.setAttribute('aria-describedby', 'supporting-text')
-
-        // Add name and aria-label
-        selectElement.setAttribute('aria-label', this.label)
-
-        this.multiple = selectElement.multiple
-        this.selectElementSize = selectElement.size || undefined
-
-        // Add click handler to focus the select element
-        this.addEventListener('click', () => {
-          selectElement?.focus() // Focus the select element when the component is clicked
-        })
-
-        // Add change event listener for validation
-        selectElement.addEventListener('change', () => {
-          if (selectElement) {
-            return this.validate(selectElement)
-          }
-        })
-      }
+      assignedNodes.forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT') {
+          selectContainer?.appendChild(node) // Move the select element to the select-container
+        }
+      })
     }
 
-    if (labelElement && selectElement && slotElement) {
-      slotElement.addEventListener('change', () => {
+    // Now you can find the select element in the Shadow DOM
+    const selectElement: HTMLSelectElement | null = this.shadowRoot
+      ? this.shadowRoot.querySelector('select')
+      : null
+
+    if (selectElement) {
+      // Set a unique ID and aria-describedby
+      selectElement.id = this.selectId
+      selectElement.setAttribute('aria-describedby', 'supporting-text')
+
+      // Add name and aria-label
+      selectElement.setAttribute('aria-label', this.label)
+
+      this.multiple = selectElement.multiple
+      this.selectElementSize = selectElement.size || undefined
+
+      // Add click handler to focus the select element
+      this.addEventListener('click', () => {
+        selectElement?.focus() // Focus the select element when the component is clicked
+      })
+
+      // Add change event listener for validation
+      selectElement.addEventListener('change', () => {
+        if (selectElement) {
+          return this.validate(selectElement)
+        }
+      })
+    }
+
+    if (labelElement && selectElement) {
+      selectElement.addEventListener('change', () => {
         const selectedOption = selectElement.selectedOptions[0]
         labelElement.textContent = selectedOption.textContent
       })
@@ -113,17 +122,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * @returns The slotted select element or null if not found
    */
   getSelectElement(): HTMLSelectElement | null {
-    const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
-    if (slotElement) {
-      const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
-        flatten: true,
-      })
-      return assignedNodes.find(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT',
-      ) as HTMLSelectElement
-    }
-    return null
+    return this.shadowRoot ? this.shadowRoot.querySelector('select') : null
   }
 
   _getValidityAnchor(): HTMLElement {
@@ -184,6 +183,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
       return html`
         <label id="placeholder">${this.placeholder || 'Select'}</label>
         <slot></slot>
+        <div class="select-container"></div>
       `
     } else {
       return html` <slot></slot> `
