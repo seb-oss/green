@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.62.5
+
+### Patch Changes
+
+- e18b5a8: **Utils:style-expression-property:** Safe guard falsy values
+
 ## 1.62.4
 
 ### Patch Changes
