@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 // This file is here to help with development of the style expression parser, since the regular
 // tests are a bit clunky for this kind of work.
 //
