@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { notFound } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
+import { GdsRichText } from '$/import/components'
 import { Mdx } from 'core/mdx'
 
 import type { Metadata, ResolvingMetadata } from 'next'

@@ -30,7 +30,6 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     await expect(el.options).to.have.lengthOf(3)
     await expect(el.options[0].textContent).to.equal('Option 1')
     await expect(el.options[1].textContent).to.equal('Option 2')
@@ -51,7 +50,6 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot!.querySelector<HTMLElement>(
       getScopedTagName('gds-popover'),
     )!
-
     await expect(popover.hidden).to.be.false
   })
 
@@ -63,7 +61,6 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     await expect(el.value).to.equal('v1')
     await expect(el.displayValue).to.equal('Option 1')
   })
@@ -76,10 +73,8 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     el.value = 'v2'
     await el.updateComplete
-
     await expect(el.value).to.equal('v2')
     await waitUntil(() => el.displayValue === 'Option 2')
   })
@@ -94,7 +89,6 @@ describe('<gds-dropdown>', () => {
     `)
     const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
-
     await expect(label).to.not.be.null
     await expect(label.textContent).to.equal('DD Label')
     await expect(label.getAttribute('for')).to.equal(trigger.id)
@@ -108,7 +102,6 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     await expect(el.value).to.equal('v2')
     await expect(el.displayValue).to.equal('Option 2')
   })
@@ -121,11 +114,9 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     await expect(el.placeholder).to.not.be.null
     await expect(el.placeholder!.textContent).to.equal('Option 2')
   })
-
   it('should have undefined `isPlaceholder` if none is specified', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
@@ -134,7 +125,6 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     await expect(el.placeholder).to.be.undefined
   })
 
@@ -149,9 +139,7 @@ describe('<gds-dropdown>', () => {
     `)
     const triggerSlot =
       el.shadowRoot!.querySelector<HTMLSlotElement>(`button slot`)!
-
     const triggerContent = triggerSlot.assignedNodes()[0] as HTMLElement
-
     await expect(triggerContent.textContent).to.equal('Custom trigger')
   })
 
@@ -163,17 +151,12 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     const uiStateHandler = sinon.spy()
-
     el.addEventListener('gds-ui-state', uiStateHandler)
     el.open = true
-
     await waitUntil(() => uiStateHandler.calledOnce)
     el.open = false
-
     await waitUntil(() => uiStateHandler.calledTwice)
-
     await expect(uiStateHandler).to.have.been.calledTwice
   })
 
@@ -185,11 +168,9 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     const option1 = el.querySelectorAll(getScopedTagName('gds-option'))[0]
     el.removeChild(option1)
     await el.updateComplete
-
     await expect(el.options.length).to.equal(2)
     await expect(el.options[0].value).to.equal('v2')
     await expect(el.value).to.equal('v2')
@@ -208,7 +189,6 @@ describe('<gds-dropdown>', () => {
     `)
     const form = document.getElementById('test-form')! as HTMLFormElement
     const formData = new FormData(form)
-
     await expect((form.elements[0] as GdsDropdown).value).to.equal('v1')
     await expect(formData.get('test-dropdown')).to.equal('v1')
   })
@@ -228,11 +208,8 @@ describe('<gds-dropdown>', () => {
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-
     const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
-
     await aTimeout(50)
-
     await expect(popover?.clientWidth).to.be.greaterThanOrEqual(
       trigger.clientWidth,
     )
@@ -250,17 +227,13 @@ describe('<gds-dropdown>', () => {
         >
       </gds-dropdown>
     `)
-
     await el.updateComplete
-
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
-
+    const field = el.test_getFieldElement()
     await aTimeout(50)
-
-    expect(popover?.offsetWidth).to.equal(trigger.offsetWidth)
+    expect(popover?.offsetWidth).to.equal(field.offsetWidth)
   })
 
   it('should limit the height of the popover to max-height attribute', async () => {
@@ -277,21 +250,16 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v9">Option 9</gds-option>
       </gds-dropdown>
     `)
-
     await el.updateComplete
-
     const popover = el.shadowRoot
       ?.querySelector<HTMLElement>(getScopedTagName('gds-popover'))
       ?.shadowRoot?.querySelector<HTMLElement>('dialog')
-
     await aTimeout(50)
-
     await expect(popover?.clientHeight).to.be.lessThanOrEqual(50)
   })
 
   it('should select complex value correctly with `compareWith` callback', async () => {
     const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
-
     ;[1, 2, 3].forEach((num) => {
       const o = document.createElement(
         getScopedTagName('gds-option'),
@@ -300,15 +268,10 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-
     el.compareWith = (a, b) => a.val === b.val
-
     await el.updateComplete
-
     el.value = { val: 'test2' }
-
     await el.updateComplete
-
     await expect(el.options[0].selected).equal(false)
     await expect(el.options[1].selected).equal(true)
     await expect(el.options[2].selected).equal(false)
@@ -318,7 +281,6 @@ describe('<gds-dropdown>', () => {
     const el = await fixture<GdsDropdown>(
       html`<gds-dropdown multiple></gds-dropdown>`,
     )
-
     ;[1, 2, 3, 4].forEach((num) => {
       const o = document.createElement(
         getScopedTagName('gds-option'),
@@ -327,15 +289,10 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-
     el.compareWith = (a, b) => a.val === b.val
-
     await el.updateComplete
-
     el.value = [{ val: 'test2' }, { val: 'test4' }]
-
     await el.updateComplete
-
     await expect(el.options[0].selected).equal(false)
     await expect(el.options[1].selected).equal(true)
     await expect(el.options[2].selected).equal(false)
@@ -344,9 +301,7 @@ describe('<gds-dropdown>', () => {
 
   it('should pre-select correct option when options where added dynamically', async () => {
     const el = await fixture<GdsDropdown>(html`<gds-dropdown></gds-dropdown>`)
-
     el.value = 'test2'
-
     await el.updateComplete
     ;[1, 2, 3].forEach((num) => {
       const o = document.createElement(
@@ -356,9 +311,7 @@ describe('<gds-dropdown>', () => {
       o.innerHTML = `Test option ${num}`
       el.appendChild(o)
     })
-
     await el.updateComplete
-
     await expect(el.options[0].selected).equal(false)
     await expect(el.options[1].selected).equal(true)
     await expect(el.options[2].selected).equal(false)
@@ -372,15 +325,11 @@ describe('<gds-dropdown>', () => {
         <gds-option value="v3">Option 3</gds-option>
       </gds-dropdown>
     `)
-
     el.value = 'v3'
     await el.updateComplete
-
     const option3 = el.querySelectorAll(getScopedTagName('gds-option'))[2]
     option3.textContent = 'Option 3 (updated)'
-
     await el.updateComplete
-
     await expect(el.displayValue).to.equal('Option 3 (updated)')
   })
 })
@@ -751,5 +700,32 @@ describe('<gds-dropdown multiple>', () => {
     `)
 
     await expect(el.displayValue).to.equal('Select values')
+  })
+})
+
+describe('<gds-dropdown> accessibility', () => {
+  it('pass axe smoketest', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown">
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    await expect(el).to.be.accessible()
+  })
+
+  it('should have a label for the trigger', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown">
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    const trigger = el.shadowRoot!.querySelector<HTMLElement>('button')!
+    const label = el.shadowRoot!.querySelector<HTMLElement>('label')!
+
+    await expect(label.getAttribute('for')).to.equal(trigger.id)
   })
 })

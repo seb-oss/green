@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useContext, useState } from 'react'
+import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
@@ -13,7 +14,6 @@ import {
   IconTextEdit,
 } from '$/import/icons'
 import { Context } from '$/provider/provider'
-import Link from 'core/link'
 
 import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
 
@@ -39,58 +39,19 @@ const menu = [
     title: 'Foundation',
     path: '/foundation',
     icon: <IconBrandGreen />,
-    subLinks: [
-      // {
-      //   title: 'Accessibility',
-      //   path: '/foundation/accessibility',
-      //   badge: undefined,
-      //   private: false,
-      // },
-    ],
+    subLinks: [],
   },
   {
     title: 'UX Writing',
     path: '/ux-writing',
     icon: <IconTextEdit />,
-    subLinks: [
-      // {
-      //   title: 'General',
-      //   path: '/ux-writing/general',
-      //   badge: undefined,
-      //   private: false,
-      // },
-      // {
-      //   title: 'English',
-      //   path: '/ux-writing/english',
-      //   badge: undefined,
-      //   private: false,
-      // },
-      // {
-      //   title: 'Swedish',
-      //   path: '/ux-writing/swedish',
-      //   badge: undefined,
-      //   private: false,
-      // },
-    ],
+    subLinks: [],
   },
   {
     title: 'About',
     path: '/about',
     icon: <IconSquareInfo />,
-    subLinks: [
-      // {
-      //   title: 'Changelog',
-      //   path: '/changelog',
-      //   badge: undefined,
-      //   private: false,
-      // },
-      // {
-      //   title: 'Status',
-      //   path: '/status',
-      //   badge: undefined,
-      //   private: false,
-      // },
-    ],
+    subLinks: [],
   },
 ]
 
@@ -120,14 +81,16 @@ export default function Sidebar() {
       height="calc(100vh - 72px)"
       align-items="flex-start"
       flex-direction="column"
-      margin="0 s; m{0 0 0 s}"
-      z-index="99"
+      margin="0 s; m{s 0 0 s}"
+      z-index="2"
       padding="none"
       position="fixed; m{sticky}"
-      inset="60px 0 0 0"
-      max-height="calc(100vh - 60px)"
+      inset="70px 0 0 0"
+      max-height="calc(100vh - 90px)"
       overflow="hidden"
       min-width="270px"
+      className="sidebar-transition"
+      variant="primary"
     >
       <GdsFlex flex-direction="column" max-height="100%">
         <GdsContainer
@@ -147,8 +110,7 @@ export default function Sidebar() {
               <GdsFlex key={idx} flex-direction="column" min-width="100%">
                 <Link
                   href={menuItem.path}
-                  className={`sidebar-link ${menuItem.path === path ? 'active' : ''}`}
-                  variant="hidden"
+                  className={`fade-in sidebar-link ${menuItem.path === path ? 'active' : ''}`}
                   onClick={() => {
                     window.innerWidth < 1024 && toggleNav()
                   }}
@@ -180,9 +142,8 @@ export default function Sidebar() {
                 return (
                   <Link
                     href={subLink.path}
-                    className={`sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
+                    className={`fade-in sidebar-link sidebar-link--sub ${subLink.path === path ? 'active' : ''}`}
                     key={subIdx}
-                    variant="hidden"
                     onClick={() => {
                       window.innerWidth < 1024 && toggleNav()
                     }}
@@ -216,26 +177,6 @@ export default function Sidebar() {
               })}
           </GdsFlex>
         </GdsContainer>
-
-        {/* <GdsContainer padding="xs" min-width="250px">
-          <GdsFlex flex-direction="column" min-width="100%" margin="auto 0 0 0">
-            <Link
-              href="https://designlibrary.sebgroup.com/"
-              target="_blank"
-              className="sidebar-link"
-              variant="hidden"
-            >
-              <GdsFlex
-                align-items="center"
-                justify-content="space-between"
-                width="100%"
-              >
-                <span>Design Library</span>
-                <IconCainLink />
-              </GdsFlex>
-            </Link>
-          </GdsFlex>
-        </GdsContainer> */}
       </GdsFlex>
     </GdsCard>
   )

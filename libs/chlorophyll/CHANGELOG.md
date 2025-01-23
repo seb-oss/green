@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.6.13
+
+### Patch Changes
+
+- 3331d19: Tabs not selected now have same size as selected tabs
+
+## 3.6.12
+
+### Patch Changes
+
+- 85759d1: Wizard next button icon alignment fix
+
 ## 3.6.11
 
 ### Patch Changes

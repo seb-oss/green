@@ -1,10 +1,12 @@
+import { tr } from 'date-fns/locale'
+
 type Tokens = string[]
 type BreakpointSpecifier = { condition: string; value: string }[]
 type BreakpointValues = { sel: string; values: string[] }
 type BreakpointData = { breakpoint: string; values: BreakpointValues[] }
 type BreakpointTree = BreakpointData[]
 
-export const viewportBreakpoints: Record<string, string> = {
+const viewportBreakpoints: Record<string, string> = {
   '0': '0px',
   '2xs': '320px',
   xs: '425px',
@@ -30,7 +32,7 @@ const whitespace = [' ', '/n']
  * @param source The source string to tokenize
  * @returns An array of tokens
  */
-export function tokenize(source: string): Tokens {
+export function tokenize(source = ''): Tokens {
   const lexemes = []
   let scanned = ''
 

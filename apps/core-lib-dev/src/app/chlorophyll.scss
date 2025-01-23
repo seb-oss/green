@@ -5,7 +5,3 @@
 @use '../../../../libs/chlorophyll/scss' with (
   $font-path: '../../../../dist/libs/fonts/fonts'
 );
-
-@use '../../../../libs/fonts/scss/gds-fonts' with (
-  $seb-font-path: '../../../../dist/libs/fonts/fonts'
-);

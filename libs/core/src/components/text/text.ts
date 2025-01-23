@@ -129,36 +129,6 @@ export class GdsText extends GdsContainer {
   'text-transform'?: string
 
   /**
-   * Controls the max length of the text in characters.
-   * Length is by defualt in characters to keep conistency with the text content.
-   *
-   * You can apply length like this:
-   *
-   * ```html
-   * <gds-text max-width="50"></gds-text>
-   * ```
-   *
-   * @property length
-   */
-  @styleExpressionProperty({
-    property: 'max-width',
-    valueTemplate: (v) => `${v}ch`,
-  })
-  'max-width'?: string
-
-  /**
-   * Controls the max-width property of the text.
-   * Supports all valid CSS max-width values.
-   *
-   * @property max
-   */
-  @styleExpressionProperty({
-    property: 'min-width',
-    valueTemplate: (v) => `${v}ch`,
-  })
-  'min-width'?: string
-
-  /**
    * Controls the text-align property of the text.
    * Supports all valid CSS text-align values.
    *
