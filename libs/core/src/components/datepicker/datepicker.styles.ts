@@ -23,7 +23,7 @@ export const styles = css`
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      min-width: 10ch;
+      inline-size: 11ch;
       gap: var(--gds-space-4xs);
       font-size: var(--gds-text-size-detail-s);
       font-weight: var(--gds-text-weight-regular);
@@ -36,9 +36,8 @@ export const styles = css`
       text-align: center;
       height: 100%;
       box-sizing: border-box;
-      border-radius: var(--gds-space-2xs);
+      /* border-radius: var(--gds-space-2xs); */
       outline: none;
-      padding-inline: var(--gds-space-2xs);
       padding-block: var(--gds-space-3xs);
       text-transform: uppercase;
       line-height: 1;
@@ -47,14 +46,6 @@ export const styles = css`
       &:focus {
         background-color: var(--gds-color-l3-background-primary);
         color: var(--gds-color-l3-content-primary);
-      }
-
-      &[data-max-width='4'] {
-        width: calc(4ch + (var(--gds-space-2xs) * 2));
-      }
-
-      &[data-max-width='2'] {
-        width: calc(2ch + (var(--gds-space-2xs) * 2));
       }
     }
   }
