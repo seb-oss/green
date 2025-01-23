@@ -25,7 +25,6 @@ export const styles = css`
       justify-content: flex-start;
       min-width: 10ch;
       gap: var(--gds-space-4xs);
-      font-family: monospace;
       font-size: var(--gds-text-size-detail-s);
       font-weight: var(--gds-text-weight-regular);
     }
