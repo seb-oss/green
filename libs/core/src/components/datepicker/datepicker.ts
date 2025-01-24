@@ -304,6 +304,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
       </gds-form-control-footer>
 
       <gds-popover
+        autofocus
         .triggerRef=${this._elTrigger}
         .anchorRef=${this._elFieldAsync}
         .open=${this.open}
