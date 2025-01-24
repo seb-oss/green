@@ -81,6 +81,14 @@ export class GdsDropdown<ValueT = any>
   multiple = false
 
   /**
+   * Whether the dropdown should be rendered as a combobox.
+   * When set to true, the dropdown will render an input field instead of a button.
+   * The value of the dropdown will be a string representing the selected value.
+   */
+  @property({ type: Boolean, reflect: true })
+  combobox = false
+
+  /**
    * Delegate function for comparing option values.
    * By default the option values are compared using strict equality.
    * If you want to compare objects by field values, you can provide
@@ -256,12 +264,14 @@ export class GdsDropdown<ValueT = any>
         `,
       )}
       <gds-popover
+        .autofocus=${!this.combobox}
         .label=${this.label}
         .open=${this.open}
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${this.#calcMaxHeight}
         .disableMobileStyles=${this.disableMobileStyles}
+        .nonmodal=${this.combobox}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >
         <gds-field-base
@@ -272,24 +282,9 @@ export class GdsDropdown<ValueT = any>
           id="field"
         >
           <slot name="lead" slot="lead"></slot>
-          <button
-            id="trigger"
-            role="combobox"
-            aria-expanded="${this.open}"
-            aria-owns="listbox"
-            aria-haspopup="listbox"
-            aria-controls="listbox"
-            name="trigger"
-            aria-label="${this.label} ${this.displayValue}"
-            aria-describedby="supporting-text extended-supporting-text sub-label message"
-            aria-invalid="${this.invalid}"
-            aria-required="${this.required}"
-            aria-disabled="${this.disabled}"
-          >
-            <slot name="trigger">
-              <span>${unsafeHTML(this.displayValue)}</span>
-            </slot>
-          </button>
+          ${this.combobox
+            ? this.#renderCombobox()
+            : this.#renderTriggerButton()}
           <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
         </gds-field-base>
 
@@ -343,6 +338,65 @@ export class GdsDropdown<ValueT = any>
 
   protected _getValidityAnchor(): HTMLElement {
     return this._elTriggerBtn
+  }
+
+  #renderCombobox = () => {
+    return html`
+      <input
+        id="trigger"
+        role="combobox"
+        aria-expanded="${this.open}"
+        aria-owns="listbox"
+        aria-haspopup="listbox"
+        aria-controls="listbox"
+        placeholder="${this.placeholder?.innerHTML}"
+        name="trigger"
+        aria-label="${this.label} ${this.displayValue}"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
+        aria-invalid="${this.invalid}"
+        aria-required="${this.required}"
+        aria-disabled="${this.disabled}"
+        @click=${(e: MouseEvent) => {
+          e.stopImmediatePropagation()
+        }}
+        @focus=${(e: FocusEvent) => {
+          //this.open = true
+        }}
+        @input=${(e: InputEvent) => {
+          this.value = (e.target as HTMLInputElement).value as any
+        }}
+        @keydown=${(e: KeyboardEvent) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault()
+            this.open = true
+            this._elListbox.then((listbox) => listbox.focus())
+          }
+        }}
+      />
+    `
+  }
+
+  #renderTriggerButton = () => {
+    return html`
+      <button
+        id="trigger"
+        role="combobox"
+        aria-expanded="${this.open}"
+        aria-owns="listbox"
+        aria-haspopup="listbox"
+        aria-controls="listbox"
+        name="trigger"
+        aria-label="${this.label} ${this.displayValue}"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
+        aria-invalid="${this.invalid}"
+        aria-required="${this.required}"
+        aria-disabled="${this.disabled}"
+      >
+        <slot name="trigger">
+          <span>${unsafeHTML(this.displayValue)}</span>
+        </slot>
+      </button>
+    `
   }
 
   /**
