@@ -251,6 +251,46 @@ export const Searchable: Story = {
 }
 
 /**
+ * The dropdown supports the combobox pattern with the `combobox` attribute. This allows the user to type in the input field or select an option from the list.
+ */
+export const Combobox: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown label="Select tech" combobox>
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+      <gds-option value="ai">Artificial Intelligence</gds-option>
+      <gds-option value="robotics">Robotics</gds-option>
+      <gds-option value="quantum-computing">Quantum Computing</gds-option>
+      <gds-option value="biotechnology">Biotechnology</gds-option>
+      <gds-option value="genetic-engineering">Genetic Engineering</gds-option>
+      <gds-option value="holography">Holography</gds-option>
+      <gds-option value="fusion-power">Fusion Power</gds-option>
+      <gds-option value="antimatter">Antimatter</gds-option>
+      <gds-option value="dark-matter">Dark Matter</gds-option>
+      <gds-option value="neural-interfaces">Neural Interfaces</gds-option>
+      <gds-option value="exoskeletons">Exoskeletons</gds-option>
+      <gds-option value="space-elevators">Space Elevators</gds-option>
+      <gds-option value="terraforming">Terraforming</gds-option>
+      <gds-option value="nanobots">Nanobots</gds-option>
+      <gds-option value="smart-materials">Smart Materials</gds-option>
+      <gds-option value="augmented-reality">Augmented Reality</gds-option>
+      <gds-option value="virtual-reality">Virtual Reality</gds-option>
+      <gds-option value="brain-computer-interface"
+        >Brain-Computer Interface</gds-option
+      >
+      <gds-option value="cybersecurity">Cybersecurity</gds-option>
+      <gds-option value="biometrics">Biometrics</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+/**
  * Use the `multiple` attribute to allow multiple selections. The selected values will be displayed
  */
 export const Multiple: Story = {
