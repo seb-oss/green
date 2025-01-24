@@ -356,6 +356,7 @@ export class GdsDropdown<ValueT = any>
         aria-invalid="${this.invalid}"
         aria-required="${this.required}"
         aria-disabled="${this.disabled}"
+        .value=${this.value}
         @click=${(e: MouseEvent) => {
           e.stopImmediatePropagation()
         }}
@@ -363,7 +364,9 @@ export class GdsDropdown<ValueT = any>
           //this.open = true
         }}
         @input=${(e: InputEvent) => {
+          this.open = true
           this.value = (e.target as HTMLInputElement).value as any
+          this.#handleSearchFieldInput(e)
         }}
         @keydown=${(e: KeyboardEvent) => {
           if (e.key === 'ArrowDown') {
@@ -465,7 +468,7 @@ export class GdsDropdown<ValueT = any>
    *
    * @param e The input event.
    */
-  #handleSearchFieldInput = (e: KeyboardEvent) => {
+  #handleSearchFieldInput = (e: InputEvent) => {
     if (!e.currentTarget) return
 
     // We don't want this internal event to progate to the consumer
