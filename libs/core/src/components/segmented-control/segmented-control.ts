@@ -147,6 +147,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         entries.forEach((entry) => {
           const segment = entry.target as GdsSegment
           segment._isVisible = entry.intersectionRatio > 0.99
+          // update arrows visibility once isVisible changes
+          this.#updateScrollBtnStateDebounced()
         })
       },
       {
