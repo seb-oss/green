@@ -81,8 +81,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
     // Now you can find the select element in the select-container
     const selectElement: HTMLSelectElement | null =
       this.shadowRoot?.querySelector('.select-container select') || null
-
     if (selectElement) {
+      this.multiple = selectElement.multiple
       // Set a unique ID and aria-describedby
       selectElement.id = this.selectId
       selectElement.setAttribute('aria-describedby', 'supporting-text')
@@ -94,8 +94,18 @@ export class GdsSelect extends GdsFormControlElement<string> {
       this.value = selectElement.value
 
       // Add event listener to validate on change
+      // selectElement.addEventListener('change', () => {
+      //   this.value = selectElement.value // Update the value property
+      //   this.checkValidity() // Check validity on change
+      // })
+
       selectElement.addEventListener('change', () => {
-        this.value = selectElement.value // Update the value property
+        const selectedOptions = Array.from(selectElement.selectedOptions).map(
+          (option) => option.value,
+        )
+        this.value = this.multiple
+          ? selectedOptions.join(',')
+          : selectedOptions[0] // Update to handle multiple values
         this.checkValidity() // Check validity on change
       })
 
@@ -159,6 +169,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
     const elements = [
       this.#renderSlotLead(),
       this.#renderMainSlot(),
+      this.#renderMainLabel(),
       this.#renderChevron(),
     ]
 
@@ -169,16 +180,19 @@ export class GdsSelect extends GdsFormControlElement<string> {
     return html` <slot name="lead" slot="lead"></slot> `
   }
 
-  #renderMainSlot() {
+  #renderMainLabel() {
     if (!this.multiple) {
       return html`
-        <label id="placeholder">${this.placeholder || 'Select'}</label>
-        <slot></slot>
-        <div class="select-container"></div>
+        <label id="placeholder"> ${this.placeholder || 'Select'} </label>
       `
-    } else {
-      return html` <slot></slot> `
     }
+  }
+
+  #renderMainSlot() {
+    return html`
+      <slot></slot>
+      <div class="select-container"></div>
+    `
   }
 
   #renderChevron() {

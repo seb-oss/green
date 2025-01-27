@@ -12,6 +12,10 @@ export const styles = css`
       gap: var(--gds-space-xs);
     }
 
+    .select-container {
+      display: contents;
+    }
+
     select,
     ::slotted(select) {
       appearance: none;
@@ -32,9 +36,11 @@ export const styles = css`
       }
     }
 
-    .multiple ::slotted(select) {
+    /* .multiple ::slotted(select) { */
+    select[multiple] {
       opacity: 1;
       position: relative;
+      width: 100%;
     }
 
     label {
