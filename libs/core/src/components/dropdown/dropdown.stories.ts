@@ -251,7 +251,32 @@ export const Searchable: Story = {
 }
 
 /**
- * The dropdown supports the combobox pattern with the `combobox` attribute. This allows the user to type in the input field or select an option from the list.
+ * Use the `multiple` attribute to allow multiple selections. The selected values will be displayed
+ */
+export const Multiple: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown label="Select tech" searchable multiple>
+      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+/**
+ * The dropdown supports the combobox pattern with the `combobox` attribute.
+ *
+ * Use combobox when the user needs to have the option of entering a custom value but is also helped by a list of predefined options.
+ *
+ * ***Note:***
+ * - The `combobox` attribute doesn't work with the `multiple` attribute. If both are used, the `combobox` attribute will be ignored.
+ * - Custom trigger content will not be rendered when the `combobox` attribute is used, since it will be replaced with an input element internally.
+ * - Avoid using the `searchable` attribute with the `combobox` attribute, since the combobox input is already used for filtering.
  */
 export const Combobox: Story = {
   ...DefaultParams,
@@ -286,24 +311,6 @@ export const Combobox: Story = {
       >
       <gds-option value="cybersecurity">Cybersecurity</gds-option>
       <gds-option value="biometrics">Biometrics</gds-option>
-    </gds-dropdown>
-  `,
-}
-
-/**
- * Use the `multiple` attribute to allow multiple selections. The selected values will be displayed
- */
-export const Multiple: Story = {
-  ...DefaultParams,
-  render: (args) => html`
-    <gds-dropdown label="Select tech" searchable multiple>
-      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
-      <gds-option value="warp">Warp Drive</gds-option>
-      <gds-option value="cybernetics">Cybernetics</gds-option>
-      <gds-option value="nanotechnology">Nanotechnology</gds-option>
-      <gds-option value="cloning">Cloning</gds-option>
-      <gds-option value="cryonics">Cryonics</gds-option>
-      <gds-option value="teleportation">Teleportation</gds-option>
     </gds-dropdown>
   `,
 }

@@ -282,7 +282,7 @@ export class GdsDropdown<ValueT = any>
           id="field"
         >
           <slot name="lead" slot="lead"></slot>
-          ${this.combobox
+          ${this.combobox && !this.multiple
             ? this.#renderCombobox()
             : this.#renderTriggerButton()}
           <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
