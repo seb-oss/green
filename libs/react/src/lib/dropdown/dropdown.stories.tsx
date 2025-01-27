@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import React from 'react'
 
 import { Dropdown } from './dropdown'

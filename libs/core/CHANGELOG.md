@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.63.0
+
+### Minor Changes
+
+- 33788ef: **Text:** Font-sizes are now defined as rem units
+- c230b89: **GdsText:** Inherit all style expression props from GdsContainer
+
+### Patch Changes
+
+- 1ea5ef2: **Button:** Tweak ripple animation and hover style
+- 4933535: **FieldBase:** Update focus border-color
+
+## 1.62.5
+
+### Patch Changes
+
+- e18b5a8: **Utils:style-expression-property:** Safe guard falsy values
+
 ## 1.62.4
 
 ### Patch Changes

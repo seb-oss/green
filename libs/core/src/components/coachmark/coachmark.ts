@@ -294,6 +294,7 @@ export class GdsCoachmark extends GdsElement {
         )
       })
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.warn('failed to render tooltips')
     }
   }
