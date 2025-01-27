@@ -29,8 +29,10 @@ export const RadioGroup = ({
   defaultSelected,
   valueSelected,
   label,
+  /** @deprecated use `label` instead */
   title,
   labelInformation,
+  /** @deprecated use `labelInformation` instead */
   description,
   expandableInfo,
   expandableInfoButtonLabel,
@@ -41,13 +43,6 @@ export const RadioGroup = ({
   horizontal,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
-  if (title)
-    console.warn('"title" prop is deprecated. Please use "label" instead.')
-  if (description)
-    console.warn(
-      '"description" prop is deprecated. Please use "labelInformation" instead.',
-    )
-
   const [selected, setSelected] = useState<string | undefined>(
     valueSelected ?? defaultSelected,
   )

@@ -36,13 +36,14 @@ export const styles = css`
       cursor: text;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
-      transition-property: background-color, border-color, outline-color;
+      transition-property: background-color;
     }
 
     .field:focus-within {
       outline-width: var(--gds-space-3xs);
       outline-offset: var(--gds-space-3xs);
       outline-color: currentColor;
+      border-color: currentColor;
     }
 
     .field.small {
