@@ -40,7 +40,9 @@ import '../button'
  * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
  *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
+ * @event input - Fired when the value of the dropdown is changed through user interaction.
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
+ * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
  */
 @gdsCustomElement('gds-dropdown')
 @localized()
@@ -360,13 +362,10 @@ export class GdsDropdown<ValueT = any>
         @click=${(e: MouseEvent) => {
           e.stopImmediatePropagation()
         }}
-        @focus=${(e: FocusEvent) => {
-          //this.open = true
-        }}
         @input=${(e: InputEvent) => {
-          this.open = true
           this.value = (e.target as HTMLInputElement).value as any
           this.#handleSearchFieldInput(e)
+          this.open = true
         }}
         @keydown=${(e: KeyboardEvent) => {
           if (e.key === 'ArrowDown') {
@@ -473,6 +472,16 @@ export class GdsDropdown<ValueT = any>
 
     // We don't want this internal event to progate to the consumer
     e.stopPropagation()
+
+    // Emit cancellable filter input event. If cancelled, consumer is expreced to handle filtering and update the options list.
+    const wasCancelled = !this.dispatchEvent(
+      new CustomEvent('gds-filter-input', {
+        detail: { value: (e.currentTarget as HTMLInputElement).value },
+        cancelable: true,
+      }),
+    )
+
+    if (wasCancelled) return
 
     const input = e.currentTarget as HTMLInputElement
     this.options.forEach((o) => (o.hidden = false))
