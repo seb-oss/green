@@ -211,8 +211,8 @@ const formats: Record<string, Format> = {
             .replace('typography-', 'text-')
           return Object.assign({}, token, {
             name: adjustedName,
-            value: `${token.value}px`,
-            original: { value: `${token.value}px` },
+            value: `${token.value / 16}rem`,
+            original: { value: `${token.value / 16}rem` },
           })
         } else if (
           token.path[0] === 'sys' &&
@@ -378,10 +378,7 @@ const formats: Record<string, Format> = {
     name: 'scss/variables',
     formatter: function (args) {
       const dictionary = Object.assign({}, args.dictionary)
-      const options = Object.assign(
-        { colorScheme: 'light' },
-        args.options,
-      )
+      const options = Object.assign({ colorScheme: 'light' }, args.options)
 
       const { colorScheme, name, outputReferences } = options
 
