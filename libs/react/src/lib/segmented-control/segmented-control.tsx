@@ -60,14 +60,16 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
 /** @deprecated - Use `GdsSegmented` instead */
 export const Segment: React.FC<SegmentProps> = ({
   className,
+  minWidth,
+  maxWidth,
   ...props
 }: SegmentProps) => {
   return (
     <GdsSegment
       className={classNames(className)}
       {...props}
-      min-width={props.minWidth || props.segMinWidth}
-      max-width={props.maxWidth}
+      min-width={minWidth || props.segMinWidth}
+      max-width={maxWidth}
     />
   )
 }
