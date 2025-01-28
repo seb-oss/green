@@ -28,9 +28,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @property()
   placeholder = ''
 
-  @property()
-  label = ''
-
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
