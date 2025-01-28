@@ -116,6 +116,22 @@ import { NggCoreRendererFactory } from '@sebgroup/green-angular/src/lib/shared'
 })
 ```
 
+Or, if you are only using standalone components, you can either create a root app module and provide the renderer there, or you can provide it in bootstrapping:
+
+```ts
+// app.config.ts
+const appConfig: ApplicationConfig = {
+  providers: [...other providers..., {
+    provide: RendererFactory2,
+    useClass: NggCoreRendererFactory,
+  }]
+};
+
+// main.ts
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
+```
+
 Now you can use Green Core components in your template without any special directive:
 
 ```html

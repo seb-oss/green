@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.23.0
+
+### Minor Changes
+
+- 23f052c: **SegmentedControl**: Update to match core component
+
 ## 3.22.0
 
 ### Minor Changes

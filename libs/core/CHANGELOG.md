@@ -1,5 +1,66 @@
 # Changelog
 
+## 1.63.0
+
+### Minor Changes
+
+- 33788ef: **Text:** Font-sizes are now defined as rem units
+- c230b89: **GdsText:** Inherit all style expression props from GdsContainer
+
+### Patch Changes
+
+- 1ea5ef2: **Button:** Tweak ripple animation and hover style
+- 4933535: **FieldBase:** Update focus border-color
+
+## 1.62.5
+
+### Patch Changes
+
+- e18b5a8: **Utils:style-expression-property:** Safe guard falsy values
+
+## 1.62.4
+
+### Patch Changes
+
+- d359d06: **Button:** Fix width styling issue in 2016 design
+
+## 1.62.3
+
+### Patch Changes
+
+- c6d42ec: **Filter Chip**: Fix issue where filter chip is trying to register transitional styles for button
+
+## 1.62.2
+
+### Patch Changes
+
+- 12a3417: **Scoping:** Fix return type of `gdsCustomElement` decorator in bail-out code path
+
+## 1.62.1
+
+### Patch Changes
+
+- eb6e18e: **Datepicker:** Fix calendar button size in small variant
+- eb6e18e: **Form error state (2016):** Styling alignments
+- eb6e18e: **Dropdown:** Fix chevron alignment in 2016 design
+- 2f2987b: **Segmented Control:** Fix an issue where scroll buttons would do nothing under certain conditions
+
+## 1.62.0
+
+### Minor Changes
+
+- 5e16375: **Texarea:** Consolidate with Field Base
+- 40f905b: **Datepicker:** Consolidate with Field Base
+- f43d556: **Input:** Consolidate with Field Base
+- 4d8df8b: **Dropdown:** Consolidate with Field Base
+- f43d556: **Input:** Add transitional styles
+- 5e16375: **Textarea:** Add transitional styles
+
+### Patch Changes
+
+- 33b08a2: **Icon Button:** Update transitional styles
+- 93bac39: **Datepicker and Dropdown:** minor a11y improvements
+
 ## 1.61.0
 
 ### Minor Changes

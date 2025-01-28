@@ -1,7 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
 import { property, query, queryAll, queryAsync, state } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { join } from 'lit/directives/join.js'
 import { map } from 'lit/directives/map.js'
 import { repeat } from 'lit/directives/repeat.js'
@@ -158,7 +157,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * Get a string representation of the currently displayed value in the input field. The formatting will match the dateformat attribute.
    */
   get displayValue() {
-    return this._elInput.innerText.replace(/\s+/g, '')
+    return this._elField.innerText.replace(/\s+/g, '')
   }
 
   /**
@@ -191,14 +190,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   @queryAsync('#calendar-button')
   private _elTrigger!: Promise<HTMLButtonElement>
 
-  @queryAsync('#date-picker')
-  private _elField!: Promise<HTMLDivElement>
+  @queryAsync('#field')
+  private _elFieldAsync!: Promise<HTMLDivElement>
 
   @queryAll('[role=spinbutton]')
   private _elSpinners!: NodeListOf<GdsDatePartSpinner>
 
-  @query('.input')
-  private _elInput!: HTMLDivElement
+  @query('#field')
+  private _elField!: HTMLDivElement
 
   #valueOnOpen?: Date
 
@@ -210,7 +209,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   render() {
     return html`
       <gds-form-control-header class="size-${this.size}">
-        <label for="spinner-0" slot="label">${this.label}</label>
+        <label id="label" for="spinner-0" slot="label">${this.label}</label>
         ${when(
           this.supportingText.length > 0,
           () =>
@@ -219,11 +218,16 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
             </span>`,
         )}
         <slot
+          id="supporting-text-slot"
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
         <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
-        <slot name="sub-label" slot="supporting-text"></slot>
+        <slot
+          id="sub-label-slot"
+          name="sub-label"
+          slot="supporting-text"
+        ></slot>
       </gds-form-control-header>
       <gds-field-base
         .size=${this.size}
@@ -232,7 +236,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         @click=${this.#handleFieldClick}
         @copy=${this.#handleClipboardCopy}
         @paste=${this.#handleClipboardPaste}
-        id="date-picker"
+        id="field"
       >
         <div class="spinners">
           ${join(
@@ -241,13 +245,14 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
               (f, i) =>
                 html`<gds-date-part-spinner
                   id="spinner-${i}"
+                  aria-invalid="${this.invalid}"
                   class="spinner"
                   .length=${f.token === 'y' ? 4 : 2}
                   .value=${this.#spinnerState[f.name]}
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
-                  aria-describedby="label sub-label message"
+                  aria-describedby="label supporting-text supporting-text-slot sub-label-slot message"
                   data-max-width=${this.#getMaxSpinnerValue(f.name).toString()
                     .length}
                   @keydown=${this.#handleSpinnerKeydown}
@@ -268,7 +273,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
         <gds-button
           id="calendar-button"
           slot="action"
-          size="small"
+          size="${this.size === 'small' ? 'xs' : 'small'}"
           rank="tertiary"
           aria-label="${msg('Open calendar modal')}"
           aria-haspopup="menu"
@@ -288,7 +293,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
           // Wrapped in a slot for backwards compatibility with the deprecated message slot
           // Remove for 2.0 release
           () => html`
-            <slot name="message" slot="message">
+            <slot id="message" name="message" slot="message">
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
@@ -300,7 +305,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
 
       <gds-popover
         .triggerRef=${this._elTrigger}
-        .anchorRef=${this._elField}
+        .anchorRef=${this._elFieldAsync}
         .open=${this.open}
         @gds-ui-state=${this.#handlePopoverStateChange}
         label=${this.label}
@@ -558,7 +563,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardCopy = (e: ClipboardEvent) => {
-    this._elField.then((field) => {
+    this._elFieldAsync.then((field) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       e.clipboardData?.setData('text/plain', this.displayValue)
@@ -566,7 +571,7 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
   }
 
   #handleClipboardPaste = (e: ClipboardEvent) => {
-    this._elField.then((field: HTMLElement) => {
+    this._elFieldAsync.then((field: HTMLElement) => {
       if (e.currentTarget !== field) return
       e.preventDefault()
       const pasted = e.clipboardData?.getData('text/plain')
