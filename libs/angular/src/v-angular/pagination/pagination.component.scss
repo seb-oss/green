@@ -1,0 +1,138 @@
+// @use 'node_modules/@sebgroup/vanilla/src/functions.scss' as functions;
+// @use 'node_modules/@sebgroup/vanilla/src/variables' as vars;
+// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
+
+$faded-blue: #a2ddfe;
+$transition-time: 200ms;
+
+:host {
+  .pagination-wrapper {
+    .paging-input-wrapper {
+      display: flex;
+      .label-wrapper {
+        margin: auto;
+        padding: 0 1em;
+      }
+      .input-wrapper {
+        display: flex;
+        border: 0.0625em solid #868686;
+        border-radius: 4px;
+        height: 100%;
+        & input {
+          border: 0;
+          padding: 0.5em;
+          min-height: 2.5rem;
+          width: 60px;
+          box-sizing: border-box;
+          border-radius: 3px;
+          font-size: 1rem;
+          font-family: inherit;
+
+          &:focus {
+            outline-color: #1a1a1a;
+            outline-style: solid;
+            outline-width: 0.125rem;
+            outline-offset: 0.125rem;
+          }
+        }
+        > button {
+          border: 0;
+          color: #1a1a1a;
+          background-color: transparent;
+          font-size: 1rem;
+          font-family: inherit;
+
+          &:focus {
+            outline-color: #1a1a1a;
+            outline-style: solid;
+            outline-width: 0.125rem;
+            outline-offset: 0.125rem;
+          }
+        }
+      }
+    }
+    > .custom-pagination {
+      > .pagination {
+        display: flex;
+        list-style: none;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        > .page-item {
+          > .page-link {
+            position: relative;
+            text-align: center;
+            padding-top: 0;
+            padding-bottom: 0;
+            min-width: 38px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            color: #1a1a1a;
+            border: none;
+            border-radius: 4px;
+
+            font-size: 1rem;
+            font-family: inherit;
+
+            &.active {
+              background-color: #1a1a1a;
+              color: #eee;
+            }
+
+            > .nav-num {
+              margin: 0 auto;
+            }
+
+            > .nav-action {
+              margin: 0 auto;
+              display: inline-flex;
+            }
+
+            &:focus {
+              outline-color: #1a1a1a;
+              outline-style: solid;
+              outline-width: 0.125rem;
+              outline-offset: 0.125rem;
+            }
+
+            &:hover {
+              box-shadow: 0px 2px 6px 0px #eee;
+            }
+          }
+        }
+
+        &.dotnav {
+          .page-item {
+            width: 20px;
+            height: 25px;
+
+            .page-dot-link {
+              position: relative;
+              display: inline-block;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              margin-right: 5px;
+              cursor: pointer;
+              background-color: $faded-blue;
+              transition: all $transition-time;
+              margin: 0 auto;
+              will-change: transform;
+
+              &.active {
+                background-color: #007ac7;
+                cursor: default;
+                transform: scale(1.3);
+              }
+
+              &:hover:not(.active) {
+                background-color: #41b0ee;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

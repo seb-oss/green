@@ -1,21 +1,24 @@
 import { CommonModule } from '@angular/common'
-import { NgModule } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
 import { ReactiveFormsModule } from '@angular/forms'
 
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvInputMaskModule } from '@sebgroup/green-angular/src/v-angular/input-mask'
-import { NggCharacterCountdownDirectiveModule } from '@sebgroup/green-angular/src/v-angular/character-countdown';
-import { NgvInputComponent } from './input.component'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggvCharacterCountdownDirectiveModule } from '@sebgroup/green-angular/src/v-angular/character-countdown'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvInputMaskModule } from '@sebgroup/green-angular/src/v-angular/input-mask'
+import { NggvInputComponent } from './input.component'
 
 @NgModule({
-  declarations: [NgvInputComponent],
+  declarations: [NggvInputComponent],
   imports: [
     CommonModule,
-    NgvI18nModule,
-    NgvInputMaskModule,
+    NggvI18nModule,
+    NggvInputMaskModule,
     ReactiveFormsModule,
-    NggCharacterCountdownDirectiveModule,
+    NggvCharacterCountdownDirectiveModule,
+    NggCoreWrapperModule,
   ],
-  exports: [NgvInputComponent],
+  exports: [NggvInputComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class NgvInputModule {}
+export class NggvInputModule {}

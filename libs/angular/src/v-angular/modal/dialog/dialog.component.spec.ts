@@ -2,26 +2,26 @@ import '../modal.globals'
 
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvDialogComponent } from './dialog.component'
+import { NggvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvDialogComponent } from './dialog.component'
 
-describe('[NgvModal]', () => {
+describe('[NggvModal]', () => {
   // ----------------------------------------------------------------------------
   // DialogComponent
   // ----------------------------------------------------------------------------
   describe('DialogComponent', () => {
-    let component: NgvDialogComponent
-    let fixture: ComponentFixture<NgvDialogComponent>
+    let component: NggvDialogComponent
+    let fixture: ComponentFixture<NggvDialogComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvDialogComponent],
-        imports: [NgvI18nTestModule],
+        declarations: [NggvDialogComponent],
+        imports: [NggvI18nTestModule],
       }).compileComponents()
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(NgvDialogComponent)
+      fixture = TestBed.createComponent(NggvDialogComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

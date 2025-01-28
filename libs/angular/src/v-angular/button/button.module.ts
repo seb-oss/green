@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 import { RouterModule } from '@angular/router'
 
-import { NgvExternalLinkDirectiveModule } from '@sebgroup/green-angular/src/v-angular/external-link'
-import { NgvButtonComponent } from './button.component'
+import { NggvExternalLinkDirectiveModule } from '@sebgroup/green-angular/src/v-angular/external-link'
+import { NggvButtonComponent } from './button.component'
 
 @NgModule({
-  declarations: [NgvButtonComponent],
-  imports: [CommonModule, NgvExternalLinkDirectiveModule, RouterModule],
-  exports: [NgvButtonComponent],
+  declarations: [NggvButtonComponent],
+  imports: [CommonModule, NggvExternalLinkDirectiveModule, RouterModule],
+  exports: [NggvButtonComponent],
 })
-export class NgvButtonModule {}
+export class NggvButtonModule {}

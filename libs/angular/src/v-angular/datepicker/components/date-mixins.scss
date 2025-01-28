@@ -1,0 +1,18 @@
+// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
+
+@mixin text-field--error() {
+  $_border-bottom: 0.125rem solid #9f000a !important;
+
+  border-bottom: $_border-bottom;
+
+  &:focus,
+  &:active,
+  &:hover {
+    border-bottom: $_border-bottom;
+  }
+}
+
+@mixin text-field--error-item() {
+  display: flex;
+  gap: 0.5rem;
+}

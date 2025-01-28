@@ -1,0 +1,45 @@
+<output class="messages-container" aria-live="polite">
+  <div
+    class="message"
+    *ngFor="let message of messages"
+    [ngClass]="message.type"
+    @toastAnimation
+    (mouseenter)="onMouseEnter(message)"
+    (mouseleave)="onMouseLeave(message)"
+  >
+    <div class="content" *transloco="let t; read: message.translocoScope">
+      <div class="message-type-icon-wrapper">
+        <ng-container *ngIf="message.type === 'success'">
+          <gds-icon-checkmark *nggCoreElement></gds-icon-checkmark>
+        </ng-container>
+        <ng-container
+          *ngIf="message.type === 'error' || message.type === 'warning'"
+        >
+          <gds-icon-triangle-exclamation
+            *nggCoreElement
+          ></gds-icon-triangle-exclamation>
+        </ng-container>
+        <ng-container *ngIf="message.type === 'information'">
+          <gds-icon-circle-info *nggCoreElement></gds-icon-circle-info>
+        </ng-container>
+      </div>
+      <div class="text-content">
+        <div>{{ t(message.titleText) }}</div>
+        <div *ngIf="message.bodyText" class="text-body-content">
+          {{ t(message.bodyText) }}
+        </div>
+      </div>
+      <button
+        class="close-icon-button"
+        [ngClass]="{ information: message.type === 'information' }"
+        (click)="removeMessage(message)"
+        [attr.aria-label]="closeButtonAriaLabel"
+      >
+        <gds-icon-cross-small
+          class="close-icon"
+          *nggCoreElement
+        ></gds-icon-cross-small>
+      </button>
+    </div>
+  </div>
+</output>

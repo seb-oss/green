@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { NgvCardComponent } from './card.component'
+import { NggvCardComponent } from './card.component'
 
 @NgModule({
-  declarations: [NgvCardComponent],
+  declarations: [NggvCardComponent],
   imports: [CommonModule],
-  exports: [NgvCardComponent],
+  exports: [NggvCardComponent],
 })
-export class NgvCardModule {}
+export class NggvCardModule {}

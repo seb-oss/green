@@ -10,20 +10,20 @@ import {
 import { TranslocoTestingModule } from '@jsverse/transloco'
 
 import en from '../i18n/i18n.json'
-import { NgvCheckboxComponent } from './checkbox.component'
+import { NggvCheckboxComponent } from './checkbox.component'
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // CheckboxComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('CheckboxComponent - constructor()', () => {
-    let component: NgvCheckboxComponent
-    let fixture: ComponentFixture<NgvCheckboxComponent>
+    let component: NggvCheckboxComponent
+    let fixture: ComponentFixture<NggvCheckboxComponent>
     let checkbox: HTMLInputElement
 
     beforeEach(waitForAsync(async () => {
       await TestBed.configureTestingModule({
-        declarations: [NgvCheckboxComponent],
+        declarations: [NggvCheckboxComponent],
         imports: [
           FormsModule,
           ReactiveFormsModule,
@@ -39,7 +39,7 @@ describe('[NgvCore]', () => {
         providers: [{ provide: NgControl, useValue: new FormControl() }],
       }).compileComponents()
 
-      fixture = TestBed.createComponent(NgvCheckboxComponent)
+      fixture = TestBed.createComponent(NggvCheckboxComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
 
