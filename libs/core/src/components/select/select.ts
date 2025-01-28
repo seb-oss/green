@@ -1,5 +1,5 @@
 import { localized } from '@lit/localize'
-import { property, query } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { tokens } from '../../tokens.style'
@@ -31,16 +31,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
-  @property({ type: Boolean })
-  private multiple = false
-
-  @property({ type: Number })
-  private selectElementSize?: number
-
-  private readonly selectId = `select-${Math.random().toString(36).substring(2, 11)}`
-
-  @query('select')
-  private selectElement!: HTMLSelectElement // Reference to the select element
+  @state()
+  private multiline = false
 
   constructor() {
     super()
@@ -66,33 +58,25 @@ export class GdsSelect extends GdsFormControlElement<string> {
       })
     }
 
-    // Now you can find the select element in the select-container
     const selectElement: HTMLSelectElement | null =
       this.shadowRoot?.querySelector('.select-container select') || null
+
     if (selectElement) {
-      this.multiple = selectElement.multiple
-      // Set a unique ID and aria-describedby
-      selectElement.id = this.selectId
+      this.multiline = selectElement.multiple
       selectElement.setAttribute('aria-describedby', 'supporting-text')
-
-      // Add name and aria-label
       selectElement.setAttribute('aria-label', this.label)
-
-      // Sync the value with the form control's value property
       this.value = selectElement.value
-
       selectElement.addEventListener('change', () => {
         const selectedOptions = Array.from(selectElement.selectedOptions).map(
           (option) => option.value,
         )
-        this.value = this.multiple
+        this.value = this.multiline
           ? selectedOptions.join(',')
-          : selectedOptions[0] // Update to handle multiple values
-        this.checkValidity() // Check validity on change
+          : selectedOptions[0]
+        this.checkValidity()
       })
 
-      // Set initial value
-      selectElement.value = this.value // Ensure the select element reflects the initial value
+      selectElement.value = this.value
     }
 
     if (labelElement && selectElement) {
@@ -117,7 +101,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   render() {
     const CLASSES = {
-      multiple: this.multiple,
+      multiple: this.multiline,
     }
 
     return html`
@@ -132,8 +116,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
         .size=${this.size}
         .disabled=${this.disabled}
         .invalid=${this.invalid}
-        .multiline=${this.multiple}
-        align-items=${this.multiple ? 'flex-start' : 'center'}
+        .multiline=${this.multiline}
+        align-items=${this.multiline ? 'flex-start' : 'center'}
         class=${classMap(CLASSES)}
       >
         ${this.#renderFieldContents()}
@@ -163,7 +147,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   #renderMainLabel() {
-    if (!this.multiple) {
+    if (!this.multiline) {
       return html` <label id="placeholder"> ${this.value || 'Select'} </label> `
     }
   }
@@ -176,7 +160,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   #renderChevron() {
-    if (!this.multiple) {
+    if (!this.multiline) {
       return html`
         <gds-button
           tabindex="-1"
