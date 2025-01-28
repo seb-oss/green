@@ -107,6 +107,9 @@ const CoreRichText = createComponent({
 const CoreSelect = createComponent({
   tagName: getScopedTagName('gds-select'),
   react: React,
+  events: {
+    onChange: 'input',
+  },
   elementClass: GdsSelect,
 })
 
