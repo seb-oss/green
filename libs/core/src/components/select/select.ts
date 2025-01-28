@@ -47,13 +47,19 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @state()
   private multiline = false
 
+  /**
+   * The currently selected value(s) of the select element.
+   */
+  @state()
+  private selectedValue: string | string[] = ''
+
   constructor() {
     super()
     this.value = ''
   }
 
   firstUpdated() {
-    const labelElement = this.shadowRoot?.querySelector('label#placeholder')
+    // const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
 
     // Move the content of the slot into the select-container
@@ -78,25 +84,21 @@ export class GdsSelect extends GdsFormControlElement<string> {
       this.multiline = selectElement.multiple
       selectElement.setAttribute('aria-describedby', 'supporting-text')
       selectElement.setAttribute('aria-label', this.label)
-      this.value = selectElement.value
+      this.selectedValue = selectElement.value
       selectElement.addEventListener('change', () => {
         const selectedOptions = Array.from(selectElement.selectedOptions).map(
           (option) => option.value,
         )
+        this.selectedValue = this.multiline
+          ? selectedOptions
+          : selectedOptions[0]
         this.value = this.multiline
           ? selectedOptions.join(',')
-          : selectedOptions[0]
+          : (this.selectedValue as string)
         this.checkValidity()
       })
 
-      selectElement.value = this.value
-    }
-
-    if (labelElement && selectElement) {
-      selectElement.addEventListener('change', () => {
-        const selectedOption = selectElement.selectedOptions[0]
-        labelElement.textContent = selectedOption.textContent
-      })
+      selectElement.value = this.value || ''
     }
   }
 
@@ -161,7 +163,19 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   #renderMainLabel() {
     if (!this.multiline) {
-      return html` <label id="placeholder"> ${this.value || 'Select'} </label> `
+      const selectedLabels = Array.from(
+        this.getSelectElement()?.selectedOptions || [],
+      ).map((option) => {
+        return option.text
+      })
+
+      const placeholderText = this.multiline
+        ? selectedLabels.join(', ')
+        : selectedLabels.length > 0
+          ? selectedLabels[0]
+          : 'Select'
+
+      return html` <label id="placeholder">${placeholderText}</label> `
     }
   }
 
