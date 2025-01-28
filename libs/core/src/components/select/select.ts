@@ -25,12 +25,25 @@ import '../button/button'
 export class GdsSelect extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
+  /**
+   * The supporting text displayed between the label and the select.
+   * This text provides additional context or information to the user.
+   */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
+  /**
+   * The size of the select element.
+   * This property can be either 'large' or 'small', and it determines the size of the select element.
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
+  /**
+   * Indicates whether the select element allows multiple selections.
+   * When set to true, the select component will enable multiline options,
+   * allowing users to select multiple items at once.
+   */
   @state()
   private multiline = false
 
