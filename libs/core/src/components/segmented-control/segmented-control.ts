@@ -127,7 +127,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   }
 
   @resizeObserver()
-  @watch('segMinWidth')
+  @watch('value')
   private _recalculateMinWidth() {
     this.updateComplete.then(() => {
       this.#updateScrollBtnStateDebounced()
