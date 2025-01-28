@@ -2,6 +2,7 @@ import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
+import { tokens } from '../../tokens.style'
 import {
   gdsCustomElement,
   html,
@@ -22,7 +23,7 @@ import '../button/button'
 @gdsCustomElement('gds-select')
 @localized()
 export class GdsSelect extends GdsFormControlElement<string> {
-  static styles = [styles]
+  static styles = [tokens, styles]
 
   @property()
   placeholder = ''
