@@ -669,7 +669,8 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
           [unselectLabel]="unselectLabel"
           [nggvTypeahead]="searchFunction"
           [resultFormatter]="resultFormatter"
-          [selectedFormatter]="selectedFormatter">
+          [selectedFormatter]="selectedFormatter"
+          [emptyOptionLabel]="emptyOptionLabel">
 
           <ng-template #labelTpl>Custom Label</ng-template>
 
