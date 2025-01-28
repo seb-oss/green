@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.63.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Fix actions button not hidden when child rerenders
+- 3a9af88: **Segmented Control:** Fix issue where indicator would not update to reflect value
+- 776f056: **Button:** Fix icon buttons getting 0 width in Safari browsers
+
 ## 1.63.0
 
 ### Minor Changes
