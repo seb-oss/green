@@ -36,8 +36,8 @@ export interface SegmentProps {
   disabled?: boolean
   children?: ReactNode | ReactNode[]
   width?: string
-  'min-Width'?: string
-  'max-Width'?: string
+  minWidth?: string
+  maxWidth?: string
   /** @deprecated */
   segMinWidth?: number
 }
@@ -60,13 +60,18 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
 /** @deprecated - Use `GdsSegmented` instead */
 export const Segment: React.FC<SegmentProps> = ({
   className,
+  minWidth,
+  maxWidth,
+  segMinWidth,
   ...props
 }: SegmentProps) => {
+  const formattedSegMinWidth = segMinWidth ? `${segMinWidth}px` : undefined
   return (
     <GdsSegment
       className={classNames(className)}
       {...props}
-      min-width={props['min-Width'] || props.segMinWidth?.toString()}
+      min-width={minWidth || formattedSegMinWidth}
+      max-width={maxWidth}
     />
   )
 }
