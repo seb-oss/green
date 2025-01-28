@@ -703,6 +703,120 @@ describe('<gds-dropdown multiple>', () => {
   })
 })
 
+describe('<gds-dropdown combobox>', () => {
+  it('should support combobox mode', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown combobox>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+      'input[role=combobox]',
+    )
+
+    await expect(el.combobox).to.be.true
+    await expect(comboInnputEl).to.not.be.null
+  })
+
+  it('should update value on input', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown combobox>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+      'input[role=combobox]',
+    )
+
+    comboInnputEl!.value = 'v2'
+    comboInnputEl!.dispatchEvent(new Event('input'))
+
+    await expect(el.value).to.equal('v2')
+  })
+
+  it('should update displayValue on input', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown combobox>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+      'input[role=combobox]',
+    )
+
+    comboInnputEl!.value = 'v2'
+    comboInnputEl!.dispatchEvent(new Event('input'))
+
+    await aTimeout(0)
+
+    await expect(el.displayValue).to.equal('Option 2')
+  })
+
+  it('should filter options on input', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown combobox open>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+      'input[role=combobox]',
+    )
+
+    comboInnputEl!.value = '2'
+    comboInnputEl!.dispatchEvent(new Event('input'))
+
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+    )
+
+    await expect(options.length).to.equal(1)
+    await expect(options[0].textContent).to.equal('Option 2')
+  })
+
+  it('should be possible to calcel the gds-filter-input event to customize filtering', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown combobox open>
+        <gds-option>Option 1</gds-option>
+        <gds-option>Option 2</gds-option>
+        <gds-option>Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+      'input[role=combobox]',
+    )
+
+    el.addEventListener('gds-filter-input', (e: any) => {
+      e.preventDefault()
+      el.options[0].parentElement!.removeChild(el.options[0])
+      el.options[1].parentElement!.removeChild(el.options[1])
+    })
+
+    comboInnputEl!.value = '2'
+    comboInnputEl!.dispatchEvent(new Event('input'))
+
+    await aTimeout(0)
+
+    const options = el.querySelectorAll(
+      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+    )
+
+    await expect(options.length).to.equal(1)
+  })
+})
+
 describe('<gds-dropdown> accessibility', () => {
   it('pass axe smoketest', async () => {
     const el = await fixture<GdsDropdown>(html`
