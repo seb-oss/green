@@ -86,6 +86,12 @@ export class GdsPopover extends GdsElement {
   disableMobileStyles = false
 
   /**
+   * Whether the popover should autofocus the first slotted child when opened.
+   */
+  @property({ type: Boolean })
+  autofocus = false
+
+  /**
    * A callback that returns the minimum width of the popover.
    * By default, the popover minWidth will be as wide as the trigger element.
    */
@@ -284,14 +290,17 @@ export class GdsPopover extends GdsElement {
         !this.nonmodal
           ? this._elDialog?.showModal()
           : this._elDialog?.setAttribute('open', 'true')
-        this.#focusFirstSlottedChild()
+
+        if (this.autofocus) {
+          // Make this optional
+          this.#focusFirstSlottedChild()
+          // VoiceOver hack
+          setTimeout(() => this.#focusFirstSlottedChild(), 250)
+        }
 
         requestAnimationFrame(() => {
           if (this.#backdropEl) this.#backdropEl.show = true
         })
-
-        // Another VoiceOver hack
-        setTimeout(() => this.#focusFirstSlottedChild(), 250)
 
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(

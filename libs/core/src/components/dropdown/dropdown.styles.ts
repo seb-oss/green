@@ -77,6 +77,14 @@ const style = css`
       }
     }
 
+    input[role='combobox'] {
+      appearance: none;
+      background: transparent;
+      border: none;
+      font-size: inherit;
+      outline: none;
+    }
+
     [aria-expanded='true'] [slot='trail'] {
       transform: scaleY(-1);
     }
