@@ -25,9 +25,6 @@ import '../button/button'
 export class GdsSelect extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
-  @property()
-  placeholder = ''
-
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
@@ -83,12 +80,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
       // Sync the value with the form control's value property
       this.value = selectElement.value
-
-      // Add event listener to validate on change
-      // selectElement.addEventListener('change', () => {
-      //   this.value = selectElement.value // Update the value property
-      //   this.checkValidity() // Check validity on change
-      // })
 
       selectElement.addEventListener('change', () => {
         const selectedOptions = Array.from(selectElement.selectedOptions).map(
@@ -173,9 +164,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   #renderMainLabel() {
     if (!this.multiple) {
-      return html`
-        <label id="placeholder"> ${this.placeholder || 'Select'} </label>
-      `
+      return html` <label id="placeholder"> ${this.value || 'Select'} </label> `
     }
   }
 
