@@ -17,6 +17,7 @@ import {
 } from '@sebgroup/green-core/components/form/form-control'
 import { GdsInput } from '@sebgroup/green-core/components/input/index.js'
 import { GdsRichText } from '@sebgroup/green-core/components/rich-text/index.js'
+import { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 // In this example, we are importing the GdsTheme component to set the design version to 2023
 import { GdsTheme } from '@sebgroup/green-core/components/theme/index.js'
@@ -103,12 +104,19 @@ const CoreRichText = createComponent({
   react: React,
 })
 
+const CoreSelect = createComponent({
+  tagName: getScopedTagName('gds-select'),
+  react: React,
+  elementClass: GdsSelect,
+})
+
 // This type represents or form data model
 // In this example, we represent the field value and error state as a simple tuple
 type FormData = {
   name: [string, errorState]
   email: [string, errorState]
   fruit: [string | undefined, errorState]
+  dessert: [string | undefined, errorState]
   date: [Date | undefined, errorState]
   description: [string, errorState]
 }
@@ -120,6 +128,7 @@ const initialFormState: FormData = {
   name: ['', false],
   email: ['', false],
   fruit: [undefined, false],
+  dessert: [undefined, false],
   date: [undefined, false],
   description: ['', false],
 }
@@ -221,6 +230,26 @@ export const GreenCoreFormExample = () => {
                 <CoreOption value="orange">Orange</CoreOption>
                 <CoreOption value="banana">Banana</CoreOption>
               </CoreDropdown>
+              <CoreSelect
+                label={'Select a dessert'}
+                value={formData.dessert[0]}
+                validator={requiredValidator}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    dessert: [
+                      (e.currentTarget as GdsSelect).value || '',
+                      (e.currentTarget as GdsSelect).validity.valid,
+                    ],
+                  })
+                }
+              >
+                <select>
+                  <option value="cake">Cake</option>
+                  <option value="ice-cream">Ice cream</option>
+                  <option value="pie">Pie</option>
+                </select>
+              </CoreSelect>
               <CoreDatepicker
                 label={'Select a date'}
                 value={formData.date[0]}
@@ -280,6 +309,11 @@ export const GreenCoreFormExample = () => {
                   <th>Dropdown</th>
                   <td>{formData.fruit[0]}</td>
                   <td>Valid: {formData.fruit[1] ? '✅' : '❌'}</td>
+                </tr>
+                <tr>
+                  <th>Select</th>
+                  <td>{formData.dessert[0]}</td>
+                  <td>Valid: {formData.dessert[1] ? '✅' : '❌'}</td>
                 </tr>
                 <tr>
                   <th>Date</th>
