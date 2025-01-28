@@ -32,7 +32,7 @@ const debounce = (fn: () => void, delay: number) => {
  *
  * @slot - Segments to display in the control
  *
- * @event changed - Fires when the selected segment is changed
+ * @event change - Fires when the selected segment is changed
  */
 @gdsCustomElement('gds-segmented-control')
 @localized()
