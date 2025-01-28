@@ -44,7 +44,7 @@
     flex: 1;
 
     &:focus {
-      outline-color: color-mix(in srgb, currentcolor, #000 100%);
+      outline-color: var(--gds-color-l3-content-tertiary);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -166,6 +166,14 @@
   .positive {
     background-color: var(--gds-color-l3-background-positive);
 
+    &:focus {
+      outline-color: var(--gds-color-l3-content-positive);
+
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
     @media (pointer: fine) {
       &:hover {
         background-color: color-mix(
@@ -233,6 +241,13 @@
 
   .negative {
     background-color: var(--gds-color-l3-background-negative);
+
+    &:focus {
+      outline-color: var(--gds-color-l3-content-negative);
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
 
     @media (pointer: fine) {
       &:hover {

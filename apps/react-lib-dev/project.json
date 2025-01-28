@@ -47,7 +47,8 @@
       "executor": "@nx/webpack:dev-server",
       "options": {
         "buildTarget": "react-lib-dev:build",
-        "hmr": true
+        "hmr": true,
+        "port": 4201
       },
       "configurations": {
         "production": {
