@@ -34,13 +34,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
-  @property({
-    attribute: 'disabled',
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
-
   @property({ type: Boolean })
   private multiple = false
 
