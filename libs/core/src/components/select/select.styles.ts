@@ -36,7 +36,6 @@ export const styles = css`
       }
     }
 
-    /* .multiple ::slotted(select) { */
     select[multiple] {
       opacity: 1;
       position: relative;

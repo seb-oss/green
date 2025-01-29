@@ -19,6 +19,37 @@ import '../button/button'
 /**
  * @element gds-select
  * @status beta
+ *
+ * A custom select component that extends GdsFormControlElement to provide enhanced
+ * select/dropdown functionality with proper value propagation and event handling.
+ *
+ * Key Features:
+ * - Supports both single and multiple selections
+ * - Handles value propagation correctly between the native select and custom component
+ * - Manages proper event bubbling and custom event dispatch
+ * - Provides visual feedback through a customizable UI
+ * - Supports form validation
+ *
+ * Usage Example:
+ * ```html
+ * <gds-select label="Choose an option" supporting-text="Select one item">
+ *   <select>
+ *     <option value="1">Option 1</option>
+ *     <option value="2">Option 2</option>
+ *   </select>
+ * </gds-select>
+ * ```
+ *
+ * Event Handling:
+ * The component stops propagation of native select events and dispatches its own
+ * custom events after ensuring internal state is properly updated. This prevents
+ * race conditions and ensures consistent behavior.
+ *
+ * Accessibility:
+ * - Maintains ARIA labels and descriptions
+ * - Preserves native select keyboard navigation
+ * - Provides proper focus management
+ *
  */
 @gdsCustomElement('gds-select')
 @localized()
@@ -48,7 +79,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
   private multiline = false
 
   /**
-   * The currently selected value(s) of the select element.
+   * Internal state tracking the currently selected value(s).
+   * Can be either a single string or array of strings for multiple select.
    */
   @state()
   private selectedValue: string | string[] = ''
@@ -58,11 +90,19 @@ export class GdsSelect extends GdsFormControlElement<string> {
     this.value = ''
   }
 
+  /**
+   * Lifecycle method called after first render.
+   * Handles:
+   * 1. Moving slotted select into the component's shadow DOM
+   * 2. Setting up event listeners
+   * 3. Initializing ARIA attributes
+   * 4. Syncing initial values
+   */
+
   firstUpdated() {
-    // const labelElement = this.shadowRoot?.querySelector('label#placeholder')
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
 
-    // Move the content of the slot into the select-container
+    // Move slotted select into the component's shadow DOM for proper styling and control
     if (slotElement) {
       const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
         flatten: true,
@@ -72,7 +112,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
       assignedNodes.forEach((node) => {
         if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT') {
-          selectContainer?.appendChild(node) // Move the select element to the select-container
+          selectContainer?.appendChild(node)
         }
       })
     }
@@ -81,25 +121,64 @@ export class GdsSelect extends GdsFormControlElement<string> {
       this.shadowRoot?.querySelector('.select-container select') || null
 
     if (selectElement) {
+      // Initialize component state from select element
       this.multiline = selectElement.multiple
       selectElement.setAttribute('aria-describedby', 'supporting-text')
       selectElement.setAttribute('aria-label', this.label)
       this.selectedValue = selectElement.value
-      selectElement.addEventListener('change', () => {
-        const selectedOptions = Array.from(selectElement.selectedOptions).map(
-          (option) => option.value,
-        )
-        this.selectedValue = this.multiline
-          ? selectedOptions
-          : selectedOptions[0]
-        this.value = this.multiline
-          ? selectedOptions.join(',')
-          : (this.selectedValue as string)
-        this.checkValidity()
-      })
 
+      // Set up event listeners with proper propagation control
+      selectElement.addEventListener(
+        'change',
+        this.handleSelectChange.bind(this),
+      )
+      selectElement.addEventListener('input', (e) => e.stopPropagation())
+
+      // Sync initial value
       selectElement.value = this.value || ''
     }
+  }
+
+  /**
+   * Handles changes to the native select element.
+   * Manages event propagation and ensures proper state updates.
+   *
+   * @param event The original change event from the native select
+   */
+  private handleSelectChange(event: Event) {
+    // Prevent native event bubbling to avoid race conditions
+    event.stopPropagation()
+
+    const selectElement = event.target as HTMLSelectElement
+    const selectedOptions = Array.from(selectElement.selectedOptions).map(
+      (option) => option.value,
+    )
+
+    // Update internal state based on selection type (single/multiple)
+    this.selectedValue = this.multiline ? selectedOptions : selectedOptions[0]
+    this.value = this.multiline
+      ? selectedOptions.join(',')
+      : (this.selectedValue as string)
+
+    // Validate the new value
+    this.checkValidity()
+
+    // Dispatch custom events after internal state is updated
+    this.dispatchEvent(
+      new CustomEvent('input', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      }),
+    )
+
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   /**
@@ -110,10 +189,18 @@ export class GdsSelect extends GdsFormControlElement<string> {
     return this.shadowRoot?.querySelector('.select-container select') ?? null
   }
 
+  /**
+   * Internal method to provide the element used for validity checking.
+   * Returns the native select element for validation purposes.
+   */
   _getValidityAnchor(): HTMLElement {
     return this.shadowRoot?.querySelector('SELECT') as HTMLElement
   }
 
+  /**
+   * Main render method for the component.
+   * Composes the UI from header, field base, and footer sections.
+   */
   render() {
     const CLASSES = {
       multiple: this.multiline,
@@ -146,6 +233,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
     `
   }
 
+  /**
+   * Renders the main content area of the select field.
+   * Composes the field from various sub-elements.
+   */
   #renderFieldContents() {
     const elements = [
       this.#renderSlotLead(),
@@ -157,10 +248,17 @@ export class GdsSelect extends GdsFormControlElement<string> {
     return elements.map((element) => html`${element}`)
   }
 
+  /**
+   * Renders the leading slot content if provided.
+   */
   #renderSlotLead() {
     return html` <slot name="lead" slot="lead"></slot> `
   }
 
+  /**
+   * Renders the main label text for single-select mode.
+   * Shows either selected option text or placeholder.
+   */
   #renderMainLabel() {
     if (!this.multiline) {
       const selectedLabels = Array.from(
@@ -179,6 +277,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
     }
   }
 
+  /**
+   * Renders the main slot and select container.
+   * The select container is where the native select is moved to.
+   */
   #renderMainSlot() {
     return html`
       <slot></slot>
@@ -186,6 +288,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
     `
   }
 
+  /**
+   * Renders the chevron icon button for single-select mode.
+   * Provides visual indication of dropdown functionality.
+   */
   #renderChevron() {
     if (!this.multiline) {
       return html`

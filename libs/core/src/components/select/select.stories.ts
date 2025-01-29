@@ -14,8 +14,8 @@ import '../icon/icons/brand-green.ts'
 import '../icon/icons/books.ts'
 
 /**
- * The `Select` story demonstrates a default selection component with a placeholder and supporting text.
- * <br>The component can be customized with a label, supporting text, and additional content.
+ * The `Select` story demonstrates a default selection component with a label and supporting text.
+ * <br>The component can be customized with a label, supporting text, lead icon and additional content.
  */
 
 const meta: Meta = {
@@ -39,7 +39,6 @@ const DefaultParams: Story = {
 /**
  * ### Parameters
  *
- *-  **placeholder**: The placeholder text displayed before an option is selected (e.g., 'Science Themes').
  *-  **label**: The label text displayed above the select field (e.g., 'Label text').
  *-  **supportingText**: Additional text that provides context or instructions (e.g., 'Supporting text').
  *-  **innerHTML**: The inner HTML content that defines the options within the select dropdown. It includes:
@@ -150,11 +149,7 @@ export const Lead: Story = {
   name: 'Lead Icon',
   render: () => html`
     <gds-flex>
-      <gds-select
-        placeholder="Green Design System"
-        label="Label text"
-        supporting-text="Supporting text"
-      >
+      <gds-select label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -182,12 +177,7 @@ export const Disabled: Story = {
   name: 'Disabled',
   render: () => html`
     <gds-flex>
-      <gds-select
-        disabled
-        placeholder="Space Missions"
-        label="Label text"
-        supporting-text="Supporting text"
-      >
+      <gds-select disabled label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text"
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -217,7 +207,6 @@ export const Validation: Story = {
     <gds-flex>
       <gds-select
         .invalid=${true}
-        placeholder="Space Technologies"
         label="Label text"
         supporting-text="Supporting text"
         .required=${true}
@@ -273,7 +262,6 @@ export const Size: Story = {
     <gds-flex>
       <gds-select
         size="small"
-        placeholder="Space Agencies"
         label="Label text"
         supporting-text="Supporting text"
       >
@@ -306,11 +294,7 @@ export const Multiple: Story = {
   name: 'Multiple',
   render: () => html`
     <gds-flex>
-      <gds-select
-        placeholder="Space Phenomena"
-        label="Label text"
-        supporting-text="Supporting text"
-      >
+      <gds-select label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text"
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -346,11 +330,7 @@ export const SelectSize: Story = {
   name: 'Select Size',
   render: () => html`
     <gds-flex>
-      <gds-select
-        placeholder="Space Exploration"
-        label="Label text"
-        supporting-text="Supporting text"
-      >
+      <gds-select label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text"
           >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
