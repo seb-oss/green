@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.23.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Update props naming and types
+- Updated dependencies [c259ac4]
+- Updated dependencies [3a9af88]
+- Updated dependencies [776f056]
+  - @sebgroup/green-core@1.63.1
+
+## 3.23.0
+
+### Minor Changes
+
+- 23f052c: **SegmentedControl**: Update to match core component
+
 ## 3.22.0
 
 ### Minor Changes

@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.1.2
+
+### Patch Changes
+
+- 1bf0d07: **nggCoreElement**: Remove console.log
+
 ## 5.1.1
 
 ### Patch Changes

@@ -511,13 +511,13 @@
           "dark-hover": {
             "value": "#ffffff",
             "darkValue": "#ffffff",
-            "alpha": "10%",
+            "alpha": "15%",
             "type": "color"
           },
           "dark-pressed": {
             "value": "#ffffff",
             "darkValue": "#ffffff",
-            "alpha": "20%",
+            "alpha": "25%",
             "type": "color"
           },
           "light-hover": {

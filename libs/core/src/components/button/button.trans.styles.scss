@@ -24,6 +24,7 @@ $button-danger-border: tokens.get(tokens.$red, 0);
       display: flex;
       gap: 0.5rem;
       text-decoration: none;
+      width: 100%;
     }
 
     .button slot:not([name]) {
