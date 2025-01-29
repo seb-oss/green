@@ -188,6 +188,32 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   /**
+   * Lifecycle method to handle updates to properties.
+   * Ensures synchronization between component value and internal select element.
+   *
+   * @protected
+   * @override
+   * @param {Map<PropertyKey, unknown>} changedProperties - Map of changed properties
+   */
+
+  protected override willUpdate(
+    changedProperties: Map<PropertyKey, unknown>,
+  ): void {
+    super.willUpdate(changedProperties)
+
+    if (changedProperties.has('value')) {
+      const newValue = this.value
+      const selectElement = this.getSelectElement()
+      if (selectElement && selectElement.value !== newValue) {
+        selectElement.value = newValue || ''
+        this.selectedValue = selectElement.multiple
+          ? newValue?.split(',') || []
+          : newValue || ''
+      }
+    }
+  }
+
+  /**
    * Handles changes to the native select element.
    * Manages event propagation and ensures proper state updates.
    *
@@ -230,6 +256,26 @@ export class GdsSelect extends GdsFormControlElement<string> {
         composed: true,
       }),
     )
+  }
+
+  /**
+   * Handles form reset events by selecting the first option.
+   *
+   * @protected
+   * @override
+   */
+  override formResetCallback(): void {
+    const selectElement = this.getSelectElement()
+    if (selectElement) {
+      const firstOption = selectElement.options[0]
+      if (firstOption) {
+        this.value = firstOption.value
+        selectElement.value = firstOption.value
+        this.selectedValue = selectElement.multiple
+          ? [firstOption.value]
+          : firstOption.value
+      }
+    }
   }
 
   /**
