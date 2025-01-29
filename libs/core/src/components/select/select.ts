@@ -23,6 +23,9 @@ import '../button/button'
  * A custom select component that extends GdsFormControlElement to provide enhanced
  * select/dropdown functionality with proper value propagation and event handling.
  *
+ * @slot - Default slot for the native select element
+ * @slot lead - Slot for leading content (e.g., icons)
+ *
  * Key Features:
  * - Supports both single and multiple selections
  * - Handles value propagation correctly between the native select and custom component
@@ -45,6 +48,9 @@ import '../button/button'
  * custom events after ensuring internal state is properly updated. This prevents
  * race conditions and ensures consistent behavior.
  *
+ * @fires {CustomEvent} change - Fired when the selection changes with detail: { value: string }
+ * @fires {CustomEvent} input - Fired on input with detail: { value: string }
+ *
  * Accessibility:
  * - Maintains ARIA labels and descriptions
  * - Preserves native select keyboard navigation
@@ -59,6 +65,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
   /**
    * The supporting text displayed between the label and the select.
    * This text provides additional context or information to the user.
+   * @type {string}
+   * @attr supporting-text
+   * @default ''
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
@@ -66,6 +75,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
   /**
    * The size of the select element.
    * This property can be either 'large' or 'small', and it determines the size of the select element.
+   *
+   * @type {'large' | 'small'}
+   * @attr size
+   * @default 'large'
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
@@ -74,6 +87,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * Indicates whether the select element allows multiple selections.
    * When set to true, the select component will enable multiline options,
    * allowing users to select multiple items at once.
+   *
+   * @private
+   * @state
+   * @type {boolean}
    */
   @state()
   private multiline = false
@@ -92,8 +109,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   /**
    * Gets the initial value from a select element, handling both single and multiple selections
-   * @param select The select element to get the value from
-   * @returns The initial value as a string
+   * @private
+   * @param {HTMLSelectElement} select - The select element to get the value from
+   * @returns {string} The initial value(s) as a comma-separated string
+   * @throws {Error} If the select element is invalid or not found
    */
   private getInitialSelectValue(select: HTMLSelectElement): string {
     if (select.multiple) {
@@ -107,11 +126,17 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   /**
    * Lifecycle method called after first render.
-   * Handles:
-   * 1. Moving slotted select into the component's shadow DOM
-   * 2. Setting up event listeners
-   * 3. Initializing ARIA attributes
-   * 4. Syncing initial values
+   *
+   * @protected
+   * @override
+   *
+   * Performs the following setup:
+   * 1. Moves the slotted select element into shadow DOM
+   * 2. Initializes ARIA attributes and accessibility features
+   * 3. Sets up event listeners for change and input events
+   * 4. Synchronizes initial values between native select and component state
+   *
+   * @throws {Error} If required elements are not found in the shadow DOM
    */
 
   firstUpdated() {
@@ -166,7 +191,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * Handles changes to the native select element.
    * Manages event propagation and ensures proper state updates.
    *
-   * @param event The original change event from the native select
+   * @private
+   * @param {Event} event - The original change event from the native select
+   * @fires CustomEvent#change
+   * @fires CustomEvent#input
    */
   private handleSelectChange(event: Event) {
     // Prevent native event bubbling to avoid race conditions
@@ -259,6 +287,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
   /**
    * Renders the main content area of the select field.
    * Composes the field from various sub-elements.
+   *
+   * @private
+   * @returns {TemplateResult[]} Array of template results for field contents
    */
   #renderFieldContents() {
     const elements = [
@@ -314,6 +345,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
   /**
    * Renders the chevron icon button for single-select mode.
    * Provides visual indication of dropdown functionality.
+   *
+   * @private
+   * @returns {TemplateResult | undefined} Template for the chevron button or undefined for multiline
    */
   #renderChevron() {
     if (!this.multiline) {
