@@ -105,9 +105,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             value="My value"
           ></gds-textarea>`,
         )
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         expect(clearButtonEl).to.exist
       })
     })
@@ -121,9 +119,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             value="My value"
           ></gds-textarea>`,
         )
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
         expect(el.value).to.equal('')
       })
@@ -182,7 +178,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const el = await fixture<GdsTextarea>(
           html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
-        await clickOnElement(el.shadowRoot?.querySelector('.field') as Element)
+        await clickOnElement(el.test_getFieldElement())
         expect(document.activeElement).to.equal(el)
       })
 

@@ -11,9 +11,9 @@ type DoProps = {
 export default function Do({ children }: DoProps) {
   return (
     <GdsCard
-      border="4xs/#ecf6ed"
+      border="3xs/#ecf6ed"
       border-radius="s"
-      background="positive"
+      background="primary"
       height="max-content"
       padding="0"
       overflow="hidden"
@@ -24,10 +24,11 @@ export default function Do({ children }: DoProps) {
         align-items="center"
         gap="s"
         padding="xs m"
+        color="positive"
       >
-        <IconCheckmark height="14" />
+        <IconCheckmark width={14} stroke={2} />
         <GdsText tag="small" font-weight="book">
-          DO
+          Do
         </GdsText>
       </GdsFlex>
     </GdsCard>

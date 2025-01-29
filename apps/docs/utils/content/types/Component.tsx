@@ -9,8 +9,9 @@ import { getLastEditedDate, urlFromFilePath } from '../utils'
 
 export type DocHeading = { level: 1 | 2 | 3; title: string }
 
-const figmaAccessKey = process.env.FIGMA_ACCESS_KEY
-const figmaProjectId = process.env.FIGMA_PROJECT_ID
+const FIGMA_ACCESS_KEY = process.env.FIGMA_ACCESS_KEY
+const FIGMA_PROJECT_ID = process.env.FIGMA_PROJECT_ID
+const ID_REGEX = /^\d{1,8}-\d{1,8}$/ // regex to match the ID format like "12345678-2234234"
 
 export const Component = defineDocumentType(() => ({
   name: 'Component',
@@ -71,101 +72,44 @@ export const Component = defineDocumentType(() => ({
           }),
     },
     last_edited: { type: 'date', resolve: getLastEditedDate },
-    figma_hero_svg: {
-      type: 'json',
-      resolve: async (doc) => {
-        const node = doc.node
-
-        try {
-          const response = await axios.get(
-            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node}&format=svg`,
-            {
-              headers: {
-                'X-Figma-Token': figmaAccessKey,
-              },
-            },
-          )
-
-          const images = response.data.images
-          const imageUrl = Object.values(images)[0] as string
-
-          return fetch(imageUrl)
-            .then((response) => response.text())
-            .then((svgData) => {
-              const nodeIdWithHyphen = node?.replace(':', '-') // Replace the colon with a hyphen
-              return {
-                node: nodeIdWithHyphen,
-                svg: svgData,
-                url: imageUrl,
-              }
-            })
-            .catch((error) => {
-              // console.error(`Error fetching Figma SVG`, error)
-              return {
-                node: node,
-                svg: '',
-              }
-            })
-        } catch (error) {
-          // console.error("Error fetching Figma hero SVG:")
-          return {
-            node: node,
-            svg: '',
-          }
-        }
-      },
-    },
     figma_svgs: {
       type: 'json',
       resolve: async (doc) => {
-        const regXHeader = /node="(?<node>.+?)"/g
-        const nodes = Array.from(doc.body.raw.matchAll(regXHeader)).map(
-          (match) => match.groups?.node,
-        )
-
         try {
-          const response = await axios.get(
-            `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${nodes.join(',')}&format=svg`,
+          // Extract and filter valid node IDs
+          const regXHeader = /node="(?<node>.+?)"/g
+          const nodes = Array.from(doc.body.raw.matchAll(regXHeader))
+            .map((match) => match.groups?.node)
+            .filter((node): node is string => !!node && ID_REGEX.test(node))
+
+          if (nodes.length === 0) return []
+
+          // Get all image URLs in a single request
+          const { data: imageData } = await axios.get(
+            `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${nodes.join(',')}&format=svg`,
             {
               headers: {
-                'X-Figma-Token': figmaAccessKey,
+                'X-Figma-Token': FIGMA_ACCESS_KEY,
               },
             },
           )
 
-          const images = response.data.images
-          // console.log("images", images)
-
-          const fetchPromises = Object.entries(images).map(
-            ([node, imageUrl]) => {
-              return fetch(imageUrl as string)
-                .then((response) => response.text())
-                .then((svgData) => {
-                  const nodeIdWithHyphen = node.replace(':', '-') // Replace the colon with a hyphen
-                  return {
-                    node: nodeIdWithHyphen,
-                    svg: svgData,
-                    url: imageUrl,
-                  }
-                })
-                .catch((error) => {
-                  // console.error(`Error fetching Figma SVG`, error)
-                  return {
-                    node: node,
-                    svg: '',
-                  }
-                })
+          // Fetch all SVGs in parallel
+          const svgPromises = Object.entries(imageData.images).map(
+            async ([nodeId, url]) => {
+              const { data: svgContent } = await axios.get(url as string)
+              return {
+                node: nodeId.replace(':', '-'),
+                svg: svgContent,
+                url: url as string,
+              }
             },
           )
 
-          const svgData = await Promise.all(fetchPromises)
-          return svgData
+          return Promise.all(svgPromises)
         } catch (error) {
-          // console.error("Error processing Figma SVGS:")
-          return nodes.map((node) => ({
-            node: node,
-            svg: '',
-          }))
+          console.error('Error fetching Figma SVGs:', error)
+          return []
         }
       },
     },

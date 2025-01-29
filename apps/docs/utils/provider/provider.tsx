@@ -98,11 +98,10 @@ export function Provider({ children }: { children: React.ReactNode }) {
     <Context.Provider value={value}>
       {children}
       <Toaster
-        richColors
-        theme="light"
-        position="bottom-center"
+        theme="dark"
+        position="bottom-right"
         expand={false}
-        closeButton={true}
+        closeButton={false}
         duration={4428}
       />
       <CMD isOpen={isOpen} toggleCmd={toggleCmd} />

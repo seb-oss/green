@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import { ViewTransitions } from 'next-view-transitions'
 import Script from 'next/script'
 import Main from '&/main'
 import Consent from '$/consent/consent'
@@ -16,9 +17,9 @@ import '#/global.css'
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode
-}) {
+}>) {
   useCookieConsent()
 
   useEffect(() => {
@@ -29,23 +30,24 @@ export default function RootLayout({
   }, [])
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
-        <Provider>
-          <Favicon />
-          <Fonts>
-            <GdsFlex flex-direction="column">
-              <Header />
-              <Main>
-                {children}
-                <Consent />
-              </Main>
-              <Footer />
-            </GdsFlex>
-          </Fonts>
-        </Provider>
-        <Script id="data-layer">
-          {`window["dataLayer"] = {
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <body>
+          <Provider>
+            <Favicon />
+            <Fonts>
+              <GdsFlex flex-direction="column">
+                <Header />
+                <Main>
+                  {children}
+                  <Consent />
+                  <Footer />
+                </Main>
+              </GdsFlex>
+            </Fonts>
+          </Provider>
+          <Script id="data-layer">
+            {`window["dataLayer"] = {
             "pageName":"seb.io",
             "pagetype":"StandardPage",
             "language":"en",
@@ -53,8 +55,9 @@ export default function RootLayout({
             "project":"green",
             "website":"seb.io",
           };`}
-        </Script>
-      </body>
-    </html>
+          </Script>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }

@@ -1,7 +1,7 @@
 import { GdsElement } from '../../gds-element'
-import { Focusable } from '../../mixins/focusable'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
+import { Focusable } from '../../utils/mixins/focusable'
 import styles from '../listbox/option.styles'
 
 /**

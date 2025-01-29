@@ -12,10 +12,11 @@ import '../src/components/button/index.js'
 import '../src/components/grid/index.js'
 
 setCustomElementsManifest(customElements)
+registerTransitionalStyles()
 
 export const globalTypes = {
   style: {
-    name: 'Change Style',
+    name: 'Change design version',
     defaultValue: '2023',
     toolbar: {
       icon: 'lightning',
@@ -40,6 +41,7 @@ export default {
         order: [
           'Green Design System',
           'Get started',
+          "What's what?",
           'Docs',
           'Components',
           'Style',
@@ -54,33 +56,9 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
-      // Initialize previousStyle if it doesn't exist
-      if (typeof context.globals.previousStyle === 'undefined') {
-        context.globals.previousStyle = '2023' // Default to 2023
-      }
-
-      const style = context.globals.style || '2023'
-
-      if (style === '2016') {
-        if (context.globals.previousStyle !== '2016') {
-          registerTransitionalStyles()
-        }
-      } else {
-        if (context.globals.previousStyle === '2016') {
-          document.location.reload()
-        }
-      }
-
-      context.globals.previousStyle = style
-
-      return html`<gds-theme>${storyFn()}</gds-theme>`
+      return html`<gds-theme .designVersion=${context.globals.style}
+        >${storyFn()}</gds-theme
+      >`
     },
   ],
-}
-
-@customElement('transitional-styles-toggle')
-class TransitionalStylesToggle extends LitElement {
-  protected createRenderRoot() {
-    return this
-  }
 }

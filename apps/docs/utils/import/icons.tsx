@@ -50,6 +50,16 @@ export const IconChevronTop = dynamic(
   },
 )
 
+export const IconBook = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconBook').then(
+      (mod) => mod.IconBook,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 export const IconBarsThree = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconBarsThree').then(
@@ -194,6 +204,56 @@ export const IconSun = dynamic(
   () =>
     import('@sebgroup/green-react/src/lib/icon/icons/IconSun').then(
       (mod) => mod.IconSun,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconTextEdit = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconTextEdit').then(
+      (mod) => mod.IconTextEdit,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconSquareInfo = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconSquareInfo').then(
+      (mod) => mod.IconSquareInfo,
+    ),
+  {
+    ssr: false,
+  },
+)
+
+export const IconSquareGridCircle = dynamic(
+  () =>
+    import(
+      '@sebgroup/green-react/src/lib/icon/icons/IconSquareGridCircle'
+    ).then((mod) => mod.IconSquareGridCircle),
+  {
+    ssr: false,
+  },
+)
+
+export const IconSquareBehindSquare = dynamic(
+  () =>
+    import(
+      '@sebgroup/green-react/src/lib/icon/icons/IconSquareBehindSquare'
+    ).then((mod) => mod.IconSquareBehindSquare),
+  {
+    ssr: false,
+  },
+)
+
+export const IconBrandGreen = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconBrandGreen').then(
+      (mod) => mod.IconBrandGreen,
     ),
   {
     ssr: false,
