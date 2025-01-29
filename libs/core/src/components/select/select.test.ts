@@ -11,13 +11,13 @@ const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-select>', () => {
   describe('Rendering', () => {
-    it('should render a placeholder', async () => {
+    it('should render a label', async () => {
       const el = await fixture<GdsSelect>(
-        html`<gds-select placeholder="Select Placeholder"></gds-select>`,
+        html`<gds-select label="Select Label"></gds-select>`,
       )
-      const labelEl = el.shadowRoot?.querySelector('label#placeholder')
+      const labelEl = el.shadowRoot?.querySelector('label#label-text')
       expect(labelEl).to.exist
-      expect(labelEl?.textContent).to.contain('Select Placeholder')
+      expect(labelEl?.textContent).to.contain('Select Label')
     })
 
     it('should render options correctly', async () => {
@@ -112,8 +112,37 @@ describe('<gds-select>', () => {
       `)
 
       await el.updateComplete
-
       expect(el.value).to.equal('1')
+    })
+
+    it('should handle multiple pre-selected options in multiple mode', async () => {
+      const el = await fixture<GdsSelect>(html`
+        <gds-select label="Select Label">
+          <select multiple>
+            <option value="1" selected>Option 1</option>
+            <option value="2" selected>Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+        </gds-select>
+      `)
+
+      await el.updateComplete
+      expect(el.value).to.equal('1,2')
+    })
+
+    it('should handle no pre-selected options', async () => {
+      const el = await fixture<GdsSelect>(html`
+        <gds-select label="Select Label">
+          <select>
+            <option value="">Please select</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+          </select>
+        </gds-select>
+      `)
+
+      await el.updateComplete
+      expect(el.value).to.equal('')
     })
   })
 })

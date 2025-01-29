@@ -91,6 +91,21 @@ export class GdsSelect extends GdsFormControlElement<string> {
   }
 
   /**
+   * Gets the initial value from a select element, handling both single and multiple selections
+   * @param select The select element to get the value from
+   * @returns The initial value as a string
+   */
+  private getInitialSelectValue(select: HTMLSelectElement): string {
+    if (select.multiple) {
+      const selectedOptions = Array.from(select.selectedOptions).map(
+        (option) => option.value,
+      )
+      return selectedOptions.join(',')
+    }
+    return select.value
+  }
+
+  /**
    * Lifecycle method called after first render.
    * Handles:
    * 1. Moving slotted select into the component's shadow DOM
@@ -112,7 +127,15 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
       assignedNodes.forEach((node) => {
         if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT') {
+          const select = node as HTMLSelectElement
+          // Get the initial value before moving the element
+          const initialValue = this.getInitialSelectValue(select)
           selectContainer?.appendChild(node)
+          // Update both the value and selectedValue
+          this.value = initialValue
+          this.selectedValue = select.multiple
+            ? initialValue.split(',')
+            : initialValue
         }
       })
     }
