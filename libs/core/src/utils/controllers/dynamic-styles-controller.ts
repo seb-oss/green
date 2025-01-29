@@ -86,8 +86,10 @@ export class DynamicStylesController implements ReactiveController {
    */
   clearInitial() {
     if (this.#useLegacyStylesheets) {
-      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.#initialLegacyStyleSheets = []
+      requestAnimationFrame(() => {
+        this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
+        this.#initialLegacyStyleSheets = []
+      })
     } else {
       this.#initialStyleSheets = []
     }
@@ -126,12 +128,14 @@ export class DynamicStylesController implements ReactiveController {
 
   #commit() {
     if (this.#useLegacyStylesheets) {
-      if (!this.host.shadowRoot) return
-      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
-        style.remove()
-      })
-      this.#legacyStyleSheets.forEach((styleEl) => {
-        this.host.shadowRoot?.appendChild(styleEl)
+      requestAnimationFrame(() => {
+        if (!this.host.shadowRoot) return
+        this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+          style.remove()
+        })
+        this.#legacyStyleSheets.forEach((styleEl) => {
+          this.host.shadowRoot?.appendChild(styleEl)
+        })
       })
     } else {
       if (!this.host.shadowRoot) return

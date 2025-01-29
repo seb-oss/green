@@ -272,7 +272,7 @@ export class GdsPopover extends GdsElement {
               size="small"
               rank="tertiary"
             >
-              <gds-icon-cross-small></icon-cross-small>
+              <gds-icon-cross-small></gds-icon-cross-small>
             </gds-button>
           </header>
           <slot></slot>
