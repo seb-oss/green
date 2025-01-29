@@ -5,6 +5,8 @@ import '../../../.storybook/manager'
 
 import { addons } from '@storybook/manager-api'
 
+import { Select } from '../../react/src'
+
 const betaItems = {
   Layout: true,
   Form: true,
@@ -28,6 +30,7 @@ const betaItems = {
   Image: true,
   Mask: true,
   Signal: true,
+  Select: true,
   Spacer: true,
   Text: true,
   Theme: true,
