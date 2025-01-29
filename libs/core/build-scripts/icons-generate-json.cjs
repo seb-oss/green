@@ -1,25 +1,87 @@
 const fs = require('fs').promises
 const path = require('path')
 
-// Define directories
-const regularDir = path.resolve(__dirname, 'assets/regular')
-const solidDir = path.resolve(__dirname, 'assets/solid')
-const outputDir = path.resolve(__dirname, 'icons')
+// Define directories and base URL
+const regularDir = path.resolve(
+  __dirname,
+  '../src/components/icon/assets/regular',
+)
+const solidDir = path.resolve(__dirname, '../src/components/icon/assets/solid')
+const outputDir = path.resolve(__dirname, '../src/components/icon/json')
+
+// Base URL for raw GitHub content
+const BASE_GITHUB_URL =
+  'https://raw.githubusercontent.com/seb-oss/green/refs/heads/main/libs/core/src/components/icon/assets'
 
 /**
- * Utility function to create a delay
- * @param {number} ms - Milliseconds to delay
+ * Generate static URLs for the icon
+ * @param {string} iconName - Name of the icon
  */
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
+function generateStaticUrls(iconName) {
+  return {
+    regular: `${BASE_GITHUB_URL}/regular/${iconName}.svg`,
+    solid: `${BASE_GITHUB_URL}/solid/${iconName}.svg`,
+  }
 }
 
 /**
- * Convert string to kebab case
+ * Convert string to Pascal Case
  * @param {string} str - Input string
  */
-function toKebabCase(str) {
-  return str.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase()
+function toPascalCase(str) {
+  return str
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('')
+}
+
+/**
+ * Generate framework-specific metadata
+ * @param {string} iconName - Name of the icon
+ */
+function generateFrameworkData(iconName) {
+  const pascalName = toPascalCase(iconName)
+
+  return {
+    web: {
+      path: `@sebgroup/green-core/icon/${iconName}`,
+      import: `import '@sebgroup/green-core/icon/${iconName}.js'`,
+      component: `<gds-icon-${iconName}></gds-icon-${iconName}>`,
+    },
+    react: {
+      path: `@sebgroup/green-react/icon/${iconName}`,
+      import: `import { Icon${pascalName} } from '@sebgroup/green-react/icon/${iconName}'`,
+      component: `<Icon${pascalName}></Icon${pascalName}>`,
+    },
+    angular: {
+      path: `@sebgroup/green-angular/icon/${iconName}`,
+      import: `import { Icon${pascalName} } from '@sebgroup/green-angular/icon/${iconName}'`,
+      component: `<gds-icon-${iconName}></gds-icon-${iconName}>`,
+    },
+  }
+}
+
+/**
+ * Extract SVG content and normalize it
+ * @param {string} filePath - Path to SVG file
+ */
+async function extractSvgContent(filePath) {
+  try {
+    let content = await fs.readFile(filePath, 'utf-8')
+    const svgContentMatch = content.match(/<svg[^>]*>([\s\S]*?)<\/svg>/)
+
+    if (svgContentMatch && svgContentMatch[1]) {
+      let innerContent = svgContentMatch[1].trim()
+      innerContent = innerContent.replace(/#353531/g, 'currentColor')
+      return innerContent
+    }
+
+    console.warn(`No SVG content found in ${filePath}`)
+    return ''
+  } catch (error) {
+    console.warn(`Failed to process ${filePath}: ${error.message}`)
+    return ''
+  }
 }
 
 /**
@@ -33,36 +95,11 @@ function toTitleCase(str) {
     .join(' ')
 }
 
-/**
- * Extract SVG content and normalize it
- * @param {string} filePath - Path to SVG file
- */
-async function extractSvgContent(filePath) {
-  try {
-    let content = await fs.readFile(filePath, 'utf-8')
-    // Replace color with currentColor
-    content = content.replace(/#353531/g, 'currentColor')
-    // Extract only the path elements
-    const pathMatch = content.match(/<path[^>]*>.*?<\/path>/g)
-    return pathMatch ? pathMatch.join('\n').replace(/\s*\n\s*/g, '') : ''
-  } catch (error) {
-    console.warn(`Failed to process ${filePath}: ${error.message}`)
-    return ''
-  }
-}
-
-/**
- * Generate the icon library
- */
 async function generateIconLibrary() {
   try {
-    // Create output directory if it doesn't exist
     await fs.mkdir(outputDir, { recursive: true })
-
-    // Read all SVG files
     const regularFiles = await fs.readdir(regularDir)
     const iconLibrary = {}
-    let indexContent = '// Generated icon library index\n\n'
 
     for (const file of regularFiles) {
       if (path.extname(file) !== '.svg') continue
@@ -70,101 +107,67 @@ async function generateIconLibrary() {
       const iconName = path.basename(file, '.svg')
       console.log(`Processing icon: ${iconName}`)
 
-      // Extract SVG content
-      const regularSvg = await extractSvgContent(
-        path.join(regularDir, `${iconName}.svg`),
-      )
-      const solidSvg = await extractSvgContent(
-        path.join(solidDir, `${iconName}.svg`),
-      )
+      // Process regular variant
+      const regularPath = path.join(regularDir, file)
+      const regularContent = await extractSvgContent(regularPath)
+      if (regularContent) {
+        console.log(`✅ Filled regular variant for: ${iconName}`)
+      } else {
+        console.log(`❌ Failed to fill regular variant for: ${iconName}`)
+      }
 
-      // Create icon metadata
-      const iconData = {
+      // Process solid variant
+      const solidPath = path.join(solidDir, file)
+      const solidContent = await extractSvgContent(solidPath)
+      if (solidContent) {
+        console.log(`✅ Filled solid variant for: ${iconName}`)
+      } else {
+        console.log(`❌ Failed to fill solid variant for: ${iconName}`)
+      }
+
+      // Create icon metadata with framework information and static URLs
+      iconLibrary[iconName] = {
         id: iconName,
         displayName: toTitleCase(iconName),
         fileName: `${iconName}.svg`,
         urlPath: iconName,
         variants: {
-          regular: regularSvg,
-          solid: solidSvg,
+          regular: regularContent,
+          solid: solidContent,
         },
+        static: generateStaticUrls(iconName),
         meta: {
           description: '',
           categories: [],
           tags: [],
         },
+        framework: generateFrameworkData(iconName),
       }
 
-      iconLibrary[iconName] = iconData
-      indexContent += `export { default as ${iconName}Icon } from './${iconName}';\n`
-
-      // Generate individual icon file
-      const iconFileContent = `
-/**
- * @fileoverview Icon component for ${iconData.displayName}
- * @element gds-icon-${toKebabCase(iconName)}
- */
-
-export default {
-  id: '${iconData.id}',
-  displayName: '${iconData.displayName}',
-  fileName: '${iconData.fileName}',
-  urlPath: '${iconData.urlPath}',
-  variants: {
-    regular: \`${iconData.variants.regular}\`,
-    solid: \`${iconData.variants.solid}\`
-  },
-  meta: {
-    description: '',
-    categories: [],
-    tags: []
-  }
-};
-`
-
-      await fs.writeFile(
-        path.join(outputDir, `${iconName}.js`),
-        iconFileContent.trim(),
-      )
-
-      // Add delay to prevent overwhelming the file system
-      await delay(100)
+      console.log(`✅ Completed processing: ${iconName}\n`)
     }
 
-    // Write main library file
-    await fs.writeFile(
-      path.join(outputDir, 'icon-library.json'),
-      JSON.stringify(iconLibrary, null, 2),
-    )
+    // Write the complete library file
+    const outputPath = path.join(outputDir, 'icons.json')
+    await fs.writeFile(outputPath, JSON.stringify(iconLibrary, null, 2))
 
-    // Write index file
-    await fs.writeFile(path.join(outputDir, 'index.js'), indexContent)
-
-    // Generate types file
-    const typesContent = `
-/**
- * @typedef {Object} IconVariants
- * @property {string} regular - Regular style SVG content
- * @property {string} solid - Solid style SVG content
- */
-
-/**
- * @typedef {Object} IconMetadata
- * @property {string} id - Icon identifier
- * @property {string} displayName - Human readable name
- * @property {string} fileName - SVG filename
- * @property {string} urlPath - URL-safe path
- * @property {IconVariants} variants - Icon variants
- * @property {Object} meta - Additional metadata
- */
-
-export {};
-`
-
-    await fs.writeFile(path.join(outputDir, 'types.d.ts'), typesContent.trim())
-
-    console.log(`Successfully generated icon library in ${outputDir}`)
+    console.log(`Successfully generated icon library at ${outputPath}`)
     console.log(`Total icons processed: ${Object.keys(iconLibrary).length}`)
+
+    // Generate a summary
+    // const summary = {
+    //   totalIcons: Object.keys(iconLibrary).length,
+    //   missingRegular: Object.entries(iconLibrary)
+    //     .filter(([_, data]) => !data.variants.regular)
+    //     .map(([name]) => name),
+    //   missingSolid: Object.entries(iconLibrary)
+    //     .filter(([_, data]) => !data.variants.solid)
+    //     .map(([name]) => name),
+    // };
+
+    // const summaryPath = path.join(outputDir, 'summary.json');
+    // await fs.writeFile(summaryPath, JSON.stringify(summary, null, 2));
+    // console.log(`Generated summary at ${summaryPath}`);
   } catch (error) {
     console.error('Failed to generate icon library:', error)
     process.exit(1)

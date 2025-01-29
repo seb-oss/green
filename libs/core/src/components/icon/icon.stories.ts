@@ -12,6 +12,7 @@ import { html } from 'lit'
 import './icon.stories.css'
 
 import * as Icons from './icons'
+import iconLibrary from './json/icons.json'
 
 /**
  * The `gds-icon-*` component is a flexible set of icon components. These allows you to use a variety of pre-defined icons in your application.
@@ -80,8 +81,17 @@ window.addEventListener('DOMContentLoaded', () => {
       if (iconNameAttr) {
         const iconName = iconNameAttr.toLowerCase().replace('gds-icon-', '')
 
-        // Implement fuzzy search
-        const isMatch = fuzzySearch(searchTerm, iconName)
+        // Search in icon library metadata
+        const iconData = iconLibrary[iconName]
+        const searchableText = [
+          iconName,
+          iconData?.displayName.toLowerCase(),
+          ...(iconData?.meta.tags || []),
+          ...(iconData?.meta.categories || []),
+          iconData?.meta.description.toLowerCase(),
+        ].join(' ')
+
+        const isMatch = fuzzySearch(searchTerm, searchableText)
 
         if (isMatch || searchBox.value.trim() === '') {
           icon.removeAttribute('hidden')
@@ -113,11 +123,8 @@ export const IconsRegular: Story = {
   ...DefaultParams,
   name: 'Regular icons',
   render: (args) => {
-    const iconElements = Object.keys(Icons).map((iconName) => {
-      const IconComponent = Icons[iconName]
-      const tagName = IconComponent._name
-        ? literal`gds-icon-${unsafeStatic(IconComponent._name)}`
-        : literal`gds-icon-${unsafeStatic(iconName)}`
+    const iconElements = Object.keys(iconLibrary).map((iconName) => {
+      const tagName = literal`gds-icon-${unsafeStatic(iconName)}`
       return staticHTML`<${tagName}></${tagName}>`
     })
 
