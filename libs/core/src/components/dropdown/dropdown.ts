@@ -272,7 +272,7 @@ export class GdsDropdown<ValueT = any>
         .calcMaxWidth=${(trigger: HTMLElement) =>
           this.syncPopoverWidth ? `${trigger.offsetWidth}px` : `auto`}
         .calcMaxHeight=${this.#calcMaxHeight}
-        .disableMobileStyles=${this.disableMobileStyles}
+        .disableMobileStyles=${this.disableMobileStyles || this.combobox}
         .nonmodal=${this.combobox}
         @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
       >

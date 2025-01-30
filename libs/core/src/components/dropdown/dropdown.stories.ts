@@ -273,10 +273,13 @@ export const Multiple: Story = {
  *
  * Use combobox when the user needs to have the option of entering a custom value but is also helped by a list of predefined options.
  *
+ * Don't use combobox if you only need a searchable dropdown but don't want to allow custom values. Use the `searchable` attribute instead in that case.
+ *
  * ***Note:***
  * - The `combobox` attribute doesn't work with the `multiple` attribute. If both are used, the `combobox` attribute will be ignored.
  * - Custom trigger content will not be rendered when the `combobox` attribute is used, since it will be replaced with an input element internally.
- * - Avoid using the `searchable` attribute with the `combobox` attribute, since the combobox input is already used for filtering.
+ * - Never combine the `searchable` attribute with the `combobox` attribute, since the combobox input is already used for filtering.
+ * - For practical reasons, mobile styles are disabled when the `combobox` attribute is used.
  */
 export const Combobox: Story = {
   ...DefaultParams,
