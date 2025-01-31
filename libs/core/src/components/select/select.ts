@@ -24,8 +24,8 @@ import '../button/button'
  * A custom select component that extends GdsFormControlElement to provide enhanced
  * select/dropdown functionality with proper value propagation and event handling.
  *
- * @slot - Default slot for the native select element
- * @slot lead - Slot for leading content (e.g., icons)
+ * - Default slot for the native select element
+ * - Slot for leading content (e.g., icons)
  *
  * Key Features:
  * - Supports both single and multiple selections
@@ -136,14 +136,21 @@ export class GdsSelect extends GdsFormControlElement<string> {
       assignedNodes.forEach((node) => {
         if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT') {
           const select = node as HTMLSelectElement
-          // Get the initial value before moving the element
-          const initialValue = this.getInitialSelectValue(select)
+          this.multiline = select.multiple
           selectContainer?.appendChild(node)
-          // Update both the value and selectedValue
-          this.value = initialValue
-          this.selectedValue = select.multiple
-            ? initialValue.split(',')
-            : initialValue
+
+          // Initialize selected values
+          const initialSelectedOptions = Array.from(select.selectedOptions).map(
+            (option) => option.value,
+          )
+
+          if (this.multiline) {
+            this.selectedValue = initialSelectedOptions
+            this.value = initialSelectedOptions.join(',')
+          } else {
+            this.selectedValue = initialSelectedOptions.slice(0, 1)
+            this.value = initialSelectedOptions[0] || ''
+          }
         }
       })
     }
@@ -152,21 +159,14 @@ export class GdsSelect extends GdsFormControlElement<string> {
       this.shadowRoot?.querySelector('.select-container select') || null
 
     if (selectElement) {
-      // Initialize component state from select element
-      this.multiline = selectElement.multiple
       selectElement.setAttribute('aria-describedby', 'supporting-text')
       selectElement.setAttribute('aria-label', this.label)
-      this.selectedValue = selectElement.value
 
-      // Set up event listeners with proper propagation control
       selectElement.addEventListener(
         'change',
         this.handleSelectChange.bind(this),
       )
       selectElement.addEventListener('input', (e) => e.stopPropagation())
-
-      // Sync initial value
-      selectElement.value = this.value || ''
     }
   }
 
@@ -181,13 +181,18 @@ export class GdsSelect extends GdsFormControlElement<string> {
     super.willUpdate(changedProperties)
 
     if (changedProperties.has('value')) {
-      const newValue = this.value
       const selectElement = this.getSelectElement()
-      if (selectElement && selectElement.value !== newValue) {
-        selectElement.value = newValue || ''
-        this.selectedValue = selectElement.multiple
-          ? newValue?.split(',') || []
-          : newValue || ''
+      if (selectElement && selectElement.multiple) {
+        // For multiple select, update all options
+        const newValues = this.value ? this.value.split(',') : []
+        Array.from(selectElement.options).forEach((option) => {
+          option.selected = newValues.includes(option.value)
+        })
+        this.selectedValue = newValues
+      } else if (selectElement) {
+        // For single select
+        selectElement.value = this.value || ''
+        this.selectedValue = this.value ? [this.value] : []
       }
     }
   }
@@ -201,15 +206,19 @@ export class GdsSelect extends GdsFormControlElement<string> {
     event.stopPropagation()
 
     const selectElement = event.target as HTMLSelectElement
-    const selectedOptions = Array.from(selectElement.selectedOptions).map(
-      (option) => option.value,
-    )
+    const selectedOptions = Array.from(selectElement.selectedOptions)
+      .map((option) => option.value)
+      .filter((value) => value !== '') // Filter out empty values
 
-    // Update internal state based on selection type (single/multiple)
-    this.selectedValue = this.multiline ? selectedOptions : selectedOptions[0]
-    this.value = this.multiline
-      ? selectedOptions.join(',')
-      : (this.selectedValue as string)
+    if (this.multiline) {
+      // For multiple select, maintain the array of selections
+      this.selectedValue = selectedOptions
+      // Only join non-empty values
+      this.value = selectedOptions.length > 0 ? selectedOptions.join(',') : ''
+    } else {
+      this.selectedValue = [selectedOptions[0]]
+      this.value = selectedOptions[0]
+    }
 
     // Validate the new value
     this.checkValidity()
@@ -238,13 +247,20 @@ export class GdsSelect extends GdsFormControlElement<string> {
   override formResetCallback(): void {
     const selectElement = this.getSelectElement()
     if (selectElement) {
-      const firstOption = selectElement.options[0]
-      if (firstOption) {
-        this.value = firstOption.value
-        selectElement.value = firstOption.value
-        this.selectedValue = selectElement.multiple
-          ? [firstOption.value]
-          : firstOption.value
+      if (selectElement.multiple) {
+        // Reset all selections
+        Array.from(selectElement.options).forEach((option) => {
+          option.selected = false
+        })
+        this.selectedValue = []
+        this.value = ''
+      } else {
+        const firstOption = selectElement.options[0]
+        if (firstOption) {
+          this.value = firstOption.value
+          selectElement.value = firstOption.value
+          this.selectedValue = [firstOption.value]
+        }
       }
     }
   }
