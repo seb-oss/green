@@ -332,6 +332,46 @@ describe('<gds-dropdown>', () => {
     await el.updateComplete
     await expect(el.displayValue).to.equal('Option 3 (updated)')
   })
+
+  it('should set gds-form-control-header class based on size', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown" size="small">
+      </gds-dropdown>
+    `)
+    const gdsFormControlHeader = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-header]')!
+
+    await expect(gdsFormControlHeader.classList.contains('size-small')).to.be.true
+  })
+
+  it('should set gds-form-control-header class based on default size', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown">
+      </gds-dropdown>
+    `)
+    const gdsFormControlHeader = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-header]')!
+
+    await expect(gdsFormControlHeader.classList.contains('size-medium')).to.be.true
+  })
+
+  it('should set gds-form-control-footer class based on size', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown" size="small">
+      </gds-dropdown>
+    `)
+    const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-footer]')!
+
+    await expect(gdsFormControlFooter.classList.contains('size-small')).to.be.true
+  })
+
+  it('should set gds-form-control-footer class based on default size', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown label="My dropdown">
+      </gds-dropdown>
+    `)
+    const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-footer]')!
+
+    await expect(gdsFormControlFooter.classList.contains('size-medium')).to.be.true
+  })
 })
 
 describe('<gds-dropdown> interactions', () => {
