@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'

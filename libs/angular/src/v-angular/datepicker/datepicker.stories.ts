@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import './datepicker.globals'
 
 import { CommonModule, registerLocaleData, WeekDay } from '@angular/common'

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import '../core/core.globals'
 import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 

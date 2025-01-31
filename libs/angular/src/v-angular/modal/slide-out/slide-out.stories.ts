@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'

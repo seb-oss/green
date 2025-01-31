@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { Component, importProvidersFrom } from '@angular/core'
 import { RouterModule } from '@angular/router'

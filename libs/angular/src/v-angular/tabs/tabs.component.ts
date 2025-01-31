@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {
   AfterContentInit,
   Component,
@@ -79,6 +80,7 @@ export class TabsComponent
         while (uniqueIds.has(index + offset)) offset++
         const id = index + offset
         if (uniqueIds.has(tab.id)) {
+          // eslint-disable-next-line no-console
           console.warn(
             `Duplicate tab id "${tab.id}" found for tab "${tab.tab}", de-duplicating using index + offset. New tab id will be ${id}`,
           )

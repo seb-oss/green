@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { importProvidersFrom } from '@angular/core'
 import { TranslocoLoader, TranslocoModule } from '@jsverse/transloco'
 import {
