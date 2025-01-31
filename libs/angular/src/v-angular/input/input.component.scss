@@ -33,8 +33,6 @@
   }
 
   .gds-input-wrapper {
-    // @include mixins.add-input-wrapper;
-    // display: flex;
 
     @include validation.add-feedback-element(false);
 
@@ -80,14 +78,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      
-
-      &:focus {
-        outline-color: #1a1a1a;
-        outline-style: solid;
-        outline-width: 0.125rem;
-        outline-offset: 0.125rem;
-      }
 
       &[disabled] {
         background-color: #f8f8f8 !important;
@@ -103,6 +93,7 @@
     }
 
     .input-group-suffix {
+      
       min-height: 2.5rem;
       border: none;
       border-radius: 3px;
@@ -114,14 +105,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      
-
-      &:focus {
-        outline-color: #1a1a1a;
-        outline-style: solid;
-        outline-width: 0.125rem;
-        outline-offset: 0.125rem;
-      }
 
       &[disabled] {
         background-color: #f8f8f8 !important;
