@@ -3,6 +3,8 @@
 @use '../../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 
 :host {
+  --gds-ref-pallet-base300: hsl(0, 0%, 87%);
+  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
   --gds-ref-pallet-base400: hsl(0, 0%, 81%);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-z-index-dropdown: ;
@@ -79,10 +81,12 @@
     }
   }
 
-  .gds-dropdown__options__label:hover,
+  .gds-dropdown__options__label:hover {
+    background-color: var(--gds-ref-pallet-base400);
+  }
   .gds-dropdown__options__label:focus-visible,
   .gds-dropdown__options__label[aria-focus='true'] {
-    background-color: var(--gds-ref-pallet-base400);
+    background-color: var(--gds-ref-pallet-base300);
   }
 
   .gds-dropdown__options__label:active {

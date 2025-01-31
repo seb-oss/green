@@ -30,6 +30,7 @@
     width: 100%;
     line-height: 18px;
     font-size: 1rem;
+    font-family: inherit;
   }
 
   .gds-input-wrapper {
@@ -197,6 +198,10 @@
   .label,
   legend {
     @include form-group.add-label();
+  }
+
+  .gds-field-label--optional {
+    font-weight: 400;
   }
 
   .form-info {
