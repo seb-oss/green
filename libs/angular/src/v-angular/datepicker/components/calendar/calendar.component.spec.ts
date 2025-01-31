@@ -1,3 +1,4 @@
+import { loadavg } from 'os'
 import { WeekDay } from '@angular/common'
 import { DebugElement } from '@angular/core'
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
@@ -23,12 +24,20 @@ describe('[NggvDatepicker]', () => {
     let fixture: ComponentFixture<CalendarComponent>
     let debugElement: DebugElement
 
-    const getDateButtonElement = (date: Date): DebugElement | undefined =>
-      debugElement.query(
+    const getDateButtonElement = (date: Date): DebugElement | undefined => {
+      const buttons = debugElement.queryAll(
         (e) =>
           (e.nativeElement as HTMLButtonElement).innerHTML.trim() ===
           date.getDate().toString(),
       )
+
+      // Added this check. Test was failing if there were two 31st in one calendar matrix.
+      if (buttons.length > 1) {
+        return buttons[1]
+      }
+
+      return buttons[0]
+    }
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -92,7 +101,9 @@ describe('[NggvDatepicker]', () => {
           component.dateMatrix = dateMatrix
           component[inputName] = inputValue
           fixture.detectChanges()
+
           const buttonDe = getDateButtonElement(verifyDate) as DebugElement
+
           expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')
         })
       },
