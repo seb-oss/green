@@ -32,7 +32,7 @@ const whitespace = [' ', '/n']
  * @param source The source string to tokenize
  * @returns An array of tokens
  */
-export function tokenize(source: string): Tokens {
+export function tokenize(source = ''): Tokens {
   const lexemes = []
   let scanned = ''
 

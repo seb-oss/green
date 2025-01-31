@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 // Datepicker.stories.ts
 import {
   FormControl,

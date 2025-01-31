@@ -1,5 +1,51 @@
 # Changelog
 
+## 5.1.2
+
+### Patch Changes
+
+- 1bf0d07: **nggCoreElement**: Remove console.log
+
+## 5.1.1
+
+### Patch Changes
+
+- 4d8df8b: **NggCoreControlDirective:** Fix a missing public export
+- 53ed2a4: **In page wizard** Change icon
+- Updated dependencies [5e16375]
+- Updated dependencies [33b08a2]
+- Updated dependencies [3331d19]
+- Updated dependencies [40f905b]
+- Updated dependencies [93bac39]
+- Updated dependencies [f43d556]
+- Updated dependencies [4d8df8b]
+- Updated dependencies [f43d556]
+- Updated dependencies [5e16375]
+  - @sebgroup/green-core@1.62.0
+  - @sebgroup/chlorophyll@3.6.13
+
+## 5.1.0
+
+### Minor Changes
+
+- 15771a0: **CoreElements**: Add a new custom renderer that adds the ability to use scoped core components without the `*nggCoreElement` directive
+
+### Patch Changes
+
+- f4ffadf: **Modals:** Add custom close button label
+- Updated dependencies [85759d1]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [a234635]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [15771a0]
+- Updated dependencies [47957aa]
+- Updated dependencies [15771a0]
+  - @sebgroup/chlorophyll@3.6.12
+  - @sebgroup/green-core@1.61.0
+
 ## 5.0.0
 
 ### Major Changes

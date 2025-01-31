@@ -37,14 +37,14 @@ There is a small and a medium version which can be configured using the `size` p
 
 ### Segment Size
 
-The size of the segments can be configured using the `segMinWidth` prop. This influences how many segments will be visible at the same time.
-If you have long segment labels and want to avoid concatenation, you can increase the `segMinWidth` prop.
-But keep in mind that the best practice is to keep the segment labels short.
+Segments can have different widths depending on the content, and if there are too many segments to fit in the container, scroll buttons will appear to the left and/or right.
 
-<SegmentedControl segMinWidth={200}>
+Segment with can also be controlled individually on the segments using the `width`, `min-width` and `max-width` Style Expression properties.
+
+<SegmentedControl>
   <Segment value="1">1 month</Segment>
   <Segment value="2">This year</Segment>
-  <Segment value="3">1 year</Segment>
+  <Segment value="3" minWidth='350px' >1 year</Segment>
   <Segment value="4">3 years</Segment>
   <Segment value="5">5 years</Segment>
   <Segment value="6">10 years</Segment>
@@ -57,7 +57,6 @@ Available `SegmentedControl` component props
   | Props        | Type                                                                    | Description                    |
   | :----------- | :---------------------------------------------------------------------- | :----------------------------- |
   |  value       | \` string \`                                                            | The value of the currently selected segment. Setting this property will select the segment with the matching value.  |
-  |  segMinWidth | \` number \`                                                            | Minimum width of each segment. Used for calculating the number of visible segments that can fit based on the available space. |
   |  size        | \` small | medium \`                                                    | Size of the segmented control |
   |  onChange    | \` (event: Event) => void \`                                            | Fires when the selected segment is changed, use \` event.target.value \` to retrive the value         |
   |  className   | \` string \`                                                            | Component className         |
@@ -77,5 +76,8 @@ Available `Segment` component props
   |  className   | \` string \`                                                            | Component className         |
   |  disabled    | \` boolean \`                                                           | To disabled segment button |
   |  children    | \` ReactNode | ReactNode[] \`                                           | Pass down labels or Reactnode as child |
+  |  width       | \` string \`                                                            | Controls the \` width \` css property of the segment. |
+  |  minWidth   | \` string \`                                                             | Controls the \` minWidth \` css property of the segment. |
+  |  maxWidth   | \` string \`                                                             | Controls the \` maxWidth \` css property of the segment. |
   `}
 </Markdown>
