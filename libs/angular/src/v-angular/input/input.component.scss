@@ -1,7 +1,8 @@
 @use '../../../../chlorophyll/scss/components/form/input/mixins';
 @use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as validation;
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
 @use '../../../../chlorophyll/scss/tokens';
 
 :host {
@@ -34,7 +35,6 @@
   }
 
   .gds-input-wrapper {
-
     @include validation.add-feedback-element(false);
 
     &:before {
@@ -71,7 +71,7 @@
       min-height: 2.5rem;
       border: none;
       border-radius: 3px;
-      
+
       height: 2.625rem;
       min-width: 2.625rem;
       border-top-right-radius: 0 !important;
@@ -94,11 +94,10 @@
     }
 
     .input-group-suffix {
-      
       min-height: 2.5rem;
       border: none;
       border-radius: 3px;
-      
+
       height: 2.625rem;
       min-width: 2.625rem;
       border-top-left-radius: 0 !important;
@@ -121,7 +120,6 @@
     }
 
     .input-group {
-      
       width: 100%;
       input {
         // Config
@@ -135,7 +133,6 @@
         line-height: 1.5;
         font-size: 1rem;
         font-family: inherit;
-
 
         *,
         *::before,

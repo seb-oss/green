@@ -54,7 +54,8 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   @HostBinding('attr.id') @Input() id = (window as any).nggv?.nextId()
 
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined = 'dropdown'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'dropdown'
 
   @Input() options!: any[]
 
