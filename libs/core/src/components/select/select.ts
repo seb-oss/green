@@ -3,6 +3,7 @@ import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { tokens } from '../../tokens.style'
+import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
   html,
@@ -138,7 +139,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
    *
    * @throws {Error} If required elements are not found in the shadow DOM
    */
-
+  @watch('value')
   firstUpdated() {
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
 
@@ -361,19 +362,18 @@ export class GdsSelect extends GdsFormControlElement<string> {
    */
   #renderMainLabel() {
     if (!this.multiline) {
-      const selectedLabels = Array.from(
-        this.getSelectElement()?.selectedOptions || [],
-      ).map((option) => {
-        return option.text
-      })
+      const selectElement = this.getSelectElement()
+      let displayText = this.value // Default to showing the programmatic value
 
-      const placeholderText = this.multiline
-        ? selectedLabels.join(', ')
-        : selectedLabels.length > 0
-          ? selectedLabels[0]
-          : 'Select'
+      if (selectElement) {
+        const selectedOptions = Array.from(selectElement.selectedOptions)
+        if (selectedOptions.length > 0) {
+          // If there is a selected option, use its text
+          displayText = selectedOptions[0].text
+        }
+      }
 
-      return html` <label id="placeholder">${placeholderText}</label> `
+      return html`<label id="placeholder">${displayText}</label>`
     }
   }
 
