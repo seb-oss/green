@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.63.2
+
+### Patch Changes
+
+- 7213bfb: Dropdown: Added support for size small to header
+
 ## 1.63.1
 
 ### Patch Changes
