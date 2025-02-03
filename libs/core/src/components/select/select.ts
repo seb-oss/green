@@ -1,5 +1,5 @@
 import { localized } from '@lit/localize'
-import { property, state } from 'lit/decorators.js'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { tokens } from '../../tokens.style'
@@ -91,6 +91,12 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @state()
   private selectedValue: string | string[] = ''
 
+  /**
+   * Reference to the native select element.
+   */
+  @query('select')
+  selectElement!: HTMLSelectElement
+
   constructor() {
     super()
     this.value = ''
@@ -157,11 +163,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
       selectElement.addEventListener('input', (e) => e.stopPropagation())
     }
   }
-
-  /**
-   * Lifecycle method to handle updates to properties.
-   * Ensures synchronization between component value and internal select element.
-   */
 
   protected override willUpdate(
     changedProperties: Map<PropertyKey, unknown>,
@@ -253,25 +254,14 @@ export class GdsSelect extends GdsFormControlElement<string> {
     }
   }
 
-  /**
-   * Public method to get the slotted select element
-   */
   getSelectElement(): HTMLSelectElement | null {
     return this.shadowRoot?.querySelector('.select-container select') ?? null
   }
 
-  /**
-   * Internal method to provide the element used for validity checking.
-   * Returns the native select element for validation purposes.
-   */
-  _getValidityAnchor(): HTMLElement {
-    return this.shadowRoot?.querySelector('SELECT') as HTMLElement
+  _getValidityAnchor() {
+    return this.selectElement
   }
 
-  /**
-   * Main render method for the component.
-   * Composes the UI from header, field base, and footer sections.
-   */
   render() {
     const CLASSES = {
       multiple: this.multiline,
