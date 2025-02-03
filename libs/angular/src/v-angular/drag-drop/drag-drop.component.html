@@ -1,0 +1,305 @@
+<ng-container *transloco="let t">
+  <form enctype="multipart/form-data" #dragDropForm>
+    <div class="gds-drag-drop">
+      <input
+        class="gds-drag-drop__input"
+        id="drag-drop"
+        type="file"
+        [accept]="accept"
+        [multiple]="multiple && list"
+        (change)="onDrop($event)"
+      />
+      <label
+        [ngClass]="{
+          'gds-drag-drop__label': true,
+          'gds-drag-drop__label--above': componentState === 'over',
+        }"
+        for="drag-drop"
+        [attr.data-thook]="thook + '-picker'"
+        [attr.aria-busy]="loading"
+        (dragenter)="onDragEnter($event)"
+        (dragover)="onDragEnter($event)"
+        (dragleave)="onDragLeave($event)"
+        (dragend)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        [ngSwitch]="componentState"
+      >
+        <!-- COMPONENT STATE NORMAL -->
+        <ng-template [ngSwitchCase]="'normal'">
+          <gds-icon-cloud-upload *nggCoreElement></gds-icon-cloud-upload
+          ><em>{{ t('dragDrop.label.fileChoose') }}</em>
+          <ng-template [ngIf]="isDragDropAvailable">
+            {{ t('dragDrop.label.fileDrag') }}</ng-template
+          >
+        </ng-template>
+
+        <!-- COMPONENT STATE OVER -->
+        <ng-template [ngSwitchCase]="'over'">
+          <gds-icon-cloud-upload *nggCoreElement></gds-icon-cloud-upload
+          >{{ t('dragDrop.label.fileDrop') }}
+        </ng-template>
+
+        <!-- COMPONENT STATE UPLOADING -->
+        <ng-template [ngSwitchCase]="'uploading'">
+          <strong class="filename">{{ lastFile?.fileName }}</strong>
+
+          <!-- UPLOADING STATE -->
+          <ng-template [ngIf]="lastFile?.uploadState === 'uploading'">
+            <ng-template
+              [ngTemplateOutlet]="progressTemplate"
+              [ngTemplateOutletContext]="{
+                file: lastFile,
+              }"
+            ></ng-template>
+          </ng-template>
+
+          <!-- UPLOADED STATE -->
+          <ng-template [ngIf]="lastFile?.uploadState === 'uploaded'">
+            <ng-template
+              [ngTemplateOutlet]="progressTemplate"
+              [ngTemplateOutletContext]="{
+                file: lastFile,
+                text: t('dragDrop.text.fileStateUploaded'),
+              }"
+            ></ng-template>
+          </ng-template>
+
+          <!-- VALIDATING STATE -->
+          <ng-template [ngIf]="lastFile?.uploadState === 'validating'">
+            <ng-template
+              [ngTemplateOutlet]="progressTemplate"
+              [ngTemplateOutletContext]="{
+                file: lastFile,
+                text: t('dragDrop.text.fileStateValidating'),
+              }"
+            ></ng-template>
+          </ng-template>
+        </ng-template>
+
+        <!-- COMPONENT STATE DONE -->
+        <ng-template [ngSwitchCase]="'done'">
+          {{ t('dragDrop.label.fileUploaded', { filename: lastFile?.fileName })
+          }}<gds-icon-checkmark *nggCoreElement></gds-icon-checkmark>
+        </ng-template>
+      </label>
+
+      <!-- LIST -->
+      <table
+        class="gds-table file-list"
+        [attr.data-thook]="thook + '-file-list'"
+        *ngIf="list"
+      >
+        <thead>
+          <tr>
+            <th *ngIf="selectable">
+              <div class="gds-field-checkbox-wrap">
+                <input
+                  type="checkbox"
+                  aria-label="Field label"
+                  id="select-all"
+                />
+                <label for="select-all"></label>
+              </div>
+            </th>
+            <th class="gds-table__primary-col col-name">
+              {{ t('dragDrop.label.fileName') }}
+            </th>
+            <th class="col-status">
+              {{ t('dragDrop.label.fileStatus') }}
+            </th>
+            <th class="col-actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            [attr.data-thook]="thook + '-file'"
+            *ngFor="let file of files | value"
+          >
+            <td *ngIf="selectable">
+              <div class="gds-field-checkbox-wrap">
+                <input
+                  type="checkbox"
+                  aria-label="Field label"
+                  [id]="'file-checkbox-' + file.id"
+                />
+                <label [for]="'file-checkbox-' + file.id"></label>
+              </div>
+            </td>
+            <td
+              class="gds-table__primary-col"
+              [attr.data-thook]="thook + '-file-name'"
+            >
+              {{ file.fileName }}
+            </td>
+            <td
+              [attr.data-thook]="thook + '-file-status'"
+              [ngSwitch]="file.uploadState"
+            >
+              <!-- UPLOADING STATE -->
+              <ng-template [ngSwitchCase]="'uploading'">
+                <ng-template
+                  [ngTemplateOutlet]="progressTemplate"
+                  [ngTemplateOutletContext]="{
+                    file: file,
+                  }"
+                ></ng-template>
+              </ng-template>
+
+              <!-- UPLOADED STATE -->
+              <ng-template [ngSwitchCase]="'uploaded'">
+                <ng-template
+                  [ngTemplateOutlet]="progressTemplate"
+                  [ngTemplateOutletContext]="{
+                    file: file,
+                    text: t('dragDrop.text.fileStateUploaded'),
+                  }"
+                ></ng-template>
+              </ng-template>
+
+              <!-- VALIDATING STATE -->
+              <ng-template [ngSwitchCase]="'validating'">
+                <ng-template
+                  [ngTemplateOutlet]="progressTemplate"
+                  [ngTemplateOutletContext]="{
+                    file: file,
+                    text: t('dragDrop.text.fileStateValidating'),
+                  }"
+                ></ng-template>
+              </ng-template>
+
+              <!-- ABORTED STATE -->
+              <ng-template [ngSwitchCase]="'aborted'">
+                <span
+                  class="error-text"
+                  [transloco]="
+                    'dragDrop.error.' + file.internalStatusReasonCode
+                  "
+                  [translocoParams]="translateParams(file)"
+                  *ngIf="file.internalStatusReasonCode"
+                ></span>
+              </ng-template>
+
+              <!-- ERROR STATE -->
+              <ng-template [ngSwitchCase]="'error'">
+                <span
+                  class="error-text"
+                  [transloco]="
+                    'dragDrop.error.' + file.internalStatusReasonCode
+                  "
+                  [translocoParams]="translateParams(file)"
+                  *ngIf="file.internalStatusReasonCode"
+                ></span>
+                <br />
+                <a
+                  (click)="detailsClick.emit(file)"
+                  style="cursor: pointer"
+                  *ngIf="
+                    file.statusReasonInformation &&
+                    file.statusReasonInformation.length
+                  "
+                >
+                  {{ t('dragDrop.link.viewDetails') }}
+                </a>
+              </ng-template>
+
+              <!-- DONE STATE -->
+              <ng-template [ngSwitchCase]="'done'">
+                <span class="success-text">{{
+                  t('dragDrop.text.fileStateDone')
+                }}</span>
+              </ng-template>
+            </td>
+
+            <td class="gds-table__numeric-col">
+              <a
+                class="remove"
+                tabindex="0"
+                (click)="onRemove(file.id, file.uploadState)"
+                *ngIf="!disableRemove.includes(file.uploadState)"
+              >
+                <gds-icon-cross-small *nggCoreElement></gds-icon-cross-small>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+
+  <nggv-dialog
+    #deleteModalRef
+    [title]="t('dragDrop.text.fileCancelModalTitle')"
+    [content]="
+      t('dragDrop.text.fileCancelModalContent', {
+        name: markedForDeletion?.fileName,
+      })
+    "
+    [payload]="markedForDeletion"
+    [buttons]="{
+      negative: 'dragDrop.text.fileCancelConfirm',
+      positive: 'dragDrop.text.fileCancelDeny',
+    }"
+    (nggvNegativeEvent)="onConfirmRemove($any($event))"
+  ></nggv-dialog>
+
+  <!-- PROGRESS TEMPLATE -->
+
+  <ng-template
+    #progressTemplate
+    let-file="
+    file"
+    let-text="text"
+  >
+    <div class="progress-wrapper">
+      <progress
+        class="gds-progress-bar progress"
+        max="100"
+        [value]="file.progress"
+      >
+        {{
+          t('dragDrop.text.fileStateUploading', {
+            uploaded:
+              (file.raw?.size * (file.progress / 100)) / 1024 | number: '0.0-0',
+            size: file.raw?.size / 1024 | number: '0.0-0',
+            progress: file.progress,
+            unit: 'kB',
+          })
+        }}
+      </progress>
+      <ng-template [ngIf]="stateMap.validating.length">
+        <div
+          class="gds-progress-indicator indicator"
+          *ngIf="uploadStateIsArray(stateMap.validating); else singleValidation"
+        >
+          <div
+            class="gds-progress-indicator__step"
+            [class.-done]="i <= stateMap.validating.indexOf(file.status)"
+            *ngFor="let state of stateMap.validating; let i = index"
+          ></div>
+        </div>
+      </ng-template>
+      <ng-template #singleValidation>
+        <div class="gds-progress-indicator indicator">
+          <!-- eslint-disable @angular-eslint/template/eqeqeq -->
+          <div
+            class="gds-progress-indicator__step"
+            [class.-done]="file.status == stateMap.validating"
+          ></div>
+          <!-- eslint-enable @angular-eslint/template/eqeqeq -->
+        </div>
+      </ng-template>
+    </div>
+    <span class="progress-text">
+      {{
+        text ||
+          t('dragDrop.text.fileStateUploading', {
+            uploaded:
+              (file.raw?.size * (file.progress / 100)) / 1024 | number: '0.0-0',
+            size: file.raw?.size / 1024 | number: '0.0-0',
+            progress: file.progress,
+            unit: 'kB',
+          })
+      }}
+    </span>
+  </ng-template>
+</ng-container>

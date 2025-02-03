@@ -68,14 +68,13 @@ export abstract class GdsIcon extends GdsElement {
     const viewBox = isSebIcon ? '0 0 55 24' : this.box || '0 0 24 24'
 
     let svgContent = `<svg
-      ${width ? `width="${width}"` : ''}
-      height="${height}"
+      style="height:${height};${width ? `width:${width};` : ''}"
       viewBox="${viewBox}"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       ${this.label ? `aria-label="${this.label}"` : `aria-label="${(this.constructor as typeof GdsIcon)._name}"`}
       role="graphics-symbol"
-      part="icon" 
+      part="icon"
     >
       ${this.solid ? (this.constructor as typeof GdsIcon)._solidSVG : (this.constructor as typeof GdsIcon)._regularSVG}
     </svg>`

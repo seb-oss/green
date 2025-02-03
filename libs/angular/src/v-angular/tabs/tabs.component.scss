@@ -1,0 +1,34 @@
+@use '@sebgroup/chlorophyll/scss/components/tabs-bar/mixins' as tabs;
+@use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
+
+:host {
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+  --gds-ref-pallet-base600: #868686;
+  --text-primary-color: #333;
+
+  .gds-tabs__tablist {
+    @include tabs.tabs-bar;
+  }
+
+  .gds-tabs__tab {
+    @include button.reset;
+    @include tabs.tab;
+    gap: 0.25rem;
+    transition: none;
+    font-size: 1rem;
+    font-family: inherit;
+
+    &.-selected {
+      box-sizing: border-box;
+      @include tabs.tab--selected;
+      transition: none;
+      padding: 11px 15px 12px;
+    }
+
+    &[disabled] {
+      color: #adadad;
+      cursor: not-allowed;
+    }
+  }
+}

@@ -1,5 +1,47 @@
 # Changelog
 
+## 5.2.0
+
+### Minor Changes
+
+- 0213060: **V-Angular:** Migrating V-Angular remaining components to Green and closing the gap on already exsisting components.
+
+  ## Migrated components
+
+  - AccountNumber
+  - Alert
+  - BaseControlValueAccessor
+  - Breadcrumbs
+  - Button
+  - Card
+  - CharacterCountdown
+  - Checkbox
+  - Datepicker
+  - DragDrop
+  - Dropdown
+  - DropdownList
+  - ExternalLink
+  - I18n
+  - InfoCircle
+  - Input
+  - InputMask
+  - Modal
+  - Pagination
+  - Radio
+  - Slug
+  - Table
+  - Tabs
+  - Textarea
+  - Toast
+  - Tooltip
+
+### Patch Changes
+
+- Updated dependencies [7213bfb]
+- Updated dependencies [0213060]
+  - @sebgroup/green-core@1.63.2
+  - @sebgroup/chlorophyll@3.6.14
+
 ## 5.1.2
 
 ### Patch Changes
