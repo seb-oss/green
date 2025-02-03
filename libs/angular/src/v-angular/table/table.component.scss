@@ -1,0 +1,107 @@
+@use '@sebgroup/chlorophyll/scss/components/table/mixins' as table;
+
+::ng-deep .gds-table {
+  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
+  --sg-table-header-background: #1a1a1a;
+  --sg-table-header-color: #fff;
+  --sg-table-cell-padding-x: 0.5rem;
+  --sg-table-cell-padding-y: 0.6875rem;
+  --sg-table-border-width: 1px;
+  --sg-table-border-color: var(--gds-ref-pallet-base600);
+  --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
+  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
+  --sg-table-sort-icon-color-active: #fff;
+  @include table.add-table();
+  width: 100%;
+
+  border-bottom: none;
+
+  tr:hover td {
+    background-color: #f8f8f8;
+  }
+
+  .gds-table__numeric-col,
+  .gds-table__numeric-col {
+    text-align: right;
+  }
+
+  thead tr th.gds-table__numeric-col .sg-table-sort {
+    justify-content: end;
+  }
+
+  th,
+  td {
+    &.gds-table__numeric-col + :not(.gds-table__numeric-col) {
+      padding-left: 1rem;
+    }
+  }
+
+  th button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  td {
+    cursor: pointer;
+  }
+
+  tfoot {
+    border-top: 1px solid;
+    border-bottom: none;
+    font-weight: 500;
+
+    ::ng-deep {
+      td {
+        padding: var(--sg-table-cell-padding-y) var(--sg-table-cell-padding-x);
+      }
+    }
+  }
+
+  th.column {
+    &__check {
+      height: vanilla-px-to-rem(40px - 8px);
+      width: vanilla-px-to-rem(40px);
+
+      div {
+        min-height: 100%;
+      }
+
+      input:checked + label {
+        &::after {
+          top: 0.6rem;
+          display: inline;
+        }
+      }
+
+      label {
+        display: inline;
+        padding: 0;
+        &::before {
+          top: 0.55rem;
+        }
+      }
+    }
+  }
+
+  td.column {
+    &__check {
+      width: vanilla-px-to-rem(40px);
+
+      div {
+        min-height: unset;
+      }
+
+      label {
+        padding: 0;
+        &::before {
+          margin: 0;
+        }
+      }
+    }
+  }
+}

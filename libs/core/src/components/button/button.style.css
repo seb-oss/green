@@ -16,7 +16,7 @@
 
   .button {
     --_block-size: var(--gds-space-3xl);
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -41,7 +41,6 @@
     text-decoration: none;
     transition-property: color, border-colorm, background;
     transition-duration: 0.2s;
-    max-width: 100%;
     flex: 1;
 
     &:focus {
@@ -71,7 +70,7 @@
     }
 
     &:not(.circle) slot:not([name]) {
-      display: inline-block;
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -81,9 +80,10 @@
 
 /* High specificity */
 .button.circle {
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   padding: 0;
   min-block-size: var(--_block-size);
+  min-inline-size: var(--_block-size);
 }
 
 .button:disabled {

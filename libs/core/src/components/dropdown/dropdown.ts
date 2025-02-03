@@ -246,7 +246,7 @@ export class GdsDropdown<ValueT = any>
       ${when(
         !this.hideLabel,
         () => html`
-          <gds-form-control-header>
+          <gds-form-control-header class="size-${this.size}">
             <label id="label" for="trigger" slot="label">${this.label}</label>
             ${when(
               this.supportingText.length > 0,
