@@ -24,9 +24,6 @@ import '../button/button'
  * A custom select component that extends GdsFormControlElement to provide enhanced
  * select/dropdown functionality with proper value propagation and event handling.
  *
- * - Default slot for the native select element
- * - Slot for leading content (e.g., icons)
- *
  * Key Features:
  * - Supports both single and multiple selections
  * - Handles value propagation correctly between the native select and custom component
@@ -57,6 +54,8 @@ import '../button/button'
  * - Preserves native select keyboard navigation
  * - Provides proper focus management
  *
+ * @slot - Default slot for the native select element
+ * @slot lead - Slot for leading content (e.g., icons)
  */
 @gdsCustomElement('gds-select')
 @localized()
