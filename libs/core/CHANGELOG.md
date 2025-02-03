@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.64.0
+
+### Minor Changes
+
+- 07cb314: **Dropdown:** Add `combobox` option
+- 07cb314: **Popover:** Add `autofocus` property to control wheter focus is automtaically moved to the popover when opened
+
+### Patch Changes
+
+- 07cb314: **Icon:** Fix invalid use of css units in SVG width/height attributes
+- 07cb314: **Transitional Styles:** Fix crash in legacy browsers
+- 07cb314: **Form controls:** Fix recursion bug in validity state update in legacy browsers
+
 ## 1.63.2
 
 ### Patch Changes
