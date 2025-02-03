@@ -109,17 +109,6 @@ export class GdsSelect extends GdsFormControlElement<string> {
     return select.value
   }
 
-  /**
-   * Lifecycle method called after first render.
-   *
-   *
-   * Performs the following setup:
-   * 1. Moves the slotted select element into shadow DOM
-   * 2. Initializes ARIA attributes and accessibility features
-   * 3. Sets up event listeners for change and input events
-   * 4. Synchronizes initial values between native select and component state
-   *
-   */
   @watch('value')
   firstUpdated() {
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
