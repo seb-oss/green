@@ -46,13 +46,13 @@ import '../button/button'
  * custom events after ensuring internal state is properly updated. This prevents
  * race conditions and ensures consistent behavior.
  *
- * {CustomEvent} change - Fired when the selection changes with detail: { value: string }
- * {CustomEvent} input - Fired on input with detail: { value: string }
- *
  * Accessibility:
  * - Maintains ARIA labels and descriptions
  * - Preserves native select keyboard navigation
  * - Provides proper focus management
+ *
+ * @fires {CustomEvent} change - Fired when the selection changes with detail: { value: string }
+ * @fires {CustomEvent} input - Fired on input with detail: { value: string }
  *
  * @slot - Default slot for the native select element
  * @slot lead - Slot for leading content (e.g., icons)
