@@ -25,6 +25,11 @@ import { toast } from 'sonner'
 
 import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
+// Dynamic component props
+type DynamicComponentProps = {
+  hero?: boolean // Define the hero prop
+}
+
 export default function ComponentLayout({
   children,
   params,
@@ -72,21 +77,21 @@ export default function ComponentLayout({
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },
-    {
-      path: '/design',
-      label: 'Design',
-      isPrivate: componentDesign?.private || false,
-    },
+    // {
+    //   path: '/design',
+    //   label: 'Design',
+    //   isPrivate: componentDesign?.private || false,
+    // },
     {
       path: '/ux-text',
       label: 'UX text',
       isPrivate: componentUXText?.private || false,
     },
-    {
-      path: '/code',
-      label: 'Code',
-      isPrivate: componentCode?.private || false,
-    },
+    // {
+    //   path: '/code',
+    //   label: 'Code',
+    //   isPrivate: componentCode?.private || false,
+    // },
     {
       path: '/accessibility',
       label: 'Accessibility',
@@ -95,7 +100,7 @@ export default function ComponentLayout({
   ]
 
   const getDynamicComponent = (c: string) =>
-    dynamic(
+    dynamic<DynamicComponentProps>(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
           const ExampleComponent = () => <div>Example</div>
@@ -274,7 +279,7 @@ export default function ComponentLayout({
                   justify-content="center"
                   height="360px"
                 >
-                  <Preview />
+                  <Preview hero={true} />
                 </GdsFlex>
               </GdsCard>
             </GdsFlex>
