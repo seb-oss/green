@@ -54,9 +54,11 @@ export class DynamicStylesController implements ReactiveController {
    */
   clear(key: string) {
     if (this.#useLegacyStylesheets) {
-      const styleEl = this.#legacyStyleSheets.get(key)
-      styleEl?.remove()
-      this.#legacyStyleSheets.delete(key)
+      this.host.updateComplete.then(() => {
+        const styleEl = this.#legacyStyleSheets.get(key)
+        styleEl?.remove()
+        this.#legacyStyleSheets.delete(key)
+      })
     } else {
       this.#styleSheets.delete(key)
     }
@@ -68,10 +70,12 @@ export class DynamicStylesController implements ReactiveController {
    */
   clearAll() {
     if (this.#useLegacyStylesheets) {
-      this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.#legacyStyleSheets.clear()
-      this.#initialLegacyStyleSheets = []
+      this.host.updateComplete.then(() => {
+        this.#legacyStyleSheets.forEach((styleEl) => styleEl.remove())
+        this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
+        this.#legacyStyleSheets.clear()
+        this.#initialLegacyStyleSheets = []
+      })
     } else {
       if (this.host.shadowRoot) {
         this.host.shadowRoot.adoptedStyleSheets = []
@@ -86,8 +90,10 @@ export class DynamicStylesController implements ReactiveController {
    */
   clearInitial() {
     if (this.#useLegacyStylesheets) {
-      this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
-      this.#initialLegacyStyleSheets = []
+      this.host.updateComplete.then(() => {
+        this.#initialLegacyStyleSheets.forEach((styleEl) => styleEl.remove())
+        this.#initialLegacyStyleSheets = []
+      })
     } else {
       this.#initialStyleSheets = []
     }
@@ -126,12 +132,17 @@ export class DynamicStylesController implements ReactiveController {
 
   #commit() {
     if (this.#useLegacyStylesheets) {
-      if (!this.host.shadowRoot) return
-      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
-        style.remove()
-      })
-      this.#legacyStyleSheets.forEach((styleEl) => {
-        this.host.shadowRoot?.appendChild(styleEl)
+      this.host.updateComplete.then(() => {
+        if (!this.host.shadowRoot) return
+        this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+          style.remove()
+        })
+        this.#initialLegacyStyleSheets.forEach((styleEl) => {
+          this.host.shadowRoot?.appendChild(styleEl)
+        })
+        this.#legacyStyleSheets.forEach((styleEl) => {
+          this.host.shadowRoot?.appendChild(styleEl)
+        })
       })
     } else {
       if (!this.host.shadowRoot) return
@@ -145,12 +156,14 @@ export class DynamicStylesController implements ReactiveController {
   #init() {
     if (this.#initialized) return
     if (this.#useLegacyStylesheets) {
-      if (!this.host.shadowRoot) return
-      this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
-        this.#initialLegacyStyleSheets.push(style)
-        this.#initialLegacyStyleSheetsCopy.push(
-          style.cloneNode(true) as HTMLStyleElement,
-        )
+      this.host.updateComplete.then(() => {
+        if (!this.host.shadowRoot) return
+        this.host.shadowRoot.querySelectorAll('style').forEach((style) => {
+          this.#initialLegacyStyleSheets.push(style)
+          this.#initialLegacyStyleSheetsCopy.push(
+            style.cloneNode(true) as HTMLStyleElement,
+          )
+        })
       })
     } else {
       if (this.host.shadowRoot && this.#initialStyleSheets.length === 0) {

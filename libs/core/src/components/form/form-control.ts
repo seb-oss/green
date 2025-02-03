@@ -50,7 +50,8 @@ export abstract class GdsFormControlElement<ValueT = any>
           this.value = value
         },
         setValidity: (validity: ValidityState, validationMessage?: string) => {
-          this.invalid = validity.customError
+          ;(this.#internals.validity as any) = validity
+          this.errorMessage = validationMessage || ''
         },
         validationMessage: '',
         validity: {
