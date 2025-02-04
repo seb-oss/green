@@ -11,8 +11,7 @@ export default {
   title: 'V-Angular/Account Number',
   decorators: [
     moduleMetadata({
-      declarations: [AccountNumberPipe],
-      imports: [CommonModule],
+      imports: [AccountNumberPipe, CommonModule],
     }),
   ],
   argTypes: {
