@@ -10,6 +10,7 @@ import {
   GdsMenuButton,
   GdsText,
 } from '$/import/components'
+import { IconSquareArrowTopRight } from '$/import/icons'
 
 import { Accordion, AccordionItem } from './accordion'
 
@@ -71,7 +72,12 @@ export default function Taber({ component, links }: TaberProps) {
           }
           target="_blank"
         >
-          <GdsFlex margin="0 0 0 auto" gap="xs" padding="m l">
+          <GdsFlex
+            margin="0 0 0 auto"
+            align-items="center"
+            gap="xs"
+            padding="m l"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -85,7 +91,8 @@ export default function Taber({ component, links }: TaberProps) {
                 clip-rule="evenodd"
               />
             </svg>
-            Storybook
+            API Docs
+            <IconSquareArrowTopRight height={16} />
           </GdsFlex>
         </Link>
       </GdsFlex>

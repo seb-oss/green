@@ -16,6 +16,7 @@ import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
 import IMG from './image/image'
+import Inline from './inline'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
 import Prototype from './prototype'
@@ -50,6 +51,7 @@ const components = {
   Section: Section,
   ul: (props: object) => <ul {...props} />,
   li: (props: object) => <li {...props} />,
+  Inline,
 }
 
 export function Mdx({

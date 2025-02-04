@@ -264,8 +264,16 @@ export default function ComponentLayout({
                     </GdsBadge>
                   )}
                   <GdsFlex gap="s">
+                    Tags:
                     {tagsArray.map((tag) => (
-                      <Link href={`/tag/` + tag} key={tag}>
+                      <Link
+                        href={`/tag/` + tag}
+                        key={tag}
+                        style={{
+                          textDecoration: 'underline',
+                          textTransform: 'capitalize',
+                        }}
+                      >
                         {tag}
                       </Link>
                     ))}
@@ -277,7 +285,8 @@ export default function ComponentLayout({
                   gap="xl"
                   align-items="center"
                   justify-content="center"
-                  height="360px"
+                  padding="4xl 0"
+                  // height="360px"
                 >
                   <Preview hero={true} />
                 </GdsFlex>
