@@ -11,6 +11,7 @@ import {
 } from '$/import/components'
 import { v4 as uuidv4 } from 'uuid'
 
+import Badge from './badge'
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
@@ -31,6 +32,7 @@ const components = {
   Pattern,
   GdsDivider: (props: object) => <GdsDivider {...props} />,
   Story,
+  Badge,
   Grid: ({ children, ...props }: { children: React.ReactNode }) => {
     return (
       <>

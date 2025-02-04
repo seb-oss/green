@@ -33,7 +33,7 @@ export const Component = defineDocumentType(() => ({
         'The URL path of this page relative to site root. For example, the site root page would be "/", and doc page would be "docs/getting-started/"',
       resolve: (component) => {
         // if (component._id.startsWith('component/**/design.mdx'))
-        //   return '/component'
+        // return '/component'
         return urlFromFilePath(component)
       },
     },
@@ -85,14 +85,14 @@ export const Component = defineDocumentType(() => ({
           if (nodes.length === 0) return []
 
           // Get all image URLs in a single request
-          const { data: imageData } = await axios.get(
-            `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${nodes.join(',')}&format=svg`,
-            {
-              headers: {
-                'X-Figma-Token': FIGMA_ACCESS_KEY,
-              },
-            },
-          )
+          // const { data: imageData } = await axios.get(
+          //   `https://api.figma.com/v1/images/${FIGMA_PROJECT_ID}/?ids=${nodes.join(',')}&format=svg`,
+          //   {
+          //     headers: {
+          //       'X-Figma-Token': FIGMA_ACCESS_KEY,
+          //     },
+          //   },
+          // )
 
           // Fetch all SVGs in parallel
           const svgPromises = Object.entries(imageData.images).map(
