@@ -32,8 +32,8 @@ export const Component = defineDocumentType(() => ({
       description:
         'The URL path of this page relative to site root. For example, the site root page would be "/", and doc page would be "docs/getting-started/"',
       resolve: (component) => {
-        if (component._id.startsWith('component/**/design.mdx'))
-          return '/component'
+        // if (component._id.startsWith('component/**/design.mdx'))
+        //   return '/component'
         return urlFromFilePath(component)
       },
     },
