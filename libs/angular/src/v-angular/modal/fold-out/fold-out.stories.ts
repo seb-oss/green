@@ -29,7 +29,7 @@ export default {
 } as Meta
 
 const Template: StoryFn<NggvFoldOutComponent> = (args: any) => {
-  let lastClicked = ''
+  const lastClicked = ''
   return {
     template: /* html */ `
     <div class="story-wrapper">
@@ -46,7 +46,7 @@ const Template: StoryFn<NggvFoldOutComponent> = (args: any) => {
 }
 
 const TemplateAlt: StoryFn<NggvFoldOutComponent> = (args: any) => {
-  let lastClicked = ''
+  const lastClicked = ''
   return {
     template: /* html */ `
       <div class="story-wrapper--right-align">
@@ -63,7 +63,7 @@ const TemplateAlt: StoryFn<NggvFoldOutComponent> = (args: any) => {
 }
 
 const TemplateWithText: StoryFn<NggvFoldOutComponent> = (args: any) => {
-  let lastClicked = ''
+  const lastClicked = ''
   return {
     template: /* html */ `
       <div class="story-wrapper">
