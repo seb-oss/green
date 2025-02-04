@@ -286,7 +286,6 @@ export default function ComponentLayout({
                   align-items="center"
                   justify-content="center"
                   padding="4xl 0"
-                  // height="360px"
                 >
                   <Preview hero={true} />
                 </GdsFlex>
