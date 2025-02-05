@@ -28,44 +28,56 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<NggvFoldOutComponent> = (args: any) => ({
-  template: /* html */ `
-  <div class="story-wrapper">
-    <nggv-fold-out [alignOptions]="alignOptions">
-      <div nggvOption>View details</div>
-      <div nggvOption>Sign payment</div>
-      <div nggvOption class="delete-option">Delete</div>
-    </nggv-fold-out>
-  </div>`,
-  styleUrls: ['./fold-out.stories.scss'],
-  props: args,
-})
-
-const TemplateAlt: StoryFn<NggvFoldOutComponent> = (args: any) => ({
-  template: /* html */ `
-    <div class="story-wrapper--right-align">
+const Template: StoryFn<NggvFoldOutComponent> = (args: any) => {
+  const lastClicked = ''
+  return {
+    template: /* html */ `
+    <div class="story-wrapper">
       <nggv-fold-out [alignOptions]="alignOptions">
-        <div nggvOption>View details</div>
-        <div nggvOption>Sign payment</div>
-        <div nggvOption class="delete-option">Delete</div>
+        <div nggvOption (click)="lastClicked = 'View details'">View details</div>
+        <div nggvOption (click)="lastClicked = 'Sign payment'">Sign payment</div>
+        <div nggvOption class="delete-option" (click)="lastClicked = 'Delete'">Delete</div>
       </nggv-fold-out>
+      <div>Clicked: <span [innerHTML]="lastClicked"></span></div>
     </div>`,
-  styleUrls: ['./fold-out.stories.scss'],
-  props: args,
-})
+    styleUrls: ['./fold-out.stories.scss'],
+    props: { ...args, lastClicked },
+  }
+}
 
-const TemplateWithText: StoryFn<NggvFoldOutComponent> = (args: any) => ({
-  template: /* html */ `
-  <div class="story-wrapper">
-      <nggv-fold-out [text]="text">
-        <div nggvOption>View details</div>
-        <div nggvOption>Sign payment</div>
-        <div nggvOption class="delete-option">Delete</div>
-      </nggv-fold-out>
-    </div>`,
-  styleUrls: ['./fold-out.stories.scss'],
-  props: args,
-})
+const TemplateAlt: StoryFn<NggvFoldOutComponent> = (args: any) => {
+  const lastClicked = ''
+  return {
+    template: /* html */ `
+      <div class="story-wrapper--right-align">
+        <nggv-fold-out [alignOptions]="alignOptions">
+          <div nggvOption (click)="lastClicked = 'View details'">View details</div>
+          <div nggvOption (click)="lastClicked = 'Sign payment'">Sign payment</div>
+          <div nggvOption class="delete-option" (click)="lastClicked = 'Delete'">Delete</div>
+        </nggv-fold-out>
+        <div>Clicked: <span [innerHTML]="lastClicked"></span></div>
+      </div>`,
+    styleUrls: ['./fold-out.stories.scss'],
+    props: { ...args, lastClicked },
+  }
+}
+
+const TemplateWithText: StoryFn<NggvFoldOutComponent> = (args: any) => {
+  const lastClicked = ''
+  return {
+    template: /* html */ `
+      <div class="story-wrapper">
+        <nggv-fold-out [text]="text">
+          <div nggvOption (click)="lastClicked = 'View details'">View details</div>
+          <div nggvOption (click)="lastClicked = 'Sign payment'">Sign payment</div>
+          <div nggvOption class="delete-option" (click)="lastClicked = 'Delete'">Delete</div>
+        </nggv-fold-out>
+        <div>Clicked: <span [innerHTML]="lastClicked"></span></div>
+      </div>`,
+    styleUrls: ['./fold-out.stories.scss'],
+    props: { ...args, lastClicked },
+  }
+}
 
 export const Primary = Template.bind({})
 Primary.args = {

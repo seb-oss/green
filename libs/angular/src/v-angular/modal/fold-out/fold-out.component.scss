@@ -17,6 +17,9 @@
   --sg-card-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1019607843);
   --gds-ref-pallet-base800: #333;
 
+  // needed to counteract position: absolute further down
+  position: relative;
+
   .flex-right {
     right: 0;
   }
