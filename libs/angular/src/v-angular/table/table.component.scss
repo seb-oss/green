@@ -11,14 +11,14 @@
   --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-table-sort-icon-color-active: #fff;
-  --sg-table-row-background-color: #f8f8f8;
+  --sg-table-row-background-color: var(--gds-ref-pallet-base100);
   @include table.add-table();
   width: 100%;
 
   border-bottom: none;
 
   tr:hover td {
-    background-color: var(--gds-ref-pallet-base100);
+    background-color: var(--sg-table-row-background-color);
   }
 
   .gds-table__numeric-col,
@@ -108,7 +108,7 @@
 
   tr.row {
     &__expand {
-      background-color: var(--gds-ref-pallet-base100);
+      background-color: var(--sg-table-row-background-color);
 
       .gds-item-field-wrap {
         display: flex;
