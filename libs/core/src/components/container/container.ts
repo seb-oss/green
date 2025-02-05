@@ -344,37 +344,6 @@ export class GdsContainer extends GdsElement {
   'box-sizing' = 'border-box'
 
   /**
-   * Controls the cursor property.
-   * Supports all valid CSS cursor values.
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  cursor?: string
-
-  /**
-   * Controls the `pointer-events` property.
-   * Supports all valid CSS `pointer-events` values.
-   *
-   * @property pointer-events
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'pointer-events'?: string
-
-  /**
-   * Controls the `user-select` property.
-   * Supports all valid CSS `user-select` values.
-   *
-   * @property user-select
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'user-select'?: string
-
-  /**
    * Controls the z-index property.
    * Supports all valid CSS z-index values.
    */
@@ -391,50 +360,6 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => v,
   })
   transform?: string
-
-  /**
-   * Controls the `transform-style` property.
-   * Supports all valid CSS `transform-style` values.
-   *
-   * @property transform-style
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'transform-style'?: string
-
-  /**
-   * Controls the `transition` property.
-   * Supports all valid CSS `transition` values.
-   *
-   * @property transition
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  transition?: string
-
-  /**
-   * Controls the `transition-behavior` property.
-   * Supports all valid CSS `transition-behavior` values.
-   *
-   * @property transition-behavior
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'transition-behavior'?: string
-
-  /**
-   * Controls the `animation` property.
-   * Supports all valid CSS `animation` values.
-   *
-   * @property animation
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  animation?: string
 
   /**
    * Controls the size of the text.
