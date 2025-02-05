@@ -11,13 +11,14 @@
   --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-table-sort-icon-color-active: #fff;
+  --sg-table-row-background-color: #f8f8f8;
   @include table.add-table();
   width: 100%;
 
   border-bottom: none;
 
   tr:hover td {
-    background-color: #f8f8f8;
+    background-color: var(--gds-ref-pallet-base100);
   }
 
   .gds-table__numeric-col,
@@ -100,6 +101,29 @@
         padding: 0;
         &::before {
           margin: 0;
+        }
+      }
+    }
+  }
+
+  tr.row {
+    &__expand {
+      background-color: var(--gds-ref-pallet-base100);
+
+      .gds-item-field-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+
+        .chevron-field {
+          width: 1.5rem;
+
+          svg {
+            transition: transform 0.3s ease;
+          }
+
+          &[aria-expanded='true'] svg {
+            transform: rotate(-180deg);
+          }
         }
       }
     }

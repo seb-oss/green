@@ -191,6 +191,12 @@ export class TableComponent<T extends TableRow>
   @Input() selectable = true
 
   /**
+   * Used to enable/disable expandable rows.
+   * Defaults to false.
+   */
+  @Input() expandable = false
+
+  /**
    * Allow nggv-table to attempt sorting the data in the table. Not recommended if only a subset is loaded or if the dataset is very large.
    * Disabled by default.
    */
