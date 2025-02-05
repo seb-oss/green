@@ -162,3 +162,51 @@ export class TableImplementationComponent {
     console.log(value);
   }
 }`
+
+export const exampleWithExpandableRows = `
+import { TableColumn } from '@sebgroup/nggv-table';
+
+@Component({
+  selector: 'app-table-implementation',
+  template: \`
+    <nggv-table
+      rowId="id"
+      [expandable]="expandable"
+      [tableColumns]="tableColumns"
+      [tableData]="tableData"
+      (ngvRowClick)="ngvRowClick($event)"
+    >
+    </nggv-table>\`
+})
+export class TableImplementationComponent {
+  tableColumns: Array<TableColumn> = [
+    { property: 'name', label: 'Name' },
+    { property: 'currency', label: 'Ccy' },
+    { property: 'status', label: 'Status' },
+    { property: 'bookedBalance', label: 'Booked balance', valueType: 'numeric' },
+    { property: 'datedBalance', label: 'Value dated balance', valueType: 'numeric' },
+    { property: 'limit', label: 'Limit', valueType: 'numeric' },
+    { property: 'unauthorizedUsage', label: 'Unauthorized usage', valueType: 'numeric' }
+  ];
+  tableData: Array<any> = [
+    { id: '111', name: 'Capitalized CPH ODFlex 160209', currency: '', status: '', bookedBalance: 80000, datedBalance: 80000, limit: 2000, unauthorizedUsage: 30000, expanded: false, subItems: [
+      { id: '001', name: 'Child CPH ODFlex 111', currency: 'DKK', status: 'Booked', bookedBalance: 80000, datedBalance: 80000, limit: 2000, unauthorizedUsage: 30000 },
+      { id: '011', name: 'Child CPH ODFlex 111', currency: 'GBP', status: 'Waiting', bookedBalance: 6000, datedBalance: 5000, limit: 1000, unauthorizedUsage: 5000 }
+    ] },
+    { id: '222', name: 'Capitalized CPH ODFlex 160209', currency: '', status: '', bookedBalance: 6000, datedBalance: 5000, limit: 1000, unauthorizedUsage: 5000, expanded: false, subItems: [] },
+    { id: '333', name: 'Capitalized CPH ODFlex 160209', currency: '', status: '', bookedBalance: 300000, datedBalance: 40000, limit: 80000, unauthorizedUsage: 0, expanded: false, subItems: [
+      { id: '003', name: 'Child CPH ODFlex 333', currency: 'DKK', status: 'Booked', bookedBalance: 80000, datedBalance: 80000, limit: 2000, unauthorizedUsage: 30000 },
+      { id: '013', name: 'Child CPH ODFlex 333', currency: 'GBP', status: 'Waiting', bookedBalance: 6000, datedBalance: 5000, limit: 1000, unauthorizedUsage: 5000 }
+    ] }
+    // ...
+  ];
+
+  rowClicked(event: any) {
+    this.tableData = this.tableData.map((item) => {
+      if (item.id === event.id) {
+        item.expanded = !item.expanded;
+      }
+      return item;
+    });
+  }
+}`

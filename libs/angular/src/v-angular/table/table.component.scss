@@ -4,6 +4,7 @@
   --gds-ref-pallet-base600: hsl(0, 0%, 53%);
   --sg-table-header-background: #1a1a1a;
   --sg-table-header-color: #fff;
+  --sg-table-row-selected-color: #f8f8f8;
   --sg-table-cell-padding-x: 0.5rem;
   --sg-table-cell-padding-y: 0.6875rem;
   --sg-table-border-width: 1px;
@@ -17,7 +18,7 @@
   border-bottom: none;
 
   tr:hover td {
-    background-color: #f8f8f8;
+    background-color: var(--sg-table-row-selected-color);
   }
 
   .gds-table__numeric-col,
@@ -100,6 +101,29 @@
         padding: 0;
         &::before {
           margin: 0;
+        }
+      }
+    }
+  }
+
+  tr.row {
+    &__expand {
+      background-color: var(--sg-table-row-selected-color);
+
+      .gds-item-field-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+
+        .chevron-field {
+          width: 1.5rem;
+
+          svg {
+            transition: transform 0.3s ease;
+          }
+
+          &[aria-expanded='true'] svg {
+            transform: rotate(-180deg);
+          }
         }
       }
     }
