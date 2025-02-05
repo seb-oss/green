@@ -97,13 +97,20 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @query('select')
   selectElement!: HTMLSelectElement
 
+  /**
+   * Flag for tracking whether the initial value has been set.
+   * Using a boolean flag here avoids setting a Symbol on the form value,
+   * which causes an error when ElementInternals.setFormValue() is called.
+   */
+  private _isValueUnset = true
+
   constructor() {
     super()
     this.value = ''
   }
 
   /**
-   * Gets the initial value from a select element, handling both single and multiple selections
+   * Gets the initial value from a select element, handling both single and multiple selections.
    */
   private getInitialSelectValue(select: HTMLSelectElement): string {
     if (select.multiple) {
@@ -133,17 +140,22 @@ export class GdsSelect extends GdsFormControlElement<string> {
           this.multiline = select.multiple
           selectContainer?.appendChild(node)
 
-          // Initialize selected values
-          const initialSelectedOptions = Array.from(select.selectedOptions).map(
-            (option) => option.value,
-          )
+          // Check if the value is still unset (i.e. no user interaction yet)
+          if (this._isValueUnset) {
+            const initialValue = this.getInitialSelectValue(select)
+            this.value = initialValue
 
-          if (this.multiline) {
-            this.selectedValue = initialSelectedOptions
-            this.value = initialSelectedOptions.join(',')
-          } else {
-            this.selectedValue = initialSelectedOptions.slice(0, 1)
-            this.value = initialSelectedOptions[0] || ''
+            // Also initialize the internal selectedValue state
+            const initialSelectedOptions = Array.from(
+              select.selectedOptions,
+            ).map((option) => option.value)
+            if (this.multiline) {
+              this.selectedValue = initialSelectedOptions
+            } else {
+              this.selectedValue = initialSelectedOptions.slice(0, 1)
+            }
+            // Mark the value as set (user hasn't explicitly set it, but it is now initialized)
+            this._isValueUnset = false
           }
         }
       })
@@ -193,6 +205,9 @@ export class GdsSelect extends GdsFormControlElement<string> {
   private handleSelectChange(event: Event) {
     // Prevent native event bubbling to avoid race conditions
     event.stopPropagation()
+
+    // Mark that the user has interacted with the select
+    this._isValueUnset = false
 
     const selectElement = event.target as HTMLSelectElement
     const selectedOptions = Array.from(selectElement.selectedOptions)
@@ -251,6 +266,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
           this.selectedValue = [firstOption.value]
         }
       }
+      // Reset the flag so the value can be reinitialized if needed
+      this._isValueUnset = true
     }
   }
 
