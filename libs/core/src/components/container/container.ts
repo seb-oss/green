@@ -124,7 +124,6 @@ export class GdsContainer extends GdsElement {
    * ```
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
     styleTemplate: function (_prop, values) {
       const [size, style, color] = values
       const sizeCss = `var(--gds-space-${size})`
@@ -419,6 +418,24 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   'font-weight'?: string
+
+  /**
+   * Controls the text-align property of the text.
+   * Supports all valid CSS text-align values.
+   *
+   * @property align
+   */
+  @styleExpressionProperty()
+  'text-align'?: string
+
+  /**
+   * Controls the text-wrap property of the text.
+   * Supports all valid CSS text-wrap values.
+   *
+   * @property wrap
+   */
+  @styleExpressionProperty()
+  'text-wrap'?: string
 
   /**
    * Controls the grid-column property.
