@@ -229,6 +229,15 @@ export const IconSquareInfo = dynamic(
     ssr: false,
   },
 )
+export const IconSquareArrowTopRight = dynamic(
+  () =>
+    import(
+      '@sebgroup/green-react/src/lib/icon/icons/IconSquareArrowTopRight'
+    ).then((mod) => mod.IconSquareArrowTopRight),
+  {
+    ssr: false,
+  },
+)
 
 export const IconSquareGridCircle = dynamic(
   () =>
