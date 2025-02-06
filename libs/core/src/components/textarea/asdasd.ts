@@ -27,7 +27,7 @@ import type { GdsButton } from '../button'
  * @status beta
  *
  * @element gds-textarea
- *.
+ *
  * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
  * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
@@ -73,9 +73,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
    * When `auto` (default), the field will disaplay a resize handle and will be resizeable in the vertical direction.
    *
    * The textarea is resizeable based on the `rows` attribute and the content of the textarea by default.
-   *
-   * @property resize
-   *
    */
   @property()
   resize = 'auto'
@@ -87,14 +84,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   maxlength = Number.MAX_SAFE_INTEGER
 
   /**
-   * The variant of the input field. The default variant displays a label, supporting text, and
-   * extended supporting text. The floating-label variant only displays the field itself and the
-   * supporting text below.
-   *
-   * The floating-label variant should only be used in specific cases, for example when the input field
-   * is placed inside a table cell or in a space-constrained layout.
-   *
-   * A typical form should use the default variant.
+   * The variant of the input field.
    */
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
@@ -105,19 +95,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
 
-  /**
-   * A reference to the clear button element. Returns null if there is no clear button.
-   * Intended for use in integration tests.
-   */
   test_getClearButton() {
     return this.shadowRoot?.querySelector<GdsButton>('#clear-button')
   }
 
-  /**
-   * A reference to the field element. This does not refer to the input element itself,
-   * but the wrapper that makes up the visual field.
-   * Intended for use in integration tests.
-   */
   test_getFieldElement() {
     return this.shadowRoot?.querySelector('#field')
   }
@@ -135,8 +116,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    // In the unlikely event the componet is disconnected in the middle of dragging,
-    // this will prevent dangling event listeners on `document`.
     this.#stopDragging()
   }
 
@@ -193,7 +172,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return nothing
   }
 
-  // Any attribute name added here will get forwarded to the native <input> element.
   #forwardableAttrs = (attr: Attr) =>
     ['type', 'placeholder', 'required'].includes(attr.name)
 
@@ -225,22 +203,12 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
       if (element.value === '') {
-        // If the textarea is empty, reset to the default number of rows.
         this.rows = this._defaultRows
       } else {
-        // Get computed style values for the textarea.
-        const computedStyle = getComputedStyle(element)
-        const lineHeight = parseFloat(computedStyle.lineHeight)
-        // Determine the required height by checking scrollHeight.
-        const contentHeight = element.scrollHeight
-        // Calculate the number of rows required based on the element's line height.
-        const requiredRows = Math.ceil(contentHeight / lineHeight)
-        // Use the maximum between the default rows and the required rows.
-        this.rows = Math.max(this._defaultRows, requiredRows)
+        this.rows = Math.max(this.rows, element.value.split('\n').length)
       }
-      // Update the resize state and CSS variable.
-      this.#resizeState.lines = this.rows
-      element.style.setProperty('--_lines', this.rows.toString())
+      this.#resizeState.lines = Number(this.rows)
+      element?.style.setProperty('--_lines', this.rows.toString())
     })
   }
 
@@ -251,7 +219,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   #handleClearBtnClick = () => {
     this.value = ''
 
-    // Reset rows to the default.
     this.rows = this._defaultRows
     this.#resizeState.lines = this._defaultRows
     this.elTextareaAsync.then((element) => {
@@ -279,7 +246,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       this.#renderClearButton(),
       this.#renderSlotTrail(),
     ]
-
     return elements.map((element) => html`${element}`)
   }
 
@@ -301,7 +267,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     }
   }
 
-  // State for the resize handle action
   #resizeState = {
     isDragging: false,
     startMouseY: 0,
@@ -311,9 +276,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #startDragging = (event: MouseEvent) => {
-    event.preventDefault() // Prevent default behavior
-    this.#resizeState.isDragging = true // Set dragging state to true
-    this.#resizeState.startMouseY = event.clientY // Store the initial mouse position
+    event.preventDefault()
+    this.#resizeState.isDragging = true
+    this.#resizeState.startMouseY = event.clientY
     this.#resizeState.lineHeight = parseFloat(
       getComputedStyle(this.elTextarea).lineHeight,
     )
@@ -322,13 +287,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #onDrag = (event: MouseEvent) => {
-    if (!this.#resizeState.isDragging) return // If not dragging, return
-
-    const deltaY = event.clientY - this.#resizeState.startMouseY // Calculate the movement in Y direction
+    if (!this.#resizeState.isDragging) return
+    const deltaY = event.clientY - this.#resizeState.startMouseY
     this.#resizeState.deltaLines = Math.round(
       deltaY / this.#resizeState.lineHeight,
-    ) // Calculate the number of lines to increase or decrease
-
+    )
     this.elTextareaAsync.then((element) => {
       element?.style.setProperty(
         '--_lines',
@@ -338,9 +301,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #stopDragging = () => {
-    this.#resizeState.isDragging = false // Set dragging state to false
-    this.#resizeState.lines += this.#resizeState.deltaLines // Update the number of lines
-    this.rows = this.#resizeState.lines // Update the rows attribute
+    this.#resizeState.isDragging = false
+    this.#resizeState.lines += this.#resizeState.deltaLines
+    this.rows = this.#resizeState.lines
     this.#resizeState.deltaLines = 0
     document.removeEventListener('mousemove', this.#onDrag)
     document.removeEventListener('mouseup', this.#stopDragging)

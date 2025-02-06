@@ -200,6 +200,33 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         el.focus()
         expect(document.activeElement).to.equal(el)
       })
+
+      it('should update the rows when value is set programmatically', async () => {
+        const textareaComp = await fixture<GdsTextarea>(
+          html`<gds-textarea></gds-textarea>`,
+        )
+
+        // Initially the default rows should be set (e.g. 4)
+        expect(textareaComp.rows).to.equal(4)
+
+        // Set programmatic content which is long enough to require more height.
+        textareaComp.value = `This is a long text that should cause the textarea to resize based 
+        on its scroll height. Even without explicit line breaks, the text will wrap and 
+        increase the height of the element as required.`
+
+        // Wait for any pending updates.
+        await textareaComp.updateComplete
+
+        // Retrieve the actual textarea element.
+        const nativeTextarea = textareaComp.shadowRoot.querySelector('textarea')
+
+        // Check that the computed rows (stored in the component and CSS variable) increased.
+        // For example, ensure that rows is greater than the default.
+        expect(textareaComp.rows).to.be.greaterThan(4)
+        expect(
+          parseInt(nativeTextarea.style.getPropertyValue('--_lines'), 10),
+        ).to.be.greaterThan(4)
+      })
     })
   })
 }

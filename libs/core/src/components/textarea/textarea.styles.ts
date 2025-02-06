@@ -35,7 +35,6 @@ export const styles = css`
       transition:
         var(--_transition),
         resize 0s;
-
       width: 100%;
     }
 
