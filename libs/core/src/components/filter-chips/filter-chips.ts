@@ -34,7 +34,12 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
    * if multi-select is enabled.
    */
   @property({ converter: stringArrayConverter })
-  value?: ValueT | ValueT[]
+  get value() {
+    return this._internalValue as ValueT
+  }
+  set value(value: ValueT | undefined) {
+    this._internalValue = value
+  }
 
   /**
    * Whether multiple chips can be selected at once.
@@ -102,9 +107,11 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     if (clickedChip) {
       if (this.multiple && Array.isArray(this.value)) {
         if (clickedChip.selected) {
-          this.value = this.value.filter((v) => v !== clickedChip.value)
+          this.value = this.value.filter(
+            (v) => v !== clickedChip.value,
+          ) as ValueT
         } else {
-          this.value = [...this.value, clickedChip.value]
+          this.value = [...this.value, clickedChip.value] as ValueT
         }
       } else {
         this.value = clickedChip.value
@@ -157,7 +164,7 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     if (!this.value) return
 
     if (this.multiple && !Array.isArray(this.value)) {
-      this.value = [this.value]
+      this.value = [this.value] as ValueT
     }
 
     if (!this.multiple && Array.isArray(this.value)) {
