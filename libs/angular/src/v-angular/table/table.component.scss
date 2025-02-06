@@ -1,6 +1,7 @@
 @use '@sebgroup/chlorophyll/scss/components/table/mixins' as table;
 
 ::ng-deep .gds-table {
+  --gds-ref-pallet-base100: #f8f8f8;
   --gds-ref-pallet-base600: hsl(0, 0%, 53%);
   --sg-table-header-background: #1a1a1a;
   --sg-table-header-color: #fff;
@@ -11,14 +12,13 @@
   --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-table-sort-icon-color-active: #fff;
-  --sg-table-row-background-color: var(--gds-ref-pallet-base100);
   @include table.add-table();
   width: 100%;
 
   border-bottom: none;
 
   tr:hover td {
-    background-color: var(--sg-table-row-background-color);
+    background-color: var(--gds-ref-pallet-base100);
   }
 
   .gds-table__numeric-col,
@@ -108,7 +108,7 @@
 
   tr.row {
     &__expand {
-      background-color: var(--sg-table-row-background-color);
+      background-color: var(--gds-ref-pallet-base100);
 
       .gds-item-field-wrap {
         display: flex;
