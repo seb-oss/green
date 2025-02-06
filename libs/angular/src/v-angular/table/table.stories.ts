@@ -14,13 +14,16 @@ import {
   exampleAlt,
   examplePrimary,
   exampleWithAppendedRows,
+  exampleWithExpandableRows,
 } from './table.examples'
 import {
   ColumnData,
   ColumnDataWithErrorMessages,
+  ColumnDataWithListItems,
   columns,
   data,
   dataWithErrorMessages,
+  dataWithListItems,
   manifest,
   mockedAriaLabelsOrderBy,
   mockedFooterData,
@@ -151,6 +154,25 @@ const TableStoryWithAppendedRows: StoryFn<
   props: args,
 })
 
+const TableStoryWithExpandableRows: StoryFn<
+  TableComponent<ColumnDataWithListItems<'subItems'>>
+> = (args) => ({
+  template: /*html*/ `
+    <nggv-table
+      rowId="id"
+      [selectable]="selectable"
+      [expandable]="expandable"
+      [tableColumns]="tableColumns"
+      [tableData]="tableData"
+      [subItemsProp]="'subItems'"
+      [allowLocalSort]="allowLocalSort"
+      (ngvRowClick)="ngvRowClick($event)"
+      (ngvRowSelect)="ngvRowSelect($event)"
+      (ngvOrderBy)="ngvOrderBy($event)">
+    </nggv-table>`,
+  props: args,
+})
+
 export const Primary = TableStory.bind({})
 Primary.args = {
   tableData: data,
@@ -200,6 +222,20 @@ WithAppendedRows.args = {
 }
 WithAppendedRows.parameters = {
   docs: { source: { code: exampleWithAppendedRows } },
+}
+
+export const WithExpandableRows = TableStoryWithExpandableRows.bind({})
+WithExpandableRows.args = {
+  rowId: 'id',
+  subItemsProp: 'subItems',
+  selectable: false,
+  expandable: true,
+  tableColumns: columns.withExpandableRows,
+  tableData: dataWithListItems,
+  ngvRowClick: mockActions.ngvRowClick as any,
+}
+WithExpandableRows.parameters = {
+  docs: { source: { code: exampleWithExpandableRows } },
 }
 
 const GlobalSortTableStory: StoryFn<TableComponent<ColumnData>> = (args) => {
