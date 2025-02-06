@@ -92,7 +92,7 @@
   <tbody [formGroup]="rowSelectors">
     <ng-container *ngFor="let item of tableData; let i = index">
       <tr
-        *ngIf="!expandable"
+        [class.row__expand]="expandable"
         [attr.data-thook]="item | trThook: i : trThookFn"
         [attr.data-hasrowspan]="hasRowSpan(item)"
       >
@@ -113,82 +113,59 @@
 
         <!-- Other columns -->
         <td
-          *ngFor="let column of tableColumns"
-          (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
+          *ngFor="let column of tableColumns; let i = index"
           [columnType]="column.valueType"
           [value]="item[column.property]"
+          (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
         >
-          <ng-container
-            *ngIf="
-              customRowTemplates.get(column.property) as tdTemplate;
-              else defaultTdTemplate
-            "
-          >
-            <!-- Cannot infer tdTemplate as TemplateRef therefore null -->
-            <ng-template
-              *ngTemplateOutlet="
-                tdTemplate || null;
-                context: { $implicit: item }
-              "
-            >
-            </ng-template>
+          <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
+            <div class="gds-item-field-wrap">
+              <span
+                class="chevron-field"
+                [attr.aria-expanded]="rowSelectors.get(item[rowId]).value">
+              <svg
+                *ngIf="item.subItems.length > 0"
+                width="18" height="14" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                d="M20 9L12 17L4 9"
+                stroke="currentColor"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                />
+              </svg>
+              </span>
+                {{ item[column.property] }} ({{ item.subItems.length }})
+            </div>
           </ng-container>
 
-          <ng-template #defaultTdTemplate>
-            {{ item[column.property] }}
-          </ng-template>
-        </td>
-      </tr>
-
-      <!-- Expandable rows content -->
-      <ng-container *ngIf="expandable">
-        <tr class="row__expand" [attr.data-thook]="item | trThook: i : trThookFn">
-          <td
-            *ngFor="let column of tableColumns; let i = index"
-            [columnType]="column.valueType"
-            [value]="item[column.property]"
-            (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
-          >
-            <ng-container *ngIf="i === 0; else defaultTdTemplate">
-              <div class="gds-item-field-wrap">
-                <span class="chevron-field" [attr.aria-expanded]="item.expanded">
-                  <svg
-                    *ngIf="item.subItems.length > 0"
-                    width="18" height="14" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M20 9L12 17L4 9"
-                      stroke="currentColor"
-                      stroke-width="2.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                {{ item[column.property] }} ({{ item.subItems.length }})
-              </div>
+          <ng-template #nonExpandableTemplate>
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: item }">
+              </ng-template>
             </ng-container>
             <ng-template #defaultTdTemplate>
               {{ item[column.property] }}
             </ng-template>
+          </ng-template>
+        </td>
+      </tr>
+
+      <!-- Expanded Sub Items -->
+      <ng-container *ngIf="expandable && rowSelectors.get(item[rowId]).value">
+        <tr *ngFor="let subItem of item[subItemsProp]">
+          <td
+            *ngFor="let column of tableColumns"
+            [columnType]="column.valueType"
+            [value]="subItem[column.property]"
+          >
+            <div class="gds-sub-item-field-wrap">
+              {{ subItem[column.property] }}
+            </div>
           </td>
         </tr>
-
-        <!-- Expanded Sub Items -->
-        <ng-container *ngIf="item.expanded">
-          <tr *ngFor="let subItem of item.subItems">
-            <td
-              *ngFor="let column of tableColumns"
-              [columnType]="column.valueType"
-              [value]="subItem[column.property]"
-            >
-              <div class="gds-sub-item-field-wrap">
-                {{ subItem[column.property] }}
-              </div>
-            </td>
-          </tr>
-        </ng-container>
       </ng-container>
 
       <!-- Custom appended rows -->

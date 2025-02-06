@@ -155,7 +155,7 @@ const TableStoryWithAppendedRows: StoryFn<
 })
 
 const TableStoryWithExpandableRows: StoryFn<
-  TableComponent<ColumnDataWithListItems>
+  TableComponent<ColumnDataWithListItems<'subItems'>>
 > = (args) => ({
   template: /*html*/ `
     <nggv-table
@@ -164,6 +164,7 @@ const TableStoryWithExpandableRows: StoryFn<
       [expandable]="expandable"
       [tableColumns]="tableColumns"
       [tableData]="tableData"
+      [subItemsProp]="'subItems'"
       [allowLocalSort]="allowLocalSort"
       (ngvRowClick)="ngvRowClick($event)"
       (ngvRowSelect)="ngvRowSelect($event)"
@@ -226,6 +227,8 @@ WithAppendedRows.parameters = {
 export const WithExpandableRows = TableStoryWithExpandableRows.bind({})
 WithExpandableRows.args = {
   rowId: 'id',
+  subItemsProp: 'subItems',
+  selectable: false,
   expandable: true,
   tableColumns: columns.withExpandableRows,
   tableData: dataWithListItems,

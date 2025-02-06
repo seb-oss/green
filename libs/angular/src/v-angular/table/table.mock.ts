@@ -208,12 +208,11 @@ export const dataWithErrorMessages: ColumnDataWithErrorMessages[] = [
   },
 ]
 
-export type ColumnDataWithListItems = ColumnData & {
-  expanded: boolean,
-  subItems: ColumnData[]
+export type ColumnDataWithListItems<T extends string> = ColumnData & {
+  [key in T]: ColumnData[]
 }
 
-export const dataWithListItems: ColumnDataWithListItems[] = [
+export const dataWithListItems: ColumnDataWithListItems<'subItems'>[] = [
   {
     id: '0',
     name: 'Parent item DKK 111',
@@ -223,7 +222,6 @@ export const dataWithListItems: ColumnDataWithListItems[] = [
     datedBalance: 10500,
     limit: 300,
     unauthorizedUsage: 3500,
-    expanded: true,
     subItems: [
       {
         id: '0',
@@ -256,7 +254,6 @@ export const dataWithListItems: ColumnDataWithListItems[] = [
     datedBalance: 0,
     limit: 0,
     unauthorizedUsage: 0,
-    expanded: false,
     subItems: [],
   },
   {
@@ -268,7 +265,6 @@ export const dataWithListItems: ColumnDataWithListItems[] = [
     datedBalance: 7200,
     limit: 650,
     unauthorizedUsage: 2300,
-    expanded: false,
     subItems: [
       {
         id: '0',
