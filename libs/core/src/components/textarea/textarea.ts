@@ -39,6 +39,8 @@ import type { GdsButton } from '../button'
 export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
+  private _defaultRows = 4
+
   /**
    * Rows of the textarea
    */
@@ -214,7 +216,17 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @watch('value')
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
-      this.rows = Math.max(this.rows, element.value.split('\n').length)
+      // this.rows = Math.max(this.rows, element.value.split('\n').length)
+      // this.#resizeState.lines = Number(this.rows)
+      // element?.style.setProperty('--_lines', this.rows.toString())
+
+      // If the textarea is empty, reset the rows to default.
+      if (element.value === '') {
+        this.rows = this._defaultRows
+      } else {
+        // Otherwise, update the number of rows based on the content.
+        this.rows = Math.max(this.rows, element.value.split('\n').length)
+      }
       this.#resizeState.lines = Number(this.rows)
       element?.style.setProperty('--_lines', this.rows.toString())
     })
@@ -225,7 +237,29 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #handleClearBtnClick = () => {
+    // this.value = ''
+    // this.dispatchEvent(
+    //   new Event('gds-input-cleared', {
+    //     bubbles: true,
+    //     composed: true,
+    //   }),
+    // )
+    // this.dispatchEvent(
+    //   new Event('input', {
+    //     bubbles: true,
+    //     composed: true,
+    //   }),
+    // )
+
     this.value = ''
+
+    // Reset rows to the default.
+    this.rows = this._defaultRows
+    this.#resizeState.lines = this._defaultRows
+    this.elTextareaAsync.then((element) => {
+      element?.style.setProperty('--_lines', this._defaultRows.toString())
+    })
+
     this.dispatchEvent(
       new Event('gds-input-cleared', {
         bubbles: true,
