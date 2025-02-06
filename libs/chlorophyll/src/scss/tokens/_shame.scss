@@ -30,8 +30,8 @@ $black: rgb(0, 0, 0);
 $white: rgb(255, 255, 255);
 
 $heading-primary-color: var(--heading-primary-color);
-$text-primary-color: var(--text-primary-color);
-$text-secondary-color: var(--text-secondary-color);
+$text-primary-color: var(--gds-sys-color-text-primary);
+$text-secondary-color: var(--gds-sys-color-text-secondary);
 $text-disabled-color: var(--text-disabled-color);
 $text-primary-disabled-color: var(--text-primary-disabled-color);
 $text-inherit-color: inherit;
@@ -171,12 +171,12 @@ $grey: (
 
 $disabled: (
   light: (
-    'background': var(--gds-ref-pallet-base200),
-    'color': var(--gds-ref-pallet-base600),
-    'border': var(--gds-ref-pallet-base500),
-    'primary-background': var(--gds-ref-pallet-base200),
-    'primary-color': var(--gds-ref-pallet-base600),
-    'primary-border': var(--gds-ref-pallet-base500),
+    'background': var(--gds-sys-color-base-200),
+    'color': var(--gds-sys-color-base-600),
+    'border': var(--gds-sys-color-base-500),
+    'primary-background': var(--gds-sys-color-base-200),
+    'primary-color': var(--gds-sys-color-base-600),
+    'primary-border': var(--gds-sys-color-base-500),
   ),
   dark: (
     'background': color.adjust($white, $alpha: -0.98),
@@ -235,9 +235,9 @@ $border-primary-disabled-color: var(--border-primary-disabled-color);
 $border-color-invalid: var(--border-color-invalid);
 $border-color-valid: var(--border-color-valid);
 
-$grey-400: var(--grey-400);
-$grey-500: var(--grey-500);
-$grey-700: var(--grey-700);
+$grey-400: var(--gds-sys-color-base-200);
+$grey-500: var(--gds-sys-color-base-300);
+$grey-700: var(--gds-sys-color-base-500);
 
 $intent-primary-color: var(--intent-primary-color);
 $intent-secondary-color: var(--intent-secondary-color);
@@ -272,8 +272,8 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 /* stylelint-disable */
 @mixin dark-mode() {
   --heading-primary-color: #{$white};
-  --text-primary-color: #{color.adjust($white, $alpha: -0.1)};
-  --text-secondary-color: #{color.adjust($white, $alpha: -0.4)};
+  --gds-sys-color-text-primary: #{color.adjust($white, $alpha: -0.1)};
+  --gds-sys-color-text-secondary: #{color.adjust($white, $alpha: -0.4)};
   --text-disabled-color: #{get($disabled, 'color', 'dark')};
   --text-primary-disabled-color: #{get($disabled, 'primary-color', 'dark')};
   --border-color: #{get($grey, 500, 'dark')};
@@ -292,7 +292,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
     )};
   @include generate-intent-variables($intent, 'dark');
   @include grey-colors($grey, 'dark');
-  color: var(--text-primary-color);
+  color: var(--gds-sys-color-text-primary);
   --gds-sys-outline-color: hsla(0, 0%, 87%, 0.2);
   --gds-comp-chips-fr-color: #dedede;
   --gds-comp-chips-bg-color: #2c2c2c;
@@ -303,14 +303,14 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --gds-comp-chips-bg-color-active: #222222;
   --gds-comp-chips-bg-color-action: #2c2c2c;
   --gds-sys-color-focus-outline: white;
-  --gds-sys-color-font: var(--gds-ref-pallet-base300);
+  --gds-sys-color-text-primary: var(--gds-sys-color-base-300);
 }
 
 @mixin light-mode() {
   --heading-primary-color: #{$black};
-  --text-primary-color: #{get($grey, 1000, 'light')};
-  --text-secondary-color: #{get($grey, 800, 'light')};
-  --text-disabled-color: var(--gds-ref-pallet-base600);
+  --gds-sys-color-text-primary: #{get($grey, 1000, 'light')};
+  --gds-sys-color-text-secondary: #{get($grey, 800, 'light')};
+  --text-disabled-color: var(--gds-sys-color-base-600);
   --text-primary-disabled-color: #{get($disabled, 'primary-color')};
   --border-color: #{color.adjust($black, $alpha: -0.83)}; // #CECECE against white
   --border-secondary-color: #{color.adjust($black, $alpha: -0.9)};
@@ -324,7 +324,7 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --link-color-dark-visited: #{get($grey, 900, 'light')};
   @include generate-intent-variables($intent);
   @include grey-colors($grey);
-  color: var(--text-primary-color);
+  color: var(--gds-sys-color-text-primary);
   --gds-sys-outline-color: #333333;
   --gds-comp-chips-fr-color: #333333;
   --gds-comp-chips-bg-color: #ffffff;

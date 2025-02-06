@@ -14,8 +14,8 @@
     @include mixins.add-border-color();
     @include mixins.add-focus();
 
-    color: var(--text-primary-color);
-    background: var(--gds-sys-color-surface);
+    color: var(--gds-sys-color-text-primary);
+    background: var(--gds-sys-color-background-primary);
     padding-right: 3rem;
     flex: 1;
     display: block;

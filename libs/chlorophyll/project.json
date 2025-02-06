@@ -32,6 +32,13 @@
       },
       "outputs": ["{workspaceRoot}/dist/libs/chlorophyll"]
     },
+    "copy-tokens": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx copyfiles dist/libs/tokens/scss/_mixin-sys-*.scss libs/chlorophyll/src/scss/tokens -f"
+      },
+      "dependsOn": ["tokens:build"]
+    },
     "lint": {
       "executor": "nx:run-commands",
       "options": {

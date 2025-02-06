@@ -17,7 +17,7 @@
     @include button.base();
     @include button.icon();
     border-color: transparent;
-    color: var(--gds-ref-pallet-base800);
+    color: var(--gds-sys-color-base-800);
     display: flex;
     gap: 0.5rem;
     line-height: 0.75;
@@ -45,11 +45,11 @@
 
   ::ng-deep .sdv-field-dropdown__options__label:hover,
   ::ng-deep .sdv-field-dropdown__options__label:focus-visible {
-    background-color: var(--grey-400);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   ::ng-deep .sdv-field-dropdown__options__label:active {
-    background-color: var(--grey-500);
+    background-color: var(--gds-sys-color-base-300);
   }
 
   ::ng-deep .sdv-field-dropdown__options__label:focus-visible {

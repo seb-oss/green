@@ -33,7 +33,7 @@
   }
 
   .form-info {
-    color: var(--text-primary-color);
+    color: var(--gds-sys-color-text-primary);
     display: block;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -76,7 +76,7 @@
     }
 
     &:hover {
-      background: var(--grey-400);
+      background: var(--gds-sys-color-base-200);
     }
 
     &::after {

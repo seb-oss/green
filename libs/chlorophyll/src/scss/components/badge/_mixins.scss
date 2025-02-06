@@ -5,7 +5,7 @@
 
 $variants: (
   'info': (
-    color: hsl(var(--sg-intent-info-hsl-contrast)),
+    color: var(--gds-sys-color-text-black),
     background: hsl(var(--sg-intent-info-hsl)),
   ),
   'success': (

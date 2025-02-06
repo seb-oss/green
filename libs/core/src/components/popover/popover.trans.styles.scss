@@ -19,11 +19,11 @@
 
     .close::part(_button) {
       border-radius: 100%;
-      color: var(--text-primary-color);
+      color: var(--gds-sys-color-text-primary);
       border: 1px solid transparent;
 
       &:hover {
-        background-color: var(--grey-500);
+        background-color: var(--gds-sys-color-base-300);
       }
     }
   }
@@ -47,13 +47,13 @@
     inset: auto;
     z-index: var(--z-index);
     box-shadow: var(--sg-popover-box-shadow);
-    color: var(--text-primary-color);
+    color: var(--gds-sys-color-text-primary);
     overflow: hidden;
     padding: 0;
 
     @include common.padding-bottom(0);
     @include common.add-border();
-    @include common.add-border-color(var(--text-primary-color));
+    @include common.add-border-color(var(--gds-sys-color-text-primary));
     @include common.add-border-radius();
 
     &.use-modal-in-mobile {

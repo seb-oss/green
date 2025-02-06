@@ -36,7 +36,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--gds-sys-color-font);
+    color: var(--gds-sys-color-text-primary);
     font-weight: 400;
     text-decoration: none;
 
@@ -45,19 +45,19 @@
     @include common.add-outline-focus-state();
 
     &:hover {
-      border: 1px solid var(--gds-ref-pallet-base600);
+      border: 1px solid var(--gds-sys-color-base-600);
     }
 
     &[aria-current] {
-      background: var(--gds-ref-pallet-base800);
-      color: var(--gds-ref-pallet-base000);
+      background: var(--gds-sys-color-base-800);
+      color: var(--gds-sys-color-text-inverted);
       font-weight: 500;
     }
 
     > svg {
       height: 1rem;
       width: 1rem;
-      fill: var(--gds-sys-color-font);
+      fill: var(--gds-sys-color-text-primary);
     }
   }
 }

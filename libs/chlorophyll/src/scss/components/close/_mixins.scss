@@ -13,13 +13,13 @@ $close-thickness: 0.125rem;
 $close-thickness-sm: 0.125rem;
 $close-bg-hsl: var(--sg-hsl-contrast);
 $close-bg: hsla(var(--background-hsl), 0);
-$close-bg-hover: var(--grey-500);
-$close-bg-active: var(--grey-500);
-$close-icon-color: var(--text-primary-color);
+$close-bg-hover: var(--gds-sys-color-base-300);
+$close-bg-active: var(--gds-sys-color-base-300);
+$close-icon-color: var(--gds-sys-color-text-primary);
 
 @mixin close {
   font-size: 0;
-  background: var(--gds-sys-color-surface);
+  background: var(--gds-sys-color-background-primary);
   border: 0;
   border-radius: 50%;
   content: '';
@@ -38,12 +38,12 @@ $close-icon-color: var(--text-primary-color);
       width: $close-touch-target-size;
 
       > i {
-        background: var(--gds-ref-pallet-base200);
+        background: var(--gds-sys-color-base-200);
         height: $close-height-sm;
         width: $close-width-sm;
         border-radius: 50%;
         position: relative;
-        --color: var(--gds-sys-color-base);
+        --color: var(--gds-sys-color-text-primary);
       }
 
       & > div::after,
@@ -66,7 +66,7 @@ $close-icon-color: var(--text-primary-color);
 
   & > i::after,
   & > i::before {
-    background: var(--gds-sys-color-font);
+    background: var(--gds-sys-color-text-primary);
     content: '';
     display: block;
     height: 0.789375rem;
@@ -86,14 +86,14 @@ $close-icon-color: var(--text-primary-color);
   }
 
   > svg path {
-    fill: var(--gds-sys-color-font);
+    fill: var(--gds-sys-color-text-primary);
   }
 
   @include common.media-breakpoint-up('md') {
     &:not(:disabled, .disabled):hover > i {
       background: color-mix(
         in srgb,
-        var(--gds-sys-color-font) 10%,
+        var(--gds-sys-color-text-primary) 10%,
         transparent
       );
     }
@@ -101,7 +101,7 @@ $close-icon-color: var(--text-primary-color);
     &:not(:disabled, .disabled):hover:active > i {
       background: color-mix(
         in srgb,
-        var(--gds-sys-color-font) 20%,
+        var(--gds-sys-color-text-primary) 20%,
         transparent
       );
     }

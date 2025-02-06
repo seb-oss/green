@@ -22,7 +22,7 @@ $colors: (
   ),
   'info': (
     color: hsl(var(--sg-intent-info-hsl)),
-    contrast: hsl(var(--sg-intent-info-hsl-contrast)),
+    contrast: var(--gds-sys-color-text-black),
   ),
   'success': (
     color: hsl(var(--sg-intent-success-hsl)),

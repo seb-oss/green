@@ -150,7 +150,7 @@ $_background: input.$background;
     }
 
     &.ghost:not(.active):focus-visible {
-      color: var(--gds-sys-color-font);
+      color: var(--gds-sys-color-text-primary);
     }
 
     &.disabled,

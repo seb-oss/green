@@ -12,7 +12,7 @@
 }
 
 .cell-table--row-wrapper {
-  border-top: 1px solid var(--gds-ref-pallet-base400);
+  border-top: 1px solid var(--gds-sys-color-base-400);
   display: flex;
   padding: 1rem;
 
@@ -24,7 +24,7 @@
     cursor: pointer;
 
     &:hover {
-      background-color: var(--gds-ref-pallet-base100);
+      background-color: var(--gds-sys-color-base-100);
     }
   }
 }
@@ -35,7 +35,7 @@
 
   [tabindex='0'] {
     &:focus {
-      outline: 2px solid var(--gds-ref-pallet-base800);
+      outline: 2px solid var(--gds-sys-color-base-800);
     }
   }
 }

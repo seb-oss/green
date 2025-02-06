@@ -13,11 +13,11 @@
 
   :host(:hover) div,
   :host(:focus-visible) div {
-    background-color: var(--grey-400);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   :host(:active) div {
-    background-color: var(--grey-500);
+    background-color: var(--gds-sys-color-base-300);
   }
 
   :host(:focus-visible) {

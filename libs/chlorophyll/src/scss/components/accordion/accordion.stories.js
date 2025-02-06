@@ -21,7 +21,7 @@ export default {
  */
 export const Accordion = {
   render: () => `
-  <div class="accordion">
+  <div class="gds-accordion">
       <div>
         <div role="heading" aria-level="2">
           <button id="accordion-1-id" aria-expanded="true">

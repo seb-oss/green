@@ -28,12 +28,12 @@
     inset: auto;
     z-index: var(--z-index);
     box-shadow: var(--sg-popover-box-shadow);
-    color: var(--text-primary-color);
+    color: var(--gds-sys-color-text-primary);
     padding: 0;
 
     @include common.padding-bottom(0);
     @include common.add-border();
-    @include common.add-border-color(var(--text-primary-color));
+    @include common.add-border-color(var(--gds-sys-color-text-primary));
     @include common.add-border-radius();
 
     @include dropdown.select();
@@ -58,11 +58,11 @@
 
   .gds-dropdown__options__label:hover,
   .gds-dropdown__options__label:focus-visible {
-    background-color: var(--grey-400);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   .gds-dropdown__options__label:active {
-    background-color: var(--grey-500);
+    background-color: var(--gds-sys-color-base-300);
   }
 
   .gds-dropdown__options__label:focus-visible {

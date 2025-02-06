@@ -10,35 +10,39 @@
   @include mixins.base;
 }
 
-.gds-button-secondary {
+.gds-button.secondary {
   @include mixins.secondary;
 }
 
-.gds-button-tertiary {
+.gds-button.tertiary {
   @include mixins.tertiary;
 }
 
 .gds-button,
-.gds-button-primary {
+.gds-button.primary {
   @include mixins.primary;
 }
 
-.gds-button-primary {
+.gds-button.ghost-dark {
   @include mixins.ghost-dark;
 }
 
-.gds-button-icon {
+.gds-button.ghost-light {
+  @include mixins.ghost-light;
+}
+
+.gds-button.icon {
   @include mixins.icon;
 }
 
-.gds-button-danger {
+.gds-button.danger {
   @include mixins.danger-bg;
 }
 
-.gds-button-danger-secondary {
+.gds-button.danger-secondary {
   @include mixins.danger-color;
 }
 
-.gds-button-danger-tertiary {
+.gds-button.danger-tertiary {
   @include mixins.danger-color;
 }

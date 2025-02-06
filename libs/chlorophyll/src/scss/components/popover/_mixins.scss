@@ -5,7 +5,7 @@
 $_box-shadow: var(--sg-popover-box-shadow);
 $_box-shadow-mobile: 0 -0.25rem 1rem rgba(0, 0, 0, 0.1);
 $_z-index: var(--sg-z-index-popover);
-$_border-color: var(--text-primary-color);
+$_border-color: var(--gds-sys-color-text-primary);
 $_popover-bg: var(--sg-popover-background);
 $_max-height-mobile: calc(100% - 1rem);
 $_max-height: 500px;

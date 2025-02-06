@@ -8,7 +8,7 @@ $z-index: tokens.$zindex-dropdown;
 $color: tokens.$text-primary-color;
 $border-color: map.get(tokens.$blue, 'light', 0);
 $background: tokens.$form-control-bg;
-$highlighted-background: var(--grey-1000);
+$highlighted-background: var(--gds-sys-color-base-800);
 
 @mixin dropdown-trigger {
   @include button.reset;
@@ -16,7 +16,7 @@ $highlighted-background: var(--grey-1000);
   @include common.padding-vertical(4);
   @include common.add-border-radius();
   @include common.add-border();
-  @include common.add-border-color(var(--grey-800));
+  @include common.add-border-color(var(--gds-sys-color-base-600));
   @include common.add-focus('');
 
   background: $background;
@@ -33,11 +33,11 @@ $highlighted-background: var(--grey-1000);
   }
 
   &:not(:disabled, .disabled, [aria-disabled]):hover {
-    --background: var(--grey-400);
-    --color: var(--grey-1000);
-    background-color: var(--grey-400);
-    color: var(--grey-1000);
-    border-color: var(--grey-1000);
+    --background: var(--gds-sys-color-base-200);
+    --color: var(--gds-sys-color-base-800);
+    background-color: var(--gds-sys-color-base-200);
+    color: var(--gds-sys-color-base-800);
+    border-color: var(--gds-sys-color-base-800);
   }
 
   > span {
@@ -83,11 +83,11 @@ $highlighted-background: var(--grey-1000);
 
   &:hover,
   &:focus-visible {
-    background-color: var(--grey-400);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   &:active {
-    background-color: var(--grey-400);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   &:focus {
@@ -130,11 +130,11 @@ $highlighted-background: var(--grey-1000);
 
     &:hover,
     &:focus-visible {
-      background-color: var(--gds-ref-pallet-base200);
+      background-color: var(--gds-sys-color-base-200);
     }
 
     &:active {
-      background-color: var(--gds-ref-pallet-base300);
+      background-color: var(--gds-sys-color-base-300);
     }
 
     &:focus {

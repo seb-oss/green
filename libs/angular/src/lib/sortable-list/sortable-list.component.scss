@@ -9,7 +9,7 @@ label.item {
 
 .item-box {
   background-color: var(--sg-card-background);
-  color: var(--text-primary-color);
+  color: var(--gds-sys-color-text-primary);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,7 +43,7 @@ label.item {
 
 .item-list-header-subtitle {
   font-size: 0.75rem;
-  color: var(--text-primary-color);
+  color: var(--gds-sys-color-text-primary);
   display: flex;
   justify-content: center;
   align-content: center;

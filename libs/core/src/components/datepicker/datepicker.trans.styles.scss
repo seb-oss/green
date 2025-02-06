@@ -21,7 +21,7 @@
   }
 
   .form-info {
-    color: var(--text-primary-color);
+    color: var(--gds-sys-color-text-primary);
     display: block;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -43,7 +43,7 @@
     min-height: 2.75rem;
 
     &:hover {
-      background-color: var(--grey-200);
+      background-color: var(--gds-sys-color-base-100);
     }
 
     .input {
@@ -67,7 +67,7 @@
       border: none;
 
       &:hover {
-        border-color: var(--grey-400);
+        border-color: var(--gds-sys-color-base-200);
       }
     }
 
@@ -105,13 +105,13 @@
       background: transparent;
       border: 0;
       box-sizing: border-box;
-      color: var(--text-primary-color);
+      color: var(--gds-sys-color-text-primary);
       cursor: pointer;
       width: 2.75rem;
       font-size: 1rem;
 
       &:hover {
-        background: var(--grey-500);
+        background: var(--gds-sys-color-base-300);
       }
     }
 
@@ -150,13 +150,13 @@
       @include common.add-focus();
       background-color: transparent;
       border: 0;
-      color: var(--text-primary-color);
+      color: var(--gds-sys-color-text-primary);
       cursor: pointer;
       font-size: 1rem;
       padding: 0.5rem 0.75rem;
 
       &:hover {
-        background: var(--grey-500);
+        background: var(--gds-sys-color-base-300);
       }
     }
   }

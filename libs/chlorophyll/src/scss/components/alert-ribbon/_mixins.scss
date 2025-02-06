@@ -7,48 +7,35 @@
 
 $variants: (
   'info': (
-    color: hsl(var(--sg-intent-info-hsl-contrast)),
+    color: var(--gds-sys-color-text-black),
     border-color: transparent,
-    link-outline-color:
-      hsla(var(--sg-intent-info-hsl-contrast), link.$outline-opacity),
-    background: hsl(var(--sg-intent-info-hsl)),
+    background: var(--gds-sys-color-base-200),
     ghost-button-type: 'light',
   ),
   'success': (
-    color: var(--gds-ref-pallet-base000),
+    color: var(--gds-sys-color-text-inverted),
     border-color: transparent,
-    link-outline-color:
-      hsla(var(--sg-intent-success-hsl-contrast), link.$outline-opacity),
-    background: hsl(var(--sg-intent-success-hsl)),
+    background: var(--gds-sys-color-dark-green-2),
     ghost-button-type: 'light',
   ),
   'warning': (
-    color: hsl(var(--sg-intent-warning-hsl-contrast)),
+    color: var(--gds-sys-color-text-black),
     border-color: transparent,
-    link-outline-color:
-      hsla(var(--sg-intent-warning-hsl-contrast), link.$outline-opacity),
-    background: hsl(var(--sg-intent-warning-hsl)),
+    background: var(--gds-sys-color-dark-yellow-1),
     ghost-button-type: 'dark',
   ),
   'danger': (
-    color: hsl(var(--sg-intent-critical-hsl-contrast)),
+    color: var(--gds-sys-color-text-inverted),
     border-color: transparent,
-    link-outline-color:
-      hsla(var(--sg-intent-critical-hsl-contrast), link.$outline-opacity),
     background: hsl(var(--sg-intent-critical-hsl)),
     ghost-button-type: 'light',
   ),
 );
 
-$background: hsl(var(--sg-intent-neutral-hsl));
+$background: var(--gds-sys-color-base-200);
 $border-radius: 0;
 $border: solid 1px var(--border-color);
-$close-bg-hover: var(--sg-hsl-black);
-$color: var(--text-primary-color);
-$link-outline-color: hsla(
-  var(--sg-intent-neutral-hsl-contrast),
-  link.$outline-opacity
-);
+$color: var(--gds-sys-color-text-primary);
 
 @mixin alert-ribbon {
   --background: #{$background};
@@ -127,12 +114,12 @@ $link-outline-color: hsla(
   }
 
   // dismiss
-  button.close {
+  button.gds-close {
+    padding: 0;
     grid-area: dismiss;
     justify-self: flex-end;
     margin: -0.5rem -0.375rem 0 0.375rem;
     background-color: transparent;
-    --background-hsl: #{$close-bg-hover};
     --color: #{$color};
 
     & > i:after,
@@ -155,6 +142,7 @@ $link-outline-color: hsla(
 
   // links
   @include link.variant($color);
+
   a {
     text-decoration: underline !important;
     transition: opacity 300ms ease-in-out;
@@ -178,22 +166,10 @@ $link-outline-color: hsla(
     > button,
     > button[type='button'],
     > .button {
-      &:not(
-          .primary,
-          .ghost,
-          .close,
-          .link,
-          [type='submit'],
-          :disabled,
-          .disabled,
-          [aria-disabled]
-        ) {
-        @include button.ghost-dark();
-        //force small size TODO: improve how to do sizing with mixin
-        min-height: 2rem;
-        padding: 0.4375rem 0.75rem;
-        line-height: 1.125rem;
-      }
+      //force small size TODO: improve how to do sizing with mixin
+      min-height: 2rem;
+      padding: 0.4375rem 0.75rem;
+      line-height: 1.125rem;
 
       + {
         a,
@@ -232,36 +208,11 @@ $link-outline-color: hsla(
   --gds-sys-color-focus-outline: #{$color};
 
   // alert-ribbon close
-  .close {
+  .gds-close {
     --color: #{$color};
   }
 
   i > svg > * {
     fill: $color;
-  }
-
-  > footer,
-  .alert-ribbon__footer {
-    > a,
-    > button,
-    > button[type='button'],
-    > .button {
-      &:not(
-          .primary,
-          .ghost,
-          .close,
-          .link,
-          [type='submit'],
-          :disabled,
-          .disabled,
-          [aria-disabled]
-        ) {
-        @if ($ghost-button-type == 'light') {
-          @include button.ghost-light();
-        } @else {
-          @include button.ghost-dark();
-        }
-      }
-    }
   }
 }

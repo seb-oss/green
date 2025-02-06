@@ -11,8 +11,8 @@ $_track_width: 2.75rem;
 $_track_height_mobile: 2rem;
 $_track_width_mobile: 3.5rem;
 $_track_transition_time: 150ms;
-$_track_color: var(--sg-grey-600);
-$_track_color_hover: var(--sg-grey-500);
+$_track_color: var(--gds-sys-color-base-600);
+$_track_color_hover: var(--gds-sys-color-base-500);
 $_track_color_pressed: hsl(var(--sg-hsl-green-2));
 $_track_color_pressed_dark_mode: var(--intent-success-background);
 $_track_color_pressed_hover: hsl(var(--sg-hsl-green-1));
@@ -44,7 +44,7 @@ $_breakpoint-mobile-layout: map.get(tokens.$grid-breakpoints, 'sm');
     outline-width 0s;
 
   .dark-mode & {
-    border: 1px solid var(--sg-grey-200);
+    border: 1px solid var(--gds-sys-color-base-200);
   }
 
   // Thumb
