@@ -59,23 +59,15 @@ export const styles = css`
       height: 20px;
       cursor: row-resize;
       z-index: 2;
-      &:hover,
-      &:active {
-        &::before {
-          width: 22px;
-          opacity: 1;
-          height: 1px;
-        }
-      }
+
       &::before {
         content: '';
         position: absolute;
         background: currentColor;
         inset: 0;
         margin-inline: auto;
-        height: 0px;
-        width: 12px;
-        opacity: 0;
+        height: 1px;
+        width: 22px;
         border-radius: 100px;
         transition: var(--_transition);
       }
