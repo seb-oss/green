@@ -131,7 +131,7 @@ const initialFormState: FormData = {
   name: ['', false],
   email: ['', false],
   fruit: [undefined, false],
-  dessert: [undefined, false],
+  dessert: ['Cheesecake', false],
   date: [undefined, false],
   description: ['', false],
 }

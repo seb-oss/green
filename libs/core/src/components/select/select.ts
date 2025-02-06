@@ -106,7 +106,10 @@ export class GdsSelect extends GdsFormControlElement<string> {
 
   constructor() {
     super()
-    this.value = ''
+    /*
+     * Value is not initialized here in purpose so the external prop or native select can determine * the initial value
+     */
+    // this.value = ''
   }
 
   /**
@@ -125,27 +128,25 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @watch('value')
   firstUpdated() {
     const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
-
-    // Move slotted select into the component's shadow DOM for proper styling and control
     if (slotElement) {
       const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
         flatten: true,
       })
       const selectContainer =
         this.shadowRoot?.querySelector('.select-container')
-
       assignedNodes.forEach((node) => {
-        if (node.nodeType === Node.ELEMENT_NODE && node.nodeName === 'SELECT') {
+        if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          (node as HTMLElement).nodeName.toUpperCase() === 'SELECT'
+        ) {
           const select = node as HTMLSelectElement
           this.multiline = select.multiple
-          selectContainer?.appendChild(node)
-
-          // Check if the value is still unset (i.e. no user interaction yet)
-          if (this._isValueUnset) {
+          selectContainer?.appendChild(select)
+          // Do not override a programmatic value.
+          // (Also note that if no external value is provided, we will default to the native select’s value.)
+          if (!this.value) {
             const initialValue = this.getInitialSelectValue(select)
             this.value = initialValue
-
-            // Also initialize the internal selectedValue state
             const initialSelectedOptions = Array.from(
               select.selectedOptions,
             ).map((option) => option.value)
@@ -154,80 +155,74 @@ export class GdsSelect extends GdsFormControlElement<string> {
             } else {
               this.selectedValue = initialSelectedOptions.slice(0, 1)
             }
-            // Mark the value as set (user hasn't explicitly set it, but it is now initialized)
-            this._isValueUnset = false
           }
         }
       })
     }
 
-    const selectElement: HTMLSelectElement | null =
-      this.shadowRoot?.querySelector('.select-container select') || null
+    const nativeSelect = this.shadowRoot?.querySelector(
+      '.select-container select',
+    ) as HTMLSelectElement | null
 
-    if (selectElement) {
-      selectElement.setAttribute('aria-describedby', 'supporting-text')
-      selectElement.setAttribute('aria-label', this.label)
-
-      selectElement.addEventListener(
+    if (nativeSelect) {
+      nativeSelect.setAttribute('aria-describedby', 'supporting-text')
+      nativeSelect.setAttribute('aria-label', this.label)
+      nativeSelect.addEventListener(
         'change',
         this.handleSelectChange.bind(this),
       )
-      selectElement.addEventListener('input', (e) => e.stopPropagation())
+      nativeSelect.addEventListener('input', (e) => e.stopPropagation())
     }
   }
 
-  protected override willUpdate(
-    changedProperties: Map<PropertyKey, unknown>,
-  ): void {
-    super.willUpdate(changedProperties)
-
-    if (changedProperties.has('value')) {
-      const selectElement = this.getSelectElement()
-      if (selectElement && selectElement.multiple) {
-        // For multiple select, update all options
+  updated(changedProperties: Map<PropertyKey, unknown>): void {
+    // Always force-sync the native select to the programmatically provided value.
+    const nativeSelect = this.getSelectElement()
+    if (nativeSelect && changedProperties.has('value')) {
+      if (!nativeSelect.multiple) {
+        // Check if the programmatic value exists on one of the options.
+        const optionExists = Array.from(nativeSelect.options).some(
+          (option) => option.value === this.value,
+        )
+        if (!optionExists && this.value) {
+          // If not, inject a dummy option (with the same display text as value).
+          const newOption = document.createElement('option')
+          newOption.value = this.value
+          newOption.text = this.value
+          newOption.selected = true
+          // Prepend so it becomes the visible selection.
+          nativeSelect.prepend(newOption)
+        } else {
+          nativeSelect.value = this.value || ''
+        }
+        this.selectedValue = this.value ? [this.value] : []
+      } else if (nativeSelect.multiple) {
         const newValues = this.value ? this.value.split(',') : []
-        Array.from(selectElement.options).forEach((option) => {
+        Array.from(nativeSelect.options).forEach((option) => {
           option.selected = newValues.includes(option.value)
         })
         this.selectedValue = newValues
-      } else if (selectElement) {
-        // For single select
-        selectElement.value = this.value || ''
-        this.selectedValue = this.value ? [this.value] : []
       }
     }
   }
 
-  /**
-   * Handles changes to the native select element.
-   * Manages event propagation and ensures proper state updates.
-   */
   private handleSelectChange(event: Event) {
-    // Prevent native event bubbling to avoid race conditions
     event.stopPropagation()
-
-    // Mark that the user has interacted with the select
-    this._isValueUnset = false
-
-    const selectElement = event.target as HTMLSelectElement
-    const selectedOptions = Array.from(selectElement.selectedOptions)
+    const nativeSelect = event.target as HTMLSelectElement
+    const selectedOptions = Array.from(nativeSelect.selectedOptions)
       .map((option) => option.value)
       .filter((value) => value !== '') // Filter out empty values
 
-    if (this.multiline) {
-      // For multiple select, maintain the array of selections
+    if (nativeSelect.multiple) {
       this.selectedValue = selectedOptions
-      // Only join non-empty values
       this.value = selectedOptions.length > 0 ? selectedOptions.join(',') : ''
     } else {
       this.selectedValue = [selectedOptions[0]]
       this.value = selectedOptions[0]
     }
 
-    // Validate the new value
     this.checkValidity()
 
-    // Dispatch custom events after internal state is updated
     this.dispatchEvent(
       new CustomEvent('input', {
         detail: { value: this.value },
@@ -249,25 +244,22 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * Handles form reset events by selecting the first option.
    */
   override formResetCallback(): void {
-    const selectElement = this.getSelectElement()
-    if (selectElement) {
-      if (selectElement.multiple) {
-        // Reset all selections
-        Array.from(selectElement.options).forEach((option) => {
+    const nativeSelect = this.getSelectElement()
+    if (nativeSelect) {
+      if (nativeSelect.multiple) {
+        Array.from(nativeSelect.options).forEach((option) => {
           option.selected = false
         })
         this.selectedValue = []
         this.value = ''
       } else {
-        const firstOption = selectElement.options[0]
+        const firstOption = nativeSelect.options[0]
         if (firstOption) {
           this.value = firstOption.value
-          selectElement.value = firstOption.value
+          nativeSelect.value = firstOption.value
           this.selectedValue = [firstOption.value]
         }
       }
-      // Reset the flag so the value can be reinitialized if needed
-      this._isValueUnset = true
     }
   }
 
