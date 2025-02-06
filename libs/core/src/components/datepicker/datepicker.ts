@@ -70,7 +70,12 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
    * This can be a string if set via the value attribute in markup, or via the setAttribute DOM API.
    */
   @property({ converter: dateConverter })
-  value?: Date
+  get value(): Date | undefined {
+    return this._internalValue
+  }
+  set value(value: Date | undefined) {
+    this._internalValue = value as any
+  }
 
   /**
    * The minimum date that can be selected.

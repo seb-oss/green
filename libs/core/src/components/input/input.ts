@@ -223,7 +223,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         .value=${this.value}
         id="input"
         ?disabled=${this.disabled}
-        aria-describedby="supporting-text"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid=${this.invalid}
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}

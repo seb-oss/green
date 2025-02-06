@@ -327,7 +327,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         @change=${this.#handleOnChange}
         .value=${this.value}
         id="input"
-        aria-describedby="supporting-text"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       ></textarea>

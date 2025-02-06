@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { createComponent } from '@lit/react'
-import { set } from 'date-fns'
 
 // Import all web components from Green Core
 import { GdsButton } from '@sebgroup/green-core/components/button/index.js'
@@ -131,7 +130,7 @@ const initialFormState: FormData = {
   name: ['', false],
   email: ['', false],
   fruit: [undefined, false],
-  dessert: ['Cheesecake', false],
+  dessert: [undefined, false],
   date: [undefined, false],
   description: ['', false],
 }
@@ -168,7 +167,10 @@ export const GreenCoreFormExample = () => {
         <CoreCard variant="primary" flex="1">
           <form
             onSubmit={(e) => e.preventDefault()}
-            onReset={(e) => setFormData(initialFormState)}
+            onReset={(e) => {
+              e.preventDefault()
+              setFormData(initialFormState)
+            }}
           >
             <CoreFlex gap="m" flex-direction="column">
               <CoreInput
