@@ -97,19 +97,12 @@ export class GdsSelect extends GdsFormControlElement<string> {
   @query('select')
   selectElement!: HTMLSelectElement
 
-  /**
-   * Flag for tracking whether the initial value has been set.
-   * Using a boolean flag here avoids setting a Symbol on the form value,
-   * which causes an error when ElementInternals.setFormValue() is called.
+  /*
+   * Value is not initialized here in purpose so the external
+   * prop or native select can determine the initial value
    */
-  private _isValueUnset = true
-
   constructor() {
     super()
-    /*
-     * Value is not initialized here in purpose so the external prop or native select can determine * the initial value
-     */
-    // this.value = ''
   }
 
   /**
