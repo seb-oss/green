@@ -1,13 +1,12 @@
-import ComponentList from '@/component-list/component-list'
-import Grid from '@/grid/grid'
-import Content from '&/content/content'
+'use client'
+
+import { GdsFlex } from '$/import/components'
+import ComponentList from 'core/components'
 
 export default function Components() {
   return (
-    <Content layout="content">
-      <Grid columns={1} paddingBlock="large" paddingInline="large">
-        <ComponentList title="Components" />
-      </Grid>
-    </Content>
+    <GdsFlex flex-direction="column" margin="0 auto">
+      <ComponentList title="Components" />
+    </GdsFlex>
   )
 }

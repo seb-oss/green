@@ -14,6 +14,10 @@
     visibility: visible;
   }
 
+  :host > div:not([hidden]) {
+    display: contents;
+  }
+
   header {
     display: flex;
 

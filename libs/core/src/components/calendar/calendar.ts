@@ -1,6 +1,6 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { html } from 'lit'
-import { property, query } from 'lit/decorators.js'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
@@ -50,7 +50,7 @@ export type CustomizedDate = {
 
 /**
  * @element gds-calendar
- * @status beta
+ * @status stable
  *
  * A calendar is a widget that allows the user to select a date.
  *
@@ -58,6 +58,7 @@ export type CustomizedDate = {
  * @event gds-date-focused - Fired when focus is changed. Can be cancelled using `event.preventDefault()`.
  */
 @gdsCustomElement('gds-calendar')
+@localized()
 export class GdsCalendar extends GdsElement {
   static styles = [tokens, style]
   static shadowRootOptions: ShadowRootInit = {
@@ -169,7 +170,13 @@ export class GdsCalendar extends GdsElement {
    * A template function to customize the accessible date label.
    */
   @property({ attribute: false })
-  dateLabelTemplate = (date: Date) => date.toDateString()
+  dateLabelTemplate = (date: Date) =>
+    date.toLocaleDateString(this._currentLocale, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
 
   /**
    * Returns the date cell element for the given day number.
@@ -177,6 +184,9 @@ export class GdsCalendar extends GdsElement {
   getDateCell(dayNumber: number) {
     return this.shadowRoot?.querySelector(`#dateCell-${dayNumber}`)
   }
+
+  @state()
+  private _currentLocale = navigator.language
 
   @query('td[tabindex="0"]')
   private _elFocusedCell?: HTMLElement
@@ -186,6 +196,10 @@ export class GdsCalendar extends GdsElement {
     TransitionalStyles.instance.apply(this, 'gds-calendar')
 
     this.addEventListener('keydown', this.#handleKeyDown)
+    window.addEventListener('lit-localize-status', (e: CustomEvent) => {
+      if (e.detail.status === 'ready')
+        this._currentLocale = e.detail.readyLocale
+    })
   }
 
   focus() {

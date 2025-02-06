@@ -145,6 +145,9 @@ export const Sizes: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        XS
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         Small
       </gds-button>
@@ -203,6 +206,9 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        <gds-icon-arrow-right />
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         <gds-icon-arrow-right />
       </gds-button>
@@ -278,5 +284,29 @@ export const Length: Story = {
         This is a long text that will truncated
       </gds-button>
     </div>
+  `,
+}
+
+/**
+ * Some aria attributes are forwarded to the inner button element by default, but if you want to force a certain
+ * aria-attribute on the inner button, you can use the `gds-aria-*` attributes on the `gds-button` element.
+ *
+ * Also note that `label` will render as `aria-label` on the inner button element.
+ */
+export const Aria: Story = {
+  ...DefaultParams,
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: () => html`
+    <gds-button
+      label="This is a button"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      gds-aria-description="This is a description"
+    >
+      Aria button
+    </gds-button>
   `,
 }

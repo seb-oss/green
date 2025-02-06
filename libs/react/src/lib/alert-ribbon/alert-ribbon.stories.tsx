@@ -179,6 +179,20 @@ DangerWithCloseButton.args = {
   closeText: '',
 }
 
+export const InfoWithCustomCloseButton = Template.bind({})
+InfoWithCustomCloseButton.args = {
+  type: '',
+  header: 'Info',
+  footer: null,
+  children: (
+    <>
+      This is an alert type with a custom close label.
+    </>
+  ),
+  isCloseable: true,
+  closeText: 'Stäng',
+}
+
 export const InfoWithFooterButtons = Template.bind({})
 InfoWithFooterButtons.args = {
   type: '',

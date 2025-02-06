@@ -10,13 +10,13 @@
 
 @layer core {
   :host {
-    display: inline-block;
+    display: inline-flex;
     max-width: 100%;
   }
 
   .button {
     --_block-size: var(--gds-space-3xl);
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -39,24 +39,26 @@
     padding-inline: var(--gds-space-l);
     position: relative;
     text-decoration: none;
-    transition-property: color, border-color;
-    transition: all 0.4s;
-    max-width: 100%;
+    transition-property: color, border-colorm, background;
+    transition-duration: 0.2s;
+    flex: 1;
 
     &:focus {
-      outline-color: color-mix(in srgb, currentcolor, #000 100%);
+      outline-color: var(--gds-color-l3-content-tertiary);
 
       &:not(:focus-visible) {
         outline-color: transparent;
       }
     }
 
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-primary),
-        var(--gds-color-l3-states-dark-hover)
-      );
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-primary),
+          var(--gds-color-l3-states-dark-hover)
+        );
+      }
     }
 
     &:active {
@@ -68,7 +70,7 @@
     }
 
     &:not(.circle) slot:not([name]) {
-      display: inline-block;
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -78,8 +80,10 @@
 
 /* High specificity */
 .button.circle {
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   padding: 0;
+  min-block-size: var(--_block-size);
+  min-inline-size: var(--_block-size);
 }
 
 .button:disabled {
@@ -93,12 +97,14 @@
     background-color: var(--gds-color-l3-background-secondary);
     color: var(--gds-color-l3-content-tertiary);
 
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-secondary),
-        var(--gds-color-l3-states-light-hover)
-      );
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-secondary),
+          var(--gds-color-l3-states-light-hover)
+        );
+      }
     }
 
     &:active {
@@ -114,12 +120,14 @@
     background-color: transparent;
     color: var(--gds-color-l3-content-tertiary);
 
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        transparent,
-        var(--gds-color-l3-states-light-hover)
-      );
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-hover)
+        );
+      }
     }
 
     &:active {
@@ -158,12 +166,22 @@
   .positive {
     background-color: var(--gds-color-l3-background-positive);
 
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-positive),
-        var(--gds-color-l3-states-dark-hover)
-      );
+    &:focus {
+      outline-color: var(--gds-color-l3-content-positive);
+
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-positive),
+          var(--gds-color-l3-states-dark-hover)
+        );
+      }
     }
 
     &:active {
@@ -178,12 +196,14 @@
       background-color: var(--gds-color-l3-background-positive-secondary);
       color: var(--gds-color-l3-content-positive);
 
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--gds-color-l3-background-positive-secondary),
-          var(--gds-color-l3-states-positive-hover)
-        );
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-positive-secondary),
+            var(--gds-color-l3-states-positive-hover)
+          );
+        }
       }
 
       &:active {
@@ -199,12 +219,14 @@
       background-color: transparent;
       color: var(--gds-color-l3-content-positive);
 
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-positive-hover)
-        );
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-color-l3-states-positive-hover)
+          );
+        }
       }
 
       &:active {
@@ -220,12 +242,21 @@
   .negative {
     background-color: var(--gds-color-l3-background-negative);
 
-    &:hover {
-      background-color: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-negative),
-        var(--gds-color-l3-states-dark-hover)
-      );
+    &:focus {
+      outline-color: var(--gds-color-l3-content-negative);
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-color-l3-background-negative),
+          var(--gds-color-l3-states-dark-hover)
+        );
+      }
     }
 
     &:active {
@@ -240,12 +271,14 @@
       background-color: var(--gds-color-l3-background-negative-secondary);
       color: var(--gds-color-l3-content-negative);
 
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          var(--gds-color-l3-background-negative-secondary),
-          var(--gds-color-l3-states-negative-hover)
-        );
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-color-l3-background-negative-secondary),
+            var(--gds-color-l3-states-negative-hover)
+          );
+        }
       }
 
       &:active {
@@ -261,12 +294,14 @@
       background-color: transparent;
       color: var(--gds-color-l3-content-negative);
 
-      &:hover {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-negative-hover)
-        );
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-color-l3-states-negative-hover)
+          );
+        }
       }
 
       &:active {

@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -13,16 +16,17 @@ import {
 } from '@storybook/angular'
 import { debounceTime, map, Observable } from 'rxjs'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
 import { DropdownUtils, Option } from '../core/core.utils'
-import { NgvI18nModule } from '../i18n/i18n.module'
-import { NgvInputComponent } from '../input/input.component'
-import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
-import { NgvDropdownListComponent } from './dropdown-list/dropdown-list.component'
-import { NgvDropdownComponent } from './dropdown.component'
-import { NgvTypeaheadHighlightComponent } from './typeahead/typeahead-highlight/typeahead-highlight.component'
-import { NgvTypeaheadInputComponent } from './typeahead/typeahead-input/typeahead-input.component'
-import { NgvTypeaheadDirective } from './typeahead/typeahead.directive'
+import { NggvI18nModule } from '../i18n/i18n.module'
+import { NggvInputComponent } from '../input/input.component'
+import { NggvTooltipDirective } from '../tooltip/tooltip.directive'
+import { NggvDropdownListComponent } from './dropdown-list/dropdown-list.component'
+import { NggvDropdownComponent } from './dropdown.component'
+import { NggvTypeaheadHighlightComponent } from './typeahead/typeahead-highlight/typeahead-highlight.component'
+import { NggvTypeaheadInputComponent } from './typeahead/typeahead-input/typeahead-input.component'
+import { NggvTypeaheadDirective } from './typeahead/typeahead.directive'
 
 interface WithExtras {
   ngModel: string
@@ -38,27 +42,29 @@ interface ExtendedOption<K, V> extends Option<K, V> {
 
 export default {
   title: 'V-Angular/Dropdown',
-  component: NgvDropdownComponent,
+  component: NggvDropdownComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule), DropdownUtils],
+      providers: [importProvidersFrom(NggvI18nModule), DropdownUtils],
     }),
     moduleMetadata({
       declarations: [
-        NgvDropdownListComponent,
-        NgvInputComponent,
-        NgvTypeaheadInputComponent,
-        NgvTypeaheadHighlightComponent,
-        NgvTooltipDirective,
+        NggvDropdownListComponent,
+        NggvInputComponent,
+        NggvTypeaheadInputComponent,
+        NggvTypeaheadHighlightComponent,
+        NggvTooltipDirective,
         CharacterCountdownDirective,
       ],
       imports: [
         CommonModule,
+        NggCoreWrapperModule,
         FormsModule,
         ReactiveFormsModule,
-        NgvI18nModule,
-        NgvTypeaheadDirective,
+        NggvI18nModule,
+        NggvTypeaheadDirective,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta
@@ -84,14 +90,14 @@ const options = [
   },
 ]
 
-type StoryArgs = NgvDropdownComponent<
+type StoryArgs = NggvDropdownComponent<
   string,
   string | null,
   ExtendedOption<string, string | null>
 > &
   WithExtras
 
-const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
+const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel)
   ctrl.valueChanges.subscribe(console.log)
   const toggleDisableField = () => {
@@ -121,7 +127,7 @@ const Template: StoryFn<NgvDropdownComponent> = (args: any) => {
         </nggv-dropdown>
 
         <div style="margin-top: 1rem">
-          <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+          <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
         </div>
       </div>`,
     props: {
@@ -179,8 +185,8 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
     template: /*html*/ `
       <div style="width: 264px">
         <div style="display: flex">
-          <button class="sdv-button" (click)="showAlt = !showAlt">Change options</button>
-          <button class="sdv-button sdv-button-alternative" (click)="resetFunc()">Reset to default</button>
+          <button class="gds-button" (click)="showAlt = !showAlt">Change options</button>
+          <button class="gds-button gds-button-alternative" (click)="resetFunc()">Reset to default</button>
         </div>
         <div>Value: {{ formControl.value }}</div>
         <nggv-dropdown
@@ -207,7 +213,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
 }
 
 const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
-  const accounts = [
+  const options = [
     {
       key: 'se50000000001',
       label: null,
@@ -241,6 +247,12 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
       currency: 'EUR',
     },
   ]
+  const accounts = [
+    {
+      label: 'My own accounts',
+      options,
+    },
+  ]
   const fc = new UntypedFormControl()
   const toggleDisableField = () => {
     if (fc.disabled) return fc.enable()
@@ -256,6 +268,11 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         [formControl]="formControl"
         [locked]="locked"
         [displayDisabledAsLocked]="displayDisabledAsLocked">
+
+        <ng-template let-item #groupLabelTpl>
+          <div style="background-color: salmon; padding-left: 1rem"><pre>My custom group label</pre></div>
+        </ng-template>
+
         <ng-template let-selected #selectedTpl>
           <div *ngIf="selected?.key" class="account-option">
             <div class="account-option--label" style="font-weight: 500;">
@@ -284,7 +301,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
 
       </nggv-dropdown>
       <div style="margin-top: 1rem">
-        <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+        <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
       `,
     styles: [
@@ -297,9 +314,9 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         padding-right: 0.5rem;
         width: 350px;
       }
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true'] .account-option--number {
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true'] .account-option--number {
         color: white;
       }
       .account-option--number,
@@ -420,6 +437,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         [resultFormatter]="resultFormatter"
         [allowUnselect]="true"
         [unselectLabel]="unselectLabel"
+        [emptyOptionLabel]="emptyOptionLabel"
         (filterPhraseChange)="handlefilterPhraseChange($event)">
 
         <ng-template let-selected #selectedTpl>
@@ -460,7 +478,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
 
       </nggv-dropdown>
       <div style="margin-top: 1rem">
-        <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+        <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
       `,
     styles: [
@@ -473,9 +491,9 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         padding-right: 0.5rem;
         width: 350px;
       }
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
-      ::ng-deep.sdv-field-dropdown__options__label[aria-selected='true'] .account-option--number {
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='false']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true']:hover .account-option--number,
+      ::ng-deep.gds-field-dropdown__options__label[aria-selected='true'] .account-option--number {
         color: white;
       }
       .account-option--number,
@@ -652,7 +670,8 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
           [unselectLabel]="unselectLabel"
           [nggvTypeahead]="searchFunction"
           [resultFormatter]="resultFormatter"
-          [selectedFormatter]="selectedFormatter">
+          [selectedFormatter]="selectedFormatter"
+          [emptyOptionLabel]="emptyOptionLabel">
 
           <ng-template #labelTpl>Custom Label</ng-template>
 
@@ -666,6 +685,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
       placeholder: 'Choose',
       allowUnselect: true,
       unselectLabel: 'Unselect',
+      emptyOptionLabel: 'No matching options',
       searchFunction: (value$: Observable<string>) =>
         value$.pipe(
           debounceTime(300),

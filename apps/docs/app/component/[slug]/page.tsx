@@ -1,12 +1,11 @@
 import Head from 'next/head'
 import { notFound } from 'next/navigation'
 import { allComponents } from 'content'
-import { Mdx } from '@/mdx'
-import isDev from '$/dev/dev'
+import { isDev } from '$/env/env'
+import { GdsRichText } from '$/import/components'
+import { Mdx } from 'core/mdx'
 
 import type { Metadata, ResolvingMetadata } from 'next'
-
-import './page.css'
 
 export const dynamic = 'force-static'
 
@@ -14,7 +13,11 @@ type Props = {
   params: { slug: string }
 }
 
-export const generateStaticParams = (): any => {
+type ComponentParams = {
+  slug: string
+}
+
+export const generateStaticParams = (): ComponentParams[] => {
   return allComponents.map((component) => ({
     slug: component.url_path.replace('/component/', ''),
   }))

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { CommonModule } from '@angular/common'
 import { importProvidersFrom } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -8,8 +9,9 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvI18nModule } from '../../i18n/i18n.module'
-import { NgvSlideOutComponent } from './slide-out.component'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggvI18nModule } from '../../i18n/i18n.module'
+import { NggvSlideOutComponent } from './slide-out.component'
 
 interface WithExtras {
   action: (val: any) => void
@@ -18,13 +20,18 @@ interface WithExtras {
 
 export default {
   title: 'V-Angular/Slide Out',
-  component: NgvSlideOutComponent,
+  component: NggvSlideOutComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, BrowserAnimationsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        BrowserAnimationsModule,
+        NggvI18nModule,
+        NggCoreWrapperModule,
+      ],
     }),
   ],
   argTypes: {
@@ -47,7 +54,7 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
+const Template: StoryFn<NggvSlideOutComponent & WithExtras> = (args: any) => ({
   template: /* html */ `
   <nggv-slideout-modal #slideOut [initiallyShown]="initiallyShown" [closable]="closable" [content]="content" [title]="title" [buttons]="buttons" [side]="side" [autoWidth]="autoWidth" (nggvCloseEvent)="action($event)">
       <p *ngIf="!outsideContent && !autoWidth">Some content in the content div</p>
@@ -59,7 +66,7 @@ const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
         This is a modal with extra wide content.
       </div>
     </nggv-slideout-modal>
-    <button class="sdv-button" (click)="slideOut.open()">Open slide-out</button>
+    <button class="gds-button" (click)="slideOut.open()">Open slide-out</button>
     `,
   props: args,
 })
@@ -67,6 +74,7 @@ const Template: StoryFn<NgvSlideOutComponent & WithExtras> = (args: any) => ({
 export const Primary = Template.bind({})
 Primary.args = {
   initiallyShown: true,
+  autoWidth: false,
   closable: true,
   buttons: {
     negative: 'button_cancel',

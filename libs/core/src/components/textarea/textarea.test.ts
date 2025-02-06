@@ -72,7 +72,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
       })
 
       it('should show remaining characters when maxlength is set', async () => {
-        const el = await fixture<GdsInput>(
+        const el = await fixture<GdsTextarea>(
           html`<gds-textarea
             variant="${variant}"
             maxlength="10"
@@ -105,9 +105,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             value="My value"
           ></gds-textarea>`,
         )
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         expect(clearButtonEl).to.exist
       })
     })
@@ -121,9 +119,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
             value="My value"
           ></gds-textarea>`,
         )
-        const clearButtonEl = el.shadowRoot?.querySelector(
-          '.field [label="Clear input"]',
-        )
+        const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
         expect(el.value).to.equal('')
       })
@@ -163,26 +159,11 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
       })
 
-      it('should have a aria-describedby attribute that matches the supporting text id', async () => {
-        const el = await fixture<GdsTextarea>(
-          html`<gds-textarea
-            variant="${variant}"
-            supporting-text="My supporting text"
-          ></gds-textarea>`,
-        )
-        const inputEl = el.shadowRoot?.querySelector('textarea')
-        const supportingTextEl =
-          el.shadowRoot?.querySelector('#supporting-text')
-        expect(inputEl?.getAttribute('aria-describedby')).to.equal(
-          supportingTextEl?.id,
-        )
-      })
-
       it('should focus when clicking on the field', async () => {
         const el = await fixture<GdsTextarea>(
           html`<gds-textarea variant="${variant}"></gds-textarea>`,
         )
-        await clickOnElement(el.shadowRoot?.querySelector('.field') as Element)
+        await clickOnElement(el.test_getFieldElement())
         expect(document.activeElement).to.equal(el)
       })
 

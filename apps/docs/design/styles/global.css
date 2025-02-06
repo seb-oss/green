@@ -1,10 +1,5 @@
 @import 'reset.css';
-@import 'tokens.css';
 @import 'motion.css';
-@import 'typography.css';
-@import 'utilities.css';
-@import 'responsive.css';
-@import 'syntax.css';
 
 @layer core {
   html {
@@ -15,8 +10,6 @@
   }
 
   body {
-    background-color: var(--gds-sys-color-background-background);
-    color: var(--gds-sys-color-content-content);
     letter-spacing: 0.1px;
     -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
@@ -25,20 +18,20 @@
     font-family: var(--gds-font-family);
   }
 
-  p,
-  li {
-    > a {
-      text-decoration: underline;
+  @media screen and (prefers-color-scheme: dark) {
+    body {
+      background-color: var(--gds-color-l1-background-primary);
+      color: var(--gds-color-l1-content-primary);
     }
   }
 
-  * {
-    &:focus-visible {
-      outline-offset: 2px;
-      outline-color: currentColor;
-      outline-width: 2px;
-      outline-style: solid;
-    }
+  body {
+    letter-spacing: 0.1px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-text-size-adjust: 100%;
+    font-family: var(--gds-font-family);
   }
 
   @layer blocks;

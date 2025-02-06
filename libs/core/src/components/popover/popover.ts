@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -23,6 +23,7 @@ import '../icon/icons/cross-small'
 
 /**
  * @element gds-popover
+ * @status stable
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
@@ -36,6 +37,7 @@ import '../icon/icons/cross-small'
  * @slot trigger - Trigger element for the popover. If this slot is occupied, the popover will listen to keydown and click events on the trigger and automtaiclly open when clicked or when the trigger is focused and `ArrowDown` is pressed.
  */
 @gdsCustomElement('gds-popover')
+@localized()
 export class GdsPopover extends GdsElement {
   static styles = unsafeCSS(styles)
 
@@ -82,6 +84,12 @@ export class GdsPopover extends GdsElement {
    */
   @property({ type: Boolean })
   disableMobileStyles = false
+
+  /**
+   * Whether the popover should autofocus the first slotted child when opened.
+   */
+  @property({ type: Boolean })
+  autofocus = false
 
   /**
    * A callback that returns the minimum width of the popover.
@@ -264,7 +272,7 @@ export class GdsPopover extends GdsElement {
               size="small"
               rank="tertiary"
             >
-              <gds-icon-cross-small></icon-cross-small>
+              <gds-icon-cross-small></gds-icon-cross-small>
             </gds-button>
           </header>
           <slot></slot>
@@ -282,14 +290,17 @@ export class GdsPopover extends GdsElement {
         !this.nonmodal
           ? this._elDialog?.showModal()
           : this._elDialog?.setAttribute('open', 'true')
-        this.#focusFirstSlottedChild()
+
+        if (this.autofocus) {
+          // Make this optional
+          this.#focusFirstSlottedChild()
+          // VoiceOver hack
+          setTimeout(() => this.#focusFirstSlottedChild(), 250)
+        }
 
         requestAnimationFrame(() => {
           if (this.#backdropEl) this.#backdropEl.show = true
         })
-
-        // Another VoiceOver hack
-        setTimeout(() => this.#focusFirstSlottedChild(), 250)
 
         // Wait for the next event loop cycle before registering the close listener, to avoid the dialog closing immediately
         setTimeout(

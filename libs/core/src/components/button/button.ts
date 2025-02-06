@@ -16,13 +16,15 @@ import style from './button.style.css?inline'
 
 import '../../primitives/ripple'
 
+const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
+
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
 
 /**
  * @element gds-button
  * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
- * @status beta
+ * @status stable
  *
  * @slot - Content to be displayed as the button label.
  * @slot lead - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed before the label.
@@ -130,6 +132,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       button: true,
       circle: this.#isIconButton,
       icon: this.#isIconButton,
+      xs: this.size === 'xs',
       small: this.size === 'small',
       large: this.size === 'large',
       positive: this.variant === 'positive',
@@ -155,7 +158,9 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
         @click="${this.#handleClick}"
         ${forwardAttributes(
           (attr) =>
-            attr.name.startsWith('gds-aria') || attr.name === 'gds-role',
+            attr.name.startsWith('gds-aria') ||
+            attr.name === 'gds-role' ||
+            ariaForwards.includes(attr.name),
         )}
       >
         <slot name="lead"></slot>

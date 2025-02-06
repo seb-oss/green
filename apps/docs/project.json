@@ -13,9 +13,9 @@
         "outputPath": "dist/apps/docs",
         "assets": [
           {
-            "input": "dist/libs/core/src",
-            "glob": "index.bundle.js",
-            "output": "./core-out"
+            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "glob": "**/*.woff2",
+            "output": "./fonts/SEBSansSerifGDS"
           }
         ]
       },
@@ -25,7 +25,7 @@
         },
         "production": {}
       },
-      "dependsOn": ["react:generate-core-wrappers"]
+      "dependsOn": ["core:build", "react:generate-core-wrappers"]
     },
     "serve": {
       "executor": "@nx/next:server",
@@ -35,9 +35,9 @@
         "dev": true,
         "assets": [
           {
-            "input": "dist/libs/core/src",
-            "glob": "index.bundle.js",
-            "output": "./core-out"
+            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "glob": "**/*.woff2",
+            "output": "./fonts/SEBSansSerifGDS"
           }
         ]
       },
@@ -51,7 +51,7 @@
           "dev": false
         }
       },
-      "dependsOn": ["react:generate-core-wrappers"]
+      "dependsOn": ["core:build", "react:generate-core-wrappers"]
     },
     "export": {
       "executor": "@nx/next:export",

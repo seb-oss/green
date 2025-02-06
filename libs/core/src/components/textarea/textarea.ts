@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 import { when } from 'lit/directives/when.js'
@@ -15,33 +15,29 @@ import { styles } from './textarea.styles'
 // Local Components
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
-import '../icon/icons/cross-small'
+import '../../primitives/field-base'
+import '../icon/icons/cross-large'
 import '../flex'
 import '../button'
+
+import type { GdsButton } from '../button'
 
 /**
  * @summary A custom input element that can be used in forms.
  * @status beta
  *
- * @element gds-input
+ * @element gds-textarea
  *.
  * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
  * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
  *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
  */
 @gdsCustomElement('gds-textarea')
+@localized()
 export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
-
-  @property()
-  value = ''
-
-  /**
-   * The label displayed above the field
-   */
-  @property()
-  label = ''
 
   /**
    * Rows of the textarea
@@ -56,36 +52,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   })
   rows = 4
 
-  @state()
-  private lines = 4 // Default number of lines
-  private isDragging = false // Track dragging state
-  private lastMouseY = 0 // Store the last mouse Y position
-
   /**
    * The supporting text displayed between the label and the field itself
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
-
-  /**
-   * Whether the supporting text should be displayed or not.
-   */
-  @property({
-    attribute: 'show-extended-supporting-text',
-    type: Boolean,
-    reflect: true,
-  })
-  showExtendedSupportingText = false
-
-  /**
-   * If the input is Disabled
-   */
-  @property({
-    attribute: 'disabled',
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
 
   /**
    * Whether the field should be clearable or not. Clearable fields will display a clear button when
@@ -105,7 +76,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
    *
    */
   @property()
-  resize = ''
+  resize = 'auto'
 
   /**
    * The maximum number of characters allowed in the field.
@@ -132,13 +103,26 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
 
-  @state()
-  trailSlotOccupied = false
+  /**
+   * A reference to the clear button element. Returns null if there is no clear button.
+   * Intended for use in integration tests.
+   */
+  test_getClearButton() {
+    return this.shadowRoot?.querySelector<GdsButton>('#clear-button')
+  }
+
+  /**
+   * A reference to the field element. This does not refer to the input element itself,
+   * but the wrapper that makes up the visual field.
+   * Intended for use in integration tests.
+   */
+  test_getFieldElement() {
+    return this.shadowRoot?.querySelector('#field')
+  }
 
   constructor() {
     super()
-    this.lines = 0
-    this.resize = 'auto'
+    this.value = ''
   }
 
   connectedCallback(): void {
@@ -149,7 +133,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    this.#addResizeHandleListener()
+    // In the unlikely event the componet is disconnected in the middle of dragging,
+    // this will prevent dangling event listeners on `document`.
+    this.#stopDragging()
   }
 
   render() {
@@ -167,53 +153,35 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return html`
       <gds-form-control-header>
         <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text"
-          >${this.supportingText}</span
-        >
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
         <slot
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
       </gds-form-control-header>
 
-      <gds-flex
-        position="relative"
-        align-items="flex-start"
-        justify-content="center"
-        gap="xs"
-        level="3"
-        padding=${!this.trailSlotOccupied ? 's s s m' : 's m s m'}
-        border-radius="xs"
-        .background=${this.disabled
-          ? 'disabled'
-          : this.invalid
-            ? 'negative-secondary'
-            : 'secondary'}
-        .border=${this.disabled
-          ? ''
-          : this.invalid
-            ? '4xs/negative'
-            : '4xs/secondary'}
-        class="field ${this.invalid ? 'invalid' : ''}"
+      <gds-field-base
+        id="field"
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
         @click=${this.#handleFieldClick}
-        cursor="text"
+        multiline
       >
-        ${this.#renderSlotLead()} ${this.#renderNativeTextarea()}
-
-        <gds-flex gap="xs" align-items="center" block-size="l">
-          ${this.#renderClearButton()} ${this.#renderSlotTrail()}
-        </gds-flex>
+        ${this.#renderFieldContents()}
         ${when(
           this.resize === 'auto',
           () => this.#renderResizeHandle(),
           () => nothing,
         )}
-      </gds-flex>
+      </gds-field-base>
 
       <gds-form-control-footer
         .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - this.value.length}
-        .validationMessage=${this.invalid && this.validationMessage}
+        this.maxlength - (this.value?.length || 0)}
+        .validationMessage=${this.invalid &&
+        (this.errorMessage || this.validationMessage)}
       ></gds-form-control-footer>
     `
   }
@@ -246,8 +214,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @watch('value')
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
-      const lines = (element.value.split('\n').length || 1).toString()
-      element?.style.setProperty('--_lines', lines.toString())
+      this.rows = Math.max(this.rows, element.value.split('\n').length)
+      this.#resizeState.lines = Number(this.rows)
+      element?.style.setProperty('--_lines', this.rows.toString())
     })
   }
 
@@ -257,16 +226,37 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
+    this.dispatchEvent(
+      new Event('gds-input-cleared', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+  }
+
+  #renderFieldContents() {
+    const elements = [
+      this.#renderSlotLead(),
+      this.#renderNativeTextarea(),
+      this.#renderClearButton(),
+      this.#renderSlotTrail(),
+    ]
+
+    return elements.map((element) => html`${element}`)
   }
 
   #renderSlotLead() {
-    return html` <slot name="lead"></slot> `
+    return html`<slot slot="lead" name="lead"></slot>`
   }
 
   #renderSlotTrail() {
-    return html`
-      <slot name="trail" @slotchange=${this.#handleSlotChange}></slot>
-    `
+    return html`<slot slot="trail" name="trail"></slot>`
   }
 
   #addResizeHandleListener() {
@@ -274,73 +264,60 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     if (resizeHandle) {
       resizeHandle.addEventListener(
         'mousedown',
-        this.#startDragging.bind(this) as EventListener,
+        this.#startDragging as EventListener,
       )
     }
   }
 
-  #startDragging(event: MouseEvent) {
+  // State for the resize handle action
+  #resizeState = {
+    isDragging: false,
+    startMouseY: 0,
+    lines: this.rows,
+    deltaLines: 0,
+    lineHeight: 0,
+  }
+
+  #startDragging = (event: MouseEvent) => {
     event.preventDefault() // Prevent default behavior
-    this.isDragging = true // Set dragging state to true
-    this.lastMouseY = event.clientY // Store the initial mouse position
-    document.addEventListener('mousemove', this.#onDrag.bind(this))
-    document.addEventListener('mouseup', this.#stopDragging.bind(this))
+    this.#resizeState.isDragging = true // Set dragging state to true
+    this.#resizeState.startMouseY = event.clientY // Store the initial mouse position
+    this.#resizeState.lineHeight = parseFloat(
+      getComputedStyle(this.elTextarea).lineHeight,
+    )
+    document.addEventListener('mousemove', this.#onDrag)
+    document.addEventListener('mouseup', this.#stopDragging)
   }
 
-  #onDrag(event: MouseEvent) {
-    if (!this.isDragging) return // If not dragging, return
-    const deltaY = event.clientY - this.lastMouseY // Calculate the movement in Y direction
+  #onDrag = (event: MouseEvent) => {
+    if (!this.#resizeState.isDragging) return // If not dragging, return
 
-    // Check if the movement exceeds the threshold (10 or 20 pixels)
-    if (Math.abs(deltaY) >= 20) {
-      if (deltaY > 0) {
-        // Dragging down, increase lines
-        this.lines += 1
-      } else {
-        // Dragging up, decrease lines
-        this.lines = Math.max(1, this.lines - 1) // Ensure lines do not go below 1
-      }
+    const deltaY = event.clientY - this.#resizeState.startMouseY // Calculate the movement in Y direction
+    this.#resizeState.deltaLines = Math.round(
+      deltaY / this.#resizeState.lineHeight,
+    ) // Calculate the number of lines to increase or decrease
 
-      this.elTextareaAsync.then((element) => {
-        element?.style.setProperty('--_lines', this.lines.toString())
-      })
-
-      // Update lastMouseY to the current position
-      this.lastMouseY = event.clientY
-    }
+    this.elTextareaAsync.then((element) => {
+      element?.style.setProperty(
+        '--_lines',
+        (this.#resizeState.lines + this.#resizeState.deltaLines).toString(),
+      )
+    })
   }
 
-  #stopDragging() {
-    this.isDragging = false // Set dragging state to false
-    document.removeEventListener('mousemove', this.#onDrag.bind(this))
-    document.removeEventListener('mouseup', this.#stopDragging.bind(this))
+  #stopDragging = () => {
+    this.#resizeState.isDragging = false // Set dragging state to false
+    this.#resizeState.lines += this.#resizeState.deltaLines // Update the number of lines
+    this.rows = this.#resizeState.lines // Update the rows attribute
+    this.#resizeState.deltaLines = 0
+    document.removeEventListener('mousemove', this.#onDrag)
+    document.removeEventListener('mouseup', this.#stopDragging)
   }
 
   #renderResizeHandle() {
     return html`
-      <gds-container
-        class="resize-handle"
-        position="absolute"
-        inset="auto auto -10px 0"
-        width="100%"
-        height="20px"
-        cursor="row-resize"
-        z-index="2"
-        @mousedown=${this.#startDragging}
-      ></gds-container>
+      <div class="resize-handle" @mousedown=${this.#startDragging}></div>
     `
-  }
-
-  #handleSlotChange(event: Event) {
-    const slot = event.target as HTMLSlotElement
-    const assignedNodes = slot.assignedNodes({ flatten: true })
-    this.trailSlotOccupied =
-      assignedNodes.length > 0 &&
-      assignedNodes.some(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE ||
-          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
-      )
   }
 
   #renderNativeTextarea() {
@@ -350,12 +327,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         @change=${this.#handleOnChange}
         .value=${this.value}
         id="input"
-        style="${this.invalid
-          ? 'color: var(--gds-color-l3-content-negative);'
-          : this.disabled
-            ? 'color: currentColor;pointer-events:none;'
-            : null}"
-        aria-describedby="supporting-text"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       ></textarea>
@@ -363,7 +335,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   }
 
   #renderClearButton() {
-    if (this.clearable && this.value.length > 0)
+    if (this.clearable && (this.value?.length || 0) > 0)
       return html`
         <gds-button
           size="small"
@@ -372,8 +344,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           ?disabled="${this.disabled}"
           label="${msg('Clear input')}"
           @click=${this.#handleClearBtnClick}
+          slot="action"
+          id="clear-button"
         >
-          <gds-icon-cross-small />
+          <gds-icon-cross-large />
         </gds-button>
       `
     else return nothing

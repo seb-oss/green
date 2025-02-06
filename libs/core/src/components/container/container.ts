@@ -25,7 +25,7 @@ export class GdsContainer extends GdsElement {
   static styles = [tokens, ContainerCSS]
 
   /**
-   * Controls the display property of the container.
+   * Controls the display property.
    * Supports all valid CSS display values.
    */
   @styleExpressionProperty({
@@ -34,7 +34,8 @@ export class GdsContainer extends GdsElement {
   display = 'block'
 
   /**
-   * The level of the container can be used to apply background and color styles from the corresponding level.
+   * The level of the container is used to resolve the color tokens from the corresponding level.
+   * Check the [Color System documentation page](./?path=/docs/style-colors--docs) for more information.
    *
    * Default value for `gds-container` is set to `2`.
    *
@@ -45,7 +46,7 @@ export class GdsContainer extends GdsElement {
   level = '2'
 
   /**
-   * Controls the `place-items` property of the container.
+   * Controls the `place-items` property.
    * Supports all valid CSS `place-items` values.
    */
   @styleExpressionProperty({
@@ -54,7 +55,7 @@ export class GdsContainer extends GdsElement {
   'place-items'?: string
 
   /**
-   * Controls the `place-content` property of the container.
+   * Controls the `place-content` property.
    * Supports all valid CSS `place-content` values.
    */
   @styleExpressionProperty({
@@ -63,7 +64,7 @@ export class GdsContainer extends GdsElement {
   'place-content'?: string
 
   /**
-   * Controls the color property of the container.
+   * Controls the color property.
    * Supports all the color tokens from the design system.
    *
    * ```html
@@ -114,7 +115,7 @@ export class GdsContainer extends GdsElement {
   color?: string
 
   /**
-   * Controls the background property of the card.
+   * Controls the background property.
    * Supports all the color tokens from the design system.
    *
    * Adding transparency to the background color:
@@ -168,7 +169,7 @@ export class GdsContainer extends GdsElement {
   background?: string
 
   /**
-   * Controls the border property of the card.
+   * Controls the border property.
    * Supports all tokens from the design system.
    *
    * @property border
@@ -241,6 +242,10 @@ export class GdsContainer extends GdsElement {
   })
   border?: string
 
+  /**
+   * Controls the border-color property.
+   * Supports all the color tokens from the design system.
+   */
   @styleExpressionProperty({
     valueTemplate: function (v: string) {
       const [color] = v.split('/')
@@ -291,6 +296,10 @@ export class GdsContainer extends GdsElement {
   })
   'border-color'?: string
 
+  /**
+   * Controls the border-width property.
+   * Supports all the border style values.
+   */
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
       const top = values[0]
@@ -310,7 +319,7 @@ export class GdsContainer extends GdsElement {
   'border-width'?: string
 
   /**
-   * Controls the border-radius property of the container.
+   * Controls the border-radius property.
    * Supports all the size tokens from the design system.
    *
    * You can apply radius in each corner like this:
@@ -329,7 +338,7 @@ export class GdsContainer extends GdsElement {
    *
    *  * These are the available values you can use to define Border Radius
    *
-   * `0, 4XS, 3XS, 2XS, XS, S, M, L, XL, 2XL, 3XL, 4XL, 5XL, 6XL, 7XL, 8XL, MAX`
+   * `0, 4xs, 3xs, 2xs, xs, s, m, l, xl, 2xl, 3xl, 4xl, 5xl, 6xl, 7xl, 8xl, max`
    *
    */
   @styleExpressionProperty({
@@ -338,7 +347,7 @@ export class GdsContainer extends GdsElement {
   'border-radius'?: string
 
   /**
-   * Controls the opacity property of the container.
+   * Controls the opacity property.
    *
    * You can apply opacity like this:
    *
@@ -358,7 +367,7 @@ export class GdsContainer extends GdsElement {
    * You can apply padding in each side like this:
    *
    * ```html
-   * <gds-flex padding="xl"></gds-flex>
+   * <gds-container padding="xl"></gds-container>
    * ```
    *
    * `xl` in this case will be applied to all breakpoints and sides.
@@ -366,7 +375,7 @@ export class GdsContainer extends GdsElement {
    * Padding also support breakpoint syntax like this:
    *
    * ```html
-   * <gds-flex padding="xs{s} m{m} l{xl}"></gds-flex>
+   * <gds-container padding="xs{s} m{m} l{xl}"></gds-container>
    * ```
    *
    * The above example will apply the padding style of `xs` for `small` devices, `m` for `medium` devices, and `xl` for large devices.
@@ -382,12 +391,17 @@ export class GdsContainer extends GdsElement {
   'padding-block'?: string
 
   /**
-   * Controls the margin of the text.
+   * Controls the margin property.
    * Supports all the default margin values.
    */
   @styleExpressionProperty({
     valueTemplate: (v) => {
-      return v === 'auto' ? 'auto' : `var(--gds-space-${v})`
+      const sign = v.startsWith('-') ? 'neg' : 'pos'
+      const val =
+        sign == 'pos'
+          ? `var(--gds-space-${v})`
+          : `calc(var(--gds-space-${v.substring(1)}) * -1)`
+      return v === 'auto' ? 'auto' : val
     },
     styleTemplate: (_prop, values) => {
       const transformValue = (v: string) => (v === 'auto' ? 'auto' : `${v}`)
@@ -403,7 +417,7 @@ export class GdsContainer extends GdsElement {
   margin?: string
 
   /**
-   * Controls the position property of the flex.
+   * Controls the position property.
    * Supports all valid CSS position values.
    */
   @styleExpressionProperty({
@@ -412,7 +426,7 @@ export class GdsContainer extends GdsElement {
   position?: string
 
   /**
-   * Controls the inset property of the flex.
+   * Controls the inset property.
    * Supports all valid CSS inset values.
    */
   @styleExpressionProperty({
@@ -421,7 +435,7 @@ export class GdsContainer extends GdsElement {
   inset?: string
 
   /**
-   * Controls the overflow property of the flex.
+   * Controls the overflow property.
    * Supports all valid CSS overflow values.
    */
   @styleExpressionProperty({
@@ -430,54 +444,7 @@ export class GdsContainer extends GdsElement {
   overflow?: string
 
   /**
-   * Controls the grid-column property of the flex.
-   * Supports all valid CSS grid-column values.
-   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
-   *
-   * ```html
-   * <gds-flex grid-column="2 / -1"></gds-flex>
-   * ```
-   *
-   * The above example will apply the grid-column style of `2 / -1`.
-   * The column can be applied to the flex using shorthand like grid-column="1 / 2"
-   *
-   * The column also support breakpoint syntax like this:
-   *
-   * ```html
-   * <gds-flex grid-column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
-   * ```
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
-  })
-  'grid-column'?: string
-
-  /**
-   * Controls the grid-row property of the flex.
-   * Supports all valid CSS grid-row values.
-   *
-   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
-   *
-   * ```html
-   * <gds-flex grid-row="2 / -1"></gds-flex>
-   * ```
-   *
-   * The above example will apply the grid-row style of `2 / -1`.
-   * The row can be applied to the flex using shorthand like grid-row="1 / 2"
-   *
-   * The row also support breakpoint syntax like this:
-   *
-   * ```html
-   * <gds-flex grid-row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-flex>
-   * ```
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => `${v}`,
-  })
-  'grid-row'?: string
-
-  /**
-   * Controls the height property of the flex.
+   * Controls the height property.
    * Supports all valid CSS height values.
    *
    * @property height
@@ -488,7 +455,7 @@ export class GdsContainer extends GdsElement {
   height?: string
 
   /**
-   * Controls the `max-height` property of the flex.
+   * Controls the `max-height` property.
    * Supports all valid CSS `max-height` values.
    *
    * @property max-height
@@ -499,7 +466,7 @@ export class GdsContainer extends GdsElement {
   'max-height'?: string
 
   /**
-   * Controls the `min-height` property of the flex.
+   * Controls the `min-height` property.
    * Supports all valid CSS `min-height` values.
    *
    * @property min-height
@@ -510,7 +477,7 @@ export class GdsContainer extends GdsElement {
   'min-height'?: string
 
   /**
-   * Controls the `block-size` property of the flex.
+   * Controls the `block-size` property.
    * Supports only tokens.
    *
    * @property block-size
@@ -519,7 +486,7 @@ export class GdsContainer extends GdsElement {
   'block-size'?: string
 
   /**
-   * Controls the `min-block-size` property of the flex.
+   * Controls the `min-block-size` property.
    * Supports only tokens.
    *
    * @property min-block-size
@@ -528,7 +495,7 @@ export class GdsContainer extends GdsElement {
   'min-block-size'?: string
 
   /**
-   * Controls the width property of the flex.
+   * Controls the width property.
    * Supports all valid CSS height values.
    *
    *  @property width
@@ -539,7 +506,7 @@ export class GdsContainer extends GdsElement {
   width?: string
 
   /**
-   * Controls the `max-width` property of the flex.
+   * Controls the `max-width` property.
    * Supports all valid CSS `max-width` values.
    *
    * @property max-width
@@ -550,7 +517,7 @@ export class GdsContainer extends GdsElement {
   'max-width'?: string
 
   /**
-   * Controls the `min-width` property of the flex.
+   * Controls the `min-width` property.
    * Supports all valid CSS `min-width` values.
    *
    * @property min-width
@@ -561,7 +528,7 @@ export class GdsContainer extends GdsElement {
   'min-width'?: string
 
   /**
-   * Controls the `inline-size` property of the flex.
+   * Controls the `inline-size` property.
    * Supports only token
    *
    * @property inline-size
@@ -570,7 +537,18 @@ export class GdsContainer extends GdsElement {
   'inline-size'?: string
 
   /**
-   * Controls the cursor property of the flex.
+   * Controls the `box-sizing` property.
+   * Supports only token
+   *
+   * @property box-sizing
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+  })
+  'box-sizing'?: string
+
+  /**
+   * Controls the cursor property.
    * Supports all valid CSS cursor values.
    */
   @styleExpressionProperty({
@@ -579,7 +557,7 @@ export class GdsContainer extends GdsElement {
   cursor?: string
 
   /**
-   * Controls the `pointer-events` property of the flex.
+   * Controls the `pointer-events` property.
    * Supports all valid CSS `pointer-events` values.
    *
    * @property pointer-events
@@ -590,7 +568,7 @@ export class GdsContainer extends GdsElement {
   'pointer-events'?: string
 
   /**
-   * Controls the `user-select` property of the flex.
+   * Controls the `user-select` property.
    * Supports all valid CSS `user-select` values.
    *
    * @property user-select
@@ -601,7 +579,7 @@ export class GdsContainer extends GdsElement {
   'user-select'?: string
 
   /**
-   * Controls the z-index property of the flex.
+   * Controls the z-index property.
    * Supports all valid CSS z-index values.
    */
   @styleExpressionProperty({
@@ -610,7 +588,7 @@ export class GdsContainer extends GdsElement {
   'z-index'?: string
 
   /**
-   * Controls the `transform` property of the flex.
+   * Controls the `transform` property.
    * Supports all valid CSS `transform` values.
    *
    * @property transform
@@ -621,7 +599,7 @@ export class GdsContainer extends GdsElement {
   transform?: string
 
   /**
-   * Controls the `transform-style` property of the flex.
+   * Controls the `transform-style` property.
    * Supports all valid CSS `transform-style` values.
    *
    * @property transform-style
@@ -632,7 +610,7 @@ export class GdsContainer extends GdsElement {
   'transform-style'?: string
 
   /**
-   * Controls the `transition` property of the flex.
+   * Controls the `transition` property.
    * Supports all valid CSS `transition` values.
    *
    * @property transition
@@ -643,7 +621,7 @@ export class GdsContainer extends GdsElement {
   transition?: string
 
   /**
-   * Controls the `transition-behavior` property of the flex.
+   * Controls the `transition-behavior` property.
    * Supports all valid CSS `transition-behavior` values.
    *
    * @property transition-behavior
@@ -654,7 +632,7 @@ export class GdsContainer extends GdsElement {
   'transition-behavior'?: string
 
   /**
-   * Controls the `animation` property of the flex.
+   * Controls the `animation` property.
    * Supports all valid CSS `animation` values.
    *
    * @property animation
@@ -723,6 +701,64 @@ export class GdsContainer extends GdsElement {
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   'font-weight'?: string
+
+  /**
+   * Controls the grid-column property.
+   * Supports all valid CSS grid-column values.
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * ```html
+   * <gds-container grid-column="2 / -1"></gds-container>
+   * ```
+   *
+   * The above example will apply the grid-column style of `2 / -1`.
+   * The column can be applied using shorthand like grid-column="1 / 2"
+   *
+   * The column also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-container grid-column="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-container>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  'grid-column'?: string
+
+  /**
+   * Controls the grid-row property.
+   * Supports all valid CSS grid-row values.
+   *
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+   *
+   * ```html
+   * <gds-container grid-row="2 / -1"></gds-container>
+   * ```
+   *
+   * The above example will apply the grid-row style of `2 / -1`.
+   * The row can be applied using shorthand like grid-row="1 / 2"
+   *
+   * The row also support breakpoint syntax like this:
+   *
+   * ```html
+   * <gds-container grid-row="s{1 / 2} m{2 / 3} l{3 / 4}"></gds-container>
+   * ```
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  'grid-row'?: string
+
+  /**
+   * Controls the `flex` property.
+   * Supports all valid CSS `flex` values.
+   *
+   * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/flex
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `${v}`,
+  })
+  flex?: string
 
   render() {
     return html`<slot></slot>`

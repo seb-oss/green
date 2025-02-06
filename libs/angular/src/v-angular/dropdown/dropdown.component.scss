@@ -6,6 +6,23 @@
 @use '../../../../chlorophyll/src/scss/tokens' as tokens;
 
 :host {
+  --sg-border-radius: 0.25rem;
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+  --text-primary-color: #333;
+  --sg-form-control-bg: #fff;
+  --grey-000: hsl(0 0% 100%);
+  --grey-100: hsl(0, 0%, 97%);
+  --grey-200: hsl(0, 0%, 91%);
+  --grey-300: hsl(0, 0%, 87%);
+  --grey-400: hsl(0, 0%, 81%);
+  --grey-500: hsl(0, 0%, 68%);
+  --grey-600: hsl(0, 0%, 53%);
+  --grey-700: hsl(0, 0%, 29%);
+  --grey-800: hsl(0, 0%, 20%);
+  --grey-900: hsl(0, 0%, 10%);
+  --grey-1000: hsl(0 0% 0%);
+
   label {
     display: block;
     font-weight: 500;
@@ -20,17 +37,16 @@
     width: 100%;
   }
 
+  .gds-field-label--optional {
+    font-weight: 400;
+  }
+
   button {
-    @include button.reset();
-    @include button.base();
-    @include button.secondary();
     @include dropdown.dropdown-trigger();
 
-    font-size: inherit;
+    font-size: 1rem;
     font-weight: normal;
     line-height: 1.125;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
 
     width: 100%;
 
@@ -41,9 +57,51 @@
     &:hover {
       background: var(--gds-sys-color-base-200);
     }
+
+    &:active {
+      background: inherit;
+      color: inherit;
+      border-color: inherit;
+    }
+
+    &:disabled,
+    &.disabled {
+      --text-primary-color: var(--grey-600);
+      background: var(--grey-300);
+      color: var(--grey-600);
+      cursor: not-allowed;
+    }
+
+    &.nggv-field--error {
+      border-bottom: 2px solid #9f000a;
+    }
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        margin-top: 0.128rem;
+        align-items: center;
+      }
+    }
   }
 
   .dropdown {
+    width: 100%;
     position: relative;
+
+    nggv-dropdown-list {
+      width: 100%;
+    }
   }
 }

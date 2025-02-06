@@ -5,7 +5,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsContainer } from '../container'
-import FlexCSS from './flex.style'
+import FlexCSS from './flex.styles'
 
 /**
  * The `gds-flex` component is a flex element that can be used to wrap other components and control the layout of its children.
@@ -130,6 +130,16 @@ export class GdsFlex extends GdsContainer {
     valueTemplate: (v) => v,
   })
   'flex-direction'?: string
+
+  /**
+   * Controls the flex-wrap property of the flex.
+   * Supports all valid CSS flex-wrap values.
+   */
+  @styleExpressionProperty({
+    property: 'flex-wrap',
+    valueTemplate: (v) => v,
+  })
+  'flex-wrap'?: string
 
   connectedCallback(): void {
     super.connectedCallback()

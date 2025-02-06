@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { APP_BASE_HREF, CommonModule } from '@angular/common'
 import { RouterTestingModule } from '@angular/router/testing'
 import {
@@ -7,12 +8,12 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link'
-import { ButtonStyle, NgvButtonComponent } from './button.component'
+import { NggvExternalLinkDirective } from '@sebgroup/green-angular/src/v-angular/external-link'
+import { ButtonStyle, NggvButtonComponent } from './button.component'
 
 interface StoryClickable {
-  text: string
   clickAction: (event: Event) => void
+  text: string
 }
 
 const getButtonText = (type: ButtonStyle): string => {
@@ -21,14 +22,14 @@ const getButtonText = (type: ButtonStyle): string => {
 
 export default {
   title: 'V-Angular/Button',
-  component: NgvButtonComponent,
+  component: NggvButtonComponent,
   decorators: [
     applicationConfig({
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }),
     moduleMetadata({
       imports: [CommonModule, RouterTestingModule],
-      declarations: [NgvExternalLinkDirective],
+      declarations: [NggvExternalLinkDirective],
     }),
   ],
   argTypes: {
@@ -51,7 +52,9 @@ export default {
   },
 } as Meta
 
-const Template: StoryFn<NgvButtonComponent & StoryClickable> = (args: any) => ({
+const Template: StoryFn<NggvButtonComponent & StoryClickable> = (
+  args: any,
+) => ({
   template: /*html*/ `
     <div class="button-wrapper button-wrapper--{{ text }}">
       <nggv-button

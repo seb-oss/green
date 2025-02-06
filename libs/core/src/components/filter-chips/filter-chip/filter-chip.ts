@@ -17,6 +17,9 @@ import '../../icon/icons/checkmark.js'
 
 /**
  * @element gds-filter-chip
+ * @status stable
+ *
+ * * @slot Content of the Filter chip
  */
 @gdsCustomElement('gds-filter-chip')
 export class GdsFilterChip<ValueT = any> extends GdsElement {
@@ -38,16 +41,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
     super.connectedCallback()
     this.setAttribute('role', 'none')
     TransitionalStyles.instance.apply(this, 'gds-filter-chip')
-
-    // Apply transitional styles to the button if connectedCallback is called directly
-    // This is here mainly for the toggle feature in Storybook to work
-    this._button.then((btn) => {
-      TransitionalStyles.instance.apply(btn, 'gds-button')
-    })
   }
-
-  @queryAsync(getScopedTagName('gds-button'))
-  private _button!: Promise<GdsButton>
 
   render() {
     const btnClasses = {

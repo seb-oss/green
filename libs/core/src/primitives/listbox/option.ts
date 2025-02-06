@@ -3,11 +3,11 @@ import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
-import { Focusable } from '../../mixins/focusable'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
+import { Focusable } from '../../utils/mixins/focusable'
 import style from './option.styles'
 
 import '../../components/icon/icons/checkmark'
@@ -19,7 +19,6 @@ export interface OptionsContainer extends HTMLElement {
 
 /**
  * @element gds-option
- * @internal
  *
  * A listbox option is an option in a listbox widget.
  * This primitive corresponds to the aria `option` role: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/option_role
@@ -125,7 +124,11 @@ export class GdsOption extends Focusable(GdsElement) {
     const checkbox = html`
       <span class="checkbox ${classMap({ checked: this.selected })}">
         ${this.selected
-          ? html`<gds-icon-checkmark stroke="4"></gds-icon-checkmark>`
+          ? html`<gds-icon-checkmark
+              width="10"
+              height="10"
+              stroke="4"
+            ></gds-icon-checkmark>`
           : ''}
       </span>
     `

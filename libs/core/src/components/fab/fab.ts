@@ -5,6 +5,7 @@ import styles from './fab.styles'
 
 /**
  * @element gds-fab
+ * @status stable
  *
  * The Floating Action Button is used for functions central to the user experience, such as
  * support and help features that needs to be accessible at all times.
@@ -21,7 +22,6 @@ export class GdsFab extends GdsButton {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
-    selector: '[part="_button"]',
   })
   position?: string
 
@@ -42,7 +42,6 @@ export class GdsFab extends GdsButton {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => v,
-    selector: '[part="_button"]',
   })
   inset?: string
 

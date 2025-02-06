@@ -1,7 +1,13 @@
+/* eslint-disable no-console */
 import '../core/core.globals'
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { CommonModule } from '@angular/common'
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core'
+import {
+  APP_INITIALIZER,
+  CUSTOM_ELEMENTS_SCHEMA,
+  importProvidersFrom,
+} from '@angular/core'
 import {
   AbstractControl,
   ReactiveFormsModule,
@@ -14,7 +20,7 @@ import {
   TranslocoLoader,
   TranslocoModule,
   TranslocoService,
-} from '@ngneat/transloco'
+} from '@jsverse/transloco'
 import {
   applicationConfig,
   Meta,
@@ -32,20 +38,21 @@ import {
   tap,
 } from 'rxjs'
 
-import { NgvButtonComponent } from '../button/button.component'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggvButtonComponent } from '../button/button.component'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
-import { NgvCheckboxComponent } from '../checkbox/checkbox.component'
+import { NggvCheckboxComponent } from '../checkbox/checkbox.component'
 import { DropdownUtils } from '../core/core.utils'
-import { NgvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
-import { NgvDropdownComponent } from '../dropdown/dropdown.component'
-import { NgvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
-import { NgvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
-import { NgvExternalLinkDirective } from '../external-link/external-link.directive'
-import { NgvI18nModule } from '../i18n/i18n.module'
-import { NgvInfoCircleComponent } from '../info-circle/info-circle.component'
-import { createMask, NgvInputMaskModule } from '../input-mask'
-import { NgvTooltipDirective } from '../tooltip/tooltip.directive'
-import { NgvInputComponent } from './input.component'
+import { NggvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
+import { NggvDropdownComponent } from '../dropdown/dropdown.component'
+import { NggvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { NggvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
+import { NggvExternalLinkDirective } from '../external-link/external-link.directive'
+import { NggvI18nModule } from '../i18n/i18n.module'
+import { NggvInfoCircleComponent } from '../info-circle/info-circle.component'
+import { createMask, NggvInputMaskModule } from '../input-mask'
+import { NggvTooltipDirective } from '../tooltip/tooltip.directive'
+import { NggvInputComponent } from './input.component'
 
 interface WithExtras {
   notice: string
@@ -91,13 +98,13 @@ function translocoStorybookInitializer(translocoService: TranslocoService) {
   }
 }
 
-const meta: Meta<NgvInputComponent> = {
+const meta: Meta<NggvInputComponent> = {
   title: 'V-Angular/Input',
-  component: NgvInputComponent,
+  component: NggvInputComponent,
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom(NgvI18nModule),
+        importProvidersFrom(NggvI18nModule),
         {
           provide: APP_INITIALIZER,
           useFactory: translocoStorybookInitializer, // our initializer hook
@@ -109,36 +116,38 @@ const meta: Meta<NgvInputComponent> = {
     }),
     moduleMetadata({
       declarations: [
-        NgvButtonComponent,
-        NgvDropdownComponent,
-        NgvDropdownListComponent,
-        NgvTypeaheadDropdownListComponent,
-        NgvCheckboxComponent,
-        NgvTooltipDirective,
-        NgvInfoCircleComponent,
+        NggvButtonComponent,
+        NggvDropdownComponent,
+        NggvDropdownListComponent,
+        NggvTypeaheadDropdownListComponent,
+        NggvCheckboxComponent,
+        NggvTooltipDirective,
+        NggvInfoCircleComponent,
         CharacterCountdownDirective,
-        NgvExternalLinkDirective,
+        NggvExternalLinkDirective,
       ],
       imports: [
-        NgvTypeaheadDirective,
+        NggvTypeaheadDirective,
         CommonModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
+        NggvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
         TranslocoModule,
+        NggCoreWrapperModule,
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 }
 export default meta
 
-const Template: StoryFn<NgvInputComponent & WithExtras> = (args: any) => ({
+const Template: StoryFn<NggvInputComponent & WithExtras> = (args: any) => ({
   props: args,
 })
 
-const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: any,
-) => {
+const TemplateWithFormControl: StoryFn<
+  NggvInputComponent & WithExtras & any
+> = (args: any) => {
   const ctrl = new UntypedFormControl(args.ngModel, [
     Validators.required,
     Validators.maxLength(12),
@@ -170,7 +179,7 @@ const TemplateWithFormControl: StoryFn<NgvInputComponent & WithExtras & any> = (
       [formControl]="formControl">
     </nggv-input>
     <div style="margin-top: 1rem">
-      <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+      <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
     </div>
     `,
     props: {
@@ -204,13 +213,13 @@ WithFormControl.args = {
   valid: undefined,
 }
 
-const TemplateWithError: StoryFn<NgvInputComponent & WithExtras> = (
+const TemplateWithError: StoryFn<NggvInputComponent & WithExtras> = (
   args: any,
 ) => ({
   props: { ...args },
 })
 
-const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
+const TemplateWithCustomLabel: StoryFn<NggvInputComponent & WithExtras> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -230,11 +239,10 @@ const TemplateWithCustomLabel: StoryFn<NgvInputComponent & WithExtras> = (
 export const WithCustomErrorAndCountdown = TemplateWithError.bind({})
 WithCustomErrorAndCountdown.args = {
   ...Primary.args,
-  maxlength: 25,
+  maxLength: 25,
   showCharacterCountdown: true,
   invalid: true,
   error: 'this is an error message',
-  badgeText: 'SEB',
 }
 
 export const WithCustomError = TemplateWithError.bind({})
@@ -259,8 +267,8 @@ const resetObservable$ = new Observable((subscriber) => {
 })
 
 const TemplateWithPrefixAndOrSuffix: StoryFn<
-  NgvInputComponent & WithExtras & any
-> = (args: NgvInputComponent & WithExtras & any) => ({
+  NggvInputComponent & WithExtras & any
+> = (args: NggvInputComponent & WithExtras & any) => ({
   styles: [`.suffix-prefix-padding{ padding: 0.75em }`],
   template: /*html*/ `
   <h2>Prefix and/or suffix</h2>
@@ -340,8 +348,8 @@ WithPrefixAndOrSuffix.args = {
 }
 
 export const WithResetObservable: StoryFn<
-  NgvInputComponent & WithExtras & any
-> = (_args: NgvInputComponent & WithExtras & any) => {
+  NggvInputComponent & WithExtras & any
+> = (_args: NggvInputComponent & WithExtras & any) => {
   const formGroup = new UntypedFormGroup({
     resetForm: new UntypedFormControl('Annoying orange'),
   })
@@ -364,8 +372,8 @@ export const WithResetObservable: StoryFn<
   }
 }
 
-export const WithMaxLength: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras & any,
+export const WithMaxLength: StoryFn<NggvInputComponent & WithExtras & any> = (
+  args: NggvInputComponent & WithExtras & any,
 ) => {
   const formGroup = new UntypedFormGroup({
     remittanceInformation: new UntypedFormControl(
@@ -431,8 +439,8 @@ let phoneFCValue = ''
 let licenseFCValue = ''
 let ipFCValue = ''
 
-const TemplateWithInputMask: StoryFn<NgvInputComponent & WithExtras & any> = (
-  args: NgvInputComponent & WithExtras & any,
+const TemplateWithInputMask: StoryFn<NggvInputComponent & WithExtras & any> = (
+  args: NggvInputComponent & WithExtras & any,
 ) => {
   const dateFC = new UntypedFormControl(dateFCValue, [Validators.required])
   const emailFC = new UntypedFormControl(emailFCValue)
@@ -629,7 +637,7 @@ WithDisplayDisabledAsLocked.args = {
   displayDisabledAsLocked: true,
 }
 
-const TemplateWithTypeAhead: StoryFn<NgvInputComponent & WithExtras> = (
+const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
   args: any,
 ) => {
   const options = [

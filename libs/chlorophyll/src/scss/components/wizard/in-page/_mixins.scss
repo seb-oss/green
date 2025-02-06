@@ -30,7 +30,7 @@
   padding: 0;
 
   &:not(.completed, .active) {
-    color: var(--gds-sys-color-base-500);
+    color: var(--gds-sys-color-text-secondary);
   }
 
   .review-content {
@@ -148,6 +148,7 @@
       margin-left: 0.25rem;
       width: 1.5rem;
       height: 1.5rem;
+      align-content: center;
     }
   }
 

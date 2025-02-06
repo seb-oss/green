@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
 import { property, queryAsync } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -17,7 +17,7 @@ import '../popover'
 
 /**
  * @element gds-context-menu
- * @status beta
+ * @status stable
  *
  * The context menu is presented in-context to the related data, so users don’t lose
  * their place in the app. It appears upon interaction with the 3 dot button and
@@ -29,6 +29,7 @@ import '../popover'
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
 @gdsCustomElement('gds-context-menu')
+@localized()
 export class GdsContextMenu extends GdsElement {
   static styles = [styles]
 

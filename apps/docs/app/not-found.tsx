@@ -1,6 +1,5 @@
-import Link from 'next/link'
-import Grid from '@/grid/grid'
-import Content from '&/content/content'
+import { Link } from 'next-view-transitions'
+import { GdsContainer, GdsFlex, GdsText } from '$/import/components'
 
 import type { Metadata } from 'next'
 
@@ -16,16 +15,12 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <Content layout="home">
-      <Grid
-        columns={1}
-        gapBlock="large"
-        paddingInline="large"
-        paddingBlock="large"
-      >
-        <h1 className="heading-medium">404 - Page Not Found</h1>
-        <Link href={'/'}>Go back</Link>
-      </Grid>
-    </Content>
+    <GdsFlex flex-direction="column" gap="4xl">
+      <GdsContainer>
+        <GdsText font-size="display-2xl">404</GdsText>
+        <GdsText tag="h1">Page Not Found</GdsText>
+      </GdsContainer>
+      <Link href={'/'}>Go back</Link>
+    </GdsFlex>
   )
 }

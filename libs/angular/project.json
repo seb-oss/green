@@ -27,6 +27,7 @@
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/angular"],
+      "dependsOn": ["core:build"],
       "options": {
         "jestConfig": "libs/angular/jest.config.ts"
       }

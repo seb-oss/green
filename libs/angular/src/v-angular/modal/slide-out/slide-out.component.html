@@ -17,24 +17,24 @@
       [class.entered]="shown"
       role="dialog"
       aria-modal="true"
-      aria-labelledby="sdv-modal-title"
-      aria-describedby="sdv-modal-body"
+      aria-labelledby="gds-modal-title"
+      aria-describedby="gds-modal-body"
     >
       <header class="gds-slide-out__header">
-        <h3 class="gds-slide-out__heading" id="sdv-modal-title">
+        <h3 id="gds-modal-title">
           {{ heading || title || '' }}
         </h3>
         <button
           data-testid="modal-close-button"
-          class="close"
+          class="nggv-modal-slideout__close"
           (click)="this.close()"
+          [attr.aria-label]="closeButtonAriaLabel"
         >
-          <span className="sr-only">Close</span>
           <i></i>
         </button>
       </header>
 
-      <section id="sdv-modal-body">
+      <section id="modal-body">
         <div class="gds-slide-out__content hide-if-empty">
           <div *ngIf="content" [innerHtml]="content"></div>
           <ng-content></ng-content>
@@ -42,7 +42,7 @@
         <ng-content select="[slot='outside-content']"></ng-content>
       </section>
 
-      <footer class="sdv-modal-dialog__actions">
+      <footer class="modal-dialog__actions">
         <button
           class="danger"
           type="reset"
@@ -66,6 +66,7 @@
         </button>
 
         <button
+          class="primary"
           type="submit"
           [attr.data-thook]="'dialog-' + (_buttons?.positive || 'positive')"
           (click)="onAction($event, 'positive')"
@@ -78,7 +79,7 @@
     </div>
 
     <div
-      class="gds-backdrop"
+      class="nggv-backdrop"
       data-thook="slideout-backdrop"
       (click)="close()"
     ></div>

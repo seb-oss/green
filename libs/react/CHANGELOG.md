@@ -1,5 +1,55 @@
 # Changelog
 
+## 3.23.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Update props naming and types
+- Updated dependencies [c259ac4]
+- Updated dependencies [3a9af88]
+- Updated dependencies [776f056]
+  - @sebgroup/green-core@1.63.1
+
+## 3.23.0
+
+### Minor Changes
+
+- 23f052c: **SegmentedControl**: Update to match core component
+
+## 3.22.0
+
+### Minor Changes
+
+- c1cba06: **Dropdown:** Pass `required` prop down to Core component
+
+### Patch Changes
+
+- Updated dependencies [7ba5610]
+  - @sebgroup/chlorophyll@3.6.10
+
+## 3.21.0
+
+### Minor Changes
+
+- 1347472: **Modal:** Make bodyScrollLock optional through prop. Fixes #1742
+- 1347472: **Dropdown:** Expose `gds-ui-state` event through wrapper
+
+## 3.20.2
+
+### Patch Changes
+
+- 2b58b66: Modal react close button fix
+- Updated dependencies [de5d0f2]
+  - @sebgroup/green-core@1.48.1
+
+## 3.20.1
+
+### Patch Changes
+
+- 5f337ca: Alert Ribbon Close Button fix
+- Updated dependencies [5f337ca]
+  - @sebgroup/chlorophyll@3.6.8
+
 ## 3.20.0
 
 ### Minor Changes

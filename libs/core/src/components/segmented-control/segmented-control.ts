@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 
@@ -26,15 +26,16 @@ const debounce = (fn: () => void, delay: number) => {
 
 /**
  * @element gds-segmented-control
- * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+ * @status stable
  *
- * @status beta
+ * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  *
  * @slot - Segments to display in the control
  *
- * @event changed - Fires when the selected segment is changed
+ * @event change - Fires when the selected segment is changed
  */
 @gdsCustomElement('gds-segmented-control')
+@localized()
 export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
 
@@ -126,7 +127,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
   }
 
   @resizeObserver()
-  @watch('segMinWidth')
+  @watch('value')
   private _recalculateMinWidth() {
     this.updateComplete.then(() => {
       this.#updateScrollBtnStateDebounced()
@@ -146,6 +147,8 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
         entries.forEach((entry) => {
           const segment = entry.target as GdsSegment
           segment._isVisible = entry.intersectionRatio > 0.99
+          // update arrows visibility once isVisible changes
+          this.#updateScrollBtnStateDebounced()
         })
       },
       {
@@ -160,18 +163,22 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
 
   #scrollLeft = () => {
     const nextLeftOutOfView = this.segments.filter(
-      (s, i, arr) => arr[i + 2]?.isVisible && !s.isVisible,
+      (s, i, arr) => arr[i + 1]?.isVisible && !s.isVisible,
     )[0]
 
-    nextLeftOutOfView.scrollIntoView()
+    if (!nextLeftOutOfView) return
+
+    this._elTrack.scrollLeft -= nextLeftOutOfView.offsetWidth
   }
 
   #scrollRight = () => {
     const nextRightOutOfView = this.segments
-      .filter((s, i, arr) => arr[i - 2]?.isVisible && !s.isVisible)
+      .filter((s, i, arr) => arr[i - 1]?.isVisible && !s.isVisible)
       .reverse()[0]
 
-    nextRightOutOfView.scrollIntoView()
+    if (!nextRightOutOfView) return
+
+    this._elTrack.scrollLeft += nextRightOutOfView.offsetWidth
   }
 
   // Updates the visibility of the scroll buttons
@@ -227,7 +234,7 @@ export class GdsSegmentedControl<ValueT = any> extends GdsElement {
       if (selectedSegment) {
         this.segments.forEach((s) => (s.selected = false))
         selectedSegment.selected = true
-        selectedSegment.scrollIntoView()
+        this._elTrack.scrollLeft = selectedSegment.offsetLeft
       }
     })
   }

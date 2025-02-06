@@ -1,5 +1,49 @@
 # Changelog
 
+## 3.6.14
+
+### Patch Changes
+
+- 0213060: Chaning dropdown trigger colors to correct ones
+- Updated dependencies [7fc5d17]
+  - @sebgroup/fonts@2.0.3
+
+## 3.6.13
+
+### Patch Changes
+
+- 3331d19: Tabs not selected now have same size as selected tabs
+
+## 3.6.12
+
+### Patch Changes
+
+- 85759d1: Wizard next button icon alignment fix
+
+## 3.6.11
+
+### Patch Changes
+
+- c185f41: Fixed contrast for inactive in-page wizard step card
+
+## 3.6.10
+
+### Patch Changes
+
+- 7ba5610: Hover on focused qhost button now have visible text
+
+## 3.6.9
+
+### Patch Changes
+
+- e03df6f: Modal close min width fix
+
+## 3.6.8
+
+### Patch Changes
+
+- 5f337ca: Alert Ribbon Close Button fix
+
 ## 3.6.7
 
 ### Patch Changes

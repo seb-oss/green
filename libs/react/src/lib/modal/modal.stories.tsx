@@ -1,5 +1,7 @@
+/* eslint no-console: "off" */
 import React from 'react'
 import { useArgs } from '@storybook/preview-api'
+
 import type { Meta, StoryFn } from '@storybook/react'
 
 import Modal, { ModalProps } from './modal'
@@ -34,10 +36,12 @@ const Template: StoryFn<ModalProps> = (props) => {
   )
 }
 
-export const ModalDefault: StoryFn<ModalProps> = Template.bind({})
+export const ModalDefault: Story<ModalProps> = Template.bind({})
+
 ModalDefault.args = {
   type: 'default',
   header: 'Default Modal',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -46,7 +50,8 @@ ModalDefault.args = {
 export const SlideOutSmall: StoryFn<ModalProps> = Template.bind({})
 SlideOutSmall.args = {
   type: 'slideout',
-  header: 'SlideOut Modal',
+  header: 'SlideOut Modal - Small',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -56,7 +61,8 @@ SlideOutSmall.args = {
 export const SlideOutMedium: StoryFn<ModalProps> = Template.bind({})
 SlideOutMedium.args = {
   type: 'slideout',
-  header: 'SlideOut Modal',
+  header: 'SlideOut Modal - Medium',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -66,7 +72,8 @@ SlideOutMedium.args = {
 export const SlideOutLarge: StoryFn<ModalProps> = Template.bind({})
 SlideOutLarge.args = {
   type: 'slideout',
-  header: 'SlideOut Modal',
+  header: 'SlideOut Modal - Large',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -77,6 +84,7 @@ export const TakeOver: StoryFn<ModalProps> = Template.bind({})
 TakeOver.args = {
   type: 'takeover',
   header: 'TakeOver Modal',
+  closeText: 'Custom Close Label',
   children: 'Body content',
   confirm: 'OK',
   dismiss: 'Nope',
@@ -84,6 +92,7 @@ TakeOver.args = {
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
+  tags: ['autodocs'],
   component: Modal,
   parameters: {
     componentIds: [

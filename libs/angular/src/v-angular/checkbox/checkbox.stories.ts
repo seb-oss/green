@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import { CommonModule } from '@angular/common'
-import { importProvidersFrom } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -14,8 +17,9 @@ import {
 } from '@storybook/angular'
 import { delay } from 'rxjs/operators'
 
-import { NgvI18nModule } from '../i18n'
-import { NgvCheckboxComponent } from './checkbox.component'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggvI18nModule } from '../i18n'
+import { NggvCheckboxComponent } from './checkbox.component'
 
 interface StoryInputListener {
   checked: boolean
@@ -27,18 +31,25 @@ interface StoryInputListener {
 
 export default {
   title: 'V-Angular/Checkbox',
-  component: NgvCheckboxComponent,
+  component: NggvCheckboxComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)], // Changes: removed
+      providers: [importProvidersFrom(NggvI18nModule)], // Changes: removed
     }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NggvI18nModule,
+        NggCoreWrapperModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
 } as Meta
 
-const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
+const Template: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -48,13 +59,15 @@ const Template: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
       [value]="value"
       [disabled]="disabled"
       [required]="required"
+      [invalid]="invalid"
+      [error]="error"
       [ngModel]="checked"
       (ngModelChange)="action($event)">
     </nggv-checkbox>`,
   props: args,
 })
 
-const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
+const TemplateAlt: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -76,8 +89,8 @@ const TemplateAlt: StoryFn<NgvCheckboxComponent & StoryInputListener> = (
   props: args,
 })
 
-const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
-  args: NgvCheckboxComponent & any,
+const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
+  args: NggvCheckboxComponent & any,
 ) => {
   const grp = new UntypedFormGroup({
     vanilla: new UntypedFormControl(
@@ -102,7 +115,7 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
   }
   return {
     template: /*html*/ `
-      <label class="sdv-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
+      <label class="gds-field-label" style="margin-bottom: 0.25em">Favorite flavours:</label>
       <div [formGroup]="formGroup">
         <nggv-checkbox id="opt1"
           [name]="name"
@@ -110,6 +123,8 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           value="vanilla"
           formControlName="vanilla"
           [optional]="false"
+          [invalid]="invalid"
+          [error]="error"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Vanilla 🍦</ng-template>
@@ -120,6 +135,8 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           value="strawberry"
           formControlName="strawberry"
           [optional]="false"
+          [invalid]="invalid"
+          [error]="error"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Strawberry 🍧</ng-template>
@@ -130,13 +147,15 @@ const TemplateWithReactiveForm: StoryFn<NgvCheckboxComponent & any> = (
           value="chocolate"
           formControlName="chocolate"
           [optional]="false"
+          [invalid]="invalid"
+          [error]="error"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Chocolate 🍫</ng-template>
         </nggv-checkbox>
       </div>
       <div style="margin-top: 1rem">
-        <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+        <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
       </div>
     `,
     props: {
@@ -155,6 +174,8 @@ Single.args = {
   action: console.log,
   required: true,
   disabled: false,
+  invalid: false,
+  error: '',
   locked: false,
 }
 

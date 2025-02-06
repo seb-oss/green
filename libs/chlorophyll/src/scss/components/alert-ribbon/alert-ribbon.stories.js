@@ -27,6 +27,12 @@ export default {
     closeButton: {
       control: 'boolean',
     },
+    isCloseable: {
+      control: 'boolean',
+    },
+    closeText: {
+      control: 'text',
+    },
   },
 }
 
@@ -35,7 +41,7 @@ export default {
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-alertribbon)
  *
- * An alert ribbon is a message used to inform the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
+ * An alert ribbon is a message used to inform the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message. Note that 'closeButton' will be depricated and replaced by 'isCloseable'.
  */
 export const AlertRibbon = {
   render: (args) => `
@@ -80,6 +86,8 @@ export const AlertRibbon = {
     link: 'part of the sentence.',
     button: false,
     primaryButton: '',
-    closeButton: true,
+    closeButton: false,
+    isCloseable: true,
+    closeText: 'Close this',
   },
 }

@@ -4,6 +4,9 @@ global.CSSStyleSheet.prototype.replaceSync = (k) => false
 global.HTMLElement.prototype.attachInternals = () => {
   return new global.ElementInternals()
 }
+global.HTMLElement.prototype.closest = () => {
+  return null
+}
 
 global.ElementInternals = function () {}
 global.ElementInternals.prototype.setValidity = () => {}
@@ -11,6 +14,10 @@ global.ElementInternals.prototype.setFormValue = () => {}
 global.ElementInternals.prototype.validity = () => {
   valid: true
 }
+global.ElementInternals.prototype.checkValidity = () => {}
+global.ElementInternals.prototype.reportValidity = () => {}
+global.ElementInternals.prototype.willValidate = () => {}
+global.ElementInternals.prototype.validationMessage = ''
 
 window.matchMedia = () => {
   return {

@@ -12,24 +12,24 @@ import {
   Self,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@ngneat/transloco'
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { takeUntil } from 'rxjs'
 
 import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
-import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
-import { NgvDropdownComponent } from '../../dropdown.component'
+import { NggvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
+import { NggvDropdownComponent } from '../../dropdown.component'
 
 @Component({
   selector: 'nggv-typeahead-input',
   templateUrl: './typeahead-input.component.html',
   styleUrls: ['./typeahead-input.component.scss'],
 })
-export class NgvTypeaheadInputComponent
-  extends NgvInputComponent
+export class NggvTypeaheadInputComponent
+  extends NggvInputComponent
   implements OnInit, OnDestroy
 {
   /** Reference to the host dropdown */
-  @Input() hostComponent!: NgvDropdownComponent
+  @Input() hostComponent!: NggvDropdownComponent
 
   /** Formats each item that is displayed as an option. Only applies format if the option if it implement Option interface. */
   @Input() resultFormatter?: (option: OptionBase<any>) => string
@@ -46,6 +46,9 @@ export class NgvTypeaheadInputComponent
 
   /** Used to determine the height of the inputin html */
   buttonHeight?: number
+
+  /** @internal Used to determine wether the input has been moved or not */
+  inputMoved = false
 
   constructor(
     private element: ElementRef,
@@ -74,9 +77,9 @@ export class NgvTypeaheadInputComponent
    * Allow space to be inputted as text
    * @param event fired containing which key was released.
    */
-  @HostListener('document:keyup', ['$event'])
+  @HostListener('keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
-    if (event.code === 'Space') {
+    if (event.code === 'Space' && this.expanded) {
       event.preventDefault()
     }
   }
@@ -98,6 +101,7 @@ export class NgvTypeaheadInputComponent
         // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
         this.buttonHeight =
           this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
+        this.inputMoved = true
       }
     }, 0)
   }
@@ -112,6 +116,10 @@ export class NgvTypeaheadInputComponent
       .pipe(takeUntil(this._destroy$))
       .subscribe((state) => {
         this.expanded = state
+
+        // Calling this function from onInit caused issues when DOM has not fully been initialized because of
+        // different CSS used to hide (but not remove) from DOM
+        if (!this.inputMoved) this.moveInput()
 
         if (this.expanded) {
           // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.

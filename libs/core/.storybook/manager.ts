@@ -5,8 +5,6 @@ import '../../../.storybook/manager'
 
 import { addons } from '@storybook/manager-api'
 
-// import '../src/components/badge/index.js'
-
 const betaItems = {
   Layout: true,
   Form: true,
@@ -15,6 +13,26 @@ const betaItems = {
   Media: true,
   Content: true,
   Style: true,
+  'Rich Text': true,
+  Dialog: true,
+  Badge: true,
+  Dropdown: true,
+  Card: true,
+  Coachmark: true,
+  Container: true,
+  Datepicker: true,
+  Divider: true,
+  Flex: true,
+  Grid: true,
+  Link: true,
+  Image: true,
+  Mask: true,
+  Signal: true,
+  Select: true,
+  Spacer: true,
+  Text: true,
+  Theme: true,
+  Video: true,
 }
 
 addons.setConfig({

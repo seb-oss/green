@@ -3,6 +3,10 @@ import '../../components/container/container'
 import '../../components/card/card'
 import '../../components/flex/flex'
 import '../../components/text/text'
+import '../../components/grid/grid'
+import './size.css'
+
+import sizeTokens from '../../../../tokens/src/tokens/size.json';
 
 <Meta title="Style/Size" />
 
@@ -13,124 +17,48 @@ import '../../components/text/text'
 The spacing scale is used for margin, padding, gap, radius and all the spacing values.
 
 ### Spacing Scale
-<gds-flex flex-direction="column" gap="s">
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center" overflow="hidden">
-            <gds-text min-width="10" align-items="left">MAX*</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 max 0 0" background="tertiary" mask="right"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">8XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 8xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">7XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 7xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">6XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 6xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">5XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 5xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">4XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 4xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">3XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 3xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">2XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 2xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">XL</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 xl 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">L</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 l 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">M</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 m 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">S</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 s 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">XS</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 xs 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">2XS</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 2xs 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-    <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">3XS</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 3xs 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-        <gds-card shadow="s" border-radius="s">
-        <gds-flex gap="s" padding="s l" align-items="center">
-            <gds-text min-width="10" align-items="left">0</gds-text>
-            <gds-card border-radius="xs" width="1px" height="40px" padding="0 0 0 0" background="tertiary"></gds-card>
-        </gds-flex>
-    </gds-card>
-</gds-flex>
-
-
+<gds-grid columns={Object.keys(sizeTokens.ref.size).length} gap="xs" width="100%" auto-columns="80">
+{Object.entries(sizeTokens.ref.size).map(([size, { value }]) => (
+<gds-card padding="s" border-radius="l" key={size}>
+    <gds-flex gap="l" align-items="center" flex-direction="column">
+        <gds-card variant="secondary" padding="s" width="100%" box-sizing="border-box">
+            <gds-flex align-items="center" justify-content="center" flex-direction="column">
+                <gds-text>{size.toLowerCase()}</gds-text>
+                <gds-text tag="small" color="secondary/0.4">{value}px</gds-text>
+            </gds-flex>
+        </gds-card>
+        <gds-card 
+            height={value + 'px'}
+            max-height="400px"
+            padding="0"
+            width="100%"
+            border="0"
+            variant="tertiary">
+        </gds-card>
+    </gds-flex>
+</gds-card>
+))}
+</gds-grid>
+ 
  <br />
  <br />
  <br />
 
- ### *1 MAX
- The MAX size is the maximum size of the spacing scale used when you want to create a circular shape.
+ ### *1 max
+ The `max` size is the maximum size of the spacing scale used when you want to create a circular shape.
 
  Example
 ```
-    <gds-card border-radius="max">MAX</gds-card>
+    <gds-card border-radius="max">max</gds-card>
 ```
 
  <br />
  <br />
  <br />
 
-<gds-card background="tertiary" color="white-text" border-radius="max" width="200px">
+<gds-card variant="tertiary" border-radius="max" width="200px">
     <gds-flex align-items="center" justify-content="center"  height="200px">
-        <gds-text tag="h5">MAX (999px)</gds-text>
+        <gds-text tag="h5">max (999px)</gds-text>
     </gds-flex>
 </gds-card>
+ 

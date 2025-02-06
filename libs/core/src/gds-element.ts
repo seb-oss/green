@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { state } from 'lit/decorators.js'
 
-import { DynamicStylesController } from './dynamic-styles'
+import { DynamicStylesController } from './utils/controllers/dynamic-styles-controller'
 
 // This nis needed to support legacy decorators. Once we upgrade to TC39 standard decorators across the lib, we can remove this.
 // More info: https://lit.dev/Components/decorators/#decorator-versions
@@ -36,5 +36,15 @@ export class GdsElement extends LitElement {
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('gds-element', this.gdsElementName?.toString() || '')
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.dispatchEvent(
+      new CustomEvent('gds-element-disconnected', {
+        bubbles: true,
+        composed: false,
+      }),
+    )
   }
 }

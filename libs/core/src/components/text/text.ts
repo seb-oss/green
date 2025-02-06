@@ -6,6 +6,8 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { GdsContainer } from '../container'
+import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
 /**
@@ -17,8 +19,8 @@ import textStyles from './text.style'
  *
  */
 @gdsCustomElement('gds-text')
-export class GdsText extends GdsElement {
-  static styles = [tokens, textStyles]
+export class GdsText extends GdsContainer {
+  static styles = [tokens, defaultStyles, textStyles]
 
   /**
    * The level of the container can be used to apply background and color styles from the corresponding level.
@@ -79,6 +81,7 @@ export class GdsText extends GdsElement {
    */
   @styleExpressionProperty({
     valueTemplate: (v) => `${v}`,
+    selector: '[tag]',
     styleTemplate: (prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
@@ -100,18 +103,6 @@ export class GdsText extends GdsElement {
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   'font-weight'?: string
-
-  /**
-   * Controls the margin of the text.
-   * Supports all the default margin values.
-   *
-   * @property margin
-   */
-  @styleExpressionProperty({
-    property: 'margin',
-    valueTemplate: (v) => v,
-  })
-  margin?: string
 
   /**
    * Controls the text-wrap property of the text.
@@ -138,36 +129,6 @@ export class GdsText extends GdsElement {
   'text-transform'?: string
 
   /**
-   * Controls the max length of the text in characters.
-   * Length is by defualt in characters to keep conistency with the text content.
-   *
-   * You can apply length like this:
-   *
-   * ```html
-   * <gds-text max-width="50"></gds-text>
-   * ```
-   *
-   * @property length
-   */
-  @styleExpressionProperty({
-    property: 'max-width',
-    valueTemplate: (v) => `${v}ch`,
-  })
-  'max-width'?: string
-
-  /**
-   * Controls the max-width property of the text.
-   * Supports all valid CSS max-width values.
-   *
-   * @property max
-   */
-  @styleExpressionProperty({
-    property: 'min-width',
-    valueTemplate: (v) => `${v}ch`,
-  })
-  'min-width'?: string
-
-  /**
    * Controls the text-align property of the text.
    * Supports all valid CSS text-align values.
    *
@@ -180,13 +141,31 @@ export class GdsText extends GdsElement {
   'text-align'?: string
 
   /**
+   * Controls the text-decoration property of the text.
+   * Supports all valid CSS text-decoration values.
+   *
+   * @property text-decoration
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => v,
+    selector: '[tag]',
+  })
+  'text-decoration'?: string
+
+  /**
    * Controls the number of lines it should show.
    *
    * @property lines
    */
   @styleExpressionProperty({
-    property: '--_lines',
     valueTemplate: (v) => v,
+    styleTemplate: (_prop, values) => {
+      return `overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: ${values[0]};
+      -webkit-box-orient: vertical;`
+    },
   })
   lines?: number
 
@@ -215,13 +194,7 @@ export class GdsText extends GdsElement {
   color?: string
 
   render() {
-    const TAG_ENCODE = encodeURI(this.tag)
-    const TAG = unsafeStatic(TAG_ENCODE)
-    const classes = {
-      'no-size-set': !this['font-size'],
-      'no-weight-set': !this['font-weight'],
-      'lines-set': !!this.lines,
-    }
-    return html`<${TAG} tag class=${classMap(classes)}><slot></slot></${TAG}>`
+    const TAG = unsafeStatic(encodeURI(this.tag))
+    return html`<${TAG} tag><slot></slot></${TAG}>`
   }
 }

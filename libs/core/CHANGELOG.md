@@ -1,5 +1,292 @@
 # Changelog
 
+## 1.64.0
+
+### Minor Changes
+
+- 07cb314: **Dropdown:** Add `combobox` option
+- 07cb314: **Popover:** Add `autofocus` property to control wheter focus is automtaically moved to the popover when opened
+
+### Patch Changes
+
+- 07cb314: **Icon:** Fix invalid use of css units in SVG width/height attributes
+- 07cb314: **Transitional Styles:** Fix crash in legacy browsers
+- 07cb314: **Form controls:** Fix recursion bug in validity state update in legacy browsers
+
+## 1.63.2
+
+### Patch Changes
+
+- 7213bfb: Dropdown: Added support for size small to header
+
+## 1.63.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Fix actions button not hidden when child rerenders
+- 3a9af88: **Segmented Control:** Fix issue where indicator would not update to reflect value
+- 776f056: **Button:** Fix icon buttons getting 0 width in Safari browsers
+
+## 1.63.0
+
+### Minor Changes
+
+- 33788ef: **Text:** Font-sizes are now defined as rem units
+- c230b89: **GdsText:** Inherit all style expression props from GdsContainer
+
+### Patch Changes
+
+- 1ea5ef2: **Button:** Tweak ripple animation and hover style
+- 4933535: **FieldBase:** Update focus border-color
+
+## 1.62.5
+
+### Patch Changes
+
+- e18b5a8: **Utils:style-expression-property:** Safe guard falsy values
+
+## 1.62.4
+
+### Patch Changes
+
+- d359d06: **Button:** Fix width styling issue in 2016 design
+
+## 1.62.3
+
+### Patch Changes
+
+- c6d42ec: **Filter Chip**: Fix issue where filter chip is trying to register transitional styles for button
+
+## 1.62.2
+
+### Patch Changes
+
+- 12a3417: **Scoping:** Fix return type of `gdsCustomElement` decorator in bail-out code path
+
+## 1.62.1
+
+### Patch Changes
+
+- eb6e18e: **Datepicker:** Fix calendar button size in small variant
+- eb6e18e: **Form error state (2016):** Styling alignments
+- eb6e18e: **Dropdown:** Fix chevron alignment in 2016 design
+- 2f2987b: **Segmented Control:** Fix an issue where scroll buttons would do nothing under certain conditions
+
+## 1.62.0
+
+### Minor Changes
+
+- 5e16375: **Texarea:** Consolidate with Field Base
+- 40f905b: **Datepicker:** Consolidate with Field Base
+- f43d556: **Input:** Consolidate with Field Base
+- 4d8df8b: **Dropdown:** Consolidate with Field Base
+- f43d556: **Input:** Add transitional styles
+- 5e16375: **Textarea:** Add transitional styles
+
+### Patch Changes
+
+- 33b08a2: **Icon Button:** Update transitional styles
+- 93bac39: **Datepicker and Dropdown:** minor a11y improvements
+
+## 1.61.0
+
+### Minor Changes
+
+- 15771a0: **Textarea**: Add `gds-input-cleared` event
+- 47957aa: **Tokens:** Remove Color Tokens V1, update all components to use the new color tokens
+- 15771a0: **Rich Text:** Add configurable `captureMode`, in order to increase framework compatibility
+
+### Patch Changes
+
+- 15771a0: **Dropdown:** Emit `input` event when value is changed
+- 15771a0: **Form controls:** Add property for manually controlling error message
+- a234635: **Datepicker:** Year no longer loops around when incrementing past last available
+- 15771a0: **Dateicker:** Dispatch input event on value changed from calendar popover
+- 15771a0: **Datepicker:** Dispatch `ìnput` event on spinner change
+- 15771a0: **Input & Textarea**: Dispatch `input` event when the control is cleared
+
+## 1.60.1
+
+### Patch Changes
+
+- d144d6b: **Icon:** Fix all icons fill from black to currentColor like the rest so it gets the content color instead
+
+## 1.60.0
+
+### Minor Changes
+
+- 87b9ce0: **Link:** Use `text-decoration` prop to enable underline style instead of variants
+
+## 1.59.1
+
+### Patch Changes
+
+- eea8929: **FAB:** Pass position to host instead of internal button
+- caa5de7: **Button:** remove `width` and remove `transition` on all props keep it specific instead and add `min-block-size` on icon button.
+- 6fa9154: **Datepicker:** Fix label line-height in transitional styles
+- 1a8e4be: **FAB:** Add default `z-index`
+
+## 1.59.0
+
+### Minor Changes
+
+- f2492d2: **GdsTheme:** Include all 2023 CSS variables instead of only colors
+
+### Patch Changes
+
+- f2492d2: **GdsTheme:** Fix issue with changing `color-scheme`
+
+## 1.58.0
+
+### Minor Changes
+
+- 694a88f: **Badge:** Add new boolean prop `rounded` to have fully rounded border radius when used on form elements such as input
+
+### Patch Changes
+
+- ed505c8: **Badge:** Add missing import for dependency `gds-flex`
+
+## 1.57.0
+
+### Minor Changes
+
+- 2b8089c: **Container:** Add `box-sizing` to prevent box model from groing more than max of content
+
+### Patch Changes
+
+- 11acd29: **FAB:** Fix width issue inherited from `gds-button`, now set's the `max-width:max-content`
+
+## 1.56.0
+
+### Minor Changes
+
+- 7d40f57: **Input:** Add event to be dispatched when clearing gds-input
+
+## 1.55.1
+
+### Patch Changes
+
+- d55952a: **Divider:** Update the color property to accept the new values and improve the documentation
+
+## 1.55.0
+
+### Minor Changes
+
+- ca68597: **GdsTheme**: Add `design-version` property for granular control over transitional styles
+
+### Patch Changes
+
+- ca68597: **Segmented Control:** Transitional styles fix for legacy browsers
+
+## 1.54.1
+
+### Patch Changes
+
+- 4e47020: **Testing:** Add additional `ElementInternals` mocks for Jest. Fixes #1679
+
+## 1.54.0
+
+### Minor Changes
+
+- 9b001a9: **Rich Text:** Add details/accordion styling, improve paragraphs and spacing on blockquote, figure etc
+
+### Patch Changes
+
+- 7d4d945: **Datepicker:** Use aria live for error message, and announce form-info and sub-label in `aria-describedby`. Fixes #1274
+- 7d4d945: **Calendar:** Date labels now follows active lit-localize locale. Fixes #1274
+- 7d4d945: **Localization:** All localized components should now re-render automatically when active locale is changed
+
+## 1.53.0
+
+### Minor Changes
+
+- 277d0d4: **Core Tokens:** Enable light and dark mode tokens on root based on `gds-theme` attribute
+
+## 1.52.0
+
+### Minor Changes
+
+- f58733a: **Menu Button:** Use new leveled colors for light and dark mode, impove focus style and update stories
+
+## 1.51.0
+
+### Minor Changes
+
+- 92187bd: **Flex:** Add the `flex-wrap` property
+
+## 1.50.0
+
+### Minor Changes
+
+- 23c8827: **Link:** Add secondary variant with reversed underline
+
+## 1.49.1
+
+### Patch Changes
+
+- cdaa840: **iOS15:** Fix library wide crash on iOS/Safari 15.x
+
+## 1.49.0
+
+### Minor Changes
+
+- fedbf7a: **Link:** Add new component `gds-link` with predefined styles V1
+
+### Patch Changes
+
+- 807b8c4: **Link:** Fix the link test
+
+## 1.48.1
+
+### Patch Changes
+
+- de5d0f2: **Rich Text:** Patch padding on rich text figure
+
+## 1.48.0
+
+### Minor Changes
+
+- 474856a: **Rich text:** Add `gds-rich-text` component
+- 5bc49c8: **Dialog:** Add `gds-dialog` to Green Core
+
+## 1.47.1
+
+### Patch Changes
+
+- c533689: **Form controls:** Add nullcheck in `formAssociatedCallback`
+
+## 1.47.0
+
+### Minor Changes
+
+- 2c90cdf: **Text:** Add text decoration property with default CSS values and offset
+
+## 1.46.2
+
+### Patch Changes
+
+- 4143c5f: **Segmented Control:** Fix scrolling issue
+
+## 1.46.1
+
+### Patch Changes
+
+- a269b32: **Text:** Pass font size to tag instead of the host
+- a269b32: Minor updates on Mask, Divider, Text and Spacer
+
+## 1.46.0
+
+### Minor Changes
+
+- 5147399: **Card:** Card now has default styling and a `variant` prop to simplyfy setting card colors
+
+### Patch Changes
+
+- 5147399: **Declarative Layour:** Include level in cache key
+- 400676b: **Button:** Forwarded attributes will now update internally when changed
+- 400676b: **Form Controls:** The form control header/footer pattern is now captured in reusable primitives.
+- 6ebe461: **Form Controls:** Fix extended supporting text animation
+
 ## 1.45.3
 
 ### Patch Changes

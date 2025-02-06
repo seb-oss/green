@@ -1,5 +1,8 @@
+/* eslint-disable no-console */
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
+
 import { CommonModule } from '@angular/common'
-import { importProvidersFrom } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import {
   applicationConfig,
@@ -8,8 +11,9 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvRadioComponent } from './radio.component'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvRadioComponent } from './radio.component'
 
 interface StoryInputListener {
   selected: string
@@ -18,19 +22,26 @@ interface StoryInputListener {
 
 export default {
   title: 'V-Angular/Radio',
-  component: NgvRadioComponent,
+  component: NggvRadioComponent,
 
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NggvI18nModule,
+        NggCoreWrapperModule,
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
-} as Meta<NgvRadioComponent>
+} as Meta<NggvRadioComponent>
 
-const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
+const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
   args: any,
 ) => ({
   template: /*html*/ `
@@ -61,8 +72,8 @@ const Template: StoryFn<NgvRadioComponent & StoryInputListener> = (
   },
 })
 
-const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
-  args: NgvRadioComponent & any,
+const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
+  args: NggvRadioComponent & any,
 ) => {
   const ctrl = new FormControl(args.selected)
   ctrl.valueChanges.subscribe(console.log)
@@ -72,12 +83,14 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
   }
   return {
     template: /*html*/ `
-    <label class="sdv-field-label" style="margin-bottom: 0.25em">Field that displays disabled as locked</label>
+    <label class="gds-field-label" style="margin-bottom: 0.25em">Field that displays disabled as locked</label>
     <nggv-radio
       [name]="name"
       [value]="name + '1'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 1</ng-template>
     </nggv-radio>
@@ -86,6 +99,8 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '2'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 2</ng-template>
     </nggv-radio>
@@ -94,11 +109,13 @@ const TemplateWithFormControl: StoryFn<NgvRadioComponent & any> = (
       [value]="name + '3'"
       [formControl]="formControl"
       [locked]="locked"
+      [error]="error"
+      [invalid]="invalid"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 3</ng-template>
     </nggv-radio>
     <div style="margin-top: 1rem">
-      <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+      <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
     </div>
   `,
     props: {
@@ -114,6 +131,8 @@ Primary.args = {
   label: 'Radio label',
   name: 'radio',
   selected: 'radio2',
+  error: '',
+  invalid: false,
 }
 
 export const WithLockedInput = TemplateWithFormControl.bind({})

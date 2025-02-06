@@ -1,24 +1,30 @@
+'use client'
+
 import Link from 'next/link'
 import { allChangelogs, Changelog } from 'content'
-import Layout from '&/changelog'
+import { GdsCard, GdsFlex, GdsText } from '$/import/components'
 import { compareDesc, format, parseISO } from 'date-fns'
 
 function ChangelogCard(changelog: Changelog) {
   return (
-    <article id={changelog.version} className="log">
-      <aside>
-        <div>{changelog.version}</div>
+    <GdsFlex id={changelog.version} className="log" gap="xl">
+      <GdsCard flex-direction="column">
+        <GdsText tag="h5">{changelog.version}</GdsText>
         <time dateTime={changelog.date}>
-          {format(parseISO(changelog.date), 'LL.d.yy')}
+          <GdsText tag="small">
+            {format(parseISO(changelog.date), 'LL.d.yy')}
+          </GdsText>
         </time>
-      </aside>
-      <div>
-        <h2>
+      </GdsCard>
+      <GdsFlex flex-direction="column" flex="1" gap="xs">
+        <GdsText tag="h4">
           <Link href={changelog.url_path}>{changelog.title}</Link>
-        </h2>
-        <p>{changelog.summary}</p>
-      </div>
-    </article>
+        </GdsText>
+        <GdsText tag="p" color="secondary">
+          {changelog.summary}
+        </GdsText>
+      </GdsFlex>
+    </GdsFlex>
   )
 }
 
@@ -28,13 +34,13 @@ export default function ChangelogPage() {
   )
 
   return (
-    <Layout>
-      <h1 className="heading-medium">Changelogs</h1>
-      <section>
+    <GdsFlex max-width="80ch" flex-direction="column" gap="xl">
+      <GdsText tag="h1">Changelogs</GdsText>
+      <GdsFlex>
         {changelogs.map((changelog, idx) => (
           <ChangelogCard key={idx} {...changelog} />
         ))}
-      </section>
-    </Layout>
+      </GdsFlex>
+    </GdsFlex>
   )
 }

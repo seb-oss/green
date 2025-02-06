@@ -22,10 +22,6 @@
   <source>Clear input</source>
   <target>Rensa text</target>
 </trans-unit>
-<trans-unit id="sdc27791837e94961">
-  <source>Show extended supporting text</source>
-  <target>Visa utökad beskrivning</target>
-</trans-unit>
 <trans-unit id="s7fd3469f78111589">
   <source>Open context menu</source>
   <target>Öppna meny</target>
@@ -146,10 +142,6 @@
   <source>First available date</source>
   <target>Första tillgängliga datum</target>
 </trans-unit>
-<trans-unit id="s241bf8eb8742b138">
-  <source>Validation error</source>
-  <target>Valideringsfel</target>
-</trans-unit>
 <trans-unit id="s5febcd9b311c16fe">
   <source>Scroll right</source>
   <target>Scrolla höger</target>
@@ -157,6 +149,18 @@
 <trans-unit id="s9af3c72c33088826">
   <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
   <target>Det finns <x id="0" equiv-text="${errors.length}"/> fel att åtgärda innan du kan fortsätta:</target>
+</trans-unit>
+<trans-unit id="sb77f4dce69a005ac">
+  <source>Error message.</source>
+  <target>Felmeddelande.</target>
+</trans-unit>
+<trans-unit id="s83c436ed1bc16dfb">
+  <source>Show more information</source>
+  <target>Visa mer information</target>
+</trans-unit>
+<trans-unit id="s2ceb11be2290bb1b">
+  <source>Cancel</source>
+  <target>Avbryt</target>
 </trans-unit>
 </body>
 </file>

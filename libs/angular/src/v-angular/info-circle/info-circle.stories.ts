@@ -1,21 +1,21 @@
 import { CommonModule } from '@angular/common'
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
-import { NgvTooltipModule } from '../tooltip/tooltip.module'
-import { NgvInfoCircleComponent } from './info-circle.component'
+import { NggvTooltipModule } from '../tooltip/tooltip.module'
+import { NggvInfoCircleComponent } from './info-circle.component'
 
 export default {
   title: 'V-Angular/Info Circle',
-  component: NgvInfoCircleComponent,
+  component: NggvInfoCircleComponent,
   decorators: [
     moduleMetadata({
-      declarations: [NgvInfoCircleComponent],
-      imports: [CommonModule, NgvTooltipModule],
+      declarations: [NggvInfoCircleComponent],
+      imports: [CommonModule, NggvTooltipModule],
     }),
   ],
 } as Meta
 
-type StoryArgs = NgvInfoCircleComponent
+type StoryArgs = NggvInfoCircleComponent
 
 const Template: StoryFn<StoryArgs> = (args: StoryArgs) => ({
   template: /*html*/ `

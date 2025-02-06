@@ -22,7 +22,7 @@
       appearance: none;
       background: transparent;
       border-width: 0;
-      color: var(--gds-sys-color-content-content);
+      color: var(--text-primary-color);
       cursor: pointer;
       flex-grow: 1;
       flex-shrink: 0;
@@ -36,6 +36,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 100%;
+      border-radius: 0;
     }
 
     @media (pointer: fine) {
