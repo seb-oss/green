@@ -1,8 +1,9 @@
 import { localized } from '@lit/localize'
-import { property, query, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { tokens } from '../../tokens.style'
+import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
@@ -21,15 +22,7 @@ import '../button/button'
  * @element gds-select
  * @status beta
  *
- * A custom select component that extends GdsFormControlElement to provide enhanced
- * select/dropdown functionality with proper value propagation and event handling.
- *
- * Key Features:
- * - Supports both single and multiple selections
- * - Handles value propagation correctly between the native select and custom component
- * - Manages proper event bubbling and custom event dispatch
- * - Provides visual feedback through a customizable UI
- * - Supports form validation
+ * `gds-select` is a wrapper component for the native select element.
  *
  * Usage Example:
  * ```html
@@ -41,15 +34,9 @@ import '../button/button'
  * </gds-select>
  * ```
  *
- * Event Handling:
- * The component stops propagation of native select events and dispatches its own
- * custom events after ensuring internal state is properly updated. This prevents
- * race conditions and ensures consistent behavior.
- *
- * Accessibility:
- * - Maintains ARIA labels and descriptions
- * - Preserves native select keyboard navigation
- * - Provides proper focus management
+ * The wrapped select element will be cloned into the component's shadow DOM. Therefore, event listeners should only be added on the host
+ * element, and not on the enclosed select element. Also, state should also be handled only through the host.
+ * Setting value or selected props on the select element will not work as expected.
  *
  * @fires {CustomEvent} change - Fired when the selection changes with detail: { value: string }
  * @fires {CustomEvent} input - Fired on input with detail: { value: string }
@@ -59,7 +46,9 @@ import '../button/button'
  */
 @gdsCustomElement('gds-select')
 @localized()
-export class GdsSelect extends GdsFormControlElement<string> {
+export class GdsSelect<ValueT = string> extends GdsFormControlElement<
+  ValueT | ValueT[]
+> {
   static styles = [tokens, styles]
 
   /**
@@ -77,144 +66,143 @@ export class GdsSelect extends GdsFormControlElement<string> {
   size: 'large' | 'small' = 'large'
 
   /**
-   * Indicates whether the select element allows multiple selections.
-   * When set to true, the select component will enable multiline options,
-   * allowing users to select multiple items at once.
-   */
-  @state()
-  private multiline = false
-
-  /**
-   * Internal state tracking the currently selected value(s).
-   * Can be either a single string or array of strings for multiple select.
-   */
-  @state()
-  private selectedValue: string | string[] = ''
-
-  /**
    * Reference to the native select element.
    */
   @query('select')
-  selectElement!: HTMLSelectElement
+  selectElement?: HTMLSelectElement
 
-  /*
-   * Value is not initialized here in purpose so the external
-   * prop or native select can determine the initial value
-   */
-  constructor() {
-    super()
+  #isValueInitialized = false
+  @property()
+  get value() {
+    return this._internalValue as ValueT
+  }
+  set value(value: ValueT | undefined) {
+    this.#isValueInitialized || (this.#isValueInitialized = true)
+    this._internalValue = value
   }
 
   /**
-   * Gets the initial value from a select element, handling both single and multiple selections.
+   * Returns the display value for the select component.
+   * For single-select mode, this is the selected option text.
+   * For multi-select mode, this is a comma-separated list of selected option texts.
    */
-  private getInitialSelectValue(select: HTMLSelectElement): string {
-    if (select.multiple) {
-      const selectedOptions = Array.from(select.selectedOptions).map(
-        (option) => option.value,
-      )
-      return selectedOptions.join(',')
-    }
-    return select.value
+  get displayValue() {
+    if (!this.selectElement) return ''
+    return Array.from(this.selectElement.selectedOptions)
+      .map((o) => o.text)
+      .join(', ')
   }
 
-  @watch('value')
-  firstUpdated() {
-    const slotElement = this.shadowRoot?.querySelector('slot:not([name])')
-    if (slotElement) {
-      const assignedNodes = (slotElement as HTMLSlotElement).assignedNodes({
-        flatten: true,
-      })
-      const selectContainer =
-        this.shadowRoot?.querySelector('.select-container')
-      assignedNodes.forEach((node) => {
-        if (
-          node.nodeType === Node.ELEMENT_NODE &&
-          (node as HTMLElement).nodeName.toUpperCase() === 'SELECT'
-        ) {
-          const select = node as HTMLSelectElement
-          this.multiline = select.multiple
-          selectContainer?.appendChild(select)
-          // Do not override a programmatic value.
-          // (Also note that if no external value is provided, we will default to the native select’s value.)
-          if (!this.value) {
-            const initialValue = this.getInitialSelectValue(select)
-            this.value = initialValue
-            const initialSelectedOptions = Array.from(
-              select.selectedOptions,
-            ).map((option) => option.value)
-            if (this.multiline) {
-              this.selectedValue = initialSelectedOptions
-            } else {
-              this.selectedValue = initialSelectedOptions.slice(0, 1)
-            }
-          }
-        }
-      })
-    }
-
-    const nativeSelect = this.shadowRoot?.querySelector(
-      '.select-container select',
-    ) as HTMLSelectElement | null
-
-    if (nativeSelect) {
-      nativeSelect.setAttribute('aria-describedby', 'supporting-text')
-      nativeSelect.setAttribute('aria-label', this.label)
-      nativeSelect.addEventListener(
-        'change',
-        this.handleSelectChange.bind(this),
-      )
-      nativeSelect.addEventListener('input', (e) => e.stopPropagation())
-    }
+  /**
+   * Wheter the select element is in multiple selection mode.
+   */
+  get multiple() {
+    return this.selectElement?.multiple ?? false
   }
 
-  updated(changedProperties: Map<PropertyKey, unknown>): void {
-    // Always force-sync the native select to the programmatically provided value.
-    const nativeSelect = this.getSelectElement()
-    if (nativeSelect && changedProperties.has('value')) {
-      if (!nativeSelect.multiple) {
-        // Check if the programmatic value exists on one of the options.
-        const optionExists = Array.from(nativeSelect.options).some(
-          (option) => option.value === this.value,
+  @query('.select-container')
+  private _elSelectContainer?: HTMLDivElement
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.updateComplete.then(() => {
+      this._captureDOM()
+      this._handleValueChange()
+    })
+  }
+
+  render() {
+    const CLASSES = {
+      multiple: this.multiple,
+    }
+
+    return html`
+      <gds-form-control-header class="size-${this.size}">
+        <label for="select" slot="label" id="label-text">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+      </gds-form-control-header>
+
+      <gds-field-base
+        .size=${this.size}
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
+        .multiline=${this.multiple}
+        align-items=${this.multiple ? 'flex-start' : 'center'}
+        class=${classMap(CLASSES)}
+      >
+        ${this.#renderFieldContents()}
+      </gds-field-base>
+
+      <gds-form-control-footer
+        class="size-${this.size}"
+        .validationMessage=${this.invalid &&
+        (this.errorMessage || this.validationMessage)}
+      ></gds-form-control-footer>
+    `
+  }
+
+  @observeLightDOM({
+    childList: true,
+    subtree: true,
+    attributes: true,
+    characterData: true,
+  })
+  private _captureDOM() {
+    if (
+      !this.shadowRoot ||
+      this.childNodes.length === 0 ||
+      !this._elSelectContainer
+    )
+      return
+
+    const cloned = Array.from(this.children)
+      .filter((n) => n.nodeName === 'SELECT')
+      .map((node: Node) => {
+        const clone = node.cloneNode(true)
+        clone.addEventListener('change', this.#handleSelectElementChange)
+        clone.addEventListener('input', this.#handleSelectElementChange)
+        ;(clone as HTMLElement).setAttribute(
+          'aria-describedby',
+          'supporting-text extended-supporting-text sub-label message',
         )
-        if (!optionExists && this.value) {
-          // If not, inject a dummy option (with the same display text as value).
-          const newOption = document.createElement('option')
-          newOption.value = this.value
-          newOption.text = this.value
-          newOption.selected = true
-          // Prepend so it becomes the visible selection.
-          nativeSelect.prepend(newOption)
-        } else {
-          nativeSelect.value = this.value || ''
-        }
-        this.selectedValue = this.value ? [this.value] : []
-      } else if (nativeSelect.multiple) {
-        const newValues = this.value ? this.value.split(',') : []
-        Array.from(nativeSelect.options).forEach((option) => {
-          option.selected = newValues.includes(option.value)
-        })
-        this.selectedValue = newValues
+        ;(clone as HTMLElement).setAttribute('id', 'select')
+        if (!this.#isValueInitialized)
+          this.value = (clone as HTMLSelectElement).value as ValueT
+        return clone
+      })
+
+    this._elSelectContainer.replaceChildren(...cloned)
+  }
+
+  /**
+   * Handles form reset events by selecting the first option.
+   */
+  override formResetCallback(): void {
+    if (!this.selectElement) return
+
+    if (this.selectElement.multiple) {
+      Array.from(this.selectElement.options).forEach((option) => {
+        option.selected = false
+      })
+      this.value = [] as ValueT
+    } else {
+      const firstOption = this.selectElement.options[0]
+      if (firstOption) {
+        this.value = firstOption.value as any
+        this.selectElement.value = firstOption.value
       }
     }
   }
 
-  private handleSelectChange(event: Event) {
-    event.stopPropagation()
-    const nativeSelect = event.target as HTMLSelectElement
-    const selectedOptions = Array.from(nativeSelect.selectedOptions)
-      .map((option) => option.value)
-      .filter((value) => value !== '') // Filter out empty values
+  override _getValidityAnchor() {
+    return this.selectElement as HTMLElement
+  }
 
-    if (nativeSelect.multiple) {
-      this.selectedValue = selectedOptions
-      this.value = selectedOptions.length > 0 ? selectedOptions.join(',') : ''
-    } else {
-      this.selectedValue = [selectedOptions[0]]
-      this.value = selectedOptions[0]
-    }
-
-    this.checkValidity()
+  #handleSelectElementChange = (e: Event) => {
+    e.stopPropagation()
+    this.#setValueFromSelectElement()
 
     this.dispatchEvent(
       new CustomEvent('input', {
@@ -233,67 +221,29 @@ export class GdsSelect extends GdsFormControlElement<string> {
     )
   }
 
-  /**
-   * Handles form reset events by selecting the first option.
-   */
-  override formResetCallback(): void {
-    const nativeSelect = this.getSelectElement()
-    if (nativeSelect) {
-      if (nativeSelect.multiple) {
-        Array.from(nativeSelect.options).forEach((option) => {
-          option.selected = false
-        })
-        this.selectedValue = []
-        this.value = ''
-      } else {
-        const firstOption = nativeSelect.options[0]
-        if (firstOption) {
-          this.value = firstOption.value
-          nativeSelect.value = firstOption.value
-          this.selectedValue = [firstOption.value]
-        }
-      }
+  #setValueFromSelectElement() {
+    if (!this.selectElement) return
+
+    if (this.multiple) {
+      const selectedOptions = Array.from(this.selectElement.selectedOptions)
+      this.value = selectedOptions.map((o) => o.value) as ValueT
+    } else {
+      this.value = this.selectElement.value as ValueT
     }
   }
 
-  getSelectElement(): HTMLSelectElement | null {
-    return this.shadowRoot?.querySelector('.select-container select') ?? null
-  }
+  @watch('value')
+  private _handleValueChange() {
+    if (!this.selectElement) return
 
-  _getValidityAnchor() {
-    return this.selectElement
-  }
+    if (this.multiple) {
+      const valArr = (this.value as string[]) || []
+      Array.from(this.selectElement.options).forEach((option) => {
+        option.selected = valArr.includes(option.value)
+      })
+    } else this.selectElement.value = this.value as string
 
-  render() {
-    const CLASSES = {
-      multiple: this.multiline,
-    }
-
-    return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label for="input" slot="label" id="label-text">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-      </gds-form-control-header>
-
-      <gds-field-base
-        .size=${this.size}
-        .disabled=${this.disabled}
-        .invalid=${this.invalid}
-        .multiline=${this.multiline}
-        align-items=${this.multiline ? 'flex-start' : 'center'}
-        class=${classMap(CLASSES)}
-      >
-        ${this.#renderFieldContents()}
-      </gds-field-base>
-
-      <gds-form-control-footer
-        class="size-${this.size}"
-        .validationMessage=${this.invalid &&
-        (this.errorMessage || this.validationMessage)}
-      ></gds-form-control-footer>
-    `
+    this.requestUpdate()
   }
 
   /**
@@ -315,7 +265,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * Renders the leading slot content if provided.
    */
   #renderSlotLead() {
-    return html` <slot name="lead" slot="lead"></slot> `
+    return html`<slot name="lead" slot="lead"></slot>`
   }
 
   /**
@@ -323,19 +273,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * Shows either selected option text or placeholder.
    */
   #renderMainLabel() {
-    if (!this.multiline) {
-      const selectElement = this.getSelectElement()
-      let displayText = this.value // Default to showing the programmatic value
-
-      if (selectElement) {
-        const selectedOptions = Array.from(selectElement.selectedOptions)
-        if (selectedOptions.length > 0) {
-          // If there is a selected option, use its text
-          displayText = selectedOptions[0].text
-        }
-      }
-
-      return html`<label id="placeholder">${displayText}</label>`
+    if (!this.multiple) {
+      return html`<label id="placeholder">${this.displayValue}</label>`
     }
   }
 
@@ -344,10 +283,7 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * The select container is where the native select is moved to.
    */
   #renderMainSlot() {
-    return html`
-      <slot></slot>
-      <div class="select-container"></div>
-    `
+    return html`<div class="select-container"></div>`
   }
 
   /**
@@ -355,19 +291,8 @@ export class GdsSelect extends GdsFormControlElement<string> {
    * Provides visual indication of dropdown functionality.
    */
   #renderChevron() {
-    if (!this.multiline) {
-      return html`
-        <gds-button
-          tabindex="-1"
-          size="small"
-          rank="tertiary"
-          variant="${this.invalid ? 'negative' : 'neutral'}"
-          ?disabled="${this.disabled}"
-          slot="action"
-        >
-          <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-        </gds-button>
-      `
+    if (!this.multiple) {
+      return html` <gds-icon-chevron-bottom></gds-icon-chevron-bottom> `
     }
   }
 }

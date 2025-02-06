@@ -1,5 +1,5 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml } from '@open-wc/testing'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 
 import type { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 
@@ -35,7 +35,7 @@ describe('<gds-select>', () => {
       await el.updateComplete
 
       // Get the select element through the component method
-      const selectElement = el.getSelectElement()
+      const selectElement = el.selectElement
       expect(selectElement).to.exist
       expect(selectElement.options.length).to.equal(3) // 1 for "Please select" + 2 options
       expect(selectElement.options[0].text).to.equal('Please select')
@@ -56,19 +56,6 @@ describe('<gds-select>', () => {
         </gds-select>`,
       )
       await expect(el).to.be.accessible()
-    })
-
-    it('should have an aria-describedby attribute that matches the supporting text id', async () => {
-      const el = await fixture<GdsSelect>(
-        html`<gds-select supporting-text="My supporting text">
-          <select></select>
-        </gds-select>`,
-      )
-      const inputEl = el.getSelectElement() // Use the method to get the select element
-      const supportingTextEl = el.shadowRoot?.querySelector('#supporting-text')
-      expect(inputEl?.getAttribute('aria-describedby')).to.equal(
-        supportingTextEl?.id,
-      )
     })
   })
 
@@ -100,34 +87,34 @@ describe('<gds-select>', () => {
       expect(options[0].textContent).to.equal('Option 1') // Verify the first option's text
     })
 
-    it('should return value when an option is pre-selected', async () => {
+    it('should select option based on value', async () => {
       const el = await fixture<GdsSelect>(html`
-        <gds-select label="Select Label">
+        <gds-select label="Select Label" value="1">
           <select>
             <option value="">Please select</option>
-            <option value="1" selected>Option 1</option>
+            <option value="1">Option 1</option>
             <option value="2">Option 2</option>
           </select>
         </gds-select>
       `)
 
       await el.updateComplete
-      expect(el.value).to.equal('1')
+      expect(el.displayValue).to.equal('Option 1')
     })
 
-    it('should handle multiple pre-selected options in multiple mode', async () => {
+    it('should return a comma separated string as display value for multiple selections', async () => {
       const el = await fixture<GdsSelect>(html`
-        <gds-select label="Select Label">
+        <gds-select label="Select Label" .value=${['1', '2']}>
           <select multiple>
-            <option value="1" selected>Option 1</option>
-            <option value="2" selected>Option 2</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
             <option value="3">Option 3</option>
           </select>
         </gds-select>
       `)
 
       await el.updateComplete
-      expect(el.value).to.equal('1,2')
+      expect(el.displayValue).to.equal('Option 1, Option 2')
     })
 
     it('should handle no pre-selected options', async () => {

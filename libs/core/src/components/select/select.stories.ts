@@ -56,6 +56,7 @@ export const select: Story = {
   args: {
     label: 'Label text',
     supportingText: 'Supporting text',
+    value: 'organic-chemistry',
     innerHTML: `
       <span slot="extended-supporting-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
