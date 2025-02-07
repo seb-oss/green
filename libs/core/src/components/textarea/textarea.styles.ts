@@ -48,27 +48,6 @@ export const styles = css`
     [align-items] ::part(_button) {
       margin-top: calc(var(--gds-space-2xs) * -1);
     }
-
-    .resize-handle {
-      position: absolute;
-      inset: auto auto -10px 0;
-      width: 100%;
-      height: 20px;
-      cursor: row-resize;
-      z-index: 2;
-
-      &::before {
-        content: '';
-        position: absolute;
-        background: currentColor;
-        inset: 0;
-        margin-inline: auto;
-        height: 1px;
-        width: 22px;
-        border-radius: 100px;
-        transition: var(--_transition);
-      }
-    }
   }
 
   @layer simplified {

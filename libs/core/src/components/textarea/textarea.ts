@@ -68,17 +68,13 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   clearable = false
 
   /**
-   * Whether the field should be resizeable or not. If set to `false`, the field will not be resizeable.
-   *
-   * When `auto` (default), the field will disaplay a resize handle and will be resizeable in the vertical direction.
-   *
-   * The textarea is resizeable based on the `rows` attribute and the content of the textarea by default.
-   *
-   * @property resize
-   *
+   * The resizable attribute of the textarea. It can be set to 'auto', 'manual' or 'false'.
+   * When set to 'auto', the textarea will be resizable in the vertical direction based on content.
+   * When set to 'manual', the textarea will be resizable in both the vertical and horizontal directions.
+   * When set to 'false', the textarea will not be resizable.
    */
-  @property()
-  resize = 'auto'
+  @property({ type: String })
+  resizable: 'auto' | 'manual' | 'false' = 'auto'
 
   /**
    * The maximum number of characters allowed in the field.
@@ -130,14 +126,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   connectedCallback(): void {
     super.connectedCallback()
     this._setAutoHeight()
-    this.#addResizeHandleListener()
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    // In the unlikely event the componet is disconnected in the middle of dragging,
-    // this will prevent dangling event listeners on `document`.
-    this.#stopDragging()
   }
 
   render() {
@@ -172,11 +164,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         multiline
       >
         ${this.#renderFieldContents()}
-        ${when(
-          this.resize === 'auto',
-          () => this.#renderResizeHandle(),
-          () => nothing,
-        )}
       </gds-field-base>
 
       <gds-form-control-footer
@@ -188,7 +175,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     `
   }
 
-  // variant="floatingLabel"
   #renderFloatingLabel() {
     return nothing
   }
@@ -213,7 +199,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     )
   }
 
-  // Handle paste event without using setTimeout.
   #handleOnPaste = (e: ClipboardEvent) => {
     // Use requestAnimationFrame to guarantee that the pasted content is rendered.
     requestAnimationFrame(() => {
@@ -238,8 +223,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         // Use the maximum between the default rows and the required rows.
         this.rows = Math.max(this._defaultRows, requiredRows)
       }
-      // Update the resize state and CSS variable.
-      this.#resizeState.lines = this.rows
       element.style.setProperty('--_lines', this.rows.toString())
     })
   }
@@ -253,7 +236,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
     // Reset rows to the default.
     this.rows = this._defaultRows
-    this.#resizeState.lines = this._defaultRows
     this.elTextareaAsync.then((element) => {
       element?.style.setProperty('--_lines', this._defaultRows.toString())
     })
@@ -289,67 +271,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #renderSlotTrail() {
     return html`<slot slot="trail" name="trail"></slot>`
-  }
-
-  #addResizeHandleListener() {
-    const resizeHandle = this.querySelector('.resize-handle')
-    if (resizeHandle) {
-      resizeHandle.addEventListener(
-        'mousedown',
-        this.#startDragging as EventListener,
-      )
-    }
-  }
-
-  // State for the resize handle action
-  #resizeState = {
-    isDragging: false,
-    startMouseY: 0,
-    lines: this.rows,
-    deltaLines: 0,
-    lineHeight: 0,
-  }
-
-  #startDragging = (event: MouseEvent) => {
-    event.preventDefault() // Prevent default behavior
-    this.#resizeState.isDragging = true // Set dragging state to true
-    this.#resizeState.startMouseY = event.clientY // Store the initial mouse position
-    this.#resizeState.lineHeight = parseFloat(
-      getComputedStyle(this.elTextarea).lineHeight,
-    )
-    document.addEventListener('mousemove', this.#onDrag)
-    document.addEventListener('mouseup', this.#stopDragging)
-  }
-
-  #onDrag = (event: MouseEvent) => {
-    if (!this.#resizeState.isDragging) return // If not dragging, return
-
-    const deltaY = event.clientY - this.#resizeState.startMouseY // Calculate the movement in Y direction
-    this.#resizeState.deltaLines = Math.round(
-      deltaY / this.#resizeState.lineHeight,
-    ) // Calculate the number of lines to increase or decrease
-
-    this.elTextareaAsync.then((element) => {
-      element?.style.setProperty(
-        '--_lines',
-        (this.#resizeState.lines + this.#resizeState.deltaLines).toString(),
-      )
-    })
-  }
-
-  #stopDragging = () => {
-    this.#resizeState.isDragging = false // Set dragging state to false
-    this.#resizeState.lines += this.#resizeState.deltaLines // Update the number of lines
-    this.rows = this.#resizeState.lines // Update the rows attribute
-    this.#resizeState.deltaLines = 0
-    document.removeEventListener('mousemove', this.#onDrag)
-    document.removeEventListener('mouseup', this.#stopDragging)
-  }
-
-  #renderResizeHandle() {
-    return html`
-      <div class="resize-handle" @mousedown=${this.#startDragging}></div>
-    `
   }
 
   #renderNativeTextarea() {
