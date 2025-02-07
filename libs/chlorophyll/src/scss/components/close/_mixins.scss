@@ -11,15 +11,22 @@ $close-padding: 1rem;
 $close-padding-sm: 0.375rem;
 $close-thickness: 0.125rem;
 $close-thickness-sm: 0.125rem;
-$close-bg-hsl: var(--sg-hsl-contrast);
-$close-bg: hsla(var(--background-hsl), 0);
-$close-bg-hover: var(--gds-sys-color-base-300);
-$close-bg-active: var(--gds-sys-color-base-300);
+$close-bg: transparent;
+$close-bg-hover: color-mix(
+  in srgb,
+  var(--gds-sys-color-text-primary) 20%,
+  transparent
+);
+$close-bg-active: color-mix(
+  in srgb,
+  var(--gds-sys-color-text-primary) 30%,
+  transparent
+);
 $close-icon-color: var(--gds-sys-color-text-primary);
 
 @mixin close {
   font-size: 0;
-  background: var(--gds-sys-color-background-primary);
+  background: transparent;
   border: 0;
   border-radius: 50%;
   content: '';
@@ -29,6 +36,7 @@ $close-icon-color: var(--gds-sys-color-text-primary);
   height: $close-height;
   position: relative;
   width: $close-width;
+  padding: 0;
 
   /* smartphones, touchscreens */
   @media (hover: none) and (pointer: coarse) {

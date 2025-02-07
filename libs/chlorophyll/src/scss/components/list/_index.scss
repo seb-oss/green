@@ -1,4 +1,3 @@
-@forward 'tokens';
 @use 'mixins';
 
 ul.gds-list {
@@ -9,12 +8,12 @@ ul.gds-bullet-list {
   @include mixins.bullet-list();
 }
 
-ol {
+ol.gds-list {
   @include mixins.base-list();
   @include mixins.ordered-list();
 }
 
-ul.check {
+ul.gds-check-list {
   @include mixins.check-list(green);
 
   &.primary {
@@ -22,14 +21,14 @@ ul.check {
   }
 }
 
-.table-list-caption {
+.gds-table-list-caption {
   @include mixins.table-list-caption();
 }
 
-figure dl {
+.gds-table-list {
   @include mixins.table-list();
 }
 
-dl.gds-list {
+.gds-value-list {
   @include mixins.add-value-list();
 }

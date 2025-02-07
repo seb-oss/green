@@ -47,8 +47,6 @@ $color: var(--gds-sys-color-text-primary);
   color: var(--color);
   @include common.padding-vertical(5);
   @include common.padding-horizontal(5);
-
-  // layout
   display: inline-grid;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: min-content 1fr;
@@ -62,7 +60,6 @@ $color: var(--gds-sys-color-text-primary);
       'icon content footer';
   }
 
-  // icon
   > i {
     display: block;
     width: 1.5rem;
@@ -75,7 +72,6 @@ $color: var(--gds-sys-color-text-primary);
     }
   }
 
-  // content
   > div:not(.alert-ribbon__footer),
   .alert-ribbon__content {
     grid-area: content;
@@ -140,15 +136,11 @@ $color: var(--gds-sys-color-text-primary);
     }
   }
 
-  // links
-  @include link.variant($color);
-
   a {
     text-decoration: underline !important;
     transition: opacity 300ms ease-in-out;
   }
 
-  // footer
   > footer,
   .alert-ribbon__footer {
     grid-area: footer;
@@ -166,7 +158,7 @@ $color: var(--gds-sys-color-text-primary);
     > button,
     > button[type='button'],
     > .button {
-      //force small size TODO: improve how to do sizing with mixin
+      //TODO: improve how to do sizing with mixin
       min-height: 2rem;
       padding: 0.4375rem 0.75rem;
       line-height: 1.125rem;

@@ -26,7 +26,7 @@ All your basic styling will now be correct. Additional classes will only be need
 ```html
 <div class="use-green">
   <form>
-    <div class="form-group">
+    <div class="gds-form-group">
       <label for="formInput1">Input</label>
       <span class="form-info" id="formInfo1">Some info or help</span>
       <input id="formInput1" type="text" aria-describedby="formInfo1" />

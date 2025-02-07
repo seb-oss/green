@@ -5,13 +5,17 @@ export default {
     componentIds: ['component-button'],
   },
   argTypes: {
-    type: {
-      control: 'select',
-      options: ['button', 'submit', 'reset'],
-    },
     variant: {
       control: 'select',
-      options: ['', 'primary', 'secondary', 'tertiary', 'ghost', 'danger'],
+      options: [
+        '',
+        'primary',
+        'secondary',
+        'tertiary',
+        'ghost-dark',
+        'ghost-light',
+        'danger',
+      ],
     },
     size: {
       control: 'select',
@@ -33,7 +37,7 @@ export default {
  */
 export const Button = {
   render: (args) =>
-    `<button type="${args.type}" class="${args.variant} ${args.size}" ${args.disabled ? 'disabled' : ''}>${args.text}</button>`,
+    `<button class="gds-button ${args.variant} ${args.size}" ${args.disabled ? 'disabled' : ''}>${args.text}</button>`,
   args: {
     type: 'button',
     text: 'Click me!',

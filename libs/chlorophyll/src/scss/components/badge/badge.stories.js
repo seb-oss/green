@@ -27,11 +27,11 @@ export default {
  */
 export const Badge = {
   render: (args) => `
-    <span class="badge ${args.variant}">
+    <span class="gds-badge ${args.variant}">
       <strong>${args.text}</strong>
       ${
         args.dismissible
-          ? `<button class="close">
+          ? `<button class="gds-close">
           <span class="sr-only">Remove</span>
           <i></i>
         </button>`

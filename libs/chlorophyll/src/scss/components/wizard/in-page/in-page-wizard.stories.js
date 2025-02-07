@@ -106,12 +106,12 @@ export const CurrentStep = {
     stepText: 'Step 2 of 6',
     title: 'Title',
 
-    content: `<div class="form-group">
+    content: `<div class="gds-form-group">
           <label for="inputInvalid">Input label</label>
           <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
           <input id="inputInvalid" type="text" />
         </div>
-        <div class="form-group">
+        <div class="gds-form-group">
           <label for="inputInvalid">Input label</label>
           <span class="form-info">Lorem ipsum very long description of input and what should be entered</span>
           <input id="inputInvalid" type="text" />

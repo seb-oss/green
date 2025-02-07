@@ -153,7 +153,7 @@ $button-danger-border-color: $button-danger-bg;
   min-width: auto;
   --color: var(--gds-sys-color-base-800);
 
-  .form-group & {
+  .gds-form-group & {
     margin-top: -0.625rem;
   }
 

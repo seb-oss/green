@@ -21,7 +21,7 @@ export default {
  */
 export const Slider = {
   render: (args) => `
-  <div class="form-group">
+  <div class="gds-form-group">
     <div class="gds-slider-label-container">
         <label for="gds-slider" id="gds-slider-label">Slider label text in one line</label>
         ${
@@ -50,7 +50,7 @@ export const Slider = {
 
 export const SliderWithUnitLabel = {
   render: (args) => `
-  <div class="form-group">
+  <div class="gds-form-group">
     <div class="gds-slider-label-container">
         <label for="gds-slider" id="gds-slider-label">Slider label text in one line</label>
         ${

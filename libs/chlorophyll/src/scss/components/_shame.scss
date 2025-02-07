@@ -1,13 +1,8 @@
 @use '../common';
 @use '../tokens';
 
-$_background: var(--sg-bg-level-0);
-.bg-color {
-  background: $_background;
-}
-
-.size-sm:not(.group),
-.group.size-sm > * {
+.small:not(.gds-group),
+.gds-group.small > * {
   @include common.padding-vertical(2, true);
   min-height: 2rem;
 
@@ -16,8 +11,8 @@ $_background: var(--sg-bg-level-0);
   }
 }
 
-.size-lg:not(.group),
-.group.size-lg > * {
+.large:not(.gds-group),
+.gds-group.large > * {
   @include common.padding-vertical(5, true);
   font-size: 1.5rem;
   min-height: 4rem;

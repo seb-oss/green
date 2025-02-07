@@ -47,7 +47,7 @@ export const Fill = {
   render: () => `
 
 <div class="d-flex align-items-center gx-4">
-  <div class="form-group">
+  <div class="gds-form-group">
     <label for="inputInvalid">Input label</label>
 
     <span class="form-info">

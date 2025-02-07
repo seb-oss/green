@@ -13,7 +13,7 @@ export default {
  */
 export const CloseButton = {
   render: () => `
-    <button class="close" type="button">
+    <button class="gds-close" type="button">
       <span class="sr-only">Close</span>
       <i></i>
     </button>

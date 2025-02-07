@@ -1,8 +1,7 @@
 @use 'mixins';
 @forward 'mixins';
 
-.gds-button,
-.gds-filter-chip {
+.gds-button {
   @include mixins.reset;
 }
 

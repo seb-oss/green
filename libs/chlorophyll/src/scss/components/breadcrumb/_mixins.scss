@@ -3,14 +3,20 @@
 $chevron-icon-size: 1rem;
 
 @mixin add-breadcrumb() {
-  flex-direction: row !important;
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-top: 0;
+  display: flex;
+  list-style: none;
+  flex-direction: row;
   align-items: center;
   gap: 4px;
+
   > li {
-    padding: 0 !important;
+    padding: 0;
     font-weight: 500;
     &::before {
-      display: none !important;
+      display: none;
     }
     &.icon {
       display: flex;

@@ -1,11 +1,11 @@
 @use '../../common';
 
-$_box-shadow: var(--sg-card-box-shadow);
-$_background: var(--sg-card-background);
-$_heading-color: var(--sg-card-heading-color);
-$_color: var(--sg-card-color);
-$_border: var(--sg-card-border);
-$_border-radius: var(--sg-card-border-radius);
+$_box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1019607843);
+$_background: var(--gds-sys-color-background-primary);
+$_heading-color: var(--gds-sys-color-text-primary);
+$_color: var(--gds-sys-color-text-primary);
+$_border: none;
+$_border-radius: 4px;
 $_layout-direction: column;
 
 @mixin card() {

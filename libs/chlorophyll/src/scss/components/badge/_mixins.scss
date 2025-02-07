@@ -5,28 +5,28 @@
 
 $variants: (
   'info': (
-    color: var(--gds-sys-color-text-black),
-    background: hsl(var(--sg-intent-info-hsl)),
+    color: var(--gds-sys-color-text-inverted),
+    background: var(--gds-sys-color-dark-blue-2),
   ),
   'success': (
-    color: hsl(var(--sg-intent-success-hsl-contrast)),
-    background: hsl(var(--sg-intent-success-hsl)),
+    color: var(--gds-sys-color-text-inverted),
+    background: var(--gds-sys-color-dark-green-2),
   ),
   'warning': (
-    color: hsl(var(--sg-intent-warning-hsl-contrast)),
-    background: hsl(var(--sg-intent-warning-hsl)),
+    color: var(--gds-sys-color-text-primary),
+    background: var(--gds-sys-color-yellow),
   ),
   'danger': (
-    color: hsl(var(--sg-intent-critical-hsl-contrast)),
-    background: hsl(var(--sg-intent-critical-hsl)),
+    color: var(--gds-sys-color-text-inverted),
+    background: var(--gds-sys-color-dark-red-1),
   ),
   'light': (
-    color: hsl(var(--sg-hsl-light-contrast)),
-    background: hsl(var(--sg-hsl-light)),
+    color: var(--gds-sys-color-text-primary),
+    background: var(--gds-sys-color-base-100),
   ),
   'dark': (
-    color: hsl(var(--sg-hsl-dark-contrast)),
-    background: hsl(var(--sg-hsl-dark)),
+    color: var(--gds-sys-color-text-inverted),
+    background: var(--gds-sys-color-base-900),
   ),
 );
 
@@ -34,20 +34,25 @@ $height: 24px;
 $border-radius: 2px;
 $color: var(--color);
 $background: var(--background);
-$close-bg-hover: hsla(var(--sg-hsl-black), 0.2);
-$close-bg-active: hsla(var(--sg-hsl-black), 0.3);
-
+$close-bg-hover: color-mix(
+  in srgb,
+  var(--gds-sys-color-text-primary) 20%,
+  transparent
+);
+$close-bg-active: color-mix(
+  in srgb,
+  var(--gds-sys-color-text-primary) 30%,
+  transparent
+);
 $close-height: 1.25rem;
 $close-width: $close-height;
-
 $close-icon-thickness: 2px;
-
 $label-font-weight: 500;
 $label-font-size: 14px;
 
 @mixin badge {
-  --background: hsl(var(--sg-intent-neutral-hsl));
-  --color: hsl(var(--sg-intent-neutral-hsl-contrast));
+  --background: var(--gds-sys-color-base-200);
+  --color: var(--gds-sys-color-text-primary);
   background: var(--background);
   border-radius: $border-radius;
   color: var(--color);
@@ -59,7 +64,7 @@ $label-font-size: 14px;
   @include common.padding-horizontal(3);
   @include common.padding-vertical(1);
 
-  &:has(.close) {
+  &:has(.gds-close) {
     padding-right: 1.75rem;
   }
 
@@ -69,10 +74,9 @@ $label-font-size: 14px;
   }
 
   // adjust size of close button
-  .close {
-    --color: hsl(var(--sg-intent-neutral-hsl-contrast));
+  .gds-close {
     position: absolute;
-    inset-inline-end: -0.4375rem;
+    inset-inline-end: 0;
 
     :before,
     :after {
@@ -89,23 +93,13 @@ $label-font-size: 14px;
 @mixin badge-variant($color, $background) {
   --background: #{$background};
   --color: #{$color};
-  // badge close
-  .close {
+
+  .gds-close {
     --color: #{$color};
 
     & > i,
-    & > .close:not(:disabled):not(.disabled) > i {
+    & > .gds-close:not(:disabled):not(.disabled) > i {
       background: transparent;
     }
-  }
-}
-
-@mixin badge-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -(map.get(spacing.$spacing, 2));
-  // todo: should use selector used by badge
-  .badge {
-    @include common.margin(2);
   }
 }

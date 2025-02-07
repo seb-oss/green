@@ -33,7 +33,7 @@ export default {
  */
 export const Card = {
   render: (args) => `
-  <section class="card">
+  <section class="gds-card">
     ${
       args.heading || args.closeButton
         ? `<header>
