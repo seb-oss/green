@@ -95,6 +95,12 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
 
+  /**
+   * Controls the font-size of texts.
+   */
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
 
@@ -145,7 +151,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #renderDefault() {
     return html`
-      <gds-form-control-header>
+      <gds-form-control-header class="size-${this.size}">
         <label for="input" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
@@ -167,6 +173,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       </gds-field-base>
 
       <gds-form-control-footer
+        lass="size-${this.size}"
         .charCounter=${this.#shouldShowRemainingChars &&
         this.maxlength - (this.value?.length || 0)}
         .validationMessage=${this.invalid &&

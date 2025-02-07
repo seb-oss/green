@@ -11,7 +11,9 @@ export const styles = css`
     :host {
       display: flex;
       flex-direction: column;
-      width: max-content;
+      // When resize is set in both axis the width must be max-content
+      // width: max-content;
+      width: 100%;
       contain: layout;
       isolation: isolate;
       gap: var(--gds-space-xs);
@@ -29,6 +31,7 @@ export const styles = css`
       margin: unset;
       min-height: calc(1lh * 4);
       max-height: calc(1lh * 20);
+      resize: vertical;
       outline: none;
       overflow: auto;
       padding: unset;

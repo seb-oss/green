@@ -212,6 +212,54 @@ export const Resize: Story = {
 }
 
 /**
+ * The `size` property controls the font-size of the text in form control header and footer.
+ *
+ * The `size` property can be set to `small` or `large`.<br>
+ * The default size is `large`.
+ *
+ * ```html
+ *  <gds-textarea size="small"></gds-textarea>
+ * ```
+ */
+export const Size: Story = {
+  ...DefaultParams,
+  name: 'Size',
+  render: () => html`
+    <gds-flex gap="xl" width="800px">
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Size: Small</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resize="false"
+          size="small"
+        >
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Resize: Large(default)</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea label="Label" supporting-text="Label support text">
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+        </gds-textarea>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
  * When the `clearable` property is set, a clear button is added, allowing users to quickly clear the text.
  *
  * @property clearable - Enables the clear button for the textarea field.
