@@ -28,6 +28,7 @@ export const styles = css`
       line-height: var(--gds-text-line-height-detail-m);
       margin: unset;
       min-height: calc(1lh * 4);
+      max-height: calc(1lh * 20);
       outline: none;
       overflow: hidden;
       padding: unset;

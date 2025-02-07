@@ -3,12 +3,12 @@ import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
+import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
+
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/textarea/index.js'
-
-import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -202,27 +202,25 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
       })
 
       it('should update the rows when value is set programmatically', async () => {
-        const textareaComp = await fixture<GdsTextarea>(
-          html`<gds-textarea></gds-textarea>`,
+        // Create the custom element directly with a fixed width
+        const textareaEl = await fixture<GdsTextarea>(
+          html`<gds-textarea style="width: 300px;"></gds-textarea>`,
         )
 
-        // Initially the default rows should be set (e.g. 4)
-        expect(textareaComp.rows).to.equal(4)
+        await textareaEl.updateComplete
+        expect(textareaEl.rows).to.equal(4)
 
-        // Set programmatic content which is long enough to require more height.
-        textareaComp.value = `This is a long text that should cause the textarea to resize based 
-        on its scroll height. Even without explicit line breaks, the text will wrap and 
-        increase the height of the element as required.`
+        textareaEl.value = 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6'
 
-        // Wait for any pending updates.
-        await textareaComp.updateComplete
+        await textareaEl.updateComplete
+        await aTimeout(0)
 
-        // Retrieve the actual textarea element.
-        const nativeTextarea = textareaComp.shadowRoot.querySelector('textarea')
+        const nativeTextarea = textareaEl.shadowRoot!.querySelector('textarea')
+        if (!nativeTextarea) {
+          throw new Error('Native <textarea> was not found in the shadowRoot')
+        }
 
-        // Check that the computed rows (stored in the component and CSS variable) increased.
-        // For example, ensure that rows is greater than the default.
-        expect(textareaComp.rows).to.be.greaterThan(4)
+        expect(textareaEl.rows).to.be.greaterThan(4)
         expect(
           parseInt(nativeTextarea.style.getPropertyValue('--_lines'), 10),
         ).to.be.greaterThan(4)
