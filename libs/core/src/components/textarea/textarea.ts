@@ -16,7 +16,7 @@ import { styles } from './textarea.styles'
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 import '../../primitives/field-base'
-import '../icon/icons/cross-small'
+import '../icon/icons/cross-large'
 import '../flex'
 import '../button'
 
@@ -360,7 +360,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         @paste=${this.#handleOnPaste}
         .value=${this.value}
         id="input"
-        aria-describedby="supporting-text"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       ></textarea>
@@ -380,7 +380,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           slot="action"
           id="clear-button"
         >
-          <gds-icon-cross-small />
+          <gds-icon-cross-large />
         </gds-button>
       `
     else return nothing
