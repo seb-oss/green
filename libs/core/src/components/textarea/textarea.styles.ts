@@ -34,6 +34,13 @@ export const styles = css`
       padding: unset;
       width: 100%;
       min-width: 20ch;
+
+      // &::-webkit-resizer {
+      //   background-image: linear-gradient(to bottom, transparent, currentColor);
+      //   background-position: center;
+      //   background-size: 100% 1px;
+      //   background-repeat: no-repeat;
+      // }
     }
 
     :host([size='small']) slot[name='lead']::slotted(*) {
