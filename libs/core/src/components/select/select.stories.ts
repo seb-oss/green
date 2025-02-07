@@ -216,7 +216,7 @@ export const Validation: Story = {
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         <select>
-          <option value="" selected>Incorrect Value</option>
+          <option value="">Incorrect Value</option>
           <optgroup label="Propulsion">
             <option value="ion-thrusters">Ion Thrusters</option>
             <option value="chemical-rockets">Chemical Rockets</option>

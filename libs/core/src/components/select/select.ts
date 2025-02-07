@@ -209,21 +209,23 @@ export class GdsSelect<ValueT = string> extends GdsFormControlElement<
     e.stopPropagation()
     this.#setValueFromSelectElement()
 
-    this.dispatchEvent(
-      new CustomEvent('input', {
-        detail: { value: this.value },
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    requestAnimationFrame(() => {
+      this.dispatchEvent(
+        new CustomEvent('input', {
+          detail: { value: this.value },
+          bubbles: true,
+          composed: true,
+        }),
+      )
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-        bubbles: true,
-        composed: true,
-      }),
-    )
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: { value: this.value },
+          bubbles: true,
+          composed: true,
+        }),
+      )
+    })
   }
 
   #setValueFromSelectElement() {
