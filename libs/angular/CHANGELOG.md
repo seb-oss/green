@@ -1,5 +1,22 @@
 # Changelog
 
+## 5.3.0
+
+### Minor Changes
+
+- 9b9d7b6: Added table grouping functionality.
+
+### Patch Changes
+
+- d3870c2: Added position: relative to host: element to counteract the position: absolute for the fold-out options.
+- b8a1b9c: Exported account-number-pipe as Angular stand-alone pipe.
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [f8c3d74]
+- Updated dependencies [fc89181]
+  - @sebgroup/green-core@1.65.0
+
 ## 5.2.0
 
 ### Minor Changes
