@@ -30,12 +30,9 @@ export const styles = css`
       min-height: calc(1lh * 4);
       max-height: calc(1lh * 20);
       outline: none;
-      overflow: hidden;
+      overflow: auto;
       padding: unset;
       resize: none;
-      transition:
-        var(--_transition),
-        resize 0s;
       width: 100%;
     }
 
