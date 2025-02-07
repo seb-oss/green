@@ -52,15 +52,14 @@ export class GdsSelect<ValueT = string> extends GdsFormControlElement<
   static styles = [tokens, styles]
 
   /**
-   * The supporting text displayed between the label and the select.
+   * The supporting text displayed between the label and the field.
    * This text provides additional context or information to the user.
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
   /**
-   * The size of the select element.
-   * This property can be either 'large' or 'small', and it determines the size of the select element.
+   * Controls the font-size of texts and height of the field.
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
@@ -71,7 +70,12 @@ export class GdsSelect<ValueT = string> extends GdsFormControlElement<
   @query('select')
   selectElement?: HTMLSelectElement
 
-  #isValueInitialized = false
+  /**
+   * The value of the select element.
+   * This property can be either a single value or an array of values, depending on the multiple attribute of the select element.
+   *
+   * Only use this property, and not the value property of the wrapped select element.
+   */
   @property()
   get value() {
     return this._internalValue as ValueT
@@ -80,6 +84,7 @@ export class GdsSelect<ValueT = string> extends GdsFormControlElement<
     this.#isValueInitialized || (this.#isValueInitialized = true)
     this._internalValue = value
   }
+  #isValueInitialized = false
 
   /**
    * Returns the display value for the select component.
