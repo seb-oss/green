@@ -210,17 +210,19 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
       if (element.value === '') {
-        // If the textarea is empty, reset to the default number of rows.
+        // If the textarea is empty, reset to the default number of rows
         this.rows = this._defaultRows
+        // Clear any manual resize height
+        element.style.height = ''
       } else {
-        // Get computed style values for the textarea.
+        // Get computed style values for the textarea
         const computedStyle = getComputedStyle(element)
         const lineHeight = parseFloat(computedStyle.lineHeight)
-        // Determine the required height by checking scrollHeight.
+        // Determine the required height by checking scrollHeight
         const contentHeight = element.scrollHeight
-        // Calculate the number of rows required based on the element's line height.
+        // Calculate the number of rows required based on the element's line height
         const requiredRows = Math.ceil(contentHeight / lineHeight)
-        // Use the maximum between the default rows and the required rows.
+        // Use the maximum between the default rows and the required rows
         this.rows = Math.max(this._defaultRows, requiredRows)
       }
       element.style.setProperty('--_lines', this.rows.toString())
@@ -237,7 +239,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     // Reset rows to the default.
     this.rows = this._defaultRows
     this.elTextareaAsync.then((element) => {
-      element?.style.setProperty('--_lines', this._defaultRows.toString())
+      // Clear any inline height style that might have been set by manual resizing
+      element.style.height = ''
+      // Reset the lines CSS variable
+      element.style.setProperty('--_lines', this._defaultRows.toString())
     })
 
     this.dispatchEvent(
@@ -301,7 +306,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           slot="action"
           id="clear-button"
         >
-          <gds-icon-cross-large />
+          <gds-icon-cross-large></gds-icon-cross-large>
         </gds-button>
       `
     else return nothing

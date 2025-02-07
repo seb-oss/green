@@ -11,7 +11,7 @@ export const styles = css`
     :host {
       display: flex;
       flex-direction: column;
-      width: 100%;
+      width: max-content;
       contain: layout;
       isolation: isolate;
       gap: var(--gds-space-xs);
@@ -32,8 +32,8 @@ export const styles = css`
       outline: none;
       overflow: auto;
       padding: unset;
-      resize: none;
       width: 100%;
+      min-width: 20ch;
     }
 
     :host([size='small']) slot[name='lead']::slotted(*) {
