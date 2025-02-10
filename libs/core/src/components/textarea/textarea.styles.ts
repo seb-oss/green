@@ -31,13 +31,25 @@ export const styles = css`
       margin: unset;
       min-height: calc(1lh * 4);
       max-height: calc(1lh * 20);
-      resize: vertical;
-      outline: none;
+
       overflow: auto;
+      outline: none;
       padding: unset;
       width: 100%;
       min-width: 20ch;
       padding-inline-end: calc(var(--gds-space-xs) + var(--padding-inline-end));
+
+      &.resize-manual {
+        resize: vertical;
+      }
+
+      &.resize-auto {
+        resize: none;
+      }
+
+      &.resize-false {
+        resize: none;
+      }
     }
 
     :host([size='small']) slot[name='lead']::slotted(*) {

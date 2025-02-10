@@ -189,22 +189,41 @@ export const Resize: Story = {
     <gds-flex gap="xl" width="800px">
       <gds-flex flex-direction="column" flex="1" gap="l">
         <gds-flex flex-direction="column" gap="s">
-          <gds-text>Resize: False</gds-text>
+          <gds-text>Resize: Auto</gds-text>
+          <gds-text tag="small">Based on the content</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea
           label="Label"
           supporting-text="Label support text"
-          resize="false"
+          resizable="auto"
         >
         </gds-textarea>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1" gap="l">
         <gds-flex flex-direction="column" gap="s">
-          <gds-text>Resize: True</gds-text>
+          <gds-text>Resize: Manual</gds-text>
+          <gds-text tag="small"> Draging the pull tab to resize </gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
-        <gds-textarea label="Label" supporting-text="Label support text">
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resizable="manual"
+        >
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Resize: False</gds-text>
+          <gds-text tag="small">Will not resize at all</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resizable="false"
+        >
         </gds-textarea>
       </gds-flex>
     </gds-flex>

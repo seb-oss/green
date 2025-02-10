@@ -1,7 +1,6 @@
 import { localized, msg } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
-import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { gdsCustomElement, html } from '../../scoping'
@@ -216,7 +215,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @watch('value')
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
-      if (element.value === '') {
+      if (
+        element.value === '' ||
+        this.resizable === 'false' ||
+        this.resizable === 'manual'
+      ) {
         // If the textarea is empty, reset to the default number of rows
         this.rows = this._defaultRows
         // Clear any manual resize height
@@ -293,6 +296,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         @paste=${this.#handleOnPaste}
         .value=${this.value}
         id="input"
+        class="resize-${this.resizable}"
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
