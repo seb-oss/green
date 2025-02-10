@@ -37,10 +37,6 @@ export const styles = css`
       transition-duration: 368ms;
       transition-property: background-color;
 
-      // &:has(.right) textarea {
-      //   padding-inline-end: var(--padding-inline-end);
-      // }
-
       .right {
         display: flex;
         position: absolute;
@@ -48,7 +44,6 @@ export const styles = css`
         right: var(--gds-space-s);
         top: var(--gds-space-xs);
         block-size: calc(100% - var(--gds-space-xs) * 2);
-        pointer-events: none;
       }
     }
 
