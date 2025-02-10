@@ -14,8 +14,15 @@ import '../icon/icons/brand-green.ts'
 import '../icon/icons/books.ts'
 
 /**
- * The `Select` story demonstrates a default selection component with a label and supporting text.
- * <br>The component can be customized with a label, supporting text, lead icon and additional content.
+ * `gds-select` is a wrapper component for the native select element.
+ *
+ * Use this component instead of `<gds-dropdown>` when you need to leverage the inherent behavior of the native select element, for example when native accessibility features, some of which are not currently replicable in custom dropdowns, are required. Usability on mobile devices is also sometimes better with native select elements.
+ *
+ * Don't use this component when you need to customize the dropdown behavior or appearance, or when you need to display complex content in the dropdown, or require multi-select functionality. While the native select element does support multi-select, it is not recommended for use in most cases.
+ *
+ * The wrapped select element will be cloned into the component's shadow DOM. Therefore, event listeners should only be added on the host
+ * element, and not on the enclosed select element. Also, state should also be handled only through the host.
+ * Setting value or selected props on the select element will not work as expected.
  */
 
 const meta: Meta = {
@@ -37,20 +44,10 @@ const DefaultParams: Story = {
 }
 
 /**
- * ### Parameters
- *
- *-  **label**: The label text displayed above the select field (e.g., 'Label text').
- *-  **supportingText**: Additional text that provides context or instructions (e.g., 'Supporting text').
- *-  **innerHTML**: The inner HTML content that defines the options within the select dropdown. It includes:
- *- <strong>@slot</strong> 'extended-supporting-text'
-
- * ```html
- *  <span slot="extended-supporting-text">...</span>
- * ```
- *- An icon displayed alongside the select field.
- *- Multiple option groups (e.g., Physics, Chemistry, Biology) with specific options.
+ * Basic example showing the select component with a label, supporting text and a lead icon.
+ * The wrapped `<select>` element is making use of `<optgroup>` elements to group the options.
  */
-export const select: Story = {
+export const Default: Story = {
   ...DefaultParams,
   name: 'Select',
   args: {
@@ -82,14 +79,7 @@ export const select: Story = {
 }
 
 /**
- *
- * The select component can have options, and grouping is also possible, with support for all native select attributes.
- *
- * It is important to note that options must be wrapped within a native `<select>` element to ensure proper functionality and rendering. The `<gds-select>` component is designed to enhance the native select element by providing additional features such as labels, supporting text, and icons. However, the core functionality of selecting options relies on the native `<select>` element.
- *
- * By wrapping options in a native `<select>`, we leverage the inherent behavior of the select element, which allows for user interaction, selection management, and accessibility features. Without this wrapping, the options would not be recognized or rendered correctly, as the native select element is responsible for handling the display and selection of options.
- *
- * Therefore, it is essential to include the `<select>` element to maintain the expected behavior and ensure that the component functions as intended.
+ * It is mandatory to use a native `<select>` element with options inside `<gds-select>`. `<gds-select>` is only a wrapper that allows native select to be used seamlessly along with the other form controls in the design system.
  *
  * e.g
  *
@@ -106,12 +96,12 @@ export const select: Story = {
  */
 
 /**
- * > In web components using Shadow DOM, options cannot be placed directly within a slot of a custom element. The native `select` element requires its options to be part of its own DOM structure . If placed in a slot, options will not render due to Shadow DOM encapsulation.
+ * > In web components using Shadow DOM, elements cannot be associated with each other across Shadow DOM boundaries. This is why you need to wrap a full native `select` element and it's options, rather than just putting options directly under `<gds-select>`. If placed in a slot, options would not be picked up due to the Shadow DOM encapsulation.
  */
 
 export const Option: Story = {
   ...DefaultParams,
-  name: 'Option',
+  name: 'Options',
   render: () => html`
     <gds-flex>
       <gds-select label="Label text" supporting-text="Supporting text">
@@ -138,7 +128,7 @@ export const Option: Story = {
 /**
  * The lead icon is displayed to the left of the select field.
  * <br>It can be used to provide additional context or to visually represent the select field's purpose.
- * <br>It can be set by adding an icon component to the 'lead' slot.
+ * <br>It is set by adding an icon component to the 'lead' slot.
  */
 export const Lead: Story = {
   ...DefaultParams,
@@ -226,7 +216,7 @@ export const Validation: Story = {
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         <select>
-          <option value="" selected>Incorrect Value</option>
+          <option value="">Incorrect Value</option>
           <optgroup label="Propulsion">
             <option value="ion-thrusters">Ion Thrusters</option>
             <option value="chemical-rockets">Chemical Rockets</option>
@@ -282,8 +272,9 @@ export const Size: Story = {
 }
 
 /**
- * Multiple
  * The `multiple` attribute can be set to allow multiple options to be selected on the native `<select>` element.
+ *
+ * However, it is not recommended to use the native select element in multi-select mode. The native select element does not provide a good user experience for multi-select, especially when there are many options. Prefer to use checkbox groups or the `<gds-dropdown>` component for multi-select functionality instead.
  */
 export const Multiple: Story = {
   ...DefaultParams,

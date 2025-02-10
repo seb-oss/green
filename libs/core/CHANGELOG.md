@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.65.0
+
+### Minor Changes
+
+- fc89181: **Select:** Add new components `gds-select`, Consolidate with Field Base
+
+### Patch Changes
+
+- fc89181: **Input:** Update the clearable action slot icon to be `cross-large`
+- fc89181: **Datepicker:** Fix the action slot icon size when is small and variant invalid
+- fc89181: **Button**: Fix the the outline on variants
+- f8c3d74: **FormControlElement**: Request general update when validity state changes
+
 ## 1.64.0
 
 ### Minor Changes

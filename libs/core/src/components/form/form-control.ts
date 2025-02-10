@@ -191,7 +191,7 @@ export abstract class GdsFormControlElement<ValueT = any>
       this._getValidityAnchor(),
     )
 
-    this.requestUpdate('invalid', oldValue)
+    if (oldValue !== this.invalid) this.requestUpdate()
 
     return this.#internals.checkValidity()
   }
