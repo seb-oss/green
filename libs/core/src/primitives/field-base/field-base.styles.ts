@@ -43,7 +43,7 @@ export const styles = css`
         gap: var(--gds-space-xs);
         right: var(--gds-space-s);
         top: var(--gds-space-xs);
-        block-size: calc(100% - var(--gds-space-xs) * 2);
+        block-size: max-content;
       }
     }
 

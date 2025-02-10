@@ -148,7 +148,10 @@ export class GdsFieldBase extends GdsElement {
   }
 
   #renderFieldContents() {
-    if (this.multiline) {
+    if (
+      (this.multiline && this._trailSlotOccupied) ||
+      this._actionSlotOccupied
+    ) {
       return html`
         ${this.#renderSlotLead()} ${this.#renderSlotMain()}
         <div class="right">
