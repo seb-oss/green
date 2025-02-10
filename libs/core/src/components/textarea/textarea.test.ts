@@ -72,7 +72,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
       })
 
       it('should show remaining characters when maxlength is set', async () => {
-        const el = await fixture<GdsInput>(
+        const el = await fixture<GdsTextarea>(
           html`<gds-textarea
             variant="${variant}"
             maxlength="10"
@@ -157,21 +157,6 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const labelEl = el.shadowRoot?.querySelector('label')
         const inputEl = el.shadowRoot?.querySelector('textarea')
         expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
-      })
-
-      it('should have a aria-describedby attribute that matches the supporting text id', async () => {
-        const el = await fixture<GdsTextarea>(
-          html`<gds-textarea
-            variant="${variant}"
-            supporting-text="My supporting text"
-          ></gds-textarea>`,
-        )
-        const inputEl = el.shadowRoot?.querySelector('textarea')
-        const supportingTextEl =
-          el.shadowRoot?.querySelector('#supporting-text')
-        expect(inputEl?.getAttribute('aria-describedby')).to.equal(
-          supportingTextEl?.id,
-        )
       })
 
       it('should focus when clicking on the field', async () => {

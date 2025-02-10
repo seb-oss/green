@@ -16,7 +16,7 @@ import {
 
 @Directive({
   selector:
-    'gds-input, gds-textarea, gds-dropdown, gds-datepicker, [nggCoreControl]',
+    'gds-input, gds-textarea, gds-dropdown, gds-datepicker, gds-select, [nggCoreControl]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

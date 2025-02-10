@@ -38,24 +38,17 @@ XXXX XXXX XXXX XXXX
 XXXX XXXX XXXX XXXX ...
 ```
 
-## Import
-
-- Add seb-payment-front to the .npmrc: `@sebgroup:registry=https://repo7.sebank.se/artifactory/api/npm/seb-payment-front-npm-virtual/`
-- Install @sebgroup/ngv-core: `npm i @sebgroup/ngv-core`
-
 ## Usage
 
-- In your module, declare the pipe
+- In your module, import the stand-alone pipe:
 
 ```ts
-import { AccountNumberPipe } from '@sebgroup/ngv-core';
-// accounts.module.ts
+import { AccountNumberPipe } from '@sebgroup/green-angular/v-angular';
+// module.ts
 @NgModule({
     providers: [...],
-    imports: [...],
-    declarations: [
-        AccountNumberPipe
-    ]
+    imports: [AccountNumberPipe],
+    declarations: [...]
 })
 ```
 
@@ -64,7 +57,7 @@ import { AccountNumberPipe } from '@sebgroup/ngv-core';
 - In your HTML, use the pipe
 
 ```HTML
-<!-- accounts.component.html -->
+<!-- component.html -->
 <span>{{ account.iban | accountNumber: 'iban' }}</span> <!-- Format according to 'iban' -->
 <span>{{ account.bban | accountNumber: 'bban' }}</span> <!-- Format according to 'bban' -->
 ```

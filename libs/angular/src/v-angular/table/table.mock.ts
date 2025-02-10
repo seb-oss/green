@@ -16,6 +16,7 @@ export type ColumnData = {
 export const columns: {
   primary: TableColumn<ColumnData>[]
   alt: TableColumn<ColumnData>[]
+  withExpandableRows: TableColumn<ColumnData>[]
 } = {
   primary: [
     {
@@ -67,6 +68,40 @@ export const columns: {
       sortable: true,
     }, // col 3
     { property: 'status', label: 'header.status', sortable: true }, // col 4
+  ],
+  withExpandableRows: [
+    {
+      property: 'name',
+      label: 'header.name',
+    },
+    {
+      property: 'currency',
+      label: 'header.currency',
+    },
+    {
+      property: 'status',
+      label: 'header.status',
+    },
+    {
+      property: 'bookedBalance',
+      label: 'header.bookedbalance',
+      valueType: 'numeric',
+    },
+    {
+      property: 'datedBalance',
+      label: 'header.datedbalance',
+      valueType: 'numeric',
+    },
+    {
+      property: 'limit',
+      label: 'header.limit',
+      valueType: 'numeric',
+    },
+    {
+      property: 'unauthorizedUsage',
+      label: 'header.unauthorizedusage',
+      valueType: 'numeric',
+    },
   ],
 }
 
@@ -170,6 +205,88 @@ export const dataWithErrorMessages: ColumnDataWithErrorMessages[] = [
     limit: 80000,
     unauthorizedUsage: 0,
     errorMessages: ['Invalid Amount', 'Invalid Name'],
+  },
+]
+
+export type ColumnDataWithListItems<T extends string> = ColumnData & {
+  [key in T]: ColumnData[]
+}
+
+export const dataWithListItems: ColumnDataWithListItems<'subItems'>[] = [
+  {
+    id: '0',
+    name: 'Parent item DKK 111',
+    currency: '',
+    status: '',
+    bookedBalance: 9600,
+    datedBalance: 10500,
+    limit: 300,
+    unauthorizedUsage: 3500,
+    subItems: [
+      {
+        id: '0',
+        name: 'Chlild item DKK 111',
+        currency: 'DKK',
+        status: 'Booked',
+        bookedBalance: 8000,
+        datedBalance: 8000,
+        limit: 200,
+        unauthorizedUsage: 3000,
+      },
+      {
+        id: '1',
+        name: 'Chlild item DKK 111',
+        currency: 'DKK',
+        status: 'Waiting',
+        bookedBalance: 1600,
+        datedBalance: 2500,
+        limit: 100,
+        unauthorizedUsage: 500,
+      },
+    ],
+  },
+  {
+    id: '1',
+    name: 'Parent item EUR 222',
+    currency: '',
+    status: '',
+    bookedBalance: 0,
+    datedBalance: 0,
+    limit: 0,
+    unauthorizedUsage: 0,
+    subItems: [],
+  },
+  {
+    id: '2',
+    name: 'Parent item USD 333',
+    currency: '',
+    status: '',
+    bookedBalance: 6300,
+    datedBalance: 7200,
+    limit: 650,
+    unauthorizedUsage: 2300,
+    subItems: [
+      {
+        id: '0',
+        name: 'Chlild item USD 333',
+        currency: 'USD',
+        status: 'Booked',
+        bookedBalance: 4000,
+        datedBalance: 4000,
+        limit: 500,
+        unauthorizedUsage: 1000,
+      },
+      {
+        id: '1',
+        name: 'Chlild item USD 333',
+        currency: 'USD',
+        status: 'Waiting',
+        bookedBalance: 2300,
+        datedBalance: 3200,
+        limit: 150,
+        unauthorizedUsage: 1300,
+      },
+    ],
   },
 ]
 
