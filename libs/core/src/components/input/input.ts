@@ -37,7 +37,8 @@ export class GdsInput extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   /**
-   * The supporting text displayed between the label and the field itself
+   * The supporting text displayed between the label and the field.
+   * This text provides additional context or information to the user.
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
@@ -78,6 +79,9 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
 
+  /**
+   * Controls the font-size of texts and height of the field.
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 

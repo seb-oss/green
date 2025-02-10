@@ -441,7 +441,6 @@ export const Validation: Story = {
           value="Incorrect value"
           maxLength="12"
           clearable
-          .invalid=${true}
           .validator=${{
             validate: (el: any) => {
               if (el.value === '')
@@ -460,7 +459,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'The value must be 12 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+                  'The value must be a 12 characters long numeric value. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
                 ]
             },
           }}
