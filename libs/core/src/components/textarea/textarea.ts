@@ -6,6 +6,7 @@ import { nothing } from 'lit/html.js'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
+import { resizeObserver } from '../../utils/decorators/resize-observer'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
 import { GdsFormControlElement } from '../form/form-control'
@@ -19,6 +20,7 @@ import '../icon/icons/cross-large'
 import '../flex'
 import '../button'
 
+import type { GdsFieldBase } from '../../primitives/field-base'
 import type { GdsButton } from '../button'
 
 /**
@@ -106,6 +108,9 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
 
+  @query('gds-field-base')
+  private fieldBase!: GdsFieldBase
+
   /**
    * A reference to the clear button element. Returns null if there is no clear button.
    * Intended for use in integration tests.
@@ -123,6 +128,33 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return this.shadowRoot?.querySelector('#field')
   }
 
+  @resizeObserver()
+  private _handleResize() {
+    if (!this.fieldBase) return
+
+    // Wait for field-base to be ready and get its shadow root
+    Promise.resolve().then(() => {
+      const fieldBaseShadowRoot = this.fieldBase?.shadowRoot
+      if (!fieldBaseShadowRoot) return
+
+      const rightDiv = fieldBaseShadowRoot.querySelector(
+        '.right',
+      ) as HTMLElement
+      if (rightDiv) {
+        const boundingBox = rightDiv.getBoundingClientRect()
+        this.style.setProperty('--padding-inline-end', `${boundingBox.width}px`)
+      } else {
+        this.style.removeProperty('--padding-inline-end')
+      }
+    })
+  }
+
+  private _handleSlotChange = () => {
+    requestAnimationFrame(() => {
+      this._handleResize()
+    })
+  }
+
   constructor() {
     super()
     this.value = ''
@@ -131,10 +163,12 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   connectedCallback(): void {
     super.connectedCallback()
     this._setAutoHeight()
+    this.addEventListener('slotchange', this._handleSlotChange)
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
+    this.removeEventListener('slotchange', this._handleSlotChange)
   }
 
   render() {

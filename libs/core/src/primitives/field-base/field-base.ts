@@ -5,7 +5,6 @@ import { map } from 'lit/directives/map.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch.js'
 import { styles } from './field-base.styles'
 
@@ -65,46 +64,6 @@ export class GdsFieldBase extends GdsElement {
   @state()
   private _actionSlotOccupied = false
 
-  @query('.right')
-  private rightElement?: HTMLElement
-
-  private resizeObserver?: ResizeObserver
-
-  constructor() {
-    super()
-  }
-
-  connectedCallback(): void {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-field-base')
-
-    // Initialize ResizeObserver
-    this.resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.target === this.rightElement) {
-          // Set the CSS variable on the host element
-          this.style.setProperty(
-            '--padding-inline-end',
-            `${entry.contentRect.width}px`,
-          )
-        }
-      }
-    })
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback()
-    this.resizeObserver?.disconnect()
-  }
-
-  updated(changedProperties: Map<PropertyKey, unknown>): void {
-    super.updated(changedProperties)
-
-    if (this.rightElement && this.resizeObserver) {
-      this.resizeObserver.observe(this.rightElement)
-    }
-  }
-
   render() {
     const classes = {
       invalid: this.invalid ?? false,
@@ -158,16 +117,16 @@ export class GdsFieldBase extends GdsElement {
           ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
         </div>
       `
+    } else {
+      const elements = [
+        this.#renderSlotLead(),
+        this.#renderSlotMain(),
+        this.#renderSlotAction(),
+        this.#renderSlotTrail(),
+      ]
+
+      return html`${map(elements, (el) => el)}`
     }
-
-    const elements = [
-      this.#renderSlotLead(),
-      this.#renderSlotMain(),
-      this.#renderSlotAction(),
-      this.#renderSlotTrail(),
-    ]
-
-    return html`${map(elements, (el) => el)}`
   }
 
   #renderSlotLead() {
