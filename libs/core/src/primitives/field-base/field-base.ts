@@ -5,6 +5,7 @@ import { map } from 'lit/directives/map.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
+import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch.js'
 import { styles } from './field-base.styles'
 
@@ -63,6 +64,15 @@ export class GdsFieldBase extends GdsElement {
 
   @state()
   private _actionSlotOccupied = false
+
+  constructor() {
+    super()
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    TransitionalStyles.instance.apply(this, 'gds-field-base')
+  }
 
   render() {
     const classes = {
