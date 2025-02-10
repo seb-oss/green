@@ -188,9 +188,11 @@ export const Resize: Story = {
   render: () => html`
     <gds-flex gap="xl" width="800px">
       <gds-flex flex-direction="column" flex="1" gap="l">
-        <gds-flex flex-direction="column" gap="s">
+        <gds-flex flex-direction="column" gap="2xs">
           <gds-text>Resize: Auto</gds-text>
-          <gds-text tag="small">Based on the content</gds-text>
+          <gds-text tag="small" color="secondary">
+            Based on the content
+          </gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea
@@ -201,9 +203,11 @@ export const Resize: Story = {
         </gds-textarea>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1" gap="l">
-        <gds-flex flex-direction="column" gap="s">
+        <gds-flex flex-direction="column" gap="2xs">
           <gds-text>Resize: Manual</gds-text>
-          <gds-text tag="small"> Draging the pull tab to resize </gds-text>
+          <gds-text tag="small" color="secondary">
+            Draging the pull tab to resize
+          </gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea
@@ -214,9 +218,11 @@ export const Resize: Story = {
         </gds-textarea>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1" gap="l">
-        <gds-flex flex-direction="column" gap="s">
+        <gds-flex flex-direction="column" gap="2xs">
           <gds-text>Resize: False</gds-text>
-          <gds-text tag="small">Will not resize at all</gds-text>
+          <gds-text tag="small" color="secondary">
+            Will not resize at all
+          </gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea
