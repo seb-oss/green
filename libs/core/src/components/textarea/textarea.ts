@@ -142,9 +142,12 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       ) as HTMLElement
       if (rightDiv) {
         const boundingBox = rightDiv.getBoundingClientRect()
-        this.style.setProperty('--padding-inline-end', `${boundingBox.width}px`)
+        this.elTextarea.style.setProperty(
+          '--padding-inline-end',
+          `${boundingBox.width}px`,
+        )
       } else {
-        this.style.removeProperty('--padding-inline-end')
+        this.elTextarea.style.removeProperty('--padding-inline-end')
       }
     })
   }
