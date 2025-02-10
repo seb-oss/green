@@ -72,6 +72,7 @@ export class GdsCard extends GdsContainer {
     this.padding = 's; m{l}'
     this['border-radius'] = 'xs; m{s}'
     this['border-width'] = '4xs'
+    this['border-color'] = 'transparent'
   }
 
   render() {
