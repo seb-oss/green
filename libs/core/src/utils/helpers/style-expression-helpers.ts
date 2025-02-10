@@ -18,6 +18,13 @@ export function parseColorValue(
   context: string,
   level: GdsColorLevel,
 ): string {
+  if (
+    value === 'transparent' ||
+    value === 'currentColor' ||
+    value === 'inherit'
+  ) {
+    return value
+  }
   const [colorName, transparency] = value.split('/')
   const colorVar = `var(--gds-color-l${level}-${context}-${colorName})`
   return transparency
