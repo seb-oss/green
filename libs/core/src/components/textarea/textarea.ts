@@ -53,7 +53,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       return `min-height: calc(1lh * ${ROWS});`
     },
   })
-  rows = ''
+  rows = 4
 
   /**
    * The supporting text displayed between the label and the field itself
@@ -267,7 +267,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         // Calculate the number of rows required based on the element's line height
         const requiredRows = Math.ceil(contentHeight / lineHeight)
         // Use the maximum between the default rows and the required rows
-        this.rows = Math.max(this._defaultRows, requiredRows).toString()
+        this.rows = Math.max(this._defaultRows, requiredRows)
       }
       element.style.setProperty('--_lines', this.rows.toString())
     })
