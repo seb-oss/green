@@ -163,6 +163,15 @@ export const Rows: Story = {
         rows="8"
       >
       </gds-textarea>
+      <gds-textarea
+        label="Label"
+        supporting-text="Label support text"
+        value="Example value with 8 rows"
+        clearable
+        resizable="false"
+        rows="8"
+      >
+      </gds-textarea>
     </gds-flex>
   `,
 }

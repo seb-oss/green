@@ -53,7 +53,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
       return `min-height: calc(1lh * ${ROWS});`
     },
   })
-  rows = 4
+  rows = ''
 
   /**
    * The supporting text displayed between the label and the field itself
@@ -257,10 +257,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         this.resizable === 'false' ||
         this.resizable === 'manual'
       ) {
-        // If the textarea is empty, reset to the default number of rows
-        this.rows = this._defaultRows
-        // Clear any manual resize height
-        element.style.height = ''
+        // If the resizable attribute is set to 'false' it should not grow
       } else {
         // Get computed style values for the textarea
         const computedStyle = getComputedStyle(element)
@@ -270,7 +267,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         // Calculate the number of rows required based on the element's line height
         const requiredRows = Math.ceil(contentHeight / lineHeight)
         // Use the maximum between the default rows and the required rows
-        this.rows = Math.max(this._defaultRows, requiredRows)
+        this.rows = Math.max(this._defaultRows, requiredRows).toString()
       }
       element.style.setProperty('--_lines', this.rows.toString())
     })
@@ -282,15 +279,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
-
-    // Reset rows to the default.
-    this.rows = this._defaultRows
-    this.elTextareaAsync.then((element) => {
-      // Clear any inline height style that might have been set by manual resizing
-      element.style.height = ''
-      // Reset the lines CSS variable
-      element.style.setProperty('--_lines', this._defaultRows.toString())
-    })
 
     this.dispatchEvent(
       new Event('gds-input-cleared', {
