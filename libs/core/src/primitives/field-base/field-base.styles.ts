@@ -36,6 +36,20 @@ export const styles = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: background-color;
+
+      // &:has(.right) textarea {
+      //   padding-inline-end: var(--padding-inline-end);
+      // }
+
+      .right {
+        display: flex;
+        position: absolute;
+        gap: var(--gds-space-xs);
+        right: var(--gds-space-s);
+        top: var(--gds-space-xs);
+        block-size: calc(100% - var(--gds-space-xs) * 2);
+        pointer-events: none;
+      }
     }
 
     .field.lead-slot-occupied {

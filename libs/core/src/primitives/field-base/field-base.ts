@@ -65,6 +65,11 @@ export class GdsFieldBase extends GdsElement {
   @state()
   private _actionSlotOccupied = false
 
+  @query('.right')
+  private rightElement?: HTMLElement
+
+  private resizeObserver?: ResizeObserver
+
   constructor() {
     super()
   }
@@ -72,6 +77,32 @@ export class GdsFieldBase extends GdsElement {
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-field-base')
+
+    // Initialize ResizeObserver
+    this.resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.target === this.rightElement) {
+          // Set the CSS variable on the host element
+          this.style.setProperty(
+            '--padding-inline-end',
+            `${entry.contentRect.width}px`,
+          )
+        }
+      }
+    })
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback()
+    this.resizeObserver?.disconnect()
+  }
+
+  updated(changedProperties: Map<PropertyKey, unknown>): void {
+    super.updated(changedProperties)
+
+    if (this.rightElement && this.resizeObserver) {
+      this.resizeObserver.observe(this.rightElement)
+    }
   }
 
   render() {
@@ -117,6 +148,15 @@ export class GdsFieldBase extends GdsElement {
   }
 
   #renderFieldContents() {
+    if (this.multiline) {
+      return html`
+        ${this.#renderSlotLead()} ${this.#renderSlotMain()}
+        <div class="right">
+          ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
+        </div>
+      `
+    }
+
     const elements = [
       this.#renderSlotLead(),
       this.#renderSlotMain(),
@@ -124,14 +164,7 @@ export class GdsFieldBase extends GdsElement {
       this.#renderSlotTrail(),
     ]
 
-    return html`${map(elements, (el) => el)}
-
-      <!-- <div class="left">
-        ${this.#renderSlotLead()} ${this.#renderSlotMain()}
-      </div>
-      <div class="right">
-        ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
-      </div>  --> `
+    return html`${map(elements, (el) => el)}`
   }
 
   #renderSlotLead() {
