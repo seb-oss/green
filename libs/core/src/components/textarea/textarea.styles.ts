@@ -31,7 +31,6 @@ export const styles = css`
       margin: unset;
       min-height: calc(1lh * 4);
       max-height: calc(1lh * 20);
-
       overflow: auto;
       outline: none;
       padding: unset;

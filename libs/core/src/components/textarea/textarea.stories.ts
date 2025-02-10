@@ -179,7 +179,7 @@ export const Rows: Story = {
  * @property resize - Controls whether and how the textarea can be resized by the user.
  *
  * ```html
- *  <gds-textarea resize="false"></gds-textarea>
+ *  <gds-textarea resizable="false"></gds-textarea>
  * ```
  **/
 export const Resize: Story = {
@@ -253,7 +253,7 @@ export const Size: Story = {
         <gds-textarea
           label="Label"
           supporting-text="Label support text"
-          resize="false"
+          resizable="false"
           size="small"
         >
           <span slot="extended-supporting-text">
