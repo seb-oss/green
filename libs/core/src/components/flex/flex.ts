@@ -1,5 +1,6 @@
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { forSpaceTokens } from '../../utils/helpers'
 import {
   gdsCustomElement,
   html,
@@ -40,6 +41,7 @@ export class GdsFlex extends GdsContainer {
    *
    */
   @styleExpressionProperty({
+    ...forSpaceTokens,
     styleTemplate: (_prop, values) => {
       const colGap = values[0]
       const rowGap = values[1] || colGap
@@ -53,92 +55,70 @@ export class GdsFlex extends GdsContainer {
    * Controls the `flex` property of the flex.
    * Supports all valid CSS flex property values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   flex?: string
 
   /**
    * Controls the `align-self` property of the flex.
    * Supports all valid CSS align-self values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'align-self'?: string
 
   /**
    * Controls the `align-items` property of the flex.
    * Supports all valid CSS align-items values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'align-items'?: string
 
   /**
    * Controls the `align-content` property of the flex.
    * Supports all valid CSS align-content values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'align-content'?: string
 
   /**
    * Controls the `justify-content` property of the flex.
    * Supports all valid CSS justify-content values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'justify-content'?: string
 
   /**
    * Controls the `place-content` property of the flex.
    * Supports all valid CSS place-content values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'place-content'?: string
 
   /**
    * Controls the `justify-items` property of the flex.
    * Supports all valid CSS justify-items values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'justify-items'?: string
 
   /**
    * Controls the `justify-self` property of the flex.
    * Supports all valid CSS justify-self values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'justify-self'?: string
 
   /**
    * Controls the flex-direction property of the flex.
    * Supports all valid CSS flex-direction values.
    */
-  @styleExpressionProperty({
-    property: 'flex-direction',
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'flex-direction'?: string
 
   /**
    * Controls the flex-wrap property of the flex.
    * Supports all valid CSS flex-wrap values.
    */
-  @styleExpressionProperty({
-    property: 'flex-wrap',
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'flex-wrap'?: string
 
   connectedCallback(): void {

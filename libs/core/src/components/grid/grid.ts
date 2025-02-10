@@ -1,5 +1,6 @@
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { forSpaceTokens } from '../../utils/helpers'
 import {
   gdsCustomElement,
   html,
@@ -28,7 +29,6 @@ export class GdsGrid extends GdsContainer {
    */
   @styleExpressionProperty({
     property: '--_c',
-    valueTemplate: (v) => v,
   })
   columns?: string
 
@@ -41,6 +41,7 @@ export class GdsGrid extends GdsContainer {
    * ```
    */
   @styleExpressionProperty({
+    ...forSpaceTokens,
     styleTemplate: (_prop, values) => {
       const rowGap = values[0]
       const colGap = values[1] || rowGap
@@ -50,16 +51,16 @@ export class GdsGrid extends GdsContainer {
   gap?: string
 
   /**
-   * Defines the minimum column width in pixels. Accepts a single value for all breakpoints or a "l:desktop m:tablet s:mobile" format. If set, the grid adjusts column size based on content and available width, even without other attributes.
+   * Defines the minimum column width. If set, the grid adjusts column size based on content and available width, even without other attributes.
    * @example
    * ```html
-   * <gds-grid auto-columns="200"></gds-grid> <!-- applies to all breakpoints -->
-   * <gds-grid auto-columns="l{200} m{100} s{80}"></gds-grid> <!-- different values for each breakpoint -->
+   * <gds-grid auto-columns="200px"></gds-grid> <!-- applies to all breakpoints -->
+   * <gds-grid auto-columns="l{200px} m{100px} s{80px}"></gds-grid> <!-- different values for each breakpoint -->
    * ```
    */
   @styleExpressionProperty({
     property: '--_col-width',
-    valueTemplate: (v) => `${v}px`,
+    valueTemplate: (v) => `${isNaN(v as any) ? v : `${v}px`}`,
   })
   'auto-columns'?: string
 

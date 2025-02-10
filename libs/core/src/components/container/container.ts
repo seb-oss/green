@@ -35,9 +35,7 @@ export class GdsContainer extends GdsElement {
    * Controls the display property.
    * Supports all valid CSS display values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   display = 'block'
 
   /**
@@ -56,18 +54,14 @@ export class GdsContainer extends GdsElement {
    * Controls the `place-items` property.
    * Supports all valid CSS `place-items` values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'place-items'?: string
 
   /**
    * Controls the `place-content` property.
    * Supports all valid CSS `place-content` values.
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   'place-content'?: string
 
   /**
@@ -147,7 +141,7 @@ export class GdsContainer extends GdsElement {
    * Supports all the border style values.
    */
   @styleExpressionProperty(forSpaceTokens)
-  'border-width'?: string
+  'border-width' = '0'
 
   /**
    * Controls the border-width property.
