@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.3.1
+
+### Patch Changes
+
+- e93b640: **CoreControlModule**: Fix condition for when field errors are displayed
+
 ## 5.3.0
 
 ### Minor Changes
