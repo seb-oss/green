@@ -17,7 +17,6 @@ import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 import '../../primitives/field-base'
 import '../icon/icons/cross-large'
-import '../flex'
 import '../button'
 
 import type { GdsFieldBase } from '../../primitives/field-base'

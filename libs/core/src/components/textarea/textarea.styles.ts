@@ -11,8 +11,6 @@ export const styles = css`
     :host {
       display: flex;
       flex-direction: column;
-      // When resize is set in both axis the width must be max-content
-      // width: max-content;
       width: 100%;
       contain: layout;
       isolation: isolate;
