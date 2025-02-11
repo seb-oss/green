@@ -87,4 +87,14 @@ describe('NggCoreControlDirective', () => {
     directive.setDisabledState?.(false)
     expect(inputEl.nativeElement.disabled).toBe(false)
   })
+
+  it('should validate when dirty', async () => {
+    const control = component.form.get('name')
+    control?.markAsDirty()
+    fixture.detectChanges()
+
+    await fixture.whenStable()
+
+    expect(inputEl.nativeElement.invalid).toBe(true)
+  })
 })
