@@ -22,6 +22,7 @@ import Pattern from './pattern/pattern'
 import Prototype from './prototype'
 import Section from './section'
 import Story from './story'
+import SVG from './svg'
 
 const components = {
   Figma,
@@ -34,6 +35,7 @@ const components = {
   GdsDivider: (props: object) => <GdsDivider {...props} />,
   Story,
   Badge,
+  SVG,
   Grid: ({ children, ...props }: { children: React.ReactNode }) => {
     return (
       <>
