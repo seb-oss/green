@@ -40,8 +40,8 @@ import type { GdsButton } from '../button'
 export class GdsTextarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
+  private _initialRows?: number
   private _defaultRows = 4
-
   /**
    * Rows of the textarea
    */
@@ -165,6 +165,11 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   connectedCallback(): void {
     super.connectedCallback()
+
+    if (this.hasAttribute('rows')) {
+      this._initialRows = this.rows
+    }
+
     this._setAutoHeight()
     this.addEventListener('slotchange', this._handleSlotChange)
   }
@@ -252,24 +257,38 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @watch('value')
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
-      if (
-        element.value === '' ||
-        this.resizable === 'false' ||
-        this.resizable === 'manual'
-      ) {
-        // If the resizable attribute is set to 'false' it should not grow
-      } else {
-        // Get computed style values for the textarea
-        const computedStyle = getComputedStyle(element)
-        const lineHeight = parseFloat(computedStyle.lineHeight)
-        // Determine the required height by checking scrollHeight
-        const contentHeight = element.scrollHeight
-        // Calculate the number of rows required based on the element's line height
-        const requiredRows = Math.ceil(contentHeight / lineHeight)
-        // Use the maximum between the default rows and the required rows
-        this.rows = Math.max(this._defaultRows, requiredRows)
+      // If resizable is false, maintain fixed height based on rows
+      if (this.resizable === 'false') {
+        const rowsToUse = this._initialRows ?? this._defaultRows
+        this.rows = rowsToUse
+        element.style.setProperty('--_lines', rowsToUse.toString())
+        return
       }
-      element.style.setProperty('--_lines', this.rows.toString())
+
+      // If manual resize, don't auto-adjust height
+      if (this.resizable === 'manual') {
+        return
+      }
+
+      if (this.resizable === 'auto') {
+        if (element.value === '') {
+          // When clearing, use initial rows if set, otherwise use default
+          const rowsToUse = this._initialRows ?? this._defaultRows
+          this.rows = rowsToUse
+          element.style.setProperty('--_lines', rowsToUse.toString())
+        } else {
+          // Calculate required height for content
+          const computedStyle = getComputedStyle(element)
+          const lineHeight = parseFloat(computedStyle.lineHeight)
+          const contentHeight = element.scrollHeight
+          const requiredRows = Math.ceil(contentHeight / lineHeight)
+
+          // Use initial rows as minimum if available
+          const minRows = this._initialRows ?? this._defaultRows
+          this.rows = Math.max(minRows, requiredRows)
+          element.style.setProperty('--_lines', this.rows.toString())
+        }
+      }
     })
   }
 
@@ -280,18 +299,52 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   #handleClearBtnClick = () => {
     this.value = ''
 
+    // Handle clearing based on resizable mode
+    this.elTextareaAsync.then((element) => {
+      if (this.resizable === 'manual') {
+        // For manual resize, just clear the value but maintain user-set height
+        element.style.height = ''
+      } else if (this.resizable === 'false') {
+        // For non-resizable, maintain fixed height based on initial rows
+        const rowsToUse = this._initialRows ?? this._defaultRows
+        this.rows = rowsToUse
+        element.style.setProperty('--_lines', rowsToUse.toString())
+      } else {
+        // For auto resize, reset to initial rows
+        const rowsToUse = this._initialRows ?? this._defaultRows
+        this.rows = rowsToUse
+        element.style.setProperty('--_lines', rowsToUse.toString())
+        element.style.height = ''
+      }
+    })
+
     this.dispatchEvent(
       new Event('gds-input-cleared', {
         bubbles: true,
         composed: true,
       }),
     )
+
     this.dispatchEvent(
       new Event('input', {
         bubbles: true,
         composed: true,
       }),
     )
+  }
+
+  @watch('rows')
+  private _handleRowsChange() {
+    // Store the new rows value as initial if manually set
+    if (this.hasAttribute('rows')) {
+      this._initialRows = this.rows
+    }
+
+    this.elTextareaAsync.then((element) => {
+      if (this.resizable === 'false') {
+        element.style.setProperty('--_lines', this.rows.toString())
+      }
+    })
   }
 
   #renderFieldContents() {
