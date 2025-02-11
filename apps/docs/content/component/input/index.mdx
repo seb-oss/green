@@ -8,7 +8,7 @@ private: false
 ---
 
 ## Anatomy  
-<Figma component="input" id="input-anatomy" caption="Anatomy of Input field" />
+<Figma id="anatomy" caption="Anatomy of Input field" />
 
 1. Label
 2. Label support text
@@ -35,8 +35,8 @@ To be able to use forms in all context's we provide two versions of input fields
 - <Badge variant="notice">Coming soon</Badge> **Floating label** (label inside): Can only be used in specific contexts. Limited features due to accessibility.
 
 <Grid columns="2">
-    <Figma node="1:16764" caption="Default" />
-    <Figma node="1:16767" caption="Floating label" />
+    <Figma id="variant-default" caption="Default" />
+    <Figma id="variant-floating-label" caption="Floating label" />
 </Grid>
 
 
@@ -51,7 +51,7 @@ The input field comes in two sizes.
 - **Small**: used in tables and in some special cases where the space is very limited.
 
 </div>
-<Figma node="1:16772" caption="Large and Small input field" />
+<Figma id="large-small-input" caption="Large and Small input field" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -63,7 +63,7 @@ The input field comes in two sizes.
 ### Label
 All input fields need a label. Keep the label short. 
 </div>
-<Figma node="1:16779" caption="Large input field with just a label." />
+<Figma id="label" caption="Large input field with just a label." />
 </Grid>
 
 <Grid columns="2">
@@ -74,7 +74,7 @@ We always strive to only ask for mandatory information, so we want to inform use
 
 The text "(optional)" is set in font-weight regular, to differentiate from the label.
 </div>
-<Figma node="1:16785" caption="Use '(optional)' to mark optional fields." />
+<Figma id="optional-field-indicator" caption="Use '(optional)' to mark optional fields." />
 </Grid>
 
 <Grid columns="2">
@@ -84,7 +84,7 @@ The text "(optional)" is set in font-weight regular, to differentiate from the l
 Use this to explain how to fill the field. This may be an instruction of how to 
 count or what to include. Limit the instructions to details that all or most users need.
 </div>
-<Figma node="1:16790" caption="" />
+<Figma id="support-text" caption="" />
 </Grid>
 
 ### Contextual help
@@ -97,8 +97,8 @@ If there is limited space use a tooltip.
 If there is large amounts of text use a modal.
 
 <Grid columns="2">
-<Figma node="1:16795" caption="Info icon button to reach help." />
-<Figma node="1:16797" caption="Extended support visible" />
+<Figma id="info-icon-button" caption="Info icon button to reach help." />
+<Figma id="extended-suppport" caption="Extended support visible" />
 </Grid>
 
 ### Leading icon
@@ -106,8 +106,8 @@ A leading icon visually reinforces the purpose of the field, helping users  to u
 For example: search fields or card number.
 
 <Grid columns="2">
-<Figma node="1:16802" caption="Leading icon to indicate it's a search field." />
-<Figma node="1:16804" caption="Leading icon to indicate a card number." />
+<Figma id="leading-search" caption="Leading icon to indicate it's a search field." />
+<Figma id="leading-card-number" caption="Leading icon to indicate a card number." />
 </Grid>
 
 <Grid columns="2">
@@ -116,7 +116,7 @@ For example: search fields or card number.
 To make it easy for users to clear a field an x-icon button may be added at the end of the field. 
 Often used in search/filter forms.
 </div>
-<Figma node="1:16808" caption="Makes it easy to clear a search filter." />
+<Figma id="clear-a-search-field" caption="Makes it easy to clear a search filter." />
 </Grid>
 
 <Grid columns="2">
@@ -126,7 +126,7 @@ Use it to show what the unit input value is.
 
 For example: kr
 </div>
-<Figma node="1:16813" caption="Badge used to display the currency EUR." />
+<Figma id="currency-badge" caption="Badge used to display the currency EUR." />
 </Grid>
 
 <Grid columns="2">
@@ -134,7 +134,7 @@ For example: kr
 ### Field error
 When a field contains an error the field is highlighted in red with an error text describing the error.
 </div>
-<Figma node="1:16818" caption="Input field containing an error." />
+<Figma id="field-error" caption="Input field containing an error." />
 </Grid>
 
 <Grid columns="2">
@@ -150,7 +150,7 @@ If users write too many characters the counter becomes red.
 
 If a user ignores this and tries to submit an error will be indicated on the field stating that the max has been reached.
 </div>
-<Figma node="1:16823" caption="Input field with counter" />
+<Figma id="character-counter" caption="Input field with counter" />
 </Grid>
 
 <Grid columns="2">
@@ -159,7 +159,7 @@ If a user ignores this and tries to submit an error will be indicated on the fie
 (Not available for Floating label variant)
 Used to perform comparative calculations next to the field.
 </div>
-<Figma node="1:16827" caption="Dynamic information displayed under the input field." />
+<Figma id="dynamic-info" caption="Dynamic information displayed under the input field." />
 </Grid>
 
 <Grid columns="2">
@@ -170,7 +170,7 @@ Can be used instead of disabling fields (which is bad for accessibility).
 
 This is a separate component in Figma used to replace an input field.
 </div>
-<Figma node="1:16832" caption="Example usage of Static data." />
+<Figma id="static-data" caption="Example usage of Static data." />
 </Grid>
 
 <Grid columns="2">
@@ -179,16 +179,16 @@ This is a separate component in Figma used to replace an input field.
 AVOID using placeholder text (also know as watermark). They tend to confuse users, thinking the field is already filled with data. Instructions should not be placed here, since they disappear as the field is filled with data. Use the support text instead to describe what's supposed to be entered.
 
 </div>
-<Dont caption="Don't use placeholders."><Figma node="1:16837" /></Dont> 
+<Dont caption="Don't use placeholders."><Figma id="placeholder" /></Dont> 
 </Grid>
 
 ## Do’s and dont’s
 
 <Grid columns="2">
     <Do caption="Do use '(optional)' to mark optional fields">
-        <Figma node="647-6126" />
+        <Figma id="do" />
     </Do>
     <Dont caption="Don't use asterix to indicate mandatory fields.">
-        <Figma node="647-6129" />
+        <Figma id="dont" />
     </Dont>
 </Grid>

@@ -18,7 +18,7 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   const component = allComponents.find((comp) => comp.url_path === slug)
   const componentName =
     component?.title.toLocaleLowerCase().replace(/\s/g, '-') || ''
-
+  console.log('componentName', componentName)
   const [svgSource, setSvgSource] = useState<string | null>(null)
   const figureRef = useRef<HTMLElement | null>(null)
 
@@ -32,9 +32,10 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
           return
         }
         const data = await response.json()
-        // Find the entry with a matching id
+
+        console.log('data', data)
         const match = data.nodes?.find((entry: any) => entry.id === id)
-        if (match && match.svg) {
+        if (match) {
           setSvgSource(match.svg)
         }
       } catch (error) {
