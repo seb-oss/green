@@ -154,24 +154,42 @@ export const Rows: Story = {
   ...DefaultParams,
   name: 'Rows',
   render: () => html`
-    <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea
-        label="Label"
-        supporting-text="Label support text"
-        value="Example value with 8 rows"
-        clearable
-        rows="8"
-      >
-      </gds-textarea>
-      <gds-textarea
-        label="Label"
-        supporting-text="Label support text"
-        value="Example value with 8 rows"
-        clearable
-        resizable="false"
-        rows="8"
-      >
-      </gds-textarea>
+    <gds-flex gap="xl" width="680px">
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Rows:8</gds-text>
+          <gds-text tag="small" color="secondary">
+            Clearable and auto resize
+          </gds-text>
+        </gds-flex>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          value="Example value with 8 rows"
+          clearable
+          rows="8"
+        >
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Rows:8</gds-text>
+          <gds-text tag="small" color="secondary">
+            Clearable and no resize
+          </gds-text>
+        </gds-flex>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          value="Example value with 8 rows"
+          clearable
+          resizable="false"
+          rows="8"
+        >
+        </gds-textarea>
+      </gds-flex>
     </gds-flex>
   `,
 }
