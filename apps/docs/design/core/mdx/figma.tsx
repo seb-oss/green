@@ -34,8 +34,6 @@ export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
           return
         }
         const data = await response.json()
-        // Assuming data is an array of objects with node, component, label, svg properties.
-        // Look for the matching entry where both the node and the component match.
         const match = data.find((entry: any) => {
           return entry.node === node && entry.component === component?.title
         })
@@ -72,7 +70,7 @@ export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
           style={{ height }}
         />
       ) : (
-        <p>Loading SVG...</p>
+        <p>Image could not be found!</p>
       )}
       {caption && <figcaption>{caption}</figcaption>}
     </GdsCard>
