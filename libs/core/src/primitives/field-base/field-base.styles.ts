@@ -36,6 +36,15 @@ export const styles = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: background-color;
+
+      .right {
+        display: flex;
+        position: absolute;
+        gap: var(--gds-space-xs);
+        right: var(--gds-space-s);
+        top: var(--gds-space-xs);
+        block-size: max-content;
+      }
     }
 
     .field.lead-slot-occupied {
