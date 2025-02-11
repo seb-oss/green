@@ -49,7 +49,7 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   }, [id, componentName])
 
   return (
-    <GdsCard margin="0 0 xl 0" {...rest}>
+    <GdsCard margin="0 0 xl 0" max-height="max-content" {...rest}>
       <style
         dangerouslySetInnerHTML={{
           __html: `
