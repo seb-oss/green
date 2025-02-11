@@ -298,7 +298,7 @@ export const Size: Story = {
       </gds-flex>
       <gds-flex flex-direction="column" flex="1" gap="l">
         <gds-flex flex-direction="column" gap="s">
-          <gds-text>Resize: Large(default)</gds-text>
+          <gds-text>Size: Large(default)</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea label="Label" supporting-text="Label support text">
