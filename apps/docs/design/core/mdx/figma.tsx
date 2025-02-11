@@ -18,7 +18,7 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   const component = allComponents.find((comp) => comp.url_path === slug)
   const componentName =
     component?.title.toLocaleLowerCase().replace(/\s/g, '-') || ''
-  console.log('componentName', componentName)
+
   const [svgSource, setSvgSource] = useState<string | null>(null)
   const figureRef = useRef<HTMLElement | null>(null)
 
@@ -27,14 +27,15 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
       try {
         const url = `https://seb-oss.github.io/green-content/${componentName}.json`
         const response = await fetch(url)
+
         if (!response.ok) {
           console.error('Failed to fetch figma nodes:', response.statusText)
           return
         }
-        const data = await response.json()
 
-        console.log('data', data)
+        const data = await response.json()
         const match = data.nodes?.find((entry: any) => entry.id === id)
+
         if (match) {
           setSvgSource(match.svg)
         }
