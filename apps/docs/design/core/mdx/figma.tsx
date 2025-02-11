@@ -51,7 +51,7 @@ export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
   }, [node, component])
 
   return (
-    <GdsCard {...rest}>
+    <GdsCard margin="0 0 xl 0" {...rest}>
       <style
         dangerouslySetInnerHTML={{
           __html: `
