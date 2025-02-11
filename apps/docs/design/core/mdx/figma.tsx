@@ -7,36 +7,33 @@ import { GdsCard } from '$/import/components'
 
 interface FigmaProps {
   caption?: string
-  node?: string
+  id?: string
   height?: string
   [key: string]: any
 }
 
-export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
+export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   const slug = usePathname()
-  // Find the current component from allComponents based on the current URL path.
-  const component = allComponents.find((comp) => comp.url_path === slug)
 
-  // State for the inline SVG source.
+  const component = allComponents.find((comp) => comp.url_path === slug)
+  const componentName =
+    component?.title.toLocaleLowerCase().replace(/\s/g, '-') || ''
+
   const [svgSource, setSvgSource] = useState<string | null>(null)
-  // useRef can be used if you wish to manipulate the <figure> element later.
   const figureRef = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
-    // Fetch the JSON file containing node metadata and SVG data.
     const fetchFigmaNodes = async () => {
       try {
-        const response = await fetch(
-          'https://seb-oss.github.io/green-content/figma-nodes.json',
-        )
+        const url = `https://seb-oss.github.io/green-content/${componentName}.json`
+        const response = await fetch(url)
         if (!response.ok) {
           console.error('Failed to fetch figma nodes:', response.statusText)
           return
         }
         const data = await response.json()
-        const match = data.find((entry: any) => {
-          return entry.node === node && entry.component === component?.title
-        })
+        // Find the entry with a matching id
+        const match = data.nodes?.find((entry: any) => entry.id === id)
         if (match && match.svg) {
           setSvgSource(match.svg)
         }
@@ -45,10 +42,10 @@ export default function Figma({ caption, node, height, ...rest }: FigmaProps) {
       }
     }
 
-    if (node && component) {
+    if (id && componentName) {
       fetchFigmaNodes()
     }
-  }, [node, component])
+  }, [id, componentName])
 
   return (
     <GdsCard margin="0 0 xl 0" {...rest}>
