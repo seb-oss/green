@@ -54,7 +54,6 @@ export class GdsCard extends GdsContainer {
    *
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
     styleTemplate: function (_prop, v) {
       return `
       --_border-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
@@ -69,8 +68,8 @@ export class GdsCard extends GdsContainer {
     super()
 
     // Default values for cards
-    this.padding = 's; m{l}'
-    this['border-radius'] = 'xs; m{s}'
+    this.padding = 's;m{l}'
+    this['border-radius'] = 'xs;m{s}'
     this['border-width'] = '4xs'
     this['border-color'] = 'transparent'
   }
