@@ -56,14 +56,14 @@ export abstract class GdsIcon extends GdsElement {
     const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'brand-seb'
 
     const width = isSebIcon
-      ? '55'
+      ? '55px'
       : this.width !== undefined
-        ? this.width.toString()
+        ? `${this.width.toString()}px`
         : undefined
     const height = isSebIcon
-      ? '24'
+      ? '24px'
       : this.height !== undefined
-        ? this.height.toString()
+        ? `${this.height.toString()}px`
         : '1lh'
     const viewBox = isSebIcon ? '0 0 55 24' : this.box || '0 0 24 24'
 
