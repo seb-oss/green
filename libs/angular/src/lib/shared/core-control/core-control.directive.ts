@@ -66,7 +66,7 @@ export class NggCoreControlDirective
       this.renderer.setProperty(
         this.el.nativeElement,
         'invalid',
-        control.touched && control.invalid,
+        (control.dirty || control.touched) && control.invalid,
       )
     }
   }
