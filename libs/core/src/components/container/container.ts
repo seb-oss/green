@@ -349,9 +349,7 @@ export class GdsContainer extends GdsElement {
    *
    * @property transform
    */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   transform?: string
 
   /**
@@ -392,7 +390,7 @@ export class GdsContainer extends GdsElement {
    * @property 'font-size'
    */
   @styleExpressionProperty({
-    styleTemplate: (prop, values) => {
+    styleTemplate: (_prop, values) => {
       const size = values[0]
       const styleSize = `font-size: var(--gds-text-size-${size});`
       const styleLine = `line-height: var(--gds-text-line-height-${size});`
