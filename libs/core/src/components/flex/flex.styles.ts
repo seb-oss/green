@@ -1,8 +1,4 @@
 import { css } from 'lit'
 
-const style = css`
-  :host {
-    box-sizing: border-box;
-  }
-`
+const style = css``
 export default style
