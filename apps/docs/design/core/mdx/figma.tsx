@@ -16,8 +16,7 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   const slug = usePathname()
 
   const component = allComponents.find((comp) => comp.url_path === slug)
-  const componentName =
-    component?.title.toLocaleLowerCase().replace(/\s/g, '-') || ''
+  const path = component?.pathSegments?.[0]?.pathName || ''
 
   const [svgSource, setSvgSource] = useState<string | null>(null)
   const figureRef = useRef<HTMLElement | null>(null)
@@ -25,7 +24,7 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   useEffect(() => {
     const fetchFigmaNodes = async () => {
       try {
-        const url = `https://seb-oss.github.io/green-content/${componentName}.json`
+        const url = `https://seb-oss.github.io/green-content/${path}.json`
         const response = await fetch(url)
 
         if (!response.ok) {
@@ -44,10 +43,10 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
       }
     }
 
-    if (id && componentName) {
+    if (id && path) {
       fetchFigmaNodes()
     }
-  }, [id, componentName])
+  }, [id, path])
 
   return (
     <GdsCard margin="0 0 xl 0" max-height="max-content" {...rest}>

@@ -33,7 +33,7 @@ export default function Taber({ component, links }: TaberProps) {
       padding="0"
       overflow="hidden"
       position="sticky"
-      inset="60px 0 0 0"
+      inset="70px 0 0 0"
       z-index="999"
       margin="0"
       height="60px"

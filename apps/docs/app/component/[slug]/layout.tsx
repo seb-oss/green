@@ -235,62 +235,53 @@ export default function ComponentLayout({
         width="100%"
         justify-content="center"
         margin="0 auto"
+        gap="l"
       >
+        <Breadcrumb
+          home={'Home'}
+          separator={<GdsText font-size="body-s"> / </GdsText>}
+          slug={slug}
+        />
+
+        <GdsFlex flex-direction="column" gap="xs">
+          <GdsText tag="h1">{title}</GdsText>
+          <GdsText tag="p" text-wrap="balance" className="fade-in delay-200">
+            {summary}
+          </GdsText>
+          {status && (
+            <GdsBadge variant="notice" size="small">
+              {status}
+            </GdsBadge>
+          )}
+          <GdsFlex gap="s">
+            Tags:
+            {tagsArray.map((tag) => (
+              <Link
+                href={`/tag/` + tag}
+                key={tag}
+                style={{
+                  textDecoration: 'underline',
+                  textTransform: 'capitalize',
+                }}
+              >
+                {tag}
+              </Link>
+            ))}
+          </GdsFlex>
+        </GdsFlex>
         <GdsFlex gap="l">
           <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <Breadcrumb
-              home={'Home'}
-              separator={<GdsText font-size="body-s"> / </GdsText>}
-              slug={slug}
-            />
-            <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
+            <GdsCard>
               <GdsFlex
-                justify-content="space-between"
-                align-items="flex-start"
                 gap="xl"
+                align-items="center"
+                justify-content="center"
+                padding="4xl 0"
+                min-height="300px"
               >
-                <GdsFlex flex-direction="column" gap="xs">
-                  <GdsText tag="h1">{title}</GdsText>
-                  <GdsText
-                    tag="p"
-                    text-wrap="balance"
-                    className="fade-in delay-200"
-                  >
-                    {summary}
-                  </GdsText>
-                  {status && (
-                    <GdsBadge variant="notice" size="small">
-                      {status}
-                    </GdsBadge>
-                  )}
-                  <GdsFlex gap="s">
-                    Tags:
-                    {tagsArray.map((tag) => (
-                      <Link
-                        href={`/tag/` + tag}
-                        key={tag}
-                        style={{
-                          textDecoration: 'underline',
-                          textTransform: 'capitalize',
-                        }}
-                      >
-                        {tag}
-                      </Link>
-                    ))}
-                  </GdsFlex>
-                </GdsFlex>
+                <Preview hero={true} />
               </GdsFlex>
-              <GdsCard>
-                <GdsFlex
-                  gap="xl"
-                  align-items="center"
-                  justify-content="center"
-                  padding="4xl 0"
-                >
-                  <Preview hero={true} />
-                </GdsFlex>
-              </GdsCard>
-            </GdsFlex>
+            </GdsCard>
             <Taber component={url_path} links={links} />
             <GdsFlex flex-direction="column" gap="xl">
               {children}
