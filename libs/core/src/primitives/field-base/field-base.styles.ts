@@ -22,11 +22,10 @@ export const styles = css`
       align-items: center;
       justify-content: space-between;
       gap: var(--gds-space-xs);
-      /* In Figma, the border overlaps with the padding, so we need to
-         subtract 1px to replicate this in CSS */
-      padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs)
-        calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+      padding-block: var(--gds-space-xs);
+      padding-inline: var(--gds-space-m) var(--gds-space-s);
       min-block-size: var(--gds-space-3xl);
+      block-size: var(--gds-space-3xl);
       outline-style: solid;
       outline-width: 0;
       border-radius: var(--gds-space-xs);
@@ -37,6 +36,27 @@ export const styles = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: background-color;
+
+      .right {
+        display: flex;
+        position: absolute;
+        gap: var(--gds-space-xs);
+        right: var(--gds-space-s);
+        top: var(--gds-space-xs);
+        block-size: max-content;
+      }
+    }
+
+    .field.lead-slot-occupied {
+      padding-inline-start: var(--gds-space-s);
+    }
+
+    .field.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-space-s);
+
+      &.small {
+        padding-inline-end: var(--gds-space-xs);
+      }
     }
 
     .field:focus-within {
@@ -50,25 +70,14 @@ export const styles = css`
       gap: var(--gds-space-2xs);
       padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs);
       min-block-size: var(--gds-space-xl);
-    }
-
-    /* In Figma, the icon button overlaps 4px with the padding. The rule
-       below is there to replicate that so the field doesn't change height
-       when the action button appears */
-    .field.small slot[name='action']::slotted(*) {
-      margin: calc(var(--gds-space-xs) / -0.5) 0;
+      block-size: var(--gds-space-xl);
     }
 
     .field.multiline {
       align-items: flex-start;
-      padding: calc(var(--gds-space-s) - 1px) var(--gds-space-s)
-        calc(var(--gds-space-s) - 1px) var(--gds-space-m);
+      padding: var(--gds-space-s);
+      padding-inline-start: var(--gds-space-m);
       height: max-content;
-    }
-
-    .field.trail-slot-occupied,
-    .field:not(.action-slot-occupied):not(.small) {
-      padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
     }
 
     .field.disabled {
@@ -119,7 +128,12 @@ export const styles = css`
       align-items: center;
       justify-content: center;
       display: flex;
-      min-width: var(--gds-space-l);
+      inline-size: var(--gds-space-l);
+      block-size: var(--gds-space-l);
+    }
+
+    .multiline slot[name='action']::slotted([gds-element]) {
+      margin-top: -4px;
     }
   }
 `
