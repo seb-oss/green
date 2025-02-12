@@ -3,7 +3,10 @@ import { FormBuilder, Validators } from '@angular/forms'
 import { of } from 'rxjs'
 import { delay } from 'rxjs/operators'
 
-import { DropdownOption, DropdownTexts } from '@sebgroup/green-angular'
+import {
+  DropdownOption,
+  DropdownTexts,
+} from '@sebgroup/green-angular/src/lib/dropdown'
 
 @Component({
   selector: 'green-dropdown',

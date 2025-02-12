@@ -13,7 +13,7 @@ import { styles } from './input.styles'
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 import '../../primitives/field-base'
-import '../icon/icons/cross-small'
+import '../icon/icons/cross-large'
 import '../flex'
 import '../button'
 
@@ -37,7 +37,8 @@ export class GdsInput extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   /**
-   * The supporting text displayed between the label and the field itself
+   * The supporting text displayed between the label and the field.
+   * This text provides additional context or information to the user.
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
@@ -78,6 +79,9 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
 
+  /**
+   * Controls the font-size of texts and height of the field.
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
@@ -223,7 +227,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         .value=${this.value}
         id="input"
         ?disabled=${this.disabled}
-        aria-describedby="supporting-text"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid=${this.invalid}
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
@@ -243,7 +247,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         id="clear-button"
         slot="action"
       >
-        <gds-icon-cross-small />
+        <gds-icon-cross-large />
       </gds-button>`
     else return nothing
   }

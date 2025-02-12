@@ -1,5 +1,76 @@
 # Changelog
 
+## 5.3.1
+
+### Patch Changes
+
+- e93b640: **CoreControlModule**: Fix condition for when field errors are displayed
+
+## 5.3.0
+
+### Minor Changes
+
+- 9b9d7b6: Added table grouping functionality.
+
+### Patch Changes
+
+- d3870c2: Added position: relative to host: element to counteract the position: absolute for the fold-out options.
+- b8a1b9c: Exported account-number-pipe as Angular stand-alone pipe.
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [f8c3d74]
+- Updated dependencies [fc89181]
+  - @sebgroup/green-core@1.65.0
+
+## 5.2.0
+
+### Minor Changes
+
+- 0213060: **V-Angular:** Migrating V-Angular remaining components to Green and closing the gap on already exsisting components.
+
+  ## Migrated components
+
+  - AccountNumber
+  - Alert
+  - BaseControlValueAccessor
+  - Breadcrumbs
+  - Button
+  - Card
+  - CharacterCountdown
+  - Checkbox
+  - Datepicker
+  - DragDrop
+  - Dropdown
+  - DropdownList
+  - ExternalLink
+  - I18n
+  - InfoCircle
+  - Input
+  - InputMask
+  - Modal
+  - Pagination
+  - Radio
+  - Slug
+  - Table
+  - Tabs
+  - Textarea
+  - Toast
+  - Tooltip
+
+### Patch Changes
+
+- Updated dependencies [7213bfb]
+- Updated dependencies [0213060]
+  - @sebgroup/green-core@1.63.2
+  - @sebgroup/chlorophyll@3.6.14
+
+## 5.1.2
+
+### Patch Changes
+
+- 1bf0d07: **nggCoreElement**: Remove console.log
+
 ## 5.1.1
 
 ### Patch Changes

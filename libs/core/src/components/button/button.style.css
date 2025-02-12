@@ -16,7 +16,7 @@
 
   .button {
     --_block-size: var(--gds-space-3xl);
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -40,12 +40,11 @@
     position: relative;
     text-decoration: none;
     transition-property: color, border-colorm, background;
-    transition-duration: 0.4s;
-    max-width: 100%;
+    transition-duration: 0.2s;
     flex: 1;
 
     &:focus {
-      outline-color: color-mix(in srgb, currentcolor, #000 100%);
+      outline-color: var(--gds-color-l3-content-tertiary);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -71,7 +70,7 @@
     }
 
     &:not(.circle) slot:not([name]) {
-      display: inline-block;
+      display: block;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -81,9 +80,10 @@
 
 /* High specificity */
 .button.circle {
-  aspect-ratio: 1/1;
+  aspect-ratio: 1 / 1;
   padding: 0;
   min-block-size: var(--_block-size);
+  min-inline-size: var(--_block-size);
 }
 
 .button:disabled {
@@ -166,6 +166,14 @@
   .positive {
     background-color: var(--gds-color-l3-background-positive);
 
+    &:focus {
+      outline-color: var(--gds-color-l3-content-positive);
+
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
     @media (pointer: fine) {
       &:hover {
         background-color: color-mix(
@@ -233,6 +241,13 @@
 
   .negative {
     background-color: var(--gds-color-l3-background-negative);
+
+    &:focus {
+      outline-color: var(--gds-color-l3-content-negative);
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
 
     @media (pointer: fine) {
       &:hover {

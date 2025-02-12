@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import { RadioButton } from './radioButton'
 import { RadioGroup } from './radioGroup'
 
