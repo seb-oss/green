@@ -179,16 +179,12 @@ This is a separate component in Figma used to replace an input field.
 AVOID using placeholder text (also know as watermark). They tend to confuse users, thinking the field is already filled with data. Instructions should not be placed here, since they disappear as the field is filled with data. Use the support text instead to describe what's supposed to be entered.
 
 </div>
-<Dont caption="Don't use placeholders."><Figma id="placeholder" /></Dont> 
+<Figma type="dont" id="placeholder" caption="Don't use placeholders." />
 </Grid>
 
 ## Do’s and dont’s
 
 <Grid columns="2">
-    <Do caption="Do use '(optional)' to mark optional fields">
-        <Figma id="do" />
-    </Do>
-    <Dont caption="Don't use asterix to indicate mandatory fields.">
-        <Figma id="dont" />
-    </Dont>
+    <Figma type="do" id="do" caption="Do use '(optional)' to mark optional fields" />
+    <Figma type="dont" id="dont" caption="Don't use asterix to indicate mandatory fields." />
 </Grid>

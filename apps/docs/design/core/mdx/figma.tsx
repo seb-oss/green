@@ -3,16 +3,24 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
-import { GdsCard } from '$/import/components'
+import { GdsCard, GdsFlex, GdsText } from '$/import/components'
+import { IconCheckmark, IconCrossLarge } from '$/import/icons'
 
 interface FigmaProps {
   caption?: string
   id?: string
   height?: string
+  type?: 'do' | 'dont'
   [key: string]: any
 }
 
-export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
+export default function Figma({
+  caption,
+  type,
+  id,
+  height,
+  ...rest
+}: FigmaProps) {
   const slug = usePathname()
 
   const component = allComponents.find((comp) => comp.url_path === slug)
@@ -20,12 +28,12 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
 
   const [svgSource, setSvgSource] = useState<string | null>(null)
   const figureRef = useRef<HTMLElement | null>(null)
+  const constructedURL = `https://seb-oss.github.io/green-content/${path}.json`
 
   useEffect(() => {
     const fetchFigmaNodes = async () => {
       try {
-        const url = `https://seb-oss.github.io/green-content/${path}.json`
-        const response = await fetch(url)
+        const response = await fetch(constructedURL)
 
         if (!response.ok) {
           console.error('Failed to fetch figma nodes:', response.statusText)
@@ -49,7 +57,7 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
   }, [id, path])
 
   return (
-    <GdsCard margin="0 0 xl 0" max-height="max-content" {...rest}>
+    <GdsCard margin="0 0 xl 0" padding="xs" max-height="max-content" {...rest}>
       <style
         dangerouslySetInnerHTML={{
           __html: `
@@ -68,9 +76,36 @@ export default function Figma({ caption, id, height, ...rest }: FigmaProps) {
           style={{ height }}
         />
       ) : (
-        <p>Image could not be found!</p>
+        <GdsCard>Image could not be found!</GdsCard>
       )}
-      {caption && <figcaption>{caption}</figcaption>}
+
+      {type === 'do' && (
+        <GdsCard variant="positive" padding="xs m">
+          <GdsFlex gap="s">
+            <IconCheckmark width={12} stroke={2} />
+            <GdsText tag="small" font-weight="book">
+              {caption ? caption : 'Do'}
+            </GdsText>
+          </GdsFlex>
+        </GdsCard>
+      )}
+      {type === 'dont' && (
+        <GdsCard variant="negative" padding="xs m">
+          <GdsFlex gap="s">
+            <IconCrossLarge width={12} stroke={2} />
+            <GdsText tag="small" font-weight="book">
+              {caption ? caption : "Don't"}
+            </GdsText>
+          </GdsFlex>
+        </GdsCard>
+      )}
+      {caption && !type && (
+        <GdsCard padding="xs m">
+          <GdsText tag="small" font-weight="book">
+            {caption}
+          </GdsText>
+        </GdsCard>
+      )}
     </GdsCard>
   )
 }
