@@ -322,7 +322,7 @@ const WcagList: React.FC = () => {
         )}
 
         {/* === Filtersektion === */}
-        <GdsFlex flex-direction="row" gap="s">
+        <GdsFlex width="70%" flex-direction="row" gap="s">
           {/* Kategori Dropdown */}
           <GdsTheme>
             <GdsDropdown
@@ -334,7 +334,6 @@ const WcagList: React.FC = () => {
               }
               value={filteredCategories}
             >
-              <GdsOption value="">Kategori</GdsOption>
               {Object.values(A11yCategories).map((cat) => (
                 <GdsOption key={cat} value={cat}>
                   {cat}
@@ -347,6 +346,7 @@ const WcagList: React.FC = () => {
           <GdsTheme>
             <GdsDropdown
               label="Välj nivå"
+              name="Nivå"
               searchable
               multiple
               onChange={(selected) => handleDropdownChange('Nivå', selected)}
@@ -457,13 +457,13 @@ const WcagList: React.FC = () => {
 
         {/* === Notification Messages === */}
         {resetValidation && (
-          <div style={{ background: '#cce', padding: 8, marginBottom: 8 }}>
+          <div style={{ background: '#cce', padding: 8 }}>
             <strong>Filtren är återställda!</strong>{' '}
             <button onClick={() => setResetValidation(false)}>x</button>
           </div>
         )}
         {fileUploadValidation && (
-          <div style={{ background: '#cec', padding: 8, marginBottom: 8 }}>
+          <div style={{ background: '#cec', padding: 8 }}>
             <strong>{fileName} importerad. Listan är uppdaterad!</strong>{' '}
             <button onClick={() => setFileUploadValidation(false)}>x</button>
           </div>
@@ -478,8 +478,8 @@ const WcagList: React.FC = () => {
         {isLoading ? (
           <p>Laddar...</p>
         ) : (
-          <GdsFlex flex-direction="row" gap="l">
-            <ul>
+          <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
+            <GdsFlex flex-direction="column" margin="0 auto">
               {Array.isArray(filteredWcagList) &&
                 filteredWcagList.map((item) => (
                   <GdsCard variant="secondary" border-color="secondary">
@@ -488,10 +488,10 @@ const WcagList: React.FC = () => {
                         <strong>{item.id}</strong>: {item.topic}
                       </GdsFlex>
                       <GdsFlex
-                        align-items="flex-start; m{center}"
                         justify-content="space-between"
                         flex-direction="column; s{row}"
                         gap="m"
+                        padding="2xl"
                       >
                         <GdsFlex flex="1" flex-direction="column" gap="m">
                           <GdsFlex flex-direction="column">
@@ -523,6 +523,7 @@ const WcagList: React.FC = () => {
                         </GdsFlex>
                         <GdsFlex flex="1" flex-direction="column" gap="m">
                           {/* Ändra till select för status om det är lämpligt */}
+                          <GdsText>Är kravet uppfyllt?</GdsText>
                           <GdsTheme>
                             <GdsDropdown
                               value={item.status || A11yStatus.IS_NOT_ASSESSED}
@@ -555,7 +556,7 @@ const WcagList: React.FC = () => {
                     </li>
                   </GdsCard>
                 ))}
-            </ul>
+            </GdsFlex>
           </GdsFlex>
         )}
 
