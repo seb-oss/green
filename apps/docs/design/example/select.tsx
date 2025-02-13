@@ -31,24 +31,17 @@ const Textarea = ({ hero }: { hero?: boolean }) => (
         </GdsSelect>
       </GdsFlex>
     ) : (
-      <GdsSelect label="Select">
-        <IconBooks slot="lead"></IconBooks>
-        <select>
-          <optgroup label="Physics">
-            <option value="quantum-mechanics">Quantum Mechanics</option>
-            <option value="relativity">Relativity</option>
-          </optgroup>
-          <optgroup label="Chemistry">
-            <option value="organic-chemistry">Organic Chemistry</option>
-            <option value="inorganic-chemistry">Inorganic Chemistry</option>
-          </optgroup>
-          <optgroup label="Biology">
-            <option value="genetics">Genetics</option>
-            <option value="microbiology">Microbiology</option>
-            <option value="ecology">Ecology</option>
-          </optgroup>
-        </select>
-      </GdsSelect>
+      <GdsFlex flex="1" width="240px">
+        <GdsSelect label="Select">
+          <IconBooks slot="lead"></IconBooks>
+          <select>
+            <optgroup label="Group">
+              <option value="option-1">Option 1</option>
+              <option value="option-2">Option 2</option>
+            </optgroup>
+          </select>
+        </GdsSelect>
+      </GdsFlex>
     )}
   </>
 )

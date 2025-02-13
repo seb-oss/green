@@ -28,6 +28,7 @@ export { default as Text } from './text'
 export { default as Textarea } from './textarea'
 export { default as Validation } from './validation'
 export { default as Video } from './video'
+export { default as Select } from './select'
 
 // const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
 //   Badge: Badge,
