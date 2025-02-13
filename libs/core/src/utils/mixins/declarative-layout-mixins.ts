@@ -1,8 +1,8 @@
 import { GdsElement } from '../../gds-element'
 import { styleExpressionProperty } from '../decorators/style-expression-property'
-import { forSpaceTokens } from '../helpers'
+import { forSpaceTokens, forSpaceTokensSupportingNegative } from '../helpers'
 
-type Constructor<T = {}> = new (...args: any[]) => T
+type Constructor<T = GdsElement> = new (...args: any[]) => T
 
 export interface SizeXProps {
   width?: string
@@ -130,10 +130,8 @@ export function withSizeYProps<T extends Constructor<GdsElement>>(
 
 export interface MarginProps {
   margin?: string
-  'margin-top'?: string
-  'margin-right'?: string
-  'margin-bottom'?: string
-  'margin-left'?: string
+  'margin-inline'?: string
+  'margin-block'?: string
 }
 
 /**
@@ -147,36 +145,22 @@ export function withMarginProps<T extends Constructor<GdsElement>>(
      * Style Expression Property that controls the `margin` property.
      * Only accepts space tokens.
      */
-    @styleExpressionProperty(forSpaceTokens)
+    @styleExpressionProperty(forSpaceTokensSupportingNegative)
     margin?: string
 
     /**
-     * Style Expression Property that controls the `margin-top` property.
+     * Style Expression Property that controls the `margin-inline` property.
      * Only accepts space tokens.
      */
-    @styleExpressionProperty(forSpaceTokens)
-    'margin-top'?: string
+    @styleExpressionProperty(forSpaceTokensSupportingNegative)
+    'margin-inline'?: string
 
     /**
-     * Style Expression Property that controls the `margin-right` property.
+     * Style Expression Property that controls the `margin-block` property.
      * Only accepts space tokens.
      */
-    @styleExpressionProperty(forSpaceTokens)
-    'margin-right'?: string
-
-    /**
-     * Style Expression Property that controls the `margin-bottom` property.
-     * Only accepts space tokens.
-     */
-    @styleExpressionProperty(forSpaceTokens)
-    'margin-bottom'?: string
-
-    /**
-     * Style Expression Property that controls the `margin-left` property.
-     * Only accepts space tokens.
-     */
-    @styleExpressionProperty(forSpaceTokens)
-    'margin-left'?: string
+    @styleExpressionProperty(forSpaceTokensSupportingNegative)
+    'margin-block'?: string
   }
 
   return MarginPropsMixin as Constructor<MarginProps> & T
@@ -184,10 +168,8 @@ export function withMarginProps<T extends Constructor<GdsElement>>(
 
 export interface PaddingProps {
   padding?: string
-  'padding-top'?: string
-  'padding-right'?: string
-  'padding-bottom'?: string
-  'padding-left'?: string
+  'padding-inline'?: string
+  'padding-block'?: string
 }
 
 /**
@@ -205,33 +187,92 @@ export function withPaddingProps<T extends Constructor<GdsElement>>(
     padding?: string
 
     /**
-     * Style Expression Property that controls the `padding-top` property.
+     * Style Expression Property that controls the `padding-inline` property.
      * Only accepts space tokens.
      */
     @styleExpressionProperty(forSpaceTokens)
-    'padding-top'?: string
+    'padding-inline'?: string
 
     /**
-     * Style Expression Property that controls the `padding-right` property.
+     * Style Expression Property that controls the `padding-block` property.
      * Only accepts space tokens.
      */
     @styleExpressionProperty(forSpaceTokens)
-    'padding-right'?: string
-
-    /**
-     * Style Expression Property that controls the `padding-bottom` property.
-     * Only accepts space tokens.
-     */
-    @styleExpressionProperty(forSpaceTokens)
-    'padding-bottom'?: string
-
-    /**
-     * Style Expression Property that controls the `padding-left` property.
-     * Only accepts space tokens.
-     */
-    @styleExpressionProperty(forSpaceTokens)
-    'padding-left'?: string
+    'padding-block'?: string
   }
 
   return PaddingPropsMixin as Constructor<PaddingProps> & T
+}
+
+export interface LayoutChildProps {
+  'align-self'?: string
+  'justify-self'?: string
+  'place-self'?: string
+  'grid-column'?: string
+  'grid-row'?: string
+  'grid-area'?: string
+  flex?: string
+}
+
+/**
+ * Mixin that adds layout child properties to a component.
+ *
+ * 'Layout child' properties are properties that are applies to the children of layout containers such as `gds-div`, `gds-flex` and `gds-grid`.
+ */
+export function withLayoutChildProps<T extends Constructor<GdsElement>>(
+  base: T,
+): Constructor<LayoutChildProps> & T {
+  class LayoutChildPropsMixin extends base implements LayoutChildProps {
+    /**
+     * Style Expression Property that controls the `align-self` property.
+     * Supports all valid CSS `align-self` values.
+     */
+    @styleExpressionProperty()
+    'align-self'?: string
+
+    /**
+     * Style Expression Property that controls the `justify-self` property.
+     * Supports all valid CSS `justify-self` values.
+     */
+    @styleExpressionProperty()
+    'justify-self'?: string
+
+    /**
+     * Style Expression Property that controls the `place-self` property.
+     * Supports all valid CSS `place-self` values.
+     */
+    @styleExpressionProperty()
+    'place-self'?: string
+
+    /**
+     * Style Expression Property that controls the `grid-column` property.
+     * Supports all valid CSS grid-column values.
+     * Documentation: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column
+     */
+    @styleExpressionProperty()
+    'grid-column'?: string
+
+    /**
+     * Style Expression Property that controls the `grid-row` property.
+     * Supports all valid CSS `grid-row` values.
+     */
+    @styleExpressionProperty()
+    'grid-row'?: string
+
+    /**
+     * Style Expression Property that controls the `grid-area` property.
+     * Supports all valid CSS `grid-area` values.
+     */
+    @styleExpressionProperty()
+    'grid-area'?: string
+
+    /**
+     * Style Expression Property that controls the `flex` property.
+     * Supports all valid CSS `flex` values.
+     */
+    @styleExpressionProperty()
+    flex?: string
+  }
+
+  return LayoutChildPropsMixin as Constructor<LayoutChildProps> & T
 }
