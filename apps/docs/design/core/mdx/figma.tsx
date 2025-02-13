@@ -57,55 +57,64 @@ export default function Figma({
   }, [id, path])
 
   return (
-    <GdsCard margin="0 0 xl 0" padding="xs" max-height="max-content" {...rest}>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
+    <GdsFlex
+      flex-direction="column"
+      margin="0 0 xl 0"
+      gap="xs"
+      max-height="max-content"
+    >
+      <GdsFlex
+        padding="xs"
+        border-radius="s"
+        align-items="center"
+        background="primary"
+        max-height={height ? height : 'max-content'}
+        height={height}
+        {...rest}
+      >
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             @scope {
               svg {
                 width: 100%;
               }
             }
           `,
-        }}
-      />
-      {svgSource ? (
-        <figure
-          ref={figureRef}
-          dangerouslySetInnerHTML={{ __html: svgSource }}
-          style={{ height }}
+          }}
         />
-      ) : (
-        <GdsCard>Image could not be found!</GdsCard>
-      )}
-
+        {svgSource ? (
+          <figure
+            ref={figureRef}
+            dangerouslySetInnerHTML={{ __html: svgSource }}
+          />
+        ) : (
+          <GdsCard>Image could not be found!</GdsCard>
+        )}
+      </GdsFlex>
       {type === 'do' && (
-        <GdsCard variant="positive" padding="xs m">
-          <GdsFlex gap="s">
-            <IconCheckmark width={12} stroke={2} />
-            <GdsText tag="small" font-weight="book">
-              {caption ? caption : 'Do'}
-            </GdsText>
-          </GdsFlex>
-        </GdsCard>
+        <GdsFlex color="positive" padding="0 m" gap="s">
+          <IconCheckmark width={12} stroke={2} />
+          <GdsText tag="small" font-weight="book">
+            {caption ? caption : 'Do'}
+          </GdsText>
+        </GdsFlex>
       )}
       {type === 'dont' && (
-        <GdsCard variant="negative" padding="xs m">
-          <GdsFlex gap="s">
-            <IconCrossLarge width={12} stroke={2} />
-            <GdsText tag="small" font-weight="book">
-              {caption ? caption : "Don't"}
-            </GdsText>
-          </GdsFlex>
-        </GdsCard>
+        <GdsFlex color="negative" padding="0 m" gap="s">
+          <IconCrossLarge width={12} stroke={2} />
+          <GdsText tag="small" font-weight="book">
+            {caption ? caption : "Don't"}
+          </GdsText>
+        </GdsFlex>
       )}
       {caption && !type && (
-        <GdsCard padding="xs m">
-          <GdsText tag="small" font-weight="book">
+        <GdsFlex padding="0 m">
+          <GdsText color="secondary" tag="small" font-weight="book">
             {caption}
           </GdsText>
-        </GdsCard>
+        </GdsFlex>
       )}
-    </GdsCard>
+    </GdsFlex>
   )
 }
