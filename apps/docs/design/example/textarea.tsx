@@ -8,7 +8,7 @@ const Textarea = ({ hero }: { hero?: boolean }) => (
     {hero ? (
       <GdsFlex max-width="300px">
         <GdsTextarea
-          label="Textarea"
+          label="Label"
           supportingText="This is a supporting text."
           clearable
         >
@@ -20,7 +20,9 @@ const Textarea = ({ hero }: { hero?: boolean }) => (
         </GdsTextarea>
       </GdsFlex>
     ) : (
-      <GdsTextarea label="Textarea" />
+      <GdsTextarea label="Textarea" clearable>
+        <IconCreditCard slot="lead" />
+      </GdsTextarea>
     )}
   </>
 )
