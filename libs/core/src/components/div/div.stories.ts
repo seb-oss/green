@@ -33,10 +33,8 @@ const DefaultParams: Story = {
   },
 }
 
-export const Container: Story = {
+export const Default: Story = {
   ...DefaultParams,
-  name: 'Container',
-  render: (args) => html`<gds-container> Container </gds-container>`,
 }
 
 /**
