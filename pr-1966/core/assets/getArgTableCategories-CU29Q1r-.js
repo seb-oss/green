@@ -1,1 +1,0 @@
-import{c as n}from"./custom-elements-BIIP_Ksr.js";function s(o){var a;const r=(a=n.modules.find(e=>e.declarations.find(t=>t.tagName===o)))==null?void 0:a.declarations[0];return r==null?void 0:r.members.filter(e=>e.category).map(e=>({[e.name]:{table:{category:e.category}}})).reduce((e,t)=>({...e,...t}),{})}export{s as g};
