@@ -1,7 +1,6 @@
 'use client'
 
 import { GdsFlex, GdsTextarea } from '$/import/components'
-import { IconCreditCard } from '$/import/icons'
 
 const Textarea = ({ hero }: { hero?: boolean }) => (
   <>
@@ -12,7 +11,6 @@ const Textarea = ({ hero }: { hero?: boolean }) => (
           supportingText="This is a supporting text."
           clearable
         >
-          <IconCreditCard slot="lead" />
           <span slot="extended-supporting-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -20,9 +18,7 @@ const Textarea = ({ hero }: { hero?: boolean }) => (
         </GdsTextarea>
       </GdsFlex>
     ) : (
-      <GdsTextarea label="Textarea" clearable>
-        <IconCreditCard slot="lead" />
-      </GdsTextarea>
+      <GdsTextarea label="Textarea" clearable></GdsTextarea>
     )}
   </>
 )
