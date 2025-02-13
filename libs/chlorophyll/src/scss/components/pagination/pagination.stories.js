@@ -14,7 +14,7 @@ export default {
 
 export const Pagination = {
   render: (args) => `
-    <nav class="pagination ${args.size}" role="navigation" aria-label="Pagination">
+    <nav class="gds-pagination ${args.size}" role="navigation" aria-label="Pagination">
     <ul class="gds-reset">
       <li>
         <a href="page/4" aria-label="Previous Page" class="gds-reset">

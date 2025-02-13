@@ -2,12 +2,9 @@
 @use 'sass:map';
 @use '../../common';
 @use '../../tokens';
-// Row
-//
-// Rows contain your columns.
 
 @if tokens.$enable-grid-classes {
-  .row {
+  .gds-row {
     @include mixins.make-row();
 
     > * {
@@ -17,7 +14,7 @@
 }
 
 @if tokens.$enable-cssgrid {
-  .grid {
+  .gds-grid {
     @include mixins.make-cssgrid();
     display: grid;
     gap: var(--#{tokens.$variable-prefix}gap, #{tokens.$grid-gutter-width});
@@ -28,10 +25,6 @@
     grid-template-rows: repeat(var(--#{tokens.$variable-prefix}rows, 1), 1fr);
   }
 }
-
-// Columns
-//
-// Common styles for small and large grid columns
 
 @if tokens.$enable-grid-classes {
   @include mixins.make-grid-columns();

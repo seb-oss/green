@@ -2,23 +2,21 @@
 
 ul.gds-list {
   @include mixins.base-list();
-}
+  &.bullet-list {
+    @include mixins.bullet-list();
+  }
+  &.check-list {
+    @include mixins.check-list(green);
 
-ul.gds-bullet-list {
-  @include mixins.bullet-list();
+    &.primary {
+      @include mixins.check-list(black);
+    }
+  }
 }
 
 ol.gds-list {
   @include mixins.base-list();
   @include mixins.ordered-list();
-}
-
-ul.gds-check-list {
-  @include mixins.check-list(green);
-
-  &.primary {
-    @include mixins.check-list(black);
-  }
 }
 
 .gds-table-list-caption {
@@ -27,8 +25,4 @@ ul.gds-check-list {
 
 .gds-table-list {
   @include mixins.table-list();
-}
-
-.gds-value-list {
-  @include mixins.add-value-list();
 }

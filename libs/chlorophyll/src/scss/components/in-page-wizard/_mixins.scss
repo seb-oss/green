@@ -1,8 +1,8 @@
-@use '../../../common/index' as common;
-@use '../../../tokens';
+@use '../../common/index' as common;
+@use '../../tokens';
 
 @mixin add-in-page-wizard-footer {
-  border-top: 1px solid tokens.get(tokens.$grey, 500);
+  border-top: 1px solid var(--gds-sys-color-base-500);
   padding: 1rem;
   margin-top: 0;
 

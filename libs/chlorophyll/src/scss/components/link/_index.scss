@@ -1,33 +1,27 @@
 @use 'mixins';
 @use 'sass:map';
 
-a:not(:link, :visited, .gds-reset) {
+a:not(:link, :visited, .gds-reset, .gds-link) {
   @include mixins.disabled;
 }
 
 .gds-link:not(.gds-button) {
   @include mixins.underline;
   @include mixins.base;
+
+  &.link-underline {
+    @include mixins.underline;
+  }
+
+  &.link-icon {
+    @include mixins.icon;
+  }
+
+  &.link-arrow {
+    @include mixins.arrow;
+  }
 }
 
 a.gds-button {
   @include mixins.button;
-}
-
-a.gds-link-underline {
-  @include mixins.underline;
-}
-
-.gds-link-icon {
-  @include mixins.icon;
-}
-
-.gds-link-arrow {
-  @include mixins.arrow;
-}
-
-@each $variant, $colors in mixins.$variants {
-  [class*='-#{$variant}'] {
-    @include mixins.variant(currentColor);
-  }
 }

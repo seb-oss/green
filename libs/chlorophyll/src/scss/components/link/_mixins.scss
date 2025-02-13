@@ -2,32 +2,14 @@
 @use '../../common';
 @use 'sass:map';
 
-$color: tokens.$link-color;
-$color-hover: tokens.get(tokens.$blue, 1);
-$color-visited: tokens.$link-color-visited;
-$color-dark: tokens.$link-color-dark;
-$color-visited-dark: tokens.$link-color-visited-dark;
+$color: var(--gds-sys-color-text-link);
+$color-hover: var(--gds-sys-color-blue);
+$color-visited: var(--gds-sys-color-blue-dark-2);
+$color-dark: var(--gds-sys-color-text-primary);
+$color-visited-dark: var(--gds-sys-color-text-secondary);
+// TODO: Change to typography tokens generated from style dictionary
 $font-weight: tokens.$font-weight-bold;
 $outline-opacity: 0.35;
-
-$variants: (
-  'info': (
-    color: tokens.$intent-info-color,
-    fadable-color: tokens.$intent-info-fadable-color,
-  ),
-  'success': (
-    color: tokens.$intent-success-color,
-    fadable-color: tokens.$intent-success-fadable-color,
-  ),
-  'warning': (
-    color: tokens.$intent-warning-color,
-    fadable-color: tokens.$intent-warning-fadable-color,
-  ),
-  'danger': (
-    color: tokens.$intent-danger-color,
-    fadable-color: tokens.$intent-danger-fadable-color,
-  ),
-);
 
 @mixin base {
   @include common.add-outline-focus-state();
@@ -133,27 +115,6 @@ $variants: (
     &:hover svg,
     &:hover [gds-element*='gds-icon'] {
       --arrow-translate: none;
-    }
-  }
-}
-
-/*
-
-Mixin for link variants
-Base on background color of parent element eg. white links on dark backgrounds etc.
-
-*/
-
-@mixin variant($color) {
-  a:link {
-    @include common.add-outline-focus-state();
-  }
-  a:link:not(.button, [aria-disabled]) {
-    color: $color;
-    &:hover,
-    &:focus,
-    &:visited {
-      color: currentColor;
     }
   }
 }

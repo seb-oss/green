@@ -129,6 +129,7 @@ $_background: input.$background;
 
     > *:focus {
       outline: 0;
+      background-color: transparent;
     }
   }
 
@@ -136,6 +137,8 @@ $_background: input.$background;
     @include common.padding-vertical(4);
     background: $_background;
     border-radius: inherit;
+    flex-grow: 0;
+    padding-left: 1rem;
   }
 
   // don't grow buttons in groups with inputs

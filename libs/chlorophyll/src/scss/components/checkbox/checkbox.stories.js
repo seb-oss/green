@@ -184,7 +184,7 @@ export const HorizontalValidation = {
           </label>
         </div>
       </fieldset>      <span class="gds-form-info">Neutral</span>
-    </div>    <div class="form-group was-validated">
+    </div>    <div class="gds-form-group was-validated">
       <fieldset aria-describedby="checkboxGroupHelp1" class="is-valid">
         <legend>Valid checkbox group</legend>        <span id="checkboxGroupHelp1" class="gds-form-info">
           Checkbox group description
@@ -196,7 +196,7 @@ export const HorizontalValidation = {
           </label>
         </div>
       </fieldset>      <span class="gds-form-info">Valid</span>
-    </div>    <div class="form-group was-validated">
+    </div>    <div class="gds-form-group was-validated">
       <fieldset aria-describedby="checkboxGroupHelp2" class="is-invalid">
         <legend>Invalid checkbox group</legend>
         <span class="gds-form-info">Checkbox group description</span>        <div>

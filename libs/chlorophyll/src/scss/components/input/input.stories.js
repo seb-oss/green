@@ -28,12 +28,12 @@ export default {
  */
 export const Input = {
   render: (args) => `
-    <div class="gds-form-group">
-      <label for="inputInvalid">${args.text}</label>
-      ${args.formInfo ? '<span class="form-info">' + args.formInfo + '</span>' : ''}
-      <input id="inputInvalid" type="text" ${args.validation ? 'class="' + args.validation + '"' : ''} ${args.disabled ? 'disabled' : ''} />
-      <span class="form-info">${args.validation ? args.validation : ''}</span>
-    </div>`,
+<div class="gds-form-group">
+  <label for="inputInvalid" class="gds-label">${args.text}</label>
+  ${args.formInfo ? '<span class="gds-form-info">' + args.formInfo + '</span>' : ''}
+  <input id="inputInvalid" type="text" class="gds-input ${args.validation}" ${args.disabled ? 'disabled' : ''} />
+  <span class="gds-form-info">${args.validation ? args.validation : ''}</span>
+</div>`,
   args: {
     text: 'Input label',
     formInfo:

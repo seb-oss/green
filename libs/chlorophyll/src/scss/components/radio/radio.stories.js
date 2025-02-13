@@ -31,11 +31,11 @@ export const Radiobutton = {
       <fieldset>
         <legend>${args.legend}</legend>
         <div>
-          <label class="form-control">
+          <label class="gds-form-control">
             <input type="radio" name="default" class="${args.validation}" ${args.disabled} />
             <span>${args.firstLabel}</span><i></i>
           </label>
-          <label class="form-control">
+          <label class="gds-form-control">
             <input type="radio" name="default" checked class="${args.validation}" ${args.disabled} />
             <span>${args.secondLabel}</span><i></i>
           </label>

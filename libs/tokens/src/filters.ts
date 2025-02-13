@@ -84,10 +84,9 @@ export default {
       return token.path.includes('ref')
     },
   },
-  is2023Size: {
-    name: 'is2023Size',
+  isDimention: {
+    name: 'isDimention',
     matcher: (token) => {
-      if (token.version === '2016') return false
       if (token.path.includes('ref')) return false
       return token.path.includes('size')
     },

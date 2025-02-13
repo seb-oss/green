@@ -49,3 +49,60 @@ export const ButtonGroup = {
       <button type="button" class="gds-button ghost-dark">Forth button</button>
     </div>`,
 }
+
+export const StaticText = {
+  render: () => `
+    <form>
+      <div class="gds-form-group">
+        <div class="gds-group gds-group-border gds-group-focus">
+          <input type="text" placeholder="Normal input" class="gds-input" />
+          <span class="gds-form-text">First static</span>
+        </div>
+      </div>
+
+      <div class="gds-form-group">
+        <div class="gds-group gds-group-border gds-group-focus is-valid">
+          <input type="text" placeholder="Successful input" class="gds-input" />
+          <span class="gds-form-text">Second static</span>
+        </div>
+        <span class="gds-form-info">Success</span>
+      </div>
+
+      <div class="gds-form-group">
+        <div class="gds-group gds-group-border gds-group-focus is-invalid">
+          <input type="text" placeholder="Erroneous input" class="gds-input" />
+          <span class="gds-form-text">Third static</span>
+        </div>
+        <span class="gds-form-info">Error</span>
+      </div>
+    </form>`,
+}
+
+export const InputAndButtons = {
+  render: () => `
+    <div class="gds-group gds-group-border">
+      <input type="text" placeholder="Input and buttons" class="gds-input" />
+      <button type="button" class="gds-button secondary">Default button</button>
+      <button type="button" class="gds-button primary">Primary button</button>
+    </div>`,
+}
+
+export const Sizes = {
+  render: () => `
+  <div class="gds-group size-sm">
+    <input type="text" placeholder="Small input" class="gds-input small" />
+    <button type="button" class="gds-button primary small">Small button</button>
+  </div>
+  <br>
+  <br>
+  <div class="gds-group">
+    <input type="text" placeholder="Normal input" class="gds-input" />
+    <button type="button" class="gds-button primary">Normal button</button>
+  </div>
+  <br>
+  <br>
+  <div class="gds-group size-lg">
+    <input type="text" placeholder="Large input" class="gds-input large" />
+    <button type="button" class="gds-button primary large">Large button</button>
+  </div>`,
+}

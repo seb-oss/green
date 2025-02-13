@@ -123,47 +123,6 @@ $_border-color: var(--gds-sys-color-base-200);
     }
   }
 }
-
-@mixin add-value-list() {
-  dt,
-  dd {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  dd {
-    font-weight: 500;
-  }
-
-  &:not(.gds-list--horizontal) dt {
-    margin-block-end: 0.25rem;
-  }
-
-  &:not(.gds-list--horizontal) dd {
-    margin-block-end: 1rem;
-  }
-
-  &.gds-list--horizontal {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-
-    dt,
-    dd {
-      padding: 0.5rem 0;
-    }
-
-    dt {
-      text-align: start;
-      justify-content: start;
-    }
-
-    dd {
-      text-align: end;
-      justify-content: end;
-    }
-  }
-}
-
 @mixin table-list() {
   @debug 'table-list mixin is deprecated, use the add-list-group mixin instead';
   @include add-list-group();

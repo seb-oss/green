@@ -9,8 +9,8 @@ $container-max-widths: (
   xl: 1140px,
   xxl: 1320px,
 );
+
 // Container widths
-//
 // Set the container width, and override it for fixed navbars in media queries.
 
 @if tokens.$enable-grid-classes {
@@ -33,7 +33,7 @@ $container-max-widths: (
 
       @each $name, $width in tokens.$grid-breakpoints {
         @if ($extend-breakpoint) {
-          .container#{common.breakpoint-infix($name, tokens.$grid-breakpoints)} {
+          .gds-container#{common.breakpoint-infix($name, tokens.$grid-breakpoints)} {
             @extend %responsive-container-#{$breakpoint} !optional;
           }
 

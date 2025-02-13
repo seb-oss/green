@@ -27,7 +27,7 @@ $variants: (
   'danger': (
     color: var(--gds-sys-color-text-inverted),
     border-color: transparent,
-    background: hsl(var(--sg-intent-critical-hsl)),
+    background: var(--gds-sys-color-dark-red-1),
     ghost-button-type: 'light',
   ),
 );
@@ -188,7 +188,7 @@ $color: var(--gds-sys-color-text-primary);
       );
 
       // style for nested links
-      @include link.variant(map.get($colors, 'color'));
+      //@include link.variant(map.get($colors, 'color'));
     }
   }
 }
