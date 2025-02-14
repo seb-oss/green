@@ -4,7 +4,7 @@ import { html, unsafeStatic } from 'lit/static-html.js'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { GdsContainer } from '../container'
+import { GdsDiv } from '../div'
 import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
@@ -17,7 +17,7 @@ import textStyles from './text.style'
  *
  */
 @gdsCustomElement('gds-text')
-export class GdsText extends GdsContainer {
+export class GdsText extends GdsDiv {
   static styles = [tokens, defaultStyles, textStyles]
 
   /**

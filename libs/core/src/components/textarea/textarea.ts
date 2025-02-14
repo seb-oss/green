@@ -9,9 +9,15 @@ import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './textarea.styles'
 
+import type { GdsButton } from '../button'
 // Local Components
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
@@ -20,23 +26,8 @@ import '../icon/icons/cross-large'
 import '../flex'
 import '../button'
 
-import type { GdsButton } from '../button'
-
-/**
- * @summary A custom input element that can be used in forms.
- * @status beta
- *
- * @element gds-textarea
- *.
- * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
- * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
- * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
- *       displayed in a panel when the user clicks the info button.
- * @event gds-input-cleared - Fired when the clear button is clicked.
- */
-@gdsCustomElement('gds-textarea')
 @localized()
-export class GdsTextarea extends GdsFormControlElement<string> {
+class Textarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   /**
@@ -357,3 +348,20 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return this.maxlength < Number.MAX_SAFE_INTEGER
   }
 }
+
+/**
+ * @summary A custom input element that can be used in forms.
+ * @status beta
+ *
+ * @element gds-textarea
+ *.
+ * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
+ * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
+ *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
+ */
+@gdsCustomElement('gds-textarea')
+export class GdsTextarea extends withLayoutChildProps(
+  withSizeXProps(withMarginProps(Textarea)),
+) {}

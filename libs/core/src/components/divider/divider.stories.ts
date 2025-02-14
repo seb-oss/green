@@ -7,9 +7,7 @@ import '../card'
 import { html } from 'lit'
 
 /**
- * The `gds-divider`
- *
- * The divider component is used to separate content in a meaningful way.
+ * `gds-divider` is used to semantically separate content, and has the same meaning as the `<hr>` element in HTML. Add `role="presentation"` to the divider if you only want a visual separation.
  *
  * The divider can be customized with different properties like color and size.
  *

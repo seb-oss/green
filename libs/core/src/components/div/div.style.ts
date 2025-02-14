@@ -1,6 +1,9 @@
 import { css } from 'lit'
 
 const style = css`
+  :host {
+    display: block;
+  }
   :host(:focus-visible) {
     outline-color: color-mix(in srgb, currentcolor, #000 100%);
     outline-offset: var(--gds-space-3xs);

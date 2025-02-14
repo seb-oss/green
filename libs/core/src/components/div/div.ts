@@ -6,7 +6,6 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import {
   forColorTokens,
   forSpaceTokens,
-  forSpaceTokensSupportingNegative,
   GdsColorLevel,
   parseColorValue,
 } from '../../utils/helpers'
@@ -18,27 +17,24 @@ import {
   withLayoutChildProps,
   withMarginProps,
   withPaddingProps,
+  withPositioningProps,
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import ContainerCSS from './div.style'
 
 /**
- * `gds-container` is the base element in the declarative layout system. You can think of it as a `<div>` in html.
- *
- * Container is set to `display: block` by default, and adds all of the basic layoutout related properties, like padding, margin, border, etc.
- *
- *
- *
  * @element gds-div
  * @status beta
  *
+ * `gds-div` is the base element in the declarative layout system.
  */
-
 @gdsCustomElement('gds-div')
 export class GdsDiv extends withSizeXProps(
   withSizeYProps(
-    withMarginProps(withPaddingProps(withLayoutChildProps(GdsElement))),
+    withMarginProps(
+      withPaddingProps(withLayoutChildProps(withPositioningProps(GdsElement))),
+    ),
   ),
 ) {
   static styles = [tokens, ContainerCSS]
@@ -144,20 +140,6 @@ export class GdsDiv extends withSizeXProps(
   opacity?: string
 
   /**
-   * Style Expression Property that controls the `position` property.
-   * Supports all valid CSS `position` values.
-   */
-  @styleExpressionProperty()
-  position?: string
-
-  /**
-   * Style Expression Property that controls the `inset` property.
-   * Supports all valid CSS `inset` values.
-   */
-  @styleExpressionProperty()
-  inset?: string
-
-  /**
    * Style Expression Property that controls the `overflow` property.
    * Supports all valid CSS `overflow` values.
    */
@@ -177,13 +159,6 @@ export class GdsDiv extends withSizeXProps(
    */
   @styleExpressionProperty()
   'z-index'?: string
-
-  /**
-   * Style Expression Property that controls the `transform` property.
-   * Supports all valid CSS `transform` values.
-   */
-  @styleExpressionProperty()
-  transform?: string
 
   /**
    * Style Expression Property that controls the `font-size` property.

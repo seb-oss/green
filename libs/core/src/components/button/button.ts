@@ -12,6 +12,7 @@ import { observeLightDOM } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import {
+  withLayoutChildProps,
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
@@ -224,4 +225,6 @@ class Button extends GdsFormControlElement<any> {
  * @event click - Fired when the button is clicked.
  */
 @gdsCustomElement('gds-button')
-export class GdsButton extends withSizeXProps(withMarginProps(Button)) {}
+export class GdsButton extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(Button)),
+) {}
