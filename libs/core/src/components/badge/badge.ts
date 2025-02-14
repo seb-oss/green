@@ -4,6 +4,11 @@ import { GdsElement } from '../../gds-element'
 import { html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import BadgeCSS from './badge.style'
 
 import '../flex'
@@ -16,7 +21,9 @@ import '../flex'
  *
  */
 @gdsCustomElement('gds-badge')
-export class GdsBadge extends GdsElement {
+export class GdsBadge extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(GdsElement)),
+) {
   static styles = [tokens, BadgeCSS]
 
   /**
@@ -112,7 +119,7 @@ export class GdsBadge extends GdsElement {
       padding-inline="${padding}"
       border-radius="${this.notification || this.rounded ? 'max' : '2xs'}"
       block-size="${blockSize}"
-      width="max-content"
+      width="100%"
       font-size="${this.size === 'small' || this.notification
         ? 'detail-xs'
         : 'detail-s'}"
@@ -147,8 +154,6 @@ export class GdsBadge extends GdsElement {
   }
 
   #renderTrailSlot() {
-    // if (!this.notification) {
     return html`<slot name="trail"></slot>`
-    // }
   }
 }

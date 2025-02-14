@@ -7,6 +7,7 @@ export const styles = css`
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
     letter-spacing: 0.0125rem;
+    display: block;
   }
 
   :host > :first-child {

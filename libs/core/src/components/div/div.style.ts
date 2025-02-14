@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    box-sizing: border-box;
+    display: block;
   }
   :host(:focus-visible) {
     outline-color: color-mix(in srgb, currentcolor, #000 100%);
