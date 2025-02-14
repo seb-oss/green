@@ -1,12 +1,23 @@
 ---
 title: Select
-summary: A select component designed for single-choice selections, offering native mobile functionality and enhanced accessibility. Best suited for simple option lists, while maintaining familiar dropdown behavior across devices.
+summary: The select component is designed for single-choice selections, offering native mobile functionality and enhanced accessibility. Best suited for simple option lists, while maintaining familiar dropdown behaviour across devices.
 date: 2025-02-13
 status: BETA
 tags: forms
 ---
 
-For complex selections (multi-select, custom styling, or rich content), consider using gds-dropdown instead.
+## Select vs. Dropdown
+- Select: For single-choice selections in forms, based on the native select element, with browser-determined appearance.
+- Dropdown: For single and multiple-choice selections or actions outside forms, customizable with icons or badges and different layouts off the options. [View dropdown component = link]
 
-## Anatomy  
+## Anatomy
+The Select (and other form controls) are divided in sections that are re-used between components. 
+- Header: Label, Label support, contextual help, Extended support.
+- Body: the actual field.
+- Footer: error message.
+
 <Figma id="anatomy" caption="Anatomy of Select" />
+
+
+## Behaviour
+Styling for the list off options varies by browser, and long text in the select component is truncated with ellipses.

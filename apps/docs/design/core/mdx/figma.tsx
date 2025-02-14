@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { GdsCard, GdsFlex, GdsText } from '$/import/components'
-import { IconCheckmark, IconCrossLarge } from '$/import/icons'
+import { IconCheckmark, IconCrossLarge, IconImages } from '$/import/icons'
 
 interface FigmaProps {
   caption?: string
@@ -89,7 +89,18 @@ export default function Figma({
             dangerouslySetInnerHTML={{ __html: svgSource }}
           />
         ) : (
-          <GdsCard>Image could not be found!</GdsCard>
+          <GdsCard border="none" padding="4xl" width="100%">
+            <GdsFlex
+              flex="1"
+              align-items="center"
+              justify-content="center"
+              width="100%"
+              color="disabled"
+              level="3"
+            >
+              <IconImages />
+            </GdsFlex>
+          </GdsCard>
         )}
       </GdsFlex>
       {type === 'do' && (
