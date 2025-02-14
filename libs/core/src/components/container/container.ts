@@ -4,10 +4,7 @@ import { GdsDiv } from '../div'
 /**
  * @element gds-container
  * @status beta
- * @deprecated
- *
- * `gds-container` is an alias for gds-div. Prefer using `gds-div` directly instead.
- *
+ * @deprecated `gds-container` is an alias for `gds-div`. Prefer using `gds-div` directly instead.
  */
 @gdsCustomElement('gds-container')
 export class GdsContainer extends GdsDiv {}
