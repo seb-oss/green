@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.65.1
+
+### Patch Changes
+
+- 5c43312: **Icons**: Add missing css unit in height/width
+- 67547d2: **Textarea:** Resizing improvements, resize handle and overflow
+
 ## 1.65.0
 
 ### Minor Changes

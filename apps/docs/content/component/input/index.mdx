@@ -7,22 +7,36 @@ tags: forms
 private: false
 ---
 
-## Overview 
+## Anatomy  
+<Figma id="anatomy" caption="Anatomy of Input field" />
 
-### Usage
-Input are used to let the user enter text or numbers in a form. 
+1. Label
+2. Label support text
+3. Contextual help
+4. Extended support text
+5. Field
+6. Input value
+7. Leading icon
+8. Badge
+9. Clear button
+10. Character counter
 
-<GdsDivider size="4xl" opacity="0.2" />
 
-### Variants
+The input (and other form controls) are divided in sections that are re-used between components. 
+- Header: Label, label support, contextual help, extended support.
+- Body: the actual field with leading and trailing slots.
+- Footer; character counter, dynamic information and error message.
+
+
+## Variants
+
 To be able to use forms in all context's we provide two versions of input fields.
-
-- **Default** (Label outside): Includes all the features we need in complex forms.
-- **Floating label**  (Label inside): gives a more clean look but doesn't work for longer labels and can only be used in specific contexts.
+- **Default** (label outside): Includes all the features we need in complex forms.
+- <Badge variant="notice">Coming soon</Badge> **Floating label** (label inside): Can only be used in specific contexts. Limited features due to accessibility.
 
 <Grid columns="2">
-    <Figma node="606-10125" caption="Default variant." />
-    <Figma node="606-10127" caption="Floating label variant." />
+    <Figma id="variant-default" caption="Default" />
+    <Figma id="variant-floating-label" caption="Floating label" />
 </Grid>
 
 
@@ -30,105 +44,147 @@ To be able to use forms in all context's we provide two versions of input fields
 
 <Grid columns="2">
 <div>
-### Sizes
+## Sizes
 The input field comes in two sizes.
 
 - **Large**: the default size and used in most cases.
 - **Small**: used in tables and in some special cases where the space is very limited.
+
 </div>
-<Figma node="606-10448" caption="Large and small size." />
+<Figma id="large-small-input" caption="Large and Small input field" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
 
 ## Features
 
-### General features
-
-TODO:
-- Feature	Default	Floating label
-- Label	✅	✅
-- Support text	✅	❌
-- Field error	✅	✅
-- Dynamic information	✅	❌
-- Contextual help	✅	❌
-- Optional indicator	✅	✅
+<Grid columns="2">
+<div>
+### Label
+All input fields need a label. Keep the label short. 
+</div>
+<Figma id="label" caption="Large input field with just a label." />
+</Grid>
 
 <Grid columns="2">
-
 <div>
-### Counter
-For fields that have a limit of characters allowed a counter may be added to guide users into how many characters are left to use. Indicator starts with the maximum characters allowed displayed. As the user starts typing the numbers decrease. When a limit is reached the indicator turns yellow. If users write too many characters the counter becomes red. If a user ignores this and tries to submit an error will be indicated on the field stating that the max has been reached.
-</div>
+### Optional field indicator
+(Not available for Floating label variant)
+We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "(optional)" next to the label with the field.
 
-<Figma node="607-10627" />
+The text "(optional)" is set in font-weight regular, to differentiate from the label.
+</div>
+<Figma id="optional-field-indicator" caption="Use '(optional)' to mark optional fields." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Support text
+(Not available for Floating label variant)
+Use this to explain how to fill the field. This may be an instruction of how to 
+count or what to include. Limit the instructions to details that all or most users need.
+</div>
+<Figma id="support-text" caption="" />
+</Grid>
+
+### Contextual help
+(Not available for Floating label variant)
+When  label and support text is not enough to explain a field we may use the info-icon. 
+
+When clicked the extended support is displayed between the label support and the field.
+
+If there is limited space use a tooltip. 
+If there is large amounts of text use a modal.
+
+<Grid columns="2">
+<Figma id="info-icon-button" caption="Info icon button to reach help." />
+<Figma id="extended-suppport" caption="Extended support visible" />
+</Grid>
+
+### Leading icon
+A leading icon visually reinforces the purpose of the field, helping users  to understand what type of information is needed. 
+For example: search fields or card number.
+
+<Grid columns="2">
+<Figma id="leading-search" caption="Leading icon to indicate it's a search field." />
+<Figma id="leading-card-number" caption="Leading icon to indicate a card number." />
 </Grid>
 
 <Grid columns="2">
 <div>
 ### Clearable
-To make it easy for users to clear a field an x-icon may be added at the end of the field. If used, this icon is the first in the trailing slot close to the input it's removing when pressed.
+To make it easy for users to clear a field an x-icon button may be added at the end of the field. 
+Often used in search/filter forms.
 </div>
-<Figma node="607-10706" caption="Label support text visible." />
+<Figma id="clear-a-search-field" caption="Makes it easy to clear a search filter." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Badge
+Use it to show what the unit input value is.
+
+For example: kr
+</div>
+<Figma id="currency-badge" caption="Badge used to display the currency EUR." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Field error
+When a field contains an error the field is highlighted in red with an error text describing the error.
+</div>
+<Figma id="field-error" caption="Input field containing an error." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Character counter
+For fields that have a limit of characters allowed, a counter may be added to guide users how many characters are left to use. Indicator starts with the maximum characters allowed. 
+
+As the user starts typing the numbers decrease. 
+
+When a limit is almost reached the indicator turns yellow. 
+
+If users write too many characters the counter becomes red. 
+
+If a user ignores this and tries to submit an error will be indicated on the field stating that the max has been reached.
+</div>
+<Figma id="character-counter" caption="Input field with counter" />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Dynamic information
+(Not available for Floating label variant)
+Used to perform comparative calculations next to the field.
+</div>
+<Figma id="dynamic-info" caption="Dynamic information displayed under the input field." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Static data
+Used to display static data in a form or compilation.
+Can be used instead of disabling fields (which is bad for accessibility).
+
+This is a separate component in Figma used to replace an input field.
+</div>
+<Figma id="static-data" caption="Example usage of Static data." />
 </Grid>
 
 <Grid columns="2">
 <div>
 ### Placeholder
 AVOID using placeholder text (also know as watermark). They tend to confuse users, thinking the field is already filled with data. Instructions should not be placed here, since they disappear as the field is filled with data. Use the support text instead to describe what's supposed to be entered.
+
 </div>
-<Figma node="609-10726" caption="Field instruction visible." />
+<Figma type="dont" id="placeholder" caption="Don't use placeholders." />
 </Grid>
-
-<Grid columns="2">
-<div>
-### Autocomplete
-Input text can be used with auto complete to help users who have limited literacy or who write in a foreign language.
-</div>
-<Figma node="768-6848" caption="Field error" />
-</Grid>
-
-<Grid columns="2">
-<div>
-### Input with button
-Input fields can be grouped with a button. This is used if they have a very strong relationship inside a form. For example, fetching information from a database, signing up to a newsletter, etc. In a mobile viewport, the group is seen as one module and shares the width.
-</div>
-<Figma node="609-10804" caption="Field counter" />
-</Grid>
-
-<Grid columns="2">
-<div>
-### Search field
-
-The search field's work pretty much the same way as normal input fields, but we have some rules for icon-usage.
-- Leading icon: used when the icon is only an ornament to signify that this is a search-field. 
-- Trailing icon: used when the icon is also working as a button, users can click the icon to perform the search.
-</div>
-
-<Figma node="619-6291" caption="Example on dynamic information" />
-</Grid>
-
-<GdsDivider size="4xl" opacity="0.2" />
 
 ## Do’s and dont’s
 
 <Grid columns="2">
-<Column>
-**Do**
-
-- Use "optional" to mark optional fields.
-</Column>
-
-<Column>
-**Don’t**
-
-- Use asterix for indicate mandatory fields.
-- Avoid using watermarks or placeholders. 
-</Column>
-</Grid>
-
-<Grid columns="2">
-    <Do><Figma node="647-6126" /></Do>
-    <Dont><Figma node="647-6129" /></Dont>
-    <Dont><Figma node="619-6615" /></Dont>
+    <Figma type="do" id="do" caption="Do use '(optional)' to mark optional fields" />
+    <Figma type="dont" id="dont" caption="Don't use asterix to indicate mandatory fields." />
 </Grid>

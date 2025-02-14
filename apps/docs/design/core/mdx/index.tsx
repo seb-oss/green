@@ -11,15 +11,18 @@ import {
 } from '$/import/components'
 import { v4 as uuidv4 } from 'uuid'
 
+import Badge from './badge'
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
 import IMG from './image/image'
+import Inline from './inline'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
 import Prototype from './prototype'
 import Section from './section'
 import Story from './story'
+import SVG from './svg'
 
 const components = {
   Figma,
@@ -31,6 +34,8 @@ const components = {
   Pattern,
   GdsDivider: (props: object) => <GdsDivider {...props} />,
   Story,
+  Badge,
+  SVG,
   Grid: ({ children, ...props }: { children: React.ReactNode }) => {
     return (
       <>
@@ -48,6 +53,7 @@ const components = {
   Section: Section,
   ul: (props: object) => <ul {...props} />,
   li: (props: object) => <li {...props} />,
+  Inline,
 }
 
 export function Mdx({
