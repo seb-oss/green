@@ -16,8 +16,8 @@ Checkboxes are typically grouped with a theme label above and the possible optio
 	- **Contained:** used only in combination with other contained form components.
 
 <Grid columns="2" gap="s">
-  <Figma node="1337-5540" caption="Default variant of checkbox" />
-  <Figma node="1337-5542" caption="Contained variant of checkbox" />
+  <Figma id="1337-5540" caption="Default variant of checkbox" />
+  <Figma id="1337-5542" caption="Contained variant of checkbox" />
 </Grid>
 
 
@@ -30,7 +30,7 @@ Checkboxes are typically grouped with a theme label above and the possible optio
     
     May be used for both the group label, and for each individual checkbox in the group.
   </div>
-  <Figma node="1337-6156" caption="Checkbox with an extra description for the label" />
+  <Figma id="1337-6156" caption="Checkbox with an extra description for the label" />
 </Grid>
 
 <Grid columns="2" gap="s">
@@ -40,23 +40,21 @@ Checkboxes are typically grouped with a theme label above and the possible optio
     
     Used to highlight that the group of checkboxes contains errors.
   </div>
-  <Figma node="1337-6177" caption="Checkbox containing errors" />
+  <Figma id="1337-6177" caption="Checkbox containing errors" />
 </Grid>
 
+### Indeterminate state
+
+Used when the checkbox's state is partially selected, often for parent-child relationships in nested checkboxes.
+
+**Behaviour of indeterminate checkboxes**
+- If some children are selected, the indeterminate state is visible on the parent.
+- If all children are selected, the selected state is visual on the parent.
+- If a parent checkbox is selected while unselected or in the indeterminate state, all children will be selected.
+- If the parent is deselected all children will be deselected.`
+
 <Grid columns="2" gap="s">
-  <div>
-    
-    ### Indeterminate state
-    
-    Used when the checkbox's state is partially selected, often for parent-child relationships in nested checkboxes.
-    
-    **Behaviour of indeterminate checkboxes**
-    - If some children are selected, the indeterminate state is visible on the parent.
-    - If all children are selected, the selected state is visual on the parent.
-    - If a parent checkbox is selected while unselected or in the indeterminate state, all children will be selected.
-    - If the parent is deselected all children will be deselected.
-  </div>
-  <Figma node="1337-6288" caption="Nested checkboxes with a indeterminate parent" />
+  <Figma id="1337-6288" caption="Nested checkboxes with a indeterminate parent" />
 </Grid>
 
 
@@ -71,8 +69,8 @@ Checkboxes can be aligned horizontal or vertical.
 - **Horizontal:** Only used for a small set of options if the page shouldn't be to long, but try to avoid.
 	
 <Grid columns="2" gap="s">
-  <Figma node="1337-6517" caption="Vertical alignment – preferred" />
-  <Figma node="1337-6580" caption="Horizontal alignment" />
+  <Figma id="1337-6517" caption="Vertical alignment – preferred" />
+  <Figma id="1337-6580" caption="Horizontal alignment" />
 </Grid>
 
 
