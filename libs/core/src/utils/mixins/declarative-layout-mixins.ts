@@ -83,8 +83,8 @@ export function withSizeYProps<T extends Constructor<GdsElement>>(
 ): Constructor<SizeYProps> & T {
   class DimensionPropsMixin extends base implements SizeYProps {
     /**
-     * Style Expression Property that controls the height property.
-     * Supports all valid CSS height values.
+     * Style Expression Property that controls the `height` property.
+     * Supports all valid CSS `height` values.
      */
     @styleExpressionProperty()
     height?: string
@@ -275,4 +275,42 @@ export function withLayoutChildProps<T extends Constructor<GdsElement>>(
   }
 
   return LayoutChildPropsMixin as Constructor<LayoutChildProps> & T
+}
+
+export interface PositioningProps {
+  position?: string
+  transform?: string
+  inset?: string
+}
+
+/**
+ * Mixin that adds positioning properties to a component.
+ */
+export function withPositioningProps<T extends Constructor<GdsElement>>(
+  base: T,
+): Constructor<PositioningProps> & T {
+  class PositioningPropsMixin extends base implements PositioningProps {
+    /**
+     * Style Expression Property that controls the `position` property.
+     * Supports all valid CSS `position` values.
+     */
+    @styleExpressionProperty()
+    position?: string
+
+    /**
+     * Style Expression Property that controls the `transform` property.
+     * Supports all valid CSS `transform` values.
+     */
+    @styleExpressionProperty()
+    transform?: string
+
+    /**
+     * Style Expression Property that controls the `inset` property.
+     * Supports all valid CSS `inset` values.
+     */
+    @styleExpressionProperty()
+    inset?: string
+  }
+
+  return PositioningPropsMixin as Constructor<PositioningProps> & T
 }
