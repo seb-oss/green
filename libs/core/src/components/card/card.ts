@@ -6,7 +6,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsContainer } from '../container'
+import { GdsDiv } from '../div'
 
 /**
  *  A container for content representing a single entity. e.g. a contact, article, or task.
@@ -19,7 +19,7 @@ import { GdsContainer } from '../container'
  *
  */
 @gdsCustomElement('gds-card')
-export class GdsCard extends GdsContainer {
+export class GdsCard extends GdsDiv {
   static styles = [
     tokens,
     css`
@@ -32,9 +32,9 @@ export class GdsCard extends GdsContainer {
   ]
 
   /**
-   * Controls the box-shadow property.
+   * Style Expression Property for the `box-shadow` property.
    *
-   * These are the available values you can use to define shadow size
+   * Accepts shadow tokens from the design system.
    *
    * `xs`, `s`, `m`, `l`, `xl`
    *
