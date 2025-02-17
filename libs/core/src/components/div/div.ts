@@ -90,12 +90,15 @@ export class GdsDiv extends withSizeXProps(
    */
   @styleExpressionProperty({
     styleTemplate: function (_prop, values) {
-      const [size, style, color] = values
+      const this_ = this as GdsDiv
+      const [
+        size,
+        style = this_['border-style'],
+        color = this_['border-color'],
+      ] = values
       const sizeCss = `var(--gds-space-${size})`
-      const colorCss = color
-        ? parseColorValue(color, 'border', (this as GdsDiv).level)
-        : ''
-      return `border: ${sizeCss} ${style || ''} ${colorCss};`
+      const colorCss = parseColorValue(color, 'border', this_.level)
+      return `border: ${sizeCss} ${style} ${colorCss};`
     },
   })
   border?: string
