@@ -12,6 +12,7 @@ import {
 import { v4 as uuidv4 } from 'uuid'
 
 import Badge from './badge'
+import Common from './common'
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
@@ -32,6 +33,7 @@ const components = {
   Dont,
   SE,
   Pattern,
+  Common,
   GdsDivider: (props: object) => <GdsDivider {...props} />,
   Story,
   Badge,

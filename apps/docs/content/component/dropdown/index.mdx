@@ -1,6 +1,31 @@
 ---
 title: Dropdown
-summary: Dropdown Summary
+summary: A dropdown enables the user to choose one or multiple options from a list.
 date: 2024-10-16
 status: BETA
+tags: forms
 ---
+
+## Usage 
+The select component is designed for single or multiple selections but with customizable features.
+
+<Common title="Select vs. Dropdown" />
+
+## Anatomy
+The Dropdown (and other form controls) are divided in sections that are re-used between components.  
+- Header: Label, Label support, contextual help, Extended support.
+- Body: the actual field with leading and trailing slots.
+- Footer; error message.
+
+<Figma id="anatomy" caption="Anatomy of Dropdown" />
+
+<Grid columns="2">
+<div>
+## Sizes
+The dropdown field comes in two sizes.
+- **Large**: the default size used in most cases.
+- **Small**: used in tables and in some special cases where the space is very limited. <br />(Not possible with Custom layout not supported)
+</div>
+<Figma id="sizes" caption="Caption" />
+</Grid>
+

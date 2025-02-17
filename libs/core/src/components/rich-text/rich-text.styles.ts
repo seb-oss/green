@@ -55,8 +55,11 @@ export const styles = css`
   * lists
   * -----------------------------------------------------------
   */
-  ol,
   ul {
+    padding-inline-start: 2ch;
+  }
+
+  ol {
     margin-left: 3ch;
     margin-bottom: 1lh;
   }
