@@ -56,6 +56,13 @@ export const forSpaceTokens: StyleExpressionPropertyOptions = {
 
 /**
  * Create options for style expression properties that expect space tokens.
+ */
+export const forSpaceTokensAndCustomValues: StyleExpressionPropertyOptions = {
+  valueTemplate: (value: string) => `var(--gds-space-${value}, ${value})`,
+}
+
+/**
+ * Create options for style expression properties that expect space tokens.
  * This version supports negative values.
  */
 export const forSpaceTokensSupportingNegative: StyleExpressionPropertyOptions =

@@ -1,6 +1,10 @@
 import { GdsElement } from '../../gds-element'
 import { styleExpressionProperty } from '../decorators/style-expression-property'
-import { forSpaceTokens, forSpaceTokensSupportingNegative } from '../helpers'
+import {
+  forSpaceTokens,
+  forSpaceTokensAndCustomValues,
+  forSpaceTokensSupportingNegative,
+} from '../helpers'
 
 type Constructor<T = GdsElement> = new (...args: any[]) => T
 
@@ -22,44 +26,44 @@ export function withSizeXProps<T extends Constructor<GdsElement>>(
   class DimensionPropsMixin extends base implements SizeXProps {
     /**
      * Style Expression Property that controls the `width` property.
-     * Supports all valid CSS `width` values.
+     * Supports space tokens and all valid CSS `width` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     width?: string
 
     /**
      * Style Expression Property that controls the `min-width` property.
-     * Supports all valid CSS `min-width` values.
+     * Supports space tokens and all valid CSS `min-width` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'min-width'?: string
 
     /**
      * Style Expression Property that controls the `max-width` property.
-     * Supports all valid CSS `max-width` values.
+     * Supports space tokens and all valid CSS `max-width` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'max-width'?: string
 
     /**
      * Style Expression Property that controls the `inline-size` property.
-     * Supports all valid CSS `inline-size` values
+     * Supports space tokens and all valid CSS `inline-size` values
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'inline-size'?: string
 
     /**
      * Style Expression Property that controls the `min-inline-size` property.
-     * Supports all valid CSS `min-inline-size` values.
+     * Supports space tokens and all valid CSS `min-inline-size` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'min-inline-size'?: string
 
     /**
      * Style Expression Property that controls the `max-inline-size` property.
-     * Supports all valid CSS `max-inline-size` values.
+     * Supports space tokens and all valid CSS `max-inline-size` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'max-inline-size'?: string
   }
 
@@ -84,44 +88,44 @@ export function withSizeYProps<T extends Constructor<GdsElement>>(
   class DimensionPropsMixin extends base implements SizeYProps {
     /**
      * Style Expression Property that controls the `height` property.
-     * Supports all valid CSS `height` values.
+     * Supports space tokens and all valid CSS `height` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     height?: string
 
     /**
      * Style Expression Property that controls the `min-height` property.
-     * Supports all valid CSS `min-height` values.
+     * Supports space tokens and all valid CSS `min-height` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'min-height'?: string
 
     /**
      * Style Expression Property that controls the `max-height` property.
-     * Supports all valid CSS `max-height` values.
+     * Supports space tokens and all valid CSS `max-height` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'max-height'?: string
 
     /**
      * Style Expression Property that controls the `block-size` property.
-     * Supports all valid CSS `block-size` values.
+     * Supports space tokens and all valid CSS `block-size` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'block-size'?: string
 
     /**
      * Style Expression Property that controls the `min-block-size` property.
-     * Supports all valid CSS `min-block-size` values.
+     * Supports space tokens and all valid CSS `min-block-size` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'min-block-size'?: string
 
     /**
      * Style Expression Property that controls the `max-block-size` property.
-     * Supports all valid CSS `max-block-size` values.
+     * Supports space tokens and all valid CSS `max-block-size` values.
      */
-    @styleExpressionProperty()
+    @styleExpressionProperty(forSpaceTokensAndCustomValues)
     'max-block-size'?: string
   }
 
