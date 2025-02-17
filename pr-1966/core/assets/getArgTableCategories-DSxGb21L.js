@@ -1,0 +1,1 @@
+import{c as n}from"./custom-elements-DFJeCQ1z.js";function s(a){var o;const r=(o=n.modules.find(e=>e.declarations.find(t=>t.tagName===a)))==null?void 0:o.declarations[0];return r==null?void 0:r.members.filter(e=>e.category).map(e=>({[e.name]:{control:"none",table:{category:e.category}}})).reduce((e,t)=>({...e,...t}),{})}export{s as g};
