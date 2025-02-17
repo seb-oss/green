@@ -181,4 +181,11 @@ export const styles = css`
     border-bottom: var(--gds-space-4xs) solid
       var(--gds-color-l3-border-tertiary);
   }
+
+  // Links
+
+  a {
+    color: currentColor;
+    text-decoration-color: currentColor;
+  }
 `

@@ -81,6 +81,10 @@ export function Mdx({
                 overflow-x: auto;
                 scrollbar-width: thin;
               }
+
+              a {
+                color:currentColor;
+              }
             }
           `,
           }}
