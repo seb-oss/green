@@ -16,7 +16,7 @@ export default function Common({ title }: { title: string }) {
       <GdsGrid columns="2" gap="m">
         <GdsCard>
           <GdsFlex flex-direction="column" gap="s" height="100%">
-            <GdsBadge variant="notice">Select</GdsBadge>
+            <GdsText tag="h4">Select</GdsText>
             <GdsText>
               For single-choice selections in forms, based on the native select
               element, with browser-determined appearance.
@@ -30,7 +30,7 @@ export default function Common({ title }: { title: string }) {
         </GdsCard>
         <GdsCard>
           <GdsFlex flex-direction="column" gap="s" height="100%">
-            <GdsBadge variant="notice">Dropdown</GdsBadge>
+            <GdsText tag="h4">Dropdown</GdsText>
             <GdsText>
               For single and multiple-choice selections or actions outside
               forms, customizable with icons or badges and different layouts off
