@@ -3,6 +3,8 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './index.ts'
+import '../flex'
+import '../dropdown'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/calendar)
@@ -64,7 +66,7 @@ export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
     <div style="width: 320px">
-      <gds-grid gap="m">
+      <gds-flex gap="m">
         <gds-dropdown id="year" label="Year" size="small">
           <gds-option value="2024">2024</gds-option>
           <gds-option value="2025">2025</gds-option>
@@ -84,7 +86,7 @@ export const Usage: Story = {
           <gds-option value="10">Nov</gds-option>
           <gds-option value="11">Dec</gds-option>
         </gds-dropdown>
-      </gds-grid>
+      </gds-flex>
       <gds-calendar id="cal" label="Calendar"></gds-calendar>
       <div>
         Selected date:
