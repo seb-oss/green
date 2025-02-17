@@ -7,10 +7,9 @@ import './div'
 import { getArgTablePropsFor } from '../../../.storybook/getArgTableCategories'
 
 /**
- * The `gds-container` component is a container element that can be used to wrap other components.
+ * @status beta
  *
- * @extends `gds-flex`
- *
+ * `gds-div` is a base element in the declarative layout system. It accepts all available style expression properties, and is also the base class for `gds-flex`, `gds-grid`, `gds-card` and `gds-text`
  */
 const meta: Meta = {
   title: 'Components/Div',
@@ -38,33 +37,20 @@ export const Default: Story = {
 }
 
 /**
- * The `margin` property can be used to set the margin of the container.
- *
- * It supports all the spacing tokens from the design system.
- * The margin can be set in the following ways:
- * - `margin="auto"`: Center aligns the container.
- * - `margin="auto 2xl 4xl auto"`: Sets the margin of the container in the following order: `top`, `right`, `bottom`, `left`.
+ * Here is an example of a simple layout structure using `gds-div`:
  */
-export const ContainerMargin: Story = {
+export const Example: Story = {
   ...DefaultParams,
-  name: 'Margin',
-  render: (args) =>
-    html` <gds-container margin="auto 2xl 4xl auto">
-      Container
-    </gds-container>`,
-}
-
-/**
- * The `padding` property can be used to set the padding of the container.
- *
- * It supports all the spacing tokens from the design system.
- * The padding can be set in the following ways:
- * - `padding="auto"`: Center aligns the container.
- * - `padding="auto 2xl 4xl auto"`: Sets the padding of the container in the following order: `top`, `right`, `bottom`, `left`.
- */
-export const PaddingMargin: Story = {
-  ...DefaultParams,
-  name: 'Padding',
-  render: (args) =>
-    html` <gds-container padding="xl s md xs"> Container </gds-container>`,
+  render: (args) => html`
+    <gds-div display="flex" gap="xl" justify-content="center">
+      <gds-div width="50px" height="50px" background="primary"></gds-div>
+      <gds-div
+        width="50px"
+        height="50px"
+        background="secondary"
+        border="4xs"
+      ></gds-div>
+      <gds-div width="50px" height="50px" background="tertiary"></gds-div>
+    </gds-div>
+  `,
 }

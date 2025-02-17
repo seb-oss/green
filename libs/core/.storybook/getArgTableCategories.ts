@@ -10,6 +10,7 @@ export function getArgTablePropsFor(tagName: string) {
     .map((m) => {
       return {
         [m.name]: {
+          control: 'none',
           table: {
             category: m.category,
           },
