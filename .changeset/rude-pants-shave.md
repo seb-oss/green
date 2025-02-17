@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-**Divider:** add propagation of role attribute
+**Divider:** Add propagation of role attribute
