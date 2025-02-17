@@ -34,7 +34,7 @@ const components = {
   SE,
   Pattern,
   Common,
-  GdsDivider: (props: object) => <GdsDivider {...props} />,
+  GdsDivider: (props: object) => <GdsDivider opacity="0.2" {...props} />,
   Story,
   Badge,
   SVG,
