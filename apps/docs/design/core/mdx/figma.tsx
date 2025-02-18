@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { GdsCard, GdsFlex, GdsText } from '$/import/components'
-import { IconCheckmark, IconCrossLarge } from '$/import/icons'
+import { IconCheckmark, IconCrossLarge, IconImages } from '$/import/icons'
 
 interface FigmaProps {
   caption?: string
@@ -57,55 +57,76 @@ export default function Figma({
   }, [id, path])
 
   return (
-    <GdsCard margin="0 0 xl 0" padding="xs" max-height="max-content" {...rest}>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
+    <GdsFlex
+      flex-direction="column"
+      margin="0 0 xl 0"
+      gap="xs"
+      max-height="max-content"
+    >
+      <GdsFlex
+        padding="xs"
+        border-radius="s"
+        align-items="center"
+        background="primary"
+        max-height={height ? height : 'max-content'}
+        height={height}
+        {...rest}
+      >
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `
             @scope {
               svg {
                 width: 100%;
+                height: 100%;
               }
             }
           `,
-        }}
-      />
-      {svgSource ? (
-        <figure
-          ref={figureRef}
-          dangerouslySetInnerHTML={{ __html: svgSource }}
-          style={{ height }}
+          }}
         />
-      ) : (
-        <GdsCard>Image could not be found!</GdsCard>
-      )}
-
+        {svgSource ? (
+          <figure
+            ref={figureRef}
+            dangerouslySetInnerHTML={{ __html: svgSource }}
+          />
+        ) : (
+          <GdsCard border="none" padding="4xl" width="100%">
+            <GdsFlex
+              flex="1"
+              align-items="center"
+              justify-content="center"
+              width="100%"
+              color="disabled"
+              level="3"
+            >
+              <IconImages />
+            </GdsFlex>
+          </GdsCard>
+        )}
+      </GdsFlex>
       {type === 'do' && (
-        <GdsCard variant="positive" padding="xs m">
-          <GdsFlex gap="s">
-            <IconCheckmark width={12} stroke={2} />
-            <GdsText tag="small" font-weight="book">
-              {caption ? caption : 'Do'}
-            </GdsText>
-          </GdsFlex>
-        </GdsCard>
+        <GdsFlex color="positive" padding="0 m" gap="s">
+          <IconCheckmark width={12} stroke={2} />
+          <GdsText font-size="detail-xs" font-weight="book">
+            {caption ? caption : 'Do'}
+          </GdsText>
+        </GdsFlex>
       )}
       {type === 'dont' && (
-        <GdsCard variant="negative" padding="xs m">
-          <GdsFlex gap="s">
-            <IconCrossLarge width={12} stroke={2} />
-            <GdsText tag="small" font-weight="book">
-              {caption ? caption : "Don't"}
-            </GdsText>
-          </GdsFlex>
-        </GdsCard>
+        <GdsFlex color="negative" padding="0 m" gap="s">
+          <IconCrossLarge width={12} stroke={2} />
+          <GdsText font-size="detail-xs" font-weight="book">
+            {caption ? caption : "Don't"}
+          </GdsText>
+        </GdsFlex>
       )}
       {caption && !type && (
-        <GdsCard padding="xs m">
-          <GdsText tag="small" font-weight="book">
+        <GdsFlex padding="0 m">
+          <GdsText color="secondary" font-size="detail-xs" font-weight="book">
             {caption}
           </GdsText>
-        </GdsCard>
+        </GdsFlex>
       )}
-    </GdsCard>
+    </GdsFlex>
   )
 }

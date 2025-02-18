@@ -28,7 +28,7 @@ export default function Do({ children, caption }: DoProps) {
         color="positive"
       >
         <IconCheckmark width={14} stroke={2} />
-        <GdsText tag="small" font-weight="book">
+        <GdsText font-size="details-xs" font-weight="book">
           {caption ? caption : 'Do'}
         </GdsText>
       </GdsFlex>
