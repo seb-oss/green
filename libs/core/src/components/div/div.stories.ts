@@ -3,6 +3,9 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './div'
+import '../flex'
+import '../grid'
+import '../card'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
@@ -70,4 +73,81 @@ export const Example: Story = {
       ></gds-div>
     </gds-div>
   `,
+}
+
+/**
+ * Border styling follows the same patterns as CSS and can be controlled using the shorthand properties `border`, `border-width`, `border-style`, `border-color`
+ *
+ * - `border-color` defaults to level 2 primary
+ * - `border-width` defaults to 0
+ * - `border-style` defaults to solid
+ *
+ * To add a 1px primary border around the element:
+ *
+ * ```html
+ * <gds-div border="4xs"></gds-div>
+ * ```
+ *
+ * To only add border bottom:
+ *
+ * ```html
+ * <gds-div border-width="0 0 4xs 0"></gds-div>
+ * ```
+ *
+ * To add a 1px secodary color border on the bottom:
+ *
+ * ```html
+ * <gds-div border-width="0 0 4xs 0" border-color="secondary"></gds-div>
+ * ```
+ */
+export const CardBorder: Story = {
+  ...DefaultParams,
+  name: 'Border Style',
+  render: (args) =>
+    html`<gds-grid columns="5" gap="l">
+      <gds-card
+        variant="primary"
+        border-radius="0 0 m m"
+        border-width="4xs 0 0 0"
+        border-color="secondary"
+      >
+        <gds-flex align-items="center" justify-content="center"> Top </gds-flex>
+      </gds-card>
+      <gds-card
+        variant="primary"
+        border-radius="m 0 0 m"
+        border-width="0 4xs 0 0"
+        border-color="secondary"
+      >
+        <gds-flex align-items="center" justify-content="center">Right</gds-flex>
+      </gds-card>
+      <gds-card
+        variant="primary"
+        border-radius="m m 0 0"
+        border-width="0 0 4xs 0"
+        border-color="secondary"
+      >
+        <gds-flex align-items="center" justify-content="center">
+          Bottom
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        variant="primary"
+        border-radius="0 m m 0"
+        border-width="0 0 0 4xs"
+        border-color="secondary"
+      >
+        <gds-flex align-items="center" justify-content="center">
+          Left
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        variant="primary"
+        border-radius="m"
+        border="4xs"
+        border-color="secondary"
+      >
+        <gds-flex align-items="center" justify-content="center"> All </gds-flex>
+      </gds-card>
+    </gds-grid>`,
 }

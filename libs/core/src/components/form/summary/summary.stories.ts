@@ -100,9 +100,9 @@ export const Usage: Story = {
             },
           }}
         ></gds-input>
-        <gds-container margin="s 0 s">
+        <gds-div margin="s 0 s">
           <gds-form-summary></gds-form-summary>
-        </gds-container>
+        </gds-div>
         <gds-flex gap="m">
           <gds-button type="submit">
             Launch

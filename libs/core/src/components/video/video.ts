@@ -120,13 +120,13 @@ export class GdsVideo extends withSizeXProps(
    * You can apply radius in each corner like this:
    *
    * ```html
-   * <gds-container border-radius="none none m m" ></gds-container>
+   * <gds-div border-radius="none none m m" ></gds-div>
    * ```
    *
    * Also for different breakpoints like this:
    *
    * ```html
-   * <gds-container border-radius="s{none none xs} m{none xs none xs} l{s}" ></gds-container>
+   * <gds-div border-radius="s{none none xs} m{none xs none xs} l{s}" ></gds-div>
    * ```
    *
    * Each corner can have a different radius value and also different values for different breakpoints.

@@ -77,13 +77,12 @@ export const Only_text: Story = {
 export const Example_menu_bar: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-card
+    html`<gds-div
       display="flex"
       height="70px"
       width="700px"
-      padding="0"
-      border-radius="0"
-      border="0 0 4xs/primary 0"
+      border-color="secondary"
+      border-width="0 0 4xs 0"
     >
       <div style="flex-basis:50%;">
         <gds-menu-button>

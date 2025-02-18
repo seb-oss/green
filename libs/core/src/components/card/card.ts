@@ -11,7 +11,7 @@ import { GdsDiv } from '../div'
 /**
  *  A container for content representing a single entity. e.g. a contact, article, or task.
  *
- * `gds-card` inherits all properties from `gds-container`, but comes with some predefined defaults
+ * `gds-card` inherits all properties from `gds-div`, but comes with some predefined defaults
  * and a shortcut property for specifiying different card variants.
  *
  * @element gds-card
@@ -73,8 +73,6 @@ export class GdsCard extends GdsDiv {
     // Default values for cards
     this.padding = 's;m{l}'
     this['border-radius'] = 'xs;m{s}'
-    // this['border-width'] = '4xs'
-    // this['border-color'] = 'transparent'
   }
 
   render() {

@@ -4,6 +4,9 @@ const style = css`
   :host {
     display: block;
     box-sizing: border-box;
+    border-style: solid;
+    border-width: 0;
+    border-color: var(--gds-color-l2-border-primary);
   }
   :host(:focus-visible) {
     outline-color: color-mix(in srgb, currentcolor, #000 100%);

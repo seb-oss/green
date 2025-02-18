@@ -265,7 +265,7 @@ export const ZIndex: Story = {
       border-radius="s"
     >
       <gds-fab inset="auto 40px 40px auto"> Show above other things </gds-fab>
-      <gds-container
+      <gds-div
         border-radius="s"
         width="100%"
         height="max-content"
@@ -293,8 +293,8 @@ export const ZIndex: Story = {
           </gds-flex>
           <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
         </gds-flex>
-      </gds-container>
-      <gds-container
+      </gds-div>
+      <gds-div
         border-radius="s"
         width="100%"
         height="max-content"
@@ -322,7 +322,7 @@ export const ZIndex: Story = {
           </gds-flex>
           <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
         </gds-flex>
-      </gds-container>
+      </gds-div>
     </gds-flex>
   `,
 }

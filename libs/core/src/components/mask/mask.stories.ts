@@ -52,11 +52,7 @@ export const Card: Story = {
           flex-direction="column"
           align-items="stretch"
         >
-          <gds-container
-            position="relative"
-            border-radius="s"
-            overflow="hidden"
-          >
+          <gds-div position="relative" border-radius="s" overflow="hidden">
             <gds-img
               src="https://github.com/user-attachments/assets/fdbfca17-c5b7-43cc-b846-6e1ab68e5d69"
               aspect-ratio="1/1"
@@ -69,13 +65,13 @@ export const Card: Story = {
               position="absolute"
               inset="50% 0 0 0"
             >
-              <gds-container position="absolute" inset="auto 20px 20px auto">
+              <gds-div position="absolute" inset="auto 20px 20px auto">
                 <gds-button rank="secondary">
                   <gds-icon-arrow-down></gds-icon-arrow-down>
                 </gds-button>
-              </gds-container>
+              </gds-div>
             </gds-mask>
-          </gds-container>
+          </gds-div>
           <gds-flex
             flex-direction="column"
             padding="s{xs} m{l} l{l}"
@@ -121,12 +117,12 @@ export const Card: Story = {
               width="100%"
               color="tertiary"
             >
-              <gds-container>
+              <gds-div>
                 <gds-text tag="h3"> Sustainable Practices </gds-text>
                 <gds-text font-size="body-m">
                   Promoting Eco-Friendly Solutions
                 </gds-text>
-              </gds-container>
+              </gds-div>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Get Involved</gds-button>
                 <gds-theme color-scheme="dark">
