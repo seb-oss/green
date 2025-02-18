@@ -266,6 +266,14 @@ export const GdsTextarea = dynamic(
   },
 )
 
+export const GdsSelect = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/select').then((mod) => mod.GdsSelect),
+  {
+    ssr: false,
+  },
+)
+
 export const GdsVideo = dynamic(
   () => import('@sebgroup/green-react/core/video').then((mod) => mod.GdsVideo),
   {

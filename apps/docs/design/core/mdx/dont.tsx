@@ -23,7 +23,7 @@ export default function Dont({ children, caption }: DontProps) {
       {children}
       <GdsFlex color="negative" align-items="center" gap="s" padding="xs m">
         <IconCrossLarge width={14} stroke={2} />
-        <GdsText tag="small" font-weight="book">
+        <GdsText font-size="details-xs" font-weight="book">
           {caption ? caption : "Don't"}
         </GdsText>
       </GdsFlex>
