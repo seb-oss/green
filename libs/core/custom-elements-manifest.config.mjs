@@ -115,6 +115,8 @@ function getCategory(name) {
       `'align-self'`,
       `'place-content'`,
       `'place-items'`,
+      `'place-self'`,
+      `'grid-area'`,
       `order`,
       `grid`,
       `'grid-column'`,
@@ -131,7 +133,7 @@ function getCategory(name) {
       `'text-wrap'`,
     ].includes(name)
   ) {
-    return 'Declarative layout properties'
+    return 'Declarative layout / Style expression properties'
   }
   return undefined // Unchanged if no category is found
 }
