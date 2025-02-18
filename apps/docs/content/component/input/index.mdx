@@ -4,10 +4,14 @@ summary: Text fields allow users to enter text into a UI. They typically appear 
 date: 2023-12-22
 status: BETA
 tags: forms
-private: false
 ---
 
-## Anatomy  
+## Anatomy
+The input (and other form controls) are divided in sections that are re-used between components. 
+- **Header**: Label, label support, contextual help, extended support.
+- **Body**: the actual field with leading and trailing slots.
+- **Footer**: character counter, dynamic information and error message.
+
 <Figma id="anatomy" caption="Anatomy of Input field" />
 
 1. Label
@@ -15,18 +19,11 @@ private: false
 3. Contextual help
 4. Extended support text
 5. Field
-6. Input value
+6. Input
 7. Leading icon
 8. Badge
 9. Clear button
 10. Character counter
-
-
-The input (and other form controls) are divided in sections that are re-used between components. 
-- Header: Label, label support, contextual help, extended support.
-- Body: the actual field with leading and trailing slots.
-- Footer; character counter, dynamic information and error message.
-
 
 ## Variants
 
