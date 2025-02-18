@@ -19,6 +19,7 @@ import Dont from './dont'
 import Figma from './figma'
 import IMG from './image/image'
 import Inline from './inline'
+import EN from './lang/en'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
 import Prototype from './prototype'
@@ -33,6 +34,7 @@ const components = {
   Do,
   Dont,
   SE,
+  EN,
   Pattern,
   Common,
   GdsDivider: (props: object) => <GdsDivider opacity="0.2" {...props} />,

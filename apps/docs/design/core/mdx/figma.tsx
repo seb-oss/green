@@ -107,7 +107,7 @@ export default function Figma({
       {type === 'do' && (
         <GdsFlex color="positive" padding="0 m" gap="s">
           <IconCheckmark width={12} stroke={2} />
-          <GdsText tag="small" font-weight="book">
+          <GdsText font-size="detail-xs" font-weight="book">
             {caption ? caption : 'Do'}
           </GdsText>
         </GdsFlex>
@@ -115,14 +115,14 @@ export default function Figma({
       {type === 'dont' && (
         <GdsFlex color="negative" padding="0 m" gap="s">
           <IconCrossLarge width={12} stroke={2} />
-          <GdsText tag="small" font-weight="book">
+          <GdsText font-size="detail-xs" font-weight="book">
             {caption ? caption : "Don't"}
           </GdsText>
         </GdsFlex>
       )}
       {caption && !type && (
         <GdsFlex padding="0 m">
-          <GdsText color="secondary" tag="small" font-weight="book">
+          <GdsText color="secondary" font-size="detail-xs" font-weight="book">
             {caption}
           </GdsText>
         </GdsFlex>
