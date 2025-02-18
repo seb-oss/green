@@ -42,15 +42,32 @@ export const Default: Story = {
 export const Example: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-div display="flex" gap="xl" justify-content="center">
-      <gds-div width="50px" height="50px" background="primary"></gds-div>
+    <!-- This is equivalent to 'gds-flex' -->
+    <gds-div
+      display="flex"
+      gap="xl"
+      justify-content="center"
+      align-items="center"
+    >
+      <!-- Some properties, like 'width' and 'height', accepts either tokens or arbitrary values -->
+      <gds-div width="4xl" height="4xl" background="primary"></gds-div>
+
+      <!-- All style expressions properties accepts multi-viewport expressions -->
       <gds-div
-        width="50px"
-        height="50px"
+        width="4xl; l{ 6xl }"
+        height="4xl; l{ 6xl }"
         background="secondary"
         border="4xs"
       ></gds-div>
-      <gds-div width="50px" height="50px" background="tertiary"></gds-div>
+
+      <!-- Instead of adding 'background' and 'border-radius', take a look at 'gds-card',
+           which provides pre-configured configurations of these properties -->
+      <gds-div
+        width="4xl"
+        height="4xl"
+        background="tertiary"
+        border-radius="s"
+      ></gds-div>
     </gds-div>
   `,
 }
