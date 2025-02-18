@@ -3,7 +3,7 @@
 import { GdsFlex, GdsSelect } from '$/import/components'
 import { IconBooks } from '$/import/icons'
 
-const Textarea = ({ hero }: { hero?: boolean }) => (
+const Select = ({ hero }: { hero?: boolean }) => (
   <>
     {hero ? (
       <GdsFlex max-width="340px" flex="1">
@@ -46,4 +46,4 @@ const Textarea = ({ hero }: { hero?: boolean }) => (
   </>
 )
 
-export default Textarea
+export default Select

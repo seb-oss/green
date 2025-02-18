@@ -11,6 +11,7 @@ import {
 } from '$/import/components'
 import { v4 as uuidv4 } from 'uuid'
 
+import Select from '../../example/select'
 import Badge from './badge'
 import Common from './common'
 import Do from './do'
@@ -56,6 +57,7 @@ const components = {
   ul: (props: object) => <ul {...props} />,
   li: (props: object) => <li {...props} />,
   Inline,
+  Select,
 }
 
 export function Mdx({
