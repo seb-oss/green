@@ -182,8 +182,6 @@ export const styles = css`
       var(--gds-color-l3-border-tertiary);
   }
 
-  // Links
-
   a {
     color: currentColor;
     text-decoration-color: currentColor;
