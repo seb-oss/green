@@ -7,48 +7,60 @@ tags: forms
 ---
 
 ## Usage 
-The select component is designed for single or multiple selections but with customizable features.
+The dropdown component is designed for single or multiple selections but with customizable features.
 
 <Common title="Select vs. Dropdown" />
 
 ## Anatomy
-The Dropdown (and other form controls) are divided in sections that are re-used between components.  
-- Header: Label, Label support, contextual help, Extended support.
-- Body: the actual field with leading and trailing slots.
-- Footer; error message.
+The Dropdown (and other form controls) are divided in sections that are re-used between components. 
+- **Header**: Label, Label support, contextual help, Extended support.
+- **Body**: the actual field with leading and trailing slots.
+- **Footer**: error message.
 
-<Figma id="anatomy" caption="Anatomy of Dropdown" />
+<Figma id="anatomy" caption="Anatomy of a dropdown" />
 
-## Sizes
+1. Label
+2. Label support text
+3. Contextual help
+4. Extended support text
+5. Leading icon
+6. Trailing icon (chevron)
+7. Clear button
+8. Input
+9. Search option amount badge
+10. Field
+
+
 <Grid columns="2">
 <div>
+## Sizes
 The dropdown field comes in two sizes.
-- **Large**: the default size used in most cases.
-- **Small**: used in tables and in some special cases where the space is very limited. <br />(Not possible with Custom layout not supported)
+- **Large**: default size.
+- **Small**: used in tables and in some special cases where the space is very limited. <br/> (Custom layout not supported)
 </div>
-<Figma id="sizes" caption="Caption" />
+<Figma id="large-small-dropdown" caption="Large and Small dropdown field." />
 </Grid>
 
-<GdsDivider />
-
 ## Features
+
 <Grid columns="2">
 <div>
 ### Label
 All dropdown fields need a label. Keep the label short. 
 </div>
-<Figma id="label" caption="Caption" />
+<Figma id="features-label" caption="Dropdown field with just a label" />
 </Grid>
 
 <Grid columns="2">
 <div>
 ### Optional field indicator
-Not available for Floating label variant)
+(Not available for Floating label variant)
 We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "(optional)" next to the label with the field.
 
 The text "(optional)" is set in font-weight regular, to differentiate from the label.
+
 </div>
-<Figma id="optional" caption="Caption" />
+<Figma id="features-optional" caption="Use '(optional)' to mark optional fields." />
 </Grid>
 
 <Grid columns="2">
@@ -57,27 +69,20 @@ The text "(optional)" is set in font-weight regular, to differentiate from the l
 Use this to explain how to fill the field. This may be an instruction of how to 
 count or what to include. Limit the instructions to details that all or most users need.
 </div>
-<Figma id="optional" caption="Caption" />
-</Grid>
-
-<Grid columns="2">
-<div>
-### Support text
-Use this to explain how to fill the field. This may be an instruction of how to 
-count or what to include. Limit the instructions to details that all or most users need.
-</div>
-<Figma id="optional" caption="Caption" />
+<Figma id="features-support-text" caption="Dropdown field with support text." />
 </Grid>
 
 ### Contextual help
 When  label and support text is not enough to explain a field we may use the info-icon. 
+
 When clicked the extended support is displayed between the label support and the field.
+
 If there is limited space use a tooltip. 
 If there is large amounts of text use a modal.
 
 <Grid columns="2">
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
+<Figma id="features-contextual-1" caption="Info icon button to reach help." />
+<Figma id="features-contextual-2" caption="   Extended support visible" />
 </Grid>
 
 <Grid columns="2">
@@ -85,23 +90,23 @@ If there is large amounts of text use a modal.
 ### Leading icon
 A leading icon visually reinforces the purpose of the field, helping users  to understand what type of information is needed. 
 </div>
-<Figma id="optional" caption="Caption" />
+<Figma id="features-leading" caption="Leading icon to distinguish the field" />
 </Grid>
 
 ### Single select
 Use this version when users may only select one option from the list.
 
 <Grid columns="2">
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
+<Figma id="single-select-1" caption="Single select dropdown" />
+<Figma id="single-select-2" caption="One option selected" />
 </Grid>
 
 ### Multi select
-Use this version when users may only select one option from the list.
+Use this version when users may select one or multiple options from the list
 
 <Grid columns="2">
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
+<Figma id="multi-select-1" caption="Single select dropdown" />
+<Figma id="multi-select-2" caption="Three options selected" />
 </Grid>
 
 ### Search
@@ -112,18 +117,17 @@ A search field may be used to filter the options.
 - Search helps users who navigate with keyboards or screen readers find options more quickly.
 
 <Grid columns="2">
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
+<Figma id="search-1" caption="Search in dropdown" />
+<Figma id="search-2" caption="No options found in search" />
 </Grid>
 
-
-<Grid columns="2">
-<div>
 ### Option groups
 If the options can be grouped it may help the user find options from large lists.
 The group may contain a badge indicating how many options the group holds.
-</div>
-<Figma id="optional" caption="Caption" />
+
+<Grid columns="2">
+<Figma id="option-group-single" caption="Single select grouped" />
+<Figma id="option-group-multi" caption="Multi select grouped" />
 </Grid>
 
 ### Custom option layout
@@ -132,17 +136,16 @@ These layouts may be customized for particular usage.
 Note that these fields become higher than a regular dropdown.
 
 <Grid columns="2">
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
+<Figma id="custom-1" caption="Custom dropdown option list" />
+<Figma id="custom-2" caption="Custom dropdown selected." />
 </Grid>
 
-### Combo box: You can select, but also type a new value. 
+<Grid columns="2">
+<div>
+### Combo box
 This type of field lets the user type in the field, just as an input field. By starting to type a list of options matching the entered text is displayed. If users enter an option that doesn't exist in the list, it's also accepted as a valid option.
-
-<Grid columns="3">
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
-<Figma id="optional" caption="Caption" />
+</div>
+<Figma id="combobox-1" caption="Dropdown list while typing." />
 </Grid>
 
 <Grid columns="2">
@@ -151,7 +154,7 @@ This type of field lets the user type in the field, just as an input field. By s
 To make it easy for users to clear a field an x-icon button may be added at the end of the field. 
 Often used in search/filter forms.
 </div>
-<Figma id="optional" caption="Caption" />
+<Figma id="clearable" caption="Makes it easy to clear a search filter." />
 </Grid>
 
 <Grid columns="2">
@@ -159,5 +162,5 @@ Often used in search/filter forms.
 ### Field error
 When a field contains an error the field is highlighted in red with an error text describing the error.
 </div>
-<Figma id="optional" caption="Caption" />
+<Figma id="field-error" caption="Dropdown field containing an error." />
 </Grid>
