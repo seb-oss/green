@@ -1,1 +1,0 @@
-import{M as a,u as n}from"./index-ggrKx-ls.js";import"./index-DMV3foIu.js";import"./iframe-B7--GCAU.js";import"../sb-preview/runtime.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./index-Df9so8jS.js";import"./index-DxKRhftL.js";import"./index-DrFu-skq.js";export{a as MDXProvider,n as useMDXComponents};
