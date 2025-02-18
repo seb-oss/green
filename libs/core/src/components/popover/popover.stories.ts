@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
@@ -20,6 +21,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-popover'),
+  },
 }
 
 export default meta

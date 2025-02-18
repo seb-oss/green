@@ -8,6 +8,8 @@ import '../divider'
 
 import { html } from 'lit'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
+
 /**
  * The `gds-text`
  * The gds-text element is designed to display text content flexibly. You can easily change the HTML tag it uses, wrap the text, set a maximum character length, and apply line clamping. It also allows you to adjust the text size based on design tokens that work together with line height and font size.
@@ -20,6 +22,9 @@ const meta: Meta = {
   title: 'Components/Text',
   component: 'gds-text',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-text'),
+  },
 }
 
 export default meta

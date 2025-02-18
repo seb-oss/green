@@ -14,7 +14,7 @@ import '../icon/icons/arrow-up.js'
 import '../icon/icons/arrow-down.js'
 import '../icon/icons/arrow-right.js'
 
-import { getArgTablePropsFor as argTablePropsFor } from '../../../.storybook/getArgTableCategories.ts'
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
  * A button serve as an interactive element that enables users to perform an action or make

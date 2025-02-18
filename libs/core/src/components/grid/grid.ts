@@ -64,12 +64,6 @@ export class GdsGrid extends GdsContainer {
   })
   'auto-columns'?: string
 
-  constructor() {
-    super()
-    this.display = 'grid'
-    this.width = '100%'
-  }
-
   render() {
     return html`<slot></slot>`
   }

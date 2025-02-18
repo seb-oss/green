@@ -21,7 +21,7 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import ContainerCSS from './div.style'
+import style from './div.style'
 
 /**
  * @element gds-div
@@ -37,14 +37,14 @@ export class GdsDiv extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens, ContainerCSS]
+  static styles = [tokens, style]
 
   /**
    * Controls the display property.
    * Supports all valid CSS display values.
    */
   @styleExpressionProperty()
-  display = 'block'
+  display?: string
 
   /**
    * The level of the container is used to resolve the color tokens from the corresponding level.
@@ -93,8 +93,8 @@ export class GdsDiv extends withSizeXProps(
       const this_ = this as GdsDiv
       const [
         size,
-        style = this_['border-style'],
-        color = this_['border-color'],
+        style = this_['border-style'] || 'solid',
+        color = this_['border-color'] || 'primary',
       ] = values
       const sizeCss = `var(--gds-space-${size})`
       const colorCss = parseColorValue(color, 'border', this_.level)
@@ -112,21 +112,21 @@ export class GdsDiv extends withSizeXProps(
    * ```
    */
   @styleExpressionProperty(forColorTokens('border'))
-  'border-color' = 'primary'
+  'border-color'?: string
 
   /**
    * Style Expression Property that controls the `border-width` property.
    * Only accepts space tokens.
    */
   @styleExpressionProperty(forSpaceTokens)
-  'border-width' = '0'
+  'border-width'?: string
 
   /**
    * Style Expression Property that controls the `border-style` property.
    * Supports all valid CSS `border-style` values.
    */
   @styleExpressionProperty()
-  'border-style' = 'solid'
+  'border-style'?: string
 
   /**
    * Style Expression Property that controls the `border-radius` property.
@@ -154,7 +154,7 @@ export class GdsDiv extends withSizeXProps(
    * Supports all valid CSS `box-sizing` values.
    */
   @styleExpressionProperty()
-  'box-sizing' = 'border-box'
+  'box-sizing'?: string
 
   /**
    * Style Expression Property that controls the `z-index` property.

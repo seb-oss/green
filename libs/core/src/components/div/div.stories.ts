@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './div'
 
-import { getArgTablePropsFor } from '../../../.storybook/getArgTableCategories'
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
  * @status beta
@@ -16,7 +16,7 @@ const meta: Meta = {
   component: 'gds-div',
   tags: ['autodocs'],
   argTypes: {
-    ...getArgTablePropsFor('gds-div'),
+    ...argTablePropsFor('gds-div'),
   },
 }
 

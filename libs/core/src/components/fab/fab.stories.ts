@@ -12,6 +12,7 @@ import '../icon/icons/chevron-bottom.ts'
 import '../icon/icons/bubbles.ts'
 import '../signal/index.ts'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { DefaultParams as ButtonDefaultParams } from '../button/button.stories.ts'
 
 /**
@@ -25,6 +26,9 @@ const meta: Meta = {
   title: 'Components/FAB',
   component: 'gds-fab',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-fab'),
+  },
 }
 
 export default meta

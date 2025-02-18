@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
+
 import './card'
 import '../img'
 import '../video'
@@ -29,6 +31,9 @@ const meta: Meta = {
   title: 'Components/Card',
   component: 'gds-card',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-card'),
+  },
 }
 
 export default meta

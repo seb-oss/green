@@ -24,9 +24,12 @@ export class GdsCard extends GdsDiv {
     tokens,
     css`
       :host {
+        box-sizing: border-box;
         border-color: var(--_border-color);
         background-color: var(--_background-color);
         color: var(--_color);
+        border-width: var(--gds-space-4xs);
+        border-style: solid;
       }
     `,
   ]
@@ -70,8 +73,8 @@ export class GdsCard extends GdsDiv {
     // Default values for cards
     this.padding = 's;m{l}'
     this['border-radius'] = 'xs;m{s}'
-    this['border-width'] = '4xs'
-    this['border-color'] = 'transparent'
+    // this['border-width'] = '4xs'
+    // this['border-color'] = 'transparent'
   }
 
   render() {

@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './index.ts'
 import '../flex'
 import '../dropdown'
@@ -19,6 +21,9 @@ const meta: Meta = {
     disabledWeekends: true,
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-calendar'),
+  },
 }
 
 export default meta

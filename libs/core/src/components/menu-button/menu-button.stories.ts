@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-// import { html } from 'lit';
+import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 import { html } from '../../scoping'
 
 import './menu-button'
@@ -22,6 +22,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-datepicker'),
+  },
 }
 
 export default meta
