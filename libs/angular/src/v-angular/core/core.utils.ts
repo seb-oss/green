@@ -41,4 +41,44 @@ export class DropdownUtils<
   public isGroup(option: OptionBase<T>): option is OptionGroup<T> {
     return 'options' in option
   }
+
+  public deepEqual(original: any, change: any): boolean {
+    if (original === change) return true
+
+    // breaks early if either original or change is a primitive value
+    if (
+      typeof original !== 'object' ||
+      typeof change !== 'object' ||
+      original == null ||
+      change == null
+    )
+      return false
+
+    const keysOriginal = Object.keys(original)
+    const keysChange = Object.keys(change)
+
+    if (keysOriginal.length !== keysChange.length) return false
+
+    for (const key of keysOriginal) {
+      if (!keysChange.includes(key)) return false
+
+      switch (true) {
+        case Array.isArray(original[key]) && Array.isArray(change[key]):
+          if (
+            JSON.stringify(original[key].sort()) !==
+            JSON.stringify(change[key].sort())
+          )
+            return false
+          break
+        case typeof original[key] === 'function':
+        case typeof change[key] === 'function':
+          if (original[key].toString() !== change[key].toString()) return false
+          break
+        default:
+          if (!this.deepEqual(original[key], change[key])) return false
+      }
+    }
+
+    return true
+  }
 }

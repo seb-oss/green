@@ -28,15 +28,25 @@ export const styles = css`
       line-height: var(--gds-text-line-height-detail-m);
       margin: unset;
       min-height: calc(1lh * 4);
+      max-height: calc(1lh * 20);
+      overflow: auto;
       outline: none;
-      overflow: hidden;
       padding: unset;
-      resize: none;
-      transition:
-        var(--_transition),
-        resize 0s;
-
       width: 100%;
+      min-width: 20ch;
+      padding-inline-end: calc(var(--gds-space-xs) + var(--padding-inline-end));
+
+      &.resize-manual {
+        resize: vertical;
+      }
+
+      &.resize-auto {
+        resize: none;
+      }
+
+      &.resize-false {
+        resize: none;
+      }
     }
 
     :host([size='small']) slot[name='lead']::slotted(*) {
@@ -50,35 +60,6 @@ export const styles = css`
 
     [align-items] ::part(_button) {
       margin-top: calc(var(--gds-space-2xs) * -1);
-    }
-
-    .resize-handle {
-      position: absolute;
-      inset: auto auto -10px 0;
-      width: 100%;
-      height: 20px;
-      cursor: row-resize;
-      z-index: 2;
-      &:hover,
-      &:active {
-        &::before {
-          width: 22px;
-          opacity: 1;
-          height: 1px;
-        }
-      }
-      &::before {
-        content: '';
-        position: absolute;
-        background: currentColor;
-        inset: 0;
-        margin-inline: auto;
-        height: 0px;
-        width: 12px;
-        opacity: 0;
-        border-radius: 100px;
-        transition: var(--_transition);
-      }
     }
   }
 

@@ -10,21 +10,21 @@ import { delay, distinctUntilChanged, lastValueFrom, of } from 'rxjs';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faInfoCircle } from '@fortawesome/pro-regular-svg-icons';
 import { TranslocoLoader, TranslocoService } from '@jsverse/transloco';
-import { NgvI18nModule } from '@sebgroup/nggv-i18n';
-import { NgvInputMaskModule } from '@sebgroup/nggv-input-mask';
+import { NggvI18nModule } from '@sebgroup/nggv-i18n';
+import { NggvInputMaskModule } from '@sebgroup/nggv-input-mask';
 import { TooltipDirective } from '@sebgroup/nggv-tooltip';
 import { applicationConfig, Meta, moduleMetadata, StoryFn } from '@storybook/angular';
 
-import { NgvButtonComponent } from '../../button/button.component';
+import { NggvButtonComponent } from '../../button/button.component';
 import { CharacterCountdownDirective } from '../../character-countdown/character-countdown.directive';
-import { NgvCheckboxComponent } from '../../checkbox/checkbox.component';
+import { NggvCheckboxComponent } from '../../checkbox/checkbox.component';
 import { DropdownUtils } from '../../core.utils';
-import { NgvDropdownListComponent } from '../../dropdown-list/dropdown-list.component';
-import { NgvDropdownComponent } from '../../dropdown/dropdown.component';
+import { NggvDropdownListComponent } from '../../dropdown-list/dropdown-list.component';
+import { NggvDropdownComponent } from '../../dropdown/dropdown.component';
 import { ExternalLinkDirective } from '../../external-link/external-link.directive';
-import { NgvInfoCircleComponent } from '../../info-circle/info-circle.component';
-import { NgvTypeaheadDirective } from '../typeahead.directive';
-import { NgvTypeaheadInputComponent } from './typeahead-input.component';
+import { NggvInfoCircleComponent } from '../../info-circle/info-circle.component';
+import { NggvTypeaheadDirective } from '../typeahead.directive';
+import { NggvTypeaheadInputComponent } from './typeahead-input.component';
 
 interface WithExtras {
   notice: string;
@@ -68,13 +68,13 @@ function translocoStorybookInitializer(translocoService: TranslocoService) {
   };
 }
 
-const meta: Meta<NgvTypeaheadInputComponent> = {
+const meta: Meta<NggvTypeaheadInputComponent> = {
   title: 'Core/TypeaheadInput',
-  component: NgvTypeaheadInputComponent,
+  component: NggvTypeaheadInputComponent,
   decorators: [
     applicationConfig({
       providers: [
-        importProvidersFrom(NgvI18nModule),
+        importProvidersFrom(NggvI18nModule),
         {
           provide: APP_INITIALIZER,
           useFactory: translocoStorybookInitializer, // our initializer hook
@@ -94,35 +94,35 @@ const meta: Meta<NgvTypeaheadInputComponent> = {
     }),
     moduleMetadata({
       declarations: [
-        NgvButtonComponent,
-        NgvDropdownComponent,
-        NgvDropdownListComponent,
-        NgvCheckboxComponent,
+        NggvButtonComponent,
+        NggvDropdownComponent,
+        NggvDropdownListComponent,
+        NggvCheckboxComponent,
         TooltipDirective,
-        NgvInfoCircleComponent,
+        NggvInfoCircleComponent,
         CharacterCountdownDirective,
         ExternalLinkDirective,
       ],
       imports: [
-        NgvTypeaheadDirective,
+        NggvTypeaheadDirective,
         CommonModule,
         FontAwesomeModule,
-        NgvI18nModule,
+        NggvI18nModule,
         ReactiveFormsModule,
         RouterTestingModule,
-        NgvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
+        NggvInputMaskModule.forRoot({ inputSelector: 'input', isAsync: true }),
       ],
     }),
   ],
 };
 export default meta;
 
-const Template: StoryFn<NgvTypeaheadInputComponent & WithExtras> = (args: NgvTypeaheadInputComponent & WithExtras) => ({
+const Template: StoryFn<NggvTypeaheadInputComponent & WithExtras> = (args: NggvTypeaheadInputComponent & WithExtras) => ({
   props: args,
 });
 
-const TemplateWithFormControl: StoryFn<NgvTypeaheadInputComponent & WithExtras & any> = (
-  args: NgvTypeaheadInputComponent & WithExtras,
+const TemplateWithFormControl: StoryFn<NggvTypeaheadInputComponent & WithExtras & any> = (
+  args: NggvTypeaheadInputComponent & WithExtras,
 ) => {
   const ctrl = new UntypedFormControl(args.ngModel, [Validators.required, Validators.maxLength(12)]);
   ctrl.valueChanges.subscribe((val) => {
@@ -144,7 +144,7 @@ const TemplateWithFormControl: StoryFn<NgvTypeaheadInputComponent & WithExtras &
       [formControl]="formControl">
     </nggv-input>
     <div style="margin-top: 1rem">
-      <button type="button" class="sdv-button" (click)="disableFn()">Toggle disable control</button>
+      <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
     </div>
     `,
     props: {

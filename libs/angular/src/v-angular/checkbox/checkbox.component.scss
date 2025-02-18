@@ -3,10 +3,40 @@
 @use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
 
 :host {
+  --gds-sys-color-surface: #fff;
+  --gds-ref-pallet-base200: #e8e8e8;
+  --gds-sys-color-base: #333;
+  --gds-sys-shape-corner-small: 0.125rem;
+  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
+  --gds-sys-color-blue-dark-2: #007ac7;
+  --gds-sys-shape-corner-medium: 0.25rem;
   @include tokens.add-checkbox-tokens;
   @include mixins.add-checkbox();
 
   .form-control {
     @include form-mixins.add-form-control;
+    line-height: 1.125rem;
+  }
+
+  .form-info {
+    font-weight: 500;
+    padding-left: 1rem;
+    margin-top: -0.25rem;
+  }
+
+  .form-info--error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    color: #9f000a;
+
+    .error-icon {
+      margin-top: 0.128rem;
+      align-items: center;
+    }
+  }
+
+  i:after {
+    box-sizing: border-box;
   }
 }

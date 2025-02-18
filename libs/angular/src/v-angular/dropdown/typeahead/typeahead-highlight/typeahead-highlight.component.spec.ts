@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NgvTypeaheadHighlightComponent } from './typeahead-highlight.component'
+import { NggvTypeaheadHighlightComponent } from './typeahead-highlight.component'
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // TypeaheadHighlightComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('TypeaheadHighlightComponent', () => {
-    let component: NgvTypeaheadHighlightComponent
-    let fixture: ComponentFixture<NgvTypeaheadHighlightComponent>
+    let component: NggvTypeaheadHighlightComponent
+    let fixture: ComponentFixture<NggvTypeaheadHighlightComponent>
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvTypeaheadHighlightComponent],
+        declarations: [NggvTypeaheadHighlightComponent],
       })
-      fixture = TestBed.createComponent(NgvTypeaheadHighlightComponent)
+      fixture = TestBed.createComponent(NggvTypeaheadHighlightComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

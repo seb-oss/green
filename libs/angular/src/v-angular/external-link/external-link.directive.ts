@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router'
   // eslint-disable-next-line @angular-eslint/directive-selector
   selector: 'a[routerLink]',
 })
-export class NgvExternalLinkDirective implements OnInit {
+export class NggvExternalLinkDirective implements OnInit {
   /** If set to true, links will trigger a location change rather than an internal history push. */
   @Input() external = false
 
