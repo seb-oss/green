@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.65.2
+
+### Patch Changes
+
+- d800fd8: **Field Base:** Add on main wrap gap to add space in select
+
 ## 1.65.1
 
 ### Patch Changes
