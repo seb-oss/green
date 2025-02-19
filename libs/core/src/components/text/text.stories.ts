@@ -111,7 +111,7 @@ const DefaultParams: Story = {
  * The default tag is `span` and the default size is `body-m`
  */
 
-export const Card: Story = {
+export const Tags: Story = {
   ...DefaultParams,
   name: 'Tags',
   render: (args) =>
@@ -262,7 +262,7 @@ export const Lines: Story = {
 
 /**
  *
- * The `gds-text` component has a `color` property that will change the text color based on the specified color token.
+ * The `color` property that will change the text color based on the specified color token.
  *
  * e.g. `<gds-text level="1" color="primary"></gds-text>`
  *
@@ -315,7 +315,7 @@ export const Color: Story = {
 }
 
 /**
- * `gds-text` component has a `text-decoration` property that will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
+ * The `text-decoration` property will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
  *
  *
  * e.g.
