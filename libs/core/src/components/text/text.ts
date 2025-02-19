@@ -9,12 +9,12 @@ import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
 /**
- * `gds-text` is a custom element that provides a flexible text system.
- * For accessibility reasons, it is recommended to use the `gds-text` element to display text content with flexibility like changing the tag, wrap the text and max length in characters.
- *
  * @element gds-text
  * @status beta
  *
+ * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
+ *
+ * Style expression properties apply to the outer element unless otherwise specified.
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsDiv {
@@ -23,26 +23,45 @@ export class GdsText extends GdsDiv {
   /**
    * Controls the tag of the text.
    * Supports all valid HTML tags like h1, h2, h3, h4, h5, h6, p, span, etc.
-   *
-   * @property tag
    */
   @property({ type: String })
   tag = 'span'
 
   /**
+   * Style Expression Property that controls the `font-size` property.
+   * Supports all typography size tokens from the design system.
+   */
+  @styleExpressionProperty({
+    selector: '[tag]',
+    styleTemplate: (_prop, values) => {
+      const size = values[0]
+      const styleSize = `font-size: var(--gds-text-size-${size});`
+      const styleLine = `line-height: var(--gds-text-line-height-${size});`
+      return styleSize + styleLine
+    },
+  })
+  'font-size'?: string
+
+  /**
+   * Style Expression Property that controls the `font-weight` property.
+   * Supports all typography weight tokens from the design system.
+   */
+  @styleExpressionProperty({
+    selector: '[tag]',
+    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+  })
+  'font-weight'?: string
+
+  /**
    * Controls the text-transform property of the text.
    * Supports all valid CSS text-transform values.
-   *
-   * @property transform
    */
   @styleExpressionProperty()
   'text-transform'?: string
 
   /**
-   * Controls the text-decoration property of the text.
+   * Controls the text-decoration property of the inner element.
    * Supports all valid CSS text-decoration values.
-   *
-   * @property text-decoration
    */
   @styleExpressionProperty({
     selector: '[tag]',
@@ -51,8 +70,6 @@ export class GdsText extends GdsDiv {
 
   /**
    * Controls the number of lines it should show.
-   *
-   * @property lines
    */
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {

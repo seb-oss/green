@@ -11,12 +11,11 @@ import { html } from 'lit'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * The `gds-text`
- * The gds-text element is designed to display text content flexibly. You can easily change the HTML tag it uses, wrap the text, set a maximum character length, and apply line clamping. It also allows you to adjust the text size based on design tokens that work together with line height and font size.
+ * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
  *
+ * Style expression properties apply to the outer element unless otherwise specified.
  *
- * ## Usage
- *
+ * @beta
  */
 const meta: Meta = {
   title: 'Components/Text',
@@ -103,11 +102,11 @@ const DefaultParams: Story = {
 }
 
 /**
- *
- * In order to have more flexibility the tag it self and the sizing are controlled by the user.
- * The `gds-text` accepts the `tag` property which will render the text with the specified tag and the `size` property which will render the text with the specified size based on the tokens
+ * The `tag` property controls the inner element tag name.
  *
  * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
+ *
+ * Depending on which tag you use, different default styles will be applied. Style can be overridden using the `font-size`, `font-weight` and other style expression properties.
  *
  * The default tag is `span` and the default size is `body-m`
  */

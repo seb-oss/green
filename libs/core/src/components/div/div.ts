@@ -182,7 +182,6 @@ export class GdsDiv extends withSizeXProps(
    * Supports all typography weight tokens from the design system.
    */
   @styleExpressionProperty({
-    property: 'font-weight',
     valueTemplate: (v) => `var(--gds-text-weight-${v})`,
   })
   'font-weight'?: string
