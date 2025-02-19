@@ -1,104 +1,173 @@
-import { property } from 'lit/decorators.js'
-import { nothing } from 'lit/html.js'
-import { when } from 'lit/directives/when.js'
+/**
+ * @fileoverview GDS Spinner Component - A loading indicator with accessibility support
+ * @module gds-spinner
+ */
 
-import { gdsCustomElement, html } from '../../scoping'
+import { css } from 'lit'
+import { property } from 'lit/decorators.js'
+
+import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
-import { styles } from './spinner.styles'
+import { TransitionalStyles } from '../../transitional-styles'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
+import { styles } from './gds-spinner.styles'
 
 /**
- * @summary A spinner component that indicates loading state.
- * @status beta
+ * GdsSpinner Component
+ * A loading indicator web component that supports various sizes and display modes.
  *
- * @element gds-spinner
+ * @extends {GdsElement}
  *
- * @csspart spinner - The spinner element itself
- * @csspart label - The label element when present
+ * @example
+ * ```html
+ * <!-- Basic usage -->
+ * <gds-spinner size="md" text="Loading..."></gds-spinner>
  *
- * @cssproperty --gds-ref-pallet-base400 - Color for the spinner track
- * @cssproperty --gds-ref-pallet-base800 - Color for the spinner indicator
+ * <!-- Screen reader only text -->
+ * <gds-spinner size="md" text="Loading..." .visualText=${false}></gds-spinner>
+ *
+ * <!-- Cover container -->
+ * <gds-spinner size="md" text="Loading..." cover></gds-spinner>
+ * ```
+ *
+ * @csspart spinner - The spinning circle element
+ * @csspart text - The loading text element
+ *
+ * @fires gds-element-disconnected - Fired when the element is removed from the DOM
  */
 @gdsCustomElement('gds-spinner')
-export class GdsSpinner extends LitElement {
-  static styles = [tokens, styles]
+export class GdsSpinner extends GdsElement {
+  /**
+   * Component styles combining design tokens, host styles, and component-specific styles
+   * @type {Array<CSSStyleSheet>}
+   */
+  static styles = [
+    tokens,
+    css`
+      :host {
+        display: block;
+      }
+    `,
+    styles,
+  ]
 
   /**
-   * The size of the spinner. Can be 'sm', 'md', or 'lg'.
+   * Loading text to be displayed. Can be shown visually or for screen readers only.
+   * @type {string|undefined}
    */
   @property({ type: String })
-  size: 'sm' | 'md' | 'lg' = 'md'
+  text?: string
 
   /**
-   * The type of overlay for the spinner. Can be 'fullscreen', 'cover', or empty for no overlay.
-   */
-  @property({ type: String })
-  overlay: 'fullscreen' | 'cover' | '' = ''
-
-  /**
-   * Whether to show a backdrop behind the spinner when using overlay.
+   * Controls text visibility mode.
+   * When true, text is visible and announced to screen readers.
+   * When false, text is only announced to screen readers.
+   * @type {boolean}
+   * @default true
    */
   @property({ type: Boolean })
-  backdrop = false
+  visualText: boolean = true
 
   /**
-   * Optional label to display below the spinner.
-   */
-  @property({ type: String })
-  label = ''
-
-  /**
-   * Whether the spinner is disabled.
+   * When true, adds a semi-transparent backdrop over the container.
+   * @type {boolean}
+   * @default false
    */
   @property({ type: Boolean })
-  disabled = false
+  cover: boolean = false
 
+  /**
+   * When true, spinner covers the entire viewport with backdrop.
+   * @type {boolean}
+   * @default false
+   */
+  @property({ type: Boolean })
+  fullscreen: boolean = false
+
+  /**
+   * Controls the size of the spinner.
+   * @type {'default'|'sm'|'md'|'lg'}
+   * @default 'default'
+   */
+  @property({ type: String })
+  size: 'default' | 'md' | 'lg' | 'sm' = 'default'
+
+  /**
+   * Lifecycle method called when component is added to DOM.
+   * Sets up accessibility attributes and applies transition styles.
+   * @return {void}
+   */
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.setAttribute('role', 'status')
+    this.setAttribute('aria-busy', 'true')
+    TransitionalStyles.instance.apply(this, 'gds-spinner')
+  }
+
+  /**
+   * Generates CSS classes for the wrapper element based on component state.
+   * @private
+   * @return {string} Space-separated class names
+   */
+  private _getWrapperClasses(): string {
+    const classes = ['gds-spinner-wrapper']
+
+    if (this.fullscreen) {
+      classes.push('gds-spinner-fullscreen')
+    }
+
+    if (this.cover) {
+      classes.push('gds-spinner-cover')
+    }
+
+    if (this.cover || this.fullscreen) {
+      classes.push('gds-spinner-backdrop')
+    }
+
+    return classes.join(' ')
+  }
+
+  /**
+   * Generates CSS classes for the spinner element based on size.
+   * @private
+   * @return {string} Space-separated class names
+   */
+  private _getSpinnerClasses(): string {
+    return `gds-spinner ${this.size ? `gds-spinner-${this.size}` : ''}`
+  }
+
+  /**
+   * Renders text content based on visibility preference.
+   * @private
+   * @return {TemplateResult|null} The text element template or null if no text
+   */
+  private _renderText() {
+    if (!this.text) return null
+
+    if (this.visualText) {
+      return html`<span class="spinner-text" aria-live="polite"
+        >${this.text}</span
+      >`
+    } else {
+      return html`<span class="sr-only" aria-live="polite">${this.text}</span>`
+    }
+  }
+
+  /**
+   * Renders the spinner component template.
+   * @return {TemplateResult} The component's template
+   */
   render() {
     return html`
-      <div
-        class=${this.#getWrapperClasses()}
-        role="progressbar"
-        aria-label="${this.label || 'Loading'}"
-        aria-busy="true"
-        part="base"
-      >
-        <div
-          class=${this.#getSpinnerClasses()}
-          part="spinner"
-        ></div>
-        ${when(
-          this.label,
-          () => html`<div class="spinner-label" part="label">${this.label}</div>`,
-          () => nothing
-        )}
+      <div role="status" aria-live="polite">
+        <div class=${this._getWrapperClasses()}>
+          <span class=${this._getSpinnerClasses()}></span>
+          ${this._renderText()}
+        </div>
       </div>
     `
-  }
-
-  #getSpinnerClasses(): string {
-    const classes = {
-      'gds-spinner': true,
-      'gds-spinner-sm': this.size === 'sm',
-      'gds-spinner-lg': this.size === 'lg',
-      'gds-spinner-disabled': this.disabled
-    }
-
-    return Object.entries(classes)
-      .filter(([, value]) => value)
-      .map(([key]) => key)
-      .join(' ')
-  }
-
-  #getWrapperClasses(): string {
-    const classes = {
-      'gds-spinner-wrapper': true,
-      'gds-spinner-fullscreen': this.overlay === 'fullscreen',
-      'gds-spinner-cover': this.overlay === 'cover',
-      'gds-spinner-backdrop': this.backdrop
-    }
-
-    return Object.entries(classes)
-      .filter(([, value]) => value)
-      .map(([key]) => key)
-      .join(' ')
   }
 }
