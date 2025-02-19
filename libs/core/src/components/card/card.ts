@@ -43,6 +43,7 @@ export class GdsCard extends GdsDiv {
    *
    * `xs`, `s`, `m`, `l`, `xl`
    *
+   * @deprecated Use the `box-shadow` property instead.
    */
   @styleExpressionProperty({
     property: 'box-shadow',

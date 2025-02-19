@@ -136,6 +136,18 @@ export class GdsDiv extends withSizeXProps(
   'border-radius'?: string
 
   /**
+   * Style Expression Property for the `box-shadow` property.
+   *
+   * Accepts shadow tokens from the design system.
+   *
+   * `xs`, `s`, `m`, `l`, `xl`
+   */
+  @styleExpressionProperty({
+    valueTemplate: (v) => `var(--gds-shadow-${v})`,
+  })
+  'box-shadow'?: string
+
+  /**
    * Style Expression Property that controls the `opacity` property.
    * Supports all valid CSS `opacity` values.
    */
