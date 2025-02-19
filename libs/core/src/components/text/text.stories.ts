@@ -96,7 +96,7 @@ const DefaultParams: Story = {
       control: { type: 'select' },
     },
     font: {
-      control: { type: 'string' },
+      control: { type: 'text' },
     },
   },
 }
