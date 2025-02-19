@@ -3,6 +3,8 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './rich-text'
 import '../divider'
 import '../card'
+import '../container'
+import '../text'
 
 import { html } from '../../scoping'
 
@@ -46,15 +48,18 @@ export const Card: Story = {
         <h1>
           The Starship <small>SS Endeavor</small> <mark>Exploration Class</mark>
         </h1>
+        <iframe src="https://example.com/" height="400"></iframe>
+        <h2>Heading one</h2>
+        <h3>Heading test</h3>
         <p>
           The <strong>SS Endeavor</strong> is a state-of-the-art exploration
           class starship designed for deep space missions. Equipped with
           advanced technology and robust systems, it aims to expand our
-          understanding of the universe. <br /><br />
-          With a focus on <em>interstellar travel</em>, the SS Endeavor features
-          a unique propulsion system that allows for faster-than-light travel.
-          Its mission is to explore uncharted territories and gather data on
-          distant celestial bodies.
+          understanding of the universe. With a focus on
+          <em>interstellar travel</em>, the SS Endeavor features a unique
+          propulsion system that allows for faster-than-light travel. Its
+          mission is to explore uncharted territories and gather data on distant
+          celestial bodies. <a href="#">Link</a>
         </p>
         <figure>
           <img src="https://placehold.co/600x400" alt="SS Endeavor Starship" />
@@ -84,7 +89,11 @@ export const Card: Story = {
         </p>
         <h2>Specifications</h2>
         <ul>
-          <li>Length: 150 meters</li>
+          <li>
+            Length: 150 meters Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
+          </li>
           <li>Width: 50 meters</li>
           <li>Height: 30 meters</li>
           <li>Crew Capacity: 100 personnel</li>
@@ -111,7 +120,6 @@ export const Card: Story = {
             <li>Space weather and its effects on technology</li>
           </ul>
         </details>
-
         <details name="named-details">
           <summary>Exploration Objectives</summary>
           <p>
@@ -127,7 +135,6 @@ export const Card: Story = {
             <li>Understanding the dynamics of asteroid belts</li>
           </ul>
         </details>
-
         <details name="named-details">
           <summary>Technological Innovations</summary>
           <p>
@@ -144,7 +151,6 @@ export const Card: Story = {
             <li>Innovative life support systems for long-duration missions</li>
           </ul>
         </details>
-
         <p>
           In summary, the <strong>SS Endeavor</strong> is poised to lead
           humanity's next great leap into the cosmos.
@@ -202,12 +208,67 @@ export const Headings: Story = {
   name: 'Headings',
   render: (args) => html`
     <gds-rich-text>
-      <h1>The Starship SS Endeavor Exploration Class</h1>
+      <!-- <h1>The Starship SS Endeavor Exploration Class</h1>
       <h2>Mission Alpha Centauri Deep Space Exploration</h2>
       <h3>Rocket Falcon Heavy Launch Vehicle</h3>
       <h4>Engine Raptor Next-Gen Propulsion</h4>
       <h5>Module Dragon Crew Transport</h5>
-      <h6>Satellite Starlink Global Internet</h6>
+      <h6>Satellite Starlink Global Internet</h6> -->
+
+      <h1>Heading 1</h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h2>Heading 2</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h3>Heading 3</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h4>Heading 4</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h5>Heading 5</h5>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <h6>Heading 6</h6>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </p>
     </gds-rich-text>
   `,
 }
@@ -269,14 +330,43 @@ export const Details: Story = {
   render: (args) => html`
     <gds-rich-text>
       <h3>Research Areas</h3>
-      <details>
-        <summary>Click to expand research focus areas</summary>
+      <details name="named-details">
+        <summary>Focus Areas</summary>
         <p>The SS Endeavor will focus on the following research areas:</p>
         <ul>
           <li>Astrobiology</li>
           <li>Exoplanetary geology</li>
           <li>Astrophysics and cosmology</li>
           <li>Space weather and its effects on technology</li>
+        </ul>
+      </details>
+      <details name="named-details">
+        <summary>Exploration Objectives</summary>
+        <p>
+          The SS Endeavor aims to achieve significant breakthroughs in the
+          following exploration objectives:
+        </p>
+        <ul>
+          <li>Mapping the surface of Mars for potential human colonization</li>
+          <li>Studying the atmospheres of gas giants</li>
+          <li>Investigating the potential for life on Europa</li>
+          <li>Understanding the dynamics of asteroid belts</li>
+        </ul>
+      </details>
+      <details name="named-details">
+        <summary>Technological Innovations</summary>
+        <p>
+          The SS Endeavor will develop and implement cutting-edge technologies
+          in these areas:
+        </p>
+        <ul>
+          <li>Advanced propulsion systems for deep space travel</li>
+          <li>Autonomous robotic systems for planetary exploration</li>
+          <li>
+            Next-generation communication systems for interstellar data
+            transmission
+          </li>
+          <li>Innovative life support systems for long-duration missions</li>
         </ul>
       </details>
     </gds-rich-text>
@@ -444,7 +534,7 @@ export const Table: Story = {
  */
 export const Basic: Story = {
   ...DefaultParams,
-  name: 'Rich Text',
+  name: 'Theme',
   render: (args) => html`
     <gds-card variant="tertiary">
       <gds-rich-text>
