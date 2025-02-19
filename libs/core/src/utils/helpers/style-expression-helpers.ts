@@ -58,7 +58,8 @@ export const forSpaceTokens: StyleExpressionPropertyOptions = {
  * Create options for style expression properties that expect space tokens.
  */
 export const forSpaceTokensAndCustomValues: StyleExpressionPropertyOptions = {
-  valueTemplate: (value: string) => `var(--gds-space-${value}, ${value})`,
+  valueTemplate: (value: string) =>
+    `var(--gds-space-${sanitizeVariableName(value)}, ${value})`,
 }
 
 /**
@@ -86,3 +87,7 @@ export const forSpaceTokensSupportingNegative: StyleExpressionPropertyOptions =
       return `${prop}: ${top} ${right} ${bottom} ${left};`
     },
   }
+
+function sanitizeVariableName(name: string) {
+  return name.replace(/[^a-zA-Z0-9-]/g, '')
+}
