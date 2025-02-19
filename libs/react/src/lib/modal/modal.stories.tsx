@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import React from 'react'
 import { useArgs } from '@storybook/preview-api'
 import { Meta, Story } from '@storybook/react/types-6-0'
@@ -35,6 +36,7 @@ const Template: Story<ModalProps> = (props) => {
 }
 
 export const ModalDefault: Story<ModalProps> = Template.bind({})
+
 ModalDefault.args = {
   type: 'default',
   header: 'Default Modal',
@@ -89,6 +91,7 @@ TakeOver.args = {
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
+  tags: ['autodocs'],
   component: Modal,
   parameters: {
     componentIds: [

@@ -5,4 +5,4 @@ import { Component } from '@angular/core'
   template: ` <ng-content></ng-content> `,
   styleUrls: ['./card.component.scss'],
 })
-export class NgvCardComponent {}
+export class NggvCardComponent {}

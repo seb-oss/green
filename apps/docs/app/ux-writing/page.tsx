@@ -44,14 +44,14 @@ const HEADINGS = [
 
 export default function Writing() {
   return (
-    <GdsFlex flex-direction="column" gap="6xl">
-      <Hero
-        heading="UX writing and our guidelines"
-        preamble="Regardless of where, when or how the customer meets us, the experience of SEB must be the same because each meeting contributes to how we are perceived. A positive customer experience opens the door to new business. This is particularly important in texts aimed at customers. Mistakes affect the reader's concentration on the content and understanding of the text. Because our texts are correct, our credibility with customers and other visitors (=potential customers) increases."
-        compact
-      />
-      <GdsFlex gap="8xl">
-        <GdsFlex flex-direction="column" gap="4xl">
+    <GdsFlex flex-direction="column" gap="2xl; m{6xl}">
+      <GdsFlex gap="l" margin="0 auto">
+        <GdsFlex flex-direction="column" gap="2xl; m{4xl}" max-width="80ch">
+          <Hero
+            heading="UX writing and our guidelines"
+            preamble="Regardless of where, when or how the customer meets us, the experience of SEB must be the same because each meeting contributes to how we are perceived. A positive customer experience opens the door to new business. This is particularly important in texts aimed at customers. Mistakes affect the reader's concentration on the content and understanding of the text. Because our texts are correct, our credibility with customers and other visitors (=potential customers) increases."
+            compact
+          />
           <GdsRichText font-size="body-l" color="secondary">
             <h2 id="written-id">Written ID – our tone of voice</h2>
             {`SEB's Written ID is our guiding light, and it forms the basis for
@@ -182,7 +182,7 @@ export default function Writing() {
             </p>
           </GdsRichText>
         </GdsFlex>
-        <GdsFlex min-width="240px">
+        <GdsFlex display="none; m{flex}" min-width="240px">
           <TOC headings={HEADINGS} component={'About'} />
         </GdsFlex>
       </GdsFlex>

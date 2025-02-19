@@ -6,6 +6,7 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import { GdsContainer } from '../container'
 import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 
@@ -18,7 +19,7 @@ import textStyles from './text.style'
  *
  */
 @gdsCustomElement('gds-text')
-export class GdsText extends GdsElement {
+export class GdsText extends GdsContainer {
   static styles = [tokens, defaultStyles, textStyles]
 
   /**
@@ -104,18 +105,6 @@ export class GdsText extends GdsElement {
   'font-weight'?: string
 
   /**
-   * Controls the margin of the text.
-   * Supports all the default margin values.
-   *
-   * @property margin
-   */
-  @styleExpressionProperty({
-    property: 'margin',
-    valueTemplate: (v) => v,
-  })
-  margin?: string
-
-  /**
    * Controls the text-wrap property of the text.
    * Supports all valid CSS text-wrap values.
    *
@@ -138,36 +127,6 @@ export class GdsText extends GdsElement {
     valueTemplate: (v) => v,
   })
   'text-transform'?: string
-
-  /**
-   * Controls the max length of the text in characters.
-   * Length is by defualt in characters to keep conistency with the text content.
-   *
-   * You can apply length like this:
-   *
-   * ```html
-   * <gds-text max-width="50"></gds-text>
-   * ```
-   *
-   * @property length
-   */
-  @styleExpressionProperty({
-    property: 'max-width',
-    valueTemplate: (v) => `${v}ch`,
-  })
-  'max-width'?: string
-
-  /**
-   * Controls the max-width property of the text.
-   * Supports all valid CSS max-width values.
-   *
-   * @property max
-   */
-  @styleExpressionProperty({
-    property: 'min-width',
-    valueTemplate: (v) => `${v}ch`,
-  })
-  'min-width'?: string
 
   /**
    * Controls the text-align property of the text.

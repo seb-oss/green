@@ -35,6 +35,7 @@ export interface ModalProps {
   onConfirm?: ModalEventListener
   onDismiss?: ModalEventListener
   preventBackdropClose?: boolean
+  enableBodyScrollLock?: boolean
 }
 
 interface ModalHeaderProps
@@ -69,7 +70,7 @@ const ModalHeader = ({
   return (
     <div className="header">
       <h3 id={id}>{header}</h3>
-      <button className="close" aria-label={ closeText } onClick={handleClose}>
+      <button className="close" aria-label={closeText} onClick={handleClose}>
         <i></i>
       </button>
     </div>
@@ -130,6 +131,7 @@ export const Modal = ({
   id = randomId(),
   isOpen,
   size = 'sm',
+  enableBodyScrollLock = true,
   ...props
 }: ModalProps) => {
   const [uuid, _] = useState(id)
@@ -158,8 +160,7 @@ export const Modal = ({
         setShouldRender(false)
       }, DELAY)
     }
-
-    if (isOpen && modalRef.current) {
+    if (isOpen && modalRef.current && enableBodyScrollLock) {
       // Disable scrolling on the body when the modal is open
       disableBodyScroll(modalRef.current)
     } else if (modalRef.current) {
@@ -171,7 +172,7 @@ export const Modal = ({
       // Cleanup by enabling body scroll and removing all scroll locks
       clearAllBodyScrollLocks()
     }
-  }, [isOpen, shouldRender, status])
+  }, [isOpen, shouldRender, status, enableBodyScrollLock])
 
   if (!isOpen) return null
 

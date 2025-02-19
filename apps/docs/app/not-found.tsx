@@ -1,4 +1,5 @@
-import { GdsContainer, GdsFlex, GdsLink, GdsText } from '$/import/components'
+import { Link } from 'next-view-transitions'
+import { GdsContainer, GdsFlex, GdsText } from '$/import/components'
 
 import type { Metadata } from 'next'
 
@@ -19,7 +20,7 @@ export default function NotFound() {
         <GdsText font-size="display-2xl">404</GdsText>
         <GdsText tag="h1">Page Not Found</GdsText>
       </GdsContainer>
-      <GdsLink href={'/'}>Go back</GdsLink>
+      <Link href={'/'}>Go back</Link>
     </GdsFlex>
   )
 }

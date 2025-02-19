@@ -3,6 +3,11 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
+import '../container'
+import '../text'
+import '../link'
+import '../flex'
+import '../card'
 import '../icon/icons/chevron-bottom.ts'
 import '../icon/icons/bubbles.ts'
 import '../signal/index.ts'
@@ -32,6 +37,7 @@ const DefaultParams: Story = {
       source: { format: true, type: 'dynamic' },
       story: {
         height: '200px',
+        position: 'relative',
       },
     },
     controls: { expanded: true },
@@ -186,6 +192,133 @@ export const Color: Story = {
         Secondary
         <gds-signal slot="trail" level="3" color="positive"></gds-signal>
       </gds-fab>
+    </gds-flex>
+  `,
+}
+
+/**
+ * You can position the FAB using the `inset` property.
+ * It takes all the default CSS inset values.
+ *
+ * e.g
+ *
+ * ```html
+ * <gds-fab inset="auto 48px 48px auto">
+ *    I'm a FAB
+ * </gds-fab>
+ * ```
+ *
+ * And also the `position` property can be set to use any valid CSS position values.
+ *
+ * e.g
+ *
+ * ```html
+ * <gds-fab position="absolute">
+ *    Absolute Position
+ * </gds-fab>
+ * ```
+ *
+ */
+
+export const Position: Story = {
+  ...DefaultParams,
+  name: 'Position',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-flex height="300px">
+      <gds-fab inset="auto 48px 48px auto" position="absolute">
+        I'm a FAB
+      </gds-fab>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The z order of the FAB is set by default to `1050`.
+ *
+ * This is recommended to keep the FAB above other elements.
+ *
+ * If you want to change the z-index, that should be done in the CSS or wrap FAB in a container with a higher z-index value.
+ */
+
+export const ZIndex: Story = {
+  ...DefaultParams,
+  name: 'z-index',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-flex
+      height="400px"
+      flex-direction="column"
+      gap="4xl"
+      padding="0"
+      overflow="hidden scroll"
+      border-radius="s"
+    >
+      <gds-fab inset="auto 40px 40px auto"> Show above other things </gds-fab>
+      <gds-container
+        border-radius="s"
+        width="100%"
+        height="max-content"
+        background="notice"
+        padding="4xl"
+      >
+        <gds-flex gap="xl">
+          <gds-flex
+            flex-direction="column"
+            gap="xl"
+            flex="1"
+            align-items="flex-start"
+            padding="m 0 0 0"
+          >
+            <gds-text tag="h1"> Title example </gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-link href="#" variant="secondary">
+              <gds-icon-credit-card></gds-icon-credit-card> Click me!
+            </gds-link>
+          </gds-flex>
+          <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
+        </gds-flex>
+      </gds-container>
+      <gds-container
+        border-radius="s"
+        width="100%"
+        height="max-content"
+        background="notice"
+        padding="4xl"
+      >
+        <gds-flex gap="xl">
+          <gds-flex
+            flex-direction="column"
+            gap="xl"
+            flex="1"
+            align-items="flex-start"
+            padding="m 0 0 0"
+          >
+            <gds-text tag="h1"> Title example </gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-link href="#" variant="secondary">
+              <gds-icon-credit-card></gds-icon-credit-card> Click me!
+            </gds-link>
+          </gds-flex>
+          <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
+        </gds-flex>
+      </gds-container>
     </gds-flex>
   `,
 }

@@ -76,12 +76,19 @@ export const styles = css`
   * lists
   * -----------------------------------------------------------
   */
-  ul,
-  ol,
+  ul {
+    padding-inline-start: 2ch;
+  }
+
+  ol {
+    margin-left: 3ch;
+    margin-bottom: 1lh;
+  }
+
   li {
-    margin: 0 0 0 1ch;
     padding: 0 0 0.3lh 0;
   }
+
   li:last-child {
     padding: 0;
   }
@@ -218,5 +225,10 @@ export const styles = css`
     border-bottom: var(--gds-space-4xs) solid
       color-mix(in srgb, currentColor, transparent 90%);
     margin-bottom: var(--gds-space-xl);
+  }
+
+  a {
+    color: currentColor;
+    text-decoration-color: currentColor;
   }
 `

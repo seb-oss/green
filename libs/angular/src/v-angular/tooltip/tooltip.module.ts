@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core'
 
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvTooltipDirective } from './tooltip.directive'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvTooltipDirective } from './tooltip.directive'
 
 @NgModule({
-  declarations: [NgvTooltipDirective],
-  exports: [NgvTooltipDirective],
-  imports: [NgvI18nModule],
+  declarations: [NggvTooltipDirective],
+  exports: [NggvTooltipDirective],
+  imports: [NggvI18nModule],
 })
-export class NgvTooltipModule {}
+export class NggvTooltipModule {}

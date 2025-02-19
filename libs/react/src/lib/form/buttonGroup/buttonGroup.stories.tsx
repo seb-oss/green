@@ -3,8 +3,10 @@ import { ButtonGroup } from './buttonGroup'
 
 const Template = ({ children, ...props }) => (
   <ButtonGroup {...props}>
-    <Button>Button 1</Button>
-    <Button>Button 2</Button>
+    <Button>First Button</Button>
+    <Button>Second Button</Button>
+    <Button>Third Button</Button>
+    <Button>Forth Button</Button>
   </ButtonGroup>
 )
 
