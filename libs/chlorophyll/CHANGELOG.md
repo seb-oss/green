@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.6.14
+
+### Patch Changes
+
+- 0213060: Chaning dropdown trigger colors to correct ones
+- Updated dependencies [7fc5d17]
+  - @sebgroup/fonts@2.0.3
+
 ## 3.6.13
 
 ### Patch Changes

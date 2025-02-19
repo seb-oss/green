@@ -28,6 +28,7 @@ const betaItems = {
   Image: true,
   Mask: true,
   Signal: true,
+  Select: true,
   Spacer: true,
   Text: true,
   Theme: true,

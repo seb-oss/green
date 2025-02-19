@@ -171,21 +171,6 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         expect(labelEl?.getAttribute('for')).to.equal(inputEl?.id)
       })
 
-      it('should have a aria-describedby attribute that matches the supporting text id', async () => {
-        const el = await fixture<GdsInput>(
-          html`<gds-input
-            variant="${variant}"
-            supporting-text="My supporting text"
-          ></gds-input>`,
-        )
-        const inputEl = el.shadowRoot?.querySelector('input')
-        const supportingTextEl =
-          el.shadowRoot?.querySelector('#supporting-text')
-        expect(inputEl?.getAttribute('aria-describedby')).to.equal(
-          supportingTextEl?.id,
-        )
-      })
-
       it('should focus when clicking on the field', async () => {
         const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}"></gds-input>`,

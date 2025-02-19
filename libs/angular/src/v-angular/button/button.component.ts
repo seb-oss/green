@@ -4,7 +4,6 @@ import {
   EventEmitter,
   HostBinding,
   Inject,
-  InjectionToken,
   Input,
   OnChanges,
   OnInit,
@@ -16,7 +15,7 @@ import {
 import { NgControl } from '@angular/forms'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 export type ButtonTypes = 'button' | 'submit' | 'reset' | 'link'
 
@@ -41,12 +40,13 @@ export enum ButtonStyle {
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
 })
-export class NgvButtonComponent
-  extends NgvBaseControlValueAccessorComponent
+export class NggvButtonComponent
+  extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnChanges
 {
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'button'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'button'
   /** Type of button to one of button|submit|reset|link, where link creates an anchor tag. */
   @Input() type: ButtonTypes = 'button'
   /** Style of the button to one of Primary|Secondary|Alternative|Delete|DeleteConfirm|Ghost|GhostDark|Link. */
@@ -93,7 +93,7 @@ export class NgvButtonComponent
   ngOnInit() {
     super.ngOnInit()
     if (this.href) this.external = /^\w+:\/\/.+$/.test(this.href)
-    this.buttonClasses = NgvButtonComponent.buttonStyleClasses(
+    this.buttonClasses = NggvButtonComponent.buttonStyleClasses(
       this.buttonStyle,
       this.small,
     )
@@ -101,7 +101,7 @@ export class NgvButtonComponent
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.buttonStyle || changes.small) {
-      this.buttonClasses = NgvButtonComponent.buttonStyleClasses(
+      this.buttonClasses = NggvButtonComponent.buttonStyleClasses(
         this.buttonStyle,
         this.small,
       )

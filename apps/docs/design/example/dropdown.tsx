@@ -1,12 +1,33 @@
 'use client'
 
-import { GdsDropdown, GdsOption } from '$/import/components'
+import { GdsDropdown, GdsFlex, GdsOption, GdsSelect } from '$/import/components'
 
-const Dropdown = () => (
-  <GdsDropdown>
-    <GdsOption value="1">Dropdown</GdsOption>
-    <GdsOption value="2">Dropdwon Item</GdsOption>
-  </GdsDropdown>
+const Dropdown = ({ hero }: { hero?: boolean }) => (
+  <>
+    {hero ? (
+      <GdsFlex max-width="340px" flex="1">
+        <GdsDropdown
+          value="1"
+          label="Label"
+          supportingText="This is a supporting text."
+        >
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+          <GdsOption value="1">Dropdown</GdsOption>
+          <GdsOption value="2">Dropdwon Item</GdsOption>
+        </GdsDropdown>
+      </GdsFlex>
+    ) : (
+      <GdsFlex flex="1" width="240px">
+        <GdsDropdown label="Dropdown">
+          <GdsOption value="1">Dropdown</GdsOption>
+          <GdsOption value="2">Dropdwon Item</GdsOption>
+        </GdsDropdown>
+      </GdsFlex>
+    )}
+  </>
 )
 
 export default Dropdown

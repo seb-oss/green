@@ -16,7 +16,7 @@ import {
 
 @Directive({
   selector:
-    'gds-input, gds-textarea, gds-dropdown, gds-datepicker, [nggCoreControl]',
+    'gds-input, gds-textarea, gds-dropdown, gds-datepicker, gds-select, [nggCoreControl]',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -66,7 +66,7 @@ export class NggCoreControlDirective
       this.renderer.setProperty(
         this.el.nativeElement,
         'invalid',
-        control.touched && control.invalid,
+        (control.dirty || control.touched) && control.invalid,
       )
     }
   }

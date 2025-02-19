@@ -6,9 +6,10 @@ import { IconCrossLarge } from '$/import/icons'
 
 type DontProps = {
   children: ReactNode
+  caption: string
 }
 
-export default function Dont({ children }: DontProps) {
+export default function Dont({ children, caption }: DontProps) {
   return (
     <GdsCard
       border="3xs/#fcecea"
@@ -22,8 +23,8 @@ export default function Dont({ children }: DontProps) {
       {children}
       <GdsFlex color="negative" align-items="center" gap="s" padding="xs m">
         <IconCrossLarge width={14} stroke={2} />
-        <GdsText tag="small" font-weight="book">
-          {"Don't"}
+        <GdsText font-size="details-xs" font-weight="book">
+          {caption ? caption : "Don't"}
         </GdsText>
       </GdsFlex>
     </GdsCard>

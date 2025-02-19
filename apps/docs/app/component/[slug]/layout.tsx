@@ -25,6 +25,11 @@ import { toast } from 'sonner'
 
 import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
 
+// Dynamic component props
+type DynamicComponentProps = {
+  hero?: boolean // Define the hero prop
+}
+
 export default function ComponentLayout({
   children,
   params,
@@ -72,21 +77,21 @@ export default function ComponentLayout({
 
   const links = [
     { path: '', label: 'Overview', isPrivate: false },
-    {
-      path: '/design',
-      label: 'Design',
-      isPrivate: componentDesign?.private || false,
-    },
+    // {
+    //   path: '/design',
+    //   label: 'Design',
+    //   isPrivate: componentDesign?.private || false,
+    // },
     {
       path: '/ux-text',
       label: 'UX text',
       isPrivate: componentUXText?.private || false,
     },
-    {
-      path: '/code',
-      label: 'Code',
-      isPrivate: componentCode?.private || false,
-    },
+    // {
+    //   path: '/code',
+    //   label: 'Code',
+    //   isPrivate: componentCode?.private || false,
+    // },
     {
       path: '/accessibility',
       label: 'Accessibility',
@@ -95,7 +100,7 @@ export default function ComponentLayout({
   ]
 
   const getDynamicComponent = (c: string) =>
-    dynamic(
+    dynamic<DynamicComponentProps>(
       () =>
         import(`../../../design/example/${c}`).catch(() => {
           const ExampleComponent = () => <div>Example</div>
@@ -230,54 +235,53 @@ export default function ComponentLayout({
         width="100%"
         justify-content="center"
         margin="0 auto"
+        gap="l"
       >
+        <Breadcrumb
+          home={'Home'}
+          separator={<GdsText font-size="body-s"> / </GdsText>}
+          slug={slug}
+        />
+
+        <GdsFlex flex-direction="column" gap="xs">
+          <GdsText tag="h1">{title}</GdsText>
+          <GdsText tag="p" text-wrap="balance" className="fade-in delay-200">
+            {summary}
+          </GdsText>
+          {status && (
+            <GdsBadge variant="notice" size="small">
+              {status}
+            </GdsBadge>
+          )}
+          <GdsFlex gap="s">
+            Tags:
+            {tagsArray.map((tag) => (
+              <Link
+                href={`/tag/` + tag}
+                key={tag}
+                style={{
+                  textDecoration: 'underline',
+                  textTransform: 'capitalize',
+                }}
+              >
+                {tag}
+              </Link>
+            ))}
+          </GdsFlex>
+        </GdsFlex>
         <GdsFlex gap="l">
           <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <Breadcrumb
-              home={'Home'}
-              separator={<GdsText font-size="body-s"> / </GdsText>}
-              slug={slug}
-            />
-            <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
+            <GdsCard>
               <GdsFlex
-                justify-content="space-between"
-                align-items="flex-start"
                 gap="xl"
+                align-items="center"
+                justify-content="center"
+                padding="4xl 0"
+                min-height="300px"
               >
-                <GdsFlex flex-direction="column" gap="xs">
-                  <GdsText tag="h1">{title}</GdsText>
-                  <GdsText
-                    tag="p"
-                    text-wrap="balance"
-                    className="fade-in delay-200"
-                  >
-                    {summary}
-                  </GdsText>
-                  {status && (
-                    <GdsBadge variant="notice" size="small">
-                      {status}
-                    </GdsBadge>
-                  )}
-                  <GdsFlex gap="s">
-                    {tagsArray.map((tag) => (
-                      <Link href={`/tag/` + tag} key={tag}>
-                        {tag}
-                      </Link>
-                    ))}
-                  </GdsFlex>
-                </GdsFlex>
+                <Preview hero={true} />
               </GdsFlex>
-              <GdsCard>
-                <GdsFlex
-                  gap="xl"
-                  align-items="center"
-                  justify-content="center"
-                  height="360px"
-                >
-                  <Preview />
-                </GdsFlex>
-              </GdsCard>
-            </GdsFlex>
+            </GdsCard>
             <Taber component={url_path} links={links} />
             <GdsFlex flex-direction="column" gap="xl">
               {children}
