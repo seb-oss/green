@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './index.ts'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 // Needed for components that only have 2016 style so far
 import { registerTransitionalStyles } from '../../transitional-styles.ts'
 
@@ -26,6 +27,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-context-menu'),
+  },
 }
 
 export default meta

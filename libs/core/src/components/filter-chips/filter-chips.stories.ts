@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './index.ts'
 
 /**
@@ -14,11 +16,14 @@ import './index.ts'
 const meta: Meta = {
   title: 'Components/Filter Chips',
   component: 'gds-filter-chips',
-  //subcomponents: { FilterChip: 'gds-filter-chip' },
+  subcomponents: { FilterChip: 'gds-filter-chip' },
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-filter-chips'),
+  },
 }
 
 export default meta

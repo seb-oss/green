@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './img'
 
-import { html } from 'lit'
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
  * The `gds-img`
@@ -11,6 +11,9 @@ const meta: Meta = {
   title: 'Components/Image',
   component: 'gds-img',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-img'),
+  },
 }
 
 export default meta

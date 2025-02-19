@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
+
 import './card'
 import '../img'
 import '../video'
@@ -17,18 +19,21 @@ import '../icon/icons/circles-three.js'
 /**
  * A container for content representing a single entity. e.g. a contact, article, or task.
  *
- * `gds-card` inherits all properties from `gds-container`, but comes with some predefined defaults
+ * `gds-card` inherits all properties from `gds-div`, but comes with some predefined defaults
  * and a shortcut property for specifiying different card variants.
  *
  * @status beta
  *
- * @extends `gds-container`
+ * @extends `gds-div`
  */
 
 const meta: Meta = {
   title: 'Components/Card',
   component: 'gds-card',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-card'),
+  },
 }
 
 export default meta
@@ -140,17 +145,17 @@ export const CardAdvancedExample: Story = {
         background="secondary"
       >
         <gds-flex gap="0" flex-direction="column" align-items="stretch">
-          <gds-container position="relative">
+          <gds-div position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
               aspect-ratio="1/1"
             ></gds-img>
-            <gds-container position="absolute" inset="20px 20px auto auto">
+            <gds-div position="absolute" inset="20px 20px auto auto">
               <gds-button>
                 <gds-icon-arrow-down></gds-icon-arrow-down>
               </gds-button>
-            </gds-container>
-          </gds-container>
+            </gds-div>
+          </gds-div>
           <gds-flex
             flex-direction="column"
             padding="s{xs} m{l} l{l}"
@@ -181,18 +186,18 @@ export const CardAdvancedExample: Story = {
         background="secondary"
       >
         <gds-flex gap="m" flex-direction="column" padding="s">
-          <gds-container position="relative">
+          <gds-div position="relative">
             <gds-img
               src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
               aspect-ratio="1/1"
               border-radius="xs"
             ></gds-img>
-            <gds-container position="absolute" inset="20px 20px auto auto">
+            <gds-div position="absolute" inset="20px 20px auto auto">
               <gds-button>
                 <gds-icon-arrow-down></gds-icon-arrow-down>
               </gds-button>
-            </gds-container>
-          </gds-container>
+            </gds-div>
+          </gds-div>
           <gds-flex
             flex-direction="column"
             padding="s{xs} m{s} l{s}"
@@ -238,10 +243,10 @@ export const CardAdvancedExample: Story = {
               width="100%"
               color="tertiary"
             >
-              <gds-container>
+              <gds-div>
                 <gds-text font-size="body-l">Jane Doe</gds-text>
                 <gds-text font-size="body-m">UX Designer</gds-text>
-              </gds-container>
+              </gds-div>
               <gds-flex gap="s">
                 <gds-button rank="secondary">Message</gds-button>
                 <gds-button rank="secondary">Follow</gds-button>
@@ -252,146 +257,6 @@ export const CardAdvancedExample: Story = {
       </gds-card>
     </gds-grid>
   `,
-}
-
-/**
- * @property border
- * Controls the border property of the card.
- * Supports all tokens from the design system.
- * Can be specified for each side using the size tokens like this:
- *
- * ```html
- * <gds-container border="4xs 0 0 0"></gds-container>
- * ```
- *
- *
- *
- * ```html
- * <!--Border specified for different breakpoints and side: -->
- * <gds-container border="s{2xs 0 2xs 0} m{3xs 0 0 0} l{4xs}"></gds-container>
- * ```
- * * The above example will apply the border style of 2xs(top) 0(right) 2xs(bottom) 0(right) for small devices, 3xs for medium devices, and 4xs for large devices with the respective sides.
- *
- * ```html
- * <!-- Border specified for all sides and all breakpoints: -->
- * <gds-container border="4xs"></gds-container>
- * ```
- *
- *
- * To speficy the color of the border you can use the color tokens like this:
- *
- * ```html
- * <gds-container border="4xs/primary"></gds-container>
- * ```
- */
-export const CardBorder: Story = {
-  ...DefaultParams,
-  name: 'Border Style',
-  render: (args) =>
-    html` <gds-grid columns="5" gap="l">
-      <gds-card variant="primary" border-radius="0 0 m m" border="4xs 0 0 0">
-        <gds-flex align-items="center" justify-content="center"> Top </gds-flex>
-      </gds-card>
-      <gds-card variant="primary" border-radius="m 0 0 m" border="0 4xs 0 0">
-        <gds-flex align-items="center" justify-content="center">Right</gds-flex>
-      </gds-card>
-      <gds-card variant="primary" border-radius="m m 0 0" border="0 0 4xs 0">
-        <gds-flex align-items="center" justify-content="center">
-          Bottom
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="primary" border-radius="0 m m 0" border="0 0 0 4xs">
-        <gds-flex align-items="center" justify-content="center">
-          Left
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="primary" border-radius="m" border="4xs">
-        <gds-flex align-items="center" justify-content="center"> All </gds-flex>
-      </gds-card>
-    </gds-grid>`,
-}
-
-/**
- * @property radius
- *
- * Controls the border-radius property of the card.
- * Supports all the size tokens from the design system.
- *
- * You can apply radius in each corner like this:
- *
- * ```html
- * <gds-card border-radius="0 0 m m" ></gds-card>
- * ```
- *
- * Also for different breakpoints like this:
- *
- * ```html
- * <gds-card border-radius="s{xs} m{xs} l{s}"></gds-card>
- * ```
- *
- * Each corner can have a different radius value and also different values for different breakpoints.
- * The radius styles are predfied on the tokens file and will be applied automatically based on the token value.
- *
- *
- * ```html
- * <gds-card border-radius="m">All breakpoints</gds-card>
- * <gds-card border-radius="s{0 0 xs} m{0 xs 0 xs} l{s}" >
- *    Specific breakpoints and sides
- * </gds-card>
- * ```
- *
- * These are the available values you can use to define Border Radius
- *
- * `0`, `4xs`, `3xs`, `2xs`, `xs`, `s`, `m`, `l`, `xl`, `2xl`, `3xl`, `4xl`, `5xl`, `6xl`, `7xl`, `8xl`, `max`
- *
- * #### Examples
- */
-export const CardRadius: Story = {
-  ...DefaultParams,
-  name: 'Border Radius',
-  render: (args) =>
-    html`<gds-grid columns="8" gap="l">
-      <gds-card variant="tertiary" padding="xl" border-radius="0">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          0
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="2xs">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          2xs
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="0 xs 0 xs">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          xs
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="0 s 0 s">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          s
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="0 m 0 m">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          m
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="0 l 0 l">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          l
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="xl">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          xl</gds-flex
-        >
-      </gds-card>
-      <gds-card variant="tertiary" padding="xl" border-radius="max">
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          max</gds-flex
-        >
-      </gds-card>
-    </gds-grid>`,
 }
 
 /**
@@ -473,10 +338,10 @@ export const Cardshadow: Story = {
  *
  * Using `gds-card` with `gds-grid`
  * The `gds-card` can be used with the `gds-grid` to create a card layout with multiple cards.
- * The `gds-card` and `gds-container` accept properties like `column` and `row` where you can specify the number of columns specified on the grid to span or rows to span in vertical axis like on this example:
+ * The `gds-card` and `gds-div` accept properties like `column` and `row` where you can specify the number of columns specified on the grid to span or rows to span in vertical axis like on this example:
  *
  * ```html
- * <gds-container grid-column="2 / -1" grid-row="1 / -1"></gds-container>
+ * <gds-div grid-column="2 / -1" grid-row="1 / -1"></gds-div>
  * ```
  */
 export const CardGrid: Story = {
@@ -484,7 +349,7 @@ export const CardGrid: Story = {
   name: 'Using with Grid',
   render: (args) =>
     html` <gds-grid columns="4" gap="l">
-      <gds-container>
+      <gds-div>
         <gds-card border-radius="xs">
           <gds-flex gap="m" flex-direction="column" align-items="flex-start">
             <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
@@ -497,8 +362,8 @@ export const CardGrid: Story = {
             <gds-button>Button</gds-button>
           </gds-flex>
         </gds-card>
-      </gds-container>
-      <gds-container grid-column="2 / -1" grid-row="1 / -1" display="flex">
+      </gds-div>
+      <gds-div grid-column="2 / -1" grid-row="1 / -1" display="flex">
         <gds-card border-radius="xs">
           <gds-flex
             flex-direction="column"
@@ -520,8 +385,8 @@ export const CardGrid: Story = {
             <gds-button>Button</gds-button>
           </gds-flex>
         </gds-card>
-      </gds-container>
-      <gds-container grid-column="1 / -1">
+      </gds-div>
+      <gds-div grid-column="1 / -1">
         <gds-card border-radius="xs">
           <gds-flex
             flex-direction="column"
@@ -547,6 +412,6 @@ export const CardGrid: Story = {
             <gds-button>Button</gds-button>
           </gds-flex>
         </gds-card>
-      </gds-container>
+      </gds-div>
     </gds-grid>`,
 }

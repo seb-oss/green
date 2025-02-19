@@ -8,6 +8,7 @@ import MaskCSS from './mask.style'
 
 /**
  * @element gds-mask
+ * @status beta
  */
 @gdsCustomElement('gds-mask')
 export class GdsMask extends GdsFlex {

@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './select'
 import '../flex'
 import '../icon/icons/bank.ts'
@@ -29,6 +31,9 @@ const meta: Meta = {
   title: 'Components/Select',
   component: 'gds-select',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-select'),
+  },
 }
 
 export default meta

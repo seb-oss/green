@@ -4,6 +4,10 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { defaultStyles } from '../text/default-typography.styles'
 import { styles } from './rich-text.styles'
 
@@ -18,7 +22,9 @@ import { styles } from './rich-text.styles'
  *
  */
 @gdsCustomElement('gds-rich-text')
-export class GdsRichText extends GdsElement {
+export class GdsRichText extends withLayoutChildProps(
+  withMarginProps(GdsElement),
+) {
   static styles = [tokens, defaultStyles, styles]
 
   /**

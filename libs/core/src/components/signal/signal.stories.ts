@@ -6,10 +6,15 @@ import '../flex'
 
 import { html } from 'lit'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
+
 const meta: Meta = {
   title: 'Components/Signal',
   component: 'gds-signal',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-signal'),
+  },
 }
 
 export default meta

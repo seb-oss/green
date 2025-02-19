@@ -16,6 +16,11 @@ import {
   dateArrayConverter,
   dateConverter,
 } from '../../utils/helpers/attribute-converters'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './datepicker.styles'
 
@@ -42,23 +47,8 @@ type DateFormatLayout = {
   layout: { token: 'y' | 'm' | 'd'; name: DatePart }[]
 }
 
-/**
- * @element gds-datepicker
- * A form control that allows the user to select a date.
- *
- * @status beta
- *
- * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
- * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
- * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
- * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
- *
- * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
- * @event gds-ui-state - Fired when the dropdown is opened or closed.
- */
-@gdsCustomElement('gds-datepicker')
 @localized()
-export class GdsDatepicker extends GdsFormControlElement<Date> {
+class Datepicker extends GdsFormControlElement<Date> {
   static styles = [tokens, styles]
 
   get type() {
@@ -787,3 +777,22 @@ export class GdsDatepicker extends GdsFormControlElement<Date> {
     )
   }
 }
+
+/**
+ * @element gds-datepicker
+ * A form control that allows the user to select a date.
+ *
+ * @status beta
+ *
+ * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
+ * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
+ * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
+ *
+ * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
+ * @event gds-ui-state - Fired when the dropdown is opened or closed.
+ */
+@gdsCustomElement('gds-datepicker')
+export class GdsDatepicker extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(Datepicker)),
+) {}

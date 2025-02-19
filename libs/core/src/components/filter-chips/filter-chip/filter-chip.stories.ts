@@ -1,7 +1,6 @@
-import { html } from 'lit'
-import { repeat } from 'lit/directives/repeat.js'
-
 import type { Meta, StoryObj } from '@storybook/web-components'
+
+import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
 
 import '../index.ts'
 
@@ -19,6 +18,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-filter-chip'),
+  },
 }
 
 export default meta

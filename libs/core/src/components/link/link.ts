@@ -8,6 +8,11 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import style from './link.styles'
 
 /**
@@ -22,7 +27,9 @@ import style from './link.styles'
  *
  */
 @gdsCustomElement('gds-link')
-export class GdsLink extends GdsElement {
+export class GdsLink extends withMarginProps(
+  withSizeXProps(withLayoutChildProps(GdsElement)),
+) {
   static styles = [tokens, unsafeCSS(style)]
 
   static shadowRootOptions: ShadowRootInit = {

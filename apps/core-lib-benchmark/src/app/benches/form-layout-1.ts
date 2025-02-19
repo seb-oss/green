@@ -17,23 +17,23 @@ export class FormLayout1 extends LitElement {
       this.entries,
       (e) =>
         html`<form>
-          <gds-container margin="s" padding="s">
+          <gds-div margin="s" padding="s">
             <gds-flex gap="s">
-              <gds-card border="4xs/primary" padding="s" border-radius="s">
+              <gds-card border="4xs" padding="s" border-radius="s">
                 <gds-input label="Hello" supporting-text="sup text">
                   <span slot="extended-supporting-text"
                     >Extended supporting text</span
                   >
                 </gds-input>
               </gds-card>
-              <gds-card border="4xs/primary" padding="s" border-radius="s">
+              <gds-card border="4xs" padding="s" border-radius="s">
                 <gds-input label="Hello" supporting-text="sup text">
                   <span slot="extended-supporting-text"
                     >Extended supporting text</span
                   >
                 </gds-input>
               </gds-card>
-              <gds-card border="4xs/primary" padding="s" border-radius="s">
+              <gds-card border="4xs" padding="s" border-radius="s">
                 <gds-input label="Hello" supporting-text="sup text">
                   <span slot="extended-supporting-text"
                     >Extended supporting text</span
@@ -41,7 +41,7 @@ export class FormLayout1 extends LitElement {
                 </gds-input>
               </gds-card>
             </gds-flex>
-          </gds-container>
+          </gds-div>
         </form>`,
     )}`
   }

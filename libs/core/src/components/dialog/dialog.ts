@@ -111,7 +111,7 @@ export class GdsDialog extends GdsElement {
             >
               <gds-flex
                 justify-content="space-between"
-                border="0 0 4xs/primary 0"
+                border-width="0 0 4xs 0"
                 margin="0 -s"
                 padding="0 s s"
                 background-color="secondary"
@@ -126,14 +126,9 @@ export class GdsDialog extends GdsElement {
                   ><gds-icon-cross-large></gds-icon-cross-large
                 ></gds-button>
               </gds-flex>
-              <gds-container
-                id="content"
-                padding="m 0"
-                overflow="auto"
-                flex="1"
-              >
+              <gds-div id="content" padding="m 0" overflow="auto" flex="1">
                 <slot></slot>
-              </gds-container>
+              </gds-div>
               <gds-flex
                 class="footer"
                 justify-content="center"

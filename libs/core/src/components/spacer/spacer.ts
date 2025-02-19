@@ -8,6 +8,9 @@ import {
 
 /**
  * @element gds-spacer
+ * @status beta
+ *
+ * @deprecated Use `gds-div` with the `height` property instead.
  */
 @gdsCustomElement('gds-spacer')
 export class GdsSpacer extends GdsElement {
@@ -32,12 +35,11 @@ export class GdsSpacer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'height',
-    selector: 'div',
     valueTemplate: (v) => `var(--gds-space-${v})`,
   })
   size?: string
 
   render() {
-    return html`<div></div>`
+    return html``
   }
 }

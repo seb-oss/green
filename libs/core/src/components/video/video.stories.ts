@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './video'
 
-import { html } from 'lit'
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
  * The `gds-video`
@@ -11,6 +11,9 @@ const meta: Meta = {
   title: 'Components/Video',
   component: 'gds-video',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-video'),
+  },
 }
 
 export default meta

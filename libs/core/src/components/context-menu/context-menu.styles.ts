@@ -3,6 +3,9 @@ import { css } from 'lit'
 const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
+    :host {
+      display: inline-block;
+    }
     button {
       display: flex;
       border-width: 0;

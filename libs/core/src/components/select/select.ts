@@ -9,6 +9,11 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './select.styles'
 
@@ -18,37 +23,8 @@ import '../../primitives/field-base/field-base'
 import '../icon/icons/chevron-bottom'
 import '../button/button'
 
-/**
- * @element gds-select
- * @status beta
- *
- * `gds-select` is a wrapper component for the native select element.
- *
- * Usage Example:
- * ```html
- * <gds-select label="Choose an option" supporting-text="Select one item">
- *   <select>
- *     <option value="1">Option 1</option>
- *     <option value="2">Option 2</option>
- *   </select>
- * </gds-select>
- * ```
- *
- * The wrapped select element will be cloned into the component's shadow DOM. Therefore, event listeners should only be added on the host
- * element, and not on the enclosed select element. Also, state should also be handled only through the host.
- * Setting value or selected props on the select element will not work as expected.
- *
- * @fires {CustomEvent} change - Fired when the selection changes with detail: { value: string }
- * @fires {CustomEvent} input - Fired on input with detail: { value: string }
- *
- * @slot - Default slot for the native select element
- * @slot lead - Slot for leading content (e.g., icons)
- */
-@gdsCustomElement('gds-select')
 @localized()
-export class GdsSelect<ValueT = string> extends GdsFormControlElement<
-  ValueT | ValueT[]
-> {
+class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
   static styles = [tokens, styles]
 
   /**
@@ -303,3 +279,34 @@ export class GdsSelect<ValueT = string> extends GdsFormControlElement<
     }
   }
 }
+
+/**
+ * @element gds-select
+ * @status beta
+ *
+ * `gds-select` is a wrapper component for the native select element.
+ *
+ * Usage Example:
+ * ```html
+ * <gds-select label="Choose an option" supporting-text="Select one item">
+ *   <select>
+ *     <option value="1">Option 1</option>
+ *     <option value="2">Option 2</option>
+ *   </select>
+ * </gds-select>
+ * ```
+ *
+ * The wrapped select element will be cloned into the component's shadow DOM. Therefore, event listeners should only be added on the host
+ * element, and not on the enclosed select element. Also, state should also be handled only through the host.
+ * Setting value or selected props on the select element will not work as expected.
+ *
+ * @fires {CustomEvent} change - Fired when the selection changes with detail: { value: string }
+ * @fires {CustomEvent} input - Fired on input with detail: { value: string }
+ *
+ * @slot - Default slot for the native select element
+ * @slot lead - Slot for leading content (e.g., icons)
+ */
+@gdsCustomElement('gds-select')
+export class GdsSelect extends withLayoutChildProps(
+  withSizeXProps(withMarginProps(Select)),
+) {}

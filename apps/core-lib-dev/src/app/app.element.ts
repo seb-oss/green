@@ -68,7 +68,7 @@ export class AppElement extends LitElement {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-        <gds-container padding="s{0} m{s} l{4xl}">
+        <gds-div padding="s{0} m{s} l{4xl}">
           ${choose(
             this.currentView,
             [
@@ -85,7 +85,7 @@ export class AppElement extends LitElement {
             ],
             () => html`No view selected`,
           )}
-        </gds-container>
+        </gds-div>
       </gds-theme>
     `
   }

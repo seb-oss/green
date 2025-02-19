@@ -8,6 +8,11 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 import { watch } from '../../utils/decorators/watch'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import style from './segmented-control.style.css?inline'
 
 import type { GdsSegment } from './segment'
@@ -36,7 +41,9 @@ const debounce = (fn: () => void, delay: number) => {
  */
 @gdsCustomElement('gds-segmented-control')
 @localized()
-export class GdsSegmentedControl<ValueT = any> extends GdsElement {
+export class GdsSegmentedControl<ValueT = any> extends withLayoutChildProps(
+  withSizeXProps(withMarginProps(GdsElement)),
+) {
   static styles = [tokens, unsafeCSS(style)]
 
   /**
