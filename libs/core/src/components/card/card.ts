@@ -30,6 +30,8 @@ export class GdsCard extends GdsDiv {
         color: var(--_color);
         border-width: var(--gds-space-4xs);
         border-style: solid;
+        display: flex;
+        flex-direction: column;
       }
     `,
   ]
@@ -70,9 +72,9 @@ export class GdsCard extends GdsDiv {
   constructor() {
     super()
 
-    // Default values for cards
     this.padding = 's;m{l}'
     this['border-radius'] = 'xs;m{s}'
+    this['gap'] = 's;m{l}'
   }
 
   render() {
