@@ -99,6 +99,7 @@ export const styles = css`
 
     .main-slot-wrap {
       display: flex;
+      gap: var(--gds-space-xs);
       flex: 1;
     }
 
