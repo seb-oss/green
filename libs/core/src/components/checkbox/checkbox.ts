@@ -1,6 +1,6 @@
-import { LitElement, html, unsafeCSS } from 'lit'
+import { html, LitElement, unsafeCSS } from 'lit'
 import { customElement } from 'lit/decorators.js'
-import { constrainSlots } from '../../utils/helpers'
+
 import styles from './checkbox.css'
 
 @customElement('gds-checkbox')
@@ -18,7 +18,6 @@ export class GdsCheckbox extends LitElement {
   constructor() {
     super()
     this.#internals = this.attachInternals()
-    constrainSlots(this)
   }
 
   private inputElement: HTMLInputElement | null = null
