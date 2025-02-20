@@ -1,4 +1,7 @@
 @use '@sebgroup/chlorophyll/scss/components/table/mixins' as table;
+@use '../../../../chlorophyll/scss/components/form/checkbox/mixins' as checkbox;
+@use '../../../../chlorophyll/scss/components/form/checkbox/tokens';
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
 
 ::ng-deep .gds-table {
   --gds-ref-pallet-base100: #f8f8f8;
@@ -125,6 +128,37 @@
             transform: rotate(-180deg);
           }
         }
+      }
+    }
+  }
+
+  @include tokens.add-checkbox-tokens;
+  @include checkbox.add-checkbox();
+
+  .gds-field-checkbox-wrap .form-control:has(input[type='checkbox']) {
+    @include form-mixins.add-form-control;
+    line-height: 1.125rem;
+    padding: 0;
+  }
+
+  #thead-checkbox input[type='checkbox'] ~ i {
+    box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-container-color);
+    background-color: var(--gds-comp-checkbox-border-color);
+  }
+
+  #thead-checkbox input[type='checkbox']:hover {
+    &:not(:checked) ~ i {
+      box-shadow: inset 0 0 0 1px #ababab;
+      &::after {
+        border-color: #ababab;
+      }
+    }
+
+    &:checked ~ i {
+      background-color: var(--gds-comp-checkbox-border-color);
+      box-shadow: inset 0 0 0 1px #ababab;
+      &::after {
+        border-color: #ababab;
       }
     }
   }

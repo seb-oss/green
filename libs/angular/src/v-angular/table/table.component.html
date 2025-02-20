@@ -35,7 +35,6 @@
     </ng-template>
   </ng-container>
 </ng-template>
-
 <table class="gds-table" *transloco="let t">
   <!-- Table header -->
   <thead>
@@ -43,14 +42,20 @@
       <!-- Checkbox column for header -->
       <th *ngIf="selectable" class="column__check">
         <div class="gds-field-checkbox-wrap">
-          <input
-            type="checkbox"
-            [formControl]="groupSelector"
-            [attr.aria-label]="ariaLabelCheckboxTh"
-            [attr.id]="'cb_header__' + initId"
-            [attr.data-thook]="thook"
-          />
-          <label [attr.for]="'cb_header__' + initId"></label>
+          <label
+            [attr.for]="'cb_header__' + initId"
+            class="form-control"
+            id="thead-checkbox"
+          >
+            <input
+              type="checkbox"
+              [formControl]="groupSelector"
+              [attr.aria-label]="ariaLabelCheckboxTh"
+              [attr.id]="'cb_header__' + initId"
+              [attr.data-thook]="thook"
+            />
+            <i></i>
+          </label>
         </div>
       </th>
 
@@ -99,15 +104,20 @@
         <!-- Checkbox column for row -->
         <td *ngIf="selectable" class="column__check">
           <div class="gds-field-checkbox-wrap">
-            <input
-              *ngIf="rowSelectors.get(item[rowId])"
-              type="checkbox"
-              [formControlName]="item[rowId]"
-              [attr.aria-label]="ariaLabelCheckboxTr"
-              [attr.id]="'cb_row__' + initId + '_' + i"
-              [attr.data-thook]="'row-select-' + i"
-            />
-            <label [attr.for]="'cb_row__' + initId + '_' + i"></label>
+            <label
+              [attr.for]="'cb_row__' + initId + '_' + i"
+              class="form-control"
+            >
+              <input
+                *ngIf="rowSelectors.get(item[rowId])"
+                type="checkbox"
+                [formControlName]="item[rowId]"
+                [attr.aria-label]="ariaLabelCheckboxTr"
+                [attr.id]="'cb_row__' + initId + '_' + i"
+                [attr.data-thook]="'row-select-' + i"
+              />
+              <i></i>
+            </label>
           </div>
         </td>
 
