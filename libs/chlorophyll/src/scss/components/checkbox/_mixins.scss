@@ -1,8 +1,8 @@
 @use '../../tokens/shame' as tokens;
 @use '../../common';
 
-$valid-color: tokens.$intent-success-background;
-$invalid-color: tokens.$intent-danger-background;
+$valid-color: var(--gds-sys-color-dark-green-2);
+$invalid-color: var(--gds-sys-color-text-error);
 
 @mixin add-checkbox(
   $selector: 'label.gds-form-control',

@@ -60,7 +60,7 @@ $_border-width: 1px;
   .is-valid:not(.gds-group) ~ .gds-form-info,
   .is-valid .gds-form-item__footer .gds-form-info,
   .is-valid:is(.gds-group) + .gds-form-info {
-    @include add-feedback(tokens.$intent-success-background);
+    @include add-feedback(var(--gds-sys-color-dark-green-2));
   }
 
   .was-validated input:not(.is-valid):invalid + .gds-form-info,
@@ -69,7 +69,7 @@ $_border-width: 1px;
   .is-invalid:not(.gds-group) ~ .gds-form-info,
   .is-invalid .gds-form-item__footer .gds-form-info,
   .is-invalid:is(.gds-group) + .gds-form-info {
-    @include add-feedback(tokens.$intent-danger-background);
+    @include add-feedback(var(--gds-sys-color-text-error));
   }
 }
 
@@ -84,12 +84,12 @@ $_border-width: 1px;
     }
 
     &.is-valid > div {
-      border: $_border-width solid tokens.$intent-success-background;
+      border: $_border-width solid var(--gds-sys-color-dark-green-2);
       border-radius: var(--gds-sys-shape-corner-medium);
     }
 
     &.is-invalid > div {
-      border: $_border-width solid tokens.$intent-danger-background;
+      border: $_border-width solid var(--gds-sys-color-text-error);
       border-radius: var(--gds-sys-shape-corner-medium);
     }
   }

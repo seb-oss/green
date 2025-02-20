@@ -35,7 +35,7 @@
 
   &.is-invalid {
     @include validation.add-feedback-element(false);
-    @include validation.add-feedback(tokens.$intent-danger-background);
+    @include validation.add-feedback(var(--gds-sys-color-text-error));
 
     &::before {
       bottom: 0;

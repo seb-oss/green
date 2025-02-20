@@ -2,8 +2,8 @@
 @use '../../common';
 @use './tokens' as component-tokens;
 
-$valid-color: tokens.$intent-success-background;
-$invalid-color: tokens.$intent-danger-background;
+$valid-color: var(--gds-sys-color-dark-green-2);
+$invalid-color: var(--gds-sys-color-text-error);
 
 @mixin add-radio(
   $selector: 'label.gds-form-control',
@@ -111,7 +111,7 @@ $invalid-color: tokens.$intent-danger-background;
   width: fit-content;
 
   .is-invalid & {
-    border: 1px solid tokens.$intent-danger-background;
+    border: 1px solid var(--gds-sys-color-text-error);
     border-radius: var(--gds-sys-shape-corner-medium);
   }
 

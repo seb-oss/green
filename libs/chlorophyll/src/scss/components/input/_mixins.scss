@@ -60,6 +60,6 @@ $background: var(--sg-form-control-bg);
   }
 
   .is-invalid & {
-    @include validation.add-feedback(tokens.$intent-danger-background);
+    @include validation.add-feedback(var(--gds-sys-color-text-error));
   }
 }
