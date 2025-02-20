@@ -5,8 +5,8 @@ import './radio-button'
 import { html } from 'lit'
 
 const meta: Meta = {
-  title: 'Components/Radio Button',
-  component: 'gds-radio-button',
+  title: 'Components/Radio',
+  component: 'gds-radio',
   tags: ['autodocs'],
 }
 
@@ -27,5 +27,5 @@ const DefaultParams: Story = {
  */
 export const RadioButton: Story = {
   ...DefaultParams,
-  name: 'radio-button',
+  name: 'radio',
 }
