@@ -28,32 +28,4 @@ export { default as Text } from './text'
 export { default as Textarea } from './textarea'
 export { default as Validation } from './validation'
 export { default as Video } from './video'
-
-// const EXAMPLE: { [key: string]: React.ComponentType<any> } = {
-//   Badge: Badge,
-//   Button: Button,
-//   FAB: FAB,
-//   'Filter Chips': FilterChips,
-//   Icon: Icon,
-//   'Menu Button': MenuButton,
-//   'Segmented Control': SegmentedControl,
-//   Popover: Popover,
-//   Dropdown: Dropdown,
-//   Divider: Divider,
-//   Input: Input,
-//   Textarea: Textarea,
-//   Datepicker: Datepicker,
-//   Calendar: Calendar,
-//   Coachmark: Coachmark,
-//   Mask: Mask,
-//   Container: Container,
-//   Card: Card,
-//   Grid: Grid,
-//   Image: Image,
-//   Text: Text,
-//   Video: Video,
-//   Flex: Flex,
-//   Spacer: Spacer,
-//   Validation: Validation,
-//   'Context Menu': ContextMenu,
-// }
+export { default as Select } from './select'

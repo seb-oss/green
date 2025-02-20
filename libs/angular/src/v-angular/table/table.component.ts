@@ -122,8 +122,7 @@ function objectFromEntries(entryMap: Map<any, any>): { [key: string]: any } {
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent<T extends TableRow>
-  implements OnInit, OnChanges, AfterContentInit, OnDestroy
-{
+  implements OnInit, OnChanges, AfterContentInit, OnDestroy {
   /**
    * @internal
    * Custom templates defined in the html.
@@ -189,6 +188,17 @@ export class TableComponent<T extends TableRow>
    * Defaults to true.
    */
   @Input() selectable = true
+
+  /**
+   * Used to enable/disable expandable rows.
+   * Defaults to false.
+   */
+  @Input() expandable = false
+
+  /**
+  * Property name used to describe the subItems in the data table.
+  */
+  @Input() subItemsProp = 'subItems'
 
   /**
    * Allow nggv-table to attempt sorting the data in the table. Not recommended if only a subset is loaded or if the dataset is very large.
@@ -257,10 +267,10 @@ export class TableComponent<T extends TableRow>
   private subs: Subscription[] = []
 
   ngOnChanges(changes: SimpleChanges) {
-    // table data was updated and the rows should be selectable
+    // Update selectable or expandable rows if table data or settings change
     if (
-      (changes.tableData?.currentValue && this.selectable) ||
-      (changes.selectable?.currentValue === true && this.tableData)
+      (this.selectable || this.expandable) && changes.tableData?.currentValue ||
+      (changes.selectable?.currentValue || changes.expandable?.currentValue) && this.tableData
     ) {
       const wasChanged = this.registerSelectableRows(
         changes.tableData.currentValue,
@@ -475,6 +485,7 @@ export class TableComponent<T extends TableRow>
    */
   propagateItemClick(item: any, preventDefaultEmit?: boolean) {
     if (!preventDefaultEmit) this.ngvRowClick.emit(item)
+    if (this.expandable) this.toggleRowToExpand(item[this.rowId])
   }
 
   getAriaLabel(column: TableColumn<T>): string | undefined {
@@ -484,5 +495,10 @@ export class TableComponent<T extends TableRow>
         : this.ariaLabelsOrderBy?.asc
     if (!sortOrder) return // no aria labels defined
     return column.ariaLabelSortable?.replace('{{sortOrder}}', sortOrder)
+  }
+
+  private toggleRowToExpand(id: string): void {
+    const row = this.rowSelectors.get(id)
+    row?.setValue(!row.value)
   }
 }
