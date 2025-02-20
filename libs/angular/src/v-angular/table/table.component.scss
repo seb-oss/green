@@ -15,6 +15,13 @@
   --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-table-sort-icon-color-active: #fff;
+  --gds-sys-color-surface: #fff;
+  --gds-ref-pallet-base200: #e8e8e8;
+  --gds-sys-color-base: #333;
+  --gds-sys-shape-corner-small: 0.125rem;
+  --gds-sys-color-blue-dark-2: #007ac7;
+  --gds-sys-shape-corner-medium: 0.25rem;
+
   @include table.add-table();
   width: 100%;
 
