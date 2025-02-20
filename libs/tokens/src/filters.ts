@@ -84,8 +84,8 @@ export default {
       return token.path.includes('ref')
     },
   },
-  isDimention: {
-    name: 'isDimention',
+  is2023Size: {
+    name: 'is2023Size',
     matcher: (token) => {
       if (token.path.includes('ref')) return false
       return token.path.includes('size')
