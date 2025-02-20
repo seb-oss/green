@@ -5,7 +5,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsContainer } from '../container'
+import { GdsDiv } from '../div'
 import GridCSS from './grid.style'
 
 /**
@@ -16,7 +16,7 @@ import GridCSS from './grid.style'
  *
  */
 @gdsCustomElement('gds-grid')
-export class GdsGrid extends GdsContainer {
+export class GdsGrid extends GdsDiv {
   static styles = [tokens, GridCSS]
 
   /**
