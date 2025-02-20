@@ -1,0 +1,14 @@
+import{x as p}from"./lit-element-C_s9q329.js";import{s as l}from"./chunk-GKNNPQCW-BkHQSocK.js";import{c}from"./custom-elements-xrBSxquq.js";import{r as u}from"./transitional-styles-iv5lM2WH.js";import{j as t}from"./jsx-runtime-DddeJqiD.js";import{u as a}from"./index-DFMyyNIP.js";import{ae as d,ag as h,ah as g,ai as x,aj as f,ak as j}from"./index-B5CrFevq.js";import"./theme-QT20-m4T.js";import"./button-CPxCsADE.js";import"./grid-DCdmtvHh.js";import"./tokens.style-CFvqdzpw.js";import"./custom-element-scoping-BEGY3AqQ.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./iframe-B2OIT3Ul.js";import"../sb-preview/runtime.js";import"./index-Df9so8jS.js";import"./index-DxKRhftL.js";import"./index-DrFu-skq.js";import"./watch-tFciLXSI.js";import"./query-p8xgzTDt.js";import"./class-map-Bz98xO8-.js";import"./directive-CF8sV3Lr.js";import"./if-defined-Ct9lF4W9.js";import"./when-BR7zwNJC.js";import"./static-_ukc2i0J.js";import"./observe-light-dom-CmJPHUQ4.js";import"./declarative-layout-mixins-FAlKEvM_.js";import"./runtime-CMQcyTl6.js";import"./div-BI8q5Siy.js";function i(o){const e={blockquote:"blockquote",em:"em",h2:"h2",p:"p",strong:"strong",...a(),...o.components};return t.jsxs(t.Fragment,{children:[t.jsx(d,{isTemplate:!0}),`
+`,t.jsx(h,{}),`
+`,t.jsx(g,{}),`
+`,t.jsx(x,{}),`
+`,t.jsx(e.h2,{id:"public-api",children:"Public API"}),`
+`,t.jsx(e.p,{children:"This table lists all public attributes, properties, methods, events and slots of the component."}),`
+`,t.jsxs(e.blockquote,{children:[`
+`,t.jsx(e.p,{children:t.jsxs(e.em,{children:[t.jsx(e.strong,{children:"Note:"})," JS properties and DOM attributes have different naming conventions in Green Core (camelCase vs snake-case), so some of them will show up under both sections, even though they refer to the same underlying property."]})}),`
+`]}),`
+`,t.jsx(f,{}),`
+`,t.jsx(e.h2,{id:"additional-examples-and-customization-options",children:"Additional examples and customization options"}),`
+`,t.jsx(j,{})]})}function y(o={}){const{wrapper:e}={...a(),...o.components};return e?t.jsx(e,{...o,children:t.jsx(i,{...o})}):i(o)}l(c);u();const K={style:{name:"Change design version",defaultValue:"2023",toolbar:{icon:"lightning",items:["2016","2023"],showName:!0,dynamicTitle:!0}}},Q={parameters:{docs:{page:y,transformSource:o=>{const e=o.match(/<gds-theme>([\s\S]*?)<\/gds-theme>/);return e?e[1]:o}},options:{storySort:{order:["Green Design System","Get started","What's what?","Docs","Components","Style",["Components","Layout","Media","Content","Style"],"Concepts",["Architecture"],"Contributing",["Introduction"]]}}},decorators:[(o,e)=>(setTimeout(()=>{const s=Array.from(document.querySelectorAll("tr")).find(m=>{var r;return(r=m.getAttribute("title"))==null?void 0:r.startsWith("Hide Declarative layout")}),n=s==null?void 0:s.querySelector('button[tabindex="0"]');n&&n.click()},10),p`<gds-theme .designVersion=${e.globals.style}
+        >${o()}</gds-theme
+      >`)]};export{Q as default,K as globalTypes};
