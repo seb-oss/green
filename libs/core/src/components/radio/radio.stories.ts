@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import './radio-button'
+import './radio'
 
 import { html } from 'lit'
 

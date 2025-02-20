@@ -1,32 +1,30 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
 import sinon from 'sinon'
 
-import '@sebgroup/green-core/components/radio-button'
-import type { GdsRadio-Button } from '@sebgroup/green-core/components/radio-button'
+import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+
+import '@sebgroup/green-core/components/radio'
+
+import type { GdsRadio } from '@sebgroup/green-core/components/radio'
 
 import {
-  htmlTemplateTagFactory,
   getScopedTagName,
+  htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-describe('<gds-radio-button>', () => {
+describe('<gds-radio>', () => {
   it('is a GdsElement', async () => {
-    const el = await fixture(
-      html`<gds-radio-button></gds-radio-button>`,
-    )
-    expect(el.getAttribute('gds-element')).to.equal('gds-radio-button')
+    const el = await fixture(html`<gds-radio></gds-radio>`)
+    expect(el.getAttribute('gds-element')).to.equal('gds-radio')
   })
 
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      const el = await fixture<GdsRadio-Button>(
-        html`<gds-radio-button></gds-radio-button>`,
-      )
+      const el = await fixture<GdsRadio>(html`<gds-radio></gds-radio>`)
       await el.updateComplete
       await expect(el).to.be.accessible()
     })
