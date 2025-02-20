@@ -52,7 +52,7 @@ $invalid-color: var(--gds-sys-color-text-error);
 
   /* Hover state */
   #{$selector}:hover #{$radio-selector}:not(.disabled, :disabled) ~ i {
-    background-color: var(--gds-sys-color-base-100);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   /* Checked state */

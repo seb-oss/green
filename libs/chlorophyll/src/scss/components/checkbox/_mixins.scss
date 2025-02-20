@@ -53,7 +53,7 @@ $invalid-color: var(--gds-sys-color-text-error);
   #{$selector}:hover
     #{$checkbox-selector}:not(.disabled, :disabled, :checked, :indeterminate)
     ~ i {
-    background-color: var(--gds-sys-color-base-100);
+    background-color: var(--gds-sys-color-base-200);
   }
 
   #{$selector} #{$checkbox-selector}:checked ~ i {
