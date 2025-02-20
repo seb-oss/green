@@ -2,6 +2,7 @@ import { HTMLTemplateResult } from 'lit'
 import { state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
@@ -10,11 +11,11 @@ import {
 import { styles } from './radio.styles'
 
 /**
- * @element gds-radio-button
+ * @element gds-radio
  */
 @gdsCustomElement('gds-radio')
 export class GdsRadio extends GdsElement {
-  static styles = [styles]
+  static styles = [tokens, styles]
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -23,6 +24,16 @@ export class GdsRadio extends GdsElement {
   }
 
   render() {
-    return html`<slot></slot>`
+    return html`
+      <div class="radio">
+        <div class="dot"></div>
+      </div>
+      <div class="radio selected">
+        <div class="dot"></div>
+      </div>
+      <div class="radio">
+        <div class="dot"></div>
+      </div>
+    `
   }
 }
