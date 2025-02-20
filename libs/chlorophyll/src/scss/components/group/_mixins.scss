@@ -2,11 +2,11 @@
 @use '../input';
 @use 'sass:math';
 
-$_border-width: var(--sg-border-width);
-$_border-width-negative: calc(var(--sg-border-width) * -1);
-$_border-width-50: var(--sg-border-width-50);
-$_border-width-50-negative: calc(var(--sg-border-width-50) * -1);
-$_border-color: var(--sg-border-color);
+$_border-width: 1px;
+$_border-width-negative: calc(1px * -1);
+$_border-width-50: 0.5px;
+$_border-width-50-negative: calc(0.5px * -1);
+$_border-color: var(--gds-sys-color-base-600);
 $_background: input.$background;
 
 @mixin add-group() {

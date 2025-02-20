@@ -13,9 +13,9 @@ $_track_width_mobile: 3.5rem;
 $_track_transition_time: 150ms;
 $_track_color: var(--gds-sys-color-base-600);
 $_track_color_hover: var(--gds-sys-color-base-500);
-$_track_color_pressed: hsl(var(--sg-hsl-green-2));
-$_track_color_pressed_dark_mode: var(--intent-success-background);
-$_track_color_pressed_hover: hsl(var(--sg-hsl-green-1));
+$_track_color_pressed: var(--gds-sys-color-dark-green-2);
+$_track_color_pressed_dark_mode: var(--gds-sys-color-dark-green-1);
+$_track_color_pressed_hover: var(--gds-sys-color-green);
 
 $_thumb_width: 1.25rem;
 $_thumb_width_mobile: 1.75rem;

@@ -1,7 +1,7 @@
 @use '../../tokens/shame' as tokens;
 @use '../../common';
 
-$_border-width: var(--sg-border-width);
+$_border-width: 1px;
 
 @mixin add-feedback-element($transform: true) {
   position: relative;
