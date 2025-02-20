@@ -11,7 +11,6 @@
 :host([color-scheme='light']) {
   @include shape.add-tokens;
   @include colors.add-color-tokens;
-  @include components.add-checkbox-tokens;
   @include tokens.light-mode;
   @include theme_mixins.add-theme;
 }
