@@ -11,6 +11,8 @@ import '../src/components/theme/index.js'
 import '../src/components/button/index.js'
 import '../src/components/grid/index.js'
 
+import { gdsInitLocalization } from '../src/localization.ts'
+
 setCustomElementsManifest(customElements)
 registerTransitionalStyles()
 
@@ -25,7 +27,19 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  language: {
+    name: 'Language',
+    defaultValue: 'en',
+    toolbar: {
+      icon: 'globe',
+      items: ['en', 'sv', 'da', 'de', 'fi', 'fr', 'it', 'nl', 'no'],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
 }
+
+const { setLocale } = gdsInitLocalization()
 
 export default {
   parameters: {
@@ -56,6 +70,7 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
+      setLocale(context.globals.language)
       return html`<gds-theme .designVersion=${context.globals.style}
         >${storyFn()}</gds-theme
       >`
