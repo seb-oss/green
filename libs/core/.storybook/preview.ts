@@ -70,7 +70,24 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
+      // Apply the selected language to the components
       setLocale(context.globals.language)
+
+      // Hide the Declarative layout category in the argsTables
+      setTimeout(() => {
+        // Find the first <tr> with a title starting with "Hide <category>"
+        const tr = Array.from(document.querySelectorAll('tr')).find((tr) =>
+          tr.getAttribute('title')?.startsWith('Hide Declarative layout'),
+        )
+
+        // Find the first button inside that <tr>
+        const button = tr?.querySelector('button[tabindex="0"]')
+
+        if (button) {
+          ;(button as HTMLElement).click()
+        }
+      }, 10)
+
       return html`<gds-theme .designVersion=${context.globals.style}
         >${storyFn()}</gds-theme
       >`

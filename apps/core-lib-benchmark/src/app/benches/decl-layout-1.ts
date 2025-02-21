@@ -15,37 +15,37 @@ export class DeclLayout1 extends LitElement {
     return html`${repeat(
       this.entries,
       (e) =>
-        html`<gds-container margin="s" padding="s">
+        html`<gds-div margin="s" padding="s">
           <gds-flex gap="s">
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >1</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >2</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >3</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >1</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >2</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >3</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >1</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >2</gds-card
             >
-            <gds-card border="4xs/primary" padding="s" border-radius="s"
+            <gds-card border="4xs" padding="s" border-radius="s"
               >3</gds-card
             >
           </gds-flex>
-        </gds-container>`,
+        </gds-div>`,
     )}`
   }
 }
