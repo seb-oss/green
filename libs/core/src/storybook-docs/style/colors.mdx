@@ -39,7 +39,7 @@ The color system is divided into three levels:
 
     Here's an interactive example to illustrate the concept:
 
-    <gds-container
+    <gds-div
       display="grid"
       place-items="center"
       min-height="80vh"
@@ -79,7 +79,7 @@ The color system is divided into three levels:
       <gds-flex
         level="1"
         class="gds-levels"
-        transform-style="preserve-3d"
+        style={{transformStyle: "preserve-3d"}}
         background="primary"
         data-title="L1: Document"
         width="400px"
@@ -88,9 +88,10 @@ The color system is divided into three levels:
         border-radius="l"
       >
 
-      <gds-container
+      <gds-div
         level="2"
-        border="xs/inversed"
+        border="xs"
+        border-color="inversed"
         border-radius="l"
         style={{transform: 'translate3d(0, 0, 100px)'}}
         background="positive"
@@ -98,7 +99,7 @@ The color system is divided into three levels:
         position="absolute"
         inset="0"
       >
-        <gds-container
+        <gds-div
           inset="0"
           overflow="hidden"
           position="absolute"
@@ -115,10 +116,10 @@ The color system is divided into three levels:
             muted
             loop
             ></gds-video>
-        </gds-container>
-      </gds-container>
+        </gds-div>
+      </gds-div>
 
-      <gds-container
+      <gds-div
         border-radius="s"
         style={{transform: 'translate3d(0, 0, 200px)'}}
         data-title="L3: Component"
@@ -145,14 +146,14 @@ The color system is divided into three levels:
                 width="100%"
                 color="tertiary"
               >
-                <gds-container>
+                <gds-div>
                   <gds-text tag="h3" text-wrap="balance">Sustainable Practices</gds-text>
 
                   <gds-text
                     color="tertiary/0.6"
                     font-size="body-s"
                     >Promoting Eco-Friendly Solutions</gds-text>
-                </gds-container>
+                </gds-div>
                 <gds-divider opacity="0.1"></gds-divider>
                 <gds-flex gap="s">
                   <gds-button rank="secondary">Get Involved</gds-button>
@@ -164,10 +165,10 @@ The color system is divided into three levels:
             </gds-mask>
 
 
-      </gds-container>
+      </gds-div>
 
       </gds-flex>
-    </gds-container>
+    </gds-div>
   </gds-flex>
 
   ## Working with the color system and [Declarative Layout](/docs/concepts-declarative-layout--docs)
