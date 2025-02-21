@@ -274,7 +274,7 @@ export class GdsDropdown<ValueT = any>
         .calcMaxHeight=${this.#calcMaxHeight}
         .disableMobileStyles=${this.disableMobileStyles || this.combobox}
         .nonmodal=${this.combobox}
-        @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
+        @gds-ui-state=${this.#handlePopoverStateChange}
       >
         <gds-field-base
           .size=${this.size}
@@ -462,6 +462,10 @@ export class GdsDropdown<ValueT = any>
     return `${height - 16}px`
   }
 
+  #handlePopoverStateChange = (e: CustomEvent) => {
+    this.open = e.detail.open
+  }
+
   /**
    * Event handler for filtering the options in the dropdown.
    *
@@ -537,14 +541,15 @@ export class GdsDropdown<ValueT = any>
       else {
         this.value = listbox.selection[0]?.value
         this.open = false
-        this.dispatchEvent(
-          new Event('input', {
-            bubbles: true,
-            composed: true,
-          }),
-        )
         setTimeout(() => this._elTriggerBtn?.focus(), 0)
       }
+
+      this.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+          composed: true,
+        }),
+      )
 
       this.dispatchEvent(
         new CustomEvent('change', {
@@ -573,7 +578,13 @@ export class GdsDropdown<ValueT = any>
 
     const selectedOption = this.options.find((option) => option.selected)
 
-    this.updateComplete.then(() => selectedOption?.scrollIntoView())
+    requestAnimationFrame(async () => {
+      await this.updateComplete
+      selectedOption?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      })
+    })
 
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {

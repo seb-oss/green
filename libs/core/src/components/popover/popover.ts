@@ -335,16 +335,17 @@ export class GdsPopover extends GdsElement {
   }
 
   #handleCancel = () => {
-    this.open = false
-    this.#dispatchUiStateEvent('cancel')
+    if (this.#dispatchUiStateEvent('cancel')) this.open = false
   }
 
   #dispatchUiStateEvent = (reason: 'show' | 'close' | 'cancel') => {
-    this.dispatchEvent(
+    const toState = reason === 'show' ? true : false
+    return this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
-        detail: { open: this.open, reason },
+        detail: { open: toState, reason },
         bubbles: false,
         composed: false,
+        cancelable: true,
       }),
     )
   }
@@ -352,14 +353,15 @@ export class GdsPopover extends GdsElement {
   #handleCloseButton = (e: MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
-    this.open = false
-    this.#dispatchUiStateEvent('close')
+    if (this.#dispatchUiStateEvent('close')) {
+      this.open = false
 
-    // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
-    // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
-    // dialog (close button in this case.)
-    // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
-    setTimeout(() => this._trigger?.focus(), 250)
+      // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
+      // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
+      // dialog (close button in this case.)
+      // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
+      setTimeout(() => this._trigger?.focus(), 250)
+    }
   }
 
   #registerTriggerEvents() {
@@ -472,8 +474,8 @@ export class GdsPopover extends GdsElement {
 
   #handleTriggerClick = (e: MouseEvent) => {
     e.preventDefault()
-    this.open = !this.open
-    this.#dispatchUiStateEvent(this.open ? 'show' : 'close')
+    if (this.#dispatchUiStateEvent(this.open ? 'close' : 'show'))
+      this.open = !this.open
   }
 
   /**
@@ -502,9 +504,8 @@ export class GdsPopover extends GdsElement {
         rect.left <= e.clientX &&
         e.clientX <= rect.left + rect.width
 
-      if (!isInDialog) {
+      if (!isInDialog && this.#dispatchUiStateEvent('close')) {
         this.open = false
-        this.#dispatchUiStateEvent('close')
       }
     }
   }
