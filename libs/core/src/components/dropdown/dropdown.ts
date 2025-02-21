@@ -43,7 +43,7 @@ import { UIStateChangeReason } from '../popover'
  *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event input - Fired when the value of the dropdown is changed through user interaction.
- * @event gds-ui-state - Fired when the dropdown is opened or closed.
+ * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
  * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
  */
 @gdsCustomElement('gds-dropdown')
