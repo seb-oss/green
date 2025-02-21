@@ -10,6 +10,8 @@ import '../flex/flex.js'
 import '../card/card.js'
 import '../menu-button/index.ts'
 
+import { GdsPopover } from './index.ts'
+
 /**
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  */
@@ -56,6 +58,48 @@ const DefaultParams: Story = {
  */
 export const Usage: Story = {
   ...DefaultParams,
+}
+
+/**
+ * By default, the popover will close when clicking outside or hitting the escape key. This behavior can be customized by listening to the `gds-ui-state` event and calling `preventDefault()` on the event object when the popover should not close.
+ *
+ * For example:
+ * ```html
+ * <gds-popover @gds-ui-state=${(e: CustomEvent) => e.detail.reason === 'close' && e.preventDefault()}>
+ * ```
+ *
+ * The state change reasons are:
+ * - `show`: The popover is being opened by the user by clicking the trigger.
+ * - `close`: The popover is being closed by the user by clicking outside.
+ * - `cancel`: The popover is cancelled by the user by hitting the escape key.
+ */
+export const CancelEvent: Story = {
+  ...DefaultParams,
+  render: () =>
+    html` <gds-popover
+      id="cancellable"
+      @gds-ui-state=${(e: CustomEvent) =>
+        e.detail.reason === 'close' && e.preventDefault()}
+    >
+      <gds-button rank="secondary" slot="trigger">
+        Show popover
+        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+      </gds-button>
+      <div style="padding: 1rem; padding-top: 0">
+        <h3>Customized closing behavior</h3>
+        <p>
+          This popover can only be closed by click the button below or hitting
+          escape.
+        </p>
+        <gds-button
+          rank="primary"
+          @click=${() => {
+            ;(document.getElementById('cancellable') as GdsPopover).open = false
+          }}
+          >Close me!</gds-button
+        >
+      </div>
+    </gds-popover>`,
 }
 
 /**
