@@ -26,6 +26,8 @@ import '../icon/icons/chevron-bottom'
 import '../popover'
 import '../button'
 
+import { UIStateChangeReason } from '../popover'
+
 /**
  * @element gds-dropdown
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
@@ -41,7 +43,7 @@ import '../button'
  *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event input - Fired when the value of the dropdown is changed through user interaction.
- * @event gds-ui-state - Fired when the dropdown is opened or closed.
+ * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
  * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
  */
 @gdsCustomElement('gds-dropdown')
@@ -274,7 +276,7 @@ export class GdsDropdown<ValueT = any>
         .calcMaxHeight=${this.#calcMaxHeight}
         .disableMobileStyles=${this.disableMobileStyles || this.combobox}
         .nonmodal=${this.combobox}
-        @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
+        @gds-ui-state=${this.#handlePopoverStateChange}
       >
         <gds-field-base
           .size=${this.size}
@@ -365,12 +367,12 @@ export class GdsDropdown<ValueT = any>
         @input=${(e: InputEvent) => {
           this.value = (e.target as HTMLInputElement).value as any
           this.#handleSearchFieldInput(e)
-          this.open = true
+          this.#dispatchUISateEvent(true, 'show') && (this.open = true)
         }}
         @keydown=${(e: KeyboardEvent) => {
           if (e.key === 'ArrowDown') {
             e.preventDefault()
-            this.open = true
+            this.#dispatchUISateEvent(true, 'show') && (this.open = true)
             this._elListbox.then((listbox) => listbox.focus())
           }
         }}
@@ -462,6 +464,22 @@ export class GdsDropdown<ValueT = any>
     return `${height - 16}px`
   }
 
+  #dispatchUISateEvent = (toState: boolean, reason: UIStateChangeReason) =>
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        detail: { reason, open: toState },
+        bubbles: false,
+        composed: false,
+        cancelable: true,
+      }),
+    )
+
+  #handlePopoverStateChange = (e: CustomEvent) => {
+    if (this.#dispatchUISateEvent(e.detail.open, e.detail.reason)) {
+      this.open = e.detail.open
+    }
+  }
+
   /**
    * Event handler for filtering the options in the dropdown.
    *
@@ -536,15 +554,18 @@ export class GdsDropdown<ValueT = any>
       if (this.multiple) this.value = listbox.selection.map((s) => s.value)
       else {
         this.value = listbox.selection[0]?.value
-        this.open = false
-        this.dispatchEvent(
-          new Event('input', {
-            bubbles: true,
-            composed: true,
-          }),
-        )
-        setTimeout(() => this._elTriggerBtn?.focus(), 0)
+        if (this.#dispatchUISateEvent(false, 'close')) {
+          this.open = false
+          setTimeout(() => this._elTriggerBtn?.focus(), 0)
+        }
       }
+
+      this.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+          composed: true,
+        }),
+      )
 
       this.dispatchEvent(
         new CustomEvent('change', {
@@ -573,15 +594,12 @@ export class GdsDropdown<ValueT = any>
 
     const selectedOption = this.options.find((option) => option.selected)
 
-    this.updateComplete.then(() => selectedOption?.scrollIntoView())
-
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open },
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    requestAnimationFrame(async () => {
+      await this.updateComplete
+      selectedOption?.scrollIntoView({
+        block: 'center',
+      })
+    })
   }
 
   #registerAutoCloseListener() {
@@ -605,11 +623,16 @@ export class GdsDropdown<ValueT = any>
       e.relatedTarget &&
       !this.contains(e.relatedTarget as Node)
 
-    if (isFocusOutside) this.open = false
+    if (isFocusOutside && this.#dispatchUISateEvent(false, 'close'))
+      this.open = false
   }
 
   #tabCloseListener = (e: KeyboardEvent) => {
-    if (e.key === 'Tab' && !this.searchable) {
+    if (
+      e.key === 'Tab' &&
+      !this.searchable &&
+      this.#dispatchUISateEvent(false, 'close')
+    ) {
       e.preventDefault()
       this.open = false
       this._elTriggerBtn?.focus()
