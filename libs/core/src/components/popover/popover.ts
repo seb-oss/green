@@ -21,6 +21,8 @@ import type { GdsBackdrop } from './backdrop'
 
 import '../icon/icons/cross-small'
 
+export type UIStateChangeReason = 'show' | 'close' | 'cancel'
+
 /**
  * @element gds-popover
  * @status stable
@@ -338,7 +340,7 @@ export class GdsPopover extends GdsElement {
     if (this.#dispatchUiStateEvent('cancel')) this.open = false
   }
 
-  #dispatchUiStateEvent = (reason: 'show' | 'close' | 'cancel') => {
+  #dispatchUiStateEvent = (reason: UIStateChangeReason) => {
     const toState = reason === 'show' ? true : false
     return this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
