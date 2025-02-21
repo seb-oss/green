@@ -581,8 +581,7 @@ export class GdsDropdown<ValueT = any>
     requestAnimationFrame(async () => {
       await this.updateComplete
       selectedOption?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
+        block: 'center',
       })
     })
 
