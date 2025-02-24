@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.66.1
+
+### Patch Changes
+
+- a715edc: **Declarative Layout**: Fix an incorrect import path the `styleExpressionProperty` decorator, fix default border props of gds-flex, add missing `order` property.
+
 ## 1.66.0
 
 ### Minor Changes
