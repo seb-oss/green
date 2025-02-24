@@ -11,7 +11,7 @@
 }
 
 .gds-dropdown-popover {
-  --z-index: var(--sg-z-index-dropdown);
+  --z-index: var(--gds-z-index-dropdown);
 
   .hidden {
     visibility: hidden;

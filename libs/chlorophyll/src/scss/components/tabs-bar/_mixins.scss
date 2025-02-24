@@ -60,7 +60,7 @@ $greyScale: map-get(newTokens.$grey, light);
   overflow-x: auto;
   padding: 0.25rem;
   margin: -0.25rem;
-  --sg-border-color: var(--gds-sys-color-base-600);
+  --border-color: var(--gds-sys-color-base-600);
 
   // hide scrollbar
   &::-webkit-scrollbar {

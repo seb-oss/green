@@ -2,8 +2,8 @@
 @use '../validation/mixins' as validation;
 @use '../../tokens';
 
-$_color: var(--sg-text-primary);
-$background: var(--sg-form-control-bg);
+$_color: var(--gds-sys-color-text-primary);
+$background: var(--gds-sys-color-background-primary);
 
 @mixin add-text-input() {
   @include common.padding-horizontal(5);

@@ -1,21 +1,21 @@
 $variants: (
   'success': (
-    background: hsl(var(--sg-intent-success-hsl)),
+    background: var(--gds-sys-color-dark-green-1),
   ),
   'warning': (
-    background: hsl(var(--sg-intent-warning-hsl)),
+    background: var(--gds-sys-color-yellow),
   ),
   'info': (
-    background: hsl(var(--sg-intent-info-hsl)),
+    background: var(--gds-sys-color-blue),
   ),
   'danger': (
-    background: hsl(var(--sg-intent-critical-hsl)),
+    background: var(--gds-sys-color-dark-red-2),
   ),
   'light': (
-    background: hsl(var(--sg-hsl-light)),
+    background: var(--gds-sys-color-base-200),
   ),
   'dark': (
-    background: hsl(var(--sg-hsl-dark)),
+    background: var(--gds-sys-color-base-800),
   ),
   'disabled': (
     background: var(--gds-sys-color-base-500),

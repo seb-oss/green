@@ -4,8 +4,8 @@
 $block-selector: '.skeleton-loader';
 $selector: '#{$block-selector}[aria-busy="true"]';
 
-$highlight-color: var(--sg-skeleton-loader-highlight-color);
-$background-color: var(--sg-skeleton-loader-background-color);
+$highlight-color: var(--gds-sys-color-base-300);
+$background-color: var(--gds-sys-color-base-100);
 $_dot-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1' height='1'%3E%3Cpath fill='%23FFF' fill-rule='evenodd' d='M0 0h1v1H0V0Z'/%3E%3C/svg%3E");
 $_base-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='768' height='332'%3E%3Cpath fill-rule='evenodd' fill='%23FFF' d='M323.999 159.999v-96H768v96H323.999ZM0 63.999h307.999v96H0v-96ZM0 0h220v48H0V0Zm418 272H0v-96h418v96Zm-230.001 59.999H0v-44h187.999v44Zm170.001 0H203.999v-44H358v44ZM738 272H433.999v-96H738v96Z'/%3E%3C/svg%3E");
 $_table-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='768' height='159'%3E%3Cpath fill-rule='evenodd' fill='%23FFF' d='M0 124.999v-1h768v1H0ZM660 114V90h73.999v24H660Zm-144.001 0V90h120v24h-120ZM402 114V90h80v24h-80Zm-134 0V90h100v24H268Zm-154.001 0V90h130v24h-130ZM0 78.999h768v1H0v-1ZM660 69V45h63.999v24H660Zm-144.001 0V45h110v24h-110ZM402 69V45h69.999v24H402Zm-134 0V45h80v24h-80Zm-154.001 0V45h120v24h-120ZM0 33.999h768V35H0v-1.001ZM660 0h83.999v24H660V0ZM515.999 0h90v24h-90V0ZM402 0h90v24h-90V0ZM268 0h100v24H268V0ZM113.999 0h100v24h-100V0ZM0 0h90v24H0V0Zm70 69H0V45h70v24Zm10 45H0V90h80v24Zm10 45H0v-24h90v24Zm134 0H113.999v-24H224v24Zm154 0H268v-24h110v24Zm114 0h-90v-24h90v24Zm124 0H515.999v-24H616v24Zm127.999 0H660v-24h83.999v24Z'/%3E%3C/svg%3E");

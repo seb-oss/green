@@ -1,14 +1,6 @@
-@use '../../tokens/shame' as tokens;
 @use '../button/mixins' as button;
 @use '../../common';
 @use 'sass:map';
-
-$box-shadow: var(--sg-popover-box-shadow);
-$z-index: tokens.$zindex-dropdown;
-$color: tokens.$text-primary-color;
-$border-color: map.get(tokens.$blue, 'light', 0);
-$background: tokens.$form-control-bg;
-$highlighted-background: var(--gds-sys-color-base-800);
 
 @mixin dropdown-trigger {
   @include button.reset;
@@ -19,8 +11,8 @@ $highlighted-background: var(--gds-sys-color-base-800);
   @include common.add-border-color(var(--gds-sys-color-base-600));
   @include common.add-focus('');
 
-  background: $background;
-  color: $color;
+  background: var(--gds-sys-color-background-primary);
+  color: var(--gds-sys-color-text-primary);
   min-height: 2.75rem;
   display: flex;
   flex-wrap: nowrap;
@@ -48,8 +40,8 @@ $highlighted-background: var(--gds-sys-color-base-800);
 
   &::after {
     @include common.margin-horizontal(3);
-    border-bottom: solid 2px $color;
-    border-left: solid 2px $color;
+    border-bottom: solid 2px var(--gds-sys-color-text-primary);
+    border-left: solid 2px var(--gds-sys-color-text-primary);
     content: '';
     display: block;
     height: 0.5rem;
@@ -70,12 +62,12 @@ $highlighted-background: var(--gds-sys-color-base-800);
   }
 
   &:disabled {
-    --background: var(--grey-500);
+    --background: var(--gds-sys-color-base-300);
   }
 }
 
 @mixin select-option-highlighted {
-  background: $highlighted-background;
+  background: var(--gds-sys-color-base-800);
 }
 
 @mixin select-option {

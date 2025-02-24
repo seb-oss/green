@@ -1,19 +1,11 @@
 @use '../../common';
-
-// include components used by modal
 @use '../../components/backdrop';
 
-$box-shadow: var(--sg-modal-box-shadow);
-$background: var(--sg-modal-background);
-$z-index: var(--sg-z-index-modal);
-$backdrop-background: var(--sg-modal-backdrop-background);
-$backdrop-z-index: var(--sg-z-index-modal-backdrop);
-
 @mixin modal {
-  background: $background;
+  background: var(--gds-sys-color-background-primary);
   display: flex;
   flex-direction: column;
-  box-shadow: $box-shadow;
+  box-shadow: var(--gds-z-index-modal);
   position: absolute;
   width: 100%;
   z-index: $z-index;
@@ -187,5 +179,8 @@ $backdrop-z-index: var(--sg-z-index-modal-backdrop);
 }
 
 @mixin modal-backdrop() {
-  @include backdrop.add-backdrop($backdrop-background, $backdrop-z-index);
+  @include backdrop.add-backdrop(
+    rgba(0, 0, 0, 0.5),
+    var(--gds-z-index-modal-backdrop)
+  );
 }

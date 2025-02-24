@@ -9,9 +9,9 @@
   --sg-table-cell-padding-y: 0.6875rem;
   --sg-table-border-width: 1px;
   --sg-table-border-color: var(--gds-ref-pallet-base600);
-  --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
+  --gds-table-sort-icon-color: var(--gds-ref-pallet-base600);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
-  --sg-table-sort-icon-color-active: #fff;
+  --gds-table-sort-icon-color-active: #fff;
   @include table.add-table();
   width: 100%;
 
@@ -26,7 +26,7 @@
     text-align: right;
   }
 
-  thead tr th.gds-table__numeric-col .sg-table-sort {
+  thead tr th.gds-table__numeric-col .gds-table-sort {
     justify-content: end;
   }
 

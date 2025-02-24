@@ -109,7 +109,7 @@ $_background: input.$background;
       @include common.padding-end(5);
 
       &.disabled {
-        background: var(--sg-form-control-bg-disabled);
+        background: var(--gds-sys-color-background-secondary);
       }
     }
   }

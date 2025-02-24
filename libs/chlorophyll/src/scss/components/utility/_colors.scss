@@ -1,47 +1,45 @@
 @use '../../tokens/shame' as tokens;
 @use 'sass:map';
 
-$_background: var(--sg-bg-level-0);
-
 $colors: (
   'light': (
-    color: tokens.get(tokens.$grey, 200),
-    contrast: tokens.$black,
+    color: var(--gds-sys-color-base-200),
+    contrast: var(--gds-sys-color-text-primary),
   ),
   'dark': (
-    color: tokens.get(tokens.$grey, 1000),
-    contrast: tokens.$white,
+    color: var(--gds-sys-color-base-900),
+    contrast: var(--gds-sys-color-text-inverted),
   ),
   'primary': (
-    color: tokens.$text-primary-color,
-    contrast: $_background,
+    color: var(--gds-sys-color-text-primary),
+    contrast: var(--gds-sys-color-background-secondary),
   ),
   'secondary': (
-    color: tokens.$text-secondary-color,
-    contrast: $_background,
+    contrast: var(--gds-sys-color-text-secondary),
+    contrast: var(--gds-sys-color-background-secondary),
   ),
   'info': (
-    color: hsl(var(--sg-intent-info-hsl)),
-    contrast: var(--gds-sys-color-text-black),
+    color: var(--gds-sys-color-blue-dark-2),
+    contrast: var(--gds-sys-color-text-white),
   ),
   'success': (
-    color: hsl(var(--sg-intent-success-hsl)),
-    contrast: hsl(var(--sg-intent-success-hsl-contrast)),
+    color: var(--gds-sys-color-dark-green-2),
+    contrast: var(--gds-sys-color-text-white),
   ),
   'warning': (
-    color: hsl(var(--sg-intent-warning-hsl)),
-    contrast: hsl(var(--sg-intent-warning-hsl-contrast)),
+    color: var(--gds-sys-color-yellow),
+    contrast: var(--gds-sys-color-text-primary),
   ),
   'danger': (
-    color: hsl(var(--sg-intent-critical-hsl)),
-    contrast: hsl(var(--sg-intent-critical-hsl-contrast)),
+    color: var(--gds-sys-color-dark-red-1),
+    contrast: var(--gds-sys-color-text-white),
   ),
   'reset': (
     color: inherit,
     contrast: null,
   ),
   'background': (
-    color: $_background,
+    color: var(--gds-sys-color-background-secondary),
     contrast: null,
   ),
   'transparent': (

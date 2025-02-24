@@ -114,63 +114,63 @@ export const Responsive = {
         </th>
 
         <th scope="col" aria-sort="ascending">
-          <button class="sg-table-sort">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Reference
             <span class="sr-only">descending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Responsible
             <span class="sr-only">ascending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Country
             <span class="sr-only">ascending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Creation date
             <span class="sr-only">ascending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Account holder
             <span class="sr-only">ascending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Account number
             <span class="sr-only">ascending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort justify-content-end">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort justify-content-end">
             <span class="sr-only">Sort by</span>
             Balance
             <span class="sr-only">ascending</span>
           </button>
         </th>
 
-        <th scope="col" class="sg-sortable">
-          <button class="sg-table-sort">
+        <th scope="col" class="gds-sortable">
+          <button class="gds-table-sort">
             <span class="sr-only">Sort by</span>
             Status
             <span class="sr-only">ascending</span>

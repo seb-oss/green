@@ -24,9 +24,6 @@ $color-valid: tokens.$border-color-valid;
   @if not($color == var(--border-color)) {
     --border-color: #{$color};
   }
-  @if not($color == var(--gds-sys-color-base-600)) {
-    --sg-border-color: #{$color};
-  }
 }
 
 @mixin add-validation() {
