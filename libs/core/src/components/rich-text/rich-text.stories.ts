@@ -6,6 +6,7 @@ import '../card'
 import '../container'
 import '../text'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { html } from '../../scoping'
 
 /**
@@ -25,6 +26,9 @@ const meta: Meta = {
   title: 'Components/Rich Text',
   component: 'gds-rich-text',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-rich-text'),
+  },
 }
 
 export default meta

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
@@ -20,6 +21,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-popover'),
+  },
 }
 
 export default meta
@@ -64,7 +68,7 @@ export const Usage: Story = {
 export const Customization: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-container width="700px" height="250px"><gds-card
+    html`<gds-div width="700px" height="250px"><gds-card
         display="flex"
         width="720px"
         border="0 0 4xs/primary 0"
@@ -92,5 +96,5 @@ export const Customization: Story = {
         </gds-popover>
     </gds-card>
     <gds-backdrop id="my-backdrop"></gds-backdrop>
-</gds-container>`,
+</gds-div>`,
 }

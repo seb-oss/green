@@ -12,6 +12,7 @@ import '../icon/icons/chevron-bottom.ts'
 import '../icon/icons/bubbles.ts'
 import '../signal/index.ts'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { DefaultParams as ButtonDefaultParams } from '../button/button.stories.ts'
 
 /**
@@ -25,6 +26,9 @@ const meta: Meta = {
   title: 'Components/FAB',
   component: 'gds-fab',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-fab'),
+  },
 }
 
 export default meta
@@ -261,7 +265,7 @@ export const ZIndex: Story = {
       border-radius="s"
     >
       <gds-fab inset="auto 40px 40px auto"> Show above other things </gds-fab>
-      <gds-container
+      <gds-div
         border-radius="s"
         width="100%"
         height="max-content"
@@ -289,8 +293,8 @@ export const ZIndex: Story = {
           </gds-flex>
           <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
         </gds-flex>
-      </gds-container>
-      <gds-container
+      </gds-div>
+      <gds-div
         border-radius="s"
         width="100%"
         height="max-content"
@@ -318,7 +322,7 @@ export const ZIndex: Story = {
           </gds-flex>
           <gds-card variant="secondary" flex="1" height="300px"> </gds-card>
         </gds-flex>
-      </gds-container>
+      </gds-div>
     </gds-flex>
   `,
 }
