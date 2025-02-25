@@ -37,6 +37,13 @@ export const styles = css`
       display: flex;
       flex-direction: column;
       gap: 16px;
+
+      .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
     }
 
     .radio {

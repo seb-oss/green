@@ -52,7 +52,9 @@ export class GdsRadioGroup extends GdsFormControlElement {
             slot="extended-supporting-text"
           ></slot>
         </gds-form-control-header>
-        <slot></slot>
+        <div class="content">
+          <slot></slot>
+        </div>
         <gds-form-control-footer
           class="size-${this.size}"
         ></gds-form-control-footer>
