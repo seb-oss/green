@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core'
 import { AccountNumberPipe } from './account-number.pipe'
 
 @NgModule({
-  declarations: [AccountNumberPipe],
-  imports: [CommonModule],
+  declarations: [],
+  imports: [CommonModule, AccountNumberPipe],
   exports: [AccountNumberPipe],
 })
 export class NggvAccountNumberPipeModule {}

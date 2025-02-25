@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.3.2
+
+### Patch Changes
+
+- 4a1ad4a: Added missing styles for the checkboxes inside nggv-table component
+- Updated dependencies [0babf00]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+  - @sebgroup/chlorophyll@3.6.15
+  - @sebgroup/green-core@1.66.0
+
 ## 5.3.1
 
 ### Patch Changes
