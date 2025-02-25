@@ -120,6 +120,7 @@ export class GdsContextMenu extends withMarginProps(
       </button>
       <gds-popover
         id="menu"
+        autofocus
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
         .anchorRef=${this.elTriggerBtn}
