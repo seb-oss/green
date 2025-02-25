@@ -33,6 +33,12 @@ export const styles = css`
       --radio-border-style: solid;
     }
 
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
     .radio {
       display: flex;
       align-items: center;
@@ -58,8 +64,10 @@ export const styles = css`
         }
       }
 
-      &:hover {
-        background-color: var(--radio-bg-mix);
+      @media (hover: hover) {
+        &:hover {
+          background-color: var(--radio-bg-mix);
+        }
       }
 
       &:active {
