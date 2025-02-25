@@ -25,13 +25,13 @@ export class GdsRadio extends GdsElement {
 
   render() {
     return html`
-      <div class="radio">
+      <div tabindex="0" class="radio">
         <div class="dot"></div>
       </div>
-      <div class="radio selected">
+      <div tabindex="0" class="radio selected">
         <div class="dot"></div>
       </div>
-      <div class="radio">
+      <div tabindex="0" class="radio">
         <div class="dot"></div>
       </div>
     `
