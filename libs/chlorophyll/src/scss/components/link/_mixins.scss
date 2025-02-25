@@ -1,40 +1,30 @@
-@use '../../tokens/shame' as tokens;
 @use '../../common';
 @use 'sass:map';
 
-$color: var(--gds-sys-color-text-link);
-$color-hover: var(--gds-sys-color-blue);
-$color-visited: var(--gds-sys-color-blue-dark-2);
-$color-dark: var(--gds-sys-color-text-primary);
-$color-visited-dark: var(--gds-sys-color-text-secondary);
-// TODO: Change to typography tokens generated from style dictionary
-$font-weight: tokens.$font-weight-bold;
-$outline-opacity: 0.35;
-
 @mixin base {
   @include common.add-outline-focus-state();
-  color: $color;
-  font-weight: $font-weight;
+  color: var(--gds-sys-color-text-link);
+  font-weight: 500;
   border: none;
   border-radius: 0.125rem;
 
   &:focus {
     &:not([aria-disabled]) {
-      color: $color-hover;
+      color: var(--gds-sys-color-blue);
     }
   }
 
   &.link-history:visited {
-    color: $color-visited;
+    color: var(--gds-sys-color-blue-dark-2);
   }
 
   &.link-history:visited {
-    color: $color-visited;
+    color: var(--gds-sys-color-blue-dark-2);
   }
 }
 
 @mixin disabled {
-  font-weight: $font-weight;
+  font-weight: 500;
   @include common.add-disable(false, true, false);
 }
 
@@ -79,8 +69,8 @@ $outline-opacity: 0.35;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  color: $color-dark;
-  font-weight: $font-weight;
+  color: var(--gds-sys-color-text-primary);
+  font-weight: 500;
   text-decoration: none;
   --arrow-transition: transform 0.2s ease-in-out;
   --arrow-translate: translate3d(5px, 0, 0);
@@ -97,11 +87,11 @@ $outline-opacity: 0.35;
   }
 
   &.link:focus {
-    color: $color-dark;
+    color: var(--gds-sys-color-text-primary);
   }
 
   &:visited {
-    color: $color-visited-dark;
+    color: var(--gds-sys-color-text-secondary);
   }
 
   &:hover svg,

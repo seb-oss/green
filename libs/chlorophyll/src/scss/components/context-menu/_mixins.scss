@@ -1,9 +1,5 @@
-@use '../../tokens/shame' as tokens;
 @use '../../common';
 @use 'sass:map';
-
-$box-shadow: 0rem 0rem 0.75rem 0rem rgba(0, 0, 0, 0.1);
-$font-weight: tokens.$font-weight-bold;
 
 @mixin add-context-menu-overlay {
   width: 100%;
@@ -19,7 +15,7 @@ $font-weight: tokens.$font-weight-bold;
   @include common.add-border-radius();
   @include common.add-focus('');
 
-  box-shadow: $box-shadow;
+  box-shadow: 0rem 0rem 0.75rem 0rem rgba(0, 0, 0, 0.1);
   max-width: 10rem;
   right: 0;
 }
@@ -28,11 +24,14 @@ $font-weight: tokens.$font-weight-bold;
   overflow-y: unset;
 
   li {
-    $grey-200: tokens.get(tokens.$grey, 200);
     @include common.padding-horizontal(5);
     @include common.padding-vertical(4);
-    @include common.add-hover-active-state($grey-200, $grey-200, true);
-    @include common.add-active-focus-state($grey-200);
+    @include common.add-hover-active-state(
+      var(--gds-sys-color-base-200),
+      var(--gds-sys-color-base-200),
+      true
+    );
+    @include common.add-active-focus-state(var(--gds-sys-color-base-200));
     line-height: 1.25;
     cursor: pointer;
   }

@@ -1,7 +1,6 @@
 @use '../../tokens/shame' as newTokens;
 @use '../../common';
 
-$font-weight: 'medium';
 $color: newTokens.$text-primary-color;
 $color-active: newTokens.$text-primary-color;
 $_border-width: 1px;
@@ -12,7 +11,7 @@ $greyScale: map-get(newTokens.$grey, light);
   @include common.add-border-color;
   @include common.padding-horizontal(5);
   @include common.padding-vertical(4);
-  @include common.font-weight($font-weight);
+  @include common.font-weight('medium');
   @include common.add-hover-state;
   @include common.add-focus;
 
@@ -45,9 +44,7 @@ $greyScale: map-get(newTokens.$grey, light);
     )
   );
 
-  @include common.add-hover-state(
-    map-get($greyScale, 1000)
-  ); // This is actually Base800
+  @include common.add-hover-state(var(--gds-sys-color-base-800));
 
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;

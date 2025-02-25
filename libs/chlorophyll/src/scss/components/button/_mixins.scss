@@ -2,21 +2,6 @@
 @use '../../common';
 @use 'sass:map';
 
-$button-primary-bg: tokens.get(tokens.$blue, 0);
-$button-primary-color: common.most-legible-color($button-primary-bg);
-$button-primary-border-color: $button-primary-bg;
-
-$button-secondary-bg: transparent;
-$button-secondary-color: tokens.get(tokens.$blue, 0);
-$button-secondary-border-color: $button-secondary-color;
-
-$button-ghost-bg: tokens.get(tokens.$grey, 200);
-
-$button-danger-bg: tokens.get(tokens.$red, 0);
-$button-danger-bg-hover: tokens.get(tokens.$red, 1);
-$button-danger-color: common.most-legible-color($button-danger-bg);
-$button-danger-border-color: $button-danger-bg;
-
 @mixin reset {
   background-color: transparent;
   border: 0;
@@ -62,11 +47,10 @@ $button-danger-border-color: $button-danger-bg;
 @mixin secondary {
   @include common.add-focus();
   @include common.add-hover-active-state();
-  //@include common.add-active-focus-state();
-  background: $button-secondary-bg;
-  border-color: $button-secondary-border-color;
-  color: $button-secondary-color;
-  --color: #{$button-secondary-color};
+  background: transparent;
+  border-color: var(--gds-sys-color-blue-dark-2);
+  color: var(--gds-sys-color-blue-dark-2);
+  --color: #{var(--gds-sys-color-blue-dark-2)};
 
   &:disabled,
   &.disabled,
@@ -78,11 +62,10 @@ $button-danger-border-color: $button-danger-bg;
 @mixin tertiary {
   @include common.add-focus();
   @include common.add-hover-active-state();
-  //@include common.add-active-focus-state();
-  background: $button-secondary-bg;
+  background: transparent;
   border-color: transparent;
-  color: $button-secondary-color;
-  --color: #{$button-secondary-color};
+  color: var(--gds-sys-color-blue-dark-2);
+  --color: #{var(--gds-sys-color-blue-dark-2)};
 
   &:disabled,
   &.disabled,
@@ -93,28 +76,25 @@ $button-danger-border-color: $button-danger-bg;
 
 @mixin primary {
   @include common.add-hover-active-state();
-  @include common.add-active-focus-state();
-  background: $button-primary-bg;
-  border-color: $button-primary-border-color;
-  color: $button-primary-color;
-  --color: #{$button-primary-color};
+  background: var(--gds-sys-color-dark-blue-2);
+  border-color: var(--gds-sys-color-blue-dark-2);
+  color: var(--gds-sys-color-text-white);
+  --color: #{var(--gds-sys-color-text-white)};
 
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
     @include common.add-disable(
-      $button-primary-bg,
-      $button-primary-color,
-      $button-primary-border-color
+      var(--gds-sys-color-dark-blue-2),
+      var(--gds-sys-color-text-white),
+      var(--gds-sys-color-blue-dark-2)
     );
   }
 }
 
-// TODO: handle themes (dark/light mode)
 @mixin ghost-dark() {
-  $ghost-color: tokens.get(tokens.$grey, 1000);
+  $ghost-color: var(--gds-sys-color-base-800);
   @include common.add-hover-active-state($ghost-color, $ghost-color, true);
-  @include common.add-active-focus-state($ghost-color);
   background-color: transparent;
   border-color: $ghost-color;
   color: $ghost-color;
@@ -127,15 +107,20 @@ $button-danger-border-color: $button-danger-bg;
   }
 }
 
-// TODO: handle themes (dark/light mode)
 @mixin ghost-light() {
-  $ghost-color: tokens.$white;
-  @include common.add-hover-active-state($ghost-color, $ghost-color, true);
-  @include common.add-active-focus-state($ghost-color);
+  --gds-sys-color-focus-outline: var(--gds-sys-color-white);
+  @include common.add-hover-active-state(
+    var(--gds-sys-color-white),
+    var(--gds-sys-color-base-200),
+    true,
+    var(--gds-sys-color-text-primary),
+    var(--gds-sys-color-text-primary)
+  );
+
   background-color: transparent;
-  border-color: $ghost-color;
-  color: $ghost-color;
-  --color: #{$ghost-color};
+  border-color: var(--gds-sys-color-white);
+  color: var(--gds-sys-color-white);
+  --color: var(--gds-sys-color-white);
 
   &:disabled,
   &.disabled,
@@ -195,15 +180,15 @@ $button-danger-border-color: $button-danger-bg;
 }
 
 @mixin danger-bg {
-  background: $button-danger-bg;
-  border-color: $button-danger-border-color;
-  color: $button-danger-color;
-  --color: #{$button-danger-color};
+  background: var(--gds-sys-color-dark-red-1);
+  border-color: var(--gds-sys-color-dark-red-1);
+  color: var(--gds-sys-color-text-white);
+  --color: #{var(--gds-sys-color-text-white)};
 
   @include common.add-hover-active-state(
-    $button-danger-bg-hover,
-    $button-danger-bg,
-    $button-danger-border-color
+    var(--gds-sys-color-dark-red-1),
+    var(--gds-sys-color-dark-red-1),
+    var(--gds-sys-color-dark-red-1)
   );
 
   @include common.add-focus();
@@ -212,22 +197,22 @@ $button-danger-border-color: $button-danger-bg;
   &.disabled,
   &[aria-disabled='true'] {
     @include common.add-disable(
-      $button-danger-bg,
-      $button-danger-color,
-      $button-danger-border-color
+      var(--gds-sys-color-dark-red-1),
+      var(--gds-sys-color-text-white),
+      var(--gds-sys-color-dark-red-1)
     );
   }
 }
 
 @mixin danger-color {
-  color: $button-danger-bg;
-  --color: #{$button-danger-bg};
+  color: var(--gds-sys-color-dark-red-1);
+  --color: #{var(--gds-sys-color-dark-red-1)};
   border-color: transparent;
 
   @include common.add-hover-active-state(
-    $button-danger-bg-hover,
-    $button-danger-bg,
-    $button-danger-border-color
+    var(--gds-sys-color-dark-red-1),
+    var(--gds-sys-color-dark-red-1),
+    var(--gds-sys-color-dark-red-1)
   );
 
   @include common.add-focus();

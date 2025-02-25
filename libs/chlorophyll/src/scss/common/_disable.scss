@@ -1,4 +1,3 @@
-@use '../tokens/shame' as newTokens;
 @use 'functions';
 @use 'sass:map';
 
@@ -6,31 +5,27 @@
 @mixin add-disable($background, $color, $border-color) {
   @if ($background) {
     @if ($background == true) {
-      $background: newTokens.$form-control-bg-disabled; //map.get(tokens.$disabled-colors, 'background');
+      $background: var(--gds-sys-color-base-300);
     } @else {
-      $background: newTokens.$form-control-primary-bg-disabled;
+      $background: var(--gds-sys-color-background-primary);
     }
-    background: $background !important; //desaturate(functions.max-contrast($background), 100%);
+    background: $background !important;
   }
   @if ($color) {
     @if ($color == true) {
-      $color: newTokens.$text-disabled-color; //map.get(tokens.$disabled-colors, 'color');
-    } @else {
-      $color: newTokens.$text-primary-disabled-color;
+      $color: var(--gds-sys-color-text-disabled);
     }
-    color: $color !important; //desaturate(functions.max-contrast($color), 100%);
+    color: $color !important;
   }
   @if ($border-color) {
     @if ($border-color == true) {
-      $border-color: newTokens.$border-disabled-color; //map.get(tokens.$disabled-colors, 'border');
-    } @else {
-      $border-color: newTokens.$border-primary-disabled-color;
+      $border-color: var(--gds-sys-color-text-disabled);
     }
-    border-color: $border-color !important; //desaturate(functions.max-contrast($border-color), 100%);
+    border-color: $border-color !important;
   }
   cursor: not-allowed;
 
   &::placeholder {
-    color: newTokens.$text-disabled-color; // map.get(tokens.$disabled-colors, 'color');
+    color: var(--gds-sys-color-text-disabled);
   }
 }

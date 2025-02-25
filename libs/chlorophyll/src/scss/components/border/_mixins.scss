@@ -1,16 +1,12 @@
-@use '../../tokens/shame' as tokens;
-
-$_radius: 0.25rem;
-$_width: 1px;
-$_color: var(--gds-sys-color-base-600); //tokens.$border-color;
-$color-invalid: tokens.$border-color-invalid;
-$color-valid: tokens.$border-color-valid;
-
-@mixin add-border-radius($radius: $_radius) {
+@mixin add-border-radius($radius: 0.25rem) {
   border-radius: $radius;
 }
 
-@mixin add-border($sides: false, $width: $_width, $color: $_color) {
+@mixin add-border(
+  $sides: false,
+  $width: 1px,
+  $color: var(--gds-sys-color-base-600)
+) {
   @if not $sides {
     border: solid $width $color;
   } @else {
@@ -20,7 +16,7 @@ $color-valid: tokens.$border-color-valid;
   }
 }
 
-@mixin add-border-color($color: $_color) {
+@mixin add-border-color($color: var(--gds-sys-color-base-600)) {
   @if not($color == var(--border-color)) {
     --border-color: #{$color};
   }
@@ -28,12 +24,12 @@ $color-valid: tokens.$border-color-valid;
 
 @mixin add-validation() {
   &.is-invalid {
-    @include add-border-color($color-invalid);
+    @include add-border-color(var(--gds-sys-color-text-error));
     @include add-border-radius();
   }
 
   &.is-valid {
-    @include add-border-color($color-valid);
+    @include add-border-color(var(--gds-sys-color-dark-green-1));
     @include add-border-radius();
   }
 }
