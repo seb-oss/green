@@ -8,18 +8,22 @@ import '../divider'
 
 import { html } from 'lit'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
+
 /**
- * The `gds-text`
- * The gds-text element is designed to display text content flexibly. You can easily change the HTML tag it uses, wrap the text, set a maximum character length, and apply line clamping. It also allows you to adjust the text size based on design tokens that work together with line height and font size.
+ * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
  *
+ * Style expression properties apply to the outer element unless otherwise specified.
  *
- * ## Usage
- *
+ * @beta
  */
 const meta: Meta = {
   title: 'Components/Text',
   component: 'gds-text',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-text'),
+  },
 }
 
 export default meta
@@ -92,22 +96,22 @@ const DefaultParams: Story = {
       control: { type: 'select' },
     },
     font: {
-      control: { type: 'string' },
+      control: { type: 'text' },
     },
   },
 }
 
 /**
- *
- * In order to have more flexibility the tag it self and the sizing are controlled by the user.
- * The `gds-text` accepts the `tag` property which will render the text with the specified tag and the `size` property which will render the text with the specified size based on the tokens
+ * The `tag` property controls the inner element tag name.
  *
  * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
+ *
+ * Depending on which tag you use, different default styles will be applied. Style can be overridden using the `font-size`, `font-weight` and other style expression properties.
  *
  * The default tag is `span` and the default size is `body-m`
  */
 
-export const Card: Story = {
+export const Tags: Story = {
   ...DefaultParams,
   name: 'Tags',
   render: (args) =>
@@ -258,7 +262,7 @@ export const Lines: Story = {
 
 /**
  *
- * The `gds-text` component has a `color` property that will change the text color based on the specified color token.
+ * The `color` property that will change the text color based on the specified color token.
  *
  * e.g. `<gds-text level="1" color="primary"></gds-text>`
  *
@@ -311,7 +315,7 @@ export const Color: Story = {
 }
 
 /**
- * `gds-text` component has a `text-decoration` property that will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
+ * The `text-decoration` property will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
  *
  *
  * e.g.

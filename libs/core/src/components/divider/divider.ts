@@ -1,8 +1,10 @@
+import { nothing } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { forColorTokens } from '../../utils/helpers'
 import {
   gdsCustomElement,
   html,
@@ -11,13 +13,9 @@ import DividerCSS from './divider.style'
 
 /**
  * @element gds-divider
- *
- * The `gds-divider`  is a custom element that provides a flexible divider system.
- * It can be used to create a divider with different styles and configurations.
- * The divider can be customized with different properties like color and size
- *
  * @status beta
  *
+ * The `gds-divider` component is a horizontal rule that separates content in a layout. It is equivalent to the `<hr>` element in HTML, and provides the same semantic meaning.
  */
 @gdsCustomElement('gds-divider')
 export class GdsDivider extends GdsElement {
@@ -44,49 +42,8 @@ export class GdsDivider extends GdsElement {
    * ```html
    * <gds-divider color="primary"></gds-divider>
    * ```
-   *
-   * The above example will apply the color style of base400.
-   *
    */
-  @styleExpressionProperty({
-    valueTemplate: function (v: string) {
-      const [colorInput, transparency] = v.split('/')
-
-      // Helper function to determine if a color is custom
-      const isCustomColor = (color: string): boolean => {
-        const trimmedColor = color.trim()
-        return (
-          trimmedColor.startsWith('#') || // Hex color
-          trimmedColor.startsWith('rgb(') || // RGB color
-          trimmedColor.startsWith('rgba(') || // RGBA color
-          trimmedColor.startsWith('hsl(') || // HSL color
-          trimmedColor.startsWith('hsla(') // HSLA color
-        )
-      }
-
-      // Function to construct the CSS variable string
-      const constructCssVariable = (
-        level: string,
-        colorName: string,
-      ): string => {
-        return `var(--gds-color-l${level}-border-${colorName})`
-      }
-
-      // Determine the color value
-      const getColorValue = (color: string, transparency?: string): string => {
-        if (isCustomColor(color)) {
-          return transparency
-            ? `color-mix(in srgb, ${color} ${parseFloat(transparency) * 100}%, transparent 0%)`
-            : color // Use the custom color directly
-        } else {
-          return constructCssVariable((this as GdsDivider).level, color)
-        }
-      }
-
-      // Return the computed color value
-      return getColorValue(colorInput, transparency)
-    },
-  })
+  @styleExpressionProperty(forColorTokens('border'))
   color?: string
 
   /**
@@ -120,13 +77,21 @@ export class GdsDivider extends GdsElement {
    * The above example will apply the opacity style of base400.
    *
    */
-  @styleExpressionProperty({
-    property: 'opacity',
-    valueTemplate: (v) => v,
-  })
+  @styleExpressionProperty()
   opacity?: string
 
+  /**
+   * Use the role attribute primarily if you only want the divider to be a visual element.
+   *
+   * ```html
+   * <!-- This divider will not be announced as a separator or thematic break -->
+   * <gds-divider role="presentation"></gds-divider>
+   * ```
+   */
+  @property()
+  role: string | null = null
+
   render() {
-    return html`<hr />`
+    return html`<hr role=${this.role || nothing} />`
   }
 }
