@@ -153,9 +153,15 @@ describe('<gds-dropdown>', () => {
     `)
     const uiStateHandler = sinon.spy()
     el.addEventListener('gds-ui-state', uiStateHandler)
-    el.open = true
+
+    //click to open
+    clickOnElement(el)
+
     await waitUntil(() => uiStateHandler.calledOnce)
-    el.open = false
+
+    // Hit escape to close
+    await sendKeys({ press: 'Escape' })
+
     await waitUntil(() => uiStateHandler.calledTwice)
     await expect(uiStateHandler).to.have.been.calledTwice
   })
@@ -335,42 +341,50 @@ describe('<gds-dropdown>', () => {
 
   it('should set gds-form-control-header class based on size', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown label="My dropdown" size="small">
-      </gds-dropdown>
+      <gds-dropdown label="My dropdown" size="small"> </gds-dropdown>
     `)
-    const gdsFormControlHeader = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-header]')!
+    const gdsFormControlHeader = el.shadowRoot!.querySelector<HTMLElement>(
+      '[gds-element=gds-form-control-header]',
+    )!
 
-    await expect(gdsFormControlHeader.classList.contains('size-small')).to.be.true
+    await expect(gdsFormControlHeader.classList.contains('size-small')).to.be
+      .true
   })
 
   it('should set gds-form-control-header class based on default size', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown label="My dropdown">
-      </gds-dropdown>
+      <gds-dropdown label="My dropdown"> </gds-dropdown>
     `)
-    const gdsFormControlHeader = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-header]')!
+    const gdsFormControlHeader = el.shadowRoot!.querySelector<HTMLElement>(
+      '[gds-element=gds-form-control-header]',
+    )!
 
-    await expect(gdsFormControlHeader.classList.contains('size-medium')).to.be.true
+    await expect(gdsFormControlHeader.classList.contains('size-medium')).to.be
+      .true
   })
 
   it('should set gds-form-control-footer class based on size', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown label="My dropdown" size="small">
-      </gds-dropdown>
+      <gds-dropdown label="My dropdown" size="small"> </gds-dropdown>
     `)
-    const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-footer]')!
+    const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>(
+      '[gds-element=gds-form-control-footer]',
+    )!
 
-    await expect(gdsFormControlFooter.classList.contains('size-small')).to.be.true
+    await expect(gdsFormControlFooter.classList.contains('size-small')).to.be
+      .true
   })
 
   it('should set gds-form-control-footer class based on default size', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown label="My dropdown">
-      </gds-dropdown>
+      <gds-dropdown label="My dropdown"> </gds-dropdown>
     `)
-    const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>('[gds-element=gds-form-control-footer]')!
+    const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>(
+      '[gds-element=gds-form-control-footer]',
+    )!
 
-    await expect(gdsFormControlFooter.classList.contains('size-medium')).to.be.true
+    await expect(gdsFormControlFooter.classList.contains('size-medium')).to.be
+      .true
   })
 })
 
