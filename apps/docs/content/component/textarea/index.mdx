@@ -1,8 +1,133 @@
 ---
 title: Textarea
-summary: Textarea Summary
-date: 2024-10-16
+summary: Textarea allow users to input text and digits on multiple lines.
+date: 2025-02-13
 status: BETA
-private: true
 tags: forms
 ---
+
+## Usage
+Textarea is used for longer text inputs, featuring 4 default rows and possibility for automatic vertical resizing. Ideal for comments, descriptions, and other multiline content in forms and dialogs.
+
+## Anatomy  
+The textarea (and other form controls) are divided in sections that are re-used between components. 
+- **Header**: Label, label support, contextual help, extended support.
+- **Body**: the actual field with trailing slot.
+- **Footer**: character counter and error message.
+
+<Figma id="anatomy" caption="Anatomy of Textarea" />
+
+1. Label
+2. Label support text
+3. Contextual help
+4. Extended support text
+5. Field
+6. Leading icon slot
+7. Input
+8. Clear button
+9. Character counter (badge)
+10. Resize handle
+
+
+## Variants
+We provide two versions of textarea.
+- **Default** (Label outside): Includes all the features we need in complex forms.
+- <Badge variant="notice">Coming soon</Badge> **Floating label** (label inside): Can only be used in specific contexts. Limited features due to accessibility.
+
+<Grid columns="2">
+    <Figma id="variant-1" caption="Default" />
+    <Figma id="variant-2" caption="Floating label" />
+</Grid>
+
+## Features
+
+<Grid columns="2">
+<div>
+### Label
+All textarea fields need a label. Keep the label short.
+</div>
+<Figma id="label" caption="Textarea with just a label." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Optional field indicator
+(Not available for Floating label variant)
+We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "(optional)" next to the label with the field.
+
+The text "(optional)" is set in font-weight regular, to differentiate from the label.
+</div>
+<Figma id="optional-indicator" caption="Use '(optional)' to mark optional fields." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Support text
+(Not available for Floating label variant)
+Use this to explain how to fill the field. This may be an instruction of how to count or what to include. Limit the instructions to details that all or most users need.
+</div>
+<Figma id="support-text" caption="Textarea  with support text." />
+</Grid>
+
+### Contextual help
+(Not available for floating label variant) <br />
+When  label and support text is not enough to explain a field, use the info-icon. 
+
+When clicked the extended support is displayed between the label support and the field.
+
+If there is limited space use a tooltip. <br />
+If there is large amounts of text use a modal.
+
+<Grid columns="2">
+    <Figma id="contextual-help-2" caption="Info icon button to reach help." />
+    <Figma id="contextual-help-1" caption="Extended support visible" />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Leading icon
+A leading icon visually reinforces the purpose of the field, helping users  to understand what type of information is needed. 
+</div>
+<Figma id="leading-icon" caption="Leading icon visible" />
+</Grid>    
+
+<Grid columns="2">
+<div>
+### Clearable
+To make it easy for users to clear a field an x-icon button may be added at the end of the field. 
+</div>
+<Figma id="clearable" caption="Makes it easy to clear the field." />
+</Grid>
+
+<Grid columns="2">
+<div>
+### Field error
+When a field contains an error the field is highlighted in red with an error text describing the error.
+</div>
+<Figma id="error" caption="Input field containing an error." />
+</Grid>
+
+### Character counter
+For fields that have a limit of characters allowed, a counter can be added to guide users how many characters are left to use. Indicator starts with the maximum characters allowed. <br />
+As the user starts typing the numbers decrease. <br />
+When a limit is almost reached the indicator turns yellow. <br />
+If users write too many characters the counter becomes red. An error will be indicated on the field stating that the max has been reached.
+
+<Grid columns="2">
+<Figma id="character-1" caption="Showing maximum characters." />
+<Figma id="character-2" caption="Showing characters left." />
+<Figma id="character-3" caption="Too much text in the field. Counter showing the amount in overflow." />
+</Grid>
+
+
+### Resize
+The default Textarea has a fixed height based on the expected input.
+This helps users understand how much text the field is intended for.
+If the field should be resizable, there are two options:
+- **Automatic**: Adjusts dynamically as the user types.
+- **Manual**: Users can resize it by dragging the corner.
+
+<Grid columns="2">
+ <Figma id="resize" caption="Resize handle visible" />
+</Grid>
+

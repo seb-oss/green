@@ -6,38 +6,30 @@ import { nothing } from 'lit/html.js'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { forwardAttributes } from '../../utils/directives'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './input.styles'
 
+import type { GdsButton } from '../button'
 // Local Components
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 import '../../primitives/field-base'
-import '../icon/icons/cross-small'
+import '../icon/icons/cross-large'
 import '../flex'
 import '../button'
 
-import type { GdsButton } from '../button'
-
-/**
- * @summary A custom input element that can be used in forms.
- * @status beta
- *
- * @element gds-input
- *.
- * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
- * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
- * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
- *       displayed in a panel when the user clicks the info button.
- * @event gds-input-cleared - Fired when the clear button is clicked.
- */
-@gdsCustomElement('gds-input')
 @localized()
-export class GdsInput extends GdsFormControlElement<string> {
+class Input extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
   /**
-   * The supporting text displayed between the label and the field itself
+   * The supporting text displayed between the label and the field.
+   * This text provides additional context or information to the user.
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
@@ -78,6 +70,9 @@ export class GdsInput extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
 
+  /**
+   * Controls the font-size of texts and height of the field.
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
@@ -223,7 +218,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         .value=${this.value}
         id="input"
         ?disabled=${this.disabled}
-        aria-describedby="supporting-text"
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid=${this.invalid}
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
@@ -243,7 +238,7 @@ export class GdsInput extends GdsFormControlElement<string> {
         id="clear-button"
         slot="action"
       >
-        <gds-icon-cross-small />
+        <gds-icon-cross-large />
       </gds-button>`
     else return nothing
   }
@@ -252,3 +247,20 @@ export class GdsInput extends GdsFormControlElement<string> {
     return this.maxlength < Number.MAX_SAFE_INTEGER
   }
 }
+
+/**
+ * @summary A custom input element that can be used in forms.
+ * @status beta
+ *
+ * @element gds-input
+ *.
+ * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
+ * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
+ *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
+ */
+@gdsCustomElement('gds-input')
+export class GdsInput extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(Input)),
+) {}

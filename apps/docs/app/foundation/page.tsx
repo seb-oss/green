@@ -87,17 +87,6 @@ export default function Foundation() {
           preamble="Green Design System, a framework designed to bring unity, efficiency, and coherent perspective to our digital experiences. Over time it will grow and evolve but always reflect our design philosophy. User needs first, being forefront and with confidence."
         />
         <GdsFlex gap="m" flex-direction="column">
-          <GdsText tag="h2" id="our-purpose">
-            Our purpose
-          </GdsText>
-          <GdsText font-size="body-l" color="secondary">
-            Green Design System, a framework designed to bring unity,
-            efficiency, and coherent perspective to our digital experiences.
-            Over time it will grow and evolve but always reflect our design
-            philosophy. User needs first, being forefront and with confidence.
-          </GdsText>
-        </GdsFlex>
-        <GdsFlex gap="m" flex-direction="column">
           <GdsText tag="h2" id="tonality">
             Tonality
           </GdsText>

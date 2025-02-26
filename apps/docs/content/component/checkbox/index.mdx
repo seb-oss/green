@@ -3,92 +3,137 @@ title: Checkbox
 summary: A checkbox is a form element that allows users to select one or multiple options from a list.
 date: 2024-04-03
 status: BETA
+tags: forms
 ---
 
-## Overview
+## Usage
+Checkboxes are commonly used in forms, settings, and filters to allow users to indicate their preferences. <br/>
+The checkboxes are typically grouped with a theme label above and the possible options below.
 
-Checkboxes are used when users need to select one or multiple options from a list of choices. They are commonly employed in forms, settings, and filters to allow users to indicate their preferences.
-Checkboxes are typically grouped with a theme label above and the possible options below.
+## Anatomy
+The checkbox (and other form controls) are divided in sections that are re-used between components. 
+- **Header**: Label, label support, contextual help, extended support.
+- **Body**: the actual checkboxes.
+- **Footer**: only used for error message.
+
+<Figma id="anatomy" caption="Anatomy of a checkbox" />
+
+1. Header label
+2. Header support text
+3. Contextual help
+4. Extended support text
+5. Checkbox label
+6. Checkbox support text
 
 
 ## Variants
-	- **Default:** used in most cases.
-	- **Contained:** used only in combination with other contained form components.
+- **Default**
+- **Contained**: used standalone or in combination with other contained form components.
 
 <Grid columns="2" gap="s">
-  <Figma node="1337-5540" caption="Default variant of checkbox" />
-  <Figma node="1337-5542" caption="Contained variant of checkbox" />
+  <Figma id="variant-default" caption="Default variant." />
+  <Figma id="variant-contained" caption="Contained variant." />
 </Grid>
-
 
 ## Features
 
 <Grid columns="2" gap="s">
-  <div>
+<div>
+### Label
 
-    ### Label support text
-    
-    May be used for both the group label, and for each individual checkbox in the group.
-  </div>
-  <Figma node="1337-6156" caption="Checkbox with an extra description for the label" />
+All individual checkboxes have a label. <br />
+When checkboxes are grouped, the group have a header label.
+
+</div>
+<Figma id="label" caption="Group and individual label" />
 </Grid>
 
 <Grid columns="2" gap="s">
-  <div>
-    
-    ### Error handling
-    
-    Used to highlight that the group of checkboxes contains errors.
-  </div>
-  <Figma node="1337-6177" caption="Checkbox containing errors" />
+<div>
+### Optional field indicator
+Used only for the header label. <br />
+We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "(optional)" next to the label with the field.
+
+The text "(optional)" is set in font-weight regular, to differentiate from the label.
+
+</div>
+<Figma id="optional" caption="Use '(optional)' to mark optional fields." />
 </Grid>
+
+### Support text
+May be used on both header and individual checkbox. <br />
+Contained checkboxes do not have support text for the individual checkboxes.<br />
+Use this to explain how to use the field. This may be an instruction of how to 
+count or what to include. Limit the instructions to details that all or most users need.
 
 <Grid columns="2" gap="s">
-  <div>
-    
-    ### Indeterminate state
-    
-    Used when the checkbox's state is partially selected, often for parent-child relationships in nested checkboxes.
-    
-    **Behaviour of indeterminate checkboxes**
-    - If some children are selected, the indeterminate state is visible on the parent.
-    - If all children are selected, the selected state is visual on the parent.
-    - If a parent checkbox is selected while unselected or in the indeterminate state, all children will be selected.
-    - If the parent is deselected all children will be deselected.
-  </div>
-  <Figma node="1337-6288" caption="Nested checkboxes with a indeterminate parent" />
+  <Figma id="support-text-1" caption="Default checkboxes with support text." />
+  <Figma id="support-text-2" caption="Contained checkboxes with support text." />
 </Grid>
 
+### Contextual help
+When  label and support text is not enough to explain a field we may use the info-icon. 
 
+When clicked the extended support is displayed between the label support and the field.
 
+If there is limited space use a tooltip. <br />
+If there is large amounts of text use a modal.
 
+<Grid columns="2" gap="s">
+  <Figma id="contextual-1" caption="Info icon button to reach help." />
+  <Figma id="contextual-2" caption="Extended support visible." />
+</Grid>
 
+### Error handling
+Used to highlight that a single checkbox needs to be checked, or that a group of checkboxes contains errors.
+
+<Grid columns="2" gap="s">
+  <Figma id="error-1" caption="Default checkboxes with error." />
+  <Figma id="error-2" caption="Contained checkbox with error." />
+</Grid>
+
+### Indeterminate state
+(Not available for contained variant) <br />
+Used when the checkbox state is partially selected, often for parent-child relationships in nested checkboxes.
+
+Behaviour
+- If some children are selected, the indeterminate state is visible on the parent.
+- If all children are selected, the selected state is visual on the parent.
+- If a parent checkbox is selected while unselected or in the indeterminate state, all children will be selected.
+- If the parent is deselected all children will be deselected.
+
+<Grid columns="2" gap="s">
+  <Figma id="indeterminate-1" caption="Checkbox with children." />
+  <Figma id="indeterminate-2" caption="The checkbox 'All' showing the indeterminate state." />
+  <Figma id="indeterminate-3" caption="All children selected." />
+</Grid>
 
 ## Alignment
 Checkboxes can be aligned horizontal or vertical.
+- **Vertical**: This is the default alignment. It's easier to read and scan the available options.
+- **Horizontal**: Only used for a small set of options if the page shouldn't be to long, but try to avoid.
 
-- **Vertical:** This is the default alignment. It's easier to read and scan the available options
-- **Horizontal:** Only used for a small set of options if the page shouldn't be to long, but try to avoid.
-	
 <Grid columns="2" gap="s">
-  <Figma node="1337-6517" caption="Vertical alignment – preferred" />
-  <Figma node="1337-6580" caption="Horizontal alignment" />
+  <Figma id="alignment-vertical-1" caption="Default checkboxes with vertical alignment." />
+  <Figma id="alignment-horisontal-1" caption="Default checkboxes with horizontal alignment." />
+  <Figma id="alignment-vertical-2" caption="Contained checkboxes with vertical alignment." />
+  <Figma id="alignment-horisontal-2" caption="Contained checkboxes with horizontal alignment." />
 </Grid>
 
-
-## Do's and Don'ts
+## Do's and don'ts
 
 <Grid columns="2" gap="s">
 <div>
-  ### Do:
-    - Use descriptive labels to clearly indicate the purpose of each checkbox.
-    - Keep the text as short as possible.
+### Do
+- Use descriptive labels to clearly indicate the purpose of each checkbox.
+- Keep the text as short as possible.
 </div>
 <div>
-  ### Don't:
-    - Use checkboxes for mutually exclusive options; in such cases, consider using radio buttons instead.
-    - Overload users with too many checkboxes on a single page or form. If you have to present a lot of options, use a multiselect dropdown.
-    - Use it to toggle things on or off, use the switch for that.
-    - Mix default and contained versions.
+### Don't
+- Use checkboxes for mutually exclusive options; in such cases, use radio buttons instead.
+- Overload users with too many checkboxes on a single page or form. If you have to present a lot of options, use a multiselect dropdown.
+- Use it to toggle things on or off, use the switch component for that.
+Mix default and contained versions.
 </div>
 </Grid>
+ 

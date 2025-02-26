@@ -50,7 +50,8 @@ export abstract class GdsFormControlElement<ValueT = any>
           this.value = value
         },
         setValidity: (validity: ValidityState, validationMessage?: string) => {
-          this.invalid = validity.customError
+          ;(this.#internals.validity as any) = validity
+          this.errorMessage = validationMessage || ''
         },
         validationMessage: '',
         validity: {
@@ -131,8 +132,14 @@ export abstract class GdsFormControlElement<ValueT = any>
   /**
    * Get or set the value of the form control.
    */
+  protected _internalValue?: ValueT
   @property()
-  value?: ValueT
+  get value() {
+    return this._internalValue
+  }
+  set value(value: ValueT | undefined) {
+    this._internalValue = value
+  }
 
   @property({ reflect: true })
   name = ''
@@ -184,7 +191,7 @@ export abstract class GdsFormControlElement<ValueT = any>
       this._getValidityAnchor(),
     )
 
-    this.requestUpdate('invalid', oldValue)
+    if (oldValue !== this.invalid) this.requestUpdate()
 
     return this.#internals.checkValidity()
   }

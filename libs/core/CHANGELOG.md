@@ -1,5 +1,90 @@
 # Changelog
 
+## 1.66.0
+
+### Minor Changes
+
+- 4cdaf5f: **`gds-grid`**: `auto-columns` now support any CSS units. If no unit is specified, `px` is assumed.
+- 4cdaf5f: **Divider:** Add propagation of role attribute
+- 4cdaf5f: ### Declarative Layout updates
+
+  - Add `gds-div` as the base container for declarative layout
+  - Refactor implementation for easier reuse of properties in various components. Several component now support style expression properties for common things like margin, width and flex item properties.
+  - Colors now only support tokens from Green, no custom values except `transparent` and `currentColor`. This simplifies implementation and makes color properties more consistent.
+  - Color properties now always use `tokenName/transparency`, where transparency is optional.
+  - Set `box-sizing` to `border-box` by default
+  - Set `border-color` to `primary` by default
+  - `border` property now works like css shorthand border property, ie. `size style color`
+  - `border-style` property added for completeness
+
+  #### Removed
+
+  The following style expression properties have been removed:
+
+  - `pointer-events`
+  - `user-select`
+  - `cursor`
+  - `transform-style`
+  - `transition`
+  - `transition-behavior`
+  - `animation`
+
+  #### Deprecated
+
+  The followind elements have been deprecated
+
+  - `gds-container` is deprecated in favor of `gds-div`
+  - `gds-spacer` is deprecated in favor of `gds-div`
+
+### Patch Changes
+
+- 4cdaf5f: **Calendar:** Fix missing focus outline in 2023 style
+
+## 1.65.2
+
+### Patch Changes
+
+- d800fd8: **Field Base:** Add on main wrap gap to add space in select
+
+## 1.65.1
+
+### Patch Changes
+
+- 5c43312: **Icons**: Add missing css unit in height/width
+- 67547d2: **Textarea:** Resizing improvements, resize handle and overflow
+
+## 1.65.0
+
+### Minor Changes
+
+- fc89181: **Select:** Add new components `gds-select`, Consolidate with Field Base
+
+### Patch Changes
+
+- fc89181: **Input:** Update the clearable action slot icon to be `cross-large`
+- fc89181: **Datepicker:** Fix the action slot icon size when is small and variant invalid
+- fc89181: **Button**: Fix the the outline on variants
+- f8c3d74: **FormControlElement**: Request general update when validity state changes
+
+## 1.64.0
+
+### Minor Changes
+
+- 07cb314: **Dropdown:** Add `combobox` option
+- 07cb314: **Popover:** Add `autofocus` property to control wheter focus is automtaically moved to the popover when opened
+
+### Patch Changes
+
+- 07cb314: **Icon:** Fix invalid use of css units in SVG width/height attributes
+- 07cb314: **Transitional Styles:** Fix crash in legacy browsers
+- 07cb314: **Form controls:** Fix recursion bug in validity state update in legacy browsers
+
+## 1.63.2
+
+### Patch Changes
+
+- 7213bfb: Dropdown: Added support for size small to header
+
 ## 1.63.1
 
 ### Patch Changes

@@ -1,64 +1,63 @@
-<div
-  class="sdv-modal-dialog__container"
-  *transloco="let t"
-  #dialog
-  role="dialog"
-  aria-dialog="true"
-  [attr.aria-labelledby]="dialogTitleId"
-  [attr.aria-describedby]="dialogBodyId"
->
-  <header class="modal-dialog__heading">
-    <h3 [attr.id]="dialogTitleId">{{ t(heading || title || '') }}</h3>
-    <button
-      type="button"
-      data-thook="dialog-close"
-      (click)="onAction($event, 'close')"
-      (keydown.enter)="onAction($event, 'close')"
-      class="close"
+<ng-container *ngIf="shown">
+  <div class="modal-dialog__wrapper" [class.-active]="shown">
+    <div
+      class="modal-dialog__container"
+      *transloco="let t"
+      #dialog
+      role="dialog"
+      aria-dialog="true"
+      [attr.aria-labelledby]="dialogTitleId"
+      [attr.aria-describedby]="dialogBodyId"
     >
-      <gds-icon-cross-small
-        *nggCoreElement
-        width="24"
-        height="24"
-      ></gds-icon-cross-small>
-    </button>
-  </header>
-  <section class="modal-dialog__body" [attr.id]="dialogBodyId">
-    <div [innerHtml]="content"></div>
-    <ng-content></ng-content>
-  </section>
-  <footer class="modal-dialog__actions">
-    <button
-      class="danger"
-      type="reset"
-      [attr.data-thook]="'dialog-' + (_buttons?.negative || 'negative')"
-      (click)="onAction($event, 'negative')"
-      (keydown.enter)="onAction($event, 'negative')"
-      *ngIf="_buttons && _buttons.negative"
-    >
-      {{ t(_buttons.negative) }}
-    </button>
-    <button
-      class="secondary"
-      type="button"
-      [attr.data-thook]="'dialog-' + (_buttons?.neutral || 'neutral')"
-      (click)="onAction($event, 'neutral')"
-      (keydown.enter)="onAction($event, 'neutral')"
-      *ngIf="_buttons && _buttons.neutral"
-    >
-      {{ t(_buttons.neutral) }}
-    </button>
-    <button
-      class="submit"
-      type="submit"
-      [attr.data-thook]="'dialog-' + (_buttons?.positive || 'positive')"
-      (click)="onAction($event, 'positive')"
-      (keydown.enter)="onAction($event, 'positive')"
-      *ngIf="_buttons && _buttons.positive"
-    >
-      {{ t(_buttons.positive) }}
-    </button>
-  </footer>
-</div>
-
-<div class="sdv-modal-backdrop"></div>
+      <header class="modal-dialog__heading">
+        <h3 [attr.id]="dialogTitleId">{{ t(heading || title || '') }}</h3>
+        <button
+          data-thook="dialog-close"
+          (click)="onAction($event, 'close')"
+          (keydown.enter)="onAction($event, 'close')"
+          [attr.aria-label]="closeButtonAriaLabel"
+          class="nggv-modal-slideout__close"
+        >
+          <i></i>
+        </button>
+      </header>
+      <section class="modal-dialog__body" [attr.id]="dialogBodyId">
+        <div [innerHtml]="content"></div>
+        <ng-content></ng-content>
+      </section>
+      <footer class="modal-dialog__actions">
+        <button
+          class="danger"
+          type="reset"
+          [attr.data-thook]="'dialog-' + (_buttons?.negative || 'negative')"
+          (click)="onAction($event, 'negative')"
+          (keydown.enter)="onAction($event, 'negative')"
+          *ngIf="_buttons && _buttons.negative"
+        >
+          {{ t(_buttons.negative) }}
+        </button>
+        <button
+          class="secondary"
+          type="button"
+          [attr.data-thook]="'dialog-' + (_buttons?.neutral || 'neutral')"
+          (click)="onAction($event, 'neutral')"
+          (keydown.enter)="onAction($event, 'neutral')"
+          *ngIf="_buttons && _buttons.neutral"
+        >
+          {{ t(_buttons.neutral) }}
+        </button>
+        <button
+          class="submit"
+          type="submit"
+          [attr.data-thook]="'dialog-' + (_buttons?.positive || 'positive')"
+          (click)="onAction($event, 'positive')"
+          (keydown.enter)="onAction($event, 'positive')"
+          *ngIf="_buttons && _buttons.positive"
+        >
+          {{ t(_buttons.positive) }}
+        </button>
+      </footer>
+    </div>
+    <div class="nggv-backdrop"></div>
+  </div>
+</ng-container>
