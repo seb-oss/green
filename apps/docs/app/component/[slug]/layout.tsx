@@ -10,7 +10,7 @@ import {
   GdsBadge,
   GdsButton,
   GdsCard,
-  GdsContainer,
+  GdsDiv,
   GdsFlex,
   GdsGrid,
   GdsInput,
@@ -163,7 +163,7 @@ export default function ComponentLayout({
         margin="0 auto"
         gap="xl"
       >
-        <GdsContainer position="sticky" inset="58px 0 0 0">
+        <GdsDiv position="sticky" inset="58px 0 0 0">
           <GdsFlex gap="l" flex-direction="column">
             <GdsInput
               clearable
@@ -174,7 +174,7 @@ export default function ComponentLayout({
               <IconMagnifyingGlass height={24} slot="lead" />
             </GdsInput>
           </GdsFlex>
-        </GdsContainer>
+        </GdsDiv>
         <GdsGrid columns="5" gap="m">
           {filteredIcons.map((iconName) => {
             const IconComponent = (ICONS as any)[iconName]
@@ -271,7 +271,7 @@ export default function ComponentLayout({
         </GdsFlex>
         <GdsFlex gap="l">
           <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <GdsCard>
+            <GdsCard variant="primary">
               <GdsFlex
                 gap="xl"
                 align-items="center"

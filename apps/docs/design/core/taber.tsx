@@ -5,7 +5,7 @@ import { Link, useTransitionRouter } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import {
   GdsCard,
-  GdsContainer,
+  GdsDiv,
   GdsFlex,
   GdsMenuButton,
   GdsText,
@@ -40,6 +40,7 @@ export default function Taber({ component, links }: TaberProps) {
       display="none; m{flex}"
       border-radius="xs"
       border="0"
+      variant="primary"
     >
       <GdsFlex
         justify-content="space-between"
@@ -98,7 +99,7 @@ export default function Taber({ component, links }: TaberProps) {
           </GdsFlex>
         </Link>
       </GdsFlex>
-      <GdsContainer display="block; m{none}" border="0 0 4xs/primary 0">
+      <GdsDiv display="block; m{none}" border="0 0 4xs/primary 0">
         <Accordion>
           <AccordionItem label="Navigation" labelElementLevel={3}>
             <GdsFlex flex-direction="column" gap="m" padding="0 0 xl 0">
@@ -113,7 +114,7 @@ export default function Taber({ component, links }: TaberProps) {
             </GdsFlex>
           </AccordionItem>
         </Accordion>
-      </GdsContainer>
+      </GdsDiv>
     </GdsCard>
   )
 }
