@@ -8,7 +8,7 @@ import '../flex/flex'
 
 const meta: Meta = {
   title: 'Components/Radio',
-  component: 'gds-radio',
+  component: 'gds-radio-group',
   tags: ['autodocs'],
 }
 
@@ -21,6 +21,10 @@ const DefaultParams: Story = {
       source: { format: true, type: 'dynamic' },
     },
     controls: { expanded: true },
+    args: {
+      label: 'Label',
+      supportingText: 'Label support text.',
+    },
   },
 }
 
@@ -30,6 +34,14 @@ const DefaultParams: Story = {
 export const RadioButton: Story = {
   ...DefaultParams,
   name: 'radio',
+  args: {
+    label: 'Label',
+    supportingText: 'Label support text.',
+    innerHTML: `
+    <gds-radio label="Radio Option 1" supporting-text="Supporting text" value="1"></gds-radio>
+    <gds-radio label="Radio Option 2" supporting-text="Supporting text" value="2"></gds-radio>
+    <gds-radio label="Radio Option 3" supporting-text="Supporting text" value="3"></gds-radio>`,
+  },
 }
 
 /**
