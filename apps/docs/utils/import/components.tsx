@@ -287,3 +287,20 @@ export const GdsTheme = dynamic(
     ssr: false,
   },
 )
+
+export const GdsRadio = dynamic(
+  () => import('@sebgroup/green-react/core/radio').then((mod) => mod.GdsRadio),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsRadioGroup = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/radio-group').then(
+      (mod) => mod.GdsRadioGroup,
+    ),
+  {
+    ssr: false,
+  },
+)
