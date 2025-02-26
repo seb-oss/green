@@ -35,6 +35,10 @@ const style = css`
       border-radius: 0.5rem;
     }
 
+    :host([nonmodal]) dialog {
+      z-index: 1;
+    }
+
     @media (max-width: 767px) {
       dialog.use-modal-in-mobile {
         border-radius: 1rem 1rem 0 0;

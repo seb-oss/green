@@ -290,7 +290,6 @@ export const Combobox: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-dropdown label="Favorite sci-fi tech" combobox>
-      <gds-option value="" isplaceholder></gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
       <gds-option value="nanotechnology">Nanotechnology</gds-option>
