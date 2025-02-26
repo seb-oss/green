@@ -125,7 +125,7 @@ export class GdsPopover extends GdsElement {
    * Whether the popover is nonmodal. When true, the popover will not trap focus and other elements
    * on the page will still be interactable while the popover is open.
    */
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   nonmodal = false
 
   /**
