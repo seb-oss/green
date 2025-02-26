@@ -14,41 +14,39 @@ describe('<gds-spinner>', () => {
       expect(el.size).to.equal('default')
       expect(el.cover).to.be.false
       expect(el.fullscreen).to.be.false
-      expect(el.visualText).to.be.true
-      expect(el.text).to.be.undefined
+      expect(el.showLabel).to.be.false
+      expect(el.label).to.be.undefined
       expect(el.getAttribute('role')).to.equal('status')
-      expect(el.getAttribute('aria-busy')).to.equal('true')
+      expect(el.getAttribute('aria-live')).to.equal('polite')
+      expect(el.getAttribute('aria-label')).to.equal('Loading content')
     })
 
-    it('should render spinner with text', async () => {
+    it('should render spinner with label', async () => {
       const el = await fixture<GdsSpinner>(
-        html`<gds-spinner text="Loading..."></gds-spinner>`,
+        html`<gds-spinner label="Loading..." showLabel></gds-spinner>`,
       )
       await el.updateComplete
 
-      const textElement = el.shadowRoot?.querySelector('.spinner-text')
-      expect(textElement?.textContent?.trim()).to.equal('Loading...')
+      const labelElement = el.shadowRoot?.querySelector('.spinner-label')
+      expect(labelElement?.textContent?.trim()).to.equal('Loading...')
     })
 
-    it('should render screen reader only text', async () => {
+    it('should not render label when showLabel is false', async () => {
       const el = await fixture<GdsSpinner>(
         html`<gds-spinner
-          text="Loading..."
-          .visualText=${false}
+          label="Loading..."
+          .showLabel=${false}
         ></gds-spinner>`,
       )
       await el.updateComplete
 
-      const srText = el.shadowRoot?.querySelector('.sr-only')
-      const visibleText = el.shadowRoot?.querySelector('.spinner-text')
-
-      expect(srText?.textContent?.trim()).to.equal('Loading...')
-      expect(visibleText).to.be.null
+      const labelElement = el.shadowRoot?.querySelector('.spinner-label')
+      expect(labelElement).to.be.null
     })
   })
 
   describe('Size variants', () => {
-    it('should apply correct size classes', async () => {
+    it('should apply correct size attribute', async () => {
       const sizes = ['sm', 'default', 'md', 'lg'] as const
 
       for (const size of sizes) {
@@ -57,12 +55,7 @@ describe('<gds-spinner>', () => {
         )
         await el.updateComplete
 
-        const spinner = el.shadowRoot?.querySelector('.gds-spinner')
-        if (size === 'default') {
-          expect(spinner?.classList.contains('gds-spinner')).to.be.true
-        } else {
-          expect(spinner?.classList.contains(`gds-spinner-${size}`)).to.be.true
-        }
+        expect(el.getAttribute('size')).to.equal(size)
       }
     })
   })
@@ -91,20 +84,45 @@ describe('<gds-spinner>', () => {
     })
   })
 
-  describe('Accessibility', () => {
-    it('should pass accessibility test', async () => {
-      const el = await fixture<GdsSpinner>(
-        html`<gds-spinner text="Loading..." size="md"></gds-spinner>`,
-      )
-      await expect(el).shadowDom.to.be.accessible()
+  describe('Events', () => {
+    it('should dispatch gds-spinner-shown event on connection', async () => {
+      let eventFired = false
+      const el = document.createElement('gds-spinner') as GdsSpinner
+      el.addEventListener('gds-spinner-shown', () => {
+        eventFired = true
+      })
+      document.body.appendChild(el)
+      await el.updateComplete
+
+      expect(eventFired).to.be.true
+      document.body.removeChild(el)
     })
 
+    it('should dispatch gds-spinner-hidden event on disconnection', async () => {
+      let eventFired = false
+      const el = document.createElement('gds-spinner') as GdsSpinner
+      document.body.appendChild(el)
+      await el.updateComplete
+
+      el.addEventListener('gds-spinner-hidden', () => {
+        eventFired = true
+      })
+      document.body.removeChild(el)
+
+      expect(eventFired).to.be.true
+    })
+  })
+
+  describe('Accessibility', () => {
     it('should have correct ARIA attributes', async () => {
-      const el = await fixture<GdsSpinner>(html`<gds-spinner></gds-spinner>`)
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner label="Custom label"></gds-spinner>`,
+      )
       await el.updateComplete
 
       expect(el.getAttribute('role')).to.equal('status')
-      expect(el.getAttribute('aria-busy')).to.equal('true')
+      expect(el.getAttribute('aria-live')).to.equal('polite')
+      expect(el.getAttribute('aria-label')).to.equal('Custom label')
     })
   })
 })

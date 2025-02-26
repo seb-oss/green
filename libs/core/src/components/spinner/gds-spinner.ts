@@ -1,173 +1,225 @@
 /**
- * @fileoverview GDS Spinner Component - A loading indicator with accessibility support
- * @module gds-spinner
+ * GDS Spinner Component
+ *
+ * A loading indicator with accessibility support and various display modes.
+ *
+ * @element gds-spinner
+ *
+ * @example Basic usage
+ * ```html
+ * <gds-spinner></gds-spinner>
+ * ```
+ *
+ * @example With label
+ * ```html
+ * <gds-spinner label="Loading..." showLabel></gds-spinner>
+ * ```
+ *
+ * @example Different sizes
+ * ```html
+ * <gds-spinner size="sm"></gds-spinner>
+ * <gds-spinner size="md"></gds-spinner>
+ * <gds-spinner size="lg"></gds-spinner>
+ * ```
+ *
+ * @example Cover container
+ * ```html
+ * <div style="position: relative;">
+ *   <!-- Container content -->
+ *   <gds-spinner cover></gds-spinner>
+ * </div>
+ * ```
+ *
+ * @example Fullscreen
+ * ```html
+ * <gds-spinner fullscreen label="Loading application..." showLabel></gds-spinner>
+ * ```
+ *
+ * @fires gds-spinner-shown - When the spinner is connected and visible
+ * @fires gds-spinner-hidden - When the spinner is disconnected and hidden
  */
 
-import { css } from 'lit'
-import { property } from 'lit/decorators.js'
+import { PropertyValues } from 'lit'
+import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
 
-import { GdsElement } from '../../gds-element'
-import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
+import { GdsElement } from '../../gds-element.js'
+import { TransitionalStyles } from '../../transitional-styles.js'
 import {
   gdsCustomElement,
   html,
-} from '../../utils/helpers/custom-element-scoping'
-import { styles } from './gds-spinner.styles'
+} from '../../utils/helpers/custom-element-scoping.js'
+import { styles } from './gds-spinner.styles.js'
+import {
+  GdsSpinnerProperties,
+  SpinnerConfig,
+  SpinnerSize,
+} from './gds-spinner.types'
 
-/**
- * GdsSpinner Component
- * A loading indicator web component that supports various sizes and display modes.
- *
- * @extends {GdsElement}
- *
- * @example
- * ```html
- * <!-- Basic usage -->
- * <gds-spinner size="md" text="Loading..."></gds-spinner>
- *
- * <!-- Screen reader only text -->
- * <gds-spinner size="md" text="Loading..." .visualText=${false}></gds-spinner>
- *
- * <!-- Cover container -->
- * <gds-spinner size="md" text="Loading..." cover></gds-spinner>
- * ```
- *
- * @csspart spinner - The spinning circle element
- * @csspart text - The loading text element
- *
- * @fires gds-element-disconnected - Fired when the element is removed from the DOM
- */
 @gdsCustomElement('gds-spinner')
 export class GdsSpinner extends GdsElement {
   /**
-   * Component styles combining design tokens, host styles, and component-specific styles
-   * @type {Array<CSSStyleSheet>}
+   * Default configuration values for the spinner
    */
-  static styles = [
-    tokens,
-    css`
-      :host {
-        display: block;
-      }
-    `,
-    styles,
-  ]
+  static readonly CONFIG: SpinnerConfig = {
+    defaultLabel: 'Loading content',
+    fullscreenZIndex: 9999,
+  }
+
+  /** All styles are defined in the external styles file */
+  static styles = styles
 
   /**
-   * Loading text to be displayed. Can be shown visually or for screen readers only.
-   * @type {string|undefined}
+   * The text to display as a label for the spinner
    */
-  @property({ type: String })
-  text?: string
+  @property({ type: String }) label?: string
 
   /**
-   * Controls text visibility mode.
-   * When true, text is visible and announced to screen readers.
-   * When false, text is only announced to screen readers.
-   * @type {boolean}
-   * @default true
+   * Whether to display the label text visually
+   * If false, the label is still available for screen readers
    */
-  @property({ type: Boolean })
-  visualText: boolean = true
+  @property({ type: Boolean, reflect: true }) showLabel = false
 
   /**
-   * When true, adds a semi-transparent backdrop over the container.
-   * @type {boolean}
-   * @default false
+   * When true, covers the parent container with a semi-transparent backdrop
+   * Parent must have position: relative
    */
-  @property({ type: Boolean })
-  cover: boolean = false
+  @property({ type: Boolean, reflect: true }) cover = false
 
   /**
-   * When true, spinner covers the entire viewport with backdrop.
-   * @type {boolean}
-   * @default false
+   * When true, covers the entire viewport with a fixed position backdrop
    */
-  @property({ type: Boolean })
-  fullscreen: boolean = false
+  @property({ type: Boolean, reflect: true }) fullscreen = false
 
   /**
-   * Controls the size of the spinner.
-   * @type {'default'|'sm'|'md'|'lg'}
-   * @default 'default'
+   * Size variant of the spinner
    */
-  @property({ type: String })
-  size: 'default' | 'md' | 'lg' | 'sm' = 'default'
+  @property({ type: String, reflect: true }) size: SpinnerSize = 'default'
 
   /**
-   * Lifecycle method called when component is added to DOM.
-   * Sets up accessibility attributes and applies transition styles.
-   * @return {void}
+   * Whether the spinner is currently animating
+   * @private
+   */
+  @state()
+  private _isAnimating = false
+
+  /**
+   * Stores original document styles before applying fullscreen mode
+   * @private
+   */
+  #originalStyles = {
+    overflow: 'visible',
+    overscrollBehavior: 'auto',
+  }
+
+  /**
+   * Sets up accessibility attributes and initializes the spinner
    */
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'status')
-    this.setAttribute('aria-busy', 'true')
+    this.setAttribute('aria-live', 'polite')
+    this.#updateAriaLabel()
+    this._isAnimating = true
+    this.dispatchEvent(new CustomEvent('gds-spinner-shown'))
     TransitionalStyles.instance.apply(this, 'gds-spinner')
   }
 
   /**
-   * Generates CSS classes for the wrapper element based on component state.
-   * @private
-   * @return {string} Space-separated class names
+   * Cleans up document styles if fullscreen mode was used
    */
-  private _getWrapperClasses(): string {
-    const classes = ['gds-spinner-wrapper']
-
+  disconnectedCallback(): void {
     if (this.fullscreen) {
-      classes.push('gds-spinner-fullscreen')
+      this.#toggleRootStyles(false)
     }
-
-    if (this.cover) {
-      classes.push('gds-spinner-cover')
-    }
-
-    if (this.cover || this.fullscreen) {
-      classes.push('gds-spinner-backdrop')
-    }
-
-    return classes.join(' ')
+    this._isAnimating = false
+    this.dispatchEvent(new CustomEvent('gds-spinner-hidden'))
+    super.disconnectedCallback()
   }
 
   /**
-   * Generates CSS classes for the spinner element based on size.
+   * Updates the component when properties change
+   */
+  protected updated(
+    changedProperties: PropertyValues<GdsSpinnerProperties>,
+  ): void {
+    super.updated(changedProperties)
+    if (changedProperties.has('label')) {
+      this.#updateAriaLabel()
+    }
+    if (changedProperties.has('fullscreen')) {
+      this.#toggleRootStyles(this.fullscreen)
+    }
+  }
+
+  /**
+   * Updates the aria-label attribute based on the label property
    * @private
-   * @return {string} Space-separated class names
    */
-  private _getSpinnerClasses(): string {
-    return `gds-spinner ${this.size ? `gds-spinner-${this.size}` : ''}`
+  #updateAriaLabel(): void {
+    this.setAttribute(
+      'aria-label',
+      this.label || GdsSpinner.CONFIG.defaultLabel,
+    )
   }
 
   /**
-   * Renders text content based on visibility preference.
-   * @private
-   * @return {TemplateResult|null} The text element template or null if no text
+   * Renders the spinner component
    */
-  private _renderText() {
-    if (!this.text) return null
-
-    if (this.visualText) {
-      return html`<span class="spinner-text" aria-live="polite"
-        >${this.text}</span
-      >`
-    } else {
-      return html`<span class="sr-only" aria-live="polite">${this.text}</span>`
-    }
-  }
-
-  /**
-   * Renders the spinner component template.
-   * @return {TemplateResult} The component's template
-   */
-  render() {
+  protected render() {
     return html`
-      <div role="status" aria-live="polite">
-        <div class=${this._getWrapperClasses()}>
-          <span class=${this._getSpinnerClasses()}></span>
-          ${this._renderText()}
-        </div>
+      <div part="wrapper" class=${classMap(this.#getWrapperClasses())}>
+        <span part="spinner" class="gds-spinner"></span>
+        ${when(
+          this.label && this.showLabel,
+          () =>
+            html`<span part="label" class="spinner-label">${this.label}</span>`,
+          () => null,
+        )}
       </div>
     `
+  }
+
+  /**
+   * Generates CSS classes for the wrapper element based on component state
+   * @private
+   */
+  #getWrapperClasses() {
+    return {
+      'gds-spinner-wrapper': true,
+      'gds-spinner-fullscreen': this.fullscreen,
+      'gds-spinner-cover': this.cover,
+      'gds-spinner-backdrop': this.cover || this.fullscreen,
+      'gds-spinner-animating': this._isAnimating,
+    }
+  }
+
+  /**
+   * Toggles document root styles when in fullscreen mode
+   * Prevents scrolling of the document when fullscreen overlay is active
+   * @private
+   */
+  #toggleRootStyles(isFullscreen: boolean) {
+    const { style } = document.documentElement
+    if (isFullscreen) {
+      // Save original styles before modifying
+      this.#originalStyles = {
+        overflow: style.overflow,
+        overscrollBehavior: style.overscrollBehavior,
+      }
+      style.overflow = 'hidden'
+      style.overscrollBehavior = 'none'
+    } else {
+      // Restore original styles
+      style.overflow = this.#originalStyles.overflow
+      style.overscrollBehavior = this.#originalStyles.overscrollBehavior
+    }
+  }
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    'gds-spinner': GdsSpinner
   }
 }
