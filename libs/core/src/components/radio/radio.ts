@@ -7,7 +7,7 @@ import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { styles } from './radio.styles'
 
-import '../../primitives/field-label'
+import '../../primitives/selection-controls'
 
 /**
  * @element gds-radio
@@ -59,12 +59,13 @@ export class GdsRadio extends GdsElement {
     }
 
     return html`
-      <gds-field-label
-        support-text=${this.supportingText}
+      <gds-selection-field-label
+        supporting-text=${this.supportingText}
         label=${this.label}
         @click=${this._handleClick}
         aria-disabled=${this.disabled}
         aria-checked=${this.checked}
+        type="radio"
       >
         <div
           tabindex="${this.disabled ? '-1' : '0'}"
@@ -80,7 +81,7 @@ export class GdsRadio extends GdsElement {
           <div class="dot"></div>
           <slot></slot>
         </div>
-      </gds-field-label>
+      </gds-selection-field-label>
     `
   }
 }

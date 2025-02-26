@@ -7,7 +7,7 @@ import { styles } from './radio.styles'
 
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
-import '../../primitives/field-label'
+import '../../primitives/selection-controls'
 
 /**
  * @element gds-radio-group
@@ -40,7 +40,6 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   connectedCallback() {
     super.connectedCallback()
-    console.debug('[RadioGroup] Connected')
     this.updateComplete.then(() => this._syncRadioStates())
   }
 

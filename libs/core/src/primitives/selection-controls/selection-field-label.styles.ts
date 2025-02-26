@@ -16,12 +16,12 @@ export const styles = css`
       box-sizing: border-box;
     }
 
-    .field-label-container {
+    .selection-field-container {
       display: flex;
       gap: var(--gds-spacing-m);
     }
 
-    .field-label {
+    .selection-field-label {
       display: flex;
       flex-direction: column;
       gap: var(--gds-spacing-xxs);
