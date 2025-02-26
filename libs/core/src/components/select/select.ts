@@ -97,6 +97,8 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
       multiple: this.multiple,
     }
 
+    this.selectElement && (this.selectElement.disabled = this.disabled)
+
     return html`
       <gds-form-control-header class="size-${this.size}">
         <label for="select" slot="label" id="label-text">${this.label}</label>
@@ -141,16 +143,21 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     const cloned = Array.from(this.children)
       .filter((n) => n.nodeName === 'SELECT')
       .map((node: Node) => {
-        const clone = node.cloneNode(true)
+        const clone = node.cloneNode(true) as HTMLSelectElement
         clone.addEventListener('change', this.#handleSelectElementChange)
         clone.addEventListener('input', this.#handleSelectElementChange)
-        ;(clone as HTMLElement).setAttribute(
+        clone.setAttribute(
           'aria-describedby',
           'supporting-text extended-supporting-text sub-label message',
         )
-        ;(clone as HTMLElement).setAttribute('id', 'select')
-        if (!this.#isValueInitialized)
-          this.value = (clone as HTMLSelectElement).value as ValueT
+        clone.setAttribute('id', 'select')
+        clone.disabled = this.disabled
+
+        // If this is the initial render, set the value from the select element
+        // Otherwise we set the select element value from the component value, so that it still reflects the value prop in case it was rerendered
+        if (!this.#isValueInitialized) this.value = clone.value as ValueT
+        else clone.value = this.value as string
+
         return clone
       })
 
