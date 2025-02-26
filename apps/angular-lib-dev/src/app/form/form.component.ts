@@ -21,6 +21,8 @@ import '@sebgroup/green-core/components/text/index.js'
 import '@sebgroup/green-core/components/theme/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 import '@sebgroup/green-core/components/select/index.js'
+import '@sebgroup/green-core/components/radio/index.js'
+import '@sebgroup/green-core/components/radio/radio-group.js'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -47,6 +49,7 @@ export class FormComponent {
     description: ['', Validators.required],
     dropdown: ['', Validators.required],
     select: ['', Validators.required],
+    radio: ['', Validators.required],
     date: [undefined as Date | undefined, Validators.required],
   })
 
