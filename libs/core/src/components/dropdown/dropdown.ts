@@ -366,6 +366,7 @@ export class GdsDropdown<ValueT = any>
         }}
         @input=${(e: InputEvent) => {
           this.value = (e.target as HTMLInputElement).value as any
+          this.#dispatchInputEvent()
           this.#handleSearchFieldInput(e)
           this.#dispatchUISateEvent(true, 'show') && (this.open = true)
         }}
@@ -374,6 +375,9 @@ export class GdsDropdown<ValueT = any>
             e.preventDefault()
             this.#dispatchUISateEvent(true, 'show') && (this.open = true)
             this._elListbox.then((listbox) => listbox.focus())
+          }
+          if (e.key === 'Enter') {
+            this.#dispatchChangeEvent()
           }
         }}
       />
@@ -427,8 +431,9 @@ export class GdsDropdown<ValueT = any>
       if (this.placeholder) this.value = this.placeholder.value
       else this.value = this.options[0]?.value
     }
-    // Make sure the value is one of the options, unless we have a placeholder
+    // Make sure the value is one of the options, unless we have a placeholder or is in combobox mode
     else if (
+      !this.combobox &&
       !this.placeholder &&
       this.options.find((o) =>
         this.compareWith(o.value, this.value as ValueT),
@@ -560,21 +565,28 @@ export class GdsDropdown<ValueT = any>
         }
       }
 
-      this.dispatchEvent(
-        new Event('input', {
-          bubbles: true,
-          composed: true,
-        }),
-      )
-
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.#dispatchInputEvent()
+      this.#dispatchChangeEvent()
     })
+  }
+
+  #dispatchInputEvent = () => {
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+  }
+
+  #dispatchChangeEvent = () => {
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   /**

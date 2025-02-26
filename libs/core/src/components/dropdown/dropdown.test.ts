@@ -767,12 +767,12 @@ describe('<gds-dropdown combobox>', () => {
       </gds-dropdown>
     `)
 
-    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+    const comboInputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
       'input[role=combobox]',
     )
 
     await expect(el.combobox).to.be.true
-    await expect(comboInnputEl).to.not.be.null
+    await expect(comboInputEl).to.not.be.null
   })
 
   it('should update value on input', async () => {
@@ -784,14 +784,37 @@ describe('<gds-dropdown combobox>', () => {
       </gds-dropdown>
     `)
 
-    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+    const comboInputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
       'input[role=combobox]',
     )
 
-    comboInnputEl!.value = 'v2'
-    comboInnputEl!.dispatchEvent(new Event('input'))
+    comboInputEl!.value = 'v2'
+    comboInputEl!.dispatchEvent(new Event('input'))
 
     await expect(el.value).to.equal('v2')
+  })
+
+  it('should emit `input` event on input', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown combobox>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2">Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+
+    const comboInputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+      'input[role=combobox]',
+    )
+
+    const inputHandler = sinon.spy()
+    el.addEventListener('input', inputHandler)
+
+    comboInputEl!.value = 'v2'
+    comboInputEl!.dispatchEvent(new Event('input'))
+
+    await waitUntil(() => inputHandler.calledOnce)
+    await expect(inputHandler).to.have.been.calledOnce
   })
 
   it('should update displayValue on input', async () => {
@@ -803,12 +826,12 @@ describe('<gds-dropdown combobox>', () => {
       </gds-dropdown>
     `)
 
-    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+    const comboInputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
       'input[role=combobox]',
     )
 
-    comboInnputEl!.value = 'v2'
-    comboInnputEl!.dispatchEvent(new Event('input'))
+    comboInputEl!.value = 'v2'
+    comboInputEl!.dispatchEvent(new Event('input'))
 
     await aTimeout(0)
 
@@ -824,12 +847,12 @@ describe('<gds-dropdown combobox>', () => {
       </gds-dropdown>
     `)
 
-    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+    const comboInputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
       'input[role=combobox]',
     )
 
-    comboInnputEl!.value = '2'
-    comboInnputEl!.dispatchEvent(new Event('input'))
+    comboInputEl!.value = '2'
+    comboInputEl!.dispatchEvent(new Event('input'))
 
     const options = el.querySelectorAll(
       `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
@@ -839,7 +862,7 @@ describe('<gds-dropdown combobox>', () => {
     await expect(options[0].textContent).to.equal('Option 2')
   })
 
-  it('should be possible to calcel the gds-filter-input event to customize filtering', async () => {
+  it('should be possible to cancel the gds-filter-input event to customize filtering', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown combobox open>
         <gds-option>Option 1</gds-option>
@@ -848,7 +871,7 @@ describe('<gds-dropdown combobox>', () => {
       </gds-dropdown>
     `)
 
-    const comboInnputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
+    const comboInputEl = el.shadowRoot!.querySelector<HTMLInputElement>(
       'input[role=combobox]',
     )
 
@@ -858,8 +881,8 @@ describe('<gds-dropdown combobox>', () => {
       el.options[1].parentElement!.removeChild(el.options[1])
     })
 
-    comboInnputEl!.value = '2'
-    comboInnputEl!.dispatchEvent(new Event('input'))
+    comboInputEl!.value = '2'
+    comboInputEl!.dispatchEvent(new Event('input'))
 
     await aTimeout(0)
 
