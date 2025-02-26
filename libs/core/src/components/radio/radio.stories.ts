@@ -49,27 +49,33 @@ export const States: Story = {
         </span>
         <gds-radio
           label="Radio Label"
+          value="1"
           supporting-text="Example support text"
         ></gds-radio>
         <gds-radio
           label="Radio Label"
+          value="2"
           supporting-text="Example support text"
         ></gds-radio>
         <gds-radio
-          selected
           label="Selected"
+          value="3"
           supporting-text="Example support text"
         ></gds-radio>
         <gds-radio
           label="Radio Label"
+          value="4"
           supporting-text="Example support text"
         ></gds-radio>
         <gds-radio
           label="Radio Label"
+          value="5"
+          disabled
           supporting-text="Example support text"
         ></gds-radio>
         <gds-radio
           label="Radio Label"
+          value="6"
           supporting-text="Example support text"
         ></gds-radio>
       </gds-radio-group>

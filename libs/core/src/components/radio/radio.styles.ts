@@ -82,7 +82,7 @@ export const styles = css`
         scale: 0.96;
       }
 
-      &.selected:active {
+      &[aria-checked='true']:active {
         .dot {
           box-shadow: inset 0 0 0 1px var(--radio-border-color-selected);
         }
@@ -102,12 +102,17 @@ export const styles = css`
         transition-duration: 248ms;
         will-change: box-shadow;
 
-        .selected &,
+        [aria-checked='true'] &,
         :active & {
           box-shadow: inset 0 0 0 var(--radio-border-width-selected)
             var(--radio-border-color-selected);
         }
       }
+    }
+
+    :host([disabled]) {
+      opacity: 0.4;
+      pointer-events: none;
     }
   }
 `

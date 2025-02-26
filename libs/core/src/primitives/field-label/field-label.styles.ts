@@ -31,9 +31,6 @@ export const styles = css`
         line-height: var(--gds-line-height-detail-m);
         font-weight: var(--gds-text-weight-book);
       }
-
-      .support-text {
-      }
     }
 
     @media (hover: hover) {
