@@ -78,7 +78,8 @@ export const styles = css`
         }
       }
 
-      &:active {
+      &:active,
+      :host(:active) & {
         background-color: var(--radio-bg-mix-active);
         scale: 0.96;
       }
