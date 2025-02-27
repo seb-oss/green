@@ -11,6 +11,7 @@ import '../../primitives/selection-controls'
 
 /**
  * @element gds-radio
+ * @status beta
  */
 @gdsCustomElement('gds-radio')
 export class GdsRadio extends GdsElement {
@@ -34,10 +35,20 @@ export class GdsRadio extends GdsElement {
   @state()
   private _isFocused = false
 
+  connectedCallback() {
+    super.connectedCallback()
+
+    // Perhaps warn when not wrapped in a radio group
+    // Or throw a validation error when not wrapped in a radio group
+
+    this.setAttribute('role', 'radio')
+  }
+
   private _handleClick() {
     if (this.disabled) return
 
     this.checked = true
+    this.focus()
     this.dispatchEvent(new Event('change', { bubbles: true }))
   }
 
@@ -50,14 +61,11 @@ export class GdsRadio extends GdsElement {
     }
   }
 
-  private _radioElement?: HTMLElement
-
-  firstUpdated() {
-    this._radioElement = this.renderRoot.querySelector('.radio') || undefined
-  }
-
   focus() {
-    this._radioElement?.focus()
+    const radioElement = this.renderRoot?.querySelector('.radio')
+    if (radioElement) {
+      ;(radioElement as HTMLElement).focus()
+    }
   }
 
   render() {
@@ -78,9 +86,9 @@ export class GdsRadio extends GdsElement {
         type="radio"
       >
         <div
-          tabindex="${this.disabled ? '-1' : '0'}"
           class=${classMap(classes)}
           role="radio"
+          tabindex="-1"
           aria-checked=${this.checked}
           aria-disabled=${this.disabled}
           @click=${this._handleClick}

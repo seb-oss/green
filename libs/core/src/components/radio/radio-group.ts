@@ -1,13 +1,12 @@
-// radio-group.ts
-import { property, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 
 import { gdsCustomElement, html } from '../../scoping'
+import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './radio.styles'
 
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
-import '../../primitives/selection-controls'
 
 /**
  * @element gds-radio-group
@@ -35,33 +34,52 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   })
   showExtendedSupportingText = false
 
-  @state()
-  private _validityAnchor?: HTMLElement
+  @query('.content')
+  private _contentElement!: HTMLElement
+
+  get radios() {
+    return Array.from(this.querySelectorAll('gds-radio'))
+  }
 
   connectedCallback() {
     super.connectedCallback()
-    this.updateComplete.then(() => this._syncRadioStates())
+    this.setAttribute('role', 'radiogroup')
+    this.updateComplete.then(() => {
+      this._syncRadioStates()
+      this._initializeFocusable()
+    })
+  }
+
+  private _initializeFocusable() {
+    // Make the group focusable
+    this._contentElement.setAttribute('tabindex', '0')
+
+    // Set all radios to not be focusable by tab
+    this.radios.forEach((radio) => {
+      radio.setAttribute('tabindex', '-1')
+    })
+  }
+
+  @watch('value')
+  private _handleValueChange() {
+    this._syncRadioStates()
+    this.checkValidity()
   }
 
   private _syncRadioStates() {
-    const radios = this.querySelectorAll('gds-radio')
-    radios.forEach((radio) => {
-      const radioElement = radio as any
-      radioElement.checked = radioElement.value === this.value
+    this.radios.forEach((radio: any) => {
+      radio.checked = radio.value === this.value
     })
-
-    if (radios.length > 0) {
-      this._validityAnchor = radios[0] as HTMLElement
-    }
   }
 
-  private _uncheckOtherRadios(selectedRadio: HTMLElement) {
-    const radios = this.querySelectorAll('gds-radio')
-    radios.forEach((radio) => {
-      if (radio !== selectedRadio) {
-        ;(radio as any).checked = false
-      }
-    })
+  private _handleFocus() {
+    // When group receives focus, focus the selected radio or first one
+    const selectedRadio = this.radios.find((radio: any) => radio.checked)
+    const radioToFocus = selectedRadio || this.radios[0]
+
+    if (radioToFocus) {
+      ;(radioToFocus as HTMLElement).focus()
+    }
   }
 
   private _handleRadioChange(e: Event) {
@@ -69,9 +87,8 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     if (radio.hasAttribute('value')) {
       const newValue = radio.getAttribute('value') as ValueT
 
-      this._uncheckOtherRadios(radio)
       this.value = newValue
-      this._validityAnchor = radio
+      this._syncRadioStates()
 
       this.dispatchEvent(
         new CustomEvent('change', {
@@ -84,52 +101,59 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   private _handleKeyDown(e: KeyboardEvent) {
-    const radios = Array.from(
-      this.querySelectorAll('gds-radio:not([disabled])'),
+    const radios = this.radios.filter(
+      (radio) => !radio.hasAttribute('disabled'),
     )
     if (radios.length === 0) return
 
-    // Find the currently focused radio
-    let currentIndex = radios.findIndex((radio) =>
-      radio.contains(document.activeElement),
+    let currentIndex = radios.findIndex(
+      (radio) => (radio as any).checked || document.activeElement === radio,
     )
+    if (currentIndex === -1) currentIndex = 0
 
+    let nextIndex: number
     switch (e.key) {
       case 'ArrowDown':
       case 'ArrowRight': {
         e.preventDefault()
-        currentIndex =
-          currentIndex === -1 ? 0 : (currentIndex + 1) % radios.length
-        const nextRadio = radios[currentIndex] as HTMLElement
-        nextRadio.focus()
+        nextIndex = (currentIndex + 1) % radios.length
         break
       }
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
-        currentIndex =
-          currentIndex === -1
-            ? radios.length - 1
-            : (currentIndex - 1 + radios.length) % radios.length
-        const nextRadio = radios[currentIndex] as HTMLElement
-        nextRadio.focus()
+        nextIndex = (currentIndex - 1 + radios.length) % radios.length
         break
       }
+      case 'Tab': {
+        // Let tab move focus out of the group
+        return
+      }
+      default:
+        return
     }
+
+    const nextRadio = radios[nextIndex] as any
+    nextRadio.checked = true
+    nextRadio.focus()
+    this.value = nextRadio.value
+
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+      }),
+    )
+    this.dispatchEvent(new Event('input', { bubbles: true }))
   }
 
   protected override _getValidityAnchor(): HTMLElement {
-    return this._validityAnchor || this
+    return this._contentElement || this
   }
 
   render() {
     return html`
-      <div
-        class="radio-group"
-        role="radiogroup"
-        aria-labelledby="group-label"
-        @keydown=${this._handleKeyDown}
-      >
+      <div class="radio-group">
         <gds-form-control-header class="size-${this.size}">
           <label id="group-label" for="input" slot="label">${this.label}</label>
           <span slot="supporting-text" id="supporting-text">
@@ -140,7 +164,11 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
             slot="extended-supporting-text"
           ></slot>
         </gds-form-control-header>
-        <div class="content">
+        <div
+          class="content"
+          @keydown=${this._handleKeyDown}
+          @focus=${this._handleFocus}
+        >
           <slot @change=${this._handleRadioChange}></slot>
         </div>
         <gds-form-control-footer

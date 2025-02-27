@@ -54,6 +54,7 @@ export const States: Story = {
       <gds-radio-group
         label="Group Label"
         supporting-text="Support text for the group"
+        value="4"
         show-extended-supporting-text
       >
         <span slot="extended-supporting-text">
