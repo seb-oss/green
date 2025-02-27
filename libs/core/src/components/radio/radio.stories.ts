@@ -33,7 +33,7 @@ const DefaultParams: Story = {
  */
 export const RadioButton: Story = {
   ...DefaultParams,
-  name: 'radio',
+  name: 'Radio',
   args: {
     label: 'Label',
     supportingText: 'Label support text.',
@@ -162,8 +162,8 @@ export const Disabled: Story = {
       <gds-radio-group
         label="Group Label"
         supporting-text="Support text for the group"
-        value="4"
         show-extended-supporting-text
+        value="4"
       >
         <span slot="extended-supporting-text">
           Extended supporting text for the group

@@ -152,7 +152,9 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   render() {
-    return html` ${this.#renderRadioGroupContents()} `
+    return html`<div class="radio-group">
+      ${this.#renderRadioGroupContents()}
+    </div>`
   }
 
   #renderRadioGroupContents() {
@@ -166,17 +168,17 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   #renderFieldControlHeader() {
-    if (this.label || this.supportingText) {
+    if (this.label) {
       return html` <gds-form-control-header class="size-${this.size}">
-      <label id="group-label" for="input" slot="label">${this.label}</label>
-      <span slot="supporting-text" id="supporting-text"></span>
-        ${this.supportingText}
-      </span>
-      <slot
-        name="extended-supporting-text"
-        slot="extended-supporting-text"
-      ></slot>
-    </gds-form-control-header>`
+        <label id="group-label" for="input" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+        <slot
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>`
     }
   }
 

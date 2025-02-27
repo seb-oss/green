@@ -36,13 +36,13 @@ export const styles = css`
     .radio-group {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: var(--gds-space-m);
 
       .content {
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: var(--gds-space-xs);
       }
     }
 
