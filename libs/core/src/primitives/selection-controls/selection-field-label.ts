@@ -91,6 +91,7 @@ export class GdsSelectionFieldLabel extends GdsElement {
       invalid: this.invalid,
       disabled: this.disabled,
       small: this.size === 'small',
+      'has-supporting-text': !!this.supportingText,
     }
 
     return html`
@@ -98,7 +99,7 @@ export class GdsSelectionFieldLabel extends GdsElement {
         <div class="control-slot">
           <slot></slot>
         </div>
-        <div class="label-content ${classMap(classes)}" part="_label-content">
+        <div class="${classMap(classes)}" part="_selection-field-label">
           <label class="primary-label" part="primary-label">
             ${this.label}
           </label>

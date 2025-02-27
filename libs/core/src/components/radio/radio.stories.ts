@@ -69,11 +69,7 @@ export const States: Story = {
           value="2"
           supporting-text="Example support text"
         ></gds-radio>
-        <gds-radio
-          label="Selected"
-          value="3"
-          supporting-text="Example support text"
-        ></gds-radio>
+        <gds-radio label="Selected" value="3"></gds-radio>
         <gds-radio
           label="Radio Label"
           value="4"
@@ -85,6 +81,7 @@ export const States: Story = {
           disabled
           supporting-text="Example support text"
         ></gds-radio>
+        <gds-radio label="Radio Label" value="5" disabled></gds-radio>
         <gds-radio
           label="Radio Label"
           value="6"
