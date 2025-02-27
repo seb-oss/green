@@ -83,13 +83,53 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     }
   }
 
+  private _handleKeyDown(e: KeyboardEvent) {
+    const radios = Array.from(
+      this.querySelectorAll('gds-radio:not([disabled])'),
+    )
+    if (radios.length === 0) return
+
+    // Find the currently focused radio
+    let currentIndex = radios.findIndex((radio) =>
+      radio.contains(document.activeElement),
+    )
+
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight': {
+        e.preventDefault()
+        currentIndex =
+          currentIndex === -1 ? 0 : (currentIndex + 1) % radios.length
+        const nextRadio = radios[currentIndex] as HTMLElement
+        nextRadio.focus()
+        break
+      }
+      case 'ArrowUp':
+      case 'ArrowLeft': {
+        e.preventDefault()
+        currentIndex =
+          currentIndex === -1
+            ? radios.length - 1
+            : (currentIndex - 1 + radios.length) % radios.length
+        const nextRadio = radios[currentIndex] as HTMLElement
+        nextRadio.focus()
+        break
+      }
+    }
+  }
+
   protected override _getValidityAnchor(): HTMLElement {
     return this._validityAnchor || this
   }
 
   render() {
     return html`
-      <div class="radio-group" role="radiogroup" aria-labelledby="group-label">
+      <div
+        class="radio-group"
+        role="radiogroup"
+        aria-labelledby="group-label"
+        @keydown=${this._handleKeyDown}
+      >
         <gds-form-control-header class="size-${this.size}">
           <label id="group-label" for="input" slot="label">${this.label}</label>
           <span slot="supporting-text" id="supporting-text">

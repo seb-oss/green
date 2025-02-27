@@ -50,6 +50,16 @@ export class GdsRadio extends GdsElement {
     }
   }
 
+  private _radioElement?: HTMLElement
+
+  firstUpdated() {
+    this._radioElement = this.renderRoot.querySelector('.radio') || undefined
+  }
+
+  focus() {
+    this._radioElement?.focus()
+  }
+
   render() {
     const classes = {
       radio: true,
