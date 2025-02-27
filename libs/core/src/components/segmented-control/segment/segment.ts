@@ -5,14 +5,14 @@ import { GdsElement } from '../../../gds-element'
 import { gdsCustomElement, html } from '../../../scoping'
 import { tokens } from '../../../tokens.style'
 import { TransitionalStyles } from '../../../transitional-styles'
-import { styleExpressionProperty } from '../../../utils/decorators/style-expression-property'
+import { withSizeXProps } from '../../../utils/mixins/declarative-layout-mixins'
 import style from './segment.style.css?inline'
 
 /**
  * @element gds-segment
  */
 @gdsCustomElement('gds-segment')
-export class GdsSegment<ValueT = any> extends GdsElement {
+export class GdsSegment<ValueT = any> extends withSizeXProps(GdsElement) {
   static styles = [...tokens, unsafeCSS(style)]
 
   /**
@@ -34,28 +34,6 @@ export class GdsSegment<ValueT = any> extends GdsElement {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
-
-  /**
-   * Controls the `min-width` css property of the segment.
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'min-width'?: string
-
-  /**
-   * Controls the `max-width` css property of the segment.
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => v,
-  })
-  'max-width'?: string
-
-  /**
-   * Controls the `width` css property of the segment.
-   */
-  @styleExpressionProperty()
-  width?: string
 
   /**
    * Whether the segment is currently visible.

@@ -17,6 +17,8 @@ import '../icon/icons/square-arrow-top-right.js'
 import '../icon/icons/arrow-right.js'
 import '../icon/icons/cain-link.js'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
+
 const meta: Meta = {
   title: 'Components/Link',
   component: 'gds-link',
@@ -24,6 +26,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-link'),
+  },
 }
 
 export default meta

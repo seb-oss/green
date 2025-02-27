@@ -1,11 +1,17 @@
 import { ReactNode } from 'react'
 
-export default function Inline({ children }: { children: ReactNode }) {
+export default function Inline({
+  children,
+  lang,
+}: {
+  children: ReactNode
+  lang: string
+}) {
   return (
-    <span className="inline">
-      {`"`}
+    <span className="inline" lang={lang}>
+      {!lang && `"`}
       {children}
-      {`"`}
+      {!lang && `"`}
     </span>
   )
 }

@@ -1,5 +1,79 @@
 # Changelog
 
+## 1.67.1
+
+### Patch Changes
+
+- e59a021: **Select:** Fix some state sync issues with the wrapped select element
+- d69a5ea: **Popover:** Fix stacking issue with nonmodal popovers
+- d69a5ea: **Dropdown:** Fix `combobox` when used without a placeholder option, and add missing event dispatch
+
+## 1.67.0
+
+### Minor Changes
+
+- 9180a71: **Popover:** `gds-ui-state` events can now be cancelled to gain more control over popover behavior
+- 9180a71: **Dropdown:** `gds-ui-state` event is now cancellable, and only fires on user-initiated changes
+- 5fc4d2e: **Localisation:** Add translations for `no`, `nl`, `it`, `fr`, `fi`, `de` and `da`
+
+### Patch Changes
+
+- 9180a71: **Dropdown:** Fix scrollIntoView behavior in the listbox so that headers won't be obscured
+- db5b77b: **Context Menu:** Fix focus issue. Closes #1993
+- 9180a71: **Dropdown:** Fix unexpected bubbeling of the `gds-ui-state` event
+
+## 1.66.1
+
+### Patch Changes
+
+- a715edc: **Declarative Layout**: Fix an incorrect import path the `styleExpressionProperty` decorator, fix default border props of gds-flex, add missing `order` property.
+
+## 1.66.0
+
+### Minor Changes
+
+- 4cdaf5f: **`gds-grid`**: `auto-columns` now support any CSS units. If no unit is specified, `px` is assumed.
+- 4cdaf5f: **Divider:** Add propagation of role attribute
+- 4cdaf5f: ### Declarative Layout updates
+
+  - Add `gds-div` as the base container for declarative layout
+  - Refactor implementation for easier reuse of properties in various components. Several component now support style expression properties for common things like margin, width and flex item properties.
+  - Colors now only support tokens from Green, no custom values except `transparent` and `currentColor`. This simplifies implementation and makes color properties more consistent.
+  - Color properties now always use `tokenName/transparency`, where transparency is optional.
+  - Set `box-sizing` to `border-box` by default
+  - Set `border-color` to `primary` by default
+  - `border` property now works like css shorthand border property, ie. `size style color`
+  - `border-style` property added for completeness
+
+  #### Removed
+
+  The following style expression properties have been removed:
+
+  - `pointer-events`
+  - `user-select`
+  - `cursor`
+  - `transform-style`
+  - `transition`
+  - `transition-behavior`
+  - `animation`
+
+  #### Deprecated
+
+  The followind elements have been deprecated
+
+  - `gds-container` is deprecated in favor of `gds-div`
+  - `gds-spacer` is deprecated in favor of `gds-div`
+
+### Patch Changes
+
+- 4cdaf5f: **Calendar:** Fix missing focus outline in 2023 style
+
+## 1.65.2
+
+### Patch Changes
+
+- d800fd8: **Field Base:** Add on main wrap gap to add space in select
+
 ## 1.65.1
 
 ### Patch Changes

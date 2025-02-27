@@ -6,12 +6,12 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsContainer } from '../container'
+import { GdsDiv } from '../div'
 
 /**
  *  A container for content representing a single entity. e.g. a contact, article, or task.
  *
- * `gds-card` inherits all properties from `gds-container`, but comes with some predefined defaults
+ * `gds-card` inherits all properties from `gds-div`, but comes with some predefined defaults
  * and a shortcut property for specifiying different card variants.
  *
  * @element gds-card
@@ -19,25 +19,31 @@ import { GdsContainer } from '../container'
  *
  */
 @gdsCustomElement('gds-card')
-export class GdsCard extends GdsContainer {
+export class GdsCard extends GdsDiv {
   static styles = [
     tokens,
     css`
       :host {
+        box-sizing: border-box;
         border-color: var(--_border-color);
         background-color: var(--_background-color);
         color: var(--_color);
+        border-width: var(--gds-space-4xs);
+        border-style: solid;
+        display: flex;
+        flex-direction: column;
       }
     `,
   ]
 
   /**
-   * Controls the box-shadow property.
+   * Style Expression Property for the `box-shadow` property.
    *
-   * These are the available values you can use to define shadow size
+   * Accepts shadow tokens from the design system.
    *
    * `xs`, `s`, `m`, `l`, `xl`
    *
+   * @deprecated Use the `box-shadow` property instead.
    */
   @styleExpressionProperty({
     property: 'box-shadow',
@@ -54,7 +60,6 @@ export class GdsCard extends GdsContainer {
    *
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => v,
     styleTemplate: function (_prop, v) {
       return `
       --_border-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
@@ -68,10 +73,9 @@ export class GdsCard extends GdsContainer {
   constructor() {
     super()
 
-    // Default values for cards
-    this.padding = 's; m{l}'
-    this['border-radius'] = 'xs; m{s}'
-    this['border-width'] = '4xs'
+    this.padding = 's;m{l}'
+    this['border-radius'] = 'xs;m{s}'
+    this['gap'] = 's;m{l}'
   }
 
   render() {

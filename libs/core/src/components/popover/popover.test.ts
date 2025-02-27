@@ -1,5 +1,10 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import {
+  aTimeout,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 
 import type {
@@ -137,6 +142,27 @@ describe('<gds-popover>', () => {
       await el.updateComplete
 
       expect(el.shadowRoot?.querySelector('dialog:modal')).to.be.null
+    })
+
+    it('should be possible to cancel the `gds-ui-state` event', async () => {
+      const el = await fixture<GdsPopover>(
+        html`<gds-popover open>
+          <div slot="trigger">Trigger</div>
+          <div>Content</div>
+        </gds-popover>`,
+      )
+      await el.updateComplete
+
+      el.addEventListener('gds-ui-state', (e: CustomEvent) => {
+        if (e.detail.reason === 'close') {
+          e.preventDefault()
+        }
+      })
+
+      await clickOnElement(document.body, 'right')
+      await aTimeout(100)
+
+      expect(el.open).to.be.true
     })
   })
 

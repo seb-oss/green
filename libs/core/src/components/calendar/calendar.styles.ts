@@ -39,7 +39,7 @@ const style = css`
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-space-2xs);
-        transition: all 0.2s;
+        transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
@@ -66,7 +66,8 @@ const style = css`
         }
 
         &:focus-visible {
-          outline-color: color-mix(in srgb, currentColor, transparent 50%);
+          outline-color: var(--gds-color-l2-content-primary);
+          outline-width: var(--gds-space-3xs);
         }
       }
 

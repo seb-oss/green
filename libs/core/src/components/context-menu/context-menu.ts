@@ -10,6 +10,10 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import styles from './context-menu.styles'
 
 import '../../primitives/menu'
@@ -30,7 +34,9 @@ import '../popover'
  */
 @gdsCustomElement('gds-context-menu')
 @localized()
-export class GdsContextMenu extends GdsElement {
+export class GdsContextMenu extends withMarginProps(
+  withLayoutChildProps(GdsElement),
+) {
   static styles = [styles]
 
   static shadowRootOptions: ShadowRootInit = {
@@ -114,6 +120,7 @@ export class GdsContextMenu extends GdsElement {
       </button>
       <gds-popover
         id="menu"
+        autofocus
         .open=${this.open}
         .triggerRef=${this.elTriggerBtn}
         .anchorRef=${this.elTriggerBtn}
