@@ -9,8 +9,6 @@ const style = css`
       flex-direction: column;
       width: 100%;
       gap: var(--gds-space-xs);
-      contain: layout;
-      isolation: isolate;
       --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
     }
 

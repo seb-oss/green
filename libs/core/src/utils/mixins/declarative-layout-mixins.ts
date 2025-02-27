@@ -276,6 +276,13 @@ export function withLayoutChildProps<T extends Constructor<GdsElement>>(
      */
     @styleExpressionProperty()
     flex?: string
+
+    /**
+     * Style Expression Property that controls the `order` property.
+     * Supports all valid CSS `order` values.
+     */
+    @styleExpressionProperty()
+    order?: string
   }
 
   return LayoutChildPropsMixin as Constructor<LayoutChildProps> & T

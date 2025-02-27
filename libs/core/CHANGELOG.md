@@ -1,5 +1,33 @@
 # Changelog
 
+## 1.67.1
+
+### Patch Changes
+
+- e59a021: **Select:** Fix some state sync issues with the wrapped select element
+- d69a5ea: **Popover:** Fix stacking issue with nonmodal popovers
+- d69a5ea: **Dropdown:** Fix `combobox` when used without a placeholder option, and add missing event dispatch
+
+## 1.67.0
+
+### Minor Changes
+
+- 9180a71: **Popover:** `gds-ui-state` events can now be cancelled to gain more control over popover behavior
+- 9180a71: **Dropdown:** `gds-ui-state` event is now cancellable, and only fires on user-initiated changes
+- 5fc4d2e: **Localisation:** Add translations for `no`, `nl`, `it`, `fr`, `fi`, `de` and `da`
+
+### Patch Changes
+
+- 9180a71: **Dropdown:** Fix scrollIntoView behavior in the listbox so that headers won't be obscured
+- db5b77b: **Context Menu:** Fix focus issue. Closes #1993
+- 9180a71: **Dropdown:** Fix unexpected bubbeling of the `gds-ui-state` event
+
+## 1.66.1
+
+### Patch Changes
+
+- a715edc: **Declarative Layout**: Fix an incorrect import path the `styleExpressionProperty` decorator, fix default border props of gds-flex, add missing `order` property.
+
 ## 1.66.0
 
 ### Minor Changes
