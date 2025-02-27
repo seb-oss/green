@@ -152,31 +152,50 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   render() {
-    return html`
-      <div class="radio-group">
-        <gds-form-control-header class="size-${this.size}">
-          <label id="group-label" for="input" slot="label">${this.label}</label>
-          <span slot="supporting-text" id="supporting-text">
-            ${this.supportingText}
-          </span>
-          <slot
-            name="extended-supporting-text"
-            slot="extended-supporting-text"
-          ></slot>
-        </gds-form-control-header>
-        <div
-          class="content"
-          @keydown=${this._handleKeyDown}
-          @focus=${this._handleFocus}
-        >
-          <slot @change=${this._handleRadioChange}></slot>
-        </div>
-        <gds-form-control-footer
-          class="size-${this.size}"
-          .validationMessage=${this.invalid &&
-          (this.errorMessage || this.validationMessage)}
-        ></gds-form-control-footer>
-      </div>
-    `
+    return html` ${this.#renderRadioGroupContents()} `
+  }
+
+  #renderRadioGroupContents() {
+    const elements = [
+      this.#renderFieldControlHeader(),
+      this.#renderRadios(),
+      this.#renderFieldControlFooter(),
+    ]
+
+    return elements.map((element) => html`${element}`)
+  }
+
+  #renderFieldControlHeader() {
+    if (this.label || this.supportingText) {
+      return html` <gds-form-control-header class="size-${this.size}">
+      <label id="group-label" for="input" slot="label">${this.label}</label>
+      <span slot="supporting-text" id="supporting-text"></span>
+        ${this.supportingText}
+      </span>
+      <slot
+        name="extended-supporting-text"
+        slot="extended-supporting-text"
+      ></slot>
+    </gds-form-control-header>`
+    }
+  }
+
+  #renderRadios() {
+    return html` <div
+      class="content"
+      @keydown=${this._handleKeyDown}
+      @focus=${this._handleFocus}
+    >
+      <slot @change=${this._handleRadioChange}></slot>
+    </div>`
+  }
+
+  #renderFieldControlFooter() {
+    return html` <gds-form-control-footer
+      class="size-${this.size}"
+      .validationMessage=${this.invalid &&
+      (this.errorMessage || this.validationMessage)}
+    >
+    </gds-form-control-footer>`
   }
 }

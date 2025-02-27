@@ -92,3 +92,138 @@ export const States: Story = {
     </div>
   `,
 }
+
+/**
+ * TODO: Add documentation
+ */
+export const Validation: Story = {
+  ...DefaultParams,
+  name: 'Validation',
+  render: () => html`
+    <div class="radio-group">
+      <gds-radio-group
+        label="Group Label"
+        supporting-text="Support text for the group"
+        value="4"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Extended supporting text for the group
+        </span>
+        <gds-radio
+          label="Radio Label"
+          value="1"
+          supporting-text="Example support text"
+        ></gds-radio>
+        <gds-radio
+          label="Radio Label"
+          value="2"
+          supporting-text="Example support text"
+        ></gds-radio>
+      </gds-radio-group>
+    </div>
+  `,
+}
+
+export const Required: Story = {
+  ...DefaultParams,
+  name: 'Required',
+  render: () => html`
+    <div class="radio-group">
+      <gds-radio-group
+        label="Group Label"
+        supporting-text="Support text for the group"
+        value="4"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Extended supporting text for the group
+        </span>
+        <gds-radio
+          label="Radio Label"
+          value="1"
+          supporting-text="Example support text"
+        ></gds-radio>
+        <gds-radio
+          label="Radio Label"
+          value="2"
+          supporting-text="Example support text"
+        ></gds-radio>
+      </gds-radio-group>
+    </div>
+  `,
+}
+
+export const Disabled: Story = {
+  ...DefaultParams,
+  name: 'Disabled',
+  render: () => html`
+    <div class="radio-group">
+      <gds-radio-group
+        label="Group Label"
+        supporting-text="Support text for the group"
+        value="4"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Extended supporting text for the group
+        </span>
+        <gds-radio
+          label="Radio Label"
+          value="1"
+          supporting-text="Example support text"
+        ></gds-radio>
+        <gds-radio
+          label="Radio Label"
+          value="2"
+          supporting-text="Example support text"
+        ></gds-radio>
+      </gds-radio-group>
+    </div>
+  `,
+}
+
+export const Size: Story = {
+  ...DefaultParams,
+  name: 'Size',
+  render: () => html`
+    <div class="radio-group">
+      <gds-radio-group
+        label="Group Label"
+        supporting-text="Support text for the group"
+        value="4"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Extended supporting text for the group
+        </span>
+        <gds-radio
+          label="Radio Label"
+          value="1"
+          supporting-text="Example support text"
+        ></gds-radio>
+        <gds-radio
+          label="Radio Label"
+          value="2"
+          supporting-text="Example support text"
+        ></gds-radio>
+      </gds-radio-group>
+    </div>
+  `,
+}
+
+export const GroupLabel: Story = {
+  ...DefaultParams,
+  name: 'No Label on group',
+  render: () => html`
+    <div class="radio-group">
+      <gds-radio-group>
+        <span slot="extended-supporting-text">
+          Extended supporting text for the group
+        </span>
+        <gds-radio label="Radio Label" value="1"></gds-radio>
+        <gds-radio label="Radio Label" value="2"></gds-radio>
+      </gds-radio-group>
+    </div>
+  `,
+}
