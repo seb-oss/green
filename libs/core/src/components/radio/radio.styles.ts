@@ -43,6 +43,7 @@ export const styles = css`
         display: flex;
         flex-direction: column;
         gap: var(--gds-space-xs);
+        max-width: max-content;
       }
     }
 
