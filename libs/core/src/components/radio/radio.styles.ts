@@ -72,7 +72,8 @@ export const styles = css`
       }
 
       @media (hover: hover) {
-        &:hover {
+        &:hover,
+        :host(:hover) & {
           background-color: var(--radio-bg-mix);
         }
       }
