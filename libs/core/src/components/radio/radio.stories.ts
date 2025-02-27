@@ -89,6 +89,7 @@ export const States: Story = {
         <gds-radio
           label="Radio Label"
           value="6"
+          invalid
           supporting-text="Example support text"
         ></gds-radio>
       </gds-radio-group>

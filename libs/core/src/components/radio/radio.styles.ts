@@ -31,6 +31,7 @@ export const styles = css`
       --radio-border-width: var(--gds-space-4xs);
       --radio-border-width-selected: var(--gds-space-2xs);
       --radio-border-style: solid;
+      --radio-dot-background-color: var(--gds-color-l3-content-primary);
     }
 
     .radio-group {
@@ -99,7 +100,7 @@ export const styles = css`
         border: none;
         box-shadow: inset 0 0 0 var(--radio-border-width)
           var(--radio-border-color);
-        background-color: var(--gds-color-l3-content-primary);
+        background-color: var(--radio-dot-background-color);
         box-sizing: border-box;
         transition-property: box-shadow;
         transition-duration: 248ms;
@@ -124,6 +125,28 @@ export const styles = css`
       }
     }
 
-    /* Invalid styles */
+    /*
+    TODO:
+     - [ ] Invalid styles 
+     - [ ] Consider shuffling the logic to consolidate the styles
+      
+
+     */
+    :host([invalid]:not([checked])) {
+      --radio-border-color: var(--gds-color-l3-border-negative);
+      --radio-dot-background-color: var(
+        --gds-color-l3-background-negative-secondary
+      );
+      --radio-bg-mix: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-negative-secondary),
+        var(--gds-color-l3-states-negative-hover)
+      );
+      --radio-bg-mix-active: color-mix(
+        in srgb,
+        var(--gds-color-l3-background-negative-secondary),
+        var(--gds-color-l3-states-negative-pressed)
+      );
+    }
   }
 `
