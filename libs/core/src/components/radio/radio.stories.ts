@@ -5,6 +5,9 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './radio'
 import './radio-group'
 import '../flex/flex'
+import '../card/card'
+import '../text/text'
+import '../divider/divider'
 
 const meta: Meta = {
   title: 'Components/Radio',
@@ -188,26 +191,57 @@ export const Size: Story = {
   name: 'Size',
   render: () => html`
     <div class="radio-group">
-      <gds-radio-group
-        label="Group Label"
-        supporting-text="Support text for the group"
-        value="4"
-        show-extended-supporting-text
-      >
-        <span slot="extended-supporting-text">
-          Extended supporting text for the group
-        </span>
-        <gds-radio
-          label="Radio Label"
-          value="1"
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="2"
-          supporting-text="Example support text"
-        ></gds-radio>
-      </gds-radio-group>
+      <gds-flex max-width="640px" gap="xl" margin="0 auto">
+        <gds-card gap="s">
+          <gds-text tag="small">Size: Large(default)</gds-text>
+          <gds-divider opacity="0.1"></gds-divider>
+          <gds-radio-group
+            label="Group Label"
+            supporting-text="Support text for the group"
+            value="4"
+            show-extended-supporting-text
+          >
+            <span slot="extended-supporting-text">
+              Extended supporting text for the group
+            </span>
+            <gds-radio
+              label="Radio Label"
+              value="1"
+              supporting-text="Example support text"
+            ></gds-radio>
+            <gds-radio
+              label="Radio Label"
+              value="2"
+              supporting-text="Example support text"
+            ></gds-radio>
+          </gds-radio-group>
+        </gds-card>
+        <gds-card gap="s">
+          <gds-text tag="small">Size: small</gds-text>
+          <gds-divider opacity="0.1"></gds-divider>
+          <gds-radio-group
+            label="Group Label"
+            supporting-text="Support text for the group"
+            value="4"
+            size="small"
+            show-extended-supporting-text
+          >
+            <span slot="extended-supporting-text">
+              Extended supporting text for the group
+            </span>
+            <gds-radio
+              label="Radio Label"
+              value="1"
+              supporting-text="Example support text"
+            ></gds-radio>
+            <gds-radio
+              label="Radio Label"
+              value="2"
+              supporting-text="Example support text"
+            ></gds-radio>
+          </gds-radio-group>
+        </gds-card>
+      </gds-flex>
     </div>
   `,
 }

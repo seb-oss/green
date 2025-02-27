@@ -32,6 +32,9 @@ export class GdsRadio extends GdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false
 
+  @property()
+  size: 'large' | 'small' = 'large'
+
   @state()
   private _isFocused = false
 
@@ -80,9 +83,11 @@ export class GdsRadio extends GdsElement {
       <gds-selection-field-label
         supporting-text=${this.supportingText}
         label=${this.label}
+        size=${this.size}
         @click=${this._handleClick}
         aria-disabled=${this.disabled}
         aria-checked=${this.checked}
+        ?disabled=${this.disabled}
         type="radio"
       >
         <div

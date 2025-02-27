@@ -66,9 +66,17 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     this.checkValidity()
   }
 
+  @watch('size')
+  private _handleSizeChange() {
+    this.radios.forEach((radio: any) => {
+      radio.size = this.size
+    })
+  }
+
   private _syncRadioStates() {
     this.radios.forEach((radio: any) => {
       radio.checked = radio.value === this.value
+      radio.size = this.size
     })
   }
 

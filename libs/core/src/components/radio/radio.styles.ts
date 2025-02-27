@@ -113,9 +113,17 @@ export const styles = css`
       }
     }
 
+    /* Disabled styles */
+
     :host([disabled]) {
-      opacity: 0.4;
       pointer-events: none;
+
+      .radio .dot {
+        box-shadow: none;
+        background-color: var(--gds-color-l3-content-disabled);
+      }
     }
+
+    /* Invalid styles */
   }
 `
