@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'next-view-transitions'
 // Importera Gds-komponenterna från ditt designbibliotek
 import {
+  GdsBadge,
   GdsCard,
   GdsDropdown,
   GdsFlex,
@@ -24,7 +25,7 @@ import Hero from 'core/hero'
    1) Enums för a11y
 ========================================================= */
 export enum A11yCategories {
-  ANNOYING = 'Störigt/skadligt',
+  ANNOYING = 'Störigt / Skadligt',
   GENERAL = 'Generellt',
   TIME = 'Tid',
   PAGE = 'Sida',
@@ -52,6 +53,10 @@ export enum A11yCategories {
   CODE = 'Kodkvalite',
   CONSISTENT = 'Konsekvent',
 }
+
+//const something: 'Störigt/skadligt' | 'Generellt' = 'Generellt';
+
+//const categories = ['Störigt/skadligt', 'Generellt']
 
 export enum A11yLevels {
   A_REQUIRED = 'A*',
@@ -98,11 +103,25 @@ interface WcagItem {
   comment?: string
 }
 
+// Factory function
+
+function catergoryFilter(criteria: string[]) {
+  return (item: WcagItem) =>
+    criteria.length === 0 ? true : criteria.includes(item.category)
+}
+
+// should be a button that will listen to the filterCategory that is choosen
+
 // Fetch the wcag list and render in the consol
 
 export default function WcagList() {
+  // state for the wcagList
+  // wcagObjects is the state variable
+  // setWcagObjects is a function
+  // We can call the setWcagObjects function to set the new state
   const [wcagObjects, setWcagObjects] = useState<WcagItem[]>()
-  // new state for hardcoded, filter,
+  //create a new state to new state in selectedCategories, string or tom array
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
   useEffect(() => {
     async function fetchWcagObjects() {
@@ -113,12 +132,52 @@ export default function WcagList() {
     fetchWcagObjects()
   }, [])
 
+  // We sending (item: WcagItem) like a param into the function CategoryFilter
+
+  // const catergoryFilter = (item: WcagItem) => {
+  //   if (item.category === )
+  // }
+
   if (!wcagObjects) return <div>Loading...</div>
 
+  // Filter function
+
   return (
-    <GdsFlex>
-      <ul>
-        {wcagObjects.map((wcagObject) => (
+    <GdsFlex flex-direction="column">
+      <GdsFlex>
+        <GdsDropdown
+          multiple
+          value={selectedCategories}
+          onChange={(e) =>
+            setSelectedCategories((e as CustomEvent).detail.value)
+          }
+        >
+          <GdsOption isplaceholder="">Kategori</GdsOption>
+          {Object.values(A11yCategories).map((category) => (
+            <GdsOption key={category} value={category}>
+              {category}
+            </GdsOption>
+          ))}
+        </GdsDropdown>
+        <GdsDropdown>
+          <GdsOption value="" isplaceholder="">
+            Nivå
+          </GdsOption>
+        </GdsDropdown>
+        <GdsDropdown>
+          <GdsOption value="" isplaceholder="">
+            Roll
+          </GdsOption>
+        </GdsDropdown>
+        <GdsDropdown>
+          <GdsOption value="" isplaceholder="">
+            Krav
+          </GdsOption>
+        </GdsDropdown>
+      </GdsFlex>
+      {wcagObjects
+        .filter(catergoryFilter(selectedCategories))
+        .map((wcagObject) => (
           <li key={wcagObject.id}>
             <GdsText>
               {wcagObject.id}
@@ -126,6 +185,7 @@ export default function WcagList() {
             </GdsText>
             <GdsFlex>
               <GdsCard>
+                <GdsBadge>{wcagObject.category}</GdsBadge>
                 <GdsFlex>
                   <GdsFlex flex-direction="column">
                     <GdsText>
@@ -146,7 +206,6 @@ export default function WcagList() {
             </GdsFlex>
           </li>
         ))}
-      </ul>
     </GdsFlex>
   )
 }
