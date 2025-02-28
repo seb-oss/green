@@ -6,6 +6,12 @@ import { Meta, StoryObj } from '@storybook/web-components'
 import { GdsSpinner } from './gds-spinner'
 
 import './gds-spinner'
+import '../div'
+import '../flex'
+import '../text'
+import '../card'
+import '../theme'
+import '../button'
 
 const meta: Meta<GdsSpinner> = {
   title: 'Components/Spinner',
@@ -79,22 +85,21 @@ export const Playground: Story = {
     fullscreen: false,
   },
   render: (args) => html`
-    <div
-      style="
-      position: relative;
-      width: 400px;
-      height: 300px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: white;
-      overflow: hidden;
-    "
+    <gds-card
+      position="relative"
+      width="400px"
+      height="300px"
+      border-radius="xs"
+      overflow="hidden"
+      level="1"
     >
-      <div style="padding: 1rem;">
-        <h3 style="margin-top: 0;">Container Content</h3>
-        <p>This is some sample content in the container.</p>
-        <p>More content here...</p>
-      </div>
+      <gds-div padding="m">
+        <gds-text tag="h3" margin-top="0">Container Content</gds-text>
+        <gds-text tag="p"
+          >This is some sample content in the container.</gds-text
+        >
+        <gds-text tag="p">More content here...</gds-text>
+      </gds-div>
       <gds-spinner
         size=${args.size}
         label=${ifDefined(args.label)}
@@ -102,7 +107,7 @@ export const Playground: Story = {
         ?cover=${args.cover}
         ?fullscreen=${args.fullscreen}
       ></gds-spinner>
-    </div>
+    </gds-card>
   `,
 }
 
@@ -110,24 +115,24 @@ export const Playground: Story = {
 export const Sizes: Story = {
   name: 'Size Variants',
   render: () => html`
-    <div style="display: flex; gap: 2rem; align-items: center;">
-      <div style="text-align: center;">
+    <gds-flex gap="2xl" align-items="center">
+      <gds-div text-align="center">
         <gds-spinner size="sm"></gds-spinner>
-        <p style="margin-top: 1rem;">Small</p>
-      </div>
-      <div style="text-align: center;">
+        <gds-text tag="p" margin-top="m">Small</gds-text>
+      </gds-div>
+      <gds-div text-align="center">
         <gds-spinner size="default"></gds-spinner>
-        <p style="margin-top: 1rem;">Default</p>
-      </div>
-      <div style="text-align: center;">
+        <gds-text tag="p" margin-top="m">Default</gds-text>
+      </gds-div>
+      <gds-div text-align="center">
         <gds-spinner size="md"></gds-spinner>
-        <p style="margin-top: 1rem;">Medium</p>
-      </div>
-      <div style="text-align: center;">
+        <gds-text tag="p" margin-top="m">Medium</gds-text>
+      </gds-div>
+      <gds-div text-align="center">
         <gds-spinner size="lg"></gds-spinner>
-        <p style="margin-top: 1rem;">Large</p>
-      </div>
-    </div>
+        <gds-text tag="p" margin-top="m">Large</gds-text>
+      </gds-div>
+    </gds-flex>
   `,
 }
 
@@ -135,27 +140,27 @@ export const Sizes: Story = {
 export const LabelOptions: Story = {
   name: 'Label Options',
   render: () => html`
-    <div style="display: flex; gap: 4rem; align-items: center;">
-      <div style="text-align: center;">
+    <gds-flex gap="4xl" align-items="center">
+      <gds-div text-align="center">
         <gds-spinner
           size="md"
           label="With visible label"
           showLabel
         ></gds-spinner>
-        <p style="margin-top: 1rem;">Visible Label</p>
-      </div>
-      <div style="text-align: center;">
+        <gds-text tag="p" margin-top="m">Visible Label</gds-text>
+      </gds-div>
+      <gds-div text-align="center">
         <gds-spinner
           size="md"
           label="With hidden label (for screen readers)"
         ></gds-spinner>
-        <p style="margin-top: 1rem;">Hidden Label</p>
-      </div>
-      <div style="text-align: center;">
+        <gds-text tag="p" margin-top="m">Hidden Label</gds-text>
+      </gds-div>
+      <gds-div text-align="center">
         <gds-spinner size="md"></gds-spinner>
-        <p style="margin-top: 1rem;">No Label</p>
-      </div>
-    </div>
+        <gds-text tag="p" margin-top="m">No Label</gds-text>
+      </gds-div>
+    </gds-flex>
   `,
 }
 
@@ -163,22 +168,21 @@ export const LabelOptions: Story = {
 export const Cover: Story = {
   name: 'Container Cover',
   render: () => html`
-    <div
-      style="
-      position: relative;
-      width: 400px;
-      height: 300px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: white;
-      overflow: hidden;
-    "
+    <gds-card
+      position="relative"
+      width="400px"
+      height="300px"
+      border-radius="xs"
+      overflow="hidden"
+      level="1"
     >
-      <div style="padding: 1rem;">
-        <h3 style="margin-top: 0;">Container Content</h3>
-        <p>This is some sample content in the container.</p>
-        <p>More content here...</p>
-      </div>
+      <gds-div padding="m">
+        <gds-text tag="h3" margin-top="0">Container Content</gds-text>
+        <gds-text tag="p"
+          >This is some sample content in the container.</gds-text
+        >
+        <gds-text tag="p">More content here...</gds-text>
+      </gds-div>
 
       <gds-spinner
         cover
@@ -186,7 +190,7 @@ export const Cover: Story = {
         showLabel
         size="md"
       ></gds-spinner>
-    </div>
+    </gds-card>
   `,
 }
 
@@ -213,34 +217,33 @@ export const Fullscreen: Story = {
     }, 100)
 
     return html`
-      <div>
-        <h3>Fullscreen Mode Demo</h3>
-        <p>
+      <gds-div>
+        <gds-text tag="h3">Fullscreen Mode Demo</gds-text>
+        <gds-text tag="p">
           The fullscreen spinner covers the entire viewport and prevents
           scrolling. Here's a demo contained within a frame:
-        </p>
+        </gds-text>
 
         <!-- Toggle button outside the iframe -->
-        <button
-          id="external-toggle"
-          style="margin-bottom: 10px; padding: 8px 16px;"
-        >
-          Toggle Fullscreen Spinner
-        </button>
+        <gds-div margin-bottom="s">
+          <gds-button id="external-toggle" padding="s m">
+            Toggle Fullscreen Spinner
+          </gds-button>
+        </gds-div>
 
-        <div
-          style="
-          position: relative;
-          width: 600px;
-          height: 400px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          background: white;
-          overflow: hidden;
-        "
+        <gds-card
+          position="relative"
+          width="600px"
+          height="400px"
+          border-radius="xs"
+          overflow="hidden"
+          level="1"
         >
           <iframe
             id="fullscreen-demo-iframe"
+            width="100%"
+            height="100%"
+            frameborder="0"
             srcdoc="
               <html>
                 <head>
@@ -313,24 +316,9 @@ export const Fullscreen: Story = {
                 </body>
               </html>
             "
-            style="width: 100%; height: 100%; border: none;"
           ></iframe>
-        </div>
-
-        <div style="margin-top: 20px;">
-          <h4>Implementation Example:</h4>
-          <pre
-            style="background: #f5f5f5; padding: 16px; border-radius: 4px; overflow: auto;"
-          >
-&lt;gds-spinner
-  fullscreen
-  size="lg"
-  label="Loading application..."
-  showLabel
-&gt;&lt;/gds-spinner&gt;</pre
-          >
-        </div>
-      </div>
+        </gds-card>
+      </gds-div>
     `
   },
 }
@@ -343,12 +331,12 @@ export const ThemeModes: Story = {
     const handleThemeToggle = (e: Event) => {
       const demo = document.getElementById('theme-demo-container')
       if (demo) {
-        const isDark = demo.classList.contains('dark-theme')
+        const isDark = demo.getAttribute('color-scheme') === 'dark'
         if (isDark) {
-          demo.classList.remove('dark-theme')
+          demo.setAttribute('color-scheme', 'light')
           ;(e.target as HTMLButtonElement).textContent = 'Switch to Dark Theme'
         } else {
-          demo.classList.add('dark-theme')
+          demo.setAttribute('color-scheme', 'dark')
           ;(e.target as HTMLButtonElement).textContent = 'Switch to Light Theme'
         }
       }
@@ -363,92 +351,71 @@ export const ThemeModes: Story = {
     }, 100)
 
     return html`
-      <style>
-        .theme-demo {
-          padding: 2rem;
-          border-radius: 8px;
-          transition: all 0.3s ease;
-        }
-
-        .theme-demo.dark-theme {
-          background-color: #1a1a1a;
-          color: #ffffff;
-        }
-
-        .spinner-container {
-          display: flex;
-          gap: 2rem;
-          margin-top: 1.5rem;
-          justify-content: center;
-        }
-
-        .spinner-example {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          padding: 1.5rem;
-          border-radius: 8px;
-          background-color: #f8f8f8;
-          width: 180px;
-        }
-
-        .dark-theme .spinner-example {
-          background-color: #2a2a2a;
-        }
-
-        .spinner-label {
-          margin-top: 1rem;
-          font-weight: 500;
-        }
-
-        button#theme-toggle {
-          padding: 0.5rem 1rem;
-          background-color: #0078d4;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          margin-bottom: 1rem;
-        }
-
-        button#theme-toggle:hover {
-          background-color: #106ebe;
-        }
-      </style>
-
-      <div id="theme-demo-container" class="theme-demo">
-        <h3>Theme Mode Demonstration</h3>
-        <p>The spinner automatically adapts to light and dark themes:</p>
-
-        <button id="theme-toggle">Switch to Dark Theme</button>
-
-        <div class="spinner-container">
-          <div class="spinner-example">
-            <gds-spinner size="md"></gds-spinner>
-            <div class="spinner-label">Standard Spinner</div>
-          </div>
-
-          <div class="spinner-example">
-            <gds-spinner size="md" label="Loading..." showLabel></gds-spinner>
-            <div class="spinner-label">With Label</div>
-          </div>
-
-          <div
-            class="spinner-example"
-            style="position: relative; overflow: hidden;"
+      <gds-theme id="theme-demo-container" color-scheme="light">
+        <gds-div padding="2xl" border-radius="m" level="1">
+          <gds-text tag="h3">Theme Mode Demonstration</gds-text>
+          <gds-text tag="p"
+            >The spinner automatically adapts to light and dark
+            themes:</gds-text
           >
-            <div
-              style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;"
+
+          <gds-div margin-bottom="m">
+            <gds-button
+              id="theme-toggle"
+              padding="s m"
+              background-color="primary"
+              color="white"
+              border="none"
+              border-radius="xs"
+              cursor="pointer"
             >
-              <div
-                style="width: 100px; height: 100px; background: #eee; border-radius: 8px;"
-              ></div>
-            </div>
-            <gds-spinner size="md" cover></gds-spinner>
-            <div class="spinner-label" style="z-index: 1;">With Cover</div>
-          </div>
-        </div>
-      </div>
+              Switch to Dark Theme
+            </gds-button>
+          </gds-div>
+
+          <gds-flex gap="2xl" margin-top="l" justify-content="center">
+            <gds-card padding="l" border-radius="m" level="1" width="180px">
+              <gds-flex flex-direction="column" align-items="center">
+                <gds-spinner size="md"></gds-spinner>
+                <gds-text margin-top="m" font-weight="medium"
+                  >Standard Spinner</gds-text
+                >
+              </gds-flex>
+            </gds-card>
+
+            <gds-card padding="l" border-radius="m" level="1" width="180px">
+              <gds-flex flex-direction="column" align-items="center">
+                <gds-spinner
+                  size="md"
+                  label="Loading..."
+                  showLabel
+                ></gds-spinner>
+                <gds-text margin-top="m" font-weight="medium"
+                  >With Label</gds-text
+                >
+              </gds-flex>
+            </gds-card>
+
+            <gds-card padding="l" border-radius="m" level="1" width="180px">
+              <gds-div
+                position="relative"
+                height="100px"
+                display="flex"
+                align-items="center"
+                justify-content="center"
+                background="surface"
+                margin-bottom="m"
+              >
+                <gds-text margin="0" color="primary">Content</gds-text>
+                <gds-spinner size="md" cover></gds-spinner>
+              </gds-div>
+              <gds-text text-align="center" font-weight="medium"
+                >With Cover</gds-text
+              >
+            </gds-card>
+          </gds-flex>
+        </gds-div>
+      </gds-theme>
     `
   },
 }
