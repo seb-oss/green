@@ -1,0 +1,128 @@
+import { expect } from '@esm-bundle/chai'
+import { fixture, html } from '@open-wc/testing'
+
+import type { GdsSpinner } from './gds-spinner'
+
+import './gds-spinner'
+
+describe('<gds-spinner>', () => {
+  describe('Rendering', () => {
+    it('should render spinner with default values', async () => {
+      const el = await fixture<GdsSpinner>(html`<gds-spinner></gds-spinner>`)
+      await el.updateComplete
+
+      expect(el.size).to.equal('default')
+      expect(el.cover).to.be.false
+      expect(el.fullscreen).to.be.false
+      expect(el.showLabel).to.be.false
+      expect(el.label).to.be.undefined
+      expect(el.getAttribute('role')).to.equal('status')
+      expect(el.getAttribute('aria-live')).to.equal('polite')
+      expect(el.getAttribute('aria-label')).to.equal('Loading content')
+    })
+
+    it('should render spinner with label', async () => {
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner label="Loading..." showLabel></gds-spinner>`,
+      )
+      await el.updateComplete
+
+      const labelElement = el.shadowRoot?.querySelector('.spinner-label')
+      expect(labelElement?.textContent?.trim()).to.equal('Loading...')
+    })
+
+    it('should not render label when showLabel is false', async () => {
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner
+          label="Loading..."
+          .showLabel=${false}
+        ></gds-spinner>`,
+      )
+      await el.updateComplete
+
+      const labelElement = el.shadowRoot?.querySelector('.spinner-label')
+      expect(labelElement).to.be.null
+    })
+  })
+
+  describe('Size variants', () => {
+    it('should apply correct size attribute', async () => {
+      const sizes = ['sm', 'default', 'md', 'lg'] as const
+
+      for (const size of sizes) {
+        const el = await fixture<GdsSpinner>(
+          html`<gds-spinner .size=${size}></gds-spinner>`,
+        )
+        await el.updateComplete
+
+        expect(el.getAttribute('size')).to.equal(size)
+      }
+    })
+  })
+
+  describe('Display modes', () => {
+    it('should apply cover mode correctly', async () => {
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner .cover=${true}></gds-spinner>`,
+      )
+      await el.updateComplete
+
+      const wrapper = el.shadowRoot?.querySelector('.gds-spinner-wrapper')
+      expect(wrapper?.classList.contains('gds-spinner-cover')).to.be.true
+      expect(wrapper?.classList.contains('gds-spinner-backdrop')).to.be.true
+    })
+
+    it('should apply fullscreen mode correctly', async () => {
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner .fullscreen=${true}></gds-spinner>`,
+      )
+      await el.updateComplete
+
+      const wrapper = el.shadowRoot?.querySelector('.gds-spinner-wrapper')
+      expect(wrapper?.classList.contains('gds-spinner-fullscreen')).to.be.true
+      expect(wrapper?.classList.contains('gds-spinner-backdrop')).to.be.true
+    })
+  })
+
+  describe('Events', () => {
+    it('should dispatch gds-spinner-shown event on connection', async () => {
+      let eventFired = false
+      const el = document.createElement('gds-spinner') as GdsSpinner
+      el.addEventListener('gds-spinner-shown', () => {
+        eventFired = true
+      })
+      document.body.appendChild(el)
+      await el.updateComplete
+
+      expect(eventFired).to.be.true
+      document.body.removeChild(el)
+    })
+
+    it('should dispatch gds-spinner-hidden event on disconnection', async () => {
+      let eventFired = false
+      const el = document.createElement('gds-spinner') as GdsSpinner
+      document.body.appendChild(el)
+      await el.updateComplete
+
+      el.addEventListener('gds-spinner-hidden', () => {
+        eventFired = true
+      })
+      document.body.removeChild(el)
+
+      expect(eventFired).to.be.true
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('should have correct ARIA attributes', async () => {
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner label="Custom label"></gds-spinner>`,
+      )
+      await el.updateComplete
+
+      expect(el.getAttribute('role')).to.equal('status')
+      expect(el.getAttribute('aria-live')).to.equal('polite')
+      expect(el.getAttribute('aria-label')).to.equal('Custom label')
+    })
+  })
+})
