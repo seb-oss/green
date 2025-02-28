@@ -105,14 +105,19 @@ interface WcagItem {
 
 // Factory function
 
+// Filter functions to each DropDown
+
 function catergoryFilter(criteria: string[]) {
   return (item: WcagItem) =>
     criteria.length === 0 ? true : criteria.includes(item.category)
 }
 
-// should be a button that will listen to the filterCategory that is choosen
+// Level Filter
 
-// Fetch the wcag list and render in the consol
+function levelFilter(level: string[]) {
+  return (item: WcagItem) =>
+    level.length === 0 ? true : level.includes(item.level)
+}
 
 export default function WcagList() {
   // state for the wcagList
@@ -122,6 +127,7 @@ export default function WcagList() {
   const [wcagObjects, setWcagObjects] = useState<WcagItem[]>()
   //create a new state to new state in selectedCategories, string or tom array
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
+  const [selectedLevels, setSelectedLevels] = useState<string[]>([])
 
   useEffect(() => {
     async function fetchWcagObjects() {
@@ -142,6 +148,8 @@ export default function WcagList() {
 
   // Filter function
 
+  //console.log(setSelectedCategories)
+
   return (
     <GdsFlex flex-direction="column">
       <GdsFlex>
@@ -159,10 +167,19 @@ export default function WcagList() {
             </GdsOption>
           ))}
         </GdsDropdown>
-        <GdsDropdown>
+        <GdsDropdown
+          multiple
+          value={selectedLevels}
+          onChange={(e) => setSelectedLevels((e as CustomEvent).detail.value)}
+        >
           <GdsOption value="" isplaceholder="">
             Nivå
           </GdsOption>
+          {Object.values(A11yLevels).map((level) => (
+            <GdsOption key={level} value={level}>
+              {level}
+            </GdsOption>
+          ))}
         </GdsDropdown>
         <GdsDropdown>
           <GdsOption value="" isplaceholder="">
@@ -177,6 +194,7 @@ export default function WcagList() {
       </GdsFlex>
       {wcagObjects
         .filter(catergoryFilter(selectedCategories))
+        .filter(levelFilter(selectedLevels))
         .map((wcagObject) => (
           <li key={wcagObject.id}>
             <GdsText>
@@ -186,6 +204,7 @@ export default function WcagList() {
             <GdsFlex>
               <GdsCard>
                 <GdsBadge>{wcagObject.category}</GdsBadge>
+                <GdsBadge>{wcagObject.level}</GdsBadge>
                 <GdsFlex>
                   <GdsFlex flex-direction="column">
                     <GdsText>
