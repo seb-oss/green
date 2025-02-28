@@ -2,9 +2,11 @@ import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
 import { property, queryAsync } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
 import { Placement } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
@@ -37,7 +39,7 @@ import '../popover'
 export class GdsContextMenu extends withMarginProps(
   withLayoutChildProps(GdsElement),
 ) {
-  static styles = [styles]
+  static styles = [tokens, styles]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
@@ -107,6 +109,7 @@ export class GdsContextMenu extends withMarginProps(
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
+        @click=${() => (this.open = true)}
       >
         <slot name="trigger">
           ${this.showLabel ? (this.buttonLabel ?? this.label) : nothing}
@@ -118,23 +121,27 @@ export class GdsContextMenu extends withMarginProps(
           </svg>
         </slot>
       </button>
-      <gds-popover
-        id="menu"
-        autofocus
-        .open=${this.open}
-        .triggerRef=${this.elTriggerBtn}
-        .anchorRef=${this.elTriggerBtn}
-        .label=${this.label}
-        .placement=${this.placement}
-        @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
+      ${when(this.open, this.#renderPopover)}`
+  }
+
+  #renderPopover = () => {
+    return html`<gds-popover
+      id="menu"
+      autofocus
+      .open=${this.open}
+      .triggerRef=${this.elTriggerBtn}
+      .anchorRef=${this.elTriggerBtn}
+      .label=${this.label}
+      .placement=${this.placement}
+      @gds-ui-state=${(e: CustomEvent) => (this.open = e.detail.open)}
+    >
+      <gds-menu
+        aria-label=${this.label ?? this.buttonLabel}
+        @gds-menu-item-click=${this.#handleItemClick}
       >
-        <gds-menu
-          aria-label=${this.label ?? this.buttonLabel}
-          @gds-menu-item-click=${this.#handleItemClick}
-        >
-          <slot></slot>
-        </gds-menu>
-      </gds-popover>`
+        <slot></slot>
+      </gds-menu>
+    </gds-popover>`
   }
 
   #handleItemClick() {
