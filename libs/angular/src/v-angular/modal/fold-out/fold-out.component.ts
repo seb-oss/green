@@ -12,14 +12,8 @@ import {
   ViewChild,
 } from '@angular/core'
 
-import {
-  fromEvent,
-  Subscription,
-} from 'rxjs'
-import {
-  filter,
-  takeWhile,
-} from 'rxjs/operators'
+import { fromEvent, Subscription } from 'rxjs'
+import { filter, takeWhile } from 'rxjs/operators'
 
 import { KeyboardKey } from './keyboard-key.enum'
 
