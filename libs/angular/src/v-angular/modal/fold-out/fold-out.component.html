@@ -15,6 +15,7 @@
     class="nggv-fold-out__popover"
     [ngClass]="{ 'flex-right': alignOptions === 'right' }"
     [class.nggv-fold-out__popover-expanded]="shown"
+    (click)="toggleVisibility()"
   >
     <ng-content></ng-content>
   </div>
