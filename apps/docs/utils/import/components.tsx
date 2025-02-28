@@ -9,11 +9,8 @@ export const GdsFlex = dynamic(
   },
 )
 
-export const GdsContainer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/container').then(
-      (mod) => mod.GdsContainer,
-    ),
+export const GdsDiv = dynamic(
+  () => import('@sebgroup/green-react/core/div').then((mod) => mod.GdsDiv),
   {
     ssr: false,
   },

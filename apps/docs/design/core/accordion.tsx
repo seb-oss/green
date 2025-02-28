@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { GdsButton, GdsContainer, GdsFlex, GdsText } from '$/import/components'
+import { GdsButton, GdsDiv, GdsFlex, GdsText } from '$/import/components'
 import { IconMinusLarge, IconPlusLarge } from '$/import/icons'
 
 import { GdsButton as GdsButtonCore } from '@sebgroup/green-core/components/button'
-import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
+import { GdsDiv as GdsDivCore } from '@sebgroup/green-core/components/container'
 
 export function Accordion({ children }: { children: React.ReactNode }) {
   return <div className="gds-accordion">{children}</div>
@@ -27,7 +27,7 @@ export interface AccordionItemInterface {
   onClick?: (
     e:
       | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
+          HTMLButtonElement | GdsDivCore | GdsButtonCore,
           MouseEvent
         >
       | Event,
@@ -35,7 +35,7 @@ export interface AccordionItemInterface {
   onOpen?: (
     e:
       | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
+          HTMLButtonElement | GdsDivCore | GdsButtonCore,
           MouseEvent
         >
       | Event,
@@ -43,7 +43,7 @@ export interface AccordionItemInterface {
   onClose?: (
     e:
       | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
+          HTMLButtonElement | GdsDivCore | GdsButtonCore,
           MouseEvent
         >
       | Event,
@@ -72,9 +72,7 @@ export function AccordionItem({
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOnClick = (
-    event:
-      | React.MouseEvent<GdsContainerCore | GdsButtonCore, MouseEvent>
-      | Event,
+    event: React.MouseEvent<GdsDivCore | GdsButtonCore, MouseEvent> | Event,
   ) => {
     onClick && onClick(event)
     setIsOpen((state) => {
@@ -100,7 +98,7 @@ export function AccordionItem({
         width="100%"
         padding="xs 0"
       >
-        <GdsContainer
+        <GdsDiv
           user-select="none"
           cursor="pointer"
           onClick={(event) => {
@@ -109,7 +107,7 @@ export function AccordionItem({
           flex="1"
         >
           <GdsText font-size="body-l">{label}</GdsText>
-        </GdsContainer>
+        </GdsDiv>
         <GdsButton
           id={id}
           aria-expanded={isOpen}

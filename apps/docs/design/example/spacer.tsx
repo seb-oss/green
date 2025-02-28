@@ -1,6 +1,6 @@
 'use client'
 
-import { GdsContainer, GdsFlex, GdsSpacer } from '$/import/components'
+import { GdsDiv, GdsFlex, GdsSpacer } from '$/import/components'
 
 const Spacer = () => (
   <GdsFlex
@@ -12,15 +12,15 @@ const Spacer = () => (
     padding="l"
     height="200px"
   >
-    <GdsContainer background="secondary" width="100%">
+    <GdsDiv background="secondary" width="100%">
       <GdsSpacer size="s" />
-    </GdsContainer>
-    <GdsContainer background="secondary" width="100%">
+    </GdsDiv>
+    <GdsDiv background="secondary" width="100%">
       <GdsSpacer size="l" />
-    </GdsContainer>
-    <GdsContainer background="secondary" width="100%">
+    </GdsDiv>
+    <GdsDiv background="secondary" width="100%">
       <GdsSpacer size="2xl" />
-    </GdsContainer>
+    </GdsDiv>
   </GdsFlex>
 )
 

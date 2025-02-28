@@ -4,7 +4,7 @@ import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import { Link } from 'next-view-transitions'
 import {
   GdsButton,
-  GdsContainer,
+  GdsDiv,
   GdsFlex,
   GdsMask,
   GdsMenuButton,
@@ -29,7 +29,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
   }, [])
 
   return (
-    <GdsContainer level="1" position="sticky" inset="0" z-index="1100">
+    <GdsDiv level="1" position="sticky" inset="0" z-index="1100">
       <GdsMask
         background-color="secondary/0.8"
         backdrop-filter="blur(4px)"
@@ -57,7 +57,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
             Menu
           </GdsButton>
         )}
-        <GdsContainer
+        <GdsDiv
           position="absolute"
           margin="0 auto"
           inset="auto 0"
@@ -66,19 +66,19 @@ export const Header = forwardRef(({ ...props }, ref) => {
           <Link href="/">
             <IconBrandSeb />
           </Link>
-        </GdsContainer>
+        </GdsDiv>
         <GdsFlex
           height="100%"
           padding="0; s{0 l}"
           align-items="center"
           gap="2xs"
         >
-          <GdsContainer display="none; s{block}">
+          <GdsDiv display="none; s{block}">
             <GdsButton onClick={toggleCmd} rank="tertiary" size="small">
               <IconMagnifyingGlass slot="lead" />
               {isWindows ? '/' : '⌘K'}
             </GdsButton>
-          </GdsContainer>
+          </GdsDiv>
           <GdsButton
             href="https://github.com/sebgroup/green"
             target="_blank"
@@ -90,7 +90,7 @@ export const Header = forwardRef(({ ...props }, ref) => {
           <ThemeToggle />
         </GdsFlex>
       </GdsFlex>
-    </GdsContainer>
+    </GdsDiv>
   )
 })
 
