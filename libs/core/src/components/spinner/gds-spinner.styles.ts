@@ -77,7 +77,7 @@ export const styles = css`
       /* Use system colors that respect the user's high contrast theme */
       --spinner-track-color: GrayText;
       --spinner-active-color: HighlightText;
-      --spinner-label-color: ButtonText;
+      --spinner-label-color: currentColor;
 
       /* Force a transparent background for the backdrop to respect high contrast */
       --spinner-backdrop-color: transparent;
@@ -93,7 +93,7 @@ export const styles = css`
 
     /* Make sure text remains visible */
     .spinner-label {
-      color: ButtonText;
+      color: var(--spinner-label-color);
       forced-color-adjust: none;
     }
 
@@ -246,10 +246,7 @@ export const styles = css`
         var(--spinner-active-color-light),
         var(--spinner-active-color-dark)
       );
-      --spinner-label-color: light-dark(
-        var(--spinner-label-color-light),
-        var(--spinner-label-color-dark)
-      );
+      --spinner-label-color: currentColor;
       --spinner-backdrop-color: light-dark(
         var(--spinner-backdrop-color-light),
         var(--spinner-backdrop-color-dark)

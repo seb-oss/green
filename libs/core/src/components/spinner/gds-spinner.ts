@@ -1,9 +1,10 @@
 /**
+ * @element gds-spinner
+ * @status beta
+ *
  * GDS Spinner Component
  *
  * A loading indicator with accessibility support and various display modes.
- *
- * @element gds-spinner
  *
  * @example Basic usage
  * ```html

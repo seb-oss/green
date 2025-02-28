@@ -13,28 +13,23 @@ import '../card'
 import '../theme'
 import '../button'
 
+/**
+ * A loading indicator component that supports various sizes and display modes.
+ *
+ * @status beta
+ *
+ * ## Features
+ * - Multiple sizes (sm, md, lg)
+ * - Optional text label
+ * - Container cover mode
+ * - Fullscreen mode
+ * - Accessibility support
+ * - Light/dark theme support
+ */
 const meta: Meta<GdsSpinner> = {
   title: 'Components/Spinner',
   component: 'gds-spinner',
   tags: ['autodocs'],
-  parameters: {
-    layout: 'centered',
-    docs: {
-      description: {
-        component: `
-          A loading indicator component that supports various sizes and display modes.
-
-          ## Features
-          - Multiple sizes (sm, md, lg)
-          - Optional text label
-          - Container cover mode
-          - Fullscreen mode
-          - Accessibility support
-          - Light/dark theme support
-        `,
-      },
-    },
-  },
   argTypes: {
     size: {
       control: 'select',
@@ -75,7 +70,6 @@ const meta: Meta<GdsSpinner> = {
 export default meta
 type Story = StoryObj<GdsSpinner>
 
-// Basic playground with all controls
 export const Playground: Story = {
   args: {
     size: 'md',
@@ -326,7 +320,7 @@ export const Fullscreen: Story = {
 // Theme mode demo
 export const ThemeModes: Story = {
   name: 'Light & Dark Theme',
-  render: () => {
+  render: (args, { context }) => {
     // Function to handle the theme toggle
     const handleThemeToggle = (e: Event) => {
       const demo = document.getElementById('theme-demo-container')
@@ -342,24 +336,20 @@ export const ThemeModes: Story = {
       }
     }
 
-    // Register the event listener after the component has rendered
-    setTimeout(() => {
-      const toggleBtn = document.getElementById('theme-toggle')
-      if (toggleBtn) {
-        toggleBtn.addEventListener('click', handleThemeToggle)
-      }
-    }, 100)
-
     return html`
-      <gds-theme id="theme-demo-container" color-scheme="light">
-        <gds-div padding="2xl" border-radius="m" level="1">
+      <gds-theme
+        id="theme-demo-container"
+        color-scheme="light"
+        .designVersion=${context.globals.style}
+      >
+        <gds-card variant="secondary" padding="2xl">
           <gds-text tag="h3">Theme Mode Demonstration</gds-text>
           <gds-text tag="p"
             >The spinner automatically adapts to light and dark
             themes:</gds-text
           >
 
-          <gds-div margin-bottom="m">
+          <div>
             <gds-button
               id="theme-toggle"
               padding="s m"
@@ -368,13 +358,14 @@ export const ThemeModes: Story = {
               border="none"
               border-radius="xs"
               cursor="pointer"
+              @click=${handleThemeToggle}
             >
               Switch to Dark Theme
             </gds-button>
-          </gds-div>
+          </div>
 
           <gds-flex gap="2xl" margin-top="l" justify-content="center">
-            <gds-card padding="l" border-radius="m" level="1" width="180px">
+            <gds-card padding="l" width="180px">
               <gds-flex flex-direction="column" align-items="center">
                 <gds-spinner size="md"></gds-spinner>
                 <gds-text margin-top="m" font-weight="medium"
@@ -383,7 +374,7 @@ export const ThemeModes: Story = {
               </gds-flex>
             </gds-card>
 
-            <gds-card padding="l" border-radius="m" level="1" width="180px">
+            <gds-card padding="l" width="180px">
               <gds-flex flex-direction="column" align-items="center">
                 <gds-spinner
                   size="md"
@@ -396,7 +387,7 @@ export const ThemeModes: Story = {
               </gds-flex>
             </gds-card>
 
-            <gds-card padding="l" border-radius="m" level="1" width="180px">
+            <gds-card padding="l" width="180px">
               <gds-div
                 position="relative"
                 height="100px"
