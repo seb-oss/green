@@ -74,6 +74,24 @@
               <option value="Option 3">Option 3</option>
             </select>
           </gds-select>
+          <gds-radio-group
+            formControlName="radio"
+            label="Radio"
+            supporting-text="Select an option"
+            value="1"
+            [errorMessage]="getError(simpleForm.get('radio'))"
+          >
+            <gds-radio
+              label="Option 1"
+              value="1"
+              supporting-text="Supporting text"
+            ></gds-radio>
+            <gds-radio
+              label="Option 2"
+              value="2"
+              supporting-text="Supporting text"
+            ></gds-radio>
+          </gds-radio-group>
           <gds-datepicker
             formControlName="date"
             label="Date"

@@ -1,66 +1,211 @@
-import { html, LitElement, unsafeCSS } from 'lit'
-import { customElement, property } from 'lit/decorators.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
-import { when } from 'lit/directives/when.js'
+import { property, query } from 'lit/decorators.js'
 
-// import styles from './radio.css'
+import { gdsCustomElement, html } from '../../scoping'
+import { watch } from '../../utils/decorators/watch'
+import { GdsFormControlElement } from '../form/form-control'
+import { styles } from './radio.styles'
 
-@customElement('gds-radio-group')
-export class GdsRadioGroup extends LitElement {
-  // static styles = unsafeCSS(styles)
+import '../../primitives/form-control-header'
+import '../../primitives/form-control-footer'
 
-  static shadowRootOptions: ShadowRootInit = {
-    mode: 'open',
-    delegatesFocus: true,
+/**
+ * @element gds-radio-group
+ */
+@gdsCustomElement('gds-radio-group')
+export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
+  static styles = [styles]
+
+  @property()
+  override label = ''
+
+  @property()
+  override name = ''
+
+  @property()
+  size: 'large' | 'small' = 'large'
+
+  @property({ attribute: 'supporting-text' })
+  supportingText = ''
+
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  @query('.content')
+  private _contentElement!: HTMLElement
+
+  get radios() {
+    return Array.from(this.querySelectorAll('gds-radio'))
   }
 
-  // Private members
-  #internals: ElementInternals
-  selectedValue: any
-
-  constructor() {
-    super()
-    this.#internals = this.attachInternals()
+  connectedCallback() {
+    super.connectedCallback()
+    this.setAttribute('role', 'radiogroup')
+    this.updateComplete.then(() => {
+      this._syncRadioStates()
+      this._initializeFocusable()
+    })
   }
 
-  @property({ type: String, reflect: true, attribute: 'label' })
-  label = 'Label'
+  private _initializeFocusable() {
+    // Make the group focusable
+    this._contentElement.setAttribute('tabindex', '0')
 
-  private inputElement: HTMLInputElement | null = null
-  private exludeAttr = ['id', 'label']
+    // Set all radios to not be focusable by tab
+    this.radios.forEach((radio) => {
+      radio.setAttribute('tabindex', '-1')
+    })
+  }
 
-  private reflectAttributesToInput() {
-    if (this.inputElement) {
-      const attributes = this.attributes
-      for (let i = 0; i < attributes.length; i++) {
-        const attribute = attributes[i]
-        if (!this.exludeAttr.includes(attribute.name)) {
-          this.inputElement.setAttribute(attribute.name, attribute.value)
-        }
+  @watch('value')
+  private _handleValueChange() {
+    this._syncRadioStates()
+    this.checkValidity()
+  }
+
+  @watch('size')
+  private _handleSizeChange() {
+    this.radios.forEach((radio: any) => {
+      radio.size = this.size
+    })
+  }
+
+  private _syncRadioStates() {
+    this.radios.forEach((radio: any) => {
+      radio.checked = radio.value === this.value
+      radio.size = this.size
+    })
+  }
+
+  private _handleFocus() {
+    // When group receives focus, focus the selected radio or first one
+    const selectedRadio = this.radios.find((radio: any) => radio.checked)
+    const radioToFocus = selectedRadio || this.radios[0]
+
+    if (radioToFocus) {
+      ;(radioToFocus as HTMLElement).focus()
+    }
+  }
+
+  private _handleRadioChange(e: Event) {
+    const radio = e.target as HTMLElement
+    if (radio.hasAttribute('value')) {
+      const newValue = radio.getAttribute('value') as ValueT
+
+      this.value = newValue
+      this._syncRadioStates()
+
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: { value: this.value },
+          bubbles: true,
+        }),
+      )
+      this.dispatchEvent(new Event('input', { bubbles: true }))
+    }
+  }
+
+  private _handleKeyDown(e: KeyboardEvent) {
+    const radios = this.radios.filter(
+      (radio) => !radio.hasAttribute('disabled'),
+    )
+    if (radios.length === 0) return
+
+    let currentIndex = radios.findIndex(
+      (radio) => (radio as any).checked || document.activeElement === radio,
+    )
+    if (currentIndex === -1) currentIndex = 0
+
+    let nextIndex: number
+    switch (e.key) {
+      case 'ArrowDown':
+      case 'ArrowRight': {
+        e.preventDefault()
+        nextIndex = (currentIndex + 1) % radios.length
+        break
       }
+      case 'ArrowUp':
+      case 'ArrowLeft': {
+        e.preventDefault()
+        nextIndex = (currentIndex - 1 + radios.length) % radios.length
+        break
+      }
+      case 'Tab': {
+        // Let tab move focus out of the group
+        return
+      }
+      default:
+        return
     }
+
+    const nextRadio = radios[nextIndex] as any
+    nextRadio.checked = true
+    nextRadio.focus()
+    this.value = nextRadio.value
+
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+      }),
+    )
+    this.dispatchEvent(new Event('input', { bubbles: true }))
   }
 
-  update(changedProperties: Map<PropertyKey, unknown>) {
-    super.update(changedProperties)
-    if (!this.inputElement) {
-      this.inputElement = this.shadowRoot?.getElementById(
-        'radio',
-      ) as HTMLInputElement
-    }
-    this.reflectAttributesToInput()
+  protected override _getValidityAnchor(): HTMLElement {
+    return this._contentElement || this
   }
 
   render() {
-    return html`
-      <fieldset
-        class="gds-radio-group"
-        role="radiogroup"
-        aria-labelledby="label"
-      >
-        <label>${this.label}</label>
-        <slot></slot>
-      </fieldset>
-    `
+    return html`<div class="radio-group">
+      ${this.#renderRadioGroupContents()}
+    </div>`
+  }
+
+  #renderRadioGroupContents() {
+    const elements = [
+      this.#renderFieldControlHeader(),
+      this.#renderRadios(),
+      this.#renderFieldControlFooter(),
+    ]
+
+    return elements.map((element) => html`${element}`)
+  }
+
+  #renderFieldControlHeader() {
+    if (this.label) {
+      return html` <gds-form-control-header class="size-${this.size}">
+        <label id="group-label" for="input" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+        <slot
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>`
+    }
+  }
+
+  #renderRadios() {
+    return html` <div
+      class="content"
+      @keydown=${this._handleKeyDown}
+      @focus=${this._handleFocus}
+    >
+      <slot @change=${this._handleRadioChange}></slot>
+    </div>`
+  }
+
+  #renderFieldControlFooter() {
+    return html` <gds-form-control-footer
+      class="size-${this.size}"
+      .validationMessage=${this.invalid &&
+      (this.errorMessage || this.validationMessage)}
+    >
+    </gds-form-control-footer>`
   }
 }
