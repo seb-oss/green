@@ -4,8 +4,12 @@ export const defaultStyles = css`
   @layer defaults {
     a:link {
       color: currentColor;
-      text-undeline-offset: 0.2lh;
+      text-underline-offset: 0.1lh;
       font-weight: var(--gds-text-weight-book);
+    }
+
+    a:visited {
+      color: currentColor;
     }
 
     h1 {
@@ -47,11 +51,18 @@ export const defaultStyles = css`
     p,
     li {
       font-size: var(--gds-text-size-body-m);
-      line-height: var(--gds-text-line-height-body-m);
+      line-height: 22px;
     }
 
     strong {
       font-weight: var(--gds-text-weight-medium);
+    }
+
+    iframe {
+      border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
+      border-radius: var(--gds-space-xs);
+      min-width: 100%;
+      margin-bottom: var(--gds-space-l);
     }
   }
 `
