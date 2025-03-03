@@ -44,10 +44,6 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   @query('.content')
   private _contentElement!: HTMLElement
 
-  // get radios() {
-  //   return Array.from(this.querySelectorAll('gds-radio'))
-  // }
-
   get radios(): GdsRadio[] {
     return Array.from(this.querySelectorAll('gds-radio')) as GdsRadio[]
   }
@@ -168,8 +164,16 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
       const newValue = radio.getAttribute('value') as ValueT
 
       this.value = newValue
+
+      const basicValidation = this._validateRadios()
+      const validityCheck = this.checkValidity()
+
+      if (basicValidation && validityCheck) {
+        this.invalid = false
+        this.errorMessage = ''
+      }
+
       this._syncRadioStates()
-      this._validateRadios() // Add validation check
 
       this.dispatchEvent(
         new CustomEvent('change', {
@@ -218,6 +222,17 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     nextRadio.checked = true
     nextRadio.focus()
     this.value = nextRadio.value
+
+    // Add same validation handling as in _handleRadioChange
+    const basicValidation = this._validateRadios()
+    const validityCheck = this.checkValidity()
+
+    if (basicValidation && validityCheck) {
+      this.invalid = false
+      this.errorMessage = ''
+    }
+
+    this._syncRadioStates()
 
     this.dispatchEvent(
       new CustomEvent('change', {
