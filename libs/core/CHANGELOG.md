@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.67.1
+
+### Patch Changes
+
+- e59a021: **Select:** Fix some state sync issues with the wrapped select element
+- d69a5ea: **Popover:** Fix stacking issue with nonmodal popovers
+- d69a5ea: **Dropdown:** Fix `combobox` when used without a placeholder option, and add missing event dispatch
+
 ## 1.67.0
 
 ### Minor Changes
