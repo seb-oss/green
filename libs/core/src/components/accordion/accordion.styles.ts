@@ -8,12 +8,13 @@ export const styles = css`
       font-size: var(--gds-text-size-body-m);
       line-height: var(--gds-text-line-height-body-m);
       color: var(--gds-color-l2-content-secondary);
+      transition: all 120ms;
     }
 
     summary {
       font-weight: var(--gds-text-weight-regular);
       list-style: none;
-      padding: 0.4lh 0.2ch;
+      padding: 0.6cap 0.2ch 0.5cap 0.2ch;
       font-size: var(--gds-text-size-body-l);
       line-height: var(--gds-text-line-height-body-l);
       color: var(--gds-color-l2-content-primary);
@@ -24,17 +25,19 @@ export const styles = css`
       user-select: none;
       outline-offset: var(--gds-space-2xs);
       outline-color: currentColor;
+      transition: all 120ms;
+    }
 
-      &:focus-visible {
-        border-radius: var(--gds-space-2xs);
-      }
+    summary:focus-visible {
+      border-radius: var(--gds-space-2xs);
     }
 
     details[open] {
-      margin-bottom: 1lh;
+      padding-bottom: 1lh;
     }
 
     details[open] summary {
+      margin-bottom: 1lh;
       border-bottom: var(--gds-space-4xs) solid
         var(--gds-color-l3-border-tertiary);
     }

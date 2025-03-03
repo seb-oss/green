@@ -9,6 +9,61 @@ const meta: Meta = {
   title: 'Components/Accordion',
   component: 'gds-accordion',
   tags: ['autodocs'],
+  argTypes: {
+    summary: {
+      description: 'The text displayed in the accordion header',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'Summary' },
+      },
+    },
+    name: {
+      description:
+        'Groups accordions together. Accordions with the same name will close each other when opened',
+      control: 'text',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: '' },
+      },
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        component: `
+## Overview
+The \`gds-acordion\` component is a collapsible section that helps organize and hide content until needed. 
+It follows the native HTML \`<details>\` and \`<summary>\` behavior while adding extra functionality for grouped accordions.
+
+## Features
+- Expandable/collapsible content sections
+- Group behavior: accordions with the same name will close each other automatically
+- Works across Shadow DOM boundaries
+- Customizable summary text
+- Accessible by default, following native HTML semantics
+- Visual indicators for open/closed states
+
+## Accessibility
+- Follows ARIA best practices for expandable sections
+- Keyboard navigable
+- Screen reader friendly
+- Maintains focus management
+
+## Example
+\`\`\`html
+<gds-accordion name="group1" summary="Section 1">
+  <gds-rich-text>Content for section 1</gds-rich-text>
+</gds-accordion>
+
+<gds-accordion name="group1" summary="Section 2">
+  <gds-rich-text>Content for section 2</gds-rich-text>
+</gds-accordion>
+\`\`\`
+        `,
+      },
+    },
+  },
 }
 
 export default meta
@@ -24,7 +79,8 @@ const DefaultParams: Story = {
 }
 
 /**
- * TODO: Add documentation
+ * Basic example of an accordion component.
+ * This story demonstrates the default usage with simple content.
  */
 export const accordion: Story = {
   ...DefaultParams,
@@ -35,7 +91,14 @@ export const accordion: Story = {
 }
 
 /**
- * Name of the accordion
+ * This story demonstrates how accordions with the same name interact with each other.<br/>
+ * When one accordion in the group is opened, others in the same group will automatically close.
+ *
+ * Key points:
+ * - All accordions share the name "Name"
+ * - Opening any accordion will close others in the group
+ * - Each accordion maintains its own content independently
+ * - The behavior works across Shadow DOM boundaries
  */
 export const RanksAndVariants: Story = {
   ...DefaultParams,
@@ -43,6 +106,28 @@ export const RanksAndVariants: Story = {
   parameters: {
     ...DefaultParams.parameters,
     controls: { include: [] },
+    docs: {
+      description: {
+        story: `
+### Group Behavior
+When multiple accordions share the same \`name\` attribute, they form a group. 
+Opening one accordion in the group automatically closes other accordions in the same group.
+
+### Use Cases
+- FAQ sections
+- Product details
+- Step-by-step guides
+- Settings panels
+- Content organization
+
+### Implementation Notes
+- Uses custom events to handle group behavior
+- Works across Shadow DOM boundaries
+- Maintains proper state management
+- Cleans up event listeners on disconnect
+        `,
+      },
+    },
   },
   render: (args) => html`
     <gds-accordion name="Name" summary="Example">
