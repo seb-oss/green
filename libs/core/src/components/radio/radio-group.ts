@@ -9,6 +9,8 @@ import { styles } from './radio.styles'
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 
+import { msg } from '@lit/localize'
+
 /**
  * @element gds-radio-group
  */
@@ -64,9 +66,44 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     })
   }
 
+  checkValidity() {
+    if (!this.validator) {
+      // If no custom validator, just check if required and has value
+      if (this.required && !this.value) {
+        this.invalid = true
+        this.errorMessage = msg('Please select an option')
+        return false
+      }
+      return true
+    }
+
+    // Use the validator if provided (following the same pattern as input/dropdown)
+    const validity = this.validator.validate(this)
+    if (validity) {
+      this.invalid = !validity[0].valid
+      this.errorMessage = validity[1]
+    }
+
+    // Propagate invalid state to radios
+    this.radios.forEach((radio: any) => {
+      radio.invalid = this.invalid
+    })
+
+    return this.validity.valid
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._contentElement
+  }
+
   @watch('value')
   private _handleValueChange() {
     this._syncRadioStates()
+    this.checkValidity()
+  }
+
+  @watch('required')
+  private _handleRequiredChange() {
     this.checkValidity()
   }
 
@@ -78,9 +115,11 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   private _syncRadioStates() {
+    const isValid = this.checkValidity()
     this.radios.forEach((radio: any) => {
       radio.checked = radio.value === this.value
       radio.size = this.size
+      radio.invalid = !isValid
     })
   }
 
@@ -157,10 +196,6 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
       }),
     )
     this.dispatchEvent(new Event('input', { bubbles: true }))
-  }
-
-  protected override _getValidityAnchor(): HTMLElement {
-    return this._contentElement || this
   }
 
   render() {

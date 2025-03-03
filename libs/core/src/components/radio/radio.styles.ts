@@ -141,7 +141,7 @@ export const styles = css`
       
 
      */
-    :host([invalid]:not([checked])) {
+    .radio.invalid {
       --radio-border-color: var(--gds-color-l3-border-negative);
       --radio-dot-background-color: var(
         --gds-color-l3-background-negative-secondary

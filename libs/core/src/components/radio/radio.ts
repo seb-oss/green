@@ -80,6 +80,7 @@ export class GdsRadio extends GdsElement {
       checked: this.checked,
       disabled: this.disabled,
       focused: this._isFocused,
+      invalid: this.invalid,
     }
 
     /*

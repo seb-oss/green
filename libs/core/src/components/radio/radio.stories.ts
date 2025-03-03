@@ -57,7 +57,6 @@ export const States: Story = {
       <gds-radio-group
         label="Group Label"
         supporting-text="Support text for the group"
-        value="4"
         show-extended-supporting-text
       >
         <span slot="extended-supporting-text">
@@ -89,7 +88,6 @@ export const States: Story = {
         <gds-radio
           label="Radio Label"
           value="6"
-          invalid
           supporting-text="Example support text"
         ></gds-radio>
       </gds-radio-group>
@@ -108,8 +106,8 @@ export const Validation: Story = {
       <gds-radio-group
         label="Group Label"
         supporting-text="Support text for the group"
-        value="4"
         show-extended-supporting-text
+        required
       >
         <span slot="extended-supporting-text">
           Extended supporting text for the group
