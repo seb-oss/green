@@ -1,4 +1,4 @@
-import { msg } from '@lit/localize'
+import { localized, msg } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
@@ -12,22 +12,32 @@ import '../../primitives/form-control-footer'
 
 import type { GdsRadio } from './radio'
 
-/**
- * @element gds-radio-group
- */
-@gdsCustomElement('gds-radio-group')
-export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
+@localized()
+class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   static styles = [styles]
 
+  /**
+   * Controls the font-size of label and supporting text on group form control header and single radio buttons respectively.
+   */
   @property()
   size: 'large' | 'small' = 'large'
 
+  /**
+   * The direction in which radio buttons are displayed.
+   */
   @property()
   direction: 'row' | 'column' = 'column'
 
+  /**
+   * The supporting text displayed between the label and the field.
+   * This text provides additional context or information to the user.
+   */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
+  /**
+   * Whether the supporting text should be displayed or not.
+   */
   @property({
     attribute: 'show-extended-supporting-text',
     type: Boolean,
@@ -295,3 +305,19 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     </gds-form-control-footer>`
   }
 }
+
+/**
+ * @summary A form control component for grouping radio buttons.
+ * @status beta
+ *
+ * @element gds-radio-group
+ *
+ * @slot - Default slot for radio buttons (accepts `gds-radio` elements)
+ * @slot extended-supporting-text - A longer supporting text that will be displayed in a panel when the user clicks the info button
+ *
+ * @event change - Fired when a radio button selection changes
+ * @event input - Fired when a radio button selection changes
+ *
+ */
+@gdsCustomElement('gds-radio-group')
+export class GdsRadioGroup extends RadioGroup {}

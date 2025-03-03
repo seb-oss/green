@@ -17,24 +17,46 @@ import '../../primitives/selection-controls'
 export class GdsRadio extends GdsElement {
   static styles = [tokens, styles]
 
+  /**
+   * The label displayed next to the radio button.
+   */
   @property()
   label = ''
 
+  /**
+   * The supporting text displayed below the label.
+   * This text provides additional context or information to the user.
+   */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
+  /**
+   * The value of the radio button.
+   */
   @property()
   value = ''
 
+  /**
+   * Whether the radio button is checked or not.
+   */
   @property({ type: Boolean, reflect: true })
   checked = false
 
+  /**
+   * Whether the radio button is disabled or not.
+   */
   @property({ type: Boolean, reflect: true })
   disabled = false
 
+  /**
+   * Controls the font-size of label and supporting text.
+   */
   @property()
   size: 'large' | 'small' = 'large'
 
+  /**
+   * Whether the radio button is invalid or not.
+   */
   @property({ type: Boolean })
   invalid = false
 
