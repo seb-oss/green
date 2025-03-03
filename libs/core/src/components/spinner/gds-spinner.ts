@@ -125,6 +125,7 @@ export class GdsSpinner extends GdsElement {
    * Cleans up document styles if fullscreen mode was used
    */
   disconnectedCallback(): void {
+    super.disconnectedCallback()
     if (this.fullscreen) {
       this.#toggleRootStyles(false)
     }

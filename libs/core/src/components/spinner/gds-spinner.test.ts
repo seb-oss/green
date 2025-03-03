@@ -1,8 +1,14 @@
-import { expect, fixture, html } from '@open-wc/testing'
+import { expect, fixture, html as testingHtml } from '@open-wc/testing'
+
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 import type { GdsSpinner } from './gds-spinner'
 
-import './gds-spinner'
+import '@sebgroup/green-core/components/spinner/index.js'
+
+import sinon from 'sinon'
+
+const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-spinner>', () => {
   describe('Rendering', () => {
@@ -85,30 +91,22 @@ describe('<gds-spinner>', () => {
 
   describe('Events', () => {
     it('should dispatch gds-spinner-shown event on connection', async () => {
-      let eventFired = false
-      const el = document.createElement('gds-spinner') as GdsSpinner
-      el.addEventListener('gds-spinner-shown', () => {
-        eventFired = true
-      })
-      document.body.appendChild(el)
-      await el.updateComplete
+      const eventSpy = sinon.spy()
+      await fixture<GdsSpinner>(
+        html`<gds-spinner @gds-spinner-shown=${eventSpy}></gds-spinner>`,
+      )
 
-      expect(eventFired).to.be.true
-      document.body.removeChild(el)
+      expect(eventSpy.calledOnce).to.be.true
     })
 
     it('should dispatch gds-spinner-hidden event on disconnection', async () => {
-      let eventFired = false
-      const el = document.createElement('gds-spinner') as GdsSpinner
-      document.body.appendChild(el)
-      await el.updateComplete
+      const eventSpy = sinon.spy()
+      const el = await fixture<GdsSpinner>(
+        html`<gds-spinner @gds-spinner-hidden=${eventSpy}></gds-spinner>`,
+      )
+      el.remove()
 
-      el.addEventListener('gds-spinner-hidden', () => {
-        eventFired = true
-      })
-      document.body.removeChild(el)
-
-      expect(eventFired).to.be.true
+      expect(eventSpy.calledOnce).to.be.true
     })
   })
 
