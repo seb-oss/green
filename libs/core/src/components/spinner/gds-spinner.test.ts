@@ -1,5 +1,4 @@
-import { expect } from '@esm-bundle/chai'
-import { fixture, html } from '@open-wc/testing'
+import { expect, fixture, html } from '@open-wc/testing'
 
 import type { GdsSpinner } from './gds-spinner'
 
