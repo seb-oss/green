@@ -8,6 +8,8 @@ import IconCSS from './icon.style'
 /**
  * @element gds-icon
  * @status stable
+ *
+ * @part icon - The icon SVG element.
  */
 export abstract class GdsIcon extends GdsElement {
   static styles = [IconCSS]
