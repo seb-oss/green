@@ -38,23 +38,23 @@ export const styles = css`
       display: flex;
       flex-direction: column;
       gap: var(--gds-space-m);
+    }
 
-      .content {
-        display: flex;
-        position: relative;
-        max-width: max-content;
-      }
+    .content {
+      display: flex;
+      position: relative;
+      max-width: max-content;
+    }
 
-      &.direction-row .content {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: var(--gds-space-l);
-      }
+    .direction-row .content {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--gds-space-l);
+    }
 
-      &.direction-column .content {
-        flex-direction: column;
-        gap: var(--gds-space-xs);
-      }
+    .direction-column .content {
+      flex-direction: column;
+      gap: var(--gds-space-xs);
     }
 
     .radio {
@@ -73,65 +73,63 @@ export const styles = css`
       border-radius: var(--radio-radius);
       width: var(--radio-size);
       height: var(--radio-size);
+    }
 
-      &:focus {
-        outline-color: var(--gds-color-l3-content-tertiary);
-
-        &:not(:focus-visible) {
-          outline-color: transparent;
-        }
+    @media (hover: hover) {
+      .radio:hover,
+      :host(:hover) .radio {
+        background-color: var(--radio-bg-mix);
       }
+    }
 
-      @media (hover: hover) {
-        &:hover,
-        :host(:hover) & {
-          background-color: var(--radio-bg-mix);
-        }
-      }
+    .radio:active,
+    :host(:active) .radio {
+      background-color: var(--radio-bg-mix-active);
+      scale: 0.96;
+    }
 
-      &:active,
-      :host(:active) & {
-        background-color: var(--radio-bg-mix-active);
-        scale: 0.96;
-      }
+    .radio:focus {
+      outline-color: var(--gds-color-l3-content-tertiary);
+    }
 
-      &[aria-checked='true']:active {
-        .dot {
-          box-shadow: inset 0 0 0 1px var(--radio-border-color-selected);
-        }
-      }
+    .radio:not(:focus-visible) {
+      outline-color: transparent;
+    }
 
-      .dot {
-        appearance: none;
-        width: var(--radio-pill-size);
-        height: var(--radio-pill-size);
-        border-radius: var(--radio-radius);
-        border: none;
-        box-shadow: inset 0 0 0 var(--radio-border-width)
-          var(--radio-border-color);
-        background-color: var(--radio-dot-background-color);
-        box-sizing: border-box;
-        transition-property: box-shadow;
-        transition-duration: 248ms;
-        will-change: box-shadow;
+    :host([aria-checked='true']):active .dot {
+      box-shadow: inset 0 0 0 1px var(--radio-border-color-selected);
+    }
 
-        [aria-checked='true'] &,
-        :active & {
-          box-shadow: inset 0 0 0 var(--radio-border-width-selected)
-            var(--radio-border-color-selected);
-        }
-      }
+    .dot {
+      appearance: none;
+      width: var(--radio-pill-size);
+      height: var(--radio-pill-size);
+      border-radius: var(--radio-radius);
+      border: none;
+      box-shadow: inset 0 0 0 var(--radio-border-width)
+        var(--radio-border-color);
+      background-color: var(--radio-dot-background-color);
+      box-sizing: border-box;
+      transition-property: box-shadow;
+      transition-duration: 248ms;
+      will-change: box-shadow;
+    }
+
+    [aria-checked='true'] .dot,
+    :host(:active) .dot {
+      box-shadow: inset 0 0 0 var(--radio-border-width-selected)
+        var(--radio-border-color-selected);
     }
 
     /* Disabled styles */
 
     :host([disabled]) {
       pointer-events: none;
+    }
 
-      .radio .dot {
-        box-shadow: none;
-        background-color: var(--gds-color-l3-content-disabled);
-      }
+    :host([disabled]) .radio .dot {
+      box-shadow: none;
+      background-color: var(--gds-color-l3-content-disabled);
     }
 
     /*
