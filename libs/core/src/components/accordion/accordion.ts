@@ -35,6 +35,12 @@ export class GdsAccordion extends GdsElement {
   @property()
   name = ''
 
+  /**
+   * Controls if the accordion is open
+   */
+  @property({ type: Boolean, reflect: true })
+  open = false
+
   @state()
   private isOpen = false
 
@@ -51,6 +57,9 @@ export class GdsAccordion extends GdsElement {
       'gds-accordion-opened',
       this.handleOtherAccordions.bind(this),
     )
+
+    // Set initial state based on open property
+    this.isOpen = this.open
   }
 
   disconnectedCallback() {
@@ -62,16 +71,42 @@ export class GdsAccordion extends GdsElement {
     super.disconnectedCallback()
   }
 
+  updated(changedProperties: Map<string, any>) {
+    if (changedProperties.has('open')) {
+      this.handleOpenChange()
+    }
+  }
+
+  private handleOpenChange() {
+    const details = this.shadowRoot?.querySelector('details')
+    if (details) {
+      details.open = this.open
+      this.isOpen = this.open
+
+      // If opening via property and has a name, notify other accordions
+      if (this.open && this.name) {
+        const accordionEvent = new CustomEvent('gds-accordion-opened', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            name: this.name,
+            sourceId: this.id,
+          },
+        })
+        window.dispatchEvent(accordionEvent)
+      }
+    }
+  }
+
   private handleOtherAccordions(event: Event) {
-    // Check if this is another accordion with the same name
     const customEvent = event as CustomEvent
     if (
       this.name &&
       customEvent.detail.name === this.name &&
       customEvent.detail.sourceId !== this.id
     ) {
+      this.open = false
       this.isOpen = false
-      // Force the details element to close
       const details = this.shadowRoot?.querySelector('details')
       if (details) {
         details.open = false
@@ -82,12 +117,12 @@ export class GdsAccordion extends GdsElement {
   private handleToggle = (event: Event) => {
     const details = event.target as HTMLDetailsElement
     this.isOpen = details.open
+    this.open = details.open // Update the open property to match the current state
 
     if (this.isOpen && this.name) {
-      // Dispatch custom event when accordion is opened
       const accordionEvent = new CustomEvent('gds-accordion-opened', {
         bubbles: true,
-        composed: true, // This allows the event to cross Shadow DOM boundaries
+        composed: true,
         detail: {
           name: this.name,
           sourceId: this.id,
@@ -97,7 +132,6 @@ export class GdsAccordion extends GdsElement {
     }
   }
 
-  // Generate unique ID if not present
   private ensureId(): string {
     if (!this.id) {
       this.id = `gds-accordion-${Math.random().toString(36).substr(2, 9)}`
@@ -106,9 +140,13 @@ export class GdsAccordion extends GdsElement {
   }
 
   render() {
-    this.ensureId() // Ensure we have an ID for event handling
+    this.ensureId()
 
-    return html`<details ?name=${this.name || ''} @toggle=${this.handleToggle}>
+    return html`<details
+      ?open=${this.open}
+      ?name=${this.name || ''}
+      @toggle=${this.handleToggle}
+    >
       <summary>
         ${this.summary ? this.summary : 'Summary'}
         <gds-button rank="tertiary">

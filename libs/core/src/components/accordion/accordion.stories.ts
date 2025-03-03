@@ -100,37 +100,52 @@ export const accordion: Story = {
  * - Each accordion maintains its own content independently
  * - The behavior works across Shadow DOM boundaries
  */
-export const RanksAndVariants: Story = {
+export const Name: Story = {
   ...DefaultParams,
   name: 'Name',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: (args) => html`
+    <gds-accordion name="Name" summary="Example">
+      <gds-rich-text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </gds-rich-text>
+    </gds-accordion>
+    <gds-accordion name="Name" summary="Example">
+      <gds-rich-text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </gds-rich-text>
+    </gds-accordion>
+    <gds-accordion name="Name" summary="Example">
+      <gds-rich-text>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </gds-rich-text>
+    </gds-accordion>
+  `,
+}
+
+export const Open: Story = {
+  ...DefaultParams,
+  name: 'Open',
   parameters: {
     ...DefaultParams.parameters,
     controls: { include: [] },
     docs: {
       description: {
         story: `
-### Group Behavior
-When multiple accordions share the same \`name\` attribute, they form a group. 
-Opening one accordion in the group automatically closes other accordions in the same group.
-
-### Use Cases
-- FAQ sections
-- Product details
-- Step-by-step guides
-- Settings panels
-- Content organization
-
-### Implementation Notes
-- Uses custom events to handle group behavior
-- Works across Shadow DOM boundaries
-- Maintains proper state management
-- Cleans up event listeners on disconnect
+### Open Accordion
+Just as in the native select if you set the open attribute to true the accordion will be open by default.
         `,
       },
     },
   },
   render: (args) => html`
-    <gds-accordion name="Name" summary="Example">
+    <gds-accordion open name="Name" summary="I'm open by default">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
