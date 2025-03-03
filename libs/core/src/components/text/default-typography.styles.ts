@@ -4,8 +4,12 @@ export const defaultStyles = css`
   @layer defaults {
     a:link {
       color: currentColor;
-      text-undeline-offset: 0.2lh;
+      text-underline-offset: 0.1lh;
       font-weight: var(--gds-text-weight-book);
+    }
+
+    a:visited {
+      color: currentColor;
     }
 
     h1 {
