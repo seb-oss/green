@@ -36,7 +36,6 @@ export default function Taber({ component, links }: TaberProps) {
       inset="70px 0 0 0"
       z-index="999"
       margin="0"
-      height="60px"
       display="none; m{flex}"
       border-radius="xs"
       border="0"

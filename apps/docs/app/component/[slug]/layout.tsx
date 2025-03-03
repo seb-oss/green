@@ -163,7 +163,7 @@ export default function ComponentLayout({
         margin="0 auto"
         gap="xl"
       >
-        <GdsDiv position="sticky" inset="58px 0 0 0">
+        <GdsDiv position="sticky" inset="58px 0 0 0" z-index="999">
           <GdsFlex gap="l" flex-direction="column">
             <GdsInput
               clearable
@@ -179,50 +179,35 @@ export default function ComponentLayout({
           {filteredIcons.map((iconName) => {
             const IconComponent = (ICONS as any)[iconName]
             return (
-              <GdsCard
-                level="2"
+              <GdsFlex
                 key={iconName}
                 flex-direction="column"
-                align-items="center"
-                padding="xs"
                 title={transformIconName(iconName)}
-                variant="secondary"
-                transition="all 482ms"
-                background="hover:primary"
-                border-color="primary; hover:secondary"
               >
-                <GdsFlex
-                  background="transparent"
+                <GdsCard
+                  variant="primary"
                   align-items="center"
                   justify-content="center"
                   padding="m"
-                  height="120px"
+                  height="160px"
+                  width="100%"
                   border-radius="s"
-                  cursor="pointer"
                   data-clipboard-text={`<${iconName}></${iconName}>`}
                   onClick={() => handleIconClick(`<${iconName}></${iconName}>`)}
                 >
                   <IconComponent height={24} />
-                </GdsFlex>
+                </GdsCard>
                 <GdsFlex
                   align-items="center"
                   justify-content="space-between"
-                  padding="xs xs 0 s"
+                  padding="0 s 0 s"
+                  width="100%"
                 >
                   <GdsText font-size="detail-xs">
                     {transformIconName(iconName)}
                   </GdsText>
-                  <GdsButton
-                    rank="tertiary"
-                    size="small"
-                    onClick={() =>
-                      handleIconClick(`<${iconName}></${iconName}>`)
-                    }
-                  >
-                    <IconSquareBehindSquare height={12} />
-                  </GdsButton>
                 </GdsFlex>
-              </GdsCard>
+              </GdsFlex>
             )
           })}
         </GdsGrid>
@@ -248,11 +233,13 @@ export default function ComponentLayout({
           <GdsText tag="p" text-wrap="balance" className="fade-in delay-200">
             {summary}
           </GdsText>
-          {status && (
-            <GdsBadge variant="notice" size="small">
-              {status}
-            </GdsBadge>
-          )}
+          <GdsFlex>
+            {status && (
+              <GdsBadge variant="notice" size="small">
+                {status}
+              </GdsBadge>
+            )}
+          </GdsFlex>
           <GdsFlex gap="s">
             Tags:
             {tagsArray.map((tag) => (
@@ -271,7 +258,7 @@ export default function ComponentLayout({
         </GdsFlex>
         <GdsFlex gap="l">
           <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <GdsCard variant="primary">
+            <GdsCard variant="primary" border-radius="s">
               <GdsFlex
                 gap="xl"
                 align-items="center"
