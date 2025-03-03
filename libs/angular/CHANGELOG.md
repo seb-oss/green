@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.3.3
+
+### Patch Changes
+
+- fc5b9d4: added actionEmitter and close on option click on foldout
+- Updated dependencies [25a87f9]
+  - @sebgroup/green-core@1.67.2
+
 ## 5.3.2
 
 ### Patch Changes
