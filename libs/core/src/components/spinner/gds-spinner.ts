@@ -1,3 +1,17 @@
+import { PropertyValues } from 'lit'
+import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
+
+import { GdsElement } from '../../gds-element'
+import { gdsCustomElement, html } from '../../scoping'
+import { styles } from './gds-spinner.styles'
+import {
+  GdsSpinnerProperties,
+  SpinnerConfig,
+  SpinnerSize,
+} from './gds-spinner.types'
+
 /**
  * @element gds-spinner
  * @status beta
@@ -39,25 +53,6 @@
  * @fires gds-spinner-shown - When the spinner is connected and visible
  * @fires gds-spinner-hidden - When the spinner is disconnected and hidden
  */
-
-import { PropertyValues } from 'lit'
-import { property, state } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
-import { when } from 'lit/directives/when.js'
-
-import { GdsElement } from '../../gds-element.js'
-import { TransitionalStyles } from '../../transitional-styles.js'
-import {
-  gdsCustomElement,
-  html,
-} from '../../utils/helpers/custom-element-scoping.js'
-import { styles } from './gds-spinner.styles.js'
-import {
-  GdsSpinnerProperties,
-  SpinnerConfig,
-  SpinnerSize,
-} from './gds-spinner.types'
-
 @gdsCustomElement('gds-spinner')
 export class GdsSpinner extends GdsElement {
   /**
@@ -124,7 +119,6 @@ export class GdsSpinner extends GdsElement {
     this.#updateAriaLabel()
     this._isAnimating = true
     this.dispatchEvent(new CustomEvent('gds-spinner-shown'))
-    TransitionalStyles.instance.apply(this, 'gds-spinner')
   }
 
   /**
