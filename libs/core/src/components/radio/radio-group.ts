@@ -20,12 +20,6 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   static styles = [styles]
 
   @property()
-  override label = ''
-
-  @property()
-  override name = ''
-
-  @property()
   size: 'large' | 'small' = 'large'
 
   @property()
@@ -58,8 +52,8 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     })
   }
 
+  /** Validates radio buttons for required label/value and minimum count */
   private _validateRadios() {
-    // Check for label and value
     const invalidRadios = this.radios.filter(
       (radio) => !radio.label || !radio.value,
     )
@@ -70,7 +64,6 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
       return false
     }
 
-    // Check for minimum number of radios
     if (this.radios.length < 2) {
       this.invalid = true
       this.errorMessage = msg('Minimum two radio buttons required')
@@ -80,16 +73,15 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     return true
   }
 
+  /** Sets up keyboard focus behavior for the radio group */
   private _initializeFocusable() {
-    // Make the group focusable
     this._contentElement.setAttribute('tabindex', '0')
-
-    // Set all radios to not be focusable by tab
     this.radios.forEach((radio) => {
       radio.setAttribute('tabindex', '-1')
     })
   }
 
+  /** Validates the radio group state and updates error messages */
   checkValidity() {
     if (!this.validator) {
       // If no custom validator, just check if required and has value
@@ -101,14 +93,12 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
       return true
     }
 
-    // Use the validator if provided (following the same pattern as input/dropdown)
     const validity = this.validator.validate(this)
     if (validity) {
       this.invalid = !validity[0].valid
       this.errorMessage = validity[1]
     }
 
-    // Propagate invalid state to radios
     this.radios.forEach((radio: any) => {
       radio.invalid = this.invalid
     })
@@ -120,6 +110,7 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     return this._contentElement
   }
 
+  /** Updates radio states when value changes */
   @watch('value')
   private _handleValueChange() {
     this._syncRadioStates()
@@ -127,11 +118,13 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     this.checkValidity()
   }
 
+  /** Triggers validation when required state changes */
   @watch('required')
   private _handleRequiredChange() {
     this.checkValidity()
   }
 
+  /** Propagates size changes to all radio buttons */
   @watch('size')
   private _handleSizeChange() {
     this.radios.forEach((radio: any) => {
@@ -139,6 +132,7 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     })
   }
 
+  /** Synchronizes checked state and validity across all radio buttons */
   private _syncRadioStates() {
     const isValid = this.checkValidity()
     this.radios.forEach((radio: any) => {
@@ -148,8 +142,8 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     })
   }
 
+  /** Handles focus management when group receives focus */
   private _handleFocus() {
-    // When group receives focus, focus the selected radio or first one
     const selectedRadio = this.radios.find((radio: any) => radio.checked)
     const radioToFocus = selectedRadio || this.radios[0]
 
@@ -158,6 +152,7 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     }
   }
 
+  /** Handles radio selection, validation, and event dispatching */
   private _handleRadioChange(e: Event) {
     const radio = e.target as HTMLElement
     if (radio.hasAttribute('value')) {
@@ -185,6 +180,7 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     }
   }
 
+  /** Handles keyboard navigation between radio buttons */
   private _handleKeyDown(e: KeyboardEvent) {
     const radios = this.radios.filter(
       (radio) => !radio.hasAttribute('disabled'),

@@ -43,10 +43,6 @@ export class GdsRadio extends GdsElement {
 
   connectedCallback() {
     super.connectedCallback()
-
-    // Perhaps warn when not wrapped in a radio group
-    // Or throw a validation error when not wrapped in a radio group
-
     this.setAttribute('role', 'radio')
   }
 
