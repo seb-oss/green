@@ -40,11 +40,20 @@ export const styles = css`
       gap: var(--gds-space-m);
 
       .content {
-        position: relative;
         display: flex;
+        position: relative;
+        max-width: max-content;
+      }
+
+      &.direction-row .content {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: var(--gds-space-l);
+      }
+
+      &.direction-column .content {
         flex-direction: column;
         gap: var(--gds-space-xs);
-        max-width: max-content;
       }
     }
 

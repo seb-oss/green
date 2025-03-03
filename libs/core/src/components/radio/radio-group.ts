@@ -1,4 +1,5 @@
 import { property, query } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 
 import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
@@ -23,6 +24,9 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   @property()
   size: 'large' | 'small' = 'large'
+
+  @property()
+  direction: 'row' | 'column' = 'column'
 
   @property({ attribute: 'supporting-text' })
   supportingText = ''
@@ -160,7 +164,13 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   render() {
-    return html`<div class="radio-group">
+    const classes = {
+      'radio-group': true,
+      'direction-row': this.direction === 'row',
+      'direction-column': this.direction === 'column',
+    }
+
+    return html`<div class=${classMap(classes)}>
       ${this.#renderRadioGroupContents()}
     </div>`
   }

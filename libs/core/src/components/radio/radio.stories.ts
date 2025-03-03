@@ -246,6 +246,66 @@ export const Size: Story = {
     </div>
   `,
 }
+export const Direction: Story = {
+  ...DefaultParams,
+  name: 'Direction',
+  render: () => html`
+    <div class="radio-group">
+      <gds-flex gap="xl" margin="0 auto">
+        <gds-card gap="s">
+          <gds-text tag="small">Column (default)</gds-text>
+          <gds-divider opacity="0.1"></gds-divider>
+          <gds-radio-group
+            label="Group Label"
+            supporting-text="Support text for the group"
+            value="4"
+            show-extended-supporting-text
+          >
+            <span slot="extended-supporting-text">
+              Extended supporting text for the group
+            </span>
+            <gds-radio
+              label="Radio Label"
+              value="1"
+              supporting-text="Example support text"
+            ></gds-radio>
+            <gds-radio
+              label="Radio Label"
+              value="2"
+              supporting-text="Example support text"
+            ></gds-radio>
+          </gds-radio-group>
+        </gds-card>
+        <gds-card gap="s" flex="1">
+          <gds-text tag="small">Row</gds-text>
+          <gds-divider opacity="0.1"></gds-divider>
+          <gds-radio-group
+            label="Group Label"
+            supporting-text="Support text for the group"
+            value="4"
+            size="small"
+            direction="row"
+            show-extended-supporting-text
+          >
+            <span slot="extended-supporting-text">
+              Extended supporting text for the group
+            </span>
+            <gds-radio
+              label="Radio Label"
+              value="1"
+              supporting-text="Example support text"
+            ></gds-radio>
+            <gds-radio
+              label="Radio Label"
+              value="2"
+              supporting-text="Example support text"
+            ></gds-radio>
+          </gds-radio-group>
+        </gds-card>
+      </gds-flex>
+    </div>
+  `,
+}
 
 export const GroupLabel: Story = {
   ...DefaultParams,
