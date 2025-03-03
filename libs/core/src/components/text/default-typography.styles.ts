@@ -51,18 +51,11 @@ export const defaultStyles = css`
     p,
     li {
       font-size: var(--gds-text-size-body-m);
-      line-height: 22px;
+      line-height: var(--gds-text-line-height-body-m);
     }
 
     strong {
       font-weight: var(--gds-text-weight-medium);
-    }
-
-    iframe {
-      border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
-      border-radius: var(--gds-space-xs);
-      min-width: 100%;
-      margin-bottom: var(--gds-space-l);
     }
   }
 `

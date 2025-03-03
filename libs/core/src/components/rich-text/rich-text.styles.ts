@@ -10,10 +10,6 @@ export const styles = css`
     display: block;
   }
 
-  :host > :first-child {
-    margin-top: 0;
-  }
-
   h1,
   h2,
   h3,
@@ -22,6 +18,10 @@ export const styles = css`
   h6 {
     margin-top: var(--gds-space-2xl);
     margin-bottom: var(--gds-space-xs);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6):first-of-type {
+    margin-top: unset;
   }
 
   h1 + h2 {
@@ -62,6 +62,12 @@ export const styles = css`
     max-width: 40ch;
   }
 
+  hr {
+    border: none;
+    border-top: var(--default-border);
+    margin: var(--gds-space-xl) 0;
+  }
+
   s {
     text-decoration: underline;
     text-decoration-skip-ink: none;
@@ -77,13 +83,28 @@ export const styles = css`
   * lists
   * -----------------------------------------------------------
   */
-  ul {
+  ul,
+  ol {
     padding-inline-start: 2ch;
+    margin: unset;
+    margin-bottom: 1lh;
+    max-width: 80ch;
   }
 
   ol {
-    margin-left: 3ch;
-    margin-bottom: 1lh;
+    counter-reset: list-counter;
+    list-style-type: none;
+    padding-inline-start: 1ch;
+  }
+
+  ol li {
+    display: flex;
+    counter-increment: list-counter;
+  }
+
+  ol li::before {
+    content: counter(list-counter) '. ';
+    min-width: 3ch;
   }
 
   li {
@@ -99,17 +120,20 @@ export const styles = css`
   }
 
   /*
-  * figure
+  * figure and image
   * -----------------------------------------------------------
   */
+  img {
+    display: block;
+    border-radius: var(--gds-space-xs);
+  }
+
   figure {
     margin: 0;
     padding: 0;
     margin-top: var(--gds-space-xl);
-    & img {
-      display: block;
-    }
   }
+
   figcaption {
     font-size: smaller;
     margin-block-start: var(--gds-space-xs);
@@ -178,10 +202,10 @@ export const styles = css`
     outline-offset: var(--gds-space-2xs);
     outline-color: currentColor;
     padding-inline: var(--gds-space-m);
+  }
 
-    &:focus-visible {
-      border-radius: var(--gds-space-2xs);
-    }
+  summary:focus-visible {
+    border-radius: var(--gds-space-2xs);
   }
 
   details:hover summary {
@@ -231,5 +255,15 @@ export const styles = css`
   a {
     color: currentColor;
     text-decoration-color: currentColor;
+  }
+
+  /*
+  * Iframe
+  */
+  iframe {
+    border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
+    border-radius: var(--gds-space-xs);
+    min-width: 100%;
+    margin-bottom: var(--gds-space-l);
   }
 `
