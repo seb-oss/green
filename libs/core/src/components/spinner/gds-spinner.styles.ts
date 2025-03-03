@@ -219,6 +219,7 @@ export const styles = css`
   .gds-spinner-wrapper.gds-spinner-backdrop {
     background-color: var(--spinner-backdrop-color);
     backdrop-filter: blur(var(--spinner-backdrop-blur));
+    --spinner-label-color: #fff;
   }
 
   /* Label styling */
