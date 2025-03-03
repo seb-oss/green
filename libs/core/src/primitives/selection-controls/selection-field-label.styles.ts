@@ -56,6 +56,10 @@ export const styles = css`
       &.has-supporting-text {
         padding-block-start: calc(1cap / 2);
       }
+
+      &.invalid {
+        color: var(--gds-color-l3-content-negative);
+      }
     }
 
     @media (hover: hover) {
