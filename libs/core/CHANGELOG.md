@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.67.2
+
+### Patch Changes
+
+- 25a87f9: **Context Menu:** Improved rendering performance
+
 ## 1.67.1
 
 ### Patch Changes
