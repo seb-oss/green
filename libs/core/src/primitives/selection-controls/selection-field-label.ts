@@ -103,7 +103,7 @@ export class GdsSelectionFieldLabel extends GdsElement {
           <label class="primary-label" part="primary-label">
             ${this.label}
           </label>
-          ${this.supportingText
+          ${this.label
             ? html`
                 <span class="supporting-text" part="_supporting-text">
                   ${this.supportingText}

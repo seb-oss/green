@@ -1,3 +1,4 @@
+import { msg } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
@@ -9,7 +10,7 @@ import { styles } from './radio.styles'
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 
-import { msg } from '@lit/localize'
+import type { GdsRadio } from './radio'
 
 /**
  * @element gds-radio-group
@@ -43,8 +44,12 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   @query('.content')
   private _contentElement!: HTMLElement
 
-  get radios() {
-    return Array.from(this.querySelectorAll('gds-radio'))
+  // get radios() {
+  //   return Array.from(this.querySelectorAll('gds-radio'))
+  // }
+
+  get radios(): GdsRadio[] {
+    return Array.from(this.querySelectorAll('gds-radio')) as GdsRadio[]
   }
 
   connectedCallback() {
@@ -53,7 +58,30 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     this.updateComplete.then(() => {
       this._syncRadioStates()
       this._initializeFocusable()
+      this._validateRadios()
     })
+  }
+
+  private _validateRadios() {
+    // Check for label and value
+    const invalidRadios = this.radios.filter(
+      (radio) => !radio.label || !radio.value,
+    )
+
+    if (invalidRadios.length > 0) {
+      this.invalid = true
+      this.errorMessage = msg('Radio buttons require label and value')
+      return false
+    }
+
+    // Check for minimum number of radios
+    if (this.radios.length < 2) {
+      this.invalid = true
+      this.errorMessage = msg('Minimum two radio buttons required')
+      return false
+    }
+
+    return true
   }
 
   private _initializeFocusable() {
@@ -99,6 +127,7 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   @watch('value')
   private _handleValueChange() {
     this._syncRadioStates()
+    this._validateRadios() // Add validation check
     this.checkValidity()
   }
 
@@ -140,6 +169,7 @@ export class GdsRadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
 
       this.value = newValue
       this._syncRadioStates()
+      this._validateRadios() // Add validation check
 
       this.dispatchEvent(
         new CustomEvent('change', {

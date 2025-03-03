@@ -83,18 +83,6 @@ export class GdsRadio extends GdsElement {
       invalid: this.invalid,
     }
 
-    /*
-    TODO:
-    
-    - [ ] Consolidate states between components
-        - [ ] Review state sharing between selection field label and radio
-        - [ ] Evaluate if radio dot should directly receive size or other information
-
-    - [ ] Validation
-        - [ ] Add validation to radio group
-        - [ ] Add validation to radio
-        - [ ] Add properly validation styling
-    */
     return html`
       <gds-selection-field-label
         supporting-text=${this.supportingText}
