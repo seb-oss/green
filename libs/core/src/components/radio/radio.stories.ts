@@ -11,11 +11,16 @@ import '../divider/divider'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
-import { validate } from 'webpack'
-
-import { GdsRadio } from './radio'
 import { GdsRadioGroup } from './radio-group'
 
+/**
+ * Radio buttons are form controls that allow users to select a single option from a set of mutually exclusive choices.<br/>
+ * They are grouped using a radio group component which manages selection, keyboard navigation, and validation.
+ *
+ * Radio groups provide built-in validation for required selection, proper configuration (label/value),
+ * and minimum number of options.<br/> They support both vertical and horizontal layouts, and can be sized
+ * to fit different space requirements.
+ */
 const meta: Meta = {
   title: 'Components/Radio',
   component: 'gds-radio-group',

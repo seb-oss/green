@@ -82,13 +82,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     this._syncRadioStates()
   }
 
-  /** Propagates size changes to all radio buttons
-   *
-   *
-   * TODO:
-   * - [ ] Remove this entirely and set the size using variables
-   * - [ ] Remove the size property
-   */
+  /** Propagates size changes to all radio buttons*/
   @watch('size')
   private _handleSizeChange() {
     this.radios.forEach((radio: any) => {

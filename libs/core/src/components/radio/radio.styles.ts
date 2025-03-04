@@ -24,13 +24,12 @@ export const styles = css`
         var(--gds-color-l3-states-light-pressed)
       );
       --radio-size: var(--gds-space-xl);
-      --radio-pill-size: var(--gds-space-m);
+      --radio-dot-size: var(--gds-space-m);
       --radio-radius: var(--gds-space-max);
       --radio-border-color: var(--gds-color-l3-border-secondary);
       --radio-border-color-selected: var(--gds-color-l3-border-primary);
       --radio-border-width: var(--gds-space-4xs);
       --radio-border-width-selected: var(--gds-space-2xs);
-      --radio-border-style: solid;
       --radio-dot-background-color: var(--gds-color-l3-content-primary);
     }
 
@@ -96,14 +95,14 @@ export const styles = css`
       outline-color: transparent;
     }
 
-    :host([aria-checked='true']):active .dot {
+    :host([checked]):active .dot {
       box-shadow: inset 0 0 0 1px var(--radio-border-color-selected);
     }
 
     .dot {
       appearance: none;
-      width: var(--radio-pill-size);
-      height: var(--radio-pill-size);
+      width: var(--radio-dot-size);
+      height: var(--radio-dot-size);
       border-radius: var(--radio-radius);
       border: none;
       box-shadow: inset 0 0 0 var(--radio-border-width)
@@ -115,7 +114,7 @@ export const styles = css`
       will-change: box-shadow;
     }
 
-    [aria-checked='true'] .dot,
+    :host([checked]) .dot,
     :host(:active) .dot {
       box-shadow: inset 0 0 0 var(--radio-border-width-selected)
         var(--radio-border-color-selected);
@@ -132,13 +131,6 @@ export const styles = css`
       background-color: var(--gds-color-l3-content-disabled);
     }
 
-    /*
-    TODO:
-     - [ ] Invalid styles 
-     - [ ] Consider shuffling the logic to consolidate the styles
-      
-
-     */
     .radio.invalid {
       --radio-border-color: var(--gds-color-l3-border-negative);
       --radio-dot-background-color: var(
