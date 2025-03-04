@@ -16,14 +16,14 @@ describe('<gds-spinner>', () => {
       const el = await fixture<GdsSpinner>(html`<gds-spinner></gds-spinner>`)
       await el.updateComplete
 
-      expect(el.size).to.equal('default')
+      expect(el.size).to.equal('md')
       expect(el.cover).to.be.false
       expect(el.fullscreen).to.be.false
       expect(el.showLabel).to.be.false
-      expect(el.label).to.be.undefined
+      expect(el.label).to.equal('Loading...')
       expect(el.getAttribute('role')).to.equal('status')
       expect(el.getAttribute('aria-live')).to.equal('polite')
-      expect(el.getAttribute('aria-label')).to.equal('Loading content')
+      expect(el.getAttribute('aria-label')).to.equal('Loading...')
     })
 
     it('should render spinner with label', async () => {
