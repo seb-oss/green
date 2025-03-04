@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.68.0
+
+### Minor Changes
+
+- 2378057: **Spinner:** Add new component
+
 ## 1.67.3
 
 ### Patch Changes
