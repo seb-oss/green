@@ -158,7 +158,9 @@ export const LabelOptions: Story = {
   `,
 }
 
-// Container cover mode
+/**
+ * By setting the container position to relative, the spinner can cover the entire container by using the `cover` attribute.
+ */
 export const Cover: Story = {
   name: 'Container Cover',
   render: () => html`
