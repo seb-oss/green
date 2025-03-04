@@ -90,21 +90,11 @@ describe('<gds-spinner>', () => {
   })
 
   describe('Events', () => {
-    it('should dispatch gds-spinner-shown event on connection', async () => {
+    it('should dispatch gds-spinner-connected event on connection', async () => {
       const eventSpy = sinon.spy()
       await fixture<GdsSpinner>(
-        html`<gds-spinner @gds-spinner-shown=${eventSpy}></gds-spinner>`,
+        html`<gds-spinner @gds-spinner-connected=${eventSpy}></gds-spinner>`,
       )
-
-      expect(eventSpy.calledOnce).to.be.true
-    })
-
-    it('should dispatch gds-spinner-hidden event on disconnection', async () => {
-      const eventSpy = sinon.spy()
-      const el = await fixture<GdsSpinner>(
-        html`<gds-spinner @gds-spinner-hidden=${eventSpy}></gds-spinner>`,
-      )
-      el.remove()
 
       expect(eventSpy.calledOnce).to.be.true
     })

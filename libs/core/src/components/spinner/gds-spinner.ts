@@ -53,8 +53,7 @@ import { styles } from './gds-spinner.styles'
  * <gds-spinner fullscreen label="Loading application..." showLabel></gds-spinner>
  * ```
  *
- * @fires gds-spinner-shown - When the spinner is connected and visible
- * @fires gds-spinner-hidden - When the spinner is disconnected and hidden
+ * @fires gds-spinner-connected - When the spinner is connected and visible
  */
 @gdsCustomElement('gds-spinner')
 @localized()
@@ -111,7 +110,7 @@ export class GdsSpinner extends withMarginProps(
     this.setAttribute('role', 'status')
     this.setAttribute('aria-live', 'polite')
     this._isAnimating = true
-    this.dispatchEvent(new CustomEvent('gds-spinner-shown'))
+    this.dispatchEvent(new CustomEvent('gds-spinner-connected'))
   }
 
   /**
@@ -124,7 +123,6 @@ export class GdsSpinner extends withMarginProps(
       this._toggleRootStyles()
     }
     this._isAnimating = false
-    this.dispatchEvent(new CustomEvent('gds-spinner-hidden'))
     super.disconnectedCallback()
   }
 
