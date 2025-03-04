@@ -1,3 +1,4 @@
+// radio.ts
 import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
@@ -66,28 +67,25 @@ export class GdsRadio extends GdsElement {
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'radio')
+    this._updateAriaState()
+  }
+
+  private _updateAriaState() {
     this.setAttribute('aria-checked', this.checked.toString())
     this.setAttribute('aria-disabled', this.disabled.toString())
-    if (!this.disabled) {
-      this.setAttribute('tabindex', '0')
-    }
+    this.setAttribute('tabindex', this.disabled ? '-1' : '0')
+    this.toggleAttribute('aria-invalid', this.invalid)
   }
 
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties)
 
-    if (changedProperties.has('checked')) {
-      this.setAttribute('aria-checked', this.checked.toString())
-    }
-    if (changedProperties.has('disabled')) {
-      this.setAttribute('aria-disabled', this.disabled.toString())
-      this.setAttribute('tabindex', this.disabled ? '-1' : '0')
-    }
-    if (changedProperties.has('label')) {
-      this.setAttribute('aria-label', this.label)
-    }
-    if (changedProperties.has('invalid')) {
-      this.setAttribute('aria-invalid', this.invalid.toString())
+    if (
+      changedProperties.has('checked') ||
+      changedProperties.has('disabled') ||
+      changedProperties.has('invalid')
+    ) {
+      this._updateAriaState()
     }
   }
 

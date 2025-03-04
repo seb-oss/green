@@ -53,7 +53,7 @@ export const styles = css`
     }
 
     :host(:focus) .radio {
-      outline-color: var(--gds-color-l3-content-tertiary);
+      outline-color: var(--_radio-outline-color);
     }
 
     :host(:not(:focus-visible)) .radio {

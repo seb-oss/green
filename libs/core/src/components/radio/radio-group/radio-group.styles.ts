@@ -32,6 +32,7 @@ export const styles = css`
 
     /* Color */
     --_radio-label-color: var(--gds-color-l3-content-tertiary);
+    --_radio-outline-color: var(--gds-color-l3-content-tertiary);
   }
 
   :host(:invalid) {
@@ -50,6 +51,7 @@ export const styles = css`
       var(--gds-color-l3-states-negative-pressed)
     );
     --_radio-label-color: var(--gds-color-l3-content-negative);
+    --_radio-outline-color: var(--gds-color-l3-content-negative);
   }
 
   :host([size='small']) {

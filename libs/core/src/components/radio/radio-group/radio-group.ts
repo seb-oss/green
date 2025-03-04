@@ -1,3 +1,4 @@
+// radio-group.ts
 import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -64,7 +65,6 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.addEventListener('invalid', this._syncRadioStates)
   }
 
-  /** Sets up keyboard focus behavior for the radio group */
   private _initializeFocusable() {
     this._contentElement.setAttribute('tabindex', '0')
     this.radios.forEach((radio) => {
@@ -76,21 +76,11 @@ class RadioGroup extends GdsFormControlElement<string> {
     return this._contentElement
   }
 
-  /** Updates radio states when value changes */
   @watch('value')
   private _handleValueChange() {
     this._syncRadioStates()
   }
 
-  /** Propagates size changes to all radio buttons*/
-  @watch('size')
-  private _handleSizeChange() {
-    this.radios.forEach((radio: any) => {
-      radio.size = this.size
-    })
-  }
-
-  /** Synchronizes checked state and validity across all radio buttons */
   @watch('invalid')
   private _syncRadioStates() {
     this.radios.forEach((radio: any) => {
@@ -100,7 +90,6 @@ class RadioGroup extends GdsFormControlElement<string> {
     })
   }
 
-  /** Handles focus management when group receives focus */
   private _handleFocus() {
     const selectedRadio = this.radios.find((radio: any) => radio.checked)
     const radioToFocus = selectedRadio || this.radios[0]
@@ -110,27 +99,25 @@ class RadioGroup extends GdsFormControlElement<string> {
     }
   }
 
-  /** Handles radio selection, validation, and event dispatching */
+  private _dispatchChangeEvents() {
+    this.dispatchEvent(
+      new CustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+      }),
+    )
+    this.dispatchEvent(new Event('input', { bubbles: true }))
+  }
+
   private _handleRadioChange(e: Event) {
     const radio = e.target as GdsRadio
     if (radio.hasAttribute('value')) {
-      const newValue = radio.value
-
-      this.value = newValue
-
+      this.value = radio.value
       this._syncRadioStates()
-
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { value: this.value },
-          bubbles: true,
-        }),
-      )
-      this.dispatchEvent(new Event('input', { bubbles: true }))
+      this._dispatchChangeEvents()
     }
   }
 
-  /** Handles keyboard navigation between radio buttons */
   private _handleKeyDown(e: KeyboardEvent) {
     const radios = this.radios.filter(
       (radio) => !radio.hasAttribute('disabled'),
@@ -157,7 +144,6 @@ class RadioGroup extends GdsFormControlElement<string> {
         break
       }
       case 'Tab': {
-        // Let tab move focus out of the group
         return
       }
       default:
@@ -170,14 +156,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.value = nextRadio.value
 
     this._syncRadioStates()
-
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-        bubbles: true,
-      }),
-    )
-    this.dispatchEvent(new Event('input', { bubbles: true }))
+    this._dispatchChangeEvents()
   }
 
   render() {
@@ -248,7 +227,6 @@ class RadioGroup extends GdsFormControlElement<string> {
  *
  * @event change - Fired when a radio button selection changes
  * @event input - Fired when a radio button selection changes
- *
  */
 @gdsCustomElement('gds-radio-group')
 export class GdsRadioGroup extends RadioGroup {}
