@@ -80,6 +80,7 @@ export const States: Story = {
       <gds-radio-group
         label="Group Label"
         supporting-text="Support text for the group"
+        value="2"
         show-extended-supporting-text
       >
         <span slot="extended-supporting-text">
@@ -255,7 +256,7 @@ export const Single: Story = {
   render: () => html`
     <div class="radio-group">
       <gds-radio-group>
-        <gds-radio value="1" label="Missing value"></gds-radio>
+        <gds-radio value="1" label="Radio Label"></gds-radio>
       </gds-radio-group>
     </div>
   `,
