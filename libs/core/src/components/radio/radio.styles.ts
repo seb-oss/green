@@ -81,8 +81,6 @@ export const styles = css`
         var(--radio-border-color-selected);
     }
 
-    /* Disabled styles */
-
     :host([disabled]) {
       pointer-events: none;
     }

@@ -1,6 +1,4 @@
-// radio.ts
 import { property, state } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
@@ -48,12 +46,6 @@ export class GdsRadio extends GdsElement {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
-
-  /**
-   * Controls the font-size of label and supporting text.
-   */
-  @property()
-  size: 'large' | 'small' = 'large'
 
   /**
    * Whether the radio button is invalid or not.
@@ -128,14 +120,6 @@ export class GdsRadio extends GdsElement {
   }
 
   render() {
-    // const classes = {
-    //   radio: true,
-    //   checked: this.checked,
-    //   disabled: this.disabled,
-    //   focused: this._isFocused,
-    //   invalid: this.invalid,
-    // }
-
     return html`
       <gds-selection-field-label
         supporting-text=${this.supportingText}
