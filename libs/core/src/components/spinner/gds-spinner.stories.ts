@@ -12,6 +12,7 @@ import '../text'
 import '../card'
 import '../theme'
 import '../button'
+import '../divider'
 
 /**
  * A loading indicator component that supports various sizes and display modes.
@@ -110,49 +111,49 @@ export const Sizes: Story = {
   render: () => html`
     <gds-flex gap="2xl" align-items="center">
       <gds-div text-align="center">
-        <gds-spinner size="sm"></gds-spinner>
-        <gds-text tag="p" margin-top="m">Small</gds-text>
+        <gds-spinner size="sm" label="small" showLabel></gds-spinner>
       </gds-div>
       <gds-div text-align="center">
-        <gds-spinner size="default"></gds-spinner>
-        <gds-text tag="p" margin-top="m">Default</gds-text>
+        <gds-spinner size="default" label="Default" showLabel></gds-spinner>
       </gds-div>
       <gds-div text-align="center">
-        <gds-spinner size="md"></gds-spinner>
-        <gds-text tag="p" margin-top="m">Medium</gds-text>
+        <gds-spinner size="md" label="Medium" showLabel></gds-spinner>
       </gds-div>
       <gds-div text-align="center">
-        <gds-spinner size="lg"></gds-spinner>
-        <gds-text tag="p" margin-top="m">Large</gds-text>
+        <gds-spinner size="lg" label="Large" showLabel></gds-spinner>
       </gds-div>
     </gds-flex>
   `,
 }
 
-// Label Options
+/**
+ * The label is hidden by default, but can also be shown visually.
+ *
+ * A label should always be provided for accessibility reasons.
+ */
 export const LabelOptions: Story = {
   name: 'Label Options',
   render: () => html`
-    <gds-flex gap="4xl" align-items="center">
-      <gds-div text-align="center">
-        <gds-spinner
-          size="md"
-          label="With visible label"
-          showLabel
-        ></gds-spinner>
-        <gds-text tag="p" margin-top="m">Visible Label</gds-text>
-      </gds-div>
-      <gds-div text-align="center">
-        <gds-spinner
-          size="md"
-          label="With hidden label (for screen readers)"
-        ></gds-spinner>
-        <gds-text tag="p" margin-top="m">Hidden Label</gds-text>
-      </gds-div>
-      <gds-div text-align="center">
-        <gds-spinner size="md"></gds-spinner>
-        <gds-text tag="p" margin-top="m">No Label</gds-text>
-      </gds-div>
+    <gds-flex gap="4xl" align-items="stretch">
+      <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
+        <gds-text tag="h4">Visible Label</gds-text>
+        <gds-card>
+          <gds-spinner
+            size="md"
+            label="With visible label"
+            showLabel
+          ></gds-spinner>
+        </gds-card>
+      </gds-flex>
+      <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
+        <gds-text tag="h4">Hidden Label</gds-text>
+        <gds-card>
+          <gds-spinner
+            size="md"
+            label="With hidden label (for screen readers)"
+          ></gds-spinner>
+        </gds-card>
+      </gds-flex>
     </gds-flex>
   `,
 }
@@ -206,7 +207,10 @@ export const Fullscreen: Story = {
   },
 }
 
-// Theme mode demo
+/**
+ * The spinner colors adaps to the current user settings, and the label uses currentColor
+ * to inherit the text color.
+ */
 export const ThemeModes: Story = {
   name: 'Light & Dark Theme',
   render: (args, { context }) => {
@@ -255,28 +259,31 @@ export const ThemeModes: Story = {
 
           <gds-flex gap="2xl" margin-top="l" justify-content="center">
             <gds-card padding="l" width="180px">
-              <gds-flex flex-direction="column" align-items="center">
-                <gds-spinner size="md"></gds-spinner>
+              <gds-flex flex-direction="column" align-items="center" gap="m">
                 <gds-text margin-top="m" font-weight="medium"
                   >Standard Spinner</gds-text
                 >
+                <gds-spinner size="md"></gds-spinner>
               </gds-flex>
             </gds-card>
 
             <gds-card padding="l" width="180px">
-              <gds-flex flex-direction="column" align-items="center">
+              <gds-flex flex-direction="column" align-items="center" gap="m">
+                <gds-text margin-top="m" font-weight="medium"
+                  >With Label</gds-text
+                >
                 <gds-spinner
                   size="md"
                   label="Loading..."
                   showLabel
                 ></gds-spinner>
-                <gds-text margin-top="m" font-weight="medium"
-                  >With Label</gds-text
-                >
               </gds-flex>
             </gds-card>
 
             <gds-card padding="l" width="180px">
+              <gds-text text-align="center" font-weight="medium"
+                >With Cover</gds-text
+              >
               <gds-div
                 position="relative"
                 height="100px"
@@ -286,12 +293,9 @@ export const ThemeModes: Story = {
                 background="surface"
                 margin-bottom="m"
               >
-                <gds-text margin="0" color="primary">Content</gds-text>
+              <gds-text margin="0" color="primary">Content</gds-text>
                 <gds-spinner size="md" cover></gds-spinner>
               </gds-div>
-              <gds-text text-align="center" font-weight="medium"
-                >With Cover</gds-text
-              >
             </gds-card>
           </gds-flex>
         </gds-div>
