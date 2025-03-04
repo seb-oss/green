@@ -78,7 +78,6 @@
             formControlName="radio"
             label="Radio"
             supporting-text="Select an option"
-            value="1"
             [errorMessage]="getError(simpleForm.get('radio'))"
           >
             <gds-radio
@@ -153,6 +152,17 @@
               {{ simpleForm.get('select')?.value }}
               <gds-text
                 *ngIf="simpleForm.get('select')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Radio</th>
+            <td>
+              {{ simpleForm.get('radio')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('radio')?.invalid"
                 color="negative"
                 >(invalid)</gds-text
               >
