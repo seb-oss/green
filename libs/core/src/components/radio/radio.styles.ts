@@ -12,48 +12,12 @@ export const styles = css`
   }
 
   @layer base {
-    :host {
-      --radio-bg-mix: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-secondary),
-        var(--gds-color-l3-states-light-hover)
-      );
-      --radio-bg-mix-active: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-secondary),
-        var(--gds-color-l3-states-light-pressed)
-      );
-      --radio-size: var(--gds-space-xl);
-      --radio-dot-size: var(--gds-space-m);
-      --radio-radius: var(--gds-space-max);
-      --radio-border-color: var(--gds-color-l3-border-secondary);
-      --radio-border-color-selected: var(--gds-color-l3-border-primary);
-      --radio-border-width: var(--gds-space-4xs);
-      --radio-border-width-selected: var(--gds-space-2xs);
-      --radio-dot-background-color: var(--gds-color-l3-content-primary);
+    :host([disabled]) {
+      --_radio-label-color: var(--gds-color-l3-content-disabled);
     }
 
-    .radio-group {
-      display: flex;
-      flex-direction: column;
-      gap: var(--gds-space-m);
-    }
-
-    .content {
-      display: flex;
-      position: relative;
-      max-width: max-content;
-    }
-
-    .direction-row .content {
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: var(--gds-space-l);
-    }
-
-    .direction-column .content {
-      flex-direction: column;
-      gap: var(--gds-space-xs);
+    :host(:invalid) {
+      --_radio-label-color: var(--gds-color-l3-content-negative);
     }
 
     .radio {
@@ -72,6 +36,7 @@ export const styles = css`
       border-radius: var(--radio-radius);
       width: var(--radio-size);
       height: var(--radio-size);
+      cursor: pointer;
     }
 
     @media (hover: hover) {
@@ -87,16 +52,16 @@ export const styles = css`
       scale: 0.96;
     }
 
-    .radio:focus {
+    :host(:focus) {
+      outline: none;
+    }
+
+    :host(:focus) .radio {
       outline-color: var(--gds-color-l3-content-tertiary);
     }
 
-    .radio:not(:focus-visible) {
+    :host(:not(:focus-visible)) .radio {
       outline-color: transparent;
-    }
-
-    :host([checked]):active .dot {
-      box-shadow: inset 0 0 0 1px var(--radio-border-color-selected);
     }
 
     .dot {

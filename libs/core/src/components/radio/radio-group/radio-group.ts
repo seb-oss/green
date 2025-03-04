@@ -2,15 +2,15 @@ import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
-import { gdsCustomElement, html } from '../../scoping'
-import { watch } from '../../utils/decorators/watch'
-import { GdsFormControlElement } from '../form/form-control'
-import { styles } from './radio.styles'
+import { gdsCustomElement, html } from '../../../scoping'
+import { watch } from '../../../utils/decorators/watch'
+import { GdsFormControlElement } from '../../form/form-control'
+import { styles } from './radio-group.styles'
 
-import '../../primitives/form-control-header'
-import '../../primitives/form-control-footer'
+import '../../../primitives/form-control-header'
+import '../../../primitives/form-control-footer'
 
-import type { GdsRadio } from './radio'
+import type { GdsRadio } from '../radio'
 
 @localized()
 class RadioGroup extends GdsFormControlElement<string> {

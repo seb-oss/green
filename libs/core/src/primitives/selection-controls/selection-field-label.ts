@@ -25,7 +25,6 @@ import { styles } from './selection-field-label.styles' // Renamed style file
  * <gds-selection-field-label
  *   label="Choose an option"
  *   supporting-text="Additional information"
- *   type="radio"
  * >
  *   <slot><!-- radio/checkbox element goes here --></slot>
  * </gds-selection-field-label>
@@ -48,33 +47,6 @@ export class GdsSelectionFieldLabel extends GdsElement {
   @property({ attribute: 'supporting-text' })
   supportingText = ''
 
-  /**
-   * Indicates the type of selection control this label is associated with
-   */
-  @property()
-  type: 'radio' | 'checkbox' = 'radio'
-
-  /**
-   * Controls the size of the label and supporting text
-   */
-  @property()
-  size: 'large' | 'small' = 'large'
-
-  /**
-   * Whether the associated control is disabled
-   */
-  @property({
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
-
-  /**
-   * Whether the associated control is in an invalid state
-   */
-  @property({ type: Boolean })
-  invalid = false
-
   constructor() {
     super()
   }
@@ -87,10 +59,6 @@ export class GdsSelectionFieldLabel extends GdsElement {
   render() {
     const classes = {
       'selection-field-label': true,
-      [`type-${this.type}`]: true,
-      invalid: this.invalid,
-      disabled: this.disabled,
-      small: this.size === 'small',
       'has-supporting-text': !!this.supportingText,
     }
 
@@ -99,28 +67,15 @@ export class GdsSelectionFieldLabel extends GdsElement {
         <div class="control-slot">
           <slot></slot>
         </div>
-        <div class="${classMap(classes)}" part="_selection-field-label">
-          <label class="primary-label" part="primary-label">
-            ${this.label}
-          </label>
+        <div class="${classMap(classes)}">
+          <label class="primary-label"> ${this.label} </label>
           ${this.label
             ? html`
-                <span class="supporting-text" part="_supporting-text">
-                  ${this.supportingText}
-                </span>
+                <span class="supporting-text"> ${this.supportingText} </span>
               `
             : ''}
         </div>
       </div>
     `
-  }
-
-  @watch('disabled')
-  private _handleDisabledChange() {
-    if (this.disabled) {
-      this.setAttribute('inert', '')
-    } else {
-      this.removeAttribute('inert')
-    }
   }
 }

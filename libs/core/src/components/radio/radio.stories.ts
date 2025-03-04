@@ -3,7 +3,7 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './radio'
-import './radio-group'
+import './radio-group/radio-group'
 import '../flex/flex'
 import '../card/card'
 import '../text/text'
@@ -11,7 +11,7 @@ import '../divider/divider'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
-import { GdsRadioGroup } from './radio-group'
+import { GdsRadioGroup } from './radio-group/radio-group'
 
 /**
  * Radio buttons are form controls that allow users to select a single option from a set of mutually exclusive choices.<br/>

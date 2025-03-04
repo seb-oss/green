@@ -5,6 +5,7 @@ import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
+import { watch } from '../../utils/decorators/watch'
 import { styles } from './radio.styles'
 
 import '../../primitives/selection-controls'
@@ -63,13 +64,50 @@ export class GdsRadio extends GdsElement {
   @state()
   private _isFocused = false
 
+  constructor() {
+    super()
+    this.addEventListener('keydown', this._handleKeyDown)
+    this.addEventListener('focus', () => (this._isFocused = true))
+    this.addEventListener('blur', () => (this._isFocused = false))
+  }
+
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'radio')
+    this.setAttribute('aria-checked', this.checked.toString())
+    this.setAttribute('aria-disabled', this.disabled.toString())
+    if (!this.disabled) {
+      this.setAttribute('tabindex', '0')
+    }
   }
 
-  private _handleClick() {
+  updated(changedProperties: Map<string, unknown>) {
+    super.updated(changedProperties)
+
+    if (changedProperties.has('checked')) {
+      this.setAttribute('aria-checked', this.checked.toString())
+    }
+    if (changedProperties.has('disabled')) {
+      this.setAttribute('aria-disabled', this.disabled.toString())
+      this.setAttribute('tabindex', this.disabled ? '-1' : '0')
+    }
+    if (changedProperties.has('label')) {
+      this.setAttribute('aria-label', this.label)
+    }
+  }
+
+  @watch('disabled')
+  private _handleDisabledChange() {
+    if (this.disabled) {
+      this.setAttribute('inert', '')
+    } else {
+      this.removeAttribute('inert')
+    }
+  }
+
+  private _handleClick(e: Event) {
     if (this.disabled) return
+    e.preventDefault()
 
     this.checked = true
     this.focus()
@@ -81,14 +119,8 @@ export class GdsRadio extends GdsElement {
 
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      this._handleClick()
-    }
-  }
-
-  focus() {
-    const radioElement = this.renderRoot?.querySelector('.radio')
-    if (radioElement) {
-      ;(radioElement as HTMLElement).focus()
+      this.checked = true
+      this.dispatchEvent(new Event('change', { bubbles: true }))
     }
   }
 
@@ -105,27 +137,11 @@ export class GdsRadio extends GdsElement {
       <gds-selection-field-label
         supporting-text=${this.supportingText}
         label=${this.label}
-        size=${this.size}
         @click=${this._handleClick}
-        aria-disabled=${this.disabled}
-        aria-checked=${this.checked}
-        ?disabled=${this.disabled}
-        ?invalid=${this.invalid}
         type="radio"
       >
-        <div
-          class=${classMap(classes)}
-          role="radio"
-          tabindex="-1"
-          aria-checked=${this.checked}
-          aria-disabled=${this.disabled}
-          @click=${this._handleClick}
-          @keydown=${this._handleKeyDown}
-          @focus=${() => (this._isFocused = true)}
-          @blur=${() => (this._isFocused = false)}
-        >
+        <div class=${classMap(classes)}>
           <div class="dot"></div>
-          <slot></slot>
         </div>
       </gds-selection-field-label>
     `

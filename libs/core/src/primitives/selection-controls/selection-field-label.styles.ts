@@ -14,6 +14,7 @@ export const styles = css`
   @layer base {
     * {
       box-sizing: border-box;
+      --_color: var(--_radio-label-color, inherit);
     }
 
     .selection-field-container {
@@ -25,43 +26,22 @@ export const styles = css`
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color: var(--gds-color-l3-content-tertiary);
+      color: var(--_color);
     }
 
     .primary-label {
-      font-size: var(--gds-text-size-detail-m);
-      line-height: var(--gds-text-line-height-detail-m);
       font-weight: var(--gds-text-weight-book);
       cursor: pointer;
     }
 
-    .small .primary-label {
-      font-size: var(--gds-text-size-detail-s);
-      line-height: var(--gds-text-line-height-detail-s);
-    }
-
     .supporting-text {
-      font-size: var(--gds-text-size-detail-s);
-      line-height: var(--gds-text-line-height-detail-s);
+      font-size: var(--_font-size-supporting-text);
+      line-height: var(--_line-height-supporting-text);
       font-weight: var(--gds-text-weight-regular);
-      cursor: pointer;
-    }
-
-    .small .supporting-text {
-      font-size: var(--gds-text-size-detail-s);
-      line-height: var(--gds-line-height-detail-s);
-    }
-
-    .disabled {
-      color: var(--gds-color-l3-content-disabled);
     }
 
     .has-supporting-text {
       padding-block-start: calc(1cap / 2);
-    }
-
-    .invalid {
-      color: var(--gds-color-l3-content-negative);
     }
   }
 `
