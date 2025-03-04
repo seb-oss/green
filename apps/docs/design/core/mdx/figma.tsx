@@ -27,8 +27,8 @@ export default function Figma({
   const path = component?.pathSegments?.[0]?.pathName || ''
 
   const [svgSource, setSvgSource] = useState<string | null>(null)
-  const figureRef = useRef<HTMLElement | null>(null)
-  const constructedURL = `https://seb-oss.github.io/green-content/${path}.json`
+  const figureRef = useRef<HTMLDivElement | null>(null)
+  const constructedURL = `https://api.seb.io/${path}/${path}.images.json`
 
   useEffect(() => {
     const fetchFigmaNodes = async () => {
@@ -64,7 +64,6 @@ export default function Figma({
       max-height="max-content"
     >
       <GdsFlex
-        padding="xs"
         border-radius="s"
         align-items="center"
         background="primary"
@@ -85,7 +84,7 @@ export default function Figma({
           }}
         />
         {svgSource ? (
-          <figure
+          <div
             ref={figureRef}
             dangerouslySetInnerHTML={{ __html: svgSource }}
           />
