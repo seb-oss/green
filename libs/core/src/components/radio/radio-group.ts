@@ -1,4 +1,4 @@
-import { localized, msg } from '@lit/localize'
+import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
@@ -60,7 +60,6 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.updateComplete.then(() => {
       this._syncRadioStates()
       this._initializeFocusable()
-      //this._validateRadios()
     })
     this.addEventListener('invalid', this._syncRadioStates)
   }
@@ -81,17 +80,15 @@ class RadioGroup extends GdsFormControlElement<string> {
   @watch('value')
   private _handleValueChange() {
     this._syncRadioStates()
-    //this._validateRadios() // Add validation check
-    //this.checkValidity()
   }
 
-  /** Triggers validation when required state changes */
-  // @watch('required')
-  // private _handleRequiredChange() {
-  //   this.checkValidity()
-  // }
-
-  /** Propagates size changes to all radio buttons */
+  /** Propagates size changes to all radio buttons
+   *
+   *
+   * TODO:
+   * - [ ] Remove this entirely and set the size using variables
+   * - [ ] Remove the size property
+   */
   @watch('size')
   private _handleSizeChange() {
     this.radios.forEach((radio: any) => {
@@ -126,14 +123,6 @@ class RadioGroup extends GdsFormControlElement<string> {
       const newValue = radio.value
 
       this.value = newValue
-
-      //const basicValidation = this._validateRadios()
-      const validityCheck = this.checkValidity()
-
-      // if (basicValidation && validityCheck) {
-      //   this.invalid = false
-      //   this.errorMessage = ''
-      // }
 
       this._syncRadioStates()
 
@@ -185,15 +174,6 @@ class RadioGroup extends GdsFormControlElement<string> {
     nextRadio.checked = true
     nextRadio.focus()
     this.value = nextRadio.value
-
-    // Add same validation handling as in _handleRadioChange
-    //const basicValidation = this._validateRadios()
-    const validityCheck = this.checkValidity()
-
-    // if (basicValidation && validityCheck) {
-    //   this.invalid = false
-    //   this.errorMessage = ''
-    // }
 
     this._syncRadioStates()
 
