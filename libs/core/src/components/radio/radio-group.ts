@@ -13,7 +13,7 @@ import '../../primitives/form-control-footer'
 import type { GdsRadio } from './radio'
 
 @localized()
-class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
+class RadioGroup extends GdsFormControlElement<string> {
   static styles = [styles]
 
   /**
@@ -49,7 +49,9 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   private _contentElement!: HTMLElement
 
   get radios(): GdsRadio[] {
-    return Array.from(this.querySelectorAll('gds-radio')) as GdsRadio[]
+    return Array.from(
+      this.querySelectorAll('[gds-element=gds-radio]'),
+    ) as GdsRadio[]
   }
 
   connectedCallback() {
@@ -58,29 +60,9 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     this.updateComplete.then(() => {
       this._syncRadioStates()
       this._initializeFocusable()
-      this._validateRadios()
+      //this._validateRadios()
     })
-  }
-
-  /** Validates radio buttons for required label/value and minimum count */
-  private _validateRadios() {
-    const invalidRadios = this.radios.filter(
-      (radio) => !radio.label || !radio.value,
-    )
-
-    if (invalidRadios.length > 0) {
-      this.invalid = true
-      this.errorMessage = msg('Radio buttons require label and value')
-      return false
-    }
-
-    if (this.radios.length < 2) {
-      this.invalid = true
-      this.errorMessage = msg('Minimum two radio buttons required')
-      return false
-    }
-
-    return true
+    this.addEventListener('invalid', this._syncRadioStates)
   }
 
   /** Sets up keyboard focus behavior for the radio group */
@@ -91,31 +73,6 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     })
   }
 
-  /** Validates the radio group state and updates error messages */
-  checkValidity() {
-    if (!this.validator) {
-      // If no custom validator, just check if required and has value
-      if (this.required && !this.value) {
-        this.invalid = true
-        this.errorMessage = msg('Please select an option')
-        return false
-      }
-      return true
-    }
-
-    const validity = this.validator.validate(this)
-    if (validity) {
-      this.invalid = !validity[0].valid
-      this.errorMessage = validity[1]
-    }
-
-    this.radios.forEach((radio: any) => {
-      radio.invalid = this.invalid
-    })
-
-    return this.validity.valid
-  }
-
   protected _getValidityAnchor(): HTMLElement {
     return this._contentElement
   }
@@ -124,15 +81,15 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   @watch('value')
   private _handleValueChange() {
     this._syncRadioStates()
-    this._validateRadios() // Add validation check
-    this.checkValidity()
+    //this._validateRadios() // Add validation check
+    //this.checkValidity()
   }
 
   /** Triggers validation when required state changes */
-  @watch('required')
-  private _handleRequiredChange() {
-    this.checkValidity()
-  }
+  // @watch('required')
+  // private _handleRequiredChange() {
+  //   this.checkValidity()
+  // }
 
   /** Propagates size changes to all radio buttons */
   @watch('size')
@@ -143,12 +100,12 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
   }
 
   /** Synchronizes checked state and validity across all radio buttons */
+  @watch('invalid')
   private _syncRadioStates() {
-    const isValid = this.checkValidity()
     this.radios.forEach((radio: any) => {
       radio.checked = radio.value === this.value
       radio.size = this.size
-      radio.invalid = !isValid
+      radio.invalid = this.invalid
     })
   }
 
@@ -164,19 +121,19 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
 
   /** Handles radio selection, validation, and event dispatching */
   private _handleRadioChange(e: Event) {
-    const radio = e.target as HTMLElement
+    const radio = e.target as GdsRadio
     if (radio.hasAttribute('value')) {
-      const newValue = radio.getAttribute('value') as ValueT
+      const newValue = radio.value
 
       this.value = newValue
 
-      const basicValidation = this._validateRadios()
+      //const basicValidation = this._validateRadios()
       const validityCheck = this.checkValidity()
 
-      if (basicValidation && validityCheck) {
-        this.invalid = false
-        this.errorMessage = ''
-      }
+      // if (basicValidation && validityCheck) {
+      //   this.invalid = false
+      //   this.errorMessage = ''
+      // }
 
       this._syncRadioStates()
 
@@ -230,13 +187,13 @@ class RadioGroup<ValueT = any> extends GdsFormControlElement<ValueT> {
     this.value = nextRadio.value
 
     // Add same validation handling as in _handleRadioChange
-    const basicValidation = this._validateRadios()
+    //const basicValidation = this._validateRadios()
     const validityCheck = this.checkValidity()
 
-    if (basicValidation && validityCheck) {
-      this.invalid = false
-      this.errorMessage = ''
-    }
+    // if (basicValidation && validityCheck) {
+    //   this.invalid = false
+    //   this.errorMessage = ''
+    // }
 
     this._syncRadioStates()
 

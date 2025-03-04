@@ -11,6 +11,11 @@ import '../divider/divider'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
+import { validate } from 'webpack'
+
+import { GdsRadio } from './radio'
+import { GdsRadioGroup } from './radio-group'
+
 const meta: Meta = {
   title: 'Components/Radio',
   component: 'gds-radio-group',
@@ -125,12 +130,20 @@ export const Validation: Story = {
   ...DefaultParams,
   name: 'Validation',
   render: () => html`
-    <div class="radio-group">
+    <form class="radio-group">
       <gds-radio-group
         label="Group Label"
         supporting-text="Support text for the group"
         show-extended-supporting-text
-        required
+        .validator=${{
+          validate: (el: GdsRadioGroup) => {
+            if (!el.value)
+              return [
+                { ...el.validity, valid: false, customError: true },
+                'This is required',
+              ]
+          },
+        }}
       >
         <span slot="extended-supporting-text">
           Extended supporting text for the group
@@ -146,7 +159,8 @@ export const Validation: Story = {
           supporting-text="Example support text"
         ></gds-radio>
       </gds-radio-group>
-    </div>
+      <gds-button type="submit">Submit</gds-button>
+    </form>
   `,
 }
 
