@@ -7,6 +7,14 @@ import { DynamicStylesController } from './utils/controllers/dynamic-styles-cont
 // More info: https://lit.dev/Components/decorators/#decorator-versions
 import 'reflect-metadata'
 
+/**
+ * Base class for Green Core elements.
+ * This class sets up the base functionality that all Green Core elements share.
+ *
+ * @internal
+ *
+ * @fires gds-element-disconnected - When the element is disconnected from the DOM
+ */
 export class GdsElement extends LitElement {
   /**
    * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.

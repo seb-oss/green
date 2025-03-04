@@ -20,6 +20,7 @@
 's39938ecdae568740': `Syys`,
 's407a88a592a0987c': `Elokuu`,
 's46d6587089bd0356': `Seuraava kuukausi`,
+'s49730f3d5751a433': `Ladataan...`,
 's5052d10b539eabf0': `Maalis`,
 's58bfb494feb8eb02': str`${0} valittua`,
 's5d929ff1619ac0c9': `Hae`,
