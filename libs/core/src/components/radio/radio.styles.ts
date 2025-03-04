@@ -16,10 +16,6 @@ export const styles = css`
       --_radio-label-color: var(--gds-color-l3-content-disabled);
     }
 
-    :host(:invalid) {
-      --_radio-label-color: var(--gds-color-l3-content-negative);
-    }
-
     .radio {
       display: flex;
       align-items: center;
@@ -94,23 +90,6 @@ export const styles = css`
     :host([disabled]) .radio .dot {
       box-shadow: none;
       background-color: var(--gds-color-l3-content-disabled);
-    }
-
-    .radio.invalid {
-      --radio-border-color: var(--gds-color-l3-border-negative);
-      --radio-dot-background-color: var(
-        --gds-color-l3-background-negative-secondary
-      );
-      --radio-bg-mix: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-negative-secondary),
-        var(--gds-color-l3-states-negative-hover)
-      );
-      --radio-bg-mix-active: color-mix(
-        in srgb,
-        var(--gds-color-l3-background-negative-secondary),
-        var(--gds-color-l3-states-negative-pressed)
-      );
     }
   }
 `

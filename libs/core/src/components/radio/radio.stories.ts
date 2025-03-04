@@ -157,6 +157,7 @@ export const Validation: Story = {
         <gds-radio
           label="Radio Label"
           value="1"
+          .invalid=${true}
           supporting-text="Example support text"
         ></gds-radio>
         <gds-radio

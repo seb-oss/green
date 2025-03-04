@@ -32,7 +32,24 @@ export const styles = css`
 
     /* Color */
     --_radio-label-color: var(--gds-color-l3-content-tertiary);
-    color: var(--_radio-label-color);
+  }
+
+  :host(:invalid) {
+    --radio-border-color: var(--gds-color-l3-border-negative);
+    --radio-dot-background-color: var(
+      --gds-color-l3-background-negative-secondary
+    );
+    --radio-bg-mix: color-mix(
+      in srgb,
+      var(--gds-color-l3-background-negative-secondary),
+      var(--gds-color-l3-states-negative-hover)
+    );
+    --radio-bg-mix-active: color-mix(
+      in srgb,
+      var(--gds-color-l3-background-negative-secondary),
+      var(--gds-color-l3-states-negative-pressed)
+    );
+    --_radio-label-color: var(--gds-color-l3-content-negative);
   }
 
   :host([size='small']) {
@@ -52,6 +69,7 @@ export const styles = css`
     display: flex;
     position: relative;
     max-width: max-content;
+    color: var(--_radio-label-color);
   }
 
   .direction-row .content {

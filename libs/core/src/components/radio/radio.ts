@@ -94,6 +94,9 @@ export class GdsRadio extends GdsElement {
     if (changedProperties.has('label')) {
       this.setAttribute('aria-label', this.label)
     }
+    if (changedProperties.has('invalid')) {
+      this.setAttribute('aria-invalid', this.invalid.toString())
+    }
   }
 
   @watch('disabled')
@@ -125,13 +128,13 @@ export class GdsRadio extends GdsElement {
   }
 
   render() {
-    const classes = {
-      radio: true,
-      checked: this.checked,
-      disabled: this.disabled,
-      focused: this._isFocused,
-      invalid: this.invalid,
-    }
+    // const classes = {
+    //   radio: true,
+    //   checked: this.checked,
+    //   disabled: this.disabled,
+    //   focused: this._isFocused,
+    //   invalid: this.invalid,
+    // }
 
     return html`
       <gds-selection-field-label
@@ -140,7 +143,7 @@ export class GdsRadio extends GdsElement {
         @click=${this._handleClick}
         type="radio"
       >
-        <div class=${classMap(classes)}>
+        <div class="radio">
           <div class="dot"></div>
         </div>
       </gds-selection-field-label>
