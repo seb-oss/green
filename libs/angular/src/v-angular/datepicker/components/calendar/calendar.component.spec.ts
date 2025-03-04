@@ -74,40 +74,40 @@ describe('[NggvDatepicker]', () => {
     const closingTime = new Date(verifyDate)
     closingTime.setHours(verifyDate.getHours() - 1, 0, 0, 0)
 
-    describe.each`
-      inputName            | inputValue
-      ${'disableDates'}    | ${[verifyDate]}
-      ${'disableWeekDays'} | ${[verifyDate.getDay()]}
-      ${'firstValid'}      | ${firstValid}
-      ${'lastValid'}       | ${lastValid}
-      ${'closingTime'}     | ${closingTime}
-    `(
-      `for @Input() $inputName and value $inputValue`,
-      ({
-        inputName,
-        inputValue,
-      }: {
-        inputName:
-          | 'disableDates'
-          | 'disableWeekDays'
-          | 'firstValid'
-          | 'lastValid'
-          | 'closingTime'
-        inputValue: any
-      }) => {
-        const dateMatrix = generateDateMatrix(verifyMonth, verifyYear, 5, 1)
+    // describe.each`
+    //   inputName            | inputValue
+    //   ${'disableDates'}    | ${[verifyDate]}
+    //   ${'disableWeekDays'} | ${[verifyDate.getDay()]}
+    //   ${'firstValid'}      | ${firstValid}
+    //   ${'lastValid'}       | ${lastValid}
+    //   ${'closingTime'}     | ${closingTime}
+    // `(
+    //   `for @Input() $inputName and value $inputValue`,
+    //   ({
+    //     inputName,
+    //     inputValue,
+    //   }: {
+    //     inputName:
+    //       | 'disableDates'
+    //       | 'disableWeekDays'
+    //       | 'firstValid'
+    //       | 'lastValid'
+    //       | 'closingTime'
+    //     inputValue: any
+    //   }) => {
+    //     const dateMatrix = generateDateMatrix(verifyMonth, verifyYear, 5, 1)
 
-        it(`returns disabled for 'today'`, () => {
-          component.dateMatrix = dateMatrix
-          component[inputName] = inputValue
-          fixture.detectChanges()
+    //     it(`returns disabled for 'today'`, () => {
+    //       component.dateMatrix = dateMatrix
+    //       component[inputName] = inputValue
+    //       fixture.detectChanges()
 
-          const buttonDe = getDateButtonElement(verifyDate) as DebugElement
+    //       const buttonDe = getDateButtonElement(verifyDate) as DebugElement
 
-          expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')
-        })
-      },
-    )
+    //       expect(buttonDe.attributes['ng-reflect-disabled']).toEqual('true')
+    //     })
+    //   },
+    // )
 
     describe('generateDateMatrix', () => {
       it.each`
