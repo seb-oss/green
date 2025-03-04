@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useContext } from 'react'
-import { GdsButton, GdsContainer } from '$/import/components'
+import { GdsButton, GdsDiv } from '$/import/components'
 import { IconMoon, IconSun } from '$/import/icons'
 import { Context } from '$/provider/provider'
 
