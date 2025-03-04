@@ -8,6 +8,8 @@ import '../flex/flex'
 import '../card/card'
 import '../text/text'
 import '../divider/divider'
+import '../icon/icons/circle-check'
+import '../icon/icons/cross-small'
 
 const meta: Meta = {
   title: 'Components/Radio',
@@ -159,29 +161,71 @@ export const MissingLabel: Story = {
   name: 'Missing Label',
   render: () => html`
     <gds-flex gap="xl">
-      <gds-flex gap="s" flex-direction="column" flex="1">
-        <gds-text tag="small">Valid: Label and Value</gds-text>
-        <gds-divider opacity="0.1"></gds-divider>
-        <gds-radio-group>
-          <gds-radio label="Radio Label" value="1"></gds-radio>
-          <gds-radio label="Radio Label" value="2"></gds-radio>
-        </gds-radio-group>
+      <gds-flex gap="l" flex-direction="column" flex="1">
+        <gds-card
+          align-items="center"
+          flex-direction="row"
+          gap="2xs"
+          padding="s"
+          variant="positive"
+        >
+          <gds-icon-circle-check></gds-icon-circle-check>
+          <gds-text tag="small">Valid: Label and Value</gds-text>
+        </gds-card>
+        <gds-card>
+          <gds-radio-group label="Group Label" supporting-text="Support text">
+            <span slot="extended-supporting-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </span>
+            <gds-radio label="Radio Label" value="1"></gds-radio>
+            <gds-radio label="Radio Label" value="2"></gds-radio>
+          </gds-radio-group>
+        </gds-card>
       </gds-flex>
-      <gds-flex gap="s" flex-direction="column" flex="1">
-        <gds-text tag="small">Invalid: Missing label</gds-text>
-        <gds-divider opacity="0.1"></gds-divider>
-        <gds-radio-group>
-          <gds-radio value="1"></gds-radio>
-          <gds-radio value="2"></gds-radio>
-        </gds-radio-group>
+      <gds-flex gap="l" flex-direction="column" flex="1">
+        <gds-card
+          align-items="center"
+          flex-direction="row"
+          gap="2xs"
+          padding="s"
+          variant="negative"
+        >
+          <gds-icon-cross-small></gds-icon-cross-small>
+          <gds-text tag="small"> Invalid: Missing label </gds-text>
+        </gds-card>
+        <gds-card>
+          <gds-radio-group label="Group Label" supporting-text="Support text">
+            <span slot="extended-supporting-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </span>
+            <gds-radio value="1"></gds-radio>
+            <gds-radio value="2"></gds-radio>
+          </gds-radio-group>
+        </gds-card>
       </gds-flex>
-      <gds-flex gap="s" flex-direction="column" flex="1">
-        <gds-text tag="small">Invalid: Missing value</gds-text>
-        <gds-divider opacity="0.1"></gds-divider>
-        <gds-radio-group>
-          <gds-radio label="Radio Label"></gds-radio>
-          <gds-radio label="Radio Label"></gds-radio>
-        </gds-radio-group>
+      <gds-flex gap="l" flex-direction="column" flex="1">
+        <gds-card
+          align-items="center"
+          flex-direction="row"
+          gap="2xs"
+          padding="s"
+          variant="negative"
+        >
+          <gds-icon-cross-small></gds-icon-cross-small>
+          <gds-text tag="small"> Invalid: Missing value </gds-text>
+        </gds-card>
+        <gds-card>
+          <gds-radio-group label="Group Label" supporting-text="Support text">
+            <span slot="extended-supporting-text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </span>
+            <gds-radio label="Radio Label"></gds-radio>
+            <gds-radio label="Radio Label"></gds-radio>
+          </gds-radio-group>
+        </gds-card>
       </gds-flex>
     </gds-flex>
   `,
