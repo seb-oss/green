@@ -99,7 +99,7 @@ export class GdsRadio extends GdsElement {
   }
 
   private _handleClick(e: Event) {
-    if (this.disabled) return
+    if (this.disabled || !this.value || !this.label) return
     e.preventDefault()
 
     this.checked = true
