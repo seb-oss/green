@@ -145,19 +145,19 @@ Just as in the native select if you set the open attribute to true the accordion
     },
   },
   render: (args) => html`
-    <gds-accordion open name="Name" summary="I'm open by default">
+    <gds-accordion open name="default-open" summary="I'm open by default">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </gds-rich-text>
     </gds-accordion>
-    <gds-accordion name="Name" summary="Example">
+    <gds-accordion name="default-open" summary="Example">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </gds-rich-text>
     </gds-accordion>
-    <gds-accordion name="Name" summary="Example">
+    <gds-accordion name="default-open" summary="Example">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
