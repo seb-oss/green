@@ -20,6 +20,7 @@
 's39938ecdae568740': `September`,
 's407a88a592a0987c': `Augustus`,
 's46d6587089bd0356': `Volgende maand`,
+'s49730f3d5751a433': `Laden...`,
 's5052d10b539eabf0': `Maart`,
 's58bfb494feb8eb02': str`${0} geselecteerd`,
 's5d929ff1619ac0c9': `Zoeken`,
