@@ -74,7 +74,6 @@ type Story = StoryObj<GdsSpinner>
 export const Playground: Story = {
   args: {
     size: 'md',
-    label: 'Loading...',
     showLabel: true,
     cover: false,
     fullscreen: false,
@@ -176,12 +175,7 @@ export const Cover: Story = {
         <gds-text tag="p">More content here...</gds-text>
       </gds-div>
 
-      <gds-spinner
-        cover
-        label="Loading content..."
-        showLabel
-        size="md"
-      ></gds-spinner>
+      <gds-spinner cover showLabel size="md"></gds-spinner>
     </gds-card>
   `,
 }
@@ -196,11 +190,7 @@ export const Fullscreen: Story = {
   render: () => {
     return html`
       <gds-div height="400px">
-        <gds-spinner
-          fullscreen
-          label="Loading content..."
-          showLabel
-        ></gds-spinner>
+        <gds-spinner fullscreen showLabel></gds-spinner>
       </gds-div>
     `
   },
@@ -273,7 +263,6 @@ export const ThemeModes: Story = {
                 >
                 <gds-spinner
                   size="md"
-                  label="Loading..."
                   showLabel
                 ></gds-spinner>
               </gds-flex>
