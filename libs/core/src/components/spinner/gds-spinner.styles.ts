@@ -10,26 +10,16 @@ export const styles = css`
     --spinner-size-md: 3.75rem;
     --spinner-size-lg: 6rem;
 
-    --track-widths: 0.275rem 0.375rem 0.375rem;
+    --track-widths: 0.1rem 0.2rem 0.3rem;
     --track-width-sm: 0.275rem;
     --track-width-md: 0.375rem;
     --track-width-lg: 0.375rem;
 
-    /* Theme variables - define light and dark separately first */
-    --spinner-track-color-light: hsl(0 0% 81%);
-    --spinner-track-color-dark: hsl(0 0% 40%);
-    --spinner-active-color-light: hsl(0 0% 20%);
-    --spinner-active-color-dark: hsl(0 0% 85%);
-    --spinner-label-color-light: #333333;
-    --spinner-label-color-dark: #ffffff;
-    --spinner-backdrop-color-light: rgba(255, 255, 255, 0.8);
-    --spinner-backdrop-color-dark: rgba(0, 0, 0, 0.8);
-
     /* Default to light mode as fallback */
-    --spinner-track-color: var(--spinner-track-color-light);
-    --spinner-active-color: var(--spinner-active-color-light);
-    --spinner-label-color: var(--spinner-label-color-light);
-    --spinner-backdrop-color: var(--spinner-backdrop-color-light);
+    --spinner-track-color: var(--gds-color-l3-background-secondary);
+    --spinner-active-color: var(--gds-color-l3-content-secondary);
+    --spinner-label-color: currentColor;
+    --spinner-backdrop-color: rgba(0, 0, 0, 0.8);
 
     --spinner-backdrop-blur: 2px;
 
@@ -42,16 +32,6 @@ export const styles = css`
     color-scheme: var(--spinner-color-scheme);
 
     display: block;
-  }
-
-  /* Media query fallback for browsers that don't support light-dark() */
-  @media (prefers-color-scheme: dark) {
-    :host {
-      --spinner-track-color: var(--spinner-track-color-dark);
-      --spinner-active-color: var(--spinner-active-color-dark);
-      --spinner-label-color: var(--spinner-label-color-dark);
-      --spinner-backdrop-color: var(--spinner-backdrop-color-dark);
-    }
   }
 
   /* Size-specific host settings */
@@ -69,90 +49,6 @@ export const styles = css`
   :host([size='lg']) {
     --size: var(--spinner-size-lg);
     --track-width: var(--track-width-lg);
-  }
-
-  /* High contrast mode support */
-  @media (forced-colors: active) {
-    :host {
-      /* Use system colors that respect the user's high contrast theme */
-      --spinner-track-color: GrayText;
-      --spinner-active-color: HighlightText;
-      --spinner-label-color: currentColor;
-
-      /* Force a transparent background for the backdrop to respect high contrast */
-      --spinner-backdrop-color: transparent;
-    }
-
-    /* Ensure the spinner has a visible outline in high contrast mode */
-    .gds-spinner {
-      /* This ensures the spinner is visible */
-      border-color: Canvas;
-      border-top-color: Highlight;
-      forced-color-adjust: none;
-    }
-
-    /* Make sure text remains visible */
-    .spinner-label {
-      color: var(--spinner-label-color);
-      forced-color-adjust: none;
-    }
-
-    /* For cover/fullscreen modes, use a pattern instead of transparency */
-    .gds-spinner-wrapper.gds-spinner-backdrop {
-      background-color: Canvas;
-      background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        GrayText 10px,
-        GrayText 20px
-      );
-      backdrop-filter: none;
-    }
-  }
-
-  /* Increased contrast mode support */
-  @media (prefers-contrast: more) {
-    :host {
-      /* Higher contrast between track and active part */
-      --spinner-track-color-light: hsl(0 0% 75%);
-      --spinner-track-color-dark: hsl(0 0% 45%);
-      --spinner-active-color-light: hsl(0 0% 0%);
-      --spinner-active-color-dark: hsl(0 0% 100%);
-
-      /* Ensure text is highly visible */
-      --spinner-label-color-light: #000000;
-      --spinner-label-color-dark: #ffffff;
-
-      /* More opaque backdrop for better contrast */
-      --spinner-backdrop-color-light: rgba(255, 255, 255, 0.9);
-      --spinner-backdrop-color-dark: rgba(0, 0, 0, 0.9);
-
-      /* Thicker borders for better visibility */
-      --track-width-sm: 0.325rem;
-      --track-width-md: 0.45rem;
-      --track-width-lg: 0.45rem;
-    }
-
-    /* More pronounced label */
-    .spinner-label {
-      font-weight: bold;
-    }
-  }
-
-  /* Reduced contrast mode support */
-  @media (prefers-contrast: less) {
-    :host {
-      /* Softer contrast */
-      --spinner-track-color-light: hsl(0 0% 85%);
-      --spinner-track-color-dark: hsl(0 0% 35%);
-      --spinner-active-color-light: hsl(0 0% 40%);
-      --spinner-active-color-dark: hsl(0 0% 70%);
-
-      /* Softer backdrop */
-      --spinner-backdrop-color-light: rgba(255, 255, 255, 0.7);
-      --spinner-backdrop-color-dark: rgba(0, 0, 0, 0.7);
-    }
   }
 
   /* Fullscreen positioning */
@@ -220,6 +116,8 @@ export const styles = css`
     background-color: var(--spinner-backdrop-color);
     backdrop-filter: blur(var(--spinner-backdrop-blur));
     --spinner-label-color: #fff;
+    --spinner-track-color: var(--gds-color-l3-content-secondary);
+    --spinner-active-color: var(--gds-color-l3-background-secondary);
   }
 
   /* Label styling */
@@ -233,25 +131,6 @@ export const styles = css`
   @keyframes gdsSpinnerRotation {
     to {
       transform: rotate(360deg);
-    }
-  }
-
-  /* Light-dark variants as separate rules after the fallbacks */
-  @supports (color: light-dark(red, blue)) {
-    :host {
-      --spinner-track-color: light-dark(
-        var(--spinner-track-color-light),
-        var(--spinner-track-color-dark)
-      );
-      --spinner-active-color: light-dark(
-        var(--spinner-active-color-light),
-        var(--spinner-active-color-dark)
-      );
-      --spinner-label-color: currentColor;
-      --spinner-backdrop-color: light-dark(
-        var(--spinner-backdrop-color-light),
-        var(--spinner-backdrop-color-dark)
-      );
     }
   }
 `

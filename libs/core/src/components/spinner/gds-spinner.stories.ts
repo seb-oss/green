@@ -114,10 +114,7 @@ export const Sizes: Story = {
         <gds-spinner size="sm" label="small" showLabel></gds-spinner>
       </gds-div>
       <gds-div text-align="center">
-        <gds-spinner size="default" label="Default" showLabel></gds-spinner>
-      </gds-div>
-      <gds-div text-align="center">
-        <gds-spinner size="md" label="Medium" showLabel></gds-spinner>
+        <gds-spinner size="md" label="Medium (default)" showLabel></gds-spinner>
       </gds-div>
       <gds-div text-align="center">
         <gds-spinner size="lg" label="Large" showLabel></gds-spinner>
