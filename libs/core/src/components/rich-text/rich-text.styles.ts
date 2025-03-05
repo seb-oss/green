@@ -20,7 +20,7 @@ export const styles = css`
     margin-bottom: var(--gds-space-xs);
   }
 
-  :is(h1, h2, h3, h4, h5, h6):first-of-type {
+  :is(h1, h2, h3, h4, h5, h6):first-child {
     margin-top: unset;
   }
 
