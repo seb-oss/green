@@ -15,7 +15,7 @@ export default function Common({ title }: { title: string }) {
             element, with browser-determined appearance.
           </GdsText>
           <GdsFlex margin="auto 0 0 0">
-            <Link href="/component/select">Explore Select</Link>
+            <Link href="/component/select">Explore select</Link>
           </GdsFlex>
         </GdsCard>
         <GdsCard variant="primary" padding="l" gap="s" border-radius="s">
@@ -25,7 +25,7 @@ export default function Common({ title }: { title: string }) {
             with icons or badges and different layouts of the options.
           </GdsText>
           <GdsFlex margin="auto 0 0 0">
-            <Link href="/component/dropdown">Explore Dropdown</Link>
+            <Link href="/component/dropdown">Explore dropdown</Link>
           </GdsFlex>
         </GdsCard>
       </GdsGrid>
