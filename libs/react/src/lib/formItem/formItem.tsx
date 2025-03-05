@@ -155,7 +155,12 @@ export const FormItem = ({
       <div className="gds-form-item__footer">
         {validator && (
           <>
-            <TriangleExclamationIcon solid width={16} height={16} />
+            <TriangleExclamationIcon
+              solid
+              width={16}
+              height={16}
+              style={{ color: 'var(--gds-sys-color-text-error)' }}
+            />
             <span className="form-info" id={`${inputId}_message`}>
               {validator.message}
             </span>
