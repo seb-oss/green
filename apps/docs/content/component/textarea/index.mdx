@@ -9,13 +9,13 @@ tags: forms
 ## Usage
 Textarea is used for longer text inputs, featuring 4 default rows and possibility for automatic vertical resizing. Ideal for comments, descriptions, and other multiline content in forms and dialogs.
 
-## Anatomy  
-The textarea (and other form controls) are divided in sections that are re-used between components. 
+## Anatomy
+The textarea (and other form controls) are divided in sections that are re-used between components.
 - **Header**: Label, label support, contextual help, extended support.
-- **Body**: the actual field with trailing slot.
-- **Footer**: character counter and error message.
+- **Body**: The field with leading and trailing slots.
+- **Footer**: Character counter and error message.
 
-<Figma id="anatomy" caption="Anatomy of Textarea" />
+<Figma id="anatomy" caption="Anatomy of textarea." />
 
 1. Label
 2. Label support text
@@ -31,7 +31,7 @@ The textarea (and other form controls) are divided in sections that are re-used 
 
 ## Variants
 We provide two versions of textarea.
-- **Default** (Label outside): Includes all the features we need in complex forms.
+- **Default**
 - <Badge variant="notice">Coming soon</Badge> **Floating label** (label inside): Can only be used in specific contexts. Limited features due to accessibility.
 
 <Grid columns="2">
@@ -44,18 +44,15 @@ We provide two versions of textarea.
 <Grid columns="2">
 <div>
 ### Label
-All textarea fields need a label. Keep the label short.
+All input fields must have a label to ensure clarity and accessibility. Labels help users understand the purpose of the field, including those using assistive technologies.
 </div>
-<Figma id="label" caption="Textarea with just a label." />
+<Figma id="label" caption="Textarea with a label." />
 </Grid>
 
 <Grid columns="2">
 <div>
 ### Optional field indicator
-(Not available for Floating label variant)
-We always strive to only ask for mandatory information, so we want to inform users if some fields are optional. We do this by adding a parenthesis with the words "(optional)" next to the label with the field.
-
-The text "(optional)" is set in font-weight regular, to differentiate from the label.
+We only ask for required information. If some fields are optional, we let users know by adding "(optional)" in brackets next to the field label. The word "(optional)" is shown in regular font weight to distinguish it from the label.
 </div>
 <Figma id="optional-indicator" caption="Use '(optional)' to mark optional fields." />
 </Grid>
@@ -63,24 +60,20 @@ The text "(optional)" is set in font-weight regular, to differentiate from the l
 <Grid columns="2">
 <div>
 ### Support text
-(Not available for Floating label variant)
-Use this to explain how to fill the field. This may be an instruction of how to count or what to include. Limit the instructions to details that all or most users need.
+Use this to explain how to fill in the field, for example how to count or what to include. 
 </div>
 <Figma id="support-text" caption="Textarea  with support text." />
 </Grid>
 
 ### Contextual help
-(Not available for floating label variant) <br />
-When  label and support text is not enough to explain a field, use the info-icon. 
-
-When clicked the extended support is displayed between the label support and the field.
-
-If there is limited space use a tooltip. <br />
-If there is large amounts of text use a modal.
+If the label and support text aren’t enough to explain a field, we can use the info icon.
+Clicking the icon shows additional support text between the label support and the field.
+- Use a tooltip if space is limited.
+- Use a modal for large amounts of text.
 
 <Grid columns="2">
-    <Figma id="contextual-help-2" caption="Info icon button to reach help." />
-    <Figma id="contextual-help-1" caption="Extended support visible" />
+    <Figma id="contextual-help-2" caption="Use the info icon to show more support text." />
+    <Figma id="contextual-help-1" caption="Extended support expanded." />
 </Grid>
 
 <Grid columns="2">
@@ -94,29 +87,30 @@ A leading icon visually reinforces the purpose of the field, helping users  to u
 <Grid columns="2">
 <div>
 ### Clearable
-To make it easy for users to clear a field an x-icon button may be added at the end of the field. 
+To make it easy for users to clear a field, an x-icon button can be placed at the end of the field. This is commonly used in search/filter forms.
 </div>
-<Figma id="clearable" caption="Makes it easy to clear the field." />
+<Figma id="clearable" caption="Makes it easy to clear a field." />
 </Grid>
 
 <Grid columns="2">
 <div>
-### Field error
-When a field contains an error the field is highlighted in red with an error text describing the error.
+### Error message
+Used to indicate that a selection must be made from the dropdown or that there is an error with the selected option.
 </div>
 <Figma id="error" caption="Input field containing an error." />
 </Grid>
 
 ### Character counter
-For fields that have a limit of characters allowed, a counter can be added to guide users how many characters are left to use. Indicator starts with the maximum characters allowed. <br />
-As the user starts typing the numbers decrease. <br />
-When a limit is almost reached the indicator turns yellow. <br />
-If users write too many characters the counter becomes red. An error will be indicated on the field stating that the max has been reached.
+For fields with a character limit, a counter can be added to show users how many characters they have left.
 
+The counter starts with the maximum allowed characters. As the user types, the
+remaining characters decrease. When the limit is nearly reached, the counter turns yellow. When or if the user exceeds the limit, the counter turns red.
+
+If the user ignores this and attempts to submit, an error message will appear indicating that the maximum character limit has been reached.
 <Grid columns="2">
 <Figma id="character-1" caption="Showing maximum characters." />
 <Figma id="character-2" caption="Showing characters left." />
-<Figma id="character-3" caption="Too much text in the field. Counter showing the amount in overflow." />
+<Figma id="character-3" caption="Showing the number of characters over the limit." />
 </Grid>
 
 
@@ -128,6 +122,6 @@ If the field should be resizable, there are two options:
 - **Manual**: Users can resize it by dragging the corner.
 
 <Grid columns="2">
- <Figma id="resize" caption="Resize handle visible" />
+ <Figma id="resize" caption="Resize handle visible." />
 </Grid>
 

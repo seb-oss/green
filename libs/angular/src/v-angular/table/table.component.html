@@ -171,6 +171,7 @@
             *ngFor="let column of tableColumns"
             [columnType]="column.valueType"
             [value]="subItem[column.property]"
+            (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
           >
             <div class="gds-sub-item-field-wrap">
               {{ subItem[column.property] }}
