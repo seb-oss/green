@@ -92,19 +92,8 @@ export const styles = css`
   }
 
   ol {
-    counter-reset: list-counter;
-    list-style-type: none;
-    padding-inline-start: 1ch;
-  }
-
-  ol li {
-    display: flex;
-    counter-increment: list-counter;
-  }
-
-  ol li::before {
-    content: counter(list-counter) '. ';
-    min-width: 3ch;
+    padding-inline-start: 4ch;
+    list-style-position: outside;
   }
 
   li {
