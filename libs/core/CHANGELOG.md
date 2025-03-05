@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.68.1
+
+### Patch Changes
+
+- 9d1476d: **Rich text:** Fix the heading first of type
+  **Rich text:** Fix the ordered list padding
+
 ## 1.68.0
 
 ### Minor Changes
