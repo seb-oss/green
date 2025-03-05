@@ -45,6 +45,12 @@
       @include validation.add-feedback(tokens.$intent-danger-background);
     }
 
+    &.nggv-field--error {
+      $_border-bottom: 0.125rem solid #9f000a !important;
+      border-bottom: $_border-bottom;
+      height: 100%;
+    }
+
     $_height: 2.75rem;
     $_border-color-normal: #868686;
 
