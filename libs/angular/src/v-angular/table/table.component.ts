@@ -484,8 +484,11 @@ export class TableComponent<T extends TableRow>
    * Emits row data for what row was clicked if defaultEmit is allowed.
    */
   propagateItemClick(item: any, preventDefaultEmit?: boolean) {
-    if (!preventDefaultEmit) this.ngvRowClick.emit(item)
-    if (this.expandable) this.toggleRowToExpand(item[this.rowId])
+    if (!preventDefaultEmit) this.ngvRowClick.emit(item);
+
+    if (this.expandable && item[this.subItemsProp]) {
+      this.toggleRowToExpand(item[this.rowId]);
+    }
   }
 
   getAriaLabel(column: TableColumn<T>): string | undefined {
