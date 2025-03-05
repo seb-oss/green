@@ -206,10 +206,12 @@
   .gds-form-item__footer:not(:empty) {
     margin-top: 0.5rem;
     display: flex;
-    column-gap: 1rem;
+    column-gap: 0.5rem;
 
-    & > span {
+    & > span,
+    & > .form-info {
       font-weight: 500;
+      line-height: 1.125;
     }
   }
 }
