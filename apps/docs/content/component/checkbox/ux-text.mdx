@@ -14,21 +14,24 @@ A stand-alone checkbox should clearly indicate what happens when it’s checked 
 #### Do
 <Grid columns="2" gap="s">
 <div>
-<EN>I have read the terms and conditions, and confirm that the information i have provided is correct.</EN>
-<SE>Jag har läst villkoren och försäkrar att de uppgifter jag fyllt i är riktiga.</SE>
+    <EN>I have read the terms and conditions, and confirm that the information i have provided is correct.</EN>
+    <Figma type="do" id="i-form-do-eng" caption="Do" />
 </div>
-<Figma type="do" id="negation-do" caption="Do: 'I' form in Swedish and English." />
+<div>
+    <SE>Jag har läst villkoren och försäkrar att de uppgifter jag fyllt i är riktiga.</SE>
+    <Figma type="do" id="i-form-do-swe" caption="Do" />
+</div>
 </Grid>
 
 #### Don't
 <Grid columns="2" gap="m">
 <div>
-<EN>Have you read the terms and conditions? Can you confirm that the information is correct?</EN>
-<SE>Har du läst villkoren? Kan du försäkra att den information du fyllt i stämmer?</SE>
+    <EN>Have you read the terms and conditions? Can you confirm that the information is correct?</EN>
+    <Figma type="dont" id="i-form-dont-eng" caption="Don't" />
 </div>
 <div>
-<Figma type="dont" id="negation-dont-1" caption="Don't 'You' form (example in Swedish and English)." />
-<Figma type="dont" id="negation-dont-2" caption="Don't use a negation (example in Swedish and English)." />
+    <SE>Har du läst villkoren? Kan du försäkra att den information du fyllt i stämmer?</SE>
+    <Figma type="dont" id="i-form-dont-swe" caption="Don't" />
 </div>
 </Grid>
 
@@ -38,38 +41,38 @@ A stand-alone checkbox should clearly indicate what happens when it’s checked 
 <Grid columns="2" gap="m">
     <div>
         <EN>Yes, please, I want exclusive offers and news by email.</EN>
-        <SE>Ja tack, jag vill ha exklusiva erbjudanden och nyheter via mejl.</SE>
+        <Figma type="do" id="negation-do-eng" caption="Do" />
     </div>
-    <Figma type="do" id="accepting-do" caption="Use the 'I' form" />
+    <div>
+        <SE>Ja tack, jag vill ha exklusiva erbjudanden och nyheter via mejl.</SE>
+        <Figma type="do" id="negation-do-swe" caption="Do" />
+    </div>
 </Grid>
 
 #### Don’t
 <Grid columns="2" gap="m">
     <div>
         <EN>Yes, please, I do not want to miss out on exclusive offers and news by email.</EN>
-        <SE>Ja tack, jag vill inte missa exklusiva erbjudanden och nyheter via mejl.</SE>
+        <Figma type="dont" id="negation-dont-eng" caption="Don't" />
     </div>
-    <Figma type="dont" id="accepting-dont" caption="Use the 'I' form" />
+    <div>
+        <SE>Ja tack, jag vill inte missa exklusiva erbjudanden och nyheter via mejl.</SE>
+        <Figma type="dont" id="negation-dont-swe" caption="Don't" />
+    </div>
 </Grid>
 
 ### Avoid questions
-
-#### Do
-<Grid columns="2" gap="m">
-    <div>
-        <EN>Yes, please, I want exclusive offers and news by email.</EN>
-        <SE>Ja tack, jag vill ha exklusiva erbjudanden och nyheter via mejl.</SE>
-    </div>
-    <Figma type="do" id="accepting-do" caption="Use the 'I' form" />
-</Grid>
 
 #### Don’t
 <Grid columns="2" gap="m">
     <div>
         <EN>Do you want to get exclusive offers and news by email?</EN>
-        <SE>Vill du ha exklusiva erbjudanden och nyheter via mejl?</SE>
+        <Figma type="dont" id="questions-dont-eng" caption="Don't" />
     </div>
-    <Figma type="dont" id="accepting-dont" caption="Use the 'I' form" />
+    <div>
+        <SE>Vill du ha exklusiva erbjudanden och nyheter via mejl?</SE>
+        <Figma type="dont" id="questions-dont-swe" caption="Don't" />
+    </div>
 </Grid>
 
 ## Multiple options
@@ -78,12 +81,16 @@ Ensure the label and options match. Provide clear instructions so users know the
 - A continuous sentence starting with lowercase, with only the last option ending in a full stop.
 - Single words or short phrases with no full stop.
 
-### Do
+ 
+### Do 
 <Grid columns="2" gap="m">
-<Figma type="do" id="multiple-options-do-eng" caption="Multiple answers (English)" />
-<Figma type="dont" id="multiple-options-dont-eng" caption="Multiple answers (Swedish)" />
-<Figma type="do" id="multiple-options-do-swe" caption="Multiple answers, the label is a yes or no question (English)" />
-<Figma type="dont" id="multiple-options-dont-swe" caption="Multiple answers, the label is a yes or no question (Swedish)
-" />
+    <Figma type="do" id="multiple-options-do-eng" caption="Do" />
+    <Figma type="do" id="multiple-options-do-swe" caption="Do" />
+</Grid>
+
+### Don't
+<Grid columns="2" gap="m">
+    <Figma type="dont" id="options-dont-eng" caption="Don't" />
+    <Figma type="dont" id="options-dont-swe" caption="Don't" />
 </Grid>
  
