@@ -4,10 +4,10 @@ date: 2024-04-03
 ---
 
 ## Labels
-Write checkbox labels so customers can easily understand what checking or leaving the box blank means. This is especially important for standalone checkboxes, such as accepting terms or subscribing to emails with news and offers. If there is a header label, make sure it matches the individual checkbox label, whether grouped or standalone. Never use checkbox if the answer is yes or no.
+Write checkbox labels so customers can easily understand what checking or leaving the box blank means. This is especially important for stand-alone checkboxes, such as accepting terms or subscribing to emails with news and offers. If there is a header label, make sure it matches the individual checkbox label, whether grouped or stand-alone. Never use checkbox if the answer is yes or no.
 
 ## Stand-alone checkbox
-A stand-alone checkbox should clearly indicate what happens when it’s checked or left blank. Use the “I” form. Avoid using negations as this forces users to check the box to prevent something from happening. A standalone checkbox should state a clear action or agreement, not ask a question.
+A stand-alone checkbox should clearly indicate what happens when it’s checked or left blank. Use the “I” form. Avoid using negations as this forces users to check the box to prevent something from happening. A stand-alone checkbox should state a clear action or agreement, not ask a question.
 
 ### Use the “I” form
 
@@ -23,48 +23,62 @@ A stand-alone checkbox should clearly indicate what happens when it’s checked 
 #### Don't
 <Grid columns="2" gap="m">
 <div>
-<EN>Do you want priority access to exclusive offers and news by email?</EN>
-<SE>Vill du ha exklusiva erbjudanden och nyheter via mejl?</SE>
+<EN>Have you read the terms and conditions? Can you confirm that the information is correct?</EN>
+<SE>Har du läst villkoren? Kan du försäkra att den information du fyllt i stämmer?</SE>
 </div>
 <div>
-<EN>Yes, please, I do not want to miss out on exclusive offers and news by email.</EN>
-<SE>Ja tack, jag vill inte missa exklusiva erbjudanden och nyheter via mejl.</SE>
-</div>
 <Figma type="dont" id="negation-dont-1" caption="Don't 'You' form (example in Swedish and English)." />
 <Figma type="dont" id="negation-dont-2" caption="Don't use a negation (example in Swedish and English)." />
+</div>
 </Grid>
 
-## Accepting the terms
-When asking users to accept terms, use the “I” form and avoid phrasing it as a question in an individual checkbox. A question can be used in the header label.
-
-### Do
+### Avoid negations
+ 
+#### Do
 <Grid columns="2" gap="m">
     <div>
-        <SE>Jag har läst informationen och granskat de uppgifter jag fyllt I. Jag försäkrar att de är riktiga.</SE>
-        <EN>I have read the information and reviewed what I entered in the form. I confirm that everything is correct.</EN>
+        <EN>Yes, please, I want exclusive offers and news by email.</EN>
+        <SE>Ja tack, jag vill ha exklusiva erbjudanden och nyheter via mejl.</SE>
     </div>
     <Figma type="do" id="accepting-do" caption="Use the 'I' form" />
 </Grid>
 
-### Don’t
+#### Don’t
 <Grid columns="2" gap="m">
     <div>
-        <SE>Har du läst informationen och granskat de uppgifter du fyllt i? Försäkrar du att de är riktiga?</SE>
-        <EN>Have you read the information and reviewed what was entered in the form? Can you confirm that everything is correct?</EN>
+        <EN>Yes, please, I do not want to miss out on exclusive offers and news by email.</EN>
+        <SE>Ja tack, jag vill inte missa exklusiva erbjudanden och nyheter via mejl.</SE>
+    </div>
+    <Figma type="dont" id="accepting-dont" caption="Use the 'I' form" />
+</Grid>
+
+### Avoid questions
+
+#### Do
+<Grid columns="2" gap="m">
+    <div>
+        <EN>Yes, please, I want exclusive offers and news by email.</EN>
+        <SE>Ja tack, jag vill ha exklusiva erbjudanden och nyheter via mejl.</SE>
+    </div>
+    <Figma type="do" id="accepting-do" caption="Use the 'I' form" />
+</Grid>
+
+#### Don’t
+<Grid columns="2" gap="m">
+    <div>
+        <EN>Do you want to get exclusive offers and news by email?</EN>
+        <SE>Vill du ha exklusiva erbjudanden och nyheter via mejl?</SE>
     </div>
     <Figma type="dont" id="accepting-dont" caption="Use the 'I' form" />
 </Grid>
 
 ## Multiple options
-Decide on a consistent style for option labels:
+Ensure the label and options match. Provide clear instructions so users know they can select multiple options. Decide on a consistent style for option labels:
 - Full sentences starting with a capital letter and ending with a full stop.
 - A continuous sentence starting with lowercase, with only the last option ending in a full stop.
-- Single words or short phrases with no full stop
+- Single words or short phrases with no full stop.
 
 ### Do
-- Provide clear instructions so users know they can select multiple options.
-- Ensure the label and options match. If the field label is a yes/no question, the answer options should be “Yes” and “No” – nothing else.
-
 <Grid columns="2" gap="m">
 <Figma type="do" id="multiple-options-do-eng" caption="Multiple answers (English)" />
 <Figma type="dont" id="multiple-options-dont-eng" caption="Multiple answers (Swedish)" />
@@ -72,21 +86,4 @@ Decide on a consistent style for option labels:
 <Figma type="dont" id="multiple-options-dont-swe" caption="Multiple answers, the label is a yes or no question (Swedish)
 " />
 </Grid>
-
-## Options texts
-
-<Grid columns="2" gap="m">
-<div>
-### Do
-Write option texts that are consistent. 
-
-<Figma type="do" id="options-dont-eng" caption="" />
-</div>
-
-<div>
-### Don't
-Inconsistent options (English)
-
-<Figma type="dont" id="options-dont-swe" caption="" />
-</div>
-</Grid>
+ 
