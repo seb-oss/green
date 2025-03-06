@@ -131,6 +131,8 @@ export const States: Story = {
  * - Minimum options: Shows error when group has fewer than two radio buttons
  *
  * The error message appears below the radio group.
+ *
+ * If you click on 'submit' first on the example below it will validate the radio group and show the error message.
  */
 export const Validation: Story = {
   ...DefaultParams,
