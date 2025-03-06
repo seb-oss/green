@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.68.2
+
+### Patch Changes
+
+- 49bb2e6: **Rich Text:** Update styling on ordered list
+
 ## 1.68.1
 
 ### Patch Changes
