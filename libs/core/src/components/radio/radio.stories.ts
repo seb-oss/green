@@ -136,37 +136,39 @@ export const Validation: Story = {
   ...DefaultParams,
   name: 'Validation',
   render: () => html`
-    <form class="radio-group">
-      <gds-radio-group
-        label="Group Label"
-        supporting-text="Support text for the group"
-        show-extended-supporting-text
-        .validator=${{
-          validate: (el: GdsRadioGroup) => {
-            if (!el.value)
-              return [
-                { ...el.validity, valid: false, customError: true },
-                'This is required',
-              ]
-          },
-        }}
-      >
-        <span slot="extended-supporting-text">
-          Extended supporting text for the group
-        </span>
-        <gds-radio
-          label="Radio Label"
-          value="1"
-          .invalid=${true}
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="2"
-          supporting-text="Example support text"
-        ></gds-radio>
-      </gds-radio-group>
-      <gds-button type="submit">Submit</gds-button>
+    <form method="dialog">
+      <gds-flex flex-direction="column" align-items="flex-start" gap="m">
+        <gds-radio-group
+          label="Group Label"
+          supporting-text="Support text for the group"
+          show-extended-supporting-text
+          .validator=${{
+            validate: (el: GdsRadioGroup) => {
+              if (!el.value)
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'This is required',
+                ]
+            },
+          }}
+        >
+          <span slot="extended-supporting-text">
+            Extended supporting text for the group
+          </span>
+          <gds-radio
+            label="Radio Label"
+            value="1"
+            .invalid=${true}
+            supporting-text="Example support text"
+          ></gds-radio>
+          <gds-radio
+            label="Radio Label"
+            value="2"
+            supporting-text="Example support text"
+          ></gds-radio>
+        </gds-radio-group>
+        <gds-button type="submit">Submit</gds-button>
+      </gds-flex>
     </form>
   `,
 }
