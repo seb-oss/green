@@ -211,6 +211,10 @@ export const styles = css`
     padding-inline: var(--gds-space-m);
   }
 
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
   summary:focus-visible {
     border-radius: var(--gds-space-2xs);
   }
