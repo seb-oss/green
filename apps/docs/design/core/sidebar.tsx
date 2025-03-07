@@ -15,8 +15,6 @@ import {
 } from '$/import/icons'
 import { Context } from '$/provider/provider'
 
-import { GdsDiv as GdsDivCore } from '@sebgroup/green-core/components/container'
-
 import './sidebar.css'
 
 const menu = [
@@ -42,7 +40,7 @@ const menu = [
     subLinks: [],
   },
   {
-    title: 'UX Writing',
+    title: 'UX writing',
     path: '/ux-writing',
     icon: <IconTextEdit />,
     subLinks: [],
@@ -129,7 +127,7 @@ export default function Sidebar() {
           padding="xs"
           overflow="scroll"
           onScroll={(e) => {
-            if ((e.target as GdsDivCore).scrollTop === 0) {
+            if ((e.target as HTMLElement).scrollTop === 0) {
               setHasScrolled(false)
             } else {
               if (hasScrolled) return

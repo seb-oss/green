@@ -20,7 +20,7 @@ export const styles = css`
     margin-bottom: var(--gds-space-xs);
   }
 
-  :is(h1, h2, h3, h4, h5, h6):first-of-type {
+  :is(h1, h2, h3, h4, h5, h6):first-child {
     margin-top: unset;
   }
 
@@ -92,26 +92,29 @@ export const styles = css`
   }
 
   ol {
-    counter-reset: list-counter;
     list-style-type: none;
-    padding-inline-start: 1ch;
+    counter-reset: ordered-list;
+    margin: unset;
+    padding: unset;
   }
 
   ol li {
-    display: flex;
-    counter-increment: list-counter;
+    padding-left: 3ch;
+    position: relative;
   }
 
-  ol li::before {
-    content: counter(list-counter) '. ';
-    min-width: 3ch;
+  ol li:before {
+    counter-increment: ordered-list;
+    content: counter(ordered-list, decimal-leading-zero) '.';
+    left: 0;
+    position: absolute;
   }
 
   li {
     padding: 0 0 0.3lh 0;
   }
 
-  li:last-child {
+  ul li:last-child {
     padding: 0;
   }
 

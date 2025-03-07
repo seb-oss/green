@@ -109,7 +109,7 @@ export const Card: Story = {
         <ol>
           <li>
             Conduct scientific research on exoplanets, focusing on atmospheric
-            composition and potential habitability.
+            composition <a href="#">Inline link</a> and potential habitability.
           </li>
           <li>
             Establish contact with potential extraterrestrial civilizations
