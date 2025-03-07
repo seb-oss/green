@@ -29,6 +29,7 @@ import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
+import './spinner.element'
 import './login/login.element'
 
 export class AppElement extends LitElement {
