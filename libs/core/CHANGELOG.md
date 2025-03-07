@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.68.3
+
+### Patch Changes
+
+- 08f1210: **Spinner:** add spinner to export on components
+- 08f1210: **Spinner:** rename classes to fix issue with suffix
+
 ## 1.68.2
 
 ### Patch Changes
