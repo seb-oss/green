@@ -58,7 +58,7 @@
     "@swc/core": "1.5.29",
     "@swc/helpers": "0.5.13",
     "@vercel/og": "^0.5.20",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "billboard.js": "^3.7.5",
     "body-scroll-lock": "^3.1.5",
     "browserslist": "^4.20.2",
