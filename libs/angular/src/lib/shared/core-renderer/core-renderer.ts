@@ -1,5 +1,10 @@
 import {
+  ɵAnimationEngine as AnimationEngine,
+  ɵAnimationRendererFactory as AnimationRendererFactory,
+} from '@angular/animations/browser'
+import {
   Injectable,
+  NgZone,
   Renderer2,
   RendererFactory2,
   RendererStyleFlags2,
@@ -122,3 +127,33 @@ export class NggCoreRendererFactory implements RendererFactory2 {
     return new NggCoreRenderer(renderer)
   }
 }
+
+export function animationsCoreRendererFactory(
+  delegate: DomRendererFactory2,
+  engine: AnimationEngine,
+  zone: NgZone,
+) {
+  const crf = new NggCoreRendererFactory(delegate)
+  return new AnimationRendererFactory(crf, engine, zone)
+}
+
+/**
+ * Provide the NggCoreRendererFactory to use <gds-*> elements without any extra directives.
+ * The NggCoreRenderer will handle element name scoping automatically.
+ */
+export const provideCoreRenderer = () => ({
+  provide: RendererFactory2,
+  useClass: NggCoreRendererFactory,
+})
+
+/**
+ * Provide the NggCoreRendererFactory to use <gds-*> elements without any extra directives.
+ * The NggCoreRenderer will handle element name scoping automatically.
+ *
+ * This factory also provides the Angular animations renderer.
+ */
+export const provideCoreRendererWithAnimations = () => ({
+  provide: RendererFactory2,
+  useFactory: animationsCoreRendererFactory,
+  deps: [DomRendererFactory2, AnimationEngine, NgZone],
+})
