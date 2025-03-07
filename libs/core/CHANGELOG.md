@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.68.4
+
+### Patch Changes
+
+- d529108: **Rixh text:** Remove leading zero
+
 ## 1.68.3
 
 ### Patch Changes
