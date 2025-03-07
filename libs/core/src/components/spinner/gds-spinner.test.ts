@@ -72,9 +72,9 @@ describe('<gds-spinner>', () => {
       )
       await el.updateComplete
 
-      const wrapper = el.shadowRoot?.querySelector('.gds-spinner-wrapper')
-      expect(wrapper?.classList.contains('gds-spinner-cover')).to.be.true
-      expect(wrapper?.classList.contains('gds-spinner-backdrop')).to.be.true
+      const wrapper = el.shadowRoot?.querySelector('.spinner-wrapper')
+      expect(wrapper?.classList.contains('spinner-cover')).to.be.true
+      expect(wrapper?.classList.contains('spinner-backdrop')).to.be.true
     })
 
     it('should apply fullscreen mode correctly', async () => {
@@ -83,9 +83,9 @@ describe('<gds-spinner>', () => {
       )
       await el.updateComplete
 
-      const wrapper = el.shadowRoot?.querySelector('.gds-spinner-wrapper')
-      expect(wrapper?.classList.contains('gds-spinner-fullscreen')).to.be.true
-      expect(wrapper?.classList.contains('gds-spinner-backdrop')).to.be.true
+      const wrapper = el.shadowRoot?.querySelector('.spinner-wrapper')
+      expect(wrapper?.classList.contains('spinner-fullscreen')).to.be.true
+      expect(wrapper?.classList.contains('spinner-backdrop')).to.be.true
     })
   })
 
