@@ -20,22 +20,14 @@ $font-sizes: (
 
 $font-scale: (
   1: 0.875rem,
-  // 14px
   2: 1rem,
-  // 16px
   3: 1.25rem,
-  // 20px
   4: 1.5rem,
-  // 24px
   5: 2rem,
-  // 32px
   6: 2.5rem,
-  // 40px
   7: 3rem,
-  // 48px
   8: 4rem,
-  // 64px
-  9: 6rem // 96px,,,,,,,,,,,,
+  9: 6rem,
 );
 
 @function font-scale($step) {
@@ -44,24 +36,15 @@ $font-scale: (
 
 $line-height-scale: (
   1: 1rem,
-  // 16px
   2: 1.25rem,
-  // 20px
   3: 1.5rem,
-  // 24px
   4: 1.75rem,
-  // 28px
   5: 2rem,
-  // 32px
   6: 2.5rem,
-  // 40px
   7: 3rem,
-  // 48px
   8: 3.5rem,
-  // 56px
   9: 4.5rem,
-  // 72px
-  10: 6.25rem // 100px,,,,,,,,,,,,
+  10: 6.25rem,
 );
 
 @function line-height-scale($step) {

@@ -1,10 +1,17 @@
 @use 'sass:map';
 @use 'sass:color';
 @use '../common/functions';
+
+/**
+ * Get a property value from a map.
+ */
 @function get($property, $value, $theme: light) {
   @return map.get(map.get($property, $theme), $value);
 }
 
+/**
+ * Generate intent variables.
+ */
 @mixin generate-intent-variables($map, $theme: light) {
   $desired-color: #fff;
   @if ($theme == dark) {
@@ -20,6 +27,9 @@
   }
 }
 
+/**
+ * Generate grey colors.
+ */
 @mixin grey-colors($map, $theme: light) {
   @each $key, $color in map.get($map, $theme) {
     --grey-#{$key}: #{$color};
@@ -36,14 +46,18 @@ $text-disabled-color: var(--text-disabled-color);
 $text-primary-disabled-color: var(--text-primary-disabled-color);
 $text-inherit-color: inherit;
 
-// Todo refactor link color (add to blue swatch)
+/**
+* Todo refactor link color (add to blue swatch)
+*/
 $link-color: rgb(0, 98, 188);
 $link-color-visited: rgb(103, 58, 182);
 
 $link-color-dark: var(--link-color-dark);
 $link-color-visited-dark: var(--link-color-dark-visited);
 
-// font weights
+/**
+* Font weights
+*/
 $font-weight-light: 300;
 $font-weight-lighter: 300;
 $font-weight-normal: 400;
@@ -53,10 +67,12 @@ $font-weight-bolder: 800;
 $font-family-sans-serif: 'SEB SansSerif GDS', 'SEBSansSerif', sans-serif,
   'Helvetica Neue', Helvetica, Arial !default;
 $root-font-size: 16px !default;
-$base-font-size: 1rem !default; // relative to root element font size (html)
+$base-font-size: 1rem !default;
 
-// z-index values for managing depth
-// based on what we have and use in bootstrap today
+/**
+* z-index values for managing depth based on what we have and use in bootstrap today
+* 
+*/
 $zindex-dropdown-backdrop: 990;
 $zindex-dropdown: 2000;
 $zindex-sticky: 1020;
@@ -142,28 +158,21 @@ $grey: (
     500: rgb(222, 222, 222),
     400: rgb(233, 233, 233),
     300: rgb(238, 238, 238),
-    // missing?
-    // background
     200: rgb(248, 248, 248),
     100: rgb(255, 255, 255),
-    // missing?
   ),
   dark: (
     100: rgb(18, 18, 18),
-    // background
     200: rgb(34, 34, 34),
     300: rgb(39, 39, 39),
     400: rgb(44, 44, 44),
     500: rgb(51, 51, 51),
     600: rgb(60, 60, 60),
-    // missing?
     700: rgb(67, 67, 67),
-    // missing?
     800: rgb(73, 73, 73),
     900: rgb(117, 117, 117),
     1000: rgb(171, 171, 171),
     1100: rgb(179, 179, 179),
-    // missing?
   ),
 );
 /* stylelint-enable */
@@ -207,7 +216,6 @@ $intent: (
     'info': get($blue, 0),
     'success': get($green, 0),
     'warning': get($yellow, 2),
-    //TODO: base color from on pallet
     'danger': rgba(159, 0, 10, 1),
     'light': get($grey, 300),
     'dark': get($grey, 1000),
@@ -218,7 +226,6 @@ $intent: (
     'info': get($blue, 2, 'dark'),
     'success': get($green, 2, 'dark'),
     'warning': get($yellow, 0, 'dark'),
-    //TODO: base color from on pallet
     'danger': rgba(255, 89, 79, 1),
     'light': get($grey, 300, 'dark'),
     'dark': get($grey, 1000, 'dark'),
@@ -269,6 +276,9 @@ $form-control-bg-disabled: var(--sg-form-control-bg-disabled);
 $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
 
 /* stylelint-disable */
+/**
+ * Dark mode styles.
+ */
 @mixin dark-mode() {
   --heading-primary-color: #{$white};
   --gds-sys-color-text-primary: #{color.adjust($white, $alpha: -0.1)};
@@ -305,6 +315,9 @@ $form-control-primary-bg-disabled: var(--form-control-primary-bg-disabled);
   --gds-sys-color-text-primary: var(--gds-sys-color-base-300);
 }
 
+/**
+ * Light mode styles.
+ */
 @mixin light-mode() {
   --heading-primary-color: #{$black};
   --gds-sys-color-text-primary: #{get($grey, 1000, 'light')};

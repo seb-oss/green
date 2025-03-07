@@ -28,8 +28,10 @@ $grid-base-line-color: tokens.$border-secondary-color;
 
 $min-height: 3.5rem;
 
+/**
+ * Add color palettes for charts.
+ */
 @mixin add-color-palettes() {
-  /*-- Default color pattern --*/
   .bb-color-pattern {
     background-image: url('#45B400;#0092E1;#FFB400;#4F2C99;#8AAEC7;#898EFE;#FFAC35;#70B0FF;');
 
@@ -42,6 +44,10 @@ $min-height: 3.5rem;
     }
   }
 }
+
+/**
+ * Chart series list item styles.
+ */
 @mixin _chart-series-list-item() {
   @include common.margin-end(3);
   align-items: center;
@@ -57,6 +63,10 @@ $min-height: 3.5rem;
     flex-shrink: 0;
   }
 }
+
+/**
+ * Add chart styles.
+ */
 @mixin add-chart-styles() {
   // layout using grid
   .chart {
