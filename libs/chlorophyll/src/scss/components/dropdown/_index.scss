@@ -18,17 +18,23 @@
     display: none;
   }
 
-  // menu
+  /**
+   * Menu
+   */
   ul[role='menu'] {
     @include mixins.menu();
   }
 
-  // dropdown select
+  /**
+   * Dropdown select
+   */
   ul[role='listbox'] {
     @include mixins.select();
   }
 
-  // dropdown multi-select
+  /**
+   * Dropdown multi-select
+   */
   .sg-fieldset-container {
     overflow-y: auto;
     fieldset[role='listbox'][aria-multiselectable='true'] {

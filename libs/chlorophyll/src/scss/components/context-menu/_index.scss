@@ -19,7 +19,9 @@
     @include mixins.add-select-context-menu();
   }
 
-  //TODO Improve design for mobile
+  /**
+   * TODO Improve design for mobile
+   */
   @include common.media-breakpoint-down('sm') {
     top: unset !important;
     left: 0 !important;

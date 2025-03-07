@@ -10,22 +10,31 @@ $container-max-widths: (
   xxl: 1320px,
 );
 
-// Container widths
-// Set the container width, and override it for fixed navbars in media queries.
-
+/**
+ * Container widths
+ * Set the container width, and override it for fixed navbars in media queries.
+ */
 @if tokens.$enable-grid-classes {
-  // Single container class with breakpoint max-widths
+  /**
+   * Single container class with breakpoint max-widths
+   */
   .gds-container,
-    // 100% wide container at all breakpoints
+    /**
+     * 100% wide container at all breakpoints
+     */
   .gds-container-fluid,
   %container-fluid {
     @include mixins.make-container();
   }
 
-  // Responsive containers that are 100% wide until a breakpoint
+  /**
+   * Responsive containers that are 100% wide until a breakpoint
+   */
   @each $breakpoint, $container-max-width in $container-max-widths {
     @include common.media-breakpoint-up($breakpoint, tokens.$grid-breakpoints) {
-      // Extend each breakpoint which is smaller or equal to the current breakpoint
+      /**
+       * Extend each breakpoint which is smaller or equal to the current breakpoint
+       */
       $extend-breakpoint: true;
       %responsive-container-#{$breakpoint} {
         max-width: $container-max-width;
@@ -37,7 +46,9 @@ $container-max-widths: (
             @extend %responsive-container-#{$breakpoint} !optional;
           }
 
-          // Once the current breakpoint is reached, stop extending
+          /**
+           * Once the current breakpoint is reached, stop extending
+           */
           @if ($breakpoint == $name) {
             $extend-breakpoint: false;
           }

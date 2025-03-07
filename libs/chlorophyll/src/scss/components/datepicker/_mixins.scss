@@ -2,7 +2,9 @@
 @use '../../common';
 
 @mixin calendar() {
-  // use full width on small screens
+  /**
+   * Use full width on small screens
+   */
   @include common.media-breakpoint-down(sm) {
     width: 100%;
     max-height: stretch;
@@ -33,11 +35,15 @@
     @include common.margin-vertical(3);
 
     table {
-      // use full width on small screens
+      /**
+       * Use full width on small screens
+       */
       @include common.media-breakpoint-down(sm) {
         width: 100%;
       }
-      // general
+      /**
+       * General
+       */
       border-spacing: 0;
       tr {
         th,
@@ -48,7 +54,9 @@
         }
       }
       thead {
-        // days
+        /**
+         * Days
+         */
         th {
           font-weight: 400;
           border-bottom: solid 1px var(--gds-sys-color-base-300);
@@ -61,24 +69,32 @@
       }
 
       tbody {
-        // week numbers
+        /**
+         * Week numbers
+         */
         tr th {
           font-weight: 400;
         }
-        // dates
+        /**
+         * Dates
+         */
         tr td {
           font-weight: 500;
           border: solid 1px transparent;
           user-select: none;
           transition: all 200ms ease-in-out;
 
-          // weekend
+          /**
+           * Weekend
+           */
           &.sg-date-holiday:not(.disabled) {
             background: var(--gds-sys-color-background-primary);
             color: var(--gds-sys-color-text-error);
           }
 
-          // today
+          /**
+           * Today
+           */
           &.sg-date-today {
             background: transparent;
             box-shadow: inset 0 0 0 2px var(--gds-sys-color-blue-dark-2);
@@ -86,7 +102,9 @@
             color: var(--gds-sys-color-blue-dark-2);
           }
 
-          // hover
+          /**
+           * Hover
+           */
           &:hover:not(.disabled) {
             background: var(--gds-sys-color-blue);
             border-radius: 4px;
@@ -95,19 +113,23 @@
             cursor: pointer;
           }
 
-          // focus
+          /**
+           * Focus
+           */
           &:focus-visible:not(.disabled) {
             @include common.add-focus();
             background: var(--gds-sys-color-blue);
             border-radius: 4px;
-            border: solid 1px var(--gds-sys-color-background-primary);
+            border: solid 1px var (--gds-sys-color-background-primary);
             color: var(--gds-sys-color-text-inverted);
             cursor: pointer;
             position: relative;
             z-index: 0;
           }
 
-          // selected
+          /**
+           * Selected
+           */
           &[aria-selected='true'] {
             background: var(--gds-sys-color-blue-dark-2);
             border-radius: 4px;
@@ -115,7 +137,9 @@
             color: var(--gds-sys-color-text-inverted);
           }
 
-          // highlighted
+          /**
+           * Highlighted
+           */
           &[tabindex='0'] {
             background: var(--gds-sys-color-blue-dark-2);
             border-radius: 4px;
@@ -123,7 +147,9 @@
             color: var(--gds-sys-color-text-inverted);
           }
 
-          // active (pressed)
+          /**
+           * Active (pressed)
+           */
           &:hover:active:not(.disabled) {
             background: var(--gds-sys-color-blue-dark-2);
             border-radius: 4px;
@@ -131,7 +157,9 @@
             color: var(--gds-sys-color-text-inverted);
           }
 
-          // disabled
+          /**
+           * Disabled
+           */
           &.disabled {
             background: var(--gds-sys-color-base-100);
             font-weight: 400;
@@ -156,9 +184,13 @@
 
 @mixin calendar-range() {
   main {
-    // dates
+    /**
+     * Dates
+     */
     table tbody tr td {
-      // selected
+      /**
+       * Selected
+       */
       &[aria-selected='true'] {
         &.sg-first-date,
         &.sg-first-date:hover:not(.disabled) {
@@ -175,7 +207,9 @@
         }
       }
 
-      // selection
+      /**
+       * Selection
+       */
       &.sg-date-selection {
         border: solid 1px var(--gds-sys-color-background-primary);
         border-left-width: 0;
@@ -188,21 +222,27 @@
         );
         color: var(--gds-sys-color-text-inverted);
 
-        // hover
+        /**
+         * Hover
+         */
         &:hover:not(.disabled) {
           border-radius: 0;
           border-left-width: 0;
           border-right-width: 0;
         }
 
-        // range
+        /**
+         * Range
+         */
         &.sg-first-date:not(:hover),
         &.sg-last-date:not(:hover) {
           background: var(--gds-sys-color-blue-dark-2);
         }
       }
 
-      // other-month
+      /**
+       * Other-month
+       */
       &.sg-other-month {
         color: var(--gds-sys-color-base-100);
       }

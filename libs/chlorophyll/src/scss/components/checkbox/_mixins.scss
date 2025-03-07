@@ -8,7 +8,9 @@ $invalid-color: var(--gds-sys-color-text-error);
   $checkbox-selector: 'input[type="checkbox"]',
   $validated-selector: '.was-validated'
 ) {
-  /* Hide the browser's default checkbox */
+  /**
+   * Hide the browser's default checkbox
+   */
   #{$selector} #{$checkbox-selector} {
     cursor: pointer;
     height: 0;
@@ -22,7 +24,9 @@ $invalid-color: var(--gds-sys-color-text-error);
     align-items: flex-start;
   }
 
-  /* Add focus to form-control field */
+  /**
+   * Add focus to form-control field
+   */
   #{$selector}:has(#{$checkbox-selector}) {
     padding: 0.6875rem 1rem 0.5625rem;
   }
@@ -31,7 +35,9 @@ $invalid-color: var(--gds-sys-color-text-error);
     @include common.add-focus('within');
   }
 
-  /* Style for custom checkbox */
+  /**
+   * Style for custom checkbox
+   */
   #{$selector} #{$checkbox-selector} ~ i {
     @include common.margin-end(4);
     margin-top: 0.0625rem;
@@ -70,7 +76,9 @@ $invalid-color: var(--gds-sys-color-text-error);
     opacity: 1;
   }
 
-  // Invalid state
+  /**
+   * Invalid state
+   */
   #{$selector}:has(#{$checkbox-selector}.is-invalid) {
     border: 0.0625rem solid $invalid-color;
     @include common.margin-bottom(3);
@@ -93,7 +101,9 @@ $invalid-color: var(--gds-sys-color-text-error);
     }
   }
 
-  /* Disabled state */
+  /**
+   * Disabled state
+   */
   #{$selector} #{$checkbox-selector}:disabled,
   #{$selector} #{$checkbox-selector}.disabled {
     ~ i {
