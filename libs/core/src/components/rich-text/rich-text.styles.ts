@@ -106,7 +106,7 @@ export const styles = css`
   ol li:before {
     counter-increment: ordered-list;
     content: counter(ordered-list) '.';
-    left: 4px;
+    left: 0.2rem;
     position: absolute;
   }
 
