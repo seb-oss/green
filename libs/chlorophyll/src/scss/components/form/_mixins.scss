@@ -1,14 +1,20 @@
 @use '../../common';
 @use '../../tokens';
 
-/* base style for forms */
+/**
+ * @mixin add-form
+ * Base style for forms
+ */
 @mixin add-form {
   > * {
     @include common.margin-bottom(6);
   }
 }
 
-/* horizontal layout for forms */
+/**
+ * @mixin horizontal-layout
+ * Horizontal layout for forms
+ */
 @mixin horizontal-layout() {
   /* use flex layout on small screens and up, ie. stack on small screens (mobile devices) */
   @include common.media-breakpoint-up('sm') {
@@ -86,7 +92,10 @@
   }
 }
 
-/* label for checkboxes and radio buttons */
+/**
+ * @mixin add-form-control
+ * Label for checkboxes and radio buttons
+ */
 @mixin add-form-control {
   @include common.padding-vertical(4);
   @include common.padding-horizontal(5);
@@ -107,7 +116,10 @@
   }
 }
 
-/* form group */
+/**
+ * @mixin add-form-group
+ * Form group
+ */
 @mixin add-form-group() {
   display: flex;
   flex-direction: column;
@@ -128,6 +140,10 @@
   }
 }
 
+/**
+ * @mixin add-form-item
+ * Form item
+ */
 @mixin add-form-item() {
   display: flex;
   flex-direction: column;
@@ -215,7 +231,10 @@
   }
 }
 
-/* form text */
+/**
+ * @mixin add-form-text
+ * Form text
+ */
 @mixin add-form-text() {
   border: solid transparent 1px; // correct vertical alignment
   min-height: 2.75rem;
@@ -224,6 +243,9 @@
   font: inherit;
 }
 
+/**
+ * @mixin add-label
+ */
 @mixin add-label() {
   &:is(label) {
     // Overriding bootstraps reset.scss for label
@@ -259,6 +281,9 @@
   }
 }
 
+/**
+ * @mixin add-form-info
+ */
 @mixin add-form-info() {
   &:last-child {
     font-weight: 500;

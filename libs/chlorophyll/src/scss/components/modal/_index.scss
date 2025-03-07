@@ -1,38 +1,30 @@
 @use '../../tokens';
 @use 'mixins';
 
-// base styles for modal
-div[role='dialog']:not(.sg-date, .popover),
-section[role='dialog'],
-main[role='dialog'],
-aside[role='dialog'] {
+/**
+ * Modal component styles
+ */
+.gds-modal {
   @include mixins.modal();
 }
 
-// normal dialog modal
-div[role='dialog']:not(.sg-date, .popover),
-section[role='dialog'] {
+.gds-modal--dialog {
   @include mixins.dialog-modal;
 }
 
-.gds-dialog-wrapper {
+.gds-modal--dialog-wrapper {
   @include mixins.dialog-modal-wrapper;
 }
 
-// aside aka slide out modal
-aside[role='dialog'] {
+.gds-modal--slide-out {
   @include mixins.aside-modal;
 }
 
-// fullscreen aka take over modal
-main[role='dialog'] {
+.gds-modal--take-over {
   @include mixins.fullscreen-modal;
 }
 
-// backdrop for all modal styles except fullscreen
-div[role='dialog'],
-section[role='dialog'],
-aside[role='dialog'],
+.gds-modal,
 .gds-dialog-wrapper {
   ~ .backdrop {
     @include mixins.modal-backdrop();

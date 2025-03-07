@@ -1,7 +1,6 @@
 @use 'functions';
 @use 'sass:map';
 
-// old
 @mixin add-disable($background, $color, $border-color) {
   @if ($background) {
     @if ($background == true) {

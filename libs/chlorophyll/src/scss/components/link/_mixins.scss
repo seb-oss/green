@@ -64,7 +64,9 @@
   }
 }
 
-// TODO: Convert this to a "Secondary link" and add full support for icons in the link component.
+/** 
+ * TODO: Convert this to a "Secondary link" and add full support for icons in the link component.
+ */
 @mixin arrow {
   display: inline-flex;
   align-items: center;

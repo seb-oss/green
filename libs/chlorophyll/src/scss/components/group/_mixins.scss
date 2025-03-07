@@ -141,9 +141,8 @@ $_background: input.$background;
     padding-left: 1rem;
   }
 
-  // don't grow buttons in groups with inputs
   input ~ {
-    .button,
+    .gds-button,
     button {
       flex-grow: 0;
     }

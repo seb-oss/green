@@ -1,10 +1,8 @@
 @use 'mixins';
-@forward 'mixins';
-
-// dependencies
 @use '../../components/list';
 @use '../../components/popover';
 @use '../../components/utility';
+@forward 'mixins';
 
 .gds-dropdown {
   @include mixins.dropdown-trigger();

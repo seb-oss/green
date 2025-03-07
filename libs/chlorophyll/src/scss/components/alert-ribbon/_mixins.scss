@@ -37,6 +37,9 @@ $border-radius: 0;
 $border: solid 1px var(--border-color);
 $color: var(--gds-sys-color-text-primary);
 
+/**
+ * @mixin alert-ribbon
+ */
 @mixin alert-ribbon {
   --background: #{$background};
   --color: #{$color};
@@ -193,6 +196,13 @@ $color: var(--gds-sys-color-text-primary);
   }
 }
 
+/**
+ * @mixin alert-variant
+ * @param {Color} $color - Text color
+ * @param {Color} $background - Background color
+ * @param {Color} $border-color - Border color
+ * @param {String} $ghost-button-type - Ghost button type
+ */
 @mixin alert-variant($color, $background, $border-color, $ghost-button-type) {
   --background: #{$background};
   --color: #{$color};

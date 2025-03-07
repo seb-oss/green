@@ -7,8 +7,12 @@
 //
 // Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
 
-// Ascending
-// Used to evaluate Sass maps like our grid breakpoints.
+/**
+ * Assert that a map is in ascending order
+ * @mixin assert-ascending
+ * @param {Map} $map - The map to check
+ * @param {String} $map-name - The name of the map
+ */
 @mixin assert-ascending($map, $map-name) {
   $prev-key: null;
   $prev-num: null;
@@ -25,8 +29,12 @@
   }
 }
 
-// Starts at zero
-// Used to ensure the min-width of the lowest breakpoint starts at 0.
+/**
+ * Assert that the first breakpoint in a map starts at zero
+ * @mixin assert-starts-at-zero
+ * @param {Map} $map - The map to check
+ * @param {String} $map-name - The name of the map
+ */
 @mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
   @if length($map) > 0 {
     $values: map-values($map);
@@ -37,19 +45,24 @@
   }
 }
 
-// Add important rule
+/**
+ * Check if a value is important
+ * @function is-important
+ * @param {Boolean} $important - Whether the value is important
+ * @return {String} - "!important" if true, otherwise an empty string
+ */
 @function is-important($important) {
   @return #{if($important, '!important', '')};
 }
 
-// Replace `$search` with `$replace` in `$string`
-// Used on our SVG icon backgrounds for custom forms.
-//
-// @author Hugo Giraudel
-// @param {String} $string - Initial string
-// @param {String} $search - Substring to replace
-// @param {String} $replace ('') - New value
-// @return {String} - Updated string
+/**
+ * Replace a substring in a string
+ * @function str-replace
+ * @param {String} $string - The original string
+ * @param {String} $search - The substring to replace
+ * @param {String} $replace - The replacement string
+ * @return {String} - The updated string
+ */
 @function str-replace($string, $search, $replace: '') {
   $index: str-index($string, $search);
 
@@ -65,8 +78,12 @@
   @return $string;
 }
 
-// Internal Bootstrap function to turn maps into its negative variant.
-// It prefixes the keys with `n` and makes the value negative.
+/**
+ * Convert a map to its negative variant
+ * @function negativify-map
+ * @param {Map} $map - The map to convert
+ * @return {Map} - The negative variant of the map
+ */
 @function negativify-map($map) {
   $result: ();
   @each $key, $value in $map {
@@ -78,8 +95,13 @@
 }
 $enable-important-utilities: true;
 
-// Utility generator
-// Used to generate utilities & print utilities
+/**
+ * Generate utility classes
+ * @mixin generate-utility
+ * @param {Map} $utility - Utility map
+ * @param {String} $infix - Infix for class names
+ * @param {Boolean} $is-rfs-media-query - Whether to use RFS media query
+ */
 @mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
   $values: map-get($utility, values);
 

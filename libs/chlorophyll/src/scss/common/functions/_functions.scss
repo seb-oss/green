@@ -89,7 +89,9 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   0.9911020971138298 1;
 /**
  * Calculate the luminance for a color.
- * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ * @function luminance
+ * @param {Color} $color - The color to calculate luminance for
+ * @return {Number} - The luminance value
  */
 @function luminance($color) {
   $red: nth($linear-channel-values, red($color) + 1);
@@ -102,7 +104,10 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 
 /**
  * Calculate the contrast ratio between two colors.
- * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
+ * @function color-contrast
+ * @param {Color} $fg - Foreground color
+ * @param {Color} $bg - Background color
+ * @return {Number} - The contrast ratio
  */
 @function color-contrast($fg, $bg) {
   $luminance1: luminance($fg) + 0.05;
@@ -114,9 +119,12 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @return $ratio;
 }
 
-/// Remove the unit of a length
-/// @param {Number} $number - Number to remove unit from
-/// @return {Number} - Unitless number
+/**
+ * Remove the unit of a length
+ * @function strip-unit
+ * @param {Number} $number - Number to remove unit from
+ * @return {Number} - Unitless number
+ */
 @function strip-unit($number) {
   @if type-of($number) == 'number' and not unitless($number) {
     @return $number / ($number * 0 + 1);
@@ -125,14 +133,12 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @return $number;
 }
 
-// validate-font-size($size)
-// Helper: Depending on the unit recalculate a font size value into pixels if possible
-// To be used in other functions or mixins — creates non-standard CSS output:
-// Usage:
-// .sample { validate-font-size: validate-font-size(1em); }
-// Output:
-// .sample { validate-font-size: 16; }
-//
+/**
+ * Validate font size
+ * @function validate-font-size
+ * @param {Number} $size - Font size to validate
+ * @return {Number} - Validated font size in pixels
+ */
 @function validate-font-size($size) {
   @if unit($size) ==
     'em' or
@@ -160,14 +166,15 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-// get-ratio($level: 'AA', $size: 16, $bold: false, $graphic: false)
-// Helper: Determine the correct ratio value to use based on font-size and WCAG Level
-// To be used in other functions or mixins — creates non-standard CSS output:
-// Usage:
-// .sample { get-ratio: get-ratio('AAA', 19, true); }
-// Output:
-// .sample { get-ratio: 4.5; }
-//
+/**
+ * Get ratio for WCAG level
+ * @function get-ratio
+ * @param {String} $level - WCAG level
+ * @param {Number} $size - Font size
+ * @param {Boolean} $bold - Is bold
+ * @param {Boolean} $graphic - Is graphic
+ * @return {Number} - Ratio value
+ */
 @function get-ratio($level: 'AA', $size: 16, $bold: false, $graphic: false) {
   // Default ratio
   $ratio: 4.5;
@@ -205,15 +212,12 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @return $ratio;
 }
 
-// light-or-dark($color)
-// Helper: Use contrast against white or black to determine if a color is "light" or "dark"
-// Adapted from: https://medium.com/dev-channel/using-sass-to-automatically-pick-text-colors-4ba7645d2796
-// To be used in other functions or mixins — creates non-standard CSS output:
-// Usage:
-// .sample { light-or-dark: light-or-dark(#c00); }
-// Output:
-// .sample { light-or-dark: "light"; }
-//
+/**
+ * Determine if a color is light or dark
+ * @function light-or-dark
+ * @param {Color} $color - The color to check
+ * @return {String} - "light" or "dark"
+ */
 @function light-or-dark($color) {
   $light-contrast: color-contrast($color, $white);
   $dark-contrast: color-contrast($color, $black);
@@ -226,18 +230,12 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
-// most-legible-color($color)
-// Helper: In some cases, we simply want to use black or white text over a color, whichever is more appropriate
-// Usage:
-// .sample {
-//   background-color: #c00;
-//   color: most-legible-color(#c00);
-// }
-// Output:
-// .sample {
-//   background-color: #c00;
-//   color: #fff;
-// }
+/**
+ * Get the most legible color (black or white) for a given background color
+ * @function most-legible-color
+ * @param {Color} $color - The background color
+ * @return {Color} - The most legible color
+ */
 @function most-legible-color($color) {
   $color-lod: light-or-dark($color);
 
@@ -248,6 +246,15 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
+/**
+ * Get the desired color combination for foreground and background colors
+ * @function desired-color-combination
+ * @param {Color} $fg - Foreground color
+ * @param {Color} $bg - Background color
+ * @param {Number} $offsetThreshold - Offset threshold
+ * @param {Number} $ratio - Contrast ratio
+ * @return {List} - List containing background and foreground colors
+ */
 @function desired-color-combination(
   $fg,
   $bg,
@@ -280,6 +287,13 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   @return $bg, $color;
 }
 
+/**
+ * @mixin desired-color-combination
+ * @param {Color} $fg - Foreground color
+ * @param {Color} $bg - Background color
+ * @param {Number} $offsetThreshold - Offset threshold
+ * @param {Number} $ratio - Contrast ratio
+ */
 @mixin desired-color-combination($fg, $bg, $offsetThreshold: 20%, $ratio: 4.5) {
   $color-combination: desired-color-combination(
     $fg,
@@ -293,19 +307,20 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   --color: #{nth($color-combination, 2)};
 }
 
-// a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false, $graphic: false)
-// Goal: Return a color that passes for the chosen WCAG level without changing the Hue of the color
-// Usage:
-// .sample {
-//   background-color: #000;
-//   color: a11y-color(#c0c, #000);
-// }
-// Output:
-// .sample {
-//   background-color: #000;
-//   color: #d200d2;
-// }
-//
+/**
+ * Get an accessible color for a given foreground and background color
+ * @function a11y-color
+ * @param {Color} $fg - Foreground color
+ * @param {Color} $bg - Background color
+ * @param {String} $level - WCAG level
+ * @param {Number} $size - Font size
+ * @param {Boolean} $bold - Is bold
+ * @param {Boolean} $graphic - Is graphic
+ * @param {Number} $maxOffset - Maximum offset
+ * @param {Boolean} $darkMode - Is dark mode
+ * @param {Number} $ratio - Contrast ratio
+ * @return {Color} - Accessible color
+ */
 @function a11y-color(
   $fg,
   $bg,
@@ -371,6 +386,14 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
+/**
+ * Get the maximum contrast color
+ * @function max-contrast
+ * @param {Color} $fg - Foreground color
+ * @param {Color} $bg - Background color
+ * @param {Color} $max - Maximum contrast color
+ * @return {Color} - Maximum contrast color
+ */
 @function max-contrast($fg, $bg: $grey-200, $max: $grey-600) {
   @if (color-contrast($fg, $bg) > 3) {
     @return $max;
@@ -379,14 +402,32 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
   }
 }
 
+/**
+ * Get the RGB values of a color as a string
+ * @function stripped-rgb
+ * @param {Color} $color - The color
+ * @return {String} - RGB values as a string
+ */
 @function stripped-rgb($color) {
   @return red($color) + ', ' + green($color) + ', ' + blue($color);
 }
 
+/**
+ * Get the HSL values of a color as a string
+ * @function stripped-hsl
+ * @param {Color} $color - The color
+ * @return {String} - HSL values as a string
+ */
 @function stripped-hsl($color) {
   @return hue($color) + ', ' + saturation($color) + ', ' + lightness($color);
 }
 
+/**
+ * Convert a map of colors to a map of HSL values
+ * @function hsl-map
+ * @param {Map} $colors - Map of colors
+ * @return {Map} - Map of HSL values
+ */
 @function hsl-map($colors) {
   // new map
   $hsl-map: ();

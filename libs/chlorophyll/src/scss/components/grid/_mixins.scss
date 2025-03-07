@@ -2,6 +2,10 @@
 @use '../../tokens';
 @use '../../common/breakpoints';
 
+/**
+ * @mixin make-row
+ * @param {Number} $gutter - Gutter width
+ */
 @mixin make-row($gutter: tokens.$grid-gutter-width) {
   --#{tokens.$variable-prefix}gutter-x: #{$gutter};
   --#{tokens.$variable-prefix}gutter-y: 0;
@@ -18,6 +22,10 @@
   ); // stylelint-disable-line function-disallowed-list
 }
 
+/**
+ * @mixin make-col-ready
+ * @param {Number} $gutter - Gutter width
+ */
 @mixin make-col-ready($gutter: tokens.$grid-gutter-width) {
   // Add box sizing if only the grid is loaded
   box-sizing: if(
@@ -41,6 +49,11 @@
   width: 100%;
 }
 
+/**
+ * @mixin make-col
+ * @param {Boolean|Number} $size - Column size
+ * @param {Number} $columns - Number of columns
+ */
 @mixin make-col($size: false, $columns: tokens.$grid-columns) {
   @if $size {
     flex: 0 0 auto;
@@ -51,11 +64,19 @@
   }
 }
 
+/**
+ * @mixin make-col-auto
+ */
 @mixin make-col-auto() {
   flex: 0 0 auto;
   width: auto;
 }
 
+/**
+ * @mixin make-col-offset
+ * @param {Number} $size - Offset size
+ * @param {Number} $columns - Number of columns
+ */
 @mixin make-col-offset($size, $columns: tokens.$grid-columns) {
   $num: math.div($size, $columns);
   margin-left: if($num == 0, 0, percentage($num));
@@ -64,6 +85,10 @@
 // Row columns
 // number of columns. Supports wrapping to new lines, but does not do a Masonry style grid.
 
+/**
+ * @mixin row-cols
+ * @param {Number} $count - Number of columns
+ */
 @mixin row-cols($count) {
   > * {
     flex: 0 0 auto;
@@ -75,6 +100,12 @@
 // Used only by Bootstrap to generate the correct number of grid classes given
 // any value of `$grid-columns`.
 
+/**
+ * @mixin make-grid-columns
+ * @param {Number} $columns - Number of columns
+ * @param {Number} $gutter - Gutter width
+ * @param {Map} $breakpoints - Breakpoints map
+ */
 @mixin make-grid-columns(
   $columns: tokens.$grid-columns,
   $gutter: tokens.$grid-gutter-width,
@@ -147,6 +178,11 @@
   }
 }
 
+/**
+ * @mixin make-cssgrid
+ * @param {Number} $columns - Number of columns
+ * @param {Map} $breakpoints - Breakpoints map
+ */
 @mixin make-cssgrid(
   $columns: tokens.$grid-columns,
   $breakpoints: tokens.$grid-breakpoints
