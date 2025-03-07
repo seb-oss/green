@@ -20,6 +20,7 @@
 's39938ecdae568740': `Settembre`,
 's407a88a592a0987c': `Agosto`,
 's46d6587089bd0356': `Mese successivo`,
+'s49730f3d5751a433': `Caricamento...`,
 's5052d10b539eabf0': `Marzo`,
 's58bfb494feb8eb02': str`${0} selezionato`,
 's5d929ff1619ac0c9': `Cerca`,
