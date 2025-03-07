@@ -92,15 +92,29 @@ export const styles = css`
   }
 
   ol {
-    padding-inline-start: 4ch;
-    list-style-position: outside;
+    list-style-type: none;
+    counter-reset: ordered-list;
+    margin: unset;
+    padding: unset;
+  }
+
+  ol li {
+    padding-left: 3ch;
+    position: relative;
+  }
+
+  ol li:before {
+    counter-increment: ordered-list;
+    content: counter(ordered-list, decimal-leading-zero) '.';
+    left: 0;
+    position: absolute;
   }
 
   li {
     padding: 0 0 0.3lh 0;
   }
 
-  li:last-child {
+  ul li:last-child {
     padding: 0;
   }
 
