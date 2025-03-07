@@ -19,6 +19,28 @@
 
   &.gds-form-item {
     @include form-group.add-form-item();
+
+    .gds-form-item__footer:not(:empty) {
+      .form-info {
+        font-weight: 500;
+      }
+
+      .form-info--error {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5em;
+        color: #9f000a;
+
+        .error-icon {
+          margin-top: 0.128rem;
+          align-items: center;
+        }
+      }
+
+      > .form-info--countdown {
+        font-weight: 400;
+      }
+    }
   }
 
   .hide-if-empty:empty {
@@ -205,23 +227,5 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     width: 100%;
-  }
-
-  .gds-form-item__footer {
-    .form-info {
-      font-weight: 500;
-    }
-
-    .form-info--error {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5em;
-      color: #9f000a;
-
-      .error-icon {
-        margin-top: 0.128rem;
-        align-items: center;
-      }
-    }
   }
 }

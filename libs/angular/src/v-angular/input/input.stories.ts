@@ -228,7 +228,7 @@ const TemplateWithCustomLabel: StoryFn<NggvInputComponent & WithExtras> = (
       [invalid]="invalid"
       [required]="required">
       <ng-template #labelTpl>
-        <i>{{ customLabelText }}</i>
+        My custom label template
         <nggv-info-circle [info]="info"></nggv-info-circle>
         <span>{{ text }}</span>
       </ng-template>
@@ -412,7 +412,7 @@ export const WithMaxLength: StoryFn<NggvInputComponent & WithExtras & any> = (
         formControlName="remittanceInformation"
         >
         <ng-template #labelTpl>
-          <i>{{ customLabelText }}</i>
+          My custom label template
           <nggv-info-circle [info]="info"></nggv-info-circle>
           <span>{{ text }}</span>
         </ng-template>

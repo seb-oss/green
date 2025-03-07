@@ -1,6 +1,6 @@
 export const tooltipBoxStyles = new Map<string, any>([
   ['position', 'absolute'],
-  ['z-index', '1040'],
+  ['z-index', '1045'],
   ['border-radius', '.25rem'],
   ['padding', '.5rem 1rem'],
   ['background-color', '#1a1a1a'],
