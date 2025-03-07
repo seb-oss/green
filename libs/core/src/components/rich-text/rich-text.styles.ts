@@ -99,19 +99,23 @@ export const styles = css`
   }
 
   ol li {
-    padding-left: 3.6ch;
+    padding-left: 3.4ch;
     position: relative;
   }
 
   ol li:before {
     counter-increment: ordered-list;
     content: counter(ordered-list) '.';
-    left: 4px;
+    left: 2px;
     position: absolute;
   }
 
-  ol li:nth-child(-n + 9)::before {
-    padding-left: 1ch;
+  ol:not(:has(li:nth-child(10))) li {
+    padding-left: 2.2ch;
+  }
+
+  ol:has(li:nth-child(10)) li:nth-child(-n + 9):before {
+    left: 1.2ch;
   }
 
   li {
