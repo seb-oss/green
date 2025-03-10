@@ -141,7 +141,7 @@ export class GdsSpinner extends withMarginProps(
   protected render() {
     return html`
       <div part="wrapper" class=${classMap(this.#getWrapperClasses())}>
-        <span part="spinner" class="gds-spinner"></span>
+        <span part="spinner" class="spinner"></span>
         ${when(
           this.label && this.showLabel,
           () =>
@@ -158,11 +158,11 @@ export class GdsSpinner extends withMarginProps(
    */
   #getWrapperClasses() {
     return {
-      'gds-spinner-wrapper': true,
-      'gds-spinner-fullscreen': this.fullscreen,
-      'gds-spinner-cover': this.cover,
-      'gds-spinner-backdrop': this.cover || this.fullscreen,
-      'gds-spinner-animating': this._isAnimating,
+      'spinner-wrapper': true,
+      'spinner-fullscreen': this.fullscreen,
+      'spinner-cover': this.cover,
+      'spinner-backdrop': this.cover || this.fullscreen,
+      'spinner-animating': this._isAnimating,
     }
   }
 

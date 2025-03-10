@@ -55,6 +55,8 @@
   .nggv-modal-slideout__close {
     @include button.reset;
     @include close.close;
+    min-height: 2rem;
+    min-width: 2rem;
   }
 
   .modal-dialog__actions {

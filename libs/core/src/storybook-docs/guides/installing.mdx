@@ -100,17 +100,12 @@ If you are using a lot of web components, it can feel a bit cluttered with all t
 In your module:
 
 ```ts
-import { CUSTOM_ELEMENTS_SCHEMA, RendererFactory2 } from '@angular/core'
-import { NggCoreRendererFactory } from '@sebgroup/green-angular/src/lib/shared'
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
 
 @NgModule({
-    // Provide the NggCoreRenderer as a custom renderer
-    providers: [
-      {
-        provide: RendererFactory2,
-        useClass: NggCoreRendererFactory,
-      },
-    ],
+    // Provides `NggCoreRenderer` as a custom renderer
+    providers: [provideCoreRenderer()],
     // CUSTOM_ELEMENTS_SCHEMA is still needed
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -121,10 +116,7 @@ Or, if you are only using standalone components, you can either create a root ap
 ```ts
 // app.config.ts
 const appConfig: ApplicationConfig = {
-  providers: [...other providers..., {
-    provide: RendererFactory2,
-    useClass: NggCoreRendererFactory,
-  }]
+  providers: [...other providers..., provideCoreRenderer()]
 };
 
 // main.ts
@@ -136,6 +128,24 @@ Now you can use Green Core components in your template without any special direc
 
 ```html
 <gds-button>Click me!</gds-button>
+```
+
+#### Using the custom renderer with Angular animations
+
+If you also need to use Angular animations, you need to use a special version of the provider. This is because Angular animations also use a custom renderer. So we need a bit of specialized initialization to make sure both the Green Core renderer and the Angular animations renderer can coexist.
+
+All you need to do on your end is to use `provideCoreRendererWithAnimations()` instead of `provideCoreRenderer()`.
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { provideCoreRendererWithAnimations } from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+    imports: [BrowserAnimationsModule] // You also need to make sure you have imported the `BrowserAnimationsModule` module
+    providers: [provideCoreRendererWithAnimations()],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
 ```
 
 ### Using React
