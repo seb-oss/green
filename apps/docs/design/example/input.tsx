@@ -7,12 +7,12 @@ const Input = ({ hero }: { hero?: boolean }) => (
   <>
     {hero ? (
       <GdsFlex>
-        <GdsInput label="Input" value=" " clearable>
+        <GdsInput label="Label" value=" " clearable>
           <IconCreditCard slot="lead" />
         </GdsInput>
       </GdsFlex>
     ) : (
-      <GdsInput label="Input" value=" " clearable>
+      <GdsInput label="Label" value=" " clearable>
         <IconCreditCard slot="lead" />
       </GdsInput>
     )}

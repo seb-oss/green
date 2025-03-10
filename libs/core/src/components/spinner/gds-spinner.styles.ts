@@ -67,7 +67,7 @@ export const styles = css`
   }
 
   /* Spinner component */
-  .gds-spinner {
+  .spinner {
     border-radius: 50%;
     border: var(--track-width, 0.375rem) solid var(--spinner-track-color);
     border-top-color: var(--spinner-active-color);
@@ -78,7 +78,7 @@ export const styles = css`
 
   /* Motion preference adjustments */
   @media (prefers-reduced-motion: reduce) {
-    .gds-spinner {
+    .spinner {
       /* Slower rotation for reduced motion preference */
       animation-duration: 2s;
       /* Smaller rotation to reduce visual intensity */
@@ -93,26 +93,26 @@ export const styles = css`
   }
 
   /* Layout components */
-  .gds-spinner-wrapper {
+  .spinner-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
 
-  .gds-spinner-wrapper.gds-spinner-cover {
+  .spinner-wrapper.spinner-cover {
     position: absolute;
     inset: 0;
     z-index: 999;
   }
 
-  .gds-spinner-wrapper.gds-spinner-fullscreen {
+  .spinner-wrapper.spinner-fullscreen {
     position: fixed;
     inset: 0;
     z-index: 9999;
   }
 
-  .gds-spinner-wrapper.gds-spinner-backdrop {
+  .spinner-wrapper.spinner-backdrop {
     background-color: var(--spinner-backdrop-color);
     backdrop-filter: blur(var(--spinner-backdrop-blur));
     --spinner-label-color: #fff;

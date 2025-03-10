@@ -20,7 +20,7 @@ export const styles = css`
     margin-bottom: var(--gds-space-xs);
   }
 
-  :is(h1, h2, h3, h4, h5, h6):first-of-type {
+  :is(h1, h2, h3, h4, h5, h6):first-child {
     margin-top: unset;
   }
 
@@ -92,26 +92,37 @@ export const styles = css`
   }
 
   ol {
-    counter-reset: list-counter;
     list-style-type: none;
-    padding-inline-start: 1ch;
+    counter-reset: ordered-list;
+    margin: unset;
+    padding: unset;
   }
 
   ol li {
-    display: flex;
-    counter-increment: list-counter;
+    padding-left: 3.6ch;
+    position: relative;
   }
 
-  ol li::before {
-    content: counter(list-counter) '. ';
-    min-width: 3ch;
+  ol li:before {
+    counter-increment: ordered-list;
+    content: counter(ordered-list) '.';
+    left: 0.2rem;
+    position: absolute;
+  }
+
+  ol:not(:has(li:nth-child(10))) li {
+    padding-left: 2.4ch;
+  }
+
+  ol:has(li:nth-child(10)) li:nth-child(-n + 9):before {
+    left: 1.4ch;
   }
 
   li {
     padding: 0 0 0.3lh 0;
   }
 
-  li:last-child {
+  ul li:last-child {
     padding: 0;
   }
 
@@ -202,6 +213,10 @@ export const styles = css`
     outline-offset: var(--gds-space-2xs);
     outline-color: currentColor;
     padding-inline: var(--gds-space-m);
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
   }
 
   summary:focus-visible {
