@@ -458,14 +458,7 @@ export class GdsDropdown<ValueT = any>
   }
 
   #calcMaxHeight = (trigger: HTMLElement) => {
-    const triggerRect = trigger.getBoundingClientRect()
-    const windowHeight = window.innerHeight
-    const bottomSpace = windowHeight - triggerRect.bottom
-    const topSpace = triggerRect.top
-
-    let height = Math.min(topSpace, this.maxHeight)
-    if (bottomSpace > topSpace) height = Math.min(bottomSpace, this.maxHeight)
-
+    const height = Math.min(window.innerHeight, this.maxHeight)
     return `${height - 16}px`
   }
 
