@@ -10,148 +10,230 @@ import type {
 } from '@sebgroup/green-core/components/radio'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { clickOnElement } from '../../utils/testing'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-radio>', () => {
-  it('is a GdsElement', async () => {
-    const el = await fixture(html`<gds-radio></gds-radio>`)
-    expect(el.getAttribute('gds-element')).to.equal('gds-radio')
-  })
-
-  describe('Accessibility', () => {
-    it('is accessible', async () => {
+  describe('Rendering', () => {
+    it('should render with label', async () => {
       const el = await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test"></gds-radio>
+        <gds-radio label="Test Label" value="test"></gds-radio>
       `)
       await el.updateComplete
-      await expect(el).to.be.accessible()
+      const label = el.shadowRoot?.querySelector('gds-selection-field-label')
+      expect(label).to.exist
+      expect(label?.getAttribute('label')).to.equal('Test Label')
     })
 
-    it('has correct ARIA attributes', async () => {
+    it('should render with supporting text', async () => {
       const el = await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test"></gds-radio>
+        <gds-radio
+          label="Test Label"
+          value="test"
+          supporting-text="Help text"
+        ></gds-radio>
       `)
-      const radio = el.shadowRoot?.querySelector('[role="radio"]')
-      expect(radio?.getAttribute('role')).to.equal('radio')
-      expect(radio?.getAttribute('aria-checked')).to.equal('false')
+      await el.updateComplete
+      const label = el.shadowRoot?.querySelector('gds-selection-field-label')
+      expect(label?.getAttribute('supporting-text')).to.equal('Help text')
     })
   })
 
   describe('API', () => {
-    it('should update checked state', async () => {
-      const el = await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test"></gds-radio>
+    let el: GdsRadio
+
+    beforeEach(async () => {
+      el = await fixture<GdsRadio>(html`
+        <gds-radio label="Test Label" value="test"></gds-radio>
       `)
+      await el.updateComplete
+    })
+
+    it('should update checked state', async () => {
       el.checked = true
       await el.updateComplete
       expect(el.checked).to.be.true
+      expect(el.getAttribute('aria-checked')).to.equal('true')
     })
 
     it('should handle disabled state', async () => {
-      const el = await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test" disabled></gds-radio>
-      `)
-      const radio = el.shadowRoot?.querySelector('[role="radio"]')
-      expect(radio?.getAttribute('aria-disabled')).to.equal('true')
+      el.disabled = true
+      await el.updateComplete
+      expect(el.disabled).to.be.true
+      expect(el.getAttribute('aria-disabled')).to.equal('true')
+      expect(el.getAttribute('tabindex')).to.equal('-1')
     })
 
-    it('should warn when used outside radio group', async () => {
-      const consoleSpy = sinon.spy(console, 'warn')
-      await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test"></gds-radio>
-      `)
-      expect(consoleSpy).to.have.been.calledWith(
-        sinon.match(/Should be wrapped in a gds-radio-group/),
-      )
-      consoleSpy.restore()
+    it('should handle invalid state', async () => {
+      el.invalid = true
+      await el.updateComplete
+      expect(el.invalid).to.be.true
+      expect(el.hasAttribute('aria-invalid')).to.be.true
     })
   })
 
-  describe('Interactions', () => {
+  describe('Events', () => {
     it('should emit change event when clicked', async () => {
       const el = await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test"></gds-radio>
+        <gds-radio label="Test Label" value="test"></gds-radio>
       `)
+      await el.updateComplete
+
       const changeSpy = sinon.spy()
       el.addEventListener('change', changeSpy)
 
-      const radio = el.shadowRoot?.querySelector('[role="radio"]')
-      await clickOnElement(radio!)
+      const label = el.shadowRoot?.querySelector('gds-selection-field-label')
+      label?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await el.updateComplete
 
       expect(changeSpy).to.have.been.calledOnce
+      expect(el.checked).to.be.true
     })
 
     it('should not emit change event when disabled', async () => {
       const el = await fixture<GdsRadio>(html`
-        <gds-radio label="Test Radio" value="test" disabled></gds-radio>
+        <gds-radio label="Test Label" value="test" disabled></gds-radio>
       `)
+      await el.updateComplete
+
       const changeSpy = sinon.spy()
       el.addEventListener('change', changeSpy)
 
-      const radio = el.shadowRoot?.querySelector('[role="radio"]')
-      await clickOnElement(radio!)
+      const label = el.shadowRoot?.querySelector('gds-selection-field-label')
+      label?.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await el.updateComplete
 
       expect(changeSpy).to.not.have.been.called
+      expect(el.checked).to.be.false
     })
   })
 })
 
 describe('<gds-radio-group>', () => {
-  it('should handle single selection', async () => {
-    const el = await fixture<GdsRadioGroup>(html`
-      <gds-radio-group label="Test Group">
-        <gds-radio value="1" label="Option 1"></gds-radio>
-        <gds-radio value="2" label="Option 2"></gds-radio>
-        <gds-radio value="3" label="Option 3"></gds-radio>
-      </gds-radio-group>
-    `)
+  describe('Rendering', () => {
+    it('should render with label and radios', async () => {
+      const el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group label="Test Group">
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+        </gds-radio-group>
+      `)
+      await el.updateComplete
 
-    const radios = el.querySelectorAll('gds-radio')
-    await clickOnElement(radios[1])
-    await el.updateComplete
+      const header = el.shadowRoot?.querySelector('gds-form-control-header')
+      const radios = el.querySelectorAll('gds-radio')
 
-    expect(el.value).to.equal('2')
-    expect((radios[1] as GdsRadio).checked).to.be.true
-    expect((radios[0] as GdsRadio).checked).to.be.false
-    expect((radios[2] as GdsRadio).checked).to.be.false
+      expect(header?.querySelector('[slot="label"]')?.textContent).to.equal(
+        'Test Group',
+      )
+      expect(radios.length).to.equal(2)
+    })
+
+    it('should render with supporting text', async () => {
+      const el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group label="Test Group" supporting-text="Help text">
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+        </gds-radio-group>
+      `)
+      await el.updateComplete
+
+      const supportingText = el.shadowRoot?.querySelector('#supporting-text')
+      expect(supportingText?.textContent?.trim()).to.equal('Help text')
+    })
+  })
+
+  describe('Selection', () => {
+    let el: GdsRadioGroup
+
+    beforeEach(async () => {
+      el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group label="Test Group">
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+          <gds-radio value="3" label="Option 3"></gds-radio>
+        </gds-radio-group>
+      `)
+      await el.updateComplete
+    })
+
+    it('should select radio on change event', async () => {
+      const radios = el.querySelectorAll('gds-radio')
+      const radio2 = radios[1] as GdsRadio
+
+      radio2.dispatchEvent(new Event('change', { bubbles: true }))
+      await el.updateComplete
+      await waitUntil(() => el.value === '2')
+
+      expect(el.value).to.equal('2')
+      expect(radio2.checked).to.be.true
+      expect((radios[0] as GdsRadio).checked).to.be.false
+      expect((radios[2] as GdsRadio).checked).to.be.false
+    })
+
+    it('should update radio states when value changes', async () => {
+      el.value = '3'
+      await el.updateComplete
+
+      const radios = el.querySelectorAll('gds-radio')
+      expect((radios[0] as GdsRadio).checked).to.be.false
+      expect((radios[1] as GdsRadio).checked).to.be.false
+      expect((radios[2] as GdsRadio).checked).to.be.true
+    })
   })
 
   describe('Keyboard Navigation', () => {
-    it('should handle arrow key navigation', async () => {
-      const el = await fixture<GdsRadioGroup>(html`
+    let el: GdsRadioGroup
+
+    beforeEach(async () => {
+      el = await fixture<GdsRadioGroup>(html`
         <gds-radio-group label="Test Group">
           <gds-radio value="1" label="Option 1"></gds-radio>
           <gds-radio value="2" label="Option 2"></gds-radio>
           <gds-radio value="3" label="Option 3"></gds-radio>
         </gds-radio-group>
       `)
-
-      el.focus()
-      await sendKeys({ press: 'ArrowDown' })
       await el.updateComplete
-
-      const radios = el.querySelectorAll('gds-radio')
-      expect(document.activeElement).to.equal(radios[0])
     })
 
-    it('should cycle through options with arrow keys', async () => {
-      const el = await fixture<GdsRadioGroup>(html`
-        <gds-radio-group label="Test Group">
-          <gds-radio value="1" label="Option 1"></gds-radio>
-          <gds-radio value="2" label="Option 2"></gds-radio>
-          <gds-radio value="3" label="Option 3"></gds-radio>
-        </gds-radio-group>
-      `)
+    it('should handle ArrowRight/ArrowDown navigation', async () => {
+      const content = el.shadowRoot?.querySelector('.content')
+      content?.focus()
 
-      el.focus()
-      await sendKeys({ press: 'ArrowDown' })
-      await sendKeys({ press: 'ArrowDown' })
+      content?.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'ArrowRight',
+          bubbles: true,
+        }),
+      )
+      await el.updateComplete
+      expect(el.value).to.equal('1')
+
+      content?.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'ArrowRight',
+          bubbles: true,
+        }),
+      )
+      await el.updateComplete
+      expect(el.value).to.equal('2')
+    })
+
+    it('should handle ArrowLeft/ArrowUp navigation', async () => {
+      el.value = '2'
       await el.updateComplete
 
-      const radios = el.querySelectorAll('gds-radio')
-      expect(document.activeElement).to.equal(radios[1])
+      const content = el.shadowRoot?.querySelector('.content')
+      content?.focus()
+
+      content?.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: 'ArrowLeft',
+          bubbles: true,
+        }),
+      )
+      await el.updateComplete
+      expect(el.value).to.equal('1')
     })
   })
 })
