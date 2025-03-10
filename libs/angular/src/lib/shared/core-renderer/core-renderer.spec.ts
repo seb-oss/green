@@ -1,5 +1,6 @@
-import { Component, RendererFactory2 } from '@angular/core'
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import {
   NggCoreRendererFactory,
@@ -23,6 +24,7 @@ describe('NggCoreRenderer', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [provideCoreRenderer()],
     })
     const fixture = TestBed.createComponent(TestComponent)
@@ -41,7 +43,9 @@ describe('NggCoreRenderer (with animations)', () => {
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
+      imports: [BrowserAnimationsModule],
       declarations: [TestComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       providers: [provideCoreRendererWithAnimations()],
     })
     const fixture = TestBed.createComponent(TestComponent)
