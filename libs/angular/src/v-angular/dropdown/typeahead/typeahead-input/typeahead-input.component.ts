@@ -68,7 +68,6 @@ export class NggvTypeaheadInputComponent
     this.debounceTime = 0
     this.hostComponent.selectOnSingleOption = false
 
-    this.moveInput()
     this.handleExpandedChange()
   }
 
