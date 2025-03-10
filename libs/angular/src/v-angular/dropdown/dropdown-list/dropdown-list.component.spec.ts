@@ -39,7 +39,7 @@ describe('DropdownListComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  describe('getActiveIndex', () => {
+  describe('getActiveIndex()', () => {
     const optionsWithNullish = [
       { key: null, label: 'placeholder' },
       { key: 'key1', label: 'la1' },
@@ -84,6 +84,7 @@ describe('DropdownListComponent', () => {
       ({ selected, options, expectedIndex }) => {
         component.options = options
         component.selectedValue = selected
+        component.refreshSelectedOption()
         const expected = component.getActiveIndex()
         expect(expected).toEqual(expectedIndex)
       },
