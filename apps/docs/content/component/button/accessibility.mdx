@@ -7,7 +7,7 @@ date: 2024-02-08
 All values we measure need to pass in order to give a check on the accessibility on all our components.
 
 ### Review
-**Review button, webcomponent 2023-12-11 - FAILED**
+**Review button, webcomponent 2025-03-06 - FAILED**
 - Contrast: Passed
 - Aria-label: Passed
 - Keyboard navigation: **Failed** <br />Enter key doesn’t trigger the visual pressed-state.
@@ -30,10 +30,10 @@ All values we measure need to pass in order to give a check on the accessibility
 ### Important considerations
 
 #### Maintain semantic consistency
-Do not use links (a tag) instead of buttons (button tag). Buttons are intended for actions or operations (e.g. submitting forms, triggering actions), while links are intended for navigation to other pages or resources. Avoid using links for triggering actions, or buttons for navigation purposes.
+Do not use links ('a' tag) instead of buttons ('button' tag). Buttons are intended for actions or operations (e.g. submitting forms, triggering actions), while links are intended for navigation to other pages or resources. Avoid using links for triggering actions, or buttons for navigation purposes.
 
 ### Keyboard navigation
-Uses default navigation: trigger on key-up with space, trigger on key-down with enter.
+Uses default navigation: Tabs as normal and trigger on key-up with space and on key-down with enter.
 
 ### Labelling
 - Ensure buttons have discernible label text. If the button has no visible text, the label attribute must be used to provide an accessible label.
@@ -57,7 +57,7 @@ Uses default navigation: trigger on key-up with space, trigger on key-down with 
      since there is no visible text. -->
 <gds-button label="Close menu">  <gds-icon name="x"></gds-icon></gds-button>
 ```
-## Resources
+### Resources
 
 - [Accessibility / Design Library](https://designlibrary.sebank.se/foundation/accessibility/accessibility-at-seb/)
 - [Accessibility / SEB overall accessibility guidelines - todo](/foundation/accessibility)
