@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
+import { createComponent } from '@lit/react'
 import classNames from 'classnames'
 
 import {
@@ -16,6 +17,8 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
+import { IconTriangleExclamation } from '@sebgroup/green-core/components/icon/icons/triangle-exclamation'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { IconButton } from '../form'
 import { InfoCircle, Times } from '../icons'
 
@@ -31,6 +34,12 @@ interface FormItemProps
   /** Intended to use together with TextArea to show character counter. */
   rightAlignedFooterInfo?: string
 }
+
+const TriangleExclamationIcon = createComponent({
+  tagName: getScopedTagName('gds-icon-triangle-exclamation'),
+  elementClass: IconTriangleExclamation,
+  react: React,
+})
 
 export const FormItem = ({
   expandableInfo,
@@ -145,9 +154,17 @@ export const FormItem = ({
       {children}
       <div className="gds-form-item__footer">
         {validator && (
-          <span className="form-info" id={`${inputId}_message`}>
-            {validator.message}
-          </span>
+          <>
+            <TriangleExclamationIcon
+              solid
+              width={16}
+              height={16}
+              style={{ color: 'var(--gds-sys-color-text-error)' }}
+            />
+            <span className="form-info" id={`${inputId}_message`}>
+              {validator.message}
+            </span>
+          </>
         )}
         {rightAlignedFooterInfo && (
           <span
