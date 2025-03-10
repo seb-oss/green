@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.68.4
+
+### Patch Changes
+
+- d529108: **Rixh text:** Remove leading zero
+
+## 1.68.3
+
+### Patch Changes
+
+- 08f1210: **Spinner:** add spinner to export on components
+- 08f1210: **Spinner:** rename classes to fix issue with suffix
+
+## 1.68.2
+
+### Patch Changes
+
+- 49bb2e6: **Rich Text:** Update styling on ordered list
+
+## 1.68.1
+
+### Patch Changes
+
+- 9d1476d: **Rich text:** Fix the heading first of type
+  **Rich text:** Fix the ordered list padding
+
+## 1.68.0
+
+### Minor Changes
+
+- 2378057: **Spinner:** Add new component
+
 ## 1.67.3
 
 ### Patch Changes

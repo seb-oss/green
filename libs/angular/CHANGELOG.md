@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.3.4
+
+### Patch Changes
+
+- 50a3fa2: Updated table grouping funcionality with clickable sub-items.
+- Updated dependencies [9d1476d]
+  - @sebgroup/green-core@1.68.1
+
 ## 5.3.3
 
 ### Patch Changes
