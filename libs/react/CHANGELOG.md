@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.24.1
+
+### Patch Changes
+
+- 277716a: **Modal:** fix scrolling inside modal on iOS
+- Updated dependencies [d529108]
+  - @sebgroup/green-core@1.68.4
+
 ## 3.24.0
 
 ### Minor Changes

@@ -99,15 +99,23 @@ export const styles = css`
   }
 
   ol li {
-    padding-left: 3ch;
+    padding-left: 3.6ch;
     position: relative;
   }
 
   ol li:before {
     counter-increment: ordered-list;
-    content: counter(ordered-list, decimal-leading-zero) '.';
-    left: 0;
+    content: counter(ordered-list) '.';
+    left: 0.2rem;
     position: absolute;
+  }
+
+  ol:not(:has(li:nth-child(10))) li {
+    padding-left: 2.4ch;
+  }
+
+  ol:has(li:nth-child(10)) li:nth-child(-n + 9):before {
+    left: 1.4ch;
   }
 
   li {
@@ -205,6 +213,10 @@ export const styles = css`
     outline-offset: var(--gds-space-2xs);
     outline-color: currentColor;
     padding-inline: var(--gds-space-m);
+  }
+
+  details summary::-webkit-details-marker {
+    display: none;
   }
 
   summary:focus-visible {
