@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.16
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+
 ## 3.6.15
 
 ### Patch Changes
