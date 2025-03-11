@@ -1,3 +1,4 @@
+import { on } from 'events'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { createComponent } from '@lit/react'
 
@@ -15,6 +16,10 @@ import {
   GdsValidator,
 } from '@sebgroup/green-core/components/form/form-control'
 import { GdsInput } from '@sebgroup/green-core/components/input/index.js'
+import {
+  GdsRadio,
+  GdsRadioGroup,
+} from '@sebgroup/green-core/components/radio/index.js'
 import { GdsRichText } from '@sebgroup/green-core/components/rich-text/index.js'
 import { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
@@ -112,6 +117,24 @@ const CoreSelect = createComponent({
   elementClass: GdsSelect,
 })
 
+const CoreRadio = createComponent({
+  tagName: getScopedTagName('gds-radio'),
+  react: React,
+  events: {
+    onChange: 'input',
+  },
+  elementClass: GdsRadio,
+})
+
+const CoreRadioGroup = createComponent({
+  tagName: getScopedTagName('gds-radio-group'),
+  react: React,
+  events: {
+    onChange: 'input',
+  },
+  elementClass: GdsRadioGroup,
+})
+
 // This type represents or form data model
 // In this example, we represent the field value and error state as a simple tuple
 type FormData = {
@@ -121,6 +144,7 @@ type FormData = {
   dessert: [string | undefined, errorState]
   date: [Date | undefined, errorState]
   description: [string, errorState]
+  radio: [string | undefined, errorState]
 }
 
 type errorState = boolean
@@ -133,6 +157,7 @@ const initialFormState: FormData = {
   dessert: [undefined, false],
   date: [undefined, false],
   description: ['', false],
+  radio: [undefined, false],
 }
 
 // This is a simple validator that checks that the field is not empty
@@ -255,6 +280,39 @@ export const GreenCoreFormExample = () => {
                   <option value="pie">Pie</option>
                 </select>
               </CoreSelect>
+              <CoreRadioGroup
+                label={'Select a option'}
+                value={formData.radio[0]}
+                validator={requiredValidator}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    radio: [
+                      (e.currentTarget as GdsRadioGroup).value || '',
+                      (e.currentTarget as GdsRadioGroup).validity.valid,
+                    ],
+                  })
+                }
+                supporting-text="Please select one of the following options"
+              >
+                <CoreRadio
+                  value="1"
+                  label="Option 1"
+                  supportingText="Supporting text for option 1"
+                ></CoreRadio>
+                <CoreRadio
+                  value="2"
+                  label="Option 2"
+                  supportingText="Supporting text for option 2"
+                  disabled={true}
+                ></CoreRadio>
+                <CoreRadio
+                  value="3"
+                  label="Option 3"
+                  supportingText="Supporting text for option 3"
+                ></CoreRadio>
+              </CoreRadioGroup>
+
               <CoreDatepicker
                 label={'Select a date'}
                 value={formData.date[0]}
@@ -324,6 +382,11 @@ export const GreenCoreFormExample = () => {
                   <th>Date</th>
                   <td>{formData.date[0]?.toLocaleDateString()}</td>
                   <td>Valid: {formData.date[1] ? '✅' : '❌'}</td>
+                </tr>
+                <tr>
+                  <th>Radio</th>
+                  <td>{formData.radio[0]}</td>
+                  <td>Valid: {formData.radio[1] ? '✅' : '❌'}</td>
                 </tr>
                 <tr>
                   <th>Description</th>
