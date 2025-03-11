@@ -131,7 +131,7 @@ const CoreRadioGroup = createComponent({
   tagName: getScopedTagName('gds-radio-group'),
   react: React,
   events: {
-    onChange: 'change', // Listen for 'change' event
+    onChange: 'change',
     onInvalid: 'invalid',
   },
 
