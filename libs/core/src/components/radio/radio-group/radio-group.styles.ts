@@ -20,6 +20,7 @@ export const styles = css`
     --radio-border-color-selected: var(--gds-color-l3-border-primary);
     --radio-border-width: var(--gds-space-4xs);
     --radio-border-width-selected: var(--gds-space-2xs);
+    --radio-outline-width: var(--gds-space-3xs);
     --radio-dot-background-color: var(--gds-color-l3-content-primary);
 
     /* Font Sizes */

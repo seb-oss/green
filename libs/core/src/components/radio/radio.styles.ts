@@ -20,30 +20,42 @@ export const styles = css`
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      width: var(--radio-dot-size);
+      height: var(--radio-dot-size);
+      margin-block-start: calc(var(--radio-border-width) * 2);
       cursor: pointer;
+    }
+
+    .state {
+      display: flex;
       box-sizing: border-box;
       backface-visibility: hidden;
       transition-property: background-color, scale, outline;
       transition-duration: 248ms;
       outline-style: solid;
-      outline-offset: calc(-2 * var(--radio-border-width));
-      outline-width: var(--gds-space-3xs);
+      outline-offset: calc(-1 * var(--radio-outline-width));
+      outline-width: var(--radio-outline-width);
       outline-color: transparent;
       border-radius: var(--radio-radius);
-      width: var(--radio-size);
-      height: var(--radio-size);
-      cursor: pointer;
+      min-width: var(--radio-size);
+      min-height: var(--radio-size);
+      position: absolute;
+      left: calc(* 1 - calc((var(--radio-size) - var(--radio-dot-size)) / 2));
+      top: calc(* 1 - calc((var(--radio-size) - var(--radio-dot-size)) / 2));
+      scale: 0.8;
     }
 
     @media (hover: hover) {
       .radio:hover,
-      :host(:hover) .radio {
+      :host(:hover) .radio .state {
         background-color: var(--radio-bg-mix);
+        scale: 1;
       }
     }
 
-    .radio:active,
-    :host(:active) .radio {
+    .radio:active .state,
+    :host(:active) .radio .state {
       background-color: var(--radio-bg-mix-active);
       scale: 0.96;
     }
@@ -52,20 +64,19 @@ export const styles = css`
       outline: none;
     }
 
-    :host(:focus) .radio {
+    :host(:focus) .radio .state {
       outline-color: var(--_radio-outline-color);
+      scale: 1;
     }
 
-    :host(:not(:focus-visible)) .radio {
+    :host(:not(:focus-visible)) .radio .state {
       outline-color: transparent;
     }
 
     .dot {
-      appearance: none;
       width: var(--radio-dot-size);
       height: var(--radio-dot-size);
       border-radius: var(--radio-radius);
-      border: none;
       box-shadow: inset 0 0 0 var(--radio-border-width)
         var(--radio-border-color);
       background-color: var(--radio-dot-background-color);
@@ -73,6 +84,8 @@ export const styles = css`
       transition-property: box-shadow;
       transition-duration: 248ms;
       will-change: box-shadow;
+      position: absolute;
+      inset: 0;
     }
 
     :host([checked]) .dot,

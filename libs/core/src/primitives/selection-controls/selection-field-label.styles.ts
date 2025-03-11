@@ -19,7 +19,7 @@ export const styles = css`
 
     .selection-field-container {
       display: flex;
-      gap: var(--gds-space-2xs);
+      gap: var(--gds-space-s);
     }
 
     .selection-field-label {
@@ -38,10 +38,6 @@ export const styles = css`
       font-size: var(--_font-size-supporting-text);
       line-height: var(--_line-height-supporting-text);
       font-weight: var(--gds-text-weight-regular);
-    }
-
-    .has-supporting-text {
-      padding-block-start: calc(1cap / 2);
     }
   }
 `

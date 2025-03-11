@@ -126,6 +126,7 @@ export class GdsRadio extends GdsElement {
         type="radio"
       >
         <div class="radio">
+          <div class="state"></div>
           <div class="dot"></div>
         </div>
       </gds-selection-field-label>
