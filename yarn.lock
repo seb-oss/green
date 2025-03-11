@@ -6332,6 +6332,11 @@
   resolved "https://registry.yarnpkg.com/@storybook/icons/-/icons-1.2.12.tgz#3e4c939113b67df7ab17b78f805dbb57f4acf0db"
   integrity sha512-UxgyK5W3/UV4VrI3dl6ajGfHM4aOqMAkFLWe2KibeQudLf6NJpDrDMSHwZj+3iKC4jFU7dkKbbtH2h/al4sW3Q==
 
+"@storybook/icons@^1.3.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@storybook/icons/-/icons-1.4.0.tgz#7cf7ab3dfb41943930954c4ef493a73798d8b31d"
+  integrity sha512-Td73IeJxOyalzvjQL+JXx72jlIYHgs+REaHiREOqfpo3A2AYYG71AUbcv+lg7mEDIweKVCxsMQ0UKo634c8XeA==
+
 "@storybook/instrumenter@8.4.2":
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/@storybook/instrumenter/-/instrumenter-8.4.2.tgz#6599abf2b698328659eb0cd5568d553f8d649776"
@@ -22972,6 +22977,13 @@ stop-iteration-iterator@^1.0.0:
   integrity sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==
   dependencies:
     internal-slot "^1.0.4"
+
+storybook-addon-tag-badges@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/storybook-addon-tag-badges/-/storybook-addon-tag-badges-1.4.0.tgz#aa4ac9d53d3a725a0f5a4cff4a158cc5fdeda8fe"
+  integrity sha512-ecVwNVT4zIpnB14ltXCTHsWqykW2lgiHrDJW1VeblI3+aU9uMaSZG0zuey+r3vehMeODADnRNrcdk6sN9MAmBA==
+  dependencies:
+    "@storybook/icons" "^1.3.0"
 
 storybook@8.2.9:
   version "8.2.9"
