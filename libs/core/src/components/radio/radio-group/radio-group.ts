@@ -49,6 +49,8 @@ class RadioGroup extends GdsFormControlElement<string> {
   @query('.content')
   private _contentElement!: HTMLElement
 
+  private _isConnected = false
+
   get radios(): GdsRadio[] {
     return Array.from(
       this.querySelectorAll('[gds-element=gds-radio]'),
@@ -58,31 +60,57 @@ class RadioGroup extends GdsFormControlElement<string> {
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'radiogroup')
+    this._isConnected = true
+
     this.updateComplete.then(() => {
       this._syncRadioStates()
       this._initializeFocusable()
     })
+
     this.addEventListener('invalid', this._syncRadioStates)
   }
 
-  private _initializeFocusable() {
-    this._contentElement.setAttribute('tabindex', '0')
-    this.radios.forEach((radio) => {
-      radio.setAttribute('tabindex', '-1')
-    })
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    this._isConnected = false
+    this.removeEventListener('invalid', this._syncRadioStates)
   }
 
   protected _getValidityAnchor(): HTMLElement {
     return this._contentElement
   }
 
+  private _initializeFocusable() {
+    if (!this._contentElement || !this._isConnected) return
+
+    const selectedRadio = this.radios.find((radio) => radio.checked)
+
+    if (selectedRadio) {
+      selectedRadio.setAttribute('tabindex', '0')
+      this._contentElement.setAttribute('tabindex', '-1')
+    } else {
+      this._contentElement.setAttribute('tabindex', '0')
+    }
+
+    this.radios
+      .filter((radio) => !radio.checked)
+      .forEach((radio) => radio.setAttribute('tabindex', '-1'))
+  }
+
   @watch('value')
   private _handleValueChange() {
+    if (!this._isConnected) return
+
     this._syncRadioStates()
+    this.updateComplete.then(() => {
+      this._initializeFocusable()
+    })
   }
 
   @watch('invalid')
   private _syncRadioStates() {
+    if (!this._isConnected) return
+
     this.radios.forEach((radio: any) => {
       radio.checked = radio.value === this.value
       radio.size = this.size
@@ -91,11 +119,18 @@ class RadioGroup extends GdsFormControlElement<string> {
   }
 
   private _handleFocus() {
+    if (!this._contentElement || !this._isConnected) return
+
     const selectedRadio = this.radios.find((radio: any) => radio.checked)
     const radioToFocus = selectedRadio || this.radios[0]
 
     if (radioToFocus) {
-      ;(radioToFocus as HTMLElement).focus()
+      radioToFocus.focus()
+      if (!selectedRadio) {
+        this.radios.forEach((radio) => radio.setAttribute('tabindex', '-1'))
+        radioToFocus.setAttribute('tabindex', '0')
+        this._contentElement.setAttribute('tabindex', '-1')
+      }
     }
   }
 
@@ -119,41 +154,51 @@ class RadioGroup extends GdsFormControlElement<string> {
   }
 
   private _handleKeyDown(e: KeyboardEvent) {
+    if (!this._isConnected) return
+
     const radios = this.radios.filter(
       (radio) => !radio.hasAttribute('disabled'),
     )
     if (radios.length === 0) return
 
     let currentIndex = radios.findIndex(
-      (radio) => (radio as any).checked || document.activeElement === radio,
+      (radio) => document.activeElement === radio,
     )
-    if (currentIndex === -1) currentIndex = 0
+    if (currentIndex === -1) {
+      currentIndex = radios.findIndex((radio) => radio.checked)
+      if (currentIndex === -1) currentIndex = 0
+    }
 
-    let nextIndex: number
     switch (e.key) {
       case 'ArrowDown':
       case 'ArrowRight': {
         e.preventDefault()
-        nextIndex = (currentIndex + 1) % radios.length
+        const nextIndex = (currentIndex + 1) % radios.length
+        this._focusAndSelectRadio(radios[nextIndex])
         break
       }
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
-        nextIndex = (currentIndex - 1 + radios.length) % radios.length
+        const nextIndex = (currentIndex - 1 + radios.length) % radios.length
+        this._focusAndSelectRadio(radios[nextIndex])
         break
-      }
-      case 'Tab': {
-        return
       }
       default:
         return
     }
+  }
 
-    const nextRadio = radios[nextIndex] as any
-    nextRadio.checked = true
-    nextRadio.focus()
-    this.value = nextRadio.value
+  private _focusAndSelectRadio(radio: GdsRadio) {
+    if (!this._contentElement || !this._isConnected) return
+
+    this.radios.forEach((r) => r.setAttribute('tabindex', '-1'))
+    radio.setAttribute('tabindex', '0')
+    this._contentElement.setAttribute('tabindex', '-1')
+
+    radio.checked = true
+    radio.focus()
+    this.value = radio.value
 
     this._syncRadioStates()
     this._dispatchChangeEvents()
