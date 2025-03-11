@@ -72,7 +72,11 @@ export default {
 const options = [
   { key: 'opt1', label: 'label.defaultlabel', accountNumber: '345345' },
   { key: 'opt6', label: 'HÖR LUR TJO HEJ KOTLETT' },
-  { key: 'opt2', label: 'Option 2' },
+  {
+    key: 'opt2',
+    label:
+      'This is a very long label that should over flow a smaller dropdown button',
+  },
   { key: 'opt3', label: 'Option 3', disabled: true },
   { key: 'opt4', label: 'Option 4' },
   {
@@ -106,7 +110,7 @@ const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
   }
   return {
     template: /*html*/ `
-      <div style="width: 264px">
+      <div>
         <nggv-dropdown
           [label]="label"
           [placeholder]="placeholder"
@@ -115,7 +119,6 @@ const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
           [required]="required"
           [invalid]="invalid"
           [error]="error"
-          style="width: 264px"
           [formControl]="formControl"
           [locked]="locked"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
@@ -142,7 +145,7 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
   const formControl = new UntypedFormControl({ value: '' })
   return {
     template: /*html*/ `
-  <div style="width: 264px">
+  <div>
     <nggv-dropdown
       [label]="label"
       [placeholder]="placeholder"
@@ -151,7 +154,7 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
       [invalid]="invalid"
       [disabled]="disabled"
       [error]="error"
-      style="width: 264px"
+    
       [formControl]="formControl">
 
       <ng-template #labelTpl>Custom Label</ng-template>
@@ -183,7 +186,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
 
   return {
     template: /*html*/ `
-      <div style="width: 264px">
+      <div>
         <div style="display: flex">
           <button class="gds-button" (click)="showAlt = !showAlt">Change options</button>
           <button class="gds-button gds-button-alternative" (click)="resetFunc()">Reset to default</button>
@@ -194,7 +197,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
           [placeholder]="placeholder"
           [options]="options"
           [required]="required"
-          style="width: 264px"
+        
           [formControl]="formControl">
 
           <ng-template #labelTpl>Custom Label</ng-template>
@@ -560,14 +563,13 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           [required]="true"
           [invalid]="true"
           error="This is a permanent error"
-          style="width: 264px"
           [formControl]="formControl">
         </nggv-dropdown>
         <nggv-input
           label="Input"
           [placeholder]="placeholder"
           [required]="true"
-          style="margin-left: 0.25rem; width: 264px"
+          style="margin-left: 0.25rem;"
           [formControl]="formControl">
         </nggv-input>
       </div>`,
@@ -654,7 +656,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
   return {
     template: /*html*/ `
     Value: {{ formControl.value }}
-    <div style="width: 264px; display:">
+    <div>
         <nggv-dropdown
           [label]="label"
           [formControl]="formControl"
@@ -663,7 +665,7 @@ const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {
           [required]="required"
           [invalid]="invalid"
           [error]="error"
-          style="width: 264px"
+        
           #dropdownElement
           [options]="options"
           [allowUnselect]="allowUnselect"
