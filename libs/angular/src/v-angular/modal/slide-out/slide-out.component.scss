@@ -26,6 +26,7 @@
     @include mixins.modal();
     @include mixins.aside-modal();
     z-index: 1050;
+    overflow-y: auto;
 
     &.auto-width {
       width: auto;
