@@ -121,8 +121,9 @@ const CoreRadio = createComponent({
   tagName: getScopedTagName('gds-radio'),
   react: React,
   events: {
-    onChange: 'input',
+    onChange: 'change',
   },
+
   elementClass: GdsRadio,
 })
 
@@ -130,8 +131,10 @@ const CoreRadioGroup = createComponent({
   tagName: getScopedTagName('gds-radio-group'),
   react: React,
   events: {
-    onChange: 'input',
+    onChange: 'change', // Listen for 'change' event
+    onInvalid: 'invalid',
   },
+
   elementClass: GdsRadioGroup,
 })
 
@@ -282,17 +285,23 @@ export const GreenCoreFormExample = () => {
               </CoreSelect>
               <CoreRadioGroup
                 label={'Select a option'}
-                value={formData.radio[0]}
                 validator={requiredValidator}
-                onChange={(e) =>
+                value={formData.radio[0]}
+                onChange={(e) => {
+                  const radioGroup = e.currentTarget as GdsRadioGroup
+                  const selectedRadio = e.target as GdsRadio
+                  radioGroup.value = selectedRadio.value
+                  radioGroup.radios.forEach((radio) => {
+                    const isChecked = radio.value === radioGroup.value
+                    radio.checked = isChecked
+                    console.log(`Radio ${radio.value}: ${isChecked}`)
+                  })
                   setFormData({
                     ...formData,
-                    radio: [
-                      (e.currentTarget as GdsRadioGroup).value || '',
-                      (e.currentTarget as GdsRadioGroup).validity.valid,
-                    ],
+                    radio: [radioGroup.value, true],
                   })
-                }
+                }}
+                error-message="Please select an option"
                 supporting-text="Please select one of the following options"
               >
                 <CoreRadio
