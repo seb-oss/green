@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.24.2
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
 ## 3.24.1
 
 ### Patch Changes
