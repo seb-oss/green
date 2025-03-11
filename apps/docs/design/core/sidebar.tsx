@@ -40,7 +40,7 @@ const menu = [
     subLinks: [],
   },
   {
-    title: 'UX Writing',
+    title: 'UX writing',
     path: '/ux-writing',
     icon: <IconTextEdit />,
     subLinks: [],

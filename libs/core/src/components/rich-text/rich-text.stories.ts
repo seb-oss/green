@@ -105,11 +105,36 @@ export const Card: Story = {
           <li>Maximum Speed: 10 light-years per hour</li>
         </ul>
         <hr />
-        <h2>Mission Objectives</h2>
+        <h2>One digit list</h2>
         <ol>
           <li>
             Conduct scientific research on exoplanets, focusing on atmospheric
-            composition and potential habitability.
+            composition <a href="#">Inline link</a> and potential habitability.
+          </li>
+          <li>
+            Establish contact with potential extraterrestrial civilizations
+            through advanced signal detection and transmission protocols.
+          </li>
+          <li>
+            Collect comprehensive data on diverse cosmic phenomena, including
+            black hole dynamics, supernova remnants, and dark matter
+            distribution.
+          </li>
+          <li>
+            Test new technologies in real-world scenarios, specifically advanced
+            propulsion systems for interstellar travel.
+          </li>
+          <li>
+            Test new technologies in real-world scenarios, implementing
+            closed-loop life support systems for long-duration space missions.
+          </li>
+        </ol>
+
+        <h2>Two digit list</h2>
+        <ol>
+          <li>
+            Conduct scientific research on exoplanets, focusing on atmospheric
+            composition <a href="#">Inline link</a> and potential habitability.
           </li>
           <li>
             Establish contact with potential extraterrestrial civilizations

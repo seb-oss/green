@@ -1,5 +1,27 @@
 # Changelog
 
+## 5.4.0
+
+### Minor Changes
+
+- 54814fe: **NggCoreRenderer:** Add provider for supporting animations when using `NggCoreRenderer`. Fixes #1997
+
+### Patch Changes
+
+- 158fc60: **NggDropdown:** Fix text overflow style in the trigger. Fixes #1948
+- b8454ea: **Modal**: fixing close button sizing on mobile
+  **Tooltip**: fixing zindex problem when combined with modal
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 5.3.4
+
+### Patch Changes
+
+- 50a3fa2: Updated table grouping funcionality with clickable sub-items.
+- Updated dependencies [9d1476d]
+  - @sebgroup/green-core@1.68.1
+
 ## 5.3.3
 
 ### Patch Changes
