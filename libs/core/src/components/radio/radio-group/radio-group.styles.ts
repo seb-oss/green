@@ -40,6 +40,7 @@ export const styles = css`
     --radio-dot-background-color: var(
       --gds-color-l3-background-negative-secondary
     );
+    --radio-border-color-selected: var(--gds-color-l3-border-negative);
     --radio-bg-mix: color-mix(
       in srgb,
       var(--gds-color-l3-background-negative-secondary),
