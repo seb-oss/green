@@ -14,14 +14,14 @@ export const styles = css`
     );
 
     --radio-size: var(--gds-space-xl);
-    --radio-dot-size: var(--gds-space-m);
+    --radio-disc-size: var(--gds-space-m);
     --radio-radius: var(--gds-space-max);
     --radio-border-color: var(--gds-color-l3-border-secondary);
     --radio-border-color-selected: var(--gds-color-l3-border-primary);
     --radio-border-width: var(--gds-space-4xs);
     --radio-border-width-selected: var(--gds-space-2xs);
     --radio-outline-width: var(--gds-space-3xs);
-    --radio-dot-background-color: var(--gds-color-l3-content-primary);
+    --radio-disc-background-color: var(--gds-color-l3-content-primary);
 
     /* Font Sizes */
     --_font-size-label: var(--gds-text-size-detail-m);
@@ -38,7 +38,7 @@ export const styles = css`
 
   :host(:invalid) {
     --radio-border-color: var(--gds-color-l3-border-negative);
-    --radio-dot-background-color: var(
+    --radio-disc-background-color: var(
       --gds-color-l3-background-negative-secondary
     );
     --radio-border-color-selected: var(--gds-color-l3-border-negative);

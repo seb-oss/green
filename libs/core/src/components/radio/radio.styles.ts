@@ -21,8 +21,8 @@ export const styles = css`
       align-items: center;
       justify-content: center;
       position: relative;
-      width: var(--radio-dot-size);
-      height: var(--radio-dot-size);
+      width: var(--radio-disc-size);
+      height: var(--radio-disc-size);
       margin-block-start: calc(var(--radio-border-width) * 2);
       cursor: pointer;
     }
@@ -41,8 +41,8 @@ export const styles = css`
       min-width: var(--radio-size);
       min-height: var(--radio-size);
       position: absolute;
-      left: calc(* 1 - calc((var(--radio-size) - var(--radio-dot-size)) / 2));
-      top: calc(* 1 - calc((var(--radio-size) - var(--radio-dot-size)) / 2));
+      left: calc(* 1 - calc((var(--radio-size) - var(--radio-disc-size)) / 2));
+      top: calc(* 1 - calc((var(--radio-size) - var(--radio-disc-size)) / 2));
       scale: 0.8;
     }
 
@@ -57,6 +57,10 @@ export const styles = css`
     .radio:active .state,
     :host(:active) .radio .state {
       background-color: var(--radio-bg-mix-active);
+    }
+
+    :host(:active:not(:focus-visible)) .radio:active .state,
+    :host(:active:not(:focus-visible)) .radio .state {
       scale: 0.96;
     }
 
@@ -73,13 +77,13 @@ export const styles = css`
       outline-color: transparent;
     }
 
-    .dot {
-      width: var(--radio-dot-size);
-      height: var(--radio-dot-size);
+    .disc {
+      width: var(--radio-disc-size);
+      height: var(--radio-disc-size);
       border-radius: var(--radio-radius);
       box-shadow: inset 0 0 0 var(--radio-border-width)
         var(--radio-border-color);
-      background-color: var(--radio-dot-background-color);
+      background-color: var(--radio-disc-background-color);
       box-sizing: border-box;
       transition-property: box-shadow;
       transition-duration: 248ms;
@@ -88,8 +92,8 @@ export const styles = css`
       inset: 0;
     }
 
-    :host([checked]) .dot,
-    :host(:active) .dot {
+    :host([checked]) .disc,
+    :host(:active) .disc {
       box-shadow: inset 0 0 0 var(--radio-border-width-selected)
         var(--radio-border-color-selected);
     }
@@ -98,7 +102,7 @@ export const styles = css`
       pointer-events: none;
     }
 
-    :host([disabled]) .radio .dot {
+    :host([disabled]) .radio .disc {
       box-shadow: none;
       background-color: var(--gds-color-l3-content-disabled);
     }

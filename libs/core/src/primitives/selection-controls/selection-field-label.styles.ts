@@ -20,6 +20,7 @@ export const styles = css`
     .selection-field-container {
       display: flex;
       gap: var(--gds-space-s);
+      cursor: pointer;
     }
 
     .selection-field-label {
