@@ -15,8 +15,8 @@ addons.setConfig({
         tooltip: 'This component is in beta',
       },
       display: {
-        sidebar: ['component'],
-        toolbar: false,
+        sidebar: ['component', 'group'],
+        toolbar: true,
       },
     },
     ...defaultConfig,
