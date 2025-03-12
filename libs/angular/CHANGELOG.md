@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.4.1
+
+### Patch Changes
+
+- 79a086f: fixed incomplete v-angular migration by removing a line which causes height issues
+- 3907ebb: **Alert Ribbon**: showing correct icon based on type
+  **Dropdown**: correct height on typeahead overlay, fixing spacing to validation
+- c564b23: Added margin-top to error-wrapper class in dropdown component. Removed height from input-wrapper class in input component to fix visual bug
+- 3077e1e: Added .nggv-field--error to input.component.scss to show a red line when there's an error on the input fields. Made slide-out scrollable when overflown. Added core map to index.ts file to expose some interfaces
+- 9111c10: Performance fix for dropdown-list and handling of key press events.
+- Updated dependencies [6cea9a6]
+  - @sebgroup/green-core@1.68.5
+
 ## 5.4.0
 
 ### Minor Changes
