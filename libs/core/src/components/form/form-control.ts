@@ -80,6 +80,9 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({ attribute: false })
   validator?: GdsValidator
 
+  /**
+   * The required attribute can be used to communicate to users of assistive technology that the control is required. Validation still needs to be done in a validator or equivalent.
+   */
   @property({ type: Boolean })
   required = false
 

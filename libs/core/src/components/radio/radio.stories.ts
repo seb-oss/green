@@ -17,13 +17,14 @@ import { GdsRadioGroup } from './radio-group/radio-group'
  * Radio buttons are form controls that allow users to select a single option from a set of mutually exclusive choices.<br/>
  * They are grouped using a radio group component which manages selection, keyboard navigation, and validation.
  *
- * Radio groups provide built-in validation for required selection, proper configuration (label/value),
- * and minimum number of options.<br/> They support both vertical and horizontal layouts, and can be sized
- * to fit different space requirements.
+ * Radio groups provide validation and selection management and implements the ElementInternals `formAssociated` API.
+ *
+ * Groups support vertical and horizontal layouts, and can be sized to fit different space requirements.
  */
 const meta: Meta = {
   title: 'Components/Radio',
   component: 'gds-radio-group',
+  subcomponents: { Option: 'gds-radio' },
   tags: ['autodocs'],
 }
 
@@ -56,6 +57,7 @@ const DefaultParams: Story = {
  * </gds-radio-group>
  * ```
  *
+ * Interactive example with supporting texts:
  */
 export const RadioButton: Story = {
   ...DefaultParams,
@@ -71,66 +73,9 @@ export const RadioButton: Story = {
 }
 
 /**
- * Radio buttons can be in different states:
- * - Default: The normal, interactive state
- * - Selected: When a radio button is chosen
- * - Disabled: When the radio button cannot be interacted with
- * - With supporting text: Additional context below the label
- */
-export const States: Story = {
-  ...DefaultParams,
-  name: 'States',
-  render: () => html`
-    <div class="radio-group">
-      <gds-radio-group
-        label="Group Label"
-        supporting-text="Support text for the group"
-        value="2"
-        show-extended-supporting-text
-      >
-        <span slot="extended-supporting-text">
-          Extended supporting text for the group
-        </span>
-        <gds-radio
-          label="Radio Label"
-          value="1"
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="2"
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio label="Selected" value="3"></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="4"
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="5"
-          disabled
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio label="Radio Label" value="5" disabled></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="6"
-          supporting-text="Example support text"
-        ></gds-radio>
-      </gds-radio-group>
-    </div>
-  `,
-}
-
-/**
- * Radio groups support validation:
- * - Required selection: Shows error when no option is selected
- * - Missing properties: Shows error when radios lack required label or value
- * - Minimum options: Shows error when group has fewer than two radio buttons
+ * Radio groups support validation using Green Core's [form validation API](/docs/components-form-validation-documentation--docs).
  *
- * The error message appears below the radio group.
+ * The error message appears below the radio group, and can be set either trough a validator, or explicctly using the using the `error-message` attribute.
  *
  * If you click on 'submit' first on the example below it will validate the radio group and show the error message.
  */
@@ -175,15 +120,9 @@ export const Validation: Story = {
   `,
 }
 
-/**
- * This example demonstrates validation when radio buttons are missing required properties.
- * Each radio button must have both:
- * - label: The text displayed next to the radio button
- * - value: The data value associated with the option
- */
-export const MissingLabel: Story = {
+export const DosAndDonts: Story = {
   ...DefaultParams,
-  name: 'Missing Properties',
+  name: "Do's and dont's",
   render: () => html`
     <gds-flex gap="xl">
       <gds-flex gap="l" flex-direction="column" flex="1">
@@ -195,7 +134,7 @@ export const MissingLabel: Story = {
           variant="positive"
         >
           <gds-icon-circle-check></gds-icon-circle-check>
-          <gds-text tag="small">Valid: Label and Value</gds-text>
+          <gds-text tag="small">Do provide both Label and Value</gds-text>
         </gds-card>
         <gds-card align-items="flex-start" gap="m">
           <gds-radio-group label="Group Label" supporting-text="Support text">
@@ -217,32 +156,11 @@ export const MissingLabel: Story = {
           variant="negative"
         >
           <gds-icon-cross-small></gds-icon-cross-small>
-          <gds-text tag="small"> Invalid: Missing label </gds-text>
+          <gds-text tag="small">Never exclude the label</gds-text>
         </gds-card>
         <form method="dialog">
           <gds-card align-items="flex-start" gap="m">
-            <gds-radio-group
-              label="Group Label"
-              supporting-text="Support text"
-              .validator=${{
-                validate: (el: GdsRadioGroup) => {
-                  const radiosWithoutLabel = el.radios.filter(
-                    (radio) => !radio.label,
-                  )
-                  if (radiosWithoutLabel.length > 0) {
-                    return [
-                      { ...el.validity, valid: false, customError: true },
-                      'Radio buttons require label',
-                    ]
-                  }
-
-                  return [
-                    { ...el.validity, valid: true, customError: false },
-                    '',
-                  ]
-                },
-              }}
-            >
+            <gds-radio-group label="Group Label" supporting-text="Support text">
               <span slot="extended-supporting-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -250,7 +168,6 @@ export const MissingLabel: Story = {
               <gds-radio value="1"></gds-radio>
               <gds-radio value="2"></gds-radio>
             </gds-radio-group>
-            <gds-button type="submit" size="small">Submit</gds-button>
           </gds-card>
         </form>
       </gds-flex>
@@ -263,32 +180,11 @@ export const MissingLabel: Story = {
           variant="negative"
         >
           <gds-icon-cross-small></gds-icon-cross-small>
-          <gds-text tag="small"> Invalid: Missing value </gds-text>
+          <gds-text tag="small">Never exclude the value </gds-text>
         </gds-card>
         <form method="dialog">
           <gds-card align-items="flex-start" gap="m">
-            <gds-radio-group
-              label="Group Label"
-              supporting-text="Support text"
-              .validator=${{
-                validate: (el: GdsRadioGroup) => {
-                  const radiosWithoutLabel = el.radios.filter(
-                    (radio) => !radio.value,
-                  )
-                  if (radiosWithoutLabel.length > 0) {
-                    return [
-                      { ...el.validity, valid: false, customError: true },
-                      'Radio buttons require value',
-                    ]
-                  }
-
-                  return [
-                    { ...el.validity, valid: true, customError: false },
-                    '',
-                  ]
-                },
-              }}
-            >
+            <gds-radio-group label="Group Label" supporting-text="Support text">
               <span slot="extended-supporting-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -296,7 +192,6 @@ export const MissingLabel: Story = {
               <gds-radio label="Radio Label"></gds-radio>
               <gds-radio label="Radio Label"></gds-radio>
             </gds-radio-group>
-            <gds-button type="submit" size="small">Submit</gds-button>
           </gds-card>
         </form>
       </gds-flex>
@@ -305,41 +200,9 @@ export const MissingLabel: Story = {
 }
 
 /**
- * When the required attribute is set on a radio group, users must select an option before form submission.
- * An error message is displayed if the form is submitted without a selection.
- */
-export const Required: Story = {
-  ...DefaultParams,
-  name: 'Required',
-  render: () => html`
-    <div class="radio-group">
-      <gds-radio-group
-        label="Group Label"
-        supporting-text="Support text for the group"
-        required
-        show-extended-supporting-text
-      >
-        <span slot="extended-supporting-text">
-          Extended supporting text for the group
-        </span>
-        <gds-radio
-          label="Radio Label"
-          value="1"
-          supporting-text="Example support text"
-        ></gds-radio>
-        <gds-radio
-          label="Radio Label"
-          value="2"
-          supporting-text="Example support text"
-        ></gds-radio>
-      </gds-radio-group>
-    </div>
-  `,
-}
-
-/**
  * Disabled radio buttons cannot be interacted with and appear visually muted.
- * Use this state for options that are temporarily unavailable.
+ *
+ * In general, this state should never be used. Instead, aim to explain to the user why the choice is wrong in an error message and make sure they understand how to correct it.
  */
 export const Disabled: Story = {
   ...DefaultParams,
