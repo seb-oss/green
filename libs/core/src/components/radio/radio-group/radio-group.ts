@@ -46,16 +46,21 @@ class RadioGroup extends GdsFormControlElement<string> {
   })
   showExtendedSupportingText = false
 
-  @query('.content')
-  private _contentElement!: HTMLElement
-
-  private _isConnected = false
-
+  /**
+   * Returns an array of `<gds-radio>` elements in the radio group.
+   *
+   * @readonly
+   */
   get radios(): GdsRadio[] {
     return Array.from(
       this.querySelectorAll('[gds-element=gds-radio]'),
     ) as GdsRadio[]
   }
+
+  @query('.content')
+  private _contentElement!: HTMLElement
+
+  private _isConnected = false
 
   connectedCallback() {
     super.connectedCallback()

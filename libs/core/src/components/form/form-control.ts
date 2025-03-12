@@ -135,7 +135,6 @@ export abstract class GdsFormControlElement<ValueT = any>
   /**
    * Get or set the value of the form control.
    */
-  protected _internalValue?: ValueT
   @property()
   get value() {
     return this._internalValue
@@ -143,6 +142,7 @@ export abstract class GdsFormControlElement<ValueT = any>
   set value(value: ValueT | undefined) {
     this._internalValue = value
   }
+  protected _internalValue?: ValueT
 
   @property({ reflect: true })
   name = ''
