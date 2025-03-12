@@ -24,7 +24,7 @@ import { GdsRadioGroup } from './radio-group/radio-group'
 const meta: Meta = {
   title: 'Components/Radio',
   component: 'gds-radio-group',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
 }
 
 export default meta

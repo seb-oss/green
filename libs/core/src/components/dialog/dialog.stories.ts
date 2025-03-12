@@ -17,7 +17,7 @@ import type { GdsDialog } from './dialog'
 const meta: Meta = {
   title: 'Components/Dialog',
   component: 'gds-dialog',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
   },

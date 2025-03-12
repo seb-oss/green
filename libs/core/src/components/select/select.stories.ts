@@ -30,7 +30,7 @@ import '../icon/icons/books.ts'
 const meta: Meta = {
   title: 'Components/Select',
   component: 'gds-select',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-select'),
   },

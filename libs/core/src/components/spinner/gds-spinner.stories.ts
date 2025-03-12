@@ -30,7 +30,7 @@ import '../divider'
 const meta: Meta<GdsSpinner> = {
   title: 'Components/Spinner',
   component: 'gds-spinner',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     size: {
       control: 'select',

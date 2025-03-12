@@ -10,7 +10,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 const meta: Meta = {
   title: 'Components/Image',
   component: 'gds-img',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-img'),
   },

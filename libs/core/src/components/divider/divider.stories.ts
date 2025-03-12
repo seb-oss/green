@@ -20,7 +20,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 const meta: Meta = {
   title: 'Components/Divider',
   component: 'gds-divider',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-divider'),
   },

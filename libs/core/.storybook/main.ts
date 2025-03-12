@@ -8,8 +8,6 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-docs',
     '@storybook/addon-links',
-    // https://github.com/Sidnioulz/storybook-addon-tag-badges
-    'storybook-addon-tag-badges',
   ],
   core: {
     builder: '@storybook/builder-vite', // 👈 The builder enabled here.

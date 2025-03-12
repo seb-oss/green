@@ -23,7 +23,7 @@ import '../icon/icons/circles-three.js'
 const meta: Meta = {
   title: 'Components/Mask',
   component: 'gds-mask',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-mask'),
   },

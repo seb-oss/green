@@ -20,7 +20,7 @@ const meta: Meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-segmented-control'),
   },

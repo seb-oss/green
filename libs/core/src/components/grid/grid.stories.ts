@@ -18,7 +18,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 const meta: Meta = {
   title: 'Components/Grid',
   component: 'gds-grid',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
 }
 
 export default meta

@@ -14,7 +14,7 @@ import './flex'
 const meta: Meta = {
   title: 'Components/Flex',
   component: 'gds-flex',
-  tags: ['autodocs', 'beta'],
+  tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-flex'),
   },
