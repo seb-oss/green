@@ -30,7 +30,7 @@ import '../icon/icons/circles-three.js'
 const meta: Meta = {
   title: 'Components/Card',
   component: 'gds-card',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
   argTypes: {
     ...argTablePropsFor('gds-card'),
   },
