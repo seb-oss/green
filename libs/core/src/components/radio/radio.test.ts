@@ -151,6 +151,55 @@ describe('Radio Components', () => {
         expect(changeSpy).to.have.been.called
         expect(el.value).to.equal('1')
       })
+
+      it('should emit input event when radio is selected', async () => {
+        const el = await fixture<GdsRadioGroup>(html`
+          <gds-radio-group label="Test Group">
+            <gds-radio value="1" label="Option 1"></gds-radio>
+            <gds-radio value="2" label="Option 2"></gds-radio>
+          </gds-radio-group>
+        `)
+        await el.updateComplete
+        const inputSpy = sinon.spy()
+        el.addEventListener('input', inputSpy)
+        el.radios[0].dispatchEvent(new Event('change', { bubbles: true }))
+        await el.updateComplete
+        await new Promise((resolve) => setTimeout(resolve, 0))
+        expect(inputSpy).to.have.been.called
+        expect(el.value).to.equal('1')
+      })
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('should be accessible', async () => {
+      const el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group label="Test Group">
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+        </gds-radio-group>
+      `)
+      await expect(el).to.be.accessible()
+    })
+
+    it('should be accessible when invalid', async () => {
+      const el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group label="Test Group" aria-invalid="true">
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+        </gds-radio-group>
+      `)
+      await expect(el).to.be.accessible
+    })
+
+    it('should be accessible when disabled', async () => {
+      const el = await fixture<GdsRadioGroup>(html`
+        <gds-radio-group label="Test Group" disabled>
+          <gds-radio value="1" label="Option 1"></gds-radio>
+          <gds-radio value="2" label="Option 2"></gds-radio>
+        </gds-radio-group>
+      `)
+      await expect(el).to.be.accessible()
     })
   })
 })
