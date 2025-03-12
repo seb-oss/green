@@ -19,6 +19,28 @@
 
   &.gds-form-item {
     @include form-group.add-form-item();
+
+    .gds-form-item__footer:not(:empty) {
+      .form-info {
+        font-weight: 500;
+      }
+
+      .form-info--error {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5em;
+        color: #9f000a;
+
+        .error-icon {
+          margin-top: 0.128rem;
+          align-items: center;
+        }
+      }
+
+      > .form-info--countdown {
+        font-weight: 400;
+      }
+    }
   }
 
   .hide-if-empty:empty {
@@ -45,6 +67,12 @@
       @include validation.add-feedback(tokens.$intent-danger-background);
     }
 
+    &.nggv-field--error {
+      $_border-bottom: 0.125rem solid #9f000a !important;
+      border-bottom: $_border-bottom;
+      height: 100%;
+    }
+
     $_height: 2.75rem;
     $_border-color-normal: #868686;
 
@@ -64,7 +92,6 @@
       box-sizing: border-box;
     }
 
-    height: 2.625rem;
     display: flex;
 
     .input-group-prefix {
@@ -205,23 +232,5 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     width: 100%;
-  }
-
-  .gds-form-item__footer {
-    .form-info {
-      font-weight: 500;
-    }
-
-    .form-info--error {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5em;
-      color: #9f000a;
-
-      .error-icon {
-        margin-top: 0.128rem;
-        align-items: center;
-      }
-    }
   }
 }

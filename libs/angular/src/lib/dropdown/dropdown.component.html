@@ -20,7 +20,7 @@
       ><ng-content select="[data-form-info]"></ng-content
     ></span>
 
-    <span slot="trigger"
+    <span slot="trigger" style="display: contents"
       ><ng-container
         *ngTemplateOutlet="
           customButton?.templateRef && selectedOption
@@ -52,7 +52,7 @@
 </div>
 
 <ng-template #defaultButton let-selected="option">
-  <span class="trigger">{{ texts?.select }}</span>
+  <span class="ngg-dropdown-default-trigger">{{ texts?.select }}</span>
 </ng-template>
 
 <ng-template #defaultOption let-option="option">
