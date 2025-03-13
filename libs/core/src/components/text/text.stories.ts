@@ -36,69 +36,6 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {
-    size: {
-      options: [
-        'heading-xl',
-        'heading-l',
-        'heading-m',
-        'heading-s',
-        'heading-xs',
-        'heading-2xs',
-        'detail-m',
-        'detail-s',
-        'detail-xs',
-        'body-l',
-        'body-m',
-        'body-s',
-        'display-2xl',
-        'display-xl',
-        'display-l',
-        'display-m',
-        'display-s ',
-        'preamble-2xl',
-        'preamble-xl',
-        'preamble-l',
-        'preamble-m',
-        'preamble-s',
-        'preamble-xs',
-      ],
-      control: { type: 'select' },
-    },
-    tag: {
-      options: [
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'p',
-        'span',
-        'em',
-        'mark',
-        'strong',
-      ],
-      control: { type: 'select' },
-    },
-    wrap: {
-      options: ['balance', 'nowrap', 'pretty', 'wrap'],
-      control: { type: 'select' },
-    },
-    length: {
-      control: { type: 'number' },
-    },
-    min: {
-      control: { type: 'number' },
-    },
-    align: {
-      options: ['left', 'center', 'right', 'justify'],
-      control: { type: 'select' },
-    },
-    font: {
-      control: { type: 'text' },
-    },
-  },
 }
 
 /**

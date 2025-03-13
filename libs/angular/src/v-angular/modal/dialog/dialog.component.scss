@@ -1,6 +1,5 @@
 @use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
-
 @use '../../../../../chlorophyll/scss/components/close/mixins' as close;
 @use '../../../../../chlorophyll/scss/common' as common;
 @use '../../../../../chlorophyll/scss/components/button/mixins' as button;
@@ -12,7 +11,7 @@
   --gds-sys-color-base: hsl(0, 0%, 20%);
   --gds-sys-color-font: hsl(0, 0%, 20%);
   --gds-sys-shape-corner-round: 50%;
-  --sg-border-color: hsl(0, 0%, 53%);
+  --sg-border-color: #e9e9e9;
   --sg-border-radius: 0.25rem;
   --sg-border-width-50: 0.5px;
   --sg-border-width: 1px;
