@@ -572,6 +572,26 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           style="margin-left: 0.25rem;"
           [formControl]="formControl">
         </nggv-input>
+      </div>
+      <div>
+        <nggv-dropdown
+          label="Dropdown 2"
+          [placeholder]="placeholder"
+          [options]="options"
+          [required]="true"
+          [invalid]="true"
+          error="This is a permanent error"
+          [formControl]="formControl">
+        </nggv-dropdown>
+      </div>
+      <div>
+        <nggv-input
+          label="Input 2"
+          [placeholder]="placeholder"
+          [required]="true"
+          style="margin-left: 0.25rem;"
+          [formControl]="formControl">
+        </nggv-input>
       </div>`,
     props: {
       ...args,
