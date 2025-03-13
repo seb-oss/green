@@ -16,6 +16,10 @@ export const styles = css`
       border-color: var(--gds-color-l2-border-quaternary);
     }
 
+    details[open] {
+      border-color: var(--gds-color-l2-border-primary);
+    }
+
     summary {
       display: flex;
       justify-content: space-between;
