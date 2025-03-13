@@ -1,6 +1,7 @@
 @use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 @use '../../../../chlorophyll/scss/components/button/mixins' as button;
 @use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 @use '../../../../chlorophyll/scss/components/form/validation/mixins' as
   validation;
 @use '../../../../chlorophyll/scss/tokens' as tokens;
@@ -27,15 +28,18 @@
     display: block;
     font-weight: 500;
     line-height: 1.25rem;
-    margin-bottom: 0.5rem;
     width: 100%;
   }
 
   .description {
+    font-size: 0.875rem;
     margin-bottom: 0.5rem;
     line-height: 1.25rem;
     width: 100%;
   }
+
+  @include form-group.add-form-item();
+  position: initial; // counteracts position: relative in mixin
 
   .gds-field-label--optional {
     font-weight: 400;
@@ -47,8 +51,15 @@
     font-size: 1rem;
     font-weight: normal;
     line-height: 1.125;
-
+    text-align: left;
     width: 100%;
+
+    span {
+      width: 100%;
+      white-space: nowrap;
+      display: block;
+      text-overflow: ellipsis;
+    }
 
     &.small {
       font-size: 0.875rem;
@@ -78,10 +89,6 @@
   }
 
   .gds-form-item__footer {
-    &.error-wrapper {
-      margin-top: 0.5rem;
-    }
-
     .form-info {
       font-weight: 500;
       font-size: 0.875rem;
