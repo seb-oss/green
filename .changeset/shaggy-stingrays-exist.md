@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-core': patch
+'@sebgroup/green-core': minor
 ---
 
 **Radio Button:** Add new component Radio Button
