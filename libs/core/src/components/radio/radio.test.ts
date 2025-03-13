@@ -76,7 +76,7 @@ describe('Radio Components', () => {
         `)
         await el.updateComplete
         const firstRadio = el.radios[0]
-        firstRadio.dispatchEvent(new Event('change', { bubbles: true }))
+        firstRadio.click()
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
         expect(firstRadio.checked).to.be.true
@@ -145,7 +145,7 @@ describe('Radio Components', () => {
         await el.updateComplete
         const changeSpy = sinon.spy()
         el.addEventListener('change', changeSpy)
-        el.radios[0].dispatchEvent(new Event('change', { bubbles: true }))
+        el.radios[0].click()
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
         expect(changeSpy).to.have.been.called
@@ -162,7 +162,7 @@ describe('Radio Components', () => {
         await el.updateComplete
         const inputSpy = sinon.spy()
         el.addEventListener('input', inputSpy)
-        el.radios[0].dispatchEvent(new Event('change', { bubbles: true }))
+        el.radios[0].click()
         await el.updateComplete
         await new Promise((resolve) => setTimeout(resolve, 0))
         expect(inputSpy).to.have.been.called
