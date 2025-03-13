@@ -14,6 +14,8 @@ import '../theme'
 import '../button'
 import '../divider'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
+
 /**
  * A loading indicator component that supports various sizes and display modes.
  *
@@ -32,39 +34,7 @@ const meta: Meta<GdsSpinner> = {
   component: 'gds-spinner',
   tags: ['autodocs', 'beta'],
   argTypes: {
-    size: {
-      control: 'select',
-      options: ['default', 'sm', 'md', 'lg'],
-      description: 'Size of the spinner',
-      table: {
-        defaultValue: { summary: 'default' },
-      },
-    },
-    label: {
-      control: 'text',
-      description: 'Loading text for the spinner',
-    },
-    showLabel: {
-      control: 'boolean',
-      description: 'Whether to display the label text visibly',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
-    cover: {
-      control: 'boolean',
-      description: 'Cover parent container with backdrop',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
-    fullscreen: {
-      control: 'boolean',
-      description: 'Cover entire viewport',
-      table: {
-        defaultValue: { summary: 'false' },
-      },
-    },
+    ...argTablePropsFor('gds-textarea'),
   },
 }
 
