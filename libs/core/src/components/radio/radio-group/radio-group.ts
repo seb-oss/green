@@ -64,12 +64,11 @@ class RadioGroup extends GdsFormControlElement<string> {
 
   connectedCallback() {
     super.connectedCallback()
-    this.setAttribute('role', 'radiogroup')
     this._isConnected = true
 
     this.updateComplete.then(() => {
       this._syncRadioStates()
-      this._initializeFocusable()
+      this.#initializeFocusable()
     })
 
     this.addEventListener('invalid', this._syncRadioStates)
@@ -85,7 +84,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     return this._contentElement
   }
 
-  private _initializeFocusable() {
+  #initializeFocusable() {
     if (!this._contentElement || !this._isConnected) return
 
     const selectedRadio = this.radios.find((radio) => radio.checked)
@@ -108,7 +107,7 @@ class RadioGroup extends GdsFormControlElement<string> {
 
     this._syncRadioStates()
     this.updateComplete.then(() => {
-      this._initializeFocusable()
+      this.#initializeFocusable()
     })
   }
 
@@ -123,7 +122,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     })
   }
 
-  private _handleFocus() {
+  #handleFocus() {
     if (!this._contentElement || !this._isConnected) return
 
     const selectedRadio = this.radios.find((radio: any) => radio.checked)
@@ -139,7 +138,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     }
   }
 
-  private _dispatchChangeEvents() {
+  #dispatchChangeEvents() {
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: { value: this.value },
@@ -149,16 +148,16 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.dispatchEvent(new Event('input', { bubbles: true }))
   }
 
-  private _handleRadioChange(e: Event) {
+  #handleRadioChange(e: Event) {
     const radio = e.target as GdsRadio
     if (radio.hasAttribute('value')) {
       this.value = radio.value
       this._syncRadioStates()
-      this._dispatchChangeEvents()
+      this.#dispatchChangeEvents()
     }
   }
 
-  private _handleKeyDown(e: KeyboardEvent) {
+  #handleKeyDown(e: KeyboardEvent) {
     if (!this._isConnected) return
 
     const radios = this.radios.filter(
@@ -179,14 +178,14 @@ class RadioGroup extends GdsFormControlElement<string> {
       case 'ArrowRight': {
         e.preventDefault()
         const nextIndex = (currentIndex + 1) % radios.length
-        this._focusAndSelectRadio(radios[nextIndex])
+        this.#focusAndSelectRadio(radios[nextIndex])
         break
       }
       case 'ArrowUp':
       case 'ArrowLeft': {
         e.preventDefault()
         const nextIndex = (currentIndex - 1 + radios.length) % radios.length
-        this._focusAndSelectRadio(radios[nextIndex])
+        this.#focusAndSelectRadio(radios[nextIndex])
         break
       }
       default:
@@ -194,7 +193,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     }
   }
 
-  private _focusAndSelectRadio(radio: GdsRadio) {
+  #focusAndSelectRadio(radio: GdsRadio) {
     if (!this._contentElement || !this._isConnected) return
 
     this.radios.forEach((r) => r.setAttribute('tabindex', '-1'))
@@ -206,7 +205,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.value = radio.value
 
     this._syncRadioStates()
-    this._dispatchChangeEvents()
+    this.#dispatchChangeEvents()
   }
 
   render() {
@@ -216,7 +215,13 @@ class RadioGroup extends GdsFormControlElement<string> {
       'direction-column': this.direction === 'column',
     }
 
-    return html`<div class=${classMap(classes)}>
+    return html`<div
+      role="radiogroup"
+      id="radiogroup"
+      class=${classMap(classes)}
+      aria-labelledby="group-label"
+      aria-describedby="supporting-text extended-supporting-text footer"
+    >
       ${this.#renderRadioGroupContents()}
     </div>`
   }
@@ -234,11 +239,12 @@ class RadioGroup extends GdsFormControlElement<string> {
   #renderFieldControlHeader() {
     if (this.label) {
       return html` <gds-form-control-header class="size-${this.size}">
-        <label id="group-label" for="input" slot="label">${this.label}</label>
+        <label id="group-label" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
         </span>
         <slot
+          id="extended-supporting-text"
           name="extended-supporting-text"
           slot="extended-supporting-text"
         ></slot>
@@ -249,15 +255,16 @@ class RadioGroup extends GdsFormControlElement<string> {
   #renderRadios() {
     return html` <div
       class="content"
-      @keydown=${this._handleKeyDown}
-      @focus=${this._handleFocus}
+      @keydown=${this.#handleKeyDown}
+      @focus=${this.#handleFocus}
     >
-      <slot @change=${this._handleRadioChange}></slot>
+      <slot @gds-radio-change=${this.#handleRadioChange}></slot>
     </div>`
   }
 
   #renderFieldControlFooter() {
     return html` <gds-form-control-footer
+      id="footer"
       class="size-${this.size}"
       .validationMessage=${this.invalid &&
       (this.errorMessage || this.validationMessage)}

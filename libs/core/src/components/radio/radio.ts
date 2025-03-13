@@ -12,6 +12,8 @@ import '../../primitives/selection-controls'
 /**
  * @element gds-radio
  * @status beta
+ *
+ * @event gds-radio-change - Dispatched when the radio button is checked.
  */
 @gdsCustomElement('gds-radio')
 export class GdsRadio extends GdsElement {
@@ -105,7 +107,7 @@ export class GdsRadio extends GdsElement {
 
     this.checked = true
     this.focus()
-    this.dispatchEvent(new Event('change', { bubbles: true }))
+    this.dispatchEvent(new Event('gds-radio-change', { bubbles: true }))
   }
 
   #handleKeyDown = (e: KeyboardEvent) => {
@@ -114,7 +116,7 @@ export class GdsRadio extends GdsElement {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       this.checked = true
-      this.dispatchEvent(new Event('change', { bubbles: true }))
+      this.dispatchEvent(new Event('gds-radio-change', { bubbles: true }))
     }
   }
 

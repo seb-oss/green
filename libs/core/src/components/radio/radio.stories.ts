@@ -63,7 +63,7 @@ export const RadioButton: Story = {
   ...DefaultParams,
   name: 'Radio',
   args: {
-    label: 'Label',
+    label: 'Pick an option',
     supportingText: 'Label support text.',
     innerHTML: `
     <gds-radio label="Radio Option 1" supporting-text="Supporting text" value="1"></gds-radio>
