@@ -3,6 +3,8 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './accordion'
+import '../text/text'
+import '../card/card'
 import '../rich-text/rich-text'
 
 const meta: Meta = {
@@ -108,19 +110,88 @@ export const Name: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-accordion name="Name" summary="Example">
+    <gds-flex min-width="100%" gap="xl">
+      <gds-flex flex-direction="column" gap="xl" flex="1">
+        <gds-text tag="small">Grouped</gds-text>
+        <gds-flex flex-direction="column">
+          <div class="group">
+            <gds-accordion name="group-one" summary="Example">
+              <gds-rich-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </gds-rich-text>
+            </gds-accordion>
+            <gds-accordion name="group-one" summary="Example">
+              <gds-rich-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </gds-rich-text>
+            </gds-accordion>
+            <gds-accordion name="group-one" summary="Example">
+              <gds-rich-text>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </gds-rich-text>
+            </gds-accordion>
+          </div>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="xl" flex="1">
+        <gds-text tag="small">Ungrouped</gds-text>
+        <gds-flex flex-direction="column">
+          <gds-accordion summary="Example">
+            <gds-rich-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-rich-text>
+          </gds-accordion>
+          <gds-accordion summary="Example">
+            <gds-rich-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-rich-text>
+          </gds-accordion>
+          <gds-accordion summary="Example">
+            <gds-rich-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-rich-text>
+          </gds-accordion>
+        </gds-flex>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+export const Open: Story = {
+  ...DefaultParams,
+  name: 'Open',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+    docs: {
+      description: {
+        story: `
+### Open Accordion
+Just as in the native select if you set the open attribute to true the accordion will be open by default.
+        `,
+      },
+    },
+  },
+  render: (args) => html`
+    <gds-accordion open name="default-open" summary="I'm open by default">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </gds-rich-text>
     </gds-accordion>
-    <gds-accordion name="Name" summary="Example">
+    <gds-accordion name="default-open" summary="Example">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </gds-rich-text>
     </gds-accordion>
-    <gds-accordion name="Name" summary="Example">
+    <gds-accordion name="default-open" summary="Example">
       <gds-rich-text>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
@@ -129,9 +200,9 @@ export const Name: Story = {
   `,
 }
 
-export const Open: Story = {
+export const Size: Story = {
   ...DefaultParams,
-  name: 'Open',
+  name: 'Size',
   parameters: {
     ...DefaultParams.parameters,
     controls: { include: [] },

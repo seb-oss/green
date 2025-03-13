@@ -4,42 +4,57 @@ export const styles = css`
   @layer base, reset;
   @layer base {
     details {
-      border-top: solid var(--gds-space-4xs) var(--gds-color-l3-border-tertiary);
+      border-bottom: solid var(--gds-space-4xs)
+        var(--gds-color-l2-border-primary);
       font-size: var(--gds-text-size-body-m);
       line-height: var(--gds-text-line-height-body-m);
       color: var(--gds-color-l2-content-secondary);
-      transition: all 120ms;
+      transition: border-color 240ms linear;
+    }
+
+    details:hover {
+      border-color: var(--gds-color-l2-border-quaternary);
     }
 
     summary {
-      font-weight: var(--gds-text-weight-regular);
-      list-style: none;
-      padding: 0.6cap 0.2ch 0.5cap 0.2ch;
-      font-size: var(--gds-text-size-body-l);
-      line-height: var(--gds-text-line-height-body-l);
-      color: var(--gds-color-l2-content-primary);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      list-style: none;
       cursor: pointer;
       user-select: none;
       outline-offset: var(--gds-space-2xs);
       outline-color: currentColor;
       transition: all 120ms;
+      padding-block: var(--gds-space-m);
+      color: var(--gds-color-l2-content-primary);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary .label {
+      font-size: var(--gds-text-size-heading-xs);
+      line-height: var(--gds-text-line-height-heading-xs);
+      font-weight: var(--gds-text-weight-regular);
+    }
+
+    summary svg {
+      block-size: var(--gds-space-m);
+      inline-size: var(--gds-space-m);
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+    }
+
+    .content {
+      padding-block-end: var(--gds-space-l);
+      min-height: 1lh;
     }
 
     summary:focus-visible {
       border-radius: var(--gds-space-2xs);
-    }
-
-    details[open] {
-      padding-bottom: 1lh;
-    }
-
-    details[open] summary {
-      margin-bottom: 1lh;
-      border-bottom: var(--gds-space-4xs) solid
-        var(--gds-color-l3-border-tertiary);
     }
   }
 `
