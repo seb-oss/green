@@ -28,7 +28,7 @@ import { html } from 'lit'
 const meta: Meta = {
   title: 'Components/Theme',
   component: 'gds-theme',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
 }
 
 export default meta

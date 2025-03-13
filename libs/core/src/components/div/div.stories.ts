@@ -17,7 +17,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 const meta: Meta = {
   title: 'Components/Div',
   component: 'gds-div',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
   argTypes: {
     ...argTablePropsFor('gds-div'),
   },

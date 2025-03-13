@@ -32,7 +32,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 const meta: Meta<GdsSpinner> = {
   title: 'Components/Spinner',
   component: 'gds-spinner',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
   argTypes: {
     ...argTablePropsFor('gds-textarea'),
   },

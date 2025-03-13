@@ -11,7 +11,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 const meta: Meta = {
   title: 'Components/Signal',
   component: 'gds-signal',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
   argTypes: {
     ...argTablePropsFor('gds-signal'),
   },

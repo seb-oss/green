@@ -27,7 +27,7 @@ const meta: Meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
   argTypes: {
     ...argTablePropsFor('gds-input'),
     value: {
