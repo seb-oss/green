@@ -114,26 +114,24 @@ export const Name: Story = {
       <gds-flex flex-direction="column" gap="xl" flex="1">
         <gds-text tag="small">Grouped</gds-text>
         <gds-flex flex-direction="column">
-          <div class="group">
-            <gds-accordion name="group-one" summary="Example">
-              <gds-rich-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </gds-rich-text>
-            </gds-accordion>
-            <gds-accordion name="group-one" summary="Example">
-              <gds-rich-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </gds-rich-text>
-            </gds-accordion>
-            <gds-accordion name="group-one" summary="Example">
-              <gds-rich-text>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </gds-rich-text>
-            </gds-accordion>
-          </div>
+          <gds-accordion name="group-one" summary="Example">
+            <gds-rich-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-rich-text>
+          </gds-accordion>
+          <gds-accordion name="group-one" summary="Example">
+            <gds-rich-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-rich-text>
+          </gds-accordion>
+          <gds-accordion name="group-one" summary="Example">
+            <gds-rich-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-rich-text>
+          </gds-accordion>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="xl" flex="1">

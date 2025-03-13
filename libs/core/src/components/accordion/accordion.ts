@@ -109,6 +109,6 @@ export class GdsAccordion extends GdsElement {
       <div class="content">
         <slot></slot>
       </div>
-    </details>`
+    </details> `
   }
 }
