@@ -5,6 +5,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './accordion'
 import '../text/text'
 import '../card/card'
+import '../flex/flex'
 import '../rich-text/rich-text'
 
 const meta: Meta = {
@@ -110,27 +111,27 @@ export const Name: Story = {
     controls: { include: [] },
   },
   render: (args) => html`
-    <gds-flex min-width="100%" gap="xl">
+    <gds-flex width="100%" gap="xl">
       <gds-flex flex-direction="column" gap="xl" flex="1">
         <gds-text tag="small">Grouped</gds-text>
         <gds-flex flex-direction="column">
           <gds-accordion name="group-one" summary="Example">
-            <gds-rich-text>
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-rich-text>
+            </p>
           </gds-accordion>
           <gds-accordion name="group-one" summary="Example">
-            <gds-rich-text>
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-rich-text>
+            </p>
           </gds-accordion>
           <gds-accordion name="group-one" summary="Example">
-            <gds-rich-text>
+            <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-rich-text>
+            </p>
           </gds-accordion>
         </gds-flex>
       </gds-flex>

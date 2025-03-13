@@ -3,17 +3,13 @@ import { css } from 'lit'
 export const styles = css`
   @layer base, reset;
   @layer base {
-    /* :root {
-      interpolate-size: allow-keywords;
-      } */
-
     details {
       border-bottom: solid var(--gds-space-4xs)
         var(--gds-color-l2-border-primary);
       font-size: var(--gds-text-size-body-m);
       line-height: var(--gds-text-line-height-body-m);
       color: var(--gds-color-l2-content-secondary);
-      transition: all 240ms linear;
+      transition: border-color 240ms linear;
     }
 
     details:hover {
@@ -52,12 +48,12 @@ export const styles = css`
       stroke-linecap: round;
     }
 
-    .content {
-      padding-block-end: var(--gds-space-l);
-    }
-
     summary:focus-visible {
       border-radius: var(--gds-space-2xs);
+    }
+
+    .content {
+      padding-block-end: var(--gds-space-l);
     }
   }
 `
