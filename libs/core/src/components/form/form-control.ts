@@ -80,6 +80,9 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({ attribute: false })
   validator?: GdsValidator
 
+  /**
+   * The required attribute can be used to communicate to users of assistive technology that the control is required. Validation still needs to be done in a validator or equivalent.
+   */
   @property({ type: Boolean })
   required = false
 
@@ -132,7 +135,6 @@ export abstract class GdsFormControlElement<ValueT = any>
   /**
    * Get or set the value of the form control.
    */
-  protected _internalValue?: ValueT
   @property()
   get value() {
     return this._internalValue
@@ -140,6 +142,7 @@ export abstract class GdsFormControlElement<ValueT = any>
   set value(value: ValueT | undefined) {
     this._internalValue = value
   }
+  protected _internalValue?: ValueT
 
   @property({ reflect: true })
   name = ''
