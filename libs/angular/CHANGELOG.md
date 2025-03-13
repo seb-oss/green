@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.5.0
+
+### Minor Changes
+
+- 9ac5286: **Routing:** Add `nggCoreRouterLink` directive for accessible routing with Green Core components
+
+### Patch Changes
+
+- Updated dependencies [f438e8f]
+  - @sebgroup/green-core@1.69.0
+
 ## 5.4.2
 
 ### Patch Changes
