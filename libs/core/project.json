@@ -96,6 +96,12 @@
         "command": "node libs/core/build-scripts/icons-generate.cjs"
       }
     },
+    "icons-generate-json": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/icons-generate-json.cjs"
+      }
+    },
     "icons-react": {
       "executor": "nx:run-commands",
       "options": {
