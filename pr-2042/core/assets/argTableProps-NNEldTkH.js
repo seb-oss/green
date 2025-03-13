@@ -1,1 +1,0 @@
-import{c as n}from"./custom-elements-cWsN5GFd.js";function s(a){var t;const r=(t=n.modules.find(e=>e.declarations.find(o=>o.tagName===a)))==null?void 0:t.declarations[0];return r==null?void 0:r.members.filter(e=>e.category).map(e=>({[e.name]:{control:"none",table:{category:e.category}}})).reduce((e,o)=>({...e,...o}),{})}export{s as a};
