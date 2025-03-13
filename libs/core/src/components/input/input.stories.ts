@@ -104,7 +104,7 @@ export const Size: Story = {
                   valid: false,
                   customError: true,
                 },
-                'Error message.',
+                'Required field.',
               ]
             else if (el.value.length !== 12 || isNaN(el.value))
               return [

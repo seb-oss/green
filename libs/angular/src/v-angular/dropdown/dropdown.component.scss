@@ -39,6 +39,7 @@
   }
 
   @include form-group.add-form-item();
+  position: initial; // counteracts position: relative in mixin
 
   .gds-field-label--optional {
     font-weight: 400;

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.69.0
+
+### Minor Changes
+
+- f438e8f: **Radio Button:** Add new component Radio Button
+
 ## 1.68.5
 
 ### Patch Changes
