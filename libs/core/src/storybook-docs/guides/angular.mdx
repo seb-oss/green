@@ -1,0 +1,148 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Guides/Angular" />
+
+# Using Green Core components with Angular
+
+Angular has support for using web components directly. To enable this support, you need to add [`CUSTOM_ELEMENTS_SCHEMA`](https://angular.dev/guide/components/advanced-configuration#custom-element-schemas) to your module or component.
+
+You also need to ensure that you handle Green Core's [element name scoping](/docs/concepts-scoping--docs), and if you use routing, make sure that `hrefs` are handled correctly. Read on to learn how to do all of this.
+
+## Scoping
+
+In addition to the schema, you also need a way to handle Green Core's [element name scoping](/docs/concepts-scoping--docs). There are two ways to do this:
+
+- **Use the `NggCoreRenderer` custom renderer**<br/>
+  This renderer automatically applies scoping to all Green Core elements in your template.
+- **Use the `NggCoreWrapperModule` module**<br/>
+  This module provides a directive, `*nggCoreElement` that you can use to apply scoping to individual elements in your template.
+
+The renderer is the most convenient way to use Green Core components with Angular, but the directive can provide more explicit control when needed, or should the renderer conflict with other custom renderers, or cause any other unexpected side effects.
+
+### Using `NggCoreRenderer`
+
+The `NggCoreRenderer` is a custom renderer that automatically applies scoping to all Green Core elements in your template. It does this by overriding the call to `document.createElement()` and applying the scoping suffix to the element names before creation. This is the easiest way to use Green Core components in your Angular application.
+
+**In your module:**
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+    // Provides `NggCoreRenderer` as a custom renderer
+    providers: [provideCoreRenderer()],
+    // CUSTOM_ELEMENTS_SCHEMA is still needed
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+Or, if you are only using standalone components, you can either create a root app module and provide the renderer there, or you can provide it in bootstrapping:
+
+```ts
+// app.config.ts
+const appConfig: ApplicationConfig = {
+  providers: [...other providers..., provideCoreRenderer()]
+};
+
+// main.ts
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
+```
+
+Now you can use Green Core components in your template like any other elements:
+
+```html
+<gds-button (click)="handleEvent($event)">Click me!</gds-button>
+```
+
+#### Using the custom renderer with Angular animations
+
+If you also need to use Angular animations, you need to use a special version of the provider. This is because Angular animations also use a custom renderer under the hood, so we need a bit of specialized initialization to make sure both the Green Core renderer and the Angular animations renderer can coexist and do their things.
+
+All you need to do on your end is to use `provideCoreRendererWithAnimations()` instead of `provideCoreRenderer()`.
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { provideCoreRendererWithAnimations } from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+    imports: [BrowserAnimationsModule] // You also need to make sure you have imported the `BrowserAnimationsModule` module
+    providers: [provideCoreRendererWithAnimations()],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+### Using `NggCoreWrapperModule`
+
+The `NggCoreWrapperModule` is a module that provides a directive, `*nggCoreElement`, that you can use to apply scoping to individual elements in your template. This can be useful if you need more explicit control over which elements are scoped, or if the `NggCoreRenderer` is causing any issues.
+
+**In your module:**
+
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+    // Add the NggCoreWrapperModule to the `imports` array
+    imports: [NggCoreWrapperModule],
+    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+**In your component:**
+
+```ts
+import '@sebgroup/green-core/components/button/index.js'
+
+// Transitional styles
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
+```
+
+Use the web component in your template with the `*nggCoreElement` directive.
+
+**In your template:**
+
+```html
+<gds-button *nggCoreElement (click)="handleEvent($event)">Click me!</gds-button>
+```
+
+## Routing
+
+If you are using Angular's routing, you need to make sure that `hrefs` are handled correctly. The `routerLink` directive from Angular will apply `href` automatically to `a` tags, but not to custom elements. To make sure that `href` is applied to custom elements, you can use the `nggCoreRouterLink` directive from the Green Angular package.
+
+**In your module:**
+
+```ts
+import {
+  NggCoreRouterLinkModule
+} from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+  imports: [NggCoreRouterLinkModule],
+})
+export class AppModule {}
+```
+
+**In your template:**<br/>
+This assumes you have routes already defined in `routes`.
+
+```html
+<gds-menu-button
+  *ngFor="let route of routes"
+  [routerLink]="route.path"
+  routerLinkActive
+  nggCoreRouterLink
+>
+  {{ route.data?.name }}
+</gds-menu-button>
+```
+
+`nggCoreRouterLink` will cause the href attribute to be added regardless of tag name, by telling the `routerLink` directive to treat the element as an anchor tag.
+
+In addition, if the element is a `<gds-menu-button>`, and Angular's `routerLinkActive` directive is also present, the `selected` property will automatically be set for active router links.
+
+Add the `nggCoreRouterLink` directive whenever you use `routerLink` with a Green Core component.

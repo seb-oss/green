@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.69.0
+
+### Minor Changes
+
+- f438e8f: **Radio Button:** Add new component Radio Button
+
+## 1.68.5
+
+### Patch Changes
+
+- 6cea9a6: **Popover:** Change default positioning middleware to shift position rather than flip in order to use more available viewport space.
+
 ## 1.68.4
 
 ### Patch Changes
