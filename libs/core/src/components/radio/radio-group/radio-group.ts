@@ -5,13 +5,18 @@ import { classMap } from 'lit/directives/class-map.js'
 
 import { gdsCustomElement, html } from '../../../scoping'
 import { watch } from '../../../utils/decorators/watch'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../../form/form-control'
 import { styles } from './radio-group.styles'
 
+import type { GdsRadio } from '../radio'
+
 import '../../../primitives/form-control-header'
 import '../../../primitives/form-control-footer'
-
-import type { GdsRadio } from '../radio'
 
 @localized()
 class RadioGroup extends GdsFormControlElement<string> {
@@ -286,4 +291,6 @@ class RadioGroup extends GdsFormControlElement<string> {
  * @event input - Fired when a radio button selection changes
  */
 @gdsCustomElement('gds-radio-group')
-export class GdsRadioGroup extends RadioGroup {}
+export class GdsRadioGroup extends withLayoutChildProps(
+  withMarginProps(withSizeXProps(RadioGroup)),
+) {}

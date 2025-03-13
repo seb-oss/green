@@ -11,6 +11,7 @@ import '../divider/divider'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { GdsRadioGroup } from './radio-group/radio-group'
 
 /**
@@ -26,6 +27,9 @@ const meta: Meta = {
   component: 'gds-radio-group',
   subcomponents: { GdsRadio: 'gds-radio' },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-radio-group'),
+  },
 }
 
 export default meta
