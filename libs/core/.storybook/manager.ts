@@ -14,7 +14,7 @@ addons.setConfig({
         text: 'BETA',
         bgColor: '#001c13',
         fgColor: '#e0eb0b',
-        tooltip: 'This component is in beta',
+        tooltip: 'The API of component is subject to change',
       },
       display: {
         sidebar: ['component', 'group'],
