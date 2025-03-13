@@ -59,7 +59,7 @@ export class GdsRadio extends GdsElement {
 
   constructor() {
     super()
-    this.addEventListener('keydown', this._handleKeyDown)
+    this.addEventListener('keydown', this.#handleKeyDown)
     this.addEventListener('focus', () => (this._isFocused = true))
     this.addEventListener('blur', () => (this._isFocused = false))
   }
@@ -68,6 +68,7 @@ export class GdsRadio extends GdsElement {
     super.connectedCallback()
     this.setAttribute('role', 'radio')
     this._updateAriaState()
+    this.addEventListener('click', this.#handleClick)
   }
 
   private _updateAriaState() {
@@ -98,7 +99,7 @@ export class GdsRadio extends GdsElement {
     }
   }
 
-  private _handleClick(e: Event) {
+  #handleClick = (e: Event) => {
     if (this.disabled || !this.value || !this.label) return
     e.preventDefault()
 
@@ -107,7 +108,7 @@ export class GdsRadio extends GdsElement {
     this.dispatchEvent(new Event('change', { bubbles: true }))
   }
 
-  private _handleKeyDown(e: KeyboardEvent) {
+  #handleKeyDown = (e: KeyboardEvent) => {
     if (this.disabled) return
 
     if (e.key === 'Enter' || e.key === ' ') {
@@ -122,7 +123,6 @@ export class GdsRadio extends GdsElement {
       <gds-selection-field-label
         supporting-text=${this.supportingText}
         label=${this.label}
-        @click=${this._handleClick}
         type="radio"
       >
         <div class="radio">
