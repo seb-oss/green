@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.4.2
+
+### Patch Changes
+
+- 213f2ad: Fix for dropdown layering to render list above other inputs.
+
 ## 5.4.1
 
 ### Patch Changes
