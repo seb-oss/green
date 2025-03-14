@@ -119,7 +119,7 @@ export class NggvTypeaheadInputComponent
 
         // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
         this.buttonHeight =
-          this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
+          this.dropdownButton?.getBoundingClientRect().height || 32 // Default to 2em;
 
         if (this.expanded) {
           // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.
