@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.5.1
+
+### Patch Changes
+
+- 43b08d4: dropdownButton in typeahead might be undefined
+- f0d4efc: fixing typeahead input height when opening dropdown
+
 ## 5.5.0
 
 ### Minor Changes
