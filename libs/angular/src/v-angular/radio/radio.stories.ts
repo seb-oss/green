@@ -49,12 +49,16 @@ const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
       [label]="label"
       [name]="name"
       [value]="name + '1'"
+      [error]="error"
+      [invalid]="invalid"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
     </nggv-radio>
     <nggv-radio
       [label]="label"
       [name]="name"
+      [error]="error"
+      [invalid]="invalid"
       [value]="name + '2'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
@@ -62,6 +66,8 @@ const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
     <nggv-radio
       [label]="label"
       [name]="name"
+      [error]="error"
+      [invalid]="invalid"
       [value]="name + '3'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
