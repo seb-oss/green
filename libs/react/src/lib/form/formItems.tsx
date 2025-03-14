@@ -5,7 +5,7 @@ import { useFormContext } from './formContext'
 import { validateInputValue } from './validateInput'
 
 export interface FormItemsProps {
-  children: React.ReactNode
+  children: React.ReactElement<any>
   name: string
   validate?: IValidator
   onChange?: React.ChangeEventHandler<HTMLInputElement>
@@ -77,7 +77,7 @@ export const FormItems: React.FC<FormItemsProps> = ({
   }
 
   /* eslint-disable-next-line */
-  return React.cloneElement(children as React.ReactElement, {
+  return React.cloneElement(children, {
     validator: errors?.[name] && validate,
     name,
     value: values?.[name],

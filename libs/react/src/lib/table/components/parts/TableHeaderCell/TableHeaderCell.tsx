@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import classnames from 'classnames'
 
 import {
@@ -12,6 +12,7 @@ export type TableHeaderCellProps<T = any> = JSX.IntrinsicElements['th'] & {
   accessor?: keyof T
   disableSort?: boolean
   sortDirection?: SortDirection
+  children?: React.ReactNode
 }
 
 const TableHeaderCell = React.forwardRef(
@@ -108,7 +109,7 @@ const TableHeaderCell = React.forwardRef(
         {...props}
       >
         {sortable ? (
-          <button className="sg-table-sort"> {children}</button>
+          <button className="sg-table-sort">{children}</button>
         ) : (
           children
         )}

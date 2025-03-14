@@ -29,6 +29,11 @@ export default async function runExecutor(
         './libs/core/src/components/**/!(*.test|*.style|*.styles|*.stories).ts',
       ),
 
+      // React
+      ...glob.sync(
+        './libs/core/src/generated/react/**/!(*.test|*.style|*.styles|*.stories).ts',
+      ),
+
       // Transitional styles
       ...glob.sync('./libs/core/src/components/**/*.trans.styles.ts'),
 

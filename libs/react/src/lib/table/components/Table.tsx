@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { JSX } from 'react'
 import classnames from 'classnames'
 
 import {
@@ -22,7 +22,7 @@ export type TableProps = JSX.IntrinsicElements['table'] & {
 }
 
 export const Table = React.memo(
-  React.forwardRef(
+  React.forwardRef<HTMLTableElement, TableProps>(
     (
       {
         onRowSelect,
@@ -30,10 +30,11 @@ export const Table = React.memo(
         onSort,
         sortedColumn = null,
         className,
+        children,
         ...props
-      }: TableProps,
-      ref: React.ForwardedRef<HTMLTableElement>,
-    ): React.ReactElement<void> => {
+      },
+      ref,
+    ): React.ReactElement => {
       const [tableState, setTableState] = React.useState<TableState>({
         expandedRows: [],
         sortedColumn,
@@ -52,7 +53,9 @@ export const Table = React.memo(
             {...props}
             className={classnames('table', className)}
             ref={ref}
-          />
+          >
+            {children}
+          </table>
         </TableContext.Provider>
       )
     },

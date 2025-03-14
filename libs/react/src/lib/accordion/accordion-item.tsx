@@ -1,4 +1,4 @@
-import React, { ReactNode, RefObject, useRef, useState } from 'react'
+import React, { JSX, ReactNode, RefObject, useRef, useState } from 'react'
 
 interface AccordionItemProps {
   item: AccordionItemInterface
@@ -25,7 +25,7 @@ export interface AccordionItemInterface {
 
 const AccordionItem = ({ item, index, uuid }: AccordionItemProps) => {
   const { labelElementLevel, label, subLabel, content, customLabel } = item
-  const contentRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   const [isOpen, setIsOpen] = useState(item.defaultOpen || false)
 

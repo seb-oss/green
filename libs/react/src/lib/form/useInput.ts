@@ -7,7 +7,7 @@ const useInput = (
   onChanges?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   onChangeInput?: (value: string) => string,
 ): InputHTMLAttributes<HTMLInputElement> & {
-  ref: RefObject<HTMLInputElement>
+  ref: RefObject<HTMLInputElement | null>
 } => {
   const id = useMemo(() => props.id || randomId(), [props.id])
   const ref = useRef<HTMLInputElement>(null)
