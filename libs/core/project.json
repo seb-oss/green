@@ -102,6 +102,13 @@
         "command": "node libs/core/build-scripts/icons-react.cjs"
       }
     },
+    "generate-jsx-components": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build-custom-elements-json"],
+      "options": {
+        "command": "node libs/core/build-scripts/generate-react.cjs"
+      }
+    },
     "test": {
       "executor": "nx:run-commands",
       "dependsOn": ["build-tests"],

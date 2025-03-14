@@ -5,7 +5,7 @@ const prettierConfig = import('../../../prettier.config.mjs')
 const { getAllComponents } = require('./shared.cjs')
 //const { inspect } = require('util')
 
-const reactDir = path.join('./libs/react/src/core')
+const reactDir = path.join('libs/core/src/generated/react')
 
 // Clear build directory
 if (fs.existsSync(reactDir)) {
@@ -31,9 +31,6 @@ for (const component of filteredComponents) {
   const importPath = component.path
     .replace(/\.ts$/, '.js')
     .replace(/^src\//, '')
-  const events = (component.events || [])
-    .map((event) => `${event.reactName}: '${event.name}'`)
-    .join(',\n')
 
   fs.mkdirSync(componentDir, { recursive: true })
 
@@ -42,35 +39,18 @@ for (const component of filteredComponents) {
   prettier
     .format(
       `
-        import * as React from 'react';
-        import { createComponent } from '@lit/react';
-        import { getScopedTagName } from '@sebgroup/green-core/scoping'
-        import { ${component.name} } from '@sebgroup/green-core/${importPath}';
-
-        const tagName = getScopedTagName('${component.tagName}')
-        //${component.name}.define('${component.tagName}')
+        import { getReactComponent } from '../../../utils/react';
+        import type { ${component.name} as ${component.name}Type } from '../../../${importPath}';
 
         ${jsDoc}
-        const reactWrapper = createComponent({
-          tagName,
-          elementClass: ${component.name},
-          react: React,
-          events: {
-            ${events}
-          },
-          displayName: "${component.name}"
-        })
-
-        export default reactWrapper
+        export const ${component.name} = getReactComponent<${component.name}Type>('${component.tagName}');
       `,
       Object.assign(prettierConfig, {
         parser: 'babel-ts',
       }),
     )
     .then((formattedSource) => {
-      index.push(
-        `export { default as ${component.name} } from './${tagWithoutPrefix}';`,
-      )
+      index.push(`export { ${component.name} } from './${tagWithoutPrefix}';`)
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 
