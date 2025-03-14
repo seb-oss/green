@@ -53,89 +53,45 @@ export class MyApp extends LitElement {
 
 ### Using Angular
 
-Angular has support for using web components directly in the template. To enable it, you need to do the following:
+Angular has support for using web components directly. To enable this support, you need to do the following:
 
-Add the `CUSTOM_ELEMENTS_SCHEMA` in the module where you plan to use the components. It is recommended to add this as locally as possible, only on the moduls/components where you need it, and not in the app module.
+- Add the `CUSTOM_ELEMENTS_SCHEMA` in the module where you plan to use the components.
+- Provide `NggCoreRenderer` or import `NggCoreWrapperModule` to handle Green Core's element name scoping.
 
-You also need the `NggCoreWrapperModule` from `@sebgroup/green-angular`.
+The renderer is more convenient, but the wrapper module can provide more explicit control.
 
-In your module:
+For a more detailed break-down of how to use Green Core components with Angular, and some additional information about use with the router, see the full [Angular guide](/docs/guides-angular--docs).
 
+Below is a minimal example using the renderer.
+
+**In your module:**
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
 
 @NgModule({
-    // Add the NggCoreWrapperModule to the `imports` array
-    imports: [NggCoreWrapperModule],
-    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
-```
-
-In your component:
-
-```ts
-import '@sebgroup/green-core/components/button/index.js'
-
-// Transitional styles
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
-ButtonStyles.register()
-```
-
-Use the web component in your template with the `*nggCoreElement` directive.
-
-In your template:
-
-```html
-<gds-button *nggCoreElement>Click me!</gds-button>
-```
-
-The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same pupose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
-
-#### Alternative custom renderer
-
-If you are using a lot of web components, it can feel a bit cluttered with all the `*nggCoreElement` directives. In that case you can use `NggCoreRenderer` instead. This will automatically add scoping to all `<gds-*>` elements in the template.
-
-In your module:
-
-```ts
-import { CUSTOM_ELEMENTS_SCHEMA, RendererFactory2 } from '@angular/core'
-import { NggCoreRendererFactory } from '@sebgroup/green-angular/src/lib/shared'
-
-@NgModule({
-    // Provide the NggCoreRenderer as a custom renderer
-    providers: [
-      {
-        provide: RendererFactory2,
-        useClass: NggCoreRendererFactory,
-      },
-    ],
+    // Provides `NggCoreRenderer` as a custom renderer
+    providers: [provideCoreRenderer()],
     // CUSTOM_ELEMENTS_SCHEMA is still needed
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 ```
 
-Or, if you are only using standalone components, you can either create a root app module and provide the renderer there, or you can provide it in bootstrapping:
+If you need animations, use `provideCoreRendererWithAnimations()` instead, and make sure to import `BrowserAnimationsModule` too.
+
+**In your component:**
 
 ```ts
-// app.config.ts
-const appConfig: ApplicationConfig = {
-  providers: [...other providers..., {
-    provide: RendererFactory2,
-    useClass: NggCoreRendererFactory,
-  }]
-};
+import '@sebgroup/green-core/components/button/index.js'
 
-// main.ts
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+// Transitional styles, only if you need the 2016 design
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
 ```
 
-Now you can use Green Core components in your template without any special directive:
-
+**In your template:**
 ```html
-<gds-button>Click me!</gds-button>
+<gds-button (click)="handleEvent($event)">Click me!</gds-button>
 ```
 
 ### Using React

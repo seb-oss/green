@@ -1,5 +1,57 @@
 # Changelog
 
+## 5.5.0
+
+### Minor Changes
+
+- 9ac5286: **Routing:** Add `nggCoreRouterLink` directive for accessible routing with Green Core components
+
+### Patch Changes
+
+- Updated dependencies [f438e8f]
+  - @sebgroup/green-core@1.69.0
+
+## 5.4.2
+
+### Patch Changes
+
+- 213f2ad: Fix for dropdown layering to render list above other inputs.
+
+## 5.4.1
+
+### Patch Changes
+
+- 79a086f: fixed incomplete v-angular migration by removing a line which causes height issues
+- 3907ebb: **Alert Ribbon**: showing correct icon based on type
+  **Dropdown**: correct height on typeahead overlay, fixing spacing to validation
+- c564b23: Added margin-top to error-wrapper class in dropdown component. Removed height from input-wrapper class in input component to fix visual bug
+- 3077e1e: Added .nggv-field--error to input.component.scss to show a red line when there's an error on the input fields. Made slide-out scrollable when overflown. Added core map to index.ts file to expose some interfaces
+- 9111c10: Performance fix for dropdown-list and handling of key press events.
+- Updated dependencies [6cea9a6]
+  - @sebgroup/green-core@1.68.5
+
+## 5.4.0
+
+### Minor Changes
+
+- 54814fe: **NggCoreRenderer:** Add provider for supporting animations when using `NggCoreRenderer`. Fixes #1997
+
+### Patch Changes
+
+- 158fc60: **NggDropdown:** Fix text overflow style in the trigger. Fixes #1948
+- b8454ea: **Modal**: fixing close button sizing on mobile
+  **Tooltip**: fixing zindex problem when combined with modal
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 5.3.4
+
+### Patch Changes
+
+- 50a3fa2: Updated table grouping funcionality with clickable sub-items.
+- Updated dependencies [9d1476d]
+  - @sebgroup/green-core@1.68.1
+
 ## 5.3.3
 
 ### Patch Changes

@@ -29,13 +29,19 @@ export default {
   ],
 } as Meta
 
-const Template: StoryFn<NggvDialogComponent> = (args: any) => ({
-  props: args,
-})
+const Template: StoryFn<NggvDialogComponent> = (args: any) => {
+  return {
+    template: `<button (click)="isOpen = !isOpen">Open dialog</button><nggv-dialog [heading]="heading" [shown]="isOpen" [initiallyShown]="initiallyShown" [closeButtonAriaLabel]="closeButtonAriaLabel" [buttons]="buttons" [content]="content" (nggvCloseEvent)="isOpen = false"></nggv-dialog>`,
+    props: {
+      ...args,
+      isOpen: false,
+    },
+  }
+}
 
 export const Primary = Template.bind({})
 Primary.args = {
-  initiallyShown: true,
+  initiallyShown: false,
   closeButtonAriaLabel: 'Close dialog',
   buttons: {
     negative: 'button_cancel',

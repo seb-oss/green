@@ -1,6 +1,6 @@
 :host {
   position: absolute;
-  top: 0;
+  top: 1px;
   left: 0;
   width: calc(100% - 2.625em);
 
@@ -12,7 +12,7 @@
       display: flex;
 
       .input-group input.gds-field {
-        height: 100%;
+        height: calc(100% - 2px);
         width: 100%;
         min-height: unset;
         margin-left: 1px;

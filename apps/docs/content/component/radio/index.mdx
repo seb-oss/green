@@ -1,8 +1,9 @@
 ---
-title: Radio Button
+title: Radio button
 summary: A radio button allows users to select one option from a predefined set of mutually exclusive choices.
 date: 2024-04-10
 status: BETA
+tags: forms
 ---
 
 ## Usage
@@ -10,12 +11,13 @@ Radio buttons are commonly used in forms, surveys, and settings where users need
 The benefit of using radio buttons over select is that users may easily scan the available options and make a quick selection.
 
 ## Anatomy 
-The radio button (and other form controls) are divided in sections that are re-used between components. 
-- **Header**: Label, label support, contextual help, extended support.
-- **Body**: the actual radiobuttons.
-- **Footer**: error message.
+The radio button (and other form controls) are divided in sections that are re-used between components.
 
-<Figma id="anatomy" caption="Anatomy of a radio button" /> 
+- **Header**: Label, label support, contextual help, extended support.
+- **Body**: The radio button.
+- **Footer**: Error message.
+
+<Figma id="anatomy" caption="Anatomy of a radio button." /> 
 
 1. Label
 2. Label support text
@@ -25,13 +27,13 @@ The radio button (and other form controls) are divided in sections that are re-u
 6. Label support text
 
 ## Variants
-- **Default**: used in most cases.
+- **Default**
 - **Contained**: used only in combination with other contained form components.
 - <Badge variant="notice">Coming soon</Badge> **Contained extended**: The contained version but including Label support text.
 
 <Grid columns="2">
-    <Figma id="variant-1" caption="Default radio button" />
-    <Figma id="variant-2" caption="Contained radio button" />
+    <Figma id="variant-1" caption="Default radio button." />
+    <Figma id="variant-2" caption="Contained radio button." />
 </Grid>
 
 ## Features 
@@ -39,39 +41,36 @@ The radio button (and other form controls) are divided in sections that are re-u
 <Grid columns="2">
 <div>
 ### Label
-All radio buttons need a label. The group needs a label too.
+All individual radio buttons must have a label to ensure clarity and accessibility. When radio buttons are grouped, the group must have a header label. Labels help users understand the purpose of the radio buttons, including those using assistive technologies.
 </div>
-<Figma id="label" caption="Radio button labels" />
+<Figma id="label" caption="Radio button labels." />
 </Grid>
 
 <Grid columns="2">
 <div>
 ### Label support 
-(Not available for contained variant) <br />
-May be used for both the group label and for each individual radio button in the group.
+This can be used for both the header and individual radio buttons. Use this to explain how to fill in the field, for example how to count or what to include. Contained radio buttons don’t have support text for the individual radio buttons.
 </div>
-<Figma id="label-support-text" caption="Radio buttons with support texts" />
+<Figma id="label-support-text" caption="Radio buttons with support texts." />
 </Grid>
 
 ### Contextual help
-When  label and support text is not enough to explain a field we may use the info-icon. 
-
-When clicked the extended support is displayed between the label support and the field.
-
-If there is limited space use a tooltip. 
-If there is large amounts of text use a modal.
+If the label and support text are not enough to explain a field, we can use the info icon.
+Clicking the icon shows additional support text between the label support and the field.
+- Use a tooltip if space is limited.
+- Use a modal for large amounts of text.
 
 <Grid columns="2">
 <Figma id="contextual-1" caption="Info icon button to reach help." />
 <Figma id="contextual-2" caption="Extended support visible." />
 </Grid>
 
-### Error handling
+### Error message
 If an error occurs we mark the entire group of options with error. The error is described with an error message.
 
 <Grid columns="2">
 <Figma id="error-default" caption="Default radio buttons with error." />
-<Figma id="error-contained" caption="Extended support visible" />
+<Figma id="error-contained" caption="Extended support visible." />
 </Grid>
 
 
@@ -81,8 +80,8 @@ If an error occurs we mark the entire group of options with error. The error is 
 
 ## Alignment
 We can align the radio buttons both horizontal and vertical.
-- **Horizontal**: works best with very few options, this also saves space.
-- **Vertical**: works best if there's more than two options, easier to scan and select.
+- **Vertical**: This is the default alignment. It's easier to read and scan the available options.
+- **Horizontal**: Only used for a small set of options if the page shouldn't be to long, but try to avoid.
 <Grid columns="2">
 <Figma id="alignment-1" caption="Default radio buttons with vertical alignment." />
 <Figma id="alignment-2" caption="Default radio buttons with horizontal alignment." />
@@ -94,16 +93,13 @@ We can align the radio buttons both horizontal and vertical.
 ## Do's and Don'ts
 <Grid columns="2">
 <div>
-### Do:
-- Use descriptive labels to clearly indicate the purpose of each radio button.
-- Keep the text as short as possible.
-- At least two options.
-- Sort the options in a logical order.
+### Do
+- Have at least two options.
 </div>
 <div>
-### Don't:
-- Use radio buttons for non-mutually exclusive options; consider checkboxes instead.
-- Overload users with too many radio buttons in a question. If you have to present a lot of options, use a select.
-- Mix default and contained versions.
+### Don't
+- Don’t use radio buttons for non-mutually exclusive options; consider checkboxes instead.
+- Don’t overwhelm users with too many radio buttons on a single page or form. If you need to show many options, use a single select dropdown instead.
+- Don’t mix default and contained versions.
 </div>
 </Grid>
