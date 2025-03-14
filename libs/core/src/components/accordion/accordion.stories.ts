@@ -116,22 +116,16 @@ export const Name: Story = {
         <gds-text tag="small">Grouped</gds-text>
         <gds-flex flex-direction="column">
           <gds-accordion name="group-one" summary="Example">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
           <gds-accordion name="group-one" summary="Example">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
           <gds-accordion name="group-one" summary="Example">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
         </gds-flex>
       </gds-flex>
@@ -139,22 +133,16 @@ export const Name: Story = {
         <gds-text tag="small">Ungrouped</gds-text>
         <gds-flex flex-direction="column">
           <gds-accordion summary="Example">
-            <gds-rich-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-rich-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
           <gds-accordion summary="Example">
-            <gds-rich-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-rich-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
           <gds-accordion summary="Example">
-            <gds-rich-text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </gds-rich-text>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
         </gds-flex>
       </gds-flex>
@@ -235,3 +223,5 @@ Just as in the native select if you set the open attribute to true the accordion
     </gds-accordion>
   `,
 }
+
+// Icon

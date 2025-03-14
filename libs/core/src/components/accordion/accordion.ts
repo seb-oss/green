@@ -1,4 +1,5 @@
 import { property, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
@@ -8,6 +9,9 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { styles } from './accordion.styles'
+
+import '../button/button'
+import './accordion-icon/accordion-icon'
 
 /**
  * @element gds-accordion
@@ -35,6 +39,9 @@ export class GdsAccordion extends GdsElement {
   @property({ type: Boolean, reflect: true })
   open = false
 
+  // Watch the open property and update the open attribute
+  // @watch('open')
+
   /**
    * Controls the font-size of texts and height of the field.
    */
@@ -42,39 +49,40 @@ export class GdsAccordion extends GdsElement {
   size: 'large' | 'small' = 'large'
 
   render() {
-    return html`<details
-      ?open=${this.open}
-      @toggle=${(e: Event) =>
-        (this.open = (e.target as HTMLDetailsElement).open)}
-      id="details"
-    >
-      <summary>
-        <div class="label">${this.summary ? this.summary : 'Summary'}</div>
-        <svg viewBox="0 0 20 20">
-          <line x1="4" y1="10" x2="16" y2="10" />
-          <line x1="10" y1="4" x2="10" y2="16">
-            <animate
-              attributeName="y1"
-              dur="240ms"
-              from="${this.open ? '4' : '10'}"
-              to="${this.open ? '10' : '4'}"
-              begin="details.toggle"
-              fill="freeze"
-            />
-            <animate
-              attributeName="y2"
-              dur="240ms"
-              from="${this.open ? '16' : '10'}"
-              to="${this.open ? '10' : '16'}"
-              begin="details.toggle"
-              fill="freeze"
-            />
-          </line>
-        </svg>
-      </summary>
-      <div class="content">
-        <slot></slot>
+    const accordionClasses = {
+      details: true,
+      open: this.open,
+      small: this.size === 'small',
+    }
+
+    return html`<div class=${classMap(accordionClasses)}>
+      ${this.#renderFieldContents()}
+    </div> `
+  }
+
+  #renderFieldContents() {
+    const elements = [this.#renderSummary(), this.#renderContent()]
+    return elements.map((element) => html`${element}`)
+  }
+
+  #renderContent() {
+    return html`<div class="content"><slot></slot></div>`
+  }
+
+  #renderSummary() {
+    return html`<div class="summary">
+      <div class="summary-label">
+        ${this.summary ? this.summary : 'Summary'}
       </div>
-    </details> `
+      <div class="summary-icon">${this.#renderSummaryIcon()}</div>
+    </div>`
+  }
+
+  #renderSummaryIcon() {
+    return html`<gds-button rank="tertiary" size="small">
+      <gds-icon-accordion></gds-icon-accordion>
+      <slot name="summary-icon-open" slot="icon"></slot>
+      <slot name="summary-icon-closed" slot="icon"></slot>
+    </gds-button>`
   }
 }
