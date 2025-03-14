@@ -17,21 +17,27 @@ const Radio = ({ hero }: { hero?: boolean }) => (
           </span>
           <GdsRadio
             value="1"
-            label="Label"
-            supportingText="Supporting text"
+            label="Label one"
+            supportingText="Supporting text one"
           ></GdsRadio>
           <GdsRadio
             value="2"
-            label="Label"
-            supportingText="Supporting text"
+            label="Label two"
+            supportingText="Supporting text two"
+          ></GdsRadio>
+          <GdsRadio
+            value="3"
+            label="Label three"
+            supportingText="Supporting text three"
           ></GdsRadio>
         </GdsRadioGroup>
       </GdsFlex>
     ) : (
       <GdsFlex flex="1" width="240px">
         <GdsRadioGroup value="1">
-          <GdsRadio value="1" label="Radio Button"></GdsRadio>
-          <GdsRadio value="2" label="Radio Button"></GdsRadio>
+          <GdsRadio value="1" label="Radio button 1"></GdsRadio>
+          <GdsRadio value="2" label="Radio button 2"></GdsRadio>
+          <GdsRadio value="3" label="Radio button 3"></GdsRadio>
         </GdsRadioGroup>
       </GdsFlex>
     )}
