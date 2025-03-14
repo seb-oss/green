@@ -42,6 +42,12 @@ export class GdsAccordion extends GdsElement {
   // Watch the open property and update the open attribute
   // @watch('open')
 
+  @state()
+  private _summarySlotIconOpenOccupied = false
+
+  @state()
+  private _summarySlotIconClosedOccupied = false
+
   /**
    * Controls the font-size of texts and height of the field.
    */
@@ -60,6 +66,26 @@ export class GdsAccordion extends GdsElement {
     </div> `
   }
 
+  #handleSlotChange = (
+    slotName: 'summary-icon-open' | 'summary-icon-closed',
+    event: Event,
+  ) => {
+    const slot = event.target as HTMLSlotElement
+    const assignedNodes = slot.assignedNodes({ flatten: true })
+    const slotOccupied =
+      assignedNodes.length > 0 &&
+      assignedNodes.some(
+        (node) =>
+          node.nodeType === Node.ELEMENT_NODE ||
+          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
+      )
+    if (slotName === 'summary-icon-open') {
+      this._summarySlotIconOpenOccupied = slotOccupied
+    } else if (slotName === 'summary-icon-closed') {
+      this._summarySlotIconClosedOccupied = slotOccupied
+    }
+  }
+
   #renderFieldContents() {
     const elements = [this.#renderSummary(), this.#renderContent()]
     return elements.map((element) => html`${element}`)
@@ -74,15 +100,34 @@ export class GdsAccordion extends GdsElement {
       <div class="summary-label">
         ${this.summary ? this.summary : 'Summary'}
       </div>
-      <div class="summary-icon">${this.#renderSummaryIcon()}</div>
+      <div class="summary-icon">
+        <gds-button rank="tertiary" size="small">
+          ${this.#renderSummaryIcon()}
+        </gds-button>
+      </div>
     </div>`
   }
 
   #renderSummaryIcon() {
-    return html`<gds-button rank="tertiary" size="small">
-      <gds-icon-accordion></gds-icon-accordion>
-      <slot name="summary-icon-open" slot="icon"></slot>
-      <slot name="summary-icon-closed" slot="icon"></slot>
-    </gds-button>`
+    if (
+      !this._summarySlotIconOpenOccupied &&
+      !this._summarySlotIconClosedOccupied
+    ) {
+      return html`<gds-icon-accordion></gds-icon-accordion>`
+    }
+
+    return html`
+      ${this.open && this._summarySlotIconClosedOccupied
+        ? html`<slot
+            name="summary-icon-closed"
+            @slotchange=${(e: Event) =>
+              this.#handleSlotChange('summary-icon-open', e)}
+          ></slot>`
+        : html`<slot
+            name="summary-icon-open"
+            @slotchange=${(e: Event) =>
+              this.#handleSlotChange('summary-icon-open', e)}
+          ></slot>`}
+    `
   }
 }
