@@ -63,7 +63,7 @@ export const RadioGroup = ({
     }
   }
 
-  const radioBtnRef: React.RefObject<HTMLInputElement> = useRef(null)
+  const radioBtnRef = useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
@@ -107,21 +107,18 @@ export const RadioGroup = ({
   return (
     <FormItem {...formItemProps} inputId={uniqueId}>
       <div className={radioGroupWrapperClassNames}>
-        {React.Children.map(
-          children as React.ReactElement,
-          (radioButton: React.ReactElement<RadioButtonProps>) => {
-            return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
-              ? React.cloneElement(radioButton, {
-                  'aria-describedby': describedBy,
-                  validator: validator,
-                  onChange: handleOnChange,
-                  checked: selected === radioButton.props.value,
-                  name,
-                  ref: radioBtnRef,
-                })
-              : radioButton
-          },
-        )}
+        {React.Children.map(children as React.ReactNode, (radioButton) => {
+          return React.isValidElement<RadioButtonProps>(radioButton)
+            ? React.cloneElement(radioButton, {
+                'aria-describedby': describedBy,
+                validator: validator,
+                onChange: handleOnChange,
+                checked: selected === radioButton.props.value,
+                name,
+                ref: radioBtnRef,
+              })
+            : radioButton
+        })}
       </div>
     </FormItem>
   )
