@@ -5,10 +5,10 @@ import { classMap } from 'lit/directives/class-map.js'
 import {
   autoUpdate,
   computePosition,
-  flip,
   Middleware,
   offset,
   Placement,
+  shift,
 } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
@@ -119,7 +119,7 @@ export class GdsPopover extends GdsElement {
    * By default, the popover maxHeight will be set to a hard coded pixel value (check source code).
    */
   @property({ attribute: false })
-  calcMaxHeight = (_referenceEl: HTMLElement) => `500px`
+  calcMaxHeight = (_referenceEl: HTMLElement) => `${window.innerHeight - 16}px`
 
   /**
    * Whether the popover is nonmodal. When true, the popover will not trap focus and other elements
@@ -156,7 +156,13 @@ export class GdsPopover extends GdsElement {
    * Defaults to `[offset(8), flip()]`
    */
   @property({ attribute: false })
-  floatingUIMiddleware: Middleware[] = [offset(8), flip()]
+  floatingUIMiddleware: Middleware[] = [
+    offset(8),
+    shift({
+      crossAxis: true,
+      padding: 8,
+    }),
+  ]
 
   @state()
   private _trigger: HTMLElement | undefined = undefined

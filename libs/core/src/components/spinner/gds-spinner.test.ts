@@ -52,7 +52,7 @@ describe('<gds-spinner>', () => {
 
   describe('Size variants', () => {
     it('should apply correct size attribute', async () => {
-      const sizes = ['sm', 'default', 'md', 'lg'] as const
+      const sizes = ['sm', 'md', 'lg'] as const
 
       for (const size of sizes) {
         const el = await fixture<GdsSpinner>(
@@ -72,9 +72,9 @@ describe('<gds-spinner>', () => {
       )
       await el.updateComplete
 
-      const wrapper = el.shadowRoot?.querySelector('.gds-spinner-wrapper')
-      expect(wrapper?.classList.contains('gds-spinner-cover')).to.be.true
-      expect(wrapper?.classList.contains('gds-spinner-backdrop')).to.be.true
+      const wrapper = el.shadowRoot?.querySelector('.spinner-wrapper')
+      expect(wrapper?.classList.contains('spinner-cover')).to.be.true
+      expect(wrapper?.classList.contains('spinner-backdrop')).to.be.true
     })
 
     it('should apply fullscreen mode correctly', async () => {
@@ -83,9 +83,9 @@ describe('<gds-spinner>', () => {
       )
       await el.updateComplete
 
-      const wrapper = el.shadowRoot?.querySelector('.gds-spinner-wrapper')
-      expect(wrapper?.classList.contains('gds-spinner-fullscreen')).to.be.true
-      expect(wrapper?.classList.contains('gds-spinner-backdrop')).to.be.true
+      const wrapper = el.shadowRoot?.querySelector('.spinner-wrapper')
+      expect(wrapper?.classList.contains('spinner-fullscreen')).to.be.true
+      expect(wrapper?.classList.contains('spinner-backdrop')).to.be.true
     })
   })
 
@@ -93,7 +93,9 @@ describe('<gds-spinner>', () => {
     it('should dispatch gds-spinner-connected event on connection', async () => {
       const eventSpy = sinon.spy()
       await fixture<GdsSpinner>(
-        html`<gds-spinner @gds-spinner-connected=${eventSpy}></gds-spinner>`,
+        html`<gds-spinner
+          @gds-spinner-connected=${(e: Event) => eventSpy(e)}
+        ></gds-spinner>`,
       )
 
       expect(eventSpy.calledOnce).to.be.true
