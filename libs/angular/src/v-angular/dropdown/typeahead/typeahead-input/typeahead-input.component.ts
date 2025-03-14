@@ -51,7 +51,7 @@ export class NggvTypeaheadInputComponent
   inputMoved = false
 
   constructor(
-    private element: ElementRef,
+    public element: ElementRef,
     private renderer2: Renderer2,
     @Self() @Optional() public ngControl: NgControl,
     @Optional()
@@ -59,7 +59,7 @@ export class NggvTypeaheadInputComponent
     protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
   ) {
-    super(ngControl, translocoScope, cdr)
+    super(ngControl, translocoScope, cdr, element)
     super.ngOnInit()
   }
 
