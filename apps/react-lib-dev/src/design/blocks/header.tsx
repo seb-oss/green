@@ -20,7 +20,7 @@ export default function Header() {
       level="1"
       position="sticky"
       inset="0"
-      z-index="1100"
+      z-index="2"
       background="primary"
       className="main-header"
     >
