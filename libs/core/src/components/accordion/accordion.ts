@@ -106,17 +106,19 @@ export class GdsAccordion extends GdsElement {
   #syncGroupState = (): void => {
     if (!this.open || !this.name) return
 
-    document.querySelectorAll('gds-accordion').forEach((accordion) => {
-      if (
-        accordion !== this &&
-        (accordion as GdsAccordion).name === this.name
-      ) {
-        const other = accordion as GdsAccordion
-        other.open = false
-        other.#updateContentHeight()
-        other.#dispatchStateEvent()
-      }
-    })
+    document
+      .querySelectorAll('[gds-element="gds-accordion"]')
+      .forEach((accordion) => {
+        if (
+          accordion !== this &&
+          (accordion as GdsAccordion).name === this.name
+        ) {
+          const other = accordion as GdsAccordion
+          other.open = false
+          other.#updateContentHeight()
+          other.#dispatchStateEvent()
+        }
+      })
   }
 
   #dispatchStateEvent = (): void => {
