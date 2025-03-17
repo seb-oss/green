@@ -67,40 +67,25 @@ export class GdsAccordion extends GdsElement {
   @property({ type: Boolean, attribute: 'custom-icon' })
   customIcon = false
 
-  /**
-   * Reference to content element for animation
-   */
   @query('.content')
   private _content?: HTMLElement
 
-  /**
-   * References to icon slots
-   */
   @query('slot[name="summary-icon-open"]')
   private _openIconSlot?: HTMLSlotElement
 
   @query('slot[name="summary-icon-closed"]')
   private _closedIconSlot?: HTMLSlotElement
 
-  /**
-   * Component lifecycle: After first render
-   */
   protected firstUpdated(): void {
-    this._initializeContentHeight()
+    this.#initializeContentHeight()
   }
 
-  /**
-   * Initializes content height for animation
-   */
-  private _initializeContentHeight(): void {
+  #initializeContentHeight = (): void => {
     if (!this._content) return
-    this._updateContentHeight()
+    this.#updateContentHeight()
   }
 
-  /**
-   * Updates content height for animation
-   */
-  private _updateContentHeight(): void {
+  #updateContentHeight = (): void => {
     if (!this._content) return
 
     requestAnimationFrame(() => {
@@ -111,20 +96,14 @@ export class GdsAccordion extends GdsElement {
     })
   }
 
-  /**
-   * Handles accordion toggle
-   */
-  private _handleToggle = (): void => {
+  #handleToggle = (): void => {
     this.open = !this.open
-    this._updateContentHeight()
-    this._syncGroupState()
-    this._dispatchStateEvent()
+    this.#updateContentHeight()
+    this.#syncGroupState()
+    this.#dispatchStateEvent()
   }
 
-  /**
-   * Synchronizes state with other accordions in the same group
-   */
-  private _syncGroupState(): void {
+  #syncGroupState = (): void => {
     if (!this.open || !this.name) return
 
     document.querySelectorAll('gds-accordion').forEach((accordion) => {
@@ -134,16 +113,13 @@ export class GdsAccordion extends GdsElement {
       ) {
         const other = accordion as GdsAccordion
         other.open = false
-        other._updateContentHeight()
-        other._dispatchStateEvent()
+        other.#updateContentHeight()
+        other.#dispatchStateEvent()
       }
     })
   }
 
-  /**
-   * Dispatches UI state change event
-   */
-  private _dispatchStateEvent(): void {
+  #dispatchStateEvent = (): void => {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         bubbles: true,
@@ -153,10 +129,7 @@ export class GdsAccordion extends GdsElement {
     )
   }
 
-  /**
-   * Renders the component
-   */
-  protected render() {
+  render() {
     return html`
       <div
         class=${classMap({
@@ -167,40 +140,34 @@ export class GdsAccordion extends GdsElement {
         })}
         part="base"
       >
-        ${this._renderHeader()} ${this._renderContent()}
+        ${this.#renderHeader()} ${this.#renderContent()}
       </div>
     `
   }
 
-  /**
-   * Renders the accordion header
-   */
-  private _renderHeader() {
+  #renderHeader = () => {
     return html`
       <div class="summary" part="summary">
         <div
           class="summary-label"
-          @click=${this._handleToggle}
+          @click=${this.#handleToggle}
           role="button"
           aria-expanded="${this.open}"
         >
           ${this.summary || 'Summary'}
         </div>
-        ${this._renderIconButton()}
+        ${this.#renderIconButton()}
       </div>
     `
   }
 
-  /**
-   * Renders the icon button
-   */
-  private _renderIconButton() {
+  #renderIconButton = () => {
     return html`
       <div class="summary-icon">
         <gds-button
           rank="tertiary"
           size=${this.size === 'small' ? 'xs' : 'medium'}
-          @click=${this._handleToggle}
+          @click=${this.#handleToggle}
           aria-label="${this.open ? 'Collapse' : 'Expand'}"
         >
           <gds-icon-accordion
@@ -216,10 +183,7 @@ export class GdsAccordion extends GdsElement {
     `
   }
 
-  /**
-   * Renders the accordion content
-   */
-  private _renderContent() {
+  #renderContent = () => {
     return html`
       <div class="content" part="content" aria-hidden="${!this.open}">
         <slot></slot>
