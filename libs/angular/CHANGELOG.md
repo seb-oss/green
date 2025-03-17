@@ -1,5 +1,32 @@
 # Changelog
 
+## 5.5.1
+
+### Patch Changes
+
+- 43b08d4: dropdownButton in typeahead might be undefined
+- f0d4efc: fixing typeahead input height when opening dropdown
+- Updated dependencies [7fe6b60]
+- Updated dependencies [7fe6b60]
+  - @sebgroup/green-core@1.69.1
+
+## 5.5.0
+
+### Minor Changes
+
+- 9ac5286: **Routing:** Add `nggCoreRouterLink` directive for accessible routing with Green Core components
+
+### Patch Changes
+
+- Updated dependencies [f438e8f]
+  - @sebgroup/green-core@1.69.0
+
+## 5.4.2
+
+### Patch Changes
+
+- 213f2ad: Fix for dropdown layering to render list above other inputs.
+
 ## 5.4.1
 
 ### Patch Changes

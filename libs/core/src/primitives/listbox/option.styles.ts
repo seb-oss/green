@@ -55,7 +55,7 @@ const style = css`
       }
     }
 
-    :host([aria-hidden='true']) {
+    :host([inert]) {
       display: none;
     }
 

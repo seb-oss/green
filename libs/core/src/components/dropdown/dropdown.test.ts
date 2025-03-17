@@ -106,7 +106,7 @@ describe('<gds-dropdown>', () => {
     await expect(el.displayValue).to.equal('Option 2')
   })
 
-  it('should expose isPlaceholder through `isPlaceholder` field', async () => {
+  it('should expose isPlaceholder through `placeholder` field', async () => {
     const el = await fixture<GdsDropdown>(html`
       <gds-dropdown>
         <gds-option value="v1">Option 1</gds-option>
@@ -126,6 +126,24 @@ describe('<gds-dropdown>', () => {
       </gds-dropdown>
     `)
     await expect(el.placeholder).to.be.undefined
+  })
+
+  it('should not show the placeholder in the list of options when opened', async () => {
+    const el = await fixture<GdsDropdown>(html`
+      <gds-dropdown>
+        <gds-option value="v1">Option 1</gds-option>
+        <gds-option value="v2" isPlaceholder>Option 2</gds-option>
+        <gds-option value="v3">Option 3</gds-option>
+      </gds-dropdown>
+    `)
+    el.open = true
+    await el.updateComplete
+
+    await expect(el.options.length).to.equal(2)
+    await expect(el.options[0].value).to.equal('v1')
+    await expect(el.options[1].value).to.equal('v3')
+    expect(el.placeholder).to.have.attribute('inert')
+    expect(el.placeholder).to.have.attribute('hidden')
   })
 
   it('should support custom trigger content', async () => {
@@ -621,7 +639,7 @@ describe('<gds-dropdown searchable>', () => {
     await el.updateComplete
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -650,7 +668,7 @@ describe('<gds-dropdown searchable>', () => {
     await el.updateComplete
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -855,7 +873,7 @@ describe('<gds-dropdown combobox>', () => {
     comboInputEl!.dispatchEvent(new Event('input'))
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -887,7 +905,7 @@ describe('<gds-dropdown combobox>', () => {
     await aTimeout(0)
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
