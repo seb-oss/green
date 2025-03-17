@@ -44,6 +44,7 @@ export const styles = css`
     .details.small .summary-label {
       font-size: var(--gds-text-size-heading-2xs);
       line-height: var(--gds-text-line-height-heading-2xs);
+      padding-block: var(--gds-space-s);
     }
 
     .details:focus-visible {

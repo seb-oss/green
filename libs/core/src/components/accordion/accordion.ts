@@ -201,7 +201,7 @@ export class GdsAccordion extends GdsElement {
       <div class="summary-icon">
         <gds-button
           rank="tertiary"
-          size=${this.size === 'small' ? 'small' : 'medium'}
+          size=${this.size === 'small' ? 'xs' : 'medium'}
           @click=${this._handleToggle}
           aria-label="${this.open ? 'Collapse' : 'Expand'}"
         >

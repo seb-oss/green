@@ -148,8 +148,16 @@ export const Grouped: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          'Accordions with the same name attribute will close each other when one is opened.',
+        story: `
+Accordions with the same name attribute will close each other when one is opened.
+
+In this example, all accordions are grouped together with the name attribute set to "group-1".
+
+\`\`\`html
+<gds-accordion name="group-1"> ... </gds-accordion>
+\`\`\`  
+
+`,
       },
     },
   },
@@ -158,11 +166,9 @@ export const Grouped: Story = {
       <gds-accordion name="group-1" summary="First Accordion">
         Content of first accordion
       </gds-accordion>
-
       <gds-accordion name="group-1" summary="Second Accordion">
         Content of second accordion
       </gds-accordion>
-
       <gds-accordion name="group-1" summary="Third Accordion">
         Content of third accordion
       </gds-accordion>
@@ -179,30 +185,41 @@ export const Sizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The accordion component supports two sizes: large and small.',
+        story: `
+The accordion component supports two sizes: large(default) and small.        
+        
+\`\`\`html
+<gds-accordion size="small"> ... </gds-accordion>
+\`\`\`        
+        
+        `,
       },
     },
   },
   render: () => html`
     <gds-flex gap="xl">
-      <gds-flex flex-direction="column" gap="m" flex="1">
-        <gds-text tag="small">Large Size (Default)</gds-text>
+      <gds-flex flex-direction="column" flex="1">
+        <gds-text tag="small" color="secondary">Large Size (Default)</gds-text>
         <gds-accordion summary="Summary example">
-          Content in default size
+          Content goes here
         </gds-accordion>
-
         <gds-accordion summary="Summary example">
-          Content in small size
+          Content goes here
+        </gds-accordion>
+        <gds-accordion summary="Summary example">
+          Content goes here
         </gds-accordion>
       </gds-flex>
-      <gds-flex flex-direction="column" gap="m" flex="1">
-        <gds-text tag="small">Small</gds-text>
+      <gds-flex flex-direction="column" flex="1">
+        <gds-text tag="small" color="secondary">Small</gds-text>
         <gds-accordion size="small" summary="Summary example">
-          Content in default size
+          Content goes here
         </gds-accordion>
-
         <gds-accordion size="small" summary="Summary example">
-          Content in small size
+          Content goes here
+        </gds-accordion>
+        <gds-accordion size="small" summary="Summary example">
+          Content goes here
         </gds-accordion>
       </gds-flex>
     </gds-flex>
@@ -246,7 +263,14 @@ export const InitiallyOpen: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Accordions can be initially opened using the open attribute.',
+        story: `
+Accordions can be initially opened using the open attribute.
+
+\`\`\`html
+ <gds-accordion open> ... </gds-accordion>
+\`\`\`  
+        
+        `,
       },
     },
   },
