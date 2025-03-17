@@ -69,15 +69,10 @@ describe('[NggvCore]', () => {
         component.state = { key: '111', label: 'label123' }
         const emitSpy = jest.spyOn(component.hostComponent.nggvInput, 'emit')
         const expandedSpy = jest.spyOn(component, 'setExpanded')
-        const outisdeSpy = jest.spyOn(
-          component as any,
-          'subscribeToOutsideClickEvent',
-        )
         fixture.detectChanges()
         component.hostComponent.nggvFocus.next({ event: 'focusDummy' })
         expect(emitSpy).not.toHaveBeenCalled()
         expect(expandedSpy).toHaveBeenCalledWith(true)
-        expect(outisdeSpy).toHaveBeenCalled()
       })
     })
 

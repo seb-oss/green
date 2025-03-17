@@ -241,7 +241,6 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
     let option
 
     switch (event.key) {
-      case 'Tab':
       case 'Escape':
         this.setExpanded(false)
         this.closed.emit()

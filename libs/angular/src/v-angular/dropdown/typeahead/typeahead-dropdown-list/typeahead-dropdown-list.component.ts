@@ -99,6 +99,13 @@ export class NggvTypeaheadDropdownListComponent
         this.setExpanded(true)
         this.subscribeToOutsideClickEvent()
       })
+
+    this.hostComponent.nggvBlur
+      .asObservable()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(() => {
+        this.setExpanded(false)
+      })
   }
 
   /**
