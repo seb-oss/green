@@ -117,7 +117,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
   // remove non-input args
   return {
     template: /*html*/ `
-    <nggv-dateinput 
+    <nggv-dateinput
       [label]="label"
       [locale]="locale"
       [dateLocale]="dateLocale"
@@ -151,7 +151,7 @@ const TemplateWithSelected: StoryFn<DateStoryArgs> = (args) => {
   // remove non-input args
   return {
     template: /*html*/ `
-    <nggv-dateinput 
+    <nggv-dateinput
       [label]="label"
       [dateLocale]="dateLocale"
       [locale]="locale"
@@ -203,7 +203,7 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
           [disableDates]="disableDates"
           [disableWeekDays]="disableWeekDays"
           [required]="required"
-          [invalid]="(formControl.statusChanges | async) === 'INVALID'"
+          [invalid]="invalid || (formControl.statusChanges | async) === 'INVALID'"
           [error]="error"
           [errorList]="errorList"
           [withErrorIcon]="withErrorIcon"
