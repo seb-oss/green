@@ -1,1 +1,0 @@
-import{g as v}from"./custom-element-scoping-BEGY3AqQ.js";import{G as a}from"./div-Cdgasd2E.js";var l=Object.defineProperty,m=Object.getOwnPropertyDescriptor,_=(f,r,t,s)=>{for(var e=s>1?void 0:s?m(r,t):r,o=f.length-1,n;o>=0;o--)(n=f[o])&&(e=(s?n(r,t,e):n(e))||e);return s&&e&&l(r,t,e),e};let p=class extends a{};p=_([v("gds-container")],p);
