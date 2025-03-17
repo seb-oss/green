@@ -1,5 +1,11 @@
 // components/sidebar.tsx
-import { GdsCard, GdsDiv, GdsFlex } from '@sebgroup/green-react/src/core'
+import {
+  GdsCard,
+  GdsDiv,
+  GdsDropdown,
+  GdsFlex,
+  GdsOption,
+} from '@sebgroup/green-react/src/core'
 import { routes } from '../../config/routes'
 
 interface SidebarProps {
@@ -26,73 +32,78 @@ export default function Sidebar({
   }
 
   return (
-    <GdsCard
-      height="calc(100vh - 72px)"
-      align-items="flex-start"
-      flex-direction="column"
-      margin="0 s; m{s 0 0 s}"
-      z-index="2"
-      padding="none"
-      position="fixed; m{sticky}"
-      inset="70px 0 0 0"
-      max-height="calc(100vh - 90px)"
-      overflow="hidden"
-      min-width="270px"
-      className="sidebar-transition"
-      variant="primary"
-      border-radius="xs"
-    >
-      <GdsFlex flex-direction="column" max-height="100%">
-        <GdsDiv
-          padding="xs"
-          min-width="250px"
-          border="0 0 4xs 0"
-          border-color="primary"
-        >
-          <GdsFlex align-items="flex-start" flex-direction="column" gap="4xs">
-            <GdsFlex flex-direction="column" min-width="100%">
-              {routes.map((route) => (
-                <GdsFlex
-                  key={route.id}
-                  flex-direction="column"
-                  min-width="100%"
-                >
-                  <div
-                    onClick={() => handleRouteClick(route.id)}
-                    className={`cursor-pointer ${
-                      activeRoute === route.id ? 'active' : ''
-                    }`}
-                    style={{ cursor: 'pointer' }}
+    <GdsFlex flex-direction="column" gap="s" margin="0 s; m{s 0 0 s}">
+      <GdsCard
+        height="calc(100vh - 72px)"
+        align-items="flex-start"
+        flex-direction="column"
+        z-index="2"
+        padding="none"
+        position="fixed; m{sticky}"
+        inset="70px 0 0 0"
+        max-height="calc(100vh - 90px)"
+        overflow="hidden"
+        min-width="270px"
+        className="sidebar-transition"
+        variant="primary"
+        border-radius="xs"
+      >
+        <GdsFlex flex-direction="column" max-height="100%">
+          <GdsDiv
+            padding="xs"
+            min-width="250px"
+            border="0 0 4xs 0"
+            border-color="primary"
+          >
+            <GdsFlex align-items="flex-start" flex-direction="column" gap="4xs">
+              <GdsFlex flex-direction="column" min-width="100%">
+                {routes.map((route) => (
+                  <GdsFlex
+                    key={route.id}
+                    flex-direction="column"
+                    min-width="100%"
                   >
-                    <GdsFlex align-content="center" gap="s" padding="xs s">
-                      {route.icon}
-                      {route.title}
-                    </GdsFlex>
-                  </div>
-                  {route.subRoutes && activeRoute === route.id && (
-                    <GdsFlex flex-direction="column" padding="0 0 0 xl">
-                      {route.subRoutes.map((subRoute) => (
-                        <div
-                          key={subRoute.id}
-                          onClick={() => onSubRouteChange(subRoute.id)}
-                          className={`cursor-pointer ${
-                            activeSubRoute === subRoute.id ? 'active' : ''
-                          }`}
-                          style={{ cursor: 'pointer' }}
-                        >
-                          <GdsFlex align-content="center" padding="xs s">
-                            {subRoute.title}
-                          </GdsFlex>
-                        </div>
-                      ))}
-                    </GdsFlex>
-                  )}
-                </GdsFlex>
-              ))}
+                    <div
+                      onClick={() => handleRouteClick(route.id)}
+                      className={`cursor-pointer ${
+                        activeRoute === route.id ? 'active' : ''
+                      }`}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <GdsFlex align-content="center" gap="s" padding="xs s">
+                        {route.icon}
+                        {route.title}
+                      </GdsFlex>
+                    </div>
+                    {route.subRoutes && activeRoute === route.id && (
+                      <GdsFlex flex-direction="column" padding="0 0 0 xl">
+                        {route.subRoutes.map((subRoute) => (
+                          <div
+                            key={subRoute.id}
+                            onClick={() => onSubRouteChange(subRoute.id)}
+                            className={`cursor-pointer ${
+                              activeSubRoute === subRoute.id ? 'active' : ''
+                            }`}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            <GdsFlex align-content="center" padding="xs s">
+                              {subRoute.title}
+                            </GdsFlex>
+                          </div>
+                        ))}
+                      </GdsFlex>
+                    )}
+                  </GdsFlex>
+                ))}
+              </GdsFlex>
             </GdsFlex>
-          </GdsFlex>
-        </GdsDiv>
-      </GdsFlex>
-    </GdsCard>
+          </GdsDiv>
+        </GdsFlex>
+      </GdsCard>
+      <GdsDropdown label="Design version">
+        <GdsOption value="1">2016</GdsOption>
+        <GdsOption value="2">2023</GdsOption>
+      </GdsDropdown>
+    </GdsFlex>
   )
 }

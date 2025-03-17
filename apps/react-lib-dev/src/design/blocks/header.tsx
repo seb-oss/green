@@ -21,8 +21,8 @@ export default function Header() {
       position="sticky"
       inset="0"
       z-index="1100"
-      color="primary"
       background="primary"
+      className="main-header"
     >
       <GdsFlex
         justify-content="space-between"
@@ -48,7 +48,12 @@ export default function Header() {
           inset="auto 0"
           max-width="max-content"
         >
-          <a href="/">
+          <a
+            href="https://seb.io"
+            style={{ color: 'inherit' }}
+            target="_blank"
+            rel="noreferrer"
+          >
             <IconBrandSeb />
           </a>
         </GdsDiv>
