@@ -213,6 +213,13 @@ export class GdsDiv extends withSizeXProps(
   'text-wrap'?: string
 
   /**
+   * Style Expression Property that controls the `overflow-wrap` property.
+   * Supports all valid CSS `overflow-wrap` values.
+   */
+  @styleExpressionProperty()
+  'overflow-wrap'?: string
+
+  /**
    * Style Expression Property that controls the `gap` property.
    * Only accepts space tokens.
    */

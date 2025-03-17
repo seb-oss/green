@@ -279,3 +279,71 @@ export const Decoration: Story = {
       </gds-text>
     </gds-flex>`,
 }
+
+export const TextWrap: Story = {
+  name: 'Text Wrap',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">No wrap</gds-text>
+        <gds-text text-wrap="no-wrap">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">Pretty</gds-text>
+        <gds-text text-wrap="pretty">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">Pretty</gds-text>
+        <gds-text text-wrap="balance">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">Stable</gds-text>
+        <gds-text text-wrap="stable">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+export const OverflowWrap: Story = {
+  name: 'Overflow Wrap',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">Normal</gds-text>
+        <gds-text overflow-wrap="normal" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">Anywhere</gds-text>
+        <gds-text overflow-wrap="anywhere" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text tag="small" color="secondary">Break Word</gds-text>
+        <gds-text overflow-wrap="break-word" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
