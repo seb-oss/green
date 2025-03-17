@@ -1,9 +1,8 @@
-import { property, state } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
-import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
   html,
@@ -13,95 +12,139 @@ import { styles } from './accordion.styles'
 import '../button/button'
 import './accordion-icon/accordion-icon'
 
+export type AccordionSize = 'large' | 'small'
+
 /**
+ * Accordion component that provides collapsible content sections.
+ *
  * @element gds-accordion
  * @status beta
+ *
+ * @slot - Default slot for accordion content
+ * @slot summary-icon-open - Custom icon shown when accordion is open
+ * @slot summary-icon-closed - Custom icon shown when accordion is closed
+ 
+ * @event gds-ui-state - Fired when accordion opens or closes
+ *
+ * @example
+ * ```html
+ * <gds-accordion summary="Section Title">
+ *   <p>Accordion content here</p>
+ * </gds-accordion>
+ * ```
  */
 @gdsCustomElement('gds-accordion')
 export class GdsAccordion extends GdsElement {
   static styles = [tokens, styles]
 
   /**
-   * Summary of the accordion
+   * The summary text displayed in the accordion header
    */
-  @property()
+  @property({ type: String })
   summary = ''
 
   /**
-   * Accordion name
+   * Group identifier for accordion behavior synchronization
    */
-  @property()
+  @property({ type: String })
   name = ''
 
   /**
-   * Controls if the accordion is open
+   * Controls the expanded state of the accordion
    */
   @property({ type: Boolean, reflect: true })
   open = false
 
-  @watch('open')
-  handleOpenChange() {
-    const icon = this.shadowRoot?.querySelector('gds-icon-accordion')
-    if (icon) {
-      ;(icon as HTMLElement & { open: boolean }).open = this.open
-    }
-  }
-
-  @state()
-  private _summarySlotIconOpenOccupied = false
-
-  @state()
-  private _summarySlotIconClosedOccupied = false
-
   /**
-   * Controls the font-size of texts and height of the field.
+   * Controls the size variant of the accordion
    */
   @property({ type: String })
-  size: 'large' | 'small' = 'large'
+  size: AccordionSize = 'large'
 
-  #handleClick() {
-    this.open = !this.open
+  /**
+   * Controls whether to use custom icons from slots
+   */
+  @property({ type: Boolean, attribute: 'custom-icon' })
+  customIcon = false
 
-    if (this.open && this.name) {
-      // Find all other accordions with the same name and close them
-      const otherAccordions = document.querySelectorAll('gds-accordion')
-      otherAccordions.forEach((accordion) => {
-        if (
-          accordion !== this &&
-          (accordion as GdsAccordion).name === this.name
-        ) {
-          ;(accordion as GdsAccordion).open = false
+  /**
+   * Reference to content element for animation
+   */
+  @query('.content')
+  private _content?: HTMLElement
 
-          // Update the content max-height for the closed accordion
-          const content = accordion.shadowRoot?.querySelector(
-            '.content',
-          ) as HTMLElement
-          if (content) {
-            content.style.setProperty('--_max-height', '0')
-          }
+  /**
+   * References to icon slots
+   */
+  @query('slot[name="summary-icon-open"]')
+  private _openIconSlot?: HTMLSlotElement
 
-          // Dispatch UI state event for the closed accordion
-          accordion.dispatchEvent(
-            new CustomEvent('gds-ui-state', {
-              bubbles: true,
-              composed: true,
-              detail: false,
-            }),
-          )
-        }
-      })
-    }
+  @query('slot[name="summary-icon-closed"]')
+  private _closedIconSlot?: HTMLSlotElement
 
-    // Get the content element and set its max-height
-    const content = this.shadowRoot?.querySelector('.content') as HTMLElement
-    if (content) {
-      content.style.setProperty(
+  /**
+   * Component lifecycle: After first render
+   */
+  protected firstUpdated(): void {
+    this._initializeContentHeight()
+  }
+
+  /**
+   * Initializes content height for animation
+   * @private
+   */
+  private _initializeContentHeight(): void {
+    if (!this._content) return
+    this._updateContentHeight()
+  }
+
+  /**
+   * Updates content height for animation
+   */
+  private _updateContentHeight(): void {
+    if (!this._content) return
+
+    requestAnimationFrame(() => {
+      this._content?.style.setProperty(
         '--_max-height',
-        this.open ? `${content.scrollHeight}px` : '0',
+        this.open ? `${this._content.scrollHeight}px` : '0',
       )
-    }
+    })
+  }
 
-    // Dispatch UI state event
+  /**
+   * Handles accordion toggle
+   */
+  private _handleToggle = (): void => {
+    this.open = !this.open
+    this._updateContentHeight()
+    this._syncGroupState()
+    this._dispatchStateEvent()
+  }
+
+  /**
+   * Synchronizes state with other accordions in the same group
+   */
+  private _syncGroupState(): void {
+    if (!this.open || !this.name) return
+
+    document.querySelectorAll('gds-accordion').forEach((accordion) => {
+      if (
+        accordion !== this &&
+        (accordion as GdsAccordion).name === this.name
+      ) {
+        const other = accordion as GdsAccordion
+        other.open = false
+        other._updateContentHeight()
+        other._dispatchStateEvent()
+      }
+    })
+  }
+
+  /**
+   * Dispatches UI state change event
+   */
+  private _dispatchStateEvent(): void {
     this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         bubbles: true,
@@ -111,92 +154,78 @@ export class GdsAccordion extends GdsElement {
     )
   }
 
-  render() {
-    const accordionClasses = {
-      details: true,
-      open: this.open,
-      small: this.size === 'small',
-    }
-
-    return html`<div class=${classMap(accordionClasses)}>
-      ${this.#renderFieldContents()}
-    </div> `
-  }
-
-  #handleSlotChange = (
-    slotName: 'summary-icon-open' | 'summary-icon-closed',
-    event: Event,
-  ) => {
-    const slot = event.target as HTMLSlotElement
-    const assignedNodes = slot.assignedNodes({ flatten: true })
-    const slotOccupied =
-      assignedNodes.length > 0 &&
-      assignedNodes.some(
-        (node) =>
-          node.nodeType === Node.ELEMENT_NODE ||
-          (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
-      )
-    if (slotName === 'summary-icon-open') {
-      this._summarySlotIconOpenOccupied = slotOccupied
-    } else if (slotName === 'summary-icon-closed') {
-      this._summarySlotIconClosedOccupied = slotOccupied
-    }
-  }
-
-  #renderFieldContents() {
-    const elements = [this.#renderSummary(), this.#renderContent()]
-    return elements.map((element) => html`${element}`)
-  }
-
-  #renderContent() {
-    return html`<div class="content" aria-hidden="${!this.open}">
-      <slot></slot>
-    </div>`
-  }
-
-  #renderSummary() {
-    return html`<div class="summary">
+  /**
+   * Renders the component
+   */
+  protected render() {
+    return html`
       <div
-        class="summary-label"
-        @click=${this.#handleClick}
-        role="button"
-        aria-expanded="${this.open}"
+        class=${classMap({
+          details: true,
+          accordion: true,
+          open: this.open,
+          small: this.size === 'small',
+        })}
+        part="base"
       >
-        ${this.summary ? this.summary : 'Summary'}
+        ${this._renderHeader()} ${this._renderContent()}
       </div>
+    `
+  }
+
+  /**
+   * Renders the accordion header
+   * @private
+   */
+  private _renderHeader() {
+    return html`
+      <div class="summary" part="summary">
+        <div
+          class="summary-label"
+          @click=${this._handleToggle}
+          role="button"
+          aria-expanded="${this.open}"
+        >
+          ${this.summary || 'Summary'}
+        </div>
+        ${this._renderIconButton()}
+      </div>
+    `
+  }
+
+  /**
+   * Renders the icon button
+   */
+  private _renderIconButton() {
+    return html`
       <div class="summary-icon">
         <gds-button
           rank="tertiary"
           size="small"
-          @click=${this.#handleClick}
-          aria-expanded="${this.open}"
+          @click=${this._handleToggle}
+          aria-label="${this.open ? 'Collapse' : 'Expand'}"
         >
-          ${this.#renderSummaryIcon()}
+          <gds-icon-accordion
+            .open=${this.open}
+            ?custom-icon=${this.customIcon}
+          >
+            ${this.open
+              ? html`<slot name="summary-icon-open"></slot>`
+              : html`<slot name="summary-icon-closed"></slot>`}
+          </gds-icon-accordion>
         </gds-button>
       </div>
-    </div>`
+    `
   }
 
-  #renderSummaryIcon() {
-    if (
-      !this._summarySlotIconOpenOccupied &&
-      !this._summarySlotIconClosedOccupied
-    ) {
-      return html`<gds-icon-accordion></gds-icon-accordion>`
-    }
-
+  /**
+   * Renders the accordion content
+   */
+  private _renderContent() {
     return html`
-      ${this.open && this._summarySlotIconClosedOccupied
-        ? html`<slot
-            name="summary-icon-closed"
-            @slotchange=${(e: Event) =>
-              this.#handleSlotChange('summary-icon-open', e)}
-          ></slot>`
-        : html`<slot
-            name="summary-icon-open"
-            @slotchange=${(e: Event) =>
-              this.#handleSlotChange('summary-icon-open', e)}
-          ></slot>`}
+      <div class="content" part="content" aria-hidden="${!this.open}">
+        <slot></slot>
+      </div>
     `
   }
 }

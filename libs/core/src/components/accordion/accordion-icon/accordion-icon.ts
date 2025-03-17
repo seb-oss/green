@@ -10,17 +10,30 @@ import { styles } from './accordion-icon.style'
 /**
  * @element gds-icon-accordion
  * @status beta
+ *
+ * @slot - Default slot for custom icon content
  */
 @gdsCustomElement('gds-icon-accordion')
 export class GdsIconAccordion extends GdsElement {
   static styles = [styles]
+
   /**
    * Controls if the accordion is open
    */
   @property({ type: Boolean, reflect: true })
   open = false
 
+  /**
+   * Controls whether to use custom icon from slot
+   */
+  @property({ type: Boolean, attribute: 'custom-icon' })
+  customIcon = false
+
   render() {
+    if (this.customIcon) {
+      return html`<slot></slot>`
+    }
+
     return html`
       <svg
         width="20"

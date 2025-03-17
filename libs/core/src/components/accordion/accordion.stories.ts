@@ -8,6 +8,7 @@ import '../card/card'
 import '../flex/flex'
 import '../rich-text/rich-text'
 import '../icon/icons/chevron-top'
+import '../icon/icons/chevron-bottom'
 
 const meta: Meta = {
   title: 'Components/Accordion',
@@ -114,15 +115,15 @@ export const Name: Story = {
   render: (args) => html`
     <gds-flex width="100%" gap="xl">
       <gds-flex flex-direction="column" gap="xl" flex="1">
-        <gds-text tag="small">Grouped</gds-text>
+        <gds-text tag="small">Grouped With custom icon</gds-text>
         <gds-flex flex-direction="column">
-          <gds-accordion name="group-one" summary="Example">
+          <gds-accordion name="group-one" summary="Example" custom-icon>
             <gds-icon-chevron-top
               slot="summary-icon-open"
             ></gds-icon-chevron-top>
-            <gds-icon-chevron-top
+            <gds-icon-chevron-bottom
               slot="summary-icon-closed"
-            ></gds-icon-chevron-top>
+            ></gds-icon-chevron-bottom>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>
