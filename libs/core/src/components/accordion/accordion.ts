@@ -91,7 +91,6 @@ export class GdsAccordion extends GdsElement {
 
   /**
    * Initializes content height for animation
-   * @private
    */
   private _initializeContentHeight(): void {
     if (!this._content) return
@@ -175,7 +174,6 @@ export class GdsAccordion extends GdsElement {
 
   /**
    * Renders the accordion header
-   * @private
    */
   private _renderHeader() {
     return html`

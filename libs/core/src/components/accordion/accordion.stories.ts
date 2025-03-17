@@ -125,17 +125,56 @@ export const CustomIcons: Story = {
     },
   },
   render: () => html`
-    <gds-accordion summary="With Custom Icons" custom-icon>
-      <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
-      <gds-icon-chevron-bottom
-        slot="summary-icon-closed"
-      ></gds-icon-chevron-bottom>
-      This accordion uses custom chevron icons.
-    </gds-accordion>
-
-    <gds-accordion summary="Default Icon">
-      This accordion uses the default plus/minus icon.
-    </gds-accordion>
+    <gds-flex gap="2xl">
+      <gds-flex flex-direction="column" flex="1">
+        <gds-text tag="small" color="secondary">Default</gds-text>
+        <gds-accordion name="default-icon" summary="Default Icon">
+          This accordion uses the default plus/minus icon.
+        </gds-accordion>
+        <gds-accordion name="default-icon" summary="Default Icon">
+          This accordion uses the default plus/minus icon.
+        </gds-accordion>
+        <gds-accordion name="default-icon" summary="Default Icon">
+          This accordion uses the default plus/minus icon.
+        </gds-accordion>
+      </gds-flex>
+      <gds-flex flex-direction="column" flex="1">
+        <gds-text tag="small" color="secondary">Custom icon</gds-text>
+        <gds-accordion
+          name="custom-icon"
+          summary="With Custom Icons"
+          custom-icon
+        >
+          <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
+          <gds-icon-chevron-bottom
+            slot="summary-icon-closed"
+          ></gds-icon-chevron-bottom>
+          This accordion uses custom chevron icons.
+        </gds-accordion>
+        <gds-accordion
+          name="custom-icon"
+          summary="With Custom Icons"
+          custom-icon
+        >
+          <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
+          <gds-icon-chevron-bottom
+            slot="summary-icon-closed"
+          ></gds-icon-chevron-bottom>
+          This accordion uses custom chevron icons.
+        </gds-accordion>
+        <gds-accordion
+          name="custom-icon"
+          summary="With Custom Icons"
+          custom-icon
+        >
+          <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
+          <gds-icon-chevron-bottom
+            slot="summary-icon-closed"
+          ></gds-icon-chevron-bottom>
+          This accordion uses custom chevron icons.
+        </gds-accordion>
+      </gds-flex>
+    </gds-flex>
   `,
 }
 
