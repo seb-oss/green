@@ -32,37 +32,53 @@ const meta: Meta = {
         defaultValue: { summary: '' },
       },
     },
+    open: {
+      description: 'Controls if the accordion is expanded',
+      control: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
+    size: {
+      description: 'Controls the size of the accordion',
+      control: { type: 'select', options: ['large', 'small'] },
+      table: {
+        type: { summary: '"large" | "small"' },
+        defaultValue: { summary: 'large' },
+      },
+    },
+    'custom-icon': {
+      description: 'Controls whether to use custom icons from slots',
+      control: 'boolean',
+      table: {
+        type: { summary: 'boolean' },
+      },
+    },
   },
   parameters: {
     docs: {
       description: {
         component: `
 ## Overview
-The \`gds-acordion\` component is a collapsible section that helps organize and hide content until needed. 
-It follows the native HTML \`<details>\` and \`<summary>\` behavior while adding extra functionality for grouped accordions.
+The \`gds-accordion\` component is a collapsible section that helps organize and hide content until needed.
+It provides smooth animations, grouping behavior, and support for custom icons.
 
 ## Features
-- Expandable/collapsible content sections
+- Expandable/collapsible content sections with smooth animations
 - Group behavior: accordions with the same name will close each other automatically
-- Works across Shadow DOM boundaries
-- Customizable summary text
-- Accessible by default, following native HTML semantics
-- Visual indicators for open/closed states
+- Custom icon support through slots
+- Two size variants: large and small
+- Accessible by default
+- Keyboard navigation support
 
-## Accessibility
-- Follows ARIA best practices for expandable sections
-- Keyboard navigable
-- Screen reader friendly
-- Maintains focus management
+## Custom Icons
+You can provide custom icons for both open and closed states:
 
-## Example
 \`\`\`html
-<gds-accordion name="group1" summary="Section 1">
-  <gds-rich-text>Content for section 1</gds-rich-text>
-</gds-accordion>
-
-<gds-accordion name="group1" summary="Section 2">
-  <gds-rich-text>Content for section 2</gds-rich-text>
+<gds-accordion custom-icon>
+  <gds-icon-chevron-up slot="summary-icon-open"></gds-icon-chevron-up>
+  <gds-icon-chevron-down slot="summary-icon-closed"></gds-icon-chevron-down>
+  Content here
 </gds-accordion>
 \`\`\`
         `,
@@ -85,151 +101,158 @@ const DefaultParams: Story = {
 
 /**
  * Basic example of an accordion component.
- * This story demonstrates the default usage with simple content.
  */
-export const accordion: Story = {
+export const Default: Story = {
   ...DefaultParams,
-  name: 'Accordion',
   args: {
-    innerHTML: `<p>Content</p>`,
+    summary: 'Click to expand',
+    innerHTML: 'Accordion content goes here',
   },
 }
 
 /**
- * This story demonstrates how accordions with the same name interact with each other.<br/>
- * When one accordion in the group is opened, others in the same group will automatically close.
- *
- * Key points:
- * - All accordions share the name "Name"
- * - Opening any accordion will close others in the group
- * - Each accordion maintains its own content independently
- * - The behavior works across Shadow DOM boundaries
+ * Example of accordions with custom icons.
  */
-export const Name: Story = {
+export const CustomIcons: Story = {
   ...DefaultParams,
-  name: 'Name',
+  name: 'Custom Icons',
   parameters: {
-    ...DefaultParams.parameters,
-    controls: { include: [] },
+    docs: {
+      description: {
+        story:
+          'Demonstrates how to use custom icons for open and closed states.',
+      },
+    },
   },
-  render: (args) => html`
-    <gds-flex width="100%" gap="xl">
-      <gds-flex flex-direction="column" gap="xl" flex="1">
-        <gds-text tag="small">Grouped With custom icon</gds-text>
-        <gds-flex flex-direction="column">
-          <gds-accordion name="group-one" summary="Example" custom-icon>
-            <gds-icon-chevron-top
-              slot="summary-icon-open"
-            ></gds-icon-chevron-top>
-            <gds-icon-chevron-bottom
-              slot="summary-icon-closed"
-            ></gds-icon-chevron-bottom>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </gds-accordion>
-          <gds-accordion name="group-one" summary="Example">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </gds-accordion>
-          <gds-accordion name="group-one" summary="Example">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </gds-accordion>
-        </gds-flex>
+  render: () => html`
+    <gds-accordion summary="With Custom Icons" custom-icon>
+      <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
+      <gds-icon-chevron-bottom
+        slot="summary-icon-closed"
+      ></gds-icon-chevron-bottom>
+      This accordion uses custom chevron icons.
+    </gds-accordion>
+
+    <gds-accordion summary="Default Icon">
+      This accordion uses the default plus/minus icon.
+    </gds-accordion>
+  `,
+}
+
+/**
+ * Example of grouped accordions.
+ */
+export const Grouped: Story = {
+  ...DefaultParams,
+  name: 'Grouped',
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Accordions with the same name attribute will close each other when one is opened.',
+      },
+    },
+  },
+  render: () => html`
+    <gds-flex flex-direction="column" gap="m">
+      <gds-accordion name="group-1" summary="First Accordion">
+        Content of first accordion
+      </gds-accordion>
+
+      <gds-accordion name="group-1" summary="Second Accordion">
+        Content of second accordion
+      </gds-accordion>
+
+      <gds-accordion name="group-1" summary="Third Accordion">
+        Content of third accordion
+      </gds-accordion>
+    </gds-flex>
+  `,
+}
+
+/**
+ * Example of different size variants.
+ */
+export const Sizes: Story = {
+  ...DefaultParams,
+  name: 'Sizes',
+  parameters: {
+    docs: {
+      description: {
+        story: 'The accordion component supports two sizes: large and small.',
+      },
+    },
+  },
+  render: () => html`
+    <gds-flex gap="xl">
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-text tag="small">Large Size (Default)</gds-text>
+        <gds-accordion summary="Summary example">
+          Content in default size
+        </gds-accordion>
+
+        <gds-accordion summary="Summary example">
+          Content in small size
+        </gds-accordion>
       </gds-flex>
-      <gds-flex flex-direction="column" gap="xl" flex="1">
-        <gds-text tag="small">Ungrouped</gds-text>
-        <gds-flex flex-direction="column">
-          <gds-accordion summary="Example">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </gds-accordion>
-          <gds-accordion summary="Example">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </gds-accordion>
-          <gds-accordion summary="Example">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </gds-accordion>
-        </gds-flex>
+      <gds-flex flex-direction="column" gap="m" flex="1">
+        <gds-text tag="small">Small</gds-text>
+        <gds-accordion size="small" summary="Summary example">
+          Content in default size
+        </gds-accordion>
+
+        <gds-accordion size="small" summary="Summary example">
+          Content in small size
+        </gds-accordion>
       </gds-flex>
     </gds-flex>
   `,
 }
 
-export const Open: Story = {
+/**
+ * Example with rich content.
+ */
+export const RichContent: Story = {
   ...DefaultParams,
-  name: 'Open',
+  name: 'Rich Content',
   parameters: {
-    ...DefaultParams.parameters,
-    controls: { include: [] },
     docs: {
       description: {
-        story: `
-### Open Accordion
-Just as in the native select if you set the open attribute to true the accordion will be open by default.
-        `,
+        story:
+          'Accordions can contain any type of content, including other components.',
       },
     },
   },
-  render: (args) => html`
-    <gds-accordion open name="default-open" summary="I'm open by default">
+  render: () => html`
+    <gds-accordion summary="Rich Content Example">
       <gds-rich-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </gds-rich-text>
-    </gds-accordion>
-    <gds-accordion name="default-open" summary="Example">
-      <gds-rich-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </gds-rich-text>
-    </gds-accordion>
-    <gds-accordion name="default-open" summary="Example">
-      <gds-rich-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
+        <h3>Heading Inside Accordion</h3>
+        <p>This is a paragraph with <strong>rich</strong> formatting.</p>
+        <ul>
+          <li>List item 1</li>
+          <li>List item 2</li>
+        </ul>
       </gds-rich-text>
     </gds-accordion>
   `,
 }
 
-export const Size: Story = {
+/**
+ * Example of initially open accordion.
+ */
+export const InitiallyOpen: Story = {
   ...DefaultParams,
-  name: 'Size',
+  name: 'Initially Open',
   parameters: {
-    ...DefaultParams.parameters,
-    controls: { include: [] },
     docs: {
       description: {
-        story: `
-### Open Accordion
-Just as in the native select if you set the open attribute to true the accordion will be open by default.
-        `,
+        story: 'Accordions can be initially opened using the open attribute.',
       },
     },
   },
-  render: (args) => html`
-    <gds-accordion open name="default-open" summary="I'm open by default">
-      <gds-rich-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </gds-rich-text>
-    </gds-accordion>
-    <gds-accordion name="default-open" summary="Example">
-      <gds-rich-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </gds-rich-text>
-    </gds-accordion>
-    <gds-accordion name="default-open" summary="Example">
-      <gds-rich-text>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </gds-rich-text>
+  render: () => html`
+    <gds-accordion open summary="Initially Open">
+      This accordion starts in the open state.
     </gds-accordion>
   `,
 }
-
-// Icon

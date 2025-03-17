@@ -16,8 +16,8 @@ export const styles = css`
       border-color: var(--gds-color-l2-border-quaternary);
     }
 
-    .details[open] {
-      border-color: var(--gds-color-l2-border-primary);
+    .details.open {
+      border-color: var(--gds-color-l2-border-quaternary);
     }
 
     .summary {
@@ -39,6 +39,11 @@ export const styles = css`
       padding-block: var(--gds-space-m);
       cursor: pointer;
       flex: 1;
+    }
+
+    .details.small .summary-label {
+      font-size: var(--gds-text-size-heading-2xs);
+      line-height: var(--gds-text-line-height-heading-2xs);
     }
 
     .details:focus-visible {
