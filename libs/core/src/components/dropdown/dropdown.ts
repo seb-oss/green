@@ -604,7 +604,7 @@ export class GdsDropdown<ValueT = any>
   private _handleOpenChange() {
     const open = this.open
 
-    this.#optionElements?.forEach((o) => (o.hidden = !open))
+    this.options.forEach((o) => (o.hidden = !open))
 
     if (open) this.#registerAutoCloseListener()
     else {
