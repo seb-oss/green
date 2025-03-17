@@ -621,7 +621,7 @@ describe('<gds-dropdown searchable>', () => {
     await el.updateComplete
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -650,7 +650,7 @@ describe('<gds-dropdown searchable>', () => {
     await el.updateComplete
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -855,7 +855,7 @@ describe('<gds-dropdown combobox>', () => {
     comboInputEl!.dispatchEvent(new Event('input'))
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
@@ -887,7 +887,7 @@ describe('<gds-dropdown combobox>', () => {
     await aTimeout(0)
 
     const options = el.querySelectorAll(
-      `${getScopedTagName('gds-option')}:not([aria-hidden="true"])`,
+      `${getScopedTagName('gds-option')}:not([inert])`,
     )
 
     await expect(options.length).to.equal(1)
