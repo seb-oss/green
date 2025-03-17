@@ -72,6 +72,7 @@ export class GdsText extends GdsDiv {
    * Controls the number of lines it should show.
    */
   @styleExpressionProperty({
+    selector: '[tag]',
     styleTemplate: (_prop, values) => {
       return `overflow: hidden;
       text-overflow: ellipsis;

@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.5.1
+
+### Patch Changes
+
+- 43b08d4: dropdownButton in typeahead might be undefined
+- f0d4efc: fixing typeahead input height when opening dropdown
+- Updated dependencies [7fe6b60]
+- Updated dependencies [7fe6b60]
+  - @sebgroup/green-core@1.69.1
+
 ## 5.5.0
 
 ### Minor Changes
