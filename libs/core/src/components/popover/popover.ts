@@ -268,7 +268,7 @@ export class GdsPopover extends GdsElement {
             'use-modal-in-mobile': !this.disableMobileStyles,
             'has-backdrop': Boolean(this.backdrop && this.backdrop === 'true'),
           })}"
-          aria-hidden="${String(!this.open)}"
+          ?inert="${!this.open}"
           @close=${() => this.open && this.#handleCancel()}
         >
           <header>

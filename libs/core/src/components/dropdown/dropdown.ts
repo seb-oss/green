@@ -240,6 +240,7 @@ export class GdsDropdown<ValueT = any>
     this.updateComplete.then(() => {
       this._handleLightDOMChange()
       this._handleValueChange()
+      this._handleOpenChange()
     })
   }
 
@@ -586,7 +587,7 @@ export class GdsDropdown<ValueT = any>
    * Emits `gds-ui-state`event and does some other house-keeping when the open state changes.
    */
   @watch('open')
-  private _onOpenChange() {
+  private _handleOpenChange() {
     const open = this.open
 
     this.#optionElements?.forEach((o) => (o.hidden = !open))
