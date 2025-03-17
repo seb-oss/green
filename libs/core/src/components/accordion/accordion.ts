@@ -39,8 +39,13 @@ export class GdsAccordion extends GdsElement {
   @property({ type: Boolean, reflect: true })
   open = false
 
-  // Watch the open property and update the open attribute
-  // @watch('open')
+  @watch('open')
+  handleOpenChange() {
+    const icon = this.shadowRoot?.querySelector('gds-icon-accordion')
+    if (icon) {
+      ;(icon as HTMLElement & { open: boolean }).open = this.open
+    }
+  }
 
   @state()
   private _summarySlotIconOpenOccupied = false
@@ -53,6 +58,11 @@ export class GdsAccordion extends GdsElement {
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  // Add click handler method
+  #handleClick() {
+    this.open = !this.open
+  }
 
   render() {
     const accordionClasses = {
@@ -92,16 +102,16 @@ export class GdsAccordion extends GdsElement {
   }
 
   #renderContent() {
-    return html`<div class="content"><slot></slot></div>`
+    return html`<div class="content" .toggle=${this.open}><slot></slot></div>`
   }
 
   #renderSummary() {
     return html`<div class="summary">
-      <div class="summary-label">
+      <div class="summary-label" @click=${this.#handleClick}>
         ${this.summary ? this.summary : 'Summary'}
       </div>
       <div class="summary-icon">
-        <gds-button rank="tertiary" size="small">
+        <gds-button rank="tertiary" size="small" @click=${this.#handleClick}>
           ${this.#renderSummaryIcon()}
         </gds-button>
       </div>
@@ -113,7 +123,7 @@ export class GdsAccordion extends GdsElement {
       !this._summarySlotIconOpenOccupied &&
       !this._summarySlotIconClosedOccupied
     ) {
-      return html`<gds-icon-accordion></gds-icon-accordion>`
+      return html`<gds-icon-accordion .open=${this.open}></gds-icon-accordion>`
     }
 
     return html`

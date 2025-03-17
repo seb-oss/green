@@ -120,6 +120,9 @@ export const Name: Story = {
             <gds-icon-chevron-top
               slot="summary-icon-open"
             ></gds-icon-chevron-top>
+            <gds-icon-chevron-top
+              slot="summary-icon-closed"
+            ></gds-icon-chevron-top>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </gds-accordion>

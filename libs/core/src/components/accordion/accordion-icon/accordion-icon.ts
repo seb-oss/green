@@ -29,6 +29,7 @@ export class GdsIconAccordion extends GdsElement {
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
+        id="plus"
       >
         <line x1="4" y1="10" x2="16" y2="10" />
         <line x1="10" y1="4" x2="10" y2="16">
@@ -37,7 +38,7 @@ export class GdsIconAccordion extends GdsElement {
             dur="240ms"
             from="${this.open ? '4' : '10'}"
             to="${this.open ? '10' : '4'}"
-            begin="details.toggle"
+            begin="plus.toggle"
             fill="freeze"
           />
           <animate
@@ -45,11 +46,24 @@ export class GdsIconAccordion extends GdsElement {
             dur="240ms"
             from="${this.open ? '16' : '10'}"
             to="${this.open ? '10' : '16'}"
-            begin="details.toggle"
+            begin="plus.toggle"
             fill="freeze"
           />
         </line>
       </svg>
     `
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    if (changedProperties.has('open')) {
+      const svg = this.shadowRoot?.querySelector('svg')
+      if (svg) {
+        const event = new CustomEvent('toggle', {
+          bubbles: true,
+          composed: true,
+        })
+        svg.dispatchEvent(event)
+      }
+    }
   }
 }

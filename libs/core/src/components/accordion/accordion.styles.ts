@@ -25,12 +25,10 @@ export const styles = css`
       justify-content: space-between;
       align-items: center;
       list-style: none;
-      cursor: pointer;
       user-select: none;
       outline-offset: var(--gds-space-2xs);
       outline-color: currentColor;
       transition: all 120ms;
-      padding-block: var(--gds-space-m);
       color: var(--gds-color-l2-content-primary);
     }
 
@@ -38,14 +36,22 @@ export const styles = css`
       font-size: var(--gds-text-size-heading-xs);
       line-height: var(--gds-text-line-height-heading-xs);
       font-weight: var(--gds-text-weight-regular);
+      padding-block: var(--gds-space-m);
+      cursor: pointer;
+      flex: 1;
     }
 
     .details:focus-visible {
       border-radius: var(--gds-space-2xs);
     }
 
-    .content {
+    .details.open .content {
+      display: flex;
       padding-block-end: var(--gds-space-l);
+    }
+
+    .content {
+      display: none;
     }
   }
 `
