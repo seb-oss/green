@@ -59,9 +59,56 @@ export class GdsAccordion extends GdsElement {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
-  // Add click handler method
   #handleClick() {
     this.open = !this.open
+
+    if (this.open && this.name) {
+      // Find all other accordions with the same name and close them
+      const otherAccordions = document.querySelectorAll('gds-accordion')
+      otherAccordions.forEach((accordion) => {
+        if (
+          accordion !== this &&
+          (accordion as GdsAccordion).name === this.name
+        ) {
+          ;(accordion as GdsAccordion).open = false
+
+          // Update the content max-height for the closed accordion
+          const content = accordion.shadowRoot?.querySelector(
+            '.content',
+          ) as HTMLElement
+          if (content) {
+            content.style.setProperty('--_max-height', '0')
+          }
+
+          // Dispatch UI state event for the closed accordion
+          accordion.dispatchEvent(
+            new CustomEvent('gds-ui-state', {
+              bubbles: true,
+              composed: true,
+              detail: false,
+            }),
+          )
+        }
+      })
+    }
+
+    // Get the content element and set its max-height
+    const content = this.shadowRoot?.querySelector('.content') as HTMLElement
+    if (content) {
+      content.style.setProperty(
+        '--_max-height',
+        this.open ? `${content.scrollHeight}px` : '0',
+      )
+    }
+
+    // Dispatch UI state event
+    this.dispatchEvent(
+      new CustomEvent('gds-ui-state', {
+        bubbles: true,
+        composed: true,
+        detail: this.open,
+      }),
+    )
   }
 
   render() {
@@ -102,16 +149,28 @@ export class GdsAccordion extends GdsElement {
   }
 
   #renderContent() {
-    return html`<div class="content" .toggle=${this.open}><slot></slot></div>`
+    return html`<div class="content" aria-hidden="${!this.open}">
+      <slot></slot>
+    </div>`
   }
 
   #renderSummary() {
     return html`<div class="summary">
-      <div class="summary-label" @click=${this.#handleClick}>
+      <div
+        class="summary-label"
+        @click=${this.#handleClick}
+        role="button"
+        aria-expanded="${this.open}"
+      >
         ${this.summary ? this.summary : 'Summary'}
       </div>
       <div class="summary-icon">
-        <gds-button rank="tertiary" size="small" @click=${this.#handleClick}>
+        <gds-button
+          rank="tertiary"
+          size="small"
+          @click=${this.#handleClick}
+          aria-expanded="${this.open}"
+        >
           ${this.#renderSummaryIcon()}
         </gds-button>
       </div>
@@ -123,7 +182,7 @@ export class GdsAccordion extends GdsElement {
       !this._summarySlotIconOpenOccupied &&
       !this._summarySlotIconClosedOccupied
     ) {
-      return html`<gds-icon-accordion .open=${this.open}></gds-icon-accordion>`
+      return html`<gds-icon-accordion></gds-icon-accordion>`
     }
 
     return html`

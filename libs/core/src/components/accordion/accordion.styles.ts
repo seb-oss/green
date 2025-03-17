@@ -51,7 +51,15 @@ export const styles = css`
     }
 
     .content {
-      display: none;
+      max-height: var(--_max-height, 0);
+      overflow: hidden;
+      transition: all 240ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [aria-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+      translate: 0 -4px;
     }
   }
 `
