@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.69.1
+
+### Patch Changes
+
+- 7fe6b60: **Dropdown:** Fix issue with elements being `aria-hidden` while also having focus
+- 7fe6b60: **Dropdown:** Fix popover overlap when using `combobox` option
+
 ## 1.69.0
 
 ### Minor Changes
