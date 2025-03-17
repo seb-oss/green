@@ -27,6 +27,7 @@ import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 import { GdsTheme } from '@sebgroup/green-core/components/theme/index.js'
 // This is used to get the correct element name when creating the wrappers below
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { GdsText } from '@sebgroup/green-react/src/core'
 
 // Regster React wrappers
 // At some point in the future, the React library will have predefined wrappers to import,
@@ -191,7 +192,7 @@ export const GreenCoreFormExample = () => {
         </p>
       </CoreRichText>
 
-      <CoreFlex gap="l" max-width="1000px" margin="0 auto">
+      <CoreFlex gap="l" align-items="flex-start" flex="1">
         <CoreCard variant="primary" flex="1">
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -362,10 +363,21 @@ export const GreenCoreFormExample = () => {
           </form>
         </CoreCard>
 
-        <CoreFlex flex="1">
+        <CoreCard
+          flex="1"
+          position="sticky"
+          inset="40px 0 0 0"
+          gap="m"
+          flex-direction="column"
+          variant="secondary"
+        >
+          <GdsText tag="h3">Reflected React state</GdsText>
           <CoreRichText style={{ flex: '1' }}>
-            <h3>Reflected React state</h3>
-            <table>
+            <table
+              style={{
+                margin: '0',
+              }}
+            >
               <tbody>
                 <tr>
                   <th>Name</th>
@@ -405,7 +417,7 @@ export const GreenCoreFormExample = () => {
               </tbody>
             </table>
           </CoreRichText>
-        </CoreFlex>
+        </CoreCard>
       </CoreFlex>
     </CoreTheme>
   )
