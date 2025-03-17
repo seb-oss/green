@@ -44,6 +44,17 @@ export class GdsPopover extends GdsElement {
   static styles = unsafeCSS(styles)
 
   /**
+   * The default set of middleware for Floating UI positioning used by GdsPopover.
+   */
+  static DefaultMiddleware: Middleware[] = [
+    offset(8),
+    shift({
+      crossAxis: true,
+      padding: 8,
+    }),
+  ]
+
+  /**
    * Whether the popover is open.
    */
   @property({ type: Boolean, reflect: true })
@@ -156,13 +167,7 @@ export class GdsPopover extends GdsElement {
    * Defaults to `[offset(8), flip()]`
    */
   @property({ attribute: false })
-  floatingUIMiddleware: Middleware[] = [
-    offset(8),
-    shift({
-      crossAxis: true,
-      padding: 8,
-    }),
-  ]
+  floatingUIMiddleware: Middleware[] = GdsPopover.DefaultMiddleware
 
   @state()
   private _trigger: HTMLElement | undefined = undefined
