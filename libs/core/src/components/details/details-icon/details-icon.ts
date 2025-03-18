@@ -5,20 +5,20 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
-import { styles } from './accordion-icon.style'
+import { styles } from './details-icon.style'
 
 /**
- * @element gds-icon-accordion
+ * @element gds-icon-details
  * @status beta
  *
  * @slot - Default slot for custom icon content
  */
-@gdsCustomElement('gds-icon-accordion')
-export class GdsIconAccordion extends GdsElement {
+@gdsCustomElement('gds-icon-details')
+export class GdsIconDetails extends GdsElement {
   static styles = [styles]
 
   /**
-   * Controls if the accordion is open
+   * Controls if the details is open
    */
   @property({ type: Boolean, reflect: true })
   open = false

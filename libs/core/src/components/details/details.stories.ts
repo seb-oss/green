@@ -2,7 +2,7 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import './accordion'
+import './details'
 import '../text/text'
 import '../card/card'
 import '../flex/flex'
@@ -11,12 +11,12 @@ import '../icon/icons/chevron-top'
 import '../icon/icons/chevron-bottom'
 
 const meta: Meta = {
-  title: 'Components/Accordion',
-  component: 'gds-accordion',
+  title: 'Components/Details',
+  component: 'gds-details',
   tags: ['autodocs'],
   argTypes: {
     summary: {
-      description: 'The text displayed in the accordion header',
+      description: 'The text displayed in the details header',
       control: 'text',
       table: {
         type: { summary: 'string' },
@@ -25,7 +25,7 @@ const meta: Meta = {
     },
     name: {
       description:
-        'Groups accordions together. Accordions with the same name will close each other when opened',
+        'Groups detailss together. Detailss with the same name will close each other when opened',
       control: 'text',
       table: {
         type: { summary: 'string' },
@@ -33,14 +33,14 @@ const meta: Meta = {
       },
     },
     open: {
-      description: 'Controls if the accordion is expanded',
+      description: 'Controls if the details is expanded',
       control: 'boolean',
       table: {
         type: { summary: 'boolean' },
       },
     },
     size: {
-      description: 'Controls the size of the accordion',
+      description: 'Controls the size of the details',
       control: { type: 'select', options: ['large', 'small'] },
       table: {
         type: { summary: '"large" | "small"' },
@@ -60,12 +60,12 @@ const meta: Meta = {
       description: {
         component: `
 ## Overview
-The \`gds-accordion\` component is a collapsible section that helps organize and hide content until needed.
+The \`gds-details\` component is a collapsible section that helps organize and hide content until needed.
 It provides smooth animations, grouping behavior, and support for custom icons.
 
 ## Features
 - Expandable/collapsible content sections with smooth animations
-- Group behavior: accordions with the same name will close each other automatically
+- Group behavior: detailss with the same name will close each other automatically
 - Custom icon support through slots
 - Two size variants: large and small
 - Accessible by default
@@ -75,11 +75,11 @@ It provides smooth animations, grouping behavior, and support for custom icons.
 You can provide custom icons for both open and closed states:
 
 \`\`\`html
-<gds-accordion custom-icon>
+<gds-details custom-icon>
   <gds-icon-chevron-up slot="summary-icon-open"></gds-icon-chevron-up>
   <gds-icon-chevron-down slot="summary-icon-closed"></gds-icon-chevron-down>
   Content here
-</gds-accordion>
+</gds-details>
 \`\`\`
         `,
       },
@@ -100,18 +100,18 @@ const DefaultParams: Story = {
 }
 
 /**
- * Basic example of an accordion component.
+ * Basic example of an details component.
  */
 export const Default: Story = {
   ...DefaultParams,
   args: {
     summary: 'Click to expand',
-    innerHTML: 'Accordion content goes here',
+    innerHTML: 'Details content goes here',
   },
 }
 
 /**
- * Example of accordions with custom icons.
+ * Example of detailss with custom icons.
  */
 export const CustomIcons: Story = {
   ...DefaultParams,
@@ -128,58 +128,46 @@ export const CustomIcons: Story = {
     <gds-flex gap="2xl">
       <gds-flex flex-direction="column" flex="1">
         <gds-text tag="small" color="secondary">Default</gds-text>
-        <gds-accordion name="default-icon" summary="Default Icon">
-          This accordion uses the default plus/minus icon.
-        </gds-accordion>
-        <gds-accordion name="default-icon" summary="Default Icon">
-          This accordion uses the default plus/minus icon.
-        </gds-accordion>
-        <gds-accordion name="default-icon" summary="Default Icon">
-          This accordion uses the default plus/minus icon.
-        </gds-accordion>
+        <gds-details name="default-icon" summary="Default Icon">
+          This details uses the default plus/minus icon.
+        </gds-details>
+        <gds-details name="default-icon" summary="Default Icon">
+          This details uses the default plus/minus icon.
+        </gds-details>
+        <gds-details name="default-icon" summary="Default Icon">
+          This details uses the default plus/minus icon.
+        </gds-details>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1">
         <gds-text tag="small" color="secondary">Custom icon</gds-text>
-        <gds-accordion
-          name="custom-icon"
-          summary="With Custom Icons"
-          custom-icon
-        >
+        <gds-details name="custom-icon" summary="With Custom Icons" custom-icon>
           <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
           <gds-icon-chevron-bottom
             slot="summary-icon-closed"
           ></gds-icon-chevron-bottom>
-          This accordion uses custom chevron icons.
-        </gds-accordion>
-        <gds-accordion
-          name="custom-icon"
-          summary="With Custom Icons"
-          custom-icon
-        >
+          This details uses custom chevron icons.
+        </gds-details>
+        <gds-details name="custom-icon" summary="With Custom Icons" custom-icon>
           <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
           <gds-icon-chevron-bottom
             slot="summary-icon-closed"
           ></gds-icon-chevron-bottom>
-          This accordion uses custom chevron icons.
-        </gds-accordion>
-        <gds-accordion
-          name="custom-icon"
-          summary="With Custom Icons"
-          custom-icon
-        >
+          This details uses custom chevron icons.
+        </gds-details>
+        <gds-details name="custom-icon" summary="With Custom Icons" custom-icon>
           <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
           <gds-icon-chevron-bottom
             slot="summary-icon-closed"
           ></gds-icon-chevron-bottom>
-          This accordion uses custom chevron icons.
-        </gds-accordion>
+          This details uses custom chevron icons.
+        </gds-details>
       </gds-flex>
     </gds-flex>
   `,
 }
 
 /**
- * Example of grouped accordions.
+ * Example of grouped detailss.
  */
 export const Grouped: Story = {
   ...DefaultParams,
@@ -188,12 +176,12 @@ export const Grouped: Story = {
     docs: {
       description: {
         story: `
-Accordions with the same name attribute will close each other when one is opened.
+Detailss with the same name attribute will close each other when one is opened.
 
-In this example, all accordions are grouped together with the name attribute set to "group-1".
+In this example, all detailss are grouped together with the name attribute set to "group-1".
 
 \`\`\`html
-<gds-accordion name="group-1"> ... </gds-accordion>
+<gds-details name="group-1"> ... </gds-details>
 \`\`\`  
 
 `,
@@ -202,15 +190,15 @@ In this example, all accordions are grouped together with the name attribute set
   },
   render: () => html`
     <gds-flex flex-direction="column">
-      <gds-accordion name="group-1" summary="First Accordion">
-        Content of first accordion
-      </gds-accordion>
-      <gds-accordion name="group-1" summary="Second Accordion">
-        Content of second accordion
-      </gds-accordion>
-      <gds-accordion name="group-1" summary="Third Accordion">
-        Content of third accordion
-      </gds-accordion>
+      <gds-details name="group-1" summary="First Details">
+        Content of first details
+      </gds-details>
+      <gds-details name="group-1" summary="Second Details">
+        Content of second details
+      </gds-details>
+      <gds-details name="group-1" summary="Third Details">
+        Content of third details
+      </gds-details>
     </gds-flex>
   `,
 }
@@ -225,10 +213,10 @@ export const Sizes: Story = {
     docs: {
       description: {
         story: `
-The accordion component supports two sizes: large(default) and small.        
+The details component supports two sizes: large(default) and small.        
         
 \`\`\`html
-<gds-accordion size="small"> ... </gds-accordion>
+<gds-details size="small"> ... </gds-details>
 \`\`\`        
         
         `,
@@ -239,27 +227,21 @@ The accordion component supports two sizes: large(default) and small.
     <gds-flex gap="xl">
       <gds-flex flex-direction="column" flex="1">
         <gds-text tag="small" color="secondary">Large Size (Default)</gds-text>
-        <gds-accordion summary="Summary example">
-          Content goes here
-        </gds-accordion>
-        <gds-accordion summary="Summary example">
-          Content goes here
-        </gds-accordion>
-        <gds-accordion summary="Summary example">
-          Content goes here
-        </gds-accordion>
+        <gds-details summary="Summary example"> Content goes here </gds-details>
+        <gds-details summary="Summary example"> Content goes here </gds-details>
+        <gds-details summary="Summary example"> Content goes here </gds-details>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1">
         <gds-text tag="small" color="secondary">Small</gds-text>
-        <gds-accordion size="small" summary="Summary example">
+        <gds-details size="small" summary="Summary example">
           Content goes here
-        </gds-accordion>
-        <gds-accordion size="small" summary="Summary example">
+        </gds-details>
+        <gds-details size="small" summary="Summary example">
           Content goes here
-        </gds-accordion>
-        <gds-accordion size="small" summary="Summary example">
+        </gds-details>
+        <gds-details size="small" summary="Summary example">
           Content goes here
-        </gds-accordion>
+        </gds-details>
       </gds-flex>
     </gds-flex>
   `,
@@ -275,26 +257,26 @@ export const RichContent: Story = {
     docs: {
       description: {
         story:
-          'Accordions can contain any type of content, including other components.',
+          'Detailss can contain any type of content, including other components.',
       },
     },
   },
   render: () => html`
-    <gds-accordion summary="Rich Content Example">
+    <gds-details summary="Rich Content Example">
       <gds-rich-text>
-        <h3>Heading Inside Accordion</h3>
+        <h3>Heading Inside Details</h3>
         <p>This is a paragraph with <strong>rich</strong> formatting.</p>
         <ul>
           <li>List item 1</li>
           <li>List item 2</li>
         </ul>
       </gds-rich-text>
-    </gds-accordion>
+    </gds-details>
   `,
 }
 
 /**
- * Example of initially open accordion.
+ * Example of initially open details.
  */
 export const InitiallyOpen: Story = {
   ...DefaultParams,
@@ -303,10 +285,10 @@ export const InitiallyOpen: Story = {
     docs: {
       description: {
         story: `
-Accordions can be initially opened using the open attribute.
+Detailss can be initially opened using the open attribute.
 
 \`\`\`html
- <gds-accordion open> ... </gds-accordion>
+ <gds-details open> ... </gds-details>
 \`\`\`  
         
         `,
@@ -314,8 +296,8 @@ Accordions can be initially opened using the open attribute.
     },
   },
   render: () => html`
-    <gds-accordion open summary="Initially Open">
-      This accordion starts in the open state.
-    </gds-accordion>
+    <gds-details open summary="Initially Open">
+      This details starts in the open state.
+    </gds-details>
   `,
 }

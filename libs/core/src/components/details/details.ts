@@ -7,59 +7,59 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { styles } from './accordion.styles'
+import { styles } from './details.styles'
 
 import '../button/button'
-import './accordion-icon/accordion-icon'
+import './details-icon/details-icon'
 
-export type AccordionSize = 'large' | 'small'
+export type DetailsSize = 'large' | 'small'
 
 /**
- * Accordion component that provides collapsible content sections.
+ * Details component that provides collapsible content sections.
  *
- * @element gds-accordion
+ * @element gds-details
  * @status beta
  *
- * @slot - Default slot for accordion content
- * @slot summary-icon-open - Custom icon shown when accordion is open
- * @slot summary-icon-closed - Custom icon shown when accordion is closed
+ * @slot - Default slot for details content
+ * @slot summary-icon-open - Custom icon shown when details is open
+ * @slot summary-icon-closed - Custom icon shown when details is closed
  
- * @event gds-ui-state - Fired when accordion opens or closes
+ * @event gds-ui-state - Fired when details opens or closes
  *
  * @example
  * ```html
- * <gds-accordion summary="Section Title">
- *   <p>Accordion content here</p>
- * </gds-accordion>
+ * <gds-details summary="Section Title">
+ *   <p>Details content here</p>
+ * </gds-details>
  * ```
  */
-@gdsCustomElement('gds-accordion')
-export class GdsAccordion extends GdsElement {
+@gdsCustomElement('gds-details')
+export class GdsDetails extends GdsElement {
   static styles = [tokens, styles]
 
   /**
-   * The summary text displayed in the accordion header
+   * The summary text displayed in the details header
    */
   @property({ type: String })
   summary = ''
 
   /**
-   * Group identifier for accordion behavior synchronization
+   * Group identifier for details behavior synchronization
    */
   @property({ type: String })
   name = ''
 
   /**
-   * Controls the expanded state of the accordion
+   * Controls the expanded state of the details
    */
   @property({ type: Boolean, reflect: true })
   open = false
 
   /**
-   * Controls the size variant of the accordion
+   * Controls the size variant of the details
    */
   @property({ type: String })
-  size: AccordionSize = 'large'
+  size: DetailsSize = 'large'
 
   /**
    * Controls whether to use custom icons from slots
@@ -107,13 +107,10 @@ export class GdsAccordion extends GdsElement {
     if (!this.open || !this.name) return
 
     document
-      .querySelectorAll('[gds-element="gds-accordion"]')
-      .forEach((accordion) => {
-        if (
-          accordion !== this &&
-          (accordion as GdsAccordion).name === this.name
-        ) {
-          const other = accordion as GdsAccordion
+      .querySelectorAll('[gds-element="gds-details"]')
+      .forEach((details) => {
+        if (details !== this && (details as GdsDetails).name === this.name) {
+          const other = details as GdsDetails
           other.open = false
           other.#updateContentHeight()
           other.#dispatchStateEvent()
@@ -136,7 +133,6 @@ export class GdsAccordion extends GdsElement {
       <div
         class=${classMap({
           details: true,
-          accordion: true,
           open: this.open,
           small: this.size === 'small',
         })}
@@ -172,14 +168,11 @@ export class GdsAccordion extends GdsElement {
           @click=${this.#handleToggle}
           aria-label="${this.open ? 'Collapse' : 'Expand'}"
         >
-          <gds-icon-accordion
-            .open=${this.open}
-            ?custom-icon=${this.customIcon}
-          >
+          <gds-icon-details .open=${this.open} ?custom-icon=${this.customIcon}>
             ${this.open
               ? html`<slot name="summary-icon-open"></slot>`
               : html`<slot name="summary-icon-closed"></slot>`}
-          </gds-icon-accordion>
+          </gds-icon-details>
         </gds-button>
       </div>
     `
