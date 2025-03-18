@@ -201,7 +201,7 @@ In this example, all accordions are grouped together with the name attribute set
     },
   },
   render: () => html`
-    <gds-flex flex-direction="column" gap="m">
+    <gds-flex flex-direction="column">
       <gds-accordion name="group-1" summary="First Accordion">
         Content of first accordion
       </gds-accordion>
