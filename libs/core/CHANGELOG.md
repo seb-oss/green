@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.69.2
+
+### Patch Changes
+
+- d245d21: **Dropdown:** Fix regression causing `isPlaceholder` options to become visible in the list
+- d03bed4: **Text:** add overflow-wrap prop
+
 ## 1.69.1
 
 ### Patch Changes
