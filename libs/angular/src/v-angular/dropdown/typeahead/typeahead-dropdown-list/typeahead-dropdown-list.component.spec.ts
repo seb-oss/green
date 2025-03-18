@@ -24,6 +24,7 @@ import { NggvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.co
 })
 export class InputStubComponent {
   @Output() nggvFocus: EventEmitter<boolean> = new EventEmitter()
+  @Output() nggvBlur: EventEmitter<boolean> = new EventEmitter()
   @Output() nggvInput: EventEmitter<string> = new EventEmitter()
   @ViewChild('input', { static: true, read: ElementRef }) inputRef?: ElementRef
 
