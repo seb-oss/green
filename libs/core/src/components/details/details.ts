@@ -128,7 +128,8 @@ export class GdsDetails extends GdsElement {
           open: this.open,
           small: this.size === 'small',
         })}
-        part="base"
+        role="group"
+        aria-labelledby="summary-${this.name || 'default'}"
       >
         ${this.#renderHeader()} ${this.#renderContent()}
       </div>
@@ -139,10 +140,12 @@ export class GdsDetails extends GdsElement {
     return html`
       <div class="summary" part="summary">
         <div
+          id="summary-${this.name || 'default'}"
           class="summary-label"
           @click=${this.#handleToggle}
           role="button"
           aria-expanded="${this.open}"
+          aria-controls="content-${this.name || 'default'}"
         >
           ${this.summary || 'Summary'}
         </div>
@@ -168,7 +171,13 @@ export class GdsDetails extends GdsElement {
 
   #renderContent = () => {
     return html`
-      <div class="content" part="content" aria-hidden="${!this.open}">
+      <div
+        id="content-${this.name || 'default'}"
+        class="content"
+        role="region"
+        aria-labelledby="summary-${this.name || 'default'}"
+        aria-hidden="${!this.open}"
+      >
         <slot></slot>
       </div>
     `
