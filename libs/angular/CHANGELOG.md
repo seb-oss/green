@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.5.2
+
+### Patch Changes
+
+- a904e48: Updated V-Angular Table sub-item to accept custom template
+
 ## 5.5.1
 
 ### Patch Changes

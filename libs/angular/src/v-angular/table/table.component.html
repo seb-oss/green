@@ -173,9 +173,13 @@
             [value]="subItem[column.property]"
             (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
           >
-            <div class="gds-sub-item-field-wrap">
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }">
+              </ng-template>
+            </ng-container>
+            <ng-template #defaultTdTemplate>
               {{ subItem[column.property] }}
-            </div>
+            </ng-template>
           </td>
         </tr>
       </ng-container>
