@@ -1,11 +1,9 @@
 // components/sidebar.tsx
-import {
-  GdsCard,
-  GdsDiv,
-  GdsDropdown,
-  GdsFlex,
-  GdsOption,
-} from '@sebgroup/green-react/src/core'
+import { GdsCard } from '@sebgroup/green-core/react/card'
+import { GdsDiv } from '@sebgroup/green-core/react/div'
+import { GdsDropdown } from '@sebgroup/green-core/react/dropdown'
+import { GdsFlex } from '@sebgroup/green-core/react/flex'
+import { GdsOption } from '@sebgroup/green-core/react/option'
 import { routes } from '../../config/routes'
 
 interface SidebarProps {

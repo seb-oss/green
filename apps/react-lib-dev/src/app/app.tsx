@@ -1,7 +1,8 @@
 // App.tsx
 import { useState } from 'react'
 
-import { GdsFlex, GdsText } from '@sebgroup/green-react/src/core'
+import { GdsFlex } from '@sebgroup/green-core/react/flex'
+import { GdsText } from '@sebgroup/green-core/react/text'
 import { routes } from '../config/routes'
 import Header from '../design/blocks/header'
 import Sidebar from '../design/blocks/sidebar'

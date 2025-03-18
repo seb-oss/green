@@ -1,6 +1,8 @@
 import { useState } from 'react'
 
-import { GdsButton, GdsDiv, GdsFlex } from '@sebgroup/green-react/src/core'
+import { GdsButton } from '@sebgroup/green-core/react/button'
+import { GdsDiv } from '@sebgroup/green-core/react/div'
+import { GdsFlex } from '@sebgroup/green-core/react/flex'
 import {
   IconBarsThree,
   IconBrandGithub,

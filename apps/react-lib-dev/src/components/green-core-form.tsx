@@ -25,9 +25,10 @@ import { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 // In this example, we are importing the GdsTheme component to set the design version to 2023
 import { GdsTheme } from '@sebgroup/green-core/components/theme/index.js'
+import { GdsBadge } from '@sebgroup/green-core/react/badge'
+import { GdsText } from '@sebgroup/green-core/react/text'
 // This is used to get the correct element name when creating the wrappers below
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
-import { GdsBadge, GdsText } from '@sebgroup/green-react/src/core'
 
 // Regster React wrappers
 // At some point in the future, the React library will have predefined wrappers to import,
