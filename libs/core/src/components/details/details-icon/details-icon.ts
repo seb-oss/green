@@ -10,8 +10,6 @@ import { styles } from './details-icon.style'
 /**
  * @element gds-icon-details
  * @status beta
- *
- * @slot - Default slot for custom icon content
  */
 @gdsCustomElement('gds-icon-details')
 export class GdsIconDetails extends GdsElement {
@@ -23,17 +21,7 @@ export class GdsIconDetails extends GdsElement {
   @property({ type: Boolean, reflect: true })
   open = false
 
-  /**
-   * Controls whether to use custom icon from slot
-   */
-  @property({ type: Boolean, attribute: 'custom-icon' })
-  customIcon = false
-
   render() {
-    if (this.customIcon) {
-      return html`<slot></slot>`
-    }
-
     return html`
       <svg
         width="20"

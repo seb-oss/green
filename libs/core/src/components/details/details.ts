@@ -21,8 +21,6 @@ export type DetailsSize = 'large' | 'small'
  * @status beta
  *
  * @slot - Default slot for details content
- * @slot summary-icon-open - Custom icon shown when details is open
- * @slot summary-icon-closed - Custom icon shown when details is closed
  
  * @event gds-ui-state - Fired when details opens or closes
  *
@@ -60,12 +58,6 @@ export class GdsDetails extends GdsElement {
    */
   @property({ type: String })
   size: DetailsSize = 'large'
-
-  /**
-   * Controls whether to use custom icons from slots
-   */
-  @property({ type: Boolean, attribute: 'custom-icon' })
-  customIcon = false
 
   @query('.content')
   private _content?: HTMLElement
@@ -168,11 +160,7 @@ export class GdsDetails extends GdsElement {
           @click=${this.#handleToggle}
           aria-label="${this.open ? 'Collapse' : 'Expand'}"
         >
-          <gds-icon-details .open=${this.open} ?custom-icon=${this.customIcon}>
-            ${this.open
-              ? html`<slot name="summary-icon-open"></slot>`
-              : html`<slot name="summary-icon-closed"></slot>`}
-          </gds-icon-details>
+          <gds-icon-details .open=${this.open}></gds-icon-details>
         </gds-button>
       </div>
     `

@@ -47,13 +47,6 @@ const meta: Meta = {
         defaultValue: { summary: 'large' },
       },
     },
-    'custom-icon': {
-      description: 'Controls whether to use custom icons from slots',
-      control: 'boolean',
-      table: {
-        type: { summary: 'boolean' },
-      },
-    },
   },
   parameters: {
     docs: {
@@ -61,23 +54,17 @@ const meta: Meta = {
         component: `
 ## Overview
 The \`gds-details\` component is a collapsible section that helps organize and hide content until needed.
-It provides smooth animations, grouping behavior, and support for custom icons.
+It provides smooth animations, grouping behavior.
 
 ## Features
 - Expandable/collapsible content sections with smooth animations
 - Group behavior: detailss with the same name will close each other automatically
-- Custom icon support through slots
 - Two size variants: large and small
 - Accessible by default
 - Keyboard navigation support
 
-## Custom Icons
-You can provide custom icons for both open and closed states:
-
 \`\`\`html
-<gds-details custom-icon>
-  <gds-icon-chevron-up slot="summary-icon-open"></gds-icon-chevron-up>
-  <gds-icon-chevron-down slot="summary-icon-closed"></gds-icon-chevron-down>
+<gds-details summary="Click to expand">
   Content here
 </gds-details>
 \`\`\`
@@ -108,62 +95,6 @@ export const Default: Story = {
     summary: 'Click to expand',
     innerHTML: 'Details content goes here',
   },
-}
-
-/**
- * Example of detailss with custom icons.
- */
-export const CustomIcons: Story = {
-  ...DefaultParams,
-  name: 'Custom Icons',
-  parameters: {
-    docs: {
-      description: {
-        story:
-          'Demonstrates how to use custom icons for open and closed states.',
-      },
-    },
-  },
-  render: () => html`
-    <gds-flex gap="2xl">
-      <gds-flex flex-direction="column" flex="1">
-        <gds-text tag="small" color="secondary">Default</gds-text>
-        <gds-details name="default-icon" summary="Default Icon">
-          This details uses the default plus/minus icon.
-        </gds-details>
-        <gds-details name="default-icon" summary="Default Icon">
-          This details uses the default plus/minus icon.
-        </gds-details>
-        <gds-details name="default-icon" summary="Default Icon">
-          This details uses the default plus/minus icon.
-        </gds-details>
-      </gds-flex>
-      <gds-flex flex-direction="column" flex="1">
-        <gds-text tag="small" color="secondary">Custom icon</gds-text>
-        <gds-details name="custom-icon" summary="With Custom Icons" custom-icon>
-          <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
-          <gds-icon-chevron-bottom
-            slot="summary-icon-closed"
-          ></gds-icon-chevron-bottom>
-          This details uses custom chevron icons.
-        </gds-details>
-        <gds-details name="custom-icon" summary="With Custom Icons" custom-icon>
-          <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
-          <gds-icon-chevron-bottom
-            slot="summary-icon-closed"
-          ></gds-icon-chevron-bottom>
-          This details uses custom chevron icons.
-        </gds-details>
-        <gds-details name="custom-icon" summary="With Custom Icons" custom-icon>
-          <gds-icon-chevron-top slot="summary-icon-open"></gds-icon-chevron-top>
-          <gds-icon-chevron-bottom
-            slot="summary-icon-closed"
-          ></gds-icon-chevron-bottom>
-          This details uses custom chevron icons.
-        </gds-details>
-      </gds-flex>
-    </gds-flex>
-  `,
 }
 
 /**
