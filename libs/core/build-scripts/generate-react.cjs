@@ -3,7 +3,6 @@ const path = require('path')
 const prettier = require('prettier')
 const prettierConfig = import('../../../prettier.config.mjs')
 const { getAllComponents } = require('./shared.cjs')
-//const { inspect } = require('util')
 
 const reactDir = path.join('libs/core/src/generated/react')
 
@@ -28,9 +27,7 @@ for (const component of filteredComponents) {
   const tagWithoutPrefix = component.tagName.replace(/^gds-/, '')
   const componentDir = path.join(reactDir, tagWithoutPrefix)
   const componentFile = path.join(componentDir, 'index.ts')
-  const importPath = component.path
-    .replace(/\.ts$/, '.js')
-    .replace(/^src\//, '')
+  const importPath = component.path.replace(/^src\//, '').replace(/\.ts$/, '')
 
   fs.mkdirSync(componentDir, { recursive: true })
 
@@ -40,10 +37,15 @@ for (const component of filteredComponents) {
     .format(
       `
         import { getReactComponent } from '../../../utils/react';
-        import type { ${component.name} as ${component.name}Type } from '../../../${importPath}';
+        import { ${component.name} as ${component.name}Class } from '../../../${importPath}';
 
         ${jsDoc}
-        export const ${component.name} = getReactComponent<${component.name}Type>('${component.tagName}');
+        export const ${component.name} = (() => {
+          // Register the custom element lazily when the component is first used
+          ${component.name}Class.define();
+
+          return getReactComponent<${component.name}Class>('${component.tagName}');
+        })()
       `,
       Object.assign(prettierConfig, {
         parser: 'babel-ts',
