@@ -16,10 +16,6 @@ export const styles = css`
       border-color: var(--gds-color-l2-border-quaternary);
     }
 
-    .details.open {
-      border-color: var(--gds-color-l2-border-quaternary);
-    }
-
     .summary {
       display: flex;
       justify-content: space-between;
@@ -30,6 +26,34 @@ export const styles = css`
       outline-color: currentColor;
       transition: all 120ms;
       color: var(--gds-color-l2-content-primary);
+    }
+
+    .summary-icon {
+      border-radius: var(--gds-space-max);
+      background-color: transparent;
+      transition: all 280ms;
+      aspect-ratio: 1;
+      width: max-content;
+      height: max-content;
+      line-height: 1;
+    }
+
+    @media (pointer: fine) {
+      .summary:hover .summary-icon {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-hover)
+        );
+      }
+
+      .summary:active .summary-icon {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-color-l3-states-light-pressed)
+        );
+      }
     }
 
     .summary-label {
@@ -47,6 +71,11 @@ export const styles = css`
       padding-block: var(--gds-space-s);
     }
 
+    .details.small .content {
+      font-size: var(--gds-text-size-heading-2xs);
+      line-height: var(--gds-text-line-height-heading-2xs);
+    }
+
     .details:focus-visible {
       border-radius: var(--gds-space-2xs);
     }
@@ -54,6 +83,10 @@ export const styles = css`
     .details.open .content {
       display: flex;
       padding-block-end: var(--gds-space-l);
+    }
+
+    .details.small.open .content {
+      padding-block-end: var(--gds-space-s);
     }
 
     .content {
