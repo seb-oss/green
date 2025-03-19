@@ -145,6 +145,7 @@ export const FormItem = ({
           ref={expandableRef}
           id={`gds-expandable-info-${inputId}`}
           className="gds-form-item__expandable-info"
+          aria-hidden={isHidden}
           hidden={isHidden}
           style={{ height: isExpanded ? expandableHeight : 0 }}
         >
