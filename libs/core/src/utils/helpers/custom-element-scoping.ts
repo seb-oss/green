@@ -57,7 +57,6 @@
  */
 
 import { html as litHtml } from 'lit'
-import { customElement, CustomElementDecorator } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 
@@ -71,11 +70,6 @@ type Constructor<T = GdsElement> = {
   // tslint:disable-next-line:no-any
   new (...args: any[]): T
 }
-
-/**
- * Allow for custom element classes with private constructors
- */
-type CustomElementClass = Omit<typeof HTMLElement, 'new'>
 
 export class ScopedElementRegistry {
   static get instance() {
@@ -109,21 +103,17 @@ export const gdsCustomElement = (tagName: string) => {
     return class Component extends constructor {
       gdsElementName = tagName
       static define() {
-        if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
-          // We still need to add elements to the lookup table since we use this lookup table to
-          // validate a custom element even though we are not using scoping
-          ScopedElementRegistry.instance.set(tagName, tagName)
-          customElements.define(tagName, Component)
-          return
-        }
+        const isVersioningDisabled = (globalThis as any)
+          .GDS_DISABLE_VERSIONED_ELEMENTS
+        const nameToRegister = isVersioningDisabled
+          ? tagName
+          : tagName + VER_SUFFIX
 
-        const versionedTagName = tagName + VER_SUFFIX
-        ScopedElementRegistry.instance.set(tagName, versionedTagName)
+        // If the element is already registered, we assume it is compatible with the current version, so we can bail out
+        if (customElements.get(nameToRegister)) return
 
-        // Bail out if the element is already registered
-        if (customElements.get(versionedTagName)) return
-
-        customElements.define(versionedTagName, Component)
+        ScopedElementRegistry.instance.set(tagName, nameToRegister)
+        customElements.define(nameToRegister, Component)
       }
     }
   }
