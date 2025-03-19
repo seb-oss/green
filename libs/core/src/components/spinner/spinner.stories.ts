@@ -5,7 +5,7 @@ import { Meta, StoryObj } from '@storybook/web-components'
 
 import { GdsSpinner } from './spinner'
 
-import './gds-spinner'
+import './spinner'
 import '../div'
 import '../flex'
 import '../text'

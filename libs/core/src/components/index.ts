@@ -1,5 +1,5 @@
 export * from '../primitives/listbox/option.component'
-export * from '../primitives/menu/menu-heading'
+export * from '../primitives/menu/menu-heading.component'
 export * from '../primitives/menu/menu-item.component'
 export * from './button/button'
 export * from './badge/badge'
