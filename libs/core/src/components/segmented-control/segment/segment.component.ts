@@ -12,7 +12,7 @@ import style from './segment.style.css?inline'
  * @element gds-segment
  */
 @gdsCustomElement('gds-segment')
-export class GdsSegment<ValueT = string> extends withSizeXProps(GdsElement) {
+export class GdsSegment<ValueT = any> extends withSizeXProps(GdsElement) {
   static styles = [...tokens, unsafeCSS(style)]
 
   /**
