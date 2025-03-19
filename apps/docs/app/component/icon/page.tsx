@@ -256,14 +256,16 @@ export default function IconBrowser() {
               </GdsFlex>
               <GdsFlex flex-direction="column" gap="m">
                 <GdsFlex flex-direction="column" gap="s">
-                  <GdsText tag="small">Tags</GdsText>
-                  <GdsFlex flex-wrap="wrap" gap="s">
-                    <GdsBadge size="small">
-                      {icons[selectedIcon].meta.tags.length > 0
-                        ? icons[selectedIcon].meta.tags.join(', ')
-                        : 'No tags available'}
-                    </GdsBadge>
-                  </GdsFlex>
+                  <GdsText tag="small">keywords</GdsText>
+                  <GdsText tag="small">
+                    {icons[selectedIcon].meta.tags.length > 0 ? (
+                      icons[selectedIcon].meta.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))
+                    ) : (
+                      <span>No tags available</span>
+                    )}
+                  </GdsText>
                 </GdsFlex>
 
                 {/* <GdsFlex flex-direction="column" gap="s">
