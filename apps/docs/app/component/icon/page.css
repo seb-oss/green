@@ -1,0 +1,11 @@
+.icons-browser {
+  position: relative;
+  min-height: max-content;
+}
+
+.preview {
+  svg {
+    height: 24px;
+    width: 24px;
+  }
+}
