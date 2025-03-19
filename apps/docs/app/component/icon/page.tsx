@@ -4,6 +4,7 @@ import './page.css'
 
 import { useEffect, useState } from 'react'
 import {
+  GdsBadge,
   GdsButton,
   GdsCard,
   GdsFilterChip,
@@ -13,7 +14,7 @@ import {
   GdsInput,
   GdsText,
 } from '$/import/components'
-import { IconMagnifyingGlass } from '$/import/icons'
+import { IconCheckmark, IconMagnifyingGlass } from '$/import/icons'
 
 interface IconData {
   id: string
@@ -65,16 +66,16 @@ export default function IconBrowser() {
           icon.meta.categories.forEach((cat) => allCategories.add(cat))
         })
         setCategories(Array.from(allCategories))
+        // Set 'all' as default category
+        setSelectedCategories(['all'])
       })
   }, [])
 
-  const handleFilterChange = (event: CustomEvent) => {
-    const selectedValues = event.detail.value.split(',')
-    if (selectedValues.includes('all')) {
-      setSelectedCategories([])
-    } else {
-      setSelectedCategories(selectedValues)
-    }
+  const toggleCategory = (category: string) => {
+    setSelectedCategories((prev) => {
+      // Always select only the clicked category
+      return [category]
+    })
   }
 
   const filteredIcons = Object.entries(icons).filter(([key, icon]) => {
@@ -85,7 +86,7 @@ export default function IconBrowser() {
       )
 
     const matchesCategories =
-      selectedCategories.length === 0 ||
+      selectedCategories.includes('all') ||
       icon.meta.categories.some((cat) => selectedCategories.includes(cat))
 
     return matchesSearch && matchesCategories
@@ -109,6 +110,12 @@ export default function IconBrowser() {
     window.URL.revokeObjectURL(blobUrl)
   }
 
+  useEffect(() => {
+    if (Object.keys(icons).length > 0 && !selectedIcon) {
+      setSelectedIcon(Object.keys(icons)[0])
+    }
+  }, [icons])
+
   return (
     <GdsFlex flex-direction="column" gap="xl" className="icons-browser">
       <GdsFlex flex-direction="column" align-items="flex-start" gap="xl">
@@ -118,31 +125,44 @@ export default function IconBrowser() {
         >
           <IconMagnifyingGlass height={24} slot="lead" />
         </GdsInput>
-        {/* <GdsButton
-          rank={showSolid ? 'secondary' : 'primary'}
+        <GdsButton
+          rank={showSolid ? 'primary' : 'secondary'}
           onClick={(e) => setShowSolid(!showSolid)}
-          size="xs"
+          size="small"
         >
-          Solid
-        </GdsButton> */}
-        <GdsFlex>
-          <GdsFilterChips
-            value={
-              selectedCategories.length ? selectedCategories.join(',') : 'all'
-            }
-            onChange={(e) => handleFilterChange(e as CustomEvent)}
+          {showSolid && <IconCheckmark height={12} slot="lead" />}
+          {showSolid ? 'Show Regular' : 'Show Solid'}
+        </GdsButton>
+        <GdsFlex gap="s" flex-wrap="wrap" max-width="80%">
+          <GdsButton
+            rank={selectedCategories.includes('all') ? 'primary' : 'secondary'}
+            size="small"
+            onClick={() => toggleCategory('all')}
           >
-            <GdsFilterChip value="all">All</GdsFilterChip>
-            {categories.map((category) => (
-              <GdsFilterChip key={category} value={category}>
-                {category}
-              </GdsFilterChip>
-            ))}
-          </GdsFilterChips>
+            {selectedCategories.includes('all') && (
+              <IconCheckmark height={12} slot="lead" />
+            )}
+            All
+          </GdsButton>
+          {categories.map((category) => (
+            <GdsButton
+              key={category}
+              rank={
+                selectedCategories.includes(category) ? 'primary' : 'secondary'
+              }
+              size="small"
+              onClick={() => toggleCategory(category)}
+            >
+              {selectedCategories.includes(category) && (
+                <IconCheckmark height={12} slot="lead" />
+              )}
+              {category}
+            </GdsButton>
+          ))}
         </GdsFlex>
       </GdsFlex>
-      <GdsFlex gap="xl">
-        <GdsGrid columns="6" gap="m" className="preview">
+      <GdsFlex gap="xl" align-items="flex-start">
+        <GdsGrid columns="4" gap="m" className="preview">
           {filteredIcons.map(([key, icon]) => (
             <GdsCard
               key={key}
@@ -155,14 +175,25 @@ export default function IconBrowser() {
                 align-items="center"
                 gap="l s m s"
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  strokeWidth={1.5}
-                  fill="none"
-                  dangerouslySetInnerHTML={{
-                    __html: icon.variants.regular,
-                  }}
-                ></svg>
+                {showSolid ? (
+                  <svg
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    fill="none"
+                    dangerouslySetInnerHTML={{
+                      __html: icon.variants.solid,
+                    }}
+                  ></svg>
+                ) : (
+                  <svg
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    fill="none"
+                    dangerouslySetInnerHTML={{
+                      __html: icon.variants.regular,
+                    }}
+                  ></svg>
+                )}
 
                 <GdsText tag="small">{icon.displayName}</GdsText>
               </GdsFlex>
@@ -171,30 +202,188 @@ export default function IconBrowser() {
         </GdsGrid>
 
         {selectedIcon && icons[selectedIcon] && (
-          <GdsCard width="240px">
-            <h2>{icons[selectedIcon].displayName}</h2>
+          <GdsCard
+            width="240px"
+            max-width="240px"
+            height="max-content"
+            position="sticky"
+            inset="80px 0 0 0"
+            padding="s"
+            border-radius="l"
+          >
+            <GdsFlex flex-direction="column" gap="l">
+              <GdsFlex flex-direction="column">
+                <GdsCard variant="secondary" className="preview">
+                  <GdsFlex
+                    align-items="center"
+                    justify-content="center"
+                    height="120px"
+                    aspect-ratio="1"
+                    className="icon-large-preview"
+                  >
+                    {showSolid ? (
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="44"
+                        height="44"
+                        fill="none"
+                        dangerouslySetInnerHTML={{
+                          __html: icons[selectedIcon].variants.solid,
+                        }}
+                      />
+                    ) : (
+                      <svg
+                        viewBox="0 0 24 24"
+                        width="44"
+                        height="44"
+                        strokeWidth={1.5}
+                        fill="none"
+                        dangerouslySetInnerHTML={{
+                          __html: icons[selectedIcon].variants.regular,
+                        }}
+                      />
+                    )}
+                  </GdsFlex>
+                </GdsCard>
+                <GdsFlex flex-direction="column" gap="s" padding="s m m m">
+                  <GdsText tag="h4">{icons[selectedIcon].displayName}</GdsText>
+                  {icons[selectedIcon].meta.categories.map((category) => (
+                    <GdsBadge key={category} size="small">
+                      {category}
+                    </GdsBadge>
+                  ))}
+                </GdsFlex>
+              </GdsFlex>
+              <GdsFlex flex-direction="column" gap="m">
+                <GdsFlex flex-direction="column" gap="s">
+                  <GdsText tag="small">Tags</GdsText>
+                  <GdsFlex flex-wrap="wrap" gap="s">
+                    <GdsBadge size="small">
+                      {icons[selectedIcon].meta.tags.length > 0
+                        ? icons[selectedIcon].meta.tags.join(', ')
+                        : 'No tags available'}
+                    </GdsBadge>
+                  </GdsFlex>
+                </GdsFlex>
 
-            <div>
-              <h3>Preview</h3>
-              <div>
-                <div>
-                  <h4>Regular</h4>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: icons[selectedIcon].variants.regular,
-                    }}
-                  />
-                </div>
-                <div>
-                  <h4>Solid</h4>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: icons[selectedIcon].variants.solid,
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
+                {/* <GdsFlex flex-direction="column" gap="s">
+                  <GdsText tag="h4">Description</GdsText>
+                  <GdsText>
+                    {icons[selectedIcon].meta.description ||
+                      'No description available'}
+                  </GdsText>
+                </GdsFlex> */}
+
+                <GdsFlex flex-direction="column" gap="m">
+                  <GdsText tag="h4">Download</GdsText>
+                  <GdsFlex gap="s">
+                    <GdsButton
+                      size="small"
+                      onClick={() =>
+                        downloadSVG(
+                          icons[selectedIcon].static.regular,
+                          `${selectedIcon}-regular.svg`,
+                        )
+                      }
+                    >
+                      Regular SVG
+                    </GdsButton>
+                    <GdsButton
+                      size="small"
+                      onClick={() =>
+                        downloadSVG(
+                          icons[selectedIcon].static.solid,
+                          `${selectedIcon}-solid.svg`,
+                        )
+                      }
+                    >
+                      Solid SVG
+                    </GdsButton>
+                  </GdsFlex>
+                </GdsFlex>
+
+                <GdsFlex flex-direction="column" gap="m">
+                  <GdsText tag="h4">Frameworks</GdsText>
+                  <GdsFlex gap="s">
+                    {(['web', 'react', 'angular'] as const).map((fw) => (
+                      <GdsButton
+                        key={fw}
+                        size="small"
+                        rank={framework === fw ? 'primary' : 'secondary'}
+                        onClick={() => setFramework(fw)}
+                      >
+                        {fw.charAt(0).toUpperCase() + fw.slice(1)}
+                      </GdsButton>
+                    ))}
+                  </GdsFlex>
+
+                  <GdsFlex flex-direction="column" gap="s">
+                    <GdsFlex
+                      justify-content="space-between"
+                      align-items="center"
+                    >
+                      <GdsText tag="small">Path</GdsText>
+                      <GdsButton
+                        size="xs"
+                        onClick={() =>
+                          copyToClipboard(
+                            icons[selectedIcon].framework[framework].path,
+                          )
+                        }
+                      >
+                        Copy
+                      </GdsButton>
+                    </GdsFlex>
+                    <GdsInput
+                      size="small"
+                      value={icons[selectedIcon].framework[framework].path}
+                    />
+
+                    <GdsFlex
+                      justify-content="space-between"
+                      align-items="center"
+                    >
+                      <GdsText tag="small">Import</GdsText>
+                      <GdsButton
+                        size="xs"
+                        onClick={() =>
+                          copyToClipboard(
+                            icons[selectedIcon].framework[framework].import,
+                          )
+                        }
+                      >
+                        Copy
+                      </GdsButton>
+                    </GdsFlex>
+                    <GdsInput
+                      size="small"
+                      value={icons[selectedIcon].framework[framework].import}
+                    />
+
+                    <GdsFlex
+                      justify-content="space-between"
+                      align-items="center"
+                    >
+                      <GdsText tag="small">Component</GdsText>
+                      <GdsButton
+                        size="xs"
+                        onClick={() =>
+                          copyToClipboard(
+                            icons[selectedIcon].framework[framework].component,
+                          )
+                        }
+                      >
+                        Copy
+                      </GdsButton>
+                    </GdsFlex>
+                    <GdsInput
+                      size="small"
+                      value={icons[selectedIcon].framework[framework].component}
+                    />
+                  </GdsFlex>
+                </GdsFlex>
+              </GdsFlex>
+            </GdsFlex>
           </GdsCard>
         )}
       </GdsFlex>

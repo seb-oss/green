@@ -9,3 +9,10 @@
     width: 24px;
   }
 }
+
+.icon-large-preview {
+  svg {
+    height: 48px;
+    width: 48px;
+  }
+}
