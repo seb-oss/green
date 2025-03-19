@@ -9,7 +9,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/libs/core/src"],
       "options": {
-        "command": "nx run core:build-with-types-and-scoping"
+        "command": "nx run core:generate-jsx-components && nx run core:build-with-types-and-scoping"
       }
     },
     "build-src": {
