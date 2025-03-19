@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.17
+
+### Patch Changes
+
+- 00c48da: **Radio group:** Add missing gds prefix to horizontal modifier
+
 ## 3.6.16
 
 ### Patch Changes
