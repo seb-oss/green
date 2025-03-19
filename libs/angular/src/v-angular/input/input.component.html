@@ -23,7 +23,10 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="form-info description hide-if-empty" *ngIf="descriptionIsVisible">
+<div
+  class="form-info description hide-if-empty"
+  *ngIf="description && descriptionIsVisible"
+>
   {{ description }}
 </div>
 
