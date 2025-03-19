@@ -9,9 +9,9 @@ import {
 } from '../../utils/controllers/listbox-kb-nav-controller'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 
-import type { GdsMenuItem } from '../../primitives/menu/menu-item'
+import type { GdsMenuItem } from './menu-item'
 
-import '../../primitives/menu/menu-item'
+import './menu-item'
 
 /**
  * @element gds-menu

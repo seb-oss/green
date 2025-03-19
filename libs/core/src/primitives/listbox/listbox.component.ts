@@ -12,12 +12,9 @@ import { watch } from '../../utils/decorators/watch'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 import style from './listbox.styles'
 
-import type {
-  GdsOption,
-  OptionsContainer,
-} from '../../primitives/listbox/option'
+import type { GdsOption, OptionsContainer } from './option.component'
 
-import '../../primitives/listbox/option'
+import './option.component'
 
 /**
  * @element gds-listbox

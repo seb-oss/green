@@ -17,7 +17,7 @@ import type { GdsListbox } from '../../primitives/listbox'
 import type {
   GdsOption,
   OptionsContainer,
-} from '../../primitives/listbox/option'
+} from '../../primitives/listbox/option.component'
 
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
@@ -26,7 +26,6 @@ import '../../primitives/listbox'
 import '../icon/icons/checkmark'
 import '../icon/icons/chevron-bottom'
 import '../popover'
-import '../button'
 
 /**
  * @element gds-dropdown
