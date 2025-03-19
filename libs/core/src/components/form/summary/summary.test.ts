@@ -59,9 +59,9 @@ describe('<gds-form-summary>', () => {
       await summaryEl.updateComplete
 
       expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
-      expect(summaryEl.shadowRoot?.querySelector('li')?.textContent).to.equal(
-        'Dropdown label',
-      )
+      expect(
+        summaryEl.shadowRoot?.querySelector('li')?.textContent.trim(),
+      ).to.equal('Dropdown label')
     })
   })
 })

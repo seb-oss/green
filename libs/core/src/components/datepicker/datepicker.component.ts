@@ -22,12 +22,12 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsDatePartSpinner } from './date-part-spinner'
 import { styles } from './datepicker.styles'
 
 import type { GdsDropdown } from '../../components/dropdown'
 import type { GdsCalendar } from '../calendar'
 import type { GdsPopover } from '../popover'
-import type { GdsDatePartSpinner } from './date-part-spinner'
 
 import '../../components/flex'
 import '../../components/button'
@@ -38,7 +38,6 @@ import '../icon/icons/calender-add'
 import '../icon/icons/chevron-left'
 import '../icon/icons/chevron-right'
 import '../popover'
-import './date-part-spinner'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -195,6 +194,11 @@ class Datepicker extends GdsFormControlElement<Date> {
   private _elField!: HTMLDivElement
 
   #valueOnOpen?: Date
+
+  constructor() {
+    super()
+    GdsDatePartSpinner.define()
+  }
 
   connectedCallback(): void {
     super.connectedCallback()
