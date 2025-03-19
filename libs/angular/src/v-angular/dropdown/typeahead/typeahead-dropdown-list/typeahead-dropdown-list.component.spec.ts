@@ -24,6 +24,7 @@ import { NggvTypeaheadDropdownListComponent } from './typeahead-dropdown-list.co
 })
 export class InputStubComponent {
   @Output() nggvFocus: EventEmitter<boolean> = new EventEmitter()
+  @Output() nggvBlur: EventEmitter<boolean> = new EventEmitter()
   @Output() nggvInput: EventEmitter<string> = new EventEmitter()
   @ViewChild('input', { static: true, read: ElementRef }) inputRef?: ElementRef
 
@@ -69,15 +70,10 @@ describe('[NggvCore]', () => {
         component.state = { key: '111', label: 'label123' }
         const emitSpy = jest.spyOn(component.hostComponent.nggvInput, 'emit')
         const expandedSpy = jest.spyOn(component, 'setExpanded')
-        const outisdeSpy = jest.spyOn(
-          component as any,
-          'subscribeToOutsideClickEvent',
-        )
         fixture.detectChanges()
         component.hostComponent.nggvFocus.next({ event: 'focusDummy' })
         expect(emitSpy).not.toHaveBeenCalled()
         expect(expandedSpy).toHaveBeenCalledWith(true)
-        expect(outisdeSpy).toHaveBeenCalled()
       })
     })
 
