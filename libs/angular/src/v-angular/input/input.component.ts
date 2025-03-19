@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Inject,
@@ -144,6 +145,7 @@ export class NggvInputComponent
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
+    public element: ElementRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }
