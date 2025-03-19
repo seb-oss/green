@@ -146,14 +146,10 @@ export const Input = forwardRef(
         label={label}
         labelInformation={info}
         role={role}
+        validator={validator}
       >
         <div className="gds-input-wrapper">
-          <Group
-            groupBorder
-            groupFocus
-            error={validator?.message}
-            id={`${uuid}_group`}
-          >
+          <Group groupBorder groupFocus id={`${uuid}_group`}>
             {input}
             {unit && <span className={spanClassName}>{unit}</span>}
             {children}

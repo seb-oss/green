@@ -6,14 +6,15 @@ import { IconCheckmark } from '$/import/icons'
 
 type DoProps = {
   children: ReactNode
+  caption: string
 }
 
-export default function Do({ children }: DoProps) {
+export default function Do({ children, caption }: DoProps) {
   return (
     <GdsCard
-      border="4xs/#ecf6ed"
+      border="3xs/#ecf6ed"
       border-radius="s"
-      background="positive"
+      background="primary"
       height="max-content"
       padding="0"
       overflow="hidden"
@@ -24,10 +25,11 @@ export default function Do({ children }: DoProps) {
         align-items="center"
         gap="s"
         padding="xs m"
+        color="positive"
       >
-        <IconCheckmark />
-        <GdsText tag="small" font-weight="book">
-          DO
+        <IconCheckmark width={14} stroke={2} />
+        <GdsText font-size="details-xs" font-weight="book">
+          {caption ? caption : 'Do'}
         </GdsText>
       </GdsFlex>
     </GdsCard>

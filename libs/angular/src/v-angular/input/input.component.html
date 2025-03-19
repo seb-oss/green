@@ -1,7 +1,7 @@
 <!-- LABEL -->
 <label
   [id]="id + '-label'"
-  class="sdv-field-label hide-if-empty"
+  class="gds-field-label hide-if-empty"
   [attr.for]="id + '-input'"
   *transloco="let t; read: scope"
 >
@@ -14,7 +14,7 @@
       {{ label }}
       <span
         *ngIf="optional === true || (required !== true && optional !== false)"
-        class="sdv-field-label--optional"
+        class="gds-field-label--optional"
       >
         ({{ t('label.optional') }})
       </span>
@@ -23,7 +23,7 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="form-info description hide-if-empty">
+<div class="form-info description hide-if-empty" *ngIf="descriptionIsVisible">
   {{ description }}
 </div>
 
@@ -60,7 +60,7 @@
       <input
         #input
         [id]="id + '-input'"
-        class="sdv-field"
+        class="gds-field"
         [attr.type]="type"
         [attr.name]="name"
         [attr.required]="required"
@@ -72,6 +72,7 @@
         [attr.maxlength]="maxlength"
         [attr.minlength]="minlength"
         [pattern]="pattern"
+        title=""
         [disabled]="disabled"
         [autocomplete]="autocomplete"
         [autofocus]="autofocus"
@@ -94,7 +95,7 @@
       <input
         #input
         [id]="id + '-input'"
-        class="sdv-field"
+        class="gds-field"
         autocomplete="off"
         [attr.name]="name"
         [attr.required]="required"
@@ -104,6 +105,7 @@
         [attr.aria-label]="description"
         [attr.aria-describedby]="id + '-message'"
         [nggvInputMask]="inputMask"
+        title=""
         [formControl]="control"
       />
     </div>
@@ -121,12 +123,28 @@
   >
     <span
       class="form-info form-info--error"
-      [attr.id]="id + '-message'"
+      [attr.for]="id + '-input'"
       *ngIf="invalid && (error || ngControl?.invalid)"
     >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <span class="error-icon">
+        <gds-icon-triangle-exclamation
+          width="16"
+          height="16"
+          solid="true"
+          *nggCoreElement
+        ></gds-icon-triangle-exclamation>
+      </span>
+
+      <span
+        *ngIf="error; else errorsRef"
+        [attr.data-thook]="thook + '-errorlabel'"
+        >{{ error }}</span
+      >
       <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>
@@ -139,7 +157,7 @@
           currentLength: (inputRef?.nativeElement?.value ?? '').length;
           charactersLeft as charactersLeft
         "
-        class="form-info"
+        class="form-info form-info--countdown"
         style="text-align: right"
       >
         {{ charactersLeft }} {{ t('label.maxlength') }}

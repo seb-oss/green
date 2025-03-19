@@ -1,5 +1,280 @@
 # Changelog
 
+## 1.69.2
+
+### Patch Changes
+
+- d245d21: **Dropdown:** Fix regression causing `isPlaceholder` options to become visible in the list
+- d03bed4: **Text:** add overflow-wrap prop
+
+## 1.69.1
+
+### Patch Changes
+
+- 7fe6b60: **Dropdown:** Fix issue with elements being `aria-hidden` while also having focus
+- 7fe6b60: **Dropdown:** Fix popover overlap when using `combobox` option
+
+## 1.69.0
+
+### Minor Changes
+
+- f438e8f: **Radio Button:** Add new component Radio Button
+
+## 1.68.5
+
+### Patch Changes
+
+- 6cea9a6: **Popover:** Change default positioning middleware to shift position rather than flip in order to use more available viewport space.
+
+## 1.68.4
+
+### Patch Changes
+
+- d529108: **Rixh text:** Remove leading zero
+
+## 1.68.3
+
+### Patch Changes
+
+- 08f1210: **Spinner:** add spinner to export on components
+- 08f1210: **Spinner:** rename classes to fix issue with suffix
+
+## 1.68.2
+
+### Patch Changes
+
+- 49bb2e6: **Rich Text:** Update styling on ordered list
+
+## 1.68.1
+
+### Patch Changes
+
+- 9d1476d: **Rich text:** Fix the heading first of type
+  **Rich text:** Fix the ordered list padding
+
+## 1.68.0
+
+### Minor Changes
+
+- 2378057: **Spinner:** Add new component
+
+## 1.67.3
+
+### Patch Changes
+
+- 286c636: **Rich Text:** Improvements on styling
+
+## 1.67.2
+
+### Patch Changes
+
+- 25a87f9: **Context Menu:** Improved rendering performance
+
+## 1.67.1
+
+### Patch Changes
+
+- e59a021: **Select:** Fix some state sync issues with the wrapped select element
+- d69a5ea: **Popover:** Fix stacking issue with nonmodal popovers
+- d69a5ea: **Dropdown:** Fix `combobox` when used without a placeholder option, and add missing event dispatch
+
+## 1.67.0
+
+### Minor Changes
+
+- 9180a71: **Popover:** `gds-ui-state` events can now be cancelled to gain more control over popover behavior
+- 9180a71: **Dropdown:** `gds-ui-state` event is now cancellable, and only fires on user-initiated changes
+- 5fc4d2e: **Localisation:** Add translations for `no`, `nl`, `it`, `fr`, `fi`, `de` and `da`
+
+### Patch Changes
+
+- 9180a71: **Dropdown:** Fix scrollIntoView behavior in the listbox so that headers won't be obscured
+- db5b77b: **Context Menu:** Fix focus issue. Closes #1993
+- 9180a71: **Dropdown:** Fix unexpected bubbeling of the `gds-ui-state` event
+
+## 1.66.1
+
+### Patch Changes
+
+- a715edc: **Declarative Layout**: Fix an incorrect import path the `styleExpressionProperty` decorator, fix default border props of gds-flex, add missing `order` property.
+
+## 1.66.0
+
+### Minor Changes
+
+- 4cdaf5f: **`gds-grid`**: `auto-columns` now support any CSS units. If no unit is specified, `px` is assumed.
+- 4cdaf5f: **Divider:** Add propagation of role attribute
+- 4cdaf5f: ### Declarative Layout updates
+
+  - Add `gds-div` as the base container for declarative layout
+  - Refactor implementation for easier reuse of properties in various components. Several component now support style expression properties for common things like margin, width and flex item properties.
+  - Colors now only support tokens from Green, no custom values except `transparent` and `currentColor`. This simplifies implementation and makes color properties more consistent.
+  - Color properties now always use `tokenName/transparency`, where transparency is optional.
+  - Set `box-sizing` to `border-box` by default
+  - Set `border-color` to `primary` by default
+  - `border` property now works like css shorthand border property, ie. `size style color`
+  - `border-style` property added for completeness
+
+  #### Removed
+
+  The following style expression properties have been removed:
+
+  - `pointer-events`
+  - `user-select`
+  - `cursor`
+  - `transform-style`
+  - `transition`
+  - `transition-behavior`
+  - `animation`
+
+  #### Deprecated
+
+  The followind elements have been deprecated
+
+  - `gds-container` is deprecated in favor of `gds-div`
+  - `gds-spacer` is deprecated in favor of `gds-div`
+
+### Patch Changes
+
+- 4cdaf5f: **Calendar:** Fix missing focus outline in 2023 style
+
+## 1.65.2
+
+### Patch Changes
+
+- d800fd8: **Field Base:** Add on main wrap gap to add space in select
+
+## 1.65.1
+
+### Patch Changes
+
+- 5c43312: **Icons**: Add missing css unit in height/width
+- 67547d2: **Textarea:** Resizing improvements, resize handle and overflow
+
+## 1.65.0
+
+### Minor Changes
+
+- fc89181: **Select:** Add new components `gds-select`, Consolidate with Field Base
+
+### Patch Changes
+
+- fc89181: **Input:** Update the clearable action slot icon to be `cross-large`
+- fc89181: **Datepicker:** Fix the action slot icon size when is small and variant invalid
+- fc89181: **Button**: Fix the the outline on variants
+- f8c3d74: **FormControlElement**: Request general update when validity state changes
+
+## 1.64.0
+
+### Minor Changes
+
+- 07cb314: **Dropdown:** Add `combobox` option
+- 07cb314: **Popover:** Add `autofocus` property to control wheter focus is automtaically moved to the popover when opened
+
+### Patch Changes
+
+- 07cb314: **Icon:** Fix invalid use of css units in SVG width/height attributes
+- 07cb314: **Transitional Styles:** Fix crash in legacy browsers
+- 07cb314: **Form controls:** Fix recursion bug in validity state update in legacy browsers
+
+## 1.63.2
+
+### Patch Changes
+
+- 7213bfb: Dropdown: Added support for size small to header
+
+## 1.63.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Fix actions button not hidden when child rerenders
+- 3a9af88: **Segmented Control:** Fix issue where indicator would not update to reflect value
+- 776f056: **Button:** Fix icon buttons getting 0 width in Safari browsers
+
+## 1.63.0
+
+### Minor Changes
+
+- 33788ef: **Text:** Font-sizes are now defined as rem units
+- c230b89: **GdsText:** Inherit all style expression props from GdsContainer
+
+### Patch Changes
+
+- 1ea5ef2: **Button:** Tweak ripple animation and hover style
+- 4933535: **FieldBase:** Update focus border-color
+
+## 1.62.5
+
+### Patch Changes
+
+- e18b5a8: **Utils:style-expression-property:** Safe guard falsy values
+
+## 1.62.4
+
+### Patch Changes
+
+- d359d06: **Button:** Fix width styling issue in 2016 design
+
+## 1.62.3
+
+### Patch Changes
+
+- c6d42ec: **Filter Chip**: Fix issue where filter chip is trying to register transitional styles for button
+
+## 1.62.2
+
+### Patch Changes
+
+- 12a3417: **Scoping:** Fix return type of `gdsCustomElement` decorator in bail-out code path
+
+## 1.62.1
+
+### Patch Changes
+
+- eb6e18e: **Datepicker:** Fix calendar button size in small variant
+- eb6e18e: **Form error state (2016):** Styling alignments
+- eb6e18e: **Dropdown:** Fix chevron alignment in 2016 design
+- 2f2987b: **Segmented Control:** Fix an issue where scroll buttons would do nothing under certain conditions
+
+## 1.62.0
+
+### Minor Changes
+
+- 5e16375: **Texarea:** Consolidate with Field Base
+- 40f905b: **Datepicker:** Consolidate with Field Base
+- f43d556: **Input:** Consolidate with Field Base
+- 4d8df8b: **Dropdown:** Consolidate with Field Base
+- f43d556: **Input:** Add transitional styles
+- 5e16375: **Textarea:** Add transitional styles
+
+### Patch Changes
+
+- 33b08a2: **Icon Button:** Update transitional styles
+- 93bac39: **Datepicker and Dropdown:** minor a11y improvements
+
+## 1.61.0
+
+### Minor Changes
+
+- 15771a0: **Textarea**: Add `gds-input-cleared` event
+- 47957aa: **Tokens:** Remove Color Tokens V1, update all components to use the new color tokens
+- 15771a0: **Rich Text:** Add configurable `captureMode`, in order to increase framework compatibility
+
+### Patch Changes
+
+- 15771a0: **Dropdown:** Emit `input` event when value is changed
+- 15771a0: **Form controls:** Add property for manually controlling error message
+- a234635: **Datepicker:** Year no longer loops around when incrementing past last available
+- 15771a0: **Dateicker:** Dispatch input event on value changed from calendar popover
+- 15771a0: **Datepicker:** Dispatch `ìnput` event on spinner change
+- 15771a0: **Input & Textarea**: Dispatch `input` event when the control is cleared
+
+## 1.60.1
+
+### Patch Changes
+
+- d144d6b: **Icon:** Fix all icons fill from black to currentColor like the rest so it gets the content color instead
+
 ## 1.60.0
 
 ### Minor Changes

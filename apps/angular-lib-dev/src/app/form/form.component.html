@@ -1,0 +1,200 @@
+<h1 style="margin-bottom: 2rem">Form example using Green Core components</h1>
+
+<gds-theme [designVersion]="designVersion">
+  <gds-flex gap="l" max-width="1000px" margin="0 auto l">
+    <div style="flex: 1">
+      <div style="margin-bottom: 8px; font-weight: bold">Design version</div>
+      <gds-segmented-control
+        [value]="designVersion"
+        (change)="setDesignVersion($event)"
+        style="width: 100%"
+      >
+        <gds-segment value="2016">2016</gds-segment>
+        <gds-segment value="2023">2023</gds-segment>
+      </gds-segmented-control>
+    </div>
+    <div style="flex: 1"></div>
+  </gds-flex>
+  <gds-flex gap="l" max-width="1000px" margin="0 auto">
+    <gds-card
+      variant="primary"
+      flex="1"
+      [class.card]="designVersion === '2016'"
+    >
+      <form [formGroup]="simpleForm">
+        <gds-flex flex-direction="column" gap="m">
+          <!-- Because we've imported the NggCoreFormsModule, we can use the Green Core form controls
+             just like regular HTML controls. Just set the formControlName to the matching field in
+             your reactive form object.
+
+             Additionally, we can supply the error message to the `errorMessage` property of the form control.
+             This will render in red underneath the input field if the control is invalid.
+
+             Other than that, not much is differnt from using regular HTML controls. -->
+          <gds-input
+            formControlName="name"
+            label="Name"
+            clearable
+            [errorMessage]="getError(simpleForm.get('name'))"
+          ></gds-input>
+          <gds-input
+            formControlName="email"
+            label="Email"
+            type="email"
+            [errorMessage]="getError(simpleForm.get('email'))"
+            clearable
+          ></gds-input>
+          <gds-dropdown
+            searchable
+            formControlName="dropdown"
+            label="Dropdown"
+            [errorMessage]="getError(simpleForm.get('dropdown'))"
+          >
+            <gds-option value="">Select option</gds-option>
+            <gds-option value="Option 1">Option 1</gds-option>
+            <gds-option value="Option 2">Option 2</gds-option>
+            <gds-option value="Option 3">Option 3</gds-option>
+            <gds-option value="Option 4">Option 4</gds-option>
+            <gds-option value="Option 5">Option 5</gds-option>
+            <gds-option value="Option 6">Option 6</gds-option>
+            <gds-option value="Option 7">Option 7</gds-option>
+            <gds-option value="Option 8">Option 8</gds-option>
+            <gds-option value="Option 9">Option 9</gds-option>
+            <gds-option value="Option 10">Option 10</gds-option>
+          </gds-dropdown>
+          <gds-select
+            formControlName="select"
+            label="Select"
+            [errorMessage]="getError(simpleForm.get('select'))"
+          >
+            <select>
+              <option value="">Select option</option>
+              <option value="Option 1">Option 1</option>
+              <option value="Option 2">Option 2</option>
+              <option value="Option 3">Option 3</option>
+            </select>
+          </gds-select>
+          <gds-radio-group
+            formControlName="radio"
+            label="Radio"
+            supporting-text="Select an option"
+            [errorMessage]="getError(simpleForm.get('radio'))"
+          >
+            <gds-radio
+              label="Option 1"
+              value="1"
+              supporting-text="Supporting text"
+            ></gds-radio>
+            <gds-radio
+              label="Option 2"
+              value="2"
+              supporting-text="Supporting text"
+            ></gds-radio>
+            <gds-radio
+              label="Option 3"
+              value="3"
+              supporting-text="Supporting text"
+            ></gds-radio>
+          </gds-radio-group>
+          <gds-datepicker
+            formControlName="date"
+            label="Date"
+            [errorMessage]="getError(simpleForm.get('date'))"
+          ></gds-datepicker>
+          <gds-textarea
+            formControlName="description"
+            label="Description"
+            [errorMessage]="getError(simpleForm.get('description'))"
+            clearable
+          >
+          </gds-textarea>
+          <gds-flex gap="m">
+            <gds-button type="submit">Submit</gds-button>
+            <gds-button type="reset" rank="secondary">Reset</gds-button>
+          </gds-flex>
+          <!-- <gds-form-summary></gds-form-summary> -->
+        </gds-flex>
+      </form>
+    </gds-card>
+
+    <gds-flex flex="1">
+      <gds-rich-text>
+        <table>
+          <tr>
+            <th>Name</th>
+            <td>
+              {{ simpleForm.get('name')?.value }}
+              <gds-text *ngIf="simpleForm.get('name')?.invalid" color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>
+              {{ simpleForm.get('email')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('email')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Dropdown</th>
+            <td>
+              {{ simpleForm.get('dropdown')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('dropdown')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Select</th>
+            <td>
+              {{ simpleForm.get('select')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('select')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Radio</th>
+            <td>
+              {{ simpleForm.get('radio')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('radio')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Date</th>
+            <td>
+              {{ simpleForm.get('date')?.value }}
+              <gds-text *ngIf="simpleForm.get('date')?.invalid" color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td>
+              {{ simpleForm.get('description')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('description')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+        </table>
+      </gds-rich-text>
+    </gds-flex>
+  </gds-flex>
+</gds-theme>

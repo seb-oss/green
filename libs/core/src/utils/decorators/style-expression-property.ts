@@ -1,9 +1,8 @@
 import { CSSResult, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
-import { GdsElement } from 'src/gds-element'
 
+import { GdsElement } from '../../gds-element'
 import { parse, toCss, tokenize } from '../helpers/style-expression-parser'
-import { watch } from './watch'
 
 /**
  * Options for `@styleExpressionProperty`.
@@ -52,8 +51,7 @@ export function styleExpressionProperty(
   ) => {
     const sel = options?.selector ?? String(':host')
     const prop = options?.property ?? String(descriptor)
-    const valueTemplate =
-      options?.valueTemplate ?? ((v) => `var(--gds-space-${v}, 0)`)
+    const valueTemplate = options?.valueTemplate
     const styleTemplate = options?.styleTemplate
     const cacheKey = options?.cacheOverrideKey ?? `0`
 
@@ -69,8 +67,10 @@ export function styleExpressionProperty(
         return this['__' + String(descriptor)]
       },
       set: async function (newValue) {
+        if (!newValue) return
         this['__' + String(descriptor)] = newValue
-        await this.updateComplete
+
+        await this.firstUpdated()
 
         // If the element has level defined, we need to use it in the cache key
         const lvl = (this as any).level ?? '0'
@@ -89,7 +89,7 @@ export function styleExpressionProperty(
           sel,
           prop,
           ast,
-          valueTemplate.bind(this),
+          valueTemplate?.bind(this),
           styleTemplate?.bind(this),
         )
 

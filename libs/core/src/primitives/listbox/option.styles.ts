@@ -5,7 +5,7 @@ const style = css`
 
   @layer base {
     :host(:not(:last-child)) {
-      border-bottom: 1px solid var(--gds-sys-color-border-stroke-variant2);
+      border-bottom: 1px solid var(--gds-color-l2-border-primary);
     }
 
     :host div {
@@ -21,25 +21,41 @@ const style = css`
       gap: 1ch;
       max-width: 100%;
       box-sizing: border-box;
+      position: relative;
+
+      &::before {
+        content: ' ';
+        display: flex;
+        inset: var(--gds-space-2xs);
+        position: absolute;
+        border: var(--gds-space-3xs) solid currentColor;
+        border-radius: var(--gds-space-xs);
+        opacity: 0;
+        visitility: hidden;
+        pointer-events: none;
+      }
     }
 
-    :host([highlighted]) div {
-      background-color: var(--gds-sys-color-container-container-shade1);
-      color: var(--gds-sys-color-content-content-inverse);
+    :host([highlighted]) {
+      background-color: var(--gds-color-l2-background-tertiary);
+      color: var(--gds-color-l2-content-tertiary);
     }
 
     :host(:hover:not([highlighted])) div {
-      background-color: var(--gds-sys-color-container-container-dim1);
+      background-color: var(--gds-color-l3-background-secondary);
     }
 
     :host(:focus-visible) {
-      outline: auto;
-      outline-offset: -6px;
-      outline-color: currentColor;
-      outline-width: 2px;
+      outline: none;
+
+      div::before {
+        inset: var(--gds-space-2xs);
+        opacity: 1;
+        visivility: visible;
+      }
     }
 
-    :host([aria-hidden='true']) div {
+    :host([inert]) {
       display: none;
     }
 
@@ -48,7 +64,7 @@ const style = css`
       align-items: center;
       justify-content: center;
       height: 1lh;
-      width: auto;
+      width: 1lh;
       box-sizing: border-box;
       position: relative;
       aspect-ratio: 1/1;
@@ -61,7 +77,7 @@ const style = css`
 
         gds-icon-checkmark {
           &::part(icon) {
-            color: var(--gds-sys-color-base-white);
+            color: var(--gds-color-l2-content-tertiary);
             stroke-width: var(--gds-space-2xs);
           }
         }

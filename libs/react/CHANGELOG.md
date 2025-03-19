@@ -1,5 +1,47 @@
 # Changelog
 
+## 3.24.2
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 3.24.1
+
+### Patch Changes
+
+- 277716a: **Modal:** fix scrolling inside modal on iOS
+- Updated dependencies [d529108]
+  - @sebgroup/green-core@1.68.4
+
+## 3.24.0
+
+### Minor Changes
+
+- 34bf172: **Dependencies:** Include React 19 in peer dependency constraint
+
+  This update makes it possible to use @sebgroup/green-react with React 19 without complaints from NPM.
+
+  Note, however, that the library is still not thoroughly tested with React 19, and all our unit tests still run against React 18. So proceed with caution.
+
+## 3.23.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Update props naming and types
+- Updated dependencies [c259ac4]
+- Updated dependencies [3a9af88]
+- Updated dependencies [776f056]
+  - @sebgroup/green-core@1.63.1
+
+## 3.23.0
+
+### Minor Changes
+
+- 23f052c: **SegmentedControl**: Update to match core component
+
 ## 3.22.0
 
 ### Minor Changes

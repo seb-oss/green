@@ -1,12 +1,22 @@
 'use client'
 
-import { GdsInput } from '$/import/components'
+import { GdsFlex, GdsInput } from '$/import/components'
 import { IconCreditCard } from '$/import/icons'
 
-const Input = () => (
-  <GdsInput label="Input" value=" " clearable>
-    <IconCreditCard slot="lead" />
-  </GdsInput>
+const Input = ({ hero }: { hero?: boolean }) => (
+  <>
+    {hero ? (
+      <GdsFlex>
+        <GdsInput label="Label" value=" " clearable>
+          <IconCreditCard slot="lead" />
+        </GdsInput>
+      </GdsFlex>
+    ) : (
+      <GdsInput label="Label" value=" " clearable>
+        <IconCreditCard slot="lead" />
+      </GdsInput>
+    )}
+  </>
 )
 
 export default Input

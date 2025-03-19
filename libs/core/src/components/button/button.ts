@@ -11,6 +11,11 @@ import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators'
 import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import style from './button.style.css?inline'
 
@@ -21,19 +26,7 @@ const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 // Create a customized `html` template tag that strips whitespace and applies custom element scoping.
 const html = stripWhitespace(customElementHtml)
 
-/**
- * @element gds-button
- * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
- * @status stable
- *
- * @slot - Content to be displayed as the button label.
- * @slot lead - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed before the label.
- * @slot trail - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed after the label.
- *
- * @event click - Fired when the button is clicked.
- */
-@gdsCustomElement('gds-button')
-export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
+class Button extends GdsFormControlElement<any> {
   static styles = [tokens, unsafeCSS(style)]
 
   /**
@@ -132,6 +125,7 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
       button: true,
       circle: this.#isIconButton,
       icon: this.#isIconButton,
+      xs: this.size === 'xs',
       small: this.size === 'small',
       large: this.size === 'large',
       positive: this.variant === 'positive',
@@ -218,3 +212,19 @@ export class GdsButton<ValueT = any> extends GdsFormControlElement<ValueT> {
     this.requestUpdate()
   }
 }
+
+/**
+ * @element gds-button
+ * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
+ * @status stable
+ *
+ * @slot - Content to be displayed as the button label.
+ * @slot lead - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed before the label.
+ * @slot trail - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed after the label.
+ *
+ * @event click - Fired when the button is clicked.
+ */
+@gdsCustomElement('gds-button')
+export class GdsButton extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(Button)),
+) {}

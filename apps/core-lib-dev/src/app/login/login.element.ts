@@ -94,7 +94,7 @@ export class CardExample extends LitElement {
               height="100%"
             >
               <form novalidate>
-                <gds-container>
+                <gds-div>
                   <gds-text tag="h1" color="l2-content-primary" weight="book">
                     Välkommen till Internetbanken
                   </gds-text>
@@ -105,7 +105,7 @@ export class CardExample extends LitElement {
                   >
                     Hur vill du logga in?
                   </gds-text>
-                </gds-container>
+                </gds-div>
                 <gds-card
                   border-radius="s"
                   border="4xs/l2-stroke-primary"

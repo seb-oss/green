@@ -45,17 +45,18 @@ export class GdsOption extends Focusable(GdsElement) {
    * Controls whether the option is visible or not.
    */
   @property({
-    attribute: 'aria-hidden',
+    type: Boolean,
     reflect: true,
   })
   get hidden(): boolean {
     return this.#hidden
   }
   set hidden(value: string | boolean) {
-    if (this.isPlaceholder) return
-
-    this.#hidden = value === 'true' || value === true
-    this.setAttribute('aria-hidden', value.toString())
+    const strValue = value.toString()
+    this.#hidden = strValue === 'true'
+    this.#hidden
+      ? this.setAttribute('inert', '')
+      : this.removeAttribute('inert')
   }
   #hidden = false
 
@@ -93,28 +94,24 @@ export class GdsOption extends Focusable(GdsElement) {
     super.connectedCallback()
     this.setAttribute('role', 'option')
 
-    if (this.isPlaceholder) {
-      this.#hidden = true
-      this.setAttribute('aria-hidden', 'true')
-    }
-
-    this.updateComplete.then(() =>
-      TransitionalStyles.instance.apply(this, 'gds-option'),
-    )
+    this.updateComplete.then(() => {
+      if (this.isPlaceholder) {
+        this.hidden = true
+      }
+      TransitionalStyles.instance.apply(this, 'gds-option')
+    })
   }
 
   get parentElement() {
     return super.parentElement as OptionsContainer
   }
 
-  @watch('isplaceholder')
+  @watch('isPlaceholder')
   private _handlePlaceholderStatusChange() {
     if (this.isPlaceholder) {
-      this.#hidden = true
-      this.setAttribute('aria-hidden', 'true')
+      this.hidden = true
     } else {
-      this.#hidden = false
-      this.setAttribute('aria-hidden', 'false')
+      this.hidden = false
     }
   }
 
@@ -124,7 +121,11 @@ export class GdsOption extends Focusable(GdsElement) {
     const checkbox = html`
       <span class="checkbox ${classMap({ checked: this.selected })}">
         ${this.selected
-          ? html`<gds-icon-checkmark stroke="4"></gds-icon-checkmark>`
+          ? html`<gds-icon-checkmark
+              width="10"
+              height="10"
+              stroke="4"
+            ></gds-icon-checkmark>`
           : ''}
       </span>
     `

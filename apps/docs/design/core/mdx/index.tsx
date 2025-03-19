@@ -5,22 +5,27 @@ import { useMDXComponent } from 'next-contentlayer/hooks'
 import {
   GdsDivider,
   GdsFlex,
+  GdsGrid,
   GdsRichText,
   GdsSpacer,
 } from '$/import/components'
 import { v4 as uuidv4 } from 'uuid'
 
-// Local components
+import Select from '../../example/select'
+import Badge from './badge'
+import Common from './common'
 import Do from './do'
 import Dont from './dont'
 import Figma from './figma'
-import Grid from './grid'
 import IMG from './image/image'
+import Inline from './inline'
+import EN from './lang/en'
 import SE from './lang/se'
 import Pattern from './pattern/pattern'
 import Prototype from './prototype'
 import Section from './section'
 import Story from './story'
+import SVG from './svg'
 
 const components = {
   Figma,
@@ -29,26 +34,22 @@ const components = {
   Do,
   Dont,
   SE,
+  EN,
   Pattern,
-  GdsDivider: (props: object) => <GdsDivider {...props} />,
-  Grid,
+  Common,
+  GdsDivider: (props: object) => <GdsDivider opacity="0.2" {...props} />,
   Story,
-  // PP: ({ children, ...props }: { children: React.ReactNode }) => {
-  //   return (
-  //     <>
-  //       <GdsText tag="p" {...props}>
-  //         {children}
-  //       </GdsText>
-  //     </>
-  //   )
-  // },
-  // p: (props: object) => <GdsText tag="p" {...props} />,
-  // h1: (props: object) => <GdsText tag="h1" {...props} />,
-  // h2: (props: object) => <GdsText tag="h2" {...props} />,
-  // h3: (props: object) => <GdsText tag="h3" {...props} />,
-  // h4: (props: object) => <GdsText tag="h4" {...props} />,
-  // h5: (props: object) => <GdsText tag="h5" {...props} />,
-  // hr: (props: object) => <GdsDivider {...props} />,
+  Badge,
+  SVG,
+  Grid: ({ children, ...props }: { children: React.ReactNode }) => {
+    return (
+      <>
+        <GdsGrid width="100%" gap="l" margin="m 0 0 0" {...props}>
+          {children}
+        </GdsGrid>
+      </>
+    )
+  },
   br: (props: object) => <GdsSpacer {...props} />,
   Column: (props: object) => (
     <GdsFlex flex-direction="column" gap="xs" {...props} />
@@ -57,6 +58,8 @@ const components = {
   Section: Section,
   ul: (props: object) => <ul {...props} />,
   li: (props: object) => <li {...props} />,
+  Inline,
+  Select,
 }
 
 export function Mdx({
@@ -71,7 +74,7 @@ export function Mdx({
 
   return (
     <>
-      <GdsRichText key={uniqueId}>
+      <GdsRichText captureMode="move" key={uniqueId}>
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -81,6 +84,10 @@ export function Mdx({
                 border-radius: 8px;
                 overflow-x: auto;
                 scrollbar-width: thin;
+              }
+
+              a {
+                color:currentColor;
               }
             }
           `,

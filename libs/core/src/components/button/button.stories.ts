@@ -14,6 +14,8 @@ import '../icon/icons/arrow-up.js'
 import '../icon/icons/arrow-down.js'
 import '../icon/icons/arrow-right.js'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 /**
  * A button serve as an interactive element that enables users to perform an action or make
  * a choice with a simple click or tap. To decide which kind of button/buttons and putting
@@ -27,19 +29,8 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
-
-export default meta
-type Story = StoryObj
-
-export const DefaultParams: Story = {
-  parameters: {
-    docs: {
-      source: { format: true, type: 'dynamic' },
-    },
-    controls: { expanded: true },
-  },
   argTypes: {
+    ...argTablePropsFor('gds-button'),
     rank: {
       options: ['primary', 'secondary', 'tertiary'],
       control: { type: 'select' },
@@ -62,6 +53,18 @@ export const DefaultParams: Story = {
     download: {
       control: { type: 'text' },
     },
+  },
+}
+
+export default meta
+type Story = StoryObj
+
+export const DefaultParams: Story = {
+  parameters: {
+    docs: {
+      source: { format: true, type: 'dynamic' },
+    },
+    controls: { expanded: true },
   },
   args: {
     innerText: 'Button',
@@ -145,6 +148,9 @@ export const Sizes: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        XS
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         Small
       </gds-button>
@@ -203,6 +209,9 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        <gds-icon-arrow-right />
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         <gds-icon-arrow-right />
       </gds-button>

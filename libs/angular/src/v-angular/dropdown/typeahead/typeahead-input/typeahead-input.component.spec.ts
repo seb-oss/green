@@ -9,10 +9,10 @@ import {
 } from '@angular/core/testing'
 import { TranslocoModule } from '@jsverse/transloco'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvDropdownComponent } from '../../../dropdown/dropdown.component'
-import { NgvInputComponent } from '../../../input/input.component'
-import { NgvTypeaheadInputComponent } from './typeahead-input.component'
+import { NggvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvDropdownComponent } from '../../../dropdown/dropdown.component'
+import { NggvInputComponent } from '../../../input/input.component'
+import { NggvTypeaheadInputComponent } from './typeahead-input.component'
 
 @Component({
   template: '',
@@ -34,27 +34,27 @@ export class DropdownStubComponent {
   @Output() expandedChange: EventEmitter<boolean> = new EventEmitter()
 }
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // TypeaheadInput - constructor()
   // ----------------------------------------------------------------------------
   describe('TypeaheadInputComponent - constructor()', () => {
-    let component: NgvTypeaheadInputComponent
-    let fixture: ComponentFixture<NgvTypeaheadInputComponent>
+    let component: NggvTypeaheadInputComponent
+    let fixture: ComponentFixture<NggvTypeaheadInputComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
         declarations: [
-          NgvTypeaheadInputComponent,
+          NggvTypeaheadInputComponent,
           DropdownStubComponent,
-          NgvInputComponent,
+          NggvInputComponent,
         ],
-        imports: [CommonModule, TranslocoModule, NgvI18nTestModule],
+        imports: [CommonModule, TranslocoModule, NggvI18nTestModule],
       })
-      fixture = TestBed.createComponent(NgvTypeaheadInputComponent)
+      fixture = TestBed.createComponent(NggvTypeaheadInputComponent)
       component = fixture.componentInstance
       component.hostComponent =
-        new DropdownStubComponent() as NgvDropdownComponent
+        new DropdownStubComponent() as NggvDropdownComponent
     }))
 
     it('should create', () => {

@@ -21,7 +21,6 @@ const style = css`
       th {
         height: var(--gds-space-2xl);
         width: var(--gds-space-2xl);
-        background: var(--gds-sys-color-container-container-bright);
         box-sizing: border-box;
         text-align: center;
         font-weight: normal;
@@ -40,7 +39,7 @@ const style = css`
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-space-2xs);
-        transition: all 0.2s;
+        transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
@@ -48,18 +47,17 @@ const style = css`
 
         &:not(.disabled):hover,
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-base800);
+          background: var(--gds-color-l2-background-tertiary);
           cursor: pointer;
-          color: var(--gds-sys-color-base-white);
+          color: var(--gds-color-l2-content-tertiary);
         }
 
         &.today {
-          border-color: var(--gds-sys-color-base800);
+          border-color: var(--gds-color-l2-background-tertiary);
         }
 
         &.disabled {
-          background-color: var(--gds-sys-color-base100);
-          color: var(--gds-sys-color-base500);
+          color: var(--gds-color-l3-content-disabled);
           cursor: not-allowed;
         }
 
@@ -68,7 +66,8 @@ const style = css`
         }
 
         &:focus-visible {
-          outline-color: color-mix(in srgb, currentColor, transparent 50%);
+          outline-color: var(--gds-color-l2-content-primary);
+          outline-width: var(--gds-space-3xs);
         }
       }
 

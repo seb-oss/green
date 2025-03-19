@@ -7,57 +7,34 @@ const style = css`
     :host {
       display: flex;
       flex-direction: column;
-      color: var(--gds-sys-color-base800);
-      font-family: inherit;
+      width: 100%;
+      gap: var(--gds-space-xs);
+      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #field::part(_base) {
+      cursor: pointer;
     }
 
     button {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--gds-space-m);
-      height: var(--gds-space-3xl);
-      border: var(--gds-space-4xs) solid #6f6f6f;
-      border-radius: var(--gds-space-xs);
-      padding-inline: var(--gds-space-m);
-      cursor: pointer;
-      box-sizing: border-box;
-      font-size: var(--gds-space-m);
+      appearance: none;
+      background: transparent;
+      border-width: 0;
       font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      color: currentColor;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+      flex: 0 1 100%;
 
-      // TODO: Update colors to use tokens
-      border-color: #6f6f6f;
-      color: #1b1b1b;
-      background-color: #e2e2e2;
+      /* This prevents overflow when the text is too long */
+      display: grid;
+    }
 
-      &.small {
-        height: var(--gds-space-xl);
-        padding: var(--gds-space-s);
-        padding-right: var(--gds-space-xs);
-        font-size: calc(var(--gds-space-s) + 2px);
-
-        .icon {
-          width: var(--gds-space-l);
-          height: var(--gds-space-l);
-        }
-      }
-
-      &:hover {
-        background-color: #cecece;
-      }
-
-      .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        height: var(--gds-space-xl);
-        width: var(--gds-space-xl);
-      }
-
-      &[aria-expanded='true'] ::part(icon) {
-        transform: scaleY(-1);
-      }
+    button:focus {
+      outline: none;
     }
 
     slot[name='trigger'] > span {
@@ -65,14 +42,6 @@ const style = css`
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-    }
-
-    label {
-      font-size: var(--gds-text-size-detail-m);
-      line-height: var(--gds-text-line-height-detail-m);
-      font-weight: var(--gds-text-weight-book);
-      padding-block: var(--gds-space-2xs);
-      font-family: inherit;
     }
 
     input[type='text'] {
@@ -83,25 +52,39 @@ const style = css`
       line-height: inherit;
       border: none;
       outline: none;
-      color: var(--gds-sys-color-base800);
-      border-bottom: 1px solid var(--gds-sys-color-base400);
+      color: var(--gds-color-l3-content-disabled);
+      border-color: var(--gds-color-l3-border-tertiary);
+      border-width: 0 0 var(--gds-space-4xs) 0;
+      border-style: solid;
       width: 100%;
       padding: var(--gds-space-m);
-      font-weight: var(--gds-text-weight-book);
+      font-weight: var(--gds-text-weight-regular);
       flex: 1;
       box-sizing: border-box;
       font-family: inherit;
 
       &:focus {
-        border-color: var(--gds-sys-color-base800);
+        border-color: var(--gds-color-l3-border-secondary);
+        color: var(--gds-color-l3-content-tertiary);
       }
 
       &::placeholder {
-        color: currrentColor;
         font-family: inherit;
         font-weight: var(--gds-text-weight-book);
-        color: var(--gds-sys-color-base800);
+        color: var(--gds-color-l3-content-disabled);
       }
+    }
+
+    input[role='combobox'] {
+      appearance: none;
+      background: transparent;
+      border: none;
+      font-size: inherit;
+      outline: none;
+    }
+
+    [aria-expanded='true'] [slot='trail'] {
+      transform: scaleY(-1);
     }
   }
 `
