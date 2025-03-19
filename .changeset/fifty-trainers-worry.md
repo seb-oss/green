@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-react': patch
+'@sebgroup/green-react': minor
 ---
 
-adding aria-hidden to expandable info
+**FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
