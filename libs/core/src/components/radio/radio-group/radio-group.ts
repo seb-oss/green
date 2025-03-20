@@ -21,7 +21,7 @@ import '../../../primitives/form-control-footer'
 
 @localized()
 class RadioGroup extends GdsFormControlElement<string> {
-  static styles = [styles, tokens]
+  static styles = [tokens, styles]
 
   /**
    * Controls the font-size of label and supporting text on group form control header and single radio buttons respectively.
