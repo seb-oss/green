@@ -26,16 +26,16 @@ import { InfoCircle, Times } from '../icons'
 /**
  * TODO: Remove when inert is supported in React types
  */
-declare module 'react' {
-  interface HTMLAttributes<T> extends DOMAttributes<T> {
-    /**
-     * Boolean attribute indicating that the browser will ignore the element.
-     *
-     * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert MDN Web Docs}
-     */
-    inert?: ''
-  }
-}
+// declare module 'react' {
+//   interface HTMLAttributes<T> extends DOMAttributes<T> {
+//     /**
+//      * Boolean attribute indicating that the browser will ignore the element.
+//      *
+//      * @see {@link https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/inert MDN Web Docs}
+//      */
+//     inert?: ''
+//   }
+// }
 
 interface FormItemProps
   extends IExpandableInformation,
@@ -162,9 +162,10 @@ export const FormItem = ({
           ref={expandableRef}
           id={`gds-expandable-info-${inputId}`}
           className="gds-form-item__expandable-info"
-          inert={isHidden ? '' : undefined}
           hidden={isHidden}
           style={{ height: isExpanded ? expandableHeight : 0 }}
+          // TODO: Remove when inert is supported in React types
+          {...{ inert: isHidden ? '' : undefined }}
         >
           <div ref={expandableInnerRef}> {expandableInfo} </div>
         </div>
