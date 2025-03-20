@@ -6,7 +6,6 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
-import { watch } from '../../utils/decorators/watch.js'
 import { styles } from './selection-field-label.styles' // Renamed style file
 
 /**
