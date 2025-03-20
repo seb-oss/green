@@ -23,7 +23,10 @@
   </label>
 
   <!-- DESCRIPTION -->
-  <div class="gds-field-label--small description hide-if-empty">
+  <div
+    class="gds-field-label--small description hide-if-empty"
+    *ngIf="description"
+  >
     {{ description }}
   </div>
 
