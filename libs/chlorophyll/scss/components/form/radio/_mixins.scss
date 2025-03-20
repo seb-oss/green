@@ -113,7 +113,8 @@ $invalid-color: var(--gds-sys-color-text-error);
     border-radius: var(--gds-sys-shape-corner-medium);
   }
 
-  &.radio-group-wrapper--horizontal {
+  &.radio-group-wrapper--horizontal,
+  &.gds-radio-group-wrapper--horizontal {
     display: flex;
   }
 }

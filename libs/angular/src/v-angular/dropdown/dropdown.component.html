@@ -4,6 +4,7 @@
     [id]="id + '-label'"
     class="gds-field-label hide-if-empty"
     [attr.for]="id + '-toggle'"
+    *ngIf="labelContentTpl || basicLabelContentTpl || label"
   >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
@@ -23,7 +24,7 @@
   </label>
 
   <!-- DESCRIPTION -->
-  <div class="description">{{ description }}</div>
+  <div class="description" *ngIf="description">{{ description }}</div>
 
   <!-- LOCKED INPUT -->
   <ng-container *ngIf="locked">

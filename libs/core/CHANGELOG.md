@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.69.3
+
+### Patch Changes
+
+- 8fe5d35: **Tokens:** L2 content information
+
 ## 1.69.2
 
 ### Patch Changes
