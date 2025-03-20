@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import SEBSAnsSerif from '$/fonts/SEBSansSerif'
 
+import SEBSansSerifCentered from './SEBSansSerifCentered'
+
 export default function Fonts({ children }: { children: React.ReactNode }) {
   const [stylesheetCreated, setStylesheetCreated] = useState(false)
 
@@ -11,6 +13,7 @@ export default function Fonts({ children }: { children: React.ReactNode }) {
       const sheet = new CSSStyleSheet()
       sheet.replaceSync(`
         :root { 
+            --gds-font-family-centered: ${SEBSansSerifCentered.style.fontFamily};
             --gds-font-family: ${SEBSAnsSerif.style.fontFamily};
         }
         `)

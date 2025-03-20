@@ -15,7 +15,7 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: 100%;
-    font-family: var(--gds-font-family);
+    font-family: var(--gds-font-family-centered);
   }
 
   @media screen and (prefers-color-scheme: dark) {
@@ -31,7 +31,7 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-text-size-adjust: 100%;
-    font-family: var(--gds-font-family);
+    font-family: var(--gds-font-family-centered);
   }
 
   @layer blocks;
