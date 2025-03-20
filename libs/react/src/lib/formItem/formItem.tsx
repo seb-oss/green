@@ -163,6 +163,7 @@ export const FormItem = ({
           id={`gds-expandable-info-${inputId}`}
           className="gds-form-item__expandable-info"
           inert={isHidden ? '' : undefined}
+          hidden={isHidden}
           style={{ height: isExpanded ? expandableHeight : 0 }}
         >
           <div ref={expandableInnerRef}> {expandableInfo} </div>
