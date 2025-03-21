@@ -51,6 +51,8 @@
     &-expanded {
       display: block;
       position: absolute;
+      bottom: 0;
+      transform: translateY(calc(100% + 0.5rem));
       z-index: var(--sg-z-index-popover);
     }
   }

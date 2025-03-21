@@ -22,14 +22,22 @@
   .gds-field-label {
     @include form-group.add-label;
     display: block;
-    &:is(label) {
-      margin-bottom: 0.5rem;
-    }
+  }
+
+  label + .field-wrap,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.25rem;
+    width: 100%;
   }
 
   .gds-field-label--optional {
     @include form-group.add-label;
-    margin-bottom: 0.5rem;
   }
 
   .nggv-datepicker {

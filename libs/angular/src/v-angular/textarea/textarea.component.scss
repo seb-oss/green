@@ -13,11 +13,11 @@
 
   label:not(.gds-field-notice) {
     @include form-group.add-label;
-    margin-bottom: 0.5rem;
   }
 
-  label:is(.gds-field-label) {
-    margin-bottom: 0.5rem;
+  label + .gds-field,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
   }
 
   .hide-if-empty:empty {
@@ -75,6 +75,10 @@
         margin-top: 0.128rem;
         align-items: center;
       }
+    }
+
+    > .form-info--countdown {
+      font-weight: 400;
     }
   }
 
