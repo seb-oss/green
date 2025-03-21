@@ -44,6 +44,7 @@
 
   .gds-slide-out__content {
     @include mixins.modal-body();
+    overflow: unset;
   }
 
   .modal-dialog__actions,
