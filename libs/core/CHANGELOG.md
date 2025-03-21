@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.69.4
+
+### Patch Changes
+
+- b46f13f: **Radio:** Remove transitional styles
+
 ## 1.69.3
 
 ### Patch Changes
