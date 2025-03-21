@@ -99,7 +99,7 @@ interface WcagItem {
   role: string // t.ex. "Utvecklare", "Redaktör / Utvecklare"
   howToTest?: { content: string }
   sort?: number
-  status?: string // "Kravet uppfylls" etc.
+  status: string // "Kravet uppfylls" etc.
   comment?: string
 }
 
@@ -119,6 +119,20 @@ function levelFilter(level: string[]) {
     level.length === 0 ? true : level.includes(item.level)
 }
 
+// Role Filter
+
+const roleFilter = (role: string[]) => {
+  return (item: WcagItem) =>
+    role.length === 0 ? true : role.includes(item.role)
+}
+
+// Status Filter
+
+const statusFilter = (status: string[]) => {
+  return (item: WcagItem) =>
+    statusFilter.length === 0 ? true : status.includes(item.status)
+}
+
 export default function WcagList() {
   // state for the wcagList
   // wcagObjects is the state variable
@@ -128,6 +142,8 @@ export default function WcagList() {
   //create a new state to new state in selectedCategories, string or tom array
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedLevels, setSelectedLevels] = useState<string[]>([])
+  const [selectedRoles, setSelectedRoles] = useState<string[]>([])
+  const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
 
   useEffect(() => {
     async function fetchWcagObjects() {
@@ -181,20 +197,40 @@ export default function WcagList() {
             </GdsOption>
           ))}
         </GdsDropdown>
-        <GdsDropdown>
+        <GdsDropdown
+          multiple
+          value={selectedRoles}
+          onChange={(e) => setSelectedRoles((e as CustomEvent).detail.value)}
+        >
           <GdsOption value="" isplaceholder="">
             Roll
           </GdsOption>
+          {Object.values(A11yRoles).map((role) => (
+            <GdsOption key={role} value={role}>
+              {role}
+            </GdsOption>
+          ))}
         </GdsDropdown>
-        <GdsDropdown>
+        <GdsDropdown
+          multiple
+          value={selectedStatuses}
+          onChange={(e) => setSelectedStatuses((e as CustomEvent).detail.value)}
+        >
           <GdsOption value="" isplaceholder="">
             Krav
           </GdsOption>
+          {Object.values(A11yStatus).map((status) => (
+            <GdsOption key={status} value={status}>
+              {status}
+            </GdsOption>
+          ))}
         </GdsDropdown>
       </GdsFlex>
       {wcagObjects
         .filter(catergoryFilter(selectedCategories))
         .filter(levelFilter(selectedLevels))
+        .filter(roleFilter(selectedRoles))
+        // .filter(statusFilter(selectedStatuses))
         .map((wcagObject) => (
           <li key={wcagObject.id}>
             <GdsText>
