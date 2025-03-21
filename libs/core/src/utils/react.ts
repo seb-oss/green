@@ -9,7 +9,8 @@ type WithReactChildren<T> = Omit<T, 'children'> & {
 type GdsComponentProps<T> = WithReactChildren<{
   [K in keyof T]?: T[K]
 }> &
-  Omit<React.HTMLAttributes<HTMLElement>, 'children'>
+  Omit<React.HTMLAttributes<HTMLElement>, 'children'> &
+  React.RefAttributes<HTMLElement>
 
 /**
  * Get a React 19 compatible component from a GDS component
