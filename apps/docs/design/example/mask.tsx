@@ -1,10 +1,10 @@
 'use client'
 
-import { GdsButton, GdsContainer, GdsImg, GdsMask } from '$/import/components'
+import { GdsButton, GdsDiv, GdsImg, GdsMask } from '$/import/components'
 import { IconArrowDown } from '$/import/icons'
 
 const Mask = () => (
-  <GdsContainer position="relative" overflow="hidden">
+  <GdsDiv position="relative" overflow="hidden">
     <GdsImg
       src="/example/mask.jpg"
       aspect-ratio="16/9"
@@ -18,13 +18,13 @@ const Mask = () => (
       position="absolute"
       inset="50% 0 0 0"
     >
-      <GdsContainer position="absolute" inset="auto 20px 20px auto">
+      <GdsDiv position="absolute" inset="auto 20px 20px auto">
         <GdsButton rank="secondary">
           <IconArrowDown />
         </GdsButton>
-      </GdsContainer>
+      </GdsDiv>
     </GdsMask>
-  </GdsContainer>
+  </GdsDiv>
 )
 
 export default Mask

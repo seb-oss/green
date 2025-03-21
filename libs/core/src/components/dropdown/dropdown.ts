@@ -3,12 +3,14 @@ import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
+import { flip, offset } from '@floating-ui/dom'
 
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsPopover, UIStateChangeReason } from '../popover'
 import styles from './dropdown.styles'
 
 import type { GdsListbox } from '../../primitives/listbox'
@@ -25,8 +27,6 @@ import '../icon/icons/checkmark'
 import '../icon/icons/chevron-bottom'
 import '../popover'
 import '../button'
-
-import { UIStateChangeReason } from '../popover'
 
 /**
  * @element gds-dropdown
@@ -240,6 +240,7 @@ export class GdsDropdown<ValueT = any>
     this.updateComplete.then(() => {
       this._handleLightDOMChange()
       this._handleValueChange()
+      this._handleOpenChange()
     })
   }
 
@@ -276,6 +277,9 @@ export class GdsDropdown<ValueT = any>
         .calcMaxHeight=${this.#calcMaxHeight}
         .disableMobileStyles=${this.disableMobileStyles || this.combobox}
         .nonmodal=${this.combobox}
+        .floatingUIMiddleware=${this.combobox
+          ? [offset(8), flip()]
+          : GdsPopover.DefaultMiddleware}
         @gds-ui-state=${this.#handlePopoverStateChange}
       >
         <gds-field-base
@@ -458,14 +462,18 @@ export class GdsDropdown<ValueT = any>
   }
 
   #calcMaxHeight = (trigger: HTMLElement) => {
-    const triggerRect = trigger.getBoundingClientRect()
-    const windowHeight = window.innerHeight
-    const bottomSpace = windowHeight - triggerRect.bottom
-    const topSpace = triggerRect.top
+    if (this.combobox) {
+      const triggerRect = trigger.getBoundingClientRect()
+      const windowHeight = window.innerHeight
+      const bottomSpace = windowHeight - triggerRect.bottom
+      const topSpace = triggerRect.top
 
-    let height = Math.min(topSpace, this.maxHeight)
-    if (bottomSpace > topSpace) height = Math.min(bottomSpace, this.maxHeight)
+      let height = Math.min(topSpace, this.maxHeight)
+      if (bottomSpace > topSpace) height = Math.min(bottomSpace, this.maxHeight)
+      return `${height - 16}px`
+    }
 
+    const height = Math.min(window.innerHeight, this.maxHeight)
     return `${height - 16}px`
   }
 
@@ -593,10 +601,10 @@ export class GdsDropdown<ValueT = any>
    * Emits `gds-ui-state`event and does some other house-keeping when the open state changes.
    */
   @watch('open')
-  private _onOpenChange() {
+  private _handleOpenChange() {
     const open = this.open
 
-    this.#optionElements?.forEach((o) => (o.hidden = !open))
+    this.options.forEach((o) => (o.hidden = !open))
 
     if (open) this.#registerAutoCloseListener()
     else {

@@ -20,6 +20,7 @@
 's39938ecdae568740': `September`,
 's407a88a592a0987c': `August`,
 's46d6587089bd0356': `Næste måned`,
+'s49730f3d5751a433': `Indlæser...`,
 's5052d10b539eabf0': `Marts`,
 's58bfb494feb8eb02': str`${0} valgt`,
 's5d929ff1619ac0c9': `Søg`,

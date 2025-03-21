@@ -4,6 +4,7 @@
     [id]="id + '-label'"
     class="gds-field-label hide-if-empty"
     [attr.for]="id + '-toggle'"
+    *ngIf="labelContentTpl || basicLabelContentTpl || label"
   >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
@@ -23,7 +24,7 @@
   </label>
 
   <!-- DESCRIPTION -->
-  <div class="description">{{ description }}</div>
+  <div class="description" *ngIf="description">{{ description }}</div>
 
   <!-- LOCKED INPUT -->
   <ng-container *ngIf="locked">
@@ -50,78 +51,80 @@
 
   <!-- INPUT -->
   <ng-container *ngIf="!locked">
-    <div #input [id]="id + '-input'" class="dropdown">
-      <button
-        [id]="id + '-toggle'"
-        [disabled]="disabled"
-        type="button"
-        class="nggv-field-dropdown__label toggle"
-        [class.nggv-field--error]="invalid"
-        aria-haspopup="listbox"
-        [attr.data-thook]="thook + '-toggle'"
-        [attr.aria-expanded]="expanded"
-        [attr.aria-labelledby]="
-          ariaLabel ? null : id + '-label ' + id + '-toggle'
-        "
-        [attr.aria-label]="ariaLabel || null"
-        (click)="toggleDropdown()"
-      >
-        <ng-template
-          *ngTemplateOutlet="
-            selectedContentTpl || defaultSelectedContentTpl;
-            context: { $implicit: state }
+    <div class="gds-input-wrapper">
+      <div #input [id]="id + '-input'" class="dropdown">
+        <button
+          [id]="id + '-toggle'"
+          [disabled]="disabled"
+          type="button"
+          class="nggv-field-dropdown__label toggle"
+          [class.nggv-field--error]="invalid"
+          aria-haspopup="listbox"
+          [attr.data-thook]="thook + '-toggle'"
+          [attr.aria-expanded]="expanded"
+          [attr.aria-labelledby]="
+            ariaLabel ? null : id + '-label ' + id + '-toggle'
           "
+          [attr.aria-label]="ariaLabel || null"
+          (click)="toggleDropdown()"
         >
+          <span>
+            <ng-template
+              *ngTemplateOutlet="
+                selectedContentTpl || defaultSelectedContentTpl;
+                context: { $implicit: state }
+              "
+            >
+            </ng-template>
+          </span>
+        </button>
+        <nggv-dropdown-list
+          #dropDownList
+          [options]="options"
+          [scrollOffset]="scrollOffset"
+          [state]="state"
+          [expanded]="expanded"
+          [optionContentTpl]="optionContentTpl"
+          [groupLabelTpl]="groupLabelTpl"
+          [textToHighlight]="textToHighlight"
+          (closed)="setExpanded(false)"
+          (selectedValueChanged)="onSelectChange($event)"
+        >
+        </nggv-dropdown-list>
+      </div>
+      <!-- ERRORS -->
+      <div class="gds-form-item__footer error-wrapper">
+        <span
+          class="form-info form-info--error"
+          [attr.for]="id + '-input'"
+          *ngIf="invalid && (error || ngControl?.invalid)"
+        >
+          <span class="error-icon">
+            <gds-icon-triangle-exclamation
+              width="16"
+              height="16"
+              [solid]="true"
+              *nggCoreElement
+            ></gds-icon-triangle-exclamation>
+          </span>
+          <span
+            *ngIf="error; else errorsRef"
+            [attr.data-thook]="thook + '-errorlabel'"
+            >{{ error }}</span
+          >
+        </span>
+        <ng-template #errorsRef>
+          <span
+            *ngIf="firstError as error"
+            [attr.data-thook]="thook + '-errorlabel'"
+          >
+            {{ t('error.field' + error?.code, error?.params) }}
+          </span>
         </ng-template>
-      </button>
-
-      <nggv-dropdown-list
-        #dropDownList
-        [options]="options"
-        [scrollOffset]="scrollOffset"
-        [state]="state"
-        [expanded]="expanded"
-        [optionContentTpl]="optionContentTpl"
-        [groupLabelTpl]="groupLabelTpl"
-        [textToHighlight]="textToHighlight"
-        (closed)="setExpanded(false)"
-        (selectedValueChanged)="onSelectChange($event)"
-      >
-      </nggv-dropdown-list>
+      </div>
+      <!-- CHILDREN -->
+      <ng-content></ng-content>
     </div>
-    <!-- ERRORS -->
-    <div class="gds-form-item__footer error-wrapper">
-      <span
-        class="form-info form-info--error"
-        [attr.for]="id + '-input'"
-        *ngIf="invalid && (error || ngControl?.invalid)"
-      >
-        <span class="error-icon">
-          <gds-icon-triangle-exclamation
-            width="16"
-            height="16"
-            [solid]="true"
-            *nggCoreElement
-          ></gds-icon-triangle-exclamation>
-        </span>
-        <span
-          *ngIf="error; else errorsRef"
-          [attr.data-thook]="thook + '-errorlabel'"
-          >{{ error }}</span
-        >
-      </span>
-      <ng-template #errorsRef>
-        <span
-          *ngIf="firstError as error"
-          [attr.data-thook]="thook + '-errorlabel'"
-        >
-          {{ t('error.field' + error?.code, error?.params) }}
-        </span>
-      </ng-template>
-    </div>
-
-    <!-- CHILDREN -->
-    <ng-content></ng-content>
   </ng-container>
 
   <ng-template #defaultSelectedContentTpl let-state>

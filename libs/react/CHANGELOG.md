@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.25.0
+
+### Minor Changes
+
+- f333bbb: **FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
+
+### Patch Changes
+
+- Updated dependencies [b46f13f]
+  - @sebgroup/green-core@1.69.4
+
+## 3.24.2
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 3.24.1
+
+### Patch Changes
+
+- 277716a: **Modal:** fix scrolling inside modal on iOS
+- Updated dependencies [d529108]
+  - @sebgroup/green-core@1.68.4
+
 ## 3.24.0
 
 ### Minor Changes

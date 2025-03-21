@@ -23,7 +23,10 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="form-info description hide-if-empty" *ngIf="descriptionIsVisible">
+<div
+  class="form-info description hide-if-empty"
+  *ngIf="description && descriptionIsVisible"
+>
   {{ description }}
 </div>
 
@@ -157,7 +160,7 @@
           currentLength: (inputRef?.nativeElement?.value ?? '').length;
           charactersLeft as charactersLeft
         "
-        class="form-info"
+        class="form-info form-info--countdown"
         style="text-align: right"
       >
         {{ charactersLeft }} {{ t('label.maxlength') }}
