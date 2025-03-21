@@ -3,7 +3,6 @@ import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { styles } from './radio.styles'
 
@@ -17,7 +16,7 @@ import '../../primitives/selection-controls'
  */
 @gdsCustomElement('gds-radio')
 export class GdsRadio extends GdsElement {
-  static styles = [tokens, styles]
+  static styles = [styles]
 
   /**
    * The label displayed next to the radio button.
