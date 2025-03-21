@@ -1,9 +1,9 @@
-// radio-group.ts
 import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { gdsCustomElement, html } from '../../../scoping'
+import { tokens } from '../../../tokens.style'
 import { watch } from '../../../utils/decorators/watch'
 import {
   withLayoutChildProps,
@@ -20,7 +20,7 @@ import '../../../primitives/form-control-footer'
 
 @localized()
 class RadioGroup extends GdsFormControlElement<string> {
-  static styles = [styles]
+  static styles = [tokens, styles]
 
   /**
    * Controls the font-size of label and supporting text on group form control header and single radio buttons respectively.
