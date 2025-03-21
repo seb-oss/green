@@ -2,6 +2,16 @@
 
 import dynamic from 'next/dynamic'
 
+export const GdsAccordion = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/accordion').then(
+      (mod) => mod.GdsAccordion,
+    ),
+  {
+    ssr: false,
+  },
+)
+
 export const GdsFlex = dynamic(
   () => import('@sebgroup/green-react/core/flex').then((mod) => mod.GdsFlex),
   {

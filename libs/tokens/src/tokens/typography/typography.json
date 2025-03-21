@@ -22,6 +22,10 @@
           "value": "16",
           "type": "float"
         },
+        "heading-2xs": {
+          "value": "14",
+          "type": "float"
+        },
         "heading-2xl": {
           "value": "14",
           "type": "float"
