@@ -3,9 +3,8 @@ const path = require('path')
 const prettier = require('prettier')
 const prettierConfig = import('../../../prettier.config.mjs')
 const { getAllComponents } = require('./shared.cjs')
-//const { inspect } = require('util')
 
-const reactDir = path.join('./libs/react/src/core')
+const reactDir = path.join('libs/core/src/generated/react')
 
 // Clear build directory
 if (fs.existsSync(reactDir)) {
@@ -28,12 +27,7 @@ for (const component of filteredComponents) {
   const tagWithoutPrefix = component.tagName.replace(/^gds-/, '')
   const componentDir = path.join(reactDir, tagWithoutPrefix)
   const componentFile = path.join(componentDir, 'index.ts')
-  const importPath = component.path
-    .replace(/\.ts$/, '.js')
-    .replace(/^src\//, '')
-  const events = (component.events || [])
-    .map((event) => `${event.reactName}: '${event.name}'`)
-    .join(',\n')
+  const importPath = component.path.replace(/^src\//, '').replace(/\.ts$/, '')
 
   fs.mkdirSync(componentDir, { recursive: true })
 
@@ -42,35 +36,23 @@ for (const component of filteredComponents) {
   prettier
     .format(
       `
-        import * as React from 'react';
-        import { createComponent } from '@lit/react';
-        import { getScopedTagName } from '@sebgroup/green-core/scoping'
-        import { ${component.name} } from '@sebgroup/green-core/${importPath}';
-
-        const tagName = getScopedTagName('${component.tagName}')
-        //${component.name}.define('${component.tagName}')
+        import { getReactComponent } from '../../../utils/react';
+        import { ${component.name} as ${component.name}Class } from '../../../${importPath}';
 
         ${jsDoc}
-        const reactWrapper = createComponent({
-          tagName,
-          elementClass: ${component.name},
-          react: React,
-          events: {
-            ${events}
-          },
-          displayName: "${component.name}"
-        })
+        export const ${component.name} = (() => {
+          // Register the custom element lazily when the component is first used
+          ${component.name}Class.define();
 
-        export default reactWrapper
+          return getReactComponent<${component.name}Class>('${component.tagName}');
+        })()
       `,
       Object.assign(prettierConfig, {
         parser: 'babel-ts',
       }),
     )
     .then((formattedSource) => {
-      index.push(
-        `export { default as ${component.name} } from './${tagWithoutPrefix}';`,
-      )
+      index.push(`export { ${component.name} } from './${tagWithoutPrefix}';`)
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 

@@ -25,6 +25,8 @@ import { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
 import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 // In this example, we are importing the GdsTheme component to set the design version to 2023
 import { GdsTheme } from '@sebgroup/green-core/components/theme/index.js'
+import { GdsBadge } from '@sebgroup/green-core/react/badge'
+import { GdsText } from '@sebgroup/green-core/react/text'
 // This is used to get the correct element name when creating the wrappers below
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
@@ -177,6 +179,70 @@ const requiredValidator: GdsValidator = {
   },
 }
 
+interface FormFieldDisplay {
+  label: string
+  value: string | undefined
+  format?: (value: any) => string
+}
+
+// Create a configuration object that maps form fields to their display properties
+const formFieldsDisplay: Record<keyof FormData, FormFieldDisplay> = {
+  name: {
+    label: 'Name',
+    value: undefined,
+  },
+  email: {
+    label: 'Email',
+    value: undefined,
+  },
+  fruit: {
+    label: 'Dropdown',
+    value: undefined,
+  },
+  dessert: {
+    label: 'Select',
+    value: undefined,
+  },
+  date: {
+    label: 'Date',
+    value: undefined,
+    format: (value: Date) => value?.toLocaleDateString() || 'No date',
+  },
+  radio: {
+    label: 'Radio',
+    value: undefined,
+  },
+  description: {
+    label: 'Description',
+    value: undefined,
+  },
+}
+
+// Create a reusable FormFieldRow component
+const FormFieldRow = ({
+  label,
+  value,
+  isValid,
+}: {
+  label: string
+  value: string
+  isValid: boolean
+}) => (
+  <CoreFlex align-items="center" gap="m">
+    <GdsText tag="h5" font-weight="book" width="10ch">
+      {label}
+    </GdsText>
+    <GdsText flex="1" overflow-wrap="anywhere">
+      {value || 'No value'}
+    </GdsText>
+    {isValid && (
+      <GdsBadge variant="positive" rounded>
+        Valid
+      </GdsBadge>
+    )}
+  </CoreFlex>
+)
+
 export const GreenCoreFormExample = () => {
   const [formData, setFormData] = useState<FormData>(initialFormState)
 
@@ -191,7 +257,7 @@ export const GreenCoreFormExample = () => {
         </p>
       </CoreRichText>
 
-      <CoreFlex gap="l" max-width="1000px" margin="0 auto">
+      <CoreFlex gap="l" align-items="flex-start" flex="1">
         <CoreCard variant="primary" flex="1">
           <form
             onSubmit={(e) => e.preventDefault()}
@@ -362,50 +428,37 @@ export const GreenCoreFormExample = () => {
           </form>
         </CoreCard>
 
-        <CoreFlex flex="1">
-          <CoreRichText style={{ flex: '1' }}>
-            <h3>Reflected React state</h3>
-            <table>
-              <tbody>
-                <tr>
-                  <th>Name</th>
-                  <td>{formData.name[0]}</td>
-                  <td>Valid: {formData.name[1] ? '✅' : '❌'}</td>
-                </tr>
-                <tr>
-                  <th>Email</th>
-                  <td>{formData.email[0]}</td>
-                  <td>Valid: {formData.email[1] ? '✅' : '❌'}</td>
-                </tr>
-                <tr>
-                  <th>Dropdown</th>
-                  <td>{formData.fruit[0]}</td>
-                  <td>Valid: {formData.fruit[1] ? '✅' : '❌'}</td>
-                </tr>
-                <tr>
-                  <th>Select</th>
-                  <td>{formData.dessert[0]}</td>
-                  <td>Valid: {formData.dessert[1] ? '✅' : '❌'}</td>
-                </tr>
-                <tr>
-                  <th>Date</th>
-                  <td>{formData.date[0]?.toLocaleDateString()}</td>
-                  <td>Valid: {formData.date[1] ? '✅' : '❌'}</td>
-                </tr>
-                <tr>
-                  <th>Radio</th>
-                  <td>{formData.radio[0]}</td>
-                  <td>Valid: {formData.radio[1] ? '✅' : '❌'}</td>
-                </tr>
-                <tr>
-                  <th>Description</th>
-                  <td>{formData.description[0]}</td>
-                  <td>Valid: {formData.description[1] ? '✅' : '❌'}</td>
-                </tr>
-              </tbody>
-            </table>
-          </CoreRichText>
-        </CoreFlex>
+        <CoreCard
+          flex="1"
+          position="sticky"
+          inset="40px 0 0 0"
+          gap="m"
+          flex-direction="column"
+          variant="secondary"
+          max-width="46ch"
+        >
+          <GdsText tag="h3">Reflected React state</GdsText>
+          <CoreCard padding="m l" gap="xs">
+            {(Object.keys(formData) as Array<keyof FormData>).map(
+              (fieldKey) => {
+                const field = formFieldsDisplay[fieldKey]
+                const [value, isValid] = formData[fieldKey]
+                const displayValue = field.format
+                  ? field.format(value)
+                  : value?.toString()
+
+                return (
+                  <FormFieldRow
+                    key={fieldKey}
+                    label={field.label}
+                    value={displayValue || 'No value'}
+                    isValid={isValid}
+                  />
+                )
+              },
+            )}
+          </CoreCard>
+        </CoreCard>
       </CoreFlex>
     </CoreTheme>
   )

@@ -13,7 +13,7 @@ import {
   withMarginProps,
   withPositioningProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import { styles } from './gds-spinner.styles'
+import { styles } from './spinner.styles'
 
 /**
  * @element gds-spinner

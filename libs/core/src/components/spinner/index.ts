@@ -1,1 +1,1 @@
-export * from './gds-spinner'
+export * from './spinner'

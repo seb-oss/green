@@ -9,7 +9,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/libs/core/src"],
       "options": {
-        "command": "nx run core:build-with-types-and-scoping"
+        "command": "nx run core:generate-jsx-components && nx run core:build-with-types-and-scoping"
       }
     },
     "build-src": {
@@ -100,6 +100,13 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "node libs/core/build-scripts/icons-react.cjs"
+      }
+    },
+    "generate-jsx-components": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build-custom-elements-json"],
+      "options": {
+        "command": "node libs/core/build-scripts/generate-react.cjs"
       }
     },
     "test": {
