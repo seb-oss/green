@@ -31,6 +31,11 @@
     width: 100%;
   }
 
+  label + .gds-input-wrapper,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
+  }
+
   .description {
     font-size: 0.875rem;
     margin-bottom: 0.5rem;

@@ -169,6 +169,22 @@ const TableStoryWithExpandableRows: StoryFn<
       (ngvRowClick)="ngvRowClick($event)"
       (ngvRowSelect)="ngvRowSelect($event)"
       (ngvOrderBy)="ngvOrderBy($event)">
+        <!-- custom td template for bookedBalance column -->
+        <ng-template tableColumn="bookedBalance" tableColumnTarget="td" let-bookedBalance="$implicit.bookedBalance">
+          {{ bookedBalance | number:'1.2-2' }}
+        </ng-template>
+        <!-- custom td template for datedBalance column -->
+        <ng-template tableColumn="datedBalance" tableColumnTarget="td" let-datedBalance="$implicit.datedBalance">
+          {{ datedBalance | number:'1.2-2' }}
+        </ng-template>
+        <!-- custom td template for limit column -->
+        <ng-template tableColumn="limit" tableColumnTarget="td" let-limit="$implicit.limit">
+          {{ limit | number:'1.2-2' }}
+        </ng-template>
+        <!-- custom td template for unauthorizedUsage column -->
+        <ng-template tableColumn="unauthorizedUsage" tableColumnTarget="td" let-unauthorizedUsage="$implicit.unauthorizedUsage">
+          {{ unauthorizedUsage | number:'1.2-2' }}
+        </ng-template>
     </nggv-table>`,
   props: args,
 })
