@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './index.ts'
 import '../grid/index.js'
 import '../flex/index.js'
@@ -40,6 +42,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-badge'),
+  },
 }
 
 export default meta

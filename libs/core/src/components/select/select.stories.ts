@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './select'
 import '../flex'
 import '../icon/icons/bank.ts'
@@ -29,6 +31,9 @@ const meta: Meta = {
   title: 'Components/Select',
   component: 'gds-select',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-select'),
+  },
 }
 
 export default meta
@@ -53,13 +58,14 @@ export const Default: Story = {
   args: {
     label: 'Label text',
     supportingText: 'Supporting text',
-    value: 'organic-chemistry',
+    value: '',
     innerHTML: `
       <span slot="extended-supporting-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </span>
       <gds-icon-books slot="lead"></gds-icon-books>
       <select>
+        <option value="">Select a value</option>
         <optgroup label="Physics">
           <option value="quantum-mechanics">Quantum Mechanics</option>
           <option value="relativity">Relativity</option>
@@ -169,7 +175,10 @@ export const Disabled: Story = {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-lightning slot="lead"></gds-icon-lightning>
-        <select></select>
+        <select>
+          <option value="thunder">Thunder</option>
+          <option value="lightning">Lightning</option>
+        </select>
       </gds-select>
     </gds-flex>
   `,

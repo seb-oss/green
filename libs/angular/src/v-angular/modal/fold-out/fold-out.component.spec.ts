@@ -103,6 +103,18 @@ describe('[NggvModal]', () => {
         expect(keyDownSpy).not.toHaveBeenCalled()
         expect(clickSpy).not.toHaveBeenCalled()
       })
+
+      it('should get the actionEmitter to emit', () => {
+        const spy = jest.spyOn((component as any).actionEmitter, 'emit')
+        ;(component as any).shown = true
+        const nativeElement = fixture.nativeElement
+        const optionContainer = nativeElement.querySelector(
+          '.nggv-fold-out__popover',
+        )
+        optionContainer.dispatchEvent(new Event('click'))
+
+        expect(spy).toHaveBeenCalled()
+      })
     })
 
     describe('subscribeToKeyDownEvent', () => {

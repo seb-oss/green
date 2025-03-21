@@ -1,18 +1,19 @@
+import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
+
 import {
   AfterViewInit,
   Component,
   ElementRef,
+  EventEmitter,
   HostBinding,
-  HostListener,
   Input,
   OnDestroy,
+  Output,
   ViewChild,
 } from '@angular/core'
 
-import '@sebgroup/green-core/components/icon/icons/dot-grid-one-horizontal.js'
-
 import { fromEvent, Subscription } from 'rxjs'
-import { filter, map, takeWhile } from 'rxjs/operators'
+import { filter, takeWhile } from 'rxjs/operators'
 
 import { KeyboardKey } from './keyboard-key.enum'
 
@@ -35,6 +36,8 @@ export class NggvFoldOutComponent implements OnDestroy, AfterViewInit {
   @Input() text?: string
   /** Aria label for the fold-out button */
   @Input() ariaLabel?: string
+  /** Emits when the children container collapses, for components with change detection strategy "OnPush" */
+  @Output() actionEmitter = new EventEmitter<void>()
 
   /** @internal */
   protected shown = false
@@ -95,6 +98,7 @@ export class NggvFoldOutComponent implements OnDestroy, AfterViewInit {
     } else {
       this.onClickSubscription?.unsubscribe()
       this.onKeyUpSubscription?.unsubscribe()
+      this.actionEmitter.emit()
     }
   }
 

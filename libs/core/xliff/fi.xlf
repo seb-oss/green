@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="fi" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sb77f4dce69a005ac">
+  <source>Error message.</source>
+  <target>Virheilmoitus.</target>
+</trans-unit>
+<trans-unit id="s5e8250fb85d64c23">
+  <source>Close</source>
+  <target>Sulje</target>
+</trans-unit>
+<trans-unit id="s7fd3469f78111589">
+  <source>Open context menu</source>
+  <target>Avaa pikavalikko</target>
+</trans-unit>
+<trans-unit id="s83c436ed1bc16dfb">
+  <source>Show more information</source>
+  <target>Näytä lisää tietoja</target>
+</trans-unit>
+<trans-unit id="s58bfb494feb8eb02">
+  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
+  <target><x id="0" equiv-text="${this.value.length}"/> valittua</target>
+</trans-unit>
+<trans-unit id="sd898d99fd9c13de6">
+  <source>Filter available options</source>
+  <target>Suodata saatavilla olevia vaihtoehtoja</target>
+</trans-unit>
+<trans-unit id="s5d929ff1619ac0c9">
+  <source>Search</source>
+  <target>Hae</target>
+</trans-unit>
+<trans-unit id="s1e118319b5202c41">
+  <source>Mon</source>
+  <target>Ma</target>
+</trans-unit>
+<trans-unit id="s6d24cd19e23b8185">
+  <source>Tue</source>
+  <target>Ti</target>
+</trans-unit>
+<trans-unit id="s74aa0319e62b2eb7">
+  <source>Wed</source>
+  <target>Ke</target>
+</trans-unit>
+<trans-unit id="s6cfed919e21ac6ac">
+  <source>Thu</source>
+  <target>To</target>
+</trans-unit>
+<trans-unit id="sf295af199c723ec8">
+  <source>Fri</source>
+  <target>Pe</target>
+</trans-unit>
+<trans-unit id="s9836b719fa8ef857">
+  <source>Sat</source>
+  <target>La</target>
+</trans-unit>
+<trans-unit id="s987ac119fac8d621">
+  <source>Sun</source>
+  <target>Su</target>
+</trans-unit>
+<trans-unit id="s17e3edbe032f79ec">
+  <source>Open calendar modal</source>
+  <target>Avaa kalenteri-modal</target>
+</trans-unit>
+<trans-unit id="s62931b2a50168976">
+  <source>Previous month</source>
+  <target>Edellinen kuukausi</target>
+</trans-unit>
+<trans-unit id="sb47daaf9e1c4a905">
+  <source>Month</source>
+  <target>Kuukausi</target>
+</trans-unit>
+<trans-unit id="s1a2dda8f763a68bd">
+  <source>January</source>
+  <target>Tammikuu</target>
+</trans-unit>
+<trans-unit id="sbc083a1dbee9af73">
+  <source>February</source>
+  <target>Helmikuu</target>
+</trans-unit>
+<trans-unit id="s5052d10b539eabf0">
+  <source>March</source>
+  <target>Maalis</target>
+</trans-unit>
+<trans-unit id="scb6b9cb49cf93277">
+  <source>April</source>
+  <target>Huhti</target>
+</trans-unit>
+<trans-unit id="s1e187019b5262aa6">
+  <source>May</source>
+  <target>Touko</target>
+</trans-unit>
+<trans-unit id="s15a852e9f9a50fa5">
+  <source>June</source>
+  <target>Kesä</target>
+</trans-unit>
+<trans-unit id="s15a16ae9f99f19bf">
+  <source>July</source>
+  <target>Heinä</target>
+</trans-unit>
+<trans-unit id="s407a88a592a0987c">
+  <source>August</source>
+  <target>Elokuu</target>
+</trans-unit>
+<trans-unit id="s39938ecdae568740">
+  <source>September</source>
+  <target>Syys</target>
+</trans-unit>
+<trans-unit id="sa7cd5c2ff6d266e7">
+  <source>October</source>
+  <target>Lokakuu</target>
+</trans-unit>
+<trans-unit id="s281846ef0421c71f">
+  <source>November</source>
+  <target>Marraskuu</target>
+</trans-unit>
+<trans-unit id="s7793b811d20184fe">
+  <source>December</source>
+  <target>Joulukuu</target>
+</trans-unit>
+<trans-unit id="sa6f2645578b2d2bc">
+  <source>Year</source>
+  <target>Vuosi</target>
+</trans-unit>
+<trans-unit id="s46d6587089bd0356">
+  <source>Next month</source>
+  <target>Seuraava kuukausi</target>
+</trans-unit>
+<trans-unit id="sb4f1dffbb6be6302">
+  <source>Clear</source>
+  <target>Tyhjennä</target>
+</trans-unit>
+<trans-unit id="s63d040e37887f17e">
+  <source>Today</source>
+  <target>Tänään</target>
+</trans-unit>
+<trans-unit id="se4129fd6b9d7b4c2">
+  <source>Last available date</source>
+  <target>Viimeinen saatavilla oleva päivämäärä</target>
+</trans-unit>
+<trans-unit id="s8ade4e9d5e804d6a">
+  <source>First available date</source>
+  <target>Ensimmäinen saatavilla oleva päivämäärä</target>
+</trans-unit>
+<trans-unit id="se0955919920ee87d">
+  <source>Day</source>
+  <target>Päivä</target>
+</trans-unit>
+<trans-unit id="s5febcd9b311c16fe">
+  <source>Scroll right</source>
+  <target>Vieritä oikealle</target>
+</trans-unit>
+<trans-unit id="s9af3c72c33088826">
+  <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
+  <target>On <x id="0" equiv-text="${errors.length}"/> virhettä, jotka täytyy korjata ennen kuin voit jatkaa:</target>
+</trans-unit>
+<trans-unit id="sdc42f1da42d6411a">
+  <source>Clear input</source>
+  <target>Tyhjennä syöte</target>
+</trans-unit>
+<trans-unit id="s2ceb11be2290bb1b">
+  <source>Cancel</source>
+  <target>Peruuta</target>
+</trans-unit>
+<trans-unit id="s49730f3d5751a433">
+  <source>Loading...</source>
+  <target>Ladataan...</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

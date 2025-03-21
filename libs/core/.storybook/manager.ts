@@ -33,6 +33,9 @@ const betaItems = {
   Text: true,
   Theme: true,
   Video: true,
+  Div: true,
+  Spinner: true,
+  Radio: true,
 }
 
 addons.setConfig({

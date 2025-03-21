@@ -1,10 +1,15 @@
 import {
+  ConfigurableFocusTrap,
+  ConfigurableFocusTrapFactory,
+} from '@angular/cdk/a11y'
+import {
   Component,
   ElementRef,
   EventEmitter,
   HostBinding,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   Renderer2,
@@ -24,7 +29,9 @@ export interface DialogEvent<T = any> {
   styleUrls: ['./dialog.component.scss'],
   exportAs: 'dialog',
 })
-export class NggvDialogComponent implements OnInit {
+export class NggvDialogComponent implements OnInit, OnDestroy {
+  private configurableFocusTrap: ConfigurableFocusTrap
+
   @ViewChild('dialog') dialogRef: ElementRef | undefined
 
   /** Special property used for selecting DOM elements during automated UI testing. */
@@ -36,6 +43,7 @@ export class NggvDialogComponent implements OnInit {
   private _shown = false
   @Input() set shown(value: boolean) {
     this._shown = value
+    this.enableFocusTrap()
     if (value) {
       this.hideOverflow()
     } else {
@@ -91,7 +99,15 @@ export class NggvDialogComponent implements OnInit {
   protected _firstFocusable: HTMLElement | undefined
   protected _lastFocusable: HTMLElement | undefined
 
-  constructor(private renderer: Renderer2) {}
+  constructor(
+    private renderer: Renderer2,
+    private ref: ElementRef<HTMLElement>,
+    private configurableFocusTrapFactory: ConfigurableFocusTrapFactory,
+  ) {
+    this.configurableFocusTrap = this.configurableFocusTrapFactory.create(
+      this.ref.nativeElement,
+    )
+  }
 
   ngOnInit() {
     this.dialogTitleId =
@@ -129,6 +145,8 @@ export class NggvDialogComponent implements OnInit {
   open(opener?: HTMLElement) {
     this._shown = true
     this._previous = opener || (document.activeElement as HTMLElement)
+
+    this.enableFocusTrap()
     this.hideOverflow()
     this._limitFocusable()
     return true
@@ -161,6 +179,7 @@ export class NggvDialogComponent implements OnInit {
     }
 
     this.resetOverflow()
+    this.disableFocusTrap()
 
     this._shown = false
     window.setTimeout(() => {
@@ -200,5 +219,22 @@ export class NggvDialogComponent implements OnInit {
 
   private resetOverflow(): void {
     this.renderer.removeStyle(document.body, 'overflow')
+  }
+
+  private enableFocusTrap() {
+    if (this.configurableFocusTrap) {
+      this.configurableFocusTrap.enabled = true
+      this.configurableFocusTrap.focusInitialElementWhenReady()
+    }
+  }
+
+  private disableFocusTrap() {
+    if (this.configurableFocusTrap) {
+      this.configurableFocusTrap.enabled = false
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.configurableFocusTrap?.destroy()
   }
 }

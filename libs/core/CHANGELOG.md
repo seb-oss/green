@@ -1,5 +1,149 @@
 # Changelog
 
+## 1.69.3
+
+### Patch Changes
+
+- 8fe5d35: **Tokens:** L2 content information
+
+## 1.69.2
+
+### Patch Changes
+
+- d245d21: **Dropdown:** Fix regression causing `isPlaceholder` options to become visible in the list
+- d03bed4: **Text:** add overflow-wrap prop
+
+## 1.69.1
+
+### Patch Changes
+
+- 7fe6b60: **Dropdown:** Fix issue with elements being `aria-hidden` while also having focus
+- 7fe6b60: **Dropdown:** Fix popover overlap when using `combobox` option
+
+## 1.69.0
+
+### Minor Changes
+
+- f438e8f: **Radio Button:** Add new component Radio Button
+
+## 1.68.5
+
+### Patch Changes
+
+- 6cea9a6: **Popover:** Change default positioning middleware to shift position rather than flip in order to use more available viewport space.
+
+## 1.68.4
+
+### Patch Changes
+
+- d529108: **Rixh text:** Remove leading zero
+
+## 1.68.3
+
+### Patch Changes
+
+- 08f1210: **Spinner:** add spinner to export on components
+- 08f1210: **Spinner:** rename classes to fix issue with suffix
+
+## 1.68.2
+
+### Patch Changes
+
+- 49bb2e6: **Rich Text:** Update styling on ordered list
+
+## 1.68.1
+
+### Patch Changes
+
+- 9d1476d: **Rich text:** Fix the heading first of type
+  **Rich text:** Fix the ordered list padding
+
+## 1.68.0
+
+### Minor Changes
+
+- 2378057: **Spinner:** Add new component
+
+## 1.67.3
+
+### Patch Changes
+
+- 286c636: **Rich Text:** Improvements on styling
+
+## 1.67.2
+
+### Patch Changes
+
+- 25a87f9: **Context Menu:** Improved rendering performance
+
+## 1.67.1
+
+### Patch Changes
+
+- e59a021: **Select:** Fix some state sync issues with the wrapped select element
+- d69a5ea: **Popover:** Fix stacking issue with nonmodal popovers
+- d69a5ea: **Dropdown:** Fix `combobox` when used without a placeholder option, and add missing event dispatch
+
+## 1.67.0
+
+### Minor Changes
+
+- 9180a71: **Popover:** `gds-ui-state` events can now be cancelled to gain more control over popover behavior
+- 9180a71: **Dropdown:** `gds-ui-state` event is now cancellable, and only fires on user-initiated changes
+- 5fc4d2e: **Localisation:** Add translations for `no`, `nl`, `it`, `fr`, `fi`, `de` and `da`
+
+### Patch Changes
+
+- 9180a71: **Dropdown:** Fix scrollIntoView behavior in the listbox so that headers won't be obscured
+- db5b77b: **Context Menu:** Fix focus issue. Closes #1993
+- 9180a71: **Dropdown:** Fix unexpected bubbeling of the `gds-ui-state` event
+
+## 1.66.1
+
+### Patch Changes
+
+- a715edc: **Declarative Layout**: Fix an incorrect import path the `styleExpressionProperty` decorator, fix default border props of gds-flex, add missing `order` property.
+
+## 1.66.0
+
+### Minor Changes
+
+- 4cdaf5f: **`gds-grid`**: `auto-columns` now support any CSS units. If no unit is specified, `px` is assumed.
+- 4cdaf5f: **Divider:** Add propagation of role attribute
+- 4cdaf5f: ### Declarative Layout updates
+
+  - Add `gds-div` as the base container for declarative layout
+  - Refactor implementation for easier reuse of properties in various components. Several component now support style expression properties for common things like margin, width and flex item properties.
+  - Colors now only support tokens from Green, no custom values except `transparent` and `currentColor`. This simplifies implementation and makes color properties more consistent.
+  - Color properties now always use `tokenName/transparency`, where transparency is optional.
+  - Set `box-sizing` to `border-box` by default
+  - Set `border-color` to `primary` by default
+  - `border` property now works like css shorthand border property, ie. `size style color`
+  - `border-style` property added for completeness
+
+  #### Removed
+
+  The following style expression properties have been removed:
+
+  - `pointer-events`
+  - `user-select`
+  - `cursor`
+  - `transform-style`
+  - `transition`
+  - `transition-behavior`
+  - `animation`
+
+  #### Deprecated
+
+  The followind elements have been deprecated
+
+  - `gds-container` is deprecated in favor of `gds-div`
+  - `gds-spacer` is deprecated in favor of `gds-div`
+
+### Patch Changes
+
+- 4cdaf5f: **Calendar:** Fix missing focus outline in 2023 style
+
 ## 1.65.2
 
 ### Patch Changes

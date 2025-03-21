@@ -9,11 +9,8 @@ export const GdsFlex = dynamic(
   },
 )
 
-export const GdsContainer = dynamic(
-  () =>
-    import('@sebgroup/green-react/core/container').then(
-      (mod) => mod.GdsContainer,
-    ),
+export const GdsDiv = dynamic(
+  () => import('@sebgroup/green-react/core/div').then((mod) => mod.GdsDiv),
   {
     ssr: false,
   },
@@ -283,6 +280,23 @@ export const GdsVideo = dynamic(
 
 export const GdsTheme = dynamic(
   () => import('@sebgroup/green-react/core/theme').then((mod) => mod.GdsTheme),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsRadio = dynamic(
+  () => import('@sebgroup/green-react/core/radio').then((mod) => mod.GdsRadio),
+  {
+    ssr: false,
+  },
+)
+
+export const GdsRadioGroup = dynamic(
+  () =>
+    import('@sebgroup/green-react/core/radio-group').then(
+      (mod) => mod.GdsRadioGroup,
+    ),
   {
     ssr: false,
   },
