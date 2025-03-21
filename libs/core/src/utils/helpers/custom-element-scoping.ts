@@ -83,6 +83,10 @@ export class ScopedElementRegistry {
   }
 }
 
+export interface GdsCustomElementOptions {
+  dependsOn?: (typeof GdsElement)[]
+}
+
 /**
  * Class decorator factory that defines the decorated class as a custom element, and registers
  * it with the custom element registry under a versioned name.
@@ -98,7 +102,10 @@ export class ScopedElementRegistry {
  * @category Decorator
  * @param tagName The tag name of the custom element to define.
  */
-export const gdsCustomElement = (tagName: string) => {
+export const gdsCustomElement = (
+  tagName: string,
+  options?: GdsCustomElementOptions,
+) => {
   return function <T extends Constructor<GdsElement>>(constructor: T): T {
     return class Component extends constructor {
       gdsElementName = tagName
@@ -114,6 +121,10 @@ export const gdsCustomElement = (tagName: string) => {
 
         ScopedElementRegistry.instance.set(tagName, nameToRegister)
         customElements.define(nameToRegister, Component)
+
+        if (options?.dependsOn) {
+          options.dependsOn.forEach((dep) => dep.define())
+        }
       }
     }
   }

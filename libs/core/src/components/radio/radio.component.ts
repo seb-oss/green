@@ -1,11 +1,10 @@
 import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
+import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
 import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
 import { styles } from './radio.styles'
-
-import '../../primitives/selection-controls'
 
 /**
  * @element gds-radio
@@ -13,7 +12,7 @@ import '../../primitives/selection-controls'
  *
  * @event gds-radio-change - Dispatched when the radio button is checked.
  */
-@gdsCustomElement('gds-radio')
+@gdsCustomElement('gds-radio', { dependsOn: [GdsSelectionFieldLabel] })
 export class GdsRadio extends GdsElement {
   static styles = [styles]
 

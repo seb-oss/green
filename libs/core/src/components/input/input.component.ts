@@ -3,6 +3,10 @@ import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 import { nothing } from 'lit/html.js'
 
+import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
+import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
+// Local Components
+import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { forwardAttributes } from '../../utils/directives'
@@ -11,17 +15,11 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { GdsButton } from '../button/button.component'
+import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsIconCrossLarge } from '../icon/icons/cross-large.component'
 import { styles } from './input.styles'
-
-import type { GdsButton } from '../button'
-// Local Components
-import '../../primitives/form-control-header'
-import '../../primitives/form-control-footer'
-import '../../primitives/field-base'
-import '../icon/icons/cross-large'
-import '../flex'
-import '../button'
 
 @localized()
 class Input extends GdsFormControlElement<string> {
@@ -260,7 +258,16 @@ class Input extends GdsFormControlElement<string> {
  *       displayed in a panel when the user clicks the info button.
  * @event gds-input-cleared - Fired when the clear button is clicked.
  */
-@gdsCustomElement('gds-input')
+@gdsCustomElement('gds-input', {
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsFieldBase,
+    GdsIconCrossLarge,
+    GdsFlex,
+    GdsButton,
+  ],
+})
 export class GdsInput extends withSizeXProps(
   withMarginProps(withLayoutChildProps(Input)),
 ) {}

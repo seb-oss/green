@@ -5,6 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import { literal, html as staticHtml } from 'lit/static-html.js'
 
+import { GdsRipple } from '../../primitives/ripple/ripple.component'
 import { html as customElementHtml, gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -18,8 +19,6 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import style from './button.style.css?inline'
-
-import '../../primitives/ripple'
 
 const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 
@@ -101,10 +100,6 @@ class Button extends GdsFormControlElement<any> {
   @query('.button') private _button?: HTMLElement
 
   #isIconButton = false
-
-  constructor() {
-    super()
-  }
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -224,7 +219,7 @@ class Button extends GdsFormControlElement<any> {
  *
  * @event click - Fired when the button is clicked.
  */
-@gdsCustomElement('gds-button')
+@gdsCustomElement('gds-button', { dependsOn: [GdsRipple] })
 export class GdsButton extends withSizeXProps(
   withMarginProps(withLayoutChildProps(Button)),
 ) {}

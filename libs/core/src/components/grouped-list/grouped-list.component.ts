@@ -7,8 +7,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-
-import './list-item'
+import { GdsListItem } from './list-item.component'
 
 /**
  * @element gds-grouped-list
@@ -16,7 +15,7 @@ import './list-item'
  *
  * Grouped lists are used to list many datapoints with labels in a structured way.
  */
-@gdsCustomElement('gds-grouped-list')
+@gdsCustomElement('gds-grouped-list', { dependsOn: [GdsListItem] })
 export class GdsGroupedList extends GdsElement {
   /**
    * The label for the list that will render in the shadowDOM as the first <li> element in the list with the class `gds-list-heading`

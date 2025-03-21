@@ -11,10 +11,9 @@ import {
 import { watch } from '../../utils/decorators/watch'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
 import style from './listbox.styles'
+import { GdsOption } from './option.component'
 
-import type { GdsOption, OptionsContainer } from './option.component'
-
-import './option.component'
+import type { OptionsContainer } from './option.component'
 
 /**
  * @element gds-listbox
@@ -29,7 +28,7 @@ import './option.component'
  *
  * @slot - The default slot. Only `gds-option` elements should be used here.
  */
-@gdsCustomElement('gds-listbox')
+@gdsCustomElement('gds-listbox', { dependsOn: [GdsOption] })
 export class GdsListbox
   extends GdsElement
   implements ListboxKbNavigation, OptionsContainer

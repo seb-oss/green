@@ -9,9 +9,8 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { GdsFlex } from '../flex/flex.component'
 import BadgeCSS from './badge.style'
-
-import '../flex'
 
 /**
  * `gds-badge`
@@ -20,7 +19,7 @@ import '../flex'
  * @status beta
  *
  */
-@gdsCustomElement('gds-badge')
+@gdsCustomElement('gds-badge', { dependsOn: [GdsFlex] })
 export class GdsBadge extends withSizeXProps(
   withMarginProps(withLayoutChildProps(GdsElement)),
 ) {
@@ -83,10 +82,6 @@ export class GdsBadge extends withSizeXProps(
 
   @state()
   mainSlotOccupied = false
-
-  constructor() {
-    super()
-  }
 
   render() {
     const background = this.disabled

@@ -2,16 +2,15 @@ import { localized, msg } from '@lit/localize'
 import { property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
+import { GdsButton } from '../../components/button/button.component'
+import { GdsCard } from '../../components/card/card.component'
+import { GdsIconCircleInfo } from '../../components/icon/icons/circle-info.component'
 import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { styles } from './form-control-header.styles'
-
-import '../../components/button'
-import '../../components/icon/icons/circle-info'
-import '../../components/card'
 
 /**
  * @element gds-form-control-header
@@ -20,7 +19,9 @@ import '../../components/card'
  * @slot supporting-text - The supporting text of the form control.
  * @slot extended-supporting-text - The extended supporting text, or "Show more info" card, of the form control.
  */
-@gdsCustomElement('gds-form-control-header')
+@gdsCustomElement('gds-form-control-header', {
+  dependsOn: [GdsButton, GdsCard],
+})
 @localized()
 export class GdsFormControlHeader extends GdsElement {
   static styles = [styles]

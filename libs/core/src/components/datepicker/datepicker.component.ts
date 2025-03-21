@@ -8,6 +8,9 @@ import { until } from 'lit/directives/until.js'
 import { when } from 'lit/directives/when.js'
 import { isSameDay } from 'date-fns'
 
+import { GdsButton } from '../../components/button/button.component'
+import { GdsDropdown } from '../../components/dropdown/dropdown.component'
+import { GdsFlex } from '../../components/flex/flex.component'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -21,23 +24,15 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { GdsCalendar } from '../calendar/calendar.component'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsIconCalendar } from '../icon/icons/calendar/calendar.component'
+import { GdsIconCalenderAdd } from '../icon/icons/calender-add/calender-add.component'
+import { GdsIconChevronLeft } from '../icon/icons/chevron-left/chevron-left.component'
+import { GdsIconChevronRight } from '../icon/icons/chevron-right/chevron-right.component'
+import { GdsPopover } from '../popover/popover.component'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { styles } from './datepicker.styles'
-
-import type { GdsDropdown } from '../../components/dropdown'
-import type { GdsCalendar } from '../calendar'
-import type { GdsPopover } from '../popover'
-
-import '../../components/flex'
-import '../../components/button'
-import '../../components/dropdown'
-import '../calendar'
-import '../icon/icons/calendar'
-import '../icon/icons/calender-add'
-import '../icon/icons/chevron-left'
-import '../icon/icons/chevron-right'
-import '../popover'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -798,7 +793,19 @@ class Datepicker extends GdsFormControlElement<Date> {
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event gds-ui-state - Fired when the dropdown is opened or closed.
  */
-@gdsCustomElement('gds-datepicker')
+@gdsCustomElement('gds-datepicker', {
+  dependsOn: [
+    GdsFlex,
+    GdsButton,
+    GdsDropdown,
+    GdsCalendar,
+    GdsPopover,
+    GdsIconCalendar,
+    GdsIconCalenderAdd,
+    GdsIconChevronLeft,
+    GdsIconChevronRight,
+  ],
+})
 export class GdsDatepicker extends withSizeXProps(
   withMarginProps(withLayoutChildProps(Datepicker)),
 ) {}

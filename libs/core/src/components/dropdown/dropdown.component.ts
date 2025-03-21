@@ -5,27 +5,24 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { when } from 'lit/directives/when.js'
 import { flip, offset } from '@floating-ui/dom'
 
+import { GdsFieldBase } from '../../primitives/field-base'
+import { GdsFormControlFooter } from '../../primitives/form-control-footer'
+import { GdsFormControlHeader } from '../../primitives/form-control-header'
+import { GdsListbox } from '../../primitives/listbox'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsIconCheckmark } from '../icon/icons/checkmark'
+import { GdsIconChevronBottom } from '../icon/icons/chevron-bottom'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
 import styles from './dropdown.styles'
 
-import type { GdsListbox } from '../../primitives/listbox'
 import type {
   GdsOption,
   OptionsContainer,
 } from '../../primitives/listbox/option.component'
-
-import '../../primitives/form-control-header'
-import '../../primitives/form-control-footer'
-import '../../primitives/field-base'
-import '../../primitives/listbox'
-import '../icon/icons/checkmark'
-import '../icon/icons/chevron-bottom'
-import '../popover'
 
 /**
  * @element gds-dropdown
@@ -45,7 +42,15 @@ import '../popover'
  * @event gds-ui-state - Fired when the dropdown is opened or closed by the user. Can be cancelled to prevent the dropdown from opening or closing.
  * @event gds-filter-input - Fired when the user types in the search field. The event is cancellable, and the consumer is expected to handle filtering and updating the options list if the event is cancelled.
  */
-@gdsCustomElement('gds-dropdown')
+@gdsCustomElement('gds-dropdown', {
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsFieldBase,
+    GdsIconCheckmark,
+    GdsIconChevronBottom,
+  ],
+})
 @localized()
 export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>

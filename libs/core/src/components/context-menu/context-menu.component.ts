@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 import { Placement } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
+import { GdsMenu } from '../../primitives/menu/menu.component'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
@@ -16,10 +17,8 @@ import {
   withLayoutChildProps,
   withMarginProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { GdsPopover } from '../popover/popover.component'
 import styles from './context-menu.styles'
-
-import '../../primitives/menu'
-import '../popover'
 
 /**
  * @element gds-context-menu
@@ -34,7 +33,7 @@ import '../popover'
  *
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
-@gdsCustomElement('gds-context-menu')
+@gdsCustomElement('gds-context-menu', { dependsOn: [GdsMenu, GdsPopover] })
 @localized()
 export class GdsContextMenu extends withMarginProps(
   withLayoutChildProps(GdsElement),
@@ -83,10 +82,6 @@ export class GdsContextMenu extends withMarginProps(
 
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
-
-  constructor() {
-    super()
-  }
 
   connectedCallback() {
     super.connectedCallback()

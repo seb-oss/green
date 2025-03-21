@@ -4,14 +4,14 @@ import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../../gds-element'
 import { gdsCustomElement, html } from '../../../scoping'
+import { GdsCard } from '../../card/card.component'
+import { GdsFlex } from '../../flex/flex.component'
+import { GdsText } from '../../text/text.component'
 import { GdsFormControlElement } from '../form-control'
 
-import '../../container/index'
-import '../../card/index'
-import '../../flex/index'
-import '../../text/index'
-
-@gdsCustomElement('gds-form-summary')
+@gdsCustomElement('gds-form-summary', {
+  dependsOn: [GdsCard, GdsFlex, GdsText],
+})
 export class GdsFormSummary extends GdsElement {
   static styles = css`
     ul {

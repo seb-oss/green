@@ -8,10 +8,7 @@ import {
   ListboxKbNavigation,
 } from '../../utils/controllers/listbox-kb-nav-controller'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
-
-import type { GdsMenuItem } from './menu-item'
-
-import './menu-item'
+import { GdsMenuItem } from './menu-item.component'
 
 /**
  * @element gds-menu
@@ -22,7 +19,7 @@ import './menu-item'
  *
  * * @slot - The default slot. Only `gds-menu-item` elements should be used here.
  */
-@gdsCustomElement('gds-menu')
+@gdsCustomElement('gds-menu', { dependsOn: [GdsMenuItem] })
 export class GdsMenu extends GdsElement implements ListboxKbNavigation {
   #slotRef: Ref<HTMLSlotElement> = createRef()
 

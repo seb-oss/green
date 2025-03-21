@@ -2,6 +2,9 @@ import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
+import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
+import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
+import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
@@ -15,13 +18,8 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
+import { IconChevronBottom } from '../icon/icons/chevron-bottom'
 import { styles } from './select.styles'
-
-import '../../primitives/form-control-header'
-import '../../primitives/form-control-footer'
-import '../../primitives/field-base/field-base'
-import '../icon/icons/chevron-bottom'
-import '../button/button'
 
 @localized()
 class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
@@ -313,7 +311,9 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
  * @slot - Default slot for the native select element
  * @slot lead - Slot for leading content (e.g., icons)
  */
-@gdsCustomElement('gds-select')
+@gdsCustomElement('gds-select', {
+  dependsOn: [GdsFormControlHeader, GdsFormControlFooter, IconChevronBottom],
+})
 export class GdsSelect extends withLayoutChildProps(
   withSizeXProps(withMarginProps(Select)),
 ) {}

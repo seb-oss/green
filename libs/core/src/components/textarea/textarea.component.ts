@@ -3,6 +3,9 @@ import { property, query, queryAsync } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 import { nothing } from 'lit/html.js'
 
+import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
+import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
+import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
@@ -14,17 +17,10 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { GdsButton } from '../button/button.component'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsIconCrossLarge } from '../icon/icons/cross-large/cross-large.component'
 import { styles } from './textarea.styles'
-
-import type { GdsFieldBase } from '../../primitives/field-base'
-import type { GdsButton } from '../button'
-// Local Components
-import '../../primitives/form-control-header'
-import '../../primitives/form-control-footer'
-import '../../primitives/field-base'
-import '../icon/icons/cross-large'
-import '../button'
 
 @localized()
 class Textarea extends GdsFormControlElement<string> {
@@ -408,7 +404,15 @@ class Textarea extends GdsFormControlElement<string> {
  *       displayed in a panel when the user clicks the info button.
  * @event gds-input-cleared - Fired when the clear button is clicked.
  */
-@gdsCustomElement('gds-textarea')
+@gdsCustomElement('gds-textarea', {
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsButton,
+    GdsIconCrossLarge,
+    GdsFieldBase,
+  ],
+})
 export class GdsTextarea extends withLayoutChildProps(
   withSizeXProps(withMarginProps(Textarea)),
 ) {}

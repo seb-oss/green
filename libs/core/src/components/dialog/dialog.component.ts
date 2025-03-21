@@ -8,17 +8,16 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsButton } from '../button/button.component'
+import { GdsCard } from '../card/card.component'
+import { GdsFlex } from '../flex/flex.component'
+import { GdsIconCrossLarge } from '../icon/icons/cross-large/cross-large.component'
 import { styles } from './dialog.styles'
 import {
   lockBodyScrolling,
   registerGlobalScrollLockStyles,
   unlockBodyScrolling,
 } from './scroll-lock'
-
-import '../button'
-import '../card'
-import '../flex'
-import '../icon/icons/cross-large'
 
 registerGlobalScrollLockStyles()
 
@@ -34,7 +33,9 @@ registerGlobalScrollLockStyles()
  * @slot trigger - The trigger button for the dialog
  * @slot footer - The footer of the dialog
  */
-@gdsCustomElement('gds-dialog')
+@gdsCustomElement('gds-dialog', {
+  dependsOn: [GdsButton, GdsCard, GdsFlex, GdsIconCrossLarge],
+})
 @localized()
 export class GdsDialog extends GdsElement {
   static styles = [styles]

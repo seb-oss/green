@@ -1,6 +1,8 @@
 import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
+import { GdsBadge } from '../../components/badge/badge.component'
+import { GdsIconTriangleExclamation } from '../../components/icon/icons/triangle-exclamation.component'
 import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
@@ -8,13 +10,12 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { styles } from './form-control-footer.styles'
 
-import '../../components/badge'
-import '../../components/icon/icons/triangle-exclamation'
-
 /**
  * @element gds-form-control-footer
  */
-@gdsCustomElement('gds-form-control-footer')
+@gdsCustomElement('gds-form-control-footer', {
+  dependsOn: [GdsBadge, GdsIconTriangleExclamation],
+})
 export class GdsFormControlFooter extends GdsElement {
   static styles = [styles]
 

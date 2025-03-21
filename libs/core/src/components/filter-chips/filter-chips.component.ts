@@ -9,11 +9,8 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsFormControlElement } from '../form/form-control'
+import { GdsFilterChip } from './filter-chip/filter-chip.component'
 import { styles } from './filter-chips.styles'
-
-import type { GdsFilterChip } from './filter-chip'
-
-import './filter-chip'
 
 /**
  * @element gds-filter-chips
@@ -23,7 +20,7 @@ import './filter-chip'
  *
  * @fires change - When a chip is clicked
  */
-@gdsCustomElement('gds-filter-chips')
+@gdsCustomElement('gds-filter-chips', { dependsOn: [GdsFilterChip] })
 export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   ValueT | ValueT[]
 > {

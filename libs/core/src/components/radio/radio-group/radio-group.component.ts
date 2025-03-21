@@ -2,6 +2,8 @@ import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
+import { GdsFormControlFooter } from '../../../primitives/form-control-footer/form-control-footer.component'
+import { GdsFormControlHeader } from '../../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../../scoping'
 import { tokens } from '../../../tokens.style'
 import { watch } from '../../../utils/decorators/watch'
@@ -14,9 +16,6 @@ import { GdsFormControlElement } from '../../form/form-control'
 import { styles } from './radio-group.styles'
 
 import type { GdsRadio } from '../radio'
-
-import '../../../primitives/form-control-header'
-import '../../../primitives/form-control-footer'
 
 @localized()
 class RadioGroup extends GdsFormControlElement<string> {
@@ -290,7 +289,9 @@ class RadioGroup extends GdsFormControlElement<string> {
  * @event change - Fired when a radio button selection changes
  * @event input - Fired when a radio button selection changes
  */
-@gdsCustomElement('gds-radio-group')
+@gdsCustomElement('gds-radio-group', {
+  dependsOn: [GdsFormControlHeader, GdsFormControlFooter],
+})
 export class GdsRadioGroup extends withLayoutChildProps(
   withMarginProps(withSizeXProps(RadioGroup)),
 ) {}
