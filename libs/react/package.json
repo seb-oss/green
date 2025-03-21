@@ -4,8 +4,8 @@
   "module": "./src/index.js",
   "version": "3.25.0",
   "peerDependencies": {
-    "react": "^18 || ^19",
-    "react-dom": "^18 || ^19"
+    "react": "^17 || ^18 || ^19",
+    "react-dom": "^17 || ^18 || ^19"
   },
   "dependencies": {
     "@sebgroup/green-core": "^1.69.4",
