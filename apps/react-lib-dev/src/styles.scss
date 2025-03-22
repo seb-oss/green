@@ -1,3 +1,4 @@
+
 @use '@sebgroup/chlorophyll/scss/components/use-green-scope' with (
   $font-path: '@sebgroup/fonts/fonts'
 );
@@ -5,3 +6,9 @@
 .use-green {
   @import '@sebgroup/chlorophyll/scss';
 }
+
+body {
+  margin: unset;
+}
+
+ 

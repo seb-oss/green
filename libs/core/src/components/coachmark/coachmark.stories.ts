@@ -26,7 +26,7 @@ const meta: Meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
 }
 
 export default meta

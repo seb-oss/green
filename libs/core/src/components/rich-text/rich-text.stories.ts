@@ -25,7 +25,7 @@ import { html } from '../../scoping'
 const meta: Meta = {
   title: 'Components/Rich Text',
   component: 'gds-rich-text',
-  tags: ['autodocs'],
+  tags: ['autodocs', 'beta'],
   argTypes: {
     ...argTablePropsFor('gds-rich-text'),
   },
