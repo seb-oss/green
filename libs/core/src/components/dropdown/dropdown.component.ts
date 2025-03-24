@@ -47,6 +47,8 @@ import type {
     GdsFormControlHeader,
     GdsFormControlFooter,
     GdsFieldBase,
+    GdsListbox,
+    GdsPopover,
     IconCheckmark,
     IconChevronBottom,
   ],
