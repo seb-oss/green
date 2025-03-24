@@ -132,9 +132,6 @@ async function renameFiles() {
 
         tsIndexContent += `export * from './${newName}'\n`
         mdxContent += `<gds-icon-${toKebabCase(newName)}></gds-icon-${toKebabCase(newName)}>\n`
-
-        // Delay before moving to the next file
-        await delay(1000) // 1 second delay
       } catch (error) {
         console.error(
           `%cFailed to rename ${oldName} in regular directory. Error: ${error.message}`,

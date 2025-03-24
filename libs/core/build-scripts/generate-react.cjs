@@ -17,15 +17,14 @@ const metadata = JSON.parse(
   fs.readFileSync(path.join('libs/core/custom-elements.json'), 'utf8'),
 )
 const components = getAllComponents(metadata)
-const filteredComponents = components
-  .filter((component) => component.tagName)
-  .filter((component) => component.tagName.indexOf('icon') === -1)
+const filteredComponents = components.filter((component) => component.tagName)
 const index = []
 let i = 0
 
 for (const component of filteredComponents) {
   const tagWithoutPrefix = component.tagName.replace(/^gds-/, '')
-  const componentDir = path.join(reactDir, tagWithoutPrefix)
+  const subDir = component.tagName.includes('icon') ? 'icons/' : ''
+  const componentDir = path.join(path.join(reactDir, subDir), tagWithoutPrefix)
   const componentFile = path.join(componentDir, 'index.ts')
   const importPath = component.path.replace(/^src\//, '').replace(/\.ts$/, '')
 
@@ -33,11 +32,13 @@ for (const component of filteredComponents) {
 
   const jsDoc = component.jsDoc || ''
 
+  const levels = subDir.length > 0 ? '../../../..' : '../../..'
+
   prettier
     .format(
       `
-        import { getReactComponent } from '../../../utils/react';
-        import { ${component.name} as ${component.name}Class } from '../../../${importPath}';
+        import { getReactComponent } from '${levels}/utils/react';
+        import { ${component.name} as ${component.name}Class } from '${levels}/${importPath}';
 
         ${jsDoc}
         export const ${component.name} = (() => {
@@ -52,7 +53,9 @@ for (const component of filteredComponents) {
       }),
     )
     .then((formattedSource) => {
-      index.push(`export { ${component.name} } from './${tagWithoutPrefix}';`)
+      index.push(
+        `export { ${component.name} } from './${subDir}${tagWithoutPrefix}';`,
+      )
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 
