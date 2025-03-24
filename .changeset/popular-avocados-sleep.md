@@ -2,4 +2,4 @@
 '@sebgroup/green-angular': patch
 ---
 
-Allow overflow to be shown outside of slide-out content.
+**V-Angular Slide-out:** Allow overflow to be shown outside of slide-out content.
