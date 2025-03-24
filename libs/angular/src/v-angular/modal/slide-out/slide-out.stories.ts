@@ -39,9 +39,9 @@ export default {
   ],
   argTypes: {
     side: {
+      options: ['left', 'right'],
       control: {
         type: 'inline-radio',
-        options: ['left', 'right'],
       },
     },
     action: {
