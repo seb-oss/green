@@ -26,10 +26,10 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsCalendar } from '../calendar/calendar.component'
 import { GdsFormControlElement } from '../form/form-control'
-import { GdsIconCalendar } from '../icon/icons/calendar/calendar.component'
-import { GdsIconCalenderAdd } from '../icon/icons/calender-add/calender-add.component'
-import { GdsIconChevronLeft } from '../icon/icons/chevron-left/chevron-left.component'
-import { GdsIconChevronRight } from '../icon/icons/chevron-right/chevron-right.component'
+import { IconCalendar } from '../icon/icons/calendar.component'
+import { IconCalenderAdd } from '../icon/icons/calender-add.component'
+import { IconChevronLeft } from '../icon/icons/chevron-left.component'
+import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsPopover } from '../popover/popover.component'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { styles } from './datepicker.styles'
@@ -800,10 +800,10 @@ class Datepicker extends GdsFormControlElement<Date> {
     GdsDropdown,
     GdsCalendar,
     GdsPopover,
-    GdsIconCalendar,
-    GdsIconCalenderAdd,
-    GdsIconChevronLeft,
-    GdsIconChevronRight,
+    IconCalendar,
+    IconCalenderAdd,
+    IconChevronLeft,
+    IconChevronRight,
   ],
 })
 export class GdsDatepicker extends withSizeXProps(

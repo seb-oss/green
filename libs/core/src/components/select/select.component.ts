@@ -18,7 +18,7 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
-import { IconChevronBottom } from '../icon/icons/chevron-bottom'
+import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
 import { styles } from './select.styles'
 
 @localized()
@@ -312,7 +312,12 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
  * @slot lead - Slot for leading content (e.g., icons)
  */
 @gdsCustomElement('gds-select', {
-  dependsOn: [GdsFormControlHeader, GdsFormControlFooter, IconChevronBottom],
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsFieldBase,
+    IconChevronBottom,
+  ],
 })
 export class GdsSelect extends withLayoutChildProps(
   withSizeXProps(withMarginProps(Select)),

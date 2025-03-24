@@ -19,7 +19,7 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsFormControlElement } from '../form/form-control'
-import { GdsIconCrossLarge } from '../icon/icons/cross-large/cross-large.component'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import { styles } from './textarea.styles'
 
 @localized()
@@ -409,8 +409,8 @@ class Textarea extends GdsFormControlElement<string> {
     GdsFormControlHeader,
     GdsFormControlFooter,
     GdsButton,
-    GdsIconCrossLarge,
     GdsFieldBase,
+    IconCrossLarge,
   ],
 })
 export class GdsTextarea extends withLayoutChildProps(

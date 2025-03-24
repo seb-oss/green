@@ -8,7 +8,7 @@ import {
   html,
 } from '../../../utils/helpers/custom-element-scoping'
 import { GdsButton } from '../../button/button.component'
-import { GdsIconCheckmark } from '../../icon/icons/checkmark/checkmark.component'
+import { IconCheckmark } from '../../icon/icons/checkmark.component'
 import { styles } from './filter-chip.styles'
 
 /**
@@ -18,7 +18,7 @@ import { styles } from './filter-chip.styles'
  * * @slot Content of the Filter chip
  */
 @gdsCustomElement('gds-filter-chip', {
-  dependsOn: [GdsButton, GdsIconCheckmark],
+  dependsOn: [GdsButton, IconCheckmark],
 })
 export class GdsFilterChip<ValueT = any> extends GdsElement {
   static styles = [styles]

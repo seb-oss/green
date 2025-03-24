@@ -14,8 +14,8 @@ import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
-import { GdsIconCheckmark } from '../icon/icons/checkmark'
-import { GdsIconChevronBottom } from '../icon/icons/chevron-bottom'
+import { IconCheckmark } from '../icon/icons/checkmark.component'
+import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
 import styles from './dropdown.styles'
 
@@ -47,8 +47,8 @@ import type {
     GdsFormControlHeader,
     GdsFormControlFooter,
     GdsFieldBase,
-    GdsIconCheckmark,
-    GdsIconChevronBottom,
+    IconCheckmark,
+    IconChevronBottom,
   ],
 })
 @localized()

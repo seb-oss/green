@@ -2,7 +2,7 @@ import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
-import { GdsIconCheckmark } from '../../components/icon/icons/checkmark.component'
+import { IconCheckmark } from '../../components/icon/icons/checkmark.component'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
@@ -30,7 +30,7 @@ export interface OptionsContainer extends HTMLElement {
  * @event gds-blur - Fired when the option loses focus.
  * @event gds-focus - Fired when the option gains focus.
  */
-@gdsCustomElement('gds-option', { dependsOn: [GdsIconCheckmark] })
+@gdsCustomElement('gds-option', { dependsOn: [IconCheckmark] })
 export class GdsOption extends Focusable(GdsElement) {
   static styles = [tokens, style]
 

@@ -15,7 +15,7 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch, watchMediaQuery } from '../../utils/decorators'
-import { GdsIconCrossSmall } from '../icon/icons/cross-small/cross-small.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import styles from './popover.styles'
 
 import type { GdsBackdrop } from './backdrop'
@@ -37,7 +37,7 @@ export type UIStateChangeReason = 'show' | 'close' | 'cancel'
  * @slot - Content of the popover
  * @slot trigger - Trigger element for the popover. If this slot is occupied, the popover will listen to keydown and click events on the trigger and automtaiclly open when clicked or when the trigger is focused and `ArrowDown` is pressed.
  */
-@gdsCustomElement('gds-popover', { dependsOn: [GdsIconCrossSmall] })
+@gdsCustomElement('gds-popover', { dependsOn: [IconCrossSmall] })
 @localized()
 export class GdsPopover extends GdsElement {
   static styles = unsafeCSS(styles)

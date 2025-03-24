@@ -13,8 +13,8 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import { GdsIconChevronLeft } from '../icon/icons/chevron-left/chevron-left.component'
-import { GdsIconChevronRight } from '../icon/icons/chevron-right/chevron-right.component'
+import { IconChevronLeft } from '../icon/icons/chevron-left.component'
+import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsSegment } from './segment/segment.component'
 import style from './segmented-control.style.css?inline'
 
@@ -37,7 +37,7 @@ const debounce = (fn: () => void, delay: number) => {
  * @event change - Fires when the selected segment is changed
  */
 @gdsCustomElement('gds-segmented-control', {
-  dependsOn: [GdsSegment, GdsIconChevronLeft, GdsIconChevronRight],
+  dependsOn: [GdsSegment, IconChevronLeft, IconChevronRight],
 })
 @localized()
 export class GdsSegmentedControl<ValueT = any> extends withLayoutChildProps(

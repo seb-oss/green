@@ -4,7 +4,7 @@ import { when } from 'lit/directives/when.js'
 
 import { GdsButton } from '../../components/button/button.component'
 import { GdsCard } from '../../components/card/card.component'
-import { GdsIconCircleInfo } from '../../components/icon/icons/circle-info.component'
+import { IconCircleInfo } from '../../components/icon/icons/circle-info.component'
 import { GdsElement } from '../../gds-element'
 import {
   gdsCustomElement,
@@ -20,7 +20,7 @@ import { styles } from './form-control-header.styles'
  * @slot extended-supporting-text - The extended supporting text, or "Show more info" card, of the form control.
  */
 @gdsCustomElement('gds-form-control-header', {
-  dependsOn: [GdsButton, GdsCard],
+  dependsOn: [GdsButton, GdsCard, IconCircleInfo],
 })
 @localized()
 export class GdsFormControlHeader extends GdsElement {

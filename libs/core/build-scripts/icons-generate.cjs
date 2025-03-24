@@ -31,7 +31,7 @@ async function replaceInFile(filePath) {
   return content.replace(/<\/?svg[^>]*>/g, '')
 }
 
-function generateTsContent(name, regularSvg, solidSvg) {
+function generateComponentTsContent(name, regularSvg, solidSvg) {
   const className = `Icon${toPascalCase(name)}`
   const tagName = `gds-icon-${toKebabCase(name)}`
 
@@ -39,7 +39,7 @@ function generateTsContent(name, regularSvg, solidSvg) {
   regularSvg = regularSvg.replace(/\s*\n\s*/g, '')
   solidSvg = solidSvg.replace(/\s*\n\s*/g, '')
 
-  return `import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
+  return `import { gdsCustomElement } from '../../../scoping'
 import { GdsIcon } from '../icon'
 
 /**
@@ -54,6 +54,15 @@ export class ${className} extends GdsIcon {
   /** @private */
   static _name = '${toKebabCase(name)}'
 }`.trim()
+}
+
+function generateTsContent(name) {
+  const className = `Icon${toPascalCase(name)}`
+  return `import { ${className} } from './${name}.component'
+
+${className}.define()
+
+export { ${className} }`
 }
 
 async function renameFiles() {
@@ -106,9 +115,20 @@ async function renameFiles() {
           )
         }
 
-        const tsContent = generateTsContent(newName, regularSvg, solidSvg)
+        const componentTsContent = generateComponentTsContent(
+          newName,
+          regularSvg,
+          solidSvg,
+        )
+        await fs.writeFile(
+          path.join(outputDir, `${newName}.component.ts`),
+          componentTsContent,
+        )
+        console.log(`Generated ${newName}.component.ts`)
+
+        const tsContent = generateTsContent(newName)
         await fs.writeFile(path.join(outputDir, `${newName}.ts`), tsContent)
-        console.log(`Generated TypeScript file for ${newName}`)
+        console.log(`Generated ${newName}.ts`)
 
         tsIndexContent += `export * from './${newName}'\n`
         mdxContent += `<gds-icon-${toKebabCase(newName)}></gds-icon-${toKebabCase(newName)}>\n`

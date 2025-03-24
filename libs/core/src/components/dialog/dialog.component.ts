@@ -11,7 +11,7 @@ import {
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
-import { GdsIconCrossLarge } from '../icon/icons/cross-large/cross-large.component'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import { styles } from './dialog.styles'
 import {
   lockBodyScrolling,
@@ -34,7 +34,7 @@ registerGlobalScrollLockStyles()
  * @slot footer - The footer of the dialog
  */
 @gdsCustomElement('gds-dialog', {
-  dependsOn: [GdsButton, GdsCard, GdsFlex, GdsIconCrossLarge],
+  dependsOn: [GdsButton, GdsCard, GdsFlex, IconCrossLarge],
 })
 @localized()
 export class GdsDialog extends GdsElement {
