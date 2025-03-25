@@ -1,7 +1,6 @@
 'use client'
 
-import { GdsFlex, GdsGrid, GdsText, GdsRichText } from '$/import/components'
-import { Accordion, AccordionItem } from 'core/accordion'
+import { GdsFlex, GdsRichText } from '$/import/components'
 import Hero from 'core/hero'
 import TOC from 'core/navigator'
 
@@ -47,8 +46,8 @@ const HEADINGS = [
     level: 3,
   },
   {
-    slug: 'darkmode',
-    text: 'Darkmode',
+    slug: 'dark-mode',
+    text: 'Dark mode',
     level: 3,
   },
 ]
@@ -110,10 +109,10 @@ export default function Accessibility() {
                 </h3>
     
                 <p>
-                  This includes good contrast and well done colors.
+                  This includes good contrast and well done colours.
                   The components should have strong enough contrast between each of its
                   parts.
-                  The colors should not be hard to see for those that are colorblind. It can
+                  The colours should not be hard to see for those that are colourblind. It can
                   sometimes be good to have icons or patterns to distinguish some areas better.
                 </p>
 
@@ -148,7 +147,7 @@ export default function Accessibility() {
 
                 <h2 id="aria-html">Aria & Html</h2>
                 <p>
-                Follows Aria Attributes and Roles. Uses correct html with no unnessesary aria.
+                Follows Aria Attributes and Roles. Uses correct html with no unnecessary aria.
                 </p>
                 <ul>
                   <li>mm</li>
@@ -159,13 +158,13 @@ export default function Accessibility() {
 
                 <h2 id="focus">Focus</h2>
                 <p>
-                  If focus is implimented in a good way.
+                  If focus is implemented in a good way.
                 </p>
                 <ul>
                   <li>Should usually be a black focus ring in a few pixels away.</li>
                   <li>Does focus shows up with keyboard and not mouse?</li>
-                  <li>Is it visible enough? Is some parts of it hidden
-                    behind something else or ourside window?</li>
+                  <li>Is it visible enough? Are some parts of it hidden
+                    behind something else or outside the window?</li>
                   <li>Is the focus order logical?</li>
                   <li>Does focus traps work?</li>
                 </ul>
@@ -188,13 +187,13 @@ export default function Accessibility() {
                 </p>
                 <ul>
                   <li>Usually test on: <a href="https://www.nvaccess.org/download/">NVDA</a>, VoiceOver (MacOS / iOS), & TalkBack (Android).</li>
-                  <li>Can jump between headers wich is the most common way of using a screen-reader?</li>
+                  <li>Can jump between headers? Which is the most common way of using a screen-reader.</li>
                   <li>Read out everything that can be seen (except images that have no real meaning).</li>
                 </ul>
 
-                <h2 id="darkmode">Darkmode</h2>
+                <h2 id="dark-mode">Dark mode</h2>
                 <p>
-                  If the components supports darkmode - and how well it does it.
+                  If the components support dark mode - and how well it does it.
                 </p>
                 <ul>
                   <li>What changes? Maybe nothing?</li>
