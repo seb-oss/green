@@ -115,6 +115,24 @@ const cssToJsPlugin: esbuild.Plugin = {
   },
 }
 
+async function updatePackageJson() {
+  const sideEffectFiles = glob
+    .sync(
+      './dist/libs/core/src/{components,primitives}/**/!(*.component|*.styles|*.style|*.css|*.scss).js',
+    )
+    .map((file) => file.replace('/dist/libs/core/src', ''))
+
+  const packageJson = JSON.parse(
+    await fsPromises.readFile('./dist/libs/core/src/package.json', 'utf8'),
+  )
+
+  packageJson.sideEffects = sideEffectFiles
+  await fsPromises.writeFile(
+    './dist/libs/core/src/package.json',
+    JSON.stringify(packageJson, null, 2),
+  )
+}
+
 export default async function runExecutor(
   options: BuildCoreLibExecutorSchema,
   context: ExecutorContext,
@@ -143,6 +161,8 @@ export default async function runExecutor(
     plugins: [cssToJsPlugin],
     metafile: true,
   })
+
+  await updatePackageJson()
 
   return {
     success: true,
