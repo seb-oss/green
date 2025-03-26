@@ -48,7 +48,7 @@
     "storybook": {
       "executor": "@nx/storybook:storybook",
       "options": {
-        "port": 4400,
+        "port": 4403,
         "configDir": "libs/chlorophyll/.storybook"
       },
       "configurations": {
