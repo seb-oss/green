@@ -12,6 +12,8 @@ import { GdsFormControlElement } from '../form/form-control'
 import { GdsFilterChip } from './filter-chip/filter-chip.component'
 import { styles } from './filter-chips.styles'
 
+export { GdsFilterChip }
+
 /**
  * @element gds-filter-chips
  * @status stable

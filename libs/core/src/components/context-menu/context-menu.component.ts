@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 import { Placement } from '@floating-ui/dom'
 
 import { GdsElement } from '../../gds-element'
+import { GdsMenuItem } from '../../primitives/menu/menu-item.component'
 import { GdsMenu } from '../../primitives/menu/menu.component'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
@@ -20,6 +21,9 @@ import {
 import { GdsPopover } from '../popover/popover.component'
 import styles from './context-menu.styles'
 
+export { GdsMenuItem }
+export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
+
 /**
  * @element gds-context-menu
  * @status stable
@@ -33,7 +37,9 @@ import styles from './context-menu.styles'
  *
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
-@gdsCustomElement('gds-context-menu', { dependsOn: [GdsMenu, GdsPopover] })
+@gdsCustomElement('gds-context-menu', {
+  dependsOn: [GdsMenuItem, GdsMenu, GdsPopover],
+})
 @localized()
 export class GdsContextMenu extends withMarginProps(
   withLayoutChildProps(GdsElement),

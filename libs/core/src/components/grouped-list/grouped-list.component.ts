@@ -9,6 +9,8 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsListItem } from './list-item.component'
 
+export { GdsListItem }
+
 /**
  * @element gds-grouped-list
  * @status stable
