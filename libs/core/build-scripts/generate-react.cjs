@@ -34,12 +34,17 @@ for (const component of filteredComponents) {
 
   const levels = subDir.length > 0 ? '../../../..' : '../../..'
 
+  // We allow the use of react as an extraneous dependency here because we expect any consumer
+  // that imports React components from Green Core to already have React as a dependency.
+  // TODO: List react as an optional peer dependency in package.json in the next major version.
   prettier
     .format(
       `
-        import { createElement } from 'react';
         import { getReactComponent } from '${levels}/utils/react';
         import { ${component.name} as ${component.name}Class } from '${levels}/${importPath}';
+
+        // eslint-disable-next-line import/no-extraneous-dependencies
+        import { createElement } from 'react';
 
         ${jsDoc}
         export const ${component.name} = (props: React.ComponentProps<ReturnType<typeof getReactComponent<${component.name}Class>>>) => {
