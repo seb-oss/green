@@ -20,9 +20,9 @@ export default {
   ],
   argTypes: {
     alignOptions: {
+      options: ['left', 'right'],
       control: {
         type: 'inline-radio',
-        options: ['left', 'right'],
       },
     },
   },
