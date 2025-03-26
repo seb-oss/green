@@ -1,0 +1,3 @@
+import{a as s}from"./argTableProps-DJ3osy8N.js";import"./custom-elements-WCmTfZl-.js";const p={title:"Components/Image",component:"gds-img",tags:["autodocs"],argTypes:{...s("gds-img")},parameters:{docs:{description:{component:"The `gds-img`"}}}},t={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}},args:{ratio:"16/9",fit:"cover",inset:"0",position:"relative",opacity:"1",src:"https://placehold.co/600x400",alt:"Placeholder"}},e={...t};var a,o,r;e.parameters={...e.parameters,docs:{...(a=e.parameters)==null?void 0:a.docs,source:{originalSource:`{
+  ...DefaultParams
+}`,...(r=(o=e.parameters)==null?void 0:o.docs)==null?void 0:r.source}}};const i=["Basic"];export{e as Basic,i as __namedExportsOrder,p as default};
