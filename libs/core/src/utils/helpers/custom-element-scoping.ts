@@ -109,7 +109,10 @@ export const gdsCustomElement = (
   return function <T extends Constructor<GdsElement>>(constructor: T): T {
     return class Component extends constructor {
       gdsElementName = tagName
+      static isDefined = false
       static define() {
+        if (Component.isDefined) return
+
         const isVersioningDisabled = (globalThis as any)
           .GDS_DISABLE_VERSIONED_ELEMENTS
         const nameToRegister = isVersioningDisabled
@@ -118,6 +121,8 @@ export const gdsCustomElement = (
 
         // If the element is already registered, we assume it is compatible with the current version, so we can bail out
         if (customElements.get(nameToRegister)) return
+
+        Component.isDefined = true
 
         ScopedElementRegistry.instance.set(tagName, nameToRegister)
         customElements.define(nameToRegister, Component)

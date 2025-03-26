@@ -27,6 +27,11 @@ export class GdsElement extends LitElement {
   }
 
   /**
+   * Whether the element is defined in the custom element registry.
+   */
+  static isDefined = false
+
+  /**
    * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.
    *
    * @attribute gds-element
