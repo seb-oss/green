@@ -37,25 +37,23 @@ for (const component of filteredComponents) {
   prettier
     .format(
       `
+        import { createElement } from 'react';
         import { getReactComponent } from '${levels}/utils/react';
         import { ${component.name} as ${component.name}Class } from '${levels}/${importPath}';
 
         ${jsDoc}
-        export const ${component.name} = (() => {
-          // Register the custom element lazily when the component is first used
+        export const ${component.name} = (props: React.ComponentProps<ReturnType<typeof getReactComponent<${component.name}Class>>>) => {
           ${component.name}Class.define();
-
-          return getReactComponent<${component.name}Class>('${component.tagName}');
-        })()
+          const JSXElement = getReactComponent<${component.name}Class>('${component.tagName}');
+          return createElement(JSXElement, props);
+        };
       `,
       Object.assign(prettierConfig, {
         parser: 'babel-ts',
       }),
     )
     .then((formattedSource) => {
-      index.push(
-        `export { ${component.name} } from './${subDir}${tagWithoutPrefix}';`,
-      )
+      index.push(`export * from './${subDir}${tagWithoutPrefix}';`)
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 
