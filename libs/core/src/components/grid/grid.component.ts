@@ -5,7 +5,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsDiv } from '../div'
+import { GdsDiv } from '../div/div.component'
 import GridCSS from './grid.style'
 
 /**

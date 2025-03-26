@@ -6,7 +6,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { GdsDiv } from '../div'
+import { GdsDiv } from '../div/div.component'
 
 /**
  *  A container for content representing a single entity. e.g. a contact, article, or task.

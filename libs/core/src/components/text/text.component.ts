@@ -4,7 +4,7 @@ import { html, unsafeStatic } from 'lit/static-html.js'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { GdsDiv } from '../div'
+import { GdsDiv } from '../div/div.component'
 import { defaultStyles } from './default-typography.styles'
 import textStyles from './text.style'
 

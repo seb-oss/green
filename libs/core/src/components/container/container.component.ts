@@ -1,5 +1,5 @@
 import { gdsCustomElement } from '../../scoping'
-import { GdsDiv } from '../div'
+import { GdsDiv } from '../div/div.component'
 
 /**
  * @element gds-container
