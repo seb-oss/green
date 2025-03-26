@@ -68,6 +68,7 @@ export { ${className} }`
 async function renameFiles() {
   const regularFiles = await fs.readdir(regularDir)
   let tsIndexContent = ''
+  let tsPureIndexContent = ''
   let mdxContent = ''
 
   for (const file of regularFiles) {
@@ -131,6 +132,7 @@ async function renameFiles() {
         console.log(`Generated ${newName}.ts`)
 
         tsIndexContent += `export * from './${newName}'\n`
+        tsPureIndexContent += `export * from './${newName}.component'\n`
         mdxContent += `<gds-icon-${toKebabCase(newName)}></gds-icon-${toKebabCase(newName)}>\n`
       } catch (error) {
         console.error(
@@ -143,6 +145,7 @@ async function renameFiles() {
   }
 
   await fs.writeFile(path.join(outputDir, 'index.ts'), tsIndexContent)
+  await fs.writeFile(path.join(outputDir, 'pure.ts'), tsPureIndexContent)
   console.log('Generated index.ts file')
 
   // const mdxFile = path.resolve(
