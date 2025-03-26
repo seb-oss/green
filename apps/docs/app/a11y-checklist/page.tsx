@@ -5,6 +5,7 @@ import { Link } from 'next-view-transitions'
 // Importera Gds-komponenterna från ditt designbibliotek
 import {
   GdsBadge,
+  GdsButton,
   GdsCard,
   GdsDropdown,
   GdsFlex,
@@ -162,13 +163,20 @@ export default function WcagList() {
 
   if (!wcagObjects) return <div>Loading...</div>
 
-  // Filter function
-
   //console.log(setSelectedCategories)
+
+  //Resett the filters
+
+  const resetFilters = () => {
+    setSelectedCategories([])
+    setSelectedLevels([])
+    setSelectedRoles([])
+    setSelectedStatuses([])
+  }
 
   return (
     <GdsFlex flex-direction="column">
-      <GdsFlex>
+      <GdsFlex width="70%">
         <GdsDropdown
           multiple
           value={selectedCategories}
@@ -225,6 +233,9 @@ export default function WcagList() {
             </GdsOption>
           ))}
         </GdsDropdown>
+      </GdsFlex>
+      <GdsFlex>
+        <GdsButton onClick={resetFilters}>Återställ filter</GdsButton>
       </GdsFlex>
       {wcagObjects
         .filter(catergoryFilter(selectedCategories))
