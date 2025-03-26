@@ -40,6 +40,7 @@
     "./localization": "./localization.js",
     "./jest-config": "./green-jest-config.cjs",
     "./components/*": "./components/*",
+    "./pure": "./components/pure.js",
     "./_primitives/*": "./primitives/*",
     "./react": "./generated/react/index.js",
     "./react/*": "./generated/react/*"

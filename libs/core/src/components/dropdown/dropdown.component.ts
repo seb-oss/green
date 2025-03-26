@@ -24,6 +24,8 @@ import type {
   OptionsContainer,
 } from '../../primitives/listbox/option.component'
 
+export * from '../../primitives/listbox/option.component'
+
 /**
  * @element gds-dropdown
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.

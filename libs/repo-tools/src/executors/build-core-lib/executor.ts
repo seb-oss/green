@@ -125,8 +125,6 @@ export default async function runExecutor(
 
   await esbuild.build({
     entryPoints: [
-      // Everything
-      './libs/core/src',
       ...glob.sync('./libs/core/src/**/!(*.test|*.stories).{ts,tsx}'),
     ],
     chunkNames: 'chunks/[name].[hash]',
