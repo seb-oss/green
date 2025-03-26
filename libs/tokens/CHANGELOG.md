@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.10.2
+
+### Patch Changes
+
+- d6d45d1: **Tokens:** L2 content information typo
+
 ## 0.10.1
 
 ### Patch Changes

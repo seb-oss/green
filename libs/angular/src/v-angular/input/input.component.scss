@@ -32,7 +32,6 @@
         color: #9f000a;
 
         .error-icon {
-          margin-top: 0.128rem;
           align-items: center;
         }
       }
@@ -93,6 +92,7 @@
     }
 
     display: flex;
+    flex-direction: row;
 
     .input-group-prefix {
       min-height: 2.5rem;
@@ -222,6 +222,11 @@
   .label,
   legend {
     @include form-group.add-label();
+  }
+
+  label + .gds-input-wrapper,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
   }
 
   .gds-field-label--optional {

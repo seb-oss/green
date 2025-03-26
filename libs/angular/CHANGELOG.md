@@ -1,5 +1,23 @@
 # Changelog
 
+## 5.5.4
+
+### Patch Changes
+
+- cf901cf: **V-Angular Components:** Fixed spacing within components and after.
+- 759863c: **V-Angular Slide-out:** Allow overflow to be shown outside of slide-out content.
+
+## 5.5.3
+
+### Patch Changes
+
+- 142324e: Fixing issue with prefix/suffix in input and dropdown
+- 3c2809f: fixing typeahead dropdown placement and width
+- Updated dependencies [8fe5d35]
+- Updated dependencies [00c48da]
+  - @sebgroup/green-core@1.69.3
+  - @sebgroup/chlorophyll@3.6.17
+
 ## 5.5.2
 
 ### Patch Changes
