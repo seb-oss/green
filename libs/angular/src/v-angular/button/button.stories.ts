@@ -34,9 +34,9 @@ export default {
   ],
   argTypes: {
     type: {
+      options: ['button', 'submit', 'reset', 'link'],
       control: {
         type: 'select',
-        options: ['button', 'submit', 'reset', 'link'],
       },
     },
     buttonStyle: {
