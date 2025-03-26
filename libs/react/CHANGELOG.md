@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.25.0
+
+### Minor Changes
+
+- f333bbb: **FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
+
+### Patch Changes
+
+- Updated dependencies [b46f13f]
+  - @sebgroup/green-core@1.69.4
+
 ## 3.24.2
 
 ### Patch Changes
