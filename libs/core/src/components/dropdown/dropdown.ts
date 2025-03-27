@@ -37,6 +37,7 @@ import '../button'
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
  * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
+ * @slot expand-label - What will be shown on a screen reader when the cheveron down icon is selected.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
  * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
  * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
@@ -59,10 +60,16 @@ export class GdsDropdown<ValueT = any>
   }
 
   /**
-   * The supporting text displayed between the label and the field itself
+   * The supporting text displayed between the label and the field itself.
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
+
+  /**
+   * The aria label, that screen-readers use, that should be show on the cheveron down icon.
+   */
+  @property({ attribute: 'expand-label' })
+  expandLabel = 'Expand'
 
   /**
    * Sets the open state of the dropdown.
@@ -293,7 +300,10 @@ export class GdsDropdown<ValueT = any>
           ${this.combobox && !this.multiple
             ? this.#renderCombobox()
             : this.#renderTriggerButton()}
-          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+          <gds-icon-chevron-bottom
+            slot="trail"
+            label=${this.expandLabel}
+          ></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(
