@@ -7,6 +7,7 @@ import {
   GdsBadge,
   GdsButton,
   GdsCard,
+  GdsDiv,
   GdsDropdown,
   GdsFlex,
   GdsImg,
@@ -314,30 +315,30 @@ export default function WcagList() {
       <GdsFlex>
         <GdsButton onClick={resetFilters}>Återställ filter</GdsButton>
       </GdsFlex>
-      {wcagObjects
-        .filter(catergoryFilter(selectedCategories))
-        .filter(levelFilter(selectedLevels))
-        .filter(roleFilter(selectedRoles))
-        // .filter(statusFilter(selectedStatuses))
-        .map((wcagObject) => (
-          <li key={wcagObject.id}>
-            <GdsFlex>
-              <GdsCard>
-                <GdsFlex
-                  align-items="space-between"
-                  justify-content="space-between"
-                >
-                  <GdsText>
-                    {wcagObject.id}
-                    {wcagObject.topic}
-                  </GdsText>
-                  <GdsFlex gap="5">
-                    <GdsBadge>{wcagObject.category}</GdsBadge>
-                    <GdsBadge>{wcagObject.level}</GdsBadge>
-                    <GdsBadge>{wcagObject.role}</GdsBadge>
-                  </GdsFlex>
+      <GdsFlex role="list" flex-direction="column" gap="m">
+        {wcagObjects
+          .filter(catergoryFilter(selectedCategories))
+          .filter(levelFilter(selectedLevels))
+          .filter(roleFilter(selectedRoles))
+          // .filter(statusFilter(selectedStatuses))
+          .map((wcagObject) => (
+            <GdsCard role="listitem">
+              <GdsFlex
+                align-items="space-between"
+                justify-content="space-between"
+              >
+                <GdsFlex gap="xs">
+                  <GdsBadge variant="information">{wcagObject.id}</GdsBadge>
+                  <GdsText>{wcagObject.topic}</GdsText>
                 </GdsFlex>
-                <GdsFlex>
+                <GdsFlex gap="xs">
+                  <GdsBadge>{wcagObject.category}</GdsBadge>
+                  <GdsBadge>{wcagObject.level}</GdsBadge>
+                  <GdsBadge>{wcagObject.role}</GdsBadge>
+                </GdsFlex>
+              </GdsFlex>
+              <GdsFlex flex-direction="column; s{row}" gap="m">
+                <GdsFlex flex="1" flex-direction="column" gap="m">
                   <GdsFlex flex-direction="column">
                     <GdsText>
                       <GdsRichText>Påstående:</GdsRichText>
@@ -348,15 +349,27 @@ export default function WcagList() {
                       {wcagObject.why}
                     </GdsText>
                   </GdsFlex>
-                  <GdsFlex flex-direction="column">
-                    <GdsDropdown></GdsDropdown>
-                    <GdsTextarea></GdsTextarea>
-                  </GdsFlex>
+                  <GdsCard>
+                    <details>
+                      <summary>Lagkrav och standarder</summary>
+                      <GdsDiv border="outline">
+                        <GdsFlex flex-direction="column" gap="m">
+                          <p>{wcagObject.wcag}</p>
+                          <p>{wcagObject.guideline}</p>
+                          <p>{wcagObject.criteria}</p>
+                        </GdsFlex>
+                      </GdsDiv>
+                    </details>
+                  </GdsCard>
                 </GdsFlex>
-              </GdsCard>
-            </GdsFlex>
-          </li>
-        ))}
+                <GdsFlex flex="1" flex-direction="column" gap="m">
+                  <GdsDropdown></GdsDropdown>
+                  <GdsTextarea></GdsTextarea>
+                </GdsFlex>
+              </GdsFlex>
+            </GdsCard>
+          ))}
+      </GdsFlex>
     </GdsFlex>
   )
 }
