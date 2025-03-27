@@ -36,7 +36,7 @@
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
       "options": {
-        "port": 4400,
+        "port": 4405,
         "configDir": "libs/angular-charts/.storybook",
         "browserTarget": "angular-charts:build-storybook",
         "compodoc": false
