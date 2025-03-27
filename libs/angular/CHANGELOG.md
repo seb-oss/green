@@ -1,5 +1,12 @@
 # Changelog
 
+## 5.5.4
+
+### Patch Changes
+
+- cf901cf: **V-Angular Components:** Fixed spacing within components and after.
+- 759863c: **V-Angular Slide-out:** Allow overflow to be shown outside of slide-out content.
+
 ## 5.5.3
 
 ### Patch Changes
