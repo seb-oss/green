@@ -31,6 +31,7 @@ const Template: StoryFn<AlertComponent> = (args) => ({
       [title]="title"
       [body]="body"
       [linkText]="linkText"
+      [linkHref]="linkHref"
       [actionText]="actionText"
       [closable]="closable"
       (closeAlert)="onClose()"
@@ -51,7 +52,8 @@ export const Information = Template.bind({})
 Information.args = {
   type: AlertType.Information,
   body: 'Body text starts on the same row as heading A link (optional) always ends the message, stand alone or',
-  linkText: 'part of the senctenc.',
+  linkText: 'part of the senctence.',
+  linkHref: '#',
   closable: true,
   onLink: console.log,
   onClose: console.log,
@@ -72,6 +74,7 @@ Error.args = {
   title: 'We were unable to show your e-invoce.',
   body: "Try again. If it still doesn't work,",
   linkText: 'contact us.',
+  linkHref: '#',
   actionText: 'Try again',
   onAction: console.log,
   onLink: console.log,
