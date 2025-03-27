@@ -176,6 +176,32 @@ export default function WcagList() {
 
   return (
     <GdsFlex flex-direction="column">
+      <GdsFlex gap="2xl; m{4xl}" flex-direction="column" max-width="80ch">
+        <GdsFlex flex-direction="column" gap="xl">
+          <GdsText tag="h2" id="what-is-green">
+            Accessibility
+          </GdsText>
+          <GdsText font-size="body-l" color="secondary">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est,
+            qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
+            sed quia non numquam eius modi tempora incidunt ut labore et dolore
+            magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
+            nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut
+            aliquid ex ea commodi consequatur? Quis autem vel eum iure
+            reprehenderit qui in ea voluptate velit esse quam nihil molestiae
+            consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
+            pariatur?
+          </GdsText>
+          <GdsText font-size="body-l" color="secondary">
+            {`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`}
+          </GdsText>
+        </GdsFlex>
+      </GdsFlex>
       <GdsFlex width="70%">
         <GdsDropdown
           multiple
@@ -234,6 +260,57 @@ export default function WcagList() {
           ))}
         </GdsDropdown>
       </GdsFlex>
+      {/* === Visa aktiva filter === */}
+      <h3>Valda filter:</h3>
+      <GdsFlex flex-direction="row" gap="m">
+        {/* Kategorier */}
+        {selectedCategories.length > 0 && (
+          <div>
+            <strong>Kategori:</strong>
+            <ul>
+              {selectedCategories.map((cat) => (
+                <GdsBadge key={cat}>{cat}</GdsBadge>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Nivåer */}
+        {selectedLevels.length > 0 && (
+          <div>
+            <strong>Nivå:</strong>
+            <ul>
+              {selectedLevels.map((lvl) => (
+                <li key={lvl}>{lvl}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Roller */}
+        {selectedRoles.length > 0 && (
+          <div>
+            <strong>Roll:</strong>
+            <ul>
+              {selectedRoles.map((role) => (
+                <li key={role}>{role}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Statusar */}
+        {selectedStatuses.length > 0 && (
+          <div>
+            <strong>Status:</strong>
+            <ul>
+              {selectedStatuses.map((status) => (
+                <li key={status}>{status}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </GdsFlex>
       <GdsFlex>
         <GdsButton onClick={resetFilters}>Återställ filter</GdsButton>
       </GdsFlex>
@@ -244,14 +321,22 @@ export default function WcagList() {
         // .filter(statusFilter(selectedStatuses))
         .map((wcagObject) => (
           <li key={wcagObject.id}>
-            <GdsText>
-              {wcagObject.id}
-              {wcagObject.topic}
-            </GdsText>
             <GdsFlex>
               <GdsCard>
-                <GdsBadge>{wcagObject.category}</GdsBadge>
-                <GdsBadge>{wcagObject.level}</GdsBadge>
+                <GdsFlex
+                  align-items="space-between"
+                  justify-content="space-between"
+                >
+                  <GdsText>
+                    {wcagObject.id}
+                    {wcagObject.topic}
+                  </GdsText>
+                  <GdsFlex gap="5">
+                    <GdsBadge>{wcagObject.category}</GdsBadge>
+                    <GdsBadge>{wcagObject.level}</GdsBadge>
+                    <GdsBadge>{wcagObject.role}</GdsBadge>
+                  </GdsFlex>
+                </GdsFlex>
                 <GdsFlex>
                   <GdsFlex flex-direction="column">
                     <GdsText>
