@@ -1,10 +1,11 @@
+@use 'sass:map';
 @use '../../tokens/shame' as newTokens;
 @use '../../common';
 
 $color: newTokens.$text-primary-color;
 $color-active: newTokens.$text-primary-color;
 $_border-width: 1px;
-$greyScale: map-get(newTokens.$grey, light);
+$greyScale: map.get(newTokens.$grey, light);
 
 @mixin tab {
   @include common.add-border($sides: 'bottom');

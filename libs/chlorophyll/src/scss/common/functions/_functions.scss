@@ -1,5 +1,7 @@
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:map';
+@use 'sass:color';
 $white: #fff;
 $black: black;
 $grey-200: rgb(248, 248, 248);
@@ -94,9 +96,18 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
  * @return {Number} - The luminance value
  */
 @function luminance($color) {
-  $red: nth($linear-channel-values, red($color) + 1);
-  $green: nth($linear-channel-values, green($color) + 1);
-  $blue: nth($linear-channel-values, blue($color) + 1);
+  $red: list.nth(
+    $linear-channel-values,
+    math.floor(color.channel($color, 'red')) + 1
+  );
+  $green: list.nth(
+    $linear-channel-values,
+    math.floor(color.channel($color, 'green')) + 1
+  );
+  $blue: list.nth(
+    $linear-channel-values,
+    math.floor(color.channel($color, 'blue')) + 1
+  );
 
   //@return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
   @return 0.2126 * $red + 0.7152 * $green + 0.0693 * $blue;
@@ -301,8 +312,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     $offsetThreshold,
     $ratio
   );
-  background-color: nth($color-combination, 1);
-  color: nth($color-combination, 2);
+  background-color: list.nth($color-combination, 1);
+  color: list.nth($color-combination, 2);
   --background: #{nth($color-combination, 1)};
   --color: #{nth($color-combination, 2)};
 }
@@ -409,7 +420,9 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
  * @return {String} - RGB values as a string
  */
 @function stripped-rgb($color) {
-  @return red($color) + ', ' + green($color) + ', ' + blue($color);
+  @return color.channel($color, 'red') + ', ' +
+    math.floor(color.channel($color, 'green')) + ', ' +
+    math.floor(color.channel($color, 'blue'));
 }
 
 /**
@@ -419,7 +432,9 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
  * @return {String} - HSL values as a string
  */
 @function stripped-hsl($color) {
-  @return hue($color) + ', ' + saturation($color) + ', ' + lightness($color);
+  @return color.channel($color, 'hue', $space: hsl) + ', ' +
+    color.channel($color, 'saturation', $space: hsl) + ', ' +
+    color.channel($color, 'lightness', $space: hsl);
 }
 
 /**

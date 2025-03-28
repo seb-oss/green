@@ -31,7 +31,7 @@ $font-scale: (
 );
 
 @function font-scale($step) {
-  @return map-get($font-scale, $step);
+  @return map.get($font-scale, $step);
 }
 
 $line-height-scale: (
@@ -48,7 +48,7 @@ $line-height-scale: (
 );
 
 @function line-height-scale($step) {
-  @return map-get($line-height-scale, $step);
+  @return map.get($line-height-scale, $step);
 }
 
 $font-weights: (
@@ -59,7 +59,7 @@ $font-weights: (
 );
 
 @function font-weight($weight) {
-  @return map-get($font-weights, $weight);
+  @return map.get($font-weights, $weight);
 }
 
 $line-height-sm: 1;

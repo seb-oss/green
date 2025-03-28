@@ -1,4 +1,6 @@
+@use 'sass:list';
 @use 'sass:math';
+@use 'sass:map';
 @use '../../tokens/config';
 
 /* stylelint-disable max-nesting-depth */
@@ -36,9 +38,9 @@
  * @param {String} $map-name - The name of the map
  */
 @mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
-  @if length($map) > 0 {
-    $values: map-values($map);
-    $first-value: nth($values, 1);
+  @if list.length($map) > 0 {
+    $values: map.values($map);
+    $first-value: list.nth($values, 1);
     @if $first-value != 0 {
       @warn 'First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.';
     }
@@ -88,7 +90,7 @@
   $result: ();
   @each $key, $value in $map {
     @if $key != 0 {
-      $result: map-merge($result, ('n' + $key: (-$value)));
+      $result: map.merge($result, ('n' + $key: (-$value)));
     }
   }
   @return $result;
@@ -103,7 +105,7 @@ $enable-important-utilities: true;
  * @param {Boolean} $is-rfs-media-query - Whether to use RFS media query
  */
 @mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
-  $values: map-get($utility, values);
+  $values: map.get($utility, values);
 
   // If the values are a list or string, convert it into a map
   @if type-of($values) == 'string' or type-of(nth($values, 1)) != 'list' {
@@ -111,7 +113,7 @@ $enable-important-utilities: true;
   }
 
   @each $key, $value in $values {
-    $properties: map-get($utility, property);
+    $properties: map.get($utility, property);
 
     // Multiple properties are possible, for example with vertical or horizontal margins or paddings
     @if type-of($properties) == 'string' {
@@ -121,13 +123,13 @@ $enable-important-utilities: true;
     // Use custom class if present
     $property-class: if(
       map-has-key($utility, class),
-      map-get($utility, class),
-      nth($properties, 1)
+      map.get($utility, class),
+      list.nth($properties, 1)
     );
     $property-class: if($property-class == null, '', $property-class);
 
     // State params to generate pseudo-classes
-    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+    $state: if(map-has-key($utility, state), map.get($utility, state), ());
 
     $infix: if(
       $property-class == '' and str-slice($infix, 1, 1) == '-',
@@ -143,7 +145,7 @@ $enable-important-utilities: true;
     );
 
     // Disable RFS for now
-    /*@if map-get($utility, rfs) {
+    /*@if map.get($utility, rfs) {
       // Inside the media query
       @if $is-rfs-media-query {
         $val: rfs-value($value);
@@ -156,9 +158,9 @@ $enable-important-utilities: true;
       }
     }*/
 
-    $is-css-var: map-get($utility, css-var);
-    $is-local-vars: map-get($utility, local-vars);
-    $is-rtl: map-get($utility, rtl);
+    $is-css-var: map.get($utility, css-var);
+    $is-local-vars: map.get($utility, local-vars);
+    $is-rtl: map.get($utility, rtl);
 
     @if $value != null {
       @if $is-rtl == false {

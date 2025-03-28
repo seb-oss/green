@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:map';
 @use 'sass:math';
 @use 'sass:color';
@@ -116,12 +117,15 @@ Values for light mode are used by default.
   )
   /* intent */,
   $intent-neutral:
-    nth(functions.desired-color-combination($white, $grey-200), 1),
-  $intent-info: nth(functions.desired-color-combination($white, $blue-2), 1),
-  $intent-success: nth(functions.desired-color-combination($white, $green-2), 1),
+    list.nth(functions.desired-color-combination($white, $grey-200), 1),
+  $intent-info:
+    list.nth(functions.desired-color-combination($white, $blue-2), 1),
+  $intent-success:
+    list.nth(functions.desired-color-combination($white, $green-2), 1),
   $intent-warning:
-    nth(functions.desired-color-combination($white, $yellow-0), 1),
-  $intent-critical: nth(functions.desired-color-combination($white, $red-1), 1),
+    list.nth(functions.desired-color-combination($white, $yellow-0), 1),
+  $intent-critical:
+    list.nth(functions.desired-color-combination($white, $red-1), 1),
   $_intent: (
     'neutral-hsl': functions.stripped-hsl($intent-neutral),
     'neutral-hsl-contrast':
