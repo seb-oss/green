@@ -59,7 +59,7 @@ export class GdsDropdown<ValueT = any>
   }
 
   /**
-   * The supporting text displayed between the label and the field itself
+   * The supporting text displayed between the label and the field itself.
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
@@ -293,7 +293,10 @@ export class GdsDropdown<ValueT = any>
           ${this.combobox && !this.multiple
             ? this.#renderCombobox()
             : this.#renderTriggerButton()}
-          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+          <gds-icon-chevron-bottom
+            slot="trail"
+            label=${msg('Expand')}
+          ></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(
