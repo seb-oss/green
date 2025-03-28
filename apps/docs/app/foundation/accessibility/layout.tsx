@@ -6,13 +6,17 @@ export const metadata: Metadata = {
   description:
     "How accessibility is checked in Green Design System and it's components",
   alternates: {
-    canonical: '/foundation'
+    canonical: '/foundation/accessibility',
   },
   openGraph: {
-    images: '/og?title=Accessibility'
-  }
+    images: '/og?title=Accessibility',
+  },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return children
 }
