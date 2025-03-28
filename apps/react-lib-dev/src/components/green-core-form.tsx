@@ -1,144 +1,39 @@
 import { on } from 'events'
 import React, { ChangeEvent, FormEvent, useState } from 'react'
-import { createComponent } from '@lit/react'
 
-// Import all web components from Green Core
-import { GdsButton } from '@sebgroup/green-core/components/button/index.js'
-import { GdsCard } from '@sebgroup/green-core/components/card/index.js'
-import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
-import {
-  GdsDropdown,
-  GdsOption,
-} from '@sebgroup/green-core/components/dropdown/index.js'
-import { GdsFlex } from '@sebgroup/green-core/components/flex/index.js'
+// We can import types ilke this if we want to cast event targets to correct types
+import type {
+  GdsDatepicker as GdsDatepickerType,
+  GdsDropdown as GdsDropdownType,
+  GdsInput as GdsInputType,
+  GdsRadioGroup as GdsRadioGroupType,
+  GdsRadio as GdsRadioType,
+  GdsSelect as GdsSelectType,
+  GdsTextarea as GdsTextareaType,
+} from '@sebgroup/green-core/pure'
+
 import {
   GdsFormControlElement,
   GdsValidator,
 } from '@sebgroup/green-core/components/form/form-control'
-import { GdsInput } from '@sebgroup/green-core/components/input/index.js'
+// Import React components from Green Core
 import {
+  GdsBadge,
+  GdsButton,
+  GdsCard,
+  GdsDatepicker,
+  GdsDropdown,
+  GdsFlex,
+  GdsInput,
+  GdsOption,
   GdsRadio,
   GdsRadioGroup,
-} from '@sebgroup/green-core/components/radio/index.js'
-import { GdsRichText } from '@sebgroup/green-core/components/rich-text/index.js'
-import { GdsSelect } from '@sebgroup/green-core/components/select/index.js'
-import { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
-// In this example, we are importing the GdsTheme component to set the design version to 2023
-import { GdsTheme } from '@sebgroup/green-core/components/theme/index.js'
-import { GdsBadge } from '@sebgroup/green-core/react/badge'
-import { GdsText } from '@sebgroup/green-core/react/text'
-// This is used to get the correct element name when creating the wrappers below
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
-
-// Regster React wrappers
-// At some point in the future, the React library will have predefined wrappers to import,
-// and at that point, you would only need to do this in case you want to customize the wrapper
-// in some way.
-const CoreInput = createComponent({
-  tagName: getScopedTagName('gds-input'),
-  elementClass: GdsInput,
-  events: {
-    onChange: 'input',
-    onInvalid: 'invalid',
-  },
-  react: React,
-})
-
-const CoreTextarea = createComponent({
-  tagName: getScopedTagName('gds-textarea'),
-  elementClass: GdsTextarea,
-  events: {
-    onChange: 'input',
-  },
-  react: React,
-})
-
-const CoreDropdown = createComponent({
-  tagName: getScopedTagName('gds-dropdown'),
-  elementClass: GdsDropdown,
-  events: {
-    onChange: 'input',
-  },
-  react: React,
-})
-
-const CoreOption = createComponent({
-  tagName: getScopedTagName('gds-option'),
-  react: React,
-  elementClass: GdsOption,
-})
-
-const CoreDatepicker = createComponent({
-  tagName: getScopedTagName('gds-datepicker'),
-  elementClass: GdsDatepicker,
-  events: {
-    onChange: 'input',
-  },
-  react: React,
-})
-
-const CoreButton = createComponent({
-  tagName: getScopedTagName('gds-button'),
-  elementClass: GdsButton,
-  events: {
-    click: 'onClick',
-  },
-  react: React,
-})
-
-const CoreFlex = createComponent({
-  tagName: getScopedTagName('gds-flex'),
-  elementClass: GdsFlex,
-  react: React,
-})
-
-const CoreCard = createComponent({
-  tagName: getScopedTagName('gds-card'),
-  elementClass: GdsCard,
-  react: React,
-})
-
-const CoreTheme = createComponent({
-  tagName: getScopedTagName('gds-theme'),
-  elementClass: GdsTheme,
-  react: React,
-})
-
-const CoreRichText = createComponent({
-  tagName: getScopedTagName('gds-rich-text'),
-  elementClass: GdsRichText,
-  react: React,
-})
-
-const CoreSelect = createComponent({
-  tagName: getScopedTagName('gds-select'),
-  react: React,
-  events: {
-    onChange: 'input',
-  },
-  elementClass: GdsSelect,
-})
-
-const CoreRadio = createComponent({
-  tagName: getScopedTagName('gds-radio'),
-  react: React,
-  events: {
-    onChange: 'change',
-  },
-
-  elementClass: GdsRadio,
-})
-
-const CoreRadioGroup = createComponent({
-  tagName: getScopedTagName('gds-radio-group'),
-  react: React,
-  events: {
-    onChange: 'change',
-    onInvalid: 'invalid',
-  },
-
-  elementClass: GdsRadioGroup,
-})
+  GdsRichText,
+  GdsSelect,
+  GdsText,
+  GdsTextarea,
+  GdsTheme,
+} from '@sebgroup/green-core/react'
 
 // This type represents or form data model
 // In this example, we represent the field value and error state as a simple tuple
@@ -228,7 +123,7 @@ const FormFieldRow = ({
   value: string
   isValid: boolean
 }) => (
-  <CoreFlex align-items="center" gap="m">
+  <GdsFlex align-items="center" gap="m">
     <GdsText tag="h5" font-weight="book" width="10ch">
       {label}
     </GdsText>
@@ -240,25 +135,25 @@ const FormFieldRow = ({
         Valid
       </GdsBadge>
     )}
-  </CoreFlex>
+  </GdsFlex>
 )
 
 export const GreenCoreFormExample = () => {
   const [formData, setFormData] = useState<FormData>(initialFormState)
 
   return (
-    <CoreTheme designVersion="2023">
-      <CoreRichText>
+    <GdsTheme designVersion="2023">
+      <GdsRichText>
         <h2>This is a form built with Green Core form controls</h2>
 
         <p>
           This is built completely with the form control elements and built-in
           framework agnostic validation features from Green Core
         </p>
-      </CoreRichText>
+      </GdsRichText>
 
-      <CoreFlex gap="l" align-items="flex-start" flex="1">
-        <CoreCard variant="primary" flex="1">
+      <GdsFlex gap="l" align-items="flex-start" flex="1">
+        <GdsCard variant="primary" flex="1">
           <form
             onSubmit={(e) => e.preventDefault()}
             onReset={(e) => {
@@ -266,20 +161,20 @@ export const GreenCoreFormExample = () => {
               setFormData(initialFormState)
             }}
           >
-            <CoreFlex gap="m" flex-direction="column">
-              <CoreInput
+            <GdsFlex gap="m" flex-direction="column">
+              <GdsInput
                 label={'Name'}
                 //
                 // Control the value through the value prop, just like you would with a regular HTML input
                 value={formData.name[0]}
                 //
-                // And update React state in the onChange callback
-                onChange={(e) =>
+                // And update React state in the onInput callback
+                onInput={(e) =>
                   setFormData({
                     ...formData,
                     name: [
-                      (e.currentTarget as GdsInput).value || '',
-                      (e.currentTarget as GdsInput).validity.valid,
+                      (e.currentTarget as GdsInputType).value || '',
+                      (e.currentTarget as GdsInputType).validity.valid,
                       // ^ here we can use the native validity state from the element.
                       // This will be updated by the validator behind the scenes
                     ],
@@ -296,49 +191,49 @@ export const GreenCoreFormExample = () => {
                 onInvalid={(e) => console.log('Invalid', e)}
               />
               {/* Then we repeat the same setup for the other controls */}
-              <CoreInput
+              <GdsInput
                 label={'Email'}
                 value={formData.email[0]}
                 validator={requiredValidator}
-                onChange={(e) =>
+                onInput={(e) =>
                   setFormData({
                     ...formData,
                     email: [
-                      (e.currentTarget as GdsInput).value || '',
-                      (e.currentTarget as GdsInput).validity.valid,
+                      (e.currentTarget as GdsInputType).value || '',
+                      (e.currentTarget as GdsInputType).validity.valid,
                     ],
                   })
                 }
               />
-              <CoreDropdown
+              <GdsDropdown
                 label={'Select a fruit'}
                 value={formData.fruit[0]}
                 validator={requiredValidator}
-                onChange={(e) =>
+                onInput={(e) =>
                   setFormData({
                     ...formData,
                     fruit: [
-                      (e.currentTarget as GdsDropdown).value || '',
-                      (e.currentTarget as GdsDropdown).validity.valid,
+                      (e.currentTarget as GdsDropdownType).value || '',
+                      (e.currentTarget as GdsDropdownType).validity.valid,
                     ],
                   })
                 }
               >
-                <CoreOption isPlaceholder>Select a fruit</CoreOption>
-                <CoreOption value="apple">Apple</CoreOption>
-                <CoreOption value="orange">Orange</CoreOption>
-                <CoreOption value="banana">Banana</CoreOption>
-              </CoreDropdown>
-              <CoreSelect
+                <GdsOption isPlaceholder>Select a fruit</GdsOption>
+                <GdsOption value="apple">Apple</GdsOption>
+                <GdsOption value="orange">Orange</GdsOption>
+                <GdsOption value="banana">Banana</GdsOption>
+              </GdsDropdown>
+              <GdsSelect
                 label={'Select a dessert'}
                 value={formData.dessert[0]}
                 validator={requiredValidator}
-                onChange={(e) =>
+                onInput={(e) =>
                   setFormData({
                     ...formData,
                     dessert: [
-                      (e.currentTarget as GdsSelect).value || '',
-                      (e.currentTarget as GdsSelect).validity.valid,
+                      (e.currentTarget as GdsSelectType).value || '',
+                      (e.currentTarget as GdsSelectType).validity.valid,
                     ],
                   })
                 }
@@ -348,16 +243,16 @@ export const GreenCoreFormExample = () => {
                   <option value="ice-cream">Ice cream</option>
                   <option value="pie">Pie</option>
                 </select>
-              </CoreSelect>
-              <CoreRadioGroup
+              </GdsSelect>
+              <GdsRadioGroup
                 label={'Select a option'}
                 validator={requiredValidator}
                 value={formData.radio[0]}
-                onChange={(e) => {
-                  const radioGroup = e.currentTarget as GdsRadioGroup
-                  const selectedRadio = e.target as GdsRadio
+                onInput={(e) => {
+                  const radioGroup = e.currentTarget as GdsRadioGroupType
+                  const selectedRadio = e.target as GdsRadioType
                   radioGroup.value = selectedRadio.value
-                  radioGroup.radios.forEach((radio) => {
+                  radioGroup.radios.forEach((radio: GdsRadioType) => {
                     const isChecked = radio.value === radioGroup.value
                     radio.checked = isChecked
                     console.log(`Radio ${radio.value}: ${isChecked}`)
@@ -370,65 +265,65 @@ export const GreenCoreFormExample = () => {
                 error-message="Please select an option"
                 supporting-text="Please select one of the following options"
               >
-                <CoreRadio
+                <GdsRadio
                   value="1"
                   label="Option 1"
                   supportingText="Supporting text for option 1"
-                ></CoreRadio>
-                <CoreRadio
+                ></GdsRadio>
+                <GdsRadio
                   value="2"
                   label="Option 2"
                   supportingText="Supporting text for option 2"
                   disabled={true}
-                ></CoreRadio>
-                <CoreRadio
+                ></GdsRadio>
+                <GdsRadio
                   value="3"
                   label="Option 3"
                   supportingText="Supporting text for option 3"
-                ></CoreRadio>
-              </CoreRadioGroup>
+                ></GdsRadio>
+              </GdsRadioGroup>
 
-              <CoreDatepicker
+              <GdsDatepicker
                 label={'Select a date'}
                 value={formData.date[0]}
                 validator={requiredValidator}
-                onChange={(e) =>
+                onInput={(e) =>
                   setFormData({
                     ...formData,
                     date: [
-                      (e.currentTarget as GdsDatepicker).value || undefined,
-                      (e.currentTarget as GdsDatepicker).validity.valid,
+                      (e.currentTarget as GdsDatepickerType).value || undefined,
+                      (e.currentTarget as GdsDatepickerType).validity.valid,
                     ],
                   })
                 }
               />
-              <CoreTextarea
+              <GdsTextarea
                 label={'Description'}
                 value={formData.description[0]}
                 validator={requiredValidator}
-                onChange={(e) =>
+                onInput={(e) =>
                   setFormData({
                     ...formData,
                     description: [
-                      (e.currentTarget as GdsTextarea).value || '',
-                      (e.currentTarget as GdsTextarea).validity.valid,
+                      (e.currentTarget as GdsTextareaType).value || '',
+                      (e.currentTarget as GdsTextareaType).validity.valid,
                     ],
                   })
                 }
               />
-              <CoreFlex gap="m">
-                <CoreButton rank="primary" type="submit">
+              <GdsFlex gap="m">
+                <GdsButton rank="primary" type="submit">
                   Submit
-                </CoreButton>
-                <CoreButton rank="secondary" type="reset">
+                </GdsButton>
+                <GdsButton rank="secondary" type="reset">
                   Reset
-                </CoreButton>
-              </CoreFlex>
-            </CoreFlex>
+                </GdsButton>
+              </GdsFlex>
+            </GdsFlex>
           </form>
-        </CoreCard>
+        </GdsCard>
 
-        <CoreCard
+        <GdsCard
           flex="1"
           position="sticky"
           inset="40px 0 0 0"
@@ -438,7 +333,7 @@ export const GreenCoreFormExample = () => {
           max-width="46ch"
         >
           <GdsText tag="h3">Reflected React state</GdsText>
-          <CoreCard padding="m l" gap="xs">
+          <GdsCard padding="m l" gap="xs">
             {(Object.keys(formData) as Array<keyof FormData>).map(
               (fieldKey) => {
                 const field = formFieldsDisplay[fieldKey]
@@ -457,9 +352,9 @@ export const GreenCoreFormExample = () => {
                 )
               },
             )}
-          </CoreCard>
-        </CoreCard>
-      </CoreFlex>
-    </CoreTheme>
+          </GdsCard>
+        </GdsCard>
+      </GdsFlex>
+    </GdsTheme>
   )
 }
