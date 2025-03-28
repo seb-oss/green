@@ -10,7 +10,7 @@ import {
   GdsBadge,
   GdsButton,
   GdsCard,
-  GdsContainer,
+  GdsDiv,
   GdsFlex,
   GdsGrid,
   GdsInput,
@@ -163,7 +163,7 @@ export default function ComponentLayout({
         margin="0 auto"
         gap="xl"
       >
-        <GdsContainer position="sticky" inset="58px 0 0 0">
+        <GdsDiv position="sticky" inset="58px 0 0 0" z-index="999">
           <GdsFlex gap="l" flex-direction="column">
             <GdsInput
               clearable
@@ -174,55 +174,40 @@ export default function ComponentLayout({
               <IconMagnifyingGlass height={24} slot="lead" />
             </GdsInput>
           </GdsFlex>
-        </GdsContainer>
+        </GdsDiv>
         <GdsGrid columns="5" gap="m">
           {filteredIcons.map((iconName) => {
             const IconComponent = (ICONS as any)[iconName]
             return (
-              <GdsCard
-                level="2"
+              <GdsFlex
                 key={iconName}
                 flex-direction="column"
-                align-items="center"
-                padding="xs"
                 title={transformIconName(iconName)}
-                variant="secondary"
-                transition="all 482ms"
-                background="hover:primary"
-                border-color="primary; hover:secondary"
               >
-                <GdsFlex
-                  background="transparent"
+                <GdsCard
+                  variant="primary"
                   align-items="center"
                   justify-content="center"
                   padding="m"
-                  height="120px"
+                  height="160px"
+                  width="100%"
                   border-radius="s"
-                  cursor="pointer"
                   data-clipboard-text={`<${iconName}></${iconName}>`}
                   onClick={() => handleIconClick(`<${iconName}></${iconName}>`)}
                 >
                   <IconComponent height={24} />
-                </GdsFlex>
+                </GdsCard>
                 <GdsFlex
                   align-items="center"
                   justify-content="space-between"
-                  padding="xs xs 0 s"
+                  padding="0 s 0 s"
+                  width="100%"
                 >
                   <GdsText font-size="detail-xs">
                     {transformIconName(iconName)}
                   </GdsText>
-                  <GdsButton
-                    rank="tertiary"
-                    size="small"
-                    onClick={() =>
-                      handleIconClick(`<${iconName}></${iconName}>`)
-                    }
-                  >
-                    <IconSquareBehindSquare height={12} />
-                  </GdsButton>
                 </GdsFlex>
-              </GdsCard>
+              </GdsFlex>
             )
           })}
         </GdsGrid>
@@ -235,54 +220,55 @@ export default function ComponentLayout({
         width="100%"
         justify-content="center"
         margin="0 auto"
+        gap="l"
       >
+        <Breadcrumb
+          home={'Home'}
+          separator={<GdsText font-size="body-s"> / </GdsText>}
+          slug={slug}
+        />
+
+        <GdsFlex flex-direction="column" gap="xs">
+          <GdsText tag="h1">{title}</GdsText>
+          <GdsText tag="p" text-wrap="balance" className="fade-in delay-200">
+            {summary}
+          </GdsText>
+          <GdsFlex>
+            {status && (
+              <GdsBadge variant="notice" size="small">
+                {status}
+              </GdsBadge>
+            )}
+          </GdsFlex>
+          <GdsFlex gap="s">
+            Tags:
+            {tagsArray.map((tag) => (
+              <Link
+                href={`/tag/` + tag}
+                key={tag}
+                style={{
+                  textDecoration: 'underline',
+                  textTransform: 'capitalize',
+                }}
+              >
+                {tag}
+              </Link>
+            ))}
+          </GdsFlex>
+        </GdsFlex>
         <GdsFlex gap="l">
           <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <Breadcrumb
-              home={'Home'}
-              separator={<GdsText font-size="body-s"> / </GdsText>}
-              slug={slug}
-            />
-            <GdsFlex flex-direction="column" flex="1" width="100%" gap="xl">
+            <GdsCard variant="primary" border-radius="s">
               <GdsFlex
-                justify-content="space-between"
-                align-items="flex-start"
                 gap="xl"
+                align-items="center"
+                justify-content="center"
+                padding="4xl 0"
+                min-height="300px"
               >
-                <GdsFlex flex-direction="column" gap="xs">
-                  <GdsText tag="h1">{title}</GdsText>
-                  <GdsText
-                    tag="p"
-                    text-wrap="balance"
-                    className="fade-in delay-200"
-                  >
-                    {summary}
-                  </GdsText>
-                  {status && (
-                    <GdsBadge variant="notice" size="small">
-                      {status}
-                    </GdsBadge>
-                  )}
-                  <GdsFlex gap="s">
-                    {tagsArray.map((tag) => (
-                      <Link href={`/tag/` + tag} key={tag}>
-                        {tag}
-                      </Link>
-                    ))}
-                  </GdsFlex>
-                </GdsFlex>
+                <Preview hero={true} />
               </GdsFlex>
-              <GdsCard>
-                <GdsFlex
-                  gap="xl"
-                  align-items="center"
-                  justify-content="center"
-                  height="360px"
-                >
-                  <Preview hero={true} />
-                </GdsFlex>
-              </GdsCard>
-            </GdsFlex>
+            </GdsCard>
             <Taber component={url_path} links={links} />
             <GdsFlex flex-direction="column" gap="xl">
               {children}

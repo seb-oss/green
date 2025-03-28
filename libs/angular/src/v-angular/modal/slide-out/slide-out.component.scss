@@ -26,6 +26,7 @@
     @include mixins.modal();
     @include mixins.aside-modal();
     z-index: 1050;
+    overflow-y: auto;
 
     &.auto-width {
       width: auto;
@@ -43,6 +44,7 @@
 
   .gds-slide-out__content {
     @include mixins.modal-body();
+    overflow: unset;
   }
 
   .modal-dialog__actions,

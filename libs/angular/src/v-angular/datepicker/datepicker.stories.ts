@@ -99,7 +99,7 @@ export default {
 type DateStoryArgs = DateInputComponent
 
 const notTomorrowValidator = (control: AbstractControl) => {
-  if (control.value == (null || '')) return null
+  if (control.value == null || control.value == '') return null
   const tomorrow = new Date()
   tomorrow.setDate(tomorrow.getDate() + 1)
   const controlDate = new Date(control.value)
@@ -119,7 +119,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
   // remove non-input args
   return {
     template: /*html*/ `
-    <nggv-dateinput 
+    <nggv-dateinput
       [label]="label"
       [locale]="locale"
       [dateFormat]="dateFormat"
@@ -154,7 +154,7 @@ const TemplateWithSelected: StoryFn<DateStoryArgs> = (args) => {
   // remove non-input args
   return {
     template: /*html*/ `
-    <nggv-dateinput 
+    <nggv-dateinput
       [label]="label"
       [dateLocale]="dateLocale"
       [dateFormat]="dateFormat"
@@ -208,7 +208,7 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
           [disableDates]="disableDates"
           [disableWeekDays]="disableWeekDays"
           [required]="required"
-          [invalid]="(formControl.statusChanges | async) === 'INVALID'"
+          [invalid]="invalid || (formControl.statusChanges | async) === 'INVALID'"
           [error]="error"
           [errorList]="errorList"
           [withErrorIcon]="withErrorIcon"

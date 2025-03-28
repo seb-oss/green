@@ -6,6 +6,7 @@ import {
   OnDestroy,
   OnInit,
   Optional,
+  Renderer2,
   SkipSelf,
 } from '@angular/core'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
@@ -43,6 +44,7 @@ export class NggvTypeaheadDropdownListComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
+    private renderer2: Renderer2,
     private element: ElementRef,
   ) {
     super(translocoScope)
@@ -97,6 +99,13 @@ export class NggvTypeaheadDropdownListComponent
         this.setExpanded(true)
         this.subscribeToOutsideClickEvent()
       })
+
+    this.hostComponent.nggvBlur
+      .asObservable()
+      .pipe(takeUntil(this._destroy$))
+      .subscribe(() => {
+        this.setExpanded(false)
+      })
   }
 
   /**
@@ -111,5 +120,22 @@ export class NggvTypeaheadDropdownListComponent
     if (!this.selectedFormatter) return value.label ?? ''
     // If a formatter exists, use it
     return this.selectedFormatter(value) ?? ''
+  }
+
+  /**
+   *
+   * @param expanded boolean to set if dropdown is expanded
+   */
+  override setExpanded(expanded = true) {
+    super.setExpanded(expanded)
+
+    /**
+     * Makes the typeahead dropdown as wide as the host component
+     */
+    this.renderer2.setStyle(
+      this.element.nativeElement,
+      'width',
+      `${this.hostComponent.element.nativeElement.offsetWidth}px`,
+    )
   }
 }

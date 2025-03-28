@@ -32,7 +32,7 @@ export class GdsHeader extends LitElement {
         position="relative"
         height="4rem"
       >
-        <gds-container display="xs{flex} s{flex} m{flex} l{none}">
+        <gds-div display="xs{flex} s{flex} m{flex} l{none}">
           <gds-context-menu>
             <gds-flex align-items="center" gap="s" slot="trigger">
               Menu
@@ -53,8 +53,8 @@ export class GdsHeader extends LitElement {
               Calendar
             </gds-menu-item>
           </gds-context-menu>
-        </gds-container>
-        <gds-container display="xs{none} s{none} m{none} l{flex}">
+        </gds-div>
+        <gds-div display="xs{none} s{none} m{none} l{flex}">
           <gds-menu-button @click=${() => this.handleButtonClick('login')}>
             Login
           </gds-menu-button>
@@ -69,7 +69,10 @@ export class GdsHeader extends LitElement {
           <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
             Calendar
           </gds-menu-button>
-        </gds-container>
+          <gds-menu-button @click=${() => this.handleButtonClick('spinner')}>
+            Spinner
+          </gds-menu-button>
+        </gds-div>
         <gds-flex
           position="2xs{relative} l{absolute}"
           inset="auto 0"

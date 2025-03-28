@@ -1,6 +1,4 @@
-@use '../../tokens/shame' as tokens;
-@use '../../common';
-@use './tokens' as component-tokens;
+@use '../../../common';
 
 $valid-color: var(--gds-sys-color-dark-green-2);
 $invalid-color: var(--gds-sys-color-text-error);
@@ -45,7 +43,7 @@ $invalid-color: var(--gds-sys-color-text-error);
       width: 100%;
       height: 100%;
       border-radius: var(--gds-sys-shape-corner-round);
-      background-color: var(transparent);
+      background-color: transparent;
       transform: scale(0.5);
     }
   }
@@ -115,6 +113,7 @@ $invalid-color: var(--gds-sys-color-text-error);
     border-radius: var(--gds-sys-shape-corner-medium);
   }
 
+  &.radio-group-wrapper--horizontal,
   &.gds-radio-group-wrapper--horizontal {
     display: flex;
   }

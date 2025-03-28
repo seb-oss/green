@@ -1,5 +1,42 @@
 # Changelog
 
+## 3.25.0
+
+### Minor Changes
+
+- f333bbb: **FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
+
+### Patch Changes
+
+- Updated dependencies [b46f13f]
+  - @sebgroup/green-core@1.69.4
+
+## 3.24.2
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 3.24.1
+
+### Patch Changes
+
+- 277716a: **Modal:** fix scrolling inside modal on iOS
+- Updated dependencies [d529108]
+  - @sebgroup/green-core@1.68.4
+
+## 3.24.0
+
+### Minor Changes
+
+- 34bf172: **Dependencies:** Include React 19 in peer dependency constraint
+
+  This update makes it possible to use @sebgroup/green-react with React 19 without complaints from NPM.
+
+  Note, however, that the library is still not thoroughly tested with React 19, and all our unit tests still run against React 18. So proceed with caution.
+
 ## 3.23.1
 
 ### Patch Changes

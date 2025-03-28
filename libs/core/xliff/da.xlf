@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="da" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sb77f4dce69a005ac">
+  <source>Error message.</source>
+  <target>Fejlmeddelelse.</target>
+</trans-unit>
+<trans-unit id="s5e8250fb85d64c23">
+  <source>Close</source>
+  <target>Luk</target>
+</trans-unit>
+<trans-unit id="s7fd3469f78111589">
+  <source>Open context menu</source>
+  <target>Åbn kontekstmenu</target>
+</trans-unit>
+<trans-unit id="s83c436ed1bc16dfb">
+  <source>Show more information</source>
+  <target>Vis flere oplysninger</target>
+</trans-unit>
+<trans-unit id="s58bfb494feb8eb02">
+  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
+  <target><x id="0" equiv-text="${this.value.length}"/> valgt</target>
+</trans-unit>
+<trans-unit id="sd898d99fd9c13de6">
+  <source>Filter available options</source>
+  <target>Filtrer tilgængelige muligheder</target>
+</trans-unit>
+<trans-unit id="s5d929ff1619ac0c9">
+  <source>Search</source>
+  <target>Søg</target>
+</trans-unit>
+<trans-unit id="s1e118319b5202c41">
+  <source>Mon</source>
+  <target>Man</target>
+</trans-unit>
+<trans-unit id="s6d24cd19e23b8185">
+  <source>Tue</source>
+  <target>Ti</target>
+</trans-unit>
+<trans-unit id="s74aa0319e62b2eb7">
+  <source>Wed</source>
+  <target>Ons</target>
+</trans-unit>
+<trans-unit id="s6cfed919e21ac6ac">
+  <source>Thu</source>
+  <target>Tor</target>
+</trans-unit>
+<trans-unit id="sf295af199c723ec8">
+  <source>Fri</source>
+  <target>Fre</target>
+</trans-unit>
+<trans-unit id="s9836b719fa8ef857">
+  <source>Sat</source>
+  <target>Lør</target>
+</trans-unit>
+<trans-unit id="s987ac119fac8d621">
+  <source>Sun</source>
+  <target>Søn</target>
+</trans-unit>
+<trans-unit id="s17e3edbe032f79ec">
+  <source>Open calendar modal</source>
+  <target>Åbn kalender-popup</target>
+</trans-unit>
+<trans-unit id="s62931b2a50168976">
+  <source>Previous month</source>
+  <target>Forrige måned</target>
+</trans-unit>
+<trans-unit id="sb47daaf9e1c4a905">
+  <source>Month</source>
+  <target>Måned</target>
+</trans-unit>
+<trans-unit id="s1a2dda8f763a68bd">
+  <source>January</source>
+  <target>Januar</target>
+</trans-unit>
+<trans-unit id="sbc083a1dbee9af73">
+  <source>February</source>
+  <target>Februar</target>
+</trans-unit>
+<trans-unit id="s5052d10b539eabf0">
+  <source>March</source>
+  <target>Marts</target>
+</trans-unit>
+<trans-unit id="scb6b9cb49cf93277">
+  <source>April</source>
+  <target>April</target>
+</trans-unit>
+<trans-unit id="s1e187019b5262aa6">
+  <source>May</source>
+  <target>Maj</target>
+</trans-unit>
+<trans-unit id="s15a852e9f9a50fa5">
+  <source>June</source>
+  <target>Juni</target>
+</trans-unit>
+<trans-unit id="s15a16ae9f99f19bf">
+  <source>July</source>
+  <target>Juli</target>
+</trans-unit>
+<trans-unit id="s407a88a592a0987c">
+  <source>August</source>
+  <target>August</target>
+</trans-unit>
+<trans-unit id="s39938ecdae568740">
+  <source>September</source>
+  <target>September</target>
+</trans-unit>
+<trans-unit id="sa7cd5c2ff6d266e7">
+  <source>October</source>
+  <target>Oktober</target>
+</trans-unit>
+<trans-unit id="s281846ef0421c71f">
+  <source>November</source>
+  <target>November</target>
+</trans-unit>
+<trans-unit id="s7793b811d20184fe">
+  <source>December</source>
+  <target>December</target>
+</trans-unit>
+<trans-unit id="sa6f2645578b2d2bc">
+  <source>Year</source>
+  <target>År</target>
+</trans-unit>
+<trans-unit id="s46d6587089bd0356">
+  <source>Next month</source>
+  <target>Næste måned</target>
+</trans-unit>
+<trans-unit id="sb4f1dffbb6be6302">
+  <source>Clear</source>
+  <target>Ryd</target>
+</trans-unit>
+<trans-unit id="s63d040e37887f17e">
+  <source>Today</source>
+  <target>I dag</target>
+</trans-unit>
+<trans-unit id="se4129fd6b9d7b4c2">
+  <source>Last available date</source>
+  <target>Sidste tilgængelige dato</target>
+</trans-unit>
+<trans-unit id="s8ade4e9d5e804d6a">
+  <source>First available date</source>
+  <target>Første tilgængelige dato</target>
+</trans-unit>
+<trans-unit id="se0955919920ee87d">
+  <source>Day</source>
+  <target>Dag</target>
+</trans-unit>
+<trans-unit id="s5febcd9b311c16fe">
+  <source>Scroll right</source>
+  <target>Rul til højre</target>
+</trans-unit>
+<trans-unit id="s9af3c72c33088826">
+  <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
+  <target>Der er <x id="0" equiv-text="${errors.length}"/> fejl, der skal rettes, før du kan fortsætte:</target>
+</trans-unit>
+<trans-unit id="sdc42f1da42d6411a">
+  <source>Clear input</source>
+  <target>Ryd inputfelt</target>
+</trans-unit>
+<trans-unit id="s2ceb11be2290bb1b">
+  <source>Cancel</source>
+  <target>Annuller</target>
+</trans-unit>
+<trans-unit id="s49730f3d5751a433">
+  <source>Loading...</source>
+  <target>Indlæser...</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

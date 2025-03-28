@@ -35,7 +35,6 @@
     </ng-template>
   </ng-container>
 </ng-template>
-
 <table class="gds-table" *transloco="let t">
   <!-- Table header -->
   <thead>
@@ -43,14 +42,20 @@
       <!-- Checkbox column for header -->
       <th *ngIf="selectable" class="column__check">
         <div class="gds-field-checkbox-wrap">
-          <input
-            type="checkbox"
-            [formControl]="groupSelector"
-            [attr.aria-label]="ariaLabelCheckboxTh"
-            [attr.id]="'cb_header__' + initId"
-            [attr.data-thook]="thook"
-          />
-          <label [attr.for]="'cb_header__' + initId"></label>
+          <label
+            [attr.for]="'cb_header__' + initId"
+            class="form-control"
+            id="thead-checkbox"
+          >
+            <input
+              type="checkbox"
+              [formControl]="groupSelector"
+              [attr.aria-label]="ariaLabelCheckboxTh"
+              [attr.id]="'cb_header__' + initId"
+              [attr.data-thook]="thook"
+            />
+            <i></i>
+          </label>
         </div>
       </th>
 
@@ -99,15 +104,20 @@
         <!-- Checkbox column for row -->
         <td *ngIf="selectable" class="column__check">
           <div class="gds-field-checkbox-wrap">
-            <input
-              *ngIf="rowSelectors.get(item[rowId])"
-              type="checkbox"
-              [formControlName]="item[rowId]"
-              [attr.aria-label]="ariaLabelCheckboxTr"
-              [attr.id]="'cb_row__' + initId + '_' + i"
-              [attr.data-thook]="'row-select-' + i"
-            />
-            <label [attr.for]="'cb_row__' + initId + '_' + i"></label>
+            <label
+              [attr.for]="'cb_row__' + initId + '_' + i"
+              class="form-control"
+            >
+              <input
+                *ngIf="rowSelectors.get(item[rowId])"
+                type="checkbox"
+                [formControlName]="item[rowId]"
+                [attr.aria-label]="ariaLabelCheckboxTr"
+                [attr.id]="'cb_row__' + initId + '_' + i"
+                [attr.data-thook]="'row-select-' + i"
+              />
+              <i></i>
+            </label>
           </div>
         </td>
 
@@ -121,17 +131,15 @@
           <ng-container
             *ngIf="expandable && i === 0; else nonExpandableTemplate"
           >
+        <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
             <div class="gds-item-field-wrap">
               <span
                 class="chevron-field"
-                [attr.aria-expanded]="rowSelectors.get(item[rowId]).value"
+                [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
               >
                 <svg
                   *ngIf="item.subItems.length > 0"
-                  width="18"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
+                  width="18" height="14" viewBox="0 0 24 24" fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
@@ -167,16 +175,21 @@
       </tr>
 
       <!-- Expanded Sub Items -->
-      <ng-container *ngIf="expandable && rowSelectors.get(item[rowId]).value">
+      <ng-container *ngIf="expandable && rowSelectors.get(item[rowId])?.value">
         <tr *ngFor="let subItem of item[subItemsProp]">
           <td
             *ngFor="let column of tableColumns"
             [columnType]="column.valueType"
             [value]="subItem[column.property]"
+            (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
           >
-            <div class="gds-sub-item-field-wrap">
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }">
+              </ng-template>
+            </ng-container>
+            <ng-template #defaultTdTemplate>
               {{ subItem[column.property] }}
-            </div>
+            </ng-template>
           </td>
         </tr>
       </ng-container>

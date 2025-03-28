@@ -1,44 +1,37 @@
 import { localized, msg } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
-import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
+import { resizeObserver } from '../../utils/decorators/resize-observer'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { styles } from './textarea.styles'
 
+import type { GdsFieldBase } from '../../primitives/field-base'
+import type { GdsButton } from '../button'
 // Local Components
 import '../../primitives/form-control-header'
 import '../../primitives/form-control-footer'
 import '../../primitives/field-base'
 import '../icon/icons/cross-large'
-import '../flex'
 import '../button'
 
-import type { GdsButton } from '../button'
-
-/**
- * @summary A custom input element that can be used in forms.
- * @status beta
- *
- * @element gds-textarea
- *.
- * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
- * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
- * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
- *       displayed in a panel when the user clicks the info button.
- * @event gds-input-cleared - Fired when the clear button is clicked.
- */
-@gdsCustomElement('gds-textarea')
 @localized()
-export class GdsTextarea extends GdsFormControlElement<string> {
+class Textarea extends GdsFormControlElement<string> {
   static styles = [tokens, styles]
 
+  private _initialRows?: number
+  private _defaultRows = 4
   /**
    * Rows of the textarea
    */
@@ -66,17 +59,13 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   clearable = false
 
   /**
-   * Whether the field should be resizeable or not. If set to `false`, the field will not be resizeable.
-   *
-   * When `auto` (default), the field will disaplay a resize handle and will be resizeable in the vertical direction.
-   *
-   * The textarea is resizeable based on the `rows` attribute and the content of the textarea by default.
-   *
-   * @property resize
-   *
+   * The resizable attribute of the textarea. It can be set to 'auto', 'manual' or 'false'.
+   * When set to 'auto', the textarea will be resizable in the vertical direction based on content.
+   * When set to 'manual', the textarea will be resizable in both the vertical and horizontal directions.
+   * When set to 'false', the textarea will not be resizable.
    */
-  @property()
-  resize = 'auto'
+  @property({ type: String })
+  resizable: 'auto' | 'manual' | 'false' = 'auto'
 
   /**
    * The maximum number of characters allowed in the field.
@@ -97,11 +86,20 @@ export class GdsTextarea extends GdsFormControlElement<string> {
   @property({ type: String })
   variant: 'default' | 'floating-label' = 'default'
 
+  /**
+   * Controls the font-size of texts.
+   */
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
 
   @query('textarea')
   private elTextarea!: HTMLTextAreaElement
+
+  @query('gds-field-base')
+  private fieldBase!: GdsFieldBase
 
   /**
    * A reference to the clear button element. Returns null if there is no clear button.
@@ -120,6 +118,36 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return this.shadowRoot?.querySelector('#field')
   }
 
+  @resizeObserver()
+  private _handleResize() {
+    if (!this.fieldBase) return
+
+    // Wait for field-base to be ready and get its shadow root
+    Promise.resolve().then(() => {
+      const fieldBaseShadowRoot = this.fieldBase?.shadowRoot
+      if (!fieldBaseShadowRoot) return
+
+      const rightDiv = fieldBaseShadowRoot.querySelector(
+        '.right',
+      ) as HTMLElement
+      if (rightDiv) {
+        const boundingBox = rightDiv.getBoundingClientRect()
+        this.elTextarea.style.setProperty(
+          '--padding-inline-end',
+          `${boundingBox.width}px`,
+        )
+      } else {
+        this.elTextarea.style.removeProperty('--padding-inline-end')
+      }
+    })
+  }
+
+  private _handleSlotChange = () => {
+    requestAnimationFrame(() => {
+      this._handleResize()
+    })
+  }
+
   constructor() {
     super()
     this.value = ''
@@ -127,15 +155,18 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   connectedCallback(): void {
     super.connectedCallback()
+
+    if (this.hasAttribute('rows')) {
+      this._initialRows = this.rows
+    }
+
     this._setAutoHeight()
-    this.#addResizeHandleListener()
+    this.addEventListener('slotchange', this._handleSlotChange)
   }
 
   disconnectedCallback() {
     super.disconnectedCallback()
-    // In the unlikely event the componet is disconnected in the middle of dragging,
-    // this will prevent dangling event listeners on `document`.
-    this.#stopDragging()
+    this.removeEventListener('slotchange', this._handleSlotChange)
   }
 
   render() {
@@ -151,7 +182,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #renderDefault() {
     return html`
-      <gds-form-control-header>
+      <gds-form-control-header class="size-${this.size}">
         <label for="input" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
@@ -170,14 +201,10 @@ export class GdsTextarea extends GdsFormControlElement<string> {
         multiline
       >
         ${this.#renderFieldContents()}
-        ${when(
-          this.resize === 'auto',
-          () => this.#renderResizeHandle(),
-          () => nothing,
-        )}
       </gds-field-base>
 
       <gds-form-control-footer
+        lass="size-${this.size}"
         .charCounter=${this.#shouldShowRemainingChars &&
         this.maxlength - (this.value?.length || 0)}
         .validationMessage=${this.invalid &&
@@ -186,7 +213,6 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     `
   }
 
-  // variant="floatingLabel"
   #renderFloatingLabel() {
     return nothing
   }
@@ -211,12 +237,48 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     )
   }
 
+  #handleOnPaste = (e: ClipboardEvent) => {
+    // Use requestAnimationFrame to guarantee that the pasted content is rendered.
+    requestAnimationFrame(() => {
+      this._setAutoHeight()
+    })
+  }
+
   @watch('value')
   private _setAutoHeight() {
     this.elTextareaAsync.then((element) => {
-      this.rows = Math.max(this.rows, element.value.split('\n').length)
-      this.#resizeState.lines = Number(this.rows)
-      element?.style.setProperty('--_lines', this.rows.toString())
+      // If resizable is false, maintain fixed height based on rows
+      if (this.resizable === 'false') {
+        const rowsToUse = this._initialRows ?? this._defaultRows
+        this.rows = rowsToUse
+        element.style.setProperty('--_lines', rowsToUse.toString())
+        return
+      }
+
+      // If manual resize, don't auto-adjust height
+      if (this.resizable === 'manual') {
+        return
+      }
+
+      if (this.resizable === 'auto') {
+        if (element.value === '') {
+          // When clearing, use initial rows if set, otherwise use default
+          const rowsToUse = this._initialRows ?? this._defaultRows
+          this.rows = rowsToUse
+          element.style.setProperty('--_lines', rowsToUse.toString())
+        } else {
+          // Calculate required height for content
+          const computedStyle = getComputedStyle(element)
+          const lineHeight = parseFloat(computedStyle.lineHeight)
+          const contentHeight = element.scrollHeight
+          const requiredRows = Math.ceil(contentHeight / lineHeight)
+
+          // Use initial rows as minimum if available
+          const minRows = this._initialRows ?? this._defaultRows
+          this.rows = Math.max(minRows, requiredRows)
+          element.style.setProperty('--_lines', this.rows.toString())
+        }
+      }
     })
   }
 
@@ -226,18 +288,53 @@ export class GdsTextarea extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
+
+    // Handle clearing based on resizable mode
+    this.elTextareaAsync.then((element) => {
+      if (this.resizable === 'manual') {
+        // For manual resize, just clear the value but maintain user-set height
+        element.style.height = ''
+      } else if (this.resizable === 'false') {
+        // For non-resizable, maintain fixed height based on initial rows
+        const rowsToUse = this._initialRows ?? this._defaultRows
+        this.rows = rowsToUse
+        element.style.setProperty('--_lines', rowsToUse.toString())
+      } else {
+        // For auto resize, reset to initial rows
+        const rowsToUse = this._initialRows ?? this._defaultRows
+        this.rows = rowsToUse
+        element.style.setProperty('--_lines', rowsToUse.toString())
+        element.style.height = ''
+      }
+    })
+
     this.dispatchEvent(
       new Event('gds-input-cleared', {
         bubbles: true,
         composed: true,
       }),
     )
+
     this.dispatchEvent(
       new Event('input', {
         bubbles: true,
         composed: true,
       }),
     )
+  }
+
+  @watch('rows')
+  private _handleRowsChange() {
+    // Store the new rows value as initial if manually set
+    if (this.hasAttribute('rows')) {
+      this._initialRows = this.rows
+    }
+
+    this.elTextareaAsync.then((element) => {
+      if (this.resizable === 'false') {
+        element.style.setProperty('--_lines', this.rows.toString())
+      }
+    })
   }
 
   #renderFieldContents() {
@@ -259,74 +356,15 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return html`<slot slot="trail" name="trail"></slot>`
   }
 
-  #addResizeHandleListener() {
-    const resizeHandle = this.querySelector('.resize-handle')
-    if (resizeHandle) {
-      resizeHandle.addEventListener(
-        'mousedown',
-        this.#startDragging as EventListener,
-      )
-    }
-  }
-
-  // State for the resize handle action
-  #resizeState = {
-    isDragging: false,
-    startMouseY: 0,
-    lines: this.rows,
-    deltaLines: 0,
-    lineHeight: 0,
-  }
-
-  #startDragging = (event: MouseEvent) => {
-    event.preventDefault() // Prevent default behavior
-    this.#resizeState.isDragging = true // Set dragging state to true
-    this.#resizeState.startMouseY = event.clientY // Store the initial mouse position
-    this.#resizeState.lineHeight = parseFloat(
-      getComputedStyle(this.elTextarea).lineHeight,
-    )
-    document.addEventListener('mousemove', this.#onDrag)
-    document.addEventListener('mouseup', this.#stopDragging)
-  }
-
-  #onDrag = (event: MouseEvent) => {
-    if (!this.#resizeState.isDragging) return // If not dragging, return
-
-    const deltaY = event.clientY - this.#resizeState.startMouseY // Calculate the movement in Y direction
-    this.#resizeState.deltaLines = Math.round(
-      deltaY / this.#resizeState.lineHeight,
-    ) // Calculate the number of lines to increase or decrease
-
-    this.elTextareaAsync.then((element) => {
-      element?.style.setProperty(
-        '--_lines',
-        (this.#resizeState.lines + this.#resizeState.deltaLines).toString(),
-      )
-    })
-  }
-
-  #stopDragging = () => {
-    this.#resizeState.isDragging = false // Set dragging state to false
-    this.#resizeState.lines += this.#resizeState.deltaLines // Update the number of lines
-    this.rows = this.#resizeState.lines // Update the rows attribute
-    this.#resizeState.deltaLines = 0
-    document.removeEventListener('mousemove', this.#onDrag)
-    document.removeEventListener('mouseup', this.#stopDragging)
-  }
-
-  #renderResizeHandle() {
-    return html`
-      <div class="resize-handle" @mousedown=${this.#startDragging}></div>
-    `
-  }
-
   #renderNativeTextarea() {
     return html`
       <textarea
         @input=${this.#handleOnInput}
         @change=${this.#handleOnChange}
+        @paste=${this.#handleOnPaste}
         .value=${this.value}
         id="input"
+        class="resize-${this.resizable}"
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
@@ -347,7 +385,7 @@ export class GdsTextarea extends GdsFormControlElement<string> {
           slot="action"
           id="clear-button"
         >
-          <gds-icon-cross-large />
+          <gds-icon-cross-large></gds-icon-cross-large>
         </gds-button>
       `
     else return nothing
@@ -357,3 +395,20 @@ export class GdsTextarea extends GdsFormControlElement<string> {
     return this.maxlength < Number.MAX_SAFE_INTEGER
   }
 }
+
+/**
+ * @summary A custom input element that can be used in forms.
+ * @status beta
+ *
+ * @element gds-textarea
+ *.
+ * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
+ * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
+ *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
+ */
+@gdsCustomElement('gds-textarea')
+export class GdsTextarea extends withLayoutChildProps(
+  withSizeXProps(withMarginProps(Textarea)),
+) {}

@@ -1,5 +1,145 @@
 # Changelog
 
+## 5.6.0
+
+### Minor Changes
+
+- d75df66: **V-Angular**: Adding href to alert-ribbon and fixing icons in toast
+
+### Patch Changes
+
+- 9b15233: **V-Angular Slide-out:** Set focus on first focusable element instead of last focusable element
+
+## 5.5.4
+
+### Patch Changes
+
+- cf901cf: **V-Angular Components:** Fixed spacing within components and after.
+- 759863c: **V-Angular Slide-out:** Allow overflow to be shown outside of slide-out content.
+
+## 5.5.3
+
+### Patch Changes
+
+- 142324e: Fixing issue with prefix/suffix in input and dropdown
+- 3c2809f: fixing typeahead dropdown placement and width
+- Updated dependencies [8fe5d35]
+- Updated dependencies [00c48da]
+  - @sebgroup/green-core@1.69.3
+  - @sebgroup/chlorophyll@3.6.17
+
+## 5.5.2
+
+### Patch Changes
+
+- a904e48: Updated V-Angular Table sub-item to accept custom template
+
+## 5.5.1
+
+### Patch Changes
+
+- 43b08d4: dropdownButton in typeahead might be undefined
+- f0d4efc: fixing typeahead input height when opening dropdown
+- Updated dependencies [7fe6b60]
+- Updated dependencies [7fe6b60]
+  - @sebgroup/green-core@1.69.1
+
+## 5.5.0
+
+### Minor Changes
+
+- 9ac5286: **Routing:** Add `nggCoreRouterLink` directive for accessible routing with Green Core components
+
+### Patch Changes
+
+- Updated dependencies [f438e8f]
+  - @sebgroup/green-core@1.69.0
+
+## 5.4.2
+
+### Patch Changes
+
+- 213f2ad: Fix for dropdown layering to render list above other inputs.
+
+## 5.4.1
+
+### Patch Changes
+
+- 79a086f: fixed incomplete v-angular migration by removing a line which causes height issues
+- 3907ebb: **Alert Ribbon**: showing correct icon based on type
+  **Dropdown**: correct height on typeahead overlay, fixing spacing to validation
+- c564b23: Added margin-top to error-wrapper class in dropdown component. Removed height from input-wrapper class in input component to fix visual bug
+- 3077e1e: Added .nggv-field--error to input.component.scss to show a red line when there's an error on the input fields. Made slide-out scrollable when overflown. Added core map to index.ts file to expose some interfaces
+- 9111c10: Performance fix for dropdown-list and handling of key press events.
+- Updated dependencies [6cea9a6]
+  - @sebgroup/green-core@1.68.5
+
+## 5.4.0
+
+### Minor Changes
+
+- 54814fe: **NggCoreRenderer:** Add provider for supporting animations when using `NggCoreRenderer`. Fixes #1997
+
+### Patch Changes
+
+- 158fc60: **NggDropdown:** Fix text overflow style in the trigger. Fixes #1948
+- b8454ea: **Modal**: fixing close button sizing on mobile
+  **Tooltip**: fixing zindex problem when combined with modal
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 5.3.4
+
+### Patch Changes
+
+- 50a3fa2: Updated table grouping funcionality with clickable sub-items.
+- Updated dependencies [9d1476d]
+  - @sebgroup/green-core@1.68.1
+
+## 5.3.3
+
+### Patch Changes
+
+- fc5b9d4: added actionEmitter and close on option click on foldout
+- Updated dependencies [25a87f9]
+  - @sebgroup/green-core@1.67.2
+
+## 5.3.2
+
+### Patch Changes
+
+- 4a1ad4a: Added missing styles for the checkboxes inside nggv-table component
+- Updated dependencies [0babf00]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+  - @sebgroup/chlorophyll@3.6.15
+  - @sebgroup/green-core@1.66.0
+
+## 5.3.1
+
+### Patch Changes
+
+- e93b640: **CoreControlModule**: Fix condition for when field errors are displayed
+
+## 5.3.0
+
+### Minor Changes
+
+- 9b9d7b6: Added table grouping functionality.
+
+### Patch Changes
+
+- d3870c2: Added position: relative to host: element to counteract the position: absolute for the fold-out options.
+- b8a1b9c: Exported account-number-pipe as Angular stand-alone pipe.
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [f8c3d74]
+- Updated dependencies [fc89181]
+  - @sebgroup/green-core@1.65.0
+
 ## 5.2.0
 
 ### Minor Changes

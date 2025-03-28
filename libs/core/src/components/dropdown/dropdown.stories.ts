@@ -2,6 +2,8 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './index.ts'
 import '../icon/icons/push.ts'
 
@@ -24,6 +26,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-dropdown'),
+  },
 }
 
 export default meta
@@ -285,7 +290,6 @@ export const Combobox: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-dropdown label="Favorite sci-fi tech" combobox>
-      <gds-option value="" isplaceholder></gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
       <gds-option value="nanotechnology">Nanotechnology</gds-option>

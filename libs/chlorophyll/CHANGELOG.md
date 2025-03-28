@@ -1,5 +1,23 @@
 # Changelog
 
+## 3.6.17
+
+### Patch Changes
+
+- 00c48da: **Radio group:** Add missing gds prefix to horizontal modifier
+
+## 3.6.16
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+
+## 3.6.15
+
+### Patch Changes
+
+- 0babf00: **Chlorophyll:** Checkbox & Radio Button hover styles not to hint selected icon
+
 ## 3.6.14
 
 ### Patch Changes

@@ -7,6 +7,10 @@ import { literal, html as staticHtml } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
+import {
+  withLayoutChildProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import MenuButtonCSS from './menu-button.styles'
 
 /**
@@ -22,7 +26,9 @@ import MenuButtonCSS from './menu-button.styles'
  * @csspart main-slot - The main slot of the button, between the lead and trail slots.
  */
 @gdsCustomElement('gds-menu-button')
-export class GdsMenuButton extends GdsElement {
+export class GdsMenuButton extends withSizeXProps(
+  withLayoutChildProps(GdsElement),
+) {
   static styles = [tokens, unsafeCSS(MenuButtonCSS)]
 
   static shadowRootOptions: ShadowRootInit = {

@@ -3,12 +3,12 @@ import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
+import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
+
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/textarea/index.js'
-
-import type { GdsTextarea } from '@sebgroup/green-core/components/textarea/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
@@ -184,6 +184,31 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         )
         el.focus()
         expect(document.activeElement).to.equal(el)
+      })
+
+      it('should update the rows when value is set programmatically', async () => {
+        // Create the custom element directly with a fixed width
+        const textareaEl = await fixture<GdsTextarea>(
+          html`<gds-textarea style="width: 300px;"></gds-textarea>`,
+        )
+
+        await textareaEl.updateComplete
+        expect(textareaEl.rows).to.equal(4)
+
+        textareaEl.value = 'Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6'
+
+        await textareaEl.updateComplete
+        await aTimeout(0)
+
+        const nativeTextarea = textareaEl.shadowRoot!.querySelector('textarea')
+        if (!nativeTextarea) {
+          throw new Error('Native <textarea> was not found in the shadowRoot')
+        }
+
+        expect(textareaEl.rows).to.be.greaterThan(4)
+        expect(
+          parseInt(nativeTextarea.style.getPropertyValue('--_lines'), 10),
+        ).to.be.greaterThan(4)
       })
     })
   })

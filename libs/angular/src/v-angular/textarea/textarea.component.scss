@@ -15,11 +15,11 @@
 
   label:not(.gds-field-notice) {
     @include form-group.add-label;
-    margin-bottom: 0.5rem;
   }
 
-  label:is(.gds-field-label) {
-    margin-bottom: 0.5rem;
+  label + .gds-field,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
   }
 
   .hide-if-empty:empty {
@@ -40,6 +40,11 @@
     box-sizing: border-box;
     font-family: inherit;
     font-size: 1rem;
+
+    &.nggv-field--error {
+      $_border-bottom: 0.125rem solid #9f000a !important;
+      border-bottom: $_border-bottom;
+    }
   }
 
   .description {
@@ -72,6 +77,10 @@
         margin-top: 0.128rem;
         align-items: center;
       }
+    }
+
+    > .form-info--countdown {
+      font-weight: 400;
     }
   }
 

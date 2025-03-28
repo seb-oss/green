@@ -2,9 +2,12 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+
 import './index.ts'
 import '../badge/index.ts'
 import '../flex/index.ts'
+import '../text/index.ts'
 import '../divider/index.ts'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
@@ -34,6 +37,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-textarea'),
+  },
 }
 
 export default meta
@@ -154,15 +160,42 @@ export const Rows: Story = {
   ...DefaultParams,
   name: 'Rows',
   render: () => html`
-    <gds-flex flex-direction="column" gap="xl" width="320px">
-      <gds-textarea
-        label="Label"
-        supporting-text="Label support text"
-        value="Example value with 8 rows"
-        clearable
-        rows="8"
-      >
-      </gds-textarea>
+    <gds-flex gap="xl" width="680px">
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Rows:8</gds-text>
+          <gds-text tag="small" color="secondary">
+            Clearable and auto resize
+          </gds-text>
+        </gds-flex>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          value="Example value with 8 rows"
+          clearable
+          rows="8"
+        >
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-flex flex-direction="column">
+          <gds-text>Rows:8</gds-text>
+          <gds-text tag="small" color="secondary">
+            Clearable and no resize
+          </gds-text>
+        </gds-flex>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          value="Example value with 8 rows"
+          clearable
+          resizable="false"
+          rows="8"
+        >
+        </gds-textarea>
+      </gds-flex>
     </gds-flex>
   `,
 }
@@ -179,7 +212,7 @@ export const Rows: Story = {
  * @property resize - Controls whether and how the textarea can be resized by the user.
  *
  * ```html
- *  <gds-textarea resize="false"></gds-textarea>
+ *  <gds-textarea resizable="false"></gds-textarea>
  * ```
  **/
 export const Resize: Story = {
@@ -188,23 +221,96 @@ export const Resize: Story = {
   render: () => html`
     <gds-flex gap="xl" width="800px">
       <gds-flex flex-direction="column" flex="1" gap="l">
-        <gds-flex flex-direction="column" gap="s">
-          <gds-text>Resize: False</gds-text>
+        <gds-flex flex-direction="column" gap="2xs">
+          <gds-text>Resize: Auto</gds-text>
+          <gds-text tag="small" color="secondary">
+            Based on the content
+          </gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea
           label="Label"
           supporting-text="Label support text"
-          resize="false"
+          resizable="auto"
         >
         </gds-textarea>
       </gds-flex>
       <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="2xs">
+          <gds-text>Resize: Manual</gds-text>
+          <gds-text tag="small" color="secondary">
+            Draging the pull tab to resize
+          </gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resizable="manual"
+        >
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="2xs">
+          <gds-text>Resize: False</gds-text>
+          <gds-text tag="small" color="secondary">
+            Will not resize at all
+          </gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resizable="false"
+        >
+        </gds-textarea>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The `size` property controls the font-size of the text in form control header and footer.
+ *
+ * The `size` property can be set to `small` or `large`.<br>
+ * The default size is `large`.
+ *
+ * ```html
+ *  <gds-textarea size="small"></gds-textarea>
+ * ```
+ */
+export const Size: Story = {
+  ...DefaultParams,
+  name: 'Size',
+  render: () => html`
+    <gds-flex gap="xl" width="800px">
+      <gds-flex flex-direction="column" flex="1" gap="l">
         <gds-flex flex-direction="column" gap="s">
-          <gds-text>Resize: True</gds-text>
+          <gds-text>Size: Small</gds-text>
+          <gds-divider opacity="0.2"></gds-divider>
+        </gds-flex>
+        <gds-textarea
+          label="Label"
+          supporting-text="Label support text"
+          resizable="false"
+          size="small"
+        >
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
+        </gds-textarea>
+      </gds-flex>
+      <gds-flex flex-direction="column" flex="1" gap="l">
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text>Size: Large(default)</gds-text>
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-textarea label="Label" supporting-text="Label support text">
+          <span slot="extended-supporting-text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </span>
         </gds-textarea>
       </gds-flex>
     </gds-flex>
@@ -374,7 +480,6 @@ export const Validation: Story = {
           value="Incorrect value"
           maxLength="12"
           clearable
-          .invalid=${true}
           .validator=${{
             validate: (el: any) => {
               if (el.value === '')
@@ -393,7 +498,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'The value must be 12 characters long. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
+                  'The value must be a 12 characters long numeric value. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ',
                 ]
             },
           }}

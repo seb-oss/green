@@ -74,6 +74,28 @@
               <option value="Option 3">Option 3</option>
             </select>
           </gds-select>
+          <gds-radio-group
+            formControlName="radio"
+            label="Radio"
+            supporting-text="Select an option"
+            [errorMessage]="getError(simpleForm.get('radio'))"
+          >
+            <gds-radio
+              label="Option 1"
+              value="1"
+              supporting-text="Supporting text"
+            ></gds-radio>
+            <gds-radio
+              label="Option 2"
+              value="2"
+              supporting-text="Supporting text"
+            ></gds-radio>
+            <gds-radio
+              label="Option 3"
+              value="3"
+              supporting-text="Supporting text"
+            ></gds-radio>
+          </gds-radio-group>
           <gds-datepicker
             formControlName="date"
             label="Date"
@@ -135,6 +157,17 @@
               {{ simpleForm.get('select')?.value }}
               <gds-text
                 *ngIf="simpleForm.get('select')?.invalid"
+                color="negative"
+                >(invalid)</gds-text
+              >
+            </td>
+          </tr>
+          <tr>
+            <th>Radio</th>
+            <td>
+              {{ simpleForm.get('radio')?.value }}
+              <gds-text
+                *ngIf="simpleForm.get('radio')?.invalid"
                 color="negative"
                 >(invalid)</gds-text
               >

@@ -12,7 +12,7 @@
   --gds-sys-color-base: hsl(0, 0%, 20%);
   --gds-sys-color-font: hsl(0, 0%, 20%);
   --gds-sys-shape-corner-round: 50%;
-  --sg-border-color: hsl(0, 0%, 53%);
+  --sg-border-color: #e9e9e9;
   --sg-border-radius: 0.25rem;
   --sg-border-width-50: 0.5px;
   --sg-border-width: 1px;
@@ -55,6 +55,8 @@
   .nggv-modal-slideout__close {
     @include button.reset;
     @include close.close;
+    min-height: 2rem;
+    min-width: 2rem;
   }
 
   .modal-dialog__actions {

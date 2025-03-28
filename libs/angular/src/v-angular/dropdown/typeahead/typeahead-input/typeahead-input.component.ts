@@ -51,7 +51,7 @@ export class NggvTypeaheadInputComponent
   inputMoved = false
 
   constructor(
-    private element: ElementRef,
+    public element: ElementRef,
     private renderer2: Renderer2,
     @Self() @Optional() public ngControl: NgControl,
     @Optional()
@@ -59,7 +59,7 @@ export class NggvTypeaheadInputComponent
     protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
   ) {
-    super(ngControl, translocoScope, cdr)
+    super(ngControl, translocoScope, cdr, element)
     super.ngOnInit()
   }
 
@@ -68,7 +68,6 @@ export class NggvTypeaheadInputComponent
     this.debounceTime = 0
     this.hostComponent.selectOnSingleOption = false
 
-    this.moveInput()
     this.handleExpandedChange()
   }
 
@@ -98,9 +97,6 @@ export class NggvTypeaheadInputComponent
           this.dropdownButton.querySelector('button'),
           this.element.nativeElement,
         )
-        // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
-        this.buttonHeight =
-          this.dropdownButton.getBoundingClientRect().height || 32 // Default to 2em;
         this.inputMoved = true
       }
     }, 0)
@@ -120,6 +116,10 @@ export class NggvTypeaheadInputComponent
         // Calling this function from onInit caused issues when DOM has not fully been initialized because of
         // different CSS used to hide (but not remove) from DOM
         if (!this.inputMoved) this.moveInput()
+
+        // Get the height of the parent button so the input can be explicitly set to the same height since it's absolutely positioned
+        this.buttonHeight =
+          this.dropdownButton?.getBoundingClientRect().height || 32 // Default to 2em;
 
         if (this.expanded) {
           // Weird workaround for setting focus. Didn't set focus, but wrapping in setTimeout solved it.

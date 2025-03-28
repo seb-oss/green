@@ -117,21 +117,26 @@ export class GdsFieldBase extends GdsElement {
   }
 
   #renderFieldContents() {
-    const elements = [
-      this.#renderSlotLead(),
-      this.#renderSlotMain(),
-      this.#renderSlotAction(),
-      this.#renderSlotTrail(),
-    ]
-
-    return html`${map(elements, (el) => el)}
-
-      <!-- <div class="left">
+    if (
+      this.multiline &&
+      (this._trailSlotOccupied || this._actionSlotOccupied)
+    ) {
+      return html`
         ${this.#renderSlotLead()} ${this.#renderSlotMain()}
-      </div>
-      <div class="right">
-        ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
-      </div>  --> `
+        <div class="right">
+          ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
+        </div>
+      `
+    } else {
+      const elements = [
+        this.#renderSlotLead(),
+        this.#renderSlotMain(),
+        this.#renderSlotAction(),
+        this.#renderSlotTrail(),
+      ]
+
+      return html`${map(elements, (el) => el)}`
+    }
   }
 
   #renderSlotLead() {

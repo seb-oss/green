@@ -46,6 +46,7 @@ import { DropdownUtils } from '../core/core.utils'
 import { NggvDropdownListComponent } from '../dropdown/dropdown-list/dropdown-list.component'
 import { NggvDropdownComponent } from '../dropdown/dropdown.component'
 import { NggvTypeaheadDropdownListComponent } from '../dropdown/typeahead/typeahead-dropdown-list/typeahead-dropdown-list.component'
+import { NggvTypeaheadHighlightComponent } from '../dropdown/typeahead/typeahead-highlight/typeahead-highlight.component'
 import { NggvTypeaheadDirective } from '../dropdown/typeahead/typeahead.directive'
 import { NggvExternalLinkDirective } from '../external-link/external-link.directive'
 import { NggvI18nModule } from '../i18n/i18n.module'
@@ -120,6 +121,7 @@ const meta: Meta<NggvInputComponent> = {
         NggvDropdownComponent,
         NggvDropdownListComponent,
         NggvTypeaheadDropdownListComponent,
+        NggvTypeaheadHighlightComponent,
         NggvCheckboxComponent,
         NggvTooltipDirective,
         NggvInfoCircleComponent,
@@ -228,7 +230,7 @@ const TemplateWithCustomLabel: StoryFn<NggvInputComponent & WithExtras> = (
       [invalid]="invalid"
       [required]="required">
       <ng-template #labelTpl>
-        <i>{{ customLabelText }}</i>
+        My custom label template
         <nggv-info-circle [info]="info"></nggv-info-circle>
         <span>{{ text }}</span>
       </ng-template>
@@ -412,7 +414,7 @@ export const WithMaxLength: StoryFn<NggvInputComponent & WithExtras & any> = (
         formControlName="remittanceInformation"
         >
         <ng-template #labelTpl>
-          <i>{{ customLabelText }}</i>
+          My custom label template
           <nggv-info-circle [info]="info"></nggv-info-circle>
           <span>{{ text }}</span>
         </ng-template>
@@ -666,6 +668,35 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [selectedFormatter]="selectedFormatter"
         [autocomplete]="'off'">
       </nggv-input>
+      <nggv-input class="toggle"
+        [label]="label"
+        [nggvTypeahead]="searchFunction"
+        [resultFormatter]="resultFormatter"
+        [selectedFormatter]="selectedFormatter"
+        [autocomplete]="'off'">
+      </nggv-input>
+      <nggv-input class="toggle"
+        [label]="label"
+        [nggvTypeahead]="searchFunction"
+        [resultFormatter]="resultFormatter"
+        [selectedFormatter]="selectedFormatter"
+        [autocomplete]="'off'">
+      </nggv-input>
+      <nggv-input class="toggle"
+        [label]="label"
+        [nggvTypeahead]="searchFunction"
+        [resultFormatter]="resultFormatter"
+        [selectedFormatter]="selectedFormatter"
+        [autocomplete]="'off'">
+      </nggv-input>
+      <nggv-input class="toggle"
+        [label]="label"
+        [nggvTypeahead]="searchFunction"
+        [resultFormatter]="resultFormatter"
+        [selectedFormatter]="selectedFormatter"
+        [autocomplete]="'off'">
+      </nggv-input>
+      
     `,
     styles: [
       /*css*/ `
