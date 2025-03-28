@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Can name the expand icon for screen-readers
+The chevron icon is called Expand for screen readers.
