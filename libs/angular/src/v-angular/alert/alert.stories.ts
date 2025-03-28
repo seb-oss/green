@@ -52,7 +52,7 @@ export const Information = Template.bind({})
 Information.args = {
   type: AlertType.Information,
   body: 'Body text starts on the same row as heading A link (optional) always ends the message, stand alone or',
-  linkText: 'part of the senctence.',
+  linkText: 'part of the sentence.',
   linkHref: '#',
   closable: true,
   onLink: console.log,
