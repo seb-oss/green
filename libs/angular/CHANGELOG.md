@@ -1,5 +1,15 @@
 # Changelog
 
+## 5.6.0
+
+### Minor Changes
+
+- d75df66: **V-Angular**: Adding href to alert-ribbon and fixing icons in toast
+
+### Patch Changes
+
+- 9b15233: **V-Angular Slide-out:** Set focus on first focusable element instead of last focusable element
+
 ## 5.5.4
 
 ### Patch Changes
