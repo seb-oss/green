@@ -3,13 +3,9 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core'
 import { Subscription } from 'rxjs'
 
 import { ToastMessageService } from './toast-message.service'
-// import { faCheck, faExclamationSquare, faInfoSquare, faTimes } from '@fortawesome/pro-solid-svg-icons';
 import { ToastMessage } from './toast.models'
 
 import '@sebgroup/green-core/components/icon/icons/cross-small.js'
-import '@sebgroup/green-core/components/icon/icons/checkmark.js'
-import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
-import '@sebgroup/green-core/components/icon/icons/circle-info.js'
 
 @Component({
   selector: 'nggv-toast',
@@ -39,11 +35,6 @@ export class ToastComponent implements OnInit, OnDestroy {
   private toastMessagesSubscription!: Subscription
 
   messages: ToastMessage[] = []
-
-  // faTimes = faTimes;
-  // confirmCheck = faCheck;
-  // errorIcon = faExclamationSquare;
-  // informationIcon = faInfoSquare;
 
   constructor(private toastMessageService: ToastMessageService) {}
 
