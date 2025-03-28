@@ -1,6 +1,6 @@
 'use client'
 
-import { GdsDropdown, GdsFlex, GdsOption, GdsSelect } from '$/import/components'
+import { GdsDropdown, GdsFlex, GdsOption } from '$/import/components'
 
 const Dropdown = ({ hero }: { hero?: boolean }) => (
   <>
