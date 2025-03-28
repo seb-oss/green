@@ -49,7 +49,6 @@ const DefaultParams: Story = {
   args: {
     label: 'Pick a date',
     supportingText: 'Supporting text',
-    expandLabel: 'Expand label',
     innherHTML: `
       <span slot="extended-supporting-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
       </span>
