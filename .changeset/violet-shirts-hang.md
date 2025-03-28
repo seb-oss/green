@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-The chevron icon is called Expand for screen readers.
+**Dropdown:** Label the chevron-down icon as 'Expand' for screen readers.
