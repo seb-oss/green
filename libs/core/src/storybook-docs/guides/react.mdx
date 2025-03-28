@@ -1,0 +1,59 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Guides/React" />
+
+React 19 has built-in support for web components, and Green Core automatically generates typed JSX wrappers for all components and icons. This means you can use the components directly in your JSX templates.
+
+For example:
+
+```ts
+import { GdsButton } from '@sebgroup/green-core/react'
+```
+
+Then, in your JSX template:
+
+```tsx
+<GdsButton rank="secondary" onClick={() => console.log('Hello')}>
+  Click me!
+</GdsButton>
+```
+
+These imports are tree-shakable and the underlying web components will be defined automatically on first use.
+
+## Transitional styles
+
+If you are using the 2016 design, you need to add transitional styles. You can import them like this and register separately:
+
+```ts
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
+```
+
+Then, you can use the component in your JSX template as shown above.
+
+## React 18 and older
+
+React 18 and older versions do not have proper built-in support for web components. You can still use Green Core components in your React application, but you need to provide a wrapper for each component.
+You can use the `createComponent` function from `@lit/react` to create these wrappers.
+
+Here is an example:
+
+```ts
+import React from 'react'
+import { createComponent } from '@lit/react'
+
+import { GdsButton as GdsButtonClass } from '@sebgroup/green-core/component/button/index.js'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
+
+export const GdsButton = createComponent({
+  tagName: getScopedTagName('gds-button'),
+  elementClass: GdsButtonClass,
+  react: React,
+  events: { onClick: 'click' }, // Event callbacks need to be explicitly mapped to DOM events
+})
+```
+
+Then you can just use `<GdsButton />` like a regular React component.
