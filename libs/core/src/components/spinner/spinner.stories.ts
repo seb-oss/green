@@ -3,9 +3,9 @@ import { html } from 'lit'
 import { ifDefined } from 'lit-html/directives/if-defined.js'
 import { Meta, StoryObj } from '@storybook/web-components'
 
-import { GdsSpinner } from './gds-spinner'
+import { GdsSpinner } from './spinner'
 
-import './gds-spinner'
+import './spinner'
 import '../div'
 import '../flex'
 import '../text'
