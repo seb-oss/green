@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.6.1
+
+### Patch Changes
+
+- 0e6d189: Update how underlying Core components are imported. Affects NggDropdown, NggDatepicker and NggContextMenu
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
 ## 5.6.0
 
 ### Minor Changes
