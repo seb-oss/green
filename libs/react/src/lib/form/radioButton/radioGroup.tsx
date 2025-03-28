@@ -48,7 +48,7 @@ export const RadioGroup = ({
   )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
   const [name] = useState(propName)
-  const [uniqueId] = useState(randomId())
+  const [uuid] = useState(randomId())
 
   if (valueSelected !== prevValueSelected) {
     setSelected(valueSelected)
@@ -98,14 +98,14 @@ export const RadioGroup = ({
   })
 
   const describedBy = classNames({
-    [`${uniqueId}_message`]:
+    [`${uuid}_message`]:
       validator?.message !== undefined && validator.message.length > 0,
-    [`${uniqueId}_info`]: labelInformation,
-    [`gds-expandable-info-${uniqueId}`]: expandableInfo,
+    [`${uuid}_info`]: labelInformation,
+    [`gds-expandable-info-${uuid}`]: expandableInfo,
   })
 
   return (
-    <FormItem {...formItemProps} inputId={uniqueId}>
+    <FormItem {...formItemProps} inputId={uuid}>
       <div className={radioGroupWrapperClassNames}>
         {React.Children.map(
           children as React.ReactElement,
