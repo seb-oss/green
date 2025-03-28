@@ -49,17 +49,19 @@ describe('FormItem', () => {
     expect(screen.getByRole('button').classList.contains('icon')).toEqual(true)
   })
 
-  it('should display expandable information button', async function () {
+  it('should display expandable information when expandable info button is pressed', async function () {
     render(
       <FormItem {...formItemProps}>
         <input type="text" />
       </FormItem>,
     )
-    expect(screen.getByText(formItemProps.expandableInfo)).not.toBeVisible()
+    expect(screen.queryByText(formItemProps.expandableInfo)).toBeNull()
+
     await act(async () => {
       await userEvent.click(screen.getByRole('button'))
     })
-    expect(screen.getByText(formItemProps.expandableInfo)).toBeVisible()
+
+    expect(await screen.findByText(formItemProps.expandableInfo)).toBeVisible()
   })
 
   it('should get correct role from prop', function () {

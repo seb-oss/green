@@ -104,7 +104,7 @@ export const Input = forwardRef(
     const showSimpleInput = !label && !info && !expandableInfo
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_group-message`]:
+      [`${uuid}_message`]:
         !showSimpleInput &&
         validator?.message !== undefined &&
         validator.message.length > 0,
