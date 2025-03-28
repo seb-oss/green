@@ -2,4 +2,4 @@
 '@sebgroup/green-angular': minor
 ---
 
-Adding href to alertribbon and fixing icons in toast
+Adding href to alert-ribbon and fixing icons in toast
