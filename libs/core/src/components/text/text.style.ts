@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    display: block;
+    display: inline-block;
   }
 
   [tag] {
