@@ -151,7 +151,7 @@ export const FormItem = ({
           hidden={isHidden}
           style={{ height: isExpanded ? expandableHeight : 0 }}
           // TODO: Remove when inert is supported in React types
-          {...{ inert: isHidden ? '' : undefined }}
+          {...{ inert: isHidden ? true : undefined }}
         >
           <div ref={expandableInnerRef}> {!isHidden && expandableInfo} </div>
         </div>

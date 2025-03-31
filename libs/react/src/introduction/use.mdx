@@ -4,18 +4,22 @@ import { Meta } from '@storybook/blocks'
 
 # Use
 
-## Use Component with Chlorophyll styles
+**Note:** The preferred way to consume React components is from the Core library. Read how to do it [here](https://storybook.seb.io/latest/core/?path=/docs/guides-react--docs)
 
-React components rely on chlorophyll styling to work as intented. Introduce the chlorophyll library to your main styles file which is typically `styles.css` located in your `src` folder
+But if you need components from this storybook, read on.
 
-```
+## Use Components with Chlorophyll styles
+
+React components rely on Chlorophyll styling to work as intented. Introduce the chlorophyll library to your main styles file which is typically `styles.css` located in your `src` folder
+
+```css
 // project/src/styles.scss
 @use "~@sebgroup/chlorophyll/scss";
 ```
 
-**Note:** Depending on you bundler, you may need to configure the font path by setting the `$font-path` variable:
+**Note:** Depending on your bundler, you may need to configure the font path by setting the `$font-path` variable:
 
-```scss
+```css
 @use '@sebgroup/chlorophyll/scss' with (
   $font-path: '@sebgroup/fonts/fonts'
 );
@@ -31,9 +35,9 @@ Check out the example on [this page](https://storybook.seb.io/latest/chlorophyll
 
 Within your React project component file, you can import green-react components as below:
 
-```
+```ts
 // project/src/ProjectComponent
-import {Button} from "@sebgroup/green-react";
+import { Button } from "@sebgroup/green-react";
 
 ...
 

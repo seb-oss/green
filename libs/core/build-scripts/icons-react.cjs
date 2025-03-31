@@ -7,10 +7,6 @@ const iconsDir = path.resolve(
 )
 const outputDir = path.resolve(__dirname, '../../react/src/lib/icon/icons')
 
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
-
 function toPascalCase(str) {
   return str.replace(/(^\w|-\w)/g, clearAndUpper)
 }
@@ -21,20 +17,7 @@ function clearAndUpper(text) {
 
 async function generateReactComponent(name) {
   const className = `Icon${toPascalCase(name)}`
-  const componentName = `Icon${toPascalCase(name)}`
-  const tagName = `gds-icon-${name}`
-
-  return `import React from 'react'
-import { createComponent } from '@lit/react'
-import { ${className} as Icon } from '@sebgroup/green-core/components/icon/icons/${name}.js'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
-
-export const ${componentName} = createComponent({
-  tagName: getScopedTagName('${tagName}'),
-  elementClass: Icon,
-  react: React
-})
-`
+  return `export { ${className} } from '@sebgroup/green-core/react';`
 }
 
 async function processIcons() {
@@ -55,9 +38,6 @@ async function processIcons() {
         console.log(`Generated React component for ${name}`)
 
         indexContent += `export * from './${componentName}'\n`
-
-        // Delay before moving to the next file
-        await delay(1000) // 1 second delay
       } catch (error) {
         console.error(
           `Failed to generate component for ${name}. Error: ${error.message}`,

@@ -31,7 +31,7 @@ async function replaceInFile(filePath) {
   return content.replace(/<\/?svg[^>]*>/g, '')
 }
 
-function generateTsContent(name, regularSvg, solidSvg) {
+function generateComponentTsContent(name, regularSvg, solidSvg) {
   const className = `Icon${toPascalCase(name)}`
   const tagName = `gds-icon-${toKebabCase(name)}`
 
@@ -39,7 +39,7 @@ function generateTsContent(name, regularSvg, solidSvg) {
   regularSvg = regularSvg.replace(/\s*\n\s*/g, '')
   solidSvg = solidSvg.replace(/\s*\n\s*/g, '')
 
-  return `import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
+  return `import { gdsCustomElement } from '../../../scoping'
 import { GdsIcon } from '../icon'
 
 /**
@@ -56,9 +56,19 @@ export class ${className} extends GdsIcon {
 }`.trim()
 }
 
+function generateTsContent(name) {
+  const className = `Icon${toPascalCase(name)}`
+  return `import { ${className} } from './${name}.component'
+
+${className}.define()
+
+export { ${className} }`
+}
+
 async function renameFiles() {
   const regularFiles = await fs.readdir(regularDir)
   let tsIndexContent = ''
+  let tsPureIndexContent = ''
   let mdxContent = ''
 
   for (const file of regularFiles) {
@@ -106,15 +116,24 @@ async function renameFiles() {
           )
         }
 
-        const tsContent = generateTsContent(newName, regularSvg, solidSvg)
+        const componentTsContent = generateComponentTsContent(
+          newName,
+          regularSvg,
+          solidSvg,
+        )
+        await fs.writeFile(
+          path.join(outputDir, `${newName}.component.ts`),
+          componentTsContent,
+        )
+        console.log(`Generated ${newName}.component.ts`)
+
+        const tsContent = generateTsContent(newName)
         await fs.writeFile(path.join(outputDir, `${newName}.ts`), tsContent)
-        console.log(`Generated TypeScript file for ${newName}`)
+        console.log(`Generated ${newName}.ts`)
 
         tsIndexContent += `export * from './${newName}'\n`
+        tsPureIndexContent += `export * from './${newName}.component'\n`
         mdxContent += `<gds-icon-${toKebabCase(newName)}></gds-icon-${toKebabCase(newName)}>\n`
-
-        // Delay before moving to the next file
-        await delay(1000) // 1 second delay
       } catch (error) {
         console.error(
           `%cFailed to rename ${oldName} in regular directory. Error: ${error.message}`,
@@ -126,6 +145,7 @@ async function renameFiles() {
   }
 
   await fs.writeFile(path.join(outputDir, 'index.ts'), tsIndexContent)
+  await fs.writeFile(path.join(outputDir, 'pure.ts'), tsPureIndexContent)
   console.log('Generated index.ts file')
 
   // const mdxFile = path.resolve(
