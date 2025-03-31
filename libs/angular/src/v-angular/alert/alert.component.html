@@ -16,9 +16,12 @@
   <div>
     <h3 *ngIf="title">{{ title }}</h3>
     <p *ngIf="body">
-      {{ body }}&nbsp;<a *ngIf="linkText" (click)="onLink($event)">{{
-        linkText
-      }}</a>
+      {{ body }}&nbsp;<a
+        *ngIf="linkText"
+        [href]="linkHref"
+        (click)="onLink($event)"
+        >{{ linkText }}</a
+      >
     </p>
   </div>
   <button

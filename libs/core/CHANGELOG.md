@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.70.0
+
+### Minor Changes
+
+- 0e6d189: **React:** Green Core now exports automatically generated JSX wrappers for all components and icons.
+
+  For example:
+
+  ```ts
+  import { GdsButton } from '@sebgroup/green-core/react'
+  ```
+
+  Then, in JSX template:
+
+  ```tsx
+  <GdsButton rank="secondary" onClick={() => console.log('Hello')}>
+    Click me!
+  </GdsButton>
+  ```
+
+  These imports are tree-shakable and underlying web components will be defined automatically on first use.
+
+- 0e6d189: **Treeshaking:** Pure exports are now available through `@sebgroup/green-core/pure`. Any components imported from there needs to be defined by calling `ClassName.define()` on the component class
+
+### Patch Changes
+
+- 0e6d189: **SSR:** Fix some usage of `document` and `window` to make the library more SSR friendly
+- cd4667d: **Dropdown:** Label the chevron-down icon as 'Expand' for screen readers.
+
 ## 1.69.4
 
 ### Patch Changes
