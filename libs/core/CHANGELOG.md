@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.70.1
+
+### Patch Changes
+
+- 15f33c4: **React:** Use fully qualified paths in React exports (i.e, include `index.js`)
+
 ## 1.70.0
 
 ### Minor Changes
