@@ -58,7 +58,7 @@ for (const component of filteredComponents) {
       }),
     )
     .then((formattedSource) => {
-      index.push(`export * from './${subDir}${tagWithoutPrefix}';`)
+      index.push(`export * from './${subDir}${tagWithoutPrefix}/index.js';`)
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 
