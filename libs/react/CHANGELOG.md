@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.26.0
+
+### Minor Changes
+
+- 0e6d189: Updates for React 19
+
+### Patch Changes
+
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
 ## 3.25.0
 
 ### Minor Changes
