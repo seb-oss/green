@@ -31,7 +31,9 @@ const rewriteImports: esbuild.Plugin = {
         .replace(/from\s+['"](\..*?)['"]/g, (match, importPath) => {
           if (
             path.extname(importPath) &&
-            path.extname(importPath) !== '.component'
+            !['.component', '.styles', '.style'].includes(
+              path.extname(importPath),
+            )
           )
             return match // Skip if it already has an extension
 
