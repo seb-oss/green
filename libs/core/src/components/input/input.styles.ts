@@ -14,6 +14,10 @@ export const styles = css`
       width: 100%;
       contain: layout;
       isolation: isolate;
+      gap: var(--gds-space-xs);
+    }
+
+    :host([size='small']) {
       gap: var(--gds-space-2xs);
     }
 
