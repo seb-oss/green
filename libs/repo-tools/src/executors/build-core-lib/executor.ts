@@ -127,7 +127,7 @@ const rewriteImports: esbuild.Plugin = {
     build.onEnd(async () => {
       for (const [importPath, { resolvedPath, outputPath }] of cssFiles) {
         const isScss = resolvedPath.endsWith('.scss')
-        let cssContent = isScss
+        const cssContent = isScss
           ? sass.compile(resolvedPath).css.toString()
           : fs.readFileSync(resolvedPath, 'utf8')
         const { css } = await postcss([
