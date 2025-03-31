@@ -140,12 +140,15 @@ export default function WcagList() {
   // wcagObjects is the state variable
   // setWcagObjects is a function
   // We can call the setWcagObjects function to set the new state
-  const [wcagObjects, setWcagObjects] = useState<WcagItem[]>()
+  const [wcagObjects, setWcagObjects] = useState<WcagItem[]>([])
+  const [filteredWcagList, setFilteredWcagList] = useState<WcagItem[]>([])
   //create a new state to new state in selectedCategories, string or tom array
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
   const [selectedLevels, setSelectedLevels] = useState<string[]>([])
   const [selectedRoles, setSelectedRoles] = useState<string[]>([])
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([])
+
+  console.log(filteredWcagList)
 
   useEffect(() => {
     async function fetchWcagObjects() {
@@ -155,6 +158,23 @@ export default function WcagList() {
     }
     fetchWcagObjects()
   }, [])
+
+  // Second useEffect filteredList
+
+  useEffect(() => {
+    const filteredList = wcagObjects
+      .filter(catergoryFilter(selectedCategories))
+      .filter(levelFilter(selectedLevels))
+      .filter(roleFilter(selectedRoles))
+    // .filter(statusFilter(selectedStatuses))
+    setFilteredWcagList(filteredList)
+  }, [
+    wcagObjects,
+    selectedCategories,
+    selectedLevels,
+    selectedRoles,
+    selectedStatuses,
+  ])
 
   // We sending (item: WcagItem) like a param into the function CategoryFilter
 
@@ -313,10 +333,13 @@ export default function WcagList() {
         )}
       </GdsFlex>
       <GdsFlex>
+        <p>
+          Visar {filteredWcagList.length} av {wcagObjects.length}{' '}
+        </p>
         <GdsButton onClick={resetFilters}>Återställ filter</GdsButton>
       </GdsFlex>
       <GdsFlex role="list" flex-direction="column" gap="m">
-        {wcagObjects
+        {filteredWcagList
           .filter(catergoryFilter(selectedCategories))
           .filter(levelFilter(selectedLevels))
           .filter(roleFilter(selectedRoles))
