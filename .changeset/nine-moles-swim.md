@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-**Text:** Change default display to inline-block and improve examples for white space
+**Text:** Add examples for white space
