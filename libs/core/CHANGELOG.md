@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.71.1
+
+### Patch Changes
+
+- 49d0984: **Bundling:** Also include style modules in path extension rewrites
+
+## 1.71.0
+
+### Minor Changes
+
+- faa898c: **Div:** Add white-space prop
+
+### Patch Changes
+
+- 9a1c8be: **Bundling:** Modified build script to add `.js` extensions to all internal imports
+- faa898c: **Text:** Add examples for white space
+- faa898c: **Link:** Change default white space to normal
+
 ## 1.70.1
 
 ### Patch Changes

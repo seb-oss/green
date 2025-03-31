@@ -382,3 +382,75 @@ export const OverflowWrap: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ *
+ * Check the documentation on `white-space` property [here](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
+ *
+ * The `white-space` supports all valid CSS `white-space` values such as `wrap` `collapse` or combined `preserve nowrap` etc.
+ *
+ * e.g.
+ *
+ * ```html
+ * <gds-text white-space="pre-wrap">
+ *    ...
+ * </gds-text>
+ * ```
+ */
+export const WhiteSpace: Story = {
+  name: 'white-space',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="m">
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">normal</gds-text>
+        <gds-text white-space="normal" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">pre</gds-text>
+        <gds-text white-space="pre" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">pre-wrap</gds-text>
+        <gds-text white-space="pre" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-divider></gds-divider>
+      <gds-text>Shorthand</gds-text>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">wrap</gds-text>
+        <gds-text white-space="wrap" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">collapse</gds-text>
+        <gds-text white-space="collapse" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">preserve nowrap</gds-text>
+        <gds-text white-space="preserve nowrap" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
