@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.71.1
+
+### Patch Changes
+
+- 49d0984: **Bundling:** Also include style modules in path extension rewrites
+
 ## 1.71.0
 
 ### Minor Changes
