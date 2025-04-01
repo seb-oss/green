@@ -50,7 +50,8 @@ for (const component of filteredComponents) {
         export const ${component.name} = (props: React.ComponentProps<ReturnType<typeof getReactComponent<${component.name}Class>>>) => {
           ${component.name}Class.define();
           const JSXElement = getReactComponent<${component.name}Class>('${component.tagName}');
-          return createElement(JSXElement, {...props, class: props.className});
+          const propsWithClass = {...props, class: props.className}
+          return createElement(JSXElement, propsWithClass);
         };
       `,
       Object.assign(prettierConfig, {
