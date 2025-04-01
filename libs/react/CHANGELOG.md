@@ -1,5 +1,20 @@
 # Changelog
 
+## 3.27.0
+
+### Minor Changes
+
+- fe75e49: **TextInput:** aria-live prop for form control footer
+  **TextArea:** aria-live prop for form control footer
+  **RadioGroup:** aria-live prop for form control footer
+  **Select:** aria-live prop for form control footer
+
+### Patch Changes
+
+- fe75e49: **React:** Fixing expandable info & error message for screen readers #2094
+- Updated dependencies [bf967f5]
+  - @sebgroup/green-core@1.71.2
+
 ## 3.26.0
 
 ### Minor Changes
