@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.71.2
+
+### Patch Changes
+
+- bf967f5: **React:** Fix issue with 'className' prop when using older versions of React (<19)
+
 ## 1.71.1
 
 ### Patch Changes
