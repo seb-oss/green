@@ -13,6 +13,11 @@ import { RadioButtonProps } from './radioButton'
 export interface RadioGroupProps
   extends IExpandableInformation,
     ILabelAndLabelInformation {
+  /**
+   * Set the live region attribute of the form control footer, this will change how error messages are read by screen readers
+   * @default 'assertive'
+   */
+  'aria-live'?: React.AriaAttributes['aria-live']
   label?: string
   title?: string
   valueSelected?: string
@@ -26,6 +31,7 @@ export interface RadioGroupProps
 }
 
 export const RadioGroup = ({
+  'aria-live': ariaLive,
   defaultSelected,
   valueSelected,
   label,
@@ -91,6 +97,7 @@ export const RadioGroup = ({
     expandableInfo,
     expandableInfoButtonLabel,
     role: 'radiogroup',
+    'aria-live': ariaLive,
   }
 
   const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
