@@ -1,5 +1,64 @@
 # Changelog
 
+## 1.71.1
+
+### Patch Changes
+
+- 49d0984: **Bundling:** Also include style modules in path extension rewrites
+
+## 1.71.0
+
+### Minor Changes
+
+- faa898c: **Div:** Add white-space prop
+
+### Patch Changes
+
+- 9a1c8be: **Bundling:** Modified build script to add `.js` extensions to all internal imports
+- faa898c: **Text:** Add examples for white space
+- faa898c: **Link:** Change default white space to normal
+
+## 1.70.1
+
+### Patch Changes
+
+- 15f33c4: **React:** Use fully qualified paths in React exports (i.e, include `index.js`)
+
+## 1.70.0
+
+### Minor Changes
+
+- 0e6d189: **React:** Green Core now exports automatically generated JSX wrappers for all components and icons.
+
+  For example:
+
+  ```ts
+  import { GdsButton } from '@sebgroup/green-core/react'
+  ```
+
+  Then, in JSX template:
+
+  ```tsx
+  <GdsButton rank="secondary" onClick={() => console.log('Hello')}>
+    Click me!
+  </GdsButton>
+  ```
+
+  These imports are tree-shakable and underlying web components will be defined automatically on first use.
+
+- 0e6d189: **Treeshaking:** Pure exports are now available through `@sebgroup/green-core/pure`. Any components imported from there needs to be defined by calling `ClassName.define()` on the component class
+
+### Patch Changes
+
+- 0e6d189: **SSR:** Fix some usage of `document` and `window` to make the library more SSR friendly
+- cd4667d: **Dropdown:** Label the chevron-down icon as 'Expand' for screen readers.
+
+## 1.69.4
+
+### Patch Changes
+
+- b46f13f: **Radio:** Remove transitional styles
+
 ## 1.69.3
 
 ### Patch Changes

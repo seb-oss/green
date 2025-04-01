@@ -1,5 +1,30 @@
 # Changelog
 
+## 3.26.0
+
+### Minor Changes
+
+- 0e6d189: Updates for React 19
+
+### Patch Changes
+
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
+## 3.25.0
+
+### Minor Changes
+
+- f333bbb: **FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
+
+### Patch Changes
+
+- Updated dependencies [b46f13f]
+  - @sebgroup/green-core@1.69.4
+
 ## 3.24.2
 
 ### Patch Changes

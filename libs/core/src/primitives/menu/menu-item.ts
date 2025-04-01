@@ -1,42 +1,5 @@
-import { GdsElement } from '../../gds-element'
-import { gdsCustomElement, html } from '../../scoping'
-import { TransitionalStyles } from '../../transitional-styles'
-import { Focusable } from '../../utils/mixins/focusable'
-import styles from '../listbox/option.styles'
+import { GdsMenuItem } from './menu-item.component'
 
-/**
- * @element gds-menu-item
- */
-@gdsCustomElement('gds-menu-item')
-export class GdsMenuItem extends Focusable(GdsElement) {
-  static styles = [styles]
+GdsMenuItem.define()
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    this.setAttribute('role', 'menuitem')
-
-    this.addEventListener('keydown', (e) => {
-      if (e.key !== 'Enter' && e.key !== ' ') return
-      e.preventDefault()
-      this.click()
-    })
-
-    this.addEventListener('click', this.#handleOnClick)
-
-    // This component should have the same style as option, so we just apply `gds-option` here.
-    TransitionalStyles.instance.apply(this, 'gds-option')
-  }
-
-  #handleOnClick = () => {
-    this.dispatchEvent(
-      new CustomEvent('gds-menu-item-click', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
-  }
-
-  render() {
-    return html`<div><slot></slot></div>`
-  }
-}
+export { GdsMenuItem }

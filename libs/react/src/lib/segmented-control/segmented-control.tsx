@@ -2,11 +2,12 @@ import React, { ReactNode } from 'react'
 import { createComponent } from '@lit/react'
 import classNames from 'classnames'
 
-import { GdsSegmentedControl as CoreSegmentedControl } from '@sebgroup/green-core/components/segmented-control/index.js'
-import { GdsSegment as CoreSegment } from '@sebgroup/green-core/components/segmented-control/segment/index.js'
+import { GdsSegment as CoreSegment } from '@sebgroup/green-core/components/segmented-control/segment/segment.component'
+import { GdsSegmentedControl as CoreSegmentedControl } from '@sebgroup/green-core/components/segmented-control/segmented-control.component'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
+CoreSegmentedControl.define()
 registerTransitionalStyles()
 
 export const GdsSegementedControl = createComponent({

@@ -35,6 +35,12 @@
 
   .message-type-icon-wrapper {
     padding: 1rem;
+
+    i {
+      display: block;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
   }
 
   .close-icon-button {
@@ -52,6 +58,7 @@
     color: inherit;
     padding: 0;
     cursor: pointer;
+    min-height: 32px;
 
     &:hover {
       color: #333;

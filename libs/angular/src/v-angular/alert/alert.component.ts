@@ -12,6 +12,7 @@ export class AlertComponent {
   @Input() title?: string
   @Input() body?: string
   @Input() linkText?: string
+  @Input() linkHref?: string
   @Input() actionText?: string
   @Input() closable = false
 

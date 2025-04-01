@@ -6,11 +6,12 @@ import React, {
 } from 'react'
 import { createComponent } from '@lit/react'
 
-import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
+import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/datepicker.component'
 import { GdsValidator } from '@sebgroup/green-core/components/form/form-control'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
+GdsDatepicker.define()
 registerTransitionalStyles()
 
 export const CoreDatepicker = createComponent({

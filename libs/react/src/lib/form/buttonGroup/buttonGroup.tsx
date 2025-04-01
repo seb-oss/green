@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react'
+import { JSX, ReactElement, useEffect, useState } from 'react'
 import classNames from 'classnames'
 
 import { ButtonVariant } from '@sebgroup/extract'
@@ -28,9 +28,9 @@ export const ButtonGroup = ({
     const buttonProps: Props[] = (
       children instanceof Array ? children : [children]
     )
-      .filter((b) => b && (b as ReactElement).props)
+      .filter((b) => b && b.props)
       .map((b, ix) => {
-        const bp = (b as ReactElement).props
+        const bp = b.props
         const props: Props = {
           ...bp,
           variant,
