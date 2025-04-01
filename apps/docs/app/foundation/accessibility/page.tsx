@@ -50,6 +50,11 @@ const HEADINGS = [
     text: 'Dark mode',
     level: 3,
   },
+  {
+    slug: 'summary',
+    text: 'Summary',
+    level: 2,
+  },
 ]
 
 export default function Accessibility() {
@@ -59,12 +64,48 @@ export default function Accessibility() {
         <GdsFlex flex-direction="column" gap="2xl; m{4xl}" max-width="80ch">
           <Hero
             heading="Accessibility"
-            preamble="How is accessible is the Green Design System?"
+            preamble="Accessibility in the Green Design"
             compact
           />
           <GdsRichText font-size="body-l" color="secondary">
-            <h2 id="parts">What we check</h2>
+            <h2 id="parts">Why we check</h2>
+            <ul>
+              <li>
+                Legal Compliance: The European Accessibility Act requires it by
+                June 2025.
+              </li>
+              <li>
+                Inclusivity: It ensures everyone, including people with
+                disabilities, can use websites.
+              </li>
+              <li>
+                Better User Experience: Accessible sites are easier to navigate
+                for all users.
+              </li>
+              <li>
+                Wider Audience: It helps reach the 80 million people with
+                disabilities in Europe.
+              </li>
+              <li>
+                Ethical Responsibility: It reflects a commitment to fairness and
+                equality.
+              </li>
+            </ul>
+            <p>
+              At the end of June 2025, the new &nbsp;
+              <a href="https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en">
+                European Accessibility Act (EAA)
+              </a>
+              &nbsp; will come into effect. Our bank must comply with this
+              legislation. Approximately 20% of people have permanent,
+              temporary, or situational disabilities that make it difficult to
+              use non-accessible websites. By addressing these accessibility
+              issues, we can attract more customers and increase revenue. More
+              importantly, we will enhance overall customer satisfaction. Good
+              accessibility typically improves the user experience for everyone.
+            </p>
 
+            <h2 id="parts">What we check</h2>
             <p>
               Every component in Green Design System have accessibility in mind.
               Here you can read about the different parts that we check on each
@@ -79,33 +120,31 @@ export default function Accessibility() {
               <li>Screen reader</li>
               <li>Darkmode</li>
             </ul>
-          </GdsRichText>
-          <GdsRichText>
             <h2 id="contrast">Contrast</h2>
             <h3>Why is high contrast needed?</h3>
 
             <p>
-              Higher contrast ratios cater to users with visual impairments that
-              make it difficult to read text with lower contrast. By adhering to
-              this standard, content creators can make their text accessible to
-              a broader audience, including those with more significant vision
-              challenges.
+              High contrast ratios assist users with visual impairments by
+              making it easier to read text and identify components or areas on
+              a page. By adhering to this standard, content creators can make
+              their text accessible to a broader audience, including those with
+              significant vision challenges.
             </p>
 
-            <h3>What we check?</h3>
+            <h3>What do we check with contrast and colors?</h3>
 
             <p>
-              This includes good contrast and well done colours. The components
-              should have strong enough contrast between each of its parts. The
-              colours should not be hard to see for those that are colourblind.
-              It can sometimes be good to have icons or patterns to distinguish
-              some areas better.
+              We ensure good contrast and well-chosen colors. Components should
+              have strong enough contrast between their parts. Colors should be
+              easily distinguishable, even for those who are colorblind.
+              Sometimes, using icons or patterns can help distinguish areas
+              better.
             </p>
 
             <h3>Here are a few good links to tools that can help:</h3>
             <ul>
               <li>
-                It should follow&nbsp;
+                Follow&nbsp;
                 <a href="https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html">
                   WCAG 2.1 SC.1.4.3
                 </a>
@@ -132,6 +171,13 @@ export default function Accessibility() {
                 </a>
               </li>
             </ul>
+
+            <h3>Future High Contrast Mode:</h3>
+            <p>
+              In addition to the dark mode feature detailed below, we are
+              planning to introduce a high contrast mode in the future. This
+              setting is becoming increasingly common on other websites.
+            </p>
 
             <h2 id="keyboard-navigation">Keyboard navigation</h2>
             <p>
@@ -221,6 +267,15 @@ export default function Accessibility() {
               <li>What changes? Maybe nothing?</li>
               <li>Something broken?</li>
             </ul>
+
+            <h2 id="summary">Summary</h2>
+            <h3 id="status">How is accessible is the Green Design System?</h3>
+            <p>
+              Overall, the design system is accessible. However, we occasionally
+              encounter issues, and new ones are reported from time to time. If
+              you find any accessibility problems, please help us by submitting
+              a new issue.
+            </p>
           </GdsRichText>
         </GdsFlex>
         <GdsFlex display="none; m{flex}" min-width="240px">
