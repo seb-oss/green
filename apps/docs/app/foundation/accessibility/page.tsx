@@ -69,6 +69,19 @@ export default function Accessibility() {
           />
           <GdsRichText font-size="body-l" color="secondary">
             <h2 id="parts">Why we check</h2>
+            <p>
+              At the end of June 2025, the new &nbsp;
+              <a href="https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en">
+                European Accessibility Act (EAA)
+              </a>
+              &nbsp; will come into effect. Our bank must comply with this
+              legislation. Approximately 20% of people have permanent,
+              temporary, or situational disabilities that make it difficult to
+              use non-accessible websites. By addressing these accessibility
+              issues, we can attract more customers and increase revenue. More
+              importantly, we will enhance overall customer satisfaction. Good
+              accessibility typically improves the user experience for everyone.
+            </p>
             <ul>
               <li>
                 Legal Compliance: The European Accessibility Act requires it by
@@ -91,19 +104,6 @@ export default function Accessibility() {
                 equality.
               </li>
             </ul>
-            <p>
-              At the end of June 2025, the new &nbsp;
-              <a href="https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/union-equality-strategy-rights-persons-disabilities-2021-2030/european-accessibility-act_en">
-                European Accessibility Act (EAA)
-              </a>
-              &nbsp; will come into effect. Our bank must comply with this
-              legislation. Approximately 20% of people have permanent,
-              temporary, or situational disabilities that make it difficult to
-              use non-accessible websites. By addressing these accessibility
-              issues, we can attract more customers and increase revenue. More
-              importantly, we will enhance overall customer satisfaction. Good
-              accessibility typically improves the user experience for everyone.
-            </p>
 
             <h2 id="parts">What we check</h2>
             <p>
