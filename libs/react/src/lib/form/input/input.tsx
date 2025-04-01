@@ -41,14 +41,22 @@ export interface InputProps
   value?: string | number
   /** Function called when input value changes */
   onChangeInput?: (value: string) => string
-  /** Pass an string that is an id to another element describing the input-field*/
+  /**
+   * Pass an string that is an id to another element describing the input field
+   */
   'aria-describedby'?: string
+  /**
+   * Set the live region attribute of the form control footer, this will change how error messages are read by screen readers
+   * @default 'assertive'
+   */
+  'aria-live'?: React.AriaAttributes['aria-live']
 }
 
 export const Input = forwardRef(
   (
     {
       'aria-describedby': ariaDescribedBy,
+      'aria-live': ariaLive = 'assertive',
       autoComplete = 'off',
       children,
       className,
@@ -104,7 +112,7 @@ export const Input = forwardRef(
     const showSimpleInput = !label && !info && !expandableInfo
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_group-message`]:
+      [`${uuid}_message`]:
         !showSimpleInput &&
         validator?.message !== undefined &&
         validator.message.length > 0,
@@ -147,6 +155,7 @@ export const Input = forwardRef(
         labelInformation={info}
         role={role}
         validator={validator}
+        aria-live={ariaLive}
       >
         <div className="gds-input-wrapper">
           <Group groupBorder groupFocus id={`${uuid}_group`}>
