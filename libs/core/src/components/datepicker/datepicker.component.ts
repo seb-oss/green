@@ -411,43 +411,48 @@ class Datepicker extends GdsFormControlElement<Date> {
             .disabledDates=${this.disabledDates}
           ></gds-calendar>
 
-          <gds-flex
-            align-items="center"
-            justify-content="space-between"
-            padding="0 m m m"
-          >
-            ${when(
-              !this.hideClear,
-              () =>
-                html` <gds-button
-                  rank="tertiary"
-                  size="small"
-                  @click=${(e: MouseEvent) => {
-                    e.stopPropagation()
-                    this.value = undefined
-                    this.open = false
-                    this.#dispatchChangeEvent()
-                  }}
-                >
-                  ${msg('Clear')}
-                </gds-button>`,
-            )}
-            ${until(this.#renderBackToValidRangeButton(), nothing)}
-            ${when(
-              !this.hideToday,
-              () =>
-                html` <gds-button
-                  rank="tertiary"
-                  size="small"
-                  @click=${(e: MouseEvent) => {
-                    e.stopPropagation()
-                    this.#focusDate(new Date())
-                  }}
-                >
-                  ${msg('Today')}
-                </gds-button>`,
-            )}
-          </gds-flex>
+          ${when(
+            !(this.hideClear && this.hideToday),
+            () => html`
+              <gds-flex
+                align-items="center"
+                justify-content="space-between"
+                padding="0 m m m"
+              >
+                ${when(
+                  !this.hideClear,
+                  () =>
+                    html` <gds-button
+                      rank="tertiary"
+                      size="small"
+                      @click=${(e: MouseEvent) => {
+                        e.stopPropagation()
+                        this.value = undefined
+                        this.open = false
+                        this.#dispatchChangeEvent()
+                      }}
+                    >
+                      ${msg('Clear')}
+                    </gds-button>`,
+                )}
+                ${until(this.#renderBackToValidRangeButton(), nothing)}
+                ${when(
+                  !this.hideToday,
+                  () =>
+                    html` <gds-button
+                      rank="tertiary"
+                      size="small"
+                      @click=${(e: MouseEvent) => {
+                        e.stopPropagation()
+                        this.#focusDate(new Date())
+                      }}
+                    >
+                      ${msg('Today')}
+                    </gds-button>`,
+                )}
+              </gds-flex>
+            `,
+          )}
         </gds-div>
       </gds-popover>
     `
