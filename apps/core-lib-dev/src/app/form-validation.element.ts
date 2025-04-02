@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
 import { customElement, state } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/card/index.js'
 //import '@sebgroup/green-core/components/input/index.js'
