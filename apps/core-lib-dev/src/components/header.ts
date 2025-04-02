@@ -22,6 +22,14 @@ export class GdsHeader extends LitElement {
     )
   }
 
+  #menuItems = [
+    { text: 'Login', value: 'login' },
+    { text: 'Validation', value: 'form-validation' },
+    { text: 'Datepicker', value: 'datepicker' },
+    { text: 'Calendar', value: 'calendar' },
+    { text: 'Plain Form Controls', value: 'plain-form-controls' },
+  ]
+
   render() {
     return html`
       <gds-flex
@@ -38,40 +46,23 @@ export class GdsHeader extends LitElement {
               Menu
               <gds-icon-bars-three></gds-icon-bars-three>
             </gds-flex>
-            <gds-menu-item @click=${() => this.handleButtonClick('login')}>
-              Login
-            </gds-menu-item>
-            <gds-menu-item
-              @click=${() => this.handleButtonClick('form-validation')}
-            >
-              Validation
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('datepicker')}>
-              Datepicker
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('calendar')}>
-              Calendar
-            </gds-menu-item>
+            ${this.#menuItems.map(
+              (item) =>
+                html`<gds-menu-item
+                  @click=${() => this.handleButtonClick(item.value)}
+                  >${item.text}</gds-menu-item
+                >`,
+            )}
           </gds-context-menu>
         </gds-div>
         <gds-div display="xs{none} s{none} m{none} l{flex}">
-          <gds-menu-button @click=${() => this.handleButtonClick('login')}>
-            Login
-          </gds-menu-button>
-          <gds-menu-button
-            @click=${() => this.handleButtonClick('form-validation')}
-          >
-            Validation
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('datepicker')}>
-            Datepicker
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
-            Calendar
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('spinner')}>
-            Spinner
-          </gds-menu-button>
+          ${this.#menuItems.map(
+            (item) =>
+              html`<gds-menu-button
+                @click=${() => this.handleButtonClick(item.value)}
+                >${item.text}</gds-menu-button
+              >`,
+          )}
         </gds-div>
         <gds-flex
           position="2xs{relative} l{absolute}"
