@@ -18,7 +18,9 @@ $size: 220px;
     &-progress {
       @include mixins.use-circle($size);
       @include mixins.use-animation();
-      clip: rect(0px, functions.get-radius($size), $size, 0px);
+      & {
+        clip: rect(0px, functions.get-radius($size), $size, 0px);
+      }
     }
 
     @each $variant, $colors in mixins.$variants {

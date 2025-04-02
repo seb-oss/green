@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:color';
+@use 'sass:list';
 @use '../common/functions';
 
 /**
@@ -21,9 +22,11 @@
     /* try and adjust colors to get desired color combination,
     in this case adjust background to go with white foreground */
     $colors: functions.desired-color-combination($desired-color, $color);
-    --intent-#{$key}-background: #{nth($colors, 1)};
-    --intent-#{$key}-color: #{nth($colors, 2)};
-    --intent-#{$key}-fadable-color: #{functions.stripped-rgb(nth($colors, 2))};
+    --intent-#{$key}-background: #{list.nth($colors, 1)};
+    --intent-#{$key}-color: #{list.nth($colors, 2)};
+    --intent-#{$key}-fadable-color: #{functions.stripped-rgb(
+        list.nth($colors, 2)
+      )};
   }
 }
 

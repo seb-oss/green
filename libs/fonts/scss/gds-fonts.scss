@@ -1,6 +1,7 @@
-/*!
+/**
  *  SEB SansSerif GDS
  */
 
-@import 'variables';
-@import 'SEB-SansSerif-GDS';
+@use 'SEB-SansSerif-GDS' as font;
+
+@include font.add-fonts();

@@ -2,5 +2,6 @@
  *  @deprecated
  */
 
-@import 'variables';
-@import 'SEB-SansSerif';
+@use 'SEB-SansSerif' as fonts;
+
+@include fonts.add-fonts();

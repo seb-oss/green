@@ -1,4 +1,6 @@
 @use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
 @use '../../tokens';
 @use '../../common/breakpoints';
 
@@ -29,7 +31,7 @@
 @mixin make-col-ready($gutter: tokens.$grid-gutter-width) {
   // Add box sizing if only the grid is loaded
   box-sizing: if(
-    variable-exists(include-column-box-sizing) and
+    meta.variable-exists(include-column-box-sizing) and
       tokens.$include-column-box-sizing,
     border-box,
     null
@@ -57,7 +59,7 @@
 @mixin make-col($size: false, $columns: tokens.$grid-columns) {
   @if $size {
     flex: 0 0 auto;
-    width: percentage(math.div($size, $columns));
+    width: math.percentage(math.div($size, $columns));
   } @else {
     flex: 1 1 0;
     max-width: 100%;
@@ -79,7 +81,7 @@
  */
 @mixin make-col-offset($size, $columns: tokens.$grid-columns) {
   $num: math.div($size, $columns);
-  margin-left: if($num == 0, 0, percentage($num));
+  margin-left: if($num == 0, 0, math.percentage($num));
 }
 
 // Row columns
@@ -111,7 +113,7 @@
   $gutter: tokens.$grid-gutter-width,
   $breakpoints: tokens.$grid-breakpoints
 ) {
-  @each $breakpoint in map-keys($breakpoints) {
+  @each $breakpoint in map.keys($breakpoints) {
     // .gds-row-cols defaults must all appear before .gds-col overrides so they can be overridden.
     $infix: breakpoints.breakpoint-infix($breakpoint, $breakpoints);
     @include breakpoints.media-breakpoint-up($breakpoint, $breakpoints) {
@@ -187,7 +189,7 @@
   $columns: tokens.$grid-columns,
   $breakpoints: tokens.$grid-breakpoints
 ) {
-  @each $breakpoint in map-keys($breakpoints) {
+  @each $breakpoint in map.keys($breakpoints) {
     $infix: breakpoints.breakpoint-infix($breakpoint, $breakpoints);
 
     @include breakpoints.media-breakpoint-up($breakpoint, $breakpoints) {

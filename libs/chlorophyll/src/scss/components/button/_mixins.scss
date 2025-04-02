@@ -17,10 +17,12 @@
   @include common.add-border();
   @include common.font-weight('medium');
   @include common.add-focus();
-  min-height: 2.75rem;
-  align-items: center;
-  display: inline-flex;
-  justify-content: center;
+  & {
+    min-height: 2.75rem;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+  }
 
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
@@ -47,10 +49,12 @@
 @mixin secondary {
   @include common.add-focus();
   @include common.add-hover-active-state();
-  background: transparent;
-  border-color: var(--gds-sys-color-blue-dark-2);
-  color: var(--gds-sys-color-blue-dark-2);
-  --color: #{var(--gds-sys-color-blue-dark-2)};
+  & {
+    background: transparent;
+    border-color: var(--gds-sys-color-blue-dark-2);
+    color: var(--gds-sys-color-blue-dark-2);
+    --color: #{var(--gds-sys-color-blue-dark-2)};
+  }
 
   &:disabled,
   &.disabled,
@@ -62,10 +66,12 @@
 @mixin tertiary {
   @include common.add-focus();
   @include common.add-hover-active-state();
-  background: transparent;
-  border-color: transparent;
-  color: var(--gds-sys-color-blue-dark-2);
-  --color: #{var(--gds-sys-color-blue-dark-2)};
+  & {
+    background: transparent;
+    border-color: transparent;
+    color: var(--gds-sys-color-blue-dark-2);
+    --color: #{var(--gds-sys-color-blue-dark-2)};
+  }
 
   &:disabled,
   &.disabled,
@@ -76,10 +82,12 @@
 
 @mixin primary {
   @include common.add-hover-active-state();
-  background: var(--gds-sys-color-dark-blue-2);
-  border-color: var(--gds-sys-color-blue-dark-2);
-  color: var(--gds-sys-color-text-white);
-  --color: #{var(--gds-sys-color-text-white)};
+  & {
+    background: var(--gds-sys-color-dark-blue-2);
+    border-color: var(--gds-sys-color-blue-dark-2);
+    color: var(--gds-sys-color-text-white);
+    --color: #{var(--gds-sys-color-text-white)};
+  }
 
   &:disabled,
   &.disabled,
@@ -117,10 +125,12 @@
     var(--gds-sys-color-text-primary)
   );
 
-  background-color: transparent;
-  border-color: var(--gds-sys-color-white);
-  color: var(--gds-sys-color-white);
-  --color: var(--gds-sys-color-white);
+  & {
+    background-color: transparent;
+    border-color: var(--gds-sys-color-white);
+    color: var(--gds-sys-color-white);
+    --color: var(--gds-sys-color-white);
+  }
 
   &:disabled,
   &.disabled,

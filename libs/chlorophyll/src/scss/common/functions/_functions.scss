@@ -151,25 +151,25 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
  * @return {Number} - Validated font size in pixels
  */
 @function validate-font-size($size) {
-  @if unit($size) ==
+  @if math.unit($size) ==
     'em' or
-    unit($size) ==
+    math.unit($size) ==
     'rem' or
-    unit($size) ==
+    math.unit($size) ==
     'px' or
-    unit($size) ==
+    math.unit($size) ==
     ''
   {
     // Check if a flexible unit
-    @if unit($size) == 'em' or unit($size) == 'rem' {
+    @if math.unit($size) == 'em' or math.unit($size) == 'rem' {
       // Need to convert to a pixel value. Let's not overcomplicate it with possible EM inheritence scale factors
       @return strip-unit($size * 16);
     }
-    @if unit($size) == 'px' {
+    @if math.unit($size) == 'px' {
       // We expect PX, so strip the value and return it
       @return strip-unit($size);
     }
-    @if unit($size) == '' {
+    @if math.unit($size) == '' {
       @return $size;
     }
   } @else {
@@ -389,7 +389,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     // This might loop 100 times or more depending on the colors
     $offset: 0;
     @while color-contrast($fg, $bg) < $ratio and $offset < $maxOffset {
-      $fg: scale-color($fg, $lightness: $step, $saturation: math.div($step, 4));
+      $fg: color.scale($fg, $lightness: $step, $saturation: math.div($step, 4));
       $offset: $offset + math.abs($step);
       //@debug 'step' $step $original-contrast $fg color-contrast($fg, $bg) $offset;
     }

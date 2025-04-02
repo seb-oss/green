@@ -16,7 +16,6 @@ $_chart-bubble-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/200
 $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='247'%3E%3Cpath fill='%23FFF' fill-rule='evenodd' d='m229.999 82-90 79.999-69.999-40-70 80 73.999-118 72 29L219.999 0l30 13.589.901 85.187L229.999 82Zm-90 84.999 90-80 20 16.209v143.791H0v-40l70-80 69.999 40Z'/%3E%3C/svg%3E");
 
 @mixin add-skeleton-loader() {
-  font-size: 0;
   @keyframes skeleton-loader {
     0% {
       background-position: 0 0;
@@ -26,18 +25,21 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  height: 332px;
-  mask-image: $_base-mask;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  mask-repeat: no-repeat;
-  animation: skeleton-loader 3000ms linear infinite;
+  & {
+    font-size: 0;
+    height: 332px;
+    mask-image: $_base-mask;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    mask-repeat: no-repeat;
+    animation: skeleton-loader 3000ms linear infinite;
+  }
 }
 
 @mixin add-skeleton-loader-no-stretch() {
@@ -45,8 +47,6 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
 }
 
 @mixin add-skeleton-loader-fill() {
-  height: 100%;
-  width: 100%;
   @keyframes skeleton-loader {
     0% {
       background-position: 0 0;
@@ -56,17 +56,21 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  mask-image: $_dot-mask;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  mask-repeat: repeat;
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
+  & {
+    height: 100%;
+    width: 100%;
+    mask-image: $_dot-mask;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    mask-repeat: repeat;
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+  }
 }
 
 @mixin add-skeleton-loader-table() {
@@ -79,18 +83,20 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  height: 158px;
-  mask-image: $_table-mask;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  mask-repeat: repeat;
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
+  & {
+    height: 158px;
+    mask-image: $_table-mask;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    mask-repeat: repeat;
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+  }
 }
 @mixin add-skeleton-chart-donut() {
   @keyframes skeleton-loader {
@@ -102,20 +108,22 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  max-height: 260px;
-  mask-image: $_chart-donut-mask;
-  mask-repeat: no-repeat;
-  mask-position: center bottom;
-  mask-size: contain;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
+  & {
+    max-height: 260px;
+    mask-image: $_chart-donut-mask;
+    mask-repeat: no-repeat;
+    mask-position: center bottom;
+    mask-size: contain;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+  }
 }
 @mixin add-skeleton-chart-bar() {
   @keyframes skeleton-loader {
@@ -127,21 +135,23 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  max-height: 260px;
-  mask-image: $_chart-bar-mask;
-  mask-repeat: no-repeat;
-  mask-position: center bottom;
-  mask-size: 100% 100%;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
-  width: stretch;
+  & {
+    max-height: 260px;
+    mask-image: $_chart-bar-mask;
+    mask-repeat: no-repeat;
+    mask-position: center bottom;
+    mask-size: 100% 100%;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+    width: stretch;
+  }
 }
 @mixin add-skeleton-chart-area() {
   @keyframes skeleton-loader {
@@ -153,21 +163,23 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  max-height: 260px;
-  mask-image: $_chart-area-mask;
-  mask-repeat: no-repeat;
-  mask-position: center bottom;
-  mask-size: 100% 100%;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
-  width: stretch;
+  & {
+    max-height: 260px;
+    mask-image: $_chart-area-mask;
+    mask-repeat: no-repeat;
+    mask-position: center bottom;
+    mask-size: 100% 100%;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+    width: stretch;
+  }
 }
 @mixin add-skeleton-chart-bubble() {
   @keyframes skeleton-loader {
@@ -179,20 +191,22 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  max-height: 260px;
-  mask-image: $_chart-bubble-mask;
-  mask-repeat: repeat-x;
-  mask-position: center bottom;
-  mask-size: contain;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
+  & {
+    max-height: 260px;
+    mask-image: $_chart-bubble-mask;
+    mask-repeat: repeat-x;
+    mask-position: center bottom;
+    mask-size: contain;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+  }
 }
 @mixin add-skeleton-chart-bar-horizontal() {
   @keyframes skeleton-loader {
@@ -204,18 +218,20 @@ $_chart-area-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/
       background-position: 200vw 0;
     }
   }
-  max-height: 260px;
-  mask-image: $_chart-bar-horizontal-mask;
-  mask-repeat: repeat;
-  mask-position: center bottom;
-  mask-size: contain;
-  background: linear-gradient(
-    280deg,
-    $background-color 12.5%,
-    $highlight-color 17.5%,
-    $background-color 37.5%
-  );
-  background-size: 200vw 100vw;
-  background-position: 0 0;
-  animation: skeleton-loader 3000ms linear infinite;
+  & {
+    max-height: 260px;
+    mask-image: $_chart-bar-horizontal-mask;
+    mask-repeat: repeat;
+    mask-position: center bottom;
+    mask-size: contain;
+    background: linear-gradient(
+      280deg,
+      $background-color 12.5%,
+      $highlight-color 17.5%,
+      $background-color 37.5%
+    );
+    background-size: 200vw 100vw;
+    background-position: 0 0;
+    animation: skeleton-loader 3000ms linear infinite;
+  }
 }

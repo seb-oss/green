@@ -15,7 +15,6 @@
 
 @if tokens.$enable-cssgrid {
   .gds-grid {
-    @include mixins.make-cssgrid();
     display: grid;
     gap: var(--#{tokens.$variable-prefix}gap, #{tokens.$grid-gutter-width});
     grid-template-columns: repeat(
@@ -23,6 +22,7 @@
       1fr
     );
     grid-template-rows: repeat(var(--#{tokens.$variable-prefix}rows, 1), 1fr);
+    @include mixins.make-cssgrid();
   }
 }
 
