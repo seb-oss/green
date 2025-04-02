@@ -164,3 +164,17 @@ export const DisabledField: Story = {
     ></gds-datepicker>
   `,
 }
+
+/**
+ * The close and the clear button can be hidden by using the `hide-clear` and `hide-today` attribute.
+ */
+export const Simplified: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker
+      label="A simplified datepicker"
+      hide-clear
+      hide-today
+    ></gds-datepicker>
+  `,
+}
