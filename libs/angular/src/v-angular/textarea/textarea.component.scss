@@ -1,7 +1,5 @@
-@use '../../../../chlorophyll/src/scss/components/form/common/mixins' as
-  form-group;
-@use '../../../../chlorophyll/src/scss/components/form/textarea/mixins' as
-  mixins;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-group;
+@use '../../../../chlorophyll/src/scss/components/textarea/mixins' as mixins;
 
 :host {
   --sg-text-primary: #333;
