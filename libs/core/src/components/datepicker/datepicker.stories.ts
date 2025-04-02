@@ -166,7 +166,7 @@ export const DisabledField: Story = {
 }
 
 /**
- * The close and the clear button can be hidden by using the `hide-clear` and `hide-today` attribute.
+ * The clear and today button can be hidden by using the `hide-clear` and `hide-today` attribute.
  */
 export const Simplified: Story = {
   ...DefaultParams,
