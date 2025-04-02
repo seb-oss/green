@@ -575,6 +575,37 @@ describe('<gds-datepicker>', () => {
       await expect(monthDropdown.value).to.equal('0')
       await expect(yearDropdown.value).to.equal('2014')
     })
+
+    it('should not show the clear or today button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker hideClear hideToday open></gds-datepicker>`,
+      )
+      const clearButton =
+        el.shadowRoot!.querySelector<HTMLButtonElement>('button')
+      const todayButton =
+        el.shadowRoot!.querySelector<HTMLButtonElement>('button')
+
+      expect(clearButton?.textContent?.trim()).to.not.equal('Clear')
+      expect(todayButton?.textContent?.trim()).to.not.equal('Today')
+    })
+
+    it('should show the clear and today button with correct text', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker open></gds-datepicker>`,
+      )
+      const buttons = Array.from(
+        el.shadowRoot!.querySelectorAll<HTMLButtonElement>('button'),
+      )
+      const clearButton = buttons.find(
+        (button) => button.textContent?.trim() === 'Clear',
+      )
+      const todayButton = buttons.find(
+        (button) => button.textContent?.trim() === 'Today',
+      )
+
+      expect(clearButton).to.exist
+      expect(todayButton).to.exist
+    })
   })
 
   describe('Accessibility', () => {
