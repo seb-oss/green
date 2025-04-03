@@ -168,13 +168,10 @@ export const DisabledField: Story = {
 /**
  * The selected date can be clearable by using the 'clearable` attribute (was default on before).
  */
-export const Simplified: Story = {
+export const Clearable: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-datepicker
-      label="A clearable datepicker"
-      clearable
-    ></gds-datepicker>
+    <gds-datepicker label="A clearable datepicker" clearable></gds-datepicker>
   `,
 }
 
