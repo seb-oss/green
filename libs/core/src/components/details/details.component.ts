@@ -21,7 +21,6 @@ export type DetailsSize = 'large' | 'small'
  * @status beta
  *
  * @slot - Default slot for details content
- 
  * @event gds-ui-state - Fired when details opens or closes
  *
  * @example
@@ -95,6 +94,13 @@ export class GdsDetails extends GdsElement {
     this.#dispatchStateEvent()
   }
 
+  #handleKeydown = (event: KeyboardEvent): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault()
+      this.#handleToggle()
+    }
+  }
+
   #syncGroupState = (): void => {
     if (!this.open || !this.name) return
 
@@ -128,8 +134,6 @@ export class GdsDetails extends GdsElement {
           open: this.open,
           small: this.size === 'small',
         })}
-        role="group"
-        aria-labelledby="summary-${this.name || 'default'}"
       >
         ${this.#renderHeader()} ${this.#renderContent()}
       </div>
@@ -138,15 +142,17 @@ export class GdsDetails extends GdsElement {
 
   #renderHeader = () => {
     return html`
-      <div class="summary" part="summary">
-        <div
-          id="summary-${this.name || 'default'}"
-          class="summary-label"
-          @click=${this.#handleToggle}
-          role="button"
-          aria-expanded="${this.open}"
-          aria-controls="content-${this.name || 'default'}"
-        >
+      <div
+        class="summary"
+        part="summary"
+        role="button"
+        tabindex="0"
+        @click=${this.#handleToggle}
+        @keydown=${this.#handleKeydown}
+        aria-expanded="${this.open}"
+        aria-controls="content-${this.name || 'default'}"
+      >
+        <div id="summary-${this.name || 'default'}" class="summary-label">
           ${this.summary || 'Summary'}
         </div>
         ${this.#renderIconButton()}
@@ -156,12 +162,12 @@ export class GdsDetails extends GdsElement {
 
   #renderIconButton = () => {
     return html`
-      <div class="summary-icon">
+      <div class="summary-icon" role="presentation" aria-hidden="true">
         <gds-button
           rank="tertiary"
           size=${this.size === 'small' ? 'xs' : 'medium'}
-          @click=${this.#handleToggle}
-          aria-label="${this.open ? 'Collapse' : 'Expand'}"
+          role="presentation"
+          tabindex="-1"
         >
           <gds-icon-details .open=${this.open}></gds-icon-details>
         </gds-button>
@@ -177,6 +183,7 @@ export class GdsDetails extends GdsElement {
         role="region"
         aria-labelledby="summary-${this.name || 'default'}"
         aria-hidden="${!this.open}"
+        tabindex="${this.open ? '0' : '-1'}"
       >
         <slot></slot>
       </div>

@@ -12,10 +12,6 @@ export const styles = css`
       transition: border-color 240ms linear;
     }
 
-    .details:hover {
-      border-color: var(--gds-color-l2-border-quaternary);
-    }
-
     .summary {
       display: flex;
       justify-content: space-between;
@@ -26,6 +22,7 @@ export const styles = css`
       outline-color: currentColor;
       transition: all 120ms;
       color: var(--gds-color-l2-content-primary);
+      outline-color: transparent;
     }
 
     .summary-icon {
@@ -39,7 +36,7 @@ export const styles = css`
     }
 
     @media (pointer: fine) {
-      .summary:hover .summary-icon {
+      .summary:is(:hover, :focus-within) .summary-icon {
         background-color: color-mix(
           in srgb,
           transparent,
@@ -54,6 +51,11 @@ export const styles = css`
           var(--gds-color-l3-states-light-pressed)
         );
       }
+
+      .details:hover,
+      .details:focus-within {
+        border-color: var(--gds-color-l2-border-quaternary);
+      }
     }
 
     .summary-label {
@@ -63,6 +65,7 @@ export const styles = css`
       padding-block: var(--gds-space-m);
       cursor: pointer;
       flex: 1;
+      outline: none;
     }
 
     .details.small .summary-label {
@@ -93,12 +96,7 @@ export const styles = css`
       max-height: var(--_max-height, 0);
       overflow: hidden;
       transition: all 240ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    [aria-hidden='true'] {
-      visibility: hidden;
-      opacity: 0;
-      translate: 0 -4px;
+      outline: none;
     }
   }
 `
