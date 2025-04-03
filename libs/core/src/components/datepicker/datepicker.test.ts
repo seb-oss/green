@@ -576,22 +576,25 @@ describe('<gds-datepicker>', () => {
       await expect(yearDropdown.value).to.equal('2014')
     })
 
-    it('should not show the clear or today button', async () => {
+    it('should not show the today button', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker hideClear hideToday open></gds-datepicker>`,
+        html`<gds-datepicker hideTodayButton open></gds-datepicker>`,
       )
-      const clearButton =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('button')
-      const todayButton =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('button')
 
-      expect(clearButton?.textContent?.trim()).to.not.equal('Clear')
-      expect(todayButton?.textContent?.trim()).to.not.equal('Today')
+      const buttons = Array.from(
+        el.shadowRoot!.querySelectorAll<HTMLButtonElement>('button'),
+      )
+
+      const clearButton = buttons.find(
+        (button) => button.textContent?.trim() === 'Today',
+      )
+
+      expect(todayButton).to.not.exist
     })
 
-    it('should show the clear and today button with correct text', async () => {
+    it('should show clear button', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker open></gds-datepicker>`,
+        html`<gds-datepicker clearable open></gds-datepicker>`,
       )
       const buttons = Array.from(
         el.shadowRoot!.querySelectorAll<HTMLButtonElement>('button'),
@@ -599,12 +602,8 @@ describe('<gds-datepicker>', () => {
       const clearButton = buttons.find(
         (button) => button.textContent?.trim() === 'Clear',
       )
-      const todayButton = buttons.find(
-        (button) => button.textContent?.trim() === 'Today',
-      )
 
       expect(clearButton).to.exist
-      expect(todayButton).to.exist
     })
   })
 

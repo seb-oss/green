@@ -104,16 +104,16 @@ class Datepicker extends GdsFormControlElement<Date> {
   hideLabel = false
 
   /**
-   * Whether to hide the Clear button under the calendar.
+   * Whether the Clear button is shown under the calendar.
    */
-  @property({ type: Boolean, attribute: 'hide-clear' })
-  hideClear = false
+  @property({ type: Boolean, attribute: 'clearable' })
+  clearable = false
 
   /**
    * Whether to hide the Today button under the calendar.
    */
-  @property({ type: Boolean, attribute: 'hide-today' })
-  hideToday = false
+  @property({ type: Boolean, attribute: 'hide-today-button' })
+  hideTodayButton = false
 
   /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
@@ -412,7 +412,7 @@ class Datepicker extends GdsFormControlElement<Date> {
           ></gds-calendar>
 
           ${when(
-            !(this.hideClear && this.hideToday),
+            this.clearable && !this.hideTodayButton,
             () => html`
               <gds-flex
                 align-items="center"
@@ -420,7 +420,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 padding="0 m m m"
               >
                 ${when(
-                  !this.hideClear,
+                  this.clearable,
                   () =>
                     html` <gds-button
                       rank="tertiary"
@@ -437,7 +437,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 )}
                 ${until(this.#renderBackToValidRangeButton(), nothing)}
                 ${when(
-                  !this.hideToday,
+                  !this.hideTodayButton,
                   () =>
                     html` <gds-button
                       rank="tertiary"

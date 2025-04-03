@@ -166,15 +166,27 @@ export const DisabledField: Story = {
 }
 
 /**
- * The clear and today button can be hidden by using the `hide-clear` and `hide-today` attribute.
+ * The selected date can be clearable by using the 'clearable` attribute (was default on before).
  */
 export const Simplified: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-datepicker
-      label="A simplified datepicker"
-      hide-clear
-      hide-today
+      label="A clearable datepicker"
+      clearable
+    ></gds-datepicker>
+  `,
+}
+
+/**
+ * The today button can be hidden by using the `hide-today-button` attribute.
+ */
+export const Simplified: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker
+      label="A no today buttom datepicker"
+      hide-today-button
     ></gds-datepicker>
   `,
 }
