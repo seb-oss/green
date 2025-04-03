@@ -87,10 +87,14 @@ export class GdsDetails extends GdsElement {
     })
   }
 
-  #handleToggle = (): void => {
-    this.open = !this.open
+  @watch('open')
+  private __handleOpenChange() {
     this.#updateContentHeight()
     this.#syncGroupState()
+  }
+
+  #handleToggle = (): void => {
+    this.open = !this.open
     this.#dispatchStateEvent()
   }
 
