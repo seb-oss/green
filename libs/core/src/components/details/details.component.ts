@@ -3,14 +3,14 @@ import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
+import { watch } from '../../utils/decorators/watch'
 import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { GdsButton } from '../button/button.component'
+import { GdsIconDetails } from './details-icon/details-icon.component'
 import { styles } from './details.styles'
-
-import '../button/button'
-import './details-icon/details-icon'
 
 export type DetailsSize = 'large' | 'small'
 
@@ -30,7 +30,7 @@ export type DetailsSize = 'large' | 'small'
  * </gds-details>
  * ```
  */
-@gdsCustomElement('gds-details')
+@gdsCustomElement('gds-details', { dependsOn: [GdsButton, GdsIconDetails] })
 export class GdsDetails extends GdsElement {
   static styles = [tokens, styles]
 
