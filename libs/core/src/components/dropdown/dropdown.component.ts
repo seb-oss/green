@@ -158,14 +158,24 @@ export class GdsDropdown<ValueT = any>
 
   /**
    * Whether to hide the label.
+   *
+   * @deprecated - use `plain` instead
    */
   @property({ type: Boolean, attribute: 'hide-label' })
   hideLabel = false
 
   /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
+
+  /**
    * Whether to disable the mobile styles.
    */
-  @property()
+  @property({ type: Boolean })
   disableMobileStyles = false
 
   /**
@@ -255,7 +265,7 @@ export class GdsDropdown<ValueT = any>
   render() {
     return html`
       ${when(
-        !this.hideLabel,
+        !this.plain && !this.hideLabel,
         () => html`
           <gds-form-control-header class="size-${this.size}">
             <label id="label" for="trigger" slot="label">${this.label}</label>
@@ -332,7 +342,7 @@ export class GdsDropdown<ValueT = any>
       </gds-popover>
 
       ${when(
-        !this.hideLabel,
+        !this.plain,
         () => html`
           <gds-form-control-footer class="size-${this.size}">
             ${when(

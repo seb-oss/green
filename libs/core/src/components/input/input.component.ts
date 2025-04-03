@@ -1,6 +1,8 @@
 import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
@@ -74,6 +76,14 @@ class Input extends GdsFormControlElement<string> {
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
+
   @queryAsync('input')
   private elInputAsync!: Promise<HTMLInputElement>
 
@@ -115,16 +125,20 @@ class Input extends GdsFormControlElement<string> {
 
   #renderDefault() {
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-        <slot
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label for="input" slot="label">${this.label}</label>
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+          </gds-form-control-header>`,
+      )}
       <gds-field-base
         .size=${this.size}
         .disabled=${this.disabled}
@@ -134,13 +148,17 @@ class Input extends GdsFormControlElement<string> {
       >
         ${this.#renderFieldContents()}
       </gds-field-base>
-      <gds-form-control-footer
-        class="size-${this.size}"
-        .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - (this.value?.length || 0)}
-        .validationMessage=${this.invalid &&
-        (this.errorMessage || this.validationMessage)}
-      ></gds-form-control-footer>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-footer
+            class="size-${this.size}"
+            .charCounter=${this.#shouldShowRemainingChars &&
+            this.maxlength - (this.value?.length || 0)}
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>`,
+      )}
     `
   }
 
@@ -218,6 +236,7 @@ class Input extends GdsFormControlElement<string> {
         ?disabled=${this.disabled}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid=${this.invalid}
+        aria-label=${(this.plain && this.label) || nothing}
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
       />

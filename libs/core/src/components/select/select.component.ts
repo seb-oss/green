@@ -1,6 +1,7 @@
 import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
 import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
@@ -37,6 +38,14 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
 
   /**
    * Reference to the native select element.
@@ -98,12 +107,18 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     this.selectElement && (this.selectElement.disabled = this.disabled)
 
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label for="select" slot="label" id="label-text">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label for="select" slot="label" id="label-text"
+              >${this.label}</label
+            >
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+          </gds-form-control-header>`,
+      )}
 
       <gds-field-base
         .size=${this.size}
@@ -116,11 +131,15 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
         ${this.#renderFieldContents()}
       </gds-field-base>
 
-      <gds-form-control-footer
-        class="size-${this.size}"
-        .validationMessage=${this.invalid &&
-        (this.errorMessage || this.validationMessage)}
-      ></gds-form-control-footer>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-footer
+            class="size-${this.size}"
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>`,
+      )}
     `
   }
 
@@ -148,6 +167,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
           'aria-describedby',
           'supporting-text extended-supporting-text sub-label message',
         )
+        clone.ariaLabel = this.label
         clone.setAttribute('id', 'select')
         clone.disabled = this.disabled
 

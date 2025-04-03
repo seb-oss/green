@@ -92,6 +92,14 @@ class Datepicker extends GdsFormControlElement<Date> {
   size: 'large' | 'small' = 'large'
 
   /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
+
+  /**
    * Whether to show a column of week numbers in the calendar.
    */
   @property({ type: Boolean, attribute: 'show-week-numbers' })
@@ -202,27 +210,31 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   render() {
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label id="label" for="spinner-0" slot="label">${this.label}</label>
-        ${when(
-          this.supportingText.length > 0,
-          () =>
-            html`<span slot="supporting-text" id="supporting-text">
-              ${this.supportingText}
-            </span>`,
-        )}
-        <slot
-          id="supporting-text-slot"
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
-        <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
-        <slot
-          id="sub-label-slot"
-          name="sub-label"
-          slot="supporting-text"
-        ></slot>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label id="label" for="spinner-0" slot="label">${this.label}</label>
+            ${when(
+              this.supportingText.length > 0,
+              () =>
+                html`<span slot="supporting-text" id="supporting-text">
+                  ${this.supportingText}
+                </span>`,
+            )}
+            <slot
+              id="supporting-text-slot"
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+            <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
+            <slot
+              id="sub-label-slot"
+              name="sub-label"
+              slot="supporting-text"
+            ></slot>
+          </gds-form-control-header>`,
+      )}
       <gds-field-base
         .size=${this.size}
         .disabled=${this.disabled}
@@ -246,7 +258,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
-                  aria-describedby="label supporting-text supporting-text-slot sub-label-slot message"
+                  aria-describedby="supporting-text supporting-text-slot sub-label-slot message"
                   data-max-width=${this.#getMaxSpinnerValue(f.name).toString()
                     .length}
                   @keydown=${this.#handleSpinnerKeydown}
@@ -289,22 +301,26 @@ class Datepicker extends GdsFormControlElement<Date> {
         </gds-button>
       </gds-field-base>
 
-      <gds-form-control-footer class="size-${this.size}">
-        ${when(
-          this.invalid,
-          // @deprecated
-          // Wrapped in a slot for backwards compatibility with the deprecated message slot
-          // Remove for 2.0 release
-          () => html`
-            <slot id="message" name="message" slot="message">
-              <gds-icon-triangle-exclamation
-                solid
-              ></gds-icon-triangle-exclamation>
-              ${this.errorMessage || this.validationMessage}
-            </slot>
-          `,
-        )}
-      </gds-form-control-footer>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-footer class="size-${this.size}">
+            ${when(
+              this.invalid,
+              // @deprecated
+              // Wrapped in a slot for backwards compatibility with the deprecated message slot
+              // Remove for 2.0 release
+              () => html`
+                <slot id="message" name="message" slot="message">
+                  <gds-icon-triangle-exclamation
+                    solid
+                  ></gds-icon-triangle-exclamation>
+                  ${this.errorMessage || this.validationMessage}
+                </slot>
+              `,
+            )}
+          </gds-form-control-footer>`,
+      )}
 
       <gds-popover
         autofocus
@@ -513,7 +529,7 @@ class Datepicker extends GdsFormControlElement<Date> {
       month: msg('Month'),
       day: msg('Day'),
     }
-    return labels[name]
+    return `${labels[name]} ${this.label}`
   }
 
   #getMinSpinnerValue(name: DatePart) {

@@ -1,6 +1,7 @@
 import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
+import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
@@ -87,6 +88,14 @@ class Textarea extends GdsFormControlElement<string> {
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
 
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
@@ -178,16 +187,20 @@ class Textarea extends GdsFormControlElement<string> {
 
   #renderDefault() {
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-        <slot
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label for="input" slot="label">${this.label}</label>
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+          </gds-form-control-header>`,
+      )}
 
       <gds-field-base
         id="field"
@@ -199,13 +212,17 @@ class Textarea extends GdsFormControlElement<string> {
         ${this.#renderFieldContents()}
       </gds-field-base>
 
-      <gds-form-control-footer
-        lass="size-${this.size}"
-        .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - (this.value?.length || 0)}
-        .validationMessage=${this.invalid &&
-        (this.errorMessage || this.validationMessage)}
-      ></gds-form-control-footer>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-footer
+            lass="size-${this.size}"
+            .charCounter=${this.#shouldShowRemainingChars &&
+            this.maxlength - (this.value?.length || 0)}
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>`,
+      )}
     `
   }
 
@@ -361,6 +378,7 @@ class Textarea extends GdsFormControlElement<string> {
         .value=${this.value}
         id="input"
         class="resize-${this.resizable}"
+        aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}
