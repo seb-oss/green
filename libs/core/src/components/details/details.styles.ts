@@ -22,7 +22,6 @@ export const styles = css`
       outline-color: currentColor;
       transition: all 120ms;
       color: var(--gds-color-l2-content-primary);
-      outline: none;
     }
 
     .summary-icon {
@@ -33,6 +32,14 @@ export const styles = css`
       width: max-content;
       height: max-content;
       line-height: 1;
+    }
+
+    .summary:focus {
+      outline-color: var(--gds-color-l3-content-tertiary);
+
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
     }
 
     @media (pointer: fine) {
