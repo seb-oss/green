@@ -44,8 +44,8 @@ export const styles = css`
       text-align: center;
 
       &:focus {
-        background-color: var(--gds-color-l3-background-primary);
-        color: var(--gds-color-l3-content-primary);
+        background-color: var(--gds-color-l2-background-tertiary);
+        color: var(--gds-color-l2-content-tertiary);
       }
     }
   }
