@@ -109,14 +109,14 @@ export type DatepickerOptions = {
   children?: React.ReactNode
 
   /**
-   * Whether to hide the clear button under the calendar.
+   * If the it will be possible to clear the selected date.
    */
-  hideClear?: boolean
+  Clearable?: boolean
 
   /**
    * Whether to hide the today button under the calendar.
    */
-  hideToday?: boolean
+  hideTodayButton?: boolean
 
   /**
    * @deprecated Use `value` instead.
