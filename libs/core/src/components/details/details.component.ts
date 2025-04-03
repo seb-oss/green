@@ -180,10 +180,7 @@ export class GdsDetails extends GdsElement {
       <div
         id="content-${this.name || 'default'}"
         class="content"
-        role="region"
-        aria-labelledby="summary-${this.name || 'default'}"
         aria-hidden="${!this.open}"
-        tabindex="${this.open ? '0' : '-1'}"
       >
         <slot></slot>
       </div>
