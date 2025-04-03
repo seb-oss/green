@@ -22,7 +22,7 @@ export const styles = css`
       outline-color: currentColor;
       transition: all 120ms;
       color: var(--gds-color-l2-content-primary);
-      outline-color: transparent;
+      outline: none;
     }
 
     .summary-icon {
