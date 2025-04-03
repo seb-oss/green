@@ -8,6 +8,11 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsIconDetails } from './details-icon/details-icon.component'
 import { styles } from './details.styles'
@@ -31,7 +36,9 @@ export type DetailsSize = 'large' | 'small'
  * ```
  */
 @gdsCustomElement('gds-details', { dependsOn: [GdsButton, GdsIconDetails] })
-export class GdsDetails extends GdsElement {
+export class GdsDetails extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(GdsElement)),
+) {
   static styles = [tokens, styles]
 
   /**
