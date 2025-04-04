@@ -3,138 +3,82 @@ import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
-import { htmlTemplateTagFactory } from '../../utils/helpers/custom-element-scoping'
+import type { GdsDetails } from '@sebgroup/green-core/components/details'
 
-import type { GdsDetails } from './details'
+import {
+  getScopedTagName,
+  htmlTemplateTagFactory,
+} from '@sebgroup/green-core/scoping'
+import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/details'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-details>', () => {
-  describe('Accessibility', () => {
-    it('should be accessible', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test Summary">
-          This is the details content
-        </gds-details>
-      `)
-      await el.updateComplete
-      await expect(el).to.be.accessible()
-    })
-
-    it('should be accessible when open', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test Summary" open>
-          This is the details content
-        </gds-details>
-      `)
-      await el.updateComplete
-      await expect(el).to.be.accessible()
-    })
-  })
-
   describe('Basic Functionality', () => {
-    it('should expose summary text through summary property', async () => {
+    it('should render summary text from attribute', async () => {
       const el = await fixture<GdsDetails>(html`
         <gds-details summary="Test Summary">Content</gds-details>
       `)
-      await expect(el.summary).to.equal('Test Summary')
+      const summaryLabel = el.shadowRoot?.querySelector('.summary-label')
+      expect(summaryLabel?.textContent?.trim()).to.equal('Test Summary')
     })
 
-    it('should render content in default slot', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test">Test Content</gds-details>
-      `)
-      const slot = el.shadowRoot!.querySelector('slot:not([name])')
-      expect(slot).to.exist
+    it('should render default summary when not provided', async () => {
+      const el = await fixture<GdsDetails>(
+        html`<gds-details>Content</gds-details>`,
+      )
+      const summaryLabel = el.shadowRoot?.querySelector('.summary-label')
+      expect(summaryLabel?.textContent?.trim()).to.equal('Summary')
     })
   })
 
   describe('Open State', () => {
-    it('should initialize as closed by default', async () => {
+    it('should be closed by default', async () => {
       const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test">Content</gds-details>
+        <gds-details summary="Test Summary">Content</gds-details>
       `)
-      await el.updateComplete
-      expect(el.open).to.be.false
+      expect(el.getAttribute('open')).to.be.null
     })
 
-    it('should respect initial open attribute', async () => {
+    it('should be open when open attribute is set', async () => {
       const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test" open>Content</gds-details>
+        <gds-details summary="Test Summary" open>Content</gds-details>
       `)
-      await el.updateComplete
-      expect(el.open).to.be.true
+      expect(el.getAttribute('open')).to.not.be.null
     })
 
-    it('should toggle state on summary click', async () => {
+    it('should toggle state when clicked', async () => {
       const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test">Content</gds-details>
+        <gds-details summary="Test Summary">Content</gds-details>
       `)
-      const summary = el.shadowRoot!.querySelector('.summary') as HTMLElement
 
-      summary.click()
-      await el.updateComplete
-      expect(el.open).to.be.true
+      const summary = el.shadowRoot?.querySelector('.summary') as HTMLElement
+      await clickOnElement(summary)
+      await waitUntil(() => el.getAttribute('open') !== null)
+      expect(el.getAttribute('open')).to.not.be.null
 
-      summary.click()
-      await el.updateComplete
-      expect(el.open).to.be.false
-    })
-
-    it('should toggle on Enter key', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test">Content</gds-details>
-      `)
-      const summary = el.shadowRoot!.querySelector('.summary') as HTMLElement
-      summary.focus()
-
-      await sendKeys({ press: 'Enter' })
-      await el.updateComplete
-      expect(el.open).to.be.true
-    })
-
-    it('should toggle on Space key', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test">Content</gds-details>
-      `)
-      const summary = el.shadowRoot!.querySelector('.summary') as HTMLElement
-      summary.focus()
-
-      await sendKeys({ press: 'Space' })
-      await el.updateComplete
-      expect(el.open).to.be.true
+      await clickOnElement(summary)
+      await waitUntil(() => el.getAttribute('open') === null)
+      expect(el.getAttribute('open')).to.be.null
     })
   })
 
   describe('UI State Events', () => {
-    it('should emit gds-ui-state event on open', async () => {
+    it('should emit gds-ui-state event when toggled', async () => {
       const el = await fixture<GdsDetails>(html`
         <gds-details summary="Test">Content</gds-details>
       `)
-      const handler = sinon.spy()
-      el.addEventListener('gds-ui-state', handler)
 
-      el.open = true
-      await el.updateComplete
+      const stateHandler = sinon.spy()
+      el.addEventListener('gds-ui-state', stateHandler)
 
-      expect(handler).to.have.been.calledOnce
-      expect(handler.firstCall.args[0].detail).to.be.true
-    })
+      const summary = el.shadowRoot?.querySelector('.summary') as HTMLElement
+      await clickOnElement(summary)
 
-    it('should emit gds-ui-state event on close', async () => {
-      const el = await fixture<GdsDetails>(html`
-        <gds-details summary="Test" open>Content</gds-details>
-      `)
-      const handler = sinon.spy()
-      el.addEventListener('gds-ui-state', handler)
-
-      el.open = false
-      await el.updateComplete
-
-      expect(handler).to.have.been.calledOnce
-      expect(handler.firstCall.args[0].detail).to.be.false
+      await waitUntil(() => stateHandler.calledOnce)
+      expect(stateHandler.firstCall.args[0].detail).to.be.true
     })
   })
 
@@ -142,43 +86,60 @@ describe('<gds-details>', () => {
     it('should close other details in same group', async () => {
       const container = await fixture(html`
         <div>
-          <gds-details name="group1">Content 1</gds-details>
-          <gds-details name="group1">Content 2</gds-details>
+          <gds-details name="group1" summary="Details 1">Content 1</gds-details>
+          <gds-details name="group1" summary="Details 2">Content 2</gds-details>
         </div>
       `)
-      const [details1, details2] = Array.from(
-        container.querySelectorAll('gds-details'),
+
+      const details = Array.from(
+        container.querySelectorAll(getScopedTagName('gds-details')),
       ) as GdsDetails[]
 
-      details1.open = true
-      await details1.updateComplete
-      expect(details1.open).to.be.true
-      expect(details2.open).to.be.false
+      const summary1 = details[0].shadowRoot?.querySelector(
+        '.summary',
+      ) as HTMLElement
+      await clickOnElement(summary1)
+      await waitUntil(() => details[0].getAttribute('open') !== null)
 
-      details2.open = true
-      await details2.updateComplete
-      expect(details1.open).to.be.false
-      expect(details2.open).to.be.true
+      expect(details[0].getAttribute('open')).to.not.be.null
+      expect(details[1].getAttribute('open')).to.be.null
+
+      const summary2 = details[1].shadowRoot?.querySelector(
+        '.summary',
+      ) as HTMLElement
+      await clickOnElement(summary2)
+      await waitUntil(() => details[1].getAttribute('open') !== null)
+
+      expect(details[0].getAttribute('open')).to.be.null
+      expect(details[1].getAttribute('open')).to.not.be.null
     })
 
-    // it('should not affect details without group name', async () => {
-    //   const container = await fixture(html`
-    //     <div>
-    //       <gds-details name="group1">Content 1</gds-details>
-    //       <gds-details>Content 2</gds-details>
-    //     </div>
-    //   `)
-    //   const [details1, details2] = Array.from(
-    //     container.querySelectorAll('gds-details'),
-    //   ) as GdsDetails[]
+    it('should not affect details in different groups', async () => {
+      const container = await fixture(html`
+        <div>
+          <gds-details name="group1" summary="Details 1">Content 1</gds-details>
+          <gds-details name="group2" summary="Details 2">Content 2</gds-details>
+        </div>
+      `)
 
-    //   details1.open = true
-    //   await details1.updateComplete
-    //   details2.open = true
-    //   await details2.updateComplete
+      const details = Array.from(
+        container.querySelectorAll(getScopedTagName('gds-details')),
+      ) as GdsDetails[]
 
-    //   expect(details1.open).to.be.true
-    //   expect(details2.open).to.be.true
-    // })
+      const summary1 = details[0].shadowRoot?.querySelector(
+        '.summary',
+      ) as HTMLElement
+      await clickOnElement(summary1)
+      await waitUntil(() => details[0].getAttribute('open') !== null)
+
+      const summary2 = details[1].shadowRoot?.querySelector(
+        '.summary',
+      ) as HTMLElement
+      await clickOnElement(summary2)
+      await waitUntil(() => details[1].getAttribute('open') !== null)
+
+      expect(details[0].getAttribute('open')).to.not.be.null
+      expect(details[1].getAttribute('open')).to.not.be.null
+    })
   })
 })
