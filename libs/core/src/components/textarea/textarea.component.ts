@@ -190,7 +190,7 @@ class Textarea extends GdsFormControlElement<string> {
       </gds-field-base>
 
       ${when(
-        !this.plain,
+        this.#shouldShowFooter(),
         () =>
           html`<gds-form-control-footer
             lass="size-${this.size}"
@@ -201,6 +201,10 @@ class Textarea extends GdsFormControlElement<string> {
           ></gds-form-control-footer>`,
       )}
     `
+  }
+
+  #shouldShowFooter() {
+    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
   }
 
   protected _getValidityAnchor() {

@@ -126,7 +126,7 @@ class Input extends GdsFormControlElement<string> {
         ${this.#renderFieldContents()}
       </gds-field-base>
       ${when(
-        !this.plain,
+        this.#shouldShowFooter(),
         () =>
           html`<gds-form-control-footer
             class="size-${this.size}"
@@ -137,6 +137,10 @@ class Input extends GdsFormControlElement<string> {
           ></gds-form-control-footer>`,
       )}
     `
+  }
+
+  #shouldShowFooter() {
+    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
   }
 
   _getValidityAnchor() {

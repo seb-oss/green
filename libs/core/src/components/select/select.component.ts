@@ -133,7 +133,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
       </gds-field-base>
 
       ${when(
-        !this.plain,
+        this.#shouldShowFooter(),
         () =>
           html`<gds-form-control-footer
             class="size-${this.size}"
@@ -142,6 +142,10 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
           ></gds-form-control-footer>`,
       )}
     `
+  }
+
+  #shouldShowFooter() {
+    return !this.plain && this.invalid
   }
 
   @observeLightDOM({
