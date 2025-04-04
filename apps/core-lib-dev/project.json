@@ -6,15 +6,11 @@
   "tags": [],
   "targets": {
     "build-app": {
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     },
     "build": {
       "executor": "@nx/vite:build",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
         "main": "apps/core-lib-dev/src/main.ts",
@@ -29,7 +25,8 @@
         "production": {
           "mode": "production"
         }
-      }
+      },
+      "dependsOn": ["core:build"]
     },
     "serve": {
       "executor": "@nx/vite:dev-server",
@@ -49,9 +46,7 @@
       }
     },
     "preview": {
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
@@ -74,9 +69,7 @@
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "core-lib-dev:build",
         "spa": true
