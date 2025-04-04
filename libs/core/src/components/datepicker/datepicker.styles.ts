@@ -4,17 +4,6 @@ export const styles = css`
   @layer base, reset;
 
   @layer base {
-    :host {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      contain: layout;
-      isolation: isolate;
-      gap: var(--gds-space-xs);
-      font-family: inherit;
-      min-width: 200px;
-    }
-
     ::part(_button) {
       outline-offset: -1px;
     }
@@ -27,6 +16,11 @@ export const styles = css`
       gap: var(--gds-space-4xs);
       font-size: var(--gds-text-size-detail-s);
       font-weight: var(--gds-text-weight-regular);
+    }
+
+    :host([size='small']) .spinners {
+      font-size: var(--gds-text-size-detail-s);
+      line-height: var(--gds-text-line-height-detail-s);
     }
 
     .spinner {

@@ -1,12 +1,14 @@
 import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
+import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
 import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
 import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
@@ -24,7 +26,7 @@ import { styles } from './textarea.styles'
 
 @localized()
 class Textarea extends GdsFormControlElement<string> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyle, styles]
 
   private _initialRows?: number
   private _defaultRows = 4
@@ -70,23 +72,18 @@ class Textarea extends GdsFormControlElement<string> {
   maxlength = Number.MAX_SAFE_INTEGER
 
   /**
-   * The variant of the input field. The default variant displays a label, supporting text, and
-   * extended supporting text. The floating-label variant only displays the field itself and the
-   * supporting text below.
-   *
-   * The floating-label variant should only be used in specific cases, for example when the input field
-   * is placed inside a table cell or in a space-constrained layout.
-   *
-   * A typical form should use the default variant.
-   */
-  @property({ type: String })
-  variant: 'default' | 'floating-label' = 'default'
-
-  /**
    * Controls the font-size of texts.
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
 
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
@@ -166,28 +163,21 @@ class Textarea extends GdsFormControlElement<string> {
   }
 
   render() {
-    return html`${choose(this.variant, [
-      ['default', () => this.#renderDefault()],
-      ['floating-label', () => this.#renderFloatingLabel()],
-    ])}`
-  }
-
-  protected _getValidityAnchor() {
-    return this.elTextarea
-  }
-
-  #renderDefault() {
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label for="input" slot="label">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-        <slot
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label for="input" slot="label">${this.label}</label>
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+          </gds-form-control-header>`,
+      )}
 
       <gds-field-base
         id="field"
@@ -199,18 +189,26 @@ class Textarea extends GdsFormControlElement<string> {
         ${this.#renderFieldContents()}
       </gds-field-base>
 
-      <gds-form-control-footer
-        lass="size-${this.size}"
-        .charCounter=${this.#shouldShowRemainingChars &&
-        this.maxlength - (this.value?.length || 0)}
-        .validationMessage=${this.invalid &&
-        (this.errorMessage || this.validationMessage)}
-      ></gds-form-control-footer>
+      ${when(
+        this.#shouldShowFooter(),
+        () =>
+          html`<gds-form-control-footer
+            lass="size-${this.size}"
+            .charCounter=${this.#shouldShowRemainingChars &&
+            this.maxlength - (this.value?.length || 0)}
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>`,
+      )}
     `
   }
 
-  #renderFloatingLabel() {
-    return nothing
+  #shouldShowFooter() {
+    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+  }
+
+  protected _getValidityAnchor() {
+    return this.elTextarea
   }
 
   // Any attribute name added here will get forwarded to the native <input> element.
@@ -360,7 +358,8 @@ class Textarea extends GdsFormControlElement<string> {
         @paste=${this.#handleOnPaste}
         .value=${this.value}
         id="input"
-        class="resize-${this.resizable}"
+        class="native-control resize-${this.resizable}"
+        aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
         ${forwardAttributes(this.#forwardableAttrs)}

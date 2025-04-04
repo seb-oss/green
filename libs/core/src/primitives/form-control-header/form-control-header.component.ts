@@ -66,6 +66,7 @@ export class GdsFormControlHeader extends GdsElement {
       <gds-button
         size="small"
         rank="tertiary"
+        margin="-xs 0"
         label="${msg('Show more information')}"
         gds-aria-expanded="${this.showExtendedSupportingText}"
         @click=${this.#handleExtSupTxtBtnClick}

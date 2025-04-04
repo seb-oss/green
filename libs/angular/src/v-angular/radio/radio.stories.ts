@@ -20,10 +20,9 @@ interface StoryInputListener {
   action: (event: Event) => void
 }
 
-export default {
+const meta: Meta<NggvRadioComponent> = {
   title: 'V-Angular/Radio',
   component: NggvRadioComponent,
-
   decorators: [
     applicationConfig({
       providers: [importProvidersFrom(NggvI18nModule)],
@@ -39,7 +38,21 @@ export default {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
-} as Meta<NggvRadioComponent>
+  argTypes: {
+    size: {
+      options: ['large', 'small'],
+      control: {
+        type: 'select',
+        labels: {
+          large: 'Large',
+          small: 'Small',
+        },
+      },
+    },
+  },
+}
+
+export default meta
 
 const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
   args: any,
@@ -51,6 +64,7 @@ const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
       [value]="name + '1'"
       [error]="error"
       [invalid]="invalid"
+      [size]="size"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
     </nggv-radio>
@@ -59,6 +73,7 @@ const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
       [name]="name"
       [error]="error"
       [invalid]="invalid"
+      [size]="size"
       [value]="name + '2'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
@@ -68,6 +83,7 @@ const Template: StoryFn<NggvRadioComponent & StoryInputListener> = (
       [name]="name"
       [error]="error"
       [invalid]="invalid"
+      [size]="size"
       [value]="name + '3'"
       [ngModel]="selected"
       (ngModelChange)="action($event)">
@@ -97,6 +113,7 @@ const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
       [locked]="locked"
       [error]="error"
       [invalid]="invalid"
+      [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 1</ng-template>
     </nggv-radio>
@@ -107,6 +124,7 @@ const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
       [locked]="locked"
       [error]="error"
       [invalid]="invalid"
+      [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 2</ng-template>
     </nggv-radio>
@@ -117,6 +135,7 @@ const TemplateWithFormControl: StoryFn<NggvRadioComponent & any> = (
       [locked]="locked"
       [error]="error"
       [invalid]="invalid"
+      [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked">
       <ng-template #labelTpl>{{label}} 3</ng-template>
     </nggv-radio>
@@ -139,6 +158,7 @@ Primary.args = {
   selected: 'radio2',
   error: '',
   invalid: false,
+  size: 'large',
 }
 
 export const WithLockedInput = TemplateWithFormControl.bind({})

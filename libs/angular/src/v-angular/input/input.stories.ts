@@ -140,6 +140,18 @@ const meta: Meta<NggvInputComponent> = {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
+  argTypes: {
+    size: {
+      options: ['large', 'small'],
+      control: {
+        type: 'select',
+        labels: {
+          large: 'Large',
+          small: 'Small',
+        },
+      },
+    },
+  },
 }
 export default meta
 
@@ -174,6 +186,7 @@ const TemplateWithFormControl: StoryFn<
       [description]="description"
       [invalid]="invalid"
       [valid]="valid"
+      [size]="size"
       [required]="required"
       [optional]="optional"
       [locked]="locked"
@@ -200,6 +213,7 @@ Primary.args = {
   description: 'This is a field description',
   type: 'text',
   autocomplete: 'on',
+  size: 'large',
   required: undefined,
   optional: false,
   disabled: false,
@@ -228,6 +242,7 @@ const TemplateWithCustomLabel: StoryFn<NggvInputComponent & WithExtras> = (
     <nggv-input [label]="label"
       [disabled]="disabled"
       [invalid]="invalid"
+      [size]="size"
       [required]="required">
       <ng-template #labelTpl>
         My custom label template
@@ -271,7 +286,6 @@ const resetObservable$ = new Observable((subscriber) => {
 const TemplateWithPrefixAndOrSuffix: StoryFn<
   NggvInputComponent & WithExtras & any
 > = (args: NggvInputComponent & WithExtras & any) => ({
-  styles: [`.suffix-prefix-padding{ padding: 0.75em }`],
   template: /*html*/ `
   <h2>Prefix and/or suffix</h2>
   <p>
@@ -281,11 +295,13 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
   <nggv-input label="Default"
     type="text"
     description="Default"
+    [size]="size"
     [invalid]="invalid">
   </nggv-input>
   <nggv-input label="Prefix"
     type="text"
     description="Prefix with checkbox"
+    [size]="size"
     [invalid]="invalid">
     <nggv-checkbox
       slot="prefix"
@@ -297,6 +313,7 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
   <nggv-input label="Suffix"
     type="text"
     description="Suffix with simple text"
+    [size]="size"
     [invalid]="invalid">
     <label slot="suffix" class="suffix-prefix-padding">SEB</label>
   </nggv-input>
@@ -304,6 +321,7 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
   <nggv-input label="Default (suffix)"
     type="text"
     description="Suffix (default placement) with button"
+    [size]="size"
     [invalid]="invalid">
     <nggv-button
       class="suffix-prefix-padding"
@@ -316,6 +334,7 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
   <nggv-input label="Large button with no padding (suffix)"
   type="text"
   description="Suffix (default placement) with button without padding"
+  [size]="size"
   [invalid]="invalid">
   <nggv-button
   class="integrated-btn"
@@ -329,6 +348,7 @@ const TemplateWithPrefixAndOrSuffix: StoryFn<
   <nggv-input label="Prefix and default (suffix)"
     type="number"
     description="Prefix with simple label and suffix (default) with dropdown"
+    [size]="size"
     [invalid]="invalid">
     <label slot="prefix" class="suffix-prefix-padding">Amount:</label>
     <nggv-dropdown
@@ -363,7 +383,8 @@ export const WithResetObservable: StoryFn<
         formControlName="resetForm"
         [description]="description"
         [defaultValue]="defaultValue"
-        [reset]="resetObservable$">
+        [reset]="resetObservable$"
+        [size]="size">
       </nggv-input>
     </ng-container>`,
     props: {
@@ -411,6 +432,7 @@ export const WithMaxLength: StoryFn<NggvInputComponent & WithExtras & any> = (
         [label]="label"
         [invalid]="invalid"
         [maxLength]="maxLength$ | async"
+        [size]="size"
         formControlName="remittanceInformation"
         >
         <ng-template #labelTpl>
@@ -666,6 +688,7 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [nggvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
+        [size]="size"
         [autocomplete]="'off'">
       </nggv-input>
       <nggv-input class="toggle"
@@ -673,6 +696,7 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [nggvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
+        [size]="size"
         [autocomplete]="'off'">
       </nggv-input>
       <nggv-input class="toggle"
@@ -680,6 +704,7 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [nggvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
+        [size]="size"
         [autocomplete]="'off'">
       </nggv-input>
       <nggv-input class="toggle"
@@ -687,6 +712,7 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [nggvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
+        [size]="size"
         [autocomplete]="'off'">
       </nggv-input>
       <nggv-input class="toggle"
@@ -694,6 +720,7 @@ const TemplateWithTypeAhead: StoryFn<NggvInputComponent & WithExtras> = (
         [nggvTypeahead]="searchFunction"
         [resultFormatter]="resultFormatter"
         [selectedFormatter]="selectedFormatter"
+        [size]="size"
         [autocomplete]="'off'">
       </nggv-input>
       

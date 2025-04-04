@@ -12,6 +12,7 @@ import { GdsButton } from '../../components/button/button.component'
 import { GdsDropdown } from '../../components/dropdown/dropdown.component'
 import { GdsFlex } from '../../components/flex/flex.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
@@ -43,7 +44,7 @@ type DateFormatLayout = {
 
 @localized()
 class Datepicker extends GdsFormControlElement<Date> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyle, styles]
 
   get type() {
     return 'gds-datepicker'
@@ -90,6 +91,14 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
 
   /**
    * Whether to show a column of week numbers in the calendar.
@@ -202,27 +211,31 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   render() {
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label id="label" for="spinner-0" slot="label">${this.label}</label>
-        ${when(
-          this.supportingText.length > 0,
-          () =>
-            html`<span slot="supporting-text" id="supporting-text">
-              ${this.supportingText}
-            </span>`,
-        )}
-        <slot
-          id="supporting-text-slot"
-          name="extended-supporting-text"
-          slot="extended-supporting-text"
-        ></slot>
-        <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
-        <slot
-          id="sub-label-slot"
-          name="sub-label"
-          slot="supporting-text"
-        ></slot>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label id="label" for="spinner-0" slot="label">${this.label}</label>
+            ${when(
+              this.supportingText.length > 0,
+              () =>
+                html`<span slot="supporting-text" id="supporting-text">
+                  ${this.supportingText}
+                </span>`,
+            )}
+            <slot
+              id="supporting-text-slot"
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+            <!-- @deprecated: use 'supporting-text' slot instead. Remove in 2.0 release. -->
+            <slot
+              id="sub-label-slot"
+              name="sub-label"
+              slot="supporting-text"
+            ></slot>
+          </gds-form-control-header>`,
+      )}
       <gds-field-base
         .size=${this.size}
         .disabled=${this.disabled}
@@ -246,7 +259,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   aria-valuemin=${this.#getMinSpinnerValue(f.name)}
                   aria-valuemax=${this.#getMaxSpinnerValue(f.name)}
                   aria-label=${this.#getSpinnerLabel(f.name)}
-                  aria-describedby="label supporting-text supporting-text-slot sub-label-slot message"
+                  aria-describedby="supporting-text supporting-text-slot sub-label-slot message"
                   data-max-width=${this.#getMaxSpinnerValue(f.name).toString()
                     .length}
                   @keydown=${this.#handleSpinnerKeydown}
@@ -289,22 +302,24 @@ class Datepicker extends GdsFormControlElement<Date> {
         </gds-button>
       </gds-field-base>
 
-      <gds-form-control-footer class="size-${this.size}">
-        ${when(
-          this.invalid,
-          // @deprecated
-          // Wrapped in a slot for backwards compatibility with the deprecated message slot
-          // Remove for 2.0 release
-          () => html`
+      ${when(
+        this.#shouldShowFooter(),
+        () =>
+          html`<gds-form-control-footer class="size-${this.size}">
+            ${
+              ``
+              // @deprecated
+              // Wrapped in a slot for backwards compatibility with the deprecated message slot
+              // Remove for 2.0 release
+            }
             <slot id="message" name="message" slot="message">
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
               ${this.errorMessage || this.validationMessage}
             </slot>
-          `,
-        )}
-      </gds-form-control-footer>
+          </gds-form-control-footer>`,
+      )}
 
       <gds-popover
         autofocus
@@ -433,6 +448,10 @@ class Datepicker extends GdsFormControlElement<Date> {
     `
   }
 
+  #shouldShowFooter() {
+    return !this.plain && this.invalid
+  }
+
   protected _getValidityAnchor(): HTMLElement {
     return this._elSpinners[0]
   }
@@ -513,7 +532,7 @@ class Datepicker extends GdsFormControlElement<Date> {
       month: msg('Month'),
       day: msg('Day'),
     }
-    return labels[name]
+    return `${labels[name]} ${this.label}`
   }
 
   #getMinSpinnerValue(name: DatePart) {
@@ -785,10 +804,9 @@ class Datepicker extends GdsFormControlElement<Date> {
  *
  * @status beta
  *
- * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
  * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
- * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
+ * @slot sub-label - ***(deprecated - use `supporting-text` property instead)*** Renders between the label and the trigger button.
  *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event gds-ui-state - Fired when the dropdown is opened or closed.

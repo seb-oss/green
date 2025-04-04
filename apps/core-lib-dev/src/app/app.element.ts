@@ -24,6 +24,8 @@ import '@sebgroup/green-core/components/video/index.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 import '@sebgroup/green-core/components/spinner/index.js'
+import '@sebgroup/green-core/components/textarea/index.js'
+import '@sebgroup/green-core/components/select/index.js'
 import '../components/header'
 import './chlorophyll.scss'
 import './form-validation.element'
@@ -31,6 +33,7 @@ import './datepicker.element'
 import './calendar.element'
 import './spinner.element'
 import './login/login.element'
+import './plain-form-controls.element'
 
 export class AppElement extends LitElement {
   static styles = css`
@@ -85,6 +88,10 @@ export class AppElement extends LitElement {
               ],
               ['calendar', () => html`<calendar-example></calendar-example>`],
               ['spinner', () => html`<spinner-example></spinner-example>`],
+              [
+                'plain-form-controls',
+                () => html`<plain-form-controls></plain-form-controls>`,
+              ],
             ],
             () => html`No view selected`,
           )}
