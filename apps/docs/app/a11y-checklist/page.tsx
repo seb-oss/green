@@ -101,7 +101,7 @@ interface WcagItem {
   role: string // t.ex. "Utvecklare", "Redaktör / Utvecklare"
   howToTest?: { content: string }
   sort?: number
-  status: string // "Kravet uppfylls" etc.
+  status?: string // "Kravet uppfylls" etc.
   comment?: string
 }
 
@@ -131,6 +131,8 @@ const roleFilter = (role: string[]) => {
 // Status Filter
 
 const statusFilter = (status: string[]) => {
+  //if statement
+  //returnera false om det är undefined
   return (item: WcagItem) =>
     statusFilter.length === 0 ? true : status.includes(item.status)
 }
@@ -223,13 +225,12 @@ export default function WcagList() {
           </GdsText>
         </GdsFlex>
       </GdsFlex>
-      <GdsFlex width="70%">
+      <GdsFlex width="70%" gap="s">
         <GdsDropdown
           multiple
+          searchable
           value={selectedCategories}
-          onChange={(e) =>
-            setSelectedCategories((e as CustomEvent).detail.value)
-          }
+          onInput={(e) => setSelectedCategories((e.target as any).value)}
         >
           <GdsOption isplaceholder="">Kategori</GdsOption>
           {Object.values(A11yCategories).map((category) => (
@@ -240,8 +241,9 @@ export default function WcagList() {
         </GdsDropdown>
         <GdsDropdown
           multiple
+          searchable
           value={selectedLevels}
-          onChange={(e) => setSelectedLevels((e as CustomEvent).detail.value)}
+          onInput={(e) => setSelectedLevels((e.target as any).value)}
         >
           <GdsOption value="" isplaceholder="">
             Nivå
@@ -254,8 +256,9 @@ export default function WcagList() {
         </GdsDropdown>
         <GdsDropdown
           multiple
+          searchable
           value={selectedRoles}
-          onChange={(e) => setSelectedRoles((e as CustomEvent).detail.value)}
+          onInput={(e) => setSelectedRoles((e.target as any).value)}
         >
           <GdsOption value="" isplaceholder="">
             Roll
@@ -268,8 +271,9 @@ export default function WcagList() {
         </GdsDropdown>
         <GdsDropdown
           multiple
+          searchable
           value={selectedStatuses}
-          onChange={(e) => setSelectedStatuses((e as CustomEvent).detail.value)}
+          onInput={(e) => setSelectedStatuses((e.target as any).value)}
         >
           <GdsOption value="" isplaceholder="">
             Krav
@@ -360,7 +364,7 @@ export default function WcagList() {
                   <GdsBadge>{wcagObject.role}</GdsBadge>
                 </GdsFlex>
               </GdsFlex>
-              <GdsFlex flex-direction="column; s{row}" gap="m">
+              <GdsFlex flex-direction="column; s{row}" gap="m" padding="m">
                 <GdsFlex flex="1" flex-direction="column" gap="m">
                   <GdsFlex flex-direction="column">
                     <GdsText>
