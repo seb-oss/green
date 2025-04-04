@@ -10,6 +10,7 @@ import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { GdsListbox } from '../../primitives/listbox/listbox.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
@@ -60,7 +61,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyle, styles]
 
   get type() {
     return 'gds-dropdown'
@@ -374,6 +375,7 @@ export class GdsDropdown<ValueT = any>
       <input
         id="trigger"
         role="combobox"
+        class="native-control"
         aria-expanded="${this.open}"
         aria-owns="listbox"
         aria-haspopup="listbox"
@@ -414,6 +416,7 @@ export class GdsDropdown<ValueT = any>
       <button
         id="trigger"
         role="combobox"
+        class="native-control"
         aria-expanded="${this.open}"
         aria-owns="listbox"
         aria-haspopup="listbox"

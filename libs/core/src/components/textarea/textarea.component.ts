@@ -8,6 +8,7 @@ import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
 import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
@@ -25,7 +26,7 @@ import { styles } from './textarea.styles'
 
 @localized()
 class Textarea extends GdsFormControlElement<string> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyle, styles]
 
   private _initialRows?: number
   private _defaultRows = 4
@@ -175,17 +176,6 @@ class Textarea extends GdsFormControlElement<string> {
   }
 
   render() {
-    return html`${choose(this.variant, [
-      ['default', () => this.#renderDefault()],
-      ['floating-label', () => this.#renderFloatingLabel()],
-    ])}`
-  }
-
-  protected _getValidityAnchor() {
-    return this.elTextarea
-  }
-
-  #renderDefault() {
     return html`
       ${when(
         !this.plain,
@@ -226,8 +216,8 @@ class Textarea extends GdsFormControlElement<string> {
     `
   }
 
-  #renderFloatingLabel() {
-    return nothing
+  protected _getValidityAnchor() {
+    return this.elTextarea
   }
 
   // Any attribute name added here will get forwarded to the native <input> element.
@@ -377,7 +367,7 @@ class Textarea extends GdsFormControlElement<string> {
         @paste=${this.#handleOnPaste}
         .value=${this.value}
         id="input"
-        class="resize-${this.resizable}"
+        class="native-control resize-${this.resizable}"
         aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "

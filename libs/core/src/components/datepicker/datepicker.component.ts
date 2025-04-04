@@ -12,6 +12,7 @@ import { GdsButton } from '../../components/button/button.component'
 import { GdsDropdown } from '../../components/dropdown/dropdown.component'
 import { GdsFlex } from '../../components/flex/flex.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
@@ -43,7 +44,7 @@ type DateFormatLayout = {
 
 @localized()
 class Datepicker extends GdsFormControlElement<Date> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyle, styles]
 
   get type() {
     return 'gds-datepicker'

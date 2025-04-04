@@ -10,6 +10,7 @@ import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-
 // Local Components
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyles from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { forwardAttributes } from '../../utils/directives'
 import {
@@ -25,7 +26,7 @@ import { styles } from './input.styles'
 
 @localized()
 class Input extends GdsFormControlElement<string> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyles, styles]
 
   /**
    * The supporting text displayed between the label and the field.
@@ -229,6 +230,7 @@ class Input extends GdsFormControlElement<string> {
   #renderNativeInput() {
     return html`
       <input
+        class="native-control"
         @input=${this.#handleOnInput}
         @change=${this.#handleOnChange}
         .value=${this.value}

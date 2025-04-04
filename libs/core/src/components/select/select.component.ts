@@ -6,6 +6,7 @@ import { when } from 'lit/directives/when.js'
 import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
 import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
+import formControlHostStyles from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
@@ -24,7 +25,7 @@ import { styles } from './select.styles'
 
 @localized()
 class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyles, styles]
 
   /**
    * The supporting text displayed between the label and the field.
@@ -170,6 +171,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
         clone.ariaLabel = this.label
         clone.setAttribute('id', 'select')
         clone.disabled = this.disabled
+        clone.className = 'native-control'
 
         // If this is the initial render, set the value from the select element
         // Otherwise we set the select element value from the component value, so that it still reflects the value prop in case it was rerendered
@@ -282,7 +284,9 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   #renderMainLabel() {
     if (!this.multiple) {
-      return html`<label id="placeholder">${this.displayValue}</label>`
+      return html`<label id="placeholder" class="native-control"
+        >${this.displayValue}</label
+      >`
     }
   }
 
