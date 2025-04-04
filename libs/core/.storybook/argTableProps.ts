@@ -6,7 +6,7 @@ export function argTablePropsFor(tagName: string) {
   )?.declarations[0] as any
 
   return manifest?.members
-    .filter((m) => m.category)
+    ?.filter((m) => m.category)
     .map((m) => {
       return {
         [m.name]: {
