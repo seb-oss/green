@@ -39,6 +39,7 @@ export class GdsHeader extends LitElement {
         background="l1-background-primary"
         position="relative"
         height="4rem"
+        border-width="0 0 4xs"
       >
         <gds-div display="xs{flex} s{flex} m{flex} l{none}">
           <gds-context-menu>
