@@ -72,19 +72,6 @@ class Textarea extends GdsFormControlElement<string> {
   maxlength = Number.MAX_SAFE_INTEGER
 
   /**
-   * The variant of the input field. The default variant displays a label, supporting text, and
-   * extended supporting text. The floating-label variant only displays the field itself and the
-   * supporting text below.
-   *
-   * The floating-label variant should only be used in specific cases, for example when the input field
-   * is placed inside a table cell or in a space-constrained layout.
-   *
-   * A typical form should use the default variant.
-   */
-  @property({ type: String })
-  variant: 'default' | 'floating-label' = 'default'
-
-  /**
    * Controls the font-size of texts.
    */
   @property({ type: String })
