@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.72.0
+
+### Minor Changes
+
+- 8851dbd: **Accordion:** Add new component `gds-accordion`
+
 ## 1.71.2
 
 ### Patch Changes
