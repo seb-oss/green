@@ -575,6 +575,36 @@ describe('<gds-datepicker>', () => {
       await expect(monthDropdown.value).to.equal('0')
       await expect(yearDropdown.value).to.equal('2014')
     })
+
+    it('should not show the today button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker hideTodayButton open></gds-datepicker>`,
+      )
+
+      const buttons = Array.from(
+        el.shadowRoot!.querySelectorAll<HTMLButtonElement>('button'),
+      )
+
+      const clearButton = buttons.find(
+        (button) => button.textContent?.trim() === 'Today',
+      )
+
+      expect(todayButton).to.not.exist
+    })
+
+    it('should show clear button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker clearable open></gds-datepicker>`,
+      )
+      const buttons = Array.from(
+        el.shadowRoot!.querySelectorAll<HTMLButtonElement>('button'),
+      )
+      const clearButton = buttons.find(
+        (button) => button.textContent?.trim() === 'Clear',
+      )
+
+      expect(clearButton).to.exist
+    })
   })
 
   describe('Accessibility', () => {
