@@ -243,8 +243,8 @@
       "l3": {
         "background": {
           "primary": {
-            "value": "#1b1b1b",
-            "darkValue": "#d7d7d7",
+            "value": "#003824",
+            "darkValue": "#0FAB59",
             "type": "color"
           },
           "secondary": {
