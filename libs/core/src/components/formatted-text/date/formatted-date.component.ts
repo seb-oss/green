@@ -24,7 +24,10 @@ export class GdsFormattedDate extends GdsFormattedText {
 
   get formattedValue() {
     if (this.format && this.format in dateTimeFormats) {
-      return dateTimeFormats[this.format](this.value, this.locale)
+      return dateTimeFormats[this.format](
+        this.value ?? this.element?.textContent ?? undefined,
+        this.locale,
+      )
     }
 
     // TODO: Should this throw an error?

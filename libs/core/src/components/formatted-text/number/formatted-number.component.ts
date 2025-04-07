@@ -24,7 +24,7 @@ export class GdsFormattedNumber extends GdsFormattedText {
 
   get formattedValue() {
     return numberFormats.decimalsAndThousands(
-      this.value,
+      this.value ?? this.element?.textContent ?? undefined,
       this.locale,
       this.currency,
     )
