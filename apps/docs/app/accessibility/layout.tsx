@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://seb.io/foundation/accessibility'),
+  metadataBase: new URL('https://seb.io/accessibility'),
   title: 'Accessibility — Green Design System',
   description:
     "How accessibility is checked in Green Design System and it's components",
   alternates: {
-    canonical: '/foundation/accessibility',
+    canonical: '/accessibility',
   },
   openGraph: {
     images: '/og?title=Accessibility',

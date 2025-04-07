@@ -288,3 +288,13 @@ export const IconImages = dynamic(
     ssr: false,
   },
 )
+
+export const IconPeople = dynamic(
+  () =>
+    import('@sebgroup/green-react/src/lib/icon/icons/IconPeople').then(
+      (mod) => mod.IconPeople,
+    ),
+  {
+    ssr: false,
+  },
+)
