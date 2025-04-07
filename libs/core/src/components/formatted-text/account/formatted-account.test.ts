@@ -6,31 +6,33 @@ import type { GdsFormattedAccount } from '@sebgroup/green-core/components/format
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/formatted-text/number'
+import '@sebgroup/green-core/components/formatted-text/account'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 const accounts = ['54400023423', 54400023423]
 
-const formats: {
-  format: AccountFormats
-  expected: string
-}[] = [
+const formats: Record<
+  AccountFormats,
   {
-    format: 'decimalsAndThousands',
+    expected: string
+  }
+> = {
+  'seb-account': {
     expected: '5440 00 234 23',
   },
-]
+}
 
 describe('GdsFormattedAccount', () => {
-  describe('Handles all number formats with currency', () => {
-    for (const { format, expected } of formats) {
+  describe('Handles all account formats', () => {
+    for (const [format, { expected }] of Object.entries(formats)) {
       for (const account of accounts) {
         it(`Account type: ${typeof account} Format: ${format}`, async () => {
           const element: GdsFormattedAccount = await fixture(
-            html`<gds-formatted-number
+            html`<gds-formatted-account
               .account=${account}
-            ></gds-formatted-number>`,
+              .format=${format}
+            ></gds-formatted-account>`,
           )
           await element.updateComplete
 

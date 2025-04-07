@@ -12,7 +12,7 @@ export abstract class GdsFormattedText extends GdsText {
   abstract get formattedValue(): string
 
   @query('[tag]')
-  private element?: Element
+  protected element?: Element
 
   protected updated(changedProperties: PropertyValues): void {
     super.updated(changedProperties)

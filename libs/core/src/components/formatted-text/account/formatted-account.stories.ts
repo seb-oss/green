@@ -20,10 +20,10 @@ import { GdsFormattedAccount } from './formatted-account.component'
  */
 const meta: Meta = {
   title: 'Components/Formatted Text/Accounts',
-  component: 'gds-formatted-number',
+  component: 'gds-formatted-account',
   tags: ['autodocs'],
   argTypes: {
-    ...argTablePropsFor('gds-formatted-number'),
+    ...argTablePropsFor('gds-formatted-account'),
   },
 }
 

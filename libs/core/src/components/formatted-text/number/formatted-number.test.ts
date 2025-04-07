@@ -15,15 +15,16 @@ const values = ['1234.5', 1234.5]
 const locales = ['sv-SE', 'en-GB'] as const
 const currencies = ['SEK', 'EUR'] as const
 
-const formats: {
-  format: NumberFormats
-  expected: Record<
-    (typeof locales)[number],
-    Record<(typeof currencies)[number] | 'No Currency', string>
-  >
-}[] = [
+const formats: Record<
+  NumberFormats,
   {
-    format: 'decimalsAndThousands',
+    expected: Record<
+      (typeof locales)[number],
+      Record<(typeof currencies)[number] | 'No Currency', string>
+    >
+  }
+> = {
+  decimalsAndThousands: {
     expected: {
       'sv-SE': {
         'No Currency': '1 234,50',
@@ -37,12 +38,12 @@ const formats: {
       },
     },
   },
-]
+}
 
 describe('GdsFormattedNumber', () => {
-  describe('Handles all number formats with currency', () => {
+  describe('Handles all number formats', () => {
     for (const currency of [undefined, ...currencies]) {
-      for (const { format, expected } of formats) {
+      for (const [format, { expected }] of Object.entries(formats)) {
         for (const locale of locales) {
           const currencyLabel = currency ?? 'No Currency'
 

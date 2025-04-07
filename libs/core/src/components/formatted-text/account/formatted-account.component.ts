@@ -13,10 +13,15 @@ import { accountsFormats } from './account-formatter'
  */
 @gdsCustomElement('gds-formatted-account')
 export class GdsFormattedAccount extends GdsFormattedText {
-  @property({ type: String })
-  account?: string
+  @property()
+  account?: number | string
+
+  @property()
+  format?: number | string = 'seb-account'
 
   get formattedValue() {
-    return accountsFormats['seb-account'](this.account)
+    return accountsFormats['seb-account'](
+      this.account ?? this.element?.textContent ?? undefined,
+    )
   }
 }
