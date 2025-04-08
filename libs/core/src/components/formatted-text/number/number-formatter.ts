@@ -9,7 +9,7 @@ type NumberFormatter = (
 export const numberFormats = {
   decimalsAndThousands: (value, locale, currency) => {
     const parsed = Number(value)
-    let options: Intl.NumberFormatOptions = {}
+    const options: Intl.NumberFormatOptions = {}
 
     if (!isNaN(parsed) && parsed % 1 !== 0) {
       options.minimumFractionDigits = 2
