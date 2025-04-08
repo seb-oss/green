@@ -14,12 +14,6 @@ import './index.ts'
  * The Blur component is used to apply a blur effect over content,
  * often used to obscure sensitive or background information.
  *
- * The component acts as a container that wraps the target element
- * and applies a blur effect based on the `shouldBlur` property.
- *
- * Note: When multiple blur components are rendered, each manages its own
- * blur effect independently.
- *
  * @status beta
  *
  */
@@ -28,7 +22,7 @@ const meta: Meta = {
   component: 'gds-blur',
   tags: ['autodocs'],
   argTypes: {
-    ...argTablePropsFor('gds-formatted-number'),
+    ...argTablePropsFor('gds-blur'),
   },
 }
 
@@ -42,15 +36,12 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  args: {
-    shouldBlur: true,
-  },
 }
 
 export const Default: Story = {
   ...DefaultParams,
-  render: (args) => html`
-    <gds-blur .shouldBlur=${args.shouldBlur}>
+  render: () => html`
+    <gds-blur>
       <gds-text>Blur</gds-text>
     </gds-blur>
   `,

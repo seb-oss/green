@@ -1,10 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './formatted-number'
-import '../../card'
-import '../../container'
-import '../../flex'
-import '../../divider'
 
 import { html } from 'lit'
 

@@ -2,11 +2,11 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import './index.ts'
-
 import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
 import { Default as formattedNumberDefault } from '../../formatted-text/number/formatted-number.stories.ts'
 import { GdsSensitiveNumber } from './index.ts'
+
+import './index.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/sensitiv/number)
@@ -29,7 +29,6 @@ const meta: Meta = {
   component: 'gds-sensitive-number',
   tags: ['autodocs'],
   argTypes: {
-    ...argTablePropsFor('gds-formatted-number'),
     ...argTablePropsFor('gds-sensitive-number'),
   },
 }
