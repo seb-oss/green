@@ -4,7 +4,7 @@ import type { GdsBlur } from '@sebgroup/green-core/components/blur'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/blur'
+import '@sebgroup/green-core/components/blur/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

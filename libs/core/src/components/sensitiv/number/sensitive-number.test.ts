@@ -5,7 +5,7 @@ import type { GdsSensitiveNumber } from '@sebgroup/green-core/components/sensiti
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/sensitive/number'
+import '@sebgroup/green-core/components/sensitive/number/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
