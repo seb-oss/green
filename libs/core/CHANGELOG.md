@@ -1,5 +1,41 @@
 # Changelog
 
+## 1.72.0
+
+### Minor Changes
+
+- 8851dbd: **Accordion:** Add new component `gds-accordion`
+
+## 1.71.2
+
+### Patch Changes
+
+- bf967f5: **React:** Fix issue with 'className' prop when using older versions of React (<19)
+
+## 1.71.1
+
+### Patch Changes
+
+- 49d0984: **Bundling:** Also include style modules in path extension rewrites
+
+## 1.71.0
+
+### Minor Changes
+
+- faa898c: **Div:** Add white-space prop
+
+### Patch Changes
+
+- 9a1c8be: **Bundling:** Modified build script to add `.js` extensions to all internal imports
+- faa898c: **Text:** Add examples for white space
+- faa898c: **Link:** Change default white space to normal
+
+## 1.70.1
+
+### Patch Changes
+
+- 15f33c4: **React:** Use fully qualified paths in React exports (i.e, include `index.js`)
+
 ## 1.70.0
 
 ### Minor Changes
