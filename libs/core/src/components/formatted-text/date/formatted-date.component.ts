@@ -18,7 +18,7 @@ export class GdsFormattedDate extends GdsFormattedText {
   value?: Date | string
 
   @property({ type: String })
-  format?: DateTimeFormat
+  format: DateTimeFormat = 'dateOnlyNumbers'
 
   @property({ type: String })
   locale?: string
