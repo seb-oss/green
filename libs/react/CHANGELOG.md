@@ -1,5 +1,53 @@
 # Changelog
 
+## 3.27.1
+
+### Patch Changes
+
+- acb44e2: **Input:** aria-describedby validation message ids are now pemanent. Having them conditionally rendered caused screen read to read out text when attribute was updated.
+- Updated dependencies [8851dbd]
+  - @sebgroup/green-core@1.72.0
+
+## 3.27.0
+
+### Minor Changes
+
+- fe75e49: **TextInput:** aria-live prop for form control footer
+  **TextArea:** aria-live prop for form control footer
+  **RadioGroup:** aria-live prop for form control footer
+  **Select:** aria-live prop for form control footer
+
+### Patch Changes
+
+- fe75e49: **React:** Fixing expandable info & error message for screen readers #2094
+- Updated dependencies [bf967f5]
+  - @sebgroup/green-core@1.71.2
+
+## 3.26.0
+
+### Minor Changes
+
+- 0e6d189: Updates for React 19
+
+### Patch Changes
+
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
+## 3.25.0
+
+### Minor Changes
+
+- f333bbb: **FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
+
+### Patch Changes
+
+- Updated dependencies [b46f13f]
+  - @sebgroup/green-core@1.69.4
+
 ## 3.24.2
 
 ### Patch Changes

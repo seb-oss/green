@@ -260,7 +260,7 @@ export class NggvSlideOutComponent implements OnInit {
       )
       this.firstFocusable = focusable[0]
       this.lastFocusable = focusable[focusable.length - 1]
-      if (this.lastFocusable) this.lastFocusable.focus()
+      if (this.firstFocusable) this.firstFocusable.focus()
     })
   }
 

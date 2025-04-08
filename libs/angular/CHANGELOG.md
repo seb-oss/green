@@ -1,5 +1,33 @@
 # Changelog
 
+## 5.6.1
+
+### Patch Changes
+
+- 0e6d189: Update how underlying Core components are imported. Affects NggDropdown, NggDatepicker and NggContextMenu
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
+## 5.6.0
+
+### Minor Changes
+
+- d75df66: **V-Angular**: Adding href to alert-ribbon and fixing icons in toast
+
+### Patch Changes
+
+- 9b15233: **V-Angular Slide-out:** Set focus on first focusable element instead of last focusable element
+
+## 5.5.4
+
+### Patch Changes
+
+- cf901cf: **V-Angular Components:** Fixed spacing within components and after.
+- 759863c: **V-Angular Slide-out:** Allow overflow to be shown outside of slide-out content.
+
 ## 5.5.3
 
 ### Patch Changes

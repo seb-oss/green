@@ -70,7 +70,7 @@ export function styleExpressionProperty(
         if (!newValue) return
         this['__' + String(descriptor)] = newValue
 
-        await this.firstUpdated()
+        await this.updateComplete
 
         // If the element has level defined, we need to use it in the cache key
         const lvl = (this as any).level ?? '0'
