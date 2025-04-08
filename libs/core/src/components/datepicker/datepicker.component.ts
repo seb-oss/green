@@ -412,7 +412,7 @@ class Datepicker extends GdsFormControlElement<Date> {
           ></gds-calendar>
 
           ${when(
-            this.clearable && !this.hideTodayButton,
+            this.clearable || !this.hideTodayButton,
             () => html`
               <gds-flex
                 align-items="center"
