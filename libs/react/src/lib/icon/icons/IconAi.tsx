@@ -1,0 +1,1 @@
+export { IconAi } from '@sebgroup/green-core/react';
