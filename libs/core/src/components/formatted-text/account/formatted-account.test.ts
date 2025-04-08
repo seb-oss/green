@@ -6,7 +6,7 @@ import type { GdsFormattedAccount } from '@sebgroup/green-core/components/format
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/formatted-text/account/index.js'
+import '@sebgroup/green-core/components/formatted-text/account'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

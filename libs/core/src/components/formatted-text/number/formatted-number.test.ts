@@ -6,7 +6,7 @@ import type { GdsFormattedNumber } from '@sebgroup/green-core/components/formatt
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/formatted-text/number/index.js'
+import '@sebgroup/green-core/components/formatted-text/number'
 
 const html = htmlTemplateTagFactory(testingHtml)
 

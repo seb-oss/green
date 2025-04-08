@@ -6,7 +6,7 @@ import type { GdsFormattedDate } from '@sebgroup/green-core/components/formatted
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/formatted-text/date/index.js'
+import '@sebgroup/green-core/components/formatted-text/date'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
