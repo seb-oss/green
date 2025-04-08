@@ -151,21 +151,29 @@ export default function Accessibility() {
                 , with ratio of 3:1 to 4.5:1.
               </li>
               <li>
-                Edge Rendering: Edge-&gt;DevTools-&gt;
+                Turn on and off different vision deficiencies to see how your
+                site can look like for others, like no green color:
+                <br />
+                Edge-&gt;DevTools-&gt;
                 <a href="https://www.geeksforgeeks.org/rendering-tool-in-microsoft-edge-browser/">
                   Rendering-&gt;Emulate vision deficiencies
                 </a>
                 .
               </li>
               <li>
-                Chrome Silktide: Chrome-&gt;
+                The Chrome extension Silktide also have similar functions (and
+                many more). This extension is whitelisted in SEB.
+                <br />
+                Chrome-&gt;
                 <a href="https://chromewebstore.google.com/detail/silktide-accessibility-ch/mpobacholfblmnpnfbiomjkecoojakah?hl=en">
                   Silktide-&gt;
                 </a>
                 Color Blindness.
               </li>
               <li>
-                Online Contrast Checker:&nbsp;
+                There are many online contrast checkers to see if 2 colors hasve
+                enough contrast between them. Here is one of them:
+                <br />
                 <a href="https://webaim.org/resources/contrastchecker/">
                   webaim.org
                 </a>
@@ -174,9 +182,12 @@ export default function Accessibility() {
 
             <h3>Future High Contrast Mode:</h3>
             <p>
-              In addition to the dark mode feature detailed below, we are
-              planning to introduce a high contrast mode in the future. This
-              setting is becoming increasingly common on other websites.
+              In addition to the dark mode feature detailed below, we may
+              introduce a high contrast mode in the future. This setting is
+              becoming increasingly common on other websites. While it may not
+              be the most visually appealing, it will enhance readability in
+              poor lighting conditions, on suboptimal screens, or for users with
+              visual impairments.
             </p>
 
             <h2 id="keyboard-navigation">Keyboard navigation</h2>
@@ -185,11 +196,20 @@ export default function Accessibility() {
               deviating from the standards.
             </p>
             <ul>
-              <li>Can open/press/run with enter/space?</li>
-              <li>Can move with arrow-keys when applicable.</li>
               <li>
-                Can write text when applicable (and easy to understand when you
-                can not).
+                You can open, press, or run the component using the Enter and/or
+                Space keys
+              </li>
+              <li>You can navigate using the arrow keys when applicable</li>
+              <li>
+                You can enter text when applicable, with clear indications when
+                text entry is not possible.
+              </li>
+              <li>
+                Please note that disabled fields should be avoided. These fields
+                cannot be clicked or written in, and often do not provide an
+                explanation as to why. Additionally, they typically have poor
+                contrast.
               </li>
             </ul>
 
@@ -210,18 +230,31 @@ export default function Accessibility() {
             </ul>
 
             <h2 id="focus">Focus</h2>
-            <p>If focus is implemented in a good way.</p>
+            <p>If focus is implemented correctly:</p>
             <ul>
               <li>
-                Should usually be a black focus ring in a few pixels away.
+                There should typically be a black focus ring a few pixels away
+                from the element.
               </li>
-              <li>Does focus shows up with keyboard and not mouse?</li>
               <li>
-                Is it visible enough? Are some parts of it hidden behind
-                something else or outside the window?
+                Does the focus appear when using the keyboard, but not the
+                mouse?
               </li>
-              <li>Is the focus order logical?</li>
-              <li>Does focus traps work?</li>
+              <li>
+                Is it sufficiently visible? Are any parts of it hidden behind
+                other elements or outside the window?{' '}
+              </li>
+              <li>
+                Is the focus order logical? Typically, the focus order should
+                start from the top left, move to the top right, and then proceed
+                downwards, continuing from left to right.
+              </li>
+              <li>
+                Do focus traps work effectively? Focus traps should ensure that
+                popups and modals prevent users from interacting with elements
+                outside them, whether using a mouse, keyboard, or screen
+                readers.
+              </li>
             </ul>
 
             <h2 id="touch">Touch</h2>
@@ -273,8 +306,8 @@ export default function Accessibility() {
             <p>
               Overall, the design system is accessible. However, we occasionally
               encounter issues, and new ones are reported from time to time. If
-              you find any accessibility problems, please help us by submitting
-              a new issue.
+              you identify any accessibility problems, please assist us by
+              submitting a new issue.
             </p>
           </GdsRichText>
         </GdsFlex>
