@@ -201,6 +201,30 @@ export const RichContent: Story = {
           <li>List item 1</li>
           <li>List item 2</li>
         </ul>
+        <h3>Heading Inside Details</h3>
+        <p>This is a paragraph with <strong>rich</strong> formatting.</p>
+        <ul>
+          <li>List item 1</li>
+          <li>List item 2</li>
+        </ul>
+        <h3>Heading Inside Details</h3>
+        <p>This is a paragraph with <strong>rich</strong> formatting.</p>
+        <ul>
+          <li>List item 1</li>
+          <li>List item 2</li>
+        </ul>
+        <h3>Heading Inside Details</h3>
+        <p>This is a paragraph with <strong>rich</strong> formatting.</p>
+        <ul>
+          <li>List item 1</li>
+          <li>List item 2</li>
+        </ul>
+        <h3>Heading Inside Details</h3>
+        <p>This is a paragraph with <strong>rich</strong> formatting.</p>
+        <ul>
+          <li>List item 1</li>
+          <li>List item 2</li>
+        </ul>
       </gds-rich-text>
     </gds-details>
   `,
