@@ -53,8 +53,6 @@ const DefaultParams: Story = {
  * The default tag is `span` and the default size is `body-m`
  */
 
-// fix dateLongWithWeekday to Date Long With Weekday
-
 export const Default: Story = {
   ...DefaultParams,
   name: 'Default',

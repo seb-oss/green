@@ -1,3 +1,4 @@
+import { PropertyValues } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
@@ -14,7 +15,7 @@ import { DateTimeFormat, dateTimeFormats } from './date-time-formatter'
 @gdsCustomElement('gds-formatted-date')
 export class GdsFormattedDate extends GdsFormattedText {
   @property({ attribute: false })
-  value?: Date
+  value?: Date | string
 
   @property({ type: String })
   format?: DateTimeFormat
@@ -38,5 +39,13 @@ export class GdsFormattedDate extends GdsFormattedText {
     // }
 
     return this.value?.toString() ?? ''
+  }
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    super.firstUpdated(_changedProperties)
+
+    if (!this.value && this.element) {
+      this.value = this.element.textContent ?? undefined
+    }
   }
 }

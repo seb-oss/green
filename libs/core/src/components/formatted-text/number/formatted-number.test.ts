@@ -54,6 +54,7 @@ describe('GdsFormattedNumber', () => {
                   .value=${value}
                   .locale=${locale}
                   .currency=${currency}
+                  .format=${format}
                 ></gds-formatted-number>`,
               )
               await element.updateComplete

@@ -1,8 +1,9 @@
+import { PropertyValues } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
 import { GdsFormattedText } from '../formatted-text'
-import { numberFormats } from '../formatters'
+import { NumberFormats, numberFormats } from '../formatters'
 
 /**
  * @element gds-formatted-number
@@ -14,7 +15,7 @@ import { numberFormats } from '../formatters'
 @gdsCustomElement('gds-formatted-number')
 export class GdsFormattedNumber extends GdsFormattedText {
   @property({ attribute: false })
-  value?: number
+  value?: number | string
 
   @property({ type: String })
   locale?: string
@@ -22,11 +23,18 @@ export class GdsFormattedNumber extends GdsFormattedText {
   @property({ type: String })
   currency?: string
 
+  @property()
+  protected format: NumberFormats = 'decimalsAndThousands'
+
   get formattedValue() {
-    return numberFormats.decimalsAndThousands(
-      this.value ?? this.element?.textContent ?? undefined,
-      this.locale,
-      this.currency,
-    )
+    return numberFormats[this.format](this.value, this.locale, this.currency)
+  }
+
+  protected firstUpdated(_changedProperties: PropertyValues): void {
+    super.firstUpdated(_changedProperties)
+
+    if (!this.value && this.element) {
+      this.value = this.element.textContent ?? undefined
+    }
   }
 }
