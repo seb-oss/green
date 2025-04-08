@@ -585,7 +585,7 @@ describe('<gds-datepicker>', () => {
         el.shadowRoot!.querySelectorAll<HTMLButtonElement>('button'),
       )
 
-      const clearButton = buttons.find(
+      const todayButton = buttons.find(
         (button) => button.textContent?.trim() === 'Today',
       )
 
