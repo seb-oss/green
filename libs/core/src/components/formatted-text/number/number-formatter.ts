@@ -10,6 +10,7 @@ export const numberFormats = {
   decimalsAndThousands: (value, locale, currency) => {
     const options: Intl.NumberFormatOptions = {
       maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
     }
 
     if (currency) {
