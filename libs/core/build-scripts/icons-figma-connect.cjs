@@ -25,7 +25,6 @@ function kebabToPascalCase(str) {
 
 function generateFigmaContent(componentTag, nodeId) {
   const transformedNodeId = transformNodeId(nodeId)
-  // Extract just the name part between 'gds-icon-' and the first '>'
   const iconName = componentTag.replace('<gds-icon-', '').split('>')[0]
 
   const pascalCaseName = kebabToPascalCase(iconName)
@@ -36,13 +35,14 @@ figma.connect(
   '${FIGMA_BASE_URL}?node-id=${transformedNodeId}',
   {
     example: () => html\`
-    // JS 
-    import { Icon${pascalCaseName} } from '@sebgroup/green-core/pure'
+      ${componentTag}
 
-    Icon${pascalCaseName}.define()
+      <script>
+        import { Icon${pascalCaseName} } from '@sebgroup/green-core/pure'
 
-    // HTML 
-    ${componentTag}\`,
+        Icon${pascalCaseName}.define()
+      </script>
+    \`,
   },
 )
 `
