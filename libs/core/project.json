@@ -96,6 +96,12 @@
         "command": "node libs/core/build-scripts/icons-generate.cjs"
       }
     },
+    "icons-codeconnect": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/icons-codeconnect.cjs"
+      }
+    },
     "icons-react": {
       "executor": "nx:run-commands",
       "options": {
