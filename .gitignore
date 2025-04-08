@@ -75,4 +75,4 @@ storybook-migration-summary.md
 vite.config.*.timestamp*
 
 # Figma
-.figma-code-connect
+figma-connect

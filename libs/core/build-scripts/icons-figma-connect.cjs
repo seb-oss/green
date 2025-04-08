@@ -7,7 +7,7 @@ const ICONS_API_URL = 'https://api.seb.io/icons/icons.json'
 const FIGMA_BASE_URL = process.env.FIGMA_BASE_URL // Should be provided in .env
 const outputDir = path.resolve(
   __dirname,
-  '../src/components/icon/.figma-code-connect',
+  '../src/components/icon/figma-connect',
 )
 
 // Helper function to transform nodeId format
@@ -15,14 +15,34 @@ function transformNodeId(nodeId) {
   return nodeId.replace(':', '-')
 }
 
+// Helper function to convert kebab-case to PascalCase
+function kebabToPascalCase(str) {
+  return str
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+}
+
 function generateFigmaContent(componentTag, nodeId) {
   const transformedNodeId = transformNodeId(nodeId)
+  // Extract just the name part between 'gds-icon-' and the first '>'
+  const iconName = componentTag.replace('<gds-icon-', '').split('>')[0]
+
+  const pascalCaseName = kebabToPascalCase(iconName)
+
   return `import figma, { html } from '@figma/code-connect/html'
 
 figma.connect(
   '${FIGMA_BASE_URL}?node-id=${transformedNodeId}',
   {
-    example: () => html\`${componentTag}\`,
+    example: () => html\`
+    // JS 
+    import { Icon${pascalCaseName} } from '@sebgroup/green-core/pure'
+
+    Icon${pascalCaseName}.define()
+
+    // HTML 
+    ${componentTag}\`,
   },
 )
 `
@@ -55,7 +75,9 @@ async function main() {
       }
 
       // Generate figma file content
-      const figmaContent = generateFigmaContent(webComponent, nodeId)
+      const iconName = icon.displayName.replace(/[^a-zA-Z0-9]/g, '') // Clean the name
+      const figmaContent = generateFigmaContent(webComponent, nodeId, iconName)
+      // const figmaContent = generateFigmaContent(webComponent, nodeId)
 
       // Write .figma.ts file
       const figmaFilePath = path.join(outputDir, `${key}.figma.ts`)

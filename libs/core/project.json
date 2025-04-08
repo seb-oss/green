@@ -96,7 +96,7 @@
         "command": "node libs/core/build-scripts/icons-generate.cjs"
       }
     },
-    "icons-figma-connect": {
+    "icons-figma-connect-generate": {
       "executor": "nx:run-commands",
       "options": {
         "command": "node libs/core/build-scripts/icons-figma-connect.cjs"
