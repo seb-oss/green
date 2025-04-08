@@ -218,6 +218,42 @@
     }
   }
 
+  &.small {
+    label {
+      font-size: 0.875rem;
+    }
+    label + .form-info {
+      margin-bottom: 0.25rem;
+    }
+
+    label + .gds-input-wrapper {
+      margin-top: 0.25rem;
+    }
+
+    .gds-input-wrapper {
+      min-height: 2rem;
+
+      .input-group input {
+        padding: 0.38rem 0.5rem;
+        line-height: 1rem;
+        height: 2rem;
+        min-height: 2rem;
+        font-size: 0.875rem;
+      }
+
+      .input-group-suffix,
+      .input-group-prefix {
+        height: 2rem;
+        min-height: 2rem;
+        min-width: initial;
+      }
+    }
+
+    .gds-form-item__footer:not(:empty) {
+      margin-top: 0.25rem;
+    }
+  }
+
   label,
   .label,
   legend {
