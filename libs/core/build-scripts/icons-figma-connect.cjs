@@ -10,11 +10,17 @@ const outputDir = path.resolve(
   '../src/components/icon/.figma-code-connect',
 )
 
+// Helper function to transform nodeId format
+function transformNodeId(nodeId) {
+  return nodeId.replace(':', '-')
+}
+
 function generateFigmaContent(componentTag, nodeId) {
+  const transformedNodeId = transformNodeId(nodeId)
   return `import figma, { html } from '@figma/code-connect/html'
 
 figma.connect(
-  '${FIGMA_BASE_URL}?node-id=${nodeId}',
+  '${FIGMA_BASE_URL}?node-id=${transformedNodeId}',
   {
     example: () => html\`${componentTag}\`,
   },

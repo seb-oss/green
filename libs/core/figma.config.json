@@ -1,0 +1,13 @@
+{
+  "codeConnect": {
+    "parser": "web",
+    "include": ["src/components/**/*"],
+    "exclude": ["test/**", "docs/**", "build/**"],
+    "importPaths": {
+      "src/components/*": "@ui/components"
+    },
+    "paths": {
+      "@ui/components/*": ["src/components/*"]
+    }
+  }
+}
