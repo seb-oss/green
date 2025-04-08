@@ -60,7 +60,9 @@
         @if (message.template) {
           <ng-template [ngTemplateOutlet]="message.template"></ng-template>
         } @else {
-          <div>{{ t(message.titleText) }}</div>
+          @if (message.titleText) {
+            <div>{{ t(message.titleText) }}</div>
+          }
           @if (message.bodyText) {
             <div class="text-body-content">
               {{ t(message.bodyText) }}
