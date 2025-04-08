@@ -92,11 +92,7 @@
   &:disabled,
   &.disabled,
   &[aria-disabled='true'] {
-    @include common.add-disable(
-      var(--gds-sys-color-dark-blue-2),
-      var(--gds-sys-color-text-white),
-      var(--gds-sys-color-blue-dark-2)
-    );
+    @include common.add-disable(true, true, true);
   }
 }
 

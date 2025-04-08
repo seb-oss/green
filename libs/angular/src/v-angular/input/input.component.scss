@@ -1,10 +1,9 @@
-@use '../../../../chlorophyll/src/scss/components/form/input/mixins';
-@use '../../../../chlorophyll/src/scss/components/form/common/mixins' as
-  form-group;
+@use '../../../../chlorophyll/src/scss/components/input/mixins';
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-group;
 
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+@use '../../../../chlorophyll/src/scss/components/validation/mixins' as
   validation;
-@use '../../../../chlorophyll/scss/tokens';
+@use '../../../../chlorophyll/src/scss/tokens';
 
 :host {
   --sg-text-primary: #333;

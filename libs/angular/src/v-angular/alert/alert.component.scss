@@ -1,7 +1,7 @@
-@use '@sebgroup/chlorophyll/scss/components/alert-ribbon';
-@use '@sebgroup/chlorophyll/scss/components/close';
+@use '@sebgroup/chlorophyll/src/scss/components/alert-ribbon';
+@use '@sebgroup/chlorophyll/src/scss/components/close';
 
-@use '@sebgroup/chlorophyll/scss/components/button/mixins';
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins';
 
 :host {
   --sg-intent-neutral-hsl: 0deg, 0%, 91.3725490196%;

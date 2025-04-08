@@ -1,9 +1,8 @@
 @use '../../../../../chlorophyll/src/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/src/scss/components/backdrop' as backdrop;
-
-@use '../../../../../chlorophyll/scss/components/close/mixins' as close;
-@use '../../../../../chlorophyll/scss/common' as common;
-@use '../../../../../chlorophyll/scss/components/button/mixins' as button;
+@use '../../../../../chlorophyll/src/scss/components/close/mixins' as close;
+@use '../../../../../chlorophyll/src/scss/common' as common;
+@use '../../../../../chlorophyll/src/scss/components/button/mixins' as button;
 
 :host {
   --grey-500: rgb(222, 222, 222);

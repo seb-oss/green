@@ -1,5 +1,5 @@
-@use '@sebgroup/chlorophyll/scss/components/button/mixins' as buttons;
-@use '@sebgroup/chlorophyll/scss/common';
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins' as buttons;
+@use '@sebgroup/chlorophyll/src/scss/common';
 
 :host {
   display: flex;

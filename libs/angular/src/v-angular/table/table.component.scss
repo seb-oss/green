@@ -1,7 +1,6 @@
-@use '@sebgroup/chlorophyll/scss/components/table/mixins' as table;
-@use '../../../../chlorophyll/scss/components/form/checkbox/mixins' as checkbox;
-@use '../../../../chlorophyll/scss/components/form/checkbox/tokens';
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
+@use '@sebgroup/chlorophyll/src/scss/components/table/mixins' as table;
+@use '../../../../chlorophyll/src/scss/components/checkbox/mixins' as checkbox;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-mixins;
 
 ::ng-deep .gds-table {
   --gds-ref-pallet-base100: #f8f8f8;
@@ -139,7 +138,6 @@
     }
   }
 
-  @include tokens.add-checkbox-tokens;
   @include checkbox.add-checkbox();
 
   .gds-field-checkbox-wrap .form-control:has(input[type='checkbox']) {
@@ -154,7 +152,7 @@
   }
 
   #thead-checkbox:has(input[type='checkbox']:focus-visible):focus-within {
-    outline-color: var(--sg-table-header-color);
+    outline-color: var(--gds-sys-color-base-900);
   }
 
   #thead-checkbox input[type='checkbox']:hover {

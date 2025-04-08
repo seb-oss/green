@@ -1,9 +1,8 @@
 @use '../../../../chlorophyll/src/scss/components/dropdown/mixins' as dropdown;
 @use '../../../../chlorophyll/src/scss/components/button/mixins' as button;
-@use '../../../../chlorophyll/src/scss/components/form/input/mixins' as input;
-@use '../../../../chlorophyll/src/scss/components/form/common/mixins' as
-  form-group;
-@use '../../../../chlorophyll/src/scss/components/form/validation/mixins' as
+@use '../../../../chlorophyll/src/scss/components/input/mixins' as input;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-group;
+@use '../../../../chlorophyll/src/scss/components/validation/mixins' as
   validation;
 @use '../../../../chlorophyll/src/scss/tokens' as tokens;
 

@@ -1,7 +1,7 @@
 // @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
 // @use 'node_modules/@sebgroup/vanilla/src/components/datepicker/datepicker-mixins'
 //   as datepicker;
-@use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins' as button;
 
 :host {
   --sg-border-color: transparent;

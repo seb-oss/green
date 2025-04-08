@@ -9,7 +9,6 @@
   --gds-ref-pallet-base400: hsl(0, 0%, 81%);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-z-index-dropdown: ;
-  --sg-z-index-popover: 1060;
   --sg-z-index-dropdown-backdrop: 990;
   --sg-z-index-dropdown: 2000;
   --sg-popover-background: #fff;
@@ -33,7 +32,7 @@
 
   // dropdown select
   ul[role='listbox'] {
-    --z-index: var(--sg-z-index-popover);
+    --z-index: 1060;
     background-color: var(--sg-popover-background);
     flex-direction: column;
     justify-content: flex-end;
