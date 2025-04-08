@@ -21,6 +21,8 @@ import {
 import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
 
+//import '@sebgroup/green-core/components/icon/icons'
+
 // Justera importvägarna
 
 /* =========================================================
@@ -197,6 +199,8 @@ export default function WcagList() {
     setSelectedStatuses([])
   }
 
+  console.log()
+
   return (
     <GdsFlex flex-direction="column">
       <GdsFlex gap="2xl; m{4xl}" flex-direction="column" max-width="80ch">
@@ -294,7 +298,7 @@ export default function WcagList() {
             <strong>Kategori:</strong>
             <ul>
               {selectedCategories.map((cat) => (
-                <GdsBadge key={cat}>{cat}</GdsBadge>
+                <GdsButton key={cat}>{cat}</GdsButton>
               ))}
             </ul>
           </div>
@@ -306,7 +310,7 @@ export default function WcagList() {
             <strong>Nivå:</strong>
             <ul>
               {selectedLevels.map((lvl) => (
-                <li key={lvl}>{lvl}</li>
+                <GdsButton key={lvl}>{lvl}</GdsButton>
               ))}
             </ul>
           </div>
@@ -318,7 +322,7 @@ export default function WcagList() {
             <strong>Roll:</strong>
             <ul>
               {selectedRoles.map((role) => (
-                <li key={role}>{role}</li>
+                <GdsButton key={role}>{role}</GdsButton>
               ))}
             </ul>
           </div>
@@ -330,7 +334,11 @@ export default function WcagList() {
             <strong>Status:</strong>
             <ul>
               {selectedStatuses.map((status) => (
-                <li key={status}>{status}</li>
+                <GdsButton key={status}>
+                  {status}
+                  {/* <GdsIconCrossSmall></GdsIconCrossSmall> */}
+                  <IconCrossLarge></IconCrossLarge>
+                </GdsButton>
               ))}
             </ul>
           </div>
