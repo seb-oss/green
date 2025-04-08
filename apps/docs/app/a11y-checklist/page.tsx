@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Link } from 'next-view-transitions'
+// import { Link } from 'next-view-transitions'
 // Importera Gds-komponenterna från ditt designbibliotek
 import {
   GdsBadge,
@@ -18,12 +18,17 @@ import {
   GdsTextarea,
   GdsTheme,
 } from '$/import/components'
-import { Accordion, AccordionItem } from 'core/accordion'
-import Hero from 'core/hero'
+import {
+  IconBrandGreen,
+  IconCrossLarge,
+  IconEyeSlash,
+  IconSquareGridCircle,
+  IconSquareInfo,
+  IconTextEdit,
+} from '$/import/icons'
+import { marked } from 'marked'
 
 //import '@sebgroup/green-core/components/icon/icons'
-
-// Justera importvägarna
 
 /* =========================================================
    1) Enums för a11y
@@ -334,10 +339,9 @@ export default function WcagList() {
             <strong>Status:</strong>
             <ul>
               {selectedStatuses.map((status) => (
-                <GdsButton key={status}>
+                <GdsButton width="250px" key={status} trail="">
                   {status}
-                  {/* <GdsIconCrossSmall></GdsIconCrossSmall> */}
-                  <IconCrossLarge></IconCrossLarge>
+                  <IconCrossLarge width={12} height={12} />
                 </GdsButton>
               ))}
             </ul>
@@ -392,6 +396,20 @@ export default function WcagList() {
                           <p>{wcagObject.wcag}</p>
                           <p>{wcagObject.guideline}</p>
                           <p>{wcagObject.criteria}</p>
+                        </GdsFlex>
+                      </GdsDiv>
+                    </details>
+                    <details>
+                      <summary>Hur du kan testa</summary>
+                      <GdsDiv border="outline">
+                        <GdsFlex flex-direction="column" gap="m">
+                          <span
+                            dangerouslySetInnerHTML={{
+                              __html: marked.parse(
+                                wcagObject.howToTest?.content ?? '',
+                              ),
+                            }}
+                          />
                         </GdsFlex>
                       </GdsDiv>
                     </details>
