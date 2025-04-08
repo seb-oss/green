@@ -68,4 +68,34 @@ describe('GdsFormattedNumber', () => {
       }
     }
   })
+
+  describe('Handles fractions', () => {
+    it('No fractions', async () => {
+      const element: GdsFormattedNumber = await fixture(
+        html`<gds-formatted-number
+          .value=${1234}
+          .locale=${'sv-SE'}
+          .currency=${undefined}
+          .format=${'decimalsAndThousands'}
+        ></gds-formatted-number>`,
+      )
+      await element.updateComplete
+
+      expect(element.formattedValue).to.equal('1 234')
+    })
+  })
+
+  it('With Fractions', async () => {
+    const element: GdsFormattedNumber = await fixture(
+      html`<gds-formatted-number
+        .value=${1234.5}
+        .locale=${'sv-SE'}
+        .currency=${undefined}
+        .format=${'decimalsAndThousands'}
+      ></gds-formatted-number>`,
+    )
+    await element.updateComplete
+
+    expect(element.formattedValue).to.equal('1 234,50')
+  })
 })

@@ -8,8 +8,12 @@ type NumberFormatter = (
 
 export const numberFormats = {
   decimalsAndThousands: (value, locale, currency) => {
-    const options: Intl.NumberFormatOptions = {
-      maximumFractionDigits: 2,
+    const parsed = Number(value)
+    let options: Intl.NumberFormatOptions = {}
+
+    if (!isNaN(parsed) && parsed % 1 !== 0) {
+      options.minimumFractionDigits = 2
+      options.maximumFractionDigits = 2
     }
 
     if (currency) {
@@ -17,9 +21,9 @@ export const numberFormats = {
         ...options,
         style: 'currency',
         currency: currency,
-      }).format(Number(value))
+      }).format(parsed)
     }
 
-    return new Intl.NumberFormat(locale, options).format(Number(value))
+    return new Intl.NumberFormat(locale, options).format(parsed)
   },
 } satisfies Record<string, NumberFormatter>
