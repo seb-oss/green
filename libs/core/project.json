@@ -96,10 +96,16 @@
         "command": "node libs/core/build-scripts/icons-generate.cjs"
       }
     },
-    "icons-codeconnect": {
+    "icons-figma-connect": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "node libs/core/build-scripts/icons-codeconnect.cjs"
+        "command": "node libs/core/build-scripts/icons-figma-connect.cjs"
+      }
+    },
+    "icons-figma-connect-publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx figma connect publish --exit-on-unreadable-files"
       }
     },
     "icons-react": {

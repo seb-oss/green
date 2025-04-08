@@ -5,7 +5,10 @@ const path = require('path')
 // Configuration
 const ICONS_API_URL = 'https://api.seb.io/icons/icons.json'
 const FIGMA_BASE_URL = process.env.FIGMA_BASE_URL // Should be provided in .env
-const outputDir = path.resolve(__dirname, '../src/components/icon/figma')
+const outputDir = path.resolve(
+  __dirname,
+  '../src/components/icon/.figma-code-connect',
+)
 
 function generateFigmaContent(componentTag, nodeId) {
   return `import figma, { html } from '@figma/code-connect/html'
