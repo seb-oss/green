@@ -32,7 +32,7 @@ export class GdsSensitiveNumber extends GdsFormattedNumber {
 
   get formattedValue() {
     if (this.hide && !this.currency) {
-      return '0'
+      return '0.00'
     } else if (this.hide) {
       return numberFormats[this.format](0, this.locale, this.currency)
     }
