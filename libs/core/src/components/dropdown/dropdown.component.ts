@@ -10,6 +10,7 @@ import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
 import { GdsListbox } from '../../primitives/listbox/listbox.component'
 import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyle from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
@@ -34,10 +35,9 @@ export * from '../../primitives/listbox/option.component'
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
- * @slot supporting-text - A supporting text that will be displayed below the label and above the input field.
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
  * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.
- * @slot sub-label - ***(deprecated - use `supporting-text` slot instead)*** Renders between the label and the trigger button.
+ * @slot sub-label - ***(deprecated - use `supporting-text` property instead)*** Renders between the label and the trigger button.
  *
  * @event change - Fired when the value of the dropdown is changed through user interaction (not when value prop is set programatically).
  * @event input - Fired when the value of the dropdown is changed through user interaction.
@@ -60,7 +60,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyle, styles]
 
   get type() {
     return 'gds-dropdown'
@@ -158,14 +158,24 @@ export class GdsDropdown<ValueT = any>
 
   /**
    * Whether to hide the label.
+   *
+   * @deprecated - use `plain` instead
    */
   @property({ type: Boolean, attribute: 'hide-label' })
   hideLabel = false
 
   /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
+
+  /**
    * Whether to disable the mobile styles.
    */
-  @property()
+  @property({ type: Boolean })
   disableMobileStyles = false
 
   /**
@@ -255,7 +265,7 @@ export class GdsDropdown<ValueT = any>
   render() {
     return html`
       ${when(
-        !this.hideLabel,
+        !this.plain && !this.hideLabel,
         () => html`
           <gds-form-control-header class="size-${this.size}">
             <label id="label" for="trigger" slot="label">${this.label}</label>
@@ -332,27 +342,29 @@ export class GdsDropdown<ValueT = any>
       </gds-popover>
 
       ${when(
-        !this.hideLabel,
+        this.#shouldShowFooter(),
         () => html`
           <gds-form-control-footer class="size-${this.size}">
-            ${when(
-              this.invalid,
+            ${
+              ``
               // @deprecated
               // Wrapped in a slot for backwards compatibility with the deprecated message slot
               // Remove for 2.0 release
-              () => html`
-                <slot id="message" name="message" slot="message">
-                  <gds-icon-triangle-exclamation
-                    solid
-                  ></gds-icon-triangle-exclamation>
-                  ${this.errorMessage || this.validationMessage}
-                </slot>
-              `,
-            )}
+            }
+            <slot id="message" name="message" slot="message">
+              <gds-icon-triangle-exclamation
+                solid
+              ></gds-icon-triangle-exclamation>
+              ${this.errorMessage || this.validationMessage}
+            </slot>
           </gds-form-control-footer>
         `,
       )}
     `
+  }
+
+  #shouldShowFooter() {
+    return !this.plain && this.invalid
   }
 
   protected _getValidityAnchor(): HTMLElement {
@@ -364,6 +376,7 @@ export class GdsDropdown<ValueT = any>
       <input
         id="trigger"
         role="combobox"
+        class="native-control"
         aria-expanded="${this.open}"
         aria-owns="listbox"
         aria-haspopup="listbox"
@@ -404,6 +417,7 @@ export class GdsDropdown<ValueT = any>
       <button
         id="trigger"
         role="combobox"
+        class="native-control"
         aria-expanded="${this.open}"
         aria-owns="listbox"
         aria-haspopup="listbox"

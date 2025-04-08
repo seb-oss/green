@@ -5,35 +5,23 @@ const style = css`
 
   @layer base {
     :host {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      gap: var(--gds-space-xs);
-      --_transition: all 368ms cubic-bezier(0.4, 0, 0.2, 1);
+      isolation: auto;
+      contain: none;
     }
 
     #field::part(_base) {
       cursor: pointer;
     }
 
-    button {
-      appearance: none;
-      background: transparent;
-      border-width: 0;
-      font-family: inherit;
-      font-size: inherit;
-      line-height: inherit;
-      color: currentColor;
-      cursor: pointer;
-      padding: 0;
-      text-align: left;
+    button#trigger {
       flex: 0 1 100%;
+      cursor: pointer;
 
       /* This prevents overflow when the text is too long */
       display: grid;
     }
 
-    button:focus {
+    #trigger:focus {
       outline: none;
     }
 
@@ -73,14 +61,6 @@ const style = css`
         font-weight: var(--gds-text-weight-book);
         color: var(--gds-color-l3-content-disabled);
       }
-    }
-
-    input[role='combobox'] {
-      appearance: none;
-      background: transparent;
-      border: none;
-      font-size: inherit;
-      outline: none;
     }
 
     [aria-expanded='true'] [slot='trail'] {
