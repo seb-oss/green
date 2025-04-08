@@ -9,7 +9,14 @@ import { DateTimeFormat, dateTimeFormats } from './date-time-formatter'
  * @element gds-formatted-date
  * @status beta
  *
- * `gds-formatted-date` extends `gds-text` and format the date value based on the provided format and locale.
+ * `gds-formatted-date` extends `gds-text` and formats the date to the desired format.
+ *
+ * @example
+ * <gds-formatted-date
+ *   value="2023-10-10T12:00:00Z"
+ *   locale="sv-SE"
+ *   format="dateOnlyNumbers">
+ * </gds-formatted-date>
  */
 
 @gdsCustomElement('gds-formatted-date')
@@ -44,8 +51,8 @@ export class GdsFormattedDate extends GdsFormattedText {
   protected firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties)
 
-    if (!this.value && this.element) {
-      this.value = this.element.textContent ?? undefined
+    if (!this.value && this.textContent) {
+      this.value = this.textContent
     }
   }
 }

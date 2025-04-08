@@ -9,8 +9,14 @@ import { NumberFormats, numberFormats } from '../formatters'
  * @element gds-formatted-number
  * @status beta
  *
- * `gds-formatted-number` extends `gds-text` and format the date value based on the provided format and locale.
+ * `gds-formatted-number` extends `gds-text` and formats the number to the desired format.
  *
+ * @example
+ * <gds-formatted-number
+ *   value="1234.5"
+ *   locale="sv-SE"
+ *   currency="SEK">
+ * </gds-formatted-number>
  */
 @gdsCustomElement('gds-formatted-number')
 export class GdsFormattedNumber extends GdsFormattedText {
@@ -23,7 +29,7 @@ export class GdsFormattedNumber extends GdsFormattedText {
   @property({ type: String })
   currency?: string
 
-  @property()
+  @property({ type: String })
   protected format: NumberFormats = 'decimalsAndThousands'
 
   get formattedValue() {
@@ -33,8 +39,8 @@ export class GdsFormattedNumber extends GdsFormattedText {
   protected firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties)
 
-    if (!this.value && this.element) {
-      this.value = this.element.textContent ?? undefined
+    if (!this.value && this.textContent) {
+      this.value = this.textContent
     }
   }
 }

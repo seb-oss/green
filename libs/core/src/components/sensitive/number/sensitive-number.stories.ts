@@ -30,6 +30,9 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-sensitive-number'),
+    currency: {
+      type: 'string',
+    },
   },
 }
 
@@ -44,7 +47,6 @@ const DefaultParams: Story = {
   },
   args: {
     ...formattedNumberDefault.args,
-    currency: 'SEK',
     hide: true,
   },
 }

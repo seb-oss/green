@@ -9,15 +9,19 @@ import { AccountFormats, accountsFormats } from './account-formatter'
  * @element gds-formatted-account
  * @status beta
  *
- * `gds-formatted-account` extends `gds-text` and format the date value based on the provided format and locale.
+ * `gds-formatted-account` extends `gds-text` and formats the account to the desired format.
  *
+ * @example
+ * <gds-formatted-account
+ *   account="54400023423">
+ * </gds-formatted-account>
  */
 @gdsCustomElement('gds-formatted-account')
 export class GdsFormattedAccount extends GdsFormattedText {
   @property()
   account?: number | string
 
-  @property()
+  @property({ type: String })
   protected format: AccountFormats = 'seb-account'
 
   get formattedValue() {
@@ -27,8 +31,8 @@ export class GdsFormattedAccount extends GdsFormattedText {
   protected firstUpdated(_changedProperties: PropertyValues): void {
     super.firstUpdated(_changedProperties)
 
-    if (!this.account && this.element) {
-      this.account = this.element.textContent ?? undefined
+    if (!this.account && this.textContent) {
+      this.account = this.textContent
     }
   }
 }

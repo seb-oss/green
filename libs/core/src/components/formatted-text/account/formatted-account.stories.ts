@@ -1,16 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/web-components'
-
-import './formatted-account'
-
 import { html } from 'lit'
+
+import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps'
 import { GdsFormattedAccount } from './formatted-account.component'
 
+import './formatted-account'
+import '../../flex'
+
 /**
- * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/formatted-text/account)
  *
- * Style expression properties apply to the outer element unless otherwise specified.
+ * `gds-formatted-account` extends `gds-text` and formats the account to the desired format.
  *
  * @beta
  */
@@ -42,7 +43,8 @@ export const Default: Story = {
   ...DefaultParams,
   name: 'SEB Account',
   render: (args) =>
-    html`<gds-formatted-account
-      .account=${args.account}
-    ></gds-formatted-account>`,
+    html`<gds-flex gap="m" flex-direction="column">
+      <gds-formatted-account .account=${args.account}></gds-formatted-account>
+      <gds-formatted-account>${args.account}</gds-formatted-account>
+    </gds-flex>`,
 }

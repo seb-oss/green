@@ -7,6 +7,10 @@ import { numberFormats } from '../../formatted-text'
 import { GdsFormattedNumber } from '../../formatted-text/number/formatted-number.component'
 
 /**
+ * @element gds-sensitive-number
+ *
+ * @status beta
+ *
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/sensitiv/number)
  *
  * GdsSensitiveNumber is used to display numbers that need to be hidden,
@@ -18,10 +22,8 @@ import { GdsFormattedNumber } from '../../formatted-text/number/formatted-number
  * <gds-sensitive-number
  *   hide
  *   value="1234"
- *   locale="en-GB">
+ *   locale="sv-SE">
  * </gds-sensitive-number>
- *
- * @status beta
  */
 @gdsCustomElement('gds-sensitive-number', { dependsOn: [GdsBlur] })
 export class GdsSensitiveNumber extends GdsFormattedNumber {
