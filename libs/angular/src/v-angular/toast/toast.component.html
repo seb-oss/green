@@ -57,10 +57,16 @@
         </ng-container>
       </div>
       <div class="text-content">
-        <div>{{ t(message.titleText) }}</div>
-        <div *ngIf="message.bodyText" class="text-body-content">
-          {{ t(message.bodyText) }}
-        </div>
+        @if (message.template) {
+          <ng-template [ngTemplateOutlet]="message.template"></ng-template>
+        } @else {
+          <div>{{ t(message.titleText) }}</div>
+          @if (message.bodyText) {
+            <div class="text-body-content">
+              {{ t(message.bodyText) }}
+            </div>
+          }
+        }
       </div>
       <button
         class="close-icon-button"

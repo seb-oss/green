@@ -10,6 +10,24 @@ export class ToastMessageService {
   private messages: ToastMessage[] = []
   private messageSubject = new Subject<ToastMessage[]>()
 
+  add(message: ToastMessage) {
+    const { type, translocoScope, titleText, template, bodyText, timeout } =
+      message
+    const newMessage: ToastMessage = {
+      type: type ? type : MessageType.Information,
+      translocoScope,
+      template,
+      titleText: titleText ?? '',
+      bodyText,
+      timeout,
+    }
+
+    this.removeMessage(newMessage)
+    this.messages.push(newMessage)
+    this.messageSubject.next([...this.messages])
+    this.setMessageRemoveTimeout(newMessage)
+  }
+
   addMessage(
     type: 'success' | 'information' | 'error' | 'warning',
     translocoScope: string,
@@ -39,7 +57,7 @@ export class ToastMessageService {
   }
 
   removeMessage(message: ToastMessage): void {
-    const index = this.getDuplicateMessageIndex(message.titleText)
+    const index = this.getDuplicateMessageIndex(message.titleText ?? '')
     this.removeMessageByIndex(index)
   }
 
