@@ -91,7 +91,6 @@ export const styles = css`
     }
 
     .details.open .content {
-      display: flex;
       padding-block-end: var(--gds-space-l);
     }
 
@@ -100,10 +99,17 @@ export const styles = css`
     }
 
     .content {
-      max-height: var(--_max-height, 0);
-      overflow: hidden;
-      transition: all 240ms cubic-bezier(0.4, 0, 0.2, 1);
+      interpolate-size: allow-keywords;
+      height: 0;
+      transition: height 0.35s ease;
+      overflow-y: clip;
       outline: none;
+    }
+
+    .content.open {
+      height: max-content;
+      max-height: 100vh;
+      overflow-y: auto;
     }
   }
 `
