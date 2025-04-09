@@ -57,18 +57,13 @@ export class GdsCheckbox extends GdsElement {
   @state()
   private _isFocused = false
 
-  constructor() {
-    super()
-    this.addEventListener('keydown', this.#handleKeyDown)
-    this.addEventListener('focus', () => (this._isFocused = true))
-    this.addEventListener('blur', () => (this._isFocused = false))
-  }
-
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'checkbox')
     this._updateAriaState()
-    this.addEventListener('click', this.#handleClick)
+    this.addEventListener('keydown', this.#handleKeyDown)
+    this.addEventListener('focus', () => (this._isFocused = true))
+    this.addEventListener('blur', () => (this._isFocused = false))
   }
 
   private _updateAriaState() {
@@ -100,10 +95,7 @@ export class GdsCheckbox extends GdsElement {
   }
 
   #handleClick = (e: Event) => {
-    if (this.disabled || !this.value || !this.label) return
-    e.preventDefault()
-
-    this.checked = true
+    this.checked = !this.checked
     this.focus()
     this.dispatchEvent(new Event('gds-checkbox-change', { bubbles: true }))
   }
@@ -124,6 +116,7 @@ export class GdsCheckbox extends GdsElement {
         supporting-text=${this.supportingText}
         label=${this.label}
         type="checkbox"
+        @click=${this.#handleClick}
       >
         <div class="checkbox">
           <div class="state"></div>

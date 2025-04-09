@@ -55,7 +55,7 @@ class CheckboxGroup extends GdsFormControlElement<string> {
    *
    * @readonly
    */
-  get checkboxs(): GdsCheckbox[] {
+  get checkboxes(): GdsCheckbox[] {
     return Array.from(
       this.querySelectorAll('[gds-element=gds-checkbox]'),
     ) as GdsCheckbox[]
@@ -106,7 +106,7 @@ class CheckboxGroup extends GdsFormControlElement<string> {
   #renderCheckboxGroupContents() {
     const elements = [
       this.#renderFieldControlHeader(),
-      this.#renderCheckboxs(),
+      this.#renderCheckboxes(),
       this.#renderFieldControlFooter(),
     ]
 
@@ -129,7 +129,7 @@ class CheckboxGroup extends GdsFormControlElement<string> {
     }
   }
 
-  #renderCheckboxs() {
+  #renderCheckboxes() {
     return html` <div class="content">
       <slot></slot>
     </div>`
