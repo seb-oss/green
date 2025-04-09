@@ -18,17 +18,12 @@ import {
   NgControl,
 } from '@angular/forms'
 
+import type { GdsOption } from '@sebgroup/green-core/components/dropdown/index.js'
+
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown/dropdown.component.js'
+import * as DropdownTransStyles from '@sebgroup/green-core/components/dropdown/dropdown.trans.styles.js'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
-
-import '@sebgroup/green-core/components/dropdown/index.js'
-
-import type {
-  GdsDropdown,
-  GdsOption,
-} from '@sebgroup/green-core/components/dropdown/index.js'
-
-import * as DropdownTransStyles from '@sebgroup/green-core/components/dropdown/dropdown.trans.styles.js'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -179,6 +174,7 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
     @Inject(Injector) private injector: Injector,
     private _cdr: ChangeDetectorRef,
   ) {
+    GdsDropdown.define()
     DropdownTransStyles.register()
   }
 

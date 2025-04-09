@@ -1,4 +1,5 @@
 import React, {
+  AriaAttributes,
   PropsWithChildren,
   useEffect,
   useLayoutEffect,
@@ -31,6 +32,7 @@ interface FormItemProps
   validator?: IValidator
   inputId?: string
   role?: string
+  'aria-live'?: AriaAttributes['aria-live']
   /** Intended to use together with TextArea to show character counter. */
   rightAlignedFooterInfo?: string
 }
@@ -51,6 +53,7 @@ export const FormItem = ({
   expandableInfoButtonLabel,
   role,
   rightAlignedFooterInfo,
+  'aria-live': ariaLive = 'assertive',
 }: FormItemProps) => {
   const expandableInnerRef = useRef<HTMLDivElement>(null)
   const expandableRef = useRef<HTMLDivElement>(null)
@@ -147,12 +150,14 @@ export const FormItem = ({
           className="gds-form-item__expandable-info"
           hidden={isHidden}
           style={{ height: isExpanded ? expandableHeight : 0 }}
+          // TODO: Remove when inert is supported in React types
+          {...{ inert: isHidden ? true : undefined }}
         >
-          <div ref={expandableInnerRef}> {expandableInfo} </div>
+          <div ref={expandableInnerRef}> {!isHidden && expandableInfo} </div>
         </div>
       )}
       {children}
-      <div className="gds-form-item__footer">
+      <div className="gds-form-item__footer" aria-live={ariaLive}>
         {validator && (
           <>
             <TriangleExclamationIcon
@@ -160,6 +165,7 @@ export const FormItem = ({
               width={16}
               height={16}
               style={{ color: 'var(--gds-sys-color-text-error)' }}
+              aria-hidden="true"
             />
             <span className="form-info" id={`${inputId}_message`}>
               {validator.message}
@@ -173,6 +179,7 @@ export const FormItem = ({
               textAlign: 'right',
               width: validator ? 'auto' : '100%',
             }}
+            aria-hidden="true"
           >
             {rightAlignedFooterInfo}
           </span>

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.10.3
+
+### Patch Changes
+
+- 8851dbd: **Tokens: heading-2xs:** Add missing font size
+
+## 0.10.2
+
+### Patch Changes
+
+- d6d45d1: **Tokens:** L2 content information typo
+
 ## 0.10.1
 
 ### Patch Changes

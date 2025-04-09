@@ -15,8 +15,13 @@ import {
 } from '@angular/forms'
 
 @Directive({
-  selector:
-    'gds-input, gds-textarea, gds-dropdown, gds-datepicker, gds-select, gds-radio-group, [nggCoreControl]',
+  selector: `gds-input:not([ngDefaultControl]),
+     gds-textarea:not([ngDefaultControl]),
+     gds-dropdown:not([ngDefaultControl]),
+     gds-datepicker:not([ngDefaultControl]),
+     gds-select:not([ngDefaultControl]),
+     gds-radio-group:not([ngDefaultControl]),
+     [nggCoreControl]`,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

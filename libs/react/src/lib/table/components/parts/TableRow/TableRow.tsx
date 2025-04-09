@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import React, { JSX, useId } from 'react'
 import classnames from 'classnames'
 
 import { useTableContext } from '../../context/TableContextProvider'

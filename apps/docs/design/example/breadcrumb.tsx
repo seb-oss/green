@@ -15,7 +15,7 @@ const Breadcrumb = () => {
       </Link>
       <GdsText> / </GdsText>
       <Link href={'/component/breadcrumb'}>
-        <GdsText color="primary/0.4">Breadcrumb</GdsText>
+        <GdsText color="primary">Breadcrumb</GdsText>
       </Link>
     </GdsFlex>
   )

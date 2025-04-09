@@ -5,10 +5,12 @@ import {
   GdsContextMenu,
   GdsMenuHeading,
   GdsMenuItem,
-} from '@sebgroup/green-core/components/context-menu/index.js'
+} from '@sebgroup/green-core/components/context-menu/context-menu.component'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
+GdsContextMenu.define()
+GdsMenuHeading.define()
 registerTransitionalStyles()
 
 export const ContextMenu = createComponent({

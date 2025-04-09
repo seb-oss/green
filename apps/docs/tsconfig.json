@@ -37,6 +37,8 @@
       "@sebgroup/green-charts": ["libs/charts/src/index.ts"],
       "@sebgroup/green-core": ["dist/libs/core/src"],
       "@sebgroup/green-core/*": ["dist/libs/core/src/*"],
+      "@sebgroup/green-core/react": ["dist/libs/core/src/generated/react"],
+      "@sebgroup/green-core/react/*": ["dist/libs/core/src/generated/react/*"],
       "@sebgroup/green-react": ["libs/react/src/index.ts"],
       "@sebgroup/green-react/core/*": ["libs/react/src/core"],
       "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"],

@@ -17,9 +17,7 @@ import {
 import { endOfDay, startOfDay } from 'date-fns'
 
 import { randomId } from '@sebgroup/extract'
-
-import '@sebgroup/green-core/components/datepicker/index.js'
-
+import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/datepicker.component.js'
 import * as DatepickerTransStyles from '@sebgroup/green-core/components/datepicker/datepicker.trans.styles.js'
 
 export interface Attributes {
@@ -116,6 +114,7 @@ export class NggDatepickerComponent
   }
 
   constructor(private _cdr: ChangeDetectorRef) {
+    GdsDatepicker.define()
     DatepickerTransStyles.register()
   }
 
