@@ -101,7 +101,9 @@ export const styles = css`
     .content {
       interpolate-size: allow-keywords;
       height: 0;
-      transition: height 0.35s ease;
+      transition:
+        height 0.35s ease,
+        padding-block-end 0.35s ease;
       overflow-y: clip;
       outline: none;
     }
@@ -109,7 +111,6 @@ export const styles = css`
     .content.open {
       height: max-content;
       max-height: 100vh;
-      overflow-y: auto;
     }
   }
 `
