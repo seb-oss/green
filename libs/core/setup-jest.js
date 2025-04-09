@@ -1,23 +1,53 @@
 global.CSSStyleSheet = function () {}
 global.CSSStyleSheet.prototype.replaceSync = (k) => false
 
-global.HTMLElement.prototype.attachInternals = () => {
-  return new global.ElementInternals()
-}
-global.HTMLElement.prototype.closest = () => {
-  return null
+global.ElementInternals = function () {
+  // Private state for this instance
+  this._validity = { valid: true } // Default to valid
+  this._validationMessage = '' // Default message
 }
 
-global.ElementInternals = function () {}
-global.ElementInternals.prototype.setValidity = () => {}
-global.ElementInternals.prototype.setFormValue = () => {}
-global.ElementInternals.prototype.validity = () => {
-  valid: true
+// Mock ElementInternals
+global.ElementInternals.prototype.setValidity = function (
+  validityFlags = {},
+  message = '',
+) {
+  this._validity = {
+    valid: validityFlags.valid !== false,
+    ...validityFlags,
+  }
+  this._validationMessage = message
 }
-global.ElementInternals.prototype.checkValidity = () => {}
-global.ElementInternals.prototype.reportValidity = () => {}
-global.ElementInternals.prototype.willValidate = () => {}
-global.ElementInternals.prototype.validationMessage = ''
+global.ElementInternals.prototype.setFormValue = function (value) {}
+Object.defineProperty(global.ElementInternals.prototype, 'validity', {
+  get() {
+    return this._validity
+  },
+})
+global.ElementInternals.prototype.checkValidity = function () {
+  return this._validity.valid
+}
+global.ElementInternals.prototype.reportValidity = function () {
+  return this._validity.valid
+}
+Object.defineProperty(global.ElementInternals.prototype, 'willValidate', {
+  get() {
+    return true
+  },
+})
+Object.defineProperty(global.ElementInternals.prototype, 'validationMessage', {
+  get() {
+    return this._validationMessage
+  },
+})
+global.HTMLElement = global.HTMLElement || class HTMLElement {}
+global.HTMLElement.prototype.attachInternals = function () {
+  return new global.ElementInternals()
+}
+
+global.HTMLElement.prototype.closest = function () {
+  return null
+}
 
 window.matchMedia = () => {
   return {
