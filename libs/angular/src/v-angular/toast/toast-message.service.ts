@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, TemplateRef } from '@angular/core'
 import { Observable, Subject } from 'rxjs'
 
 import { MessageType, ToastMessage } from './toast.models'
@@ -34,6 +34,7 @@ export class ToastMessageService {
     titleText: string,
     bodyText?: string,
     timeout?: number,
+    template?: TemplateRef<any>,
   ): void
   addMessage(
     type: MessageType,
@@ -41,6 +42,7 @@ export class ToastMessageService {
     titleText: string,
     bodyText?: string,
     timeout?: number,
+    template?: TemplateRef<any>,
   ): void {
     const newMessage: ToastMessage = {
       type,
@@ -48,6 +50,7 @@ export class ToastMessageService {
       titleText,
       bodyText,
       timeout,
+      template,
     }
 
     this.removeMessage(newMessage)
