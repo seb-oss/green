@@ -3,7 +3,7 @@ $seb-font-path: '../fonts' !default;
 @mixin add-fonts {
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Light.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Light.woff2')
       format('woff2');
     font-weight: 300;
     font-style: normal;
@@ -12,7 +12,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Regular.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Regular.woff2')
       format('woff2');
     font-weight: 400;
     font-style: normal;
@@ -21,7 +21,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Book.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Book.woff2')
       format('woff2');
     font-weight: 450;
     font-style: normal;
@@ -30,7 +30,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Medium.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Medium.woff2')
       format('woff2');
     font-weight: 500;
     font-style: normal;
@@ -39,7 +39,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Bold.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-Bold.woff2')
       format('woff2');
     font-weight: 700;
     font-style: normal;
@@ -52,7 +52,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-LightItalic.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-LightItalic.woff2')
       format('woff2');
     font-weight: 300;
     font-style: italic;
@@ -61,7 +61,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-RegularItalic.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-RegularItalic.woff2')
       format('woff2');
     font-weight: 400;
     font-style: italic;
@@ -70,7 +70,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-BookItalic.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-BookItalic.woff2')
       format('woff2');
     font-weight: 450;
     font-style: italic;
@@ -79,7 +79,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-MediumItalic.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-MediumItalic.woff2')
       format('woff2');
     font-weight: 500;
     font-style: italic;
@@ -88,7 +88,7 @@ $seb-font-path: '../fonts' !default;
 
   @font-face {
     font-family: 'SEB SansSerif GDS';
-    src: url('#{variables.$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-BoldItalic.woff2')
+    src: url('#{$seb-font-path}/SEBSansSerifGDS/SEBSansSerifGDS-BoldItalic.woff2')
       format('woff2');
     font-weight: 700;
     font-style: italic;

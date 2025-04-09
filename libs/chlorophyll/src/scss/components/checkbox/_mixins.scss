@@ -127,6 +127,7 @@ $invalid-color: var(--gds-sys-color-text-error);
   }
 
   #{$selector} #{$checkbox-selector} ~ i::after {
+    box-sizing: border-box;
     content: '';
     opacity: 0;
     position: absolute;

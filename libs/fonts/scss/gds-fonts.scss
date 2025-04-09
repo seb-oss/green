@@ -1,7 +1,8 @@
 /**
  *  SEB SansSerif GDS
  */
-
+ $seb-font-path: '../fonts' !default;
+ 
 @use 'SEB-SansSerif-GDS' as font;
 
 @include font.add-fonts();

@@ -1,7 +1,7 @@
 @use 'mixins';
 
 // Tab
-[role='tab'] {
+.gds-tabs__tab {
   @include mixins.tab;
 }
 
@@ -11,16 +11,16 @@
 }
 
 // Tab bar
-[role='tablist'] {
+.gds-tabs {
   @include mixins.tabs-bar;
 }
 
 // Tab panel
-[role='tabpanel'] {
+.gds-tabs__panel {
   @include mixins.tabs-panel;
 }
 
 // Selected tab panel
-[role='tabpanel'][aria-hidden='false'] {
+.gds-tabs__panel[aria-hidden='false'] {
   @include mixins.tabs-panel--selected;
 }

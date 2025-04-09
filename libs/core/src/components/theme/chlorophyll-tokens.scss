@@ -1,31 +1,27 @@
-@use '../../../../chlorophyll/src/scss/tokens/shame' as tokens;
-@use '../../../../chlorophyll/src/scss/tokens/colors' as colors;
 @use '../../../../chlorophyll/src/scss/tokens/shape' as shape;
-@use '../../../../chlorophyll/src/scss/tokens/components' as components;
-@use '../../../../chlorophyll/src/scss/components/themes/mixins' as theme_mixins;
+@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-dark-2016' as
+  dark-tokens;
 
 :host {
   display: contents;
+  @include shape.add-tokens;
 }
 
 :host([color-scheme='light']) {
-  @include shape.add-tokens;
-  @include colors.add-color-tokens;
-  @include tokens.light-mode;
-  @include theme_mixins.add-theme;
+  @include light-tokens.add-variables();
 }
 
 /* force dark mode */
 :host([color-scheme='dark']) {
-  @include tokens.dark-mode;
-  @include theme_mixins.dark-theme;
+  @include dark-tokens.add-variables();
 }
 
 /* use preferred color scheme */
 @media (prefers-color-scheme: dark) {
   :host,
   :host([color-scheme='auto']) {
-    @include tokens.dark-mode;
-    @include theme_mixins.dark-theme;
+    @include dark-tokens.add-variables();
   }
 }
