@@ -6,6 +6,7 @@ export interface ToastMessage {
   titleText?: string
   bodyText?: string
   template?: TemplateRef<any>
+  templateContext?: any
   timeout?: number
   timeoutId?: number
   timeoutStartTime?: number

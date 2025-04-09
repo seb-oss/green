@@ -58,7 +58,10 @@
       </div>
       <div class="text-content">
         @if (message.template) {
-          <ng-template [ngTemplateOutlet]="message.template"></ng-template>
+          <ng-template
+            [ngTemplateOutlet]="message.template"
+            [ngTemplateOutletContext]="{ $implicit: message.templateContext }"
+          ></ng-template>
         } @else {
           @if (message.titleText) {
             <div>{{ t(message.titleText) }}</div>

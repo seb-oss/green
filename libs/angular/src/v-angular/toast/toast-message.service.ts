@@ -11,15 +11,23 @@ export class ToastMessageService {
   private messageSubject = new Subject<ToastMessage[]>()
 
   add(message: ToastMessage) {
-    const { type, translocoScope, titleText, template, bodyText, timeout } =
-      message
+    const {
+      type,
+      translocoScope,
+      titleText,
+      template,
+      templateContext,
+      bodyText,
+      timeout,
+    } = message
     const newMessage: ToastMessage = {
       type: type ? type : MessageType.Information,
       translocoScope,
-      template,
       titleText: titleText ?? '',
       bodyText,
       timeout,
+      template,
+      templateContext,
     }
 
     this.removeMessage(newMessage)
@@ -35,6 +43,7 @@ export class ToastMessageService {
     bodyText?: string,
     timeout?: number,
     template?: TemplateRef<any>,
+    templateContext?: any,
   ): void
   addMessage(
     type: MessageType,
@@ -43,6 +52,7 @@ export class ToastMessageService {
     bodyText?: string,
     timeout?: number,
     template?: TemplateRef<any>,
+    templateContext?: any,
   ): void {
     const newMessage: ToastMessage = {
       type,
@@ -51,6 +61,7 @@ export class ToastMessageService {
       bodyText,
       timeout,
       template,
+      templateContext,
     }
 
     this.removeMessage(newMessage)
