@@ -17,6 +17,21 @@ import 'reflect-metadata'
  */
 export class GdsElement extends LitElement {
   /**
+   * Defines the custom element in the custom element registry.
+   * This method needs to be called once before the element can be used.
+   */
+  static define(): void {
+    // This method is meant to be overriden by the gdsCustomElement decorator,
+    // so here we do nothing.
+    return void 0
+  }
+
+  /**
+   * Whether the element is defined in the custom element registry.
+   */
+  static isDefined = false
+
+  /**
    * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.
    *
    * @attribute gds-element

@@ -3,9 +3,8 @@ const path = require('path')
 const prettier = require('prettier')
 const prettierConfig = import('../../../prettier.config.mjs')
 const { getAllComponents } = require('./shared.cjs')
-//const { inspect } = require('util')
 
-const reactDir = path.join('./libs/react/src/core')
+const reactDir = path.join('libs/core/src/generated/react')
 
 // Clear build directory
 if (fs.existsSync(reactDir)) {
@@ -18,59 +17,49 @@ const metadata = JSON.parse(
   fs.readFileSync(path.join('libs/core/custom-elements.json'), 'utf8'),
 )
 const components = getAllComponents(metadata)
-const filteredComponents = components
-  .filter((component) => component.tagName)
-  .filter((component) => component.tagName.indexOf('icon') === -1)
+const filteredComponents = components.filter((component) => component.tagName)
 const index = []
 let i = 0
 
 for (const component of filteredComponents) {
   const tagWithoutPrefix = component.tagName.replace(/^gds-/, '')
-  const componentDir = path.join(reactDir, tagWithoutPrefix)
+  const subDir = component.tagName.includes('icon') ? 'icons/' : ''
+  const componentDir = path.join(path.join(reactDir, subDir), tagWithoutPrefix)
   const componentFile = path.join(componentDir, 'index.ts')
-  const importPath = component.path
-    .replace(/\.ts$/, '.js')
-    .replace(/^src\//, '')
-  const events = (component.events || [])
-    .map((event) => `${event.reactName}: '${event.name}'`)
-    .join(',\n')
+  const importPath = component.path.replace(/^src\//, '').replace(/\.ts$/, '')
 
   fs.mkdirSync(componentDir, { recursive: true })
 
   const jsDoc = component.jsDoc || ''
 
+  const levels = subDir.length > 0 ? '../../../..' : '../../..'
+
+  // We allow the use of react as an extraneous dependency here because we expect any consumer
+  // that imports React components from Green Core to already have React as a dependency.
+  // TODO: List react as an optional peer dependency in package.json in the next major version.
   prettier
     .format(
       `
-        import * as React from 'react';
-        import { createComponent } from '@lit/react';
-        import { getScopedTagName } from '@sebgroup/green-core/scoping'
-        import { ${component.name} } from '@sebgroup/green-core/${importPath}';
+        import { getReactComponent } from '${levels}/utils/react';
+        import { ${component.name} as ${component.name}Class } from '${levels}/${importPath}';
 
-        const tagName = getScopedTagName('${component.tagName}')
-        //${component.name}.define('${component.tagName}')
+        // eslint-disable-next-line import/no-extraneous-dependencies
+        import { createElement } from 'react';
 
         ${jsDoc}
-        const reactWrapper = createComponent({
-          tagName,
-          elementClass: ${component.name},
-          react: React,
-          events: {
-            ${events}
-          },
-          displayName: "${component.name}"
-        })
-
-        export default reactWrapper
+        export const ${component.name} = (props: React.ComponentProps<ReturnType<typeof getReactComponent<${component.name}Class>>>) => {
+          ${component.name}Class.define();
+          const JSXElement = getReactComponent<${component.name}Class>('${component.tagName}');
+          const propsWithClass = {...props, class: props.className}
+          return createElement(JSXElement, propsWithClass);
+        };
       `,
       Object.assign(prettierConfig, {
         parser: 'babel-ts',
       }),
     )
     .then((formattedSource) => {
-      index.push(
-        `export { default as ${component.name} } from './${tagWithoutPrefix}';`,
-      )
+      index.push(`export * from './${subDir}${tagWithoutPrefix}/index.js';`)
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 

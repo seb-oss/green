@@ -1,5 +1,43 @@
 # Changelog
 
+## 5.7.0
+
+### Minor Changes
+
+- a6fee64: **V-Angular Input:** Adding small variant
+  **V-Angular RadioButton:** Adding small variant
+
+### Patch Changes
+
+- Updated dependencies [a538e40]
+- Updated dependencies [a6fee64]
+- Updated dependencies [a6fee64]
+- Updated dependencies [bc58619]
+- Updated dependencies [0e5e557]
+  - @sebgroup/chlorophyll@3.6.18
+  - @sebgroup/green-core@1.73.0
+
+## 5.6.1
+
+### Patch Changes
+
+- 0e6d189: Update how underlying Core components are imported. Affects NggDropdown, NggDatepicker and NggContextMenu
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
+## 5.6.0
+
+### Minor Changes
+
+- d75df66: **V-Angular**: Adding href to alert-ribbon and fixing icons in toast
+
+### Patch Changes
+
+- 9b15233: **V-Angular Slide-out:** Set focus on first focusable element instead of last focusable element
+
 ## 5.5.4
 
 ### Patch Changes
