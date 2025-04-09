@@ -10,8 +10,6 @@ export const accountsFormats = {
         : (value?.toString() ?? '')
 
     if (account.length !== 11) {
-      // TODO: Should this throw an error?
-      // console.warn('Account number must be 11 digits for SEB accounts')
       return account
     }
 

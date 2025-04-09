@@ -44,13 +44,6 @@ export class GdsFormattedDate extends GdsFormattedText {
       )
     }
 
-    // TODO: Should this throw an error?
-    // if (this.format) {
-    //   console.warn(`${this.format} is not an available format`)
-    // } else {
-    //   console.warn('No format provided')
-    // }
-
     return this.value?.toString() ?? ''
   }
 
