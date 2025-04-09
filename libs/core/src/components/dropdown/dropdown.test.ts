@@ -383,7 +383,8 @@ describe('<gds-dropdown>', () => {
 
   it('should set gds-form-control-footer class based on size', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown label="My dropdown" size="small"> </gds-dropdown>
+      <gds-dropdown label="My dropdown" size="small" .invalid=${true}>
+      </gds-dropdown>
     `)
     const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>(
       '[gds-element=gds-form-control-footer]',
@@ -395,7 +396,7 @@ describe('<gds-dropdown>', () => {
 
   it('should set gds-form-control-footer class based on default size', async () => {
     const el = await fixture<GdsDropdown>(html`
-      <gds-dropdown label="My dropdown"> </gds-dropdown>
+      <gds-dropdown label="My dropdown" .invalid=${true}> </gds-dropdown>
     `)
     const gdsFormControlFooter = el.shadowRoot!.querySelector<HTMLElement>(
       '[gds-element=gds-form-control-footer]',

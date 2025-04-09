@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.73.0
+
+### Minor Changes
+
+- a6fee64: **Form controls:** Add `plain` attribute that hides header and footer, removing all surrounding space from the control
+  **Form controls:** Footer is now hidden and does not add space when nothing is displayed
+
+### Patch Changes
+
+- a538e40: **Field base:** fixing colours in darkmode
+- a6fee64: **Form controls:** Set 2xs gap between form control parts
+- bc58619: **Icon:** Fix missing export of `GdsIcon` base-class
+- 0e5e557: **Details:** Patch content getting cut
+
+## 1.72.0
+
+### Minor Changes
+
+- 8851dbd: **Accordion:** Add new component `gds-accordion`
+
 ## 1.71.2
 
 ### Patch Changes

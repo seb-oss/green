@@ -34,28 +34,54 @@ export class NggvInputComponent
   extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
-  /** Adding .gds-form-item as a class to host element */
+  /**
+   * Adding .gds-form-item as a class to host element
+   */
   @HostBinding('class') class = 'gds-form-item'
-  /** Special property used for selecting DOM elements during automated UI testing. */
+  /**
+   * Adding .gds-form-item--small class based on size input for styling
+   */
+  @HostBinding('class') @Input() size: 'small' | 'large' = 'large'
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'input'
-  /** Type of input field. Should avoid types that modify field too much such as range. */
+  /**
+   * Type of input field. Should avoid types that modify field too much such as range.
+   */
   @Input() type = 'text'
-  /** Text shown before input has a written value. */
+  /**
+   * Text shown before input has a written value.
+   */
   @Input() placeholder?: string
-  /** If set to "on", hint for form autofill feature. */
+  /**
+   * If set to "on", hint for form autofill feature.
+   */
   @Input() autocomplete = 'on'
-  /** If set to true, the value will not be editable. */
+  /**
+   * If set to true, the value will not be editable.
+   */
   @Input() readonly = false
-  /** If set to true, enables the Angular template-driven email validator. */
+  /**
+   * If set to true, enables the Angular template-driven email validator.
+   */
   @Input() email = false
-  /** Minimum value required for numeric input types. */
+  /**
+   * Minimum value required for numeric input types.
+   */
   @Input() min = 0
-  /** Maximum value required for numeric input types. */
+  /**
+   * Maximum value required for numeric input types.
+   */
   @Input() max = Number.MAX_SAFE_INTEGER
-  /** Incremental values that are valid for numeric input types. */
+  /**
+   * Incremental values that are valid for numeric input types.
+   */
   @Input() step = 1
-  /** Minimum length (number of characters) of value. */
+  /**
+   * Minimum length (number of characters) of value.
+   */
   @Input() set minLength(length: number) {
     this._minlength = length
   }

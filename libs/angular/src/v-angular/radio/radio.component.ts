@@ -70,13 +70,19 @@ export class NggvRadioComponent
   extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
-  /** Special property used for selecting DOM elements during automated UI testing. */
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'radio'
-
-  /** Syncs a FormControl in an existing FormGroup to a form control element by name. */
+  /**
+   * Sets class on host element based on size input for styling
+   */
+  @HostBinding('class') @Input() size: 'small' | 'large' = 'large'
+  /**
+   * Syncs a FormControl in an existing FormGroup to a form control element by name.
+   */
   @Input() formControlName?: string
-
   /**
    * Creates a new RadioComponent
    * @param ngControl optional FormControl provided when component is used in a form, through dependency injection.
