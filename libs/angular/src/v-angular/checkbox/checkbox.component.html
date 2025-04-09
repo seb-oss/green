@@ -22,7 +22,7 @@
     <label
       [id]="id + '-label'"
       [attr.for]="id + '-checkbox'"
-      class="form-control"
+      class="gds-form-control"
       *transloco="let t; read: scope"
     >
       <input
@@ -66,7 +66,7 @@
   <!-- ERRORS -->
   <ng-container *transloco="let t; read: scope">
     <div
-      class="form-info form-info--error"
+      class="gds-form-info gds-form-info--error"
       [attr.for]="id + '-checkbox'"
       *ngIf="invalid && (error || ngControl?.invalid)"
     >

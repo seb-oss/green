@@ -1,9 +1,6 @@
 @use '../../tokens';
 @use 'mixins';
 
-/**
- * Modal component styles
- */
 .gds-modal {
   @include mixins.modal();
 }

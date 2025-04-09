@@ -51,9 +51,9 @@
   @include common.add-hover-active-state();
   & {
     background: transparent;
-    border-color: var(--gds-sys-color-blue-dark-2);
-    color: var(--gds-sys-color-blue-dark-2);
-    --color: #{var(--gds-sys-color-blue-dark-2)};
+    border-color: var(--gds-sys-color-dark-blue-2);
+    color: var(--gds-sys-color-dark-blue-2);
+    --color: #{var(--gds-sys-color-dark-blue-2)};
   }
 
   &:disabled,
@@ -69,8 +69,8 @@
   & {
     background: transparent;
     border-color: transparent;
-    color: var(--gds-sys-color-blue-dark-2);
-    --color: #{var(--gds-sys-color-blue-dark-2)};
+    color: var(--gds-sys-color-dark-blue-2);
+    --color: #{var(--gds-sys-color-dark-blue-2)};
   }
 
   &:disabled,
@@ -84,7 +84,7 @@
   @include common.add-hover-active-state();
   & {
     background: var(--gds-sys-color-dark-blue-2);
-    border-color: var(--gds-sys-color-blue-dark-2);
+    border-color: var(--gds-sys-color-dark-blue-2);
     color: var(--gds-sys-color-text-white);
     --color: #{var(--gds-sys-color-text-white)};
   }

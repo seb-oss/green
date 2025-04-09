@@ -71,6 +71,7 @@ $invalid-color: var(--gds-sys-color-text-error);
 
   #{$selector} #{$checkbox-selector}:indeterminate ~ i::after {
     border-bottom: 2px solid var(--gds-sys-color-background-primary);
+    box-sizing: border-box;
     border-left: none;
     transform: scale(1) rotate(0deg);
     opacity: 1;

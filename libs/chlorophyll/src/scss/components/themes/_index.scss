@@ -1,6 +1,3 @@
-@use '../../tokens/shame' as tokens;
-@use '../../tokens/components' as components;
-@use '../../tokens/colors' as colors;
 @use '../../tokens/z-index' as z-index;
 @use '../../tokens/mixin-sys-light-2016' as light-tokens;
 @use '../../tokens/mixin-sys-dark-2016' as dark-tokens;
@@ -24,10 +21,5 @@
   @include shape.add-tokens;
   @include colors.add-color-tokens;
   @include z-index.add-tokens;
-  //@include components.add-checkbox-tokens;
-  //@include components.add-radio-tokens;
-  //@include components.add-list-tokens;
-  @include tokens.light-mode;
   @include light-tokens.add-variables();
-  @include mixins.add-theme();
 }

@@ -97,9 +97,9 @@
            */
           &.sg-date-today {
             background: transparent;
-            box-shadow: inset 0 0 0 2px var(--gds-sys-color-blue-dark-2);
+            box-shadow: inset 0 0 0 2px var(--gds-sys-color-dark-blue-2);
             border-radius: 4px;
-            color: var(--gds-sys-color-blue-dark-2);
+            color: var(--gds-sys-color-dark-blue-2);
           }
 
           /**
@@ -131,7 +131,7 @@
            * Selected
            */
           &[aria-selected='true'] {
-            background: var(--gds-sys-color-blue-dark-2);
+            background: var(--gds-sys-color-dark-blue-2);
             border-radius: 4px;
             border: solid 1px var(--gds-sys-color-background-primary);
             color: var(--gds-sys-color-text-inverted);
@@ -141,7 +141,7 @@
            * Highlighted
            */
           &[tabindex='0'] {
-            background: var(--gds-sys-color-blue-dark-2);
+            background: var(--gds-sys-color-dark-blue-2);
             border-radius: 4px;
             border: solid 1px var(--gds-sys-color-background-primary);
             color: var(--gds-sys-color-text-inverted);
@@ -151,7 +151,7 @@
            * Active (pressed)
            */
           &:hover:active:not(.disabled) {
-            background: var(--gds-sys-color-blue-dark-2);
+            background: var(--gds-sys-color-dark-blue-2);
             border-radius: 4px;
             border: solid 1px var(--gds-sys-color-background-primary);
             color: var(--gds-sys-color-text-inverted);
@@ -236,7 +236,7 @@
          */
         &.sg-first-date:not(:hover),
         &.sg-last-date:not(:hover) {
-          background: var(--gds-sys-color-blue-dark-2);
+          background: var(--gds-sys-color-dark-blue-2);
         }
       }
 

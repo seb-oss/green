@@ -44,7 +44,7 @@
         <div class="gds-field-checkbox-wrap">
           <label
             [attr.for]="'cb_header__' + initId"
-            class="form-control"
+            class="gds-form-control"
             id="thead-checkbox"
           >
             <input
@@ -106,7 +106,7 @@
           <div class="gds-field-checkbox-wrap">
             <label
               [attr.for]="'cb_row__' + initId + '_' + i"
-              class="form-control"
+              class="gds-form-control"
             >
               <input
                 *ngIf="rowSelectors.get(item[rowId])"
@@ -131,28 +131,34 @@
           <ng-container
             *ngIf="expandable && i === 0; else nonExpandableTemplate"
           >
-        <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
-            <div class="gds-item-field-wrap">
-              <span
-                class="chevron-field"
-                [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
-              >
-                <svg
-                  *ngIf="item.subItems.length > 0"
-                  width="18" height="14" viewBox="0 0 24 24" fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+            <ng-container
+              *ngIf="expandable && i === 0; else nonExpandableTemplate"
+            >
+              <div class="gds-item-field-wrap">
+                <span
+                  class="chevron-field"
+                  [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
                 >
-                  <path
-                    d="M20 9L12 17L4 9"
-                    stroke="currentColor"
-                    stroke-width="2.6"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
-              {{ item[column.property] }} ({{ item.subItems.length }})
-            </div>
+                  <svg
+                    *ngIf="item.subItems.length > 0"
+                    width="18"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20 9L12 17L4 9"
+                      stroke="currentColor"
+                      stroke-width="2.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </span>
+                {{ item[column.property] }} ({{ item.subItems.length }})
+              </div>
+            </ng-container>
           </ng-container>
 
           <ng-template #nonExpandableTemplate>
@@ -181,10 +187,19 @@
             *ngFor="let column of tableColumns"
             [columnType]="column.valueType"
             [value]="subItem[column.property]"
-            (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
+            (click)="
+              propagateItemClick(subItem, column.preventDefaultClickEvent)
+            "
           >
-            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
-              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }">
+            <ng-container
+              *ngIf="
+                customRowTemplates.get(column.property) as tdTemplate;
+                else defaultTdTemplate
+              "
+            >
+              <ng-template
+                *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"
+              >
               </ng-template>
             </ng-container>
             <ng-template #defaultTdTemplate>

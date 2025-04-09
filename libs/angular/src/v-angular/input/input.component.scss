@@ -1,17 +1,12 @@
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
 @use '../../../../chlorophyll/src/scss/components/input/mixins';
 @use '../../../../chlorophyll/src/scss/components/form/mixins' as form-group;
-
 @use '../../../../chlorophyll/src/scss/components/validation/mixins' as
   validation;
-@use '../../../../chlorophyll/src/scss/tokens';
 
 :host {
-  --sg-text-primary: #333;
-  --sg-form-control-bg: #fff;
-  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
-  --sg-border-radius: 4px;
-  --sg-border-width: 1px;
-  --sg-border-color: #868686;
+  @include light-tokens.add-variables();
 
   * {
     box-sizing: border-box;
@@ -21,11 +16,11 @@
     @include form-group.add-form-item();
 
     .gds-form-item__footer:not(:empty) {
-      .form-info {
+      .gds-form-info {
         font-weight: 500;
       }
 
-      .form-info--error {
+      .gds-form-info--error {
         display: flex;
         align-items: flex-start;
         gap: 0.5em;
@@ -36,7 +31,7 @@
         }
       }
 
-      > .form-info--countdown {
+      > .gds-form-info--countdown {
         font-weight: 400;
       }
     }
@@ -46,9 +41,8 @@
     display: none;
   }
 
-  @include mixins.add-text-input;
-
   input {
+    @include mixins.add-text-input;
     width: 100%;
     line-height: 18px;
     font-size: 1rem;
@@ -63,7 +57,7 @@
     }
 
     .is-invalid & {
-      @include validation.add-feedback(tokens.$intent-danger-background);
+      @include validation.add-feedback(#9f000a);
     }
 
     &.nggv-field--error {
@@ -233,7 +227,7 @@
     font-weight: 400;
   }
 
-  .form-info {
+  .gds-form-info {
     font-size: 0.875rem;
     line-height: 1.25rem;
     width: 100%;

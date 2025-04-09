@@ -8,7 +8,7 @@ $selector: 'table.table';
   thead {
     tr {
       th {
-        border-top: 1px solid var(--gds-ref-pallet-base-600);
+        border-top: 1px solid var(--gds-sys-color-base-600);
         background: var(--gds-sys-color-base-800);
         color: var(--gds-sys-color-background-primary);
         padding: 0.3rem 0.5rem;
@@ -67,7 +67,7 @@ $selector: 'table.table';
     tr {
       td,
       th {
-        border-top: 1px solid var(--gds-ref-pallet-base-600);
+        border-top: 1px solid var(--gds-sys-color-base-600);
         padding: 0.6875rem 0.5rem;
         vertical-align: top;
       }
@@ -107,7 +107,7 @@ $selector: 'table.table';
       }
     }
   }
-  border-bottom: 1px solid var(--gds-ref-pallet-base-600);
+  border-bottom: 1px solid var(--gds-sys-color-base-600);
   @include add-mobile-version;
 }
 
@@ -142,7 +142,7 @@ $selector: 'table.table';
         tr {
           display: flex;
           flex-direction: column;
-          border-bottom: 1px solid var(--gds-ref-pallet-base-600);
+          border-bottom: 1px solid var(--gds-sys-color-base-600);
           td {
             display: flex;
             justify-content: space-between;

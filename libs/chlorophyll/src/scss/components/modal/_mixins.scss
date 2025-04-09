@@ -27,7 +27,6 @@
 @mixin modal-header {
   @include common.padding-horizontal(5);
   @include common.padding-vertical(5);
-
   @include common.add-border('bottom');
   @include common.add-border-color();
   display: inline-flex;
@@ -86,9 +85,12 @@
 }
 
 @mixin dialog-modal() {
-  position: initial;
   width: 375px;
   max-width: 95vw;
+  position: absolute;
+  top: 32px;
+  inset-inline: 0;
+  margin: auto;
 
   &.medium {
     width: 512px;

@@ -1,12 +1,12 @@
-<div class="item-list">
+<div class="gds-sortable-list">
   <ng-container>
-    <p class="item-list-header">
-      <span class="item-list-header-title">{{ description }}</span>
+    <p class="gds-sortable-list-header">
+      <span class="gds-sortable-list-header-title">{{ description }}</span>
     </p>
     <div #sortableListGroups cdkDropListGroup>
       <div
         *ngFor="let group of groups; let g_i = index"
-        class="item-list-group"
+        class="gds-sortable-list-group"
         [class.drag-enabled]="isDraggable && !isReadOnly"
         role="list"
         cdkDropList
@@ -16,13 +16,13 @@
       >
         <p
           *ngIf="group.title && group.title.length > 0"
-          class="item-list-header"
+          class="gds-sortable-list-header"
         >
-          <span class="item-list-header-title">{{ group.title }}</span>
+          <span class="gds-sortable-list-header-title">{{ group.title }}</span>
         </p>
         <p
           *ngIf="group.description && group.description.length > 0"
-          class="item-list-header-description"
+          class="gds-sortable-list-header-description"
         >
           {{ group.description }}
         </p>
@@ -41,10 +41,10 @@
             (keydown.alt.arrowUp)="onAltArrowKeydown(g_i, i, i - 1, $event)"
             (keydown.arrowDown)="onArrowKeydown(g_i, i + 1, $event)"
             (keydown.arrowUp)="onArrowKeydown(g_i, i - 1, $event)"
-            class="form-control item-control align-items-center item"
+            class="gds-form-control item-control align-items-center item"
             [tabindex]="shouldDisplayCheckboxes ? '-1' : '0'"
           >
-            <div class="form-control">
+            <div class="gds-form-control">
               <input
                 (change)="toggleSelection(checklistItem)"
                 [checked]="checklistItem.selected"
@@ -56,7 +56,7 @@
                   >{{ checklistItem.name }}
                   <span
                     *ngIf="checklistItem.hasCustomSuffix"
-                    class="item-list-suffix"
+                    class="gds-sortable-list-suffix"
                   >
                     <ng-container
                       *ngTemplateOutlet="
@@ -70,7 +70,10 @@
                 </span>
                 <br />
                 <span *ngIf="!!checklistItem.description">
-                  <span class="item-list-suffix" name="agendaItemToolTip">
+                  <span
+                    class="gds-sortable-list-suffix"
+                    name="agendaItemToolTip"
+                  >
                     {{ checklistItem.description }}
                   </span>
                   <br />
@@ -79,7 +82,7 @@
               <i></i>
             </div>
             <div *ngIf="isDraggable && !isReadOnly" class="item-grip-icon">
-              <i class="sg-icon sg-icon-grip-vertical text-primary"></i>
+              <gds-icon-dot-grid-two *nggCoreElement></gds-icon-dot-grid-two>
             </div>
           </label>
         </div>
