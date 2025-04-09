@@ -18,9 +18,15 @@ import { AccountFormats, accountsFormats } from './account-formatter'
  */
 @gdsCustomElement('gds-formatted-account')
 export class GdsFormattedAccount extends GdsFormattedText {
+  /** The account number or identifier to display. */
   @property()
   account?: number | string
 
+  /**
+   * Specifies the account format.
+   * For 'seb-account', it needs to be 11 characters.
+   * @default 'seb-account'
+   */
   @property({ type: String })
   protected format: AccountFormats = 'seb-account'
 

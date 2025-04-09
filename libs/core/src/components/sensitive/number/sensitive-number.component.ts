@@ -27,6 +27,10 @@ import { GdsFormattedNumber } from '../../formatted-text/number/formatted-number
  */
 @gdsCustomElement('gds-sensitive-number', { dependsOn: [GdsBlur] })
 export class GdsSensitiveNumber extends GdsFormattedNumber {
+  /**
+   * When true, hides the sensitive number.
+   * @default false
+   */
   @property({ type: Boolean })
   hide = false
 

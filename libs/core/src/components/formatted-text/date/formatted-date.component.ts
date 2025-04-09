@@ -21,12 +21,18 @@ import { DateTimeFormat, dateTimeFormats } from './date-time-formatter'
 
 @gdsCustomElement('gds-formatted-date')
 export class GdsFormattedDate extends GdsFormattedText {
+  /** The date value to be formatted, either Date or ISO string. */
   @property({ attribute: false })
   value?: Date | string
 
+  /**
+   * Specifies the date format.
+   * @default 'dateOnlyNumbers'
+   */
   @property({ type: String })
   format: DateTimeFormat = 'dateOnlyNumbers'
 
+  /** The locale used for date formatting. */
   @property({ type: String })
   locale?: string
 

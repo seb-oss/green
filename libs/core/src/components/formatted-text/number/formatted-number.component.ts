@@ -20,15 +20,22 @@ import { NumberFormats, numberFormats } from '../formatters'
  */
 @gdsCustomElement('gds-formatted-number')
 export class GdsFormattedNumber extends GdsFormattedText {
+  /** The numerical value to display. */
   @property({ attribute: false })
   value?: number | string
 
+  /** The locale used for number formatting. */
   @property({ type: String })
   locale?: string
 
+  /** The currency used when formatting numbers. */
   @property({ type: String })
   currency?: string
 
+  /**
+   * Specifies the number format.
+   * @default 'decimalsAndThousands'
+   */
   @property({ type: String })
   protected format: NumberFormats = 'decimalsAndThousands'
 
