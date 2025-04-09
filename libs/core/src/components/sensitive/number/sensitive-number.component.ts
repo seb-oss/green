@@ -1,3 +1,4 @@
+import { PropertyValues } from 'lit'
 import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
@@ -35,9 +36,7 @@ export class GdsSensitiveNumber extends GdsFormattedNumber {
   hide = false
 
   get formattedValue() {
-    if (this.hide && !this.currency) {
-      return '0.00'
-    } else if (this.hide) {
+    if (this.hide) {
       return numberFormats[this.format](0, this.locale, this.currency)
     }
 
@@ -50,5 +49,13 @@ export class GdsSensitiveNumber extends GdsFormattedNumber {
       () => html`<gds-blur>${super.render()}</gds-blur>`,
       () => super.render(),
     )
+  }
+
+  protected updated(changedProperties: PropertyValues): void {
+    super.updated(changedProperties)
+
+    if (this.element) {
+      this.element.ariaLabel = super.formattedValue
+    }
   }
 }
