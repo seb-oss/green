@@ -156,6 +156,9 @@ export const IconsSolid: Story = {
       class="icon-preview"
     >
       <gds-icon-airplane-up solid></gds-icon-airplane-up>
+      <gds-icon-robot solid></gds-icon-robot>
+      <gds-icon-rocket solid></gds-icon-rocket>
+      <gds-icon-school solid></gds-icon-school>
     </gds-grid>
   `,
 }
