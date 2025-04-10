@@ -2,6 +2,8 @@ import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { deprecatedIcons } from './icon.deprecated'
+
 import './icons/index.ts'
 import '../grid/index.ts'
 import '../container/index.ts'
@@ -55,17 +57,6 @@ export const Basic: Story = {
  * Icons are available in regular versions. You can use the `solid` attribute to display the solid version of the icon.
  */
 
-window.addEventListener('click', (e: MouseEvent) => {
-  const target = e.target as HTMLElement
-  if (target.tagName.startsWith('GDS-ICON')) {
-    const outerHTML = target.outerHTML
-    const cleanedHTML = outerHTML.replace(/ gds-element="[^"]*"/, '')
-    navigator.clipboard.writeText(cleanedHTML)
-    target.classList.add('copied')
-    setTimeout(() => target.classList.remove('copied'), 642)
-  }
-})
-
 window.addEventListener('DOMContentLoaded', () => {
   const searchBox = document.getElementById('icon-search') as HTMLInputElement
   const icons = Array.from(
@@ -78,9 +69,13 @@ window.addEventListener('DOMContentLoaded', () => {
     icons.forEach((icon) => {
       const iconNameAttr = icon.getAttribute('gds-element')
       if (iconNameAttr) {
-        const iconName = iconNameAttr.toLowerCase().replace('gds-icon-', '')
+        // Skip deprecated icons in search
+        if (deprecatedIcons[iconNameAttr]?.hide) {
+          icon.setAttribute('hidden', '')
+          return
+        }
 
-        // Implement fuzzy search
+        const iconName = iconNameAttr.toLowerCase().replace('gds-icon-', '')
         const isMatch = fuzzySearch(searchTerm, iconName)
 
         if (isMatch || searchBox.value.trim() === '') {
@@ -113,13 +108,21 @@ export const IconsRegular: Story = {
   ...DefaultParams,
   name: 'Regular icons',
   render: (args) => {
-    const iconElements = Object.keys(Icons).map((iconName) => {
-      const IconComponent = Icons[iconName]
-      const tagName = IconComponent._name
-        ? literal`gds-icon-${unsafeStatic(IconComponent._name)}`
-        : literal`gds-icon-${unsafeStatic(iconName)}`
-      return staticHTML`<${tagName}></${tagName}>`
-    })
+    const iconElements = Object.keys(Icons)
+      .map((iconName) => {
+        const IconComponent = Icons[iconName]
+        const tagName = IconComponent._name
+          ? `gds-icon-${IconComponent._name}`
+          : `gds-icon-${iconName}`
+
+        // Skip deprecated icons
+        if (deprecatedIcons[tagName]?.hide) {
+          return null
+        }
+
+        return staticHTML`<${literal`${unsafeStatic(tagName)}`}></${literal`${unsafeStatic(tagName)}`}>`
+      })
+      .filter(Boolean)
 
     return html`
       <gds-flex flex-direction="column" gap="xl" id="solids">
@@ -229,11 +232,53 @@ export const IconsStroke: Story = {
 }
 
 /**
- * Icons have the role of `graphics-symbol`, and will by default have the icon name as label. You can customize the label by setting the `label` attribute.
+ * Icons have the role of `presentation`, when there is no label provided. This means that the icon will be ignored by screen readers.
  */
 
 export const IconsLabel: Story = {
   ...DefaultParams,
   name: 'Accessible Label',
   render: (args) => html`<gds-icon-rocket label="Rocket" />`,
+}
+
+/**
+ * The following icons are deprecated and should not be used in new code.
+ * They are kept for backwards compatibility but will be removed in a future version.
+ */
+export const Deprecated: Story = {
+  ...DefaultParams,
+  name: 'Deprecated Icons',
+  render: () => {
+    const deprecatedElements = Object.entries(deprecatedIcons).map(
+      ([tagName, info]) => {
+        const tag = literal`gds-icon-${unsafeStatic(info.name)}`
+
+        return html`
+          <div class="deprecated-icon">
+            ${staticHTML`<${tag}></${tag}>`}
+            <div class="deprecated-info">
+              <span class="deprecated-label">Deprecated</span>
+              ${info.useInstead
+                ? html`<span class="replacement"
+                    >Use <code>${info.useInstead}</code> instead</span
+                  >`
+                : ''}
+            </div>
+          </div>
+        `
+      },
+    )
+
+    return html`
+      <div class="deprecated-section">
+        <gds-grid
+          columns="s{2} m{4} l{4}"
+          gap="s{xl} m{xl} l{xl}"
+          class="icon-preview"
+        >
+          ${deprecatedElements}
+        </gds-grid>
+      </div>
+    `
+  },
 }

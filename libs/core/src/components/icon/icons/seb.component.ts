@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-seb
+ * @deprecated Use `gds-icon-brand-seb` instead
  */
 @gdsCustomElement('gds-icon-seb')
 export class IconSeb extends GdsIcon {
