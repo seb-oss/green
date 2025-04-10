@@ -3,6 +3,10 @@ import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 import { GdsElement } from '../../gds-element'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import IconCSS from './icon.style'
 
 /**
@@ -11,7 +15,8 @@ import IconCSS from './icon.style'
  *
  * @part icon - The icon SVG element.
  */
-export abstract class GdsIcon extends GdsElement {
+
+export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
   static styles = [IconCSS]
 
   /**
