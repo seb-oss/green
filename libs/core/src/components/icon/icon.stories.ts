@@ -248,7 +248,7 @@ export const IconsLabel: Story = {
 /**
  * The following icons are deprecated and should not be used in new code.
  *
- * They are kept for backwards compatibility but will be removed in a future version.
+ * They are kept for backwards compatibility but will be removed in the next major release.
  */
 export const Deprecated: Story = {
   ...DefaultParams,
