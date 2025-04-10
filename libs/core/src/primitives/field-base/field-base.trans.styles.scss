@@ -10,9 +10,9 @@
     @include common.add-focus('within');
     align-items: stretch;
     gap: var(--gds-space-xs);
-    background-color: var(--sg-form-control-bg);
+    background-color: var(--gds-sys-color-background-primary);
     box-sizing: border-box;
-    color: var(--sg-text-primary);
+    color: var(--gds-sys-color-text-primary);
     cursor: text;
     display: flex;
     justify-content: space-between;

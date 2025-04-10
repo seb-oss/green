@@ -24,6 +24,16 @@
 
   @include mixins.add-radio();
 
+  &.small {
+    .form-control {
+      padding: 0.25rem;
+    }
+
+    .form-control input[type='radio'] ~ i {
+      margin-right: 0.5rem;
+    }
+  }
+
   .form-info {
     font-size: 0.875rem;
     line-height: 1.25rem;

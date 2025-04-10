@@ -1,4 +1,4 @@
-import React, { AriaAttributes, ReactNode, useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 
 import { AlertRibbonType } from '@sebgroup/extract'
 import { Check, SquareExclamation, SquareInfo } from '../icons'
@@ -12,7 +12,7 @@ export interface AlertRibbonProps {
   closeText?: string
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void
   role?: 'alert'
-  ['aria-live']?: AriaAttributes['aria-live']
+  'aria-live'?: React.AriaAttributes['aria-live']
   closeAriaLabel?: string
 }
 

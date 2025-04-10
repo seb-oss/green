@@ -1,8 +1,6 @@
 @use '../../../../chlorophyll/src/scss/tokens/shape' as shape;
-@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
-  light-tokens;
-@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-dark-2016' as
-  dark-tokens;
+@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-light-2016' as light2016;
+@use '../../../../chlorophyll/src/scss/tokens/mixin-sys-dark-2016' as dark2016;
 
 :host {
   display: contents;
@@ -10,12 +8,12 @@
 }
 
 :host([color-scheme='light']) {
-  @include light-tokens.add-variables();
+  @include light2016.add-variables();
 }
 
 /* force dark mode */
 :host([color-scheme='dark']) {
-  @include dark-tokens.add-variables();
+  @include dark2016.add-variables();
 }
 
 /* use preferred color scheme */

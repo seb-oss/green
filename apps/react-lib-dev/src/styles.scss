@@ -5,3 +5,7 @@
 .use-green {
   @import './libs/chlorophyll/src/scss';
 }
+
+body {
+  margin: unset;
+}
