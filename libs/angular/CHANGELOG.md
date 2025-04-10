@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.8.0
+
+### Minor Changes
+
+- a9cde91: **V-Angular Toast:** Support input of custom template to render inside of toast.
+
 ## 5.7.1
 
 ### Patch Changes
