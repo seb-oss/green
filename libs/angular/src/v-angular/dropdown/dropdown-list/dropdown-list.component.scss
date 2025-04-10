@@ -1,24 +1,18 @@
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as light2016;
+@use '@sebgroup/chlorophyll/src/scss/tokens/z-index';
 @use '../../../../../chlorophyll/src/scss/common';
 @use '../../../../../chlorophyll/src/scss/components/list/mixins' as list;
 @use '../../../../../chlorophyll/src/scss/components/dropdown/mixins' as
   dropdown;
 
 :host {
-  --gds-ref-pallet-base300: hsl(0, 0%, 87%);
-  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
-  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
-  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
-  --sg-z-index-dropdown: ;
-  --sg-z-index-dropdown-backdrop: 990;
-  --sg-z-index-dropdown: 2000;
-  --sg-popover-background: #fff;
-  --sg-popover-box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
-  --text-primary-color: #333;
+  @include light2016.add-variables();
+  @include z-index.add-tokens();
 
   position: absolute;
   bottom: 0;
   transform: translateY(calc(100% + 0.5rem));
-  z-index: var(--sg-z-index-dropdown);
+  z-index: var(--gds-z-index-dropdown);
 
   .hidden {
     visibility: hidden;
@@ -33,12 +27,12 @@
   // dropdown select
   ul[role='listbox'] {
     --z-index: 1060;
-    background-color: var(--sg-popover-background);
+    background-color: var(--gds-sys-color-background-primary);
     flex-direction: column;
     justify-content: flex-end;
     inset: auto;
     z-index: var(--z-index);
-    box-shadow: var(--sg-popover-box-shadow);
+    box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
     color: var(--gds-sys-color-text-primary);
     padding: 0;
     max-height: 500px;

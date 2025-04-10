@@ -20,6 +20,6 @@
 @media (prefers-color-scheme: dark) {
   :host,
   :host([color-scheme='auto']) {
-    @include dark-tokens.add-variables();
+    @include dark2016.add-variables();
   }
 }
