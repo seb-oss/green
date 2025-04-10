@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.74.1
+
+### Patch Changes
+
+- 630d015: **Details:** Patch content overflow and improve focus state
+
 ## 1.74.0
 
 ### Minor Changes
