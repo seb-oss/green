@@ -174,6 +174,7 @@ export class GdsDetails extends withSizeXProps(
           small: this.size === 'small',
         })}
         aria-hidden="${!this.open}"
+        ?hidden="${!this.open}"
       >
         <slot></slot>
       </div>

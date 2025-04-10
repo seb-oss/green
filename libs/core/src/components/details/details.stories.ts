@@ -6,6 +6,7 @@ import './details'
 import '../text/text'
 import '../card/card'
 import '../flex/flex'
+import '../link/link'
 import '../rich-text/rich-text'
 import '../icon/icons/chevron-top'
 import '../icon/icons/chevron-bottom'
@@ -122,7 +123,12 @@ In this example, all detailss are grouped together with the name attribute set t
   render: () => html`
     <gds-flex flex-direction="column">
       <gds-details name="group-1" summary="First Details">
-        Content of first details
+        <gds-rich-text>
+          <gds-text tag="h4">Heading Inside Details</gds-text>
+          <gds-link href="#">
+            <gds-text>Linked content</gds-text>
+          </gds-link>
+        </gds-rich-text>
       </gds-details>
       <gds-details name="group-1" summary="Second Details">
         Content of second details
