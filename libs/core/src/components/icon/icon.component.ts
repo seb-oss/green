@@ -15,19 +15,20 @@ export abstract class GdsIcon extends GdsElement {
   static styles = [IconCSS]
 
   /**
-   * This property allow you to set the width of the icon. If not provided, the default width is 24px.
+   * This property allow you to set the width of the icon. If not provided, uses the icon's default width.
    */
   @property({ type: Number })
   width?: number
 
   /**
-   * This property allow you to set the height of the icon. If not provided, the default height is 24px.
+   * This property allow you to set the height of the icon. If not provided, uses the icon's default height.
    */
   @property({ type: Number })
   height?: number
 
   /**
-   * When set to true, the solid version of the icon is displayed. When set to false or not provided, the regular version of the icon is displayed.
+   * When set to true, the solid version of the icon is displayed.
+   * When set to false or not provided, the regular version of the icon is displayed.
    */
   @property({ type: Boolean })
   solid = false
@@ -45,36 +46,94 @@ export abstract class GdsIcon extends GdsElement {
   box = false
 
   /**
-   * This property allow you to set the accessible label of the icon. If not provided, the default label is the name of the icon.
+   * This property allow you to set the accessible label of the icon.
+   * If not provided, the icon will be presentational.
    */
   @property({ type: String })
   label = ''
 
+  // Static properties
   protected static _name: string
   protected static _regularSVG?: string
   protected static _solidSVG?: string
+  protected static _width: number
+  protected static _height: number
+  protected static _viewBox: string
 
-  render() {
-    let svgContent = `<svg
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      width="${this.width || 24}"
-      height="${this.height || 24}"
-      viewBox="${this.box || '0 0 24 24'}"
-      ${this.label ? `aria-label="${this.label}"` : `aria-label="${(this.constructor as typeof GdsIcon)._name}"`}
-      role="graphics-symbol"
-      part="icon"
-    >
-      ${this.solid ? (this.constructor as typeof GdsIcon)._solidSVG : (this.constructor as typeof GdsIcon)._regularSVG}
-    </svg>`
-
-    if (this.stroke) {
-      svgContent = svgContent.replace(
-        /<(path|rect|circle|ellipse|line|polyline|polygon)/g,
-        `<$1 stroke-width="${this.stroke}"`,
-      )
+  /**
+   * Generates the SVG attributes for the icon
+   * @private
+   */
+  private get svgAttributes() {
+    const constructor = this.constructor as typeof GdsIcon
+    const baseAttrs = {
+      fill: 'none',
+      xmlns: 'http://www.w3.org/2000/svg',
+      width: this.width || constructor._width,
+      height: this.height || constructor._height,
+      viewBox: this.box || constructor._viewBox,
+      part: 'icon',
     }
 
-    return html`${unsafeHTML(svgContent)}`
+    // Add accessibility attributes based on label presence
+    if (this.label) {
+      return {
+        ...baseAttrs,
+        'aria-label': this.label,
+      }
+    } else {
+      return {
+        ...baseAttrs,
+        role: 'presentation',
+      }
+    }
+  }
+
+  /**
+   * Gets the appropriate SVG content based on the solid property
+   * @private
+   */
+  private get svgContent() {
+    const constructor = this.constructor as typeof GdsIcon
+    return this.solid ? constructor._solidSVG : constructor._regularSVG
+  }
+
+  /**
+   * Applies stroke width to SVG paths if stroke property is set
+   * @private
+   */
+  private applyStroke(content: string): string {
+    if (!this.stroke) return content
+
+    return content.replace(
+      /<(path|rect|circle|ellipse|line|polyline|polygon)/g,
+      `<$1 stroke-width="${this.stroke}"`,
+    )
+  }
+
+  /**
+   * Generates the SVG attributes string
+   * @private
+   */
+  private generateAttributesString(attrs: Record<string, any>): string {
+    return Object.entries(attrs)
+      .filter(([_, value]) => value !== undefined)
+      .map(([key, value]) => `${key}="${value}"`)
+      .join('\n      ')
+  }
+
+  render() {
+    const attrs = this.svgAttributes
+    let content = this.svgContent || ''
+
+    if (this.stroke) {
+      content = this.applyStroke(content)
+    }
+
+    const svg = `<svg
+      ${this.generateAttributesString(attrs)}
+    >${content}</svg>`
+
+    return html`${unsafeHTML(svg)}`
   }
 }

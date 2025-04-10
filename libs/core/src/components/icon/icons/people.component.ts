@@ -12,4 +12,10 @@ export class IconPeople extends GdsIcon {
   static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M6.5 7.5C6.5 4.46243 8.96243 2 12 2C15.0376 2 17.5 4.46243 17.5 7.5C17.5 10.5376 15.0376 13 12 13C8.96243 13 6.5 10.5376 6.5 7.5Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3.74416 21C3.32995 21 3 20.6642 3 20.25V18.75C3 16.1266 5.12665 14 7.75 14H16.25C18.8734 14 21 16.1266 21 18.75V20.25C21 20.6642 20.67 21 20.2558 21C17.0815 21 6.91849 21 3.74416 21Z" fill="currentColor"/>`
   /** @private */
   static _name = 'people'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

@@ -12,4 +12,10 @@ export class IconPause extends GdsIcon {
   static _solidSVG = `<path d="M4.75 3C4.33579 3 4 3.33579 4 3.75V20.25C4 20.6642 4.33579 21 4.75 21H9.25C9.66421 21 10 20.6642 10 20.25V3.75C10 3.33579 9.66421 3 9.25 3H4.75Z" fill="currentColor"/><path d="M14.75 3C14.3358 3 14 3.33579 14 3.75V20.25C14 20.6642 14.3358 21 14.75 21H19.25C19.6642 21 20 20.6642 20 20.25V3.75C20 3.33579 19.6642 3 19.25 3H14.75Z" fill="currentColor"/>`
   /** @private */
   static _name = 'pause'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }
