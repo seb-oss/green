@@ -243,6 +243,7 @@ export const IconsLabel: Story = {
 
 /**
  * The following icons are deprecated and should not be used in new code.
+ *
  * They are kept for backwards compatibility but will be removed in a future version.
  */
 export const Deprecated: Story = {
@@ -269,16 +270,6 @@ export const Deprecated: Story = {
       },
     )
 
-    return html`
-      <div class="deprecated-section">
-        <gds-grid
-          columns="s{2} m{4} l{4}"
-          gap="s{xl} m{xl} l{xl}"
-          class="icon-preview"
-        >
-          ${deprecatedElements}
-        </gds-grid>
-      </div>
-    `
+    return html` <div class="deprecated-section">${deprecatedElements}</div> `
   },
 }
