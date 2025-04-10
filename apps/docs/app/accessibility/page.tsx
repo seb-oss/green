@@ -27,7 +27,7 @@ const HEADINGS = [
   },
   {
     slug: 'aria-html',
-    text: 'Aria & Html',
+    text: 'Aria & html',
     level: 3,
   },
   {
@@ -84,7 +84,7 @@ export default function Accessibility() {
             </p>
             <ul>
               <li>
-                Legal Compliance: The European Accessibility Act requires it by
+                Legal compliance: The European Accessibility Act requires it by
                 June 2025.
               </li>
               <li>
@@ -92,15 +92,15 @@ export default function Accessibility() {
                 disabilities, can use websites.
               </li>
               <li>
-                Better User Experience: Accessible sites are easier to navigate
+                Better user experience: Accessible sites are easier to navigate
                 for all users.
               </li>
               <li>
-                Wider Audience: It helps reach the 80 million people with
+                Wider audience: It helps reach the 80 million people with
                 disabilities in Europe.
               </li>
               <li>
-                Ethical Responsibility: It reflects a commitment to fairness and
+                Ethical responsibility: It reflects a commitment to fairness and
                 equality.
               </li>
             </ul>
@@ -168,7 +168,7 @@ export default function Accessibility() {
                 <a href="https://chromewebstore.google.com/detail/silktide-accessibility-ch/mpobacholfblmnpnfbiomjkecoojakah?hl=en">
                   Silktide-&gt;
                 </a>
-                Color Blindness.
+                Color blindness.
               </li>
               <li>
                 There are many online contrast checkers to see if 2 colors hasve
@@ -180,7 +180,7 @@ export default function Accessibility() {
               </li>
             </ul>
 
-            <h3>Future High Contrast Mode:</h3>
+            <h3>Future high contrast mode:</h3>
             <p>
               In addition to the dark mode feature detailed below, we may
               introduce a high contrast mode in the future. This setting is
@@ -213,7 +213,7 @@ export default function Accessibility() {
               </li>
             </ul>
 
-            <h2 id="aria-html">Aria & Html</h2>
+            <h2 id="aria-html">Aria & html</h2>
             <p>
               Follows Aria Attributes and Roles. Uses correct html with no
               unnecessary aria. Common misstakes are:
