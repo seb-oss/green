@@ -1,3 +1,4 @@
+```ts
 import { html } from 'lit'
 import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
@@ -55,12 +56,17 @@ export abstract class GdsIcon extends GdsElement {
   protected static _solidSVG?: string
 
   render() {
+    const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'brand-seb'
+
+    const width = isSebIcon ? '55px' : this.width !== undefined ? `${this.width.toString()}px` : undefined
+    const height = isSebIcon ? '24px' : this.height !== undefined ? `${this.height.toString()}px` : '1lh'
+    const viewBox = isSebIcon ? '0 0 55 24' : this.box || '0 0 24 24'
+
     let svgContent = `<svg
+      style="height:${height};${width ? `width:${width};` : ''}"
+      viewBox="${viewBox}"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      width="${this.width || 24}"
-      height="${this.height || 24}"
-      viewBox="${this.box || '0 0 24 24'}"
       ${this.label ? `aria-label="${this.label}"` : `aria-label="${(this.constructor as typeof GdsIcon)._name}"`}
       role="graphics-symbol"
       part="icon"
@@ -69,12 +75,10 @@ export abstract class GdsIcon extends GdsElement {
     </svg>`
 
     if (this.stroke) {
-      svgContent = svgContent.replace(
-        /<(path|rect|circle|ellipse|line|polyline|polygon)/g,
-        `<$1 stroke-width="${this.stroke}"`,
-      )
+      svgContent = svgContent.replace(/<(path|rect|circle|ellipse|line|polyline|polygon)/g, `<$1 stroke-width="${this.stroke}"`)
     }
 
     return html`${unsafeHTML(svgContent)}`
   }
 }
+```

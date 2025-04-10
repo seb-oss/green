@@ -39,6 +39,15 @@ function generateComponentTsContent(name, regularSvg, solidSvg) {
   regularSvg = regularSvg.replace(/\s*\n\s*/g, '')
   solidSvg = solidSvg.replace(/\s*\n\s*/g, '')
 
+  // Extract width, height, and viewBox from the SVG content
+  const widthMatch = regularSvg.match(/width="(\d+)"/)
+  const heightMatch = regularSvg.match(/height="(\d+)"/)
+  const viewBoxMatch = regularSvg.match(/viewBox="([^"]+)"/)
+
+  const width = widthMatch ? widthMatch[1] : 24
+  const height = heightMatch ? heightMatch[1] : 24
+  const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24'
+
   return `import { gdsCustomElement } from '../../../scoping'
 import { GdsIcon } from '../icon'
 
@@ -53,6 +62,12 @@ export class ${className} extends GdsIcon {
   static _solidSVG = \`${solidSvg}\`
   /** @private */
   static _name = '${toKebabCase(name)}'
+  /** @private */
+  static _width = ${width}
+  /** @private */
+  static _height = ${height}
+  /** @private */
+  static _viewBox = '${viewBox}'
 }`.trim()
 }
 
