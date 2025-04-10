@@ -1,5 +1,16 @@
 # Changelog
 
+## 5.7.1
+
+### Patch Changes
+
+- 9bf1161: **V-Angular Input:** Fixed error and countdown styling for input field.
+- dc3a205: **NggCoreControl**: Allow opt-out by using `ngDefaultControl` directive
+- Updated dependencies [51bbe15]
+- Updated dependencies [0850de5]
+- Updated dependencies [dc3a205]
+  - @sebgroup/green-core@1.74.0
+
 ## 5.7.0
 
 ### Minor Changes
