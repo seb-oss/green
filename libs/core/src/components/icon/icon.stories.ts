@@ -1,16 +1,17 @@
+import { html } from 'lit'
 import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { deprecatedIcons } from './icon.deprecated'
 
-import './icons/index.ts'
-import '../grid/index.ts'
-import '../container/index.ts'
+import './icons'
+import '../grid'
+import '../container'
+import '../card'
+import '../badge'
 import '../flex'
-
-import { html } from 'lit'
-
+import '../text'
 import './icon.stories.css'
 
 import * as Icons from './icons'
@@ -255,21 +256,36 @@ export const Deprecated: Story = {
         const tag = literal`gds-icon-${unsafeStatic(info.name)}`
 
         return html`
-          <div class="deprecated-icon">
-            ${staticHTML`<${tag}></${tag}>`}
-            <div class="deprecated-info">
-              <span class="deprecated-label">Deprecated</span>
+          <gds-flex gap="s" align-items="center">
+            <gds-card
+              variant="primary"
+              width="100px"
+              height="80px"
+              align-items="center"
+              justify-content="center"
+            >
+              ${staticHTML`<${tag}></${tag}>`}
+            </gds-card>
+            <gds-flex flex-direction="column" align-items="flex-start" gap="xs">
+              <gds-text font-size="s" class="deprecated-label">
+                ${tagName}
+              </gds-text>
               ${info.useInstead
-                ? html`<span class="replacement"
-                    >Use <code>${info.useInstead}</code> instead</span
-                  >`
+                ? html`
+                    <gds-text size="xs" color="disabled" opacity="0.8">
+                      Use <code>${info.useInstead}</code> instead
+                    </gds-text>
+                  `
                 : ''}
-            </div>
-          </div>
+              <gds-badge size="small" variant="warning">DEPRECATED</gds-badge>
+            </gds-flex>
+          </gds-flex>
         `
       },
     )
 
-    return html` <div class="deprecated-section">${deprecatedElements}</div> `
+    return html`
+      <gds-flex flex-direction="column" gap="s">${deprecatedElements}</gds-flex>
+    `
   },
 }
