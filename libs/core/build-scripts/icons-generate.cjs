@@ -24,6 +24,19 @@ function clearAndUpper(text) {
   return text.replace(/-/, '').toUpperCase()
 }
 
+function getDeprecationInfo(tagName) {
+  try {
+    const deprecationPath = path.join(
+      __dirname,
+      '../src/components/icon/icon.deprecated.ts',
+    )
+    const deprecationContent = require(deprecationPath)
+    return deprecationContent.deprecatedIcons[tagName]
+  } catch (error) {
+    return null
+  }
+}
+
 async function extractSvgInfo(filePath) {
   const content = await fs.readFile(filePath, 'utf-8')
 
@@ -52,6 +65,14 @@ function generateComponentTsContent(name, regularSvg, solidSvg) {
   const className = `Icon${toPascalCase(name)}`
   const tagName = `gds-icon-${toKebabCase(name)}`
 
+  // Check for deprecation
+  const deprecationInfo = getDeprecationInfo(tagName)
+  const deprecationComment = deprecationInfo?.useInstead
+    ? ` * @deprecated Use \`${deprecationInfo.useInstead}\` instead\n`
+    : deprecationInfo
+      ? ` * @deprecated This icon is deprecated\n`
+      : ''
+
   // Remove line breaks and leading/trailing spaces from SVG content
   const regularContent = regularSvg.content.replace(/\s*\n\s*/g, '')
   const solidContent = (solidSvg?.content || '').replace(/\s*\n\s*/g, '')
@@ -61,7 +82,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element ${tagName}
- */
+${deprecationComment} */
 @gdsCustomElement('${tagName}')
 export class ${className} extends GdsIcon {
   /** @private */
