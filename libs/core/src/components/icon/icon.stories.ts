@@ -51,8 +51,7 @@ export const Basic: Story = {
   ...DefaultParams,
   args: {
     solid: false,
-    width: 24,
-    height: 24,
+    size: 'xl',
   },
 }
 
@@ -305,9 +304,9 @@ export const IconsStroke: Story = {
   ...DefaultParams,
   name: 'Stroke',
   render: (args) => html`
-    <gds-icon-robot stroke="2" height="42"></gds-icon-robot>
-    <gds-icon-rocket stroke="2" height="42"></gds-icon-rocket>
-    <gds-icon-school stroke="2" height="42"></gds-icon-school>
+    <gds-icon-robot stroke="2" size="xl"></gds-icon-robot>
+    <gds-icon-rocket stroke="2" size="xl"></gds-icon-rocket>
+    <gds-icon-school stroke="2" size="xl"></gds-icon-school>
   `,
 }
 
