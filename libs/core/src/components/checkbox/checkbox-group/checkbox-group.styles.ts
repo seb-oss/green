@@ -19,7 +19,7 @@ export const styles = css`
     --checkbox-border-color: var(--gds-color-l3-border-secondary);
     --checkbox-border-color-selected: var(--gds-color-l3-border-primary);
     --checkbox-border-width: var(--gds-space-4xs);
-    --checkbox-border-width-selected: var(--gds-space-2xs);
+    --checkbox-border-width-selected: var(--gds-space-s);
     --checkbox-outline-width: var(--gds-space-3xs);
     --checkbox-disc-background-color: var(--gds-color-l3-content-primary);
 

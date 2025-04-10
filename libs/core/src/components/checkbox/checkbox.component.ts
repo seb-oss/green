@@ -1,10 +1,12 @@
 import { property, state } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
 import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
+import { IconCheckmark } from '../pure'
 import { styles } from './checkbox.styles'
 
 /**
@@ -13,7 +15,9 @@ import { styles } from './checkbox.styles'
  *
  * @event gds-checkbox-change - Dispatched when the checkbox button is checked.
  */
-@gdsCustomElement('gds-checkbox', { dependsOn: [GdsSelectionFieldLabel] })
+@gdsCustomElement('gds-checkbox', {
+  dependsOn: [GdsSelectionFieldLabel, IconCheckmark],
+})
 export class GdsCheckbox extends GdsElement {
   static styles = [tokens, styles]
 
@@ -62,6 +66,7 @@ export class GdsCheckbox extends GdsElement {
     this.setAttribute('role', 'checkbox')
     this._updateAriaState()
     this.addEventListener('keydown', this.#handleKeyDown)
+    this.addEventListener('click', this.#handleClick)
     this.addEventListener('focus', () => (this._isFocused = true))
     this.addEventListener('blur', () => (this._isFocused = false))
   }
@@ -105,7 +110,7 @@ export class GdsCheckbox extends GdsElement {
 
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      this.checked = true
+      this.checked = !this.checked
       this.dispatchEvent(new Event('gds-checkbox-change', { bubbles: true }))
     }
   }
@@ -116,11 +121,20 @@ export class GdsCheckbox extends GdsElement {
         supporting-text=${this.supportingText}
         label=${this.label}
         type="checkbox"
-        @click=${this.#handleClick}
       >
         <div class="checkbox">
           <div class="state"></div>
-          <div class="disc"></div>
+          <div class="disc">
+            ${when(
+              this.checked,
+              () =>
+                html`<gds-icon-checkmark
+                  class="check-icon"
+                  stroke="4"
+                  label=" "
+                ></gds-icon-checkmark>`,
+            )}
+          </div>
         </div>
       </gds-selection-field-label>
     `

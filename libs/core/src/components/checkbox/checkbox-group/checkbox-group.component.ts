@@ -115,7 +115,7 @@ class CheckboxGroup extends GdsFormControlElement<string> {
 
   #renderFieldControlHeader() {
     if (this.label) {
-      return html` <gds-form-control-header class="size-${this.size}">
+      return html`<gds-form-control-header class="size-${this.size}">
         <label id="group-label" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}

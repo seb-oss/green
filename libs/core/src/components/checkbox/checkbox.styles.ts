@@ -16,6 +16,18 @@ export const styles = css`
       --_checkbox-label-color: var(--gds-color-l3-content-disabled);
     }
 
+    .check-icon {
+      line-height: 10px;
+      transition: scale 248ms;
+      will-change: scale, opacity;
+      scale: 1;
+      color: var(--gds-color-l3-content-primary);
+      opacity: 1;
+      @starting-style {
+        scale: 0.2;
+      }
+    }
+
     .checkbox {
       display: flex;
       align-items: center;
@@ -37,7 +49,7 @@ export const styles = css`
       outline-offset: calc(-1 * var(--checkbox-outline-width));
       outline-width: var(--checkbox-outline-width);
       outline-color: transparent;
-      border-radius: var(--checkbox-radius);
+      border-radius: calc(var(--checkbox-radius) + 4px);
       min-width: var(--checkbox-size);
       min-height: var(--checkbox-size);
       position: absolute;
@@ -94,6 +106,9 @@ export const styles = css`
       will-change: box-shadow;
       position: absolute;
       inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     :host([checked]) .disc,
