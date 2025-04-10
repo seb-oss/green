@@ -1,0 +1,26 @@
+@use 'mixins';
+
+// Tab
+.gds-tabs__tab {
+  @include mixins.tab;
+}
+
+// Selected tab
+[role='tab'][aria-selected='true'] {
+  @include mixins.tab--selected;
+}
+
+// Tab bar
+.gds-tabs {
+  @include mixins.tabs-bar;
+}
+
+// Tab panel
+.gds-tabs__panel {
+  @include mixins.tabs-panel;
+}
+
+// Selected tab panel
+.gds-tabs__panel[aria-hidden='false'] {
+  @include mixins.tabs-panel--selected;
+}

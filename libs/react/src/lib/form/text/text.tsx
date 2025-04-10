@@ -5,7 +5,7 @@ interface TextProps {
 }
 
 export const Text = ({ children }: TextProps) => (
-  <span className="form-text">{children}</span>
+  <span className="gds-form-text">{children}</span>
 )
 
 export default Text

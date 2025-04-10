@@ -1,0 +1,21 @@
+@use '../../common';
+@use '../group';
+@use 'sass:math';
+
+$_width: 4rem;
+$_font-size: 1.5rem;
+
+@mixin add-stepper() {
+  .button,
+  button {
+    width: 44px;
+    font-size: $_font-size;
+    padding-bottom: 0.5rem;
+    padding-top: 0.25rem;
+    flex-grow: 0;
+  }
+  input {
+    width: $_width;
+    text-align: center;
+  }
+}

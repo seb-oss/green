@@ -1,0 +1,36 @@
+@use 'mixins';
+
+.gds-form {
+  @include mixins.add-form;
+}
+
+.gds-form-horizontal {
+  @include mixins.horizontal-layout;
+}
+
+.gds-form-control {
+  @include mixins.add-form-control;
+}
+
+.gds-form-group {
+  @include mixins.add-form-group;
+}
+
+.gds-form-item {
+  @include mixins.add-form-item;
+  label {
+    @include mixins.add-label;
+  }
+}
+
+.gds-form-info {
+  @include mixins.add-form-info;
+}
+
+.gds-form-text {
+  @include mixins.add-form-text;
+}
+
+.gds-label {
+  @include mixins.add-label();
+}

@@ -345,6 +345,7 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
   <button type="submit" [disabled]="ngForm?.submitted && validationForm.invalid">
     Save
   </button>
+  </form>
     `,
     props: {
       ...args,
@@ -408,6 +409,7 @@ const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
     <button (click)="validationFormAdvance.reset()">
       Reset
     </button>
+    </form>
     `,
     props: {
       ...args,

@@ -1,0 +1,5 @@
+@use 'mixins';
+
+.gds-alert-ribbon {
+  @include mixins.alert-ribbon();
+}

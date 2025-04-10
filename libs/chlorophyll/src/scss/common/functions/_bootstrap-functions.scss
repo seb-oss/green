@@ -1,0 +1,225 @@
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:string';
+@use '../../tokens/config';
+
+/* stylelint-disable max-nesting-depth */
+
+// Bootstrap functions
+//
+// Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
+
+/**
+ * Assert that a map is in ascending order
+ * @mixin assert-ascending
+ * @param {Map} $map - The map to check
+ * @param {String} $map-name - The name of the map
+ */
+@mixin assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num ==
+      null or
+      math.unit($num) ==
+      '%' or
+      math.unit($prev-num) ==
+      '%'
+    {
+      // Do nothing
+    } @else if not math.compatible($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
+
+/**
+ * Assert that the first breakpoint in a map starts at zero
+ * @mixin assert-starts-at-zero
+ * @param {Map} $map - The map to check
+ * @param {String} $map-name - The name of the map
+ */
+@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
+  @if list.length($map) > 0 {
+    $values: map.values($map);
+    $first-value: list.nth($values, 1);
+    @if $first-value != 0 {
+      @warn 'First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.';
+    }
+  }
+}
+
+/**
+ * Check if a value is important
+ * @function is-important
+ * @param {Boolean} $important - Whether the value is important
+ * @return {String} - "!important" if true, otherwise an empty string
+ */
+@function is-important($important) {
+  @return #{if($important, '!important', '')};
+}
+
+/**
+ * Replace a substring in a string
+ * @function str-replace
+ * @param {String} $string - The original string
+ * @param {String} $search - The substring to replace
+ * @param {String} $replace - The replacement string
+ * @return {String} - The updated string
+ */
+@function str-replace($string, $search, $replace: '') {
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        string.slice($string, $index + string.length($search)),
+        $search,
+        $replace
+      );
+  }
+
+  @return $string;
+}
+
+/**
+ * Convert a map to its negative variant
+ * @function negativify-map
+ * @param {Map} $map - The map to convert
+ * @return {Map} - The negative variant of the map
+ */
+@function negativify-map($map) {
+  $result: ();
+  @each $key, $value in $map {
+    @if $key != 0 {
+      $result: map.merge($result, ('n' + $key: (-$value)));
+    }
+  }
+  @return $result;
+}
+$enable-important-utilities: true;
+
+/**
+ * Generate utility classes
+ * @mixin generate-utility
+ * @param {Map} $utility - Utility map
+ * @param {String} $infix - Infix for class names
+ * @param {Boolean} $is-rfs-media-query - Whether to use RFS media query
+ */
+@mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
+  $values: map.get($utility, values);
+
+  // If the values are a list or string, convert it into a map
+  @if meta.type-of($values) ==
+    'string' or
+    meta.type-of(list.nth($values, 1)) !=
+    'list'
+  {
+    $values: list.zip($values, $values);
+  }
+
+  @each $key, $value in $values {
+    $properties: map.get($utility, property);
+
+    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    @if meta.type-of($properties) == 'string' {
+      $properties: list.append((), $properties);
+    }
+
+    // Use custom class if present
+    $property-class: if(
+      map.has-key($utility, class),
+      map.get($utility, class),
+      list.nth($properties, 1)
+    );
+    $property-class: if($property-class == null, '', $property-class);
+
+    // State params to generate pseudo-classes
+    $state: if(map.has-key($utility, state), map.get($utility, state), ());
+
+    $infix: if(
+      $property-class == '' and string.slice($infix, 1, 1) == '-',
+      string.slice($infix, 2),
+      $infix
+    );
+
+    // Don't prefix if value key is null (eg. with shadow class)
+    $property-class-modifier: if(
+      $key,
+      if($property-class == '' and $infix == '', '', '-') + $key,
+      ''
+    );
+
+    // Disable RFS for now
+    /*@if map.get($utility, rfs) {
+      // Inside the media query
+      @if $is-rfs-media-query {
+        $val: rfs-value($value);
+
+        // Do not render anything if fluid and non fluid values are the same
+        $value: if($val == rfs-fluid-value($value), null, $val);
+      }
+      @else {
+        $value: rfs-fluid-value($value);
+      }
+    }*/
+
+    $is-css-var: map.get($utility, css-var);
+    $is-local-vars: map.get($utility, local-vars);
+    $is-rtl: map.get($utility, rtl);
+
+    @if $value != null {
+      @if $is-rtl == false {
+        /* rtl:begin:remove */
+      }
+
+      @if $is-css-var {
+        .#{$property-class + $infix + $property-class-modifier} {
+          --#{config.$variable-prefix}#{$property-class}: #{$value};
+        }
+
+        @each $pseudo in $state {
+          .#{$property-class
+            + $infix
+            + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+            --#{config.$variable-prefix}#{$property-class}: #{$value};
+          }
+        }
+      } @else {
+        .#{$property-class + $infix + $property-class-modifier} {
+          @each $property in $properties {
+            @if $is-local-vars {
+              @each $local-var, $value in $is-local-vars {
+                --#{config.$variable-prefix}#{$local-var}: #{$value};
+              }
+            }
+            #{$property}: $value
+              if($enable-important-utilities, !important, null);
+          }
+        }
+
+        @each $pseudo in $state {
+          .#{$property-class
+            + $infix
+            + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+            @each $property in $properties {
+              #{$property}: $value
+                if($enable-important-utilities, !important, null);
+            }
+          }
+        }
+      }
+
+      @if $is-rtl == false {
+        /* rtl:end:remove */
+      }
+    }
+  }
+}
+/* stylelint-enable max-nesting-depth */

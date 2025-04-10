@@ -11,7 +11,7 @@ export const Accordion = ({ items }: AccordionInterface) => {
   const [uuid, _] = React.useState(randomId())
 
   return (
-    <div className="accordion">
+    <div className="gds-accordion">
       {items &&
         items.map((item, index) => (
           <AccordionItem

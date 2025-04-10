@@ -21,9 +21,9 @@ export function Group({
   groupFocus = false,
 }: GroupProps) {
   const groupClassName = classNames(
-    'group',
-    { 'group-border': groupBorder },
-    { 'group-focus': groupFocus },
+    'gds-group',
+    { 'gds-group-border': groupBorder },
+    { 'gds-group-focus': groupFocus },
     { 'is-invalid': error },
     className,
   )
@@ -31,10 +31,10 @@ export function Group({
     ? (error as Error).message || (error as string)
     : ''
   return (
-    <div className="form-group" id={id}>
+    <div className="gds-form-group" id={id}>
       <div className={groupClassName}>{children}</div>
       {error && (
-        <span className="form-info" id={id && `${id}-message`}>
+        <span className="gds-form-info" id={id && `${id}-message`}>
           {errorMessage}
         </span>
       )}

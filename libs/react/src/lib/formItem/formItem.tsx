@@ -108,7 +108,7 @@ export const FormItem = ({
             </label>
           )}
           {labelInformation && (
-            <div className="form-info" id={`${inputId}_info`}>
+            <div className="gds-form-info" id={`${inputId}_info`}>
               {labelInformation}
             </div>
           )}

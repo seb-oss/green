@@ -1,0 +1,16 @@
+@use 'mixins';
+@use 'sass:map';
+@use '../close';
+
+.gds-badge {
+  @include mixins.badge();
+
+  @each $variant, $colors in mixins.$variants {
+    &.#{$variant} {
+      @include mixins.badge-variant(
+        map.get($colors, 'color'),
+        map.get($colors, 'background')
+      );
+    }
+  }
+}

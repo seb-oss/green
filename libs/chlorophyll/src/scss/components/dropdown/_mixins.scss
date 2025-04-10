@@ -1,0 +1,142 @@
+@use '../button/mixins' as button;
+@use '../../common';
+@use 'sass:map';
+
+@mixin dropdown-trigger {
+  @include button.reset;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-border-color(var(--gds-sys-color-base-600));
+  @include common.add-focus('');
+
+  background: var(--gds-sys-color-background-primary);
+  color: var(--gds-sys-color-text-primary);
+  min-height: 2.75rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+
+  @include common.media-breakpoint-down('sm') {
+    min-width: 100%;
+  }
+
+  &:not(:disabled, .disabled, [aria-disabled]):hover {
+    --background: var(--gds-sys-color-base-200);
+    --color: var(--gds-sys-color-base-800);
+    background-color: var(--gds-sys-color-base-200);
+    color: var(--gds-sys-color-base-800);
+    border-color: var(--gds-sys-color-base-800);
+  }
+
+  > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &::after {
+    @include common.margin-horizontal(3);
+    border-bottom: solid 2px var(--gds-sys-color-text-primary);
+    border-left: solid 2px var(--gds-sys-color-text-primary);
+    content: '';
+    display: block;
+    height: 0.5rem;
+    width: 0.5rem;
+    position: relative;
+    top: -0.15rem;
+    transform: translate(75%, 0) rotate3d(0, 0, 1, -45deg) scale3d(1, 1, -1);
+    transition: transform 300ms ease-in;
+    flex-shrink: 0;
+  }
+
+  &[aria-expanded='true']::after {
+    transform: translate(75%, 6px) rotate3d(0, 0, 1, -45deg) scale3d(-1, -1, 1);
+  }
+
+  &:hover::after {
+    border-color: currentColor;
+  }
+
+  &:disabled {
+    --background: var(--gds-sys-color-base-300);
+  }
+}
+
+@mixin select-option-highlighted {
+  background: var(--gds-sys-color-base-800);
+}
+
+@mixin select-option {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+
+  line-height: 1.25;
+  cursor: pointer;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--gds-sys-color-base-200);
+  }
+
+  &:active {
+    background-color: var(--gds-sys-color-base-200);
+  }
+
+  &:focus {
+    outline-color: #000;
+    outline-offset: -0.25rem;
+  }
+
+  &.active.sg-highlighted,
+  &[aria-selected='true'] {
+    @include select-option-highlighted;
+    color: #fff;
+  }
+}
+
+@mixin select {
+  [role='option'] {
+    @include select-option;
+  }
+}
+
+@mixin multi-select {
+  [role='option'] {
+    display: flex;
+    width: 100%;
+
+    &.active.sg-highlighted input[type='checkbox'] ~ i {
+      border-color: #007ac7 !important;
+      box-shadow: 0 0 0.25em 0.0625em #41b0ee;
+      outline-color: transparent;
+      outline-style: solid;
+    }
+  }
+}
+
+@mixin menu {
+  [role='menuitem'] {
+    @include common.padding-horizontal(4);
+    @include common.padding-vertical(4);
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--gds-sys-color-base-200);
+    }
+
+    &:active {
+      background-color: var(--gds-sys-color-base-300);
+    }
+
+    &:focus {
+      outline-color: #000;
+      outline-offset: -0.25rem;
+    }
+
+    cursor: pointer;
+  }
+}

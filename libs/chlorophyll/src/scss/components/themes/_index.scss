@@ -1,0 +1,24 @@
+@use '../../tokens/z-index' as z-index;
+@use '../../tokens/mixin-sys-light-2016' as light-tokens;
+@use '../../tokens/mixin-sys-dark-2016' as dark-tokens;
+@use '../../tokens/shape' as shape;
+@use 'mixins';
+
+/* force dark mode to whole app or part of it by adding the class ".dark-mode" */
+.dark-mode {
+  @include dark-tokens.add-variables();
+}
+
+/* use preferred color scheme for whole app or part of it by adding the class ".auto-mode" */
+@media (prefers-color-scheme: dark) {
+  .auto-mode {
+    @include dark-tokens.add-variables();
+  }
+}
+
+/* apps will use light mode by default */
+:root {
+  @include shape.add-tokens;
+  @include z-index.add-tokens;
+  @include light-tokens.add-variables();
+}

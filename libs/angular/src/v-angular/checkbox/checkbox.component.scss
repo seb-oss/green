@@ -1,30 +1,26 @@
-@use '../../../../chlorophyll/scss/components/form/checkbox/mixins';
-@use '../../../../chlorophyll/scss/components/form/checkbox/tokens';
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '@sebgroup/chlorophyll/src/scss/tokens/shape';
+@use '../../../../chlorophyll/src/scss/components/checkbox/mixins';
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-mixins;
 
 :host {
-  --gds-sys-color-surface: #fff;
-  --gds-ref-pallet-base200: #e8e8e8;
-  --gds-sys-color-base: #333;
-  --gds-sys-shape-corner-small: 0.125rem;
-  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
-  --gds-sys-color-blue-dark-2: #007ac7;
-  --gds-sys-shape-corner-medium: 0.25rem;
-  @include tokens.add-checkbox-tokens;
+  @include light-tokens.add-variables();
+  @include shape.add-tokens();
   @include mixins.add-checkbox();
 
-  .form-control {
+  .gds-form-control {
     @include form-mixins.add-form-control;
     line-height: 1.125rem;
   }
 
-  .form-info {
+  .gds-form-info {
     font-weight: 500;
     padding-left: 1rem;
     margin-top: -0.25rem;
   }
 
-  .form-info--error {
+  .gds-form-info--error {
     display: flex;
     align-items: flex-start;
     gap: 0.5em;

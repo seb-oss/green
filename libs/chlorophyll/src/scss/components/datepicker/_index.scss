@@ -1,0 +1,16 @@
+@use 'mixins';
+@use '../../components/popover';
+@use '../../components/utility';
+@use '../../components/icon';
+
+.gds-calendar {
+  @include mixins.calendar;
+}
+
+.popover-datepicker {
+  --z-index: var(--gds-z-index-datepicker);
+}
+
+.gds-calendar-range {
+  @include mixins.calendar-range;
+}
