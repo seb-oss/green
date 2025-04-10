@@ -134,10 +134,11 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
       content = this.applyStroke(content)
     }
 
-    const svg = `<svg
-      ${this.generateAttributesString(attrs)}
-    >${content}</svg>`
-
+    const svg = `
+      <svg ${this.generateAttributesString(attrs)}> 
+        ${content}
+      </svg>
+    `
     return html`${unsafeHTML(svg)}`
   }
 }

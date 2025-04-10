@@ -8,13 +8,13 @@ const style = css`
       display: inline-block;
     }
 
+    svg {
+      display: block;
+    }
+
     :host(:not([width]):not([height])) svg {
       height: 1lh;
       width: auto;
-    }
-
-    svg {
-      display: block;
     }
   }
 `
