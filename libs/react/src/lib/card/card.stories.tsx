@@ -1,3 +1,5 @@
+import React from 'react'
+
 import Button from '../form/button/button'
 import Link from '../link/link'
 import Card from './card'
@@ -7,19 +9,19 @@ const Template = ({ children, ...props }) => <Card {...props}>{children}</Card>
 const Header = () => (
   <>
     <h3>Card Headline</h3>
-    <Button variant="close">
+    <button className="gds-close">
       <span className="sr-only">Close</span>
       <i></i>
-    </Button>
+    </button>
   </>
 )
 
 const Footer = () => (
   <>
-    <Link href="https://seb.se" className="button link">
+    <Link href="https://seb.se" button>
       Link
     </Link>
-    <Button>Default button</Button>
+    <Button variant="secondary">Default button</Button>
     <Button variant="primary">Primary</Button>
   </>
 )

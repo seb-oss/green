@@ -19,7 +19,6 @@
 /* apps will use light mode by default */
 :root {
   @include shape.add-tokens;
-  @include colors.add-color-tokens;
   @include z-index.add-tokens;
   @include light-tokens.add-variables();
 }

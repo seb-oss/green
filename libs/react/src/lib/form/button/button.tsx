@@ -37,7 +37,7 @@ export const Button = forwardRef(
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const buttonClassName =
-      classNames(className, variant, size, {
+      classNames('gds-button', className, variant, size, {
         active: active,
       }) || undefined
 

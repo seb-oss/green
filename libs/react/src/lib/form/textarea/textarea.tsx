@@ -83,7 +83,7 @@ export const TextArea = forwardRef(
     })
 
     const inputClassName =
-      classNames(className, {
+      classNames('gds-textarea', className, {
         [validateClassName(validator?.indicator)]: validator,
       }) || undefined
 

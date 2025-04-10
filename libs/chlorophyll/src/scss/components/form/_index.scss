@@ -18,6 +18,9 @@
 
 .gds-form-item {
   @include mixins.add-form-item;
+  label {
+    @include mixins.add-label;
+  }
 }
 
 .gds-form-info {

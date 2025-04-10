@@ -161,7 +161,6 @@ $color: var(--gds-sys-color-text-primary);
     > button,
     > button[type='button'],
     > .button {
-      //TODO: improve how to do sizing with mixin
       min-height: 2rem;
       padding: 0.4375rem 0.75rem;
       line-height: 1.125rem;
@@ -189,9 +188,6 @@ $color: var(--gds-sys-color-text-primary);
         map.get($colors, 'border-color'),
         map.get($colors, 'ghost-button-type')
       );
-
-      // style for nested links
-      //@include link.variant(map.get($colors, 'color'));
     }
   }
 }

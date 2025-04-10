@@ -53,8 +53,8 @@
   &:not(:disabled, .disabled, [aria-disabled]):hover #{$target} {
     background: $bg;
     color: $color;
-    --background: $bg;
-    --color: $color;
+    --background: #{$bg};
+    --color: #{$color};
 
     border-color: $bg;
   }

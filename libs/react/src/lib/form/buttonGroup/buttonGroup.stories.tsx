@@ -1,3 +1,5 @@
+import React from 'react'
+
 import { Button } from '../button/button'
 import { ButtonGroup } from './buttonGroup'
 
@@ -24,7 +26,7 @@ export const Default = {
   },
 
   args: {
-    variant: 'ghost',
+    variant: 'secondary',
     selectedIndex: 1,
   },
 }

@@ -1,5 +1,5 @@
-@use '../../common';
 @use 'sass:map';
+@use '../../common';
 
 @mixin base {
   @include common.add-outline-focus-state();
@@ -7,6 +7,14 @@
   font-weight: 500;
   border: none;
   border-radius: 0.125rem;
+
+  &.gds-link--white {
+    color: var(--gds-sys-color-text-white);
+  }
+
+  &.gds-link--black {
+    color: var(--gds-sys-color-text-primary);
+  }
 
   &:focus {
     &:not([aria-disabled]) {

@@ -1,5 +1,5 @@
-@use 'mixins';
 @use 'sass:map';
+@use 'mixins';
 
 a:not(:link, :visited, .gds-reset, .gds-link) {
   @include mixins.disabled;
