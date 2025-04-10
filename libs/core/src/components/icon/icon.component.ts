@@ -80,7 +80,6 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
       part: 'icon',
     }
 
-    // Add accessibility attributes based on label presence
     if (this.label) {
       return {
         ...baseAttrs,
