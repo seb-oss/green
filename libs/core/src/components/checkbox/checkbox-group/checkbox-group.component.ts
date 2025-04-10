@@ -6,6 +6,7 @@ import { classMap } from 'lit/directives/class-map.js'
 import { GdsFormControlFooter } from '../../../primitives/form-control-footer/form-control-footer.component'
 import { GdsFormControlHeader } from '../../../primitives/form-control-header/form-control-header.component'
 import { gdsCustomElement, html } from '../../../scoping'
+import { observeLightDOM } from '../../../utils/decorators'
 import { watch } from '../../../utils/decorators/watch'
 import {
   withLayoutChildProps,
@@ -18,7 +19,7 @@ import { styles } from './checkbox-group.styles'
 import type { GdsCheckbox } from '../checkbox.component'
 
 @localized()
-class CheckboxGroup extends GdsFormControlElement<string> {
+class CheckboxGroup extends GdsFormControlElement<string[]> {
   static styles = [styles]
 
   /**
@@ -82,7 +83,11 @@ class CheckboxGroup extends GdsFormControlElement<string> {
 
   @watch('value')
   private _handleValueChange() {
-    if (!this._isConnected) return
+    if (this._isConnected) {
+      this.checkboxes.forEach((checkbox) => {
+        checkbox.checked = this.value?.includes(checkbox.value) || false
+      })
+    }
   }
 
   render() {
@@ -131,12 +136,25 @@ class CheckboxGroup extends GdsFormControlElement<string> {
 
   #renderCheckboxes() {
     return html` <div class="content">
-      <slot></slot>
+      <slot @input=${this._handleCheckboxChange}></slot>
     </div>`
   }
 
+  @observeLightDOM({
+    attributes: true,
+    childList: true,
+    subtree: true,
+    characterData: true,
+  })
+  private _handleCheckboxChange(e?: Event) {
+    e && e.stopPropagation()
+    this.value = this.checkboxes
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value)
+  }
+
   #renderFieldControlFooter() {
-    return html` <gds-form-control-footer
+    return html`<gds-form-control-footer
       id="footer"
       class="size-${this.size}"
       .validationMessage=${this.invalid &&

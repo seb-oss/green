@@ -18,8 +18,8 @@ export const styles = css`
 
     .check-icon {
       line-height: 10px;
-      transition: scale 248ms;
-      will-change: scale, opacity;
+      transition: scale 150ms;
+      will-change: scale;
       scale: 1;
       color: var(--gds-color-l3-content-primary);
       opacity: 1;

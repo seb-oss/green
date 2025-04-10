@@ -36,8 +36,9 @@ export const checkbox: Story = {
     label: 'Pick options',
     supportingText: 'Label support text.',
     innerHTML: `
-    <gds-checkbox label="Hello"></gds-checkbox>
-    <gds-checkbox label="Hello" checked></gds-checkbox>
+    <gds-checkbox label="First option" supporting-text="This is the first option" value="first"></gds-checkbox>
+    <gds-checkbox label="Second option" supporting-text="This is the second option" value="second" checked></gds-checkbox>
+    <gds-checkbox label="Third option" supporting-text="This is the third option" value="third"></gds-checkbox>
     `,
   },
 }

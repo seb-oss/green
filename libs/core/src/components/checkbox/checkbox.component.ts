@@ -1,4 +1,4 @@
-import { property, state } from 'lit/decorators.js'
+import { property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -6,6 +6,7 @@ import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/sele
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
+import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../pure'
 import { styles } from './checkbox.styles'
 
@@ -18,7 +19,7 @@ import { styles } from './checkbox.styles'
 @gdsCustomElement('gds-checkbox', {
   dependsOn: [GdsSelectionFieldLabel, IconCheckmark],
 })
-export class GdsCheckbox extends GdsElement {
+export class GdsCheckbox extends GdsFormControlElement {
   static styles = [tokens, styles]
 
   /**
@@ -35,12 +36,6 @@ export class GdsCheckbox extends GdsElement {
   supportingText = ''
 
   /**
-   * The value of the checkbox button.
-   */
-  @property()
-  value = ''
-
-  /**
    * Whether the checkbox button is checked or not.
    */
   @property({ type: Boolean, reflect: true })
@@ -52,14 +47,8 @@ export class GdsCheckbox extends GdsElement {
   @property({ type: Boolean, reflect: true })
   disabled = false
 
-  /**
-   * Whether the checkbox button is invalid or not.
-   */
-  @property({ type: Boolean })
-  invalid = false
-
-  @state()
-  private _isFocused = false
+  @query('.checkbox')
+  private _elCheckbox!: HTMLElement
 
   connectedCallback() {
     super.connectedCallback()
@@ -67,8 +56,6 @@ export class GdsCheckbox extends GdsElement {
     this._updateAriaState()
     this.addEventListener('keydown', this.#handleKeyDown)
     this.addEventListener('click', this.#handleClick)
-    this.addEventListener('focus', () => (this._isFocused = true))
-    this.addEventListener('blur', () => (this._isFocused = false))
   }
 
   private _updateAriaState() {
@@ -78,7 +65,7 @@ export class GdsCheckbox extends GdsElement {
     this.toggleAttribute('aria-invalid', this.invalid)
   }
 
-  updated(changedProperties: Map<string, unknown>) {
+  protected updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties)
 
     if (
@@ -96,22 +83,6 @@ export class GdsCheckbox extends GdsElement {
       this.setAttribute('inert', '')
     } else {
       this.removeAttribute('inert')
-    }
-  }
-
-  #handleClick = (e: Event) => {
-    this.checked = !this.checked
-    this.focus()
-    this.dispatchEvent(new Event('gds-checkbox-change', { bubbles: true }))
-  }
-
-  #handleKeyDown = (e: KeyboardEvent) => {
-    if (this.disabled) return
-
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      this.checked = !this.checked
-      this.dispatchEvent(new Event('gds-checkbox-change', { bubbles: true }))
     }
   }
 
@@ -138,5 +109,36 @@ export class GdsCheckbox extends GdsElement {
         </div>
       </gds-selection-field-label>
     `
+  }
+
+  #handleClick = (e: Event) => {
+    this.focus()
+    this.#toggleChecked()
+  }
+
+  #handleKeyDown = (e: KeyboardEvent) => {
+    if (this.disabled) return
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      this.#toggleChecked()
+    }
+  }
+
+  #toggleChecked() {
+    this.checked = !this.checked
+    this.dispatchEvent(
+      new CustomEvent('gds-checkbox-change', { bubbles: true }),
+    )
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+  }
+
+  protected _getValidityAnchor(): HTMLElement {
+    return this._elCheckbox || this
   }
 }
