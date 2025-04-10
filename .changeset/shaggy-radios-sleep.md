@@ -2,16 +2,15 @@
 '@sebgroup/green-core': minor
 ---
 
-**Icon:** New icons, metadata, documentation and accessibility
+**Icon:** New icons, new sizing method, metadata, documentation and accessibility improvements.
 
-The following props have been removed"
+The following props have been removed:
 
 1. `width`
 2. `height`
 3. `box` - the viewbox property
 
-Now instead you speficy only the `size` property
-`size` is a style expression property that accepts, token and custom values
+Now you can specify only `size` which is a style expression property that accepts tokens and custom values/
 
 Example:
 
