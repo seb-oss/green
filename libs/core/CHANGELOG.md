@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.74.0
+
+### Minor Changes
+
+- 51bbe15: New components for blur, formatted-text for date, number and account and sensitive-number
+
+### Patch Changes
+
+- 0850de5: **Details:** Fix scroll-bar flash during transition
+- dc3a205: **Testing:** Fix _ElementInternals_ mock for Jest
+
 ## 1.73.0
 
 ### Minor Changes
