@@ -1,8 +1,14 @@
-const ICON_REPLACEMENTS = {
+export interface DeprecationInfo {
+  name: string
+  useInstead?: string
+  hide: true
+}
+
+const ICON_REPLACEMENTS: Record<string, string> = {
   seb: 'gds-icon-brand-seb',
 }
 
-const DEPRECATED_NAMES = [
+const DEPRECATED_NAMES: string[] = [
   'square-plus',
   'square-minus',
   'square-x',
@@ -40,20 +46,21 @@ const DEPRECATED_NAMES = [
   'maintenance',
 ]
 
-export const deprecatedIcons = Object.fromEntries([
-  ...Object.entries(ICON_REPLACEMENTS).map(([name, replacement]) => [
-    `gds-icon-${name}`,
-    {
-      name,
-      useInstead: replacement,
-      hide: true,
-    },
-  ]),
-  ...DEPRECATED_NAMES.map((name) => [
-    `gds-icon-${name}`,
-    {
-      name,
-      hide: true,
-    },
-  ]),
-])
+export const deprecatedIcons: Record<string, DeprecationInfo> =
+  Object.fromEntries([
+    ...Object.entries(ICON_REPLACEMENTS).map(([name, replacement]) => [
+      `gds-icon-${name}`,
+      {
+        name,
+        useInstead: replacement,
+        hide: true,
+      } as DeprecationInfo,
+    ]),
+    ...DEPRECATED_NAMES.map((name) => [
+      `gds-icon-${name}`,
+      {
+        name,
+        hide: true,
+      } as DeprecationInfo,
+    ]),
+  ])

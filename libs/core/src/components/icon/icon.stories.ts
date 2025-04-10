@@ -1,9 +1,10 @@
-import { html } from 'lit'
+import { html, TemplateResult } from 'lit'
 import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import { deprecatedIcons } from './icon.deprecated'
+import sizeTokens from '../../../../tokens/src/tokens/size.json'
+import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
 
 import './icons'
 import '../grid'
@@ -11,6 +12,7 @@ import '../container'
 import '../card'
 import '../badge'
 import '../flex'
+import '../divider'
 import '../text'
 import './icon.stories.css'
 
@@ -194,31 +196,105 @@ export const Brands: Story = {
   },
 }
 
-/**
- * You can customize the icons by setting the `width` and `height` properties. If not specified it will fall back to `1lh` height and `auto` width.
- */
+const createSizeExample = (
+  size: string | number,
+  options: {
+    unit?: string
+    icon?: string
+    isToken?: boolean
+  } = {},
+) => {
+  const { unit = '', icon = 'credit-card', isToken = false } = options
+  const displaySize = unit ? `${size}${unit}` : size.toString().toUpperCase()
+  const sizeAttribute = unit ? `${size}${unit}` : size
+  const tag = literal`gds-icon-${unsafeStatic(icon)}`
 
+  return html`
+    <gds-flex
+      flex-direction="column"
+      align-items="center"
+      justify-content="flex-start"
+      gap="s"
+    >
+      <gds-card
+        width="100px"
+        height="100px"
+        align-items="center"
+        justify-content="center"
+      >
+        ${staticHTML`<${tag} size="${sizeAttribute}"></${tag}>`}
+      </gds-card>
+      <gds-flex
+        flex-direction="row"
+        align-items="center"
+        justify-content="center"
+        gap="xs"
+      >
+        <gds-text tag="small">${displaySize}</gds-text>
+        ${isToken
+          ? html`
+              <gds-text tag="small" color="secondary/0.4">
+                ${sizeTokens.ref.size[size.toString().toUpperCase()].value}px
+              </gds-text>
+            `
+          : ''}
+      </gds-flex>
+    </gds-flex>
+  `
+}
+
+const createSection = (title: string, examples: TemplateResult[]) => html`
+  <gds-flex flex-direction="column" gap="m">
+    <gds-text>${title}</gds-text>
+    <gds-divider color="primary"></gds-divider>
+    <gds-flex align-items="flex-start" flex-direction="row" gap="s">
+      ${examples}
+    </gds-flex>
+  </gds-flex>
+`
+
+/**
+ * The default icon size is equal to 1lh (1 line height).
+ * You can change the icon size by setting the `size` attribute.
+ * The size property accepts all the size tokens and also custom value like px or lh.
+ *
+ * ```html
+ * <gds-icon-robot size="l"></gds-icon-robot>
+ * <gds-icon-robot size="2xl"></gds-icon-robot>
+ * <gds-icon-robot size="48px"></gds-icon-robot>
+ * <gds-icon-robot size="2lh"></gds-icon-robot>
+ * ```
+ */
 export const IconsSize: Story = {
   ...DefaultParams,
   name: 'Sizing',
-  render: (args) => html`
-    <gds-icon-robot width="84" height="84"></gds-icon-robot>
-    <gds-icon-rocket width="84" height="84"></gds-icon-rocket>
-    <gds-icon-school width="84" height="84"></gds-icon-school>
-    <gds-icon-settings-gear width="84" height="84"></gds-icon-settings-gear>
-    <gds-icon-settings-slider-hor
-      width="84"
-      height="84"
-    ></gds-icon-settings-slider-hor>
-    <gds-icon-settings-slider-three
-      width="84"
-      height="84"
-    ></gds-icon-settings-slider-three>
-    <gds-icon-settings-slider-ver
-      width="84"
-      height="84"
-    ></gds-icon-settings-slider-ver>
-  `,
+  render: (args) => {
+    // Token sizes
+    const TOKEN_SIZES = ['xs', 's', 'm', 'l', 'xl', '2xl', '3xl', '4xl']
+    const tokenExamples = TOKEN_SIZES.map((size) =>
+      createSizeExample(size, { isToken: true }),
+    )
+
+    // Pixel sizes
+    const PIXEL_SIZES = [16, 24, 32, 48]
+    const pixelExamples = PIXEL_SIZES.map((size) =>
+      createSizeExample(size, { unit: 'px', icon: 'rocket' }),
+    )
+
+    // Line-height sizes
+    const LH_SIZES = [1, 1.5, 2, 2.5]
+    const lhExamples = LH_SIZES.map((size) =>
+      createSizeExample(size, { unit: 'lh', icon: 'ai' }),
+    )
+
+    return html`
+      <gds-flex gap="4xl" flex-direction="column">
+        ${createSection('Tokens', tokenExamples)}
+        ${createSection('Using: Custom values(px)', pixelExamples)}
+        ${createSection('Using: Custom values(lh)', lhExamples)}
+      </gds-flex>
+    `
+  },
 }
 
 /**
@@ -255,7 +331,7 @@ export const Deprecated: Story = {
   name: 'Deprecated Icons',
   render: () => {
     const deprecatedElements = Object.entries(deprecatedIcons).map(
-      ([tagName, info]) => {
+      ([tagName, info]: [string, DeprecationInfo]) => {
         const tag = literal`gds-icon-${unsafeStatic(info.name)}`
 
         return html`

@@ -3,6 +3,8 @@ import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 import { GdsElement } from '../../gds-element'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { forSpaceTokensAndCustomValues } from '../../utils/helpers'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -20,16 +22,17 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
   static styles = [IconCSS]
 
   /**
-   * This property allow you to set the width of the icon. If not provided, uses the icon's default width.
+   * This property allow you to set the size of the icon with the token and custom values.
+   * If not provided, uses the icon's default size.
+   *
+   * The size is a shorthand for setting both width and height at once.
    */
-  @property({ type: Number })
-  width?: number
-
-  /**
-   * This property allow you to set the height of the icon. If not provided, uses the icon's default height.
-   */
-  @property({ type: Number })
-  height?: number
+  @styleExpressionProperty({
+    ...forSpaceTokensAndCustomValues,
+    property: 'height',
+    selector: 'svg',
+  })
+  size?: string
 
   /**
    * When set to true, the solid version of the icon is displayed.
@@ -43,12 +46,6 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
    */
   @property({ type: Number })
   stroke?: number
-
-  /**
-   * When viewbox is defined it will override the default viewbox of the icon.
-   */
-  @property({ type: String })
-  box = false
 
   /**
    * This property allow you to set the accessible label of the icon.
@@ -74,9 +71,9 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
     const baseAttrs = {
       fill: 'none',
       xmlns: 'http://www.w3.org/2000/svg',
-      width: this.width || constructor._width,
-      height: this.height || constructor._height,
-      viewBox: this.box || constructor._viewBox,
+      width: constructor._width,
+      height: constructor._height,
+      viewBox: constructor._viewBox,
       part: 'icon',
     }
 
