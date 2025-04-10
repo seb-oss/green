@@ -1,4 +1,3 @@
-// icon.deprecated.ts
 interface DeprecationInfo {
   name: string
   useInstead?: string
