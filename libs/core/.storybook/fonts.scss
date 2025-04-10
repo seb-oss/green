@@ -1,6 +1,8 @@
-@use '@sebgroup/fonts/scss/gds-fonts.scss' with (
+@use '@sebgroup/fonts/scss/SEB-SansSerif-GDS' with (
   $seb-font-path: '@sebgroup/fonts/fonts'
 );
+
+@include SEB-SansSerif-GDS.add-fonts();
 
 gds-theme {
   font-family: 'SEB SansSerif GDS';
