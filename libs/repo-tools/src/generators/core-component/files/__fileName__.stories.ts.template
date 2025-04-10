@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './<%= toKebabCase(name) %>'
+import './<%= toBritishTitleCase(name) %>'
+import './<%= toPascalCase(name) %>'
 
 import { html } from 'lit'
 
 const meta: Meta = {
-  title: 'Components/<%= name %>',
+  title: 'Components/<%= toBritishTitleCase(name) %>',
   component: 'gds-<%= toKebabCase(name) %>',
   tags: ['autodocs'],
 }
@@ -25,7 +27,7 @@ const DefaultParams: Story = {
 /**
  * TODO: Add documentation
  */
-export const <%= name %>: Story = {
+export const <%= toPascalCase(name) %>: Story = {
   ...DefaultParams,
   name: '<%= name %>',
 }
