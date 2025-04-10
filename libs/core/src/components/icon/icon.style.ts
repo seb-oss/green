@@ -12,7 +12,7 @@ const style = css`
       display: block;
     }
 
-    :host(:not([width]):not([height])) svg {
+    :host(:not([size])) svg {
       height: 1lh;
       width: auto;
     }
