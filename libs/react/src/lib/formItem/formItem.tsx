@@ -162,8 +162,7 @@ export const FormItem = ({
           <>
             <TriangleExclamationIcon
               solid
-              width={16}
-              height={16}
+              size="m"
               style={{ color: 'var(--gds-sys-color-text-error)' }}
               aria-hidden="true"
             />
