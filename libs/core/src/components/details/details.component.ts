@@ -74,29 +74,8 @@ export class GdsDetails extends withSizeXProps(
   @query('slot[name="summary-icon-closed"]')
   private _closedIconSlot?: HTMLSlotElement
 
-  protected firstUpdated(): void {
-    this.#initializeContentHeight()
-  }
-
-  #initializeContentHeight = (): void => {
-    if (!this._content) return
-    this.#updateContentHeight()
-  }
-
-  #updateContentHeight = (): void => {
-    if (!this._content) return
-
-    requestAnimationFrame(() => {
-      this._content?.style.setProperty(
-        '--_max-height',
-        this.open ? `${this._content.scrollHeight}px` : '0',
-      )
-    })
-  }
-
   @watch('open')
   private __handleOpenChange() {
-    this.#updateContentHeight()
     this.#syncGroupState()
   }
 
@@ -121,7 +100,6 @@ export class GdsDetails extends withSizeXProps(
         if (details !== this && (details as GdsDetails).name === this.name) {
           const other = details as GdsDetails
           other.open = false
-          other.#updateContentHeight()
           other.#dispatchStateEvent()
         }
       })
@@ -190,7 +168,11 @@ export class GdsDetails extends withSizeXProps(
     return html`
       <div
         id="content-${this.name || 'default'}"
-        class="content"
+        class=${classMap({
+          content: true,
+          open: this.open,
+          small: this.size === 'small',
+        })}
         aria-hidden="${!this.open}"
       >
         <slot></slot>
