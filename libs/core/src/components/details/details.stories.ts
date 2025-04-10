@@ -131,10 +131,20 @@ In this example, all detailss are grouped together with the name attribute set t
         </gds-rich-text>
       </gds-details>
       <gds-details name="group-1" summary="Second Details">
-        Content of second details
+        <gds-rich-text>
+          <gds-text tag="h4">Heading Inside Details</gds-text>
+          <gds-link href="#">
+            <gds-text>Linked content</gds-text>
+          </gds-link>
+        </gds-rich-text>
       </gds-details>
       <gds-details name="group-1" summary="Third Details">
-        Content of third details
+        <gds-rich-text>
+          <gds-text tag="h4">Heading Inside Details</gds-text>
+          <gds-link href="#">
+            <gds-text>Linked content</gds-text>
+          </gds-link>
+        </gds-rich-text>
       </gds-details>
     </gds-flex>
   `,
