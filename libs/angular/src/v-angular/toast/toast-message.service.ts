@@ -10,7 +10,7 @@ export class ToastMessageService {
   private messages: ToastMessage[] = []
   private messageSubject = new Subject<ToastMessage[]>()
 
-  add(message: ToastMessage) {
+  add(message: ToastMessage): void {
     const {
       type,
       translocoScope,
