@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-chart-presentation
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-chart-presentation')
 export class IconChartPresentation extends GdsIcon {

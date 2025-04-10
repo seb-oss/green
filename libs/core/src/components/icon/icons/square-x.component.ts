@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-square-x
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-square-x')
 export class IconSquareX extends GdsIcon {

@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-circles-three
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-circles-three')
 export class IconCirclesThree extends GdsIcon {

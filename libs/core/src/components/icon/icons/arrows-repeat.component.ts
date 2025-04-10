@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-arrows-repeat
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-arrows-repeat')
 export class IconArrowsRepeat extends GdsIcon {

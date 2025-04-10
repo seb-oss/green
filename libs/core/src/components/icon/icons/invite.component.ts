@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-invite
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-invite')
 export class IconInvite extends GdsIcon {

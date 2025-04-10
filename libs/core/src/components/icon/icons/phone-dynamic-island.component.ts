@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-phone-dynamic-island
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-phone-dynamic-island')
 export class IconPhoneDynamicIsland extends GdsIcon {

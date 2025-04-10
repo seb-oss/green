@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-bubble-text
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-bubble-text')
 export class IconBubbleText extends GdsIcon {

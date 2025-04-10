@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-folder-upload
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-folder-upload')
 export class IconFolderUpload extends GdsIcon {

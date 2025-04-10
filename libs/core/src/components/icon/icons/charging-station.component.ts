@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-charging-station
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-charging-station')
 export class IconChargingStation extends GdsIcon {

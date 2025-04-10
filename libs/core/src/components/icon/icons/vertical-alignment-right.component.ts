@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-vertical-alignment-right
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-vertical-alignment-right')
 export class IconVerticalAlignmentRight extends GdsIcon {

@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-square-check
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-square-check')
 export class IconSquareCheck extends GdsIcon {

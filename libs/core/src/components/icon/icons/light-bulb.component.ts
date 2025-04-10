@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-light-bulb
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-light-bulb')
 export class IconLightBulb extends GdsIcon {

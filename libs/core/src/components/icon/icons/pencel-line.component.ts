@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-pencel-line
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-pencel-line')
 export class IconPencelLine extends GdsIcon {

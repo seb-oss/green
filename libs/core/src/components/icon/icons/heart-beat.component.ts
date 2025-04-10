@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-heart-beat
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-heart-beat')
 export class IconHeartBeat extends GdsIcon {
