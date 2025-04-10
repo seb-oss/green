@@ -141,7 +141,7 @@ export default function Accessibility() {
               better.
             </p>
 
-            <h3>Here are a few good links to tools that can help:</h3>
+            <h3>Here are a few good links to tools that can help</h3>
             <ul>
               <li>
                 Follow&nbsp;
@@ -180,7 +180,7 @@ export default function Accessibility() {
               </li>
             </ul>
 
-            <h3>Future high contrast mode:</h3>
+            <h3>Future high contrast mode</h3>
             <p>
               In addition to the dark mode feature detailed below, we may
               introduce a high contrast mode in the future. This setting is
