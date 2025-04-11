@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.74.2
+
+### Patch Changes
+
+- 84d218d: **Details:** Fix the a11y issue to avoid reading contents when collapsed
+
 ## 1.74.1
 
 ### Patch Changes
