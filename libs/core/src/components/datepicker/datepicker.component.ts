@@ -169,6 +169,20 @@ class Datepicker extends GdsFormControlElement<Date> {
   test_calendarButton!: Promise<HTMLButtonElement>
 
   /**
+   * A reference to the clear button element inside the shadow root.
+   * Inteded for use in integration tests.
+   */
+  @query('#clear-button')
+  test_clearButton!: HTMLButtonElement
+
+  /**
+   * A reference to the today button element inside the shadow root.
+   * Inteded for use in integration tests.
+   */
+  @query('#today-button')
+  test_todayButton!: HTMLButtonElement
+
+  /**
    * A reference to a date cell element (<td>) inside the shadow root of the calendar primitive.
    * Intended for use in integration tests.
    */
@@ -423,6 +437,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   this.clearable,
                   () =>
                     html` <gds-button
+                      id="clear-button"
                       rank="tertiary"
                       size="small"
                       @click=${(e: MouseEvent) => {
@@ -440,6 +455,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   !this.hideTodayButton,
                   () =>
                     html` <gds-button
+                      id="today-button"
                       rank="tertiary"
                       size="small"
                       @click=${(e: MouseEvent) => {
