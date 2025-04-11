@@ -1,0 +1,1 @@
+export { IconLab } from '@sebgroup/green-core/react';

@@ -1,0 +1,1 @@
+export { IconYoutube } from '@sebgroup/green-core/react';

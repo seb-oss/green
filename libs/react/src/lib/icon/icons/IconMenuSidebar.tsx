@@ -1,0 +1,1 @@
+export { IconMenuSidebar } from '@sebgroup/green-core/react';

@@ -1,0 +1,1 @@
+export { IconPageAdd } from '@sebgroup/green-core/react';

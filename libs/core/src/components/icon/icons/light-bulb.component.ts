@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-light-bulb
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-light-bulb')
 export class IconLightBulb extends GdsIcon {
@@ -12,4 +13,10 @@ export class IconLightBulb extends GdsIcon {
   static _solidSVG = `<path d="M19.9998 9.00089C19.9998 11.249 19.072 13.2807 17.5803 14.7334H6.41753C4.9259 13.2807 3.99805 11.249 3.99805 9.00089C3.99805 4.58212 7.58016 1 11.9989 1C16.4177 1 19.9998 4.58212 19.9998 9.00089Z" fill="currentColor"/><path d="M7.99775 18.25V16.2334H16.0001V18.25C16.0001 18.6642 15.6643 19 15.2501 19H8.74775C8.33354 19 7.99775 18.6642 7.99775 18.25Z" fill="currentColor"/><path d="M8.75 20.5C8.33579 20.5 8 20.8358 8 21.25C8 21.6642 8.33579 22 8.75 22H15.25C15.6642 22 16 21.6642 16 21.25C16 20.8358 15.6642 20.5 15.25 20.5H8.75Z" fill="currentColor"/>`
   /** @private */
   static _name = 'light-bulb'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

@@ -1,0 +1,1 @@
+export { IconCookies } from '@sebgroup/green-core/react';

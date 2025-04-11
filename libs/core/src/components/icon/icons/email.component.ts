@@ -12,4 +12,10 @@ export class IconEmail extends GdsIcon {
   static _solidSVG = `<path d="M2.33632 4.12431L12 12.031L21.6637 4.12431C21.5451 4.04575 21.4029 4 21.25 4H2.75C2.59711 4 2.4549 4.04575 2.33632 4.12431Z" fill="currentColor"/><path d="M2 5.78723V19.25C2 19.6642 2.33579 20 2.75 20H21.25C21.6642 20 22 19.6642 22 19.25V5.78723L12.4749 13.5805C12.1987 13.8065 11.8013 13.8065 11.5251 13.5805L2 5.78723Z" fill="currentColor"/>`
   /** @private */
   static _name = 'email'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

@@ -12,4 +12,10 @@ export class IconEyeOpen extends GdsIcon {
   static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C16.1417 4.00003 20.1618 6.64058 22.671 11.6649C22.7763 11.8759 22.7763 12.1241 22.671 12.3351C20.1618 17.3595 16.1417 20 12 19.9999C7.85826 19.9999 3.83815 17.3593 1.32902 12.335C1.22366 12.124 1.22366 11.8758 1.32902 11.6648C3.83815 6.64046 7.85827 3.99997 12 4ZM8.375 12C8.375 9.99797 9.99797 8.375 12 8.375C14.002 8.375 15.625 9.99797 15.625 12C15.625 14.002 14.002 15.625 12 15.625C9.99797 15.625 8.375 14.002 8.375 12Z" fill="currentColor"/>`
   /** @private */
   static _name = 'eye-open'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

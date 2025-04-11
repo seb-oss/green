@@ -1,0 +1,1 @@
+export { IconLeisure } from '@sebgroup/green-core/react';
