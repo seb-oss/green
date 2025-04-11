@@ -5,6 +5,9 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build-app": {
+      "dependsOn": ["build"]
+    },
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],

@@ -14,6 +14,7 @@ const betaItems = {
   Content: true,
   Style: true,
   'Rich Text': true,
+  Details: true,
   Dialog: true,
   Badge: true,
   Dropdown: true,
