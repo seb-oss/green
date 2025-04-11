@@ -1,10 +1,12 @@
 import { localized } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
 import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
 import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
+import formControlHostStyles from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
 import { observeLightDOM } from '../../utils/decorators/observe-light-dom'
 import { watch } from '../../utils/decorators/watch'
@@ -23,7 +25,7 @@ import { styles } from './select.styles'
 
 @localized()
 class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
-  static styles = [tokens, styles]
+  static styles = [tokens, formControlHostStyles, styles]
 
   /**
    * The supporting text displayed between the label and the field.
@@ -37,6 +39,14 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
+
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
 
   /**
    * Reference to the native select element.
@@ -98,12 +108,18 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     this.selectElement && (this.selectElement.disabled = this.disabled)
 
     return html`
-      <gds-form-control-header class="size-${this.size}">
-        <label for="select" slot="label" id="label-text">${this.label}</label>
-        <span slot="supporting-text" id="supporting-text">
-          ${this.supportingText}
-        </span>
-      </gds-form-control-header>
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label for="select" slot="label" id="label-text"
+              >${this.label}</label
+            >
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+          </gds-form-control-header>`,
+      )}
 
       <gds-field-base
         .size=${this.size}
@@ -116,12 +132,20 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
         ${this.#renderFieldContents()}
       </gds-field-base>
 
-      <gds-form-control-footer
-        class="size-${this.size}"
-        .validationMessage=${this.invalid &&
-        (this.errorMessage || this.validationMessage)}
-      ></gds-form-control-footer>
+      ${when(
+        this.#shouldShowFooter(),
+        () =>
+          html`<gds-form-control-footer
+            class="size-${this.size}"
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>`,
+      )}
     `
+  }
+
+  #shouldShowFooter() {
+    return !this.plain && this.invalid
   }
 
   @observeLightDOM({
@@ -148,8 +172,10 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
           'aria-describedby',
           'supporting-text extended-supporting-text sub-label message',
         )
+        clone.ariaLabel = this.label
         clone.setAttribute('id', 'select')
         clone.disabled = this.disabled
+        clone.className = 'native-control'
 
         // If this is the initial render, set the value from the select element
         // Otherwise we set the select element value from the component value, so that it still reflects the value prop in case it was rerendered
@@ -262,7 +288,9 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   #renderMainLabel() {
     if (!this.multiple) {
-      return html`<label id="placeholder">${this.displayValue}</label>`
+      return html`<label id="placeholder" class="native-control"
+        >${this.displayValue}</label
+      >`
     }
   }
 

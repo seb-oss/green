@@ -5,6 +5,8 @@ import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/calendar/index.js'
 
+import { CustomizedDate } from '@sebgroup/green-core/components/calendar/calendar.component'
+
 const YEAR_MONTH = `${new Date().getFullYear()}-${new Date().getMonth() + 1}`
 
 @customElement('calendar-example')
@@ -47,7 +49,7 @@ export class CalendarExample extends LitElement {
       indicator: 'dot',
       disabled: true,
     },
-  ]
+  ] as CustomizedDate[]
 
   render() {
     return html` <div style="width:320px; margin: 8rem auto;">
@@ -65,7 +67,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.disabledWeekends}
-            @change=${(e) => (this.disabledWeekends = e.target.checked)} /><span
+            @change=${(e: Event) => (this.disabledWeekends = (e.target as HTMLInputElement).checked)} /><span
             >Disable weekends</span
           ><i
         ></i></label>
@@ -73,7 +75,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showWeekNumbers}
-            @change=${(e) => (this.showWeekNumbers = e.target.checked)} /><span
+            @change=${(e: Event) => (this.showWeekNumbers = (e.target as HTMLInputElement).checked)} /><span
             >Show week numbers</span
           ><i
         ></i></label>
@@ -81,7 +83,7 @@ export class CalendarExample extends LitElement {
           ><input
             type="checkbox"
             .checked=${this.showCustomizedDates}
-            @change=${(e) => (this.showCustomizedDates = e.target.checked)} /><span
+            @change=${(e: Event) => (this.showCustomizedDates = (e.target as HTMLInputElement).checked)} /><span
             >Show customized dates</span
           ><i
         ></i></label>

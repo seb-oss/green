@@ -1,5 +1,39 @@
 # Changelog
 
+## 5.8.0
+
+### Minor Changes
+
+- a9cde91: **V-Angular Toast:** Support input of custom template to render inside of toast.
+
+## 5.7.1
+
+### Patch Changes
+
+- 9bf1161: **V-Angular Input:** Fixed error and countdown styling for input field.
+- dc3a205: **NggCoreControl**: Allow opt-out by using `ngDefaultControl` directive
+- Updated dependencies [51bbe15]
+- Updated dependencies [0850de5]
+- Updated dependencies [dc3a205]
+  - @sebgroup/green-core@1.74.0
+
+## 5.7.0
+
+### Minor Changes
+
+- a6fee64: **V-Angular Input:** Adding small variant
+  **V-Angular RadioButton:** Adding small variant
+
+### Patch Changes
+
+- Updated dependencies [a538e40]
+- Updated dependencies [a6fee64]
+- Updated dependencies [a6fee64]
+- Updated dependencies [bc58619]
+- Updated dependencies [0e5e557]
+  - @sebgroup/chlorophyll@3.6.18
+  - @sebgroup/green-core@1.73.0
+
 ## 5.6.1
 
 ### Patch Changes

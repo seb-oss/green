@@ -80,11 +80,17 @@ describe('<gds-datepicker>', () => {
       const separator =
         el.shadowRoot!.querySelector<HTMLSpanElement>('.separator')!
 
-      await expect(spinners[0].getAttribute('aria-label')).to.equal('Day')
+      await expect(spinners[0].getAttribute('aria-label').trim()).to.equal(
+        'Day',
+      )
       await expect(spinners[0].length).to.equal(2)
-      await expect(spinners[1].getAttribute('aria-label')).to.equal('Month')
+      await expect(spinners[1].getAttribute('aria-label').trim()).to.equal(
+        'Month',
+      )
       await expect(spinners[1].length).to.equal(2)
-      await expect(spinners[2].getAttribute('aria-label')).to.equal('Year')
+      await expect(spinners[2].getAttribute('aria-label').trim()).to.equal(
+        'Year',
+      )
       await expect(spinners[2].length).to.equal(4)
       await expect(separator.textContent).to.equal('/')
       await expect(el.dateformat).to.equal('d/m/y')
