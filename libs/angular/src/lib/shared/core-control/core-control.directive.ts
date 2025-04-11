@@ -21,6 +21,8 @@ import {
      gds-datepicker:not([ngDefaultControl]),
      gds-select:not([ngDefaultControl]),
      gds-radio-group:not([ngDefaultControl]),
+     gds-checkbox:not([ngDefaultControl]),
+     gds-checkbox-group:not([ngDefaultControl]),
      [nggCoreControl]`,
   providers: [
     {
