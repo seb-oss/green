@@ -592,7 +592,7 @@ describe('<gds-datepicker>', () => {
 
       expect(todayButton).to.exist*/
 
-      expect(el.value!.test_todayButton()).to.exist
+      expect(el.test_todayButton).to.exist
     })
 
     it('should not show the today button', async () => {
@@ -603,7 +603,7 @@ describe('<gds-datepicker>', () => {
         el.shadowRoot!.querySelector<HTMLButtonElement>('#today_button')
       expect(todayButton).to.not.exist*/
 
-      expect(el.test_todayButton()).to.not.exist
+      expect(el.test_todayButton).to.not.exist
     })
 
     it('should show the clear button', async () => {
@@ -614,7 +614,7 @@ describe('<gds-datepicker>', () => {
         el.shadowRoot!.querySelector<HTMLButtonElement>('#clear_button')
       expect(clearButton).to.exist*/
 
-      expect(el.value!.test_clearButton()).to.exist
+      expect(el.test_clearButton).to.exist
     })
 
     it('should not show the clear button', async () => {
@@ -625,7 +625,7 @@ describe('<gds-datepicker>', () => {
         el.shadowRoot!.querySelector<HTMLButtonElement>('#clear_button')
       expect(clearButton).to.not.exist*/
 
-      expect(el.value!.test_clearButton()).to.not.exist
+      expect(el.test_clearButton).to.not.exist
     })
   })
 
