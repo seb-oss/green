@@ -35,6 +35,30 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
   size?: string
 
   /**
+   * This property allow you to set the width of the icon. If not provided, the default width is auto.
+   *
+   * @deprecated Use the `size` property instead.
+   *
+   * ```html
+   * <gds-icon size="m"></gds-icon>
+   * ```
+   */
+  @property({ type: Number })
+  width?: number
+
+  /**
+   * This property allow you to set the height of the icon. If not provided, the default height is 1lh.
+   *
+   *@deprecated Use the `size` property instead.
+   *
+   * ```html
+   * <gds-icon size="m"></gds-icon>
+   * ```
+   */
+  @property({ type: Number })
+  height?: number
+
+  /**
    * When set to true, the solid version of the icon is displayed.
    * When set to false or not provided, the regular version of the icon is displayed.
    */
@@ -71,8 +95,8 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
     const baseAttrs = {
       fill: 'none',
       xmlns: 'http://www.w3.org/2000/svg',
-      width: constructor._width,
-      height: constructor._height,
+      width: this.width || constructor._width,
+      height: this.width || constructor._height,
       viewBox: constructor._viewBox,
       part: 'icon',
     }
