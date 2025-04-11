@@ -598,7 +598,7 @@ describe('<gds-datepicker>', () => {
       expect(todayButton).to.not.exist
     })
 
-    it('should show clear button', async () => {
+    it('should show the clear button', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker clearable open></gds-datepicker>`,
       )
@@ -609,7 +609,7 @@ describe('<gds-datepicker>', () => {
       expect(clearButton).to.exist
     })
 
-    it('should not show clear button', async () => {
+    it('should not show the clear button', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker open></gds-datepicker>`,
       )
