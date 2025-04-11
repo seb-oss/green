@@ -136,21 +136,29 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
 
   #renderCheckboxes() {
     return html` <div class="content">
-      <slot @input=${this._handleCheckboxChange}></slot>
+      <slot @input=${this.#handleCheckboxChange}></slot>
     </div>`
   }
 
-  @observeLightDOM({
-    attributes: true,
-    childList: true,
-    subtree: true,
-    characterData: true,
-  })
-  private _handleCheckboxChange(e?: Event) {
+  #handleCheckboxChange(e: Event) {
     e && e.stopPropagation()
+    this.#computeValue()
+    this.#dispatchInputEvent()
+  }
+
+  #computeValue() {
     this.value = this.checkboxes
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value)
+  }
+
+  #dispatchInputEvent() {
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   #renderFieldControlFooter() {
@@ -161,6 +169,16 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
       (this.errorMessage || this.validationMessage)}
     >
     </gds-form-control-footer>`
+  }
+
+  @observeLightDOM({
+    attributes: true,
+    childList: true,
+    subtree: true,
+    characterData: true,
+  })
+  private _syncOnDOMChange() {
+    this.#computeValue()
   }
 }
 

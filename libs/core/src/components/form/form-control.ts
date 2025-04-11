@@ -209,12 +209,13 @@ export abstract class GdsFormControlElement<ValueT = any>
     this.checkValidity()
   }
 
-  formResetCallback() {
+  protected formResetCallback() {
     if (typeof this.value === 'string') (this.value as string) = ''
+    else if (Array.isArray(this.value)) (this.value as Array<string>) = []
     else this.value = undefined
   }
 
-  formAssociatedCallback(form?: HTMLFormElement) {
+  protected formAssociatedCallback(form?: HTMLFormElement) {
     form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 
