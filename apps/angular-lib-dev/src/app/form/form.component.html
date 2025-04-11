@@ -124,11 +124,10 @@
             [errorMessage]="getError(simpleForm.get('date'))"
           ></gds-datepicker>
           <gds-textarea
+            formControlName="description"
             label="Description"
             [errorMessage]="getError(simpleForm.get('description'))"
-            clearable
-          >
-          </gds-textarea>
+          ></gds-textarea>
           <gds-checkbox
             formControlName="singleCheckbox"
             label="Accept terms and conditions"
