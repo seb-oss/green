@@ -263,6 +263,17 @@ const createSection = (title: string, examples: TemplateResult[]) => html`
  * <gds-icon-robot size="48px"></gds-icon-robot>
  * <gds-icon-robot size="2lh"></gds-icon-robot>
  * ```
+ *
+ * ### Width and Height properties
+ * <gds-badge variant="warning" size="small">Deprecated</gds-badge>
+ *
+ * Size is a shorthand for setting both width and height at once and will be the only way to set the size in the future.
+ * Using the `width` and `height` attributes will be deprecated in the next major release.
+ *
+ *Using the `size` property instead.
+ * ```html
+ * <gds-icon-robot size="l"></gds-icon-robot>
+ * ```
  */
 export const IconsSize: Story = {
   ...DefaultParams,

@@ -72,6 +72,15 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
   stroke?: number
 
   /**
+   * When viewbox is defined it will override the default viewbox of the icon.
+   *
+   * @deprecated this prop will be removed on the next major release
+   *
+   */
+  @property({ type: String })
+  box = false
+
+  /**
    * This property allow you to set the accessible label of the icon.
    * If not provided, the icon will be presentational.
    */
@@ -97,7 +106,7 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
       xmlns: 'http://www.w3.org/2000/svg',
       width: this.width || constructor._width,
       height: this.width || constructor._height,
-      viewBox: constructor._viewBox,
+      viewBox: this.box || constructor._viewBox,
       part: 'icon',
     }
 
