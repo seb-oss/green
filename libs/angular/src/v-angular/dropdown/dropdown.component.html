@@ -4,7 +4,7 @@
     [id]="id + '-label'"
     class="gds-field-label hide-if-empty"
     [attr.for]="id + '-toggle'"
-    *ngIf="labelContentTpl || basicLabelContentTpl || label"
+    *ngIf="labelContentTpl || label"
   >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"

@@ -1,5 +1,42 @@
 # Changelog
 
+## 1.74.2
+
+### Patch Changes
+
+- 84d218d: **Details:** Fix the a11y issue to avoid reading contents when collapsed
+
+## 1.74.1
+
+### Patch Changes
+
+- 630d015: **Details:** Patch content overflow and improve focus state
+
+## 1.74.0
+
+### Minor Changes
+
+- 51bbe15: New components for blur, formatted-text for date, number and account and sensitive-number
+
+### Patch Changes
+
+- 0850de5: **Details:** Fix scroll-bar flash during transition
+- dc3a205: **Testing:** Fix _ElementInternals_ mock for Jest
+
+## 1.73.0
+
+### Minor Changes
+
+- a6fee64: **Form controls:** Add `plain` attribute that hides header and footer, removing all surrounding space from the control
+  **Form controls:** Footer is now hidden and does not add space when nothing is displayed
+
+### Patch Changes
+
+- a538e40: **Field base:** fixing colours in darkmode
+- a6fee64: **Form controls:** Set 2xs gap between form control parts
+- bc58619: **Icon:** Fix missing export of `GdsIcon` base-class
+- 0e5e557: **Details:** Patch content getting cut
+
 ## 1.72.0
 
 ### Minor Changes

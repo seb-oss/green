@@ -32,6 +32,23 @@ export const styles = css`
       width: max-content;
       height: max-content;
       line-height: 1;
+      position: relative;
+    }
+
+    .summary-icon::after {
+      content: '';
+      position: absolute;
+      border-radius: var(--gds-space-max);
+      transition: all 280ms;
+      inset: 0;
+      scale: 0.9;
+      opacity: 0;
+      pointer-events: none;
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-color-l3-states-light-hover)
+      );
     }
 
     .summary:focus {
@@ -43,20 +60,15 @@ export const styles = css`
     }
 
     @media (pointer: fine) {
-      .summary:is(:hover, :focus-within) .summary-icon {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-light-hover)
-        );
+      .summary:hover .summary-icon::after,
+      .summary:focus-visible .summary-icon::after {
+        opacity: 1;
+        scale: 1;
       }
 
-      .summary:active .summary-icon {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-light-pressed)
-        );
+      .summary:active .summary-icon::after {
+        opacity: 1;
+        scale: 1;
       }
 
       .details:hover,
@@ -91,7 +103,6 @@ export const styles = css`
     }
 
     .details.open .content {
-      display: flex;
       padding-block-end: var(--gds-space-l);
     }
 
@@ -100,10 +111,20 @@ export const styles = css`
     }
 
     .content {
-      max-height: var(--_max-height, 0);
+      interpolate-size: allow-keywords;
+      height: 0;
+      transition:
+        height 0.35s ease,
+        padding-block-end 0.35s ease;
       overflow: hidden;
-      transition: all 240ms cubic-bezier(0.4, 0, 0.2, 1);
       outline: none;
+      scrollbar-width: none;
+    }
+
+    .content.open {
+      overflow: auto;
+      height: max-content;
+      max-height: 100vh;
     }
   }
 `
