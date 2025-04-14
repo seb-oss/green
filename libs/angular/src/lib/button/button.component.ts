@@ -5,7 +5,7 @@ import {
   Input,
 } from '@angular/core'
 
-import { ButtonSize, ButtonVariant } from '@sebgroup/extract'
+import { ButtonSize, ButtonVariant } from '@sebgroup/extract/src'
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
