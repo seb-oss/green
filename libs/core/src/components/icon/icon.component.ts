@@ -104,8 +104,13 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
     const baseAttrs = {
       fill: 'none',
       xmlns: 'http://www.w3.org/2000/svg',
-      width: this.width || constructor._width,
-      height: this.width || constructor._height,
+      // TODO: Remove in 2.0.0
+      // (deprecated)
+      ...((this.size === undefined && {
+        width: this.width || constructor._width,
+        height: this.width || constructor._height,
+      }) ||
+        {}),
       viewBox: this.box || constructor._viewBox,
       part: 'icon',
     }
@@ -165,7 +170,7 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
     }
 
     const svg = `
-      <svg ${this.generateAttributesString(attrs)}> 
+      <svg ${this.generateAttributesString(attrs)}>
         ${content}
       </svg>
     `
