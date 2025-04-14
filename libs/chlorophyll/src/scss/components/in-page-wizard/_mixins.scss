@@ -180,6 +180,6 @@
 
   &.completed &__header__icon {
     display: flex;
-    background-color: tokens.get(tokens.$green, 2, dark);
+    background-color: var(--gds-sys-color-dark-green-2);
   }
 }

@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use '../../common';
 @use '../../tokens/typography' as tokens;
-@use '../../tokens/shame' as newTokens;
 
 @mixin properties($map) {
   @each $name, $value in $map {

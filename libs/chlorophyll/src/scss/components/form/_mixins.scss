@@ -177,7 +177,7 @@
       margin-bottom: 0;
 
       a:link:not(.button, [aria-disabled]) {
-        color: tokens.$link-color;
+        color: var(--gds-sys-color-text-link);
       }
     }
 
@@ -191,7 +191,7 @@
     overflow: hidden;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    transition: height tokens.$transition-time;
+    transition: height var(--gds-sys-transition);
 
     > div {
       padding-bottom: 0.5rem;
@@ -206,7 +206,7 @@
     z-index: -1;
     margin: -1rem;
     opacity: 0;
-    transition: all tokens.$transition-time;
+    transition: all var(--gds-sys-transition);
     border: 1px solid transparent;
 
     @media (prefers-reduced-motion: reduce) {

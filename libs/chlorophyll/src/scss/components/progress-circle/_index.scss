@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use 'functions';
 @use 'mixins';
-@use '../../tokens/shame' as colors;
 
 $animation-duration: 0.7s;
 $ring-width: 11px;
@@ -9,7 +8,7 @@ $size: 220px;
 
 .gds-progress-circle {
   @include mixins.use-circle($size, false);
-  background: colors.$grey-400;
+  background: var(--gds-sys-color-base-400);
 
   .ring {
     @include mixins.use-circle($size);
@@ -43,7 +42,7 @@ $size: 220px;
     justify-content: center;
     align-items: center;
     margin: $ring-width 0 0 $ring-width;
-    background: colors.$white;
+    background: var(--gds-sys-color-background-primary);
     overflow: hidden;
   }
 }

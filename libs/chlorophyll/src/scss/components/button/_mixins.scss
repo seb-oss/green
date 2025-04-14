@@ -170,7 +170,7 @@
   text {
     fill: var(--gds-sys-color-base-800);
     stroke: var(--gds-sys-color-base-800);
-    transition: all tokens.$transition-time;
+    transition: all var(--gds-sys-transition);
   }
 
   &:hover,

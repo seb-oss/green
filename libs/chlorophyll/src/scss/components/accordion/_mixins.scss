@@ -54,7 +54,7 @@
         position: absolute;
         top: 1rem;
         right: 1rem;
-        transition: transform tokens.$transition-time;
+        transition: transform var(--gds-sys-transition);
         path {
           fill: currentColor;
         }
@@ -70,7 +70,7 @@
   [role='region'] {
     overflow: hidden;
     line-height: 1.5rem;
-    transition: height tokens.$transition-time;
+    transition: height var(--gds-sys-transition);
 
     @media (prefers-reduced-motion: reduce) {
       transition: none;

@@ -1,6 +1,5 @@
 @use '../../common' as mixins;
 @use '../validation/mixins' as validation;
-@use '../../tokens/shame' as tokens;
 
 @mixin add-select {
   display: flex;

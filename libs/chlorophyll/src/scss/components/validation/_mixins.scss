@@ -1,4 +1,3 @@
-@use '../../tokens/shame' as tokens;
 @use '../../common';
 
 $_border-width: 1px;
@@ -42,7 +41,7 @@ $_border-width: 1px;
   @include common.font-scale(1);
   display: inline-block;
   line-height: 1.25rem;
-  color: tokens.$text-primary-color;
+  color: var(--gds-sys-color-text-primary);
   width: 100%;
 }
 

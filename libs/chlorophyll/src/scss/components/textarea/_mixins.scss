@@ -1,8 +1,7 @@
-@use '../../tokens/shame' as tokens;
 @use '../../common';
 
-$color: tokens.$text-primary-color;
-$background: tokens.$form-control-bg;
+$color: var(--gds-sys-color-text-primary);
+$background: var(--gds-sys-color-background-primary);
 
 @mixin add-textarea() {
   @include common.padding-horizontal(5);

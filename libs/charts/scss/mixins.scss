@@ -2,12 +2,12 @@
 @use '../../chlorophyll/src/scss/common/spacing' as common;
 @use '../../chlorophyll/src/scss/common/breakpoints' as breakpoints;
 @use '../../chlorophyll/src/scss/components/list';
-$font-family: tokens.$font-family-sans-serif;
+$font-family: 'SEB SansSerif', sans-serif;
 $axis-color: #8c8c8c;
 
-$axis-text-color: tokens.$text-primary-color;
-$axis-text-size: tokens.$base-font-size;
-$axis-text-weight: tokens.$font-weight-normal;
+$axis-text-color: var(--gds-sys-color-text-primary);
+$axis-text-size: 16px;
+$axis-text-weight: 400;
 
 $y-axis-text-color: $axis-text-color;
 
@@ -18,13 +18,13 @@ $y-axis-tick-thickness: $y-axis-thickness;
 
 $x-axis-text-color: $axis-text-color;
 
-$x-axis-color: tokens.$border-secondary-color;
+$x-axis-color: var(--gds-sys-color-base-300);
 $x-axis-thickness: 1px;
 $x-axis-tick-color: $x-axis-color;
 $x-axis-tick-thickness: $x-axis-thickness;
 
-$grid-focus-line-color: tokens.get(tokens.$blue, 2);
-$grid-base-line-color: tokens.$border-secondary-color;
+$grid-focus-line-color: var(--gds-sys-color-dark-blue-1);
+$grid-base-line-color: var(--gds-sys-color-base-300);
 
 $min-height: 3.5rem;
 
@@ -402,12 +402,12 @@ $min-height: 3.5rem;
   }
 
   .bb-tooltip-list {
-    background: tokens.$black;
-    color: tokens.$white;
+    background: var(--gds-sys-color-black);
+    color: var(--gds-sys-color-white);
     padding: 0.5rem;
 
     dt {
-      font-weight: tokens.$font-weight-bold;
+      font-weight: 500;
       margin-bottom: 0.25rem;
     }
 
