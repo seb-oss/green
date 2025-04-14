@@ -8,6 +8,8 @@ import { GdsFormattedNumber } from './formatted-number.component'
 import './formatted-number'
 import '../../flex'
 
+import { numberFormats } from './number-formatter'
+
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/formatted-text/number)
  *
@@ -21,6 +23,10 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-formatted-number'),
+    format: {
+      control: { type: 'select' },
+      options: Object.keys(numberFormats),
+    },
     currency: {
       type: 'string',
     },

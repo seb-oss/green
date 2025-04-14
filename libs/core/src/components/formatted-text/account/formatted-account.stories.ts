@@ -8,6 +8,8 @@ import { GdsFormattedAccount } from './formatted-account.component'
 import './formatted-account'
 import '../../flex'
 
+import { accountsFormats } from './account-formatter'
+
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/formatted-text/account)
  *
@@ -21,6 +23,10 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-formatted-account'),
+    format: {
+      control: { type: 'select' },
+      options: Object.keys(accountsFormats),
+    },
   },
 }
 
