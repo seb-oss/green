@@ -1,0 +1,293 @@
+@use '../../common';
+@use '../../tokens';
+
+/**
+ * @mixin add-form
+ * Base style for forms
+ */
+@mixin add-form {
+  > * {
+    @include common.margin-bottom(6);
+  }
+}
+
+/**
+ * @mixin horizontal-layout
+ * Horizontal layout for forms
+ */
+@mixin horizontal-layout() {
+  /* use flex layout on small screens and up, ie. stack on small screens (mobile devices) */
+  @include common.media-breakpoint-up('sm') {
+    display: flex;
+  }
+  /* inline child elements on small screens and up unless it's a label
+  for form control, which should be positioned on top */
+  > {
+    *:not(label:not(.gds-form-control)),
+    *:not(.label:not(.gds-form-control)) {
+      @include common.media-breakpoint-up('sm') {
+        @include common.margin-end(4);
+        display: inline-flex !important;
+      }
+    }
+  }
+
+  // form group fieldset (groups of radio buttons or checkboxes)
+  .gds-form-group > {
+    fieldset {
+      @include common.margin-bottom(0);
+
+      legend {
+        @include common.padding(0);
+      }
+
+      .gds-form-info {
+        display: inline-flex;
+      }
+    }
+
+    fieldset + .gds-form-info {
+      margin-top: 0.5rem;
+    }
+
+    input,
+    button,
+    button[aria-haspopup='listbox'] {
+      @include common.margin-bottom(0);
+    }
+  }
+
+  // vertically align siblings and adjust for missing label
+  .gds-form-group ~ {
+    button,
+    .gds-form-control,
+    .gds-form-text {
+      @include common.media-breakpoint-up('sm') {
+        margin-bottom: auto;
+        margin-top: 1.75rem;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .gds-form-control {
+    display: inline-flex;
+    margin-inline-start: 0;
+  }
+
+  // hide form info as it's not positioned correctly
+  &.was-validated .gds-form-group label + .gds-form-info,
+  &.was-validated .gds-form-group .label + .gds-form-info {
+    opacity: 0;
+  }
+
+  // place form info first
+  .gds-form-group label + .gds-form-info,
+  .gds-form-group .label + .gds-form-info {
+    order: 1;
+  }
+
+  .gds-form-text {
+    @include common.padding-vertical(4);
+  }
+}
+
+/**
+ * @mixin add-form-control
+ * Label for checkboxes and radio buttons
+ */
+@mixin add-form-control {
+  @include common.padding-vertical(4);
+  @include common.padding-horizontal(5);
+  border: 1px solid transparent;
+  border-radius: var(--gds-sys-shape-corner-medium);
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row-reverse;
+  font: inherit;
+  justify-content: flex-end;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+
+  &:has(input:disabled) {
+    cursor: not-allowed;
+  }
+}
+
+/**
+ * @mixin add-form-group
+ * Form group
+ */
+@mixin add-form-group() {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+
+  &:not(:last-child) {
+    @include common.margin-bottom(6);
+  }
+
+  > input:not(:last-child),
+  > textarea:not(:last-child),
+  > button:not(:last-child),
+  button[aria-haspopup='listbox']:not(:last-child),
+  .gds-select-wrapper {
+    @include common.margin-bottom(3);
+  }
+}
+
+/**
+ * @mixin add-form-item
+ * Form item
+ */
+@mixin add-form-item() {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  .gds-form-item__header {
+    display: flex;
+
+    .gds-form-info {
+      font-weight: normal;
+    }
+
+    button.icon.small {
+      margin-top: -0.5rem;
+      margin-right: -0.5rem;
+    }
+  }
+
+  .gds-form-item__labels {
+    flex: 1;
+    margin-bottom: 0.5rem;
+
+    .gds-form-info {
+      margin-bottom: 0;
+
+      a:link:not(.button, [aria-disabled]) {
+        color: var(--gds-sys-color-text-link);
+      }
+    }
+
+    > * {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .gds-form-item__expandable-info {
+    overflow: hidden;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    transition: height var(--gds-sys-transition);
+
+    > div {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .gds-form-item__backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--gds-sys-color-base-100);
+    border-radius: 2px;
+    z-index: -1;
+    margin: -1rem;
+    opacity: 0;
+    transition: all var(--gds-sys-transition);
+    border: 1px solid transparent;
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  &:has([aria-expanded='true']) .gds-form-item__backdrop {
+    opacity: 1;
+    border-radius: 0.25rem;
+    border-color: var(--gds-sys-color-base-600);
+  }
+
+  .gds-form-item__footer:not(:empty) {
+    margin-top: 0.5rem;
+    display: flex;
+    column-gap: 0.5rem;
+
+    & > span,
+    & > .form-info {
+      font-weight: 500;
+      line-height: 1.125;
+    }
+  }
+}
+
+/**
+ * @mixin add-form-text
+ * Form text
+ */
+@mixin add-form-text() {
+  border: solid transparent 1px; // correct vertical alignment
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  font: inherit;
+}
+
+/**
+ * @mixin add-label
+ */
+@mixin add-label() {
+  &:is(label) {
+    // Overriding bootstraps reset.scss for label
+    margin-bottom: 0;
+  }
+
+  &.gds-form-control {
+    width: fit-content;
+    // No support for :has( input[type="checkbox"]:focus-visible ) in FireFox so this is a fallback solution.
+    @supports (-moz-appearance: none) {
+      @include common.add-focus('within');
+    }
+  }
+
+  &:not(.gds-form-control) {
+    @include common.font-weight('medium');
+    width: 100%;
+    line-height: 1.25rem;
+  }
+
+  & + input,
+  & + textarea,
+  fieldset & + div,
+  & + .gds-button,
+  & + .gds-group-stepper,
+  & + .gds-stepper-wrapper,
+  & + .gds-group {
+    margin-top: 0.5rem;
+  }
+
+  & + .gds-form-info {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/**
+ * @mixin add-form-info
+ */
+@mixin add-form-info() {
+  &:last-child {
+    font-weight: 500;
+  }
+}

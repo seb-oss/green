@@ -87,7 +87,6 @@ export default {
   is2023Size: {
     name: 'is2023Size',
     matcher: (token) => {
-      if (token.version === '2016') return false
       if (token.path.includes('ref')) return false
       return token.path.includes('size')
     },

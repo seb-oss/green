@@ -1,0 +1,10 @@
+@use 'mixins';
+@forward 'mixins';
+
+.gds-input {
+  @include mixins.add-text-input;
+}
+
+.gds-input-wrapper {
+  @include mixins.add-input-wrapper;
+}

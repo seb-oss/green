@@ -1,24 +1,14 @@
-@use '@sebgroup/chlorophyll/scss/components/alert-ribbon';
-@use '@sebgroup/chlorophyll/scss/components/close';
-
-@use '@sebgroup/chlorophyll/scss/components/button/mixins';
+@use '@sebgroup/chlorophyll/src/scss/tokens/z-index';
+@use '@sebgroup/chlorophyll/src/scss/tokens/shape';
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '@sebgroup/chlorophyll/src/scss/components/alert-ribbon';
+@use '@sebgroup/chlorophyll/src/scss/components/close';
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins';
 
 :host {
-  --sg-intent-neutral-hsl: 0deg, 0%, 91.3725490196%;
-  --sg-intent-success-hsl: 98.8235294118deg, 100%, 26.6666666667%;
-  --sg-intent-success-hsl-contrast: 0deg, 0%, 100%;
-  --sg-intent-warning-hsl: 46.3529411765deg, 100%, 50%;
-  --sg-intent-warning-hsl-contrast: 0deg, 0%, 0%;
-  --sg-intent-critical-hsl: 0deg, 78.5123966942%, 47.4509803922%;
-  --sg-intent-critical-hsl-contrast: 0deg, 0%, 100%;
-  --gds-ref-pallet-base000: hsl(0 0% 100%);
-  --text-primary-color: #333;
-  --sg-border-width: 1px;
-  --sg-border-width-50: 0.5px;
-  --sg-border-radius: 0.25rem;
-  --gds-sys-color-font: #333;
-  --sg-border-color: #868686;
-
+  @include shape.add-tokens;
+  @include light-tokens.add-variables();
   .alert-container {
     box-sizing: border-box;
     width: 100%;
@@ -32,19 +22,18 @@
       font-family: inherit;
     }
 
-    button:not(.close) {
+    button:not(.gds-close) {
       @include mixins.base;
-      @include mixins.secondary;
     }
 
-    .close {
-      padding: 0;
+    &.information button:not(.gds-close),
+    &.warning button:not(.gds-close) {
+      @include mixins.ghost-dark;
+    }
 
-      i {
-        width: 2rem;
-        height: 2rem;
-        border-radius: 50%;
-      }
+    &.success button:not(.gds-close),
+    &.danger button:not(.gds-close) {
+      @include mixins.ghost-light;
     }
   }
 }

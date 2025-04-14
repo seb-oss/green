@@ -1,7 +1,0 @@
-@use '../../tokens/shame' as tokens;
-
-$font-path: tokens.$font-path !default;
-
-@use '@sebgroup/fonts/scss/seb-fonts' with (
-  $seb-font-path: $font-path
-);

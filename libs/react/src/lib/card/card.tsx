@@ -9,7 +9,7 @@ export interface CardProps {
 
 export function Card({ children, header, footer }: CardProps) {
   return (
-    <section className="card">
+    <section className="gds-card">
       {header && <header>{header}</header>}
       {children}
       {footer && <footer>{footer}</footer>}

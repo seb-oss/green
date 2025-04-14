@@ -1,0 +1,30 @@
+@use 'mixins';
+@use '../../common';
+
+// form info
+.gds-form-info {
+  @include mixins.add-form-info;
+}
+
+input + .gds-form-info,
+textarea + .gds-form-info,
+[aria-haspopup='listbox'] ~ .gds-form-info,
+.group + .gds-form-info,
+.gds-select-wrapper + .gds-form-info {
+  @include mixins.add-feedback-element();
+}
+
+.gds-group {
+  @include mixins.add-feedback-element(false);
+
+  &.is-invalid {
+    @include mixins.add-feedback(var(--gds-sys-color-text-error));
+  }
+
+  &:before {
+    bottom: 0;
+  }
+}
+
+@include mixins.add-validation;
+@include mixins.add-fieldset-validation;

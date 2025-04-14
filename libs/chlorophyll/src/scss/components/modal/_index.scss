@@ -1,0 +1,29 @@
+@use '../../tokens';
+@use 'mixins';
+
+.gds-modal {
+  @include mixins.modal();
+}
+
+.gds-modal--dialog {
+  @include mixins.dialog-modal;
+}
+
+.gds-modal--dialog-wrapper {
+  @include mixins.dialog-modal-wrapper;
+}
+
+.gds-modal--slide-out {
+  @include mixins.aside-modal;
+}
+
+.gds-modal--take-over {
+  @include mixins.fullscreen-modal;
+}
+
+.gds-modal,
+.gds-dialog-wrapper {
+  ~ .backdrop {
+    @include mixins.modal-backdrop();
+  }
+}

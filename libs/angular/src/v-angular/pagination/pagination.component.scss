@@ -1,9 +1,4 @@
-// @use 'node_modules/@sebgroup/vanilla/src/functions.scss' as functions;
-// @use 'node_modules/@sebgroup/vanilla/src/variables' as vars;
-// @use 'node_modules/@sebgroup/vanilla/src/colors' as colors;
-
 $faded-blue: #a2ddfe;
-$transition-time: 200ms;
 
 :host {
   .pagination-wrapper {
@@ -116,7 +111,7 @@ $transition-time: 200ms;
               margin-right: 5px;
               cursor: pointer;
               background-color: $faded-blue;
-              transition: all $transition-time;
+              transition: all var(--gds-sys-transition);
               margin: 0 auto;
               will-change: transform;
 

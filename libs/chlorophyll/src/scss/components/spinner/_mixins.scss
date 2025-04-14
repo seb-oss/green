@@ -1,0 +1,55 @@
+@use '../../common';
+
+$rotation-animation: gdsSpinnerRotation;
+$spinner-size-sm: 2rem;
+$spinner-size-md: 3.75rem;
+$spinner-size-lg: 6rem;
+
+$track-width-md: 0.375rem;
+$track-width-sm: 0.275rem;
+
+@mixin add-spinner($size, $border-width) {
+  height: $size;
+  width: $size;
+  animation: $rotation-animation 1s infinite linear;
+  border-left: $border-width solid var(--gds-sys-color-base-400);
+  border-right: $border-width solid var(--gds-sys-color-base-400);
+  border-bottom: $border-width solid var(--gds-sys-color-base-400);
+  border-top: $border-width solid var(--gds-sys-color-base-800);
+  border-radius: 50%;
+  display: block;
+}
+
+@mixin add-spinner-animation {
+  @keyframes #{$rotation-animation} {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+@mixin add-spinner-overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+@mixin add-spinner-sm {
+  @include add-spinner($spinner-size-sm, $track-width-sm);
+}
+
+@mixin add-spinner-md {
+  @include add-spinner($spinner-size-md, $track-width-md);
+}
+
+@mixin add-spinner-lg {
+  @include add-spinner($spinner-size-lg, $track-width-md);
+}

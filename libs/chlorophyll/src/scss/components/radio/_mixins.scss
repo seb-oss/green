@@ -1,0 +1,120 @@
+@use '../../common';
+
+$valid-color: var(--gds-sys-color-dark-green-2);
+$invalid-color: var(--gds-sys-color-text-error);
+
+@mixin add-radio(
+  $selector: 'label.gds-form-control',
+  $radio-selector: 'input[type="radio"]',
+  $validated-selector: '.was-validated'
+) {
+  /* Hide the browser's default radio */
+  #{$selector} #{$radio-selector} {
+    cursor: pointer;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    z-index: -1;
+  }
+
+  // Add focus to form-control field
+  // This doesn't work for Firefox so there is a fallback solution on label.form-control
+  //
+  #{$selector}:has(#{$radio-selector}:focus-visible) {
+    @include common.add-focus('within');
+  }
+
+  /* Style for custom radio */
+  #{$selector} #{$radio-selector} ~ i {
+    @include common.margin-end(4);
+    margin-top: 0.0625rem;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: var(--gds-sys-shape-corner-round);
+    display: flex;
+    height: 1rem;
+    width: 1rem;
+    // Need to use box-shadow instead of border due to border causing fractional pixel offset on smaller pixel density screens
+    box-shadow: inset 0px 0px 0px 0.05rem var(--gds-sys-color-text-primary);
+
+    &::after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      border-radius: var(--gds-sys-shape-corner-round);
+      background-color: transparent;
+      transform: scale(0.5);
+    }
+  }
+
+  /* Hover state */
+  #{$selector}:hover #{$radio-selector}:not(.disabled, :disabled) ~ i {
+    background-color: var(--gds-sys-color-base-200);
+  }
+
+  /* Checked state */
+  #{$selector} #{$radio-selector}:checked:not(.disabled, :disabled) ~ i {
+    box-shadow: inset 0px 0px 0px 0.05rem var(--gds-sys-color-text-primary);
+
+    &::after {
+      background-color: var(--gds-sys-color-text-primary);
+    }
+  }
+
+  /* Checked Hover state */
+  #{$selector}:hover #{$radio-selector}:checked:not(.disabled, :disabled) ~ i {
+    &::after {
+      background-color: var(--gds-sys-color-base-700);
+    }
+  }
+
+  /* Valid state */
+  #{$validated-selector} #{$selector} #{$radio-selector}:not(.is-invalid):valid,
+  #{$selector} #{$radio-selector}.is-valid {
+    ~ i {
+      @include common.add-border-color($valid-color);
+    }
+  }
+
+  /* Invalid state */
+  #{$validated-selector} #{$selector} #{$radio-selector}:not(.is-valid):invalid,
+  #{$selector} #{$radio-selector}.is-invalid {
+    ~ i {
+      @include common.add-border-color($invalid-color);
+    }
+  }
+
+  /* Disabled state */
+  #{$selector} #{$radio-selector}:disabled,
+  #{$selector} #{$radio-selector}.disabled {
+    ~ i {
+      background-color: var(--gds-comp-radio-container-background-disabled);
+      box-shadow: inset 0px 0px 0px 0.05rem var(--gds-sys-color-base-500);
+    }
+
+    ~ span {
+      @include common.add-disable(false, true, false);
+    }
+  }
+  #{$selector} #{$radio-selector}:disabled:checked,
+  #{$selector} #{$radio-selector}:checked.disabled {
+    ~ i::after {
+      background-color: var(--gds-sys-color-base-600);
+    }
+  }
+}
+
+@mixin add-radio-group-wrapper() {
+  width: fit-content;
+
+  .is-invalid & {
+    border: 1px solid var(--gds-sys-color-text-error);
+    border-radius: var(--gds-sys-shape-corner-medium);
+  }
+
+  &.radio-group-wrapper--horizontal,
+  &.gds-radio-group-wrapper--horizontal {
+    display: flex;
+  }
+}

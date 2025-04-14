@@ -24,12 +24,12 @@ describe('Link', () => {
   it('renders boolean button prop', () => {
     render(<Link button>Foo</Link>)
     const link: HTMLAnchorElement = screen.getByText('Foo')
-    expect(link.className).toEqual('button')
+    expect(link.className).toEqual('gds-button')
   })
   it('renders named button prop', () => {
     render(<Link button="ghost">Foo</Link>)
     const link: HTMLAnchorElement = screen.getByText('Foo')
-    expect(link.className).toEqual('button ghost')
+    expect(link.className).toEqual('gds-button ghost')
   })
   it('sets role button', () => {
     render(<Link button>Foo</Link>)
@@ -39,6 +39,6 @@ describe('Link', () => {
   it('renders boolean secondary prop', () => {
     render(<Link secondary>Foo</Link>)
     const link: HTMLAnchorElement = screen.getByText('Foo')
-    expect(link.className).toEqual('link gds-link-arrow')
+    expect(link.className).toEqual('gds-link gds-link-arrow')
   })
 })

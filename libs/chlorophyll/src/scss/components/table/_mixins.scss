@@ -1,0 +1,160 @@
+@use 'sass:map';
+@use '../../common';
+
+$selector: 'table.table';
+
+@mixin add-table() {
+  border-collapse: collapse;
+  thead {
+    tr {
+      th {
+        border-top: 1px solid var(--gds-sys-color-base-600);
+        background: var(--gds-sys-color-base-800);
+        color: var(--gds-sys-color-background-primary);
+        padding: 0.3rem 0.5rem;
+        text-align: left;
+        font-weight: 500;
+        &.icon-invert {
+          &.gds-sortable {
+            .gds-table-sort::after {
+              margin-left: 0;
+              margin-right: 0.3rem;
+              order: -1;
+            }
+          }
+        }
+        .gds-table-sort {
+          color: inherit;
+          width: 100%;
+          text-align: left;
+          display: flex;
+          align-items: center;
+
+          @include common.add-focus();
+          border-radius: 0.125rem;
+          --gds-sys-color-focus-outline: var(
+            --gds-sys-color-background-primary
+          );
+        }
+        &[aria-sort],
+        &.gds-sortable {
+          .gds-table-sort::after {
+            content: '';
+            background: var(--gds-sys-color-base-500);
+            mask-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='12'%20viewBox='0%200%2012%2012'%20fill='none'%3E%3Cpath%20d='M11.107%205.86147L10.6429%205.39741C10.5328%205.28726%2010.3546%205.28726%2010.2445%205.39741L6.60933%209.03257V1.03101C6.60933%200.876318%206.48276%200.749756%206.32808%200.749756H5.67183C5.51714%200.749756%205.39058%200.876318%205.39058%201.03101V9.03257L1.75542%205.39741C1.64526%205.28726%201.46714%205.28726%201.35698%205.39741L0.89292%205.86147C0.782764%205.97163%200.782764%206.14976%200.89292%206.25991L5.80073%2011.1677C5.91089%2011.2779%206.08901%2011.2779%206.19917%2011.1677L11.107%206.25991C11.2171%206.14976%2011.2171%205.97163%2011.107%205.86147Z'%20fill='%23ADADAD'/%3E%3C/svg%3E");
+            mask-repeat: no-repeat;
+            mask-position: right;
+            width: 12px;
+            height: 12px;
+            margin-left: 0.3rem;
+          }
+        }
+        &[aria-sort='ascending'] {
+          .gds-table-sort::after {
+            background: var(--gds-sys-color-text-inverted);
+            transform: rotate(180deg);
+          }
+        }
+        &[aria-sort='descending'] {
+          .gds-table-sort::after {
+            background: var(--gds-sys-color-text-inverted);
+          }
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      td,
+      th {
+        border-top: 1px solid var(--gds-sys-color-base-600);
+        padding: 0.6875rem 0.5rem;
+        vertical-align: top;
+      }
+      &.collapsible {
+        ~ .sub-row {
+          display: none;
+        }
+        &.expanded {
+          ~ .sub-row.show {
+            display: table-row;
+          }
+        }
+      }
+      td {
+        &.collapse-control,
+        &.select-control {
+          width: 15px;
+        }
+        &.collapse-control {
+          > .collapse-btn {
+            min-height: unset;
+            padding: 0;
+            background: transparent;
+            > .icon-holder {
+              cursor: pointer;
+              width: 12px;
+              svg {
+                width: 12px;
+                fill: var(--gds-sys-color-text-primary);
+                &[name='angle-right'] {
+                  width: 9px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  border-bottom: 1px solid var(--gds-sys-color-base-600);
+  @include add-mobile-version;
+}
+
+@mixin add-mobile-version() {
+  @include common.media-breakpoint-down('sm') {
+    &.table-mobile {
+      width: 100%;
+      table-layout: fixed;
+      border-bottom: none;
+      thead {
+        position: sticky;
+        top: 0;
+        display: block;
+        @media (hover: none) and (pointer: coarse) {
+          display: table-header-group;
+        }
+        background: var(--gds-sys-color-base-800);
+        tr {
+          display: flex;
+          overflow: auto;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          th {
+            flex: auto;
+            text-align: left !important;
+            white-space: nowrap;
+          }
+        }
+      }
+      tbody {
+        tr {
+          display: flex;
+          flex-direction: column;
+          border-bottom: 1px solid var(--gds-sys-color-base-600);
+          td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: none !important;
+            &::before {
+              content: attr(data-label);
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}
