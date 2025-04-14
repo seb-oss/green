@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-Added new sensitive components for date and accounts
+**New components:** Added sensitive components for date and accounts
