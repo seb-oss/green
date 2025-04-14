@@ -332,6 +332,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
         delta -= window.scrollY || document.documentElement.scrollTop
         if (delta) window.scrollBy(0, delta > 0 ? -offset : offset)
+        optionRef.nativeElement.focus()
       }, 0)
     }
   }
