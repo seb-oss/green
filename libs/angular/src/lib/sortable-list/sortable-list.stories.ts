@@ -5,7 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { Meta, moduleMetadata, StoryFn } from '@storybook/angular'
 
-import { NggCoreWrapperModule } from '../shared'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import {
   NggSortableListComponent,
   SortableListItem,
