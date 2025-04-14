@@ -3,6 +3,7 @@ import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forSpaceTokensAndCustomValues } from '../../utils/helpers'
 import {
@@ -19,7 +20,7 @@ import IconCSS from './icon.style'
  */
 
 export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
-  static styles = [IconCSS]
+  static styles = [tokens, IconCSS]
 
   /**
    * This property allow you to set the size of the icon with the token and custom values.
