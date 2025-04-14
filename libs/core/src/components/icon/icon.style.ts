@@ -10,9 +10,6 @@ const style = css`
 
     svg {
       display: block;
-    }
-
-    :host(:not([size])) svg {
       height: 1lh;
       width: auto;
     }
