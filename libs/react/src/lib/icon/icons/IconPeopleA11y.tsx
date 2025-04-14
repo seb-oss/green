@@ -1,0 +1,1 @@
+export { IconPeopleA11y } from '@sebgroup/green-core/react';
