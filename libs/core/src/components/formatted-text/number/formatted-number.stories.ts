@@ -4,11 +4,10 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps'
 import { GdsFormattedNumber } from './formatted-number.component'
+import { numberFormats } from './number-formatter'
 
 import './formatted-number'
 import '../../flex'
-
-import { numberFormats } from './number-formatter'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/formatted-text/number)

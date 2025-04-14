@@ -3,12 +3,11 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps'
+import { accountsFormats } from './account-formatter'
 import { GdsFormattedAccount } from './formatted-account.component'
 
 import './formatted-account'
 import '../../flex'
-
-import { accountsFormats } from './account-formatter'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/formatted-text/account)
