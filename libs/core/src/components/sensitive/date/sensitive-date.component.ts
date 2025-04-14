@@ -10,7 +10,7 @@ import { GdsFormattedDate } from '../../formatted-text/date/formatted-date.compo
  *
  * @status beta
  *
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/sensitiv/date)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/sensitive/date)
  *
  * GdsSensitiveDate is used to display dates that need to be hidden
  *
