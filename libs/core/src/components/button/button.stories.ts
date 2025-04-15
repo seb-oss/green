@@ -337,101 +337,98 @@ export const Spread: Story = {
     controls: { include: [] },
   },
   render: () => html`
-    <gds-flex gap="4xl" width="480px">
-      <gds-flex flex-direction="column" gap="4xl" flex="1">
-        <gds-flex flex-direction="column" gap="m" width="100%">
-          <gds-text>Spread: Neutral</gds-text>
-          <gds-divider opacity="0.2"></gds-divider>
-          <gds-grid columns="3" gap="xl">
-            <gds-button spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-            <gds-button rank="secondary" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-            <gds-button rank="tertiary" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
+    <gds-flex gap="4xl" flex-direction="column" width="520px">
+      <gds-flex flex-direction="column" gap="m" width="100%">
+        <gds-text>Spread: Neutral</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-grid columns="3" gap="xl">
+          <gds-button spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="secondary" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="tertiary" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
 
-            <gds-button spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-            <gds-button rank="secondary" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-            <gds-button rank="tertiary" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-          </gds-grid>
-        </gds-flex>
-        <gds-flex flex-direction="column" gap="m" width="100%">
-          <gds-text>Spread: Positive</gds-text>
-          <gds-divider opacity="0.2"></gds-divider>
-          <gds-grid columns="3" gap="xl">
-            <gds-button variant="positive" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-            <gds-button rank="secondary" variant="positive" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-            <gds-button rank="tertiary" variant="positive" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
+          <gds-button spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="secondary" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="tertiary" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+        </gds-grid>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m" width="100%">
+        <gds-text>Spread: Positive</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-grid columns="3" gap="xl">
+          <gds-button variant="positive" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="secondary" variant="positive" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="tertiary" variant="positive" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
 
-            <gds-button variant="positive" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-            <gds-button rank="secondary" variant="positive" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-            <gds-button rank="tertiary" variant="positive" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-          </gds-grid>
-        </gds-flex>
-        <gds-flex flex-direction="column" gap="m" width="100%">
-          <gds-text>Spread: Negative</gds-text>
-          <gds-divider opacity="0.2"></gds-divider>
-          <gds-grid columns="3" gap="xl">
-            <gds-button variant="negative" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-            <gds-button rank="secondary" variant="negative" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-            <gds-button rank="tertiary" variant="negative" spread>
-              <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
-              Previous
-            </gds-button>
-
-            <gds-button variant="negative" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-            <gds-button rank="secondary" variant="negative" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-            <gds-button rank="tertiary" variant="negative" spread>
-              Next
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-          </gds-grid>
-        </gds-flex>
+          <gds-button variant="positive" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="secondary" variant="positive" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="tertiary" variant="positive" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+        </gds-grid>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m" width="100%">
+        <gds-text>Spread: Negative</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-grid columns="3" gap="xl">
+          <gds-button variant="negative" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="secondary" variant="negative" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="tertiary" variant="negative" spread>
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button variant="negative" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="secondary" variant="negative" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="tertiary" variant="negative" spread>
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+        </gds-grid>
       </gds-flex>
     </gds-flex>
   `,
