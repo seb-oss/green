@@ -52,7 +52,7 @@ Documentation currently resides in a few different locations:
 
 ## 🏦 Working from SEB
 
-Working from SEB and on SEB machines you need to setup things in a specific way for everything to work smooth. Checkout our _Green Design System_ article over at SEB Garden.
+Working from SEB and on SEB machines you need to setup things in a specific way for everything to work smooth. Checkout our _Green Design System_ article over at SEB Garden for developer guildlines. (Search for _Garden_ at the intranet and then _Green Design System_ in that tool - we can't direct link from an opence source).
 
 ## 🎉 Contribute
 
