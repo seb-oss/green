@@ -1,7 +1,7 @@
 import { LitElement } from 'lit'
-import { customElement, state } from 'lit/decorators.js'
+import { customElement } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import '@sebgroup/green-core/components/card/index.js'
 //import '@sebgroup/green-core/components/input/index.js'
@@ -10,6 +10,11 @@ import '@sebgroup/green-core/components/dropdown/index.js'
 import '@sebgroup/green-core/components/form/summary/index.js'
 import '@sebgroup/green-core/components/coachmark/index.js'
 import '@sebgroup/green-core/components/fab/index.js'
+
+import {
+  GdsFormControlElement,
+  GdsValidator,
+} from '@sebgroup/green-core/components/form/form-control'
 
 @customElement('form-validation')
 export class FormValidationExample extends LitElement {
@@ -39,21 +44,23 @@ export class FormValidationExample extends LitElement {
                   { ...el.validity, valid: false, customError: true },
                   'This field is required',
                 ]
+              else return
             },
-          }}
+          } as GdsValidator}
         ></gds-datepicker>
         <gds-dropdown
           label="Favorite pet"
           .validator=${{
-            validate: (el: any) => {
-              console.log('Inside custom validator', el.value)
-              if (el.value !== 'cat')
+            validate: (element: GdsFormControlElement) => {
+              if (element.value === 'cat') {
                 return [
-                  { ...el.validity, valid: false, customError: true },
+                  { ...element.validity, valid: false, customError: true },
                   'Only cats are allowed!',
                 ]
+              }
+              return undefined
             },
-          }}
+          } as GdsValidator}
         >
           <gds-option>Pick favorite</gds-option>
           <gds-option value="dog">Dog</gds-option>

@@ -1,3 +1,4 @@
+export { default as Accordion } from './accordion'
 export { default as Badge } from './badge'
 export { default as Button } from './button'
 export { default as Breadcrumb } from './breadcrumb'

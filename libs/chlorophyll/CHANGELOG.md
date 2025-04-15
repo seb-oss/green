@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.18
+
+### Patch Changes
+
+- a538e40: **Field base:** fixing colours in darkmode
+
 ## 3.6.17
 
 ### Patch Changes

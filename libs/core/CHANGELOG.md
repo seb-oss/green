@@ -1,5 +1,131 @@
 # Changelog
 
+## 1.75.0
+
+### Minor Changes
+
+- 30d27ef: **Icon:** New icons, new sizing method, metadata, documentation and accessibility improvements.
+
+  The following props have been deprecated and will be removed on the next major release:
+
+  1. `width`
+  2. `height`
+  3. `box` - the viewbox property
+
+  Now you can specify only `size` which is a style expression property that accepts tokens and custom values.
+
+  Example:
+
+  ```html
+  <!-- Token values -->
+  <gds-icon-credit-card size="xl"></gds-icon-credit-card>
+
+  <!-- Custom values -->
+  <gds-icon-credit-card size="48px"></gds-icon-credit-card>
+  ```
+
+## 1.74.2
+
+### Patch Changes
+
+- 84d218d: **Details:** Fix the a11y issue to avoid reading contents when collapsed
+
+## 1.74.1
+
+### Patch Changes
+
+- 630d015: **Details:** Patch content overflow and improve focus state
+
+## 1.74.0
+
+### Minor Changes
+
+- 51bbe15: New components for blur, formatted-text for date, number and account and sensitive-number
+
+### Patch Changes
+
+- 0850de5: **Details:** Fix scroll-bar flash during transition
+- dc3a205: **Testing:** Fix _ElementInternals_ mock for Jest
+
+## 1.73.0
+
+### Minor Changes
+
+- a6fee64: **Form controls:** Add `plain` attribute that hides header and footer, removing all surrounding space from the control
+  **Form controls:** Footer is now hidden and does not add space when nothing is displayed
+
+### Patch Changes
+
+- a538e40: **Field base:** fixing colours in darkmode
+- a6fee64: **Form controls:** Set 2xs gap between form control parts
+- bc58619: **Icon:** Fix missing export of `GdsIcon` base-class
+- 0e5e557: **Details:** Patch content getting cut
+
+## 1.72.0
+
+### Minor Changes
+
+- 8851dbd: **Accordion:** Add new component `gds-accordion`
+
+## 1.71.2
+
+### Patch Changes
+
+- bf967f5: **React:** Fix issue with 'className' prop when using older versions of React (<19)
+
+## 1.71.1
+
+### Patch Changes
+
+- 49d0984: **Bundling:** Also include style modules in path extension rewrites
+
+## 1.71.0
+
+### Minor Changes
+
+- faa898c: **Div:** Add white-space prop
+
+### Patch Changes
+
+- 9a1c8be: **Bundling:** Modified build script to add `.js` extensions to all internal imports
+- faa898c: **Text:** Add examples for white space
+- faa898c: **Link:** Change default white space to normal
+
+## 1.70.1
+
+### Patch Changes
+
+- 15f33c4: **React:** Use fully qualified paths in React exports (i.e, include `index.js`)
+
+## 1.70.0
+
+### Minor Changes
+
+- 0e6d189: **React:** Green Core now exports automatically generated JSX wrappers for all components and icons.
+
+  For example:
+
+  ```ts
+  import { GdsButton } from '@sebgroup/green-core/react'
+  ```
+
+  Then, in JSX template:
+
+  ```tsx
+  <GdsButton rank="secondary" onClick={() => console.log('Hello')}>
+    Click me!
+  </GdsButton>
+  ```
+
+  These imports are tree-shakable and underlying web components will be defined automatically on first use.
+
+- 0e6d189: **Treeshaking:** Pure exports are now available through `@sebgroup/green-core/pure`. Any components imported from there needs to be defined by calling `ClassName.define()` on the component class
+
+### Patch Changes
+
+- 0e6d189: **SSR:** Fix some usage of `document` and `window` to make the library more SSR friendly
+- cd4667d: **Dropdown:** Label the chevron-down icon as 'Expand' for screen readers.
+
 ## 1.69.4
 
 ### Patch Changes

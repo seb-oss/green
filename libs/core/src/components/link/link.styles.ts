@@ -6,6 +6,7 @@ const style = css`
   @layer core {
     :host {
       display: inline-block;
+      white-space: normal;
     }
   }
 
