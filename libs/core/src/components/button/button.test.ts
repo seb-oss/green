@@ -186,15 +186,19 @@ describe('<gds-button>', () => {
       expect(el.rank).to.equal('tertiary')
     })
 
-    it('should support spread attribute', async () => {
+    it('should support justify-content style expression', async () => {
       const el = await fixture<GdsButton>(
-        html`<gds-button spread>Button</gds-button>`,
+        html`<gds-button justify-content="space-between">Button</gds-button>`,
       )
 
-      const shadowButton = el.shadowRoot?.querySelector('button')
+      await el.updateComplete
 
-      expect(shadowButton?.classList.contains('spread')).to.equal(true)
-      expect(el.spread).to.equal(true)
+      const computedStyle = window.getComputedStyle(
+        el.shadowRoot?.querySelector('button'),
+      )
+
+      expect(computedStyle.justifyContent).to.equal('space-between')
+      expect(el['justify-content']).to.equal('space-between')
     })
 
     it('should support link attributes', async () => {

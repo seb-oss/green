@@ -48,7 +48,7 @@ class Button extends GdsFormControlElement<any> {
    */
 
   @styleExpressionProperty({
-    selector: 'button',
+    selector: '.button',
   })
   'justify-content'?: string
 
