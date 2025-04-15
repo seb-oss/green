@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-maintenance
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-maintenance')
 export class IconMaintenance extends GdsIcon {
@@ -12,4 +13,10 @@ export class IconMaintenance extends GdsIcon {
   static _solidSVG = `<path d="M16.8878 3.11219C17.1388 2.86121 17.0545 2.43727 16.7154 2.33256C16.0152 2.11639 15.2712 2 14.5 2C10.3579 2 7.00001 5.35786 7.00001 9.5C7.00001 10.5332 7.20892 11.5176 7.5868 12.4132L2.03034 17.9697C1.73745 18.2626 1.73745 18.7374 2.03034 19.0303L4.96968 21.9697C5.26257 22.2626 5.73745 22.2626 6.03034 21.9697L11.5868 16.4132C12.4825 16.7911 13.4668 17 14.5 17C18.6421 17 22 13.6421 22 9.5C22 8.72883 21.8836 7.98484 21.6674 7.28464C21.5627 6.9455 21.1388 6.86121 20.8878 7.11219L18 10C16.8954 11.1046 15.1046 11.1046 14 10C12.8954 8.89543 12.8954 7.10457 14 6L16.8878 3.11219Z" fill="currentColor"/>`
   /** @private */
   static _name = 'maintenance'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }
