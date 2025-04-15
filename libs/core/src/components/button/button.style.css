@@ -78,7 +78,6 @@
   }
 }
 
-/* High specificity */
 .button.circle {
   aspect-ratio: 1 / 1;
   padding: 0;
@@ -90,6 +89,10 @@
   pointer-events: none;
   background-color: var(--gds-color-l3-background-disabled);
   color: var(--gds-color-l3-content-disabled);
+}
+
+.button:not(.circle).spread {
+  justify-content: space-between;
 }
 
 @layer ranks {

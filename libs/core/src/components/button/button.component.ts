@@ -43,6 +43,12 @@ class Button extends GdsFormControlElement<any> {
   disabled = false
 
   /**
+   * Spread the contents of the button
+   */
+  @property({ type: Boolean, reflect: true })
+  spread = false
+
+  /**
    * The type of the button.
    */
   @property({ reflect: true })
@@ -118,6 +124,7 @@ class Button extends GdsFormControlElement<any> {
   render() {
     const buttonClasses = {
       button: true,
+      spread: true,
       circle: this.#isIconButton,
       icon: this.#isIconButton,
       xs: this.size === 'xs',
