@@ -52,7 +52,7 @@ Documentation currently resides in a few different locations:
 
 ## 🏦 Working from SEB
 
-Working from SEB and on SEB machines you need to setup things in a specific way for everything to work smooth. Search for _Garden_ at the intranet and then _Green Design System_ in that tool for developer instructions (we can't direct link from an opence source).
+Ask on Teams if you need help setting up local development environment.
 
 ## 🎉 Contribute
 
