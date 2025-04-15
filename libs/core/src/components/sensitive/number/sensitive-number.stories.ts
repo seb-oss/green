@@ -3,23 +3,17 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
+import { numberFormats } from '../../formatted-text/formatters.ts'
 import { Default as formattedNumberDefault } from '../../formatted-text/number/formatted-number.stories.ts'
 import { GdsSensitiveNumber } from './index.ts'
 
 import './index.ts'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/sensitiv/number)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/sensitive/number)
  *
- * Coachmarks are contextual tips that focus on making the user
- * aware of a new feature, the benefits of an existing one or a moved feature within an interface.
- *
- * The component is primarily a container that follows the targeted element.
- * The coachmark will be invisible and disabled if another element covered the targeted element or its simply out of view.
- * The coachmark will close and dispatch a CustomEvent of `gds-ui-state`
- *
- * Note: the component can only view one coachmark at the time therefore the tooltip won't be
- * rendered in second storybook panel and testing the tooltip behaviour will be in the first panel only
+ * GdsSensitiveNumber displays a formatted number and optionally hides it using a blur effect
+ * when the 'hide' property is set to true.
  *
  * @status beta
  *
@@ -30,6 +24,10 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-sensitive-number'),
+    format: {
+      control: { type: 'select' },
+      options: Object.keys(numberFormats),
+    },
     currency: {
       type: 'string',
     },

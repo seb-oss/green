@@ -10,6 +10,8 @@ const style = css`
 
     svg {
       display: block;
+      height: 1lh;
+      width: auto;
     }
   }
 `

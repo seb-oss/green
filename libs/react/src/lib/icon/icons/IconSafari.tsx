@@ -1,0 +1,1 @@
+export { IconSafari } from '@sebgroup/green-core/react';

@@ -1,0 +1,1 @@
+export { IconSunsetArrowDown } from '@sebgroup/green-core/react';
