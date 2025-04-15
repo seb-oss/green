@@ -186,6 +186,17 @@ describe('<gds-button>', () => {
       expect(el.rank).to.equal('tertiary')
     })
 
+    it('should support spread attribute', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button spread>Button</gds-button>`,
+      )
+
+      const shadowButton = el.shadowRoot?.querySelector('button')
+
+      expect(shadowButton?.classList.contains('spread')).to.equal(true)
+      expect(el.spread).to.equal(true)
+    })
+
     it('should support link attributes', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
