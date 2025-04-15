@@ -91,10 +91,6 @@
   color: var(--gds-color-l3-content-disabled);
 }
 
-.button:not(.circle).spread {
-  justify-content: space-between;
-}
-
 @layer ranks {
   :host([rank*='secondary']) .button {
     background-color: var(--gds-color-l3-background-secondary);
