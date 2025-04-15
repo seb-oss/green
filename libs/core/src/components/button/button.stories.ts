@@ -325,13 +325,36 @@ export const Aria: Story = {
 }
 
 /**
- * In order to spread the contents of the button, you can use the `spread` attribute.
- * This will make the button take up the full width of its parent element.
  *
- * It will justify the contents with space between them.
+ * The `justify-content` property allows control over how content is distributed within buttons.<br/>
+ * This is particularly useful for navigation patterns like Next/Previous buttons where you want
+ * consistent spacing between icons and text.
+ *
+ * Uses `justify-content="space-between"` to maximize space between elements
+ *
+ * Common use cases:
+ * - Navigation buttons (Next/Previous)
+ * - Buttons with leading/trailing icons that need specific spacing
+ *
+ * e.g
+ *
+ * ```html
+ * <!-- Example of a button with leading icon and text -->
+ * <gds-button justify-content="space-between">
+ *   <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+ *  Previous
+ * </gds-button>
+ *
+ * <!-- Example of a button with trailing icon and text -->
+ * <gds-button justify-content="space-between">
+ *   Next
+ *   <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+ * </gds-button>
+ * ```
  */
-export const Spread: Story = {
+export const NextPrevious: Story = {
   ...DefaultParams,
+  name: 'Next & Previous',
   parameters: {
     ...DefaultParams.parameters,
     controls: { include: [] },
@@ -342,28 +365,28 @@ export const Spread: Story = {
         <gds-text>Spread: Neutral</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-grid columns="3" gap="xl">
-          <gds-button spread>
+          <gds-button justify-content="space-between">
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button rank="secondary" spread>
+          <gds-button rank="secondary" justify-content="space-between">
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button rank="tertiary" spread>
+          <gds-button rank="tertiary" justify-content="space-between">
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
 
-          <gds-button spread>
+          <gds-button justify-content="space-between">
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
-          <gds-button rank="secondary" spread>
+          <gds-button rank="secondary" justify-content="space-between">
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
-          <gds-button rank="tertiary" spread>
+          <gds-button rank="tertiary" justify-content="space-between">
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
@@ -373,28 +396,44 @@ export const Spread: Story = {
         <gds-text>Spread: Positive</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-grid columns="3" gap="xl">
-          <gds-button variant="positive" spread>
+          <gds-button variant="positive" justify-content="space-between">
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button rank="secondary" variant="positive" spread>
+          <gds-button
+            rank="secondary"
+            variant="positive"
+            justify-content="space-between"
+          >
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button rank="tertiary" variant="positive" spread>
+          <gds-button
+            rank="tertiary"
+            variant="positive"
+            justify-content="space-between"
+          >
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
 
-          <gds-button variant="positive" spread>
+          <gds-button variant="positive" justify-content="space-between">
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
-          <gds-button rank="secondary" variant="positive" spread>
+          <gds-button
+            rank="secondary"
+            variant="positive"
+            justify-content="space-between"
+          >
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
-          <gds-button rank="tertiary" variant="positive" spread>
+          <gds-button
+            rank="tertiary"
+            variant="positive"
+            justify-content="space-between"
+          >
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
@@ -404,27 +443,43 @@ export const Spread: Story = {
         <gds-text>Spread: Negative</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-grid columns="3" gap="xl">
-          <gds-button variant="negative" spread>
+          <gds-button variant="negative" justify-content="space-between">
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button rank="secondary" variant="negative" spread>
+          <gds-button
+            rank="secondary"
+            variant="negative"
+            justify-content="space-between"
+          >
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button rank="tertiary" variant="negative" spread>
+          <gds-button
+            rank="tertiary"
+            variant="negative"
+            justify-content="space-between"
+          >
             <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
             Previous
           </gds-button>
-          <gds-button variant="negative" spread>
+          <gds-button variant="negative" justify-content="space-between">
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
-          <gds-button rank="secondary" variant="negative" spread>
+          <gds-button
+            rank="secondary"
+            variant="negative"
+            justify-content="space-between"
+          >
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
-          <gds-button rank="tertiary" variant="negative" spread>
+          <gds-button
+            rank="tertiary"
+            variant="negative"
+            justify-content="space-between"
+          >
             Next
             <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
           </gds-button>
