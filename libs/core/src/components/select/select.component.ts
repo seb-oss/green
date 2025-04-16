@@ -121,7 +121,10 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .disabled=${this.disabled}
+          >
             <label for="select" slot="label" id="label-text">
               ${this.label}
             </label>

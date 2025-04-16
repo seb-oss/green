@@ -27,6 +27,15 @@ export class GdsFormControlHeader extends GdsElement {
   static styles = [styles]
 
   /**
+   * Whether the field is disabled.
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
+
+  /**
    * Whether the supporting text should be displayed or not.
    */
   @property({
@@ -70,6 +79,7 @@ export class GdsFormControlHeader extends GdsElement {
         label="${msg('Show more information')}"
         gds-aria-expanded="${this.showExtendedSupportingText}"
         @click=${this.#handleExtSupTxtBtnClick}
+        ?disabled=${this.disabled}
       >
         <gds-icon-circle-info ?solid=${this.showExtendedSupportingText} />
       </gds-button>

@@ -167,7 +167,10 @@ class Textarea extends GdsFormControlElement<string> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .disabled=${this.disabled}
+          >
             <label for="input" slot="label">${this.label}</label>
             <span slot="supporting-text" id="supporting-text">
               ${this.supportingText}

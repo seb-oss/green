@@ -169,9 +169,14 @@ export const Disabled: Story = {
   name: 'Disabled',
   render: () => html`
     <gds-flex>
-      <gds-select disabled label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      <gds-select
+        disabled
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-lightning slot="lead"></gds-icon-lightning>
@@ -219,8 +224,8 @@ export const Validation: Story = {
           },
         }}
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
@@ -269,8 +274,8 @@ export const ExtendedSupportingText: Story = {
         supporting-text="Supporting text"
         show-extended-supporting-text
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
@@ -309,9 +314,10 @@ export const Size: Story = {
         size="small"
         label="Label text"
         supporting-text="Supporting text"
+        show-extended-supporting-text
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-bank slot="lead"></gds-icon-bank>
@@ -340,9 +346,13 @@ export const Multiple: Story = {
   name: 'Multiple',
   render: () => html`
     <gds-flex>
-      <gds-select label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      <gds-select
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-sun slot="lead"></gds-icon-sun>
@@ -377,8 +387,8 @@ export const SelectSize: Story = {
   render: () => html`
     <gds-flex>
       <gds-select label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-compass-round slot="lead"></gds-icon-compass-round>
