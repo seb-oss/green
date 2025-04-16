@@ -1,0 +1,1 @@
+export { IconOther } from '@sebgroup/green-core/react';

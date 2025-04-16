@@ -3,6 +3,7 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps'
+import { accountsFormats } from './account-formatter'
 import { GdsFormattedAccount } from './formatted-account.component'
 
 import './formatted-account'
@@ -21,6 +22,10 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-formatted-account'),
+    format: {
+      control: { type: 'select' },
+      options: Object.keys(accountsFormats),
+    },
   },
 }
 
