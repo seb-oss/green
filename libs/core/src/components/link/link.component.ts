@@ -1,6 +1,5 @@
-import { unsafeCSS } from 'lit'
+import { nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { html as staticHtml } from 'lit/static-html.js'
 
@@ -55,17 +54,11 @@ export class GdsLink extends withMarginProps(
   @property()
   rel?: string
 
-  private _ariaLabel?: string
-
-  @property({ attribute: 'aria-label' })
-  get 'aria-label'(): string | undefined {
-    return this._ariaLabel
-  }
-
-  set 'aria-label'(value: string | undefined) {
-    this._ariaLabel = value
-    this.removeAttribute('aria-label')
-  }
+  /**
+   * The label of the link.
+   */
+  @property()
+  label = ''
 
   /**
    * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value. Only used when href is present.
@@ -89,8 +82,9 @@ export class GdsLink extends withMarginProps(
   })
   'text-decoration'?: string
 
-  constructor() {
-    super()
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.setAttribute('role', 'none')
   }
 
   render() {
@@ -100,7 +94,7 @@ export class GdsLink extends withMarginProps(
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel || this.#defaultRel)}
         download=${ifDefined(this.download)}
-        aria-label=${ifDefined(this._ariaLabel)}
+        aria-label=${this.label || nothing}
       >
         <slot name="lead"></slot>
         <slot></slot>
