@@ -243,6 +243,56 @@ export const Validation: Story = {
 }
 
 /**
+ * The `extended-supporting-text` slot can be used to provide extended information about the select field.<br>
+ * The slot will show by default when the `show-extended-supporting-text` property is set.<br>
+ * If not specified, the slot will be hidden and a companion icon will be displayed to indicate that more information is available.
+ *
+ * ```html
+ *<gds-select show-extended-supporting-text>
+ *  <span slot="extended-supporting-text">...</span>
+ *  <select><option value="">...</option></select>
+ *</gds-select>
+ * ```
+ */
+export const ExtendedSupportingText: Story = {
+  ...DefaultParams,
+  name: 'Extended Supporting Text',
+  render: () => html`
+    <gds-flex
+      gap="xl"
+      align-items="center"
+      justify-content="center"
+      width="100%"
+    >
+      <gds-select
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text"
+          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+        <gds-icon-rocket slot="lead"></gds-icon-rocket>
+        <select>
+          <option value="">First option</option>
+          <optgroup label="Propulsion">
+            <option value="ion-thrusters">Ion Thrusters</option>
+            <option value="chemical-rockets">Chemical Rockets</option>
+          </optgroup>
+          <optgroup label="Communication">
+            <option value="satellite-communication">
+              Satellite Communication
+            </option>
+            <option value="deep-space-network">Deep Space Network</option>
+          </optgroup>
+        </select>
+      </gds-select>
+    </gds-flex>
+  `,
+}
+
+/**
  * The `size` property can be set to 'small' to reduce the size of the select field.<br>
  * **@property size** - The size of the select field.
  *
