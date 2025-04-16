@@ -10,6 +10,7 @@ import { html as customElementHtml, gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import {
@@ -41,6 +42,15 @@ class Button extends GdsFormControlElement<any> {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
+
+  /**
+   * Spread the contents of the button
+   */
+
+  @styleExpressionProperty({
+    selector: '.button',
+  })
+  'justify-content'?: string
 
   /**
    * The type of the button.

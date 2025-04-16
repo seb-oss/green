@@ -1,5 +1,24 @@
 # Changelog
 
+## 3.28.0
+
+### Minor Changes
+
+- 30d27ef: **Icon:** Add 27 new icons
+
+### Patch Changes
+
+- Updated dependencies [30d27ef]
+  - @sebgroup/green-core@1.75.0
+
+## 3.27.1
+
+### Patch Changes
+
+- acb44e2: **Input:** aria-describedby validation message ids are now pemanent. Having them conditionally rendered caused screen read to read out text when attribute was updated.
+- Updated dependencies [8851dbd]
+  - @sebgroup/green-core@1.72.0
+
 ## 3.27.0
 
 ### Minor Changes
