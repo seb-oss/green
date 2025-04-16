@@ -186,6 +186,21 @@ describe('<gds-button>', () => {
       expect(el.rank).to.equal('tertiary')
     })
 
+    it('should support justify-content style expression', async () => {
+      const el = await fixture<GdsButton>(
+        html`<gds-button justify-content="space-between">Button</gds-button>`,
+      )
+
+      await el.updateComplete
+
+      const computedStyle = window.getComputedStyle(
+        el.shadowRoot?.querySelector('button'),
+      )
+
+      expect(computedStyle.justifyContent).to.equal('space-between')
+      expect(el['justify-content']).to.equal('space-between')
+    })
+
     it('should support link attributes', async () => {
       const el = await fixture<GdsButton>(
         html`<gds-button
