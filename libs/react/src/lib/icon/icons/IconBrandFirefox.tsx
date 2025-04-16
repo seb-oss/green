@@ -1,0 +1,1 @@
+export { IconBrandFirefox } from '@sebgroup/green-core/react';

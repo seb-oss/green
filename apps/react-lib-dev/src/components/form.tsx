@@ -158,13 +158,13 @@ export const FormExample = () => {
           }
           value={textAreaState}
           onChange={(event) => setTextAreaState(event.target.value)}
+          onBlur={(event) => toggleValidation()}
           expandableInfo="Expandable plain text information"
           unit="kr"
           validator={validator}
           testId="test-id"
         />
 
-        {textAreaState}
         <TextArea
           label={'Label'}
           info={
@@ -172,12 +172,12 @@ export const FormExample = () => {
           }
           testId="test-id"
           value={textAreaState}
-          onBlur={(event) => setTextAreaState(event.target.value)}
+          onBlur={(event) => toggleValidation()}
           expandableInfo={
             <>
               <p>
                 React component in <b>Expandable Information</b>. Allows custom
-                markup, including <a href="#">links</a>
+                markup, including <a href="/">links</a>
               </p>
               <p>Use sparingly!</p>
             </>
@@ -187,6 +187,7 @@ export const FormExample = () => {
 
         <Select
           label="Select something"
+          onBlur={(event) => toggleValidation()}
           info="Hello"
           expandableInfo="Hello"
           expandableInfoButtonLabel="Hej"
@@ -198,6 +199,7 @@ export const FormExample = () => {
 
         <Stepper
           onChange={(e) => setStepperVal(Number(e.target.value))}
+          onBlur={(event) => toggleValidation()}
           value={stepperVal.toFixed(4)}
           onIncrease={() => setStepperVal((v) => v + 0.0001)}
           onDecrease={() => setStepperVal((v) => v - 0.0001)}

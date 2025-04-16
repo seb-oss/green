@@ -25,6 +25,11 @@ export interface ITextAreaProps
       React.TextareaHTMLAttributes<HTMLTextAreaElement>,
       HTMLTextAreaElement
     > {
+  /**
+   * Set the live region attribute of the form control footer, this will change how error messages are read by screen readers
+   * @default 'assertive'
+   */
+  'aria-live'?: React.AriaAttributes['aria-live']
   /** Data test id used for finding elements in test */
   testId?: string
   /** Label describing the textarea */
@@ -40,6 +45,7 @@ export interface ITextAreaProps
 export const TextArea = forwardRef(
   (
     {
+      'aria-live': ariaLive = 'assertive',
       'aria-describedby': ariaDescribedBy,
       autoComplete = 'off',
       className,
@@ -93,6 +99,7 @@ export const TextArea = forwardRef(
 
     return (
       <FormItem
+        aria-live={ariaLive}
         expandableInfo={expandableInfo}
         expandableInfoButtonLabel={expandableInfoButtonLabel}
         inputId={uuid}

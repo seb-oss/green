@@ -50,7 +50,8 @@ for (const component of filteredComponents) {
         export const ${component.name} = (props: React.ComponentProps<ReturnType<typeof getReactComponent<${component.name}Class>>>) => {
           ${component.name}Class.define();
           const JSXElement = getReactComponent<${component.name}Class>('${component.tagName}');
-          return createElement(JSXElement, props);
+          const propsWithClass = {...props, class: props.className}
+          return createElement(JSXElement, propsWithClass);
         };
       `,
       Object.assign(prettierConfig, {
@@ -58,7 +59,7 @@ for (const component of filteredComponents) {
       }),
     )
     .then((formattedSource) => {
-      index.push(`export * from './${subDir}${tagWithoutPrefix}';`)
+      index.push(`export * from './${subDir}${tagWithoutPrefix}/index.js';`)
 
       fs.writeFileSync(componentFile, formattedSource, 'utf8')
 

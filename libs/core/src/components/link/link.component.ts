@@ -1,6 +1,5 @@
-import { unsafeCSS } from 'lit'
+import { nothing, unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
-import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { html as staticHtml } from 'lit/static-html.js'
 
@@ -56,6 +55,27 @@ export class GdsLink extends withMarginProps(
   rel?: string
 
   /**
+   * Provides an accessible name for the link that will be read by screen readers.
+   * Use this when:
+   * - The link contains only an icon
+   * - The visual text needs a different description for screen readers
+   * - Additional context is needed for accessibility
+   *
+   * @example
+   * // Icon-only link
+   * <gds-link href="/settings" label="Open settings">
+   *   <gds-icon-settings></gds-icon-settings>
+   * </gds-link>
+   *
+   * // Different screen reader text
+   * <gds-link href="/article" label="Read full article about climate change">
+   *   Read more
+   * </gds-link>
+   */
+  @property()
+  label = ''
+
+  /**
    * Causes the browser to treat the linked URL as a download. Can be used with or without a filename value. Only used when href is present.
    */
   @property()
@@ -77,8 +97,9 @@ export class GdsLink extends withMarginProps(
   })
   'text-decoration'?: string
 
-  constructor() {
-    super()
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.setAttribute('role', 'none')
   }
 
   render() {
@@ -88,6 +109,7 @@ export class GdsLink extends withMarginProps(
         target=${ifDefined(this.target)}
         rel=${ifDefined(this.rel || this.#defaultRel)}
         download=${ifDefined(this.download)}
+        aria-label=${this.label || nothing}
       >
         <slot name="lead"></slot>
         <slot></slot>

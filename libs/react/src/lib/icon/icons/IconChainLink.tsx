@@ -1,0 +1,1 @@
+export { IconChainLink } from '@sebgroup/green-core/react';
