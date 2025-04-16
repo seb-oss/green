@@ -525,10 +525,7 @@
         >
           <slot name="lead" slot="lead"></slot>
           ${this.combobox&&!this.multiple?(0,chunk_QTSIPXV3.S7)(this,_renderCombobox).call(this):(0,chunk_QTSIPXV3.S7)(this,_renderTriggerButton).call(this)}
-          <gds-icon-chevron-bottom
-            slot="trail"
-            label=${(0,lit_localize.ab)("Expand")}
-          ></gds-icon-chevron-bottom>
+          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${(0,when.z)(this.searchable,(()=>custom_element_scoping.qy`<input
@@ -630,4 +627,4 @@
     display: flex;
   }
 `}}]);
-//# sourceMappingURL=1834.6c510b6a.iframe.bundle.js.map
+//# sourceMappingURL=1834.106cc884.iframe.bundle.js.map
