@@ -132,6 +132,23 @@ export const TextDecoration: Story = {
  *
  * It will be forwarded to the `aria-label` attribute of the underlying anchor element.
  *
+ *
+ * Use this when:
+ * - The link contains only an icon
+ * - The visual text needs a different description for screen readers
+ * - Additional context is needed for accessibility
+ *
+ *```html
+ *<!-- Icon-only link -->
+ *<gds-link href="/settings" label="Open settings">
+ *  <gds-icon-settings></gds-icon-settings>
+ *</gds-link>
+ *
+ *<!-- Different screen reader text -->
+ *<gds-link href="/article" label="Read full article about climate change">
+ *  Read more
+ *</gds-link>
+ *```
  */
 export const Label: Story = {
   ...DefaultParams,
