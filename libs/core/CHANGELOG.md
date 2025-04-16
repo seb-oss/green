@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.76.1
+
+### Patch Changes
+
+- 751e88c: **Textarea:** Fix crash that would occur with Angular when using `clearable` option on textareas
+
+## 1.76.0
+
+### Minor Changes
+
+- 1798f7d: **New components:** Added sensitive components for date and accounts
+- fa32e41: **Button:** Add `justify-content` prop to justify the contents of the button adding support for next and prev layout
+
+  ```html
+  <!-- Example of a button with leading icon and text -->
+  <gds-button justify-content="space-between">
+    <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+    Previous
+  </gds-button>
+
+  <!-- Example of a button with trailing icon and text -->
+  <gds-button justify-content="space-between">
+    Next
+    <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+  </gds-button>
+  ```
+
+### Patch Changes
+
+- 3f6e026: **Link:** Add label for accessibility purposes
+
 ## 1.75.0
 
 ### Minor Changes
