@@ -126,3 +126,17 @@ export const TextDecoration: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * On the `gds-link` component, the `aria-label` attribute is used to provide an accessible name for the link.
+ */
+export const Accessibility: Story = {
+  ...DefaultParams,
+  name: 'Accessibility',
+  render: () => html`
+    <gds-link aria-label="Aria label is used"> Link with Aria label </gds-link>
+
+    <!-- For test purposes will be removed on release -->
+    <a href="#" aria-label="Aria label is used"> Link with Aria label </a>
+  `,
+}
