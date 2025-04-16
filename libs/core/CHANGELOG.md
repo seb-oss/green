@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.76.1
+
+### Patch Changes
+
+- 751e88c: **Textarea:** Fix crash that would occur with Angular when using `clearable` option on textareas
+
 ## 1.76.0
 
 ### Minor Changes
