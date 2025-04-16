@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Removed label for dropdown icon
+**Dropdown:** Removed label for chevron icon
