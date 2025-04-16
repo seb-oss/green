@@ -1,5 +1,52 @@
 # Changelog
 
+## 1.75.0
+
+### Minor Changes
+
+- 30d27ef: **Icon:** New icons, new sizing method, metadata, documentation and accessibility improvements.
+
+  The following props have been deprecated and will be removed on the next major release:
+
+  1. `width`
+  2. `height`
+  3. `box` - the viewbox property
+
+  Now you can specify only `size` which is a style expression property that accepts tokens and custom values.
+
+  Example:
+
+  ```html
+  <!-- Token values -->
+  <gds-icon-credit-card size="xl"></gds-icon-credit-card>
+
+  <!-- Custom values -->
+  <gds-icon-credit-card size="48px"></gds-icon-credit-card>
+  ```
+
+## 1.74.2
+
+### Patch Changes
+
+- 84d218d: **Details:** Fix the a11y issue to avoid reading contents when collapsed
+
+## 1.74.1
+
+### Patch Changes
+
+- 630d015: **Details:** Patch content overflow and improve focus state
+
+## 1.74.0
+
+### Minor Changes
+
+- 51bbe15: New components for blur, formatted-text for date, number and account and sensitive-number
+
+### Patch Changes
+
+- 0850de5: **Details:** Fix scroll-bar flash during transition
+- dc3a205: **Testing:** Fix _ElementInternals_ mock for Jest
+
 ## 1.73.0
 
 ### Minor Changes

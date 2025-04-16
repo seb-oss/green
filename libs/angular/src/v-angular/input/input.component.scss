@@ -13,31 +13,29 @@
   --sg-border-width: 1px;
   --sg-border-color: #868686;
 
+  @include form-group.add-form-item();
+
   * {
     box-sizing: border-box;
   }
 
-  &.gds-form-item {
-    @include form-group.add-form-item();
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
 
-    .gds-form-item__footer:not(:empty) {
-      .form-info {
-        font-weight: 500;
-      }
-
-      .form-info--error {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.5em;
-        color: #9f000a;
-
-        .error-icon {
-          align-items: center;
-        }
-      }
-
-      > .form-info--countdown {
+      &.form-info--countdown {
         font-weight: 400;
+      }
+    }
+
+    .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        align-items: center;
       }
     }
   }

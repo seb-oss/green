@@ -12,4 +12,10 @@ export class IconCircleQuestionmark extends GdsIcon {
   static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM9 7.75C9 7.33579 9.33579 7 9.75 7H14.25C14.6642 7 15 7.33579 15 7.75V10.5C15 10.7508 14.8747 10.9849 14.666 11.124L12.75 12.4014V13.25C12.75 13.6642 12.4142 14 12 14C11.5858 14 11.25 13.6642 11.25 13.25V12C11.25 11.7492 11.3753 11.5151 11.584 11.376L13.5 10.0986V8.5H10.5V9.25C10.5 9.66421 10.1642 10 9.75 10C9.33579 10 9 9.66421 9 9.25V7.75ZM12 15C11.4477 15 11 15.4477 11 16C11 16.5523 11.4477 17 12 17C12.5523 17 13 16.5523 13 16C13 15.4477 12.5523 15 12 15Z" fill="currentColor"/>`
   /** @private */
   static _name = 'circle-questionmark'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }
