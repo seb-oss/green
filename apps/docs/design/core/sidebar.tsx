@@ -9,6 +9,7 @@ import { GdsBadge, GdsCard, GdsDiv, GdsFlex } from '$/import/components'
 import {
   IconBrandGreen,
   IconEyeSlash,
+  IconPeople,
   IconSquareGridCircle,
   IconSquareInfo,
   IconTextEdit,
@@ -43,6 +44,12 @@ const menu = [
     title: 'UX writing',
     path: '/ux-writing',
     icon: <IconTextEdit />,
+    subLinks: [],
+  },
+  {
+    title: 'Accessibility',
+    path: '/accessibility',
+    icon: <IconPeople />,
     subLinks: [],
   },
   {
