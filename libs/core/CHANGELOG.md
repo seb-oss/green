@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.76.2
+
+### Patch Changes
+
+- 441260e: **Dropdown:** Removed label for chevron icon
+
 ## 1.76.1
 
 ### Patch Changes
