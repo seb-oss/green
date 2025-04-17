@@ -27,15 +27,6 @@ export class GdsFormControlHeader extends GdsElement {
   static styles = [styles]
 
   /**
-   * Whether the field is disabled.
-   */
-  @property({
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
-
-  /**
    * Whether the supporting text should be displayed or not.
    */
   @property({
