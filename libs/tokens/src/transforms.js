@@ -17,7 +17,7 @@ const transforms = {
       return token.alpha
     },
     transform: (token) => {
-      let value, darkValue
+      let value
 
       const toMixBlend = (alpha) => `${Math.round(alpha * 100)}%`
 
@@ -25,12 +25,6 @@ const transforms = {
         value = tinycolor(token.value)
         if (token.alpha) {
           token.value = `#${value.toHex()} ${toMixBlend(token.alpha)}`
-        }
-      }
-      if (token.darkValue) {
-        darkValue = tinycolor(token.darkValue)
-        if (token.alpha) {
-          token.darkValue = `#${darkValue.toHex()} ${toMixBlend(token.alpha)}`
         }
       }
 

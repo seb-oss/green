@@ -34,10 +34,11 @@ await Promise.all(
     colorSchemes.map((colorScheme) => {
       const config = {
         source: [
-          `src/tokens/${theme}/**/tokens.json`,
-          `src/tokens/${theme}/**/*.comfortable.json`,
-          `src/tokens/${theme}/**/*.ref.json`,
-          `src/tokens/${theme}/**/*.${colorScheme}.json`,
+          __dirname + `/src/tokens/${theme}/**/*.ref.json`,
+          __dirname + `/src/tokens/${theme}/**/tokens.base.json`,
+          __dirname + `/src/tokens/${theme}/**/*.typography.json`,
+          __dirname + `/src/tokens/${theme}/**/*.comfortable.json`,
+          __dirname + `/src/tokens/${theme}/**/*.${colorScheme}.json`,
         ],
         log: {
           verbosity: 'verbose',
@@ -53,63 +54,24 @@ await Promise.all(
               'name/kebab',
               'color/mix-blend',
             ],
-            buildPath: `../../dist/libs/tokens/${theme}/internal/`,
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/internal/`,
             prefix: 'gds-',
             files: [
               {
                 destination: `variables.css`,
-                format: 'css/variables',
+                format: 'css/only-variables',
                 filter: 'no-colors',
-                options: {
-                  outputReferences: false,
-                },
               },
               {
                 destination: `variables.${colorScheme}.css`,
-                format: 'css/variables',
+                format: 'css/only-variables',
                 filter: 'is-color-no-ref',
                 options: {
-                  outputReferences: false,
+                  colorScheme: colorScheme,
                 },
               },
             ],
           },
-          // {
-          //   destination: 'size.css',
-          //   format: 'size',
-          //   options: {
-          //     outputReferences: true,
-          //   },
-          // },
-          // {
-          //   destination: 'viewport.css',
-          //   format: 'viewport',
-          //   options: {
-          //     outputReferences: true,
-          //   },
-          // },
-          // {
-          //   destination: 'text.css',
-          //   format: 'text',
-          //   options: {
-          //     outputReferences: true,
-          //   },
-          // },
-          // {
-          //   destination: 'shadow.css',
-          //   format: 'shadow',
-          //   options: {
-          //     outputReferences: true,
-          //   },
-          // },
-          // {
-          //   destination: 'motion.css',
-          //   format: 'css/variables',
-          //   filter: 'isMotion',
-          //   options: {
-          //     outputReferences: true,
-          //     selector: ':host',
-          //   },
           css: {
             transforms: [
               'attribute/cti',
@@ -120,7 +82,7 @@ await Promise.all(
               'name/kebab',
               'color/alpha',
             ],
-            buildPath: `../../dist/libs/tokens/${theme}/css/`,
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/css/`,
             prefix: 'gds-',
             files: [
               {
@@ -141,16 +103,13 @@ await Promise.all(
               'color/css',
               'color/alpha',
             ],
-            buildPath: `../../dist/libs/tokens/${theme}/scss/`,
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/scss/`,
             prefix: 'gds-',
             files: [
               {
                 destination: `variables.css`,
                 format: 'css/variables',
                 filter: 'no-colors',
-                options: {
-                  outputReferences: false,
-                },
               },
               {
                 destination: `_mixin.${colorScheme}.scss`,
@@ -160,35 +119,18 @@ await Promise.all(
             ],
           },
           figma: {
-            buildPath: `../../dist/libs/tokens/${theme}/figma/`,
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/figma/`,
             transforms: ['name/figma', 'color/alpha'],
             files: [
               {
                 format: 'json/figma',
                 destination: 'figma-colours.json',
                 filter: 'is-color',
-                options: {
-                  outputReferences: false,
-                },
-              },
-              {
-                format: 'json/figma',
-                destination: 'figma-density.json',
-                options: {
-                  outputReferences: false,
-                },
-              },
-              {
-                format: 'json/figma',
-                destination: 'figma-typography.json',
-                options: {
-                  outputReferences: false,
-                },
               },
             ],
           },
           ios: {
-            buildPath: `../../dist/libs/tokens/${theme}/ios/`,
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/ios/`,
             sourcePath: swiftSourcePath,
             transforms: [
               'attribute/cti',

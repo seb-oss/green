@@ -413,42 +413,42 @@
         "states": {
           "dark-hover": {
             "value": "#ffffff",
-            "alpha": "15%",
+            "alpha": ".15",
             "type": "color"
           },
           "dark-pressed": {
             "value": "#ffffff",
-            "alpha": "25%",
+            "alpha": ".25",
             "type": "color"
           },
           "light-hover": {
             "value": "#1b1b1b",
-            "alpha": "10%",
+            "alpha": ".10",
             "type": "color"
           },
           "light-pressed": {
             "value": "#1b1b1b",
-            "alpha": "20%",
+            "alpha": ".20",
             "type": "color"
           },
           "positive-hover": {
             "value": "#35723d",
-            "alpha": "10%",
+            "alpha": ".10",
             "type": "color"
           },
           "positive-pressed": {
             "value": "#35723d",
-            "alpha": "20%",
+            "alpha": ".20",
             "type": "color"
           },
           "negative-hover": {
             "value": "#a63e2a",
-            "alpha": "10%",
+            "alpha": ".10",
             "type": "color"
           },
           "negative-pressed": {
             "value": "#a63e2a",
-            "alpha": "20%",
+            "alpha": ".20",
             "type": "color"
           }
         }
