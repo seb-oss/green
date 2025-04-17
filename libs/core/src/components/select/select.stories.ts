@@ -169,9 +169,14 @@ export const Disabled: Story = {
   name: 'Disabled',
   render: () => html`
     <gds-flex>
-      <gds-select disabled label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      <gds-select
+        disabled
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-lightning slot="lead"></gds-icon-lightning>
@@ -219,13 +224,63 @@ export const Validation: Story = {
           },
         }}
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         <select>
           <option value="">Incorrect Value</option>
+          <optgroup label="Propulsion">
+            <option value="ion-thrusters">Ion Thrusters</option>
+            <option value="chemical-rockets">Chemical Rockets</option>
+          </optgroup>
+          <optgroup label="Communication">
+            <option value="satellite-communication">
+              Satellite Communication
+            </option>
+            <option value="deep-space-network">Deep Space Network</option>
+          </optgroup>
+        </select>
+      </gds-select>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The `extended-supporting-text` slot can be used to provide extended information about the select field.<br>
+ * The slot will show by default when the `show-extended-supporting-text` property is set.<br>
+ * If not specified, the slot will be hidden and a companion icon will be displayed to indicate that more information is available.
+ *
+ * ```html
+ *<gds-select show-extended-supporting-text>
+ *  <span slot="extended-supporting-text">...</span>
+ *  <select><option value="">...</option></select>
+ *</gds-select>
+ * ```
+ */
+export const ExtendedSupportingText: Story = {
+  ...DefaultParams,
+  name: 'Extended Supporting Text',
+  render: () => html`
+    <gds-flex
+      gap="xl"
+      align-items="center"
+      justify-content="center"
+      width="100%"
+    >
+      <gds-select
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+        <gds-icon-rocket slot="lead"></gds-icon-rocket>
+        <select>
+          <option value="">First option</option>
           <optgroup label="Propulsion">
             <option value="ion-thrusters">Ion Thrusters</option>
             <option value="chemical-rockets">Chemical Rockets</option>
@@ -259,9 +314,10 @@ export const Size: Story = {
         size="small"
         label="Label text"
         supporting-text="Supporting text"
+        show-extended-supporting-text
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-bank slot="lead"></gds-icon-bank>
@@ -290,9 +346,13 @@ export const Multiple: Story = {
   name: 'Multiple',
   render: () => html`
     <gds-flex>
-      <gds-select label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      <gds-select
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-sun slot="lead"></gds-icon-sun>
@@ -327,8 +387,8 @@ export const SelectSize: Story = {
   render: () => html`
     <gds-flex>
       <gds-select label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-compass-round slot="lead"></gds-icon-compass-round>
