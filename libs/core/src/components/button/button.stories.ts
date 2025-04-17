@@ -177,8 +177,12 @@ export const Sizes: Story = {
 /**
  * Buttons can have an icon on the left or right side of the text. These are called leading or
  * trailing icons, and are added by placing a `gds-icon` component in either the `lead` or `trail`
- * slot. Note that the icons themself does not have a label so if the icon have some meaning,
+ * slot.
+ *
+ * Note that the icons themself does not have a label so if the icon have some meaning,
  * show that on the text or use the label attribute, for it to be read out on screen readers.
+ * <a href="/docs/components-icon--docs#regular%20icons">
+ * Icons</a> that can be used.
  */
 export const WithIcon: Story = {
   ...DefaultParams,
@@ -213,6 +217,8 @@ export const WithIcon: Story = {
  * If a single `gds-icon` is the only child of a button, it will render as a circular
  * icon button. Note the icon does not have a aria-label so you have to set the label
  * attribute on the button so it reads more than just Button on screen readers.
+ * <a href="/docs/components-icon--docs#regular%20icons">
+ * Icons</a> that can be used.
  */
 export const IconButton: Story = {
   ...DefaultParams,
