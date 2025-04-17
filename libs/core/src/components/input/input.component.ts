@@ -105,10 +105,7 @@ class Input extends GdsFormControlElement<string> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header
-            class="size-${this.size}"
-            .disabled=${this.disabled}
-          >
+          html`<gds-form-control-header class="size-${this.size}">
             <label for="input" slot="label">${this.label}</label>
             <span slot="supporting-text" id="supporting-text">
               ${this.supportingText}
