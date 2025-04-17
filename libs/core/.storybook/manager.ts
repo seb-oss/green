@@ -19,6 +19,7 @@ const betaItems = {
   Badge: true,
   Dropdown: true,
   Card: true,
+  Checkbox: true,
   Coachmark: true,
   Container: true,
   Datepicker: true,
