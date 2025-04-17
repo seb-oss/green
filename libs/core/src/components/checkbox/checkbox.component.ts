@@ -48,7 +48,7 @@ export class GdsCheckbox extends GdsFormControlElement {
   @property({ type: Boolean, reflect: true })
   disabled = false
 
-  @query('.checkbox')
+  @query('.rbcb')
   private _elCheckbox!: HTMLElement
 
   connectedCallback() {
@@ -94,7 +94,11 @@ export class GdsCheckbox extends GdsFormControlElement {
         label=${this.label}
         type="checkbox"
       >
-        ${checkboxTemplate(this.checked)}
+        ${checkboxTemplate({
+          checked: this.checked,
+          disabled: this.disabled,
+          invalid: this.invalid,
+        })}
       </gds-selection-field-label>
     `
   }
