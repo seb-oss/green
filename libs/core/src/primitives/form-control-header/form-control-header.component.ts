@@ -70,7 +70,6 @@ export class GdsFormControlHeader extends GdsElement {
         label="${msg('Show more information')}"
         gds-aria-expanded="${this.showExtendedSupportingText}"
         @click=${this.#handleExtSupTxtBtnClick}
-        ?disabled=${this.disabled}
       >
         <gds-icon-circle-info ?solid=${this.showExtendedSupportingText} />
       </gds-button>
