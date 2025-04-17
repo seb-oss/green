@@ -18,7 +18,6 @@
 's281846ef0421c71f': `Marraskuu`,
 's2ceb11be2290bb1b': `Peruuta`,
 's39938ecdae568740': `Syys`,
-'s3b151ca64eb26ec1': `Laajentaa`,
 's407a88a592a0987c': `Elokuu`,
 's46d6587089bd0356': `Seuraava kuukausi`,
 's49730f3d5751a433': `Ladataan...`,
