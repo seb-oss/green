@@ -4,6 +4,8 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 import '.'
 
+import { html } from 'lit'
+
 const meta: Meta = {
   title: 'Components/Checkbox',
   component: 'gds-checkbox-group',
@@ -41,4 +43,14 @@ export const checkbox: Story = {
     <gds-checkbox label="Third option" supporting-text="This is the third option" value="third"></gds-checkbox>
     `,
   },
+}
+
+/**
+ * It's possible to use a single checkbox without enclosing it in a group.
+ *
+ * However, single checkboxes does not support error messages, so if you need that, wrap it in a group.
+ */
+export const Single: Story = {
+  ...DefaultParams,
+  render: () => html`<gds-checkbox label="A single checkbox"></gds-checkbox>`,
 }

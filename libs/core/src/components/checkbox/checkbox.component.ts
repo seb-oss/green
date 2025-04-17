@@ -1,9 +1,10 @@
 import { property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
-import { GdsElement } from '../../gds-element'
 import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
 import { gdsCustomElement, html } from '../../scoping'
+import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
+import { checkboxTemplate } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
@@ -20,7 +21,7 @@ import { styles } from './checkbox.styles'
   dependsOn: [GdsSelectionFieldLabel, IconCheckmark],
 })
 export class GdsCheckbox extends GdsFormControlElement {
-  static styles = [tokens, styles]
+  static styles = [tokens, rbcbToggleStyles, styles]
 
   /**
    * The label displayed next to the checkbox button.
@@ -93,20 +94,7 @@ export class GdsCheckbox extends GdsFormControlElement {
         label=${this.label}
         type="checkbox"
       >
-        <div class="checkbox">
-          <div class="state"></div>
-          <div class="disc">
-            ${when(
-              this.checked,
-              () =>
-                html`<gds-icon-checkmark
-                  class="check-icon"
-                  stroke="4"
-                  label=" "
-                ></gds-icon-checkmark>`,
-            )}
-          </div>
-        </div>
+        ${checkboxTemplate(this.checked)}
       </gds-selection-field-label>
     `
   }
