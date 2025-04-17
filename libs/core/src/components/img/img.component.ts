@@ -62,7 +62,7 @@ export class GdsImg extends withPositioningProps(
    */
   @styleExpressionProperty({
     property: 'border-radius',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-space-${v})`,
   })
   'border-radius'?: string
 

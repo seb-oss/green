@@ -3,6 +3,7 @@
   "version": "0.10.3",
   "dependencies": {},
   "description": "Design tokens for Green Design System",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seb-oss/green.git"

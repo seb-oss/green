@@ -3,7 +3,7 @@ import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import sizeTokens from '../../../../tokens/src/tokens/size.json'
+import densityTokens from '../../../../tokens/src/tokens/2023/sys/density.comfortable.json'
 import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
 
 import './icons'
@@ -204,9 +204,11 @@ const createSizeExample = (
   } = {},
 ) => {
   const { unit = '', icon = 'credit-card', isToken = false } = options
-  const displaySize = unit ? `${size}${unit}` : size.toString().toUpperCase()
+  const displaySize = unit ? `${size}${unit}` : size.toString()
   const sizeAttribute = unit ? `${size}${unit}` : size
   const tag = literal`gds-icon-${unsafeStatic(icon)}`
+
+  console.log(densityTokens.sys.space)
 
   return html`
     <gds-flex
@@ -233,7 +235,7 @@ const createSizeExample = (
         ${isToken
           ? html`
               <gds-text tag="small" color="secondary/0.4">
-                ${sizeTokens.ref.size[size.toString().toUpperCase()].value}px
+                ${densityTokens.sys.space[size.toString()].value}px
               </gds-text>
             `
           : ''}

@@ -19,7 +19,7 @@ export type StyleExpressionPropertyOptions = {
    * also be `padding`. This option overrides that. */
   property?: string
 
-  /** A function that takes a value and returns a string. Defaults to `(value) => 'var(--gds-space-${value})'`
+  /** A function that takes a value and returns a string. Defaults to `(value) => 'var(--gds-sys-space-${value})'`
    * This can be used to resolve the values into CSS variables for example. */
   valueTemplate?: (value: string) => string
 

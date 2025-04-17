@@ -6,15 +6,15 @@ const style = css`
   }
 
   slot[name='lead']::slotted(*) {
-    line-height: var(--gds-space-m);
+    line-height: var(--gds-sys-space-m);
   }
 
   :host([notification]) slot[name='trail']::slotted(*) {
-    line-height: var(--gds-space-s);
+    line-height: var(--gds-sys-space-s);
   }
 
   :host([notification]) slot[name='lead']::slotted(*) {
-    line-height: var(--gds-space-s);
+    line-height: var(--gds-sys-space-s);
   }
 `
 export default style

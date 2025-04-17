@@ -13,7 +13,7 @@ export const styles = css`
 
   @layer base {
     :host([disabled]) {
-      --_radio-label-color: var(--gds-color-l3-content-disabled);
+      --_radio-label-color: var(--gds-sys-color-l3-content-disabled);
     }
 
     .radio {
@@ -104,7 +104,7 @@ export const styles = css`
 
     :host([disabled]) .radio .disc {
       box-shadow: none;
-      background-color: var(--gds-color-l3-content-disabled);
+      background-color: var(--gds-sys-color-l3-content-disabled);
     }
   }
 `

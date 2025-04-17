@@ -35,7 +35,7 @@ export class GdsSpacer extends GdsElement {
    */
   @styleExpressionProperty({
     property: 'height',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-space-${v})`,
   })
   size?: string
 

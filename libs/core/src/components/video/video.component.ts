@@ -133,7 +133,7 @@ export class GdsVideo extends withSizeXProps(
    * @property radius
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-space-${v})`,
   })
   'border-radius'?: string
 

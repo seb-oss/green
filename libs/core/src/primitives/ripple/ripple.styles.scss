@@ -2,7 +2,7 @@
   --gds-ripple-motion-name: ripple;
   --gds-ripple-motion: var(--gds-ripple-motion-name) 1.25s
     cubic-bezier(0.16, 1, 0.3, 1) 0s 1 normal none running;
-  border-radius: var(--gds-space-max);
+  border-radius: var(--gds-sys-space-max);
   contain: strict;
   display: grid;
   place-content: center;
@@ -15,7 +15,7 @@
 
 div {
   background-color: currentColor;
-  border-radius: var(--gds-space-max);
+  border-radius: var(--gds-sys-space-max);
   display: flex;
   height: 100%;
   left: calc((-50% + var(--gds-ripple-left)) / 4);

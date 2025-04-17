@@ -7,9 +7,9 @@
   button {
     appearance: none;
     background: transparent;
-    border-radius: var(--gds-space-max);
+    border-radius: var(--gds-sys-space-max);
     border-width: 0;
-    color: var(--gds-color-l3-content-tertiary);
+    color: var(--gds-sys-color-l3-content-tertiary);
     cursor: pointer;
     flex-grow: 1;
     flex-shrink: 0;
@@ -42,7 +42,7 @@
     :host(:not([selected])) button:hover {
       background-color: color-mix(
         in srgb,
-        var(--gds-color-l3-states-light-hover),
+        var(--gds-sys-color-l3-states-light-hover),
         transparent
       );
 
@@ -56,7 +56,7 @@
     outline-color: color-mix(
       in srgb,
       transparent,
-      var(--gds-color-l3-content-tertiary) 100%
+      var(--gds-sys-color-l3-content-tertiary) 100%
     );
   }
 }

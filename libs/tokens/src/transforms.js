@@ -1,25 +1,11 @@
-import * as StyleDictionary from 'style-dictionary'
-import * as tinycolor from 'tinycolor2'
+import tinycolor from 'tinycolor2'
 
-const transforms: Record<
-  string,
-  StyleDictionary.Named<StyleDictionary.Transform<unknown>>
-> = {
+const transforms = {
   'name/figma': {
     name: 'name/figma',
     type: 'name',
-    transformer: (token: StyleDictionary.DesignToken) => {
+    transform: (token) => {
       return token.path.slice(1, token.path.length).join('/')
-    },
-  },
-  'size/px': {
-    name: 'size/px',
-    type: 'name',
-    matcher: function (prop) {
-      return prop.attributes.category === 'size'
-    },
-    transformer: function (prop) {
-      return `${prop.original.value}px`
     },
   },
   // For use with css `mix-color` function
@@ -27,24 +13,18 @@ const transforms: Record<
     name: 'color/mix-blend',
     transitive: true,
     type: 'value',
-    matcher: (token: StyleDictionary.DesignToken) => {
+    filter: (token) => {
       return token.alpha
     },
-    transformer: (token: StyleDictionary.DesignToken) => {
-      let value: tinycolor.Instance, darkValue: tinycolor.Instance
+    transform: (token) => {
+      let value
 
-      const toMixBlend = (alpha: number) => `${Math.round(alpha * 100)}%`
+      const toMixBlend = (alpha) => `${Math.round(alpha * 100)}%`
 
       if (token.value) {
         value = tinycolor(token.value)
         if (token.alpha) {
           token.value = `#${value.toHex()} ${toMixBlend(token.alpha)}`
-        }
-      }
-      if (token.darkValue) {
-        darkValue = tinycolor(token.darkValue)
-        if (token.alpha) {
-          token.darkValue = `#${darkValue.toHex()} ${toMixBlend(token.alpha)}`
         }
       }
 
@@ -55,11 +35,11 @@ const transforms: Record<
     name: 'color/alpha',
     transitive: true,
     type: 'value',
-    matcher: (token: StyleDictionary.DesignToken) => {
+    filter: (token) => {
       return token.alpha
     },
-    transformer: (token: StyleDictionary.DesignToken) => {
-      let value: tinycolor.Instance, darkValue: tinycolor.Instance
+    transform: (token) => {
+      let value, darkValue
 
       if (token.value) {
         value = tinycolor(token.value)
@@ -80,8 +60,8 @@ const transforms: Record<
   'green/color/UIColorSwift': {
     name: 'green/color/UIColorSwift',
     type: 'value',
-    matcher: (token) => token.path.includes('color'),
-    transformer: function (token) {
+    filter: (token) => token.path.includes('color'),
+    transform: function (token) {
       const { r, g, b, a } = tinycolor(token.value).toRgb()
       const rFixed = (r / 255.0).toFixed(3)
       const gFixed = (g / 255.0).toFixed(3)

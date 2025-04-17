@@ -61,7 +61,7 @@ export class GdsDivider extends GdsElement {
    */
   @styleExpressionProperty({
     property: '--_size',
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-space-${v})`,
   })
   size?: string
 

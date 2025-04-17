@@ -1,8 +1,8 @@
 @layer base {
   :host {
-    background-color: var(--gds-color-l3-background-secondary);
+    background-color: var(--gds-sys-color-l3-background-secondary);
     border: 0.25rem solid transparent;
-    border-radius: var(--gds-space-max);
+    border-radius: var(--gds-sys-space-max);
     box-sizing: border-box;
     contain: layout;
     display: inline-flex;
@@ -39,10 +39,10 @@
     align-items: center;
     appearance: none;
     aspect-ratio: 1;
-    border-radius: var(--gds-space-max);
+    border-radius: var(--gds-sys-space-max);
     border-width: 0;
-    background-color: var(--gds-color-l3-background-secondary);
-    color: var(--gds-color-l3-content-tertiary);
+    background-color: var(--gds-sys-color-l3-background-secondary);
+    color: var(--gds-sys-color-l3-content-tertiary);
     cursor: pointer;
     display: flex;
     font-size: 1rem;
@@ -57,8 +57,8 @@
       &:hover {
         background-color: color-mix(
           in srgb,
-          var(--gds-color-l3-background-secondary),
-          var(--gds-color-l3-states-light-hover)
+          var(--gds-sys-color-l3-background-secondary),
+          var(--gds-sys-color-l3-states-light-hover)
         );
       }
     }
@@ -93,8 +93,8 @@
   }
 
   #indicator {
-    background-color: var(--gds-color-l3-background-quarternary);
-    border-radius: var(--gds-space-max);
+    background-color: var(--gds-sys-color-l3-background-quarternary);
+    border-radius: var(--gds-sys-space-max);
     height: 100%;
     left: 0;
     position: absolute;

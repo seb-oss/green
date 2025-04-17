@@ -96,7 +96,7 @@ export class GdsDiv extends withSizeXProps(
         style = this_['border-style'] || 'solid',
         color = this_['border-color'] || 'primary',
       ] = values
-      const sizeCss = `var(--gds-space-${size})`
+      const sizeCss = `var(--gds-sys-space-${size})`
       const colorCss = parseColorValue(color, 'border', this_.level)
       return `border: ${sizeCss} ${style} ${colorCss};`
     },
@@ -182,8 +182,8 @@ export class GdsDiv extends withSizeXProps(
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-text-size-${size});`
-      const styleLine = `line-height: var(--gds-text-line-height-${size});`
+      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
+      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
       return styleSize + styleLine
     },
   })
@@ -194,7 +194,7 @@ export class GdsDiv extends withSizeXProps(
    * Supports all typography weight tokens from the design system.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-text-weight-${v})`,
   })
   'font-weight'?: string
 

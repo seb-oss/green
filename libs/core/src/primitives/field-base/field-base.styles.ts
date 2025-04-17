@@ -21,17 +21,18 @@ export const styles = css`
       position: relative;
       align-items: center;
       justify-content: space-between;
-      gap: var(--gds-space-xs);
-      padding-block: var(--gds-space-xs);
-      padding-inline: var(--gds-space-m) var(--gds-space-s);
-      min-block-size: var(--gds-space-3xl);
-      block-size: var(--gds-space-3xl);
+      gap: var(--gds-sys-space-xs);
+      padding-block: var(--gds-sys-space-xs);
+      padding-inline: var(--gds-sys-space-m) var(--gds-sys-space-s);
+      min-block-size: var(--gds-sys-space-3xl);
+      block-size: var(--gds-sys-space-3xl);
       outline-style: solid;
       outline-width: 0;
-      border-radius: var(--gds-space-xs);
-      background: var(--gds-color-l3-background-secondary);
-      color: var(--gds-color-l3-content-tertiary);
-      border: var(--gds-space-4xs) solid var(--gds-color-l3-border-secondary);
+      border-radius: var(--gds-sys-space-xs);
+      background: var(--gds-sys-color-l3-background-secondary);
+      color: var(--gds-sys-color-l3-content-tertiary);
+      border: var(--gds-sys-space-4xs) solid
+        var(--gds-sys-color-l3-border-secondary);
       cursor: text;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
@@ -44,57 +45,57 @@ export const styles = css`
       .right.as-flex {
         display: flex;
         position: absolute;
-        gap: var(--gds-space-xs);
-        right: var(--gds-space-s);
-        top: var(--gds-space-xs);
+        gap: var(--gds-sys-space-xs);
+        right: var(--gds-sys-space-s);
+        top: var(--gds-sys-space-xs);
         block-size: max-content;
       }
     }
 
     .field.lead-slot-occupied {
-      padding-inline-start: var(--gds-space-s);
+      padding-inline-start: var(--gds-sys-space-s);
     }
 
     .field.action-slot-occupied:not(.trail-slot-occupied) {
-      padding-inline-end: var(--gds-space-s);
+      padding-inline-end: var(--gds-sys-space-s);
 
       &.small {
-        padding-inline-end: var(--gds-space-xs);
+        padding-inline-end: var(--gds-sys-space-xs);
       }
     }
 
     .field:focus-within {
-      outline-width: var(--gds-space-3xs);
-      outline-offset: var(--gds-space-3xs);
+      outline-width: var(--gds-sys-space-3xs);
+      outline-offset: var(--gds-sys-space-3xs);
       outline-color: currentColor;
       border-color: currentColor;
     }
 
     .field.small {
-      gap: var(--gds-space-2xs);
-      padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs);
-      min-block-size: var(--gds-space-xl);
-      block-size: var(--gds-space-xl);
+      gap: var(--gds-sys-space-2xs);
+      padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs);
+      min-block-size: var(--gds-sys-space-xl);
+      block-size: var(--gds-sys-space-xl);
     }
 
     .field.multiline {
       align-items: flex-start;
-      padding: var(--gds-space-s);
-      padding-inline-start: var(--gds-space-m);
+      padding: var(--gds-sys-space-s);
+      padding-inline-start: var(--gds-sys-space-m);
       height: max-content;
     }
 
     .field.disabled {
-      background: var(--gds-color-l3-background-disabled);
-      color: var(--gds-color-l3-content-disabled);
+      background: var(--gds-sys-color-l3-background-disabled);
+      color: var(--gds-sys-color-l3-content-disabled);
       border-color: transparent;
       pointer-events: none;
     }
 
     .field.invalid {
-      background: var(--gds-color-l3-background-negative-secondary);
-      border-color: var(--gds-color-l3-border-negative);
-      color: var(--gds-color-l3-content-negative);
+      background: var(--gds-sys-color-l3-background-negative-secondary);
+      border-color: var(--gds-sys-color-l3-border-negative);
+      color: var(--gds-sys-color-l3-content-negative);
     }
 
     slot:not([name])::slotted(*) {
@@ -103,7 +104,7 @@ export const styles = css`
 
     .main-slot-wrap {
       display: flex;
-      gap: var(--gds-space-xs);
+      gap: var(--gds-sys-space-xs);
       flex: 1;
     }
 
@@ -115,16 +116,16 @@ export const styles = css`
       .field:hover {
         background: color-mix(
           in srgb,
-          var(--gds-color-l3-background-secondary),
-          var(--gds-color-l3-states-light-hover)
+          var(--gds-sys-color-l3-background-secondary),
+          var(--gds-sys-color-l3-states-light-hover)
         );
       }
 
       .field.invalid:hover {
         background: color-mix(
           in srgb,
-          var(--gds-color-l3-background-negative-secondary),
-          var(--gds-color-l3-states-negative-hover)
+          var(--gds-sys-color-l3-background-negative-secondary),
+          var(--gds-sys-color-l3-states-negative-hover)
         );
       }
     }
@@ -133,8 +134,8 @@ export const styles = css`
       align-items: center;
       justify-content: center;
       display: flex;
-      inline-size: var(--gds-space-l);
-      block-size: var(--gds-space-l);
+      inline-size: var(--gds-sys-space-l);
+      block-size: var(--gds-sys-space-l);
     }
 
     .multiline slot[name='action']::slotted([gds-element]) {
