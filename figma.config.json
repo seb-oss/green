@@ -1,0 +1,6 @@
+{
+  "codeConnect": {
+    "parser": "compose",
+    "include": ["libs/core/src/components/icon/figma-connect/**.figma.ts"]
+  }
+}

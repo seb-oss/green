@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.28.0
+
+### Minor Changes
+
+- 30d27ef: **Icon:** Add 27 new icons
+
+### Patch Changes
+
+- Updated dependencies [30d27ef]
+  - @sebgroup/green-core@1.75.0
+
 ## 3.27.1
 
 ### Patch Changes

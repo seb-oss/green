@@ -138,6 +138,31 @@ describe('<gds-link>', () => {
 
       expect(document.activeElement).to.equal(link)
     })
+
+    it('should pass aria-label to inner link element and not host', async () => {
+      const el = await fixture<GdsLink>(
+        html`<gds-link href="javascript:;" label="Test label"
+          >Link text</gds-link
+        >`,
+      )
+
+      const shadowLink = el.shadowRoot?.querySelector('a')
+
+      expect(el.getAttribute('aria-label')).to.be.null
+
+      expect(shadowLink?.getAttribute('aria-label')).to.equal('Test label')
+    })
+
+    it('should not set aria-label on inner link when label prop is not provided', async () => {
+      const el = await fixture<GdsLink>(
+        html`<gds-link href="javascript:;">Link text</gds-link>`,
+      )
+
+      const shadowLink = el.shadowRoot?.querySelector('a')
+
+      expect(el.getAttribute('aria-label')).to.be.null
+      expect(shadowLink?.getAttribute('aria-label')).to.be.null
+    })
   })
 
   describe('Security', () => {

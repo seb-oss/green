@@ -38,6 +38,10 @@ export const styles = css`
       transition-property: background-color;
 
       .right {
+        display: contents;
+      }
+
+      .right.as-flex {
         display: flex;
         position: absolute;
         gap: var(--gds-space-xs);

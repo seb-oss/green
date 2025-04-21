@@ -12,4 +12,10 @@ export class IconTag extends GdsIcon {
   static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M2 2.75C2 2.33579 2.33579 2 2.75 2H12C12.1989 2 12.3897 2.07902 12.5303 2.21967L21.7803 11.4697C22.0732 11.7626 22.0732 12.2374 21.7803 12.5303L12.5303 21.7803C12.2374 22.0732 11.7626 22.0732 11.4697 21.7803L2.21967 12.5303C2.07902 12.3897 2 12.1989 2 12V2.75ZM7.5 9C8.32843 9 9 8.32843 9 7.5C9 6.67157 8.32843 6 7.5 6C6.67157 6 6 6.67157 6 7.5C6 8.32843 6.67157 9 7.5 9Z" fill="currentColor"/>`
   /** @private */
   static _name = 'tag'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

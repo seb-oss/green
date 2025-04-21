@@ -1,0 +1,1 @@
+export { IconPound } from '@sebgroup/green-core/react';
