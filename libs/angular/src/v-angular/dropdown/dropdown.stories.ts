@@ -77,7 +77,7 @@ const options = [
     label:
       'This is a very long label that should over flow a smaller dropdown button',
   },
-  { key: 'opt3', label: 'Option 3', disabled: true },
+  { key: 'opt3', label: 'Option 3 - disabled', disabled: true },
   { key: 'opt4', label: 'Option 4' },
   {
     key: 'opt5',
