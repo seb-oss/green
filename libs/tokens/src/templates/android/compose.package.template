@@ -1,0 +1,26 @@
+// swift-tools-version: 5.10
+// The swift-tools-version declares the minimum version of Swift required to build this package.
+//
+<%= header %>
+import PackageDescription
+
+let package = Package(
+    name: "<%= file.packageName %>",
+    platforms: [.iOS(.v<%= options.platformVersion %>)],
+    products: [
+        <%= options.targets.map(function(target) {
+            return '.library(\n            name: "' + target + '",\n            targets: ["' + target + '"]\n        )'
+        }).join(',\n        ') %>
+    ],
+    dependencies: [],
+    targets: [
+        <%= options.targets.map(function(target) {
+            var targetString = '.target(\n            name: "' + target + '",\n            dependencies: [],\n            resources: [\n                '
+            targetString += options.resources?.map(function(resource) {
+                return '.process("' + resource + '")'
+            }).join(',\n                ')
+            targetString += '\n            ]\n        )'
+            return targetString
+        }).join(',\n        ') %>
+    ]
+)

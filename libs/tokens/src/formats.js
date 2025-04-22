@@ -11,6 +11,7 @@ import {
   sortByReference,
 } from 'style-dictionary/utils'
 
+import * as kotlin from './templates/android/kotlin.tokens.js'
 import * as swift from './templates/ios/swift.tokens.js'
 
 /**
@@ -123,6 +124,54 @@ const formats = {
       }
       const tree = swift.treeFromTokens(allTokens, options.type)
       const fileContent = swift.fileContentFromTree(
+        tree,
+        options,
+        file,
+        propertyformat,
+      )
+      return fileContent
+    },
+  },
+  'green/android-kotlin-class-tree': {
+    name: 'green/android-kotlin-class-tree',
+    format: ({ dictionary, options, file, platform }) => {
+      let allTokens
+      const { outputReferences, package, import } =  options
+      options = setSwiftFileProperties(
+        options,
+        'class',
+        platform.transformGroup,
+      )
+      if (outputReferences) {
+        allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
+      } else {
+        allTokens = [...dictionary.allTokens].sort(sortByName)
+      }
+
+      let propertyformat
+      if (options.colorType == 'uiKitDynamicProvider') {
+        propertyformat = kotlin.uiKitColorReferencePropertyFormatter(
+          options.lightModeObjectName,
+          options.darkModeObjectName,
+          options,
+        )
+      } else if (options.colorType == 'swiftUiReferenceToUiKit') {
+        propertyformat = kotlin.swiftUiColorReferencePropertyFormatter(
+          options.uiKitObjectName,
+          options,
+        )
+      } else {
+        const valueformat = createPropertyFormatter({
+          outputReferences,
+          dictionary,
+          formatting: {
+            suffix: '',
+          },
+        })
+        propertyformat = kotlin.staticPropertyFormatter(options, valueformat)
+      }
+      const tree = kotlin.treeFromTokens(allTokens, options.type)
+      const fileContent = kotlin.fileContentFromTree(
         tree,
         options,
         file,
