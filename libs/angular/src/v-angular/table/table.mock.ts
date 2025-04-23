@@ -1,6 +1,15 @@
 import { Observable, of } from 'rxjs'
 
-import { TableColumn } from './table.models'
+export interface TableColumn<T> {
+  property: keyof T;
+  label: string;
+  sortable?: boolean;
+  valueType?: 'numeric' | 'text';
+  order?: 'asc' | 'desc';
+  ariaLabelSortable?: string;
+  hidePropertyOnMobile?: boolean;
+  hideLabelOnMobile?: boolean;
+}
 
 export type ColumnData = {
   id: string
@@ -73,23 +82,27 @@ export const columns: {
     {
       property: 'name',
       label: 'header.name',
+      hideLabelOnMobile: true,
+    },
+    {
+      property: 'status',
+      label: 'header.status',
+      hideLabelOnMobile: true,
     },
     {
       property: 'currency',
       label: 'header.currency',
     },
     {
-      property: 'status',
-      label: 'header.status',
-    },
-    {
       property: 'bookedBalance',
+      hidePropertyOnMobile: true,
       label: 'header.bookedbalance',
       valueType: 'numeric',
     },
     {
       property: 'datedBalance',
       label: 'header.datedbalance',
+      hidePropertyOnMobile: true,
       valueType: 'numeric',
     },
     {
@@ -99,6 +112,7 @@ export const columns: {
     },
     {
       property: 'unauthorizedUsage',
+      hidePropertyOnMobile: true,
       label: 'header.unauthorizedusage',
       valueType: 'numeric',
     },
