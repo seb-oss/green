@@ -6,7 +6,7 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
-import { styles } from './toggle-control.styles' // Renamed style file
+import { styles } from './toggle-control-base.styles' // Renamed style file
 
 /**
  * @element gds-toggle-control-base
