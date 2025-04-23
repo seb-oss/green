@@ -124,6 +124,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
           html`<gds-form-control-header
             class="size-${this.size}"
             .disabled=${this.disabled}
+            .showExtendedSupportingText=${this.showExtendedSupportingText}
           >
             <label for="select" slot="label" id="label-text">
               ${this.label}

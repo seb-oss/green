@@ -60,9 +60,6 @@ export const Default: Story = {
     supportingText: 'Supporting text',
     value: '',
     innerHTML: `
-      <span slot="extended-supporting-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </span>
       <gds-icon-books slot="lead"></gds-icon-books>
       <select>
         <option value="">Select a value</option>
@@ -110,7 +107,11 @@ export const Option: Story = {
   name: 'Options',
   render: () => html`
     <gds-flex>
-      <gds-select label="Label text" supporting-text="Supporting text">
+      <gds-select
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
