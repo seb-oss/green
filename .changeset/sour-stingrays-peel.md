@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-**Select:** Add missing extended supporting text slot and prop
+**Select, Datepicker, Dropdown, Input, Textarea and Radio:** Add missing extended supporting text slot and prop
