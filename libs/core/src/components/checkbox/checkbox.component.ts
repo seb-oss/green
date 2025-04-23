@@ -20,7 +20,7 @@ import { styles } from './checkbox.styles'
 @gdsCustomElement('gds-checkbox', {
   dependsOn: [GdsToggleControlBase, IconCheckmark],
 })
-export class GdsCheckbox extends GdsFormControlElement {
+export class GdsCheckbox extends GdsFormControlElement<string> {
   static styles = [tokens, rbcbToggleStyles, styles]
 
   /**
