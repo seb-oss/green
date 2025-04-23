@@ -19,7 +19,7 @@ import { styles } from './checkbox-group.styles'
 import type { GdsCheckbox } from '../checkbox.component'
 
 @localized()
-class CheckboxGroup extends GdsFormControlElement<string[]> {
+class CheckboxGroup extends GdsFormControlElement<(string | undefined)[]> {
   static styles = [styles]
 
   /**
@@ -62,32 +62,19 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     ) as GdsCheckbox[]
   }
 
-  @query('.content')
-  private _contentElement!: HTMLElement
-
-  private _isConnected = false
-
-  connectedCallback() {
-    super.connectedCallback()
-    this._isConnected = true
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback()
-    this._isConnected = false
-  }
-
   protected _getValidityAnchor(): HTMLElement {
-    return this._contentElement
+    return this.checkboxes.pop()!
   }
 
   @watch('value')
   private _handleValueChange() {
-    if (this._isConnected) {
-      this.checkboxes.forEach((checkbox) => {
-        checkbox.checked = this.value?.includes(checkbox.value) || false
-      })
-    }
+    this.checkboxes.forEach((checkbox) => {
+      checkbox.checked = this.value?.includes(checkbox.value) || false
+    })
+  }
+
+  focus() {
+    this.checkboxes[0]?.focus()
   }
 
   render() {
@@ -135,7 +122,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   }
 
   #renderCheckboxes() {
-    return html` <div class="content">
+    return html`<div class="content">
       <slot @input=${this.#handleCheckboxChange}></slot>
     </div>`
   }

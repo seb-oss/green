@@ -89,6 +89,7 @@ export const Validation: Story = {
       <gds-flex flex-direction="column" align-items="flex-start" gap="m">
         <gds-checkbox-group
           label="Group Label"
+          name="checkbox-group"
           supporting-text="Support text for the group"
           show-extended-supporting-text
           .validator=${{
