@@ -107,11 +107,7 @@ export const Option: Story = {
   name: 'Options',
   render: () => html`
     <gds-flex>
-      <gds-select
-        label="Label text"
-        supporting-text="Supporting text"
-        show-extended-supporting-text
-      >
+      <gds-select label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -170,12 +166,7 @@ export const Disabled: Story = {
   name: 'Disabled',
   render: () => html`
     <gds-flex>
-      <gds-select
-        disabled
-        label="Label text"
-        supporting-text="Supporting text"
-        show-extended-supporting-text
-      >
+      <gds-select disabled label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -315,7 +306,6 @@ export const Size: Story = {
         size="small"
         label="Label text"
         supporting-text="Supporting text"
-        show-extended-supporting-text
       >
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -347,11 +337,7 @@ export const Multiple: Story = {
   name: 'Multiple',
   render: () => html`
     <gds-flex>
-      <gds-select
-        label="Label text"
-        supporting-text="Supporting text"
-        show-extended-supporting-text
-      >
+      <gds-select label="Label text" supporting-text="Supporting text">
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
