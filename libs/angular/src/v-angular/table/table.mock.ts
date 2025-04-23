@@ -1,15 +1,6 @@
 import { Observable, of } from 'rxjs'
 
-export interface TableColumn<T> {
-  property: keyof T;
-  label: string;
-  sortable?: boolean;
-  valueType?: 'numeric' | 'text';
-  order?: 'asc' | 'desc';
-  ariaLabelSortable?: string;
-  hidePropertyOnMobile?: boolean;
-  hideLabelOnMobile?: boolean;
-}
+import { TableColumn } from './table.models'
 
 export type ColumnData = {
   id: string
