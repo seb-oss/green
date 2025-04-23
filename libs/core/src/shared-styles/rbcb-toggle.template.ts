@@ -5,14 +5,17 @@ import { when } from 'lit/directives/when.js'
 // rbcb = radio button / checkbox
 
 export interface RbcbTemplateProps {
+  type: 'checkbox' | 'radio'
   checked: boolean
   disabled: boolean
   invalid: boolean
 }
 
-export const checkboxTemplate = (props: RbcbTemplateProps) => {
-  const { checked, disabled, invalid } = props
+export const rbcbTemplate = (props: RbcbTemplateProps) => {
+  const { type, checked, disabled, invalid } = props
   const modifiers = {
+    'rbcb--checkbox': type === 'checkbox',
+    'rbcb--radio': type === 'radio',
     '--checked': checked,
     '--disabled': disabled,
     '--invalid': invalid,
@@ -22,7 +25,7 @@ export const checkboxTemplate = (props: RbcbTemplateProps) => {
       <div class="rbcb__perimeter"></div>
       <div class="rbcb__toggle">
         ${when(
-          checked,
+          type === 'checkbox' && checked,
           () =>
             html`<gds-icon-checkmark
               class="rbcb__icon"

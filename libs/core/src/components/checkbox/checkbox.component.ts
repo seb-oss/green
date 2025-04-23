@@ -4,7 +4,7 @@ import { when } from 'lit/directives/when.js'
 import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
 import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
-import { checkboxTemplate } from '../../shared-styles/rbcb-toggle.template'
+import { rbcbTemplate } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
@@ -94,7 +94,8 @@ export class GdsCheckbox extends GdsFormControlElement {
         label=${this.label}
         type="checkbox"
       >
-        ${checkboxTemplate({
+        ${rbcbTemplate({
+          type: 'checkbox',
           checked: this.checked,
           disabled: this.disabled,
           invalid: this.invalid,

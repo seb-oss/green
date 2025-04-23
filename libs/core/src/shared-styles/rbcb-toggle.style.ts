@@ -12,6 +12,7 @@ export default css`
     --_toggle-size: var(--gds-space-m);
     --_toggle-radius: var(--gds-space-2xs);
     --_perimeter-size: var(--gds-space-xl);
+    --_toggle-border-width-checked: var(--gds-space-s);
 
     --_perimeter-bg-mix: color-mix(
       in srgb,
@@ -34,6 +35,11 @@ export default css`
     height: var(--_toggle-size);
     margin-block-start: calc(var(--gds-space-4xs) * 2);
     cursor: pointer;
+  }
+
+  .rbcb--radio {
+    --_toggle-radius: var(--gds-space-max);
+    --_toggle-border-width-checked: var(--gds-space-2xs);
   }
 
   .rbcb__toggle {
@@ -89,7 +95,7 @@ export default css`
    */
 
   .--checked .rbcb__toggle {
-    box-shadow: inset 0 0 0 var(--gds-space-s)
+    box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
       var(--gds-color-l3-border-primary);
   }
 
@@ -137,6 +143,12 @@ export default css`
     :host(:hover) .rbcb__perimeter {
       background-color: var(--_perimeter-bg-mix);
       scale: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rbcb__toggle {
+      transition: none;
     }
   }
 

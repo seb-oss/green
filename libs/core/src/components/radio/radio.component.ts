@@ -3,6 +3,8 @@ import { property, state } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
 import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
 import { gdsCustomElement, html } from '../../scoping'
+import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
+import { rbcbTemplate } from '../../shared-styles/rbcb-toggle.template'
 import { watch } from '../../utils/decorators/watch'
 import { styles } from './radio.styles'
 
@@ -14,7 +16,7 @@ import { styles } from './radio.styles'
  */
 @gdsCustomElement('gds-radio', { dependsOn: [GdsSelectionFieldLabel] })
 export class GdsRadio extends GdsElement {
-  static styles = [styles]
+  static styles = [rbcbToggleStyles, styles]
 
   /**
    * The label displayed next to the radio button.
@@ -124,10 +126,12 @@ export class GdsRadio extends GdsElement {
         label=${this.label}
         type="radio"
       >
-        <div class="radio">
-          <div class="state"></div>
-          <div class="disc"></div>
-        </div>
+        ${rbcbTemplate({
+          type: 'radio',
+          checked: this.checked,
+          disabled: this.disabled,
+          invalid: this.invalid,
+        })}
       </gds-selection-field-label>
     `
   }
