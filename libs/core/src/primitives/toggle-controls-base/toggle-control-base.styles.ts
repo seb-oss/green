@@ -14,20 +14,18 @@ export const styles = css`
   @layer base {
     * {
       box-sizing: border-box;
-      --_color: var(--_radio-label-color, inherit);
     }
 
-    .selection-field-container {
+    .container {
       display: flex;
       gap: var(--gds-space-s);
       cursor: pointer;
     }
 
-    .selection-field-label {
+    .label {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      color: var(--_color);
     }
 
     .primary-label {

@@ -5,7 +5,6 @@ import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
 import { styles } from './toggle-control-base.styles' // Renamed style file
 
 /**
@@ -50,19 +49,14 @@ export class GdsToggleControlBase extends GdsElement {
     super()
   }
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-selection-field-label')
-  }
-
   render() {
     const classes = {
-      'selection-field-label': true,
+      label: true,
       'has-supporting-text': !!this.supportingText,
     }
 
     return html`
-      <div class="selection-field-container">
+      <div class="container">
         <div class="control-slot">
           <slot></slot>
         </div>
