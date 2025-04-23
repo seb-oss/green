@@ -1,10 +1,10 @@
 import { property, query, state } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
-import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
+import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
-import { rbcbTemplate } from '../../shared-styles/rbcb-toggle.template'
+import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
@@ -18,7 +18,7 @@ import { styles } from './checkbox.styles'
  * @event gds-checkbox-change - Dispatched when the checkbox button is checked.
  */
 @gdsCustomElement('gds-checkbox', {
-  dependsOn: [GdsSelectionFieldLabel, IconCheckmark],
+  dependsOn: [GdsToggleControlBase, IconCheckmark],
 })
 export class GdsCheckbox extends GdsFormControlElement {
   static styles = [tokens, rbcbToggleStyles, styles]
@@ -89,18 +89,17 @@ export class GdsCheckbox extends GdsFormControlElement {
 
   render() {
     return html`
-      <gds-selection-field-label
+      <gds-toggle-control-base
         supporting-text=${this.supportingText}
         label=${this.label}
         type="checkbox"
       >
-        ${rbcbTemplate({
-          type: 'checkbox',
+        ${checkboxToggle({
           checked: this.checked,
           disabled: this.disabled,
           invalid: this.invalid,
         })}
-      </gds-selection-field-label>
+      </gds-toggle-control-base>
     `
   }
 

@@ -1,6 +1,7 @@
-import { html } from 'lit'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
+
+import { html } from '../scoping'
 
 // rbcb = radio button / checkbox
 
@@ -11,7 +12,19 @@ export interface RbcbTemplateProps {
   invalid: boolean
 }
 
-export const rbcbTemplate = (props: RbcbTemplateProps) => {
+/**
+ * Renders a checkbox toggle.
+ */
+export const checkboxToggle = (props: Omit<RbcbTemplateProps, 'type'>) =>
+  template({ ...props, type: 'checkbox' })
+
+/**
+ * Renders a radio toggle.
+ */
+export const radioToggle = (props: Omit<RbcbTemplateProps, 'type'>) =>
+  template({ ...props, type: 'radio' })
+
+const template = (props: RbcbTemplateProps) => {
   const { type, checked, disabled, invalid } = props
   const modifiers = {
     'rbcb--checkbox': type === 'checkbox',

@@ -1,10 +1,10 @@
 import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
-import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
+import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
-import { rbcbTemplate } from '../../shared-styles/rbcb-toggle.template'
+import { radioToggle } from '../../shared-styles/rbcb-toggle.template'
 import { watch } from '../../utils/decorators/watch'
 import { styles } from './radio.styles'
 
@@ -14,7 +14,7 @@ import { styles } from './radio.styles'
  *
  * @event gds-radio-change - Dispatched when the radio button is checked.
  */
-@gdsCustomElement('gds-radio', { dependsOn: [GdsSelectionFieldLabel] })
+@gdsCustomElement('gds-radio', { dependsOn: [GdsToggleControlBase] })
 export class GdsRadio extends GdsElement {
   static styles = [rbcbToggleStyles, styles]
 
@@ -121,18 +121,17 @@ export class GdsRadio extends GdsElement {
 
   render() {
     return html`
-      <gds-selection-field-label
+      <gds-toggle-control-base
         supporting-text=${this.supportingText}
         label=${this.label}
         type="radio"
       >
-        ${rbcbTemplate({
-          type: 'radio',
+        ${radioToggle({
           checked: this.checked,
           disabled: this.disabled,
           invalid: this.invalid,
         })}
-      </gds-selection-field-label>
+      </gds-toggle-control-base>
     `
   }
 }

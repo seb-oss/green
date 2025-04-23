@@ -6,10 +6,10 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
-import { styles } from './selection-field-label.styles' // Renamed style file
+import { styles } from './toggle-control.styles' // Renamed style file
 
 /**
- * @element gds-selection-field-label
+ * @element gds-toggle-control-base
  * @status beta
  * @internal
  *
@@ -21,17 +21,17 @@ import { styles } from './selection-field-label.styles' // Renamed style file
  *
  * Usage:
  * ```html
- * <gds-selection-field-label
+ * <gds-toggle-control-base
  *   label="Choose an option"
  *   supporting-text="Additional information"
  * >
  *   <slot><!-- radio/checkbox element goes here --></slot>
- * </gds-selection-field-label>
+ * </gds-toggle-control-base>
  * ```
  */
-@gdsCustomElement('gds-selection-field-label')
+@gdsCustomElement('gds-toggle-control-base')
 @localized()
-export class GdsSelectionFieldLabel extends GdsElement {
+export class GdsToggleControlBase extends GdsElement {
   static styles = [tokens, styles]
 
   /**
