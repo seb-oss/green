@@ -66,6 +66,16 @@ class Textarea extends GdsFormControlElement<string> {
   resizable: 'auto' | 'manual' | 'false' = 'auto'
 
   /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
    * The maximum number of characters allowed in the field.
    */
   @property({ type: Number })
@@ -167,7 +177,10 @@ class Textarea extends GdsFormControlElement<string> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText="${this.showExtendedSupportingText}"
+          >
             <label for="input" slot="label">${this.label}</label>
             <span slot="supporting-text" id="supporting-text">
               ${this.supportingText}
