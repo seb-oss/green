@@ -227,6 +227,14 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
           this.updateState(option, event)
         }
         return false
+      case 'Tab': // trigger dropdown to close (for typeahead)
+        event.preventDefault()
+        event.stopPropagation()
+        if (this.expanded) {
+          this.setExpanded(false)
+          this.closed.emit()
+        }
+        return false
     }
     return true
   }
@@ -256,7 +264,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
         option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
 
       case 'ArrowUp': // Move up one step to the previous option
@@ -266,7 +274,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
         option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
 
       case 'ArrowDown': // Move down one step to the next option
@@ -277,7 +285,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
         option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
 
       case 'End': // Move to the last options
@@ -285,7 +293,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
         option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
     }
   }
@@ -314,7 +322,7 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * Scrolls focused result into view with a specified offset.
    * @param key the result index which to scroll to.
    */
-  scrollToResult(option: any) {
+  scrollToResult(option: any, focusElement?: boolean) {
     if (!this.optionRefs || !option) return
     const optionRef = this.optionRefs.find(
       (li) => li.nativeElement.id === this.id + '-option-' + option.key,
@@ -331,7 +339,12 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
         })
 
         delta -= window.scrollY || document.documentElement.scrollTop
-        if (delta) window.scrollBy(0, delta > 0 ? -offset : offset)
+        if (delta) {
+          window.scrollBy(0, delta > 0 ? -offset : offset)
+        }
+        if (focusElement) {
+          optionRef.nativeElement.focus()
+        }
       }, 0)
     }
   }
