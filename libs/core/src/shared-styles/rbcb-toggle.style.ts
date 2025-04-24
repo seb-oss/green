@@ -99,6 +99,10 @@ export default css`
       var(--gds-color-l3-border-primary);
   }
 
+  .--disabled {
+    cursor: default;
+  }
+
   .--disabled .rbcb__toggle {
     box-shadow: none;
     background-color: var(--gds-color-l3-content-disabled);
@@ -139,8 +143,8 @@ export default css`
   }
 
   @media (hover: hover) {
-    .rbcb:hover .rbcb__perimeter,
-    :host(:hover) .rbcb__perimeter {
+    .rbcb:hover:not(.--disabled) .rbcb__perimeter,
+    :host(:hover) .rbcb:not(.--disabled) .rbcb__perimeter {
       background-color: var(--_perimeter-bg-mix);
       scale: 1;
     }
@@ -152,8 +156,8 @@ export default css`
     }
   }
 
-  .rbcb:active .rbcb__perimeter,
-  :host(:active) .rbcb__perimeter {
+  .rbcb:active:not(.--disabled) .rbcb__perimeter,
+  :host(:active) .rbcb:not(.--disabled) .rbcb__perimeter {
     background-color: var(--_perimeter-bg-mix-active);
   }
 

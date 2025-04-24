@@ -78,15 +78,6 @@ export class GdsCheckbox extends GdsFormControlElement<string> {
     }
   }
 
-  @watch('disabled')
-  private _handleDisabledChange() {
-    if (this.disabled) {
-      this.setAttribute('inert', '')
-    } else {
-      this.removeAttribute('inert')
-    }
-  }
-
   render() {
     return html`
       <gds-toggle-control-base

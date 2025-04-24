@@ -91,15 +91,6 @@ export class GdsRadio extends GdsElement {
     }
   }
 
-  @watch('disabled')
-  private _handleDisabledChange() {
-    if (this.disabled) {
-      this.setAttribute('inert', '')
-    } else {
-      this.removeAttribute('inert')
-    }
-  }
-
   #handleClick = (e: Event) => {
     if (this.disabled || !this.value || !this.label) return
     e.preventDefault()

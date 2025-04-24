@@ -19,7 +19,6 @@ export const styles = css`
     .container {
       display: flex;
       gap: var(--gds-space-s);
-      cursor: pointer;
     }
 
     .label {
@@ -30,7 +29,7 @@ export const styles = css`
 
     .primary-label {
       font-weight: var(--gds-text-weight-book);
-      cursor: pointer;
+      cursor: inherit;
     }
 
     .supporting-text {
