@@ -3,6 +3,7 @@
 import Script from 'next/script'
 
 import useCookieConsent from '../settings/consent/useCookieConsent'
+import { SettingsProvider as App } from '../settings/provider'
 
 export default function RootLayout({
   children,
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        Fresh and clean
+        <App>Fresh and clean</App>
         <Script id="data-layer">
           {`window["dataLayer"] = {
             "pageName":"seb.io",
