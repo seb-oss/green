@@ -9,6 +9,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   pageExtensions: ['mdx', 'ts', 'tsx'],
+  devIndicators: false,
   experimental: {
     mdxRs: true,
     viewTransition: true,
