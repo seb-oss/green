@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.19
+
+### Patch Changes
+
+- 3a1f67a: fix naming of css variables in checkboxtokens
+
 ## 3.6.18
 
 ### Patch Changes
