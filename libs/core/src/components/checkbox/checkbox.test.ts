@@ -1,23 +1,14 @@
 import { expect } from '@esm-bundle/chai'
-import {
-  aTimeout,
-  fixture,
-  html as testingHtml,
-  waitUntil,
-} from '@open-wc/testing'
-import { sendKeys, sendMouse } from '@web/test-runner-commands'
-import sinon from 'sinon'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
+import { sendKeys } from '@web/test-runner-commands'
 
-import { clickOnElement, conditionToBeTrue, timeout } from '../../utils/testing'
+import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/checkbox'
 
 import type { GdsCheckbox } from '@sebgroup/green-core/components/checkbox'
 
-import {
-  getScopedTagName,
-  htmlTemplateTagFactory,
-} from '@sebgroup/green-core/scoping'
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
