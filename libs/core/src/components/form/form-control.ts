@@ -101,11 +101,6 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({
     type: Boolean,
     reflect: true,
-    attribute: 'aria-invalid',
-    converter: {
-      fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value?.toString(),
-    },
   })
   set invalid(value: boolean) {
     const oldValue = this.invalid
@@ -194,7 +189,18 @@ export abstract class GdsFormControlElement<ValueT = any>
       this._getValidityAnchor(),
     )
 
-    if (oldValue !== this.invalid) this.requestUpdate()
+    if (oldValue !== this.invalid) {
+      this.dispatchEvent(
+        new CustomEvent('gds-validity-state', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            valid: this.validity.valid,
+            message: this.validationMessage,
+          },
+        }),
+      )
+    }
 
     return this.#internals.checkValidity()
   }

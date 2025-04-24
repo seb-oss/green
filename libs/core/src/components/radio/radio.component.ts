@@ -5,7 +5,6 @@ import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/togg
 import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
 import { radioToggle } from '../../shared-styles/rbcb-toggle.template'
-import { watch } from '../../utils/decorators/watch'
 import { styles } from './radio.styles'
 
 /**

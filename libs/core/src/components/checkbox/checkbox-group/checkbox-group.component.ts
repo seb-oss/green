@@ -77,6 +77,11 @@ class CheckboxGroup extends GdsFormControlElement<(string | undefined)[]> {
     this.checkboxes[0]?.focus()
   }
 
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.addEventListener('gds-validity-state', this.#handleInvalidChange)
+  }
+
   render() {
     const classes = {
       'checkbox-group': true,
@@ -90,9 +95,16 @@ class CheckboxGroup extends GdsFormControlElement<(string | undefined)[]> {
       class=${classMap(classes)}
       aria-labelledby="group-label"
       aria-describedby="supporting-text extended-supporting-text footer"
+      aria-invalid=${this.invalid}
     >
       ${this.#renderCheckboxGroupContents()}
     </div>`
+  }
+
+  #handleInvalidChange = () => {
+    this.checkboxes.forEach((checkbox) => {
+      checkbox.invalid = this.invalid
+    })
   }
 
   #renderCheckboxGroupContents() {
