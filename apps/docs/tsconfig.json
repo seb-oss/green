@@ -1,64 +1,41 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "preserve",
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "strict": true,
-    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "jsx": "preserve",
     "incremental": true,
-    "types": ["jest", "node"],
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "content": [".contentlayer/generated"],
-      "@/*": ["apps/docs/design/blocks/*"],
-      "core/*": ["apps/docs/design/core/*"],
-      "#/*": ["apps/docs/design/styles/*"],
-      "&/*": ["apps/docs/design/layouts/*"],
-      "m/*": ["apps/docs/design/mdx/*"],
-      "example/*": ["apps/docs/design/example/*"],
-      "$/*": ["apps/docs/utils/*"],
-      "public/*": ["apps/docs/public/*"],
-      "@sebgroup/extract": ["libs/extract/src/index.ts"],
-      "@sebgroup/fonts": ["libs/fonts/"],
-      "@sebgroup/fonts/*": ["libs/fonts/*"],
-      "@sebgroup/green-angular": ["libs/angular/src/index.ts"],
-      "@sebgroup/green-angular-charts": ["libs/angular-charts/src/index.ts"],
-      "@sebgroup/green-angular-dev/*": ["apps/angular-lib-dev/*"],
-      "@sebgroup/green-angular/*": ["libs/angular/*"],
-      "@sebgroup/green-charts": ["libs/charts/src/index.ts"],
-      "@sebgroup/green-core": ["dist/libs/core/src"],
-      "@sebgroup/green-core/*": ["dist/libs/core/src/*"],
-      "@sebgroup/green-core/react": ["dist/libs/core/src/generated/react"],
-      "@sebgroup/green-core/react/*": ["dist/libs/core/src/generated/react/*"],
-      "@sebgroup/green-react": ["libs/react/src/index.ts"],
-      "@sebgroup/green-react/core/*": ["libs/react/src/core"],
-      "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"],
-      "@sebgroup/green-tokens": ["dist/libs/tokens"],
-      "@sebgroup/green-tokens/*": ["dist/libs/tokens/*"],
-      "@sebgroup/repo-tools": ["dist/repo-tools/src/index.ts"]
+      "@/*": [
+        "./*"
+      ]
     }
   },
   "include": [
-    "**/*.css",
+    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js",
-    "**/*.jsx",
-    "../../apps/docs/.next/types/**/*.ts",
-    "../../dist/apps/docs/.next/types/**/*.ts",
-    "next-env.d.ts",
-    ".next/types/**/*.ts",
-    "../../.contentlayer/generated",
-    "app/api/figma.js"
+    ".next/types/**/*.ts"
   ],
-  "exclude": ["jest.config.ts"]
+  "exclude": [
+    "jest.config.ts"
+  ]
 }
