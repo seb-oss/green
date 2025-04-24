@@ -29,6 +29,8 @@ export interface GdsValidator {
  * other common form control functionality that all Green Core form controls share.
  *
  * @internal
+ *
+ * @event gds-validity-state - Dispatched when the validity state of the form control is changed by a validator.
  */
 export abstract class GdsFormControlElement<ValueT = any>
   extends GdsElement
