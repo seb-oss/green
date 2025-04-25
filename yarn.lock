@@ -4491,13 +4491,6 @@
   dependencies:
     "@nx/devkit" "16.8.1"
 
-"@nrwl/devkit@17.3.1":
-  version "17.3.1"
-  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-17.3.1.tgz#9fc67510926ee62b717d2146b34432bdd231ff24"
-  integrity sha512-MtHlsdErSz0Z1j8j+qAKUafWzMs3XcHgXmJomjUzect1jS/HtmbcDvdMv9GwVtk+67JD+7ca2CWjk2atv6dZdw==
-  dependencies:
-    "@nx/devkit" "17.3.1"
-
 "@nx/angular@20.0.10":
   version "20.0.10"
   resolved "https://registry.yarnpkg.com/@nx/angular/-/angular-20.0.10.tgz#8dbefe8c659d050a00a05d6868cd15c093674d20"
@@ -4546,20 +4539,6 @@
     semver "7.5.3"
     tmp "~0.2.1"
     tslib "^2.3.0"
-
-"@nx/devkit@17.3.1":
-  version "17.3.1"
-  resolved "https://registry.yarnpkg.com/@nx/devkit/-/devkit-17.3.1.tgz#ecaf2db7a66c0209d23a2e6165f5ca53db22e3b2"
-  integrity sha512-E44feT7x/pGTzMWSndjTAoBXvZYEdy2SU99O14LdW7atUK4gv0glKUfyq6nNFULrs6r173WKfJgfmJDL3l78lg==
-  dependencies:
-    "@nrwl/devkit" "17.3.1"
-    ejs "^3.1.7"
-    enquirer "~2.3.6"
-    ignore "^5.0.4"
-    semver "7.5.3"
-    tmp "~0.2.1"
-    tslib "^2.3.0"
-    yargs-parser "21.1.1"
 
 "@nx/devkit@20.0.10":
   version "20.0.10"
@@ -4891,17 +4870,6 @@
     tslib "^2.3.0"
     yargs-parser "21.1.1"
 
-"@nxkit/style-dictionary@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@nxkit/style-dictionary/-/style-dictionary-5.0.0.tgz#1a5cf44ef1342fba61d6865a7306b91b1f413de2"
-  integrity sha512-bBbPcE10TwngwSF5ItSmoJPOMrmVKgbwC0sI2eEkR7zt/pyrPzrB58AQ9Zan5pSr/sGrUFEHoHdv8Hi9qTq5tA==
-  dependencies:
-    "@nx/devkit" "17.3.1"
-    "@phenomnomnominal/tsquery" "^5.0.0"
-    fs-extra "^11.1.0"
-    ts-node "10.9.1"
-    tslib "^2.3.0"
-
 "@open-wc/dedupe-mixin@^1.4.0":
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/@open-wc/dedupe-mixin/-/dedupe-mixin-1.4.0.tgz#b3c58f8699b197bb5e923d624c720e67c9f324d6"
@@ -5199,7 +5167,7 @@
   dependencies:
     parse5 "^7.0.0"
 
-"@phenomnomnominal/tsquery@^5.0.0", "@phenomnomnominal/tsquery@~5.0.1":
+"@phenomnomnominal/tsquery@~5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@phenomnomnominal/tsquery/-/tsquery-5.0.1.tgz#a2a5abc89f92c01562a32806655817516653a388"
   integrity sha512-3nVv+e2FQwsW8Aw6qTU6f+1rfcJ3hrcnvH/mu9i8YhxO+9sqbOfpL8m6PbET5+xKOlz/VSbp0RoYWYCtIsnmuA==

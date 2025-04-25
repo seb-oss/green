@@ -20,17 +20,28 @@ export default {
       return token.type !== 'color'
     },
   },
+  'no-colors-no-ref': {
+    name: 'no-colors-no-ref',
+    filter: async (token) => {
+      return token.type !== 'color' && !token.path.includes('ref')
+    },
+  },
   'is-color': {
     name: 'is-color',
     filter: async (token) => {
       return token.type === 'color'
     },
   },
-
   'is-color-no-ref': {
     name: 'is-color-no-ref',
     filter: async (token) => {
       return token.type === 'color' && !token.path.includes('ref')
+    },
+  },
+  'is-color-is-ref': {
+    name: 'is-color-is-ref',
+    filter: async (token) => {
+      return token.type === 'color' && token.path.includes('ref')
     },
   },
   isRef: {

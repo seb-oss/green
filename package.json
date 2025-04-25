@@ -149,7 +149,6 @@
     "@nx/web": "20.0.10",
     "@nx/webpack": "20.0.10",
     "@nx/workspace": "20.0.10",
-    "@nxkit/style-dictionary": "^5.0.0",
     "@open-wc/testing": "^4.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
     "@schematics/angular": "~15.1.0",

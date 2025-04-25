@@ -136,7 +136,7 @@ const formats = {
     name: 'green/android-kotlin-class-tree',
     format: ({ dictionary, options, file, platform }) => {
       let allTokens
-      const { outputReferences, package, import } =  options
+      const { outputReferences } = options
       options = setSwiftFileProperties(
         options,
         'class',

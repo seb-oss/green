@@ -60,7 +60,12 @@ await Promise.all(
               {
                 destination: `variables.css`,
                 format: 'css/only-variables',
-                filter: 'no-colors',
+                filter: 'no-colors-no-ref',
+              },
+              {
+                destination: `variables.ref.css`,
+                format: 'css/only-variables',
+                filter: 'is-color-is-ref',
               },
               {
                 destination: `variables.${colorScheme}.css`,
@@ -86,6 +91,11 @@ await Promise.all(
             prefix: 'gds-',
             files: [
               {
+                destination: `colors.ref.css`,
+                format: 'css/variables',
+                filter: 'is-color-is-ref',
+              },
+              {
                 destination: `variables.${colorScheme}.css`,
                 format: 'css/variables',
                 filter: 'is-color-no-ref',
@@ -109,7 +119,12 @@ await Promise.all(
               {
                 destination: `variables.css`,
                 format: 'css/variables',
-                filter: 'no-colors',
+                filter: 'no-colors-no-ref',
+              },
+              {
+                destination: `_mixin.colors.ref.scss`,
+                format: 'scss/mixin',
+                filter: 'is-color-is-ref',
               },
               {
                 destination: `_mixin.${colorScheme}.scss`,

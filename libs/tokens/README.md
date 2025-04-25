@@ -32,7 +32,7 @@ An example of a token name is: `gds.sys.color.l3.background.primary`
 3. `color` is the type of the token. Can be: color, dimension, font-family and more. See [section 8 in the Design Tokens Format Module](https://tr.designtokens.org/format/#types) for more types.
 4. `l3.background.primary` the remaing parts are descriptive words communicating the tokens role. In this care we use a [level system](https://storybook.seb.io/latest/core/?path=/docs/style-colors--docs) to create a color structure.
 
-### Style Dictionary
+## Style Dictionary
 
 Tokens are transformed with [Style Dictionary](https://amzn.github.io/style-dictionary/) so they can be used in all platforms that Green Design System caters for.
 
@@ -43,7 +43,25 @@ $ yarn install
 $ nx run tokens:build
 ```
 
-The yarn build task is what performs the style dictionary build steps to generate the files for each platform. Every time you change something in the style dictionary, like changing colors or adding design tokens, you will have to run this command again to generate the files.
+The NX build task is what performs the style dictionary build steps to generate the files for each platform. Every time you change something in the style dictionary, like changing colors or adding design tokens, you will have to run this command again to generate the files.
+
+### Build script
+
+We use a build script: `style-dictionary.build.js` to execute Style Dictionary. Here we loop over Themes, Colors Schemes and other modes to dynamically create a config and run Style Dictionary so it outputs the needed artifacts.
+
+### Themes
+
+GDS currently have two themes, `2016` & `2023` which are version of SEB`s digital design.
+
+### Color Schemes
+
+Colors schemes are light mode and dark mode.
+
+### Custom hooks and templates
+
+In order to create the artifacts GDS needs for all platforms we have created custom [hooks](https://styledictionary.com/version-4/migration/#hooks-apis). GDS uses [actions](https://styledictionary.com/reference/hooks/actions/), [filters](https://styledictionary.com/reference/hooks/filters/), [formats](https://styledictionary.com/reference/hooks/formats/) and [transforms](https://styledictionary.com/reference/hooks/transforms/).
+
+You can find each of the custom hooks in the corresponding files `actions.js`, `filters.js`, `formats.js` and `transforms.js`. They are imported into the build script `style-dictionary.build.js`.
 
 ## Support
 
