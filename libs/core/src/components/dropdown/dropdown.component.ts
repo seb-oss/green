@@ -179,6 +179,16 @@ export class GdsDropdown<ValueT = any>
   disableMobileStyles = false
 
   /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
    * Get the options of the dropdown.
    */
   get options() {
@@ -267,7 +277,10 @@ export class GdsDropdown<ValueT = any>
       ${when(
         !this.plain && !this.hideLabel,
         () => html`
-          <gds-form-control-header class="size-${this.size}">
+          <gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText="${this.showExtendedSupportingText}"
+          >
             <label id="label" for="trigger" slot="label">${this.label}</label>
             ${when(
               this.supportingText.length > 0,

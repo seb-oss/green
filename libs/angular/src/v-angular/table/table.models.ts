@@ -32,6 +32,12 @@ export interface TableHeaderOptions {
    * it will instruct the table to sort the data based on this specific column.
    */
   order?: SortingOrder
+
+  /**
+   * Dynamically hide or show the label and data on mobile view.
+   */
+  hideLabelOnMobile?: boolean
+  hidePropertyOnMobile?: boolean
 }
 
 /** Options applying to table rows */
