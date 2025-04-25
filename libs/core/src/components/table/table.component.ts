@@ -100,6 +100,52 @@ export class GdsTable extends GdsElement {
   private selectedBranches: string[] = []
 
   @state()
+  private selectedRows: Set<number> = new Set() // Using row IDs
+
+  // Add these methods for row selection
+  private handleSelectAll(e: Event) {
+    const checkbox = e.target as HTMLInputElement
+    if (checkbox.checked) {
+      // Select all visible rows
+      this.filteredData.forEach((row) => this.selectedRows.add(row.id))
+    } else {
+      // Deselect all rows
+      this.selectedRows.clear()
+    }
+    this.requestUpdate()
+    this.dispatchSelectionChange()
+  }
+
+  private handleRowSelect(rowId: number, e: Event) {
+    const checkbox = e.target as HTMLInputElement
+    if (checkbox.checked) {
+      this.selectedRows.add(rowId)
+    } else {
+      this.selectedRows.delete(rowId)
+    }
+    this.requestUpdate()
+    this.dispatchSelectionChange()
+  }
+
+  private isAllSelected(): boolean {
+    return (
+      this.filteredData.length > 0 &&
+      this.filteredData.every((row) => this.selectedRows.has(row.id))
+    )
+  }
+
+  private dispatchSelectionChange() {
+    this.dispatchEvent(
+      new CustomEvent('selection-change', {
+        detail: {
+          selectedRows: Array.from(this.selectedRows),
+          selectedCount: this.selectedRows.size,
+        },
+      }),
+    )
+  }
+
+  @state()
   private sortConfig = {
     field: null as string | null,
     direction: 'asc' as 'asc' | 'desc',
@@ -143,23 +189,6 @@ export class GdsTable extends GdsElement {
     }
     this.requestUpdate()
   }
-
-  // Handle branch selection
-  // private handleBranchFilter(e: CustomEvent) {
-  //   this.selectedBranches = e.detail.value
-  //   this.filterDataByBranches()
-  // }
-
-  // private filterDataByBranches() {
-  //   let filtered = this.data
-  //   if (this.selectedBranches.length > 0) {
-  //     filtered = this.data.filter((row) =>
-  //       this.selectedBranches.includes(row.branch),
-  //     )
-  //   }
-  //   this.filteredData = this.sortData(filtered)
-  //   this.requestUpdate()
-  // }
 
   private handleBranchFilter(e: CustomEvent) {
     this.selectedBranches = e.detail.value
@@ -271,7 +300,13 @@ export class GdsTable extends GdsElement {
           <!-- Table Header Row -->
           <div class="gds-table-row gds-table-head">
             <div class="gds-row-select">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                .checked=${this.isAllSelected()}
+                .indeterminate=${this.selectedRows.size > 0 &&
+                !this.isAllSelected()}
+                @change=${this.handleSelectAll}
+              />
             </div>
             ${visibleColumns.map(
               (column) => html`
@@ -299,7 +334,11 @@ export class GdsTable extends GdsElement {
                   <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
                 </div>
                 <div class="gds-row-select">
-                  <input type="checkbox" />
+                  <input
+                    type="checkbox"
+                    .checked=${this.selectedRows.has(row.id)}
+                    @change=${(e: Event) => this.handleRowSelect(row.id, e)}
+                  />
                 </div>
 
                 ${visibleColumns.map((column) => {
@@ -398,7 +437,8 @@ export class GdsTable extends GdsElement {
         <!-- Table Footer -->
         <div class="gds-table-footer">
           <gds-flex flex="1">
-            0 of ${this.data.length} row(s) selected.
+            ${this.selectedRows.size} of ${this.filteredData.length} row(s)
+            selected.
           </gds-flex>
 
           <div class="footer-actions">
