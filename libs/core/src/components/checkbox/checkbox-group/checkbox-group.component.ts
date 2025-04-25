@@ -19,7 +19,7 @@ import { styles } from './checkbox-group.styles'
 import type { GdsCheckbox } from '../checkbox.component'
 
 @localized()
-class CheckboxGroup extends GdsFormControlElement<(string | undefined)[]> {
+class CheckboxGroup extends GdsFormControlElement<string[]> {
   static styles = [styles]
 
   /**
@@ -50,6 +50,14 @@ class CheckboxGroup extends GdsFormControlElement<(string | undefined)[]> {
     reflect: true,
   })
   showExtendedSupportingText = false
+
+  get value(): string[] {
+    return this._internalValue || []
+  }
+
+  set value(value: string[]) {
+    this._internalValue = value
+  }
 
   /**
    * Returns an array of `<gds-checkbox>` elements in the checkbox group.

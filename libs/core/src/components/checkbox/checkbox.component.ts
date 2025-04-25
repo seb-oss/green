@@ -15,12 +15,12 @@ import { styles } from './checkbox.styles'
  * @element gds-checkbox
  * @status beta
  *
- * @event gds-checkbox-change - Dispatched when the checkbox button is checked.
+ * @event gds-checkbox-change - Dispatched when the checkbox is checked.
  */
 @gdsCustomElement('gds-checkbox', {
   dependsOn: [GdsToggleControlBase, IconCheckmark],
 })
-export class GdsCheckbox extends GdsFormControlElement<string> {
+export class GdsCheckbox extends GdsFormControlElement {
   static styles = [tokens, rbcbToggleStyles, styles]
 
   /**
@@ -47,6 +47,14 @@ export class GdsCheckbox extends GdsFormControlElement<string> {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
+
+  get value(): string {
+    return this._internalValue || ''
+  }
+
+  set value(value: string) {
+    this._internalValue = value
+  }
 
   @query('.rbcb')
   private _elCheckbox!: HTMLElement
