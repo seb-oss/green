@@ -1,0 +1,258 @@
+import { nothing, unsafeCSS } from 'lit'
+
+import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
+import style from './table.styles.css?inline'
+
+import '../input'
+import '../dropdown'
+import '../card'
+import '../div'
+import '../context-menu'
+import '../icon/icons/magnifying-glass'
+import '../icon/icons/filter'
+import '../icon/icons/arrow-left'
+import '../icon/icons/arrow-right'
+import '../icon/icons/chevron-double-left'
+import '../icon/icons/chevron-left'
+import '../icon/icons/chevron-double-right'
+import '../icon/icons/chevron-right'
+import '../icon/icons/dot-grid-one-vertical'
+import '../icon/icons/dot-grid-two'
+import '../icon/icons/car'
+import '../icon/icons/text-edit'
+import '../icon/icons/bank'
+import '../icon/icons/ai'
+import '../icon/icons/map-pin'
+
+/**
+ * @element gds-table
+ */
+@gdsCustomElement('gds-table')
+export class GdsTable extends GdsElement {
+  static styles = [tokens, unsafeCSS(style)]
+
+  connectedCallback(): void {
+    super.connectedCallback()
+  }
+
+  render() {
+    return html`
+      <div class="gds-table">
+        <gds-div class="gds-table-filter">
+          <div class="gds-filter-content">
+            <gds-input size="small" plain value="search" clearable>
+              <gds-icon-magnifying-glass
+                slot="lead"
+              ></gds-icon-magnifying-glass>
+            </gds-input>
+            <gds-dropdown
+              size="small"
+              searchable
+              plain
+              combobox
+              multiple
+              placeholder="Filter"
+            >
+              <gds-option isplaceholder>Filter by branches</gds-option>
+              <gds-option value="columns">
+                <span>Branch One</span>
+                <gds-badge variant="notice" size="small" rounded>
+                  24
+                </gds-badge>
+              </gds-option>
+              <gds-option value="branch-two">
+                <span>Branch Two</span>
+                <gds-badge variant="notice" size="small" rounded>
+                  24
+                </gds-badge>
+              </gds-option>
+            </gds-dropdown>
+          </div>
+          <div class="gds-filter-columns">
+            <gds-dropdown size="small" searchable plain>
+              <gds-option value="columns">Columns</gds-option>
+            </gds-dropdown>
+          </div>
+        </gds-div>
+        <div class="gds-table-content">
+          <div class="gds-table-row gds-table-head">
+            <div class="gds-row-select">
+              <input type="checkbox" />
+            </div>
+            <div class="gds-table-head-column">
+              <div class="column-name">Title</div>
+              <gds-icon-filter></gds-icon-filter>
+            </div>
+            <div class="gds-table-head-column">
+              <div class="column-name">Services</div>
+              <gds-icon-filter></gds-icon-filter>
+            </div>
+            <div class="gds-table-head-column">
+              <div class="column-name">Branches</div>
+              <gds-icon-filter></gds-icon-filter>
+            </div>
+            <div class="gds-table-head-column">
+              <div class="column-name">Street</div>
+              <gds-icon-filter></gds-icon-filter>
+            </div>
+          </div>
+          <div class="gds-table-row">
+            <div class="gds-row-drag">
+              <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
+            </div>
+            <div class="gds-row-select">
+              <input type="checkbox" />
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-icon-ai></gds-icon-ai>
+                </div>
+                <div class="cell-content">TEST</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-badge size="small" variant="positive">New</gds-badge>
+                </div>
+                <div class="cell-content">Cell content</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-icon-bank></gds-icon-bank>
+                </div>
+                <div class="cell-content">Branch</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-icon-map-pin></gds-icon-map-pin>
+                </div>
+                <div class="cell-content">Street</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-row-options">
+              <gds-icon-dot-grid-one-vertical></gds-icon-dot-grid-one-vertical>
+            </div>
+          </div>
+          <div class="gds-table-row">
+            <div class="gds-row-drag">
+              <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
+            </div>
+            <div class="gds-row-select">
+              <input type="checkbox" />
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-icon-ai></gds-icon-ai>
+                </div>
+                <div class="cell-content">TEST</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-badge size="small" variant="negative">
+                    Closing
+                  </gds-badge>
+                </div>
+                <div class="cell-content">Cell content</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-icon-bank></gds-icon-bank>
+                </div>
+                <div class="cell-content">Branch</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-cell">
+              <div class="cell-content">
+                <div class="cell-lead">
+                  <gds-icon-map-pin></gds-icon-map-pin>
+                </div>
+                <div class="cell-content">Street</div>
+              </div>
+              <gds-button size="xs" rank="tertiary">
+                <gds-icon-text-edit></gds-icon-text-edit>
+              </gds-button>
+            </div>
+            <div class="gds-row-options">
+              <gds-icon-dot-grid-one-vertical></gds-icon-dot-grid-one-vertical>
+            </div>
+          </div>
+        </div>
+        <div class="gds-table-footer">
+          <gds-flex flex="1"> 0 of 100 row(s) selected. </gds-flex>
+
+          <div class="footer-actions">
+            <span>Number of rows</span>
+            <div class="footer-actions-rows">
+              <gds-dropdown size="small" searchable plain class="rows-dropdown">
+                <gds-option value="10"> 10 </gds-option>
+                <gds-option value="20"> 10 </gds-option>
+                <gds-option value="40"> 10 </gds-option>
+                <gds-option value="100"> 10 </gds-option>
+                <gds-option value="1000"> 10 </gds-option>
+              </gds-dropdown>
+            </div>
+
+            <gds-flex
+              flex="1"
+              align-items="center"
+              justify-content="space-between"
+            >
+              <span>1-10 of 100</span>
+            </gds-flex>
+            <gds-flex>
+              <gds-button size="small" rank="tertiary">
+                <gds-icon-chevron-double-left></gds-icon-chevron-double-left>
+              </gds-button>
+              <gds-button size="small" rank="tertiary">
+                <gds-icon-chevron-left></gds-icon-chevron-left>
+              </gds-button>
+              <gds-button size="small" rank="tertiary">
+                <gds-icon-chevron-right></gds-icon-chevron-right>
+              </gds-button>
+              <gds-button size="small" rank="tertiary">
+                <gds-icon-chevron-double-right></gds-icon-chevron-double-right>
+              </gds-button>
+            </gds-flex>
+          </div>
+        </div>
+      </div>
+    `
+  }
+}
