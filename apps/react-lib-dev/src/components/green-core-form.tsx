@@ -188,11 +188,10 @@ export const GreenCoreFormExample = () => {
                 validator={requiredValidator}
                 value={formData.radio[0]}
                 onInput={(e) => {
-                  console.log('Radio group input', e)
                   const radioGroup = e.currentTarget as GdsRadioGroupType
                   setFormData({
                     ...formData,
-                    radio: [radioGroup.value, true],
+                    radio: [radioGroup.value, radioGroup.validity.valid],
                   })
                 }}
                 error-message="Please select an option"
@@ -223,7 +222,10 @@ export const GreenCoreFormExample = () => {
                   const checkboxGroup = e.currentTarget as GdsCheckboxGroupType
                   setFormData({
                     ...formData,
-                    checkbox: [checkboxGroup.value, true],
+                    checkbox: [
+                      checkboxGroup.value,
+                      checkboxGroup.validity.valid,
+                    ],
                   })
                 }}
                 error-message="Please select an option"
