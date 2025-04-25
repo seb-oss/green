@@ -100,6 +100,57 @@ export class GdsTable extends GdsElement {
   private selectedBranches: string[] = []
 
   @state()
+  private draggedColumn: string | null = null
+
+  @state()
+  private dragOverColumn: string | null = null
+
+  // Add these methods for drag and drop
+  private handleDragStart(e: DragEvent, columnKey: string) {
+    this.draggedColumn = columnKey
+    const target = e.target as HTMLElement
+    target.classList.add('dragging')
+    e.dataTransfer?.setData('text/plain', columnKey)
+  }
+
+  private handleDragOver(e: DragEvent, columnKey: string) {
+    e.preventDefault()
+    this.dragOverColumn = columnKey
+  }
+
+  private handleDragEnd(e: DragEvent) {
+    const target = e.target as HTMLElement
+    target.classList.remove('dragging')
+    this.draggedColumn = null
+    this.dragOverColumn = null
+  }
+
+  private handleDrop(e: DragEvent, targetColumnKey: string) {
+    e.preventDefault()
+    if (!this.draggedColumn || this.draggedColumn === targetColumnKey) return
+
+    const fromIndex = this.columns.findIndex(
+      (col) => col.key === this.draggedColumn,
+    )
+    const toIndex = this.columns.findIndex((col) => col.key === targetColumnKey)
+
+    // Reorder columns
+    const newColumns = [...this.columns]
+    const [movedColumn] = newColumns.splice(fromIndex, 1)
+    newColumns.splice(toIndex, 0, movedColumn)
+
+    this.columns = newColumns
+    this.draggedColumn = null
+    this.dragOverColumn = null
+
+    this.dispatchEvent(
+      new CustomEvent('column-reorder', {
+        detail: { columns: this.columns },
+      }),
+    )
+  }
+
+  @state()
   private selectedRows: Set<number> = new Set() // Using row IDs
 
   // Add these methods for row selection
@@ -196,43 +247,155 @@ export class GdsTable extends GdsElement {
   }
 
   // Sorting methods
-  private sortData(data: typeof DUMMY_DATA) {
+  private sortData(data: typeof DUMMY_DATA): typeof DUMMY_DATA {
     if (!this.sortConfig.field) return data
 
     return [...data].sort((a, b) => {
-      let aVal = a[this.sortConfig.field as keyof typeof a]
-      let bVal = b[this.sortConfig.field as keyof typeof b]
+      let aVal: any = a[this.sortConfig.field as keyof typeof a]
+      let bVal: any = b[this.sortConfig.field as keyof typeof b]
 
+      // Handle nested status object
       if (this.sortConfig.field === 'status') {
         aVal = a.status.label
         bVal = b.status.label
       }
 
+      // Convert to lowercase if string
+      if (typeof aVal === 'string') aVal = aVal.toLowerCase()
+      if (typeof bVal === 'string') bVal = bVal.toLowerCase()
+
       const direction = this.sortConfig.direction === 'asc' ? 1 : -1
-      return aVal > bVal ? direction : -direction
+
+      if (aVal < bVal) return -1 * direction
+      if (aVal > bVal) return 1 * direction
+      return 0
     })
   }
 
-  private handleColumnClick(columnKey: string) {
+  private handleColumnClick(columnKey: string, e: MouseEvent) {
+    // Prevent sorting when clicking drag handle
+    if ((e.target as HTMLElement).closest('.column-drag-handle')) return
+
     if (this.sortConfig.field === columnKey) {
+      // Toggle direction if same column
       this.sortConfig = {
-        ...this.sortConfig,
+        field: columnKey,
         direction: this.sortConfig.direction === 'asc' ? 'desc' : 'asc',
       }
     } else {
+      // Set new column with default ascending direction
       this.sortConfig = {
         field: columnKey,
         direction: 'asc',
       }
     }
 
+    // Apply sorting
     this.filteredData = this.sortData(this.filteredData)
     this.requestUpdate()
+
+    // Dispatch sort change event
+    this.dispatchEvent(
+      new CustomEvent('sort-change', {
+        detail: { ...this.sortConfig },
+      }),
+    )
   }
 
   private getSortIconClass(columnKey: string): string {
     if (this.sortConfig.field !== columnKey) return ''
     return this.sortConfig.direction === 'asc' ? 'asc' : 'desc'
+  }
+
+  private renderRow(
+    row: (typeof DUMMY_DATA)[0],
+    visibleColumns: SortableColumn[],
+  ) {
+    return html`
+      <div
+        class="gds-table-row ${this.selectedRows.has(row.id) ? 'selected' : ''}"
+      >
+        <div class="gds-row-drag">
+          <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
+        </div>
+        <div class="gds-row-select">
+          <input
+            type="checkbox"
+            .checked=${this.selectedRows.has(row.id)}
+            @change=${(e: Event) => this.handleRowSelect(row.id, e)}
+          />
+        </div>
+
+        ${visibleColumns.map((column) => {
+          switch (column.key) {
+            case 'title':
+              return html`
+                <div class="gds-cell">
+                  <div class="cell-content">
+                    <div class="cell-lead">
+                      <gds-icon-ai></gds-icon-ai>
+                    </div>
+                    <div class="cell-content">${row.title}</div>
+                  </div>
+                  <gds-button size="xs" rank="tertiary" class="gds-cell-edit">
+                    <gds-icon-text-edit></gds-icon-text-edit>
+                  </gds-button>
+                </div>
+              `
+            case 'status':
+              return html`
+                <div class="gds-cell">
+                  <div class="cell-content">
+                    <div class="cell-lead">
+                      <gds-badge size="small" variant=${row.status.variant}>
+                        ${row.status.label}
+                      </gds-badge>
+                    </div>
+                    <div class="cell-content">Cell content</div>
+                  </div>
+                  <gds-button size="xs" rank="tertiary" class="gds-cell-edit">
+                    <gds-icon-text-edit></gds-icon-text-edit>
+                  </gds-button>
+                </div>
+              `
+            case 'branch':
+              return html`
+                <div class="gds-cell">
+                  <div class="cell-content">
+                    <div class="cell-lead">
+                      <gds-icon-bank></gds-icon-bank>
+                    </div>
+                    <div class="cell-content">${row.branch}</div>
+                  </div>
+                  <gds-button size="xs" rank="tertiary" class="gds-cell-edit">
+                    <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
+                  </gds-button>
+                </div>
+              `
+            case 'street':
+              return html`
+                <div class="gds-cell">
+                  <div class="cell-content">
+                    <div class="cell-lead">
+                      <gds-icon-map-pin></gds-icon-map-pin>
+                    </div>
+                    <div class="cell-content">${row.street}</div>
+                  </div>
+                  <gds-button size="xs" rank="tertiary" class="gds-cell-edit">
+                    <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
+                  </gds-button>
+                </div>
+              `
+            default:
+              return nothing
+          }
+        })}
+
+        <div class="gds-row-options">
+          <gds-icon-dot-grid-one-vertical></gds-icon-dot-grid-one-vertical>
+        </div>
+      </div>
+    `
   }
 
   render() {
@@ -314,9 +477,23 @@ export class GdsTable extends GdsElement {
                   class="gds-table-head-column ${this.sortConfig.field ===
                   column.key
                     ? 'sorted'
-                    : ''}"
-                  @click=${() => this.handleColumnClick(column.key)}
+                    : ''} 
+           ${this.draggedColumn === column.key ? 'dragging' : ''} 
+           ${this.dragOverColumn === column.key ? 'drag-over' : ''}"
+                  draggable="true"
+                  @dragstart=${(e: DragEvent) =>
+                    this.handleDragStart(e, column.key)}
+                  @dragover=${(e: DragEvent) =>
+                    this.handleDragOver(e, column.key)}
+                  @dragleave=${() => (this.dragOverColumn = null)}
+                  @dragend=${this.handleDragEnd}
+                  @drop=${(e: DragEvent) => this.handleDrop(e, column.key)}
+                  @click=${(e: MouseEvent) =>
+                    this.handleColumnClick(column.key, e)}
                 >
+                  <div class="column-drag-handle">
+                    <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
+                  </div>
                   <div class="column-name">${column.label}</div>
                   <gds-icon-filter
                     class="${this.getSortIconClass(column.key)}"
@@ -327,111 +504,7 @@ export class GdsTable extends GdsElement {
           </div>
 
           <!-- Table Rows -->
-          ${this.filteredData.map(
-            (row) => html`
-              <div class="gds-table-row">
-                <div class="gds-row-drag">
-                  <gds-icon-dot-grid-two></gds-icon-dot-grid-two>
-                </div>
-                <div class="gds-row-select">
-                  <input
-                    type="checkbox"
-                    .checked=${this.selectedRows.has(row.id)}
-                    @change=${(e: Event) => this.handleRowSelect(row.id, e)}
-                  />
-                </div>
-
-                ${visibleColumns.map((column) => {
-                  if (column.key === 'title') {
-                    return html`
-                      <div class="gds-cell">
-                        <div class="cell-content">
-                          <div class="cell-lead">
-                            <gds-icon-ai></gds-icon-ai>
-                          </div>
-                          <div class="cell-content">${row.title}</div>
-                        </div>
-                        <gds-button
-                          size="xs"
-                          rank="tertiary"
-                          class="gds-cell-edit"
-                        >
-                          <gds-icon-text-edit></gds-icon-text-edit>
-                        </gds-button>
-                      </div>
-                    `
-                  }
-                  if (column.key === 'status') {
-                    return html`
-                      <div class="gds-cell">
-                        <div class="cell-content">
-                          <div class="cell-lead">
-                            <gds-badge
-                              size="small"
-                              variant=${row.status.variant}
-                            >
-                              ${row.status.label}
-                            </gds-badge>
-                          </div>
-                          <div class="cell-content">Cell content</div>
-                        </div>
-                        <gds-button
-                          size="xs"
-                          rank="tertiary"
-                          class="gds-cell-edit"
-                        >
-                          <gds-icon-text-edit></gds-icon-text-edit>
-                        </gds-button>
-                      </div>
-                    `
-                  }
-                  if (column.key === 'branch') {
-                    return html`
-                      <div class="gds-cell">
-                        <div class="cell-content">
-                          <div class="cell-lead">
-                            <gds-icon-bank></gds-icon-bank>
-                          </div>
-                          <div class="cell-content">${row.branch}</div>
-                        </div>
-                        <gds-button
-                          size="xs"
-                          rank="tertiary"
-                          class="gds-cell-edit"
-                        >
-                          <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-                        </gds-button>
-                      </div>
-                    `
-                  }
-                  if (column.key === 'street') {
-                    return html`
-                      <div class="gds-cell">
-                        <div class="cell-content">
-                          <div class="cell-lead">
-                            <gds-icon-map-pin></gds-icon-map-pin>
-                          </div>
-                          <div class="cell-content">${row.street}</div>
-                        </div>
-                        <gds-button
-                          size="xs"
-                          rank="tertiary"
-                          class="gds-cell-edit"
-                        >
-                          <gds-icon-chevron-bottom></gds-icon-chevron-bottom>
-                        </gds-button>
-                      </div>
-                    `
-                  }
-                  return nothing
-                })}
-
-                <div class="gds-row-options">
-                  <gds-icon-dot-grid-one-vertical></gds-icon-dot-grid-one-vertical>
-                </div>
-              </div>
-            `,
-          )}
+          ${this.filteredData.map((row) => this.renderRow(row, visibleColumns))}
         </div>
 
         <!-- Table Footer -->
