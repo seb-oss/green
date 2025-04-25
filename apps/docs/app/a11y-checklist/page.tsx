@@ -410,7 +410,7 @@ export default function WcagList() {
   if (!wcagObjects) return <div>Loading...</div>
 
   return (
-    <GdsFlex flex-direction="column">
+    <GdsFlex flex-direction="column" gap="l">
       <GdsFlex flex-direction="column" gap="2xl; m{4xl}" max-width="80ch">
         <GdsFlex flex-direction="column" gap="xl">
           <GdsText tag="h2" id="what-is-green">
@@ -443,21 +443,6 @@ export default function WcagList() {
           </GdsText>
         </GdsFlex>
       </GdsFlex>
-
-      {/* Export/Import CSV buttons */}
-      <GdsFlex gap="m" margin-bottom="m">
-        <GdsButton onClick={exportToCSV} variant="secondary">
-          Exportera till CSV
-        </GdsButton>
-        Importera från CSV
-        <input type="file" accept=".csv" onChange={importFromCSV} />
-      </GdsFlex>
-
-      {csvImportError && (
-        <GdsDiv padding="m" margin-bottom="m" border="error">
-          <GdsText color="error">{csvImportError}</GdsText>
-        </GdsDiv>
-      )}
 
       {/* Filters */}
       <GdsFlex width="70%" gap="s">
@@ -521,8 +506,6 @@ export default function WcagList() {
         </GdsDropdown>
       </GdsFlex>
 
-      {/* Active filters */}
-      <h3>Valda filter:</h3>
       <GdsFlex flex-direction="row" gap="m">
         {/* Kategorier */}
         {selectedCategories.length > 0 && (
@@ -576,11 +559,25 @@ export default function WcagList() {
         )}
       </GdsFlex>
 
-      <GdsFlex>
+      <GdsFlex align-items="center" gap="l">
         <p>
           Visar {filteredWcagList.length} av {wcagObjects.length}{' '}
         </p>
         <GdsButton onClick={resetFilters}>Återställ filter</GdsButton>
+        {/* Export/Import CSV buttons */}
+        <GdsFlex gap="m" margin-bottom="m" align-items="center">
+          <GdsButton onClick={exportToCSV} variant="secondary">
+            Exportera till CSV
+          </GdsButton>
+          Importera från CSV
+          <input type="file" accept=".csv" onChange={importFromCSV} />
+        </GdsFlex>
+
+        {csvImportError && (
+          <GdsDiv padding="m" margin-bottom="m" border="error">
+            <GdsText color="error">{csvImportError}</GdsText>
+          </GdsDiv>
+        )}
       </GdsFlex>
 
       {/* WCAG Items List */}
