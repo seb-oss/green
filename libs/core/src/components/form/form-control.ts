@@ -192,6 +192,7 @@ export abstract class GdsFormControlElement<ValueT = any>
     )
 
     if (oldValue !== this.invalid) {
+      this.requestUpdate('invalid', oldValue)
       this.dispatchEvent(
         new CustomEvent('gds-validity-state', {
           bubbles: true,
