@@ -239,89 +239,141 @@ export default function WcagList() {
   }
 
   // CSV Import functionality
+
   const importFromCSV = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     setCsvImportError('')
-
-    console.log(file)
 
     if (!file) return
 
     const reader = new FileReader()
 
-    //callback
-
-    //debugger efter try
-
     reader.onload = (e) => {
       try {
         const csvText = e.target?.result as string
-        const lines = csvText.split('\n')
-        const headers = lines[0].split(',')
+        if (!csvText) {
+          setCsvImportError('Could not read file content')
+          return
+        }
 
-        // Validate CSV structure
-        const requiredHeaders = ['id', 'status', 'comment']
-        const hasRequiredHeaders = requiredHeaders.every((h) =>
-          headers.includes(h),
+        // Split by lines and handle both \r\n and \n line endings
+        const lines = csvText
+          .split(/\r?\n/)
+          .filter((line) => line.trim().length > 0)
+
+        if (lines.length < 2) {
+          setCsvImportError('CSV file appears to be empty or malformed')
+          return
+        }
+
+        // Use parseCSVLine for header row too to handle quoted column names properly
+        const headers = parseCSVLine(lines[0])
+
+        // Validate CSV structure by checking that all columns from the header array are in the CSV
+        const requiredHeaders = [
+          'id',
+          'topic',
+          'criteria',
+          'category',
+          'level',
+          'principle',
+          'guideline',
+          'statement',
+          'why',
+          'role',
+          'wcag',
+          'status',
+          'comment',
+        ]
+        const hasRequiredHeaders = requiredHeaders.every((header) =>
+          headers.includes(header),
         )
 
         if (!hasRequiredHeaders) {
           setCsvImportError(
-            'CSV filen saknar nödvändiga kolumner (id, status, comment)',
+            'CSV filen saknar nödvändiga kolumner (id, topic, criteria, category, level, principle, guideline, statement, why, role, wcag, status, comment)',
           )
           return
         }
 
         // Create a map of current wcagObjects for easy lookup
-        const currentItems = new Map(wcagObjects.map((item) => [item.id, item]))
-        const updatedItems: WcagItem[] = [...wcagObjects]
+        const currentItems = new Map(
+          wcagObjects.map((item) => [item.id.toString(), item]),
+        ) // Ensure id is a string
+        const updatedItems = [...wcagObjects]
+        let updatedCount = 0
+
+        console.log('Current wcagObjects:', currentItems) // Log current objects for comparison
 
         // Process data rows
         for (let i = 1; i < lines.length; i++) {
           if (!lines[i].trim()) continue // Skip empty lines
 
           const values = parseCSVLine(lines[i])
-          if (values.length !== headers.length) continue // Skip malformed lines
 
-          // Create object from row
+          // Create object from row with appropriate indexing
           const rowData: Record<string, string> = {}
           headers.forEach((header, index) => {
-            rowData[header] = values[index]
+            if (index < values.length) {
+              rowData[header] = values[index]
+            } else {
+              rowData[header] = '' // Handle missing values
+            }
           })
 
-          // Find and update existing item
-          const itemId = rowData['id']
+          console.log('Row data:', rowData) // Log the row data from CSV
+
+          // Clean the id value (remove leading/trailing spaces and invalid characters)
+          const itemId = rowData['id'].trim()
+
+          // Skip rows with invalid or malformed ids
+          if (!itemId || itemId.startsWith('•')) {
+            console.log('Skipping invalid row with id:', itemId)
+            continue
+          }
+
+          // Convert itemId to string to match the Map keys
           const existingItem = currentItems.get(itemId)
+          console.log('Existing item for ID:', itemId, existingItem) // Log if an existing item is found
 
           if (existingItem) {
             const itemIndex = updatedItems.findIndex(
-              (item) => item.id === itemId,
+              (item) => item.id.toString() === itemId, // Ensure both sides are strings
             )
             if (itemIndex !== -1) {
               updatedItems[itemIndex] = {
                 ...existingItem,
-                status: rowData['status'],
-                comment: rowData['comment'],
+                status: rowData['status'] || existingItem.status,
+                comment: rowData['comment'] || existingItem.comment,
               }
+              updatedCount++
             }
           }
         }
 
         // Update state with imported data
         setWcagObjects(updatedItems)
+
+        // Give user feedback on successful import
+        alert(`Successfully updated ${updatedCount} items from CSV`)
       } catch (error) {
         console.error('Error importing CSV:', error)
-        setCsvImportError('Ett fel uppstod vid import av CSV-filen')
+        setCsvImportError(`Ett fel uppstod vid import av CSV-filen: ${error}`)
       }
 
       // Reset file input
       event.target.value = ''
     }
 
+    reader.onerror = () => {
+      setCsvImportError('Failed to read the file')
+      event.target.value = ''
+    }
+
     reader.readAsText(file)
   }
 
-  // Helper function to parse CSV line considering quoted fields
+  // Improved CSV line parsing function
   const parseCSVLine = (line: string): string[] => {
     const result: string[] = []
     let currentField = ''
