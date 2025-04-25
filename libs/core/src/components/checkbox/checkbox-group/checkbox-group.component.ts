@@ -51,11 +51,11 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   })
   showExtendedSupportingText = false
 
-  get value(): string[] {
+  @property({ type: Array })
+  override get value(): string[] {
     return this._internalValue || []
   }
-
-  set value(value: string[]) {
+  override set value(value: string[]) {
     this._internalValue = value
   }
 
@@ -74,10 +74,10 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     return this.checkboxes.pop()!
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   private _handleValueChange() {
     this.checkboxes.forEach((checkbox) => {
-      checkbox.checked = this.value?.includes(checkbox.value) || false
+      checkbox.checked = this.value.includes(checkbox.value) || false
     })
   }
 
@@ -185,7 +185,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     characterData: true,
   })
   private _syncOnDOMChange() {
-    this.#computeValue()
+    this.updateComplete.then(() => this.#computeValue())
   }
 }
 

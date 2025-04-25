@@ -39,7 +39,7 @@ export class GdsCheckbox extends GdsFormControlElement {
   /**
    * Whether the checkbox button is checked or not.
    */
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean })
   checked = false
 
   /**
