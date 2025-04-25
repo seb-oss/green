@@ -223,56 +223,57 @@ await Promise.all(
               },
             ],
           },
-          android: {
-            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,
-            sourcePath: swiftSourcePath,
-            transformGroup: 'compose',
-            files: [
-              {
-                destination: `Colors/${capitalize(colorScheme)}ModeColors.kt`,
-                format: 'compose/object',
-                filter: 'is-color-no-ref',
-                options: {
-                  import: ['androidx.compose.ui.graphics.Color'],
-                  packageName: ['se.seb.gds.tokens'],
-                  className: `${capitalize(colorScheme)}ModeColors`,
-                  objectType: 'data class',
-                },
-              },
-              {
-                destination: 'Colors/Colors.kt',
-                format: 'green/android-kotlin-class-tree',
-                filter: 'is-color-no-ref',
-                options: {
-                  objectType: 'struct',
-                  import: ['SwiftUI'],
-                  uiKitObjectName: 'UIColors',
-                  className: 'Colors',
-                  colorType: 'swiftUiReferenceToUiKit',
-                },
-              },
-              {
-                destination: 'Dimensions.kt',
-                format: 'compose/object',
-                filter: 'is-dimension',
-                options: {
-                  import: ['UIKit'],
-                  objectType: 'struct',
-                  className: 'Dimensions',
-                },
-              },
-              {
-                destination: 'Shape.kt',
-                format: 'compose/object',
-                filter: 'is-shape',
-                options: {
-                  import: ['UIKit'],
-                  objectType: 'struct',
-                  className: 'Shape',
-                },
-              },
-            ],
-          },
+          // TODO: Add Android support
+          // android: {
+          //   buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,
+          //   sourcePath: swiftSourcePath,
+          //   transformGroup: 'compose',
+          //   files: [
+          //     {
+          //       destination: `Colors/${capitalize(colorScheme)}ModeColors.kt`,
+          //       format: 'compose/object',
+          //       filter: 'is-color-no-ref',
+          //       options: {
+          //         import: ['androidx.compose.ui.graphics.Color'],
+          //         packageName: ['se.seb.gds.tokens'],
+          //         className: `${capitalize(colorScheme)}ModeColors`,
+          //         objectType: 'data class',
+          //       },
+          //     },
+          //     {
+          //       destination: 'Colors/Colors.kt',
+          //       format: 'green/android-kotlin-class-tree',
+          //       filter: 'is-color-no-ref',
+          //       options: {
+          //         objectType: 'struct',
+          //         import: ['SwiftUI'],
+          //         uiKitObjectName: 'UIColors',
+          //         className: 'Colors',
+          //         colorType: 'swiftUiReferenceToUiKit',
+          //       },
+          //     },
+          //     {
+          //       destination: 'Dimensions.kt',
+          //       format: 'compose/object',
+          //       filter: 'is-dimension',
+          //       options: {
+          //         import: ['UIKit'],
+          //         objectType: 'struct',
+          //         className: 'Dimensions',
+          //       },
+          //     },
+          //     {
+          //       destination: 'Shape.kt',
+          //       format: 'compose/object',
+          //       filter: 'is-shape',
+          //       options: {
+          //         import: ['UIKit'],
+          //         objectType: 'struct',
+          //         className: 'Shape',
+          //       },
+          //     },
+          //   ],
+          // },
         },
       }
 
