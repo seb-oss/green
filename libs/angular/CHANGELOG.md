@@ -1,5 +1,20 @@
 # Changelog
 
+## 5.9.0
+
+### Minor Changes
+
+- 8616efe: Updated v-angular table for mobile view
+
+## 5.8.1
+
+### Patch Changes
+
+- 0f2c59f: **V-Angular Dropdown/Typeahead:** Enable keyboard navigation with NVDA screen-reader.
+- Updated dependencies [441260e]
+- Updated dependencies [ba27ca9]
+  - @sebgroup/green-core@1.76.2
+
 ## 5.8.0
 
 ### Minor Changes

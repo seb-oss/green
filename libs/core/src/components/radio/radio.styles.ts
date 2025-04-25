@@ -6,7 +6,7 @@ export const styles = css`
   }
 
   :host([disabled]) {
-    color: var(--gds-color-l3-content-disabled);
+    color: var(--gds-sys-color-l3-content-disabled);
     cursor: default;
   }
 

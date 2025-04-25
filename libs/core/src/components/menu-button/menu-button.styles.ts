@@ -5,13 +5,13 @@ const style = css`
 
   @layer tokens {
     :host {
-      --_gap: var(--gds-space-xs);
+      --_gap: var(--gds-sys-space-xs);
 
-      --_padding-inline: var(--gds-space-m);
-      --_padding-block: var(--gds-space-xs);
+      --_padding-inline: var(--gds-sys-space-m);
+      --_padding-block: var(--gds-sys-space-xs);
 
       --_color-bg: transparent;
-      --_color-text: var(--gds-color-l3-content-tertiary);
+      --_color-text: var(--gds-sys-color-l3-content-tertiary);
       --_color-border: transparent;
 
       --_font-size: 1rem;
@@ -75,18 +75,18 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-color-l3-states-light-hover)
+          var(--gds-sys-color-l3-states-light-hover)
         );
-        --_color-border: var(--gds-color-l3-border-secondary);
+        --_color-border: var(--gds-sys-color-l3-border-secondary);
       }
 
       &.selected {
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-color-l3-states-light-hover)
+          var(--gds-sys-color-l3-states-light-hover)
         );
-        --_color-border: var(--gds-color-l3-border-primary);
+        --_color-border: var(--gds-sys-color-l3-border-primary);
       }
 
       slot:not([name]) {
@@ -99,7 +99,7 @@ const style = css`
     .compact {
       display: flex;
       flex-direction: column;
-      --_padding-inline: var(--gds-space-s);
+      --_padding-inline: var(--gds-sys-space-s);
       --_gap: 1px;
       font-size: 0.875rem;
       height: 56px;
@@ -120,7 +120,7 @@ const style = css`
 
   :disabled {
     border-color: var(--_color-bg);
-    color: var(--gds-color-l3-content-disabled);
+    color: var(--gds-sys-color-l3-content-disabled);
     pointer-events: none;
   }
 
