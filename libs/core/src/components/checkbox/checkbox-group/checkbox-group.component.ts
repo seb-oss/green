@@ -154,9 +154,13 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   }
 
   #computeValue() {
-    this.value = this.checkboxes
+    const newValue = this.checkboxes
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value)
+
+    if (JSON.stringify(newValue) !== JSON.stringify(this.value)) {
+      this.value = newValue
+    }
   }
 
   #dispatchInputEvent() {
@@ -185,7 +189,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     characterData: true,
   })
   private _syncOnDOMChange() {
-    this.updateComplete.then(() => this.#computeValue())
+    this.#computeValue()
   }
 }
 

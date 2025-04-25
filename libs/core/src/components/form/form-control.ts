@@ -212,7 +212,7 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.reportValidity()
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   private __handleValueChange() {
     this.#internals.setFormValue(this.value as any)
     this.checkValidity()
