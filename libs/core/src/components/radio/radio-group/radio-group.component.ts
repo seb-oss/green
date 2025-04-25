@@ -153,20 +153,17 @@ class RadioGroup extends GdsFormControlElement<string> {
   }
 
   #handleRadioChange(e: Event) {
+    e.stopPropagation()
     const radio = e.target as GdsRadio
-    if (radio.hasAttribute('value')) {
-      this.value = radio.value
-      this._syncRadioStates()
-      this.#dispatchChangeEvents()
-    }
+    this.value = radio.value
+    this._syncRadioStates()
+    this.#dispatchChangeEvents()
   }
 
   #handleKeyDown(e: KeyboardEvent) {
     if (!this._isConnected) return
 
-    const radios = this.radios.filter(
-      (radio) => !radio.hasAttribute('disabled'),
-    )
+    const radios = this.radios.filter((radio) => !radio.disabled)
     if (radios.length === 0) return
 
     let currentIndex = radios.findIndex(
@@ -266,7 +263,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       @keydown=${this.#handleKeyDown}
       @focus=${this.#handleFocus}
     >
-      <slot @gds-radio-change=${this.#handleRadioChange}></slot>
+      <slot @input=${this.#handleRadioChange}></slot>
     </div>`
   }
 
