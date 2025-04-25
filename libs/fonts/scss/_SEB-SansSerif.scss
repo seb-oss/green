@@ -37,6 +37,21 @@
       format('woff2'),
     url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.woff')
       format('woff');
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEBSansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.eot');
+  src:
+    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.eot?#iefix')
+      format('embedded-opentype'),
+    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.woff2')
+      format('woff2'),
+    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.woff')
+      format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
