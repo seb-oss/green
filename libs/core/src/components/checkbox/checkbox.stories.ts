@@ -69,7 +69,7 @@ export const CheckboxButton: Story = {
     supportingText: 'Label support text.',
     innerHTML: `
     <gds-checkbox label="Checkbox Option 1" supporting-text="Supporting text" value="1"></gds-checkbox>
-    <gds-checkbox label="Checkbox Option 2" supporting-text="Supporting text" value="2"></gds-checkbox>
+    <gds-checkbox label="Checkbox Option 2" supporting-text="Supporting text" value="2" checked></gds-checkbox>
     <gds-checkbox label="Checkbox Option 3" supporting-text="Supporting text" value="3"></gds-checkbox>`,
   },
 }
@@ -224,7 +224,6 @@ export const Disabled: Story = {
         label="Group Label"
         supporting-text="Support text for the group"
         show-extended-supporting-text
-        value="4"
       >
         <span slot="extended-supporting-text">
           Extended supporting text for the group
@@ -265,7 +264,6 @@ export const Size: Story = {
           <gds-checkbox-group
             label="Group Label"
             supporting-text="Support text for the group"
-            value="4"
             show-extended-supporting-text
           >
             <span slot="extended-supporting-text">
@@ -275,6 +273,7 @@ export const Size: Story = {
               label="Checkbox Label"
               value="1"
               supporting-text="Example support text"
+              checked
             ></gds-checkbox>
             <gds-checkbox
               label="Checkbox Label"
@@ -289,7 +288,6 @@ export const Size: Story = {
           <gds-checkbox-group
             label="Group Label"
             supporting-text="Support text for the group"
-            value="4"
             size="small"
             show-extended-supporting-text
           >
@@ -332,7 +330,6 @@ export const Direction: Story = {
           <gds-checkbox-group
             label="Group Label"
             supporting-text="Support text for the group"
-            value="4"
             show-extended-supporting-text
           >
             <span slot="extended-supporting-text">
@@ -366,7 +363,6 @@ export const Direction: Story = {
           <gds-checkbox-group
             label="Group Label"
             supporting-text="Support text for the group"
-            value="4"
             size="small"
             direction="row"
             show-extended-supporting-text
@@ -427,5 +423,13 @@ export const GroupLabel: Story = {
         <gds-checkbox label="Checkbox Label" value="2"></gds-checkbox>
       </gds-checkbox-group>
     </div>
+  `,
+}
+
+export const SingleCheckbox: Story = {
+  ...DefaultParams,
+  name: 'Single checkbox',
+  render: () => html`
+    <gds-checkbox label="Checkbox Label" value="1" checked></gds-checkbox>
   `,
 }
