@@ -17,6 +17,10 @@
       gap: 10px;
       width: max-content;
       margin-right: auto;
+
+      & > * {
+        width: 240px;
+      }
     }
   }
 
@@ -80,6 +84,19 @@
         align-items: center;
         gap: 10px;
         width: max-content;
+      }
+    }
+
+    .gds-cell-edit {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 240ms;
+      translate: 4px 0;
+
+      .gds-cell:hover & {
+        opacity: 1;
+        visibility: visible;
+        translate: 0 0;
       }
     }
 
