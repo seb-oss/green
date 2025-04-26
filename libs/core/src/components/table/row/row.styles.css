@@ -1,0 +1,84 @@
+:host {
+  display: block;
+}
+
+.gds-table-row {
+  display: grid;
+  grid-template-columns: auto auto 1fr auto auto;
+  align-items: center;
+  gap: var(--gds-spacing-xs);
+  padding: var(--gds-spacing-xs);
+  position: relative;
+  transition: background-color 0.2s ease;
+}
+
+.gds-table-row.clickable {
+  cursor: pointer;
+}
+
+.gds-table-row.clickable:hover {
+  background-color: var(--gds-surface-hover-color);
+}
+
+.gds-table-row.selected {
+  background-color: var(--gds-surface-selected-color);
+}
+
+.gds-table-row.dragging {
+  opacity: 0.5;
+  border: 1px dashed var(--gds-border-color);
+}
+
+.gds-row-drag {
+  cursor: grab;
+  color: var(--gds-text-color-secondary);
+  padding: var(--gds-spacing-xs);
+}
+
+.gds-row-drag:hover {
+  color: var(--gds-text-color-primary);
+}
+
+.gds-row-select {
+  display: flex;
+  align-items: center;
+  padding: var(--gds-spacing-xs);
+}
+
+.gds-row-content {
+  display: flex;
+  gap: var(--gds-spacing-s);
+  min-width: 0;
+}
+
+.gds-row-options {
+  position: relative;
+  padding: var(--gds-spacing-xs);
+}
+
+.options-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+  background: var(--gds-surface-color);
+  border: 1px solid var(--gds-border-color);
+  border-radius: var(--gds-border-radius-m);
+  box-shadow: var(--gds-shadow-m);
+  min-width: 150px;
+}
+
+.link-icon {
+  color: var(--gds-text-color-secondary);
+  transition: transform 0.2s ease;
+}
+
+.gds-table-row.clickable:hover .link-icon {
+  transform: translateX(4px);
+}
+
+/* Focus styles */
+.gds-table-row[role='link']:focus-visible {
+  outline: 2px solid var(--gds-color-primary);
+  outline-offset: -2px;
+}

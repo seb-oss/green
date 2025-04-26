@@ -1,0 +1,104 @@
+:host {
+  display: block;
+}
+
+.gds-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--gds-spacing-xs);
+  min-height: 40px;
+  position: relative;
+}
+
+.gds-cell.editable {
+  cursor: pointer;
+}
+
+.gds-cell.clickable {
+  cursor: pointer;
+  color: var(--gds-text-color-link);
+  transition: background-color 0.2s ease;
+}
+
+.gds-cell.clickable:hover {
+  background-color: var(--gds-surface-hover-color);
+}
+
+.gds-cell.editable:hover {
+  background-color: var(--gds-surface-hover-color);
+}
+
+.cell-content {
+  display: flex;
+  align-items: center;
+  gap: var(--gds-spacing-s);
+  flex: 1;
+}
+
+.cell-lead {
+  display: flex;
+  align-items: center;
+}
+
+.cell-value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.edit-button {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.gds-cell:hover .edit-button {
+  opacity: 1;
+}
+
+.gds-cell.editing {
+  background-color: var(--gds-surface-selected-color);
+}
+
+.cell-edit-input {
+  flex: 1;
+}
+
+.cell-actions {
+  display: flex;
+  gap: var(--gds-spacing-xs);
+}
+
+.link-icon {
+  color: var(--gds-text-color-secondary);
+  transition: transform 0.2s ease;
+}
+
+.gds-cell.clickable:hover .link-icon {
+  transform: translateX(4px);
+}
+
+/* Animation for edit mode transition */
+.gds-cell.editing {
+  animation: edit-mode-enter 0.2s ease;
+}
+
+@keyframes edit-mode-enter {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keyboard focus styles */
+.gds-cell[role='link']:focus-visible {
+  outline: 2px solid var(--gds-color-primary);
+  outline-offset: -2px;
+  border-radius: var(--gds-border-radius-s);
+}
