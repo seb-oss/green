@@ -1,3 +1,5 @@
 export * from './table'
 export * from './cell/cell'
 export * from './row/row'
+export * from './filter/filter'
+export * from './footer/footer'

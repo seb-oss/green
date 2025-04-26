@@ -30,6 +30,8 @@ import '../icon/icons/ai'
 import '../icon/icons/map-pin'
 import './cell'
 import './row'
+import './filter'
+import './footer'
 
 /**
  * @element gds-table
@@ -41,42 +43,7 @@ export class GdsTable extends GdsElement {
   render() {
     return html`
       <div class="gds-table">
-        <gds-div class="gds-table-filter">
-          <div class="gds-filter-content">
-            <gds-input size="small" plain value="search" clearable>
-              <gds-icon-magnifying-glass
-                slot="lead"
-              ></gds-icon-magnifying-glass>
-            </gds-input>
-            <gds-dropdown
-              size="small"
-              searchable
-              plain
-              combobox
-              multiple
-              placeholder="Filter"
-            >
-              <gds-option isplaceholder>Filter by branches</gds-option>
-              <gds-option value="columns">
-                <span>Branch One</span>
-                <gds-badge variant="notice" size="small" rounded>
-                  24
-                </gds-badge>
-              </gds-option>
-              <gds-option value="branch-two">
-                <span>Branch Two</span>
-                <gds-badge variant="notice" size="small" rounded>
-                  24
-                </gds-badge>
-              </gds-option>
-            </gds-dropdown>
-          </div>
-          <div class="gds-filter-columns">
-            <gds-dropdown size="small" searchable plain>
-              <gds-option value="columns">Columns</gds-option>
-            </gds-dropdown>
-          </div>
-        </gds-div>
+        <gds-table-filter></gds-table-filter>
         <div class="gds-table-content">
           <div class="gds-table-row gds-table-head">
             <div class="gds-row-select">
@@ -117,43 +84,7 @@ export class GdsTable extends GdsElement {
             <gds-table-cell> Hello cell </gds-table-cell>
           </gds-table-row>
         </div>
-        <div class="gds-table-footer">
-          <gds-flex flex="1"> 0 of 100 row(s) selected. </gds-flex>
-          <div class="footer-actions">
-            <span>Number of rows</span>
-            <div class="footer-actions-rows">
-              <gds-dropdown size="small" searchable plain class="rows-dropdown">
-                <gds-option value="10"> 10 </gds-option>
-                <gds-option value="20"> 10 </gds-option>
-                <gds-option value="40"> 10 </gds-option>
-                <gds-option value="100"> 10 </gds-option>
-                <gds-option value="1000"> 10 </gds-option>
-              </gds-dropdown>
-            </div>
-
-            <gds-flex
-              flex="1"
-              align-items="center"
-              justify-content="space-between"
-            >
-              <span>1-10 of 100</span>
-            </gds-flex>
-            <gds-flex>
-              <gds-button size="small" rank="tertiary">
-                <gds-icon-chevron-double-left></gds-icon-chevron-double-left>
-              </gds-button>
-              <gds-button size="small" rank="tertiary">
-                <gds-icon-chevron-left></gds-icon-chevron-left>
-              </gds-button>
-              <gds-button size="small" rank="tertiary">
-                <gds-icon-chevron-right></gds-icon-chevron-right>
-              </gds-button>
-              <gds-button size="small" rank="tertiary">
-                <gds-icon-chevron-double-right></gds-icon-chevron-double-right>
-              </gds-button>
-            </gds-flex>
-          </div>
-        </div>
+        <gds-table-footer></gds-table-footer>
       </div>
     `
   }
