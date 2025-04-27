@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { nothing, unsafeCSS } from 'lit'
 import { property, state } from 'lit/decorators.js'
 
@@ -46,6 +47,12 @@ export class GdsTable extends GdsElement {
 
   @property({ type: Array })
   data = BANK_DATA
+
+  @state()
+  private selectedRows: Set<number> = new Set()
+
+  @state()
+  private selectAll: boolean = false
 
   @state()
   private searchQuery = ''
@@ -385,6 +392,32 @@ export class GdsTable extends GdsElement {
     return this.columns.filter((col) => col.visible)
   }
 
+  private handleRowSelection(index: number, checked: boolean) {
+    if (checked) {
+      this.selectedRows.add(index)
+    } else {
+      this.selectedRows.delete(index)
+    }
+    this.requestUpdate()
+  }
+
+  private handleSelectAll(e: Event) {
+    const checked = (e.target as HTMLInputElement).checked
+    this.selectAll = checked
+
+    if (checked) {
+      // Select all filtered rows
+      this.filteredData.forEach((_, index) => {
+        this.selectedRows.add(index)
+      })
+    } else {
+      // Clear all selections
+      this.selectedRows.clear()
+    }
+
+    this.requestUpdate()
+  }
+
   render() {
     return html`
       <gds-flex flex-direction="column" gap="s">
@@ -475,8 +508,12 @@ export class GdsTable extends GdsElement {
           border-width="4xs"
         >
           <gds-table-row class="table-head">
-            <input type="checkbox" slot="lead" />
-
+            <input
+              type="checkbox"
+              slot="lead"
+              .checked=${this.selectAll}
+              @change=${this.handleSelectAll}
+            />
             ${this.columns
               .filter((column) => column.visible)
               .map(
@@ -528,12 +565,14 @@ export class GdsTable extends GdsElement {
 
           <!-- Data Rows -->
           ${this.filteredData.map(
-            (row) => html`
+            (row, rowIndex) => html`
               <gds-table-row
                 ?sortable=${row.sortable}
                 ?selectable=${row.selectable}
                 href=${row.href || ''}
-                variant=${row.variant || ''}
+                variant=${this.selectedRows.has(rowIndex)
+                  ? 'positive'
+                  : row.variant || ''}
               >
                 ${row.sortable
                   ? html`
@@ -543,7 +582,16 @@ export class GdsTable extends GdsElement {
                     `
                   : nothing}
 
-                <input type="checkbox" slot="lead" />
+                <input
+                  type="checkbox"
+                  slot="lead"
+                  .checked=${this.selectedRows.has(rowIndex)}
+                  @change=${(e: Event) =>
+                    this.handleRowSelection(
+                      rowIndex,
+                      (e.target as HTMLInputElement).checked,
+                    )}
+                />
 
                 ${row.cells.map((cell, index) =>
                   // Only render cells for visible columns
@@ -623,7 +671,8 @@ export class GdsTable extends GdsElement {
         <!-- Footer -->
         <gds-flex align-items="center" gap="s">
           <gds-text tag="small" color="secondary">
-            0 of 100 row(s) selected.
+            ${this.selectedRows.size} of ${this.filteredData.length} row(s)
+            selected.
           </gds-text>
           <gds-flex margin="0 0 0 auto" gap="s">
             <gds-flex align-items="center" gap="xs">
