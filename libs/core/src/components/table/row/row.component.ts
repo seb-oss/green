@@ -1,3 +1,4 @@
+import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../../gds-element'
@@ -5,6 +6,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../../utils/helpers/custom-element-scoping'
+import style from './row.styles.css?inline'
 
 import '../../flex'
 import '../../grid'
@@ -14,6 +16,8 @@ import '../../grid'
  */
 @gdsCustomElement('gds-table-row')
 export class GdsTableRow extends GdsElement {
+  static styles = [unsafeCSS(style)]
+
   @property()
   variant = ''
 
