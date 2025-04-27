@@ -1,4 +1,5 @@
 import { nothing, unsafeCSS } from 'lit'
+import { property, query } from 'lit/decorators.js'
 
 import { GdsElement } from '../../../gds-element'
 import {
@@ -7,6 +8,7 @@ import {
 } from '../../../utils/helpers/custom-element-scoping'
 
 import '../../flex'
+import '../../text'
 
 import style from './cell.styles.css?inline'
 
@@ -17,6 +19,9 @@ import style from './cell.styles.css?inline'
 export class GdsTableCell extends GdsElement {
   static styles = [unsafeCSS(style)]
 
+  @property()
+  variant = ''
+
   render() {
     return html`
       <gds-flex
@@ -26,12 +31,17 @@ export class GdsTableCell extends GdsElement {
         border-width="0 0 0 4xs"
         min-height="100%"
         flex="1"
+        .background=${this.variant}
+        .color=${this.variant}
+        .border-color=${this.variant}
       >
         <gds-flex gap="s">
           <slot name="lead"></slot>
           <gds-flex class="cell-value" flex-direction="column">
             <slot></slot>
-            <slot name="supporting-text"></slot>
+            <gds-text tag="small" color="secondary">
+              <slot name="supporting-text"></slot>
+            </gds-text>
           </gds-flex>
         </gds-flex>
         <slot name="trail"></slot>

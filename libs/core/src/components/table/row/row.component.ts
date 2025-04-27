@@ -20,6 +20,7 @@ export class GdsTableRow extends GdsElement {
         borde-color="secondary"
         border-width="0 0 4xs 0"
         align-items="center"
+        min-height="max-content"
       >
         <gds-flex
           align-items="center"
@@ -40,7 +41,15 @@ export class GdsTableRow extends GdsElement {
           <slot></slot>
         </gds-flex>
 
-        <gds-flex align-items="center" justify-content="center" width="40px">
+        <gds-flex
+          align-items="center"
+          justify-content="center"
+          width="40px"
+          border-style="solid"
+          border-width="0 0 0 4xs"
+          min-height="100%"
+          height="100%"
+        >
           <slot name="trail"></slot>
         </gds-flex>
       </gds-flex>
