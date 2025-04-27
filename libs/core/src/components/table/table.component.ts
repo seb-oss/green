@@ -7,6 +7,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { BANK_COLUMNS, BANK_DATA } from './table.data'
 import style from './table.styles.css?inline'
 
 import '../dropdown'
@@ -15,6 +16,9 @@ import '../input'
 import '../context-menu'
 import '../icon/icons/ai'
 import '../icon/icons/car'
+import '../icon/icons/bank'
+import '../icon/icons/pin'
+import '../icon/icons/plus'
 import '../icon/icons/dot-grid-two'
 import '../icon/icons/dot-grid-one-vertical'
 import '../icon/icons/filter'
@@ -36,6 +40,45 @@ import './row'
 @gdsCustomElement('gds-table')
 export class GdsTable extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
+
+  @property({ type: Array })
+  columns = BANK_COLUMNS
+
+  @property({ type: Array })
+  data = BANK_DATA
+
+  private renderIcon(iconName: string, slot?: string, size?: string) {
+    switch (iconName) {
+      case 'bank':
+        return html`<gds-icon-bank
+          slot=${slot || 'lead'}
+          size=${size || 'm'}
+        ></gds-icon-bank>`
+      case 'pin':
+        return html`<gds-icon-pin
+          slot=${slot || 'lead'}
+          size=${size || 'm'}
+        ></gds-icon-pin>`
+      case 'ai':
+        return html`<gds-icon-ai
+          slot=${slot || 'lead'}
+          size=${size || 'm'}
+        ></gds-icon-ai>`
+      case 'dot-grid-two':
+        return html`<gds-icon-dot-grid-two
+          slot=${slot || 'lead'}
+          size=${size || 'm'}
+        ></gds-icon-dot-grid-two>`
+      case 'plus':
+        return html`<gds-icon-plus
+          slot=${slot || 'lead'}
+          size=${size || 'm'}
+        ></gds-icon-plus>`
+      // Add other icon cases as needed
+      default:
+        return nothing
+    }
+  }
 
   render() {
     return html`
@@ -93,82 +136,102 @@ export class GdsTable extends GdsElement {
         >
           <gds-table-row class="table-head">
             <input type="checkbox" slot="lead" />
-            <gds-table-cell>
-              <gds-icon-dot-grid-two slot="lead"></gds-icon-dot-grid-two>
-              Head column
-              <gds-button slot="trail" size="xs" rank="tertiary">
-                <gds-icon-arrow-bottom-top size="s"></gds-icon-arrow-bottom-top>
-              </gds-button>
-            </gds-table-cell>
-            <gds-table-cell>
-              <gds-icon-dot-grid-two slot="lead"></gds-icon-dot-grid-two>
-              Head column
-              <gds-button slot="trail" size="xs" rank="tertiary">
-                <gds-icon-arrow-bottom-top size="s"></gds-icon-arrow-bottom-top>
-              </gds-button>
-            </gds-table-cell>
-            <gds-table-cell> Unsorted column </gds-table-cell>
+            ${this.columns.map(
+              (column) => html`
+                <gds-table-cell>
+                  <gds-icon-dot-grid-two slot="lead"></gds-icon-dot-grid-two>
+                  ${column.label}
+                  ${column.sortable
+                    ? html`
+                        <gds-button slot="trail" size="xs" rank="tertiary">
+                          <gds-icon-arrow-bottom-top
+                            size="s"
+                          ></gds-icon-arrow-bottom-top>
+                        </gds-button>
+                      `
+                    : nothing}
+                </gds-table-cell>
+              `,
+            )}
           </gds-table-row>
+          <!-- Data Rows -->
+          ${this.data.map(
+            (row) => html`
+              <gds-table-row
+                ?sortable=${row.sortable}
+                ?selectable=${row.selectable}
+                href=${row.href || ''}
+                variant=${row.variant || ''}
+              >
+                ${row.sortable
+                  ? html`
+                      <gds-icon-dot-grid-two
+                        slot="drag"
+                      ></gds-icon-dot-grid-two>
+                    `
+                  : nothing}
 
-          <gds-table-row data-title="First cell title">
-            <gds-icon-dot-grid-two slot="drag"></gds-icon-dot-grid-two>
-            <input type="checkbox" slot="lead" />
-            <gds-table-cell>
-              <gds-icon-car slot="lead"></gds-icon-car>
-              Hello cell with custom select
-              <span slot="supporting-text">Supporting text</span>
-            </gds-table-cell>
-            <gds-table-cell>
-              <gds-icon-ai slot="lead"></gds-icon-ai>
-              Hello cell
-            </gds-table-cell>
-            <gds-table-cell>
-              <gds-icon-ai slot="lead"></gds-icon-ai>
-              With cell options
-              <gds-context-menu slot="trail">
-                <gds-menu-item>Action 1</gds-menu-item>
-                <gds-menu-item>Action 2</gds-menu-item>
-                <gds-menu-item>Action 3</gds-menu-item>
-              </gds-context-menu>
-            </gds-table-cell>
-            <gds-button slot="trail" rank="tertiary" size="xs">
-              <gds-icon-dot-grid-one-vertical
-                size="s"
-              ></gds-icon-dot-grid-one-vertical>
-            </gds-button>
-          </gds-table-row>
-          <gds-table-row sortable selectable data-title="First cell title">
-            <gds-icon-dot-grid-two slot="drag"></gds-icon-dot-grid-two>
-            <input type="checkbox" slot="lead" />
-            <gds-table-cell variant="notice">
-              <gds-badge variant="notice" slot="lead" size="small">
-                Docs
-              </gds-badge>
-              And this is just regular information
-            </gds-table-cell>
-            <gds-table-cell variant="positive">
-              <gds-badge variant="positive" slot="lead" size="small">
-                New
-              </gds-badge>
-              This can be something new
-            </gds-table-cell>
-            <gds-table-cell variant="warning">
-              <gds-badge variant="warning" slot="lead" size="small">
-                Deprecated
-              </gds-badge>
-              With a badge
-            </gds-table-cell>
-          </gds-table-row>
-          <gds-table-row sortable selectable data-title="First cell title">
-            <gds-icon-dot-grid-two slot="drag"></gds-icon-dot-grid-two>
-            <input type="checkbox" slot="lead" />
-            <gds-table-cell> Hello cell </gds-table-cell>
-            <gds-table-cell editable>
-              <gds-icon-ai slot="lead"></gds-icon-ai>
-              Hello cell
-            </gds-table-cell>
-            <gds-table-cell> Hello cell </gds-table-cell>
-          </gds-table-row>
+                <input type="checkbox" slot="lead" />
+
+                ${row.cells.map(
+                  (cell) => html`
+                    <gds-table-cell variant=${cell.variant || ''}>
+                      ${cell.icon
+                        ? this.renderIcon(
+                            cell.icon.name,
+                            cell.icon.slot,
+                            cell.icon.size,
+                          )
+                        : nothing}
+                      ${cell.badge
+                        ? html`
+                            <gds-badge
+                              variant=${cell.badge.variant}
+                              size="small"
+                              slot="lead"
+                            >
+                              ${cell.badge.label}
+                            </gds-badge>
+                          `
+                        : nothing}
+                      ${cell.value}
+                      ${cell.supportingText
+                        ? html`
+                            <span slot="supporting-text"
+                              >${cell.supportingText}</span
+                            >
+                          `
+                        : nothing}
+                      ${cell.options
+                        ? html`
+                            <gds-context-menu slot="trail">
+                              ${cell.options.map(
+                                (option) => html`
+                                  <gds-menu-item>${option.label}</gds-menu-item>
+                                `,
+                              )}
+                            </gds-context-menu>
+                          `
+                        : nothing}
+                    </gds-table-cell>
+                  `,
+                )}
+                ${row.href
+                  ? html`
+                      <gds-icon-chevron-right
+                        slot="trail"
+                      ></gds-icon-chevron-right>
+                    `
+                  : html`
+                      <gds-button slot="trail" rank="tertiary" size="xs">
+                        <gds-icon-dot-grid-one-vertical size="s">
+                        </gds-icon-dot-grid-one-vertical>
+                      </gds-button>
+                    `}
+              </gds-table-row>
+            `,
+          )}
+
           <gds-table-row href="#" variant="primary">
             <input type="checkbox" slot="lead" />
             <gds-table-cell>
