@@ -418,6 +418,94 @@ export class GdsTable extends GdsElement {
     this.requestUpdate()
   }
 
+  @state()
+  private editingCell: { rowIndex: number; columnIndex: number } | null = null
+
+  @state()
+  private editingValue: string = ''
+
+  private handleCellDoubleClick(
+    rowIndex: number,
+    columnIndex: number,
+    value: string,
+  ) {
+    // Don't allow editing header cells
+    if (rowIndex === -1) return
+
+    this.editingCell = { rowIndex, columnIndex }
+    this.editingValue = value
+    this.requestUpdate()
+  }
+
+  private handleCellEdit(e: InputEvent) {
+    const target = e.target as HTMLInputElement
+    this.editingValue = target.value
+  }
+
+  private handleCellEditKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
+      this.saveCellEdit()
+    } else if (e.key === 'Escape') {
+      this.editingCell = null
+      this.requestUpdate()
+    }
+  }
+
+  private saveCellEdit() {
+    if (!this.editingCell) return
+
+    const { rowIndex, columnIndex } = this.editingCell
+
+    // Update both filtered and original data
+    this.filteredData = this.filteredData.map((row, i) => {
+      if (i === rowIndex) {
+        const newRow = { ...row }
+        newRow.cells = [...row.cells]
+        newRow.cells[columnIndex] = {
+          ...row.cells[columnIndex],
+          value: this.editingValue,
+        }
+        return newRow
+      }
+      return row
+    })
+
+    // Find and update the corresponding row in the original data
+    const originalRowIndex = this.data.findIndex(
+      (row) =>
+        JSON.stringify(row) === JSON.stringify(this.filteredData[rowIndex]),
+    )
+    if (originalRowIndex !== -1) {
+      this.data = this.data.map((row, i) => {
+        if (i === originalRowIndex) {
+          const newRow = { ...row }
+          newRow.cells = [...row.cells]
+          newRow.cells[columnIndex] = {
+            ...row.cells[columnIndex],
+            value: this.editingValue,
+          }
+          return newRow
+        }
+        return row
+      })
+    }
+
+    // Reset editing state
+    this.editingCell = null
+    this.requestUpdate()
+
+    // Dispatch edit event
+    this.dispatchEvent(
+      new CustomEvent('cell-edit', {
+        detail: {
+          rowIndex,
+          columnIndex,
+          newValue: this.editingValue,
+        },
+      }),
+    )
+  }
+
   render() {
     return html`
       <gds-flex flex-direction="column" gap="s">
@@ -597,7 +685,15 @@ export class GdsTable extends GdsElement {
                   // Only render cells for visible columns
                   this.columns[index].visible
                     ? html`
-                        <gds-table-cell variant=${cell.variant || ''}>
+                        <gds-table-cell
+                          variant=${cell.variant || ''}
+                          @dblclick=${() =>
+                            this.handleCellDoubleClick(
+                              rowIndex,
+                              index,
+                              cell.value,
+                            )}
+                        >
                           ${cell.icon
                             ? this.renderIcon(
                                 cell.icon.name,
@@ -616,7 +712,18 @@ export class GdsTable extends GdsElement {
                                 </gds-badge>
                               `
                             : nothing}
-                          ${cell.value}
+                          ${this.editingCell?.rowIndex === rowIndex &&
+                          this.editingCell?.columnIndex === index
+                            ? html`
+                                <gds-input
+                                  size="small"
+                                  .value=${this.editingValue}
+                                  @input=${this.handleCellEdit}
+                                  @keydown=${this.handleCellEditKeyDown}
+                                  @blur=${this.saveCellEdit}
+                                ></gds-input>
+                              `
+                            : cell.value}
                           ${cell.supportingText
                             ? html`
                                 <span slot="supporting-text"

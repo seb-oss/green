@@ -48,9 +48,9 @@ export class GdsTableCell extends GdsElement {
         @drop=${(e: DragEvent) =>
           this.dispatchEvent(new CustomEvent('cell-drop', { detail: e }))}
       >
-        <gds-flex gap="s">
+        <gds-flex gap="s" align-items="center">
           <slot name="lead"></slot>
-          <gds-flex class="cell-value" flex-direction="column">
+          <gds-flex class="cell-value" flex-direction="column" flex="1">
             <slot></slot>
             <gds-text tag="small" color="secondary">
               <slot name="supporting-text"></slot>
