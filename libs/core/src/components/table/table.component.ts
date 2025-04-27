@@ -84,7 +84,10 @@ export class GdsTable extends GdsElement {
           </gds-table-row>
           <gds-table-row hasOptions selectable>
             <gds-table-select slot="lead"></gds-table-select>
-            <gds-table-cell> Hello cell </gds-table-cell>
+            <gds-table-cell supporting-text="Cell supporting text">
+              <gds-icon-car slot="lead"></gds-icon-car>
+              Hello cell
+            </gds-table-cell>
             <gds-table-cell> Hello cell </gds-table-cell>
             <gds-table-cell> Hello cell </gds-table-cell>
             <!-- Custom options menu -->

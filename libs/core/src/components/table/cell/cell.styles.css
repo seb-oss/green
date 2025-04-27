@@ -6,7 +6,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--gds-spacing-xs);
   min-height: 40px;
   position: relative;
   border-left: 1px solid #ccc;
@@ -20,23 +19,28 @@
 
 .gds-cell.clickable {
   cursor: pointer;
-  color: var(--gds-text-color-link);
   transition: background-color 0.2s ease;
 }
 
 .gds-cell.clickable:hover {
-  background-color: var(--gds-surface-hover-color);
+  background-color: #ccc;
 }
 
 .gds-cell.editable:hover {
-  background-color: var(--gds-surface-hover-color);
+  background-color: #eee;
 }
 
 .cell-content {
   display: flex;
-  align-items: center;
-  gap: var(--gds-spacing-s);
+  align-items: flex-start;
+  gap: 1ch;
   flex: 1;
+}
+
+.supporting-text {
+  display: flex;
+  font-size: 12px;
+  opacity: 0.4;
 }
 
 .cell-lead {

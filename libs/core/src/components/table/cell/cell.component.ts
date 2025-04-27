@@ -33,6 +33,9 @@ export class GdsTableCell extends GdsElement {
   @property({ type: String })
   value = ''
 
+  @property({ type: String })
+  'supporting-text' = ''
+
   @property({ type: Boolean })
   editable = false
 
@@ -183,6 +186,11 @@ export class GdsTableCell extends GdsElement {
           <div class="cell-value">
             <slot @slotchange=${this.handleSlotChange}></slot>
             ${!this.hasSlottedContent ? this.value : ''}
+            ${this['supporting-text']
+              ? html`
+                  <div class="supporting-text">${this['supporting-text']}</div>
+                `
+              : nothing}
           </div>
         </div>
         ${this.editable && !this.href
