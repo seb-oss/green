@@ -225,14 +225,13 @@ export const BANK_DATA: TableRow[] = [
       {
         value: 'Open New Account',
         icon: { name: 'plus', slot: 'lead' },
-        supportingText: 'Click to start application',
       },
       {
         value: 'New Account',
         badge: { label: 'New', variant: 'positive' },
       },
       {
-        value: '--',
+        value: ' ',
         variant: 'notice',
       },
       {

@@ -1,0 +1,11 @@
+.dragging {
+  opacity: 0.5;
+}
+
+gds-table-cell[draggable='true'] {
+  cursor: grab;
+}
+
+gds-table-cell[draggable='true']:active {
+  cursor: grabbing;
+}

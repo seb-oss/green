@@ -137,6 +137,62 @@ export class GdsTable extends GdsElement {
     }
   }
 
+  @state()
+  private draggedColumnKey: string | null = null
+
+  private handleColumnDragStart(e: DragEvent, columnKey: string) {
+    if (!this.columns.find((col) => col.key === columnKey)?.dragaggable) return
+    this.draggedColumnKey = columnKey
+    e.dataTransfer?.setData('text/plain', columnKey)
+  }
+
+  private handleColumnDragOver(e: DragEvent, columnKey: string) {
+    if (
+      !this.draggedColumnKey ||
+      !this.columns.find((col) => col.key === columnKey)?.dragaggable
+    )
+      return
+    e.preventDefault()
+  }
+
+  private handleColumnDrop(e: DragEvent, targetColumnKey: string) {
+    e.preventDefault()
+    if (!this.draggedColumnKey || this.draggedColumnKey === targetColumnKey)
+      return
+    if (!this.columns.find((col) => col.key === targetColumnKey)?.dragaggable)
+      return
+
+    // Get indexes
+    const fromIndex = this.columns.findIndex(
+      (col) => col.key === this.draggedColumnKey,
+    )
+    const toIndex = this.columns.findIndex((col) => col.key === targetColumnKey)
+
+    // Reorder columns
+    const newColumns = [...this.columns]
+    const [movedColumn] = newColumns.splice(fromIndex, 1)
+    newColumns.splice(toIndex, 0, movedColumn)
+    this.columns = newColumns
+
+    // Reorder data cells to match column order
+    this.data = this.data.map((row) => ({
+      ...row,
+      cells: row.cells.map(
+        (_, index) =>
+          row.cells[
+            this.columns.findIndex((col) => col.key === BANK_COLUMNS[index].key)
+          ],
+      ),
+    }))
+
+    this.draggedColumnKey = null
+    this.requestUpdate()
+  }
+
+  private handleColumnDragEnd() {
+    this.draggedColumnKey = null
+  }
+
   render() {
     return html`
       <gds-flex flex-direction="column" gap="s">
