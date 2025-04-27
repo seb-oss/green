@@ -1,5 +1,5 @@
 import { nothing, unsafeCSS } from 'lit'
-import { property } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
@@ -46,6 +46,63 @@ export class GdsTable extends GdsElement {
 
   @property({ type: Array })
   data = BANK_DATA
+
+  @state()
+  private sortConfig: {
+    column: string | null
+    direction: 'asc' | 'desc'
+  } = {
+    column: null,
+    direction: 'asc',
+  }
+
+  private handleSort(column: string) {
+    if (!this.columns.find((col) => col.key === column)?.sortable) return
+
+    if (this.sortConfig.column === column) {
+      // Toggle direction if same column
+      this.sortConfig = {
+        column,
+        direction: this.sortConfig.direction === 'asc' ? 'desc' : 'asc',
+      }
+    } else {
+      // New column, default to ascending
+      this.sortConfig = {
+        column,
+        direction: 'asc',
+      }
+    }
+
+    this.sortData()
+  }
+
+  private sortData() {
+    if (!this.sortConfig.column) return
+
+    this.data = [...this.data].sort((a, b) => {
+      const columnIndex = this.columns.findIndex(
+        (col) => col.key === this.sortConfig.column,
+      )
+      if (columnIndex === -1) return 0
+
+      const aValue = a.cells[columnIndex].value
+      const bValue = b.cells[columnIndex].value
+
+      // Handle numeric values (like balance)
+      if (this.sortConfig.column === 'balance') {
+        const aNum = parseFloat(aValue.replace(/[^0-9.-]+/g, ''))
+        const bNum = parseFloat(bValue.replace(/[^0-9.-]+/g, ''))
+        return this.sortConfig.direction === 'asc' ? aNum - bNum : bNum - aNum
+      }
+
+      // Regular string comparison
+      return this.sortConfig.direction === 'asc'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
+    })
+
+    this.requestUpdate()
+  }
 
   private renderIcon(iconName: string, slot?: string, size?: string) {
     switch (iconName) {
@@ -143,7 +200,16 @@ export class GdsTable extends GdsElement {
                   ${column.label}
                   ${column.sortable
                     ? html`
-                        <gds-button slot="trail" size="xs" rank="tertiary">
+                        <gds-button
+                          slot="trail"
+                          size="xs"
+                          rank=${column.sortable ? 'tertiary' : 'primary'}
+                          class=${this.sortConfig.column === column.key
+                            ? `sort-${this.sortConfig.direction}`
+                            : ''}
+                          @click=${() =>
+                            column.sortable && this.handleSort(column.key)}
+                        >
                           <gds-icon-arrow-bottom-top
                             size="s"
                           ></gds-icon-arrow-bottom-top>
