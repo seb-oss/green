@@ -48,6 +48,43 @@ export class GdsTable extends GdsElement {
   data = BANK_DATA
 
   @state()
+  private searchQuery = ''
+
+  @state()
+  private filteredData = this.data
+
+  private handleSearch(e: InputEvent) {
+    const target = e.target as HTMLInputElement
+    this.searchQuery = target.value.toLowerCase()
+    this.filterData()
+  }
+
+  private filterData() {
+    if (!this.searchQuery) {
+      this.filteredData = this.data
+      return
+    }
+
+    this.filteredData = this.data.filter((row) => {
+      // Search through all cell values and supporting text
+      return row.cells.some((cell) => {
+        const searchableContent = [
+          cell.value,
+          cell.supportingText,
+          cell.badge?.label,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase()
+
+        return searchableContent.includes(this.searchQuery)
+      })
+    })
+
+    this.requestUpdate()
+  }
+
+  @state()
   private sortConfig: {
     column: string | null
     direction: 'asc' | 'desc'
@@ -144,6 +181,9 @@ export class GdsTable extends GdsElement {
   private dragOverColumn: string | null = null
 
   private handleDragStart(e: DragEvent, columnKey: string) {
+    // Only start drag if column is draggable
+    if (!this.columns.find((col) => col.key === columnKey)?.dragaggable) return
+
     this.draggedColumn = columnKey
     const target = e.target as HTMLElement
     target.classList.add('dragging')
@@ -151,6 +191,15 @@ export class GdsTable extends GdsElement {
   }
 
   private handleDragOver(e: DragEvent, columnKey: string) {
+    // Only allow drag over if both columns are draggable
+    const targetColumn = this.columns.find((col) => col.key === columnKey)
+    if (
+      !this.draggedColumn ||
+      !targetColumn?.dragaggable ||
+      this.draggedColumn === columnKey
+    )
+      return
+
     e.preventDefault()
     this.dragOverColumn = columnKey
   }
@@ -164,6 +213,15 @@ export class GdsTable extends GdsElement {
 
   private handleDrop(e: DragEvent, targetColumnKey: string) {
     e.preventDefault()
+
+    // Get both columns
+    const sourceColumn = this.columns.find(
+      (col) => col.key === this.draggedColumn,
+    )
+    const targetColumn = this.columns.find((col) => col.key === targetColumnKey)
+
+    // Only allow drop if both columns are draggable
+    if (!sourceColumn?.dragaggable || !targetColumn?.dragaggable) return
     if (!this.draggedColumn || this.draggedColumn === targetColumnKey) return
 
     const fromIndex = this.columns.findIndex(
@@ -176,12 +234,20 @@ export class GdsTable extends GdsElement {
     const [movedColumn] = newColumns.splice(fromIndex, 1)
     newColumns.splice(toIndex, 0, movedColumn)
 
-    // Reorder data cells
+    // Reorder data cells preserving ALL properties
     const newData = this.data.map((row) => {
+      // Create a complete copy of the row
+      const newRow = { ...row }
+      // Create a complete copy of the cells array
       const newCells = [...row.cells]
+
+      // Move the entire cell object with all its properties
       const [movedCell] = newCells.splice(fromIndex, 1)
       newCells.splice(toIndex, 0, movedCell)
-      return { ...row, cells: newCells }
+
+      // Update the row with the new cells array
+      newRow.cells = newCells
+      return newRow
     })
 
     // Update state
@@ -191,9 +257,18 @@ export class GdsTable extends GdsElement {
     this.draggedColumn = null
     this.dragOverColumn = null
 
+    // Force a complete re-render
+    this.requestUpdate()
+
     this.dispatchEvent(
       new CustomEvent('column-reorder', {
-        detail: { columns: this.columns },
+        detail: {
+          columns: this.columns,
+          fromIndex,
+          toIndex,
+          sourceColumn,
+          targetColumn,
+        },
       }),
     )
   }
@@ -209,9 +284,12 @@ export class GdsTable extends GdsElement {
               placeholder="Search data"
               clearable
               width="400px"
+              .value=${this.searchQuery}
+              @input=${this.handleSearch}
             >
               <gds-icon-search-menu slot="lead"></gds-icon-search-menu>
             </gds-input>
+
             <gds-dropdown
               size="small"
               searchable
@@ -300,7 +378,7 @@ export class GdsTable extends GdsElement {
             )}
           </gds-table-row>
           <!-- Data Rows -->
-          ${this.data.map(
+          ${this.filteredData.map(
             (row) => html`
               <gds-table-row
                 ?sortable=${row.sortable}
