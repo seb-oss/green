@@ -138,33 +138,36 @@ export class GdsTable extends GdsElement {
   }
 
   @state()
-  private draggedColumnKey: string | null = null
+  private draggedColumn: string | null = null
 
-  private handleColumnDragStart(e: DragEvent, columnKey: string) {
-    if (!this.columns.find((col) => col.key === columnKey)?.dragaggable) return
-    this.draggedColumnKey = columnKey
+  @state()
+  private dragOverColumn: string | null = null
+
+  private handleDragStart(e: DragEvent, columnKey: string) {
+    this.draggedColumn = columnKey
+    const target = e.target as HTMLElement
+    target.classList.add('dragging')
     e.dataTransfer?.setData('text/plain', columnKey)
   }
 
-  private handleColumnDragOver(e: DragEvent, columnKey: string) {
-    if (
-      !this.draggedColumnKey ||
-      !this.columns.find((col) => col.key === columnKey)?.dragaggable
-    )
-      return
+  private handleDragOver(e: DragEvent, columnKey: string) {
     e.preventDefault()
+    this.dragOverColumn = columnKey
   }
 
-  private handleColumnDrop(e: DragEvent, targetColumnKey: string) {
-    e.preventDefault()
-    if (!this.draggedColumnKey || this.draggedColumnKey === targetColumnKey)
-      return
-    if (!this.columns.find((col) => col.key === targetColumnKey)?.dragaggable)
-      return
+  private handleDragEnd(e: DragEvent) {
+    const target = e.target as HTMLElement
+    target.classList.remove('dragging')
+    this.draggedColumn = null
+    this.dragOverColumn = null
+  }
 
-    // Get indexes
+  private handleDrop(e: DragEvent, targetColumnKey: string) {
+    e.preventDefault()
+    if (!this.draggedColumn || this.draggedColumn === targetColumnKey) return
+
     const fromIndex = this.columns.findIndex(
-      (col) => col.key === this.draggedColumnKey,
+      (col) => col.key === this.draggedColumn,
     )
     const toIndex = this.columns.findIndex((col) => col.key === targetColumnKey)
 
@@ -172,25 +175,27 @@ export class GdsTable extends GdsElement {
     const newColumns = [...this.columns]
     const [movedColumn] = newColumns.splice(fromIndex, 1)
     newColumns.splice(toIndex, 0, movedColumn)
+
+    // Reorder data cells
+    const newData = this.data.map((row) => {
+      const newCells = [...row.cells]
+      const [movedCell] = newCells.splice(fromIndex, 1)
+      newCells.splice(toIndex, 0, movedCell)
+      return { ...row, cells: newCells }
+    })
+
+    // Update state
     this.columns = newColumns
+    this.data = newData
 
-    // Reorder data cells to match column order
-    this.data = this.data.map((row) => ({
-      ...row,
-      cells: row.cells.map(
-        (_, index) =>
-          row.cells[
-            this.columns.findIndex((col) => col.key === BANK_COLUMNS[index].key)
-          ],
-      ),
-    }))
+    this.draggedColumn = null
+    this.dragOverColumn = null
 
-    this.draggedColumnKey = null
-    this.requestUpdate()
-  }
-
-  private handleColumnDragEnd() {
-    this.draggedColumnKey = null
+    this.dispatchEvent(
+      new CustomEvent('column-reorder', {
+        detail: { columns: this.columns },
+      }),
+    )
   }
 
   render() {
@@ -249,13 +254,27 @@ export class GdsTable extends GdsElement {
         >
           <gds-table-row class="table-head">
             <input type="checkbox" slot="lead" />
+
             ${this.columns.map(
               (column) => html`
-                <gds-table-cell>
+                <gds-table-cell
+                  ?draggable=${column.dragaggable}
+                  class=${this.draggedColumn === column.key ? 'dragging' : ''}
+                  @cell-dragstart=${(e: CustomEvent) =>
+                    this.handleDragStart(e.detail, column.key)}
+                  @cell-dragover=${(e: CustomEvent) =>
+                    this.handleDragOver(e.detail, column.key)}
+                  @cell-dragend=${(e: CustomEvent) =>
+                    this.handleDragEnd(e.detail)}
+                  @cell-drop=${(e: CustomEvent) =>
+                    this.handleDrop(e.detail, column.key)}
+                >
                   ${column.dragaggable
-                    ? html`<gds-icon-dot-grid-two
-                        slot="lead"
-                      ></gds-icon-dot-grid-two>`
+                    ? html`
+                        <gds-icon-dot-grid-two
+                          slot="lead"
+                        ></gds-icon-dot-grid-two>
+                      `
                     : nothing}
                   ${column.label}
                   ${column.sortable
@@ -263,7 +282,7 @@ export class GdsTable extends GdsElement {
                         <gds-button
                           slot="trail"
                           size="xs"
-                          rank=${column.sortable ? 'tertiary' : 'primary'}
+                          rank="tertiary"
                           class=${this.sortConfig.column === column.key
                             ? `sort-${this.sortConfig.direction}`
                             : ''}

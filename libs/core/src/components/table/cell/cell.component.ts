@@ -22,6 +22,9 @@ export class GdsTableCell extends GdsElement {
   @property()
   variant = ''
 
+  @property({ type: Boolean })
+  draggable = false
+
   render() {
     return html`
       <gds-flex
@@ -35,6 +38,15 @@ export class GdsTableCell extends GdsElement {
         .background=${this.variant}
         .color=${this.variant}
         .border-color=${this.variant}
+        draggable=${this.draggable}
+        @dragstart=${(e: DragEvent) =>
+          this.dispatchEvent(new CustomEvent('cell-dragstart', { detail: e }))}
+        @dragover=${(e: DragEvent) =>
+          this.dispatchEvent(new CustomEvent('cell-dragover', { detail: e }))}
+        @dragend=${(e: DragEvent) =>
+          this.dispatchEvent(new CustomEvent('cell-dragend', { detail: e }))}
+        @drop=${(e: DragEvent) =>
+          this.dispatchEvent(new CustomEvent('cell-drop', { detail: e }))}
       >
         <gds-flex gap="s">
           <slot name="lead"></slot>

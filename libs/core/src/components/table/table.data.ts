@@ -78,7 +78,7 @@ export const BANK_COLUMNS: TableColumn[] = [
     key: 'branch',
     label: 'Branch',
     sortable: false,
-    dragaggable: true,
+    dragaggable: false,
     filterable: true,
     visible: true,
   },
