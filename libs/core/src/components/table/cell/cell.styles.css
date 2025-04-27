@@ -1,5 +1,5 @@
 :host {
-  display: block;
+  display: contents;
 }
 
 .gds-cell {
@@ -9,6 +9,9 @@
   padding: var(--gds-spacing-xs);
   min-height: 40px;
   position: relative;
+  border-left: 1px solid #ccc;
+  padding-inline: 20px;
+  flex: 1;
 }
 
 .gds-cell.editable {

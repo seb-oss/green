@@ -1,4 +1,5 @@
 import { nothing, unsafeCSS } from 'lit'
+import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
@@ -32,6 +33,8 @@ import './cell'
 import './row'
 import './filter'
 import './footer'
+import './head'
+import './select'
 
 /**
  * @element gds-table
@@ -39,39 +42,51 @@ import './footer'
 @gdsCustomElement('gds-table')
 export class GdsTable extends GdsElement {
   static styles = [tokens, unsafeCSS(style)]
+  @property({ type: Array })
+  columns = [
+    { key: 'title', label: 'Title', sortable: true, filterable: true },
+    { key: 'services', label: 'Services', sortable: true, filterable: true },
+    { key: 'branches', label: 'Branches', sortable: true, filterable: true },
+    { key: 'street', label: 'Street', sortable: true, filterable: true },
+  ]
 
+  private handleColumnReorder(e: CustomEvent) {
+    const { sourceColumn, targetColumn } = e.detail
+    // Implement column reordering logic
+  }
+
+  private handleSort(e: CustomEvent) {
+    const { column, direction } = e.detail
+    // Implement sorting logic
+  }
+
+  private handleFilter(e: CustomEvent) {
+    const { filters } = e.detail
+    // Implement filtering logic
+  }
   render() {
     return html`
       <div class="gds-table">
         <gds-table-filter></gds-table-filter>
         <div class="gds-table-content">
-          <div class="gds-table-row gds-table-head">
-            <div class="gds-row-select">
-              <input type="checkbox" />
-            </div>
-            <div class="gds-table-head-column">
-              <div class="column-name">Title</div>
-              <gds-icon-filter></gds-icon-filter>
-            </div>
-            <div class="gds-table-head-column">
-              <div class="column-name">Services</div>
-              <gds-icon-filter></gds-icon-filter>
-            </div>
-            <div class="gds-table-head-column">
-              <div class="column-name">Branches</div>
-              <gds-icon-filter></gds-icon-filter>
-            </div>
-            <div class="gds-table-head-column">
-              <div class="column-name">Street</div>
-              <gds-icon-filter></gds-icon-filter>
-            </div>
-          </div>
+          <gds-table-head
+            .columns=${this.columns}
+            .selectable=${true}
+            @column-reorder=${this.handleColumnReorder}
+            @sort-change=${this.handleSort}
+            @filter-change=${this.handleFilter}
+          >
+            <gds-table-select slot="lead"></gds-table-select>
+          </gds-table-head>
           <gds-table-row href="#" selectable>
-            <gds-table-cell 1> Hello cell </gds-table-cell>
+            <gds-table-select slot="lead"></gds-table-select>
+            <gds-table-cell> Linked row </gds-table-cell>
           </gds-table-row>
           <gds-table-row hasOptions selectable>
+            <gds-table-select slot="lead"></gds-table-select>
             <gds-table-cell> Hello cell </gds-table-cell>
-
+            <gds-table-cell> Hello cell </gds-table-cell>
+            <gds-table-cell> Hello cell </gds-table-cell>
             <!-- Custom options menu -->
             <div slot="options">
               <gds-dropdown>
@@ -81,9 +96,11 @@ export class GdsTable extends GdsElement {
             </div>
           </gds-table-row>
           <gds-table-row sortable selectable>
+            <gds-table-select slot="lead"></gds-table-select>
             <gds-table-cell> Hello cell </gds-table-cell>
           </gds-table-row>
           <gds-table-row sortable selectable>
+            <gds-table-select slot="lead"></gds-table-select>
             <gds-table-cell> Hello cell </gds-table-cell>
             <gds-table-cell editable>
               <gds-icon-ai slot="lead"></gds-icon-ai>

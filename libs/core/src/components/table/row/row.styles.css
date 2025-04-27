@@ -3,13 +3,18 @@
 }
 
 .gds-table-row {
-  display: grid;
-  grid-template-columns: auto auto 1fr auto auto;
+  display: flex;
   align-items: center;
   gap: var(--gds-spacing-xs);
   padding: var(--gds-spacing-xs);
   position: relative;
   transition: background-color 0.2s ease;
+  border-bottom: 1px solid #ccc;
+}
+
+.gds-table-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .gds-table-row.clickable {
@@ -33,6 +38,8 @@
   cursor: grab;
   color: var(--gds-text-color-secondary);
   padding: var(--gds-spacing-xs);
+  position: absolute;
+  left: -2ch;
 }
 
 .gds-row-drag:hover {
@@ -47,8 +54,8 @@
 
 .gds-row-content {
   display: flex;
-  gap: var(--gds-spacing-s);
-  min-width: 0;
+  flex: 1;
+  width: 100%;
 }
 
 .gds-row-options {

@@ -164,13 +164,14 @@ export class GdsTableRow extends GdsElement {
           : nothing}
         ${this.selectable
           ? html`
-              <div class="gds-row-select">
-                <input
+              <slot name="lead"></slot>
+              <!-- <div class="gds-row-select"> -->
+              <!-- <input
                   type="checkbox"
                   .checked=${this.selected}
                   @change=${this.handleSelect}
-                />
-              </div>
+                /> -->
+              <!-- </div> -->
             `
           : nothing}
 
