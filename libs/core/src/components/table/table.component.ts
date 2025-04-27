@@ -18,7 +18,7 @@ import '../icon/icons/ai'
 import '../icon/icons/car'
 import '../icon/icons/bank'
 import '../icon/icons/pin'
-import '../icon/icons/plus'
+import '../icon/icons/plus-small'
 import '../icon/icons/dot-grid-two'
 import '../icon/icons/dot-grid-one-vertical'
 import '../icon/icons/filter'
@@ -70,10 +70,10 @@ export class GdsTable extends GdsElement {
           size=${size || 'm'}
         ></gds-icon-dot-grid-two>`
       case 'plus':
-        return html`<gds-icon-plus
+        return html`<gds-icon-plus-small
           slot=${slot || 'lead'}
           size=${size || 'm'}
-        ></gds-icon-plus>`
+        ></gds-icon-plus-small>`
       // Add other icon cases as needed
       default:
         return nothing
