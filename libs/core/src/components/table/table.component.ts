@@ -59,31 +59,6 @@ export class GdsTable extends GdsElement {
     this.filterData()
   }
 
-  private filterData() {
-    if (!this.searchQuery) {
-      this.filteredData = this.data
-      return
-    }
-
-    this.filteredData = this.data.filter((row) => {
-      // Search through all cell values and supporting text
-      return row.cells.some((cell) => {
-        const searchableContent = [
-          cell.value,
-          cell.supportingText,
-          cell.badge?.label,
-        ]
-          .filter(Boolean)
-          .join(' ')
-          .toLowerCase()
-
-        return searchableContent.includes(this.searchQuery)
-      })
-    })
-
-    this.requestUpdate()
-  }
-
   @state()
   private sortConfig: {
     column: string | null
@@ -116,7 +91,8 @@ export class GdsTable extends GdsElement {
   private sortData() {
     if (!this.sortConfig.column) return
 
-    this.data = [...this.data].sort((a, b) => {
+    // Sort the filtered data instead of the original data
+    this.filteredData = [...this.filteredData].sort((a, b) => {
       const columnIndex = this.columns.findIndex(
         (col) => col.key === this.sortConfig.column,
       )
@@ -139,6 +115,16 @@ export class GdsTable extends GdsElement {
     })
 
     this.requestUpdate()
+
+    // Dispatch sort event
+    this.dispatchEvent(
+      new CustomEvent('sort-change', {
+        detail: {
+          column: this.sortConfig.column,
+          direction: this.sortConfig.direction,
+        },
+      }),
+    )
   }
 
   private renderIcon(iconName: string, slot?: string, size?: string) {
@@ -273,6 +259,88 @@ export class GdsTable extends GdsElement {
     )
   }
 
+  // New filter
+  @state()
+  private selectedFilterColumn: string | null = null
+
+  @state()
+  private selectedFilterValues: string[] = []
+
+  private getUniqueValuesForColumn(columnKey: string) {
+    const columnIndex = this.columns.findIndex((col) => col.key === columnKey)
+    if (columnIndex === -1) return []
+
+    const valueMap = new Map<
+      string,
+      {
+        count: number
+        variant?: string
+      }
+    >()
+
+    this.data.forEach((row) => {
+      const cell = row.cells[columnIndex]
+      const value = cell.badge?.label || cell.value
+
+      const existing = valueMap.get(value) || {
+        count: 0,
+        variant: cell.badge?.variant || cell.variant || 'notice',
+      }
+
+      valueMap.set(value, {
+        count: existing.count + 1,
+        variant: existing.variant,
+      })
+    })
+
+    return Array.from(valueMap.entries()).map(([value, data]) => ({
+      value,
+      count: data.count,
+      variant: data.variant,
+    }))
+  }
+
+  private handleFilterSelect(e: CustomEvent) {
+    this.selectedFilterValues = e.detail.value || []
+    this.filterData()
+  }
+
+  // Modify your existing filterData method to include column filtering
+  private filterData() {
+    let filtered = this.data
+
+    // Apply search filter
+    if (this.searchQuery) {
+      filtered = filtered.filter((row) => {
+        return row.cells.some((cell) => {
+          const searchableContent = [
+            cell.value,
+            cell.supportingText,
+            cell.badge?.label,
+          ]
+            .filter(Boolean)
+            .join(' ')
+            .toLowerCase()
+
+          return searchableContent.includes(this.searchQuery)
+        })
+      })
+    }
+
+    // Apply column filter
+    if (this.selectedFilterValues.length > 0) {
+      const columnIndex = this.columns.findIndex((col) => col.key === 'branch') // Using branch column as example
+      filtered = filtered.filter((row) => {
+        const cellValue =
+          row.cells[columnIndex].badge?.label || row.cells[columnIndex].value
+        return this.selectedFilterValues.includes(cellValue)
+      })
+    }
+
+    this.filteredData = filtered
+    this.requestUpdate()
+  }
+
   render() {
     return html`
       <gds-flex flex-direction="column" gap="s">
@@ -297,20 +365,23 @@ export class GdsTable extends GdsElement {
               combobox
               multiple
               placeholder="Filter"
+              .value=${this.selectedFilterValues}
+              @change=${this.handleFilterSelect}
             >
               <gds-option isplaceholder>Filter by branches</gds-option>
-              <gds-option value="columns">
-                <span>Branch One</span>
-                <gds-badge variant="notice" size="small" rounded>
-                  24
-                </gds-badge>
-              </gds-option>
-              <gds-option value="branch-two">
-                <span>Branch Two</span>
-                <gds-badge variant="notice" size="small" rounded>
-                  24
-                </gds-badge>
-              </gds-option>
+              ${this.getUniqueValuesForColumn('branch').map(
+                (item) => html`
+                  <gds-option value=${item.value}>
+                    <span>${item.value}</span>
+                    <gds-badge
+                      variant=${item.variant || 'none'}
+                      size="small"
+                      rounded
+                      >${item.count}</gds-badge
+                    >
+                  </gds-option>
+                `,
+              )}
             </gds-dropdown>
           </gds-flex>
           <gds-flex margin="0 0 0 auto" gap="s" align-items="center">
@@ -364,8 +435,10 @@ export class GdsTable extends GdsElement {
                           class=${this.sortConfig.column === column.key
                             ? `sort-${this.sortConfig.direction}`
                             : ''}
-                          @click=${() =>
-                            column.sortable && this.handleSort(column.key)}
+                          @click=${(e: MouseEvent) => {
+                            e.stopPropagation() // Add this to prevent event bubbling
+                            if (column.sortable) this.handleSort(column.key)
+                          }}
                         >
                           <gds-icon-arrow-bottom-top
                             size="s"
