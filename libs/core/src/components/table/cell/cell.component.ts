@@ -24,16 +24,17 @@ export class GdsTableCell extends GdsElement {
         padding="xs m"
         border-style="solid"
         border-width="0 0 0 4xs"
-        height="100%"
+        min-height="100%"
         flex="1"
       >
-        <slot name="lead"></slot>
-        <gds-flex class="cell-value" flex-direction="column">
-          <slot></slot>
-          <slot name="supporting-text"></slot>
+        <gds-flex gap="s">
+          <slot name="lead"></slot>
+          <gds-flex class="cell-value" flex-direction="column">
+            <slot></slot>
+            <slot name="supporting-text"></slot>
+          </gds-flex>
         </gds-flex>
         <slot name="trail"></slot>
-        <gds-div width="4sx" height="100%" data-title="resizer"></gds-div>
       </gds-flex>
     `
   }

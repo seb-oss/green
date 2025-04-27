@@ -14,6 +14,11 @@ import './cell'
 import './row'
 import './filter'
 import './footer'
+import '../icon/icons/ai'
+import '../icon/icons/car'
+import '../icon/icons/dot-grid-two'
+import '../icon/icons/filter'
+import '../icon/icons/chevron-right'
 
 /**
  * @element gds-table

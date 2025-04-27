@@ -21,7 +21,14 @@ export class GdsTableRow extends GdsElement {
         border-width="0 0 4xs 0"
         align-items="center"
       >
-        <gds-flex align-items="center" justify-content="center" width="40px">
+        <gds-flex
+          align-items="center"
+          justify-content="center"
+          height="100%"
+          width="max-content"
+          position="absolute"
+          inset="0 0 0 -24px"
+        >
           <slot name="drag"></slot>
         </gds-flex>
 

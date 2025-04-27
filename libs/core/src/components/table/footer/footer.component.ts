@@ -17,6 +17,9 @@ import '../../text'
 import '../../icon/icons/dot-grid-two'
 import '../../icon/icons/dot-grid-one-vertical'
 import '../../icon/icons/chevron-right'
+import '../../icon/icons/chevron-double-right'
+import '../../icon/icons/chevron-left'
+import '../../icon/icons/chevron-double-left'
 
 /**
  * @element gds-table-footer
