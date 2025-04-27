@@ -66,10 +66,10 @@ export class GdsTable extends GdsElement {
               <gds-icon-filter></gds-icon-filter>
             </div>
           </div>
-          <gds-table-row href="#">
-            <gds-table-cell> Hello cell </gds-table-cell>
+          <gds-table-row href="#" selectable>
+            <gds-table-cell 1> Hello cell </gds-table-cell>
           </gds-table-row>
-          <gds-table-row hasOptions>
+          <gds-table-row hasOptions selectable>
             <gds-table-cell> Hello cell </gds-table-cell>
 
             <!-- Custom options menu -->
@@ -81,6 +81,14 @@ export class GdsTable extends GdsElement {
             </div>
           </gds-table-row>
           <gds-table-row sortable selectable>
+            <gds-table-cell> Hello cell </gds-table-cell>
+          </gds-table-row>
+          <gds-table-row sortable selectable>
+            <gds-table-cell> Hello cell </gds-table-cell>
+            <gds-table-cell editable>
+              <gds-icon-ai slot="lead"></gds-icon-ai>
+              Hello cell
+            </gds-table-cell>
             <gds-table-cell> Hello cell </gds-table-cell>
           </gds-table-row>
         </div>

@@ -13,11 +13,8 @@ import '../../dropdown'
 import '../../card'
 import '../../div'
 import '../../button'
-
-// import '../../icon/icons/text-edit'
-// import '../../icon/icons/check'
-// import '../../icon/icons/x'
-// import '../../icon/icons/chevron-right'
+import '../../icon/icons/floppy-disk'
+import '../../icon/icons/cross-small'
 
 interface EditableContent {
   value: string
@@ -142,7 +139,7 @@ export class GdsTableCell extends GdsElement {
             variant="positive"
             @click=${this.handleEditSave}
           >
-            <gds-icon-check></gds-icon-check>
+            <gds-icon-floppy-disk></gds-icon-floppy-disk>
           </gds-button>
           <gds-button
             size="xs"
@@ -150,7 +147,7 @@ export class GdsTableCell extends GdsElement {
             variant="negative"
             @click=${this.handleEditCancel}
           >
-            <gds-icon-x></gds-icon-x>
+            <gds-icon-cross-small></gds-icon-cross-small>
           </gds-button>
         </div>
       </div>
