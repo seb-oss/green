@@ -26,6 +26,7 @@ export class GdsTableCell extends GdsElement {
     return html`
       <gds-flex
         align-items="center"
+        justify-content="space-between"
         padding="xs m"
         border-style="solid"
         border-width="0 0 0 4xs"

@@ -1,3 +1,5 @@
+import { property } from 'lit/decorators.js'
+
 import { GdsElement } from '../../../gds-element'
 import {
   gdsCustomElement,
@@ -12,6 +14,9 @@ import '../../grid'
  */
 @gdsCustomElement('gds-table-row')
 export class GdsTableRow extends GdsElement {
+  @property()
+  variant = ''
+
   render() {
     return html`
       <gds-flex
@@ -21,6 +26,10 @@ export class GdsTableRow extends GdsElement {
         border-width="0 0 4xs 0"
         align-items="center"
         min-height="max-content"
+        .background=${this.variant}
+        .color=${this.variant}
+        .border-color=${this.variant}
+        overflow="hidden"
       >
         <gds-flex
           align-items="center"
