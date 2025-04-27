@@ -361,7 +361,6 @@ export class GdsTable extends GdsElement {
   }
 
   private handleColumnVisibility(e: CustomEvent) {
-    // Make sure we're getting the correct value from the event
     const selectedColumns = Array.isArray(e.detail.value) ? e.detail.value : []
 
     // Update column visibility
@@ -370,17 +369,12 @@ export class GdsTable extends GdsElement {
       visible: selectedColumns.includes(col.key),
     }))
 
-    // Update filtered data to respect column visibility
-    this.filterData()
     this.requestUpdate()
 
-    // Dispatch the event
     this.dispatchEvent(
       new CustomEvent('column-visibility-change', {
         detail: {
-          visibleColumns: this.columns
-            .filter((col) => col.visible)
-            .map((col) => col.key),
+          visibleColumns: selectedColumns,
         },
       }),
     )
@@ -483,52 +477,55 @@ export class GdsTable extends GdsElement {
           <gds-table-row class="table-head">
             <input type="checkbox" slot="lead" />
 
-            ${this.visibleColumns.map(
-              (column) => html`
-                <gds-table-cell
-                  ?draggable=${column.dragaggable}
-                  class=${this.draggedColumn === column.key ? 'dragging' : ''}
-                  @cell-dragstart=${(e: CustomEvent) =>
-                    this.handleDragStart(e.detail, column.key)}
-                  @cell-dragover=${(e: CustomEvent) =>
-                    this.handleDragOver(e.detail, column.key)}
-                  @cell-dragend=${(e: CustomEvent) =>
-                    this.handleDragEnd(e.detail)}
-                  @cell-drop=${(e: CustomEvent) =>
-                    this.handleDrop(e.detail, column.key)}
-                >
-                  ${column.dragaggable
-                    ? html`
-                        <gds-icon-dot-grid-two
-                          slot="lead"
-                        ></gds-icon-dot-grid-two>
-                      `
-                    : nothing}
-                  ${column.label}
-                  ${column.sortable
-                    ? html`
-                        <gds-button
-                          slot="trail"
-                          size="xs"
-                          rank="tertiary"
-                          class=${this.sortConfig.column === column.key
-                            ? `sort-${this.sortConfig.direction}`
-                            : ''}
-                          @click=${(e: MouseEvent) => {
-                            e.stopPropagation() // Add this to prevent event bubbling
-                            if (column.sortable) this.handleSort(column.key)
-                          }}
-                        >
-                          <gds-icon-arrow-bottom-top
-                            size="s"
-                          ></gds-icon-arrow-bottom-top>
-                        </gds-button>
-                      `
-                    : nothing}
-                </gds-table-cell>
-              `,
-            )}
+            ${this.columns
+              .filter((column) => column.visible)
+              .map(
+                (column) => html`
+                  <gds-table-cell
+                    ?draggable=${column.dragaggable}
+                    class=${this.draggedColumn === column.key ? 'dragging' : ''}
+                    @cell-dragstart=${(e: CustomEvent) =>
+                      this.handleDragStart(e.detail, column.key)}
+                    @cell-dragover=${(e: CustomEvent) =>
+                      this.handleDragOver(e.detail, column.key)}
+                    @cell-dragend=${(e: CustomEvent) =>
+                      this.handleDragEnd(e.detail)}
+                    @cell-drop=${(e: CustomEvent) =>
+                      this.handleDrop(e.detail, column.key)}
+                  >
+                    ${column.dragaggable
+                      ? html`
+                          <gds-icon-dot-grid-two
+                            slot="lead"
+                          ></gds-icon-dot-grid-two>
+                        `
+                      : nothing}
+                    ${column.label}
+                    ${column.sortable
+                      ? html`
+                          <gds-button
+                            slot="trail"
+                            size="xs"
+                            rank="tertiary"
+                            class=${this.sortConfig.column === column.key
+                              ? `sort-${this.sortConfig.direction}`
+                              : ''}
+                            @click=${(e: MouseEvent) => {
+                              e.stopPropagation()
+                              if (column.sortable) this.handleSort(column.key)
+                            }}
+                          >
+                            <gds-icon-arrow-bottom-top
+                              size="s"
+                            ></gds-icon-arrow-bottom-top>
+                          </gds-button>
+                        `
+                      : nothing}
+                  </gds-table-cell>
+                `,
+              )}
           </gds-table-row>
+
           <!-- Data Rows -->
           ${this.filteredData.map(
             (row) => html`
@@ -548,48 +545,53 @@ export class GdsTable extends GdsElement {
 
                 <input type="checkbox" slot="lead" />
 
-                ${row.cells.map(
-                  (cell) => html`
-                    <gds-table-cell variant=${cell.variant || ''}>
-                      ${cell.icon
-                        ? this.renderIcon(
-                            cell.icon.name,
-                            cell.icon.slot,
-                            cell.icon.size,
-                          )
-                        : nothing}
-                      ${cell.badge
-                        ? html`
-                            <gds-badge
-                              variant=${cell.badge.variant}
-                              size="small"
-                              slot="lead"
-                            >
-                              ${cell.badge.label}
-                            </gds-badge>
-                          `
-                        : nothing}
-                      ${cell.value}
-                      ${cell.supportingText
-                        ? html`
-                            <span slot="supporting-text"
-                              >${cell.supportingText}</span
-                            >
-                          `
-                        : nothing}
-                      ${cell.options
-                        ? html`
-                            <gds-context-menu slot="trail">
-                              ${cell.options.map(
-                                (option) => html`
-                                  <gds-menu-item>${option.label}</gds-menu-item>
-                                `,
-                              )}
-                            </gds-context-menu>
-                          `
-                        : nothing}
-                    </gds-table-cell>
-                  `,
+                ${row.cells.map((cell, index) =>
+                  // Only render cells for visible columns
+                  this.columns[index].visible
+                    ? html`
+                        <gds-table-cell variant=${cell.variant || ''}>
+                          ${cell.icon
+                            ? this.renderIcon(
+                                cell.icon.name,
+                                cell.icon.slot,
+                                cell.icon.size,
+                              )
+                            : nothing}
+                          ${cell.badge
+                            ? html`
+                                <gds-badge
+                                  variant=${cell.badge.variant}
+                                  size="small"
+                                  slot="lead"
+                                >
+                                  ${cell.badge.label}
+                                </gds-badge>
+                              `
+                            : nothing}
+                          ${cell.value}
+                          ${cell.supportingText
+                            ? html`
+                                <span slot="supporting-text"
+                                  >${cell.supportingText}</span
+                                >
+                              `
+                            : nothing}
+                          ${cell.options
+                            ? html`
+                                <gds-context-menu slot="trail">
+                                  ${cell.options.map(
+                                    (option) => html`
+                                      <gds-menu-item
+                                        >${option.label}</gds-menu-item
+                                      >
+                                    `,
+                                  )}
+                                </gds-context-menu>
+                              `
+                            : nothing}
+                        </gds-table-cell>
+                      `
+                    : nothing,
                 )}
                 ${row.href
                   ? html`
