@@ -196,7 +196,11 @@ export class GdsTable extends GdsElement {
             ${this.columns.map(
               (column) => html`
                 <gds-table-cell>
-                  <gds-icon-dot-grid-two slot="lead"></gds-icon-dot-grid-two>
+                  ${column.dragaggable
+                    ? html`<gds-icon-dot-grid-two
+                        slot="lead"
+                      ></gds-icon-dot-grid-two>`
+                    : nothing}
                   ${column.label}
                   ${column.sortable
                     ? html`

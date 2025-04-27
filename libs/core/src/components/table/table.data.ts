@@ -4,6 +4,7 @@ export interface TableColumn {
   key: string
   label: string
   sortable: boolean
+  dragaggable: boolean
   filterable: boolean
   visible: boolean
   width?: string
@@ -45,6 +46,7 @@ export const BANK_COLUMNS: TableColumn[] = [
     key: 'account',
     label: 'Account',
     sortable: true,
+    dragaggable: false,
     filterable: true,
     visible: true,
   },
@@ -52,6 +54,7 @@ export const BANK_COLUMNS: TableColumn[] = [
     key: 'type',
     label: 'Type',
     sortable: true,
+    dragaggable: true,
     filterable: true,
     visible: true,
   },
@@ -59,6 +62,7 @@ export const BANK_COLUMNS: TableColumn[] = [
     key: 'balance',
     label: 'Balance',
     sortable: true,
+    dragaggable: true,
     filterable: false,
     visible: true,
   },
@@ -66,13 +70,15 @@ export const BANK_COLUMNS: TableColumn[] = [
     key: 'status',
     label: 'Status',
     sortable: true,
+    dragaggable: true,
     filterable: true,
     visible: true,
   },
   {
     key: 'branch',
     label: 'Branch',
-    sortable: true,
+    sortable: false,
+    dragaggable: true,
     filterable: true,
     visible: true,
   },
