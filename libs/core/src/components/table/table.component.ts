@@ -200,13 +200,15 @@ export class GdsTable extends GdsElement {
   private handleDrop(e: DragEvent, targetColumnKey: string) {
     e.preventDefault()
 
-    // Get both columns
-    const sourceColumn = this.columns.find(
+    // Get both columns from visible columns only
+    const sourceColumn = this.visibleColumns.find(
       (col) => col.key === this.draggedColumn,
     )
-    const targetColumn = this.columns.find((col) => col.key === targetColumnKey)
+    const targetColumn = this.visibleColumns.find(
+      (col) => col.key === targetColumnKey,
+    )
 
-    // Only allow drop if both columns are draggable
+    // Only allow drop if both columns are draggable and visible
     if (!sourceColumn?.dragaggable || !targetColumn?.dragaggable) return
     if (!this.draggedColumn || this.draggedColumn === targetColumnKey) return
 
@@ -220,25 +222,24 @@ export class GdsTable extends GdsElement {
     const [movedColumn] = newColumns.splice(fromIndex, 1)
     newColumns.splice(toIndex, 0, movedColumn)
 
-    // Reorder data cells preserving ALL properties
-    const newData = this.data.map((row) => {
-      // Create a complete copy of the row
-      const newRow = { ...row }
-      // Create a complete copy of the cells array
-      const newCells = [...row.cells]
+    // Reorder both filtered and original data
+    const reorderCells = (data: any[]) => {
+      return data.map((row) => {
+        const newRow = { ...row }
+        const newCells = [...row.cells]
+        const [movedCell] = newCells.splice(fromIndex, 1)
+        newCells.splice(toIndex, 0, movedCell)
+        newRow.cells = newCells
+        return newRow
+      })
+    }
 
-      // Move the entire cell object with all its properties
-      const [movedCell] = newCells.splice(fromIndex, 1)
-      newCells.splice(toIndex, 0, movedCell)
+    // Update both original and filtered data
+    this.data = reorderCells(this.data)
+    this.filteredData = reorderCells(this.filteredData)
 
-      // Update the row with the new cells array
-      newRow.cells = newCells
-      return newRow
-    })
-
-    // Update state
+    // Update columns
     this.columns = newColumns
-    this.data = newData
 
     this.draggedColumn = null
     this.dragOverColumn = null
@@ -301,18 +302,31 @@ export class GdsTable extends GdsElement {
   }
 
   private handleFilterSelect(e: CustomEvent) {
-    this.selectedFilterValues = e.detail.value || []
+    // Make sure we're getting the correct value from the event
+    const selectedValues = Array.isArray(e.detail.value) ? e.detail.value : []
+    this.selectedFilterValues = selectedValues
     this.filterData()
+
+    // Dispatch an event if needed
+    this.dispatchEvent(
+      new CustomEvent('filter-change', {
+        detail: {
+          filterValues: this.selectedFilterValues,
+        },
+      }),
+    )
   }
 
-  // Modify your existing filterData method to include column filtering
   private filterData() {
     let filtered = this.data
 
     // Apply search filter
     if (this.searchQuery) {
       filtered = filtered.filter((row) => {
-        return row.cells.some((cell) => {
+        return row.cells.some((cell, index) => {
+          // Only search in visible columns
+          if (!this.columns[index].visible) return false
+
           const searchableContent = [
             cell.value,
             cell.supportingText,
@@ -327,18 +341,54 @@ export class GdsTable extends GdsElement {
       })
     }
 
-    // Apply column filter
+    // Apply branch filter
     if (this.selectedFilterValues.length > 0) {
-      const columnIndex = this.columns.findIndex((col) => col.key === 'branch') // Using branch column as example
-      filtered = filtered.filter((row) => {
-        const cellValue =
-          row.cells[columnIndex].badge?.label || row.cells[columnIndex].value
-        return this.selectedFilterValues.includes(cellValue)
-      })
+      const branchColumnIndex = this.columns.findIndex(
+        (col) => col.key === 'branch',
+      )
+      if (branchColumnIndex !== -1) {
+        filtered = filtered.filter((row) => {
+          const cellValue =
+            row.cells[branchColumnIndex].badge?.label ||
+            row.cells[branchColumnIndex].value
+          return this.selectedFilterValues.includes(cellValue)
+        })
+      }
     }
 
     this.filteredData = filtered
     this.requestUpdate()
+  }
+
+  private handleColumnVisibility(e: CustomEvent) {
+    // Make sure we're getting the correct value from the event
+    const selectedColumns = Array.isArray(e.detail.value) ? e.detail.value : []
+
+    // Update column visibility
+    this.columns = this.columns.map((col) => ({
+      ...col,
+      visible: selectedColumns.includes(col.key),
+    }))
+
+    // Update filtered data to respect column visibility
+    this.filterData()
+    this.requestUpdate()
+
+    // Dispatch the event
+    this.dispatchEvent(
+      new CustomEvent('column-visibility-change', {
+        detail: {
+          visibleColumns: this.columns
+            .filter((col) => col.visible)
+            .map((col) => col.key),
+        },
+      }),
+    )
+  }
+
+  // Add this getter for visible columns
+  private get visibleColumns() {
+    return this.columns.filter((col) => col.visible)
   }
 
   render() {
@@ -389,8 +439,37 @@ export class GdsTable extends GdsElement {
               <gds-icon-pencil-sparkle slot="lead"></gds-icon-pencil-sparkle>
               Compact
             </gds-button>
-            <gds-dropdown size="small" searchable plain>
-              <gds-option value="columns">Columns</gds-option>
+            <gds-dropdown
+              size="small"
+              searchable
+              plain
+              multiple
+              @change=${this.handleColumnVisibility}
+            >
+              <gds-option isplaceholder>Columns</gds-option>
+              ${this.columns.map(
+                (column) => html`
+                  <gds-option value=${column.key} .selected=${column.visible}>
+                    <gds-flex align-items="center" gap="s">
+                      ${column.label}
+                      ${column.dragaggable
+                        ? html`
+                            <gds-badge variant="notice" size="small"
+                              >Draggable</gds-badge
+                            >
+                          `
+                        : nothing}
+                      ${column.sortable
+                        ? html`
+                            <gds-badge variant="positive" size="small"
+                              >Sortable</gds-badge
+                            >
+                          `
+                        : nothing}
+                    </gds-flex>
+                  </gds-option>
+                `,
+              )}
             </gds-dropdown>
           </gds-flex>
         </gds-flex>
@@ -404,7 +483,7 @@ export class GdsTable extends GdsElement {
           <gds-table-row class="table-head">
             <input type="checkbox" slot="lead" />
 
-            ${this.columns.map(
+            ${this.visibleColumns.map(
               (column) => html`
                 <gds-table-cell
                   ?draggable=${column.dragaggable}
