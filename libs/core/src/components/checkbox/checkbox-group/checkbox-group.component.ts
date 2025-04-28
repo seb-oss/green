@@ -1,6 +1,5 @@
-// checkbox-group.ts
 import { localized } from '@lit/localize'
-import { property, query } from 'lit/decorators.js'
+import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsFormControlFooter } from '../../../primitives/form-control-footer/form-control-footer.component'

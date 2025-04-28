@@ -1,12 +1,10 @@
-import { property, query, state } from 'lit/decorators.js'
-import { when } from 'lit/directives/when.js'
+import { property, query } from 'lit/decorators.js'
 
 import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
 import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
-import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../pure'
 import { styles } from './checkbox.styles'
