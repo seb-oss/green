@@ -164,11 +164,13 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   }
 
   #dispatchInputEvent() {
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+          composed: true,
+        }),
+      ),
     )
   }
 

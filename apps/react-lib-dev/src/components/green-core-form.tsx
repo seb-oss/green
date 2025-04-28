@@ -158,7 +158,7 @@ export const GreenCoreFormExample = () => {
                   })
                 }
               >
-                <GdsOption isPlaceholder>Select a fruit</GdsOption>
+                <GdsOption value="">Select a fruit</GdsOption>
                 <GdsOption value="apple">Apple</GdsOption>
                 <GdsOption value="orange">Orange</GdsOption>
                 <GdsOption value="banana">Banana</GdsOption>
@@ -178,6 +178,7 @@ export const GreenCoreFormExample = () => {
                 }
               >
                 <select>
+                  <option value="">Select</option>
                   <option value="cake">Cake</option>
                   <option value="ice-cream">Ice cream</option>
                   <option value="pie">Pie</option>
