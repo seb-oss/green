@@ -1,0 +1,321 @@
+import{l as A}from"./localized-decorator-DtmrKsyB.js";import"./runtime-BL31MtW8.js";import{n as l,G as S,h,g as m,r as j}from"./custom-element-scoping-b4c89-hi.js";import{a as V}from"./query-p8xgzTDt.js";import{e as w}from"./class-map-CXsQwv0r.js";import{G as H,a as K}from"./form-control-header.component-DlYtB3HG.js";import{t as T}from"./tokens.style-OWC-W9l-.js";import{w as R}from"./watch-tFciLXSI.js";import{d as q,b as U,w as X}from"./declarative-layout-mixins-DCzV-Sjo.js";import{a as J}from"./button.component-JH9MBQut.js";import{i as v}from"./lit-element-Bx14lxc-.js";import{n as N}from"./when-BR7zwNJC.js";const Q=v`
+  @layer base, a11y;
+
+  @layer a11y {
+    @media (prefers-reduced-motion: reduce) {
+      .field-label {
+        transition: none;
+      }
+    }
+  }
+
+  @layer base {
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      display: flex;
+      gap: var(--gds-sys-space-s);
+    }
+
+    .label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .primary-label {
+      font-weight: var(--gds-sys-text-weight-book);
+      cursor: inherit;
+    }
+
+    .supporting-text {
+      font-size: var(--_font-size-supporting-text);
+      line-height: var(--_line-height-supporting-text);
+      font-weight: var(--gds-sys-text-weight-regular);
+    }
+  }
+`;var Y=Object.defineProperty,Z=Object.getOwnPropertyDescriptor,k=(e,t,s,i)=>{for(var r=i>1?void 0:i?Z(t,s):t,n=e.length-1,d;n>=0;n--)(d=e[n])&&(r=(i?d(t,s,r):d(r))||r);return i&&r&&Y(t,s,r),r};let b=class extends S{constructor(){super(),this.label="",this.supportingText=""}render(){const e={label:!0,"has-supporting-text":!!this.supportingText};return h`
+      <div class="container">
+        <div class="control-slot">
+          <slot></slot>
+        </div>
+        <div class="${w(e)}">
+          <label class="primary-label"> ${this.label} </label>
+          ${this.label?h`
+                <span class="supporting-text"> ${this.supportingText} </span>
+              `:""}
+        </div>
+      </div>
+    `}};b.styles=[T,Q];k([l()],b.prototype,"label",2);k([l({attribute:"supporting-text"})],b.prototype,"supportingText",2);b=k([m("gds-toggle-control-base"),A()],b);const ee=v`
+  .rbcb {
+    --_toggle-size: var(--gds-sys-space-m);
+    --_toggle-radius: var(--gds-sys-space-2xs);
+    --_perimeter-size: var(--gds-sys-space-xl);
+    --_toggle-border-width-checked: var(--gds-sys-space-s);
+
+    --_perimeter-bg-mix: color-mix(
+      in srgb,
+      var(--gds-sys-color-l3-background-secondary),
+      var(--gds-sys-color-l3-states-light-hover)
+    );
+    --_perimeter-bg-mix-active: color-mix(
+      in srgb,
+      var(--gds-sys-color-l3-background-secondary),
+      var(--gds-sys-color-l3-states-light-pressed)
+    );
+
+    /* -- */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: var(--_toggle-size);
+    height: var(--_toggle-size);
+    margin-block-start: calc(var(--gds-sys-space-4xs) * 2);
+    cursor: pointer;
+  }
+
+  .rbcb--radio {
+    --_toggle-radius: var(--gds-sys-space-max);
+    --_toggle-border-width-checked: var(--gds-sys-space-2xs);
+  }
+
+  .rbcb__toggle {
+    width: var(--_toggle-size);
+    height: var(--_toggle-size);
+    border-radius: var(--_toggle-radius);
+    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+      var(--gds-sys-color-l3-border-secondary);
+    background-color: var(--gds-sys-color-l3-content-primary);
+    box-sizing: border-box;
+    transition-property: box-shadow;
+    transition-duration: 248ms;
+    will-change: box-shadow;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .rbcb__icon {
+    line-height: 10px;
+    transition: scale 150ms;
+    will-change: scale;
+    scale: 1;
+    color: var(--gds-sys-color-l3-content-primary);
+    @starting-style {
+      scale: 0.2;
+    }
+  }
+
+  .rbcb__perimeter {
+    display: flex;
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    transition-property: background-color, scale, outline-color;
+    transition-duration: 248ms;
+    outline-style: solid;
+    outline-offset: calc(-1 * var(--gds-sys-space-3xs));
+    outline-width: 0;
+    outline-color: var(--gds-sys-color-l3-content-tertiary);
+    border-radius: calc(var(--_toggle-radius) + 4px);
+    min-width: var(--_perimeter-size);
+    min-height: var(--_perimeter-size);
+    position: absolute;
+    left: calc(* 1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
+    top: calc(* 1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
+    scale: 0.8;
+  }
+
+  /**
+   * Modifiers
+   */
+
+  .--checked .rbcb__toggle {
+    box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
+      var(--gds-sys-color-l3-border-primary);
+  }
+
+  .--disabled {
+    cursor: default;
+  }
+
+  .--disabled .rbcb__toggle {
+    box-shadow: none;
+    background-color: var(--gds-sys-color-l3-content-disabled);
+  }
+
+  .--invalid .rbcb__toggle {
+    background-color: var(--gds-sys-color-l3-background-negative-secondary);
+    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+      var(--gds-sys-color-l3-border-negative);
+  }
+
+  .--invalid.--checked .rbcb__toggle {
+    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+      var(--gds-sys-color-l3-border-negative);
+  }
+
+  .--invalid .rbcb__perimeter {
+    outline-color: var(--gds-sys-color-l3-border-negative);
+    --_perimeter-bg-mix: color-mix(
+      in srgb,
+      var(--gds-sys-color-l3-background-negative-secondary),
+      var(--gds-sys-color-l3-states-negative-hover)
+    );
+    --_perimeter-bg-mix-active: color-mix(
+      in srgb,
+      var(--gds-sys-color-l3-background-negative-secondary),
+      var(--gds-sys-color-l3-states-negative-pressed)
+    );
+  }
+
+  .--invalid .rbcb__icon {
+    color: var(--gds-sys-color-l3-content-negative);
+  }
+
+  :host(:focus-visible) .rbcb__perimeter {
+    outline-width: var(--gds-sys-space-3xs);
+    scale: 1;
+  }
+
+  @media (hover: hover) {
+    .rbcb:hover:not(.--disabled) .rbcb__perimeter,
+    :host(:hover) .rbcb:not(.--disabled) .rbcb__perimeter {
+      background-color: var(--_perimeter-bg-mix);
+      scale: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rbcb__toggle {
+      transition: none;
+    }
+  }
+
+  .rbcb:active:not(.--disabled) .rbcb__perimeter,
+  :host(:active) .rbcb:not(.--disabled) .rbcb__perimeter {
+    background-color: var(--_perimeter-bg-mix-active);
+  }
+
+  :host(:active:not(:focus-visible)) .rbcb:active .rbcb__perimeter,
+  :host(:active:not(:focus-visible)) .rbcb__perimeter {
+    scale: 0.96;
+  }
+`,ke=e=>F({...e,type:"checkbox"}),te=e=>F({...e,type:"radio"}),F=e=>{const{type:t,checked:s,disabled:i,invalid:r}=e;return h`
+    <div class="rbcb ${w({"rbcb--checkbox":t==="checkbox","rbcb--radio":t==="radio","--checked":s,"--disabled":i,"--invalid":r})}">
+      <div class="rbcb__perimeter"></div>
+      <div class="rbcb__toggle">
+        ${N(t==="checkbox"&&s,()=>h`<gds-icon-checkmark
+              class="rbcb__icon"
+              stroke="4"
+            ></gds-icon-checkmark>`)}
+      </div>
+    </div>
+  `},se=v`
+  :host {
+    /* Font Sizes */
+    --_font-size-label: var(--gds-sys-text-size-detail-m);
+    --_line-height-label: var(--gds-sys-text-line-height-detail-m);
+    --_font-size-supporting-text: var(--gds-sys-text-size-detail-s);
+    --_line-height-supporting-text: var(--gds-sys-text-line-height-detail-s);
+    font-size: var(--_font-size-label);
+    line-height: var(--_line-height-label);
+
+    /* Color */
+    --_radio-label-color: var(--gds-sys-color-l3-content-tertiary);
+  }
+
+  :host(:invalid) {
+    --_radio-label-color: var(--gds-sys-color-l3-content-negative);
+  }
+
+  :host([size='small']) {
+    --_font-size-label: var(--gds-sys-text-size-detail-s);
+    --_line-height-label: var(--gds-sys-text-line-height-detail-s);
+    --_font-size-supporting-text: var(--gds-sys-text-size-detail-s);
+    --_line-height-supporting-text: var(--gds-sys-text-line-height-detail-s);
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gds-sys-space-m);
+  }
+
+  .content {
+    display: flex;
+    position: relative;
+    max-width: max-content;
+    color: var(--_radio-label-color);
+  }
+
+  .direction-row .content {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--gds-sys-space-l);
+  }
+
+  .direction-column .content {
+    flex-direction: column;
+    gap: var(--gds-sys-space-xs);
+  }
+`;var ie=Object.defineProperty,re=Object.getOwnPropertyDescriptor,G=e=>{throw TypeError(e)},g=(e,t,s,i)=>{for(var r=i>1?void 0:i?re(t,s):t,n=e.length-1,d;n>=0;n--)(d=e[n])&&(r=(i?d(t,s,r):d(r))||r);return i&&r&&ie(t,s,r),r},oe=(e,t,s)=>t.has(e)||G("Cannot "+s),ae=(e,t,s)=>t.has(e)?G("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),a=(e,t,s)=>(oe(e,t,"access private method"),s),o,_,O,C,D,P,f,L,M,B,I;let c=class extends J{constructor(){super(...arguments),ae(this,o),this.size="large",this.direction="column",this.supportingText="",this.showExtendedSupportingText=!1,this._isConnected=!1}get radios(){return Array.from(this.querySelectorAll("[gds-element=gds-radio]"))}connectedCallback(){super.connectedCallback(),this._isConnected=!0,this.updateComplete.then(()=>{this._syncRadioStates(),a(this,o,_).call(this)}),this.addEventListener("invalid",this._syncRadioStates)}disconnectedCallback(){super.disconnectedCallback(),this._isConnected=!1,this.removeEventListener("invalid",this._syncRadioStates)}_getValidityAnchor(){return this._contentElement}_handleValueChange(){this._isConnected&&(this._syncRadioStates(),this.updateComplete.then(()=>{a(this,o,_).call(this)}))}_syncRadioStates(){this._isConnected&&this.radios.forEach(e=>{e.checked=e.value===this.value,e.size=this.size,e.invalid=this.invalid})}render(){const e={"radio-group":!0,"direction-row":this.direction==="row","direction-column":this.direction==="column"};return h`<div
+      role="radiogroup"
+      id="radiogroup"
+      class=${w(e)}
+      aria-labelledby="group-label"
+      aria-describedby="supporting-text extended-supporting-text footer"
+      aria-invalid=${this.invalid}
+    >
+      ${a(this,o,L).call(this)}
+    </div>`}};o=new WeakSet;_=function(){if(!this._contentElement||!this._isConnected)return;const e=this.radios.find(t=>t.checked);e?(e.setAttribute("tabindex","0"),this._contentElement.setAttribute("tabindex","-1")):this._contentElement.setAttribute("tabindex","0"),this.radios.filter(t=>!t.checked).forEach(t=>t.setAttribute("tabindex","-1"))};O=function(){if(!this._contentElement||!this._isConnected)return;const e=this.radios.find(s=>s.checked),t=e||this.radios[0];t&&(t.focus(),e||(this.radios.forEach(s=>s.setAttribute("tabindex","-1")),t.setAttribute("tabindex","0"),this._contentElement.setAttribute("tabindex","-1")))};C=function(){this.updateComplete.then(()=>this.dispatchEvent(new Event("change",{composed:!0,bubbles:!0}))),this.updateComplete.then(()=>this.dispatchEvent(new Event("input",{bubbles:!0,composed:!0})))};D=function(e){e.stopPropagation();const t=e.target;this.value=t.value,this._syncRadioStates(),a(this,o,C).call(this)};P=function(e){if(!this._isConnected)return;const t=this.radios.filter(i=>!i.disabled);if(t.length===0)return;let s=t.findIndex(i=>document.activeElement===i);switch(s===-1&&(s=t.findIndex(i=>i.checked),s===-1&&(s=0)),e.key){case"ArrowDown":case"ArrowRight":{e.preventDefault();const i=(s+1)%t.length;a(this,o,f).call(this,t[i]);break}case"ArrowUp":case"ArrowLeft":{e.preventDefault();const i=(s-1+t.length)%t.length;a(this,o,f).call(this,t[i]);break}default:return}};f=function(e){!this._contentElement||!this._isConnected||(this.radios.forEach(t=>t.setAttribute("tabindex","-1")),e.setAttribute("tabindex","0"),this._contentElement.setAttribute("tabindex","-1"),e.checked=!0,e.focus(),this.value=e.value,this._syncRadioStates(),a(this,o,C).call(this))};L=function(){return[a(this,o,M).call(this),a(this,o,B).call(this),a(this,o,I).call(this)].map(t=>h`${t}`)};M=function(){if(this.label)return h` <gds-form-control-header
+        class="size-${this.size}"
+        .showExtendedSupportingText="${this.showExtendedSupportingText}"
+      >
+        <label id="group-label" slot="label">${this.label}</label>
+        <span slot="supporting-text" id="supporting-text">
+          ${this.supportingText}
+        </span>
+        <slot
+          id="extended-supporting-text"
+          name="extended-supporting-text"
+          slot="extended-supporting-text"
+        ></slot>
+      </gds-form-control-header>`};B=function(){return h` <div
+      class="content"
+      @keydown=${a(this,o,P)}
+      @focus=${a(this,o,O)}
+    >
+      <slot @input=${a(this,o,D)}></slot>
+    </div>`};I=function(){return h` <gds-form-control-footer
+      id="footer"
+      class="size-${this.size}"
+      .validationMessage=${this.invalid&&(this.errorMessage||this.validationMessage)}
+    >
+    </gds-form-control-footer>`};c.styles=[T,se];g([l()],c.prototype,"size",2);g([l()],c.prototype,"direction",2);g([l({attribute:"supporting-text"})],c.prototype,"supportingText",2);g([l({attribute:"show-extended-supporting-text",type:Boolean,reflect:!0})],c.prototype,"showExtendedSupportingText",2);g([V(".content")],c.prototype,"_contentElement",2);g([R("value")],c.prototype,"_handleValueChange",1);g([R("invalid")],c.prototype,"_syncRadioStates",1);c=g([A()],c);let E=class extends q(U(X(c))){};E=g([m("gds-radio-group",{dependsOn:[H,K]})],E);const ne=v`
+  :host {
+    cursor: pointer;
+  }
+
+  :host([disabled]) {
+    color: var(--gds-sys-color-l3-content-disabled);
+    cursor: default;
+  }
+
+  :host(:focus) {
+    outline: none;
+  }
+`;var le=Object.defineProperty,de=Object.getOwnPropertyDescriptor,W=e=>{throw TypeError(e)},u=(e,t,s,i)=>{for(var r=i>1?void 0:i?de(t,s):t,n=e.length-1,d;n>=0;n--)(d=e[n])&&(r=(i?d(t,s,r):d(r))||r);return i&&r&&le(t,s,r),r},ce=(e,t,s)=>t.has(e)||W("Cannot "+s),z=(e,t,s)=>(ce(e,t,"read from private field"),s?s.call(e):t.get(e)),$=(e,t,s)=>t.has(e)?W("Cannot add the same private member more than once"):t instanceof WeakSet?t.add(e):t.set(e,s),y,x;let p=class extends S{constructor(){super(),this.label="",this.supportingText="",this.value="",this.checked=!1,this.disabled=!1,this.invalid=!1,this._isFocused=!1,$(this,y,e=>{this.disabled||!this.value||!this.label||(e.preventDefault(),this.checked=!0,this.focus(),this.dispatchEvent(new Event("input",{bubbles:!0})))}),$(this,x,e=>{this.disabled||(e.key==="Enter"||e.key===" ")&&(e.preventDefault(),this.checked=!0,this.dispatchEvent(new Event("input",{bubbles:!0})))}),this.addEventListener("keydown",z(this,x)),this.addEventListener("focus",()=>this._isFocused=!0),this.addEventListener("blur",()=>this._isFocused=!1)}connectedCallback(){super.connectedCallback(),this.setAttribute("role","radio"),this._updateAriaState(),this.addEventListener("click",z(this,y))}_updateAriaState(){this.setAttribute("aria-checked",this.checked.toString()),this.setAttribute("aria-disabled",this.disabled.toString()),this.setAttribute("tabindex",this.disabled?"-1":"0"),this.toggleAttribute("aria-invalid",this.invalid)}updated(e){super.updated(e),(e.has("checked")||e.has("disabled")||e.has("invalid"))&&this._updateAriaState()}render(){return h`
+      <gds-toggle-control-base
+        supporting-text=${this.supportingText}
+        label=${this.label}
+        type="radio"
+      >
+        ${te({checked:this.checked,disabled:this.disabled,invalid:this.invalid})}
+      </gds-toggle-control-base>
+    `}};y=new WeakMap;x=new WeakMap;p.styles=[ee,ne];u([l()],p.prototype,"label",2);u([l({attribute:"supporting-text"})],p.prototype,"supportingText",2);u([l()],p.prototype,"value",2);u([l({type:Boolean,reflect:!0})],p.prototype,"checked",2);u([l({type:Boolean,reflect:!0})],p.prototype,"disabled",2);u([l({type:Boolean})],p.prototype,"invalid",2);u([j()],p.prototype,"_isFocused",2);p=u([m("gds-radio",{dependsOn:[b]})],p);export{p as G,E as a,b,ke as c,ee as r};
