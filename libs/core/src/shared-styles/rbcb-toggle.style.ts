@@ -99,6 +99,16 @@ export default css`
       var(--gds-sys-color-l3-border-primary);
   }
 
+  .--indeterminate .rbcb__toggle {
+    box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
+      var(--gds-sys-color-l3-border-primary);
+  }
+
+  .--invalid.--indeterminate .rbcb__toggle {
+    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+      var(--gds-sys-color-l3-border-negative);
+  }
+
   .--disabled {
     cursor: default;
   }

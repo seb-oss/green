@@ -5,6 +5,7 @@ import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
 import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
+import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../pure'
 import { styles } from './checkbox.styles'
@@ -41,10 +42,25 @@ export class GdsCheckbox extends GdsFormControlElement {
   checked = false
 
   /**
+   * Indicates the indeterminate state of the checkbox.
+   * This state is used when the checkbox represents a group where some but not all
+   * child options are selected, such as in hierarchical selections or "select all" scenarios.
+   */
+  @property({ type: Boolean, reflect: true })
+  indeterminate = false
+
+  /**
    * Whether the checkbox button is disabled or not.
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
+
+  @watch('indeterminate')
+  protected handleIndeterminateChange() {
+    if (this.indeterminate) {
+      this.checked = false
+    }
+  }
 
   get value(): string {
     return this._internalValue || ''
@@ -66,7 +82,10 @@ export class GdsCheckbox extends GdsFormControlElement {
   }
 
   private _updateAriaState() {
-    this.setAttribute('aria-checked', this.checked.toString())
+    this.setAttribute(
+      'aria-checked',
+      this.indeterminate ? 'mixed' : this.checked.toString(),
+    )
     this.setAttribute('aria-disabled', this.disabled.toString())
     this.setAttribute('tabindex', this.disabled ? '-1' : '0')
     this.toggleAttribute('aria-invalid', this.invalid)
@@ -77,6 +96,7 @@ export class GdsCheckbox extends GdsFormControlElement {
 
     if (
       changedProperties.has('checked') ||
+      changedProperties.has('indeterminate') ||
       changedProperties.has('disabled') ||
       changedProperties.has('invalid')
     ) {
@@ -93,6 +113,7 @@ export class GdsCheckbox extends GdsFormControlElement {
       >
         ${checkboxToggle({
           checked: this.checked,
+          indeterminate: this.indeterminate,
           disabled: this.disabled,
           invalid: this.invalid,
         })}
@@ -115,7 +136,12 @@ export class GdsCheckbox extends GdsFormControlElement {
   }
 
   #toggleChecked() {
-    this.checked = !this.checked
+    if (this.indeterminate) {
+      this.indeterminate = false
+      this.checked = true
+    } else {
+      this.checked = !this.checked
+    }
     this.dispatchEvent(
       new CustomEvent('gds-checkbox-change', { bubbles: true }),
     )

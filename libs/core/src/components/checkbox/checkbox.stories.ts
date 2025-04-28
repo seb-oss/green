@@ -10,6 +10,7 @@ import '../text/text'
 import '../divider/divider'
 import '../icon/icons/circle-check'
 import '../icon/icons/cross-small'
+import '../icon/icons/minus-small'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { GdsCheckboxGroup } from './checkbox-group/checkbox-group'
@@ -423,6 +424,21 @@ export const GroupLabel: Story = {
         <gds-checkbox label="Checkbox Label" value="2"></gds-checkbox>
       </gds-checkbox-group>
     </div>
+  `,
+}
+
+/**
+ * The indeterminate state is used when a checkbox represents a group of sub-options with mixed selected states.
+ * Common use cases include:
+ * - Parent checkboxes in a tree structure where some but not all children are checked
+ * - "Select all" checkboxes when some items are selected
+ * - Bulk actions where the selection applies to only some items in a group
+ */
+export const Indeterminate: Story = {
+  ...DefaultParams,
+  name: 'Indeterminate',
+  render: () => html`
+    <gds-checkbox label="Select all" value="1" indeterminate></gds-checkbox>
   `,
 }
 
