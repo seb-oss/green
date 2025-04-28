@@ -119,6 +119,7 @@ export class GdsRadio extends GdsElement {
         ${radioToggle({
           checked: this.checked,
           disabled: this.disabled,
+          indeterminate: false,
           invalid: this.invalid,
         })}
       </gds-toggle-control-base>
