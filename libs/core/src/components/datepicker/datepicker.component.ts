@@ -155,6 +155,16 @@ class Datepicker extends GdsFormControlElement<Date> {
   disabledDates?: Date[]
 
   /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
    * Get the currently focused date in the calendar popover. If no date is focused, or the calendar popover
    * is closed, the value will be undefined.
    */
@@ -240,7 +250,10 @@ class Datepicker extends GdsFormControlElement<Date> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText="${this.showExtendedSupportingText}"
+          >
             <label id="label" for="spinner-0" slot="label">${this.label}</label>
             ${when(
               this.supportingText.length > 0,

@@ -6,7 +6,7 @@ import '../../components/text/text'
 import '../../components/grid/grid'
 import './size.css'
 
-import sizeTokens from '../../../../tokens/src/tokens/size.json';
+import densityTokens from '../../../../tokens/src/tokens/2023/sys/density.comfortable.json';
 
 <Meta title="Style/Size" />
 
@@ -17,8 +17,8 @@ import sizeTokens from '../../../../tokens/src/tokens/size.json';
 The spacing scale is used for margin, padding, gap, radius and all the spacing values.
 
 ### Spacing Scale
-<gds-grid columns={Object.keys(sizeTokens.ref.size).length} gap="xs" width="100%" auto-columns="80">
-{Object.entries(sizeTokens.ref.size).map(([size, { value }]) => (
+<gds-grid columns={Object.keys(densityTokens.sys.space).length} gap="xs" width="100%" auto-columns="80">
+{Object.entries(densityTokens.sys.space).map(([size, { value }]) => (
 <gds-card padding="s" border-radius="l" key={size}>
     <gds-flex gap="l" align-items="center" flex-direction="column">
         <gds-card variant="secondary" padding="s" width="100%" box-sizing="border-box">
@@ -44,7 +44,7 @@ The spacing scale is used for margin, padding, gap, radius and all the spacing v
  <br />
  <br />
 
- ### *1 max
+ ### Max
  The `max` size is the maximum size of the spacing scale used when you want to create a circular shape.
 
  Example
