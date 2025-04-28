@@ -513,7 +513,10 @@ export default function WcagList() {
             <strong>Kategori:</strong>
             <ul>
               {selectedCategories.map((cat) => (
-                <GdsButton key={cat}>{cat}</GdsButton>
+                <GdsButton key={cat}>
+                  {cat}
+                  <IconCrossLarge slot="trail" width={12} height={12} />
+                </GdsButton>
               ))}
             </ul>
           </div>
@@ -525,7 +528,10 @@ export default function WcagList() {
             <strong>Nivå:</strong>
             <ul>
               {selectedLevels.map((lvl) => (
-                <GdsButton key={lvl}>{lvl}</GdsButton>
+                <GdsButton key={lvl}>
+                  {lvl}
+                  <IconCrossLarge slot="trail" width={12} height={12} />
+                </GdsButton>
               ))}
             </ul>
           </div>
@@ -537,7 +543,10 @@ export default function WcagList() {
             <strong>Roll:</strong>
             <ul>
               {selectedRoles.map((role) => (
-                <GdsButton key={role}>{role}</GdsButton>
+                <GdsButton key={role}>
+                  {role}
+                  <IconCrossLarge slot="trail" width={12} height={12} />
+                </GdsButton>
               ))}
             </ul>
           </div>
