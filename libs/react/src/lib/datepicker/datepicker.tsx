@@ -111,7 +111,7 @@ export type DatepickerOptions = {
   /**
    * If the it will be possible to clear the selected date.
    */
-  Clearable?: boolean
+  clearable?: boolean
 
   /**
    * Whether to hide the today button under the calendar.
