@@ -22,14 +22,12 @@ export const styles = css`
         transform: translateY(-16px);
         &::backdrop {
           opacity: 0;
-          backdrop-filter: blur(0);
         }
       }
 
       &::backdrop {
         transition: 0.3s;
-        background: rgba(100, 100, 100, 0.3);
-        backdrop-filter: blur(3px);
+        background: rgba(100, 100, 100, 0.4);
       }
     }
 
