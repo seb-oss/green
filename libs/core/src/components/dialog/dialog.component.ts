@@ -8,6 +8,10 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import {
+  withSizeXProps,
+  withSizeYProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
@@ -37,8 +41,9 @@ registerGlobalScrollLockStyles()
   dependsOn: [GdsButton, GdsCard, GdsFlex, IconCrossLarge],
 })
 @localized()
-export class GdsDialog extends GdsElement {
+export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   static styles = [styles]
+  static styleExpressionBaseSelector = 'dialog'
 
   /**
    * Whether the dialog is open. The state of the dialog can be controlled either
@@ -106,7 +111,7 @@ export class GdsDialog extends GdsElement {
               class="card"
               display="flex"
               variant="secondary"
-              shadow="xl"
+              box-shadow="xl"
               padding="s"
               border-radius=${this.variant === 'default' ? 's' : '0'}
             >
