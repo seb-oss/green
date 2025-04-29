@@ -106,7 +106,7 @@ describe('<gds-checkbox-group>', () => {
       await el.updateComplete
       expect(el.checkboxes.length).to.equal(3)
     })
-    it('should have a value of empty array whn no boxes are checked', async () => {
+    it('should have a value of empty array when no boxes are checked', async () => {
       const el = await fixture<GdsCheckbox>(
         html`<gds-checkbox-group label="Group label">
           <gds-checkbox value="1" label="Checkbox 1"></gds-checkbox>
