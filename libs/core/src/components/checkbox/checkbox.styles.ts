@@ -10,6 +10,10 @@ export const styles = css`
     cursor: default;
   }
 
+  :host(:invalid) {
+    color: var(--gds-sys-color-l3-content-negative);
+  }
+
   :host(:focus) {
     outline: none;
   }

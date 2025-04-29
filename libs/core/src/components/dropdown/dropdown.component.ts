@@ -614,21 +614,25 @@ export class GdsDropdown<ValueT = any>
   }
 
   #dispatchInputEvent = () => {
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+          composed: true,
+        }),
+      ),
     )
   }
 
   #dispatchChangeEvent = () => {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-        bubbles: true,
-        composed: true,
-      }),
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new CustomEvent('change', {
+          detail: { value: this.value },
+          bubbles: true,
+          composed: true,
+        }),
+      ),
     )
   }
 

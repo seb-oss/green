@@ -11,11 +11,11 @@ export const styles = css`
     line-height: var(--_line-height-label);
 
     /* Color */
-    --_radio-label-color: var(--gds-sys-color-l3-content-tertiary);
+    --_checkbox-label-color: var(--gds-sys-color-l3-content-tertiary);
   }
 
   :host(:invalid) {
-    --_radio-label-color: var(--gds-sys-color-l3-content-negative);
+    --_checkbox-label-color: var(--gds-sys-color-l3-content-negative);
   }
 
   :host([size='small']) {
@@ -25,7 +25,7 @@ export const styles = css`
     --_line-height-supporting-text: var(--gds-sys-text-line-height-detail-s);
   }
 
-  .radio-group {
+  .checkbox-group {
     display: flex;
     flex-direction: column;
     gap: var(--gds-sys-space-m);
@@ -35,7 +35,7 @@ export const styles = css`
     display: flex;
     position: relative;
     max-width: max-content;
-    color: var(--_radio-label-color);
+    color: var(--_checkbox-label-color);
   }
 
   .direction-row .content {
