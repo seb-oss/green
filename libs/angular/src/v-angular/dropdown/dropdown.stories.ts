@@ -662,14 +662,6 @@ WithLockedInput.args = {
   description: undefined,
 }
 
-export const WithCustomLockedTemplate = Template.bind({})
-WithCustomLockedTemplate.args = {
-  ...Primary.args,
-  ngModel: 'opt2',
-  locked: true,
-  description: undefined,
-}
-
 export const WithDisplayDisabledAsLocked = Template.bind({})
 WithDisplayDisabledAsLocked.args = {
   ...Primary.args,
