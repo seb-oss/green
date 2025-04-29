@@ -14,7 +14,8 @@ import { styles } from './checkbox.styles'
  * @element gds-checkbox
  * @status beta
  *
- * @event gds-checkbox-change - Dispatched when the checkbox is checked.
+ * @event input - Dispatched when the checkbox is checked or unchecked.
+ * @event change - Dispatched when the checkbox is checked or unchecked.
  */
 @gdsCustomElement('gds-checkbox', {
   dependsOn: [GdsToggleControlBase, IconCheckmark],
@@ -143,7 +144,10 @@ export class GdsCheckbox extends GdsFormControlElement {
       this.checked = !this.checked
     }
     this.dispatchEvent(
-      new CustomEvent('gds-checkbox-change', { bubbles: true }),
+      new Event('change', {
+        bubbles: true,
+        composed: true,
+      }),
     )
     this.dispatchEvent(
       new Event('input', {
