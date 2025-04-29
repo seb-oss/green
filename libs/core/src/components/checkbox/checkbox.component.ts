@@ -55,13 +55,6 @@ export class GdsCheckbox extends GdsFormControlElement {
   @property({ type: Boolean, reflect: true })
   disabled = false
 
-  @watch('indeterminate')
-  protected handleIndeterminateChange() {
-    if (this.indeterminate) {
-      this.checked = false
-    }
-  }
-
   get value(): string {
     return this._internalValue || ''
   }
@@ -89,6 +82,13 @@ export class GdsCheckbox extends GdsFormControlElement {
     this.setAttribute('aria-disabled', this.disabled.toString())
     this.setAttribute('tabindex', this.disabled ? '-1' : '0')
     this.toggleAttribute('aria-invalid', this.invalid)
+  }
+
+  @watch('indeterminate')
+  private _handleIndeterminateChange() {
+    if (this.indeterminate) {
+      this.checked = false
+    }
   }
 
   protected updated(changedProperties: Map<string, unknown>) {
