@@ -35,8 +35,8 @@ export class GdsText extends GdsDiv {
     selector: '[tag]',
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-text-size-${size});`
-      const styleLine = `line-height: var(--gds-text-line-height-${size});`
+      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
+      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
       return styleSize + styleLine
     },
   })
@@ -48,7 +48,7 @@ export class GdsText extends GdsDiv {
    */
   @styleExpressionProperty({
     selector: '[tag]',
-    valueTemplate: (v) => `var(--gds-text-weight-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-text-weight-${v})`,
   })
   'font-weight'?: string
 

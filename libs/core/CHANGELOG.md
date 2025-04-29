@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.76.3
+
+### Patch Changes
+
+- 56552ef: Changeing datepicker focus color
+
+## 1.76.2
+
+### Patch Changes
+
+- 441260e: **Dropdown:** Removed label for chevron icon
+- ba27ca9: **Select, Datepicker, Dropdown, Input, Textarea and Radio:** Add missing extended supporting text slot and prop
+
 ## 1.76.1
 
 ### Patch Changes

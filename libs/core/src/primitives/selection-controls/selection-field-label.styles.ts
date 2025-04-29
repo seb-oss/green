@@ -19,7 +19,7 @@ export const styles = css`
 
     .selection-field-container {
       display: flex;
-      gap: var(--gds-space-s);
+      gap: var(--gds-sys-space-s);
       cursor: pointer;
     }
 
@@ -31,14 +31,14 @@ export const styles = css`
     }
 
     .primary-label {
-      font-weight: var(--gds-text-weight-book);
+      font-weight: var(--gds-sys-text-weight-book);
       cursor: pointer;
     }
 
     .supporting-text {
       font-size: var(--_font-size-supporting-text);
       line-height: var(--_line-height-supporting-text);
-      font-weight: var(--gds-text-weight-regular);
+      font-weight: var(--gds-sys-text-weight-regular);
     }
   }
 `
