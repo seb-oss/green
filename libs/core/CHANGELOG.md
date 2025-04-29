@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.77.0
+
+### Minor Changes
+
+- 7d86c93: **Checkbox:** Add new component
+- 7d86c93: **Form Controls:** Dispatch `gds-validity-state` event when a validator has changed the state.
+
+### Patch Changes
+
+- 7d86c93: **Datepicker:** Fix event type for `input` and `change` events (`CustomEvent` -> `Event`)
+- 7d86c93: **Select:** Fix issue with initial validation running on untouched control
+- 7d86c93: **Radio Buttons**: Fix issue where value would not get picked up when assigned as a property
+- 7d86c93: **Datepicker:** Fix missing `input` event on clear
+
+## 1.76.3
+
+### Patch Changes
+
+- 56552ef: Changeing datepicker focus color
+
 ## 1.76.2
 
 ### Patch Changes

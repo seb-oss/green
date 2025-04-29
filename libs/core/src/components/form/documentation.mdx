@@ -48,6 +48,8 @@ The return value of the `validate` method should be a tuple of the validity stat
 The `ValidityState` object communicates the cause of the validation failure to the user agent. If the control was
 initially in a valid state, setting it to invalid will also cause it to emit a `invalid` event.
 
+Additionally, if the validity state changes due to the validate method, a `gds-validity-state` event will be dispatched. This event is not emitted when validity is explicitly set.
+
 The validator is executed when the value of the form control changes, and when the form emits a submit event.
 
 ## Using other validation methods
