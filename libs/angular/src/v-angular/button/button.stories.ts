@@ -88,6 +88,7 @@ export const Primary = Template.bind({})
 Primary.args = {
   buttonStyle: ButtonStyle.Primary,
   text: getButtonText(ButtonStyle.Primary),
+  small: false,
   clickAction: console.log,
 }
 
