@@ -32,23 +32,31 @@
 
 <!-- LOCKED INPUT -->
 <ng-container *ngIf="locked">
-  <div
-    [id]="id + '-input'"
-    class="nggv-field--locked"
-    [attr.name]="name"
-    [attr.value]="state"
-    [attr.role]="role"
-  >
-    <span *ngIf="!state" class="unset-state">-</span>
-    <ng-container *ngIf="state">
-      <ng-container *ngIf="!inputMask">
-        {{ state }}
+  <ng-template
+    *ngTemplateOutlet="
+      lockedTpl || defaultLockedTpl;
+      context: { $implicit: state }
+    "
+  ></ng-template>
+  <ng-template #defaultLockedTpl>
+    <div
+      [id]="id + '-input'"
+      class="nggv-field--locked"
+      [attr.name]="name"
+      [attr.value]="state"
+      [attr.role]="role"
+    >
+      <span *ngIf="!state" class="unset-state">-</span>
+      <ng-container *ngIf="state">
+        <ng-container *ngIf="!inputMask">
+          {{ state }}
+        </ng-container>
+        <ng-container *ngIf="!!inputMask">
+          {{ state | nggvInputMaskFormat: inputMask }}
+        </ng-container>
       </ng-container>
-      <ng-container *ngIf="!!inputMask">
-        {{ state | nggvInputMaskFormat: inputMask }}
-      </ng-container>
-    </ng-container>
-  </div>
+    </div>
+  </ng-template>
 </ng-container>
 
 <!-- INPUT WRAPPER -->
