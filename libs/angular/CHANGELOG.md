@@ -1,5 +1,21 @@
 # Changelog
 
+## 5.10.0
+
+### Minor Changes
+
+- 7d86c93: **Forms:** Add ControlValueAccessor support for `gds-checkbox`
+
+### Patch Changes
+
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+  - @sebgroup/green-core@1.77.0
+
 ## 5.9.0
 
 ### Minor Changes

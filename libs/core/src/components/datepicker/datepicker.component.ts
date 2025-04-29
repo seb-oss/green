@@ -439,6 +439,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 e.stopPropagation()
                 this.value = undefined
                 this.open = false
+                this.#dispatchInputEvent()
                 this.#dispatchChangeEvent()
               }}
             >
@@ -567,18 +568,24 @@ class Datepicker extends GdsFormControlElement<Date> {
   }
 
   #dispatchChangeEvent() {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-      }),
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new Event('change', {
+          bubbles: true,
+          composed: true,
+        }),
+      ),
     )
   }
 
   #dispatchInputEvent() {
-    this.dispatchEvent(
-      new CustomEvent('input', {
-        detail: { value: this.value },
-      }),
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+          composed: true,
+        }),
+      ),
     )
   }
 

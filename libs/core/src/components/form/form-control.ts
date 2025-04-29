@@ -29,6 +29,8 @@ export interface GdsValidator {
  * other common form control functionality that all Green Core form controls share.
  *
  * @internal
+ *
+ * @event gds-validity-state - Dispatched when the validity state of the form control is changed by a validator.
  */
 export abstract class GdsFormControlElement<ValueT = any>
   extends GdsElement
@@ -101,11 +103,6 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({
     type: Boolean,
     reflect: true,
-    attribute: 'aria-invalid',
-    converter: {
-      fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value?.toString(),
-    },
   })
   set invalid(value: boolean) {
     const oldValue = this.invalid
@@ -194,7 +191,19 @@ export abstract class GdsFormControlElement<ValueT = any>
       this._getValidityAnchor(),
     )
 
-    if (oldValue !== this.invalid) this.requestUpdate()
+    if (oldValue !== this.invalid) {
+      this.requestUpdate('invalid', oldValue)
+      this.dispatchEvent(
+        new CustomEvent('gds-validity-state', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            valid: this.validity.valid,
+            message: this.validationMessage,
+          },
+        }),
+      )
+    }
 
     return this.#internals.checkValidity()
   }
@@ -203,18 +212,19 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.reportValidity()
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   private __handleValueChange() {
     this.#internals.setFormValue(this.value as any)
     this.checkValidity()
   }
 
-  formResetCallback() {
+  protected formResetCallback() {
     if (typeof this.value === 'string') (this.value as string) = ''
+    else if (Array.isArray(this.value)) (this.value as Array<string>) = []
     else this.value = undefined
   }
 
-  formAssociatedCallback(form?: HTMLFormElement) {
+  protected formAssociatedCallback(form?: HTMLFormElement) {
     form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 
