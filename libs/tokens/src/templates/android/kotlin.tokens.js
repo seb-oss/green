@@ -1,49 +1,28 @@
-import {
-  File,
-  formatHelpers,
-  Options,
-  TransformedToken,
-} from 'style-dictionary'
+import { fileHeader } from 'style-dictionary/utils'
 
-const { fileHeader } = formatHelpers
-
-export type TokenTreeProperty = {
-  name: string
-  path: string[]
-  token: TransformedToken
-}
-
-export type TokenBranch = {
-  name: string
-  tree: TokenTree
-}
-
-export type TokenTree = {
-  properties: TokenTreeProperty[]
-  branches: TokenBranch[]
-}
-
-export const staticPropertyFormatter = (
-  options: Options,
-  valueFormatter: (token) => string,
-): ((token: TokenTreeProperty, indent: string) => string) => {
-  return function (token, indent): string {
+export const staticPropertyFormatter = (options, valueFormatter) => {
+  return function (token, indent) {
     let value = valueFormatter(token.token)
     const equalityIndex = value.indexOf('=')
     if (equalityIndex > 0) {
       value = value.slice(equalityIndex + 1)
     }
     return (
-      indent + options.accessControl + 'static let ' + token.name + ' =' + value
+      indent +
+      options.accessControl +
+      ' static let ' +
+      token.name +
+      ' =' +
+      value
     )
   }
 }
 
 export const swiftUiColorReferencePropertyFormatter = (
-  uiKitObjectName: string,
-  options: Options,
-): ((token: TokenTreeProperty, indent: string) => string) => {
-  return function (token, indent): string {
+  uiKitObjectName,
+  options,
+) => {
+  return function (token, indent) {
     const path =
       token.path
         .slice(0, token.path.length - 1)
@@ -57,7 +36,7 @@ export const swiftUiColorReferencePropertyFormatter = (
     return (
       indent +
       options.accessControl +
-      'static let ' +
+      ' static let ' +
       token.name +
       ' = Color(uiColor: ' +
       uiKitObjectName +
@@ -69,11 +48,11 @@ export const swiftUiColorReferencePropertyFormatter = (
 }
 
 export const uiKitColorReferencePropertyFormatter = (
-  lightModeObjectName: string,
-  darkModeObjectName: string,
-  options: Options,
-): ((token: TokenTreeProperty, indent: string) => string) => {
-  return function (token, indent): string {
+  lightModeObjectName,
+  darkModeObjectName,
+  options,
+) => {
+  return function (token, indent) {
     const path =
       token.path
         .slice(0, token.path.length - 1)
@@ -87,7 +66,7 @@ export const uiKitColorReferencePropertyFormatter = (
     return (
       indent +
       options.accessControl +
-      'static var ' +
+      ' static var ' +
       token.name +
       ': UIColor {\n' +
       indent +
@@ -115,10 +94,7 @@ export const uiKitColorReferencePropertyFormatter = (
 }
 
 /// Structures a list of tokens into a tree by the token paths.
-export const treeFromTokens = (
-  tokens: TransformedToken[],
-  ignorePathUpToValue?: string,
-): TokenTree => {
+export const treeFromTokens = (tokens, ignorePathUpToValue) => {
   let tree = null
   tokens.forEach((token) => {
     let usablePath
@@ -150,15 +126,15 @@ export const treeFromTokens = (
 }
 
 /// Outputs the full string contents of a Swift file constructed from the information in a given TokenTree.
-export const fileContentFromTree = (
-  tree: TokenTree,
-  options: Options,
-  file: File,
-  propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
-): string => {
+export const fileContentFromTree = async (
+  tree,
+  options,
+  file,
+  propertyFormatter,
+) => {
   // Headers and imports
   let result = '//\n// ' + file.destination + '\n//\n'
-  result += fileHeader({ file, commentStyle: 'short' })
+  result += await fileHeader({ file, commentStyle: 'short' })
   result += options.import
     .map(function (item) {
       return 'import ' + item
@@ -168,19 +144,19 @@ export const fileContentFromTree = (
 
   // File contents
   result +=
-    options.accessControl + options.objectType + ' ' + file.className + ' {\n'
+    options.accessControl +
+    ' ' +
+    options.objectType +
+    ' ' +
+    options.className +
+    ' {\n'
   result += swiftObjectFromTree(tree, options, propertyFormatter, 1)
   result += '}\n'
 
   return result
 }
 
-const swiftObjectFromTree = (
-  tree: TokenTree,
-  options: Options,
-  propertyFormatter: (token: TokenTreeProperty, indent: string) => string,
-  indent: number,
-): string => {
+const swiftObjectFromTree = (tree, options, propertyFormatter, indent) => {
   let result = ''
   const indentString = '    '.repeat(indent)
 
@@ -194,6 +170,7 @@ const swiftObjectFromTree = (
     result +=
       indentString +
       options.accessControl +
+      ' ' +
       options.objectType +
       ' ' +
       name +
@@ -214,12 +191,7 @@ const swiftObjectFromTree = (
   return result
 }
 
-const placeTokenInTree = (
-  token: TransformedToken,
-  path: string[],
-  fullPath: string[],
-  tree?: TokenTree,
-): TokenTree => {
+const placeTokenInTree = (token, path, fullPath, tree) => {
   if (!tree) {
     tree = {
       properties: [],

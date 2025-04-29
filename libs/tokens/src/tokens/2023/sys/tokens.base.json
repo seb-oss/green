@@ -1,5 +1,83 @@
 {
   "sys": {
+    "state": {
+      "hover-state-layer-opacity": {
+        "value": "0.10",
+        "type": "float"
+      }
+    },
+    "motion": {
+      "easing": {
+        "ease-in": {
+          "value": "cubic-bezier(0.64, 0, 0.78, 0)",
+          "type": "string"
+        },
+        "ease-in-out": {
+          "value": "cubic-bezier(0.83, 0, 0.17, 1)",
+          "type": "string"
+        },
+        "ease-out": {
+          "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+          "type": "string"
+        },
+        "linear": {
+          "value": "cubic-bezier(0, 0, 1, 1)",
+          "type": "string"
+        }
+      },
+      "duration": {
+        "fastest": {
+          "value": ".2s",
+          "type": "string"
+        },
+        "fast": {
+          "value": ".4s",
+          "type": "string"
+        },
+        "default": {
+          "value": ".5s",
+          "type": "string"
+        },
+        "slow": {
+          "value": "1s",
+          "type": "string"
+        },
+        "slowest": {
+          "value": "1.5s",
+          "type": "string"
+        }
+      }
+    },
+    "viewport": {
+      "XS": {
+        "value": "375",
+        "type": "float"
+      },
+      "S": {
+        "value": "430",
+        "type": "float"
+      },
+      "M": {
+        "value": "768",
+        "type": "float"
+      },
+      "L": {
+        "value": "1024",
+        "type": "float"
+      },
+      "XL": {
+        "value": "1440",
+        "type": "float"
+      },
+      "2XL": {
+        "value": "2560",
+        "type": "float"
+      },
+      "3XL": {
+        "value": "3840",
+        "type": "float"
+      }
+    },
     "shadow": {
       "xs-offset-x-1": {
         "value": "0",
@@ -18,8 +96,7 @@
         "type": "float"
       },
       "xs-color-1": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "xs-offset-x-2": {
         "value": "0",
@@ -38,8 +115,7 @@
         "type": "float"
       },
       "xs-color-2": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "s-offset-x-1": {
         "value": "0",
@@ -58,8 +134,7 @@
         "type": "float"
       },
       "s-color-1": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "s-offset-x-2": {
         "value": "0",
@@ -78,8 +153,7 @@
         "type": "float"
       },
       "s-color-2": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "m-offset-x-1": {
         "value": "0",
@@ -98,8 +172,7 @@
         "type": "float"
       },
       "m-color-1": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "m-offset-x-2": {
         "value": "0",
@@ -118,8 +191,7 @@
         "type": "float"
       },
       "m-color-2": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "l-offset-x-1": {
         "value": "0",
@@ -138,8 +210,7 @@
         "type": "float"
       },
       "l-color-1": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "l-offset-x-2": {
         "value": "0",
@@ -158,8 +229,7 @@
         "type": "float"
       },
       "l-color-2": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "xl-offset-x-1": {
         "value": "0",
@@ -178,8 +248,7 @@
         "type": "float"
       },
       "xl-color-1": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       },
       "xl-offset-x-2": {
         "value": "0",
@@ -198,8 +267,7 @@
         "type": "float"
       },
       "xl-color-2": {
-        "value": "#000000",
-        "type": "color"
+        "value": "#000000"
       }
     }
   }

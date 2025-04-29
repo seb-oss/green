@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.9.0
+
+### Minor Changes
+
+- 8616efe: Updated v-angular table for mobile view
+
 ## 5.8.1
 
 ### Patch Changes

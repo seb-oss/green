@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.76.3
+
+### Patch Changes
+
+- 56552ef: Changeing datepicker focus color
+
 ## 1.76.2
 
 ### Patch Changes
