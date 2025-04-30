@@ -1,5 +1,5 @@
 import fs from 'fs'
-import path, { dirname, format } from 'path'
+import path, { dirname, format, sep } from 'path'
 import { fileURLToPath } from 'url'
 import _ from 'lodash'
 import {
@@ -12,6 +12,8 @@ import {
 } from 'style-dictionary/utils'
 
 import * as kotlin from './templates/android/kotlin.tokens.js'
+import ComposeColorSchemeTemplate from './templates/compose/color-scheme.template.js'
+import ComposeClassTemplate from './templates/compose/data-class.template.js'
 import * as swift from './templates/ios/swift.tokens.js'
 
 /**
@@ -132,52 +134,33 @@ const formats = {
       return fileContent
     },
   },
-  'green/android-kotlin-class-tree': {
-    name: 'green/android-kotlin-class-tree',
-    format: ({ dictionary, options, file, platform }) => {
-      let allTokens
-      const { outputReferences } = options
-      options = setSwiftFileProperties(
+  'compose/class': {
+    name: 'compose/class',
+    format: async ({ dictionary, options, file }) => {
+      return ComposeClassTemplate({
+        allTokens: dictionary.allTokens,
         options,
-        'class',
-        platform.transformGroup,
-      )
-      if (outputReferences) {
-        allTokens = [...dictionary.allTokens].sort(sortByReference(dictionary))
-      } else {
-        allTokens = [...dictionary.allTokens].sort(sortByName)
-      }
-
-      let propertyformat
-      if (options.colorType == 'uiKitDynamicProvider') {
-        propertyformat = kotlin.uiKitColorReferencePropertyFormatter(
-          options.lightModeObjectName,
-          options.darkModeObjectName,
-          options,
-        )
-      } else if (options.colorType == 'swiftUiReferenceToUiKit') {
-        propertyformat = kotlin.swiftUiColorReferencePropertyFormatter(
-          options.uiKitObjectName,
-          options,
-        )
-      } else {
-        const valueformat = createPropertyFormatter({
-          outputReferences,
+        header: await fileHeader({ file }),
+      })
+    },
+  },
+  'compose/color-scheme': {
+    name: 'compose/color-scheme',
+    format: async ({ dictionary, options, file }) => {
+      return ComposeColorSchemeTemplate({
+        allTokens: dictionary.allTokens,
+        formatProperty: createPropertyFormatter({
+          outputReferences: options.outputReferences,
           dictionary,
           formatting: {
-            suffix: '',
+            prefix: '',
+            suffix: ',',
+            separator: ' =',
           },
-        })
-        propertyformat = kotlin.staticPropertyFormatter(options, valueformat)
-      }
-      const tree = kotlin.treeFromTokens(allTokens, options.type)
-      const fileContent = kotlin.fileContentFromTree(
-        tree,
+        }),
         options,
-        file,
-        propertyformat,
-      )
-      return fileContent
+        header: await fileHeader({ file }),
+      })
     },
   },
   // 'green/android-resources': {
