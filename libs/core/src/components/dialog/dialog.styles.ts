@@ -49,6 +49,10 @@ export const styles = css`
       }
     }
 
+    dialog:focus {
+      outline: none;
+    }
+
     .card {
       flex-direction: column;
     }

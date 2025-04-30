@@ -8,6 +8,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { isIOS } from '../../utils/helpers/platform'
 import {
   withSizeXProps,
   withSizeYProps,
@@ -165,6 +166,12 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
       this.updateComplete.then(() => {
         this._elDialog?.showModal()
         lockBodyScrolling(this)
+
+        // VoiceOver on iOS fails to move focus to the dialog in some cases.
+        // This is a workaround to
+        if (isIOS) {
+          this._elDialog?.focus()
+        }
       })
     } else {
       this.#returnValue = this.#returnValue || 'prop-change'
