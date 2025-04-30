@@ -33,33 +33,33 @@ const style = css`
     }
 
     input[type='text'] {
-      border-radius: var(--gds-space-xs);
+      border-radius: var(--gds-sys-space-xs);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       font-size: inherit;
       line-height: inherit;
       border: none;
       outline: none;
-      color: var(--gds-color-l3-content-disabled);
-      border-color: var(--gds-color-l3-border-tertiary);
-      border-width: 0 0 var(--gds-space-4xs) 0;
+      color: var(--gds-sys-color-l3-content-disabled);
+      border-color: var(--gds-sys-color-l3-border-tertiary);
+      border-width: 0 0 var(--gds-sys-space-4xs) 0;
       border-style: solid;
       width: 100%;
-      padding: var(--gds-space-m);
-      font-weight: var(--gds-text-weight-regular);
+      padding: var(--gds-sys-space-m);
+      font-weight: var(--gds-sys-text-weight-regular);
       flex: 1;
       box-sizing: border-box;
       font-family: inherit;
 
       &:focus {
-        border-color: var(--gds-color-l3-border-secondary);
-        color: var(--gds-color-l3-content-tertiary);
+        border-color: var(--gds-sys-color-l3-border-secondary);
+        color: var(--gds-sys-color-l3-content-tertiary);
       }
 
       &::placeholder {
         font-family: inherit;
-        font-weight: var(--gds-text-weight-book);
-        color: var(--gds-color-l3-content-disabled);
+        font-weight: var(--gds-sys-text-weight-book);
+        color: var(--gds-sys-color-l3-content-disabled);
       }
     }
 

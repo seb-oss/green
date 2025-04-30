@@ -81,8 +81,8 @@ Media queries can also be expressed as CSS units and as ranges, for example:
 - `>500px, <1000px { ... }` - Above 500px, below 1000px
 
 The value that goes in the media query is usually resolved to a css variable. In the padding example, it would
-resolve to `var(--gds-space-m)`. This is then transformed into a CSS property, typically of the same name as the
-property used on the component. So, here it would be `padding: var(--gds-space-m)`. That means you can also use
+resolve to `var(--gds-sys-space-m)`. This is then transformed into a CSS property, typically of the same name as the
+property used on the component. So, here it would be `padding: var(--gds-sys-space-m)`. That means you can also use
 regular CSS shorthand patterns, like `padding: 1em 2em 3em 4em` by adding more values. They will each resolve to\
 a CSS variable. For example: `padding="xs; l {m xl m xl}"`
 

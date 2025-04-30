@@ -1,5 +1,39 @@
 # Changelog
 
+## 1.78.0
+
+### Minor Changes
+
+- 9075450: **Dialog:** Add style expression properties for controlling size
+
+### Patch Changes
+
+- 657e0a3: **Spinner:** Update backdrop color
+- 0a3ac2c: **Checkbox & Radio:** Add missing `.js` extension on import paths
+- 9075450: **Dialog:** Fix iOS focus issue when opening via custom button
+- 9075450: **Dialog:** Remove backdrop blur effect
+- 6846a6c: Datepicker option to not use Clear and Today button
+
+## 1.77.0
+
+### Minor Changes
+
+- 7d86c93: **Checkbox:** Add new component
+- 7d86c93: **Form Controls:** Dispatch `gds-validity-state` event when a validator has changed the state.
+
+### Patch Changes
+
+- 7d86c93: **Datepicker:** Fix event type for `input` and `change` events (`CustomEvent` -> `Event`)
+- 7d86c93: **Select:** Fix issue with initial validation running on untouched control
+- 7d86c93: **Radio Buttons**: Fix issue where value would not get picked up when assigned as a property
+- 7d86c93: **Datepicker:** Fix missing `input` event on clear
+
+## 1.76.3
+
+### Patch Changes
+
+- 56552ef: Changeing datepicker focus color
+
 ## 1.76.2
 
 ### Patch Changes

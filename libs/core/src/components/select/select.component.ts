@@ -196,7 +196,8 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
 
         // If this is the initial render, set the value from the select element
         // Otherwise we set the select element value from the component value, so that it still reflects the value prop in case it was rerendered
-        if (!this.#isValueInitialized) this.value = clone.value as ValueT
+        if (!this.#isValueInitialized)
+          this._internalValue = clone.value as ValueT
         else clone.value = this.value as string
 
         return clone

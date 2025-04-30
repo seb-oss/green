@@ -1,5 +1,44 @@
 # Changelog
 
+## 5.11.0
+
+### Minor Changes
+
+- 318de75: **V-Angular Inputs:** Support for custom locked template for input fields.
+
+### Patch Changes
+
+- 766cbe6: Adding export of checkbox directive to fix build error
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
+## 5.10.0
+
+### Minor Changes
+
+- 7d86c93: **Forms:** Add ControlValueAccessor support for `gds-checkbox`
+
+### Patch Changes
+
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+  - @sebgroup/green-core@1.77.0
+
+## 5.9.0
+
+### Minor Changes
+
+- 8616efe: Updated v-angular table for mobile view
+
 ## 5.8.1
 
 ### Patch Changes

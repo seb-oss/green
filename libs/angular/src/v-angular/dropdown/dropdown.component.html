@@ -28,25 +28,33 @@
 
   <!-- LOCKED INPUT -->
   <ng-container *ngIf="locked">
-    <div
-      [id]="id + '-input'"
-      class="nggv-field--locked"
-      [attr.name]="name"
-      [attr.value]="state"
-      [attr.role]="role"
-      [attr.aria-labelledby]="id + '-label ' + id + '-input'"
-    >
-      <span *ngIf="!state" class="unset-state">-</span>
-      <ng-container *ngIf="state">
-        <ng-template
-          *ngTemplateOutlet="
-            selectedContentTpl || defaultSelectedContentTpl;
-            context: { $implicit: state }
-          "
-        >
-        </ng-template>
-      </ng-container>
-    </div>
+    <ng-template
+      *ngTemplateOutlet="
+        lockedTpl || defaultLockedTpl;
+        context: { $implicit: state }
+      "
+    ></ng-template>
+    <ng-template #defaultLockedTpl>
+      <div
+        [id]="id + '-input'"
+        class="nggv-field--locked"
+        [attr.name]="name"
+        [attr.value]="state"
+        [attr.role]="role"
+        [attr.aria-labelledby]="id + '-label ' + id + '-input'"
+      >
+        <span *ngIf="!state" class="unset-state">-</span>
+        <ng-container *ngIf="state">
+          <ng-template
+            *ngTemplateOutlet="
+              selectedContentTpl || defaultSelectedContentTpl;
+              context: { $implicit: state }
+            "
+          >
+          </ng-template>
+        </ng-container>
+      </div>
+    </ng-template>
   </ng-container>
 
   <!-- INPUT -->

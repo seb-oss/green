@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.28.1
+
+### Patch Changes
+
+- 6846a6c: Datepicker option to not use Clear and Today button
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
 ## 3.28.0
 
 ### Minor Changes
