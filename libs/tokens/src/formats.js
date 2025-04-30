@@ -11,7 +11,6 @@ import {
   sortByReference,
 } from 'style-dictionary/utils'
 
-import * as kotlin from './templates/android/kotlin.tokens.js'
 import ComposeColorSchemeTemplate from './templates/compose/color-scheme.template.js'
 import ComposeClassTemplate from './templates/compose/data-class.template.js'
 import * as swift from './templates/ios/swift.tokens.js'
