@@ -168,7 +168,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         lockBodyScrolling(this)
 
         // VoiceOver on iOS fails to move focus to the dialog in some cases.
-        // This is a workaround to
+        // This is a workaround to force focus to the dialog.
         if (isIOS) {
           this._elDialog?.focus()
         }
