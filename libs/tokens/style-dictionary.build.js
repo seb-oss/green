@@ -235,7 +235,7 @@ await Promise.all(
                 options: {
                   import: ['androidx.compose.ui.graphics.Color'],
                   packageName: ['se.seb.gds.tokens'],
-                  className: `GdsTokens`,
+                  className: `GdsColorTokens`,
                   variableName: `${colorScheme}ModeColors`,
                   objectType: 'val',
                 },
@@ -246,31 +246,11 @@ await Promise.all(
                 filter: 'is-color-no-ref',
                 options: {
                   objectType: 'data',
-                  className: 'GdsTokens',
+                  className: 'GdsColorTokens',
                   import: ['androidx.compose.ui.graphics.Color'],
                   packageName: ['se.seb.gds.tokens'],
                 },
               },
-              // {
-              //   destination: 'Dimensions.kt',
-              //   format: 'compose/object',
-              //   filter: 'is-dimension',
-              //   options: {
-              //     import: ['UIKit'],
-              //     objectType: 'struct',
-              //     className: 'Dimensions',
-              //   },
-              // },
-              // {
-              //   destination: 'Shape.kt',
-              //   format: 'compose/object',
-              //   filter: 'is-shape',
-              //   options: {
-              //     import: ['UIKit'],
-              //     objectType: 'struct',
-              //     className: 'Shape',
-              //   },
-              // },
             ],
           },
         },
