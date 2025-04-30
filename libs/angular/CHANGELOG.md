@@ -1,5 +1,22 @@
 # Changelog
 
+## 5.11.0
+
+### Minor Changes
+
+- 318de75: **V-Angular Inputs:** Support for custom locked template for input fields.
+
+### Patch Changes
+
+- 766cbe6: Adding export of checkbox directive to fix build error
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
 ## 5.10.0
 
 ### Minor Changes

@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.78.0
+
+### Minor Changes
+
+- 9075450: **Dialog:** Add style expression properties for controlling size
+
+### Patch Changes
+
+- 657e0a3: **Spinner:** Update backdrop color
+- 0a3ac2c: **Checkbox & Radio:** Add missing `.js` extension on import paths
+- 9075450: **Dialog:** Fix iOS focus issue when opening via custom button
+- 9075450: **Dialog:** Remove backdrop blur effect
+- 6846a6c: Datepicker option to not use Clear and Today button
+
 ## 1.77.0
 
 ### Minor Changes
