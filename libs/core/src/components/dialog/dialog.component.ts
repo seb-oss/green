@@ -8,6 +8,11 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
+import { isIOS } from '../../utils/helpers/platform'
+import {
+  withSizeXProps,
+  withSizeYProps,
+} from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { GdsFlex } from '../flex/flex.component'
@@ -37,8 +42,9 @@ registerGlobalScrollLockStyles()
   dependsOn: [GdsButton, GdsCard, GdsFlex, IconCrossLarge],
 })
 @localized()
-export class GdsDialog extends GdsElement {
+export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   static styles = [styles]
+  static styleExpressionBaseSelector = 'dialog'
 
   /**
    * Whether the dialog is open. The state of the dialog can be controlled either
@@ -106,7 +112,7 @@ export class GdsDialog extends GdsElement {
               class="card"
               display="flex"
               variant="secondary"
-              shadow="xl"
+              box-shadow="xl"
               padding="s"
               border-radius=${this.variant === 'default' ? 's' : '0'}
             >
@@ -160,6 +166,12 @@ export class GdsDialog extends GdsElement {
       this.updateComplete.then(() => {
         this._elDialog?.showModal()
         lockBodyScrolling(this)
+
+        // VoiceOver on iOS fails to move focus to the dialog in some cases.
+        // This is a workaround to force focus to the dialog.
+        if (isIOS) {
+          this._elDialog?.focus()
+        }
       })
     } else {
       this.#returnValue = this.#returnValue || 'prop-change'

@@ -143,7 +143,7 @@ export class GdsDiv extends withSizeXProps(
    * `xs`, `s`, `m`, `l`, `xl`
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-shadow-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-shadow-${v})`,
   })
   'box-shadow'?: string
 
