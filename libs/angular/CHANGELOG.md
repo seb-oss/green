@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.11.1
+
+### Patch Changes
+
+- 728c620: **V-Angular:** Updated table component
+
 ## 5.11.0
 
 ### Minor Changes
