@@ -45,7 +45,6 @@ jobs:
           # Scan each changed file for sensitive strings
           for file in $changed_files; do
             if [ -f "$file" ]; then
-              echo "Scanning $file..."
               while IFS= read -r pattern; do
                 if [ -n "$pattern" ] && grep -Hnq "$pattern" "$file"; then
                   echo "Error: Sensitive string found in changes"
