@@ -2,4 +2,4 @@
 '@sebgroup/green-angular': patch
 ---
 
-Updated table component
+**V-Angular:** Updated table component
