@@ -183,7 +183,11 @@
             </ng-template>
           </td>
 
-          <td class="mobile-view" [attr.colspan]="tableColumns.length">
+          <td
+            class="mobile-view"
+            [attr.colspan]="tableColumns.length"
+            (click)="propagateItemClick(subItem)"
+          >
             <dl class="mobile-view-field-wrap">
               <ng-container *ngFor="let column of tableColumns">
                 <div
@@ -191,27 +195,25 @@
                   class="mobile-view-field"
                   [columnType]="column.valueType"
                   [value]="subItem[column.property]"
-                  (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
                 >
                   <dt *ngIf="!column.hideLabelOnMobile">
                     <ng-container *transloco="let t">
                       {{ t(column.label ?? '') }}
                     </ng-container>
                   </dt>
-                  <dd>
-                    <strong>
-                      <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
-                        <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"></ng-template>
-                      </ng-container>
-                      <ng-template #defaultTdTemplate>
-                        {{ subItem[column.property] }}
-                      </ng-template>
-                    </strong>
+                  <dd [ngStyle]="column.boldTextOnMobile ? { 'font-weight': '500' } : {'font-weight': '400'}">
+                    <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+                      <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"></ng-template>
+                    </ng-container>
+                    <ng-template #defaultTdTemplate>
+                      {{ subItem[column.property] }}
+                    </ng-template>
                   </dd>
                   <ng-content></ng-content>
                 </div>
               </ng-container>
             </dl>
+
             <span
               class="nav-chevron-field"
               [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
@@ -230,6 +232,7 @@
               </svg>
             </span>
           </td>
+
         </tr>
       </ng-container>
 

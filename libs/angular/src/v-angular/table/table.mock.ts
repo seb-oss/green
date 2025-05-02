@@ -74,15 +74,18 @@ export const columns: {
       property: 'name',
       label: 'header.name',
       hideLabelOnMobile: true,
+      boldTextOnMobile: true,
     },
     {
       property: 'status',
       label: 'header.status',
       hideLabelOnMobile: true,
+      boldTextOnMobile: true,
     },
     {
       property: 'currency',
       label: 'header.currency',
+      boldTextOnMobile: true,
     },
     {
       property: 'bookedBalance',
@@ -100,6 +103,7 @@ export const columns: {
       property: 'limit',
       label: 'header.limit',
       valueType: 'numeric',
+      boldTextOnMobile: true,
     },
     {
       property: 'unauthorizedUsage',
