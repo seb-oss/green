@@ -48,13 +48,6 @@
     justify-content: end;
   }
 
-  th,
-  td {
-    &.gds-table__numeric-col + :not(.gds-table__numeric-col) {
-      // padding-left: 1rem;
-    }
-  }
-
   th button {
     background-color: rgba(0, 0, 0, 0);
     border: 0;
@@ -63,6 +56,10 @@
     font-weight: inherit;
     padding: 0;
     cursor: pointer;
+  }
+
+  tbody {
+    border-bottom: var(--sg-table-border-width) solid var(--sg-table-border-color);
   }
 
   td {
@@ -189,11 +186,6 @@
       display: none;
     }
 
-    tbody tr td {
-      border-top: none;
-      border-bottom: var(--sg-table-border-width) solid var(--sg-table-border-color);
-    }
-
     .row__expand td:not(:first-child) {
       display: none;
     }
@@ -223,11 +215,13 @@
           &:nth-child(2n + 1) {
             justify-self: start;
             align-items: start;
+            text-align: start;
           }
 
           &:nth-child(2n) {
             align-items: end;
             justify-self: end;
+            text-align: end;
           }
         }
       }
