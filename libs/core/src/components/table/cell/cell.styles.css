@@ -1,0 +1,7 @@
+:host {
+  display: contents;
+}
+
+[draggable] {
+  cursor: grab;
+}
