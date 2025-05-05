@@ -31,6 +31,9 @@ export default function Sidebar() {
       <Link title="Components" href="/components">
         <Core.IconSquareGridCircle />
       </Link>
+      <Link title="Templates" href="/templates">
+        <Core.IconDevices />
+      </Link>
       <Link title="Foundation" href="/foundation">
         <Core.IconBrandGreen />
       </Link>

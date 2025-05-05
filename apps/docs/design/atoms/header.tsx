@@ -1,13 +1,16 @@
 import {
   GdsButton,
+  GdsCard,
   GdsDropdown,
   GdsFlex,
   GdsInput,
   GdsLink,
   GdsOption,
+  GdsText,
   IconAi,
   IconBarsTwo,
   IconBrandSeb,
+  IconChevronBottom,
   IconDevices,
   IconMagnifyingGlass,
   IconMenuSidebar,
@@ -27,24 +30,23 @@ export default function Header() {
       <GdsButton rank="tertiary" size="small">
         <IconMenuSidebar />
       </GdsButton>
-      <GdsFlex
-        position="absolute"
-        inset="0"
-        width="20%"
-        height="max-content"
-        margin="auto"
-      >
-        <GdsInput plain size="small" placeholder="What are you looking for?">
-          <IconMagnifyingGlass slot="lead" />
-        </GdsInput>
+      <GdsFlex height="100%" padding="xs">
+        <GdsCard
+          border-radius="max"
+          flex-direction="row"
+          gap="m"
+          background="primary"
+          padding="s m"
+        >
+          <IconMagnifyingGlass />
+          <GdsText>What are you looking for?</GdsText>
+        </GdsCard>
       </GdsFlex>
 
-      <GdsFlex>
-        <GdsDropdown size="small" plain>
-          <IconDevices slot="lead"></IconDevices>
-          <GdsOption value="web">Web</GdsOption>
-        </GdsDropdown>
-      </GdsFlex>
+      <GdsButton size="small" rank="tertiary">
+        <IconDevices size="m" slot="lead"></IconDevices>
+        Web
+      </GdsButton>
     </GdsFlex>
   )
 }
