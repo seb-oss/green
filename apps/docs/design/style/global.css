@@ -28,10 +28,8 @@ body {
   margin: unset;
 }
 
-/* [theme='dark'] {
-  color-scheme: dark;
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
-
-[theme='light'] {
-  color-scheme: light;
-} */
