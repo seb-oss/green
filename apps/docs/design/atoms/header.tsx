@@ -42,7 +42,6 @@ export default function Header() {
           <GdsText>What are you looking for?</GdsText>
         </GdsCard>
       </GdsFlex>
-
       <GdsButton size="small" rank="tertiary">
         <IconDevices size="m" slot="lead"></IconDevices>
         Web
