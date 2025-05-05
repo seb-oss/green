@@ -3,7 +3,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { GdsTheme } from '@sebgroup/green-core/react'
+import { GdsDiv, GdsTheme } from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../hooks'
 
 import type { ColorScheme } from './types'
@@ -61,5 +61,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [colorScheme])
 
   if (!stylesheetCreated) return null
-  return <GdsTheme color-scheme={colorScheme}>{children}</GdsTheme>
+  return (
+    <GdsTheme color-scheme="light">
+      <GdsDiv background="primary" min-height="100vh">
+        {children}
+      </GdsDiv>
+    </GdsTheme>
+  )
 }

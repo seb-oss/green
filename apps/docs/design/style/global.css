@@ -3,7 +3,8 @@
 }
 
 html {
-  color-scheme: dark light;
+  color-scheme: light;
+  /* color-scheme: dark light; */
   scrollbar-width: none;
 }
 
@@ -12,7 +13,7 @@ body {
   scroll-behavior: smooth;
   scroll-padding-top: 160px;
   overscroll-behavior: contain;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 300;
   line-height: 1;
   font-family: var(--font);
@@ -27,10 +28,10 @@ body {
   margin: unset;
 }
 
-[theme='dark'] {
+/* [theme='dark'] {
   color-scheme: dark;
 }
 
 [theme='light'] {
   color-scheme: light;
-}
+} */
