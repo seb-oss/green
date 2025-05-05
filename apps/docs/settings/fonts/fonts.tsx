@@ -12,7 +12,7 @@ export default function Fonts({ children }: { children: React.ReactNode }) {
       const sheet = new CSSStyleSheet()
       sheet.replaceSync(`
         :root { 
-            --font-code: ${SEBSansSerif.style.fontFamily};
+            --font: ${SEBSansSerif.style.fontFamily};
         }`)
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
       setStylesheetCreated(true)

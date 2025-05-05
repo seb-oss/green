@@ -26,7 +26,19 @@
     "paths": {
       "@/*": [
         "./*"
-      ]
+      ],
+      "@sebgroup/green-core": [
+        "dist/libs/core/src"
+      ],
+      "@sebgroup/green-core/*": [
+        "dist/libs/core/src/*"
+      ],
+      "@sebgroup/green-core/react": [
+        "dist/libs/core/src/generated/react"
+      ],
+      "@sebgroup/green-core/react/*": [
+        "dist/libs/core/src/generated/react/*"
+      ],
     }
   },
   "include": [

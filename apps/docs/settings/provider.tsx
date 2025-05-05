@@ -14,6 +14,8 @@ import { useToast } from './toast'
 
 import type { SettingsContextType } from './types'
 
+import '../design/style/global.css'
+
 interface SettingsProviderProps extends PropsWithChildren {
   fallback?: React.ReactNode
 }
