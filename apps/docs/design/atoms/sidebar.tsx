@@ -28,6 +28,27 @@ export default function Sidebar() {
       <Link title="Home" href="/">
         <Core.IconHomeOpen />
       </Link>
+      <Link title="Components" href="/components">
+        <Core.IconSquareGridCircle />
+      </Link>
+      <Link title="Foundation" href="/foundation">
+        <Core.IconBrandGreen />
+      </Link>
+      <Link title="UX Writing" href="/foundation">
+        <Core.IconPencilWave />
+      </Link>
+      <Link title="Accessibility" href="/foundation">
+        <Core.IconPeopleCircle />
+      </Link>
+      <Link title="About" href="/foundation">
+        <Core.IconCircleInfo />
+      </Link>
+      <Link title="Github" href="https://github.com/seb-oss/green-core">
+        <Core.IconBrandGithub />
+      </Link>
+      <Link title="Storybook" href="https:/storybook.seb.io">
+        <Core.IconBrandStorybook />
+      </Link>
     </Core.GdsCard>
   )
 }
