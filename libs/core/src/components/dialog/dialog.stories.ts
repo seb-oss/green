@@ -79,7 +79,7 @@ export const CustomButtons: Story = {
         This is the content of the dialog.
         <gds-button
           slot="footer"
-          onclick="document.getElementById('my-dialog') as GdsDialog)?.close('cusom close')"
+          onclick="document.getElementById('my-dialog').close('custom close')"
           >Custom close button</gds-button
         >
       </gds-dialog>`,
@@ -100,14 +100,14 @@ export const Events: Story = {
       @gds-show=${console.log}
       @gds-ui-state=${console.log}
       heading="Dialog heading"
-      id="my-dialog"
+      id="my-dialog-events"
     >
       <gds-button slot="trigger">Open dialog</gds-button>
       This is the content of the dialog.
       <gds-button rank="secondary" slot="footer">Custom btn</gds-button>
       <gds-button
         slot="footer"
-        onclick="document.getElementById('my-dialog').close('cusom close')"
+        onclick="document.getElementById('my-dialog-events').close('custom close')"
         >Custom btn 2</gds-button
       >
     </gds-dialog>`,

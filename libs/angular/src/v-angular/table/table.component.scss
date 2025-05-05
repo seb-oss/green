@@ -27,6 +27,14 @@
 
   border-bottom: none;
 
+  .web-view {
+    display: table-cell;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
   tr:hover td {
     background-color: var(--gds-ref-pallet-base100);
   }
@@ -40,13 +48,6 @@
     justify-content: end;
   }
 
-  th,
-  td {
-    &.gds-table__numeric-col + :not(.gds-table__numeric-col) {
-      padding-left: 1rem;
-    }
-  }
-
   th button {
     background-color: rgba(0, 0, 0, 0);
     border: 0;
@@ -55,6 +56,10 @@
     font-weight: inherit;
     padding: 0;
     cursor: pointer;
+  }
+
+  tbody {
+    border-bottom: var(--sg-table-border-width) solid var(--sg-table-border-color);
   }
 
   td {
@@ -170,6 +175,81 @@
       box-shadow: inset 0 0 0 1px #ababab;
       &::after {
         border-color: #ababab;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .gds-table {
+    thead {
+      display: none;
+    }
+
+    .row__expand td:not(:first-child) {
+      display: none;
+    }
+
+    .row__expand td {
+      display: table-cell;
+    }
+
+    .web-view {
+      display: none;
+    }
+
+    .mobile-view {
+      display: flex;
+      align-items: center;
+
+      .mobile-view-field-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+
+        .mobile-view-field {
+          display: flex;
+          flex-direction: column;
+          padding-bottom: 0.3rem;
+
+          &:nth-child(2n + 1) {
+            justify-self: start;
+            align-items: start;
+            text-align: start;
+          }
+
+          &:nth-child(2n) {
+            align-items: end;
+            justify-self: end;
+            text-align: end;
+          }
+        }
+      }
+
+      .nav-chevron-field {
+        width: 1.5rem;
+        padding-left: 0.5rem;
+
+        svg {
+          transition: transform 0.3s ease;
+        }
+
+        &[aria-expanded='true'] svg {
+          transform: rotate(-90deg);
+        }
+      }
+
+      .settings-field {
+        width: 1.5rem;
+        padding: 0 1rem;
+
+        svg {
+          transition: all 0.3s ease;
+        }
+
+        &:hover svg {
+          fill: var(--gds-sys-color-blue-dark-2);
+        }
       }
     }
   }

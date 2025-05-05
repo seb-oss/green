@@ -269,8 +269,8 @@ export const ExtendedSupportingText: Story = {
   render: () => html`
     <gds-flex gap="xl" width="800px">
       <gds-input label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-input>
