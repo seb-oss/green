@@ -8,12 +8,14 @@ $use-green-selector: '.use-green' !default;
 @use '../../tokens/colors';
 @use '../../tokens/components';
 @use '../../tokens/shape';
+@use '../../tokens/size';
 
 @use '../reset/mixins' as mixins;
 @use '../themes/mixins' as themes;
 
 /* add variables for light mode to `.use-green` class */
 #{$use-green-selector} {
+  @include size.add-tokens();
   @include shape.add-tokens();
   @include colors.add-color-tokens();
   @include components.add-radio-tokens();

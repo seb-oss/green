@@ -1,0 +1,19 @@
+@mixin add-tokens() {
+  --gds-sys-space-0: 0px;
+  --gds-sys-space-4xs: 1px;
+  --gds-sys-space-3xs: 2px;
+  --gds-sys-space-2xs: 4px;
+  --gds-sys-space-xs: 8px;
+  --gds-sys-space-s: 12px;
+  --gds-sys-space-m: 16px;
+  --gds-sys-space-l: 24px;
+  --gds-sys-space-xl: 32px;
+  --gds-sys-space-2xl: 40px;
+  --gds-sys-space-3xl: 48px;
+  --gds-sys-space-4xl: 64px;
+  --gds-sys-space-5xl: 80px;
+  --gds-sys-space-6xl: 96px;
+  --gds-sys-space-7xl: 112px;
+  --gds-sys-space-8xl: 120px;
+  --gds-sys-space-max: 999px;
+}

@@ -1,6 +1,8 @@
 @use '../common/functions/bootstrap-functions' as functions;
 @use 'sass:map';
+
 $enable-negative-margins: true;
+
 $spacing: (
   0: 0,
   1: 0.125rem,
