@@ -35,6 +35,16 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
   supportingText = ''
 
   /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
    * Controls the font-size of texts and height of the field.
    */
   @property({ type: String })
@@ -111,13 +121,20 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
-            <label for="select" slot="label" id="label-text"
-              >${this.label}</label
-            >
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText=${this.showExtendedSupportingText}
+          >
+            <label for="select" slot="label" id="label-text">
+              ${this.label}
+            </label>
             <span slot="supporting-text" id="supporting-text">
               ${this.supportingText}
             </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
           </gds-form-control-header>`,
       )}
 
@@ -179,7 +196,8 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
 
         // If this is the initial render, set the value from the select element
         // Otherwise we set the select element value from the component value, so that it still reflects the value prop in case it was rerendered
-        if (!this.#isValueInitialized) this.value = clone.value as ValueT
+        if (!this.#isValueInitialized)
+          this._internalValue = clone.value as ValueT
         else clone.value = this.value as string
 
         return clone

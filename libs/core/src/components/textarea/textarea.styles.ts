@@ -7,7 +7,9 @@ export const styles = css`
     max-height: calc(1lh * 20);
     overflow: auto;
     min-width: 20ch;
-    padding-inline-end: calc(var(--gds-space-xs) + var(--padding-inline-end));
+    padding-inline-end: calc(
+      var(--gds-sys-space-xs) + var(--padding-inline-end)
+    );
 
     &.resize-manual {
       resize: vertical;

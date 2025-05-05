@@ -41,6 +41,12 @@ export class NggvBaseControlValueAccessorComponent
   @ContentChild('labelTpl', { read: TemplateRef })
   labelContentTpl?: TemplateRef<undefined>
 
+  /** Custom template for displaying value when the input is locked.
+   * Specified by nesting an `<ng-template #lockedTpl let-state>Custom locked content state: {{ state }}</ng-template>`.
+   */
+  @ContentChild('lockedTpl', { read: TemplateRef })
+  lockedTpl?: TemplateRef<undefined>
+
   /** Reference to the native child input element. */
   @ViewChild('input', { read: ElementRef }) inputRef?: ElementRef
 

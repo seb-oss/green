@@ -15,7 +15,6 @@ import {
   ViewChild,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-// import { faCalendarDays, IconDefinition } from '@fortawesome/pro-regular-svg-icons';
 import {
   TRANSLOCO_SCOPE,
   TranslocoScope,

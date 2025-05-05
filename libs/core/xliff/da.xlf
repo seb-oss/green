@@ -166,10 +166,6 @@
   <source>Loading...</source>
   <target>Indlæser...</target>
 </trans-unit>
-<trans-unit id="s3b151ca64eb26ec1">
-  <source>Expand</source>
-  <target>Udvide</target>
-</trans-unit>
 </body>
 </file>
 </xliff>
