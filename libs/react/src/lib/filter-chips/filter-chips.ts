@@ -1,13 +1,14 @@
 import React from 'react'
 import { createComponent } from '@lit/react'
 
-import { register as registerTranistionalStyles } from '@sebgroup/green-core/components/filter-chips/filter-chips.trans.styles.js'
 import {
   GdsFilterChip,
   GdsFilterChips,
-} from '@sebgroup/green-core/components/filter-chips/index.js'
+} from '@sebgroup/green-core/components/filter-chips/filter-chips.component'
+import { register as registerTranistionalStyles } from '@sebgroup/green-core/components/filter-chips/filter-chips.trans.styles.js'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
+GdsFilterChips.define()
 registerTranistionalStyles()
 
 export const FilterChips = createComponent({

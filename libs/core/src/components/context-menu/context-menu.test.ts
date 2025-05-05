@@ -85,7 +85,11 @@ describe('<gds-context-menu>', () => {
   describe('Accessibility', () => {
     it('should use set label on button and popover', async () => {
       const el = await fixture<GdsContextMenu>(html`
-        <gds-context-menu button-label="Button label" label="Context label">
+        <gds-context-menu
+          button-label="Button label"
+          label="Context label"
+          open
+        >
           <gds-menu-item>Item 1</gds-menu-item>
           <gds-menu-item>Item 2</gds-menu-item>
           <gds-menu-item>Item 3</gds-menu-item>

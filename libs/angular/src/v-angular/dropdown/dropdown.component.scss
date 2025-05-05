@@ -1,45 +1,117 @@
 @use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 @use '../../../../chlorophyll/scss/components/button/mixins' as button;
 @use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 @use '../../../../chlorophyll/scss/components/form/validation/mixins' as
   validation;
 @use '../../../../chlorophyll/scss/tokens' as tokens;
 
 :host {
+  --sg-border-radius: 0.25rem;
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+  --text-primary-color: #333;
+  --sg-form-control-bg: #fff;
+  --grey-000: hsl(0 0% 100%);
+  --grey-100: hsl(0, 0%, 97%);
+  --grey-200: hsl(0, 0%, 91%);
+  --grey-300: hsl(0, 0%, 87%);
+  --grey-400: hsl(0, 0%, 81%);
+  --grey-500: hsl(0, 0%, 68%);
+  --grey-600: hsl(0, 0%, 53%);
+  --grey-700: hsl(0, 0%, 29%);
+  --grey-800: hsl(0, 0%, 20%);
+  --grey-900: hsl(0, 0%, 10%);
+  --grey-1000: hsl(0 0% 0%);
+
   label {
     display: block;
     font-weight: 500;
     line-height: 1.25rem;
-    margin-bottom: 0.5rem;
     width: 100%;
   }
 
+  label + .gds-input-wrapper,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
+  }
+
   .description {
+    font-size: 0.875rem;
     margin-bottom: 0.5rem;
     line-height: 1.25rem;
     width: 100%;
   }
 
+  @include form-group.add-form-item();
+  position: initial; // counteracts position: relative in mixin
+
+  &:not(:last-child) {
+    margin-bottom: unset; // remove margin for dropdown
+  }
+
+  .gds-field-label--optional {
+    font-weight: 400;
+  }
+
   button {
-    @include button.reset();
-    @include button.base();
-    @include button.secondary();
     @include dropdown.dropdown-trigger();
 
-    font-size: inherit;
+    font-size: 1rem;
     font-weight: normal;
     line-height: 1.125;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-
+    text-align: left;
     width: 100%;
+
+    span {
+      width: 100%;
+      white-space: nowrap;
+      display: block;
+      text-overflow: ellipsis;
+    }
 
     &.small {
       font-size: 0.875rem;
     }
 
     &:hover {
-      background: var(--grey-400);
+      background: #e7e7e7;
+    }
+
+    &:active {
+      background: inherit;
+      color: inherit;
+      border-color: inherit;
+    }
+
+    &:disabled,
+    &.disabled {
+      --text-primary-color: var(--grey-600);
+      background: var(--grey-300);
+      color: var(--grey-600);
+      cursor: not-allowed;
+    }
+
+    &.nggv-field--error {
+      border-bottom: 2px solid #9f000a;
+    }
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        align-items: center;
+      }
     }
   }
 

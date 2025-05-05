@@ -9,9 +9,7 @@ import {
 } from '@angular/core'
 
 import { DropdownOption } from '@sebgroup/green-angular/src/lib/dropdown'
-
-import '@sebgroup/green-core/components/context-menu/index.js'
-
+import { GdsContextMenu } from '@sebgroup/green-core/components/context-menu/context-menu.component.js'
 import * as ContextMenuTransStyles from '@sebgroup/green-core/components/context-menu/context-menu.trans.styles.js'
 
 /**
@@ -58,6 +56,7 @@ export class NggContextMenuComponent {
   isActive = false
 
   constructor(private elementRef: ElementRef<HTMLElement>) {
+    GdsContextMenu.define()
     ContextMenuTransStyles.register()
   }
 

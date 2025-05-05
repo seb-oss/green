@@ -13,6 +13,9 @@ import '../icon/icons/chevron-top.js'
 import '../icon/icons/arrow-up.js'
 import '../icon/icons/arrow-down.js'
 import '../icon/icons/arrow-right.js'
+import '../icon/icons/arrow-left.js'
+
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
  * A button serve as an interactive element that enables users to perform an action or make
@@ -27,19 +30,8 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-}
-
-export default meta
-type Story = StoryObj
-
-export const DefaultParams: Story = {
-  parameters: {
-    docs: {
-      source: { format: true, type: 'dynamic' },
-    },
-    controls: { expanded: true },
-  },
   argTypes: {
+    ...argTablePropsFor('gds-button'),
     rank: {
       options: ['primary', 'secondary', 'tertiary'],
       control: { type: 'select' },
@@ -62,6 +54,18 @@ export const DefaultParams: Story = {
     download: {
       control: { type: 'text' },
     },
+  },
+}
+
+export default meta
+type Story = StoryObj
+
+export const DefaultParams: Story = {
+  parameters: {
+    docs: {
+      source: { format: true, type: 'dynamic' },
+    },
+    controls: { expanded: true },
   },
   args: {
     innerText: 'Button',
@@ -91,13 +95,16 @@ export const RanksAndVariants: Story = {
         <gds-flex gap="xl">
           <gds-button>
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Primary</gds-button>
+            Primary
+          </gds-button>
           <gds-button rank="secondary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Secondary</gds-button>
+            Secondary
+          </gds-button>
           <gds-button rank="tertiary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Tertiary</gds-button>
+            Tertiary
+          </gds-button>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
@@ -106,13 +113,16 @@ export const RanksAndVariants: Story = {
         <gds-flex gap="xl">
           <gds-button variant="positive">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Primary</gds-button>
+            Primary
+          </gds-button>
           <gds-button variant="positive" rank="secondary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Secondary</gds-button>
+            Secondary
+          </gds-button>
           <gds-button variant="positive" rank="tertiary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Tertiary</gds-button>
+            Tertiary
+          </gds-button>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
@@ -121,16 +131,19 @@ export const RanksAndVariants: Story = {
         <gds-flex gap="xl">
           <gds-button variant="negative">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Primary</gds-button>
+            Primary</gds-button
+          >
           <gds-button variant="negative" rank="secondary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Secondary</gds-button>
+            Secondary</gds-button
+          >
           <gds-button variant="negative" rank="tertiary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Tertiary</gds-button>
+            Tertiary</gds-button
+          >
         </gds-flex>
       </gds-flex>
-    </gds-grid>
+    </gds-flex>
   `,
 }
 
@@ -145,6 +158,9 @@ export const Sizes: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        XS
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         Small
       </gds-button>
@@ -203,6 +219,9 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
+      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+        <gds-icon-arrow-right />
+      </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         <gds-icon-arrow-right />
       </gds-button>
@@ -302,5 +321,170 @@ export const Aria: Story = {
     >
       Aria button
     </gds-button>
+  `,
+}
+
+/**
+ *
+ * The `justify-content` property allows control over how content is distributed within buttons.<br/>
+ * This is particularly useful for navigation patterns like Next/Previous buttons where you want
+ * consistent spacing between icons and text.
+ *
+ * Uses `justify-content="space-between"` to maximize space between elements
+ *
+ * Common use cases:
+ * - Navigation buttons (Next/Previous)
+ * - Buttons with leading/trailing icons that need specific spacing
+ *
+ * e.g
+ *
+ * ```html
+ * <!-- Example of a button with leading icon and text -->
+ * <gds-button justify-content="space-between">
+ *   <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+ *  Previous
+ * </gds-button>
+ *
+ * <!-- Example of a button with trailing icon and text -->
+ * <gds-button justify-content="space-between">
+ *   Next
+ *   <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+ * </gds-button>
+ * ```
+ */
+export const NextPrevious: Story = {
+  ...DefaultParams,
+  name: 'Next & Previous',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: () => html`
+    <gds-flex gap="4xl" flex-direction="column" width="520px">
+      <gds-flex flex-direction="column" gap="m" width="100%">
+        <gds-text>Spread: Neutral</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-grid columns="3" gap="xl">
+          <gds-button justify-content="space-between">
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="secondary" justify-content="space-between">
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button rank="tertiary" justify-content="space-between">
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+
+          <gds-button justify-content="space-between">
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="secondary" justify-content="space-between">
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button rank="tertiary" justify-content="space-between">
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+        </gds-grid>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m" width="100%">
+        <gds-text>Spread: Positive</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-grid columns="3" gap="xl">
+          <gds-button variant="positive" justify-content="space-between">
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button
+            rank="secondary"
+            variant="positive"
+            justify-content="space-between"
+          >
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button
+            rank="tertiary"
+            variant="positive"
+            justify-content="space-between"
+          >
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+
+          <gds-button variant="positive" justify-content="space-between">
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button
+            rank="secondary"
+            variant="positive"
+            justify-content="space-between"
+          >
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button
+            rank="tertiary"
+            variant="positive"
+            justify-content="space-between"
+          >
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+        </gds-grid>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m" width="100%">
+        <gds-text>Spread: Negative</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-grid columns="3" gap="xl">
+          <gds-button variant="negative" justify-content="space-between">
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button
+            rank="secondary"
+            variant="negative"
+            justify-content="space-between"
+          >
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button
+            rank="tertiary"
+            variant="negative"
+            justify-content="space-between"
+          >
+            <gds-icon-arrow-left slot="lead"></gds-icon-arrow-left>
+            Previous
+          </gds-button>
+          <gds-button variant="negative" justify-content="space-between">
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button
+            rank="secondary"
+            variant="negative"
+            justify-content="space-between"
+          >
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+          <gds-button
+            rank="tertiary"
+            variant="negative"
+            justify-content="space-between"
+          >
+            Next
+            <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
+          </gds-button>
+        </gds-grid>
+      </gds-flex>
+    </gds-flex>
   `,
 }

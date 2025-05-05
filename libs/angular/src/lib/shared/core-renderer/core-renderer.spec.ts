@@ -1,7 +1,12 @@
-import { Component, RendererFactory2 } from '@angular/core'
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
-import { NggCoreRendererFactory } from './core-renderer'
+import {
+  NggCoreRendererFactory,
+  provideCoreRenderer,
+  provideCoreRendererWithAnimations,
+} from './core-renderer'
 
 @Component({
   template: '<gds-button></gds-button>',
@@ -19,12 +24,29 @@ describe('NggCoreRenderer', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent],
-      providers: [
-        {
-          provide: RendererFactory2,
-          useClass: NggCoreRendererFactory,
-        },
-      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideCoreRenderer()],
+    })
+    const fixture = TestBed.createComponent(TestComponent)
+    parent = fixture.debugElement.nativeElement
+    fixture.detectChanges()
+  })
+
+  it('should create an element with the scoped tag name', () => {
+    expect(parent.querySelector('gds-button-scoped')).toBeTruthy()
+  })
+})
+
+describe('NggCoreRenderer (with animations)', () => {
+  let component: TestComponent
+  let parent: HTMLElement
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      imports: [BrowserAnimationsModule],
+      declarations: [TestComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideCoreRendererWithAnimations()],
     })
     const fixture = TestBed.createComponent(TestComponent)
     parent = fixture.debugElement.nativeElement

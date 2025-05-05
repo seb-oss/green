@@ -3,7 +3,6 @@ import {
   ElementRef,
   EventEmitter,
   HostBinding,
-  HostListener,
   Inject,
   Input,
   OnChanges,
@@ -16,7 +15,7 @@ import {
   ViewChildren,
 } from '@angular/core'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
-import { Subject, Subscription } from 'rxjs'
+import { filter, fromEvent, Subject, Subscription, takeUntil } from 'rxjs'
 import scrollIntoView from 'scroll-into-view-if-needed'
 
 import {
@@ -30,7 +29,7 @@ import {
   templateUrl: './dropdown-list.component.html',
   styleUrls: ['./dropdown-list.component.scss'],
 })
-export class NgvDropdownListComponent implements OnInit, OnChanges {
+export class NggvDropdownListComponent implements OnInit, OnChanges {
   @Input() set expanded(state: boolean) {
     this.setExpanded(state)
   }
@@ -43,6 +42,7 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   @Input() scrollOffset = 24
 
   @Input() optionContentTpl: TemplateRef<OptionBase<any>> | undefined
+  @Input() groupLabelTpl: TemplateRef<OptionBase<any>> | undefined
 
   /** @internal List of references to the option elements. */
   @ViewChildren('optionRefs') optionRefs:
@@ -53,11 +53,19 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   @HostBinding('attr.id') @Input() id = (window as any).nggv?.nextId()
 
   /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'dropdown'
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'dropdown'
 
   @Input() options!: any[]
 
   @Input() textToHighlight?: string
+
+  /**
+   * Used to control if "selectedValueChanged" only should emit distinct changes, or each time a value is selected
+   * When true, value is not emitted if there's no distinct change
+   * When false, value is emitted every time an option is selected
+   * */
+  @Input() onlyEmitDistinctChanges = true
 
   @Output() selectedValueChanged = new EventEmitter<any>()
 
@@ -76,6 +84,10 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
 
   /** Subscribe if dropdown expanded to listen to click outside to close dropdown. */
   protected onClickSubscription: Subscription | undefined
+  /** Subscribe to to keyboard events only when list is open. */
+  private onKeyDownSubscription: Subscription | undefined
+  private onKeyUpSubscription: Subscription | undefined
+  private _flattenedOptions: any[] = []
 
   constructor(
     @Optional()
@@ -111,9 +123,15 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
   updateState(option: any, event: Event) {
     if (option.disabled) return
 
-    this.selectedValue = option
-    this.state = option
-    this.selectedValueChanged.emit(option)
+    if (
+      !this.onlyEmitDistinctChanges ||
+      !this.dropdownUtils.deepEqual(this.selectedValue, option)
+    ) {
+      this.selectedValue = option
+      this.state = option
+      this.selectedValueChanged.emit(option)
+    }
+
     this.setExpanded(false)
     event.stopPropagation()
   }
@@ -125,10 +143,18 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
     // update expanded state
     this._expanded = expanded
 
-    if (expanded) this.refreshSelectedOption()
-    else {
+    if (expanded) {
+      this.refreshSelectedOption()
+      this.subscribeToKeyUpEvents()
+      this.subscribeToKeyDownEvents()
+    } else {
       this.closed$.next(true)
       this.onClickSubscription?.unsubscribe()
+      this.onKeyDownSubscription?.unsubscribe()
+      this.onKeyUpSubscription?.unsubscribe()
+      // to trigger gc removal
+      this.onKeyDownSubscription = undefined
+      this.onKeyUpSubscription = undefined
     }
   }
 
@@ -136,12 +162,12 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
    * @internal
    */
   refreshSelectedOption() {
-    const options = this.dropdownUtils.flattenOptions(
+    this._flattenedOptions = this.dropdownUtils.flattenOptions(
       this.options,
       !this.optionContentTpl,
     )
     this.activeIndex = this.getActiveIndex()
-    this.state = options[this.activeIndex]
+    this.state = this._flattenedOptions[this.activeIndex]
     this.scrollToResult(this.state)
   }
 
@@ -154,17 +180,13 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
    */
   getActiveIndex(): number {
     if (!!this.selectedValue && this.selectedValue?.key != null) {
-      const selectedIndex = this.dropdownUtils
-        .flattenOptions(this.options, !this.optionContentTpl)
-        .findIndex(
-          (option) =>
-            option.key != null && option.key === this.selectedValue?.key,
-        )
+      const selectedIndex = this._flattenedOptions.findIndex(
+        (option) =>
+          option.key != null && option.key === this.selectedValue?.key,
+      )
       if (selectedIndex > -1) return selectedIndex
     }
-    return this.dropdownUtils
-      .flattenOptions(this.options, !this.optionContentTpl)
-      .findIndex((option) => option.key != null)
+    return this._flattenedOptions.findIndex((option) => option.key != null)
   }
 
   /**
@@ -189,14 +211,29 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
    * Disables default events.
    * @param event fired containing which key was pressed.
    */
-  @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
     switch (event.key) {
-      case 'Enter': //  Disable form submission
+      case ' ': // Space - placed here to ensure the dropdown-list closes after selecting using "Space"
       case 'ArrowUp': // Disable scrolling up
       case 'ArrowDown': // Disable scrolling down
         event.preventDefault()
         event.stopPropagation()
+        return false
+      case 'Enter': // Disable form submission and select the currently active value
+        event.preventDefault()
+        event.stopPropagation()
+        if (this.expanded) {
+          const option = this._flattenedOptions[this.activeIndex]
+          this.updateState(option, event)
+        }
+        return false
+      case 'Tab': // trigger dropdown to close (for typeahead)
+        event.preventDefault()
+        event.stopPropagation()
+        if (this.expanded) {
+          this.setExpanded(false)
+          this.closed.emit()
+        }
         return false
     }
     return true
@@ -207,13 +244,8 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
    * Enter toggles the dropdown, home, end, and, arrows change the index.
    * @param event fired containing which key was released.
    */
-  @HostListener('document:keyup', ['$event'])
   onKeyUp(event: KeyboardEvent) {
     if (!this.expanded) return
-    const options = this.dropdownUtils.flattenOptions(
-      this.options,
-      !this.optionContentTpl,
-    )
     let option
 
     switch (event.key) {
@@ -221,52 +253,76 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
         this.setExpanded(false)
         this.closed.emit()
         break
-      case 'Enter': // Select the currently chosen value
-        option = options[this.activeIndex]
+
+      case ' ': // Space - select the currently chosen value
+        option = this._flattenedOptions[this.activeIndex]
         this.updateState(option, event)
         break
 
       case 'Home': // Move to the first option
         this.activeIndex = 0
 
-        option = options[this.activeIndex]
+        option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
 
       case 'ArrowUp': // Move up one step to the previous option
         if (this.activeIndex > 0) this.activeIndex--
-        else if (this.activeIndex === 0) this.activeIndex = options.length - 1
+        else if (this.activeIndex === 0)
+          this.activeIndex = this._flattenedOptions.length - 1
 
-        option = options[this.activeIndex]
+        option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
 
       case 'ArrowDown': // Move down one step to the next option
-        if (options.length > this.activeIndex + 1) this.activeIndex++
-        else if (this.activeIndex === options.length - 1) this.activeIndex = 0
+        if (this._flattenedOptions.length > this.activeIndex + 1)
+          this.activeIndex++
+        else if (this.activeIndex === this._flattenedOptions.length - 1)
+          this.activeIndex = 0
 
-        option = options[this.activeIndex]
+        option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
 
       case 'End': // Move to the last options
-        this.activeIndex = options.length - 1
+        this.activeIndex = this._flattenedOptions.length - 1
 
-        option = options[this.activeIndex]
+        option = this._flattenedOptions[this.activeIndex]
         this.state = option
-        this.scrollToResult(option)
+        this.scrollToResult(option, true)
         break
     }
+  }
+
+  /** @internal */
+  subscribeToKeyUpEvents() {
+    this.onKeyUpSubscription = fromEvent<KeyboardEvent>(document, 'keyup')
+      .pipe(
+        filter(() => this.expanded),
+        takeUntil(this.closed$),
+      )
+      .subscribe((event) => this.onKeyUp(event))
+  }
+
+  /** @internal */
+  subscribeToKeyDownEvents() {
+    this.onKeyDownSubscription = fromEvent<KeyboardEvent>(document, 'keydown')
+      .pipe(
+        filter(() => this.expanded),
+        takeUntil(this.closed$),
+      )
+      .subscribe((event) => this.onKeyDown(event))
   }
 
   /**
    * Scrolls focused result into view with a specified offset.
    * @param key the result index which to scroll to.
    */
-  scrollToResult(option: any) {
+  scrollToResult(option: any, focusElement?: boolean) {
     if (!this.optionRefs || !option) return
     const optionRef = this.optionRefs.find(
       (li) => li.nativeElement.id === this.id + '-option-' + option.key,
@@ -283,7 +339,12 @@ export class NgvDropdownListComponent implements OnInit, OnChanges {
         })
 
         delta -= window.scrollY || document.documentElement.scrollTop
-        if (delta) window.scrollBy(0, delta > 0 ? -offset : offset)
+        if (delta) {
+          window.scrollBy(0, delta > 0 ? -offset : offset)
+        }
+        if (focusElement) {
+          optionRef.nativeElement.focus()
+        }
       }, 0)
     }
   }

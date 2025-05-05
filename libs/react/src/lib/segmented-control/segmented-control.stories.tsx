@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import { provideProtractorTestingSupport } from '@angular/platform-browser'
 
 import { Segment, SegmentedControl } from './segmented-control'

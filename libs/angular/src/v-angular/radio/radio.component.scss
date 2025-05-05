@@ -2,6 +2,40 @@
 @use '../../../../chlorophyll/scss/components/form/common/mixins' as common;
 
 :host {
+  --gds-ref-pallet-base200: hsl(0, 0%, 91%);
+  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
+  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
+  --gds-comp-checkbox-container-height: 1rem;
+  --gds-comp-checkbox-container-width: 1rem;
+  --gds-comp-checkbox-container-color: var(#fff);
+  --gds-comp-checkbox-container-color-disabled: var(--gds-ref-pallet-base200);
+  --gds-comp-checkbox-border-color: #333;
+  --gds-comp-checkbox-border-radius: 2px;
+  --gds-comp-checkbox-hover-border-color: var(--gds-ref-pallet-base600);
+  --gds-comp-checkbox-container-color-selected: #333;
+  --gds-comp-checkbox-border-color-selected: var(#fff);
+  --gds-comp-checkbox-border-color-focus: var(--gds-sys-color-blue-dark-2);
+  --gds-comp-radio-container-height: 1rem;
+  --gds-comp-radio-container-width: 1rem;
+  --gds-comp-radio-border-radius: 50%;
+  --gds-comp-radio-ring-width: 0.1875rem;
+  --gds-comp-radio-container-background-disabled: var(--gds-ref-pallet-base200);
+  --gds-comp-radio-border: #333;
+  --gds-comp-radio-border-checked: #333;
+  --gds-comp-radio-border-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-border-checked-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-border-disabled: var(--gds-ref-pallet-base500);
+  --gds-comp-radio-ring: var(#fff);
+  --gds-comp-radio-ring-checked: var(#fff);
+  --gds-comp-radio-ring-hover: var(#fff);
+  --gds-comp-radio-ring-checked-hover: var(#fff);
+  --gds-comp-radio-ring-disabled: var(#fff);
+  --gds-comp-radio-dot: transparent;
+  --gds-comp-radio-dot-checked: #333;
+  --gds-comp-radio-dot-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-dot-checked-hover: var(--gds-ref-pallet-base600);
+  --gds-comp-radio-dot-disabled: var(--gds-ref-pallet-base600);
+
   .nggv-field--locked {
     display: inline-block;
     border-radius: 0.25em;
@@ -15,4 +49,38 @@
   }
 
   @include mixins.add-radio();
+
+  &.small {
+    .form-control {
+      padding: 0.25rem;
+    }
+
+    .form-control input[type='radio'] ~ i {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .form-info {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
+
+  .form-info {
+    font-weight: 500;
+    padding-left: 1rem;
+    margin-top: -0.25rem;
+  }
+
+  .form-info--error {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+    color: #9f000a;
+
+    .error-icon {
+      margin-top: 0.128rem;
+      align-items: center;
+    }
+  }
 }

@@ -1,11 +1,13 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
 
 import './login.css'
 
-const coverOne = `https://github.com/user-attachments/assets/b8ee5060-b5dd-40b4-b626-aefbd960ec35`
+import { GdsFormControlElement } from '@sebgroup/green-core/components/form/form-control'
+
+//const coverOne = `https://github.com/user-attachments/assets/b8ee5060-b5dd-40b4-b626-aefbd960ec35`
 const coverTwo = `https://github.com/user-attachments/assets/1c038c0b-b468-48d2-b171-092534b3a0e2`
 
 @customElement('gds-login')
@@ -94,7 +96,7 @@ export class CardExample extends LitElement {
               height="100%"
             >
               <form novalidate>
-                <gds-container>
+                <gds-div>
                   <gds-text tag="h1" color="l2-content-primary" weight="book">
                     Välkommen till Internetbanken
                   </gds-text>
@@ -105,7 +107,7 @@ export class CardExample extends LitElement {
                   >
                     Hur vill du logga in?
                   </gds-text>
-                </gds-container>
+                </gds-div>
                 <gds-card
                   border-radius="s"
                   border="4xs/l2-stroke-primary"
@@ -120,7 +122,7 @@ export class CardExample extends LitElement {
                       showExtendedSupportingText="true"
                       supportingText="Fyll i med 12 siffror."
                       .validator=${{
-                        validate: (el: any) => {
+                        validate: (el: GdsFormControlElement) => {
                           if (el.value === '')
                             return [
                               {
@@ -139,6 +141,7 @@ export class CardExample extends LitElement {
                               },
                               'Personnumret måste vara 12 siffror.',
                             ]
+                          else return
                         },
                       }}
                     ></gds-input>
@@ -157,7 +160,7 @@ export class CardExample extends LitElement {
                       label="Inloggningskod"
                       supportingText="Fyll i koden med 6 siffror."
                       .validator=${{
-                        validate: (el: any) => {
+                        validate: (el: GdsFormControlElement) => {
                           if (el.value === '')
                             return [
                               {
@@ -176,6 +179,7 @@ export class CardExample extends LitElement {
                               },
                               'Koden måste vara 6 siffror.',
                             ]
+                          else return
                         },
                       }}
                     ></gds-input>

@@ -5,7 +5,7 @@ import {
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
-} from '@sebgroup/green-core/scoping'
+} from '@sebgroup/green-core/scoping.js'
 
 const html = htmlTemplateTagFactory((strs, ...values) =>
   strs.map((s, i) => s + values[i]).join(''),
@@ -45,15 +45,17 @@ export class SimpleValues extends HTMLElement {
 
     const dropdown = this.querySelector('#dropdown') as GdsDropdown
 
-    dropdown.addEventListener('change', (e: CustomEvent) => {
-      console.log('Value changed: ', e.detail.value)
+    dropdown.addEventListener('change', (e: Event) => {
+      const customEvent = e as CustomEvent
+      console.log('Value changed: ', customEvent.detail.value)
       console.log('dropdown', dropdown.options)
       console.log('dd name', dropdown.name)
     })
 
-    dropdown.addEventListener('gds-ui-state', (e: CustomEvent) =>
-      console.log('UI state changed: ', e.detail),
-    )
+    dropdown.addEventListener('gds-ui-state', (e: Event) => {
+      const customEvent = e as CustomEvent
+      console.log('UI state changed: ', customEvent.detail)
+    })
 
     const newOption = document.createElement(
       getScopedTagName('gds-option'),

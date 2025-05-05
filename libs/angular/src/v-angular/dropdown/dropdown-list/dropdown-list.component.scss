@@ -3,6 +3,18 @@
 @use '../../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
 
 :host {
+  --gds-ref-pallet-base300: hsl(0, 0%, 87%);
+  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
+  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
+  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
+  --sg-z-index-dropdown: ;
+  --sg-z-index-popover: 1060;
+  --sg-z-index-dropdown-backdrop: 990;
+  --sg-z-index-dropdown: 2000;
+  --sg-popover-background: #fff;
+  --sg-popover-box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
+  --text-primary-color: #333;
+
   position: absolute;
   bottom: 0;
   transform: translateY(calc(100% + 0.5rem));
@@ -31,6 +43,7 @@
     padding: 0;
     max-height: 500px;
     overflow-y: auto;
+    width: 100%;
 
     @include common.padding-bottom(0);
     @include common.add-border();
@@ -39,12 +52,12 @@
 
     @include dropdown.select();
 
-    .group{
-      ul{
+    .group {
+      ul {
         list-style-type: none;
         padding: 0;
       }
-      
+
       &:hover {
         color: inherit;
         background-color: inherit;
@@ -69,14 +82,16 @@
     }
   }
 
-  .gds-dropdown__options__label:hover,
+  .gds-dropdown__options__label:hover {
+    background-color: var(--gds-ref-pallet-base400);
+  }
   .gds-dropdown__options__label:focus-visible,
   .gds-dropdown__options__label[aria-focus='true'] {
-    background-color: var(--grey-400);
+    background-color: var(--gds-ref-pallet-base300);
   }
 
   .gds-dropdown__options__label:active {
-    background-color: var(--grey-500);
+    background-color: var(--gds-ref-pallet-base500);
   }
 
   .gds-dropdown__options__label:focus-visible {
@@ -90,5 +105,16 @@
 
   .gds-dropdown__options__label[highlighted] {
     color: #fff;
+  }
+
+  li + .group {
+    padding-top: 0;
+  }
+
+  .nggv-group-label {
+    cursor: pointer;
+    background-color: #e7e7e7;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
   }
 }

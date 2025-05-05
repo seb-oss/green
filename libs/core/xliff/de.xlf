@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="de" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sb77f4dce69a005ac">
+  <source>Error message.</source>
+  <target>Fehlermeldung.</target>
+</trans-unit>
+<trans-unit id="s5e8250fb85d64c23">
+  <source>Close</source>
+  <target>Schließen</target>
+</trans-unit>
+<trans-unit id="s7fd3469f78111589">
+  <source>Open context menu</source>
+  <target>Kontextmenü öffnen</target>
+</trans-unit>
+<trans-unit id="s83c436ed1bc16dfb">
+  <source>Show more information</source>
+  <target>Weitere Informationen anzeigen</target>
+</trans-unit>
+<trans-unit id="s58bfb494feb8eb02">
+  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
+  <target><x id="0" equiv-text="${this.value.length}"/> ausgewählt</target>
+</trans-unit>
+<trans-unit id="sd898d99fd9c13de6">
+  <source>Filter available options</source>
+  <target>Verfügbare Optionen filtern</target>
+</trans-unit>
+<trans-unit id="s5d929ff1619ac0c9">
+  <source>Search</source>
+  <target>Suche</target>
+</trans-unit>
+<trans-unit id="s1e118319b5202c41">
+  <source>Mon</source>
+  <target>Mo</target>
+</trans-unit>
+<trans-unit id="s6d24cd19e23b8185">
+  <source>Tue</source>
+  <target>Di</target>
+</trans-unit>
+<trans-unit id="s74aa0319e62b2eb7">
+  <source>Wed</source>
+  <target>Mi</target>
+</trans-unit>
+<trans-unit id="s6cfed919e21ac6ac">
+  <source>Thu</source>
+  <target>Do</target>
+</trans-unit>
+<trans-unit id="sf295af199c723ec8">
+  <source>Fri</source>
+  <target>Fr</target>
+</trans-unit>
+<trans-unit id="s9836b719fa8ef857">
+  <source>Sat</source>
+  <target>Sa</target>
+</trans-unit>
+<trans-unit id="s987ac119fac8d621">
+  <source>Sun</source>
+  <target>So</target>
+</trans-unit>
+<trans-unit id="s17e3edbe032f79ec">
+  <source>Open calendar modal</source>
+  <target>Kalender-Modal öffnen</target>
+</trans-unit>
+<trans-unit id="s62931b2a50168976">
+  <source>Previous month</source>
+  <target>Vorheriger Monat</target>
+</trans-unit>
+<trans-unit id="sb47daaf9e1c4a905">
+  <source>Month</source>
+  <target>Monat</target>
+</trans-unit>
+<trans-unit id="s1a2dda8f763a68bd">
+  <source>January</source>
+  <target>Januar</target>
+</trans-unit>
+<trans-unit id="sbc083a1dbee9af73">
+  <source>February</source>
+  <target>Februar</target>
+</trans-unit>
+<trans-unit id="s5052d10b539eabf0">
+  <source>March</source>
+  <target>März</target>
+</trans-unit>
+<trans-unit id="scb6b9cb49cf93277">
+  <source>April</source>
+  <target>April</target>
+</trans-unit>
+<trans-unit id="s1e187019b5262aa6">
+  <source>May</source>
+  <target>Mai</target>
+</trans-unit>
+<trans-unit id="s15a852e9f9a50fa5">
+  <source>June</source>
+  <target>Juni</target>
+</trans-unit>
+<trans-unit id="s15a16ae9f99f19bf">
+  <source>July</source>
+  <target>Juli</target>
+</trans-unit>
+<trans-unit id="s407a88a592a0987c">
+  <source>August</source>
+  <target>August</target>
+</trans-unit>
+<trans-unit id="s39938ecdae568740">
+  <source>September</source>
+  <target>September</target>
+</trans-unit>
+<trans-unit id="sa7cd5c2ff6d266e7">
+  <source>October</source>
+  <target>Oktober</target>
+</trans-unit>
+<trans-unit id="s281846ef0421c71f">
+  <source>November</source>
+  <target>November</target>
+</trans-unit>
+<trans-unit id="s7793b811d20184fe">
+  <source>December</source>
+  <target>Dezember</target>
+</trans-unit>
+<trans-unit id="sa6f2645578b2d2bc">
+  <source>Year</source>
+  <target>Jahr</target>
+</trans-unit>
+<trans-unit id="s46d6587089bd0356">
+  <source>Next month</source>
+  <target>Nächster Monat</target>
+</trans-unit>
+<trans-unit id="sb4f1dffbb6be6302">
+  <source>Clear</source>
+  <target>Löschen</target>
+</trans-unit>
+<trans-unit id="s63d040e37887f17e">
+  <source>Today</source>
+  <target>Heute</target>
+</trans-unit>
+<trans-unit id="se4129fd6b9d7b4c2">
+  <source>Last available date</source>
+  <target>Letztes verfügbares Datum</target>
+</trans-unit>
+<trans-unit id="s8ade4e9d5e804d6a">
+  <source>First available date</source>
+  <target>Erstes verfügbares Datum</target>
+</trans-unit>
+<trans-unit id="se0955919920ee87d">
+  <source>Day</source>
+  <target>Tag</target>
+</trans-unit>
+<trans-unit id="s5febcd9b311c16fe">
+  <source>Scroll right</source>
+  <target>Nach rechts scrollen</target>
+</trans-unit>
+<trans-unit id="s9af3c72c33088826">
+  <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
+  <target>Es gibt <x id="0" equiv-text="${errors.length}"/> Fehler zu beheben, bevor du fortfahren kannst:</target>
+</trans-unit>
+<trans-unit id="sdc42f1da42d6411a">
+  <source>Clear input</source>
+  <target>Feld löschen</target>
+</trans-unit>
+<trans-unit id="s2ceb11be2290bb1b">
+  <source>Cancel</source>
+  <target>Abbrechen</target>
+</trans-unit>
+<trans-unit id="s49730f3d5751a433">
+  <source>Loading...</source>
+  <target>Laden...</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

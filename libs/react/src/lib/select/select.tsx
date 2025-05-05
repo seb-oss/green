@@ -18,12 +18,16 @@ export interface SelectProps
       React.SelectHTMLAttributes<HTMLSelectElement>,
       HTMLSelectElement
     > {
+  /**
+   * Set the live region attribute of the form control footer, this will change how error messages are read by screen readers
+   * @default 'assertive'
+   */
+  'aria-live'?: React.AriaAttributes['aria-live']
   label: string
   info?: string
   validator?: IValidator | undefined
   value?: string
   testId?: string
-
   /**
    * @deprecated
    * Use `info` instead
@@ -34,6 +38,7 @@ export interface SelectProps
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
+      'aria-live': ariaLive = 'assertive',
       'aria-describedby': ariaDescribedBy,
       id = randomId(),
       validator,
@@ -62,6 +67,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <FormItem
+        aria-live={ariaLive}
         label={label}
         labelInformation={info ?? props.labelInformation}
         expandableInfo={expandableInfo}

@@ -7,7 +7,7 @@ import Main from '&/main'
 import Consent from '$/consent/consent'
 import useCookieConsent from '$/consent/useCookieConsent'
 import Fonts from '$/fonts/fonts'
-import { GdsFlex } from '$/import/components'
+import { GdsFlex, GdsTheme } from '$/import/components'
 import { Provider } from '$/provider/provider'
 import Favicon from 'core/favicon'
 import Footer from 'core/footer'
@@ -36,14 +36,16 @@ export default function RootLayout({
           <Provider>
             <Favicon />
             <Fonts>
-              <GdsFlex flex-direction="column">
-                <Header />
-                <Main>
-                  {children}
-                  <Consent />
-                  <Footer />
-                </Main>
-              </GdsFlex>
+              <GdsTheme design-version="2023">
+                <GdsFlex flex-direction="column">
+                  <Header />
+                  <Main>
+                    {children}
+                    <Consent />
+                    <Footer />
+                  </Main>
+                </GdsFlex>
+              </GdsTheme>
             </Fonts>
           </Provider>
           <Script id="data-layer">

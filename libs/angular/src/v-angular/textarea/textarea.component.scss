@@ -2,15 +2,22 @@
 @use '../../../../chlorophyll/scss/components/form/textarea/mixins' as mixins;
 
 :host {
+  --sg-text-primary: #333;
+  --sg-form-control-bg: #fff;
+  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
+  --sg-border-radius: 4px;
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+
   @include mixins.add-textarea();
 
-  label:not(.sdv-field-notice) {
+  label:not(.gds-field-notice) {
     @include form-group.add-label;
-    margin-bottom: 0.5rem;
   }
 
-  label:is(.sdv-field-label) {
-    margin-bottom: 0.5rem;
+  label + .gds-field,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
   }
 
   .hide-if-empty:empty {
@@ -21,17 +28,21 @@
     padding-left: 0.5rem;
   }
 
-  .sdv-field-label--optional {
+  .gds-field-label--optional {
     font-weight: 400;
   }
-
-  // .nggv-field--error {
-  //   //@include nggv.text-field--error();
-  // }
 
   textarea {
     width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 1rem;
+
+    &.nggv-field--error {
+      $_border-bottom: 0.125rem solid #9f000a !important;
+      border-bottom: $_border-bottom;
+    }
   }
 
   .description {
@@ -40,27 +51,45 @@
 
   .error-wrapper {
     margin-top: 0.5rem;
-    //@include nggv.text-field--error-wrapper();
+    display: flex;
+  }
+
+  .form-info {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+    }
+
+    .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        margin-top: 0.128rem;
+        align-items: center;
+      }
+    }
+
+    > .form-info--countdown {
+      font-weight: 400;
+    }
   }
 
   .no-resize {
     resize: none;
-    /* Width */
-    //$_10px: functions.vanilla-px-to-rem(10, 16);
-    //$_3px: functions.vanilla-px-to-rem(3, 16);
 
     &::-webkit-scrollbar {
       -webkit-appearance: none;
-      //width: $_10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      //border: solid $_3px transparent;
     }
 
     &::-webkit-scrollbar-thumb {
-      //box-shadow: inset 0 0 $_10px $_10px colors.$vanilla-color-grey5;
-      //border: solid $_3px transparent;
       border-radius: 0.5rem;
     }
   }

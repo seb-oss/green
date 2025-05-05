@@ -1,15 +1,5 @@
-import { gdsCustomElement } from '../../../utils/helpers/custom-element-scoping'
-import { GdsIcon } from '../icon'
+import { IconArrowWallDown } from './arrow-wall-down.component'
 
-/**
- * @element gds-icon-arrow-wall-down
- */
-@gdsCustomElement('gds-icon-arrow-wall-down')
-export class IconArrowWallDown extends GdsIcon {
-  /** @private */
-  static _regularSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C12.4142 2 12.75 2.33579 12.75 2.75V15.4393L15.7197 12.4697C16.0126 12.1768 16.4874 12.1768 16.7803 12.4697C17.0732 12.7626 17.0732 13.2374 16.7803 13.5303L12.5303 17.7803C12.3897 17.921 12.1989 18 12 18C11.8011 18 11.6103 17.921 11.4697 17.7803L7.21967 13.5303C6.92678 13.2374 6.92678 12.7626 7.21967 12.4697C7.51256 12.1768 7.98743 12.1768 8.28033 12.4697L11.25 15.4393V2.75C11.25 2.33579 11.5858 2 12 2ZM4 21.25C4 20.8358 4.33579 20.5 4.75 20.5H19.25C19.6642 20.5 20 20.8358 20 21.25C20 21.6642 19.6642 22 19.25 22H4.75C4.33579 22 4 21.6642 4 21.25Z" fill="currentColor"/>`
-  /** @private */
-  static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C12.4142 2 12.75 2.33579 12.75 2.75V15.4393L15.7197 12.4697C16.0126 12.1768 16.4874 12.1768 16.7803 12.4697C17.0732 12.7626 17.0732 13.2374 16.7803 13.5303L12.5303 17.7803C12.3897 17.921 12.1989 18 12 18C11.8011 18 11.6103 17.921 11.4697 17.7803L7.21967 13.5303C6.92678 13.2374 6.92678 12.7626 7.21967 12.4697C7.51256 12.1768 7.98743 12.1768 8.28033 12.4697L11.25 15.4393V2.75C11.25 2.33579 11.5858 2 12 2ZM4 21.25C4 20.8358 4.33579 20.5 4.75 20.5H19.25C19.6642 20.5 20 20.8358 20 21.25C20 21.6642 19.6642 22 19.25 22H4.75C4.33579 22 4 21.6642 4 21.25Z" fill="currentColor"/>`
-  /** @private */
-  static _name = 'arrow-wall-down'
-}
+IconArrowWallDown.define()
+
+export { IconArrowWallDown }

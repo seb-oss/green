@@ -2,21 +2,39 @@
   <button
     data-thook="fold-out-toggle"
     class="fold-out-button"
-    (click)="toggleVisibility($event)"
+    [ngClass]="{ 'no-text': !text }"
+    (click)="toggleVisibility()"
+    [attr.aria-expanded]="shown"
+    [attr.aria-label]="ariaLabel"
   >
-    <gds-icon-dot-grid-one-horizontal
-      width="24"
-      height="24"
-      *nggCoreElement
-    ></gds-icon-dot-grid-one-horizontal>
+    <ng-container *ngTemplateOutlet="text ? withText : default"> </ng-container>
   </button>
 
   <div
-    class="gds-fold-out__popover"
+    #childrenContainer
+    class="nggv-fold-out__popover"
     [ngClass]="{ 'flex-right': alignOptions === 'right' }"
-    [class.gds-fold-out__popover-expanded]="shown"
-    (click)="toggleVisibility($event, false)"
+    [class.nggv-fold-out__popover-expanded]="shown"
+    (click)="toggleVisibility()"
   >
     <ng-content></ng-content>
   </div>
 </div>
+
+<ng-template #withText>
+  {{ text }}
+  <gds-icon-dot-grid-one-horizontal
+    width="24"
+    height="24"
+    *nggCoreElement
+  ></gds-icon-dot-grid-one-horizontal>
+</ng-template>
+
+<ng-template #default>
+  <gds-icon-dot-grid-one-horizontal
+    width="24"
+    height="24"
+    *nggCoreElement
+  ></gds-icon-dot-grid-one-horizontal>
+  <ng-template></ng-template
+></ng-template>

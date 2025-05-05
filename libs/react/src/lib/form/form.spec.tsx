@@ -98,8 +98,8 @@ describe('Form component', () => {
       }),
     )
     await act(() => fireEvent.click(screen.getByText('submit')))
-    expect(mockFn).toBeCalled()
-    expect(mockFn).toBeCalledWith({ text: 'cat cat' })
+    expect(mockFn).toHaveBeenCalled()
+    expect(mockFn).toHaveBeenLastCalledWith({ text: 'cat cat' })
   })
 
   it('Should call not onSubmitForm fn when input empty', async () => {
@@ -123,7 +123,7 @@ describe('Form component', () => {
             rules: { type: 'Required' },
           }}
         >
-          <Checkbox label="checkbox" />
+          <Checkbox label="checkbox" checked />
         </FormItems>
       </Form>,
     )

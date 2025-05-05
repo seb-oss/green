@@ -12,10 +12,10 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
-import { NgvI18nModule } from '../../i18n/i18n.module'
-import { NgvInputComponent } from '../../input/input.component'
-import { NgvTooltipDirective } from '../../tooltip/tooltip.directive'
-import { NgvDropdownListComponent } from './dropdown-list.component'
+import { NggvI18nModule } from '../../i18n/i18n.module'
+import { NggvInputComponent } from '../../input/input.component'
+import { NggvTooltipDirective } from '../../tooltip/tooltip.directive'
+import { NggvDropdownListComponent } from './dropdown-list.component'
 
 interface WithExtras {
   ngModel: string
@@ -28,14 +28,14 @@ interface WithExtras {
 
 export default {
   title: 'V-Angular/DropdownList',
-  component: NgvDropdownListComponent,
+  component: NggvDropdownListComponent,
   decorators: [
     applicationConfig({
-      providers: [importProvidersFrom(NgvI18nModule)],
+      providers: [importProvidersFrom(NggvI18nModule)],
     }),
     moduleMetadata({
-      declarations: [NgvInputComponent, NgvTooltipDirective],
-      imports: [CommonModule, FormsModule, ReactiveFormsModule, NgvI18nModule],
+      declarations: [NggvInputComponent, NggvTooltipDirective],
+      imports: [CommonModule, FormsModule, ReactiveFormsModule, NggvI18nModule],
     }),
   ],
 } as Meta
@@ -61,7 +61,7 @@ const options = [
   },
 ]
 
-type StoryArgs = NgvDropdownListComponent & WithExtras
+type StoryArgs = NggvDropdownListComponent & WithExtras
 
 const Template: StoryFn<StoryArgs> = (args: any) => {
   let expanded = false

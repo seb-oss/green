@@ -1,0 +1,253 @@
+<ng-template #sortableThTemplate let-column>
+  <button class="sg-table-sort" *transloco="let t">
+    <ng-template #thButtonTemplate>
+      {{ t(column.label ?? '') }}
+    </ng-template>
+    <ng-container
+      *ngIf="
+        customHeaderTemplates.get(column.property) as thTemplate;
+        else thButtonTemplate
+      "
+    >
+      <ng-template
+        *ngTemplateOutlet="thTemplate || null; context: { $implicit: column }"
+      >
+      </ng-template>
+    </ng-container>
+  </button>
+</ng-template>
+
+<ng-template #notSortableThTemplate let-column>
+  <ng-template #defaultThTemplate>
+    <ng-container *transloco="let t">
+      {{ t(column.label ?? '') }}
+    </ng-container>
+  </ng-template>
+  <ng-container
+    *ngIf="
+      customHeaderTemplates.get(column.property) as thTemplate;
+      else defaultThTemplate
+    "
+  >
+    <ng-template
+      *ngTemplateOutlet="thTemplate || null; context: { $implicit: column }"
+    >
+    </ng-template>
+  </ng-container>
+</ng-template>
+<table class="gds-table" *transloco="let t">
+  <!-- Table header -->
+  <thead>
+    <tr>
+      <!-- Checkbox column for header -->
+      <th *ngIf="selectable" class="column__check">
+        <div class="gds-field-checkbox-wrap">
+          <label
+            [attr.for]="'cb_header__' + initId"
+            class="form-control"
+            id="thead-checkbox"
+          >
+            <input
+              type="checkbox"
+              [formControl]="groupSelector"
+              [attr.aria-label]="ariaLabelCheckboxTh"
+              [attr.id]="'cb_header__' + initId"
+              [attr.data-thook]="thook"
+            />
+            <i></i>
+          </label>
+        </div>
+      </th>
+
+      <!-- Other columns -->
+      <th
+        *ngFor="let column of tableColumns"
+        [columnType]="column.valueType"
+        [sortable]="column.sortable"
+        [sortOrder]="column.order"
+        [thook]="'column-header-' + !!column.property"
+        (click)="toggleSortOrder(column)"
+        (keydown.space)="toggleSortOrderWithSpace($event, column)"
+        [attr.aria-label]="getAriaLabel(column)"
+        [attr.aria-sort]="column.order + 'ending'"
+      >
+        <ng-container *ngIf="column.sortable">
+          <ng-container
+            *ngTemplateOutlet="
+              sortableThTemplate;
+              context: { $implicit: column, column: column }
+            "
+          >
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!column.sortable">
+          <ng-container
+            *ngTemplateOutlet="
+              notSortableThTemplate;
+              context: { $implicit: column, column: column }
+            "
+          >
+          </ng-container>
+        </ng-container>
+      </th>
+    </tr>
+  </thead>
+
+  <!-- Table body -->
+  <tbody [formGroup]="rowSelectors">
+    <ng-container *ngFor="let item of tableData; let i = index">
+      <tr
+        [class.row__expand]="expandable"
+        [attr.data-thook]="item | trThook: i : trThookFn"
+        [attr.data-hasrowspan]="hasRowSpan(item)"
+      >
+        <!-- Checkbox column for row -->
+        <td *ngIf="selectable" class="column__check">
+          <div class="gds-field-checkbox-wrap">
+            <label
+              [attr.for]="'cb_row__' + initId + '_' + i"
+              class="form-control"
+            >
+              <input
+                *ngIf="rowSelectors.get(item[rowId])"
+                type="checkbox"
+                [formControlName]="item[rowId]"
+                [attr.aria-label]="ariaLabelCheckboxTr"
+                [attr.id]="'cb_row__' + initId + '_' + i"
+                [attr.data-thook]="'row-select-' + i"
+              />
+              <i></i>
+            </label>
+          </div>
+        </td>
+
+        <!-- Other columns -->
+        <td
+          *ngFor="let column of tableColumns; let i = index"
+          [columnType]="column.valueType"
+          [value]="item[column.property]"
+          (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
+        >
+        <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
+            <div class="gds-item-field-wrap">
+              <span
+                class="chevron-field"
+                [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
+              >
+                <svg
+                  *ngIf="item.subItems.length > 0"
+                  width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M20 9L12 17L4 9"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+                {{ item[column.property] }} ({{ item.subItems.length }})
+            </div>
+          </ng-container>
+
+          <ng-template #nonExpandableTemplate>
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: item }">
+              </ng-template>
+            </ng-container>
+            <ng-template #defaultTdTemplate>
+              {{ item[column.property] }}
+            </ng-template>
+          </ng-template>
+        </td>
+      </tr>
+
+      <!-- Expanded Sub Items -->
+      <ng-container *ngIf="expandable && rowSelectors.get(item[rowId])?.value">
+        <tr *ngFor="let subItem of item[subItemsProp]">
+          <td
+            *ngFor="let column of tableColumns"
+            class="web-view"
+            [columnType]="column.valueType"
+            [value]="subItem[column.property]"
+            (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
+          >
+            <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+              <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }">
+              </ng-template>
+            </ng-container>
+            <ng-template #defaultTdTemplate>
+              {{ subItem[column.property] }}
+            </ng-template>
+          </td>
+
+          <td
+            class="mobile-view"
+            [attr.colspan]="tableColumns.length"
+            (click)="propagateItemClick(subItem)"
+          >
+            <dl class="mobile-view-field-wrap">
+              <ng-container *ngFor="let column of tableColumns">
+                <div
+                  *ngIf="!column.hidePropertyOnMobile"
+                  class="mobile-view-field"
+                  [columnType]="column.valueType"
+                  [value]="subItem[column.property]"
+                >
+                  <dt *ngIf="!column.hideLabelOnMobile">
+                    <ng-container *transloco="let t">
+                      {{ t(column.label ?? '') }}
+                    </ng-container>
+                  </dt>
+                  <dd [ngStyle]="column.boldTextOnMobile ? { 'font-weight': '500' } : {'font-weight': '400'}">
+                    <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+                      <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"></ng-template>
+                    </ng-container>
+                    <ng-template #defaultTdTemplate>
+                      {{ subItem[column.property] }}
+                    </ng-template>
+                  </dd>
+                  <ng-content></ng-content>
+                </div>
+              </ng-container>
+            </dl>
+            <span
+              class="nav-chevron-field"
+              [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
+            >
+              <svg
+                width="20" height="20" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 9L12 17L4 9"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </td>
+        </tr>
+      </ng-container>
+
+      <!-- Custom appended rows -->
+      <ng-container *ngIf="appendedRowsTemplateRef as trTemplate">
+        <!-- Cannot infer trTemplate as TemplateRef therefore null -->
+        <ng-container
+          *ngTemplateOutlet="trTemplate || null; context: { $implicit: item }"
+        >
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </tbody>
+
+  <!-- Table footer -->
+  <tfoot *ngIf="customFooterTemplateRef as trTemplate">
+    <!-- Cannot infer trTemplate as TemplateRef therefore null -->
+    <ng-container *ngTemplateOutlet="trTemplate || null"> </ng-container>
+  </tfoot>
+</table>

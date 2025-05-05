@@ -1,5 +1,6 @@
 import { Meta, Markdown } from '@storybook/addon-docs';
-import colors from '../../../../tokens/src/tokens/color-v2/color.json';
+import lightColors from '../../../../tokens/src/tokens/2023/sys/color.light.json';
+import darkColors from '../../../../tokens/src/tokens/2023/sys/color.dark.json';
 import '../../components/container/container'
 import '../../components/badge'
 import '../../components/grid/grid'
@@ -39,7 +40,7 @@ The color system is divided into three levels:
 
     Here's an interactive example to illustrate the concept:
 
-    <gds-container
+    <gds-div
       display="grid"
       place-items="center"
       min-height="80vh"
@@ -79,7 +80,7 @@ The color system is divided into three levels:
       <gds-flex
         level="1"
         class="gds-levels"
-        transform-style="preserve-3d"
+        style={{transformStyle: "preserve-3d"}}
         background="primary"
         data-title="L1: Document"
         width="400px"
@@ -88,9 +89,10 @@ The color system is divided into three levels:
         border-radius="l"
       >
 
-      <gds-container
+      <gds-div
         level="2"
-        border="xs/inversed"
+        border="xs"
+        border-color="inversed"
         border-radius="l"
         style={{transform: 'translate3d(0, 0, 100px)'}}
         background="positive"
@@ -98,7 +100,7 @@ The color system is divided into three levels:
         position="absolute"
         inset="0"
       >
-        <gds-container
+        <gds-div
           inset="0"
           overflow="hidden"
           position="absolute"
@@ -115,10 +117,10 @@ The color system is divided into three levels:
             muted
             loop
             ></gds-video>
-        </gds-container>
-      </gds-container>
+        </gds-div>
+      </gds-div>
 
-      <gds-container
+      <gds-div
         border-radius="s"
         style={{transform: 'translate3d(0, 0, 200px)'}}
         data-title="L3: Component"
@@ -145,14 +147,14 @@ The color system is divided into three levels:
                 width="100%"
                 color="tertiary"
               >
-                <gds-container>
+                <gds-div>
                   <gds-text tag="h3" text-wrap="balance">Sustainable Practices</gds-text>
 
                   <gds-text
                     color="tertiary/0.6"
                     font-size="body-s"
                     >Promoting Eco-Friendly Solutions</gds-text>
-                </gds-container>
+                </gds-div>
                 <gds-divider opacity="0.1"></gds-divider>
                 <gds-flex gap="s">
                   <gds-button rank="secondary">Get Involved</gds-button>
@@ -164,10 +166,10 @@ The color system is divided into three levels:
             </gds-mask>
 
 
-      </gds-container>
+      </gds-div>
 
       </gds-flex>
-    </gds-container>
+    </gds-div>
   </gds-flex>
 
   ## Working with the color system and [Declarative Layout](/docs/concepts-declarative-layout--docs)
@@ -185,19 +187,19 @@ The color system is divided into three levels:
   and `background`, since that's the property that was used.
 
   ```html
-  <gds-card background="primary">Will resolve to `--gds-color-l2-background-primary`</gds-card>
+  <gds-card background="primary">Will resolve to `--gds-sys-color-l2-background-primary`</gds-card>
   ```
 
   If necessary, you can also explicitly declare which level you want to use by setting
   the `level` attribute on the component.
 
   ```html
-  <gds-card level="3" background="primary">Will resolve to `--gds-color-l3-background-primary`</gds-card>
+  <gds-card level="3" background="primary">Will resolve to `--gds-sys-color-l3-background-primary`</gds-card>
   ```
 
   ## Colors
   <gds-flex flex-direction="column" gap="2xl">
-    {Object.entries(colors.color.level).map(([level, categories]) => (
+    {Object.entries(lightColors.sys.color).map(([level, categories]) => (
         <gds-flex flex-direction="column" gap="2xl">
           <gds-flex gap="s" flex-direction="column">
             <gds-text text-transform="uppercase">{level}</gds-text>
@@ -218,7 +220,7 @@ The color system is divided into three levels:
                                                 border-radius="xs"
                                                 border-width="4xs"
                                                 border-color="#d7d7d7"
-                                                style={{background: `var(--gds-color-${level}-${category}-${item}`}}
+                                                style={{background: `var(--gds-sys-color-${level}-${category}-${item})`}}
                                                 padding="0"
                                             />
                                             <gds-flex flex-direction="column" gap="3xs" align-items="start">
@@ -238,7 +240,7 @@ The color system is divided into three levels:
                                                 border-radius="xs"
                                                 border-width="4xs"
                                                 border-color="#3c3b3b"
-                                                background={item}
+                                                style={{background: darkColors.sys.color[level][category][item].value}}
                                                 padding="0"
                                             />
                                             <gds-flex flex-direction="column" gap="3xs" align-items="start">
@@ -255,7 +257,7 @@ The color system is divided into three levels:
                                                 tag="small"
                                                 transform="uppercase"
                                               >
-                                                {properties.darkValue}
+                                                {darkColors.sys.color[level][category][item].value}
                                               </gds-text>
                                             </gds-flex>
                                         </gds-flex>

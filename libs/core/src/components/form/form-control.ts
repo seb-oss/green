@@ -29,6 +29,8 @@ export interface GdsValidator {
  * other common form control functionality that all Green Core form controls share.
  *
  * @internal
+ *
+ * @event gds-validity-state - Dispatched when the validity state of the form control is changed by a validator.
  */
 export abstract class GdsFormControlElement<ValueT = any>
   extends GdsElement
@@ -50,7 +52,8 @@ export abstract class GdsFormControlElement<ValueT = any>
           this.value = value
         },
         setValidity: (validity: ValidityState, validationMessage?: string) => {
-          this.invalid = validity.customError
+          ;(this.#internals.validity as any) = validity
+          this.errorMessage = validationMessage || ''
         },
         validationMessage: '',
         validity: {
@@ -79,6 +82,9 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({ attribute: false })
   validator?: GdsValidator
 
+  /**
+   * The required attribute can be used to communicate to users of assistive technology that the control is required. Validation still needs to be done in a validator or equivalent.
+   */
   @property({ type: Boolean })
   required = false
 
@@ -86,7 +92,7 @@ export abstract class GdsFormControlElement<ValueT = any>
    * This can be used to manually control the error message that will be displayed
    * when the control is invalid.
    */
-  @property()
+  @property({ attribute: 'error-message' })
   errorMessage = ''
 
   /**
@@ -97,11 +103,6 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({
     type: Boolean,
     reflect: true,
-    attribute: 'aria-invalid',
-    converter: {
-      fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value?.toString(),
-    },
   })
   set invalid(value: boolean) {
     const oldValue = this.invalid
@@ -132,10 +133,25 @@ export abstract class GdsFormControlElement<ValueT = any>
    * Get or set the value of the form control.
    */
   @property()
-  value?: ValueT
+  get value() {
+    return this._internalValue
+  }
+  set value(value: ValueT | undefined) {
+    this._internalValue = value
+  }
+  protected _internalValue?: ValueT
 
   @property({ reflect: true })
   name = ''
+
+  /**
+   * If the input is Disabled
+   */
+  @property({
+    type: Boolean,
+    reflect: true,
+  })
+  disabled = false
 
   /**
    * The form element that the form control is associated with.
@@ -175,7 +191,19 @@ export abstract class GdsFormControlElement<ValueT = any>
       this._getValidityAnchor(),
     )
 
-    this.requestUpdate('invalid', oldValue)
+    if (oldValue !== this.invalid) {
+      this.requestUpdate('invalid', oldValue)
+      this.dispatchEvent(
+        new CustomEvent('gds-validity-state', {
+          bubbles: true,
+          composed: true,
+          detail: {
+            valid: this.validity.valid,
+            message: this.validationMessage,
+          },
+        }),
+      )
+    }
 
     return this.#internals.checkValidity()
   }
@@ -184,18 +212,19 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.reportValidity()
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   private __handleValueChange() {
     this.#internals.setFormValue(this.value as any)
     this.checkValidity()
   }
 
-  formResetCallback() {
+  protected formResetCallback() {
     if (typeof this.value === 'string') (this.value as string) = ''
+    else if (Array.isArray(this.value)) (this.value as Array<string>) = []
     else this.value = undefined
   }
 
-  formAssociatedCallback(form?: HTMLFormElement) {
+  protected formAssociatedCallback(form?: HTMLFormElement) {
     form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 

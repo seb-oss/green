@@ -1,8 +1,8 @@
 import { Directive } from '@angular/core'
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { NgvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvDropdownListComponent } from './dropdown-list.component'
+import { NggvI18nModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvDropdownListComponent } from './dropdown-list.component'
 
 @Directive({
   selector: '[nggvTooltip]',
@@ -19,18 +19,18 @@ import { NgvDropdownListComponent } from './dropdown-list.component'
 class TooltipStubDirective {}
 
 describe('DropdownListComponent', () => {
-  let component: NgvDropdownListComponent
-  let fixture: ComponentFixture<NgvDropdownListComponent>
+  let component: NggvDropdownListComponent
+  let fixture: ComponentFixture<NggvDropdownListComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NgvDropdownListComponent, TooltipStubDirective],
-      imports: [NgvI18nModule],
+      declarations: [NggvDropdownListComponent, TooltipStubDirective],
+      imports: [NggvI18nModule],
     }).compileComponents()
   })
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgvDropdownListComponent)
+    fixture = TestBed.createComponent(NggvDropdownListComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
@@ -39,7 +39,7 @@ describe('DropdownListComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  describe('getActiveIndex', () => {
+  describe('getActiveIndex()', () => {
     const optionsWithNullish = [
       { key: null, label: 'placeholder' },
       { key: 'key1', label: 'la1' },
@@ -84,6 +84,7 @@ describe('DropdownListComponent', () => {
       ({ selected, options, expectedIndex }) => {
         component.options = options
         component.selectedValue = selected
+        component.refreshSelectedOption()
         const expected = component.getActiveIndex()
         expect(expected).toEqual(expectedIndex)
       },

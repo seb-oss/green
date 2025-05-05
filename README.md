@@ -31,7 +31,7 @@ If you're trying to find something specific, here's a full list of packages that
 | [@sebgroup/green-charts](https://github.com/seb-oss/green/tree/main/libs/charts)                 | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-charts/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-charts)                 | [Changelog](https://github.com/seb-oss/green/tree/main/libs/charts/CHANGELOG.md)         | An SEB wrapper of [Billboard.js](https://naver.github.io/billboard.js/) |
 | [@sebgroup/green-react-charts](https://github.com/seb-oss/green/tree/main/libs/react-charts)     | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-react-charts/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-react-charts)     | [Changelog](https://github.com/seb-oss/green/tree/main/libs/react-charts/CHANGELOG.md)   | A React version of the charts wrapper                                   |
 | [@sebgroup/green-angular-charts](https://github.com/seb-oss/green/tree/main/libs/angular-charts) | [![Stable version](https://img.shields.io/npm/v/@sebgroup/green-angular-charts/latest.svg)](https://www.npmjs.com/package/@sebgroup/green-angular-charts) | [Changelog](https://github.com/seb-oss/green/tree/main/libs/angular-charts/CHANGELOG.md) | An Angular version of the charts wrapper                                |
-| [@sebgroup/fonts](https://github.com/seb-oss/green/tree/main/libs/fonts) | [![Stable version](https://img.shields.io/npm/v/@sebgroup/fonts/latest.svg)](https://www.npmjs.com/package/@sebgroup/fonts) | [Changelog](https://github.com/seb-oss/green/tree/main/libs/fonts/CHANGELOG.md) | This package contains SEBs primary font SEB SansSerif                           |
+| [@sebgroup/fonts](https://github.com/seb-oss/green/tree/main/libs/fonts)                         | [![Stable version](https://img.shields.io/npm/v/@sebgroup/fonts/latest.svg)](https://www.npmjs.com/package/@sebgroup/fonts)                               | [Changelog](https://github.com/seb-oss/green/tree/main/libs/fonts/CHANGELOG.md)          | This package contains SEBs primary font SEB SansSerif                   |
 
 ## 📋 Table of content
 
@@ -52,7 +52,7 @@ Documentation currently resides in a few different locations:
 
 ## 🏦 Working from SEB
 
-Working from SEB and on SEB machines you need to setup things in a specific way for everything to work smooth. Checkout our [Developer Guidelines](https://github.sebank.se/pages/seb-common/Developer-garden/detail_pages/green.html) over at Developer Garden.
+Ask on Teams if you need help setting up local development environment.
 
 ## 🎉 Contribute
 

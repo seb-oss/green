@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.0
+
+### Major Changes
+
+- 56552ef: **L3 Background Primary:** Changing the l3 background primary to be Green Senior
+- 56552ef: Migrating to Style Dictionary v4 and rewriting token structure and output for a more scaleable implementation.
+
+## 0.10.3
+
+### Patch Changes
+
+- 8851dbd: **Tokens: heading-2xs:** Add missing font size
+
+## 0.10.2
+
+### Patch Changes
+
+- d6d45d1: **Tokens:** L2 content information typo
+
 ## 0.10.1
 
 ### Patch Changes

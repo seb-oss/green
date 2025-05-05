@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/chlorophyll",
-  "version": "3.6.12",
+  "version": "3.6.19",
   "description": "A CSS framework for SEB with accessibility at it's core.",
   "main": "css/green-chlorophyll.min.css",
   "repository": {
@@ -20,6 +20,6 @@
   },
   "homepage": "https://storybook.seb.io/latest/chlorophyll/",
   "dependencies": {
-    "@sebgroup/fonts": "^2.0.0"
+    "@sebgroup/fonts": "^2.0.3"
   }
 }

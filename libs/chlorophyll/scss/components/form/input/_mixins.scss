@@ -75,5 +75,13 @@ $background: var(--sg-form-control-bg);
 
   .is-invalid & {
     @include validation.add-feedback(tokens.$intent-danger-background);
+
+    &:before {
+      z-index: 1;
+    }
+  }
+
+  & > .form-group > .group {
+    margin-bottom: 0;
   }
 }

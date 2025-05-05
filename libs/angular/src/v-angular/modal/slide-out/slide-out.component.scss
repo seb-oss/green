@@ -1,12 +1,32 @@
 @use '../../../../../chlorophyll/scss/components/modal/mixins' as mixins;
 @use '../../../../../chlorophyll/scss/components/backdrop' as backdrop;
-@use '../../../../../chlorophyll/scss/components/button';
+@use '../../../../../chlorophyll/scss/components/close/mixins' as close;
+@use '../../../../../chlorophyll/scss/common' as common;
+@use '../../../../../chlorophyll/scss/components/button/mixins' as button;
 
 :host {
+  --background-hsl: 0deg, 0%, 0%;
+  --gds-ref-pallet-base200: hsl(0, 0%, 91%);
+  --gds-sys-color-base: hsl(0, 0%, 20%);
+  --gds-sys-color-font: hsl(0, 0%, 20%);
+  --gds-sys-shape-corner-round: 50%;
+  --grey-500: rgb(222, 222, 222);
+  --sg-border-color: hsl(0, 0%, 53%);
+  --sg-border-radius: 0.25rem;
+  --sg-border-width: 1px;
+  --sg-hsl-contrast: 0deg, 0%, 0%;
+  --sg-modal-backdrop-background: rgba(0, 0, 0, 0.5);
+  --sg-modal-background: #fff;
+  --sg-modal-box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
+  --sg-z-index-modal-backdrop: 1040;
+  --sg-z-index-modal: 1050;
+  --text-primary-color: rgb(51, 51, 51);
+
   .gds-slide-out {
     @include mixins.modal();
     @include mixins.aside-modal();
     z-index: 1050;
+    overflow-y: auto;
 
     &.auto-width {
       width: auto;
@@ -18,16 +38,48 @@
     display: none;
   }
 
-  .gds-backdrop {
-    @include backdrop.add-backdrop(rgba(0, 0, 0, 0.35), 1040);
+  .nggv-backdrop {
+    @include mixins.modal-backdrop;
   }
 
   .gds-slide-out__content {
     @include mixins.modal-body();
+    overflow: unset;
   }
 
-  .modal-dialog__actions, .gds-slide-out__header, .modal-body, .gds-slide-out__content {
+  .modal-dialog__actions,
+  .gds-slide-out__header,
+  .modal-body,
+  .gds-slide-out__content {
     box-sizing: border-box;
+  }
+
+  .modal-slide-out__heading {
+    @include mixins.modal-header();
+  }
+
+  .nggv-modal-slideout__close {
+    @include button.reset;
+    @include close.close;
+  }
+
+  .modal-dialog__actions {
+    button {
+      @include button.reset;
+      @include button.base;
+
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .primary {
+      @include button.primary;
+    }
+    .secondary {
+      @include button.secondary;
+    }
+    .danger {
+      @include button.danger-color;
+    }
   }
 
   #sdv-modal-body {

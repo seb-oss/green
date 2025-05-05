@@ -6,11 +6,12 @@ import React, {
 } from 'react'
 import { createComponent } from '@lit/react'
 
-import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/index.js'
+import { GdsDatepicker } from '@sebgroup/green-core/components/datepicker/datepicker.component'
 import { GdsValidator } from '@sebgroup/green-core/components/form/form-control'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
+GdsDatepicker.define()
 registerTransitionalStyles()
 
 export const CoreDatepicker = createComponent({
@@ -106,6 +107,17 @@ export type DatepickerOptions = {
    * The children of the datepicker.
    */
   children?: React.ReactNode
+
+  /**
+   * If the it will be possible to clear the selected date.
+   */
+  clearable?: boolean
+
+  /**
+   * Whether to hide the today button under the calendar.
+   */
+  hideTodayButton?: boolean
+
   /**
    * @deprecated Use `value` instead.
    */
@@ -128,6 +140,7 @@ export const Datepicker = forwardRef(
       showWeeks,
       testId,
       validator,
+      size,
       selectedDate,
       currentDate,
       ...props
@@ -171,6 +184,7 @@ export const Datepicker = forwardRef(
           onchange={onChangeHandler}
           value={value}
           ref={_ref}
+          size={size === 'small' ? 'small' : 'large'}
           {...props}
         />
       </div>

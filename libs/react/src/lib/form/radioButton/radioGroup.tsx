@@ -13,6 +13,11 @@ import { RadioButtonProps } from './radioButton'
 export interface RadioGroupProps
   extends IExpandableInformation,
     ILabelAndLabelInformation {
+  /**
+   * Set the live region attribute of the form control footer, this will change how error messages are read by screen readers
+   * @default 'assertive'
+   */
+  'aria-live'?: React.AriaAttributes['aria-live']
   label?: string
   title?: string
   valueSelected?: string
@@ -26,11 +31,14 @@ export interface RadioGroupProps
 }
 
 export const RadioGroup = ({
+  'aria-live': ariaLive,
   defaultSelected,
   valueSelected,
   label,
+  /** @deprecated use `label` instead */
   title,
   labelInformation,
+  /** @deprecated use `labelInformation` instead */
   description,
   expandableInfo,
   expandableInfoButtonLabel,
@@ -41,19 +49,12 @@ export const RadioGroup = ({
   horizontal,
   children,
 }: React.PropsWithChildren<RadioGroupProps>) => {
-  if (title)
-    console.warn('"title" prop is deprecated. Please use "label" instead.')
-  if (description)
-    console.warn(
-      '"description" prop is deprecated. Please use "labelInformation" instead.',
-    )
-
   const [selected, setSelected] = useState<string | undefined>(
     valueSelected ?? defaultSelected,
   )
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected)
   const [name] = useState(propName)
-  const [uniqueId] = useState(randomId())
+  const [uuid] = useState(randomId())
 
   if (valueSelected !== prevValueSelected) {
     setSelected(valueSelected)
@@ -68,7 +69,7 @@ export const RadioGroup = ({
     }
   }
 
-  const radioBtnRef: React.RefObject<HTMLInputElement> = useRef(null)
+  const radioBtnRef = useRef<HTMLInputElement>(null)
 
   React.useEffect(() => {
     if (radioBtnRef && radioBtnRef.current) {
@@ -96,6 +97,7 @@ export const RadioGroup = ({
     expandableInfo,
     expandableInfoButtonLabel,
     role: 'radiogroup',
+    'aria-live': ariaLive,
   }
 
   const radioGroupWrapperClassNames = classNames('gds-radio-group-wrapper', {
@@ -103,30 +105,27 @@ export const RadioGroup = ({
   })
 
   const describedBy = classNames({
-    [`${uniqueId}_message`]:
+    [`${uuid}_message`]:
       validator?.message !== undefined && validator.message.length > 0,
-    [`${uniqueId}_info`]: labelInformation,
-    [`gds-expandable-info-${uniqueId}`]: expandableInfo,
+    [`${uuid}_info`]: labelInformation,
+    [`gds-expandable-info-${uuid}`]: expandableInfo,
   })
 
   return (
-    <FormItem {...formItemProps} inputId={uniqueId}>
+    <FormItem {...formItemProps} inputId={uuid}>
       <div className={radioGroupWrapperClassNames}>
-        {React.Children.map(
-          children as React.ReactElement,
-          (radioButton: React.ReactElement<RadioButtonProps>) => {
-            return React.isValidElement<React.FC<RadioButtonProps>>(radioButton)
-              ? React.cloneElement(radioButton, {
-                  'aria-describedby': describedBy,
-                  validator: validator,
-                  onChange: handleOnChange,
-                  checked: selected === radioButton.props.value,
-                  name,
-                  ref: radioBtnRef,
-                })
-              : radioButton
-          },
-        )}
+        {React.Children.map(children as React.ReactNode, (radioButton) => {
+          return React.isValidElement<RadioButtonProps>(radioButton)
+            ? React.cloneElement(radioButton, {
+                'aria-describedby': describedBy,
+                validator: validator,
+                onChange: handleOnChange,
+                checked: selected === radioButton.props.value,
+                name,
+                ref: radioBtnRef,
+              })
+            : radioButton
+        })}
       </div>
     </FormItem>
   )

@@ -1,16 +1,22 @@
 import { CSSResult } from 'lit'
 
 import { supportsConstructedStylesheets } from '../utils/controllers/dynamic-styles-controller'
+import { isServer } from './helpers/platform'
 
 declare global {
   var __gdsGlobalStylesRegistry: GlobalStylesRegistry // eslint-disable-line no-var
+}
+
+function getDocumentAdoptedStylesheet() {
+  if (isServer) return []
+  return document.adoptedStyleSheets || []
 }
 
 export class GlobalStylesRegistry {
   #useLegacyStylesheets = !supportsConstructedStylesheets()
   #styleSheets = new Map<string, CSSStyleSheet>()
   #legacyStyleSheets = new Map<string, HTMLStyleElement>()
-  #initialStyleSheets: CSSStyleSheet[] = document.adoptedStyleSheets || []
+  #initialStyleSheets: CSSStyleSheet[] = getDocumentAdoptedStylesheet()
 
   /**
    * Get the global singleton instance of the GlobalStylesRegistry.
@@ -41,6 +47,8 @@ export class GlobalStylesRegistry {
   }
 
   #injectStylesLegacy(key: string, cssText: string) {
+    if (isServer) return
+
     let styleEl = this.#legacyStyleSheets.get(key)
 
     if (!styleEl) {
@@ -53,6 +61,8 @@ export class GlobalStylesRegistry {
   }
 
   #injectStyles(key: string, styleSheet: CSSStyleSheet) {
+    if (isServer) return
+
     this.#styleSheets.set(key, styleSheet)
 
     document.adoptedStyleSheets = [

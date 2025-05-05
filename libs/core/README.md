@@ -65,7 +65,7 @@ In your module:
 
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule } from '@sebgroup/green-angular'
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 
 @NgModule({
     // Add the NggCoreWrapperModule to the `imports` array

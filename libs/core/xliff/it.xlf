@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+<file target-language="it" source-language="en" original="lit-localize-inputs" datatype="plaintext">
+<body>
+<trans-unit id="sb77f4dce69a005ac">
+  <source>Error message.</source>
+  <target>Messaggio di errore.</target>
+</trans-unit>
+<trans-unit id="s5e8250fb85d64c23">
+  <source>Close</source>
+  <target>Chiudi</target>
+</trans-unit>
+<trans-unit id="s7fd3469f78111589">
+  <source>Open context menu</source>
+  <target>Apri il menu contestuale</target>
+</trans-unit>
+<trans-unit id="s83c436ed1bc16dfb">
+  <source>Show more information</source>
+  <target>Mostra più informazioni</target>
+</trans-unit>
+<trans-unit id="s58bfb494feb8eb02">
+  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
+  <target><x id="0" equiv-text="${this.value.length}"/> selezionato</target>
+</trans-unit>
+<trans-unit id="sd898d99fd9c13de6">
+  <source>Filter available options</source>
+  <target>Filtra le opzioni disponibili</target>
+</trans-unit>
+<trans-unit id="s5d929ff1619ac0c9">
+  <source>Search</source>
+  <target>Cerca</target>
+</trans-unit>
+<trans-unit id="s1e118319b5202c41">
+  <source>Mon</source>
+  <target>Lun</target>
+</trans-unit>
+<trans-unit id="s6d24cd19e23b8185">
+  <source>Tue</source>
+  <target>Mar</target>
+</trans-unit>
+<trans-unit id="s74aa0319e62b2eb7">
+  <source>Wed</source>
+  <target>Mer</target>
+</trans-unit>
+<trans-unit id="s6cfed919e21ac6ac">
+  <source>Thu</source>
+  <target>Gio</target>
+</trans-unit>
+<trans-unit id="sf295af199c723ec8">
+  <source>Fri</source>
+  <target>Ven</target>
+</trans-unit>
+<trans-unit id="s9836b719fa8ef857">
+  <source>Sat</source>
+  <target>Sab</target>
+</trans-unit>
+<trans-unit id="s987ac119fac8d621">
+  <source>Sun</source>
+  <target>Dom</target>
+</trans-unit>
+<trans-unit id="s17e3edbe032f79ec">
+  <source>Open calendar modal</source>
+  <target>Apri la finestra del calendario</target>
+</trans-unit>
+<trans-unit id="s62931b2a50168976">
+  <source>Previous month</source>
+  <target>Mese precedente</target>
+</trans-unit>
+<trans-unit id="sb47daaf9e1c4a905">
+  <source>Month</source>
+  <target>Mese</target>
+</trans-unit>
+<trans-unit id="s1a2dda8f763a68bd">
+  <source>January</source>
+  <target>Gennaio</target>
+</trans-unit>
+<trans-unit id="sbc083a1dbee9af73">
+  <source>February</source>
+  <target>Febbraio</target>
+</trans-unit>
+<trans-unit id="s5052d10b539eabf0">
+  <source>March</source>
+  <target>Marzo</target>
+</trans-unit>
+<trans-unit id="scb6b9cb49cf93277">
+  <source>April</source>
+  <target>Aprile</target>
+</trans-unit>
+<trans-unit id="s1e187019b5262aa6">
+  <source>May</source>
+  <target>Maggio</target>
+</trans-unit>
+<trans-unit id="s15a852e9f9a50fa5">
+  <source>June</source>
+  <target>Giugno</target>
+</trans-unit>
+<trans-unit id="s15a16ae9f99f19bf">
+  <source>July</source>
+  <target>Luglio</target>
+</trans-unit>
+<trans-unit id="s407a88a592a0987c">
+  <source>August</source>
+  <target>Agosto</target>
+</trans-unit>
+<trans-unit id="s39938ecdae568740">
+  <source>September</source>
+  <target>Settembre</target>
+</trans-unit>
+<trans-unit id="sa7cd5c2ff6d266e7">
+  <source>October</source>
+  <target>Ottobre</target>
+</trans-unit>
+<trans-unit id="s281846ef0421c71f">
+  <source>November</source>
+  <target>Novembre</target>
+</trans-unit>
+<trans-unit id="s7793b811d20184fe">
+  <source>December</source>
+  <target>Dicembre</target>
+</trans-unit>
+<trans-unit id="sa6f2645578b2d2bc">
+  <source>Year</source>
+  <target>Anno</target>
+</trans-unit>
+<trans-unit id="s46d6587089bd0356">
+  <source>Next month</source>
+  <target>Mese successivo</target>
+</trans-unit>
+<trans-unit id="sb4f1dffbb6be6302">
+  <source>Clear</source>
+  <target>Pulisci</target>
+</trans-unit>
+<trans-unit id="s63d040e37887f17e">
+  <source>Today</source>
+  <target>Oggi</target>
+</trans-unit>
+<trans-unit id="se4129fd6b9d7b4c2">
+  <source>Last available date</source>
+  <target>Ultima data disponibile</target>
+</trans-unit>
+<trans-unit id="s8ade4e9d5e804d6a">
+  <source>First available date</source>
+  <target>Prima data disponibile</target>
+</trans-unit>
+<trans-unit id="se0955919920ee87d">
+  <source>Day</source>
+  <target>Giorno</target>
+</trans-unit>
+<trans-unit id="s5febcd9b311c16fe">
+  <source>Scroll right</source>
+  <target>Scorri a destra</target>
+</trans-unit>
+<trans-unit id="s9af3c72c33088826">
+  <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
+  <target>Ci sono <x id="0" equiv-text="${errors.length}"/> errori da correggere prima di poter continuare:</target>
+</trans-unit>
+<trans-unit id="sdc42f1da42d6411a">
+  <source>Clear input</source>
+  <target>Pulisci il campo di input</target>
+</trans-unit>
+<trans-unit id="s2ceb11be2290bb1b">
+  <source>Cancel</source>
+  <target>Annulla</target>
+</trans-unit>
+<trans-unit id="s49730f3d5751a433">
+  <source>Loading...</source>
+  <target>Caricamento...</target>
+</trans-unit>
+</body>
+</file>
+</xliff>

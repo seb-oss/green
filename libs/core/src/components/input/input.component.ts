@@ -1,0 +1,273 @@
+import { localized, msg } from '@lit/localize'
+import { property, query, queryAsync, state } from 'lit/decorators.js'
+import { choose } from 'lit/directives/choose.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
+import { when } from 'lit/directives/when.js'
+import { nothing } from 'lit/html.js'
+
+import { GdsFieldBase } from '../../primitives/field-base/field-base.component'
+import { GdsFormControlFooter } from '../../primitives/form-control-footer/form-control-footer.component'
+// Local Components
+import { GdsFormControlHeader } from '../../primitives/form-control-header/form-control-header.component'
+import { gdsCustomElement, html } from '../../scoping'
+import formControlHostStyles from '../../shared-styles/form-control-host.style'
+import { tokens } from '../../tokens.style'
+import { forwardAttributes } from '../../utils/directives'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
+import { GdsButton } from '../button/button.component'
+import { GdsFlex } from '../flex/flex.component'
+import { GdsFormControlElement } from '../form/form-control'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
+import { styles } from './input.styles'
+
+@localized()
+class Input extends GdsFormControlElement<string> {
+  static styles = [tokens, formControlHostStyles, styles]
+
+  /**
+   * The supporting text displayed between the label and the field.
+   * This text provides additional context or information to the user.
+   */
+  @property({ attribute: 'supporting-text' })
+  supportingText = ''
+
+  /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
+   * Whether the field should be clearable or not. Clearable fields will display a clear button when
+   * the field has a value.
+   */
+  @property({ type: Boolean })
+  clearable = false
+
+  /**
+   * The maximum number of characters allowed in the field.
+   */
+  @property({ type: Number })
+  maxlength: number = Number.MAX_SAFE_INTEGER
+
+  /**
+   * Controls the font-size of texts and height of the field.
+   */
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
+
+  /**
+   * Hides the header and the footer, while still keeping the accessible label
+   *
+   * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
+   */
+  @property({ type: Boolean })
+  plain = false
+
+  @queryAsync('input')
+  private elInputAsync!: Promise<HTMLInputElement>
+
+  @query('input')
+  private elInput!: HTMLInputElement
+
+  /**
+   * A reference to the clear button element. Returns null if there is no clear button.
+   * Intended for use in integration tests.
+   */
+  test_getClearButton() {
+    return this.shadowRoot?.querySelector<GdsButton>('#clear-button')
+  }
+
+  /**
+   * A reference to the field element. This does not refer to the input element itself,
+   * but the wrapper that makes up the visual field.
+   * Intended for use in integration tests.
+   */
+  test_getFieldElement() {
+    return this.shadowRoot?.querySelector('#field')
+  }
+
+  constructor() {
+    super()
+    this.value = ''
+  }
+
+  render() {
+    return html`
+      ${when(
+        !this.plain,
+        () =>
+          html`<gds-form-control-header class="size-${this.size}">
+            <label for="input" slot="label">${this.label}</label>
+            <span slot="supporting-text" id="supporting-text">
+              ${this.supportingText}
+            </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
+          </gds-form-control-header>`,
+      )}
+      <gds-field-base
+        .size=${this.size}
+        .disabled=${this.disabled}
+        .invalid=${this.invalid}
+        @click=${this.#handleFieldClick}
+        id="field"
+      >
+        ${this.#renderFieldContents()}
+      </gds-field-base>
+      ${when(
+        this.#shouldShowFooter(),
+        () =>
+          html`<gds-form-control-footer
+            class="size-${this.size}"
+            .charCounter=${this.#shouldShowRemainingChars &&
+            this.maxlength - (this.value?.length || 0)}
+            .validationMessage=${this.invalid &&
+            (this.errorMessage || this.validationMessage)}
+          ></gds-form-control-footer>`,
+      )}
+    `
+  }
+
+  #shouldShowFooter() {
+    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+  }
+
+  _getValidityAnchor() {
+    return this.elInput
+  }
+
+  // Any attribute name added here will get forwarded to the native <input> element.
+  #forwardableAttrs = (attr: Attr) =>
+    ['type', 'placeholder', 'required'].includes(attr.name)
+
+  #handleOnInput = (e: Event) => {
+    const element = e.target as HTMLInputElement
+    this.value = element.value
+  }
+
+  #handleOnChange = (e: Event) => {
+    const element = e.target as HTMLInputElement
+    this.value = element.value
+    this.dispatchEvent(
+      new Event('change', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+  }
+
+  #handleFieldClick = () => {
+    this.elInputAsync.then((el) => el.focus())
+  }
+
+  #handleClearBtnClick = () => {
+    this.value = ''
+    this.dispatchEvent(
+      new Event('gds-input-cleared', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+    this.dispatchEvent(
+      new Event('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
+  }
+
+  #renderFieldContents() {
+    const elements = [
+      this.#renderSlotLead(),
+      this.#renderNativeInput(),
+      this.#renderClearButton(),
+      this.#renderSlotTrail(),
+    ]
+
+    return elements.map((element) => html`${element}`)
+  }
+
+  #renderSlotLead() {
+    return html` <slot slot="lead" name="lead"></slot> `
+  }
+
+  #renderSlotTrail() {
+    return html`<slot slot="trail" name="trail"></slot>`
+  }
+
+  #renderNativeInput() {
+    return html`
+      <input
+        class="native-control"
+        @input=${this.#handleOnInput}
+        @change=${this.#handleOnChange}
+        .value=${this.value}
+        id="input"
+        ?disabled=${this.disabled}
+        aria-describedby="supporting-text extended-supporting-text sub-label message"
+        aria-invalid=${this.invalid}
+        aria-label=${(this.plain && this.label) || nothing}
+        placeholder=" "
+        ${forwardAttributes(this.#forwardableAttrs)}
+      />
+    `
+  }
+
+  #renderClearButton() {
+    if (this.clearable && (this.value?.length || 0) > 0)
+      return html`<gds-button
+        size="${this.size === 'small' ? 'xs' : 'small'}"
+        rank="tertiary"
+        variant="${this.invalid ? 'negative' : ''}"
+        ?disabled="${this.disabled}"
+        label="${msg('Clear input')}"
+        @click=${this.#handleClearBtnClick}
+        id="clear-button"
+        slot="action"
+      >
+        <gds-icon-cross-large />
+      </gds-button>`
+    else return nothing
+  }
+
+  get #shouldShowRemainingChars() {
+    return this.maxlength < Number.MAX_SAFE_INTEGER
+  }
+}
+
+/**
+ * @summary A custom input element that can be used in forms.
+ * @status beta
+ *
+ * @element gds-input
+ *.
+ * @slot lead - Accepts `gds-icon-[ICON_NAME]`. Use this to place an icon in the start of the field.
+ * @slot trail - Accepts `gds-badge`. Use this to place a badge in the field, for displaying currency for example.
+ * @slot extended-supporting-text - A longer supporting text can be placed here. It will be
+ *       displayed in a panel when the user clicks the info button.
+ * @event gds-input-cleared - Fired when the clear button is clicked.
+ */
+@gdsCustomElement('gds-input', {
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsFieldBase,
+    GdsFlex,
+    GdsButton,
+    IconCrossLarge,
+  ],
+})
+export class GdsInput extends withSizeXProps(
+  withMarginProps(withLayoutChildProps(Input)),
+) {}

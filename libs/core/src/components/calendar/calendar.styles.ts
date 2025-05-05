@@ -10,17 +10,18 @@ const style = css`
     }
 
     :host table {
-      border-spacing: var(--gds-space-2xs);
+      border-spacing: var(--gds-sys-space-2xs);
       flex-grow: 1;
       width: 100%;
       padding: 1ch;
     }
 
     thead {
-      box-shadow: 0 var(--gds-space-4xs) 0 0 var(--gds-color-l2-border-primary);
+      box-shadow: 0 var(--gds-sys-space-4xs) 0 0
+        var(--gds-sys-color-l2-border-primary);
       th {
-        height: var(--gds-space-2xl);
-        width: var(--gds-space-2xl);
+        height: var(--gds-sys-space-2xl);
+        width: var(--gds-sys-space-2xl);
         box-sizing: border-box;
         text-align: center;
         font-weight: normal;
@@ -30,34 +31,34 @@ const style = css`
     tbody {
       td {
         position: relative;
-        height: var(--gds-space-3xl);
-        width: var(--gds-space-3xl);
+        height: var(--gds-sys-space-3xl);
+        width: var(--gds-sys-space-3xl);
         box-sizing: border-box;
         text-align: center;
         user-select: none;
-        border-width: var(--gds-space-3xs);
+        border-width: var(--gds-sys-space-3xs);
         border-style: solid;
         border-color: transparent;
-        border-radius: var(--gds-space-2xs);
-        transition: all 0.2s;
+        border-radius: var(--gds-sys-space-2xs);
+        transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
-        outline-offset: var(--gds-space-3xs);
+        outline-offset: var(--gds-sys-space-3xs);
 
         &:not(.disabled):hover,
         &[aria-selected='true'] {
-          background: var(--gds-color-l2-background-tertiary);
+          background: var(--gds-sys-color-l2-background-tertiary);
           cursor: pointer;
-          color: var(--gds-color-l2-content-tertiary);
+          color: var(--gds-sys-color-l2-content-tertiary);
         }
 
         &.today {
-          border-color: var(--gds-color-l2-background-tertiary);
+          border-color: var(--gds-sys-color-l2-background-tertiary);
         }
 
         &.disabled {
-          color: var(--gds-color-l3-content-disabled);
+          color: var(--gds-sys-color-l3-content-disabled);
           cursor: not-allowed;
         }
 
@@ -66,18 +67,19 @@ const style = css`
         }
 
         &:focus-visible {
-          outline-color: color-mix(in srgb, currentColor, transparent 50%);
+          outline-color: var(--gds-sys-color-l2-content-primary);
+          outline-width: var(--gds-sys-space-3xs);
         }
       }
 
       .indicator-dot {
         display: flex;
         position: absolute;
-        width: var(--gds-space-2xs);
-        height: var(--gds-space-2xs);
-        border-radius: var(--gds-space-max);
+        width: var(--gds-sys-space-2xs);
+        height: var(--gds-sys-space-2xs);
+        border-radius: var(--gds-sys-space-max);
         background-color: var(--_color, currentColor);
-        inset: var(--gds-space-2xs) var(--gds-space-2xs) auto auto;
+        inset: var(--gds-sys-space-2xs) var(--gds-sys-space-2xs) auto auto;
       }
     }
   }

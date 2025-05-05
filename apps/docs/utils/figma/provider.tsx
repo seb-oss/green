@@ -1,4 +1,3 @@
-// FigmaContext.tsx
 import { createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
@@ -27,9 +26,6 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({
   const [figmaData, setFigmaData] = useState<FigmaData[]>([])
   const figmaAccessKey = process.env.NEXT_PUBLIC_FIGMA_ACCESS_KEY
   const figmaProjectId = process.env.NEXT_PUBLIC_FIGMA_PROJECT_ID
-
-  // console.log(figmaAccessKey, figmaProjectId)
-
   useEffect(() => {
     const fetchData = async (node: string) => {
       try {
@@ -45,6 +41,7 @@ export const FigmaProvider: React.FC<FigmaProviderProps> = ({
         const images = response.data.images
         const imageUrl = Object.values(images)[0] as string
         const svgResponse = await axios.get(imageUrl)
+
         return { node, svgContent: svgResponse.data }
       } catch (error) {
         console.error('Error fetching Figma image:', error)

@@ -1,0 +1,187 @@
+<!-- LABEL -->
+<ng-container *transloco="let t; read: scope">
+  <label
+    [id]="id + '-label'"
+    class="gds-field-label hide-if-empty"
+    [attr.for]="id + '-input'"
+  >
+    <ng-template
+      *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
+    ></ng-template>
+    <ng-template #basicLabelContentTpl>
+      <!-- to trigger css:empty if no label was added -->
+      <ng-container *ngIf="label">
+        {{ label }}
+        <span
+          *ngIf="optional === true || (required !== true && optional !== false)"
+          class="gds-field-label--optional"
+        >
+          ({{ t('label.optional') }})
+        </span>
+      </ng-container>
+    </ng-template>
+  </label>
+
+  <!-- DESCRIPTION -->
+  <div
+    class="gds-field-label--small description hide-if-empty"
+    *ngIf="description"
+  >
+    {{ description }}
+  </div>
+
+  <!-- LOCKED INPUT -->
+  <ng-container *ngIf="locked">
+    <ng-template
+      *ngTemplateOutlet="
+        lockedTpl || defaultLockedTpl;
+        context: { $implicit: state }
+      "
+    ></ng-template>
+    <ng-template #defaultLockedTpl>
+      <div
+        [id]="id + '-input'"
+        class="nggv-field--locked"
+        [attr.name]="name"
+        [attr.value]="state"
+        [attr.role]="role"
+      >
+        <span *ngIf="!state" class="unset-state">-</span>
+        <ng-container *ngIf="state">
+          {{ state | nggvInputMaskFormat: dateInputMask }}
+        </ng-container>
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <!-- INPUT WRAPPER -->
+  <ng-container *ngIf="!locked">
+    <div
+      class="field-wrap"
+      [class.nggv-field--error]="invalid"
+      *ngIf="showInput$ | async"
+    >
+      <!-- INPUT FIELD -->
+      <input
+        #input
+        [id]="id + '-input'"
+        class="nggv-field-date"
+        type="text"
+        autocomplete="off"
+        [attr.name]="name"
+        [attr.required]="required"
+        [disabled]="disabled"
+        [readOnly]="readonly"
+        [attr.role]="role"
+        [attr.placeholder]="placeholder"
+        [attr.aria-label]="description"
+        [nggvInputMask]="dateInputMask"
+        [value]="state"
+        title=""
+        (change)="onValueChange($event.target)"
+        (focus)="onFocus($event)"
+        (blur)="onBlur($event)"
+      />
+
+      <button
+        aria-label="toggle calendar"
+        #toggleCalendarButton
+        class="nggv-button-date"
+        type="button"
+        data-thook="toggle-calendar-button"
+        (click)="toggleDatepicker()"
+        [disabled]="disabled"
+      >
+        <gds-icon-calendar
+          *nggCoreElement
+          width="20"
+          height="20"
+        ></gds-icon-calendar>
+      </button>
+    </div>
+
+    <!-- DATEPICKER -->
+    <div class="nggv-datepicker" *ngIf="shown">
+      <nggv-datepicker
+        #input
+        [type]="type"
+        [disableDates]="disableDates"
+        [disableWeekDays]="disableWeekDays"
+        [selected]="state"
+        [locale]="locale"
+        [minCalendarRows]="minRows"
+        [firstDayOfWeek]="firstDayOfWeek"
+        [firstValid]="firstValid"
+        [lastValid]="lastValid"
+        [closingTime]="closingTime"
+        (ngvDateChange)="onDateChange($event)"
+      >
+        <ng-content></ng-content>
+      </nggv-datepicker>
+    </div>
+
+    <!-- ERRORS -->
+    <ng-container
+      *ngIf="
+        invalid &&
+        (error || ngControl?.invalid) &&
+        (!errorList || !errorList.length)
+      "
+    >
+      <label
+        class="gds-field-notice gds-field-notice--error"
+        [attr.for]="id + '-input'"
+      >
+        <span class="error-item">
+          <span class="error-item--icon">
+            <gds-icon-triangle-exclamation
+              *nggCoreElement
+              [solid]="true"
+              width="16"
+              height="16"
+            ></gds-icon-triangle-exclamation>
+          </span>
+          <span
+            *ngIf="error; else errorsRef"
+            class="error-item--text"
+            [attr.data-thook]="thook + '-errorlabel'"
+            >{{ error }}</span
+          >
+          <ng-template #errorsRef>
+            <span
+              *ngIf="firstError as error"
+              class="error-item--text"
+              [attr.data-thook]="thook + '-errorlabel'"
+            >
+              {{ t('error.field' + error?.code, error?.params) }}
+            </span>
+          </ng-template>
+        </span>
+      </label>
+    </ng-container>
+
+    <ng-container *ngFor="let error of errorList ?? []">
+      <label
+        class="gds-field-notice gds-field-notice--error"
+        [attr.for]="id + '-input'"
+        *ngIf="invalid && error"
+      >
+        <span class="error-item">
+          <span class="error-item--icon">
+            <gds-icon-triangle-exclamation
+              *nggCoreElement
+              [solid]="true"
+              width="16"
+              height="16"
+            ></gds-icon-triangle-exclamation>
+          </span>
+          <span
+            class="error-item--text"
+            [attr.data-thook]="thook + '-errorlabel'"
+            >{{ error }}</span
+          >
+        </span>
+      </label>
+    </ng-container>
+  </ng-container>
+</ng-container>

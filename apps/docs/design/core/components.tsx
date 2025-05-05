@@ -54,7 +54,7 @@ export default function Components({ title, tag }: ComponentsProps) {
           return (
             <GdsCard
               key={idx}
-              border="4xs/primary"
+              border="4xs solid primary"
               border-radius="s"
               overflow="hidden"
               padding="0"

@@ -6,14 +6,15 @@ import {
   OnDestroy,
   OnInit,
   Optional,
+  Renderer2,
   SkipSelf,
 } from '@angular/core'
 import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
 import { fromEvent, Subject, takeUntil } from 'rxjs'
 
 import { OptionBase } from '@sebgroup/green-angular/src/v-angular/core'
-import { NgvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
-import { NgvDropdownListComponent } from '../../dropdown-list/dropdown-list.component'
+import { NggvInputComponent } from '@sebgroup/green-angular/src/v-angular/input'
+import { NggvDropdownListComponent } from '../../dropdown-list/dropdown-list.component'
 
 // Use dropdownList template and combine stylesheets
 @Component({
@@ -24,11 +25,11 @@ import { NgvDropdownListComponent } from '../../dropdown-list/dropdown-list.comp
     '../../dropdown-list/dropdown-list.component.scss',
   ],
 })
-export class NgvTypeaheadDropdownListComponent
-  extends NgvDropdownListComponent
+export class NggvTypeaheadDropdownListComponent
+  extends NggvDropdownListComponent
   implements OnInit, OnDestroy
 {
-  @Input() hostComponent!: NgvInputComponent
+  @Input() hostComponent!: NggvInputComponent
 
   /** Formats each item that is displayed as an option. Only applies format if the option if it implement Option interface. */
   @Input() resultFormatter?: (option: OptionBase<any>) => string
@@ -43,6 +44,7 @@ export class NgvTypeaheadDropdownListComponent
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
+    private renderer2: Renderer2,
     private element: ElementRef,
   ) {
     super(translocoScope)
@@ -111,5 +113,22 @@ export class NgvTypeaheadDropdownListComponent
     if (!this.selectedFormatter) return value.label ?? ''
     // If a formatter exists, use it
     return this.selectedFormatter(value) ?? ''
+  }
+
+  /**
+   *
+   * @param expanded boolean to set if dropdown is expanded
+   */
+  override setExpanded(expanded = true) {
+    super.setExpanded(expanded)
+
+    /**
+     * Makes the typeahead dropdown as wide as the host component
+     */
+    this.renderer2.setStyle(
+      this.element.nativeElement,
+      'width',
+      `${this.hostComponent.element.nativeElement.offsetWidth}px`,
+    )
   }
 }

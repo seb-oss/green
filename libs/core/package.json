@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "1.61.0",
+  "version": "1.78.0",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
@@ -34,7 +34,11 @@
     "./transitional-styles": "./transitional-styles.js",
     "./localization": "./localization.js",
     "./jest-config": "./green-jest-config.cjs",
+    "./everything": "./components/index.js",
     "./components/*": "./components/*",
-    "./_primitives/*": "./primitives/*"
+    "./pure": "./components/pure.js",
+    "./_primitives/*": "./primitives/*",
+    "./react": "./generated/react/index.js",
+    "./react/*": "./generated/react/*"
   }
 }

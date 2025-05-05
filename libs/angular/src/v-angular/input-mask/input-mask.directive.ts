@@ -35,7 +35,7 @@ const InputmaskConstructor =
 @Directive({
   selector: '[nggvInputMask]',
 })
-export class NgvInputMaskDirective<T = any>
+export class NggvInputMaskDirective<T = any>
   implements OnInit, AfterViewInit, OnDestroy, ControlValueAccessor, Validator
 {
   /** Input settings of directive */
@@ -105,7 +105,7 @@ export class NgvInputMaskDirective<T = any>
     if (
       isPlatformServer(this.platformId) ||
       !this.nativeInputElement ||
-      !Object.keys(this.nggvInputMask).length
+      !Object.keys(this.nggvInputMask ?? {}).length
     ) {
       return
     }

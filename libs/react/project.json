@@ -13,13 +13,6 @@
       },
       "dependsOn": ["rollup", "generate-core-wrappers"]
     },
-    "generate-core-wrappers": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["core:build-custom-elements-json"],
-      "options": {
-        "command": "node libs/core/build-scripts/generate-react.cjs"
-      }
-    },
     "rollup": {
       "executor": "@nx/rollup:rollup",
       "outputs": ["{options.outputPath}"],

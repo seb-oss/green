@@ -9,33 +9,33 @@ import {
 } from '@angular/forms'
 import { TranslocoModule } from '@jsverse/transloco'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
 import { CharacterCountdownDirective } from '../character-countdown/character-countdown.directive'
-import { NgvTextareaComponent } from './textarea.component'
+import { NggvTextareaComponent } from './textarea.component'
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // TextareaComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('TextareaComponent - constructor()', () => {
-    let component: NgvTextareaComponent
-    let fixture: ComponentFixture<NgvTextareaComponent>
+    let component: NggvTextareaComponent
+    let fixture: ComponentFixture<NggvTextareaComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvTextareaComponent, CharacterCountdownDirective],
+        declarations: [NggvTextareaComponent, CharacterCountdownDirective],
         providers: [{ provide: NgControl, useValue: new FormControl() }],
         imports: [
           FormsModule,
           ReactiveFormsModule,
           TranslocoModule,
-          NgvI18nTestModule,
+          NggvI18nTestModule,
         ],
       }).compileComponents()
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(NgvTextareaComponent)
+      fixture = TestBed.createComponent(NggvTextareaComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

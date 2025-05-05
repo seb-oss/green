@@ -1,5 +1,304 @@
 # Changelog
 
+## 5.11.0
+
+### Minor Changes
+
+- 318de75: **V-Angular Inputs:** Support for custom locked template for input fields.
+
+### Patch Changes
+
+- 766cbe6: Adding export of checkbox directive to fix build error
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
+## 5.10.0
+
+### Minor Changes
+
+- 7d86c93: **Forms:** Add ControlValueAccessor support for `gds-checkbox`
+
+### Patch Changes
+
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+  - @sebgroup/green-core@1.77.0
+
+## 5.9.0
+
+### Minor Changes
+
+- 8616efe: Updated v-angular table for mobile view
+
+## 5.8.1
+
+### Patch Changes
+
+- 0f2c59f: **V-Angular Dropdown/Typeahead:** Enable keyboard navigation with NVDA screen-reader.
+- Updated dependencies [441260e]
+- Updated dependencies [ba27ca9]
+  - @sebgroup/green-core@1.76.2
+
+## 5.8.0
+
+### Minor Changes
+
+- a9cde91: **V-Angular Toast:** Support input of custom template to render inside of toast.
+
+## 5.7.1
+
+### Patch Changes
+
+- 9bf1161: **V-Angular Input:** Fixed error and countdown styling for input field.
+- dc3a205: **NggCoreControl**: Allow opt-out by using `ngDefaultControl` directive
+- Updated dependencies [51bbe15]
+- Updated dependencies [0850de5]
+- Updated dependencies [dc3a205]
+  - @sebgroup/green-core@1.74.0
+
+## 5.7.0
+
+### Minor Changes
+
+- a6fee64: **V-Angular Input:** Adding small variant
+  **V-Angular RadioButton:** Adding small variant
+
+### Patch Changes
+
+- Updated dependencies [a538e40]
+- Updated dependencies [a6fee64]
+- Updated dependencies [a6fee64]
+- Updated dependencies [bc58619]
+- Updated dependencies [0e5e557]
+  - @sebgroup/chlorophyll@3.6.18
+  - @sebgroup/green-core@1.73.0
+
+## 5.6.1
+
+### Patch Changes
+
+- 0e6d189: Update how underlying Core components are imported. Affects NggDropdown, NggDatepicker and NggContextMenu
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
+## 5.6.0
+
+### Minor Changes
+
+- d75df66: **V-Angular**: Adding href to alert-ribbon and fixing icons in toast
+
+### Patch Changes
+
+- 9b15233: **V-Angular Slide-out:** Set focus on first focusable element instead of last focusable element
+
+## 5.5.4
+
+### Patch Changes
+
+- cf901cf: **V-Angular Components:** Fixed spacing within components and after.
+- 759863c: **V-Angular Slide-out:** Allow overflow to be shown outside of slide-out content.
+
+## 5.5.3
+
+### Patch Changes
+
+- 142324e: Fixing issue with prefix/suffix in input and dropdown
+- 3c2809f: fixing typeahead dropdown placement and width
+- Updated dependencies [8fe5d35]
+- Updated dependencies [00c48da]
+  - @sebgroup/green-core@1.69.3
+  - @sebgroup/chlorophyll@3.6.17
+
+## 5.5.2
+
+### Patch Changes
+
+- a904e48: Updated V-Angular Table sub-item to accept custom template
+
+## 5.5.1
+
+### Patch Changes
+
+- 43b08d4: dropdownButton in typeahead might be undefined
+- f0d4efc: fixing typeahead input height when opening dropdown
+- Updated dependencies [7fe6b60]
+- Updated dependencies [7fe6b60]
+  - @sebgroup/green-core@1.69.1
+
+## 5.5.0
+
+### Minor Changes
+
+- 9ac5286: **Routing:** Add `nggCoreRouterLink` directive for accessible routing with Green Core components
+
+### Patch Changes
+
+- Updated dependencies [f438e8f]
+  - @sebgroup/green-core@1.69.0
+
+## 5.4.2
+
+### Patch Changes
+
+- 213f2ad: Fix for dropdown layering to render list above other inputs.
+
+## 5.4.1
+
+### Patch Changes
+
+- 79a086f: fixed incomplete v-angular migration by removing a line which causes height issues
+- 3907ebb: **Alert Ribbon**: showing correct icon based on type
+  **Dropdown**: correct height on typeahead overlay, fixing spacing to validation
+- c564b23: Added margin-top to error-wrapper class in dropdown component. Removed height from input-wrapper class in input component to fix visual bug
+- 3077e1e: Added .nggv-field--error to input.component.scss to show a red line when there's an error on the input fields. Made slide-out scrollable when overflown. Added core map to index.ts file to expose some interfaces
+- 9111c10: Performance fix for dropdown-list and handling of key press events.
+- Updated dependencies [6cea9a6]
+  - @sebgroup/green-core@1.68.5
+
+## 5.4.0
+
+### Minor Changes
+
+- 54814fe: **NggCoreRenderer:** Add provider for supporting animations when using `NggCoreRenderer`. Fixes #1997
+
+### Patch Changes
+
+- 158fc60: **NggDropdown:** Fix text overflow style in the trigger. Fixes #1948
+- b8454ea: **Modal**: fixing close button sizing on mobile
+  **Tooltip**: fixing zindex problem when combined with modal
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 5.3.4
+
+### Patch Changes
+
+- 50a3fa2: Updated table grouping funcionality with clickable sub-items.
+- Updated dependencies [9d1476d]
+  - @sebgroup/green-core@1.68.1
+
+## 5.3.3
+
+### Patch Changes
+
+- fc5b9d4: added actionEmitter and close on option click on foldout
+- Updated dependencies [25a87f9]
+  - @sebgroup/green-core@1.67.2
+
+## 5.3.2
+
+### Patch Changes
+
+- 4a1ad4a: Added missing styles for the checkboxes inside nggv-table component
+- Updated dependencies [0babf00]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+- Updated dependencies [4cdaf5f]
+  - @sebgroup/chlorophyll@3.6.15
+  - @sebgroup/green-core@1.66.0
+
+## 5.3.1
+
+### Patch Changes
+
+- e93b640: **CoreControlModule**: Fix condition for when field errors are displayed
+
+## 5.3.0
+
+### Minor Changes
+
+- 9b9d7b6: Added table grouping functionality.
+
+### Patch Changes
+
+- d3870c2: Added position: relative to host: element to counteract the position: absolute for the fold-out options.
+- b8a1b9c: Exported account-number-pipe as Angular stand-alone pipe.
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [fc89181]
+- Updated dependencies [f8c3d74]
+- Updated dependencies [fc89181]
+  - @sebgroup/green-core@1.65.0
+
+## 5.2.0
+
+### Minor Changes
+
+- 0213060: **V-Angular:** Migrating V-Angular remaining components to Green and closing the gap on already exsisting components.
+
+  ## Migrated components
+
+  - AccountNumber
+  - Alert
+  - BaseControlValueAccessor
+  - Breadcrumbs
+  - Button
+  - Card
+  - CharacterCountdown
+  - Checkbox
+  - Datepicker
+  - DragDrop
+  - Dropdown
+  - DropdownList
+  - ExternalLink
+  - I18n
+  - InfoCircle
+  - Input
+  - InputMask
+  - Modal
+  - Pagination
+  - Radio
+  - Slug
+  - Table
+  - Tabs
+  - Textarea
+  - Toast
+  - Tooltip
+
+### Patch Changes
+
+- Updated dependencies [7213bfb]
+- Updated dependencies [0213060]
+  - @sebgroup/green-core@1.63.2
+  - @sebgroup/chlorophyll@3.6.14
+
+## 5.1.2
+
+### Patch Changes
+
+- 1bf0d07: **nggCoreElement**: Remove console.log
+
+## 5.1.1
+
+### Patch Changes
+
+- 4d8df8b: **NggCoreControlDirective:** Fix a missing public export
+- 53ed2a4: **In page wizard** Change icon
+- Updated dependencies [5e16375]
+- Updated dependencies [33b08a2]
+- Updated dependencies [3331d19]
+- Updated dependencies [40f905b]
+- Updated dependencies [93bac39]
+- Updated dependencies [f43d556]
+- Updated dependencies [4d8df8b]
+- Updated dependencies [f43d556]
+- Updated dependencies [5e16375]
+  - @sebgroup/green-core@1.62.0
+  - @sebgroup/chlorophyll@3.6.13
+
 ## 5.1.0
 
 ### Minor Changes

@@ -3,91 +3,94 @@ title: UX Text
 date: 2024-04-03
 ---
 
-## UX text
+## Labels
+Write checkbox labels so customers can easily understand what checking or leaving the box blank means. This is especially important for stand-alone checkboxes, such as accepting terms or subscribing to emails with news and offers. If there is a header label, make sure it matches the individual checkbox label, whether grouped or stand-alone. Never use checkbox if the answer is yes or no.
 
-Write checkbox labels so that the customers can easily understand what it means to check the box or leave it blank. It can be difficult when customers must check an individual stand-alone checkbox, for example, that they accept the terms or want to receive news and offers by e-mail. Or when they should be able to turn a setting on or off and it is essential that they actively take a stand on the choice. (If there is a default option that almost everyone will choose, use a toggle instead.)
+## Stand-alone checkbox
+A stand-alone checkbox should clearly indicate what happens when it’s checked or left blank. Use the “I” form. Avoid using negations as this forces users to check the box to prevent something from happening. A stand-alone checkbox should state a clear action or agreement, not ask a question.
 
-The label and options must also be adapted to suit each other. If the field label is a yes or no question, the answer options should be yes and no and nothing else. Since the user can only choose one of these options, use radio buttons instead.
+### Use the “I” form
 
-Furthermore, remember to write consistent options. Decide if the options should
-
-- consist of complete sentences beginning with uppercase and ending with a full stop
-- constitute one continuing sentence beginning with lowercase and only the last point ending with a full stop
-
-**or**
-
-- a single word or a couple of words and no full stop.
-
-## Negations
-### Avoid negations and use the I-form
-Avoid negations such as Do not send me more e-mails in the checkbox label, as this would mean that users have to check the box to prevent something from happening. Also, do not use questions like Do you want newsletters from us? The convention is to use the I-form for this type of checkbox.
-
+#### Do
 <Grid columns="2" gap="s">
 <div>
-    **Do**
-    <Do><Figma node="1368-980" /></Do>
-    - <SE>Ja tack, jag vill ha förtur på exklusiva erbjudanden och nyheter via mejl.</SE>
-    - Yes please, I want to get priority on exclusive offers and news by e-mail.
+    <EN>I have read the terms and conditions, and confirm that the information i have provided is correct.</EN>
+    <Figma type="do" id="i-form-do-eng" caption="Do" />
 </div>
 <div>
-    **Don't**
-    <Dont><Figma node="1368-982" /></Dont>
-    - <SE>Vill du ha exklusiva erbjudanden och nyheter via mejl?</SE>
-    - Do you want to get priority on exclusive offers and news by e-mail?
-    - <SE>Ja tack, jag vill inte missa exklusiva erbjudanden och nyheter via mejl.</SE>
-    - Yes please, I do not want to miss out on preference on exclusive offers and news by e-mail.
+    <SE>Jag har läst villkoren och försäkrar att de uppgifter jag fyllt i är riktiga.</SE>
+    <Figma type="do" id="i-form-do-swe" caption="Do" />
 </div>
 </Grid>
 
-## Accepting the terms
-### When the user accepts terms, use I-form and avoid a question
-
-<Grid columns="2" gap="s">
+#### Don't
+<Grid columns="2" gap="m">
 <div>
-    **Do**
-    <Do><Figma node="1368-1091" /></Do>
-    - <SE>Jag har läst informationen och granskat de uppgifter jag fyllt i. Jag försäkrar att de är riktiga.</SE>
-    - I have read the information and reviewed what I entered in the form. I ensure that everything is correct.
+    <EN>Have you read the terms and conditions? Can you confirm that the information is correct?</EN>
+    <Figma type="dont" id="i-form-dont-eng" caption="Don't" />
 </div>
 <div>
-    **Don't**
-    <Dont><Figma node="1368-1093" /></Dont>
-    - <SE>Försäkrar du att du läst informationen och granskat de uppgifter du fyllt i? Försäkrar du att de är riktiga?</SE>
-    - Have you read the information and reviewed what was entered in the form? Can you ensure that everything is correct?
+    <SE>Har du läst villkoren? Kan du försäkra att den information du fyllt i stämmer?</SE>
+    <Figma type="dont" id="i-form-dont-swe" caption="Don't" />
 </div>
 </Grid>
+
+### Avoid negations
+ 
+#### Do
+<Grid columns="2" gap="m">
+    <div>
+        <EN>Yes, please, I want exclusive offers and news by email.</EN>
+        <Figma type="do" id="negation-do-eng" caption="Do" />
+    </div>
+    <div>
+        <SE>Ja tack, jag vill ha exklusiva erbjudanden och nyheter via mejl.</SE>
+        <Figma type="do" id="negation-do-swe" caption="Do" />
+    </div>
+</Grid>
+
+#### Don’t
+<Grid columns="2" gap="m">
+    <div>
+        <EN>Yes, please, I do not want to miss out on exclusive offers and news by email.</EN>
+        <Figma type="dont" id="negation-dont-eng" caption="Don't" />
+    </div>
+    <div>
+        <SE>Ja tack, jag vill inte missa exklusiva erbjudanden och nyheter via mejl.</SE>
+        <Figma type="dont" id="negation-dont-swe" caption="Don't" />
+    </div>
+</Grid>
+
+### Avoid questions
+
+#### Don’t
+<Grid columns="2" gap="m">
+    <div>
+        <EN>Do you want to get exclusive offers and news by email?</EN>
+        <Figma type="dont" id="questions-dont-eng" caption="Don't" />
+    </div>
+    <div>
+        <SE>Vill du ha exklusiva erbjudanden och nyheter via mejl?</SE>
+        <Figma type="dont" id="questions-dont-swe" caption="Don't" />
+    </div>
+</Grid>
+
 ## Multiple options
-Decide if the options should consist of complete sentences beginning with uppercase and ending with a full stop, constitute one continuing sentence beginning with lowercase and only the last point ending with a full stop or a single word or a couple of words and no full stop. Provide clear instructions that the user can select multiple options. The label and options must also be adapted to suit each other. If the field label is a yes or no question, the answer options should be yes and no and nothing else.
+Ensure the label and options match. Provide clear instructions so users know they can select multiple options. Decide on a consistent style for option labels:
+- Full sentences starting with a capital letter and ending with a full stop.
+- A continuous sentence starting with lowercase, with only the last option ending in a full stop.
+- Single words or short phrases with no full stop.
 
-**Do**
-- Provide clear instructions that the user can select multiple options.
-- The label and options must also be adapted to suit each other. If the field label is a yes or no question, the answer options should be yes and no and nothing else.
-
-<Grid columns="2" gap="s" gapBlock="small" >
-<div>
-    <Do><Figma node="1368-1162" /></Do>
-</div>
-<div>
-    <Dont><Figma node="1368-1164" /></Dont>
-</div>
-<div>
-    <Do><Figma node="1368-1217" /></Do>
-</div>
-<div>
-    <Dont><Figma node="1368-1218" /></Dont>
-</div>
+ 
+### Do 
+<Grid columns="2" gap="m">
+    <Figma type="do" id="multiple-options-do-eng" caption="Do" />
+    <Figma type="do" id="multiple-options-do-swe" caption="Do" />
 </Grid>
 
-
-## Options texts
-
-**Do**
-- Write option texts that are consistent.
-<Grid columns="2" gap="s">
-<div>
-    <Dont><Figma node="1368-1222" /></Dont>
-</div>
-<div>
-    <Dont><Figma node="1368-1223" /></Dont>
-</div>
+### Don't
+<Grid columns="2" gap="m">
+    <Figma type="dont" id="options-dont-eng" caption="Don't" />
+    <Figma type="dont" id="options-dont-swe" caption="Don't" />
 </Grid>
+ 

@@ -1,5 +1,7 @@
 import type { LitElement } from 'lit'
 
+import { isServer } from '../helpers/platform'
+
 type Handler = (matches: boolean) => void
 
 /**
@@ -36,6 +38,7 @@ export function watchMediaQuery(q: string) {
     _propertyKey: string,
     descriptor: TypedPropertyDescriptor<Handler>,
   ) => {
+    if (isServer) return
     const mediaQuery = window.matchMedia(q)
 
     const connectedCallback = proto.connectedCallback

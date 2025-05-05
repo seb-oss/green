@@ -3,6 +3,7 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './index.ts'
+
 import type { GdsInput } from './index.ts'
 
 import '../badge'
@@ -11,6 +12,8 @@ import '../divider'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 import '../icon/icons/people-profile.ts'
+
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
  *
@@ -26,7 +29,7 @@ const meta: Meta = {
   },
   tags: ['autodocs'],
   argTypes: {
-    // 👇 All Button stories expect a label arg
+    ...argTablePropsFor('gds-input'),
     value: {
       control: 'text',
     },
@@ -101,7 +104,7 @@ export const Size: Story = {
                   valid: false,
                   customError: true,
                 },
-                'Error message.',
+                'Required field.',
               ]
             else if (el.value.length !== 12 || isNaN(el.value))
               return [
@@ -266,8 +269,8 @@ export const ExtendedSupportingText: Story = {
   render: () => html`
     <gds-flex gap="xl" width="800px">
       <gds-input label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-input>

@@ -1,0 +1,84 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Guides/React" />
+
+# Using Green Core components with React
+
+## React 19
+
+React 19 has built-in support for web components, and Green Core automatically generates typed JSX wrappers for all components and icons. This means you can use the components directly in your JSX templates.
+
+For example:
+
+```ts
+import { GdsButton } from '@sebgroup/green-core/react'
+```
+
+Then, in your JSX template:
+
+```tsx
+<GdsButton rank="secondary" onClick={() => console.log('Hello')}>
+  Click me!
+</GdsButton>
+```
+
+These imports are tree-shakable and the underlying web components will be defined automatically on first use.
+
+Then, you can use the component in your JSX template as shown above.
+
+### Web component quirks with React
+
+There are a few quirks to be aware of when using web components with React:
+- **Event handling**: React does not apply some of its regular conventions to web components, for example, when you use `<input>` in React, it will automatically map the `input` event to the `onChange` callback. When using a web component, you need to explicity listen to the events you are interested in. For example, if you want to listen to the `input` event of a web component, you need to use `onInput` instead of `onChange`.
+- **State synchronization**: React does not automatically enforce state synchronisation on form controls on dispatch of the input event, so to ensure that your state is in sync with the component, you need to use `onInput` and explicitly update your state there. In other words, web components do not act like fully controlled components in React, unless you explicitly set them up that way.
+
+  Example:
+  ```tsx
+  const [email, setEmail] = useState('')
+  // ...
+  <GdsInput
+    label={'Email'}
+    value={email} // <-- Whenever `email` is changed, this will update, like you'd expect
+    validator={requiredValidator}
+    onInput={(e) => setEmail((e.target as HTMLInputElement).value)} // <-- But if the `setEmail` was omitted here,
+    // state would get out of sync when the user types, as React will not enforce it behind the scenes as it does
+    // with regular inputs
+  />
+  ```
+  Check out [this](https://github.com/seb-oss/green/blob/main/apps/react-lib-dev/src/app/green-core-form.tsx) for a full example of a form with validation in React.
+
+## Transitional styles
+
+If you are using the 2016 design, you need to add transitional styles. You can import them like this and register separately:
+
+```ts
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
+```
+
+## React 18 and older
+
+React 18 and older versions do not have proper built-in support for web components. You can still use Green Core components in your React application, but you need to provide a wrapper for each component.
+You can use the `createComponent` function from `@lit/react` to create these wrappers.
+
+Here is an example:
+
+```ts
+import React from 'react'
+import { createComponent } from '@lit/react'
+
+import { GdsButton as GdsButtonClass } from '@sebgroup/green-core/component/button/index.js'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
+
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
+
+export const GdsButton = createComponent({
+  tagName: getScopedTagName('gds-button'),
+  elementClass: GdsButtonClass,
+  react: React,
+  events: { onClick: 'click' }, // Event callbacks need to be explicitly mapped to DOM events
+})
+```
+
+Then you can just use `<GdsButton />` like a regular React component.

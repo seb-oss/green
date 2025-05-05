@@ -1,0 +1,21 @@
+import { gdsCustomElement } from '../../../scoping'
+import { GdsIcon } from '../icon'
+
+/**
+ * @element gds-icon-email
+ */
+@gdsCustomElement('gds-icon-email')
+export class IconEmail extends GdsIcon {
+  /** @private */
+  static _regularSVG = `<path d="M21.25 4.75H22C22 4.33579 21.6642 4 21.25 4V4.75ZM21.25 19.25V20C21.6642 20 22 19.6642 22 19.25H21.25ZM2.75 19.25H2C2 19.6642 2.33579 20 2.75 20V19.25ZM2.75 4.75V4C2.33579 4 2 4.33579 2 4.75H2.75ZM12 13L11.5251 13.5805C11.8013 13.8065 12.1987 13.8065 12.4749 13.5805L12 13ZM20.5 4.75V19.25H22V4.75H20.5ZM21.25 18.5H2.75V20H21.25V18.5ZM3.5 19.25V4.75H2V19.25H3.5ZM2.75 5.5H21.25V4H2.75V5.5ZM12.4749 12.4195L3.47493 5.0559L2.52507 6.21684L11.5251 13.5805L12.4749 12.4195ZM20.5251 5.0559L11.5251 12.4195L12.4749 13.5805L21.4749 6.21684L20.5251 5.0559Z" fill="currentColor"/>`
+  /** @private */
+  static _solidSVG = `<path d="M2.33632 4.12431L12 12.031L21.6637 4.12431C21.5451 4.04575 21.4029 4 21.25 4H2.75C2.59711 4 2.4549 4.04575 2.33632 4.12431Z" fill="currentColor"/><path d="M2 5.78723V19.25C2 19.6642 2.33579 20 2.75 20H21.25C21.6642 20 22 19.6642 22 19.25V5.78723L12.4749 13.5805C12.1987 13.8065 11.8013 13.8065 11.5251 13.5805L2 5.78723Z" fill="currentColor"/>`
+  /** @private */
+  static _name = 'email'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
+}

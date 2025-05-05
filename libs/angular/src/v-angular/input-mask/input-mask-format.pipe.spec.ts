@@ -1,6 +1,6 @@
 import { InputMaskFormatPipe } from './input-mask-format.pipe'
 
-describe('[NgvInputMask]', () => {
+describe('[NggvInputMask]', () => {
   // ----------------------------------------------------------------------------
   // InputMaskFormatPipe - constructor()
   // ----------------------------------------------------------------------------

@@ -1,10 +1,12 @@
 import React, {
+  AriaAttributes,
   PropsWithChildren,
   useEffect,
   useLayoutEffect,
   useRef,
   useState,
 } from 'react'
+import { createComponent } from '@lit/react'
 import classNames from 'classnames'
 
 import {
@@ -16,6 +18,8 @@ import {
   randomId,
   validateClassName,
 } from '@sebgroup/extract'
+import { IconTriangleExclamation } from '@sebgroup/green-core/components/icon/icons/triangle-exclamation'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { IconButton } from '../form'
 import { InfoCircle, Times } from '../icons'
 
@@ -28,9 +32,16 @@ interface FormItemProps
   validator?: IValidator
   inputId?: string
   role?: string
+  'aria-live'?: AriaAttributes['aria-live']
   /** Intended to use together with TextArea to show character counter. */
   rightAlignedFooterInfo?: string
 }
+
+const TriangleExclamationIcon = createComponent({
+  tagName: getScopedTagName('gds-icon-triangle-exclamation'),
+  elementClass: IconTriangleExclamation,
+  react: React,
+})
 
 export const FormItem = ({
   expandableInfo,
@@ -42,6 +53,7 @@ export const FormItem = ({
   expandableInfoButtonLabel,
   role,
   rightAlignedFooterInfo,
+  'aria-live': ariaLive = 'assertive',
 }: FormItemProps) => {
   const expandableInnerRef = useRef<HTMLDivElement>(null)
   const expandableRef = useRef<HTMLDivElement>(null)
@@ -138,16 +150,27 @@ export const FormItem = ({
           className="gds-form-item__expandable-info"
           hidden={isHidden}
           style={{ height: isExpanded ? expandableHeight : 0 }}
+          // TODO: Remove when inert is supported in React types
+          {...{ inert: isHidden ? true : undefined }}
         >
-          <div ref={expandableInnerRef}> {expandableInfo} </div>
+          <div ref={expandableInnerRef}> {!isHidden && expandableInfo} </div>
         </div>
       )}
       {children}
-      <div className="gds-form-item__footer">
+      <div className="gds-form-item__footer" aria-live={ariaLive}>
         {validator && (
-          <span className="form-info" id={`${inputId}_message`}>
-            {validator.message}
-          </span>
+          <>
+            <TriangleExclamationIcon
+              solid
+              width={16}
+              height={16}
+              style={{ color: 'var(--gds-sys-color-text-error)' }}
+              aria-hidden="true"
+            />
+            <span className="form-info" id={`${inputId}_message`}>
+              {validator.message}
+            </span>
+          </>
         )}
         {rightAlignedFooterInfo && (
           <span
@@ -156,6 +179,7 @@ export const FormItem = ({
               textAlign: 'right',
               width: validator ? 'auto' : '100%',
             }}
+            aria-hidden="true"
           >
             {rightAlignedFooterInfo}
           </span>

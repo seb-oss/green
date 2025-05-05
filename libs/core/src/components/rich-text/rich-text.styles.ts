@@ -2,33 +2,55 @@ import { css } from 'lit'
 
 export const styles = css`
   :host {
-    font-size: var(--gds-text-size-body-m);
-    line-height: var(--gds-text-line-height-body-m);
+    font-size: var(--gds-sys-text-size-body-m);
+    line-height: var(--gds-sys-text-line-height-body-m);
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
     letter-spacing: 0.0125rem;
+    display: block;
   }
 
-  :host > :first-child {
-    margin-top: 0;
-  }
-
-  /*
-  * typography
-  * -----------------------------------------------------------
-  */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    margin-top: 0.6lh;
-    margin-bottom: 0.3lh;
+    margin-top: var(--gds-sys-space-2xl);
+    margin-bottom: var(--gds-sys-space-xs);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6):first-child {
+    margin-top: unset;
+  }
+
+  h1 + h2 {
+    margin-top: 0;
+  }
+
+  h2 + h3 {
+    margin-top: 0;
+  }
+
+  h3 + h4 {
+    margin-top: 0;
+  }
+
+  h4 + h5 {
+    margin-top: 0;
+  }
+
+  h4 + h5 {
+    margin-top: 0;
+  }
+
+  h5 + h6 {
+    margin-top: 0;
   }
 
   p {
-    margin-bottom: 1lh;
+    margin: 0;
+    margin-bottom: var(--gds-sys-space-xs);
     max-width: 80ch;
   }
 
@@ -38,6 +60,12 @@ export const styles = css`
     border-left: 0.2rem solid currentColor;
     padding-left: 2ch;
     max-width: 40ch;
+  }
+
+  hr {
+    border: none;
+    border-top: var(--default-border);
+    margin: var(--gds-sys-space-xl) 0;
   }
 
   s {
@@ -56,12 +84,45 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   ul,
-  ol,
+  ol {
+    padding-inline-start: 2ch;
+    margin: unset;
+    margin-bottom: 1lh;
+    max-width: 80ch;
+  }
+
+  ol {
+    list-style-type: none;
+    counter-reset: ordered-list;
+    margin: unset;
+    padding: unset;
+  }
+
+  ol li {
+    padding-left: 3.6ch;
+    position: relative;
+  }
+
+  ol li:before {
+    counter-increment: ordered-list;
+    content: counter(ordered-list) '.';
+    left: 0.2rem;
+    position: absolute;
+  }
+
+  ol:not(:has(li:nth-child(10))) li {
+    padding-left: 2.4ch;
+  }
+
+  ol:has(li:nth-child(10)) li:nth-child(-n + 9):before {
+    left: 1.4ch;
+  }
+
   li {
-    margin: 0 0 0 1ch;
     padding: 0 0 0.3lh 0;
   }
-  li:last-child {
+
+  ul li:last-child {
     padding: 0;
   }
 
@@ -70,19 +131,23 @@ export const styles = css`
   }
 
   /*
-  * figure
+  * figure and image
   * -----------------------------------------------------------
   */
+  img {
+    display: block;
+    border-radius: var(--gds-sys-space-xs);
+  }
+
   figure {
     margin: 0;
     padding: 0;
-    & img {
-      display: block;
-    }
+    margin-top: var(--gds-sys-space-xl);
   }
+
   figcaption {
     font-size: smaller;
-    margin-block-start: 0.4lh;
+    margin-block-start: var(--gds-sys-space-xs);
   }
 
   /*
@@ -94,15 +159,17 @@ export const styles = css`
     border-spacing: 0;
     width: 100%;
     border: var(--default-border);
-    border-radius: var(--gds-space-s);
+    border-radius: var(--gds-sys-space-s);
+    margin-top: var(--gds-sys-space-xl);
   }
+
   th {
-    font-weight: var(--gds-text-weight-book);
+    font-weight: var(--gds-sys-text-weight-book);
     text-align: left;
     border-bottom: var(--default-border);
     border-left: transparent;
     border-right: transparent;
-    color: var(--gds-color-l3-content-secondary);
+    color: currentColor;
   }
 
   th:not(:last-child) {
@@ -125,30 +192,39 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   details {
-    border-top: solid var(--gds-space-4xs) var(--gds-color-l3-border-tertiary);
-    font-size: var(--gds-text-size-body-m);
-    line-height: var(--gds-text-line-height-body-m);
-    color: var(--gds-color-l2-content-secondary);
+    border-top: solid var(--gds-sys-space-4xs)
+      color-mix(in srgb, currentColor, transparent 90%);
+    font-size: var(--gds-sys-text-size-body-m);
+    line-height: var(--gds-sys-text-line-height-body-m);
   }
 
   summary {
-    font-weight: var(--gds-text-weight-regular);
+    font-weight: var(--gds-sys-text-weight-regular);
     list-style: none;
     padding: 0.4lh 0.2ch;
-    font-size: var(--gds-text-size-body-l);
-    line-height: var(--gds-text-line-height-body-l);
-    color: var(--gds-color-l2-content-primary);
+    font-size: var(--gds-sys-text-size-body-l);
+    line-height: var(--gds-sys-text-line-height-body-l);
+    color: currentColor;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     user-select: none;
-    outline-offset: var(--gds-space-2xs);
+    outline-offset: var(--gds-sys-space-2xs);
     outline-color: currentColor;
+    padding-inline: var(--gds-sys-space-m);
+  }
 
-    &:focus-visible {
-      border-radius: var(--gds-space-2xs);
-    }
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary:focus-visible {
+    border-radius: var(--gds-sys-space-2xs);
+  }
+
+  details:hover summary {
+    background: color-mix(in srgb, currentColor, transparent 95%);
   }
 
   summary::after {
@@ -158,8 +234,8 @@ export const styles = css`
     justify-content: center;
     width: 24px;
     height: 24px;
-    font-weight: var(--gds-text-weight-regular);
-    font-size: var(--gds-text-size-body-l);
+    font-weight: var(--gds-sys-text-weight-regular);
+    font-size: var(--gds-sys-text-size-body-l);
   }
 
   details[open] summary::after {
@@ -167,11 +243,43 @@ export const styles = css`
   }
 
   details[open] {
-    margin-bottom: 1lh;
+    border-bottom: var(--gds-sys-space-4xs) solid
+      color-mix(in srgb, currentColor, transparent 95%);
+    padding-bottom: 0.4lh;
+    background: color-mix(in srgb, currentColor, transparent 95%);
+  }
+
+  details[open] > *:not(summary) {
+    margin-left: var(--gds-sys-space-m);
   }
 
   details[open] summary {
-    border-bottom: var(--gds-space-4xs) solid
-      var(--gds-color-l3-border-tertiary);
+    margin-bottom: 0.4lh;
+  }
+
+  details[open] + details {
+    border: none;
+  }
+
+  details:last-of-type {
+    border-bottom: var(--gds-sys-space-4xs) solid
+      color-mix(in srgb, currentColor, transparent 90%);
+    margin-bottom: var(--gds-sys-space-xl);
+  }
+
+  a {
+    color: currentColor;
+    text-decoration-color: currentColor;
+  }
+
+  /*
+  * Iframe
+  */
+  iframe {
+    border: var(--gds-sys-space-4xs) solid
+      var(--gds-sys-color-l2-border-primary);
+    border-radius: var(--gds-sys-space-xs);
+    min-width: 100%;
+    margin-bottom: var(--gds-sys-space-l);
   }
 `

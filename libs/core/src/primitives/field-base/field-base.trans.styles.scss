@@ -1,0 +1,89 @@
+@use '../../../../chlorophyll/scss/common';
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  .field {
+    @include common.add-border-radius();
+    @include common.add-border();
+    @include common.add-border-color();
+    @include common.add-focus('within');
+    align-items: stretch;
+    gap: var(--gds-sys-space-xs);
+    background-color: var(--gds-sys-color-background-primary);
+    box-sizing: border-box;
+    color: var(--gds-sys-color-text-primary);
+    cursor: text;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs)
+      calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-m);
+    min-block-size: 44px;
+  }
+
+  .field:hover {
+    background-color: var(--grey-200);
+  }
+
+  .field.small {
+    font-size: 0.875rem;
+    min-height: 2rem;
+  }
+
+  .field.multiline {
+    align-items: flex-start;
+    padding: calc(var(--gds-sys-space-s) - 1px) var(--gds-sys-space-s)
+      calc(var(--gds-sys-space-s) - 1px) var(--gds-sys-space-m);
+    height: max-content;
+  }
+
+  .field.action-slot-occupied:not(.trail-slot-occupied) {
+    padding-right: var(--gds-sys-space-xs);
+  }
+
+  .field.lead-slot-occupied {
+    padding-left: var(--gds-sys-space-xs);
+  }
+
+  .field.trail-slot-occupied {
+    padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-m);
+  }
+
+  .field slot[name='action']::slotted(*) {
+    margin: -3px 0 -3px -3px;
+  }
+
+  .field:focus-within {
+    outline-color: currentColor;
+  }
+
+  .field.invalid {
+    border-color: var(--gds-sys-color-l3-border-negative);
+    color: var(--gds-sys-color-l3-content-negative);
+    border-bottom-width: 2px;
+  }
+
+  .field.disabled {
+    background: var(--gds-sys-color-l3-background-disabled);
+    color: var(--gds-sys-color-l3-content-disabled);
+    border-color: transparent;
+    pointer-events: none;
+  }
+
+  .main-slot-wrap {
+    display: flex;
+    flex: 1;
+  }
+
+  slot:not([name])::slotted(*) {
+    color: currentColor;
+  }
+
+  slot[name='lead']::slotted([gds-element^='gds-icon-']) {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    min-width: var(--gds-sys-space-l);
+  }
+}

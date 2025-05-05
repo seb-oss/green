@@ -5,7 +5,7 @@ import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
 import { allComponents } from 'content'
 import { isDev } from '$/env/env'
-import { GdsBadge, GdsCard, GdsContainer, GdsFlex } from '$/import/components'
+import { GdsBadge, GdsCard, GdsDiv, GdsFlex } from '$/import/components'
 import {
   IconBrandGreen,
   IconEyeSlash,
@@ -14,8 +14,6 @@ import {
   IconTextEdit,
 } from '$/import/icons'
 import { Context } from '$/provider/provider'
-
-import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
 
 import './sidebar.css'
 
@@ -42,7 +40,7 @@ const menu = [
     subLinks: [],
   },
   {
-    title: 'UX Writing',
+    title: 'UX writing',
     path: '/ux-writing',
     icon: <IconTextEdit />,
     subLinks: [],
@@ -91,9 +89,10 @@ export default function Sidebar() {
       min-width="270px"
       className="sidebar-transition"
       variant="primary"
+      border-radius="xs"
     >
       <GdsFlex flex-direction="column" max-height="100%">
-        <GdsContainer
+        <GdsDiv
           padding="xs"
           min-width="250px"
           border="0 0 4xs 0"
@@ -123,12 +122,12 @@ export default function Sidebar() {
               </GdsFlex>
             ))}
           </GdsFlex>
-        </GdsContainer>
-        <GdsContainer
+        </GdsDiv>
+        <GdsDiv
           padding="xs"
           overflow="scroll"
           onScroll={(e) => {
-            if ((e.target as GdsContainerCore).scrollTop === 0) {
+            if ((e.target as HTMLElement).scrollTop === 0) {
               setHasScrolled(false)
             } else {
               if (hasScrolled) return
@@ -176,7 +175,7 @@ export default function Sidebar() {
                 )
               })}
           </GdsFlex>
-        </GdsContainer>
+        </GdsDiv>
       </GdsFlex>
     </GdsCard>
   )

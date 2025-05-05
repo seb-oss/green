@@ -4,7 +4,7 @@ import { createComponent } from '@lit/react'
 import {
   GdsDropdown,
   GdsOption,
-} from '@sebgroup/green-core/components/dropdown/index.js'
+} from '@sebgroup/green-core/components/dropdown/dropdown.component'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { CoreMenuHeading } from '../context-menu/context-menu'
@@ -72,6 +72,7 @@ export interface DropdownOption {
   [key: string]: any
 }
 
+GdsDropdown.define()
 registerTransitionalStyles()
 
 export const CoreDropdown = createComponent({
@@ -88,8 +89,8 @@ export const CoreOption = createComponent({
 })
 
 export interface DropdownProps extends DropdownArgs {
-  onChange?: OnChange,
-  required?: boolean,
+  onChange?: OnChange
+  required?: boolean
 }
 
 export const Dropdown = ({

@@ -65,4 +65,4 @@ export class TranslocoMockInterceptor implements TranslocoInterceptor {
     },
   ],
 })
-export class NgvI18nTestModule {}
+export class NggvI18nTestModule {}

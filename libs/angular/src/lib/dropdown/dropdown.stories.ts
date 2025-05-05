@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 // Dropdown.stories.ts
 import {
   FormControl,

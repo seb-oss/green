@@ -1,0 +1,1 @@
+export { IconBanknote2 } from '@sebgroup/green-core/react';

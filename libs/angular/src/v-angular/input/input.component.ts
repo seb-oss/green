@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
   Inject,
@@ -18,7 +19,7 @@ import { debounceTime, takeUntil } from 'rxjs/operators'
 
 import type { InputmaskOptions } from '@sebgroup/green-angular/src/v-angular/input-mask'
 
-import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
 
 /**
  * Input fields allow users to add and edit text.
@@ -29,31 +30,58 @@ import { NgvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/sr
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
 })
-export class NgvInputComponent
-  extends NgvBaseControlValueAccessorComponent
+export class NggvInputComponent
+  extends NggvBaseControlValueAccessorComponent
   implements OnInit, OnDestroy
 {
-  /** Adding .gds-form-item as a class to host element */
+  /**
+   * Adding .gds-form-item as a class to host element
+   */
   @HostBinding('class') class = 'gds-form-item'
-  /** Special property used for selecting DOM elements during automated UI testing. */
-  @HostBinding('attr.data-thook') @Input() thook = 'input'
-  /** Type of input field. Should avoid types that modify field too much such as range. */
+  /**
+   * Adding .gds-form-item--small class based on size input for styling
+   */
+  @HostBinding('class') @Input() size: 'small' | 'large' = 'large'
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
+  @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
+    'input'
+  /**
+   * Type of input field. Should avoid types that modify field too much such as range.
+   */
   @Input() type = 'text'
-  /** Text shown before input has a written value. */
+  /**
+   * Text shown before input has a written value.
+   */
   @Input() placeholder?: string
-  /** If set to "on", hint for form autofill feature. */
+  /**
+   * If set to "on", hint for form autofill feature.
+   */
   @Input() autocomplete = 'on'
-  /** If set to true, the value will not be editable. */
+  /**
+   * If set to true, the value will not be editable.
+   */
   @Input() readonly = false
-  /** If set to true, enables the Angular template-driven email validator. */
+  /**
+   * If set to true, enables the Angular template-driven email validator.
+   */
   @Input() email = false
-  /** Minimum value required for numeric input types. */
+  /**
+   * Minimum value required for numeric input types.
+   */
   @Input() min = 0
-  /** Maximum value required for numeric input types. */
+  /**
+   * Maximum value required for numeric input types.
+   */
   @Input() max = Number.MAX_SAFE_INTEGER
-  /** Incremental values that are valid for numeric input types. */
+  /**
+   * Incremental values that are valid for numeric input types.
+   */
   @Input() step = 1
-  /** Minimum length (number of characters) of value. */
+  /**
+   * Minimum length (number of characters) of value.
+   */
   @Input() set minLength(length: number) {
     this._minlength = length
   }
@@ -100,11 +128,6 @@ export class NgvInputComponent
   @Input() pattern = ''
   /** Amount of time to wait until emitting (nggvINput) event */
   @Input() debounceTime = 500
-  /**
-   * @deprecated
-   * Text to put in badge
-   */
-  @Input() badgeText = ''
 
   /** Settings for input mask if requested */
   private _inputMask!: InputmaskOptions<any>
@@ -148,6 +171,7 @@ export class NgvInputComponent
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
     protected cdr: ChangeDetectorRef,
+    public element: ElementRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }
@@ -168,7 +192,11 @@ export class NgvInputComponent
 
   writeValue(value: any) {
     // maxLength will only work with string values
-    if (value?.length && value.length > this.maxlength) {
+    if (
+      value?.length &&
+      value.length > this.maxlength &&
+      this.control.touched
+    ) {
       // cut value to match max length
       this.state = this.cutTextAfterMaxLength(value)
       if (value.length !== this.state.length) {

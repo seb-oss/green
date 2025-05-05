@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement } from 'react'
+import React, { JSX, PropsWithChildren, ReactElement } from 'react'
 import classNames from 'classnames'
 
 export type BreadcrumbProps = {

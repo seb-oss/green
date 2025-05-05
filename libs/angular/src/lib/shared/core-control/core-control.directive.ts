@@ -11,12 +11,17 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   NgControl,
-  Validators,
 } from '@angular/forms'
 
 @Directive({
-  selector:
-    'gds-input, gds-textarea, gds-dropdown, gds-datepicker, [nggCoreControl]',
+  selector: `gds-input:not([ngDefaultControl]),
+     gds-textarea:not([ngDefaultControl]),
+     gds-dropdown:not([ngDefaultControl]),
+     gds-datepicker:not([ngDefaultControl]),
+     gds-select:not([ngDefaultControl]),
+     gds-radio-group:not([ngDefaultControl]),
+     gds-checkbox-group:not([ngDefaultControl]),
+     [nggCoreControl]`,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -28,13 +33,13 @@ import {
 export class NggCoreControlDirective
   implements ControlValueAccessor, AfterViewInit
 {
-  private control?: NgControl
+  protected control?: NgControl
 
   constructor(
-    private el: ElementRef,
-    private renderer: Renderer2,
-    private injector: Injector,
-    private cdr: ChangeDetectorRef,
+    protected el: ElementRef,
+    protected renderer: Renderer2,
+    protected injector: Injector,
+    protected cdr: ChangeDetectorRef,
   ) {}
 
   ngAfterViewInit() {
@@ -66,7 +71,7 @@ export class NggCoreControlDirective
       this.renderer.setProperty(
         this.el.nativeElement,
         'invalid',
-        control.touched && control.invalid,
+        (control.dirty || control.touched) && control.invalid,
       )
     }
   }

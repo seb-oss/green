@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 const fs = require('fs')
 
 // Read the input JSON from update.json

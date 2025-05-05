@@ -24,6 +24,7 @@ $button-danger-border: tokens.get(tokens.$red, 0);
       display: flex;
       gap: 0.5rem;
       text-decoration: none;
+      width: 100%;
     }
 
     .button slot:not([name]) {
@@ -35,21 +36,6 @@ $button-danger-border: tokens.get(tokens.$red, 0);
 
     :host(:not([variant='ghost'])) .button {
       @include button.primary();
-    }
-
-    .button.icon {
-      padding: 0.75rem;
-      slot {
-        display: contents;
-      }
-    }
-
-    .button.icon.small {
-      padding: 0.5rem;
-    }
-
-    .button.icon.large {
-      padding: 1.25rem;
     }
 
     :host([rank*='secondary']) .button {
@@ -83,5 +69,32 @@ $button-danger-border: tokens.get(tokens.$red, 0);
   }
 
   @layer _overrides {
+    :host .button.icon {
+      padding: 0.75rem;
+      background: transparent;
+      border-width: 0px;
+      color: currentColor;
+      &:hover {
+        color: currentColor;
+        background: var(--grey-500);
+      }
+      slot {
+        display: contents;
+      }
+    }
+
+    .button.icon.xs {
+      min-height: 1.5rem;
+      line-height: 0.75rem;
+      padding: 0.25rem;
+    }
+
+    .button.icon.small {
+      padding: 0.5rem;
+    }
+
+    .button.icon.large {
+      padding: 1rem;
+    }
   }
 }

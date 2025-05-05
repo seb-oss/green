@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core'
 
-import { NgvBaseControlValueAccessorComponent } from './base-control-value-accessor.component'
+import { NggvBaseControlValueAccessorComponent } from './base-control-value-accessor.component'
 
 @NgModule({
-  declarations: [NgvBaseControlValueAccessorComponent],
+  declarations: [NggvBaseControlValueAccessorComponent],
   imports: [],
-  exports: [NgvBaseControlValueAccessorComponent],
+  exports: [NggvBaseControlValueAccessorComponent],
 })
-export class NgvBaseControlValueAccessorModule {}
+export class NggvBaseControlValueAccessorModule {}

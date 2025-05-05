@@ -5,6 +5,9 @@
   "projectType": "application",
   "tags": [],
   "targets": {
+    "build-app": {
+      "dependsOn": ["build"]
+    },
     "build": {
       "executor": "@nx/webpack:webpack",
       "outputs": ["{options.outputPath}"],
@@ -17,10 +20,7 @@
         "main": "apps/react-lib-dev/src/main.tsx",
         "polyfills": "apps/react-lib-dev/src/polyfills.ts",
         "tsConfig": "apps/react-lib-dev/tsconfig.app.json",
-        "assets": [
-          "apps/react-lib-dev/src/favicon.ico",
-          "apps/react-lib-dev/src/assets"
-        ],
+        "assets": ["apps/react-lib-dev/src/assets"],
         "styles": ["apps/react-lib-dev/src/styles.scss"],
         "scripts": [],
         "webpackConfig": "apps/react-lib-dev/webpack.config.js",
@@ -47,7 +47,8 @@
       "executor": "@nx/webpack:dev-server",
       "options": {
         "buildTarget": "react-lib-dev:build",
-        "hmr": true
+        "hmr": true,
+        "port": 4201
       },
       "configurations": {
         "production": {
