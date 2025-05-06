@@ -9,7 +9,9 @@ export default function Root({ children }: { children: React.ReactNode }) {
       <Header />
       <GdsFlex gap="xl" padding="0 m">
         <Sidebar />
-        <section>{children}</section>
+        <GdsFlex flex="1" flex-direction="column" gap="m">
+          {children}
+        </GdsFlex>
       </GdsFlex>
       <Footer />
     </GdsFlex>

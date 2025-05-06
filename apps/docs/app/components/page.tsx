@@ -1,6 +1,8 @@
 // app/components/page.tsx
 import Link from 'next/link'
 
+import * as Core from '@sebgroup/green-core/react'
+
 // Define the component type
 interface Component {
   name: string
@@ -42,30 +44,38 @@ async function getComponents(): Promise<Component[]> {
 async function ComponentsList() {
   const components = await getComponents()
 
-  return (
-    <div className="grid gap-4">
-      {components.map((component: Component) => (
-        <Link
-          key={component.name}
-          href={`/component/${component.name}`}
-          className="p-4 border rounded-lg hover:bg-gray-50 transition-colors"
+  //   {components.length === 0 && <div>No components found</div>}
+  return components.map((component: Component) => (
+    <Link key={component.name} href={`/component/${component.name}`}>
+      <Core.GdsCard
+        key={component.name + component.path}
+        border="4xs solid primary"
+        border-radius="s"
+        padding="0"
+        background="primary"
+        width="280px"
+      >
+        <Core.GdsCard
+          justify-content="space-between"
+          padding="l s"
+          flex-direction="row"
+          background="secondary"
         >
-          <h2 className="text-lg font-semibold capitalize">{component.name}</h2>
-        </Link>
-      ))}
-
-      {components.length === 0 && (
-        <p className="text-gray-500">No components found</p>
-      )}
-    </div>
-  )
+          <Core.GdsText>{component.name}</Core.GdsText>
+        </Core.GdsCard>
+      </Core.GdsCard>
+    </Link>
+  ))
 }
 
 export default function Components() {
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-6">Components</h1>
-      <ComponentsList />
-    </div>
+    <>
+      <Core.GdsText tag="h1">Components</Core.GdsText>
+
+      <Core.GdsFlex min-width="100%" gap="s; s{xl}">
+        <ComponentsList />
+      </Core.GdsFlex>
+    </>
   )
 }
