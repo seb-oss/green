@@ -8,7 +8,7 @@ content:
     type: collection
     path: content/components
     format: 'json'
-    filename: '{fields.slug}'
+    filename: '{fields.slug}.mdx'
     view:
       fields: [title, date]
     fields:
@@ -31,7 +31,7 @@ content:
     type: collection
     format: 'json'
     path: content/pages
-    filename: '{fields.slug}'
+    filename: '{fields.slug}.mdx'
     view:
       fields: [title, date]
     fields:
