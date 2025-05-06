@@ -6,7 +6,6 @@ content:
   - name: components
     label: Components
     type: collection
-    format: 'mdx'
     path: content/components
     filename: '{fields.slug}'
     view:
@@ -63,7 +62,6 @@ content:
   - name: pages
     label: Pages
     type: collection
-    format: 'mdx'
     path: content/pages
     filename: '{fields.slug}'
     view:
