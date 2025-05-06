@@ -72,7 +72,6 @@ export default function Components() {
   return (
     <>
       <Core.GdsText tag="h1">Components</Core.GdsText>
-
       <Core.GdsFlex min-width="100%" gap="s; s{xl}">
         <ComponentsList />
       </Core.GdsFlex>

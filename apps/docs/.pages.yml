@@ -1,0 +1,88 @@
+media:
+  input: public/assets
+  output: /assets
+  categories: ['image']
+content:
+  - name: components
+    label: Components
+    type: collection
+    format: 'json'
+    path: _components
+    filename: '{fields.slug}.json'
+    view:
+      fields: [title, date]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: slug, label: Slug, type: string, required: true }
+      - {
+          name: date,
+          label: Date,
+          type: date,
+          options: { time: true, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" },
+        }
+      - { name: body, label: Body, type: rich-text }
+      - name: code
+        label: Code
+        type: code
+        options:
+          language: html
+      - name: number
+        label: Number
+        type: number
+        options:
+          min: 3
+      - name: contact
+        label: Contact information
+        type: object
+        fields:
+          - name: first_name
+            label: First name
+            type: string
+          - name: last_name
+            label: Last name
+            type: string
+          - name: email
+            label: Email address
+            type: string
+          - name: phone
+            label: Phone number
+            type: string
+      - name: web
+        label: Web
+        type: boolean
+        default: false
+      - name: ios
+        label: iOS
+        type: boolean
+        default: false
+      - name: android
+        label: Android
+        type: boolean
+        default: false
+
+  - name: pages
+    label: Pages
+    type: collection
+    format: 'json'
+    path: _pages
+    filename: '{fields.slug}.json'
+    view:
+      fields: [title, date]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - { name: slug, label: Slug, type: string, required: true }
+      - {
+          name: date,
+          label: Date,
+          type: date,
+          options: { time: true, format: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'" },
+        }
+      - name: related_components
+        label: Related Components
+        type: reference
+        options:
+          collection: components
+          multiple: true
+          search: 'title'
+
+      - { name: body, label: Body, type: rich-text }
