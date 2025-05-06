@@ -7,7 +7,6 @@ content:
     label: Components
     type: collection
     path: apps/docs/content/components
-    format: 'json'
     filename: '{fields.slug}.mdx'
     view:
       fields: [title, date]
@@ -29,7 +28,6 @@ content:
   - name: pages
     label: Pages
     type: collection
-    format: 'json'
     path: apps/docs/content/components
     filename: '{fields.slug}.mdx'
     view:
