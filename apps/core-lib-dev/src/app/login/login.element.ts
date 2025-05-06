@@ -78,7 +78,7 @@ export class CardExample extends LitElement {
                   </gds-text>
                   <gds-text text-wrap="balance">
                     Together with our clients, we're accelerating the
-                    sustainable transition.
+                    sustainable transition.and test
                   </gds-text>
                   <gds-flex align-items="center" gap="s" margin="s 0 0 0">
                     <gds-text>Net Zero Transition</gds-text>
