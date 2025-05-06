@@ -6,7 +6,13 @@ import colorsDark from '../../../dist/libs/tokens/2023/internal/variables.dark.c
 import colorsLight from '../../../dist/libs/tokens/2023/internal/variables.light.css?inline'
 import { GlobalStylesRegistry } from './utils/global-styles'
 
-const tokens = [unsafeCSS(base)]
+const tokens = [
+  css`
+    :host {
+      ${unsafeCSS(base)}
+    }
+  `,
+]
 
 // Apply a set of default tokens to the root element
 GlobalStylesRegistry.instance.injectGlobalStyles(
