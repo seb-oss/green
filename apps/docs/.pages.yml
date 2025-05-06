@@ -6,9 +6,9 @@ content:
   - name: components
     label: Components
     type: collection
-    format: 'json'
-    path: _components
-    filename: '{fields.slug}.json'
+    format: 'mdx'
+    path: content/components
+    filename: '{fields.slug}'
     view:
       fields: [title, date]
     fields:
@@ -63,9 +63,9 @@ content:
   - name: pages
     label: Pages
     type: collection
-    format: 'json'
-    path: _pages
-    filename: '{fields.slug}.json'
+    format: 'mdx'
+    path: content/pages
+    filename: '{fields.slug}'
     view:
       fields: [title, date]
     fields:
