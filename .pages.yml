@@ -6,7 +6,7 @@ content:
   - name: components
     label: Components
     type: collection
-    path: content/components
+    path: apps/docs/content/components
     format: 'json'
     filename: '{fields.slug}.mdx'
     view:
@@ -30,7 +30,7 @@ content:
     label: Pages
     type: collection
     format: 'json'
-    path: content/pages
+    path: apps/docs/content/components
     filename: '{fields.slug}.mdx'
     view:
       fields: [title, date]
