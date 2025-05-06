@@ -1,6 +1,7 @@
 import {
   GdsButton,
   GdsCard,
+  GdsDiv,
   GdsDropdown,
   GdsFlex,
   GdsInput,
@@ -35,9 +36,13 @@ export default function Header() {
       position="relative"
       gap="m"
     >
-      <GdsButton rank="tertiary" size="small" onClick={handleClick}>
-        <IconMenuSidebar />
-      </GdsButton>
+      {isOpen ? (
+        <GdsDiv></GdsDiv>
+      ) : (
+        <GdsButton rank="tertiary" size="small" onClick={handleClick}>
+          <IconMenuSidebar />
+        </GdsButton>
+      )}
       <GdsFlex height="100%" padding="xs">
         <GdsCard
           border-radius="max"

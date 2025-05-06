@@ -1,34 +1,88 @@
 'use client'
 
-import NextLink from 'next/link'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSettingsContext, useSettingsValue } from '../../settings'
 
+import './sidebar.css'
+
+interface NavItem {
+  title: string
+  path: string
+  icon: React.ReactNode
+  isExternal?: boolean
+}
+
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
-  const { settings, actions } = useSettingsContext()
+  const { actions } = useSettingsContext()
+  const router = useRouter()
 
-  const Link = ({
-    title,
-    href,
-    children,
-  }: {
-    title: string
-    href: string
-    children: React.ReactNode
-  }) => {
-    return (
-      <NextLink href={href}>
-        <Core.GdsFlex justify-content="space-between" color="primary">
-          <Core.GdsText text-style="none">{title}</Core.GdsText>
-          {children}
-        </Core.GdsFlex>
-      </NextLink>
-    )
+  const navigationItems: NavItem[] = [
+    {
+      title: 'Home',
+      path: '/',
+      icon: <Core.IconHomeOpen />,
+    },
+    {
+      title: 'Components',
+      path: '/components',
+      icon: <Core.IconSquareGridCircle />,
+    },
+    {
+      title: 'Templates',
+      path: '/templates',
+      icon: <Core.IconDevices />,
+    },
+    {
+      title: 'Foundation',
+      path: '/foundation',
+      icon: <Core.IconBrandGreen />,
+    },
+    {
+      title: 'UX Writing',
+      path: '/ux-writing',
+      icon: <Core.IconPencilWave />,
+    },
+    {
+      title: 'Accessibility',
+      path: '/accessibility',
+      icon: <Core.IconPeopleCircle />,
+    },
+    {
+      title: 'About',
+      path: '/about',
+      icon: <Core.IconCircleInfo />,
+    },
+    {
+      title: 'Github',
+      path: 'https://github.com/seb-oss/green-core',
+      icon: <Core.IconBrandGithub />,
+      isExternal: true,
+    },
+    {
+      title: 'Storybook',
+      path: 'https://storybook.seb.io',
+      icon: <Core.IconBrandStorybook />,
+      isExternal: true,
+    },
+  ]
+
+  const handleClick = (path: string, isExternal?: boolean) => {
+    // Return a function that handles the event
+    return (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      if (isExternal) {
+        window.open(path, '_blank')
+      } else {
+        router.push(path)
+      }
+    }
   }
 
-  const handleClick = () => {
+  const handleToggleSidebar = (): void => {
     actions.toggle('UI.Panel.Sidebar')
   }
 
@@ -38,48 +92,47 @@ export default function Sidebar() {
     <Core.GdsCard
       variant="secondary"
       width="20%"
-      height="max-content"
       border-radius="0"
+      justify-content="space-between"
+      height="100vh"
+      className="sidebar"
     >
-      <Core.GdsFlex align-items="center" justify-content="space-between">
-        <Core.IconBrandSeb />
-        <Core.GdsButton size="small" rank="tertiary" onClick={handleClick}>
+      <Core.GdsFlex
+        width="100%"
+        height="max-content"
+        align-items="center"
+        justify-content="space-between"
+        padding="0 m"
+      >
+        <Link href="/">
+          <Core.IconBrandSeb />
+        </Link>
+        <Core.GdsButton onClick={handleToggleSidebar} size="xs" rank="tertiary">
           <Core.IconCrossLarge />
         </Core.GdsButton>
       </Core.GdsFlex>
-      <Link title="Home" href="/">
-        <Core.IconHomeOpen />
-      </Link>
-      <Link title="Components" href="/components">
-        <Core.IconSquareGridCircle />
-      </Link>
-      <Link title="Templates" href="/templates">
-        <Core.IconDevices />
-      </Link>
-      <Link title="Foundation" href="/foundation">
-        <Core.IconBrandGreen />
-      </Link>
-      <Link title="UX Writing" href="/foundation">
-        <Core.IconPencilWave />
-      </Link>
-      <Link title="Accessibility" href="/foundation">
-        <Core.IconPeopleCircle />
-      </Link>
-      <Link title="About" href="/foundation">
-        <Core.IconCircleInfo />
-      </Link>
-      <Link title="Github" href="https://github.com/seb-oss/green-core">
-        <Core.IconBrandGithub />
-      </Link>
-      <Link title="Storybook" href="https:/storybook.seb.io">
-        <Core.IconBrandStorybook />
-      </Link>
-      <Core.GdsFlex align-items="center" justify-content="space-between">
-        Settings
-        <Core.GdsButton size="small" rank="tertiary" onClick={handleClick}>
-          <Core.IconSettingsGear />
-        </Core.GdsButton>
+
+      <Core.GdsFlex id="nav" flex-direction="column" gap="0" margin="auto 0">
+        {navigationItems.map((item) => (
+          <Core.GdsMenuButton
+            key={item.path}
+            onClick={handleClick(item.path, item.isExternal)}
+          >
+            {item.title}
+            <span slot="trail">{item.icon}</span>
+          </Core.GdsMenuButton>
+        ))}
       </Core.GdsFlex>
+
+      <Core.GdsButton
+        onClick={handleClick('/settings', false)}
+        size="small"
+        rank="tertiary"
+        justify-content="space-between"
+      >
+        Settings
+        <Core.IconSettingsGear slot="trail" />
+      </Core.GdsButton>
     </Core.GdsCard>
   )
 }

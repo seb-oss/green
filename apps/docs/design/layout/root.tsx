@@ -5,7 +5,7 @@ import Sidebar from '../atoms/sidebar'
 
 export default function Root({ children }: { children: React.ReactNode }) {
   return (
-    <GdsFlex height="100vh">
+    <GdsFlex height="100vh" color="primary">
       <Sidebar />
       <GdsFlex gap="xl" padding="0 m" flex-direction="column" flex="1">
         <Header />
