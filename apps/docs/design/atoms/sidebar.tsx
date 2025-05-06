@@ -3,8 +3,12 @@
 import NextLink from 'next/link'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useSettingsContext, useSettingsValue } from '../../settings'
 
 export default function Sidebar() {
+  const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
+  const { settings, actions } = useSettingsContext()
+
   const Link = ({
     title,
     href,
@@ -23,8 +27,26 @@ export default function Sidebar() {
       </NextLink>
     )
   }
+
+  const handleClick = () => {
+    actions.toggle('UI.Panel.Sidebar')
+  }
+
+  if (!isOpen) return null
+
   return (
-    <Core.GdsCard variant="secondary" width="20%" height="max-content">
+    <Core.GdsCard
+      variant="secondary"
+      width="20%"
+      height="max-content"
+      border-radius="0"
+    >
+      <Core.GdsFlex align-items="center" justify-content="space-between">
+        <Core.IconBrandSeb />
+        <Core.GdsButton size="small" rank="tertiary" onClick={handleClick}>
+          <Core.IconCrossLarge />
+        </Core.GdsButton>
+      </Core.GdsFlex>
       <Link title="Home" href="/">
         <Core.IconHomeOpen />
       </Link>
@@ -52,6 +74,12 @@ export default function Sidebar() {
       <Link title="Storybook" href="https:/storybook.seb.io">
         <Core.IconBrandStorybook />
       </Link>
+      <Core.GdsFlex align-items="center" justify-content="space-between">
+        Settings
+        <Core.GdsButton size="small" rank="tertiary" onClick={handleClick}>
+          <Core.IconSettingsGear />
+        </Core.GdsButton>
+      </Core.GdsFlex>
     </Core.GdsCard>
   )
 }

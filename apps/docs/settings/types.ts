@@ -18,6 +18,7 @@ export interface Theme {
 export interface Panel {
   All: boolean
   Settings: boolean
+  Sidebar: boolean
   Command: boolean
   Shortcuts: boolean
 }

@@ -5,15 +5,15 @@ import Sidebar from '../atoms/sidebar'
 
 export default function Root({ children }: { children: React.ReactNode }) {
   return (
-    <GdsFlex flex-direction="column" gap="m" height="100vh">
-      <Header />
-      <GdsFlex gap="xl" padding="0 m">
-        <Sidebar />
+    <GdsFlex height="100vh">
+      <Sidebar />
+      <GdsFlex gap="xl" padding="0 m" flex-direction="column" flex="1">
+        <Header />
         <GdsFlex flex="1" flex-direction="column" gap="m">
           {children}
         </GdsFlex>
+        <Footer />
       </GdsFlex>
-      <Footer />
     </GdsFlex>
   )
 }

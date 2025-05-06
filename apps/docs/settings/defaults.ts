@@ -17,6 +17,7 @@ const DEFAULT_THEME: Theme = {
 const DEFAULT_PANEL: Panel = {
   All: false,
   Settings: false,
+  Sidebar: false,
   Shortcuts: false,
   Command: false,
 }

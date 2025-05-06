@@ -61,11 +61,5 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [colorScheme])
 
   if (!stylesheetCreated) return null
-  return (
-    <GdsTheme color-scheme="light">
-      <GdsDiv background="primary" min-height="100vh">
-        {children}
-      </GdsDiv>
-    </GdsTheme>
-  )
+  return <GdsTheme color-scheme="light">{children}</GdsTheme>
 }

@@ -15,8 +15,16 @@ import {
   IconMagnifyingGlass,
   IconMenuSidebar,
 } from '@sebgroup/green-core/react'
+import { useSettingsContext, useSettingsValue } from '../../settings'
 
 export default function Header() {
+  const { settings, actions } = useSettingsContext()
+  const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
+
+  const handleClick = () => {
+    actions.toggle('UI.Panel.Sidebar')
+  }
+
   return (
     <GdsFlex
       background="secondary"
@@ -27,7 +35,7 @@ export default function Header() {
       position="relative"
       gap="m"
     >
-      <GdsButton rank="tertiary" size="small">
+      <GdsButton rank="tertiary" size="small" onClick={handleClick}>
         <IconMenuSidebar />
       </GdsButton>
       <GdsFlex height="100%" padding="xs">

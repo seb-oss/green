@@ -48,6 +48,14 @@ export const DefaultShortcuts: ShortcutMap = {
     hint: true,
     action: (ctx) => ctx.actions.toggle('UI.Panel.Shortcuts'),
   },
+  'UI.Panel.Sidebar': {
+    label: 'Sidebar',
+    description: 'Open or close sidebar',
+    keys: ['shift', 's'],
+    scope: ['global'],
+    hint: true,
+    action: (ctx) => ctx.actions.toggle('UI.Panel.Sidebar'),
+  },
   'UI.Panel.All': {
     label: 'Close All Panels',
     keys: ['escape'],
