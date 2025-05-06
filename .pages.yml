@@ -28,6 +28,7 @@ content:
   - name: pages
     label: Pages
     type: collection
+    format: 'json'
     path: content/pages
     filename: '{fields.slug}'
     view:
