@@ -3,6 +3,7 @@ import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import spaceRefTokens from '../../../../tokens/src/tokens/2023/ref/space.ref.json'
 import densityTokens from '../../../../tokens/src/tokens/2023/sys/density.comfortable.json'
 import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
 
@@ -210,6 +211,9 @@ const createSizeExample = (
   const tag = literal`gds-icon-${unsafeStatic(icon)}`
 
   // console.log(densityTokens.sys.space)
+  const pixelValue = isToken
+    ? spaceRefTokens.ref.space[size.toString()].value
+    : null
 
   return html`
     <gds-flex
@@ -233,10 +237,10 @@ const createSizeExample = (
         gap="xs"
       >
         <gds-text tag="small">${displaySize}</gds-text>
-        ${isToken
+        ${isToken && pixelValue
           ? html`
               <gds-text tag="small" color="secondary/0.4">
-                ${densityTokens.sys.space[size.toString()].value}px
+                ${pixelValue}px
               </gds-text>
             `
           : ''}
