@@ -159,7 +159,7 @@ export const Datepicker = forwardRef(
 
     const onChangeHandler = (e: any) => {
       if (onChange) {
-        onChange(e.detail.value)
+        onChange(e.target.value)
       }
     }
 
