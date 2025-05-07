@@ -136,8 +136,8 @@ export class NggDatepickerComponent
 
     this.value = target.value
 
-    this.valueChange.emit(e.detail.value)
-    this.onChangeFn && this.onChangeFn(e.detail.value)
+    this.valueChange.emit(target.value)
+    this.onChangeFn && this.onChangeFn(target.value)
   }
 
   ngAfterViewInit(): void {
