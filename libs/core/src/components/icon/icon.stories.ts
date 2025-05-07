@@ -14,6 +14,7 @@ import '../badge'
 import '../flex'
 import '../divider'
 import '../text'
+import '../theme'
 import './icon.stories.css'
 
 import * as Icons from './icons'
@@ -208,7 +209,7 @@ const createSizeExample = (
   const sizeAttribute = unit ? `${size}${unit}` : size
   const tag = literal`gds-icon-${unsafeStatic(icon)}`
 
-  console.log(densityTokens.sys.space)
+  // console.log(densityTokens.sys.space)
 
   return html`
     <gds-flex
@@ -352,25 +353,299 @@ export const IconsStroke: Story = {
  *
  * For available colors, see [Color System](./?path=/docs/style-colors--docs).
  *
+ *
+ * Note these examples show the possible colors in light and dark mode.
  */
 
 export const IconsColor: Story = {
   ...DefaultParams,
   name: 'Color',
   render: (args) => html`
-    <gds-flex gap="l" max-width="400px" margin="auto">
-      <gds-flex flex-direction="column" gap="s" flex="1">
-        <gds-text>Default (currentColor)</gds-text>
-        <gds-icon-robot size="xl"></gds-icon-robot>
-      </gds-flex>
-      <gds-flex flex-direction="column" gap="s" flex="1">
-        <gds-text>Secondary</gds-text>
-        <gds-icon-rocket color="secondary" size="xl"></gds-icon-rocket>
-      </gds-flex>
-      <gds-flex flex-direction="column" gap="s" flex="1">
-        <gds-text>Positive</gds-text>
-        <gds-icon-school color="positive" size="xl"></gds-icon-school>
-      </gds-flex>
+    <gds-flex
+      flex-direction="column"
+      gap="4xl"
+      min-height="80vh"
+      margin="auto"
+      padding="0"
+    >
+      <gds-theme color-scheme="light">
+        <gds-flex
+          gap="l"
+          align-items="center"
+          justify-content="center"
+          border-radius="xs"
+          background="primary"
+          level="1"
+          padding="xl 4xl"
+          flex="1"
+        >
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+            >
+              <gds-icon-ai size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Default</gds-text>
+              <gds-text tag="small" color="secondary/0.4">
+                currentColor
+              </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+            >
+              <gds-icon-ai color="secondary/0.2" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Secondary</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:0.2 </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+            >
+              <gds-icon-ai color="negative" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Negative</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:1.0 </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+              background="notice"
+              border="4xs solid notice"
+            >
+              <gds-icon-ai color="notice/0.4" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Notice 40%</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:0.4 </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+              background="positive"
+              border="4xs solid positive"
+            >
+              <gds-icon-ai color="positive" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Positive</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:1.0 </gds-text>
+            </gds-flex>
+          </gds-flex>
+        </gds-flex>
+      </gds-theme>
+      <gds-theme color-scheme="dark">
+        <gds-flex
+          gap="l"
+          align-items="center"
+          justify-content="center"
+          border-radius="xs"
+          background="primary"
+          level="1"
+          padding="xl 4xl"
+          flex="1"
+        >
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+            >
+              <gds-icon-ai size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Default</gds-text>
+              <gds-text tag="small" color="secondary/0.4">
+                currentColor
+              </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+            >
+              <gds-icon-ai color="secondary/0.2" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Secondary</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:0.2 </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+            >
+              <gds-icon-ai color="negative" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Negative</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:1.0 </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+              background="notice"
+              border="4xs solid notice"
+            >
+              <gds-icon-ai color="notice/0.4" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Notice 40%</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:0.4 </gds-text>
+            </gds-flex>
+          </gds-flex>
+          <gds-flex
+            flex-direction="column"
+            align-items="center"
+            justify-content="flex-start"
+            gap="xs"
+          >
+            <gds-card
+              width="100px"
+              height="100px"
+              align-items="center"
+              justify-content="center"
+              background="positive"
+              border="4xs solid positive"
+            >
+              <gds-icon-ai color="positive" size="xl"></gds-icon-ai>
+            </gds-card>
+            <gds-flex
+              flex-direction="column"
+              align-items="center"
+              justify-content="center"
+              gap="0"
+            >
+              <gds-text tag="small">Positive</gds-text>
+              <gds-text tag="small" color="secondary/0.4"> A:1.0 </gds-text>
+            </gds-flex>
+          </gds-flex>
+        </gds-flex>
+      </gds-theme>
     </gds-flex>
   `,
 }
