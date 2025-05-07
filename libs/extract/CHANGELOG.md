@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.3
+
+### Patch Changes
+
+- 59b22ed: **Dependencies:** Update React peer dependency versions
+
 ## 3.0.2
 
 ### Patch Changes

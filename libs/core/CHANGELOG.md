@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.78.1
+
+### Patch Changes
+
+- c2980e1: **Tokens:** Fix missing base tokens
+
 ## 1.78.0
 
 ### Minor Changes
