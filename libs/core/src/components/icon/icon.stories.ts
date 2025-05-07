@@ -314,7 +314,6 @@ export const IconsSize: Story = {
 /**
  * You can change the icon stroke by setting the `stroke` attribute.
  */
-
 export const IconsStroke: Story = {
   ...DefaultParams,
   name: 'Stroke',
@@ -322,6 +321,20 @@ export const IconsStroke: Story = {
     <gds-icon-robot stroke="2" size="xl"></gds-icon-robot>
     <gds-icon-rocket stroke="2" size="xl"></gds-icon-rocket>
     <gds-icon-school stroke="2" size="xl"></gds-icon-school>
+  `,
+}
+
+/**
+ * You can change the icon color by setting the `color` attribute.
+ */
+
+export const IconsColor: Story = {
+  ...DefaultParams,
+  name: 'Color',
+  render: (args) => html`
+    <gds-icon-robot color="secondary" size="xl"></gds-icon-robot>
+    <gds-icon-rocket color="secondary" size="xl"></gds-icon-rocket>
+    <gds-icon-school color="secondary" size="xl"></gds-icon-school>
   `,
 }
 
