@@ -8,6 +8,7 @@ import {
 import classNames from 'classnames'
 
 import { IValidator, randomId, validateClassName } from '@sebgroup/extract'
+import { IconTriangleExclamation } from '../../icon/icons/IconTriangleExclamation'
 
 export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   /** Use this prop to control the checked state of the checkbox */
@@ -72,7 +73,15 @@ export const Checkbox = forwardRef(
           <i />
         </label>
         {validator && (
-          <span className="form-info" id={`${uuid}_message`}>
+          <span
+            className="form-info"
+            id={`${uuid}_message`}
+            style={{ display: 'flex', gap: '0.25rem' }}
+          >
+            <IconTriangleExclamation
+              size="16px"
+              margin="2xs 0 0 0"
+            ></IconTriangleExclamation>
             {validator.message}
           </span>
         )}
