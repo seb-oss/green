@@ -27,6 +27,6 @@
     "swiped-events": "^1.1.6"
   },
   "peerDependencies": {
-    "react": "^18 || ^19"
+    "react": "^17 || ^18 || ^19"
   }
 }
