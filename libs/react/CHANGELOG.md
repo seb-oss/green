@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.28.3
+
+### Patch Changes
+
+- 7e585f8: **Datepicker:** Fix internal change handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
 ## 3.28.2
 
 ### Patch Changes

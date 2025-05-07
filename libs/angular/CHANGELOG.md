@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.11.2
+
+### Patch Changes
+
+- 7e585f8: **NggDatepicker:** Fix error in change event handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
 ## 5.11.1
 
 ### Patch Changes
