@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.79.0
+
+### Minor Changes
+
+- ce1b0d4: **Icon:** Add color style expression property
+
 ## 1.78.1
 
 ### Patch Changes
