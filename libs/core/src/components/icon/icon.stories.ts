@@ -325,16 +325,53 @@ export const IconsStroke: Story = {
 }
 
 /**
- * You can change the icon color by setting the `color` attribute.
+ * # Icon Color
+ *
+ * Set icon colors using the `color` attribute. Supports design system tokens and transparency.
+ *
+ * ## Default
+ * - Level: 2
+ * - Color: `currentColor` (inherits from parent)
+ *
+ * ## Examples
+ * ```html
+ * <!-- Basic color tokens -->
+ * <gds-icon-ai color="primary"></gds-icon-ai>
+ * <gds-icon-ai color="success"></gds-icon-ai>
+ * <gds-icon-ai color="warning"></gds-icon-ai>
+ *
+ * <!-- With transparency -->
+ * <gds-icon-ai color="primary/0.2"></gds-icon-ai>
+ * <gds-icon-ai color="negative/0.5"></gds-icon-ai>
+ *
+ * <!-- Inherited color -->
+ * <div style="color: blue">
+ *   <gds-icon-ai></gds-icon-ai>  <!-- Will be blue -->
+ * </div>
+ * ```
+ *
+ * For available colors, see [Color System](./?path=/docs/style-colors--docs).
+ *
  */
 
 export const IconsColor: Story = {
   ...DefaultParams,
   name: 'Color',
   render: (args) => html`
-    <gds-icon-robot color="secondary" size="xl"></gds-icon-robot>
-    <gds-icon-rocket color="secondary" size="xl"></gds-icon-rocket>
-    <gds-icon-school color="secondary" size="xl"></gds-icon-school>
+    <gds-flex gap="l" max-width="400px" margin="auto">
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-text>Default (currentColor)</gds-text>
+        <gds-icon-robot size="xl"></gds-icon-robot>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-text>Secondary</gds-text>
+        <gds-icon-rocket color="secondary" size="xl"></gds-icon-rocket>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="s" flex="1">
+        <gds-text>Positive</gds-text>
+        <gds-icon-school color="positive" size="xl"></gds-icon-school>
+      </gds-flex>
+    </gds-flex>
   `,
 }
 
