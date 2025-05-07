@@ -132,12 +132,12 @@ export class NggDatepickerComponent
   }
 
   onDateChange(evt: Event) {
-    const e = evt as CustomEvent
+    const target = evt.target as GdsDatepicker
 
-    this.value = e.detail.value
+    this.value = target.value
 
-    this.valueChange.emit(e.detail.value)
-    this.onChangeFn && this.onChangeFn(e.detail.value)
+    this.valueChange.emit(target.value)
+    this.onChangeFn && this.onChangeFn(target.value)
   }
 
   ngAfterViewInit(): void {
