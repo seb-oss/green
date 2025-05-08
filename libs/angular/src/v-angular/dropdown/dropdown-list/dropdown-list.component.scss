@@ -20,6 +20,12 @@
   transform: translateY(calc(100% + 0.5rem));
   z-index: var(--sg-z-index-dropdown);
 
+  .nvda-only {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
   .hidden {
     visibility: hidden;
     display: none;
