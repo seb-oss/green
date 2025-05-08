@@ -1,0 +1,6 @@
+import{x as p}from"./lit-element-Bx14lxc-.js";import{s as c}from"./declarative-layout-mixins-D1Y0gyd7.js";import{g as u}from"./custom-element-scoping-CNGU1oQ0.js";import"./flex-DDs2ZYgf.js";import{G as m}from"./flex.component-CkL0ce-t.js";var g=Object.defineProperty,h=Object.getOwnPropertyDescriptor,a=(s,e,t,o)=>{for(var r=o>1?void 0:o?h(e,t):e,i=s.length-1,l;i>=0;i--)(l=s[i])&&(r=(o?l(e,t,r):l(r))||r);return o&&r&&g(e,t,r),r};let n=class extends m{constructor(){super(),this["align-items"]="center",this.gap="s"}connectedCallback(){super.connectedCallback(),this.setAttribute("role","navigation"),this.setAttribute("aria-label","Breadcrumb")}render(){const s=Array.from(this.children),e=this.querySelector('[slot="separator"]');return p`
+      ${s.map((t,o)=>t.getAttribute("slot")==="separator"?null:p`
+          ${t}
+          ${o<s.length-1?e==null?void 0:e.cloneNode(!0):null}
+        `)}
+    `}};a([c({styleTemplate:(s,e)=>{const t=e[0],o=`font-size: var(--gds-sys-text-size-${t});`,r=`line-height: var(--gds-sys-text-line-height-${t});`;return o+r}})],n.prototype,"font-size",2);a([c({valueTemplate:s=>`var(--gds-sys-text-weight-${s})`})],n.prototype,"font-weight",2);n=a([u("gds-breadcrumb")],n);export{n as G};
