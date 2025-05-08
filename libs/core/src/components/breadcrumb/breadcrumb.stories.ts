@@ -23,7 +23,7 @@ type Story = StoryObj
 export const Default: Story = {
   render: () => html`
     <gds-breadcrumb gap="s">
-      <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
+      <span slot="separator">/</span>
 
       <gds-link href="/home">
         <gds-icon-home-open slot="lead"></gds-icon-home-open>
