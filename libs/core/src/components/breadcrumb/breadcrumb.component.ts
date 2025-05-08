@@ -2,7 +2,7 @@ import { html } from 'lit'
 
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { GdsFlex } from '../flex/'
+import { GdsFlex } from '../flex'
 
 @gdsCustomElement('gds-breadcrumb')
 export class GdsBreadcrumb extends GdsFlex {
