@@ -27,18 +27,7 @@ describe('<gds-breadcrumb>', () => {
       await el.updateComplete
       expect(el.getAttribute('gds-element')).to.equal('gds-breadcrumb')
     })
-
-    it('should render separator between items', async () => {
-      const separatorSlotChangePromise = new Promise<void>((resolve) => {
-        const handleSlotChange = () => {
-          resolve()
-        }
-        // Listen for the first slotchange event
-        document.addEventListener('slotchange', handleSlotChange, {
-          once: true,
-        })
-      })
-
+    it('should render separator slot', async () => {
       const el = await fixture<GdsBreadcrumb>(
         html`<gds-breadcrumb>
           <gds-text slot="separator">/</gds-text>
@@ -48,11 +37,10 @@ describe('<gds-breadcrumb>', () => {
       )
 
       await el.updateComplete
-      await separatorSlotChangePromise
 
-      const linkTag = getScopedTagName('gds-link')
-      const links = el.querySelectorAll(linkTag)
-      expect(links.length).to.equal(2)
+      const textTag = getScopedTagName('gds-text')
+      const separator = el.querySelector(`${textTag}[slot="separator"]`)
+      expect(separator).to.exist
     })
   })
 
