@@ -35,6 +35,12 @@ export class GdsBreadcrumb extends GdsFlex {
     this.gap = 's'
   }
 
+  connectedCallback() {
+    super.connectedCallback()
+    this.setAttribute('role', 'navigation')
+    this.setAttribute('aria-label', 'Breadcrumb')
+  }
+
   render() {
     const elements = Array.from(this.children)
     const separator = this.querySelector('[slot="separator"]')

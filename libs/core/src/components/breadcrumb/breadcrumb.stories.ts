@@ -30,10 +30,7 @@ type Story = StoryObj
 export const Simple: Story = {
   render: () => html`
     <gds-breadcrumb>
-      <gds-icon-chevron-right
-        size="s"
-        slot="separator"
-      ></gds-icon-chevron-right>
+      <gds-text slot="separator">/</gds-text>
       <gds-link href="/home">Home</gds-link>
       <gds-link href="/products">Products</gds-link>
       <gds-link href="/category">Category</gds-link>
@@ -42,36 +39,33 @@ export const Simple: Story = {
 }
 
 /**
- * Breadcrumb with leading icons in links
- */
-export const WithLeadIcons: Story = {
-  render: () => html`
-    <gds-breadcrumb>
-      <gds-icon-chevron-right
-        size="s"
-        slot="separator"
-      ></gds-icon-chevron-right>
-
-      <gds-link href="/home">
-        <gds-icon-home-open slot="lead"></gds-icon-home-open>
-        Home
-      </gds-link>
-
-      <gds-link href="/folder">
-        <gds-icon-folder slot="lead"></gds-icon-folder>
-        Documents
-      </gds-link>
-
-      <gds-link href="/settings">
-        <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
-        Settings
-      </gds-link>
-    </gds-breadcrumb>
-  `,
-}
-
-/**
  * Breadcrumb with mixed elements (link, button, and context menu)
+ *
+ * The breadcrumb component is not limited to links only. <br />
+ * It can also contain buttons and context menus. <br />
+ * The context menu can be used to show the overflow items when the breadcrumb is too long to fit in the available space.
+ * Buttons and context menus can be used to trigger actions or show additional options. <br />
+ *
+ * ```html
+ * <gds-breadcrumb>
+ *   <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
+ *   <gds-link href="/home">
+ *     <gds-icon-home-open slot="lead"></gds-icon-home-open>
+ *     Home
+ *   </gds-link>
+ *   <gds-button rank="tertiary" size="small">
+ *     <gds-icon-folder slot="lead"></gds-icon-folder>
+ *     Select Folder
+ *   </gds-button>
+ *   <gds-context-menu>
+ *     <gds-menu-item>Move</gds-menu-item>
+ *     <gds-menu-item>Copy</gds-menu-item>
+ *     <gds-menu-item>Delete</gds-menu-item>
+ *   </gds-context-menu>
+ *   <span>Current Item</span>
+ * </gds-breadcrumb>
+ * ```
+ *
  */
 export const MixedElements: Story = {
   render: () => html`
@@ -103,9 +97,72 @@ export const MixedElements: Story = {
 }
 
 /**
- * Breadcrumb with trailing icons in links
+ * Lead and trail icons depend on the element type. <br />
+ * The trail slot is used in links and buttons. <br />
+ *
+ * For more information about the lead and trail icons, check the documentation on button and link. <br />
+ *
+ *```html
+ * <gds-breadcrumb>
+ *    <gds-text slot="separator">/</gds-text>
+ *    <gds-link href="/home">
+ *      <gds-icon-home-open slot="lead"></gds-icon-home-open>
+ *      Home
+ *    </gds-link>
+ *    <gds-link href="/folder">
+ *      <gds-icon-folder slot="lead"></gds-icon-folder>
+ *      Documents
+ *    </gds-link>
+ *    <gds-link href="/settings">
+ *      <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
+ *      Settings
+ *    </gds-link>
+ *  </gds-breadcrumb>
+ *  ```
  */
-export const WithTrailingIcons: Story = {
+export const LeadIcon: Story = {
+  render: () => html`
+    <gds-breadcrumb>
+      <gds-text slot="separator">/</gds-text>
+
+      <gds-link href="/home">
+        <gds-icon-home-open slot="lead"></gds-icon-home-open>
+        Home
+      </gds-link>
+
+      <gds-link href="/folder">
+        <gds-icon-folder slot="lead"></gds-icon-folder>
+        Documents
+      </gds-link>
+
+      <gds-link href="/settings">
+        <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
+        Settings
+      </gds-link>
+    </gds-breadcrumb>
+  `,
+}
+
+/**
+ * Lead and trail icons depend on the element type. <br />
+ * The trail slot is used in links and buttons. <br />
+ *
+ For more information about the lead and trail icons, check the documentation on button and link. 
+
+ * ```html
+ * <gds-breadcrumb>
+ *   <gds-text slot="separator">/</gds-text>
+ *   <gds-link href="/home">
+ *     <gds-icon-home-open slot="trail"></gds-icon-home-open>
+ *   </gds-link>
+ *   <gds-link href="/settings">
+ *     Settings
+ *     <gds-icon-settings-gear slot="trail"></gds-icon-settings-gear>
+ *   </gds-link>
+ * </gds-breadcrumb>
+ * ```
+ */
+export const TrailIcon: Story = {
   render: () => html`
     <gds-breadcrumb>
       <span slot="separator">·</span>
@@ -123,21 +180,96 @@ export const WithTrailingIcons: Story = {
 }
 
 /**
- * Breadcrumb with text separator
+ *
+ * The separator can be any text or icon. <br/>
+ * Is recommanded to be used the slash character. <br />
+ *
+ * Separator can be set using the `slot="separator"` attribute. <br />
+ * The separator will automatically show in between the breadcrumb items.
+ *
+ * ```html
+ * <gds-breadcrumb>
+ *   <gds-text slot="separator">/</gds-text>
+ *   <gds-link>...</gds-link>
+ *   <gds-link>...</gds-link>
+ *   <gds-link>...</gds-link>
+ * </gds-breadcrumb>
+ * ```
  */
-export const TextSeparator: Story = {
+export const Separator: Story = {
   render: () => html`
-    <gds-breadcrumb>
-      <gds-text slot="separator" color="secondary"> · </gds-text>
-      <gds-link href="/home">Home</gds-link>
-      <gds-link href="/products">Products</gds-link>
-      <gds-text color="secondary">Current</gds-text>
-    </gds-breadcrumb>
+    <gds-flex flex-direction="column" gap="xl">
+      <gds-flex gap="m" align-items="center">
+        <gds-flex width="200px" gap="m">
+          <gds-text>Slash</gds-text>
+        </gds-flex>
+        <gds-card flex="1">
+          <gds-breadcrumb>
+            <gds-text slot="separator">/</gds-text>
+            <gds-link href="#">
+              <gds-icon-home-open slot="lead"></gds-icon-home-open>
+            </gds-link>
+            <gds-link href="#"> Blog </gds-link>
+            <gds-link href="#"> Changelog </gds-link>
+            <gds-text opacity="0.4">v2.0</gds-text>
+          </gds-breadcrumb>
+        </gds-card>
+      </gds-flex>
+      <gds-flex gap="m" align-items="center">
+        <gds-flex width="200px" gap="m">
+          <gds-text>Icon</gds-text>
+        </gds-flex>
+        <gds-card flex="1">
+          <gds-breadcrumb>
+            <gds-icon-chevron-right size="s" slot="separator"
+              >/</gds-icon-chevron-right
+            >
+            <gds-link href="#">
+              <gds-icon-home-open slot="lead"></gds-icon-home-open>
+            </gds-link>
+            <gds-link href="#"> Blog </gds-link>
+            <gds-link href="#"> Changelog </gds-link>
+            <gds-text opacity="0.4">v2.0</gds-text>
+          </gds-breadcrumb>
+        </gds-card>
+      </gds-flex>
+      <gds-flex gap="m" align-items="center">
+        <gds-flex width="200px" gap="m">
+          <gds-text>Dot</gds-text>
+        </gds-flex>
+        <gds-card flex="1">
+          <gds-breadcrumb>
+            <gds-text slot="separator">·</gds-text>
+            <gds-link href="#">
+              <gds-icon-home-open slot="lead"></gds-icon-home-open>
+            </gds-link>
+            <gds-link href="#"> Blog </gds-link>
+            <gds-link href="#"> Changelog </gds-link>
+            <gds-text opacity="0.4">v2.0</gds-text>
+          </gds-breadcrumb>
+        </gds-card>
+      </gds-flex>
+    </gds-flex>
   `,
 }
 
 /**
  * Breadcrumb with context menu for overflow
+ *
+ * The context menu can be used to show the overflow items when the breadcrumb is too long to fit in the available space.
+ *
+ * ```html
+ * <gds-breadcrumb>
+ *   <gds-text slot="separator">/</gds-text>
+ *   <gds-link>...</gds-link>
+ *   <gds-context-menu>
+ *    <gds-menu-item>Level 1</gds-menu-item>
+ *    <gds-menu-item>Level 2</gds-menu-item>
+ *    <gds-menu-item>Level 3</gds-menu-item>
+ *   </gds-context-menu>
+ *   <gds-link>Current Page</gds-link>
+ * </gds-breadcrumb>
+ * ```
  */
 export const WithOverflow: Story = {
   render: () => html`
@@ -165,6 +297,12 @@ export const WithOverflow: Story = {
  * Font size sets automatically line height.
  *
  * All the typography tokens are available for use.
+ *
+ * The default font size it inherits from parent.
+ *
+ * ```html
+ * <gds-breadcrumb font-size="body-m">...</gds-breadcrumb>
+ * ```
  */
 export const fontSize: Story = {
   render: () => html`
@@ -239,9 +377,14 @@ export const fontSize: Story = {
 }
 
 /**
- * The breadcrumb gap between its elements can be set using the `gap` property.
- * The gap property accepts all the spacing tokens from the design system.
- * The default value is `2xs`.
+ * The breadcrumb gap between its elements can be set using the `gap` property. <br/>
+ * The gap property accepts all the spacing tokens from the design system.<br/>
+ * The default value is `s`.
+ *
+ *
+ *```html
+ * <gds-breadcrumb gap="m">...</gds-breadcrumb>
+ * ```
  */
 export const Gap: Story = {
   render: () => html`
