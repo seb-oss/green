@@ -30,14 +30,14 @@ export const Default: Story = {
         Home
       </gds-link>
 
-      <gds-link href="/components"> Components </gds-link>
+      <gds-link href="/components">Components</gds-link>
 
       <gds-context-menu>
         <gds-menu-item>Action 1</gds-menu-item>
         <gds-menu-item>Action 2</gds-menu-item>
       </gds-context-menu>
 
-      <gds-link href="/current"> Current Page </gds-link>
+      <gds-link href="/current">Current Page</gds-link>
     </gds-breadcrumb>
   `,
 }
