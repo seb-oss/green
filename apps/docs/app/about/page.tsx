@@ -1,9 +1,9 @@
 'use client'
 
+import { Link } from 'next-view-transitions'
 import { GdsFlex, GdsImg, GdsRichText, GdsText } from '$/import/components'
 import { Accordion, AccordionItem } from 'core/accordion'
 import Hero from 'core/hero'
-import Link from 'core/link'
 import TOC from 'core/navigator'
 
 const HEADINGS = [

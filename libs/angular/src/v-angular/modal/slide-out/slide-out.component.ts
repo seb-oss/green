@@ -14,10 +14,9 @@ import {
   Input,
   OnInit,
   Output,
+  Renderer2,
   ViewChild,
 } from '@angular/core'
-
-// import { faTimes } from '@fortawesome/pro-regular-svg-icons';
 
 import { DialogButtons } from '../modal.types'
 
@@ -91,14 +90,25 @@ import { DialogButtons } from '../modal.types'
     ]),
   ],
 })
-export class NgvSlideOutComponent implements OnInit {
+export class NggvSlideOutComponent implements OnInit {
   /** @internal */
   @ViewChild('slideOut') slideOutRef: ElementRef | undefined
 
   /** Sets from which side the modal should open. */
   @Input() side: 'left' | 'right' = 'right'
   /** Defines the default visibility state of the slide-out. */
-  @Input() shown = false
+  private _shown = false
+  @Input() set shown(value: boolean) {
+    this._shown = value
+    if (value) {
+      this.hideOverflow()
+    } else {
+      this.resetOverflow()
+    }
+  }
+  get shown() {
+    return this._shown
+  }
   /** Defines the default visibility state of the modal. */
   @Input() initiallyShown = false
   /** Sets modal heading. Will be translated (using transloco) if the string matches a cms key. */
@@ -117,6 +127,9 @@ export class NgvSlideOutComponent implements OnInit {
 
   /** Special property used for selecting DOM elements during automated UI testing. */
   @Input() thook = 'slideout'
+
+  /** Aria label for the Close button with "X" icon, in the header */
+  @Input() closeButtonAriaLabel?: string
 
   /** @internal */
   get fromLeft(): boolean {
@@ -142,14 +155,17 @@ export class NgvSlideOutComponent implements OnInit {
   private firstFocusable: HTMLElement | undefined
   private lastFocusable: HTMLElement | undefined
 
-  constructor(private host: ElementRef) {
+  constructor(
+    private host: ElementRef,
+    private renderer: Renderer2,
+  ) {
     // appends methods for opening and closing modal to native element
     this.host.nativeElement.open = this.open.bind(this)
     this.host.nativeElement.close = this.close.bind(this)
   }
 
   ngOnInit() {
-    this.shown = this.initiallyShown
+    this._shown = this.initiallyShown
     if (this.shown) this.limitFocusable()
   }
 
@@ -176,8 +192,9 @@ export class NgvSlideOutComponent implements OnInit {
    * @returns - true
    */
   open(opener?: HTMLElement): boolean {
-    this.shown = true
+    this._shown = true
     this.previous = opener || (document.activeElement as HTMLElement)
+    this.hideOverflow()
     this.limitFocusable()
     return true
   }
@@ -197,6 +214,9 @@ export class NgvSlideOutComponent implements OnInit {
       event.target !== event.currentTarget
     )
       return
+
+    this.resetOverflow()
+
     if (this.shown && this.closable) {
       this.nggvCloseEvent.emit(this.shown)
       this.shown = false
@@ -240,7 +260,15 @@ export class NgvSlideOutComponent implements OnInit {
       )
       this.firstFocusable = focusable[0]
       this.lastFocusable = focusable[focusable.length - 1]
-      if (this.lastFocusable) this.lastFocusable.focus()
+      if (this.firstFocusable) this.firstFocusable.focus()
     })
+  }
+
+  private hideOverflow(): void {
+    this.renderer.setStyle(document.body, 'overflow', 'hidden')
+  }
+
+  private resetOverflow(): void {
+    this.renderer.removeStyle(document.body, 'overflow')
   }
 }

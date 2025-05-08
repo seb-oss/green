@@ -7,7 +7,35 @@ import { DynamicStylesController } from './utils/controllers/dynamic-styles-cont
 // More info: https://lit.dev/Components/decorators/#decorator-versions
 import 'reflect-metadata'
 
+/**
+ * Base class for Green Core elements.
+ * This class sets up the base functionality that all Green Core elements share.
+ *
+ * @internal
+ *
+ * @fires gds-element-disconnected - When the element is disconnected from the DOM
+ */
 export class GdsElement extends LitElement {
+  /**
+   * Defines the custom element in the custom element registry.
+   * This method needs to be called once before the element can be used.
+   */
+  static define(): void {
+    // This method is meant to be overriden by the gdsCustomElement decorator,
+    // so here we do nothing.
+    return void 0
+  }
+
+  /**
+   * Whether the element is defined in the custom element registry.
+   */
+  static isDefined = false
+
+  /**
+   * Style expression properties for this element will use this selector by default.
+   */
+  static styleExpressionBaseSelector = ':host'
+
   /**
    * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.
    *

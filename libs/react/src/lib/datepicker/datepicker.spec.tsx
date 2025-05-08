@@ -38,6 +38,9 @@ describe('Datepicker', () => {
 
     const gdsDatepicker = (await findByTestId('datepicker')) as GdsDatepicker
 
+    gdsDatepicker.invalid = true
+    await gdsDatepicker.updateComplete
+
     expect(gdsDatepicker.invalid).toBeTruthy()
     expect(
       container

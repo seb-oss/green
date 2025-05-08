@@ -1,9 +1,43 @@
 @use '../../../../chlorophyll/scss/components/form/input/mixins';
 @use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
 
+@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+  validation;
+@use '../../../../chlorophyll/scss/tokens';
+
 :host {
-  &.gds-form-item {
-    @include form-group.add-form-item();
+  --sg-text-primary: #333;
+  --sg-form-control-bg: #fff;
+  --gds-ref-pallet-base100: hsl(0, 0%, 97%);
+  --sg-border-radius: 4px;
+  --sg-border-width: 1px;
+  --sg-border-color: #868686;
+
+  @include form-group.add-form-item();
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .gds-form-item__footer {
+    .form-info {
+      font-weight: 500;
+
+      &.form-info--countdown {
+        font-weight: 400;
+      }
+    }
+
+    .form-info--error {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5em;
+      color: #9f000a;
+
+      .error-icon {
+        align-items: center;
+      }
+    }
   }
 
   .hide-if-empty:empty {
@@ -14,10 +48,208 @@
 
   input {
     width: 100%;
+    line-height: 18px;
+    font-size: 1rem;
+    font-family: inherit;
   }
 
   .gds-input-wrapper {
-    @include mixins.add-input-wrapper;
+    @include validation.add-feedback-element(false);
+
+    &:before {
+      bottom: 0;
+    }
+
+    .is-invalid & {
+      @include validation.add-feedback(tokens.$intent-danger-background);
+    }
+
+    &.nggv-field--error {
+      $_border-bottom: 0.125rem solid #9f000a !important;
+      border-bottom: $_border-bottom;
+      height: 100%;
+    }
+
+    $_height: 2.75rem;
+    $_border-color-normal: #868686;
+
+    border: 1px solid $_border-color-normal;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+
+    min-height: $_height;
+    line-height: 1.5;
+    font-size: 1rem;
+    font-family: inherit;
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    display: flex;
+    flex-direction: row;
+
+    .input-group-prefix {
+      min-height: 2.5rem;
+      border: none;
+      border-radius: 3px;
+
+      height: 2.625rem;
+      min-width: 2.625rem;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &[disabled] {
+        background-color: #f8f8f8 !important;
+        color: #adadad;
+      }
+
+      @media (max-width: 35.98em) {
+        min-width: initial;
+      }
+      &:empty {
+        display: none;
+      }
+    }
+
+    .input-group-suffix {
+      min-height: 2.5rem;
+      border: none;
+      border-radius: 3px;
+
+      height: 2.625rem;
+      min-width: 2.625rem;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &[disabled] {
+        background-color: #f8f8f8 !important;
+        color: #adadad;
+      }
+
+      @media (max-width: 35.98em) {
+        min-width: initial;
+      }
+      &:empty {
+        display: none;
+      }
+    }
+
+    .input-group {
+      width: 100%;
+      input {
+        // Config
+        $_height: 2.5rem;
+        $_border-color-normal: #cecece;
+
+        outline: none;
+
+        min-height: $_height;
+        height: 2.625rem;
+        line-height: 1.5;
+        font-size: 1rem;
+        font-family: inherit;
+
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+
+        &:hover {
+          border-color: #41b0ee;
+        }
+
+        &:focus {
+          outline-color: #1a1a1a;
+          outline-style: solid;
+          outline-width: 0.125rem;
+          outline-offset: 0.125rem;
+        }
+
+        &:active {
+          border-color: $_border-color-normal;
+        }
+
+        &[disabled] {
+          background-color: #f8f8f8;
+          border-color: $_border-color-normal;
+
+          &::placeholder {
+            color: #cecece;
+          }
+        }
+        border: none;
+        min-height: 2.375rem;
+        width: 100%;
+
+        &:not(:focus) {
+          border-right: none;
+          padding-right: 0;
+        }
+
+        &:focus {
+          padding-right: 0;
+        }
+      }
+    }
+    &:has(.input-group-prefix:not(:empty)) .input-group {
+      input {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+      }
+    }
+    &:has(.input-group-suffix:not(:empty)) .input-group {
+      input {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+      }
+    }
+  }
+
+  &.small {
+    label {
+      font-size: 0.875rem;
+    }
+    label + .form-info {
+      margin-bottom: 0.25rem;
+    }
+
+    label + .gds-input-wrapper {
+      margin-top: 0.25rem;
+    }
+
+    .gds-input-wrapper {
+      min-height: 2rem;
+
+      .input-group input {
+        padding: 0.38rem 0.5rem;
+        line-height: 1rem;
+        height: 2rem;
+        min-height: 2rem;
+        font-size: 0.875rem;
+      }
+
+      .input-group-suffix,
+      .input-group-prefix {
+        height: 2rem;
+        min-height: 2rem;
+        min-width: initial;
+      }
+    }
+
+    .gds-form-item__footer:not(:empty) {
+      margin-top: 0.25rem;
+    }
   }
 
   label,
@@ -26,19 +258,18 @@
     @include form-group.add-label();
   }
 
+  label + .gds-input-wrapper,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
+  }
+
+  .gds-field-label--optional {
+    font-weight: 400;
+  }
+
   .form-info {
     font-size: 0.875rem;
     line-height: 1.25rem;
     width: 100%;
-  }
-
-  .gds-form-item__footer {
-    .form-info {
-      font-weight: 500;
-    }
-
-    .form-info--error {
-      color: var(--intent-danger-background, #9f000a);
-    }
   }
 }

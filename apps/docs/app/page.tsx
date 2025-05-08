@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <GdsFlex
       flex-direction="column"
-      max-width="100ch"
+      max-width="1400ch"
       margin="0 auto"
       gap="xl"
       padding="2xl 0 0 0"

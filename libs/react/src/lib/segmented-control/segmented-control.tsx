@@ -2,29 +2,29 @@ import React, { ReactNode } from 'react'
 import { createComponent } from '@lit/react'
 import classNames from 'classnames'
 
-import { GdsSegmentedControl } from '@sebgroup/green-core/components/segmented-control/index.js'
-import { GdsSegment } from '@sebgroup/green-core/components/segmented-control/segment/index.js'
+import { GdsSegment as CoreSegment } from '@sebgroup/green-core/components/segmented-control/segment/segment.component'
+import { GdsSegmentedControl as CoreSegmentedControl } from '@sebgroup/green-core/components/segmented-control/segmented-control.component'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
+CoreSegmentedControl.define()
 registerTransitionalStyles()
 
-export const CoreSegementedControl = createComponent({
+export const GdsSegementedControl = createComponent({
   tagName: getScopedTagName('gds-segmented-control'),
-  elementClass: GdsSegmentedControl,
+  elementClass: CoreSegmentedControl,
   events: { onchange: 'change' },
   react: React,
 })
 
-export const CoreSegment = createComponent({
+export const GdsSegment = createComponent({
   tagName: getScopedTagName('gds-segment'),
-  elementClass: GdsSegment,
+  elementClass: CoreSegment,
   react: React,
 })
 
 export interface SegmentedControlProps {
   value?: string
-  segMinWidth?: number
   size?: 'small' | 'medium'
   onChange?: (event: Event) => void
   className?: string
@@ -36,15 +36,21 @@ export interface SegmentProps {
   className?: string
   disabled?: boolean
   children?: ReactNode | ReactNode[]
+  width?: string
+  minWidth?: string
+  maxWidth?: string
+  /** @deprecated */
+  segMinWidth?: number
 }
 
-const SegmentedControl: React.FC<SegmentedControlProps> = ({
+/** @deprecated - Use `GdsSegmentedControl` instead */
+export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   onChange,
   className,
   ...props
 }: SegmentedControlProps) => {
   return (
-    <CoreSegementedControl
+    <GdsSegementedControl
       onchange={onChange}
       className={classNames(className)}
       {...props}
@@ -52,11 +58,21 @@ const SegmentedControl: React.FC<SegmentedControlProps> = ({
   )
 }
 
-const Segment: React.FC<SegmentProps> = ({
+/** @deprecated - Use `GdsSegmented` instead */
+export const Segment: React.FC<SegmentProps> = ({
   className,
+  minWidth,
+  maxWidth,
+  segMinWidth,
   ...props
 }: SegmentProps) => {
-  return <CoreSegment className={classNames(className)} {...props} />
+  const formattedSegMinWidth = segMinWidth ? `${segMinWidth}px` : undefined
+  return (
+    <GdsSegment
+      className={classNames(className)}
+      {...props}
+      min-width={minWidth || formattedSegMinWidth}
+      max-width={maxWidth}
+    />
+  )
 }
-
-export { SegmentedControl, Segment }

@@ -16,7 +16,7 @@ $highlighted-background: var(--grey-1000);
   @include common.padding-vertical(4);
   @include common.add-border-radius();
   @include common.add-border();
-  @include common.add-border-color(var(--grey-800));
+  @include common.add-border-color(var(--grey-600));
   @include common.add-focus('');
 
   background: $background;
@@ -30,14 +30,6 @@ $highlighted-background: var(--grey-1000);
 
   @include common.media-breakpoint-down('sm') {
     min-width: 100%;
-  }
-
-  &:not(:disabled, .disabled, [aria-disabled]):hover {
-    --background: var(--grey-400);
-    --color: var(--grey-1000);
-    background-color: var(--grey-400);
-    color: var(--grey-1000);
-    border-color: var(--grey-1000);
   }
 
   > span {
@@ -67,6 +59,10 @@ $highlighted-background: var(--grey-1000);
 
   &:hover::after {
     border-color: currentColor;
+  }
+
+  &:disabled {
+    --background: var(--grey-500);
   }
 }
 

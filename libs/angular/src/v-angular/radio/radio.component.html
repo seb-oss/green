@@ -49,18 +49,34 @@
 
   <!-- ERRORS -->
   <ng-container *transloco="let t; read: scope">
-    <label
-      class="sdv-field-notice sdv-field-notice--error"
+    <div
+      class="form-info form-info--error"
       [attr.for]="id + '-radio'"
       *ngIf="invalid && (error || ngControl?.invalid)"
     >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <span class="error-icon">
+        <gds-icon-triangle-exclamation
+          width="16"
+          height="16"
+          [solid]="true"
+          *nggCoreElement
+        ></gds-icon-triangle-exclamation>
+      </span>
+      <span
+        *ngIf="error; else errorsRef"
+        [attr.data-thook]="thook + '-errorlabel'"
+      >
+        {{ error }}
+      </span>
       <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>
-    </label>
+    </div>
   </ng-container>
 
   <!-- CHILDREN -->

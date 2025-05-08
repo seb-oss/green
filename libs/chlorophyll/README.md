@@ -1,6 +1,6 @@
 <div align="center">
 <img width="600" alt="chlorophyll" src="https://github.com/seb-oss/green/assets/11420341/8368cfdf-5335-42b3-9a7f-b03fd0d6433b">
-<h1>@sebgroup/green-core</h1>
+<h1>@sebgroup/chlorophyll</h1>
 <p>
 Chlorophyll a styling framework for Green Design System front-end components. It is primarily used to style the components in the React and Angular libraries, but also contains grid and utility classes.
 </p>

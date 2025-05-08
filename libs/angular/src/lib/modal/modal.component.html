@@ -47,6 +47,7 @@
           [attr.id]="'modal-header-' + guid"
           data-testid="modal-header"
           [header]="header"
+          [closeText]="closeText"
           (closed)="this.handleCloseClick($event)"
         ></header>
       </ng-container>

@@ -10,7 +10,7 @@
       <input
         #input
         [id]="id + '-input'"
-        class="sdv-field"
+        class="gds-field"
         [attr.type]="type"
         [attr.name]="name"
         [attr.required]="required"
@@ -28,6 +28,9 @@
         [attr.role]="role"
         [attr.placeholder]="placeholder"
         [attr.aria-label]="description"
+        aria-owns="listbox"
+        aria-haspopup="listbox"
+        aria-controls="listbox"
         [value]="state"
         (input)="onInput($event)"
         (focus)="onFocus($event)"

@@ -1,3 +1,4 @@
+/* eslint no-console: "off" */
 import React from 'react'
 
 import { Dropdown } from './dropdown'
@@ -114,7 +115,6 @@ export const MultiSelect = {
 export const Small = {
   name: 'Small',
   render: Template.bind({}),
-
   args: {
     label: 'Small dropdown',
     size: 'small',
@@ -124,5 +124,21 @@ export const Small = {
       { label: 'Pizza', value: 'pizza' },
       { label: 'Sushi', value: 'sushi' },
     ],
+  },
+}
+
+export const WithValidation = {
+  render: Template.bind({}),
+  args: {
+    label: 'Dropdown with validation',
+    options: [
+      { label: 'Tacos', value: 'tacos' },
+      { label: 'Pizza', value: 'pizza' },
+      { label: 'Sushi', value: 'sushi' },
+    ],
+    validator: {
+      message: 'This is an error message',
+      indicator: 'error',
+    },
   },
 }

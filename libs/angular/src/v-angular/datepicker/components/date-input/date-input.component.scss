@@ -1,0 +1,199 @@
+@use '@sebgroup/chlorophyll/scss/components/form/common/mixins' as form-group;
+@use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
+@use '@sebgroup/chlorophyll/scss/common';
+@use '../date-mixins' as ngv;
+
+:host {
+  display: block;
+  position: relative;
+
+  @include common.media-breakpoint-down('md') {
+    min-width: 100%;
+  }
+
+  .hide-if-empty:empty {
+    display: none;
+  }
+
+  .unset-state {
+    padding-left: 0.5rem;
+  }
+
+  .gds-field-label {
+    @include form-group.add-label;
+    display: block;
+  }
+
+  label + .field-wrap,
+  label + .nggv-field--locked {
+    margin-top: 0.5rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.25rem;
+    width: 100%;
+  }
+
+  .gds-field-label--optional {
+    @include form-group.add-label;
+  }
+
+  .nggv-datepicker {
+    margin-top: 0.25rem;
+    position: absolute;
+  }
+
+  .nggv-field--error {
+    @include ngv.text-field--error();
+  }
+
+  .error-item {
+    @include ngv.text-field--error-item();
+    color: #9f000a;
+  }
+
+  .nggv-field--locked {
+  }
+
+  .gds-field-notice {
+    margin-top: 0.5rem;
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  .field-wrap {
+    $_height: 2.75rem;
+    $_border-color-normal: #868686;
+
+    border: 1px solid $_border-color-normal;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+
+    min-height: $_height;
+    line-height: 1.5;
+    font-size: 1rem;
+    font-family: inherit;
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    height: 2.625rem;
+    display: flex;
+
+    .nggv-button-date {
+      --text-disabled-color: #adadad;
+      @include button.base;
+      @include button.ghost-dark;
+      @include common.media-breakpoint-down('md') {
+        width: 2.625rem;
+        height: 2.625rem;
+      }
+      background-color: transparent;
+      min-height: 2.5rem;
+      border: none;
+      border-radius: 3px;
+      width: 2.625rem;
+      height: 2.625rem;
+      min-width: 2.625rem;
+      border-top-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
+      text-align: right;
+
+      &:focus {
+        outline-color: #1a1a1a;
+        outline-style: solid;
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+      }
+
+      &[disabled] {
+        background-color: #f8f8f8 !important;
+        color: #adadad;
+      }
+
+      @media (max-width: 35.98em) {
+        min-width: initial;
+      }
+    }
+
+    input[type='text'] {
+      &::-webkit-inner-spin-button,
+      &::-webkit-calendar-picker-indicator {
+        display: none;
+        -webkit-appearance: none;
+        font-size: 1rem;
+        font-family: inherit;
+      }
+    }
+
+    .nggv-field-date {
+      // Config
+      $_height: 2.75rem;
+      $_border-color-normal: #cecece;
+      //
+
+      border: 1px solid $_border-color-normal;
+      border-radius: 4px;
+      outline: none;
+      box-sizing: border-box;
+
+      min-height: $_height;
+      line-height: 1.5;
+      font-size: 1rem;
+      font-family: inherit;
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      &:hover {
+        border-color: #41b0ee;
+      }
+
+      &:focus {
+        outline-color: #1a1a1a;
+        outline-style: solid;
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+      }
+
+      &:active {
+        border-color: $_border-color-normal;
+      }
+
+      &[disabled] {
+        background-color: #f8f8f8;
+        border-color: $_border-color-normal;
+
+        &::placeholder {
+          color: #cecece;
+        }
+      }
+      border: none;
+      min-height: 2.375rem;
+      width: 100%;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      padding-left: 1rem;
+
+      &:not(:focus) {
+        border-right: none;
+        padding-right: 0;
+      }
+
+      &:focus {
+        padding-right: 0;
+      }
+    }
+  }
+}

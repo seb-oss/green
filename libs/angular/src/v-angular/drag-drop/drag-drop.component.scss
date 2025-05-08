@@ -1,0 +1,317 @@
+:host {
+  .gds-drag-drop {
+    width: 100%;
+  }
+
+  .gds-drag-drop__input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  .gds-drag-drop__label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px dashed #868686;
+    font-weight: 500;
+    padding: 2.25em 1.5em;
+  }
+
+  .gds-drag-drop__input + .gds-drag-drop__label em {
+    font-style: normal;
+    color: #0092e1;
+    cursor: pointer;
+  }
+
+  .gds-drag-drop table,
+  .gds-drag-drop .gds-table {
+    margin-top: 2.25em;
+  }
+
+  .gds-table {
+    width: 100%;
+    font-family: 'SEBSansSerif', Arial, sans-serif;
+    border-spacing: 0;
+  }
+  .gds-table th,
+  .gds-table td {
+    text-align: left;
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .gds-table thead {
+    color: #333;
+    font-size: 1em;
+  }
+  .gds-table thead tr {
+    min-height: 2em;
+  }
+  .gds-table thead th,
+  .gds-table thead td {
+    border-bottom: 1px solid #cecece;
+    font-weight: 500;
+  }
+  .gds-table tbody {
+    font-size: 1em;
+  }
+  .gds-table tbody tr {
+    height: 2.5em;
+    border-bottom: 1px solid #adadad;
+  }
+  .gds-table tbody tr:hover td,
+  .gds-table tbody tr:hover th {
+    background-color: #f8f8f8;
+  }
+  .gds-table tfoot {
+    font-weight: 500;
+    font-size: 1em;
+  }
+  .gds-table tfoot tr {
+    height: 2.5em;
+  }
+  .gds-table tfoot td {
+    border-top: 1px solid #cecece;
+    border-bottom-width: 0;
+  }
+  tr .gds-table__numeric-col {
+    text-align: right;
+  }
+  tr .gds-table__negative-col {
+    color: #bb000c;
+  }
+  tr .gds-table__primary-col {
+    color: #000;
+  }
+  .gds-table__sortable-col {
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 0.5em;
+  }
+  .gds-table__sortable-col::after {
+    content: '';
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath fill='%23adadad' transform='translate(0 260)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath fill='%23adadad' transform='translate(0 -120)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    margin-left: 0.25rem;
+    width: 0.625rem;
+    height: 1rem;
+    vertical-align: text-bottom;
+  }
+  .gds-table__sortable-col:hover::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath fill='%23cecece' transform='translate(0 260)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath fill='%23cecece' transform='translate(0 -120)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+  }
+  .gds-table__sortable-col--asc::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath fill='%23adadad' transform='translate(0 260)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath fill='%23007ac7' transform='translate(0 -120)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+  }
+  .gds-table__sortable-col--asc:hover::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath fill='%23cecece' transform='translate(0 260)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath fill='%2341b0ee' transform='translate(0 -120)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+  }
+  .gds-table__sortable-col--desc::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath fill='%23007ac7' transform='translate(0 260)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath fill='%23adadad' transform='translate(0 -120)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+  }
+  .gds-table__sortable-col--desc:hover::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 644'%3E%3Cpath fill='%2341b0ee' transform='translate(0 260)' d='M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z'/%3E%3Cpath fill='%23cecece' transform='translate(0 -120)' d='M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z'/%3E%3C/svg%3E");
+  }
+  .gds-table .gds-field-checkbox-wrap {
+    width: 2.5rem;
+  }
+  .gds-table .gds-field-checkbox-wrap label {
+    box-shadow: none !important;
+  }
+  .gds-table--fixed-l-col {
+    overflow: auto;
+    display: block;
+    position: relative;
+    max-width: 100%;
+  }
+  .gds-table--fixed-l-col td,
+  .gds-table--fixed-l-col th {
+    width: auto !important;
+    min-width: 150px;
+  }
+  .gds-table--fixed-l-col td:first-child,
+  .gds-table--fixed-l-col th:first-child {
+    position: sticky;
+    left: 0;
+    background-color: #fff;
+    border-right: 1px solid #e9e9e9;
+  }
+  .gds-table--fixed-l-col thead th {
+    top: 0;
+    z-index: 1;
+    position: sticky;
+    background-color: #fff;
+  }
+  .gds-table--fixed-l-col thead th:first-child {
+    z-index: 2;
+  }
+
+  .gds-progress-bar {
+    appearance: none;
+    height: 0.3125rem;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    color: #45b400;
+    border-width: 0;
+    background-color: #e9e9e9;
+  }
+  .gds-progress-bar::before {
+    display: block;
+    position: absolute;
+    content: '';
+    left: -200px;
+    width: 200px;
+    height: 0.3125rem;
+    background-color: #45b400;
+    animation: gds-progressbar-loading 2s linear infinite;
+  }
+  .gds-progress-bar::-webkit-progress-value {
+    background-color: transparent;
+  }
+  .gds-progress-bar::-moz-progress-bar {
+    background-color: transparent;
+  }
+  .gds-progress-bar::-ms-fill {
+    background-color: transparent;
+    border-width: 0;
+  }
+  .gds-progress-bar::-webkit-progress-bar {
+    background-color: #e9e9e9;
+  }
+  @keyframes gds-progressbar-loading {
+    from {
+      left: -30%;
+      width: 30%;
+    }
+    50% {
+      width: 30%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      left: 50%;
+    }
+    95% {
+      left: 120%;
+    }
+    to {
+      left: 100%;
+    }
+  }
+  .gds-progress-bar[value]::before {
+    content: none;
+  }
+  .gds-progress-bar[value]::-webkit-progress-value {
+    background-color: #45b400;
+  }
+  .gds-progress-bar[value]::-moz-progress-bar {
+    background-color: #45b400;
+  }
+  .gds-progress-bar[value]::-ms-fill {
+    background-color: #45b400;
+  }
+
+  .gds-progress-indicator {
+    display: flex;
+    width: 100%;
+  }
+  .gds-progress-indicator__step {
+    flex-grow: 1;
+    height: 0.5rem;
+    margin-right: 0.125rem;
+    background-color: #e9e9e9;
+  }
+  .gds-progress-indicator__step.-done {
+    background-color: #45b400;
+  }
+  .gds-progress-indicator__step:last-child {
+    margin-right: 0;
+  }
+
+  .file-list {
+    th:first-child,
+    td:first-child {
+      width: auto;
+    }
+  }
+
+  .filename {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .col-name {
+    width: 40%;
+  }
+
+  .col-status {
+    width: 30%;
+  }
+
+  .col-actions {
+    width: 0.1%;
+  }
+
+  .progress-wrapper {
+    display: flex;
+  }
+
+  .progress,
+  .indicator {
+    height: 0.5rem;
+  }
+
+  .gds-progress-indicator__step {
+    margin-right: 0;
+  }
+
+  .progress {
+    color: #45b400; // IE fallback for ::-ms-fill
+
+    // Progress
+    &::-webkit-progress-value {
+      background-color: #45b400;
+    }
+
+    &::-moz-progress-bar {
+      background-color: #45b400;
+    }
+
+    &::-ms-fill {
+      background-color: #45b400;
+    }
+  }
+
+  .progress-text {
+    display: block;
+    margin-top: 0.125rem;
+  }
+
+  .error-text {
+    color: #bb000c;
+  }
+
+  .success-text {
+    color: #308800;
+  }
+
+  .remove {
+    padding: 0 0.5rem;
+    font-size: 1.5em;
+    color: #868686;
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+
+    &:hover,
+    &:focus {
+      color: #bb000c;
+    }
+  }
+}

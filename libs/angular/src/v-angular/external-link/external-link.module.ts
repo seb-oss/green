@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { NgvExternalLinkDirective } from './external-link.directive'
+import { NggvExternalLinkDirective } from './external-link.directive'
 
 @NgModule({
-  declarations: [NgvExternalLinkDirective],
+  declarations: [NggvExternalLinkDirective],
   imports: [CommonModule],
-  exports: [NgvExternalLinkDirective],
+  exports: [NggvExternalLinkDirective],
 })
-export class NgvExternalLinkDirectiveModule {}
+export class NggvExternalLinkDirectiveModule {}

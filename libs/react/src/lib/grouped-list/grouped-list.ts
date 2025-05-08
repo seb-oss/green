@@ -4,10 +4,11 @@ import { createComponent } from '@lit/react'
 import {
   GdsGroupedList,
   GdsListItem,
-} from '@sebgroup/green-core/components/grouped-list/index.js'
+} from '@sebgroup/green-core/components/grouped-list/grouped-list.component'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
+GdsGroupedList.define()
 registerTransitionalStyles()
 
 export const GroupedList = createComponent({

@@ -1,6 +1,11 @@
 <!-- LABEL -->
 <ng-container *transloco="let t; read: scope">
-  <label [id]="id + '-label'" class="sdv-field-label hide-if-empty" [attr.for]="id + '-toggle'">
+  <label
+    [id]="id + '-label'"
+    class="gds-field-label hide-if-empty"
+    [attr.for]="id + '-toggle'"
+    *ngIf="labelContentTpl || label"
+  >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
     ></ng-template>
@@ -10,7 +15,7 @@
         {{ label }}
         <span
           *ngIf="optional === true || (required !== true && optional !== false)"
-          class="sdv-field-label--optional"
+          class="gds-field-label--optional"
         >
           ({{ t('label.optional') }})
         </span>
@@ -19,83 +24,118 @@
   </label>
 
   <!-- DESCRIPTION -->
-  <div class="description">{{ description }}</div>
+  <div class="description" *ngIf="description">{{ description }}</div>
 
   <!-- LOCKED INPUT -->
   <ng-container *ngIf="locked">
-    <div
-      [id]="id + '-input'"
-      class="nggv-field--locked"
-      [attr.name]="name"
-      [attr.value]="state"
-      [attr.role]="role"
-      [attr.aria-labelledby]="id + '-label ' + id + '-input'"
-    >
-      <span *ngIf="!state" class="unset-state">-</span>
-      <ng-container *ngIf="state">
-        <ng-template
-          *ngTemplateOutlet="
-            selectedContentTpl || defaultSelectedContentTpl;
-            context: { $implicit: state }
-          "
-        >
-        </ng-template>
-      </ng-container>
-    </div>
+    <ng-template
+      *ngTemplateOutlet="
+        lockedTpl || defaultLockedTpl;
+        context: { $implicit: state }
+      "
+    ></ng-template>
+    <ng-template #defaultLockedTpl>
+      <div
+        [id]="id + '-input'"
+        class="nggv-field--locked"
+        [attr.name]="name"
+        [attr.value]="state"
+        [attr.role]="role"
+        [attr.aria-labelledby]="id + '-label ' + id + '-input'"
+      >
+        <span *ngIf="!state" class="unset-state">-</span>
+        <ng-container *ngIf="state">
+          <ng-template
+            *ngTemplateOutlet="
+              selectedContentTpl || defaultSelectedContentTpl;
+              context: { $implicit: state }
+            "
+          >
+          </ng-template>
+        </ng-container>
+      </div>
+    </ng-template>
   </ng-container>
 
   <!-- INPUT -->
   <ng-container *ngIf="!locked">
-    <div #input [id]="id + '-input'" class="dropdown">
-      <button
-        [id]="id + '-toggle'"
-        [disabled]="disabled"
-        type="button"
-        class="nggv-field-dropdown__label toggle"
-        [class.nggv-field--error]="invalid"
-        aria-haspopup="listbox"
-        [attr.data-thook]="thook + '-toggle'"
-        [attr.aria-expanded]="expanded"
-        [attr.aria-labelledby]="id + '-label ' + id + '-toggle'"
-        (click)="toggleDropdown()"
-      >
-        <ng-template
-          *ngTemplateOutlet="
-            selectedContentTpl || defaultSelectedContentTpl;
-            context: { $implicit: state }
+    <div class="gds-input-wrapper">
+      <div #input [id]="id + '-input'" class="dropdown">
+        <button
+          [id]="id + '-toggle'"
+          [disabled]="disabled"
+          type="button"
+          class="nggv-field-dropdown__label toggle"
+          [class.nggv-field--error]="invalid"
+          role="combobox"
+          aria-owns="listbox"
+          aria-haspopup="listbox"
+          aria-controls="listbox"
+          [attr.data-thook]="thook + '-toggle'"
+          [attr.aria-expanded]="expanded"
+          [attr.aria-labelledby]="
+            ariaLabel ? null : id + '-label ' + id + '-toggle'
           "
+          [attr.aria-label]="ariaLabel || null"
+          (click)="toggleDropdown()"
         >
-        </ng-template>
-      </button>
-
-      <nggv-dropdown-list
-        #dropDownList
-        [options]="options"
-        [scrollOffset]="scrollOffset"
-        [state]="state"
-        [expanded]="expanded"
-        [optionContentTpl]="optionContentTpl"
-        [textToHighlight]="textToHighlight"
-        (selectedValueChanged)="onSelectChange($event)"
-      >
-      </nggv-dropdown-list>
-    </div>
-    <!-- ERRORS -->
-    <label
-      class="sdv-field-notice sdv-field-notice--error"
-      [attr.for]="id + '-input'"
-      *ngIf="invalid && (error || ngControl?.invalid)"
-    >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
-      <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
-          {{ t('error.field' + error?.code, error?.params) }}
+          <span>
+            <ng-template
+              *ngTemplateOutlet="
+                selectedContentTpl || defaultSelectedContentTpl;
+                context: { $implicit: state }
+              "
+            >
+            </ng-template>
+          </span>
+        </button>
+        <nggv-dropdown-list
+          #dropDownList
+          [options]="options"
+          [scrollOffset]="scrollOffset"
+          [state]="state"
+          [expanded]="expanded"
+          [optionContentTpl]="optionContentTpl"
+          [groupLabelTpl]="groupLabelTpl"
+          [textToHighlight]="textToHighlight"
+          (closed)="setExpanded(false)"
+          (selectedValueChanged)="onSelectChange($event)"
+        >
+        </nggv-dropdown-list>
+      </div>
+      <!-- ERRORS -->
+      <div class="gds-form-item__footer error-wrapper">
+        <span
+          class="form-info form-info--error"
+          [attr.for]="id + '-input'"
+          *ngIf="invalid && (error || ngControl?.invalid)"
+        >
+          <span class="error-icon">
+            <gds-icon-triangle-exclamation
+              width="16"
+              height="16"
+              [solid]="true"
+              *nggCoreElement
+            ></gds-icon-triangle-exclamation>
+          </span>
+          <span
+            *ngIf="error; else errorsRef"
+            [attr.data-thook]="thook + '-errorlabel'"
+            >{{ error }}</span
+          >
         </span>
-      </ng-template>
-    </label>
-
-    <!-- CHILDREN -->
-    <ng-content></ng-content>
+        <ng-template #errorsRef>
+          <span
+            *ngIf="firstError as error"
+            [attr.data-thook]="thook + '-errorlabel'"
+          >
+            {{ t('error.field' + error?.code, error?.params) }}
+          </span>
+        </ng-template>
+      </div>
+      <!-- CHILDREN -->
+      <ng-content></ng-content>
+    </div>
   </ng-container>
 
   <ng-template #defaultSelectedContentTpl let-state>

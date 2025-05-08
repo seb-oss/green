@@ -1,9 +1,25 @@
 import { configureLocalization } from '@lit/localize'
 
 import { sourceLocale, targetLocales } from '../../generated/locale-codes'
+import * as templates_da from '../../generated/locales/da'
+import * as templates_de from '../../generated/locales/de'
+import * as templates_fi from '../../generated/locales/fi'
+import * as templates_fr from '../../generated/locales/fr'
+import * as templates_it from '../../generated/locales/it'
+import * as templates_nl from '../../generated/locales/nl'
+import * as templates_no from '../../generated/locales/no'
 import * as templates_sv from '../../generated/locales/sv'
 
-const localizedTemplates = new Map([['sv', templates_sv]])
+const localizedTemplates = new Map([
+  ['sv', templates_sv],
+  ['no', templates_no],
+  ['nl', templates_nl],
+  ['it', templates_it],
+  ['fr', templates_fr],
+  ['fi', templates_fi],
+  ['de', templates_de],
+  ['da', templates_da],
+])
 
 type LocalizationConfig = {
   extraLocales: string[]

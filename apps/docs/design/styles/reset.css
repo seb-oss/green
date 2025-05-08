@@ -76,6 +76,15 @@
       display: none;
     } */
 
+    pre::-webkit-scrollbar {
+      display: none;
+    }
+
+    pre {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     svg {
       &:not(.preview &) {
         height: 1lh;
@@ -92,5 +101,19 @@
       block-size: 32px !important;
       inline-size: 32px !important;
     }
+
+    /* Remove Safari input shadow on mobile */
+    input[type='text'],
+    input[type='email'] {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
   }
+}
+
+[data-sonner-toaster] [data-icon] svg {
+  fill: currentColor !important;
+  stroke: #fff !important;
+  stroke-width: 0 !important;
 }

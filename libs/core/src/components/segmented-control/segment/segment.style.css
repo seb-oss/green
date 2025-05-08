@@ -7,9 +7,9 @@
   button {
     appearance: none;
     background: transparent;
-    border-radius: calc(infinity * 1px);
+    border-radius: var(--gds-sys-space-max);
     border-width: 0;
-    color: var(--gds-sys-color-content-content);
+    color: var(--gds-sys-color-l3-content-tertiary);
     cursor: pointer;
     flex-grow: 1;
     flex-shrink: 0;
@@ -21,7 +21,16 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 100%;
-    transition: 0.1s;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s,
+      outline-color 422ms;
+
+    outline-width: var(--gds-size-3xs);
+    outline-style: solid;
+    outline-offset: -2px;
+    outline-color: transparent;
 
     &:disabled {
       cursor: not-allowed;
@@ -33,7 +42,7 @@
     :host(:not([selected])) button:hover {
       background-color: color-mix(
         in srgb,
-        var(--gds-sys-color-state-layers-state-black-dim1),
+        var(--gds-sys-color-l3-states-light-hover),
         transparent
       );
 
@@ -44,7 +53,10 @@
   }
 
   button:focus-visible {
-    outline: 2px solid #000;
-    outline-offset: -2px;
+    outline-color: color-mix(
+      in srgb,
+      transparent,
+      var(--gds-sys-color-l3-content-tertiary) 100%
+    );
   }
 }

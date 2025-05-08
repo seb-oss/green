@@ -87,6 +87,20 @@ describe('Inputs', () => {
       render(<EmailInput ref={ref} />)
       expect(ref.current).toBeInstanceOf(HTMLInputElement)
     })
+    it('Should set the correct aria-live value', () => {
+      const { container } = render(
+        <EmailInput
+          label="Radio button"
+          validator={{ message: 'Error', indicator: 'error' }}
+          aria-live="off"
+        />,
+      )
+      expect(
+        container
+          .querySelector('.gds-form-item__footer')
+          ?.getAttribute('aria-live'),
+      ).toEqual('off')
+    })
   })
   describe('NumberInput', () => {
     it('renders', () => {
@@ -124,6 +138,20 @@ describe('Inputs', () => {
       const ref = React.createRef<HTMLInputElement>()
       render(<NumberInput ref={ref} />)
       expect(ref.current).toBeInstanceOf(HTMLInputElement)
+    })
+    it('Should set the correct aria-live value', () => {
+      const { container } = render(
+        <NumberInput
+          label="Radio button"
+          validator={{ message: 'Error', indicator: 'error' }}
+          aria-live="off"
+        />,
+      )
+      expect(
+        container
+          .querySelector('.gds-form-item__footer')
+          ?.getAttribute('aria-live'),
+      ).toEqual('off')
     })
   })
   describe('TextInput', () => {
@@ -257,6 +285,20 @@ describe('Inputs', () => {
     const ref = React.createRef<HTMLInputElement>()
     render(<TextInput ref={ref} />)
     expect(ref.current).toBeInstanceOf(HTMLInputElement)
+  })
+  it('Should set the correct aria-live value', () => {
+    const { container } = render(
+      <TextInput
+        label="Radio button"
+        validator={{ message: 'Error', indicator: 'error' }}
+        aria-live="off"
+      />,
+    )
+    expect(
+      container
+        .querySelector('.gds-form-item__footer')
+        ?.getAttribute('aria-live'),
+    ).toEqual('off')
   })
 })
 

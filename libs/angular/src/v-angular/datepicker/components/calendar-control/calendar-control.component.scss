@@ -1,0 +1,66 @@
+@use '@sebgroup/chlorophyll/scss/components/button/mixins' as buttons;
+@use '@sebgroup/chlorophyll/scss/common';
+
+:host {
+  display: flex;
+  padding: 0.25rem;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.25rem;
+
+  .nggv-calendar-select {
+    --sg-border-radius: 4px;
+    --sg-border-width: 1px;
+    --sg-border-color: #868686;
+    @include common.padding-horizontal(5);
+    @include common.padding-vertical(4);
+    @include common.add-border-radius();
+    @include common.add-border();
+    @include common.add-border-color();
+    @include common.add-focus();
+
+    appearance: auto;
+    background: #fff;
+    color: #333;
+    display: block;
+    flex: 1;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 2rem;
+    max-height: 2rem;
+    max-width: 100%;
+    min-height: 2rem;
+    padding-right: 3rem;
+    padding: 0 0.5em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 6rem;
+  }
+
+  button.nggv-prev-button,
+  button.nggv-next-button {
+    --sg-border-radius: 4px;
+    --sg-border-width: 0;
+    --sg-border-color: transparent;
+    @include buttons.reset;
+    @include buttons.base;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    padding: 0 0.75em;
+
+    @include common.media-breakpoint-down('md') {
+      width: 3em;
+      height: 3em;
+    }
+
+    &:hover {
+      background-color: #e9e9e9;
+    }
+
+    @media (max-width: 35.98em) {
+      min-width: initial;
+    }
+  }
+}

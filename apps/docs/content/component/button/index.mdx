@@ -5,20 +5,22 @@ date: 2023-12-22
 tags: forms, button
 ---
 
-## Overview
-
 A button serve as an interactive element that enables users to perform an action or make a choice with a simple click or tap. To decide which kind of button/buttons and putting them in the right order is key to make sure users know how to take the right action. A good rule of thumb is to use only one primary action in each context. 
+
+
+## Anatomy
+<Figma id="anatomy" caption="Anatomy of button" />
 
 ## Buttons
 
 We have a group of different buttons used for specific purposes.
 
 <Grid columns="1; s{2} m{3}" gap="s">
-  <Figma node="227-1446" caption="Default button" />
-  <Figma node="227-1455" caption="Icon button" />
-  <Figma node="227-1458" caption="Floating action button" />
-  <Figma node="227-9028" caption="Split button" />
-  <Figma node="227-9030" caption="Next and back button" />
+  <Figma id="default-button" caption="Default button" />
+  <Figma id="icon-button" caption="Icon button" />
+  <Figma id="fab-button" caption="Floating action button" />
+  <Figma id="split-button" caption="Split button" />
+  <Figma id="next-back-button" caption="Next and back button" />
 </Grid>
 
 ### Default button
@@ -27,8 +29,8 @@ The default button is our most used button. It comes in primary, secondary and t
 
 The default button can be used as the positive, negative and inverted type. 
 <Grid columns="1; s{2}" gap="s">
-  <Figma node="227-15292" caption="Primary, secondary and tertiary" />
-  <Figma node="227-15605" caption="Positive and negative" />
+  <Figma id="default-prio" caption="Primary, secondary and tertiary" />
+  <Figma id="default-pos-neg" caption="Positive and negative" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -41,16 +43,13 @@ The icon button comes in primary, secondary, and tertiary. In the sizes small, m
 
 The icon button can be used as the positive, negative and inverted type also when the context needs it. 
 
-<Grid columns="1; s{2} m{3}" gap="s">
-  <Figma node="227-1363" caption="Icon button – default and positive" />
-  <Figma node="227-1372" caption="Tonal and custom tonal" />
-  <Figma node="227-1375" caption="Tonal custom combinations on alert ribbon" />
+<Grid columns="1; s{2} m{2}" gap="s">
+  <Figma id="icon-button" caption="Icon button – default and positive" />
+  <Figma id="icon-button-custom" caption="Tonal and custom tonal" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
 
-<Grid columns="1; s{2}" gap="s">
-<div>
 ### Floating action button
 
 Only used for functions central to the user experience, such as support and help features that needs to be accessible at all times.
@@ -58,8 +57,9 @@ Only used for functions central to the user experience, such as support and help
 The button is always floating visible in the users viewport, typically in the lower right corner. This button can be used with an icon only.
 
 Used only as primary.
-</div>
-<Figma node="227-17491" caption="Floating action button" />
+ 
+<Grid columns="1; s{2}" gap="s">
+  <Figma id="fab" caption="Floating action button" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -73,8 +73,8 @@ The users can click on the dropdown arrow to reveal a dropdown menu providing se
 The split button comes in both primary and secondary.
 
 <Grid columns="1; s{2}" gap="s">
-  <Figma node="227-18284" caption="Split button – primary and secondary" />
-  <Figma node="574-5488" caption="Split button – active with dropdown" />
+  <Figma id="split-1" caption="Split button – primary and secondary" />
+  <Figma id="split-2" caption="Split button – active with dropdown" />
 </Grid>
 
 ### Next and back button
@@ -83,9 +83,9 @@ Used inside flows to signal the direction forward or backward.
 
 Back button comes in both primary and secondary state depending on what suits the content. The next button comes as primary only.
 <Grid columns="1; s{2} m{3}" gap="s">
-  <Figma node="227-18340" caption="Next button" />
-  <Figma node="227-18349" caption="Back button – primary" />
-  <Figma node="227-18352" caption="Back button – secondary" />
+  <Figma id="next" caption="Next button" />
+  <Figma id="back-1" caption="Back button – primary" />
+  <Figma id="back-2" caption="Back button – secondary" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -98,11 +98,11 @@ Back button comes in both primary and secondary state depending on what suits th
 - **Tonal**: Only used internal in other components (to match a background).
 - **Inverted**: Used to place on other than the normal backgrounds (typically darker tones).
 
-<Figma node="232-2274" caption="Button variants" height="300" />
+<Figma id="variants" caption="Button variants" height="300" />
 
 <GdsDivider size="4xl" opacity="0.2" />
 
-<Grid columns="1; s{2}" gap="s">
+ 
 ## Hierarchy
 
 It's critical to find the right balance of what buttons to use. It's up to us as designers to guide and inform the users to take the right action.
@@ -110,8 +110,9 @@ It's critical to find the right balance of what buttons to use. It's up to us as
 - **Primary buttons** require the most attention from your users.
 - **Secondary buttons**, as the name says, is the second most likely choice.
 - **Tertiary buttons** are used for less used or unwanted actions that is still relevant to find.
-
-<Figma node="232-3072" caption="From the top – primary, secondary, tertiary" />
+ 
+<Grid columns="1; s{2}" gap="s">
+  <Figma id="hierarchy" caption="From the top – primary, secondary, tertiary" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -121,9 +122,9 @@ It's critical to find the right balance of what buttons to use. It's up to us as
 The default button and icon button comes in a few different sizes. 32, 40 and 48 px. 
 
 <Grid columns="1; s{2} m{3}" gap="s">
-  <Figma node="232-3342" caption="Small – used in confined spaces, like tables." />
-  <Figma node="232-3344" caption="Medium – the default size. When in doubt, go for medium." />
-  <Figma node="232-3346" caption="Large – only used in large areas like a hero." />
+  <Figma id="small" caption="Small – used in confined spaces, like tables." />
+  <Figma id="medium" caption="Medium – the default size. When in doubt, go for medium." />
+  <Figma id="large" caption="Large – only used in large areas like a hero." />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -138,8 +139,8 @@ A general rule is to always strive to place buttons in connection to the items t
 - **Right:** Modals and flows move the user from left to right, therefore the buttons are placed to the right. 
 
 <Grid columns="1; s{2}" gap="s">
-  <Figma node="489-7502" caption="Placement left" />
-  <Figma node="232-3505" caption="Placement right" />
+  <Figma id="placement-desktop-1" caption="Placement left" />
+  <Figma id="placement-desktop-2" caption="Placement right" />
 </Grid>
 
 ### In a mobile device
@@ -149,8 +150,8 @@ A general rule is to always strive to place buttons in connection to the items t
 - **Three buttons**, consider the need for all of them. "cancel or close" might be x in the top right corner. Worst case scenario: place  two buttons side by side and one tertiary button under.
 
 <Grid columns="1; s{2}" gap="s">
-  <Figma node="489-7723" caption="One button in mobile" />
-  <Figma node="489-7651" caption="Side by side in mobile" />
+  <Figma id="placement-mobile-1" caption="One button in mobile" />
+  <Figma id="placement-mobile-2" caption="Side by side in mobile" />
 </Grid>
 
 <GdsDivider size="4xl" opacity="0.2" />
@@ -162,13 +163,9 @@ To be explored.
 <GdsDivider size="4xl" opacity="0.2" />
 
 ## Do’s and don’ts
-
-**Do**
-
-- Only use one primary action in the same context of several actions.
+Only use one primary action in the same context of several actions.
 
 <Grid columns="1; s{2}" gap="s">
-  <Do>
-    <Figma node="312-3091" />
-  </Do>
+    <Figma type="do" id="do" />
+    <Figma type="dont" id="dont" />
 </Grid>

@@ -1,0 +1,6 @@
+{
+  "include": ["src/tokens/**/*.json"],
+  "log": {
+    "verbosity": "verbose"
+  }
+}

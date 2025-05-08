@@ -162,7 +162,12 @@ export const Modal = ({
     }
     if (isOpen && modalRef.current && enableBodyScrollLock) {
       // Disable scrolling on the body when the modal is open
-      disableBodyScroll(modalRef.current)
+      disableBodyScroll(modalRef.current, {
+        allowTouchMove: (el) => {
+          // Allow touchmove for elements inside modal, its required for scroll to work on iOS devices
+          return modalRef.current?.contains(el) || false
+        },
+      })
     } else if (modalRef.current) {
       // Enable scrolling on the body when the modal is closed
       enableBodyScroll(modalRef.current)

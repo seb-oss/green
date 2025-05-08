@@ -1,24 +1,24 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { NgvTooltipDirective } from '@sebgroup/green-angular/src/v-angular/tooltip'
-import { NgvInfoCircleComponent } from './info-circle.component'
+import { NggvTooltipDirective } from '@sebgroup/green-angular/src/v-angular/tooltip'
+import { NggvInfoCircleComponent } from './info-circle.component'
 
-describe('[NgvCore]', () => {
+describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // InfoCircleComponent - constructor()
   // ----------------------------------------------------------------------------
   describe('InfoCircleComponent - constructor()', () => {
-    let component: NgvInfoCircleComponent
-    let fixture: ComponentFixture<NgvInfoCircleComponent>
+    let component: NggvInfoCircleComponent
+    let fixture: ComponentFixture<NggvInfoCircleComponent>
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
-        declarations: [NgvInfoCircleComponent, NgvTooltipDirective],
+        declarations: [NggvInfoCircleComponent, NggvTooltipDirective],
       }).compileComponents()
     }))
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(NgvInfoCircleComponent)
+      fixture = TestBed.createComponent(NggvInfoCircleComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
     })

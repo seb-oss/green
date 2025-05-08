@@ -5,12 +5,12 @@ const style = css`
   @layer base {
     :host {
       cursor: pointer;
-      color: var(--gds-sys-color-primary-text);
-      background-color: var(--gds-sys-color-container-container-dim1);
-      font-size: var(--gds-text-size-label-input-medium);
-      line-height: var(--gds-text-line-height-label-input-medium);
-      padding-inline: var(--gds-space-m);
-      padding-block: var(--gds-space-xs);
+      color: var(--gds-sys-color-l3-content-secondary);
+      background-color: var(--gds-sys-color-l3-background-secondary);
+      font-size: var(--gds-sys-text-size-label-input-medium);
+      line-height: var(--gds-sys-text-line-height-label-input-medium);
+      padding-inline: var(--gds-sys-space-m);
+      padding-block: var(--gds-sys-space-xs);
     }
   }
 `

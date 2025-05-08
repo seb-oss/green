@@ -1,5 +1,6 @@
 :host {
   display: flex;
-  width: 100%;
   position: relative;
+  bottom: initial !important;
+  transform: translateY(-1rem) !important;
 }

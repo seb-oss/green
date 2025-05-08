@@ -1,6 +1,6 @@
-import { LitElement } from 'lit'
 import { property, state } from 'lit/decorators.js'
 
+import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { watch } from '../../utils/decorators/watch'
 
@@ -11,7 +11,7 @@ import { watch } from '../../utils/decorators/watch'
  * A spinner for a date part. Only inteded to be used by the datepicker component.
  */
 @gdsCustomElement('gds-date-part-spinner')
-export class GdsDatePartSpinner extends LitElement {
+export class GdsDatePartSpinner extends GdsElement {
   static formAssociated = true
 
   @property({ type: Number })

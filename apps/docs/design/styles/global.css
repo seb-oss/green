@@ -1,4 +1,5 @@
 @import 'reset.css';
+@import 'motion.css';
 
 @layer core {
   html {

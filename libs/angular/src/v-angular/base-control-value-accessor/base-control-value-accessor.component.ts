@@ -32,7 +32,7 @@ import { takeUntil } from 'rxjs/operators'
 @Injectable() // Workaround for Compodoc https://github.com/compodoc/compodoc/issues/984
 @Component({ template: '' }) // Required with Angular ivy compiler
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
-export class NgvBaseControlValueAccessorComponent
+export class NggvBaseControlValueAccessorComponent
   implements AfterViewInit, OnInit, OnDestroy, ControlValueAccessor, Validator
 {
   /** Custom template for displaying the content of the label.
@@ -40,6 +40,12 @@ export class NgvBaseControlValueAccessorComponent
    */
   @ContentChild('labelTpl', { read: TemplateRef })
   labelContentTpl?: TemplateRef<undefined>
+
+  /** Custom template for displaying value when the input is locked.
+   * Specified by nesting an `<ng-template #lockedTpl let-state>Custom locked content state: {{ state }}</ng-template>`.
+   */
+  @ContentChild('lockedTpl', { read: TemplateRef })
+  lockedTpl?: TemplateRef<undefined>
 
   /** Reference to the native child input element. */
   @ViewChild('input', { read: ElementRef }) inputRef?: ElementRef
@@ -61,8 +67,14 @@ export class NgvBaseControlValueAccessorComponent
   @Input() value: any
   /** An error string to be shown under invalid inputs. Overwrites any form errors. */
   @Input() error?: string
+  /** @deprecated Only one error should be shown under each field. */
+  @Input() errorList?: string[]
+  /** @deprecated Icon is always added before error. */
+  @Input() withErrorIcon?: boolean = false
   /** Description of the child input element. Both visibly and as `aria-label`. */
   @Input() description?: string
+  /** Determines if the label used to display the "description" text will be rendered to DOM */
+  @Input() descriptionIsVisible = true
   /** If set to true, the browser will try to automatically set focus to the child input element. */
   @Input() autofocus = false
   /** Deafult value of the child input element. Used when resetting child element. */

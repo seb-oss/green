@@ -2,13 +2,32 @@ import { Meta } from '@storybook/blocks'
 
 <Meta title="Install" />
 
-# React Green
+# Green React
+
+Green React is a collection of React components for the Green design system. It provides a set of reusable components that can be easily integrated into your React applications.
+
+## Legacy code
+
+A migration is currently in progress, where the React-specific implementations are being replaced by framework-agnostic web components. This means that some components in this library are plain React components, and some are simply wrappers for web components. Some wrappers are more complex than others in order to maintain the same API as the original React components.
+
+When this work was started, React still did not have proper support for web components, and these wrappers were necessary. Since then, things have changed a bit, and React 19 now does have proper support for web components. This means that we now also export React-versions of the web components from the Green Core library (`@sebgroup/green-core`). A benefit of this is these components will always be up to date and provide a 1:1 feature parity with the web components. Therefore, going forward, the recommended way of consuming React components is to import them directly from `@sebgroup/green-core/react`. You can find more information about this in the [Green Core Storybook](https://storybook.seb.io/latest/core/?path=/docs/green-design-system--docs).
+
+### In this library
+
+Of the components in this library, these are currently wrappers, and use a web component from Green Core under the hood:
+- Context menu
+- Dropdown
+- Datepicker
+- Popover
+- Filter chips
+- Grouped list
+- Segmented control
+
+The rest are regular React components, and will be migrated or deprecated over time. Prefer to use the web components whenever possible.
+
+Another this to be aware of is that the regular React components rely on the Chlorophyll CSS framework for styling (this is included as a dependency), while the web components have styles included and encapsulated in shadow DOM out of the box.
 
 ## Install
-
-**Please note** - You don't have to install chlorophyll which is the core lib containing common css if you install this lib as it has a dependency to chlorophyll.
-
-### React
 
 Install React components npm package using the following
 

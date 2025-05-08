@@ -4,11 +4,40 @@ import { Meta, Markdown } from '@storybook/addon-docs'
 
 # Transitional styles
 
-Transitional Styles is a temporary mechanism that we have in place to facilitate the transition of the old 2016 design version over to the new 2023 design version.
+Transitional Styles is a temporary mechanism that we have in place to facilitate the transition from the old 2016 design version over to the new 2023 design version.
+
+## How it works
 
 The idea is that the Core Components will use the 2023 design by default, but will also have alternative "transitional styles" representing the 2016 version. By calling a function called `register()` (or `registerTransitionalStyles()` to do it globally), the consuming application can enable these styles, which will then override the 2023 styling by replacing the internal Contructed Stylesheet of the components.
 
-The mechanism consist of a few different parts:
+This example will import and apply 2016 design to buttons in the document:
+
+```ts
+// Here we import the transitional styles for the button component. It's a good practice to only
+// import the styles for the specific components you need.
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+
+// This call is what will cause the styles to get applied to the button components
+ButtonStyles.register()
+```
+
+### Granular control
+
+When transitional styles have been loaded for a component, it will apply to all instances of that component in the document. However, let's say you are adopting the new style for buttons in your application, but for some legacy reason, you still need some buttons to use the 2016 style. In that case, you can use `gds-theme` to override the transitional styles for that specific button:
+
+```html
+<gds-theme design-version="2023">
+  <gds-button>Button with 2023 style</gds-button>
+</gds-theme>
+````
+
+`gds-theme` gives you granual control over which parts of the application should use the 2023 design and which should use the 2016 design.
+
+***Note:** The 2016 styles expects some CSS variables from Chlorophyll to be present. In many cases, Chlorophyll is already used in the document, but in case it isn't, you can add these variables by using wrapping in `<gds-theme>`. You also need to import and register transitional styles for the gds-theme component in that case.*
+
+## Info for library developers
+
+Transitional Styles consist of a few different parts:
 
 - A singleton called `TransitionalStyles`, which keeps track of all registered transistional styles.
 - The actual stylesheets for each component. To support Transitional Styles, a component should have a separate file named `component-name.styles.trans.ts`, which exports a function called `register()`. This function registers the transitional styles with the singleton.
@@ -17,7 +46,7 @@ The mechanism consist of a few different parts:
 
 If `register()`, or `registerTransitionalStyles()`, has not been called, the components will simple use the default 2023 styling.
 
-# How to add transitional styles to a component
+### How to add transitional styles to a component
 
 1. Create these files in the component directory: `component-name.trans.styles.ts` and `component-name.trans.styles.scss`. The `scss`-file can import styles from Chlorophyll, through releative paths (not from node_modules). If necessarary, the styles can be copied from Chlorophyll and modified as needed.
 2. The `.ts` module should a) import the `scss` for this component, b) import the `trans.ts` from any sub-components that this components depends on, and c) export a `register()` function. The register function should register the imported styles with the `TransistionalStyles` singleton and also call `register()` on the imported sub-components. Check for example `gds-dropdown` for reference.
@@ -26,7 +55,7 @@ If `register()`, or `registerTransitionalStyles()`, has not been called, the com
 
 That should be it! Now, when the `register()` function is called, the component should switch to the transitional styles.
 
-# Tree-shaking
+### Tree-shaking
 
 In order for transitional styles to be tree-shakable, it's important to make it possible to import the styles separately for individual components. This means that every component also needs to be responsible for forwarding the `register()` call to any sub-components it depends on. This includes both "primitives" and regular components. For example, `gds-datepicker` use both `gds-dropdown` (component), `gds-popover` (primitive) and `gds-calendar` (primitive). So in the `register()` function of `gds-datepicker` we also need to call the `register()` function of all these sub-components. Also, if a primitive depends on other primitives or components, the same applies there. The point is that the consumber of Green Core should only need to remember to call `register()` on the component they are using, and not have to worry about what other components are used internally.
 

@@ -1,8 +1,8 @@
 @layer base {
   :host {
-    background-color: var(--gds-sys-color-container-container-dim1);
-    border: 0.25rem solid var(--gds-sys-color-container-container-dim1);
-    border-radius: calc(infinity * 1px);
+    background-color: var(--gds-sys-color-l3-background-secondary);
+    border: 0.25rem solid transparent;
+    border-radius: var(--gds-sys-space-max);
     box-sizing: border-box;
     contain: layout;
     display: inline-flex;
@@ -39,10 +39,10 @@
     align-items: center;
     appearance: none;
     aspect-ratio: 1;
-    background-color: var(--gds-sys-color-container-container-dim1);
-    border-radius: calc(infinity * 1px);
+    border-radius: var(--gds-sys-space-max);
     border-width: 0;
-    color: var(--gds-sys-color-content-content);
+    background-color: var(--gds-sys-color-l3-background-secondary);
+    color: var(--gds-sys-color-l3-content-tertiary);
     cursor: pointer;
     display: flex;
     font-size: 1rem;
@@ -57,8 +57,8 @@
       &:hover {
         background-color: color-mix(
           in srgb,
-          var(--gds-sys-color-state-layers-state-black-dim1),
-          var(--gds-sys-color-container-container-dim1)
+          var(--gds-sys-color-l3-background-secondary),
+          var(--gds-sys-color-l3-states-light-hover)
         );
       }
     }
@@ -93,8 +93,8 @@
   }
 
   #indicator {
-    background-color: var(--gds-sys-color-container-container-bright);
-    border-radius: calc(infinity * 1px);
+    background-color: var(--gds-sys-color-l3-background-quarternary);
+    border-radius: var(--gds-sys-space-max);
     height: 100%;
     left: 0;
     position: absolute;

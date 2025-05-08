@@ -1,5 +1,55 @@
 # Changelog
 
+## 3.6.19
+
+### Patch Changes
+
+- 3a1f67a: fix naming of css variables in checkboxtokens
+
+## 3.6.18
+
+### Patch Changes
+
+- a538e40: **Field base:** fixing colours in darkmode
+
+## 3.6.17
+
+### Patch Changes
+
+- 00c48da: **Radio group:** Add missing gds prefix to horizontal modifier
+
+## 3.6.16
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+
+## 3.6.15
+
+### Patch Changes
+
+- 0babf00: **Chlorophyll:** Checkbox & Radio Button hover styles not to hint selected icon
+
+## 3.6.14
+
+### Patch Changes
+
+- 0213060: Chaning dropdown trigger colors to correct ones
+- Updated dependencies [7fc5d17]
+  - @sebgroup/fonts@2.0.3
+
+## 3.6.13
+
+### Patch Changes
+
+- 3331d19: Tabs not selected now have same size as selected tabs
+
+## 3.6.12
+
+### Patch Changes
+
+- 85759d1: Wizard next button icon alignment fix
+
 ## 3.6.11
 
 ### Patch Changes

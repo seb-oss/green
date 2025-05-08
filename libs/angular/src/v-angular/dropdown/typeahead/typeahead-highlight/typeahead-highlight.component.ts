@@ -5,7 +5,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core'
   templateUrl: './typeahead-highlight.component.html',
   styleUrls: ['./typeahead-highlight.component.scss'],
 })
-export class NgvTypeaheadHighlightComponent implements OnChanges {
+export class NggvTypeaheadHighlightComponent implements OnChanges {
   /** The text that is displayed in the dropdown list */
   @Input() textContent?: string
   /** The substring that should be highlighted within textContent */

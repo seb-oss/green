@@ -8,4 +8,4 @@ import { SlugPipe } from './slug.pipe'
   imports: [CommonModule],
   exports: [SlugPipe],
 })
-export class NggSlugPipeModule {}
+export class NggvSlugPipeModule {}

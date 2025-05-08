@@ -12,7 +12,7 @@
  * potentially have its own version of Green.
  *
  * There is a (proposal)[https://github.com/WICG/webcomponents/blob/gh-pages/proposals/Scoped-Custom-Element-Registries.md]
- * for enabling user instantiated CustomElementRegistry scoped to a ShodowRoot, but as of
+ * for enabling user instantiated CustomElementRegistry scoped to a ShadowRoot, but as of
  * mid 2023 this is still only available in Chrome canary behind experimental flags.
  *
  * ## Solution
@@ -57,7 +57,6 @@
  */
 
 import { html as litHtml } from 'lit'
-import { customElement } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
 
@@ -65,6 +64,11 @@ export const VER_SUFFIX = '-gdsvsuffix'
 
 declare global {
   var __gdsElementLookupTable: { [VER_SUFFIX]: Map<string, string> } // eslint-disable-line no-var
+}
+
+type Constructor<T = GdsElement> = {
+  // tslint:disable-next-line:no-any
+  new (...args: any[]): T
 }
 
 export class ScopedElementRegistry {
@@ -79,30 +83,8 @@ export class ScopedElementRegistry {
   }
 }
 
-function scopedCustomElement(tagName: string) {
-  const versionedTagName = tagName + VER_SUFFIX
-  ScopedElementRegistry.instance.set(tagName, versionedTagName)
-
-  return function (constructor: any) {
-    constructor.prototype.gdsElementName = tagName
-
-    // Bail out if the element is already registered
-    if (customElements.get(versionedTagName))
-      return (_constructor: GdsElement) => false
-
-    return customElement(versionedTagName)(constructor) as any
-  }
-}
-
-function unscopedCustomElement(tagName: string) {
-  // We still need to add elements to the lookup table since we use this lookup table to
-  // validate a custom element even though we are not using scoping
-  ScopedElementRegistry.instance.set(tagName, tagName)
-
-  return function (constructor: any) {
-    constructor.prototype.gdsElementName = tagName
-    return customElement(tagName)(constructor)
-  }
+export interface GdsCustomElementOptions {
+  dependsOn?: (typeof GdsElement)[]
 }
 
 /**
@@ -120,11 +102,37 @@ function unscopedCustomElement(tagName: string) {
  * @category Decorator
  * @param tagName The tag name of the custom element to define.
  */
-export const gdsCustomElement = (tagName: string) => {
-  if ((globalThis as any).GDS_DISABLE_VERSIONED_ELEMENTS) {
-    return unscopedCustomElement(tagName)
+export const gdsCustomElement = (
+  tagName: string,
+  options?: GdsCustomElementOptions,
+) => {
+  return function <T extends Constructor<GdsElement>>(constructor: T): T {
+    return class Component extends constructor {
+      gdsElementName = tagName
+      static isDefined = false
+      static define() {
+        if (Component.isDefined) return
+
+        const isVersioningDisabled = (globalThis as any)
+          .GDS_DISABLE_VERSIONED_ELEMENTS
+        const nameToRegister = isVersioningDisabled
+          ? tagName
+          : tagName + VER_SUFFIX
+
+        // If the element is already registered, we assume it is compatible with the current version, so we can bail out
+        if (customElements.get(nameToRegister)) return
+
+        Component.isDefined = true
+
+        ScopedElementRegistry.instance.set(tagName, nameToRegister)
+        customElements.define(nameToRegister, Component)
+
+        if (options?.dependsOn) {
+          options.dependsOn.forEach((dep) => dep.define())
+        }
+      }
+    }
   }
-  return scopedCustomElement(tagName)
 }
 
 /**

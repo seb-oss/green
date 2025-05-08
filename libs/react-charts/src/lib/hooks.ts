@@ -9,7 +9,7 @@ import {
 } from '@sebgroup/green-charts'
 
 interface ChartProps {
-  chartRef: RefObject<HTMLDivElement>
+  chartRef: RefObject<HTMLDivElement | null>
   settings: ChartSettings
 }
 

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import {
   GdsButton,
   GdsCard,
-  GdsContainer,
+  GdsDiv,
   GdsFlex,
   GdsText,
 } from '$/import/components'
@@ -93,13 +93,19 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
     <GdsFlex
       flex-direction="column"
       position="sticky"
-      inset="60px 0 0 0"
+      inset="70px 0 0 0"
       overflow="hidden auto"
       max-height="calc(100vh - 72px)"
       width="100%"
     >
-      <GdsCard padding="m" max-height="max-content">
-        <GdsText tag="span" font-size="heading-xs" margin="0 0 s">
+      <GdsCard
+        padding="m"
+        max-height="max-content"
+        variant="primary"
+        border-radius="s"
+        gap="s"
+      >
+        <GdsText tag="span" font-size="heading-xs">
           On this page
         </GdsText>
         <GdsFlex flex-direction="column" gap="xs">
@@ -143,7 +149,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                       {item[0].text}
                     </GdsText>
                   </Link>
-                  <GdsContainer
+                  <GdsDiv
                     transform={
                       openSections[item[0].slug] ? 'scaleY(-1)' : 'none'
                     }
@@ -155,7 +161,7 @@ const Navigator: React.FC<TOCProps> = ({ headings, component }) => {
                     >
                       <IconChevronTop />
                     </GdsButton>
-                  </GdsContainer>
+                  </GdsDiv>
                 </GdsFlex>
                 {openSections[item[0].slug] && (
                   <GdsFlex flex-direction="column" margin="0 0 0 2xs">

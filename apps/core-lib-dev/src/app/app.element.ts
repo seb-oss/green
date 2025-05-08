@@ -2,7 +2,8 @@ import { css, LitElement } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { choose } from 'lit/directives/choose.js'
 
-import { html } from '@sebgroup/green-core/scoping'
+import { html } from '@sebgroup/green-core/scoping.js'
+
 // import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
 import '@sebgroup/green-core/components/text/index.js'
@@ -22,13 +23,17 @@ import '@sebgroup/green-core/components/img/index.js'
 import '@sebgroup/green-core/components/video/index.js'
 import '@sebgroup/green-core/components/menu-button/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
-
+import '@sebgroup/green-core/components/spinner/index.js'
+import '@sebgroup/green-core/components/textarea/index.js'
+import '@sebgroup/green-core/components/select/index.js'
 import '../components/header'
 import './chlorophyll.scss'
 import './form-validation.element'
 import './datepicker.element'
 import './calendar.element'
+import './spinner.element'
 import './login/login.element'
+import './plain-form-controls.element'
 
 export class AppElement extends LitElement {
   static styles = css`
@@ -42,10 +47,10 @@ export class AppElement extends LitElement {
   }
 
   @property()
-  accessor popoverOpen: boolean = false
+  popoverOpen: boolean = false
 
   @state()
-  accessor currentView = 'login'
+  currentView = 'login'
 
   connectedCallback() {
     super.connectedCallback()
@@ -68,7 +73,7 @@ export class AppElement extends LitElement {
     return html`
       <gds-theme color-scheme="light">
         <gds-header></gds-header>
-        <gds-container padding="s{0} m{s} l{4xl}">
+        <gds-div padding="s{0} m{s} l{4xl}">
           ${choose(
             this.currentView,
             [
@@ -82,10 +87,15 @@ export class AppElement extends LitElement {
                 () => html`<datepicker-example></datepicker-example>`,
               ],
               ['calendar', () => html`<calendar-example></calendar-example>`],
+              ['spinner', () => html`<spinner-example></spinner-example>`],
+              [
+                'plain-form-controls',
+                () => html`<plain-form-controls></plain-form-controls>`,
+              ],
             ],
             () => html`No view selected`,
           )}
-        </gds-container>
+        </gds-div>
       </gds-theme>
     `
   }

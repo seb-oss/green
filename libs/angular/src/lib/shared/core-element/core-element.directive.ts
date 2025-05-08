@@ -11,6 +11,7 @@ import {
 } from '@angular/core'
 
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { NggCoreRenderer } from '../core-renderer'
 
 @Directive({
   selector: '[nggCoreElement]',
@@ -24,15 +25,17 @@ export class NggCoreElementDirective implements OnInit {
   private readonly template = inject(TemplateRef<any>)
 
   ngOnInit() {
-    this.vcr.clear()
-    const originalCreateElement = this.renderer.createElement
+    if (!(this.renderer instanceof NggCoreRenderer)) {
+      this.vcr.clear()
 
-    this.renderer.createElement = (name: string, _namespace: string) => {
-      return this.document.createElement(getScopedTagName(name))
+      const originalCreateElement = this.renderer.createElement
+      this.renderer.createElement = (name: string, _namespace: string) => {
+        return this.document.createElement(getScopedTagName(name))
+      }
+
+      this.cdr.markForCheck()
+      this.viewRef = this.vcr.createEmbeddedView(this.template)
+      this.renderer.createElement = originalCreateElement
     }
-
-    this.viewRef = this.vcr.createEmbeddedView(this.template)
-    this.renderer.createElement = originalCreateElement
-    this.cdr.markForCheck()
   }
 }

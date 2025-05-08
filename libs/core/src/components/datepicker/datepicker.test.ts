@@ -5,12 +5,14 @@ import sinon from 'sinon'
 
 import type { GdsDatepicker } from '@sebgroup/green-core/components/datepicker'
 
+import { GdsButton } from '@sebgroup/green-core/components/button'
+import { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 import { GdsPopover } from '@sebgroup/green-core/components/popover'
 import {
   getScopedTagName,
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
-import { clickOnElement, onlyDate } from '../../utils/testing'
+import { clickOnElement, isWebKit, onlyDate } from '../../utils/testing'
 import { GdsDatePartSpinner } from './date-part-spinner'
 
 import '@sebgroup/green-core/components/datepicker'
@@ -75,15 +77,20 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      const separator = el.shadowRoot!.querySelector<HTMLSpanElement>(
-        '.field .input > span',
-      )!
+      const separator =
+        el.shadowRoot!.querySelector<HTMLSpanElement>('.separator')!
 
-      await expect(spinners[0].getAttribute('aria-label')).to.equal('Day')
+      await expect(spinners[0].getAttribute('aria-label').trim()).to.equal(
+        'Day',
+      )
       await expect(spinners[0].length).to.equal(2)
-      await expect(spinners[1].getAttribute('aria-label')).to.equal('Month')
+      await expect(spinners[1].getAttribute('aria-label').trim()).to.equal(
+        'Month',
+      )
       await expect(spinners[1].length).to.equal(2)
-      await expect(spinners[2].getAttribute('aria-label')).to.equal('Year')
+      await expect(spinners[2].getAttribute('aria-label').trim()).to.equal(
+        'Year',
+      )
       await expect(spinners[2].length).to.equal(4)
       await expect(separator.textContent).to.equal('/')
       await expect(el.dateformat).to.equal('d/m/y')
@@ -233,7 +240,7 @@ describe('<gds-datepicker>', () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`,
       )
-      const label = el.shadowRoot!.querySelector<HTMLLabelElement>('#label')!
+      const label = el.shadowRoot!.querySelector<HTMLLabelElement>('label')!
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
@@ -512,6 +519,122 @@ describe('<gds-datepicker>', () => {
       await expect(onlyDate(el.value!)).to.equal(
         onlyDate(new Date('2024-01-01')),
       )
+    })
+
+    it('should not overflow the year when trying to increase max year', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2034-12-10"
+          min="2014-01-01"
+          max="2034-12-31"
+          open
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
+      )!
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
+      const nextMonthButton = el.shadowRoot!.querySelector<GdsButton>(
+        `${getScopedTagName('gds-button')}[aria-label="Next month"]`,
+      )!
+
+      nextMonthButton.click()
+
+      await aTimeout(0)
+      await yearDropdown.updateComplete
+
+      await expect(monthDropdown.value).to.equal('11')
+      await expect(yearDropdown.value).to.equal('2034')
+    })
+
+    it('should not overflow the year when trying to decrease min year', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2014-01-10"
+          min="2014-01-01"
+          max="2034-12-31"
+          open
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
+      )!
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
+      const prevMonthButton = el.shadowRoot!.querySelector<GdsButton>(
+        `${getScopedTagName('gds-button')}[aria-label="Previous month"]`,
+      )!
+
+      prevMonthButton.click()
+
+      await aTimeout(0)
+      await monthDropdown.updateComplete
+      await yearDropdown.updateComplete
+
+      await expect(monthDropdown.value).to.equal('0')
+      await expect(yearDropdown.value).to.equal('2014')
+    })
+
+    // Testing clear and today buttons
+    it('should show the today button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker open></gds-datepicker>`,
+      )
+      expect(el.test_todayButton).to.exist
+    })
+
+    it('should not show the today button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker hide-today-button open></gds-datepicker>`,
+      )
+      expect(el.test_todayButton).to.not.exist
+    })
+
+    it('should show the clear button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker clearable open></gds-datepicker>`,
+      )
+      expect(el.test_clearButton).to.exist
+    })
+
+    it('should not show the clear button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker open></gds-datepicker>`,
+      )
+      expect(el.test_clearButton).to.not.exist
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('should pass axe smoketest', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2014-01-10"
+          min="2014-01-01"
+          max="2034-12-31"
+          open
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+      await expect(el).to.be.accessible({
+        ignoredRules: ['color-contrast'],
+      })
+    })
+
+    it('should have a label for #spinner-0', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker label="Date"></gds-datepicker>`,
+      )
+      const label =
+        el.shadowRoot!.querySelector<HTMLLabelElement>('[for="spinner-0"]')!
+      expect(label).to.exist
     })
   })
 })

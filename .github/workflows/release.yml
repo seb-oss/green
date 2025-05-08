@@ -64,7 +64,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iostokens
-          path: ./dist/libs/tokens/ios/*
+          path: ./dist/libs/tokens/2023/ios/*
 
   deployiostokens:
     name: Deploy Swift Package

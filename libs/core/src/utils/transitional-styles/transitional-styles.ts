@@ -10,6 +10,7 @@ import * as Datepicker from '../../components/datepicker/datepicker.trans.styles
 import * as Dropdown from '../../components/dropdown/dropdown.trans.styles'
 import * as FilterChips from '../../components/filter-chips/filter-chips.trans.styles'
 import * as GroupedList from '../../components/grouped-list/grouped-list.trans.styles'
+import * as Input from '../../components/input/input.trans.styles'
 import * as SegmentedControl from '../../components/segmented-control/segmented-control.trans.styles'
 import { GdsTheme } from '../../components/theme/theme'
 import * as Theme from '../../components/theme/theme.trans.styles'
@@ -32,6 +33,7 @@ export const registerTransitionalStyles = () => {
   SegmentedControl.register()
   FilterChips.register()
   Button.register()
+  Input.register()
 }
 
 declare global {

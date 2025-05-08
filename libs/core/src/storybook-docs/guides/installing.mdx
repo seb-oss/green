@@ -1,7 +1,7 @@
 import { Meta, Markdown } from '@storybook/addon-docs'
 
 <Meta title="Get started" />
- 
+
 ## Install
 
 ```bash
@@ -13,15 +13,115 @@ npm install @sebgroup/green-core
 
 ## Use
 
-There are three main ways you can use Green Core:
+The components in Green Core are standard web components, so you can use them with or without any framework, but since most consumers will be useing Angular or React, some extra convenience features are provided for these frameworks.
 
-- With Lit
-- With Angular
-- With React
+Web components needs to be defined in the custom elements registry before they can be used, and there are a few different ways of handling this:
 
-But that said, the components in Green Core are just regular Web Components, so you can use them with or without any framework.
+- Use a sub-path side-effect import:
+  ```ts
+  import '@sebgroup/green-core/components/button/index.js'
+  ```
+  This will automatically register the component in the custom elements registry, and you can use it immediately, but it will not be tree-shakable, so it will be included in your bundle wheter you use it or not.
 
-### Using Lit
+- Use a pure import and define separately:
+  ```ts
+  // Import the component class
+  import { GdsButton } from '@sebgroup/green-core/pure'
+
+  // Call define to register with the custom elements registry
+  GdsButton.define()
+  ```
+
+- For POCs and prototyping where you just want to gain access to all the components quickly, you can import everything at once:
+  ```ts
+  import '@sebgroup/green-core/everything'
+  ```
+  This will import all components and icons, and register them in the custom elements registry. This is not tree-shakable and not recommended for production use, as it will include everything in your bundle (~700kb).
+
+### Scoping
+Finally, you need to handle [scoping](/docs/concepts-scoping--docs) of the element names. This is done automatically for React, and for Lit and Angular we provide simple solutions (see below), but if you are using the components in some other way, you need to set up your own solution or disable scoping.
+
+For POCs and prototyping, you can disable scoping by setting the `GDS_DISABLE_VERSIONED_ELEMENTS` global variable to `true` before importing any components. This will make all components use their original element names (e.g. `<gds-button>` instead of `<gds-button-abc123>`).
+
+```html
+<head>
+  <script>globalThis.GDS_DISABLE_VERSIONED_ELEMENTS = true</script>
+  ...
+</head>
+```
+
+***Warning:** Never disable scoping for a microfrontend or production application, as this will cause conflicts with other applications using the same components.*
+
+## Using with Angular
+
+Angular has support for using web components directly. To enable this support, you need to do the following:
+
+- Add the `CUSTOM_ELEMENTS_SCHEMA` in the module where you plan to use the components.
+- Provide `NggCoreRenderer` or import `NggCoreWrapperModule` to handle Green Core's element name scoping.
+
+The renderer is more convenient, but the wrapper module can provide more explicit control.
+
+For a more detailed break-down of how to use Green Core components with Angular, and some additional information about use with the router, see the full [Angular guide](/docs/guides-angular--docs).
+
+Below is a minimal example using the renderer.
+
+**In your module:**
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
+
+@NgModule({
+    // Provides `NggCoreRenderer` as a custom renderer
+    providers: [provideCoreRenderer()],
+    // CUSTOM_ELEMENTS_SCHEMA is still needed
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+```
+
+If you need animations, use `provideCoreRendererWithAnimations()` instead, and make sure to import `BrowserAnimationsModule` too.
+
+**In your component:**
+
+```ts
+import '@sebgroup/green-core/components/button/index.js'
+
+// Transitional styles, only if you need the 2016 design
+import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
+```
+
+**In your template:**
+```html
+<gds-button (click)="handleEvent($event)">Click me!</gds-button>
+```
+
+## Using with React
+
+React 19 has built-in support for web components, and Green Core automatically generates typed JSX wrappers for all components and icons. This means you can use the components directly in your JSX templates.
+
+For example:
+
+```ts
+import { GdsButton } from '@sebgroup/green-core/react'
+```
+
+Then, in your JSX template:
+
+```tsx
+<GdsButton rank="secondary" onClick={() => console.log('Hello')}>
+  Click me!
+</GdsButton>
+```
+
+These imports are tree-shakable and the underlying web components will be defined automatically on first use.
+
+For full details on how to use Green Core with React, and how to handle older React versions (pre 19), see the full [React guide](/docs/guides-react--docs).
+
+## Using with Lit
+
+The components in Green core rely on the Lit framework for their internal implementations, and it is of course also possible to use the components in applications or other components using Lit.
+
+Here is a minimal example:
 
 ```ts
 import { css, customElement, LitElement } from 'lit'
@@ -30,7 +130,9 @@ import { css, customElement, LitElement } from 'lit'
 import { html } from '@sebgroup/green-core/scoping'
 
 // Transitional styles applies the current 2016 design language to the components
+// These two linies imports and registers the transitional styles for the button component
 import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
+ButtonStyles.register()
 
 // Import the components that you need
 import '@sebgroup/green-core/components/button/index.js'
@@ -41,9 +143,6 @@ export class MyApp extends LitElement {
 
   connectedCallback() {
     super.connectedCallback()
-
-    // Register transitional styles to get SEB's current visual design
-    ButtonStyles.register()
   }
 
   render() {
@@ -51,72 +150,3 @@ export class MyApp extends LitElement {
   }
 }
 ```
-
-### Using Angular
-
-Angular has support for using web components directly in the template. To enable it, you need to do the following:
-
-Add the `CUSTOM_ELEMENTS_SCHEMA` in the module where you plan to use the components. It is recommended to add this as locally as possible, only on the moduls/components where you need it, and not in the app module.
-
-You also need the `NggCoreWrapperModule` from `@sebgroup/green-angular`.
-
-In your module:
-
-```ts
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule } from '@sebgroup/green-angular'
-
-@NgModule({
-    // Add the NggCoreWrapperModule to the `imports` array
-    imports: [NggCoreWrapperModule],
-    // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-})
-```
-
-In your component:
-
-```ts
-import '@sebgroup/green-core/components/button/index.js'
-
-// Transitional styles
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
-ButtonStyles.register()
-```
-
-Use the webcomponent in your template with the `*nggCoreElement` directive.
-
-In your template:
-
-```html
-<gds-button *nggCoreElement>Click me!</gds-button>
-```
-
-The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same pupose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
-
-### Using React
-
-In most cases, we already exort React wrappers for these components from the `@sebgroup/green-react` package. In those cases you can just use those. But you can also easily create your own wrappers using `@lit/react`.
-
-Here is an example:
-
-```ts
-import React from 'react'
-import { createComponent } from '@lit/react'
-
-import { GdsButton } from '@sebgroup/green-core/component/button/index.js'
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
-
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
-ButtonStyles.register()
-
-export const Button = createComponent({
-  tagName: getScopedTagName('gds-button'),
-  elementClass: GdsButton,
-  react: React,
-  events: { onClick: 'click' }, // Event callbacks need to be explicitly mapped to DOM events
-})
-```
-
-Then you can just use `<Button />` like a regular React component.
- 

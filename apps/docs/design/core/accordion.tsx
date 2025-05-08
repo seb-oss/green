@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
-import { GdsButton, GdsContainer, GdsFlex, GdsText } from '$/import/components'
+import { GdsButton, GdsDiv, GdsFlex, GdsText } from '$/import/components'
 import { IconMinusLarge, IconPlusLarge } from '$/import/icons'
-
-import { GdsButton as GdsButtonCore } from '@sebgroup/green-core/components/button'
-import { GdsContainer as GdsContainerCore } from '@sebgroup/green-core/components/container'
 
 export function Accordion({ children }: { children: React.ReactNode }) {
   return <div className="gds-accordion">{children}</div>
@@ -24,30 +21,9 @@ export interface AccordionItemInterface {
    * */
   labelElementLevel: 2 | 3 | 4 | 5 | 6
   id?: string
-  onClick?: (
-    e:
-      | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
-          MouseEvent
-        >
-      | Event,
-  ) => void
-  onOpen?: (
-    e:
-      | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
-          MouseEvent
-        >
-      | Event,
-  ) => void
-  onClose?: (
-    e:
-      | React.MouseEvent<
-          HTMLButtonElement | GdsContainerCore | GdsButtonCore,
-          MouseEvent
-        >
-      | Event,
-  ) => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event) => void
+  onOpen?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event) => void
+  onClose?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | Event) => void
 }
 
 const AccordionItemIcon = ({ isOpen }: { isOpen: boolean }) => {
@@ -71,17 +47,13 @@ export function AccordionItem({
 }: AccordionItemProps) {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleOnClick = (
-    event:
-      | React.MouseEvent<GdsContainerCore | GdsButtonCore, MouseEvent>
-      | Event,
-  ) => {
-    onClick && onClick(event)
+  const handleOnClick = (event: React.MouseEvent | Event) => {
+    onClick && onClick(event as React.MouseEvent<HTMLButtonElement>)
     setIsOpen((state) => {
       if (!state) {
-        onOpen && onOpen(event)
+        onOpen && onOpen(event as React.MouseEvent<HTMLButtonElement>)
       } else {
-        onClose && onClose(event)
+        onClose && onClose(event as React.MouseEvent<HTMLButtonElement>)
       }
       return !state
     })
@@ -100,16 +72,15 @@ export function AccordionItem({
         width="100%"
         padding="xs 0"
       >
-        <GdsContainer
+        <GdsDiv
           user-select="none"
-          cursor="pointer"
           onClick={(event) => {
             handleOnClick(event)
           }}
           flex="1"
         >
           <GdsText font-size="body-l">{label}</GdsText>
-        </GdsContainer>
+        </GdsDiv>
         <GdsButton
           id={id}
           aria-expanded={isOpen}

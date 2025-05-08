@@ -1,6 +1,10 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
 
+import '@sebgroup/green-core/components/button/index.js'
+import '@sebgroup/green-core/components/menu-button/index.js'
+import '@sebgroup/green-core/components/flex/index.js'
+
 @Component({
   selector: 'green-root',
   templateUrl: './app.component.html',

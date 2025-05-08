@@ -1,10 +1,10 @@
 import { LitElement } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { gdsInitLocalization } from '@sebgroup/green-core/localization'
-import { html } from '@sebgroup/green-core/scoping'
+import { gdsInitLocalization } from '@sebgroup/green-core/localization.js'
+import { html } from '@sebgroup/green-core/scoping.js'
 
-const { setLocale, getLocale } = gdsInitLocalization()
+const { setLocale } = gdsInitLocalization()
 
 @customElement('gds-header')
 export class GdsHeader extends LitElement {
@@ -22,6 +22,14 @@ export class GdsHeader extends LitElement {
     )
   }
 
+  #menuItems = [
+    { text: 'Login', value: 'login' },
+    { text: 'Validation', value: 'form-validation' },
+    { text: 'Datepicker', value: 'datepicker' },
+    { text: 'Calendar', value: 'calendar' },
+    { text: 'Plain Form Controls', value: 'plain-form-controls' },
+  ]
+
   render() {
     return html`
       <gds-flex
@@ -31,45 +39,32 @@ export class GdsHeader extends LitElement {
         background="l1-background-primary"
         position="relative"
         height="4rem"
+        border-width="0 0 4xs"
       >
-        <gds-container display="xs{flex} s{flex} m{flex} l{none}">
+        <gds-div display="xs{flex} s{flex} m{flex} l{none}">
           <gds-context-menu>
             <gds-flex align-items="center" gap="s" slot="trigger">
               Menu
               <gds-icon-bars-three></gds-icon-bars-three>
             </gds-flex>
-            <gds-menu-item @click=${() => this.handleButtonClick('login')}>
-              Login
-            </gds-menu-item>
-            <gds-menu-item
-              @click=${() => this.handleButtonClick('form-validation')}
-            >
-              Validation
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('datepicker')}>
-              Datepicker
-            </gds-menu-item>
-            <gds-menu-item @click=${() => this.handleButtonClick('calendar')}>
-              Calendar
-            </gds-menu-item>
+            ${this.#menuItems.map(
+              (item) =>
+                html`<gds-menu-item
+                  @click=${() => this.handleButtonClick(item.value)}
+                  >${item.text}</gds-menu-item
+                >`,
+            )}
           </gds-context-menu>
-        </gds-container>
-        <gds-container display="xs{none} s{none} m{none} l{flex}">
-          <gds-menu-button @click=${() => this.handleButtonClick('login')}>
-            Login
-          </gds-menu-button>
-          <gds-menu-button
-            @click=${() => this.handleButtonClick('form-validation')}
-          >
-            Validation
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('datepicker')}>
-            Datepicker
-          </gds-menu-button>
-          <gds-menu-button @click=${() => this.handleButtonClick('calendar')}>
-            Calendar
-          </gds-menu-button>
-        </gds-container>
+        </gds-div>
+        <gds-div display="xs{none} s{none} m{none} l{flex}">
+          ${this.#menuItems.map(
+            (item) =>
+              html`<gds-menu-button
+                @click=${() => this.handleButtonClick(item.value)}
+                >${item.text}</gds-menu-button
+              >`,
+          )}
+        </gds-div>
         <gds-flex
           position="2xs{relative} l{absolute}"
           inset="auto 0"

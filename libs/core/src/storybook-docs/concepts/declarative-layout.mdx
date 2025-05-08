@@ -41,29 +41,36 @@ cake and eat it too.
 
 Instead of utility classes, the declarative layout system generates CSS on the fly and injects into the
 shadow roots of components. It does this using something we call `style expression properties`. These properties
-are used to inform the components what CSS it needs to generate, and that CSS is then injected into the Shadow DOM
-of the component.
+are used to inform the component what CSS it needs to generate and inject into its Shadow DOM.
 
 The system introduces a set of layout oriented components:
 
-- `<gds-container>`
+- `<gds-div>`
   - `<gds-grid>`
   - `<gds-flex>`
   - `<gds-card>`
+  - `<gds-text>`
 
-The hierechy in the list here is intentional. `<gds-container>` is the base component, containing most of the properties,
-while the other ones extends this base with specific specializations.
+The hierechy in the list here is intentional. `<gds-div>` is the base component, providing all the base properties,
+while the other ones extend this base with specific defaults, and in some cases, additional properties.
+
+Additionally, some style expression properties are available on other components, where it makes sense. For example,
+`<gds-button>` supports horizontal sizing properties, margin properties and flex/grid child items properties. Check
+the API table for each component to see which properties are available. They are listed under a separate section in
+the API table.
+
+### Responsiveness
 
 Style expression properties allows you to write responsive styles in a compact and declarative way. Here is an example:
 
 ```html
 <!-- Here, we're setting the default padding to `xs`, but increasing it to `m` in `l` viewports -->
-<gds-container padding="xs; l {m}">
+<gds-div padding="xs; l {m}">
   <!-- Similarly, here we default to 1 column, increase to 2 columns in `m` viewpors, and 4 columns in `xl` viewports -->
   <gds-grid columns="1; m {2}; xl {4}">
     <!-- Any HTML element can go as children -->
   </gds-grid>
-</gds-container>
+</gds-div>
 ```
 
 This is a very simple example, but it should give you an idea of how the style expression properties work.
@@ -74,8 +81,8 @@ Media queries can also be expressed as CSS units and as ranges, for example:
 - `>500px, <1000px { ... }` - Above 500px, below 1000px
 
 The value that goes in the media query is usually resolved to a css variable. In the padding example, it would
-resolve to `var(--gds-space-m)`. This is then transformed into a CSS property, typically of the same name as the
-property used on the component. So, here it would be `padding: var(--gds-space-m)`. That means you can also use
+resolve to `var(--gds-sys-space-m)`. This is then transformed into a CSS property, typically of the same name as the
+property used on the component. So, here it would be `padding: var(--gds-sys-space-m)`. That means you can also use
 regular CSS shorthand patterns, like `padding: 1em 2em 3em 4em` by adding more values. They will each resolve to\
 a CSS variable. For example: `padding="xs; l {m xl m xl}"`
 
@@ -87,9 +94,9 @@ to `padding="m"`.
 Psudeo selectors can be added to any media query as a separate value sequence. For example:
 
 ```html
-<gds-container padding="xs; hover: s; l { s; hover: m }">
+<gds-div padding="xs; hover: s; l { s; hover: m }">
   <!-- Any HTML element can go as children -->
-</gds-container>
+</gds-div>
 ```
 
 In the above example, the padding will be `xs` by default, `s` on hover, `m` in `l` viewports, and `m` on hover in `l` viewports.

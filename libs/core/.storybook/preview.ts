@@ -11,6 +11,8 @@ import '../src/components/theme/index.js'
 import '../src/components/button/index.js'
 import '../src/components/grid/index.js'
 
+import { gdsInitLocalization } from '../src/localization.ts'
+
 setCustomElementsManifest(customElements)
 registerTransitionalStyles()
 
@@ -25,7 +27,19 @@ export const globalTypes = {
       dynamicTitle: true,
     },
   },
+  language: {
+    name: 'Language',
+    defaultValue: 'en',
+    toolbar: {
+      icon: 'globe',
+      items: ['en', 'sv', 'da', 'de', 'fi', 'fr', 'it', 'nl', 'no'],
+      showName: true,
+      dynamicTitle: true,
+    },
+  },
 }
+
+const { setLocale } = gdsInitLocalization()
 
 export default {
   parameters: {
@@ -41,6 +55,7 @@ export default {
         order: [
           'Green Design System',
           'Get started',
+          "What's what?",
           'Docs',
           'Components',
           'Style',
@@ -55,6 +70,24 @@ export default {
   },
   decorators: [
     (storyFn: any, context: any) => {
+      // Apply the selected language to the components
+      setLocale(context.globals.language)
+
+      // Hide the Declarative layout category in the argsTables
+      setTimeout(() => {
+        // Find the first <tr> with a title starting with "Hide <category>"
+        const tr = Array.from(document.querySelectorAll('tr')).find((tr) =>
+          tr.getAttribute('title')?.startsWith('Hide Declarative layout'),
+        )
+
+        // Find the first button inside that <tr>
+        const button = tr?.querySelector('button[tabindex="0"]')
+
+        if (button) {
+          ;(button as HTMLElement).click()
+        }
+      }, 10)
+
       return html`<gds-theme .designVersion=${context.globals.style}
         >${storyFn()}</gds-theme
       >`

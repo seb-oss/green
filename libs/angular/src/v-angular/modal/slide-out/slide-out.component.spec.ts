@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 
-import { NgvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
-import { NgvSlideOutComponent } from './slide-out.component'
+import { NggvI18nTestModule } from '@sebgroup/green-angular/src/v-angular/i18n'
+import { NggvSlideOutComponent } from './slide-out.component'
 
 describe('SlideOutComponent', () => {
-  let component: NgvSlideOutComponent
-  let fixture: ComponentFixture<NgvSlideOutComponent>
+  let component: NggvSlideOutComponent
+  let fixture: ComponentFixture<NggvSlideOutComponent>
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NgvSlideOutComponent],
-      imports: [NgvI18nTestModule],
+      declarations: [NggvSlideOutComponent],
+      imports: [NggvI18nTestModule],
     }).compileComponents()
   }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NgvSlideOutComponent)
+    fixture = TestBed.createComponent(NggvSlideOutComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

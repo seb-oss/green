@@ -1,3 +1,6 @@
 export * from './shared.module'
 export * from './on-scroll.directive'
 export * from './core-element'
+export * from './core-renderer'
+export * from './core-control'
+export * from './core-router-link'

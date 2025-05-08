@@ -1,0 +1,1 @@
+export { IconOffice } from '@sebgroup/green-core/react';

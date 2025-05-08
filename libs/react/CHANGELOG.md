@@ -1,5 +1,138 @@
 # Changelog
 
+## 3.28.3
+
+### Patch Changes
+
+- 7e585f8: **Datepicker:** Fix internal change handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
+## 3.28.2
+
+### Patch Changes
+
+- e26efba: **Dropdown:** Adding icon to validation message
+- e26efba: **Checkbox:** Adding icons to validation message
+- Updated dependencies [c2980e1]
+- Updated dependencies [59b22ed]
+  - @sebgroup/green-core@1.78.1
+  - @sebgroup/extract@3.0.3
+
+## 3.28.1
+
+### Patch Changes
+
+- 6846a6c: Datepicker option to not use Clear and Today button
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
+## 3.28.0
+
+### Minor Changes
+
+- 30d27ef: **Icon:** Add 27 new icons
+
+### Patch Changes
+
+- Updated dependencies [30d27ef]
+  - @sebgroup/green-core@1.75.0
+
+## 3.27.1
+
+### Patch Changes
+
+- acb44e2: **Input:** aria-describedby validation message ids are now pemanent. Having them conditionally rendered caused screen read to read out text when attribute was updated.
+- Updated dependencies [8851dbd]
+  - @sebgroup/green-core@1.72.0
+
+## 3.27.0
+
+### Minor Changes
+
+- fe75e49: **TextInput:** aria-live prop for form control footer
+  **TextArea:** aria-live prop for form control footer
+  **RadioGroup:** aria-live prop for form control footer
+  **Select:** aria-live prop for form control footer
+
+### Patch Changes
+
+- fe75e49: **React:** Fixing expandable info & error message for screen readers #2094
+- Updated dependencies [bf967f5]
+  - @sebgroup/green-core@1.71.2
+
+## 3.26.0
+
+### Minor Changes
+
+- 0e6d189: Updates for React 19
+
+### Patch Changes
+
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [0e6d189]
+- Updated dependencies [cd4667d]
+  - @sebgroup/green-core@1.70.0
+
+## 3.25.0
+
+### Minor Changes
+
+- f333bbb: **FormItem:** adding inert to expandable info when closed and adding aria-live region to error message
+
+### Patch Changes
+
+- Updated dependencies [b46f13f]
+  - @sebgroup/green-core@1.69.4
+
+## 3.24.2
+
+### Patch Changes
+
+- 5dd17df: **Input:** Adding validation icon
+- Updated dependencies [5dd17df]
+  - @sebgroup/chlorophyll@3.6.16
+
+## 3.24.1
+
+### Patch Changes
+
+- 277716a: **Modal:** fix scrolling inside modal on iOS
+- Updated dependencies [d529108]
+  - @sebgroup/green-core@1.68.4
+
+## 3.24.0
+
+### Minor Changes
+
+- 34bf172: **Dependencies:** Include React 19 in peer dependency constraint
+
+  This update makes it possible to use @sebgroup/green-react with React 19 without complaints from NPM.
+
+  Note, however, that the library is still not thoroughly tested with React 19, and all our unit tests still run against React 18. So proceed with caution.
+
+## 3.23.1
+
+### Patch Changes
+
+- c259ac4: **Segmented-control:** Update props naming and types
+- Updated dependencies [c259ac4]
+- Updated dependencies [3a9af88]
+- Updated dependencies [776f056]
+  - @sebgroup/green-core@1.63.1
+
+## 3.23.0
+
+### Minor Changes
+
+- 23f052c: **SegmentedControl**: Update to match core component
+
 ## 3.22.0
 
 ### Minor Changes

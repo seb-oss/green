@@ -1,0 +1,145 @@
+<div class="pagination-wrapper" [ngClass]="className" [attr.id]="id">
+  <nav class="custom-pagination">
+    <ng-container *ngIf="useDotNav; else numNav">
+      <ul class="pagination dotnav">
+        <ng-container *ngFor="let num of dotnavList">
+          <li class="page-item" (click)="handleOnChange(num)" [value]="num">
+            <span
+              class="page-dot-link"
+              [ngClass]="{ active: value === num }"
+            ></span>
+          </li>
+        </ng-container>
+      </ul>
+    </ng-container>
+
+    <ng-template #numNav>
+      <ul class="pagination">
+        <ng-container>
+          <li class="page-item" (click)="handleOnChange(value - 1)">
+            <button
+              class="page-link"
+              [attr.title]="previousText"
+              [attr.disabled]="value === 1 ? 'disabled' : null"
+            >
+              <span class="nav-action">
+                <ng-container *ngIf="useTextNav; else angleLeftIcon">
+                  {{ previousText ? previousText : 'Previous' }}
+                </ng-container>
+                <ng-template #angleLeftIcon>
+                  <gds-icon-chevron-left
+                    *nggCoreElement
+                  ></gds-icon-chevron-left>
+                </ng-template>
+              </span>
+            </button>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="useFirstAndLast">
+          <li class="page-item" (click)="handleOnChange(1)">
+            <button
+              class="page-link"
+              [ngClass]="{ active: value === 1 }"
+              [attr.title]="firstText"
+            >
+              <span class="nav-num">{{ 1 }}</span>
+            </button>
+          </li>
+
+          <li class="page-item" *ngIf="showEllipsisStart">
+            <span class="page-link" [attr.title]="'...'">
+              <span class="nav-num">...</span>
+            </span>
+          </li>
+        </ng-container>
+
+        <ng-container *ngFor="let num of list">
+          <li
+            class="page-item"
+            [ngClass]="{ active: value === num }"
+            (click)="handleOnChange(num)"
+            value="num"
+          >
+            <button class="page-link" [ngClass]="{ active: value === num }">
+              <span class="nav-num">{{ num }}</span>
+            </button>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="useFirstAndLast">
+          <li class="page-item" *ngIf="showEllipsisEnd">
+            <span class="page-link" [attr.title]="'...'">
+              <span class="nav-num">...</span>
+            </span>
+          </li>
+
+          <li
+            class="page-item"
+            (click)="handleOnChange(pagingSize)"
+            *ngIf="pagingSize > 1"
+          >
+            <button
+              class="page-link"
+              [ngClass]="{ active: value === pagingSize }"
+              [attr.title]="lastText"
+            >
+              <span class="nav-num">{{ pagingSize }}</span>
+            </button>
+          </li>
+        </ng-container>
+
+        <ng-container>
+          <li class="page-item" (click)="handleOnChange(value + 1)">
+            <button class="page-link" [attr.title]="nextText">
+              <span class="nav-action">
+                <ng-container *ngIf="useTextNav; else angleRightIcon">
+                  {{ nextText ? nextText : 'Next' }}
+                </ng-container>
+                <ng-template #angleRightIcon>
+                  <gds-icon-chevron-right
+                    *nggCoreElement
+                  ></gds-icon-chevron-right>
+                </ng-template>
+              </span>
+            </button>
+          </li>
+        </ng-container>
+
+        <ng-container *ngIf="showGoToPage">
+          <li>
+            <div class="paging-input-wrapper">
+              <div class="label-wrapper">
+                <label for="pageInput" *transloco="let t">
+                  {{ t('label.gotopage') }}
+                </label>
+              </div>
+              <div class="input-wrapper">
+                <input
+                  #pageInput
+                  data-thook="pagination-go-to-input"
+                  min="1"
+                  [max]="pagingSize"
+                  id="pageInput"
+                  class="gds-field"
+                  type="number"
+                  (keydown.enter)="handlePageInput(pageInput.value)"
+                  [ngModel]="value"
+                />
+                <button
+                  type="button"
+                  data-thook="pagination-go-to-button"
+                  (click)="handlePageInput(pageInput.value)"
+                >
+                  <gds-icon-chevron-right
+                    *nggCoreElement
+                  ></gds-icon-chevron-right>
+                </button>
+              </div>
+            </div>
+          </li>
+        </ng-container>
+      </ul>
+    </ng-template>
+  </nav>
+</div>

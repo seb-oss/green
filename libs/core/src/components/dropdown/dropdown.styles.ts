@@ -5,59 +5,24 @@ const style = css`
 
   @layer base {
     :host {
-      display: flex;
-      flex-direction: column;
-      color: var(--gds-sys-color-base800);
-      font-family: inherit;
+      isolation: auto;
+      contain: none;
     }
 
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--gds-space-m);
-      height: var(--gds-space-3xl);
-      border: var(--gds-space-4xs) solid #6f6f6f;
-      border-radius: var(--gds-space-xs);
-      padding-inline: var(--gds-space-m);
+    #field::part(_base) {
       cursor: pointer;
-      box-sizing: border-box;
-      font-size: var(--gds-space-m);
-      font-family: inherit;
+    }
 
-      // TODO: Update colors to use tokens
-      border-color: #6f6f6f;
-      color: #1b1b1b;
-      background-color: #e2e2e2;
+    button#trigger {
+      flex: 0 1 100%;
+      cursor: pointer;
 
-      &.small {
-        height: var(--gds-space-xl);
-        padding: var(--gds-space-s);
-        padding-right: var(--gds-space-xs);
-        font-size: calc(var(--gds-space-s) + 2px);
+      /* This prevents overflow when the text is too long */
+      display: grid;
+    }
 
-        .icon {
-          width: var(--gds-space-l);
-          height: var(--gds-space-l);
-        }
-      }
-
-      &:hover {
-        background-color: #cecece;
-      }
-
-      .icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-        height: var(--gds-space-xl);
-        width: var(--gds-space-xl);
-      }
-
-      &[aria-expanded='true'] ::part(icon) {
-        transform: scaleY(-1);
-      }
+    #trigger:focus {
+      outline: none;
     }
 
     slot[name='trigger'] > span {
@@ -67,41 +32,39 @@ const style = css`
       white-space: nowrap;
     }
 
-    label {
-      font-size: var(--gds-text-size-detail-m);
-      line-height: var(--gds-text-line-height-detail-m);
-      font-weight: var(--gds-text-weight-book);
-      padding-block: var(--gds-space-2xs);
-      font-family: inherit;
-    }
-
     input[type='text'] {
-      border-radius: var(--gds-space-xs);
+      border-radius: var(--gds-sys-space-xs);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       font-size: inherit;
       line-height: inherit;
       border: none;
       outline: none;
-      color: var(--gds-sys-color-base800);
-      border-bottom: 1px solid var(--gds-sys-color-base400);
+      color: var(--gds-sys-color-l3-content-disabled);
+      border-color: var(--gds-sys-color-l3-border-tertiary);
+      border-width: 0 0 var(--gds-sys-space-4xs) 0;
+      border-style: solid;
       width: 100%;
-      padding: var(--gds-space-m);
-      font-weight: var(--gds-text-weight-book);
+      padding: var(--gds-sys-space-m);
+      font-weight: var(--gds-sys-text-weight-regular);
       flex: 1;
       box-sizing: border-box;
       font-family: inherit;
 
       &:focus {
-        border-color: var(--gds-sys-color-base800);
+        border-color: var(--gds-sys-color-l3-border-secondary);
+        color: var(--gds-sys-color-l3-content-tertiary);
       }
 
       &::placeholder {
-        color: currrentColor;
         font-family: inherit;
-        font-weight: var(--gds-text-weight-book);
-        color: var(--gds-sys-color-base800);
+        font-weight: var(--gds-sys-text-weight-book);
+        color: var(--gds-sys-color-l3-content-disabled);
       }
+    }
+
+    [aria-expanded='true'] [slot='trail'] {
+      transform: scaleY(-1);
     }
   }
 `

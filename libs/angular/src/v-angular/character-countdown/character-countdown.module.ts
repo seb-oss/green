@@ -8,4 +8,4 @@ import { CharacterCountdownDirective } from './character-countdown.directive'
   imports: [CommonModule],
   exports: [CharacterCountdownDirective],
 })
-export class NggCharacterCountdownDirectiveModule {}
+export class NggvCharacterCountdownDirectiveModule {}

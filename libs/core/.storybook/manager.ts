@@ -14,10 +14,12 @@ const betaItems = {
   Content: true,
   Style: true,
   'Rich Text': true,
+  Details: true,
   Dialog: true,
   Badge: true,
   Dropdown: true,
   Card: true,
+  Checkbox: true,
   Coachmark: true,
   Container: true,
   Datepicker: true,
@@ -28,10 +30,14 @@ const betaItems = {
   Image: true,
   Mask: true,
   Signal: true,
+  Select: true,
   Spacer: true,
   Text: true,
   Theme: true,
   Video: true,
+  Div: true,
+  Spinner: true,
+  Radio: true,
 }
 
 addons.setConfig({

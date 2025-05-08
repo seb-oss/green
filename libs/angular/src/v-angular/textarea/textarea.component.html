@@ -1,7 +1,7 @@
 <!-- LABEL -->
 <label
   [id]="id + '-label'"
-  class="sdv-field-label hide-if-empty"
+  class="gds-field-label hide-if-empty"
   [attr.for]="id + '-textarea'"
   *transloco="let t; read: scope"
 >
@@ -14,7 +14,7 @@
       {{ label }}
       <span
         *ngIf="optional === true || (required !== true && optional !== false)"
-        class="sdv-field-label--optional"
+        class="gds-field-label--optional"
       >
         ({{ t('label.optional') }})
       </span>
@@ -23,22 +23,32 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="sdv-field-label--small description">{{ description }}</div>
+<div class="form-info description hide-if-empty" *ngIf="description">
+  {{ description }}
+</div>
 
 <!-- LOCKED INPUT -->
 <ng-container *ngIf="locked">
-  <div
-    [id]="id + '-textarea'"
-    class="nggv-field--locked"
-    [attr.name]="name"
-    [attr.value]="state"
-    [attr.role]="role"
-  >
-    <span *ngIf="!state" class="unset-state">-</span>
-    <ng-container *ngIf="state">
-      {{ state }}
-    </ng-container>
-  </div>
+  <ng-template
+    *ngTemplateOutlet="
+      lockedTpl || defaultLockedTpl;
+      context: { $implicit: state }
+    "
+  ></ng-template>
+  <ng-template #defaultLockedTpl>
+    <div
+      [id]="id + '-textarea'"
+      class="nggv-field--locked"
+      [attr.name]="name"
+      [attr.value]="state"
+      [attr.role]="role"
+    >
+      <span *ngIf="!state" class="unset-state">-</span>
+      <ng-container *ngIf="state">
+        {{ state }}
+      </ng-container>
+    </div>
+  </ng-template>
 </ng-container>
 
 <!-- INPUT FIELD -->
@@ -46,7 +56,7 @@
   <textarea
     #input
     [id]="id + '-textarea'"
-    class="sdv-field"
+    class="gds-field"
     [ngClass]="{ 'no-resize': !!rows }"
     [class.nggv-field--error]="invalid"
     [attr.name]="name"
@@ -61,38 +71,58 @@
     [attr.placeholder]="placeholder"
     [attr.aria-label]="description"
     [value]="state"
+    title=""
     (input)="onInput($event)"
     (focus)="onFocus($event)"
     (blur)="onBlur($event)"
   ></textarea>
 
   <!-- ERRORS -->
-  <div class="error-wrapper" *transloco="let t; read: scope">
-    <label
-      class="sdv-field-notice sdv-field-notice--error"
+  <div
+    class="gds-form-item__footer error-wrapper"
+    *transloco="let t; read: scope"
+  >
+    <span
+      class="form-info form-info--error"
       [attr.for]="id + '-textarea'"
       *ngIf="invalid && (error || ngControl?.invalid)"
     >
-      <span *ngIf="error; else errorsRef">{{ error }}</span>
+      <span class="error-icon">
+        <gds-icon-triangle-exclamation
+          width="16"
+          height="16"
+          solid="true"
+          *nggCoreElement
+        ></gds-icon-triangle-exclamation>
+      </span>
+
+      <span
+        *ngIf="error; else errorsRef"
+        [attr.data-thook]="thook + '-errorlabel'"
+        >{{ error }}</span
+      >
       <ng-template #errorsRef>
-        <span *ngIf="firstError as error">
+        <span
+          *ngIf="firstError as error"
+          [attr.data-thook]="thook + '-errorlabel'"
+        >
           {{ t('error.field' + error?.code, error?.params) }}
         </span>
       </ng-template>
-    </label>
+    </span>
 
     <ng-container *ngIf="hasMaxLength">
-      <label
+      <span
         *nggvCharacterCountdown="
           maxlength;
           currentLength: (inputRef?.nativeElement?.value ?? '').length;
           charactersLeft as charactersLeft
         "
-        class="sdv-field-notice"
+        class="form-info form-info--countdown"
         style="text-align: right"
       >
         {{ charactersLeft }} {{ t('label.maxlength') }}
-      </label>
+      </span>
     </ng-container>
   </div>
 

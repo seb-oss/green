@@ -4,10 +4,11 @@ import { createComponent } from '@lit/react'
 import {
   GdsDropdown,
   GdsOption,
-} from '@sebgroup/green-core/components/dropdown/index.js'
+} from '@sebgroup/green-core/components/dropdown/dropdown.component'
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { CoreMenuHeading } from '../context-menu/context-menu'
+import { IconTriangleExclamation } from '../icon/icons/IconTriangleExclamation'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -72,6 +73,7 @@ export interface DropdownOption {
   [key: string]: any
 }
 
+GdsDropdown.define()
 registerTransitionalStyles()
 
 export const CoreDropdown = createComponent({
@@ -88,8 +90,8 @@ export const CoreOption = createComponent({
 })
 
 export interface DropdownProps extends DropdownArgs {
-  onChange?: OnChange,
-  required?: boolean,
+  onChange?: OnChange
+  required?: boolean
 }
 
 export const Dropdown = ({
@@ -153,7 +155,14 @@ export const Dropdown = ({
         onGdsUiState={(e: Event) => onGdsUiState?.(e as CustomEvent)}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
-        {validator && <span slot="message">{validator.message}</span>}
+        {validator && (
+          <div slot="message" style={{ display: 'flex', gap: '0.25rem' }}>
+            {validator.indicator === 'error' && (
+              <IconTriangleExclamation></IconTriangleExclamation>
+            )}
+            {validator.message}
+          </div>
+        )}
         <CoreOption isPlaceholder aria-hidden>
           {texts?.placeholder || 'Select'}
         </CoreOption>

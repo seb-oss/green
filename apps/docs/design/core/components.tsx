@@ -41,20 +41,20 @@ export default function Components({ title, tag }: ComponentsProps) {
     .sort((a, b) => a.title.localeCompare(b.title))
 
   return (
-    <GdsFlex gap="m" flex-direction="column">
+    <GdsFlex gap="m" flex-direction="column" min-width="100%">
       {title && (
         <GdsText tag="h1" font-size="display-s; m{display-m}" margin="0 0 xl 0">
           {title}
         </GdsText>
       )}
-      <GdsGrid columns="1; xs{2} s{2} m{2}" gap="s; s{xl}">
+      <GdsGrid columns="1; xs{2} s{2} m{2} l{3}" gap="s; s{xl}">
         {components.map((component, idx) => {
           const PATH = component.title.replace(' ', '')
           const Preview = examples[PATH]
           return (
             <GdsCard
               key={idx}
-              border="4xs/primary"
+              border="4xs solid primary"
               border-radius="s"
               overflow="hidden"
               padding="0"

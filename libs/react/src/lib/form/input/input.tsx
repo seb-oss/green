@@ -23,32 +23,53 @@ import Group from '../group/group'
 export interface InputProps
   extends IExpandableInformation,
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
-  /** Data test id used for finding elements in test */
+  /**
+   * Data test id used for finding elements in test
+   */
   testId?: string
-  /** Format value on change */
+  /**
+   * Function to format the value on change
+   */
   formatter?: (value: string) => string
-  /** Extra describing text, below the label */
+  /**
+   * Additional descriptive text displayed below the label
+   */
   info?: ReactNode
-  /** Label describing the input */
+  /**
+   * Label text describing the input field
+   */
   label?: string
-  /** Text on the right side of the input, used for unit such as 'kr' or '%' */
+  /**
+   * Text displayed on the right side of the input, typically used for units like 'kr' or '%'
+   */
   unit?: string
-  /** Validation object */
+  /**
+   * Validation object for input validation
+   */
   validator?: IValidator
   /**
-   * Value of input
+   * Current value of the input field
    */
   value?: string | number
-  /** Function called when input value changes */
+  /**
+   * Callback function triggered when the input value changes
+   */
   onChangeInput?: (value: string) => string
-  /** Pass an string that is an id to another element describing the input-field*/
+  /**
+   * ID of another element that describes the input field
+   */
   'aria-describedby'?: string
+  /**
+   * ARIA live region attribute for the form control footer, affecting how error messages are read by screen readers
+   */
+  'aria-live'?: React.AriaAttributes['aria-live']
 }
 
 export const Input = forwardRef(
   (
     {
       'aria-describedby': ariaDescribedBy,
+      'aria-live': ariaLive = 'assertive',
       autoComplete = 'off',
       children,
       className,
@@ -104,10 +125,7 @@ export const Input = forwardRef(
     const showSimpleInput = !label && !info && !expandableInfo
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_group-message`]:
-        !showSimpleInput &&
-        validator?.message !== undefined &&
-        validator.message.length > 0,
+      [`${uuid}_message`]: !showSimpleInput,
       [`${uuid}_info`]: !showSimpleInput && info,
       [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
     })
@@ -146,14 +164,11 @@ export const Input = forwardRef(
         label={label}
         labelInformation={info}
         role={role}
+        validator={validator}
+        aria-live={ariaLive}
       >
         <div className="gds-input-wrapper">
-          <Group
-            groupBorder
-            groupFocus
-            error={validator?.message}
-            id={`${uuid}_group`}
-          >
+          <Group groupBorder groupFocus id={`${uuid}_group`}>
             {input}
             {unit && <span className={spanClassName}>{unit}</span>}
             {children}

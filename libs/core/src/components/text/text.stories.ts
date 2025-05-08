@@ -8,18 +8,22 @@ import '../divider'
 
 import { html } from 'lit'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps'
+
 /**
- * The `gds-text`
- * The gds-text element is designed to display text content flexibly. You can easily change the HTML tag it uses, wrap the text, set a maximum character length, and apply line clamping. It also allows you to adjust the text size based on design tokens that work together with line height and font size.
+ * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
  *
+ * Style expression properties apply to the outer element unless otherwise specified.
  *
- * ## Usage
- *
+ * @beta
  */
 const meta: Meta = {
   title: 'Components/Text',
   component: 'gds-text',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-text'),
+  },
 }
 
 export default meta
@@ -32,82 +36,19 @@ const DefaultParams: Story = {
     },
     controls: { expanded: true },
   },
-  argTypes: {
-    size: {
-      options: [
-        'heading-xl',
-        'heading-l',
-        'heading-m',
-        'heading-s',
-        'heading-xs',
-        'heading-2xs',
-        'detail-m',
-        'detail-s',
-        'detail-xs',
-        'body-l',
-        'body-m',
-        'body-s',
-        'display-2xl',
-        'display-xl',
-        'display-l',
-        'display-m',
-        'display-s ',
-        'preamble-2xl',
-        'preamble-xl',
-        'preamble-l',
-        'preamble-m',
-        'preamble-s',
-        'preamble-xs',
-      ],
-      control: { type: 'select' },
-    },
-    tag: {
-      options: [
-        'h1',
-        'h2',
-        'h3',
-        'h4',
-        'h5',
-        'h6',
-        'p',
-        'span',
-        'em',
-        'mark',
-        'strong',
-      ],
-      control: { type: 'select' },
-    },
-    wrap: {
-      options: ['balance', 'nowrap', 'pretty', 'wrap'],
-      control: { type: 'select' },
-    },
-    length: {
-      control: { type: 'number' },
-    },
-    min: {
-      control: { type: 'number' },
-    },
-    align: {
-      options: ['left', 'center', 'right', 'justify'],
-      control: { type: 'select' },
-    },
-    font: {
-      control: { type: 'string' },
-    },
-  },
 }
 
 /**
- *
- * In order to have more flexibility the tag it self and the sizing are controlled by the user.
- * The `gds-text` accepts the `tag` property which will render the text with the specified tag and the `size` property which will render the text with the specified size based on the tokens
+ * The `tag` property controls the inner element tag name.
  *
  * Example: `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `em`, `mark`, `strong`, `small` etc.
+ *
+ * Depending on which tag you use, different default styles will be applied. Style can be overridden using the `font-size`, `font-weight` and other style expression properties.
  *
  * The default tag is `span` and the default size is `body-m`
  */
 
-export const Card: Story = {
+export const Tags: Story = {
   ...DefaultParams,
   name: 'Tags',
   render: (args) =>
@@ -214,51 +155,8 @@ export const Preamble: Story = {
 }
 
 /**
- * The `gds-text` component has a `lines` property that will clamp the text to the specified number of lines. It can be any number value.
- */
-export const Lines: Story = {
-  name: 'Line Clamp',
-  render: (args) => html`
-    <gds-flex flex-direction="column" gap="2xl">
-      <gds-flex flex-direction="column" gap="m">
-        <gds-divider></gds-divider>
-        <gds-text font-size="body-s">Lines:2</gds-text>
-        <gds-text font-size="display-s" lines="2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </gds-text>
-      </gds-flex>
-      <gds-flex flex-direction="column" gap="m">
-        <gds-divider></gds-divider>
-        <gds-text font-size="body-s">Lines:3</gds-text>
-        <gds-text font-size="display-m" lines="3">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
-        </gds-text>
-      </gds-flex>
-      <gds-flex flex-direction="column" gap="m">
-        <gds-divider></gds-divider>
-        <gds-text font-size="body-s">Lines:4</gds-text>
-        <gds-text font-size="display-l" lines="4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
-          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
-        </gds-text>
-      </gds-flex>
-    </gds-flex>
-  `,
-}
-
-/**
  *
- * The `gds-text` component has a `color` property that will change the text color based on the specified color token.
+ * The `color` property that will change the text color based on the specified color token.
  *
  * e.g. `<gds-text level="1" color="primary"></gds-text>`
  *
@@ -311,7 +209,7 @@ export const Color: Story = {
 }
 
 /**
- * `gds-text` component has a `text-decoration` property that will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
+ * The `text-decoration` property will change the text decoration based on the css values such as `underline`, `overline`, `line-through`, `underline dotted`, `{COLOR} wavy underline` etc.
  *
  *
  * e.g.
@@ -337,4 +235,222 @@ export const Decoration: Story = {
         Wavy Underline
       </gds-text>
     </gds-flex>`,
+}
+
+/**
+ * The `gds-text` component has a `lines` property that will clamp the text to the specified number of lines. It can be any number value.
+ */
+export const Lines: Story = {
+  name: 'Line Clamp',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="2xl">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-divider></gds-divider>
+        <gds-text font-size="body-s">Lines:2</gds-text>
+        <gds-text font-size="display-s" lines="2">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-divider></gds-divider>
+        <gds-text font-size="body-s">Lines:3</gds-text>
+        <gds-text font-size="display-m" lines="3">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-divider></gds-divider>
+        <gds-text font-size="body-s">Lines:4</gds-text>
+        <gds-text font-size="display-l" lines="4">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+          ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
+          sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ *
+ * Check the documentation on `text-wrap` property [here](https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap)
+ *
+ * The `text-wrap` property will change the text wrapping behavior based on the css values such as `wrap`, `nowrap`, `pretty`, `balance`, `stable`.
+ *
+ * e.g.
+ *
+ * ```html
+ * <gds-text text-wrap="pretty">
+ *    ...
+ * </gds-text>
+ * ```
+ */
+export const TextWrap: Story = {
+  name: 'text-wrap',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="m" width="250px">
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary"><code>wrap</code></gds-text>
+        <gds-text text-wrap="wrap">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="code" color="secondary">nowrap</gds-text>
+        <gds-text text-wrap="nowrap">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="code" color="secondary">pretty</gds-text>
+        <gds-text text-wrap="pretty">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="code" color="secondary">balance</gds-text>
+        <gds-text text-wrap="balance">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="code" color="secondary">stable</gds-text>
+        <gds-text text-wrap="stable">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ *
+ * Check the documentation on `text-overflow` property [here](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow)
+ *
+ * The `text-overflow` property will change the text overflow behavior based on the css values such as `clip`, `ellipsis`, `string`.
+ *
+ * e.g.
+ *
+ * ```html
+ * <gds-text overflow-wrap="break-word">
+ *    ...
+ * </gds-text>
+ * ```
+ */
+export const OverflowWrap: Story = {
+  name: 'overflow-wrap',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="m">
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">Normal</gds-text>
+        <gds-text overflow-wrap="normal" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">Anywhere</gds-text>
+        <gds-text overflow-wrap="anywhere" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">Break Word</gds-text>
+        <gds-text overflow-wrap="break-word" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ *
+ * Check the documentation on `white-space` property [here](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
+ *
+ * The `white-space` supports all valid CSS `white-space` values such as `wrap` `collapse` or combined `preserve nowrap` etc.
+ *
+ * e.g.
+ *
+ * ```html
+ * <gds-text white-space="pre-wrap">
+ *    ...
+ * </gds-text>
+ * ```
+ */
+export const WhiteSpace: Story = {
+  name: 'white-space',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="m">
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">normal</gds-text>
+        <gds-text white-space="normal" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">pre</gds-text>
+        <gds-text white-space="pre" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">pre-wrap</gds-text>
+        <gds-text white-space="pre" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-divider></gds-divider>
+      <gds-text>Shorthand</gds-text>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">wrap</gds-text>
+        <gds-text white-space="wrap" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">collapse</gds-text>
+        <gds-text white-space="collapse" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+      <gds-flex flex-direction="column">
+        <gds-text tag="small" color="secondary">preserve nowrap</gds-text>
+        <gds-text white-space="preserve nowrap" font-size="heading-xl">
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
+        </gds-text>
+      </gds-flex>
+    </gds-flex>
+  `,
 }

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
@@ -9,6 +10,8 @@ import '../icon/icons/chevron-bottom.ts'
 import '../flex/flex.js'
 import '../card/card.js'
 import '../menu-button/index.ts'
+
+import { GdsPopover } from './index.ts'
 
 /**
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
@@ -20,6 +23,9 @@ const meta: Meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-popover'),
+  },
 }
 
 export default meta
@@ -59,18 +65,66 @@ export const Usage: Story = {
 }
 
 /**
+ * By default, the popover will close when clicking outside or hitting the escape key. This behavior can be customized by listening to the `gds-ui-state` event and calling `preventDefault()` on the event object when the popover should not close.
+ *
+ * For example:
+ *
+ * ```html
+ * <gds-popover @gds-ui-state=${(e: CustomEvent) => e.detail.reason === 'close' && e.preventDefault()}>...</gds-popover>
+ * ```
+ *
+ * The state change reasons are:
+ * - `show`: The popover is being opened by the user by clicking the trigger.
+ * - `close`: The popover is being closed by the user by clicking outside.
+ * - `cancel`: The popover is being closed by the user by hitting the escape key.
+ */
+export const CancelEvent: Story = {
+  ...DefaultParams,
+  render: () =>
+    html` <gds-popover
+      id="cancellable"
+      @gds-ui-state=${(e: CustomEvent) =>
+        e.detail.reason === 'close' && e.preventDefault()}
+    >
+      <gds-button rank="secondary" slot="trigger">
+        Show popover
+        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+      </gds-button>
+      <div style="padding: 1rem; padding-top: 0">
+        <h3>Customized closing behavior</h3>
+        <p>
+          This popover can only be closed by click the button below or hitting
+          escape.
+        </p>
+        <gds-button
+          rank="primary"
+          @click=${() => {
+            ;(document.getElementById('cancellable') as GdsPopover).open = false
+          }}
+          >Close me!</gds-button
+        >
+      </div>
+    </gds-popover>`,
+}
+
+/**
  * Here is an example of how the popover can be customized with sizing, placement and backdrop.
  */
 export const Customization: Story = {
   ...DefaultParams,
   render: () =>
-    html`<gds-container width="700px" height="250px"><gds-card
-        display="flex"
+    html`<gds-div width="700px" height="250px">
+      <gds-card
+        variant="secondary"
         width="720px"
-        border="0 0 4xs/primary 0"
+        border="4xs"
+        border-width="0 0 4xs"
+        border-radius="0"
+        padding="0"
         position="fixed"
-        background="base-white"
-        style="left: 0; top: 0; z-index: 1000;"
+        flex-direction="row"
+        inset="0 auto auto 0"
+        z-index="1000"
       >
         <gds-popover>
           <gds-menu-button slot="trigger">
@@ -92,5 +146,5 @@ export const Customization: Story = {
         </gds-popover>
     </gds-card>
     <gds-backdrop id="my-backdrop"></gds-backdrop>
-</gds-container>`,
+</gds-div>`,
 }

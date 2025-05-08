@@ -1,0 +1,256 @@
+@use '@sebgroup/chlorophyll/scss/components/table/mixins' as table;
+@use '../../../../chlorophyll/scss/components/form/checkbox/mixins' as checkbox;
+@use '../../../../chlorophyll/scss/components/form/checkbox/tokens';
+@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-mixins;
+
+::ng-deep .gds-table {
+  --gds-ref-pallet-base100: #f8f8f8;
+  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
+  --sg-table-header-background: #1a1a1a;
+  --sg-table-header-color: #fff;
+  --sg-table-cell-padding-x: 0.5rem;
+  --sg-table-cell-padding-y: 0.6875rem;
+  --sg-table-border-width: 1px;
+  --sg-table-border-color: var(--gds-ref-pallet-base600);
+  --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
+  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
+  --sg-table-sort-icon-color-active: #fff;
+  --gds-sys-color-surface: #fff;
+  --gds-ref-pallet-base200: #e8e8e8;
+  --gds-sys-color-base: #333;
+  --gds-sys-shape-corner-small: 0.125rem;
+  --gds-sys-color-blue-dark-2: #007ac7;
+  --gds-sys-shape-corner-medium: 0.25rem;
+
+  @include table.add-table();
+  width: 100%;
+
+  border-bottom: none;
+
+  .web-view {
+    display: table-cell;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
+  tr:hover td {
+    background-color: var(--gds-ref-pallet-base100);
+  }
+
+  .gds-table__numeric-col,
+  .gds-table__numeric-col {
+    text-align: right;
+  }
+
+  thead tr th.gds-table__numeric-col .sg-table-sort {
+    justify-content: end;
+  }
+
+  th button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  tbody {
+    border-bottom: var(--sg-table-border-width) solid var(--sg-table-border-color);
+  }
+
+  td {
+    cursor: pointer;
+  }
+
+  tfoot {
+    border-top: 1px solid;
+    border-bottom: none;
+    font-weight: 500;
+
+    ::ng-deep {
+      td {
+        padding: var(--sg-table-cell-padding-y) var(--sg-table-cell-padding-x);
+      }
+    }
+  }
+
+  th.column {
+    &__check {
+      height: vanilla-px-to-rem(40px - 8px);
+      width: vanilla-px-to-rem(40px);
+
+      div {
+        min-height: 100%;
+      }
+
+      input:checked + label {
+        &::after {
+          top: 0.6rem;
+          display: inline;
+        }
+      }
+
+      label {
+        display: inline;
+        padding: 0;
+        &::before {
+          top: 0.55rem;
+        }
+      }
+    }
+  }
+
+  td.column {
+    &__check {
+      width: vanilla-px-to-rem(40px);
+
+      div {
+        min-height: unset;
+      }
+
+      label {
+        padding: 0;
+        &::before {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  tr.row {
+    &__expand {
+      background-color: var(--gds-ref-pallet-base100);
+
+      .gds-item-field-wrap {
+        display: flex;
+        flex-wrap: nowrap;
+
+        .chevron-field {
+          width: 1.5rem;
+
+          svg {
+            transition: transform 0.3s ease;
+          }
+
+          &[aria-expanded='true'] svg {
+            transform: rotate(-180deg);
+          }
+        }
+      }
+    }
+  }
+
+  @include tokens.add-checkbox-tokens;
+  @include checkbox.add-checkbox();
+
+  .gds-field-checkbox-wrap .form-control:has(input[type='checkbox']) {
+    @include form-mixins.add-form-control;
+    line-height: 1.125rem;
+    padding: 0;
+  }
+
+  #thead-checkbox input[type='checkbox'] ~ i {
+    box-shadow: inset 0 0 0 1px var(--gds-comp-checkbox-container-color);
+    background-color: var(--gds-comp-checkbox-border-color);
+  }
+
+  #thead-checkbox:has(input[type='checkbox']:focus-visible):focus-within {
+    outline-color: var(--sg-table-header-color);
+  }
+
+  #thead-checkbox input[type='checkbox']:hover {
+    &:not(:checked) ~ i {
+      box-shadow: inset 0 0 0 1px #ababab;
+      &::after {
+        border-color: #ababab;
+      }
+    }
+
+    &:checked ~ i {
+      background-color: var(--gds-comp-checkbox-border-color);
+      box-shadow: inset 0 0 0 1px #ababab;
+      &::after {
+        border-color: #ababab;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .gds-table {
+    thead {
+      display: none;
+    }
+
+    .row__expand td:not(:first-child) {
+      display: none;
+    }
+
+    .row__expand td {
+      display: table-cell;
+    }
+
+    .web-view {
+      display: none;
+    }
+
+    .mobile-view {
+      display: flex;
+      align-items: center;
+
+      .mobile-view-field-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+
+        .mobile-view-field {
+          display: flex;
+          flex-direction: column;
+          padding-bottom: 0.3rem;
+
+          &:nth-child(2n + 1) {
+            justify-self: start;
+            align-items: start;
+            text-align: start;
+          }
+
+          &:nth-child(2n) {
+            align-items: end;
+            justify-self: end;
+            text-align: end;
+          }
+        }
+      }
+
+      .nav-chevron-field {
+        width: 1.5rem;
+        padding-left: 0.5rem;
+
+        svg {
+          transition: transform 0.3s ease;
+        }
+
+        &[aria-expanded='true'] svg {
+          transform: rotate(-90deg);
+        }
+      }
+
+      .settings-field {
+        width: 1.5rem;
+        padding: 0 1rem;
+
+        svg {
+          transition: all 0.3s ease;
+        }
+
+        &:hover svg {
+          fill: var(--gds-sys-color-blue-dark-2);
+        }
+      }
+    }
+  }
+}
