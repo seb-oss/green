@@ -211,7 +211,7 @@ export const Separator: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text>v2.0</gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -221,15 +221,15 @@ export const Separator: Story = {
         </gds-flex>
         <gds-card flex="1">
           <gds-breadcrumb>
-            <gds-icon-chevron-right size="s" slot="separator"
-              >/</gds-icon-chevron-right
-            >
+            <gds-icon-chevron-right size="s" slot="separator">
+              /
+            </gds-icon-chevron-right>
             <gds-link href="#">
               <gds-icon-home-open slot="lead"></gds-icon-home-open>
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text>v2.0</gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -319,7 +319,7 @@ export const fontSize: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text>v2.0</gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -336,7 +336,7 @@ export const fontSize: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text color="secondary"> v2.0 </gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -352,7 +352,7 @@ export const fontSize: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text color="secondary"> v2.0 </gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -368,7 +368,7 @@ export const fontSize: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text color="secondary"> v2.0 </gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -401,7 +401,7 @@ export const Gap: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text color="secondary"> v2.0 </gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -418,7 +418,7 @@ export const Gap: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text color="secondary"> v2.0 </gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
@@ -434,7 +434,7 @@ export const Gap: Story = {
             </gds-link>
             <gds-link href="#"> Blog </gds-link>
             <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
+            <gds-text color="secondary"> v2.0 </gds-text>
           </gds-breadcrumb>
         </gds-card>
       </gds-flex>
