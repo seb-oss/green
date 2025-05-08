@@ -3,8 +3,10 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './breadcrumb'
-import './breadcrumb-item/breadcrumb-item'
+import '../link'
+import '../context-menu'
 import '../icon/icons/home-open'
+import '../icon/icons/chevron-right'
 
 const meta: Meta = {
   title: 'Components/Breadcrumb',
@@ -20,85 +22,22 @@ type Story = StoryObj
  */
 export const Default: Story = {
   render: () => html`
-    <gds-breadcrumb>
-      <span slot="separator">/</span>
-      <gds-breadcrumb-item href="/">
+    <gds-breadcrumb gap="s">
+      <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
+
+      <gds-link href="/home">
         <gds-icon-home-open slot="lead"></gds-icon-home-open>
         Home
-      </gds-breadcrumb-item>
-      <gds-breadcrumb-item href="/products">Products</gds-breadcrumb-item>
-      <gds-breadcrumb-item active>Current Page</gds-breadcrumb-item>
-    </gds-breadcrumb>
-  `,
-}
+      </gds-link>
 
-/**
- * Breadcrumb with dropdown menu
- */
-export const WithDropdown: Story = {
-  render: () => html`
-    <gds-breadcrumb>
-      <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
-      <gds-breadcrumb-item href="/">
-        <gds-icon-home-open slot="lead"></gds-icon-home-open>
-        Home
-      </gds-breadcrumb-item>
-      <gds-breadcrumb-item>
-        <gds-dropdown>
-          <gds-button slot="trigger">Categories</gds-button>
-          <gds-menu>
-            <gds-menu-item>Category 1</gds-menu-item>
-            <gds-menu-item>Category 2</gds-menu-item>
-          </gds-menu>
-        </gds-dropdown>
-      </gds-breadcrumb-item>
-      <gds-breadcrumb-item active>Current Page</gds-breadcrumb-item>
-    </gds-breadcrumb>
-  `,
-}
+      <gds-link href="/components"> Components </gds-link>
 
-/**
- * Breadcrumb with custom icon separator
- */
-export const WithIconSeparator: Story = {
-  render: () => html`
-    <gds-breadcrumb>
-      <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
-      <gds-breadcrumb-item href="/">Home</gds-breadcrumb-item>
-      <gds-breadcrumb-item href="/products">Products</gds-breadcrumb-item>
-      <gds-breadcrumb-item active>Current Page</gds-breadcrumb-item>
-    </gds-breadcrumb>
-  `,
-}
+      <gds-context-menu>
+        <gds-menu-item>Action 1</gds-menu-item>
+        <gds-menu-item>Action 2</gds-menu-item>
+      </gds-context-menu>
 
-/**
- * Complex example with mixed content
- */
-export const ComplexExample: Story = {
-  render: () => html`
-    <gds-breadcrumb>
-      <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
-      <gds-breadcrumb-item href="/">
-        <gds-icon-home-open slot="lead"></gds-icon-home-open>
-        Home
-      </gds-breadcrumb-item>
-      <gds-breadcrumb-item>
-        <gds-dropdown>
-          <gds-button slot="trigger">
-            Categories
-            <gds-icon-chevron-down slot="trail"></gds-icon-chevron-down>
-          </gds-button>
-          <gds-menu>
-            <gds-menu-item>Category 1</gds-menu-item>
-            <gds-menu-item>Category 2</gds-menu-item>
-          </gds-menu>
-        </gds-dropdown>
-      </gds-breadcrumb-item>
-      <gds-breadcrumb-item href="/products">
-        Products
-        <gds-badge slot="trail">New</gds-badge>
-      </gds-breadcrumb-item>
-      <gds-breadcrumb-item active>Current Page</gds-breadcrumb-item>
+      <gds-link href="/current"> Current Page </gds-link>
     </gds-breadcrumb>
   `,
 }
