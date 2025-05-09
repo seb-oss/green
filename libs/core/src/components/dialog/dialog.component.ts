@@ -15,6 +15,7 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
+import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import { styles } from './dialog.styles'
@@ -39,7 +40,7 @@ registerGlobalScrollLockStyles()
  * @slot footer - The footer of the dialog
  */
 @gdsCustomElement('gds-dialog', {
-  dependsOn: [GdsButton, GdsCard, GdsFlex, IconCrossLarge],
+  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossLarge],
 })
 @localized()
 export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
