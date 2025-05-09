@@ -20,10 +20,13 @@
   transform: translateY(calc(100% + 0.5rem));
   z-index: var(--sg-z-index-dropdown);
 
-  .nvda-only {
-    width: 0;
-    height: 0;
+  .visually-hidden:not(:focus):not(:active) {
+    clip-path: inset(50%);
+    height: 1px;
     overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 
   .hidden {
