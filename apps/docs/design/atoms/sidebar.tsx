@@ -12,15 +12,21 @@ import './sidebar.css'
 
 interface NavItem {
   title: string
-  path: string
-  icon: React.ReactNode
-  isExternal?: boolean
+  slug: string
+  icon: string
+}
+
+interface NavigationResponse {
+  title: string
+  slug: string
+  links: NavItem[]
 }
 
 interface Component {
   title: string
   slug: string
   summary?: string
+  path: string
 }
 
 interface ComponentsResponse {
@@ -29,19 +35,47 @@ interface ComponentsResponse {
   lastUpdated: string
 }
 
+const DynamicIcon = ({ iconName }: { iconName: string }) => {
+  const IconComponent = (Core as Record<string, any>)[iconName]
+  if (!IconComponent) {
+    console.warn(`Icon ${iconName} not found`)
+    return null
+  }
+  return <IconComponent />
+}
+
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
   const { actions } = useSettingsContext()
   const router = useRouter()
   const pathName = usePathname()
+  const [navigationItems, setNavigationItems] = useState<NavItem[]>([])
   const [components, setComponents] = useState<Component[]>([])
+
+  useEffect(() => {
+    const fetchNavigation = async () => {
+      try {
+        const response = await fetch('https://api.seb.io/navigation/main.json')
+        const data: NavigationResponse = await response.json()
+        setNavigationItems(data.links)
+      } catch (error) {
+        console.error('Error fetching navigation:', error)
+      }
+    }
+
+    fetchNavigation()
+  }, [])
 
   useEffect(() => {
     const fetchComponents = async () => {
       try {
         const response = await fetch('https://api.seb.io/components.json')
         const data: ComponentsResponse = await response.json()
-        setComponents(data.components)
+        // Sort components by title
+        const sortedComponents = [...data.components].sort((a, b) =>
+          a.title.localeCompare(b.title),
+        )
+        setComponents(sortedComponents)
       } catch (error) {
         console.error('Error fetching components:', error)
       }
@@ -49,56 +83,6 @@ export default function Sidebar() {
 
     fetchComponents()
   }, [])
-
-  const navigationItems: NavItem[] = [
-    {
-      title: 'Home',
-      path: '/',
-      icon: <Core.IconHomeOpen />,
-    },
-    {
-      title: 'Components',
-      path: '/components',
-      icon: <Core.IconSquareGridCircle />,
-    },
-    {
-      title: 'Templates',
-      path: '/templates',
-      icon: <Core.IconDevices />,
-    },
-    {
-      title: 'Foundation',
-      path: '/foundation',
-      icon: <Core.IconBrandGreen />,
-    },
-    {
-      title: 'UX Writing',
-      path: '/ux-writing',
-      icon: <Core.IconPencilWave />,
-    },
-    {
-      title: 'Accessibility',
-      path: '/accessibility',
-      icon: <Core.IconPeopleCircle />,
-    },
-    {
-      title: 'About',
-      path: '/about',
-      icon: <Core.IconCircleInfo />,
-    },
-    {
-      title: 'Github',
-      path: 'https://github.com/seb-oss/green-core',
-      icon: <Core.IconBrandGithub />,
-      isExternal: true,
-    },
-    {
-      title: 'Storybook',
-      path: 'https://storybook.seb.io',
-      icon: <Core.IconBrandStorybook />,
-      isExternal: true,
-    },
-  ]
 
   const handleClick = (path: string, isExternal?: boolean) => {
     return (e: React.MouseEvent<HTMLElement>) => {
@@ -117,6 +101,8 @@ export default function Sidebar() {
 
   const componentsList =
     pathName.startsWith('/components') || pathName.startsWith('/component/')
+
+  const isExternalLink = (slug: string) => slug.startsWith('http')
 
   return (
     <Core.GdsCard
@@ -187,8 +173,8 @@ export default function Sidebar() {
         ) : (
           navigationItems.map((item) => (
             <Core.GdsButton
-              key={item.path}
-              onClick={handleClick(item.path, item.isExternal)}
+              key={item.slug}
+              onClick={handleClick(item.slug, isExternalLink(item.slug))}
               rank="tertiary"
               justify-content={isOpen ? 'space-between' : 'none'}
               size={isOpen ? 'small' : 'medium'}
@@ -197,10 +183,10 @@ export default function Sidebar() {
               {isOpen && item.title}
               {isOpen ? (
                 <Core.GdsFlex align-items="center" slot="trail">
-                  {item.icon}
+                  <DynamicIcon iconName={item.icon} />
                 </Core.GdsFlex>
               ) : (
-                item.icon
+                <DynamicIcon iconName={item.icon} />
               )}
             </Core.GdsButton>
           ))

@@ -1,21 +1,7 @@
-// app/components/page.tsx
-import Link from 'next/link'
-
-import { listComponents } from '../../hooks/mdx'
-
-export default async function ComponentsPage() {
-  const components = await listComponents()
-
+export default function Components() {
   return (
     <div>
-      <h1>Components</h1>
-      <ul>
-        {components.map((slug) => (
-          <li key={slug}>
-            <Link href={`/component/${slug}`}>{slug}</Link>
-          </li>
-        ))}
-      </ul>
+      <span>Components</span>
     </div>
   )
 }
