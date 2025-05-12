@@ -91,6 +91,11 @@ await Promise.all(
             prefix: 'gds-',
             files: [
               {
+                destination: `variables.base.css`,
+                format: 'css/variables',
+                filter: 'no-colors-no-ref',
+              },
+              {
                 destination: `colors.ref.css`,
                 format: 'css/variables',
                 filter: 'is-color-is-ref',
@@ -117,7 +122,7 @@ await Promise.all(
             prefix: 'gds-',
             files: [
               {
-                destination: `variables.scss`,
+                destination: `variables.base.scss`,
                 format: 'scss/variables',
                 filter: 'no-colors-no-ref',
               },
