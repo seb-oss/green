@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation'
+
 import {
   GdsButton,
   GdsCard,
@@ -19,11 +21,23 @@ import {
 import { useSettingsContext, useSettingsValue } from '../../settings'
 
 export default function Header() {
+  const router = useRouter()
   const { settings, actions } = useSettingsContext()
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
 
   const handleClick = () => {
     actions.toggle('UI.Panel.Sidebar')
+  }
+
+  const handleInternalClick = (path: string, isExternal?: boolean) => {
+    return (e: React.MouseEvent<HTMLElement>) => {
+      e.preventDefault()
+      if (isExternal) {
+        window.open(path, '_blank')
+      } else {
+        router.push(path)
+      }
+    }
   }
 
   return (
@@ -32,26 +46,18 @@ export default function Header() {
       width="100%"
       align-items="center"
       justify-content="space-between"
-      padding="xs"
+      padding="l"
       position="relative"
       gap="m"
     >
       <span></span>
-      <GdsFlex height="100%" padding="xs">
-        <GdsCard
-          border-radius="max"
-          flex-direction="row"
-          gap="m"
-          background="primary"
-          padding="s m"
-        >
-          <IconMagnifyingGlass />
-          <GdsText>What are you looking for?</GdsText>
-        </GdsCard>
-      </GdsFlex>
-      <GdsButton size="small" rank="tertiary">
-        <IconDevices size="m" slot="lead"></IconDevices>
-        Web
+
+      <GdsButton
+        size="small"
+        rank="tertiary"
+        onClick={handleInternalClick('/search', false)}
+      >
+        <IconMagnifyingGlass size="m"></IconMagnifyingGlass>
       </GdsButton>
     </GdsFlex>
   )
