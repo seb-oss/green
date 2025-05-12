@@ -17,7 +17,6 @@ export default function SearchPage() {
 
   const getFilteredResults = () => {
     if (!debouncedQuery.trim()) {
-      // Show all items when no search query
       if (filter === 'components') return components
       if (filter === 'templates') return templates
       return [...components, ...templates]
@@ -26,6 +25,7 @@ export default function SearchPage() {
     const results: Array<{
       title: string
       summary?: string
+      status?: string
       slug: string
       related_components?: string[]
     }> = []
@@ -118,24 +118,38 @@ export default function SearchPage() {
               className="result-card"
             >
               <Core.GdsCard height="100%">
-                <Core.GdsFlex gap="s">
-                  <Core.GdsText>{item.title}</Core.GdsText>
-                  <Core.GdsText tag="small" color="secondary">
-                    {'related_components' in item ? 'template' : 'component'}
-                  </Core.GdsText>
-                </Core.GdsFlex>
-                {'summary' in item && item.summary && (
-                  <Core.GdsText tag="p">{item.summary}</Core.GdsText>
-                )}
-                {'related_components' in item &&
-                  (item.related_components?.length ?? 0) > 0 && (
-                    <div className="related-components">
-                      <span>Related: </span>
-                      <Core.GdsBadge>
-                        {(item.related_components ?? []).join(', ')}
-                      </Core.GdsBadge>
-                    </div>
+                <Core.GdsFlex flex-direction="column" gap="m">
+                  <Core.GdsFlex gap="s">
+                    <Core.GdsText>{item.title}</Core.GdsText>
+                    <Core.GdsText tag="small" color="secondary">
+                      {'related_components' in item ? 'template' : 'component'}
+                    </Core.GdsText>
+                  </Core.GdsFlex>
+
+                  {'summary' in item && item.summary && (
+                    <Core.GdsText tag="p" lines="2">
+                      {item.summary}
+                    </Core.GdsText>
                   )}
+
+                  {'related_components' in item &&
+                    (item.related_components?.length ?? 0) > 0 && (
+                      <Core.GdsFlex
+                        flex-direction="column"
+                        gap="s"
+                        margin="auto 0 0 0"
+                      >
+                        <Core.GdsText color="secondary">Related:</Core.GdsText>
+                        <Core.GdsFlex gap="xs" flex-wrap="wrap">
+                          {(item.related_components ?? []).map((component) => (
+                            <Core.GdsBadge key={component}>
+                              {component}
+                            </Core.GdsBadge>
+                          ))}
+                        </Core.GdsFlex>
+                      </Core.GdsFlex>
+                    )}
+                </Core.GdsFlex>
               </Core.GdsCard>
             </Link>
           ))}

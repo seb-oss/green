@@ -8,6 +8,7 @@ interface Component {
   title: string
   slug: string
   summary?: string
+  status?: string
   path: string
 }
 
