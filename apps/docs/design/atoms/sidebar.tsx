@@ -145,7 +145,7 @@ export default function Sidebar() {
       gap="4xl"
       height="100vh"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
-      padding="xs"
+      padding="xs xs m xs"
       width={isOpen ? '260px' : 'max-content'}
     >
       <Core.GdsFlex
