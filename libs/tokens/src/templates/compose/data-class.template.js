@@ -11,7 +11,7 @@ ${options.accessControl ? `${options.accessControl} ` : ''}${
 ${allTokens
   .map(
     (token) =>
-      `  ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''}val ${token.name.replace('sysColor', '')}: Color,`,
+      `  ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''}val ${token.name.replace('sysColorL', 'l')}: Color,`,
   )
   .join('\n')}
 )\n`

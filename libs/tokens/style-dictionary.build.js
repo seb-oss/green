@@ -241,7 +241,7 @@ await Promise.all(
                 },
               },
               {
-                destination: 'Colors/Colors.kt',
+                destination: 'Colors/GdsColorTokens.kt',
                 format: 'compose/class',
                 filter: 'is-color-no-ref',
                 options: {
