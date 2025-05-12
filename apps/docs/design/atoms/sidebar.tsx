@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { _ } from '../../hooks'
@@ -20,6 +20,7 @@ export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
   const { actions } = useSettingsContext()
   const router = useRouter()
+  const pathName = usePathname()
 
   const navigationItems: NavItem[] = [
     {
@@ -87,11 +88,14 @@ export default function Sidebar() {
     actions.toggle('UI.Panel.Sidebar')
   }
 
+  const componentsList = pathName.startsWith('/components')
+
   return (
     <Core.GdsCard
       variant="secondary"
       border-radius="0"
-      justify-content="space-between"
+      justify-content="flex-start"
+      gap="4xl"
       height="100vh"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding="xs"
@@ -126,24 +130,68 @@ export default function Sidebar() {
         )}
       </Core.GdsFlex>
       <Core.GdsFlex flex-direction="column" gap="m">
-        {navigationItems.map((item) => (
-          <Core.GdsButton
-            key={item.path}
-            onClick={handleClick(item.path, item.isExternal)}
-            rank="tertiary"
-            justify-content={isOpen ? 'space-between' : 'none'}
-            size={isOpen ? 'small' : 'medium'}
-          >
-            {isOpen && item.title}
-            {isOpen ? <span slot="trail">{item.icon}</span> : item.icon}
-          </Core.GdsButton>
-        ))}
+        {componentsList && (
+          <>
+            <Core.GdsButton
+              key={'home'}
+              onClick={handleClick('/', false)}
+              rank="tertiary"
+              justify-content={isOpen ? 'flex-start' : 'none'}
+              size={isOpen ? 'small' : 'medium'}
+              align-items="center"
+            >
+              <Core.IconArrowLeft slot="lead" />
+              Home
+            </Core.GdsButton>
+            <Core.GdsButton
+              key={'button'}
+              onClick={handleClick('/button', false)}
+              rank="tertiary"
+              justify-content={isOpen ? 'space-between' : 'none'}
+              size={isOpen ? 'small' : 'medium'}
+              align-items="center"
+            >
+              Button
+            </Core.GdsButton>
+            <Core.GdsButton
+              key={'input'}
+              onClick={handleClick('/input', false)}
+              rank="tertiary"
+              justify-content={isOpen ? 'space-between' : 'none'}
+              size={isOpen ? 'small' : 'medium'}
+              align-items="center"
+            >
+              Input
+            </Core.GdsButton>
+          </>
+        )}
+        {!componentsList &&
+          navigationItems.map((item) => (
+            <Core.GdsButton
+              key={item.path}
+              onClick={handleClick(item.path, item.isExternal)}
+              rank="tertiary"
+              justify-content={isOpen ? 'space-between' : 'none'}
+              size={isOpen ? 'small' : 'medium'}
+              align-items="center"
+            >
+              {isOpen && item.title}
+              {isOpen ? (
+                <Core.GdsFlex align-items="center" slot="trail">
+                  {item.icon}
+                </Core.GdsFlex>
+              ) : (
+                item.icon
+              )}
+            </Core.GdsButton>
+          ))}
       </Core.GdsFlex>
       <Core.GdsButton
         onClick={handleClick('/settings', false)}
         rank="tertiary"
         justify-content={isOpen ? 'space-between' : 'none'}
         size={isOpen ? 'small' : 'medium'}
+        margin="auto 0 0 0"
       >
         {isOpen && 'Settings'}
         {isOpen ? (
