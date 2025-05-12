@@ -85,7 +85,6 @@ export default function Templates() {
             plain
             onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
             clearable
-            placeholder="Search templates..."
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
