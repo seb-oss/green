@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
@@ -16,11 +17,38 @@ interface NavItem {
   isExternal?: boolean
 }
 
+interface Component {
+  title: string
+  slug: string
+  summary?: string
+}
+
+interface ComponentsResponse {
+  components: Component[]
+  total: number
+  lastUpdated: string
+}
+
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
   const { actions } = useSettingsContext()
   const router = useRouter()
   const pathName = usePathname()
+  const [components, setComponents] = useState<Component[]>([])
+
+  useEffect(() => {
+    const fetchComponents = async () => {
+      try {
+        const response = await fetch('https://api.seb.io/components.json')
+        const data: ComponentsResponse = await response.json()
+        setComponents(data.components)
+      } catch (error) {
+        console.error('Error fetching components:', error)
+      }
+    }
+
+    fetchComponents()
+  }, [])
 
   const navigationItems: NavItem[] = [
     {
@@ -73,7 +101,6 @@ export default function Sidebar() {
   ]
 
   const handleClick = (path: string, isExternal?: boolean) => {
-    // Return a function that handles the event
     return (e: React.MouseEvent<HTMLElement>) => {
       e.preventDefault()
       if (isExternal) {
@@ -131,7 +158,7 @@ export default function Sidebar() {
         )}
       </Core.GdsFlex>
       <Core.GdsFlex flex-direction="column" gap="m">
-        {componentsList && (
+        {componentsList ? (
           <>
             <Core.GdsButton
               key={'home'}
@@ -144,27 +171,20 @@ export default function Sidebar() {
               <Core.IconArrowLeft slot="lead" />
               Home
             </Core.GdsButton>
-            <Core.GdsButton
-              onClick={handleClick('/component/button', false)}
-              justify-content={isOpen ? 'flex-start' : 'none'}
-              size={isOpen ? 'small' : 'medium'}
-              align-items="center"
-              rank="tertiary"
-            >
-              Button
-            </Core.GdsButton>
-            <Core.GdsButton
-              onClick={handleClick('/component/input', false)}
-              justify-content={isOpen ? 'flex-start' : 'none'}
-              size={isOpen ? 'small' : 'medium'}
-              align-items="center"
-              rank="tertiary"
-            >
-              Input
-            </Core.GdsButton>
+            {components.map((component) => (
+              <Core.GdsButton
+                key={component.slug}
+                onClick={handleClick(`/component/${component.slug}`, false)}
+                justify-content={isOpen ? 'flex-start' : 'none'}
+                size={isOpen ? 'small' : 'medium'}
+                align-items="center"
+                rank="tertiary"
+              >
+                {component.title}
+              </Core.GdsButton>
+            ))}
           </>
-        )}
-        {!componentsList &&
+        ) : (
           navigationItems.map((item) => (
             <Core.GdsButton
               key={item.path}
@@ -183,7 +203,8 @@ export default function Sidebar() {
                 item.icon
               )}
             </Core.GdsButton>
-          ))}
+          ))
+        )}
       </Core.GdsFlex>
       <Core.GdsButton
         onClick={handleClick('/settings', false)}
