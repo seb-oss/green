@@ -88,7 +88,8 @@ export default function Sidebar() {
     actions.toggle('UI.Panel.Sidebar')
   }
 
-  const componentsList = pathName.startsWith('/components')
+  const componentsList =
+    pathName.startsWith('/components') || pathName.startsWith('/component/')
 
   return (
     <Core.GdsCard
@@ -144,22 +145,20 @@ export default function Sidebar() {
               Home
             </Core.GdsButton>
             <Core.GdsButton
-              key={'button'}
-              onClick={handleClick('/button', false)}
-              rank="tertiary"
-              justify-content={isOpen ? 'space-between' : 'none'}
+              onClick={handleClick('/component/button', false)}
+              justify-content={isOpen ? 'flex-start' : 'none'}
               size={isOpen ? 'small' : 'medium'}
               align-items="center"
+              rank="tertiary"
             >
               Button
             </Core.GdsButton>
             <Core.GdsButton
-              key={'input'}
-              onClick={handleClick('/input', false)}
-              rank="tertiary"
-              justify-content={isOpen ? 'space-between' : 'none'}
+              onClick={handleClick('/component/input', false)}
+              justify-content={isOpen ? 'flex-start' : 'none'}
               size={isOpen ? 'small' : 'medium'}
               align-items="center"
+              rank="tertiary"
             >
               Input
             </Core.GdsButton>
