@@ -36,13 +36,7 @@ export default function Header() {
       position="relative"
       gap="m"
     >
-      {isOpen ? (
-        <GdsDiv></GdsDiv>
-      ) : (
-        <GdsButton rank="tertiary" size="small" onClick={handleClick}>
-          <IconMenuSidebar />
-        </GdsButton>
-      )}
+      <span></span>
       <GdsFlex height="100%" padding="xs">
         <GdsCard
           border-radius="max"

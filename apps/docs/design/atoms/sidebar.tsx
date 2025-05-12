@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import { _ } from '../../hooks'
 import { useSettingsContext, useSettingsValue } from '../../settings'
 
 import './sidebar.css'
@@ -86,52 +87,72 @@ export default function Sidebar() {
     actions.toggle('UI.Panel.Sidebar')
   }
 
-  if (!isOpen) return null
-
   return (
     <Core.GdsCard
       variant="secondary"
-      width="20%"
       border-radius="0"
       justify-content="space-between"
       height="100vh"
-      className="sidebar"
+      className={_('sidebar', isOpen ? 'open' : 'closed')}
+      padding="xs"
+      width={isOpen ? '260px' : 'max-content'}
     >
       <Core.GdsFlex
-        width="100%"
-        height="max-content"
-        align-items="center"
+        padding="m"
         justify-content="space-between"
-        padding="0 m"
+        align-items="center"
       >
-        <Link href="/">
-          <Core.IconBrandSeb />
-        </Link>
-        <Core.GdsButton onClick={handleToggleSidebar} size="xs" rank="tertiary">
-          <Core.IconCrossLarge />
-        </Core.GdsButton>
-      </Core.GdsFlex>
+        {isOpen && (
+          <Core.GdsLink onClick={handleClick('/', false)}>
+            <Core.GdsText color="primary">
+              <Core.IconBrandSeb />
+            </Core.GdsText>
+          </Core.GdsLink>
+        )}
 
-      <Core.GdsFlex id="nav" flex-direction="column" gap="0" margin="auto 0">
+        {!isOpen && (
+          <Core.GdsButton onClick={handleToggleSidebar} rank="tertiary">
+            <Core.IconMenuSidebar />
+          </Core.GdsButton>
+        )}
+        {isOpen && (
+          <Core.GdsButton
+            onClick={handleToggleSidebar}
+            rank="tertiary"
+            size="small"
+          >
+            <Core.IconCrossLarge />
+          </Core.GdsButton>
+        )}
+      </Core.GdsFlex>
+      <Core.GdsFlex flex-direction="column" gap="m">
         {navigationItems.map((item) => (
-          <Core.GdsMenuButton
+          <Core.GdsButton
             key={item.path}
             onClick={handleClick(item.path, item.isExternal)}
+            rank="tertiary"
+            justify-content={isOpen ? 'space-between' : 'none'}
+            size={isOpen ? 'small' : 'medium'}
           >
-            {item.title}
-            <span slot="trail">{item.icon}</span>
-          </Core.GdsMenuButton>
+            {isOpen && item.title}
+            {isOpen ? <span slot="trail">{item.icon}</span> : item.icon}
+          </Core.GdsButton>
         ))}
       </Core.GdsFlex>
-
       <Core.GdsButton
         onClick={handleClick('/settings', false)}
-        size="small"
         rank="tertiary"
-        justify-content="space-between"
+        justify-content={isOpen ? 'space-between' : 'none'}
+        size={isOpen ? 'small' : 'medium'}
       >
-        Settings
-        <Core.IconSettingsGear slot="trail" />
+        {isOpen && 'Settings'}
+        {isOpen ? (
+          <span slot="trail">
+            <Core.IconSettingsGear />
+          </span>
+        ) : (
+          <Core.IconSettingsGear />
+        )}
       </Core.GdsButton>
     </Core.GdsCard>
   )
