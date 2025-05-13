@@ -1,59 +1,61 @@
 import { html } from 'lit'
+import { property } from 'lit/decorators.js'
 
-import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsFlex } from '../flex'
 
 @gdsCustomElement('gds-breadcrumb')
 export class GdsBreadcrumb extends GdsFlex {
   /**
-   * Style Expression Property that controls the `font-size` property.
-   * Supports all typography size tokens from the design system.
+   * Controls the font-size of texts
    */
-  @styleExpressionProperty({
-    styleTemplate: (_prop, values) => {
-      const size = values[0]
-      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
-      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
-      return styleSize + styleLine
-    },
-  })
-  'font-size'?: string
-
-  /**
-   * Style Expression Property that controls the `font-weight` property.
-   * Supports all typography weight tokens from the design system.
-   */
-  @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-sys-text-weight-${v})`,
-  })
-  'font-weight'?: string
+  @property({ type: String })
+  size: 'large' | 'small' = 'large'
 
   constructor() {
     super()
     this['align-items'] = 'center'
     this.gap = 's'
+    this['font-weight'] = 'medium'
+  }
+
+  updated(changedProperties: Map<string, any>) {
+    super.updated(changedProperties)
+
+    if (changedProperties.has('size')) {
+      this['font-size'] = this.size === 'small' ? 'detail-s' : 'detail-m'
+      this.updateChildrenSize()
+    }
   }
 
   connectedCallback() {
     super.connectedCallback()
     this.setAttribute('role', 'navigation')
     this.setAttribute('aria-label', 'Breadcrumb')
+    this['font-size'] = this.size === 'small' ? 'detail-s' : 'detail-m'
+    this['font-weight'] = 'book'
+    this.updateChildrenSize()
+  }
+
+  private updateChildrenSize() {
+    Array.from(this.children).forEach((child) => {
+      if ('size' in child) {
+        ;(child as unknown as HTMLElement).setAttribute('size', this.size)
+      }
+    })
   }
 
   render() {
     const elements = Array.from(this.children)
-    const separator = this.querySelector('[slot="separator"]')
 
     return html`
-      ${elements.map((element, index) => {
-        if (element.getAttribute('slot') === 'separator') return null
-
-        return html`
-          ${element}
-          ${index < elements.length - 1 ? separator?.cloneNode(true) : null}
-        `
-      })}
+      ${elements.map(
+        (element, index) => html`
+          ${element} ${index < elements.length - 1 ? this.separator : null}
+        `,
+      )}
     `
   }
+
+  private separator = html`<span>/</span>`
 }
