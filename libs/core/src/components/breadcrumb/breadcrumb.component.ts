@@ -21,15 +21,8 @@ export class GdsBreadcrumb extends withLayoutChildProps(
 ) {
   static styles = [tokens, BreadcrumbCSS]
 
-  /**
-   * Controls the font-size of texts
-   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
-
-  constructor() {
-    super()
-  }
 
   updated(changedProperties: Map<string, any>) {
     super.updated(changedProperties)
@@ -37,13 +30,6 @@ export class GdsBreadcrumb extends withLayoutChildProps(
     if (changedProperties.has('size')) {
       this.updateChildrenSize()
     }
-  }
-
-  connectedCallback() {
-    super.connectedCallback()
-    this.setAttribute('role', 'navigation')
-    this.setAttribute('aria-label', 'Breadcrumb')
-    this.updateChildrenSize()
   }
 
   private updateChildrenSize() {
@@ -57,11 +43,13 @@ export class GdsBreadcrumb extends withLayoutChildProps(
   render() {
     const elements = Array.from(this.children)
     const secondToLastIndex = elements.length - 2
-    const CLASSES = {
-      'size-small': this.size === 'small',
-    }
+
     return html`
-      <nav aria-label="Breadcrumb" class=${classMap(CLASSES)}>
+      <nav
+        role="navigation"
+        aria-label="Breadcrumb"
+        class=${classMap({ 'size-small': this.size === 'small' })}
+      >
         <div class="mobile-return">
           <gds-icon-chevron-left></gds-icon-chevron-left>
         </div>
