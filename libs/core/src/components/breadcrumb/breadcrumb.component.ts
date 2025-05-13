@@ -1,11 +1,26 @@
 import { html } from 'lit'
 import { property } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 
+import { GdsElement } from '../../gds-element'
+import { tokens } from '../../tokens.style'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import { GdsFlex } from '../flex'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+  withSizeXProps,
+} from '../../utils/mixins/declarative-layout-mixins'
+import { IconChevronLeft } from '../icon/icons/chevron-left.component'
+import BreadcrumbCSS from './breadcrumb.styles'
 
-@gdsCustomElement('gds-breadcrumb')
-export class GdsBreadcrumb extends GdsFlex {
+@gdsCustomElement('gds-breadcrumb', {
+  dependsOn: [IconChevronLeft],
+})
+export class GdsBreadcrumb extends withLayoutChildProps(
+  withSizeXProps(withMarginProps(GdsElement)),
+) {
+  static styles = [tokens, BreadcrumbCSS]
+
   /**
    * Controls the font-size of texts
    */
@@ -14,16 +29,12 @@ export class GdsBreadcrumb extends GdsFlex {
 
   constructor() {
     super()
-    this['align-items'] = 'center'
-    this.gap = 's'
-    this['font-weight'] = 'medium'
   }
 
   updated(changedProperties: Map<string, any>) {
     super.updated(changedProperties)
 
     if (changedProperties.has('size')) {
-      this['font-size'] = this.size === 'small' ? 'detail-s' : 'detail-m'
       this.updateChildrenSize()
     }
   }
@@ -32,8 +43,6 @@ export class GdsBreadcrumb extends GdsFlex {
     super.connectedCallback()
     this.setAttribute('role', 'navigation')
     this.setAttribute('aria-label', 'Breadcrumb')
-    this['font-size'] = this.size === 'small' ? 'detail-s' : 'detail-m'
-    this['font-weight'] = 'book'
     this.updateChildrenSize()
   }
 
@@ -47,15 +56,32 @@ export class GdsBreadcrumb extends GdsFlex {
 
   render() {
     const elements = Array.from(this.children)
-
+    const secondToLastIndex = elements.length - 2
+    const CLASSES = {
+      'size-small': this.size === 'small',
+    }
     return html`
-      ${elements.map(
-        (element, index) => html`
-          ${element} ${index < elements.length - 1 ? this.separator : null}
-        `,
-      )}
+      <nav aria-label="Breadcrumb" class=${classMap(CLASSES)}>
+        <div class="mobile-return">
+          <gds-icon-chevron-left></gds-icon-chevron-left>
+        </div>
+        <ol>
+          ${elements.map(
+            (element, index) => html`
+              <li
+                class=${classMap({
+                  'show-on-mobile': index === secondToLastIndex,
+                })}
+              >
+                ${element}
+              </li>
+              ${index < elements.length - 1
+                ? html`<span class="separator" aria-hidden="true">/</span>`
+                : null}
+            `,
+          )}
+        </ol>
+      </nav>
     `
   }
-
-  private separator = html`<span>/</span>`
 }

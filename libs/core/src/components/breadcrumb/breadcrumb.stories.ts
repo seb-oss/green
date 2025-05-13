@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './breadcrumb'
 import '../link'
+import '../flex'
 import '../card'
 import '../divider'
 import '../text'
@@ -38,59 +39,6 @@ export const Simple: Story = {
   `,
 }
 
-/**
- * Breadcrumb with mixed elements (link, button, and context menu)
- *
- * The breadcrumb component is not limited to links only. <br />
- * It can also contain buttons and context menus. <br />
- * The context menu can be used to show the overflow items when the breadcrumb is too long to fit in the available space.
- * Buttons and context menus can be used to trigger actions or show additional options. <br />
- *
- * ```html
- * <gds-breadcrumb>
- *   <gds-icon-chevron-right slot="separator"></gds-icon-chevron-right>
- *   <gds-link href="/home">
- *     <gds-icon-home-open slot="lead"></gds-icon-home-open>
- *     Home
- *   </gds-link>
- *   <gds-button rank="tertiary" size="small">
- *     <gds-icon-folder slot="lead"></gds-icon-folder>
- *     Select Folder
- *   </gds-button>
- *   <gds-context-menu>
- *     <gds-menu-item>Move</gds-menu-item>
- *     <gds-menu-item>Copy</gds-menu-item>
- *     <gds-menu-item>Delete</gds-menu-item>
- *   </gds-context-menu>
- *   <span>Current Item</span>
- * </gds-breadcrumb>
- * ```
- *
- */
-export const MixedElements: Story = {
-  render: () => html`
-    <gds-breadcrumb>
-      <gds-link href="/home">
-        <gds-icon-home-open slot="lead"></gds-icon-home-open>
-        Home
-      </gds-link>
-
-      <gds-button rank="tertiary" size="small">
-        <gds-icon-folder slot="lead"></gds-icon-folder>
-        Select Folder
-      </gds-button>
-
-      <gds-context-menu>
-        <gds-menu-item>Move</gds-menu-item>
-        <gds-menu-item>Copy</gds-menu-item>
-        <gds-menu-item>Delete</gds-menu-item>
-      </gds-context-menu>
-
-      <span>Current Item</span>
-    </gds-breadcrumb>
-  `,
-}
-
 export const Size: Story = {
   render: () => html`
     <gds-flex flex-direction="column" gap="4xl">
@@ -100,7 +48,7 @@ export const Size: Story = {
           <gds-divider opacity="0.8" color="primary"></gds-divider>
         </gds-flex>
         <gds-flex align-items="center" gap="m">
-          <gds-text width="240px">Default(large)</gds-text>
+          <gds-text width="200px">Default(large)</gds-text>
           <gds-card flex="1">
             <gds-breadcrumb>
               <gds-link href="/home">
@@ -124,7 +72,7 @@ export const Size: Story = {
         </gds-flex>
 
         <gds-flex align-items="center" gap="m">
-          <gds-text width="240px">Small</gds-text>
+          <gds-text width="200px">Small</gds-text>
           <gds-card flex="1">
             <gds-breadcrumb size="small">
               <gds-link href="/home">
@@ -153,7 +101,7 @@ export const Size: Story = {
           <gds-divider opacity="0.8" color="primary"></gds-divider>
         </gds-flex>
         <gds-flex align-items="center" gap="m">
-          <gds-text width="240px">Default(large)</gds-text>
+          <gds-text width="200px">Default(large)</gds-text>
           <gds-card flex="1">
             <gds-breadcrumb>
               <gds-button href="/home" rank="tertiary">
@@ -175,7 +123,7 @@ export const Size: Story = {
           </gds-card>
         </gds-flex>
         <gds-flex align-items="center" gap="m">
-          <gds-text width="240px">Default(large)</gds-text>
+          <gds-text width="200px">Small</gds-text>
           <gds-card flex="1">
             <gds-breadcrumb size="small" rank="tertiary">
               <gds-button href="/home" rank="tertiary">
@@ -193,6 +141,66 @@ export const Size: Story = {
                 Settings
               </gds-button>
               <gds-button rank="tertiary"> Current page </gds-button>
+            </gds-breadcrumb>
+          </gds-card>
+        </gds-flex>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
+
+export const Mobile: Story = {
+  render: () => html`
+    <gds-flex flex-direction="column" gap="4xl">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-flex flex-direction="column" gap="m">
+          <gds-text font-size="heading-m">Using links</gds-text>
+          <gds-divider opacity="0.8" color="primary"></gds-divider>
+        </gds-flex>
+        <gds-flex align-items="center" gap="m">
+          <gds-text width="200px">Default(large)</gds-text>
+          <gds-card flex="1">
+            <gds-breadcrumb>
+              <gds-link href="/home">
+                <gds-icon-home-open slot="lead"></gds-icon-home-open>
+                Home
+              </gds-link>
+
+              <gds-link href="/folder">
+                <gds-icon-folder slot="lead"></gds-icon-folder>
+                Documents
+              </gds-link>
+
+              <gds-link href="/settings">
+                <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
+                Settings
+              </gds-link>
+
+              <gds-text> Current page </gds-text>
+            </gds-breadcrumb>
+          </gds-card>
+        </gds-flex>
+
+        <gds-flex align-items="center" gap="m">
+          <gds-text width="200px">Small</gds-text>
+          <gds-card flex="1">
+            <gds-breadcrumb size="small">
+              <gds-link href="/home">
+                <gds-icon-home-open slot="lead"></gds-icon-home-open>
+                Home
+              </gds-link>
+
+              <gds-link href="/folder">
+                <gds-icon-folder slot="lead"></gds-icon-folder>
+                Documents
+              </gds-link>
+
+              <gds-link href="/settings">
+                <gds-icon-settings-gear slot="lead"></gds-icon-settings-gear>
+                Settings
+              </gds-link>
+
+              <gds-text> Current page </gds-text>
             </gds-breadcrumb>
           </gds-card>
         </gds-flex>
@@ -277,80 +285,6 @@ export const TrailIcon: Story = {
         <gds-icon-settings-gear slot="trail"></gds-icon-settings-gear>
       </gds-link>
     </gds-breadcrumb>
-  `,
-}
-
-/**
- *
- * The separator can be any text or icon. <br/>
- * Is recommanded to be used the slash character. <br />
- *
- * Separator can be set using the `slot="separator"` attribute. <br />
- * The separator will automatically show in between the breadcrumb items.
- *
- * ```html
- * <gds-breadcrumb>
- *   <gds-text slot="separator">/</gds-text>
- *   <gds-link>...</gds-link>
- *   <gds-link>...</gds-link>
- *   <gds-link>...</gds-link>
- * </gds-breadcrumb>
- * ```
- */
-export const Separator: Story = {
-  render: () => html`
-    <gds-flex flex-direction="column" gap="xl">
-      <gds-flex gap="m" align-items="center">
-        <gds-flex width="200px" gap="m">
-          <gds-text>Slash</gds-text>
-        </gds-flex>
-        <gds-card flex="1">
-          <gds-breadcrumb>
-            <gds-text slot="separator">/</gds-text>
-            <gds-link href="#">
-              <gds-icon-home-open slot="lead"></gds-icon-home-open>
-            </gds-link>
-            <gds-link href="#"> Blog </gds-link>
-            <gds-link href="#"> Changelog </gds-link>
-            <gds-text>v2.0</gds-text>
-          </gds-breadcrumb>
-        </gds-card>
-      </gds-flex>
-      <gds-flex gap="m" align-items="center">
-        <gds-flex width="200px" gap="m">
-          <gds-text>Icon</gds-text>
-        </gds-flex>
-        <gds-card flex="1">
-          <gds-breadcrumb>
-            <gds-icon-chevron-right size="s" slot="separator">
-              /
-            </gds-icon-chevron-right>
-            <gds-link href="#">
-              <gds-icon-home-open slot="lead"></gds-icon-home-open>
-            </gds-link>
-            <gds-link href="#"> Blog </gds-link>
-            <gds-link href="#"> Changelog </gds-link>
-            <gds-text>v2.0</gds-text>
-          </gds-breadcrumb>
-        </gds-card>
-      </gds-flex>
-      <gds-flex gap="m" align-items="center">
-        <gds-flex width="200px" gap="m">
-          <gds-text>Dot</gds-text>
-        </gds-flex>
-        <gds-card flex="1">
-          <gds-breadcrumb>
-            <gds-text slot="separator">·</gds-text>
-            <gds-link href="#">
-              <gds-icon-home-open slot="lead"></gds-icon-home-open>
-            </gds-link>
-            <gds-link href="#"> Blog </gds-link>
-            <gds-link href="#"> Changelog </gds-link>
-            <gds-text opacity="0.4">v2.0</gds-text>
-          </gds-breadcrumb>
-        </gds-card>
-      </gds-flex>
-    </gds-flex>
   `,
 }
 
