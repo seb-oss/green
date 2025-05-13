@@ -24,22 +24,6 @@ export class GdsBreadcrumb extends withLayoutChildProps(
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
-  updated(changedProperties: Map<string, any>) {
-    super.updated(changedProperties)
-
-    if (changedProperties.has('size')) {
-      this.updateChildrenSize()
-    }
-  }
-
-  private updateChildrenSize() {
-    Array.from(this.children).forEach((child) => {
-      if ('size' in child) {
-        ;(child as unknown as HTMLElement).setAttribute('size', this.size)
-      }
-    })
-  }
-
   render() {
     const elements = Array.from(this.children)
     const secondToLastIndex = elements.length - 2
