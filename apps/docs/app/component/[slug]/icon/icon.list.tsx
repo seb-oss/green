@@ -41,33 +41,43 @@ export function IconList({ icons }: IconListProps) {
   }, [icons, search, selectedCategory])
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="2xl" padding="0">
-      <Core.GdsFlex align-items="center" gap="m" width="400px">
+    <Core.GdsFlex
+      flex-direction="column"
+      gap="2xl"
+      padding="0"
+      max-width="920px"
+    >
+      <Core.GdsFlex align-items="center" gap="m" width="100%">
         <Core.GdsInput
           value={search}
           onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
           plain
+          flex="1"
         >
           <Core.IconMagnifyingGlass slot="lead" />
         </Core.GdsInput>
-        <Core.GdsDropdown
-          value={selectedCategory}
-          plain
-          searchable
-          onChange={(e) =>
-            setSelectedCategory((e.target as HTMLSelectElement).value)
-          }
-        >
-          <Core.GdsOption value="">All</Core.GdsOption>
-          {categories.map((category) => (
-            <Core.GdsOption key={category} value={category}>
-              {category}
-            </Core.GdsOption>
-          ))}
-        </Core.GdsDropdown>
+
+        <Core.GdsFlex max-width="200px">
+          <Core.GdsDropdown
+            value={selectedCategory}
+            plain
+            searchable
+            onChange={(e) =>
+              setSelectedCategory((e.target as HTMLSelectElement).value)
+            }
+          >
+            <Core.IconChecklist slot="lead" />
+            <Core.GdsOption value="">All</Core.GdsOption>
+            {categories.map((category) => (
+              <Core.GdsOption key={category} value={category}>
+                {category}
+              </Core.GdsOption>
+            ))}
+          </Core.GdsDropdown>
+        </Core.GdsFlex>
       </Core.GdsFlex>
 
-      <Core.GdsGrid columns="6" gap="m" max-width="920px">
+      <Core.GdsGrid columns="6" gap="m">
         {filteredIcons.map(([name, icon]) => (
           <Link
             key={name}
