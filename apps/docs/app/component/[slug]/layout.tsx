@@ -3,7 +3,9 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import Tabs from '@/apps/docs/design/atoms/tabs'
 
+import * as Core from '@sebgroup/green-core/react'
 import { getContent } from './content'
 
 interface LayoutProps {
@@ -64,54 +66,56 @@ export default async function ComponentLayout({
     }
 
     return (
-      <div className="component-layout">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="breadcrumb">
-          <ol>
-            {breadcrumbItems.map((item, index) => (
-              <li key={item.href}>
-                {index === breadcrumbItems.length - 1 ? (
-                  <span aria-current="page">{item.label}</span>
-                ) : (
-                  <>
-                    <Link href={item.href}>{item.label}</Link>
-                    <span aria-hidden="true">/</span>
-                  </>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
+      <Core.GdsFlex flex-direction="column" gap="xl" width="80ch">
+        <Core.GdsFlex gap="m" align-items="center">
+          {breadcrumbItems.map((item, index) => (
+            <Core.GdsFlex gap="m" key={item.href}>
+              {index === breadcrumbItems.length - 1 ? (
+                <span aria-current="page">{item.label}</span>
+              ) : (
+                <>
+                  <Link href={item.href}>{item.label}</Link>
+                  <Core.GdsText> / </Core.GdsText>
+                </>
+              )}
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
 
-        <div className="component-header">
-          <h1>{content.title}</h1>
-          {content.beta && <span className="beta-badge">Beta</span>}
+        <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+          <Core.GdsText tag="h1">{content.title}</Core.GdsText>
           {content.summary && <p className="summary">{content.summary}</p>}
+          {content.beta && <Core.GdsBadge variant="notice">Beta</Core.GdsBadge>}
 
           {content.tags && (
-            <div className="tags">
-              {content.tags.map((tag) => (
-                <span key={tag} className="tag">
-                  {tag}
-                </span>
-              ))}
-            </div>
+            <Core.GdsFlex>
+              <Core.GdsText>Tags:</Core.GdsText>
+              <Core.GdsFlex gap="m">
+                {content.tags.map((tag) => (
+                  <Core.GdsLink
+                    href={'components/' + tag}
+                    key={tag}
+                    className="tag"
+                  >
+                    {tag}
+                  </Core.GdsLink>
+                ))}
+              </Core.GdsFlex>
+            </Core.GdsFlex>
           )}
 
-          {content.platform && (
-            <div className="platform-support">
-              {Object.entries(content.platform).map(
-                ([platform, supported]) =>
-                  supported && (
-                    <span key={platform} className="platform">
-                      {platform}
-                    </span>
-                  ),
-              )}
-            </div>
-          )}
+          <Core.GdsCard
+            width="100%"
+            height="280px"
+            align-items="center"
+            justify-content="center"
+          >
+            ...
+          </Core.GdsCard>
 
-          <nav className="component-nav">
+          <Tabs path={pathname} slug={params.slug} />
+
+          {/* <nav className="component-nav">
             <Link
               href={`/component/${params.slug}`}
               className={
@@ -135,11 +139,11 @@ export default async function ComponentLayout({
             >
               Accessibility
             </Link>
-          </nav>
-        </div>
+          </nav> */}
+        </Core.GdsFlex>
 
         <div className="component-content">{children}</div>
-      </div>
+      </Core.GdsFlex>
     )
   } catch (error) {
     return notFound()

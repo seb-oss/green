@@ -57,7 +57,7 @@ export function IconList({ icons }: IconListProps) {
           <Core.IconMagnifyingGlass slot="lead" />
         </Core.GdsInput>
 
-        <Core.GdsFlex max-width="200px">
+        <Core.GdsFlex width="200px">
           <Core.GdsDropdown
             value={selectedCategory}
             plain
