@@ -12,7 +12,7 @@ import '@sebgroup/green-core/components/input/index.js'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-for (const variant of ['default' /*, 'floating-label' */] as const) {
+for (const variant of ['default'] as const) {
   describe('<gds-input>', () => {
     describe('Rendering', () => {
       it('should render a label', async () => {
@@ -50,7 +50,7 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
       })
 
       it('should fire a change event when the value has changed and focus has shifted away', async () => {
-        const el = await fixture<Ht>(
+        const el = await fixture<GdsInput>(
           html`<gds-input variant="${variant}"></gds-input><input />`,
         )
         const changeSpy = sinon.spy()
@@ -122,6 +122,36 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const clearButtonEl = el.test_getClearButton()
         clearButtonEl.click()
         expect(changeSpy).to.have.been.calledOnce
+      })
+
+      it('should forward standard attributes', async () => {
+        const el = await fixture<GdsInput>(
+          html`<gds-input
+            variant="${variant}"
+            min="1"
+            max="10"
+            step="1"
+            autocapitalize="on"
+            autocomplete="on"
+            autocorrect="on"
+            spellcheck="true"
+            inputmode="numeric"
+            autofocus
+            enterkeyhint="enter"
+          ></gds-input>`,
+        )
+
+        const inputEl = el.shadowRoot?.querySelector('input')
+        expect(inputEl?.getAttribute('min')).to.equal('1')
+        expect(inputEl?.getAttribute('max')).to.equal('10')
+        expect(inputEl?.getAttribute('step')).to.equal('1')
+        expect(inputEl?.getAttribute('autocapitalize')).to.equal('on')
+        expect(inputEl?.getAttribute('autocomplete')).to.equal('on')
+        expect(inputEl?.getAttribute('autocorrect')).to.equal('on')
+        expect(inputEl?.getAttribute('spellcheck')).to.equal('true')
+        expect(inputEl?.getAttribute('inputmode')).to.equal('numeric')
+        expect(inputEl?.getAttribute('autofocus')).to.equal('')
+        expect(inputEl?.getAttribute('enterkeyhint')).to.equal('enter')
       })
     })
 

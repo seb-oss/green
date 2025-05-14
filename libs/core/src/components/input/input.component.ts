@@ -72,6 +72,90 @@ class Input extends GdsFormControlElement<string> {
   @property({ type: Boolean })
   plain = false
 
+  /**
+   * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
+   * to `text`.
+   */
+  @property({ reflect: true }) type:
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'number'
+    | 'password'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url' = 'text'
+
+  /** The input's minimum value. Only applies to date and number input types. */
+  @property() min?: number | string
+
+  /** The input's maximum value. Only applies to date and number input types. */
+  @property() max?: number | string
+
+  /**
+   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
+   * implied, allowing any numeric value. Only applies to date and number input types.
+   */
+  @property() step?: number | 'any'
+
+  /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
+  @property() autocapitalize:
+    | 'off'
+    | 'none'
+    | 'on'
+    | 'sentences'
+    | 'words'
+    | 'characters' = 'off'
+
+  /** Indicates whether the browser's autocorrect feature is on or off. */
+  @property() autocorrect?: 'off' | 'on'
+
+  /**
+   * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
+   * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.
+   */
+  @property() autocomplete?: string
+
+  /** Indicates that the input should receive focus on page load. */
+  @property({ type: Boolean }) autofocus = false
+
+  /** Used to customize the label or icon of the Enter key on virtual keyboards. */
+  @property() enterkeyhint?:
+    | 'enter'
+    | 'done'
+    | 'go'
+    | 'next'
+    | 'previous'
+    | 'search'
+    | 'send'
+
+  /** Enables spell checking on the input. */
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: (value) => (!value || value === 'false' ? false : true),
+      toAttribute: (value) => (value ? 'true' : 'false'),
+    },
+  })
+  spellcheck = true
+
+  /**
+   * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
+   * keyboard on supportive devices.
+   */
+  @property() inputmode?:
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
+
   @queryAsync('input')
   private elInputAsync!: Promise<HTMLInputElement>
 
@@ -147,10 +231,6 @@ class Input extends GdsFormControlElement<string> {
     return this.elInput
   }
 
-  // Any attribute name added here will get forwarded to the native <input> element.
-  #forwardableAttrs = (attr: Attr) =>
-    ['type', 'placeholder', 'required'].includes(attr.name)
-
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
@@ -219,7 +299,18 @@ class Input extends GdsFormControlElement<string> {
         aria-invalid=${this.invalid}
         aria-label=${(this.plain && this.label) || nothing}
         placeholder=" "
-        ${forwardAttributes(this.#forwardableAttrs)}
+        type=${this.type}
+        min=${ifDefined(this.min)}
+        max=${ifDefined(this.max)}
+        step=${ifDefined(this.step as number)}
+        autocapitalize=${ifDefined(this.autocapitalize)}
+        autocomplete=${ifDefined(this.autocomplete)}
+        autocorrect=${ifDefined(this.autocorrect)}
+        ?autofocus=${this.autofocus}
+        spellcheck=${this.spellcheck}
+        enterkeyhint=${ifDefined(this.enterkeyhint)}
+        inputmode=${ifDefined(this.inputmode)}
+        ?required=${this.required}
       />
     `
   }
