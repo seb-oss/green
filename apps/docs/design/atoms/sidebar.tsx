@@ -128,6 +128,12 @@ export default function Sidebar() {
     }
   }
 
+  const internalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const href = e.currentTarget.href
+    router.push(href)
+  }
+
   const handleToggleSidebar = (): void => {
     actions.toggle('UI.Panel.Sidebar')
   }
@@ -161,7 +167,7 @@ export default function Sidebar() {
         align-items="center"
       >
         {isOpen && (
-          <Core.GdsLink onClick={handleClick('/', false)}>
+          <Core.GdsLink onClick={internalLink} href="/">
             <Core.GdsText color="primary">
               <Core.IconBrandSeb />
             </Core.GdsText>
@@ -188,7 +194,8 @@ export default function Sidebar() {
           <>
             <Core.GdsButton
               key={'home'}
-              onClick={handleClick('/', false)}
+              onClick={internalLink}
+              href="/"
               rank="tertiary"
               justify-content={isOpen ? 'flex-start' : 'none'}
               size={isOpen ? 'small' : 'medium'}
@@ -204,7 +211,8 @@ export default function Sidebar() {
               {components.map((component) => (
                 <Core.GdsButton
                   key={component.slug}
-                  onClick={handleClick(`/component/${component.slug}`, false)}
+                  onClick={internalLink}
+                  href={`/component/${component.slug}`}
                   justify-content={isOpen ? 'flex-start' : 'none'}
                   size={isOpen ? 'small' : 'medium'}
                   align-items="center"
@@ -325,7 +333,9 @@ export default function Sidebar() {
           navigationItems.map((item) => (
             <Core.GdsButton
               key={item.slug}
-              onClick={handleClick(item.slug, isExternalLink(item.slug))}
+              // onClick={handleClick(item.slug, isExternalLink(item.slug))}
+              onClick={internalLink}
+              href={item.slug}
               rank="tertiary"
               justify-content={isOpen ? 'space-between' : 'none'}
               size={isOpen ? 'small' : 'medium'}
@@ -344,20 +354,14 @@ export default function Sidebar() {
         )}
       </Core.GdsFlex>
       {isOpenSettings && (
-        <Core.GdsCard
-          position="absolute"
-          padding="xs"
-          inset="auto 10px 10px 10px"
-          width="calc(100% - 20px)"
-          z-index="2"
-          gap="0"
-        >
+        <Core.GdsCard padding="xs" gap="s" margin="auto 0 0 0">
+          <Core.GdsCard variant="secondary">Cookie consent</Core.GdsCard>
           <Core.GdsFlex
             justify-content="space-between"
             align-items="center"
-            padding="s"
+            padding="0 xs"
           >
-            <Core.GdsText tag="h5">Settings</Core.GdsText>
+            <Core.GdsText font-size="detail-s">Settings</Core.GdsText>
             <Core.GdsButton
               onClick={handleToggleSettings}
               rank="tertiary"
@@ -366,23 +370,24 @@ export default function Sidebar() {
               <Core.IconCrossLarge />
             </Core.GdsButton>
           </Core.GdsFlex>
-          <Core.GdsCard variant="secondary">Cookie consent</Core.GdsCard>
         </Core.GdsCard>
       )}
-      <Core.GdsButton
-        onClick={handleToggleSettings}
-        rank="tertiary"
-        justify-content={isOpen ? 'space-between' : 'none'}
-        size={isOpen ? 'small' : 'medium'}
-        margin="auto 0 0 0"
-      >
-        {isOpen && 'Settings'}
-        {isOpen ? (
-          <Core.IconSettingsGear slot="trail" />
-        ) : (
-          <Core.IconSettingsGear />
-        )}
-      </Core.GdsButton>
+      {!isOpenSettings && (
+        <Core.GdsButton
+          onClick={handleToggleSettings}
+          rank="tertiary"
+          justify-content={isOpen ? 'space-between' : 'none'}
+          size={isOpen ? 'small' : 'medium'}
+          margin="auto 0 0 0"
+        >
+          {isOpen && 'Settings'}
+          {isOpen ? (
+            <Core.IconSettingsGear slot="trail" />
+          ) : (
+            <Core.IconSettingsGear />
+          )}
+        </Core.GdsButton>
+      )}
     </Core.GdsCard>
   )
 }
