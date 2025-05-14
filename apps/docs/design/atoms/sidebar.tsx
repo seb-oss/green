@@ -59,6 +59,9 @@ const DynamicIcon = ({ iconName }: { iconName: string }) => {
 
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
+  const isOpenSettings = useSettingsValue(
+    (settings) => settings.UI.Panel.Settings,
+  )
   const { actions } = useSettingsContext()
   const router = useRouter()
   const pathName = usePathname()
@@ -128,6 +131,9 @@ export default function Sidebar() {
   const handleToggleSidebar = (): void => {
     actions.toggle('UI.Panel.Sidebar')
   }
+  const handleToggleSettings = (): void => {
+    actions.toggle('UI.Panel.Settings')
+  }
 
   const componentsList =
     pathName.startsWith('/components') || pathName.startsWith('/component/')
@@ -147,6 +153,7 @@ export default function Sidebar() {
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding="xs xs m xs"
       width={isOpen ? '260px' : 'max-content'}
+      position="relative"
     >
       <Core.GdsFlex
         padding="m xs m m"
@@ -259,8 +266,34 @@ export default function Sidebar() {
           ))
         )}
       </Core.GdsFlex>
+      {isOpenSettings && (
+        <Core.GdsCard
+          position="absolute"
+          padding="xs"
+          inset="auto 10px 10px 10px"
+          width="calc(100% - 20px)"
+          z-index="2"
+          gap="0"
+        >
+          <Core.GdsFlex
+            justify-content="space-between"
+            align-items="center"
+            padding="s"
+          >
+            <Core.GdsText tag="h5">Settings</Core.GdsText>
+            <Core.GdsButton
+              onClick={handleToggleSettings}
+              rank="tertiary"
+              size="xs"
+            >
+              <Core.IconCrossLarge />
+            </Core.GdsButton>
+          </Core.GdsFlex>
+          <Core.GdsCard variant="secondary">Cookie consent</Core.GdsCard>
+        </Core.GdsCard>
+      )}
       <Core.GdsButton
-        onClick={handleClick('/settings', false)}
+        onClick={handleToggleSettings}
         rank="tertiary"
         justify-content={isOpen ? 'space-between' : 'none'}
         size={isOpen ? 'small' : 'medium'}
@@ -268,9 +301,7 @@ export default function Sidebar() {
       >
         {isOpen && 'Settings'}
         {isOpen ? (
-          <span slot="trail">
-            <Core.IconSettingsGear />
-          </span>
+          <Core.IconSettingsGear slot="trail" />
         ) : (
           <Core.IconSettingsGear />
         )}
