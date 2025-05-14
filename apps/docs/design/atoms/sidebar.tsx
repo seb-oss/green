@@ -197,18 +197,95 @@ export default function Sidebar() {
               <Core.IconArrowLeft slot="lead" />
               Home
             </Core.GdsButton>
-            {components.map((component) => (
+            <Core.GdsFlex flex-direction="column" gap="2xs">
+              <Core.GdsText tag="small" padding="m">
+                Components
+              </Core.GdsText>
+              {components.map((component) => (
+                <Core.GdsButton
+                  key={component.slug}
+                  onClick={handleClick(`/component/${component.slug}`, false)}
+                  justify-content={isOpen ? 'flex-start' : 'none'}
+                  size={isOpen ? 'small' : 'medium'}
+                  align-items="center"
+                  rank="tertiary"
+                >
+                  {component.title}
+                </Core.GdsButton>
+              ))}
+            </Core.GdsFlex>
+            <Core.GdsFlex flex-direction="column" gap="2xs">
+              <Core.GdsText tag="small" padding="m">
+                Layout
+              </Core.GdsText>
+
               <Core.GdsButton
-                key={component.slug}
-                onClick={handleClick(`/component/${component.slug}`, false)}
+                key="layout-div"
+                onClick={handleClick(`/tokens/colors`, false)}
                 justify-content={isOpen ? 'flex-start' : 'none'}
                 size={isOpen ? 'small' : 'medium'}
                 align-items="center"
                 rank="tertiary"
               >
-                {component.title}
+                Div
               </Core.GdsButton>
-            ))}
+              <Core.GdsButton
+                key="layout-flex"
+                onClick={handleClick(`/tokens/size`, false)}
+                justify-content={isOpen ? 'flex-start' : 'none'}
+                size={isOpen ? 'small' : 'medium'}
+                align-items="center"
+                rank="tertiary"
+              >
+                Flex
+              </Core.GdsButton>
+              <Core.GdsButton
+                key="layout-grid"
+                onClick={handleClick(`/tokens/size`, false)}
+                justify-content={isOpen ? 'flex-start' : 'none'}
+                size={isOpen ? 'small' : 'medium'}
+                align-items="center"
+                rank="tertiary"
+              >
+                Grid
+              </Core.GdsButton>
+            </Core.GdsFlex>
+            <Core.GdsFlex flex-direction="column" gap="2xs">
+              <Core.GdsText tag="small" padding="m">
+                Tokens
+              </Core.GdsText>
+
+              <Core.GdsButton
+                key="tokens-colors"
+                onClick={handleClick(`/tokens/colors`, false)}
+                justify-content={isOpen ? 'flex-start' : 'none'}
+                size={isOpen ? 'small' : 'medium'}
+                align-items="center"
+                rank="tertiary"
+              >
+                Colors
+              </Core.GdsButton>
+              <Core.GdsButton
+                key="tokens-size"
+                onClick={handleClick(`/tokens/size`, false)}
+                justify-content={isOpen ? 'flex-start' : 'none'}
+                size={isOpen ? 'small' : 'medium'}
+                align-items="center"
+                rank="tertiary"
+              >
+                Size
+              </Core.GdsButton>
+              <Core.GdsButton
+                key="tokens-typography"
+                onClick={handleClick(`/tokens/size`, false)}
+                justify-content={isOpen ? 'flex-start' : 'none'}
+                size={isOpen ? 'small' : 'medium'}
+                align-items="center"
+                rank="tertiary"
+              >
+                Typography
+              </Core.GdsButton>
+            </Core.GdsFlex>
           </>
         ) : templatesList ? (
           <>
