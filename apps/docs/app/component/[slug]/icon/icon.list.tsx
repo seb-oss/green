@@ -4,6 +4,7 @@
 import { useMemo, useState } from 'react'
 import Link from 'next/link'
 
+import * as Core from '@sebgroup/green-core/react'
 import { IconDetails, IconsResponse } from './icon.service'
 
 interface IconListProps {
@@ -40,45 +41,53 @@ export function IconList({ icons }: IconListProps) {
   }, [icons, search, selectedCategory])
 
   return (
-    <div className="icon-browser">
-      <div className="icon-filters">
-        <input
-          type="text"
+    <Core.GdsFlex flex-direction="column" gap="2xl" padding="0">
+      <Core.GdsFlex align-items="center" gap="m" width="400px">
+        <Core.GdsInput
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search icons..."
-          className="icon-search"
-        />
-
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="category-filter"
+          onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
+          plain
         >
-          <option value="">All Categories</option>
+          <Core.IconMagnifyingGlass slot="lead" />
+        </Core.GdsInput>
+        <Core.GdsDropdown
+          value={selectedCategory}
+          plain
+          searchable
+          onChange={(e) =>
+            setSelectedCategory((e.target as HTMLSelectElement).value)
+          }
+        >
+          <Core.GdsOption value="">All</Core.GdsOption>
           {categories.map((category) => (
-            <option key={category} value={category}>
+            <Core.GdsOption key={category} value={category}>
               {category}
-            </option>
+            </Core.GdsOption>
           ))}
-        </select>
-      </div>
+        </Core.GdsDropdown>
+      </Core.GdsFlex>
 
-      <div className="icons-grid">
+      <Core.GdsGrid columns="6" gap="m" max-width="920px">
         {filteredIcons.map(([name, icon]) => (
           <Link
             key={name}
             href={`/component/icon/${name}`}
             className="icon-item"
           >
-            <div
-              className="icon-preview"
-              dangerouslySetInnerHTML={{ __html: icon.variants.regular }}
-            />
-            <span className="icon-name">{icon.displayName}</span>
+            <Core.GdsCard align-items="center" justify-content="center">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke="none"
+                fill="none"
+                dangerouslySetInnerHTML={{ __html: icon.variants.regular }}
+              ></svg>
+              <Core.GdsText tag="small">{icon.displayName}</Core.GdsText>
+            </Core.GdsCard>
           </Link>
         ))}
-      </div>
-    </div>
+      </Core.GdsGrid>
+    </Core.GdsFlex>
   )
 }
