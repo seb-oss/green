@@ -1,5 +1,7 @@
 // app/component/[slug]/page.tsx
 import { getContent } from './content'
+import { IconList } from './icon/icon.list'
+import { getIcons } from './icon/icon.service'
 
 export default async function OverviewPage({
   params: { slug },
@@ -7,6 +9,15 @@ export default async function OverviewPage({
   params: { slug: string }
 }) {
   const content = await getContent(slug)
+
+  if (slug === 'icon') {
+    const icons = await getIcons()
+    return (
+      <div>
+        <IconList icons={icons} />
+      </div>
+    )
+  }
 
   return (
     <div className="overview-content">
