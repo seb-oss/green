@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- f0c94cf: Adding android/compose/kotlin as platform
+- a25abee: Adding scss variables output
+
 ## 1.0.0
 
 ### Major Changes
