@@ -27,7 +27,7 @@ import '../icon/icons/folder'
  * - Supports both text-only and icon+text navigation links
  * - Responsive design with mobile optimization showing the previous page
  * - Configurable sizes (large/small)
- * - Each breadcrumb item is a slot that preferably uses `gds-link` components
+ * - Each breadcrumb item is a slot that preferably uses `gds-link` component.
  *
  * ## Basic Usage
  *
@@ -65,7 +65,6 @@ export const Simple: Story = {
 }
 
 /**
- * ## Breadcrumb with Icons
  * This example shows how to use icons alongside text in the breadcrumb links.
  * Icons can be used to enhance the visual representation of the links.
  *
@@ -229,10 +228,9 @@ export const Mobile: Story = {
 }
 
 /**
- *## Overflow Handling
- *
  * The breadcrumb component is designed with flexibility in mind, allowing developers to implement * custom overflow solutions that best fit their specific needs.
  *
+ * ### Example
  *
  *```html
  *<gds-breadcrumb>
