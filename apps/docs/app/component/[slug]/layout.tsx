@@ -122,32 +122,6 @@ export default async function ComponentLayout({
           </Core.GdsCard>
 
           <Tabs path={pathname} slug={params.slug} />
-
-          {/* <nav className="component-nav">
-            <Link
-              href={`/component/${params.slug}`}
-              className={
-                !pathname.includes('/ux-text') &&
-                !pathname.includes('/accessibility')
-                  ? 'active'
-                  : ''
-              }
-            >
-              Overview
-            </Link>
-            <Link
-              href={`/component/${params.slug}/ux-text`}
-              className={pathname.includes('/ux-text') ? 'active' : ''}
-            >
-              UX Text
-            </Link>
-            <Link
-              href={`/component/${params.slug}/accessibility`}
-              className={pathname.includes('/accessibility') ? 'active' : ''}
-            >
-              Accessibility
-            </Link>
-          </nav> */}
         </Core.GdsFlex>
 
         <div className="component-content">{children}</div>
