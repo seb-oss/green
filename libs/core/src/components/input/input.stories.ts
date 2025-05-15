@@ -394,6 +394,33 @@ export const Validation: Story = {
 }
 
 /**
+ * Most standard attributes are supported, and will be forwarded to the internal input element.
+ */
+export const StandardAttributes: Story = {
+  ...DefaultParams,
+  name: 'Standard Attributes',
+  render: () => html`
+    <gds-flex flex-direction="column" gap="xl" width="320px">
+      <gds-input
+        label="Label"
+        supporting-text="Using standard attributes"
+        min="0"
+        max="100"
+        step="5"
+        type="number"
+        autocapitalize="on"
+        autocomplete="on"
+        autocorrect="on"
+        spellcheck="true"
+        inputmode="numeric"
+        autofocus
+        enterkeyhint="enter"
+      ></gds-input>
+    </gds-flex>
+  `,
+}
+
+/**
  * The `disabled` property can be set to disable the input field.
  *
  * **@property disabled** - Disables the input field.
