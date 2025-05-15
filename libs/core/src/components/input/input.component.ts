@@ -1,6 +1,5 @@
 import { localized, msg } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { choose } from 'lit/directives/choose.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
@@ -12,7 +11,6 @@ import { GdsFormControlHeader } from '../../primitives/form-control-header/form-
 import { gdsCustomElement, html } from '../../scoping'
 import formControlHostStyles from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
-import { forwardAttributes } from '../../utils/directives'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -76,7 +74,8 @@ class Input extends GdsFormControlElement<string> {
    * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
    * to `text`.
    */
-  @property({ reflect: true }) type:
+  @property({ reflect: true })
+  type:
     | 'date'
     | 'datetime-local'
     | 'email'
@@ -89,40 +88,43 @@ class Input extends GdsFormControlElement<string> {
     | 'url' = 'text'
 
   /** The input's minimum value. Only applies to date and number input types. */
-  @property() min?: number | string
+  @property()
+  min?: number | string
 
   /** The input's maximum value. Only applies to date and number input types. */
-  @property() max?: number | string
+  @property()
+  max?: number | string
 
   /**
    * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
    * implied, allowing any numeric value. Only applies to date and number input types.
    */
-  @property() step?: number | 'any'
+  @property()
+  step?: number | 'any'
 
   /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
-  @property() autocapitalize:
-    | 'off'
-    | 'none'
-    | 'on'
-    | 'sentences'
-    | 'words'
-    | 'characters' = 'off'
+  @property()
+  autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters' =
+    'off'
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
-  @property() autocorrect?: 'off' | 'on'
+  @property()
+  autocorrect?: 'off' | 'on'
 
   /**
    * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
    * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.
    */
-  @property() autocomplete?: string
+  @property()
+  autocomplete?: string
 
   /** Indicates that the input should receive focus on page load. */
-  @property({ type: Boolean }) autofocus = false
+  @property({ type: Boolean })
+  autofocus = false
 
   /** Used to customize the label or icon of the Enter key on virtual keyboards. */
-  @property() enterkeyhint?:
+  @property()
+  enterkeyhint?:
     | 'enter'
     | 'done'
     | 'go'
@@ -146,7 +148,8 @@ class Input extends GdsFormControlElement<string> {
    * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
    * keyboard on supportive devices.
    */
-  @property() inputmode?:
+  @property()
+  inputmode?:
     | 'none'
     | 'text'
     | 'decimal'
