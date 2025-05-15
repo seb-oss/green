@@ -42,11 +42,11 @@
       "@sebgroup/green-charts": [
         "libs/charts/src/index.ts"
       ],
-      "@sebgroup/green-core": [
-        "dist/libs/core/src"
+      "@sebgroup/green-core/react": [
+        "dist/libs/core/src/generated/react"
       ],
-      "@sebgroup/green-core/*": [
-        "dist/libs/core/src/*"
+      "@sebgroup/green-core/react/*": [
+        "dist/libs/core/src/generated/react/*"
       ],
       "@sebgroup/green-core/pure": [
         "dist/libs/core/src/components/pure.ts"
@@ -54,11 +54,11 @@
       "@sebgroup/green-core/everything": [
         "dist/libs/core/src/components/index.ts"
       ],
-      "@sebgroup/green-core/react": [
-        "dist/libs/core/src/generated/react"
+      "@sebgroup/green-core": [
+        "dist/libs/core/src"
       ],
-      "@sebgroup/green-core/react/*": [
-        "dist/libs/core/src/generated/react/*"
+      "@sebgroup/green-core/*": [
+        "dist/libs/core/src/*"
       ],
       "@sebgroup/green-react": [
         "libs/react/src/index.ts"

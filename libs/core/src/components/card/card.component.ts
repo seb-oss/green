@@ -28,7 +28,7 @@ export class GdsCard extends GdsDiv {
         border-color: var(--_border-color);
         background-color: var(--_background-color);
         color: var(--_color);
-        border-width: var(--gds-space-4xs);
+        border-width: var(--gds-sys-space-4xs);
         border-style: solid;
         display: flex;
         flex-direction: column;
@@ -47,7 +47,7 @@ export class GdsCard extends GdsDiv {
    */
   @styleExpressionProperty({
     property: 'box-shadow',
-    valueTemplate: (v) => `var(--gds-shadow-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-shadow-${v})`,
   })
   shadow?: string
 
@@ -62,9 +62,9 @@ export class GdsCard extends GdsDiv {
   @styleExpressionProperty({
     styleTemplate: function (_prop, v) {
       return `
-      --_border-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
-      --_background-color: var(--gds-color-l${(this as GdsCard).level}-background-${v});
-      --_color: var(--gds-color-l${(this as GdsCard).level}-content-${v});
+      --_border-color: var(--gds-sys-color-l${(this as GdsCard).level}-background-${v});
+      --_background-color: var(--gds-sys-color-l${(this as GdsCard).level}-background-${v});
+      --_color: var(--gds-sys-color-l${(this as GdsCard).level}-content-${v});
       `
     },
   })
