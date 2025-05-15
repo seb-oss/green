@@ -86,7 +86,9 @@ export default function Sidebar() {
   useEffect(() => {
     const fetchComponents = async () => {
       try {
-        const response = await fetch('https://api.seb.io/components.json')
+        const response = await fetch(
+          'https://api.seb.io/components/components.json',
+        )
         const data: ComponentsResponse = await response.json()
         const sortedComponents = [...data.components].sort((a, b) =>
           a.title.localeCompare(b.title),
@@ -103,7 +105,9 @@ export default function Sidebar() {
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
-        const response = await fetch('https://api.seb.io/templates.json')
+        const response = await fetch(
+          'https://api.seb.io/templates/templates.json',
+        )
         const data: TemplatesResponse = await response.json()
         const sortedTemplates = [...data.templates].sort((a, b) =>
           a.title.localeCompare(b.title),

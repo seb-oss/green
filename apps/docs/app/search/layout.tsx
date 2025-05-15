@@ -46,8 +46,8 @@ export default function SearchLayout({
     const fetchData = async () => {
       try {
         const [componentsRes, templatesRes] = await Promise.all([
-          fetch('https://api.seb.io/components.json'),
-          fetch('https://api.seb.io/templates.json'),
+          fetch('https://api.seb.io/components/components.json'),
+          fetch('https://api.seb.io/templates/templates.json'),
         ])
 
         const [componentsData, templatesData] = await Promise.all([

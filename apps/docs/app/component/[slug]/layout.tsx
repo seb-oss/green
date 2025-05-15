@@ -30,7 +30,7 @@ export async function generateMetadata(
           content.summary || `Documentation for the ${content.title} component`,
         images: [
           {
-            url: `https://api.seb.io/${params.slug}/${params.slug}.og.png`,
+            url: `https://api.seb.io/components/${params.slug}/${params.slug}.og.png`,
             width: 1200,
             height: 630,
             alt: content.title,

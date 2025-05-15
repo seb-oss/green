@@ -27,7 +27,9 @@ export default function Templates() {
   useEffect(() => {
     const fetchTemplates = async () => {
       try {
-        const response = await fetch('https://api.seb.io/templates.json')
+        const response = await fetch(
+          'https://api.seb.io/templates/templates.json',
+        )
         const data: TemplatesResponse = await response.json()
         setTemplates(
           data.templates.sort((a, b) => a.title.localeCompare(b.title)),

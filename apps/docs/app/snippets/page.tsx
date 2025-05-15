@@ -26,7 +26,9 @@ export default function Snippets() {
   useEffect(() => {
     const fetchSnippets = async () => {
       try {
-        const response = await fetch('https://api.seb.io/snippets.json')
+        const response = await fetch(
+          'https://api.seb.io/snippets/snippets.json',
+        )
         const data: SnippetsResponse = await response.json()
         setSnippets(
           data.snippets.sort((a, b) => a.title.localeCompare(b.title)),

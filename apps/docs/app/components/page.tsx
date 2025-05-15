@@ -27,7 +27,9 @@ export default function Components() {
   useEffect(() => {
     const fetchComponents = async () => {
       try {
-        const response = await fetch('https://api.seb.io/components.json')
+        const response = await fetch(
+          'https://api.seb.io/components/components.json',
+        )
         const data: ComponentsResponse = await response.json()
         setComponents(
           data.components.sort((a, b) => a.title.localeCompare(b.title)),

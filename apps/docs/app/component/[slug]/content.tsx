@@ -36,7 +36,7 @@ interface ComponentContent {
 
 export const getContent = cache(async (slug: string) => {
   const response = await fetch(
-    `https://api.seb.io/${slug}/${slug}.content.json`,
+    `https://api.seb.io/components/${slug}/${slug}.content.json`,
     { next: { revalidate: 3600 } }, // Revalidate every hour
   )
 

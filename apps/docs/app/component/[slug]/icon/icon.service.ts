@@ -19,9 +19,12 @@ export interface IconsResponse {
 }
 
 export const getIcons = cache(async () => {
-  const response = await fetch('https://api.seb.io/icons/icons.json', {
-    next: { revalidate: 3600 },
-  })
+  const response = await fetch(
+    'https://api.seb.io/components/icon/icon.list.json',
+    {
+      next: { revalidate: 3600 },
+    },
+  )
   if (!response.ok) throw new Error('Failed to fetch icons')
   return response.json() as Promise<IconsResponse>
 })
