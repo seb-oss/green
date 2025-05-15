@@ -129,13 +129,18 @@
           (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
         >
         <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
-            <div class="gds-item-field-wrap">
+            <div
+              class="gds-item-field-wrap"
+              [ngClass]="{ 'no-sub-items': item.subItems.length === 0 }"
+            >
               <span
+                *ngIf="item.subItems.length > 0"
+                role="button"
+                tabindex="0"
                 class="chevron-field"
                 [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
               >
                 <svg
-                  *ngIf="item.subItems.length > 0"
                   width="20" height="20" viewBox="0 0 24 24" fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
@@ -214,6 +219,8 @@
               </ng-container>
             </dl>
             <span
+              role="button"
+              tabindex="0"
               class="nav-chevron-field"
               [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
             >

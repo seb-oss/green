@@ -129,6 +129,10 @@
         display: flex;
         flex-wrap: nowrap;
 
+        &.no-sub-items {
+          padding-left: 1.5rem;
+        }
+
         .chevron-field {
           width: 1.5rem;
 
@@ -180,7 +184,7 @@
   }
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 600px) {
   .gds-table {
     thead {
       display: none;
