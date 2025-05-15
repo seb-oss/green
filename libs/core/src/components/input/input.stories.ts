@@ -403,8 +403,7 @@ export const StandardAttributes: Story = {
     <gds-flex flex-direction="column" gap="xl" width="320px">
       <gds-input
         label="Label"
-        supporting-text="Label support text"
-        value="Example value"
+        supporting-text="Using standard attributes"
         min="0"
         max="100"
         step="5"
@@ -416,7 +415,6 @@ export const StandardAttributes: Story = {
         inputmode="numeric"
         autofocus
         enterkeyhint="enter"
-        clearable
       ></gds-input>
     </gds-flex>
   `,
