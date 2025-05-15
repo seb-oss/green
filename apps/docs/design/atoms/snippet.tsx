@@ -95,12 +95,9 @@ export function Snippet({ slug }: SnippetProps) {
 
   try {
     return (
-      <div className="snippet-container">
-        <h2>{snippetData.title}</h2>
-        <div className="snippet-preview">
-          {parse(snippetData.code, options)}
-        </div>
-      </div>
+      <Core.GdsFlex data-snippet={snippetData.slug}>
+        {parse(snippetData.code, options)}
+      </Core.GdsFlex>
     )
   } catch (err) {
     console.warn('Error rendering snippet:', err)

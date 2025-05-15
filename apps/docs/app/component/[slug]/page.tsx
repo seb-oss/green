@@ -1,5 +1,4 @@
 // app/component/[slug]/page.tsx
-import { Snippet } from '@/apps/docs/design/atoms/snippet'
 
 import { getContent } from './content'
 import { IconList } from './icon/icon.list'
@@ -23,7 +22,6 @@ export default async function OverviewPage({
 
   return (
     <div className="overview-content">
-      <Snippet slug="button-snippet-one" />
       {content.overview?.map((section, index) => (
         <div key={index} className="overview-section">
           {section.column.map((col, colIndex) => (

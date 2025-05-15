@@ -3,6 +3,7 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { Snippet } from '@/apps/docs/design/atoms/snippet'
 import Tabs from '@/apps/docs/design/atoms/tabs'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -118,7 +119,7 @@ export default async function ComponentLayout({
             align-items="center"
             justify-content="center"
           >
-            ...
+            <Snippet slug="button-snippet-one" />
           </Core.GdsCard>
 
           <Tabs path={pathname} slug={params.slug} />
