@@ -4,6 +4,7 @@ import { cache } from 'react'
 interface ComponentContent {
   title: string
   slug: string
+  hero_snippet?: string
   beta?: boolean
   summary?: string
   tags?: string[]

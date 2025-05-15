@@ -119,7 +119,7 @@ export default async function ComponentLayout({
             align-items="center"
             justify-content="center"
           >
-            <Snippet slug="button-snippet-one" />
+            {content.hero_snippet && <Snippet slug={content.hero_snippet} />}
           </Core.GdsCard>
 
           <Tabs path={pathname} slug={params.slug} />
