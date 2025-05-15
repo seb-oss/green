@@ -10,17 +10,16 @@ interface LayoutProps {
   params: { slug: string[] }
 }
 
+// app/[...slug]/layout.tsx
 export async function generateMetadata(
   { params }: { params: { slug: string[] } },
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
-  // Skip metadata generation for other routes
   if (params.slug[0] === 'component' || params.slug[0] === 'components') {
     return {}
   }
 
   try {
-    // Only process single-segment slugs
     if (params.slug.length !== 1) {
       return {}
     }
@@ -33,6 +32,14 @@ export async function generateMetadata(
       openGraph: {
         title: `${content.title} - SEB Design System`,
         description: content.summary || content.title,
+        images: [
+          {
+            url: `https://api.seb.io/pages/${params.slug[0]}/${params.slug[0]}.og.png`,
+            width: 1200,
+            height: 630,
+            alt: content.title,
+          },
+        ],
       },
     }
   } catch {
