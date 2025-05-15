@@ -14,7 +14,7 @@ const style = css`
       gap: var(--gds-sys-space-s);
       font-size: var(--gds-sys-text-size-detail-m);
       line-height: var(--gds-sys-text-line-height-detail-m);
-      font-weight: var(--gds-sys-text-weight-book);
+      font-weight: var(--gds-sys-text-weight-regular);
     }
 
     .size-small {
@@ -52,6 +52,10 @@ const style = css`
       font-weight: inherit;
       font-size: inherit;
       line-height: inherit;
+    }
+
+    li:last-child {
+      color: var(--gds-sys-color-l3-content-secondary);
     }
 
     .separator {
