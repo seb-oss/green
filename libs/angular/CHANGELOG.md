@@ -1,5 +1,11 @@
 # Changelog
 
+## 5.12.1
+
+### Patch Changes
+
+- a4252f9: **NggCoreControl:** Update selectors to only apply when controls are used with reactive forms (when `formControlName` is present)
+
 ## 5.12.0
 
 ### Minor Changes
