@@ -41,7 +41,7 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
    * If not provided, the default label is "breadcrumbs".
    */
   @property({ type: String })
-  label: string = msg('Open context menu')
+  label: string = msg('Breadcrumbs')
 
   render() {
     const elements = Array.from(this.children)
