@@ -272,8 +272,9 @@ export const Overflow: Story = {
 }
 
 /**
- * This property allow you to set the accessible label of the breadcrumb.
- * If not provided, the default label is "Breadcrumb".
+ * The breadcrumb component supports customizing the accessibility label. <br/>
+ * This can be useful when you have multiple navigation sections
+ * or want to provide more specific context for screen readers.
  *
  * ```html
  * <gds-breadcrumb label="Site Navigation">
