@@ -12,33 +12,33 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
-import BreadcrumbCSS from './breadcrumb.styles'
+import breadcrumbsCSS from './breadcrumbs.styles'
 
 /**
- * @element gds-breadcrumb
- * @summary The `gds-breadcrumb` component is a navigation element
+ * @element gds-breadcrumbs
+ * @summary The `gds-breadcrumbs` component is a navigation element
  * It helps users understand their current * location within a hierarchical structure of a website or application.
  *
  * @status beta
  */
-@gdsCustomElement('gds-breadcrumb', {
+@gdsCustomElement('gds-breadcrumbs', {
   dependsOn: [IconChevronLeft],
 })
 @localized()
-export class GdsBreadcrumb extends withLayoutChildProps(
+export class GdsBreadcrumbs extends withLayoutChildProps(
   withSizeXProps(withMarginProps(GdsElement)),
 ) {
-  static styles = [tokens, BreadcrumbCSS]
+  static styles = [tokens, breadcrumbsCSS]
 
   /**
-   * Controls the font-size and spacing of separators and breadcrumb items
+   * Controls the font-size and spacing of separators and breadcrumbs items
    */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
   /**
-   * This property allow you to set the accessible label of the breadcrumb.
-   * If not provided, the default label is "Breadcrumb".
+   * This property allow you to set the accessible label of the breadcrumbs.
+   * If not provided, the default label is "breadcrumbs".
    */
   @property({ type: String })
   label: string = msg('Open context menu')

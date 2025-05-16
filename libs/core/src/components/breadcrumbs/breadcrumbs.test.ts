@@ -6,34 +6,34 @@ import {
   htmlTemplateTagFactory,
 } from '@sebgroup/green-core/scoping'
 
-import '@sebgroup/green-core/components/breadcrumb'
+import '@sebgroup/green-core/components/breadcrumbs'
 import '@sebgroup/green-core/components/link'
 import '@sebgroup/green-core/components/text'
 
-import type { GdsBreadcrumb } from '@sebgroup/green-core/components/breadcrumb'
+import type { Gdsbreadcrumbs } from '@sebgroup/green-core/components/breadcrumbs'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-describe('<gds-breadcrumb>', () => {
+describe('<gds-breadcrumbs>', () => {
   describe('Rendering', () => {
-    it('should render breadcrumb', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb>
+    it('should render breadcrumbs', async () => {
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await el.updateComplete
-      expect(el.getAttribute('gds-element')).to.equal('gds-breadcrumb')
+      expect(el.getAttribute('gds-element')).to.equal('gds-breadcrumbs')
     })
 
     it('should render items in an ordered list', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb>
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await el.updateComplete
@@ -43,11 +43,11 @@ describe('<gds-breadcrumb>', () => {
     })
 
     it('should render separators between items', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb>
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await el.updateComplete
@@ -59,10 +59,10 @@ describe('<gds-breadcrumb>', () => {
 
   describe('API', () => {
     it('should support size property', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb size="small">
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs size="small">
           <gds-link href="/home">Home</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await el.updateComplete
@@ -73,24 +73,24 @@ describe('<gds-breadcrumb>', () => {
 
   describe('Accessibility', () => {
     it('should have navigation role and aria-label', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb>
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await el.updateComplete
       const nav = el.shadowRoot?.querySelector('nav')
       expect(nav?.getAttribute('role')).to.equal('navigation')
-      expect(nav?.getAttribute('aria-label')).to.equal('Breadcrumb')
+      expect(nav?.getAttribute('aria-label')).to.equal('breadcrumbs')
     })
 
     it('should mark separators as aria-hidden', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb>
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await el.updateComplete
@@ -99,11 +99,11 @@ describe('<gds-breadcrumb>', () => {
     })
 
     it('should be accessible', async () => {
-      const el = await fixture<GdsBreadcrumb>(
-        html`<gds-breadcrumb>
+      const el = await fixture<Gdsbreadcrumbs>(
+        html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
-        </gds-breadcrumb>`,
+        </gds-breadcrumbs>`,
       )
 
       await expect(el).to.be.accessible()
