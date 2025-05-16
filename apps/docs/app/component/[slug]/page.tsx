@@ -1,93 +1,41 @@
-import Head from 'next/head'
-import { notFound } from 'next/navigation'
-import { allComponents } from 'content'
-import { isDev } from '$/env/env'
-import { GdsRichText } from '$/import/components'
-import { Mdx } from 'core/mdx'
+// app/component/[slug]/page.tsx
 
-import type { Metadata, ResolvingMetadata } from 'next'
+import { getContent } from './content'
+import { IconList } from './icon/icon.list'
+import { getIcons } from './icon/icon.service'
 
-export const dynamic = 'force-static'
-
-type Props = {
-  params: { slug: string }
-}
-
-type ComponentParams = {
-  slug: string
-}
-
-export const generateStaticParams = (): ComponentParams[] => {
-  return allComponents.map((component) => ({
-    slug: component.url_path.replace('/component/', ''),
-  }))
-}
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const { slug } = params
-
-  const component = allComponents.find((component) => {
-    if (component.url_path !== '/component/' + slug) {
-      return false
-    }
-    if (component.private && !isDev) {
-      return false
-    }
-    return true
-  })
-
-  if (!component) {
-    notFound()
-  }
-
-  return {
-    title: component.title + ' — Green Design System',
-    description: component.summary,
-  }
-}
-
-export default function ComponentPage({
-  params,
+export default async function OverviewPage({
+  params: { slug },
 }: {
   params: { slug: string }
 }) {
-  const { slug } = params
+  const content = await getContent(slug)
 
-  const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug,
-  )
-
-  if (!component) {
-    notFound()
+  if (slug === 'icon') {
+    const icons = await getIcons()
+    return (
+      <div>
+        <IconList icons={icons} />
+      </div>
+    )
   }
 
-  const { body } = component
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Thing',
-            description: component.summary,
-            url: `https://seb.io/component/${slug}`,
-            author: {
-              '@type': 'Company',
-              name: 'SEB',
-            },
-          }),
-        }}
-      />
-      <Head>
-        <meta name="title" content={component.title} />
-      </Head>
-      <Mdx code={body.code} globals={{ slug }} />
-    </>
+    <div className="overview-content">
+      {content.overview?.map((section, index) => (
+        <div key={index} className="overview-section">
+          {section.column.map((col, colIndex) => (
+            <div key={colIndex} className="column">
+              {col.column_title_tag === 'H2' ? (
+                <h2>{col.title}</h2>
+              ) : (
+                <h3>{col.title}</h3>
+              )}
+              <p>{col.description}</p>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
   )
 }

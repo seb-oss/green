@@ -1,55 +1,21 @@
-import { notFound } from 'next/navigation'
-import { allComponents } from 'content'
-import { Mdx } from 'core/mdx'
+// app/component/[slug]/ux-text/page.tsx
+import { getContent } from '../content'
 
-import type { Metadata, ResolvingMetadata } from 'next'
-
-type Props = {
-  params: { slug: string }
-}
-
-export async function generateStaticParams() {
-  return allComponents.map((component) => ({
-    slug: component.url_path.replace('/component/', ''),
-  }))
-}
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const { slug } = params
-
-  const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug,
-  )
-
-  if (!component) {
-    notFound()
-  }
-
-  return {
-    title: 'Accessibility - ' + component.title + ' — Green Design System',
-    description: component.summary,
-  }
-}
-export default function Accessibility({
-  params,
+export default async function UXTextPage({
+  params: { slug },
 }: {
   params: { slug: string }
 }) {
-  const { slug } = params
+  const content = await getContent(slug)
 
-  const component = allComponents.find(
-    (component) =>
-      component.url_path === '/component/' + slug + '/accessibility',
+  return (
+    <div className="ux-text-content">
+      {content['accessibility']?.section.map((section, index) => (
+        <div key={index} className="ux-text-section">
+          <h2>{section.title}</h2>
+          <p>{section.description}</p>
+        </div>
+      ))}
+    </div>
   )
-
-  if (!component) {
-    notFound()
-  }
-
-  const { body } = component
-
-  return <Mdx code={body.code} globals={{}} />
 }

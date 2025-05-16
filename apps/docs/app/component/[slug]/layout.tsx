@@ -1,290 +1,134 @@
-/* eslint-disable @nx/enforce-module-boundaries */
-'use client'
+// app/component/[slug]/layout.tsx
+import { Metadata, ResolvingMetadata } from 'next'
+import { headers } from 'next/headers'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { Snippet } from '@/apps/docs/design/atoms/snippet'
+import Tabs from '@/apps/docs/design/atoms/tabs'
 
-import { useState } from 'react'
-import { Link } from 'next-view-transitions'
-import dynamic from 'next/dynamic'
-import { notFound, usePathname } from 'next/navigation'
-import { allComponents } from 'content'
-import {
-  GdsBadge,
-  GdsButton,
-  GdsCard,
-  GdsDiv,
-  GdsFlex,
-  GdsGrid,
-  GdsInput,
-  GdsText,
-} from '$/import/components'
-import { IconMagnifyingGlass, IconSquareBehindSquare } from '$/import/icons'
-import Breadcrumb from 'core/breadcrumb'
-import Navigator from 'core/navigator'
-import Taber from 'core/taber'
-import { format, parseISO } from 'date-fns'
-import { toast } from 'sonner'
+import * as Core from '@sebgroup/green-core/react'
+import { getContent } from './content'
 
-import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
-
-// Dynamic component props
-type DynamicComponentProps = {
-  hero?: boolean // Define the hero prop
-}
-
-export default function ComponentLayout({
-  children,
-  params,
-}: {
+interface LayoutProps {
   children: React.ReactNode
   params: { slug: string }
-}) {
-  const { slug } = params
-  const pathName = usePathname()
-  const [searchTerm, setSearchTerm] = useState('')
-  const getComponent = (path: string) =>
-    allComponents.find(
-      (component) => component.url_path === `/component/${slug}${path}`,
-    )
+}
 
-  const component = getComponent('')
-  const componentA11y = getComponent('/accessibility')
-  const componentCode = getComponent('/code')
-  const componentDesign = getComponent('/design')
-  const componentUXText = getComponent('/ux-text')
+export async function generateMetadata(
+  { params }: { params: { slug: string } },
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  try {
+    const content = await getContent(params.slug)
 
-  if (!component) {
-    notFound()
-  }
-
-  const { title, url_path, tags, status, last_edited, summary } = component
-
-  const pathsAndComponents = [
-    { path: '/accessibility', component: componentA11y },
-    { path: '/code', component: componentCode },
-    { path: '/design', component: componentDesign },
-    { path: '/ux-text', component: componentUXText },
-  ]
-
-  let TOC = <Navigator headings={component?.headings} component={title} />
-
-  for (const { path, component } of pathsAndComponents) {
-    if (pathName.includes(path)) {
-      TOC = <Navigator headings={component?.headings} component={title} />
-      break
-    }
-  }
-
-  const tagsArray = tags ? tags.split(', ') : []
-
-  const links = [
-    { path: '', label: 'Overview', isPrivate: false },
-    // {
-    //   path: '/design',
-    //   label: 'Design',
-    //   isPrivate: componentDesign?.private || false,
-    // },
-    {
-      path: '/ux-text',
-      label: 'UX text',
-      isPrivate: componentUXText?.private || false,
-    },
-    // {
-    //   path: '/code',
-    //   label: 'Code',
-    //   isPrivate: componentCode?.private || false,
-    // },
-    {
-      path: '/accessibility',
-      label: 'Accessibility',
-      isPrivate: componentA11y?.private || false,
-    },
-  ]
-
-  const getDynamicComponent = (c: string) =>
-    dynamic<DynamicComponentProps>(
-      () =>
-        import(`../../../design/example/${c}`).catch(() => {
-          const ExampleComponent = () => <div>Example</div>
-          ExampleComponent.displayName = 'ExampleComponent'
-          return ExampleComponent
-        }),
-      {
-        ssr: false,
+    return {
+      title: `${content.title} - SEB Design System`,
+      description:
+        content.summary || `Documentation for the ${content.title} component`,
+      openGraph: {
+        title: `${content.title} - SEB Design System`,
+        description:
+          content.summary || `Documentation for the ${content.title} component`,
+        images: [
+          {
+            url: `https://api.seb.io/components/${params.slug}/${params.slug}.og.png`,
+            width: 1200,
+            height: 630,
+            alt: content.title,
+          },
+        ],
       },
-    )
-
-  const Preview = getDynamicComponent(url_path.replace('/component/', ''))
-
-  const transformIconName = (iconName: string): string => {
-    return iconName
-      .replace(/^Icon/, '') // Remove the "Icon" prefix
-      .replace(/([A-Z])/g, ' $1') // Add space before each capital letter
-      .trim() // Remove leading space
+    }
+  } catch {
+    return {
+      title: 'Component - SEB Design System',
+    }
   }
+}
 
-  const handleIconClick = (clipboardText: string) => {
-    navigator.clipboard
-      .writeText(clipboardText)
-      .then(() => {
-        toast.success('Copied!')
+export default async function ComponentLayout({
+  children,
+  params,
+}: LayoutProps) {
+  try {
+    const content = await getContent(params.slug)
+    const headersList = await headers()
+    const pathname = headersList.get('x-pathname') || ''
+
+    // Generate breadcrumb items
+    const breadcrumbItems = [
+      { label: 'Home', href: '/' },
+      { label: 'Components', href: '/components' },
+      { label: content.title, href: `/component/${params.slug}` },
+    ]
+
+    if (pathname.includes('/ux-text')) {
+      breadcrumbItems.push({
+        label: 'UX Text',
+        href: `/component/${params.slug}/ux-text`,
       })
-      .catch((error) => {
-        console.error('Error copying text: ', error)
+    } else if (pathname.includes('/accessibility')) {
+      breadcrumbItems.push({
+        label: 'Accessibility',
+        href: `/component/${params.slug}/accessibility`,
       })
-  }
-
-  const fuzzySearch = (term: string, text: string): boolean => {
-    const termLower = term.toLowerCase()
-    const textLower = text.toLowerCase()
-    let termIndex = 0
-    let textIndex = 0
-
-    while (termIndex < termLower.length && textIndex < textLower.length) {
-      if (termLower[termIndex] === textLower[textIndex]) {
-        termIndex++
-      }
-      textIndex++
     }
 
-    return termIndex === termLower.length
-  }
-
-  const filteredIcons = Object.keys(ICONS).filter((iconName) =>
-    fuzzySearch(searchTerm, transformIconName(iconName)),
-  )
-
-  if (component.url_path === '/component/icon') {
-    // console.log('ICONS', ICONS)
-    // toast.success("Copied!")
     return (
-      <GdsFlex
-        flex-direction="column"
-        width="100%"
-        justify-content="center"
-        margin="0 auto"
-        gap="xl"
-      >
-        <GdsDiv position="sticky" inset="58px 0 0 0" z-index="999">
-          <GdsFlex gap="l" flex-direction="column">
-            <GdsInput
-              clearable
-              onKeyUp={(e) =>
-                setSearchTerm((e.target as HTMLInputElement).value)
-              }
-            >
-              <IconMagnifyingGlass height={24} slot="lead" />
-            </GdsInput>
-          </GdsFlex>
-        </GdsDiv>
-        <GdsGrid columns="5" gap="m">
-          {filteredIcons.map((iconName) => {
-            const IconComponent = (ICONS as any)[iconName]
-            return (
-              <GdsFlex
-                key={iconName}
-                flex-direction="column"
-                title={transformIconName(iconName)}
-              >
-                <GdsCard
-                  variant="primary"
-                  align-items="center"
-                  justify-content="center"
-                  padding="m"
-                  height="160px"
-                  width="100%"
-                  border-radius="s"
-                  data-clipboard-text={`<${iconName}></${iconName}>`}
-                  onClick={() => handleIconClick(`<${iconName}></${iconName}>`)}
-                >
-                  <IconComponent height={24} />
-                </GdsCard>
-                <GdsFlex
-                  align-items="center"
-                  justify-content="space-between"
-                  padding="0 s 0 s"
-                  width="100%"
-                >
-                  <GdsText font-size="detail-xs">
-                    {transformIconName(iconName)}
-                  </GdsText>
-                </GdsFlex>
-              </GdsFlex>
-            )
-          })}
-        </GdsGrid>
-      </GdsFlex>
-    )
-  } else {
-    return (
-      <GdsFlex
-        flex-direction="column"
-        width="100%"
-        justify-content="center"
-        margin="0 auto"
-        gap="l"
-      >
-        <Breadcrumb
-          home={'Home'}
-          separator={<GdsText font-size="body-s"> / </GdsText>}
-          slug={slug}
-        />
+      <Core.GdsFlex flex-direction="column" gap="xl" width="80ch">
+        <Core.GdsFlex gap="m" align-items="center">
+          {breadcrumbItems.map((item, index) => (
+            <Core.GdsFlex gap="m" key={item.href}>
+              {index === breadcrumbItems.length - 1 ? (
+                <span aria-current="page">{item.label}</span>
+              ) : (
+                <>
+                  <Link href={item.href}>{item.label}</Link>
+                  <Core.GdsText> / </Core.GdsText>
+                </>
+              )}
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
 
-        <GdsFlex flex-direction="column" gap="xs">
-          <GdsText tag="h1">{title}</GdsText>
-          <GdsText tag="p" text-wrap="balance" className="fade-in delay-200">
-            {summary}
-          </GdsText>
-          <GdsFlex>
-            {status && (
-              <GdsBadge variant="notice" size="small">
-                {status}
-              </GdsBadge>
-            )}
-          </GdsFlex>
-          <GdsFlex gap="s">
-            Tags:
-            {tagsArray.map((tag) => (
-              <Link
-                href={`/tag/` + tag}
-                key={tag}
-                style={{
-                  textDecoration: 'underline',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {tag}
-              </Link>
-            ))}
-          </GdsFlex>
-        </GdsFlex>
-        <GdsFlex gap="l">
-          <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <GdsCard variant="primary" border-radius="s">
-              <GdsFlex
-                gap="xl"
-                align-items="center"
-                justify-content="center"
-                padding="4xl 0"
-                min-height="300px"
-              >
-                <Preview hero={true} />
-              </GdsFlex>
-            </GdsCard>
-            <Taber component={url_path} links={links} />
-            <GdsFlex flex-direction="column" gap="xl">
-              {children}
-            </GdsFlex>
-            <footer>
-              Last updated: <br />
-              <time dateTime={last_edited} title="Last updated">
-                {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
-              </time>
-            </footer>
-          </GdsFlex>
-          <GdsFlex display="none; l{flex}" width="232px">
-            {TOC}
-          </GdsFlex>
-        </GdsFlex>
-      </GdsFlex>
+        <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+          <Core.GdsText tag="h1">{content.title}</Core.GdsText>
+          {content.summary && <p className="summary">{content.summary}</p>}
+          {content.beta && <Core.GdsBadge variant="notice">Beta</Core.GdsBadge>}
+
+          {content.tags && (
+            <Core.GdsFlex>
+              <Core.GdsText>Tags:</Core.GdsText>
+              <Core.GdsFlex gap="m">
+                {content.tags.map((tag) => (
+                  <Core.GdsLink
+                    href={'components/' + tag}
+                    key={tag}
+                    className="tag"
+                  >
+                    {tag}
+                  </Core.GdsLink>
+                ))}
+              </Core.GdsFlex>
+            </Core.GdsFlex>
+          )}
+
+          <Core.GdsCard
+            width="100%"
+            height="280px"
+            align-items="center"
+            justify-content="center"
+          >
+            {content.hero_snippet && <Snippet slug={content.hero_snippet} />}
+          </Core.GdsCard>
+
+          <Tabs path={pathname} slug={params.slug} />
+        </Core.GdsFlex>
+
+        <div className="component-content">{children}</div>
+      </Core.GdsFlex>
     )
+  } catch (error) {
+    return notFound()
   }
 }

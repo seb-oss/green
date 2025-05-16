@@ -1,10 +1,11 @@
-import { GdsFlex } from '$/import/components'
-import Components from 'core/components'
-import Empower from 'core/empower'
-import Hero from 'core/hero'
-import Resources from 'core/resources'
-
 import type { Metadata } from 'next'
+
+import * as Core from '@sebgroup/green-core/react'
+
+interface HomeContent {
+  title: string
+  summary: string
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io'),
@@ -19,21 +20,38 @@ export const metadata: Metadata = {
   },
 }
 
-export default function Home() {
-  return (
-    <GdsFlex
-      flex-direction="column"
-      max-width="1400ch"
-      margin="0 auto"
-      gap="xl"
-      padding="2xl 0 0 0"
-    >
-      <Hero
-        heading="Designed to bring unity to our digital experiences."
-        preamble="Green Design System is more than a polished user interface, its places the user at the very forefront of design, usability and accessibility."
-      />
+async function getHomeContent(): Promise<HomeContent | undefined> {
+  try {
+    const response = await fetch('https://api.seb.io/home.json')
 
-      <Components title="Components" />
-    </GdsFlex>
+    if (!response.ok) {
+      throw new Error('Failed to fetch home content')
+    }
+
+    return response.json()
+  } catch (error) {
+    console.error('Error fetching home content:', error)
+    return undefined
+  }
+}
+
+export default async function Home() {
+  const content = await getHomeContent()
+
+  return (
+    <Core.GdsFlex flex-direction="column" gap="l; s{2xl}">
+      <Core.GdsText tag="h1" font-size="display-s; m{display-m}">
+        {content?.title}
+      </Core.GdsText>
+      {content?.summary && (
+        <Core.GdsText
+          font-size="heading-s; m{heading-m} l{heading-m}"
+          color="secondary"
+          max-width="600px"
+        >
+          {content.summary}
+        </Core.GdsText>
+      )}
+    </Core.GdsFlex>
   )
 }
