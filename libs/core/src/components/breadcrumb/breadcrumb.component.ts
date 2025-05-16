@@ -1,3 +1,4 @@
+import { localized, msg } from '@lit/localize'
 import { html } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -23,6 +24,7 @@ import BreadcrumbCSS from './breadcrumb.styles'
 @gdsCustomElement('gds-breadcrumb', {
   dependsOn: [IconChevronLeft],
 })
+@localized()
 export class GdsBreadcrumb extends withLayoutChildProps(
   withSizeXProps(withMarginProps(GdsElement)),
 ) {
@@ -39,7 +41,7 @@ export class GdsBreadcrumb extends withLayoutChildProps(
    * If not provided, the default label is "Breadcrumb".
    */
   @property({ type: String })
-  label = 'Breadcrumb'
+  label: string = msg('Open context menu')
 
   render() {
     const elements = Array.from(this.children)
