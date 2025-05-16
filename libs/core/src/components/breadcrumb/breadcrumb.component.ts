@@ -13,6 +13,13 @@ import {
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import BreadcrumbCSS from './breadcrumb.styles'
 
+/**
+ * @element gds-breadcrumb
+ * @summary The `gds-breadcrumb` component is a navigation element
+ * It helps users understand their current * location within a hierarchical structure of a website or application.
+ *
+ * @status beta
+ */
 @gdsCustomElement('gds-breadcrumb', {
   dependsOn: [IconChevronLeft],
 })
@@ -21,6 +28,9 @@ export class GdsBreadcrumb extends withLayoutChildProps(
 ) {
   static styles = [tokens, BreadcrumbCSS]
 
+  /**
+   * Controls the font-size and spacing of separators and breadcrumb items
+   */
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
