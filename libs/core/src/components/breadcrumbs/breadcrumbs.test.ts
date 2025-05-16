@@ -10,14 +10,14 @@ import '@sebgroup/green-core/components/breadcrumbs'
 import '@sebgroup/green-core/components/link'
 import '@sebgroup/green-core/components/text'
 
-import type { Gdsbreadcrumbs } from '@sebgroup/green-core/components/breadcrumbs'
+import type { GdsBreadcrumbs } from '@sebgroup/green-core/components/breadcrumbs'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
 describe('<gds-breadcrumbs>', () => {
   describe('Rendering', () => {
     it('should render breadcrumbs', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
@@ -29,7 +29,7 @@ describe('<gds-breadcrumbs>', () => {
     })
 
     it('should render items in an ordered list', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
@@ -43,7 +43,7 @@ describe('<gds-breadcrumbs>', () => {
     })
 
     it('should render separators between items', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
@@ -59,7 +59,7 @@ describe('<gds-breadcrumbs>', () => {
 
   describe('API', () => {
     it('should support size property', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs size="small">
           <gds-link href="/home">Home</gds-link>
         </gds-breadcrumbs>`,
@@ -73,7 +73,7 @@ describe('<gds-breadcrumbs>', () => {
 
   describe('Accessibility', () => {
     it('should have navigation role and aria-label', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
         </gds-breadcrumbs>`,
@@ -82,11 +82,11 @@ describe('<gds-breadcrumbs>', () => {
       await el.updateComplete
       const nav = el.shadowRoot?.querySelector('nav')
       expect(nav?.getAttribute('role')).to.equal('navigation')
-      expect(nav?.getAttribute('aria-label')).to.equal('breadcrumbs')
+      expect(nav?.getAttribute('aria-label')).to.equal('Breadcrumbs')
     })
 
     it('should mark separators as aria-hidden', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
@@ -99,7 +99,7 @@ describe('<gds-breadcrumbs>', () => {
     })
 
     it('should be accessible', async () => {
-      const el = await fixture<Gdsbreadcrumbs>(
+      const el = await fixture<GdsBreadcrumbs>(
         html`<gds-breadcrumbs>
           <gds-link href="/home">Home</gds-link>
           <gds-link href="/products">Products</gds-link>
