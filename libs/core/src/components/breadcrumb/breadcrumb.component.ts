@@ -34,6 +34,13 @@ export class GdsBreadcrumb extends withLayoutChildProps(
   @property({ type: String })
   size: 'large' | 'small' = 'large'
 
+  /**
+   * This property allow you to set the accessible label of the breadcrumb.
+   * If not provided, the default label is "Breadcrumb".
+   */
+  @property({ type: String })
+  label = 'Breadcrumb'
+
   render() {
     const elements = Array.from(this.children)
     const secondToLastIndex = elements.length - 2
@@ -41,7 +48,7 @@ export class GdsBreadcrumb extends withLayoutChildProps(
     return html`
       <nav
         role="navigation"
-        aria-label="Breadcrumb"
+        aria-label=${this.label}
         class=${classMap({ 'size-small': this.size === 'small' })}
       >
         <div class="mobile-return">

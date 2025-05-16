@@ -270,3 +270,50 @@ export const Overflow: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * This property allow you to set the accessible label of the breadcrumb.
+ * If not provided, the default label is "Breadcrumb".
+ *
+ * ```html
+ * <gds-breadcrumb label="Site Navigation">
+ *   ...
+ * </gds-breadcrumb>
+ * ```
+ */
+export const Label: Story = {
+  name: 'Accessible Label',
+  render: (args) => html`
+    <gds-flex flex-direction="column" gap="2xl">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-flex align-items="center" gap="m">
+          <gds-text width="200px">Default label</gds-text>
+          <gds-card flex="1" background="secondary">
+            <gds-breadcrumb>
+              <gds-link href="/home">
+                <gds-icon-home-open slot="lead"></gds-icon-home-open>
+                Home
+              </gds-link>
+              <gds-link href="/products">Products</gds-link>
+              <gds-text>Current page</gds-text>
+            </gds-breadcrumb>
+          </gds-card>
+        </gds-flex>
+
+        <gds-flex align-items="center" gap="m">
+          <gds-text width="200px">Custom label</gds-text>
+          <gds-card background="secondary" flex="1">
+            <gds-breadcrumb label="Site Navigation">
+              <gds-link href="/home">
+                <gds-icon-home-open slot="lead"></gds-icon-home-open>
+                Home
+              </gds-link>
+              <gds-link href="/products">Products</gds-link>
+              <gds-text>Current page</gds-text>
+            </gds-breadcrumb>
+          </gds-card>
+        </gds-flex>
+      </gds-flex>
+    </gds-flex>
+  `,
+}
