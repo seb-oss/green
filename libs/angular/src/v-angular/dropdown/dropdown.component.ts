@@ -121,6 +121,14 @@ export class NggvDropdownComponent<
   @Input() selectOnSingleOption = true
 
   /**
+   * Used to determine which changes should be handled by the dropdown.
+   * If set to false, all changes will be handled by the dropdown.
+   * If set to true, only changes that are distinct from the current value will be handled.
+   * Defaults to true.
+   */
+  @Input() onlyHandleDistinctChanges = true
+
+  /**
    * Emits changes of the expanded state of the dropdown
    */
   @Output() expandedChange = new EventEmitter<boolean>()
