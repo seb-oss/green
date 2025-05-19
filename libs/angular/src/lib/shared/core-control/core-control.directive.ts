@@ -14,13 +14,13 @@ import {
 } from '@angular/forms'
 
 @Directive({
-  selector: `gds-input:not([ngDefaultControl]),
-     gds-textarea:not([ngDefaultControl]),
-     gds-dropdown:not([ngDefaultControl]),
-     gds-datepicker:not([ngDefaultControl]),
-     gds-select:not([ngDefaultControl]),
-     gds-radio-group:not([ngDefaultControl]),
-     gds-checkbox-group:not([ngDefaultControl]),
+  selector: `gds-input[formControlName]:not([ngDefaultControl]),
+     gds-textarea[formControlName]:not([ngDefaultControl]),
+     gds-dropdown[formControlName]:not([ngDefaultControl]),
+     gds-datepicker[formControlName]:not([ngDefaultControl]),
+     gds-select[formControlName]:not([ngDefaultControl]),
+     gds-radio-group[formControlName]:not([ngDefaultControl]),
+     gds-checkbox-group[formControlName]:not([ngDefaultControl]),
      [nggCoreControl]`,
   providers: [
     {
