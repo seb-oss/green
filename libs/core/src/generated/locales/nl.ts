@@ -18,6 +18,7 @@
 's281846ef0421c71f': `November`,
 's2ceb11be2290bb1b': `Annuleren`,
 's39938ecdae568740': `September`,
+'s3b8a6245b12fa2ad': `Kruimelpad`,
 's407a88a592a0987c': `Augustus`,
 's46d6587089bd0356': `Volgende maand`,
 's49730f3d5751a433': `Laden...`,
