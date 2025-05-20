@@ -18,6 +18,7 @@
 's281846ef0421c71f': `Novembre`,
 's2ceb11be2290bb1b': `Annuler`,
 's39938ecdae568740': `Septembre`,
+'s3b8a6245b12fa2ad': `Fil d'Ariane`,
 's407a88a592a0987c': `Août`,
 's46d6587089bd0356': `Mois suivant`,
 's49730f3d5751a433': `Chargement...`,
