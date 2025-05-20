@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.12.1
+
+### Patch Changes
+
+- a4252f9: **NggCoreControl:** Update selectors to only apply when controls are used with reactive forms (when `formControlName` is present)
+- Updated dependencies [4c000b4]
+  - @sebgroup/green-core@1.81.0
+
 ## 5.12.0
 
 ### Minor Changes
