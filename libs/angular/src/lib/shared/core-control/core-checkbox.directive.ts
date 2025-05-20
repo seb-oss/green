@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 import { NggCoreControlDirective } from './core-control.directive'
 
 @Directive({
-  selector: `gds-checkbox, [nggCoreCheckboxControl]`,
+  selector: `gds-checkbox[formControlName], [nggCoreCheckboxControl]`,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
