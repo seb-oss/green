@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.81.0
+
+### Minor Changes
+
+- 4c000b4: **Breadcrumb:** Add new component breadcrumb and breadcrumb item
+
 ## 1.80.0
 
 ### Minor Changes
