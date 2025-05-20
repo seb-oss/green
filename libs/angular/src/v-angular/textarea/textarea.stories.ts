@@ -36,6 +36,23 @@ export default {
       ],
     }),
   ],
+  argTypes: {
+    invalid: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    size: {
+      options: ['small', 'large'],
+      control: {
+        type: 'select',
+        labels: {
+          small: 'Small',
+          large: 'Large',
+        },
+      },
+    },
+  },
 } as Meta
 
 type TextareaComponentStory = StoryFn<NggvTextareaComponent & any>
@@ -65,6 +82,7 @@ const Template: TextareaComponentStory = (
         [maxlength]="maxlength"
         [rows]="rows"
         [locked]="locked"
+        [size]="size"
         [displayDisabledAsLocked]="displayDisabledAsLocked">
       </nggv-textarea>
       <div style="margin-top: 1rem">
@@ -87,6 +105,7 @@ Primary.args = {
   placeholder: 'This is a placeholder',
   maxlength: 140,
   invalid: false,
+  size: 'large',
 }
 
 export const WithErrorAndCountdown = Template.bind({})

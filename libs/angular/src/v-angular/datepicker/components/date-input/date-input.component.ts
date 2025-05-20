@@ -85,7 +85,10 @@ export class DateInputComponent
   @Input() firstDayOfWeek: WeekDay = WeekDay.Monday
   /** If set to true, it will allow to close the calendar on escape button click. */
   @Input() closeCalendarOnEscape = true
-
+  /**
+   * Sets the displayed size of the date input field.
+   */
+  @HostBinding('class') @Input() size: 'small' | 'large' = 'large'
   /** @internal */
   // calendarIcon: IconDefinition = faCalendarDays;
 

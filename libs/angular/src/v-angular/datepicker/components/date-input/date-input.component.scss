@@ -196,4 +196,34 @@
       }
     }
   }
+
+  &.small {
+    .gds-field-label {
+      font-size: 0.875rem;
+      line-height: 1rem;
+    }
+
+    label + .field-wrap {
+      margin-top: 0.25rem;
+    }
+
+    .field-wrap {
+      height: calc(2rem + 2px);
+      min-height: calc(2rem + 2px);
+    }
+    .field-wrap .nggv-field-date {
+      padding: 0.38rem 0.5rem;
+      line-height: 1rem;
+      min-height: 2rem;
+      font-size: 14px;
+    }
+
+    .field-wrap .nggv-button-date {
+      min-height: 2rem;
+      min-width: 2rem;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+    }
+  }
 }

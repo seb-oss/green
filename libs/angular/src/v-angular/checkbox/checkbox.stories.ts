@@ -47,6 +47,18 @@ export default {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
+  argTypes: {
+    size: {
+      options: ['small', 'large'],
+      control: {
+        type: 'select',
+        labels: {
+          small: 'Small',
+          large: 'Large',
+        },
+      },
+    },
+  },
 } as Meta
 
 const Template: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
@@ -61,10 +73,11 @@ const Template: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
       [required]="required"
       [invalid]="invalid"
       [error]="error"
+      [size]="size"
       [ngModel]="checked"
       (ngModelChange)="action($event)">
     </nggv-checkbox>`,
-  props: args,
+  props: { ...args, size: args.size || 'large' },
 })
 
 const TemplateAlt: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
@@ -73,16 +86,19 @@ const TemplateAlt: StoryFn<NggvCheckboxComponent & StoryInputListener> = (
   template: /*html*/ `
     <nggv-checkbox
       [id]="opt1.id" [name]="name" [label]="opt1.label" [value]="opt1.value"
+      [size]="size"
       [ngModel]="opt1.ngModel"
       (ngModelChange)="action($event)">
     </nggv-checkbox>
     <nggv-checkbox
       [id]="opt2.id" [name]="name" [label]="opt2.label" [value]="opt2.value"
+      [size]="size"
       [ngModel]="opt2.ngModel"
       (ngModelChange)="action($event)">
     </nggv-checkbox>
     <nggv-checkbox
       [id]="opt3.id" [name]="name" [label]="opt3.label" [value]="opt3.value"
+      [size]="size"
       [ngModel]="opt3.ngModel"
       (ngModelChange)="action($event)">
     </nggv-checkbox>`,
@@ -126,6 +142,7 @@ const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
           [invalid]="invalid"
           [error]="error"
           [locked]="locked"
+          [size]="size"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Vanilla 🍦</ng-template>
         </nggv-checkbox>
@@ -138,6 +155,7 @@ const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
           [invalid]="invalid"
           [error]="error"
           [locked]="locked"
+          [size]="size"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Strawberry 🍧</ng-template>
         </nggv-checkbox>
@@ -150,6 +168,7 @@ const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
           [invalid]="invalid"
           [error]="error"
           [locked]="locked"
+          [size]="size"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
           <ng-template #labelTpl>Chocolate 🍫</ng-template>
         </nggv-checkbox>

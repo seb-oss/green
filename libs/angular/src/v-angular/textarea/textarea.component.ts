@@ -74,6 +74,11 @@ export class NggvTextareaComponent extends NggvBaseControlValueAccessorComponent
   /** Sets the height of the textarea and disables resize. A scrollbar will appear if necessary. */
   @Input() rows?: number
 
+  /**
+   * Sets the displayed size of the textarea.
+   */
+  @HostBinding('class') @Input() size: 'small' | 'large' = 'large'
+
   constructor(
     @Self() @Optional() public ngControl: NgControl,
     @Optional()
