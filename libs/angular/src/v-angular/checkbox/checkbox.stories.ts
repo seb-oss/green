@@ -181,6 +181,7 @@ const TemplateWithReactiveForm: StoryFn<NggvCheckboxComponent & any> = (
       ...args,
       formGroup: grp,
       disableFn: toggleDisableField,
+      size: args.size || 'large',
     },
   }
 }

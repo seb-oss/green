@@ -20,6 +20,7 @@ describe('[NggvCore]', () => {
   describe('TextareaComponent - constructor()', () => {
     let component: NggvTextareaComponent
     let fixture: ComponentFixture<NggvTextareaComponent>
+    let hostElement: HTMLElement
 
     beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -38,10 +39,25 @@ describe('[NggvCore]', () => {
       fixture = TestBed.createComponent(NggvTextareaComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
+      hostElement = fixture.debugElement.nativeElement
     })
 
     it('should create', () => {
       expect(component).toBeTruthy()
+    })
+
+    it('should have "small" class when size is set to "small"', () => {
+      component.size = 'small'
+      fixture.detectChanges()
+      expect(hostElement.classList.contains('small')).toBeTruthy()
+      expect(hostElement.classList.contains('large')).toBeFalsy()
+    })
+
+    it('should have "large" class when size is set to "large"', () => {
+      component.size = 'large'
+      fixture.detectChanges()
+      expect(hostElement.classList.contains('large')).toBeTruthy()
+      expect(hostElement.classList.contains('small')).toBeFalsy()
     })
   })
 })

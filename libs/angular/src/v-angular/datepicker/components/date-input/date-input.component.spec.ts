@@ -25,6 +25,8 @@ describe('[NggvDatepicker]', () => {
   // ----------------------------------------------------------------------------
   // DateInputComponent
   // ----------------------------------------------------------------------------
+  let hostElement: HTMLElement
+
   @Component({
     template: /*html*/ `
       <nggv-dateinput #dateInput [formControl]="fc"></nggv-dateinput>
@@ -63,6 +65,7 @@ describe('[NggvDatepicker]', () => {
       fixture = TestBed.createComponent(DateInputHostComponent)
       component = fixture.componentInstance
       fixture.detectChanges()
+      hostElement = fixture.debugElement.nativeElement
     }))
 
     describe('constructor()', () => {
@@ -126,6 +129,32 @@ describe('[NggvDatepicker]', () => {
           defaultPlaceholder,
           undefined,
         )
+      })
+
+      describe('size input', () => {
+        it('should set class to small when size is set to "small"', () => {
+          component.dateInput.size = 'small'
+          fixture.detectChanges()
+
+          expect(
+            hostElement.querySelector('nggv-dateinput')?.classList,
+          ).toContain('small')
+          expect(
+            hostElement.querySelector('nggv-dateinput')?.classList,
+          ).not.toContain('large')
+        })
+
+        it('should set class to large when size is set to "large"', () => {
+          component.dateInput.size = 'large'
+          fixture.detectChanges()
+
+          expect(
+            hostElement.querySelector('nggv-dateinput')?.classList,
+          ).toContain('large')
+          expect(
+            hostElement.querySelector('nggv-dateinput')?.classList,
+          ).not.toContain('small')
+        })
       })
     })
 

@@ -24,6 +24,21 @@ export class NggvTextareaComponent extends NggvBaseControlValueAccessorComponent
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'textarea'
+
+  /**
+   * Sets the small class based on the size input.
+   */
+  @HostBinding('class.small') get isSmall(): boolean {
+    return this.size === 'small'
+  }
+
+  /**
+   * Sets the large class based on the size input.
+   */
+  @HostBinding('class.large') get isLarge(): boolean {
+    return this.size === 'large'
+  }
+
   /** Text shown before input has a written value. */
   @Input() placeholder?: string
   /** If set to true, the value will not be editable. */
@@ -77,7 +92,7 @@ export class NggvTextareaComponent extends NggvBaseControlValueAccessorComponent
   /**
    * Sets the displayed size of the textarea.
    */
-  @HostBinding('class') @Input() size: 'small' | 'large' = 'large'
+  @Input() size: 'small' | 'large' = 'large'
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
