@@ -15,13 +15,9 @@ import '../../icon/icons/rocket.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-errorsummary)
  *
- *
  * When a user attempts to submit a form with errors, this component displays a summary of those errors.
  * Including an error summary greatly assists users in promptly identifying and addressing multiple errors
  * in a consolidated manner. It provides a clear indication of what went wrong and what needs to be corrected.
- *
- * Each form component that contains an error is listed as a row, displaying the name of the field and
- * linking it to the corresponding form element.
  */
 const meta: Meta = {
   title: 'Components/Form/Validation/Summary',
@@ -50,7 +46,8 @@ const DefaultParams: Story = {
 /**
  * To use the `gds-form-summary` component, simply place it inside a form element.
  *
- * The suammry component will automatically detect any form elements with validation errors and display them.
+ * In this example we're using a reactive form summary below the form controls. The `reactive` attribute makes the summary
+ * update automatically as the user interacts with the form.
  */
 export const Usage: Story = {
   ...DefaultParams,
@@ -100,9 +97,7 @@ export const Usage: Story = {
             },
           }}
         ></gds-input>
-        <gds-div margin="s 0 s">
-          <gds-form-summary></gds-form-summary>
-        </gds-div>
+        <gds-form-summary reactive></gds-form-summary>
         <gds-flex gap="m">
           <gds-button type="submit">
             Launch
@@ -112,4 +107,36 @@ export const Usage: Story = {
         </gds-flex>
       </gds-flex>
     </form>`,
+}
+
+/**
+ * The `gds-form-summary` component can also be used in a non-reactive way.
+ * In this example, the summary is placed above the form controls and
+ * is updated manually when the user clicks the "Submit" button.
+ */
+export const ManualUpdate: Story = {
+  ...DefaultParams,
+  render: (args) =>
+    html`<form style="width: 450px">
+      <gds-form-summary id="summary"></gds-form-summary>
+      <gds-flex flex-direction="column" gap="m" align-items="start">
+        <gds-input
+          label="Designation"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A designation is required',
+                ]
+            },
+          }}
+        ></gds-input>
+        <gds-button
+          type="submit"
+          onclick="document.getElementById('summary').refresh()"
+          >Submit</gds-button
+        >
+      </gds-flex>
+    </form> `,
 }

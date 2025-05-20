@@ -23,7 +23,7 @@ describe('<gds-form-summary>', () => {
       const formEl = await fixture<HTMLFormElement>(
         html`<form>
           <gds-dropdown .invalid=${true} label="Dropdown"></gds-dropdown>
-          <gds-form-summary id="summary"></gds-form-summary>
+          <gds-form-summary id="summary" reactive></gds-form-summary>
         </form>`,
       )
       const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
@@ -41,15 +41,16 @@ describe('<gds-form-summary>', () => {
       expect(el).to.exist
     })
 
-    it('should render list items', async () => {
+    it('should render list item in reactive mode', async () => {
       const formEl = await fixture(
         html`<form>
           <gds-dropdown
+            .errorMessage=${'Error message'}
             .invalid=${true}
             label="Dropdown label"
             id="dropdown"
           ></gds-dropdown>
-          <gds-form-summary id="summary"></gds-form-summary>
+          <gds-form-summary id="summary" reactive></gds-form-summary>
         </form>`,
       )
       const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
@@ -60,8 +61,45 @@ describe('<gds-form-summary>', () => {
 
       expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
       expect(
-        summaryEl.shadowRoot?.querySelector('li')?.textContent.trim(),
+        summaryEl.shadowRoot
+          ?.querySelector('li div :first-child')
+          ?.textContent.trim(),
       ).to.equal('Dropdown label')
+      expect(
+        summaryEl.shadowRoot
+          ?.querySelector('li div :nth-child(2)')
+          ?.textContent.trim(),
+      ).to.equal('Error message')
     })
+  })
+
+  it('should render list items in non-reactive mode when refresh() is called', async () => {
+    const formEl = await fixture(
+      html`<form>
+        <gds-dropdown
+          .errorMessage=${'Error message'}
+          .invalid=${true}
+          label="Dropdown label"
+          id="dropdown"
+        ></gds-dropdown>
+        <gds-form-summary id="summary"></gds-form-summary>
+      </form>`,
+    )
+    const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
+    const dropdownEl = formEl.querySelector('#dropdown') as GdsDropdown
+
+    await dropdownEl.updateComplete
+    await summaryEl.updateComplete
+
+    expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+
+    dropdownEl.invalid = false
+
+    expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+
+    summaryEl.refresh()
+    await summaryEl.updateComplete
+
+    expect(summaryEl.shadowRoot?.querySelector('li')).to.not.exist
   })
 })
