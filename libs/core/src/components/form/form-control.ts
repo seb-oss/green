@@ -112,7 +112,7 @@ export abstract class GdsFormControlElement<ValueT = any>
         customError: value,
         valid: !value,
       },
-      this.validationMessage || msg(`Error message.`),
+      this.validationMessage || this.errorMessage || msg(`Error message.`),
       // @ts-expect-error - setValidity actually takes an element as the third argument, but the type definition is wrong.
       this._getValidityAnchor() || undefined,
     )
