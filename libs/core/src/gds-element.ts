@@ -32,6 +32,11 @@ export class GdsElement extends LitElement {
   static isDefined = false
 
   /**
+   * Style expression properties for this element will use this selector by default.
+   */
+  static styleExpressionBaseSelector = ':host'
+
+  /**
    * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.
    *
    * @attribute gds-element

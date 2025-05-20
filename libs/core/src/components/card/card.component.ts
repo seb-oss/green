@@ -47,7 +47,7 @@ export class GdsCard extends GdsDiv {
    */
   @styleExpressionProperty({
     property: 'box-shadow',
-    valueTemplate: (v) => `var(--gds-shadow-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-shadow-${v})`,
   })
   shadow?: string
 

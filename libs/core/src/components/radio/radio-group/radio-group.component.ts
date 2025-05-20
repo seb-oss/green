@@ -143,30 +143,36 @@ class RadioGroup extends GdsFormControlElement<string> {
   }
 
   #dispatchChangeEvents() {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
-        bubbles: true,
-      }),
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new Event('change', {
+          composed: true,
+          bubbles: true,
+        }),
+      ),
     )
-    this.dispatchEvent(new Event('input', { bubbles: true }))
+    this.updateComplete.then(() =>
+      this.dispatchEvent(
+        new Event('input', {
+          bubbles: true,
+          composed: true,
+        }),
+      ),
+    )
   }
 
   #handleRadioChange(e: Event) {
+    e.stopPropagation()
     const radio = e.target as GdsRadio
-    if (radio.hasAttribute('value')) {
-      this.value = radio.value
-      this._syncRadioStates()
-      this.#dispatchChangeEvents()
-    }
+    this.value = radio.value
+    this._syncRadioStates()
+    this.#dispatchChangeEvents()
   }
 
   #handleKeyDown(e: KeyboardEvent) {
     if (!this._isConnected) return
 
-    const radios = this.radios.filter(
-      (radio) => !radio.hasAttribute('disabled'),
-    )
+    const radios = this.radios.filter((radio) => !radio.disabled)
     if (radios.length === 0) return
 
     let currentIndex = radios.findIndex(
@@ -225,6 +231,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       class=${classMap(classes)}
       aria-labelledby="group-label"
       aria-describedby="supporting-text extended-supporting-text footer"
+      aria-invalid=${this.invalid}
     >
       ${this.#renderRadioGroupContents()}
     </div>`
@@ -265,7 +272,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       @keydown=${this.#handleKeyDown}
       @focus=${this.#handleFocus}
     >
-      <slot @gds-radio-change=${this.#handleRadioChange}></slot>
+      <slot @input=${this.#handleRadioChange}></slot>
     </div>`
   }
 

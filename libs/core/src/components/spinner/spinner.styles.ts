@@ -19,7 +19,7 @@ export const styles = css`
     --spinner-track-color: var(--gds-sys-color-l3-background-secondary);
     --spinner-active-color: var(--gds-sys-color-l3-content-secondary);
     --spinner-label-color: currentColor;
-    --spinner-backdrop-color: rgba(0, 0, 0, 0.8);
+    --spinner-backdrop-color: rgba(100, 100, 100, 0.4);
 
     --spinner-backdrop-blur: 2px;
 
@@ -115,9 +115,6 @@ export const styles = css`
   .spinner-wrapper.spinner-backdrop {
     background-color: var(--spinner-backdrop-color);
     backdrop-filter: blur(var(--spinner-backdrop-blur));
-    --spinner-label-color: #fff;
-    --spinner-track-color: var(--gds-sys-color-l3-content-secondary);
-    --spinner-active-color: var(--gds-sys-color-l3-background-secondary);
   }
 
   /* Label styling */
