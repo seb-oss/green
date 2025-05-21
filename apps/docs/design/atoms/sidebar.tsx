@@ -337,7 +337,6 @@ export default function Sidebar() {
           navigationItems.map((item) => (
             <Core.GdsButton
               key={item.slug}
-              // onClick={handleClick(item.slug, isExternalLink(item.slug))}
               onClick={internalLink}
               href={item.slug}
               rank="tertiary"

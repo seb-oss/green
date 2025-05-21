@@ -1,17 +1,40 @@
+// tabs.tsx
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 
-export default function Tabs({ slug, path }: { slug: string; path: string }) {
+interface TabsProps {
+  slug: string
+}
+
+export default function Tabs({ slug }: TabsProps) {
   const router = useRouter()
+  const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const internalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const href = e.currentTarget.href
     router.push(href)
   }
+
+  // Don't render anything until client-side
+  if (!mounted) {
+    return null
+  }
+
+  const currentPath = pathname.split('?')[0]
+  const isOverviewSelected = currentPath === `/component/${slug}`
+  const isUXTextSelected = currentPath === `/component/${slug}/ux-text`
+  const isAccessibilitySelected =
+    currentPath === `/component/${slug}/accessibility`
 
   return (
     <Core.GdsCard
@@ -37,23 +60,21 @@ export default function Tabs({ slug, path }: { slug: string; path: string }) {
           <Core.GdsMenuButton
             onClick={internalLink}
             href={`/component/${slug}`}
-            selected={
-              !path.includes('/ux-text') && !path.includes('/accessibility')
-            }
+            selected={isOverviewSelected}
           >
             Overview
           </Core.GdsMenuButton>
           <Core.GdsMenuButton
             onClick={internalLink}
             href={`/component/${slug}/ux-text`}
-            selected={path.includes('/ux-text')}
+            selected={isUXTextSelected}
           >
             UX text
           </Core.GdsMenuButton>
           <Core.GdsMenuButton
             onClick={internalLink}
             href={`/component/${slug}/accessibility`}
-            selected={path.includes('/accessibility')}
+            selected={isAccessibilitySelected}
           >
             Accessibility
           </Core.GdsMenuButton>

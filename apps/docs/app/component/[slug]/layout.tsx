@@ -3,8 +3,10 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import Breadcrumbs from '@/apps/docs/design/atoms/breadcrumb/breadcrumb'
 import { Snippet } from '@/apps/docs/design/atoms/snippet'
 import Tabs from '@/apps/docs/design/atoms/tabs'
+import { Icon } from '@/apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 import { getContent } from './content'
@@ -52,57 +54,27 @@ export default async function ComponentLayout({
 }: LayoutProps) {
   try {
     const content = await getContent(params.slug)
-    const headersList = await headers()
-    const pathname = headersList.get('x-pathname') || ''
-
-    // Generate breadcrumb items
-    const breadcrumbItems = [
-      { label: 'Home', href: '/' },
-      { label: 'Components', href: '/components' },
-      { label: content.title, href: `/component/${params.slug}` },
-    ]
-
-    if (pathname.includes('/ux-text')) {
-      breadcrumbItems.push({
-        label: 'UX Text',
-        href: `/component/${params.slug}/ux-text`,
-      })
-    } else if (pathname.includes('/accessibility')) {
-      breadcrumbItems.push({
-        label: 'Accessibility',
-        href: `/component/${params.slug}/accessibility`,
-      })
-    }
 
     return (
       <Core.GdsFlex flex-direction="column" gap="xl" width="80ch">
-        <Core.GdsFlex gap="m" align-items="center">
-          {breadcrumbItems.map((item, index) => (
-            <Core.GdsFlex gap="m" key={item.href}>
-              {index === breadcrumbItems.length - 1 ? (
-                <span aria-current="page">{item.label}</span>
-              ) : (
-                <>
-                  <Link href={item.href}>{item.label}</Link>
-                  <Core.GdsText> / </Core.GdsText>
-                </>
-              )}
-            </Core.GdsFlex>
-          ))}
-        </Core.GdsFlex>
-
+        <Breadcrumbs slug={params.slug} title={content.title} />
         <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-          <Core.GdsText tag="h1">{content.title}</Core.GdsText>
-          {content.summary && <p className="summary">{content.summary}</p>}
-          {content.beta && <Core.GdsBadge variant="notice">Beta</Core.GdsBadge>}
-
+          <Core.GdsFlex flex-direction="column" gap="xs">
+            <Core.GdsText tag="h1">{content.title}</Core.GdsText>
+            {content.summary && (
+              <Core.GdsText tag="p">{content.summary}</Core.GdsText>
+            )}
+            {content.beta && (
+              <Core.GdsBadge variant="notice">BETA</Core.GdsBadge>
+            )}
+          </Core.GdsFlex>
           {content.tags && (
-            <Core.GdsFlex>
-              <Core.GdsText>Tags:</Core.GdsText>
+            <Core.GdsFlex gap="xs" align-items="center">
+              <Core.GdsText tag="p">Tags:</Core.GdsText>
               <Core.GdsFlex gap="m">
                 {content.tags.map((tag) => (
                   <Core.GdsLink
-                    href={'components/' + tag}
+                    href={'/components/' + tag}
                     key={tag}
                     className="tag"
                   >
@@ -112,7 +84,6 @@ export default async function ComponentLayout({
               </Core.GdsFlex>
             </Core.GdsFlex>
           )}
-
           <Core.GdsCard
             width="100%"
             height="280px"
@@ -121,8 +92,7 @@ export default async function ComponentLayout({
           >
             {content.hero_snippet && <Snippet slug={content.hero_snippet} />}
           </Core.GdsCard>
-
-          <Tabs path={pathname} slug={params.slug} />
+          <Tabs slug={params.slug} />
         </Core.GdsFlex>
 
         <div className="component-content">{children}</div>
