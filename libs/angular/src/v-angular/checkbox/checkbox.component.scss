@@ -39,4 +39,16 @@
   i:after {
     box-sizing: border-box;
   }
+
+  &.small {
+    label.form-control:has(input[type='checkbox']) {
+      line-height: 1rem;
+      font-size: 0.875rem;
+      padding: 0.38rem 0.5rem;
+
+      span {
+        margin-top: 0.125rem;
+      }
+    }
+  }
 }

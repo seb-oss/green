@@ -125,7 +125,6 @@ export const Input = forwardRef(
     const showSimpleInput = !label && !info && !expandableInfo
 
     const describedBy = classNames(ariaDescribedBy, {
-      [`${uuid}_message`]: !showSimpleInput,
       [`${uuid}_info`]: !showSimpleInput && info,
       [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
     })
@@ -139,6 +138,9 @@ export const Input = forwardRef(
         aria-describedby={describedBy || undefined}
         aria-invalid={validator?.indicator === 'error'}
         aria-required={required}
+        aria-errormessage={
+          validator?.indicator === 'error' ? `${uuid}_message` : undefined
+        }
         autoComplete={autoComplete}
         className={inputClassName || undefined}
         data-testid={dataTestId}
