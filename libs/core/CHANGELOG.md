@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.81.0
+
+### Minor Changes
+
+- 4c000b4: **Breadcrumb:** Add new component breadcrumb and breadcrumb item
+
+## 1.80.0
+
+### Minor Changes
+
+- 2edbe83: **Input:** Support additional standard attributes
+- 2edbe83: **Textarea:** Support more standard attributes
+
+### Patch Changes
+
+- 5f775b4: **Dialog:** Add missing dependency on `gds-div`
+
 ## 1.79.0
 
 ### Minor Changes

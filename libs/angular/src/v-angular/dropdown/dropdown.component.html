@@ -98,6 +98,7 @@
           [optionContentTpl]="optionContentTpl"
           [groupLabelTpl]="groupLabelTpl"
           [textToHighlight]="textToHighlight"
+          [onlyEmitDistinctChanges]="onlyHandleDistinctChanges"
           (closed)="setExpanded(false)"
           (selectedValueChanged)="onSelectChange($event)"
         >

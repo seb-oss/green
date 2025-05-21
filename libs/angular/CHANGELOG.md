@@ -1,5 +1,29 @@
 # Changelog
 
+## 5.12.1
+
+### Patch Changes
+
+- a4252f9: **NggCoreControl:** Update selectors to only apply when controls are used with reactive forms (when `formControlName` is present)
+- Updated dependencies [4c000b4]
+  - @sebgroup/green-core@1.81.0
+
+## 5.12.0
+
+### Minor Changes
+
+- 45a6303: **V-Angular Dropdown/Typeahead**: Keyboard select dropdown with nvda screen-reader.
+
+### Patch Changes
+
+- 2a3e532: Resolved V-Angular table a11y warnings
+- Updated dependencies [2edbe83]
+- Updated dependencies [5f775b4]
+- Updated dependencies [461504b]
+- Updated dependencies [2edbe83]
+  - @sebgroup/green-core@1.80.0
+  - @sebgroup/chlorophyll@3.6.20
+
 ## 5.11.2
 
 ### Patch Changes

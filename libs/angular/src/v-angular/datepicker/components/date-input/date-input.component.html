@@ -92,11 +92,13 @@
         (click)="toggleDatepicker()"
         [disabled]="disabled"
       >
-        <gds-icon-calendar
-          *nggCoreElement
-          width="20"
-          height="20"
-        ></gds-icon-calendar>
+        @if (size === 'small') {
+          <gds-icon-calendar *nggCoreElement size="16px"></gds-icon-calendar>
+        }
+
+        @if (size === 'large') {
+          <gds-icon-calendar *nggCoreElement size="20px"></gds-icon-calendar>
+        }
       </button>
     </div>
 
@@ -137,8 +139,7 @@
             <gds-icon-triangle-exclamation
               *nggCoreElement
               [solid]="true"
-              width="16"
-              height="16"
+              size="16px"
             ></gds-icon-triangle-exclamation>
           </span>
           <span
@@ -159,7 +160,6 @@
         </span>
       </label>
     </ng-container>
-
     <ng-container *ngFor="let error of errorList ?? []">
       <label
         class="gds-field-notice gds-field-notice--error"
@@ -171,8 +171,7 @@
             <gds-icon-triangle-exclamation
               *nggCoreElement
               [solid]="true"
-              width="16"
-              height="16"
+              size="16px"
             ></gds-icon-triangle-exclamation>
           </span>
           <span
