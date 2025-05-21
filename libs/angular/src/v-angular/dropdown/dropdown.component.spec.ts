@@ -30,7 +30,7 @@ describe('[NggvCore]', () => {
   // ----------------------------------------------------------------------------
   // DropdownComponent - constructor()
   // ----------------------------------------------------------------------------
-
+  let hostElement: HTMLElement
   describe('DropdownComponent - constructor()', () => {
     let component: NggvDropdownComponent
     let fixture: ComponentFixture<NggvDropdownComponent>
@@ -60,6 +60,7 @@ describe('[NggvCore]', () => {
         NggvDropdownComponent,
       )
       component = fixture.componentInstance
+      hostElement = fixture.debugElement.nativeElement
     }))
 
     it('creates component', () => {
@@ -134,6 +135,21 @@ describe('[NggvCore]', () => {
         fixture.detectChanges()
         expect(component.options.length).toEqual(1)
         expect(component.options[0]).toEqual(updateOption)
+      })
+      describe('size input', () => {
+        it('should set class "small" when size is "small"', () => {
+          component.size = 'small'
+          fixture.detectChanges()
+          expect(hostElement.classList.contains('small')).toBeTruthy()
+          expect(hostElement.classList.contains('large')).toBeFalsy()
+        })
+
+        it('should set class "large" when size is "large"', () => {
+          component.size = 'large'
+          fixture.detectChanges()
+          expect(hostElement.classList.contains('large')).toBeTruthy()
+          expect(hostElement.classList.contains('small')).toBeFalsy()
+        })
       })
     })
   })

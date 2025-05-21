@@ -93,6 +93,16 @@ export default {
         type: 'radio',
       },
     },
+    size: {
+      options: ['small', 'large'],
+      control: {
+        type: 'select',
+        labels: {
+          large: 'Large',
+          small: 'Small',
+        },
+      },
+    },
   },
 } as Meta
 
@@ -131,6 +141,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
       [firstDayOfWeek]="firstDayOfWeek"
       [formControl]="formControl"
       [locked]="locked"
+      [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
       [closeCalendarOnEscape]="closeCalendarOnEscape"
       >
@@ -437,6 +448,7 @@ Primary.args = {
   dateCharacters: { year: 'å', month: 'm', day: 'd' },
   errorList: [],
   withErrorIcon: false,
+  size: 'large',
 }
 
 export const WithFormControl = TemplateWithFormControl.bind({})

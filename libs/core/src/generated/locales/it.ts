@@ -18,6 +18,7 @@
 's281846ef0421c71f': `Novembre`,
 's2ceb11be2290bb1b': `Annulla`,
 's39938ecdae568740': `Settembre`,
+'s3b8a6245b12fa2ad': `Percorso di navigazione`,
 's407a88a592a0987c': `Agosto`,
 's46d6587089bd0356': `Mese successivo`,
 's49730f3d5751a433': `Caricamento...`,

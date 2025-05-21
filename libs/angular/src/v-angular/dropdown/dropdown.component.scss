@@ -123,4 +123,29 @@
       width: 100%;
     }
   }
+
+  &.small {
+    label {
+      line-height: 1rem;
+      font-size: 0.875rem;
+    }
+
+    label + .gds-input-wrapper,
+    label + .nggv-field--locked {
+      margin-top: 0.25rem;
+    }
+
+    .description {
+      font-size: 0.875rem;
+      line-height: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    button {
+      font-size: 0.875rem;
+      line-height: 1rem;
+      padding: 0.38rem 0.5rem;
+      min-height: 2rem;
+    }
+  }
 }
