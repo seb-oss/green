@@ -4,7 +4,6 @@ import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import spaceRefTokens from '../../../../tokens/src/tokens/2023/ref/space.ref.json'
-import densityTokens from '../../../../tokens/src/tokens/2023/sys/density.comfortable.json'
 import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
 
 import './icons'
@@ -656,8 +655,34 @@ export const IconsColor: Story = {
 
 /**
  * Icons have the role of `presentation`, when there is no label provided. This means that the icon will be ignored by screen readers.
+ * Icons default to `role="presentation"` when no label is provided, making them invisible to screen * readers.
+ *
+ * #### Best Practices
+ * - Pair icons with text labels for clear meaning
+ * - Keep decorative icons hidden from screen readers
+ * - Add `aria-label` to the parent interactive element, not the icon
+ * - Icons use `role="presentation"` by default
+ * - Keep icons and their labels semantically connected
+ *
+ * #### Using Labels
+ * When labels are necessary:
+ * - Use the `label` attribute to provide an accessible name
+ * - The label value automatically sets the SVG's `aria-label`
+ *
+ * ```html
+ * <!-- Example with label -->
+ * <gds-icon-info label="Additional information"></gds-icon-info>
+ *
+ * <!-- Example with parent label -->
+ * <gds-button aria-label="Close dialog">
+ *   <gds-icon-close></gds-icon-close>
+ * </gds-button>
+ * ```
+ *
+ * #### Key Principle
+ * - Use labels only when the icon needs to communicate meaning independently.
+ * - If the icon is part of a labeled element or purely decorative, rely on the default role="presentation" instead.
  */
-
 export const IconsLabel: Story = {
   ...DefaultParams,
   name: 'Accessible Label',
