@@ -3,11 +3,11 @@ import React, { ChangeEvent, FormEvent, useState } from 'react'
 
 // We can import types ilke this if we want to cast event targets to correct types
 import type {
+  GdsCheckboxGroup as GdsCheckboxGroupType,
   GdsDatepicker as GdsDatepickerType,
   GdsDropdown as GdsDropdownType,
   GdsInput as GdsInputType,
   GdsRadioGroup as GdsRadioGroupType,
-  GdsRadio as GdsRadioType,
   GdsSelect as GdsSelectType,
   GdsTextarea as GdsTextareaType,
 } from '@sebgroup/green-core/pure'
@@ -21,6 +21,8 @@ import {
   GdsBadge,
   GdsButton,
   GdsCard,
+  GdsCheckbox,
+  GdsCheckboxGroup,
   GdsDatepicker,
   GdsDropdown,
   GdsFlex,
@@ -45,6 +47,7 @@ type FormData = {
   date: [Date | undefined, errorState]
   description: [string, errorState]
   radio: [string | undefined, errorState]
+  checkbox: [string[], errorState]
 }
 
 type errorState = boolean
@@ -58,6 +61,7 @@ const initialFormState: FormData = {
   date: [undefined, false],
   description: ['', false],
   radio: [undefined, false],
+  checkbox: [[], false],
 }
 
 // This is a simple validator that checks that the field is not empty
@@ -65,7 +69,7 @@ const initialFormState: FormData = {
 // You can read more about validators here: https://storybook.seb.io/latest/core/?path=/docs/components-form-validation-documentation--docs
 const requiredValidator: GdsValidator = {
   validate: (el: GdsFormControlElement) => {
-    if (!el.value)
+    if (!el.value || el.value.length === 0)
       return [
         { ...el.validity, valid: false, customError: true },
         'This field is required',
@@ -73,70 +77,6 @@ const requiredValidator: GdsValidator = {
     return
   },
 }
-
-interface FormFieldDisplay {
-  label: string
-  value: string | undefined
-  format?: (value: any) => string
-}
-
-// Create a configuration object that maps form fields to their display properties
-const formFieldsDisplay: Record<keyof FormData, FormFieldDisplay> = {
-  name: {
-    label: 'Name',
-    value: undefined,
-  },
-  email: {
-    label: 'Email',
-    value: undefined,
-  },
-  fruit: {
-    label: 'Dropdown',
-    value: undefined,
-  },
-  dessert: {
-    label: 'Select',
-    value: undefined,
-  },
-  date: {
-    label: 'Date',
-    value: undefined,
-    format: (value: Date) => value?.toLocaleDateString() || 'No date',
-  },
-  radio: {
-    label: 'Radio',
-    value: undefined,
-  },
-  description: {
-    label: 'Description',
-    value: undefined,
-  },
-}
-
-// Create a reusable FormFieldRow component
-const FormFieldRow = ({
-  label,
-  value,
-  isValid,
-}: {
-  label: string
-  value: string
-  isValid: boolean
-}) => (
-  <GdsFlex align-items="center" gap="m">
-    <GdsText tag="h5" font-weight="book" width="10ch">
-      {label}
-    </GdsText>
-    <GdsText flex="1" overflow-wrap="anywhere">
-      {value || 'No value'}
-    </GdsText>
-    {isValid && (
-      <GdsBadge variant="positive" rounded>
-        Valid
-      </GdsBadge>
-    )}
-  </GdsFlex>
-)
 
 export const GreenCoreFormExample = () => {
   const [formData, setFormData] = useState<FormData>(initialFormState)
@@ -155,7 +95,6 @@ export const GreenCoreFormExample = () => {
       <GdsFlex gap="l" align-items="flex-start" flex="1">
         <GdsCard variant="primary" flex="1">
           <form
-            onSubmit={(e) => e.preventDefault()}
             onReset={(e) => {
               e.preventDefault()
               setFormData(initialFormState)
@@ -219,7 +158,7 @@ export const GreenCoreFormExample = () => {
                   })
                 }
               >
-                <GdsOption isPlaceholder>Select a fruit</GdsOption>
+                <GdsOption value="">Select a fruit</GdsOption>
                 <GdsOption value="apple">Apple</GdsOption>
                 <GdsOption value="orange">Orange</GdsOption>
                 <GdsOption value="banana">Banana</GdsOption>
@@ -239,6 +178,7 @@ export const GreenCoreFormExample = () => {
                 }
               >
                 <select>
+                  <option value="">Select</option>
                   <option value="cake">Cake</option>
                   <option value="ice-cream">Ice cream</option>
                   <option value="pie">Pie</option>
@@ -250,16 +190,9 @@ export const GreenCoreFormExample = () => {
                 value={formData.radio[0]}
                 onInput={(e) => {
                   const radioGroup = e.currentTarget as GdsRadioGroupType
-                  const selectedRadio = e.target as GdsRadioType
-                  radioGroup.value = selectedRadio.value
-                  radioGroup.radios.forEach((radio: GdsRadioType) => {
-                    const isChecked = radio.value === radioGroup.value
-                    radio.checked = isChecked
-                    console.log(`Radio ${radio.value}: ${isChecked}`)
-                  })
                   setFormData({
                     ...formData,
-                    radio: [radioGroup.value, true],
+                    radio: [radioGroup.value, radioGroup.validity.valid],
                   })
                 }}
                 error-message="Please select an option"
@@ -274,7 +207,6 @@ export const GreenCoreFormExample = () => {
                   value="2"
                   label="Option 2"
                   supportingText="Supporting text for option 2"
-                  disabled={true}
                 ></GdsRadio>
                 <GdsRadio
                   value="3"
@@ -282,6 +214,40 @@ export const GreenCoreFormExample = () => {
                   supportingText="Supporting text for option 3"
                 ></GdsRadio>
               </GdsRadioGroup>
+
+              <GdsCheckboxGroup
+                label={'Select a option'}
+                validator={requiredValidator}
+                value={formData.checkbox[0]}
+                onInput={(e) => {
+                  const checkboxGroup = e.currentTarget as GdsCheckboxGroupType
+                  setFormData({
+                    ...formData,
+                    checkbox: [
+                      checkboxGroup.value,
+                      checkboxGroup.validity.valid,
+                    ],
+                  })
+                }}
+                error-message="Please select an option"
+                supporting-text="Please select one of the following options"
+              >
+                <GdsCheckbox
+                  value="1"
+                  label="Option 1"
+                  supportingText="Supporting text for option 1"
+                ></GdsCheckbox>
+                <GdsCheckbox
+                  value="2"
+                  label="Option 2"
+                  supportingText="Supporting text for option 2"
+                ></GdsCheckbox>
+                <GdsCheckbox
+                  value="3"
+                  label="Option 3"
+                  supportingText="Supporting text for option 3"
+                ></GdsCheckbox>
+              </GdsCheckboxGroup>
 
               <GdsDatepicker
                 label={'Select a date'}
@@ -334,24 +300,37 @@ export const GreenCoreFormExample = () => {
         >
           <GdsText tag="h3">Reflected React state</GdsText>
           <GdsCard padding="m l" gap="xs">
-            {(Object.keys(formData) as Array<keyof FormData>).map(
-              (fieldKey) => {
-                const field = formFieldsDisplay[fieldKey]
-                const [value, isValid] = formData[fieldKey]
-                const displayValue = field.format
-                  ? field.format(value)
-                  : value?.toString()
-
-                return (
-                  <FormFieldRow
-                    key={fieldKey}
-                    label={field.label}
-                    value={displayValue || 'No value'}
-                    isValid={isValid}
-                  />
-                )
-              },
-            )}
+            <GdsRichText>
+              <table>
+                <tbody>
+                  {Object.entries(formData).map(([key, value]) => (
+                    <tr key={key}>
+                      <td>
+                        <GdsText tag="h5" font-weight="book" width="10ch">
+                          {key}
+                        </GdsText>
+                      </td>
+                      <td>
+                        <GdsText flex="1" overflow-wrap="anywhere">
+                          {value[0]?.toString() || 'No value'}
+                        </GdsText>
+                      </td>
+                      <td>
+                        {value[1] ? (
+                          <GdsBadge variant="positive" rounded>
+                            Valid
+                          </GdsBadge>
+                        ) : (
+                          <GdsBadge variant="negative" rounded>
+                            Invalid
+                          </GdsBadge>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </GdsRichText>
           </GdsCard>
         </GdsCard>
       </GdsFlex>

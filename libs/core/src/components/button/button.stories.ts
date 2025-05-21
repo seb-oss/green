@@ -175,8 +175,14 @@ export const Sizes: Story = {
 }
 
 /**
- * Buttons can have an icon on the left or right side of the text. These are called leading or trailing icons,
- * and are added by placing a `gds-icon` component in either the `lead` or `trail` slot.
+ * Buttons can have an icon on the left or right side of the text. These are called leading or
+ * trailing icons, and are added by placing a `gds-icon` component in either the `lead` or `trail`
+ * slot.
+ *
+ * Note that the icons themself does not have a label so if the icon have some meaning,
+ * show that on the text or use the label attribute, for it to be read out on screen readers.
+ * <a href="/docs/components-icon--docs#regular%20icons">
+ * Icons</a> that can be used.
  */
 export const WithIcon: Story = {
   ...DefaultParams,
@@ -208,7 +214,11 @@ export const WithIcon: Story = {
 }
 
 /**
- * If a single `gds-icon` is the only child of a button, it will render as a circular icon button.
+ * If a single `gds-icon` is the only child of a button, it will render as a circular
+ * icon button. Note the icon does not have a aria-label so you have to set the label
+ * attribute on the button so it reads more than just Button on screen readers.
+ * <a href="/docs/components-icon--docs#regular%20icons">
+ * Icons</a> that can be used.
  */
 export const IconButton: Story = {
   ...DefaultParams,
@@ -219,16 +229,35 @@ export const IconButton: Story = {
   },
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+      <gds-button
+        .rank=${args.rank}
+        .variant=${args.variant}
+        size="xs"
+        label="Next step 1"
+      >
         <gds-icon-arrow-right />
       </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
+      <gds-button
+        .rank=${args.rank}
+        .variant=${args.variant}
+        size="small"
+        label="Next step 2"
+      >
         <gds-icon-arrow-right />
       </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant}>
+      <gds-button
+        .rank=${args.rank}
+        .variant=${args.variant}
+        label="Next step 3"
+      >
         <gds-icon-arrow-right />
       </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
+      <gds-button
+        .rank=${args.rank}
+        .variant=${args.variant}
+        size="large"
+        label="Next step 4"
+      >
         <gds-icon-arrow-right />
       </gds-button>
     </gds-flex>

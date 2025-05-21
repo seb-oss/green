@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.20
+
+### Patch Changes
+
+- 461504b: Fixing dark mode tokens
+
 ## 3.6.19
 
 ### Patch Changes
