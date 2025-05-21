@@ -20,6 +20,7 @@ describe('[NggvCore]', () => {
     let component: NggvCheckboxComponent
     let fixture: ComponentFixture<NggvCheckboxComponent>
     let checkbox: HTMLInputElement
+    let hostElement: HTMLElement
 
     beforeEach(waitForAsync(async () => {
       await TestBed.configureTestingModule({
@@ -44,6 +45,7 @@ describe('[NggvCore]', () => {
       fixture.detectChanges()
 
       checkbox = fixture.debugElement.nativeElement.querySelector('input')
+      hostElement = fixture.debugElement.nativeElement
     }))
 
     it('should create', () => {
@@ -64,6 +66,22 @@ describe('[NggvCore]', () => {
         component.disabled = true
         checkbox.click()
         expect(component.state).toBe(true)
+      })
+    })
+
+    describe('size input', () => {
+      it('should apply "small" class when size is set to "small"', () => {
+        component.size = 'small'
+        fixture.detectChanges()
+        expect(hostElement.classList.contains('small')).toBe(true)
+        expect(hostElement.classList.contains('large')).toBe(false)
+      })
+
+      it('should apply "large" class when size is set to "large"', () => {
+        component.size = 'large'
+        fixture.detectChanges()
+        expect(hostElement.classList.contains('large')).toBe(true)
+        expect(hostElement.classList.contains('small')).toBe(false)
       })
     })
   })

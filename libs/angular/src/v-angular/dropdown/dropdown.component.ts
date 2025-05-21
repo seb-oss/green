@@ -58,9 +58,24 @@ export class NggvDropdownComponent<
     | TemplateRef<OptionBase<any>>
     | undefined
 
-  /** Special property used for selecting DOM elements during automated UI testing. */
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dropdown'
+
+  @HostBinding('class.small') get isSmall(): boolean {
+    return this.size === 'small'
+  }
+
+  @HostBinding('class.large') get isLarge(): boolean {
+    return this.size === 'large'
+  }
+
+  /**
+   * Sets the displayed size of the dropdown.
+   */
+  @Input() size: 'small' | 'large' = 'large'
 
   /** Text shown before an option is selected. */
   @Input() placeholder?: string

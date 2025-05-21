@@ -67,6 +67,18 @@ export default {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }),
   ],
+  argTypes: {
+    size: {
+      options: ['small', 'large'],
+      control: {
+        type: 'select',
+        labels: {
+          small: 'Small',
+          large: 'Large',
+        },
+      },
+    },
+  },
 } as Meta
 
 const options = [
@@ -121,14 +133,11 @@ const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
           [error]="error"
           [formControl]="formControl"
           [locked]="locked"
+          [size]="size"
           [displayDisabledAsLocked]="displayDisabledAsLocked">
-
           <ng-template #labelTpl>Custom Label</ng-template>
-
           <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
-
         </nggv-dropdown>
-
         <div style="margin-top: 1rem">
           <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
         </div>
@@ -154,7 +163,7 @@ const DisabledTemplate: StoryFn<StoryArgs> = (args: any) => {
       [invalid]="invalid"
       [disabled]="disabled"
       [error]="error"
-    
+      [size]="size"
       [formControl]="formControl">
 
       <ng-template #labelTpl>Custom Label</ng-template>
@@ -197,7 +206,7 @@ const AltTemplate: StoryFn<StoryArgs> = (args: any) => {
           [placeholder]="placeholder"
           [options]="options"
           [required]="required"
-        
+        [size]="size"
           [formControl]="formControl">
 
           <ng-template #labelTpl>Custom Label</ng-template>
@@ -270,6 +279,7 @@ const CustomSelectedTemplate: StoryFn<StoryArgs> = (args: any) => {
         [required]="true"
         [formControl]="formControl"
         [locked]="locked"
+        [size]="size"
         [displayDisabledAsLocked]="displayDisabledAsLocked">
 
         <ng-template let-item #groupLabelTpl>
@@ -441,6 +451,7 @@ const CustomSelectedTemplateTypeahead: StoryFn<StoryArgs> = (args: any) => {
         [allowUnselect]="true"
         [unselectLabel]="unselectLabel"
         [emptyOptionLabel]="emptyOptionLabel"
+        [size]="size"
         (filterPhraseChange)="handlefilterPhraseChange($event)">
 
         <ng-template let-selected #selectedTpl>
@@ -562,6 +573,7 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           [options]="options"
           [required]="true"
           [invalid]="true"
+          [size]="size"
           error="This is a permanent error"
           [formControl]="formControl">
         </nggv-dropdown>
@@ -580,6 +592,7 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           [options]="options"
           [required]="true"
           [invalid]="true"
+          [size]="size"
           error="This is a permanent error"
           [formControl]="formControl">
         </nggv-dropdown>
