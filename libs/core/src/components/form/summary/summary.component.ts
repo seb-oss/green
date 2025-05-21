@@ -33,7 +33,19 @@ export class GdsFormSummary extends GdsElement {
       padding: 0;
     }
     li {
+      margin: 0;
+      max-height: 0;
+      transition:
+        max-height 0.3s ease-in-out,
+        opacity 0.3s ease-in-out,
+        margin 0.3s ease-in-out;
+      overflow: hidden;
+      opacity: 0;
+    }
+    li.show {
       margin: 0.5rem 0;
+      max-height: 4rem;
+      opacity: 1;
     }
     a {
       color: inherit;
@@ -65,7 +77,7 @@ export class GdsFormSummary extends GdsElement {
 
     if (this.#form && this.reactive) {
       this.#formObserver = new MutationObserver(() => {
-        this.requestUpdate()
+        this.refresh()
       })
       this.#formObserver.observe(this.#form, {
         attributes: true,
@@ -87,12 +99,14 @@ export class GdsFormSummary extends GdsElement {
   }
 
   render() {
-    const formControlElements = Array.from(
+    const formControls = Array.from(
       this.#form?.elements || [],
     ) as GdsFormControlElement[]
-    const errors = formControlElements.filter((e) => e.invalid)
+    const errorControls = formControls.filter(
+      (el) => el.ariaInvalid === 'true' || el.invalid,
+    )
     return when(
-      errors.length > 0,
+      errorControls.length > 0,
       () =>
         html`<gds-card
           level="2"
@@ -109,13 +123,17 @@ export class GdsFormSummary extends GdsElement {
           <gds-flex gap="0" flex-direction="column">
             <gds-text font-size="heading-xs" font-weight="book">
               ${msg(
-                str`There are ${errors.length} errors to correct before you can continue:`,
+                str`There are ${errorControls.length} errors to correct before you can continue:`,
               )}
             </gds-text>
             <ul>
-              ${errors.map(
+              ${formControls.map(
                 (el: GdsFormControlElement, idx) =>
-                  html`<li>
+                  html`<li
+                    class=${el.ariaInvalid === 'true' || el.invalid
+                      ? 'show'
+                      : 'hide'}
+                  >
                     <gds-card
                       role="link"
                       display="flex"
@@ -136,12 +154,18 @@ export class GdsFormSummary extends GdsElement {
                       }}
                     >
                       <div id=${`error-label-${idx}`}>
-                        <gds-div font-weight="book">${el.label}</gds-div>
+                        <gds-div font-weight="book"
+                          >${el.dataset.label ||
+                          el.label ||
+                          el.ariaLabel}</gds-div
+                        >
                         ${when(
                           !this.hideErrors,
                           () =>
                             html`<gds-div font-size="body-s">
-                              ${el.validationMessage}
+                              ${el.dataset.errormessage ||
+                              el.errorMessage ||
+                              (el as any).ariaErrorMessage}
                             </gds-div>`,
                         )}
                       </div>

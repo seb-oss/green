@@ -184,6 +184,8 @@ export abstract class GdsFormControlElement<ValueT = any>
       '',
     ]
 
+    this.errorMessage = validity[1] || this.errorMessage
+
     this.#internals.setValidity(
       validity[0],
       validity[1],
