@@ -6,6 +6,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import spaceRefTokens from '../../../../tokens/src/tokens/2023/ref/space.ref.json'
 import densityTokens from '../../../../tokens/src/tokens/2023/sys/density.comfortable.json'
 import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
+import { IconSuggestion, iconSuggestions } from './icon.suggestions'
 
 import './icons'
 import '../grid'
@@ -15,6 +16,7 @@ import '../badge'
 import '../flex'
 import '../divider'
 import '../text'
+import '../input'
 import '../theme'
 import './icon.stories.css'
 
@@ -711,47 +713,6 @@ export const Deprecated: Story = {
     `
   },
 }
-// In icon.stories.ts
-
-// First, create an interface for the suggestions
-interface IconSuggestion {
-  oldIcon: string
-  newIcon: string
-  reason?: string
-}
-
-// Create a mapping of suggested replacements
-const iconSuggestions: IconSuggestion[] = [
-  {
-    oldIcon: 'square-plus',
-    newIcon: 'plus-circle',
-  },
-  {
-    oldIcon: 'square-minus',
-    newIcon: 'minus-circle',
-  },
-  {
-    oldIcon: 'square-x',
-    newIcon: 'x-circle',
-  },
-  {
-    oldIcon: 'bubble-text',
-    newIcon: 'message',
-  },
-  {
-    oldIcon: 'bubble-dots',
-    newIcon: 'message-dots',
-  },
-  {
-    oldIcon: 'settings-slider-ver',
-    newIcon: 'sliders',
-  },
-  {
-    oldIcon: 'page-text',
-    newIcon: 'document',
-  },
-  // Add more suggestions as needed
-]
 
 /**
  * While some icons are deprecated, here are suggested alternatives that better align with our current design system that you should be using when seaching for the Fontawesome replacement.
@@ -762,53 +723,113 @@ export const Suggestions: Story = {
   ...DefaultParams,
   name: 'Suggested Alternatives',
   render: () => {
-    const suggestionElements = iconSuggestions.map((suggestion) => {
-      const oldTag = literal`gds-icon-${unsafeStatic(suggestion.oldIcon)}`
-      const newTag = literal`gds-icon-${unsafeStatic(suggestion.newIcon)}`
+    function fuzzySearch(term: string, text: string): boolean {
+      let termIndex = 0
+      let textIndex = 0
+      term = term.toLowerCase()
+      text = text.toLowerCase()
 
-      return html`
-        <gds-flex gap="l" align-items="center" margin-bottom="l">
-          <gds-flex gap="xl" align-items="center">
-            <gds-flex align-items="center" gap="m" width="280px">
-              <gds-card
-                variant="negative"
-                width="40px"
-                height="40px"
-                align-items="center"
-                justify-content="center"
-              >
-                ${staticHTML`<${oldTag}></${oldTag}>`}
-              </gds-card>
-              ${suggestion.oldIcon}
-            </gds-flex>
-            <gds-icon-arrow-right
-              size="m"
-              color="secondary"
-            ></gds-icon-arrow-right>
-            <gds-flex align-items="center" gap="m" width="280px">
-              <gds-card
-                variant="primary"
-                width="40px"
-                height="40px"
-                align-items="center"
-                justify-content="center"
-              >
-                ${staticHTML`<${newTag}></${newTag}>`}
-              </gds-card>
-              ${suggestion.newIcon}
+      while (termIndex < term.length && textIndex < text.length) {
+        if (term.charAt(termIndex) === text.charAt(textIndex)) {
+          termIndex++
+        }
+        textIndex++
+      }
+      return termIndex === term.length
+    }
+
+    const suggestionElements = Object.entries(iconSuggestions).map(
+      ([tagName, info]: [string, IconSuggestion]) => {
+        const oldTag = literal`gds-icon-${unsafeStatic(info.name)}`
+        const newTag = literal`${unsafeStatic(info.useInstead)}`
+
+        return html`
+          <gds-flex
+            gap="l"
+            align-items="center"
+            margin-bottom="l"
+            class="suggestion-item"
+            data-old-icon="${info.name}"
+            data-new-icon="${info.useInstead.replace('gds-icon-', '')}"
+          >
+            <gds-flex gap="xl" align-items="center">
+              <gds-flex align-items="center" gap="m" width="280px">
+                <gds-card
+                  variant="negative"
+                  width="40px"
+                  height="40px"
+                  align-items="center"
+                  justify-content="center"
+                >
+                  ${staticHTML`<${oldTag}></${oldTag}>`}
+                </gds-card>
+                ${info.name}
+              </gds-flex>
+              <gds-icon-arrow-right
+                size="m"
+                color="secondary"
+              ></gds-icon-arrow-right>
+              <gds-flex align-items="center" gap="m" width="280px">
+                <gds-card
+                  variant="primary"
+                  width="40px"
+                  height="40px"
+                  align-items="center"
+                  justify-content="center"
+                >
+                  ${staticHTML`<${newTag}></${newTag}>`}
+                </gds-card>
+                ${info.useInstead.replace('gds-icon-', '')}
+              </gds-flex>
             </gds-flex>
           </gds-flex>
-        </gds-flex>
-      `
-    })
+        `
+      },
+    )
+
+    // Setup search functionality after render
+    setTimeout(() => {
+      const searchInput = document
+        .querySelector('#suggestion-search')
+        ?.shadowRoot?.querySelector('input')
+      const flexItems = Array.from(
+        document.querySelectorAll('.suggestion-item'),
+      )
+
+      if (searchInput) {
+        searchInput.addEventListener('input', (event: Event) => {
+          const searchTerm = (
+            event.target as HTMLInputElement
+          ).value.toLowerCase()
+
+          flexItems.forEach((flex) => {
+            const oldIcon = flex.getAttribute('data-old-icon') || ''
+            const newIcon = flex.getAttribute('data-new-icon') || ''
+
+            const isMatch =
+              searchTerm === '' ||
+              fuzzySearch(searchTerm, oldIcon) ||
+              fuzzySearch(searchTerm, newIcon)
+
+            // Use display attribute on gds-flex
+            flex.setAttribute('display', isMatch ? 'flex' : 'none')
+          })
+        })
+      }
+    }, 0)
 
     return html`
-      <gds-flex flex-direction="column" gap="m">
+      <gds-flex flex-direction="column" gap="m" width="800px" margin="auto">
         <gds-text margin-bottom="l">
           These are recommended replacements for some of our older icons. The
           suggestions aim to maintain visual consistency and improve usability.
         </gds-text>
-        ${suggestionElements}
+        <gds-input id="suggestion-search" placeholder="Search for icons...">
+          <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
+        </gds-input>
+        <gds-card background="primary/0.2" padding="l">
+          ${suggestionElements}
+        </gds-card>
       </gds-flex>
     `
   },
