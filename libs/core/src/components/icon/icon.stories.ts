@@ -824,7 +824,11 @@ export const Suggestions: Story = {
           These are recommended replacements for some of our older icons. The
           suggestions aim to maintain visual consistency and improve usability.
         </gds-text>
-        <gds-input id="suggestion-search" placeholder="Search for icons...">
+        <gds-input
+          id="suggestion-search"
+          placeholder="Search for icons..."
+          width="100%"
+        >
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
         </gds-input>
         <gds-card background="primary/0.2" padding="l">
