@@ -711,3 +711,105 @@ export const Deprecated: Story = {
     `
   },
 }
+// In icon.stories.ts
+
+// First, create an interface for the suggestions
+interface IconSuggestion {
+  oldIcon: string
+  newIcon: string
+  reason?: string
+}
+
+// Create a mapping of suggested replacements
+const iconSuggestions: IconSuggestion[] = [
+  {
+    oldIcon: 'square-plus',
+    newIcon: 'plus-circle',
+  },
+  {
+    oldIcon: 'square-minus',
+    newIcon: 'minus-circle',
+  },
+  {
+    oldIcon: 'square-x',
+    newIcon: 'x-circle',
+  },
+  {
+    oldIcon: 'bubble-text',
+    newIcon: 'message',
+  },
+  {
+    oldIcon: 'bubble-dots',
+    newIcon: 'message-dots',
+  },
+  {
+    oldIcon: 'settings-slider-ver',
+    newIcon: 'sliders',
+  },
+  {
+    oldIcon: 'page-text',
+    newIcon: 'document',
+  },
+  // Add more suggestions as needed
+]
+
+/**
+ * While some icons are deprecated, here are suggested alternatives that better align with our current design system that you should be using when seaching for the Fontawesome replacement.
+ *
+ * These suggestions are based on usage patterns and visual consistency.
+ */
+export const Suggestions: Story = {
+  ...DefaultParams,
+  name: 'Suggested Alternatives',
+  render: () => {
+    const suggestionElements = iconSuggestions.map((suggestion) => {
+      const oldTag = literal`gds-icon-${unsafeStatic(suggestion.oldIcon)}`
+      const newTag = literal`gds-icon-${unsafeStatic(suggestion.newIcon)}`
+
+      return html`
+        <gds-flex gap="l" align-items="center" margin-bottom="l">
+          <gds-flex gap="xl" align-items="center">
+            <gds-flex align-items="center" gap="m" width="280px">
+              <gds-card
+                variant="negative"
+                width="40px"
+                height="40px"
+                align-items="center"
+                justify-content="center"
+              >
+                ${staticHTML`<${oldTag}></${oldTag}>`}
+              </gds-card>
+              ${suggestion.oldIcon}
+            </gds-flex>
+            <gds-icon-arrow-right
+              size="m"
+              color="secondary"
+            ></gds-icon-arrow-right>
+            <gds-flex align-items="center" gap="m" width="280px">
+              <gds-card
+                variant="primary"
+                width="40px"
+                height="40px"
+                align-items="center"
+                justify-content="center"
+              >
+                ${staticHTML`<${newTag}></${newTag}>`}
+              </gds-card>
+              ${suggestion.newIcon}
+            </gds-flex>
+          </gds-flex>
+        </gds-flex>
+      `
+    })
+
+    return html`
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text margin-bottom="l">
+          These are recommended replacements for some of our older icons. The
+          suggestions aim to maintain visual consistency and improve usability.
+        </gds-text>
+        ${suggestionElements}
+      </gds-flex>
+    `
+  },
+}
