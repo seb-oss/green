@@ -27,8 +27,19 @@ export class GdsFormControlFooter extends GdsElement {
 
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties)
-    if (changedProperties.has('validationMessage')) {
+    if (
+      changedProperties.has('validationMessage') ||
+      changedProperties.has('charCounter')
+    ) {
       this.classList.toggle('visually-hidden', !this.validationMessage)
+    }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+
+    if (!this.validationMessage && !this.charCounter) {
+      this.classList.add('visually-hidden')
     }
   }
 

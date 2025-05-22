@@ -215,19 +215,21 @@ class Input extends GdsFormControlElement<string> {
       ${when(
         this.#shouldShowFooter(),
         () =>
-          html`<gds-form-control-footer
+          html` <gds-form-control-footer
             class="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars &&
-            this.maxlength - (this.value?.length || 0)}
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            .charCounter=${this.#shouldShowRemainingChars
+              ? this.maxlength - (this.value?.length || 0)
+              : undefined}
+            .validationMessage=${this.invalid
+              ? this.errorMessage || this.validationMessage
+              : undefined}
           ></gds-form-control-footer>`,
       )}
     `
   }
 
   #shouldShowFooter() {
-    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+    return !this.plain
   }
 
   _getValidityAnchor() {

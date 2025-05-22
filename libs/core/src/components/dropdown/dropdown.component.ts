@@ -354,7 +354,12 @@ export class GdsDropdown<ValueT = any>
       ${when(
         this.#shouldShowFooter(),
         () => html`
-          <gds-form-control-footer class="size-${this.size}">
+          <gds-form-control-footer
+            class="size-${this.size}"
+            .validationMessage=${this.invalid
+              ? this.validationMessage || this.errorMessage
+              : undefined}
+          >
             ${
               ``
               // @deprecated
@@ -365,7 +370,7 @@ export class GdsDropdown<ValueT = any>
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage || this.validationMessage}
+              ${this.validationMessage || this.errorMessage}
             </slot>
           </gds-form-control-footer>
         `,
@@ -374,7 +379,7 @@ export class GdsDropdown<ValueT = any>
   }
 
   #shouldShowFooter() {
-    return !this.plain && this.invalid
+    return !this.plain
   }
 
   protected _getValidityAnchor(): HTMLElement {
