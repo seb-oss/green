@@ -828,6 +828,12 @@ export const Suggestions: Story = {
           <gds-icon-magnifying-glass slot="lead"></gds-icon-magnifying-glass>
         </gds-input>
         <gds-card background="primary/0.2" padding="l">
+          <gds-flex gap="xl">
+            <gds-flex width="280px">Old</gds-flex>
+            <gds-flex width="20px"></gds-flex>
+            <gds-flex width="280px">New</gds-flex>
+          </gds-flex>
+          <gds-divider color="primary"></gds-divider>
           ${suggestionElements}
         </gds-card>
       </gds-flex>
