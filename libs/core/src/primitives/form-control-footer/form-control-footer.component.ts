@@ -25,6 +25,13 @@ export class GdsFormControlFooter extends GdsElement {
   @property()
   validationMessage?: string
 
+  updated(changedProperties: Map<string, unknown>) {
+    super.updated(changedProperties)
+    if (changedProperties.has('validationMessage')) {
+      this.classList.toggle('visually-hidden', !this.validationMessage)
+    }
+  }
+
   render() {
     return html`<div aria-live="polite">
       <div class="error-message">
