@@ -1,16 +1,17 @@
 import { msg, str } from '@lit/localize'
-import { css } from 'lit'
 import { property } from 'lit/decorators.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../../gds-element'
 import { gdsCustomElement, html } from '../../../scoping'
+import { tokens } from '../../../tokens.style'
 import { GdsButton } from '../../button/button.component'
 import { GdsCard } from '../../card/card.component'
 import { GdsDiv } from '../../div/div.component'
 import { GdsFlex } from '../../flex/flex.component'
 import { IconArrowUp } from '../../icon/icons/arrow-up.component'
 import { GdsFormControlElement } from '../form-control'
+import styles from './summary.styles'
 
 /**
  * @element gds-form-summary
@@ -23,34 +24,7 @@ import { GdsFormControlElement } from '../form-control'
   dependsOn: [GdsCard, GdsFlex, GdsDiv, GdsButton, IconArrowUp],
 })
 export class GdsFormSummary extends GdsElement {
-  static styles = css`
-    :host {
-      display: contents;
-    }
-    ul {
-      list-style-type: none;
-      margin: 1rem 0 0;
-      padding: 0;
-    }
-    li {
-      margin: 0;
-      max-height: 0;
-      transition:
-        max-height 0.3s ease-in-out,
-        opacity 0.3s ease-in-out,
-        margin 0.3s ease-in-out;
-      overflow: hidden;
-      opacity: 0;
-    }
-    li.show {
-      margin: 0.5rem 0;
-      max-height: 4rem;
-      opacity: 1;
-    }
-    a {
-      color: inherit;
-    }
-  `
+  static styles = [tokens, styles]
 
   /**
    * Whether to hide the error messages under the labels.
@@ -109,16 +83,14 @@ export class GdsFormSummary extends GdsElement {
       errorControls.length > 0,
       () =>
         html`<gds-card
-          level="2"
+          role="navigation"
           border-color="negative"
           border-radius="xs"
           border-width="0"
           padding="l"
           background="negative"
           color="negative"
-          role="alert"
-          aria-live="polite"
-          aria-atomic="true"
+          overflow="hidden"
         >
           <gds-flex gap="0" flex-direction="column">
             <gds-text font-size="heading-xs" font-weight="book">
@@ -129,11 +101,7 @@ export class GdsFormSummary extends GdsElement {
             <ul>
               ${formControls.map(
                 (el: GdsFormControlElement, idx) =>
-                  html`<li
-                    class=${el.ariaInvalid === 'true' || el.invalid
-                      ? 'show'
-                      : 'hide'}
-                  >
+                  html`<li ?inert=${!(el.ariaInvalid === 'true' || el.invalid)}>
                     <gds-card
                       role="link"
                       display="flex"
