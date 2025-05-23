@@ -1,5 +1,7 @@
 import { msg, str } from '@lit/localize'
-import { property } from 'lit/decorators.js'
+import { nothing } from 'lit'
+import { property, queryAsync } from 'lit/decorators.js'
+import { until } from 'lit/directives/until.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../../gds-element'
@@ -40,6 +42,8 @@ export class GdsFormSummary extends GdsElement {
    */
   @property({ type: Boolean })
   reactive = false
+
+  @queryAsync('#root') private _elRoot!: Promise<GdsCard>
 
   #form?: HTMLFormElement
   #formObserver?: MutationObserver
@@ -83,6 +87,7 @@ export class GdsFormSummary extends GdsElement {
       errorControls.length > 0,
       () =>
         html`<gds-card
+          id="root"
           role="navigation"
           border-color="negative"
           border-radius="xs"
@@ -91,9 +96,15 @@ export class GdsFormSummary extends GdsElement {
           background="negative"
           color="negative"
           overflow="hidden"
+          aria-describedby="description"
+          aria-label=${msg(`Form error summary`)}
         >
           <gds-flex gap="0" flex-direction="column">
-            <gds-text font-size="heading-xs" font-weight="book">
+            <gds-text
+              font-size="heading-xs"
+              font-weight="book"
+              id="description"
+            >
               ${msg(
                 str`There are ${errorControls.length} errors to correct before you can continue:`,
               )}
@@ -142,7 +153,7 @@ export class GdsFormSummary extends GdsElement {
                         variant="negative"
                         label=${`Move focus to ${el.label} field`}
                       >
-                        ${this.#renderArrowIcon(el)}
+                        ${until(this.#renderArrowIcon(el), nothing)}
                       </gds-button>
                     </gds-card>
                   </li>`,
@@ -153,8 +164,8 @@ export class GdsFormSummary extends GdsElement {
     )
   }
 
-  #renderArrowIcon(el: GdsFormControlElement) {
-    const selfTop = this.getBoundingClientRect().top
+  async #renderArrowIcon(el: GdsFormControlElement) {
+    const selfTop = (await this._elRoot).getBoundingClientRect().top
     const elTop = el.getBoundingClientRect().top
 
     const isAbove = elTop < selfTop
