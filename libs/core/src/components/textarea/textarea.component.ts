@@ -276,7 +276,7 @@ class Textarea extends GdsFormControlElement<string> {
   }
 
   #shouldShowFooter() {
-    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+    return !this.plain
   }
 
   protected _getValidityAnchor() {

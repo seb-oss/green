@@ -3,6 +3,14 @@ import { css } from 'lit'
 export const styles = css`
   @layer base, reset, transitional-styles;
   @layer base {
+    :host(.visually-hidden) {
+      position: absolute;
+      clip: rect(0 0 0 0);
+      width: 0px;
+      height: 0px;
+      overflow: hidden;
+    }
+
     :host > *:not(style) {
       display: flex;
       justify-content: space-between;
