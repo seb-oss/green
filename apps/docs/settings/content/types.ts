@@ -60,7 +60,6 @@ export interface ComponentContent extends BaseContent {
 export interface Page extends BaseContent {
   type: 'page'
   headings: Heading[]
-  content: string
   showInMenu?: boolean
   menuOrder?: number
 }
