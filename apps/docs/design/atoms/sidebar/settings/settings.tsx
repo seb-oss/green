@@ -32,6 +32,7 @@ export default function Settings() {
             >
               <Core.IconCrossLarge />
             </Core.GdsButton>
+            <Core.GdsButton>REFRESH CONTENT</Core.GdsButton>
           </Core.GdsFlex>
         </Core.GdsCard>
       )}
