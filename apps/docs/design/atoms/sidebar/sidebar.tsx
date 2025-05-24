@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -50,71 +50,179 @@ interface TemplatesResponse {
   lastUpdated: string
 }
 
+interface SidebarData {
+  navigation: NavItem[]
+  components: Component[]
+  templates: Template[]
+}
+
+// Custom hook for fetching all sidebar data
+const useSidebarData = () => {
+  const [data, setData] = useState<SidebarData>({
+    navigation: [],
+    components: [],
+    templates: [],
+  })
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        setLoading(true)
+
+        const [navigationRes, componentsRes, templatesRes] = await Promise.all([
+          fetch('https://api.seb.io/navigation/main.json'),
+          fetch('https://api.seb.io/components/components.json'),
+          fetch('https://api.seb.io/templates/templates.json'),
+        ])
+
+        const [navigationData, componentsData, templatesData] =
+          await Promise.all([
+            navigationRes.json() as Promise<NavigationResponse>,
+            componentsRes.json() as Promise<ComponentsResponse>,
+            templatesRes.json() as Promise<TemplatesResponse>,
+          ])
+
+        setData({
+          navigation: navigationData.links,
+          components: [...componentsData.components].sort((a, b) =>
+            a.title.localeCompare(b.title),
+          ),
+          templates: [...templatesData.templates].sort((a, b) =>
+            a.title.localeCompare(b.title),
+          ),
+        })
+      } catch (err) {
+        console.error('Error fetching sidebar data:', err)
+        setError(err instanceof Error ? err.message : 'Unknown error')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchAllData()
+  }, [])
+
+  return { data, loading, error }
+}
+
+// Reusable link component
+const SidebarLink = ({
+  href,
+  children,
+  icon,
+  iconSlot = 'trail',
+}: {
+  href: string
+  children: React.ReactNode
+  icon?: string
+  iconSlot?: 'lead' | 'trail'
+}) => (
+  <Link
+    component="button"
+    href={href}
+    rank="tertiary"
+    justify-content={
+      icon && iconSlot === 'trail' ? 'space-between' : 'flex-start'
+    }
+    size="small"
+    align-items="center"
+  >
+    {icon && iconSlot === 'lead' && <Icon name={icon} slot="lead" />}
+    {children}
+    {icon && iconSlot === 'trail' && <Icon name={icon} slot="trail" />}
+  </Link>
+)
+
+// Home button component
+const HomeButton = () => (
+  <SidebarLink href="/" icon="IconArrowLeft" iconSlot="lead">
+    Home
+  </SidebarLink>
+)
+
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
-  const router = useRouter()
   const pathName = usePathname()
-  const [navigationItems, setNavigationItems] = useState<NavItem[]>([])
-  const [components, setComponents] = useState<Component[]>([])
-  const [templates, setTemplates] = useState<Template[]>([])
+  const { data, loading, error } = useSidebarData()
 
-  useEffect(() => {
-    const fetchNavigation = async () => {
-      try {
-        const response = await fetch('https://api.seb.io/navigation/main.json')
-        const data: NavigationResponse = await response.json()
-        setNavigationItems(data.links)
-      } catch (error) {
-        console.error('Error fetching navigation:', error)
-      }
+  // Memoized path checks
+  const pathType = useMemo(() => {
+    if (
+      pathName.startsWith('/components') ||
+      pathName.startsWith('/component/')
+    ) {
+      return 'components'
+    }
+    if (
+      pathName.startsWith('/templates') ||
+      pathName.startsWith('/template/')
+    ) {
+      return 'templates'
+    }
+    return 'navigation'
+  }, [pathName])
+
+  // Memoized content renderer
+  const renderContent = useMemo(() => {
+    if (loading) {
+      return <Core.GdsText>Loading...</Core.GdsText>
     }
 
-    fetchNavigation()
-  }, [])
-
-  useEffect(() => {
-    const fetchComponents = async () => {
-      try {
-        const response = await fetch(
-          'https://api.seb.io/components/components.json',
-        )
-        const data: ComponentsResponse = await response.json()
-        const sortedComponents = [...data.components].sort((a, b) =>
-          a.title.localeCompare(b.title),
-        )
-        setComponents(sortedComponents)
-      } catch (error) {
-        console.error('Error fetching components:', error)
-      }
+    if (error) {
+      return <Core.GdsText>Error loading navigation</Core.GdsText>
     }
 
-    fetchComponents()
-  }, [])
+    switch (pathType) {
+      case 'components':
+        return (
+          <>
+            <HomeButton />
+            <Core.GdsFlex flex-direction="column" gap="2xs">
+              <Core.GdsText tag="small" padding="m">
+                Components
+              </Core.GdsText>
+              {data.components.map((component) => (
+                <SidebarLink
+                  key={component.slug}
+                  href={`/component/${component.slug}`}
+                >
+                  {component.title}
+                </SidebarLink>
+              ))}
+            </Core.GdsFlex>
+          </>
+        )
 
-  useEffect(() => {
-    const fetchTemplates = async () => {
-      try {
-        const response = await fetch(
-          'https://api.seb.io/templates/templates.json',
+      case 'templates':
+        return (
+          <>
+            <HomeButton />
+            <Core.GdsFlex flex-direction="column" gap="2xs">
+              <Core.GdsText tag="small" padding="m">
+                Templates
+              </Core.GdsText>
+              {data.templates.map((template) => (
+                <SidebarLink
+                  key={template.slug}
+                  href={`/template/${template.slug}`}
+                >
+                  {template.title}
+                </SidebarLink>
+              ))}
+            </Core.GdsFlex>
+          </>
         )
-        const data: TemplatesResponse = await response.json()
-        const sortedTemplates = [...data.templates].sort((a, b) =>
-          a.title.localeCompare(b.title),
-        )
-        setTemplates(sortedTemplates)
-      } catch (error) {
-        console.error('Error fetching templates:', error)
-      }
+
+      default:
+        return data.navigation.map((item) => (
+          <SidebarLink key={item.slug} href={item.slug} icon={item.icon}>
+            {item.title}
+          </SidebarLink>
+        ))
     }
-
-    fetchTemplates()
-  }, [])
-
-  const componentsList =
-    pathName.startsWith('/components') || pathName.startsWith('/component/')
-
-  const templatesList =
-    pathName.startsWith('/templates') || pathName.startsWith('/template/')
+  }, [data, loading, error, pathType])
 
   return (
     <Core.GdsCard
@@ -131,83 +239,7 @@ export default function Sidebar() {
     >
       {isOpen && (
         <Core.GdsFlex flex-direction="column" gap="m">
-          {componentsList ? (
-            <>
-              <Link
-                component="button"
-                key={'home'}
-                href="/"
-                rank="tertiary"
-                justify-content="flex-start"
-                size="small"
-                align-items="center"
-              >
-                <Icon name="IconArrowLeft" slot="lead" />
-                Home
-              </Link>
-              <Core.GdsFlex flex-direction="column" gap="2xs">
-                <Core.GdsText tag="small" padding="m">
-                  Components
-                </Core.GdsText>
-                {components.map((component) => (
-                  <Link
-                    key={component.slug}
-                    component="button"
-                    href={`/component/${component.slug}`}
-                    justify-content="flex-start"
-                    size="small"
-                    align-items="center"
-                    rank="tertiary"
-                  >
-                    {component.title}
-                  </Link>
-                ))}
-              </Core.GdsFlex>
-            </>
-          ) : templatesList ? (
-            <>
-              <Link
-                component="button"
-                key={'home'}
-                href="/"
-                rank="tertiary"
-                justify-content="flex-start"
-                size="small"
-                align-items="center"
-              >
-                <Icon name="IconArrowLeft" slot="lead" />
-                Home
-              </Link>
-              {templates.map((template) => (
-                <Link
-                  key={template.slug}
-                  component="button"
-                  href={`/template/${template.slug}`}
-                  justify-content="flex-start"
-                  size="small"
-                  align-items="center"
-                  rank="tertiary"
-                >
-                  {template.title}
-                </Link>
-              ))}
-            </>
-          ) : (
-            navigationItems.map((item) => (
-              <Link
-                key={item.slug}
-                component="button"
-                href={item.slug}
-                rank="tertiary"
-                justify-content="space-between"
-                size="small"
-                align-items="center"
-              >
-                {item.title}
-                <Icon name={item.icon} slot="trail" />
-              </Link>
-            ))
-          )}
+          {renderContent}
         </Core.GdsFlex>
       )}
       {!isOpen && (
