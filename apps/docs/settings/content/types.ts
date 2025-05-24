@@ -40,6 +40,12 @@ export interface ComponentSection {
   column_title_tag?: string
 }
 
+export interface ComponentImage {
+  node: string
+  id: string
+  svg: string
+}
+
 export interface ComponentContent extends BaseContent {
   type: 'component'
   hero_snippet?: string
@@ -55,6 +61,7 @@ export interface ComponentContent extends BaseContent {
   overview?: Array<{ column: ComponentSection[] }>
   'ux-text'?: { section: ComponentSection[] }
   accessibility?: { section: ComponentSection[] }
+  images?: ComponentImage[]
 }
 
 // PAGES

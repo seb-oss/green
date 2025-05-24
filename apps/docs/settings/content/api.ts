@@ -1,5 +1,6 @@
 import {
   ComponentContent,
+  ComponentImage,
   ComponentList,
   Navigation,
   NavigationList,
@@ -21,6 +22,22 @@ export async function fetchComponentsList(): Promise<ComponentList> {
   return response.json()
 }
 
+async function fetchComponentImages(
+  componentSlug: string,
+): Promise<ComponentImage[]> {
+  const response = await fetch(
+    `${API_BASE}/components/${componentSlug}/${componentSlug}.images.json`,
+  )
+  if (!response.ok) {
+    if (response.status === 404) {
+      return [] // Return empty array if images don't exist
+    }
+    throw new Error(`Failed to fetch component images: ${componentSlug}`)
+  }
+  const data = await response.json()
+  return data.nodes || []
+}
+
 export async function fetchComponentContent(
   path: string,
 ): Promise<ComponentContent> {
@@ -29,11 +46,24 @@ export async function fetchComponentContent(
     throw new Error(`Failed to fetch component content: ${path}`)
   }
   const data = await response.json()
+
+  // Extract component slug from path
+  const slug = path.split('/')[1] // Assumes path format: "components/button/button.content.json"
+
+  // Fetch images in parallel with content
+  let images: ComponentImage[] = []
+  try {
+    images = await fetchComponentImages(slug)
+  } catch (error) {
+    console.warn(`Failed to fetch images for component ${slug}:`, error)
+  }
+
   return {
     ...data,
     type: 'component' as const,
     createdAt: data.createdAt || new Date().toISOString(),
     updatedAt: data.updatedAt || new Date().toISOString(),
+    images, // Add images to component data
   }
 }
 

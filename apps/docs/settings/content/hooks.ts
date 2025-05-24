@@ -137,6 +137,20 @@ export function useContent() {
         return components
       },
 
+      getComponentImage: (componentSlug: string, imageId: string) => {
+        const component = store.components.find(
+          (comp) => comp.slug === componentSlug,
+        )
+        return component?.images?.find((img) => img.id === imageId)
+      },
+
+      getComponentImages: (componentSlug: string) => {
+        const component = store.components.find(
+          (comp) => comp.slug === componentSlug,
+        )
+        return component?.images || []
+      },
+
       // Template actions
       getTemplate: (slug: string) =>
         store.templates.find((template) => template.slug === slug),
