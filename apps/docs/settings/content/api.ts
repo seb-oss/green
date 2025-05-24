@@ -1,4 +1,4 @@
-import { ComponentContent, ComponentList } from './types'
+import { ComponentContent, ComponentList, Page, PageList } from './types'
 
 const API_BASE = 'https://api.seb.io'
 
@@ -23,5 +23,34 @@ export async function fetchComponentContent(
     type: 'component' as const,
     createdAt: data.createdAt || new Date().toISOString(),
     updatedAt: data.updatedAt || new Date().toISOString(),
+  }
+}
+
+// Pages
+
+export async function fetchPagesList(): Promise<PageList> {
+  const response = await fetch(`${API_BASE}/pages/pages.json`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch pages list')
+  }
+  return response.json()
+}
+
+export async function fetchPageContent(path: string): Promise<Page> {
+  const response = await fetch(`${API_BASE}/${path}`)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch page content: ${path}`)
+  }
+  const data = await response.json()
+
+  // Transform API response to match Page interface
+  return {
+    ...data,
+    type: 'page' as const,
+    headings: data.headings || [], // Provide default if missing
+    createdAt: data.createdAt || new Date().toISOString(),
+    updatedAt: data.updatedAt || new Date().toISOString(),
+    showInMenu: data.showInMenu || false,
+    menuOrder: data.menuOrder || 0,
   }
 }

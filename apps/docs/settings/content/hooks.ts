@@ -3,7 +3,7 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-import { fetchComponentsList } from './api'
+import { fetchComponentsList, fetchPagesList } from './api'
 import { contentContext } from './context'
 import { loadContent } from './loader'
 import { contentStorage } from './storage'
@@ -11,7 +11,7 @@ import { contentStorage } from './storage'
 import type { ComponentContent, ContentStore, Page, Post } from './types'
 
 const DEFAULT_STORE: ContentStore = {
-  posts: [],
+  // posts: [],
   pages: [],
   components: [],
   lastUpdated: '',
@@ -56,25 +56,25 @@ export function useContent() {
 
   const actions = useMemo(
     () => ({
-      getPost: (slug: string) => store.posts.find((post) => post.slug === slug),
+      // getPost: (slug: string) => store.posts.find((post) => post.slug === slug),
       getPage: (slug: string) => store.pages.find((page) => page.slug === slug),
 
-      getPosts: (options?: {
-        filter?: (post: Post) => boolean
-        sort?: (a: Post, b: Post) => number
-      }) => {
-        let posts = store.posts.filter((post) => post.published)
+      // getPosts: (options?: {
+      //   filter?: (post: Post) => boolean
+      //   sort?: (a: Post, b: Post) => number
+      // }) => {
+      //   let posts = store.posts.filter((post) => post.published)
 
-        if (options?.filter) {
-          posts = posts.filter(options.filter)
-        }
+      //   if (options?.filter) {
+      //     posts = posts.filter(options.filter)
+      //   }
 
-        if (options?.sort) {
-          posts = posts.sort(options.sort)
-        }
+      //   if (options?.sort) {
+      //     posts = posts.sort(options.sort)
+      //   }
 
-        return posts
-      },
+      //   return posts
+      // },
 
       getPages: (options?: {
         filter?: (page: Page) => boolean
@@ -123,11 +123,19 @@ export function useContent() {
       // Add cache validation check
       validateCache: async () => {
         try {
-          const componentsList = await fetchComponentsList()
-          const storedLastUpdated = new Date(store.lastUpdated)
-          const apiLastUpdated = new Date(componentsList.lastUpdated)
+          const [componentsList, pagesList] = await Promise.all([
+            fetchComponentsList(),
+            fetchPagesList(),
+          ])
 
-          if (apiLastUpdated > storedLastUpdated) {
+          const storedLastUpdated = new Date(store.lastUpdated)
+          const componentsLastUpdated = new Date(componentsList.lastUpdated)
+          const pagesLastUpdated = new Date(pagesList.lastUpdated)
+
+          if (
+            componentsLastUpdated > storedLastUpdated ||
+            pagesLastUpdated > storedLastUpdated
+          ) {
             await actions.refresh()
           }
         } catch (error) {
@@ -188,7 +196,7 @@ export function useCurrentContent() {
 
     return {
       page: actions.getPage(slug),
-      post: actions.getPost(slug),
+      // post: actions.getPost(slug),
       component: actions.getComponent(slug),
       slug,
     }

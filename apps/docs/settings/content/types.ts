@@ -57,6 +57,21 @@ export interface ComponentContent extends BaseContent {
   accessibility?: { section: ComponentSection[] }
 }
 
+// PAGES
+
+// Add these alongside existing types
+export interface PageList {
+  pages: PageSummary[]
+  total: number
+  lastUpdated: string
+}
+
+export interface PageSummary {
+  title: string
+  slug: string
+  path: string
+}
+
 export interface Page extends BaseContent {
   type: 'page'
   headings: Heading[]
@@ -64,10 +79,12 @@ export interface Page extends BaseContent {
   menuOrder?: number
 }
 
+// ===========================
+
 export type ContentItem = Post | Page
 
 export interface ContentStore {
-  posts: Post[]
+  // posts: Post[]
   pages: Page[]
   components: ComponentContent[]
   _lastChecked?: string
@@ -75,12 +92,12 @@ export interface ContentStore {
 }
 
 export interface ContentActions {
-  getPost: (slug: string) => Post | undefined
+  // getPost: (slug: string) => Post | undefined
   getPage: (slug: string) => Page | undefined
-  getPosts: (options?: {
-    filter?: (post: Post) => boolean
-    sort?: (a: Post, b: Post) => number
-  }) => Post[]
+  // getPosts: (options?: {
+  //   filter?: (post: Post) => boolean
+  //   sort?: (a: Post, b: Post) => number
+  // }) => Post[]
   getPages: (options?: {
     filter?: (page: Page) => boolean
     sort?: (a: Page, b: Page) => number

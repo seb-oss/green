@@ -1,46 +1,44 @@
 'use client'
 
-import { fetchComponentContent, fetchComponentsList } from './api'
+import {
+  fetchComponentContent,
+  fetchComponentsList,
+  fetchPageContent,
+  fetchPagesList,
+} from './api'
 
-import type { ContentStore, Page, Post } from './types'
-
-type JsonImport<T> = {
-  default: T[]
-}
+import type { ContentStore } from './types'
 
 export async function loadContent(): Promise<ContentStore> {
   try {
-    const [postsModule, pagesModule] = await Promise.all([
-      import('../../content/posts.json') as unknown as Promise<
-        JsonImport<Omit<Post, 'type'>>
-      >,
-      import('../../content/pages.json') as unknown as Promise<
-        JsonImport<Omit<Page, 'type'>>
-      >,
+    // Fetch both components and pages lists
+    const [componentsList, pagesList] = await Promise.all([
+      fetchComponentsList(),
+      fetchPagesList(),
     ])
 
-    // First fetch the components list
-    const componentsList = await fetchComponentsList()
+    // Fetch all content in parallel
+    const [components, pages] = await Promise.all([
+      Promise.all(
+        componentsList.components.map((component) =>
+          fetchComponentContent(component.path),
+        ),
+      ),
+      Promise.all(pagesList.pages.map((page) => fetchPageContent(page.path))),
+    ])
 
-    // Then fetch all component contents in parallel
-    const componentsPromises = componentsList.components.map((component) =>
-      fetchComponentContent(component.path),
-    )
-
-    const components = await Promise.all(componentsPromises)
+    // Get the latest lastUpdated timestamp
+    const lastUpdated = new Date(
+      Math.max(
+        new Date(componentsList.lastUpdated).getTime(),
+        new Date(pagesList.lastUpdated).getTime(),
+      ),
+    ).toISOString()
 
     return {
-      posts: postsModule.default.map((post) => ({
-        ...post,
-        type: 'post' as const,
-      })),
-      pages: pagesModule.default.map((page) => ({
-        ...page,
-        type: 'page' as const,
-      })),
+      pages,
       components,
-      // lastUpdated: new Date().toISOString(),
-      lastUpdated: componentsList.lastUpdated,
+      lastUpdated,
     }
   } catch (error) {
     console.error('Error loading content:', error)
