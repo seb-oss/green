@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
-import { _, Icon, internalLink } from '../../../hooks'
+import { _, Icon } from '../../../hooks'
 import { useSettingsValue } from '../../../settings'
 import { Link } from '../link/link'
 import Settings from './settings/settings'
@@ -125,6 +125,7 @@ export default function Sidebar() {
       height="100vh"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding="xs xs m xs"
+      min-width={isOpen ? '260px' : 'max-content'}
       width={isOpen ? '260px' : 'max-content'}
       position="relative"
     >
@@ -137,8 +138,8 @@ export default function Sidebar() {
                 key={'home'}
                 href="/"
                 rank="tertiary"
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
+                justify-content="flex-start"
+                size="small"
                 align-items="center"
               >
                 <Icon name="IconArrowLeft" slot="lead" />
@@ -149,17 +150,17 @@ export default function Sidebar() {
                   Components
                 </Core.GdsText>
                 {components.map((component) => (
-                  <Core.GdsButton
+                  <Link
                     key={component.slug}
-                    onClick={internalLink}
+                    component="button"
                     href={`/component/${component.slug}`}
-                    justify-content={isOpen ? 'flex-start' : 'none'}
-                    size={isOpen ? 'small' : 'medium'}
+                    justify-content="flex-start"
+                    size="small"
                     align-items="center"
                     rank="tertiary"
                   >
                     {component.title}
-                  </Core.GdsButton>
+                  </Link>
                 ))}
               </Core.GdsFlex>
             </>
@@ -170,32 +171,24 @@ export default function Sidebar() {
                 key={'home'}
                 href="/"
                 rank="tertiary"
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
+                justify-content="flex-start"
+                size="small"
                 align-items="center"
               >
-                <Core.IconArrowLeft slot="lead" />
+                <Icon name="IconArrowLeft" slot="lead" />
                 Home
               </Link>
               {templates.map((template) => (
                 <Link
-                  component="button"
                   key={template.slug}
+                  component="button"
                   href={`/template/${template.slug}`}
-                  justify-content={isOpen ? 'flex-start' : 'none'}
-                  size={isOpen ? 'small' : 'medium'}
+                  justify-content="flex-start"
+                  size="small"
                   align-items="center"
                   rank="tertiary"
                 >
                   {template.title}
-                  {template.related_components.length > 0 && isOpen && (
-                    <div className="template-components" slot="trail">
-                      <small>
-                        {template.related_components.length} component
-                        {template.related_components.length !== 1 ? 's' : ''}
-                      </small>
-                    </div>
-                  )}
                 </Link>
               ))}
             </>
