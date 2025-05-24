@@ -110,17 +110,6 @@ export default function Sidebar() {
     fetchTemplates()
   }, [])
 
-  const handleClick = (path: string, isExternal?: boolean) => {
-    return (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault()
-      if (isExternal) {
-        window.open(path, '_blank')
-      } else {
-        router.push(path)
-      }
-    }
-  }
-
   const componentsList =
     pathName.startsWith('/components') || pathName.startsWith('/component/')
 
@@ -176,9 +165,10 @@ export default function Sidebar() {
             </>
           ) : templatesList ? (
             <>
-              <Core.GdsButton
+              <Link
+                component="button"
                 key={'home'}
-                onClick={handleClick('/', false)}
+                href="/"
                 rank="tertiary"
                 justify-content={isOpen ? 'flex-start' : 'none'}
                 size={isOpen ? 'small' : 'medium'}
@@ -186,11 +176,12 @@ export default function Sidebar() {
               >
                 <Core.IconArrowLeft slot="lead" />
                 Home
-              </Core.GdsButton>
+              </Link>
               {templates.map((template) => (
-                <Core.GdsButton
+                <Link
+                  component="button"
                   key={template.slug}
-                  onClick={handleClick(`/template/${template.slug}`, false)}
+                  href={`/template/${template.slug}`}
                   justify-content={isOpen ? 'flex-start' : 'none'}
                   size={isOpen ? 'small' : 'medium'}
                   align-items="center"
@@ -205,7 +196,7 @@ export default function Sidebar() {
                       </small>
                     </div>
                   )}
-                </Core.GdsButton>
+                </Link>
               ))}
             </>
           ) : (
