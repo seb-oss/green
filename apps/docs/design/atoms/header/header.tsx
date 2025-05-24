@@ -1,35 +1,19 @@
-import { useRouter } from 'next/navigation'
-import { internalLink } from '@/apps/docs/hooks'
+'use client'
 
 import {
-  GdsButton,
-  GdsCard,
-  GdsDiv,
-  GdsDropdown,
   GdsFlex,
-  GdsInput,
-  GdsLink,
-  GdsOption,
-  GdsText,
-  IconAi,
-  IconBarsTwo,
   IconBrandSeb,
-  IconChevronBottom,
-  IconCrossLarge,
-  IconDevices,
+  IconCrossSmall,
   IconMagnifyingGlass,
   IconMenuSidebar,
 } from '@sebgroup/green-core/react'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
+import { Link } from '../link/link'
 
 export default function Header() {
-  const router = useRouter()
-  const { settings, actions } = useSettingsContext()
+  const { actions } = useSettingsContext()
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
 
-  const handleClick = () => {
-    actions.toggle('UI.Panel.Sidebar')
-  }
   const handleToggleSidebar = (): void => {
     actions.toggle('UI.Panel.Sidebar')
   }
@@ -44,28 +28,33 @@ export default function Header() {
       position="relative"
       gap="m"
     >
-      {isOpen ? (
-        <GdsButton onClick={handleToggleSidebar} rank="tertiary" size="small">
+      {!isOpen ? (
+        <Link
+          component="button"
+          onClick={handleToggleSidebar}
+          rank="tertiary"
+          size="small"
+        >
           <IconMenuSidebar />
-        </GdsButton>
+        </Link>
       ) : (
-        <GdsButton onClick={handleToggleSidebar} rank="tertiary" size="small">
-          <IconCrossLarge />
-        </GdsButton>
+        <Link
+          component="button"
+          onClick={handleToggleSidebar}
+          rank="tertiary"
+          size="small"
+        >
+          <IconCrossSmall />
+        </Link>
       )}
 
-      <GdsLink onClick={internalLink} href="/">
+      <Link href="/">
         <IconBrandSeb />
-      </GdsLink>
+      </Link>
 
-      <GdsButton
-        size="small"
-        rank="tertiary"
-        onClick={internalLink}
-        href="/search"
-      >
+      <Link component="button" href="/search" size="small" rank="tertiary">
         <IconMagnifyingGlass size="m"></IconMagnifyingGlass>
-      </GdsButton>
+      </Link>
     </GdsFlex>
   )
 }
