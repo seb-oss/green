@@ -1,6 +1,8 @@
 import {
   ComponentContent,
   ComponentList,
+  Navigation,
+  NavigationList,
   Page,
   PageList,
   Snippet,
@@ -109,6 +111,33 @@ export async function fetchSnippetContent(path: string): Promise<Snippet> {
   return {
     ...data,
     type: 'snippet' as const,
+    createdAt: data.createdAt || new Date().toISOString(),
+    updatedAt: data.updatedAt || new Date().toISOString(),
+  }
+}
+
+// Navigations
+
+export async function fetchNavigationList(): Promise<NavigationList> {
+  const response = await fetch(`${API_BASE}/navigation/navigation.json`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch navigation list')
+  }
+  return response.json()
+}
+
+export async function fetchNavigationContent(
+  path: string,
+): Promise<Navigation> {
+  const response = await fetch(`${API_BASE}/${path}`)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch navigation content: ${path}`)
+  }
+  const data = await response.json()
+
+  return {
+    ...data,
+    type: 'navigation' as const,
     createdAt: data.createdAt || new Date().toISOString(),
     updatedAt: data.updatedAt || new Date().toISOString(),
   }

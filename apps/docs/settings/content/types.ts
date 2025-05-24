@@ -128,6 +128,33 @@ export interface Snippet extends BaseContent {
 
 // ===========================
 
+// Navigation
+
+export interface NavigationList {
+  navigation: NavigationSummary[]
+  total: number
+  lastUpdated: string
+}
+
+export interface NavigationSummary {
+  title: string
+  slug: string
+  path: string
+  links: number
+}
+
+export interface NavigationLink {
+  title: string
+  slug: string
+  icon?: string
+}
+
+export interface Navigation extends BaseContent {
+  type: 'navigation'
+  links: NavigationLink[]
+}
+// ==========
+
 export type ContentItem = Post | Page
 
 export interface ContentStore {
@@ -136,6 +163,7 @@ export interface ContentStore {
   components: ComponentContent[]
   templates: Template[]
   snippets: Snippet[]
+  navigation: Navigation[]
   _lastChecked?: string
   lastUpdated: string
 }
@@ -163,6 +191,11 @@ export interface ContentActions {
     filter?: (snippet: Snippet) => boolean
     sort?: (a: Snippet, b: Snippet) => number
   }) => Snippet[]
+  getNavigation: (slug: string) => Navigation | undefined
+  getNavigations: (options?: {
+    filter?: (navigation: Navigation) => boolean
+    sort?: (a: Navigation, b: Navigation) => number
+  }) => Navigation[]
   refresh: () => Promise<void>
 }
 

@@ -9,6 +9,7 @@ const DEFAULT_CONTENT_STORE = {
   components: [],
   templates: [],
   snippets: [],
+  navigation: [],
   lastUpdated: '',
 }
 
@@ -23,6 +24,8 @@ export const contentContext = createContext<ContentContext>({
     getTemplate: () => undefined,
     getSnippet: () => undefined,
     getSnippets: () => [],
+    getNavigation: () => undefined,
+    getNavigations: () => [],
     getMenuItems: () => [],
     refresh: async () => {},
   },

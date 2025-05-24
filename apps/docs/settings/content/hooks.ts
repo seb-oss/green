@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 
 import {
   fetchComponentsList,
+  fetchNavigationList,
   fetchPagesList,
   fetchSnippetsList,
   fetchTemplatesList,
@@ -16,6 +17,7 @@ import { contentStorage } from './storage'
 import type {
   ComponentContent,
   ContentStore,
+  Navigation,
   Page,
   Post,
   Snippet,
@@ -28,6 +30,7 @@ const DEFAULT_STORE: ContentStore = {
   components: [],
   templates: [],
   snippets: [],
+  navigation: [],
   lastUpdated: '',
 }
 
@@ -175,16 +178,43 @@ export function useContent() {
         return snippets
       },
 
+      // Navigation actions
+      getNavigation: (slug: string) =>
+        store.navigation.find((nav) => nav.slug === slug),
+
+      getNavigations: (options?: {
+        filter?: (navigation: Navigation) => boolean
+        sort?: (a: Navigation, b: Navigation) => number
+      }) => {
+        let navigation = store.navigation
+
+        if (options?.filter) {
+          navigation = navigation.filter(options.filter)
+        }
+
+        if (options?.sort) {
+          navigation = navigation.sort(options.sort)
+        }
+
+        return navigation
+      },
+
       // Add cache validation check
       validateCache: async () => {
         try {
-          const [componentsList, pagesList, templatesList, snippetsList] =
-            await Promise.all([
-              fetchComponentsList(),
-              fetchPagesList(),
-              fetchTemplatesList(),
-              fetchSnippetsList(),
-            ])
+          const [
+            componentsList,
+            pagesList,
+            templatesList,
+            snippetsList,
+            navigationList,
+          ] = await Promise.all([
+            fetchComponentsList(),
+            fetchPagesList(),
+            fetchTemplatesList(),
+            fetchSnippetsList(),
+            fetchNavigationList(),
+          ])
 
           const storedLastUpdated = new Date(store.lastUpdated)
           const latestUpdate = new Date(
@@ -193,6 +223,7 @@ export function useContent() {
               new Date(pagesList.lastUpdated).getTime(),
               new Date(templatesList.lastUpdated).getTime(),
               new Date(snippetsList.lastUpdated).getTime(),
+              new Date(navigationList.lastUpdated).getTime(),
             ),
           )
 
@@ -260,6 +291,7 @@ export function useCurrentContent() {
       component: actions.getComponent(slug),
       template: actions.getTemplate(slug),
       snippet: actions.getSnippet(slug),
+      navigation: actions.getNavigation(slug),
       slug,
     }
   }, [isLoaded, actions, slug])
