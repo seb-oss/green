@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { Icon } from '@/apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Link } from '../link/link'
 
 interface BreadcrumbItem {
   label: string
@@ -53,10 +54,10 @@ export default function Breadcrumbs({ slug, title }: BreadcrumbsProps) {
   return (
     <Core.GdsBreadcrumbs size="small">
       {breadcrumbItems.map((item) => (
-        <Core.GdsLink href={item.href} key={item.href + item.label}>
-          {item.iconName && <Icon name={item.iconName} slot="lead" />}
+        <Link href={item.href} key={item.href + item.label}>
+          {item.iconName && <Icon size="s" name={item.iconName} slot="lead" />}
           {item.label}
-        </Core.GdsLink>
+        </Link>
       ))}
     </Core.GdsBreadcrumbs>
   )

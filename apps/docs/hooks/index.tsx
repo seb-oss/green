@@ -15,11 +15,19 @@ export const internalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
   router.push(href)
 }
 
-export const Icon = ({ name, slot }: { name: string; slot?: string }) => {
+export const Icon = ({
+  name,
+  size,
+  slot,
+}: {
+  name: string
+  size?: string
+  slot?: string
+}) => {
   const IconComponent = (Core as Record<string, any>)[name]
   if (!IconComponent) {
     console.warn(`Icon ${name} not found`)
     return null
   }
-  return <IconComponent slot={slot} />
+  return <IconComponent slot={slot} size={size} />
 }
