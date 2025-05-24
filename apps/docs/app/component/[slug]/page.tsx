@@ -1,93 +1,48 @@
-import Head from 'next/head'
-import { notFound } from 'next/navigation'
-import { allComponents } from 'content'
-import { isDev } from '$/env/env'
-import { GdsRichText } from '$/import/components'
-import { Mdx } from 'core/mdx'
+// app/component/[slug]/page.tsx
+'use client'
 
-import type { Metadata, ResolvingMetadata } from 'next'
+import { useContent } from './content'
+import { IconList } from './icon/icon.list'
 
-export const dynamic = 'force-static'
+// import { useIcons } from './icon/icon.service' // Convert icon service to hook
 
-type Props = {
-  params: { slug: string }
-}
-
-type ComponentParams = {
-  slug: string
-}
-
-export const generateStaticParams = (): ComponentParams[] => {
-  return allComponents.map((component) => ({
-    slug: component.url_path.replace('/component/', ''),
-  }))
-}
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const { slug } = params
-
-  const component = allComponents.find((component) => {
-    if (component.url_path !== '/component/' + slug) {
-      return false
-    }
-    if (component.private && !isDev) {
-      return false
-    }
-    return true
-  })
-
-  if (!component) {
-    notFound()
-  }
-
-  return {
-    title: component.title + ' — Green Design System',
-    description: component.summary,
-  }
-}
-
-export default function ComponentPage({
-  params,
+export default function OverviewPage({
+  params: { slug },
 }: {
   params: { slug: string }
 }) {
-  const { slug } = params
+  const { content, loading, error } = useContent(slug)
+  // const { icons, loading: iconsLoading } = useIcons(slug === 'icon')
 
-  const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug,
-  )
-
-  if (!component) {
-    notFound()
+  if (loading) {
+    return <div>Loading...</div>
   }
 
-  const { body } = component
+  if (error) {
+    return <div>Error: {error}</div>
+  }
+
+  if (slug === 'icon') {
+    // if (iconsLoading) return <div>Loading icons...</div>
+    return <div>{/* <IconList icons={icons || []} /> */}</div>
+  }
 
   return (
-    <>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Thing',
-            description: component.summary,
-            url: `https://seb.io/component/${slug}`,
-            author: {
-              '@type': 'Company',
-              name: 'SEB',
-            },
-          }),
-        }}
-      />
-      <Head>
-        <meta name="title" content={component.title} />
-      </Head>
-      <Mdx code={body.code} globals={{ slug }} />
-    </>
+    <div className="overview-content">
+      {content?.overview?.map((section, index) => (
+        <div key={index} className="overview-section">
+          {section.column.map((col, colIndex) => (
+            <div key={colIndex} className="column">
+              {col.column_title_tag === 'H2' ? (
+                <h2>{col.title}</h2>
+              ) : (
+                <h3>{col.title}</h3>
+              )}
+              <p>{col.description}</p>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
   )
 }

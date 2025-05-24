@@ -1,55 +1,26 @@
-import { notFound } from 'next/navigation'
-import { allComponents } from 'content'
-import { Mdx } from 'core/mdx'
+// app/component/[slug]/accessibility/page.tsx
+'use client'
 
-import type { Metadata, ResolvingMetadata } from 'next'
+import { useContent } from '../content'
 
-type Props = {
-  params: { slug: string }
-}
-
-export async function generateStaticParams() {
-  return allComponents.map((component) => ({
-    slug: component.url_path.replace('/component/', ''),
-  }))
-}
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata,
-): Promise<Metadata> {
-  const { slug } = params
-
-  const component = allComponents.find(
-    (component) => component.url_path === '/component/' + slug,
-  )
-
-  if (!component) {
-    notFound()
-  }
-
-  return {
-    title: 'Accessibility - ' + component.title + ' — Green Design System',
-    description: component.summary,
-  }
-}
-export default function Accessibility({
-  params,
+export default function AccessibilityPage({
+  params: { slug },
 }: {
   params: { slug: string }
 }) {
-  const { slug } = params
+  const { content, loading, error } = useContent(slug)
 
-  const component = allComponents.find(
-    (component) =>
-      component.url_path === '/component/' + slug + '/accessibility',
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
+
+  return (
+    <div className="accessibility-content">
+      {content?.accessibility?.section.map((section, index) => (
+        <div key={index} className="accessibility-section">
+          <h2>{section.title}</h2>
+          <p>{section.description}</p>
+        </div>
+      ))}
+    </div>
   )
-
-  if (!component) {
-    notFound()
-  }
-
-  const { body } = component
-
-  return <Mdx code={body.code} globals={{}} />
 }

@@ -1,290 +1,162 @@
-/* eslint-disable @nx/enforce-module-boundaries */
+// app/component/[slug]/layout.tsx
 'use client'
 
-import { useState } from 'react'
-import { Link } from 'next-view-transitions'
-import dynamic from 'next/dynamic'
-import { notFound, usePathname } from 'next/navigation'
-import { allComponents } from 'content'
-import {
-  GdsBadge,
-  GdsButton,
-  GdsCard,
-  GdsDiv,
-  GdsFlex,
-  GdsGrid,
-  GdsInput,
-  GdsText,
-} from '$/import/components'
-import { IconMagnifyingGlass, IconSquareBehindSquare } from '$/import/icons'
-import Breadcrumb from 'core/breadcrumb'
-import Navigator from 'core/navigator'
-import Taber from 'core/taber'
-import { format, parseISO } from 'date-fns'
-import { toast } from 'sonner'
+import { useEffect, useState } from 'react'
+import Breadcrumbs from '@/apps/docs/design/atoms/breadcrumb/breadcrumb'
+import { Link } from '@/apps/docs/design/atoms/link/link'
+import { Snippet } from '@/apps/docs/design/atoms/snippet'
+import Tabs from '@/apps/docs/design/atoms/tabs'
 
-import * as ICONS from '@sebgroup/green-react/src/lib/icon/icons'
+import * as Core from '@sebgroup/green-core/react'
 
-// Dynamic component props
-type DynamicComponentProps = {
-  hero?: boolean // Define the hero prop
+interface ComponentContent {
+  title: string
+  slug: string
+  hero_snippet?: string
+  beta?: boolean
+  summary?: string
+  tags?: string[]
+  category?: string[]
+  platform?: {
+    web: boolean
+    ios: boolean
+    android: boolean
+  }
+  overview?: {
+    column: {
+      title: string
+      column_title_tag: string
+      description: string
+    }[]
+  }[]
+  'ux-text'?: {
+    section: {
+      title: string
+      description: string
+    }[]
+  }
+  accessibility?: {
+    section: {
+      title: string
+      description: string
+    }[]
+  }
 }
 
-export default function ComponentLayout({
-  children,
-  params,
-}: {
+interface LayoutProps {
   children: React.ReactNode
   params: { slug: string }
-}) {
-  const { slug } = params
-  const pathName = usePathname()
-  const [searchTerm, setSearchTerm] = useState('')
-  const getComponent = (path: string) =>
-    allComponents.find(
-      (component) => component.url_path === `/component/${slug}${path}`,
-    )
+}
 
-  const component = getComponent('')
-  const componentA11y = getComponent('/accessibility')
-  const componentCode = getComponent('/code')
-  const componentDesign = getComponent('/design')
-  const componentUXText = getComponent('/ux-text')
+export default function ComponentLayout({ children, params }: LayoutProps) {
+  const [content, setContent] = useState<ComponentContent | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  if (!component) {
-    notFound()
-  }
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(
+          `https://api.seb.io/components/${params.slug}/${params.slug}.content.json`,
+        )
 
-  const { title, url_path, tags, status, last_edited, summary } = component
+        if (!response.ok) {
+          throw new Error('Failed to fetch component content')
+        }
 
-  const pathsAndComponents = [
-    { path: '/accessibility', component: componentA11y },
-    { path: '/code', component: componentCode },
-    { path: '/design', component: componentDesign },
-    { path: '/ux-text', component: componentUXText },
-  ]
+        const data = await response.json()
+        setContent(data)
 
-  let TOC = <Navigator headings={component?.headings} component={title} />
+        // Update document title and meta tags
+        document.title = `${data.title} - SEB Design System`
 
-  for (const { path, component } of pathsAndComponents) {
-    if (pathName.includes(path)) {
-      TOC = <Navigator headings={component?.headings} component={title} />
-      break
-    }
-  }
-
-  const tagsArray = tags ? tags.split(', ') : []
-
-  const links = [
-    { path: '', label: 'Overview', isPrivate: false },
-    // {
-    //   path: '/design',
-    //   label: 'Design',
-    //   isPrivate: componentDesign?.private || false,
-    // },
-    {
-      path: '/ux-text',
-      label: 'UX text',
-      isPrivate: componentUXText?.private || false,
-    },
-    // {
-    //   path: '/code',
-    //   label: 'Code',
-    //   isPrivate: componentCode?.private || false,
-    // },
-    {
-      path: '/accessibility',
-      label: 'Accessibility',
-      isPrivate: componentA11y?.private || false,
-    },
-  ]
-
-  const getDynamicComponent = (c: string) =>
-    dynamic<DynamicComponentProps>(
-      () =>
-        import(`../../../design/example/${c}`).catch(() => {
-          const ExampleComponent = () => <div>Example</div>
-          ExampleComponent.displayName = 'ExampleComponent'
-          return ExampleComponent
-        }),
-      {
-        ssr: false,
-      },
-    )
-
-  const Preview = getDynamicComponent(url_path.replace('/component/', ''))
-
-  const transformIconName = (iconName: string): string => {
-    return iconName
-      .replace(/^Icon/, '') // Remove the "Icon" prefix
-      .replace(/([A-Z])/g, ' $1') // Add space before each capital letter
-      .trim() // Remove leading space
-  }
-
-  const handleIconClick = (clipboardText: string) => {
-    navigator.clipboard
-      .writeText(clipboardText)
-      .then(() => {
-        toast.success('Copied!')
-      })
-      .catch((error) => {
-        console.error('Error copying text: ', error)
-      })
-  }
-
-  const fuzzySearch = (term: string, text: string): boolean => {
-    const termLower = term.toLowerCase()
-    const textLower = text.toLowerCase()
-    let termIndex = 0
-    let textIndex = 0
-
-    while (termIndex < termLower.length && textIndex < textLower.length) {
-      if (termLower[termIndex] === textLower[textIndex]) {
-        termIndex++
+        // Update meta description
+        const metaDescription = document.querySelector(
+          'meta[name="description"]',
+        )
+        if (metaDescription) {
+          metaDescription.setAttribute(
+            'content',
+            data.summary || `Documentation for the ${data.title} component`,
+          )
+        }
+      } catch (err) {
+        console.error('Error fetching content:', err)
+        setError(err instanceof Error ? err.message : 'Unknown error')
+      } finally {
+        setLoading(false)
       }
-      textIndex++
     }
 
-    return termIndex === termLower.length
-  }
+    fetchContent()
+  }, [params.slug])
 
-  const filteredIcons = Object.keys(ICONS).filter((iconName) =>
-    fuzzySearch(searchTerm, transformIconName(iconName)),
-  )
-
-  if (component.url_path === '/component/icon') {
-    // console.log('ICONS', ICONS)
-    // toast.success("Copied!")
+  if (loading) {
     return (
-      <GdsFlex
+      <Core.GdsFlex
         flex-direction="column"
-        width="100%"
-        justify-content="center"
-        margin="0 auto"
         gap="xl"
-      >
-        <GdsDiv position="sticky" inset="58px 0 0 0" z-index="999">
-          <GdsFlex gap="l" flex-direction="column">
-            <GdsInput
-              clearable
-              onKeyUp={(e) =>
-                setSearchTerm((e.target as HTMLInputElement).value)
-              }
-            >
-              <IconMagnifyingGlass height={24} slot="lead" />
-            </GdsInput>
-          </GdsFlex>
-        </GdsDiv>
-        <GdsGrid columns="5" gap="m">
-          {filteredIcons.map((iconName) => {
-            const IconComponent = (ICONS as any)[iconName]
-            return (
-              <GdsFlex
-                key={iconName}
-                flex-direction="column"
-                title={transformIconName(iconName)}
-              >
-                <GdsCard
-                  variant="primary"
-                  align-items="center"
-                  justify-content="center"
-                  padding="m"
-                  height="160px"
-                  width="100%"
-                  border-radius="s"
-                  data-clipboard-text={`<${iconName}></${iconName}>`}
-                  onClick={() => handleIconClick(`<${iconName}></${iconName}>`)}
-                >
-                  <IconComponent height={24} />
-                </GdsCard>
-                <GdsFlex
-                  align-items="center"
-                  justify-content="space-between"
-                  padding="0 s 0 s"
-                  width="100%"
-                >
-                  <GdsText font-size="detail-xs">
-                    {transformIconName(iconName)}
-                  </GdsText>
-                </GdsFlex>
-              </GdsFlex>
-            )
-          })}
-        </GdsGrid>
-      </GdsFlex>
-    )
-  } else {
-    return (
-      <GdsFlex
-        flex-direction="column"
-        width="100%"
+        width="80ch"
+        align-items="center"
         justify-content="center"
-        margin="0 auto"
-        gap="l"
+        height="50vh"
       >
-        <Breadcrumb
-          home={'Home'}
-          separator={<GdsText font-size="body-s"> / </GdsText>}
-          slug={slug}
-        />
-
-        <GdsFlex flex-direction="column" gap="xs">
-          <GdsText tag="h1">{title}</GdsText>
-          <GdsText tag="p" text-wrap="balance" className="fade-in delay-200">
-            {summary}
-          </GdsText>
-          <GdsFlex>
-            {status && (
-              <GdsBadge variant="notice" size="small">
-                {status}
-              </GdsBadge>
-            )}
-          </GdsFlex>
-          <GdsFlex gap="s">
-            Tags:
-            {tagsArray.map((tag) => (
-              <Link
-                href={`/tag/` + tag}
-                key={tag}
-                style={{
-                  textDecoration: 'underline',
-                  textTransform: 'capitalize',
-                }}
-              >
-                {tag}
-              </Link>
-            ))}
-          </GdsFlex>
-        </GdsFlex>
-        <GdsFlex gap="l">
-          <GdsFlex width="100%; l{80ch}" flex-direction="column" gap="2xl">
-            <GdsCard variant="primary" border-radius="s">
-              <GdsFlex
-                gap="xl"
-                align-items="center"
-                justify-content="center"
-                padding="4xl 0"
-                min-height="300px"
-              >
-                <Preview hero={true} />
-              </GdsFlex>
-            </GdsCard>
-            <Taber component={url_path} links={links} />
-            <GdsFlex flex-direction="column" gap="xl">
-              {children}
-            </GdsFlex>
-            <footer>
-              Last updated: <br />
-              <time dateTime={last_edited} title="Last updated">
-                {format(parseISO(last_edited), "d LLL, yyyy '/' HH:mm")}
-              </time>
-            </footer>
-          </GdsFlex>
-          <GdsFlex display="none; l{flex}" width="232px">
-            {TOC}
-          </GdsFlex>
-        </GdsFlex>
-      </GdsFlex>
+        <Core.GdsText>Loading...</Core.GdsText>
+      </Core.GdsFlex>
     )
   }
+
+  if (error || !content) {
+    return (
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="xl"
+        width="80ch"
+        align-items="center"
+        justify-content="center"
+        height="50vh"
+      >
+        <Core.GdsText>Error loading component: {error}</Core.GdsText>
+      </Core.GdsFlex>
+    )
+  }
+
+  return (
+    <Core.GdsFlex flex-direction="column" gap="xl" width="80ch">
+      <Breadcrumbs slug={params.slug} title={content.title} />
+      <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+        <Core.GdsFlex flex-direction="column" gap="xs" align-items="flex-start">
+          <Core.GdsText tag="h1">{content.title}</Core.GdsText>
+          {content.summary && (
+            <Core.GdsText tag="p">{content.summary}</Core.GdsText>
+          )}
+          {content.beta && <Core.GdsBadge variant="notice">BETA</Core.GdsBadge>}
+        </Core.GdsFlex>
+        {content.tags && (
+          <Core.GdsFlex gap="xs" align-items="center">
+            <Core.GdsText tag="p">Tags:</Core.GdsText>
+            <Core.GdsFlex gap="m">
+              {content.tags.map((tag) => (
+                <Link href={'/components/' + tag} key={tag} className="tag">
+                  {tag}
+                </Link>
+              ))}
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+        )}
+        <Core.GdsCard
+          width="100%"
+          height="280px"
+          align-items="center"
+          justify-content="center"
+        >
+          {content.hero_snippet && <Snippet slug={content.hero_snippet} />}
+        </Core.GdsCard>
+        <Tabs slug={params.slug} />
+      </Core.GdsFlex>
+
+      <div className="component-content">{children}</div>
+    </Core.GdsFlex>
+  )
 }

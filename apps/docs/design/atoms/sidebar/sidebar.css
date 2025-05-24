@@ -1,0 +1,8 @@
+.sidebar {
+  transition: all 240ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: -4px 0;
+  }
+}

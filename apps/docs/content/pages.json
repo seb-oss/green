@@ -1,0 +1,29 @@
+[
+  {
+    "slug": "/",
+    "title": "Home",
+    "preamble": "Home",
+    "excerpt": "Excerpt",
+    "description": "Longer description",
+    "hero": "",
+    "showInMenu": true,
+    "menuOrder": 1,
+    "iconName": "",
+    "headings": [
+      {
+        "slug": "our-story",
+        "title": "Our Story",
+        "level": 2
+      },
+      {
+        "slug": "mission",
+        "title": "Our Mission",
+        "level": 2
+      }
+    ],
+    "content": "# About Us\n\n## Our Story\nContent here...\n\n## Our Mission\nMore content...",
+    "createdAt": "2025-04-24T00:00:00Z",
+    "updatedAt": "2025-04-24T00:00:00Z",
+    "type": "page"
+  }
+]

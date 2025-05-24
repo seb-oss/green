@@ -1,0 +1,145 @@
+/* Consent Modal Styling */
+
+#cc-main .cm {
+  font-family: var(--gds-font-family);
+  color: var(--gds-color-l2-background-secondary);
+  background: var(--gds-color-l2-background-secondary);
+  z-index: 2147483647;
+  position: fixed;
+  border-radius: var(--gds-space-s);
+  box-shadow: var(--gds-shadow-l);
+  border: 1px solid var(--gds-color-l2-border-primary);
+  right: var(--gds-space-l);
+  bottom: var(--gds-space-l);
+  padding: var(--gds-space-xl);
+  inset: 35% 8px auto;
+}
+
+.cm-wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999; /* Ensure it's above other elements */
+  inset: 0;
+  opacity: 1;
+  visibility: visible;
+}
+
+.cm__btn-group {
+  flex-direction: column;
+  gap: var(--gds-space-m);
+  display: flex;
+}
+
+.cm__title {
+  color: var(--gds-color-l2-content-secondary);
+  font-size: 1.25rem;
+  font-weight: 450;
+  margin: 0;
+}
+
+.cm__desc {
+  color: var(--gds-color-l2-content-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 450;
+  margin-top: var(--gds-space-l);
+  margin-bottom: var(--gds-space-l);
+}
+
+.cm__btn {
+  background-color: var(--gds-color-l3-background-primary);
+  border-radius: var(--gds-space-max);
+  color: var(--gds-color-l3-content-primary);
+  font-family: var(--gds-font-family);
+  border: none;
+  padding-block: var(--gds-space-s);
+  padding-inline: var(--gds-space-l);
+  margin-top: 0;
+  font-weight: 450;
+  font-size: var(--gds-text-size-detail-m);
+}
+
+.cm__btn:hover {
+  background-color: color-mix(
+    in srgb,
+    var(--gds-color-l3-background-primary),
+    var(--gds-color-l3-states-dark-hover)
+  );
+}
+
+/* When aria-hidden="true" is set, hide the entire modal and the buttons */
+.cm[aria-hidden='true'] {
+  visibility: hidden;
+}
+
+.cm[aria-hidden='true'] .cm__btns {
+  pointer-events: none;
+}
+
+/* ============ ADDED LINES FOR FADE ============ */
+
+/* Default state for backdrop */
+.cm-wrapper {
+  --duration: 0.3s;
+
+  transition:
+    opacity var(--duration) ease,
+    visibility var(--duration) ease;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Visible state for backdrop */
+.show--consent .cm-wrapper {
+  opacity: 1;
+  visibility: visible;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+/* Default state for modal */
+.cm {
+  transition:
+    translate var(--duration) ease,
+    opacity var(--duration) ease,
+    visibility var(--duration) ease;
+
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 -40px;
+}
+
+/* Visible state for modal */
+.show--consent .cm {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+
+  @starting-style {
+    translate: 0 -40px;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .cm-wrapper {
+    --duration: 0s;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .cm {
+    max-width: 500px;
+    border-radius: var(--gds-space-s);
+    inset: 0;
+    margin: auto;
+    max-height: fit-content;
+  }
+
+  .cm__btn-group {
+    justify-content: flex-start;
+    flex-direction: row;
+  }
+}

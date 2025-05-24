@@ -1,0 +1,64 @@
+// breadcrumb.tsx
+'use client'
+
+import { usePathname } from 'next/navigation'
+import { Icon } from '@/apps/docs/hooks'
+
+import * as Core from '@sebgroup/green-core/react'
+import { Link } from '../link/link'
+
+interface BreadcrumbItem {
+  label: string
+  href: string
+  iconName?: string
+}
+
+interface BreadcrumbsProps {
+  slug: string
+  title: string
+}
+
+export default function Breadcrumbs({ slug, title }: BreadcrumbsProps) {
+  const pathname = usePathname()
+  const currentPath = pathname.split('?')[0]
+
+  const breadcrumbItems: BreadcrumbItem[] = [
+    {
+      label: 'Home',
+      href: '/',
+      iconName: 'IconHomeOpen',
+    },
+    {
+      label: 'Components',
+      href: '/components',
+      iconName: 'IconSquareGridCircle',
+    },
+    {
+      label: title,
+      href: `/component/${slug}`,
+    },
+  ]
+
+  if (currentPath.includes(`/component/${slug}/ux-text`)) {
+    breadcrumbItems.push({
+      label: 'UX text',
+      href: `/component/${slug}/ux-text`,
+    })
+  } else if (currentPath.includes(`/component/${slug}/accessibility`)) {
+    breadcrumbItems.push({
+      label: 'Accessibility',
+      href: `/component/${slug}/accessibility`,
+    })
+  }
+
+  return (
+    <Core.GdsBreadcrumbs size="small" key="breadcrumb">
+      {breadcrumbItems.map((item) => (
+        <Link href={item.href} key={item.href + item.label}>
+          {item.iconName && <Icon size="s" name={item.iconName} slot="lead" />}
+          {item.label}
+        </Link>
+      ))}
+    </Core.GdsBreadcrumbs>
+  )
+}
