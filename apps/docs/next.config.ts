@@ -10,6 +10,11 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   pageExtensions: ['mdx', 'ts', 'tsx'],
   devIndicators: false,
+  output: 'export',
+  trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     mdxRs: true,
     viewTransition: true,

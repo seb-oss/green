@@ -1,6 +1,7 @@
-// app/component/[slug]/content.ts
+// app/component/[slug]/useContent.ts
+'use client'
 
-import { cache } from 'react'
+import { useEffect, useState } from 'react'
 
 interface ComponentContent {
   title: string
@@ -36,12 +37,39 @@ interface ComponentContent {
   }
 }
 
-export const getContent = cache(async (slug: string) => {
-  const response = await fetch(
-    `https://api.seb.io/components/${slug}/${slug}.content.json`,
-    { next: { revalidate: 3600 } }, // Revalidate every hour
-  )
+export function useContent(slug: string) {
+  const [content, setContent] = useState<ComponentContent | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  if (!response.ok) throw new Error('Failed to fetch component content')
-  return response.json() as Promise<ComponentContent>
-})
+  useEffect(() => {
+    const fetchContent = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+
+        const response = await fetch(
+          `https://api.seb.io/components/${slug}/${slug}.content.json`,
+        )
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch content: ${response.status}`)
+        }
+
+        const data = await response.json()
+        setContent(data)
+      } catch (err) {
+        console.error('Error fetching content:', err)
+        setError(err instanceof Error ? err.message : 'Unknown error')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (slug) {
+      fetchContent()
+    }
+  }, [slug])
+
+  return { content, loading, error }
+}

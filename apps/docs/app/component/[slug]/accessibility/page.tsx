@@ -1,16 +1,22 @@
-import { getContent } from '../content'
+// app/component/[slug]/accessibility/page.tsx
+'use client'
 
-export default async function UXTextPage({
+import { useContent } from '../content'
+
+export default function AccessibilityPage({
   params: { slug },
 }: {
   params: { slug: string }
 }) {
-  const content = await getContent(slug)
+  const { content, loading, error } = useContent(slug)
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
 
   return (
-    <div className="ux-text-content">
-      {content['accessibility']?.section.map((section, index) => (
-        <div key={index} className="ux-text-section">
+    <div className="accessibility-content">
+      {content?.accessibility?.section.map((section, index) => (
+        <div key={index} className="accessibility-section">
           <h2>{section.title}</h2>
           <p>{section.description}</p>
         </div>
