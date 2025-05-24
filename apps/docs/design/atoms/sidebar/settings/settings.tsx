@@ -18,7 +18,10 @@ export default function Settings() {
     <>
       {isOpenSettings && (
         <Core.GdsCard padding="xs" gap="s" margin="auto 0 0 0">
-          <Core.GdsCard variant="secondary">Cookie consent</Core.GdsCard>
+          <Core.GdsCard variant="secondary">
+            <span>Cookie consent</span>
+            <Core.GdsButton size="xs">REFRESH CONTENT</Core.GdsButton>
+          </Core.GdsCard>
           <Core.GdsFlex
             justify-content="space-between"
             align-items="center"
@@ -32,7 +35,6 @@ export default function Settings() {
             >
               <Core.IconCrossLarge />
             </Core.GdsButton>
-            <Core.GdsButton>REFRESH CONTENT</Core.GdsButton>
           </Core.GdsFlex>
         </Core.GdsCard>
       )}

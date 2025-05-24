@@ -236,6 +236,10 @@ export interface ContentActions {
   }) => Page[]
   getMenuItems: () => Page[]
   getComponent: (slug: string) => ComponentContent | undefined
+  getComponents: (options?: {
+    filter?: (component: ComponentContent) => boolean
+    sort?: (a: ComponentContent, b: ComponentContent) => number
+  }) => ComponentContent[]
   getTemplate: (slug: string) => Template | undefined
   getTemplates: (options?: {
     filter?: (template: Template) => boolean

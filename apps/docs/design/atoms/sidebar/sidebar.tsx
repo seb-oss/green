@@ -1,113 +1,19 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useMemo } from 'react'
+import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { _, Icon } from '../../../hooks'
 import { useSettingsValue } from '../../../settings'
+import { useContentContext } from '../../../settings/content'
 import { Link } from '../link/link'
 import Settings from './settings/settings'
 import SidebarCollapsed from './sidebar.collapsed'
 
 import './sidebar.css'
 
-interface NavItem {
-  title: string
-  slug: string
-  icon: string
-}
-
-interface NavigationResponse {
-  title: string
-  slug: string
-  links: NavItem[]
-}
-
-interface Component {
-  title: string
-  slug: string
-  summary?: string
-  path: string
-}
-
-interface ComponentsResponse {
-  components: Component[]
-  total: number
-  lastUpdated: string
-}
-
-interface Template {
-  title: string
-  slug: string
-  path: string
-  related_components: string[]
-}
-
-interface TemplatesResponse {
-  templates: Template[]
-  total: number
-  lastUpdated: string
-}
-
-interface SidebarData {
-  navigation: NavItem[]
-  components: Component[]
-  templates: Template[]
-}
-
-// Custom hook for fetching all sidebar data
-const useSidebarData = () => {
-  const [data, setData] = useState<SidebarData>({
-    navigation: [],
-    components: [],
-    templates: [],
-  })
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    const fetchAllData = async () => {
-      try {
-        setLoading(true)
-
-        const [navigationRes, componentsRes, templatesRes] = await Promise.all([
-          fetch('https://api.seb.io/navigation/main.json'),
-          fetch('https://api.seb.io/components/components.json'),
-          fetch('https://api.seb.io/templates/templates.json'),
-        ])
-
-        const [navigationData, componentsData, templatesData] =
-          await Promise.all([
-            navigationRes.json() as Promise<NavigationResponse>,
-            componentsRes.json() as Promise<ComponentsResponse>,
-            templatesRes.json() as Promise<TemplatesResponse>,
-          ])
-
-        setData({
-          navigation: navigationData.links,
-          components: [...componentsData.components].sort((a, b) =>
-            a.title.localeCompare(b.title),
-          ),
-          templates: [...templatesData.templates].sort((a, b) =>
-            a.title.localeCompare(b.title),
-          ),
-        })
-      } catch (err) {
-        console.error('Error fetching sidebar data:', err)
-        setError(err instanceof Error ? err.message : 'Unknown error')
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchAllData()
-  }, [])
-
-  return { data, loading, error }
-}
-
-// Reusable link component
+// Reusable link component (keep as is)
 const SidebarLink = ({
   href,
   children,
@@ -135,7 +41,7 @@ const SidebarLink = ({
   </Link>
 )
 
-// Home button component
+// Home button component (keep as is)
 const HomeButton = () => (
   <SidebarLink href="/" icon="IconArrowLeft" iconSlot="lead">
     Home
@@ -145,7 +51,7 @@ const HomeButton = () => (
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
   const pathName = usePathname()
-  const { data, loading, error } = useSidebarData()
+  const { isLoaded, actions } = useContentContext()
 
   // Memoized path checks
   const pathType = useMemo(() => {
@@ -166,16 +72,15 @@ export default function Sidebar() {
 
   // Memoized content renderer
   const renderContent = useMemo(() => {
-    if (loading) {
+    if (!isLoaded) {
       return <Core.GdsText>Loading...</Core.GdsText>
-    }
-
-    if (error) {
-      return <Core.GdsText>Error loading navigation</Core.GdsText>
     }
 
     switch (pathType) {
       case 'components':
+        const components = actions.getComponents({
+          sort: (a, b) => a.title.localeCompare(b.title),
+        })
         return (
           <>
             <HomeButton />
@@ -183,7 +88,7 @@ export default function Sidebar() {
               <Core.GdsText tag="small" padding="m">
                 Components
               </Core.GdsText>
-              {data.components.map((component) => (
+              {components.map((component) => (
                 <SidebarLink
                   key={component.slug}
                   href={`/component/${component.slug}`}
@@ -196,6 +101,9 @@ export default function Sidebar() {
         )
 
       case 'templates':
+        const templates = actions.getTemplates({
+          sort: (a, b) => a.title.localeCompare(b.title),
+        })
         return (
           <>
             <HomeButton />
@@ -203,7 +111,7 @@ export default function Sidebar() {
               <Core.GdsText tag="small" padding="m">
                 Templates
               </Core.GdsText>
-              {data.templates.map((template) => (
+              {templates.map((template) => (
                 <SidebarLink
                   key={template.slug}
                   href={`/template/${template.slug}`}
@@ -216,13 +124,15 @@ export default function Sidebar() {
         )
 
       default:
-        return data.navigation.map((item) => (
+        // Get main navigation
+        const mainNav = actions.getNavigation('main')
+        return mainNav?.links.map((item) => (
           <SidebarLink key={item.slug} href={item.slug} icon={item.icon}>
             {item.title}
           </SidebarLink>
         ))
     }
-  }, [data, loading, error, pathType])
+  }, [isLoaded, actions, pathType])
 
   return (
     <Core.GdsCard
