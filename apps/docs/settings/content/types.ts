@@ -62,6 +62,54 @@ export interface ComponentContent extends BaseContent {
   'ux-text'?: { section: ComponentSection[] }
   accessibility?: { section: ComponentSection[] }
   images?: ComponentImage[]
+  icons?: IconList
+}
+
+// ICON ICON ICON
+
+export interface IconVariants {
+  regular: string
+  solid: string
+}
+
+export interface IconFramework {
+  path: string
+  import: string
+  component: string
+}
+
+export interface IconFrameworks {
+  web: IconFramework
+  react: IconFramework
+  angular: IconFramework
+}
+
+export interface IconMeta {
+  description: string
+  categories: string[]
+  tags: string[]
+  width: number
+  height: number
+  viewBox: string
+}
+
+export interface IconData {
+  id: string
+  nodeId: string
+  displayName: string
+  fileName: string
+  urlPath: string
+  variants: IconVariants
+  static: {
+    regular: string
+    solid: string
+  }
+  meta: IconMeta
+  framework: IconFrameworks
+}
+
+export interface IconList {
+  [key: string]: IconData
 }
 
 // PAGES

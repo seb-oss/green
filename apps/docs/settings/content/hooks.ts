@@ -17,6 +17,7 @@ import { contentStorage } from './storage'
 import type {
   ComponentContent,
   ContentStore,
+  IconData,
   Navigation,
   Page,
   Post,
@@ -149,6 +150,67 @@ export function useContent() {
           (comp) => comp.slug === componentSlug,
         )
         return component?.images || []
+      },
+
+      // ICONS
+
+      getIcon: (iconId: string) => {
+        const iconComponent = store.components.find(
+          (comp) => comp.slug === 'icon',
+        )
+        return iconComponent?.icons?.[iconId]
+      },
+
+      getIcons: (options?: {
+        filter?: (icon: IconData) => boolean
+        sort?: (a: IconData, b: IconData) => number
+      }) => {
+        const iconComponent = store.components.find(
+          (comp) => comp.slug === 'icon',
+        )
+
+        if (!iconComponent?.icons) return []
+
+        let icons = Object.values(iconComponent.icons)
+
+        if (options?.filter) {
+          icons = icons.filter(options.filter)
+        }
+
+        if (options?.sort) {
+          icons = icons.sort(options.sort)
+        }
+
+        return icons
+      },
+
+      getIconsByCategory: (category: string) => {
+        const iconComponent = store.components.find(
+          (comp) => comp.slug === 'icon',
+        )
+
+        if (!iconComponent?.icons) return []
+
+        return Object.values(iconComponent.icons).filter((icon) =>
+          icon.meta.categories.includes(category),
+        )
+      },
+
+      searchIcons: (query: string) => {
+        const iconComponent = store.components.find(
+          (comp) => comp.slug === 'icon',
+        )
+
+        if (!iconComponent?.icons) return []
+
+        const searchTerm = query.toLowerCase()
+        return Object.values(iconComponent.icons).filter(
+          (icon) =>
+            icon.displayName.toLowerCase().includes(searchTerm) ||
+            icon.meta.tags.some((tag) =>
+              tag.toLowerCase().includes(searchTerm),
+            ),
+        )
       },
 
       // Template actions

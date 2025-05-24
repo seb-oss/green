@@ -2,6 +2,7 @@ import {
   ComponentContent,
   ComponentImage,
   ComponentList,
+  IconList,
   Navigation,
   NavigationList,
   Page,
@@ -38,6 +39,19 @@ async function fetchComponentImages(
   return data.nodes || []
 }
 
+async function fetchIconList(componentSlug: string): Promise<IconList> {
+  const response = await fetch(
+    `${API_BASE}/components/${componentSlug}/${componentSlug}.list.json`,
+  )
+  if (!response.ok) {
+    if (response.status === 404) {
+      return {} // Return empty object if list doesn't exist
+    }
+    throw new Error(`Failed to fetch icon list: ${componentSlug}`)
+  }
+  return response.json()
+}
+
 export async function fetchComponentContent(
   path: string,
 ): Promise<ComponentContent> {
@@ -49,6 +63,16 @@ export async function fetchComponentContent(
 
   // Extract component slug from path
   const slug = path.split('/')[1] // Assumes path format: "components/button/button.content.json"
+
+  // If this is the icon component, fetch the icon list
+  let icons: IconList | undefined
+  if (slug === 'icon') {
+    try {
+      icons = await fetchIconList(slug)
+    } catch (error) {
+      console.warn('Failed to fetch icon list:', error)
+    }
+  }
 
   // Fetch images in parallel with content
   let images: ComponentImage[] = []
@@ -63,7 +87,8 @@ export async function fetchComponentContent(
     type: 'component' as const,
     createdAt: data.createdAt || new Date().toISOString(),
     updatedAt: data.updatedAt || new Date().toISOString(),
-    images, // Add images to component data
+    images,
+    icons,
   }
 }
 
