@@ -8,10 +8,9 @@ import { _, Icon, internalLink } from '../../../hooks'
 import { useSettingsValue } from '../../../settings'
 import { Link } from '../link/link'
 import Settings from './settings/settings'
+import SidebarCollapsed from './sidebar.collapsed'
 
 import './sidebar.css'
-
-import SidebarCollapsed from './sidebar.collapsed'
 
 interface NavItem {
   title: string

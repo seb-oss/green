@@ -41,7 +41,7 @@ export default function Header() {
         <Link
           component="button"
           onClick={handleToggleSidebar}
-          rank="tertiary"
+          rank="secondary"
           size="small"
         >
           <IconCrossSmall />
