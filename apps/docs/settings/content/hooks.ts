@@ -3,7 +3,12 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-import { fetchComponentsList, fetchPagesList, fetchTemplatesList } from './api'
+import {
+  fetchComponentsList,
+  fetchPagesList,
+  fetchSnippetsList,
+  fetchTemplatesList,
+} from './api'
 import { contentContext } from './context'
 import { loadContent } from './loader'
 import { contentStorage } from './storage'
@@ -13,6 +18,7 @@ import type {
   ContentStore,
   Page,
   Post,
+  Snippet,
   Template,
 } from './types'
 
@@ -21,6 +27,7 @@ const DEFAULT_STORE: ContentStore = {
   pages: [],
   components: [],
   templates: [],
+  snippets: [],
   lastUpdated: '',
 }
 
@@ -148,14 +155,36 @@ export function useContent() {
         return templates
       },
 
+      getSnippet: (slug: string) =>
+        store.snippets.find((snippet) => snippet.slug === slug),
+
+      getSnippets: (options?: {
+        filter?: (snippet: Snippet) => boolean
+        sort?: (a: Snippet, b: Snippet) => number
+      }) => {
+        let snippets = store.snippets
+
+        if (options?.filter) {
+          snippets = snippets.filter(options.filter)
+        }
+
+        if (options?.sort) {
+          snippets = snippets.sort(options.sort)
+        }
+
+        return snippets
+      },
+
       // Add cache validation check
       validateCache: async () => {
         try {
-          const [componentsList, pagesList, templatesList] = await Promise.all([
-            fetchComponentsList(),
-            fetchPagesList(),
-            fetchTemplatesList(),
-          ])
+          const [componentsList, pagesList, templatesList, snippetsList] =
+            await Promise.all([
+              fetchComponentsList(),
+              fetchPagesList(),
+              fetchTemplatesList(),
+              fetchSnippetsList(),
+            ])
 
           const storedLastUpdated = new Date(store.lastUpdated)
           const latestUpdate = new Date(
@@ -163,6 +192,7 @@ export function useContent() {
               new Date(componentsList.lastUpdated).getTime(),
               new Date(pagesList.lastUpdated).getTime(),
               new Date(templatesList.lastUpdated).getTime(),
+              new Date(snippetsList.lastUpdated).getTime(),
             ),
           )
 
@@ -227,8 +257,9 @@ export function useCurrentContent() {
 
     return {
       page: actions.getPage(slug),
-      // post: actions.getPost(slug),
       component: actions.getComponent(slug),
+      template: actions.getTemplate(slug),
+      snippet: actions.getSnippet(slug),
       slug,
     }
   }, [isLoaded, actions, slug])

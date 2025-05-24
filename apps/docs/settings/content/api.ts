@@ -3,6 +3,8 @@ import {
   ComponentList,
   Page,
   PageList,
+  Snippet,
+  SnippetList,
   Template,
   TemplateList,
 } from './types'
@@ -82,6 +84,31 @@ export async function fetchTemplateContent(path: string): Promise<Template> {
   return {
     ...data,
     type: 'template' as const,
+    createdAt: data.createdAt || new Date().toISOString(),
+    updatedAt: data.updatedAt || new Date().toISOString(),
+  }
+}
+
+// SNIPPETS
+
+export async function fetchSnippetsList(): Promise<SnippetList> {
+  const response = await fetch(`${API_BASE}/snippets/snippets.json`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch snippets list')
+  }
+  return response.json()
+}
+
+export async function fetchSnippetContent(path: string): Promise<Snippet> {
+  const response = await fetch(`${API_BASE}/${path}`)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch snippet content: ${path}`)
+  }
+  const data = await response.json()
+
+  return {
+    ...data,
+    type: 'snippet' as const,
     createdAt: data.createdAt || new Date().toISOString(),
     updatedAt: data.updatedAt || new Date().toISOString(),
   }

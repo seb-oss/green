@@ -104,6 +104,30 @@ export interface Template extends BaseContent {
 
 // ==========
 
+// Snippets
+
+// Add these alongside existing types
+export interface SnippetList {
+  snippets: SnippetSummary[]
+  total: number
+  lastUpdated: string
+}
+
+export interface SnippetSummary {
+  title: string
+  slug: string
+  path: string
+  code: string
+}
+
+export interface Snippet extends BaseContent {
+  type: 'snippet'
+  snippet_component?: string
+  code: string
+}
+
+// ===========================
+
 export type ContentItem = Post | Page
 
 export interface ContentStore {
@@ -111,6 +135,7 @@ export interface ContentStore {
   pages: Page[]
   components: ComponentContent[]
   templates: Template[]
+  snippets: Snippet[]
   _lastChecked?: string
   lastUpdated: string
 }
@@ -133,6 +158,11 @@ export interface ContentActions {
     filter?: (template: Template) => boolean
     sort?: (a: Template, b: Template) => number
   }) => Template[]
+  getSnippet: (slug: string) => Snippet | undefined
+  getSnippets: (options?: {
+    filter?: (snippet: Snippet) => boolean
+    sort?: (a: Snippet, b: Snippet) => number
+  }) => Snippet[]
   refresh: () => Promise<void>
 }
 

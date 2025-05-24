@@ -5,6 +5,8 @@ import {
   fetchComponentsList,
   fetchPageContent,
   fetchPagesList,
+  fetchSnippetContent,
+  fetchSnippetsList,
   fetchTemplateContent,
   fetchTemplatesList,
 } from './api'
@@ -14,14 +16,16 @@ import type { ContentStore } from './types'
 export async function loadContent(): Promise<ContentStore> {
   try {
     // Fetch both components and pages lists
-    const [componentsList, pagesList, templatesList] = await Promise.all([
-      fetchComponentsList(),
-      fetchPagesList(),
-      fetchTemplatesList(),
-    ])
+    const [componentsList, pagesList, templatesList, snippetsList] =
+      await Promise.all([
+        fetchComponentsList(),
+        fetchPagesList(),
+        fetchTemplatesList(),
+        fetchSnippetsList(),
+      ])
 
     // Fetch all content in parallel
-    const [components, pages, templates] = await Promise.all([
+    const [components, pages, templates, snippets] = await Promise.all([
       Promise.all(
         componentsList.components.map((component) =>
           fetchComponentContent(component.path),
@@ -33,6 +37,11 @@ export async function loadContent(): Promise<ContentStore> {
           fetchTemplateContent(template.path),
         ),
       ),
+      Promise.all(
+        snippetsList.snippets.map((snippet) =>
+          fetchSnippetContent(snippet.path),
+        ),
+      ),
     ])
 
     // Get the latest lastUpdated timestamp
@@ -41,6 +50,7 @@ export async function loadContent(): Promise<ContentStore> {
         new Date(componentsList.lastUpdated).getTime(),
         new Date(pagesList.lastUpdated).getTime(),
         new Date(templatesList.lastUpdated).getTime(),
+        new Date(snippetsList.lastUpdated).getTime(),
       ),
     ).toISOString()
 
@@ -48,6 +58,7 @@ export async function loadContent(): Promise<ContentStore> {
       pages,
       components,
       templates,
+      snippets,
       lastUpdated,
     }
   } catch (error) {
