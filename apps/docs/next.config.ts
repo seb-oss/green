@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ['mdx', 'ts', 'tsx'],
   devIndicators: false,
   output: 'export',
-  trailingSlash: true,
+  trailingSlash: false,
   images: {
     unoptimized: true,
   },
