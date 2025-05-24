@@ -1,4 +1,5 @@
 import { useRouter } from 'next/navigation'
+import { internalLink } from '@/apps/docs/hooks'
 
 import {
   GdsButton,
@@ -14,11 +15,12 @@ import {
   IconBarsTwo,
   IconBrandSeb,
   IconChevronBottom,
+  IconCrossLarge,
   IconDevices,
   IconMagnifyingGlass,
   IconMenuSidebar,
 } from '@sebgroup/green-core/react'
-import { useSettingsContext, useSettingsValue } from '../../settings'
+import { useSettingsContext, useSettingsValue } from '../../../settings'
 
 export default function Header() {
   const router = useRouter()
@@ -28,16 +30,8 @@ export default function Header() {
   const handleClick = () => {
     actions.toggle('UI.Panel.Sidebar')
   }
-
-  const handleInternalClick = (path: string, isExternal?: boolean) => {
-    return (e: React.MouseEvent<HTMLElement>) => {
-      e.preventDefault()
-      if (isExternal) {
-        window.open(path, '_blank')
-      } else {
-        router.push(path)
-      }
-    }
+  const handleToggleSidebar = (): void => {
+    actions.toggle('UI.Panel.Sidebar')
   }
 
   return (
@@ -50,12 +44,25 @@ export default function Header() {
       position="relative"
       gap="m"
     >
-      <span></span>
+      {isOpen ? (
+        <GdsButton onClick={handleToggleSidebar} rank="tertiary" size="small">
+          <IconMenuSidebar />
+        </GdsButton>
+      ) : (
+        <GdsButton onClick={handleToggleSidebar} rank="tertiary" size="small">
+          <IconCrossLarge />
+        </GdsButton>
+      )}
+
+      <GdsLink onClick={internalLink} href="/">
+        <IconBrandSeb />
+      </GdsLink>
 
       <GdsButton
         size="small"
         rank="tertiary"
-        onClick={handleInternalClick('/search', false)}
+        onClick={internalLink}
+        href="/search"
       >
         <IconMagnifyingGlass size="m"></IconMagnifyingGlass>
       </GdsButton>

@@ -5,10 +5,12 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
-import { _ } from '../../hooks'
-import { useSettingsContext, useSettingsValue } from '../../settings'
+import { _, internalLink } from '../../../hooks'
+import { useSettingsContext, useSettingsValue } from '../../../settings'
 
 import './sidebar.css'
+
+import Settings from './settings/settings'
 
 interface NavItem {
   title: string
@@ -59,10 +61,6 @@ const DynamicIcon = ({ iconName }: { iconName: string }) => {
 
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
-  const isOpenSettings = useSettingsValue(
-    (settings) => settings.UI.Panel.Settings,
-  )
-  const { actions } = useSettingsContext()
   const router = useRouter()
   const pathName = usePathname()
   const [navigationItems, setNavigationItems] = useState<NavItem[]>([])
@@ -132,26 +130,11 @@ export default function Sidebar() {
     }
   }
 
-  const internalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const href = e.currentTarget.href
-    router.push(href)
-  }
-
-  const handleToggleSidebar = (): void => {
-    actions.toggle('UI.Panel.Sidebar')
-  }
-  const handleToggleSettings = (): void => {
-    actions.toggle('UI.Panel.Settings')
-  }
-
   const componentsList =
     pathName.startsWith('/components') || pathName.startsWith('/component/')
 
   const templatesList =
     pathName.startsWith('/templates') || pathName.startsWith('/template/')
-
-  const isExternalLink = (slug: string) => slug.startsWith('http')
 
   return (
     <Core.GdsCard
@@ -165,34 +148,6 @@ export default function Sidebar() {
       width={isOpen ? '260px' : 'max-content'}
       position="relative"
     >
-      <Core.GdsFlex
-        padding="m xs m m"
-        justify-content="space-between"
-        align-items="center"
-      >
-        {isOpen && (
-          <Core.GdsLink onClick={internalLink} href="/">
-            <Core.GdsText color="primary">
-              <Core.IconBrandSeb />
-            </Core.GdsText>
-          </Core.GdsLink>
-        )}
-
-        {!isOpen && (
-          <Core.GdsButton onClick={handleToggleSidebar} rank="tertiary">
-            <Core.IconMenuSidebar />
-          </Core.GdsButton>
-        )}
-        {isOpen && (
-          <Core.GdsButton
-            onClick={handleToggleSidebar}
-            rank="tertiary"
-            size="small"
-          >
-            <Core.IconCrossLarge />
-          </Core.GdsButton>
-        )}
-      </Core.GdsFlex>
       <Core.GdsFlex flex-direction="column" gap="m">
         {componentsList ? (
           <>
@@ -225,78 +180,6 @@ export default function Sidebar() {
                   {component.title}
                 </Core.GdsButton>
               ))}
-            </Core.GdsFlex>
-            <Core.GdsFlex flex-direction="column" gap="2xs">
-              <Core.GdsText tag="small" padding="m">
-                Layout
-              </Core.GdsText>
-
-              <Core.GdsButton
-                key="layout-div"
-                onClick={handleClick(`/tokens/colors`, false)}
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
-                align-items="center"
-                rank="tertiary"
-              >
-                Div
-              </Core.GdsButton>
-              <Core.GdsButton
-                key="layout-flex"
-                onClick={handleClick(`/tokens/size`, false)}
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
-                align-items="center"
-                rank="tertiary"
-              >
-                Flex
-              </Core.GdsButton>
-              <Core.GdsButton
-                key="layout-grid"
-                onClick={handleClick(`/tokens/size`, false)}
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
-                align-items="center"
-                rank="tertiary"
-              >
-                Grid
-              </Core.GdsButton>
-            </Core.GdsFlex>
-            <Core.GdsFlex flex-direction="column" gap="2xs">
-              <Core.GdsText tag="small" padding="m">
-                Tokens
-              </Core.GdsText>
-
-              <Core.GdsButton
-                key="tokens-colors"
-                onClick={handleClick(`/tokens/colors`, false)}
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
-                align-items="center"
-                rank="tertiary"
-              >
-                Colors
-              </Core.GdsButton>
-              <Core.GdsButton
-                key="tokens-size"
-                onClick={handleClick(`/tokens/size`, false)}
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
-                align-items="center"
-                rank="tertiary"
-              >
-                Size
-              </Core.GdsButton>
-              <Core.GdsButton
-                key="tokens-typography"
-                onClick={handleClick(`/tokens/size`, false)}
-                justify-content={isOpen ? 'flex-start' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
-                align-items="center"
-                rank="tertiary"
-              >
-                Typography
-              </Core.GdsButton>
             </Core.GdsFlex>
           </>
         ) : templatesList ? (
@@ -356,41 +239,7 @@ export default function Sidebar() {
           ))
         )}
       </Core.GdsFlex>
-      {isOpenSettings && (
-        <Core.GdsCard padding="xs" gap="s" margin="auto 0 0 0">
-          <Core.GdsCard variant="secondary">Cookie consent</Core.GdsCard>
-          <Core.GdsFlex
-            justify-content="space-between"
-            align-items="center"
-            padding="0 xs"
-          >
-            <Core.GdsText font-size="detail-s">Settings</Core.GdsText>
-            <Core.GdsButton
-              onClick={handleToggleSettings}
-              rank="tertiary"
-              size="xs"
-            >
-              <Core.IconCrossLarge />
-            </Core.GdsButton>
-          </Core.GdsFlex>
-        </Core.GdsCard>
-      )}
-      {!isOpenSettings && (
-        <Core.GdsButton
-          onClick={handleToggleSettings}
-          rank="tertiary"
-          justify-content={isOpen ? 'space-between' : 'none'}
-          size={isOpen ? 'small' : 'medium'}
-          margin="auto 0 0 0"
-        >
-          {isOpen && 'Settings'}
-          {isOpen ? (
-            <Core.IconSettingsGear slot="trail" />
-          ) : (
-            <Core.IconSettingsGear />
-          )}
-        </Core.GdsButton>
-      )}
+      <Settings />
     </Core.GdsCard>
   )
 }
