@@ -1,5 +1,5 @@
 import { GdsFlex } from '@sebgroup/green-core/react'
-import Footer from '../atoms/footer'
+import Footer from '../atoms/footer/footer'
 import Header from '../atoms/header/header'
 import Sidebar from '../atoms/sidebar/sidebar'
 

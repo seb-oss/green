@@ -4,8 +4,8 @@
 import { useEffect, useState } from 'react'
 import Breadcrumbs from '@/apps/docs/design/atoms/breadcrumb/breadcrumb'
 import { Link } from '@/apps/docs/design/atoms/link/link'
-import { Snippet } from '@/apps/docs/design/atoms/snippet'
-import Tabs from '@/apps/docs/design/atoms/tabs'
+import { Snippet } from '@/apps/docs/design/atoms/snippet/snippet'
+import Tabs from '@/apps/docs/design/atoms/tabs/tabs'
 
 import * as Core from '@sebgroup/green-core/react'
 
