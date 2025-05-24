@@ -2,7 +2,7 @@
 
 import Script from 'next/script'
 
-import Root from '../design/layout/root'
+import { Root } from '../design/layout/root/root'
 import useCookieConsent from '../settings/consent/useCookieConsent'
 import { SettingsProvider as App } from '../settings/provider'
 

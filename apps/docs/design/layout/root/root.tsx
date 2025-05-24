@@ -1,5 +1,6 @@
 'use client'
 
+import { GdsFlex } from '@sebgroup/green-core/react'
 import Footer from '../../atoms/footer/footer'
 import Header from '../../atoms/header/header'
 import { LAYOUT_UTILS } from '../config'
@@ -8,6 +9,8 @@ import type { RootProps } from '../types'
 
 import './root.css'
 
+import Sidebar from '../../atoms/sidebar/sidebar'
+
 export function Root({ children, className, fluid, ...rest }: RootProps) {
   const classes = [LAYOUT_UTILS.root(fluid), className]
     .filter(Boolean)
@@ -15,9 +18,16 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
 
   return (
     <main className={classes} {...rest}>
-      <Header />
-      {children}
-      <Footer />
+      <GdsFlex height="100vh" flex-direction="column" color="primary">
+        <Header />
+        <GdsFlex gap="xl">
+          <Sidebar />
+          <GdsFlex flex-direction="column">
+            {children}
+            <Footer />
+          </GdsFlex>
+        </GdsFlex>
+      </GdsFlex>
     </main>
   )
 }
