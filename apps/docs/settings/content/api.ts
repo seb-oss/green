@@ -1,4 +1,11 @@
-import { ComponentContent, ComponentList, Page, PageList } from './types'
+import {
+  ComponentContent,
+  ComponentList,
+  Page,
+  PageList,
+  Template,
+  TemplateList,
+} from './types'
 
 const API_BASE = 'https://api.seb.io'
 
@@ -52,5 +59,30 @@ export async function fetchPageContent(path: string): Promise<Page> {
     updatedAt: data.updatedAt || new Date().toISOString(),
     showInMenu: data.showInMenu || false,
     menuOrder: data.menuOrder || 0,
+  }
+}
+
+// TEMPLATES
+
+export async function fetchTemplatesList(): Promise<TemplateList> {
+  const response = await fetch(`${API_BASE}/templates/templates.json`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch templates list')
+  }
+  return response.json()
+}
+
+export async function fetchTemplateContent(path: string): Promise<Template> {
+  const response = await fetch(`${API_BASE}/${path}`)
+  if (!response.ok) {
+    throw new Error(`Failed to fetch template content: ${path}`)
+  }
+  const data = await response.json()
+
+  return {
+    ...data,
+    type: 'template' as const,
+    createdAt: data.createdAt || new Date().toISOString(),
+    updatedAt: data.updatedAt || new Date().toISOString(),
   }
 }

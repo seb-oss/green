@@ -7,6 +7,7 @@ import type { ContentContext } from './types'
 const DEFAULT_CONTENT_STORE = {
   pages: [],
   components: [],
+  templates: [],
   lastUpdated: '',
 }
 
@@ -17,6 +18,8 @@ export const contentContext = createContext<ContentContext>({
     getPage: () => undefined,
     getComponent: () => undefined,
     getPages: () => [],
+    getTemplates: () => [],
+    getTemplate: () => undefined,
     getMenuItems: () => [],
     refresh: async () => {},
   },

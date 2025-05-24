@@ -81,12 +81,36 @@ export interface Page extends BaseContent {
 
 // ===========================
 
+// Templates
+
+export interface TemplateList {
+  templates: TemplateSummary[]
+  total: number
+  lastUpdated: string
+}
+
+export interface TemplateSummary {
+  title: string
+  slug: string
+  path: string
+  related_components?: string[]
+}
+
+export interface Template extends BaseContent {
+  type: 'template'
+  code: string
+  related_components?: string[]
+}
+
+// ==========
+
 export type ContentItem = Post | Page
 
 export interface ContentStore {
   // posts: Post[]
   pages: Page[]
   components: ComponentContent[]
+  templates: Template[]
   _lastChecked?: string
   lastUpdated: string
 }
@@ -104,6 +128,11 @@ export interface ContentActions {
   }) => Page[]
   getMenuItems: () => Page[]
   getComponent: (slug: string) => ComponentContent | undefined
+  getTemplate: (slug: string) => Template | undefined
+  getTemplates: (options?: {
+    filter?: (template: Template) => boolean
+    sort?: (a: Template, b: Template) => number
+  }) => Template[]
   refresh: () => Promise<void>
 }
 

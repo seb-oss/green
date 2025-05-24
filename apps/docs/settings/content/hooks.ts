@@ -3,17 +3,24 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-import { fetchComponentsList, fetchPagesList } from './api'
+import { fetchComponentsList, fetchPagesList, fetchTemplatesList } from './api'
 import { contentContext } from './context'
 import { loadContent } from './loader'
 import { contentStorage } from './storage'
 
-import type { ComponentContent, ContentStore, Page, Post } from './types'
+import type {
+  ComponentContent,
+  ContentStore,
+  Page,
+  Post,
+  Template,
+} from './types'
 
 const DEFAULT_STORE: ContentStore = {
   // posts: [],
   pages: [],
   components: [],
+  templates: [],
   lastUpdated: '',
 }
 
@@ -120,22 +127,46 @@ export function useContent() {
         return components
       },
 
+      // Template actions
+      getTemplate: (slug: string) =>
+        store.templates.find((template) => template.slug === slug),
+
+      getTemplates: (options?: {
+        filter?: (template: Template) => boolean
+        sort?: (a: Template, b: Template) => number
+      }) => {
+        let templates = store.templates
+
+        if (options?.filter) {
+          templates = templates.filter(options.filter)
+        }
+
+        if (options?.sort) {
+          templates = templates.sort(options.sort)
+        }
+
+        return templates
+      },
+
       // Add cache validation check
       validateCache: async () => {
         try {
-          const [componentsList, pagesList] = await Promise.all([
+          const [componentsList, pagesList, templatesList] = await Promise.all([
             fetchComponentsList(),
             fetchPagesList(),
+            fetchTemplatesList(),
           ])
 
           const storedLastUpdated = new Date(store.lastUpdated)
-          const componentsLastUpdated = new Date(componentsList.lastUpdated)
-          const pagesLastUpdated = new Date(pagesList.lastUpdated)
+          const latestUpdate = new Date(
+            Math.max(
+              new Date(componentsList.lastUpdated).getTime(),
+              new Date(pagesList.lastUpdated).getTime(),
+              new Date(templatesList.lastUpdated).getTime(),
+            ),
+          )
 
-          if (
-            componentsLastUpdated > storedLastUpdated ||
-            pagesLastUpdated > storedLastUpdated
-          ) {
+          if (latestUpdate > storedLastUpdated) {
             await actions.refresh()
           }
         } catch (error) {
