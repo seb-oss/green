@@ -39,12 +39,12 @@ export default function Breadcrumbs({ slug, title }: BreadcrumbsProps) {
     },
   ]
 
-  if (currentPath === `/component/${slug}/ux-text`) {
+  if (currentPath.includes(`/component/${slug}/ux-text`)) {
     breadcrumbItems.push({
-      label: 'UX Text',
+      label: 'UX text',
       href: `/component/${slug}/ux-text`,
     })
-  } else if (currentPath === `/component/${slug}/accessibility`) {
+  } else if (currentPath.includes(`/component/${slug}/accessibility`)) {
     breadcrumbItems.push({
       label: 'Accessibility',
       href: `/component/${slug}/accessibility`,
@@ -52,7 +52,7 @@ export default function Breadcrumbs({ slug, title }: BreadcrumbsProps) {
   }
 
   return (
-    <Core.GdsBreadcrumbs size="small">
+    <Core.GdsBreadcrumbs size="small" key="breadcrumb">
       {breadcrumbItems.map((item) => (
         <Link href={item.href} key={item.href + item.label}>
           {item.iconName && <Icon size="s" name={item.iconName} slot="lead" />}

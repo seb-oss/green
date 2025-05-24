@@ -1,12 +1,10 @@
 // app/component/[slug]/layout.tsx
 import { Metadata, ResolvingMetadata } from 'next'
-import { headers } from 'next/headers'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Breadcrumbs from '@/apps/docs/design/atoms/breadcrumb/breadcrumb'
+import { Link } from '@/apps/docs/design/atoms/link/link'
 import { Snippet } from '@/apps/docs/design/atoms/snippet'
 import Tabs from '@/apps/docs/design/atoms/tabs'
-import { Icon } from '@/apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 import { getContent } from './content'
@@ -59,7 +57,11 @@ export default async function ComponentLayout({
       <Core.GdsFlex flex-direction="column" gap="xl" width="80ch">
         <Breadcrumbs slug={params.slug} title={content.title} />
         <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-          <Core.GdsFlex flex-direction="column" gap="xs">
+          <Core.GdsFlex
+            flex-direction="column"
+            gap="xs"
+            align-items="flex-start"
+          >
             <Core.GdsText tag="h1">{content.title}</Core.GdsText>
             {content.summary && (
               <Core.GdsText tag="p">{content.summary}</Core.GdsText>
@@ -73,13 +75,9 @@ export default async function ComponentLayout({
               <Core.GdsText tag="p">Tags:</Core.GdsText>
               <Core.GdsFlex gap="m">
                 {content.tags.map((tag) => (
-                  <Core.GdsLink
-                    href={'/components/' + tag}
-                    key={tag}
-                    className="tag"
-                  >
+                  <Link href={'/components/' + tag} key={tag} className="tag">
                     {tag}
-                  </Core.GdsLink>
+                  </Link>
                 ))}
               </Core.GdsFlex>
             </Core.GdsFlex>

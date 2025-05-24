@@ -1,4 +1,3 @@
-// app/component/[slug]/ux-text/page.tsx
 import { getContent } from '../content'
 
 export default async function UXTextPage({

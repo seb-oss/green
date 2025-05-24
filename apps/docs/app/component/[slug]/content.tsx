@@ -1,4 +1,5 @@
 // app/component/[slug]/content.ts
+
 import { cache } from 'react'
 
 interface ComponentContent {
