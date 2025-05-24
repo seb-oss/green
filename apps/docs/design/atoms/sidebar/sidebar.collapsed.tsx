@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { internalLink } from '@/apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
-import { useSettingsValue } from '../../../settings'
+import { Link } from '../link/link'
 
 interface NavItem {
   title: string
@@ -45,7 +45,8 @@ export default function SidebarCollapsed() {
   }, [])
 
   return navigationItems.map((item) => (
-    <Core.GdsButton
+    <Link
+      component="button"
       key={item.slug}
       onClick={internalLink}
       href={item.slug}
@@ -54,6 +55,6 @@ export default function SidebarCollapsed() {
       width="max-content"
     >
       <DynamicIcon iconName={item.icon} />
-    </Core.GdsButton>
+    </Link>
   ))
 }

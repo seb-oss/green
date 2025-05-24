@@ -1,12 +1,12 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
-import { _, internalLink } from '../../../hooks'
-import { useSettingsContext, useSettingsValue } from '../../../settings'
+import { _, Icon, internalLink } from '../../../hooks'
+import { useSettingsValue } from '../../../settings'
+import { Link } from '../link/link'
 import Settings from './settings/settings'
 
 import './sidebar.css'
@@ -49,15 +49,6 @@ interface TemplatesResponse {
   templates: Template[]
   total: number
   lastUpdated: string
-}
-
-const DynamicIcon = ({ iconName }: { iconName: string }) => {
-  const IconComponent = (Core as Record<string, any>)[iconName]
-  if (!IconComponent) {
-    console.warn(`Icon ${iconName} not found`)
-    return null
-  }
-  return <IconComponent />
 }
 
 export default function Sidebar() {
@@ -153,18 +144,18 @@ export default function Sidebar() {
         <Core.GdsFlex flex-direction="column" gap="m">
           {componentsList ? (
             <>
-              <Core.GdsButton
+              <Link
+                component="button"
                 key={'home'}
-                onClick={internalLink}
                 href="/"
                 rank="tertiary"
                 justify-content={isOpen ? 'flex-start' : 'none'}
                 size={isOpen ? 'small' : 'medium'}
                 align-items="center"
               >
-                <Core.IconArrowLeft slot="lead" />
+                <Icon name="IconArrowLeft" slot="lead" />
                 Home
-              </Core.GdsButton>
+              </Link>
               <Core.GdsFlex flex-direction="column" gap="2xs">
                 <Core.GdsText tag="small" padding="m">
                   Components
@@ -220,24 +211,18 @@ export default function Sidebar() {
             </>
           ) : (
             navigationItems.map((item) => (
-              <Core.GdsButton
+              <Link
                 key={item.slug}
-                onClick={internalLink}
+                component="button"
                 href={item.slug}
                 rank="tertiary"
-                justify-content={isOpen ? 'space-between' : 'none'}
-                size={isOpen ? 'small' : 'medium'}
+                justify-content="space-between"
+                size="small"
                 align-items="center"
               >
-                {isOpen && item.title}
-                {isOpen ? (
-                  <Core.GdsFlex align-items="center" slot="trail">
-                    <DynamicIcon iconName={item.icon} />
-                  </Core.GdsFlex>
-                ) : (
-                  <DynamicIcon iconName={item.icon} />
-                )}
-              </Core.GdsButton>
+                {item.title}
+                <Icon name={item.icon} slot="trail" />
+              </Link>
             ))
           )}
         </Core.GdsFlex>
