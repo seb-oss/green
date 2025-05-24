@@ -7,12 +7,6 @@ export interface Heading {
 export interface BaseContent {
   slug: string
   title: string
-  iconName?: string
-  preamble?: string
-  description?: string
-  excerpt?: string
-  hero?: string
-  layout?: 'wide' | 'narrow'
   createdAt: string
   updatedAt: string
 }
@@ -24,6 +18,43 @@ export interface Post extends BaseContent {
   tags?: string[]
   published: boolean
   pinned?: boolean
+}
+
+// COMPONENT STYPES
+export interface ComponentList {
+  components: ComponentSummary[]
+  total: number
+  lastUpdated: string
+}
+
+export interface ComponentSummary {
+  title: string
+  slug: string
+  summary?: string
+  path: string
+}
+
+export interface ComponentSection {
+  title: string
+  description: string
+  column_title_tag?: string
+}
+
+export interface ComponentContent extends BaseContent {
+  type: 'component'
+  hero_snippet?: string
+  beta?: boolean
+  summary?: string
+  tags?: string[]
+  category?: string[]
+  platform?: {
+    web?: boolean
+    ios?: boolean
+    android?: boolean
+  }
+  overview?: Array<{ column: ComponentSection[] }>
+  'ux-text'?: { section: ComponentSection[] }
+  accessibility?: { section: ComponentSection[] }
 }
 
 export interface Page extends BaseContent {
@@ -39,6 +70,8 @@ export type ContentItem = Post | Page
 export interface ContentStore {
   posts: Post[]
   pages: Page[]
+  components: ComponentContent[]
+  _lastChecked?: string
   lastUpdated: string
 }
 
@@ -54,6 +87,7 @@ export interface ContentActions {
     sort?: (a: Page, b: Page) => number
   }) => Page[]
   getMenuItems: () => Page[]
+  getComponent: (slug: string) => ComponentContent | undefined
   refresh: () => Promise<void>
 }
 

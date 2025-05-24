@@ -7,7 +7,10 @@ import type { ContentStore } from './types'
 interface ContentSchema extends DBSchema {
   store: {
     key: 'content'
-    value: ContentStore
+    // value: ContentStore
+    value: ContentStore & {
+      _lastChecked: string // Add timestamp for cache validation
+    }
   }
 }
 
@@ -55,7 +58,11 @@ export class ContentStorage {
 
     try {
       const db = await this.db
-      await db.put(DB_CONFIG.store, store, 'content')
+      await db.put(
+        DB_CONFIG.store,
+        { ...store, _lastChecked: new Date().toISOString() },
+        'content',
+      )
     } catch (error) {
       console.error('Failed to set store:', error)
     }

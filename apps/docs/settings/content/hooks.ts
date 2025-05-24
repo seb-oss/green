@@ -3,15 +3,17 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
+import { fetchComponentsList } from './api'
 import { contentContext } from './context'
 import { loadContent } from './loader'
 import { contentStorage } from './storage'
 
-import type { ContentStore, Page, Post } from './types'
+import type { ComponentContent, ContentStore, Page, Post } from './types'
 
 const DEFAULT_STORE: ContentStore = {
   posts: [],
   pages: [],
+  components: [],
   lastUpdated: '',
 }
 
@@ -96,10 +98,58 @@ export function useContent() {
           .filter((page) => page.showInMenu)
           .sort((a, b) => (a.menuOrder || 0) - (b.menuOrder || 0)),
 
+      // Component stuff
+
+      getComponent: (slug: string) =>
+        store.components.find((component) => component.slug === slug),
+
+      getComponents: (options?: {
+        filter?: (component: ComponentContent) => boolean
+        sort?: (a: ComponentContent, b: ComponentContent) => number
+      }) => {
+        let components = store.components
+
+        if (options?.filter) {
+          components = components.filter(options.filter)
+        }
+
+        if (options?.sort) {
+          components = components.sort(options.sort)
+        }
+
+        return components
+      },
+
+      // Add cache validation check
+      validateCache: async () => {
+        try {
+          const componentsList = await fetchComponentsList()
+          const storedLastUpdated = new Date(store.lastUpdated)
+          const apiLastUpdated = new Date(componentsList.lastUpdated)
+
+          if (apiLastUpdated > storedLastUpdated) {
+            await actions.refresh()
+          }
+        } catch (error) {
+          console.error('Failed to validate cache:', error)
+        }
+      },
+
+      // refresh: async () => {
+      //   const content = await loadContent()
+      //   if (contentStorage) {
+      //     await contentStorage.setStore(content)
+      //   }
+      //   setStore(content)
+      // },
+
       refresh: async () => {
         const content = await loadContent()
         if (contentStorage) {
-          await contentStorage.setStore(content)
+          await contentStorage.setStore({
+            ...content,
+            _lastChecked: new Date().toISOString(),
+          })
         }
         setStore(content)
       },
@@ -107,7 +157,15 @@ export function useContent() {
     [store],
   )
 
+  useEffect(() => {
+    if (isLoaded) {
+      actions.validateCache()
+    }
+  }, [isLoaded])
+
   return { isLoaded, store, actions }
+
+  // return { isLoaded, store, actions }
 }
 
 export function useContentContext() {
@@ -131,6 +189,7 @@ export function useCurrentContent() {
     return {
       page: actions.getPage(slug),
       post: actions.getPost(slug),
+      component: actions.getComponent(slug),
       slug,
     }
   }, [isLoaded, actions, slug])

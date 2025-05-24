@@ -1,5 +1,7 @@
 'use client'
 
+import { fetchComponentContent, fetchComponentsList } from './api'
+
 import type { ContentStore, Page, Post } from './types'
 
 type JsonImport<T> = {
@@ -17,6 +19,16 @@ export async function loadContent(): Promise<ContentStore> {
       >,
     ])
 
+    // First fetch the components list
+    const componentsList = await fetchComponentsList()
+
+    // Then fetch all component contents in parallel
+    const componentsPromises = componentsList.components.map((component) =>
+      fetchComponentContent(component.path),
+    )
+
+    const components = await Promise.all(componentsPromises)
+
     return {
       posts: postsModule.default.map((post) => ({
         ...post,
@@ -26,7 +38,9 @@ export async function loadContent(): Promise<ContentStore> {
         ...page,
         type: 'page' as const,
       })),
-      lastUpdated: new Date().toISOString(),
+      components,
+      // lastUpdated: new Date().toISOString(),
+      lastUpdated: componentsList.lastUpdated,
     }
   } catch (error) {
     console.error('Error loading content:', error)
