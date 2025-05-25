@@ -16,6 +16,8 @@ import type { SettingsContextType } from './types'
 
 import '../design/style/global.css'
 
+export const dynamic = 'force-dynamic'
+
 interface SettingsProviderProps extends PropsWithChildren {
   fallback?: React.ReactNode
 }

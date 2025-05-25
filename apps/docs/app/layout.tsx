@@ -5,6 +5,8 @@ import Script from 'next/script'
 import { Root } from '../design/layout/root/root'
 import { SettingsProvider as App } from '../settings/provider'
 
+export const dynamic = 'force-dynamic'
+
 export default function RootLayout({
   children,
 }: Readonly<{
