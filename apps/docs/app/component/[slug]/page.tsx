@@ -1,10 +1,13 @@
 // app/component/[slug]/page.tsx
+import { use } from 'react'
+
 import { OverviewClient } from './overview.client'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function Page({ params }: PageProps) {
-  return <OverviewClient slug={params.slug} />
+  const { slug } = use(params)
+  return <OverviewClient slug={slug} />
 }
