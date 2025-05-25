@@ -2,9 +2,9 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Icon } from '@/apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Icon } from '../../../hooks'
 import { Link } from '../link/link'
 
 interface BreadcrumbItem {

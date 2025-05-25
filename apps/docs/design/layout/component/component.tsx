@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentContent } from '@/apps/docs/settings/content/types'
+import { ComponentContent } from '../../../settings/content/types'
 
 import './component.css'
 
