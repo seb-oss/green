@@ -65,9 +65,6 @@
       "options": {
         "jestConfig": "apps/docs/jest.config.ts"
       }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
     }
   }
 }
