@@ -2,8 +2,6 @@
 
 import Script from 'next/script'
 
-export const dynamic = 'force-dynamic'
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -12,6 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        asdasd
         {children}
         <Script id="data-layer">
           {`window["dataLayer"] = {

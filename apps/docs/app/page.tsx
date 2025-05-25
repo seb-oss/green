@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 
-export const dynamic = 'force-dynamic'
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io'),
   title: 'Green Design System',
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <div>
-      <span>Home content </span>
+      <span>Home content</span>
     </div>
   )
 }
