@@ -20,7 +20,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
       <GdsFlex height="100vh" flex-direction="column" color="primary">
         <Header />
         <GdsFlex gap="xl">
-          <Sidebar />
+          {/* <Sidebar /> */}
           <GdsFlex flex-direction="column">
             {children}
             <Footer />
