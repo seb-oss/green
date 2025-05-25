@@ -1,5 +1,4 @@
 //@ts-check
-import createMDX from '@next/mdx'
 
 import type { NextConfig } from 'next'
 
@@ -8,19 +7,12 @@ import type { NextConfig } from 'next'
  **/
 
 const nextConfig: NextConfig = {
-  pageExtensions: ['mdx', 'ts', 'tsx'],
   devIndicators: false,
   output: 'export',
   trailingSlash: false,
   images: {
     unoptimized: true,
   },
-  experimental: {
-    mdxRs: true,
-    viewTransition: true,
-  },
 }
 
-const withMDX = createMDX({})
-
-export default withMDX(nextConfig)
+export default nextConfig
