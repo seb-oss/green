@@ -15,9 +15,22 @@ export default async function ComponentPage({
   const content = await loadContent()
   const component = content.components.find((c) => c.slug === params.slug)
 
-  if (!component) {
-    return <div>Component not found</div>
+  if (!component?.overview) {
+    return <div>No overview content available</div>
   }
 
-  return <h1>{component.title}</h1>
+  return (
+    <div>
+      {component.overview.map((section, index) => (
+        <div key={index}>
+          {section.column.map((col, colIndex) => (
+            <div key={colIndex}>
+              <h2>{col.title}</h2>
+              <p>{col.description}</p>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
 }
