@@ -2,11 +2,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 
-import { GdsDiv, GdsTheme } from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../hooks'
 
 import type { ColorScheme } from './types'
+
+// Dynamically import GdsTheme with no SSR
+const DynamicGdsTheme = dynamic(
+  () => import('@sebgroup/green-core/react').then((mod) => mod.GdsTheme),
+  { ssr: false },
+)
 
 const THEME_STYLESHEET = 'theme-stylesheet'
 const styleSheetMap = new WeakMap<CSSStyleSheet, string>()
@@ -22,12 +28,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!mounted) return
 
-    // Guard for SSR/static generation
-    if (typeof window === 'undefined' || !('adoptedStyleSheets' in document)) {
-      return
-    }
+    if (typeof window === 'undefined') return
 
     const setupTheme = () => {
+      if (!('adoptedStyleSheets' in document)) return
+
       document.adoptedStyleSheets = document.adoptedStyleSheets.filter(
         (sheet) => styleSheetMap.get(sheet) !== THEME_STYLESHEET,
       )
@@ -72,11 +77,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     return setupTheme()
   }, [colorScheme, mounted])
 
-  // During SSR/static generation, render with a default theme
   if (!mounted) {
     return <>{children}</>
   }
 
-  // Client-side render with full functionality
-  return <GdsTheme color-scheme={colorScheme}>{children}</GdsTheme>
+  return (
+    <DynamicGdsTheme color-scheme={colorScheme}>{children}</DynamicGdsTheme>
+  )
 }
