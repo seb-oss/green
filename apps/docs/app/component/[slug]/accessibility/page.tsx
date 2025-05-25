@@ -1,10 +1,13 @@
 // app/component/[slug]/accessibility/page.tsx
+import { use } from 'react'
+
 import { AccessibilityClient } from './page.client'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function Page({ params }: PageProps) {
-  return <AccessibilityClient slug={params.slug} />
+  const { slug } = use(params)
+  return <AccessibilityClient slug={slug} />
 }
