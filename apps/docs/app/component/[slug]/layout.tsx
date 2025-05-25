@@ -1,4 +1,6 @@
 // app/component/[slug]/layout.tsx
+import { use } from 'react'
+
 import { fetchComponentsList } from '../../../settings/content/api'
 import { ComponentLayoutClient } from './layout.client'
 
@@ -13,11 +15,10 @@ export async function generateStaticParams() {
 
 interface LayoutProps {
   children: React.ReactNode
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default function Layout({ children, params }: LayoutProps) {
-  return (
-    <ComponentLayoutClient slug={params.slug}>{children}</ComponentLayoutClient>
-  )
+  const { slug } = use(params)
+  return <ComponentLayoutClient slug={slug}>{children}</ComponentLayoutClient>
 }
