@@ -12,13 +12,14 @@ export interface PageProps extends LayoutProps {
   content?: React.ReactNode
   slug?: string
   title?: string
-  variant?: "home" | "page"
-  layout?: "root" | "page" | "wide" | "narrow" | "centered" | "blank"
+  variant?: 'home' | 'page'
+  layout?: 'root' | 'page' | 'home' | 'wide' | 'narrow' | 'centered' | 'blank'
 }
 
 export interface LayoutClasses {
   root: string
   page: string
+  home: string
   wide: string
   narrow: string
 }

@@ -3,6 +3,7 @@
 import {
   fetchComponentContent,
   fetchComponentsList,
+  fetchHomeContent,
   fetchNavigationContent,
   fetchNavigationList,
   fetchPageContent,
@@ -24,12 +25,14 @@ export async function loadContent(): Promise<ContentStore> {
       templatesList,
       snippetsList,
       navigationList,
+      homeContent,
     ] = await Promise.all([
       fetchComponentsList(),
       fetchPagesList(),
       fetchTemplatesList(),
       fetchSnippetsList(),
       fetchNavigationList(),
+      fetchHomeContent(),
     ])
 
     // Fetch all content in parallel
@@ -58,6 +61,8 @@ export async function loadContent(): Promise<ContentStore> {
         ),
       ])
 
+    const allPages = [homeContent, ...pages]
+
     // Get the latest lastUpdated timestamp
     const lastUpdated = new Date(
       Math.max(
@@ -70,7 +75,7 @@ export async function loadContent(): Promise<ContentStore> {
     ).toISOString()
 
     return {
-      pages,
+      pages: allPages,
       components,
       templates,
       snippets,

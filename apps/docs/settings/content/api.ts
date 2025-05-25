@@ -123,6 +123,29 @@ export async function fetchPageContent(path: string): Promise<Page> {
   }
 }
 
+// home page
+
+// Add this to api.ts
+export async function fetchHomeContent(): Promise<Page> {
+  const response = await fetch(`${API_BASE}/home.json`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch home content')
+  }
+  const data = await response.json()
+
+  // Transform API response to match Page interface
+  return {
+    ...data,
+    slug: 'home',
+    type: 'page' as const,
+    headings: [], // Since home doesn't have headings
+    createdAt: new Date().toISOString(), // Default value
+    updatedAt: new Date().toISOString(), // Default value
+    showInMenu: true, // Assuming we want home in menu
+    menuOrder: 0, // Put it first in menu
+  }
+}
+
 // TEMPLATES
 
 export async function fetchTemplatesList(): Promise<TemplateList> {

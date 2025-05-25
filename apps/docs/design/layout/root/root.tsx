@@ -17,11 +17,16 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
 
   return (
     <main className={classes} {...rest}>
-      <GdsFlex height="100vh" flex-direction="column" color="primary">
+      <GdsFlex
+        height="100vh"
+        flex-direction="column"
+        color="primary"
+        width="100%"
+      >
         <Header />
         <GdsFlex gap="xl">
           <Sidebar />
-          <GdsFlex flex-direction="column">
+          <GdsFlex flex-direction="column" width="100%" padding="m xl m 0">
             {children}
             <Footer />
           </GdsFlex>

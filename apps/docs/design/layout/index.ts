@@ -18,5 +18,6 @@ export {
 
 export { Root } from './root/root'
 export { Page } from './page/page'
+export { Home } from './home/home'
 export { Component } from './component/component'
 export { CSS_VARIABLES } from './styles'

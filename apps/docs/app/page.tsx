@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { Home as Layout } from '../design/layout/home/home'
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io'),
   title: 'Green Design System',
@@ -14,9 +16,5 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  return (
-    <div>
-      <span>Home content </span>
-    </div>
-  )
+  return <Layout content={<>hello</>} />
 }
