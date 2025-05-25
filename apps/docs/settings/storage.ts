@@ -1,4 +1,4 @@
-// settings/storage.ts
+// storage.ts
 'use client'
 
 import { DBSchema, IDBPDatabase, openDB } from 'idb'
@@ -31,30 +31,27 @@ interface StorageData {
 class SettingsStorage {
   private db: Promise<IDBPDatabase<StorageSchema>> | null = null
 
-  constructor() {
-    if (typeof window !== 'undefined') {
-      this.db = this.initDB()
-    }
-  }
+  private async getDB(): Promise<IDBPDatabase<StorageSchema> | null> {
+    if (typeof window === 'undefined') return null
 
-  private initDB() {
-    return openDB<StorageSchema>(CONFIG.name, CONFIG.version, {
-      upgrade(db) {
-        if (!db.objectStoreNames.contains(CONFIG.store)) {
-          db.createObjectStore(CONFIG.store)
-        }
-      },
-    })
+    if (!this.db) {
+      this.db = openDB<StorageSchema>(CONFIG.name, CONFIG.version, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains(CONFIG.store)) {
+            db.createObjectStore(CONFIG.store)
+          }
+        },
+      })
+    }
+
+    return this.db
   }
 
   async load(): Promise<SettingsState> {
-    if (!this.db) {
-      console.warn('IndexedDB is not available, using default settings')
-      return DEFAULT_SETTINGS
-    }
-
     try {
-      const db = await this.db
+      const db = await this.getDB()
+      if (!db) return DEFAULT_SETTINGS
+
       const result = (await db.get(CONFIG.store, 'current')) as
         | StorageData
         | undefined
@@ -66,13 +63,10 @@ class SettingsStorage {
   }
 
   async save(settings: SettingsState): Promise<void> {
-    if (!this.db) {
-      console.warn('IndexedDB is not available, settings not saved')
-      return
-    }
-
     try {
-      const db = await this.db
+      const db = await this.getDB()
+      if (!db) return
+
       await db.put(
         CONFIG.store,
         {
@@ -87,13 +81,10 @@ class SettingsStorage {
   }
 
   async reset(): Promise<SettingsState> {
-    if (!this.db) {
-      console.warn('IndexedDB is not available')
-      return DEFAULT_SETTINGS
-    }
-
     try {
-      const db = await this.db
+      const db = await this.getDB()
+      if (!db) return DEFAULT_SETTINGS
+
       await db.delete(CONFIG.store, 'current')
       return DEFAULT_SETTINGS
     } catch (error) {

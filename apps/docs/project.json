@@ -11,6 +11,7 @@
       "defaultConfiguration": "production",
       "options": {
         "outputPath": "dist/apps/docs",
+        "staticExport": true,
         "assets": [
           {
             "input": "libs/fonts/fonts/SEBSansSerifGDS",
