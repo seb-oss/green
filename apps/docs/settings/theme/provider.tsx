@@ -12,11 +12,22 @@ const THEME_STYLESHEET = 'theme-stylesheet'
 const styleSheetMap = new WeakMap<CSSStyleSheet, string>()
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [stylesheetCreated, setStylesheetCreated] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const colorScheme = useSettingsValue((s) => s.UI.Theme.ColorScheme)
 
   useEffect(() => {
-    if ('adoptedStyleSheets' in document) {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (!mounted) return
+
+    // Guard for SSR/static generation
+    if (typeof window === 'undefined' || !('adoptedStyleSheets' in document)) {
+      return
+    }
+
+    const setupTheme = () => {
       document.adoptedStyleSheets = document.adoptedStyleSheets.filter(
         (sheet) => styleSheetMap.get(sheet) !== THEME_STYLESHEET,
       )
@@ -42,7 +53,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
       updateColorScheme(colorScheme)
-      setStylesheetCreated(true)
 
       const handleSystemChange = () => {
         if (colorScheme === 'system') {
@@ -58,8 +68,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         )
       }
     }
-  }, [colorScheme])
 
-  if (!stylesheetCreated) return null
-  return <GdsTheme color-scheme="light">{children}</GdsTheme>
+    return setupTheme()
+  }, [colorScheme, mounted])
+
+  // During SSR/static generation, render with a default theme
+  if (!mounted) {
+    return <GdsTheme color-scheme="light">{children}</GdsTheme>
+  }
+
+  // Client-side render with full functionality
+  return <GdsTheme color-scheme={colorScheme}>{children}</GdsTheme>
 }
