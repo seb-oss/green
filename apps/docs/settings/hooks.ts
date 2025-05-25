@@ -17,7 +17,7 @@ import { getNextColorScheme } from './theme/hooks'
 
 import type {
   AudioRefs,
-  DeviceState,
+  // DeviceState,
   Panel,
   SettingsState,
   SettingsTogglePath,
@@ -163,19 +163,19 @@ export function updateNestedBoolean(
       const [category, key] = rest
       return toggleUXSettings(settings, category as keyof UXState, key)
     }
-    case 'Device': {
-      const [key] = rest
-      if (key in settings.Device) {
-        return {
-          ...settings,
-          Device: {
-            ...settings.Device,
-            [key]: !settings.Device[key as keyof DeviceState],
-          },
-        }
-      }
-      return settings
-    }
+    // case 'Device': {
+    //   const [key] = rest
+    //   if (key in settings.Device) {
+    //     return {
+    //       ...settings,
+    //       Device: {
+    //         ...settings.Device,
+    //         [key]: !settings.Device[key as keyof DeviceState],
+    //       },
+    //     }
+    //   }
+    //   return settings
+    // }
 
     default:
       return settings
@@ -243,21 +243,21 @@ export function useSettings() {
     setSettings(defaultSettings)
   }, [])
 
-  useEffect(() => {
-    const checkDevice = () => {
-      setSettings((prev) => ({
-        ...prev,
-        Device: {
-          ...prev.Device,
-          Mobile: window.innerWidth < 768,
-        },
-      }))
-    }
+  // useEffect(() => {
+  //   const checkDevice = () => {
+  //     setSettings((prev) => ({
+  //       ...prev,
+  //       Device: {
+  //         ...prev.Device,
+  //         Mobile: window.innerWidth < 768,
+  //       },
+  //     }))
+  //   }
 
-    checkDevice()
-    window.addEventListener('resize', checkDevice)
-    return () => window.removeEventListener('resize', checkDevice)
-  }, [])
+  //   checkDevice()
+  //   window.addEventListener('resize', checkDevice)
+  //   return () => window.removeEventListener('resize', checkDevice)
+  // }, [])
 
   return useMemo(
     () => ({
