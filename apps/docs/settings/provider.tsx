@@ -60,18 +60,18 @@ export function SettingsProvider({
 
   return (
     <Fonts>
-      <Settings.Provider value={value}>
-        {/* <Theme> */}
-        <ContentProvider
+      {/* <Settings.Provider value={value}> */}
+      {/* <Theme> */}
+      {/* <ContentProvider
           fallback={<span>preloader</span>}
           loading={!settings.loading.isFullyLoaded}
           onLoad={() => settings.loading.setContentLoaded(true)}
-        >
-          {children}
-          <Shortcuts />
-        </ContentProvider>
-        {/* </Theme> */}
-      </Settings.Provider>
+        > */}
+      {children}
+      {/* <Shortcuts /> */}
+      {/* </ContentProvider> */}
+      {/* </Theme> */}
+      {/* </Settings.Provider> */}
     </Fonts>
   )
 }
