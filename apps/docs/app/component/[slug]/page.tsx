@@ -1,4 +1,4 @@
-import { loadContent } from '../../settings/content/loader'
+import { loadContent } from '../../../settings/content/loader'
 
 export async function generateStaticParams() {
   const content = await loadContent()
