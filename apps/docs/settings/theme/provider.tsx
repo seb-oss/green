@@ -74,7 +74,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // During SSR/static generation, render with a default theme
   if (!mounted) {
-    return <GdsTheme color-scheme="light">{children}</GdsTheme>
+    return <>{children}</>
   }
 
   // Client-side render with full functionality
