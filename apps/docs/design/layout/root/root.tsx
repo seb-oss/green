@@ -3,13 +3,12 @@
 import { GdsFlex } from '@sebgroup/green-core/react'
 import Footer from '../../atoms/footer/footer'
 import Header from '../../atoms/header/header'
+import Sidebar from '../../atoms/sidebar/sidebar'
 import { LAYOUT_UTILS } from '../config'
 
 import type { RootProps } from '../types'
 
 import './root.css'
-
-import Sidebar from '../../atoms/sidebar/sidebar'
 
 export function Root({ children, className, fluid, ...rest }: RootProps) {
   const classes = [LAYOUT_UTILS.root(fluid), className]
