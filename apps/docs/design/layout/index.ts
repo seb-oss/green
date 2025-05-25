@@ -6,7 +6,7 @@ export type {
   LayoutClasses,
   LayoutStates,
   LayoutVariants,
-} from "./types"
+} from './types'
 
 export {
   LAYOUT_CLASSES,
@@ -14,8 +14,9 @@ export {
   LAYOUT_VARIANTS,
   LAYOUT_UTILS,
   LAYOUT_DIMENSIONS,
-} from "./config"
+} from './config'
 
-export { Root } from "./root/root"
-export { Page } from "./page/page"
-export { CSS_VARIABLES } from "./styles"
+export { Root } from './root/root'
+export { Page } from './page/page'
+export { Component } from './component/component'
+export { CSS_VARIABLES } from './styles'
