@@ -2,6 +2,9 @@
 
 import Script from 'next/script'
 
+import { Root } from '../design/layout/root/root'
+import { SettingsProvider as App } from '../settings/provider'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -10,8 +13,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        asdasd
-        {children}
+        <App>
+          <Root>{children}</Root>
+        </App>
         <Script id="data-layer">
           {`window["dataLayer"] = {
             "pageName":"seb.io",
