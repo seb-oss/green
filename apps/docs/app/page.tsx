@@ -1,10 +1,5 @@
 import type { Metadata } from 'next'
 
-interface HomeContent {
-  title: string
-  summary: string
-}
-
 export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io'),
   title: 'Green Design System',

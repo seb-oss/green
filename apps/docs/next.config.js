@@ -8,8 +8,12 @@ const { composePlugins, withNx } = require('@nx/next')
  **/
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true,
   images: {
     unoptimized: true,
+  },
+  experimental: {
+    esmExternals: true,
   },
   transpilePackages: ['@babel/runtime'],
   output: 'export',

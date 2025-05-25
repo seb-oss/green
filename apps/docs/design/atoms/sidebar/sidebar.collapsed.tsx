@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { internalLink } from '@/apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
+import { internalLink } from '../../../hooks'
 import { Link } from '../link/link'
 
 interface NavItem {
