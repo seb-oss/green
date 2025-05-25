@@ -12,6 +12,9 @@ export function Component({ component }: ComponentProps) {
   return (
     <article className="component">
       <span>component stuff</span>
+      {component.title && (
+        <h1 className="component-title">{component.title}</h1>
+      )}
     </article>
   )
 }
