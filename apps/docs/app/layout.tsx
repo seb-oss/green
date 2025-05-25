@@ -1,5 +1,3 @@
-'use client'
-
 import Script from 'next/script'
 
 import { Root } from '../design/layout/root/root'
