@@ -1,10 +1,12 @@
 // app/component/[slug]/layout.client.tsx
 'use client'
 
-import Link from 'next/link'
 import { notFound, usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
+import { Link } from '../../../design/atoms/link/link'
+import Tabs from '../../../design/atoms/tabs/tabs'
 import { useContent } from '../../../settings/content'
 
 interface ComponentLayoutClientProps {
@@ -33,15 +35,27 @@ export function ComponentLayoutClient({
   }
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="2xl">
-      <Core.GdsFlex flex-direction="column" gap="l" padding="xl">
-        <Core.GdsText font-size="display-l">{component.title}</Core.GdsText>
+    <Core.GdsFlex flex-direction="column" gap="2xl" max-width="840px">
+      <Core.GdsFlex flex-direction="column" gap="m" padding="0">
+        <Breadcrumbs slug={component.slug} title="Breadcrumbs" />
+        <Core.GdsText tag="h1" font-size="heading-xl">
+          {component.title}
+        </Core.GdsText>
+
+        <Core.GdsFlex>
+          {component.beta && (
+            <Core.GdsBadge size="small" variant="notice">
+              BETA
+            </Core.GdsBadge>
+          )}
+        </Core.GdsFlex>
 
         {component.summary && (
           <Core.GdsText
-            font-size="preamble-l"
+            tag="p"
+            font-size="body-m"
             color="secondary"
-            max-width="68ch"
+            max-width="82ch"
           >
             {component.summary}
           </Core.GdsText>
@@ -49,35 +63,17 @@ export function ComponentLayoutClient({
 
         {component.tags && (
           <Core.GdsFlex gap="s" margin="s 0">
+            Tags:
             {component.tags.map((tag) => (
-              <Core.GdsBadge key={tag}>{tag}</Core.GdsBadge>
+              <Link key={tag} href={'/components/' + tag}>
+                {tag}
+              </Link>
             ))}
           </Core.GdsFlex>
         )}
 
-        <Core.GdsFlex gap="m">
-          <Link href={`/component/${slug}`}>
-            <Core.GdsText
-              color={section === 'overview' ? 'primary' : 'secondary'}
-            >
-              Overview
-            </Core.GdsText>
-          </Link>
-          <Link href={`/component/${slug}/ux-text`}>
-            <Core.GdsText
-              color={section === 'ux-text' ? 'primary' : 'secondary'}
-            >
-              UX Text
-            </Core.GdsText>
-          </Link>
-          <Link href={`/component/${slug}/accessibility`}>
-            <Core.GdsText
-              color={section === 'accessibility' ? 'primary' : 'secondary'}
-            >
-              Accessibility
-            </Core.GdsText>
-          </Link>
-        </Core.GdsFlex>
+        <Core.GdsCard height="280px"></Core.GdsCard>
+        <Tabs slug={component.slug} />
       </Core.GdsFlex>
 
       {children}

@@ -18,7 +18,7 @@ export function OverviewClient({ slug }: OverviewClientProps) {
   if (!component?.overview) return null
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="xl" padding="xl">
+    <Core.GdsFlex flex-direction="column" gap="xl">
       {component.overview.map((section, index) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="l">
           {section.column.map((col, colIndex) => (

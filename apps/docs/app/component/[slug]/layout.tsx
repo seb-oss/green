@@ -11,12 +11,12 @@ export async function generateStaticParams() {
   }))
 }
 
-interface ComponentLayoutProps {
+interface LayoutProps {
   children: React.ReactNode
   params: { slug: string }
 }
 
-export default function Layout({ children, params }: ComponentLayoutProps) {
+export default function Layout({ children, params }: LayoutProps) {
   return (
     <ComponentLayoutClient slug={params.slug}>{children}</ComponentLayoutClient>
   )

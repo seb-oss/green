@@ -1,8 +1,6 @@
 // breadcrumb.tsx
 'use client'
 
-import { usePathname } from 'next/navigation'
-
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
 import { Link } from '../link/link'
@@ -19,9 +17,6 @@ interface BreadcrumbsProps {
 }
 
 export default function Breadcrumbs({ slug, title }: BreadcrumbsProps) {
-  const pathname = usePathname()
-  const currentPath = pathname.split('?')[0]
-
   const breadcrumbItems: BreadcrumbItem[] = [
     {
       label: 'Home',
@@ -38,18 +33,6 @@ export default function Breadcrumbs({ slug, title }: BreadcrumbsProps) {
       href: `/component/${slug}`,
     },
   ]
-
-  if (currentPath.includes(`/component/${slug}/ux-text`)) {
-    breadcrumbItems.push({
-      label: 'UX text',
-      href: `/component/${slug}/ux-text`,
-    })
-  } else if (currentPath.includes(`/component/${slug}/accessibility`)) {
-    breadcrumbItems.push({
-      label: 'Accessibility',
-      href: `/component/${slug}/accessibility`,
-    })
-  }
 
   return (
     <Core.GdsBreadcrumbs size="small" key="breadcrumb">
