@@ -1,5 +1,7 @@
 // settings/toast/config.ts
-import type { ToastState } from "./types"
+'use client'
+
+import type { ToastState } from './types'
 
 export const TOAST_CONFIG = {
   defaultDuration: 3000,

@@ -1,14 +1,17 @@
 // settings/toast/hooks.ts
-import { useCallback, useEffect, useRef, useState } from "react"
+'use client'
 
-import { DEFAULT_TOAST_STATE, TOAST_CONFIG } from "./config"
-import type { ToastContext, ToastItem } from "./types"
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+import { DEFAULT_TOAST_STATE, TOAST_CONFIG } from './config'
+
+import type { ToastContext, ToastItem } from './types'
 
 export function useToast(): ToastContext {
   const [state, setState] = useState(DEFAULT_TOAST_STATE)
   const timeoutsRef = useRef<Record<string, NodeJS.Timeout>>({})
 
-  const add = useCallback((toast: Omit<ToastItem, "id">) => {
+  const add = useCallback((toast: Omit<ToastItem, 'id'>) => {
     setState((prev) => {
       const items = prev.items.slice(-TOAST_CONFIG.maxToasts + 1)
 

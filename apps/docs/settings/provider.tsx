@@ -62,14 +62,14 @@ export function SettingsProvider({
     <Fonts>
       <Settings.Provider value={value}>
         <Theme>
-          {/* <ContentProvider
+          <ContentProvider
             fallback={<span>preloader</span>}
             loading={!settings.loading.isFullyLoaded}
             onLoad={() => settings.loading.setContentLoaded(true)}
-          > */}
-          {children}
-          <Shortcuts />
-          {/* </ContentProvider> */}
+          >
+            {children}
+            <Shortcuts />
+          </ContentProvider>
         </Theme>
       </Settings.Provider>
     </Fonts>

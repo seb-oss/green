@@ -1,4 +1,6 @@
 // settings/shortcuts/utils.ts
+'use client'
+
 import type {
   SettingsContextType,
   SettingsState,
