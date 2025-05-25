@@ -19,6 +19,7 @@ export const contentContext = createContext<ContentContext>({
   actions: {
     getPage: () => undefined,
     getComponent: () => undefined,
+    getComponents: () => [],
     getPages: () => [],
     getTemplates: () => [],
     getTemplate: () => undefined,
