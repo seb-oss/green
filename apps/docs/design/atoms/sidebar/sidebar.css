@@ -1,0 +1,9 @@
+.sidebar {
+  box-sizing: border-box;
+  max-height: calc(100vh - 80px);
+
+  /* @starting-style {
+    opacity: 0;
+    translate: -4px 0;
+  } */
+}
