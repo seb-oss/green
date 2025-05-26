@@ -22,6 +22,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
         flex-direction="column"
         color="primary"
         width="100%"
+        background="secondary"
       >
         <Header />
         <GdsFlex gap="xl">

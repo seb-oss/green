@@ -1,19 +1,21 @@
+// app/settings/page.tsx
 'use client'
-
-import { Link } from 'apps/docs/design/atoms/link/link'
 
 import {
   GdsBreadcrumbs,
   GdsCard,
-  GdsCheckbox,
-  GdsCheckboxGroup,
   GdsFlex,
-  GdsMenuButton,
+  GdsRadio,
+  GdsRadioGroup,
   GdsText,
   IconHomeOpen,
 } from '@sebgroup/green-core/react'
+import { Link } from '../../design/atoms/link/link'
+import { useSettingsContext } from '../../settings/hooks'
 
 export default function Settings() {
+  const { settings, actions } = useSettingsContext()
+
   return (
     <GdsFlex flex-direction="column" gap="l">
       <GdsBreadcrumbs size="small">
@@ -23,6 +25,7 @@ export default function Settings() {
         </Link>
         <GdsText>Settings</GdsText>
       </GdsBreadcrumbs>
+
       <GdsFlex
         flex-direction="column"
         gap="m"
@@ -30,7 +33,8 @@ export default function Settings() {
         align-items="flex-start"
       >
         <GdsText tag="h1">Settings</GdsText>
-        <GdsText tag="p">Color scheme consent etc. </GdsText>
+        <GdsText tag="p">Customize your experience</GdsText>
+
         <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
           <Link component="menu" href="/settings">
             Settings
@@ -41,10 +45,37 @@ export default function Settings() {
         </GdsCard>
       </GdsFlex>
 
-      <GdsCheckboxGroup>
-        <GdsCheckbox label="Content Refresh"></GdsCheckbox>
-        <GdsCheckbox label="Theme dark light mode"></GdsCheckbox>
-      </GdsCheckboxGroup>
+      <GdsCard padding="l">
+        <GdsFlex flex-direction="column" gap="l">
+          <GdsText tag="h2">Appearance</GdsText>
+          <GdsRadioGroup
+            label="Theme"
+            value={settings.UI.Theme.ColorScheme}
+            onChange={(e) =>
+              actions.setSettings((prev) => ({
+                ...prev,
+                UI: {
+                  ...prev.UI,
+                  Theme: {
+                    ...prev.UI.Theme,
+                    ColorScheme: e.target.value,
+                  },
+                },
+              }))
+            }
+          >
+            <GdsRadio value="light" label="Light">
+              Light
+            </GdsRadio>
+            <GdsRadio value="dark" label="Dark">
+              Dark
+            </GdsRadio>
+            <GdsRadio value="system" label="System">
+              System
+            </GdsRadio>
+          </GdsRadioGroup>
+        </GdsFlex>
+      </GdsCard>
     </GdsFlex>
   )
 }
