@@ -77,8 +77,10 @@ export class GdsFormSummary extends GdsElement {
   }
 
   render() {
-    const formControls = Array.from(
-      this.#form?.elements || [],
+    const formControls = Array.from(this.#form?.elements || []).filter(
+      // Individual checkboxes can be used as form controls, but they don't support error messages,
+      // so we filter them out here. Checkboxes needs to be wrapped in a group to work with form summary.
+      (el) => (el as GdsFormControlElement).gdsElementName !== 'gds-checkbox',
     ) as GdsFormControlElement[]
     const errorControls = formControls.filter(
       (el) => el.ariaInvalid === 'true' || el.invalid,
