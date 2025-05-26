@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect } from 'react'
-// import { GdsTheme } from '$/import/components'
 import * as CookieConsent from 'vanilla-cookieconsent'
 
 import pluginConfig from './config'
@@ -10,8 +11,7 @@ const Consent = () => {
   useEffect(() => {
     CookieConsent.run(pluginConfig)
   }, [CookieConsent, pluginConfig])
-
-  // return <GdsTheme id="cookie-consent"></GdsTheme>
+  return <div id="cookie-consent"></div>
 }
 
 export default Consent

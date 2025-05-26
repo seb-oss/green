@@ -16,6 +16,8 @@ import type { SettingsContextType } from './types'
 
 import '../design/style/global.css'
 
+import Preloader from '../design/atoms/preloader/preloader'
+
 interface SettingsProviderProps extends PropsWithChildren {
   fallback?: React.ReactNode
 }
@@ -63,7 +65,7 @@ export function SettingsProvider({
       <Settings.Provider value={value}>
         <Theme>
           <ContentProvider
-            fallback={<span>preloader</span>}
+            fallback={<Preloader />}
             loading={!settings.loading.isFullyLoaded}
             onLoad={() => settings.loading.setContentLoaded(true)}
           >
