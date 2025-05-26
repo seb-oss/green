@@ -4,6 +4,9 @@ import React, { useMemo } from 'react'
 
 import type { PropsWithChildren } from 'react'
 
+import Preloader from '../design/atoms/preloader/preloader'
+import { ConsentManager } from './consent/consent.manager'
+import { useConsentScript } from './consent/consent.script'
 import { ContentProvider } from './content'
 import { SettingsContext as Settings } from './context'
 import Fonts from './fonts/fonts'
@@ -16,8 +19,6 @@ import type { SettingsContextType } from './types'
 
 import '../design/style/global.css'
 
-import Preloader from '../design/atoms/preloader/preloader'
-
 interface SettingsProviderProps extends PropsWithChildren {
   fallback?: React.ReactNode
 }
@@ -28,7 +29,6 @@ export function SettingsProvider({
 }: SettingsProviderProps) {
   const settings = useSettings()
   const toast = useToast()
-
   const value = useMemo<SettingsContextType>(
     () => ({
       settings: {
@@ -71,6 +71,7 @@ export function SettingsProvider({
           >
             {children}
             <Shortcuts />
+            <ConsentManager />
           </ContentProvider>
         </Theme>
       </Settings.Provider>

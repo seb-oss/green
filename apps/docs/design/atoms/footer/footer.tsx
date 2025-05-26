@@ -1,4 +1,5 @@
 import { GdsButton, GdsFlex } from '@sebgroup/green-core/react'
+import { Link } from '../link/link'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -14,9 +15,14 @@ export default function Footer() {
     >
       <GdsFlex justify-content="space-between" align-items="center">
         {text}
-        <GdsButton data-cc="c-settings" rank="tertiary">
+        <Link
+          component="button"
+          href="/settings/consent"
+          rank="tertiary"
+          size="small"
+        >
           Cookie preferences
-        </GdsButton>
+        </Link>
       </GdsFlex>
     </GdsFlex>
   )

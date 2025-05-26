@@ -138,9 +138,10 @@ export default function Sidebar() {
     <Core.GdsCard
       variant="secondary"
       border-radius="0"
-      justify-content="flex-start"
+      justify-content="space-between"
+      align-items="center"
       gap="4xl"
-      height="100vh"
+      height="calc(100vh - 80px)"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding="xs xs m xs"
       min-width={isOpen ? '260px' : 'max-content'}
@@ -148,7 +149,7 @@ export default function Sidebar() {
       position="relative"
     >
       {isOpen && (
-        <Core.GdsFlex flex-direction="column" gap="m">
+        <Core.GdsFlex flex-direction="column" gap="m" width="100%">
           {renderContent}
         </Core.GdsFlex>
       )}

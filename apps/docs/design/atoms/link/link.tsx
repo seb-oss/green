@@ -9,7 +9,7 @@ interface CustomLinkProps {
   href: string
   isExternal?: boolean
   children: React.ReactNode
-  component?: 'button' | 'link'
+  component?: 'button' | 'link' | 'menu'
   [key: string]: any
 }
 
@@ -26,7 +26,21 @@ export const Link = React.forwardRef<HTMLElement, CustomLinkProps>(
       }
     }
 
-    const Component = component === 'button' ? Core.GdsButton : Core.GdsLink
+    // Determine which component to use
+    let Component:
+      | typeof Core.GdsButton
+      | typeof Core.GdsLink
+      | typeof Core.GdsMenuButton
+    switch (component) {
+      case 'button':
+        Component = Core.GdsButton
+        break
+      case 'menu':
+        Component = Core.GdsMenuButton
+        break
+      default:
+        Component = Core.GdsLink
+    }
 
     return (
       <Component href={href} onClick={handleClick} ref={ref} {...props}>
