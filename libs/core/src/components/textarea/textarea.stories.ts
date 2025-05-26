@@ -12,6 +12,8 @@ import '../divider/index.ts'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 
+import { GdsFormControlElement } from '../form/form-control.ts'
+
 /**
  *
  * Textareas are used for longer multiline text inputs, such as comments or descriptions.<br>
@@ -454,7 +456,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Error message.',
+                  'You need to enter a value.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -480,8 +482,10 @@ export const Validation: Story = {
           value="Incorrect value"
           maxLength="12"
           clearable
+          .invalid=${true}
+          error-message="This is explicitly set error message."
           .validator=${{
-            validate: (el: any) => {
+            validate: (el: GdsFormControlElement) => {
               if (el.value === '')
                 return [
                   {

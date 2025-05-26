@@ -356,9 +356,7 @@ export class GdsDropdown<ValueT = any>
         () => html`
           <gds-form-control-footer
             class="size-${this.size}"
-            .validationMessage=${this.invalid
-              ? this.validationMessage || this.errorMessage
-              : undefined}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           >
             ${
               ``

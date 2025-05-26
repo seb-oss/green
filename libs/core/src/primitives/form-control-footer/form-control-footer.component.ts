@@ -23,22 +23,22 @@ export class GdsFormControlFooter extends GdsElement {
   charCounter?: number
 
   @property()
-  validationMessage?: string
+  errorMessage?: string
 
   updated(changedProperties: Map<string, unknown>) {
     super.updated(changedProperties)
     if (
-      changedProperties.has('validationMessage') ||
+      changedProperties.has('errorMessage') ||
       changedProperties.has('charCounter')
     ) {
-      this.classList.toggle('visually-hidden', !this.validationMessage)
+      this.classList.toggle('visually-hidden', !this.errorMessage)
     }
   }
 
   connectedCallback(): void {
     super.connectedCallback()
 
-    if (!this.validationMessage && !this.charCounter) {
+    if (!this.errorMessage && !this.charCounter) {
       this.classList.add('visually-hidden')
     }
   }
@@ -48,17 +48,17 @@ export class GdsFormControlFooter extends GdsElement {
       <div class="error-message">
         <slot name="message"
           >${when(
-            this.validationMessage,
+            this.errorMessage,
             () => html`
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.validationMessage}
+              ${this.errorMessage}
             `,
           )}</slot
         >
       </div>
-      <div class="char-counter">
+      <div class="char-counter" aria-hidden="true">
         ${when(Number.isInteger(this.charCounter), () =>
           this.#renderRemainingCharsBadge(this.charCounter!),
         )}

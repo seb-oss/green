@@ -220,9 +220,7 @@ class Input extends GdsFormControlElement<string> {
             .charCounter=${this.#shouldShowRemainingChars
               ? this.maxlength - (this.value?.length || 0)
               : undefined}
-            .validationMessage=${this.invalid
-              ? this.errorMessage || this.validationMessage
-              : undefined}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
