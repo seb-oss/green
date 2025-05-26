@@ -1,5 +1,6 @@
-// app/settings/page.tsx
 'use client'
+
+import { FormEvent } from 'react'
 
 import {
   GdsBreadcrumbs,
@@ -11,10 +12,33 @@ import {
   IconHomeOpen,
 } from '@sebgroup/green-core/react'
 import { Link } from '../../design/atoms/link/link'
-import { useSettingsContext } from '../../settings/hooks'
+import { useSettingsContext, useSettingsValue } from '../../settings/hooks'
+
+type ColorScheme = 'dark' | 'light' | 'system'
 
 export default function Settings() {
-  const { settings, actions } = useSettingsContext()
+  const { actions } = useSettingsContext()
+  const colorScheme = useSettingsValue(
+    (settings) => settings.UI.Theme.ColorScheme,
+  )
+
+  const handleThemeChange = (e: FormEvent<HTMLElement>) => {
+    const target = e.target as HTMLInputElement
+    const value = target.value as ColorScheme
+
+    if (['dark', 'light', 'system'].includes(value)) {
+      actions.setSettings((prev) => ({
+        ...prev,
+        UI: {
+          ...prev.UI,
+          Theme: {
+            ...prev.UI.Theme,
+            ColorScheme: value,
+          },
+        },
+      }))
+    }
+  }
 
   return (
     <GdsFlex flex-direction="column" gap="l">
@@ -50,19 +74,8 @@ export default function Settings() {
           <GdsText tag="h2">Appearance</GdsText>
           <GdsRadioGroup
             label="Theme"
-            value={settings.UI.Theme.ColorScheme}
-            onChange={(e) =>
-              actions.setSettings((prev) => ({
-                ...prev,
-                UI: {
-                  ...prev.UI,
-                  Theme: {
-                    ...prev.UI.Theme,
-                    ColorScheme: e.target.value,
-                  },
-                },
-              }))
-            }
+            value={colorScheme as ColorScheme}
+            onChange={handleThemeChange}
           >
             <GdsRadio value="light" label="Light">
               Light
