@@ -167,7 +167,7 @@ export class GdsMonthPicker extends GdsElement {
    * Sets the size of the button. Defaults to "medium".
    */
   @property({ reflect: true })
-  size: 'small' | 'medium'
+  size: 'small' | 'large' = 'large'
 
   /**
    * If the month number should be displayed after the month name

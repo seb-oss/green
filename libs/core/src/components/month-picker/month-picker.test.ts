@@ -36,7 +36,7 @@ describe('<gds-month-picker>', () => {
     it('is accessible', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
-          .focusedDate=${new Date('2024-06-03')}
+          .focusedDate=${new Date('2025-06-03')}
           label="Month picker"
         ></gds-month-picker>`,
       )
