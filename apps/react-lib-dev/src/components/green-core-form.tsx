@@ -1,11 +1,12 @@
 import { on } from 'events'
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 // We can import types ilke this if we want to cast event targets to correct types
 import type {
   GdsCheckboxGroup as GdsCheckboxGroupType,
   GdsDatepicker as GdsDatepickerType,
   GdsDropdown as GdsDropdownType,
+  GdsFormSummary as GdsFormSummaryType,
   GdsInput as GdsInputType,
   GdsRadioGroup as GdsRadioGroupType,
   GdsSelect as GdsSelectType,
@@ -26,6 +27,7 @@ import {
   GdsDatepicker,
   GdsDropdown,
   GdsFlex,
+  GdsFormSummary,
   GdsInput,
   GdsOption,
   GdsRadio,
@@ -80,6 +82,20 @@ const requiredValidator: GdsValidator = {
 
 export const GreenCoreFormExample = () => {
   const [formData, setFormData] = useState<FormData>(initialFormState)
+  const formSummaryRef = React.useRef<GdsFormSummaryType>(null)
+
+  function checkFormStatus() {
+    const summary = formSummaryRef.current
+    if (!summary) return
+
+    summary.refresh()
+    if (summary.errorCount > 0) {
+      summary.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      })
+    }
+  }
 
   return (
     <GdsTheme designVersion="2023">
@@ -100,6 +116,7 @@ export const GreenCoreFormExample = () => {
               setFormData(initialFormState)
             }}
           >
+            <GdsFormSummary ref={formSummaryRef}></GdsFormSummary>
             <GdsFlex gap="m" flex-direction="column">
               <GdsInput
                 label={'Name'}
@@ -278,7 +295,11 @@ export const GreenCoreFormExample = () => {
                 }
               />
               <GdsFlex gap="m">
-                <GdsButton rank="primary" type="submit">
+                <GdsButton
+                  rank="primary"
+                  type="submit"
+                  onClick={checkFormStatus}
+                >
                   Submit
                 </GdsButton>
                 <GdsButton rank="secondary" type="reset">
