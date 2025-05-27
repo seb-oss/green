@@ -37,6 +37,7 @@ const betaItems = {
   Div: true,
   Spinner: true,
   Radio: true,
+  MonthPicker: true,
 }
 
 addons.setConfig({
