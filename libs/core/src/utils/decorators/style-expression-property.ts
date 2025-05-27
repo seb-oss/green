@@ -19,7 +19,7 @@ export type StyleExpressionPropertyOptions = {
    * also be `padding`. This option overrides that. */
   property?: string
 
-  /** A function that takes a value and returns a string. Defaults to `(value) => 'var(--gds-space-${value})'`
+  /** A function that takes a value and returns a string. Defaults to `(value) => 'var(--gds-sys-space-${value})'`
    * This can be used to resolve the values into CSS variables for example. */
   valueTemplate?: (value: string) => string
 
@@ -49,7 +49,6 @@ export function styleExpressionProperty(
     proto: ElemClass,
     descriptor: PropertyKey,
   ) => {
-    const sel = options?.selector ?? String(':host')
     const prop = options?.property ?? String(descriptor)
     const valueTemplate = options?.valueTemplate
     const styleTemplate = options?.styleTemplate
@@ -71,6 +70,9 @@ export function styleExpressionProperty(
         this['__' + String(descriptor)] = newValue
 
         await this.updateComplete
+
+        const sel =
+          options?.selector ?? this.constructor.styleExpressionBaseSelector
 
         // If the element has level defined, we need to use it in the cache key
         const lvl = (this as any).level ?? '0'

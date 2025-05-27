@@ -129,26 +129,31 @@
           (click)="propagateItemClick(item, column.preventDefaultClickEvent)"
         >
         <ng-container *ngIf="expandable && i === 0; else nonExpandableTemplate">
-            <div class="gds-item-field-wrap">
+            <div
+              class="gds-item-field-wrap"
+              [ngClass]="{ 'no-sub-items': item.subItems.length === 0 }"
+            >
               <span
+                *ngIf="item.subItems.length > 0"
+                role="button"
+                tabindex="0"
                 class="chevron-field"
                 [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
               >
                 <svg
-                  *ngIf="item.subItems.length > 0"
-                  width="18" height="14" viewBox="0 0 24 24" fill="none"
+                  width="20" height="20" viewBox="0 0 24 24" fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     d="M20 9L12 17L4 9"
                     stroke="currentColor"
-                    stroke-width="2.6"
+                    stroke-width="1.6"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
                 </svg>
               </span>
-              {{ item[column.property] }} ({{ item.subItems.length }})
+                {{ item[column.property] }} ({{ item.subItems.length }})
             </div>
           </ng-container>
 
@@ -169,6 +174,7 @@
         <tr *ngFor="let subItem of item[subItemsProp]">
           <td
             *ngFor="let column of tableColumns"
+            class="web-view"
             [columnType]="column.valueType"
             [value]="subItem[column.property]"
             (click)="propagateItemClick(subItem, column.preventDefaultClickEvent)"
@@ -180,6 +186,57 @@
             <ng-template #defaultTdTemplate>
               {{ subItem[column.property] }}
             </ng-template>
+          </td>
+
+          <td
+            class="mobile-view"
+            [attr.colspan]="tableColumns.length"
+            (click)="propagateItemClick(subItem)"
+          >
+            <dl class="mobile-view-field-wrap">
+              <ng-container *ngFor="let column of tableColumns">
+                <div
+                  *ngIf="!column.hidePropertyOnMobile"
+                  class="mobile-view-field"
+                  [columnType]="column.valueType"
+                  [value]="subItem[column.property]"
+                >
+                  <dt *ngIf="!column.hideLabelOnMobile">
+                    <ng-container *transloco="let t">
+                      {{ t(column.label ?? '') }}
+                    </ng-container>
+                  </dt>
+                  <dd [ngStyle]="column.boldTextOnMobile ? { 'font-weight': '500' } : {'font-weight': '400'}">
+                    <ng-container *ngIf="customRowTemplates.get(column.property) as tdTemplate; else defaultTdTemplate">
+                      <ng-template *ngTemplateOutlet="tdTemplate; context: { $implicit: subItem }"></ng-template>
+                    </ng-container>
+                    <ng-template #defaultTdTemplate>
+                      {{ subItem[column.property] }}
+                    </ng-template>
+                  </dd>
+                  <ng-content></ng-content>
+                </div>
+              </ng-container>
+            </dl>
+            <span
+              role="button"
+              tabindex="0"
+              class="nav-chevron-field"
+              [attr.aria-expanded]="rowSelectors.get(item[rowId])?.value"
+            >
+              <svg
+                width="20" height="20" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 9L12 17L4 9"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
           </td>
         </tr>
       </ng-container>

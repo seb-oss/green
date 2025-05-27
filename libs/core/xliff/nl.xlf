@@ -166,9 +166,9 @@
   <source>Loading...</source>
   <target>Laden...</target>
 </trans-unit>
-<trans-unit id="s3b151ca64eb26ec1">
-  <source>Expand</source>
-  <target>Uitbreiden</target>
+<trans-unit id="s3b8a6245b12fa2ad">
+  <source>Breadcrumbs</source>
+  <target>Kruimelpad</target>
 </trans-unit>
 </body>
 </file>

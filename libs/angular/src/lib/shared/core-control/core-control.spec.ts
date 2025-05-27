@@ -26,6 +26,7 @@ import { NggCoreFormsModule } from './core-control.module'
         name="password"
         required
       ></gds-input>
+      <gds-input name="nonReactive" required></gds-input>
     </form>
   `,
 })
@@ -43,6 +44,7 @@ describe('NggCoreControlDirective', () => {
   let nameInputEl: DebugElement
   let emailInputEl: DebugElement
   let passwordInputEl: DebugElement
+  let nonReactiveInputEl: DebugElement
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -59,6 +61,9 @@ describe('NggCoreControlDirective', () => {
     )
     emailInputEl = fixture.debugElement.query(By.css('[name="email"]'))
     passwordInputEl = fixture.debugElement.query(By.css('[name="password"]'))
+    nonReactiveInputEl = fixture.debugElement.query(
+      By.css('[name="nonReactive"]'),
+    )
   })
 
   it('should set invalid property on the element', async () => {
@@ -138,5 +143,15 @@ describe('NggCoreControlDirective', () => {
     await fixture.whenStable()
 
     expect(passwordInputEl.nativeElement.invalid).toBe(false)
+  })
+
+  it('should not apply controlValueAccessor to non-reactive input', async () => {
+    const control = component.form.get('nonReactive')
+    control?.markAsDirty()
+    fixture.detectChanges()
+
+    await fixture.whenStable()
+
+    expect(nonReactiveInputEl.nativeElement.invalid).toBe(false)
   })
 })

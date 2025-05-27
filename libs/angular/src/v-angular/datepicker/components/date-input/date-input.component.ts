@@ -15,7 +15,6 @@ import {
   ViewChild,
 } from '@angular/core'
 import { NgControl } from '@angular/forms'
-// import { faCalendarDays, IconDefinition } from '@fortawesome/pro-regular-svg-icons';
 import {
   TRANSLOCO_SCOPE,
   TranslocoScope,
@@ -60,6 +59,15 @@ export class DateInputComponent
   /** Special property used for selecting DOM elements during automated UI testing. */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'date-input'
+
+  @HostBinding('class.small') get isSmall(): boolean {
+    return this.size === 'small'
+  }
+
+  @HostBinding('class.large') get isLarge(): boolean {
+    return this.size === 'large'
+  }
+
   /** Set type of calendar: either 'normal' or 'expanded'. Default is 'normal'. */
   @Input() type: CalendarType = 'normal'
   /** If set to true, the value will not be editable. */
@@ -86,6 +94,11 @@ export class DateInputComponent
   @Input() firstDayOfWeek: WeekDay = WeekDay.Monday
   /** If set to true, it will allow to close the calendar on escape button click. */
   @Input() closeCalendarOnEscape = true
+
+  /**
+   * Sets the displayed size of the date input field.
+   */
+  @Input() size: 'small' | 'large' = 'large'
 
   /** @internal */
   // calendarIcon: IconDefinition = faCalendarDays;

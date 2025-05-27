@@ -1,0 +1,67 @@
+name: Scan PR Changes for Sensitive Strings
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-sensitive-strings:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the pull request's code
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures full history for PR diffs
+
+      # Set up a basic environment (e.g., for grep)
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y grep
+
+      # Check for sensitive strings
+      - name: Scan for sensitive strings
+        env:
+          SENSITIVE_STRINGS: ${{ secrets.SENSITIVE_STRINGS }}
+        run: |
+          # Exit if no sensitive strings are defined
+          if [ -z "$SENSITIVE_STRINGS" ]; then
+            echo "No sensitive strings defined in SENSITIVE_STRINGS secret."
+            exit 0
+          fi
+
+          # Create a temporary file with sensitive strings (one per line)
+          echo "$SENSITIVE_STRINGS" > sensitive_strings.txt
+
+          # Get the list of changed files in the PR
+          changed_files=$(git diff --name-only origin/main...HEAD)
+
+          # Flag to track if any sensitive strings are found
+          found=0
+
+          # Scan each changed file for sensitive strings
+          for file in $changed_files; do
+            if [ -f "$file" ]; then
+              while IFS= read -r pattern; do
+                if [ -n "$pattern" ] && grep -F -iq "$pattern" "$file"; then
+                  echo "Error: Sensitive string found in changes"
+                  found=1
+                fi
+              done < sensitive_strings.txt
+            fi
+          done
+
+          # Clean up
+          rm sensitive_strings.txt
+
+          # Exit with failure if sensitive strings were found
+          if [ $found -eq 1 ]; then
+            echo "Check failed: Sensitive strings detected."
+            exit 1
+          else
+            echo "No sensitive strings found."
+            exit 0
+          fi

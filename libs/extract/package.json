@@ -1,6 +1,6 @@
 {
   "name": "@sebgroup/extract",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Base library for framework components.",
   "repository": {
     "type": "git",
@@ -27,6 +27,6 @@
     "swiped-events": "^1.1.6"
   },
   "peerDependencies": {
-    "react": "^18 || ^19"
+    "react": "^17 || ^18 || ^19"
   }
 }

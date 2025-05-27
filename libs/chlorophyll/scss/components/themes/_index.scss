@@ -8,6 +8,7 @@
 .dark-mode {
   @include tokens.dark-mode;
   @include mixins.dark-theme;
+  @include colors.add-color-tokens-dark;
 }
 
 /* use preferred color scheme for whole app or part of it by adding the class ".auto-mode" */

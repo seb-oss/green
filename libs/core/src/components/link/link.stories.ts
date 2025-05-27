@@ -126,3 +126,36 @@ export const TextDecoration: Story = {
     </gds-flex>
   `,
 }
+
+/**
+ * On the `gds-link` component, the `label` attribute is used to provide an accessible name for the link.
+ *
+ * It will be forwarded to the `aria-label` attribute of the underlying anchor element.
+ *
+ *
+ * Use this when:
+ * - The link contains only an icon
+ * - The visual text needs a different description for screen readers
+ * - Additional context is needed for accessibility
+ *
+ *```html
+ *<!-- Icon-only link -->
+ *<gds-link href="/settings" label="Open settings">
+ *  <gds-icon-settings></gds-icon-settings>
+ *</gds-link>
+ *
+ *<!-- Different screen reader text -->
+ *<gds-link href="/article" label="Read full article about climate change">
+ *  Read more
+ *</gds-link>
+ *```
+ */
+export const Label: Story = {
+  ...DefaultParams,
+  name: 'Label',
+  render: () => html`
+    <gds-link href="#" label="Aria label is used">
+      Link with aria-label
+    </gds-link>
+  `,
+}

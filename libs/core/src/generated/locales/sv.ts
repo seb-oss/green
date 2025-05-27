@@ -18,7 +18,7 @@
 's281846ef0421c71f': `November`,
 's2ceb11be2290bb1b': `Avbryt`,
 's39938ecdae568740': `September`,
-'s3b151ca64eb26ec1': `Expandera`,
+'s3b8a6245b12fa2ad': `Brödsmulor`,
 's407a88a592a0987c': `Augusti`,
 's46d6587089bd0356': `Nästa månad`,
 's49730f3d5751a433': `Laddar...`,
