@@ -26,9 +26,25 @@ import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/s
   styleUrls: ['./checkbox.component.scss'],
 })
 export class NggvCheckboxComponent extends NggvBaseControlValueAccessorComponent {
-  /** Special property used for selecting DOM elements during automated UI testing. */
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'checkbox'
+
+  @HostBinding('class.small') get isSmall(): boolean {
+    return this.size === 'small'
+  }
+
+  @HostBinding('class.large') get isLarge(): boolean {
+    return this.size === 'large'
+  }
+
+  /**
+   * Sets the displayed size of the checkbox
+   */
+  @Input() size: 'small' | 'large' = 'large'
+
   @Input() optionalLabel = 'Optional'
 
   @Output() readonly valueChange: EventEmitter<string> =

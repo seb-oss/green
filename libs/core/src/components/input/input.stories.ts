@@ -269,8 +269,8 @@ export const ExtendedSupportingText: Story = {
   render: () => html`
     <gds-flex gap="xl" width="800px">
       <gds-input label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
       </gds-input>
@@ -389,6 +389,33 @@ export const Validation: Story = {
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         </gds-input>
       </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ * Most standard attributes are supported, and will be forwarded to the internal input element.
+ */
+export const StandardAttributes: Story = {
+  ...DefaultParams,
+  name: 'Standard Attributes',
+  render: () => html`
+    <gds-flex flex-direction="column" gap="xl" width="320px">
+      <gds-input
+        label="Label"
+        supporting-text="Using standard attributes"
+        min="0"
+        max="100"
+        step="5"
+        type="number"
+        autocapitalize="on"
+        autocomplete="on"
+        autocorrect="on"
+        spellcheck="true"
+        inputmode="numeric"
+        autofocus
+        enterkeyhint="enter"
+      ></gds-input>
     </gds-flex>
   `,
 }

@@ -1,5 +1,105 @@
 # Changelog
 
+## 5.13.0
+
+### Minor Changes
+
+- 9d223a7: V-Angular: Adding small variant of Dropdown
+- 9d223a7: V-Angular: Adding small variant of Checkbox
+- 9d223a7: V-Angular: Adding small variant of DateInput
+- 9d223a7: V-Angular: Adding small variant of Textarea
+
+### Patch Changes
+
+- 1829e13: Fixed dropdown selection behaviour when typeahead is used
+- 9d223a7: V-Angular: Fixing icon sizing in Date input
+
+## 5.12.1
+
+### Patch Changes
+
+- a4252f9: **NggCoreControl:** Update selectors to only apply when controls are used with reactive forms (when `formControlName` is present)
+- Updated dependencies [4c000b4]
+  - @sebgroup/green-core@1.81.0
+
+## 5.12.0
+
+### Minor Changes
+
+- 45a6303: **V-Angular Dropdown/Typeahead**: Keyboard select dropdown with nvda screen-reader.
+
+### Patch Changes
+
+- 2a3e532: Resolved V-Angular table a11y warnings
+- Updated dependencies [2edbe83]
+- Updated dependencies [5f775b4]
+- Updated dependencies [461504b]
+- Updated dependencies [2edbe83]
+  - @sebgroup/green-core@1.80.0
+  - @sebgroup/chlorophyll@3.6.20
+
+## 5.11.2
+
+### Patch Changes
+
+- 7e585f8: **NggDatepicker:** Fix error in change event handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
+## 5.11.1
+
+### Patch Changes
+
+- 728c620: **V-Angular:** Updated table component
+
+## 5.11.0
+
+### Minor Changes
+
+- 318de75: **V-Angular Inputs:** Support for custom locked template for input fields.
+
+### Patch Changes
+
+- 766cbe6: Adding export of checkbox directive to fix build error
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
+## 5.10.0
+
+### Minor Changes
+
+- 7d86c93: **Forms:** Add ControlValueAccessor support for `gds-checkbox`
+
+### Patch Changes
+
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+  - @sebgroup/green-core@1.77.0
+
+## 5.9.0
+
+### Minor Changes
+
+- 8616efe: Updated v-angular table for mobile view
+
+## 5.8.1
+
+### Patch Changes
+
+- 0f2c59f: **V-Angular Dropdown/Typeahead:** Enable keyboard navigation with NVDA screen-reader.
+- Updated dependencies [441260e]
+- Updated dependencies [ba27ca9]
+  - @sebgroup/green-core@1.76.2
+
 ## 5.8.0
 
 ### Minor Changes

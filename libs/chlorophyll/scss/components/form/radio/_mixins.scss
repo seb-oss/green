@@ -58,7 +58,7 @@ $invalid-color: var(--gds-sys-color-text-error);
     box-shadow: inset 0px 0px 0px 0.05rem var(--gds-sys-color-text-primary);
 
     &::after {
-      background-color: var(--gds-sys-color-base);
+      background-color: var(--gds-sys-color-text-primary);
     }
   }
 

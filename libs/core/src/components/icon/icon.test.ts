@@ -75,4 +75,18 @@ describe('IconAi', () => {
     expect(svg).to.have.attribute('role', 'presentation')
     expect(svg).to.not.have.attribute('aria-label')
   })
+
+  it('should apply color property correctly', async () => {
+    element = await fixture(html`<gds-icon-ai color="primary"></gds-icon-ai>`)
+    await element.updateComplete
+    expect((element as any).__color).to.equal('primary')
+  })
+
+  it('should apply color with transparency correctly', async () => {
+    element = await fixture(
+      html`<gds-icon-ai color="primary/0.2"></gds-icon-ai>`,
+    )
+    await element.updateComplete
+    expect((element as any).__color).to.equal('primary/0.2')
+  })
 })

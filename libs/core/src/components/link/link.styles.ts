@@ -20,7 +20,7 @@ const style = css`
       color: currentColor;
       outline-offset: 4px;
       outline-color: currentColor;
-      font-weight: var(--gds-text-weight-book);
+      font-weight: var(--gds-sys-text-weight-book);
       transition: all 0.2s ease-in-out;
 
       &:hover {

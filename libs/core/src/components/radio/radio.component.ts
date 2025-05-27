@@ -1,20 +1,21 @@
 import { property, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
-import { GdsSelectionFieldLabel } from '../../primitives/selection-controls/selection-field-label.component'
+import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
-import { watch } from '../../utils/decorators/watch'
+import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
+import { radioToggle } from '../../shared-styles/rbcb-toggle.template'
 import { styles } from './radio.styles'
 
 /**
  * @element gds-radio
  * @status beta
  *
- * @event gds-radio-change - Dispatched when the radio button is checked.
+ * @event input - Dispatched when the radio button is checked.
  */
-@gdsCustomElement('gds-radio', { dependsOn: [GdsSelectionFieldLabel] })
+@gdsCustomElement('gds-radio', { dependsOn: [GdsToggleControlBase] })
 export class GdsRadio extends GdsElement {
-  static styles = [styles]
+  static styles = [rbcbToggleStyles, styles]
 
   /**
    * The label displayed next to the radio button.
@@ -89,22 +90,13 @@ export class GdsRadio extends GdsElement {
     }
   }
 
-  @watch('disabled')
-  private _handleDisabledChange() {
-    if (this.disabled) {
-      this.setAttribute('inert', '')
-    } else {
-      this.removeAttribute('inert')
-    }
-  }
-
   #handleClick = (e: Event) => {
     if (this.disabled || !this.value || !this.label) return
     e.preventDefault()
 
     this.checked = true
     this.focus()
-    this.dispatchEvent(new Event('gds-radio-change', { bubbles: true }))
+    this.dispatchEvent(new Event('input', { bubbles: true }))
   }
 
   #handleKeyDown = (e: KeyboardEvent) => {
@@ -113,22 +105,24 @@ export class GdsRadio extends GdsElement {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       this.checked = true
-      this.dispatchEvent(new Event('gds-radio-change', { bubbles: true }))
+      this.dispatchEvent(new Event('input', { bubbles: true }))
     }
   }
 
   render() {
     return html`
-      <gds-selection-field-label
+      <gds-toggle-control-base
         supporting-text=${this.supportingText}
         label=${this.label}
         type="radio"
       >
-        <div class="radio">
-          <div class="state"></div>
-          <div class="disc"></div>
-        </div>
-      </gds-selection-field-label>
+        ${radioToggle({
+          checked: this.checked,
+          disabled: this.disabled,
+          indeterminate: false,
+          invalid: this.invalid,
+        })}
+      </gds-toggle-control-base>
     `
   }
 }

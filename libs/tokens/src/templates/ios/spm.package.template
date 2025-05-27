@@ -1,7 +1,7 @@
 // swift-tools-version: 5.10
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 //
-<%= fileHeader({file, commentStyle: 'short'}) %>
+<%= header %>
 import PackageDescription
 
 let package = Package(
@@ -16,7 +16,7 @@ let package = Package(
     targets: [
         <%= options.targets.map(function(target) {
             var targetString = '.target(\n            name: "' + target + '",\n            dependencies: [],\n            resources: [\n                '
-            targetString += options.resources.map(function(resource) {
+            targetString += options.resources?.map(function(resource) {
                 return '.process("' + resource + '")'
             }).join(',\n                ')
             targetString += '\n            ]\n        )'

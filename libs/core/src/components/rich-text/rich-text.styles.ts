@@ -2,8 +2,8 @@ import { css } from 'lit'
 
 export const styles = css`
   :host {
-    font-size: var(--gds-text-size-body-m);
-    line-height: var(--gds-text-line-height-body-m);
+    font-size: var(--gds-sys-text-size-body-m);
+    line-height: var(--gds-sys-text-line-height-body-m);
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
     letter-spacing: 0.0125rem;
@@ -16,8 +16,8 @@ export const styles = css`
   h4,
   h5,
   h6 {
-    margin-top: var(--gds-space-2xl);
-    margin-bottom: var(--gds-space-xs);
+    margin-top: var(--gds-sys-space-2xl);
+    margin-bottom: var(--gds-sys-space-xs);
   }
 
   :is(h1, h2, h3, h4, h5, h6):first-child {
@@ -50,7 +50,7 @@ export const styles = css`
 
   p {
     margin: 0;
-    margin-bottom: var(--gds-space-xs);
+    margin-bottom: var(--gds-sys-space-xs);
     max-width: 80ch;
   }
 
@@ -65,7 +65,7 @@ export const styles = css`
   hr {
     border: none;
     border-top: var(--default-border);
-    margin: var(--gds-space-xl) 0;
+    margin: var(--gds-sys-space-xl) 0;
   }
 
   s {
@@ -136,18 +136,18 @@ export const styles = css`
   */
   img {
     display: block;
-    border-radius: var(--gds-space-xs);
+    border-radius: var(--gds-sys-space-xs);
   }
 
   figure {
     margin: 0;
     padding: 0;
-    margin-top: var(--gds-space-xl);
+    margin-top: var(--gds-sys-space-xl);
   }
 
   figcaption {
     font-size: smaller;
-    margin-block-start: var(--gds-space-xs);
+    margin-block-start: var(--gds-sys-space-xs);
   }
 
   /*
@@ -159,12 +159,12 @@ export const styles = css`
     border-spacing: 0;
     width: 100%;
     border: var(--default-border);
-    border-radius: var(--gds-space-s);
-    margin-top: var(--gds-space-xl);
+    border-radius: var(--gds-sys-space-s);
+    margin-top: var(--gds-sys-space-xl);
   }
 
   th {
-    font-weight: var(--gds-text-weight-book);
+    font-weight: var(--gds-sys-text-weight-book);
     text-align: left;
     border-bottom: var(--default-border);
     border-left: transparent;
@@ -192,27 +192,27 @@ export const styles = css`
   * -----------------------------------------------------------
   */
   details {
-    border-top: solid var(--gds-space-4xs)
+    border-top: solid var(--gds-sys-space-4xs)
       color-mix(in srgb, currentColor, transparent 90%);
-    font-size: var(--gds-text-size-body-m);
-    line-height: var(--gds-text-line-height-body-m);
+    font-size: var(--gds-sys-text-size-body-m);
+    line-height: var(--gds-sys-text-line-height-body-m);
   }
 
   summary {
-    font-weight: var(--gds-text-weight-regular);
+    font-weight: var(--gds-sys-text-weight-regular);
     list-style: none;
     padding: 0.4lh 0.2ch;
-    font-size: var(--gds-text-size-body-l);
-    line-height: var(--gds-text-line-height-body-l);
+    font-size: var(--gds-sys-text-size-body-l);
+    line-height: var(--gds-sys-text-line-height-body-l);
     color: currentColor;
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
     user-select: none;
-    outline-offset: var(--gds-space-2xs);
+    outline-offset: var(--gds-sys-space-2xs);
     outline-color: currentColor;
-    padding-inline: var(--gds-space-m);
+    padding-inline: var(--gds-sys-space-m);
   }
 
   details summary::-webkit-details-marker {
@@ -220,7 +220,7 @@ export const styles = css`
   }
 
   summary:focus-visible {
-    border-radius: var(--gds-space-2xs);
+    border-radius: var(--gds-sys-space-2xs);
   }
 
   details:hover summary {
@@ -234,8 +234,8 @@ export const styles = css`
     justify-content: center;
     width: 24px;
     height: 24px;
-    font-weight: var(--gds-text-weight-regular);
-    font-size: var(--gds-text-size-body-l);
+    font-weight: var(--gds-sys-text-weight-regular);
+    font-size: var(--gds-sys-text-size-body-l);
   }
 
   details[open] summary::after {
@@ -243,14 +243,14 @@ export const styles = css`
   }
 
   details[open] {
-    border-bottom: var(--gds-space-4xs) solid
+    border-bottom: var(--gds-sys-space-4xs) solid
       color-mix(in srgb, currentColor, transparent 95%);
     padding-bottom: 0.4lh;
     background: color-mix(in srgb, currentColor, transparent 95%);
   }
 
   details[open] > *:not(summary) {
-    margin-left: var(--gds-space-m);
+    margin-left: var(--gds-sys-space-m);
   }
 
   details[open] summary {
@@ -262,9 +262,9 @@ export const styles = css`
   }
 
   details:last-of-type {
-    border-bottom: var(--gds-space-4xs) solid
+    border-bottom: var(--gds-sys-space-4xs) solid
       color-mix(in srgb, currentColor, transparent 90%);
-    margin-bottom: var(--gds-space-xl);
+    margin-bottom: var(--gds-sys-space-xl);
   }
 
   a {
@@ -276,9 +276,10 @@ export const styles = css`
   * Iframe
   */
   iframe {
-    border: var(--gds-space-4xs) solid var(--gds-color-l2-border-primary);
-    border-radius: var(--gds-space-xs);
+    border: var(--gds-sys-space-4xs) solid
+      var(--gds-sys-color-l2-border-primary);
+    border-radius: var(--gds-sys-space-xs);
     min-width: 100%;
-    margin-bottom: var(--gds-space-l);
+    margin-bottom: var(--gds-sys-space-l);
   }
 `

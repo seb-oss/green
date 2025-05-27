@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.6.20
+
+### Patch Changes
+
+- 461504b: Fixing dark mode tokens
+
+## 3.6.19
+
+### Patch Changes
+
+- 3a1f67a: fix naming of css variables in checkboxtokens
+
 ## 3.6.18
 
 ### Patch Changes

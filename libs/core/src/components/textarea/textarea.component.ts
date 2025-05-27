@@ -1,6 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { property, query, queryAsync } from 'lit/decorators.js'
-import { choose } from 'lit/directives/choose.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
 
@@ -13,7 +13,6 @@ import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators'
 import { resizeObserver } from '../../utils/decorators/resize-observer'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import { forwardAttributes } from '../../utils/directives'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -66,6 +65,16 @@ class Textarea extends GdsFormControlElement<string> {
   resizable: 'auto' | 'manual' | 'false' = 'auto'
 
   /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
+
+  /**
    * The maximum number of characters allowed in the field.
    */
   @property({ type: Number })
@@ -84,6 +93,66 @@ class Textarea extends GdsFormControlElement<string> {
    */
   @property({ type: Boolean })
   plain = false
+
+  /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
+  @property()
+  autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters' =
+    'off'
+
+  /** Indicates whether the browser's autocorrect feature is on or off. */
+  @property()
+  autocorrect?: 'off' | 'on'
+
+  /**
+   * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
+   * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.
+   */
+  @property()
+  autocomplete?: string
+
+  /** Indicates that the input should receive focus on page load. */
+  @property({ type: Boolean })
+  autofocus = false
+
+  /** Enables spell checking on the input. */
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: (value) => (!value || value === 'false' ? false : true),
+      toAttribute: (value) => (value ? 'true' : 'false'),
+    },
+  })
+  spellcheck = true
+
+  @property()
+  wrap!: 'hard' | 'soft'
+
+  /** Used to customize the label or icon of the Enter key on virtual keyboards. */
+  @property()
+  enterkeyhint?:
+    | 'enter'
+    | 'done'
+    | 'go'
+    | 'next'
+    | 'previous'
+    | 'search'
+    | 'send'
+
+  /**
+   * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
+   * keyboard on supportive devices.
+   */
+  @property()
+  inputmode?:
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
 
   @queryAsync('textarea')
   private elTextareaAsync!: Promise<HTMLTextAreaElement>
@@ -167,7 +236,10 @@ class Textarea extends GdsFormControlElement<string> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText="${this.showExtendedSupportingText}"
+          >
             <label for="input" slot="label">${this.label}</label>
             <span slot="supporting-text" id="supporting-text">
               ${this.supportingText}
@@ -210,10 +282,6 @@ class Textarea extends GdsFormControlElement<string> {
   protected _getValidityAnchor() {
     return this.elTextarea
   }
-
-  // Any attribute name added here will get forwarded to the native <input> element.
-  #forwardableAttrs = (attr: Attr) =>
-    ['type', 'placeholder', 'required'].includes(attr.name)
 
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
@@ -362,7 +430,15 @@ class Textarea extends GdsFormControlElement<string> {
         aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "
-        ${forwardAttributes(this.#forwardableAttrs)}
+        autocapitalize=${ifDefined(this.autocapitalize)}
+        autocomplete=${ifDefined(this.autocomplete)}
+        autocorrect=${ifDefined(this.autocorrect)}
+        ?autofocus=${this.autofocus}
+        spellcheck=${this.spellcheck}
+        enterkeyhint=${ifDefined(this.enterkeyhint)}
+        inputmode=${ifDefined(this.inputmode)}
+        wrap=${ifDefined(this.wrap)}
+        ?required=${this.required}
       ></textarea>
     `
   }

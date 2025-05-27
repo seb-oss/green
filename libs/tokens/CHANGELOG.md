@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- f0c94cf: Adding android/compose/kotlin as platform
+- a25abee: Adding scss variables output
+
+## 1.0.0
+
+### Major Changes
+
+- 56552ef: **L3 Background Primary:** Changing the l3 background primary to be Green Senior
+- 56552ef: Migrating to Style Dictionary v4 and rewriting token structure and output for a more scaleable implementation.
+
 ## 0.10.3
 
 ### Patch Changes

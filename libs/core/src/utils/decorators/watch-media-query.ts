@@ -1,6 +1,6 @@
 import type { LitElement } from 'lit'
 
-import { isServer } from '../helpers/is-server'
+import { isServer } from '../helpers/platform'
 
 type Handler = (matches: boolean) => void
 
