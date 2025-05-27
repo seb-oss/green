@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './<%= toKebabCase(name) %>'
-import './<%= toBritishTitleCase(name) %>'
-import './<%= toPascalCase(name) %>'
 
 import { html } from 'lit'
 
@@ -25,7 +23,10 @@ const DefaultParams: Story = {
 }
 
 /**
- * TODO: Add documentation
+ * TODO: Add documentation here. Add the export in
+ * green/apps/docs/design/example/index.tsx and the beta
+ * flag in green/libs/core/.storybook/manager.ts to see
+ * this story file in the menu of the core storybook.
  */
 export const <%= toPascalCase(name) %>: Story = {
   ...DefaultParams,
