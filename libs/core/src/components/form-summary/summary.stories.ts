@@ -2,13 +2,13 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 import './index.ts'
-import '../../datepicker/index.ts'
-import '../../dropdown/index.ts'
-import '../../input/index.ts'
-import '../../icon/icons/rocket.ts'
+import '../datepicker/index.ts'
+import '../dropdown/index.ts'
+import '../input/index.ts'
+import '../icon/icons/rocket.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form/summary)
@@ -20,7 +20,7 @@ import '../../icon/icons/rocket.ts'
  * in a consolidated manner. It provides a clear indication of what went wrong and what needs to be corrected.
  */
 const meta: Meta = {
-  title: 'Components/Form/Validation/Summary',
+  title: 'Components/Form Summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',
