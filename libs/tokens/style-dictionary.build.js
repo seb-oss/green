@@ -154,7 +154,7 @@ await Promise.all(
             files: [
               {
                 format: 'json/figma',
-                destination: 'figma-colours.json',
+                destination: `figma-colours.${theme}.json`,
                 filter: 'is-color',
               },
             ],

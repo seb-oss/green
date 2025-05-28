@@ -1,0 +1,168 @@
+{
+  "sys": {
+    "color": {
+      "L1": {
+        "L1-01": {
+          "value": "{sys.color.background.01}",
+          "type": "color"
+        },
+        "L1-02": {
+          "value": "{sys.color.background.02}",
+          "type": "color"
+        },
+        "L1-brand-01": {
+          "value": "{sys.color.background.03}",
+          "type": "color"
+        },
+        "L1-inversed": {
+          "value": "{sys.color.background.04}",
+          "type": "color"
+        }
+      },
+      "L2": {
+        "L2-01": {
+          "value": "{sys.color.background.05}",
+          "type": "color"
+        },
+        "L2-02": {
+          "value": "{sys.color.background.06}",
+          "type": "color"
+        },
+        "L2-03": {
+          "value": "{sys.color.background.07}",
+          "type": "color"
+        },
+        "L2-brand-01": {
+          "value": "{sys.color.background.08}",
+          "type": "color"
+        },
+        "L2-brand-02": {
+          "value": "{sys.color.background.09}",
+          "type": "color"
+        },
+        "L2-positive-01": {
+          "value": "{sys.color.background.10}",
+          "type": "color"
+        },
+        "L2-negative-01": {
+          "value": "{sys.color.background.11}",
+          "type": "color"
+        },
+        "L2-warning-01": {
+          "value": "{sys.color.background.12}",
+          "type": "color"
+        },
+        "L2-information-01": {
+          "value": "{sys.color.background.13}",
+          "type": "color"
+        },
+        "L2-notice-01": {
+          "value": "{sys.color.background.14}",
+          "type": "color"
+        }
+      },
+      "L3": {
+        "L3-brand-01": {
+          "value": "{sys.color.background.15}",
+          "type": "color"
+        },
+        "L3-brand-02": {
+          "value": "{sys.color.background.16}",
+          "type": "color"
+        },
+        "L3-brand-03": {
+          "value": "{sys.color.background.17}",
+          "type": "color"
+        },
+        "L3-01": {
+          "value": "{sys.color.background.18}",
+          "type": "color"
+        },
+        "L3-02": {
+          "value": "{sys.color.background.19}",
+          "type": "color"
+        },
+        "L3-03": {
+          "value": "{sys.color.background.20}",
+          "type": "color"
+        },
+        "L3-04": {
+          "value": "{sys.color.background.21}",
+          "type": "color"
+        },
+        "L3-positive-01": {
+          "value": "{sys.color.background.22}",
+          "type": "color"
+        },
+        "L3-positive-02": {
+          "value": "{sys.color.background.23}",
+          "type": "color"
+        },
+        "L3-positive-03": {
+          "value": "{sys.color.background.24}",
+          "type": "color"
+        },
+        "L3-negative-01": {
+          "value": "{sys.color.background.25}",
+          "type": "color"
+        },
+        "L3-negative-02": {
+          "value": "{sys.color.background.26}",
+          "type": "color"
+        },
+        "L3-negative-03": {
+          "value": "{sys.color.background.27}",
+          "type": "color"
+        },
+        "L3-notice-01": {
+          "value": "{sys.color.background.28}",
+          "type": "color"
+        },
+        "L3-notice-02": {
+          "value": "{sys.color.background.29}",
+          "type": "color"
+        },
+        "L3-notice-03": {
+          "value": "{sys.color.background.30}",
+          "type": "color"
+        },
+        "L3-warning-01": {
+          "value": "{sys.color.background.31}",
+          "type": "color"
+        },
+        "L3-warning-02": {
+          "value": "{sys.color.background.32}",
+          "type": "color"
+        },
+        "L3-warning-03": {
+          "value": "{sys.color.background.33}",
+          "type": "color"
+        },
+        "L3-information-01": {
+          "value": "{sys.color.background.34}",
+          "type": "color"
+        },
+        "L3-information-02": {
+          "value": "{sys.color.background.35}",
+          "type": "color"
+        },
+        "L3-information-03": {
+          "value": "{sys.color.background.36}",
+          "type": "color"
+        },
+        "L3-disabled-01": {
+          "value": "{sys.color.background.37}",
+          "type": "color"
+        },
+        "L3-disabled-02": {
+          "value": "{sys.color.background.38}",
+          "type": "color"
+        },
+        "L3-disabled-03": {
+          "value": "{sys.color.background.39}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}
