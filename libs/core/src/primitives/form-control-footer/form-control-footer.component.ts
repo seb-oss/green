@@ -4,6 +4,7 @@ import { when } from 'lit/directives/when.js'
 import { GdsBadge } from '../../components/badge/badge.component'
 import { IconTriangleExclamation } from '../../components/icon/icons/triangle-exclamation.component'
 import { GdsElement } from '../../gds-element'
+import { watch } from '../../utils/decorators/watch.js'
 import {
   gdsCustomElement,
   html,
@@ -25,22 +26,18 @@ export class GdsFormControlFooter extends GdsElement {
   @property()
   errorMessage?: string
 
-  updated(changedProperties: Map<string, unknown>) {
-    super.updated(changedProperties)
-    if (
-      changedProperties.has('errorMessage') ||
-      changedProperties.has('charCounter')
-    ) {
-      this.classList.toggle('visually-hidden', !this.errorMessage)
-    }
+  @watch('charCounter')
+  @watch('errorMessage')
+  private _handleVisibilityChange() {
+    this.classList.toggle(
+      'visually-hidden',
+      !this.errorMessage && !this.charCounter,
+    )
   }
 
   connectedCallback(): void {
     super.connectedCallback()
-
-    if (!this.errorMessage && !this.charCounter) {
-      this.classList.add('visually-hidden')
-    }
+    this._handleVisibilityChange()
   }
 
   render() {
