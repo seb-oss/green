@@ -52,8 +52,15 @@ const DefaultParams: Story = {
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) =>
-    html`<form style="width: 450px">
-      <gds-flex flex-direction="column" gap="m">
+    html`<form style="width: 450px" novalidate>
+      <gds-card
+        display="flex"
+        flex-direction="column"
+        gap="m"
+        variant="secondary"
+        border-color="primary"
+      >
+        <gds-text tag="h2">Launch control</gds-text>
         <gds-dropdown
           label="Astronaut"
           .validator=${{
@@ -98,14 +105,14 @@ export const Usage: Story = {
           }}
         ></gds-input>
         <gds-form-summary reactive></gds-form-summary>
-        <gds-flex gap="m">
+        <gds-flex gap="m" justify-content="center" margin="s 0 0 0">
+          <gds-button type="reset" rank="tertiary">Reset</gds-button>
           <gds-button type="submit">
             Launch
             <gds-icon-rocket slot="trail"></gds-icon-rocket>
           </gds-button>
-          <gds-button type="reset">Reset</gds-button>
         </gds-flex>
-      </gds-flex>
+      </gds-card>
     </form>`,
 }
 
@@ -117,7 +124,7 @@ export const Usage: Story = {
 export const ManualUpdate: Story = {
   ...DefaultParams,
   render: (args) =>
-    html`<form style="width: 450px">
+    html`<form style="width: 450px" novalidate>
       <gds-form-summary id="summary"></gds-form-summary>
       <gds-flex flex-direction="column" gap="m" align-items="start">
         <gds-input

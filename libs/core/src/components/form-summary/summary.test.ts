@@ -6,6 +6,8 @@ import type { GdsFormSummary } from '@sebgroup/green-core/components/form-summar
 import '@sebgroup/green-core/components/form-summary'
 import '@sebgroup/green-core/components/dropdown'
 
+import sinon from 'sinon'
+
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
@@ -71,35 +73,58 @@ describe('<gds-form-summary>', () => {
           ?.textContent.trim(),
       ).to.equal('Error message')
     })
+
+    it('should render list items in non-reactive mode when refresh() is called', async () => {
+      const formEl = await fixture(
+        html`<form>
+          <gds-dropdown
+            .errorMessage=${'Error message'}
+            .invalid=${true}
+            label="Dropdown label"
+            id="dropdown"
+          ></gds-dropdown>
+          <gds-form-summary id="summary"></gds-form-summary>
+        </form>`,
+      )
+      const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
+      const dropdownEl = formEl.querySelector('#dropdown') as GdsDropdown
+
+      await dropdownEl.updateComplete
+      await summaryEl.updateComplete
+
+      expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+
+      dropdownEl.invalid = false
+
+      expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
+
+      summaryEl.refresh()
+      await summaryEl.updateComplete
+
+      expect(summaryEl.shadowRoot?.querySelector('li')).to.not.exist
+    })
   })
 
-  it('should render list items in non-reactive mode when refresh() is called', async () => {
-    const formEl = await fixture(
-      html`<form>
-        <gds-dropdown
-          .errorMessage=${'Error message'}
-          .invalid=${true}
-          label="Dropdown label"
-          id="dropdown"
-        ></gds-dropdown>
-        <gds-form-summary id="summary"></gds-form-summary>
-      </form>`,
-    )
-    const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
-    const dropdownEl = formEl.querySelector('#dropdown') as GdsDropdown
+  describe('API', () => {
+    it('should return the number of errors from the errorCount getter', async () => {
+      const formEl = await fixture(
+        html`<form>
+          <gds-dropdown
+            .errorMessage=${'Error message'}
+            .invalid=${true}
+            label="Dropdown label"
+            id="dropdown"
+          ></gds-dropdown>
+          <gds-form-summary id="summary" reactive></gds-form-summary>
+        </form>`,
+      )
+      const summaryEl = formEl.querySelector('#summary') as GdsFormSummary
+      const dropdownEl = formEl.querySelector('#dropdown') as GdsDropdown
 
-    await dropdownEl.updateComplete
-    await summaryEl.updateComplete
+      await dropdownEl.updateComplete
+      await summaryEl.updateComplete
 
-    expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
-
-    dropdownEl.invalid = false
-
-    expect(summaryEl.shadowRoot?.querySelector('li')).to.exist
-
-    summaryEl.refresh()
-    await summaryEl.updateComplete
-
-    expect(summaryEl.shadowRoot?.querySelector('li')).to.not.exist
+      expect(summaryEl.errorCount).to.equal(1)
+    })
   })
 })
