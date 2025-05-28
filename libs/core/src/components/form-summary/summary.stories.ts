@@ -147,3 +147,26 @@ export const ManualUpdate: Story = {
       </gds-flex>
     </form> `,
 }
+
+/**
+ * `gds-form-summary` can also be used with native controls by specifying label and error message as data attributes on the control.
+ * Any control that has `aria-invalid` set to `true` will be included in the summary.
+ */
+export const NativeControls: Story = {
+  ...DefaultParams,
+  render: (args) =>
+    html`<form style="width: 450px">
+      <gds-flex flex-direction="column" gap="m">
+        <label for="designation">Designation</label>
+        <input
+          id="designation"
+          type="text"
+          aria-invalid="true"
+          data-label="Designation"
+          data-errormessage="A designation is required"
+          required
+        />
+        <gds-form-summary id="summary"></gds-form-summary>
+      </gds-flex>
+    </form> `,
+}
