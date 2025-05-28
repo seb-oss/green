@@ -1,9 +1,9 @@
 import { expect } from '@esm-bundle/chai'
 import { fixture, html as testingHtml } from '@open-wc/testing'
 
-import type { GdsFormSummary } from '@sebgroup/green-core/components/form/summary'
+import type { GdsFormSummary } from '@sebgroup/green-core/components/form-summary'
 
-import '@sebgroup/green-core/components/form/summary'
+import '@sebgroup/green-core/components/form-summary'
 import '@sebgroup/green-core/components/dropdown'
 
 import type { GdsDropdown } from '@sebgroup/green-core/components/dropdown'
