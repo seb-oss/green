@@ -52,6 +52,20 @@ export class GdsFormSummary extends GdsElement {
     return this.#getErrorControls().length
   }
 
+  /**
+   * Focuses the first focusable element in the summary.
+   */
+  focus(options?: FocusOptions): void {
+    this._elRoot.then((el) => {
+      const firstFocusable = el.querySelector(
+        '[gds-element="gds-button"]',
+      ) as GdsFormControlElement | null
+      if (firstFocusable) {
+        firstFocusable.focus(options)
+      }
+    })
+  }
+
   @queryAsync('#root') private _elRoot!: Promise<GdsCard>
 
   #form?: HTMLFormElement
@@ -120,7 +134,6 @@ export class GdsFormSummary extends GdsElement {
                 (el: GdsFormControlElement, idx) =>
                   html`<li ?inert=${!(el.ariaInvalid === 'true' || el.invalid)}>
                     <gds-card
-                      role="link"
                       display="flex"
                       padding="s"
                       flex-direction="row"
@@ -132,6 +145,7 @@ export class GdsFormSummary extends GdsElement {
                       background="transparent; hover: negative/.2"
                       style="cursor: pointer"
                       border-width="0"
+                      border-radius="xs"
                       margin="0 -xs"
                       @click=${(e: MouseEvent) => {
                         e.preventDefault()

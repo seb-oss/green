@@ -90,10 +90,7 @@ export const GreenCoreFormExample = () => {
 
     summary.refresh()
     if (summary.errorCount > 0) {
-      summary.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
+      summary.focus()
     }
   }
 
