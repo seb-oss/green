@@ -244,7 +244,12 @@ export class GdsPopover extends GdsElement {
     // This should be removed in the future if/when the VirtualKeyboard API is suported on Safari.
     this.addEventListener('focusin', (e: FocusEvent) => {
       const t = e.target as HTMLElement
-      if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
+
+      if (
+        t.tagName === 'INPUT' ||
+        t.tagName === 'TEXTAREA' ||
+        t.tagName === this.tagName
+      ) {
         this._isVirtKbVisible = true
       } else {
         this._isVirtKbVisible = false
