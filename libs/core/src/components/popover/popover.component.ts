@@ -245,11 +245,7 @@ export class GdsPopover extends GdsElement {
     this.addEventListener('focusin', (e: FocusEvent) => {
       const t = e.target as HTMLElement
 
-      if (
-        t.tagName === 'INPUT' ||
-        t.tagName === 'TEXTAREA' ||
-        t.tagName === this.tagName
-      ) {
+      if (t === this || t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
         this._isVirtKbVisible = true
       } else {
         this._isVirtKbVisible = false
