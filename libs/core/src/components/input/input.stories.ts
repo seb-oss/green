@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './index.ts'
 
+import type { GdsFormControlElement } from '../form/form-control.ts'
 import type { GdsInput } from './index.ts'
 
 import '../badge'
@@ -328,7 +329,9 @@ export const Validation: Story = {
           supporting-text="Label support text"
           value=" "
           .validator=${{
-            validate: (el: any) => {
+            validate: (
+              el: GdsFormControlElement,
+            ): [ValidityState, string] | undefined => {
               if (el.value === '')
                 return [
                   {
@@ -356,14 +359,18 @@ export const Validation: Story = {
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </span>
         </gds-input>
+
         <gds-input
           label="Label"
           supporting-text="Label support text"
           value="Incorrect value"
           clearable
           .invalid=${true}
+          error-message="This displays if the input is invalid."
           .validator=${{
-            validate: (el: any) => {
+            validate: (
+              el: GdsFormControlElement,
+            ): [ValidityState, string] | undefined => {
               if (el.value === '')
                 return [
                   {
@@ -371,7 +378,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Error message.',
+                  'This displays if the input doesn`t have any value.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -384,7 +391,6 @@ export const Validation: Story = {
                 ]
             },
           }}
-          clearable
         >
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         </gds-input>
