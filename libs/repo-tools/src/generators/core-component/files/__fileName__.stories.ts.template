@@ -23,8 +23,7 @@ const DefaultParams: Story = {
 }
 
 /**
- * TODO: Add documentation here. Add the export in
- * green/apps/docs/design/example/index.tsx and the beta
+ * TODO: Add documentation here. Add the beta
  * flag in green/libs/core/.storybook/manager.ts to see
  * this story file in the menu of the core storybook.
  */
