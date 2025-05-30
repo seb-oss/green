@@ -35,6 +35,8 @@ await Promise.all(
       const config = {
         source: [
           __dirname + `/src/tokens/${theme}/**/*.ref.json`,
+          __dirname +
+            `/src/tokens/${theme}/**/*.${colorScheme}.foundation.json`,
           __dirname + `/src/tokens/${theme}/**/tokens.base.json`,
           __dirname + `/src/tokens/${theme}/**/*.typography.json`,
           __dirname + `/src/tokens/${theme}/**/*.comfortable.json`,

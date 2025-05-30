@@ -2,27 +2,27 @@
   "sys": {
     "color": {
       "state": {
-        "01": {
+        "dark-hover": {
           "value": "{ref.color.grey.13}",
           "type": "color"
         },
-        "02": {
+        "dark-pressed": {
           "value": "{ref.color.grey.20}",
           "type": "color"
         },
-        "03": {
+        "light-hover": {
           "value": "{ref.color.grey.17}",
           "type": "color"
         },
-        "04": {
+        "light-pressed": {
           "value": "{ref.color.grey.3}",
           "type": "color"
         },
-        "05": {
+        "positive-hover": {
           "value": "{ref.color.white}",
           "type": "color"
         },
-        "06": {
+        "positive-pressed": {
           "value": "{ref.color.grey.19}",
           "type": "color"
         },
