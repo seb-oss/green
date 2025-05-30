@@ -25,6 +25,7 @@ const betaItems = {
   Datepicker: true,
   Divider: true,
   Flex: true,
+  'Form Summary': true,
   Grid: true,
   Link: true,
   Image: true,

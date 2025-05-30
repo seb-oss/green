@@ -236,6 +236,7 @@ export abstract class GdsFormControlElement<ValueT = any>
     if (!this.validity.valid) e.preventDefault()
   }
 
+  // TODO: This needs to be handled on a component by component basis, since it's not always the validity anchor that should be the focus reciever.
   focus(options?: FocusOptions | undefined): void {
     this._getValidityAnchor().focus(options)
   }

@@ -15,14 +15,17 @@
     </div>
     <div style="flex: 1"></div>
   </gds-flex>
+
   <gds-flex gap="l" max-width="1000px" margin="0 auto">
     <gds-card
-      variant="primary"
+      variant="secondary"
+      border-color="primary"
       flex="1"
       [class.card]="designVersion === '2016'"
     >
       <form [formGroup]="simpleForm">
         <gds-flex flex-direction="column" gap="m">
+          <gds-form-summary reactive></gds-form-summary>
           <!-- Because we've imported the NggCoreFormsModule, we can use the Green Core form controls
              just like regular HTML controls. Just set the formControlName to the matching field in
              your reactive form object.
@@ -30,7 +33,7 @@
              Additionally, we can supply the error message to the `errorMessage` property of the form control.
              This will render in red underneath the input field if the control is invalid.
 
-             Other than that, not much is differnt from using regular HTML controls. -->
+             Other than that, not much is different from using regular HTML controls. -->
           <gds-input
             formControlName="name"
             label="Name"
@@ -135,6 +138,7 @@
             value="terms"
             [errorMessage]="getError(simpleForm.get('singleCheckbox'))"
           ></gds-checkbox>
+          <gds-form-summary></gds-form-summary>
           <gds-flex gap="m">
             <gds-button type="submit">Submit</gds-button>
             <gds-button type="reset" rank="secondary">Reset</gds-button>
