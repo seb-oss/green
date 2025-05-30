@@ -23,9 +23,10 @@ const DefaultParams: Story = {
 }
 
 /**
- * TODO: Add documentation here. Add the beta
- * flag in green/libs/core/.storybook/manager.ts to see
- * this story file in the menu of the core storybook.
+ * TODO: Add documentation here. Also add the beta
+ * flag in green/libs/core/.storybook/manager.ts to
+ * mark the component as beta in the menu of the
+ * core storybook.
  */
 export const <%= toPascalCase(name) %>: Story = {
   ...DefaultParams,
