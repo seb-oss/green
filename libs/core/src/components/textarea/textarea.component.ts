@@ -265,18 +265,19 @@ class Textarea extends GdsFormControlElement<string> {
         this.#shouldShowFooter(),
         () =>
           html`<gds-form-control-footer
-            lass="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars &&
-            this.maxlength - (this.value?.length || 0)}
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            id="footer"
+            class="size-${this.size}"
+            .charCounter=${this.#shouldShowRemainingChars
+              ? this.maxlength - (this.value?.length || 0)
+              : undefined}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
   }
 
   #shouldShowFooter() {
-    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+    return !this.plain
   }
 
   protected _getValidityAnchor() {
@@ -429,6 +430,7 @@ class Textarea extends GdsFormControlElement<string> {
         class="native-control resize-${this.resizable}"
         aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
+        aria-errormessage="footer"
         placeholder=" "
         autocapitalize=${ifDefined(this.autocapitalize)}
         autocomplete=${ifDefined(this.autocomplete)}

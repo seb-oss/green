@@ -280,8 +280,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     return html` <gds-form-control-footer
       id="footer"
       class="size-${this.size}"
-      .validationMessage=${this.invalid &&
-      (this.errorMessage || this.validationMessage)}
+      .errorMessage=${this.invalid ? this.errorMessage : undefined}
     >
     </gds-form-control-footer>`
   }
