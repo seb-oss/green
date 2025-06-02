@@ -4,6 +4,7 @@ import { when } from 'lit/directives/when.js'
 import { GdsBadge } from '../../components/badge/badge.component'
 import { IconTriangleExclamation } from '../../components/icon/icons/triangle-exclamation.component'
 import { GdsElement } from '../../gds-element'
+import { watch } from '../../utils/decorators/watch.js'
 import {
   gdsCustomElement,
   html,
@@ -23,24 +24,38 @@ export class GdsFormControlFooter extends GdsElement {
   charCounter?: number
 
   @property()
-  validationMessage?: string
+  errorMessage?: string
+
+  @watch('charCounter')
+  @watch('errorMessage')
+  private _handleVisibilityChange() {
+    this.classList.toggle(
+      'visually-hidden',
+      !this.errorMessage && !this.charCounter,
+    )
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this._handleVisibilityChange()
+  }
 
   render() {
     return html`<div aria-live="polite">
       <div class="error-message">
         <slot name="message"
           >${when(
-            this.validationMessage,
+            this.errorMessage,
             () => html`
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.validationMessage}
+              ${this.errorMessage}
             `,
           )}</slot
         >
       </div>
-      <div class="char-counter">
+      <div class="char-counter" aria-hidden="true">
         ${when(Number.isInteger(this.charCounter), () =>
           this.#renderRemainingCharsBadge(this.charCounter!),
         )}

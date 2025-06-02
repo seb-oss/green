@@ -344,7 +344,10 @@ class Datepicker extends GdsFormControlElement<Date> {
       ${when(
         this.#shouldShowFooter(),
         () =>
-          html`<gds-form-control-footer class="size-${this.size}">
+          html`<gds-form-control-footer
+            class="size-${this.size}"
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
+          >
             ${
               ``
               // @deprecated
@@ -355,7 +358,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage || this.validationMessage}
+              ${this.errorMessage}
             </slot>
           </gds-form-control-footer>`,
       )}
@@ -504,7 +507,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   }
 
   #shouldShowFooter() {
-    return !this.plain && this.invalid
+    return !this.plain
   }
 
   protected _getValidityAnchor(): HTMLElement {
