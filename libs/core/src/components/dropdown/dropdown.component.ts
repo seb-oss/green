@@ -223,16 +223,16 @@ export class GdsDropdown<ValueT = any>
             .reduce(
               (acc: string, cur: ValueT) =>
                 acc +
-                this.options.find((v) => v.value === cur)?.innerHTML +
+                this.options.find((v) => v.value === cur)?.innerText +
                 ', ',
               '',
             )
             .slice(0, -2))
     } else {
-      displayValue = this.options.find((v) => v.selected)?.innerHTML
+      displayValue = this.options.find((v) => v.selected)?.innerText
     }
 
-    return displayValue || this.placeholder?.innerHTML || ''
+    return displayValue || this.placeholder?.innerText || ''
   }
 
   /**
