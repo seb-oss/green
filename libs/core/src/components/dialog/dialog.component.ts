@@ -168,6 +168,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         this._elDialog?.showModal()
         lockBodyScrolling(this)
 
+        document.removeEventListener('click', this.#handleClickOutside)
         requestAnimationFrame(() =>
           document.addEventListener('click', this.#handleClickOutside),
         )
