@@ -6,6 +6,7 @@ import {
   GdsButton,
   GdsCard,
   GdsFlex,
+  GdsRichText,
   GdsText,
   IconHomeOpen,
 } from '@sebgroup/green-core/react'
@@ -50,19 +51,22 @@ export default function ConsentPage() {
         </GdsCard>
       </GdsFlex>
 
-      <GdsCard padding="l">
+      <GdsCard padding="l" max-width="80ch">
         <GdsFlex flex-direction="column" gap="l">
           <GdsText tag="h2">Cookie Preferences</GdsText>
-          <GdsText>
+          <GdsRichText>
             We use essential cookies to ensure the proper operation of this
-            website. Additionally, with your consent, we use tracking cookies to
+            website.
+            <br />
+            <br />
+            Additionally, with your consent, we use tracking cookies to
             understand how you interact with our content and improve your
             experience.
-          </GdsText>
+          </GdsRichText>
 
           <GdsFlex flex-direction="column" align-items="flex-start" gap="m">
             <GdsText tag="strong">
-              Current Status:{' '}
+              Current Status:
               {consent ? 'Tracking Enabled' : 'Essential Cookies Only'}
             </GdsText>
             <GdsButton onClick={() => actions.toggle('UX.Global.Consent')}>

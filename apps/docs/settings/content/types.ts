@@ -34,10 +34,21 @@ export interface ComponentSummary {
   path: string
 }
 
+export interface ComponentColumn {
+  type: 'rich-text' | 'snippet' | 'image'
+  title?: string
+  tag?: string
+  content?: string
+  Snippet?: string
+  caption?: string
+  img?: string
+}
+
 export interface ComponentSection {
-  title: string
-  description: string
-  column_title_tag?: string
+  title?: string
+  tag?: string
+  cols?: '1' | '2' | '3'
+  columns?: ComponentColumn[]
 }
 
 export interface ComponentImage {
@@ -58,7 +69,8 @@ export interface ComponentContent extends BaseContent {
     ios?: boolean
     android?: boolean
   }
-  overview?: Array<{ column: ComponentSection[] }>
+  // overview?: Array<{ column: ComponentSection[] }>
+  overview?: ComponentSection[]
   'ux-text'?: { section: ComponentSection[] }
   accessibility?: { section: ComponentSection[] }
   images?: ComponentImage[]

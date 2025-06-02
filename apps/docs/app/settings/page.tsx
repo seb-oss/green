@@ -5,6 +5,7 @@ import { FormEvent } from 'react'
 import {
   GdsBreadcrumbs,
   GdsCard,
+  GdsDivider,
   GdsFlex,
   GdsRadio,
   GdsRadioGroup,
@@ -69,7 +70,7 @@ export default function Settings() {
         </GdsCard>
       </GdsFlex>
 
-      <GdsCard padding="l">
+      <GdsCard padding="l" max-width="80ch">
         <GdsFlex flex-direction="column" gap="l">
           <GdsText tag="h2">Appearance</GdsText>
           <GdsRadioGroup
@@ -86,6 +87,14 @@ export default function Settings() {
             <GdsRadio value="system" label="System">
               System
             </GdsRadio>
+          </GdsRadioGroup>
+        </GdsFlex>
+        <GdsDivider opacity="0.2"></GdsDivider>
+        <GdsFlex flex-direction="column" gap="l">
+          <GdsText tag="h2">Density</GdsText>
+          <GdsRadioGroup label="Density" value="default">
+            <GdsRadio value="default" label="Default" />
+            <GdsRadio value="comfortable" label="Comfortable" />
           </GdsRadioGroup>
         </GdsFlex>
       </GdsCard>
