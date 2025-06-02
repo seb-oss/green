@@ -60,7 +60,7 @@ await Promise.all(
               {
                 destination: `variables.css`,
                 format: 'css/only-variables',
-                filter: 'no-colors-no-ref',
+                filter: 'base-tokens',
               },
               {
                 destination: `variables.ref.css`,
@@ -74,6 +74,11 @@ await Promise.all(
                 options: {
                   colorScheme: colorScheme,
                 },
+              },
+              {
+                destination: `variables.shadows.css`,
+                format: 'css/shadows',
+                filter: 'is-shadow',
               },
             ],
           },
@@ -93,7 +98,7 @@ await Promise.all(
               {
                 destination: `variables.base.css`,
                 format: 'css/variables',
-                filter: 'no-colors-no-ref',
+                filter: 'base-tokens',
               },
               {
                 destination: `colors.ref.css`,
@@ -124,7 +129,7 @@ await Promise.all(
               {
                 destination: `variables.base.scss`,
                 format: 'scss/variables',
-                filter: 'no-colors-no-ref',
+                filter: 'base-tokens',
               },
               {
                 destination: `_mixin.colors.ref.scss`,
