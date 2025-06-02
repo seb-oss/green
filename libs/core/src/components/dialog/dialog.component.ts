@@ -193,10 +193,11 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
     const returnValue = dialog.returnValue
 
     if (returnValue !== 'prop-change') {
-      if (this.#dispatchCloseEvent(returnValue)) {
-        this.close(returnValue || 'native-close')
+      if (!this.#dispatchCloseEvent(returnValue)) {
         return
       }
+      this.close(returnValue || 'native-close')
+      return
     }
 
     this.close(returnValue || 'native-close')
