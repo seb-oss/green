@@ -3,7 +3,7 @@ import { html } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import { addMonths, isSameMonth, lastDayOfMonth } from 'date-fns'
+import { addMonths, isSameMonth, lastDayOfMonth, subMonths } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
@@ -121,7 +121,7 @@ export class GdsMonthPicker extends GdsElement {
   /**
    * The date that is currently focused.
    */
-  @property()
+  @property({ converter: dateConverter })
   focusedDate = new Date()
 
   /**
@@ -306,7 +306,7 @@ export class GdsMonthPicker extends GdsElement {
         this.focusedMonth -= 1
       handled = true
     } else if (e.key === 'ArrowRight') {
-      if (this.focusedMonth < 11 && this.focusedDate < addMonths(this.max, -1))
+      if (this.focusedMonth < 11 && this.focusedDate < subMonths(this.max, 1))
         this.focusedMonth += 1
       handled = true
     } else if (e.key === 'ArrowUp') {
@@ -314,7 +314,7 @@ export class GdsMonthPicker extends GdsElement {
         this.focusedMonth -= 3
       handled = true
     } else if (e.key === 'ArrowDown') {
-      if (this.focusedMonth < 9 && this.focusedDate < addMonths(this.max, -3))
+      if (this.focusedMonth < 9 && this.focusedDate < subMonths(this.max, 3))
         this.focusedMonth += 3
       handled = true
     } else if (e.key === 'Home') {
@@ -322,6 +322,54 @@ export class GdsMonthPicker extends GdsElement {
       handled = true
     } else if (e.key === 'End') {
       this.focusedMonth = 11
+      handled = true
+    } else if (e.key === 'PageUp') {
+      if (
+        this.focusedMonth == 0 ||
+        this.focusedMonth == 3 ||
+        this.focusedMonth == 6 ||
+        this.focusedMonth == 9
+      ) {
+        this.focusedMonth = 0
+      } else if (
+        this.focusedMonth == 1 ||
+        this.focusedMonth == 4 ||
+        this.focusedMonth == 7 ||
+        this.focusedMonth == 10
+      ) {
+        this.focusedMonth = 1
+      } else if (
+        this.focusedMonth == 2 ||
+        this.focusedMonth == 5 ||
+        this.focusedMonth == 8 ||
+        this.focusedMonth == 11
+      ) {
+        this.focusedMonth = 2
+      }
+      handled = true
+    } else if (e.key === 'PageDown') {
+      if (
+        this.focusedMonth == 0 ||
+        this.focusedMonth == 3 ||
+        this.focusedMonth == 6 ||
+        this.focusedMonth == 9
+      ) {
+        this.focusedMonth = 9
+      } else if (
+        this.focusedMonth == 1 ||
+        this.focusedMonth == 4 ||
+        this.focusedMonth == 7 ||
+        this.focusedMonth == 10
+      ) {
+        this.focusedMonth = 10
+      } else if (
+        this.focusedMonth == 2 ||
+        this.focusedMonth == 5 ||
+        this.focusedMonth == 8 ||
+        this.focusedMonth == 11
+      ) {
+        this.focusedMonth = 11
+      }
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
