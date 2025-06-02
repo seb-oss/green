@@ -106,6 +106,36 @@ describe('<gds-month-picker>', () => {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
       }
     })
+
+    it('should select january when pressing home', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-calendar></gds-calendar>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'Home' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getMonth()).to.equal(0)
+    })
+
+    it('should select december when pressing end', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-calendar></gds-calendar>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'End' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getMonth()).to.equal(11)
+    })
   })
 
   describe('API', () => {
