@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.82.0
+
+### Minor Changes
+
+- 04043ea: **Form control footer:** Hide visually when there is no error message
+
+### Patch Changes
+
+- 9e55957: **Core**: popover causing dropdown to flicker on select
+- 24483a8: **Datepicker:** Fix focus color of the date part spinners
+
 ## 1.81.0
 
 ### Minor Changes
