@@ -1,5 +1,19 @@
 # Changelog
 
+## 5.13.0
+
+### Minor Changes
+
+- 9d223a7: V-Angular: Adding small variant of Dropdown
+- 9d223a7: V-Angular: Adding small variant of Checkbox
+- 9d223a7: V-Angular: Adding small variant of DateInput
+- 9d223a7: V-Angular: Adding small variant of Textarea
+
+### Patch Changes
+
+- 1829e13: Fixed dropdown selection behaviour when typeahead is used
+- 9d223a7: V-Angular: Fixing icon sizing in Date input
+
 ## 5.12.1
 
 ### Patch Changes
