@@ -2,6 +2,7 @@
 'use client'
 
 import { notFound, usePathname } from 'next/navigation'
+import { Snippet } from 'apps/docs/design/atoms/snippet/snippet'
 
 import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
@@ -41,7 +42,6 @@ export function ComponentLayoutClient({
         <Core.GdsText tag="h1" font-size="heading-xl">
           {component.title}
         </Core.GdsText>
-
         <Core.GdsFlex>
           {component.beta && (
             <Core.GdsBadge size="small" variant="notice">
@@ -72,7 +72,15 @@ export function ComponentLayoutClient({
           </Core.GdsFlex>
         )}
 
-        <Core.GdsCard height="280px"></Core.GdsCard>
+        <Core.GdsCard
+          height="280px"
+          justify-content="center"
+          align-items="center"
+        >
+          {component.hero_snippet && (
+            <Snippet slug={component.hero_snippet?.toString()} />
+          )}
+        </Core.GdsCard>
         <Tabs slug={component.slug} />
       </Core.GdsFlex>
 
