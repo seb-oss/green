@@ -96,7 +96,7 @@ export function Snippet({ slug }: SnippetProps) {
   try {
     return (
       <Core.GdsFlex data-snippet={snippetData.slug}>
-        {parse(snippetData.code, options)}
+        <div>{parse(snippetData.code, options)}</div>
       </Core.GdsFlex>
     )
   } catch (err) {
