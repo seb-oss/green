@@ -1,6 +1,13 @@
 .sidebar {
   box-sizing: border-box;
   max-height: calc(100vh - 80px);
+  height: 100vh;
+
+  .list {
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
 
   /* @starting-style {
     opacity: 0;

@@ -84,7 +84,7 @@ export default function Sidebar() {
         return (
           <>
             <HomeButton />
-            <Core.GdsFlex flex-direction="column" gap="2xs">
+            <Core.GdsFlex flex-direction="column" gap="2xs" className="list">
               <Core.GdsText tag="small" padding="m">
                 Components
               </Core.GdsText>
@@ -107,7 +107,7 @@ export default function Sidebar() {
         return (
           <>
             <HomeButton />
-            <Core.GdsFlex flex-direction="column" gap="2xs">
+            <Core.GdsFlex flex-direction="column" gap="2xs" className="list">
               <Core.GdsText tag="small" padding="m">
                 Templates
               </Core.GdsText>
@@ -149,7 +149,12 @@ export default function Sidebar() {
       position="relative"
     >
       {isOpen && (
-        <Core.GdsFlex flex-direction="column" gap="m" width="100%">
+        <Core.GdsFlex
+          flex-direction="column"
+          gap="m"
+          width="100%"
+          height="100%"
+        >
           {renderContent}
         </Core.GdsFlex>
       )}
