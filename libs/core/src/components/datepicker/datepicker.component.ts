@@ -56,10 +56,11 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    if (super.value instanceof Date) {
-      return new Date(super.value)
+    const dateValue = super.value;
+    if (dateValue instanceof Date) {
+      return new Date(dateValue);
     }
-    return undefined
+    return undefined;
   }
   set value(value: Date | undefined) {
     super.value = value
