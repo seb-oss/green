@@ -20,7 +20,7 @@ registerTransitionalStyles()
  * displays a list of choices, one choice per line.
  */
 const meta: Meta = {
-  title: 'Components/Context Menu',
+  title: 'Components/Context menu',
   component: 'gds-context-menu',
   subcomponents: { MenuItem: 'gds-menu-item' },
   parameters: {

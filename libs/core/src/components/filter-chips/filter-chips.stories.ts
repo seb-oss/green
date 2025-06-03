@@ -14,7 +14,7 @@ import './index.ts'
  * The filter chips component allows users to quickly refine the result of data they want to be presented on the page.
  */
 const meta: Meta = {
-  title: 'Components/Filter Chips',
+  title: 'Components/Filter chips',
   component: 'gds-filter-chips',
   subcomponents: { FilterChip: 'gds-filter-chip' },
   parameters: {
