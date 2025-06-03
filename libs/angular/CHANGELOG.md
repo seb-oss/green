@@ -1,5 +1,18 @@
 # Changelog
 
+## 5.13.1
+
+### Patch Changes
+
+- 0acbec7: Dragdrop: Prevet overflow for file name
+- Updated dependencies [1aa919a]
+- Updated dependencies [44dff87]
+- Updated dependencies [41b8a90]
+- Updated dependencies [73e0759]
+- Updated dependencies [4d4704b]
+- Updated dependencies [f1ceb54]
+  - @sebgroup/green-core@1.83.0
+
 ## 5.13.0
 
 ### Minor Changes
