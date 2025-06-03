@@ -1,10 +1,20 @@
 // app/component/[slug]/layout.tsx
 import { use } from 'react'
+import { Metadata, ResolvingMetadata } from 'next'
+import { notFound } from 'next/navigation'
 
-import { fetchComponentsList } from '../../../settings/content/api'
+import {
+  fetchComponentContent,
+  fetchComponentsList,
+} from '../../../settings/content/api'
 import { ComponentLayoutClient } from './layout.client'
 
 export const dynamic = 'force-static'
+
+interface Props {
+  params: { slug: string }
+  children: React.ReactNode
+}
 
 export async function generateStaticParams() {
   const { components } = await fetchComponentsList()
@@ -13,12 +23,35 @@ export async function generateStaticParams() {
   }))
 }
 
-interface LayoutProps {
-  children: React.ReactNode
-  params: Promise<{ slug: string }>
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { components } = await fetchComponentsList()
+  const componentSummary = components.find(
+    (component) => component.slug === params.slug,
+  )
+
+  if (!componentSummary) {
+    notFound()
+  }
+
+  const component = await fetchComponentContent(componentSummary.path)
+
+  return {
+    title: `${component.title} — Green Design System`,
+    description: component.summary || '',
+    openGraph: {
+      title: `${component.title} — Green Design System`,
+      description: component.summary || '',
+    },
+    keywords: [...(component.tags || []), ...(component.category || [])].join(
+      ', ',
+    ),
+  }
 }
 
-export default function Layout({ children, params }: LayoutProps) {
-  const { slug } = use(params)
+export default function Layout({ children, params }: Props) {
+  const { slug } = params
   return <ComponentLayoutClient slug={slug}>{children}</ComponentLayoutClient>
 }
