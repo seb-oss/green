@@ -42,12 +42,44 @@ export function ComponentLayoutClient({
         <Core.GdsText tag="h1" font-size="heading-xl">
           {component.title}
         </Core.GdsText>
-        <Core.GdsFlex>
-          {component.beta && (
-            <Core.GdsBadge size="small" variant="notice">
-              BETA
-            </Core.GdsBadge>
-          )}
+        <Core.GdsFlex gap="l">
+          <Core.GdsFlex gap="xs" flex-direction="column">
+            <Core.GdsText tag="small" color="secondary">
+              Status
+            </Core.GdsText>
+            {component.beta && (
+              <Core.GdsBadge size="small" variant="notice">
+                BETA
+              </Core.GdsBadge>
+            )}
+          </Core.GdsFlex>
+          <Core.GdsFlex gap="xs" flex-direction="column">
+            <Core.GdsText tag="small" color="secondary">
+              Platform
+            </Core.GdsText>
+            {component.platform && (
+              <Core.GdsFlex gap="s">
+                {component.platform.web && (
+                  <Core.GdsFlex align-items="center" gap="4xs">
+                    <Core.IconCompassRound></Core.IconCompassRound>
+                    Web
+                  </Core.GdsFlex>
+                )}
+                {component.platform.ios && (
+                  <Core.GdsFlex align-items="center" gap="4xs">
+                    <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
+                    iOS
+                  </Core.GdsFlex>
+                )}
+                {component.platform.android && (
+                  <Core.GdsFlex align-items="center" gap="4xs">
+                    <Core.IconRobot></Core.IconRobot>
+                    Android
+                  </Core.GdsFlex>
+                )}
+              </Core.GdsFlex>
+            )}
+          </Core.GdsFlex>
         </Core.GdsFlex>
 
         {component.summary && (
@@ -65,7 +97,7 @@ export function ComponentLayoutClient({
           <Core.GdsFlex gap="s" margin="s 0">
             Tags:
             {component.tags.map((tag) => (
-              <Link key={tag} href={'/components/' + tag}>
+              <Link key={tag} href={'/components/' + tag.toLocaleLowerCase()}>
                 {tag}
               </Link>
             ))}
@@ -81,6 +113,7 @@ export function ComponentLayoutClient({
             <Snippet slug={component.hero_snippet?.toString()} />
           )}
         </Core.GdsCard>
+
         <Tabs slug={component.slug} />
       </Core.GdsFlex>
 
