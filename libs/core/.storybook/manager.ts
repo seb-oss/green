@@ -19,7 +19,7 @@ const betaItems = {
   Divider: true,
   Dropdown: true,
   Flex: true,
-  Form: true,
+  'Form Summary': true,
   Grid: true,
   Image: true,
   Input: true,

@@ -91,6 +91,19 @@ export const CustomButtons: Story = {
  * When `close()` or `show()` is called without a parameter, the event will not be emitted. If a parameter is passed, the
  * event will be emitted with the parameter as the event detail. Also when any of the built-in methods are used to open or
  * close the dialog, the event will be emitted with the parameter as the event detail.
+ *
+ * All the emitted events will have a `detail` object with a reason property that can be used to determine the reason for the event.
+ * The `gds-ui-state` event can also be cancelled to prevent the dialog from closing.
+ *
+ * Possible reasons are:
+ * - `btn-close`: The dialog was closed by the user clicking the close button.
+ * - `btn-cancel`: The dialog was closed by the user clicking the default cancel button.
+ * - `btn-ok`: The dialog was closed by the user clicking the default OK button.
+ * - `native-close`: The dialog was closed by an action native to the HTML dialog element, such as pressing the Escape key.
+ * - `click-outside`: The dialog was closed by the user clicking outside the dialog.
+ * - `slotted-trigger`: The dialog was opened by the user clicking the slotted trigger button.
+ *
+ * The reason can also be a custom string supplied when calling the `close()` or `show()` methods.
  */
 export const Events: Story = {
   ...DefaultParams,

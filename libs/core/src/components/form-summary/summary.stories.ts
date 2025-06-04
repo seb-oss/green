@@ -2,29 +2,25 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 import './index.ts'
-import '../../datepicker/index.ts'
-import '../../dropdown/index.ts'
-import '../../input/index.ts'
-import '../../icon/icons/rocket.ts'
+import '../datepicker/index.ts'
+import '../dropdown/index.ts'
+import '../input/index.ts'
+import '../icon/icons/rocket.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form/summary)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-errorsummary)
  *
- *
  * When a user attempts to submit a form with errors, this component displays a summary of those errors.
  * Including an error summary greatly assists users in promptly identifying and addressing multiple errors
  * in a consolidated manner. It provides a clear indication of what went wrong and what needs to be corrected.
- *
- * Each form component that contains an error is listed as a row, displaying the name of the field and
- * linking it to the corresponding form element.
  */
 const meta: Meta = {
-  title: 'Components/Form/Validation/Summary',
+  title: 'Components/Form Summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',
@@ -50,13 +46,21 @@ const DefaultParams: Story = {
 /**
  * To use the `gds-form-summary` component, simply place it inside a form element.
  *
- * The suammry component will automatically detect any form elements with validation errors and display them.
+ * In this example we're using a reactive form summary below the form controls. The `reactive` attribute makes the summary
+ * update automatically as the user interacts with the form.
  */
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) =>
-    html`<form style="width: 450px">
-      <gds-flex flex-direction="column" gap="m">
+    html`<form style="width: 450px" novalidate>
+      <gds-card
+        display="flex"
+        flex-direction="column"
+        gap="m"
+        variant="secondary"
+        border-color="primary"
+      >
+        <gds-text tag="h2">Launch control</gds-text>
         <gds-dropdown
           label="Astronaut"
           .validator=${{
@@ -100,16 +104,69 @@ export const Usage: Story = {
             },
           }}
         ></gds-input>
-        <gds-div margin="s 0 s">
-          <gds-form-summary></gds-form-summary>
-        </gds-div>
-        <gds-flex gap="m">
+        <gds-form-summary reactive></gds-form-summary>
+        <gds-flex gap="m" justify-content="center" margin="s 0 0 0">
+          <gds-button type="reset" rank="tertiary">Reset</gds-button>
           <gds-button type="submit">
             Launch
             <gds-icon-rocket slot="trail"></gds-icon-rocket>
           </gds-button>
-          <gds-button type="reset">Reset</gds-button>
         </gds-flex>
-      </gds-flex>
+      </gds-card>
     </form>`,
+}
+
+/**
+ * The `gds-form-summary` component can also be used in a non-reactive way.
+ * In this example, the summary is placed above the form controls and
+ * is updated manually when the user clicks the "Submit" button.
+ */
+export const ManualUpdate: Story = {
+  ...DefaultParams,
+  render: (args) =>
+    html`<form style="width: 450px" novalidate>
+      <gds-form-summary id="summary"></gds-form-summary>
+      <gds-flex flex-direction="column" gap="m" align-items="start">
+        <gds-input
+          label="Designation"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === '')
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A designation is required',
+                ]
+            },
+          }}
+        ></gds-input>
+        <gds-button
+          type="submit"
+          onclick="document.getElementById('summary').refresh()"
+          >Submit</gds-button
+        >
+      </gds-flex>
+    </form> `,
+}
+
+/**
+ * `gds-form-summary` can also be used with native controls by specifying label and error message as data attributes on the control.
+ * Any control that has `aria-invalid` set to `true` will be included in the summary.
+ */
+export const NativeControls: Story = {
+  ...DefaultParams,
+  render: (args) =>
+    html`<form style="width: 450px">
+      <gds-flex flex-direction="column" gap="m">
+        <label for="designation">Designation</label>
+        <input
+          id="designation"
+          type="text"
+          aria-invalid="true"
+          data-label="Designation"
+          data-errormessage="A designation is required"
+          required
+        />
+        <gds-form-summary id="summary"></gds-form-summary>
+      </gds-flex>
+    </form> `,
 }
