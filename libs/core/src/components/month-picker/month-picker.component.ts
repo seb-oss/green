@@ -264,14 +264,17 @@ export class GdsMonthPicker extends GdsElement {
     const month = this.value.getMonth()
 
     // Check if the month is within the min and max range
-    //if (month < this.minMonth || month > this.maxMonth) return -1
+    //if (month < this.min || month > this.max) return -1
 
     return month
   }
 
   #setSelectedMonth(month: number) {
     //this.value = month
-    this.value = new Date(new Date().getFullYear(), month, 1, 12)
+    //console.log('Selected year: ' + this.focusedYear)
+    //console.log('Selected month: ' + month)
+    //this.value = new Date(new Date().getFullYear(), month, 1, 12)
+    this.value = new Date(this.focusedYear, month, 1, 12)
 
     this.dispatchEvent(
       new CustomEvent('change', {
@@ -398,6 +401,8 @@ export class GdsMonthPicker extends GdsElement {
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
+        console.log('Selected year: ' + this.focusedYear)
+        console.log('Selected month: ' + this.focusedMonth)
         this.#setSelectedMonth(this.focusedMonth)
       }
       handled = true

@@ -194,6 +194,7 @@ describe('<gds-month-picker>', () => {
     await sendKeys({ press: 'Enter' })
     await aTimeout(0)
 
+    //console.log('Disabled date: ' + onlyDate(el.value))
     await expect(el.value).to.equal(undefined)
   })
 
