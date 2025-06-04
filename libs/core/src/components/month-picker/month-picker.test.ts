@@ -109,7 +109,7 @@ describe('<gds-month-picker>', () => {
 
     it('should select january when pressing home', async () => {
       const el = await fixture<GdsMonthPicker>(
-        html`<gds-calendar></gds-calendar>`,
+        html`<gds-month-picker></gds-month-picker>`,
       )
       el.focus()
 
@@ -124,7 +124,7 @@ describe('<gds-month-picker>', () => {
 
     it('should select december when pressing end', async () => {
       const el = await fixture<GdsMonthPicker>(
-        html`<gds-calendar></gds-calendar>`,
+        html`<gds-month-picker></gds-month-picker>`,
       )
       el.focus()
 
@@ -138,6 +138,65 @@ describe('<gds-month-picker>', () => {
     })
   })
 
+  it('should select the focused date when pressing enter', async () => {
+    const el = await fixture<GdsMonthPicker>(
+      html`<gds-month-picker
+        min="2025-01-01"
+        max="2025-12-31"
+      ></gds-month-picker>`,
+    )
+    el.focus()
+
+    const focusedDate = new Date('2025-06-01')
+    el.focusedDate = focusedDate
+    //const focusedDate = addDays(new Date(), 7)
+
+    await aTimeout(0)
+    await sendKeys({ press: 'Enter' })
+    await aTimeout(0)
+
+    await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+  })
+
+  it('should select the focused date when pressing space', async () => {
+    const el = await fixture<GdsMonthPicker>(
+      html`<gds-month-picker
+        min="2025-01-01"
+        max="2025-12-31"
+      ></gds-month-picker>`,
+    )
+    el.focus()
+
+    const focusedDate = new Date('2025-06-01')
+    el.focusedDate = focusedDate
+    //const focusedDate = addDays(new Date(), 7)
+
+    await aTimeout(0)
+    await sendKeys({ press: ' ' })
+    await aTimeout(0)
+
+    await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+  })
+
+  it('should not select the focused date when pressing enter if it is disabled', async () => {
+    const el = await fixture<GdsMonthPicker>(
+      html`<gds-month-picker
+        min="2025-01-01"
+        max="2025-06-31"
+      ></gds-month-picker>`,
+    )
+    el.focus()
+
+    const focusedDate = new Date('2025-12-01')
+    el.focusedDate = focusedDate
+
+    await aTimeout(0)
+    await sendKeys({ press: 'Enter' })
+    await aTimeout(0)
+
+    await expect(el.value).to.equal(undefined)
+  })
+
   describe('API', () => {
     it('should default to undefined', async () => {
       const el = await fixture<GdsMonthPicker>(
@@ -146,8 +205,6 @@ describe('<gds-month-picker>', () => {
       expect(el.value).to.equal(undefined)
     })
   })
-
-  //Make more tests here.
 
   // Disable for 2023
   describe('Accessibility', () => {
