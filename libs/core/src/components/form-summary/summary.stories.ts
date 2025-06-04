@@ -20,7 +20,7 @@ import '../icon/icons/rocket.ts'
  * in a consolidated manner. It provides a clear indication of what went wrong and what needs to be corrected.
  */
 const meta: Meta = {
-  title: 'Components/Form Summary',
+  title: 'Components/Form summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',
