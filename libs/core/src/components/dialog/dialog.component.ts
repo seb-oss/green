@@ -31,7 +31,7 @@ registerGlobalScrollLockStyles()
  * @element gds-dialog
  * @status beta
  *
- * @event gds-ui-state - Fired when the dialog is opened or closed
+ * @event gds-ui-state - Fired when the dialog is opened or closed. Can be cancelled to prevent the dialog from closing.
  * @event gds-close - Fired when the dialog is closed
  * @event gds-show - Fired when the dialog is opened
  *
@@ -168,6 +168,11 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         this._elDialog?.showModal()
         lockBodyScrolling(this)
 
+        document.removeEventListener('click', this.#handleClickOutside)
+        requestAnimationFrame(() =>
+          document.addEventListener('click', this.#handleClickOutside),
+        )
+
         // VoiceOver on iOS fails to move focus to the dialog in some cases.
         // This is a workaround to force focus to the dialog.
         if (isIOS) {
@@ -178,6 +183,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
       this.#returnValue = this.#returnValue || 'prop-change'
       this._elDialog?.close(this.#returnValue)
       unlockBodyScrolling(this)
+      document.removeEventListener('click', this.#handleClickOutside)
       this.requestUpdate('open')
     }
   }
@@ -186,9 +192,15 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
     const dialog = e.target as HTMLDialogElement
     const returnValue = dialog.returnValue
 
-    this.close(returnValue || 'native-close')
+    if (returnValue !== 'prop-change') {
+      if (!this.#dispatchCloseEvent(returnValue)) {
+        return
+      }
+      this.close(returnValue || 'native-close')
+      return
+    }
 
-    if (returnValue !== 'prop-change') this.#dispatchCloseEvent(returnValue)
+    this.close(returnValue || 'native-close')
   }
 
   #dispatchCloseEvent = (reason?: string) => {
@@ -199,7 +211,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         composed: false,
       }),
     )
-    this.#dispatchUiStateEvent(reason)
+    return this.#dispatchUiStateEvent(reason)
   }
 
   #dispatchShowEvent = (reason?: string) => {
@@ -210,15 +222,16 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         composed: false,
       }),
     )
-    this.#dispatchUiStateEvent(reason)
+    return this.#dispatchUiStateEvent(reason)
   }
 
   #dispatchUiStateEvent = (reason?: string) => {
-    this.dispatchEvent(
+    return this.dispatchEvent(
       new CustomEvent('gds-ui-state', {
         detail: { reason, open: this.open },
         bubbles: false,
         composed: false,
+        cancelable: true,
       }),
     )
   }
@@ -233,5 +246,26 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
 
   #handleTriggerClick = (e: MouseEvent) => {
     this.show('slotted-trigger')
+  }
+
+  #handleClickOutside = (evt: Event) => {
+    const e = evt as PointerEvent
+    const dialog = this._elDialog
+    const isNotEnterKey = e.clientX > 0 || e.clientY > 0
+
+    if (isNotEnterKey && dialog && this.open) {
+      const rect = dialog.getBoundingClientRect()
+
+      const isInDialog =
+        rect.top <= e.clientY &&
+        e.clientY <= rect.top + rect.height &&
+        rect.left <= e.clientX &&
+        e.clientX <= rect.left + rect.width
+
+      const closeReason = 'click-outside'
+      if (!isInDialog && this.#dispatchCloseEvent(closeReason)) {
+        this.close(closeReason)
+      }
+    }
   }
 }

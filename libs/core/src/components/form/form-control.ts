@@ -139,6 +139,7 @@ export abstract class GdsFormControlElement<ValueT = any>
   }
   set value(value: ValueT | undefined) {
     this._internalValue = value
+    this.#internals.setFormValue(value as any)
   }
   protected _internalValue?: ValueT
 
@@ -217,7 +218,6 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   @watch('value', { waitUntilFirstUpdate: true })
   private __handleValueChange() {
-    this.#internals.setFormValue(this.value as any)
     this.checkValidity()
   }
 
@@ -236,6 +236,7 @@ export abstract class GdsFormControlElement<ValueT = any>
     if (!this.validity.valid) e.preventDefault()
   }
 
+  // TODO: This needs to be handled on a component by component basis, since it's not always the validity anchor that should be the focus reciever.
   focus(options?: FocusOptions | undefined): void {
     this._getValidityAnchor().focus(options)
   }

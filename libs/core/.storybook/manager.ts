@@ -28,6 +28,7 @@ const betaItems = {
   Divider: true,
   Flex: true,
   'Formatted text': true,
+  'Form Summary': true,
   Grid: true,
   Link: true,
   Image: true,
