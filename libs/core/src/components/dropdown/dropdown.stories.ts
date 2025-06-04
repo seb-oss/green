@@ -12,8 +12,7 @@ import '../icon/icons/push.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-dropdown)
  *
- * A dropdown enables the user to choose one or multiple options from a list. It's ideal for
- * situations where there are numerous predetermined choices and space is limited.
+ * A dropdown enables the user to choose one or multiple options from a list.
  *
  * The dropdown can be searchable, allowing users to filter the options by typing in the input
  * field, and it also suports both single and multiple selection.

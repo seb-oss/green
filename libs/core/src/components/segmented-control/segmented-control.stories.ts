@@ -11,7 +11,7 @@ import './index.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-segmented-control)
  *
- * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
+ * SegmentedControl allows users to select a single option, immediately changing the display to reflect their selection. It is used for switching views or view options, not for navigation.
  */
 const meta: Meta = {
   title: 'Components/Segmented control',

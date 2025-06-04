@@ -11,7 +11,7 @@ import './index.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-filter-chip)
  *
- * The filter chips component allows users to quickly refine the result of data they want to be presented on the page.
+ * Filter chip allows users to narrow down the data they want to see on the page.
  */
 const meta: Meta = {
   title: 'Components/Filter chips',

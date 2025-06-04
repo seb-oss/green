@@ -17,7 +17,7 @@ import '../divider'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * A loading indicator component that supports various sizes and display modes.
+ * A spinner is an indeterminate progress indicator.
  *
  * @status beta
  *
