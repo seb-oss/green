@@ -3,7 +3,13 @@ import { html } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import { addMonths, isSameMonth, lastDayOfMonth, subMonths } from 'date-fns'
+import {
+  addMonths,
+  isSameMonth,
+  lastDayOfMonth,
+  setHours,
+  subMonths,
+} from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
@@ -276,7 +282,7 @@ export class GdsMonthPicker extends GdsElement {
     )
   }
 
-  /*#setSelectedDate(date: Date) {
+  #setSelectedDate(date: Date) {
     // Set the time to midday to avoid timezone issues
     const dateOnMidDay = setHours(date, 12)
 
@@ -289,13 +295,12 @@ export class GdsMonthPicker extends GdsElement {
         composed: false,
       }),
     )
-  }*/
+  }
 
   @watch('value')
   private _valueChanged() {
     if (!this.value) return
-    //this.focusedDate = this.value
-    //this.focusedMonth = this.value.getMonth()
+    this.focusedDate = this.value
   }
 
   #handleKeyDown(e: KeyboardEvent) {
@@ -318,57 +323,77 @@ export class GdsMonthPicker extends GdsElement {
         this.focusedMonth += 3
       handled = true
     } else if (e.key === 'Home') {
-      this.focusedMonth = 0
+      if (new Date(this.focusedYear, 0, 1) > this.min) this.focusedMonth = 0
+      else this.focusedMonth = this.min.getMonth()
       handled = true
     } else if (e.key === 'End') {
-      this.focusedMonth = 11
+      if (new Date(this.focusedYear, 11, 1) < this.max) this.focusedMonth = 11
+      else this.focusedMonth = this.max.getMonth()
       handled = true
     } else if (e.key === 'PageUp') {
       if (
-        this.focusedMonth == 0 ||
         this.focusedMonth == 3 ||
         this.focusedMonth == 6 ||
         this.focusedMonth == 9
       ) {
-        this.focusedMonth = 0
+        if (new Date(this.focusedYear, 0, 1) > this.min) this.focusedMonth = 0
+        else if (new Date(this.focusedYear, 3, 1) > this.min)
+          this.focusedMonth = 3
+        else if (new Date(this.focusedYear, 6, 1) > this.min)
+          this.focusedMonth = 6
       } else if (
-        this.focusedMonth == 1 ||
         this.focusedMonth == 4 ||
         this.focusedMonth == 7 ||
         this.focusedMonth == 10
       ) {
-        this.focusedMonth = 1
+        if (new Date(this.focusedYear, 1, 1) > this.min) this.focusedMonth = 1
+        else if (new Date(this.focusedYear, 4, 1) > this.min)
+          this.focusedMonth = 4
+        else if (new Date(this.focusedYear, 7, 1) > this.min)
+          this.focusedMonth = 7
       } else if (
-        this.focusedMonth == 2 ||
         this.focusedMonth == 5 ||
         this.focusedMonth == 8 ||
         this.focusedMonth == 11
       ) {
-        this.focusedMonth = 2
+        if (new Date(this.focusedYear, 2, 1) > this.min) this.focusedMonth = 2
+        else if (new Date(this.focusedYear, 5, 1) > this.min)
+          this.focusedMonth = 5
+        else if (new Date(this.focusedYear, 8, 1) > this.min)
+          this.focusedMonth = 8
       }
       handled = true
     } else if (e.key === 'PageDown') {
       if (
         this.focusedMonth == 0 ||
         this.focusedMonth == 3 ||
-        this.focusedMonth == 6 ||
-        this.focusedMonth == 9
+        this.focusedMonth == 6
       ) {
-        this.focusedMonth = 9
+        if (new Date(this.focusedYear, 9, 1) < this.max) this.focusedMonth = 9
+        else if (new Date(this.focusedYear, 6, 1) < this.max)
+          this.focusedMonth = 6
+        else if (new Date(this.focusedYear, 3, 1) < this.max)
+          this.focusedMonth = 3
       } else if (
         this.focusedMonth == 1 ||
         this.focusedMonth == 4 ||
-        this.focusedMonth == 7 ||
-        this.focusedMonth == 10
+        this.focusedMonth == 7
       ) {
-        this.focusedMonth = 10
+        if (new Date(this.focusedYear, 10, 1) < this.max) this.focusedMonth = 10
+        else if (new Date(this.focusedYear, 7, 1) < this.max)
+          this.focusedMonth = 7
+        else if (new Date(this.focusedYear, 4, 1) < this.max)
+          this.focusedMonth = 4
       } else if (
         this.focusedMonth == 2 ||
         this.focusedMonth == 5 ||
-        this.focusedMonth == 8 ||
-        this.focusedMonth == 11
+        this.focusedMonth == 8
       ) {
-        this.focusedMonth = 11
+        if (new Date(this.focusedYear, 11, 1) < this.max) this.focusedMonth = 11
+        else if (new Date(this.focusedYear, 8, 1) < this.max)
+          this.focusedMonth = 8
+        else if (new Date(this.focusedYear, 2, 1) < this.max)
+          this.focusedMonth = 2
       }
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
