@@ -9,6 +9,8 @@ import MaskCSS from './mask.style'
 /**
  * @element gds-mask
  * @status beta
+ *
+ * The `gds-mask` component is a container that applies gradient background for contrast. This component is experimental, and may change name or be removed in the future.
  */
 @gdsCustomElement('gds-mask')
 export class GdsMask extends GdsFlex {

@@ -17,7 +17,7 @@ import '../../flex'
  * @beta
  */
 const meta: Meta = {
-  title: 'Components/Formatted Text/Number',
+  title: 'Components/Formatted text/Number',
   component: 'gds-formatted-number',
   tags: ['autodocs'],
   argTypes: {
