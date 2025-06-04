@@ -2,43 +2,43 @@
   "sys": {
     "color": {
       "border": {
-        "01": {
+        "interactive": {
           "value": "{ref.color.grey.13}",
           "type": "color"
         },
-        "02": {
+        "subtle-01": {
           "value": "{ref.color.grey.20}",
           "type": "color"
         },
-        "03": {
+        "subtle-02": {
           "value": "{ref.color.grey.17}",
           "type": "color"
         },
-        "04": {
+        "strong": {
           "value": "{ref.color.grey.3}",
           "type": "color"
         },
-        "05": {
+        "inverse": {
           "value": "{ref.color.white}",
           "type": "color"
         },
-        "06": {
+        "information": {
           "value": "{ref.color.grey.19}",
           "type": "color"
         },
-        "07": {
+        "positive": {
           "value": "{ref.color.green.11}",
           "type": "color"
         },
-        "08": {
+        "negative": {
           "value": "{ref.color.red.10}",
           "type": "color"
         },
-        "09": {
+        "warning": {
           "value": "{ref.color.orange.10}",
           "type": "color"
         },
-        "10": {
+        "notice": {
           "value": "{ref.color.blue.10}",
           "type": "color"
         }

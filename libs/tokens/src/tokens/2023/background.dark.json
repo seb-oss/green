@@ -1,7 +1,7 @@
 {
   "sys": {
     "color": {
-      "background": {
+      "document": {
         "01": {
           "value": "{ref.color.grey.30}",
           "type": "color"
@@ -10,151 +10,155 @@
           "value": "{ref.color.grey.25}",
           "type": "color"
         },
-        "03": {
+        "brand-01": {
           "value": "{ref.color.green.27}",
           "type": "color"
         },
-        "04": {
-          "value": "{ref.color.grey.white}",
+        "inversed": {
+          "value": "{ref.color.white}",
           "type": "color"
-        },
-        "05": {
+        }
+      },
+      "surface": {
+        "01": {
           "value": "{ref.color.grey.27}",
           "type": "color"
         },
-        "06": {
+        "02": {
           "value": "{ref.color.grey.30}",
           "type": "color"
         },
-        "07": {
+        "03": {
           "value": "{ref.color.grey.23}",
           "type": "color"
         },
-        "08": {
+        "brand-01": {
           "value": "{ref.color.green.27}",
           "type": "color"
         },
-        "09": {
+        "brand-02": {
           "value": "{ref.color.copper.4}",
           "type": "color"
         },
-        "10": {
+        "positive-01": {
           "value": "{ref.color.green.26}",
           "type": "color"
         },
-        "11": {
+        "negative-01": {
           "value": "{ref.color.red.21}",
           "type": "color"
         },
-        "12": {
+        "warning-01": {
           "value": "{ref.color.orange.21}",
           "type": "color"
         },
-        "13": {
+        "information-01": {
           "value": "{ref.color.grey.26}",
           "type": "color"
         },
-        "14": {
+        "notice-01": {
           "value": "{ref.color.blue.21}",
           "type": "color"
-        },
-        "15": {
+        }
+      },
+      "container": {
+        "brand-01": {
           "value": "{ref.color.grey.8}",
           "type": "color"
         },
-        "16": {
+        "brand-02": {
           "value": "{ref.color.copper.6}",
           "type": "color"
         },
-        "17": {
+        "brand-03": {
           "value": "{ref.color.copper.7}",
           "type": "color"
         },
-        "18": {
+        "01": {
           "value": "{ref.color.grey.8}",
           "type": "color"
         },
-        "19": {
+        "02": {
           "value": "{ref.color.grey.25}",
           "type": "color"
         },
-        "20": {
+        "03": {
           "value": "{ref.color.grey.23}",
           "type": "color"
         },
-        "21": {
+        "04": {
           "value": "{ref.color.grey.3}",
           "type": "color"
         },
-        "22": {
+        "positive-01": {
           "value": "{ref.color.green.24}",
           "type": "color"
         },
-        "23": {
+        "positive-02": {
           "value": "{ref.color.green.25}",
           "type": "color"
         },
-        "24": {
+        "positive-03": {
           "value": "{ref.color.green.26}",
           "type": "color"
         },
-        "25": {
+        "negative-01": {
           "value": "{ref.color.red.17}",
           "type": "color"
         },
-        "26": {
+        "negative-02": {
           "value": "{ref.color.red.19}",
           "type": "color"
         },
-        "27": {
+        "negative-03": {
           "value": "{ref.color.red.20}",
           "type": "color"
         },
-        "28": {
+        "notice-01": {
           "value": "{ref.color.blue.17}",
           "type": "color"
         },
-        "29": {
+        "notice-02": {
           "value": "{ref.color.blue.19}",
           "type": "color"
         },
-        "30": {
+        "notice-03": {
           "value": "{ref.color.blue.20}",
           "type": "color"
         },
-        "31": {
+        "warning-01": {
           "value": "{ref.color.orange.12}",
           "type": "color"
         },
-        "32": {
+        "warning-02": {
           "value": "{ref.color.orange.19}",
           "type": "color"
         },
-        "33": {
+        "warning-03": {
           "value": "{ref.color.orange.20}",
           "type": "color"
         },
-        "34": {
+        "information-01": {
           "value": "{ref.color.grey.8}",
           "type": "color"
         },
-        "35": {
+        "information-02": {
           "value": "{ref.color.grey.24}",
           "type": "color"
         },
-        "36": {
+        "information-03": {
           "value": "{ref.color.grey.20}",
           "type": "color"
         },
-        "37": {
+        "disabled-01": {
           "value": "{ref.color.grey.20}",
           "type": "color"
         },
-        "38": {
+        "disabled-02": {
           "value": "{ref.color.grey.20}",
           "type": "color"
         },
-        "39": {
+        "disabled-03": {
           "value": "{ref.color.grey.16}",
           "type": "color"
         }

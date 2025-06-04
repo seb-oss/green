@@ -3,43 +3,43 @@
     "color": {
       "border": {
         "interactive": {
-          "value": "{sys.color.border.01}",
+          "value": "{ref.color.grey.17}",
           "type": "color"
         },
         "subtle-01": {
-          "value": "{sys.color.border.02}",
+          "value": "{ref.color.grey.7}",
           "type": "color"
         },
         "subtle-02": {
-          "value": "{sys.color.border.03}",
+          "value": "{ref.color.grey.5}",
           "type": "color"
         },
         "strong": {
-          "value": "{sys.color.border.04}",
+          "value": "{ref.color.grey.30}",
           "type": "color"
         },
         "inverse": {
-          "value": "{sys.color.border.05}",
+          "value": "{ref.color.white}",
           "type": "color"
         },
         "information": {
-          "value": "{sys.color.border.06}",
+          "value": "{ref.color.grey.30}",
           "type": "color"
         },
         "positive": {
-          "value": "{sys.color.border.07}",
+          "value": "{ref.color.green.23}",
           "type": "color"
         },
         "negative": {
-          "value": "{sys.color.border.08}",
+          "value": "{ref.color.red.16}",
           "type": "color"
         },
         "warning": {
-          "value": "{sys.color.border.09}",
+          "value": "{ref.color.orange.18}",
           "type": "color"
         },
         "notice": {
-          "value": "{sys.color.border.10}",
+          "value": "{ref.color.blue.17}",
           "type": "color"
         }
       }

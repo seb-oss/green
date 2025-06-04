@@ -35,8 +35,6 @@ await Promise.all(
       const config = {
         source: [
           __dirname + `/src/tokens/${theme}/**/*.ref.json`,
-          __dirname +
-            `/src/tokens/${theme}/**/*.${colorScheme}.foundation.json`,
           __dirname + `/src/tokens/${theme}/**/tokens.base.json`,
           __dirname + `/src/tokens/${theme}/**/*.typography.json`,
           __dirname + `/src/tokens/${theme}/**/*.comfortable.json`,
@@ -156,8 +154,8 @@ await Promise.all(
             files: [
               {
                 format: 'json/figma',
-                destination: `figma-colours.${theme}.json`,
-                filter: 'is-color',
+                destination: `figma-colours.${colorScheme}.json`,
+                filter: 'is-color-no-ref',
               },
             ],
           },

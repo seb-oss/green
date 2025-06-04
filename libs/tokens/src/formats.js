@@ -48,7 +48,7 @@ const formats = {
         dictionary.allTokens
           .map((token) => {
             return `${JSON.stringify({
-              name: token.name,
+              name: token.name.replace('color/', ''),
               value: token.value,
               type: token.type,
             })}`

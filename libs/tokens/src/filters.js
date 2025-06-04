@@ -8,9 +8,6 @@ export default {
   'dark-mode': {
     name: 'dark-mode',
     filter: async (token) => {
-      console.log(token.filePath)
-      console.log(token.filePath.includes('.dark.'))
-
       return token.filePath.includes('.dark.')
     },
   },
