@@ -15,7 +15,7 @@ import '../icon/icons/push.ts'
  * A dropdown enables the user to choose one or multiple options from a list.
  *
  * The dropdown can be searchable, allowing users to filter the options by typing in the input
- * field, and it also suports both single and multiple selection.
+ * field, and it also supports both single and multiple selection.
  */
 const meta: Meta = {
   title: 'Components/Dropdown',
