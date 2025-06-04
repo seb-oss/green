@@ -58,7 +58,7 @@ describe('<gds-month-picker>', () => {
 
       if (new Date().getMonth() > 2) {
         await expect(el.value?.getMonth()).to.equal(
-          addMonths(new Date(), -3).getMonth(),
+          subMonths(new Date(), 3).getMonth(),
         )
       } else {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
@@ -100,7 +100,7 @@ describe('<gds-month-picker>', () => {
 
       if (new Date().getMonth() > 2) {
         await expect(el.value?.getMonth()).to.equal(
-          addMonths(new Date(), -3).getMonth(),
+          subMonths(new Date(), 1).getMonth(),
         )
       } else {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
@@ -211,7 +211,7 @@ describe('<gds-month-picker>', () => {
     it('is accessible', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
-          .focusedDate=${new Date('2025-06-03')}
+          focusedDate="2025-06-03"
           label="Month picker"
         ></gds-month-picker>`,
       )
