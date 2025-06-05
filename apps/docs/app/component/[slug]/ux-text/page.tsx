@@ -9,5 +9,6 @@ interface PageProps {
 
 export default function Page({ params }: PageProps) {
   const { slug } = use(params)
-  return <UXTextClient slug={slug} />
+  return slug
+  // return <UXTextClient slug={slug} />
 }

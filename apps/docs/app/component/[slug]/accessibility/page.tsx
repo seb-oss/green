@@ -9,5 +9,7 @@ interface PageProps {
 
 export default function Page({ params }: PageProps) {
   const { slug } = use(params)
-  return <AccessibilityClient slug={slug} />
+  return slug
+
+  // <AccessibilityClient slug={slug} />
 }
