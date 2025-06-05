@@ -27,17 +27,8 @@ export function SettingsProvider({
   children,
   fallback = null,
 }: SettingsProviderProps) {
-  const [isBrowserReady, setIsBrowserReady] = useState(false)
   const settings = useSettings()
   const toast = useToast()
-
-  useEffect(() => {
-    setIsBrowserReady(true)
-  }, [])
-
-  if (!isBrowserReady) {
-    return fallback || null
-  }
 
   const value = useMemo<SettingsContextType>(
     () => ({

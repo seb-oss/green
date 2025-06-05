@@ -11,6 +11,14 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.navigator = window.navigator || {};
+            window.document = window.document || {};
+          `,
+          }}
+        />
         <App>
           <Root>{children}</Root>
         </App>

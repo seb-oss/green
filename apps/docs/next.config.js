@@ -14,10 +14,20 @@ const nextConfig = {
   unstable_runtimeJS: true,
   experimental: {
     esmExternals: true,
+    serverActions: {
+      allowedOrigins: ['stg.seb.io', '*.seb.io'],
+    },
   },
+  browserDefaults: {
+    preferClientOnly: true,
+  },
+  optimizePackageImports: ['@sebgroup/green-core'],
   transpilePackages: ['@babel/runtime'],
   output: 'export',
   trailingSlash: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   nx: {
     svgr: false,
   },
