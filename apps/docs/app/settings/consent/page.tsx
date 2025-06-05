@@ -13,6 +13,8 @@ import {
 import { Link } from '../../../design/atoms/link/link'
 import { useSettingsContext } from '../../../settings/hooks'
 
+export const dynamic = 'force-dynamic'
+
 export default function ConsentPage() {
   const { settings, actions } = useSettingsContext()
   const consent = settings.UX.Global.Consent
