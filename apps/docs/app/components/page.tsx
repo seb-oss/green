@@ -6,8 +6,9 @@ import Link from 'next/link'
 import * as Core from '@sebgroup/green-core/react'
 import { useContentContext } from '../../settings/content'
 
+export const dynamic = 'force-dynamic'
+
 function calculateScore(text: string, query: string): number {
-  // Implement your scoring logic here
   const normalizedText = text.toLowerCase()
   const normalizedQuery = query.toLowerCase()
   return normalizedText.includes(normalizedQuery) ? 1 : 0
@@ -17,7 +18,6 @@ export default function Components() {
   const { isLoaded, actions } = useContentContext()
   const [query, setQuery] = useState('')
 
-  // Get components using the content hook
   const components = actions.getComponents({
     sort: (a, b) => a.title.localeCompare(b.title),
   })
