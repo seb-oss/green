@@ -2,6 +2,8 @@
 'use client'
 
 import React from 'react'
+import DOMPurify from 'dompurify'
+import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
 import Figure from '../../../design/atoms/figure/figure'
@@ -56,7 +58,13 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
                 {column.title}
               </Core.GdsText>
             )}
-            <Core.GdsText tag="p">{column.content}</Core.GdsText>
+            <Core.GdsRichText
+              dangerouslySetInnerHTML={{
+                __html: column.content
+                  ? DOMPurify.sanitize(marked.parse(column.content) as string)
+                  : '',
+              }}
+            ></Core.GdsRichText>
           </Core.GdsFlex>
         )
 
