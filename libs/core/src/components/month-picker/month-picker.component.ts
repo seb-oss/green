@@ -219,40 +219,48 @@ export class GdsMonthPicker extends GdsElement {
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
-        ${months.map((month, index) => {
-          const cmonth = new Date(this.focusedYear, index, 1)
-          const isOutsideMinMax =
-            (cmonth < this.min || cmonth > this.max) &&
-            !isSameMonth(cmonth, this.min) &&
-            !isSameMonth(cmonth, this.max)
+        ${Array.from({ length: 4 }).map(
+          (_, rowIdx) => html`
+            <tr role="row">
+              ${months
+                .slice(rowIdx * 3, rowIdx * 3 + 3)
+                .map((month, colIdx) => {
+                  const index = rowIdx * 3 + colIdx
+                  if (index >= months.length) return html`<td inert></td>`
+                  const cmonth = new Date(this.focusedYear, index, 1)
+                  const isOutsideMinMax =
+                    (cmonth < this.min || cmonth > this.max) &&
+                    !isSameMonth(cmonth, this.min) &&
+                    !isSameMonth(cmonth, this.max)
 
-          return html`
-            ${when(index % 3 == 0, () => html`<tr role="row"></tr>`)}
-            ${when(
-              !this.hideExtraneousMonths || !isOutsideMinMax,
-              () =>
-                html` <td
-                  class="${this.size == 'small' ? 'small' : ''}
-                  ${!this.noCurrentMonth &&
-                  currentYear == this.focusedYear &&
-                  currentMonth == index
-                    ? 'today'
-                    : ''} ${isOutsideMinMax ? 'disabled' : ''}"
-                  tabindex="${this.focusedMonth == index ? 0 : -1}"
-                  aria-selected="${this.#getSelectedMonth() == index
-                    ? 'true'
-                    : 'false'}"
-                  @click=${() =>
-                    isOutsideMinMax ? null : this.#setSelectedMonth(index)}
-                >
-                  ${this.shortMonthText ? month.substring(0, 3) : month}
-                  ${this.monthNumber ? ' (' + (index + 1) + ')' : ''}
-                </td>`,
-              () => html`<td inert></td>`,
-            )}
-            ${when(index % 3 == 2, () => html`</tr>`)}
-          `
-        })}
+                  return when(
+                    !this.hideExtraneousMonths || !isOutsideMinMax,
+                    () =>
+                      html`<td
+                        class="${this.size == 'small' ? 'small' : ''}
+                ${!this.noCurrentMonth &&
+                        currentYear == this.focusedYear &&
+                        currentMonth == index
+                          ? 'today'
+                          : ''} ${isOutsideMinMax ? 'disabled' : ''}"
+                        tabindex="${this.focusedMonth == index ? 0 : -1}"
+                        aria-selected="${this.#getSelectedMonth() == index
+                          ? 'true'
+                          : 'false'}"
+                        @click=${() =>
+                          isOutsideMinMax
+                            ? null
+                            : this.#setSelectedMonth(index)}
+                      >
+                        ${this.shortMonthText ? month.substring(0, 3) : month}
+                        ${this.monthNumber ? ' (' + (index + 1) + ')' : ''}
+                      </td>`,
+                    () => html`<td inert></td>`,
+                  )
+                })}
+            </tr>
+          `,
+        )}
       </tbody>
     </table>`
   }
