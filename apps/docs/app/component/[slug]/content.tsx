@@ -1,4 +1,4 @@
-// app/component/[slug]/shared/ContentSection.tsx
+// app/component/[slug]/content.tsx
 'use client'
 
 import React from 'react'
@@ -23,32 +23,28 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
 
   const component = actions.getComponent(slug)
 
-  console.log('ContentSection:', {
-    slug,
-    contentKey,
-    component,
-    hasContent: component?.[contentKey],
-    contentStructure: component?.[contentKey],
-  })
-
   if (!component) return null
 
-  // Handle different content structures based on contentKey
-  const content = (() => {
+  const getContent = (): ComponentSection[] | null => {
     switch (contentKey) {
       case 'overview':
-        return component.overview
-      case 'ux-text':
-        // return component['ux-text']?.section
-        return component['ux-text']?.section || component['ux-text']
+        return component.overview || null
+      case 'ux-text': {
+        if (Array.isArray(component['ux-text'])) {
+          return component['ux-text']
+        }
+        return component['ux-text']?.section || null
+      }
       case 'accessibility':
-        return component.accessibility?.section
+        return component.accessibility?.section || null
       default:
         return null
     }
-  })()
+  }
 
-  if (!content) return null
+  const content = getContent()
+
+  if (!content || !Array.isArray(content)) return null
 
   const renderColumn = (column: ComponentColumn) => {
     switch (column.type) {
@@ -72,6 +68,9 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
         const image = actions.getComponentImage(slug, column['img'])
         if (!image?.svg) return null
         return <Figure id={image.svg} caption={column.caption} />
+
+      default:
+        return null
     }
   }
 
@@ -85,12 +84,15 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
             </Core.GdsText>
           )}
 
-          {/* Handle different section structures */}
           {contentKey === 'accessibility' ? (
             <Core.GdsText>{(section as any).description}</Core.GdsText>
           ) : (
             section.columns && (
-              <Core.GdsGrid columns={section.cols} gap="m" max-width="100%">
+              <Core.GdsGrid
+                columns={section.cols || '2'}
+                gap="m"
+                max-width="100%"
+              >
                 {section.columns.map((column, colIndex) => (
                   <React.Fragment key={colIndex}>
                     {renderColumn(column)}
