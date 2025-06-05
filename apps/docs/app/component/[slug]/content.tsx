@@ -3,6 +3,8 @@
 
 import React from 'react'
 import Figure from 'apps/docs/design/atoms/figure/figure'
+import DOMPurify from 'dompurify'
+import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useContent } from '../../../settings/content'
@@ -56,7 +58,13 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
                 {column.title}
               </Core.GdsText>
             )}
-            <Core.GdsText tag="p">{column.content}</Core.GdsText>
+            <Core.GdsRichText
+              dangerouslySetInnerHTML={{
+                __html: column.content
+                  ? DOMPurify.sanitize(marked.parse(column.content) as string)
+                  : '',
+              }}
+            ></Core.GdsRichText>
           </Core.GdsFlex>
         )
 
