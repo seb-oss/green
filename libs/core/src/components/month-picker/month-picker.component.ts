@@ -341,76 +341,30 @@ export class GdsMonthPicker extends GdsElement {
       if (new Date(this.focusedYear, 11, 1) < this.max) this.focusedMonth = 11
       else this.focusedMonth = this.max.getMonth()
       handled = true
-    } else if (e.key === 'PageUp') {
-      if (
-        this.focusedMonth == 3 ||
-        this.focusedMonth == 6 ||
-        this.focusedMonth == 9
-      ) {
-        if (new Date(this.focusedYear, 0, 1) > this.min) this.focusedMonth = 0
-        else if (new Date(this.focusedYear, 3, 1) > this.min)
-          this.focusedMonth = 3
-        else if (new Date(this.focusedYear, 6, 1) > this.min)
-          this.focusedMonth = 6
-      } else if (
-        this.focusedMonth == 4 ||
-        this.focusedMonth == 7 ||
-        this.focusedMonth == 10
-      ) {
-        if (new Date(this.focusedYear, 1, 1) > this.min) this.focusedMonth = 1
-        else if (new Date(this.focusedYear, 4, 1) > this.min)
-          this.focusedMonth = 4
-        else if (new Date(this.focusedYear, 7, 1) > this.min)
-          this.focusedMonth = 7
-      } else if (
-        this.focusedMonth == 5 ||
-        this.focusedMonth == 8 ||
-        this.focusedMonth == 11
-      ) {
-        if (new Date(this.focusedYear, 2, 1) > this.min) this.focusedMonth = 2
-        else if (new Date(this.focusedYear, 5, 1) > this.min)
-          this.focusedMonth = 5
-        else if (new Date(this.focusedYear, 8, 1) > this.min)
-          this.focusedMonth = 8
+    } else if (e.key === 'PageUp' || e.key === 'PageDown') {
+      const isUp = e.key === 'PageUp'
+      let newMonth = this.focusedMonth
+
+      // Try moving up to 3 steps up or down in the same column
+      for (let i = 0; i < 3; i++) {
+        const next = newMonth + (isUp ? -3 : 3)
+        if (next < 0 || next > 11) break
+        const candidate = new Date(this.focusedYear, next, 1)
+        if (isUp && candidate < this.min && !isSameMonth(candidate, this.min))
+          break
+        if (!isUp && candidate > this.max && !isSameMonth(candidate, this.max))
+          break
+        newMonth = next
       }
-      handled = true
-    } else if (e.key === 'PageDown') {
-      if (
-        this.focusedMonth == 0 ||
-        this.focusedMonth == 3 ||
-        this.focusedMonth == 6
-      ) {
-        if (new Date(this.focusedYear, 9, 1) < this.max) this.focusedMonth = 9
-        else if (new Date(this.focusedYear, 6, 1) < this.max)
-          this.focusedMonth = 6
-        else if (new Date(this.focusedYear, 3, 1) < this.max)
-          this.focusedMonth = 3
-      } else if (
-        this.focusedMonth == 1 ||
-        this.focusedMonth == 4 ||
-        this.focusedMonth == 7
-      ) {
-        if (new Date(this.focusedYear, 10, 1) < this.max) this.focusedMonth = 10
-        else if (new Date(this.focusedYear, 7, 1) < this.max)
-          this.focusedMonth = 7
-        else if (new Date(this.focusedYear, 4, 1) < this.max)
-          this.focusedMonth = 4
-      } else if (
-        this.focusedMonth == 2 ||
-        this.focusedMonth == 5 ||
-        this.focusedMonth == 8
-      ) {
-        if (new Date(this.focusedYear, 11, 1) < this.max) this.focusedMonth = 11
-        else if (new Date(this.focusedYear, 8, 1) < this.max)
-          this.focusedMonth = 8
-        else if (new Date(this.focusedYear, 2, 1) < this.max)
-          this.focusedMonth = 2
+
+      if (newMonth !== this.focusedMonth) {
+        this.focusedMonth = newMonth
       }
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
-        console.log('Selected year: ' + this.focusedYear)
-        console.log('Selected month: ' + this.focusedMonth)
+        //console.log('Selected year: ' + this.focusedYear)
+        //console.log('Selected month: ' + this.focusedMonth)
         this.#setSelectedMonth(this.focusedMonth)
       }
       handled = true
