@@ -35,10 +35,11 @@ export interface ComponentSummary {
 }
 
 export interface ComponentColumn {
-  type: 'rich-text' | 'snippet' | 'image'
+  type: 'rich-text' | 'snippet' | 'image' | 'paragraph'
   title?: string
   tag?: string
   content?: string
+  text?: string
   Snippet?: string
   caption?: string
   img?: string
