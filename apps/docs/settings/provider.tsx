@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import type { PropsWithChildren } from 'react'
 
@@ -27,8 +27,18 @@ export function SettingsProvider({
   children,
   fallback = null,
 }: SettingsProviderProps) {
+  const [isBrowserReady, setIsBrowserReady] = useState(false)
   const settings = useSettings()
   const toast = useToast()
+
+  useEffect(() => {
+    setIsBrowserReady(true)
+  }, [])
+
+  if (!isBrowserReady) {
+    return fallback || null
+  }
+
   const value = useMemo<SettingsContextType>(
     () => ({
       settings: {
