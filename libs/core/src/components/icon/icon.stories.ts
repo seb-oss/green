@@ -21,7 +21,7 @@ import './icon.stories.css'
 import * as Icons from './icons'
 
 /**
- * The `gds-icon-*` component is a flexible set of icon components. These allows you to use a variety of pre-defined icons in your application.
+ * An icon helps communicate meaning quickly, enhances visual hierarchy, and supports navigation or interaction.
  *
  * ### Usage
  *
@@ -279,7 +279,7 @@ const createSection = (title: string, examples: TemplateResult[]) => html`
  * Using the `width` and `height` attributes will be deprecated in the next major release.
  *
  *Using the `size` property instead.
- 
+
  * ```html
  * <gds-icon-robot size="l"></gds-icon-robot>
  * ```

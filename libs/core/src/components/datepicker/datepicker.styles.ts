@@ -38,8 +38,8 @@ export const styles = css`
       text-align: center;
 
       &:focus {
-        background-color: var(--gds-color-l2-background-tertiary);
-        color: var(--gds-color-l2-content-tertiary);
+        background-color: var(--gds-sys-color-l2-background-tertiary);
+        color: var(--gds-sys-color-l2-content-tertiary);
       }
     }
   }

@@ -11,7 +11,7 @@ import '../dropdown'
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/calendar)
  *
- * The calendar component is a visual representation of a calendar that allows users to select a date.
+ * The calendar displays a grid of selectable dates.
  */
 const meta: Meta = {
   title: 'Components/Calendar',

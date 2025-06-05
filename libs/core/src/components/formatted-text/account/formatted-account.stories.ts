@@ -17,7 +17,7 @@ import '../../flex'
  * @beta
  */
 const meta: Meta = {
-  title: 'Components/Formatted Text/Accounts',
+  title: 'Components/Formatted text/Accounts',
   component: 'gds-formatted-account',
   tags: ['autodocs'],
   argTypes: {

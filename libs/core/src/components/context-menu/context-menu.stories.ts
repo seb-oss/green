@@ -15,12 +15,10 @@ registerTransitionalStyles()
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-moremenu)
  *
- * The context menu is presented in-context to the related data, so users don’t lose
- * their place in the app. It appears upon interaction with the 3 dot button and
- * displays a list of choices, one choice per line.
+ * A context menu displays a list of contextual actions.
  */
 const meta: Meta = {
-  title: 'Components/Context Menu',
+  title: 'Components/Context menu',
   component: 'gds-context-menu',
   subcomponents: { MenuItem: 'gds-menu-item' },
   parameters: {
