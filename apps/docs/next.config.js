@@ -11,6 +11,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  unstable_runtimeJS: true,
   experimental: {
     esmExternals: true,
   },
