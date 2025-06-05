@@ -181,13 +181,13 @@ describe('<gds-month-picker>', () => {
   it('should not select the focused date when pressing enter if it is disabled', async () => {
     const el = await fixture<GdsMonthPicker>(
       html`<gds-month-picker
-        min="2025-01-01"
-        max="2025-06-31"
+        min="2024-01-01"
+        max="2024-06-31"
       ></gds-month-picker>`,
     )
     el.focus()
 
-    const focusedDate = new Date('2025-12-01')
+    const focusedDate = new Date('2024-12-01')
     el.focusedDate = focusedDate
 
     await aTimeout(0)
