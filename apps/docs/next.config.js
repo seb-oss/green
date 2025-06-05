@@ -24,7 +24,7 @@ const nextConfig = {
   optimizePackageImports: ['@sebgroup/green-core'],
   transpilePackages: ['@babel/runtime'],
   output: 'export',
-  trailingSlash: true,
+  trailingSlash: false,
   typescript: {
     ignoreBuildErrors: true,
   },
