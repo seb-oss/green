@@ -2,9 +2,9 @@
 'use client'
 
 import React from 'react'
-import Figure from 'apps/docs/design/atoms/figure/figure'
 
 import * as Core from '@sebgroup/green-core/react'
+import Figure from '../../../design/atoms/figure/figure'
 import { useContent } from '../../../settings/content'
 import {
   ComponentColumn,
