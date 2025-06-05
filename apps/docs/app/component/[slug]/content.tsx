@@ -64,7 +64,11 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
         return <div className="snippet-container">{column.Snippet}</div>
 
       case 'paragraph':
-        return <Core.GdsText tag={column.tag}>{column.text}</Core.GdsText>
+        return (
+          <Core.GdsText font-size={column.size} tag={column.tag}>
+            {column.text}
+          </Core.GdsText>
+        )
 
       case 'image':
         if (!column['img']) return null
