@@ -1,6 +1,6 @@
 import { gdsCustomElement } from '../../scoping'
 import { withPositioningProps } from '../../utils/mixins/declarative-layout-mixins'
-import { GdsButton } from '../button'
+import { GdsButton } from '../button/button.component'
 import styles from './fab.styles'
 
 /**

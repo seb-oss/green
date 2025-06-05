@@ -26,6 +26,7 @@ import '@sebgroup/green-core/components/segmented-control/index.js'
 import '@sebgroup/green-core/components/spinner/index.js'
 import '@sebgroup/green-core/components/textarea/index.js'
 import '@sebgroup/green-core/components/select/index.js'
+import '@sebgroup/green-core/components/alert/index.js'
 import '../components/header'
 import './chlorophyll.scss'
 import './form-validation.element'
@@ -50,7 +51,7 @@ export class AppElement extends LitElement {
   popoverOpen: boolean = false
 
   @state()
-  currentView = 'login'
+  currentView = 'alert'
 
   connectedCallback() {
     super.connectedCallback()
@@ -77,7 +78,22 @@ export class AppElement extends LitElement {
           ${choose(
             this.currentView,
             [
-              ['login', () => html`<gds-login></gds-login>`],
+              [
+                'alert',
+                () => html`
+                  <gds-alert
+                    heading="Test Alert!"
+                    message="This is a test of the GDS Alert component."
+                    type="info"
+                    showIcon
+                    dismissible
+                    buttonText="Action"
+                    buttonVariant="positive"
+                    buttonRank="primary"
+                    buttonSize="medium"
+                  ></gds-alert>
+                `,
+              ],
               [
                 'form-validation',
                 () => html`<form-validation></form-validation>`,
