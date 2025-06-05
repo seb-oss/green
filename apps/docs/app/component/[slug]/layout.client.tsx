@@ -2,11 +2,11 @@
 'use client'
 
 import { notFound, usePathname } from 'next/navigation'
-import { Snippet } from 'apps/docs/design/atoms/snippet/snippet'
 
 import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import { Link } from '../../../design/atoms/link/link'
+import { Snippet } from '../../../design/atoms/snippet/snippet'
 import Tabs from '../../../design/atoms/tabs/tabs'
 import { useContent } from '../../../settings/content'
 

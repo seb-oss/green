@@ -16,6 +16,7 @@ const nextConfig = {
   },
   transpilePackages: ['@babel/runtime'],
   output: 'export',
+  trailingSlash: true,
   nx: {
     svgr: false,
   },

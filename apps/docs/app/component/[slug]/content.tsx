@@ -2,11 +2,11 @@
 'use client'
 
 import React from 'react'
-import Figure from 'apps/docs/design/atoms/figure/figure'
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
+import Figure from '../../../design/atoms/figure/figure'
 import { useContent } from '../../../settings/content'
 import {
   ComponentColumn,
@@ -72,7 +72,11 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
         return <div className="snippet-container">{column.Snippet}</div>
 
       case 'paragraph':
-        return <Core.GdsText tag={column.tag}>{column.text}</Core.GdsText>
+        return (
+          <Core.GdsText font-size={column.size} tag={column.tag}>
+            {column.text}
+          </Core.GdsText>
+        )
 
       case 'image':
         if (!column['img']) return null

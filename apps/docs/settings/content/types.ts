@@ -40,6 +40,7 @@ export interface ComponentColumn {
   tag?: string
   content?: string
   text?: string
+  size?: string
   Snippet?: string
   caption?: string
   img?: string
