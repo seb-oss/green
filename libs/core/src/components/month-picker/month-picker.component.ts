@@ -281,15 +281,16 @@ export class GdsMonthPicker extends GdsElement {
     //this.value = month
     //console.log('Selected year: ' + this.focusedYear)
     //console.log('Selected month: ' + month)
-    //this.value = new Date(this.focusedYear, month, 1, 12)
-    const candidate = new Date(this.focusedYear, month, 1, 12)
+    //this.value = new Date(new Date().getFullYear(), month, 1, 12)
+    this.value = new Date(this.focusedYear, month, 1, 12)
+    /*const candidate = new Date(this.focusedYear, month, 1, 12)
     if (
       (candidate < this.min && !isSameMonth(candidate, this.min)) ||
       (candidate > this.max && !isSameMonth(candidate, this.max))
     ) {
       return
     }
-    this.value = candidate
+    this.value = candidate*/
 
     this.dispatchEvent(
       new CustomEvent('change', {
@@ -302,8 +303,16 @@ export class GdsMonthPicker extends GdsElement {
 
   #setSelectedDate(date: Date) {
     // Set the time to midday to avoid timezone issues
-    const dateOnMidDay = setHours(date, 12)
+    //const dateOnMidDay = setHours(date, 12)
+    //this.value = dateOnMidDay
 
+    const dateOnMidDay = setHours(date, 12)
+    if (
+      (dateOnMidDay < this.min && !isSameMonth(dateOnMidDay, this.min)) ||
+      (dateOnMidDay > this.max && !isSameMonth(dateOnMidDay, this.max))
+    ) {
+      return
+    }
     this.value = dateOnMidDay
 
     this.dispatchEvent(
