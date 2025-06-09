@@ -197,6 +197,19 @@ describe('<gds-month-picker>', () => {
     await expect(el.value).to.equal(undefined)
   })
 
+  it('should update the focused date when value is changed', async () => {
+    const el = await fixture<GdsMonthPicker>(
+      html`<gds-month-picker></gds-month-picker>`,
+    )
+
+    el.value = new Date('2023-02-01')
+    await el.updateComplete
+
+    await expect(onlyDate(el.focusedDate)).to.equal(
+      onlyDate(new Date('2023-02-01')),
+    )
+  })
+
   describe('API', () => {
     it('should default to undefined', async () => {
       const el = await fixture<GdsMonthPicker>(
