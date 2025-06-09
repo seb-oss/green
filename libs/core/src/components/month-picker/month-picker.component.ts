@@ -5,6 +5,7 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import {
   addMonths,
+  isSameDay,
   isSameMonth,
   lastDayOfMonth,
   setHours,
@@ -308,8 +309,8 @@ export class GdsMonthPicker extends GdsElement {
 
     const dateOnMidDay = setHours(date, 12)
     if (
-      (dateOnMidDay < this.min && !isSameMonth(dateOnMidDay, this.min)) ||
-      (dateOnMidDay > this.max && !isSameMonth(dateOnMidDay, this.max))
+      (dateOnMidDay < this.min && !isSameDay(dateOnMidDay, this.min)) ||
+      (dateOnMidDay > this.max && !isSameDay(dateOnMidDay, this.max))
     ) {
       return
     }
