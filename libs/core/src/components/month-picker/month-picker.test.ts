@@ -187,7 +187,8 @@ describe('<gds-month-picker>', () => {
     )
     el.focus()
 
-    const focusedDate = new Date('2024-12-01')
+    //const focusedDate = new Date('2024-12-01')
+    const focusedDate = new Date('2044-12-01')
     el.focusedDate = focusedDate
 
     await aTimeout(0)
