@@ -1,5 +1,6 @@
 // app/components/[tag]/page.tsx
 import { use } from 'react'
+import { Metadata, ResolvingMetadata } from 'next'
 
 import {
   fetchComponentContent,
@@ -9,6 +10,26 @@ import { TagComponentsClient } from './page.client'
 
 interface PageProps {
   params: Promise<{ tag: string }>
+}
+
+interface Props {
+  params: { tag: string }
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  const { tag } = params
+
+  return {
+    title: `Tag: ${tag} — Green Design System`,
+    description: `Browse all components that are tagged with "${tag}" in the Green Design System.`,
+    openGraph: {
+      title: `Tag: ${tag} — Green Design System`,
+      description: `Browse all components that are tagged with "${tag}" in the Green Design System.`,
+    },
+  }
 }
 
 export async function generateStaticParams() {

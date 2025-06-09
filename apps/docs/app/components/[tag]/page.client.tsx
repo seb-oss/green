@@ -60,12 +60,12 @@ export function TagComponentsClient({ tag }: TagComponentsClientProps) {
         </Core.GdsGrid>
       ) : (
         <Core.GdsFlex
-          justify-content="center"
-          align-items="center"
+          justify-content="flex-start"
+          align-items="flex-start"
           padding="2xl"
         >
           <Core.GdsText color="secondary">
-            No components found with tag "{tag}"
+            No components found with tag: {tag}
           </Core.GdsText>
         </Core.GdsFlex>
       )}
