@@ -18,7 +18,7 @@ import '../../divider'
  * @beta
  */
 const meta: Meta = {
-  title: 'Components/Formatted Text/Date and time',
+  title: 'Components/Formatted text/Date and time',
   component: 'gds-formatted-date',
   tags: ['autodocs'],
   argTypes: {

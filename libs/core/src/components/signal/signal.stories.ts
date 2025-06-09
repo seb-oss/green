@@ -30,8 +30,7 @@ const DefaultParams: Story = {
 }
 
 /**
- * The `gds-signal` component is used to indicate that there is something new or updated.
- * It is used in conjunction with the `gds-fab` component to draw attention to important actions or notifications.
+ * A signal is used to draw attention to notifications and new content.
  *
  * The signal's style matches the button's rank and variant by default.
  */

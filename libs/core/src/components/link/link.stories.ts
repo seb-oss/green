@@ -19,6 +19,9 @@ import '../icon/icons/cain-link.js'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 
+/**
+ * A link navigates users to other pages or sections of content.
+ */
 const meta: Meta = {
   title: 'Components/Link',
   component: 'gds-link',

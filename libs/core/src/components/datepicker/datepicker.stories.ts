@@ -11,8 +11,9 @@ import './index.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/datepicker)
  *
- * Date pickers simplify the task of selecting a date in a visual representation of a calendar.
- * The date picker in Green Core mimics the behaviour of the native date input element as it is
+ * The datepicker allows users to select a date.
+ *
+ * The datepicker in Green Core mimics the behaviour of the native date input element as it is
  * implemented in Chromium browsers.
  *
  * The input field shows three parts of the date: the day, the month and the year. The user can
