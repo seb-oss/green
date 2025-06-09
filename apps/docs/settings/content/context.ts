@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/require-await */
 import { createContext } from 'react'
 
 import type { ContentContext } from './types'

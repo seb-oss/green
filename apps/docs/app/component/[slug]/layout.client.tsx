@@ -1,6 +1,7 @@
 // app/component/[slug]/layout.client.tsx
 'use client'
 
+import React from 'react'
 import { notFound, usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -126,12 +127,14 @@ export function ComponentLayoutClient({
           {component.preamble && (
             <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
           )}
-          <Core.GdsText tag="h2">Anatomy</Core.GdsText>
           {anatomyImage && (
-            <Figure
-              id={anatomyImage.svg}
-              caption={`Anatomy of ${component.title.toLowerCase()}`}
-            />
+            <React.Fragment>
+              <Core.GdsText tag="h2">Anatomy</Core.GdsText>
+              <Figure
+                id={anatomyImage.svg}
+                caption={`Anatomy of ${component.title.toLowerCase()}`}
+              />
+            </React.Fragment>
           )}
         </Core.GdsFlex>
       )}
