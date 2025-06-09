@@ -7,8 +7,8 @@ export interface Heading {
 export interface BaseContent {
   slug: string
   title: string
-  createdAt: string
-  updatedAt: string
+  createdAt?: string
+  updatedAt?: string
 }
 
 export interface Post extends BaseContent {
@@ -63,6 +63,7 @@ export interface ComponentContent extends BaseContent {
   type: 'component'
   hero_snippet?: string
   beta?: boolean
+  anatomy?: boolean
   summary?: string
   preamble?: string
   tags?: string[]

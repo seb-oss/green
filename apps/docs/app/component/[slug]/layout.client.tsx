@@ -127,7 +127,7 @@ export function ComponentLayoutClient({
           {component.preamble && (
             <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
           )}
-          {anatomyImage && (
+          {component.anatomy && anatomyImage && (
             <React.Fragment>
               <Core.GdsText tag="h2">Anatomy</Core.GdsText>
               <Figure
