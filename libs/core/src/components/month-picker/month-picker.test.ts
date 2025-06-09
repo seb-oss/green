@@ -182,7 +182,7 @@ describe('<gds-month-picker>', () => {
     const el = await fixture<GdsMonthPicker>(
       html`<gds-month-picker
         min="2024-01-01"
-        max="2024-06-31"
+        max="2024-06-30"
       ></gds-month-picker>`,
     )
     el.focus()
@@ -215,6 +215,38 @@ describe('<gds-month-picker>', () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker></gds-month-picker>`,
       )
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('respects min date', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-month-picker
+          .min=${new Date('2024-01-01')}
+        ></gds-month-picker>`,
+      )
+
+      el.focusedDate = new Date('2023-12-01')
+      await el.updateComplete
+
+      const cell = el.getDateCell(1)
+      expect(cell).to.have.class('disabled')
+
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('respects max date', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-month-picker
+          .max=${new Date('2024-01-01')}
+        ></gds-month-picker>`,
+      )
+
+      el.focusedDate = new Date('2024-02-01')
+      await el.updateComplete
+
+      const cell = el.getDateCell(1)
+      expect(cell).to.have.class('disabled')
+
       expect(el.value).to.equal(undefined)
     })
   })
