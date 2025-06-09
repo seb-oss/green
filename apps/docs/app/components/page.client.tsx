@@ -71,7 +71,7 @@ export function ComponentsClient() {
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
-        <Core.GdsGrid columns="3" gap="l">
+        <Core.GdsGrid columns="4" gap="l">
           {filteredComponents.map((component) => (
             <Link key={component.slug} href={`/component/${component.slug}`}>
               <Core.GdsCard height="100%">
