@@ -245,10 +245,21 @@ describe('<gds-datepicker>', () => {
 
     it('should always return a unique Date instance from the value property', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="2024-01-31"></gds-datepicker>`,
       )
 
       const date1 = el.value!
+
+      // Focus date part spinner and press key up to increment the year
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner'),
+      )!
+      spinners[0].focus()
+      await sendKeys({
+        press: 'ArrowUp',
+      })
+      await el.updateComplete
+
       const date2 = el.value!
 
       expect(date1).to.not.equal(date2)

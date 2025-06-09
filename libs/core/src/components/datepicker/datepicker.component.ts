@@ -56,11 +56,7 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    const dateValue = super.value
-    if (dateValue instanceof Date) {
-      return new Date(dateValue)
-    }
-    return undefined
+    return super.value
   }
   set value(value: Date | undefined) {
     super.value = value
@@ -452,7 +448,7 @@ class Datepicker extends GdsFormControlElement<Date> {
             @gds-date-focused=${this.#handleCalendarFocusChange}
             .focusedMonth=${this._focusedMonth}
             .focusedYear=${this._focusedYear}
-            .value=${super.value}
+            .value=${this.value}
             .min=${this.min}
             .max=${this.max}
             .showWeekNumbers=${this.showWeekNumbers}
@@ -703,7 +699,7 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
     e.stopPropagation()
-    this.value = e.detail
+    this.value = new Date(e.detail)
     this.open = false
     this.#dispatchChangeEvent()
     this.#dispatchInputEvent()
@@ -746,7 +742,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   #handleCalendarFocusChange = async () => {
     this._focusedMonth = (await this._elCalendar).focusedMonth
     this._focusedYear = (await this._elCalendar).focusedYear
-    this.value = (await this._elCalendar).focusedDate
+    this.value = new Date((await this._elCalendar).focusedDate)
     this.requestUpdate()
     this.#dispatchInputEvent()
   }
@@ -757,12 +753,19 @@ class Datepicker extends GdsFormControlElement<Date> {
 
     if (e.detail.reason === 'close') {
       const calValue = (await this._elCalendar).value
+
+      if (!calValue) {
+        this.value = undefined
+        this.#dispatchChangeEvent()
+        return
+      }
+
       const hasChanged = !isSameDay(
         calValue || new Date(0),
         this.#valueOnOpen || new Date(0),
       )
       if (hasChanged) {
-        this.value = calValue
+        this.value = new Date(calValue)
         this.#dispatchChangeEvent()
       }
       if (this.value) {
