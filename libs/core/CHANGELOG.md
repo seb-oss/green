@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.83.0
+
+### Minor Changes
+
+- 44dff87: **Dialog:** Close when click outside, unless event is cancelled
+- 73e0759: **Form Summary:** Update design and functionality
+
+  - Design updated to latest draft in Figma (not yet final)
+  - Make reactive mode optional, so that the behavior can be more easily adapted to different contexts
+  - Make it possible to use with native form controls by using data-attributes
+
+### Patch Changes
+
+- 1aa919a: **Form controls:** Fix issue with initial value not registered with owning form
+- 41b8a90: **Dropdown:** Fix aria-label issue when custom trigger template is used
+- 4d4704b: **Tokens:** Fix missing shadow tokens
+- f1ceb54: **Datepicker:** Make `value` always return a new Date instance
+
+## 1.82.0
+
+### Minor Changes
+
+- 04043ea: **Form control footer:** Hide visually when there is no error message
+
+### Patch Changes
+
+- 9e55957: **Core**: popover causing dropdown to flicker on select
+- 24483a8: **Datepicker:** Fix focus color of the date part spinners
+
 ## 1.81.0
 
 ### Minor Changes

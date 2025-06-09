@@ -17,8 +17,7 @@ import '../icon/icons/people-profile.ts'
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
- *
- * Input are used to let the user enter text or numbers in a form.
+ * An input lets users enter and edit text or numerical values in forms.
  *
  * @status beta
  */

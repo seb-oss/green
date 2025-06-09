@@ -5,7 +5,7 @@ import './img'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * The `gds-img`
+ * An image displays media with configurable dimensions and styling properties.
  */
 const meta: Meta = {
   title: 'Components/Image',

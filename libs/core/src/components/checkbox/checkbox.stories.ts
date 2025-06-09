@@ -16,7 +16,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { GdsCheckboxGroup } from './checkbox-group/checkbox-group'
 
 /**
- * Checkboxes are form controls that allow users to select a one or more option from a set of choices.<br/>
+ * A checkbox is a form element that allows users to select one or multiple options.<br/>
  * They can be grouped together using a checkbox group, which makes value management and validation easier.
  *
  * Groups support vertical and horizontal layouts, and can be sized to fit different space requirements.
