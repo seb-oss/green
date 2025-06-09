@@ -2,7 +2,6 @@
 'use client'
 
 import React from 'react'
-import DOMPurify from 'dompurify'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -20,18 +19,6 @@ interface ContentSectionProps {
 
 export function ContentSection({ slug, contentKey }: ContentSectionProps) {
   const { isLoaded, actions } = useContent()
-  // Attempt at fixing the content using ref
-  // const richTextRef = React.useRef<HTMLElement>(null)
-
-  // React.useEffect(() => {
-  //   if (richTextRef.current) {
-  //     const content = richTextRef.current.getAttribute('data-markdown')
-  //     if (content) {
-  //       const htmlContent = marked.parse(content, { async: false })
-  //       richTextRef.current.innerHTML = htmlContent
-  //     }
-  //   }
-  // }, [])
 
   if (!isLoaded) return null
 

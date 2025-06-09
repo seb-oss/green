@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { internalLink } from '../../../hooks'
+import { InternalLink } from '../../../hooks'
 import { Link } from '../link/link'
 
 interface NavItem {
@@ -48,7 +48,7 @@ export default function SidebarCollapsed() {
     <Link
       component="button"
       key={item.slug}
-      onClick={internalLink}
+      onClick={InternalLink}
       href={item.slug}
       rank="tertiary"
       size="small"

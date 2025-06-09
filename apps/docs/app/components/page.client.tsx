@@ -113,7 +113,7 @@ export function ComponentsClient() {
           padding="2xl"
         >
           <Core.GdsText color="secondary">
-            No components found matching "{query}"
+            No components found matching {query}
           </Core.GdsText>
         </Core.GdsFlex>
       )}

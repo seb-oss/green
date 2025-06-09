@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 
@@ -8,7 +8,7 @@ import * as Core from '@sebgroup/green-core/react'
 export const _ = (...classes: (string | boolean | undefined)[]) =>
   classes.filter(Boolean).join(' ')
 
-export const internalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+export const InternalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
   const router = useRouter()
   e.preventDefault()
   const href = e.currentTarget.href

@@ -19,7 +19,7 @@ export default function Tabs({ slug }: TabsProps) {
     setMounted(true)
   }, [])
 
-  const internalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const InternalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const href = e.currentTarget.href
     router.push(href)
@@ -58,21 +58,21 @@ export default function Tabs({ slug }: TabsProps) {
       >
         <Core.GdsFlex height="100%" gap="0">
           <Core.GdsMenuButton
-            onClick={internalLink}
+            onClick={InternalLink}
             href={`/component/${slug}`}
             selected={isOverviewSelected}
           >
             Overview
           </Core.GdsMenuButton>
           <Core.GdsMenuButton
-            onClick={internalLink}
+            onClick={InternalLink}
             href={`/component/${slug}/ux-text`}
             selected={isUXTextSelected}
           >
             UX text
           </Core.GdsMenuButton>
           <Core.GdsMenuButton
-            onClick={internalLink}
+            onClick={InternalLink}
             href={`/component/${slug}/accessibility`}
             selected={isAccessibilitySelected}
           >

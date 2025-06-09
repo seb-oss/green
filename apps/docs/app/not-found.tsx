@@ -6,7 +6,7 @@ export default function NotFound() {
       404 - Page Not Found
       <br />
       <br />
-      The page you're looking for doesn't exist.
+      {`The page you're looking for doesn't exist.`}
     </div>
   )
 }

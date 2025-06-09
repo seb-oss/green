@@ -1,5 +1,6 @@
 'use client'
 
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { createContext } from 'react'
 
 import { DEFAULT_SETTINGS } from './defaults'

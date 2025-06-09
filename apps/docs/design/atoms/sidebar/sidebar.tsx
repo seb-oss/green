@@ -76,11 +76,18 @@ export default function Sidebar() {
       return <Core.GdsText>Loading...</Core.GdsText>
     }
 
+    const components = actions.getComponents({
+      sort: (a, b) => a.title.localeCompare(b.title),
+    })
+
+    const templates = actions.getTemplates({
+      sort: (a, b) => a.title.localeCompare(b.title),
+    })
+
+    const mainNav = actions.getNavigation('main')
+
     switch (pathType) {
       case 'components':
-        const components = actions.getComponents({
-          sort: (a, b) => a.title.localeCompare(b.title),
-        })
         return (
           <>
             <HomeButton />
@@ -101,9 +108,6 @@ export default function Sidebar() {
         )
 
       case 'templates':
-        const templates = actions.getTemplates({
-          sort: (a, b) => a.title.localeCompare(b.title),
-        })
         return (
           <>
             <HomeButton />
@@ -124,8 +128,6 @@ export default function Sidebar() {
         )
 
       default:
-        // Get main navigation
-        const mainNav = actions.getNavigation('main')
         return mainNav?.links.map((item) => (
           <SidebarLink key={item.slug} href={item.slug} icon={item.icon}>
             {item.title}
