@@ -19,9 +19,14 @@ const formatDisplayName = (name: string) => {
   return name.replace(/\s+/g, '')
 }
 
+type IconSize = 's' | 'm' | 'l'
+
 export function IconContent({ component }: IconContentProps) {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedSize, setSelectedSize] = useState<IconSize>('m')
+  const [isSolid, setIsSolid] = useState(false)
+  const [view, setView] = useState<'grid' | 'list'>('grid')
 
   if (!component.icons) return null
 
@@ -50,10 +55,38 @@ export function IconContent({ component }: IconContentProps) {
     setSelectedCategory(target.value)
   }
 
+  const handleSizeChange = (e: Event) => {
+    const target = e.target as HTMLSelectElement
+    setSelectedSize(target.value as IconSize)
+  }
+
+  const handleViewChange = (e: Event) => {
+    const target = e.target as HTMLSelectElement
+    setView(target.value as 'grid' | 'list')
+  }
+
+  const handleSolidChange = (e: Event) => {
+    const target = e.target as HTMLInputElement
+    setIsSolid(target.checked)
+  }
+
+  const totalIcons = Object.keys(component.icons).length
+  const filteredCount = iconList.length
+  const resultsText =
+    search || selectedCategory
+      ? `${filteredCount} of ${totalIcons} icons`
+      : `${totalIcons} icons`
+
   return (
     <Core.GdsFlex flex-direction="column" gap="l">
-      List of deprecated icons and replacement for font awesome
-      <Core.GdsGrid columns="4" gap="l">
+      <Core.GdsGrid
+        columns="4"
+        gap="l"
+        border-color="primary"
+        border-width="0 0 4xs 0"
+        border-style="solid"
+        padding-block="0 s"
+      >
         <Core.GdsInput
           value={search}
           onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
@@ -77,39 +110,97 @@ export function IconContent({ component }: IconContentProps) {
           grid-column="1 / span 3"
           height="100%"
           align-items="center"
+          justify-content="flex-start"
+          gap="l"
         >
+          <Core.GdsFlex>
+            <Core.GdsDropdown
+              size="small"
+              value="medium"
+              plain
+              oninput={handleSizeChange}
+            >
+              <Core.GdsOption value="s">Small</Core.GdsOption>
+              <Core.GdsOption value="m">Medium</Core.GdsOption>
+              <Core.GdsOption value="l">Large</Core.GdsOption>
+            </Core.GdsDropdown>
+          </Core.GdsFlex>
+          <Core.GdsCheckbox
+            label="Solid"
+            value="solid"
+            onchange={handleSolidChange}
+          />
           <Core.GdsText color="secondary" tag="small">
-            Number of results
+            {resultsText}
           </Core.GdsText>
         </Core.GdsFlex>
         <Core.GdsFlex>
-          <Core.GdsSegmentedControl size="small" value="grid">
+          <Core.GdsSegmentedControl
+            size="small"
+            value={view}
+            onchange={handleViewChange}
+          >
             <Core.GdsSegment value="grid">Grid</Core.GdsSegment>
             <Core.GdsSegment value="list">List</Core.GdsSegment>
           </Core.GdsSegmentedControl>
         </Core.GdsFlex>
       </Core.GdsGrid>
-      <Core.GdsGrid columns="4" gap="l">
+      {!search && (
+        <Core.GdsCard
+          variant="warning"
+          padding="s xs s m"
+          flex-direction="row"
+          gap="s"
+          justify-content="space-between"
+          align-items="center"
+        >
+          <Core.GdsFlex gap="s" align-items="center">
+            <Core.IconWarningSign size="m" />
+            <Core.GdsFlex flex-direction="column" gap="2xs">
+              <Core.GdsText font-size="detail-s" color="secondary">
+                View deprecated icons and font awesome recommended replacements
+              </Core.GdsText>
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+          <Core.GdsButton size="small" rank="tertiary">
+            Instructions
+            <Core.IconArrowDown slot="trail" />
+          </Core.GdsButton>
+        </Core.GdsCard>
+      )}
+
+      <Core.GdsGrid columns={view === 'grid' ? '4' : '3'} gap="l">
         {iconList.map(([name, icon]: [string, IconData]) => (
-          <Core.GdsCard key={icon.id} height="100%" padding="m">
+          <Core.GdsCard
+            key={icon.id}
+            height="100%"
+            padding={view === 'grid' ? 'm' : 'xs'}
+          >
             <Core.GdsFlex
-              flex-direction="column"
-              gap="s"
+              flex-direction={view === 'grid' ? 'column' : 'row'}
+              gap={view === 'grid' ? 's' : 'xs'}
               align-items="center"
               height="100%"
+              justify-content={view === 'grid' ? 'flex-start' : 'flex-start'}
             >
               <Core.GdsFlex
                 justify-content="center"
                 align-items="center"
                 height="48px"
+                width={view === 'list' ? '48px' : '100%'}
               >
                 <Icon
                   name={formatDisplayName('Icon' + icon.displayName)}
-                  size="l"
+                  size={selectedSize}
+                  solid={isSolid}
                 />
               </Core.GdsFlex>
 
-              <Core.GdsText tag="small" color="secondary" text-align="center">
+              <Core.GdsText
+                tag="small"
+                color="secondary"
+                text-align={view === 'grid' ? 'center' : 'left'}
+              >
                 {icon.displayName}
               </Core.GdsText>
             </Core.GdsFlex>

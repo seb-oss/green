@@ -18,10 +18,12 @@ export const InternalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
 export const Icon = ({
   name,
   size,
+  solid,
   slot,
 }: {
   name: string
   size?: string
+  solid?: boolean
   slot?: string
 }) => {
   const IconComponent = (Core as Record<string, any>)[name]
@@ -29,5 +31,5 @@ export const Icon = ({
     console.warn(`Icon ${name} not found`)
     return null
   }
-  return <IconComponent slot={slot} size={size} />
+  return <IconComponent slot={slot} size={size} solid={solid} />
 }
