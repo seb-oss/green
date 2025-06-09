@@ -1,6 +1,7 @@
 import { localized, msg } from '@lit/localize'
 import { html } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import {
@@ -188,6 +189,13 @@ export class GdsMonthPicker extends GdsElement {
   @property()
   label?: string
 
+  /**
+   * Returns the date cell element for the given month number.
+   */
+  getMonthCell(monthNumber: number) {
+    return this.shadowRoot?.querySelector(`#monthCell-${monthNumber}`)
+  }
+
   @state()
   private _currentLocale = navigator.language
 
@@ -234,12 +242,13 @@ export class GdsMonthPicker extends GdsElement {
                     !this.hideExtraneousMonths || !isOutsideMinMax,
                     () =>
                       html`<td
-                        class="${this.size == 'small' ? 'small' : ''}
-                ${!this.noCurrentMonth &&
-                        currentYear == this.focusedYear &&
-                        currentMonth == index
-                          ? 'today'
-                          : ''} ${isOutsideMinMax ? 'disabled' : ''}"
+                        class="${classMap({
+                          small: this.size == 'small',
+                          today:
+                            currentYear == this.focusedYear &&
+                            currentMonth == index,
+                          disabled: Boolean(isOutsideMinMax),
+                        })}"
                         ?disabled=${isOutsideMinMax}
                         tabindex="${this.focusedMonth == index ? 0 : -1}"
                         aria-selected="${this.#getSelectedMonth() == index
@@ -249,6 +258,7 @@ export class GdsMonthPicker extends GdsElement {
                           isOutsideMinMax
                             ? null
                             : this.#setSelectedMonth(index)}
+                        id="monthCell-${index}"
                       >
                         ${this.shortMonthText ? month.substring(0, 3) : month}
                         ${this.monthNumber ? ' (' + (index + 1) + ')' : ''}
