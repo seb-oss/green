@@ -1,6 +1,7 @@
 // app/component/[slug]/content.tsx
 'use client'
 
+/* eslint-disable no-case-declarations */
 import React from 'react'
 import { marked } from 'marked'
 
@@ -45,7 +46,31 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
 
   const content = getContent()
 
-  if (!content || !Array.isArray(content)) return null
+  // if (!content || !Array.isArray(content)) return null
+
+  if (!content || !Array.isArray(content)) {
+    if (contentKey === 'ux-text' || contentKey === 'accessibility') {
+      return (
+        <Core.GdsFlex
+          flex-direction="column"
+          gap="m"
+          align-items="flex-start"
+          justify-content="flex-start"
+          padding="0"
+        >
+          <Core.GdsText tag="h3" font-size="display-m">
+            Coming Soon
+          </Core.GdsText>
+          <Core.GdsText color="secondary" max-width="560px">
+            {contentKey === 'ux-text'
+              ? 'UX writing guidelines for this component are currently being developed.'
+              : 'Accessibility documentation for this component is currently being developed.'}
+          </Core.GdsText>
+        </Core.GdsFlex>
+      )
+    }
+    return null
+  }
 
   const renderColumn = (column: ComponentColumn) => {
     switch (column.type) {

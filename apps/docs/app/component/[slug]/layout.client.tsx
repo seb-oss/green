@@ -121,18 +121,20 @@ export function ComponentLayoutClient({
 
         <Tabs slug={component.slug} />
       </Core.GdsFlex>
-      <Core.GdsFlex flex-direction="column" gap="l">
-        {component.preamble && (
-          <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
-        )}
-        <Core.GdsText tag="h2">Anatomy</Core.GdsText>
-        {anatomyImage && (
-          <Figure
-            id={anatomyImage.svg}
-            caption={`Anatomy of ${component.title.toLowerCase()}`}
-          />
-        )}
-      </Core.GdsFlex>
+      {section === 'overview' && (
+        <Core.GdsFlex flex-direction="column" gap="l">
+          {component.preamble && (
+            <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
+          )}
+          <Core.GdsText tag="h2">Anatomy</Core.GdsText>
+          {anatomyImage && (
+            <Figure
+              id={anatomyImage.svg}
+              caption={`Anatomy of ${component.title.toLowerCase()}`}
+            />
+          )}
+        </Core.GdsFlex>
+      )}
       {children}
     </Core.GdsFlex>
   )
