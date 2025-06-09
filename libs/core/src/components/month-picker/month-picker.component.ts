@@ -213,10 +213,6 @@ export class GdsMonthPicker extends GdsElement {
   render() {
     const currentYear = new Date().getFullYear()
     const currentMonth = new Date().getMonth()
-    //Test data
-    //console.log('Min: ' + this.min)
-    //console.log('Max: ' + this.max)
-    //this.focusedYear = 2024
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
@@ -244,6 +240,7 @@ export class GdsMonthPicker extends GdsElement {
                         currentMonth == index
                           ? 'today'
                           : ''} ${isOutsideMinMax ? 'disabled' : ''}"
+                        ?disabled=${isOutsideMinMax}
                         tabindex="${this.focusedMonth == index ? 0 : -1}"
                         aria-selected="${this.#getSelectedMonth() == index
                           ? 'true'
@@ -269,58 +266,17 @@ export class GdsMonthPicker extends GdsElement {
   #getSelectedMonth(): number {
     if (!this.value) return -1
 
-    // Get the month from the value
     const month = this.value.getMonth()
-
-    // Check if the month is within the min and max range
-    //if (month < this.min || month > this.max) return -1
 
     return month
   }
 
   #setSelectedMonth(month: number) {
-    //this.value = month
-    //console.log('Selected year: ' + this.focusedYear)
-    //console.log('Selected month: ' + month)
-    //this.value = new Date(new Date().getFullYear(), month, 1, 12)
-    //this.value = new Date(this.focusedYear, month, 1, 12)
-    const candidate = new Date(this.focusedYear, month, 1, 12)
-    if (
-      (candidate < this.min && !isSameMonth(candidate, this.min)) ||
-      (candidate > this.max && !isSameMonth(candidate, this.max))
-    ) {
-      this.value = undefined
-      return
-    }
-    this.value = candidate
+    this.value = new Date(this.focusedYear, month, 1, 12)
 
     this.dispatchEvent(
       new CustomEvent('change', {
-        detail: month,
-        bubbles: false,
-        composed: false,
-      }),
-    )
-  }
-
-  #setSelectedDate(date: Date) {
-    // Set the time to midday to avoid timezone issues
-    //const dateOnMidDay = setHours(date, 12)
-    //this.value = dateOnMidDay
-
-    const dateOnMidDay = setHours(date, 12)
-    if (
-      (dateOnMidDay < this.min && !isSameDay(dateOnMidDay, this.min)) ||
-      (dateOnMidDay > this.max && !isSameDay(dateOnMidDay, this.max))
-    ) {
-      this.value = undefined
-      return
-    }
-    this.value = dateOnMidDay
-
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: dateOnMidDay,
+        detail: this.value,
         bubbles: false,
         composed: false,
       }),
@@ -382,9 +338,6 @@ export class GdsMonthPicker extends GdsElement {
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
-        //console.log('Selected year: ' + this.focusedYear)
-        //console.log('Selected month: ' + this.focusedMonth)
-        //this.#setSelectedDate(this.focusedDate)
         this.#setSelectedMonth(this.focusedMonth)
       }
       handled = true
