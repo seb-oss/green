@@ -56,11 +56,11 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    const dateValue = super.value;
+    const dateValue = super.value
     if (dateValue instanceof Date) {
-      return new Date(dateValue);
+      return new Date(dateValue)
     }
-    return undefined;
+    return undefined
   }
   set value(value: Date | undefined) {
     super.value = value
@@ -452,7 +452,7 @@ class Datepicker extends GdsFormControlElement<Date> {
             @gds-date-focused=${this.#handleCalendarFocusChange}
             .focusedMonth=${this._focusedMonth}
             .focusedYear=${this._focusedYear}
-            .value=${this.value}
+            .value=${super.value}
             .min=${this.min}
             .max=${this.max}
             .showWeekNumbers=${this.showWeekNumbers}
