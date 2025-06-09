@@ -282,15 +282,15 @@ export class GdsMonthPicker extends GdsElement {
     //console.log('Selected year: ' + this.focusedYear)
     //console.log('Selected month: ' + month)
     //this.value = new Date(new Date().getFullYear(), month, 1, 12)
-    this.value = new Date(this.focusedYear, month, 1, 12)
-    /*const candidate = new Date(this.focusedYear, month, 1, 12)
+    //this.value = new Date(this.focusedYear, month, 1, 12)
+    const candidate = new Date(this.focusedYear, month, 1, 12)
     if (
       (candidate < this.min && !isSameMonth(candidate, this.min)) ||
       (candidate > this.max && !isSameMonth(candidate, this.max))
     ) {
       return
     }
-    this.value = candidate*/
+    this.value = candidate
 
     this.dispatchEvent(
       new CustomEvent('change', {
