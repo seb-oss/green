@@ -40,9 +40,7 @@ export default function Tabs({ slug }: TabsProps) {
     <Core.GdsCard
       padding="0"
       overflow="hidden"
-      position="sticky"
       inset="70px 0 0 0"
-      z-index="999"
       margin="0"
       border-radius="xs"
       border="0"
