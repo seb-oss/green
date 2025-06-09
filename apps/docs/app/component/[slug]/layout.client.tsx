@@ -104,7 +104,7 @@ export function ComponentLayoutClient({
             Tags:
             {component.tags.map((tag) => (
               <Link key={tag} href={'/components/' + tag.toLocaleLowerCase()}>
-                {tag}
+                {tag.toLocaleLowerCase()}
               </Link>
             ))}
           </Core.GdsFlex>
