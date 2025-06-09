@@ -147,6 +147,19 @@ export const FocusedYearDate: Story = {
   `,
 }
 
+export const OutsideMinMax: Story = {
+  ...DefaultParams,
+  name: 'Outside the min max',
+  render: (args) => html`
+    <gds-month-picker
+      focusedYear="2024"
+      focusedDate="2024-12-01"
+      min="2024-01-01"
+      max="2024-06-01"
+    ></gds-month-picker>
+  `,
+}
+
 // export const Disabled: Story = {
 //   ...DefaultParams,
 //   render: (args) => html`

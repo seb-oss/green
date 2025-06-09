@@ -289,6 +289,7 @@ export class GdsMonthPicker extends GdsElement {
       (candidate < this.min && !isSameMonth(candidate, this.min)) ||
       (candidate > this.max && !isSameMonth(candidate, this.max))
     ) {
+      this.value = undefined
       return
     }
     this.value = candidate
@@ -312,6 +313,7 @@ export class GdsMonthPicker extends GdsElement {
       (dateOnMidDay < this.min && !isSameDay(dateOnMidDay, this.min)) ||
       (dateOnMidDay > this.max && !isSameDay(dateOnMidDay, this.max))
     ) {
+      this.value = undefined
       return
     }
     this.value = dateOnMidDay
