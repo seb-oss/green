@@ -5,6 +5,7 @@ import { notFound, usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
+import Figure from '../../../design/atoms/figure/figure'
 import { Link } from '../../../design/atoms/link/link'
 import { Snippet } from '../../../design/atoms/snippet/snippet'
 import Tabs from '../../../design/atoms/tabs/tabs'
@@ -35,52 +36,56 @@ export function ComponentLayoutClient({
     notFound()
   }
 
+  const anatomyImage = component.images?.find((img) => img.id === 'anatomy')
+
   return (
     <Core.GdsFlex flex-direction="column" gap="2xl" max-width="840px">
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
-        <Breadcrumbs slug={component.slug} title="Breadcrumbs" />
+        <Breadcrumbs slug={component.slug} title={component.title} />
         <Core.GdsText tag="h1" font-size="heading-xl">
           {component.title}
         </Core.GdsText>
-        <Core.GdsFlex gap="l">
-          <Core.GdsFlex gap="xs" flex-direction="column">
-            <Core.GdsText tag="small" color="secondary">
-              Status
-            </Core.GdsText>
+        {(component.beta || component.platform?.web) && (
+          <Core.GdsFlex gap="l">
             {component.beta && (
-              <Core.GdsBadge size="small" variant="notice">
-                BETA
-              </Core.GdsBadge>
+              <Core.GdsFlex gap="xs" flex-direction="column">
+                <Core.GdsText tag="small" color="secondary">
+                  Status
+                </Core.GdsText>
+                <Core.GdsBadge size="small" variant="notice">
+                  BETA
+                </Core.GdsBadge>
+              </Core.GdsFlex>
             )}
-          </Core.GdsFlex>
-          <Core.GdsFlex gap="xs" flex-direction="column">
-            <Core.GdsText tag="small" color="secondary">
-              Platform
-            </Core.GdsText>
-            {component.platform && (
-              <Core.GdsFlex gap="s">
-                {component.platform.web && (
-                  <Core.GdsFlex align-items="center" gap="4xs">
-                    <Core.IconCompassRound></Core.IconCompassRound>
-                    Web
-                  </Core.GdsFlex>
-                )}
-                {component.platform.ios && (
-                  <Core.GdsFlex align-items="center" gap="4xs">
-                    <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
-                    iOS
-                  </Core.GdsFlex>
-                )}
-                {component.platform.android && (
-                  <Core.GdsFlex align-items="center" gap="4xs">
-                    <Core.IconRobot></Core.IconRobot>
-                    Android
-                  </Core.GdsFlex>
-                )}
+            {component.platform?.web && (
+              <Core.GdsFlex gap="xs" flex-direction="column">
+                <Core.GdsText tag="small" color="secondary">
+                  Platform
+                </Core.GdsText>
+                <Core.GdsFlex gap="s">
+                  {component.platform.web && (
+                    <Core.GdsFlex align-items="center" gap="4xs">
+                      <Core.IconCompassRound></Core.IconCompassRound>
+                      Web
+                    </Core.GdsFlex>
+                  )}
+                  {component.platform.ios && (
+                    <Core.GdsFlex align-items="center" gap="4xs">
+                      <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
+                      iOS
+                    </Core.GdsFlex>
+                  )}
+                  {component.platform.android && (
+                    <Core.GdsFlex align-items="center" gap="4xs">
+                      <Core.IconRobot></Core.IconRobot>
+                      Android
+                    </Core.GdsFlex>
+                  )}
+                </Core.GdsFlex>
               </Core.GdsFlex>
             )}
           </Core.GdsFlex>
-        </Core.GdsFlex>
+        )}
 
         {component.summary && (
           <Core.GdsText
@@ -116,7 +121,18 @@ export function ComponentLayoutClient({
 
         <Tabs slug={component.slug} />
       </Core.GdsFlex>
-
+      <Core.GdsFlex flex-direction="column" gap="l">
+        {component.preamble && (
+          <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
+        )}
+        <Core.GdsText tag="h2">Anatomy</Core.GdsText>
+        {anatomyImage && (
+          <Figure
+            id={anatomyImage.svg}
+            caption={`Anatomy of ${component.title.toLowerCase()}`}
+          />
+        )}
+      </Core.GdsFlex>
       {children}
     </Core.GdsFlex>
   )

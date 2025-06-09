@@ -64,6 +64,7 @@ export interface ComponentContent extends BaseContent {
   hero_snippet?: string
   beta?: boolean
   summary?: string
+  preamble?: string
   tags?: string[]
   category?: string[]
   platform?: {
