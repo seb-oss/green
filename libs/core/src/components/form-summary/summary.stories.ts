@@ -11,16 +11,14 @@ import '../input/index.ts'
 import '../icon/icons/rocket.ts'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form/summary)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form-summary)
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-errorsummary)
  *
- * When a user attempts to submit a form with errors, this component displays a summary of those errors.
- * Including an error summary greatly assists users in promptly identifying and addressing multiple errors
- * in a consolidated manner. It provides a clear indication of what went wrong and what needs to be corrected.
+ * Form summary shows all form errors in one place.
  */
 const meta: Meta = {
-  title: 'Components/Form Summary',
+  title: 'Components/Form summary',
   component: 'gds-form-summary',
   parameters: {
     layout: 'centered',

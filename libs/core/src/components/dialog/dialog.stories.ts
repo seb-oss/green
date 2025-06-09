@@ -7,10 +7,7 @@ import { html } from 'lit'
 import type { GdsDialog } from './dialog'
 
 /**
- * A dialog is a type of modal window that appears in front of app content
- * to provide critical information or ask for a decision. Dialogs disable
- * all app functionality when they appear, and remain on screen until confirmed,
- * dismissed, or a required action has been taken.
+ * A dialog appears in front of content to provide critical information or ask for a decision.
  *
  * @beta
  */

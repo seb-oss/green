@@ -11,6 +11,16 @@ import '../rich-text/rich-text'
 import '../icon/icons/chevron-top'
 import '../icon/icons/chevron-bottom'
 
+/**
+ * The details component is a collapsible section that helps organize and hide content until needed.
+ *
+ * Features
+ * - Expandable/collapsible content sections with smooth animations
+ * - Group behavior: detailss with the same name will close each other automatically
+ * - Two size variants: large and small
+ * - Accessible by default
+ * - Keyboard navigation support
+ */
 const meta: Meta = {
   title: 'Components/Details',
   component: 'gds-details',
@@ -46,30 +56,6 @@ const meta: Meta = {
       table: {
         type: { summary: '"large" | "small"' },
         defaultValue: { summary: 'large' },
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: `
-## Overview
-The \`gds-details\` component is a collapsible section that helps organize and hide content until needed.
-It provides smooth animations, grouping behavior.
-
-## Features
-- Expandable/collapsible content sections with smooth animations
-- Group behavior: detailss with the same name will close each other automatically
-- Two size variants: large and small
-- Accessible by default
-- Keyboard navigation support
-
-\`\`\`html
-<gds-details summary="Click to expand">
-  Content here
-</gds-details>
-\`\`\`
-        `,
       },
     },
   },
@@ -114,7 +100,7 @@ In this example, all detailss are grouped together with the name attribute set t
 
 \`\`\`html
 <gds-details name="group-1"> ... </gds-details>
-\`\`\`  
+\`\`\`
 
 `,
       },
@@ -160,12 +146,12 @@ export const Sizes: Story = {
     docs: {
       description: {
         story: `
-The details component supports two sizes: large(default) and small.        
-        
+The details component supports two sizes: large(default) and small.
+
 \`\`\`html
 <gds-details size="small"> ... </gds-details>
-\`\`\`        
-        
+\`\`\`
+
         `,
       },
     },
@@ -262,8 +248,8 @@ Detailss can be initially opened using the open attribute.
 
 \`\`\`html
  <gds-details open> ... </gds-details>
-\`\`\`  
-        
+\`\`\`
+
         `,
       },
     },

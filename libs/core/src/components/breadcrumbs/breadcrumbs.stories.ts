@@ -20,8 +20,7 @@ import '../icon/icons/folder'
 
 /**
  *
- * The `gds-breadcrumbs` component is a navigation element <br/>
- * It helps users understand their current * location within a hierarchical structure of a website or application.
+ * A breadcrumb is a secondary navigation showing the website hierarchy.
  *
  * ## Features
  * - Supports both text-only and icon+text navigation links
