@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.83.1
+
+### Patch Changes
+
+- 52c7407: **Datepicker:** Fix issue with month view getting stuck
+
 ## 1.83.0
 
 ### Minor Changes
