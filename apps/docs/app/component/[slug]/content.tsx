@@ -20,6 +20,18 @@ interface ContentSectionProps {
 
 export function ContentSection({ slug, contentKey }: ContentSectionProps) {
   const { isLoaded, actions } = useContent()
+  // Attempt at fixing the content using ref
+  // const richTextRef = React.useRef<HTMLElement>(null)
+
+  // React.useEffect(() => {
+  //   if (richTextRef.current) {
+  //     const content = richTextRef.current.getAttribute('data-markdown')
+  //     if (content) {
+  //       const htmlContent = marked.parse(content, { async: false })
+  //       richTextRef.current.innerHTML = htmlContent
+  //     }
+  //   }
+  // }, [])
 
   if (!isLoaded) return null
 
@@ -58,13 +70,15 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
                 {column.title}
               </Core.GdsText>
             )}
-            <Core.GdsRichText
-              dangerouslySetInnerHTML={{
-                __html: column.content
-                  ? DOMPurify.sanitize(marked.parse(column.content) as string)
-                  : '',
-              }}
-            ></Core.GdsRichText>
+            <Core.GdsRichText>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: column.content
+                    ? marked.parse(column.content, { async: false })
+                    : '',
+                }}
+              />
+            </Core.GdsRichText>
           </Core.GdsFlex>
         )
 
