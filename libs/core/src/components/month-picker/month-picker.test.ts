@@ -266,6 +266,20 @@ describe('<gds-month-picker>', () => {
         el.shadowRoot?.querySelector('#monthCell-1')?.textContent?.trim(),
       ).to.equal('Feb')
     })
+
+    it('should not render extraneous months when setting hide-extraneous-months to true', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-month-picker
+          .hideExtraneousDays=${true}
+          .min=${new Date('2024-04-01')}
+          .focusedDate=${new Date('2024-01-01')}
+        ></gds-month-picker>`,
+      )
+
+      expect(
+        el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
+      ).to.not.contain('January')
+    })
   })
 
   // Disable for 2023
