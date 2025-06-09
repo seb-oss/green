@@ -49,27 +49,33 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
   // if (!content || !Array.isArray(content)) return null
 
   if (!content || !Array.isArray(content)) {
-    if (contentKey === 'ux-text' || contentKey === 'accessibility') {
-      return (
-        <Core.GdsFlex
-          flex-direction="column"
-          gap="m"
-          align-items="flex-start"
-          justify-content="flex-start"
-          padding="0"
-        >
-          <Core.GdsText tag="h3" font-size="display-m">
-            Coming Soon
-          </Core.GdsText>
-          <Core.GdsText color="secondary" max-width="560px">
-            {contentKey === 'ux-text'
-              ? 'UX writing guidelines for this component are currently being developed.'
-              : 'Accessibility documentation for this component is currently being developed.'}
-          </Core.GdsText>
-        </Core.GdsFlex>
-      )
-    }
-    return null
+    return (
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="m"
+        align-items="flex-start"
+        justify-content="flex-start"
+        padding="0"
+      >
+        <Core.GdsText tag="h3" font-size="display-m">
+          Coming Soon
+        </Core.GdsText>
+        <Core.GdsText color="secondary" max-width="560px">
+          {(() => {
+            switch (contentKey) {
+              case 'ux-text':
+                return 'UX writing guidelines for this component are currently being developed.'
+              case 'accessibility':
+                return 'Accessibility documentation for this component is currently being developed.'
+              case 'overview':
+                return 'Documentation for this component is currently being developed.'
+              default:
+                return 'Content is currently being developed.'
+            }
+          })()}
+        </Core.GdsText>
+      </Core.GdsFlex>
+    )
   }
 
   const renderColumn = (column: ComponentColumn) => {
@@ -115,7 +121,7 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
     }
   }
 
-  return (
+  return content.length > 0 ? (
     <Core.GdsFlex flex-direction="column" gap="xl" width="100%">
       {content.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="l">
@@ -145,5 +151,5 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
         </Core.GdsFlex>
       ))}
     </Core.GdsFlex>
-  )
+  ) : null
 }

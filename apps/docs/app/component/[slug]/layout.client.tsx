@@ -122,7 +122,7 @@ export function ComponentLayoutClient({
 
         <Tabs slug={component.slug} />
       </Core.GdsFlex>
-      {section === 'overview' && (
+      {section === 'overview' && (component.preamble || anatomyImage) && (
         <Core.GdsFlex flex-direction="column" gap="l">
           {component.preamble && (
             <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
