@@ -12,6 +12,7 @@ import {
   ComponentColumn,
   ComponentSection,
 } from '../../../settings/content/types'
+import { IconContent } from './content.icon'
 
 interface ContentSectionProps {
   slug: string
@@ -47,6 +48,41 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
   const content = getContent()
 
   // if (!content || !Array.isArray(content)) return null
+
+  // Special handling for icon component overview
+  if (slug === 'icon' && contentKey === 'overview') {
+    return (
+      <Core.GdsFlex flex-direction="column" gap="xl" width="100%">
+        {/* Regular overview content if it exists */}
+        {content &&
+          content.length > 0 &&
+          content.map((section: ComponentSection, index: number) => (
+            <Core.GdsFlex key={index} flex-direction="column" gap="l">
+              {section.title && (
+                <Core.GdsText tag={section.tag || 'h2'} font-size="display-m">
+                  {section.title}
+                </Core.GdsText>
+              )}
+              {section.columns && (
+                <Core.GdsGrid
+                  columns={section.cols || '2'}
+                  gap="m"
+                  max-width="100%"
+                >
+                  {section.columns.map((column, colIndex) => (
+                    <React.Fragment key={colIndex}>
+                      {renderColumn(column)}
+                    </React.Fragment>
+                  ))}
+                </Core.GdsGrid>
+              )}
+            </Core.GdsFlex>
+          ))}
+
+        <IconContent component={component} />
+      </Core.GdsFlex>
+    )
+  }
 
   if (!content || !Array.isArray(content)) {
     return (
