@@ -8,6 +8,7 @@ export interface BaseContent {
   slug: string
   title: string
   hero?: string
+  featured?: string[]
   createdAt?: string
   updatedAt?: string
 }

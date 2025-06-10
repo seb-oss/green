@@ -31,18 +31,10 @@ export function Home({
   const { actions } = useContentContext()
   const homeContent = actions.getPage('home')
 
-  const featuredComponentSlugs = [
-    'button',
-    'card',
-    'input',
-    'dropdown',
-    'textarea',
-    'badge',
-  ]
-
   const components = actions.getComponents()
+
   const featuredComponents = components.filter((component) =>
-    featuredComponentSlugs.includes(component.slug),
+    homeContent?.featured?.includes(component.slug),
   )
 
   const classes = [LAYOUT_UTILS.page(variant, layout), className]
@@ -51,7 +43,7 @@ export function Home({
 
   return (
     <article className={classes} data-slug={slug} {...rest}>
-      <GdsFlex flex-direction="column" gap="8xl">
+      <GdsFlex flex-direction="column" gap="4xl">
         <GdsFlex flex-direction="column" gap="xl">
           <GdsText tag="h1">{homeContent?.title}</GdsText>
           <GdsText
@@ -70,8 +62,8 @@ export function Home({
           )}
         </GdsFlex>
 
-        <GdsFlex flex-direction="column" gap="xl" align-items="flex-start">
-          <GdsText tag="h2">Featured Components</GdsText>
+        <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+          <GdsText tag="h2">Featured components</GdsText>
           <GdsGrid columns="3" gap="l">
             {featuredComponents.map((component) => (
               <GdsCard min-height="100%" width="100%" key={component.slug}>
@@ -101,6 +93,21 @@ export function Home({
           <Link component="button" href="/components" rank="secondary">
             View All Components
           </Link>
+        </GdsFlex>
+        <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+          <GdsText tag="h2">Get started</GdsText>
+          <GdsGrid columns="3" gap="l">
+            <GdsCard>ICONS</GdsCard>
+            <GdsCard>Tokens</GdsCard>
+            <GdsCard>Layout</GdsCard>
+          </GdsGrid>
+        </GdsFlex>
+        <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+          <GdsText tag="h2">Ressources</GdsText>
+          <GdsGrid columns="3" gap="l">
+            <GdsCard>Figma</GdsCard>
+            <GdsCard>Github</GdsCard>
+          </GdsGrid>
         </GdsFlex>
         {children}
       </GdsFlex>
