@@ -7,6 +7,7 @@ export interface Heading {
 export interface BaseContent {
   slug: string
   title: string
+  hero?: string
   createdAt?: string
   updatedAt?: string
 }
