@@ -12,6 +12,7 @@ export default function Footer() {
       padding="m 0"
       gap="2xl; s{5xl}"
       border="4xs/primary 0 0 0"
+      margin="4xl 0 0 0"
     >
       <GdsFlex justify-content="space-between" align-items="center">
         {text}

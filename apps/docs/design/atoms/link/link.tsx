@@ -19,6 +19,7 @@ export const Link = React.forwardRef<HTMLElement, CustomLinkProps>(
 
     const handleClick = (e: React.MouseEvent<HTMLElement>) => {
       if (isExternal) {
+        e.preventDefault()
         window.open(href, '_blank')
       } else {
         e.preventDefault()

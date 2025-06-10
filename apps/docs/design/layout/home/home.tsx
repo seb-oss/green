@@ -6,17 +6,23 @@ import {
   GdsFlex,
   GdsGrid,
   GdsText,
+  IconAi,
   IconArrowRight,
+  IconBank,
+  IconBookmark,
+  IconBrandFigma,
+  IconBrandGithub,
+  IconCloudySun,
+  IconCupHot,
 } from '@sebgroup/green-core/react'
 import { useContentContext } from '../../../settings/content'
+import { Link } from '../../atoms/link/link'
+import { Snippet } from '../../atoms/snippet/snippet'
 import { LAYOUT_UTILS } from '../config'
 
 import type { PageProps } from '../types'
 
 import './home.css'
-
-import { Link } from '../../atoms/link/link'
-import { Snippet } from '../../atoms/snippet/snippet'
 
 export function Home({
   children,
@@ -62,8 +68,19 @@ export function Home({
           )}
         </GdsFlex>
 
-        <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-          <GdsText tag="h2">Featured components</GdsText>
+        <GdsFlex flex-direction="column" gap="xl" align-items="flex-start">
+          <GdsFlex flex-direction="column">
+            <GdsText tag="h2">Featured components</GdsText>
+            <GdsText
+              tag="p"
+              font-size="heading-s"
+              line-height="heading-s"
+              color="secondary"
+              max-width="80ch"
+            >
+              Components designed with intention, focused on user experience.
+            </GdsText>
+          </GdsFlex>
           <GdsGrid columns="3" gap="l">
             {featuredComponents.map((component) => (
               <GdsCard min-height="100%" width="100%" key={component.slug}>
@@ -95,18 +112,201 @@ export function Home({
           </Link>
         </GdsFlex>
         <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-          <GdsText tag="h2">Get started</GdsText>
+          <GdsFlex flex-direction="column">
+            <GdsText tag="h2">Get started</GdsText>
+            <GdsText
+              tag="p"
+              font-size="heading-s"
+              line-height="heading-s"
+              color="secondary"
+              max-width="80ch"
+            >
+              Essential foundations: tokens, color scales, and declarative
+              layouts.
+            </GdsText>
+          </GdsFlex>
           <GdsGrid columns="3" gap="l">
-            <GdsCard>ICONS</GdsCard>
-            <GdsCard>Tokens</GdsCard>
-            <GdsCard>Layout</GdsCard>
+            <GdsCard
+              gap="m"
+              height="240px"
+              justify-content="space-between"
+              align-items="flex-start"
+              background="secondary"
+              border-color="primary"
+            >
+              <GdsFlex
+                width="100%"
+                height="100%"
+                align-items="center"
+                justify-content="center"
+              >
+                <GdsGrid columns="3" width="max-content">
+                  <IconArrowRight size="l" />
+                  <IconAi size="l" />
+                  <IconBank size="l" />
+                  <IconCloudySun size="l" />
+                  <IconBookmark size="l" />
+                  <IconCupHot size="l" />
+                </GdsGrid>
+              </GdsFlex>
+              <GdsText>Icons</GdsText>
+            </GdsCard>
+            <GdsCard
+              gap="m"
+              height="240px"
+              justify-content="space-between"
+              align-items="flex-start"
+              background="secondary"
+              border-color="primary"
+            >
+              <GdsFlex
+                width="100%"
+                height="100%"
+                align-items="center"
+                justify-content="center"
+                flex-direction="column"
+                gap="l"
+              >
+                {/* Typography Scale */}
+                <GdsFlex gap="m" align-items="center">
+                  <GdsGrid columns="3" gap="s">
+                    <GdsCard
+                      variant="secondary"
+                      padding="xs"
+                      align-items="center"
+                      justify-content="center"
+                    >
+                      <GdsText font-size="display-m">Aa</GdsText>
+                    </GdsCard>
+                    <GdsCard
+                      variant="secondary"
+                      padding="xs"
+                      align-items="center"
+                      justify-content="center"
+                    >
+                      <GdsText font-size="display-s">Aa</GdsText>
+                    </GdsCard>
+                    <GdsCard
+                      variant="secondary"
+                      padding="xs"
+                      align-items="center"
+                      justify-content="center"
+                    >
+                      <GdsText font-size="display-xs">Aa</GdsText>
+                    </GdsCard>
+                    <GdsCard
+                      padding="0"
+                      variant="positive"
+                      border-radius="max"
+                      width="100%"
+                      height="10px"
+                    />
+                    <GdsCard
+                      padding="0"
+                      variant="negative"
+                      border-radius="max"
+                      width="100%"
+                      height="10px"
+                    />
+                    <GdsCard
+                      padding="0"
+                      variant="notice"
+                      border-radius="max"
+                      width="100%"
+                      height="10px"
+                    />
+                  </GdsGrid>
+                </GdsFlex>
+              </GdsFlex>
+              <GdsText>Tokens</GdsText>
+            </GdsCard>
+
+            <GdsCard
+              gap="m"
+              height="240px"
+              justify-content="space-between"
+              align-items="flex-start"
+              background="secondary"
+              border-color="primary"
+            >
+              <GdsFlex
+                width="100%"
+                height="100%"
+                align-items="center"
+                justify-content="center"
+                flex-direction="column"
+                gap="l"
+              >
+                <GdsGrid columns="12" gap="xs" width="60%">
+                  <GdsCard
+                    background="primary"
+                    grid-column="1/13"
+                    border-radius="xs"
+                    height="l"
+                    padding="0"
+                  />
+                  <GdsCard
+                    background="primary"
+                    grid-column="1/4"
+                    border-radius="xs"
+                    height="6xl"
+                    padding="0"
+                  />
+                  <GdsCard
+                    background="primary"
+                    grid-column="4/13"
+                    border-radius="xs"
+                    height="6xl"
+                    padding="0"
+                  />
+                </GdsGrid>
+              </GdsFlex>
+              <GdsText>Declarative layout</GdsText>
+            </GdsCard>
           </GdsGrid>
         </GdsFlex>
         <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-          <GdsText tag="h2">Ressources</GdsText>
+          <GdsFlex flex-direction="column">
+            <GdsText tag="h2">Ressources</GdsText>
+            <GdsText
+              tag="p"
+              font-size="heading-s"
+              line-height="heading-s"
+              color="secondary"
+              max-width="80ch"
+            >
+              Design and development resources to help you build with Green.
+            </GdsText>
+          </GdsFlex>
           <GdsGrid columns="3" gap="l">
-            <GdsCard>Figma</GdsCard>
-            <GdsCard>Github</GdsCard>
+            <GdsCard>
+              <IconBrandFigma />
+              <Link href="https://figma.com/@seb">
+                <GdsFlex
+                  align-items="center"
+                  justify-content="space-between"
+                  gap="s"
+                  width="100%"
+                >
+                  <GdsText color="secondary">Figma</GdsText>
+                  <IconArrowRight />
+                </GdsFlex>
+              </Link>
+            </GdsCard>
+            <GdsCard>
+              <IconBrandGithub />
+              <Link href="https://github.com/seb-oss/green" isExternal>
+                <GdsFlex
+                  align-items="center"
+                  justify-content="space-between"
+                  gap="s"
+                  width="100%"
+                >
+                  <GdsText color="secondary">Github</GdsText>
+                  <IconArrowRight />
+                </GdsFlex>
+              </Link>
+            </GdsCard>
           </GdsGrid>
         </GdsFlex>
         {children}
