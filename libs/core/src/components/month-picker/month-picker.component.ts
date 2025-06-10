@@ -84,9 +84,6 @@ export class GdsMonthPicker extends GdsElement {
    */
   @property()
   value?: Date
-  //The currently selected month.
-  //@property({ type: Number })
-  //value = -1
 
   /**
    * The minimum date that can be selected. Eg. min="2025-03-01"
@@ -101,18 +98,6 @@ export class GdsMonthPicker extends GdsElement {
   @property({ converter: dateConverter })
   max = new Date(new Date().getFullYear() + 10, 0, 1)
   //@ property({ type: Date })
-
-  // /**
-  //  * The minimum month of current year that can be selected.
-  //  */
-  //@property({ type: Number })
-  //minMonth = 0
-
-  // /**
-  //  * The maximum month of current year that can be selected.
-  //  */
-  //@property({ type: Number })
-  //maxMonth = 11
 
   /**
    * Whether to hide extraneous months (that fall ouside of min and max month)
@@ -172,7 +157,7 @@ export class GdsMonthPicker extends GdsElement {
   shortMonthText = false
 
   /**
-   * Sets the size of the button. Defaults to "medium".
+   * Sets the size of the buttons. Defaults to "large".
    */
   @property({ reflect: true })
   size: 'small' | 'large' = 'large'
