@@ -9,6 +9,8 @@ import {
 } from '../../../settings/content/api'
 import { ComponentLayoutClient } from './layout.client'
 
+import './layout.css'
+
 export const dynamic = 'force-static'
 
 interface Props {

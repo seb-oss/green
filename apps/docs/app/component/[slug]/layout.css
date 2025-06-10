@@ -1,0 +1,11 @@
+.icon-slide-out {
+  transition: all 240ms;
+  @starting-style {
+    opacity: 0;
+    translate: 10px 0;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}

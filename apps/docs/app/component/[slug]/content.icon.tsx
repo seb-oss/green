@@ -187,6 +187,7 @@ export function IconContent({ component }: IconContentProps) {
               height="100%"
               padding={view === 'grid' ? 'm' : 'xs'}
               onClick={() => handleIconClick(name, icon)}
+              className="pointer"
             >
               <Core.GdsFlex
                 flex-direction={view === 'grid' ? 'column' : 'row'}
@@ -228,11 +229,12 @@ export function IconContent({ component }: IconContentProps) {
             border-width="0"
             position="fixed"
             inset="20px 20px 20px auto"
-            width="400px"
+            width="340px"
             z-index="20"
             variant="secondary"
             box-shadow="m"
             gap="0"
+            className="icon-slide-out"
           >
             <Core.GdsCard
               border-color="primary"
@@ -255,18 +257,80 @@ export function IconContent({ component }: IconContentProps) {
             <Core.GdsFlex flex-direction="column" padding="m" gap="m">
               <Core.GdsCard
                 padding="xl"
-                justify-content="center"
+                justify-content="space-between"
                 align-items="center"
-                variant="primary"
+                variant="secondary"
                 level="2"
-                height="240px"
+                height="200px"
+                padding-block="l s"
+                color="primary"
               >
-                <Icon
-                  name={formatDisplayName('Icon' + selectedIcon.displayName)}
-                  size="2xl"
-                  solid={isSolid}
-                />
+                <Core.GdsFlex
+                  align-items="center"
+                  justify-content="center"
+                  height="100%"
+                >
+                  <Icon
+                    name={formatDisplayName('Icon' + selectedIcon.displayName)}
+                    size="2xl"
+                    solid={isSolid}
+                  />
+                </Core.GdsFlex>
               </Core.GdsCard>
+              <Core.GdsGrid columns="4" gap="s">
+                <Core.GdsCard
+                  justify-content="center"
+                  align-items="center"
+                  height="60px"
+                  padding="s"
+                  variant="positive"
+                >
+                  <Icon
+                    name={formatDisplayName('Icon' + selectedIcon.displayName)}
+                    size="m"
+                    solid={isSolid}
+                  />
+                </Core.GdsCard>
+                <Core.GdsCard
+                  justify-content="center"
+                  align-items="center"
+                  height="60px"
+                  padding="s"
+                  variant="negative"
+                >
+                  <Icon
+                    name={formatDisplayName('Icon' + selectedIcon.displayName)}
+                    size="m"
+                    solid={isSolid}
+                  />
+                </Core.GdsCard>
+                <Core.GdsCard
+                  justify-content="center"
+                  align-items="center"
+                  height="60px"
+                  padding="s"
+                  variant="notice"
+                >
+                  <Icon
+                    name={formatDisplayName('Icon' + selectedIcon.displayName)}
+                    size="m"
+                    solid={isSolid}
+                  />
+                </Core.GdsCard>
+                <Core.GdsCard
+                  justify-content="center"
+                  align-items="center"
+                  height="60px"
+                  padding="s"
+                  variant="warning"
+                >
+                  <Icon
+                    name={formatDisplayName('Icon' + selectedIcon.displayName)}
+                    size="m"
+                    solid={isSolid}
+                  />
+                </Core.GdsCard>
+              </Core.GdsGrid>
 
               {/* <Core.GdsFlex flex-direction="column" gap="m">
                 <Core.GdsText tag="h3" font-size="display-xs">
@@ -324,6 +388,7 @@ export function IconContent({ component }: IconContentProps) {
             background="tertiary"
             opacity="0.2"
             onClick={handleClosePanel}
+            className="pointer"
           ></Core.GdsCard>
         </>
       )}
