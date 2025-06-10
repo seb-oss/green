@@ -2,7 +2,7 @@
   "sys": {
     "color": {
       "$type": "color",
-      "document": {
+      "L1": {
         "01": {
           "$value": "{ref.color.white}"
         },
@@ -16,7 +16,7 @@
           "$value": "{ref.color.grey.30}"
         }
       },
-      "surface": {
+      "L2": {
         "01": {
           "$value": "{ref.color.grey.3}"
         },
@@ -48,7 +48,7 @@
           "$value": "{ref.color.blue.2}"
         }
       },
-      "container": {
+      "L3": {
         "brand-01": {
           "$value": "{ref.color.green.27}"
         },
