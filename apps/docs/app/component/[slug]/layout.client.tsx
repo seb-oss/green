@@ -3,6 +3,7 @@
 
 import React from 'react'
 import { notFound, usePathname } from 'next/navigation'
+import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
@@ -130,10 +131,36 @@ export function ComponentLayoutClient({
           {component.anatomy && anatomyImage && (
             <React.Fragment>
               <Core.GdsText tag="h2">Anatomy</Core.GdsText>
+              {component['anatomy-overview'] && (
+                <Core.GdsRichText>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: component['anatomy-overview']
+                        ? marked.parse(component['anatomy-overview'], {
+                            async: false,
+                          })
+                        : '',
+                    }}
+                  />
+                </Core.GdsRichText>
+              )}
               <Figure
                 id={anatomyImage.svg}
                 caption={`Anatomy of ${component.title.toLowerCase()}`}
               />
+              {component['anatomy-details'] && (
+                <Core.GdsRichText>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: component['anatomy-details']
+                        ? marked.parse(component['anatomy-details'], {
+                            async: false,
+                          })
+                        : '',
+                    }}
+                  />
+                </Core.GdsRichText>
+              )}
             </React.Fragment>
           )}
         </Core.GdsFlex>

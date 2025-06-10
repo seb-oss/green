@@ -64,6 +64,8 @@ export interface ComponentContent extends BaseContent {
   hero_snippet?: string
   beta?: boolean
   anatomy?: boolean
+  'anatomy-overview'?: string
+  'anatomy-details'?: string
   summary?: string
   preamble?: string
   tags?: string[]
