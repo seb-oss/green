@@ -4,6 +4,7 @@ import { FormEvent } from 'react'
 
 import {
   GdsBreadcrumbs,
+  GdsButton,
   GdsCard,
   GdsDivider,
   GdsFlex,
@@ -96,6 +97,13 @@ export default function Settings() {
             <GdsRadio value="default" label="Default" />
             <GdsRadio value="comfortable" label="Comfortable" />
           </GdsRadioGroup>
+        </GdsFlex>
+
+        {/* Show offline mode */}
+        <GdsFlex>
+          <GdsText>Download</GdsText>
+          <GdsButton>Mac OS</GdsButton>
+          <GdsButton>Windows</GdsButton>
         </GdsFlex>
       </GdsCard>
     </GdsFlex>
