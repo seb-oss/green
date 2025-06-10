@@ -218,7 +218,7 @@ describe('<gds-month-picker>', () => {
       expect(el.value).to.equal(undefined)
     })
 
-    it('respects min date', async () => {
+    it('should respects min date', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
           .min=${new Date('2024-01-01')}
@@ -234,7 +234,7 @@ describe('<gds-month-picker>', () => {
       expect(el.value).to.equal(undefined)
     })
 
-    it('respects max date', async () => {
+    it('should respects max date', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
           .max=${new Date('2024-01-01')}
@@ -250,7 +250,24 @@ describe('<gds-month-picker>', () => {
       expect(el.value).to.equal(undefined)
     })
 
-    it('shows short name', async () => {
+    it('should show short name', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-month-picker
+          .min=${new Date('2024-01-01')}
+          .max=${new Date('2024-12-31')}
+          month-number
+        ></gds-month-picker>`,
+      )
+
+      el.focusedDate = new Date('2024-02-01')
+      await el.updateComplete
+
+      expect(
+        el.shadowRoot?.querySelector('#monthCell-1')?.innerHTML,
+      ).to.contain('(2)')
+    })
+
+    it('should show month number', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
           .min=${new Date('2024-01-01')}
@@ -270,8 +287,9 @@ describe('<gds-month-picker>', () => {
     it('should not render extraneous months when setting hide-extraneous-months to true', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
-          .hideExtraneousDays=${true}
+          .hideExtraneousMonths=${true}
           .min=${new Date('2024-04-01')}
+          .max=${new Date('2024-08-01')}
           .focusedDate=${new Date('2024-01-01')}
         ></gds-month-picker>`,
       )
