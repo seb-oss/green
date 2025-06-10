@@ -3,6 +3,7 @@
 import {
   GdsFlex,
   IconBrandSeb,
+  IconCrossLarge,
   IconCrossSmall,
   IconMagnifyingGlass,
   IconMenuSidebar,
@@ -12,11 +13,6 @@ import { Link } from '../link/link'
 
 export default function Header() {
   const { actions } = useSettingsContext()
-  const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
-
-  const handleToggleSidebar = (): void => {
-    actions.toggle('UI.Panel.Sidebar')
-  }
 
   return (
     <GdsFlex
@@ -28,32 +24,14 @@ export default function Header() {
       position="relative"
       gap="m"
     >
-      {!isOpen ? (
-        <Link
-          component="button"
-          onClick={handleToggleSidebar}
-          rank="tertiary"
-          size="small"
-        >
-          <IconMenuSidebar />
-        </Link>
-      ) : (
-        <Link
-          component="button"
-          onClick={handleToggleSidebar}
-          rank="secondary"
-          size="small"
-        >
-          <IconCrossSmall />
-        </Link>
-      )}
+      <div></div>
 
       <Link href="/">
-        <IconBrandSeb />
+        <IconBrandSeb size="l" />
       </Link>
 
-      <Link component="button" href="/search" size="small" rank="tertiary">
-        <IconMagnifyingGlass size="m"></IconMagnifyingGlass>
+      <Link component="button" href="/search" size="medium" rank="tertiary">
+        <IconMagnifyingGlass></IconMagnifyingGlass>
       </Link>
     </GdsFlex>
   )

@@ -51,7 +51,7 @@ export default function SidebarCollapsed() {
       onClick={InternalLink}
       href={item.slug}
       rank="tertiary"
-      size="small"
+      size="medium"
       width="max-content"
     >
       <DynamicIcon iconName={item.icon} />
