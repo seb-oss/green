@@ -130,7 +130,6 @@ export function Home({
               gap="m"
               height="240px"
               justify-content="space-between"
-              align-items="flex-start"
               background="secondary"
               border-color="primary"
             >
@@ -149,13 +148,22 @@ export function Home({
                   <IconCupHot size="l" />
                 </GdsGrid>
               </GdsFlex>
-              <GdsText>Icons</GdsText>
+              <Link href={`/component/icon`}>
+                <GdsFlex
+                  align-items="center"
+                  justify-content="space-between"
+                  gap="s"
+                  width="100%"
+                >
+                  <GdsText color="secondary">Icons</GdsText>
+                  <IconArrowRight />
+                </GdsFlex>
+              </Link>
             </GdsCard>
             <GdsCard
               gap="m"
               height="240px"
               justify-content="space-between"
-              align-items="flex-start"
               background="secondary"
               border-color="primary"
             >
@@ -218,14 +226,23 @@ export function Home({
                   </GdsGrid>
                 </GdsFlex>
               </GdsFlex>
-              <GdsText>Tokens</GdsText>
+              <Link href="/foundation/tokens">
+                <GdsFlex
+                  align-items="center"
+                  justify-content="space-between"
+                  gap="s"
+                  width="100%"
+                >
+                  <GdsText color="secondary">Tokens</GdsText>
+                  <IconArrowRight />
+                </GdsFlex>
+              </Link>
             </GdsCard>
 
             <GdsCard
               gap="m"
               height="240px"
               justify-content="space-between"
-              align-items="flex-start"
               background="secondary"
               border-color="primary"
             >
@@ -261,7 +278,17 @@ export function Home({
                   />
                 </GdsGrid>
               </GdsFlex>
-              <GdsText>Declarative layout</GdsText>
+              <Link href="/foundation/layouts">
+                <GdsFlex
+                  align-items="center"
+                  justify-content="space-between"
+                  gap="s"
+                  width="100%"
+                >
+                  <GdsText color="secondary">Declarative layout</GdsText>
+                  <IconArrowRight />
+                </GdsFlex>
+              </Link>
             </GdsCard>
           </GdsGrid>
         </GdsFlex>
