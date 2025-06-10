@@ -281,7 +281,7 @@ export function Home({
           <GdsGrid columns="3" gap="l">
             <GdsCard>
               <IconBrandFigma />
-              <Link href="https://figma.com/@seb">
+              <Link href="https://figma.com/" isExternal>
                 <GdsFlex
                   align-items="center"
                   justify-content="space-between"
