@@ -284,7 +284,7 @@ describe('<gds-month-picker>', () => {
       ).to.equal('Feb')
     })
 
-    it('should not render extraneous months when setting hide-extraneous-months to true', async () => {
+    it('should not render extraneous months with hide-extraneous-months', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
           .hideExtraneousMonths=${true}
@@ -297,6 +297,16 @@ describe('<gds-month-picker>', () => {
       expect(
         el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
       ).to.not.contain('January')
+    })
+
+    it('should not have class today with no-current-month', async () => {
+      const el = await fixture<GdsMonthPicker>(
+        html`<gds-month-picker no-current-month></gds-month-picker>`,
+      )
+      //el.focusedDate = new Date()
+      //await el.updateComplete
+      const cell = el.getMonthCell(el.focusedMonth)
+      expect(cell).to.not.have.class('today')
     })
   })
 
