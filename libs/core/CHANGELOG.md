@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.83.2
+
+### Patch Changes
+
+- c6833ae: **Datepicker:** Correction for value instance manipulation bug
+
 ## 1.83.1
 
 ### Patch Changes
