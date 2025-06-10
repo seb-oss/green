@@ -245,6 +245,7 @@ export class GdsMonthPicker extends GdsElement {
                         class="${classMap({
                           small: this.size == 'small',
                           today:
+                            !this.noCurrentMonth &&
                             currentYear == this.focusedYear &&
                             currentMonth == index,
                           disabled: Boolean(isOutsideMinMax),
