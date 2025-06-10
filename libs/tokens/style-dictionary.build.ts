@@ -3,10 +3,10 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import StyleDictionary from 'style-dictionary'
 
-import actions from './src/actions.js'
-import filters from './src/filters.js'
-import formats from './src/formats.js'
-import transforms from './src/transforms.js'
+import actions from './src/actions/index.ts'
+import filters from './src/filters/index.ts'
+import formats from './src/formats/index.ts'
+import transforms from './src/transforms/index.ts'
 
 const swiftPackageName = 'GdsTokens'
 const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
@@ -22,7 +22,7 @@ if (fs.existsSync(distPath)) {
   fs.rmSync(distPath, { recursive: true, force: true })
 }
 
-const capitalize = (str) => {
+const capitalize = (str: string): string => {
   return String(str).charAt(0).toUpperCase() + String(str).slice(1)
 }
 
@@ -53,6 +53,8 @@ await Promise.all(
               'color/css',
               'name/kebab',
               'color/mix-blend',
+              'shadow/css',
+              'font/css',
             ],
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/internal/`,
             prefix: 'gds-',
@@ -61,17 +63,24 @@ await Promise.all(
                 destination: `variables.css`,
                 format: 'css/only-variables',
                 filter: 'no-colors-no-ref',
+                options: {
+                  usesDtcg: true,
+                },
               },
               {
                 destination: `variables.ref.css`,
                 format: 'css/only-variables',
                 filter: 'is-color-is-ref',
+                options: {
+                  usesDtcg: true,
+                },
               },
               {
                 destination: `variables.${colorScheme}.css`,
                 format: 'css/only-variables',
                 filter: 'is-color-no-ref',
                 options: {
+                  usesDtcg: true,
                   colorScheme: colorScheme,
                 },
               },
@@ -86,6 +95,8 @@ await Promise.all(
               'color/css',
               'name/kebab',
               'color/alpha',
+              'shadow/css/shorthand',
+              'typography/css/shorthand',
             ],
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/css/`,
             prefix: 'gds-',
@@ -117,6 +128,8 @@ await Promise.all(
               'size/px',
               'color/css',
               'color/alpha',
+              'shadow/css',
+              'font/css',
             ],
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/scss/`,
             prefix: 'gds-',
@@ -156,6 +169,21 @@ await Promise.all(
                 format: 'json/figma',
                 destination: `figma-colours.${colorScheme}.json`,
                 filter: 'is-color-no-ref',
+              },
+              {
+                format: 'json/figma',
+                destination: `figma.shadows.json`,
+                filter: 'is-shadow',
+              },
+              {
+                format: 'json/figma',
+                destination: `figma.typography.json`,
+                filter: 'is-typography',
+              },
+              {
+                format: 'json/figma',
+                destination: `figma.size.json`,
+                filter: 'is-dimension',
               },
             ],
           },

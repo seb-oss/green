@@ -3,6 +3,7 @@ import { fileHeader } from 'style-dictionary/utils'
 export const staticPropertyFormatter = (options, valueFormatter) => {
   return function (token, indent) {
     let value = valueFormatter(token.token)
+
     const equalityIndex = value.indexOf('=')
     if (equalityIndex > 0) {
       value = value.slice(equalityIndex + 1)

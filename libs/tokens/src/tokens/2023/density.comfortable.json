@@ -1,73 +1,87 @@
 {
   "sys": {
     "space": {
+      "$type": "dimension",
       "4xs": {
-        "value": "{ref.space.4xs}",
-        "type": "dimension"
+        "$value": "{ref.space.4xs}"
       },
       "3xs": {
-        "value": "{ref.space.3xs}",
-        "type": "dimension"
+        "$value": "{ref.space.3xs}"
       },
       "2xs": {
-        "value": "{ref.space.2xs}",
-        "type": "dimension"
+        "$value": "{ref.space.2xs}"
       },
       "xs": {
-        "value": "{ref.space.xs}",
-        "type": "dimension"
+        "$value": "{ref.space.xs}"
       },
       "s": {
-        "value": "{ref.space.s}",
-        "type": "dimension"
+        "$value": "{ref.space.s}"
       },
       "m": {
-        "value": "{ref.space.m}",
-        "type": "dimension"
+        "$value": "{ref.space.m}"
       },
       "l": {
-        "value": "{ref.space.l}",
-        "type": "dimension"
+        "$value": "{ref.space.l}"
       },
       "xl": {
-        "value": "{ref.space.xl}",
-        "type": "dimension"
+        "$value": "{ref.space.xl}"
       },
       "2xl": {
-        "value": "{ref.space.2xl}",
-        "type": "dimension"
+        "$value": "{ref.space.2xl}"
       },
       "3xl": {
-        "value": "{ref.space.3xl}",
-        "type": "dimension"
+        "$value": "{ref.space.3xl}"
       },
       "4xl": {
-        "value": "{ref.space.4xl}",
-        "type": "dimension"
+        "$value": "{ref.space.4xl}"
       },
       "5xl": {
-        "value": "{ref.space.5xl}",
-        "type": "dimension"
+        "$value": "{ref.space.5xl}"
       },
       "6xl": {
-        "value": "{ref.space.6xl}",
-        "type": "dimension"
+        "$value": "{ref.space.6xl}"
       },
       "7xl": {
-        "value": "{ref.space.7xl}",
-        "type": "dimension"
+        "$value": "{ref.space.7xl}"
       },
       "8xl": {
-        "value": "{ref.space.8xl}",
-        "type": "dimension"
+        "$value": "{ref.space.8xl}"
       },
       "max": {
-        "value": "{ref.space.max}",
-        "type": "dimension"
+        "$value": "{ref.space.max}"
       },
       "0": {
-        "value": "{ref.space.0}",
-        "type": "dimension"
+        "$value": "{ref.space.0}"
+      }
+    },
+    "radius": {
+      "$type": "dimension",
+      "none": {
+        "$value": "{ref.space.0}"
+      },
+      "2xs": {
+        "$value": "{ref.space.3xs}"
+      },
+      "xs": {
+        "$value": "{ref.space.2xs}"
+      },
+      "s": {
+        "$value": "{ref.space.xs}"
+      },
+      "m": {
+        "$value": "{ref.space.m}"
+      },
+      "l": {
+        "$value": "{ref.space.l}"
+      },
+      "xl": {
+        "$value": "{ref.space.xl}"
+      },
+      "2xl": {
+        "$value": "{ref.space.2xl}"
+      },
+      "max": {
+        "$value": "{ref.space.max}"
       }
     }
   }

@@ -2,272 +2,158 @@
   "sys": {
     "state": {
       "hover-state-layer-opacity": {
-        "value": "0.10",
-        "type": "float"
+        "$value": 0.1
       }
     },
     "motion": {
       "easing": {
+        "$type": "cubicBezier",
         "ease-in": {
-          "value": "cubic-bezier(0.64, 0, 0.78, 0)",
-          "type": "string"
+          "$value": "[0.64, 0, 0.78, 0]"
         },
         "ease-in-out": {
-          "value": "cubic-bezier(0.83, 0, 0.17, 1)",
-          "type": "string"
+          "$value": "[0.83, 0, 0.17, 1]"
         },
         "ease-out": {
-          "value": "cubic-bezier(0.22, 1, 0.36, 1)",
-          "type": "string"
+          "$value": "[0.22, 1, 0.36, 1]"
         },
         "linear": {
-          "value": "cubic-bezier(0, 0, 1, 1)",
-          "type": "string"
+          "$value": "[0, 0, 1, 1]"
         }
       },
       "duration": {
+        "$type": "duration",
         "fastest": {
-          "value": ".2s",
-          "type": "string"
+          "$value": ".2s"
         },
         "fast": {
-          "value": ".4s",
-          "type": "string"
+          "$value": ".4s"
         },
         "default": {
-          "value": ".5s",
-          "type": "string"
+          "$value": ".5s"
         },
         "slow": {
-          "value": "1s",
-          "type": "string"
+          "$value": "1s"
         },
         "slowest": {
-          "value": "1.5s",
-          "type": "string"
+          "$value": "1.5s"
         }
       }
     },
     "viewport": {
-      "XS": {
-        "value": "375",
-        "type": "float"
+      "xs": {
+        "$value": "375"
       },
-      "S": {
-        "value": "430",
-        "type": "float"
+      "s": {
+        "$value": "430"
       },
-      "M": {
-        "value": "768",
-        "type": "float"
+      "m": {
+        "$value": "768"
       },
-      "L": {
-        "value": "1024",
-        "type": "float"
+      "l": {
+        "$value": "1024"
       },
-      "XL": {
-        "value": "1440",
-        "type": "float"
+      "xl": {
+        "$value": "1440"
       },
-      "2XL": {
-        "value": "2560",
-        "type": "float"
+      "2xl": {
+        "$value": "2560"
       },
-      "3XL": {
-        "value": "3840",
-        "type": "float"
+      "3xl": {
+        "$value": "3840"
       }
     },
     "shadow": {
-      "xs-offset-x-1": {
-        "value": "0",
-        "type": "float"
+      "$type": "shadow",
+      "xs-1": {
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        }
       },
-      "xs-offset-y-1": {
-        "value": "0",
-        "type": "float"
+      "xs-2": {
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "1px",
+          "spread": "0px"
+        }
       },
-      "xs-blur-1": {
-        "value": "1",
-        "type": "float"
+      "s-1": {
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "3px",
+          "spread": "0px"
+        }
       },
-      "xs-spread-1": {
-        "value": "0",
-        "type": "float"
+      "s-2": {
+        "$value": {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "1px",
+          "blur": "2px",
+          "spread": "0px"
+        }
       },
-      "xs-color-1": {
-        "value": "#000000"
+      "m-1": {
+        "$value": {
+          "color": "#0000001a",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "8px",
+          "spread": "-2px"
+        }
       },
-      "xs-offset-x-2": {
-        "value": "0",
-        "type": "float"
+      "m-2": {
+        "$value": {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "4px",
+          "spread": "-2px"
+        }
       },
-      "xs-offset-y-2": {
-        "value": "0",
-        "type": "float"
+      "l-1": {
+        "$value": {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "12px",
+          "blur": "16px",
+          "spread": "-4px"
+        }
       },
-      "xs-blur-2": {
-        "value": "1",
-        "type": "float"
+      "l-2": {
+        "$value": {
+          "color": "#00000008",
+          "offsetX": "0px",
+          "offsetY": "4px",
+          "blur": "6px",
+          "spread": "-2px"
+        }
       },
-      "xs-spread-2": {
-        "value": "0",
-        "type": "float"
+      "xl-1": {
+        "$value": {
+          "color": "#00000014",
+          "offsetX": "0px",
+          "offsetY": "20px",
+          "blur": "24px",
+          "spread": "-4px"
+        }
       },
-      "xs-color-2": {
-        "value": "#000000"
-      },
-      "s-offset-x-1": {
-        "value": "0",
-        "type": "float"
-      },
-      "s-offset-y-1": {
-        "value": "1",
-        "type": "float"
-      },
-      "s-blur-1": {
-        "value": "3",
-        "type": "float"
-      },
-      "s-spread-1": {
-        "value": "0",
-        "type": "float"
-      },
-      "s-color-1": {
-        "value": "#000000"
-      },
-      "s-offset-x-2": {
-        "value": "0",
-        "type": "float"
-      },
-      "s-offset-y-2": {
-        "value": "1",
-        "type": "float"
-      },
-      "s-blur-2": {
-        "value": "2",
-        "type": "float"
-      },
-      "s-spread-2": {
-        "value": "0",
-        "type": "float"
-      },
-      "s-color-2": {
-        "value": "#000000"
-      },
-      "m-offset-x-1": {
-        "value": "0",
-        "type": "float"
-      },
-      "m-offset-y-1": {
-        "value": "4",
-        "type": "float"
-      },
-      "m-blur-1": {
-        "value": "8",
-        "type": "float"
-      },
-      "m-spread-1": {
-        "value": "-2",
-        "type": "float"
-      },
-      "m-color-1": {
-        "value": "#000000"
-      },
-      "m-offset-x-2": {
-        "value": "0",
-        "type": "float"
-      },
-      "m-offset-y-2": {
-        "value": "2",
-        "type": "float"
-      },
-      "m-blur-2": {
-        "value": "4",
-        "type": "float"
-      },
-      "m-spread-2": {
-        "value": "-2",
-        "type": "float"
-      },
-      "m-color-2": {
-        "value": "#000000"
-      },
-      "l-offset-x-1": {
-        "value": "0",
-        "type": "float"
-      },
-      "l-offset-y-1": {
-        "value": "12",
-        "type": "float"
-      },
-      "l-blur-1": {
-        "value": "16",
-        "type": "float"
-      },
-      "l-spread-1": {
-        "value": "-4",
-        "type": "float"
-      },
-      "l-color-1": {
-        "value": "#000000"
-      },
-      "l-offset-x-2": {
-        "value": "0",
-        "type": "float"
-      },
-      "l-offset-y-2": {
-        "value": "4",
-        "type": "float"
-      },
-      "l-blur-2": {
-        "value": "6",
-        "type": "float"
-      },
-      "l-spread-2": {
-        "value": "-2",
-        "type": "float"
-      },
-      "l-color-2": {
-        "value": "#000000"
-      },
-      "xl-offset-x-1": {
-        "value": "0",
-        "type": "float"
-      },
-      "xl-offset-y-1": {
-        "value": "20",
-        "type": "float"
-      },
-      "xl-blur-1": {
-        "value": "24",
-        "type": "float"
-      },
-      "xl-spread-1": {
-        "value": "-4",
-        "type": "float"
-      },
-      "xl-color-1": {
-        "value": "#000000"
-      },
-      "xl-offset-x-2": {
-        "value": "0",
-        "type": "float"
-      },
-      "xl-offset-y-2": {
-        "value": "8",
-        "type": "float"
-      },
-      "xl-blur-2": {
-        "value": "8",
-        "type": "float"
-      },
-      "xl-spread-2": {
-        "value": "-4",
-        "type": "float"
-      },
-      "xl-color-2": {
-        "value": "#000000"
+      "xl-2": {
+        "$value": {
+          "color": "#00000008",
+          "offsetX": "0px",
+          "offsetY": "8px",
+          "blur": "8px",
+          "spread": "-4px"
+        }
       }
     }
   }

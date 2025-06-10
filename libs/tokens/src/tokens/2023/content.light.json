@@ -2,69 +2,54 @@
   "sys": {
     "color": {
       "content": {
+        "$type": "color",
         "content-01": {
-          "value": "{ref.color.grey.30}",
-          "type": "color"
+          "$value": "{ref.color.grey.30}"
         },
         "content-02": {
-          "value": "{ref.color.grey.18}",
-          "type": "color"
+          "$value": "{ref.color.grey.18}"
         },
         "content-03": {
-          "value": "{ref.color.white}",
-          "type": "color"
+          "$value": "{ref.color.white}"
         },
         "content-inversed": {
-          "value": "{ref.color.white}",
-          "type": "color"
+          "$value": "{ref.color.white}"
         },
         "content-brand-01": {
-          "value": "{ref.color.green.27}",
-          "type": "color"
+          "$value": "{ref.color.green.27}"
         },
         "content-brand-02": {
-          "value": "{ref.color.copper.18}",
-          "type": "color"
+          "$value": "{ref.color.copper.18}"
         },
         "content-positive-01": {
-          "value": "{ref.color.green.23}",
-          "type": "color"
+          "$value": "{ref.color.green.23}"
         },
         "content-positive-02": {
-          "value": "{ref.color.green.5}",
-          "type": "color"
+          "$value": "{ref.color.green.5}"
         },
         "content-negative-01": {
-          "value": "{ref.color.red.16}",
-          "type": "color"
+          "$value": "{ref.color.red.16}"
         },
         "content-negative-02": {
-          "value": "{ref.color.red.5}",
-          "type": "color"
+          "$value": "{ref.color.red.5}"
         },
         "content-warning-01": {
-          "value": "{ref.color.orange.18}",
-          "type": "color"
+          "$value": "{ref.color.orange.18}"
         },
         "content-warning-02": {
-          "value": "{ref.color.orange.6}",
-          "type": "color"
+          "$value": "{ref.color.orange.6}"
         },
         "content-notice-01": {
-          "value": "{ref.color.blue.17}",
-          "type": "color"
+          "$value": "{ref.color.blue.17}"
         },
         "content-notice-02": {
-          "value": "{ref.color.blue.5}",
-          "type": "color"
+          "$value": "{ref.color.blue.5}"
         },
         "content-disabled-01": {
-          "value": "{ref.color.grey.13}",
-          "type": "color"
+          "$value": "{ref.color.grey.13}"
         },
         "content-disabled-02": {
-          "value": "{ref.color.grey.3}",
-          "type": "color"
+          "$value": "{ref.color.grey.3}"
         }
       }
     }

@@ -1,166 +1,128 @@
 {
   "sys": {
     "color": {
+      "$type": "color",
       "document": {
         "01": {
-          "value": "{ref.color.white}",
-          "type": "color"
+          "$value": "{ref.color.white}"
         },
         "02": {
-          "value": "{ref.color.grey.6}",
-          "type": "color"
+          "$value": "{ref.color.grey.6}"
         },
         "brand-01": {
-          "value": "{ref.color.green.27}",
-          "type": "color"
+          "$value": "{ref.color.green.27}"
         },
         "inversed": {
-          "value": "{ref.color.grey.30}",
-          "type": "color"
+          "$value": "{ref.color.grey.30}"
         }
       },
       "surface": {
         "01": {
-          "value": "{ref.color.grey.3}",
-          "type": "color"
+          "$value": "{ref.color.grey.3}"
         },
         "02": {
-          "value": "{ref.color.white}",
-          "type": "color"
+          "$value": "{ref.color.white}"
         },
         "03": {
-          "value": "{ref.color.grey.30}",
-          "type": "color"
+          "$value": "{ref.color.grey.30}"
         },
         "brand-01": {
-          "value": "{ref.color.green.27}",
-          "type": "color"
+          "$value": "{ref.color.green.27}"
         },
         "brand-02": {
-          "value": "{ref.color.copper.4}",
-          "type": "color"
+          "$value": "{ref.color.copper.4}"
         },
         "positive-01": {
-          "value": "{ref.color.green.3}",
-          "type": "color"
+          "$value": "{ref.color.green.3}"
         },
         "negative-01": {
-          "value": "{ref.color.red.3}",
-          "type": "color"
+          "$value": "{ref.color.red.3}"
         },
         "warning-01": {
-          "value": "{ref.color.orange.3}",
-          "type": "color"
+          "$value": "{ref.color.orange.3}"
         },
         "information-01": {
-          "value": "{ref.color.grey.3}",
-          "type": "color"
+          "$value": "{ref.color.grey.3}"
         },
         "notice-01": {
-          "value": "{ref.color.blue.2}",
-          "type": "color"
+          "$value": "{ref.color.blue.2}"
         }
       },
       "container": {
         "brand-01": {
-          "value": "{ref.color.green.27}",
-          "type": "color"
+          "$value": "{ref.color.green.27}"
         },
         "brand-02": {
-          "value": "{ref.color.copper.6}",
-          "type": "color"
+          "$value": "{ref.color.copper.6}"
         },
         "brand-03": {
-          "value": "{ref.color.copper.7}",
-          "type": "color"
+          "$value": "{ref.color.copper.7}"
         },
         "01": {
-          "value": "{ref.color.grey.30}",
-          "type": "color"
+          "$value": "{ref.color.grey.30}"
         },
         "02": {
-          "value": "{ref.color.grey.6}",
-          "type": "color"
+          "$value": "{ref.color.grey.6}"
         },
         "03": {
-          "value": "{ref.color.grey.8}",
-          "type": "color"
+          "$value": "{ref.color.grey.8}"
         },
         "04": {
-          "value": "{ref.color.white}",
-          "type": "color"
+          "$value": "{ref.color.white}"
         },
         "positive-01": {
-          "value": "{ref.color.green.23}",
-          "type": "color"
+          "$value": "{ref.color.green.23}"
         },
         "positive-02": {
-          "value": "{ref.color.green.6}",
-          "type": "color"
+          "$value": "{ref.color.green.6}"
         },
         "positive-03": {
-          "value": "{ref.color.green.8}",
-          "type": "color"
+          "$value": "{ref.color.green.8}"
         },
         "negative-01": {
-          "value": "{ref.color.red.16}",
-          "type": "color"
+          "$value": "{ref.color.red.16}"
         },
         "negative-02": {
-          "value": "{ref.color.red.5}",
-          "type": "color"
+          "$value": "{ref.color.red.5}"
         },
         "negative-03": {
-          "value": "{ref.color.red.6}",
-          "type": "color"
+          "$value": "{ref.color.red.6}"
         },
         "notice-01": {
-          "value": "{ref.color.blue.17}",
-          "type": "color"
+          "$value": "{ref.color.blue.17}"
         },
         "notice-02": {
-          "value": "{ref.color.blue.5}",
-          "type": "color"
+          "$value": "{ref.color.blue.5}"
         },
         "notice-03": {
-          "value": "{ref.color.blue.6}",
-          "type": "color"
+          "$value": "{ref.color.blue.6}"
         },
         "warning-01": {
-          "value": "{ref.color.orange.18}",
-          "type": "color"
+          "$value": "{ref.color.orange.18}"
         },
         "warning-02": {
-          "value": "{ref.color.orange.6}",
-          "type": "color"
+          "$value": "{ref.color.orange.6}"
         },
         "warning-03": {
-          "value": "{ref.color.orange.8}",
-          "type": "color"
+          "$value": "{ref.color.orange.8}"
         },
         "information-01": {
-          "value": "{ref.color.grey.30}",
-          "type": "color"
+          "$value": "{ref.color.grey.30}"
         },
         "information-02": {
-          "value": "{ref.color.grey.6}",
-          "type": "color"
+          "$value": "{ref.color.grey.6}"
         },
         "information-03": {
-          "value": "{ref.color.grey.8}",
-          "type": "color"
+          "$value": "{ref.color.grey.8}"
         },
         "disabled-01": {
-          "value": "{ref.color.grey.5}",
-          "type": "color"
+          "$value": "{ref.color.grey.5}"
         },
         "disabled-02": {
-          "value": "{ref.color.grey.13}",
-          "type": "color"
+          "$value": "{ref.color.grey.13}"
         },
         "disabled-03": {
-          "value": "{ref.color.grey.5}",
-          "type": "color"
+          "$value": "{ref.color.grey.5}"
         }
       }
     }

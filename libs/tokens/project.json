@@ -9,7 +9,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "node libs/tokens/style-dictionary.build.js",
+          "node libs/tokens/style-dictionary.build.ts",
           "nx run tokens:copy-package-json",
           "nx run tokens:copy-readme"
         ],
