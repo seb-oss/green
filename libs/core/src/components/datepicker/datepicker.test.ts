@@ -262,8 +262,7 @@ describe('<gds-datepicker>', () => {
 
       const date2 = el.value!
 
-      expect(date1).to.not.equal(date2)
-      expect(onlyDate(date1)).to.equal(onlyDate(date2))
+      expect(onlyDate(date1)).to.not.equal(onlyDate(date2))
     })
   })
 
