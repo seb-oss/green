@@ -124,7 +124,7 @@ export function ComponentLayoutClient({
         <Tabs slug={component.slug} />
       </Core.GdsFlex>
       {section === 'overview' && (component.preamble || anatomyImage) && (
-        <Core.GdsFlex flex-direction="column" gap="l">
+        <Core.GdsFlex flex-direction="column" gap="m">
           {component.preamble && (
             <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
           )}
@@ -149,17 +149,19 @@ export function ComponentLayoutClient({
                 caption={`Anatomy of ${component.title.toLowerCase()}`}
               />
               {component['anatomy-details'] && (
-                <Core.GdsRichText>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: component['anatomy-details']
-                        ? marked.parse(component['anatomy-details'], {
-                            async: false,
-                          })
-                        : '',
-                    }}
-                  />
-                </Core.GdsRichText>
+                <Core.GdsDiv margin="m 0 0 0">
+                  <Core.GdsRichText>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: component['anatomy-details']
+                          ? marked.parse(component['anatomy-details'], {
+                              async: false,
+                            })
+                          : '',
+                      }}
+                    />
+                  </Core.GdsRichText>
+                </Core.GdsDiv>
               )}
             </React.Fragment>
           )}
