@@ -1,6 +1,7 @@
 'use client'
 
 import { FormEvent } from 'react'
+import { usePathname } from 'next/navigation'
 
 import {
   GdsBreadcrumbs,
@@ -15,10 +16,12 @@ import {
 } from '@sebgroup/green-core/react'
 import { Link } from '../../design/atoms/link/link'
 import { useSettingsContext, useSettingsValue } from '../../settings/hooks'
+import { SettingsNav } from './nav'
 
 type ColorScheme = 'dark' | 'light' | 'system'
 
 export default function Settings() {
+  const pathname = usePathname()
   const { actions } = useSettingsContext()
   const colorScheme = useSettingsValue(
     (settings) => settings.UI.Theme.ColorScheme,
@@ -62,16 +65,11 @@ export default function Settings() {
         <GdsText tag="p">Customize your experience</GdsText>
 
         <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
-          <Link component="menu" href="/settings">
-            Settings
-          </Link>
-          <Link component="menu" href="/settings/consent">
-            Consent
-          </Link>
+          <SettingsNav />
         </GdsCard>
       </GdsFlex>
 
-      <GdsCard padding="l" max-width="80ch">
+      <GdsCard max-width="80ch" padding="0" variant="secondary">
         <GdsFlex flex-direction="column" gap="l">
           <GdsText tag="h2">Appearance</GdsText>
           <GdsRadioGroup
@@ -97,13 +95,6 @@ export default function Settings() {
             <GdsRadio value="default" label="Default" />
             <GdsRadio value="comfortable" label="Comfortable" />
           </GdsRadioGroup>
-        </GdsFlex>
-
-        {/* Show offline mode */}
-        <GdsFlex>
-          <GdsText>Download</GdsText>
-          <GdsButton>Mac OS</GdsButton>
-          <GdsButton>Windows</GdsButton>
         </GdsFlex>
       </GdsCard>
     </GdsFlex>

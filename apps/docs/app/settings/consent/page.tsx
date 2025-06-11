@@ -9,9 +9,11 @@ import {
   GdsRichText,
   GdsText,
   IconHomeOpen,
+  IconSettingsGear,
 } from '@sebgroup/green-core/react'
 import { Link } from '../../../design/atoms/link/link'
 import { useSettingsContext } from '../../../settings/hooks'
+import { SettingsNav } from '../nav'
 
 export const dynamic = 'force-dynamic'
 
@@ -27,6 +29,7 @@ export default function ConsentPage() {
           Home
         </Link>
         <Link component="link" href="/settings">
+          <IconSettingsGear slot="lead" />
           Settings
         </Link>
         <GdsText>Consent</GdsText>
@@ -42,18 +45,12 @@ export default function ConsentPage() {
         <GdsText tag="p">
           Manage your cookie preferences and tracking consent
         </GdsText>
-
         <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
-          <Link component="menu" href="/settings">
-            Settings
-          </Link>
-          <Link component="menu" href="/settings/consent">
-            Consent
-          </Link>
+          <SettingsNav />
         </GdsCard>
       </GdsFlex>
 
-      <GdsCard padding="l" max-width="80ch">
+      <GdsCard max-width="80ch" variant="secondary" padding="0">
         <GdsFlex flex-direction="column" gap="l">
           <GdsText tag="h2">Cookie Preferences</GdsText>
           <GdsRichText>
