@@ -24,7 +24,6 @@ $gray-800: map.get(map.get(tokens.$grey, light), 800);
   thead {
     tr {
       th {
-        border-top: $_border-width solid $_border-color;
         background: $_header-background;
         color: $_header-color;
         padding: $_table_header_padding;

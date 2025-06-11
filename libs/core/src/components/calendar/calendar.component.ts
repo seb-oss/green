@@ -354,7 +354,7 @@ export class GdsCalendar extends GdsElement {
   @watch('value')
   private _valueChanged() {
     if (!this.value) return
-    this.focusedDate = this.value
+    this.focusedDate = new Date(this.value)
   }
 
   #handleKeyDown(e: KeyboardEvent) {

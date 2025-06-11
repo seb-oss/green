@@ -1,5 +1,13 @@
 # Changelog
 
+## 5.13.2
+
+### Patch Changes
+
+- b89a46f: V-Angular: Removed the top line/border from the table header.
+- Updated dependencies [c6833ae]
+  - @sebgroup/green-core@1.83.2
+
 ## 5.13.1
 
 ### Patch Changes
