@@ -11,10 +11,70 @@ import {
 } from '@sebgroup/green-core/react'
 import * as Core from '@sebgroup/green-core/react'
 
+type ColorOption = {
+  name: string
+  variants: {
+    button: 'neutral' | 'positive' | 'negative'
+    badge: 'information' | 'notice' | 'positive' | 'warning' | 'negative'
+    card:
+      | 'primary'
+      | 'secondary'
+      | 'tertiary'
+      | 'positive'
+      | 'negative'
+      | 'notice'
+      | 'warning'
+      | 'information'
+  }
+}
+// Then update the colorOptions array with the type
+const colorOptions: ColorOption[] = [
+  {
+    name: 'default',
+    variants: {
+      button: 'neutral',
+      badge: 'information',
+      card: 'primary',
+    },
+  },
+  {
+    name: 'positive',
+    variants: {
+      button: 'positive',
+      badge: 'positive',
+      card: 'positive',
+    },
+  },
+  {
+    name: 'negative',
+    variants: {
+      button: 'negative',
+      badge: 'negative',
+      card: 'negative',
+    },
+  },
+  {
+    name: 'notice',
+    variants: {
+      button: 'neutral',
+      badge: 'notice',
+      card: 'notice',
+    },
+  },
+  {
+    name: 'warning',
+    variants: {
+      button: 'neutral',
+      badge: 'warning',
+      card: 'warning',
+    },
+  },
+]
+
 export function ColorsClient() {
   const [view, setView] = useState<'preview' | 'inspect'>('preview')
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
-  const [variant, setVariant] = useState('notice')
+  const [selectedColor, setSelectedColor] = useState(colorOptions[0])
 
   const handleViewChange = (e: Event) => {
     const target = e.target as HTMLSelectElement
@@ -31,9 +91,111 @@ export function ColorsClient() {
         overflow="hidden"
         position="relative"
       >
-        <GdsCard variant="primary" width="100%" height="100%">
-          <Core.GdsBadge variant={'notice'}>Badge</Core.GdsBadge>
-          <Core.GdsCard variant={variant}>Card</Core.GdsCard>
+        <GdsCard
+          variant="primary"
+          width="100%"
+          height="100%"
+          justify-content="center"
+          align-items="center"
+        >
+          <Core.GdsFlex
+            align-items="center"
+            flex-wrap="wrap"
+            width="40%"
+            gap="xl"
+            position="relative"
+          >
+            <Core.GdsBadge variant={selectedColor.variants.badge}>
+              <Core.IconCircleInfo slot="lead"></Core.IconCircleInfo>
+              Badge
+            </Core.GdsBadge>
+
+            <Core.GdsCard variant={selectedColor.variants.card} padding="l">
+              Card
+            </Core.GdsCard>
+
+            <Core.GdsButton variant={selectedColor.variants.button}>
+              <Core.IconCreditCard slot="lead"></Core.IconCreditCard>
+              Button
+            </Core.GdsButton>
+            <Core.GdsButton
+              rank="secondary"
+              variant={selectedColor.variants.button}
+            >
+              <Core.IconCreditCard slot="lead"></Core.IconCreditCard>
+              Button
+            </Core.GdsButton>
+            <Core.GdsButton
+              rank="tertiary"
+              variant={selectedColor.variants.button}
+            >
+              <Core.IconCreditCard slot="lead"></Core.IconCreditCard>
+              Button
+            </Core.GdsButton>
+
+            <Core.GdsFlex gap="s" align-items="center">
+              <Core.GdsButton
+                variant={selectedColor.variants.button}
+                size="small"
+                label="Next step 2"
+              >
+                <Core.IconArrowRight></Core.IconArrowRight>
+              </Core.GdsButton>
+            </Core.GdsFlex>
+            <Core.GdsBadge variant={selectedColor.variants.badge} size="small">
+              428
+            </Core.GdsBadge>
+            <Core.GdsCard
+              flex-direction="row"
+              color={selectedColor.variants.card}
+              padding="0"
+            >
+              <Core.IconAi size="l"></Core.IconAi>
+            </Core.GdsCard>
+            <Core.GdsCard
+              flex-direction="row"
+              color={selectedColor.variants.card}
+              padding="0"
+            >
+              <Core.IconRocket size="l"></Core.IconRocket>
+            </Core.GdsCard>
+            <Core.GdsFab
+              position="relative"
+              inset="initial"
+              size="small"
+              variant={selectedColor.variants.button}
+            >
+              Floating
+              <Core.GdsSignal slot="trail" />
+            </Core.GdsFab>
+            <Core.GdsBadge
+              rounded
+              variant={selectedColor.variants.badge}
+              size="small"
+            >
+              20+
+            </Core.GdsBadge>
+            <Core.GdsFab
+              position="relative"
+              inset="initial"
+              size="small"
+              rank="secondary"
+              variant={selectedColor.variants.button}
+            >
+              Floating
+              <Core.GdsSignal slot="trail" />
+            </Core.GdsFab>
+            <Core.GdsFab
+              position="relative"
+              inset="initial"
+              size="small"
+              rank="tertiary"
+              variant={selectedColor.variants.button}
+            >
+              Floating
+              <Core.GdsSignal slot="trail" />
+            </Core.GdsFab>
+          </Core.GdsFlex>
         </GdsCard>
 
         <GdsCard
@@ -45,79 +207,29 @@ export function ColorsClient() {
           align-items="center"
           padding="xs"
         >
-          <Core.GdsFlex>
-            <Core.GdsFlex gap="s">
+          <Core.GdsFlex
+            gap="s"
+            align-items="center"
+            justify-content="center"
+            height="100%"
+          >
+            {colorOptions.map((option) => (
               <Core.GdsCard
+                key={option.name}
                 level="2"
-                variant="primary"
+                variant={option.variants.card}
                 width="xl"
                 height="xl"
                 padding="0"
-                // When active
-                border-color="secondary"
+                border-color={
+                  selectedColor.name === option.name
+                    ? 'secondary'
+                    : 'transparent'
+                }
                 border-width="2xs"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="secondary"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="tertiary"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="positive"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="negative"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="notice"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="warning"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="information"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="copper-01"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="copper-02"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-              <Core.GdsCard
-                variant="purple-01"
-                width="xl"
-                height="xl"
-                padding="0"
-              ></Core.GdsCard>
-            </Core.GdsFlex>
+                onClick={() => setSelectedColor(option)}
+              />
+            ))}
           </Core.GdsFlex>
           <Core.GdsFlex gap="s">
             <Core.GdsFlex>
@@ -140,7 +252,7 @@ export function ColorsClient() {
               onchange={handleViewChange}
             >
               <Core.GdsSegment value="preview">Preview</Core.GdsSegment>
-              <Core.GdsSegment value="inspect">Inspect</Core.GdsSegment>
+              <Core.GdsSegment value="inspect">Tokens</Core.GdsSegment>
             </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </GdsCard>
