@@ -22,6 +22,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
         color="primary"
         width="100%"
         background="secondary"
+        gap="2xl"
       >
         <Sidebar />
         <GdsFlex gap="xl" flex-direction="column" flex="1">

@@ -35,7 +35,7 @@ export function ComponentsClient() {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="2xl" padding="0 xl" width="100%">
+    <Core.GdsFlex flex-direction="column" gap="2xl" padding="0" width="100%">
       <Core.GdsFlex
         justify-content="center"
         align-items="flex-start"
