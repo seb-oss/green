@@ -9,7 +9,13 @@ import '../grid/index.js'
 import '../flex/index.js'
 import '../card'
 import '../div'
+import '../text'
+import '../grid'
+import '../form-summary'
+import '../filter-chips'
 import '../link'
+import '../fab'
+import '../signal'
 import '../blur'
 import '../divider'
 import '../checkbox'
@@ -24,6 +30,7 @@ import '../icon/icons/home-open.ts'
 import '../icon/icons/folder'
 import '../icon/icons/ai'
 import '../icon/icons/brush'
+import '../icon/icons/bank'
 import '../icon/icons/text-edit'
 import '../icon/icons/arrow-right'
 import '../icon/icons/settings-gear'
@@ -663,7 +670,17 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Dropdown
+        <gds-flex width="280px">
+          <gds-dropdown label="Select tech" hide-label>
+            <gds-option value="">Select tech</gds-option>
+            <gds-option value="warp">Warp Drive</gds-option>
+            <gds-option value="cybernetics">Cybernetics</gds-option>
+            <gds-option value="nanotechnology">Nanotechnology</gds-option>
+            <gds-option value="cloning">Cloning</gds-option>
+            <gds-option value="cryonics">Cryonics</gds-option>
+            <gds-option value="teleportation">Teleportation</gds-option>
+          </gds-dropdown>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -671,7 +688,17 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        FAB
+        <gds-flex>
+          <gds-fab
+            inset="auto"
+            position="relative"
+            variant="positive"
+            rank="secondary"
+            size="small"
+          >
+            Floating <gds-signal slot="trail"></gds-signal>
+          </gds-fab>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -679,7 +706,15 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Filter chips
+        <gds-filter-chips
+          value="top-news"
+          label="Pick news channel"
+          row-collapse
+        >
+          <gds-filter-chip value="all">All</gds-filter-chip>
+          <gds-filter-chip value="top-news">Top news</gds-filter-chip>
+          <gds-filter-chip value="division">Division</gds-filter-chip>
+        </gds-filter-chips>
       </gds-card>
       <gds-card
         height="280px"
@@ -687,7 +722,27 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Flex
+        <gds-flex flex-direction="column" gap="s">
+          <gds-flex gap="s" align-items="center">
+            <gds-card variant="secondary" width="40px" height="40px">
+              01
+            </gds-card>
+            <gds-card variant="secondary" width="40px" height="40px">
+              02
+            </gds-card>
+            <gds-card variant="secondary" width="10px" height="40px">
+              03
+            </gds-card>
+          </gds-flex>
+          <gds-flex gap="s" align-items="center" justify-content="flex-end">
+            <gds-card variant="secondary" width="40px" height="40px">
+              04
+            </gds-card>
+            <gds-card variant="secondary" width="10px" height="40px">
+              05
+            </gds-card>
+          </gds-flex>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -695,7 +750,20 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Form summary
+        <form style="width: 450px">
+          <gds-flex flex-direction="column" gap="m">
+            <input
+              id="designation"
+              type="text"
+              aria-invalid="true"
+              data-label="Designation"
+              data-errormessage="A designation is required"
+              required=""
+              hidden
+            />
+            <gds-form-summary id="summary"></gds-form-summary>
+          </gds-flex>
+        </form>
       </gds-card>
       <gds-card
         height="280px"
@@ -703,7 +771,35 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Grid
+        <gds-grid columns="12" gap="xs" width="280px">
+          <gds-card
+            variant="secondary"
+            grid-column="1/13"
+            border-radius="xs"
+            height="2xl"
+            padding="xs"
+          >
+            <gds-text tag="small">Nav</gds-text>
+          </gds-card>
+          <gds-card
+            variant="secondary"
+            grid-column="1/5"
+            border-radius="xs"
+            height="6xl"
+            padding="xs"
+          >
+            <gds-text tag="small">Sidebar</gds-text>
+          </gds-card>
+          <gds-card
+            variant="secondary"
+            grid-column="5/13"
+            border-radius="xs"
+            height="6xl"
+            padding="xs"
+          >
+            <gds-text tag="small">Content</gds-text>
+          </gds-card>
+        </gds-grid>
       </gds-card>
       <gds-card
         height="280px"
@@ -711,7 +807,11 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Icon
+        <gds-flex alig-items="center" gap="m">
+          <gds-icon-ai size="xl"></gds-icon-ai>
+          <gds-icon-bank size="xl"></gds-icon-bank>
+          <gds-icon-rocket size="xl"></gds-icon-rocket>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
