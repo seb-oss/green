@@ -9,20 +9,32 @@ import '../grid/index.js'
 import '../flex/index.js'
 import '../card'
 import '../div'
+import '../img'
+import '../popover'
 import '../text'
+import '../select'
+import '../signal'
+import '../spinner'
 import '../grid'
+import '../video'
+import '../theme'
+import '../textarea'
+import '../segmented-control'
 import '../form-summary'
 import '../filter-chips'
 import '../link'
+import '../radio'
 import '../fab'
 import '../signal'
 import '../blur'
 import '../divider'
 import '../checkbox'
 import '../details'
+import '../input'
 import '../datepicker'
 import '../context-menu'
 import '../coachmark'
+import '../menu-button'
 import '../breadcrumbs'
 import '../calendar'
 import '../divider/index.js'
@@ -31,7 +43,15 @@ import '../icon/icons/folder'
 import '../icon/icons/ai'
 import '../icon/icons/brush'
 import '../icon/icons/bank'
+import '../icon/icons/books'
+import '../icon/icons/bell'
+import '../icon/icons/people'
+import '../icon/icons/square-arrow-top-right'
+import '../icon/icons/magnifying-glass'
+import '../icon/icons/people-profile'
 import '../icon/icons/text-edit'
+import '../icon/icons/sun'
+import '../icon/icons/moon'
 import '../icon/icons/arrow-right'
 import '../icon/icons/settings-gear'
 import '../icon/icons/credit-card'
@@ -819,7 +839,12 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Image
+        <gds-img
+          aspect-ration="16/9"
+          src="https://api.seb.io/components/image/img.jpg"
+          border-radius="s"
+          width="280px"
+        ></gds-img>
       </gds-card>
       <gds-card
         height="280px"
@@ -827,7 +852,11 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Input
+        <gds-flex width="280px">
+          <gds-input plain>
+            <gds-icon-people-profile slot="lead"></gds-icon-people-profile>
+          </gds-input>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -835,7 +864,7 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Link
+        <gds-link text-decoration="underline">Link text</gds-link>
       </gds-card>
       <gds-card
         height="280px"
@@ -843,7 +872,36 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Menu button
+        <gds-card
+          height="40px"
+          width="max-content"
+          flex-direction="row"
+          variant="primary"
+          padding="0"
+          border="none"
+          gap="0"
+        >
+          <gds-menu-button selected>
+            <gds-icon-bell slot="trail"></gds-icon-bell>
+            Notification
+          </gds-menu-button>
+          <gds-popover>
+            <gds-menu-button slot="trigger">
+              <gds-icon-people slot="trail"></gds-icon-people>
+              Profile
+            </gds-menu-button>
+            <gds-flex padding="m">Profile stuff</gds-flex>
+          </gds-popover>
+          <gds-menu-button
+            href="https://github.com/seb-oss/green"
+            target="_blank"
+          >
+            <gds-icon-square-arrow-top-right
+              slot="trail"
+            ></gds-icon-square-arrow-top-right>
+            External link
+          </gds-menu-button>
+        </gds-card>
       </gds-card>
       <gds-card
         height="280px"
@@ -851,7 +909,23 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Popover
+        <gds-popover>
+          <gds-button rank="secondary" slot="trigger">
+            Show popover
+            <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+          </gds-button>
+          <gds-flex
+            flex-direction="column"
+            gap="s"
+            padding="m"
+            align-items="flex-start"
+            width="280px"
+          >
+            <gds-text tag="h3">Custom popover!</gds-text>
+            <gds-text tag="p"> Popover content </gds-text>
+            <gds-button rank="primary">Action</gds-button>
+          </gds-flex>
+        </gds-popover>
       </gds-card>
       <gds-card
         height="280px"
@@ -859,7 +933,11 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Radio
+        <gds-radio-group>
+          <gds-radio label="Radio 1" value="1"></gds-radio>
+          <gds-radio label="Radio 2" value="2"></gds-radio>
+          <gds-radio label="Radio 3" value="3"></gds-radio
+        ></gds-radio-group>
       </gds-card>
       <gds-card
         height="280px"
@@ -867,7 +945,9 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Rich text
+        <gds-rich-text>
+          <p>Rich <strong>text</strong> <u>with</u> <em>proper</em> style!</p>
+        </gds-rich-text>
       </gds-card>
       <gds-card
         height="280px"
@@ -875,7 +955,13 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Segmented control
+        <gds-flex width="280px">
+          <gds-segmented-control value="1" size="small">
+            <gds-segment value="1">Item 1</gds-segment>
+            <gds-segment value="2">Item 2</gds-segment>
+            <gds-segment value="3">Item 3</gds-segment>
+          </gds-segmented-control>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -883,7 +969,27 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Select
+        <gds-flex width="280px">
+          <gds-select>
+            <gds-icon-books slot="lead"></gds-icon-books>
+            <select>
+              <option value="">Select a value</option>
+              <optgroup label="Physics">
+                <option value="quantum-mechanics">Quantum Mechanics</option>
+                <option value="relativity">Relativity</option>
+              </optgroup>
+              <optgroup label="Chemistry">
+                <option value="organic-chemistry">Organic Chemistry</option>
+                <option value="inorganic-chemistry">Inorganic Chemistry</option>
+              </optgroup>
+              <optgroup label="Biology">
+                <option value="genetics">Genetics</option>
+                <option value="microbiology">Microbiology</option>
+                <option value="ecology">Ecology</option>
+              </optgroup>
+            </select>
+          </gds-select>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -891,7 +997,7 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Signal
+        <gds-signal></gds-signal>
       </gds-card>
       <gds-card
         height="280px"
@@ -899,7 +1005,7 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Spinner
+        <gds-spinner size="sm"></gds-spinner>
       </gds-card>
       <gds-card
         height="280px"
@@ -907,7 +1013,25 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Text
+        <gds-flex width="280px" flex-direction="column" gap="s">
+          <gds-flex gap="m">
+            <gds-text> Text </gds-text>
+            <gds-text text-decoration="underline"> is </gds-text>
+            <gds-text text-decoration="currentcolor wavy underline">
+              Awesome!
+            </gds-text>
+          </gds-flex>
+          <gds-flex>
+            <gds-text font-size="body-s" lines="2" color="secondary">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+          </gds-flex>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -915,7 +1039,14 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Textarea
+        <gds-flex width="280px">
+          <gds-textarea
+            label="Label"
+            supporting-text="Label support text"
+            resizable="false"
+          >
+          </gds-textarea>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -923,7 +1054,18 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Theme
+        <gds-flex gap="m">
+          <gds-theme color-scheme="light" design-version="2023">
+            <gds-card variant="secondary" align="center">
+              <gds-icon-sun size="xl"></gds-icon-sun>
+            </gds-card>
+          </gds-theme>
+          <gds-theme color-scheme="dark" design-version="2023">
+            <gds-card variant="primary" align="center">
+              <gds-icon-moon size="xl"></gds-icon-moon>
+            </gds-card>
+          </gds-theme>
+        </gds-flex>
       </gds-card>
       <gds-card
         height="280px"
@@ -931,7 +1073,18 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        Video
+        <gds-flex width="280px" overflow="hidden" border-radius="s">
+          <gds-video
+            width="100%"
+            height="auto"
+            aspect-ration="16/9"
+            src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            playsinline
+            muted
+            autoplay
+            loop
+          ></gds-video>
+        </gds-flex>
       </gds-card>
     </gds-flex>
   `,
