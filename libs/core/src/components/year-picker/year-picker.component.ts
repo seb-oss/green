@@ -246,9 +246,7 @@ export class GdsYearPicker extends GdsElement {
                     html`<td
                       class="${classMap({
                         small: this.size == 'small',
-                        today:
-                          !this.noCurrentYear &&
-                          currentYear == this.focusedYear,
+                        today: !this.noCurrentYear && currentYear == year,
                         disabled: Boolean(isOutsideMinMax),
                       })}"
                       ?disabled=${isOutsideMinMax}
