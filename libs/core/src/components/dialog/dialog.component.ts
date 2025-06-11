@@ -17,7 +17,7 @@ import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
-import { IconCrossLarge } from '../icon/icons/cross-large.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { styles } from './dialog.styles'
 import {
   lockBodyScrolling,
@@ -40,7 +40,7 @@ registerGlobalScrollLockStyles()
  * @slot footer - The footer of the dialog
  */
 @gdsCustomElement('gds-dialog', {
-  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossLarge],
+  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],
 })
 @localized()
 export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
@@ -114,14 +114,12 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
               display="flex"
               variant="secondary"
               box-shadow="xl"
-              padding="s"
-              border-radius=${this.variant === 'default' ? 's' : '0'}
+              padding="l"
+              gap="l"
+              border-radius="s"
             >
               <gds-flex
                 justify-content="space-between"
-                border-width="0 0 4xs 0"
-                margin="0 -s"
-                padding="0 s s"
                 background-color="secondary"
               >
                 <h2 id="heading">${this.heading}</h2>
@@ -131,10 +129,10 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
                   size="small"
                   label=${msg('Close')}
                   @click=${() => this.close('btn-close')}
-                  ><gds-icon-cross-large></gds-icon-cross-large
+                  ><gds-icon-cross-small></gds-icon-cross-small
                 ></gds-button>
               </gds-flex>
-              <gds-div id="content" padding="m 0" overflow="auto" flex="1">
+              <gds-div id="content" overflow="auto" flex="1">
                 <slot></slot>
               </gds-div>
               <gds-flex
