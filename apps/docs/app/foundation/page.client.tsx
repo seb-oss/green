@@ -1,8 +1,5 @@
 'use client'
 
-// import * as Core from '@sebgroup/green-core/react'
-import { useContentContext } from 'apps/docs/settings/content'
-
 import {
   GdsBreadcrumbs,
   GdsCard,
@@ -18,6 +15,7 @@ import {
   IconHomeOpen,
 } from '@sebgroup/green-core/react'
 import { Link } from '../../design/atoms/link/link'
+import { useContentContext } from '../../settings/content'
 
 export function FoundationClient() {
   const { actions } = useContentContext()
