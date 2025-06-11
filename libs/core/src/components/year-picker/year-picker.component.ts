@@ -199,48 +199,47 @@ export class GdsYearPicker extends GdsElement {
   render() {
     const currentYear = new Date().getFullYear()
     const col = this.columns
-    //const rows = years.length / col + 1
     const rows = this.rows
+    const totalCells = col * rows
+    const totalYears = this.max.getFullYear() - this.min.getFullYear() + 1
+    // Center the years in the grid if there are fewer years than cells
+    const startYear =
+      this.min.getFullYear() - Math.floor((totalCells - totalYears) / 2)
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
         ${Array.from({ length: rows }).map(
           (_, rowIdx) => html`
             <tr role="row">
-              ${years
-                .slice(rowIdx * col, rowIdx * col + col)
-                .map((year, colIdx) => {
-                  //const index = rowIdx * columns + colIdx
-                  //if (index >= years.length) return html`<td inert></td>`
-                  const cyear = new Date(this.focusedYear, 1, 1)
-                  const isOutsideMinMax =
-                    (cyear < this.min || cyear > this.max) &&
-                    !isSameYear(cyear, this.min) &&
-                    !isSameYear(cyear, this.max)
-
-                  return when(
-                    !this.hideExtraneousYears || !isOutsideMinMax,
-                    () =>
-                      html`<td
-                        class="${classMap({
-                          small: this.size == 'small',
-                          today: !this.noCurrentYear && currentYear == year,
-                          disabled: Boolean(isOutsideMinMax),
-                        })}"
-                        ?disabled=${isOutsideMinMax}
-                        tabindex="${this.focusedYear == year ? 0 : -1}"
-                        aria-selected="${this.#getSelectedYear() == year
-                          ? 'true'
-                          : 'false'}"
-                        @click=${() =>
-                          isOutsideMinMax ? null : this.#setSelectedYear(year)}
-                        id="yearCell-${year}"
-                      >
-                        ${year}
-                      </td>`,
-                    () => html`<td inert></td>`,
-                  )
-                })}
+              ${Array.from({ length: col }).map((_, colIdx) => {
+                const year = startYear + rowIdx * col + colIdx
+                const isDisabled =
+                  year < this.min.getFullYear() || year > this.max.getFullYear()
+                if (this.hideExtraneousYears && isDisabled)
+                  return html`<td inert></td>`
+                return html`
+                  <td
+                    class="${classMap({
+                      small: this.size == 'small',
+                      today: !this.noCurrentYear && currentYear == year,
+                      disabled: isDisabled,
+                    })}"
+                    ?disabled=${isDisabled}
+                    tabindex="${this.focusedYear == year && !isDisabled
+                      ? 0
+                      : -1}"
+                    aria-selected="${this.#getSelectedYear() == year &&
+                    !isDisabled
+                      ? 'true'
+                      : 'false'}"
+                    @click=${() =>
+                      isDisabled ? null : this.#setSelectedYear(year)}
+                    id="yearCell-${year}"
+                  >
+                    ${year}
+                  </td>
+                `
+              })}
             </tr>
           `,
         )}
