@@ -6,11 +6,12 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import {
   addMonths,
-  isSameDay,
-  isSameMonth,
+  addYears,
+  isSameYear,
   lastDayOfMonth,
   setHours,
   subMonths,
+  subYears,
 } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
@@ -47,25 +48,8 @@ export type CustomizedDate = {
 }
 
 const years = [
-  '2016',
-  '2017',
-  '2018',
-  '2019',
-  '2020',
-  '2021',
-  '2022',
-  '2023',
-  '2024',
-  '2025',
-  '2026',
-  '2027',
-  '2028',
-  '2029',
-  '2030',
-  '2031',
-  '2032',
-  '2033',
-  '2034',
+  2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027,
+  2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035,
 ]
 
 /**
@@ -123,28 +107,6 @@ export class GdsYearPicker extends GdsElement {
    */
   @property({ converter: dateConverter })
   focusedDate = new Date()
-
-  /**
-   * The year that is currently focused.
-   */
-  @property({ type: Number })
-  get focusedMonth() {
-    return this.focusedDate.getMonth()
-  }
-  set focusedMonth(month: number) {
-    const lastOfSelectedMonth = lastDayOfMonth(
-      new Date(this.focusedYear, month, 1),
-    )
-    const newFocusedDate = new Date(this.focusedDate)
-
-    newFocusedDate.setDate(
-      Math.min(this.focusedDate.getDate(), lastOfSelectedMonth.getDate()),
-    )
-    newFocusedDate.setMonth(month)
-    newFocusedDate.setHours(12, 0, 0, 0)
-
-    this.focusedDate = newFocusedDate
-  }
 
   /**
    * The year that is currently focused.
@@ -239,8 +201,8 @@ export class GdsYearPicker extends GdsElement {
                   const cyear = new Date(this.focusedYear, index, 1)
                   const isOutsideMinMax =
                     (cyear < this.min || cyear > this.max) &&
-                    !isSameMonth(cyear, this.min) &&
-                    !isSameMonth(cyear, this.max)
+                    !isSameYear(cyear, this.min) &&
+                    !isSameYear(cyear, this.max)
 
                   return when(
                     !this.hideExtraneousYears || !isOutsideMinMax,
@@ -252,13 +214,13 @@ export class GdsYearPicker extends GdsElement {
                           disabled: Boolean(isOutsideMinMax),
                         })}"
                         ?disabled=${isOutsideMinMax}
-                        tabindex="${this.focusedYear == index ? 0 : -1}"
-                        aria-selected="${this.#getSelectedYear() == index
+                        tabindex="${this.focusedYear == year ? 0 : -1}"
+                        aria-selected="${this.#getSelectedYear() == year
                           ? 'true'
                           : 'false'}"
                         @click=${() =>
-                          isOutsideMinMax ? null : this.#setSelectedYear(index)}
-                        id="yearCell-${index}"
+                          isOutsideMinMax ? null : this.#setSelectedYear(year)}
+                        id="yearCell-${year}"
                       >
                         ${year}
                       </td>`,
@@ -282,7 +244,6 @@ export class GdsYearPicker extends GdsElement {
 
   #setSelectedYear(year: number) {
     this.value = new Date(year, 1, 1, 12)
-
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: this.value,
@@ -299,64 +260,40 @@ export class GdsYearPicker extends GdsElement {
   }
 
   #handleKeyDown(e: KeyboardEvent) {
-    //let handled = false
-    /*if (e.key === 'ArrowLeft') {
-      if (this.focusedMonth > 0 && this.focusedDate > addMonths(this.min, 1))
-        this.focusedMonth -= 1
+    let handled = false
+    if (e.key === 'ArrowLeft') {
+      if (this.focusedYear > this.min.getFullYear()) this.focusedYear -= 1
       handled = true
     } else if (e.key === 'ArrowRight') {
-      if (this.focusedMonth < 11 && this.focusedDate < subMonths(this.max, 1))
-        this.focusedMonth += 1
+      if (this.focusedYear < this.max.getFullYear()) this.focusedYear += 1
       handled = true
     } else if (e.key === 'ArrowUp') {
-      if (this.focusedMonth > 2 && this.focusedDate > addMonths(this.min, 3))
-        this.focusedMonth -= 3
+      if (this.focusedYear > this.min.getFullYear() + 5) this.focusedYear -= 5
       handled = true
     } else if (e.key === 'ArrowDown') {
-      if (this.focusedMonth < 9 && this.focusedDate < subMonths(this.max, 3))
-        this.focusedMonth += 3
+      if (this.focusedYear < this.max.getFullYear() - 5) this.focusedYear += 5
       handled = true
     } else if (e.key === 'Home') {
-      if (new Date(this.focusedYear, 0, 1) > this.min) this.focusedMonth = 0
-      else this.focusedMonth = this.min.getMonth()
+      this.focusedYear = this.min.getFullYear()
       handled = true
     } else if (e.key === 'End') {
-      if (new Date(this.focusedYear, 11, 1) < this.max) this.focusedMonth = 11
-      else this.focusedMonth = this.max.getMonth()
+      this.focusedYear = this.max.getFullYear()
       handled = true
     } else if (e.key === 'PageUp' || e.key === 'PageDown') {
-      const isUp = e.key === 'PageUp'
-      let newMonth = this.focusedMonth
-
-      // Try moving up to 3 steps up or down in the same column
-      for (let i = 0; i < 3; i++) {
-        const next = newMonth + (isUp ? -3 : 3)
-        if (next < 0 || next > 11) break
-        const candidate = new Date(this.focusedYear, next, 1)
-        if (isUp && candidate < this.min && !isSameMonth(candidate, this.min))
-          break
-        if (!isUp && candidate > this.max && !isSameMonth(candidate, this.max))
-          break
-        newMonth = next
-      }
-
-      if (newMonth !== this.focusedMonth) {
-        this.focusedMonth = newMonth
-      }
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
-        this.#setSelectedMonth(this.focusedMonth)
+        this.#setSelectedYear(this.focusedYear)
       }
       handled = true
-    }*/
-    /*if (handled) {
+    }
+    if (handled) {
       e.preventDefault()
       e.stopPropagation()
 
       this.updateComplete.then(() => {
         this._elFocusedCell?.focus()
       })
-    }*/
+    }
   }
 }
