@@ -12,6 +12,13 @@ import SidebarCollapsed from './sidebar.collapsed'
 
 import './sidebar.css'
 
+const foundationPages = [
+  { title: 'Colors', slug: 'colors' },
+  { title: 'Typography', slug: 'typography' },
+  { title: 'Spacing', slug: 'spacing' },
+  { title: 'Layout', slug: 'layout' },
+]
+
 export default function Sidebar() {
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
   const pathName = usePathname()
@@ -62,6 +69,17 @@ export default function Sidebar() {
           acc.push({
             title: template.title,
             href: `/template/${template.slug}`,
+            isSubItem: true,
+          })
+        })
+      }
+
+      // Add foundation pages
+      if (link.slug === 'foundation' && pathName.startsWith('/foundation')) {
+        foundationPages.forEach((page) => {
+          acc.push({
+            title: page.title,
+            href: `/foundation/${page.slug}`,
             isSubItem: true,
           })
         })
