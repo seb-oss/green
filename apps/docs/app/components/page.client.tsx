@@ -75,6 +75,7 @@ export function ComponentsClient() {
         <Core.GdsGrid columns="3" gap="l" max-width="100%">
           {filteredComponents.map((component) => (
             <Core.GdsCard
+              key={component.title}
               border-color="primary"
               variant="secondary"
               border-radius="m"
