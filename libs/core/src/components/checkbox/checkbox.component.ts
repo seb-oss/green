@@ -143,18 +143,14 @@ export class GdsCheckbox extends GdsFormControlElement {
     } else {
       this.checked = !this.checked
     }
-    this.dispatchEvent(
-      new Event('change', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchStandardEvent('change', {
+      bubbles: true,
+      composed: true,
+    })
+    this.dispatchStandardEvent('input', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   protected _getValidityAnchor(): HTMLElement {

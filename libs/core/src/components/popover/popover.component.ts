@@ -353,14 +353,12 @@ export class GdsPopover extends GdsElement {
 
   #dispatchUiStateEvent = (reason: UIStateChangeReason) => {
     const toState = reason === 'show' ? true : false
-    return this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open: toState, reason },
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-      }),
-    )
+    return this.dispatchCustomEvent('gds-ui-state', {
+      detail: { open: toState, reason },
+      bubbles: false,
+      composed: false,
+      cancelable: true,
+    })
   }
 
   #handleCloseButton = (e: MouseEvent) => {
@@ -368,11 +366,6 @@ export class GdsPopover extends GdsElement {
     e.preventDefault()
     if (this.#dispatchUiStateEvent('close')) {
       this.open = false
-
-      // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
-      // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
-      // dialog (close button in this case.)
-      // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
       setTimeout(() => this._trigger?.focus(), 250)
     }
   }
