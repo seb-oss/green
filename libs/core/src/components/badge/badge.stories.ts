@@ -575,9 +575,11 @@ export const ALL: Story = {
         justify-content="center"
         align-items="center"
       >
-        <gds-checkbox label="Option 1" value="1"></gds-checkbox>
-        <gds-checkbox label="Option 2" value="2" checked></gds-checkbox>
-        <gds-checkbox label="Option 3" value="3"></gds-checkbox>
+        <gds-checkbox-group>
+          <gds-checkbox label="Checkbox 1" value="1"></gds-checkbox>
+          <gds-checkbox label="Checkbox 2" value="2" checked></gds-checkbox>
+          <gds-checkbox label="Checkbox 3" value="3"></gds-checkbox>
+        </gds-checkbox-group>
       </gds-card>
       <gds-card
         height="280px"
@@ -936,8 +938,8 @@ export const ALL: Story = {
         <gds-radio-group>
           <gds-radio label="Radio 1" value="1"></gds-radio>
           <gds-radio label="Radio 2" value="2"></gds-radio>
-          <gds-radio label="Radio 3" value="3"></gds-radio
-        ></gds-radio-group>
+          <gds-radio label="Radio 3" value="3"></gds-radio>
+        </gds-radio-group>
       </gds-card>
       <gds-card
         height="280px"
