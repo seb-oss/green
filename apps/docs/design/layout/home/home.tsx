@@ -12,6 +12,7 @@ import {
   IconBookmark,
   IconBrandFigma,
   IconBrandGithub,
+  IconBrandStorybook,
   IconCloudySun,
   IconCupHot,
 } from '@sebgroup/green-core/react'
@@ -256,21 +257,24 @@ export function Home({
               >
                 <GdsGrid columns="12" gap="xs" width="60%">
                   <GdsCard
-                    background="primary"
+                    background="secondary"
+                    border-color="primary"
                     grid-column="1/13"
                     border-radius="xs"
                     height="l"
                     padding="0"
                   />
                   <GdsCard
-                    background="primary"
+                    background="secondary"
+                    border-color="primary"
                     grid-column="1/4"
                     border-radius="xs"
                     height="6xl"
                     padding="0"
                   />
                   <GdsCard
-                    background="primary"
+                    background="secondary"
+                    border-color="primary"
                     grid-column="4/13"
                     border-radius="xs"
                     height="6xl"
@@ -316,6 +320,21 @@ export function Home({
                   width="100%"
                 >
                   <GdsText color="secondary">Figma</GdsText>
+                  <IconArrowRight />
+                </GdsFlex>
+              </Link>
+            </GdsCard>
+
+            <GdsCard>
+              <IconBrandStorybook />
+              <Link href="https://storybook.seb.io/" isExternal>
+                <GdsFlex
+                  align-items="center"
+                  justify-content="space-between"
+                  gap="s"
+                  width="100%"
+                >
+                  <GdsText color="secondary">Storybook</GdsText>
                   <IconArrowRight />
                 </GdsFlex>
               </Link>
