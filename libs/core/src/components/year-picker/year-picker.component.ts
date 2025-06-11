@@ -224,45 +224,47 @@ export class GdsYearPicker extends GdsElement {
 
   render() {
     const currentYear = new Date().getFullYear()
-    //const currentMonth = new Date().getMonth()
+    const columns = 5
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
-        ${Array.from({ length: 4 }).map(
+        ${Array.from({ length: columns }).map(
           (_, rowIdx) => html`
             <tr role="row">
-              ${years.slice(rowIdx * 4, rowIdx * 4 + 4).map((year, colIdx) => {
-                const index = rowIdx * 4 + colIdx
-                if (index >= years.length) return html`<td inert></td>`
-                const cyear = new Date(this.focusedYear, index, 1)
-                const isOutsideMinMax =
-                  (cyear < this.min || cyear > this.max) &&
-                  !isSameMonth(cyear, this.min) &&
-                  !isSameMonth(cyear, this.max)
+              ${years
+                .slice(rowIdx * columns, rowIdx * columns + columns)
+                .map((year, colIdx) => {
+                  const index = rowIdx * columns + colIdx
+                  if (index >= years.length) return html`<td inert></td>`
+                  const cyear = new Date(this.focusedYear, index, 1)
+                  const isOutsideMinMax =
+                    (cyear < this.min || cyear > this.max) &&
+                    !isSameMonth(cyear, this.min) &&
+                    !isSameMonth(cyear, this.max)
 
-                return when(
-                  !this.hideExtraneousYears || !isOutsideMinMax,
-                  () =>
-                    html`<td
-                      class="${classMap({
-                        small: this.size == 'small',
-                        today: !this.noCurrentYear && currentYear == year,
-                        disabled: Boolean(isOutsideMinMax),
-                      })}"
-                      ?disabled=${isOutsideMinMax}
-                      tabindex="${this.focusedYear == index ? 0 : -1}"
-                      aria-selected="${this.#getSelectedYear() == index
-                        ? 'true'
-                        : 'false'}"
-                      @click=${() =>
-                        isOutsideMinMax ? null : this.#setSelectedYear(index)}
-                      id="yearCell-${index}"
-                    >
-                      ${year}
-                    </td>`,
-                  () => html`<td inert></td>`,
-                )
-              })}
+                  return when(
+                    !this.hideExtraneousYears || !isOutsideMinMax,
+                    () =>
+                      html`<td
+                        class="${classMap({
+                          small: this.size == 'small',
+                          today: !this.noCurrentYear && currentYear == year,
+                          disabled: Boolean(isOutsideMinMax),
+                        })}"
+                        ?disabled=${isOutsideMinMax}
+                        tabindex="${this.focusedYear == index ? 0 : -1}"
+                        aria-selected="${this.#getSelectedYear() == index
+                          ? 'true'
+                          : 'false'}"
+                        @click=${() =>
+                          isOutsideMinMax ? null : this.#setSelectedYear(index)}
+                        id="yearCell-${index}"
+                      >
+                        ${year}
+                      </td>`,
+                    () => html`<td inert></td>`,
+                  )
+                })}
             </tr>
           `,
         )}
