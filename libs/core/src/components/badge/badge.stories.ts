@@ -12,6 +12,7 @@ import '../div'
 import '../img'
 import '../popover'
 import '../text'
+import '../dialog'
 import '../select'
 import '../signal'
 import '../spinner'
@@ -626,6 +627,17 @@ export const ALL: Story = {
         <gds-flex width="200px">
           <gds-datepicker show-week-numbers></gds-datepicker>
         </gds-flex>
+      </gds-card>
+      <gds-card
+        height="280px"
+        width="840px"
+        justify-content="center"
+        align-items="center"
+      >
+        <gds-dialog heading="Dialog heading">
+          <gds-button slot="trigger">Open Dialog</gds-button>
+          This is the content of the dialog.
+        </gds-dialog>
       </gds-card>
       <gds-card
         height="280px"
