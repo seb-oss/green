@@ -49,87 +49,52 @@ export const Default: Story = {
   },
 }
 
-/*
-/ **
- * Use the `no-current-month` attribute so the month right
+/**
+ * Use the `no-current-year` attribute so the month right
  * now does not have a outer ring around it.
- * /
+ */
 export const NoCurrentMonth: Story = {
   ...DefaultParams,
   name: 'No current month',
-  render: (args) => html`
-    <gds-month-picker no-current-month></gds-month-picker>
-  `,
+  render: (args) => html` <gds-year-picker no-current-year></gds-year-picker> `,
 }
 
-/ **
+/**
  * Use the `small` attribute to use a smaller and condenced styling.
- * /
+ */
 export const Small: Story = {
   ...DefaultParams,
-  render: (args) => html` <gds-month-picker size="small"></gds-month-picker> `,
+  render: (args) => html` <gds-year-picker size="small"></gds-year-picker> `,
 }
 
-/ **
- * Use the `short-month-text` attribute to only disply first
- * three characters of the month.
- * /
-export const Short: Story = {
-  ...DefaultParams,
-  render: (args) => html`
-    <gds-month-picker short-month-text></gds-month-picker>
-  `,
-}
-
-/ **
- * Use both `small` and `short-month-text` attributes to get
- * the smallest version.
- * /
-export const ShortAndSmall: Story = {
-  ...DefaultParams,
-  name: 'Short and small',
-  render: (args) => html`
-    <gds-month-picker size="small" short-month-text></gds-month-picker>
-  `,
-}
-
-/ **
- * Use the the `month-number` attribute to show parantese
- * with the number of the month in it (1-12).
- * /
-export const MonthNumber: Story = {
-  ...DefaultParams,
-  name: 'Month number',
-  render: (args) => html` <gds-month-picker month-number></gds-month-picker> `,
-}
-
-/ **
+/**
  * Use `min` and `max` attributes to limit the months you can choose from.
  * The rest is greyed out. Remember that by default it uses the current year.
- * /
+ */
 export const MinAndMax: Story = {
   ...DefaultParams,
   name: 'Min and max',
   render: (args) => html`
-    <gds-month-picker min="2025-03-01" max="2025-09-30"></gds-month-picker>
+    <gds-year-picker min="2023-01-01" max="2032-01-01"></gds-year-picker>
   `,
 }
 
-/ **
- * Use `hide-extraneous-months` in combination with `min` and `max` attributes
- * to to fully hide the non-selectable months.
- * /
+/**
+ * Use `hide-extraneous-years` in combination with `min` and `max` attributes
+ * to to fully hide the non-selectable years.
+ */
 export const Hide: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-month-picker
-      min="2025-03-01"
-      max="2025-09-30"
-      hide-extraneous-months
-    ></gds-month-picker>
+    <gds-year-picker
+      min="2023-01-01"
+      max="2032-01-01"
+      hide-extraneous-years
+    ></gds-year-picker>
   `,
 }
 
+/*
 / **
  * Use `focusedYear` or `focusedDate` attributes to show a different year from the
  * current one. Good to use if the dates are limited to other than the current year.
