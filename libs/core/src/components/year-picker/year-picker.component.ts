@@ -116,7 +116,7 @@ export class GdsYearPicker extends GdsElement {
     return this.focusedDate.getFullYear()
   }
   set focusedYear(year: number) {
-    this.focusedDate = new Date(this.focusedDate.setFullYear(year))
+    this.focusedDate = new Date(year, 1, 1, 12)
   }
 
   /**
@@ -196,9 +196,9 @@ export class GdsYearPicker extends GdsElement {
               ${years
                 .slice(rowIdx * columns, rowIdx * columns + columns)
                 .map((year, colIdx) => {
-                  const index = rowIdx * columns + colIdx
-                  if (index >= years.length) return html`<td inert></td>`
-                  const cyear = new Date(this.focusedYear, index, 1)
+                  //const index = rowIdx * columns + colIdx
+                  //if (index >= years.length) return html`<td inert></td>`
+                  const cyear = new Date(this.focusedYear, 1, 1)
                   const isOutsideMinMax =
                     (cyear < this.min || cyear > this.max) &&
                     !isSameYear(cyear, this.min) &&
@@ -236,9 +236,7 @@ export class GdsYearPicker extends GdsElement {
 
   #getSelectedYear(): number {
     if (!this.value) return -1
-
     const year = this.value.getFullYear()
-
     return year
   }
 
@@ -268,10 +266,10 @@ export class GdsYearPicker extends GdsElement {
       if (this.focusedYear < this.max.getFullYear()) this.focusedYear += 1
       handled = true
     } else if (e.key === 'ArrowUp') {
-      if (this.focusedYear > this.min.getFullYear() + 5) this.focusedYear -= 5
+      if (this.focusedYear > this.min.getFullYear() + 4) this.focusedYear -= 5
       handled = true
     } else if (e.key === 'ArrowDown') {
-      if (this.focusedYear < this.max.getFullYear() - 5) this.focusedYear += 5
+      if (this.focusedYear < this.max.getFullYear() - 4) this.focusedYear += 5
       handled = true
     } else if (e.key === 'Home') {
       this.focusedYear = this.min.getFullYear()
