@@ -1,0 +1,29 @@
+@use './mixins';
+
+@layer base, reset, transitional-styles;
+
+@layer transitional-styles {
+  @layer _base {
+    :host {
+      @include mixins.year-picker();
+
+      table {
+        flex-grow: 1;
+        width: 100%;
+      }
+
+      table td {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+  }
+
+  @layer _modifiers {
+    .week-number {
+      border-right: solid 1px var(--gds-ref-pallet-base300);
+      font-weight: 400;
+      pointer-events: none;
+    }
+  }
+}
