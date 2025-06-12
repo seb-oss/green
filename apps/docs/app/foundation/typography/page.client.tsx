@@ -3,181 +3,188 @@
 import { useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import {
-  GdsBreadcrumbs,
-  GdsCard,
-  GdsFlex,
-  GdsText,
-  IconHomeOpen,
-} from '@sebgroup/green-core/react'
 import { Link } from '../../../design/atoms/link/link'
 import Playground from '../../../design/atoms/playgroud/playground'
 
-type ColorOption = {
-  name: string
-  variants: {
-    button: 'neutral' | 'positive' | 'negative'
-    badge: 'information' | 'notice' | 'positive' | 'warning' | 'negative'
-    card:
-      | 'primary'
-      | 'secondary'
-      | 'tertiary'
-      | 'positive'
-      | 'negative'
-      | 'notice'
-      | 'warning'
-      | 'information'
-  }
-}
+export function TypographyClient() {
+  const [textConfig, setTextConfig] = useState({
+    tag: 'p',
+    fontSize: 'body-m',
+    fontWeight: 'regular',
+    lines: undefined as number | undefined,
+  })
 
-// Then update the colorOptions array with the type
-const colorOptions: ColorOption[] = [
-  {
-    name: 'default',
-    variants: {
-      button: 'neutral',
-      badge: 'information',
-      card: 'primary',
-    },
-  },
-  {
-    name: 'positive',
-    variants: {
-      button: 'positive',
-      badge: 'positive',
-      card: 'positive',
-    },
-  },
-  {
-    name: 'negative',
-    variants: {
-      button: 'negative',
-      badge: 'negative',
-      card: 'negative',
-    },
-  },
-  {
-    name: 'notice',
-    variants: {
-      button: 'neutral',
-      badge: 'notice',
-      card: 'notice',
-    },
-  },
-  {
-    name: 'warning',
-    variants: {
-      button: 'neutral',
-      badge: 'warning',
-      card: 'warning',
-    },
-  },
-]
+  const sampleText = 'The quick brown fox jumps over the lazy dog'
 
-export function ColorsClient() {
-  const [selectedColor, setSelectedColor] = useState(colorOptions[0])
+  // Dropdown options
+  const tagOptions = [
+    { value: 'p', label: 'Paragraph' },
+    { value: 'h1', label: 'H1' },
+    { value: 'h2', label: 'H2' },
+    { value: 'h3', label: 'H3' },
+    { value: 'h4', label: 'H4' },
+    { value: 'h5', label: 'H5' },
+    { value: 'h6', label: 'H6' },
+    { value: 'span', label: 'Span' },
+  ]
+
+  const sizeOptions = [
+    // Display sizes
+    { value: 'display-2xl', label: 'Display 2XL (82px)' },
+    { value: 'display-xl', label: 'Display XL (64px)' },
+    { value: 'display-l', label: 'Display L (48px)' },
+    { value: 'display-m', label: 'Display M (36px)' },
+    { value: 'display-s', label: 'Display S (32px)' },
+    // Heading sizes
+    { value: 'heading-xl', label: 'Heading XL (32px)' },
+    { value: 'heading-l', label: 'Heading L (28px)' },
+    { value: 'heading-m', label: 'Heading M (24px)' },
+    { value: 'heading-s', label: 'Heading S (20px)' },
+    { value: 'heading-xs', label: 'Heading XS (16px)' },
+    // Body sizes
+    { value: 'body-l', label: 'Body L (20px)' },
+    { value: 'body-m', label: 'Body M (16px)' },
+    { value: 'body-s', label: 'Body S (14px)' },
+  ]
+
+  const weightOptions = [
+    { value: 'light', label: 'Light (300)' },
+    { value: 'regular', label: 'Regular (400)' },
+    { value: 'book', label: 'Book (450)' },
+    { value: 'medium', label: 'Medium (500)' },
+    { value: 'bold', label: 'Bold (700)' },
+  ]
 
   const toolbarContent = (
     <Core.GdsFlex gap="s">
-      <Core.GdsButton rank="tertiary">Size</Core.GdsButton>
+      <Core.GdsDropdown
+        plain
+        size="small"
+        value={textConfig.tag}
+        onchange={(e: any) =>
+          setTextConfig({ ...textConfig, tag: e.detail.value })
+        }
+      >
+        {tagOptions.map((option) => (
+          <Core.GdsOption key={option.value} value={option.value}>
+            {option.label}
+          </Core.GdsOption>
+        ))}
+      </Core.GdsDropdown>
+
+      <Core.GdsDropdown
+        label="Size"
+        plain
+        size="small"
+        value={textConfig.fontSize}
+        onchange={(e: any) =>
+          setTextConfig({ ...textConfig, fontSize: e.detail.value })
+        }
+      >
+        {sizeOptions.map((option) => (
+          <Core.GdsOption key={option.value} value={option.value}>
+            {option.label}
+          </Core.GdsOption>
+        ))}
+      </Core.GdsDropdown>
+
+      <Core.GdsDropdown
+        plain
+        size="small"
+        value={textConfig.fontWeight}
+        onchange={(e: any) =>
+          setTextConfig({ ...textConfig, fontWeight: e.detail.value })
+        }
+      >
+        {weightOptions.map((option) => (
+          <Core.GdsOption key={option.value} value={option.value}>
+            {option.label}
+          </Core.GdsOption>
+        ))}
+      </Core.GdsDropdown>
     </Core.GdsFlex>
   )
 
-  // Preview content
   const previewContent = (
     <Core.GdsFlex
-      align-items="center"
-      flex-wrap="wrap"
-      width="40%"
+      flex-direction="column"
       gap="xl"
-      position="relative"
+      align-items="center"
+      justify-content="center"
+      width="100%"
+      padding="xl"
     >
-      <Core.GdsText tag="h1">H1 </Core.GdsText>
+      <Core.GdsText
+        tag={textConfig.tag}
+        font-size={textConfig.fontSize}
+        font-weight={textConfig.fontWeight}
+        lines={textConfig.lines}
+      >
+        {sampleText}
+      </Core.GdsText>
     </Core.GdsFlex>
   )
 
-  const inspectContent = <InspectView selectedColor={selectedColor} />
+  const inspectContent = (
+    <Core.GdsFlex flex-direction="column" gap="m" padding="xl">
+      <Core.GdsCard variant="secondary" padding="l">
+        <Core.GdsFlex flex-direction="column" gap="m">
+          <Core.GdsText tag="h3">Typography Tokens</Core.GdsText>
+          <Core.GdsText color="secondary">
+            Font Size: {textConfig.fontSize}
+          </Core.GdsText>
+          <Core.GdsText color="secondary">
+            Font Weight: {textConfig.fontWeight}
+          </Core.GdsText>
+          <Core.GdsText color="secondary">
+            Line Height: var(--gds-sys-text-line-height-{textConfig.fontSize})
+          </Core.GdsText>
 
-  function InspectView({ selectedColor }: { selectedColor: ColorOption }) {
-    const components = [
-      {
-        name: 'Badge',
-        component: (
-          <Core.GdsBadge variant={selectedColor.variants.badge}>
-            <Core.IconCircleInfo slot="lead" />
-            Badge
-          </Core.GdsBadge>
-        ),
-        code: `<gds-badge variant="${selectedColor.variants.badge}">...</gds-badge>`,
-      },
-    ]
-
-    const handleCopy = (code: string) => {
-      navigator.clipboard.writeText(code)
-    }
-
-    return (
-      <Core.GdsFlex flex-direction="column" gap="s" padding="0" overflow="auto">
-        {components.map((item, index) => (
-          <Core.GdsFlex
-            key={index}
-            align-items="center"
-            gap="s"
-            background="secondary"
-            padding="xs"
-            border-radius="s"
+          <Core.GdsInput
+            plain
+            value={`<Core.GdsText
+  tag="${textConfig.tag}"
+  font-size="${textConfig.fontSize}"
+  font-weight="${textConfig.fontWeight}"
+>
+  ${sampleText}
+</Core.GdsText>`}
+          />
+          <Core.GdsButton
+            rank="tertiary"
+            onClick={() =>
+              navigator.clipboard.writeText(
+                `<Core.GdsText tag="${textConfig.tag}" font-size="${textConfig.fontSize}" font-weight="${textConfig.fontWeight}">${sampleText}</Core.GdsText>`,
+              )
+            }
           >
-            <Core.GdsCard
-              justify-content="center"
-              align-items="center"
-              width="240px"
-              height="max-content"
-              variant="secondary"
-            >
-              {item.component}
-            </Core.GdsCard>
-            <Core.GdsFlex
-              flex="1"
-              width="100%"
-              align-items="center"
-              gap="l"
-              padding-inline="0 m"
-            >
-              <Core.GdsInput plain min-width="200px" value={item.code} />
-              <Core.GdsButton
-                rank="tertiary"
-                onClick={() => handleCopy(item.code)}
-              >
-                <Core.IconCopy />
-              </Core.GdsButton>
-            </Core.GdsFlex>
-          </Core.GdsFlex>
-        ))}
-      </Core.GdsFlex>
-    )
-  }
-
-  // In your main component, replace the inspect view with:
+            <Core.IconCopy />
+            Copy Code
+          </Core.GdsButton>
+        </Core.GdsFlex>
+      </Core.GdsCard>
+    </Core.GdsFlex>
+  )
 
   return (
-    <GdsFlex flex-direction="column" gap="xl">
-      <GdsBreadcrumbs size="small">
+    <Core.GdsFlex flex-direction="column" gap="xl">
+      <Core.GdsBreadcrumbs size="small">
         <Link component="link" href="/">
-          <IconHomeOpen size="m" slot="lead" />
+          <Core.IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
         <Link component="link" href="/foundation">
           <Core.IconBrandGreen size="m" slot="lead" />
           Foundation
         </Link>
-        <GdsText>Typography</GdsText>
-      </GdsBreadcrumbs>
+        <Core.GdsText>Typography</Core.GdsText>
+      </Core.GdsBreadcrumbs>
 
       <Playground
         toolbar={toolbarContent}
         previewContent={previewContent}
         inspectContent={inspectContent}
       />
-    </GdsFlex>
+    </Core.GdsFlex>
   )
 }
