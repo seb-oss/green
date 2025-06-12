@@ -37,7 +37,7 @@ export interface ComponentSummary {
 }
 
 export interface ComponentColumn {
-  type: 'rich-text' | 'snippet' | 'image' | 'paragraph'
+  type: 'rich-text' | 'snippet' | 'image' | 'figma' | 'paragraph'
   title?: string
   tag?: string
   content?: string
@@ -45,7 +45,11 @@ export interface ComponentColumn {
   size?: string
   Snippet?: string
   caption?: string
-  img?: string
+  node?: string
+  width?: string
+  height?: string
+  ratio?: string
+  src?: string
 }
 
 export interface ComponentSection {
@@ -83,6 +87,10 @@ export interface ComponentContent extends BaseContent {
   accessibility?: { section: ComponentSection[] }
   images?: ComponentImage[]
   icons?: IconList
+}
+
+export interface ImageProvider {
+  getImage?: (slug: string, node: string) => ComponentImage | undefined
 }
 
 // ICON ICON ICON
@@ -153,6 +161,7 @@ export interface Page extends BaseContent {
   headings: Heading[]
   showInMenu?: boolean
   menuOrder?: number
+  sections?: ComponentSection[]
 }
 
 // ===========================

@@ -14,12 +14,19 @@ import {
   IconCupHot,
   IconHomeOpen,
 } from '@sebgroup/green-core/react'
+import { Render } from '../../design/atoms/content/render'
 import { Link } from '../../design/atoms/link/link'
 import { useContentContext } from '../../settings/content'
 
 export function FoundationClient() {
   const { actions } = useContentContext()
   const CONTENT = actions.getPage('foundation')
+
+  const imageProvider = {
+    getImage: (slug: string, node: string) => {
+      return undefined
+    },
+  }
 
   return (
     <GdsFlex flex-direction="column" gap="2xl">
@@ -31,7 +38,13 @@ export function FoundationClient() {
         <GdsText>Foundation</GdsText>
       </GdsBreadcrumbs>
       <GdsText tag="h1">{CONTENT?.title}</GdsText>
-
+      {CONTENT?.sections && (
+        <Render
+          content={CONTENT.sections}
+          slug="foundation"
+          imageProvider={imageProvider}
+        />
+      )}
       <GdsFlex gap="l" flex-direction="column">
         <GdsFlex gap="s" flex-direction="column">
           <GdsText tag="h2">Core Resources</GdsText>
