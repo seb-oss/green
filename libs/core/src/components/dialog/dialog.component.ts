@@ -202,36 +202,23 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   }
 
   #dispatchCloseEvent = (reason?: string) => {
-    this.dispatchEvent(
-      new CustomEvent('gds-close', {
-        detail: reason,
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('gds-close', {
+      detail: reason,
+    })
     return this.#dispatchUiStateEvent(reason)
   }
 
   #dispatchShowEvent = (reason?: string) => {
-    this.dispatchEvent(
-      new CustomEvent('gds-show', {
-        detail: reason,
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('gds-show', {
+      detail: reason,
+    })
     return this.#dispatchUiStateEvent(reason)
   }
 
   #dispatchUiStateEvent = (reason?: string) => {
-    return this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { reason, open: this.open },
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-      }),
-    )
+    return this.dispatchCustomEvent('gds-ui-state', {
+      detail: { reason, open: this.open },
+    })
   }
 
   #handleTriggerSlotChange() {

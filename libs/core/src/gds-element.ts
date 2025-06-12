@@ -7,6 +7,13 @@ import { DynamicStylesController } from './utils/controllers/dynamic-styles-cont
 // More info: https://lit.dev/Components/decorators/#decorator-versions
 import 'reflect-metadata'
 
+function toPascalCase(str: string): string {
+  return str
+    .split('-')
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+}
+
 /**
  * Base class for Green Core elements.
  * This class sets up the base functionality that all Green Core elements share.
@@ -74,5 +81,47 @@ export class GdsElement extends LitElement {
         composed: false,
       }),
     )
+  }
+
+  /**
+   * Dispatches a standard event with the given name and options.
+   * A pascal cased version of the event name is also dispatched for compatibility.
+   */
+  dispatchStandardEvent(name: string, options?: EventInit): boolean {
+    const computedOptions = {
+      bubbles: true,
+      composed: false,
+      cancelable: true,
+      ...options,
+    }
+
+    // Dispatch both the original event name and a pascal cased version
+    // to maintain compatibility with both naming conventions, and consolidate
+    // the results to capture any cancellation.
+    return [
+      this.dispatchEvent(new Event(name, computedOptions)),
+      this.dispatchEvent(new Event(toPascalCase(name), computedOptions)),
+    ].every((event) => event !== false)
+  }
+
+  /**
+   * Dispatches a custom event with the given name and options.
+   * A pascal cased version of the event name is also dispatched for compatibility.
+   */
+  dispatchCustomEvent<T>(
+    name: string,
+    options: CustomEventInit<T> = {},
+  ): boolean {
+    const computedOptions = {
+      bubbles: true,
+      composed: false,
+      cancelable: true,
+      ...options,
+    }
+
+    return [
+      this.dispatchEvent(new CustomEvent(name, computedOptions)),
+      this.dispatchEvent(new CustomEvent(toPascalCase(name), computedOptions)),
+    ].every((event) => event !== false)
   }
 }

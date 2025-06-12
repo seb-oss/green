@@ -342,13 +342,11 @@ export class GdsCalendar extends GdsElement {
 
     this.value = dateOnMidDay
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: dateOnMidDay,
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('change', {
+      detail: dateOnMidDay,
+      bubbles: false,
+      composed: false,
+    })
   }
 
   @watch('value')
@@ -397,14 +395,11 @@ export class GdsCalendar extends GdsElement {
       newFocusedDate.getFullYear() >= this.min.getFullYear() &&
       newFocusedDate.getFullYear() <= this.max.getFullYear()
     ) {
-      const proceed = this.dispatchEvent(
-        new CustomEvent('gds-date-focused', {
-          detail: newFocusedDate,
-          bubbles: false,
-          composed: false,
-          cancelable: true,
-        }),
-      )
+      const proceed = this.dispatchCustomEvent('gds-date-focused', {
+        detail: newFocusedDate,
+        bubbles: false,
+        composed: false,
+      })
       if (proceed) {
         this.focusedDate = newFocusedDate
       }

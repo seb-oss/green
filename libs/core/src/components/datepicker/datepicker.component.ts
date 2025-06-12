@@ -613,23 +613,19 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #dispatchChangeEvent() {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('change', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('change', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 
   #dispatchInputEvent() {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('input', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 
