@@ -18,25 +18,25 @@ export function ConsentBanner() {
   }
 
   return (
-    <GdsDialog open>
+    <GdsDialog open heading="We use cookies">
       <GdsFlex
         flex-direction="column"
         width="400px"
         align-items="flex-start"
         gap="l"
-        padding="0 xl"
       >
-        <GdsText tag="h3">We use cookies</GdsText>
         <GdsText tag="p">
           Hi, this website uses essential cookies to ensure its proper operation
           and tracking cookies to understand how you interact with it.
         </GdsText>
         <GdsText tag="p">The latter will be set only after consent.</GdsText>
-        <GdsButton onClick={() => actions.toggle('UX.Global.Consent')}>
-          Accept cookies
-        </GdsButton>
       </GdsFlex>
-      <span slot="footer"></span>
+      <GdsButton
+        onClick={() => actions.toggle('UX.Global.Consent')}
+        slot="footer"
+      >
+        Accept cookies
+      </GdsButton>
     </GdsDialog>
   )
 }
