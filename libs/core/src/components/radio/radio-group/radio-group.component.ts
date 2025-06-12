@@ -144,20 +144,16 @@ class RadioGroup extends GdsFormControlElement<string> {
 
   #dispatchChangeEvents() {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('change', {
-          composed: true,
-          bubbles: true,
-        }),
-      ),
+      this.dispatchStandardEvent('change', {
+        composed: true,
+        bubbles: true,
+      }),
     )
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('input', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 

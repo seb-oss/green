@@ -106,13 +106,11 @@ export class GdsDetails extends withSizeXProps(
   }
 
   #dispatchStateEvent = (): void => {
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        bubbles: true,
-        composed: true,
-        detail: this.open,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      bubbles: true,
+      composed: true,
+      detail: this.open,
+    })
   }
 
   render() {
