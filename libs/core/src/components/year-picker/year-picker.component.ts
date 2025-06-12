@@ -203,8 +203,16 @@ export class GdsYearPicker extends GdsElement {
     const totalCells = col * rows
     const totalYears = this.max.getFullYear() - this.min.getFullYear() + 1
     // Center the years in the grid if there are fewer years than cells
-    const startYear =
+    let startYear =
       this.min.getFullYear() - Math.floor((totalCells - totalYears) / 2)
+    if (this.focusedYear < startYear)
+      do {
+        startYear -= totalCells
+      } while (this.focusedYear < startYear)
+    else if (this.focusedYear > startYear + totalCells - 1)
+      do {
+        startYear += totalCells
+      } while (this.focusedYear > startYear + totalCells - 1)
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
@@ -293,6 +301,12 @@ export class GdsYearPicker extends GdsElement {
       this.focusedYear = this.max.getFullYear()
       handled = true
     } else if (e.key === 'PageUp' || e.key === 'PageDown') {
+      const totalCells = this.columns * this.rows
+      let newYear =
+        this.focusedYear + (e.key === 'PageUp' ? -totalCells : totalCells)
+      if (newYear < this.min.getFullYear()) newYear = this.min.getFullYear()
+      if (newYear > this.max.getFullYear()) newYear = this.max.getFullYear()
+      this.focusedYear = newYear
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
