@@ -198,9 +198,7 @@ export class GdsYearPicker extends GdsElement {
 
   render() {
     const currentYear = new Date().getFullYear()
-    const col = this.columns
-    const rows = this.rows
-    const totalCells = col * rows
+    const totalCells = this.columns * this.rows
     const totalYears = this.max.getFullYear() - this.min.getFullYear() + 1
     // Center the years in the grid if there are fewer years than cells
     let startYear =
@@ -216,11 +214,11 @@ export class GdsYearPicker extends GdsElement {
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
-        ${Array.from({ length: rows }).map(
+        ${Array.from({ length: this.rows }).map(
           (_, rowIdx) => html`
             <tr role="row">
-              ${Array.from({ length: col }).map((_, colIdx) => {
-                const year = startYear + rowIdx * col + colIdx
+              ${Array.from({ length: this.columns }).map((_, colIdx) => {
+                const year = startYear + rowIdx * this.columns + colIdx
                 const isDisabled =
                   year < this.min.getFullYear() || year > this.max.getFullYear()
                 if (this.hideExtraneousYears && isDisabled)
@@ -287,12 +285,20 @@ export class GdsYearPicker extends GdsElement {
       if (this.focusedYear < this.max.getFullYear()) this.focusedYear += 1
       handled = true
     } else if (e.key === 'ArrowUp') {
-      if (this.focusedYear > this.min.getFullYear() + (this.columns - 1))
+      //if (this.focusedYear > this.min.getFullYear() + (this.columns - 1))
+      //  this.focusedYear -= this.columns
+      if (this.focusedYear > this.min.getFullYear())
         this.focusedYear -= this.columns
+      if (this.focusedYear < this.min.getFullYear())
+        this.focusedYear = this.min.getFullYear()
       handled = true
     } else if (e.key === 'ArrowDown') {
-      if (this.focusedYear < this.max.getFullYear() - (this.columns - 1))
+      //if (this.focusedYear < this.max.getFullYear() - (this.columns - 1))
+      //  this.focusedYear += this.columns
+      if (this.focusedYear < this.max.getFullYear())
         this.focusedYear += this.columns
+      if (this.focusedYear > this.max.getFullYear())
+        this.focusedYear = this.max.getFullYear()
       handled = true
     } else if (e.key === 'Home') {
       this.focusedYear = this.min.getFullYear()
