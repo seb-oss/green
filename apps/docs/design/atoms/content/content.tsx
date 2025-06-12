@@ -1,6 +1,7 @@
 // design/atoms/content/content.tsx
 'use client'
 
+/* eslint-disable no-case-declarations */
 import React from 'react'
 import { marked } from 'marked'
 
