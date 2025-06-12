@@ -23,7 +23,7 @@ export default {
       color,
       inset = false,
     }) =>
-      `${formatWithUnit(offsetX)}${formatWithUnit(offsetY)}${formatWithUnit(blur)}${formatWithUnit(spread)}${formatWithUnit(color)}${inset ? 'inset' : ''}`.trim()
+      `${formatWithUnit(offsetX)} ${formatWithUnit(offsetY)} ${formatWithUnit(blur)} ${formatWithUnit(spread)} ${formatWithUnit(color)} ${inset ? 'inset' : ''}`.trim()
     const tokenValue = token.$value ?? token.value
 
     if (Array.isArray(tokenValue)) {

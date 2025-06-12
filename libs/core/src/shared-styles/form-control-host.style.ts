@@ -19,8 +19,7 @@ export default css`
   }
 
   :host([size='small']) .native-control {
-    font-size: var(--gds-sys-text-size-detail-s);
-    line-height: var(--gds-sys-text-line-height-detail-s);
+    font: var(--gds-sys-text-detail-s);
   }
 
   :host([disabled]) {
@@ -38,8 +37,7 @@ export default css`
     overflow: hidden;
     padding: unset;
     width: 100%;
-    font-size: var(--gds-sys-text-size-detail-m);
-    line-height: var(--gds-sys-text-line-height-detail-m);
+    font: var(--gds-sys-text-detail-m);
     color: currentColor;
     text-align: left;
   }

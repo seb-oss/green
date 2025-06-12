@@ -14,13 +14,11 @@ export const styles = css`
       justify-content: flex-start;
       inline-size: 11ch;
       gap: var(--gds-sys-space-4xs);
-      font-size: var(--gds-sys-text-size-detail-s);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-detail-s);
     }
 
     :host([size='small']) .spinners {
-      font-size: var(--gds-sys-text-size-detail-s);
-      line-height: var(--gds-sys-text-line-height-detail-s);
+      font: var(--gds-sys-text-detail-s);
     }
 
     .spinner {

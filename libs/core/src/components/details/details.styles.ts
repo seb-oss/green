@@ -6,8 +6,7 @@ export const styles = css`
     .details {
       border-bottom: solid var(--gds-sys-space-4xs)
         var(--gds-sys-color-l2-border-primary);
-      font-size: var(--gds-sys-text-size-body-m);
-      line-height: var(--gds-sys-text-line-height-body-m);
+      font: var(--gds-sys-text-body-m);
       color: var(--gds-sys-color-l2-content-secondary);
       transition: border-color 240ms linear;
     }
@@ -78,9 +77,7 @@ export const styles = css`
     }
 
     .summary-label {
-      font-size: var(--gds-sys-text-size-heading-xs);
-      line-height: var(--gds-sys-text-line-height-heading-xs);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-xs);
       padding-block: var(--gds-sys-space-m);
       cursor: pointer;
       flex: 1;
@@ -88,14 +85,12 @@ export const styles = css`
     }
 
     .details.small .summary-label {
-      font-size: var(--gds-sys-text-size-heading-2xs);
-      line-height: var(--gds-sys-text-line-height-heading-2xs);
+      font: var(--gds-sys-text-heading-2xs);
       padding-block: var(--gds-sys-space-s);
     }
 
     .details.small .content {
-      font-size: var(--gds-sys-text-size-heading-2xs);
-      line-height: var(--gds-sys-text-line-height-heading-2xs);
+      font: var(--gds-sys-text-heading-2xs);
     }
 
     .details:focus-visible {

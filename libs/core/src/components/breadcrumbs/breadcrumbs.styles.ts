@@ -12,14 +12,11 @@ const style = css`
       align-items: center;
       width: max-content;
       gap: var(--gds-sys-space-s);
-      font-size: var(--gds-sys-text-size-detail-m);
-      line-height: var(--gds-sys-text-line-height-detail-m);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-detail-m);
     }
 
     .size-small {
-      font-size: var(--gds-sys-text-size-detail-s);
-      line-height: var(--gds-sys-text-line-height-detail-s);
+      font: var(--gds-sys-text-detail-s);
       gap: var(--gds-sys-space-xs);
     }
 

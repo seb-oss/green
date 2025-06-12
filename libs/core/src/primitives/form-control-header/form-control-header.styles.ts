@@ -7,7 +7,7 @@ export const styles = css`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      line-height: var(--gds-sys-text-line-height-detail-m);
+      font: var(--gds-sys-text-detail-m);
       color: var(--gds-sys-color-l2-content-primary);
 
       & > div {
@@ -23,8 +23,7 @@ export const styles = css`
     :host(.size-small) {
       & slot[name='supporting-text'],
       & ::slotted(label) {
-        font-size: var(--gds-sys-text-size-detail-s);
-        line-height: var(--gds-sys-text-line-height-detail-s);
+        font: var(--gds-sys-text-detail-s);
       }
     }
 
@@ -33,8 +32,7 @@ export const styles = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: all;
-      font-size: var(--gds-sys-text-size-body-s);
-      line-height: var(--gds-sys-text-line-height-body-s);
+      font: var(--gds-sys-text-body-s);
       border-radius: var(--gds-sys-space-xs);
       background-color: var(--gds-sys-color-l3-background-secondary);
       color: var(--gds-sys-color-l3-content-tertiary);

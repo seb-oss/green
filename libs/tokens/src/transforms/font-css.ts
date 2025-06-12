@@ -1,9 +1,9 @@
 const formatWithUnit = (props) => {
   if (typeof props === 'string' || typeof props === 'number') {
-    return props
+    return `${props}px`
   }
   if (typeof props === 'object' && props.value && props.unit) {
-    return `${props.value}${props.unit} `
+    return `${props.value}${props.unit}`
   }
 }
 

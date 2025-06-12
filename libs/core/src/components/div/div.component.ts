@@ -182,9 +182,7 @@ export class GdsDiv extends withSizeXProps(
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
-      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
-      return styleSize + styleLine
+      return `font: var(--gds-sys-text-${size});`
     },
   })
   'font-size'?: string

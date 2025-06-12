@@ -3,52 +3,52 @@
     "color": {
       "content": {
         "$type": "color",
-        "content-01": {
+        "01": {
           "$value": "{ref.color.grey.3}"
         },
-        "content-02": {
+        "02": {
           "$value": "{ref.color.grey.12}"
         },
-        "content-03": {
+        "03": {
           "$value": "{ref.color.grey.30}"
         },
-        "content-inversed": {
+        "inversed": {
           "$value": "{ref.color.grey.3}"
         },
-        "content-brand-01": {
+        "brand-01": {
           "$value": "{ref.color.green.27}"
         },
-        "content-brand-02": {
+        "brand-02": {
           "$value": "{ref.color.copper.18}"
         },
-        "content-positive-01": {
+        "positive-01": {
           "$value": "{ref.color.green.11}"
         },
-        "content-positive-02": {
+        "positive-02": {
           "$value": "{ref.color.green.23}"
         },
-        "content-negative-01": {
+        "negative-01": {
           "$value": "{ref.color.red.10}"
         },
-        "content-negative-02": {
+        "negative-02": {
           "$value": "{ref.color.red.8}"
         },
-        "content-warning-01": {
+        "warning-01": {
           "$value": "{ref.color.orange.10}"
         },
-        "content-warning-02": {
+        "warning-02": {
           "$value": "{ref.color.orange.6}"
         },
-        "content-notice-01": {
+        "notice-01": {
           "$value": "{ref.color.blue.10}"
         },
-        "content-notice-02": {
+        "notice-02": {
           "$value": "{ref.color.blue.8}"
         },
-        "content-disabled-01": {
+        "disabled-01": {
           "$value": "{ref.color.grey.9}"
         },
-        "content-disabled-02": {
+        "disabled-02": {
           "$value": "{ref.color.grey.9}"
         }
       }

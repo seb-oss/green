@@ -60,7 +60,7 @@ await Promise.all(
             prefix: 'gds-',
             files: [
               {
-                destination: `variables.css`,
+                destination: `variables.base.css`,
                 format: 'css/only-variables',
                 filter: 'no-colors-no-ref',
                 options: {
@@ -96,7 +96,7 @@ await Promise.all(
               'name/kebab',
               'color/alpha',
               'shadow/css/shorthand',
-              'typography/css/shorthand',
+              'font/css',
             ],
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/css/`,
             prefix: 'gds-',

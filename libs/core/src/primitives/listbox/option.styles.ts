@@ -15,9 +15,7 @@ const style = css`
       padding-inline: var(--gds-sys-space-m);
       padding-block: var(--gds-sys-space-m);
       cursor: pointer;
-      font-size: var(--gds-sys-text-size-label-input-large);
-      font-weight: var(--gds-sys-text-weight-regular);
-      line-height: var(--gds-sys-text-line-height-label-input-large);
+      font: var(--gds-sys-text-detail-book-m);
       gap: 1ch;
       max-width: 100%;
       box-sizing: border-box;

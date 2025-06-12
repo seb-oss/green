@@ -27,9 +27,7 @@
     color: var(--gds-sys-color-l3-content-primary);
     border-radius: var(--gds-sys-space-max);
     font-family: inherit;
-    font-size: var(--gds-sys-text-size-detail-m);
-    line-height: var(--gds-sys-text-line-height-detail-m);
-    font-weight: var(--gds-sys-text-weight-book);
+    font: var(--gds-sys-text-detail-m);
     gap: var(--gds-sys-space-s);
     outline-color: transparent;
     outline-offset: var(--gds-sys-space-3xs);
@@ -142,22 +140,19 @@
 @layer sizes {
   :host([size='xs']) .button {
     --_block-size: var(--gds-sys-space-l);
-    font-size: var(--gds-sys-text-size-detail-s);
-    line-height: var(--gds-sys-text-line-height-detail-s);
+    font: var(--gds-sys-text-detail-s);
     padding-inline: var(--gds-sys-space-m);
   }
 
   :host([size='small']) .button {
     --_block-size: var(--gds-sys-space-xl);
-    font-size: var(--gds-sys-text-size-detail-s);
-    line-height: var(--gds-sys-text-line-height-detail-s);
+    font: var(--gds-sys-text-detail-s);
     padding-inline: var(--gds-sys-space-m);
   }
 
   :host([size='medium']) .button {
     --_block-size: var(--gds-sys-space-2xl);
-    font-size: var(--gds-sys-text-size-detail-m);
-    line-height: var(--gds-sys-text-line-height-detail-m);
+    font: var(--gds-sys-text-detail-m);
   }
 }
 
