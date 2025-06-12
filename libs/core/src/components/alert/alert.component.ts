@@ -1,11 +1,13 @@
-import { LitElement, nothing, PropertyValues } from 'lit'
-import { customElement, property, query, state } from 'lit/decorators.js'
+import { nothing, PropertyValues } from 'lit'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
-import { live } from 'lit/directives/live.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js'
 
-import { html } from '../../utils/helpers/custom-element-scoping'
+import { GdsElement } from '../../gds-element'
+import { gdsCustomElement, html } from '../../scoping'
+import { GdsButton } from '../button/button.component'
+import { GdsCard } from '../card/card.component'
 
 import '../icon/icons/checkmark.js'
 import '../icon/icons/triangle-exclamation.js'
@@ -24,8 +26,10 @@ import { alertStyles } from './alert.style'
  * @fires close - Fired when alert is dismissed
  * @fires action - Fired when action button is clicked
  */
-@customElement('gds-alert')
-export class GdsAlert extends LitElement {
+@gdsCustomElement('gds-alert', {
+  dependsOn: [GdsButton, GdsCard],
+})
+export class GdsAlert extends GdsElement {
   static styles = [tokens, alertStyles]
 
   @property({ type: String, reflect: true })

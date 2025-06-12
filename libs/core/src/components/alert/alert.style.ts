@@ -4,9 +4,10 @@ export const alertStyles = css`
   :host {
     display: block;
     container-type: inline-size;
+    margin: 0.3rem;
   }
 
-  gds-card[role='alert'] {
+  [gds-element='gds-card'] {
     display: grid;
     align-items: baseline;
     width: 100%;
@@ -22,11 +23,10 @@ export const alertStyles = css`
 
   /* Animation states */
   @media (prefers-reduced-motion: no-preference) {
-    gds-card[role='alert'] {
+    [gds-element='gds-card'] {
       animation: slideIn 0.3s ease-out;
     }
-
-    gds-card[role='alert'].dismissing {
+    [gds-element='gds-card'].dismissing {
       opacity: 0;
       transform: translateX(1rem);
       pointer-events: none;
@@ -34,7 +34,7 @@ export const alertStyles = css`
   }
 
   @media (prefers-reduced-motion: reduce) {
-    gds-card[role='alert'].dismissing {
+    [gds-element='gds-card'].dismissing {
       opacity: 0;
       pointer-events: none;
     }
@@ -52,7 +52,7 @@ export const alertStyles = css`
   }
 
   /* Focus styles */
-  gds-card[role='alert']:focus-within {
+  [gds-element='gds-card']:focus-within {
     outline: 2px solid var(--gds-focus-color, #000);
     outline-offset: 2px;
   }
@@ -69,6 +69,9 @@ export const alertStyles = css`
   .message {
     grid-area: message;
     font-size: var(--gds-font-size-base, 1rem);
+    display: flex;
+    justify-content: center;
+    text-align: center;
   }
 
   .message-text {
@@ -146,14 +149,14 @@ export const alertStyles = css`
 
   /* Small: stacked */
   @container (max-width: 600px) {
-    gds-card[role='alert'] {
+    [gds-element='gds-card'] {
       grid-template-areas:
         'icon message close'
         'icon cta     cta';
       padding: 1rem;
       gap: 0.75rem;
     }
-    gds-card[role='alert'].dismissible {
+    [gds-element='gds-card'].dismissible {
       padding: 0rem 0rem 1rem 0.5rem;
     }
     .message {
@@ -168,12 +171,12 @@ export const alertStyles = css`
 
   /* Medium: inline */
   @container (min-width: 601px) and (max-width: 1024px) {
-    gds-card[role='alert'] {
+    [gds-element='gds-card'] {
       grid-template-areas: 'icon message close';
       padding: 0.5rem 0.5rem 1rem 0.5rem;
       gap: 0.75rem 1rem;
     }
-    gds-card[role='alert'].dismissible {
+    [gds-element='gds-card'].dismissible {
       padding: 0rem 0rem 1rem 0.5rem;
     }
     .message {
@@ -191,16 +194,16 @@ export const alertStyles = css`
 
   /* Large: centered */
   @container (min-width: 1025px) {
-    gds-card[role='alert'] {
+    [gds-element='gds-card'] {
       grid-template-columns: 1fr minmax(0, 37.5rem) auto 1fr;
       grid-template-areas: 'icon message close close';
       padding: 0.75rem 1.5rem;
       min-height: 2.5rem;
     }
-    gds-card[role='alert'].dismissible {
+    [gds-element='gds-card'].dismissible {
       padding: 0rem 0rem 1rem 0.5rem;
     }
-    gds-card[role='alert'].dismissing {
+    [gds-element='gds-card'].dismissing {
       opacity: 0;
       transform: translateX(1rem);
       pointer-events: none;
@@ -209,13 +212,11 @@ export const alertStyles = css`
       grid-column: 1;
       margin-right: 1.5rem;
     }
-
     .message {
       grid-column: 2;
       display: flex;
       gap: 0.75rem;
     }
-
     gds-button {
       grid-area: unset;
       width: auto;
@@ -223,7 +224,6 @@ export const alertStyles = css`
       display: inline-flex;
       flex-shrink: 0;
     }
-
     .close-btn {
       grid-column: 4;
       margin-left: 1.5rem;
