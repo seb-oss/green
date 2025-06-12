@@ -1,7 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { css, unsafeCSS } from 'lit'
 
-import base from '../../../dist/libs/tokens/2023/internal/variables.css?inline'
+import base from '../../../dist/libs/tokens/2023/internal/variables.base.css?inline'
 import colorsDark from '../../../dist/libs/tokens/2023/internal/variables.dark.css?inline'
 import colorsLight from '../../../dist/libs/tokens/2023/internal/variables.light.css?inline'
 import { GlobalStylesRegistry } from './utils/global-styles'
