@@ -3,6 +3,7 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+import { onlyDate } from '../../utils/testing'
 
 import './index.ts'
 import '../flex/index.ts'
@@ -90,6 +91,29 @@ export const Hide: Story = {
       min="2023-01-01"
       max="2032-01-01"
       hide-extraneous-years
+    ></gds-year-picker>
+  `,
+}
+
+/**
+ * Use `columns` and `rows` to override the default 5x5 cell table.
+ */
+export const LessCells: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-year-picker columns="4" rows="3"></gds-year-picker>
+  `,
+}
+
+/**
+ * Example of choosing a birth year.
+ */
+export const BirthYear: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-year-picker
+      min="1900-01-01"
+      max="${new Date().toISOString().split('T')[0]}"
     ></gds-year-picker>
   `,
 }
