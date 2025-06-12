@@ -13,8 +13,6 @@ import {
 import { Link } from '../../../design/atoms/link/link'
 import Playground from '../../../design/atoms/playgroud/playground'
 
-import './page.css'
-
 type ColorOption = {
   name: string
   variants: {
@@ -31,6 +29,7 @@ type ColorOption = {
       | 'information'
   }
 }
+
 // Then update the colorOptions array with the type
 const colorOptions: ColorOption[] = [
   {
@@ -80,22 +79,7 @@ export function ColorsClient() {
 
   const toolbarContent = (
     <Core.GdsFlex gap="s">
-      {colorOptions.map((option) => (
-        <Core.GdsCard
-          key={option.name}
-          level="2"
-          variant={option.variants.card}
-          width="xl"
-          height="xl"
-          padding="0"
-          className="color-picker"
-          border-color={
-            selectedColor.name === option.name ? 'secondary' : 'transparent'
-          }
-          border-width="2xs"
-          onClick={() => setSelectedColor(option)}
-        />
-      ))}
+      <Core.GdsButton rank="tertiary">Size</Core.GdsButton>
     </Core.GdsFlex>
   )
 
@@ -108,90 +92,7 @@ export function ColorsClient() {
       gap="xl"
       position="relative"
     >
-      <Core.GdsBadge variant={selectedColor.variants.badge}>
-        <Core.IconCircleInfo slot="lead"></Core.IconCircleInfo>
-        Badge
-      </Core.GdsBadge>
-
-      <Core.GdsCard variant={selectedColor.variants.card} padding="l">
-        Card
-      </Core.GdsCard>
-
-      <Core.GdsButton variant={selectedColor.variants.button}>
-        <Core.IconCreditCard slot="lead"></Core.IconCreditCard>
-        Button
-      </Core.GdsButton>
-      <Core.GdsButton rank="secondary" variant={selectedColor.variants.button}>
-        <Core.IconCreditCard slot="lead"></Core.IconCreditCard>
-        Button
-      </Core.GdsButton>
-      <Core.GdsButton rank="tertiary" variant={selectedColor.variants.button}>
-        <Core.IconCreditCard slot="lead"></Core.IconCreditCard>
-        Button
-      </Core.GdsButton>
-
-      <Core.GdsFlex gap="s" align-items="center">
-        <Core.GdsButton
-          variant={selectedColor.variants.button}
-          size="small"
-          label="Next step 2"
-        >
-          <Core.IconArrowRight></Core.IconArrowRight>
-        </Core.GdsButton>
-      </Core.GdsFlex>
-      <Core.GdsBadge variant={selectedColor.variants.badge} size="small">
-        428
-      </Core.GdsBadge>
-      <Core.GdsCard
-        flex-direction="row"
-        color={selectedColor.variants.card}
-        padding="0"
-      >
-        <Core.IconAi size="l"></Core.IconAi>
-      </Core.GdsCard>
-      <Core.GdsCard
-        flex-direction="row"
-        color={selectedColor.variants.card}
-        padding="0"
-      >
-        <Core.IconRocket size="l"></Core.IconRocket>
-      </Core.GdsCard>
-      <Core.GdsFab
-        position="relative"
-        inset="initial"
-        size="small"
-        variant={selectedColor.variants.button}
-      >
-        Floating
-        <Core.GdsSignal slot="trail" />
-      </Core.GdsFab>
-      <Core.GdsBadge
-        rounded
-        variant={selectedColor.variants.badge}
-        size="small"
-      >
-        20+
-      </Core.GdsBadge>
-      <Core.GdsFab
-        position="relative"
-        inset="initial"
-        size="small"
-        rank="secondary"
-        variant={selectedColor.variants.button}
-      >
-        Floating
-        <Core.GdsSignal slot="trail" />
-      </Core.GdsFab>
-      <Core.GdsFab
-        position="relative"
-        inset="initial"
-        size="small"
-        rank="tertiary"
-        variant={selectedColor.variants.button}
-      >
-        Floating
-        <Core.GdsSignal slot="trail" />
-      </Core.GdsFab>
+      <Core.GdsText tag="h1">H1 </Core.GdsText>
     </Core.GdsFlex>
   )
 
@@ -209,39 +110,6 @@ export function ColorsClient() {
         ),
         code: `<gds-badge variant="${selectedColor.variants.badge}">...</gds-badge>`,
       },
-      {
-        name: 'Card',
-        component: (
-          <Core.GdsCard variant={selectedColor.variants.card} padding="l">
-            Card
-          </Core.GdsCard>
-        ),
-        code: `<gds-card variant="${selectedColor.variants.card}"> ... </gds-card>`,
-      },
-      {
-        name: 'Button',
-        component: (
-          <Core.GdsButton variant={selectedColor.variants.button}>
-            <Core.IconCreditCard slot="lead" />
-            Button
-          </Core.GdsButton>
-        ),
-        code: `<gds-button variant="${selectedColor.variants.button}"> ... </gds-button>`,
-      },
-      {
-        name: 'Button Secondary',
-        component: (
-          <Core.GdsButton
-            rank="secondary"
-            variant={selectedColor.variants.button}
-          >
-            <Core.IconCreditCard slot="lead" />
-            Button
-          </Core.GdsButton>
-        ),
-        code: `<gds-button rank="secondary" variant="${selectedColor.variants.button}"> ... </gds-button>`,
-      },
-      // Add more components as needed
     ]
 
     const handleCopy = (code: string) => {
@@ -302,7 +170,7 @@ export function ColorsClient() {
           <Core.IconBrandGreen size="m" slot="lead" />
           Foundation
         </Link>
-        <GdsText>Colors</GdsText>
+        <GdsText>Typography</GdsText>
       </GdsBreadcrumbs>
 
       <Playground
