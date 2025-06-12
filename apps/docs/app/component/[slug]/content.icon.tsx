@@ -224,37 +224,14 @@ export function IconContent({ component }: IconContentProps) {
 
       {selectedIcon && (
         <>
-          <Core.GdsCard
-            padding="0"
-            border-width="0"
-            position="fixed"
-            inset="20px 20px 20px auto"
-            width="340px"
-            z-index="20"
-            variant="secondary"
-            box-shadow="m"
-            gap="0"
-            className="icon-slide-out"
+          <Core.GdsDialog
+            variant="slide-out"
+            onGdsClose={handleClosePanel}
+            width="100%; s { 340px }"
+            heading={selectedIcon.displayName}
+            open
           >
-            <Core.GdsCard
-              border-color="primary"
-              background="transparent"
-              border-width="0 0 4xs 0"
-              border-radius="0"
-              flex-direction="row"
-              align-items="center"
-              justify-content="space-between"
-            >
-              <Core.GdsText tag="p">{selectedIcon.displayName}</Core.GdsText>
-              <Core.GdsButton
-                size="small"
-                rank="tertiary"
-                onClick={handleClosePanel}
-              >
-                <Core.IconCrossSmall></Core.IconCrossSmall>
-              </Core.GdsButton>
-            </Core.GdsCard>
-            <Core.GdsFlex flex-direction="column" padding="m" gap="m">
+            <Core.GdsFlex flex-direction="column" gap="m">
               <Core.GdsCard
                 padding="xl"
                 justify-content="space-between"
@@ -380,16 +357,15 @@ export function IconContent({ component }: IconContentProps) {
                 </Core.GdsFlex>
               )}
             </Core.GdsFlex>
-          </Core.GdsCard>
-          <Core.GdsCard
-            z-index="0"
-            inset="0"
-            position="fixed"
-            background="tertiary"
-            opacity="0.2"
-            onClick={handleClosePanel}
-            className="pointer"
-          ></Core.GdsCard>
+            <Core.GdsButton
+              rank="tertiary"
+              size="small"
+              onClick={handleClosePanel}
+              slot="footer"
+            >
+              Close
+            </Core.GdsButton>
+          </Core.GdsDialog>
         </>
       )}
     </>
