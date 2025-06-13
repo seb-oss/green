@@ -1,7 +1,7 @@
 <output class="messages-container" aria-live="polite">
   <div
     class="message"
-    *ngFor="let message of messages"
+    *ngFor="let message of messages; trackBy: trackByMessageIndex"
     [ngClass]="message.type"
     @toastAnimation
     (mouseenter)="onMouseEnter(message)"
