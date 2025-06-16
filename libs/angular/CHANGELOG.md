@@ -1,5 +1,14 @@
 # Changelog
 
+## 5.13.3
+
+### Patch Changes
+
+- 63487db: **V-Angular:** Fix component id collision warnings for toast component
+- Updated dependencies [56d1779]
+- Updated dependencies [55b23da]
+  - @sebgroup/green-core@1.84.0
+
 ## 5.13.2
 
 ### Patch Changes
