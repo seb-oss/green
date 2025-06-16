@@ -200,7 +200,7 @@ describe('<gds-year-picker>', () => {
   })
 
   describe('API', () => {
-    /*it('should default to undefined', async () => {
+    it('should default to undefined', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker></gds-year-picker>`,
       )
@@ -214,10 +214,10 @@ describe('<gds-year-picker>', () => {
         ></gds-year-picker>`,
       )
 
-      el.focusedDate = new Date('2023-12-01')
+      el.focusedDate = new Date('2023-01-01')
       await el.updateComplete
 
-      const cell = el.getMonthCell(1)
+      const cell = el.getYearCell(1)
       expect(cell).to.have.class('disabled')
 
       expect(el.value).to.equal(undefined)
@@ -230,56 +230,22 @@ describe('<gds-year-picker>', () => {
         ></gds-year-picker>`,
       )
 
-      el.focusedDate = new Date('2024-02-01')
+      el.focusedDate = new Date('2025-01-01')
       await el.updateComplete
 
-      const cell = el.getMonthCell(1)
+      const cell = el.getYearCell(1)
       expect(cell).to.have.class('disabled')
 
       expect(el.value).to.equal(undefined)
     })
 
-    it('should show short name', async () => {
+    it('should not render extraneous years with hide-extraneous-years', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
-          .min=${new Date('2024-01-01')}
-          .max=${new Date('2024-12-31')}
-          month-number
-        ></gds-year-picker>`,
-      )
-
-      el.focusedDate = new Date('2024-02-01')
-      await el.updateComplete
-
-      expect(
-        el.shadowRoot?.querySelector('#monthCell-1')?.innerHTML,
-      ).to.contain('(2)')
-    })
-
-    it('should show month number', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
-          .min=${new Date('2024-01-01')}
-          .max=${new Date('2024-12-31')}
-          short-month-text
-        ></gds-year-picker>`,
-      )
-
-      el.focusedDate = new Date('2024-02-01')
-      await el.updateComplete
-
-      expect(
-        el.shadowRoot?.querySelector('#monthCell-1')?.textContent?.trim(),
-      ).to.equal('Feb')
-    })
-
-    it('should not render extraneous months with hide-extraneous-months', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
-          .hideExtraneousMonths=${true}
-          .min=${new Date('2024-04-01')}
-          .max=${new Date('2024-08-01')}
-          .focusedDate=${new Date('2024-01-01')}
+          .hideExtraneousYears=${true}
+          .min=${new Date('2023-01-01')}
+          .max=${new Date('2025-01-01')}
+          .focusedDate=${new Date('2022-01-01')}
         ></gds-year-picker>`,
       )
 
@@ -288,15 +254,15 @@ describe('<gds-year-picker>', () => {
       ).to.not.contain('January')
     })
 
-    it('should not have class today with no-current-month', async () => {
+    it('should not have class today with no-current-year', async () => {
       const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker no-current-month></gds-year-picker>`,
+        html`<gds-year-picker no-current-year></gds-year-picker>`,
       )
       //el.focusedDate = new Date()
       //await el.updateComplete
-      const cell = el.getMonthCell(el.focusedMonth)
+      const cell = el.getYearCell(el.focusedYear)
       expect(cell).to.not.have.class('today')
-    })*/
+    })
   })
 
   // Disable for 2023
