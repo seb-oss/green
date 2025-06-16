@@ -91,7 +91,7 @@ export class GdsYearPicker extends GdsElement {
   //@ property({ type: Date })
 
   /**
-   * Whether to hide extraneous years (that fall ouside of min and max years)
+   * Whether to hide extraneous years (that fall ouside of min and max)
    */
   @property({ type: Boolean, attribute: 'hide-extraneous-years' })
   hideExtraneousYears = false
@@ -117,13 +117,13 @@ export class GdsYearPicker extends GdsElement {
   /**
    * The date that is currently focused.
    */
-  @property({ converter: dateConverter })
+  @property({ converter: dateConverter, attribute: 'focused-date' })
   focusedDate = new Date()
 
   /**
    * The year that is currently focused.
    */
-  @property({ type: Number })
+  @property({ type: Number, attribute: 'focused-year' })
   get focusedYear() {
     return this.focusedDate.getFullYear()
   }

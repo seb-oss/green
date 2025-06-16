@@ -1,7 +1,7 @@
 import { expect } from '@esm-bundle/chai'
 import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
-import { addDays, addMonths, subMonths } from 'date-fns'
+import { addDays, addYears, subYears } from 'date-fns'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { onlyDate } from '../../utils/testing'
@@ -23,51 +23,9 @@ describe('<gds-year-picker>', () => {
   })
 
   describe('Interactions', () => {
-    /*it('should increment by 3 months when pressing key down if september or earlier, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
-      )
-      el.focus()
-
-      await aTimeout(0)
-      await sendKeys({ press: 'ArrowDown' })
-      await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
-      await aTimeout(0)
-
-      if (new Date().getMonth() < 9) {
-        await expect(el.value?.getMonth()).to.equal(
-          addMonths(new Date(), 3).getMonth(),
-        )
-      } else {
-        await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
-      }
-    })
-
-    it('should decrement by 3 months when pressing key down if april or later, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
-      )
-      el.focus()
-
-      await aTimeout(0)
-      await sendKeys({ press: 'ArrowUp' })
-      await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
-      await aTimeout(0)
-
-      if (new Date().getMonth() > 2) {
-        await expect(el.value?.getMonth()).to.equal(
-          subMonths(new Date(), 3).getMonth(),
-        )
-      } else {
-        await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
-      }
-    })
-
-    it('should increment by 1 month when pressing key right if november or earlier, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+    it('should increment by 1 year when pressing key right', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
       )
       el.focus()
 
@@ -77,18 +35,14 @@ describe('<gds-year-picker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      if (new Date().getMonth() < 11) {
-        await expect(el.value?.getMonth()).to.equal(
-          addMonths(new Date(), 1).getMonth(),
-        )
-      } else {
-        await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
-      }
+      await expect(el.value?.getFullYear()).to.equal(
+        addYears(new Date(), 1).getFullYear(),
+      )
     })
 
-    it('should decrement by 1 month when pressing key left if february or later, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+    it('should decrement by 1 year when pressing key left', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
       )
       el.focus()
 
@@ -98,18 +52,51 @@ describe('<gds-year-picker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      if (new Date().getMonth() > 2) {
-        await expect(el.value?.getMonth()).to.equal(
-          subMonths(new Date(), 1).getMonth(),
-        )
-      } else {
-        await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
-      }
+      await expect(el.value?.getFullYear()).to.equal(
+        subYears(new Date(), 1).getFullYear(),
+      )
     })
 
-    it('should select january when pressing home', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+    it('should increment by 5 year when pressing key down', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowRight' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(
+        addYears(new Date(), 5).getFullYear(),
+      )
+    })
+
+    it('should decrement by 5 year when pressing key up', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowLeft' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(
+        subYears(new Date(), 5).getFullYear(),
+      )
+    })
+
+    it('should select min year (2015) when pressing home', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
       )
       el.focus()
 
@@ -119,12 +106,15 @@ describe('<gds-year-picker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      await expect(el.value?.getMonth()).to.equal(0)
+      await expect(el.value?.getFullYear()).to.equal(2015)
     })
 
-    it('should select december when pressing end', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+    it('should select max year (2035) when pressing end', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
       )
       el.focus()
 
@@ -134,55 +124,54 @@ describe('<gds-year-picker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      await expect(el.value?.getMonth()).to.equal(11)
+      await expect(el.value?.getFullYear()).to.equal(2035)
     })
 
     it('should select the focused date when pressing enter', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
-          min="2025-01-01"
-          max="2025-12-31"
-        ></gds-month-picker>`,
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
       )
       el.focus()
 
-      const focusedDate = new Date('2025-06-01')
+      const focusedDate = new Date('2020-01-01')
       el.focusedDate = focusedDate
-      //const focusedDate = addDays(new Date(), 7)
 
       await aTimeout(0)
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+      await expect(el.value?.getFullYear()).to.equal(2020)
     })
 
     it('should select the focused date when pressing space', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
-          min="2025-01-01"
-          max="2025-12-31"
-        ></gds-month-picker>`,
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
       )
       el.focus()
 
-      const focusedDate = new Date('2025-06-01')
+      const focusedDate = new Date('2020-01-01')
       el.focusedDate = focusedDate
-      //const focusedDate = addDays(new Date(), 7)
 
       await aTimeout(0)
-      await sendKeys({ press: ' ' })
+      await sendKeys({ press: 'Space' })
       await aTimeout(0)
 
-      await expect(onlyDate(el.value)).to.equal(onlyDate(focusedDate))
+      await expect(el.value?.getFullYear()).to.equal(2020)
     })
 
+    /*
     it('should not select the focused date when pressing enter if it is disabled', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
           min="2024-01-01"
           max="2024-06-30"
-        ></gds-month-picker>`,
+        ></gds-year-picker>`,
       )
       el.focus()
 
@@ -197,8 +186,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should update the focused date when value is changed', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
       )
 
       el.value = new Date('2023-02-01')
@@ -212,17 +201,17 @@ describe('<gds-year-picker>', () => {
 
   describe('API', () => {
     /*it('should default to undefined', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
       )
       expect(el.value).to.equal(undefined)
     })
 
     it('should respects min date', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
           .min=${new Date('2024-01-01')}
-        ></gds-month-picker>`,
+        ></gds-year-picker>`,
       )
 
       el.focusedDate = new Date('2023-12-01')
@@ -235,10 +224,10 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should respects max date', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
           .max=${new Date('2024-01-01')}
-        ></gds-month-picker>`,
+        ></gds-year-picker>`,
       )
 
       el.focusedDate = new Date('2024-02-01')
@@ -251,12 +240,12 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should show short name', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
           .min=${new Date('2024-01-01')}
           .max=${new Date('2024-12-31')}
           month-number
-        ></gds-month-picker>`,
+        ></gds-year-picker>`,
       )
 
       el.focusedDate = new Date('2024-02-01')
@@ -268,12 +257,12 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should show month number', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
           .min=${new Date('2024-01-01')}
           .max=${new Date('2024-12-31')}
           short-month-text
-        ></gds-month-picker>`,
+        ></gds-year-picker>`,
       )
 
       el.focusedDate = new Date('2024-02-01')
@@ -285,13 +274,13 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should not render extraneous months with hide-extraneous-months', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
           .hideExtraneousMonths=${true}
           .min=${new Date('2024-04-01')}
           .max=${new Date('2024-08-01')}
           .focusedDate=${new Date('2024-01-01')}
-        ></gds-month-picker>`,
+        ></gds-year-picker>`,
       )
 
       expect(
@@ -300,8 +289,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should not have class today with no-current-month', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker no-current-month></gds-month-picker>`,
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker no-current-month></gds-year-picker>`,
       )
       //el.focusedDate = new Date()
       //await el.updateComplete
