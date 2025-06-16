@@ -1,14 +1,12 @@
 import { expect, fixture, html as testingHtml } from '@open-wc/testing'
 
-import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-
 import type { GdsAlert } from './alert.component'
 
 import './alert.ts'
 
 import sinon from 'sinon'
 
-const html = htmlTemplateTagFactory(testingHtml)
+const html = testingHtml
 
 describe('<gds-alert>', () => {
   describe('Rendering', () => {
@@ -18,37 +16,25 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
 
-      expect(el.type).to.equal('info')
-      expect(el.showIcon).to.be.true
+      expect(el.variant).to.equal('information')
       expect(el.dismissible).to.be.false
       expect(el.buttonText).to.equal('')
       const card =
         el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
         el.querySelector('[gds-element="gds-card"]')
       expect(card?.getAttribute('role')).to.equal('alert')
-      expect(card?.getAttribute('aria-live')).to.equal('polite')
       expect(card?.getAttribute('aria-label')).to.equal('Information alert')
     })
 
-    it('should render alert with custom type and icon', async () => {
+    it('should render alert with custom variant and icon', async () => {
       const el = await fixture<GdsAlert>(
-        html`<gds-alert type="success" show-icon>Success alert</gds-alert>`,
+        html`<gds-alert variant="positive">Success alert</gds-alert>`,
       )
       await el.updateComplete
-      expect(el.type).to.equal('success')
+      expect(el.variant).to.equal('positive')
       const icon =
         el.shadowRoot?.querySelector('.icon') || el.querySelector('.icon')
       expect(icon).to.exist
-    })
-
-    it('should not render icon when showIcon is false', async () => {
-      const el = await fixture<GdsAlert>(
-        html`<gds-alert .showIcon=${false}>No icon</gds-alert>`,
-      )
-      await el.updateComplete
-      const icon =
-        el.shadowRoot?.querySelector('.icon') || el.querySelector('.icon')
-      expect(icon).to.be.null
     })
 
     it('should render dismissible alert with close button', async () => {
@@ -68,8 +54,8 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
       const btn =
-        el.shadowRoot?.querySelector('gds-button') ||
-        el.querySelector('gds-button')
+        el.shadowRoot?.querySelector('gds-button:not(.close-btn)') ||
+        el.querySelector('gds-button:not(.close-btn)')
       expect(btn).to.exist
       expect(btn?.textContent?.trim()).to.equal('Action')
     })
@@ -99,8 +85,8 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
       const btn =
-        el.shadowRoot?.querySelector('gds-button') ||
-        el.querySelector('gds-button')
+        el.shadowRoot?.querySelector('gds-button:not(.close-btn)') ||
+        el.querySelector('gds-button:not(.close-btn)')
       const actionSpy = sinon.spy()
       el.addEventListener('action', actionSpy)
       btn?.dispatchEvent(
@@ -112,15 +98,25 @@ describe('<gds-alert>', () => {
   })
 
   describe('Accessibility', () => {
-    it('should have correct ARIA attributes for type', async () => {
+    it('should have correct ARIA attributes for variant', async () => {
       const el = await fixture<GdsAlert>(
-        html`<gds-alert type="error">Error alert</gds-alert>`,
+        html`<gds-alert variant="negative">Error alert</gds-alert>`,
       )
       await el.updateComplete
       const card =
         el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
         el.querySelector('[gds-element="gds-card"]')
-      expect(card?.getAttribute('aria-label')).to.equal('Error alert')
+      expect(card?.getAttribute('aria-label')).to.equal('Negative alert')
+    })
+    it('should allow role to be set to status', async () => {
+      const el = await fixture<GdsAlert>(
+        html`<gds-alert role="status">Status alert</gds-alert>`,
+      )
+      await el.updateComplete
+      const card =
+        el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
+        el.querySelector('[gds-element="gds-card"]')
+      expect(card?.getAttribute('role')).to.equal('status')
     })
   })
 })

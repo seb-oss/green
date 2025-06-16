@@ -18,6 +18,40 @@ import '../button/index.js'
 import { tokens } from '../../tokens.style'
 import { alertStyles } from './alert.style'
 
+// Type definitions
+type AlertVariant =
+  | 'information'
+  | 'notice'
+  | 'positive'
+  | 'warning'
+  | 'negative'
+type AlertRole = 'alert' | 'status'
+type DismissSource = 'timeout' | 'close' | 'escape'
+
+// Constants
+const VARIANT_CONFIG = {
+  positive: { icon: 'checkmark', card: 'positive', label: 'Positive alert' },
+  warning: {
+    icon: 'triangle-exclamation',
+    card: 'warning',
+    label: 'Warning alert',
+  },
+  negative: {
+    icon: 'triangle-exclamation',
+    card: 'negative',
+    label: 'Negative alert',
+  },
+  information: {
+    icon: 'circle-info',
+    card: 'information',
+    label: 'Information alert',
+  },
+  notice: { icon: 'circle-info', card: 'information', label: 'Notice alert' },
+} as const
+
+const FADE_DURATION = 300
+const PROGRESS_INTERVAL = 100
+
 /**
  * Alert component with responsive layout, optional icon, dismiss functionality,
  * auto-dismiss timer, and action button support.
@@ -33,22 +67,23 @@ export class GdsAlert extends GdsElement {
   static styles = [tokens, alertStyles]
 
   @property({ type: String, reflect: true })
-  type: 'info' | 'success' | 'warning' | 'error' = 'info'
+  variant: AlertVariant = 'information'
 
-  @property({ type: Boolean, attribute: 'show-icon' })
-  showIcon = true
+  @property({ type: String, reflect: true })
+  role: AlertRole = 'alert'
 
   @property({ type: Boolean })
   dismissible = false
 
   @property({ type: Number, attribute: 'time-out' })
-  timeOut = 0 // milliseconds, 0 = no auto-dismiss
+  timeOut = 0
 
   @property({ type: String, attribute: 'button-text' })
-  buttonText = '' // empty = no button
+  buttonText = ''
 
   @state() private _progress = 100
   @state() private _isClosing = false
+  @state() private _cardHidden = false
 
   @query('.close-btn') private _closeButton!: HTMLButtonElement
   @query('gds-button') private _actionButton!: HTMLElement
@@ -57,14 +92,11 @@ export class GdsAlert extends GdsElement {
   private _progressIntervalId?: number
   private _alertRef: Ref<HTMLElement> = createRef()
 
-  // Reactive controller pattern for timer management
   private _timerController = {
     hostConnected: () => {
       if (this.timeOut > 0) this._startTimer()
     },
-    hostDisconnected: () => {
-      this._clearTimers()
-    },
+    hostDisconnected: () => this._clearTimers(),
   }
 
   constructor() {
@@ -72,45 +104,25 @@ export class GdsAlert extends GdsElement {
     this.addController(this._timerController)
   }
 
-  protected firstUpdated() {
-    // Announce alert to screen readers when it appears
-    this._announceAlert()
-  }
-
   protected updated(changed: PropertyValues) {
     if (changed.has('timeOut')) {
       this._clearTimers()
       if (this.timeOut > 0) this._startTimer()
     }
-
-    // Re-announce if type changes
-    if (changed.has('type') && changed.get('type') !== undefined) {
-      this._announceAlert()
-    }
   }
 
-  private _announceAlert() {
-    // Use live region announcement
-    const alert = this._alertRef.value
-    if (alert) {
-      // Force re-announcement by toggling aria-live
-      alert.removeAttribute('aria-live')
-      requestAnimationFrame(() => {
-        alert.setAttribute('aria-live', 'polite')
-      })
-    }
-  }
-
+  // Timer management
   private _startTimer() {
     const start = Date.now()
     this._progress = 100
 
     this._progressIntervalId = window.setInterval(() => {
+      const elapsed = Date.now() - start
       this._progress = Math.max(
         0,
-        ((start + this.timeOut - Date.now()) / this.timeOut) * 100,
+        ((this.timeOut - elapsed) / this.timeOut) * 100,
       )
-    }, 100)
+    }, PROGRESS_INTERVAL)
 
     this._timeoutId = window.setTimeout(
       () => this._dismiss('timeout'),
@@ -124,13 +136,12 @@ export class GdsAlert extends GdsElement {
     this._timeoutId = this._progressIntervalId = undefined
   }
 
-  private async _dismiss(source: 'timeout' | 'close' | 'escape') {
+  private async _dismiss(source: DismissSource) {
     this._isClosing = true
     this._clearTimers()
 
-    // Wait for fade animation
     await this.updateComplete
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    await new Promise((r) => setTimeout(r, FADE_DURATION))
 
     this.dispatchEvent(
       new CustomEvent('close', {
@@ -140,9 +151,10 @@ export class GdsAlert extends GdsElement {
       }),
     )
 
-    this.remove()
+    this._cardHidden = true
   }
 
+  // Event handlers
   private _onButtonClick(e: Event) {
     this.dispatchEvent(
       new CustomEvent('action', {
@@ -153,7 +165,6 @@ export class GdsAlert extends GdsElement {
     )
   }
 
-  // Keyboard handling
   private _handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape' && this.dismissible) {
       e.preventDefault()
@@ -161,52 +172,25 @@ export class GdsAlert extends GdsElement {
     }
   }
 
-  private _getAriaLabel() {
-    const labels = {
-      info: 'Information alert',
-      success: 'Success alert',
-      warning: 'Warning alert',
-      error: 'Error alert',
-    }
-    return labels[this.type]
+  // Helpers
+  private get _config() {
+    return VARIANT_CONFIG[this.variant]
   }
 
+  // Render methods
   private _renderIcon() {
-    if (!this.showIcon) return nothing
-
-    const icons = {
-      success: 'checkmark',
-      warning: 'triangle-exclamation',
-      error: 'triangle-exclamation',
-      info: 'circle-info',
-    }
-    const icon = `gds-icon-${icons[this.type] || icons.info}`
-
-    // Add appropriate label for screen readers
-    const iconLabels = {
-      success: 'Success',
-      warning: 'Warning',
-      error: 'Error',
-      info: 'Information',
-    }
-
-    return html`<span
-      class="icon"
-      role="img"
-      aria-label=${iconLabels[this.type]}
-    >
+    const icon = `gds-icon-${this._config.icon}`
+    return html`<span class="icon" role="presentation">
       ${staticHtml`<${unsafeStatic(icon)} aria-hidden="true"></${unsafeStatic(icon)}>`}
     </span>`
   }
 
   private _renderMessage() {
-    const hasButton = !!this.buttonText
-
-    return html`<div class="message" role="status">
+    return html`<div class="message">
       <span class="message-text">
-        <slot @slotchange=${this._announceAlert}></slot>
+        <slot></slot>
       </span>
-      ${hasButton
+      ${this.buttonText && this.buttonText.trim()
         ? html`
             <gds-button
               variant="neutral"
@@ -224,46 +208,41 @@ export class GdsAlert extends GdsElement {
 
   private _renderCloseButton() {
     return this.dismissible
-      ? html`<button
-          class="close-btn"
-          @click=${() => this._dismiss('close')}
-          aria-label="Dismiss alert"
-          type="button"
-        >
-          <gds-icon-cross-small
-            size="l"
-            aria-hidden="true"
-          ></gds-icon-cross-small>
-        </button>`
+      ? html`
+          <gds-button
+            class="close-btn"
+            variant="neutral"
+            rank="tertiary"
+            size="small"
+            aria-label="Dismiss alert"
+            @click=${() => this._dismiss('close')}
+          >
+            <gds-icon-cross-small></gds-icon-cross-small>
+          </gds-button>
+        `
       : nothing
   }
 
   private _renderTimerBar() {
     return this.timeOut > 0
-      ? html`<div
-          class="timer-bar"
-          role="timer"
-          aria-label="Auto-dismiss timer"
-          aria-valuenow=${this._progress}
-          aria-valuemin="0"
-          aria-valuemax="100"
-        >
-          <div class="timer-progress" style="width: ${this._progress}%"></div>
-        </div>`
+      ? html`
+          <div
+            class="timer-bar"
+            role="timer"
+            aria-label="Auto-dismiss timer"
+            aria-valuenow=${this._progress}
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div class="timer-progress" style="width: ${this._progress}%"></div>
+          </div>
+        `
       : nothing
   }
 
-  private _getCardVariant() {
-    const variants = {
-      success: 'positive',
-      warning: 'warning',
-      error: 'negative',
-      info: 'information',
-    }
-    return variants[this.type]
-  }
-
   render() {
+    if (this._cardHidden) return nothing
+
     const classes = {
       dismissing: this._isClosing,
       dismissible: this.dismissible,
@@ -272,11 +251,9 @@ export class GdsAlert extends GdsElement {
     return html`
       <gds-card
         ${ref(this._alertRef)}
-        role="alert"
-        aria-label=${this._getAriaLabel()}
-        aria-live="polite"
-        aria-atomic="true"
-        variant=${this._getCardVariant()}
+        role=${this.role}
+        aria-label=${this._config.label}
+        variant=${this._config.card}
         level="2"
         class=${classMap(classes)}
         @keydown=${this._handleKeyDown}

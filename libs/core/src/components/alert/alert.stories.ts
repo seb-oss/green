@@ -12,12 +12,20 @@ const meta: Meta<GdsAlert> = {
   component: 'gds-alert',
   tags: ['autodocs'],
   argTypes: {
-    type: {
+    variant: {
       control: 'select',
-      options: ['info', 'success', 'warning', 'error'],
+      options: ['information', 'notice', 'positive', 'warning', 'negative'],
     },
-    showIcon: { control: 'boolean' },
-    dismissible: { control: 'boolean' },
+    role: {
+      control: 'select',
+      options: ['alert', 'status'],
+      description:
+        'ARIA role. Use "alert" for critical, "status" for less important.',
+    },
+    dismissible: {
+      control: 'boolean',
+      description: 'Shows close button when enabled.',
+    },
     timeOut: { control: 'number' },
     buttonText: { control: 'text', name: 'Button Text (CTA)' },
   },
@@ -27,184 +35,110 @@ export default meta
 
 type Story = StoryObj<GdsAlert>
 
-const Template = (args: any, { parameters }: any) => html`
+// Base template
+const Template = (
+  args: GdsAlert,
+  context: { parameters: { content?: unknown } },
+) => html`
   <gds-div padding="xs; l {m}" margin="m">
     <gds-alert
-      type="${args.type}"
-      ?show-icon=${args.showIcon}
+      variant="${args.variant}"
+      role="${args.role}"
       ?dismissible=${args.dismissible}
       .timeOut=${args.timeOut}
       .buttonText=${args.buttonText || ''}
     >
-      ${parameters?.content || ''}
+      ${context.parameters?.content || ''}
     </gds-alert>
   </gds-div>
 `
 
-export const Playground: Story = {
-  args: {
-    type: 'info',
-    showIcon: true,
+// Helper to create stories
+const makeStory = (args: Partial<GdsAlert>, content: unknown): Story => ({
+  args,
+  parameters: { content },
+  render: Template,
+})
+
+// Stories
+export const Playground: Story = makeStory(
+  {
+    variant: 'information',
+    role: 'alert',
     dismissible: false,
     timeOut: 0,
     buttonText: '',
   },
-  parameters: {
-    content: html`<strong>Information</strong> Body text starts on the same row
-      as heading. A link (optional) always ends the message, stand alone or part
-      of the sentence.`,
-  },
-  render: Template,
-}
+  html`<strong>Information</strong> Body text starts on the same row as heading.
+    A link (optional) always ends the message.`,
+)
 
-export const Info: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'info',
-  },
-  parameters: {
-    content: html`<strong>Information</strong> Body text starts on the same row
-      as heading. A link (optional) always ends the message, stand alone or part
-      of the sentence.`,
-  },
-  render: Template,
-}
+export const Information = makeStory(
+  { ...Playground.args!, variant: 'information' },
+  Playground.parameters!.content,
+)
 
-export const Success: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'success',
-  },
-  parameters: {
-    content: html`<strong>Success</strong> Body text starts on the same row as
-      heading. A link (optional) always ends the message, stand alone or part of
-      the sentence.`,
-  },
-  render: Template,
-}
+export const Notice = makeStory(
+  { ...Playground.args!, variant: 'notice' },
+  html`<strong>Notice</strong> Body text with link or additional context.`,
+)
 
-export const Warning: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'warning',
-  },
-  parameters: {
-    content: html`<strong>Warning</strong> Body text starts on the same row as
-      heading. A link (optional) always ends the message, stand alone or part of
-      the sentence.`,
-  },
-  render: Template,
-}
+export const Positive = makeStory(
+  { ...Playground.args!, variant: 'positive' },
+  html`<strong>Positive</strong> Feedback message with optional CTA.`,
+)
 
-export const Error: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'error',
-  },
-  parameters: {
-    content: html`<strong>Error</strong> Body text starts on the same row as
-      heading. A link (optional) always ends the message, stand alone or part of
-      the sentence.`,
-  },
-  render: Template,
-}
+export const Warning = makeStory(
+  { ...Playground.args!, variant: 'warning' },
+  html`<strong>Warning</strong> Important information to consider.`,
+)
 
-export const WithAction: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'info',
+export const Negative = makeStory(
+  { ...Playground.args!, variant: 'negative' },
+  html`<strong>Negative</strong> Error message requiring user attention.`,
+)
+
+export const WithAction = makeStory(
+  {
+    ...Playground.args!,
+    variant: 'information',
     dismissible: true,
     buttonText: 'Take Action',
   },
-  parameters: {
-    content: html`<strong>Actionable</strong> Body text starts on the same row
-      as heading. A link (optional) always ends the message, stand alone or part
-      of the sentence.`,
-  },
-  render: Template,
-}
+  html`<strong>Actionable</strong> Alert with a button for quick user
+    interaction.`,
+)
 
-export const Dismissible: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'info',
-    dismissible: true,
-  },
-  parameters: {
-    content: html`<strong>Dismissible</strong> Body text starts on the same row
-      as heading. A link (optional) always ends the message, stand alone or part
-      of the sentence.`,
-  },
-  render: Template,
-}
+export const Dismissible = makeStory(
+  { ...Playground.args!, variant: 'information', dismissible: true },
+  html`<strong>Dismissible</strong> User can dismiss this alert.`,
+)
 
-export const AutoDismiss: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'success',
-    timeOut: 3000,
-  },
-  parameters: {
-    content: html`<strong>Auto Dismiss</strong> Body text starts on the same row
-      as heading. A link (optional) always ends the message, stand alone or part
-      of the sentence.`,
-  },
-  render: Template,
-}
+export const AutoDismiss = makeStory(
+  { ...Playground.args!, variant: 'positive', timeOut: 3000 },
+  html`<strong>Auto Dismiss</strong> This alert disappears automatically after a
+    delay.`,
+)
 
-export const NoIcon: Story = {
-  ...Playground,
-  args: {
-    ...Playground.args,
-    type: 'info',
-    showIcon: false,
-    dismissible: true,
-  },
-  parameters: {
-    content: html`<strong>No Icon</strong> This alert does not show an icon.`,
-  },
-  render: Template,
-}
-
-export const RichContent: Story = {
-  args: {
-    type: 'info',
-    showIcon: true,
+export const RichContent = makeStory(
+  {
+    variant: 'information',
+    role: 'alert',
     dismissible: true,
     buttonText: 'Learn More',
   },
-  parameters: {
-    content: html`<strong>Rich Content Alert</strong> This alert contains
-      <a href="#" style="color: inherit; text-decoration: underline;">a link</a
-      >, <em>emphasized text</em>, and
-      <code
-        style="background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 3px;"
-        >inline code</code
-      >.`,
-  },
-  render: Template,
-}
+  html`<strong>Rich Content</strong> Includes <a href="#">a link</a>,
+    <em>emphasis</em>, and <code>code</code>.`,
+)
 
-export const ComplexContent: Story = {
-  args: {
-    type: 'warning',
-    showIcon: true,
-    dismissible: true,
-    buttonText: '',
-  },
-  parameters: {
-    content: html`<strong>Long Content Example</strong> This is a very long
-      message that demonstrates how the alert handles extensive content. The
-      layout should remain stable and readable even with multiple lines of text.
-      The action button and close button should maintain their positions
-      appropriately.`,
-  },
-  render: Template,
-}
+export const ComplexContent = makeStory(
+  { variant: 'warning', role: 'alert', dismissible: true },
+  html`<strong>Complex Content</strong> Demonstrates how layout adjusts with
+    long or wrapped content in alerts.`,
+)
+
+export const KeyboardAccessible = makeStory(
+  { variant: 'positive', role: 'alert', dismissible: true },
+  html`<strong>Keyboard Accessible</strong> Press Escape to dismiss, or use
+    keyboard to interact with the alert.`,
+)

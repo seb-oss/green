@@ -8,35 +8,39 @@ export const alertStyles = css`
   }
 
   [gds-element='gds-card'] {
+    --grid-areas: 'icon message close' 'icon action close';
     display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: var(--grid-areas);
     align-items: baseline;
     width: 100%;
     position: relative;
     transition:
       opacity 0.3s ease-out,
       transform 0.3s ease-out;
-    grid-template-columns: auto 1fr auto;
-    grid-template-areas:
-      'icon message close'
-      'icon action  close';
+    padding: 0.75rem;
   }
 
-  /* Animation states */
+  [gds-element='gds-card'].dismissible {
+    padding: 0.75rem;
+  }
+
+  /* Animation */
   @media (prefers-reduced-motion: no-preference) {
     [gds-element='gds-card'] {
       animation: slideIn 0.3s ease-out;
     }
-    [gds-element='gds-card'].dismissing {
-      opacity: 0;
-      transform: translateX(1rem);
-      pointer-events: none;
-    }
+  }
+
+  [gds-element='gds-card'].dismissing {
+    opacity: 0;
+    transform: translateX(1rem);
+    pointer-events: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
     [gds-element='gds-card'].dismissing {
-      opacity: 0;
-      pointer-events: none;
+      transform: none;
     }
   }
 
@@ -44,10 +48,6 @@ export const alertStyles = css`
     from {
       opacity: 0;
       transform: translateY(-0.5rem);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
 
@@ -57,21 +57,17 @@ export const alertStyles = css`
     outline-offset: 2px;
   }
 
-  /* Core elements */
+  /* Layout elements */
   .icon {
     grid-area: icon;
-    /* High contrast mode support */
-    @media (prefers-contrast: high) {
-      forced-color-adjust: none;
-    }
   }
 
   .message {
     grid-area: message;
     font-size: var(--gds-font-size-base, 1rem);
     display: flex;
-    justify-content: center;
-    text-align: center;
+    justify-content: flex-start;
+    text-align: left;
   }
 
   .message-text {
@@ -79,29 +75,23 @@ export const alertStyles = css`
     white-space: normal;
   }
 
-  /* Interactive elements */
+  /* Buttons */
   .close-btn,
-  gds-button {
-    /* Ensure minimum touch target size (WCAG 2.5.5) */
+  [gds-element='gds-button'] {
+    /* WCAG 2.5.5 minimum touch target */
     min-width: 44px;
     min-height: 44px;
   }
 
-  /* Close button */
   .close-btn {
-    grid-area: close;
-    justify-self: end;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: inherit;
-    font-size: 1.2rem;
-    line-height: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .close-btn > gds-icon-cross-small {
     margin: 0;
-    z-index: 2;
-    padding: 0.5rem;
-    border-radius: var(--gds-radius-sm, 0.25rem);
-    transition: background-color 0.2s;
+    align-self: flex-start;
+    justify-self: flex-end;
   }
 
   .close-btn:hover {
@@ -113,18 +103,23 @@ export const alertStyles = css`
     outline-offset: 2px;
   }
 
-  /* Button inside message */
-  gds-button {
-    grid-area: action;
-    width: 100%;
-    min-width: 7.5rem;
-    margin-top: 0.75rem;
+  .close-btn > * {
+    vertical-align: top;
+    align-self: flex-start;
+  }
+
+  [gds-element='gds-button'] {
+    grid-area: unset;
+    width: auto;
+    min-width: auto;
+    margin: 0 0 0 1rem;
+    display: inline-flex;
   }
 
   /* Timer bar */
   .timer-bar {
     position: absolute;
-    inset: auto 0 0 0;
+    inset: auto 0 0;
     height: 0.25rem;
     background: var(--gds-border-color, rgba(0, 0, 0, 0.1));
     border-radius: 0 0 var(--gds-radius-md, 0.25rem)
@@ -140,32 +135,29 @@ export const alertStyles = css`
     will-change: width;
   }
 
-  /* Reduced motion: disable progress animation */
   @media (prefers-reduced-motion: reduce) {
     .timer-progress {
       transition: none;
     }
   }
 
+  /* Responsive layouts */
   /* Small: stacked */
   @container (max-width: 600px) {
     [gds-element='gds-card'] {
-      grid-template-areas:
-        'icon message close'
-        'icon cta     cta';
-      padding: 1rem;
-      gap: 0.75rem;
+      --grid-areas: 'icon message close' 'icon cta cta';
+      grid-template-areas: var(--grid-areas);
     }
-    [gds-element='gds-card'].dismissible {
-      padding: 0rem 0rem 1rem 0.5rem;
-    }
+
     .message {
-      display: flex;
       flex-direction: column;
       gap: 0.25rem;
     }
-    gds-button {
-      margin: 0.75rem 0 0;
+    .close-btn {
+      grid-area: close;
+      justify-self: end;
+      align-self: start;
+      margin: 0;
     }
   }
 
@@ -173,22 +165,9 @@ export const alertStyles = css`
   @container (min-width: 601px) and (max-width: 1024px) {
     [gds-element='gds-card'] {
       grid-template-areas: 'icon message close';
-      padding: 0.5rem 0.5rem 1rem 0.5rem;
-      gap: 0.75rem 1rem;
-    }
-    [gds-element='gds-card'].dismissible {
-      padding: 0rem 0rem 1rem 0.5rem;
     }
     .message {
-      display: flex;
       gap: 0.5rem;
-    }
-
-    gds-button {
-      grid-area: unset;
-      width: auto;
-      margin: 0 0 0 1rem;
-      display: inline-flex;
     }
   }
 
@@ -197,36 +176,35 @@ export const alertStyles = css`
     [gds-element='gds-card'] {
       grid-template-columns: 1fr minmax(0, 37.5rem) auto 1fr;
       grid-template-areas: 'icon message close close';
-      padding: 0.75rem 1.5rem;
-      min-height: 2.5rem;
-    }
-    [gds-element='gds-card'].dismissible {
-      padding: 0rem 0rem 1rem 0.5rem;
-    }
-    [gds-element='gds-card'].dismissing {
-      opacity: 0;
-      transform: translateX(1rem);
-      pointer-events: none;
     }
     .icon {
       grid-column: 1;
       margin-right: 1.5rem;
     }
+
     .message {
       grid-column: 2;
-      display: flex;
       gap: 0.75rem;
     }
-    gds-button {
+
+    [gds-element='gds-button'] {
       grid-area: unset;
-      width: auto;
-      margin: 0 0 0 0.75rem;
       display: inline-flex;
       flex-shrink: 0;
     }
+
     .close-btn {
-      grid-column: 4;
       margin-left: 1.5rem;
+      justify-self: end;
+      align-self: start;
+      grid-column: 4;
+    }
+  }
+
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    .icon {
+      forced-color-adjust: none;
     }
   }
 `
