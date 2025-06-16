@@ -235,21 +235,16 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     this.#setValueFromSelectElement()
 
     requestAnimationFrame(() => {
-      this.dispatchEvent(
-        new CustomEvent('input', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
-
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('input', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      })
+      this.dispatchCustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      })
     })
   }
 

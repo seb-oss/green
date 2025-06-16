@@ -116,13 +116,11 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
         this.value = clickedChip.value
       }
 
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { clickedChip, value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('change', {
+        detail: { clickedChip, value: this.value },
+        bubbles: true,
+        composed: true,
+      })
     }
   }
 

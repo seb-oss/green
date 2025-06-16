@@ -292,12 +292,10 @@ class Textarea extends GdsFormControlElement<string> {
   #handleOnChange = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
-    this.dispatchEvent(
-      new Event('change', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchStandardEvent('change', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #handleOnPaste = (e: ClipboardEvent) => {
@@ -371,19 +369,14 @@ class Textarea extends GdsFormControlElement<string> {
       }
     })
 
-    this.dispatchEvent(
-      new Event('gds-input-cleared', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
-
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-input-cleared', {
+      bubbles: true,
+      composed: true,
+    })
+    this.dispatchStandardEvent('input', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   @watch('rows')

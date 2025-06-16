@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.84.0
+
+### Minor Changes
+
+- 56d1779: **GdsElement:** Add event dispatch helpers for dispatching compatible events
+
+### Patch Changes
+
+- 55b23da: **Dialog:** Update design
+
 ## 1.83.2
 
 ### Patch Changes

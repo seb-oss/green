@@ -110,7 +110,7 @@ export class GdsSpinner extends withMarginProps(
     this.setAttribute('role', 'status')
     this.setAttribute('aria-live', 'polite')
     this._isAnimating = true
-    this.dispatchEvent(new CustomEvent('gds-spinner-connected'))
+    this.dispatchCustomEvent('gds-spinner-connected')
   }
 
   /**
