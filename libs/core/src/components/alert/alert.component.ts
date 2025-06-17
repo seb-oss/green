@@ -93,9 +93,9 @@ export class GdsAlert extends GdsElement {
   @state() private _isClosing = false
   @state() private _cardHidden = false
 
-  // @ts-ignore: unused private field
+  // @ts-expect-error: unused private field
   @query('.close-btn') private _closeButton!: HTMLButtonElement
-  // @ts-ignore: unused private field
+  // @ts-expect-error: unused private field
   @query('gds-button') private _actionButton!: HTMLElement
 
   private _timeoutId?: number
