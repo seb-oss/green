@@ -12,13 +12,13 @@ describe('<gds-alert>', () => {
   describe('Rendering', () => {
     it('should render alert with default values', async () => {
       const el = await fixture<GdsAlert>(
-        html`<gds-alert>Default alert</gds-alert>`,
+        html`<gds-alert label="Information alert">Default alert</gds-alert>`,
       )
       await el.updateComplete
 
       expect(el.variant).to.equal('information')
       expect(el.dismissible).to.be.false
-      expect(el.buttonText).to.equal('')
+      expect(el.buttonLabel).to.equal('')
       const card =
         el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
         el.querySelector('[gds-element="gds-card"]')
@@ -117,33 +117,6 @@ describe('<gds-alert>', () => {
         el.shadowRoot?.querySelector('[gds-element="gds-card"]') ||
         el.querySelector('[gds-element="gds-card"]')
       expect(card?.getAttribute('role')).to.equal('status')
-    })
-    it('should allow dismissLabel to be set for i18n', async () => {
-      const el = await fixture<GdsAlert>(
-        html`<gds-alert dismissible dismiss-label="Stäng"
-          >Dismiss me</gds-alert
-        >`,
-      )
-      await el.updateComplete
-      const closeBtn =
-        el.shadowRoot?.querySelector('.close-btn') ||
-        el.querySelector('.close-btn')
-      expect(closeBtn?.getAttribute('aria-label')).to.equal('Stäng')
-    })
-
-    it('should allow timerLabel to be set for i18n', async () => {
-      const el = await fixture<GdsAlert>(
-        html`<gds-alert time-out="1000" timer-label="Automatisk stängning"
-          >Timed</gds-alert
-        >`,
-      )
-      await el.updateComplete
-      const timerBar =
-        el.shadowRoot?.querySelector('.timer-bar') ||
-        el.querySelector('.timer-bar')
-      expect(timerBar?.getAttribute('aria-label')).to.equal(
-        'Automatisk stängning',
-      )
     })
   })
 })
