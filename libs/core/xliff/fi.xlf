@@ -170,6 +170,14 @@
   <source>Form error summary</source>
   <target>Lomakkeen virheiden yhteenveto</target>
 </trans-unit>
+<trans-unit id="s979f38023babd06d">
+  <source>Dismiss alert</source>
+  <target>Ohita hälytys</target>
+</trans-unit>
+<trans-unit id="s39943b8a5733f5d2">
+  <source>Auto-dismiss timer</source>
+  <target>Automaattinen sulkeutumisaika</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

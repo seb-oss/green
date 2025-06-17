@@ -6,6 +6,7 @@ import '../../../.storybook/manager'
 import { addons } from '@storybook/manager-api'
 
 const betaItems = {
+  Alert: true,
   Layout: true,
   Form: true,
   Input: true,
