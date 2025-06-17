@@ -24,16 +24,23 @@ export function Snippet({ slug }: SnippetProps) {
     const props: { [key: string]: any } = {}
 
     for (const [key, value] of Object.entries(attribs)) {
-      // Handle boolean attributes
-      if (value === '' || value === 'true') {
+      if (key.startsWith('.')) {
+        const propName = key.substring(1)
+        const cleanValue = value.replace(/\${(.+)}/, '$1')
+        try {
+          props[propName] = cleanValue.startsWith('[')
+            ? JSON.parse(cleanValue)
+            : cleanValue
+        } catch {
+          props[propName] = cleanValue
+        }
+      } else if (value === '' || value === 'true') {
         props[key] = true
       } else if (value === 'false') {
         props[key] = false
       } else if (key === 'class') {
-        // Convert class to className for React
         props.className = value
       } else {
-        // Handle all other attributes
         props[key] = value
       }
     }
@@ -42,70 +49,77 @@ export function Snippet({ slug }: SnippetProps) {
   }
 
   const getComponent = (tagName: string) => {
-    // Handle icons
+    if (!tagName.startsWith('gds-')) return null
+
     if (tagName.startsWith('gds-icon-')) {
       const iconName =
         'Icon' +
         tagName
           .replace('gds-icon-', '')
           .split('-')
-          .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
           .join('')
       return (Core as any)[iconName]
     }
 
-    // Handle regular components
     const componentName =
       'Gds' +
       tagName
         .split('-')
-        .map((part: string) => part.charAt(0).toUpperCase() + part.slice(1))
+        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
         .join('')
         .replace('Gds', '')
 
     return (Core as any)[componentName]
   }
 
-  const parseChildren = (children: any[]): React.ReactNode => {
-    return children.map((child: any, index: number) => {
-      if (child.type === 'text') {
-        return child.data
-      }
-      if (child.type === 'tag') {
-        const Component = getComponent(child.name)
-        if (Component) {
-          const props = convertAttributes(child.attribs)
-          return (
-            <Component key={index} {...props}>
-              {child.children && parseChildren(child.children)}
-            </Component>
-          )
-        }
-        console.warn(`Component not found: ${child.name}`)
-      }
-      return null
-    })
+  const getNodeContent = (node: any): string => {
+    if (!node) return ''
+    if (typeof node === 'string') return node
+    if (node.type === 'text') return node.data || ''
+
+    if (node.type === 'tag') {
+      const attrs = Object.entries(node.attribs || {})
+        .map(([key, value]) => `${key}="${value}"`)
+        .join(' ')
+
+      const attrsStr = attrs ? ` ${attrs}` : ''
+      const content = node.children?.map(getNodeContent).join('') || ''
+
+      return `<${node.name}${attrsStr}>${content}</${node.name}>`
+    }
+
+    return ''
   }
 
   const options = {
-    replace: (domNode: any) => {
-      try {
-        if (domNode.type === 'tag') {
-          const Component = getComponent(domNode.name)
-          if (Component) {
-            const props = convertAttributes(domNode.attribs)
-            return (
-              <Component {...props}>
-                {domNode.children && parseChildren(domNode.children)}
-              </Component>
-            )
-          }
-          console.warn(`Component not found: ${domNode.name}`)
+    replace: (node: any) => {
+      if (node.type !== 'tag') return undefined
+
+      if (node.name.startsWith('gds-')) {
+        const Component = getComponent(node.name)
+        if (!Component) return undefined
+
+        const props = convertAttributes(node.attribs)
+
+        // Get all children content
+        const childContent = node.children?.map(getNodeContent).join('')
+
+        // If there are no GDS components in children, use innerHTML
+        if (!childContent.includes('gds-')) {
+          return (
+            <Component
+              {...props}
+              dangerouslySetInnerHTML={{ __html: childContent }}
+            />
+          )
         }
-      } catch (err) {
-        console.warn('Error parsing component:', err)
+
+        // If there are GDS components, parse them recursively
+        return <Component {...props}>{parse(childContent, options)}</Component>
       }
-      return null
+
+      return undefined
     },
   }
 
@@ -115,10 +129,7 @@ export function Snippet({ slug }: SnippetProps) {
         const response = await fetch(
           `https://api.seb.io/snippets/${slug}/${slug}.json`,
         )
-        if (!response.ok) {
-          console.warn(`Failed to fetch snippet: ${slug}`)
-          return
-        }
+        if (!response.ok) throw new Error(`Failed to fetch snippet: ${slug}`)
         const data = await response.json()
         setSnippetData(data)
       } catch (err) {
@@ -129,12 +140,12 @@ export function Snippet({ slug }: SnippetProps) {
     fetchSnippet()
   }, [slug])
 
-  if (!snippetData) return null
+  if (!snippetData?.code) return null
 
   try {
     return (
       <Core.GdsFlex data-snippet={snippetData.slug}>
-        <div>{parse(snippetData.code, options)}</div>
+        {parse(snippetData.code, options)}
       </Core.GdsFlex>
     )
   } catch (err) {

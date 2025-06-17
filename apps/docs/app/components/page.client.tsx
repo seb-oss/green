@@ -72,14 +72,14 @@ export function ComponentsClient() {
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
-        <Core.GdsGrid columns="3" gap="l" max-width="100%">
+        <Core.GdsGrid columns="1; l{2} xl{3}" gap="2xl" max-width="180ch">
           {filteredComponents.map((component) => (
             <Core.GdsCard
               key={component.title}
-              border-color="primary"
+              // border-color="primary"
               variant="secondary"
-              border-radius="m"
-              padding="s"
+              // border-radius="m"
+              padding="0"
               gap="s"
               height="100%"
               max-width="100%"
@@ -89,7 +89,7 @@ export function ComponentsClient() {
               <Core.GdsCard
                 height="240px"
                 overflow="hidden"
-                width="340px"
+                width="100%"
                 align-items="center"
                 justify-content="center"
               >
@@ -97,37 +97,44 @@ export function ComponentsClient() {
                   <Snippet slug={component.hero_snippet} />
                 )}
               </Core.GdsCard>
-
-              <Core.GdsText font-size="display-xs">
-                {component.title}
-              </Core.GdsText>
-
-              {component.summary && (
-                <Core.GdsText
-                  color="secondary"
-                  font-size="detail-xs"
-                  margin="0 0 m 0"
-                  lines={2}
-                >
-                  {component.summary}
+              <Core.GdsFlex flex-direction="column" gap="xs" padding-inline="s">
+                <Core.GdsText font-size="display-xs">
+                  {component.title}
                 </Core.GdsText>
-              )}
-              <Core.GdsFlex
-                margin="auto 0 0 0"
-                width="100%"
-                flex="1"
-              ></Core.GdsFlex>
-              <Link key={component.slug} href={`/component/${component.slug}`}>
+
+                {component.summary && (
+                  <Core.GdsText
+                    color="secondary"
+                    font-size="detail-xs"
+                    margin="0 0 m 0"
+                    lines={2}
+                    width="40ch"
+                  >
+                    {component.summary}
+                  </Core.GdsText>
+                )}
                 <Core.GdsFlex
-                  align-items="center"
-                  justify-content="space-between"
-                  gap="s"
                   margin="auto 0 0 0"
+                  width="100%"
+                  flex="1"
+                ></Core.GdsFlex>
+                <Link
+                  key={component.slug}
+                  href={`/component/${component.slug}`}
                 >
-                  <Core.GdsText color="secondary">View Component</Core.GdsText>
-                  <Core.IconArrowRight />
-                </Core.GdsFlex>
-              </Link>
+                  <Core.GdsFlex
+                    align-items="center"
+                    justify-content="flex-start"
+                    gap="s"
+                    margin="auto 0 0 0"
+                  >
+                    <Core.GdsText color="secondary">
+                      View Component
+                    </Core.GdsText>
+                    <Core.IconArrowRight />
+                  </Core.GdsFlex>
+                </Link>
+              </Core.GdsFlex>
             </Core.GdsCard>
           ))}
         </Core.GdsGrid>
