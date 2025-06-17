@@ -20,34 +20,24 @@ import { tokens } from '../../tokens.style'
 import { alertStyles } from './alert.style'
 
 // Type definitions
-export type AlertVariant =
-  | 'information'
-  | 'notice'
-  | 'positive'
-  | 'warning'
-  | 'negative'
-export type AlertRole = 'alert' | 'status'
-export type DismissSource = 'timeout' | 'close' | 'escape'
+type DismissSource = 'timeout' | 'close' | 'escape'
 
 // Constants
 const VARIANT_CONFIG = {
-  positive: { icon: 'circle-check', card: 'positive', label: 'Positive alert' },
+  positive: { icon: 'circle-check', card: 'positive' },
   warning: {
     icon: 'triangle-exclamation',
     card: 'warning',
-    label: 'Warning alert',
   },
   negative: {
     icon: 'triangle-exclamation',
     card: 'negative',
-    label: 'Negative alert',
   },
   information: {
     icon: 'circle-info',
     card: 'information',
-    label: 'Information alert',
   },
-  notice: { icon: 'circle-info', card: 'notice', label: 'Notice alert' },
+  notice: { icon: 'circle-info', card: 'notice' },
 } as const
 
 const FADE_DURATION = 300
@@ -56,12 +46,11 @@ const PROGRESS_INTERVAL = 100
 /**
  * Alert component with responsive layout, optional icon, dismiss functionality,
  * auto-dismiss timer, and action button support.
+ * @status beta
  *
  * @slot - Alert message content
  * @fires close - Fired when alert is dismissed
  * @fires action - Fired when action button is clicked
- * @property dismissLabel - Accessible label for the dismiss/close button. Use for i18n.
- * @property timerLabel - Accessible label for the timer bar. Use for i18n.
  */
 @gdsCustomElement('gds-alert', {
   dependsOn: [GdsButton, GdsCard],
@@ -70,82 +59,106 @@ const PROGRESS_INTERVAL = 100
 export class GdsAlert extends GdsElement {
   static styles = [tokens, alertStyles]
 
+  /**
+   * The variant of the alert, which determines its appearance and icon.
+   */
   @property({ type: String, reflect: true })
-  variant: AlertVariant = 'information'
+  variant: 'information' | 'notice' | 'positive' | 'warning' | 'negative' =
+    'information'
 
+  /**
+   * The label for the alert, used for accessibility purposes.
+   * This needs be set to something relevant to the content of the alert.
+   */
+  @property({ type: String })
+  label = ''
+
+  /**
+   * The role of the alert, which can be 'alert' or 'status'.
+   * 'alert' is used for critical messages that require immediate attention,
+   * while 'status' is for informational messages. These corresponds to the
+   * ARIA roles, which you can read more about on MDN:
+   * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/alert_role
+   * https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/status_role
+   */
   @property({ type: String, reflect: true })
-  role: AlertRole = 'alert'
+  role: 'alert' | 'status' = 'alert'
 
+  /**
+   * The dismissibility of the alert, which determines whether it can be closed by the user.
+   */
   @property({ type: Boolean })
   dismissible = false
 
-  @property({ type: Number, attribute: 'time-out' })
-  timeOut = 0
+  /**
+   * The time in milliseconds after which the alert will automatically dismiss itself.
+   * Set to 0 to disable auto-dismiss.
+   */
+  @property({ type: Number })
+  timeout = 0
 
-  @property({ type: String, attribute: 'button-text' })
+  /**
+   * The text for the action button, if provided.
+   * If not set, no action button will be rendered.
+   */
+  @property({ type: String, attribute: 'button-label' })
   buttonLabel = ''
-
-  @property({ type: String, attribute: 'dismiss-label' })
-  dismissLabel = 'Dismiss alert'
-
-  @property({ type: String, attribute: 'timer-label' })
-  timerLabel = 'Auto-dismiss timer'
 
   @state() private _progress = 100
   @state() private _isClosing = false
   @state() private _cardHidden = false
 
-  private _timeoutId?: number
-  private _progressIntervalId?: number
-  private _alertRef: Ref<HTMLElement> = createRef()
+  #timeoutId?: number
+  #progressIntervalId?: number
+  #alertRef: Ref<HTMLElement> = createRef()
 
-  private _timerController = {
+  #timerController = {
     hostConnected: () => {
-      if (this.timeOut > 0) this._startTimer()
+      if (this.timeout > 0) this.#startTimer()
     },
-    hostDisconnected: () => this._clearTimers(),
+    hostDisconnected: () => this.#clearTimers(),
   }
 
   constructor() {
     super()
-    this.addController(this._timerController)
+    this.addController(this.#timerController)
   }
 
   protected updated(changed: PropertyValues) {
-    if (changed.has('timeOut')) {
-      this._clearTimers()
-      if (this.timeOut > 0) this._startTimer()
+    if (changed.has('timeout')) {
+      this.#clearTimers()
+      if (this.timeout > 0) this.#startTimer()
     }
   }
 
   // Timer management
-  private _startTimer() {
+  #startTimer() {
     const start = Date.now()
     this._progress = 100
 
-    this._progressIntervalId = window.setInterval(() => {
+    this.#progressIntervalId = window.setInterval(() => {
       const elapsed = Date.now() - start
       this._progress = Math.max(
         0,
-        ((this.timeOut - elapsed) / this.timeOut) * 100,
+        ((this.timeout - elapsed) / this.timeout) * 100,
       )
     }, PROGRESS_INTERVAL)
 
-    this._timeoutId = window.setTimeout(
-      () => this._dismiss('timeout'),
-      this.timeOut,
+    this.#timeoutId = window.setTimeout(
+      () => this.#dismiss('timeout'),
+      this.timeout,
     )
   }
 
-  private _clearTimers() {
-    clearTimeout(this._timeoutId)
-    clearInterval(this._progressIntervalId)
-    this._timeoutId = this._progressIntervalId = undefined
+  #clearTimers() {
+    clearTimeout(this.#timeoutId)
+    clearInterval(this.#progressIntervalId)
+    this.#timeoutId = this.#progressIntervalId = undefined
   }
 
-  private async _dismiss(source: DismissSource) {
+  async #dismiss(source: DismissSource) {
     this._isClosing = true
-    this._clearTimers()
+    this.#clearTimers()
 
     await this.updateComplete
     await new Promise((r) => setTimeout(r, FADE_DURATION))
@@ -162,7 +175,7 @@ export class GdsAlert extends GdsElement {
   }
 
   // Event handlers
-  private _onButtonClick(e: Event) {
+  #handleButtonClick(e: Event) {
     this.dispatchEvent(
       new CustomEvent('action', {
         detail: { source: 'button', event: e },
@@ -172,25 +185,25 @@ export class GdsAlert extends GdsElement {
     )
   }
 
-  private _handleKeyDown(e: KeyboardEvent) {
+  #handleKeyDown(e: KeyboardEvent) {
     if (e.key === 'Escape' && this.dismissible) {
       e.preventDefault()
-      this._dismiss('escape')
+      this.#dismiss('escape')
     }
   }
 
   // Helpers
-  private get _config() {
+  get #config() {
     return VARIANT_CONFIG[this.variant]
   }
 
   // Render methods
-  private _renderIcon() {
-    const icon = `gds-icon-${this._config.icon}`
+  #renderIcon() {
+    const icon = `gds-icon-${this.#config.icon}`
     return html`${staticHtml`<${unsafeStatic(icon)} class="icon" solid aria-hidden="true" size="24px"></${unsafeStatic(icon)}>`}`
   }
 
-  private _renderMessage() {
+  #renderMessage() {
     return html`<div class="message">
       <span class="message-text">
         <slot></slot>
@@ -198,14 +211,14 @@ export class GdsAlert extends GdsElement {
     </div>`
   }
 
-  private _renderActionButton(label: string) {
+  #renderActionButton(label: string) {
     return html`
       <gds-button
         class="action-button"
         variant="neutral"
         rank="primary"
         size="small"
-        @click=${this._onButtonClick}
+        @click=${this.#handleButtonClick}
         aria-describedby="alert-message"
       >
         ${label.trim()}
@@ -213,7 +226,7 @@ export class GdsAlert extends GdsElement {
     `
   }
 
-  private _renderCloseButton() {
+  #renderCloseButton() {
     return this.dismissible
       ? html`
           <div class="close-btn">
@@ -222,7 +235,7 @@ export class GdsAlert extends GdsElement {
               rank="tertiary"
               size="small"
               aria-label=${msg('Dismiss alert')}
-              @click=${() => this._dismiss('close')}
+              @click=${() => this.#dismiss('close')}
             >
               <gds-icon-cross-small size="20px"></gds-icon-cross-small>
             </gds-button>
@@ -231,13 +244,13 @@ export class GdsAlert extends GdsElement {
       : nothing
   }
 
-  private _renderTimerBar() {
-    return this.timeOut > 0
+  #renderTimerBar() {
+    return this.timeout > 0
       ? html`
           <div
             class="timer-bar"
             role="timer"
-            aria-label="${this.timerLabel ?? msg('Auto-dismiss timer')}"
+            aria-label=${msg('Auto-dismiss timer')}
             aria-valuenow=${this._progress}
             aria-valuemin="0"
             aria-valuemax="100"
@@ -258,21 +271,20 @@ export class GdsAlert extends GdsElement {
 
     return html`
       <gds-card
-        ${ref(this._alertRef)}
+        ${ref(this.#alertRef)}
         role=${this.role}
-        aria-label=${this._config.label}
-        variant=${this._config.card}
-        level="2"
+        aria-label=${this.label}
+        variant=${this.#config.card}
         class=${classMap(classes)}
-        @keydown=${this._handleKeyDown}
+        @keydown=${this.#handleKeyDown}
         id="alert-message"
         padding="m"
       >
-        ${this._renderIcon()} ${this._renderMessage()}
+        ${this.#renderIcon()} ${this.#renderMessage()}
         ${this.buttonLabel
-          ? this._renderActionButton(this.buttonLabel)
+          ? this.#renderActionButton(this.buttonLabel)
           : nothing}
-        ${this._renderCloseButton()} ${this._renderTimerBar()}
+        ${this.#renderCloseButton()} ${this.#renderTimerBar()}
       </gds-card>
     `
   }
