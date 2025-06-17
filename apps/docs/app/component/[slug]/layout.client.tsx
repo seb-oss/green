@@ -9,6 +9,7 @@ import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import Figure from '../../../design/atoms/figure/figure'
 import { Link } from '../../../design/atoms/link/link'
+import { Similar } from '../../../design/atoms/similar/similar'
 import { Snippet } from '../../../design/atoms/snippet/snippet'
 import Tabs from '../../../design/atoms/tabs/tabs'
 import { useContent } from '../../../settings/content'
@@ -33,10 +34,25 @@ export function ComponentLayoutClient({
   if (!isLoaded) return null
 
   const component = actions.getComponent(slug)
-
   if (!component) {
     notFound()
   }
+
+  const isLayoutComponent = component?.category?.includes('Layout')
+  const firstTag = component?.tags?.[0]
+
+  // const hasAdditionalContent = Boolean(
+  //   component['ux-text']?.section?.length ||
+  //     component.accessibility?.section?.length,
+  // )
+
+  const hasAdditionalContent = Boolean(
+    (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
+      (component['ux-text']?.section &&
+        component['ux-text'].section.length > 0) ||
+      (component.accessibility?.section &&
+        component.accessibility.section.length > 0),
+  )
 
   const anatomyImage = component.images?.find((img) => img.id === 'anatomy')
 
@@ -129,10 +145,37 @@ export function ComponentLayoutClient({
           {component.hero_snippet && (
             <Snippet slug={component.hero_snippet?.toString()} />
           )}
+          {!hasAdditionalContent && (
+            <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
+              <Core.GdsLink
+                href={
+                  'https://storybook.seb.io/latest/core/?path=/docs/components-' +
+                  slug +
+                  '--docs'
+                }
+                target="_blank"
+              >
+                <Core.GdsFlex
+                  margin="0 0 0 auto"
+                  align-items="center"
+                  gap="s"
+                  padding="m l"
+                >
+                  <Core.GdsFlex align-items="center" gap="3xs">
+                    <Core.IconBrandStorybook size="s" color="primary" />
+                    API Docs
+                  </Core.GdsFlex>
+                  <Core.IconSquareArrowTopRight size="s" />
+                </Core.GdsFlex>
+              </Core.GdsLink>
+            </Core.GdsDiv>
+          )}
         </Core.GdsCard>
-
-        <Tabs slug={component.slug} />
+        {!isLayoutComponent && hasAdditionalContent && (
+          <Tabs slug={component.slug} />
+        )}
       </Core.GdsFlex>
+
       {section === 'overview' && (component.preamble || anatomyImage) && (
         <Core.GdsFlex flex-direction="column" gap="m">
           {component.preamble && (
@@ -178,6 +221,42 @@ export function ComponentLayoutClient({
         </Core.GdsFlex>
       )}
       {children}
+      {isLayoutComponent && section === 'overview' && (
+        <Core.GdsCard
+          variant="secondary"
+          border-radius="m"
+          padding="0"
+          background="secondary"
+        >
+          <Core.GdsFlex
+            flex-direction="column"
+            gap="m"
+            justify-content="flex-start"
+            align-items="flex-start"
+            max-width="90ch"
+          >
+            <Core.GdsFlex gap="s" align-items="center">
+              <Core.GdsText font-size="display-s">
+                Declarative Layout Component
+              </Core.GdsText>
+            </Core.GdsFlex>
+            <Core.GdsText tag="p" color="primary" font-size="heading-s">
+              This component is part of Green's declarative layout system,
+              designed specifically for micro-frontend architectures.
+            </Core.GdsText>
+            <Core.GdsText color="secondary" tag="p">
+              It uses style expression properties to generate and inject CSS
+              directly into shadow DOM, ensuring style encapsulation while
+              providing flexible, responsive layouts without utility classes.
+            </Core.GdsText>
+            <Link component="button" href="/foundation/layout" rank="secondary">
+              Learn more about declarative layout system
+              <Core.IconArrowRight slot="trail" />
+            </Link>
+          </Core.GdsFlex>
+        </Core.GdsCard>
+      )}
+      <Similar tag={firstTag} currentSlug={component.slug} />
     </Core.GdsFlex>
   )
 }
