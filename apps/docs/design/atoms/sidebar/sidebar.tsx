@@ -1,6 +1,6 @@
 'use client'
 
-import React, { JSX, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -8,7 +8,6 @@ import { _, Icon } from '../../../hooks'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 import { Link } from '../link/link'
-import SidebarCollapsed from './sidebar.collapsed'
 
 import './sidebar.css'
 
@@ -90,44 +89,64 @@ export default function Sidebar() {
     }))
   }
 
-  const renderNavigation = useMemo(() => {
+  // Separate rendering for collapsed state
+  const renderCollapsedNav = useMemo(() => {
+    if (!isLoaded) return null
+
+    const NAV = actions.getNavigation('main')
+    return (
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="xs"
+        align-items="center"
+        width="100%"
+      >
+        {NAV?.links.map((link) => (
+          <Link
+            key={link.slug}
+            component="button"
+            href={link.slug.startsWith('/') ? link.slug : `/${link.slug}`}
+            rank={
+              pathName.startsWith(`/${link.slug}`) ? 'secondary' : 'tertiary'
+            }
+            size="medium"
+            justify-content="center"
+          >
+            {link.icon && <Icon name={link.icon} />}
+          </Link>
+        ))}
+      </Core.GdsFlex>
+    )
+  }, [isLoaded, actions, pathName])
+
+  // Separate rendering for expanded state
+  const renderExpandedNav = useMemo(() => {
     if (!isLoaded) return null
 
     const NAV = actions.getNavigation('main')
     const components = actions.getComponents()
     const templates = actions.getTemplates()
 
-    const isExternalUrl = (url: string) => {
-      return url.startsWith('http') || url.startsWith('https')
-    }
-
-    const formatInternalUrl = (slug: string) => {
-      return slug.startsWith('/') ? slug : `/${slug}`
-    }
-
     return NAV?.links.map((link) => {
-      const href = isExternalUrl(link.slug)
-        ? link.slug
-        : formatInternalUrl(link.slug)
+      const href = link.slug.startsWith('/') ? link.slug : `/${link.slug}`
 
-      // Handle collapsible sections
       if (['components', 'templates', 'foundation'].includes(link.slug)) {
         let subItems: any[] = []
 
         if (link.slug === 'components') {
-          subItems = components.map((component) => ({
-            title: component.title,
-            href: `/component/${component.slug}`,
+          subItems = components.map((c) => ({
+            title: c.title,
+            href: `/component/${c.slug}`,
           }))
         } else if (link.slug === 'templates') {
-          subItems = templates.map((template) => ({
-            title: template.title,
-            href: `/template/${template.slug}`,
+          subItems = templates.map((t) => ({
+            title: t.title,
+            href: `/template/${t.slug}`,
           }))
         } else if (link.slug === 'foundation') {
-          subItems = foundationPages.map((page) => ({
-            title: page.title,
-            href: `/foundation/${page.slug}`,
+          subItems = foundationPages.map((p) => ({
+            title: p.title,
+            href: `/foundation/${p.slug}`,
           }))
         }
 
@@ -160,7 +179,6 @@ export default function Sidebar() {
         )
       }
 
-      // Regular navigation items
       return (
         <Link
           key={href}
@@ -170,8 +188,6 @@ export default function Sidebar() {
           justify-content="flex-start"
           size="medium"
           align-items="center"
-          isExternal={isExternalUrl(href)}
-          data-animation="scroll"
         >
           {link.icon && <Icon name={link.icon} slot="lead" />}
           {link.title}
@@ -180,7 +196,38 @@ export default function Sidebar() {
     })
   }, [isLoaded, actions, pathName, openSections])
 
-  const handleToggleSidebar = (): void => {
+  const renderSettingsButton = useMemo(
+    () => (
+      <Core.GdsFlex
+        margin="auto 0 0 0"
+        background="transparent"
+        data-backdrop
+        width="100%"
+        justify-content={isOpen ? 'flex-start' : 'center'}
+      >
+        <Link
+          component="button"
+          width={isOpen ? '100%' : 'max-content'}
+          size="medium"
+          href="/settings"
+          rank={pathName === '/settings' ? 'secondary' : 'tertiary'}
+          justify-content={isOpen ? 'flex-start' : 'center'}
+        >
+          {isOpen ? (
+            <>
+              <Icon name="IconSettingsGear" slot="lead" />
+              Settings
+            </>
+          ) : (
+            <Icon name="IconSettingsGear" />
+          )}
+        </Link>
+      </Core.GdsFlex>
+    ),
+    [isOpen, pathName],
+  )
+
+  const handleToggleSidebar = () => {
     SettingsActions.toggle('UI.Panel.Sidebar')
   }
 
@@ -198,7 +245,12 @@ export default function Sidebar() {
       width={isOpen ? '240px' : 'max-content'}
       position="sticky"
     >
-      <Core.GdsFlex padding="0 0 0 m">
+      <Core.GdsFlex
+        key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
+        padding={isOpen ? '0 0 0 m' : '0'}
+        justify-content={isOpen ? 'flex-start' : 'center'}
+        width="100%"
+      >
         <Link
           component="button"
           onClick={handleToggleSidebar}
@@ -213,28 +265,38 @@ export default function Sidebar() {
           )}
         </Link>
       </Core.GdsFlex>
-      {isOpen && (
-        <Core.GdsFlex flex-direction="column" gap="xs" width="100%">
-          {renderNavigation}
-        </Core.GdsFlex>
-      )}
+
       <Core.GdsFlex
+        flex-direction="column"
+        gap="xs"
+        width="100%"
+        align-items={isOpen ? 'flex-start' : 'center'}
+      >
+        {isOpen ? renderExpandedNav : renderCollapsedNav}
+      </Core.GdsFlex>
+      <Core.GdsFlex
+        key={isOpen ? 'settings-open' : 'settings-closed'}
         margin="auto 0 0 0"
         background="transparent"
         data-backdrop
         width="100%"
+        justify-content={isOpen ? 'flex-start' : 'center'}
       >
         <Link
           component="button"
-          width="100%"
           size="medium"
-          key="settings"
-          href={`/settings`}
-          rank={pathName === `/settings` ? 'secondary' : 'tertiary'}
-          justify-content="flex-start"
+          href="/settings"
+          rank={pathName === '/settings' ? 'secondary' : 'tertiary'}
+          justify-content={isOpen ? 'flex-start' : 'center'}
         >
-          <Icon name="IconSettingsGear" slot="lead" />
-          Settings
+          {isOpen ? (
+            <>
+              <Icon name="IconSettingsGear" slot="lead" />
+              Settings
+            </>
+          ) : (
+            <Icon name="IconSettingsGear" />
+          )}
         </Link>
       </Core.GdsFlex>
     </Core.GdsCard>
