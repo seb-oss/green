@@ -48,8 +48,8 @@ const PROGRESS_INTERVAL = 100
  * @status beta
  *
  * @slot - Alert message content
- * @fires close - Fired when alert is dismissed
- * @fires action - Fired when action button is clicked
+ * @fires gds-close - Fired when alert is dismissed
+ * @fires gds-action - Fired when action button is clicked
  */
 @gdsCustomElement('gds-alert', {
   dependsOn: [
@@ -169,26 +169,22 @@ export class GdsAlert extends GdsElement {
     await this.updateComplete
     await new Promise((r) => setTimeout(r, FADE_DURATION))
 
-    this.dispatchEvent(
-      new CustomEvent('close', {
-        detail: { source },
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-close', {
+      detail: { source },
+      bubbles: true,
+      composed: true,
+    })
 
     this._cardHidden = true
   }
 
   // Event handlers
   #handleButtonClick(e: Event) {
-    this.dispatchEvent(
-      new CustomEvent('action', {
-        detail: { source: 'button', event: e },
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-action', {
+      detail: { source: 'button', event: e },
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #handleKeyDown(e: KeyboardEvent) {
@@ -235,17 +231,16 @@ export class GdsAlert extends GdsElement {
   #renderCloseButton() {
     return this.dismissible
       ? html`
-          <div class="close-btn">
-            <gds-button
-              variant="neutral"
-              rank="tertiary"
-              size="small"
-              aria-label=${msg('Dismiss alert')}
-              @click=${() => this.#dismiss('close')}
-            >
-              <gds-icon-cross-small size="20px"></gds-icon-cross-small>
-            </gds-button>
-          </div>
+          <gds-button
+            class="close-btn"
+            variant="neutral"
+            rank="tertiary"
+            size="small"
+            aria-label=${msg('Dismiss alert')}
+            @click=${() => this.#dismiss('close')}
+          >
+            <gds-icon-cross-small size="20px"></gds-icon-cross-small>
+          </gds-button>
         `
       : nothing
   }
