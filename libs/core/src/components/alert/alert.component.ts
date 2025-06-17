@@ -165,9 +165,7 @@ export class GdsAlert extends GdsElement {
   async #dismiss(source: DismissSource) {
     this._isClosing = true
     this.#clearTimers()
-
     await this.updateComplete
-    await new Promise((r) => setTimeout(r, FADE_DURATION))
 
     this.dispatchCustomEvent('gds-close', {
       detail: { source },
@@ -175,6 +173,7 @@ export class GdsAlert extends GdsElement {
       composed: true,
     })
 
+    await new Promise((r) => setTimeout(r, FADE_DURATION))
     this._cardHidden = true
   }
 
