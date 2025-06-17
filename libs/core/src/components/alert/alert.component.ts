@@ -44,6 +44,8 @@ const FADE_DURATION = 300
 const PROGRESS_INTERVAL = 100
 
 /**
+ * @element gds-alert
+ *
  * Alert component with responsive layout, optional icon, dismiss functionality,
  * auto-dismiss timer, and action button support.
  * @status beta
