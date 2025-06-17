@@ -186,11 +186,7 @@ export function Snippet({ slug }: SnippetProps) {
   if (!snippetData?.code || !componentsReady) return null
 
   try {
-    return (
-      <Core.GdsFlex data-snippet={snippetData.slug}>
-        {parse(snippetData.code, options)}
-      </Core.GdsFlex>
-    )
+    return parse(snippetData.code, options)
   } catch (err) {
     console.warn('Error rendering snippet:', err)
     return null

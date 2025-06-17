@@ -14,7 +14,7 @@ export function A11yClient() {
   const CONTENT = actions.getPage('accessibility')
 
   return (
-    <GdsFlex flex-direction="column" gap="2xl">
+    <GdsFlex flex-direction="column" gap="2xl" max-width="1200px">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
           <IconHomeOpen size="m" slot="lead" />

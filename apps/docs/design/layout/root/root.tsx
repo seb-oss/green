@@ -33,7 +33,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
             padding="0 xl m 0"
             min-height="100vh"
           >
-            <GdsFlex flex-direction="column" flex="1">
+            <GdsFlex flex-direction="column" flex="1" data-content>
               {children}
             </GdsFlex>
             <Footer />

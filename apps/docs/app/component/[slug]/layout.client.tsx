@@ -41,7 +41,14 @@ export function ComponentLayoutClient({
   const anatomyImage = component.images?.find((img) => img.id === 'anatomy')
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="2xl" max-width="840px">
+    <Core.GdsFlex
+      flex-direction="column"
+      gap="2xl"
+      max-width="840px"
+      width="100%"
+      // max-width="1200px"
+      margin="0 auto"
+    >
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
         <Breadcrumbs slug={component.slug} title={component.title} />
         <Core.GdsText tag="h1" font-size="heading-xl">
