@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-**Dialog:** Update design
+fix: popover focus improvements

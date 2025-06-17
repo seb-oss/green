@@ -20,14 +20,14 @@ import { tokens } from '../../tokens.style'
 import { alertStyles } from './alert.style'
 
 // Type definitions
-type AlertVariant =
+export type AlertVariant =
   | 'information'
   | 'notice'
   | 'positive'
   | 'warning'
   | 'negative'
-type AlertRole = 'alert' | 'status'
-type DismissSource = 'timeout' | 'close' | 'escape'
+export type AlertRole = 'alert' | 'status'
+export type DismissSource = 'timeout' | 'close' | 'escape'
 
 // Constants
 const VARIANT_CONFIG = {
@@ -60,6 +60,8 @@ const PROGRESS_INTERVAL = 100
  * @slot - Alert message content
  * @fires close - Fired when alert is dismissed
  * @fires action - Fired when action button is clicked
+ * @property dismissLabel - Accessible label for the dismiss/close button. Use for i18n.
+ * @property timerLabel - Accessible label for the timer bar. Use for i18n.
  */
 @gdsCustomElement('gds-alert', {
   dependsOn: [GdsButton, GdsCard],
@@ -83,12 +85,15 @@ export class GdsAlert extends GdsElement {
   @property({ type: String, attribute: 'button-text' })
   buttonLabel = ''
 
+  @property({ type: String, attribute: 'dismiss-label' })
+  dismissLabel = 'Dismiss alert'
+
+  @property({ type: String, attribute: 'timer-label' })
+  timerLabel = 'Auto-dismiss timer'
+
   @state() private _progress = 100
   @state() private _isClosing = false
   @state() private _cardHidden = false
-
-  @query('.close-btn') private _closeButton!: HTMLButtonElement
-  @query('gds-button') private _actionButton!: HTMLElement
 
   private _timeoutId?: number
   private _progressIntervalId?: number
@@ -232,7 +237,7 @@ export class GdsAlert extends GdsElement {
           <div
             class="timer-bar"
             role="timer"
-            aria-label=${msg('Auto-dismiss timer')}
+            aria-label="${this.timerLabel ?? msg('Auto-dismiss timer')}"
             aria-valuenow=${this._progress}
             aria-valuemin="0"
             aria-valuemax="100"

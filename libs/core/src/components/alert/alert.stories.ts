@@ -28,6 +28,16 @@ const meta: Meta<GdsAlert> = {
     },
     timeOut: { control: 'number' },
     buttonLabel: { control: 'text', name: 'Button Text (CTA)' },
+    dismissLabel: {
+      control: 'text',
+      name: 'Dismiss Button Label',
+      description: 'Accessible label for the close button (for i18n).',
+    },
+    timerLabel: {
+      control: 'text',
+      name: 'Timer Bar Label',
+      description: 'Accessible label for the timer bar (for i18n).',
+    },
   },
 }
 
@@ -40,17 +50,17 @@ const Template = (
   args: GdsAlert,
   context: { parameters: { content?: unknown } },
 ) => html`
-  <gds-div padding="xs; l {m}" margin="m">
-    <gds-alert
-      variant="${args.variant}"
-      role="${args.role}"
-      ?dismissible=${args.dismissible}
-      .timeOut=${args.timeOut}
-      .buttonLabel=${args.buttonLabel || ''}
-    >
-      ${context.parameters?.content || ''}
-    </gds-alert>
-  </gds-div>
+  <gds-alert
+    variant="${args.variant}"
+    role="${args.role}"
+    ?dismissible=${args.dismissible}
+    .timeOut=${args.timeOut}
+    .buttonLabel=${args.buttonLabel || ''}
+    .dismissLabel=${args.dismissLabel || 'Dismiss alert'}
+    .timerLabel=${args.timerLabel || 'Auto-dismiss timer'}
+  >
+    ${context.parameters?.content || ''}
+  </gds-alert>
 `
 
 // Helper to create stories
@@ -141,4 +151,18 @@ export const KeyboardAccessible = makeStory(
   { variant: 'positive', role: 'alert', dismissible: true },
   html`<strong>Keyboard Accessible</strong> Press Escape to dismiss, or use
     keyboard to interact with the alert.`,
+)
+
+export const I18nLabels: Story = makeStory(
+  {
+    variant: 'warning',
+    role: 'alert',
+    dismissible: true,
+    timeOut: 5000,
+    buttonText: 'Åtgärda',
+    dismissLabel: 'Stäng varning',
+    timerLabel: 'Denna varning stängs automatiskt',
+  },
+  html`<strong>Internationella etiketter</strong> Detta är en varning med
+    svenska etiketter för stäng och timer.`,
 )

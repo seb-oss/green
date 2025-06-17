@@ -118,5 +118,32 @@ describe('<gds-alert>', () => {
         el.querySelector('[gds-element="gds-card"]')
       expect(card?.getAttribute('role')).to.equal('status')
     })
+    it('should allow dismissLabel to be set for i18n', async () => {
+      const el = await fixture<GdsAlert>(
+        html`<gds-alert dismissible dismiss-label="Stäng"
+          >Dismiss me</gds-alert
+        >`,
+      )
+      await el.updateComplete
+      const closeBtn =
+        el.shadowRoot?.querySelector('.close-btn') ||
+        el.querySelector('.close-btn')
+      expect(closeBtn?.getAttribute('aria-label')).to.equal('Stäng')
+    })
+
+    it('should allow timerLabel to be set for i18n', async () => {
+      const el = await fixture<GdsAlert>(
+        html`<gds-alert time-out="1000" timer-label="Automatisk stängning"
+          >Timed</gds-alert
+        >`,
+      )
+      await el.updateComplete
+      const timerBar =
+        el.shadowRoot?.querySelector('.timer-bar') ||
+        el.querySelector('.timer-bar')
+      expect(timerBar?.getAttribute('aria-label')).to.equal(
+        'Automatisk stängning',
+      )
+    })
   })
 })
