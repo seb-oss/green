@@ -11,13 +11,13 @@ export const EXCLUSIVE_PANELS = [
 ] as const
 
 const DEFAULT_THEME: Theme = {
-  ColorScheme: 'dark' satisfies ColorScheme,
+  ColorScheme: 'light' satisfies ColorScheme,
 }
 
 const DEFAULT_PANEL: Panel = {
   All: false,
   Settings: false,
-  Sidebar: false,
+  Sidebar: true,
   Shortcuts: false,
   Command: false,
 }

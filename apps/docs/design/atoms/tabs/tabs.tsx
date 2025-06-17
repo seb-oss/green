@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useContent } from '../../../settings/content'
 
 interface TabsProps {
   slug: string
@@ -14,10 +15,27 @@ export default function Tabs({ slug }: TabsProps) {
   const router = useRouter()
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
+  const { isLoaded, actions } = useContent()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  if (!mounted || !isLoaded) return null
+
+  const component = actions.getComponent(slug)
+  if (!component) return null
+
+  const hasUXText = Boolean(
+    (component['ux-text']?.section &&
+      component['ux-text'].section.length > 0) ||
+      Array.isArray(component['ux-text']),
+  )
+
+  const hasAccessibility = Boolean(
+    component.accessibility?.section &&
+      component.accessibility.section.length > 0,
+  )
 
   const InternalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
@@ -26,9 +44,20 @@ export default function Tabs({ slug }: TabsProps) {
   }
 
   // Don't render anything until client-side
-  if (!mounted) {
-    return null
-  }
+  // if (!mounted) {
+  //   return null
+  // }
+
+  // const currentPath = pathname.split('?')[0]
+  // const isOverviewSelected = currentPath === `/component/${slug}`
+  // const isUXTextSelected = currentPath === `/component/${slug}/ux-text`
+  // const isAccessibilitySelected =
+  //   currentPath === `/component/${slug}/accessibility`
+
+  // const hasUXText =
+  //   component['ux-text']?.section?.length > 0 ||
+  //   Array.isArray(component['ux-text'])
+  // const hasAccessibility = component.accessibility?.section?.length > 0
 
   const currentPath = pathname.split('?')[0]
   const isOverviewSelected = currentPath === `/component/${slug}`
@@ -62,20 +91,25 @@ export default function Tabs({ slug }: TabsProps) {
           >
             Overview
           </Core.GdsMenuButton>
-          <Core.GdsMenuButton
-            onClick={InternalLink}
-            href={`/component/${slug}/ux-text`}
-            selected={isUXTextSelected}
-          >
-            UX text
-          </Core.GdsMenuButton>
-          <Core.GdsMenuButton
-            onClick={InternalLink}
-            href={`/component/${slug}/accessibility`}
-            selected={isAccessibilitySelected}
-          >
-            Accessibility
-          </Core.GdsMenuButton>
+          {hasUXText && (
+            <Core.GdsMenuButton
+              onClick={InternalLink}
+              href={`/component/${slug}/ux-text`}
+              selected={isUXTextSelected}
+            >
+              UX text
+            </Core.GdsMenuButton>
+          )}
+
+          {hasAccessibility && (
+            <Core.GdsMenuButton
+              onClick={InternalLink}
+              href={`/component/${slug}/accessibility`}
+              selected={isAccessibilitySelected}
+            >
+              Accessibility
+            </Core.GdsMenuButton>
+          )}
         </Core.GdsFlex>
 
         <Core.GdsLink
