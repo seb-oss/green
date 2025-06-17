@@ -1,8 +1,7 @@
 // app/components/page.client.tsx
 'use client'
 
-import { useState } from 'react'
-import Link from 'next/link'
+import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Snippet } from '../../design/atoms/snippet/snippet'
@@ -16,21 +15,78 @@ function calculateScore(text: string, query: string): number {
 
 export function ComponentsClient() {
   const { isLoaded, actions } = useContentContext()
+  const [view, setView] = useState<'grid' | 'list'>('grid')
   const [query, setQuery] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [filter, setFilter] = useState<'all' | 'beta'>('all')
 
   const components = actions.getComponents({
     sort: (a, b) => a.title.localeCompare(b.title),
   })
 
-  const filteredComponents = !query.trim()
-    ? components
-    : components.filter((component) => {
-        const titleScore = calculateScore(component.title, query)
-        const summaryScore = component.summary
-          ? calculateScore(component.summary, query)
-          : 0
-        return titleScore > 0 || summaryScore > 0
-      })
+  const categories = useMemo(() => {
+    const allCategories = components
+      .flatMap((component) => component.category || [])
+      .filter(Boolean)
+
+    // Remove duplicates and sort
+    return [...new Set(allCategories)].sort()
+  }, [components])
+
+  // const filteredComponents = !query.trim()
+  //   ? components
+  //   : components.filter((component) => {
+  //       const titleScore = calculateScore(component.title, query)
+  //       const summaryScore = component.summary
+  //         ? calculateScore(component.summary, query)
+  //         : 0
+  //       return titleScore > 0 || summaryScore > 0
+  //     })
+
+  const filteredComponents = useMemo(() => {
+    return components.filter((component) => {
+      // First check beta filter
+      if (filter === 'beta' && !component.beta) {
+        return false
+      }
+
+      // Then check category filter
+      if (selectedCategory && !component.category?.includes(selectedCategory)) {
+        return false
+      }
+
+      // Finally check search query
+      if (!query.trim()) return true
+
+      const titleScore = calculateScore(component.title, query)
+      const summaryScore = component.summary
+        ? calculateScore(component.summary, query)
+        : 0
+
+      return titleScore > 0 || summaryScore > 0
+    })
+  }, [components, query, selectedCategory, filter])
+
+  const handleCategoryChange = (e: Event) => {
+    const target = e.target as HTMLSelectElement
+    setSelectedCategory(target.value)
+  }
+
+  const handleViewChange = (e: Event) => {
+    const target = e.target as HTMLSelectElement
+    setView(target.value as 'grid' | 'list')
+  }
+
+  const handleFilterChange = (newFilter: 'all' | 'beta') => {
+    setFilter(newFilter)
+  }
+
+  const counts = useMemo(() => {
+    return {
+      all: components.length,
+      beta: components.filter((component) => component.beta).length,
+    }
+  }, [components])
 
   if (!isLoaded) return <div>Loading...</div>
 
@@ -66,82 +122,162 @@ export function ComponentsClient() {
             Interactive building blocks for creating user interfaces.
           </Core.GdsText>
         </Core.GdsFlex>
-        <Core.GdsFlex gap="m" width="360px">
+
+        <Core.GdsGrid
+          columns="6"
+          gap="l"
+          border-color="primary"
+          border-width="0 0 4xs 0"
+          border-style="solid"
+          padding-block="0 s"
+        >
           <Core.GdsInput
             value={query}
             plain
             onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
+            grid-column="1 / span 5"
             clearable
+            flex="1"
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
-        </Core.GdsFlex>
+
+          <Core.GdsFlex>
+            <Core.GdsDropdown plain oninput={handleCategoryChange}>
+              <Core.GdsOption value="">All Categories</Core.GdsOption>
+              {categories.map((category) => (
+                <Core.GdsOption key={category} value={category}>
+                  {category}
+                </Core.GdsOption>
+              ))}
+            </Core.GdsDropdown>
+          </Core.GdsFlex>
+          <Core.GdsFlex
+            grid-column="1 / span 5"
+            height="100%"
+            align-items="center"
+            justify-content="flex-start"
+            gap="l"
+          >
+            <Core.GdsFlex
+              color="secondary"
+              padding="0 2xs"
+              gap="s"
+              align-items="center"
+            >
+              <Core.GdsButton
+                size="small"
+                rank={filter === 'all' ? 'secondary' : 'tertiary'}
+                onClick={() => handleFilterChange('all')}
+              >
+                All
+                <Core.GdsBadge slot="trail" variant="none" rounded size="small">
+                  {counts.all}
+                </Core.GdsBadge>
+              </Core.GdsButton>
+              <Core.GdsButton
+                size="small"
+                rank={filter === 'beta' ? 'secondary' : 'tertiary'}
+                onClick={() => handleFilterChange('beta')}
+              >
+                Beta
+                <Core.GdsBadge slot="trail" variant="none" rounded size="small">
+                  {counts.beta}
+                </Core.GdsBadge>
+              </Core.GdsButton>
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+          <Core.GdsFlex>
+            <Core.GdsSegmentedControl
+              size="small"
+              value={view}
+              onchange={handleViewChange}
+            >
+              <Core.GdsSegment value="grid">Grid</Core.GdsSegment>
+              <Core.GdsSegment value="list">List</Core.GdsSegment>
+            </Core.GdsSegmentedControl>
+          </Core.GdsFlex>
+        </Core.GdsGrid>
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
-        <Core.GdsGrid columns="1; l{2} xl{3}" gap="2xl" max-width="180ch">
+        <Core.GdsGrid
+          columns={view === 'grid' ? '1; l{2} xl{3}' : '1'}
+          gap="l"
+          max-width="180ch"
+        >
           {filteredComponents.map((component) => (
             <Core.GdsCard
               key={component.title}
-              // border-color="primary"
+              border-color="primary"
               variant="secondary"
-              // border-radius="m"
-              padding="0"
+              border-radius="m"
+              padding="2xs 2xs l 2xs"
               gap="s"
               height="100%"
               max-width="100%"
               width="100%"
               min-width="100%"
+              flex-direction={view === 'grid' ? 'columns' : 'row'}
             >
               <Core.GdsCard
                 height="240px"
                 overflow="hidden"
                 width="100%"
+                max-width={view === 'grid' ? '100%' : '50%'}
                 align-items="center"
                 justify-content="center"
+                variant="secondary"
                 padding="0"
               >
                 {component.hero_snippet && (
                   <Snippet slug={component.hero_snippet} />
                 )}
               </Core.GdsCard>
-              <Core.GdsFlex flex-direction="column" gap="xs" padding-inline="s">
-                <Core.GdsText font-size="display-xs">
-                  {component.title}
-                </Core.GdsText>
+              <Core.GdsFlex
+                flex-direction="column"
+                gap="xs"
+                padding-inline="m"
+                padding-block={view === 'grid' ? '0' : 'm'}
+                flex="1"
+                height={view === 'grid' ? '100%' : 'max-content'}
+                margin={view === 'grid' ? 'none' : 'auto 0'}
+              >
+                <Core.GdsFlex gap="s" align-items="center">
+                  <Core.GdsText font-size="display-xs">
+                    {component.title}
+                  </Core.GdsText>
+                  {component.beta && (
+                    <Core.GdsBadge size="small" variant="notice" rounded>
+                      BETA
+                    </Core.GdsBadge>
+                  )}
+                  {/* {component.category?.includes('Layout') && (
+                    <Core.GdsBadge size="small" variant="notice" rounded>
+                      Layout
+                    </Core.GdsBadge>
+                  )} */}
+                </Core.GdsFlex>
 
                 {component.summary && (
                   <Core.GdsText
                     color="secondary"
                     font-size="detail-xs"
-                    margin="0 0 m 0"
                     lines={2}
                     width="40ch"
                   >
                     {component.summary}
                   </Core.GdsText>
                 )}
-                <Core.GdsFlex
-                  margin="auto 0 0 0"
-                  width="100%"
-                  flex="1"
-                ></Core.GdsFlex>
-                <Link
+
+                <Core.GdsLink
                   key={component.slug}
                   href={`/component/${component.slug}`}
+                  margin="auto 0 0 0"
                 >
-                  <Core.GdsFlex
-                    align-items="center"
-                    justify-content="flex-start"
-                    gap="s"
-                    margin="auto 0 0 0"
-                  >
-                    <Core.GdsText color="secondary">
-                      View Component
-                    </Core.GdsText>
-                    <Core.IconArrowRight />
-                  </Core.GdsFlex>
-                </Link>
+                  <Core.GdsText color="secondary">View Component</Core.GdsText>
+                  <Core.IconArrowRight slot="trail" />
+                </Core.GdsLink>
               </Core.GdsFlex>
             </Core.GdsCard>
           ))}
@@ -153,7 +289,7 @@ export function ComponentsClient() {
           padding="2xl"
         >
           <Core.GdsText color="secondary">
-            No components found matching {query}
+            No components found matching <strong>{query}</strong>
           </Core.GdsText>
         </Core.GdsFlex>
       )}

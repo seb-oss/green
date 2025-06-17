@@ -53,6 +53,7 @@ export function Home({
       flex-direction="column"
       gap="4xl"
       max-width="1200px"
+      width="100%"
       className={classes}
       data-slug={slug}
       {...rest}
@@ -90,13 +91,22 @@ export function Home({
             Components designed with intention, focused on user experience.
           </GdsText>
         </GdsFlex>
-        <GdsGrid columns="3" gap="l">
+        <GdsGrid columns="1; l{3}" gap="l" width="100%">
           {featuredComponents.map((component) => (
-            <GdsCard min-height="100%" width="100%" key={component.slug}>
+            <GdsCard
+              min-height="100%"
+              min-width="100%"
+              key={component.slug}
+              variant="secondary"
+              border-color="primary"
+              padding="0"
+              gap="0"
+            >
               <GdsFlex
                 align-items="center"
                 justify-content="center"
                 height="180px"
+                overflow="hidden"
               >
                 {component.hero_snippet && (
                   <Snippet slug={component.hero_snippet} />
@@ -108,6 +118,7 @@ export function Home({
                   justify-content="space-between"
                   gap="s"
                   width="100%"
+                  padding="0 l l l"
                 >
                   <GdsText color="secondary">{component.title}</GdsText>
                   <IconArrowRight />
