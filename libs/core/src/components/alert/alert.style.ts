@@ -7,39 +7,34 @@ export const alertStyles = css`
     margin: 0.3rem;
   }
 
-  [gds-element='gds-card'] {
+  #alert-message {
     --grid-areas: 'icon message close' 'icon action close';
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-areas: var(--grid-areas);
-    align-items: baseline;
     width: 100%;
     position: relative;
     transition:
       opacity 0.3s ease-out,
       transform 0.3s ease-out;
-    padding: 0.75rem;
-  }
-
-  [gds-element='gds-card'].dismissible {
-    padding: 0.75rem;
+    gap: var(--gds-sys-space-xs);
   }
 
   /* Animation */
   @media (prefers-reduced-motion: no-preference) {
-    [gds-element='gds-card'] {
+    #alert-message {
       animation: slideIn 0.3s ease-out;
     }
   }
 
-  [gds-element='gds-card'].dismissing {
+  #alert-message.dismissing {
     opacity: 0;
-    transform: translateX(1rem);
+    transform: translateY(-1rem);
     pointer-events: none;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    [gds-element='gds-card'].dismissing {
+    #alert-message.dismissing {
       transform: none;
     }
   }
@@ -52,7 +47,7 @@ export const alertStyles = css`
   }
 
   /* Focus styles */
-  [gds-element='gds-card']:focus-within {
+  #alert-message:focus-within {
     outline: 2px solid var(--gds-focus-color, #000);
     outline-offset: 2px;
   }
@@ -68,51 +63,22 @@ export const alertStyles = css`
     display: flex;
     justify-content: flex-start;
     text-align: left;
+    margin: 0 0 0 var(--gds-sys-space-2xs);
   }
 
   .message-text {
     display: inline;
     white-space: normal;
+    line-height: var(--gds-sys-text-line-height-body-m);
+    font-size: var(--gds-sys-text-size-body-m);
   }
 
   /* Buttons */
-  .close-btn,
-  [gds-element='gds-button'] {
-    /* WCAG 2.5.5 minimum touch target */
-    min-width: 44px;
-    min-height: 44px;
-  }
-
-  .close-btn {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .close-btn > gds-icon-cross-small {
-    margin: 0;
-    align-self: flex-start;
-    justify-self: flex-end;
-  }
-
-  .close-btn:hover {
-    background-color: var(--gds-hover-bg, rgba(0, 0, 0, 0.05));
-  }
-
-  .close-btn:focus-visible {
-    outline: 2px solid var(--gds-focus-color, #000);
-    outline-offset: 2px;
-  }
-
-  .close-btn > * {
-    vertical-align: top;
-    align-self: flex-start;
-  }
 
   [gds-element='gds-button'] {
     grid-area: unset;
     width: auto;
     min-width: auto;
-    margin: 0 0 0 1rem;
     display: inline-flex;
   }
 
@@ -144,27 +110,20 @@ export const alertStyles = css`
   /* Responsive layouts */
   /* Small: stacked */
   @container (max-width: 600px) {
-    [gds-element='gds-card'] {
-      --grid-areas: 'icon message close' 'icon cta cta';
-      grid-template-areas: var(--grid-areas);
+    #alert-message {
+      grid-template-areas: 'icon message close' 'cta cta cta';
     }
 
-    .message {
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .close-btn {
-      grid-area: close;
-      justify-self: end;
-      align-self: start;
-      margin: 0;
+    .action-button {
+      grid-area: cta;
+      margin-top: var(--gds-sys-space-xs);
     }
   }
 
   /* Medium: inline */
   @container (min-width: 601px) and (max-width: 1024px) {
-    [gds-element='gds-card'] {
-      grid-template-areas: 'icon message close';
+    #alert-message {
+      grid-template-areas: 'icon message cta close';
     }
     .message {
       gap: 0.5rem;
@@ -173,31 +132,18 @@ export const alertStyles = css`
 
   /* Large: centered */
   @container (min-width: 1025px) {
-    [gds-element='gds-card'] {
-      grid-template-columns: 1fr minmax(0, 37.5rem) auto 1fr;
-      grid-template-areas: 'icon message close close';
-    }
-    .icon {
-      grid-column: 1;
-      margin-right: 1.5rem;
+    #alert-message {
+      grid-template-columns: auto 1fr auto auto;
+      grid-template-areas: 'icon message cta close';
     }
 
     .message {
-      grid-column: 2;
-      gap: 0.75rem;
-    }
-
-    [gds-element='gds-button'] {
-      grid-area: unset;
-      display: inline-flex;
-      flex-shrink: 0;
+      justify-content: center;
     }
 
     .close-btn {
-      margin-left: 1.5rem;
+      grid-area: close;
       justify-self: end;
-      align-self: start;
-      grid-column: 4;
     }
   }
 

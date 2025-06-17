@@ -1,3 +1,4 @@
+import { localized, msg } from '@lit/localize'
 import { nothing, PropertyValues } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
@@ -9,7 +10,7 @@ import { gdsCustomElement, html } from '../../scoping'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 
-import '../icon/icons/checkmark.js'
+import '../icon/icons/circle-check.js'
 import '../icon/icons/triangle-exclamation.js'
 import '../icon/icons/circle-info.js'
 import '../icon/icons/cross-small.js'
@@ -30,7 +31,7 @@ type DismissSource = 'timeout' | 'close' | 'escape'
 
 // Constants
 const VARIANT_CONFIG = {
-  positive: { icon: 'checkmark', card: 'positive', label: 'Positive alert' },
+  positive: { icon: 'circle-check', card: 'positive', label: 'Positive alert' },
   warning: {
     icon: 'triangle-exclamation',
     card: 'warning',
@@ -46,7 +47,7 @@ const VARIANT_CONFIG = {
     card: 'information',
     label: 'Information alert',
   },
-  notice: { icon: 'circle-info', card: 'information', label: 'Notice alert' },
+  notice: { icon: 'circle-info', card: 'notice', label: 'Notice alert' },
 } as const
 
 const FADE_DURATION = 300
@@ -63,6 +64,7 @@ const PROGRESS_INTERVAL = 100
 @gdsCustomElement('gds-alert', {
   dependsOn: [GdsButton, GdsCard],
 })
+@localized()
 export class GdsAlert extends GdsElement {
   static styles = [tokens, alertStyles]
 
@@ -79,7 +81,7 @@ export class GdsAlert extends GdsElement {
   timeOut = 0
 
   @property({ type: String, attribute: 'button-text' })
-  buttonText = ''
+  buttonLabel = ''
 
   @state() private _progress = 100
   @state() private _isClosing = false
@@ -180,9 +182,7 @@ export class GdsAlert extends GdsElement {
   // Render methods
   private _renderIcon() {
     const icon = `gds-icon-${this._config.icon}`
-    return html`<span class="icon" role="presentation">
-      ${staticHtml`<${unsafeStatic(icon)} aria-hidden="true"></${unsafeStatic(icon)}>`}
-    </span>`
+    return html`${staticHtml`<${unsafeStatic(icon)} class="icon" solid aria-hidden="true" size="24px"></${unsafeStatic(icon)}>`}`
   }
 
   private _renderMessage() {
@@ -190,35 +190,38 @@ export class GdsAlert extends GdsElement {
       <span class="message-text">
         <slot></slot>
       </span>
-      ${this.buttonText && this.buttonText.trim()
-        ? html`
-            <gds-button
-              variant="neutral"
-              rank="primary"
-              size="small"
-              @click=${this._onButtonClick}
-              aria-describedby="alert-message"
-            >
-              ${this.buttonText}
-            </gds-button>
-          `
-        : nothing}
     </div>`
+  }
+
+  private _renderActionButton(label: string) {
+    return html`
+      <gds-button
+        class="action-button"
+        variant="neutral"
+        rank="primary"
+        size="small"
+        @click=${this._onButtonClick}
+        aria-describedby="alert-message"
+      >
+        ${label.trim()}
+      </gds-button>
+    `
   }
 
   private _renderCloseButton() {
     return this.dismissible
       ? html`
-          <gds-button
-            class="close-btn"
-            variant="neutral"
-            rank="tertiary"
-            size="small"
-            aria-label="Dismiss alert"
-            @click=${() => this._dismiss('close')}
-          >
-            <gds-icon-cross-small></gds-icon-cross-small>
-          </gds-button>
+          <div class="close-btn">
+            <gds-button
+              variant="neutral"
+              rank="tertiary"
+              size="small"
+              aria-label=${msg('Dismiss alert')}
+              @click=${() => this._dismiss('close')}
+            >
+              <gds-icon-cross-small size="20px"></gds-icon-cross-small>
+            </gds-button>
+          </div>
         `
       : nothing
   }
@@ -229,7 +232,7 @@ export class GdsAlert extends GdsElement {
           <div
             class="timer-bar"
             role="timer"
-            aria-label="Auto-dismiss timer"
+            aria-label=${msg('Auto-dismiss timer')}
             aria-valuenow=${this._progress}
             aria-valuemin="0"
             aria-valuemax="100"
@@ -258,8 +261,12 @@ export class GdsAlert extends GdsElement {
         class=${classMap(classes)}
         @keydown=${this._handleKeyDown}
         id="alert-message"
+        padding="m"
       >
         ${this._renderIcon()} ${this._renderMessage()}
+        ${this.buttonLabel
+          ? this._renderActionButton(this.buttonLabel)
+          : nothing}
         ${this._renderCloseButton()} ${this._renderTimerBar()}
       </gds-card>
     `

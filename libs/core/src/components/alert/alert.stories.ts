@@ -27,7 +27,7 @@ const meta: Meta<GdsAlert> = {
       description: 'Shows close button when enabled.',
     },
     timeOut: { control: 'number' },
-    buttonText: { control: 'text', name: 'Button Text (CTA)' },
+    buttonLabel: { control: 'text', name: 'Button Text (CTA)' },
   },
 }
 
@@ -46,7 +46,7 @@ const Template = (
       role="${args.role}"
       ?dismissible=${args.dismissible}
       .timeOut=${args.timeOut}
-      .buttonText=${args.buttonText || ''}
+      .buttonLabel=${args.buttonLabel || ''}
     >
       ${context.parameters?.content || ''}
     </gds-alert>
@@ -67,7 +67,7 @@ export const Playground: Story = makeStory(
     role: 'alert',
     dismissible: false,
     timeOut: 0,
-    buttonText: '',
+    buttonLabel: '',
   },
   html`<strong>Information</strong> Body text starts on the same row as heading.
     A link (optional) always ends the message.`,
@@ -103,7 +103,7 @@ export const WithAction = makeStory(
     ...Playground.args!,
     variant: 'information',
     dismissible: true,
-    buttonText: 'Take Action',
+    buttonLabel: 'Take Action',
   },
   html`<strong>Actionable</strong> Alert with a button for quick user
     interaction.`,
@@ -125,7 +125,7 @@ export const RichContent = makeStory(
     variant: 'information',
     role: 'alert',
     dismissible: true,
-    buttonText: 'Learn More',
+    buttonLabel: 'Learn More',
   },
   html`<strong>Rich Content</strong> Includes <a href="#">a link</a>,
     <em>emphasis</em>, and <code>code</code>.`,
