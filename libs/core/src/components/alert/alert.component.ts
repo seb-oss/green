@@ -7,16 +7,13 @@ import { html as staticHtml, unsafeStatic } from 'lit/static-html.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
+import { tokens } from '../../tokens.style'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
-
-import '../icon/icons/circle-check.js'
-import '../icon/icons/triangle-exclamation.js'
-import '../icon/icons/circle-info.js'
-import '../icon/icons/cross-small.js'
-import '../button/index.js'
-
-import { tokens } from '../../tokens.style'
+import { IconCircleCheck } from '../icon/icons/circle-check.component'
+import { IconCircleInfo } from '../icon/icons/circle-info.js'
+import { IconCrossSmall } from '../icon/icons/cross-small.js'
+import { IconTriangleExclamation } from '../icon/icons/triangle-exclamation.js'
 import { alertStyles } from './alert.style'
 
 // Type definitions
@@ -55,7 +52,14 @@ const PROGRESS_INTERVAL = 100
  * @fires action - Fired when action button is clicked
  */
 @gdsCustomElement('gds-alert', {
-  dependsOn: [GdsButton, GdsCard],
+  dependsOn: [
+    GdsButton,
+    GdsCard,
+    IconCircleCheck,
+    IconTriangleExclamation,
+    IconCircleInfo,
+    IconCrossSmall,
+  ],
 })
 @localized()
 export class GdsAlert extends GdsElement {
