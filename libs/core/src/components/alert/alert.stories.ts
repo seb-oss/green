@@ -7,6 +7,9 @@ import './index.ts'
 import '../card/card.ts'
 import '../button/button.ts'
 
+/**
+ * Alert is a message used to inform or update the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
+ */
 const meta: Meta<GdsAlert> = {
   title: 'Components/Alert',
   component: 'gds-alert',
@@ -19,24 +22,6 @@ const meta: Meta<GdsAlert> = {
     role: {
       control: 'select',
       options: ['alert', 'status'],
-      description:
-        'ARIA role. Use "alert" for critical, "status" for less important.',
-    },
-    dismissible: {
-      control: 'boolean',
-      description: 'Shows close button when enabled.',
-    },
-    timeOut: { control: 'number' },
-    buttonLabel: { control: 'text', name: 'Button Text (CTA)' },
-    dismissLabel: {
-      control: 'text',
-      name: 'Dismiss Button Label',
-      description: 'Accessible label for the close button (for i18n).',
-    },
-    timerLabel: {
-      control: 'text',
-      name: 'Timer Bar Label',
-      description: 'Accessible label for the timer bar (for i18n).',
     },
   },
 }
@@ -45,124 +30,101 @@ export default meta
 
 type Story = StoryObj<GdsAlert>
 
-// Base template
-const Template = (
-  args: GdsAlert,
-  context: { parameters: { content?: unknown } },
-) => html`
-  <gds-alert
-    variant="${args.variant}"
-    role="${args.role}"
-    ?dismissible=${args.dismissible}
-    .timeOut=${args.timeOut}
-    .buttonLabel=${args.buttonLabel || ''}
-    .dismissLabel=${args.dismissLabel || 'Dismiss alert'}
-    .timerLabel=${args.timerLabel || 'Auto-dismiss timer'}
-  >
-    ${context.parameters?.content || ''}
-  </gds-alert>
-`
-
-// Helper to create stories
-const makeStory = (args: Partial<GdsAlert>, content: unknown): Story => ({
-  args,
-  parameters: { content },
-  render: Template,
-})
-
-// Stories
-export const Playground: Story = makeStory(
-  {
+export const DefaultParams: Story = {
+  parameters: {
+    docs: {
+      source: { format: true, type: 'dynamic' },
+    },
+    controls: { expanded: true },
+  },
+  args: {
     variant: 'information',
     role: 'alert',
-    dismissible: false,
-    timeOut: 0,
+    dismissible: true,
+    timeout: 0,
     buttonLabel: '',
-  },
-  html`<strong>Information</strong> Body text starts on the same row as heading.
+    innerHTML: `<strong>Information</strong> Body text starts on the same row as heading.
     A link (optional) always ends the message.`,
-)
+  },
+}
 
-export const Information = makeStory(
-  { ...Playground.args!, variant: 'information' },
-  Playground.parameters!.content,
-)
+/**
+ * Alert is avaliable in multiple variants to indicate different types of messages.
+ * Each variant has a specific color and icon to convey the message type.
+ */
+export const Variants: Story = {
+  args: {},
+  render: () => html`
+    <gds-alert variant="information" role="alert">
+      <strong>Information</strong> Body text starts on the same row as heading.
+      A link (optional) always ends the message.
+    </gds-alert>
+    <gds-alert variant="notice" role="alert">
+      <strong>Notice</strong> Body text with link or additional context.
+    </gds-alert>
+    <gds-alert variant="positive" role="alert">
+      <strong>Positive</strong> Feedback message with optional CTA.
+    </gds-alert>
+    <gds-alert variant="warning" role="alert">
+      <strong>Warning</strong> Important information to consider.
+    </gds-alert>
+    <gds-alert variant="negative" role="alert">
+      <strong>Negative</strong> Error message requiring user attention.
+    </gds-alert>
+  `,
+}
 
-export const Notice = makeStory(
-  { ...Playground.args!, variant: 'notice' },
-  html`<strong>Notice</strong> Body text with link or additional context.`,
-)
-
-export const Positive = makeStory(
-  { ...Playground.args!, variant: 'positive' },
-  html`<strong>Positive</strong> Feedback message with optional CTA.`,
-)
-
-export const Warning = makeStory(
-  { ...Playground.args!, variant: 'warning' },
-  html`<strong>Warning</strong> Important information to consider.`,
-)
-
-export const Negative = makeStory(
-  { ...Playground.args!, variant: 'negative' },
-  html`<strong>Negative</strong> Error message requiring user attention.`,
-)
-
-export const WithAction = makeStory(
-  {
-    ...Playground.args!,
+/**
+ * Alerts can have a action button to allow users to take an immediate action.
+ */
+export const WithAction: Story = {
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.parameters!.args,
     variant: 'information',
     dismissible: true,
     buttonLabel: 'Take Action',
+    innerHTML: `<strong>Actionable</strong> Alert with a button for quick user interaction.`,
   },
-  html`<strong>Actionable</strong> Alert with a button for quick user
-    interaction.`,
-)
+}
 
-export const Dismissible = makeStory(
-  { ...Playground.args!, variant: 'information', dismissible: true },
-  html`<strong>Dismissible</strong> User can dismiss this alert.`,
-)
+/**
+ * Alerts can be dismissed by the user, either by pressing the close button, or by using the Escape key while the alert is focused.
+ */
+export const Dismissible: Story = {
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.parameters!.args,
+    variant: 'information',
+    dismissible: true,
+    innerHTML: `<strong>Dismissible</strong> User can dismiss this alert.`,
+  },
+}
 
-export const AutoDismiss = makeStory(
-  { ...Playground.args!, variant: 'positive', timeOut: 3000 },
-  html`<strong>Auto Dismiss</strong> This alert disappears automatically after a
-    delay.`,
-)
+/**
+ * Alerts can automatically dismiss themselves after a specified timeout.
+ */
+export const AutoDismiss: Story = {
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.parameters!.args,
+    variant: 'positive',
+    timeout: 3000,
+    innerHTML: `<strong>Auto Dismiss</strong> This alert disappears automatically after a delay.`,
+  },
+}
 
-export const RichContent = makeStory(
-  {
+/**
+ * Alerts can contain rich content in the main slot.
+ */
+export const RichContent: Story = {
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.parameters!.args,
     variant: 'information',
     role: 'alert',
     dismissible: true,
     buttonLabel: 'Learn More',
+    innerHTML: `<gds-rich-text><strong>Rich Content</strong> Includes <a href="#">a link</a>, <em>emphasis</em>, and <code>code</code>.</gds-rich-text>`,
   },
-  html`<strong>Rich Content</strong> Includes <a href="#">a link</a>,
-    <em>emphasis</em>, and <code>code</code>.`,
-)
-
-export const ComplexContent = makeStory(
-  { variant: 'warning', role: 'alert', dismissible: true },
-  html`<strong>Complex Content</strong> Demonstrates how layout adjusts with
-    long or wrapped content in alerts.`,
-)
-
-export const KeyboardAccessible = makeStory(
-  { variant: 'positive', role: 'alert', dismissible: true },
-  html`<strong>Keyboard Accessible</strong> Press Escape to dismiss, or use
-    keyboard to interact with the alert.`,
-)
-
-export const I18nLabels: Story = makeStory(
-  {
-    variant: 'warning',
-    role: 'alert',
-    dismissible: true,
-    timeOut: 5000,
-    buttonText: 'Åtgärda',
-    dismissLabel: 'Stäng varning',
-    timerLabel: 'Denna varning stängs automatiskt',
-  },
-  html`<strong>Internationella etiketter</strong> Detta är en varning med
-    svenska etiketter för stäng och timer.`,
-)
+}
