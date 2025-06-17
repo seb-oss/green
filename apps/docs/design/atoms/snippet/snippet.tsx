@@ -17,13 +17,45 @@ interface SnippetProps {
   slug: string
 }
 
+// Define components once at module level
+const defineComponents = () => {
+  Object.values(Core).forEach((Component: any) => {
+    if (Component?.define && typeof Component.define === 'function') {
+      try {
+        Component.define()
+      } catch (e) {
+        // Already defined, ignore
+      }
+    }
+  })
+}
+
 export function Snippet({ slug }: SnippetProps) {
   const [snippetData, setSnippetData] = useState<SnippetData | null>(null)
+  const [componentsReady, setComponentsReady] = useState(false)
 
-  const convertAttributes = (attribs: { [key: string]: string }) => {
+  useEffect(() => {
+    defineComponents()
+    setComponentsReady(true)
+  }, [])
+
+  const convertAttributes = (
+    attribs: { [key: string]: string },
+    tagName: string,
+  ) => {
     const props: { [key: string]: any } = {}
 
+    // First, handle lines specifically for GdsText
+    if (tagName === 'gds-text' && 'lines' in attribs) {
+      props.lines = Number(attribs.lines)
+    }
+
+    // Then handle all other attributes
     for (const [key, value] of Object.entries(attribs)) {
+      if (key === 'lines' && tagName === 'gds-text') {
+        continue // Skip lines as we already handled it
+      }
+
       if (key.startsWith('.')) {
         const propName = key.substring(1)
         const cleanValue = value.replace(/\${(.+)}/, '$1')
@@ -40,9 +72,17 @@ export function Snippet({ slug }: SnippetProps) {
         props[key] = false
       } else if (key === 'class') {
         props.className = value
+        props.class = value // Need both for web component
       } else {
         props[key] = value
       }
+    }
+
+    // Ensure GdsText is defined
+    if (tagName === 'gds-text' && (Core as any).GdsText?.define) {
+      try {
+        ;(Core as any).GdsText.define()
+      } catch {}
     }
 
     return props
@@ -100,10 +140,13 @@ export function Snippet({ slug }: SnippetProps) {
         const Component = getComponent(node.name)
         if (!Component) return undefined
 
-        const props = convertAttributes(node.attribs)
-
-        // Get all children content
+        const props = convertAttributes(node.attribs, node.name)
         const childContent = node.children?.map(getNodeContent).join('')
+
+        // Special handling for rich-text
+        if (node.name === 'gds-rich-text') {
+          return <Component {...props}>{parse(childContent)}</Component>
+        }
 
         // If there are no GDS components in children, use innerHTML
         if (!childContent.includes('gds-')) {
@@ -140,7 +183,7 @@ export function Snippet({ slug }: SnippetProps) {
     fetchSnippet()
   }, [slug])
 
-  if (!snippetData?.code) return null
+  if (!snippetData?.code || !componentsReady) return null
 
   try {
     return (
