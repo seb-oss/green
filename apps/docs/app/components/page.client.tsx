@@ -92,6 +92,7 @@ export function ComponentsClient() {
                 width="100%"
                 align-items="center"
                 justify-content="center"
+                padding="0"
               >
                 {component.hero_snippet && (
                   <Snippet slug={component.hero_snippet} />

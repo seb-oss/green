@@ -115,6 +115,9 @@ export function ComponentLayoutClient({
           height="280px"
           justify-content="center"
           align-items="center"
+          position="relative"
+          overflow="hidden"
+          padding="0"
         >
           {component.hero_snippet && (
             <Snippet slug={component.hero_snippet?.toString()} />
