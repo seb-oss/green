@@ -3,6 +3,7 @@
 
 import * as Core from '@sebgroup/green-core/react'
 import { useContentContext } from '../../../settings/content'
+import Card from '../card/card'
 import { Snippet } from '../snippet/snippet'
 
 interface SimilarProps {
@@ -58,65 +59,14 @@ export function Similar({ tag, currentSlug }: SimilarProps) {
 
       <Core.GdsGrid columns="1; l{2}" gap="l" width="100%">
         {similarComponents.map((component) => (
-          <Core.GdsCard
+          <Card
             key={component.slug}
-            border-color="primary"
-            variant="secondary"
-            border-radius="m"
-            padding="2xs 2xs l 2xs"
-            gap="s"
-            height="100%"
-          >
-            <Core.GdsCard
-              height="240px"
-              overflow="hidden"
-              width="100%"
-              align-items="center"
-              justify-content="center"
-              variant="secondary"
-              padding="0"
-            >
-              {component.hero_snippet && (
-                <Snippet slug={component.hero_snippet} />
-              )}
-            </Core.GdsCard>
-            <Core.GdsFlex
-              flex-direction="column"
-              gap="xs"
-              padding-inline="m"
-              flex="1"
-            >
-              <Core.GdsFlex gap="s" align-items="center">
-                <Core.GdsText font-size="display-xs">
-                  {component.title}
-                </Core.GdsText>
-                {component.beta && (
-                  <Core.GdsBadge size="small" variant="notice" rounded>
-                    BETA
-                  </Core.GdsBadge>
-                )}
-              </Core.GdsFlex>
-
-              {component.summary && (
-                <Core.GdsText
-                  color="secondary"
-                  font-size="detail-xs"
-                  lines={2}
-                  width="40ch"
-                >
-                  {component.summary}
-                </Core.GdsText>
-              )}
-
-              <Core.GdsLink
-                href={`/component/${component.slug}`}
-                margin="auto 0 0 0"
-              >
-                <Core.GdsText color="secondary">View Component</Core.GdsText>
-                <Core.IconArrowRight slot="trail" />
-              </Core.GdsLink>
-            </Core.GdsFlex>
-          </Core.GdsCard>
+            title={component.title}
+            beta={component.beta}
+            summary={component.summary}
+            href={component.slug}
+            snippet={component.hero_snippet}
+          />
         ))}
       </Core.GdsGrid>
     </Core.GdsFlex>

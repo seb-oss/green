@@ -42,6 +42,7 @@ export interface ComponentColumn {
   tag?: string
   content?: string
   text?: string
+  color?: string
   size?: string
   Snippet?: string
   caption?: string

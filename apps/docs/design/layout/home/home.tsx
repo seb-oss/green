@@ -15,6 +15,7 @@ import {
   IconBrandStorybook,
   IconCloudySun,
   IconCupHot,
+  IconSquareGridCircle,
 } from '@sebgroup/green-core/react'
 import { useContentContext } from '../../../settings/content'
 import { Link } from '../../atoms/link/link'
@@ -128,6 +129,7 @@ export function Home({
           ))}
         </GdsGrid>
         <Link component="button" href="/components" rank="secondary">
+          <IconSquareGridCircle slot="lead"></IconSquareGridCircle>
           View All Components
         </Link>
       </GdsFlex>

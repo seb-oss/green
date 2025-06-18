@@ -1,3 +1,4 @@
+```tsx
 // app/components/page.client.tsx
 'use client'
 
@@ -209,14 +210,91 @@ export function ComponentsClient() {
           max-width="180ch"
         >
           {filteredComponents.map((component) => (
-            <Card
-              key={component.title}
-              title={component.title}
-              href={component.slug}
-              summary={component.summary}
-              beta={component.beta}
-              snippet={component.hero_snippet}
-            />
+            <>
+              <Card
+                key={component.title}
+                title={component.title}
+                href={component.slug}
+                summary={component.summary}
+                beta={component.beta}
+                snippet={component.hero_snippet}
+              />
+              <Core.GdsCard
+                key={component.title}
+                border-color="primary"
+                variant="secondary"
+                border-radius="m"
+                padding="2xs 2xs l 2xs"
+                gap="s"
+                height="100%"
+                max-width="100%"
+                width="100%"
+                min-width="100%"
+                flex-direction={view === 'grid' ? 'columns' : 'row'}
+              >
+                <Core.GdsCard
+                  height="240px"
+                  overflow="hidden"
+                  width="100%"
+                  max-width={view === 'grid' ? '100%' : '50%'}
+                  align-items="center"
+                  justify-content="center"
+                  variant="secondary"
+                  padding="0"
+                >
+                  {component.hero_snippet && (
+                    <Snippet slug={component.hero_snippet} />
+                  )}
+                </Core.GdsCard>
+                <Core.GdsFlex
+                  flex-direction="column"
+                  gap="xs"
+                  padding-inline="m"
+                  padding-block={view === 'grid' ? '0' : 'm'}
+                  flex="1"
+                  height={view === 'grid' ? '100%' : 'max-content'}
+                  margin={view === 'grid' ? 'none' : 'auto 0'}
+                >
+                  <Core.GdsFlex gap="s" align-items="center">
+                    <Core.GdsText font-size="display-xs">
+                      {component.title}
+                    </Core.GdsText>
+                    {component.beta && (
+                      <Core.GdsBadge size="small" variant="notice" rounded>
+                        BETA
+                      </Core.GdsBadge>
+                    )}
+                    {/* {component.category?.includes('Layout') && (
+                    <Core.GdsBadge size="small" variant="notice" rounded>
+                      Layout
+                    </Core.GdsBadge>
+                  )} */}
+                  </Core.GdsFlex>
+
+                  {component.summary && (
+                    <Core.GdsText
+                      color="secondary"
+                      font-size="detail-xs"
+                      lines={2}
+                      width="40ch"
+                    >
+                      {component.summary}
+                    </Core.GdsText>
+                  )}
+
+                  <Core.GdsLink
+                    key={component.slug}
+                    href={`/component/${component.slug}`}
+                    margin="auto 0 0 0"
+                  >
+                    <Core.GdsText color="secondary">
+                      View Component
+                    </Core.GdsText>
+                    <Core.IconArrowRight slot="trail" />
+                  </Core.GdsLink>
+                </Core.GdsFlex>
+              </Core.GdsCard>
+            </>
           ))}
         </Core.GdsGrid>
       ) : (

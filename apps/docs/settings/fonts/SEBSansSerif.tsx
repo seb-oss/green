@@ -57,6 +57,7 @@ const SEBSansSerif = localFont({
   ],
   display: 'block',
   variable: '--gds-font-family',
+  fallback: ['sans-serif'],
 })
 export const fontVariable = SEBSansSerif.variable
 export default SEBSansSerif

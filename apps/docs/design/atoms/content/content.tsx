@@ -70,7 +70,12 @@ export const renderColumn = (
 
     case 'paragraph':
       return (
-        <Core.GdsText font-size={column.size} tag={column.tag}>
+        <Core.GdsText
+          font-size={column.size ? column.size : 'body-l'}
+          color={column.color ? column.color : 'secondary'}
+          tag={column.tag}
+          max-width="100ch"
+        >
           {column.text}
         </Core.GdsText>
       )

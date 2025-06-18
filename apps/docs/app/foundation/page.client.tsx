@@ -43,7 +43,17 @@ export function FoundationClient() {
         </Link>
         <GdsText>Foundation</GdsText>
       </GdsBreadcrumbs>
-      <GdsText tag="h1">{CONTENT?.title}</GdsText>
+      <GdsFlex flex-direction="column" gap="s">
+        <GdsText tag="h1">{CONTENT?.title}</GdsText>
+        <GdsText
+          tag="p"
+          font-size="heading-m"
+          color="secondary"
+          max-width="100ch"
+        >
+          {CONTENT?.summary}
+        </GdsText>
+      </GdsFlex>
       {CONTENT?.sections && (
         <Render
           content={CONTENT.sections}
