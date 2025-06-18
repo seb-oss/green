@@ -133,7 +133,7 @@ export const Popover: Story = {
       <gds-year-picker id="yearp"> </gds-year-picker>
     </gds-popover>
     <script>
-      const yearp = document.getElementById('yearp')
+      var yearp = document.getElementById('yearp')
       function onYearChange() {
         const selectedDate = yearp.value
         document.getElementById('selected-year').innerText =
