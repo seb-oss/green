@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.85.1
+
+### Patch Changes
+
+- 00111cc: **Alert:** Fix icon import paths
+
 ## 1.85.0
 
 ### Minor Changes
