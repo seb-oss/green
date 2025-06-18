@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.85.0
+
+### Minor Changes
+
+- e4eb1ad: **Alert:** Add new component
+
+### Patch Changes
+
+- 60e38d9: fix: popover focus improvements
+
 ## 1.84.0
 
 ### Minor Changes
