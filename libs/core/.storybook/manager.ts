@@ -10,7 +10,6 @@ const betaItems = {
   Badge: true,
   Blur: true,
   Breadcrumbs: true,
-  Dropdown: true,
   Card: true,
   Checkbox: true,
   Coachmark: true,
