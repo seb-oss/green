@@ -47,11 +47,6 @@ export type CustomizedDate = {
   disabled: boolean
 }
 
-const years = [
-  2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027,
-  2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035,
-]
-
 /**
  * @element gds-year-picker
  * @status stable
@@ -320,6 +315,13 @@ export class GdsYearPicker extends GdsElement {
       }
       handled = true
     }
+
+    /*const proceed = this.dispatchCustomEvent('gds-date-focused', {
+        detail: newFocusedDate,
+        bubbles: false,
+        composed: false,
+    })*/
+
     if (handled) {
       e.preventDefault()
       e.stopPropagation()
