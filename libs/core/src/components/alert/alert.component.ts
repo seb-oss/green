@@ -11,9 +11,9 @@ import { tokens } from '../../tokens.style'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { IconCircleCheck } from '../icon/icons/circle-check.component'
-import { IconCircleInfo } from '../icon/icons/circle-info.js'
-import { IconCrossSmall } from '../icon/icons/cross-small.js'
-import { IconTriangleExclamation } from '../icon/icons/triangle-exclamation.js'
+import { IconCircleInfo } from '../icon/icons/circle-info.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
+import { IconTriangleExclamation } from '../icon/icons/triangle-exclamation.component'
 import { alertStyles } from './alert.style'
 
 // Type definitions
