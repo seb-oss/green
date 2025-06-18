@@ -241,13 +241,13 @@ export function ComponentLayoutClient({
               </Core.GdsText>
             </Core.GdsFlex>
             <Core.GdsText tag="p" color="primary" font-size="heading-s">
-              This component is part of Green's declarative layout system,
-              designed specifically for micro-frontend architectures.
+              {`This component is part of Green's declarative layout system,
+              designed specifically for micro-frontend architectures.`}
             </Core.GdsText>
             <Core.GdsText color="secondary" tag="p">
-              It uses style expression properties to generate and inject CSS
+              {`It uses style expression properties to generate and inject CSS
               directly into shadow DOM, ensuring style encapsulation while
-              providing flexible, responsive layouts without utility classes.
+              providing flexible, responsive layouts without utility classes.`}
             </Core.GdsText>
             <Link component="button" href="/foundation/layout" rank="secondary">
               Learn more about declarative layout system
