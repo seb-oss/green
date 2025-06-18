@@ -5,9 +5,11 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './index.ts'
 import '../grid/index.js'
 import '../text/index.js'
+import '../badge/index.js'
 import '../divider/index.js'
 import '../flex/index.js'
 import '../icon/icons/credit-card.js'
+import '../icon/icons/settings-slider-ver.ts'
 import '../icon/icons/circle-x.js'
 import '../icon/icons/chevron-top.js'
 import '../icon/icons/arrow-up.js'
@@ -511,6 +513,32 @@ export const NextPrevious: Story = {
           </gds-button>
         </gds-grid>
       </gds-flex>
+    </gds-flex>
+  `,
+}
+
+export const Filter: Story = {
+  ...DefaultParams,
+  name: 'Filter',
+  parameters: {
+    ...DefaultParams.parameters,
+    controls: { include: [] },
+  },
+  render: () => html`
+    <gds-flex
+      gap="4xl"
+      flex-direction="column"
+      width="520px"
+      justify-content="flex-start"
+      align-items="flex-start"
+    >
+      <gds-button rank="secondary">
+        <gds-icon-settings-slider-ver
+          slot="lead"
+        ></gds-icon-settings-slider-ver>
+        Filter
+        <gds-badge slot="trail" size="small" rounded>99</gds-badge>
+      </gds-button>
     </gds-flex>
   `,
 }
