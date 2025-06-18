@@ -66,7 +66,7 @@ jobs:
       contents: write
       id-token: write
     env:
-      CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}}
+      CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}
     needs: release
     steps:
       - name: Get token
@@ -101,7 +101,7 @@ jobs:
 
       - run: |
           git config --global user.name '${{ steps.app-token.outputs.app-slug }}[bot]'
-          git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com>'
+          git config --global user.email '${{ steps.get-user-id.outputs.user-id }}+${{ steps.app-token.outputs.app-slug }}[bot]@users.noreply.github.com'
 
       - name: Push changes
         env:
@@ -110,5 +110,5 @@ jobs:
           git add .
           git commit -m "${{ env.CI_COMMIT_MESSAGE }}"
           git push
-          git tag -a ${{ needs.release.outputs.tokensversion }} -m "Version ${{ needs.release.outputs.tokensversion }} of the Green Tokens Package for Swift."
+          git tag -a ${{ needs.release.outputs.tokensversion }} -m "Version ${{ needs.release.outputs.tokensversion }} of the Green Tokens Package for Android."
           git push origin ${{ needs.release.outputs.tokensversion }}
