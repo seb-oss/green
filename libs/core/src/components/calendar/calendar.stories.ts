@@ -99,11 +99,11 @@ export const Usage: Story = {
       </div>
     </div>
     <script>
-      const cal = document.getElementById('cal')
-      const year = document.getElementById('year')
-      const month = document.getElementById('month')
+      var cal = document.getElementById('cal')
+      var year = document.getElementById('year')
+      var month = document.getElementById('month')
 
-      const customizedDates = [
+      var customizedDates = [
         {
           date: new Date('2024-06-04'),
           color: 'var(--intent-danger-background)',
