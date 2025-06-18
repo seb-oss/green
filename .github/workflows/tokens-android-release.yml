@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       tokensversion: ${{ steps.output-tokens-version.outputs.tokensversion }}
-      tokensshoulddeploy: ${{ contains(fromJson(steps.changesets.outputs.publishedPackages).*.name, '@sebgroup/green-tokens') }}
     steps:
       - name: Get token
         id: get_token
@@ -53,11 +52,11 @@ jobs:
         id: output-tokens-version
         run: echo "tokensversion=0.0.2" >> "$GITHUB_OUTPUT"
 
-      - name: Upload Androidartifacts
+      - name: Upload Android artifacts
         uses: actions/upload-artifact@v4
         with:
           name: androidtokens
-          path: ./dist/libs/tokens/2023/android/*
+          path: ./dist/libs/tokens/2023/android/Colors/*
 
   deployandroidtokens:
     name: Deploy Android Package
@@ -92,6 +91,13 @@ jobs:
         with:
           name: androidtokens
           path: lib/src/main/kotlin/se/seb/gds/tokens/
+
+      - name: Update version
+        run: |
+          file="gradle.properties"
+          tag="${{ needs.release.outputs.tokensversion }}"
+          sed -i "s/^VERSION_NAME=.*/VERSION_NAME=$tag/" "$file"
+          echo "Set VERSION_NAME to $tag"
 
       - name: Get GitHub App User ID
         id: get-user-id
