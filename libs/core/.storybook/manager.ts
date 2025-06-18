@@ -43,6 +43,7 @@ const betaItems = {
   Textarea: true,
   Theme: true,
   Video: true,
+  'Year picker': true,
 }
 
 addons.setConfig({
