@@ -6,6 +6,7 @@ import '../../../.storybook/manager'
 import { addons } from '@storybook/manager-api'
 
 const betaItems = {
+  Alert: true,
   Badge: true,
   Blur: true,
   Breadcrumbs: true,
@@ -22,8 +23,9 @@ const betaItems = {
   Divider: true,
   Dropdown: true,
   Flex: true,
-  'Formatted text': true,
+  Form: true,
   'Form summary': true,
+  'Formatted text': true,
   Grid: true,
   Image: true,
   Input: true,
