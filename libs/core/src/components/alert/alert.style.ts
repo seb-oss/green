@@ -2,9 +2,13 @@ import { css } from 'lit'
 
 export const alertStyles = css`
   :host {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: fit-content;
+    max-width: 100vw;
+    margin: 0.3rem auto;
     display: block;
     container-type: inline-size;
-    margin: 0.3rem;
   }
 
   #alert-message {
