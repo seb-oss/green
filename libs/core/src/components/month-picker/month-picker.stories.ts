@@ -5,8 +5,9 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 import './index.ts'
-import '../flex/index.ts'
-import '../dropdown/index.ts'
+import '../popover/index.ts'
+import '../button/index.ts'
+import '../icon/icons/calendar.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/month-picker)
@@ -147,7 +148,34 @@ export const FocusedYearDate: Story = {
   `,
 }
 
-export const OutsideMinMax: Story = {
+/**
+ * Example of a button that opens up the month-picker.
+ */
+export const Popover: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-popover id="pop">
+      <gds-button rank="secondary" slot="trigger">
+        <span id="selected-month">Choose a month</span>
+        <gds-icon-calendar slot="trail"></gds-icon-calendar>
+      </gds-button>
+      <div style="padding: 1rem 0 0 1.5rem">Choose a month</div>
+      <gds-month-picker id="monthp"> </gds-month-picker>
+    </gds-popover>
+    <script>
+      var monthp = document.getElementById('monthp')
+      function onMonthChange() {
+        const selectedDate = monthp.value
+        document.getElementById('selected-month').innerText =
+          selectedDate.toLocaleString('default', { month: 'long' })
+        document.getElementById('pop').open = false
+      }
+      monthp.addEventListener('change', onMonthChange)
+    </script>
+  `,
+}
+
+/*export const OutsideMinMax: Story = {
   ...DefaultParams,
   name: 'Outside the min max',
   render: (args) => html`
@@ -158,7 +186,7 @@ export const OutsideMinMax: Story = {
       max="2024-06-01"
     ></gds-month-picker>
   `,
-}
+}*/
 
 // export const Disabled: Story = {
 //   ...DefaultParams,
