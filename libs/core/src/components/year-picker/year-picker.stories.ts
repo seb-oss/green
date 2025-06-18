@@ -3,11 +3,11 @@ import { html } from 'lit'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
-import { onlyDate } from '../../utils/testing'
 
 import './index.ts'
-import '../flex/index.ts'
-import '../dropdown/index.ts'
+import '../popover/index.ts'
+import '../button/index.ts'
+import '../icon/icons/calendar.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/year-picker)
@@ -118,25 +118,34 @@ export const BirthYear: Story = {
   `,
 }
 
-/*
-/ **
- * Use `focusedYear` or `focusedDate` attributes to show a different year from the
- * current one. Good to use if the dates are limited to other than the current year.
- * Or is used in combination with the year-picker.
- * /
-export const FocusedYearDate: Story = {
+/**
+ * Example of a button that opens up the year-picker.
+ */
+export const Popover: Story = {
   ...DefaultParams,
-  name: 'Focused year or date',
   render: (args) => html`
-    <gds-month-picker
-      focusedYear="2024"
-      focusedDate="2024-06-01"
-      min="2024-02-01"
-      max="2024-10-30"
-    ></gds-month-picker>
+    <gds-popover id="pop">
+      <gds-button rank="secondary" slot="trigger">
+        <span id="selected-year">Choose a year</span>
+        <gds-icon-calendar slot="trail"></gds-icon-calendar>
+      </gds-button>
+      <div style="padding: 1rem 0 0 1.5rem">Choose a year</div>
+      <gds-year-picker id="yearp"> </gds-year-picker>
+    </gds-popover>
+    <script>
+      const yearp = document.getElementById('yearp')
+      function onYearChange() {
+        const selectedDate = yearp.value
+        document.getElementById('selected-year').innerText =
+          selectedDate.getFullYear()
+        document.getElementById('pop').open = false
+      }
+      yearp.addEventListener('change', onYearChange)
+    </script>
   `,
 }
 
+/*
 export const OutsideMinMax: Story = {
   ...DefaultParams,
   name: 'Outside the min max',
