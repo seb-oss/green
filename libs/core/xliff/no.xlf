@@ -170,6 +170,14 @@
   <source>Form error summary</source>
   <target>Skjema feil oppsummering</target>
 </trans-unit>
+<trans-unit id="s979f38023babd06d">
+  <source>Dismiss alert</source>
+  <target>Lukk varsel</target>
+</trans-unit>
+<trans-unit id="s39943b8a5733f5d2">
+  <source>Auto-dismiss timer</source>
+  <target>Automatisk lukk-timer</target>
+</trans-unit>
 </body>
 </file>
 </xliff>

@@ -1,5 +1,26 @@
 # Changelog
 
+## 6.0.0
+
+### Major Changes
+
+- ba3268c: Update minimal Angular version to 18
+
+### Patch Changes
+
+- Updated dependencies [60e38d9]
+- Updated dependencies [e4eb1ad]
+  - @sebgroup/green-core@1.85.0
+
+## 5.13.3
+
+### Patch Changes
+
+- 63487db: **V-Angular:** Fix component id collision warnings for toast component
+- Updated dependencies [56d1779]
+- Updated dependencies [55b23da]
+  - @sebgroup/green-core@1.84.0
+
 ## 5.13.2
 
 ### Patch Changes

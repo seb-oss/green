@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.85.1
+
+### Patch Changes
+
+- 00111cc: **Alert:** Fix icon import paths
+
+## 1.85.0
+
+### Minor Changes
+
+- e4eb1ad: **Alert:** Add new component
+
+### Patch Changes
+
+- 60e38d9: fix: popover focus improvements
+
+## 1.84.0
+
+### Minor Changes
+
+- 56d1779: **GdsElement:** Add event dispatch helpers for dispatching compatible events
+
+### Patch Changes
+
+- 55b23da: **Dialog:** Update design
+
 ## 1.83.2
 
 ### Patch Changes
