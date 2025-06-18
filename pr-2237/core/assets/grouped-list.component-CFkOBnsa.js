@@ -1,6 +1,0 @@
-import{G as p,h as i,g as c,n as u}from"./gds-element-KHa0AloG.js";import{n as v}from"./when-BR7zwNJC.js";import{T as m}from"./transitional-styles-D9AB5Uac.js";var f=Object.defineProperty,_=Object.getOwnPropertyDescriptor,h=(n,s,l,t)=>{for(var e=t>1?void 0:t?_(s,l):s,r=n.length-1,a;r>=0;r--)(a=n[r])&&(e=(t?a(s,l,e):a(e))||e);return t&&e&&f(s,l,e),e};let o=class extends p{connectedCallback(){super.connectedCallback(),this.setAttribute("role","listitem")}render(){return i`<slot></slot>`}};o=h([c("gds-list-item")],o);var g=Object.defineProperty,O=Object.getOwnPropertyDescriptor,b=(n,s,l,t)=>{for(var e=t>1?void 0:t?O(s,l):s,r=n.length-1,a;r>=0;r--)(a=n[r])&&(e=(t?a(s,l,e):a(e))||e);return t&&e&&g(s,l,e),e};let d=class extends p{constructor(){super(...arguments),this.label=""}connectedCallback(){super.connectedCallback(),m.instance.apply(this,"gds-grouped-list")}render(){return i`${v(this.label,()=>i`<div class="gds-list-heading" aria-hidden="true" id="label">
-            ${this.label}
-          </div>`)}
-      <div role="list" aria-labelledby="label">
-        <slot></slot>
-      </div>`}};b([u()],d.prototype,"label",2);d=b([c("gds-grouped-list",{dependsOn:[o]})],d);export{d as G,o as a};
