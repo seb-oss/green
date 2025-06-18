@@ -41,11 +41,6 @@ export function ComponentLayoutClient({
   const isLayoutComponent = component?.category?.includes('Layout')
   const firstTag = component?.tags?.[0]
 
-  // const hasAdditionalContent = Boolean(
-  //   component['ux-text']?.section?.length ||
-  //     component.accessibility?.section?.length,
-  // )
-
   const hasAdditionalContent = Boolean(
     (Array.isArray(component['ux-text']) && component['ux-text'].length > 0) ||
       (component['ux-text']?.section &&
@@ -62,7 +57,6 @@ export function ComponentLayoutClient({
       gap="2xl"
       max-width="840px"
       width="100%"
-      // max-width="1200px"
       margin="0 auto"
     >
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">

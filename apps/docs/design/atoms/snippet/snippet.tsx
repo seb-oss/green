@@ -24,7 +24,7 @@ const defineComponents = () => {
       try {
         Component.define()
       } catch (e) {
-        // Already defined, ignore
+        console.debug(`Failed to define component: ${Component.name}`, e)
       }
     }
   })
@@ -45,15 +45,13 @@ export function Snippet({ slug }: SnippetProps) {
   ) => {
     const props: { [key: string]: any } = {}
 
-    // First, handle lines specifically for GdsText
     if (tagName === 'gds-text' && 'lines' in attribs) {
       props.lines = Number(attribs.lines)
     }
 
-    // Then handle all other attributes
     for (const [key, value] of Object.entries(attribs)) {
       if (key === 'lines' && tagName === 'gds-text') {
-        continue // Skip lines as we already handled it
+        continue
       }
 
       if (key.startsWith('.')) {
@@ -64,6 +62,7 @@ export function Snippet({ slug }: SnippetProps) {
             ? JSON.parse(cleanValue)
             : cleanValue
         } catch {
+          console.debug(`Failed to parse value for ${propName}:`, cleanValue)
           props[propName] = cleanValue
         }
       } else if (value === '' || value === 'true') {
@@ -72,17 +71,18 @@ export function Snippet({ slug }: SnippetProps) {
         props[key] = false
       } else if (key === 'class') {
         props.className = value
-        props.class = value // Need both for web component
+        props.class = value
       } else {
         props[key] = value
       }
     }
 
-    // Ensure GdsText is defined
     if (tagName === 'gds-text' && (Core as any).GdsText?.define) {
       try {
         ;(Core as any).GdsText.define()
-      } catch {}
+      } catch {
+        console.debug('Failed to define GdsText component')
+      }
     }
 
     return props
@@ -143,12 +143,10 @@ export function Snippet({ slug }: SnippetProps) {
         const props = convertAttributes(node.attribs, node.name)
         const childContent = node.children?.map(getNodeContent).join('')
 
-        // Special handling for rich-text
         if (node.name === 'gds-rich-text') {
           return <Component {...props}>{parse(childContent)}</Component>
         }
 
-        // If there are no GDS components in children, use innerHTML
         if (!childContent.includes('gds-')) {
           return (
             <Component
@@ -158,7 +156,6 @@ export function Snippet({ slug }: SnippetProps) {
           )
         }
 
-        // If there are GDS components, parse them recursively
         return <Component {...props}>{parse(childContent, options)}</Component>
       }
 
