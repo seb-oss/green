@@ -3,11 +3,8 @@ import { css } from 'lit'
 export const alertStyles = css`
   :host {
     box-sizing: border-box;
-    width: 100%;
-    min-width: fit-content;
-    max-width: 100vw;
-    margin: 0.3rem auto;
     display: block;
+    max-width: 100%;
     container-type: inline-size;
   }
 
@@ -16,7 +13,7 @@ export const alertStyles = css`
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-template-areas: var(--grid-areas);
-    width: 100%;
+    min-width: fit-content;
     position: relative;
     transition:
       opacity 0.3s ease-out,
@@ -51,7 +48,7 @@ export const alertStyles = css`
   }
 
   /* Focus styles */
-  #alert-message:focus-within {
+  #alert-message:focus {
     outline: 2px solid var(--gds-focus-color, #000);
     outline-offset: 2px;
   }
