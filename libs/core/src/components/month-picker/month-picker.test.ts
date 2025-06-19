@@ -244,7 +244,7 @@ describe('<gds-month-picker>', () => {
       el.focusedDate = new Date('2024-02-01')
       await el.updateComplete
 
-      const cell = el.getMonthCell(1)
+      const cell = el.getMonthCell(12)
       expect(cell).to.have.class('disabled')
 
       expect(el.value).to.equal(undefined)
