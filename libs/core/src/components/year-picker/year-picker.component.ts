@@ -146,6 +146,27 @@ export class GdsYearPicker extends GdsElement {
   }
 
   /**
+   * Returns the year of the first cell.
+   */
+  getStartYear() {
+    const totalCells = this.columns * this.rows
+    const totalYears = this.max.getFullYear() - this.min.getFullYear() + 1
+    //Center the years in the grid if there are fewer years than cells
+    let startYear =
+      this.min.getFullYear() - Math.floor((totalCells - totalYears) / 2)
+    if (this.focusedYear < startYear)
+      do {
+        startYear -= totalCells
+      } while (this.focusedYear < startYear)
+    else if (this.focusedYear > startYear + totalCells - 1)
+      do {
+        startYear += totalCells
+      } while (this.focusedYear > startYear + totalCells - 1)
+
+    return startYear
+  }
+
+  /**
    * Returns a year iterator between the min and max dates for use in the year dropdown.
    */
   get #years() {
@@ -193,19 +214,7 @@ export class GdsYearPicker extends GdsElement {
 
   render() {
     const currentYear = new Date().getFullYear()
-    const totalCells = this.columns * this.rows
-    const totalYears = this.max.getFullYear() - this.min.getFullYear() + 1
-    // Center the years in the grid if there are fewer years than cells
-    let startYear =
-      this.min.getFullYear() - Math.floor((totalCells - totalYears) / 2)
-    if (this.focusedYear < startYear)
-      do {
-        startYear -= totalCells
-      } while (this.focusedYear < startYear)
-    else if (this.focusedYear > startYear + totalCells - 1)
-      do {
-        startYear += totalCells
-      } while (this.focusedYear > startYear + totalCells - 1)
+    const startYear = this.getStartYear()
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
@@ -235,7 +244,7 @@ export class GdsYearPicker extends GdsElement {
                       : 'false'}"
                     @click=${() =>
                       isDisabled ? null : this.#setSelectedYear(year)}
-                    id="yearCell-${year}"
+                    id="yearCell-${rowIdx * this.columns + colIdx}"
                   >
                     ${year}
                   </td>
@@ -280,16 +289,12 @@ export class GdsYearPicker extends GdsElement {
       if (this.focusedYear < this.max.getFullYear()) this.focusedYear += 1
       handled = true
     } else if (e.key === 'ArrowUp') {
-      //if (this.focusedYear > this.min.getFullYear() + (this.columns - 1))
-      //  this.focusedYear -= this.columns
       if (this.focusedYear > this.min.getFullYear())
         this.focusedYear -= this.columns
       if (this.focusedYear < this.min.getFullYear())
         this.focusedYear = this.min.getFullYear()
       handled = true
     } else if (e.key === 'ArrowDown') {
-      //if (this.focusedYear < this.max.getFullYear() - (this.columns - 1))
-      //  this.focusedYear += this.columns
       if (this.focusedYear < this.max.getFullYear())
         this.focusedYear += this.columns
       if (this.focusedYear > this.max.getFullYear())
