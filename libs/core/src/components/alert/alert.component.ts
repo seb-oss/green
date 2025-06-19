@@ -6,7 +6,7 @@ import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js'
 
 import { GdsElement } from '../../gds-element'
-import { gdsCustomElement, html } from '../../scoping'
+import { gdsCustomElement, getScopedTagName, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
@@ -201,7 +201,7 @@ export class GdsAlert extends GdsElement {
   // Render methods
   #renderIcon() {
     const icon = `gds-icon-${this.#config.icon}`
-    return html`${staticHtml`<${unsafeStatic(icon)} class="icon" solid aria-hidden="true" size="24px"></${unsafeStatic(icon)}>`}`
+    return html`${staticHtml`<${unsafeStatic(getScopedTagName(icon))} class="icon" solid aria-hidden="true" size="24px"></${unsafeStatic(getScopedTagName(icon))}>`}`
   }
 
   #renderMessage() {
