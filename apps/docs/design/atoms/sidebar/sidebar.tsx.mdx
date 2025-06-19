@@ -1,0 +1,227 @@
+
+```tsx
+
+'use client'
+
+import { useMemo } from 'react'
+import { usePathname } from 'next/navigation'
+
+import * as Core from '@sebgroup/green-core/react'
+import { _, Icon } from '../../../hooks'
+import { useSettingsContext, useSettingsValue } from '../../../settings'
+import { useContentContext } from '../../../settings/content'
+import { Link } from '../link/link'
+import SidebarCollapsed from './sidebar.collapsed'
+
+import './sidebar.css'
+
+const SidebarLink = ({
+  href,
+  children,
+  icon,
+  iconSlot = 'trail',
+  rank,
+}: {
+  href: string
+  children: React.ReactNode
+  icon?: string
+  iconSlot?: 'lead' | 'trail'
+  rank?: string
+}) => (
+  <Link
+    component="button"
+    href={href}
+    rank={rank ? rank : 'tertiary'}
+    justify-content={
+      icon && iconSlot === 'trail' ? 'space-between' : 'flex-start'
+    }
+    size="medium"
+    align-items="center"
+  >
+    {icon && iconSlot === 'lead' && <Icon name={icon} slot="lead" />}
+    {children}
+    {icon && iconSlot === 'trail' && <Icon name={icon} slot="trail" />}
+  </Link>
+)
+
+// Home button component (keep as is)
+const HomeButton = () => (
+  <SidebarLink href="/" icon="IconHomeOpen" iconSlot="lead" rank="tertiary">
+    Home
+  </SidebarLink>
+)
+
+export default function Sidebar() {
+  const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
+  const pathName = usePathname()
+  const { isLoaded, actions } = useContentContext()
+  const { actions: SettingsActions } = useSettingsContext()
+
+  // Memoized path checks
+  const pathType = useMemo(() => {
+    if (
+      pathName.startsWith('/components') ||
+      pathName.startsWith('/component/')
+    ) {
+      return 'components'
+    }
+    if (
+      pathName.startsWith('/templates') ||
+      pathName.startsWith('/template/')
+    ) {
+      return 'templates'
+    }
+    return 'navigation'
+  }, [pathName])
+
+  // Memoized content renderer
+  const renderContent = useMemo(() => {
+    if (!isLoaded) {
+      return <Core.GdsText>Loading...</Core.GdsText>
+    }
+
+    const components = actions.getComponents({
+      sort: (a, b) => a.title.localeCompare(b.title),
+    })
+
+    const templates = actions.getTemplates({
+      sort: (a, b) => a.title.localeCompare(b.title),
+    })
+
+    const mainNav = actions.getNavigation('main')
+
+    switch (pathType) {
+      case 'components':
+        return (
+          <>
+            <HomeButton />
+            <Core.GdsFlex flex-direction="column" gap="2xs" className="list">
+              <Link href="/components">
+                <Core.GdsText tag="small" padding="m">
+                  Components
+                </Core.GdsText>
+              </Link>
+              {components.map((component) => (
+                <SidebarLink
+                  key={component.slug}
+                  href={`/component/${component.slug}`}
+                  rank={
+                    pathName === `/component/${component.slug}`
+                      ? 'secondary'
+                      : 'tertiary'
+                  }
+                >
+                  {component.title}
+                </SidebarLink>
+              ))}
+            </Core.GdsFlex>
+          </>
+        )
+
+      case 'templates':
+        return (
+          <>
+            <HomeButton />
+            <Core.GdsFlex flex-direction="column" gap="2xs" className="list">
+              <Core.GdsText tag="small" padding="m">
+                Templates
+              </Core.GdsText>
+              {templates.map((template) => (
+                <SidebarLink
+                  key={template.slug}
+                  href={`/template/${template.slug}`}
+                >
+                  {template.title}
+                </SidebarLink>
+              ))}
+            </Core.GdsFlex>
+          </>
+        )
+
+      default:
+        return mainNav?.links.map((item) => (
+          <SidebarLink
+            key={item.slug}
+            href={item.slug}
+            icon={item.icon}
+            iconSlot="lead"
+          >
+            {item.title}
+          </SidebarLink>
+        ))
+    }
+  }, [isLoaded, actions, pathType])
+
+  const handleToggleSidebar = (): void => {
+    SettingsActions.toggle('UI.Panel.Sidebar')
+  }
+
+  return (
+    <Core.GdsCard
+      variant="secondary"
+      border-radius="0"
+      justify-content="flex-start"
+      align-items={isOpen ? 'flex-start' : 'center'}
+      gap="4xl"
+      className={_('sidebar', isOpen ? 'open' : 'closed')}
+      padding="l xs"
+      height="calc(100vh - 180px)"
+      min-width={isOpen ? '260px' : '80px'}
+      width={isOpen ? '260px' : 'max-content'}
+      position="sticky"
+    >
+      {!isOpen ? (
+        <>
+          <Link
+            component="button"
+            onClick={handleToggleSidebar}
+            rank="tertiary"
+            width="max-content"
+            size="medium"
+          >
+            <Core.IconMenuSidebar />
+          </Link>
+          <Core.GdsFlex flex-direction="column" gap="xs" flex="1">
+            <SidebarCollapsed />
+          </Core.GdsFlex>
+          <Link
+            component="button"
+            key="settings"
+            href={`/settings`}
+            size="medium"
+            width="max-content"
+            rank={pathName === `/settings` ? 'secondary' : 'tertiary'}
+          >
+            <Core.IconSettingsGear />
+          </Link>
+        </>
+      ) : (
+        <>
+          <Core.GdsFlex padding="0 0 0 m">
+            <Link
+              component="button"
+              onClick={handleToggleSidebar}
+              rank="secondary"
+              size="medium"
+            >
+              <Core.IconCrossLarge />
+            </Link>
+          </Core.GdsFlex>
+          <Core.GdsFlex flex-direction="column" gap="xs" flex="1">
+            {renderContent}
+          </Core.GdsFlex>
+          <Core.GdsFlex margin-block="auto 0">
+            <SidebarLink
+              key="settings"
+              href={`/settings`}
+              rank={pathName === `/settings` ? 'secondary' : 'tertiary'}
+            >
+              <Core.IconSettingsGear slot="lead" />
+              Settings
+            </SidebarLink>
+          </Core.GdsFlex>
+        </>
+      )}
+    </Core.GdsCard>
+  )
+}
