@@ -19,7 +19,12 @@ export const renderColumn = (
       return (
         <Core.GdsFlex flex-direction="column" gap="m">
           {column.title && (
-            <Core.GdsText tag={column.tag || 'h3'} font-size="display-s">
+            <Core.GdsText
+              tag={column.tag || 'h3'}
+              font-size="display-s"
+              max-width="80ch"
+              data-paragraph
+            >
               {column.title}
             </Core.GdsText>
           )}
@@ -74,7 +79,8 @@ export const renderColumn = (
           font-size={column.size ? column.size : 'body-l'}
           color={column.color ? column.color : 'secondary'}
           tag={column.tag}
-          max-width="100ch"
+          max-width="80ch"
+          data-paragraph
         >
           {column.text}
         </Core.GdsText>
