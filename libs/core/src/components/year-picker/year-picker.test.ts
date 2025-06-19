@@ -1,0 +1,284 @@
+import { expect } from '@esm-bundle/chai'
+import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
+import { sendKeys } from '@web/test-runner-commands'
+import { addDays, addYears, subYears } from 'date-fns'
+
+import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
+import { onlyDate } from '../../utils/testing'
+
+import type { GdsYearPicker } from './year-picker'
+
+import '@sebgroup/green-core/components/year-picker'
+
+const html = htmlTemplateTagFactory(testingHtml)
+
+describe('<gds-year-picker>', () => {
+  describe('Rendering', () => {
+    it('should render', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      expect(el).shadowDom.to.exist
+    })
+  })
+
+  describe('Interactions', () => {
+    it('should increment by 1 year when pressing key right', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowRight' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(
+        addYears(new Date(), 1).getFullYear(),
+      )
+    })
+
+    it('should decrement by 1 year when pressing key left', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowLeft' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(
+        subYears(new Date(), 1).getFullYear(),
+      )
+    })
+
+    it('should increment by 5 year when pressing key down', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowDown' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(
+        addYears(new Date(), 5).getFullYear(),
+      )
+    })
+
+    it('should decrement by 5 year when pressing key up', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowUp' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(
+        subYears(new Date(), 5).getFullYear(),
+      )
+    })
+
+    it('should select min year (2015) when pressing home', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'Home' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(2015)
+    })
+
+    it('should select max year (2035) when pressing end', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
+      )
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'End' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(2035)
+    })
+
+    it('should select the focused date when pressing enter', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
+      )
+      el.focus()
+
+      const focusedDate = new Date('2020-01-01')
+      el.focusedDate = focusedDate
+
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(2020)
+    })
+
+    it('should select the focused date when pressing space', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2015-01-01"
+          max="2035-01-01"
+        ></gds-year-picker>`,
+      )
+      el.focus()
+
+      const focusedDate = new Date('2020-01-01')
+      el.focusedDate = focusedDate
+
+      await aTimeout(0)
+      await sendKeys({ press: 'Space' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(2020)
+    })
+
+    /*
+    it('should not select the focused date when pressing enter if it is disabled', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          min="2024-01-01"
+          max="2024-06-30"
+        ></gds-year-picker>`,
+      )
+      el.focus()
+
+      const focusedDate = new Date('2024-12-01')
+      el.focusedDate = focusedDate
+
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value).to.equal(undefined)
+    })
+
+    it('should update the focused date when value is changed', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+
+      el.value = new Date('2023-02-01')
+      await el.updateComplete
+
+      await expect(onlyDate(el.focusedDate)).to.equal(
+        onlyDate(new Date('2023-02-01')),
+      )
+    })*/
+  })
+
+  describe('API', () => {
+    it('should default to undefined', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker></gds-year-picker>`,
+      )
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('should respects min date', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          .min=${new Date('2024-01-01')}
+        ></gds-year-picker>`,
+      )
+
+      el.focusedDate = new Date('2023-01-01')
+      await el.updateComplete
+
+      const cell = el.getYearCell(2023)
+      expect(cell).to.have.class('disabled')
+
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('should respects max date', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          .max=${new Date('2024-01-01')}
+        ></gds-year-picker>`,
+      )
+
+      el.focusedDate = new Date('2025-01-01')
+      await el.updateComplete
+
+      const cell = el.getYearCell(2025)
+      expect(cell).to.have.class('disabled')
+
+      expect(el.value).to.equal(undefined)
+    })
+
+    it('should not render extraneous years with hide-extraneous-years', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          .hideExtraneousYears=${true}
+          .min=${new Date('2023-01-01')}
+          .max=${new Date('2025-01-01')}
+          .focusedDate=${new Date('2022-01-01')}
+        ></gds-year-picker>`,
+      )
+
+      expect(
+        el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
+      ).to.not.contain('January')
+    })
+
+    it('should not have class today with no-current-year', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker no-current-year></gds-year-picker>`,
+      )
+      //el.focusedDate = new Date()
+      //await el.updateComplete
+      const cell = el.getYearCell(el.focusedYear)
+      expect(cell).to.not.have.class('today')
+    })
+  })
+
+  // Disable for 2023
+  describe('Accessibility', () => {
+    it('is accessible', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          focusedDate="2025-06-03"
+          label="Year picker"
+        ></gds-year-picker>`,
+      )
+
+      // TODO: Remove ignoredRules when color-contrast issues are resolved
+      await expect(el).to.be.accessible({
+        ignoredRules: ['color-contrast'],
+      })
+    })
+  })
+})
