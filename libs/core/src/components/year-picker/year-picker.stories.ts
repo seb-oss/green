@@ -8,6 +8,9 @@ import './index.ts'
 import '../popover/index.ts'
 import '../button/index.ts'
 import '../icon/icons/calendar.ts'
+import '../icon/icons/chevron-left.ts'
+import '../icon/icons/chevron-right.ts'
+import '../flex'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/year-picker)
@@ -141,6 +144,55 @@ export const Popover: Story = {
         document.getElementById('pop').open = false
       }
       yearp.addEventListener('change', onYearChange)
+    </script>
+  `,
+}
+
+/**
+ * Example of a the year-picker including mouse controls.
+ */
+export const ChangeYear: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <div>
+      <gds-flex
+        justify-content="space-around"
+        align-items="center"
+        style="box-shadow: 0 var(--gds-sys-space-4xs) 0 0 var(--gds-sys-color-l2-border-primary)"
+      >
+        <gds-button id="prev" rank="tertiary" label="Previous years">
+          <gds-icon-chevron-left></gds-icon-chevron-left>
+        </gds-button>
+        <span id="range">Choose a year</span>
+        <gds-button id="next" rank="tertiary" label="Next years">
+          <gds-icon-chevron-right></gds-icon-chevron-right>
+        </gds-button>
+      </gds-flex>
+      <gds-year-picker id="yearp2" min="1950-01-01" max="2100-01-01">
+      </gds-year-picker>
+    </div>
+    <script>
+      var prev = document.getElementById('prev')
+      var next = document.getElementById('next')
+      var yearp = document.getElementById('yearp2')
+      var totalCells = yearp.columns * yearp.rows
+
+      function onPrevClick() {
+        yearp.focusedYear -= totalCells
+        updateRange()
+      }
+      function onNextClick() {
+        yearp.focusedYear += totalCells
+        updateRange()
+      }
+      function updateRange() {
+        const startYear = yearp.getStartYear()
+        const endYear = startYear + totalCells - 1
+        document.getElementById('range').innerText = startYear + ' - ' + endYear
+      }
+      prev.addEventListener('click', onPrevClick)
+      next.addEventListener('click', onNextClick)
+      updateRange()
     </script>
   `,
 }
