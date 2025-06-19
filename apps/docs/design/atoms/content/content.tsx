@@ -86,6 +86,25 @@ export const renderColumn = (
       if (!image?.svg) return null
       return <Figure id={image.svg} caption={column.caption} />
 
+    case 'details':
+      return (
+        <Core.GdsDetails
+          summary={column.summary}
+          open={column.open}
+          name={column.name}
+        >
+          <Core.GdsRichText>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: column.content
+                  ? marked.parse(column.content, { async: false })
+                  : '',
+              }}
+            />
+          </Core.GdsRichText>
+        </Core.GdsDetails>
+      )
+
     default:
       return null
   }

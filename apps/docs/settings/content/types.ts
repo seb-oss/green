@@ -37,10 +37,12 @@ export interface ComponentSummary {
 }
 
 export interface ComponentColumn {
-  type: 'rich-text' | 'snippet' | 'image' | 'figma' | 'paragraph'
+  type: 'rich-text' | 'snippet' | 'image' | 'figma' | 'paragraph' | 'details'
   title?: string
   tag?: string
   content?: string
+  name?: string
+  summary?: string
   text?: string
   color?: string
   size?: string
@@ -51,6 +53,7 @@ export interface ComponentColumn {
   height?: string
   ratio?: string
   src?: string
+  open?: boolean
 }
 
 export interface ComponentSection {

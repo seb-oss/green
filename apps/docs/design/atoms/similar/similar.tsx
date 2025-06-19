@@ -4,7 +4,6 @@
 import * as Core from '@sebgroup/green-core/react'
 import { useContentContext } from '../../../settings/content'
 import Card from '../card/card'
-import { Snippet } from '../snippet/snippet'
 
 interface SimilarProps {
   tag?: string
@@ -24,7 +23,7 @@ export function Similar({ tag, currentSlug }: SimilarProps) {
           return false
         }
         // Only include components with matching tag
-        return component.tags.includes(tag)
+        return component.tags.includes(tag.toLocaleLowerCase())
       },
       sort: (a, b) => a.title.localeCompare(b.title),
     })

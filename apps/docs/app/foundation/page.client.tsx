@@ -43,24 +43,26 @@ export function FoundationClient() {
         </Link>
         <GdsText>Foundation</GdsText>
       </GdsBreadcrumbs>
-      <GdsFlex flex-direction="column" gap="s">
-        <GdsText tag="h1">{CONTENT?.title}</GdsText>
-        <GdsText
-          tag="p"
-          font-size="heading-m"
-          color="secondary"
-          max-width="100ch"
-        >
-          {CONTENT?.summary}
-        </GdsText>
+      <GdsFlex flex-direction="column" max-width="120ch" gap="4xl">
+        <GdsFlex flex-direction="column" gap="s">
+          <GdsText tag="h1">{CONTENT?.title}</GdsText>
+          <GdsText
+            tag="p"
+            font-size="heading-m"
+            color="secondary"
+            max-width="100ch"
+          >
+            {CONTENT?.summary}
+          </GdsText>
+        </GdsFlex>
+        {CONTENT?.sections && (
+          <Render
+            content={CONTENT.sections}
+            slug="foundation"
+            imageProvider={imageProvider}
+          />
+        )}
       </GdsFlex>
-      {CONTENT?.sections && (
-        <Render
-          content={CONTENT.sections}
-          slug="foundation"
-          imageProvider={imageProvider}
-        />
-      )}
       <GdsFlex gap="l" flex-direction="column">
         <GdsFlex gap="s" flex-direction="column">
           <GdsText tag="h2">Core Resources</GdsText>
