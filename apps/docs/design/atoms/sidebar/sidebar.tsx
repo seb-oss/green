@@ -52,6 +52,7 @@ const CollapsibleSection = ({
         size="medium"
         align-items="center"
         data-animation="scroll"
+        flex="1"
       >
         {icon && <Icon name={icon} slot="lead" />}
         <span data-fade>{title}</span>
@@ -112,7 +113,9 @@ export default function Sidebar() {
             }
             size="medium"
             justify-content="center"
+            flex="1"
             data-animation="scroll"
+            width="100%"
           >
             {link.icon && <Icon name={link.icon} />}
           </Link>
@@ -173,6 +176,7 @@ export default function Sidebar() {
                   size="small"
                   style={{ paddingLeft: '42px' }}
                   data-animation="scroll"
+                  flex="1"
                 >
                   <span data-fade>{item.title}</span>
                 </Link>
@@ -192,6 +196,8 @@ export default function Sidebar() {
           size="medium"
           align-items="center"
           data-animation="scroll"
+          flex="1"
+          width="100%"
         >
           {link.icon && <Icon name={link.icon} slot="lead" />}
           <span data-fade>{link.title}</span>
@@ -214,7 +220,7 @@ export default function Sidebar() {
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding={isOpen ? '2xl xs l s' : '2xl xs l m'}
       min-width={isOpen ? '240px' : '80px'}
-      width={isOpen ? '240px' : 'max-content'}
+      width={isOpen ? '100%; s{240px}' : 'max-content'}
       position="relative; s{sticky}"
       inset="0; s{90px auto auto auto}"
     >
