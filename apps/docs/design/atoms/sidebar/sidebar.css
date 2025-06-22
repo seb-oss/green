@@ -1,7 +1,7 @@
 .sidebar {
   box-sizing: border-box;
-  top: 0;
-  height: 100vh;
+  /* top: 90px; */
+  height: calc(100vh - 90px);
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -33,6 +33,15 @@
 
   [data-backdrop] {
     backdrop-filter: blur(10px);
+  }
+
+  [data-fade] {
+    transition: all 250ms;
+
+    @starting-style {
+      opacity: 0;
+      translate: 10px 0;
+    }
   }
 }
 

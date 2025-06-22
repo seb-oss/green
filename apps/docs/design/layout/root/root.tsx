@@ -19,18 +19,19 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
     <main className={classes} {...rest}>
       <GdsFlex
         min-height="100vh"
+        flex-direction="column"
         color="primary"
         width="100%"
         background="secondary"
-        gap="2xl"
+        gap="0"
       >
-        <Sidebar />
-        <GdsFlex gap="xl" flex-direction="column" flex="1">
-          <Header />
+        <Header />
+        <GdsFlex gap="xl" flex="1" flex-direction="column; s{row}" padding="0">
+          <Sidebar />
           <GdsFlex
             flex-direction="column"
             width="100%"
-            padding="0 xl m 0"
+            padding="2xl xl m 0"
             min-height="100vh"
           >
             <GdsFlex flex-direction="column" flex="1" data-content>

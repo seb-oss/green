@@ -51,13 +51,14 @@ const CollapsibleSection = ({
         justify-content="flex-start"
         size="medium"
         align-items="center"
-        style={{ flex: 1 }}
+        data-animation="scroll"
       >
         {icon && <Icon name={icon} slot="lead" />}
-        {title}
+        <span data-fade>{title}</span>
       </Link>
       <Core.GdsButton
         rank="tertiary"
+        data-animation="scroll"
         onClick={(e) => {
           e.preventDefault()
           onToggle()
@@ -111,6 +112,7 @@ export default function Sidebar() {
             }
             size="medium"
             justify-content="center"
+            data-animation="scroll"
           >
             {link.icon && <Icon name={link.icon} />}
           </Link>
@@ -170,8 +172,9 @@ export default function Sidebar() {
                   justify-content="flex-start"
                   size="small"
                   style={{ paddingLeft: '42px' }}
+                  data-animation="scroll"
                 >
-                  {item.title}
+                  <span data-fade>{item.title}</span>
                 </Link>
               ))}
             </Core.GdsFlex>
@@ -188,44 +191,14 @@ export default function Sidebar() {
           justify-content="flex-start"
           size="medium"
           align-items="center"
+          data-animation="scroll"
         >
           {link.icon && <Icon name={link.icon} slot="lead" />}
-          {link.title}
+          <span data-fade>{link.title}</span>
         </Link>
       )
     })
   }, [isLoaded, actions, pathName, openSections])
-
-  const renderSettingsButton = useMemo(
-    () => (
-      <Core.GdsFlex
-        margin="auto 0 0 0"
-        background="transparent"
-        data-backdrop
-        width="100%"
-        justify-content={isOpen ? 'flex-start' : 'center'}
-      >
-        <Link
-          component="button"
-          width={isOpen ? '100%' : 'max-content'}
-          size="medium"
-          href="/settings"
-          rank={pathName === '/settings' ? 'secondary' : 'tertiary'}
-          justify-content={isOpen ? 'flex-start' : 'center'}
-        >
-          {isOpen ? (
-            <>
-              <Icon name="IconSettingsGear" slot="lead" />
-              Settings
-            </>
-          ) : (
-            <Icon name="IconSettingsGear" />
-          )}
-        </Link>
-      </Core.GdsFlex>
-    ),
-    [isOpen, pathName],
-  )
 
   const handleToggleSidebar = () => {
     SettingsActions.toggle('UI.Panel.Sidebar')
@@ -239,32 +212,34 @@ export default function Sidebar() {
       align-items={isOpen ? 'flex-start' : 'center'}
       gap="4xl"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
-      padding="l xs"
-      height="calc(100vh - 180px)"
+      padding={isOpen ? '2xl xs l s' : '2xl xs l m'}
       min-width={isOpen ? '240px' : '80px'}
       width={isOpen ? '240px' : 'max-content'}
-      position="sticky"
+      position="relative; s{sticky}"
+      inset="0; s{90px auto auto auto}"
     >
-      <Core.GdsFlex
-        key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
-        padding={isOpen ? '0 0 0 m' : '0'}
-        justify-content={isOpen ? 'flex-start' : 'center'}
-        width="100%"
-      >
-        <Link
-          component="button"
-          onClick={handleToggleSidebar}
-          rank="tertiary"
-          width="max-content"
-          size="medium"
+      {false && (
+        <Core.GdsFlex
+          key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
+          padding={isOpen ? '0 0 0 m' : '0'}
+          justify-content={isOpen ? 'flex-start' : 'center'}
+          width="100%"
         >
-          {isOpen ? (
-            <Icon name="IconCrossLarge" />
-          ) : (
-            <Icon name="IconMenuSidebar" />
-          )}
-        </Link>
-      </Core.GdsFlex>
+          <Link
+            component="button"
+            onClick={handleToggleSidebar}
+            rank="tertiary"
+            width="max-content"
+            size="medium"
+          >
+            {isOpen ? (
+              <Icon name="IconCrossLarge" />
+            ) : (
+              <Icon name="IconMenuSidebar" />
+            )}
+          </Link>
+        </Core.GdsFlex>
+      )}
 
       <Core.GdsFlex
         flex-direction="column"
@@ -288,11 +263,12 @@ export default function Sidebar() {
           href="/settings"
           rank={pathName === '/settings' ? 'secondary' : 'tertiary'}
           justify-content={isOpen ? 'flex-start' : 'center'}
+          data-animation="scroll"
         >
           {isOpen ? (
             <>
               <Icon name="IconSettingsGear" slot="lead" />
-              Settings
+              <span data-fade>Settings</span>
             </>
           ) : (
             <Icon name="IconSettingsGear" />
