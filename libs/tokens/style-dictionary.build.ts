@@ -268,8 +268,14 @@ await Promise.all(
           },
           android: {
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,
-            sourcePath: swiftSourcePath,
-            transformGroup: 'compose',
+            transforms: [
+              'attribute/cti',
+              'name/camel',
+              'green/color/composeColor',
+              'size/compose/em',
+              'size/compose/remToSp',
+              'size/compose/remToDp',
+            ],
             files: [
               {
                 destination: `Colors/${capitalize(colorScheme)}ModeColors.kt`,

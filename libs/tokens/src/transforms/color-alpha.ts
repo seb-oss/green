@@ -5,13 +5,14 @@ export default {
   transitive: true,
   type: 'value',
   filter: (token) => {
-    return token.$value.alpha
+    return token.alpha
   },
   transform: (token) => {
-    const value = tinycolor(token.$value.hex)
-    if (token.$value.alpha) {
-      token.value = value.setAlpha(token.$value.alpha).toString()
-    }
-    return value.setAlpha(token.$value.alpha).toString()
+    const value = tinycolor(token.$value)
+    const alpha = token.alpha
+
+    token.value = value.setAlpha(alpha).toString()
+
+    return value.setAlpha(alpha).toString()
   },
 }

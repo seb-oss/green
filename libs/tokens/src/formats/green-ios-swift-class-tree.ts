@@ -21,6 +21,7 @@ const greenIosSwiftClassTree = {
     }
 
     let propertyformat
+
     if (options.colorType == 'uiKitDynamicProvider') {
       propertyformat = swift.uiKitColorReferencePropertyFormatter(
         options.lightModeObjectName,

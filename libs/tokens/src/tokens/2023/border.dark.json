@@ -18,20 +18,40 @@
         "inverse": {
           "$value": "{ref.color.white}"
         },
-        "information": {
+        "information-01": {
           "$value": "{ref.color.grey.19}"
         },
-        "positive": {
+        "positive-01": {
           "$value": "{ref.color.green.11}"
         },
-        "negative": {
+        "negative-01": {
           "$value": "{ref.color.red.10}"
         },
-        "warning": {
+        "warning-01": {
           "$value": "{ref.color.orange.10}"
         },
-        "notice": {
+        "notice-01": {
           "$value": "{ref.color.blue.10}"
+        },
+        "information-02": {
+          "$value": "{ref.color.grey.19}",
+          "alpha": 0.4
+        },
+        "positive-02": {
+          "$value": "{ref.color.green.11}",
+          "alpha": 0.4
+        },
+        "negative-02": {
+          "$value": "{ref.color.red.10}",
+          "alpha": 0.4
+        },
+        "warning-02": {
+          "$value": "{ref.color.orange.10}",
+          "alpha": 0.4
+        },
+        "notice-02": {
+          "$value": "{ref.color.blue.10}",
+          "alpha": 0.4
         }
       }
     }

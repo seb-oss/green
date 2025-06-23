@@ -4,40 +4,52 @@
       "state": {
         "$type": "color",
         "dark-hover": {
-          "$value": "{ref.color.white}26"
+          "$value": "{ref.color.white}",
+          "alpha": 0.15
         },
         "dark-pressed": {
-          "$value": "{ref.color.white}33"
+          "$value": "{ref.color.white}",
+          "alpha": 0.2
         },
         "light-hover": {
-          "$value": "{ref.color.grey.30}0F"
+          "$value": "{ref.color.grey.30}",
+          "alpha": 0.06
         },
         "light-pressed": {
-          "$value": "{ref.color.grey.30}24"
+          "$value": "{ref.color.grey.30}",
+          "alpha": 0.14
         },
         "positive-hover": {
-          "$value": "{ref.color.green.23}14"
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.08
         },
         "positive-pressed": {
-          "$value": "{ref.color.green.23}29"
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.16
         },
         "negative-hover": {
-          "$value": "{ref.color.red.16}14"
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.08
         },
         "negative-pressed": {
-          "$value": "{ref.color.red.16}29"
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.16
         },
         "notice-hover": {
-          "$value": "{ref.color.blue.17}14"
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.08
         },
         "notice-pressed": {
-          "$value": "{ref.color.blue.17}29"
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.16
         },
         "warning-hover": {
-          "$value": "{ref.color.copper.18}CC"
+          "$value": "{ref.color.copper.18}",
+          "alpha": 0.08
         },
         "warning-pressed": {
-          "$value": "{ref.color.copper.18}29"
+          "$value": "{ref.color.copper.18}",
+          "alpha": 0.16
         }
       }
     }
