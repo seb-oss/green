@@ -32,8 +32,12 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
         }
         return component['ux-text']?.section || null
       }
-      case 'accessibility':
-        return component.accessibility?.section || null
+      case 'accessibility': {
+        if (Array.isArray(component['accessibility'])) {
+          return component['accessibility']
+        }
+        return component['accessibility']?.section || null
+      }
       default:
         return null
     }

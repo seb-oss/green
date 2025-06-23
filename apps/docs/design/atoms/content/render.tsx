@@ -36,22 +36,18 @@ export function Render({
             </Core.GdsText>
           )}
 
-          {isAccessibility ? (
-            <Core.GdsText>{(section as any).description}</Core.GdsText>
-          ) : (
-            section.columns && (
-              <Core.GdsGrid
-                columns={section.cols || '2'}
-                gap="m"
-                max-width="100%"
-              >
-                {section.columns.map((column, colIndex) => (
-                  <React.Fragment key={colIndex}>
-                    {renderColumn(column, slug, imageProvider)}
-                  </React.Fragment>
-                ))}
-              </Core.GdsGrid>
-            )
+          {section.columns && (
+            <Core.GdsGrid
+              columns={section.cols || '2'}
+              gap="m"
+              max-width="100%"
+            >
+              {section.columns.map((column, colIndex) => (
+                <React.Fragment key={colIndex}>
+                  {renderColumn(column, slug, imageProvider)}
+                </React.Fragment>
+              ))}
+            </Core.GdsGrid>
           )}
         </Core.GdsFlex>
       ))}
