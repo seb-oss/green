@@ -175,23 +175,23 @@ export const ChangeYear: Story = {
     <script>
       var prev = document.getElementById('prev')
       var next = document.getElementById('next')
-      var yearp = document.getElementById('yearp2')
-      var totalCells = yearp.columns * yearp.rows
+      var yearp2 = document.getElementById('yearp2')
+      var totalCells = yearp2.columns * yearp2.rows
 
       function onPrevClick() {
-        const minYear = yearp.min.getFullYear()
-        const startYear = yearp.getStartYear()
-        if (minYear < startYear) yearp.focusedYear -= totalCells
+        const minYear = yearp2.min.getFullYear()
+        const startYear = yearp2.getStartYear()
+        if (minYear < startYear) yearp2.focusedYear -= totalCells
         updateRange()
       }
       function onNextClick() {
-        const maxYear = yearp.max.getFullYear()
-        const startYear = yearp.getStartYear()
-        if (maxYear > startYear + totalCells) yearp.focusedYear += totalCells
+        const maxYear = yearp2.max.getFullYear()
+        const startYear = yearp2.getStartYear()
+        if (maxYear > startYear + totalCells) yearp2.focusedYear += totalCells
         updateRange()
       }
       function updateRange() {
-        const startYear = yearp.getStartYear()
+        const startYear = yearp2.getStartYear()
         const endYear = startYear + totalCells - 1
         document.getElementById('range').innerText = startYear + ' - ' + endYear
       }
