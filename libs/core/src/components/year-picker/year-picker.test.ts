@@ -217,7 +217,7 @@ describe('<gds-year-picker>', () => {
       el.focusedDate = new Date('2023-01-01')
       await el.updateComplete
 
-      const cell = el.getYearCell(2023)
+      const cell = el.getYearCell(0)
       expect(cell).to.have.class('disabled')
 
       expect(el.value).to.equal(undefined)
@@ -233,7 +233,7 @@ describe('<gds-year-picker>', () => {
       el.focusedDate = new Date('2025-01-01')
       await el.updateComplete
 
-      const cell = el.getYearCell(2025)
+      const cell = el.getYearCell(24)
       expect(cell).to.have.class('disabled')
 
       expect(el.value).to.equal(undefined)
@@ -251,7 +251,7 @@ describe('<gds-year-picker>', () => {
 
       expect(
         el.shadowRoot?.querySelector('tbody td:first-child')?.innerHTML,
-      ).to.not.contain('January')
+      ).to.not.contain('2022')
     })
 
     it('should not have class today with no-current-year', async () => {
