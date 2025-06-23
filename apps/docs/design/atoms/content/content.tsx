@@ -8,6 +8,7 @@ import { marked } from 'marked'
 import * as Core from '@sebgroup/green-core/react'
 import { ComponentColumn, ImageProvider } from '../../../settings/content/types'
 import Figure from '../figure/figure'
+import { Snippet } from '../snippet/snippet'
 
 export const renderColumn = (
   column: ComponentColumn,
@@ -41,7 +42,27 @@ export const renderColumn = (
       )
 
     case 'snippet':
-      return <div className="snippet-container">{column.Snippet}</div>
+      if (column.Snippet) {
+        return (
+          <Core.GdsFlex flex-direction="column" gap="s" width="100%">
+            <Core.GdsCard
+              padding="xs"
+              justify-content="center"
+              align-items="center"
+              min-height="160px"
+            >
+              <Snippet slug={column.Snippet || ''} />
+            </Core.GdsCard>
+            {column.caption && (
+              <Core.GdsText tag="small" padding-inline="s 0" color="secondary">
+                {column.caption}
+              </Core.GdsText>
+            )}
+          </Core.GdsFlex>
+        )
+      }
+
+      ;<Snippet slug={column.Snippet || ''} />
 
     case 'image':
       if (column.src) {
