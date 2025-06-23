@@ -61,6 +61,7 @@ export const renderColumn = (
           </Core.GdsFlex>
         )
       }
+      return null
 
     case 'image':
       if (column.src) {
