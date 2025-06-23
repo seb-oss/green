@@ -55,22 +55,24 @@ export const DefaultParams: Story = {
 export const Variants: Story = {
   args: {},
   render: () => html`
-    <gds-alert variant="information" role="alert">
-      <strong>Information</strong> Body text starts on the same row as heading.
-      A link (optional) always ends the message.
-    </gds-alert>
-    <gds-alert variant="notice" role="alert">
-      <strong>Notice</strong> Body text with link or additional context.
-    </gds-alert>
-    <gds-alert variant="positive" role="alert">
-      <strong>Positive</strong> Feedback message with optional CTA.
-    </gds-alert>
-    <gds-alert variant="warning" role="alert">
-      <strong>Warning</strong> Important information to consider.
-    </gds-alert>
-    <gds-alert variant="negative" role="alert">
-      <strong>Negative</strong> Error message requiring user attention.
-    </gds-alert>
+    <gds-flex flex-direction="column" gap="m">
+      <gds-alert variant="information" role="alert">
+        <strong>Information</strong> Body text starts on the same row as
+        heading. A link (optional) always ends the message.
+      </gds-alert>
+      <gds-alert variant="notice" role="alert">
+        <strong>Notice</strong> Body text with link or additional context.
+      </gds-alert>
+      <gds-alert variant="positive" role="alert">
+        <strong>Positive</strong> Feedback message with optional CTA.
+      </gds-alert>
+      <gds-alert variant="warning" role="alert">
+        <strong>Warning</strong> Important information to consider.
+      </gds-alert>
+      <gds-alert variant="negative" role="alert">
+        <strong>Negative</strong> Error message requiring user attention.
+      </gds-alert>
+    </gds-flex>
   `,
 }
 

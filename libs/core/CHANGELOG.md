@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.85.2
+
+### Patch Changes
+
+- 020208a: **Alert:** Fix icon scoping issue
+- 14769a7: **Alert:** A few styling corrections
+
 ## 1.85.1
 
 ### Patch Changes

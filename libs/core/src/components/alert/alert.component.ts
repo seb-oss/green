@@ -6,7 +6,7 @@ import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js'
 
 import { GdsElement } from '../../gds-element'
-import { gdsCustomElement, html } from '../../scoping'
+import { gdsCustomElement, getScopedTagName, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
