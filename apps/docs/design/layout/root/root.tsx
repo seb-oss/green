@@ -10,6 +10,8 @@ import type { RootProps } from '../types'
 
 import './root.css'
 
+import Command from '../../atoms/command/command'
+
 export function Root({ children, className, fluid, ...rest }: RootProps) {
   const classes = [LAYOUT_UTILS.root(fluid), className]
     .filter(Boolean)
@@ -41,6 +43,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
           </GdsFlex>
         </GdsFlex>
       </GdsFlex>
+      <Command />
     </main>
   )
 }

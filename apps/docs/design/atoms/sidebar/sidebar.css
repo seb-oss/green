@@ -1,24 +1,8 @@
 .sidebar {
   box-sizing: border-box;
-  /* top: 90px; */
   height: calc(100vh - 90px);
   overflow-x: hidden;
   overflow-y: auto;
-
-  /* .list {
-    height: 100%;
-    min-height: 100%;
-    max-height: 60vh;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    mask-image: linear-gradient(
-      to bottom,
-      transparent 10px,
-      #fff 40px,
-      #fff 90%,
-      transparent 99%
-    );
-  } */
 
   [data-animation='scroll'] {
     animation-name: ROW_SCROLL, ROW_SCROLL;
