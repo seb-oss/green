@@ -62,8 +62,6 @@ export const renderColumn = (
         )
       }
 
-      ;<Snippet slug={column.Snippet || ''} />
-
     case 'image':
       if (column.src) {
         return (
