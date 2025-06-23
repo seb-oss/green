@@ -94,14 +94,18 @@ export default function Settings() {
             </GdsRadio>
           </GdsRadioGroup>
         </GdsFlex>
-        <GdsDivider opacity="0.2"></GdsDivider>
-        <GdsFlex flex-direction="column" gap="l">
-          <GdsText tag="h2">Density</GdsText>
-          <GdsRadioGroup label="Density" value="default">
-            <GdsRadio value="default" label="Default" />
-            <GdsRadio value="comfortable" label="Comfortable" />
-          </GdsRadioGroup>
-        </GdsFlex>
+        {false && (
+          <>
+            <GdsDivider opacity="0.2"></GdsDivider>
+            <GdsFlex flex-direction="column" gap="l">
+              <GdsText tag="h2">Density</GdsText>
+              <GdsRadioGroup label="Density" value="default">
+                <GdsRadio value="default" label="Default" />
+                <GdsRadio value="comfortable" label="Comfortable" />
+              </GdsRadioGroup>
+            </GdsFlex>
+          </>
+        )}
       </GdsCard>
     </GdsFlex>
   )

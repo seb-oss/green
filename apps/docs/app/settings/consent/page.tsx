@@ -22,7 +22,13 @@ export default function ConsentPage() {
   const consent = settings.UX.Global.Consent
 
   return (
-    <GdsFlex flex-direction="column" gap="l">
+    <GdsFlex
+      flex-direction="column"
+      gap="l"
+      max-width="1200px"
+      width="100%"
+      margin="0 auto"
+    >
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
           <IconHomeOpen slot="lead" />
