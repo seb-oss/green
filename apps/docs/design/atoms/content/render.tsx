@@ -31,7 +31,8 @@ export function Render({
       {content.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="s">
           {section.title && (
-            <Core.GdsText tag={section.tag || 'h2'} font-size="display-m">
+            <Core.GdsText tag={section.tag || 'h2'} margin="4xl 0 0 0">
+              {/* <Core.GdsText tag={section.tag || 'h2'} font-size="display-m"> */}
               {section.title}
             </Core.GdsText>
           )}

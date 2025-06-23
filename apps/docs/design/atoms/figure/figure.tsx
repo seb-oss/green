@@ -17,6 +17,9 @@ export default function Figure({
         padding="xs"
         dangerouslySetInnerHTML={{ __html: id || '' }}
         className="figure-svg"
+        min-height="240px"
+        justify-content="center"
+        align-items="center"
       />
       <GdsText tag="small" padding-inline="s 0" color="secondary">
         {caption}

@@ -22,7 +22,7 @@ export const renderColumn = (
           {column.title && (
             <Core.GdsText
               tag={column.tag || 'h3'}
-              font-size="display-s"
+              // font-size="display-s"
               max-width="80ch"
               data-paragraph
             >
