@@ -12,6 +12,7 @@ export function SettingsNav() {
     { href: '/settings', label: 'Settings' },
     { href: '/settings/consent', label: 'Consent' },
     { href: '/settings/desktop', label: 'Desktop' },
+    { href: '/settings/shortcuts', label: 'Shortcuts' },
   ]
 
   return (
