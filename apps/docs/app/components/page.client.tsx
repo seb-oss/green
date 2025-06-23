@@ -216,6 +216,7 @@ export function ComponentsClient() {
               summary={component.summary}
               beta={component.beta}
               snippet={component.hero_snippet}
+              list={view == 'list'}
             />
           ))}
         </Core.GdsGrid>
