@@ -260,7 +260,8 @@ describe('<gds-year-picker>', () => {
       )
       //el.focusedDate = new Date()
       //await el.updateComplete
-      const cell = el.getYearCell(el.focusedYear)
+      const first = el.getStartYear()
+      const cell = el.getYearCell(el.focusedYear - first)
       expect(cell).to.not.have.class('today')
     })
   })
