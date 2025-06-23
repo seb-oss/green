@@ -149,16 +149,17 @@ export const Popover: Story = {
 }
 
 /**
- * Example of a the year-picker including mouse controls.
+ * Example of mouse controls for selecting previous and next years.
  */
 export const ChangeYear: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div>
+    <div style="">
       <gds-flex
         justify-content="space-around"
         align-items="center"
-        style="box-shadow: 0 var(--gds-sys-space-4xs) 0 0 var(--gds-sys-color-l2-border-primary)"
+        style="box-shadow: 0 var(--gds-sys-space-4xs) 0 0 var(--gds-sys-color-l2-border-primary);
+        padding-bottom: 0.25rem; margin: 0 1rem -0.5rem 1rem"
       >
         <gds-button id="prev" rank="tertiary" label="Previous years">
           <gds-icon-chevron-left></gds-icon-chevron-left>
