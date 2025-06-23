@@ -179,11 +179,15 @@ export const ChangeYear: Story = {
       var totalCells = yearp.columns * yearp.rows
 
       function onPrevClick() {
-        yearp.focusedYear -= totalCells
+        const minYear = yearp.min.getFullYear()
+        const startYear = yearp.getStartYear()
+        if (minYear < startYear) yearp.focusedYear -= totalCells
         updateRange()
       }
       function onNextClick() {
-        yearp.focusedYear += totalCells
+        const maxYear = yearp.max.getFullYear()
+        const startYear = yearp.getStartYear()
+        if (maxYear > startYear + totalCells) yearp.focusedYear += totalCells
         updateRange()
       }
       function updateRange() {
