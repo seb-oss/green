@@ -59,6 +59,7 @@ export interface ComponentColumn {
 export interface ComponentSection {
   title?: string
   tag?: string
+  'section-content'?: string
   cols?: '1' | '2' | '3'
   columns?: ComponentColumn[]
 }

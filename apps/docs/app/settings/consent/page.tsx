@@ -46,14 +46,13 @@ export default function ConsentPage() {
         gap="m"
         justify-content="flex-start"
         align-items="flex-start"
+        max-width="100ch"
       >
         <GdsText tag="h1">Cookie Consent Settings</GdsText>
         <GdsText tag="p">
           Manage your cookie preferences and tracking consent
         </GdsText>
-        <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
-          <SettingsNav />
-        </GdsCard>
+        <SettingsNav />
       </GdsFlex>
 
       <GdsCard max-width="80ch" variant="secondary" padding="0">

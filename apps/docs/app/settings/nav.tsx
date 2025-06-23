@@ -16,7 +16,16 @@ export function SettingsNav() {
   ]
 
   return (
-    <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
+    <GdsCard
+      padding="0"
+      flex-direction="row"
+      gap="0"
+      border-radius="0"
+      border-width="0 0 4xs 0"
+      border-color="primary"
+      background="none"
+      width="100%"
+    >
       {navItems.map((item) => (
         <Link
           key={item.href}

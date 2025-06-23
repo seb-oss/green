@@ -22,7 +22,6 @@ export const renderColumn = (
           {column.title && (
             <Core.GdsText
               tag={column.tag || 'h3'}
-              // font-size="display-s"
               max-width="80ch"
               data-paragraph
             >
@@ -110,7 +109,13 @@ export const renderColumn = (
       if (!column.node || !imageProvider?.getImage) return null
       const image = imageProvider.getImage(slug, column.node)
       if (!image?.svg) return null
-      return <Figure id={image.svg} caption={column.caption} />
+      return (
+        <Figure
+          id={image.svg}
+          caption={column.caption}
+          identifier={column.node}
+        />
+      )
 
     case 'details':
       return (

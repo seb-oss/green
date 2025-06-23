@@ -82,9 +82,7 @@ export default function ShortcutsPage() {
         <GdsText tag="p">
           Custom keyboard shortcuts to navigate quickly through the site
         </GdsText>
-        <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
-          <SettingsNav />
-        </GdsCard>
+        <SettingsNav />
         <GdsInput
           value={searchQuery}
           onInput={(e) => setSearchQuery((e.target as HTMLInputElement).value)}

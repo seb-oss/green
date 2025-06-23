@@ -1,7 +1,7 @@
 // app/component/[slug]/layout.client.tsx
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { notFound, usePathname } from 'next/navigation'
 import { marked } from 'marked'
 
@@ -12,6 +12,7 @@ import { Link } from '../../../design/atoms/link/link'
 import { Similar } from '../../../design/atoms/similar/similar'
 import { Snippet } from '../../../design/atoms/snippet/snippet'
 import Tabs from '../../../design/atoms/tabs/tabs'
+import { useSettingsValue } from '../../../settings'
 import { useContent } from '../../../settings/content'
 
 interface ComponentLayoutClientProps {
@@ -23,6 +24,26 @@ export function ComponentLayoutClient({
   children,
   slug,
 }: ComponentLayoutClientProps) {
+  const [overrideTheme, setOverrideTheme] = useState<'light' | 'dark' | null>(
+    null,
+  )
+  const [isHovered, setIsHovered] = useState(false)
+  const systemColorScheme = useSettingsValue((s) => s.UI.Theme.ColorScheme)
+
+  useEffect(() => {
+    setOverrideTheme(null)
+  }, [systemColorScheme])
+
+  const toggleTheme = () => {
+    if (!overrideTheme) {
+      setOverrideTheme(systemColorScheme === 'light' ? 'dark' : 'light')
+      return
+    }
+    setOverrideTheme(overrideTheme === 'light' ? 'dark' : 'light')
+  }
+
+  const currentTheme = overrideTheme || systemColorScheme
+
   const { isLoaded, actions } = useContent()
   const pathname = usePathname()
   const section = pathname.includes('/ux-text')
@@ -54,7 +75,7 @@ export function ComponentLayoutClient({
   return (
     <Core.GdsFlex
       flex-direction="column"
-      gap="2xl"
+      gap="4xl"
       max-width="840px"
       width="100%"
       margin="0 auto"
@@ -127,56 +148,79 @@ export function ComponentLayoutClient({
             ))}
           </Core.GdsFlex>
         )}
-
-        <Core.GdsCard
-          height="280px"
-          justify-content="center"
-          align-items="center"
-          position="relative"
-          overflow="hidden"
-          padding="0"
-        >
-          {component.hero_snippet && (
-            <Snippet slug={component.hero_snippet?.toString()} />
-          )}
-          {!hasAdditionalContent && (
-            <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
-              <Core.GdsLink
-                href={
-                  'https://storybook.seb.io/latest/core/?path=/docs/components-' +
-                  slug +
-                  '--docs'
-                }
-                target="_blank"
-              >
-                <Core.GdsFlex
-                  margin="0 0 0 auto"
-                  align-items="center"
-                  gap="s"
-                  padding="m l"
+        <Core.GdsTheme color-scheme={currentTheme}>
+          <Core.GdsCard
+            height="280px"
+            justify-content="center"
+            align-items="center"
+            position="relative"
+            overflow="hidden"
+            padding="0"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            {component.hero_snippet && (
+              <Snippet slug={component.hero_snippet?.toString()} />
+            )}
+            {!hasAdditionalContent && (
+              <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
+                <Core.GdsLink
+                  href={
+                    'https://storybook.seb.io/latest/core/?path=/docs/components-' +
+                    slug +
+                    '--docs'
+                  }
+                  target="_blank"
                 >
-                  <Core.GdsFlex align-items="center" gap="3xs">
-                    <Core.IconBrandStorybook size="s" color="primary" />
-                    API Docs
+                  <Core.GdsFlex
+                    margin="0 0 0 auto"
+                    align-items="center"
+                    gap="s"
+                    padding="m l"
+                  >
+                    <Core.GdsFlex align-items="center" gap="3xs">
+                      <Core.IconBrandStorybook size="s" color="primary" />
+                      API Docs
+                    </Core.GdsFlex>
+                    <Core.IconSquareArrowTopRight size="s" />
                   </Core.GdsFlex>
-                  <Core.IconSquareArrowTopRight size="s" />
-                </Core.GdsFlex>
-              </Core.GdsLink>
-            </Core.GdsDiv>
-          )}
-        </Core.GdsCard>
+                </Core.GdsLink>
+              </Core.GdsDiv>
+            )}
+
+            {isHovered && (
+              <Core.GdsFlex
+                justify-content="space-between"
+                align-items="center"
+                width="max-content"
+                position="absolute"
+                inset="20px 20px auto auto"
+              >
+                <Core.GdsButton rank="tertiary" size="xs" onClick={toggleTheme}>
+                  {currentTheme === 'light' ? (
+                    <Core.IconMoon size="s" />
+                  ) : (
+                    <Core.IconSun size="s" />
+                  )}
+                </Core.GdsButton>
+              </Core.GdsFlex>
+            )}
+          </Core.GdsCard>
+        </Core.GdsTheme>
         {!isLayoutComponent && hasAdditionalContent && (
           <Tabs slug={component.slug} />
         )}
       </Core.GdsFlex>
 
       {section === 'overview' && (component.preamble || anatomyImage) && (
-        <Core.GdsFlex flex-direction="column" gap="m">
+        <Core.GdsFlex flex-direction="column" gap="4xl">
           {component.preamble && (
-            <Core.GdsText tag="p">{component.preamble}</Core.GdsText>
+            <Core.GdsText tag="p" font-size="heading-m" max-width="100ch">
+              {component.preamble}
+            </Core.GdsText>
           )}
           {component.anatomy && anatomyImage && (
-            <React.Fragment>
+            <Core.GdsFlex flex-direction="column" gap="m">
               <Core.GdsText tag="h2">Anatomy</Core.GdsText>
               {component['anatomy-overview'] && (
                 <Core.GdsRichText>
@@ -210,7 +254,7 @@ export function ComponentLayoutClient({
                   </Core.GdsRichText>
                 </Core.GdsDiv>
               )}
-            </React.Fragment>
+            </Core.GdsFlex>
           )}
         </Core.GdsFlex>
       )}

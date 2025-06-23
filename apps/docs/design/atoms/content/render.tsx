@@ -2,6 +2,7 @@
 'use client'
 
 import React from 'react'
+import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
 import {
@@ -27,16 +28,25 @@ export function Render({
   if (!content || !Array.isArray(content)) return null
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="xl" width="100%">
+    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%">
       {content.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="s">
           {section.title && (
-            <Core.GdsText tag={section.tag || 'h2'} margin="4xl 0 0 0">
-              {/* <Core.GdsText tag={section.tag || 'h2'} font-size="display-m"> */}
+            <Core.GdsText tag={section.tag || 'h2'}>
               {section.title}
             </Core.GdsText>
           )}
-
+          {section['section-content'] && (
+            <Core.GdsRichText>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: section['section-content']
+                    ? marked.parse(section['section-content'], { async: false })
+                    : '',
+                }}
+              />
+            </Core.GdsRichText>
+          )}
           {section.columns && (
             <Core.GdsGrid
               columns={section.cols || '2'}

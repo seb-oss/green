@@ -37,15 +37,14 @@ export default function Download() {
         gap="m"
         justify-content="flex-start"
         align-items="flex-start"
+        max-width="100ch"
       >
         <GdsText tag="h1">Green on Desktop</GdsText>
         <GdsText tag="p">
           Get the desktop app to access Green Design System offline. Available
           for macOS and Windows.
         </GdsText>
-        <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
-          <SettingsNav />
-        </GdsCard>
+        <SettingsNav />
       </GdsFlex>
       <GdsCard max-width="80ch" variant="secondary" padding="0">
         <GdsFlex flex-direction="column" gap="m" align-items="flex-start">

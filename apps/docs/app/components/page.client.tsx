@@ -5,7 +5,6 @@ import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import Card from '../../design/atoms/card/card'
-import { Snippet } from '../../design/atoms/snippet/snippet'
 import { useContentContext } from '../../settings/content'
 
 function calculateScore(text: string, query: string): number {
@@ -30,19 +29,8 @@ export function ComponentsClient() {
       .flatMap((component) => component.category || [])
       .filter(Boolean)
 
-    // Remove duplicates and sort
     return [...new Set(allCategories)].sort()
   }, [components])
-
-  // const filteredComponents = !query.trim()
-  //   ? components
-  //   : components.filter((component) => {
-  //       const titleScore = calculateScore(component.title, query)
-  //       const summaryScore = component.summary
-  //         ? calculateScore(component.summary, query)
-  //         : 0
-  //       return titleScore > 0 || summaryScore > 0
-  //     })
 
   const filteredComponents = useMemo(() => {
     return components.filter((component) => {

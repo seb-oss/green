@@ -66,13 +66,11 @@ export default function Settings() {
         gap="m"
         justify-content="flex-start"
         align-items="flex-start"
+        max-width="100ch"
       >
         <GdsText tag="h1">Settings</GdsText>
         <GdsText tag="p">Customize your experience</GdsText>
-
-        <GdsCard padding="0" flex-direction="row" gap="0" overflow="hidden">
-          <SettingsNav />
-        </GdsCard>
+        <SettingsNav />
       </GdsFlex>
 
       <GdsCard max-width="80ch" padding="0" variant="secondary">
