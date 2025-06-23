@@ -1,14 +1,10 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
-
 import {
+  GdsDiv,
   GdsFlex,
   IconBrandSeb,
-  IconCrossLarge,
-  IconCrossSmall,
   IconMagnifyingGlass,
-  IconMenuSidebar,
 } from '@sebgroup/green-core/react'
 import { _, Icon } from '../../../hooks'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
@@ -59,7 +55,7 @@ export default function Header() {
       <Link component="button" href="/search" size="medium" rank="tertiary">
         <IconMagnifyingGlass></IconMagnifyingGlass>
       </Link>
-      <div className="glass"></div>
+      <GdsDiv background="primary" className="glass"></GdsDiv>
     </GdsFlex>
   )
 }

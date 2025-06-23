@@ -7,6 +7,7 @@ import { useSettingsValue } from '../../../settings'
 import { Snippet } from '../snippet/snippet'
 
 interface CardProps {
+  type?: 'component' | 'template'
   list?: boolean
   title?: string
   beta?: boolean
@@ -19,6 +20,7 @@ interface CardProps {
 
 export default function Card({
   list,
+  type,
   title,
   summary,
   beta,
@@ -52,7 +54,7 @@ export default function Card({
       border-color="primary"
       variant="secondary"
       border-radius="m"
-      padding="2xs 2xs l 2xs"
+      padding={snippet ? '2xs 2xs l 2xs' : 'l'}
       gap="s"
       height="100%"
       max-width="100%"
@@ -63,41 +65,45 @@ export default function Card({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {children ? (
-        children
-      ) : (
-        <Core.GdsTheme color-scheme={currentTheme}>
-          <Core.GdsCard
-            height="240px"
-            overflow="hidden"
-            width="100%"
-            max-width={list ? '50%' : '100%'}
-            align-items="center"
-            justify-content="center"
-            variant="secondary"
-            padding="0"
-          >
-            {snippet && <Snippet slug={snippet} />}
-            {isHovered && (
-              <Core.GdsFlex
-                justify-content="space-between"
+      {children
+        ? children
+        : snippet && (
+            <Core.GdsTheme color-scheme={currentTheme}>
+              <Core.GdsCard
+                height="240px"
+                overflow="hidden"
+                width="100%"
+                max-width={list ? '50%' : '100%'}
                 align-items="center"
-                width="max-content"
-                position="absolute"
-                inset="20px 20px auto auto"
+                justify-content="center"
+                variant="secondary"
+                padding="0"
               >
-                <Core.GdsButton rank="tertiary" size="xs" onClick={toggleTheme}>
-                  {currentTheme === 'light' ? (
-                    <Core.IconMoon size="s" />
-                  ) : (
-                    <Core.IconSun size="s" />
-                  )}
-                </Core.GdsButton>
-              </Core.GdsFlex>
-            )}
-          </Core.GdsCard>
-        </Core.GdsTheme>
-      )}
+                {snippet && <Snippet slug={snippet} />}
+                {isHovered && (
+                  <Core.GdsFlex
+                    justify-content="space-between"
+                    align-items="center"
+                    width="max-content"
+                    position="absolute"
+                    inset="20px 20px auto auto"
+                  >
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="xs"
+                      onClick={toggleTheme}
+                    >
+                      {currentTheme === 'light' ? (
+                        <Core.IconMoon size="s" />
+                      ) : (
+                        <Core.IconSun size="s" />
+                      )}
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                )}
+              </Core.GdsCard>
+            </Core.GdsTheme>
+          )}
 
       <Core.GdsFlex
         flex-direction="column"
@@ -130,10 +136,14 @@ export default function Card({
 
         <Core.GdsLink
           key={href}
-          href={`/component/${href}`}
+          href={
+            type === 'template' ? `/template/${href}` : `/component/${href}`
+          }
           margin="auto 0 0 0"
         >
-          <Core.GdsText color="secondary">View Component</Core.GdsText>
+          <Core.GdsText color="secondary">
+            View {type === 'template' ? 'template' : 'component'}
+          </Core.GdsText>
           <Core.IconArrowRight size="s" slot="trail" />
         </Core.GdsLink>
       </Core.GdsFlex>
