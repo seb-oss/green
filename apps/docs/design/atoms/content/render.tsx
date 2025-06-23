@@ -28,7 +28,7 @@ export function Render({
   if (!content || !Array.isArray(content)) return null
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%">
+    <Core.GdsFlex flex-direction="column" gap="2xl" width="100%">
       {content.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="s">
           {section.title && (
