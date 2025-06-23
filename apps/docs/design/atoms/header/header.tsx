@@ -20,6 +20,10 @@ export default function Header() {
     actions.toggle('UI.Panel.Sidebar')
   }
 
+  const handleToggleCommand = () => {
+    actions.toggle('UI.Panel.Command')
+  }
+
   return (
     <GdsFlex
       background="none"
@@ -52,7 +56,12 @@ export default function Header() {
         <IconBrandSeb size="l" />
       </Link>
 
-      <Link component="button" href="/search" size="medium" rank="tertiary">
+      <Link
+        component="button"
+        onClick={handleToggleCommand}
+        size="medium"
+        rank="tertiary"
+      >
         <IconMagnifyingGlass></IconMagnifyingGlass>
       </Link>
       <GdsDiv background="primary" className="glass"></GdsDiv>

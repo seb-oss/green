@@ -136,12 +136,22 @@ export default function Command() {
   return (
     <Core.GdsDialog
       onGdsClose={handleClosePanel}
-      width="680px"
-      min-width="680px"
+      width="620px"
+      min-width="620px"
       heading="Search"
+      min-block-size="80vh"
       open
     >
-      <Core.GdsFlex flex-direction="column" gap="m">
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="m"
+        height="100%"
+        background="primary"
+        padding="s"
+        border-radius="s"
+        border-color="primary"
+        border-width="4xs"
+      >
         <Core.GdsInput
           ref={inputRef}
           plain
@@ -156,17 +166,12 @@ export default function Command() {
           <Core.IconMagnifyingGlass slot="lead" />
         </Core.GdsInput>
 
-        <Core.GdsFlex
-          flex-direction="column"
-          gap="xs"
-          max-height="400px"
-          overflow="auto"
-        >
+        <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
           {searchResults.map((result, index) => (
             <Core.GdsCard
               key={result.href}
               padding="s"
-              background={selectedIndex === index ? 'primary' : 'secondary'}
+              variant={selectedIndex === index ? 'secondary' : 'primary'}
               width="100%"
               onClick={() => {
                 router.push(result.href)
