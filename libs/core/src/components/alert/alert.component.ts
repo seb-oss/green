@@ -201,14 +201,12 @@ export class GdsAlert extends GdsElement {
   // Render methods
   #renderIcon() {
     const icon = `gds-icon-${this.#config.icon}`
-    return html`${staticHtml`<${unsafeStatic(icon)} class="icon" solid aria-hidden="true" size="24px"></${unsafeStatic(icon)}>`}`
+    return html`${staticHtml`<${unsafeStatic(icon)} class="icon" solid aria-hidden="true" size="l"></${unsafeStatic(icon)}>`}`
   }
 
   #renderMessage() {
     return html`<div class="message">
-      <span class="message-text">
-        <slot></slot>
-      </span>
+      <slot></slot>
     </div>`
   }
 
@@ -234,7 +232,7 @@ export class GdsAlert extends GdsElement {
             class="close-btn"
             variant="neutral"
             rank="tertiary"
-            size="small"
+            size="xs"
             aria-label=${msg('Dismiss alert')}
             @click=${() => this.#dismiss('close')}
           >
@@ -280,10 +278,13 @@ export class GdsAlert extends GdsElement {
         id="alert-message"
         padding="m"
       >
-        ${this.#renderIcon()} ${this.#renderMessage()}
-        ${this.buttonLabel
-          ? this.#renderActionButton(this.buttonLabel)
-          : nothing}
+        ${this.#renderIcon()}
+        <div class="content-wrapper">
+          ${this.#renderMessage()}
+          ${this.buttonLabel
+            ? this.#renderActionButton(this.buttonLabel)
+            : nothing}
+        </div>
         ${this.#renderCloseButton()} ${this.#renderTimerBar()}
       </gds-card>
     `

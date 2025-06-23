@@ -1,6 +1,7 @@
 import { css } from 'lit'
 
 export const alertStyles = css`
+  /* Base host and grid layout */
   :host {
     box-sizing: border-box;
     display: block;
@@ -9,78 +10,44 @@ export const alertStyles = css`
   }
 
   #alert-message {
-    --grid-areas: 'icon message close' 'icon action close';
     display: grid;
     grid-template-columns: auto 1fr auto;
-    grid-template-areas: var(--grid-areas);
     min-width: fit-content;
+    gap: 0.5rem;
     position: relative;
-    transition:
-      opacity 0.3s ease-out,
-      transform 0.3s ease-out;
-    gap: var(--gds-sys-space-xs);
   }
 
-  /* Animation */
-  @media (prefers-reduced-motion: no-preference) {
-    #alert-message {
-      animation: slideIn 0.3s ease-out;
-    }
-  }
-
-  #alert-message.dismissing {
-    opacity: 0;
-    transform: translateY(-1rem);
-    pointer-events: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    #alert-message.dismissing {
-      transform: none;
-    }
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-0.5rem);
-    }
-  }
-
-  /* Focus styles */
-  #alert-message:focus {
-    outline: 2px solid var(--gds-focus-color, #000);
-    outline-offset: 2px;
-  }
-
-  /* Layout elements */
+  /* Main content */
   .icon {
-    grid-area: icon;
+    justify-self: start;
   }
 
   .message {
-    grid-area: message;
-    font-size: var(--gds-font-size-base, 1rem);
-    display: flex;
-    justify-content: flex-start;
-    text-align: left;
-    margin: 0 0 0 var(--gds-sys-space-2xs);
-  }
-
-  .message-text {
-    display: inline;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+    min-width: 20ch;
+    max-width: 100%;
+    width: fit-content;
     white-space: normal;
-    line-height: var(--gds-sys-text-line-height-body-m);
-    font-size: var(--gds-sys-text-size-body-m);
   }
 
-  /* Buttons */
+  .close-btn {
+    justify-self: end;
+  }
 
-  [gds-element='gds-button'] {
-    grid-area: unset;
-    width: auto;
-    min-width: auto;
-    display: inline-flex;
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .action-button {
+    width: 100%;
   }
 
   /* Timer bar */
@@ -96,62 +63,36 @@ export const alertStyles = css`
 
   .timer-progress {
     height: 100%;
-    transition: width 0.1s linear;
     background: var(--gds-accent, currentColor);
     opacity: 0.6;
+    transition: width 0.1s linear;
     will-change: width;
   }
 
+  /* Accessibility and motion */
   @media (prefers-reduced-motion: reduce) {
+    #alert-message.dismissing {
+      transform: none;
+    }
     .timer-progress {
       transition: none;
     }
   }
 
-  /* Responsive layouts */
-  /* Small: stacked */
-  @container (max-width: 600px) {
-    #alert-message {
-      grid-template-areas: 'icon message close' 'cta cta cta';
-    }
-
-    .action-button {
-      grid-area: cta;
-      margin-top: var(--gds-sys-space-xs);
-    }
-  }
-
-  /* Medium: inline */
-  @container (min-width: 601px) and (max-width: 1024px) {
-    #alert-message {
-      grid-template-areas: 'icon message cta close';
-    }
-    .message {
-      gap: 0.5rem;
-    }
-  }
-
-  /* Large: centered */
-  @container (min-width: 1025px) {
-    #alert-message {
-      grid-template-columns: auto 1fr auto auto;
-      grid-template-areas: 'icon message cta close';
-    }
-
-    .message {
-      justify-content: center;
-    }
-
-    .close-btn {
-      grid-area: close;
-      justify-self: end;
-    }
-  }
-
-  /* High contrast mode support */
   @media (prefers-contrast: high) {
-    .icon {
+    :host {
       forced-color-adjust: none;
+    }
+  }
+
+  /* Responsive container queries */
+  @container (min-width: 601px) {
+    .content-wrapper {
+      flex-direction: row;
+    }
+    .action-button {
+      width: auto;
+      flex-shrink: 0;
     }
   }
 `
