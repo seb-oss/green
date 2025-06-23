@@ -49,8 +49,8 @@ export function Render({
           )}
           {section.columns && (
             <Core.GdsGrid
-              columns={section.cols || '2'}
-              gap="m"
+              columns={`1; s{${section.cols == '3' ? '2' : '1'}}; m{${section.cols || '2'}}`}
+              gap="2xl; m{m}"
               max-width="100%"
             >
               {section.columns.map((column, colIndex) => (

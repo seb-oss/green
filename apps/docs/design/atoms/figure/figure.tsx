@@ -30,7 +30,7 @@ export default function Figure({
         padding="xs"
         dangerouslySetInnerHTML={{ __html: id || '' }}
         className="figure-svg"
-        min-height="240px"
+        min-height="max-content; m{240px}"
         justify-content="center"
         align-items="center"
       />
