@@ -11,7 +11,7 @@ const style = css`
       --_padding-block: var(--gds-sys-space-xs);
 
       --_color-bg: transparent;
-      --_color-text: var(--gds-sys-color-l3-content-tertiary);
+      --_color-text: var(--gds-sys-color-content-01);
       --_color-border: transparent;
 
       --_font-size: 1rem;
@@ -77,7 +77,7 @@ const style = css`
           transparent,
           var(--gds-sys-color-state-light-hover)
         );
-        --_color-border: var(--gds-sys-color-l3-border-secondary);
+        --_color-border: var(--gds-sys-color-border-interactive);
       }
 
       &.selected {
@@ -86,7 +86,7 @@ const style = css`
           transparent,
           var(--gds-sys-color-state-light-hover)
         );
-        --_color-border: var(--gds-sys-color-l3-border-primary);
+        --_color-border: var(--gds-sys-color-border-strong);
       }
 
       slot:not([name]) {
