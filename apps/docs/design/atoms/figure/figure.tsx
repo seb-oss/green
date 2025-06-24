@@ -19,6 +19,19 @@ export default function Figure({
   identifier?: string
   caption?: string
 }) {
+  const getFigureType = (identifier?: string) => {
+    if (!identifier) return null
+
+    const pattern = /-do(?:nt)?(?:-|$)/i
+    const match = identifier.match(pattern)
+
+    if (!match) return null
+
+    return identifier.toLowerCase().includes('-dont') ? 'dont' : 'do'
+  }
+
+  const figureType = getFigureType(identifier)
+
   return (
     <GdsFlex
       flex-direction="column"
@@ -34,23 +47,25 @@ export default function Figure({
         justify-content="center"
         align-items="center"
       />
-      {(identifier == 'do' || identifier == 'ux-do') && (
+      {figureType === 'do' && (
         <GdsText tag="small" padding-inline="s 0" color="positive">
           <GdsFlex align-items="center" gap="s">
             <IconCheckmark size="m" /> DO
           </GdsFlex>
         </GdsText>
       )}
-      {(identifier == 'dont' || identifier == 'ux-dont') && (
+      {figureType === 'dont' && (
         <GdsText tag="small" padding-inline="s 0" color="negative">
           <GdsFlex align-items="center" gap="s">
             <IconCrossLarge size="m" /> {`Don't`}
           </GdsFlex>
         </GdsText>
       )}
-      <GdsText tag="small" padding-inline="s 0" color="secondary">
-        {caption}
-      </GdsText>
+      {!figureType && caption && (
+        <GdsText tag="small" padding-inline="s 0" color="secondary">
+          {caption}
+        </GdsText>
+      )}
     </GdsFlex>
   )
 }
