@@ -3,7 +3,7 @@ import { fileHeader, formattedVariables } from 'style-dictionary/utils'
 const scssMixin = {
   name: 'scss/mixin',
   format: async ({ dictionary, file, options }) => {
-    const { outputReferences } = options
+    const { outputReferences, usesDtcg } = options
     const header = await fileHeader({ file })
     return (
       header +
@@ -12,6 +12,7 @@ const scssMixin = {
         format: 'css',
         dictionary,
         outputReferences,
+        usesDtcg,
       }) +
       `\n}\n`
     )
