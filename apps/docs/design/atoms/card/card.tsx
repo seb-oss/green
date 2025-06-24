@@ -117,7 +117,7 @@ export default function Card({
         <Core.GdsFlex gap="s" align-items="center">
           <Core.GdsText font-size="display-xs">{title}</Core.GdsText>
           {beta && (
-            <Core.GdsBadge size="small" variant="notice" rounded>
+            <Core.GdsBadge size="small" variant="notice">
               BETA
             </Core.GdsBadge>
           )}
