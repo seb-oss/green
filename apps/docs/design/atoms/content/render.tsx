@@ -10,7 +10,7 @@ import {
   ComponentSection,
   ImageProvider,
 } from '../../../settings/content/types'
-import { renderColumn } from './content'
+import { RenderColumn } from './content'
 
 interface ContentRendererProps {
   content: ComponentSection[] | null
@@ -55,7 +55,7 @@ export function Render({
             >
               {section.columns.map((column, colIndex) => (
                 <React.Fragment key={colIndex}>
-                  {renderColumn(column, slug, imageProvider)}
+                  {RenderColumn(column, slug, imageProvider)}
                 </React.Fragment>
               ))}
             </Core.GdsGrid>

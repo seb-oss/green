@@ -11,7 +11,7 @@ import { ComponentColumn, ImageProvider } from '../../../settings/content/types'
 import Figure from '../figure/figure'
 import { Snippet } from '../snippet/snippet'
 
-export const renderColumn = (
+export const RenderColumn = (
   column: ComponentColumn,
   slug: string,
   imageProvider?: ImageProvider,
