@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 export const styles = css`
   :host {
-    font: var(--gds-sys-text-body-m);
+    font: var(--gds-sys-text-body-regular-m);
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
     letter-spacing: 0.0125rem;
@@ -200,7 +200,7 @@ export const styles = css`
     font-weight: var(--gds-sys-text-weight-regular);
     list-style: none;
     padding: 0.4lh 0.2ch;
-    font: var(--gds-sys-text-body-l);
+    font: var(--gds-sys-text-body-regular-l);
     color: currentColor;
     display: flex;
     justify-content: space-between;
@@ -231,7 +231,7 @@ export const styles = css`
     justify-content: center;
     width: 24px;
     height: 24px;
-    font: var(--gds-sys-text-body-l);
+    font: var(--gds-sys-text-body-regular-l);
   }
 
   details[open] summary::after {
