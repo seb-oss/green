@@ -260,35 +260,25 @@ export function ComponentLayoutClient({
       )}
       {children}
       {isLayoutComponent && section === 'overview' && (
-        <Core.GdsCard
-          variant="secondary"
-          border-radius="m"
-          padding="0"
-          background="secondary"
-        >
-          <Core.GdsFlex
-            flex-direction="column"
-            gap="m"
-            justify-content="flex-start"
-            align-items="flex-start"
-            max-width="90ch"
-          >
-            <Core.GdsFlex gap="s" align-items="center">
-              <Core.GdsText font-size="display-s">
-                Declarative Layout Component
-              </Core.GdsText>
-            </Core.GdsFlex>
-            <Core.GdsText tag="p" color="primary" font-size="heading-s">
-              {`This component is part of Green's declarative layout system,
-              designed specifically for micro-frontend architectures.`}
+        <Core.GdsCard variant="positive" border-radius="m">
+          <Core.GdsFlex flex-direction="column" gap="m" max-width="90ch">
+            <Core.GdsText font-size="display-s">
+              Declarative Layout Component
             </Core.GdsText>
-            <Core.GdsText color="secondary" tag="p">
-              {`It uses style expression properties to generate and inject CSS
-              directly into shadow DOM, ensuring style encapsulation while
-              providing flexible, responsive layouts without utility classes.`}
+            <Core.GdsText font-size="heading-xs" max-width="80ch">
+              A micro-frontend optimized layout system using style expressions,
+              Generates encapsulated CSS in shadow DOM for responsive layouts
+              without utility classes.
             </Core.GdsText>
-            <Link component="button" href="/foundation/layout" rank="secondary">
-              Learn more about declarative layout system
+            <Link
+              component="button"
+              href="/foundation/layout"
+              rank="secondary"
+              justify-content="flex-start"
+              width="max-content"
+              variant="positive"
+            >
+              Learn more about layouts
               <Core.IconArrowRight slot="trail" />
             </Link>
           </Core.GdsFlex>
