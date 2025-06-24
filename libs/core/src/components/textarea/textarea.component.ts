@@ -426,7 +426,7 @@ class Textarea extends GdsFormControlElement<string> {
         @paste=${this.#handleOnPaste}
         .value=${this.value}
         id="input"
-        class="native-control resize-${this.resizable}"
+        class="resize-${this.resizable}"
         aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         placeholder=" "

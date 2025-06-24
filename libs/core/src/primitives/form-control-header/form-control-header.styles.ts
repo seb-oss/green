@@ -7,7 +7,6 @@ export const styles = css`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font: var(--gds-sys-text-detail-book-m);
       color: var(--gds-sys-color-content-01);
 
       & > div {
@@ -16,8 +15,11 @@ export const styles = css`
       }
     }
 
-    ::slotted(label) {
-      font-weight: var(--gds-sys-text-weight-book);
+    slot[name='label']::slotted(*) {
+      font: var(--gds-sys-text-detail-book-m);
+    }
+    slot[name='supporting-text']::slotted(*) {
+      font: var(--gds-sys-text-detail-regular-s);
     }
 
     :host(.size-small) {
@@ -32,7 +34,7 @@ export const styles = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: all;
-      font: var(--gds-sys-text-body-s);
+      font: var(--gds-sys-text-detail-regular-s);
       border-radius: var(--gds-sys-space-xs);
       background-color: var(--gds-sys-color-l3-02);
       color: var(--gds-sys-color-content-01);
