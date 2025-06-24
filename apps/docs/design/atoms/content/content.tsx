@@ -2,10 +2,11 @@
 'use client'
 
 /* eslint-disable no-case-declarations */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useSettingsValue } from '../../../settings'
 import { ComponentColumn, ImageProvider } from '../../../settings/content/types'
 import Figure from '../figure/figure'
 import { Snippet } from '../snippet/snippet'
@@ -15,6 +16,26 @@ export const renderColumn = (
   slug: string,
   imageProvider?: ImageProvider,
 ) => {
+  const [overrideTheme, setOverrideTheme] = useState<'light' | 'dark' | null>(
+    null,
+  )
+  const [isHovered, setIsHovered] = useState(false)
+  const systemColorScheme = useSettingsValue((s) => s.UI.Theme.ColorScheme)
+
+  useEffect(() => {
+    setOverrideTheme(null)
+  }, [systemColorScheme])
+
+  const toggleTheme = () => {
+    if (!overrideTheme) {
+      setOverrideTheme(systemColorScheme === 'light' ? 'dark' : 'light')
+      return
+    }
+    setOverrideTheme(overrideTheme === 'light' ? 'dark' : 'light')
+  }
+
+  const currentTheme = overrideTheme || systemColorScheme
+
   switch (column.type) {
     case 'rich-text':
       return (
@@ -43,15 +64,47 @@ export const renderColumn = (
     case 'snippet':
       if (column.Snippet) {
         return (
-          <Core.GdsFlex flex-direction="column" gap="s" width="100%">
-            <Core.GdsCard
-              padding="xs"
-              justify-content="center"
-              align-items="center"
-              min-height="160px"
-            >
-              <Snippet slug={column.Snippet || ''} />
-            </Core.GdsCard>
+          <Core.GdsFlex
+            flex-direction="column"
+            gap="s"
+            width="100%"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
+            <Core.GdsTheme color-scheme={currentTheme}>
+              <Core.GdsCard
+                padding="xs"
+                justify-content="center"
+                align-items="center"
+                min-height="160px"
+                position="relative"
+              >
+                <Snippet slug={column.Snippet || ''} />
+
+                {isHovered && (
+                  <Core.GdsFlex
+                    justify-content="space-between"
+                    align-items="center"
+                    width="max-content"
+                    position="absolute"
+                    inset="10px 10px auto auto"
+                  >
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="xs"
+                      onClick={toggleTheme}
+                    >
+                      {currentTheme === 'light' ? (
+                        <Core.IconMoon size="s" />
+                      ) : (
+                        <Core.IconSun size="s" />
+                      )}
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                )}
+              </Core.GdsCard>
+            </Core.GdsTheme>
+
             {column.caption && (
               <Core.GdsText tag="small" padding-inline="s 0" color="secondary">
                 {column.caption}

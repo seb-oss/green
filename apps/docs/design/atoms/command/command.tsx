@@ -223,7 +223,7 @@ export default function Command() {
 
           {query && searchResults.length === 0 && (
             <Core.GdsText color="secondary" text-align="center" padding="l">
-              No results found for "{query}"
+              No results found for {`"${query}"`}
             </Core.GdsText>
           )}
 
