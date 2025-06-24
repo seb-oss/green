@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import Card from '../../../design/atoms/card/card'
+import { Link } from '../../../design/atoms/link/link'
 import { useContent } from '../../../settings/content'
 import { ComponentContent } from '../../../settings/content/types'
 
@@ -47,12 +48,21 @@ export function TemplateLayoutClient({
       margin="0 auto"
     >
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
-        <Breadcrumbs slug={template.slug} title={template.title} />
+        <Core.GdsBreadcrumbs size="small">
+          <Link component="link" href="/">
+            <Core.IconHomeOpen size="m" slot="lead" />
+            Home
+          </Link>
+          <Link component="link" href="/templates">
+            <Core.IconDevices size="m" slot="lead" />
+            Templates
+          </Link>
+          <Core.GdsText>{template.title}</Core.GdsText>
+        </Core.GdsBreadcrumbs>
         <Core.GdsText tag="h1" font-size="heading-xl">
           {template.title}
         </Core.GdsText>
 
-        {/* Template Preview Card */}
         <Core.GdsCard
           height="280px"
           justify-content="center"
@@ -61,14 +71,12 @@ export function TemplateLayoutClient({
           overflow="hidden"
           padding="0"
         >
-          {/* Template preview content will go here */}
           <Core.GdsText>Template Preview</Core.GdsText>
         </Core.GdsCard>
       </Core.GdsFlex>
 
       {children}
 
-      {/* Code Section */}
       {template.code && (
         <Core.GdsFlex flex-direction="column" gap="m">
           <Core.GdsText tag="h2">Implementation</Core.GdsText>
@@ -80,7 +88,6 @@ export function TemplateLayoutClient({
         </Core.GdsFlex>
       )}
 
-      {/* Related Components Section */}
       {relatedComponents.length > 0 && (
         <Core.GdsFlex flex-direction="column" gap="m">
           <Core.GdsText tag="h2" font-size="heading-m">

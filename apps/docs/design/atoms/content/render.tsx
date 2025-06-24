@@ -19,6 +19,35 @@ interface ContentRendererProps {
   isAccessibility?: boolean
 }
 
+const processColumns = (columns: ComponentColumn[]) => {
+  const processedColumns: (ComponentColumn | ComponentColumn[])[] = []
+  let detailsGroup: ComponentColumn[] = []
+
+  columns.forEach((column, index) => {
+    if (column.type === 'details') {
+      detailsGroup.push(column)
+
+      if (
+        index === columns.length - 1 ||
+        columns[index + 1]?.type !== 'details'
+      ) {
+        if (detailsGroup.length > 0) {
+          processedColumns.push([...detailsGroup])
+          detailsGroup = []
+        }
+      }
+    } else {
+      if (detailsGroup.length > 0) {
+        processedColumns.push([...detailsGroup])
+        detailsGroup = []
+      }
+      processedColumns.push(column)
+    }
+  })
+
+  return processedColumns
+}
+
 export function Render({
   content,
   slug,
@@ -53,9 +82,19 @@ export function Render({
               gap="2xl; m{4xl m}"
               max-width="100%"
             >
-              {section.columns.map((column, colIndex) => (
+              {processColumns(section.columns).map((column, colIndex) => (
                 <React.Fragment key={colIndex}>
-                  {RenderColumn(column, slug, imageProvider)}
+                  {Array.isArray(column) ? (
+                    <Core.GdsFlex flex-direction="column" gap="xs">
+                      {column.map((detailsColumn, detailsIndex) => (
+                        <React.Fragment key={detailsIndex}>
+                          {RenderColumn(detailsColumn, slug, imageProvider)}
+                        </React.Fragment>
+                      ))}
+                    </Core.GdsFlex>
+                  ) : (
+                    RenderColumn(column, slug, imageProvider)
+                  )}
                 </React.Fragment>
               ))}
             </Core.GdsGrid>
