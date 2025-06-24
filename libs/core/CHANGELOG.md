@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.85.3
+
+### Patch Changes
+
+- 1891932: Add missing exports from alert, rich-text and segment.
+
 ## 1.85.2
 
 ### Patch Changes
