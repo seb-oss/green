@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { ComponentContent } from '../../../settings/content/types'
 
+import './contents.css'
+
 interface TableOfContentsProps {
   component: ComponentContent
   section: 'overview' | 'ux-text' | 'accessibility'
@@ -63,7 +65,7 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
   return (
     <Core.GdsCard
       variant="primary"
-      padding="l m"
+      padding="l xs m xs"
       position="sticky"
       inset="90px auto auto auto"
       grid-column="10/13"
@@ -81,6 +83,7 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
               size="small"
               onClick={() => scrollToSection(section.id)}
               justify-content="flex-start"
+              data-overflow
             >
               {section.title}
             </Core.GdsButton>

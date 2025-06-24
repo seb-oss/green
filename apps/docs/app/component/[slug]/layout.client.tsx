@@ -222,7 +222,7 @@ export function ComponentLayoutClient({
           )}
 
           {section === 'overview' && (component.preamble || anatomyImage) && (
-            <Core.GdsFlex flex-direction="column" gap="2xl" margin="m 0 0 0">
+            <Core.GdsFlex flex-direction="column" gap="2xl">
               {component.preamble && (
                 <Core.GdsText tag="p" font-size="heading-s" max-width="100ch">
                   {component.preamble}
