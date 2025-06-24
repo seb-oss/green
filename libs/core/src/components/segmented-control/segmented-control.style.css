@@ -42,7 +42,7 @@
     border-radius: var(--gds-sys-space-max);
     border-width: 0;
     background-color: var(--gds-sys-color-l3-02);
-    color: var(--gds-sys-color-l3-content-tertiary);
+    color: var(--gds-sys-color-content-01);
     cursor: pointer;
     display: flex;
     font-size: 1rem;
@@ -93,7 +93,7 @@
   }
 
   #indicator {
-    background-color: var(--gds-sys-color-l3-background-quarternary);
+    background-color: var(--gds-sys-color-l3-04);
     border-radius: var(--gds-sys-space-max);
     height: 100%;
     left: 0;
