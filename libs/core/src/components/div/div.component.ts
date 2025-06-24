@@ -185,7 +185,7 @@ export class GdsDiv extends withSizeXProps(
       return `font: var(--gds-sys-text-${size});`
     },
   })
-  'font-size'?: string
+  'font'?: string
 
   /**
    * Style Expression Property that controls the `font-weight` property.
