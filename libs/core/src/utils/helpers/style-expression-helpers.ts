@@ -26,7 +26,14 @@ export function parseColorValue(
     return value
   }
   const [colorName, transparency] = value.split('/')
-  const colorVar = `var(--gds-sys-color-l${level}-${context}-${colorName})`
+
+  let colorVar: string
+  if (context === 'background') {
+    colorVar = `var(--gds-sys-color-l${level}-${colorName})`
+  } else {
+    colorVar = `var(--gds-sys-color-${context}-${colorName})`
+  }
+
   return transparency
     ? `color-mix(in srgb, ${colorVar} ${parseFloat(transparency) * 100}%, transparent 0%)`
     : colorVar

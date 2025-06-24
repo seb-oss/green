@@ -86,7 +86,7 @@ export const Variants: Story = {
             </gds-icon-triangle-exclamation>
             Negative
           </gds-badge>
-          <gds-badge variant="negative" disabled>
+          <gds-badge variant="disabled">
             <gds-icon-triangle-exclamation slot="lead">
             </gds-icon-triangle-exclamation>
             Disabled
@@ -104,7 +104,7 @@ export const Variants: Story = {
           <gds-badge variant="positive"> Positive </gds-badge>
           <gds-badge variant="warning"> Warning </gds-badge>
           <gds-badge variant="negative"> Negative </gds-badge>
-          <gds-badge variant="negative" disabled> Disabled </gds-badge>
+          <gds-badge variant="disabled"> Disabled </gds-badge>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
@@ -118,7 +118,7 @@ export const Variants: Story = {
           <gds-badge size="small" variant="positive"> 32 </gds-badge>
           <gds-badge size="small" variant="warning"> 602 </gds-badge>
           <gds-badge size="small" variant="negative"> 537 </gds-badge>
-          <gds-badge size="small" variant="negative" disabled> 982 </gds-badge>
+          <gds-badge size="small" variant="disabled"> 982 </gds-badge>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
@@ -127,17 +127,9 @@ export const Variants: Story = {
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-flex gap="xl" align-items="center">
-          <gds-badge variant="positive" notification></gds-badge>
-          <gds-badge variant="positive" notification>9</gds-badge>
-          <gds-badge variant="positive" notification>
-            999
-            <gds-icon-plus-small slot="trail"></gds-icon-plus-small
-          ></gds-badge>
-          <gds-badge variant="negative" notification></gds-badge>
-          <gds-badge variant="negative" notification>9</gds-badge>
-          <gds-badge variant="negative" notification>
-            999 <gds-icon-plus-small slot="trail"></gds-icon-plus-small
-          ></gds-badge>
+          <gds-badge notification></gds-badge>
+          <gds-badge notification>9</gds-badge>
+          <gds-badge notification>999+</gds-badge>
         </gds-flex>
       </gds-flex>
     </gds-flex>

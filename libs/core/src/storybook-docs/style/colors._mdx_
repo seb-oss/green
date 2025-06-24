@@ -194,7 +194,7 @@ The color system is divided into three levels:
   the `level` attribute on the component.
 
   ```html
-  <gds-card level="3" background="primary">Will resolve to `--gds-sys-color-l3-background-primary`</gds-card>
+  <gds-card level="3" background="primary">Will resolve to `--gds-sys-color-l3-01`</gds-card>
   ```
 
   ## Colors

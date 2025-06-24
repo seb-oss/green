@@ -37,7 +37,7 @@ export default css`
     overflow: hidden;
     padding: unset;
     width: 100%;
-    font: var(--gds-sys-text-detail-m);
+    font: var(--gds-sys-text-detail-book-m);
     color: currentColor;
     text-align: left;
   }

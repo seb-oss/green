@@ -3,10 +3,10 @@ export default {
   transitive: true,
   type: 'value',
   filter: (token) => {
-    return token.$value.alpha
+    return token.alpha
   },
   transform: (token) => {
     const toMixBlend = (alpha) => `${Math.round(alpha * 100)}%`
-    return `${token.$value.hex}${toMixBlend(token.$value.alpha)}`
+    return `${token.$value} ${toMixBlend(token.alpha)}`
   },
 }

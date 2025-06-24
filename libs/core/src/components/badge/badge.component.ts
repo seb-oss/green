@@ -31,7 +31,13 @@ export class GdsBadge extends withSizeXProps(
    * @property variant
    */
   @property()
-  variant = 'information'
+  variant:
+    | 'information'
+    | 'notice'
+    | 'positive'
+    | 'warning'
+    | 'negative'
+    | 'disabled' = 'information'
 
   /**
    * Defines the size of the badge.
@@ -41,19 +47,6 @@ export class GdsBadge extends withSizeXProps(
    */
   @property({ type: String })
   size: 'default' | 'small' = 'default'
-
-  /**
-   * Indicates whether the badge is disabled.
-   * When set to `true`, the badge will appear in a disabled state and will not be interactive.
-   *
-   * @property {boolean} disabled - Controls the disabled state of the badge.
-   */
-  @property({
-    attribute: 'disabled',
-    type: Boolean,
-    reflect: true,
-  })
-  disabled = false
 
   /**
    * Indicates whether the badge is in notification mode.
@@ -84,17 +77,43 @@ export class GdsBadge extends withSizeXProps(
   mainSlotOccupied = false
 
   render() {
-    const background = this.disabled
-      ? 'disabled'
-      : this.notification
-        ? (this as GdsBadge).variant
-        : (this as GdsBadge).variant + '-badge'
-
-    const color = this.disabled
-      ? 'disabled'
-      : this.notification
-        ? 'primary'
-        : (this as GdsBadge).variant
+    let background: string
+    let color: string
+    if (this.notification) {
+      background = 'negative-01'
+      color = 'inversed'
+    } else {
+      switch (this.variant) {
+        case 'information':
+          background = 'information-03'
+          color = 'information-01'
+          break
+        case 'notice':
+          background = 'notice-03'
+          color = 'notice-01'
+          break
+        case 'positive':
+          background = 'positive-03'
+          color = 'positive-01'
+          break
+        case 'warning':
+          background = 'warning-03'
+          color = 'warning-01'
+          break
+        case 'negative':
+          background = 'negative-03'
+          color = 'negative-01'
+          break
+        case 'disabled':
+          background = 'disabled-03'
+          color = 'disabled-01'
+          break
+        default:
+          background = 'information-03'
+          color = 'information-01'
+          break
+      }
+    }
 
     const padding = this.size === 'small' || this.notification ? '2xs' : 'xs'
 
@@ -116,10 +135,8 @@ export class GdsBadge extends withSizeXProps(
       block-size="${blockSize}"
       width="100%"
       font-size="${this.size === 'small' || this.notification
-        ? 'detail-xs'
-        : 'detail-s'}"
-      pointer-events=${this.disabled ? 'none' : 'auto'}
-      user-select="${this.disabled ? 'none' : 'auto'}"
+        ? 'detail-regular-xs'
+        : 'detail-regular-s'}"
     >
       ${this.#renderLeadSlot()} ${this.#renderMainSlot()}
       ${this.#renderTrailSlot()}

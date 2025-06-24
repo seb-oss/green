@@ -7,7 +7,7 @@ export const styles = css`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font: var(--gds-sys-text-detail-m);
+      font: var(--gds-sys-text-detail-book-m);
       color: var(--gds-sys-color-l2-content-primary);
 
       & > div {

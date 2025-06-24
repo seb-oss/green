@@ -3,7 +3,7 @@ import { css } from 'lit'
 export const styles = css`
   :host {
     /* Font Sizes */
-    --_font-label: var(--gds-sys-text-detail-m);
+    --_font-label: var(--gds-sys-text-detail-book-m);
     --_font-supporting-text: var(--gds-sys-text-detail-s);
     font: var(--_font-label);
 

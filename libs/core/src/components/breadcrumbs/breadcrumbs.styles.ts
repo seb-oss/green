@@ -52,7 +52,7 @@ const style = css`
     }
 
     li:last-child {
-      color: var(--gds-sys-color-l3-content-secondary);
+      color: var(--gds-sys-color-content-02);
     }
 
     .separator {
