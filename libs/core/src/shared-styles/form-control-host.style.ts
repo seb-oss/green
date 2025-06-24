@@ -27,21 +27,6 @@ export default css`
     pointer-events: none;
   }
 
-  .native-control {
-    appearance: none;
-    background-color: transparent;
-    border: 0;
-    font-family: inherit;
-    margin: unset;
-    outline: none;
-    overflow: hidden;
-    padding: unset;
-    width: 100%;
-    font: var(--gds-sys-text-detail-book-m);
-    color: currentColor;
-    text-align: left;
-  }
-
   :host([size='small']) slot[name='lead']::slotted(*) {
     line-height: 18px;
     width: var(--gds-sys-space-m);

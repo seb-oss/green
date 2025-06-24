@@ -100,6 +100,18 @@ export const styles = css`
 
     slot:not([name])::slotted(*) {
       color: currentColor;
+      font: var(--gds-sys-text-detail-regular-m);
+      appearance: none;
+      background-color: transparent;
+      border: 0;
+      font-family: inherit;
+      margin: unset;
+      outline: none;
+      overflow: hidden;
+      padding: unset;
+      width: 100%;
+      color: currentColor;
+      text-align: left;
     }
 
     .main-slot-wrap {

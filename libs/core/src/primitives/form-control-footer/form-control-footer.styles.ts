@@ -15,7 +15,7 @@ export const styles = css`
       align-items: flex-start;
       gap: var(--gds-sys-space-xs);
       margin-top: var(--gds-sys-space-2xs);
-      font: var(--gds-sys-text-detail-s);
+      font: var(--gds-sys-text-detail-regular-s);
       color: var(--gds-sys-color-content-negative-01);
     }
 
