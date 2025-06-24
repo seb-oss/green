@@ -1,9 +1,14 @@
 import { expect } from '@esm-bundle/chai'
-import { fixture, html as testingHtml, waitUntil } from '@open-wc/testing'
+import {
+  aTimeout,
+  fixture,
+  html as testingHtml,
+  waitUntil,
+} from '@open-wc/testing'
 import { sendKeys, sendMouse } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
-import { clickOnElement, timeout } from '../../utils/testing'
+import { clickOnElement } from '../../utils/testing'
 
 import '@sebgroup/green-core/components/dialog'
 
@@ -109,6 +114,50 @@ describe('<gds-dialog>', () => {
 
       const closeBtn = el.shadowRoot?.querySelector('#close-btn')
       await clickOnElement(closeBtn)
+      await waitUntil(() => !el.open)
+    })
+
+    it('should close dialog when clicking outside', async () => {
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog open heading="Test">Content</gds-dialog>`,
+      )
+
+      // Simulate clicking outside the dialog
+      const dialog = el.shadowRoot?.querySelector('dialog')
+      if (dialog) {
+        await sendMouse({
+          type: 'click',
+          position: [10, 10],
+        })
+      }
+      await waitUntil(() => !el.open)
+    })
+
+    it('should not close dialog when clicking outside if the gds-ui-state event is cancelled', async () => {
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog open heading="Test">Content</gds-dialog>`,
+      )
+      el.addEventListener('gds-ui-state', (event: any) => {
+        event.preventDefault()
+      })
+      // Simulate clicking outside the dialog
+      const dialog = el.shadowRoot?.querySelector('dialog')
+      if (dialog) {
+        await sendMouse({
+          type: 'click',
+          position: [10, 10],
+        })
+      }
+      await aTimeout(100) // Wait to see if the dialog closes
+      expect(el.open).to.be.true
+    })
+
+    it('should close dialog when pressing Escape key', async () => {
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog open heading="Test">Content</gds-dialog>`,
+      )
+
+      await sendKeys({ press: 'Escape' })
       await waitUntil(() => !el.open)
     })
   })

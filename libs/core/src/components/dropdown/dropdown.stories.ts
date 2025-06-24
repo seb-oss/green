@@ -12,11 +12,10 @@ import '../icon/icons/push.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/component-dropdown)
  *
- * A dropdown enables the user to choose one or multiple options from a list. It's ideal for
- * situations where there are numerous predetermined choices and space is limited.
+ * A dropdown enables the user to choose one or multiple options from a list.
  *
  * The dropdown can be searchable, allowing users to filter the options by typing in the input
- * field, and it also suports both single and multiple selection.
+ * field, and it also supports both single and multiple selection.
  */
 const meta: Meta = {
   title: 'Components/Dropdown',
@@ -322,16 +321,39 @@ export const Combobox: Story = {
   `,
 }
 
-export const Invalid: Story = {
+export const Validation: Story = {
   ...DefaultParams,
-  render: (args) => html`
+  render: () => html`
     <gds-dropdown
       label="Select tech"
       searchable
-      aria-invalid="true"
-      errorMessage="This field is required"
+      @change=${(e: any) => e.target.reportValidity()}
+      .validator=${{
+        validate: (el: any) => {
+          if (!el.value) {
+            return [
+              {
+                ...el.validity,
+                valid: false,
+                customError: true,
+              },
+              'Please select a technology',
+            ]
+          }
+          if (el.value === 'warp') {
+            return [
+              {
+                ...el.validity,
+                valid: false,
+                customError: true,
+              },
+              'Warp drive is not yet available',
+            ]
+          }
+        },
+      }}
     >
-      <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="" isplaceholder>Select a technology</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
       <gds-option value="nanotechnology">Nanotechnology</gds-option>

@@ -97,7 +97,7 @@ export class NggCellTableComponent {
   }
 
   // ------- TRACKBY FOR STREAM ------------
-  trackByrowId(_: any, b: TableRow) {
+  trackByRowId(_: any, b: TableRow) {
     return b.rowId
   }
   KeySelector(_: any, b: TableHeaderListItem) {

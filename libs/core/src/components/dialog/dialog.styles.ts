@@ -41,11 +41,15 @@ export const styles = css`
     }
 
     dialog.slide-out {
+      --_in: var(--gds-sys-space-l);
       width: 600px;
-      height: 100vh;
+      height: auto;
       inset: 0 0 0 auto;
       @starting-style {
         transform: translateX(96px);
+      }
+      @media (min-width: 648px) {
+        inset: var(--_in) var(--_in) var(--_in) auto;
       }
     }
 
@@ -65,8 +69,8 @@ export const styles = css`
     h2 {
       margin: 0;
       padding: 0;
-      font-size: 1.5rem;
-      font-weight: 450;
+      font-size: var(--gds-sys-text-size-heading-s);
+      font-weight: 400;
     }
   }
 `

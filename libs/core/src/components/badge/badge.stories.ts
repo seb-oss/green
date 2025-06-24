@@ -18,7 +18,7 @@ import '../icon/icons/triangle-exclamation.js'
 import '../icon/icons/plus-small.ts'
 
 /**
- * A badge is a small status or notification indicator that can be used to display a message or status.
+ * A compact visual indicator for status, counts and notifications.
  *
  * Features:
  * - **Variants**: The badge supports multiple variants including `information`, `notice`, `positive`, `warning`, and `negative`, allowing for different contextual uses.

@@ -125,13 +125,11 @@ export class GdsCoachmark extends GdsElement {
     this._isVisible = false
     this.#cardRef.value?.remove()
     this.#autoUpdateCleanupFn?.()
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open: this._isVisible, reason: 'closed' },
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      detail: { open: this._isVisible, reason: 'closed' },
+      bubbles: false,
+      composed: false,
+    })
   }
 
   #findTarget(selectors: string[]): HTMLElement | undefined {

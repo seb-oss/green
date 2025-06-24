@@ -18,10 +18,7 @@ import '../icon/icons/arrow-left.js'
 import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
- * A button serve as an interactive element that enables users to perform an action or make
- * a choice with a simple click or tap. To decide which kind of button/buttons and putting
- * them in the right order is key to make sure users know how to take the right action.
- * A good rule of thumb is to use only one primary action in each context.
+ * A button can be tapped or clicked to perform an action.
  */
 const meta: Meta = {
   title: 'Components/Button',

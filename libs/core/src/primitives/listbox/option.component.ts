@@ -139,14 +139,12 @@ export class GdsOption extends Focusable(GdsElement) {
 
   #emitSelect(e: MouseEvent | KeyboardEvent) {
     e.stopPropagation()
-    this.dispatchEvent(
-      new CustomEvent('gds-select', {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value: this.value,
-        },
-      }),
-    )
+    this.dispatchCustomEvent('gds-select', {
+      bubbles: true,
+      composed: true,
+      detail: {
+        value: this.value,
+      },
+    })
   }
 }

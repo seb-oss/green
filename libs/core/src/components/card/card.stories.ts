@@ -17,7 +17,7 @@ import '../icon/icons/arrow-right.js'
 import '../icon/icons/circles-three.js'
 
 /**
- * A container for content representing a single entity. e.g. a contact, article, or task.
+ * The card groups related content into a single container.
  *
  * `gds-card` inherits all properties from `gds-div`, but comes with some predefined defaults
  * and a shortcut property for specifiying different card variants.

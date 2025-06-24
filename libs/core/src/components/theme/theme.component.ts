@@ -71,19 +71,15 @@ export class GdsTheme extends GdsElement {
       )
     }
 
-    this.dispatchEvent(
-      new CustomEvent('gds-color-scheme-changed', {
-        detail: { colorScheme: this.colorScheme },
-      }),
-    )
+    this.dispatchCustomEvent('gds-color-scheme-changed', {
+      detail: { colorScheme: this.colorScheme },
+    })
   }
 
   @watch('designVersion')
   private _onDesignVersionChange() {
-    this.dispatchEvent(
-      new CustomEvent('gds-design-version-changed', {
-        detail: { designVersion: this.designVersion },
-      }),
-    )
+    this.dispatchCustomEvent('gds-design-version-changed', {
+      detail: { designVersion: this.designVersion },
+    })
   }
 }

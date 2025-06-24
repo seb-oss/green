@@ -87,13 +87,11 @@ export class GdsFormControlHeader extends GdsElement {
         : '0',
     )
 
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        bubbles: true,
-        composed: true,
-        detail: this.showExtendedSupportingText,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      bubbles: true,
+      composed: true,
+      detail: this.showExtendedSupportingText,
+    })
   }
 
   #renderExtSupTxt() {

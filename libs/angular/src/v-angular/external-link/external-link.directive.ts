@@ -20,7 +20,7 @@ export class NggvExternalLinkDirective implements OnInit {
     if (!this.external) return
     this.link.onClick = () => {
       // eslint-disable-next-line @typescript-eslint/dot-notation
-      window.location.href = this.link['commands'][0]
+      window.location.href = this.link['routerLink']?.toString() || ''
       return false
     }
   }

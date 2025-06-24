@@ -4,12 +4,14 @@ import { css, unsafeCSS } from 'lit'
 import base from '../../../dist/libs/tokens/2023/internal/variables.base.css?inline'
 import colorsDark from '../../../dist/libs/tokens/2023/internal/variables.dark.css?inline'
 import colorsLight from '../../../dist/libs/tokens/2023/internal/variables.light.css?inline'
+import shadows from '../../../dist/libs/tokens/2023/internal/variables.shadows.css?inline'
 import { GlobalStylesRegistry } from './utils/global-styles'
 
 const tokens = [
   css`
     :host {
       ${unsafeCSS(base)}
+      ${unsafeCSS(shadows)}
     }
   `,
 ]
@@ -21,6 +23,7 @@ GlobalStylesRegistry.instance.injectGlobalStyles(
     :root,
     :root[gds-theme='light'] {
       ${unsafeCSS(base)}
+      ${unsafeCSS(shadows)}
       ${unsafeCSS(colorsLight)}
     }
     :root[gds-theme='dark'] {

@@ -16,7 +16,7 @@ Names should be prefixed with `Gds` to indicate that they are part of a Green Co
 
 ### Class names
 
-Class names should be written in PascalCase, and should reflect the name of the component or feature that the class represents. For example, a class representing a button component should be named `GdsButton`. 
+Class names should be written in PascalCase, and should reflect the name of the component or feature that the class represents. For example, a class representing a button component should be named `GdsButton`.
 
 ### Custom element names
 
@@ -25,6 +25,12 @@ Custom element names should be written in kebab-case, and should reflect the nam
 ## Always extend GdsElement
 
 All components in Green Core should extend the `GdsElement` base class. Among some other minor things, this class adds the standard `gds-element` attribute to all components. Check the source code for more details.
+
+## Events
+
+Aim to use standard events when applicable, for example, a form control should dispatch a standard `input` event when the value is updated. In other cases, where you need to use a custom event, name it `gds-[custom-event-name]`.
+
+The GdsElement base class has event dispatch helper methods that should be used for all event dispatching. The helpers will automatically emit a CamelCased version of the event, so that it can be used in React and other frameworks that use CamelCase for event names. For example, if you dispatch a `gds-ui-state` event, the helper will also emit an `GdsUiState` event, which can be used as `onGdsUiState` in React.
 
 ## \# for private properties
 

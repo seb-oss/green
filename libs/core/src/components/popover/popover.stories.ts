@@ -14,7 +14,7 @@ import '../menu-button/index.ts'
 import { GdsPopover } from './index.ts'
 
 /**
- * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
+ * A popover is a temporary view that appears above other content.
  */
 const meta: Meta = {
   title: 'Components/Popover',

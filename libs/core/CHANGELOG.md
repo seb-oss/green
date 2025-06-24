@@ -1,5 +1,79 @@
 # Changelog
 
+## 1.85.2
+
+### Patch Changes
+
+- 020208a: **Alert:** Fix icon scoping issue
+- 14769a7: **Alert:** A few styling corrections
+
+## 1.85.1
+
+### Patch Changes
+
+- 00111cc: **Alert:** Fix icon import paths
+
+## 1.85.0
+
+### Minor Changes
+
+- e4eb1ad: **Alert:** Add new component
+
+### Patch Changes
+
+- 60e38d9: fix: popover focus improvements
+
+## 1.84.0
+
+### Minor Changes
+
+- 56d1779: **GdsElement:** Add event dispatch helpers for dispatching compatible events
+
+### Patch Changes
+
+- 55b23da: **Dialog:** Update design
+
+## 1.83.2
+
+### Patch Changes
+
+- c6833ae: **Datepicker:** Correction for value instance manipulation bug
+
+## 1.83.1
+
+### Patch Changes
+
+- 52c7407: **Datepicker:** Fix issue with month view getting stuck
+
+## 1.83.0
+
+### Minor Changes
+
+- 44dff87: **Dialog:** Close when click outside, unless event is cancelled
+- 73e0759: **Form Summary:** Update design and functionality
+
+  - Design updated to latest draft in Figma (not yet final)
+  - Make reactive mode optional, so that the behavior can be more easily adapted to different contexts
+  - Make it possible to use with native form controls by using data-attributes
+
+### Patch Changes
+
+- 1aa919a: **Form controls:** Fix issue with initial value not registered with owning form
+- 41b8a90: **Dropdown:** Fix aria-label issue when custom trigger template is used
+- 4d4704b: **Tokens:** Fix missing shadow tokens
+- f1ceb54: **Datepicker:** Make `value` always return a new Date instance
+
+## 1.82.0
+
+### Minor Changes
+
+- 04043ea: **Form control footer:** Hide visually when there is no error message
+
+### Patch Changes
+
+- 9e55957: **Core**: popover causing dropdown to flicker on select
+- 24483a8: **Datepicker:** Fix focus color of the date part spinners
+
 ## 1.81.0
 
 ### Minor Changes

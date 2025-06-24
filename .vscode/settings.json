@@ -1,14 +1,13 @@
 {
   "jest.jestCommandLine": "yarn test:all",
-  "eslint.validate": [
-    "json"
-  ],
+  "eslint.validate": ["json"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "prettier.configPath": "prettier.config.mjs",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "workbench.editor.customLabels.patterns": {
     "**/app/**": "${dirname}/${filename}",
-    "**/libs/core/src/components/**": "core/${dirname}/${filename}.${extname}",
+    "**/libs/core/src/components/**": "core/${dirname}/${filename}.${extname}"
   },
+  "nxConsole.generateAiAgentRules": true
 }
