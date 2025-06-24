@@ -14,7 +14,7 @@ Install with npm:
 npm install @sebgroup/fonts --save
 ```
 
-Include `@sepgroup/fonts/scss/gds-fonts.scss` or `@sepgroup/fonts/css/fonts.css` to your project. When importing the SCSS file, you can set the `$seb-font-path` variable to suite your needs. Check the source code to see how it is applied.
+Include `@sebgroup/fonts/scss/gds-fonts.scss` or `@sebgroup/fonts/css/fonts.css` to your project. When importing the SCSS file, you can set the `$seb-font-path` variable to suite your needs. Check the source code to see how it is applied.
 
 ## Legal notice and usage
 

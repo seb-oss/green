@@ -1,6 +1,6 @@
 # `@sebgroup/extract`
 
-Extract is considered deprectaed in favor of implementing shared functionality as Web Components. See https://github.com/seb-oss/green/tree/main/libs/core
+Extract is considered deprecated in favor of implementing shared functionality as Web Components. See https://github.com/seb-oss/green/tree/main/libs/core
 
 ---
 
@@ -14,7 +14,7 @@ then extracting the common logic.
 ### The look
 
 Step one is always creating CSS and HTML for your component in Chlorophyll.
-We use Storybook to visualise the component in various states so that we can
+We use Storybook to visualize the component in various states so that we can
 track progress and continuously check that it adheres to design guidelines.
 Read more in https://github.com/seb-oss/green/libs/chlorophyll
 
@@ -93,5 +93,5 @@ export const createCalculator = (listener: (data: CalculatorData) => void, optio
 All interactions with the calculator is done through pure functions with no
 side effects using a reducer pattern (basically a data structure goes in and
 a new, changed data structure comes out). These are easily testable. The
-resulting updated data model is communicated to the framewoek of choice which
+resulting updated data model is communicated to the framework of choice which
 can then re-render making it easily bindable.
