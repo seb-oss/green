@@ -109,7 +109,7 @@
         class="gds-field"
         autocomplete="off"
         [attr.name]="name"
-        [attr.required]="required ? true : null"
+        [attr.required]="required || null"
         [readOnly]="readonly"
         [attr.role]="role"
         [attr.placeholder]="placeholder"
