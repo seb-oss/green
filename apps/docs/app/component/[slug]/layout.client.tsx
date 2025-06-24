@@ -77,13 +77,13 @@ export function ComponentLayoutClient({
   return (
     <Core.GdsFlex
       flex-direction="column"
-      gap="2xl"
+      gap="l"
       max-width="1000px"
       width="100%"
       margin="0 auto"
     >
-      <Core.GdsFlex flex-direction="column" gap="m" padding="0">
-        <Breadcrumbs slug={component.slug} title={component.title} />
+      <Breadcrumbs slug={component.slug} title={component.title} />
+      <Core.GdsFlex flex-direction="column" gap="s" padding="0">
         <Core.GdsText tag="h1" font-size="heading-xl">
           {component.title}
         </Core.GdsText>
@@ -152,74 +152,76 @@ export function ComponentLayoutClient({
         )}
       </Core.GdsFlex>
       <Core.GdsGrid columns="12" gap="l" width="100%">
-        <Core.GdsFlex flex-direction="column" gap="m" grid-column="1/10">
-          <Core.GdsTheme color-scheme={currentTheme}>
-            <Core.GdsCard
-              height="280px"
-              justify-content="center"
-              align-items="center"
-              position="relative"
-              overflow="hidden"
-              padding="0"
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}
-            >
-              {component.hero_snippet && (
-                <Snippet slug={component.hero_snippet?.toString()} />
-              )}
-              {!hasAdditionalContent && (
-                <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
-                  <Core.GdsLink
-                    href={
-                      'https://storybook.seb.io/latest/core/?path=/docs/components-' +
-                      slug +
-                      '--docs'
-                    }
-                    target="_blank"
-                  >
-                    <Core.GdsFlex
-                      margin="0 0 0 auto"
-                      align-items="center"
-                      gap="s"
-                      padding="m l"
+        <Core.GdsFlex flex-direction="column" gap="xl" grid-column="1/10">
+          <Core.GdsFlex flex-direction="column" gap="s">
+            <Core.GdsTheme color-scheme={currentTheme}>
+              <Core.GdsCard
+                height="280px"
+                justify-content="center"
+                align-items="center"
+                position="relative"
+                overflow="hidden"
+                padding="0"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {component.hero_snippet && (
+                  <Snippet slug={component.hero_snippet?.toString()} />
+                )}
+                {!hasAdditionalContent && (
+                  <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
+                    <Core.GdsLink
+                      href={
+                        'https://storybook.seb.io/latest/core/?path=/docs/components-' +
+                        slug +
+                        '--docs'
+                      }
+                      target="_blank"
                     >
-                      <Core.GdsFlex align-items="center" gap="3xs">
-                        <Core.IconBrandStorybook size="s" color="primary" />
-                        API Docs
+                      <Core.GdsFlex
+                        margin="0 0 0 auto"
+                        align-items="center"
+                        gap="s"
+                        padding="m l"
+                      >
+                        <Core.GdsFlex align-items="center" gap="3xs">
+                          <Core.IconBrandStorybook size="s" color="primary" />
+                          API Docs
+                        </Core.GdsFlex>
+                        <Core.IconSquareArrowTopRight size="s" />
                       </Core.GdsFlex>
-                      <Core.IconSquareArrowTopRight size="s" />
-                    </Core.GdsFlex>
-                  </Core.GdsLink>
-                </Core.GdsDiv>
-              )}
+                    </Core.GdsLink>
+                  </Core.GdsDiv>
+                )}
 
-              {isHovered && (
-                <Core.GdsFlex
-                  justify-content="space-between"
-                  align-items="center"
-                  width="max-content"
-                  position="absolute"
-                  inset="20px 20px auto auto"
-                >
-                  <Core.GdsButton
-                    rank="tertiary"
-                    size="xs"
-                    onClick={toggleTheme}
+                {isHovered && (
+                  <Core.GdsFlex
+                    justify-content="space-between"
+                    align-items="center"
+                    width="max-content"
+                    position="absolute"
+                    inset="20px 20px auto auto"
                   >
-                    {currentTheme === 'light' ? (
-                      <Core.IconMoon size="s" />
-                    ) : (
-                      <Core.IconSun size="s" />
-                    )}
-                  </Core.GdsButton>
-                </Core.GdsFlex>
-              )}
-            </Core.GdsCard>
-          </Core.GdsTheme>
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="xs"
+                      onClick={toggleTheme}
+                    >
+                      {currentTheme === 'light' ? (
+                        <Core.IconMoon size="s" />
+                      ) : (
+                        <Core.IconSun size="s" />
+                      )}
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                )}
+              </Core.GdsCard>
+            </Core.GdsTheme>
 
-          {!isLayoutComponent && hasAdditionalContent && (
-            <Tabs slug={component.slug} />
-          )}
+            {!isLayoutComponent && hasAdditionalContent && (
+              <Tabs slug={component.slug} />
+            )}
+          </Core.GdsFlex>
 
           {section === 'overview' && (component.preamble || anatomyImage) && (
             <Core.GdsFlex flex-direction="column" gap="2xl">

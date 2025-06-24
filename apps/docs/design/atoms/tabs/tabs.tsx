@@ -37,7 +37,7 @@ export default function Tabs({ slug }: TabsProps) {
       padding="0"
       overflow="hidden"
       inset="70px 0 0 0"
-      margin="0 0 2xl 0"
+      margin="0"
       border-radius="xs"
       border="0"
       variant="primary"
