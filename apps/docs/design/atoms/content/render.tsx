@@ -28,7 +28,7 @@ export function Render({
   if (!content || !Array.isArray(content)) return null
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="2xl" width="100%">
+    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%">
       {content.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="s">
           {section.title && (
@@ -50,7 +50,7 @@ export function Render({
           {section.columns && (
             <Core.GdsGrid
               columns={`1; s{${section.cols == '3' ? '2' : '1'}}; m{${section.cols || '2'}}`}
-              gap="2xl; m{m}"
+              gap="2xl; m{4xl m}"
               max-width="100%"
             >
               {section.columns.map((column, colIndex) => (
