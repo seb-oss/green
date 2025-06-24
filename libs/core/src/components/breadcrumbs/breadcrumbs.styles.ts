@@ -12,7 +12,7 @@ const style = css`
       align-items: center;
       width: max-content;
       gap: var(--gds-sys-space-s);
-      font: var(--gds-sys-text-detail-m);
+      font: var(--gds-sys-text-detail-book-m);
     }
 
     .size-small {
