@@ -79,9 +79,9 @@ export default function Sidebar() {
   const { actions: SettingsActions } = useSettingsContext()
 
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({
-    components: false,
-    templates: false,
-    foundation: false,
+    components: pathName.startsWith('/component/'),
+    templates: pathName.startsWith('/template/'),
+    foundation: pathName.startsWith('/foundation/'),
   })
 
   const toggleSection = (section: string) => {
@@ -172,7 +172,10 @@ export default function Sidebar() {
                   key={item.href}
                   component="button"
                   href={item.href}
-                  rank={pathName === item.href ? 'secondary' : 'tertiary'}
+                  // rank={pathName === item.href ? 'secondary' : 'tertiary'}
+                  rank={
+                    pathName.startsWith(item.href) ? 'secondary' : 'tertiary'
+                  }
                   justify-content="space-between"
                   size="small"
                   style={{ paddingLeft: '42px' }}

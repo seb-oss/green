@@ -7,6 +7,7 @@ import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
+import { TableOfContents } from '../../../design/atoms/contents/contents'
 import Figure from '../../../design/atoms/figure/figure'
 import { Link } from '../../../design/atoms/link/link'
 import { Similar } from '../../../design/atoms/similar/similar'
@@ -77,7 +78,7 @@ export function ComponentLayoutClient({
     <Core.GdsFlex
       flex-direction="column"
       gap="2xl"
-      max-width="840px"
+      max-width="1000px"
       width="100%"
       margin="0 auto"
     >
@@ -149,149 +150,159 @@ export function ComponentLayoutClient({
             ))}
           </Core.GdsFlex>
         )}
-        <Core.GdsTheme color-scheme={currentTheme}>
-          <Core.GdsCard
-            height="280px"
-            justify-content="center"
-            align-items="center"
-            position="relative"
-            overflow="hidden"
-            padding="0"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {component.hero_snippet && (
-              <Snippet slug={component.hero_snippet?.toString()} />
-            )}
-            {!hasAdditionalContent && (
-              <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
-                <Core.GdsLink
-                  href={
-                    'https://storybook.seb.io/latest/core/?path=/docs/components-' +
-                    slug +
-                    '--docs'
-                  }
-                  target="_blank"
-                >
-                  <Core.GdsFlex
-                    margin="0 0 0 auto"
-                    align-items="center"
-                    gap="s"
-                    padding="m l"
-                  >
-                    <Core.GdsFlex align-items="center" gap="3xs">
-                      <Core.IconBrandStorybook size="s" color="primary" />
-                      API Docs
-                    </Core.GdsFlex>
-                    <Core.IconSquareArrowTopRight size="s" />
-                  </Core.GdsFlex>
-                </Core.GdsLink>
-              </Core.GdsDiv>
-            )}
-
-            {isHovered && (
-              <Core.GdsFlex
-                justify-content="space-between"
-                align-items="center"
-                width="max-content"
-                position="absolute"
-                inset="20px 20px auto auto"
-              >
-                <Core.GdsButton rank="tertiary" size="xs" onClick={toggleTheme}>
-                  {currentTheme === 'light' ? (
-                    <Core.IconMoon size="s" />
-                  ) : (
-                    <Core.IconSun size="s" />
-                  )}
-                </Core.GdsButton>
-              </Core.GdsFlex>
-            )}
-          </Core.GdsCard>
-        </Core.GdsTheme>
-        {!isLayoutComponent && hasAdditionalContent && (
-          <Tabs slug={component.slug} />
-        )}
       </Core.GdsFlex>
-
-      {section === 'overview' && (component.preamble || anatomyImage) && (
-        <Core.GdsFlex flex-direction="column" gap="2xl">
-          {component.preamble && (
-            <Core.GdsText tag="p" font-size="heading-s" max-width="100ch">
-              {component.preamble}
-            </Core.GdsText>
-          )}
-          {component.compare && (
-            <Versus
-              compare={component.compare.toLocaleLowerCase()}
-              current={slug}
-            />
-          )}
-          {component.anatomy && anatomyImage && (
-            <Core.GdsFlex flex-direction="column" gap="m">
-              <Core.GdsText tag="h2">Anatomy</Core.GdsText>
-              {component['anatomy-overview'] && (
-                <Core.GdsRichText>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: component['anatomy-overview']
-                        ? marked.parse(component['anatomy-overview'], {
-                            async: false,
-                          })
-                        : '',
-                    }}
-                  />
-                </Core.GdsRichText>
+      <Core.GdsGrid columns="12" gap="l" width="100%">
+        <Core.GdsFlex flex-direction="column" gap="m" grid-column="1/10">
+          <Core.GdsTheme color-scheme={currentTheme}>
+            <Core.GdsCard
+              height="280px"
+              justify-content="center"
+              align-items="center"
+              position="relative"
+              overflow="hidden"
+              padding="0"
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              {component.hero_snippet && (
+                <Snippet slug={component.hero_snippet?.toString()} />
               )}
-              <Figure
-                id={anatomyImage.svg}
-                caption={`Anatomy of ${component.title.toLowerCase()}`}
-              />
-              {component['anatomy-details'] && (
-                <Core.GdsDiv margin="m 0 0 0">
-                  <Core.GdsRichText>
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: component['anatomy-details']
-                          ? marked.parse(component['anatomy-details'], {
-                              async: false,
-                            })
-                          : '',
-                      }}
-                    />
-                  </Core.GdsRichText>
+              {!hasAdditionalContent && (
+                <Core.GdsDiv position="absolute" inset="auto 0 0 auto">
+                  <Core.GdsLink
+                    href={
+                      'https://storybook.seb.io/latest/core/?path=/docs/components-' +
+                      slug +
+                      '--docs'
+                    }
+                    target="_blank"
+                  >
+                    <Core.GdsFlex
+                      margin="0 0 0 auto"
+                      align-items="center"
+                      gap="s"
+                      padding="m l"
+                    >
+                      <Core.GdsFlex align-items="center" gap="3xs">
+                        <Core.IconBrandStorybook size="s" color="primary" />
+                        API Docs
+                      </Core.GdsFlex>
+                      <Core.IconSquareArrowTopRight size="s" />
+                    </Core.GdsFlex>
+                  </Core.GdsLink>
                 </Core.GdsDiv>
+              )}
+
+              {isHovered && (
+                <Core.GdsFlex
+                  justify-content="space-between"
+                  align-items="center"
+                  width="max-content"
+                  position="absolute"
+                  inset="20px 20px auto auto"
+                >
+                  <Core.GdsButton
+                    rank="tertiary"
+                    size="xs"
+                    onClick={toggleTheme}
+                  >
+                    {currentTheme === 'light' ? (
+                      <Core.IconMoon size="s" />
+                    ) : (
+                      <Core.IconSun size="s" />
+                    )}
+                  </Core.GdsButton>
+                </Core.GdsFlex>
+              )}
+            </Core.GdsCard>
+          </Core.GdsTheme>
+
+          {!isLayoutComponent && hasAdditionalContent && (
+            <Tabs slug={component.slug} />
+          )}
+
+          {section === 'overview' && (component.preamble || anatomyImage) && (
+            <Core.GdsFlex flex-direction="column" gap="2xl" margin="m 0 0 0">
+              {component.preamble && (
+                <Core.GdsText tag="p" font-size="heading-s" max-width="100ch">
+                  {component.preamble}
+                </Core.GdsText>
+              )}
+              {component.compare && (
+                <Versus
+                  compare={component.compare.toLocaleLowerCase()}
+                  current={slug}
+                />
+              )}
+              {component.anatomy && anatomyImage && (
+                <Core.GdsFlex flex-direction="column" gap="m">
+                  <Core.GdsText tag="h2">Anatomy</Core.GdsText>
+                  {component['anatomy-overview'] && (
+                    <Core.GdsRichText>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: component['anatomy-overview']
+                            ? marked.parse(component['anatomy-overview'], {
+                                async: false,
+                              })
+                            : '',
+                        }}
+                      />
+                    </Core.GdsRichText>
+                  )}
+                  <Figure
+                    id={anatomyImage.svg}
+                    caption={`Anatomy of ${component.title.toLowerCase()}`}
+                  />
+                  {component['anatomy-details'] && (
+                    <Core.GdsDiv margin="m 0 0 0">
+                      <Core.GdsRichText>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: component['anatomy-details']
+                              ? marked.parse(component['anatomy-details'], {
+                                  async: false,
+                                })
+                              : '',
+                          }}
+                        />
+                      </Core.GdsRichText>
+                    </Core.GdsDiv>
+                  )}
+                </Core.GdsFlex>
               )}
             </Core.GdsFlex>
           )}
+          {children}
+          {isLayoutComponent && section === 'overview' && (
+            <Core.GdsCard variant="positive" border-radius="m">
+              <Core.GdsFlex flex-direction="column" gap="m" max-width="90ch">
+                <Core.GdsText font-size="display-s">
+                  Declarative Layout Component
+                </Core.GdsText>
+                <Core.GdsText font-size="heading-xs" max-width="80ch">
+                  A micro-frontend optimized layout system using style
+                  expressions, Generates encapsulated CSS in shadow DOM for
+                  responsive layouts without utility classes.
+                </Core.GdsText>
+                <Link
+                  component="button"
+                  href="/foundation/layout"
+                  rank="secondary"
+                  justify-content="flex-start"
+                  width="max-content"
+                  variant="positive"
+                >
+                  Learn more about layouts
+                  <Core.IconArrowRight slot="trail" />
+                </Link>
+              </Core.GdsFlex>
+            </Core.GdsCard>
+          )}
+          <Similar tag={firstTag} currentSlug={component.slug} />
         </Core.GdsFlex>
-      )}
-      {children}
-      {isLayoutComponent && section === 'overview' && (
-        <Core.GdsCard variant="positive" border-radius="m">
-          <Core.GdsFlex flex-direction="column" gap="m" max-width="90ch">
-            <Core.GdsText font-size="display-s">
-              Declarative Layout Component
-            </Core.GdsText>
-            <Core.GdsText font-size="heading-xs" max-width="80ch">
-              A micro-frontend optimized layout system using style expressions,
-              Generates encapsulated CSS in shadow DOM for responsive layouts
-              without utility classes.
-            </Core.GdsText>
-            <Link
-              component="button"
-              href="/foundation/layout"
-              rank="secondary"
-              justify-content="flex-start"
-              width="max-content"
-              variant="positive"
-            >
-              Learn more about layouts
-              <Core.IconArrowRight slot="trail" />
-            </Link>
-          </Core.GdsFlex>
-        </Core.GdsCard>
-      )}
-      <Similar tag={firstTag} currentSlug={component.slug} />
+        <TableOfContents component={component} section={section} />
+      </Core.GdsGrid>
     </Core.GdsFlex>
   )
 }

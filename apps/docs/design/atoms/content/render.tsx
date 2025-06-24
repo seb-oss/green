@@ -61,7 +61,10 @@ export function Render({
       {content.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="s">
           {section.title && (
-            <Core.GdsText tag={section.tag || 'h2'}>
+            <Core.GdsText
+              tag={section.tag || 'h2'}
+              id={section.title.toLowerCase().replace(/\s+/g, '-')}
+            >
               {section.title}
             </Core.GdsText>
           )}
