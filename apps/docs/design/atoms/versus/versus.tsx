@@ -41,7 +41,7 @@ export default function Versus({ compare, current }: VersusProps) {
               )}
             </Core.GdsFlex>
             {compareComponent.summary && (
-              <Core.GdsText color="secondary">
+              <Core.GdsText color="secondary" tag="p">
                 {compareComponent.summary}
               </Core.GdsText>
             )}
@@ -68,7 +68,7 @@ export default function Versus({ compare, current }: VersusProps) {
               )}
             </Core.GdsFlex>
             {currentComponent.summary && (
-              <Core.GdsText color="secondary">
+              <Core.GdsText color="secondary" tag="p">
                 {currentComponent.summary}
               </Core.GdsText>
             )}

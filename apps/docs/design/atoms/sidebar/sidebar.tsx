@@ -142,6 +142,7 @@ export default function Sidebar() {
           subItems = components.map((c) => ({
             title: c.title,
             href: `/component/${c.slug}`,
+            beta: c.beta,
           }))
         } else if (link.slug === 'templates') {
           subItems = templates.map((t) => ({
@@ -172,13 +173,18 @@ export default function Sidebar() {
                   component="button"
                   href={item.href}
                   rank={pathName === item.href ? 'secondary' : 'tertiary'}
-                  justify-content="flex-start"
+                  justify-content="space-between"
                   size="small"
                   style={{ paddingLeft: '42px' }}
                   data-animation="scroll"
                   flex="1"
                 >
                   <span data-fade>{item.title}</span>
+                  {false && item.beta && (
+                    <Core.GdsBadge variant="notice" slot="trail" size="small">
+                      BETA
+                    </Core.GdsBadge>
+                  )}
                 </Link>
               ))}
             </Core.GdsFlex>
@@ -219,7 +225,7 @@ export default function Sidebar() {
       gap="4xl"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding={isOpen ? '2xl xs l s' : '2xl xs l m'}
-      min-width={isOpen ? '240px' : '80px'}
+      min-width={isOpen ? '260px' : '80px'}
       width={isOpen ? '100%; s{240px}' : 'max-content'}
       position="relative; s{sticky}"
       inset="0; s{90px auto auto auto}"
