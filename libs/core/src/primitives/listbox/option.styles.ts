@@ -13,7 +13,7 @@ const style = css`
       align-items: center;
       user-select: none;
       padding-inline: var(--gds-sys-space-m);
-      padding-block: var(--gds-sys-space-m);
+      padding-block: var(--gds-sys-space-s);
       cursor: pointer;
       font: var(--gds-sys-text-detail-book-m);
       gap: 1ch;
@@ -35,12 +35,16 @@ const style = css`
     }
 
     :host([highlighted]) {
-      background-color: var(--gds-sys-color-l2-background-tertiary);
-      color: var(--gds-sys-color-l2-content-tertiary);
+      background-color: var(--gds-sys-color-l3-02);
+      color: var(--gds-sys-color-content-01);
     }
 
     :host(:hover:not([highlighted])) div {
-      background-color: var(--gds-sys-color-l3-02);
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-02),
+        var(--gds-sys-color-state-light-hover)
+      );
     }
 
     :host(:focus-visible) {
@@ -72,10 +76,9 @@ const style = css`
 
       &.checked {
         background-color: currentColor;
-
         gds-icon-checkmark {
           &::part(icon) {
-            color: var(--gds-sys-color-l2-content-tertiary);
+            color: var(--gds-sys-color-content-01);
             stroke-width: var(--gds-sys-space-2xs);
           }
         }

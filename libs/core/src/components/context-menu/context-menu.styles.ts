@@ -9,7 +9,7 @@ const style = css`
     button {
       display: flex;
       border-width: 0;
-      background-color: #ededed;
+      background-color: var(--gds-sys-color-l3-02);
       border-radius: calc(1px * infinity);
       padding: 0.4rem 0.8rem;
       font-family: inherit;
@@ -19,7 +19,11 @@ const style = css`
     }
 
     button:hover {
-      background-color: #dcdcdc;
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-02),
+        var(--gds-sys-color-state-light-hover)
+      );
     }
   }
 `

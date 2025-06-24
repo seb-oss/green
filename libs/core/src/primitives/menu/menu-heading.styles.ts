@@ -8,7 +8,7 @@ const style = css`
       color: var(--gds-sys-color-content-02);
       background-color: var(--gds-sys-color-l3-02);
       font: var(--gds-sys-text-label-input-medium);
-      padding-inline: var(--gds-sys-space-m);
+      padding-inline: var(--gds-sys-space-s);
       padding-block: var(--gds-sys-space-xs);
     }
   }
