@@ -40,7 +40,7 @@ const style = css`
       line-height: inherit;
       border: none;
       outline: none;
-      color: var(--gds-sys-color-l3-content-disabled);
+      color: var(--gds-sys-color-content-disabled-01);
       border-color: var(--gds-sys-color-l3-border-tertiary);
       border-width: 0 0 var(--gds-sys-space-4xs) 0;
       border-style: solid;
@@ -59,7 +59,7 @@ const style = css`
       &::placeholder {
         font-family: inherit;
         font-weight: var(--gds-sys-text-weight-book);
-        color: var(--gds-sys-color-l3-content-disabled);
+        color: var(--gds-sys-color-content-disabled-01);
       }
     }
 

@@ -46,7 +46,7 @@ export const styles = css`
       background-color: color-mix(
         in srgb,
         transparent,
-        var(--gds-sys-color-l3-states-light-hover)
+        var(--gds-sys-color-state-light-hover)
       );
     }
 

@@ -16,7 +16,7 @@ export const styles = css`
       gap: var(--gds-sys-space-xs);
       margin-top: var(--gds-sys-space-2xs);
       font: var(--gds-sys-text-detail-s);
-      color: var(--gds-sys-color-l3-content-negative);
+      color: var(--gds-sys-color-content-negative-01);
     }
 
     [gds-element^='gds-icon'] {

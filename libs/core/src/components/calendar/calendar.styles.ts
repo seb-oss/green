@@ -58,7 +58,7 @@ const style = css`
         }
 
         &.disabled {
-          color: var(--gds-sys-color-l3-content-disabled);
+          color: var(--gds-sys-color-content-disabled-01);
           cursor: not-allowed;
         }
 
