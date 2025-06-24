@@ -27,13 +27,7 @@ export default function Versus({ compare, current }: VersusProps) {
         {compareComponent.title} vs. {currentComponent.title}
       </Core.GdsText>
       <Core.GdsGrid columns="2" gap="m">
-        <Core.GdsCard
-          variant="primary"
-          padding="l"
-          gap="s"
-          border-radius="s"
-          onClick={() => router.push(`/component/${compareComponent.slug}`)}
-        >
+        <Core.GdsCard variant="primary" padding="l" gap="s" border-radius="s">
           <Core.GdsFlex flex-direction="column" gap="s" height="100%">
             <Core.GdsFlex
               justify-content="space-between"
