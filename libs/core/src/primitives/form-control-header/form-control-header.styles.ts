@@ -8,7 +8,7 @@ export const styles = css`
       justify-content: space-between;
       align-items: center;
       font: var(--gds-sys-text-detail-book-m);
-      color: var(--gds-sys-color-l2-content-primary);
+      color: var(--gds-sys-color-content-01);
 
       & > div {
         display: flex;
@@ -34,8 +34,8 @@ export const styles = css`
       transition-property: all;
       font: var(--gds-sys-text-body-s);
       border-radius: var(--gds-sys-space-xs);
-      background-color: var(--gds-sys-color-l3-background-secondary);
-      color: var(--gds-sys-color-l3-content-tertiary);
+      background-color: var(--gds-sys-color-l3-02);
+      color: var(--gds-sys-color-content-01);
       max-height: var(--_max-height);
 
       &[aria-hidden='false'] {

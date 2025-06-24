@@ -40,7 +40,7 @@ const style = css`
     }
 
     :host(:hover:not([highlighted])) div {
-      background-color: var(--gds-sys-color-l3-background-secondary);
+      background-color: var(--gds-sys-color-l3-02);
     }
 
     :host(:focus-visible) {

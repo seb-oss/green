@@ -12,7 +12,7 @@ export const styles = css`
   }
 
   :host(:invalid) {
-    --_radio-label-color: var(--gds-sys-color-l3-content-negative);
+    --_radio-label-color: var(--gds-sys-color-content-negative-01);
   }
 
   :host([size='small']) {

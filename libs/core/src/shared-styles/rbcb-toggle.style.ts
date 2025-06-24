@@ -16,12 +16,12 @@ export default css`
 
     --_perimeter-bg-mix: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-secondary),
-      var(--gds-sys-color-l3-states-light-hover)
+      var(--gds-sys-color-l3-02),
+      var(--gds-sys-color-state-light-hover)
     );
     --_perimeter-bg-mix-active: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-secondary),
+      var(--gds-sys-color-l3-02),
       var(--gds-sys-color-l3-states-light-pressed)
     );
 
@@ -106,7 +106,7 @@ export default css`
 
   .--invalid.--indeterminate .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-negative);
+      var(--gds-sys-color-border-negative-01);
   }
 
   .--disabled {
@@ -115,36 +115,36 @@ export default css`
 
   .--disabled .rbcb__toggle {
     box-shadow: none;
-    background-color: var(--gds-sys-color-l3-content-disabled);
+    background-color: var(--gds-sys-color-content-disabled-01);
   }
 
   .--invalid .rbcb__toggle {
-    background-color: var(--gds-sys-color-l3-background-negative-secondary);
+    background-color: var(--gds-sys-color-l3-negative-02);
     box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-negative);
+      var(--gds-sys-color-border-negative-01);
   }
 
   .--invalid.--checked .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-negative);
+      var(--gds-sys-color-border-negative-01);
   }
 
   .--invalid .rbcb__perimeter {
-    outline-color: var(--gds-sys-color-l3-border-negative);
+    outline-color: var(--gds-sys-color-border-negative-01);
     --_perimeter-bg-mix: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-negative-secondary),
-      var(--gds-sys-color-l3-states-negative-hover)
+      var(--gds-sys-color-l3-negative-02),
+      var(--gds-sys-color-state-negative-hover)
     );
     --_perimeter-bg-mix-active: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-negative-secondary),
+      var(--gds-sys-color-l3-negative-02),
       var(--gds-sys-color-l3-states-negative-pressed)
     );
   }
 
   .--invalid .rbcb__icon {
-    color: var(--gds-sys-color-l3-content-negative);
+    color: var(--gds-sys-color-content-negative-01);
   }
 
   :host(:focus-visible) .rbcb__perimeter {

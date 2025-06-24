@@ -75,7 +75,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-l3-states-light-hover)
+          var(--gds-sys-color-state-light-hover)
         );
         --_color-border: var(--gds-sys-color-l3-border-secondary);
       }
@@ -84,7 +84,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-l3-states-light-hover)
+          var(--gds-sys-color-state-light-hover)
         );
         --_color-border: var(--gds-sys-color-l3-border-primary);
       }
@@ -120,7 +120,7 @@ const style = css`
 
   :disabled {
     border-color: var(--_color-bg);
-    color: var(--gds-sys-color-l3-content-disabled);
+    color: var(--gds-sys-color-content-disabled-01);
     pointer-events: none;
   }
 

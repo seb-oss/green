@@ -1,6 +1,6 @@
 @layer base {
   :host {
-    background-color: var(--gds-sys-color-l3-background-secondary);
+    background-color: var(--gds-sys-color-l3-02);
     border: 0.25rem solid transparent;
     border-radius: var(--gds-sys-space-max);
     box-sizing: border-box;
@@ -41,7 +41,7 @@
     aspect-ratio: 1;
     border-radius: var(--gds-sys-space-max);
     border-width: 0;
-    background-color: var(--gds-sys-color-l3-background-secondary);
+    background-color: var(--gds-sys-color-l3-02);
     color: var(--gds-sys-color-l3-content-tertiary);
     cursor: pointer;
     display: flex;
@@ -57,8 +57,8 @@
       &:hover {
         background-color: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-background-secondary),
-          var(--gds-sys-color-l3-states-light-hover)
+          var(--gds-sys-color-l3-02),
+          var(--gds-sys-color-state-light-hover)
         );
       }
     }

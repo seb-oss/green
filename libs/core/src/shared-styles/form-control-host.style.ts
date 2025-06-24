@@ -23,7 +23,7 @@ export default css`
   }
 
   :host([disabled]) {
-    color: var(--gds-sys-color-l3-content-disabled);
+    color: var(--gds-sys-color-content-disabled-01);
     pointer-events: none;
   }
 
