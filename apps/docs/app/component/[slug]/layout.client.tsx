@@ -12,6 +12,7 @@ import { Link } from '../../../design/atoms/link/link'
 import { Similar } from '../../../design/atoms/similar/similar'
 import { Snippet } from '../../../design/atoms/snippet/snippet'
 import Tabs from '../../../design/atoms/tabs/tabs'
+import Versus from '../../../design/atoms/versus/versus'
 import { useSettingsValue } from '../../../settings'
 import { useContent } from '../../../settings/content'
 
@@ -218,6 +219,12 @@ export function ComponentLayoutClient({
             <Core.GdsText tag="p" font-size="heading-s" max-width="100ch">
               {component.preamble}
             </Core.GdsText>
+          )}
+          {component.compare && (
+            <Versus
+              compare={component.compare.toLocaleLowerCase()}
+              current={slug}
+            />
           )}
           {component.anatomy && anatomyImage && (
             <Core.GdsFlex flex-direction="column" gap="m">

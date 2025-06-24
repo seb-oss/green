@@ -86,6 +86,7 @@ export interface ComponentContent extends BaseContent {
     ios?: boolean
     android?: boolean
   }
+  compare?: string
   // overview?: Array<{ column: ComponentSection[] }>
   overview?: ComponentSection[]
   'ux-text'?: { section: ComponentSection[] }
