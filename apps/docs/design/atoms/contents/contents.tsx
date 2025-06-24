@@ -43,7 +43,8 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
     // Extract h2 sections
     const extractedSections = sectionContent
       .filter(
-        (section) => section.title && (section.tag === 'h2' || !section.tag),
+        (section) => section.title,
+        // (section) => section.title && (section.tag === 'h2' || !section.tag),
       )
       .map((section) => ({
         id: section.title?.toLowerCase().replace(/\s+/g, '-') || '',
