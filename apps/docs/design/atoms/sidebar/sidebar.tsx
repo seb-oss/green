@@ -172,13 +172,15 @@ export default function Sidebar() {
                   key={item.href}
                   component="button"
                   href={item.href}
-                  // rank={pathName === item.href ? 'secondary' : 'tertiary'}
                   rank={
-                    pathName.startsWith(item.href) ? 'secondary' : 'tertiary'
+                    pathName === item.href ||
+                    pathName.startsWith(`${item.href}/`)
+                      ? 'secondary'
+                      : 'tertiary'
                   }
                   justify-content="space-between"
                   size="small"
-                  style={{ paddingLeft: '42px' }}
+                  data-sub-item
                   data-animation="scroll"
                   flex="1"
                 >

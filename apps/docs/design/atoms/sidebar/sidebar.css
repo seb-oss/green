@@ -27,6 +27,10 @@
       translate: 10px 0;
     }
   }
+
+  [data-sub-item] {
+    padding-left: 42px;
+  }
 }
 
 @keyframes ROW_SCROLL {
