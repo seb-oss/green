@@ -41,7 +41,7 @@ const style = css`
       border: none;
       outline: none;
       color: var(--gds-sys-color-content-disabled-01);
-      border-color: var(--gds-sys-color-l3-border-tertiary);
+      border-color: var(--gds-sys-color-border-interactive);
       border-width: 0 0 var(--gds-sys-space-4xs) 0;
       border-style: solid;
       width: 100%;
@@ -52,8 +52,8 @@ const style = css`
       font-family: inherit;
 
       &:focus {
-        border-color: var(--gds-sys-color-l3-border-secondary);
-        color: var(--gds-sys-color-l3-content-tertiary);
+        border-color: var(--gds-sys-color-border-interactive);
+        color: var(--gds-sys-color-content-01);
       }
 
       &::placeholder {

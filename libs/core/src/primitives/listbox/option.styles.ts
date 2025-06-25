@@ -5,7 +5,7 @@ const style = css`
 
   @layer base {
     :host(:not(:last-child)) {
-      border-bottom: 1px solid var(--gds-sys-color-l2-border-primary);
+      border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     }
 
     :host div {
@@ -15,7 +15,7 @@ const style = css`
       padding-inline: var(--gds-sys-space-m);
       padding-block: var(--gds-sys-space-s);
       cursor: pointer;
-      font: var(--gds-sys-text-detail-book-m);
+      font: var(--gds-sys-text-detail-book-regular-m);
       gap: 1ch;
       max-width: 100%;
       box-sizing: border-box;
