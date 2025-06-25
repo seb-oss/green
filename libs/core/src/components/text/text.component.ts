@@ -28,8 +28,8 @@ export class GdsText extends GdsDiv {
   tag = 'span'
 
   /**
-   * Style Expression Property that controls the `font-size` property.
-   * Supports all typography size tokens from the design system.
+   * Style Expression Property that controls the `font` property.
+   * Supports all font tokens from the design system.
    */
   @styleExpressionProperty({
     selector: '[tag]',

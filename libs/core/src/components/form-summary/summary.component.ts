@@ -120,11 +120,7 @@ export class GdsFormSummary extends GdsElement {
           aria-label=${msg(`Form error summary`)}
         >
           <gds-flex gap="0" flex-direction="column">
-            <gds-text
-              font-size="heading-xs"
-              font-weight="book"
-              id="description"
-            >
+            <gds-text font="heading-xs" font-weight="book" id="description">
               ${msg(
                 str`There are ${errorControls.length} errors to correct before you can continue:`,
               )}
@@ -161,7 +157,7 @@ export class GdsFormSummary extends GdsElement {
                         ${when(
                           !this.hideErrors,
                           () =>
-                            html`<gds-div font-size="body-s">
+                            html`<gds-div font="body-regular-s">
                               ${el.dataset.errormessage ||
                               el.errorMessage ||
                               (el as any).ariaErrorMessage}

@@ -134,7 +134,7 @@ export class GdsBadge extends withSizeXProps(
       border-radius="${this.notification || this.rounded ? 'max' : '2xs'}"
       block-size="${blockSize}"
       width="100%"
-      font-size="${this.size === 'small' || this.notification
+      font="${this.size === 'small' || this.notification
         ? 'detail-regular-xs'
         : 'detail-regular-s'}"
     >
