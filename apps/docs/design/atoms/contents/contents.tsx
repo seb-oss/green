@@ -83,7 +83,7 @@ export function TableOfContents({
 
     const contentSections: ContentSection[] = sectionContent
       .filter(
-        (section) => section.title && (!section.tag || section.tag === 'h2'),
+        (section) => section.title && (!section.tag || section.tag === 'H2'),
       )
       .map((section, index) => ({
         id: `section-${section.title?.toLowerCase().replace(/\s+/g, '-')}-${index}`,
