@@ -74,6 +74,10 @@ export function ComponentLayoutClient({
 
   const anatomyImage = component.images?.find((img) => img.id === 'anatomy')
 
+  const versus = component.compare
+    ? `${actions.getComponent(component.compare.toLowerCase())?.title} vs. ${component.title}`
+    : undefined
+
   return (
     <Core.GdsFlex
       flex-direction="column"
@@ -282,7 +286,11 @@ export function ComponentLayoutClient({
           grid-column="10/13"
           height="max-content"
         >
-          <TableOfContents component={component} section={section} />
+          <TableOfContents
+            component={component}
+            section={section}
+            versus={versus}
+          />
           {component.platform?.web && (
             <Core.GdsFlex gap="xs" flex-direction="column" padding="l">
               <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>

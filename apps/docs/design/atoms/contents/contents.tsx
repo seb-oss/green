@@ -11,6 +11,7 @@ import './contents.css'
 interface TableOfContentsProps {
   component: ComponentContent
   section: 'overview' | 'ux-text' | 'accessibility'
+  versus?: string
 }
 
 interface Section {
@@ -19,12 +20,15 @@ interface Section {
   active?: boolean
 }
 
-export function TableOfContents({ component, section }: TableOfContentsProps) {
+export function TableOfContents({
+  component,
+  section,
+  versus,
+}: TableOfContentsProps) {
   const [sections, setSections] = useState<Section[]>([])
   const [activeSection, setActiveSection] = useState<string>('component-top')
 
   useEffect(() => {
-    // Get the correct content based on section
     let sectionContent = []
     switch (section) {
       case 'overview':
@@ -42,7 +46,6 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
         break
     }
 
-    // Extract sections and order them properly
     const extractedSections = sectionContent
       .filter((section) => section.title)
       .map((section) => ({
@@ -51,21 +54,18 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
         active: false,
       }))
 
-    // Create initial sections array with component title first
     const initialSections: Section[] = [
       { id: 'component-top', title: component.title, active: true },
     ]
 
-    // Add versus section if it exists
-    if (component.compare) {
+    if (component.compare && versus) {
       initialSections.push({
         id: 'component-versus',
-        title: 'Versus',
+        title: versus,
         active: false,
       })
     }
 
-    // Add anatomy section if it exists
     if (component.anatomy) {
       initialSections.push({
         id: 'component-anatomy',
@@ -74,40 +74,38 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
       })
     }
 
-    // Add the rest of the sections
     setSections([...initialSections, ...extractedSections])
-  }, [component, section])
+  }, [component, section, versus])
 
   useEffect(() => {
-    // Intersection Observer setup
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id)
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 150 // Offset for header
+
+      sections.forEach((section) => {
+        const element = document.getElementById(section.id)
+        if (element) {
+          const { top, bottom } = element.getBoundingClientRect()
+          if (top <= 150 && bottom >= 150) {
+            setActiveSection(section.id)
           }
-        })
-      },
-      {
-        rootMargin: '-100px 0px -90% 0px',
-      },
-    )
+        }
+      })
+    }
 
-    // Observe all section elements
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id)
-      if (element) observer.observe(element)
-    })
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Initial check
 
-    return () => observer.disconnect()
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [sections])
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
-      const offset = 100 // 100px from top
+      setActiveSection(id)
+
+      const headerOffset = 100
       const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - offset
+      const offsetPosition = window.pageYOffset + elementPosition - headerOffset
 
       window.scrollTo({
         top: offsetPosition,
@@ -119,12 +117,19 @@ export function TableOfContents({ component, section }: TableOfContentsProps) {
   if (sections.length === 0) return null
 
   return (
-    <Core.GdsCard variant="secondary" padding="l xs m xs" height="max-content">
+    <Core.GdsCard
+      variant="secondary"
+      padding="l xs m xs"
+      position="sticky"
+      inset="90px auto auto auto"
+      grid-column="10/13"
+      height="max-content"
+    >
       <Core.GdsFlex flex-direction="column" gap="s">
         <Core.GdsFlex padding="0 0 0 m">
           <Core.GdsText tag="small">On this page</Core.GdsText>
         </Core.GdsFlex>
-        <Core.GdsFlex flex-direction="column" gap="2xs" overflow="auto">
+        <Core.GdsFlex flex-direction="column" gap="2xs">
           {sections.map((section) => (
             <Core.GdsButton
               key={section.id}
