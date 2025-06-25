@@ -262,6 +262,7 @@ export class GdsPopover extends GdsElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.#unregisterTriggerEvents()
+    window.removeEventListener('scroll', this.#handlePageScroll)
   }
 
   render() {
