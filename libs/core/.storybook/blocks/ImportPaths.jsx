@@ -41,29 +41,31 @@ export const ImportPaths = (props) => {
           </GdsSegment>
           <GdsSegment value="react">React JSX</GdsSegment>
         </GdsSegmentedControl>
-        {importInfo.map((info) => (
-          <div key={info.name}>
-            {viewSource === 'web' ? (
-              <Source
-                language="javascript"
-                dark
-                code={`import { ${info.name} } from '@sebgroup/green-core/pure'
+        {importInfo
+          .filter((info) => info.name !== '*')
+          .map((info) => (
+            <div key={info.name}>
+              {viewSource === 'web' ? (
+                <Source
+                  language="javascript"
+                  dark
+                  code={`import { ${info.name} } from '@sebgroup/green-core/pure'
             ${info.name}.define()
 
             // or, from direct path:
             import { ${info.name} } from '${info.path}'
             ${info.name}.define()`}
-              />
-            ) : (
-              <Source
-                language="javascript"
-                dark
-                code={`// This import can be used as a JSX element in React
+                />
+              ) : (
+                <Source
+                  language="javascript"
+                  dark
+                  code={`// This import can be used as a JSX element in React
               import { ${info.name} } from '@sebgroup/green-core/react'`}
-              />
-            )}
-          </div>
-        ))}
+                />
+              )}
+            </div>
+          ))}
       </GdsDiv>
     </GdsTheme>
   )
