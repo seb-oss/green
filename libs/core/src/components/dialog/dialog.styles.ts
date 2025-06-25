@@ -8,7 +8,7 @@ export const styles = css`
     }
 
     dialog {
-      transition: 0.3s;
+      transition: var(--gds-sys-motion-duration-fastest);
       background: transparent;
       padding: 0;
       border-width: 0;
@@ -26,7 +26,7 @@ export const styles = css`
       }
 
       &::backdrop {
-        transition: 0.3s;
+        transition: var(--gds-sys-motion-duration-fastest);
         background: rgba(100, 100, 100, 0.4);
       }
     }
