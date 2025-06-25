@@ -14,6 +14,8 @@ function importsFor(tagName) {
     m.declarations.find((d) => d.tagName === tagName),
   )
 
+  console.log(manifest)
+
   return manifest.exports.map((e) => ({
     name: e.declaration.name,
     path: manifest.path.replace(/src\//, '@sebgroup/green-core/'),
@@ -25,7 +27,12 @@ export const ImportPaths = (props) => {
   const [viewSource, setViewSource] = useState('web')
   const resolvedOf = useOf(of || 'meta')
 
+  console.log(resolvedOf.preparedMeta)
+
   const importInfo = importsFor(resolvedOf.preparedMeta.component)
+  const subComponents = Object.keys({
+    ...resolvedOf.preparedMeta.subcomponents,
+  })
 
   return (
     <GdsTheme designVersion="2023">
@@ -50,18 +57,18 @@ export const ImportPaths = (props) => {
                   language="javascript"
                   dark
                   code={`import { ${info.name} } from '@sebgroup/green-core/pure'
-            ${info.name}.define()
+${info.name}.define()
 
-            // or, from direct path:
-            import { ${info.name} } from '${info.path}'
-            ${info.name}.define()`}
+// or, from direct path:
+import { ${info.name} } from '${info.path}'
+${info.name}.define()`}
                 />
               ) : (
                 <Source
                   language="javascript"
                   dark
-                  code={`// This import can be used as a JSX element in React
-              import { ${info.name} } from '@sebgroup/green-core/react'`}
+                  code={`// Use as JSX element(s) in React
+import { ${info.name}${subComponents.length > 0 ? subComponents.map((subComp) => `, ${subComp}`) : ''} } from '@sebgroup/green-core/react'`}
                 />
               )}
             </div>
