@@ -53,7 +53,7 @@ await Promise.all(
               'color/css',
               'name/kebab',
               'color/mix-blend',
-              'shadow/css',
+              'shadow/css/shorthand',
               'font/css',
             ],
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/internal/`,
@@ -86,8 +86,11 @@ await Promise.all(
               },
               {
                 destination: `variables.shadows.css`,
-                format: 'css/shadows',
+                format: 'css/only-variables',
                 filter: 'is-shadow',
+                options: {
+                  usesDtcg: true,
+                },
               },
             ],
           },
@@ -121,6 +124,14 @@ await Promise.all(
                 format: 'css/variables',
                 filter: 'is-color-no-ref',
               },
+              {
+                destination: `variables.shadows.css`,
+                format: 'css/variables',
+                filter: 'is-shadow',
+                options: {
+                  usesDtcg: true,
+                },
+              },
             ],
           },
           scss: {
@@ -133,7 +144,7 @@ await Promise.all(
               'size/px',
               'color/css',
               'color/alpha',
-              'shadow/css',
+              'shadow/css/shorthand',
               'font/css',
             ],
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/scss/`,
@@ -163,6 +174,11 @@ await Promise.all(
                 destination: `variables.${colorScheme}.scss`,
                 format: 'scss/variables',
                 filter: 'is-color-no-ref',
+              },
+              {
+                destination: `variables.shadows.scss`,
+                format: 'scss/variables',
+                filter: 'is-shadow',
               },
             ],
           },

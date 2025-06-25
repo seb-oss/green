@@ -28,7 +28,8 @@ export function parseColorValue(
   const [colorName, transparency] = value.split('/')
 
   let colorVar: string
-  if (context === 'background') {
+
+  if (level && context === 'background') {
     colorVar = `var(--gds-sys-color-l${level}-${colorName})`
   } else {
     colorVar = `var(--gds-sys-color-${context}-${colorName})`

@@ -69,8 +69,7 @@ export const styles = css`
     h2 {
       margin: 0;
       padding: 0;
-      font-size: var(--gds-sys-text-size-heading-s);
-      font-weight: 400;
+      font: var(--gds-sys-text-heading-s);
     }
   }
 `
