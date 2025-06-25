@@ -20,7 +20,7 @@ registerTransitionalStyles()
 const meta: Meta = {
   title: 'Components/Context menu',
   component: 'gds-context-menu',
-  subcomponents: { MenuItem: 'gds-menu-item' },
+  subcomponents: { GdsMenuItem: 'gds-menu-item' },
   parameters: {
     layout: 'centered',
   },
