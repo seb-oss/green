@@ -22,7 +22,7 @@ export default function Versus({ compare, current }: VersusProps) {
   if (!compareComponent || !currentComponent) return null
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="m">
+    <Core.GdsFlex flex-direction="column" gap="m" id="component-versus">
       <Core.GdsText tag="h2">
         {compareComponent.title} vs. {currentComponent.title}
       </Core.GdsText>

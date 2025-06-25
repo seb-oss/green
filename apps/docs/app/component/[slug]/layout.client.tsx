@@ -84,50 +84,9 @@ export function ComponentLayoutClient({
     >
       <Breadcrumbs slug={component.slug} title={component.title} />
       <Core.GdsFlex flex-direction="column" gap="s" padding="0">
-        <Core.GdsText tag="h1" font-size="heading-xl">
+        <Core.GdsText tag="h1" font-size="heading-xl" id="component-top">
           {component.title}
         </Core.GdsText>
-        {(component.beta || component.platform?.web) && (
-          <Core.GdsFlex gap="l">
-            {component.beta && (
-              <Core.GdsFlex gap="xs" flex-direction="column">
-                <Core.GdsText tag="small" color="secondary">
-                  Status
-                </Core.GdsText>
-                <Core.GdsBadge size="small" variant="notice">
-                  BETA
-                </Core.GdsBadge>
-              </Core.GdsFlex>
-            )}
-            {component.platform?.web && (
-              <Core.GdsFlex gap="xs" flex-direction="column">
-                <Core.GdsText tag="small" color="secondary">
-                  Platform
-                </Core.GdsText>
-                <Core.GdsFlex gap="s">
-                  {component.platform.web && (
-                    <Core.GdsFlex align-items="center" gap="4xs">
-                      <Core.IconCompassRound></Core.IconCompassRound>
-                      Web
-                    </Core.GdsFlex>
-                  )}
-                  {component.platform.ios && (
-                    <Core.GdsFlex align-items="center" gap="4xs">
-                      <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
-                      iOS
-                    </Core.GdsFlex>
-                  )}
-                  {component.platform.android && (
-                    <Core.GdsFlex align-items="center" gap="4xs">
-                      <Core.IconRobot></Core.IconRobot>
-                      Android
-                    </Core.GdsFlex>
-                  )}
-                </Core.GdsFlex>
-              </Core.GdsFlex>
-            )}
-          </Core.GdsFlex>
-        )}
 
         {component.summary && (
           <Core.GdsText
@@ -140,16 +99,24 @@ export function ComponentLayoutClient({
           </Core.GdsText>
         )}
 
-        {component.tags && (
-          <Core.GdsFlex gap="s" margin="s 0">
-            Tags:
-            {component.tags.map((tag) => (
-              <Link key={tag} href={'/components/' + tag.toLocaleLowerCase()}>
-                {tag.toLocaleLowerCase()}
-              </Link>
-            ))}
-          </Core.GdsFlex>
-        )}
+        <Core.GdsFlex gap="l" align-items="center">
+          {component.beta && (
+            <Core.GdsBadge size="small" variant="notice">
+              BETA
+            </Core.GdsBadge>
+          )}
+
+          {component.tags && (
+            <Core.GdsFlex gap="xs" margin="s 0">
+              Tags:
+              {component.tags.map((tag) => (
+                <Link key={tag} href={'/components/' + tag.toLocaleLowerCase()}>
+                  {tag.toLocaleLowerCase()}
+                </Link>
+              ))}
+            </Core.GdsFlex>
+          )}
+        </Core.GdsFlex>
       </Core.GdsFlex>
       <Core.GdsGrid columns="12" gap="l" width="100%">
         <Core.GdsFlex flex-direction="column" gap="xl" grid-column="1/10">
@@ -237,7 +204,11 @@ export function ComponentLayoutClient({
                 />
               )}
               {component.anatomy && anatomyImage && (
-                <Core.GdsFlex flex-direction="column" gap="m">
+                <Core.GdsFlex
+                  flex-direction="column"
+                  gap="m"
+                  id="component-anatomy"
+                >
                   <Core.GdsText tag="h2">Anatomy</Core.GdsText>
                   {component['anatomy-overview'] && (
                     <Core.GdsRichText>
@@ -303,7 +274,44 @@ export function ComponentLayoutClient({
           )}
           <Similar tag={firstTag} currentSlug={component.slug} />
         </Core.GdsFlex>
-        <TableOfContents component={component} section={section} />
+        <Core.GdsFlex
+          flex-direction="column"
+          justify-content="flex-start"
+          position="sticky"
+          inset="90px auto auto auto"
+          grid-column="10/13"
+          height="max-content"
+        >
+          <TableOfContents component={component} section={section} />
+          {component.platform?.web && (
+            <Core.GdsFlex gap="xs" flex-direction="column" padding="l">
+              <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
+              <Core.GdsText tag="small" color="secondary">
+                Platform
+              </Core.GdsText>
+              <Core.GdsFlex gap="s">
+                {component.platform.web && (
+                  <Core.GdsFlex align-items="center" gap="4xs">
+                    <Core.IconCompassRound></Core.IconCompassRound>
+                    Web
+                  </Core.GdsFlex>
+                )}
+                {component.platform.ios && (
+                  <Core.GdsFlex align-items="center" gap="4xs">
+                    <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
+                    iOS
+                  </Core.GdsFlex>
+                )}
+                {component.platform.android && (
+                  <Core.GdsFlex align-items="center" gap="4xs">
+                    <Core.IconRobot></Core.IconRobot>
+                    Android
+                  </Core.GdsFlex>
+                )}
+              </Core.GdsFlex>
+            </Core.GdsFlex>
+          )}
+        </Core.GdsFlex>
       </Core.GdsGrid>
     </Core.GdsFlex>
   )
