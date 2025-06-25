@@ -14,8 +14,6 @@ function importsFor(tagName) {
     m.declarations.find((d) => d.tagName === tagName),
   )
 
-  console.log(manifest)
-
   return manifest.exports.map((e) => ({
     name: e.declaration.name,
     path: manifest.path.replace(/src\//, '@sebgroup/green-core/'),
@@ -26,8 +24,6 @@ export const ImportPaths = (props) => {
   const { of } = props
   const [viewSource, setViewSource] = useState('web')
   const resolvedOf = useOf(of || 'meta')
-
-  console.log(resolvedOf.preparedMeta)
 
   const importInfo = importsFor(resolvedOf.preparedMeta.component)
   const subComponents = Object.keys({
