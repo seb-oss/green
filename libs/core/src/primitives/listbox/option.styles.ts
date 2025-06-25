@@ -8,7 +8,7 @@ const style = css`
       border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     }
 
-    :host div {
+    :host .item {
       display: flex;
       align-items: center;
       user-select: none;
@@ -39,10 +39,10 @@ const style = css`
       color: var(--gds-sys-color-content-inversed);
     }
 
-    :host(:hover:not([highlighted])) div {
+    :host(:hover:not([highlighted])) .item {
       background-color: color-mix(
         in srgb,
-        var(--gds-sys-color-l3-02),
+        transparent,
         var(--gds-sys-color-state-light-hover)
       );
     }
@@ -50,7 +50,7 @@ const style = css`
     :host(:focus-visible) {
       outline: none;
 
-      div::before {
+      .item::before {
         inset: var(--gds-sys-space-2xs);
         opacity: 1;
         visivility: visible;

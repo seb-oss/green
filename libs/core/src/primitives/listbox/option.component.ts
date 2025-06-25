@@ -5,6 +5,8 @@ import { when } from 'lit/directives/when.js'
 import { IconCheckmark } from '../../components/icon/icons/checkmark.component'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
+import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
+import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
@@ -32,7 +34,7 @@ export interface OptionsContainer extends HTMLElement {
  */
 @gdsCustomElement('gds-option', { dependsOn: [IconCheckmark] })
 export class GdsOption extends Focusable(GdsElement) {
-  static styles = [tokens, style]
+  static styles = [tokens, rbcbToggleStyles, style]
 
   /**
    * The value of the option.
@@ -117,24 +119,18 @@ export class GdsOption extends Focusable(GdsElement) {
   render() {
     const isMultiple = this.parentElement?.multiple
 
-    const checkbox = html`
-      <span class="checkbox ${classMap({ checked: this.selected })}">
-        ${this.selected
-          ? html`<gds-icon-checkmark
-              width="10"
-              height="10"
-              stroke="4"
-            ></gds-icon-checkmark>`
-          : ''}
-      </span>
-    `
-
     if (!isMultiple) {
       if (this.selected) this.setAttribute('highlighted', '')
       else this.removeAttribute('highlighted')
     }
 
-    return html`<div>${when(isMultiple, () => checkbox)} <slot></slot></div>`
+    return html`<div class="item">
+      ${when(isMultiple, () =>
+        checkboxToggle({
+          checked: this.selected,
+        }),
+      )} <slot></slot>
+    </div>`
   }
 
   #emitSelect(e: MouseEvent | KeyboardEvent) {
