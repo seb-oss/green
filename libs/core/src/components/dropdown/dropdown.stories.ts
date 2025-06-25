@@ -20,7 +20,7 @@ import '../icon/icons/push.ts'
 const meta: Meta = {
   title: 'Components/Dropdown',
   component: 'gds-dropdown',
-  subcomponents: { Option: 'gds-option' },
+  subcomponents: { GdsOption: 'gds-option' },
   parameters: {
     layout: 'centered',
   },
