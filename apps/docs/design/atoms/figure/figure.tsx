@@ -32,6 +32,17 @@ export default function Figure({
 
   const figureType = getFigureType(identifier)
 
+  const captionType =
+    caption?.toLowerCase() === 'do'
+      ? 'do'
+      : caption?.toLowerCase() === 'dont'
+        ? 'dont'
+        : null
+
+  const showDoLabel = figureType === 'do' || captionType === 'do'
+  const showDontLabel = figureType === 'dont' || captionType === 'dont'
+  const shouldShowCaption = !captionType && caption
+
   return (
     <GdsFlex
       flex-direction="column"
@@ -47,21 +58,21 @@ export default function Figure({
         justify-content="center"
         align-items="center"
       />
-      {figureType === 'do' && (
+      {showDoLabel && (
         <GdsText tag="small" padding-inline="s 0" color="positive">
           <GdsFlex align-items="center" gap="s">
             <IconCheckmark size="m" /> DO
           </GdsFlex>
         </GdsText>
       )}
-      {figureType === 'dont' && (
+      {showDontLabel && (
         <GdsText tag="small" padding-inline="s 0" color="negative">
           <GdsFlex align-items="center" gap="s">
             <IconCrossLarge size="m" /> {`Don't`}
           </GdsFlex>
         </GdsText>
       )}
-      {!figureType && caption && (
+      {shouldShowCaption && (
         <GdsText tag="small" padding-inline="s 0" color="secondary">
           {caption}
         </GdsText>
