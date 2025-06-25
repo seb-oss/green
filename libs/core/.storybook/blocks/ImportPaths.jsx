@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Source, useOf } from '@storybook/blocks'
 
 import {
+  GdsDiv,
   GdsSegment,
   GdsSegmentedControl,
   GdsTheme,
@@ -28,38 +29,42 @@ export const ImportPaths = (props) => {
 
   return (
     <GdsTheme designVersion="2023">
-      <h2>Import</h2>
-      <GdsSegmentedControl
-        max-width="500px"
-        value={viewSource}
-        onChange={(e) => setViewSource(e.target.value)}
-      >
-        <GdsSegment value="web">Web component (Angular and others)</GdsSegment>
-        <GdsSegment value="react">React JSX</GdsSegment>
-      </GdsSegmentedControl>
-      {importInfo.map((info) => (
-        <div key={info.name}>
-          {viewSource === 'web' ? (
-            <Source
-              language="javascript"
-              dark
-              code={`import { ${info.name} } from '@sebgroup/green-core/pure'
+      <GdsDiv margin="0 0 2xl 0">
+        <h2>Import</h2>
+        <GdsSegmentedControl
+          max-width="500px"
+          value={viewSource}
+          onChange={(e) => setViewSource(e.target.value)}
+        >
+          <GdsSegment value="web">
+            Web component (Angular and others)
+          </GdsSegment>
+          <GdsSegment value="react">React JSX</GdsSegment>
+        </GdsSegmentedControl>
+        {importInfo.map((info) => (
+          <div key={info.name}>
+            {viewSource === 'web' ? (
+              <Source
+                language="javascript"
+                dark
+                code={`import { ${info.name} } from '@sebgroup/green-core/pure'
             ${info.name}.define()
 
             // or, from direct path:
             import { ${info.name} } from '${info.path}'
             ${info.name}.define()`}
-            />
-          ) : (
-            <Source
-              language="javascript"
-              dark
-              code={`// This import can be used as a JSX element in React
+              />
+            ) : (
+              <Source
+                language="javascript"
+                dark
+                code={`// This import can be used as a JSX element in React
               import { ${info.name} } from '@sebgroup/green-core/react'`}
-            />
-          )}
-        </div>
-      ))}
+              />
+            )}
+          </div>
+        ))}
+      </GdsDiv>
     </GdsTheme>
   )
 }
