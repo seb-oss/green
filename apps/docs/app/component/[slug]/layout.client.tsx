@@ -86,7 +86,12 @@ export function ComponentLayoutClient({
       width="100%"
       margin="0 auto"
     >
-      <Breadcrumbs slug={component.slug} title={component.title} />
+      <Breadcrumbs
+        key={`${slug}-${section}`}
+        slug={component.slug}
+        title={component.title}
+        section={section}
+      />
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
         <Core.GdsText tag="h1" font-size="heading-xl" id="component-top">
           {component.title}
@@ -282,48 +287,51 @@ export function ComponentLayoutClient({
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>
         </Core.GdsFlex>
-        <Core.GdsFlex
-          flex-direction="column"
-          justify-content="flex-start"
-          position="sticky"
-          inset="90px auto auto auto"
-          grid-column="10/13"
-          height="max-content"
-        >
-          <TableOfContents
-            component={component}
-            section={section}
-            versus={versus}
-          />
-          {component.platform?.web && (
-            <Core.GdsFlex gap="xs" flex-direction="column" padding="l">
-              <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
-              <Core.GdsText tag="small" color="secondary">
-                Platform
-              </Core.GdsText>
-              <Core.GdsFlex gap="s">
-                {component.platform.web && (
-                  <Core.GdsFlex align-items="center" gap="4xs">
-                    <Core.IconCompassRound></Core.IconCompassRound>
-                    Web
-                  </Core.GdsFlex>
-                )}
-                {component.platform.ios && (
-                  <Core.GdsFlex align-items="center" gap="4xs">
-                    <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
-                    iOS
-                  </Core.GdsFlex>
-                )}
-                {component.platform.android && (
-                  <Core.GdsFlex align-items="center" gap="4xs">
-                    <Core.IconRobot></Core.IconRobot>
-                    Android
-                  </Core.GdsFlex>
-                )}
+        {!isLayoutComponent && (
+          <Core.GdsFlex
+            flex-direction="column"
+            justify-content="flex-start"
+            position="sticky"
+            inset="90px auto auto auto"
+            grid-column="10/13"
+            height="max-content"
+          >
+            <TableOfContents
+              component={component}
+              section={section}
+              versus={versus}
+            />
+
+            {component.platform?.web && (
+              <Core.GdsFlex gap="xs" flex-direction="column" padding="l">
+                <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
+                <Core.GdsText tag="small" color="secondary">
+                  Platform
+                </Core.GdsText>
+                <Core.GdsFlex gap="s">
+                  {component.platform.web && (
+                    <Core.GdsFlex align-items="center" gap="4xs">
+                      <Core.IconCompassRound></Core.IconCompassRound>
+                      Web
+                    </Core.GdsFlex>
+                  )}
+                  {component.platform.ios && (
+                    <Core.GdsFlex align-items="center" gap="4xs">
+                      <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
+                      iOS
+                    </Core.GdsFlex>
+                  )}
+                  {component.platform.android && (
+                    <Core.GdsFlex align-items="center" gap="4xs">
+                      <Core.IconRobot></Core.IconRobot>
+                      Android
+                    </Core.GdsFlex>
+                  )}
+                </Core.GdsFlex>
               </Core.GdsFlex>
-            </Core.GdsFlex>
-          )}
-        </Core.GdsFlex>
+            )}
+          </Core.GdsFlex>
+        )}
       </Core.GdsGrid>
     </Core.GdsFlex>
   )
