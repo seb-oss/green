@@ -60,30 +60,6 @@ const style = css`
     :host([inert]) {
       display: none;
     }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 1lh;
-      width: 1lh;
-      box-sizing: border-box;
-      position: relative;
-      aspect-ratio: 1/1;
-      border-radius: var(--gds-sys-space-2xs);
-      border: var(--gds-sys-space-3xs) solid currentColor;
-      padding: var(--gds-sys-space-3xs);
-
-      &.checked {
-        background-color: currentColor;
-        gds-icon-checkmark {
-          &::part(icon) {
-            color: var(--gds-sys-color-content-01);
-            stroke-width: var(--gds-sys-space-2xs);
-          }
-        }
-      }
-    }
   }
 `
 

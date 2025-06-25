@@ -145,6 +145,10 @@ export default css`
     color: var(--gds-sys-color-content-negative-01);
   }
 
+  :host([gds-element='gds-option']) .rbcb__perimeter {
+    outline: none;
+  }
+
   :host(:focus-visible) .rbcb__perimeter {
     outline-width: var(--gds-sys-space-3xs);
     scale: 1;
