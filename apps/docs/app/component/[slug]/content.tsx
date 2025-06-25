@@ -4,6 +4,7 @@
 /* eslint-disable no-case-declarations */
 import React from 'react'
 
+import * as Core from '@sebgroup/green-core/react'
 import { Render } from '../../../design/atoms/content/render'
 import { useContent } from '../../../settings/content'
 import { ComponentSection } from '../../../settings/content/types'
@@ -50,8 +51,14 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
       return actions.getComponentImage?.(slug, node)
     },
   }
+
   if (slug === 'icon' && contentKey === 'overview') {
-    return <IconContent component={component} />
+    return (
+      <Core.GdsFlex flex-direction="column" gap="4xl">
+        <IconContent component={component} />
+        <Render content={content} slug={slug} imageProvider={imageProvider} />
+      </Core.GdsFlex>
+    )
   }
 
   return (

@@ -88,7 +88,12 @@ export function IconContent({ component }: IconContentProps) {
 
   return (
     <>
-      <Core.GdsFlex flex-direction="column" gap="l" position="relative">
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="l"
+        position="relative"
+        id="search-icons"
+      >
         <Core.GdsGrid
           columns="4"
           gap="l"

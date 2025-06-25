@@ -50,6 +50,12 @@ export function TableOfContents({
     ]
 
     if (section === 'overview') {
+      if (component.slug === 'icon') {
+        initialSections.push({
+          id: 'search-icons',
+          title: 'Search Icons',
+        })
+      }
       if (component.compare && versus) {
         initialSections.push({
           id: 'component-versus',
