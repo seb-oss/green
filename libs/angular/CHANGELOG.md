@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.1
+
+### Patch Changes
+
+- df15684: V-Angular: Updated the way required attribute is set inside components
+- Updated dependencies [1891932]
+  - @sebgroup/green-core@1.85.3
+
 ## 6.0.0
 
 ### Major Changes

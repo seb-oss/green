@@ -69,7 +69,7 @@
         type="text"
         autocomplete="off"
         [attr.name]="name"
-        [attr.required]="required"
+        [attr.required]="required || null"
         [disabled]="disabled"
         [readOnly]="readonly"
         [attr.role]="role"
