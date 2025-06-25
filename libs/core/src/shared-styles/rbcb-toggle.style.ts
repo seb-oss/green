@@ -145,6 +145,10 @@ export default css`
     color: var(--gds-sys-color-content-negative-01);
   }
 
+  /*
+   * When using the checkbox in a listbox, we need to remove the outline
+   * from the checkbox since it exsist on the list item
+   */
   :host([gds-element='gds-option']) .rbcb__perimeter {
     outline: none;
   }
