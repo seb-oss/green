@@ -4,7 +4,6 @@ import { Source, useOf } from '@storybook/blocks'
 import {
   GdsSegment,
   GdsSegmentedControl,
-  GdsText,
   GdsTheme,
 } from '../../../../dist/libs/core/src/generated/react'
 import customElements from '../../custom-elements.json'
@@ -13,9 +12,6 @@ function importsFor(tagName) {
   const manifest = customElements.modules.find((m) =>
     m.declarations.find((d) => d.tagName === tagName),
   )
-
-  console.log('IM HERE!')
-  console.log(manifest)
 
   return manifest.exports.map((e) => ({
     name: e.declaration.name,
@@ -26,12 +22,6 @@ function importsFor(tagName) {
 export const ImportPaths = (props) => {
   const { of } = props
   const [viewSource, setViewSource] = useState('web')
-
-  if ('of' in props && of === undefined) {
-    throw new Error(
-      'Unexpected `of={undefined}`, did you mistype a CSF file reference?',
-    )
-  }
   const resolvedOf = useOf(of || 'meta')
 
   const importInfo = importsFor(resolvedOf.preparedMeta.component)
