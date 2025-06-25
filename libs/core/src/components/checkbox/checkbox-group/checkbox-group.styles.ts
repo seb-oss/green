@@ -4,7 +4,7 @@ export const styles = css`
   :host {
     /* Font Sizes */
     --_font-label: var(--gds-sys-text-detail-book-m);
-    --_font-supporting-text: var(--gds-sys-text-detail-s);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
     font: var(--_font-label);
 
     /* Color */
@@ -16,8 +16,8 @@ export const styles = css`
   }
 
   :host([size='small']) {
-    --_font-label: var(--gds-sys-text-detail-s);
-    --_font-supporting-text: var(--gds-sys-text-detail-s);
+    --_font-label: var(--gds-sys-text-detail-book-s);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
   }
 
   .checkbox-group {

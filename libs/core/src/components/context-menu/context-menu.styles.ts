@@ -6,6 +6,7 @@ const style = css`
     :host {
       display: inline-block;
     }
+
     button {
       display: flex;
       border-width: 0;
@@ -16,6 +17,13 @@ const style = css`
       cursor: pointer;
       align-items: center;
       gap: 0.5rem;
+
+      &:focus-visible {
+        outline-offset: var(--gds-sys-space-3xs);
+        outline-style: solid;
+        outline-width: var(--gds-sys-space-3xs);
+        outline-color: var(--gds-sys-color-content-01);
+      }
     }
 
     button:hover {

@@ -42,7 +42,7 @@
     flex: 1;
 
     &:focus {
-      outline-color: var(--gds-sys-color-content-03);
+      outline-color: var(--gds-sys-color-content-01);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -140,13 +140,13 @@
 @layer sizes {
   :host([size='xs']) .button {
     --_block-size: var(--gds-sys-space-l);
-    font: var(--gds-sys-text-detail-s);
+    font: var(--gds-sys-text-detail-book-s);
     padding-inline: var(--gds-sys-space-m);
   }
 
   :host([size='small']) .button {
     --_block-size: var(--gds-sys-space-xl);
-    font: var(--gds-sys-text-detail-s);
+    font: var(--gds-sys-text-detail-book-s);
     padding-inline: var(--gds-sys-space-m);
   }
 

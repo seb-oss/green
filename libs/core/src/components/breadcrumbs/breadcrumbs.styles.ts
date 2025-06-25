@@ -16,7 +16,7 @@ const style = css`
     }
 
     .size-small {
-      font: var(--gds-sys-text-detail-s);
+      font: var(--gds-sys-text-detail-book-s);
       gap: var(--gds-sys-space-xs);
     }
 

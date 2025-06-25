@@ -28,13 +28,12 @@ export const styles = css`
     }
 
     .primary-label {
-      font-weight: var(--gds-sys-text-weight-book);
+      font: var(--gds-sys-text-detail-book-m);
       cursor: inherit;
     }
 
     .supporting-text {
-      font-size: var(--_font-size-supporting-text);
-      line-height: var(--_line-height-supporting-text);
+      font: var(--_font-supporting-text);
       font-weight: var(--gds-sys-text-weight-regular);
     }
   }

@@ -18,7 +18,7 @@ const style = css`
 
     thead {
       box-shadow: 0 var(--gds-sys-space-4xs) 0 0
-        var(--gds-sys-color-border-strong);
+        var(--gds-sys-color-border-subtle-01);
       th {
         height: var(--gds-sys-space-2xl);
         width: var(--gds-sys-space-2xl);
