@@ -237,34 +237,6 @@ export const Size: Story = {
 }
 
 /**
- * Indicates whether the badge is disabled.
- * When set to `true`, the badge will appear in a disabled state and will not be interactive.
- *
- * @property {boolean} disabled - Controls the disabled state of the badge.
- *
- * ```html
- * <gds-badge disabled>...</gds-badge>
- * <gds-badge disabled>...</gds-badge>
- * ```
- */
-export const Disabled: Story = {
-  name: 'Disabled',
-  render: (args) => html`
-    <gds-flex gap="xl">
-      <gds-badge variant="positive" disabled>
-        <gds-icon-rocket slot="lead"></gds-icon-rocket>
-        Launch
-      </gds-badge>
-      <gds-badge variant="warning" disabled>
-        <gds-icon-arrow-rotate-counter-clockwise slot="lead">
-        </gds-icon-arrow-rotate-counter-clockwise>
-        Discard
-      </gds-badge>
-    </gds-flex>
-  `,
-}
-
-/**
  * The `Notification` story demonstrates the use of the `gds-badge` component in notification mode.
  * In this mode, the badge acts as a notification indicator with only two possible variants: `positive` or `negative`.
  *
@@ -322,15 +294,9 @@ export const Notification: Story = {
   },
   render: (args) => html`
     <gds-flex gap="xl" align-items="center">
-      <gds-badge variant="positive" notification></gds-badge>
-      <gds-badge variant="positive" notification>9</gds-badge>
-      <gds-badge variant="positive" notification>
-        999
-        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
-      </gds-badge>
-      <gds-badge variant="negative" notification></gds-badge>
-      <gds-badge variant="negative" notification>9</gds-badge>
-      <gds-badge variant="negative" notification>
+      <gds-badge notification></gds-badge>
+      <gds-badge notification>9</gds-badge>
+      <gds-badge notification>
         999
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-badge>
