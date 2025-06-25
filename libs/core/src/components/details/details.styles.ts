@@ -5,9 +5,9 @@ export const styles = css`
   @layer base {
     .details {
       border-bottom: solid var(--gds-sys-space-4xs)
-        var(--gds-sys-color-l2-border-primary);
-      font: var(--gds-sys-text-body-m);
-      color: var(--gds-sys-color-l2-content-secondary);
+        var(--gds-sys-color-border-subtle-01);
+      font: var(--gds-sys-text-body-regular-m);
+      color: var(--gds-sys-color-content-01);
       transition: border-color 240ms linear;
     }
 
@@ -51,7 +51,7 @@ export const styles = css`
     }
 
     .summary:focus {
-      outline-color: var(--gds-sys-color-l3-content-tertiary);
+      outline-color: var(--gds-sys-color-content-01);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -72,7 +72,7 @@ export const styles = css`
 
       .details:hover,
       .details:focus-within {
-        border-color: var(--gds-sys-color-l2-border-quaternary);
+        border-color: var(--gds-sys-color-border-strong);
       }
     }
 
