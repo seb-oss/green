@@ -87,7 +87,7 @@ export function ComponentLayoutClient({
       margin="0 auto"
     >
       <Breadcrumbs slug={component.slug} title={component.title} />
-      <Core.GdsFlex flex-direction="column" gap="s" padding="0">
+      <Core.GdsFlex flex-direction="column" gap="m" padding="0">
         <Core.GdsText tag="h1" font-size="heading-xl" id="component-top">
           {component.title}
         </Core.GdsText>
@@ -103,7 +103,7 @@ export function ComponentLayoutClient({
           </Core.GdsText>
         )}
 
-        <Core.GdsFlex gap="l" align-items="center">
+        <Core.GdsFlex gap="l" align-items="center" height="max-content">
           {component.beta && (
             <Core.GdsBadge size="small" variant="notice">
               BETA
@@ -111,8 +111,10 @@ export function ComponentLayoutClient({
           )}
 
           {component.tags && (
-            <Core.GdsFlex gap="xs" margin="s 0">
-              Tags:
+            <Core.GdsFlex gap="xs" margin="0 0 2xs 0">
+              <Core.GdsText color="secondary" tag="small">
+                Tags:
+              </Core.GdsText>
               {component.tags.map((tag) => (
                 <Link key={tag} href={'/components/' + tag.toLocaleLowerCase()}>
                   {tag.toLocaleLowerCase()}
