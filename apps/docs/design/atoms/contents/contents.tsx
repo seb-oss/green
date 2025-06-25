@@ -1,7 +1,7 @@
 // design/atoms/contents/contents.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { ComponentContent } from '../../../settings/content/types'
@@ -14,105 +14,130 @@ interface TableOfContentsProps {
   versus?: string
 }
 
-interface Section {
+interface BaseSection {
   id: string
   title: string
-  active?: boolean
 }
+
+interface ContentSection extends BaseSection {
+  scrollTo?: never
+}
+
+interface NavigationSection extends BaseSection {
+  scrollTo: string
+}
+
+type Section = ContentSection | NavigationSection
 
 export function TableOfContents({
   component,
   section,
   versus,
 }: TableOfContentsProps) {
-  const [sections, setSections] = useState<Section[]>([])
   const [activeSection, setActiveSection] = useState<string>('component-top')
 
-  useEffect(() => {
-    let sectionContent = []
-    switch (section) {
-      case 'overview':
-        sectionContent = component.overview || []
-        break
-      case 'ux-text':
-        sectionContent = Array.isArray(component['ux-text'])
-          ? component['ux-text']
-          : component['ux-text']?.section || []
-        break
-      case 'accessibility':
-        sectionContent = Array.isArray(component['accessibility'])
-          ? component['accessibility']
-          : component['accessibility']?.section || []
-        break
-    }
-
-    const extractedSections = sectionContent
-      .filter((section) => section.title)
-      .map((section) => ({
-        id: section.title?.toLowerCase().replace(/\s+/g, '-') || '',
-        title: section.title || '',
-        active: false,
-      }))
-
+  const sections = useMemo(() => {
     const initialSections: Section[] = [
-      { id: 'component-top', title: component.title, active: true },
+      { id: 'component-top', title: component.title },
+      {
+        id: `component-${section}`,
+        title:
+          section === 'ux-text'
+            ? 'UX Text'
+            : section.charAt(0).toUpperCase() + section.slice(1),
+        scrollTo: 'component-content',
+      } as NavigationSection,
     ]
 
-    if (component.compare && versus) {
-      initialSections.push({
-        id: 'component-versus',
-        title: versus,
-        active: false,
-      })
+    if (section === 'overview') {
+      if (component.compare && versus) {
+        initialSections.push({
+          id: 'component-versus',
+          title: versus,
+        })
+      }
+      if (component.anatomy) {
+        initialSections.push({
+          id: 'component-anatomy',
+          title: 'Anatomy',
+        })
+      }
     }
 
-    if (component.anatomy) {
-      initialSections.push({
-        id: 'component-anatomy',
-        title: 'Anatomy',
-        active: false,
-      })
-    }
+    const sectionContent =
+      section === 'overview'
+        ? component.overview || []
+        : section === 'ux-text'
+          ? Array.isArray(component['ux-text'])
+            ? component['ux-text']
+            : component['ux-text']?.section || []
+          : Array.isArray(component['accessibility'])
+            ? component['accessibility']
+            : component['accessibility']?.section || []
 
-    setSections([...initialSections, ...extractedSections])
+    const contentSections: ContentSection[] = sectionContent
+      .filter(
+        (section) => section.title && (!section.tag || section.tag === 'h2'),
+      )
+      .map((section, index) => ({
+        id: `section-${section.title?.toLowerCase().replace(/\s+/g, '-')}-${index}`,
+        title: section.title || '',
+      }))
+
+    return [...initialSections, ...contentSections]
   }, [component, section, versus])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + 150 // Offset for header
+  const handleScroll = useCallback(() => {
+    const scrollPosition = window.scrollY + 150
+    let newActiveSection = 'component-top'
 
-      sections.forEach((section) => {
-        const element = document.getElementById(section.id)
-        if (element) {
-          const { top, bottom } = element.getBoundingClientRect()
-          if (top <= 150 && bottom >= 150) {
-            setActiveSection(section.id)
-          }
+    // Check each section in reverse order
+    for (const section of [...sections].reverse()) {
+      const elementId = section.scrollTo || section.id
+      const element = document.getElementById(elementId)
+
+      if (element) {
+        const { top } = element.getBoundingClientRect()
+        const absoluteTop = top + window.scrollY
+
+        if (absoluteTop <= scrollPosition) {
+          newActiveSection = section.id
+          break
         }
-      })
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    if (activeSection !== newActiveSection) {
+      setActiveSection(newActiveSection)
+    }
+  }, [sections, activeSection])
+
+  useEffect(() => {
+    const throttledScroll = () => {
+      requestAnimationFrame(handleScroll)
+    }
+
+    window.addEventListener('scroll', throttledScroll, { passive: true })
     handleScroll() // Initial check
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [sections])
+    return () => window.removeEventListener('scroll', throttledScroll)
+  }, [handleScroll])
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
+  const scrollToSection = useCallback((section: Section) => {
+    const targetId = section.scrollTo || section.id
+    const element = document.getElementById(targetId)
     if (element) {
-      setActiveSection(id)
-
+      setActiveSection(section.id)
       const headerOffset = 100
       const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = window.pageYOffset + elementPosition - headerOffset
+      const offsetPosition = window.scrollY + elementPosition - headerOffset
 
       window.scrollTo({
         top: offsetPosition,
         behavior: 'smooth',
       })
     }
-  }
+  }, [])
 
   if (sections.length === 0) return null
 
@@ -135,7 +160,7 @@ export function TableOfContents({
               key={section.id}
               rank={activeSection === section.id ? 'secondary' : 'tertiary'}
               size="xs"
-              onClick={() => scrollToSection(section.id)}
+              onClick={() => scrollToSection(section)}
               justify-content="flex-start"
               data-overflow
             >

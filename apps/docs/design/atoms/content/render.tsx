@@ -63,7 +63,7 @@ export function Render({
           {section.title && (
             <Core.GdsText
               tag={section.tag || 'h2'}
-              id={section.title.toLowerCase().replace(/\s+/g, '-')}
+              id={`section-${section.title.toLowerCase().replace(/\s+/g, '-')}-${index}`}
             >
               {section.title}
             </Core.GdsText>
