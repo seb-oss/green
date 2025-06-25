@@ -15,7 +15,7 @@ const style = css`
       padding-inline: var(--gds-sys-space-m);
       padding-block: var(--gds-sys-space-s);
       cursor: pointer;
-      font: var(--gds-sys-text-detail-book-regular-m);
+      font: var(--gds-sys-text-detail-regular-m);
       gap: 1ch;
       max-width: 100%;
       box-sizing: border-box;
@@ -35,8 +35,8 @@ const style = css`
     }
 
     :host([highlighted]) {
-      background-color: var(--gds-sys-color-l3-02);
-      color: var(--gds-sys-color-content-01);
+      background-color: var(--gds-sys-color-l3-01);
+      color: var(--gds-sys-color-content-inversed);
     }
 
     :host(:hover:not([highlighted])) div {
