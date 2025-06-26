@@ -147,6 +147,7 @@
   :host([size='small']) .button {
     --_block-size: var(--gds-sys-space-xl);
     font: var(--gds-sys-text-detail-book-s);
+    padding-block: var(--gds-sys-space-2xs);
     padding-inline: var(--gds-sys-space-m);
   }
 
