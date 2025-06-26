@@ -70,24 +70,32 @@ export const RenderColumn = (
             width="100%"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            data-column
           >
             <Core.GdsTheme color-scheme={currentTheme}>
               <Core.GdsCard
-                padding="xs"
+                padding={column.plain ? '0' : 'xs'}
                 justify-content="center"
                 align-items="center"
-                min-height="160px"
+                min-height={column.plain ? '100%' : '160px'}
                 position="relative"
+                variant={column.plain ? 'secondary' : 'primary'}
+                data-plain={column.plain}
               >
                 <Snippet slug={column.Snippet || ''} />
 
-                {isHovered && (
+                {isHovered && !column.plain && (
                   <Core.GdsFlex
                     justify-content="space-between"
                     align-items="center"
                     width="max-content"
                     position="absolute"
-                    inset="10px 10px auto auto"
+                    background={column.plain ? 'primary' : 'none'}
+                    inset={
+                      column.plain
+                        ? 'auto 10px -28px auto'
+                        : '10px 10px auto auto'
+                    }
                   >
                     <Core.GdsButton
                       rank="tertiary"

@@ -131,7 +131,11 @@ export function ComponentLayoutClient({
       </Core.GdsFlex>
       <Core.GdsGrid columns="12" gap="l" width="100%">
         <Core.GdsFlex flex-direction="column" gap="xl" grid-column="1/10">
-          <Core.GdsFlex flex-direction="column" gap="s">
+          <Core.GdsFlex
+            flex-direction="column"
+            gap="s"
+            justify-content="flex-start"
+          >
             <Core.GdsTheme color-scheme={currentTheme}>
               <Core.GdsCard
                 height="280px"

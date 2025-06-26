@@ -47,6 +47,7 @@ export interface ComponentColumn {
   color?: string
   size?: string
   Snippet?: string
+  plain?: boolean
   caption?: string
   node?: string
   width?: string

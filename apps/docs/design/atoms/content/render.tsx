@@ -59,30 +59,34 @@ export function Render({
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" width="100%">
       {content.map((section: ComponentSection, index: number) => (
-        <Core.GdsFlex key={index} flex-direction="column" gap="s">
-          {section.title && (
-            <Core.GdsText
-              tag={section.tag || 'h2'}
-              id={`section-${section.title.toLowerCase().replace(/\s+/g, '-')}-${index}`}
-            >
-              {section.title}
-            </Core.GdsText>
-          )}
-          {section['section-content'] && (
-            <Core.GdsRichText>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: section['section-content']
-                    ? marked.parse(section['section-content'], { async: false })
-                    : '',
-                }}
-              />
-            </Core.GdsRichText>
-          )}
+        <Core.GdsFlex key={index} flex-direction="column" gap="l">
+          <Core.GdsFlex flex-direction="column" gap="s">
+            {section.title && (
+              <Core.GdsText
+                tag={section.tag || 'h2'}
+                id={`section-${section.title.toLowerCase().replace(/\s+/g, '-')}-${index}`}
+              >
+                {section.title}
+              </Core.GdsText>
+            )}
+            {section['section-content'] && (
+              <Core.GdsRichText>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: section['section-content']
+                      ? marked.parse(section['section-content'], {
+                          async: false,
+                        })
+                      : '',
+                  }}
+                />
+              </Core.GdsRichText>
+            )}
+          </Core.GdsFlex>
           {section.columns && (
             <Core.GdsGrid
               columns={`1; s{${section.cols == '3' ? '2' : '1'}}; m{${section.cols || '2'}}`}
-              gap="2xl; m{4xl m}"
+              gap="2xl; m{2xl m}"
               max-width="100%"
             >
               {processColumns(section.columns).map((column, colIndex) => (
