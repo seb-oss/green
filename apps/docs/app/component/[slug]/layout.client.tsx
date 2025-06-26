@@ -264,24 +264,17 @@ export function ComponentLayoutClient({
             )}
             {children}
             {isLayoutComponent && section === 'overview' && (
-              <Core.GdsCard variant="positive" border-radius="m">
+              <Core.GdsCard variant="secondary" border-color="primary">
                 <Core.GdsFlex flex-direction="column" gap="m" max-width="90ch">
-                  <Core.GdsText font-size="display-s">
-                    Declarative Layout Component
+                  <Core.GdsText tag="h2">
+                    Declarative layout component
                   </Core.GdsText>
-                  <Core.GdsText font-size="heading-xs" max-width="80ch">
+                  <Core.GdsText tag="p" max-width="80ch">
                     A micro-frontend optimized layout system using style
                     expressions, Generates encapsulated CSS in shadow DOM for
                     responsive layouts without utility classes.
                   </Core.GdsText>
-                  <Link
-                    component="button"
-                    href="/foundation/layout"
-                    rank="secondary"
-                    justify-content="flex-start"
-                    width="max-content"
-                    variant="positive"
-                  >
+                  <Link component="link" href="/foundation/layout">
                     Learn more about layouts
                     <Core.IconArrowRight slot="trail" />
                   </Link>
