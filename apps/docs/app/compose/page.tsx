@@ -252,7 +252,14 @@ export default function Compose() {
         return <Component {...props}>{parse(childContent, options)}</Component>
       }
 
-      return undefined
+      // For non-gds tags, just render their content without the wrapper
+      const childContent = node.children?.map((child: any) => {
+        if (child.type === 'text') return child.data
+        return parse(getNodeContent(child), options)
+      })
+
+      // Return the content wrapped in a span to maintain structure
+      return <span>{childContent}</span>
     },
   }
 
@@ -284,12 +291,12 @@ export default function Compose() {
 
   return (
     <Core.GdsGrid
-      columns="24"
+      columns="2"
       gap="l"
       height="calc(100vh - 90px)"
       padding="xl"
       width="100%"
-      max-width="1600px"
+      max-width="1400px"
       margin="0 auto"
     >
       <Core.GdsCard
@@ -298,18 +305,11 @@ export default function Compose() {
         padding="0"
         overflow="hidden"
         border-color="primary"
-        grid-column="1/12"
       >
         <MonacoEditor value={code} onChange={handleCodeChange} />
       </Core.GdsCard>
 
-      <Core.GdsCard
-        variant="primary"
-        height="100%"
-        padding="l"
-        overflow="auto"
-        grid-column="12/21"
-      >
+      <Core.GdsCard variant="primary" height="100%" padding="l" overflow="auto">
         {error ? (
           <Core.GdsText color="negative">{error}</Core.GdsText>
         ) : (
