@@ -113,8 +113,8 @@ export class GdsFormSummary extends GdsElement {
           border-radius="xs"
           border-width="0"
           padding="l"
-          background="negative"
-          color="negative"
+          background="negative-01"
+          color="negative-01"
           overflow="hidden"
           aria-describedby="description"
           aria-label=${msg(`Form error summary`)}
