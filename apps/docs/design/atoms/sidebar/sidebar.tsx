@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -78,11 +78,39 @@ export default function Sidebar() {
   const { isLoaded, actions } = useContentContext()
   const { actions: SettingsActions } = useSettingsContext()
 
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>({
-    components: pathName.startsWith('/component/'),
-    templates: pathName.startsWith('/template/'),
-    foundation: pathName.startsWith('/foundation/'),
-  })
+  const sectionsWithSubItems = ['components', 'templates', 'foundation']
+
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>(
+    () => {
+      const initialState: Record<string, boolean> = {}
+
+      sectionsWithSubItems.forEach((section) => {
+        // Check both exact path and sub-paths
+        const isExactPath = pathName === `/${section}`
+        const isSubPath = pathName.startsWith(`/${section.replace('s', '')}`)
+        initialState[section] = isExactPath || isSubPath
+      })
+
+      return initialState
+    },
+  )
+
+  useEffect(() => {
+    setOpenSections((prev) => {
+      const newState = { ...prev }
+
+      sectionsWithSubItems.forEach((section) => {
+        const isExactPath = pathName === `/${section}`
+        const isSubPath = pathName.startsWith(`/${section.replace('s', '')}`)
+
+        if (isExactPath || isSubPath) {
+          newState[section] = true
+        }
+      })
+
+      return newState
+    })
+  }, [pathName])
 
   const toggleSection = (section: string) => {
     setOpenSections((prev) => ({
@@ -135,7 +163,7 @@ export default function Sidebar() {
     return NAV?.links.map((link) => {
       const href = link.slug.startsWith('/') ? link.slug : `/${link.slug}`
 
-      if (['components', 'templates', 'foundation'].includes(link.slug)) {
+      if (sectionsWithSubItems.includes(link.slug)) {
         let subItems: any[] = []
 
         if (link.slug === 'components') {
