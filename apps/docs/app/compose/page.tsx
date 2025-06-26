@@ -1,7 +1,7 @@
 // app/compose/page.tsx
 'use client'
 
-import { ComponentType, useEffect, useRef, useState } from 'react'
+import React, { ComponentType, useEffect, useRef, useState } from 'react'
 import dynamic from 'next/dynamic'
 import parse from 'html-react-parser'
 
@@ -209,21 +209,9 @@ const initialCode = `<gds-card padding="l" variant="secondary">
 
 export default function Compose() {
   const [code, setCode] = useState(initialCode)
+  const [previewCode, setPreviewCode] = useState(initialCode)
   const [componentsReady, setComponentsReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => {
-    Object.values(Core).forEach((Component: any) => {
-      if (Component?.define && typeof Component.define === 'function') {
-        try {
-          Component.define()
-        } catch (e) {
-          console.debug(`Failed to define component: ${Component.name}`, e)
-        }
-      }
-    })
-    setComponentsReady(true)
-  }, [])
 
   const options = {
     replace: (node: any) => {
@@ -252,19 +240,53 @@ export default function Compose() {
         return <Component {...props}>{parse(childContent, options)}</Component>
       }
 
-      // For non-gds tags, just render their content without the wrapper
-      const childContent = node.children?.map((child: any) => {
-        if (child.type === 'text') return child.data
-        return parse(getNodeContent(child), options)
+      // For non-gds tags, render content with keys
+      const childContent = node.children?.map((child: any, index: number) => {
+        if (child.type === 'text') {
+          return (
+            <React.Fragment key={`text-${index}`}>{child.data}</React.Fragment>
+          )
+        }
+        const parsed = parse(getNodeContent(child), options)
+        return (
+          <React.Fragment key={`content-${index}`}>{parsed}</React.Fragment>
+        )
       })
 
-      // Return the content wrapped in a span to maintain structure
       return <span>{childContent}</span>
     },
   }
 
-  const handleCodeChange = (newCode: string) => {
-    setCode(newCode)
+  // Initialize components
+  useEffect(() => {
+    Object.values(Core).forEach((Component: any) => {
+      if (Component?.define && typeof Component.define === 'function') {
+        try {
+          Component.define()
+        } catch (e) {
+          console.debug(`Failed to define component: ${Component.name}`, e)
+        }
+      }
+    })
+    setComponentsReady(true)
+  }, [])
+
+  // Handle keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+        e.preventDefault()
+        setPreviewCode(code)
+        setError(null)
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [code])
+
+  const handleSave = () => {
+    setPreviewCode(code)
     setError(null)
   }
 
@@ -272,7 +294,7 @@ export default function Compose() {
     if (!componentsReady) return null
 
     try {
-      return parse(code, options)
+      return parse(previewCode, options)
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error'
       setError(errorMessage)
@@ -299,15 +321,22 @@ export default function Compose() {
       max-width="1400px"
       margin="0 auto"
     >
-      <Core.GdsCard
-        variant="secondary"
-        height="100%"
-        padding="0"
-        overflow="hidden"
-        border-color="primary"
-      >
-        <MonacoEditor value={code} onChange={handleCodeChange} />
-      </Core.GdsCard>
+      <Core.GdsFlex flex-direction="column" gap="m">
+        <Core.GdsCard
+          variant="secondary"
+          height="60vh"
+          padding="0"
+          overflow="hidden"
+          border-color="primary"
+        >
+          <MonacoEditor value={code} onChange={(newCode) => setCode(newCode)} />
+        </Core.GdsCard>
+        <Core.GdsFlex justify-content="flex-end">
+          <Core.GdsButton onClick={handleSave} rank="primary" size="small">
+            Preview Changes (⌘ + S)
+          </Core.GdsButton>
+        </Core.GdsFlex>
+      </Core.GdsFlex>
 
       <Core.GdsCard variant="primary" height="100%" padding="l" overflow="auto">
         {error ? (
