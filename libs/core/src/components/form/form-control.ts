@@ -233,13 +233,10 @@ export abstract class GdsFormControlElement<ValueT = any>
     if (!this.validity.valid) e.preventDefault()
   }
 
-  // TODO: This needs to be handled on a component by component basis, since it's not always the validity anchor that should be the focus reciever.
-  focus(options?: FocusOptions | undefined): void {
-    this._getValidityAnchor().focus(options)
-  }
-
   /**
-   * This should return a reference to the HTML element that will recive the focus when the form control is invalid.
+   * This should return a reference to the HTML element that the browser will refer to when the form control is invalid.
+   * The reference is used when setting the validity state in ElementInternals.
+   * For reference: https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/setValidity#anchor
    */
   protected abstract _getValidityAnchor(): HTMLElement
 }
