@@ -4,6 +4,9 @@
   "dependencies": {},
   "description": "Design tokens for Green Design System",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seb-oss/green.git"

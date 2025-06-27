@@ -4,8 +4,8 @@
 @use '../../../../chlorophyll/scss/tokens/components' as components;
 @use '../../../../chlorophyll/scss/components/themes/mixins' as theme_mixins;
 
-@use '../../../../../dist/libs/tokens/2023/scss/mixin.dark' as dark2016;
-@use '../../../../../dist/libs/tokens/2023/scss/mixin.light' as light2016;
+@use '../../../../../dist/libs/tokens/2016/scss/mixin.dark' as dark2016;
+@use '../../../../../dist/libs/tokens/2016/scss/mixin.light' as light2016;
 
 :host {
   display: contents;

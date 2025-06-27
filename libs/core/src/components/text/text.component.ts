@@ -28,19 +28,17 @@ export class GdsText extends GdsDiv {
   tag = 'span'
 
   /**
-   * Style Expression Property that controls the `font-size` property.
-   * Supports all typography size tokens from the design system.
+   * Style Expression Property that controls the `font` property.
+   * Supports all font tokens from the design system.
    */
   @styleExpressionProperty({
     selector: '[tag]',
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
-      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
-      return styleSize + styleLine
+      return `font: var(--gds-sys-text-${size});`
     },
   })
-  'font-size'?: string
+  'font'?: string
 
   /**
    * Style Expression Property that controls the `font-weight` property.

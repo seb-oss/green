@@ -1,0 +1,60 @@
+{
+  "sys": {
+    "color": {
+      "content": {
+        "$type": "color",
+        "01": {
+          "$value": "{ref.color.grey.3}"
+        },
+        "02": {
+          "$value": "{ref.color.grey.12}"
+        },
+        "03": {
+          "$value": "{ref.color.grey.30}"
+        },
+        "inversed": {
+          "$value": "{ref.color.grey.3}"
+        },
+        "brand-01": {
+          "$value": "{ref.color.green.27}"
+        },
+        "brand-02": {
+          "$value": "{ref.color.copper.18}"
+        },
+        "positive-01": {
+          "$value": "{ref.color.green.11}"
+        },
+        "positive-02": {
+          "$value": "{ref.color.green.23}"
+        },
+        "positive-03": {
+          "$value": "{ref.color.green.11}"
+        },
+        "negative-01": {
+          "$value": "{ref.color.red.10}"
+        },
+        "negative-02": {
+          "$value": "{ref.color.red.8}"
+        },
+        "warning-01": {
+          "$value": "{ref.color.orange.10}"
+        },
+        "warning-02": {
+          "$value": "{ref.color.orange.6}"
+        },
+        "notice-01": {
+          "$value": "{ref.color.blue.10}"
+        },
+        "notice-02": {
+          "$value": "{ref.color.blue.8}"
+        },
+        "disabled-01": {
+          "$value": "{ref.color.grey.9}"
+        },
+        "disabled-02": {
+          "$value": "{ref.color.grey.9}"
+        }
+      }
+    }
+  }
+}

@@ -22,25 +22,13 @@ export class GdsDivider extends GdsElement {
   static styles = [tokens, DividerCSS]
 
   /**
-   * The level of the divider is used to resolve the color tokens from the corresponding level.
-   * Check the [Color System documentation page](./?path=/docs/style-colors--docs) for more information.
-   *
-   * Default value for `gds-divider` is set to `2`.
-   *
-   * @property level
-   *
-   * */
-  @property()
-  level = '2'
-
-  /**
    * Controls the color property of the divider.
    * Supports all the color tokens from the design system.
    *
    * You can apply color like this:
    *
    * ```html
-   * <gds-divider color="primary"></gds-divider>
+   * <gds-divider color="interactive"></gds-divider>
    * ```
    */
   @styleExpressionProperty(forColorTokens('border'))

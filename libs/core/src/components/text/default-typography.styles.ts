@@ -13,49 +13,36 @@ export const defaultStyles = css`
     }
 
     h1 {
-      font-size: var(--gds-sys-text-size-heading-xl);
-      line-height: var(--gds-sys-text-line-height-heading-xl);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-xl);
     }
 
     h2 {
-      font-size: var(--gds-sys-text-size-heading-l);
-      line-height: var(--gds-sys-text-line-height-heading-l);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-l);
     }
 
     h3 {
-      font-size: var(--gds-sys-text-size-heading-m);
-      line-height: var(--gds-sys-text-line-height-heading-m);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-m);
     }
 
     h4 {
-      font-size: var(--gds-sys-text-size-heading-s);
-      line-height: var(--gds-sys-text-line-height-heading-s);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-s);
     }
 
     h5 {
-      font-size: var(--gds-sys-text-size-heading-xs);
-      line-height: var(--gds-sys-text-line-height-heading-xs);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-xs);
     }
 
     h6 {
-      font-size: var(--gds-sys-text-size-heading-2xs);
-      line-height: var(--gds-sys-text-line-height-heading-2xs);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-2xs);
     }
 
     p,
     li {
-      font-size: var(--gds-sys-text-size-body-m);
-      line-height: var(--gds-sys-text-line-height-body-m);
+      font: var(--gds-sys-text-body-m);
     }
 
     strong {
-      font-weight: var(--gds-sys-text-weight-medium);
+      font: var(--gds-sys-text-body-m-medium);
     }
   }
 `

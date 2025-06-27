@@ -411,12 +411,17 @@ export class GdsPopover extends GdsElement {
 
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
+    console.log('_handleMobileLayout: ', true)
+    console.log('disableMobileStyles: ', this.disableMobileStyles)
+    console.log(this._elDialog?.style)
+
     this.#isMobileViewport = matches
     if (matches && !this.disableMobileStyles) {
       this.#autoPositionCleanupFn?.()
       this._elDialog?.style.removeProperty('left')
       this._elDialog?.style.removeProperty('top')
       this._elDialog?.style.removeProperty('minWidth')
+      this._elDialog?.style.removeProperty('min-width')
 
       this.updateComplete.then(() => {
         if (this.open) this._elDialog?.showModal()
@@ -454,6 +459,7 @@ export class GdsPopover extends GdsElement {
         minHeight: this.calcMinHeight(referenceEl),
         maxHeight: this.calcMaxHeight(referenceEl),
       })
+
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
         middleware: this.floatingUIMiddleware,

@@ -16,8 +16,8 @@ export const styles = css`
     --track-width-lg: 0.375rem;
 
     /* Default to light mode as fallback */
-    --spinner-track-color: var(--gds-sys-color-l3-background-secondary);
-    --spinner-active-color: var(--gds-sys-color-l3-content-secondary);
+    --spinner-track-color: var(--gds-sys-color-l3-02);
+    --spinner-active-color: var(--gds-sys-color-content-02);
     --spinner-label-color: currentColor;
     --spinner-backdrop-color: rgba(100, 100, 100, 0.4);
 
