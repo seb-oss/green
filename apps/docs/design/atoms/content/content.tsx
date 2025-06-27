@@ -11,6 +11,8 @@ import { ComponentColumn, ImageProvider } from '../../../settings/content/types'
 import Figure from '../figure/figure'
 import { Snippet } from '../snippet/snippet'
 
+import './content.css'
+
 interface DoItem {
   text: string
 }
@@ -74,6 +76,9 @@ export const RenderColumn = (
   )
   const [isHovered, setIsHovered] = useState(false)
   const systemColorScheme = useSettingsValue((s) => s.UI.Theme.ColorScheme)
+  const [selectedSnippet, setSelectedSnippet] = useState<string | null>(null)
+  const [snippetCode, setSnippetCode] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     setOverrideTheme(null)
@@ -88,6 +93,33 @@ export const RenderColumn = (
   }
 
   const currentTheme = overrideTheme || systemColorScheme
+
+  const handleShowCode = async (snippetSlug: string) => {
+    try {
+      const response = await fetch(
+        `https://api.seb.io/snippets/${snippetSlug}/${snippetSlug}.json`,
+      )
+      if (!response.ok)
+        throw new Error(`Failed to fetch snippet: ${snippetSlug}`)
+      const data = await response.json()
+      setSnippetCode(data.code)
+      setSelectedSnippet(snippetSlug)
+    } catch (err) {
+      console.warn('Error fetching snippet:', err)
+    }
+  }
+
+  const handleCopyCode = async () => {
+    if (snippetCode) {
+      try {
+        await navigator.clipboard.writeText(snippetCode)
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000) // Reset after 2 seconds
+      } catch (err) {
+        console.warn('Failed to copy:', err)
+      }
+    }
+  }
 
   switch (column.type) {
     case 'rich-text':
@@ -132,8 +164,11 @@ export const RenderColumn = (
                 align-items="center"
                 min-height={column.plain ? '100%' : '160px'}
                 position="relative"
-                variant={column.plain ? 'secondary' : 'primary'}
+                variant={column.plain ? 'secondary' : 'secondary'}
+                border-color="primary/0.4"
+                border-width={column.plain ? '0' : '4xs'}
                 data-plain={column.plain}
+                data-snipet={column.plain ? null : 'true'}
               >
                 <Snippet slug={column.Snippet || ''} />
 
@@ -161,6 +196,14 @@ export const RenderColumn = (
                         <Core.IconSun size="s" />
                       )}
                     </Core.GdsButton>
+
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="xs"
+                      onClick={() => handleShowCode(column.Snippet || '')}
+                    >
+                      <Core.IconZap size="s" />
+                    </Core.GdsButton>
                   </Core.GdsFlex>
                 )}
               </Core.GdsCard>
@@ -170,6 +213,75 @@ export const RenderColumn = (
               <Core.GdsText tag="small" padding-inline="s 0" color="secondary">
                 {column.caption}
               </Core.GdsText>
+            )}
+
+            {selectedSnippet && snippetCode && (
+              <Core.GdsDialog
+                variant="slide-out"
+                onGdsClose={() => {
+                  setSelectedSnippet(null)
+                  setSnippetCode(null)
+                }}
+                width="100%; s{600px}"
+                heading="Code Preview"
+                open
+              >
+                <Core.GdsFlex flex-direction="column" gap="m">
+                  <Core.GdsCard
+                    padding="l"
+                    height="200px"
+                    overflow="auto"
+                    justify-content="center"
+                    align-items="center"
+                    variant={column.plain ? 'secondary' : 'secondary'}
+                    border-color="primary/0.4"
+                    border-width={column.plain ? '0' : '4xs'}
+                    data-plain={column.plain}
+                    data-snipet={column.plain ? null : 'true'}
+                  >
+                    <Snippet slug={selectedSnippet} />
+                  </Core.GdsCard>
+
+                  <Core.GdsFlex
+                    flex-direction="column"
+                    gap="s"
+                    align-items="flex-start"
+                  >
+                    <Core.GdsTextarea value={snippetCode} label="Code" />
+                    <Core.GdsButton
+                      rank="secondary"
+                      width="max-content"
+                      size="small"
+                      onClick={handleCopyCode}
+                      variant={copied ? 'positive' : 'neutral'}
+                    >
+                      {copied ? (
+                        <>
+                          <Core.IconCheckmark slot="lead" />
+                          Copied!
+                        </>
+                      ) : (
+                        <>
+                          <Core.IconCopy slot="lead" />
+                          Copy
+                        </>
+                      )}
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                </Core.GdsFlex>
+
+                <Core.GdsButton
+                  rank="tertiary"
+                  size="small"
+                  onClick={() => {
+                    setSelectedSnippet(null)
+                    setSnippetCode(null)
+                  }}
+                  slot="footer"
+                >
+                  Close
+                </Core.GdsButton>
+              </Core.GdsDialog>
             )}
           </Core.GdsFlex>
         )

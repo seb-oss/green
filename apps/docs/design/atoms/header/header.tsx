@@ -64,7 +64,7 @@ export default function Header() {
       >
         <IconMagnifyingGlass></IconMagnifyingGlass>
       </Link>
-      <GdsDiv background="primary" className="glass"></GdsDiv>
+      <GdsDiv level="3" background="quarternary/0.6" className="glass"></GdsDiv>
     </GdsFlex>
   )
 }

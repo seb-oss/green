@@ -3,12 +3,28 @@
   z-index: 10;
 
   .glass {
+    display: flex;
     position: absolute;
     inset: 0;
-    mask-image: linear-gradient(to bottom, canvas, transparent);
-    backdrop-filter: blur(41px);
+    height: 140px;
+    width: 100%;
+    backdrop-filter: blur(14px);
+    mask-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 10%,
+      rgba(0, 0, 0, 0.85) 60%,
+      rgba(0, 0, 0, 0.4) 80%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    mask-mode: alpha;
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    overflow: hidden;
+    isolation: isolate;
     z-index: -1;
-    height: 100px;
-    pointer-events: none;
+  }
+
+  [data-filter] {
+    display: none;
   }
 }

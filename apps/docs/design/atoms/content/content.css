@@ -1,0 +1,6 @@
+[data-snipet='true'] {
+  --color: color-mix(in srgb, currentColor, transparent 90%);
+  background-image: radial-gradient(var(--color) 10%, transparent 0);
+  background-size: 1em 1em;
+  background-position: center;
+}
