@@ -52,7 +52,11 @@ const ListItem = ({
       margin="3xs 0 0 0"
       color={variant}
     >
-      <Core.IconCheckmark size="s"></Core.IconCheckmark>
+      {variant === 'positive' ? (
+        <Core.IconCheckmark size="s" />
+      ) : (
+        <Core.IconCrossLarge size="s" />
+      )}
     </Core.GdsDiv>
     <Core.GdsText tag="p">{text}</Core.GdsText>
   </Core.GdsFlex>
