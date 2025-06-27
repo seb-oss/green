@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.86.0
+
+### Minor Changes
+
+- 1ac544d: **Popover:** Close popover if page starts scrolling. Closes #2134
+
+### Patch Changes
+
+- f247f14: **Focus handling:** Fix issues with programmatic focus shifting with some form controls
+
 ## 1.85.4
 
 ### Patch Changes
