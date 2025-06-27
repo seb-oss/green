@@ -1,0 +1,43 @@
+.sidebar {
+  box-sizing: border-box;
+  height: calc(100vh - 90px);
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  [data-animation='scroll'] {
+    animation-name: ROW_SCROLL, ROW_SCROLL;
+    animation-fill-mode: both;
+    animation-timing-function: ease-in-out;
+    animation-direction: normal, reverse;
+    animation-timeline: view();
+    animation-range:
+      entry 0% entry 40px,
+      exit -40px exit 40px;
+  }
+
+  [data-backdrop] {
+    backdrop-filter: blur(10px);
+  }
+
+  [data-fade] {
+    transition: all 250ms;
+
+    @starting-style {
+      opacity: 0;
+      translate: 10px 0;
+    }
+  }
+
+  [data-sub-item] {
+    padding-left: 42px;
+  }
+}
+
+@keyframes ROW_SCROLL {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    scale: 0.96;
+  }
+}
