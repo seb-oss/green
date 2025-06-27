@@ -10,7 +10,13 @@ interface AnatomyListProps {
 
 export function Anatomy({ items }: AnatomyListProps) {
   return (
-    <Core.GdsFlex gap="m l" flex-wrap="wrap" padding="0 s" width="80%">
+    <Core.GdsFlex
+      gap="m l"
+      flex-wrap="wrap"
+      padding="0 s"
+      width="80%"
+      margin="0 0 l 0"
+    >
       {items.map((item, index) => (
         <Core.GdsFlex key={index} align-items="center" gap="xs">
           <Core.GdsBadge size="small">{(index + 1).toString()}</Core.GdsBadge>
