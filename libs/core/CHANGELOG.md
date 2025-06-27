@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.85.4
+
+### Patch Changes
+
+- c7610e3: FAB was missing from the index.ts export, meaning you have to import FAB from a subfolder, causing two import lines from green-core.
+
 ## 1.85.3
 
 ### Patch Changes
