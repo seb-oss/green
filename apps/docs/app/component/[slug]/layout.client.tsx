@@ -247,29 +247,6 @@ export function ComponentLayoutClient({
                     {component['anatomy-list']?.anatomyitems && (
                       <Anatomy items={component['anatomy-list'].anatomyitems} />
                     )}
-                    {/* <Core.GdsFlex gap="l" flex-wrap="wrap" padding="0 s">
-                      <Core.GdsFlex align-items="center" gap="xs">
-                        <Core.GdsBadge>1</Core.GdsBadge>
-                        <Core.GdsText font-size="body-s">
-                          Anatomy item
-                        </Core.GdsText>
-                      </Core.GdsFlex>
-                    </Core.GdsFlex> */}
-                    {component['anatomy-details'] && (
-                      <Core.GdsDiv margin="m 0 0 0">
-                        <Core.GdsRichText>
-                          <div
-                            dangerouslySetInnerHTML={{
-                              __html: component['anatomy-details']
-                                ? marked.parse(component['anatomy-details'], {
-                                    async: false,
-                                  })
-                                : '',
-                            }}
-                          />
-                        </Core.GdsRichText>
-                      </Core.GdsDiv>
-                    )}
                   </Core.GdsFlex>
                 )}
               </Core.GdsFlex>
