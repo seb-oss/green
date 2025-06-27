@@ -28,26 +28,25 @@ const style = css`
   @layer core {
     .button {
       align-items: center;
-
       background-color: var(--_color-bg);
-
-      border-color: var(--_color-border);
-      border-style: none;
-      border-bottom-style: solid;
       border-bottom-width: 2px;
-
+      border-style: none;
+      border-color: var(--_color-border);
+      border-bottom-style: solid;
       box-sizing: border-box;
-      color: var(--_color-text);
       color-scheme: dark light;
+      color: var(--_color-text);
       cursor: pointer;
-
       display: inline-flex;
+      font-family: inherit;
+      font-size: var(--_font-size);
+      font-weight: var(--_font-weight);
       gap: var(--_gap);
       height: 100%;
-
       inline-size: 100%;
       justify-content: space-between;
       justify-items: center;
+      line-height: var(--_line-height);
       outline-color: transparent;
       outline-offset: -2px;
       outline-style: solid;
@@ -55,18 +54,14 @@ const style = css`
       padding-block: var(--_padding-block);
       padding-inline: var(--_padding-inline);
       position: relative;
-      font-family: inherit;
-      font-size: var(--_font-size);
-      font-weight: var(--_font-weight);
-      line-height: var(--_line-height);
       transition-property: color, border-color;
-      transition: all 0.4s;
+      transition: all var(--gds-sys-motion-duration-fastest);
 
       &:focus-visible {
-        outline-color: currentColor;
-        border-radius: 6px;
-        overflow: visible;
         border-color: transparent;
+        border-radius: 6px;
+        outline-color: currentColor;
+        overflow: visible;
       }
 
       &:hover,
