@@ -58,7 +58,9 @@ const ListItem = ({
         <Core.IconCrossLarge size="s" />
       )}
     </Core.GdsDiv>
-    <Core.GdsText tag="p">{text}</Core.GdsText>
+    <Core.GdsText tag="p" text-wrap="pretty">
+      {text}
+    </Core.GdsText>
   </Core.GdsFlex>
 )
 

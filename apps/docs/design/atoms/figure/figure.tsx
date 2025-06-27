@@ -2,6 +2,7 @@
 
 import {
   GdsCard,
+  GdsDiv,
   GdsFlex,
   GdsText,
   IconCheckmark,
@@ -59,18 +60,42 @@ export default function Figure({
         align-items="center"
       />
       {showDoLabel && (
-        <GdsText tag="small" padding-inline="s 0" color="positive">
-          <GdsFlex align-items="center" gap="s">
-            <IconCheckmark size="m" /> DO
-          </GdsFlex>
-        </GdsText>
+        <GdsFlex align-items="center" gap="xs" padding="0 s">
+          <GdsDiv
+            display="flex"
+            background="positive"
+            min-width="20px"
+            max-width="20px"
+            min-height="20px"
+            max-height="20px"
+            border-radius="max"
+            justify-content="center"
+            align-items="center"
+            color="positive"
+          >
+            <IconCheckmark size="s" />
+          </GdsDiv>
+          <GdsText tag="p" color="positive">{`Do`}</GdsText>
+        </GdsFlex>
       )}
       {showDontLabel && (
-        <GdsText tag="small" padding-inline="s 0" color="negative">
-          <GdsFlex align-items="center" gap="s">
-            <IconCrossLarge size="m" /> {`Don't`}
-          </GdsFlex>
-        </GdsText>
+        <GdsFlex align-items="center" gap="s" padding="0 s">
+          <GdsDiv
+            display="flex"
+            background="negative"
+            min-width="20px"
+            max-width="20px"
+            min-height="20px"
+            max-height="20px"
+            border-radius="max"
+            justify-content="center"
+            align-items="center"
+            color="negative"
+          >
+            <IconCrossLarge size="s" />
+          </GdsDiv>
+          <GdsText tag="p" color="negative">{`Don't`}</GdsText>
+        </GdsFlex>
       )}
       {shouldShowCaption && (
         <GdsText tag="small" padding-inline="s 0" color="secondary">
