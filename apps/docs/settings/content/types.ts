@@ -37,7 +37,15 @@ export interface ComponentSummary {
 }
 
 export interface ComponentColumn {
-  type: 'rich-text' | 'snippet' | 'image' | 'figma' | 'paragraph' | 'details'
+  type:
+    | 'rich-text'
+    | 'snippet'
+    | 'image'
+    | 'figma'
+    | 'paragraph'
+    | 'details'
+    | 'do'
+    | 'dont'
   title?: string
   tag?: string
   content?: string

@@ -263,6 +263,7 @@ export function ComponentLayoutClient({
               </Core.GdsFlex>
             )}
             {children}
+
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsCard variant="secondary" border-color="primary">
                 <Core.GdsFlex flex-direction="column" gap="m" max-width="90ch">

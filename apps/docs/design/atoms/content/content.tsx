@@ -11,6 +11,53 @@ import { ComponentColumn, ImageProvider } from '../../../settings/content/types'
 import Figure from '../figure/figure'
 import { Snippet } from '../snippet/snippet'
 
+interface DoItem {
+  text: string
+}
+
+interface DontItem {
+  text: string
+}
+
+interface DoListColumn extends ComponentColumn {
+  type: 'do'
+  dolist?: DoItem[]
+}
+
+interface DontListColumn extends ComponentColumn {
+  type: 'dont'
+  dontlist?: DontItem[]
+}
+
+const ListItem = ({
+  number,
+  text,
+  variant,
+}: {
+  number: number
+  text: string
+  variant: 'positive' | 'negative'
+}) => (
+  <Core.GdsFlex gap="xs" align-items="flex-start">
+    <Core.GdsDiv
+      display="flex"
+      background={variant}
+      min-width="20px"
+      max-width="20px"
+      min-height="20px"
+      max-height="20px"
+      border-radius="max"
+      justify-content="center"
+      align-items="center"
+      margin="3xs 0 0 0"
+      color={variant}
+    >
+      <Core.IconCheckmark size="s"></Core.IconCheckmark>
+    </Core.GdsDiv>
+    <Core.GdsText tag="p">{text}</Core.GdsText>
+  </Core.GdsFlex>
+)
+
 export const RenderColumn = (
   column: ComponentColumn,
   slug: string,
@@ -164,6 +211,42 @@ export const RenderColumn = (
         >
           {column.text}
         </Core.GdsText>
+      )
+
+    case 'do':
+      const doColumn = column as DoListColumn
+      return (
+        <Core.GdsFlex flex-direction="column" gap="s">
+          <Core.GdsText tag="h3">{`Do`}</Core.GdsText>
+          <Core.GdsFlex flex-direction="column" gap="s">
+            {doColumn.dolist?.map((item, index) => (
+              <ListItem
+                key={index}
+                number={index + 1}
+                text={item.text}
+                variant="positive"
+              />
+            ))}
+          </Core.GdsFlex>
+        </Core.GdsFlex>
+      )
+
+    case 'dont':
+      const dontColumn = column as DontListColumn
+      return (
+        <Core.GdsFlex flex-direction="column" gap="s">
+          <Core.GdsText tag="h3">{`Don't`}</Core.GdsText>
+          <Core.GdsFlex flex-direction="column" gap="s">
+            {dontColumn.dontlist?.map((item, index) => (
+              <ListItem
+                key={index}
+                number={index + 1}
+                text={item.text}
+                variant="negative"
+              />
+            ))}
+          </Core.GdsFlex>
+        </Core.GdsFlex>
       )
 
     case 'figma':
