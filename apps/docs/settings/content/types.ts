@@ -79,6 +79,14 @@ export interface ComponentImage {
   svg: string
 }
 
+export interface AnatomyItem {
+  text: string
+}
+
+export interface AnatomyList {
+  anatomyitems: AnatomyItem[]
+}
+
 export interface ComponentContent extends BaseContent {
   type: 'component'
   hero_snippet?: string
@@ -86,6 +94,7 @@ export interface ComponentContent extends BaseContent {
   anatomy?: boolean
   'anatomy-overview'?: string
   'anatomy-details'?: string
+  'anatomy-list'?: AnatomyList
   summary?: string
   preamble?: string
   tags?: string[]

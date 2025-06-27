@@ -6,6 +6,7 @@ import { notFound, usePathname } from 'next/navigation'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Anatomy } from '../../../design/atoms/anatomy/anatomy'
 import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import { TableOfContents } from '../../../design/atoms/contents/contents'
 import Figure from '../../../design/atoms/figure/figure'
@@ -243,6 +244,17 @@ export function ComponentLayoutClient({
                       id={anatomyImage.svg}
                       caption={`Anatomy of ${component.title.toLowerCase()}`}
                     />
+                    {component['anatomy-list']?.anatomyitems && (
+                      <Anatomy items={component['anatomy-list'].anatomyitems} />
+                    )}
+                    {/* <Core.GdsFlex gap="l" flex-wrap="wrap" padding="0 s">
+                      <Core.GdsFlex align-items="center" gap="xs">
+                        <Core.GdsBadge>1</Core.GdsBadge>
+                        <Core.GdsText font-size="body-s">
+                          Anatomy item
+                        </Core.GdsText>
+                      </Core.GdsFlex>
+                    </Core.GdsFlex> */}
                     {component['anatomy-details'] && (
                       <Core.GdsDiv margin="m 0 0 0">
                         <Core.GdsRichText>
