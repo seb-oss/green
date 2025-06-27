@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.0.2
+
+### Patch Changes
+
+- e56c76a: V-angular: Updated textarea description logic with descriptionIsVisible property
+
 ## 6.0.1
 
 ### Patch Changes
