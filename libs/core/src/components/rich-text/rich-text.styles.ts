@@ -193,7 +193,7 @@ export const styles = css`
   details {
     border-top: solid var(--gds-sys-space-4xs)
       color-mix(in srgb, currentColor, transparent 90%);
-    font: var(--gds-sys-text-body-m);
+    font: var(--gds-sys-text-body-regular-m);
   }
 
   summary {

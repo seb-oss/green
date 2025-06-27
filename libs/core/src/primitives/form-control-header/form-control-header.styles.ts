@@ -27,6 +27,10 @@ export const styles = css`
       & ::slotted(label) {
         font: var(--gds-sys-text-detail-s);
       }
+
+      #extended-supporting-text[aria-hidden='false'] {
+        padding: var(--gds-sys-space-xs) var(--gds-sys-space-s);
+      }
     }
 
     #extended-supporting-text {
