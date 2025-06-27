@@ -67,6 +67,13 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * */
   @Input() onlyEmitDistinctChanges = true
 
+  /**
+   * Used to control if the dropdown list should select the current active element, when Space is pressed on the keyboard.
+   * Primary usage is for typeahead, where the should be able to write a filter query containing spaces,
+   * but not select the current active element with Space.
+   */
+  @Input() selectWithSpace = true
+
   @Output() selectedValueChanged = new EventEmitter<any>()
 
   @Output() closed = new EventEmitter<void>()
@@ -212,6 +219,8 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * @param event fired containing which key was pressed.
    */
   onKeyDown(event: KeyboardEvent) {
+    // If space is pressed but it should not select an option, do nothing
+    if (event.key === ' ' && !this.selectWithSpace) return true
     switch (event.key) {
       case ' ': // Space - placed here to ensure the dropdown-list closes after selecting using "Space"
       case 'ArrowUp': // Disable scrolling up
@@ -242,10 +251,12 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   /**
    * @internal
    * Enter toggles the dropdown, home, end, and, arrows change the index.
+   * Space selects the currently active option if `selectWithSpace` is true.
    * @param event fired containing which key was released.
    */
   onKeyUp(event: KeyboardEvent) {
-    if (!this.expanded) return
+    // If space is pressed but it should not select an option, do nothing
+    if (!this.expanded || (event.key === ' ' && !this.selectWithSpace)) return
     let option
 
     switch (event.key) {
