@@ -1,11 +1,13 @@
 import { localized, msg } from '@lit/localize'
-import { html } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
-import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
+import {
+  gdsCustomElement,
+  html,
+} from '../../utils/helpers/custom-element-scoping'
 import {
   withLayoutChildProps,
   withMarginProps,
