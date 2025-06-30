@@ -95,8 +95,12 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     </div>`
   }
 
+  focus(options?: FocusOptions): void {
+    this.chips[0]?.focus(options)
+  }
+
   protected _getValidityAnchor(): HTMLElement {
-    return this
+    return this.shadowRoot?.querySelector('div') as HTMLElement
   }
 
   #handleChipClick = (event: Event) => {
