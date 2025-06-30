@@ -225,11 +225,12 @@ export const RenderColumn = (
                 {showReplay && column.replay && (
                   <Core.GdsFlex
                     position="absolute"
+                    align-items="center"
                     inset="auto 10px 10px auto"
                     data-fade
                   >
                     <Core.GdsButton
-                      size="xs"
+                      size="small"
                       rank="tertiary"
                       onClick={(e) => {
                         e.stopPropagation()
