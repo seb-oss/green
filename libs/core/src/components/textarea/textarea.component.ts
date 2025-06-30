@@ -180,6 +180,10 @@ class Textarea extends GdsFormControlElement<string> {
     return this.shadowRoot?.querySelector('#field')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   @resizeObserver()
   private _handleResize() {
     if (!this.fieldBase) return
