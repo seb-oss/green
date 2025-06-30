@@ -6,7 +6,6 @@ import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
-import Migration from './content.icon.migrate'
 
 import type {
   ComponentContent,
@@ -54,6 +53,27 @@ export function IconContent({ component }: IconContentProps) {
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [selectedIcon, setSelectedIcon] = useState<IconData | null>(null)
 
+  const iconList = React.useMemo(() => {
+    if (!component.icons) return []
+
+    let results: [string, IconData][] = Object.entries(component.icons)
+
+    if (search) {
+      const fuseResults = fuse.search(search)
+      results = fuseResults.map(({ item }) => [item.id, item.originalIcon])
+    }
+
+    if (selectedCategory) {
+      results = results.filter(([_, icon]) =>
+        icon.meta.categories.includes(selectedCategory),
+      )
+    }
+
+    return results.sort((a, b) =>
+      a[1].displayName.localeCompare(b[1].displayName),
+    )
+  }, [search, selectedCategory, component.icons])
+
   if (!component.icons) return null
 
   const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
@@ -77,27 +97,6 @@ export function IconContent({ component }: IconContentProps) {
         .flat(),
     ),
   ).sort()
-
-  const iconList = React.useMemo(() => {
-    if (!component.icons) return []
-
-    let results: [string, IconData][] = Object.entries(component.icons)
-
-    if (search) {
-      const fuseResults = fuse.search(search)
-      results = fuseResults.map(({ item }) => [item.id, item.originalIcon])
-    }
-
-    if (selectedCategory) {
-      results = results.filter(([_, icon]) =>
-        icon.meta.categories.includes(selectedCategory),
-      )
-    }
-
-    return results.sort((a, b) =>
-      a[1].displayName.localeCompare(b[1].displayName),
-    )
-  }, [search, selectedCategory, component.icons])
 
   const handleCategoryChange = (e: Event) => {
     const target = e.target as HTMLSelectElement
