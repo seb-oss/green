@@ -14,6 +14,7 @@ const nextConfig = {
   unstable_runtimeJS: true,
   experimental: {
     esmExternals: true,
+    viewTransition: true,
     serverActions: {
       allowedOrigins: ['stg.seb.io', '*.seb.io'],
     },
