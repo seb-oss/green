@@ -145,8 +145,12 @@ export function ComponentLayoutClient({
                 position="relative"
                 overflow="hidden"
                 padding="0"
+                border-color="primary/0.4"
+                variant="secondary"
+                border-width="4xs"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                data-pattern
               >
                 {component.hero_snippet && (
                   <Snippet slug={component.hero_snippet?.toString()} />

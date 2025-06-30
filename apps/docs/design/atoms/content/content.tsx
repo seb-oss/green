@@ -148,6 +148,18 @@ export const RenderColumn = (
 
     case 'snippet':
       if (column.Snippet) {
+        const [snippetKey, setSnippetKey] = useState(0)
+        const [showReplay, setShowReplay] = useState(false)
+
+        const handleReplay = (immediate = false) => {
+          if (immediate) {
+            setSnippetKey((prev) => prev + 1)
+            return
+          }
+
+          setShowReplay(true)
+        }
+
         return (
           <Core.GdsFlex
             flex-direction="column"
@@ -169,8 +181,10 @@ export const RenderColumn = (
                 border-width={column.plain ? '0' : '4xs'}
                 data-plain={column.plain}
                 data-snipet={column.plain ? null : 'true'}
+                data-replay={column.replay}
+                onClick={() => handleReplay()}
               >
-                <Snippet slug={column.Snippet || ''} />
+                <Snippet slug={column.Snippet || ''} key={snippetKey} />
 
                 {isHovered && !column.plain && (
                   <Core.GdsFlex
@@ -179,6 +193,7 @@ export const RenderColumn = (
                     width="max-content"
                     position="absolute"
                     background={column.plain ? 'primary' : 'none'}
+                    data-fade
                     inset={
                       column.plain
                         ? 'auto 10px -28px auto'
@@ -203,6 +218,27 @@ export const RenderColumn = (
                       onClick={() => handleShowCode(column.Snippet || '')}
                     >
                       <Core.IconZap size="s" />
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                )}
+
+                {showReplay && (
+                  <Core.GdsFlex
+                    position="absolute"
+                    inset="auto 10px 10px auto"
+                    data-fade
+                  >
+                    <Core.GdsButton
+                      size="xs"
+                      rank="tertiary"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleReplay(true)
+                        setShowReplay(false)
+                      }}
+                    >
+                      <Core.IconArrowRotateClockwise slot="lead" size="m" />
+                      Replay
                     </Core.GdsButton>
                   </Core.GdsFlex>
                 )}

@@ -4,3 +4,11 @@
   background-size: 1em 1em;
   background-position: center;
 }
+
+[data-fade] {
+  transition: all 460ms;
+
+  @starting-style {
+    opacity: 0;
+  }
+}

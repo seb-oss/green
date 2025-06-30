@@ -64,6 +64,7 @@ export default function Card({
       position="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      z-index="0"
     >
       {children
         ? children
