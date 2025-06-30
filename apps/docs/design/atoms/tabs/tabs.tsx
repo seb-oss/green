@@ -38,10 +38,13 @@ export default function Tabs({ slug }: TabsProps) {
       overflow="hidden"
       inset="70px 0 0 0"
       margin="0"
-      border-radius="xs"
-      border="0"
-      variant="primary"
+      border-radius="0"
+      border-width="0 0 4xs 0"
+      variant="secondary"
+      border-color="primary"
       width="100%"
+      position="sticky"
+      z-index="10"
     >
       <Core.GdsFlex
         justify-content="space-between"
