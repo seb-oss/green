@@ -79,6 +79,8 @@ export const RenderColumn = (
   const [selectedSnippet, setSelectedSnippet] = useState<string | null>(null)
   const [snippetCode, setSnippetCode] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [snippetKey, setSnippetKey] = useState(0)
+  const [showReplay, setShowReplay] = useState(false)
 
   useEffect(() => {
     setOverrideTheme(null)
@@ -121,10 +123,8 @@ export const RenderColumn = (
     }
   }
 
-  const [snippetKey, setSnippetKey] = useState(0)
-  const [showReplay, setShowReplay] = useState(false)
-
   const handleReplay = (immediate = false) => {
+    if (!column.replay) return
     if (immediate) {
       setSnippetKey((prev) => prev + 1)
       return
@@ -222,7 +222,7 @@ export const RenderColumn = (
                   </Core.GdsFlex>
                 )}
 
-                {showReplay && (
+                {showReplay && column.replay && (
                   <Core.GdsFlex
                     position="absolute"
                     inset="auto 10px 10px auto"
