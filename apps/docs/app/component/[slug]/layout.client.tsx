@@ -11,6 +11,7 @@ import Breadcrumbs from '../../../design/atoms/breadcrumb/breadcrumb'
 import { TableOfContents } from '../../../design/atoms/contents/contents'
 import Figure from '../../../design/atoms/figure/figure'
 import { Link } from '../../../design/atoms/link/link'
+import { ArgsTable } from '../../../design/atoms/props/props'
 import { Similar } from '../../../design/atoms/similar/similar'
 import { Snippet } from '../../../design/atoms/snippet/snippet'
 import Tabs from '../../../design/atoms/tabs/tabs'
@@ -274,6 +275,7 @@ export function ComponentLayoutClient({
                 </Core.GdsFlex>
               </Core.GdsCard>
             )}
+            <ArgsTable componentName={slug} />
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>
         </Core.GdsFlex>
