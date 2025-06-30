@@ -4,16 +4,10 @@ import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import {
-  addMonths,
-  addYears,
-  isSameYear,
-  lastDayOfMonth,
-  setHours,
-  subMonths,
-  subYears,
-} from 'date-fns'
+import { addYears, isSameYear, subYears } from 'date-fns'
 
+import { GdsButton } from '../../components/button/button.component'
+import { GdsFlex } from '../../components/flex/flex.component'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
@@ -110,6 +104,12 @@ export class GdsYearPicker extends GdsElement {
   noCurrentYear = false
 
   /**
+   * Whether to show controls to change visible years (normaly you see 5*5=25 years at the same time).
+   */
+  @property({ type: Boolean, attribute: 'change-years-controls' })
+  changeYearsControls = false
+
+  /**
    * The date that is currently focused.
    */
   @property({ converter: dateConverter, attribute: 'focused-date' })
@@ -196,6 +196,9 @@ export class GdsYearPicker extends GdsElement {
   @query('td[tabindex="0"]')
   private _elFocusedCell?: HTMLElement
 
+  private _elFocusedButton?: HTMLElement
+  _elFocusedButton = null
+
   connectedCallback(): void {
     super.connectedCallback()
     TransitionalStyles.instance.apply(this, 'gds-year-picker')
@@ -216,45 +219,73 @@ export class GdsYearPicker extends GdsElement {
     const currentYear = new Date().getFullYear()
     const startYear = this.getStartYear()
 
-    return html` <table role="grid" aria-label="${ifDefined(this.label)}">
-      <tbody role="rowgroup">
-        ${Array.from({ length: this.rows }).map(
-          (_, rowIdx) => html`
-            <tr role="row">
-              ${Array.from({ length: this.columns }).map((_, colIdx) => {
-                const year = startYear + rowIdx * this.columns + colIdx
-                const isDisabled =
-                  year < this.min.getFullYear() || year > this.max.getFullYear()
-                if (this.hideExtraneousYears && isDisabled)
-                  return html`<td inert></td>`
-                return html`
-                  <td
-                    class="${classMap({
-                      small: this.size == 'small',
-                      today: !this.noCurrentYear && currentYear == year,
-                      disabled: isDisabled,
-                    })}"
-                    ?disabled=${isDisabled}
-                    tabindex="${this.focusedYear == year && !isDisabled
-                      ? 0
-                      : -1}"
-                    aria-selected="${this.#getSelectedYear() == year &&
-                    !isDisabled
-                      ? 'true'
-                      : 'false'}"
-                    @click=${() =>
-                      isDisabled ? null : this.#setSelectedYear(year)}
-                    id="yearCell-${rowIdx * this.columns + colIdx}"
-                  >
-                    ${year}
-                  </td>
-                `
-              })}
-            </tr>
-          `,
-        )}
-      </tbody>
-    </table>`
+    return html` <gds-div overflow="auto">
+      ${this.changeYearsControls
+        ? html`<gds-flex justify-content="space-around" align-items="center">
+            <gds-button
+              id="prev"
+              rank="tertiary"
+              label="Previous years"
+              @click=${this.#setPreviousYears}
+              @focus=${this.#handleButtonFocus}
+              @blur=${this.#handleButtonBlur}
+            >
+              <gds-icon-chevron-left></gds-icon-chevron-left>
+            </gds-button>
+            <span id="range">${this.#getRange()}</span>
+            <gds-button
+              id="next"
+              rank="tertiary"
+              label="Next years"
+              @click=${this.#setNextYears}
+              @focus=${this.#handleButtonFocus}
+              @blur=${this.#handleButtonBlur}
+            >
+              <gds-icon-chevron-right></gds-icon-chevron-right>
+            </gds-button>
+          </gds-flex>`
+        : null}
+      <table role="grid" aria-label="${ifDefined(this.label)}">
+        <tbody role="rowgroup">
+          ${Array.from({ length: this.rows }).map(
+            (_, rowIdx) => html`
+              <tr role="row">
+                ${Array.from({ length: this.columns }).map((_, colIdx) => {
+                  const year = startYear + rowIdx * this.columns + colIdx
+                  const isDisabled =
+                    year < this.min.getFullYear() ||
+                    year > this.max.getFullYear()
+                  if (this.hideExtraneousYears && isDisabled)
+                    return html`<td inert></td>`
+                  return html`
+                    <td
+                      class="${classMap({
+                        small: this.size == 'small',
+                        today: !this.noCurrentYear && currentYear == year,
+                        disabled: isDisabled,
+                      })}"
+                      ?disabled=${isDisabled}
+                      tabindex="${this.focusedYear == year && !isDisabled
+                        ? 0
+                        : -1}"
+                      aria-selected="${this.#getSelectedYear() == year &&
+                      !isDisabled
+                        ? 'true'
+                        : 'false'}"
+                      @click=${() =>
+                        isDisabled ? null : this.#setSelectedYear(year)}
+                      id="yearCell-${rowIdx * this.columns + colIdx}"
+                    >
+                      ${year}
+                    </td>
+                  `
+                })}
+              </tr>
+            `,
+          )}
+        </tbody>
+      </table></gds-div
+    >`
   }
 
   #getSelectedYear(): number {
@@ -274,6 +305,37 @@ export class GdsYearPicker extends GdsElement {
     )
   }
 
+  #setPreviousYears = (_e: MouseEvent) => {
+    const totalCells = this.columns * this.rows
+    const minYear = this.min.getFullYear()
+    const startYear = this.getStartYear()
+    if (minYear < startYear) this.focusedYear -= totalCells
+    _e.preventDefault()
+  }
+
+  #setNextYears = (_e: MouseEvent) => {
+    const totalCells = this.columns * this.rows
+    const maxYear = this.max.getFullYear()
+    const startYear = this.getStartYear()
+    if (maxYear > startYear + totalCells) this.focusedYear += totalCells
+    _e.preventDefault()
+  }
+
+  #getRange() {
+    const totalCells = this.columns * this.rows
+    const startYear = this.getStartYear()
+    const endYear = startYear + totalCells - 1
+    return startYear + ' - ' + endYear
+  }
+
+  #handleButtonFocus = (e: FocusEvent) => {
+    this._elFocusedButton = e.target as HTMLElement
+  }
+
+  #handleButtonBlur = (_) => {
+    this._elFocusedButton = null
+  }
+
   @watch('value')
   private _valueChanged() {
     if (!this.value) return
@@ -282,6 +344,7 @@ export class GdsYearPicker extends GdsElement {
 
   #handleKeyDown(e: KeyboardEvent) {
     let handled = false
+    if (this._elFocusedButton) return
     if (e.key === 'ArrowLeft') {
       if (this.focusedYear > this.min.getFullYear()) this.focusedYear -= 1
       handled = true

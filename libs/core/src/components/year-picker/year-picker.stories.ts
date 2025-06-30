@@ -149,9 +149,21 @@ export const Popover: Story = {
 }
 
 /**
- * Example of mouse controls for selecting previous and next years.
+ * Use `change-years-controls` to show controls for selecting previous and next years.
  */
 export const ChangeYear: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-year-picker min="1950-01-01" max="2100-01-01" change-years-controls>
+    </gds-year-picker>
+  `,
+}
+
+/*
+/ **
+ * Example of mouse controls for selecting previous and next years.
+ * /
+export const ChangeYear2: Story = {
   ...DefaultParams,
   render: (args) => html`
     <div style="">
@@ -200,7 +212,7 @@ export const ChangeYear: Story = {
       updateRange()
     </script>
   `,
-}
+}*/
 
 /*
 export const OutsideMinMax: Story = {

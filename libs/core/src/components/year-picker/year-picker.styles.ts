@@ -4,6 +4,13 @@ const style = css`
   @layer base, reset;
 
   @layer base {
+    gds-flex {
+      box-shadow: 0 var(--gds-sys-space-4xs) 0 0
+        var(--gds-sys-color-l2-border-primary);
+      padding-bottom: 0.25rem;
+      margin: 0.5rem 1rem -0.5rem 1rem;
+    }
+
     :host {
       display: flex;
       justify-content: center;
