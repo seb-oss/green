@@ -2,9 +2,11 @@
 'use client'
 
 import React, { useState } from 'react'
+import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
+import Migration from './content.icon.migrate'
 
 import type {
   ComponentContent,
@@ -21,6 +23,29 @@ const formatDisplayName = (name: string) => {
 
 type IconSize = 's' | 'm' | 'l'
 
+interface FuseIconItem {
+  id: string
+  searchName: string
+  searchDisplayName: string
+  searchCategories: string[]
+  searchTags: string[]
+  searchDescription?: string
+  originalIcon: IconData
+}
+
+const fuseOptions = {
+  keys: [
+    'searchName',
+    'searchDisplayName',
+    'searchCategories',
+    'searchTags',
+    'searchDescription',
+  ],
+  threshold: 0.3,
+  ignoreLocation: true,
+  shouldSort: true,
+}
+
 export function IconContent({ component }: IconContentProps) {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
@@ -31,7 +56,20 @@ export function IconContent({ component }: IconContentProps) {
 
   if (!component.icons) return null
 
-  // Get unique categories
+  const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
+    ([name, icon]) => ({
+      id: name,
+      searchName: name,
+      searchDisplayName: icon.displayName,
+      searchCategories: icon.meta.categories,
+      searchTags: icon.meta.tags,
+      searchDescription: icon.meta.description,
+      originalIcon: icon,
+    }),
+  )
+
+  const fuse = new Fuse(fuseItems, fuseOptions)
+
   const categories = Array.from(
     new Set(
       Object.values(component.icons)
@@ -40,16 +78,26 @@ export function IconContent({ component }: IconContentProps) {
     ),
   ).sort()
 
-  // Filter icons based on search and category
-  const iconList = Object.entries(component.icons)
-    .filter(([name, icon]) => {
-      const matchesSearch = name.toLowerCase().includes(search.toLowerCase())
-      const matchesCategory = selectedCategory
-        ? icon.meta.categories.includes(selectedCategory)
-        : true
-      return matchesSearch && matchesCategory
-    })
-    .sort((a, b) => a[1].displayName.localeCompare(b[1].displayName))
+  const iconList = React.useMemo(() => {
+    if (!component.icons) return []
+
+    let results: [string, IconData][] = Object.entries(component.icons)
+
+    if (search) {
+      const fuseResults = fuse.search(search)
+      results = fuseResults.map(({ item }) => [item.id, item.originalIcon])
+    }
+
+    if (selectedCategory) {
+      results = results.filter(([_, icon]) =>
+        icon.meta.categories.includes(selectedCategory),
+      )
+    }
+
+    return results.sort((a, b) =>
+      a[1].displayName.localeCompare(b[1].displayName),
+    )
+  }, [search, selectedCategory, component.icons])
 
   const handleCategoryChange = (e: Event) => {
     const target = e.target as HTMLSelectElement
@@ -160,7 +208,7 @@ export function IconContent({ component }: IconContentProps) {
             </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </Core.GdsGrid>
-        {!search && (
+        {!search && false && (
           <Core.GdsCard
             variant="warning"
             padding="s xs s m"
@@ -173,8 +221,7 @@ export function IconContent({ component }: IconContentProps) {
               <Core.IconWarningSign size="m" />
               <Core.GdsFlex flex-direction="column" gap="2xs">
                 <Core.GdsText font-size="detail-s" color="secondary">
-                  View deprecated icons and font awesome recommended
-                  replacements
+                  Font awesome migration
                 </Core.GdsText>
               </Core.GdsFlex>
             </Core.GdsFlex>
@@ -226,7 +273,6 @@ export function IconContent({ component }: IconContentProps) {
           ))}
         </Core.GdsGrid>
       </Core.GdsFlex>
-
       {selectedIcon && (
         <>
           <Core.GdsDialog

@@ -121,6 +121,18 @@ export const RenderColumn = (
     }
   }
 
+  const [snippetKey, setSnippetKey] = useState(0)
+  const [showReplay, setShowReplay] = useState(false)
+
+  const handleReplay = (immediate = false) => {
+    if (immediate) {
+      setSnippetKey((prev) => prev + 1)
+      return
+    }
+
+    setShowReplay(true)
+  }
+
   switch (column.type) {
     case 'rich-text':
       return (
@@ -148,18 +160,6 @@ export const RenderColumn = (
 
     case 'snippet':
       if (column.Snippet) {
-        const [snippetKey, setSnippetKey] = useState(0)
-        const [showReplay, setShowReplay] = useState(false)
-
-        const handleReplay = (immediate = false) => {
-          if (immediate) {
-            setSnippetKey((prev) => prev + 1)
-            return
-          }
-
-          setShowReplay(true)
-        }
-
         return (
           <Core.GdsFlex
             flex-direction="column"
