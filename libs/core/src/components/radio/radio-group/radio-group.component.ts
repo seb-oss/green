@@ -84,6 +84,10 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.removeEventListener('invalid', this._syncRadioStates)
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   protected _getValidityAnchor(): HTMLElement {
     return this._contentElement
   }

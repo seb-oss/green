@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.86.0
+
+### Minor Changes
+
+- 1ac544d: **Popover:** Close popover if page starts scrolling. Closes #2134
+
+### Patch Changes
+
+- f247f14: **Focus handling:** Fix issues with programmatic focus shifting with some form controls
+
+## 1.85.4
+
+### Patch Changes
+
+- c7610e3: FAB was missing from the index.ts export, meaning you have to import FAB from a subfolder, causing two import lines from green-core.
+
+## 1.85.3
+
+### Patch Changes
+
+- 1891932: Add missing exports from alert, rich-text and segment.
+
 ## 1.85.2
 
 ### Patch Changes
