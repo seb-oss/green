@@ -275,7 +275,7 @@ export function ComponentLayoutClient({
                 </Core.GdsFlex>
               </Core.GdsCard>
             )}
-            <ArgsTable componentName={slug} />
+            {false && <ArgsTable componentName={slug} />}
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>
         </Core.GdsFlex>
