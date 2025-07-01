@@ -128,6 +128,9 @@ export class GdsOption extends Focusable(GdsElement) {
       ${when(isMultiple, () =>
         checkboxToggle({
           checked: this.selected,
+          indeterminate: false,
+          disabled: false,
+          invalid: false,
         }),
       )} <slot></slot>
     </div>`
