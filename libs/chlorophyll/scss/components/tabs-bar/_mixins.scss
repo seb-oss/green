@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use '../../tokens/shame' as newTokens;
 @use '../../common';
 
@@ -5,7 +6,7 @@ $font-weight: 'medium';
 $color: newTokens.$text-primary-color;
 $color-active: newTokens.$text-primary-color;
 $_border-width: var(--sg-border-width);
-$greyScale: map-get(newTokens.$grey, light);
+$greyScale: map.get(newTokens.$grey, light);
 
 @mixin tab {
   @include common.add-border($sides: 'bottom');
@@ -25,7 +26,7 @@ $greyScale: map-get(newTokens.$grey, light);
   border-radius: 0.25rem 0.25rem 0 0;
   border-left: $_border-width solid transparent;
   border-top: $_border-width solid transparent;
-  border-right: $_border-width solid transparent;  
+  border-right: $_border-width solid transparent;
 
   .gds-tabs--fluid & {
     flex: 1;
@@ -46,7 +47,7 @@ $greyScale: map-get(newTokens.$grey, light);
   );
 
   @include common.add-hover-state(
-    map-get($greyScale, 1000)
+    map.get($greyScale, 1000)
   ); // This is actually Base800
 
   border-top-left-radius: 0.25rem;

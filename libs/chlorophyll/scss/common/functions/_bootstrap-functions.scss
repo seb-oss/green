@@ -1,4 +1,7 @@
 @use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:string';
 @use '../../tokens/config';
 
 /* stylelint-disable max-nesting-depth */
@@ -13,7 +16,13 @@
   $prev-key: null;
   $prev-num: null;
   @each $key, $num in $map {
-    @if $prev-num == null or unit($num) == '%' or unit($prev-num) == '%' {
+    @if $prev-num ==
+      null or
+      math.unit($num) ==
+      '%' or
+      math.unit($prev-num) ==
+      '%'
+    {
       // Do nothing
     } @else if not comparable($prev-num, $num) {
       @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
@@ -28,9 +37,9 @@
 // Starts at zero
 // Used to ensure the min-width of the lowest breakpoint starts at 0.
 @mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
-  @if length($map) > 0 {
-    $values: map-values($map);
-    $first-value: nth($values, 1);
+  @if list.length($map) > 0 {
+    $values: map.values($map);
+    $first-value: list.nth($values, 1);
     @if $first-value != 0 {
       @warn 'First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.';
     }
@@ -51,12 +60,12 @@
 // @param {String} $replace ('') - New value
 // @return {String} - Updated string
 @function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
+  $index: string.index($string, $search);
 
   @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace +
+    @return string.slice($string, 1, $index - 1) + $replace +
       str-replace(
-        str-slice($string, $index + str-length($search)),
+        string.slice($string, $index + string.length($search)),
         $search,
         $replace
       );
@@ -71,7 +80,7 @@
   $result: ();
   @each $key, $value in $map {
     @if $key != 0 {
-      $result: map-merge($result, ('n' + $key: (-$value)));
+      $result: map.merge($result, ('n' + $key: (-$value)));
     }
   }
   @return $result;
@@ -81,35 +90,35 @@ $enable-important-utilities: true;
 // Utility generator
 // Used to generate utilities & print utilities
 @mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
-  $values: map-get($utility, values);
+  $values: map.get($utility, values);
 
   // If the values are a list or string, convert it into a map
-  @if type-of($values) == 'string' or type-of(nth($values, 1)) != 'list' {
+  @if type-of($values) == 'string' or type-of(list.nth($values, 1)) != 'list' {
     $values: zip($values, $values);
   }
 
   @each $key, $value in $values {
-    $properties: map-get($utility, property);
+    $properties: map.get($utility, property);
 
     // Multiple properties are possible, for example with vertical or horizontal margins or paddings
     @if type-of($properties) == 'string' {
-      $properties: append((), $properties);
+      $properties: list.append((), $properties);
     }
 
     // Use custom class if present
     $property-class: if(
-      map-has-key($utility, class),
-      map-get($utility, class),
-      nth($properties, 1)
+      map.has-key($utility, class),
+      map.get($utility, class),
+      list.nth($properties, 1)
     );
     $property-class: if($property-class == null, '', $property-class);
 
     // State params to generate pseudo-classes
-    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+    $state: if(map.has-key($utility, state), map.get($utility, state), ());
 
     $infix: if(
-      $property-class == '' and str-slice($infix, 1, 1) == '-',
-      str-slice($infix, 2),
+      $property-class == '' and string.slice($infix, 1, 1) == '-',
+      string.slice($infix, 2),
       $infix
     );
 
@@ -121,7 +130,7 @@ $enable-important-utilities: true;
     );
 
     // Disable RFS for now
-    /*@if map-get($utility, rfs) {
+    /*@if map.get($utility, rfs) {
       // Inside the media query
       @if $is-rfs-media-query {
         $val: rfs-value($value);
@@ -134,9 +143,9 @@ $enable-important-utilities: true;
       }
     }*/
 
-    $is-css-var: map-get($utility, css-var);
-    $is-local-vars: map-get($utility, local-vars);
-    $is-rtl: map-get($utility, rtl);
+    $is-css-var: map.get($utility, css-var);
+    $is-local-vars: map.get($utility, local-vars);
+    $is-rtl: map.get($utility, rtl);
 
     @if $value != null {
       @if $is-rtl == false {

@@ -10,7 +10,7 @@
 
 $utilities: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
-$utilities: map-merge(
+$utilities: map.merge(
   (
     'align': (
       property: vertical-align,
@@ -89,7 +89,7 @@ $utilities: map-merge(
       property: border-color,
       class: border,
       values:
-        map-merge(
+        map.merge(
           map.get(newTokens.$intent, 'light'),
           (
             'white': newTokens.$white,
@@ -268,7 +268,7 @@ $utilities: map-merge(
       property: margin,
       class: m,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -280,7 +280,7 @@ $utilities: map-merge(
       property: margin-right margin-left,
       class: mx,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -292,7 +292,7 @@ $utilities: map-merge(
       property: margin-top margin-bottom,
       class: my,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -304,7 +304,7 @@ $utilities: map-merge(
       property: margin-top,
       class: mt,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -316,7 +316,7 @@ $utilities: map-merge(
       property: margin-right,
       class: me,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -328,7 +328,7 @@ $utilities: map-merge(
       property: margin-bottom,
       class: mb,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -340,7 +340,7 @@ $utilities: map-merge(
       property: margin-left,
       class: ms,
       values:
-        map-merge(
+        map.merge(
           tokens.$spacing,
           (
             auto: auto,
@@ -512,7 +512,7 @@ $utilities: map-merge(
         'text-opacity': 1,
       ),
       values:
-        map-merge(tokens.$extended-colors,
+        map.merge(tokens.$extended-colors,
           (
             'reset': inherit,
           )),
@@ -535,7 +535,7 @@ $utilities: map-merge(
         'bg-opacity': 1,
       ),
       values:
-        map-merge(
+        map.merge(
           tokens.$extended-colors,
           (
             'transparent': transparent,

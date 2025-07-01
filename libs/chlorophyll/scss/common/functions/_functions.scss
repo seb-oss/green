@@ -1,5 +1,7 @@
 @use 'sass:math';
 @use 'sass:map';
+@use 'sass:color';
+@use 'sass:list';
 $white: #fff;
 $black: black;
 $grey-200: rgb(248, 248, 248);
@@ -92,9 +94,9 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
  * See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
  */
 @function luminance($color) {
-  $red: nth($linear-channel-values, red($color) + 1);
-  $green: nth($linear-channel-values, green($color) + 1);
-  $blue: nth($linear-channel-values, blue($color) + 1);
+  $red: list.nth($linear-channel-values, color.red($color) + 1);
+  $green: list.nth($linear-channel-values, color.green($color) + 1);
+  $blue: list.nth($linear-channel-values, color.blue($color) + 1);
 
   //@return 0.2126 * $red + 0.7152 * $green + 0.0722 * $blue;
   @return 0.2126 * $red + 0.7152 * $green + 0.0693 * $blue;
@@ -134,25 +136,25 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 // .sample { validate-font-size: 16; }
 //
 @function validate-font-size($size) {
-  @if unit($size) ==
+  @if math.unit($size) ==
     'em' or
-    unit($size) ==
+    math.unit($size) ==
     'rem' or
-    unit($size) ==
+    math.unit($size) ==
     'px' or
-    unit($size) ==
+    math.unit($size) ==
     ''
   {
     // Check if a flexible unit
-    @if unit($size) == 'em' or unit($size) == 'rem' {
+    @if math.unit($size) == 'em' or math.unit($size) == 'rem' {
       // Need to convert to a pixel value. Let's not overcomplicate it with possible EM inheritence scale factors
       @return strip-unit($size * 16);
     }
-    @if unit($size) == 'px' {
+    @if math.unit($size) == 'px' {
       // We expect PX, so strip the value and return it
       @return strip-unit($size);
     }
-    @if unit($size) == '' {
+    @if math.unit($size) == '' {
       @return $size;
     }
   } @else {
@@ -287,10 +289,10 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
     $offsetThreshold,
     $ratio
   );
-  background-color: nth($color-combination, 1);
-  color: nth($color-combination, 2);
-  --background: #{nth($color-combination, 1)};
-  --color: #{nth($color-combination, 2)};
+  background-color: list.nth($color-combination, 1);
+  color: list.nth($color-combination, 2);
+  --background: #{list.nth($color-combination, 1)};
+  --color: #{list.nth($color-combination, 2)};
 }
 
 // a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false, $graphic: false)
@@ -380,11 +382,13 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675
 }
 
 @function stripped-rgb($color) {
-  @return red($color) + ', ' + green($color) + ', ' + blue($color);
+  @return color.red($color) + ', ' + color.green($color) + ', ' +
+    color.blue($color);
 }
 
 @function stripped-hsl($color) {
-  @return hue($color) + ', ' + saturation($color) + ', ' + lightness($color);
+  @return color.hue($color) + ', ' + color.saturation($color) + ', ' +
+    color.lightness($color);
 }
 
 @function hsl-map($colors) {
