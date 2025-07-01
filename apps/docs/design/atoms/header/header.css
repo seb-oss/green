@@ -6,14 +6,14 @@
     display: flex;
     position: absolute;
     inset: 0;
-    height: 140px;
+    height: 100px;
     width: 100%;
     backdrop-filter: blur(14px);
     mask-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1) 10%,
       rgba(0, 0, 0, 0.85) 60%,
-      rgba(0, 0, 0, 0.4) 80%,
+      rgba(0, 0, 0, 0.9) 80%,
       rgba(0, 0, 0, 0) 100%
     );
     mask-mode: alpha;
@@ -21,6 +21,7 @@
     mask-size: 100% 100%;
     overflow: hidden;
     isolation: isolate;
+    pointer-events: none;
     z-index: -1;
   }
 
