@@ -36,15 +36,12 @@ export default function Tabs({ slug }: TabsProps) {
     <Core.GdsCard
       padding="0"
       overflow="hidden"
-      inset="70px 0 0 0"
       margin="0"
       border-radius="0"
       border-width="0 0 4xs 0"
-      variant="secondary"
       border-color="primary"
+      variant="secondary"
       width="100%"
-      position="sticky"
-      z-index="10"
     >
       <Core.GdsFlex
         justify-content="space-between"

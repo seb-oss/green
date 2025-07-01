@@ -31,7 +31,7 @@ export default function Header() {
       align-items="center"
       justify-content="space-between"
       padding="l l l l"
-      position="sticky"
+      // position="sticky"
       className="header"
       inset="0"
       gap="m"
