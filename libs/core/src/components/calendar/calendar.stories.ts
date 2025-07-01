@@ -11,7 +11,7 @@ import '../dropdown'
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/calendar)
  *
- * The calendar component is a visual representation of a calendar that allows users to select a date.
+ * The calendar displays a grid of selectable dates.
  */
 const meta: Meta = {
   title: 'Components/Calendar',
@@ -99,11 +99,11 @@ export const Usage: Story = {
       </div>
     </div>
     <script>
-      const cal = document.getElementById('cal')
-      const year = document.getElementById('year')
-      const month = document.getElementById('month')
+      var cal = document.getElementById('cal')
+      var year = document.getElementById('year')
+      var month = document.getElementById('month')
 
-      const customizedDates = [
+      var customizedDates = [
         {
           date: new Date('2024-06-04'),
           color: 'var(--intent-danger-background)',

@@ -117,6 +117,10 @@ class Button extends GdsFormControlElement<any> {
     TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   get #isLink() {
     return this.href.length > 0
   }
@@ -190,13 +194,11 @@ class Button extends GdsFormControlElement<any> {
   }
 
   #handleClick = (e: MouseEvent) => {
-    this.dispatchEvent(
-      new CustomEvent('gds-click', {
-        bubbles: true,
-        composed: true,
-        detail: e,
-      }),
-    )
+    this.dispatchCustomEvent('gds-click', {
+      bubbles: true,
+      composed: true,
+      detail: e,
+    })
 
     if (this.form && !this.#isLink) {
       if (this.type === 'submit') {

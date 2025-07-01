@@ -7,10 +7,8 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import './flex'
 
 /**
- * The `gds-flex` component is a container element that can be used to wrap other components and control the layout of its children.
- *
+ * `gds-flex` extends `gds-div` and sets display to flex by default.
  */
-
 const meta: Meta = {
   title: 'Components/Flex',
   component: 'gds-flex',

@@ -110,6 +110,10 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     })
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     const CLASSES = {
       multiple: this.multiple,
@@ -235,21 +239,16 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     this.#setValueFromSelectElement()
 
     requestAnimationFrame(() => {
-      this.dispatchEvent(
-        new CustomEvent('input', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
-
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('input', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      })
+      this.dispatchCustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      })
     })
   }
 

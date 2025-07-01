@@ -205,6 +205,8 @@ export class NggvTypeaheadDirective<
       this.hostDropdown.allowControlNullishOption = false
       this.hostDropdown.options = this.formatOptions(filteredValues)
       this.hostDropdown.textToHighlight = `${input || ''}`
+      this.hostDropdown.onlyHandleDistinctChanges = false
+      this.hostDropdown.selectWithSpace = false
       this.hostDropdown.detectChanges()
       return
     }

@@ -108,6 +108,30 @@ for (const variant of ['default' /*, 'floating-label' */] as const) {
         const clearButtonEl = el.test_getClearButton()
         expect(clearButtonEl).to.exist
       })
+
+      it('should forward standard attributes', async () => {
+        const el = await fixture<GdsTextarea>(
+          html`<gds-textarea
+            variant="${variant}"
+            autocapitalize="on"
+            autocomplete="on"
+            autocorrect="on"
+            spellcheck="true"
+            inputmode="numeric"
+            autofocus
+            enterkeyhint="enter"
+          ></gds-textarea>`,
+        )
+
+        const textareaEl = el.shadowRoot?.querySelector('textarea')
+        expect(textareaEl?.getAttribute('autocapitalize')).to.equal('on')
+        expect(textareaEl?.getAttribute('autocomplete')).to.equal('on')
+        expect(textareaEl?.getAttribute('autocorrect')).to.equal('on')
+        expect(textareaEl?.getAttribute('spellcheck')).to.equal('true')
+        expect(textareaEl?.getAttribute('inputmode')).to.equal('numeric')
+        expect(textareaEl?.getAttribute('autofocus')).to.equal('')
+        expect(textareaEl?.getAttribute('enterkeyhint')).to.equal('enter')
+      })
     })
 
     describe('Interactions', async () => {

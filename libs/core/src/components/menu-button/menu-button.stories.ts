@@ -15,6 +15,9 @@ import '../icon/icons/people.js'
 import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 
+/**
+ * A menu button combines button and link behaviors for navigation menus.
+ */
 const meta: Meta = {
   title: 'Components/Menu button',
   component: 'gds-menu-button',

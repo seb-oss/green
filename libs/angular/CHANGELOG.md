@@ -1,5 +1,107 @@
 # Changelog
 
+## 6.0.1
+
+### Patch Changes
+
+- df15684: V-Angular: Updated the way required attribute is set inside components
+- Updated dependencies [1891932]
+  - @sebgroup/green-core@1.85.3
+
+## 6.0.0
+
+### Major Changes
+
+- ba3268c: Update minimal Angular version to 18
+
+### Patch Changes
+
+- Updated dependencies [60e38d9]
+- Updated dependencies [e4eb1ad]
+  - @sebgroup/green-core@1.85.0
+
+## 5.13.3
+
+### Patch Changes
+
+- 63487db: **V-Angular:** Fix component id collision warnings for toast component
+- Updated dependencies [56d1779]
+- Updated dependencies [55b23da]
+  - @sebgroup/green-core@1.84.0
+
+## 5.13.2
+
+### Patch Changes
+
+- b89a46f: V-Angular: Removed the top line/border from the table header.
+- Updated dependencies [c6833ae]
+  - @sebgroup/green-core@1.83.2
+
+## 5.13.1
+
+### Patch Changes
+
+- 0acbec7: Dragdrop: Prevet overflow for file name
+- Updated dependencies [1aa919a]
+- Updated dependencies [44dff87]
+- Updated dependencies [41b8a90]
+- Updated dependencies [73e0759]
+- Updated dependencies [4d4704b]
+- Updated dependencies [f1ceb54]
+  - @sebgroup/green-core@1.83.0
+
+## 5.13.0
+
+### Minor Changes
+
+- 9d223a7: V-Angular: Adding small variant of Dropdown
+- 9d223a7: V-Angular: Adding small variant of Checkbox
+- 9d223a7: V-Angular: Adding small variant of DateInput
+- 9d223a7: V-Angular: Adding small variant of Textarea
+
+### Patch Changes
+
+- 1829e13: Fixed dropdown selection behaviour when typeahead is used
+- 9d223a7: V-Angular: Fixing icon sizing in Date input
+
+## 5.12.1
+
+### Patch Changes
+
+- a4252f9: **NggCoreControl:** Update selectors to only apply when controls are used with reactive forms (when `formControlName` is present)
+- Updated dependencies [4c000b4]
+  - @sebgroup/green-core@1.81.0
+
+## 5.12.0
+
+### Minor Changes
+
+- 45a6303: **V-Angular Dropdown/Typeahead**: Keyboard select dropdown with nvda screen-reader.
+
+### Patch Changes
+
+- 2a3e532: Resolved V-Angular table a11y warnings
+- Updated dependencies [2edbe83]
+- Updated dependencies [5f775b4]
+- Updated dependencies [461504b]
+- Updated dependencies [2edbe83]
+  - @sebgroup/green-core@1.80.0
+  - @sebgroup/chlorophyll@3.6.20
+
+## 5.11.2
+
+### Patch Changes
+
+- 7e585f8: **NggDatepicker:** Fix error in change event handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
+## 5.11.1
+
+### Patch Changes
+
+- 728c620: **V-Angular:** Updated table component
+
 ## 5.11.0
 
 ### Minor Changes

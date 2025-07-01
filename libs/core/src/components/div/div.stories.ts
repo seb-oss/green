@@ -12,7 +12,9 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 /**
  * @status beta
  *
- * `gds-div` is a base element in the declarative layout system. It accepts all available style expression properties, and is also the base class for `gds-flex`, `gds-grid`, `gds-card` and `gds-text`
+ * `gds-div` is a base element in the declarative layout system.
+ *
+ * Div accepts all available style expression properties, and is also the base class for `gds-flex`, `gds-grid`, `gds-card` and `gds-text`
  */
 const meta: Meta = {
   title: 'Components/Div',

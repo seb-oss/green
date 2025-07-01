@@ -60,7 +60,7 @@ await Promise.all(
               {
                 destination: `variables.css`,
                 format: 'css/only-variables',
-                filter: 'no-colors-no-ref',
+                filter: 'base-tokens',
               },
               {
                 destination: `variables.ref.css`,
@@ -74,6 +74,11 @@ await Promise.all(
                 options: {
                   colorScheme: colorScheme,
                 },
+              },
+              {
+                destination: `variables.shadows.css`,
+                format: 'css/shadows',
+                filter: 'is-shadow',
               },
             ],
           },
@@ -90,6 +95,11 @@ await Promise.all(
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/css/`,
             prefix: 'gds-',
             files: [
+              {
+                destination: `variables.base.css`,
+                format: 'css/variables',
+                filter: 'base-tokens',
+              },
               {
                 destination: `colors.ref.css`,
                 format: 'css/variables',
@@ -117,9 +127,9 @@ await Promise.all(
             prefix: 'gds-',
             files: [
               {
-                destination: `variables.css`,
-                format: 'css/variables',
-                filter: 'no-colors-no-ref',
+                destination: `variables.base.scss`,
+                format: 'scss/variables',
+                filter: 'base-tokens',
               },
               {
                 destination: `_mixin.colors.ref.scss`,
@@ -129,6 +139,16 @@ await Promise.all(
               {
                 destination: `_mixin.${colorScheme}.scss`,
                 format: 'scss/mixin',
+                filter: 'is-color-no-ref',
+              },
+              {
+                destination: `variables.colors.ref.scss`,
+                format: 'scss/variables',
+                filter: 'is-color-is-ref',
+              },
+              {
+                destination: `variables.${colorScheme}.scss`,
+                format: 'scss/variables',
                 filter: 'is-color-no-ref',
               },
             ],
@@ -223,57 +243,36 @@ await Promise.all(
               },
             ],
           },
-          // TODO: Add Android support
-          // android: {
-          //   buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,
-          //   sourcePath: swiftSourcePath,
-          //   transformGroup: 'compose',
-          //   files: [
-          //     {
-          //       destination: `Colors/${capitalize(colorScheme)}ModeColors.kt`,
-          //       format: 'compose/object',
-          //       filter: 'is-color-no-ref',
-          //       options: {
-          //         import: ['androidx.compose.ui.graphics.Color'],
-          //         packageName: ['se.seb.gds.tokens'],
-          //         className: `${capitalize(colorScheme)}ModeColors`,
-          //         objectType: 'data class',
-          //       },
-          //     },
-          //     {
-          //       destination: 'Colors/Colors.kt',
-          //       format: 'green/android-kotlin-class-tree',
-          //       filter: 'is-color-no-ref',
-          //       options: {
-          //         objectType: 'struct',
-          //         import: ['SwiftUI'],
-          //         uiKitObjectName: 'UIColors',
-          //         className: 'Colors',
-          //         colorType: 'swiftUiReferenceToUiKit',
-          //       },
-          //     },
-          //     {
-          //       destination: 'Dimensions.kt',
-          //       format: 'compose/object',
-          //       filter: 'is-dimension',
-          //       options: {
-          //         import: ['UIKit'],
-          //         objectType: 'struct',
-          //         className: 'Dimensions',
-          //       },
-          //     },
-          //     {
-          //       destination: 'Shape.kt',
-          //       format: 'compose/object',
-          //       filter: 'is-shape',
-          //       options: {
-          //         import: ['UIKit'],
-          //         objectType: 'struct',
-          //         className: 'Shape',
-          //       },
-          //     },
-          //   ],
-          // },
+          android: {
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,
+            sourcePath: swiftSourcePath,
+            transformGroup: 'compose',
+            files: [
+              {
+                destination: `Colors/${capitalize(colorScheme)}ModeColors.kt`,
+                format: 'compose/color-scheme',
+                filter: 'is-color-no-ref',
+                options: {
+                  import: ['androidx.compose.ui.graphics.Color'],
+                  packageName: ['se.seb.gds.tokens'],
+                  className: `GdsColorTokens`,
+                  variableName: `${colorScheme}ModeColors`,
+                  objectType: 'val',
+                },
+              },
+              {
+                destination: 'Colors/GdsColorTokens.kt',
+                format: 'compose/class',
+                filter: 'is-color-no-ref',
+                options: {
+                  objectType: 'data',
+                  className: 'GdsColorTokens',
+                  import: ['androidx.compose.ui.graphics.Color'],
+                  packageName: ['se.seb.gds.tokens'],
+                },
+              },
+            ],
+          },
         },
       }
 

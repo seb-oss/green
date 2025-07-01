@@ -4,9 +4,17 @@ import { css, unsafeCSS } from 'lit'
 import base from '../../../dist/libs/tokens/2023/internal/variables.css?inline'
 import colorsDark from '../../../dist/libs/tokens/2023/internal/variables.dark.css?inline'
 import colorsLight from '../../../dist/libs/tokens/2023/internal/variables.light.css?inline'
+import shadows from '../../../dist/libs/tokens/2023/internal/variables.shadows.css?inline'
 import { GlobalStylesRegistry } from './utils/global-styles'
 
-const tokens = [unsafeCSS(base)]
+const tokens = [
+  css`
+    :host {
+      ${unsafeCSS(base)}
+      ${unsafeCSS(shadows)}
+    }
+  `,
+]
 
 // Apply a set of default tokens to the root element
 GlobalStylesRegistry.instance.injectGlobalStyles(
@@ -15,6 +23,7 @@ GlobalStylesRegistry.instance.injectGlobalStyles(
     :root,
     :root[gds-theme='light'] {
       ${unsafeCSS(base)}
+      ${unsafeCSS(shadows)}
       ${unsafeCSS(colorsLight)}
     }
     :root[gds-theme='dark'] {

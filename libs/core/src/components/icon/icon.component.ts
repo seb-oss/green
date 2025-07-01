@@ -5,7 +5,11 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import { forSpaceTokensAndCustomValues } from '../../utils/helpers'
+import {
+  forColorTokens,
+  forSpaceTokensAndCustomValues,
+  GdsColorLevel,
+} from '../../utils/helpers'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -71,6 +75,27 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
    */
   @property({ type: Number })
   stroke?: number
+
+  /**
+   * The level of the icon is used to resolve the color tokens from the corresponding level.
+   * Check the [Color System documentation page](./?path=/docs/style-colors--docs) for more information.
+   *
+   * Default for `gds-icon-*` is level 2.
+   *
+   */
+  @property()
+  level: GdsColorLevel = '2'
+
+  /**
+   * Style Expression Property that controls the `color` property.
+   * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
+   *
+   * ```html
+   * <gds-icon-ai color="primary/0.2"></gds-icon-ai>
+   * ```
+   */
+  @styleExpressionProperty(forColorTokens('content'))
+  color?: string
 
   /**
    * When viewbox is defined it will override the default viewbox of the icon.

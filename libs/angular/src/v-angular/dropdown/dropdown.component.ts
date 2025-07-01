@@ -58,9 +58,24 @@ export class NggvDropdownComponent<
     | TemplateRef<OptionBase<any>>
     | undefined
 
-  /** Special property used for selecting DOM elements during automated UI testing. */
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dropdown'
+
+  @HostBinding('class.small') get isSmall(): boolean {
+    return this.size === 'small'
+  }
+
+  @HostBinding('class.large') get isLarge(): boolean {
+    return this.size === 'large'
+  }
+
+  /**
+   * Sets the displayed size of the dropdown.
+   */
+  @Input() size: 'small' | 'large' = 'large'
 
   /** Text shown before an option is selected. */
   @Input() placeholder?: string
@@ -119,6 +134,21 @@ export class NggvDropdownComponent<
    * Defaults to true.
    */
   @Input() selectOnSingleOption = true
+
+  /**
+   * Used to control if the dropdown list should select the current active element, when Space is pressed on the keyboard.
+   * Primary usage is for typeahead, where the should be able to write a filter query containing spaces,
+   * but not select the current active element with Space.
+   */
+  @Input() selectWithSpace = true
+
+  /**
+   * Used to determine which changes should be handled by the dropdown.
+   * If set to false, all changes will be handled by the dropdown.
+   * If set to true, only changes that are distinct from the current value will be handled.
+   * Defaults to true.
+   */
+  @Input() onlyHandleDistinctChanges = true
 
   /**
    * Emits changes of the expanded state of the dropdown

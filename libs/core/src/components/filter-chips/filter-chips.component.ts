@@ -95,8 +95,12 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     </div>`
   }
 
+  focus(options?: FocusOptions): void {
+    this.chips[0]?.focus(options)
+  }
+
   protected _getValidityAnchor(): HTMLElement {
-    return this
+    return this.shadowRoot?.querySelector('div') as HTMLElement
   }
 
   #handleChipClick = (event: Event) => {
@@ -116,13 +120,11 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
         this.value = clickedChip.value
       }
 
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { clickedChip, value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('change', {
+        detail: { clickedChip, value: this.value },
+        bubbles: true,
+        composed: true,
+      })
     }
   }
 

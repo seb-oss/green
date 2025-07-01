@@ -106,13 +106,14 @@ export abstract class GdsFormControlElement<ValueT = any>
   })
   set invalid(value: boolean) {
     const oldValue = this.invalid
+
     this.#internals.setValidity(
       {
         ...this.#internals.validity,
         customError: value,
         valid: !value,
       },
-      this.validationMessage || msg(`Error message.`),
+      this.errorMessage || this.validationMessage || '   ',
       // @ts-expect-error - setValidity actually takes an element as the third argument, but the type definition is wrong.
       this._getValidityAnchor() || undefined,
     )
@@ -138,6 +139,7 @@ export abstract class GdsFormControlElement<ValueT = any>
   }
   set value(value: ValueT | undefined) {
     this._internalValue = value
+    this.#internals.setFormValue(value as any)
   }
   protected _internalValue?: ValueT
 
@@ -184,6 +186,8 @@ export abstract class GdsFormControlElement<ValueT = any>
       '',
     ]
 
+    this.errorMessage = validity[1] || this.errorMessage
+
     this.#internals.setValidity(
       validity[0],
       validity[1],
@@ -193,16 +197,13 @@ export abstract class GdsFormControlElement<ValueT = any>
 
     if (oldValue !== this.invalid) {
       this.requestUpdate('invalid', oldValue)
-      this.dispatchEvent(
-        new CustomEvent('gds-validity-state', {
-          bubbles: true,
-          composed: true,
-          detail: {
-            valid: this.validity.valid,
-            message: this.validationMessage,
-          },
-        }),
-      )
+      this.dispatchCustomEvent('gds-validity-state', {
+        detail: {
+          valid: this.validity.valid,
+          message: this.validationMessage,
+        },
+        composed: true,
+      })
     }
 
     return this.#internals.checkValidity()
@@ -214,7 +215,6 @@ export abstract class GdsFormControlElement<ValueT = any>
 
   @watch('value', { waitUntilFirstUpdate: true })
   private __handleValueChange() {
-    this.#internals.setFormValue(this.value as any)
     this.checkValidity()
   }
 
@@ -233,12 +233,10 @@ export abstract class GdsFormControlElement<ValueT = any>
     if (!this.validity.valid) e.preventDefault()
   }
 
-  focus(options?: FocusOptions | undefined): void {
-    this._getValidityAnchor().focus(options)
-  }
-
   /**
-   * This should return a reference to the HTML element that will recive the focus when the form control is invalid.
+   * This should return a reference to the HTML element that the browser will refer to when the form control is invalid.
+   * The reference is used when setting the validity state in ElementInternals.
+   * For reference: https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/setValidity#anchor
    */
   protected abstract _getValidityAnchor(): HTMLElement
 }

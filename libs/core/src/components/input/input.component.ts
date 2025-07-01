@@ -1,6 +1,5 @@
 import { localized, msg } from '@lit/localize'
-import { property, query, queryAsync, state } from 'lit/decorators.js'
-import { choose } from 'lit/directives/choose.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import { nothing } from 'lit/html.js'
@@ -12,7 +11,6 @@ import { GdsFormControlHeader } from '../../primitives/form-control-header/form-
 import { gdsCustomElement, html } from '../../scoping'
 import formControlHostStyles from '../../shared-styles/form-control-host.style'
 import { tokens } from '../../tokens.style'
-import { forwardAttributes } from '../../utils/directives'
 import {
   withLayoutChildProps,
   withMarginProps,
@@ -72,6 +70,95 @@ class Input extends GdsFormControlElement<string> {
   @property({ type: Boolean })
   plain = false
 
+  /**
+   * The type of input. Works the same as a native `<input>` element, but only a subset of types are supported. Defaults
+   * to `text`.
+   */
+  @property({ reflect: true })
+  type:
+    | 'date'
+    | 'datetime-local'
+    | 'email'
+    | 'number'
+    | 'password'
+    | 'search'
+    | 'tel'
+    | 'text'
+    | 'time'
+    | 'url' = 'text'
+
+  /** The input's minimum value. Only applies to date and number input types. */
+  @property()
+  min?: number | string
+
+  /** The input's maximum value. Only applies to date and number input types. */
+  @property()
+  max?: number | string
+
+  /**
+   * Specifies the granularity that the value must adhere to, or the special value `any` which means no stepping is
+   * implied, allowing any numeric value. Only applies to date and number input types.
+   */
+  @property()
+  step?: number | 'any'
+
+  /** Controls whether and how text input is automatically capitalized as it is entered by the user. */
+  @property()
+  autocapitalize: 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters' =
+    'off'
+
+  /** Indicates whether the browser's autocorrect feature is on or off. */
+  @property()
+  autocorrect?: 'off' | 'on'
+
+  /**
+   * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
+   * [this page on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete) for available values.
+   */
+  @property()
+  autocomplete?: string
+
+  /** Indicates that the input should receive focus on page load. */
+  @property({ type: Boolean })
+  autofocus = false
+
+  /** Used to customize the label or icon of the Enter key on virtual keyboards. */
+  @property()
+  enterkeyhint?:
+    | 'enter'
+    | 'done'
+    | 'go'
+    | 'next'
+    | 'previous'
+    | 'search'
+    | 'send'
+
+  /** Enables spell checking on the input. */
+  @property({
+    type: Boolean,
+    converter: {
+      // Allow "true|false" attribute values but keep the property boolean
+      fromAttribute: (value) => (!value || value === 'false' ? false : true),
+      toAttribute: (value) => (value ? 'true' : 'false'),
+    },
+  })
+  spellcheck = true
+
+  /**
+   * Tells the browser what type of data will be entered by the user, allowing it to display the appropriate virtual
+   * keyboard on supportive devices.
+   */
+  @property()
+  inputmode?:
+    | 'none'
+    | 'text'
+    | 'decimal'
+    | 'numeric'
+    | 'tel'
+    | 'search'
+    | 'email'
+    | 'url'
+
   @queryAsync('input')
   private elInputAsync!: Promise<HTMLInputElement>
 
@@ -98,6 +185,10 @@ class Input extends GdsFormControlElement<string> {
   constructor() {
     super()
     this.value = ''
+  }
+
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
   }
 
   render() {
@@ -128,28 +219,24 @@ class Input extends GdsFormControlElement<string> {
       ${when(
         this.#shouldShowFooter(),
         () =>
-          html`<gds-form-control-footer
+          html` <gds-form-control-footer
             class="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars &&
-            this.maxlength - (this.value?.length || 0)}
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            .charCounter=${this.#shouldShowRemainingChars
+              ? this.maxlength - (this.value?.length || 0)
+              : undefined}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
   }
 
   #shouldShowFooter() {
-    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+    return !this.plain
   }
 
   _getValidityAnchor() {
     return this.elInput
   }
-
-  // Any attribute name added here will get forwarded to the native <input> element.
-  #forwardableAttrs = (attr: Attr) =>
-    ['type', 'placeholder', 'required'].includes(attr.name)
 
   #handleOnInput = (e: Event) => {
     const element = e.target as HTMLInputElement
@@ -159,12 +246,10 @@ class Input extends GdsFormControlElement<string> {
   #handleOnChange = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
-    this.dispatchEvent(
-      new Event('change', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchStandardEvent('change', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #handleFieldClick = () => {
@@ -173,18 +258,14 @@ class Input extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
-    this.dispatchEvent(
-      new Event('gds-input-cleared', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-input-cleared', {
+      bubbles: true,
+      composed: true,
+    })
+    this.dispatchStandardEvent('input', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #renderFieldContents() {
@@ -219,7 +300,18 @@ class Input extends GdsFormControlElement<string> {
         aria-invalid=${this.invalid}
         aria-label=${(this.plain && this.label) || nothing}
         placeholder=" "
-        ${forwardAttributes(this.#forwardableAttrs)}
+        type=${this.type}
+        min=${ifDefined(this.min)}
+        max=${ifDefined(this.max)}
+        step=${ifDefined(this.step as number)}
+        autocapitalize=${ifDefined(this.autocapitalize)}
+        autocomplete=${ifDefined(this.autocomplete)}
+        autocorrect=${ifDefined(this.autocorrect)}
+        ?autofocus=${this.autofocus}
+        spellcheck=${this.spellcheck}
+        enterkeyhint=${ifDefined(this.enterkeyhint)}
+        inputmode=${ifDefined(this.inputmode)}
+        ?required=${this.required}
       />
     `
   }

@@ -56,6 +56,10 @@ export class ToastComponent implements OnInit, OnDestroy {
     this.toastMessageService.removeMessage(message)
   }
 
+  trackByMessageIndex(index: number, message: ToastMessage): number {
+    return index;
+  }
+
   ngOnDestroy(): void {
     if (this.toastMessagesSubscription) {
       this.toastMessagesSubscription.unsubscribe()

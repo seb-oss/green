@@ -15,7 +15,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { GdsRadioGroup } from './radio-group/radio-group'
 
 /**
- * Radio buttons are form controls that allow users to select a single option from a set of mutually exclusive choices.<br/>
+ * A radio button is a form element that allows users to select one of the predefined set of choices.<br/>
  * They are grouped using a radio group component which manages selection, keyboard navigation, and validation.
  *
  * Groups support vertical and horizontal layouts, and can be sized to fit different space requirements.

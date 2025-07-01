@@ -244,12 +244,16 @@ export class GdsPopover extends GdsElement {
     // This should be removed in the future if/when the VirtualKeyboard API is suported on Safari.
     this.addEventListener('focusin', (e: FocusEvent) => {
       const t = e.target as HTMLElement
+
+      if (t === this) return
+
       if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
         this._isVirtKbVisible = true
       } else {
         this._isVirtKbVisible = false
       }
     })
+
     this.addEventListener('blurin', (_) => {
       this._isVirtKbVisible = false
     })
@@ -258,6 +262,7 @@ export class GdsPopover extends GdsElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.#unregisterTriggerEvents()
+    window.removeEventListener('scroll', this.#handlePageScroll)
   }
 
   render() {
@@ -323,12 +328,18 @@ export class GdsPopover extends GdsElement {
             ),
           0,
         )
+
+        // Register the scroll listener to close the popover when the page is scrolled
+        window.addEventListener('scroll', this.#handlePageScroll, {
+          passive: true,
+        })
       } else {
         this._elDialog?.close()
         clickOutsideTarget.removeEventListener(
           'click',
           this.#handleClickOutside,
         )
+        window.removeEventListener('scroll', this.#handlePageScroll)
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })
@@ -352,14 +363,12 @@ export class GdsPopover extends GdsElement {
 
   #dispatchUiStateEvent = (reason: UIStateChangeReason) => {
     const toState = reason === 'show' ? true : false
-    return this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open: toState, reason },
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-      }),
-    )
+    return this.dispatchCustomEvent('gds-ui-state', {
+      detail: { open: toState, reason },
+      bubbles: false,
+      composed: false,
+      cancelable: true,
+    })
   }
 
   #handleCloseButton = (e: MouseEvent) => {
@@ -367,11 +376,6 @@ export class GdsPopover extends GdsElement {
     e.preventDefault()
     if (this.#dispatchUiStateEvent('close')) {
       this.open = false
-
-      // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
-      // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
-      // dialog (close button in this case.)
-      // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
       setTimeout(() => this._trigger?.focus(), 250)
     }
   }
@@ -519,6 +523,12 @@ export class GdsPopover extends GdsElement {
       if (!isInDialog && this.#dispatchUiStateEvent('close')) {
         this.open = false
       }
+    }
+  }
+
+  #handlePageScroll = () => {
+    if (this.open && this.#dispatchUiStateEvent('close')) {
+      this.open = false
     }
   }
 }

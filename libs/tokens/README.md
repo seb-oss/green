@@ -4,7 +4,7 @@ Design tokens for **Green Design System (GDS)**. The design system at Skandinavi
 
 ## How it works
 
-All of the design tokens and assets are in this project. We then use Style Dictionary to transform the tokens into files and format for specific platforms that Green Design System caters for. Adding tokens needs to go throught the GDS Core Team since the tokens have a specific hirarchy to cater to SEB's design.
+All of the design tokens and assets are in this project. We then use Style Dictionary to transform the tokens into files and format for specific platforms that Green Design System caters for. Adding tokens needs to go through the GDS Core Team since the tokens have a specific hierarchy to cater to SEB's design.
 
 ## Design Tokens
 
@@ -30,7 +30,7 @@ An example of a token name is: `gds.sys.color.l3.background.primary`
 1. `gds` is the design system prefix referring to `Green Design System` all tokens names start with this.
 2. `sys` is an abbreviation for the token class: “ref” for reference tokens, “sys” for system tokens.
 3. `color` is the type of the token. Can be: color, dimension, font-family and more. See [section 8 in the Design Tokens Format Module](https://tr.designtokens.org/format/#types) for more types.
-4. `l3.background.primary` the remaing parts are descriptive words communicating the tokens role. In this care we use a [level system](https://storybook.seb.io/latest/core/?path=/docs/style-colors--docs) to create a color structure.
+4. `l3.background.primary` the remaining parts are descriptive words communicating the tokens role. In this care we use a [level system](https://storybook.seb.io/latest/core/?path=/docs/style-colors--docs) to create a color structure.
 
 ## Style Dictionary
 

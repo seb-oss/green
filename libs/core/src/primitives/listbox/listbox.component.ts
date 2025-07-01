@@ -152,11 +152,9 @@ export class GdsListbox
 
     ;(this as any).ariaActiveDescendantElement = option
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('change', {
+      bubbles: false,
+      composed: false,
+    })
   }
 }
