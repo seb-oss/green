@@ -41,10 +41,11 @@ export default function Header() {
       gap="m"
     >
       <GdsFlex padding="0 0 0 m" align-items="center" gap="s">
-        {/* <IconBrandGreen size="l" /> */}
-        <GdsText font-weight="book" font-size="detail-m">
-          Green Design System
-        </GdsText>
+        <Link href="/">
+          <GdsText font-weight="book" font-size="detail-m">
+            Green Design System
+          </GdsText>
+        </Link>
       </GdsFlex>
 
       {false && (

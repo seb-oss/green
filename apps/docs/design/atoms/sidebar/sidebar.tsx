@@ -56,7 +56,7 @@ const CollapsibleSection = ({
       >
         {/**
          * TODO:
-         * Make it solid when active for hte icon
+         * Make it solid when active for the active page
          *
          * */}
         {icon && <Icon name={icon} slot="lead" />}
