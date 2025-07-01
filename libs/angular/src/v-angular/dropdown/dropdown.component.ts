@@ -136,6 +136,13 @@ export class NggvDropdownComponent<
   @Input() selectOnSingleOption = true
 
   /**
+   * Used to control if the dropdown list should select the current active element, when Space is pressed on the keyboard.
+   * Primary usage is for typeahead, where the should be able to write a filter query containing spaces,
+   * but not select the current active element with Space.
+   */
+  @Input() selectWithSpace = true
+
+  /**
    * Used to determine which changes should be handled by the dropdown.
    * If set to false, all changes will be handled by the dropdown.
    * If set to true, only changes that are distinct from the current value will be handled.
