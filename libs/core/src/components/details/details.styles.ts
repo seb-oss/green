@@ -5,10 +5,9 @@ export const styles = css`
   @layer base {
     .details {
       border-bottom: solid var(--gds-sys-space-4xs)
-        var(--gds-sys-color-l2-border-primary);
-      font-size: var(--gds-sys-text-size-body-m);
-      line-height: var(--gds-sys-text-line-height-body-m);
-      color: var(--gds-sys-color-l2-content-secondary);
+        var(--gds-sys-color-border-subtle-01);
+      font: var(--gds-sys-text-body-regular-m);
+      color: var(--gds-sys-color-content-01);
       transition: border-color 240ms linear;
     }
 
@@ -47,12 +46,12 @@ export const styles = css`
       background-color: color-mix(
         in srgb,
         transparent,
-        var(--gds-sys-color-l3-states-light-hover)
+        var(--gds-sys-color-state-light-hover)
       );
     }
 
     .summary:focus {
-      outline-color: var(--gds-sys-color-l3-content-tertiary);
+      outline-color: var(--gds-sys-color-content-01);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -73,14 +72,12 @@ export const styles = css`
 
       .details:hover,
       .details:focus-within {
-        border-color: var(--gds-sys-color-l2-border-quaternary);
+        border-color: var(--gds-sys-color-border-strong);
       }
     }
 
     .summary-label {
-      font-size: var(--gds-sys-text-size-heading-xs);
-      line-height: var(--gds-sys-text-line-height-heading-xs);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-heading-xs);
       padding-block: var(--gds-sys-space-m);
       cursor: pointer;
       flex: 1;
@@ -88,14 +85,12 @@ export const styles = css`
     }
 
     .details.small .summary-label {
-      font-size: var(--gds-sys-text-size-heading-2xs);
-      line-height: var(--gds-sys-text-line-height-heading-2xs);
+      font: var(--gds-sys-text-heading-2xs);
       padding-block: var(--gds-sys-space-s);
     }
 
     .details.small .content {
-      font-size: var(--gds-sys-text-size-heading-2xs);
-      line-height: var(--gds-sys-text-line-height-heading-2xs);
+      font: var(--gds-sys-text-heading-2xs);
     }
 
     .details:focus-visible {

@@ -19,16 +19,16 @@ export default css`
   }
 
   :host([size='small']) .native-control {
-    font-size: var(--gds-sys-text-size-detail-s);
-    line-height: var(--gds-sys-text-line-height-detail-s);
+    font: var(--gds-sys-text-detail-s);
   }
 
   :host([disabled]) {
-    color: var(--gds-sys-color-l3-content-disabled);
+    color: var(--gds-sys-color-content-disabled-01);
     pointer-events: none;
   }
 
   .native-control {
+    font: var(--gds-sys-text-detail-regular-m);
     appearance: none;
     background-color: transparent;
     border: 0;
@@ -38,8 +38,6 @@ export default css`
     overflow: hidden;
     padding: unset;
     width: 100%;
-    font-size: var(--gds-sys-text-size-detail-m);
-    line-height: var(--gds-sys-text-line-height-detail-m);
     color: currentColor;
     text-align: left;
   }

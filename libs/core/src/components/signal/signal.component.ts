@@ -16,9 +16,10 @@ export class GdsSignal extends GdsElement {
   /**
    * Change signal color based on variant.
    * The color can be customized using the `color` property.
+   * The value needs to be the ending of a valid `design token` of type color that starts with `--gds-sys-color-`.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-color-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
     selector: '[part="signal"]',
   })
   color?: string

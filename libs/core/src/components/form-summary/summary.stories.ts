@@ -51,14 +51,8 @@ export const Usage: Story = {
   ...DefaultParams,
   render: (args) =>
     html`<form style="width: 450px" novalidate>
-      <gds-card
-        display="flex"
-        flex-direction="column"
-        gap="m"
-        variant="secondary"
-        border-color="primary"
-      >
-        <gds-text tag="h2">Launch control</gds-text>
+      <gds-card display="flex" flex-direction="column" gap="m" padding="l">
+        <gds-text tag="h2" font="heading-l">Launch control</gds-text>
         <gds-dropdown
           label="Astronaut"
           .validator=${{

@@ -2,8 +2,7 @@ import { css } from 'lit'
 
 export const styles = css`
   :host {
-    font-size: var(--gds-sys-text-size-body-m);
-    line-height: var(--gds-sys-text-line-height-body-m);
+    font: var(--gds-sys-text-body-regular-m);
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
     letter-spacing: 0.0125rem;
@@ -194,16 +193,14 @@ export const styles = css`
   details {
     border-top: solid var(--gds-sys-space-4xs)
       color-mix(in srgb, currentColor, transparent 90%);
-    font-size: var(--gds-sys-text-size-body-m);
-    line-height: var(--gds-sys-text-line-height-body-m);
+    font: var(--gds-sys-text-body-regular-m);
   }
 
   summary {
     font-weight: var(--gds-sys-text-weight-regular);
     list-style: none;
     padding: 0.4lh 0.2ch;
-    font-size: var(--gds-sys-text-size-body-l);
-    line-height: var(--gds-sys-text-line-height-body-l);
+    font: var(--gds-sys-text-body-regular-l);
     color: currentColor;
     display: flex;
     justify-content: space-between;
@@ -234,8 +231,7 @@ export const styles = css`
     justify-content: center;
     width: 24px;
     height: 24px;
-    font-weight: var(--gds-sys-text-weight-regular);
-    font-size: var(--gds-sys-text-size-body-l);
+    font: var(--gds-sys-text-body-regular-l);
   }
 
   details[open] summary::after {

@@ -57,8 +57,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       <gds-icon-checkmark
         slot="trail"
         style="display: ${this.selected ? 'contents' : 'none'}"
-        width="16"
-        height="16"
+        size="1rem"
         class="icon"
       ></gds-icon-checkmark>
     </gds-button>`

@@ -5,19 +5,17 @@ const style = css`
 
   @layer base {
     :host(:not(:last-child)) {
-      border-bottom: 1px solid var(--gds-sys-color-l2-border-primary);
+      border-bottom: 1px solid var(--gds-sys-color-border-subtle-01);
     }
 
-    :host div {
+    :host .item {
       display: flex;
       align-items: center;
       user-select: none;
       padding-inline: var(--gds-sys-space-m);
-      padding-block: var(--gds-sys-space-m);
+      padding-block: var(--gds-sys-space-s);
       cursor: pointer;
-      font-size: var(--gds-sys-text-size-label-input-large);
-      font-weight: var(--gds-sys-text-weight-regular);
-      line-height: var(--gds-sys-text-line-height-label-input-large);
+      font: var(--gds-sys-text-detail-regular-m);
       gap: 1ch;
       max-width: 100%;
       box-sizing: border-box;
@@ -37,18 +35,22 @@ const style = css`
     }
 
     :host([highlighted]) {
-      background-color: var(--gds-sys-color-l2-background-tertiary);
-      color: var(--gds-sys-color-l2-content-tertiary);
+      background-color: var(--gds-sys-color-l3-01);
+      color: var(--gds-sys-color-content-inversed);
     }
 
-    :host(:hover:not([highlighted])) div {
-      background-color: var(--gds-sys-color-l3-background-secondary);
+    :host(:hover:not([highlighted])) .item {
+      background-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-sys-color-state-light-hover)
+      );
     }
 
     :host(:focus-visible) {
       outline: none;
 
-      div::before {
+      .item::before {
         inset: var(--gds-sys-space-2xs);
         opacity: 1;
         visivility: visible;
@@ -57,31 +59,6 @@ const style = css`
 
     :host([inert]) {
       display: none;
-    }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 1lh;
-      width: 1lh;
-      box-sizing: border-box;
-      position: relative;
-      aspect-ratio: 1/1;
-      border-radius: var(--gds-sys-space-2xs);
-      border: var(--gds-sys-space-3xs) solid currentColor;
-      padding: var(--gds-sys-space-3xs);
-
-      &.checked {
-        background-color: currentColor;
-
-        gds-icon-checkmark {
-          &::part(icon) {
-            color: var(--gds-sys-color-l2-content-tertiary);
-            stroke-width: var(--gds-sys-space-2xs);
-          }
-        }
-      }
     }
   }
 `

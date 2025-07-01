@@ -16,13 +16,13 @@ export default css`
 
     --_perimeter-bg-mix: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-secondary),
-      var(--gds-sys-color-l3-states-light-hover)
+      var(--gds-sys-color-l3-02),
+      var(--gds-sys-color-state-light-hover)
     );
     --_perimeter-bg-mix-active: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-secondary),
-      var(--gds-sys-color-l3-states-light-pressed)
+      var(--gds-sys-color-l3-02),
+      var(--gds-sys-color-state-light-pressed)
     );
 
     /* -- */
@@ -46,12 +46,12 @@ export default css`
     width: var(--_toggle-size);
     height: var(--_toggle-size);
     border-radius: var(--_toggle-radius);
-    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-secondary);
-    background-color: var(--gds-sys-color-l3-content-primary);
+    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs) var(--gds-sys-color-l3-01);
+    background-color: var(--gds-sys-color-l1-01);
     box-sizing: border-box;
     transition-property: box-shadow;
-    transition-duration: 248ms;
+    transition-duration: var(--gds-sys-motion-duration-fastest);
+    transition-timing-function: var(--gds-sys-motion-easing-linear);
     will-change: box-shadow;
     position: absolute;
     inset: 0;
@@ -65,10 +65,7 @@ export default css`
     transition: scale 150ms;
     will-change: scale;
     scale: 1;
-    color: var(--gds-sys-color-l3-content-primary);
-    @starting-style {
-      scale: 0.2;
-    }
+    color: var(--gds-sys-color-content-inversed);
   }
 
   .rbcb__perimeter {
@@ -76,11 +73,12 @@ export default css`
     box-sizing: border-box;
     backface-visibility: hidden;
     transition-property: background-color, scale, outline-color;
-    transition-duration: 248ms;
+    transition-duration: var(--gds-sys-motion-duration-fastest);
+    transition-timing-function: var(--gds-sys-motion-easing-linear);
     outline-style: solid;
     outline-offset: calc(-1 * var(--gds-sys-space-3xs));
     outline-width: 0;
-    outline-color: var(--gds-sys-color-l3-content-tertiary);
+    outline-color: var(--gds-sys-color-content-01);
     border-radius: calc(var(--_toggle-radius) + 4px);
     min-width: var(--_perimeter-size);
     min-height: var(--_perimeter-size);
@@ -96,17 +94,17 @@ export default css`
 
   .--checked .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
-      var(--gds-sys-color-l3-border-primary);
+      var(--gds-sys-color-l3-01);
   }
 
   .--indeterminate .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
-      var(--gds-sys-color-l3-border-primary);
+      var(--gds-sys-color-border-interactive);
   }
 
   .--invalid.--indeterminate .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-negative);
+      var(--gds-sys-color-border-negative-01);
   }
 
   .--disabled {
@@ -115,36 +113,44 @@ export default css`
 
   .--disabled .rbcb__toggle {
     box-shadow: none;
-    background-color: var(--gds-sys-color-l3-content-disabled);
+    background-color: var(--gds-sys-color-l3-disabled-02);
   }
 
   .--invalid .rbcb__toggle {
-    background-color: var(--gds-sys-color-l3-background-negative-secondary);
+    background-color: var(--gds-sys-color-l3-negative-02);
     box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-negative);
+      var(--gds-sys-color-border-negative-01);
   }
 
   .--invalid.--checked .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
-      var(--gds-sys-color-l3-border-negative);
+      var(--gds-sys-color-l3-negative-01);
   }
 
   .--invalid .rbcb__perimeter {
-    outline-color: var(--gds-sys-color-l3-border-negative);
+    outline-color: var(--gds-sys-color-border-negative-01);
     --_perimeter-bg-mix: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-negative-secondary),
-      var(--gds-sys-color-l3-states-negative-hover)
+      var(--gds-sys-color-l3-negative-02),
+      var(--gds-sys-color-state-negative-hover)
     );
     --_perimeter-bg-mix-active: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-background-negative-secondary),
+      var(--gds-sys-color-l3-negative-02),
       var(--gds-sys-color-l3-states-negative-pressed)
     );
   }
 
   .--invalid .rbcb__icon {
-    color: var(--gds-sys-color-l3-content-negative);
+    color: var(--gds-sys-color-content-negative-01);
+  }
+
+  /*
+   * When using the checkbox in a listbox, we need to remove the outline
+   * from the checkbox since it exsist on the list item
+   */
+  :host([gds-element='gds-option']) .rbcb__perimeter {
+    outline: none;
   }
 
   :host(:focus-visible) .rbcb__perimeter {
@@ -169,10 +175,6 @@ export default css`
   .rbcb:active:not(.--disabled) .rbcb__perimeter,
   :host(:active) .rbcb:not(.--disabled) .rbcb__perimeter {
     background-color: var(--_perimeter-bg-mix-active);
-  }
-
-  :host(:active:not(:focus-visible)) .rbcb:active .rbcb__perimeter,
-  :host(:active:not(:focus-visible)) .rbcb__perimeter {
-    scale: 0.96;
+    scale: 0.9;
   }
 `

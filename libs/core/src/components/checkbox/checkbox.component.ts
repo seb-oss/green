@@ -64,8 +64,8 @@ export class GdsCheckbox extends GdsFormControlElement {
     this._internalValue = value
   }
 
-  @query('.rbcb')
-  private _elCheckbox!: HTMLElement
+  @query('#tcb')
+  private _elToggleControlBase!: HTMLElement
 
   connectedCallback() {
     super.connectedCallback()
@@ -108,6 +108,7 @@ export class GdsCheckbox extends GdsFormControlElement {
   render() {
     return html`
       <gds-toggle-control-base
+        id="tcb"
         supporting-text=${this.supportingText}
         label=${this.label}
         type="checkbox"
@@ -154,7 +155,7 @@ export class GdsCheckbox extends GdsFormControlElement {
   }
 
   protected _getValidityAnchor(): HTMLElement {
-    return this._elCheckbox || this
+    return this._elToggleControlBase
   }
 
   protected override formResetCallback() {
