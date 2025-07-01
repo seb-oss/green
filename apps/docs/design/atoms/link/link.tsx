@@ -33,9 +33,13 @@ export const Link = React.forwardRef<HTMLElement, CustomLinkProps>(
       | typeof Core.GdsButton
       | typeof Core.GdsLink
       | typeof Core.GdsMenuButton
+      | typeof Core.GdsFab
     switch (component) {
       case 'button':
         Component = Core.GdsButton
+        break
+      case 'fab':
+        Component = Core.GdsFab
         break
       case 'menu':
         Component = Core.GdsMenuButton

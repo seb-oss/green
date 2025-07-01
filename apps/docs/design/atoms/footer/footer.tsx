@@ -1,4 +1,8 @@
+'use client'
+
 import { GdsButton, GdsFlex } from '@sebgroup/green-core/react'
+import * as Core from '@sebgroup/green-core/react'
+import { _, Icon } from '../../../hooks'
 import { Link } from '../link/link'
 
 export default function Footer() {
@@ -12,18 +16,35 @@ export default function Footer() {
       padding="m 0"
       gap="2xl; s{5xl}"
       border="4xs/primary 0 0 0"
-      margin="4xl 0 0 0"
+      margin="4xl auto 0 auto"
+      max-width="1200px"
+      width="100%"
     >
       <GdsFlex justify-content="space-between" align-items="center">
-        {text}
-        <Link
-          component="button"
-          href="/settings/consent"
-          rank="tertiary"
-          size="small"
-        >
-          Cookie preferences
-        </Link>
+        <GdsFlex align-items="center" gap="s">
+          <Core.IconBrandSeb color="primary" size="m" />
+          <Core.GdsText tag="small">{text}</Core.GdsText>
+        </GdsFlex>
+        <GdsFlex align-items="center">
+          <Link
+            component="button"
+            href="/settings/consent"
+            rank="tertiary"
+            size="small"
+          >
+            Cookie preferences
+          </Link>
+
+          <Link
+            component="button"
+            href="/settings"
+            rank="tertiary"
+            size="small"
+          >
+            <Icon name="IconSettingsGear" slot="lead" />
+            <span data-fade>Settings</span>
+          </Link>
+        </GdsFlex>
       </GdsFlex>
     </GdsFlex>
   )

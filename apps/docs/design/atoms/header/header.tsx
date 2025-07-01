@@ -3,7 +3,12 @@
 import {
   GdsDiv,
   GdsFlex,
+  GdsInput,
+  GdsText,
+  IconBrandGithub,
+  IconBrandGreen,
   IconBrandSeb,
+  IconBrandStorybook,
   IconMagnifyingGlass,
 } from '@sebgroup/green-core/react'
 import { _, Icon } from '../../../hooks'
@@ -30,41 +35,66 @@ export default function Header() {
       width="100%"
       align-items="center"
       justify-content="space-between"
-      padding="l l l l"
-      // position="sticky"
+      padding={isOpen ? 'xl xl l m' : 'xl xl l m'}
       className="header"
       inset="0"
       gap="m"
     >
+      <GdsFlex padding="0 0 0 m" align-items="center" gap="s">
+        {/* <IconBrandGreen size="l" /> */}
+        <GdsText font-weight="book" font-size="detail-m">
+          Green Design System
+        </GdsText>
+      </GdsFlex>
+
+      {false && (
+        <GdsFlex align-items="center" gap="s">
+          <Link
+            component="button"
+            onClick={handleToggleSidebar}
+            rank="tertiary"
+            width="max-content"
+            size="medium"
+          >
+            {isOpen ? (
+              <Icon name="IconCrossLarge" />
+            ) : (
+              <Icon name="IconMenuSidebar" />
+            )}
+          </Link>
+        </GdsFlex>
+      )}
+
       <GdsFlex>
         <Link
           component="button"
-          onClick={handleToggleSidebar}
-          rank="tertiary"
-          width="max-content"
+          onClick={handleToggleCommand}
           size="medium"
+          rank="secondary"
         >
-          {isOpen ? (
-            <Icon name="IconCrossLarge" />
-          ) : (
-            <Icon name="IconMenuSidebar" />
-          )}
+          <IconMagnifyingGlass slot="lead"></IconMagnifyingGlass>
+          What are you looking for?
+          <GdsFlex slot="trail" width="20px"></GdsFlex>
         </Link>
       </GdsFlex>
-
-      <Link href="/">
-        <IconBrandSeb size="l" />
-      </Link>
-
-      <Link
-        component="button"
-        onClick={handleToggleCommand}
-        size="medium"
-        rank="tertiary"
-      >
-        <IconMagnifyingGlass></IconMagnifyingGlass>
-      </Link>
-      <GdsDiv level="3" background="quarternary/0.6" className="glass"></GdsDiv>
+      <GdsFlex align-items="center" gap="0">
+        <Link
+          component="button"
+          rank="tertiary"
+          href="https://github.com/seb-oss/green"
+          target="_blank"
+        >
+          <IconBrandGithub />
+        </Link>
+        <Link
+          component="button"
+          rank="tertiary"
+          href="https://storybook.seb.io"
+          target="_blank"
+        >
+          <IconBrandStorybook />
+        </Link>
+      </GdsFlex>
     </GdsFlex>
   )
 }

@@ -54,6 +54,11 @@ const CollapsibleSection = ({
         data-animation="scroll"
         flex="1"
       >
+        {/**
+         * TODO:
+         * Make it solid when active for hte icon
+         *
+         * */}
         {icon && <Icon name={icon} slot="lead" />}
         <span data-fade>{title}</span>
       </Link>
@@ -255,37 +260,15 @@ export default function Sidebar() {
       border-radius="0"
       justify-content="flex-start"
       align-items={isOpen ? 'flex-start' : 'center'}
-      gap="4xl"
+      gap="xl"
+      // gap="4xl"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
-      padding={isOpen ? '2xl xs l s' : '2xl xs l m'}
+      padding={isOpen ? 'xl xs l s' : 'xl xs l m'}
       min-width={isOpen ? '260px' : '80px'}
       width={isOpen ? '100%; s{240px}' : 'max-content'}
       position="relative; s{sticky}"
-      inset="0; s{90px auto auto auto}"
+      inset="0; s{0px auto auto auto}"
     >
-      {false && (
-        <Core.GdsFlex
-          key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
-          padding={isOpen ? '0 0 0 m' : '0'}
-          justify-content={isOpen ? 'flex-start' : 'center'}
-          width="100%"
-        >
-          <Link
-            component="button"
-            onClick={handleToggleSidebar}
-            rank="tertiary"
-            width="max-content"
-            size="medium"
-          >
-            {isOpen ? (
-              <Icon name="IconCrossLarge" />
-            ) : (
-              <Icon name="IconMenuSidebar" />
-            )}
-          </Link>
-        </Core.GdsFlex>
-      )}
-
       <Core.GdsFlex
         flex-direction="column"
         gap="xs"
@@ -294,32 +277,59 @@ export default function Sidebar() {
       >
         {isOpen ? renderExpandedNav : renderCollapsedNav}
       </Core.GdsFlex>
-      <Core.GdsFlex
+
+      {/* <Core.GdsFlex
         key={isOpen ? 'settings-open' : 'settings-closed'}
         margin="auto 0 0 0"
         background="transparent"
+        flex-direction="column"
         data-backdrop
         width="100%"
+        justify-content={isOpen ? 'flex-start' : 'flex-start'}
+        align-items="flex-start"
+      >
+        <Core.IconBrandSeb color="primary" size="m" />
+      </Core.GdsFlex> */}
+      {/* {!isOpen } */}
+
+      <Core.GdsFlex
+        key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
+        padding={isOpen ? '0 0 0 0' : '0'}
         justify-content={isOpen ? 'flex-start' : 'center'}
+        align-items="center"
+        gap="l"
+        width="100%"
+        margin="auto 0 0 0"
       >
         <Link
           component="button"
+          onClick={handleToggleSidebar}
+          rank="tertiary"
+          width="max-content"
           size="medium"
-          href="/settings"
-          rank={pathName === '/settings' ? 'secondary' : 'tertiary'}
-          justify-content={isOpen ? 'flex-start' : 'center'}
-          data-animation="scroll"
         >
           {isOpen ? (
             <>
-              <Icon name="IconSettingsGear" slot="lead" />
-              <span data-fade>Settings</span>
+              {/* <Icon name="IconCrossSmall" slot="lead" /> */}
+              <Icon name="IconMenuSidebar" slot="lead" solid />
+              Close menu
             </>
           ) : (
-            <Icon name="IconSettingsGear" />
+            <Icon name="IconMenuSidebar" />
           )}
         </Link>
       </Core.GdsFlex>
+
+      {false && (
+        <Core.GdsFlex
+          justify-content="flex-start"
+          width="100%"
+          margin="auto 0 2xl 0"
+          padding="l 0 0 xl"
+        >
+          <Core.IconBrandSeb color="primary" size="m" />
+        </Core.GdsFlex>
+      )}
     </Core.GdsCard>
   )
 }
