@@ -18,6 +18,8 @@ import {
   withLayoutChildProps,
   withMarginProps,
 } from '../../utils/mixins/declarative-layout-mixins'
+import { GdsButton } from '../button/button.component'
+import { IconDotGridOneHorizontal } from '../icon/icons/dot-grid-one-horizontal'
 import { GdsPopover } from '../popover/popover.component'
 import styles from './context-menu.styles'
 
@@ -38,7 +40,13 @@ export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
  * @slot - The default slot. Only `gds-menu-item` elements are accepted here.
  */
 @gdsCustomElement('gds-context-menu', {
-  dependsOn: [GdsMenuItem, GdsMenu, GdsPopover],
+  dependsOn: [
+    GdsMenuItem,
+    GdsMenu,
+    GdsPopover,
+    GdsButton,
+    IconDotGridOneHorizontal,
+  ],
 })
 @localized()
 export class GdsContextMenu extends withMarginProps(
@@ -103,25 +111,17 @@ export class GdsContextMenu extends withMarginProps(
   }
 
   render() {
-    return html`<button
+    return html`<gds-button
+        .rank=${'secondary'}
         id="trigger"
-        class="icon border-0 small ${classMap({ highlighted: this.open })}"
-        aria-label=${this.buttonLabel ?? this.label}
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
         @click=${() => (this.open = true)}
       >
-        <slot name="trigger">
-          ${this.showLabel ? (this.buttonLabel ?? this.label) : nothing}
-          <svg width="24" height="24" viewBox="0 0 24 24">
-            <path
-              d="M14 12C14 13.1042 13.1042 14 12 14C10.8958 14 10 13.1042 10 12C10 10.8958 10.8958 10 12 10C13.1042 10 14 10.8958 14 12ZM19 10C17.8958 10 17 10.8958 17 12C17 13.1042 17.8958 14 19 14C20.1042 14 21 13.1042 21 12C21 10.8958 20.1042 10 19 10ZM5 10C3.89583 10 3 10.8958 3 12C3 13.1042 3.89583 14 5 14C6.10417 14 7 13.1042 7 12C7 10.8958 6.10417 10 5 10Z"
-              fill="#353531"
-            />
-          </svg>
-        </slot>
-      </button>
+        ${this.showLabel ? (this.buttonLabel ?? this.label) : nothing}
+        <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+      </gds-button>
       ${when(this.open, this.#renderPopover)}`
   }
 
