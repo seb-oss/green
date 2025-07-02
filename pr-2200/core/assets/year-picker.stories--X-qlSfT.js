@@ -1,0 +1,253 @@
+import{i as Ee,x as o}from"./lit-element-Bx14lxc-.js";import{a as $e}from"./argTableProps-BDj1IL2S.js";import{l as Be}from"./runtime-CNluP0A8.js";import{n,r as Me,G as ze,g as Le}from"./gds-element-DKcDvDP5.js";import{a as Te}from"./query-p8xgzTDt.js";import{e as Ae}from"./class-map-CXsQwv0r.js";import{o as Ne}from"./if-defined-CVqwUuaf.js";import{t as Oe}from"./tokens.style-Khpz0lp_.js";import{T as Ue}from"./transitional-styles-BiORlPgX.js";import{w as Ie}from"./watch-tFciLXSI.js";import{d as E}from"./attribute-converters-CdI0trPX.js";import"./popover-BBLM5Rv4.js";import"./backdrop-DlRfOXOV.js";import"./button-BQq6yv7d.js";import"./calendar-Bg5jShN_.js";import"./chevron-left-D3cL12Bx.js";import"./chevron-right-jFYay9xV.js";import"./flex-6YMVJR_L.js";import"./custom-elements-DepsHUFG.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./directive-CF8sV3Lr.js";import"./popover.component-2Azy5OjP.js";import"./floating-ui.dom-BmFOYU71.js";import"./cross-small.component-CF8Pyq63.js";import"./icon-BPdtWFmz.js";import"./unsafe-html-CYO4avEf.js";import"./declarative-layout-mixins-D-CzJZ0x.js";import"./button.component-CP7I7SJN.js";import"./when-BR7zwNJC.js";import"./static-B8S6DEnV.js";import"./observe-light-dom-CmJPHUQ4.js";import"./calendar.component-Sa-MbF-n.js";import"./chevron-right.component-Be7TENGg.js";import"./flex.component-C1NAGQHk.js";import"./div.component-BCGMV-IS.js";const We=Ee`
+  @layer base, reset;
+
+  @layer base {
+    gds-flex {
+      box-shadow: 0 var(--gds-sys-space-4xs) 0 0
+        var(--gds-sys-color-l2-border-primary);
+      padding-bottom: 0.25rem;
+      margin: 0.5rem 1rem -0.5rem 1rem;
+      background: yellow;
+    }
+
+    :host {
+      display: flex;
+      justify-content: center;
+    }
+
+    :host table {
+      border-spacing: var(--gds-sys-space-2xs);
+      flex-grow: 1;
+      width: 100%;
+      padding: 1ch;
+    }
+
+    thead {
+      box-shadow: 0 var(--gds-sys-space-4xs) 0 0
+        var(--gds-sys-color-l2-border-primary);
+      th {
+        height: var(--gds-sys-space-2xl);
+        width: var(--gds-sys-space-2xl);
+        box-sizing: border-box;
+        text-align: center;
+        font-weight: normal;
+      }
+    }
+
+    tbody {
+      td {
+        padding: 0 12px;
+        position: relative;
+        height: var(--gds-sys-space-3xl);
+        width: var(--gds-sys-space-3xl);
+        box-sizing: border-box;
+        text-align: center;
+        user-select: none;
+        border-width: var(--gds-sys-space-3xs);
+        border-style: solid;
+        border-color: transparent;
+        border-radius: var(--gds-sys-space-2xs);
+        transition: background 0.2s;
+        outline-style: solid;
+        outline-color: transparent;
+        outline-width: 0px;
+        outline-offset: var(--gds-sys-space-3xs);
+
+        &:not(.disabled):hover,
+        &[aria-selected='true'] {
+          background: var(--gds-sys-color-l2-background-tertiary);
+          cursor: pointer;
+          color: var(--gds-sys-color-l2-content-tertiary);
+        }
+
+        &.today {
+          border-color: var(--gds-sys-color-l2-background-tertiary);
+        }
+
+        &.disabled {
+          color: var(--gds-sys-color-l3-content-disabled);
+          cursor: not-allowed;
+        }
+
+        &:active:not(.disabled) {
+          scale: 0.96;
+        }
+
+        &:focus-visible {
+          outline-color: var(--gds-sys-color-l2-content-primary);
+          outline-width: var(--gds-sys-space-3xs);
+        }
+
+        &.small {
+          padding: 0 6px;
+          height: var(--gds-sys-space-xl);
+          font-size: var(--gds-sys-text-size-detail-s);
+          line-height: var(--gds-sys-text-line-height-detail-s);
+        }
+      }
+
+      .indicator-dot {
+        display: flex;
+        position: absolute;
+        width: var(--gds-sys-space-2xs);
+        height: var(--gds-sys-space-2xs);
+        border-radius: var(--gds-sys-space-max);
+        background-color: var(--_color, currentColor);
+        inset: var(--gds-sys-space-2xs) var(--gds-sys-space-2xs) auto auto;
+      }
+    }
+  }
+`;var Ge=Object.defineProperty,Re=Object.getOwnPropertyDescriptor,Ce=e=>{throw TypeError(e)},a=(e,r,t,l)=>{for(var u=l>1?void 0:l?Re(r,t):r,m=e.length-1,i;m>=0;m--)(i=e[m])&&(u=(l?i(r,t,u):i(u))||u);return l&&u&&Ge(r,t,u),u},De=(e,r,t)=>r.has(e)||Ce("Cannot "+t),g=(e,r,t)=>(De(e,r,"read from private field"),t?t.call(e):r.get(e)),y=(e,r,t)=>r.has(e)?Ce("Cannot add the same private member more than once"):r instanceof WeakSet?r.add(e):r.set(e,t),d=(e,r,t)=>(De(e,r,"access private method"),t),c,Fe,$,P,S,B,M,Pe,D,F,Se;let s=class extends ze{constructor(){super(...arguments),y(this,c),this.min=new Date(new Date().getFullYear()-10,0,1),this.max=new Date(new Date().getFullYear()+10,0,1),this.hideExtraneousYears=!1,this.columns=5,this.rows=5,this.noCurrentYear=!1,this.changeYearsControls=!1,this.focusedDate=new Date,this.size="large",this._currentLocale=navigator.language,y(this,P,e=>{d(this,c,B).call(this),e.preventDefault()}),y(this,S,e=>{d(this,c,M).call(this),e.preventDefault()}),y(this,D,e=>{this._elFocusedButton=e.target}),y(this,F,()=>{delete this._elFocusedButton})}get focusedYear(){return this.focusedDate.getFullYear()}set focusedYear(e){this.focusedDate=new Date(e,1,1,12)}getYearCell(e){var r;return(r=this.shadowRoot)==null?void 0:r.querySelector(`#yearCell-${e}`)}getStartYear(){const e=this.columns*this.rows,r=this.max.getFullYear()-this.min.getFullYear()+1;let t=this.min.getFullYear()-Math.floor((e-r)/2);if(this.focusedYear<t)do t-=e;while(this.focusedYear<t);else if(this.focusedYear>t+e-1)do t+=e;while(this.focusedYear>t+e-1);return t}connectedCallback(){super.connectedCallback(),Ue.instance.apply(this,"gds-year-picker"),this.addEventListener("keydown",d(this,c,Se)),window.addEventListener("lit-localize-status",e=>{e.detail.status==="ready"&&(this._currentLocale=e.detail.readyLocale)})}focus(){var e;super.focus(),(e=this._elFocusedCell)==null||e.focus()}render(){const e=new Date().getFullYear(),r=this.getStartYear();return o` <gds-div overflow="auto">
+      ${this.changeYearsControls?o`<gds-flex justify-content="space-around" align-items="center">
+            <gds-button
+              id="prev"
+              rank="tertiary"
+              label="Previous years"
+              @click=${g(this,P)}
+              @focus=${g(this,D)}
+              @blur=${g(this,F)}
+            >
+              <gds-icon-chevron-left></gds-icon-chevron-left>
+            </gds-button>
+            <span id="range">${d(this,c,Pe).call(this)}</span>
+            <gds-button
+              id="next"
+              rank="tertiary"
+              label="Next years"
+              @click=${g(this,S)}
+              @focus=${g(this,D)}
+              @blur=${g(this,F)}
+            >
+              <gds-icon-chevron-right></gds-icon-chevron-right>
+            </gds-button>
+          </gds-flex>`:null}
+      <table role="grid" aria-label="${Ne(this.label)}">
+        <tbody role="rowgroup">
+          ${Array.from({length:this.rows}).map((t,l)=>o`
+              <tr role="row">
+                ${Array.from({length:this.columns}).map((u,m)=>{const i=r+l*this.columns+m,h=i<this.min.getFullYear()||i>this.max.getFullYear();return this.hideExtraneousYears&&h?o`<td inert></td>`:o`
+                    <td
+                      class="${Ae({small:this.size=="small",today:!this.noCurrentYear&&e==i,disabled:h})}"
+                      ?disabled=${h}
+                      tabindex="${this.focusedYear==i&&!h?0:-1}"
+                      aria-selected="${d(this,c,Fe).call(this)==i&&!h?"true":"false"}"
+                      @click=${()=>h?null:d(this,c,$).call(this,i)}
+                      id="yearCell-${l*this.columns+m}"
+                    >
+                      ${i}
+                    </td>
+                  `})}
+              </tr>
+            `)}
+        </tbody>
+      </table></gds-div
+    >`}_valueChanged(){this.value&&(this.focusedDate=this.value)}};c=new WeakSet;Fe=function(){return this.value?this.value.getFullYear():-1};$=function(e){this.value=new Date(e,1,1,12),this.dispatchEvent(new CustomEvent("change",{detail:this.value,bubbles:!1,composed:!1}))};P=new WeakMap;S=new WeakMap;B=function(){const e=this.columns*this.rows,r=this.min.getFullYear();let t=this.focusedYear-e;t<r&&(t=r),this.focusedYear=t};M=function(){const e=this.columns*this.rows,r=this.max.getFullYear();let t=this.focusedYear+e;t>r&&(t=r),this.focusedYear=t};Pe=function(){const e=this.columns*this.rows,r=this.getStartYear(),t=r+e-1;return r+" - "+t};D=new WeakMap;F=new WeakMap;Se=function(e){var t;let r=!1;this._elFocusedButton||(e.key==="ArrowLeft"?(this.focusedYear>this.min.getFullYear()&&(this.focusedYear-=1),r=!0):e.key==="ArrowRight"?(this.focusedYear<this.max.getFullYear()&&(this.focusedYear+=1),r=!0):e.key==="ArrowUp"?(this.focusedYear>this.min.getFullYear()&&(this.focusedYear-=this.columns),this.focusedYear<this.min.getFullYear()&&(this.focusedYear=this.min.getFullYear()),r=!0):e.key==="ArrowDown"?(this.focusedYear<this.max.getFullYear()&&(this.focusedYear+=this.columns),this.focusedYear>this.max.getFullYear()&&(this.focusedYear=this.max.getFullYear()),r=!0):e.key==="Home"?(this.focusedYear=this.min.getFullYear(),r=!0):e.key==="End"?(this.focusedYear=this.max.getFullYear(),r=!0):e.key==="PageUp"?(d(this,c,B).call(this),r=!0):e.key==="PageDown"?(d(this,c,M).call(this),r=!0):(e.key==="Enter"||e.key===" ")&&((t=this._elFocusedCell)!=null&&t.hasAttribute("disabled")||d(this,c,$).call(this,this.focusedYear),r=!0),r&&(e.preventDefault(),e.stopPropagation(),this.updateComplete.then(()=>{var l;(l=this._elFocusedCell)==null||l.focus()})))};s.styles=[Oe,We];s.shadowRootOptions={mode:"open",delegatesFocus:!0};a([n()],s.prototype,"value",2);a([n({converter:E})],s.prototype,"min",2);a([n({converter:E})],s.prototype,"max",2);a([n({type:Boolean,attribute:"hide-extraneous-years"})],s.prototype,"hideExtraneousYears",2);a([n({type:Number})],s.prototype,"columns",2);a([n({type:Number})],s.prototype,"rows",2);a([n({type:Boolean,attribute:"no-current-year"})],s.prototype,"noCurrentYear",2);a([n({type:Boolean,attribute:"change-years-controls"})],s.prototype,"changeYearsControls",2);a([n({converter:E,attribute:"focused-date"})],s.prototype,"focusedDate",2);a([n({type:Number,attribute:"focused-year"})],s.prototype,"focusedYear",1);a([n({reflect:!0})],s.prototype,"size",2);a([n()],s.prototype,"label",2);a([Me()],s.prototype,"_currentLocale",2);a([Te('td[tabindex="0"]')],s.prototype,"_elFocusedCell",2);a([Ie("value")],s.prototype,"_valueChanged",1);s=a([Le("gds-year-picker"),Be()],s);s.define();var z=Object.freeze,He=Object.defineProperty,je=(e,r)=>z(He(e,"raw",{value:z(e.slice())})),L;const Pr={title:"Components/Year picker",component:"gds-year-picker",parameters:{layout:"centered",docs:{description:{component:`[Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/year-picker)
+
+The year picker component is a visual representation of a many years that allows users
+to select a year. Keys to use: arrow-keys, home, and end to focus a year
+and enter or space to select it.`}}},tags:["autodocs"],argTypes:{...$e("gds-year-picker")}},p={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{expanded:!0}},args:{}},C={...p,args:{label:"YearPicker"}},f={...p,name:"No current month",render:e=>o` <gds-year-picker no-current-year></gds-year-picker> `},v={...p,render:e=>o` <gds-year-picker size="small"></gds-year-picker> `},Y={...p,name:"Min and max",render:e=>o`
+    <gds-year-picker min="2023-01-01" max="2032-01-01"></gds-year-picker>
+  `},b={...p,render:e=>o`
+    <gds-year-picker
+      min="2023-01-01"
+      max="2032-01-01"
+      hide-extraneous-years
+    ></gds-year-picker>
+  `},x={...p,render:e=>o`
+    <gds-year-picker columns="4" rows="3"></gds-year-picker>
+  `},k={...p,render:e=>o`
+    <gds-year-picker
+      min="1900-01-01"
+      max="${new Date().toISOString().split("T")[0]}"
+    ></gds-year-picker>
+  `},w={...p,render:e=>o(L||(L=je([`
+    <gds-popover id="pop">
+      <gds-button rank="secondary" slot="trigger">
+        <span id="selected-year">Choose a year</span>
+        <gds-icon-calendar slot="trail"></gds-icon-calendar>
+      </gds-button>
+      <div style="padding: 1rem 0 0 1.5rem">Choose a year</div>
+      <gds-year-picker id="yearp"> </gds-year-picker>
+    </gds-popover>
+    <script>
+      var yearp = document.getElementById('yearp')
+      function onYearChange() {
+        const selectedDate = yearp.value
+        document.getElementById('selected-year').innerText =
+          selectedDate.getFullYear()
+        document.getElementById('pop').open = false
+      }
+      yearp.addEventListener('change', onYearChange)
+    <\/script>
+  `])))},_={...p,render:e=>o`
+    <gds-year-picker min="1950-01-01" max="2100-01-01" change-years-controls>
+    </gds-year-picker>
+  `};var T,A,N;C.parameters={...C.parameters,docs:{...(T=C.parameters)==null?void 0:T.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    label: 'YearPicker'
+  }
+}`,...(N=(A=C.parameters)==null?void 0:A.docs)==null?void 0:N.source}}};var O,U,I,W,G;f.parameters={...f.parameters,docs:{...(O=f.parameters)==null?void 0:O.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'No current month',
+  render: args => html\` <gds-year-picker no-current-year></gds-year-picker> \`
+}`,...(I=(U=f.parameters)==null?void 0:U.docs)==null?void 0:I.source},description:{story:"Use the `no-current-year` attribute so the month right\nnow does not have a outer ring around it.",...(G=(W=f.parameters)==null?void 0:W.docs)==null?void 0:G.description}}};var R,H,j,K,q;v.parameters={...v.parameters,docs:{...(R=v.parameters)==null?void 0:R.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\` <gds-year-picker size="small"></gds-year-picker> \`
+}`,...(j=(H=v.parameters)==null?void 0:H.docs)==null?void 0:j.source},description:{story:"Use the `small` attribute to use a smaller and condenced styling.",...(q=(K=v.parameters)==null?void 0:K.docs)==null?void 0:q.description}}};var J,Q,V,X,Z;Y.parameters={...Y.parameters,docs:{...(J=Y.parameters)==null?void 0:J.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Min and max',
+  render: args => html\`
+    <gds-year-picker min="2023-01-01" max="2032-01-01"></gds-year-picker>
+  \`
+}`,...(V=(Q=Y.parameters)==null?void 0:Q.docs)==null?void 0:V.source},description:{story:"Use `min` and `max` attributes to limit the months you can choose from.\nThe rest is greyed out. Remember that by default it uses the current year.",...(Z=(X=Y.parameters)==null?void 0:X.docs)==null?void 0:Z.description}}};var ee,re,te,se,ae;b.parameters={...b.parameters,docs:{...(ee=b.parameters)==null?void 0:ee.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\`
+    <gds-year-picker
+      min="2023-01-01"
+      max="2032-01-01"
+      hide-extraneous-years
+    ></gds-year-picker>
+  \`
+}`,...(te=(re=b.parameters)==null?void 0:re.docs)==null?void 0:te.source},description:{story:"Use `hide-extraneous-years` in combination with `min` and `max` attributes\nto to fully hide the non-selectable years.",...(ae=(se=b.parameters)==null?void 0:se.docs)==null?void 0:ae.description}}};var oe,ne,ie,ce,le;x.parameters={...x.parameters,docs:{...(oe=x.parameters)==null?void 0:oe.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\`
+    <gds-year-picker columns="4" rows="3"></gds-year-picker>
+  \`
+}`,...(ie=(ne=x.parameters)==null?void 0:ne.docs)==null?void 0:ie.source},description:{story:"Use `columns` and `rows` to override the default 5x5 cell table.",...(le=(ce=x.parameters)==null?void 0:ce.docs)==null?void 0:le.description}}};var de,pe,ue,me,he;k.parameters={...k.parameters,docs:{...(de=k.parameters)==null?void 0:de.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\`
+    <gds-year-picker
+      min="1900-01-01"
+      max="\${new Date().toISOString().split('T')[0]}"
+    ></gds-year-picker>
+  \`
+}`,...(ue=(pe=k.parameters)==null?void 0:pe.docs)==null?void 0:ue.source},description:{story:"Example of choosing a birth year.",...(he=(me=k.parameters)==null?void 0:me.docs)==null?void 0:he.description}}};var ge,ye,fe,ve,Ye;w.parameters={...w.parameters,docs:{...(ge=w.parameters)==null?void 0:ge.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\`
+    <gds-popover id="pop">
+      <gds-button rank="secondary" slot="trigger">
+        <span id="selected-year">Choose a year</span>
+        <gds-icon-calendar slot="trail"></gds-icon-calendar>
+      </gds-button>
+      <div style="padding: 1rem 0 0 1.5rem">Choose a year</div>
+      <gds-year-picker id="yearp"> </gds-year-picker>
+    </gds-popover>
+    <script>
+      var yearp = document.getElementById('yearp')
+      function onYearChange() {
+        const selectedDate = yearp.value
+        document.getElementById('selected-year').innerText =
+          selectedDate.getFullYear()
+        document.getElementById('pop').open = false
+      }
+      yearp.addEventListener('change', onYearChange)
+    <\/script>
+  \`
+}`,...(fe=(ye=w.parameters)==null?void 0:ye.docs)==null?void 0:fe.source},description:{story:"Example of a button that opens up the year-picker.",...(Ye=(ve=w.parameters)==null?void 0:ve.docs)==null?void 0:Ye.description}}};var be,xe,ke,we,_e;_.parameters={..._.parameters,docs:{...(be=_.parameters)==null?void 0:be.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\`
+    <gds-year-picker min="1950-01-01" max="2100-01-01" change-years-controls>
+    </gds-year-picker>
+  \`
+}`,...(ke=(xe=_.parameters)==null?void 0:xe.docs)==null?void 0:ke.source},description:{story:"Use `change-years-controls` to show controls for selecting previous and next years.",...(_e=(we=_.parameters)==null?void 0:we.docs)==null?void 0:_e.description}}};const Sr=["Default","NoCurrentMonth","Small","MinAndMax","Hide","LessCells","BirthYear","Popover","ChangeYear"];export{k as BirthYear,_ as ChangeYear,C as Default,b as Hide,x as LessCells,Y as MinAndMax,f as NoCurrentMonth,w as Popover,v as Small,Sr as __namedExportsOrder,Pr as default};
