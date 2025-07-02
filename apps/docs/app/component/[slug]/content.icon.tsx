@@ -1,7 +1,7 @@
 // app/component/[slug]/content.icon.tsx
 'use client'
 
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -52,13 +52,39 @@ export function IconContent({ component }: IconContentProps) {
   const [isSolid, setIsSolid] = useState(false)
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [selectedIcon, setSelectedIcon] = useState<IconData | null>(null)
+  // Create fuseItems and fuse instance with useMemo
+  const { fuseItems, fuse, categories } = useMemo(() => {
+    if (!component.icons) return { fuseItems: [], fuse: null, categories: [] }
 
-  const iconList = React.useMemo(() => {
+    const items = Object.entries(component.icons).map(([name, icon]) => ({
+      id: name,
+      searchName: name,
+      searchDisplayName: icon.displayName,
+      searchCategories: icon.meta.categories,
+      searchTags: icon.meta.tags,
+      searchDescription: icon.meta.description,
+      originalIcon: icon,
+    }))
+
+    return {
+      fuseItems: items,
+      fuse: new Fuse(items, fuseOptions),
+      categories: Array.from(
+        new Set(
+          Object.values(component.icons)
+            .map((icon) => icon.meta.categories)
+            .flat(),
+        ),
+      ).sort(),
+    }
+  }, [component.icons])
+
+  const iconList = useMemo(() => {
     if (!component.icons) return []
 
     let results: [string, IconData][] = Object.entries(component.icons)
 
-    if (search) {
+    if (search && fuse) {
       const fuseResults = fuse.search(search)
       results = fuseResults.map(({ item }) => [item.id, item.originalIcon])
     }
@@ -72,31 +98,31 @@ export function IconContent({ component }: IconContentProps) {
     return results.sort((a, b) =>
       a[1].displayName.localeCompare(b[1].displayName),
     )
-  }, [search, selectedCategory, component.icons])
+  }, [search, selectedCategory, component.icons, fuse])
 
   if (!component.icons) return null
 
-  const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
-    ([name, icon]) => ({
-      id: name,
-      searchName: name,
-      searchDisplayName: icon.displayName,
-      searchCategories: icon.meta.categories,
-      searchTags: icon.meta.tags,
-      searchDescription: icon.meta.description,
-      originalIcon: icon,
-    }),
-  )
+  // const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
+  //   ([name, icon]) => ({
+  //     id: name,
+  //     searchName: name,
+  //     searchDisplayName: icon.displayName,
+  //     searchCategories: icon.meta.categories,
+  //     searchTags: icon.meta.tags,
+  //     searchDescription: icon.meta.description,
+  //     originalIcon: icon,
+  //   }),
+  // )
 
-  const fuse = new Fuse(fuseItems, fuseOptions)
+  // const fuse = new Fuse(fuseItems, fuseOptions)
 
-  const categories = Array.from(
-    new Set(
-      Object.values(component.icons)
-        .map((icon) => icon.meta.categories)
-        .flat(),
-    ),
-  ).sort()
+  // const categories = Array.from(
+  //   new Set(
+  //     Object.values(component.icons)
+  //       .map((icon) => icon.meta.categories)
+  //       .flat(),
+  //   ),
+  // ).sort()
 
   const handleCategoryChange = (e: Event) => {
     const target = e.target as HTMLSelectElement

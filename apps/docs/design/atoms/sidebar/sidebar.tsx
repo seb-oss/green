@@ -45,6 +45,7 @@ const CollapsibleSection = ({
       gap="2xs"
     >
       <Link
+        key={href + isActive}
         component="button"
         href={href}
         rank={isActive ? 'secondary' : 'tertiary'}
@@ -63,6 +64,7 @@ const CollapsibleSection = ({
         <span data-fade>{title}</span>
       </Link>
       <Core.GdsButton
+        key={isOpen + 'chevron'}
         rank="tertiary"
         data-animation="scroll"
         onClick={(e) => {
@@ -138,7 +140,7 @@ export default function Sidebar() {
       >
         {NAV?.links.map((link) => (
           <Link
-            key={link.slug}
+            key={link.slug + isOpen}
             component="button"
             href={link.slug.startsWith('/') ? link.slug : `/${link.slug}`}
             rank={
@@ -148,9 +150,11 @@ export default function Sidebar() {
             justify-content="center"
             flex="1"
             data-animation="scroll"
-            width="100%"
+            width={isOpen ? '100%' : 'initial'}
           >
-            {link.icon && <Icon name={link.icon} />}
+            {link.icon && (
+              <Icon key={isOpen + '' + link.icon} name={link.icon} />
+            )}
           </Link>
         ))}
       </Core.GdsFlex>
