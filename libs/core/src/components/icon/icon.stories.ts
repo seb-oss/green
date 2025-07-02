@@ -4,32 +4,19 @@ import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
 import type { Meta, StoryObj } from '@storybook/web-components'
 
 import spaceRefTokens from '../../../../tokens/src/tokens/2023/ref/space.ref.json'
-import densityTokens from '../../../../tokens/src/tokens/2023/sys/density.comfortable.json'
 import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
 
 import './icons'
 import '../grid'
-import '../container'
 import '../card'
 import '../badge'
 import '../flex'
 import '../divider'
 import '../text'
 import '../theme'
-import './icon.stories.css'
-
-import * as Icons from './icons'
 
 /**
  * An icon helps communicate meaning quickly, enhances visual hierarchy, and supports navigation or interaction.
- *
- * ### Usage
- *
- * Just like other components, the icons can be imported indivually, so that you don't end up with unused icons in your bundle:
- *
- * ```js
- * import '@sebgroup/green-core/components/icon/icons/bank.js'
- * ```
  */
 const meta: Meta = {
   title: 'Components/Icon',
@@ -58,142 +45,14 @@ export const Basic: Story = {
 }
 
 /**
- * Icons are available in regular versions. You can use the `solid` attribute to display the solid version of the icon.
+ *Toggle between outline and solid icon styles using the `solid` attribute.
  */
 
-window.addEventListener('DOMContentLoaded', () => {
-  const searchBox = document.getElementById('icon-search') as HTMLInputElement
-  const icons = Array.from(
-    document.querySelectorAll('#solids [gds-element^="gds-icon-"]'),
-  )
-
-  searchBox.addEventListener('keyup', () => {
-    const searchTerm = searchBox.value.toLowerCase()
-
-    icons.forEach((icon) => {
-      const iconNameAttr = icon.getAttribute('gds-element')
-      if (iconNameAttr) {
-        // Skip deprecated icons in search
-        if (deprecatedIcons[iconNameAttr]?.hide) {
-          icon.setAttribute('hidden', '')
-          return
-        }
-
-        const iconName = iconNameAttr.toLowerCase().replace('gds-icon-', '')
-        const isMatch = fuzzySearch(searchTerm, iconName)
-
-        if (isMatch || searchBox.value.trim() === '') {
-          icon.removeAttribute('hidden')
-        } else {
-          icon.setAttribute('hidden', '')
-        }
-      }
-    })
-  })
-
-  function fuzzySearch(term: string, text: string): boolean {
-    let termIndex = 0
-    let textIndex = 0
-    while (termIndex < term.length && textIndex < text.length) {
-      if (term.charAt(termIndex) === text.charAt(textIndex)) {
-        termIndex++
-      }
-      textIndex++
-    }
-    return termIndex === term.length
-  }
-})
-
-/**
- * Click to copy icon HTML code
- */
-
-export const IconsRegular: Story = {
+export const Solid: Story = {
   ...DefaultParams,
-  name: 'Regular icons',
-  render: (args) => {
-    const iconElements = Object.keys(Icons)
-      .map((iconName) => {
-        const IconComponent = Icons[iconName]
-        const tagName = IconComponent._name
-          ? `gds-icon-${IconComponent._name}`
-          : `gds-icon-${iconName}`
-
-        // Skip deprecated icons
-        if (deprecatedIcons[tagName]?.hide) {
-          return null
-        }
-
-        return staticHTML`<${literal`${unsafeStatic(tagName)}`}></${literal`${unsafeStatic(tagName)}`}>`
-      })
-      .filter(Boolean)
-
-    return html`
-      <gds-flex flex-direction="column" gap="xl" id="solids">
-        <input type="text" id="icon-search" placeholder="Search Icons" />
-        <gds-grid
-          columns="s{2} m{4} l{4}"
-          gap="s{xl} m{xl} l{xl}"
-          class="icon-preview"
-        >
-          ${iconElements}
-        </gds-grid>
-      </gds-flex>
-    `
-  },
-}
-
-/**
- * Icons are available in solid versions. You can use the `solid` attribute to display the solid version of the icon.
- *
- * Here is an example of some solid icons:
- */
-
-export const IconsSolid: Story = {
-  ...DefaultParams,
-  name: 'Solid icons',
-  render: (args) => html`
-    <gds-grid
-      columns="s{2} m{4} l{4}"
-      gap="s{xl} m{xl} l{xl}"
-      class="icon-preview"
-    >
-      <gds-icon-airplane-up solid></gds-icon-airplane-up>
-      <gds-icon-robot solid></gds-icon-robot>
-      <gds-icon-rocket solid></gds-icon-rocket>
-      <gds-icon-school solid></gds-icon-school>
-    </gds-grid>
-  `,
-}
-
-/**
- * The icon package has the following brand icons available:
- */
-
-export const Brands: Story = {
-  ...DefaultParams,
-  name: 'Brands',
-  render: (args) => {
-    const BRANDS = Object.keys(Icons)
-      .map((iconName) => {
-        const IconComponent = Icons[iconName]
-        if (!IconComponent._name.includes('brand')) {
-          return null
-        }
-        const tagName = literal`gds-icon-${unsafeStatic(IconComponent._name)}`
-        return staticHTML`<${tagName}></${tagName}>`
-      })
-      .filter(Boolean) // Filter out null values
-
-    return html`
-      <gds-grid
-        columns="s{2} m{4} l{4}"
-        gap="s{xl} m{xl} l{xl}"
-        class="icon-preview"
-      >
-        ${BRANDS}
-      </gds-grid>
-    `
+  args: {
+    solid: true,
+    size: 'xl',
   },
 }
 
@@ -318,27 +177,25 @@ export const IconsSize: Story = {
 
 /**
  * You can change the icon stroke by setting the `stroke` attribute.
+ *
+ * ```html
+ * <gds-icon-bank stroke="2"></gds-icon-bank>
+ * ```
  */
-export const IconsStroke: Story = {
+
+export const Stroke: Story = {
   ...DefaultParams,
-  name: 'Stroke',
-  render: (args) => html`
-    <gds-icon-robot stroke="2" size="xl"></gds-icon-robot>
-    <gds-icon-rocket stroke="2" size="xl"></gds-icon-rocket>
-    <gds-icon-school stroke="2" size="xl"></gds-icon-school>
-  `,
+  args: {
+    solid: false,
+    stroke: '2',
+    size: 'xl',
+  },
 }
 
 /**
- * # Icon Color
  *
  * Set icon colors using the `color` attribute. Supports design system tokens and transparency.
  *
- * ## Default
- * - Level: 2
- * - Color: `currentColor` (inherits from parent)
- *
- * ## Examples
  * ```html
  * <!-- Basic color tokens -->
  * <gds-icon-ai color="primary"></gds-icon-ai>
@@ -355,10 +212,6 @@ export const IconsStroke: Story = {
  * </div>
  * ```
  *
- * For available colors, see [Color System](./?path=/docs/style-colors--docs).
- *
- *
- * Note these examples show the possible colors in light and dark mode.
  */
 
 export const IconsColor: Story = {
