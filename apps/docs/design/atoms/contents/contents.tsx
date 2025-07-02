@@ -8,9 +8,16 @@ import { ComponentContent } from '../../../settings/content/types'
 
 import './contents.css'
 
+const SECTION_TITLES = {
+  overview: 'Overview',
+  'ux-text': 'UX Text',
+  accessibility: 'Accessibility',
+  code: 'Code',
+} as const
+
 interface TableOfContentsProps {
   component: ComponentContent
-  section: 'overview' | 'ux-text' | 'accessibility'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
   versus?: string
 }
 
@@ -41,10 +48,7 @@ export function TableOfContents({
       { id: 'component-top', title: component.title },
       {
         id: `component-${section}`,
-        title:
-          section === 'ux-text'
-            ? 'UX Text'
-            : section.charAt(0).toUpperCase() + section.slice(1),
+        title: SECTION_TITLES[section],
         scrollTo: 'component-content',
       } as NavigationSection,
     ]
@@ -70,16 +74,17 @@ export function TableOfContents({
       }
     }
 
-    const sectionContent =
-      section === 'overview'
-        ? component.overview || []
-        : section === 'ux-text'
-          ? Array.isArray(component['ux-text'])
-            ? component['ux-text']
-            : component['ux-text']?.section || []
-          : Array.isArray(component['accessibility'])
-            ? component['accessibility']
-            : component['accessibility']?.section || []
+    // Update the section content logic to include 'code'
+    const sectionContent = {
+      overview: component.overview || [],
+      'ux-text': Array.isArray(component['ux-text'])
+        ? component['ux-text']
+        : component['ux-text']?.section || [],
+      accessibility: Array.isArray(component['accessibility'])
+        ? component['accessibility']
+        : component['accessibility']?.section || [],
+      code: [], // Add empty array for code section as it doesn't have subsections
+    }[section]
 
     const contentSections: ContentSection[] = sectionContent
       .filter(
@@ -97,7 +102,6 @@ export function TableOfContents({
     const scrollPosition = window.scrollY + 150
     let newActiveSection = 'component-top'
 
-    // Check each section in reverse order
     for (const section of [...sections].reverse()) {
       const elementId = section.scrollTo || section.id
       const element = document.getElementById(elementId)
@@ -169,6 +173,7 @@ export function TableOfContents({
               onClick={() => scrollToSection(section)}
               justify-content="flex-start"
               data-overflow
+              data-id={section.id}
             >
               {section.title}
             </Core.GdsButton>

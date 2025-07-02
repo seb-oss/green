@@ -16,7 +16,7 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   slug: string
   title: string
-  section: 'overview' | 'ux-text' | 'accessibility'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
 }
 
 const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
@@ -29,14 +29,18 @@ const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
 const LastItem = ({
   section,
 }: {
-  section: 'overview' | 'ux-text' | 'accessibility'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
 }) => {
   if (section === 'overview') return null
-  return (
-    <Core.GdsText color="secondary">
-      {section === 'ux-text' ? 'UX text' : 'Accessibility'}
-    </Core.GdsText>
-  )
+
+  const sectionText = {
+    'ux-text': 'UX text',
+    accessibility: 'Accessibility',
+    code: 'Code',
+    overview: null,
+  }[section]
+
+  return <Core.GdsText color="secondary">{sectionText}</Core.GdsText>
 }
 
 export default function Breadcrumbs({

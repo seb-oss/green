@@ -50,11 +50,21 @@ export function ComponentLayoutClient({
 
   const { isLoaded, actions } = useContent()
   const pathname = usePathname()
-  const section = pathname.includes('/ux-text')
-    ? 'ux-text'
-    : pathname.includes('/accessibility')
-      ? 'accessibility'
-      : 'overview'
+
+  const getSection = (pathname: string) => {
+    if (pathname.includes('/ux-text')) return 'ux-text'
+    if (pathname.includes('/accessibility')) return 'accessibility'
+    if (pathname.includes('/code')) return 'code'
+    return 'overview'
+  }
+
+  const section = getSection(pathname)
+
+  // const section = pathname.includes('/ux-text')
+  //   ? 'ux-text'
+  //   : pathname.includes('/accessibility')
+  //     ? 'accessibility'
+  //     : 'overview'
 
   if (!isLoaded) return null
 
@@ -275,7 +285,7 @@ export function ComponentLayoutClient({
                 </Core.GdsFlex>
               </Core.GdsCard>
             )}
-            {false && <ArgsTable componentName={slug} />}
+            {section === 'code' && <ArgsTable componentName={slug} />}
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>
         </Core.GdsFlex>

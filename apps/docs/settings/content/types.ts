@@ -110,6 +110,7 @@ export interface ComponentContent extends BaseContent {
   overview?: ComponentSection[]
   'ux-text'?: { section: ComponentSection[] }
   accessibility?: { section: ComponentSection[] }
+  code?: { section: ComponentSection[] }
   images?: ComponentImage[]
   icons?: IconList
 }

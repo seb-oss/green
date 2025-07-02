@@ -12,7 +12,7 @@ import { IconContent } from './content.icon'
 
 interface ContentSectionProps {
   slug: string
-  contentKey: 'overview' | 'ux-text' | 'accessibility'
+  contentKey: 'overview' | 'ux-text' | 'accessibility' | 'code'
 }
 
 export function ContentSection({ slug, contentKey }: ContentSectionProps) {
@@ -38,6 +38,12 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
           return component['accessibility']
         }
         return component['accessibility']?.section || null
+      }
+      case 'code': {
+        if (Array.isArray(component['code'])) {
+          return component['code']
+        }
+        return component['code']?.section || null
       }
       default:
         return null
