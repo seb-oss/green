@@ -332,7 +332,7 @@ export class GdsYearPicker extends GdsElement {
   }
 
   #handleButtonBlur = (_) => {
-    this._elFocusedButton = null
+    delete this._elFocusedButton
   }
 
   @watch('value')
