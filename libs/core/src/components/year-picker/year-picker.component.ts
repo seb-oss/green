@@ -197,7 +197,6 @@ export class GdsYearPicker extends GdsElement {
   private _elFocusedCell?: HTMLElement
 
   private _elFocusedButton?: HTMLElement
-  _elFocusedButton = null
 
   connectedCallback(): void {
     super.connectedCallback()
