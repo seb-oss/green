@@ -182,9 +182,8 @@ class Button extends GdsFormControlElement<any> {
 
     this.#isIconButton =
       assignedElements.length === 1 &&
-      assignedElements.some((element) =>
-        element.tagName.toLowerCase().startsWith('gds-icon'),
-      )
+      (assignedElements[0].tagName.toLowerCase().startsWith('gds-icon') ||
+        assignedElements[0].getAttribute('name') === 'icon')
 
     this.requestUpdate()
   }

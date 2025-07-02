@@ -1,6 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { nothing } from 'lit'
-import { property, queryAsync } from 'lit/decorators.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 import { Placement } from '@floating-ui/dom'
@@ -12,6 +12,7 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import {
   gdsCustomElement,
+  getScopedTagName,
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import {
@@ -97,9 +98,15 @@ export class GdsContextMenu extends withMarginProps(
   @queryAsync('#trigger')
   private elTriggerBtn!: Promise<HTMLButtonElement>
 
+  @queryAsync('slot[name="icon"]')
+  private elIconSlot!: Promise<HTMLSlotElement>
+
   connectedCallback() {
     super.connectedCallback()
+
     TransitionalStyles.instance.apply(this, 'gds-context-menu')
+
+    this.#handleSlotChange()
 
     this.addEventListener('keydown', (e) => {
       if (this.open && e.key == 'Tab') {
@@ -119,10 +126,37 @@ export class GdsContextMenu extends withMarginProps(
         aria-expanded=${this.open}
         @click=${() => (this.open = true)}
       >
-        ${this.showLabel ? (this.buttonLabel ?? this.label) : nothing}
-        <gds-icon-dot-grid-one-horizontal></gds-icon-dot-grid-one-horizontal>
+        ${this.showLabel
+          ? html`<slot
+                name="icon"
+                slot="lead"
+                @slotchange=${this.#handleSlotChange}
+              ></slot
+              >${this.buttonLabel}`
+          : html`<slot
+              name="icon"
+              @slotchange=${this.#handleSlotChange}
+            ></slot>`}
       </gds-button>
       ${when(this.open, this.#renderPopover)}`
+  }
+
+  #handleSlotChange() {
+    this.elIconSlot.then((el) => {
+      if (
+        !el.assignedNodes({ flatten: true }).some((node) => {
+          return node.tagName.toLowerCase().startsWith('gds-icon')
+        })
+      ) {
+        const defaultIcon = document.createElement(
+          getScopedTagName('gds-icon-dot-grid-one-horizontal'),
+        )
+
+        el.appendChild(defaultIcon as HTMLElement)
+
+        this.requestUpdate()
+      }
+    })
   }
 
   #renderPopover = () => {
