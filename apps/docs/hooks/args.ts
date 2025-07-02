@@ -1,6 +1,6 @@
 // hooks/args.ts
 // import customElements from '../../../libs/core/custom-elements.json'
-import customElements from '@sebgroup/green-core/custom-elements.json'
+import customElements from '@sebgroup/green-core/metadata'
 
 // Define the structure that matches your JSON file
 interface CustomElementsJson {

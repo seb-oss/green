@@ -5,7 +5,7 @@
 html {
   color-scheme: light;
   /* color-scheme: dark light; */
-  scrollbar-width: none;
+  scrollbar-width: thin;
 }
 
 body {

@@ -101,6 +101,9 @@
       ],
       "@sebgroup/repo-tools": [
         "dist/repo-tools/src/index.ts"
+      ],
+      "@sebgroup/green-core/metadata": [
+        "libs/core/custom-elements.json"
       ]
     }
   },
