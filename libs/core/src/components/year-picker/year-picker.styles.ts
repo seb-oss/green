@@ -9,7 +9,7 @@ const style = css`
         var(--gds-sys-color-l2-border-primary);
       padding-bottom: 0.25rem;
       margin: 0.5rem 1rem -0.5rem 1rem;
-      background: blue;
+      background: yellow;
     }
 
     :host {
