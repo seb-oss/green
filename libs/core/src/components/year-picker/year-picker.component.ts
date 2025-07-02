@@ -225,7 +225,7 @@ export class GdsYearPicker extends GdsElement {
               id="prev"
               rank="tertiary"
               label="Previous years"
-              @click=${this.#setPreviousYears}
+              @click=${this.#setPreviousYearsClick}
               @focus=${this.#handleButtonFocus}
               @blur=${this.#handleButtonBlur}
             >
@@ -236,7 +236,7 @@ export class GdsYearPicker extends GdsElement {
               id="next"
               rank="tertiary"
               label="Next years"
-              @click=${this.#setNextYears}
+              @click=${this.#setNextYearsClick}
               @focus=${this.#handleButtonFocus}
               @blur=${this.#handleButtonBlur}
             >
@@ -304,20 +304,30 @@ export class GdsYearPicker extends GdsElement {
     )
   }
 
-  #setPreviousYears = (_e: MouseEvent) => {
-    const totalCells = this.columns * this.rows
-    const minYear = this.min.getFullYear()
-    const startYear = this.getStartYear()
-    if (minYear < startYear) this.focusedYear -= totalCells
+  #setPreviousYearsClick = (_e: MouseEvent) => {
+    this.#setPreviousYears()
     _e.preventDefault()
   }
 
-  #setNextYears = (_e: MouseEvent) => {
+  #setNextYearsClick = (_e: MouseEvent) => {
+    this.#setNextYears()
+    _e.preventDefault()
+  }
+
+  #setPreviousYears() {
+    const totalCells = this.columns * this.rows
+    const minYear = this.min.getFullYear()
+    let newYear = this.focusedYear - totalCells
+    if (newYear < minYear) newYear = minYear
+    this.focusedYear = newYear
+  }
+
+  #setNextYears() {
     const totalCells = this.columns * this.rows
     const maxYear = this.max.getFullYear()
-    const startYear = this.getStartYear()
-    if (maxYear > startYear + totalCells) this.focusedYear += totalCells
-    _e.preventDefault()
+    let newYear = this.focusedYear + totalCells
+    if (newYear > maxYear) newYear = maxYear
+    this.focusedYear = newYear
   }
 
   #getRange() {
@@ -368,13 +378,11 @@ export class GdsYearPicker extends GdsElement {
     } else if (e.key === 'End') {
       this.focusedYear = this.max.getFullYear()
       handled = true
-    } else if (e.key === 'PageUp' || e.key === 'PageDown') {
-      const totalCells = this.columns * this.rows
-      let newYear =
-        this.focusedYear + (e.key === 'PageUp' ? -totalCells : totalCells)
-      if (newYear < this.min.getFullYear()) newYear = this.min.getFullYear()
-      if (newYear > this.max.getFullYear()) newYear = this.max.getFullYear()
-      this.focusedYear = newYear
+    } else if (e.key === 'PageUp') {
+      this.#setPreviousYears()
+      handled = true
+    } else if (e.key === 'PageDown') {
+      this.#setNextYears()
       handled = true
     } else if (e.key === 'Enter' || e.key === ' ') {
       if (!this._elFocusedCell?.hasAttribute('disabled')) {
