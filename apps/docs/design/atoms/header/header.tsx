@@ -1,17 +1,13 @@
 'use client'
 
 import {
-  GdsDiv,
   GdsFlex,
-  GdsInput,
   GdsText,
   IconBrandGithub,
-  IconBrandGreen,
-  IconBrandSeb,
   IconBrandStorybook,
   IconMagnifyingGlass,
 } from '@sebgroup/green-core/react'
-import { _, Icon } from '../../../hooks'
+import { _ } from '../../../hooks'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { Link } from '../link/link'
 
@@ -20,10 +16,6 @@ import './header.css'
 export default function Header() {
   const { actions } = useSettingsContext()
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
-
-  const handleToggleSidebar = () => {
-    actions.toggle('UI.Panel.Sidebar')
-  }
 
   const handleToggleCommand = () => {
     actions.toggle('UI.Panel.Command')
@@ -37,45 +29,37 @@ export default function Header() {
       justify-content="space-between"
       padding={isOpen ? 'xl xl l m' : 'xl xl l m'}
       className="header"
-      inset="0"
       gap="m"
+      position="relative"
     >
       <GdsFlex padding="0 0 0 m" align-items="center" gap="s">
         <Link href="/">
-          <GdsText font-weight="book" font-size="detail-m">
+          <GdsText
+            font-weight="book"
+            font-size="detail-m"
+            className="brand-color"
+          >
             Green Design System
           </GdsText>
         </Link>
       </GdsFlex>
 
-      {false && (
-        <GdsFlex align-items="center" gap="s">
-          <Link
-            component="button"
-            onClick={handleToggleSidebar}
-            rank="tertiary"
-            width="max-content"
-            size="medium"
-          >
-            {isOpen ? (
-              <Icon name="IconCrossLarge" />
-            ) : (
-              <Icon name="IconMenuSidebar" />
-            )}
-          </Link>
-        </GdsFlex>
-      )}
-
-      <GdsFlex>
+      <GdsFlex
+        position="absolute"
+        width="max-content"
+        inset="auto 0"
+        margin="auto"
+      >
         <Link
           component="button"
           onClick={handleToggleCommand}
           size="medium"
           rank="secondary"
+          width="400px"
+          justify-content="flex-start"
         >
           <IconMagnifyingGlass slot="lead"></IconMagnifyingGlass>
           What are you looking for?
-          <GdsFlex slot="trail" width="20px"></GdsFlex>
         </Link>
       </GdsFlex>
       <GdsFlex align-items="center" gap="0">
