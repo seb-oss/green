@@ -3,7 +3,7 @@ import { html } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-import { when } from 'lit/directives/when.js'
+//import { when } from 'lit/directives/when.js'
 import { addYears, isSameYear, subYears } from 'date-fns'
 
 import { GdsButton } from '../../components/button/button.component'
