@@ -331,7 +331,7 @@ export class GdsYearPicker extends GdsElement {
     this._elFocusedButton = e.target as HTMLElement
   }
 
-  #handleButtonBlur = (_) => {
+  #handleButtonBlur = () => {
     delete this._elFocusedButton
   }
 
