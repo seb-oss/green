@@ -145,7 +145,10 @@ export class GdsContextMenu extends withMarginProps(
     this.elIconSlot.then((el) => {
       if (
         !el.assignedNodes({ flatten: true }).some((node) => {
-          return node.tagName.toLowerCase().startsWith('gds-icon')
+          return (
+            node instanceof Element &&
+            node.tagName.toLowerCase().startsWith('gds-icon')
+          )
         })
       ) {
         const defaultIcon = document.createElement(
