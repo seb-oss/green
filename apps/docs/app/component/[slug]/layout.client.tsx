@@ -153,6 +153,7 @@ export function ComponentLayoutClient({
               padding="0"
               border-color="primary/0.4"
               variant="secondary"
+              color="primary"
               border-width="4xs"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}

@@ -4,7 +4,7 @@
   overflow-x: hidden;
   overflow-y: auto;
 
-  [data-animation='scroll'] {
+  /* [data-animation='scroll'] {
     animation-name: ROW_SCROLL, ROW_SCROLL;
     animation-fill-mode: both;
     animation-timing-function: ease-in-out;
@@ -13,7 +13,7 @@
     animation-range:
       entry 0% entry 40px,
       exit -40px exit 40px;
-  }
+  } */
 
   [data-backdrop] {
     backdrop-filter: blur(10px);
