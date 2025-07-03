@@ -1,0 +1,1 @@
+export { IconCodeBrackets } from '@sebgroup/green-core/react';
