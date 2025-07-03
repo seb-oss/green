@@ -1,0 +1,1 @@
+export { IconRunShortcut } from '@sebgroup/green-core/react';
