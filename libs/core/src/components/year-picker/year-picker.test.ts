@@ -205,17 +205,15 @@ describe('<gds-year-picker>', () => {
       await expect(el.value?.getFullYear()).to.equal(2020)
     })
 
-    /*
     it('should not select the focused date when pressing enter if it is disabled', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
-          min="2024-01-01"
-          max="2024-06-30"
+          .min=${new Date('2021-01-01')}
         ></gds-year-picker>`,
       )
       el.focus()
 
-      const focusedDate = new Date('2024-12-01')
+      const focusedDate = new Date('2020-01-01')
       el.focusedDate = focusedDate
 
       await aTimeout(0)
@@ -225,18 +223,16 @@ describe('<gds-year-picker>', () => {
       await expect(el.value).to.equal(undefined)
     })
 
-    it('should update the focused date when value is changed', async () => {
+    it('should update the focused year when value is changed', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker></gds-year-picker>`,
       )
 
-      el.value = new Date('2023-02-01')
+      el.value = new Date('2023-01-01')
       await el.updateComplete
 
-      await expect(onlyDate(el.focusedDate)).to.equal(
-        onlyDate(new Date('2023-02-01')),
-      )
-    })*/
+      await expect(el.focusedYear).to.equal(2023)
+    })
   })
 
   describe('API', () => {
