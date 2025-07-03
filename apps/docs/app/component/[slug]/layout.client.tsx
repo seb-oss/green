@@ -240,6 +240,7 @@ export function ComponentLayoutClient({
                     {component['anatomy-overview'] && (
                       <Core.GdsRichText>
                         <div
+                          className="text-pretty"
                           dangerouslySetInnerHTML={{
                             __html: component['anatomy-overview']
                               ? marked.parse(component['anatomy-overview'], {

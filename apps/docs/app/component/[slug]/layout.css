@@ -16,3 +16,7 @@
   background-size: 1em 1em;
   background-position: center;
 }
+
+.text-pretty {
+  text-wrap: pretty;
+}

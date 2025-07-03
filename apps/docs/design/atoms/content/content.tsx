@@ -153,6 +153,7 @@ export const RenderColumn = (
                   ? marked.parse(column.content, { async: false })
                   : '',
               }}
+              className="text-pretty"
             />
           </Core.GdsRichText>
         </Core.GdsFlex>

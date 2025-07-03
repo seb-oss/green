@@ -4,6 +4,8 @@
 import React from 'react'
 import { marked } from 'marked'
 
+import './render.css'
+
 import * as Core from '@sebgroup/green-core/react'
 import {
   ComponentColumn,
@@ -78,6 +80,9 @@ export function Render({
                           async: false,
                         })
                       : '',
+                  }}
+                  style={{
+                    textWrap: 'pretty',
                   }}
                 />
               </Core.GdsRichText>

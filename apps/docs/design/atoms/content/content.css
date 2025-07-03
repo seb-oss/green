@@ -12,3 +12,7 @@
     opacity: 0;
   }
 }
+
+.text-pretty {
+  text-wrap: pretty;
+}
