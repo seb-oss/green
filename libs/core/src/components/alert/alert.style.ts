@@ -9,16 +9,25 @@ export const alertStyles = css`
   }
 
   #alert-message {
-    --grid-areas: 'icon message close' 'icon action close';
+    --grid-areas: 'wrapper cta close';
+
+    &.timeout {
+      --grid-areas: 'wrapper cta close' 'progress-bar progress-bar progress-bar';
+    }
+
+    &.dismissible .icon,
+    &.dismissible .message {
+    }
+
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: 1fr auto auto;
     grid-template-areas: var(--grid-areas);
     min-width: fit-content;
     position: relative;
     transition:
       opacity 0.3s ease-out,
       transform 0.3s ease-out;
-    gap: var(--gds-sys-space-xs);
+    gap: 0;
   }
 
   /* Animation */
@@ -53,52 +62,71 @@ export const alertStyles = css`
     outline-offset: 2px;
   }
 
-  /* Layout elements */
-  .icon {
-    grid-area: icon;
+  .wrapper {
+    grid-area: wrapper;
+    display: flex;
+    gap: var(--gds-sys-space-xs);
+    margin-top: var(--gds-sys-space-xs);
+    .message {
+      max-width: 80ch;
+    }
   }
 
   .message {
-    grid-area: message;
-    font-size: var(--gds-font-size-base, 1rem);
+    font: var(--gds-sys-text-body-regular-m);
     display: flex;
     justify-content: flex-start;
     text-align: left;
-    margin: 0 0 0 var(--gds-sys-space-2xs);
+    margin-inline-end: auto;
   }
 
   .message-text {
     display: inline;
     white-space: normal;
-    line-height: var(--gds-sys-text-line-height-body-m);
-    font-size: var(--gds-sys-text-size-body-m);
+    padding-inline-end: var(--gds-sys-space-xs);
   }
 
-  /* Buttons */
-
-  [gds-element='gds-button'] {
-    grid-area: unset;
-    width: auto;
-    min-width: auto;
-    display: inline-flex;
+  .message-text ::slotted(strong) {
+    font-weight: var(--gds-sys-text-weight-book, 450);
   }
 
-  /* Timer bar */
-  .timer-bar {
-    position: absolute;
-    inset: auto 0 0;
+  .progress-container {
+    --_fill-color: var(--gds-sys-color-border-strong);
+    --_container-color: var(--gds-sys-color-l3-information-03);
+
+    &.notice {
+      --_fill-color: var(--gds-sys-color-content-notice-01);
+      --_container-color: var(--gds-sys-color-l3-notice-03);
+    }
+
+    &.warning {
+      --_fill-color: var(--gds-sys-color-content-warning-01);
+      --_container-color: var(--gds-sys-color-l3-warning-03);
+    }
+
+    &.positive {
+      --_fill-color: var(--gds-sys-color-content-positive-01);
+      --_container-color: var(--gds-sys-color-l3-positive-03);
+    }
+
+    &.negative {
+      --_fill-color: var(--gds-sys-color-content-negative-01);
+      --_container-color: var(--gds-sys-color-l3-negative-03);
+    }
+
+    grid-area: progress-bar;
+    margin-top: var(--gds-sys-space-xs);
+    inset: auto var(--gds-sys-space-m) var(--gds-sys-space-m);
     height: 0.25rem;
-    background: var(--gds-border-color, rgba(0, 0, 0, 0.1));
-    border-radius: 0 0 var(--gds-radius-md, 0.25rem)
-      var(--gds-radius-md, 0.25rem);
+    background: var(--_container-color);
+    border-radius: var(--gds-sys-radius-max);
     overflow: hidden;
   }
 
   .timer-progress {
     height: 100%;
     transition: width 0.1s linear;
-    background: var(--gds-accent, currentColor);
-    opacity: 0.6;
+    background: var(--_fill-color);
     will-change: width;
   }
 
@@ -108,43 +136,45 @@ export const alertStyles = css`
     }
   }
 
-  /* Responsive layouts */
-  /* Small: stacked */
   @container (max-width: 600px) {
     #alert-message {
-      grid-template-areas: 'icon message close' 'cta cta cta';
-    }
+      --grid-areas: 'wrapper close' 'cta cta';
 
-    .action-button {
-      grid-area: cta;
-      margin-top: var(--gds-sys-space-xs);
+      &.timeout {
+        --grid-areas: 'wrapper close' 'progress-bar progress-bar';
+      }
+
+      .action {
+        grid-area: cta;
+        margin-top: var(--gds-sys-space-xs);
+      }
     }
   }
 
   /* Medium: inline */
   @container (min-width: 601px) and (max-width: 1024px) {
     #alert-message {
-      grid-template-areas: 'icon message cta close';
-    }
-    .message {
-      gap: 0.5rem;
+      grid-template-areas: 'wrapper cta close';
+
+      .close {
+        margin-left: var(--gds-sys-space-xs);
+      }
     }
   }
 
   /* Large: centered */
   @container (min-width: 1025px) {
     #alert-message {
-      grid-template-columns: auto 1fr auto auto;
-      grid-template-areas: 'icon message cta close';
-    }
+      grid-template-columns: 1fr auto auto;
+      grid-template-areas: 'wrapper cta close';
 
-    .message {
-      justify-content: center;
-    }
+      .close {
+        margin-left: var(--gds-sys-space-xs);
+      }
 
-    .close-btn {
-      grid-area: close;
-      justify-self: end;
+      .icon {
+        margin-inline-start: auto;
+      }
     }
   }
 
