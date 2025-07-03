@@ -127,6 +127,26 @@ describe('<gds-year-picker>', () => {
       await expect(el.value?.getFullYear()).to.equal(2035)
     })
 
+    it('should select total cells more when pressing Page Upn', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          .min=${new Date('1900-01-01')}
+          .max=${new Date('2100-01-01')}
+          focusedDate="2025-01-01"
+        ></gds-year-picker>`,
+      )
+      const totalCells = el.columns * el.rows
+      el.focus()
+
+      await aTimeout(0)
+      await sendKeys({ press: 'PageUp' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.value?.getFullYear()).to.equal(2025 - totalCells)
+    })
+
     it('should select total cells more when pressing Page Down', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
@@ -144,26 +164,7 @@ describe('<gds-year-picker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      await expect(el.value?.getFullYear()).to.equal(2015 + totalCells)
-    })
-
-    it('should select the focused date when pressing enter', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
-          .min=${new Date('2015-01-01')}
-          .max=${new Date('2035-01-01')}
-        ></gds-year-picker>`,
-      )
-      el.focus()
-
-      const focusedDate = new Date('2020-01-01')
-      el.focusedDate = focusedDate
-
-      await aTimeout(0)
-      await sendKeys({ press: 'Enter' })
-      await aTimeout(0)
-
-      await expect(el.value?.getFullYear()).to.equal(2020)
+      await expect(el.value?.getFullYear()).to.equal(2025 + totalCells)
     })
 
     it('should select the focused date when pressing enter', async () => {
