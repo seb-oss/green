@@ -60,7 +60,7 @@ const CollapsibleSection = ({
          * Make it solid when active for the active page
          *
          * */}
-        {icon && <Icon name={icon} slot="lead" />}
+        {icon && <Icon name={icon} slot="lead" solid={isActive || isOpen} />}
         <span data-fade>{title}</span>
       </Link>
       <Core.GdsButton
@@ -281,20 +281,6 @@ export default function Sidebar() {
       >
         {isOpen ? renderExpandedNav : renderCollapsedNav}
       </Core.GdsFlex>
-
-      {/* <Core.GdsFlex
-        key={isOpen ? 'settings-open' : 'settings-closed'}
-        margin="auto 0 0 0"
-        background="transparent"
-        flex-direction="column"
-        data-backdrop
-        width="100%"
-        justify-content={isOpen ? 'flex-start' : 'flex-start'}
-        align-items="flex-start"
-      >
-        <Core.IconBrandSeb color="primary" size="m" />
-      </Core.GdsFlex> */}
-      {/* {!isOpen } */}
 
       <Core.GdsFlex
         key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
