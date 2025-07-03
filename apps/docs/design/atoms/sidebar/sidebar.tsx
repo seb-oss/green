@@ -241,7 +241,13 @@ export default function Sidebar() {
           flex="1"
           width="100%"
         >
-          {link.icon && <Icon name={link.icon} slot="lead" />}
+          {link.icon && (
+            <Icon
+              name={link.icon}
+              slot="lead"
+              solid={pathName === href ? true : false}
+            />
+          )}
           <span data-fade>{link.title}</span>
         </Link>
       )
