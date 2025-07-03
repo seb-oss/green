@@ -23,7 +23,7 @@
     border: none;
     cursor: pointer;
     block-size: var(--_block-size);
-    background-color: var(--gds-sys-color-l3-brand-01);
+    background-color: var(--gds-sys-color-l3-01);
     color: var(--gds-sys-color-content-03);
     border-radius: var(--gds-sys-space-max);
     font-family: inherit;
@@ -53,7 +53,7 @@
       &:hover {
         background-color: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-brand-01),
+          var(--gds-sys-color-l3-01),
           var(--gds-sys-color-state-dark-hover)
         );
       }
@@ -158,6 +158,82 @@
 }
 
 @layer variants {
+  .brand {
+    background-color: var(--gds-sys-color-l3-brand-01);
+
+    &:focus {
+      outline-color: var(--gds-sys-color-content-brand-01);
+
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-l3-brand-01),
+          var(--gds-sys-color-state-dark-hover)
+        );
+      }
+    }
+
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-brand-01),
+        var(--gds-sys-color-state-dark-pressed)
+      );
+    }
+
+    &.secondary {
+      background-color: var(--gds-sys-color-l3-02);
+      color: var(--gds-sys-color-content-01);
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-sys-color-l3-02),
+            var(--gds-sys-color-state-light-hover)
+          );
+        }
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-l3-02),
+          var(--gds-sys-color-state-light-pressed)
+        );
+      }
+    }
+
+    &.tertiary {
+      background-color: transparent;
+      color: var(--gds-sys-color-content-01);
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-sys-color-state-light-hover)
+          );
+        }
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-sys-color-state-light-pressed)
+        );
+      }
+    }
+  }
+
   .positive {
     background-color: var(--gds-sys-color-l3-positive-01);
 
@@ -304,6 +380,156 @@
           in srgb,
           transparent,
           var(--gds-sys-color-state-negative-pressed)
+        );
+      }
+    }
+  }
+
+  .notice {
+    background-color: var(--gds-sys-color-l3-notice-01);
+
+    &:focus {
+      outline-color: var(--gds-sys-color-content-notice-01);
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-l3-notice-01),
+          var(--gds-sys-color-state-dark-hover)
+        );
+      }
+    }
+
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-notice-01),
+        var(--gds-sys-color-state-dark-pressed)
+      );
+    }
+
+    &.secondary {
+      background-color: var(--gds-sys-color-l3-notice-02);
+      color: var(--gds-sys-color-content-notice-01);
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-sys-color-l3-notice-02),
+            var(--gds-sys-color-state-notice-hover)
+          );
+        }
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-l3-notice-02),
+          var(--gds-sys-color-state-notice-pressed)
+        );
+      }
+    }
+
+    &.tertiary {
+      background-color: transparent;
+      color: var(--gds-sys-color-content-notice-01);
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-sys-color-state-notice-hover)
+          );
+        }
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-sys-color-state-notice-pressed)
+        );
+      }
+    }
+  }
+
+  .warning {
+    background-color: var(--gds-sys-color-l3-warning-01);
+
+    &:focus {
+      outline-color: var(--gds-sys-color-content-warning-01);
+      &:not(:focus-visible) {
+        outline-color: transparent;
+      }
+    }
+
+    @media (pointer: fine) {
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-l3-warning-01),
+          var(--gds-sys-color-state-dark-hover)
+        );
+      }
+    }
+
+    &:active {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-warning-01),
+        var(--gds-sys-color-state-dark-pressed)
+      );
+    }
+
+    &.secondary {
+      background-color: var(--gds-sys-color-l3-warning-02);
+      color: var(--gds-sys-color-content-warning-01);
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-sys-color-l3-warning-02),
+            var(--gds-sys-color-state-warning-hover)
+          );
+        }
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-l3-warning-02),
+          var(--gds-sys-color-state-warning-pressed)
+        );
+      }
+    }
+
+    &.tertiary {
+      background-color: transparent;
+      color: var(--gds-sys-color-content-warning-01);
+
+      @media (pointer: fine) {
+        &:hover {
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-sys-color-state-warning-hover)
+          );
+        }
+      }
+
+      &:active {
+        background-color: color-mix(
+          in srgb,
+          transparent,
+          var(--gds-sys-color-state-warning-pressed)
         );
       }
     }
