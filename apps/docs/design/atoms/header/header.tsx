@@ -11,8 +11,6 @@ import { _ } from '../../../hooks'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { Link } from '../link/link'
 
-import './header.css'
-
 export default function Header() {
   const { actions } = useSettingsContext()
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)

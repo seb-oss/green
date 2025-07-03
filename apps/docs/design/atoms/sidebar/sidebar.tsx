@@ -55,11 +55,6 @@ const CollapsibleSection = ({
         data-animation="scroll"
         flex="1"
       >
-        {/**
-         * TODO:
-         * Make it solid when active for the active page
-         *
-         * */}
         {icon && <Icon name={icon} slot="lead" solid={isActive || isOpen} />}
         <span data-fade>{title}</span>
       </Link>
@@ -126,7 +121,6 @@ export default function Sidebar() {
     }))
   }
 
-  // Separate rendering for collapsed state
   const renderCollapsedNav = useMemo(() => {
     if (!isLoaded) return null
 
@@ -265,7 +259,6 @@ export default function Sidebar() {
       justify-content="flex-start"
       align-items={isOpen ? 'flex-start' : 'center'}
       gap="xl"
-      // gap="4xl"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
       padding={isOpen ? 'xl xs l s' : 'xl xs l m'}
       min-width={isOpen ? '260px' : '80px'}
@@ -300,7 +293,6 @@ export default function Sidebar() {
         >
           {isOpen ? (
             <>
-              {/* <Icon name="IconCrossSmall" slot="lead" /> */}
               <Icon name="IconMenuSidebar" slot="lead" solid />
               Close menu
             </>
@@ -309,17 +301,6 @@ export default function Sidebar() {
           )}
         </Link>
       </Core.GdsFlex>
-
-      {false && (
-        <Core.GdsFlex
-          justify-content="flex-start"
-          width="100%"
-          margin="auto 0 2xl 0"
-          padding="l 0 0 xl"
-        >
-          <Core.IconBrandSeb color="primary" size="m" />
-        </Core.GdsFlex>
-      )}
     </Core.GdsCard>
   )
 }

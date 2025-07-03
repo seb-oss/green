@@ -1,6 +1,6 @@
 .sidebar {
   box-sizing: border-box;
-  height: calc(100vh - 90px);
+  height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
 
