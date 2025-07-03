@@ -68,7 +68,13 @@ class Button extends GdsFormControlElement<any> {
    * Defines which variant the button belongs to. Defaults to "neutral".
    */
   @property({ reflect: true })
-  variant: 'neutral' | 'positive' | 'negative' = 'neutral'
+  variant:
+    | 'brand'
+    | 'neutral'
+    | 'positive'
+    | 'negative'
+    | 'notice'
+    | 'warning' = 'neutral'
 
   /**
    * Sets the size of the button. Defaults to "small".
@@ -133,8 +139,11 @@ class Button extends GdsFormControlElement<any> {
       xs: this.size === 'xs',
       small: this.size === 'small',
       large: this.size === 'large',
+      brand: this.variant === 'brand',
       positive: this.variant === 'positive',
       negative: this.variant === 'negative',
+      notice: this.variant === 'notice',
+      warning: this.variant === 'warning',
       primary: this.rank === 'primary',
       secondary: this.rank === 'secondary',
       tertiary: this.rank === 'tertiary',
