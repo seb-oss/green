@@ -159,80 +159,33 @@ export const ChangeYear: Story = {
   `,
 }
 
-/*
-/ **
- * Example of mouse controls for selecting previous and next years.
- * /
-export const ChangeYear2: Story = {
+/**
+ * Example of a button that opens up the year-picker.
+ */
+export const PopoverChange: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div style="">
-      <gds-flex
-        justify-content="space-around"
-        align-items="center"
-        style="box-shadow: 0 var(--gds-sys-space-4xs) 0 0 var(--gds-sys-color-l2-border-primary);
-        padding-bottom: 0.25rem; margin: 0 1rem -0.5rem 1rem"
+    <gds-popover id="popchange">
+      <gds-button rank="secondary" slot="trigger">
+        <span id="selected-year2">Choose a year</span>
+        <gds-icon-calendar slot="trail"></gds-icon-calendar>
+      </gds-button>
+      <gds-year-picker
+        id="yearp2"
+        min="1950-01-01"
+        max="2100-01-01"
+        change-years-controls
       >
-        <gds-button id="prev" rank="tertiary" label="Previous years">
-          <gds-icon-chevron-left></gds-icon-chevron-left>
-        </gds-button>
-        <span id="range">Choose a year</span>
-        <gds-button id="next" rank="tertiary" label="Next years">
-          <gds-icon-chevron-right></gds-icon-chevron-right>
-        </gds-button>
-      </gds-flex>
-      <gds-year-picker id="yearp2" min="1950-01-01" max="2100-01-01">
       </gds-year-picker>
-    </div>
+    </gds-popover>
     <script>
-      var prev = document.getElementById('prev')
-      var next = document.getElementById('next')
       var yearp2 = document.getElementById('yearp2')
-      var totalCells = yearp2.columns * yearp2.rows
-
-      function onPrevClick() {
-        const minYear = yearp2.min.getFullYear()
-        const startYear = yearp2.getStartYear()
-        if (minYear < startYear) yearp2.focusedYear -= totalCells
-        updateRange()
+      function onYearChange2() {
+        document.getElementById('selected-year2').innerText =
+          yearp2.value.getFullYear()
+        document.getElementById('popchange').open = false
       }
-      function onNextClick() {
-        const maxYear = yearp2.max.getFullYear()
-        const startYear = yearp2.getStartYear()
-        if (maxYear > startYear + totalCells) yearp2.focusedYear += totalCells
-        updateRange()
-      }
-      function updateRange() {
-        const startYear = yearp2.getStartYear()
-        const endYear = startYear + totalCells - 1
-        document.getElementById('range').innerText = startYear + ' - ' + endYear
-      }
-      prev.addEventListener('click', onPrevClick)
-      next.addEventListener('click', onNextClick)
-      updateRange()
+      yearp2.addEventListener('change', onYearChange2)
     </script>
   `,
-}*/
-
-/*
-export const OutsideMinMax: Story = {
-  ...DefaultParams,
-  name: 'Outside the min max',
-  render: (args) => html`
-    <gds-month-picker
-      focusedYear="2024"
-      focusedDate="2024-12-01"
-      min="2024-01-01"
-      max="2024-06-01"
-    ></gds-month-picker>
-  `,
 }
-
-// export const Disabled: Story = {
-//   ...DefaultParams,
-//   render: (args) => html`
-//     <gds-month-picker minMonth="2" maxMonth="9"></gds-month-picker>
-//   `,
-// }
-
-*/
