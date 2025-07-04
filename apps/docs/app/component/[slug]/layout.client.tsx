@@ -275,6 +275,18 @@ export function ComponentLayoutClient({
               </Core.GdsFlex>
             )}
             {children}
+            {component.soon && (
+              <Core.GdsAlert variant="notice">
+                <Core.GdsFlex flex-direction="column" gap="0">
+                  <Core.GdsText font-weight="book">
+                    {component.title} documentation in progress
+                  </Core.GdsText>
+                  <Core.GdsText tag="small">
+                    This component's documentation is currently being updated.
+                  </Core.GdsText>
+                </Core.GdsFlex>
+              </Core.GdsAlert>
+            )}
 
             {isLayoutComponent && section === 'overview' && (
               <Core.GdsCard variant="secondary" border-color="primary">

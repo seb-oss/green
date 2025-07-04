@@ -92,6 +92,7 @@ export interface ComponentContent extends BaseContent {
   type: 'component'
   hero_snippet?: string
   beta?: boolean
+  soon?: boolean
   anatomy?: boolean
   'anatomy-overview'?: string
   'anatomy-details'?: string
