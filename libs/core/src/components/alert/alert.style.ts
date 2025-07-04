@@ -175,7 +175,15 @@ export const alertStyles = css`
   /* Large: centered */
   @container (min-width: 1025px) {
     #alert-message {
-      grid-template-columns: 1fr auto auto;
+      grid-template-columns: auto auto min-content;
+
+      &.dismissible:not(.has-action) {
+        grid-template-columns: 1fr auto;
+      }
+
+      &.dismissible:not(.has-action) .wrapper {
+        margin-inline-start: 0;
+      }
 
       .close {
         margin-left: var(--gds-sys-space-xs);
@@ -183,6 +191,14 @@ export const alertStyles = css`
 
       .icon {
         margin-inline-start: auto;
+      }
+
+      .wrapper {
+        margin-left: auto;
+      }
+
+      .action {
+        margin-right: auto;
       }
     }
   }
