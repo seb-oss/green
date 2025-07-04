@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.3
+
+### Patch Changes
+
+- bad7bf3: Fix: showing validation message when passing message slot
+- Updated dependencies [27fe9cf]
+  - @sebgroup/green-core@1.88.0
+
 ## 6.0.2
 
 ### Patch Changes
