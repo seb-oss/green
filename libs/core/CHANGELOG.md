@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.87.0
+
+### Minor Changes
+
+- f3b8f76: **Icon:** add new code icons
+
+### Patch Changes
+
+- 577fc63: Fix, calculating extended supporting text height on resize
+- eca17f0: **Breadcrumbs:** Fix custom html scoping
+
 ## 1.86.0
 
 ### Minor Changes
