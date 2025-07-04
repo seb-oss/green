@@ -208,7 +208,7 @@ describe('<gds-year-picker>', () => {
     it('should not select the focused date when pressing enter if it is disabled', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
-          .min=${new Date('2021-01-01')}
+          .min=${new Date('2022-01-01')}
         ></gds-year-picker>`,
       )
       el.focus()
@@ -221,6 +221,7 @@ describe('<gds-year-picker>', () => {
       await aTimeout(0)
 
       await expect(el.value).to.equal(undefined)
+      //await expect(el.value?.getFullYear()).to.equal(2022)
     })
 
     it('should update the focused year when value is changed', async () => {
