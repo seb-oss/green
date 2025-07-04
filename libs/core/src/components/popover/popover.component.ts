@@ -411,10 +411,6 @@ export class GdsPopover extends GdsElement {
 
   @watchMediaQuery('(max-width: 576px)')
   private _handleMobileLayout(matches: boolean) {
-    console.log('_handleMobileLayout: ', true)
-    console.log('disableMobileStyles: ', this.disableMobileStyles)
-    console.log(this._elDialog?.style)
-
     this.#isMobileViewport = matches
     if (matches && !this.disableMobileStyles) {
       this.#autoPositionCleanupFn?.()
