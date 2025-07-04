@@ -61,7 +61,7 @@ export const alertStyles = css`
   .wrapper {
     grid-area: wrapper;
     display: flex;
-    gap: var(--gds-sys-space-xs);
+    gap: var(--gds-sys-space-s);
 
     .message {
       max-width: 80ch;
