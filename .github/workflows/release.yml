@@ -135,6 +135,7 @@ jobs:
     env:
       CI_COMMIT_MESSAGE: Continuous Integration Deployment ${{ github.sha }}
     needs: release
+    if: ${{ needs.release.outputs.tokensshoulddeploy == 'true' }}
     steps:
       - name: Get token
         id: app-token
