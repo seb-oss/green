@@ -7,4 +7,6 @@ export const isServer =
 /**
  * Simple UA check to determine if the platform is iOS
  */
-export const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+export const isIOS = /iPad|iPhone|iPod/.test(
+  isServer ? '' : navigator.userAgent,
+)
