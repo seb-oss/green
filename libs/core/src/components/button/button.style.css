@@ -236,6 +236,7 @@
 
   .positive {
     background-color: var(--gds-sys-color-l3-positive-01);
+    color: var(--gds-sys-color-content-inversed);
 
     &:focus {
       outline-color: var(--gds-sys-color-content-positive-01);
@@ -312,6 +313,7 @@
 
   .negative {
     background-color: var(--gds-sys-color-l3-negative-01);
+    color: var(--gds-sys-color-content-inversed);
 
     &:focus {
       outline-color: var(--gds-sys-color-content-negative-01);
@@ -387,6 +389,7 @@
 
   .notice {
     background-color: var(--gds-sys-color-l3-notice-01);
+    color: var(--gds-sys-color-content-inversed);
 
     &:focus {
       outline-color: var(--gds-sys-color-content-notice-01);
@@ -462,6 +465,7 @@
 
   .warning {
     background-color: var(--gds-sys-color-l3-warning-01);
+    color: var(--gds-sys-color-content-03);
 
     &:focus {
       outline-color: var(--gds-sys-color-content-warning-01);
