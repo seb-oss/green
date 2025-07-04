@@ -90,6 +90,14 @@ export function ComponentLayoutClient({
     ? `${actions.getComponent(component.compare.toLowerCase())?.title} vs. ${component.title}`
     : undefined
 
+  const hasOverviewContent = Boolean(
+    component.preamble ||
+      component.anatomy ||
+      component.overview?.length ||
+      component['anatomy-overview'] ||
+      component.compare,
+  )
+
   return (
     <Core.GdsFlex
       flex-direction="column"
@@ -291,7 +299,7 @@ export function ComponentLayoutClient({
             <Similar tag={firstTag} currentSlug={component.slug} />
           </Core.GdsFlex>
         </Core.GdsFlex>
-        {!isLayoutComponent && (
+        {hasOverviewContent && (
           <Core.GdsFlex
             flex-direction="column"
             justify-content="flex-start"
