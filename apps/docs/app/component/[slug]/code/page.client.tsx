@@ -8,5 +8,9 @@ interface CodeClientProps {
 }
 
 export function CodeClient({ slug }: CodeClientProps) {
-  return <ContentSection slug={slug} contentKey="ux-text" />
+  return (
+    <div id="component-code">
+      <ContentSection slug={slug} contentKey="ux-text" />
+    </div>
+  )
 }

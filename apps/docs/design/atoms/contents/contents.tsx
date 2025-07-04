@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { ID } from '../../../hooks'
+import { getContentSections, ID } from '../../../hooks'
 import { ComponentContent } from '../../../settings/content/types'
 
 import './contents.css'
@@ -43,6 +43,8 @@ export function TableOfContents({
   versus,
 }: TableOfContentsProps) {
   const [activeSection, setActiveSection] = useState<string>('component-top')
+  const sectionContent =
+    section === 'overview' ? component.overview : component[section]?.section
 
   const sections = useMemo(() => {
     const initialSections: Section[] = [
@@ -84,17 +86,15 @@ export function TableOfContents({
       accessibility: Array.isArray(component['accessibility'])
         ? component['accessibility']
         : component['accessibility']?.section || [],
-      code: [], // Add empty array for code section as it doesn't have subsections
+      code: [],
     }[section]
 
-    const contentSections: ContentSection[] = sectionContent
-      .filter(
-        (section) => section.title && (!section.tag || section.tag === 'H2'),
-      )
-      .map((section, index) => ({
-        id: ID(section.title, index),
-        title: section.title || '',
-      }))
+    const contentSections = getContentSections(sectionContent).map(
+      (section, index) => ({
+        id: ID(section.title, index), // No more type error
+        title: section.title,
+      }),
+    )
 
     return [...initialSections, ...contentSections]
   }, [component, section, versus])
@@ -104,7 +104,7 @@ export function TableOfContents({
     let newActiveSection = 'component-top'
 
     for (const section of [...sections].reverse()) {
-      const elementId = section.scrollTo || section.id
+      const elementId = section.id
       const element = document.getElementById(elementId)
 
       if (element) {

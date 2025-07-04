@@ -8,5 +8,9 @@ interface UXTextClientProps {
 }
 
 export function UXTextClient({ slug }: UXTextClientProps) {
-  return <ContentSection slug={slug} contentKey="ux-text" />
+  return (
+    <div id="component-ux-text">
+      <ContentSection slug={slug} contentKey="ux-text" />
+    </div>
+  )
 }

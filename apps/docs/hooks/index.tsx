@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import { ComponentSection } from '../settings/content/types'
 
 // Class names
 export const _ = (...classes: (string | boolean | undefined)[]) =>
@@ -42,4 +43,15 @@ export const ID = (title: string, index: number) => {
     .replace(/\s+/g, '-') // Replace spaces with hyphens
     .replace(/-+/g, '-') // Replace multiple hyphens with single
     .replace(/^-|-$/g, '')}-${index}` // Remove leading/trailing hyphens
+}
+
+export const getContentSections = (
+  content: ComponentSection[] | null | undefined,
+) => {
+  return (
+    content?.filter(
+      (section): section is ComponentSection & { title: string } =>
+        Boolean(section.title) && (!section.tag || section.tag === 'H2'),
+    ) || []
+  )
 }

@@ -7,7 +7,7 @@ import { marked } from 'marked'
 import './render.css'
 
 import * as Core from '@sebgroup/green-core/react'
-import { ID } from '../../../hooks'
+import { getContentSections, ID } from '../../../hooks'
 import {
   ComponentColumn,
   ComponentSection,
@@ -58,10 +58,10 @@ export function Render({
   isAccessibility = false,
 }: ContentRendererProps) {
   if (!content || !Array.isArray(content)) return null
-
+  const sections = getContentSections(content)
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" width="100%">
-      {content.map((section: ComponentSection, index: number) => (
+      {sections.map((section: ComponentSection, index: number) => (
         <Core.GdsFlex key={index} flex-direction="column" gap="l">
           <Core.GdsFlex flex-direction="column" gap="s">
             {section.title && (

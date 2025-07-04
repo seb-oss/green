@@ -8,5 +8,9 @@ interface AccessibilityClientProps {
 }
 
 export function AccessibilityClient({ slug }: AccessibilityClientProps) {
-  return <ContentSection slug={slug} contentKey="accessibility" />
+  return (
+    <div id="component-accessibility">
+      <ContentSection slug={slug} contentKey="accessibility" />
+    </div>
+  )
 }
