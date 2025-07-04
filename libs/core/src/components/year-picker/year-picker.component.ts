@@ -123,7 +123,7 @@ export class GdsYearPicker extends GdsElement {
     return this.focusedDate.getFullYear()
   }
   set focusedYear(year: number) {
-    this.focusedDate = new Date(year, 1, 1, 12)
+    this.focusedDate = new Date(year, 0, 1, 12)
   }
 
   /**
@@ -294,6 +294,9 @@ export class GdsYearPicker extends GdsElement {
   }
 
   #setSelectedYear(year: number) {
+    if (year < this.min.getFullYear() || year > this.max.getFullYear()) {
+      return
+    }
     this.value = new Date(year, 1, 1, 12)
     this.dispatchEvent(
       new CustomEvent('change', {
