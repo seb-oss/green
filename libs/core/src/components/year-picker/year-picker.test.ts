@@ -258,8 +258,8 @@ describe('<gds-year-picker>', () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
           .min=${new Date('1900-01-01')}
-          change-years-controls
           focusedDate="2025-01-01"
+          change-years-controls
         ></gds-year-picker>`,
       )
       const totalCells = el.columns * el.rows
@@ -267,6 +267,7 @@ describe('<gds-year-picker>', () => {
       await aTimeout(0)
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
+      await el.updateComplete
 
       await expect(el.focusedYear).to.equal(2025 - totalCells)
     })
@@ -336,6 +337,14 @@ describe('<gds-year-picker>', () => {
       const first = el.getStartYear()
       const cell = el.getYearCell(el.focusedYear - first)
       expect(cell).to.not.have.class('today')
+    })
+
+    it('should have less cells if comumns and rows are fewer', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker columns="4" rows="3"></gds-year-picker>`,
+      )
+      const totalCells = el.columns * el.rows
+      expect(totalCells).to.equal(12)
     })
   })
 
