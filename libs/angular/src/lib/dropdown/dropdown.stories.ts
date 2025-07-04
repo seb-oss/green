@@ -321,18 +321,16 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
     component: NggDropdownComponent,
     template: `
       <form [formGroup]="validationForm" #ngForm="ngForm" (submit)="save(validationForm.value)">
-  <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
+    <div class="form-group" *ngIf="validationForm.get('country') as dropdown">
     <ngg-dropdown
       label="Country"
       [options]="options$ | async"
       formControlName="country"
       [valid]="dropdown.valid && ngForm.submitted"
       [invalid]="dropdown.invalid && ngForm.submitted"
+
     >
-      <!-- Hint text when not submitted -->
-      <ng-container data-form-info *ngIf="!ngForm['submitted']"
-        >Select country</ng-container
-      >
+
       <ng-container data-form-info *ngIf="ngForm['submitted']">
         <!-- Text when form control contains one or more errors -->
         <ng-container *ngIf="dropdown.errors as errors">
@@ -345,6 +343,7 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
   <button type="submit" [disabled]="ngForm?.submitted && validationForm.invalid">
     Save
   </button>
+  </form>
     `,
     props: {
       ...args,
@@ -355,8 +354,8 @@ const FormControlTemplate: StoryFn<NggDropdownComponent> = (args) => {
   }
 }
 
-export const Form = FormControlTemplate.bind({})
-Form.args = {}
+export const FormWithValidation = FormControlTemplate.bind({})
+FormWithValidation.args = {}
 
 const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
   const validationFormAdvance = new FormGroup({
@@ -389,10 +388,7 @@ const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
         formControlName="country"
         [invalid]="validationFormAdvance.get('country').invalid && validationFormAdvance.get('country').touched"
       >
-        <!-- Hint text when not submitted -->
-        <ng-container data-form-info *ngIf="!ngForm['submitted']"
-          >Select country</ng-container
-        >
+
         <ng-container data-form-info *ngIf="ngForm['submitted']">
           <!-- Text when form control contains one or more errors -->
           <ng-container *ngIf="dropdown.errors as errors">
@@ -408,6 +404,7 @@ const FormControlWithResetTemplate: StoryFn<NggDropdownComponent> = (args) => {
     <button (click)="validationFormAdvance.reset()">
       Reset
     </button>
+    </form>
     `,
     props: {
       ...args,
