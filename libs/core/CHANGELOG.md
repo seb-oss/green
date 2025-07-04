@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.88.0
+
+### Minor Changes
+
+- 27fe9cf: **Core**: Spinner component label position prop
+
 ## 1.87.0
 
 ### Minor Changes
