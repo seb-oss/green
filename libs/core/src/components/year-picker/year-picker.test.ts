@@ -234,6 +234,42 @@ describe('<gds-year-picker>', () => {
 
       await expect(el.focusedYear).to.equal(2023)
     })
+
+    it('should focus step over change year controls', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          change-years-controls
+          focusedDate="2025-01-01"
+        ></gds-year-picker>`,
+      )
+      await sendKeys({ press: 'Tab' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Tab' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Tab' })
+      await aTimeout(0)
+      await sendKeys({ press: 'ArrowDown' })
+      await aTimeout(0)
+
+      await expect(el.focusedYear).to.equal(2030)
+    })
+
+    it('should have correct focused year when pressing the previous years button', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          .min=${new Date('1900-01-01')}
+          change-years-controls
+          focusedDate="2025-01-01"
+        ></gds-year-picker>`,
+      )
+      const totalCells = el.columns * el.rows
+      await sendKeys({ press: 'Tab' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
+
+      await expect(el.focusedYear).to.equal(2025 - totalCells)
+    })
   })
 
   describe('API', () => {
