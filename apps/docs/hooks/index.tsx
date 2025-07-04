@@ -33,3 +33,13 @@ export const Icon = ({
   }
   return <IconComponent slot={slot} size={size} solid={solid} />
 }
+
+export const ID = (title: string, index: number) => {
+  return `section-${title
+    .toLowerCase()
+    .replace(/[']/g, '') // Remove apostrophes
+    .replace(/[^a-z0-9-\s]/g, '') // Remove special characters except hyphens
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single
+    .replace(/^-|-$/g, '')}-${index}` // Remove leading/trailing hyphens
+}

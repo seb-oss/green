@@ -7,6 +7,7 @@ import { marked } from 'marked'
 import './render.css'
 
 import * as Core from '@sebgroup/green-core/react'
+import { ID } from '../../../hooks'
 import {
   ComponentColumn,
   ComponentSection,
@@ -66,7 +67,7 @@ export function Render({
             {section.title && (
               <Core.GdsText
                 tag={section.tag || 'h2'}
-                id={`section-${section.title.toLowerCase().replace(/\s+/g, '-')}-${index}`}
+                id={ID(section.title, index)}
               >
                 {section.title}
               </Core.GdsText>

@@ -4,6 +4,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import { ID } from '../../../hooks'
 import { ComponentContent } from '../../../settings/content/types'
 
 import './contents.css'
@@ -91,7 +92,7 @@ export function TableOfContents({
         (section) => section.title && (!section.tag || section.tag === 'H2'),
       )
       .map((section, index) => ({
-        id: `section-${section.title?.toLowerCase().replace(/\s+/g, '-')}-${index}`,
+        id: ID(section.title, index),
         title: section.title || '',
       }))
 
