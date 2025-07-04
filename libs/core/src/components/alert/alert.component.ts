@@ -236,7 +236,6 @@ export class GdsAlert extends GdsElement {
             size="small"
             aria-label=${msg('Dismiss alert')}
             @click=${() => this.#dismiss('close')}
-            margin="2xs 0 0 0"
           >
             <gds-icon-cross-small size="20px"></gds-icon-cross-small>
           </gds-button>
@@ -270,6 +269,7 @@ export class GdsAlert extends GdsElement {
     const classes = {
       dismissing: this._isClosing,
       dismissible: this.dismissible,
+      'has-action': this.buttonLabel,
       timeout: this.timeout > 0,
     }
 

@@ -15,10 +15,6 @@ export const alertStyles = css`
       --grid-areas: 'wrapper cta close' 'progress-bar progress-bar progress-bar';
     }
 
-    &.dismissible .icon,
-    &.dismissible .message {
-    }
-
     display: grid;
     grid-template-columns: 1fr auto auto;
     grid-template-areas: var(--grid-areas);
@@ -66,10 +62,26 @@ export const alertStyles = css`
     grid-area: wrapper;
     display: flex;
     gap: var(--gds-sys-space-xs);
-    margin-top: var(--gds-sys-space-xs);
+
     .message {
       max-width: 80ch;
     }
+  }
+
+  .dismissible .wrapper {
+    margin-top: var(--gds-sys-space-2xs);
+  }
+
+  .has-action {
+    padding: var(--gds-sys-space-s) var(--gds-sys-space-m);
+  }
+
+  .has-action .wrapper {
+    margin-top: var(--gds-sys-space-xs);
+  }
+
+  .has-action.dismissible .close {
+    margin-top: var(--gds-sys-space-2xs);
   }
 
   .message {
@@ -115,7 +127,7 @@ export const alertStyles = css`
     }
 
     grid-area: progress-bar;
-    margin-top: var(--gds-sys-space-xs);
+    margin-top: var(--gds-sys-space-m);
     inset: auto var(--gds-sys-space-m) var(--gds-sys-space-m);
     height: 0.25rem;
     background: var(--_container-color);
@@ -154,8 +166,6 @@ export const alertStyles = css`
   /* Medium: inline */
   @container (min-width: 601px) and (max-width: 1024px) {
     #alert-message {
-      grid-template-areas: 'wrapper cta close';
-
       .close {
         margin-left: var(--gds-sys-space-xs);
       }
@@ -166,7 +176,6 @@ export const alertStyles = css`
   @container (min-width: 1025px) {
     #alert-message {
       grid-template-columns: 1fr auto auto;
-      grid-template-areas: 'wrapper cta close';
 
       .close {
         margin-left: var(--gds-sys-space-xs);
