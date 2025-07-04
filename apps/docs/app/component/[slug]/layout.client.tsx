@@ -282,7 +282,7 @@ export function ComponentLayoutClient({
                     {component.title} documentation in progress
                   </Core.GdsText>
                   <Core.GdsText tag="small">
-                    This component's documentation will be updated soon.
+                    {`This component's documentation will be updated soon.`}
                   </Core.GdsText>
                 </Core.GdsFlex>
               </Core.GdsAlert>
