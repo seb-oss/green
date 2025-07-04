@@ -73,7 +73,8 @@ export const Small: Story = {
 
 /**
  * Use `min` and `max` attributes to limit the months you can choose from.
- * The rest is greyed out. Remember that by default it uses the current year.
+ * The rest is greyed out. Note that by default it uses from the current year -10
+ * to current year +10 years.
  */
 export const MinAndMax: Story = {
   ...DefaultParams,
