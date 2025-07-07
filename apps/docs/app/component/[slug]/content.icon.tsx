@@ -257,7 +257,7 @@ export function IconContent({ component }: IconContentProps) {
           </Core.GdsCard>
         )}
 
-        <Core.GdsGrid columns={view === 'grid' ? '4' : '3'} gap="l">
+        <Core.GdsGrid columns={view === 'grid' ? '2; s{4}' : '1; s{3}'} gap="l">
           {iconList.map(([name, icon]: [string, IconData]) => (
             <Core.GdsCard
               key={icon.id}

@@ -5,7 +5,6 @@ import { unstable_ViewTransition as ViewTransition } from 'react'
 import { GdsFlex } from '@sebgroup/green-core/react'
 import Command from '../../atoms/command/command'
 import Footer from '../../atoms/footer/footer'
-import Header from '../../atoms/header/header'
 import Sidebar from '../../atoms/sidebar/sidebar'
 import { LAYOUT_UTILS } from '../config'
 
@@ -22,7 +21,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
     <main className={classes} {...rest}>
       <GdsFlex
         min-height="100vh"
-        flex-direction="row"
+        flex-direction="column; s{row}"
         color="primary"
         width="100%"
         background="secondary"
@@ -33,12 +32,11 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
           flex-direction="column"
           width="100%"
           max-width="1200px"
-          padding="4xl xl m 0"
+          padding="xl; s{4xl}"
           min-height="100%"
           margin="0 auto"
           data-content
         >
-          {/* <Header /> */}
           <ViewTransition>{children}</ViewTransition>
           <Footer />
         </GdsFlex>

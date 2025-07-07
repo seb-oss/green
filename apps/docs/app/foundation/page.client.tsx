@@ -72,7 +72,7 @@ export function FoundationClient() {
           </GdsText>
         </GdsFlex>
 
-        <GdsGrid columns="3" gap="l">
+        <GdsGrid columns="1; s{3}" gap="l">
           <GdsCard
             gap="m"
             height="240px"

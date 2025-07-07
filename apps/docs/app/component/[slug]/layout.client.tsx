@@ -144,7 +144,11 @@ export function ComponentLayoutClient({
         </Core.GdsFlex>
       </Core.GdsFlex>
       <Core.GdsGrid columns="12" gap="l" width="100%">
-        <Core.GdsFlex flex-direction="column" gap="xl" grid-column="1/10">
+        <Core.GdsFlex
+          flex-direction="column"
+          gap="xl"
+          grid-column="1/13; s{1/10}"
+        >
           <Core.GdsTheme color-scheme={currentTheme}>
             <Core.GdsCard
               height="280px"
@@ -302,6 +306,7 @@ export function ComponentLayoutClient({
         </Core.GdsFlex>
         {hasOverviewContent && (
           <Core.GdsFlex
+            display="none; s{flex}"
             flex-direction="column"
             justify-content="flex-start"
             position="sticky"

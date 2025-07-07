@@ -75,6 +75,7 @@ const CollapsibleSection = ({
 )
 
 export default function Sidebar() {
+  const [menuOpen, setMenuOpen] = useState(false)
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Sidebar)
   const pathName = usePathname()
   const { isLoaded, actions } = useContentContext()
@@ -254,8 +255,38 @@ export default function Sidebar() {
     })
   }, [isLoaded, actions, pathName, openSections])
 
+  const GDS = () => {
+    return (
+      <Core.GdsFlex
+        display="none; s{flex}"
+        padding="l"
+        align-items="center"
+        justify-content="space-between"
+        height="68px"
+        width="100%"
+        gap="s"
+      >
+        {isOpen && (
+          <Link href="/">
+            <Core.GdsText
+              font-weight="book"
+              font-size="detail-m"
+              color="brand-01"
+            >
+              Green Design System
+            </Core.GdsText>
+          </Link>
+        )}
+      </Core.GdsFlex>
+    )
+  }
+
   const handleToggleSidebar = () => {
     SettingsActions.toggle('UI.Panel.Sidebar')
+  }
+
+  const handleMenuToggle = () => {
+    setMenuOpen((prev) => !prev)
   }
 
   return (
@@ -269,10 +300,21 @@ export default function Sidebar() {
       padding={isOpen ? 'xl xs l s' : 'xl xs l m'}
       min-width={isOpen ? '260px' : '80px'}
       width={isOpen ? '100%; s{240px}' : 'max-content'}
+      height="max-content; s{100vh}"
       position="relative; s{sticky}"
       inset="0; s{0px auto auto auto}"
+      border-width={menuOpen ? '0 0 4xs 0' : '0'}
+      border-color="primary"
     >
-      <Core.GdsFlex padding="l" align-items="center" height="68px" gap="s">
+      <Core.GdsFlex
+        display="none; s{flex}"
+        padding="l"
+        align-items="center"
+        justify-content="space-between"
+        height="68px"
+        width="100%"
+        gap="s"
+      >
         {isOpen && (
           <Link href="/">
             <Core.GdsText
@@ -287,12 +329,45 @@ export default function Sidebar() {
       </Core.GdsFlex>
 
       <Core.GdsFlex
+        display="flex; s{none}"
+        align-items="center"
+        justify-content="space-between"
+        width="100%"
+        padding="0 l"
+      >
+        <Link href="/">
+          <Core.GdsText
+            font-weight="book"
+            font-size="detail-m"
+            color="brand-01"
+          >
+            Green Design System
+          </Core.GdsText>
+        </Link>
+        <Link
+          component="button"
+          onClick={handleMenuToggle}
+          rank="tertiary"
+          width="max-content"
+          size="medium"
+        >
+          {menuOpen ? (
+            <Icon name="IconCrossLarge" />
+          ) : (
+            <Icon name="IconBarsThree" />
+          )}
+        </Link>
+      </Core.GdsFlex>
+
+      <Core.GdsFlex
         flex-direction="column"
         gap="xs"
         width="100%"
         align-items={isOpen ? 'flex-start' : 'center'}
+        display={menuOpen ? 'flex' : 'none; s{flex}'}
+        padding={menuOpen ? '0 l 0 0' : '0'}
       >
-        {isOpen ? renderExpandedNav : renderCollapsedNav}
+        {isOpen || menuOpen ? renderExpandedNav : renderCollapsedNav}
       </Core.GdsFlex>
 
       <Core.GdsFlex
@@ -303,6 +378,7 @@ export default function Sidebar() {
         gap="l"
         width="100%"
         margin="auto 0 0 0"
+        display={menuOpen ? 'none' : 'none; s{flex}'}
       >
         <Link
           component="button"

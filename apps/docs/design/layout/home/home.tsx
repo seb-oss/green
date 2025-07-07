@@ -147,7 +147,7 @@ export function Home({
             layouts.
           </GdsText>
         </GdsFlex>
-        <GdsGrid columns="3" gap="l">
+        <GdsGrid columns="1; s{3}" gap="l">
           <GdsCard
             gap="m"
             height="240px"
@@ -330,7 +330,7 @@ export function Home({
             Design and development resources to help you build with Green.
           </GdsText>
         </GdsFlex>
-        <GdsGrid columns="3" gap="l">
+        <GdsGrid columns="1; s{3}" gap="l">
           <GdsCard>
             <IconBrandFigma />
             <Link href="https://figma.com/" isExternal>

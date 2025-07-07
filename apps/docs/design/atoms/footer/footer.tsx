@@ -17,32 +17,44 @@ export default function Footer() {
       gap="2xl; s{5xl}"
       border-color="primary"
       border-width="4xs 0 0 0"
-      margin="4xl 0 0 0"
+      margin="0; s{4xl 0 0 0}"
     >
       <GdsFlex justify-content="space-between" align-items="center">
-        <GdsFlex align-items="center" gap="s">
+        <GdsFlex align-items="center" gap="s" flex="1">
           <Core.IconBrandSeb color="primary" size="m" />
           <Core.GdsText tag="small">{text}</Core.GdsText>
         </GdsFlex>
-        <GdsFlex align-items="center">
+        <GdsFlex align-items="center" justify-content="flex-end" flex="1">
           <Link
             component="button"
             href="/settings/consent"
             rank="tertiary"
             size="small"
           >
-            Cookie preferences
+            Cookie consent
           </Link>
 
-          <Link
-            component="button"
-            href="/settings"
-            rank="tertiary"
-            size="small"
-          >
-            <Icon name="IconSettingsGear" slot="lead" />
-            <span data-fade>Settings</span>
-          </Link>
+          <Core.GdsFlex display="flex; s{none}">
+            <Link
+              component="button"
+              href="/settings"
+              rank="tertiary"
+              size="small"
+            >
+              <Icon name="IconSettingsGear" />
+            </Link>
+          </Core.GdsFlex>
+          <Core.GdsFlex display="none; s{flex}">
+            <Link
+              component="button"
+              href="/settings"
+              rank="tertiary"
+              size="small"
+            >
+              <Icon name="IconSettingsGear" slot="lead" />
+              <span data-fade>Settings</span>
+            </Link>
+          </Core.GdsFlex>
         </GdsFlex>
       </GdsFlex>
     </GdsFlex>

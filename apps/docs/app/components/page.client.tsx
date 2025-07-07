@@ -103,7 +103,6 @@ export function ComponentsClient() {
             font-size="preamble-m"
             color="secondary"
             max-width="68ch"
-            text-align="center"
             text-wrap="pretty"
           >
             Interactive building blocks for creating user interfaces.
