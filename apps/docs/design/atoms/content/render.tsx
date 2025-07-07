@@ -57,15 +57,15 @@ export function Render({
   imageProvider,
   isAccessibility = false,
 }: ContentRendererProps) {
-  if (!content || !Array.isArray(content)) return null
-  const sections = getContentSections(content)
-
   const [hoveredSection, setHoveredSection] = useState<string | null>(null)
 
   const handleCopyLink = (sectionId: string) => {
     const url = `${window.location.origin}${window.location.pathname}#${sectionId}`
     navigator.clipboard.writeText(url)
   }
+
+  if (!content || !Array.isArray(content)) return null
+  const sections = getContentSections(content)
 
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" width="100%" data-section>
