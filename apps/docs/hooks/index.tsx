@@ -59,12 +59,7 @@ export const ID = (title: string, index: number) => {
 export const getContentSections = (
   content: ComponentSection[] | null | undefined,
 ) => {
-  return (
-    content?.filter(
-      (section): section is ComponentSection & { title: string } =>
-        Boolean(section.title), // Show all headers for content
-    ) || []
-  )
+  return content?.filter((section): section is ComponentSection => true) || []
 }
 
 export const getTableOfContentsSections = (

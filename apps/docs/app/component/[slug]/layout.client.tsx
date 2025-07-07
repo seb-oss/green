@@ -220,9 +220,7 @@ export function ComponentLayoutClient({
             </Core.GdsCard>
           </Core.GdsTheme>
 
-          {!isLayoutComponent && hasAdditionalContent && (
-            <Tabs slug={component.slug} />
-          )}
+          <Tabs slug={component.slug} />
 
           <Core.GdsFlex flex-direction="column" id="component-content" gap="xl">
             {section === 'overview' && (component.preamble || anatomyImage) && (
