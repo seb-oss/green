@@ -1,7 +1,7 @@
 // design/atoms/content/content-renderer.tsx
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { marked } from 'marked'
 
 import './render.css'
@@ -59,61 +59,103 @@ export function Render({
 }: ContentRendererProps) {
   if (!content || !Array.isArray(content)) return null
   const sections = getContentSections(content)
+
+  const [hoveredSection, setHoveredSection] = useState<string | null>(null)
+
+  const handleCopyLink = (sectionId: string) => {
+    const url = `${window.location.origin}${window.location.pathname}#${sectionId}`
+    navigator.clipboard.writeText(url)
+  }
+
   return (
-    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%">
-      {sections.map((section: ComponentSection, index: number) => (
-        <Core.GdsFlex key={index} flex-direction="column" gap="l">
-          <Core.GdsFlex flex-direction="column" gap="s">
-            {section.title && (
-              <Core.GdsText
-                tag={section.tag || 'h2'}
-                id={ID(section.title, index)}
+    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%" data-section>
+      {sections.map((section: ComponentSection, index: number) => {
+        const sectionId = section.title
+          ? ID(
+              section.title,
+              !section.tag || section.tag === 'H2'
+                ? (section as any)._h2Index
+                : index,
+            )
+          : ''
+
+        return (
+          <Core.GdsFlex key={index} flex-direction="column" gap="l">
+            <Core.GdsFlex flex-direction="column" gap="s">
+              <Core.GdsFlex
+                position="relative"
+                align-items="center"
+                gap="xs"
+                onMouseEnter={() => setHoveredSection(sectionId)}
+                onMouseLeave={() => setHoveredSection(null)}
               >
-                {section.title}
-              </Core.GdsText>
-            )}
-            {section['section-content'] && (
-              <Core.GdsRichText>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: section['section-content']
-                      ? marked.parse(section['section-content'], {
-                          async: false,
-                        })
-                      : '',
-                  }}
-                  style={{
-                    textWrap: 'pretty',
-                  }}
-                />
-              </Core.GdsRichText>
+                {section.title && (
+                  <Core.GdsText
+                    tag={section.tag || 'h2'}
+                    id={ID(
+                      section.title,
+                      !section.tag || section.tag === 'H2'
+                        ? (section as any)._h2Index
+                        : index,
+                    )}
+                  >
+                    {section.title}
+                  </Core.GdsText>
+                )}
+                {hoveredSection === sectionId && (
+                  <Core.GdsButton
+                    rank="tertiary"
+                    size="small"
+                    onClick={() => handleCopyLink(sectionId)}
+                    href={`#${sectionId}`}
+                  >
+                    <Core.IconChainLink size="s" />
+                  </Core.GdsButton>
+                )}
+              </Core.GdsFlex>
+              {section['section-content'] && (
+                <Core.GdsRichText>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: section['section-content']
+                        ? marked.parse(section['section-content'], {
+                            async: false,
+                          })
+                        : '',
+                    }}
+                    style={{
+                      textWrap: 'pretty',
+                    }}
+                  />
+                </Core.GdsRichText>
+              )}
+            </Core.GdsFlex>
+            {section.columns && (
+              <Core.GdsGrid
+                columns={`1; s{${section.cols == '3' ? '2' : '1'}}; m{${section.cols || '2'}}`}
+                gap="2xl; m{2xl m}"
+                max-width="100%"
+              >
+                {processColumns(section.columns).map((column, colIndex) => (
+                  <React.Fragment key={colIndex}>
+                    {Array.isArray(column) ? (
+                      <Core.GdsFlex flex-direction="column" gap="xs">
+                        {column.map((detailsColumn, detailsIndex) => (
+                          <React.Fragment key={detailsIndex}>
+                            {RenderColumn(detailsColumn, slug, imageProvider)}
+                          </React.Fragment>
+                        ))}
+                      </Core.GdsFlex>
+                    ) : (
+                      RenderColumn(column, slug, imageProvider)
+                    )}
+                  </React.Fragment>
+                ))}
+              </Core.GdsGrid>
             )}
           </Core.GdsFlex>
-          {section.columns && (
-            <Core.GdsGrid
-              columns={`1; s{${section.cols == '3' ? '2' : '1'}}; m{${section.cols || '2'}}`}
-              gap="2xl; m{2xl m}"
-              max-width="100%"
-            >
-              {processColumns(section.columns).map((column, colIndex) => (
-                <React.Fragment key={colIndex}>
-                  {Array.isArray(column) ? (
-                    <Core.GdsFlex flex-direction="column" gap="xs">
-                      {column.map((detailsColumn, detailsIndex) => (
-                        <React.Fragment key={detailsIndex}>
-                          {RenderColumn(detailsColumn, slug, imageProvider)}
-                        </React.Fragment>
-                      ))}
-                    </Core.GdsFlex>
-                  ) : (
-                    RenderColumn(column, slug, imageProvider)
-                  )}
-                </React.Fragment>
-              ))}
-            </Core.GdsGrid>
-          )}
-        </Core.GdsFlex>
-      ))}
+        )
+      })}
     </Core.GdsFlex>
   )
 }

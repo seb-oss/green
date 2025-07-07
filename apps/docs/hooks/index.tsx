@@ -36,7 +36,7 @@ export const Icon = ({
 }
 
 export const ID = (title: string, index: number) => {
-  return `section-${title
+  return `${title
     .toLowerCase()
     .replace(/[']/g, '') // Remove apostrophes
     .replace(/[^a-z0-9-\s]/g, '') // Remove special characters except hyphens
@@ -56,19 +56,53 @@ export const ID = (title: string, index: number) => {
 //   )
 // }
 
+export const getH2Index = (
+  sections: ComponentSection[],
+  currentIndex: number,
+): number => {
+  return sections
+    .filter(
+      (section) => section.title && (!section.tag || section.tag === 'H2'),
+    )
+    .findIndex((_, idx) => {
+      const h2Sections = sections.filter(
+        (s) => s.title && (!s.tag || s.tag === 'H2'),
+      )
+      return h2Sections[idx] === sections[currentIndex]
+    })
+}
+
 export const getContentSections = (
   content: ComponentSection[] | null | undefined,
 ) => {
-  return content?.filter((section): section is ComponentSection => true) || []
+  if (!content) return []
+
+  return content.map((section, index) => {
+    if (!section.title) return section
+
+    if (!section.tag || section.tag === 'H2') {
+      const h2Index = getH2Index(content, index)
+      return {
+        ...section,
+        _h2Index: h2Index,
+      }
+    }
+    return section
+  })
 }
 
 export const getTableOfContentsSections = (
   content: ComponentSection[] | null | undefined,
 ) => {
-  return (
-    content?.filter(
+  if (!content) return []
+
+  return content
+    .filter(
       (section): section is ComponentSection & { title: string } =>
-        Boolean(section.title) && (!section.tag || section.tag === 'H2'), // Only H2 for table of contents
-    ) || []
-  )
+        Boolean(section.title) && (!section.tag || section.tag === 'H2'),
+    )
+    .map((section, index) => ({
+      id: ID(section.title, index),
+      title: section.title,
+    }))
 }

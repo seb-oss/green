@@ -30,6 +30,11 @@ body {
   margin: unset;
 }
 
+* {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
 a {
   text-decoration: none;
   color: inherit;
