@@ -45,13 +45,35 @@ export const ID = (title: string, index: number) => {
     .replace(/^-|-$/g, '')}-${index}` // Remove leading/trailing hyphens
 }
 
+// export const getContentSections = (
+//   content: ComponentSection[] | null | undefined,
+// ) => {
+//   return (
+//     content?.filter(
+//       (section): section is ComponentSection & { title: string } =>
+//         Boolean(section.title) && (!section.tag || section.tag === 'H2'),
+//     ) || []
+//   )
+// }
+
 export const getContentSections = (
   content: ComponentSection[] | null | undefined,
 ) => {
   return (
     content?.filter(
       (section): section is ComponentSection & { title: string } =>
-        Boolean(section.title) && (!section.tag || section.tag === 'H2'),
+        Boolean(section.title), // Show all headers for content
+    ) || []
+  )
+}
+
+export const getTableOfContentsSections = (
+  content: ComponentSection[] | null | undefined,
+) => {
+  return (
+    content?.filter(
+      (section): section is ComponentSection & { title: string } =>
+        Boolean(section.title) && (!section.tag || section.tag === 'H2'), // Only H2 for table of contents
     ) || []
   )
 }

@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { getContentSections, ID } from '../../../hooks'
+import { getTableOfContentsSections, ID } from '../../../hooks'
 import { ComponentContent } from '../../../settings/content/types'
 
 import './contents.css'
@@ -89,9 +89,9 @@ export function TableOfContents({
       code: [],
     }[section]
 
-    const contentSections = getContentSections(sectionContent).map(
+    const contentSections = getTableOfContentsSections(sectionContent).map(
       (section, index) => ({
-        id: ID(section.title, index), // No more type error
+        id: ID(section.title, index),
         title: section.title,
       }),
     )
