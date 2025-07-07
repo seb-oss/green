@@ -312,15 +312,7 @@ export default function Compose() {
   }
 
   return (
-    <Core.GdsGrid
-      columns="2"
-      gap="l"
-      height="calc(100vh - 90px)"
-      padding="xl"
-      width="100%"
-      max-width="1400px"
-      margin="0 auto"
-    >
+    <Core.GdsGrid columns="2" gap="l" height="calc(100vh - 90px)" width="100%">
       <Core.GdsFlex flex-direction="column" gap="m">
         <Core.GdsCard
           variant="secondary"

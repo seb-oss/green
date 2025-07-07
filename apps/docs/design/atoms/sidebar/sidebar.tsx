@@ -272,6 +272,20 @@ export default function Sidebar() {
       position="relative; s{sticky}"
       inset="0; s{0px auto auto auto}"
     >
+      <Core.GdsFlex padding="l" align-items="center" height="68px" gap="s">
+        {isOpen && (
+          <Link href="/">
+            <Core.GdsText
+              font-weight="book"
+              font-size="detail-m"
+              color="brand-01"
+            >
+              Green Design System
+            </Core.GdsText>
+          </Link>
+        )}
+      </Core.GdsFlex>
+
       <Core.GdsFlex
         flex-direction="column"
         gap="xs"

@@ -29,13 +29,7 @@ export function FoundationClient() {
   }
 
   return (
-    <GdsFlex
-      flex-direction="column"
-      gap="2xl"
-      max-width="1200px"
-      width="100%"
-      margin="0 auto"
-    >
+    <GdsFlex flex-direction="column" gap="2xl" width="100%">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
           <IconHomeOpen size="m" slot="lead" />

@@ -15,10 +15,9 @@ export default function Footer() {
       flex-direction="column"
       padding="m 0"
       gap="2xl; s{5xl}"
-      border="4xs/primary 0 0 0"
-      margin="4xl auto 0 auto"
-      max-width="1200px"
-      width="100%"
+      border-color="primary"
+      border-width="4xs 0 0 0"
+      margin="4xl 0 0 0"
     >
       <GdsFlex justify-content="space-between" align-items="center">
         <GdsFlex align-items="center" gap="s">

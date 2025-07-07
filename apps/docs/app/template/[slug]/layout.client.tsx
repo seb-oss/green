@@ -40,13 +40,7 @@ export function TemplateLayoutClient({
     : []
 
   return (
-    <Core.GdsFlex
-      flex-direction="column"
-      gap="2xl"
-      max-width="840px"
-      width="100%"
-      margin="0 auto"
-    >
+    <Core.GdsFlex flex-direction="column" gap="2xl" width="100%">
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
         <Core.GdsBreadcrumbs size="small">
           <Link component="link" href="/">

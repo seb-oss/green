@@ -1,7 +1,7 @@
 // command.tsx
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -93,6 +93,10 @@ export default function Command() {
     SettingsActions.toggle('UI.Panel.All')
   }
 
+  const handleToggleCommand = () => {
+    SettingsActions.toggle('UI.Panel.Command')
+  }
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
       case 'ArrowDown':
@@ -131,110 +135,125 @@ export default function Command() {
     }
   }, [isOpen])
 
-  if (!isOpen) return null
+  // if (!isOpen) return null
 
   return (
-    <Core.GdsDialog
-      onGdsClose={handleClosePanel}
-      width="620px"
-      min-width="620px"
-      heading="Search"
-      min-block-size="80vh"
-      open
-    >
-      <Core.GdsFlex
-        flex-direction="column"
-        gap="m"
-        height="100%"
-        background="primary"
-        padding="s"
-        border-radius="s"
-        border-color="primary"
-        border-width="4xs"
+    <React.Fragment>
+      <Core.GdsFab
+        inset="40px 40px auto auto"
+        rank="secondary"
+        size="small"
+        onClick={handleToggleCommand}
       >
-        <Core.GdsInput
-          ref={inputRef}
-          plain
-          value={query}
-          onInput={(e) => {
-            setQuery((e.target as HTMLInputElement).value)
-            setSelectedIndex(0)
-          }}
-          onKeyDown={handleKeyDown}
-          autofocus
+        <Core.IconMagnifyingGlass></Core.IconMagnifyingGlass>
+      </Core.GdsFab>
+
+      {isOpen && (
+        <Core.GdsDialog
+          onGdsClose={handleClosePanel}
+          width="620px"
+          min-width="620px"
+          heading="Search"
+          min-block-size="80vh"
+          open
         >
-          <Core.IconMagnifyingGlass slot="lead" />
-        </Core.GdsInput>
-
-        <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
-          {searchResults.map((result, index) => (
-            <Core.GdsCard
-              key={result.href}
-              padding="s"
-              variant={selectedIndex === index ? 'secondary' : 'primary'}
-              width="100%"
-              onClick={() => {
-                router.push(result.href)
-                handleClosePanel()
+          <Core.GdsFlex
+            flex-direction="column"
+            gap="m"
+            height="100%"
+            background="primary"
+            padding="s"
+            border-radius="s"
+            border-color="primary"
+            border-width="4xs"
+          >
+            <Core.GdsInput
+              ref={inputRef}
+              plain
+              value={query}
+              onInput={(e) => {
+                setQuery((e.target as HTMLInputElement).value)
+                setSelectedIndex(0)
               }}
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  router.push(result.href)
-                  handleClosePanel()
-                }
-              }}
+              onKeyDown={handleKeyDown}
+              autofocus
             >
-              <Core.GdsFlex flex-direction="column" gap="2xs">
-                <Core.GdsFlex
-                  justify-content="flex-start"
-                  gap="s"
-                  align-items="center"
+              <Core.IconMagnifyingGlass slot="lead" />
+            </Core.GdsInput>
+
+            <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
+              {searchResults.map((result, index) => (
+                <Core.GdsCard
+                  key={result.href}
+                  padding="s"
+                  variant={selectedIndex === index ? 'secondary' : 'primary'}
+                  width="100%"
+                  onClick={() => {
+                    router.push(result.href)
+                    handleClosePanel()
+                  }}
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      router.push(result.href)
+                      handleClosePanel()
+                    }
+                  }}
                 >
-                  <Core.GdsText font-weight="book">{result.title}</Core.GdsText>
-                  <Core.GdsFlex gap="xs" align-items="center">
-                    {result.beta && (
-                      <Core.GdsBadge variant="notice" size="small">
-                        BETA
-                      </Core.GdsBadge>
-                    )}
-                    <Core.GdsBadge
-                      variant={
-                        result.type === 'component'
-                          ? 'primary'
-                          : result.type === 'template'
-                            ? 'notice'
-                            : 'secondary'
-                      }
-                      size="small"
+                  <Core.GdsFlex flex-direction="column" gap="2xs">
+                    <Core.GdsFlex
+                      justify-content="flex-start"
+                      gap="s"
+                      align-items="center"
                     >
-                      {result.type}
-                    </Core.GdsBadge>
+                      <Core.GdsText font-weight="book">
+                        {result.title}
+                      </Core.GdsText>
+                      <Core.GdsFlex gap="xs" align-items="center">
+                        {result.beta && (
+                          <Core.GdsBadge variant="notice" size="small">
+                            BETA
+                          </Core.GdsBadge>
+                        )}
+                        <Core.GdsBadge
+                          variant={
+                            result.type === 'component'
+                              ? 'primary'
+                              : result.type === 'template'
+                                ? 'notice'
+                                : 'secondary'
+                          }
+                          size="small"
+                        >
+                          {result.type}
+                        </Core.GdsBadge>
+                      </Core.GdsFlex>
+                    </Core.GdsFlex>
+                    {result.summary && (
+                      <Core.GdsText font-size="body-s" color="secondary">
+                        {result.summary}
+                      </Core.GdsText>
+                    )}
                   </Core.GdsFlex>
-                </Core.GdsFlex>
-                {result.summary && (
-                  <Core.GdsText font-size="body-s" color="secondary">
-                    {result.summary}
-                  </Core.GdsText>
-                )}
-              </Core.GdsFlex>
-            </Core.GdsCard>
-          ))}
+                </Core.GdsCard>
+              ))}
 
-          {query && searchResults.length === 0 && (
-            <Core.GdsText color="secondary" text-align="center" padding="l">
-              No results found for {`"${query}"`}
-            </Core.GdsText>
-          )}
+              {query && searchResults.length === 0 && (
+                <Core.GdsText color="secondary" text-align="center" padding="l">
+                  No results found for {`"${query}"`}
+                </Core.GdsText>
+              )}
 
-          {!query && searchResults.length === 0 && (
-            <Core.GdsText color="secondary" text-align="center" padding="l">
-              Start typing to search...
-            </Core.GdsText>
-          )}
-        </Core.GdsFlex>
-      </Core.GdsFlex>
-      <span slot="footer"></span>
-    </Core.GdsDialog>
+              {!query && searchResults.length === 0 && (
+                <Core.GdsText color="secondary" text-align="center" padding="l">
+                  Start typing to search...
+                </Core.GdsText>
+              )}
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+          <span slot="footer"></span>
+        </Core.GdsDialog>
+      )}
+    </React.Fragment>
   )
 }

@@ -30,7 +30,7 @@ body {
   margin: unset;
 }
 
-* {
+[data-section] {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
 }

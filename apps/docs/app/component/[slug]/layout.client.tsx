@@ -99,13 +99,7 @@ export function ComponentLayoutClient({
   )
 
   return (
-    <Core.GdsFlex
-      flex-direction="column"
-      gap="l"
-      max-width="1000px"
-      width="100%"
-      margin="0 auto"
-    >
+    <Core.GdsFlex flex-direction="column" gap="l" width="100%">
       <Breadcrumbs
         key={`${slug}-${section}`}
         slug={component.slug}
@@ -275,14 +269,7 @@ export function ComponentLayoutClient({
             {children}
             {component.soon && (
               <Core.GdsAlert variant="notice">
-                <Core.GdsFlex flex-direction="column" gap="0">
-                  <Core.GdsText font-weight="book">
-                    {component.title} documentation in progress
-                  </Core.GdsText>
-                  <Core.GdsText tag="small">
-                    {`This component's documentation will be updated soon.`}
-                  </Core.GdsText>
-                </Core.GdsFlex>
+                {component.title} documentation is in progress.
               </Core.GdsAlert>
             )}
 

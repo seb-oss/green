@@ -43,10 +43,7 @@ export function TemplatesClient() {
     <Core.GdsFlex
       flex-direction="column"
       gap="2xl"
-      padding="0"
       width="100%"
-      max-width="1200px"
-      margin="0 auto"
       font-size="body-s"
     >
       <Core.GdsFlex

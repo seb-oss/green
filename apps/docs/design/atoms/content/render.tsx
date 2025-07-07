@@ -139,7 +139,7 @@ export function Render({
                 {processColumns(section.columns).map((column, colIndex) => (
                   <React.Fragment key={colIndex}>
                     {Array.isArray(column) ? (
-                      <Core.GdsFlex flex-direction="column" gap="xs">
+                      <Core.GdsFlex flex-direction="column" gap="0">
                         {column.map((detailsColumn, detailsIndex) => (
                           <React.Fragment key={detailsIndex}>
                             {RenderColumn(detailsColumn, slug, imageProvider)}

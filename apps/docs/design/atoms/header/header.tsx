@@ -25,29 +25,9 @@ export default function Header() {
       width="100%"
       align-items="center"
       justify-content="space-between"
-      padding={isOpen ? 'xl xl l m' : 'xl xl l m'}
-      className="header"
-      gap="m"
       position="relative"
     >
-      <GdsFlex padding="0 0 0 m" align-items="center" gap="s">
-        <Link href="/">
-          <GdsText
-            font-weight="book"
-            font-size="detail-m"
-            className="brand-color"
-          >
-            Green Design System
-          </GdsText>
-        </Link>
-      </GdsFlex>
-
-      <GdsFlex
-        position="absolute"
-        width="max-content"
-        inset="auto 0"
-        margin="auto"
-      >
+      <GdsFlex width="max-content">
         <Link
           component="button"
           onClick={handleToggleCommand}

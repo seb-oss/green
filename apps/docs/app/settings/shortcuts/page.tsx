@@ -53,13 +53,7 @@ export default function ShortcutsPage() {
   const filteredPageShortcuts = filterShortcuts(pageShortcuts)
 
   return (
-    <GdsFlex
-      flex-direction="column"
-      gap="l"
-      max-width="1200px"
-      width="100%"
-      margin="0 auto"
-    >
+    <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
           <IconHomeOpen slot="lead" />
