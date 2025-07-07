@@ -32,7 +32,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
           flex-direction="column"
           width="100%"
           max-width="1200px"
-          padding="xl; s{4xl}"
+          padding="xl; s{4xl m}"
           min-height="100%"
           margin="0 auto"
           data-content
