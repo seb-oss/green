@@ -218,7 +218,7 @@ export const RenderColumn = (
                       size="xs"
                       onClick={() => handleShowCode(column.Snippet || '')}
                     >
-                      <Core.IconZap size="s" />
+                      <Core.IconCodeBrackets size="s" />
                     </Core.GdsButton>
                   </Core.GdsFlex>
                 )}
