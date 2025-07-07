@@ -210,6 +210,7 @@ export class GdsYearPicker extends GdsElement {
   }
 
   focus() {
+    console.log('Super Focused')
     super.focus()
     this._elFocusedCell?.focus()
   }
@@ -220,14 +221,18 @@ export class GdsYearPicker extends GdsElement {
 
     return html` <gds-div overflow="auto">
       ${this.changeYearsControls
-        ? html`<gds-flex justify-content="space-around" align-items="center">
+        ? html`<gds-flex
+            justify-content="space-around"
+            align-items="center"
+            class="controls"
+          >
             <gds-button
               id="prev"
               rank="tertiary"
               label="Previous years"
               @click=${this.#setPreviousYearsClick}
-              @focus=${this.#handleButtonFocus}
-              @blur=${this.#handleButtonBlur}
+              @focusin=${this.#handleButtonFocus}
+              @focusout=${this.#handleButtonFocus}
             >
               <gds-icon-chevron-left></gds-icon-chevron-left>
             </gds-button>
@@ -237,8 +242,8 @@ export class GdsYearPicker extends GdsElement {
               rank="tertiary"
               label="Next years"
               @click=${this.#setNextYearsClick}
-              @focus=${this.#handleButtonFocus}
-              @blur=${this.#handleButtonBlur}
+              @focusin=${this.#handleButtonFocus}
+              @focusout=${this.#handleButtonFocus}
             >
               <gds-icon-chevron-right></gds-icon-chevron-right>
             </gds-button>
@@ -341,6 +346,7 @@ export class GdsYearPicker extends GdsElement {
   }
 
   #handleButtonFocus = (e: FocusEvent) => {
+    console.log('Button Focused')
     this._elFocusedButton = e.target as HTMLElement
   }
 
@@ -356,6 +362,14 @@ export class GdsYearPicker extends GdsElement {
 
   #handleKeyDown(e: KeyboardEvent) {
     let handled = false
+    console.log(
+      'Key: ' +
+        e.key +
+        ' this._elFocusedButton: ' +
+        this._elFocusedButton +
+        ' this._elFocusedCell: ' +
+        this._elFocusedCell,
+    )
     if (this._elFocusedButton) return
     if (e.key === 'ArrowLeft') {
       if (this.focusedYear > this.min.getFullYear()) this.focusedYear -= 1
