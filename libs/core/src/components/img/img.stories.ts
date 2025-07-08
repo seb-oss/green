@@ -32,7 +32,7 @@ const DefaultParams: Story = {
     inset: '0',
     position: 'relative',
     opacity: '1',
-    src: 'https://placehold.co/600x400',
+    src: 'https://api.seb.io/components/image/img.jpg',
     alt: 'Placeholder',
   },
 }
