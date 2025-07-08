@@ -14,7 +14,7 @@ import { IconCircleCheck } from '../icon/icons/circle-check.component'
 import { IconCircleInfo } from '../icon/icons/circle-info.component'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { IconTriangleExclamation } from '../icon/icons/triangle-exclamation.component'
-import { alertStyles } from './alert.style'
+import AlertStyles from './alert.styles'
 
 // Type definitions
 type DismissSource = 'timeout' | 'close' | 'escape'
@@ -63,7 +63,7 @@ const PROGRESS_INTERVAL = 100
 })
 @localized()
 export class GdsAlert extends GdsElement {
-  static styles = [tokens, alertStyles]
+  static styles = [tokens, AlertStyles]
 
   /**
    * The variant of the alert, which determines its appearance and icon.

@@ -21,7 +21,7 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import style from './div.style'
+import DivStyles from './div.styles'
 
 /**
  * @element gds-div
@@ -37,7 +37,7 @@ export class GdsDiv extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens, style]
+  static styles = [tokens, DivStyles]
 
   /**
    * Controls the display property.

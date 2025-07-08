@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   :host {
     font: var(--gds-sys-text-body-regular-m);
     --default-border: 1px solid
@@ -279,3 +279,4 @@ export const styles = css`
     margin-bottom: var(--gds-sys-space-l);
   }
 `
+export default style

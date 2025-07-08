@@ -8,7 +8,7 @@ import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../pure'
-import { styles } from './checkbox.styles'
+import CheckboxStyles from './checkbox.styles'
 
 /**
  * @element gds-checkbox
@@ -21,7 +21,7 @@ import { styles } from './checkbox.styles'
   dependsOn: [GdsToggleControlBase, IconCheckmark],
 })
 export class GdsCheckbox extends GdsFormControlElement {
-  static styles = [tokens, rbcbToggleStyles, styles]
+  static styles = [tokens, rbcbToggleStyles, CheckboxStyles]
 
   /**
    * The label displayed next to the checkbox button.

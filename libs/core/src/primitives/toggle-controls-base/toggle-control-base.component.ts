@@ -5,7 +5,7 @@ import { classMap } from 'lit/directives/class-map.js'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { tokens } from '../../tokens.style'
-import { styles } from './toggle-control-base.styles' // Renamed style file
+import ToggleControlBaseStyles from './toggle-control-base.styles'
 
 /**
  * @element gds-toggle-control-base
@@ -31,7 +31,7 @@ import { styles } from './toggle-control-base.styles' // Renamed style file
 @gdsCustomElement('gds-toggle-control-base')
 @localized()
 export class GdsToggleControlBase extends GdsElement {
-  static styles = [tokens, styles]
+  static styles = [tokens, ToggleControlBaseStyles]
 
   /**
    * The main label text displayed next to the selection control

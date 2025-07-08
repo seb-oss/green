@@ -1,0 +1,66 @@
+import { css } from 'lit'
+
+const style = css`
+  @layer base {
+    :host {
+      display: flex;
+      z-index: 1;
+    }
+
+    button {
+      appearance: none;
+      background: transparent;
+      border-radius: var(--gds-sys-space-max);
+      border-width: 0;
+      color: var(--gds-sys-color-content-01);
+      cursor: pointer;
+      flex-grow: 1;
+      flex-shrink: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font: var(--gds-sys-text-detail-book-m);
+      overflow: hidden;
+      padding: 0 1rem;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      transition:
+        background-color var(--gds-sys-motion-fast),
+        border-color var(--gds-sys-motion-fast),
+        color var(--gds-sys-motion-fast);
+      outline-width: var(--gds-sys-space-3xs);
+      outline-style: solid;
+      outline-offset: -2px;
+      outline-color: transparent;
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+
+    @media (pointer: fine) {
+      :host(:not([selected])) button:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--gds-sys-color-state-light-hover),
+          transparent
+        );
+
+        &:disabled {
+          background-color: transparent;
+        }
+      }
+    }
+
+    button:focus-visible {
+      outline-color: color-mix(
+        in srgb,
+        transparent,
+        var(--gds-sys-color-l3-content-tertiary) 100%
+      );
+    }
+  }
+`
+export default style

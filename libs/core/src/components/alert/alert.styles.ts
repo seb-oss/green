@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const alertStyles = css`
+const style = css`
   :host {
     box-sizing: border-box;
     display: block;
@@ -210,3 +210,4 @@ export const alertStyles = css`
     }
   }
 `
+export default style

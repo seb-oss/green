@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     #label-row {
@@ -60,3 +60,4 @@ export const styles = css`
     }
   }
 `
+export default style

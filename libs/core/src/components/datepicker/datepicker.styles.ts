@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset;
 
   @layer base {
@@ -44,3 +44,4 @@ export const styles = css`
     }
   }
 `
+export default style

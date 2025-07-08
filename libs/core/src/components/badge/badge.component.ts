@@ -10,7 +10,7 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFlex } from '../flex/flex.component'
-import BadgeCSS from './badge.style'
+import BadgeStyles from './badge.styles'
 
 /**
  * `gds-badge`
@@ -23,7 +23,7 @@ import BadgeCSS from './badge.style'
 export class GdsBadge extends withSizeXProps(
   withMarginProps(withLayoutChildProps(GdsElement)),
 ) {
-  static styles = [tokens, BadgeCSS]
+  static styles = [tokens, BadgeStyles]
 
   /**
    * Controls the variant of the badge.

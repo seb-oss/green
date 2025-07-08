@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host(.visually-hidden) {
@@ -46,3 +46,4 @@ export const styles = css`
     }
   }
 `
+export default style

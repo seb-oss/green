@@ -13,5 +13,4 @@ const style = css`
     width: max-content;
   }
 `
-
 export default style

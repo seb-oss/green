@@ -50,5 +50,4 @@ const style = css`
     left: -0.5rem;
   }
 `
-
 export default style

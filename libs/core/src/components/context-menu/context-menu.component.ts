@@ -22,7 +22,7 @@ import {
 import { GdsButton } from '../button/button.component'
 import { IconDotGridOneHorizontal } from '../icon/icons/dot-grid-one-horizontal'
 import { GdsPopover } from '../popover/popover.component'
-import styles from './context-menu.styles'
+import ContextMenuStyles from './context-menu.styles'
 
 export { GdsMenuItem }
 export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
@@ -53,7 +53,7 @@ export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
 export class GdsContextMenu extends withMarginProps(
   withLayoutChildProps(GdsElement),
 ) {
-  static styles = [tokens, styles]
+  static styles = [tokens, ContextMenuStyles]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',

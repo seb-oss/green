@@ -11,7 +11,7 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators'
 import { Focusable } from '../../utils/mixins/focusable'
-import style from './option.styles'
+import OptionStyles from './option.styles'
 
 export interface OptionsContainer extends HTMLElement {
   options: GdsOption[]
@@ -34,7 +34,7 @@ export interface OptionsContainer extends HTMLElement {
  */
 @gdsCustomElement('gds-option', { dependsOn: [IconCheckmark] })
 export class GdsOption extends Focusable(GdsElement) {
-  static styles = [tokens, rbcbToggleStyles, style]
+  static styles = [tokens, rbcbToggleStyles, OptionStyles]
 
   /**
    * The value of the option.

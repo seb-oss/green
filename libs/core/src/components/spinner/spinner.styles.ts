@@ -1,7 +1,7 @@
 // File: gds-spinner.styles.ts
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   /* Host configuration with core variables */
   :host {
     /* Size variables with indexed access using CSS custom properties */
@@ -131,3 +131,4 @@ export const styles = css`
     }
   }
 `
+export default style

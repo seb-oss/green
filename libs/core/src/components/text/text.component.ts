@@ -6,7 +6,7 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsDiv } from '../div/div.component'
 import { defaultStyles } from './default-typography.styles'
-import textStyles from './text.style'
+import TextStyles from './text.styles'
 
 /**
  * @element gds-text
@@ -18,7 +18,7 @@ import textStyles from './text.style'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsDiv {
-  static styles = [tokens, defaultStyles, textStyles]
+  static styles = [tokens, defaultStyles, TextStyles]
 
   /**
    * Controls the tag of the text.

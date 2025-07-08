@@ -13,7 +13,7 @@ import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconArrowUp } from '../icon/icons/arrow-up.component'
-import styles from './summary.styles'
+import SummaryStyles from './summary.styles'
 
 /**
  * @element gds-form-summary
@@ -26,7 +26,7 @@ import styles from './summary.styles'
   dependsOn: [GdsCard, GdsFlex, GdsDiv, GdsButton, IconArrowUp],
 })
 export class GdsFormSummary extends GdsElement {
-  static styles = [tokens, styles]
+  static styles = [tokens, SummaryStyles]
 
   /**
    * Whether to hide the error messages under the labels.

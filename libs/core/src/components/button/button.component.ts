@@ -19,7 +19,7 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
-import style from './button.style.css?inline'
+import ButtonStyles from './button.styles'
 
 const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 
@@ -27,7 +27,7 @@ const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 const html = stripWhitespace(customElementHtml)
 
 class Button extends GdsFormControlElement<any> {
-  static styles = [tokens, unsafeCSS(style)]
+  static styles = [tokens, ButtonStyles]
 
   /**
    * @internal

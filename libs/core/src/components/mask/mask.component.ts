@@ -2,15 +2,10 @@ import { html } from 'lit/static-html.js'
 
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
-import {
-  forColorTokens,
-  forSpaceTokens,
-  GdsColorLevel,
-  parseColorValue,
-} from '../../utils/helpers'
+import { GdsColorLevel, parseColorValue } from '../../utils/helpers'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsFlex } from '../flex/flex.component'
-import MaskCSS from './mask.style'
+import MaskStyles from './mask.styles'
 
 /**
  * @element gds-mask
@@ -20,7 +15,7 @@ import MaskCSS from './mask.style'
  */
 @gdsCustomElement('gds-mask')
 export class GdsMask extends GdsFlex {
-  static styles = [tokens, MaskCSS]
+  static styles = [tokens, MaskStyles]
 
   @styleExpressionProperty({
     selector: '[part="mask"]',

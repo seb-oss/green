@@ -14,7 +14,7 @@ import {
   withLayoutChildProps,
   withMarginProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import IconCSS from './icon.style'
+import IconStyles from './icon.styles'
 
 /**
  * @element gds-icon
@@ -24,7 +24,7 @@ import IconCSS from './icon.style'
  */
 
 export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
-  static styles = [tokens, IconCSS]
+  static styles = [tokens, IconStyles]
 
   /**
    * This property allow you to set the size of the icon with the token and custom values.

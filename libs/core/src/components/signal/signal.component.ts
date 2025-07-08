@@ -4,14 +4,14 @@ import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
-import SignalCSS from './signal.style'
+import SignalStyles from './signal.styles'
 
 /**
  * @element gds-signal
  */
 @gdsCustomElement('gds-signal')
 export class GdsSignal extends GdsElement {
-  static styles = [tokens, SignalCSS]
+  static styles = [tokens, SignalStyles]
 
   /**
    * Change signal color based on variant.
