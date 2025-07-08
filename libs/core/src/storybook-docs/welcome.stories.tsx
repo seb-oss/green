@@ -45,9 +45,9 @@ export const GreenDesignSystem: Story = {
             gap="xl"
           >
             <gds-icon-brand-green width="80" height="80"></gds-icon-brand-green>
-            <gds-text tag="code" font-size="display-s"
-              >@sebgroup/green-core</gds-text
-            >
+            <gds-text tag="code" font-size="display-s">
+              @sebgroup/green-core
+            </gds-text>
             <gds-text
               font-size="display-xs"
               text-align="center"
@@ -89,8 +89,6 @@ export const GreenDesignSystem: Story = {
           </gds-flex>
         </gds-flex>
         <gds-divider opacity="0.2"></gds-divider>
-
-        <!-- Debug section to show what we found -->
         <gds-flex flex-direction="column" gap="xl">
           <gds-text tag="h2" font-size="xl">Components</gds-text>
         </gds-flex>
