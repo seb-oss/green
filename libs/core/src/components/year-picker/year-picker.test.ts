@@ -3,6 +3,8 @@ import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import { addDays, addYears, subYears } from 'date-fns'
 
+import type { GdsButton } from '@sebgroup/green-core/components/button'
+
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { onlyDate } from '../../utils/testing'
 
@@ -23,7 +25,7 @@ describe('<gds-year-picker>', () => {
   })
 
   describe('Interactions', () => {
-    /*it('should increment by 1 year when pressing key right', async () => {
+    it('should increment by 1 year when pressing key right', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker></gds-year-picker>`,
       )
@@ -252,9 +254,9 @@ describe('<gds-year-picker>', () => {
       await aTimeout(0)
 
       await expect(el.focusedYear).to.equal(2030)
-    })*/
+    })
 
-    it('should have correct focused year when pressing the previous years button - 9', async () => {
+    /*it('should have correct focused year when pressing the previous years button - 9', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
           .min=${new Date('1900-01-01')}
@@ -265,23 +267,89 @@ describe('<gds-year-picker>', () => {
       )
 
       const totalCells = el.columns * el.rows
-      const controls = el.shadowRoot?.querySelector('controls')
-      console.log('ElementEl: ' + controls)
-      //el.focus()
-      //await sendKeys({ press: 'Tab' })
-      //await aTimeout(0)
-      //el.focus()
-      //await aTimeout(0)
-      //await sendKeys({ press: 'Enter' })
-      //await aTimeout(0)
-      //await sendKeys({ press: 'Tab' })
-      //await aTimeout(0)
+      //const controls = el.shadowRoot?.querySelector('controls')
+      el.focus()
+      await sendKeys({ press: 'Tab' })
+      await aTimeout(0)
+      await sendKeys({ press: 'Enter' })
+      await aTimeout(0)
       await expect(el.focusedYear).to.equal(2025 - totalCells)
-    })
+    })*/
+
+    /*it('should handle keyboard navigation on buttons', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          change-years-controls
+          focusedDate="2025-01-01"
+        ></gds-year-picker>`,
+      )
+
+      // Test tab navigation
+      await sendKeys({ press: 'Tab' }) // Focus prev button
+      await aTimeout(0)
+
+      const prevButton = el.shadowRoot?.querySelector('#prev') as HTMLElement
+      expect(document.activeElement).to.equal(prevButton)
+
+      await sendKeys({ press: 'Tab' }) // Focus range
+      await aTimeout(0)
+
+      const nextButton = el.shadowRoot?.querySelector('#next') as HTMLElement
+      expect(document.activeElement).to.equal(nextButton)
+    })*/
   })
 
-  /*
   describe('API', () => {
+    /*it('should handle click on previous years button', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          change-years-controls
+          .min=${new Date('1950-01-01')}
+          .max=${new Date('2100-01-01')}
+          focusedDate="2025-01-01"
+        ></gds-year-picker>`,
+      )
+
+      // Get initial range text
+      const rangeElement = el.shadowRoot?.querySelector('#range')
+      const initialRange = rangeElement?.textContent
+
+      // Click prev button
+      const prevButton = el.shadowRoot?.querySelector('#prev') as GdsButton
+      prevButton.click()
+      await el.updateComplete
+
+      // Check if range changed
+      const newRange = rangeElement?.textContent
+      expect(newRange).to.not.equal(initialRange)
+      expect(newRange).to.include('2000 - 2024') // Previous 25 years
+    })
+
+    it('should handle click on next years button', async () => {
+      const el = await fixture<GdsYearPicker>(
+        html`<gds-year-picker
+          change-years-controls
+          .min=${new Date('1950-01-01')}
+          .max=${new Date('2100-01-01')}
+          focusedDate="2025-01-01"
+        ></gds-year-picker>`,
+      )
+
+      // Get initial range text
+      const rangeElement = el.shadowRoot?.querySelector('#range')
+      const initialRange = rangeElement?.textContent
+
+      // Click next button
+      const nextButton = el.shadowRoot?.querySelector('#next') as GdsButton
+      nextButton.click()
+      await el.updateComplete
+
+      // Check if range changed
+      const newRange = rangeElement?.textContent
+      expect(newRange).to.not.equal(initialRange)
+      expect(newRange).to.include('2050 - 2074') // Next 25 years
+    })*/
+
     it('should default to undefined', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker></gds-year-picker>`,
@@ -355,9 +423,7 @@ describe('<gds-year-picker>', () => {
       expect(totalCells).to.equal(12)
     })
   })
-  */
 
-  /*
   // Disable for 2023
   describe('Accessibility', () => {
     it('is accessible', async () => {
@@ -373,5 +439,5 @@ describe('<gds-year-picker>', () => {
         ignoredRules: ['color-contrast'],
       })
     })
-  })*/
+  })
 })

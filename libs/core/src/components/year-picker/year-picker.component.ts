@@ -209,11 +209,11 @@ export class GdsYearPicker extends GdsElement {
     })
   }
 
-  focus() {
-    console.log('Super Focused')
-    super.focus()
-    this._elFocusedCell?.focus()
-  }
+  // focus() {
+  //   console.log('Super Focused')
+  //   super.focus()
+  //   this._elFocusedCell?.focus()
+  // }
 
   render() {
     const currentYear = new Date().getFullYear()
@@ -346,7 +346,6 @@ export class GdsYearPicker extends GdsElement {
   }
 
   #handleButtonFocus = (e: FocusEvent) => {
-    console.log('Button Focused')
     this._elFocusedButton = e.target as HTMLElement
   }
 
@@ -362,14 +361,6 @@ export class GdsYearPicker extends GdsElement {
 
   #handleKeyDown(e: KeyboardEvent) {
     let handled = false
-    console.log(
-      'Key: ' +
-        e.key +
-        ' this._elFocusedButton: ' +
-        this._elFocusedButton +
-        ' this._elFocusedCell: ' +
-        this._elFocusedCell,
-    )
     if (this._elFocusedButton) return
     if (e.key === 'ArrowLeft') {
       if (this.focusedYear > this.min.getFullYear()) this.focusedYear -= 1
