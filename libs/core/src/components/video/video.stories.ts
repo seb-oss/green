@@ -38,6 +38,7 @@ const DefaultParams: Story = {
     playsinline: true,
     loop: true,
     events: 'none',
+    'border-radius': 's',
   },
 }
 

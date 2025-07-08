@@ -34,6 +34,7 @@ const DefaultParams: Story = {
     opacity: '1',
     src: 'https://api.seb.io/components/image/img.jpg',
     alt: 'Placeholder',
+    'border-radius': 's',
   },
 }
 

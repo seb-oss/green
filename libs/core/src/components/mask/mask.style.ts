@@ -2,7 +2,7 @@ import { css } from 'lit'
 
 const style = css`
   :host {
-    isolation: isolate;
+    contain: strict;
   }
 
   [part='mask'] {
@@ -10,12 +10,7 @@ const style = css`
     inset: 0;
     z-index: -1;
     pointer-events: none;
-  }
-
-  [part='content'] {
-    z-index: 1;
-    position: absolute;
-    inset: 0;
+    mask-composite: intersect;
   }
 `
 export default style
