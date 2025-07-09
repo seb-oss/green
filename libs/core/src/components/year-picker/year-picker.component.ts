@@ -1,25 +1,21 @@
-import { localized, msg } from '@lit/localize'
+import { localized } from '@lit/localize'
 import { html } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
-//import { when } from 'lit/directives/when.js'
-import { addYears, isSameYear, subYears } from 'date-fns'
 
-import { GdsButton } from '../../components/button/button.component'
-import { GdsFlex } from '../../components/flex/flex.component'
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
-import style from './year-picker.styles'
+import YearPickerStyles from './year-picker.styles'
 
 /**
  * Used to customize the appearance of a date in the year picker.
  */
-export type CustomizedDate = {
+export type YearCustomizedDate = {
   /**
    * The date to customize.
    */
@@ -43,7 +39,7 @@ export type CustomizedDate = {
 
 /**
  * @element gds-year-picker
- * @status stable
+ * @status beta
  *
  * A year-picker is a widget that allows the user to select a year.
  *
@@ -53,7 +49,7 @@ export type CustomizedDate = {
 @gdsCustomElement('gds-year-picker')
 @localized()
 export class GdsYearPicker extends GdsElement {
-  static styles = [tokens, style]
+  static styles = [tokens, YearPickerStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

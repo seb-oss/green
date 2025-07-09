@@ -4,14 +4,7 @@ import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
-import {
-  addMonths,
-  isSameDay,
-  isSameMonth,
-  lastDayOfMonth,
-  setHours,
-  subMonths,
-} from 'date-fns'
+import { addMonths, isSameMonth, lastDayOfMonth, subMonths } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
@@ -19,12 +12,12 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
-import style from './month-picker.styles'
+import MonthPickerStyles from './month-picker.styles'
 
 /**
  * Used to customize the appearance of a date in the month picker.
  */
-export type CustomizedDate = {
+export type MonthCustomizedDate = {
   /**
    * The date to customize.
    */
@@ -63,7 +56,7 @@ const months = [
 
 /**
  * @element gds-month-picker
- * @status stable
+ * @status beta
  *
  * A month-picker is a widget that allows the user to select a month.
  *
@@ -73,7 +66,7 @@ const months = [
 @gdsCustomElement('gds-month-picker')
 @localized()
 export class GdsMonthPicker extends GdsElement {
-  static styles = [tokens, style]
+  static styles = [tokens, MonthPickerStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
