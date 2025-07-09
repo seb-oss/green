@@ -37,7 +37,7 @@ export function FoundationClient() {
         </Link>
         <GdsText>Foundation</GdsText>
       </GdsBreadcrumbs>
-      <GdsFlex flex-direction="column" max-width="120ch" gap="4xl">
+      <GdsFlex flex-direction="column" gap="4xl">
         <GdsFlex flex-direction="column" gap="s">
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
           <GdsText
@@ -57,7 +57,7 @@ export function FoundationClient() {
           />
         )}
       </GdsFlex>
-      <GdsFlex gap="l" flex-direction="column">
+      <GdsFlex gap="l" flex-direction="column" width="100%">
         <GdsFlex gap="s" flex-direction="column">
           <GdsText tag="h2">Core Resources</GdsText>
           <GdsText
