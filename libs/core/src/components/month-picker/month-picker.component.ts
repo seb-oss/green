@@ -14,31 +14,6 @@ import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
 import MonthPickerStyles from './month-picker.styles'
 
-/**
- * Used to customize the appearance of a date in the month picker.
- */
-export type MonthCustomizedDate = {
-  /**
-   * The date to customize.
-   */
-  date: Date
-
-  /**
-   * The color of the indicator.
-   */
-  color?: string
-
-  /**
-   * The type of indicator.
-   */
-  indicator?: 'dot'
-
-  /**
-   * Whether the date is disabled or not.
-   */
-  disabled: boolean
-}
-
 const months = [
   msg('January'),
   msg('February'),

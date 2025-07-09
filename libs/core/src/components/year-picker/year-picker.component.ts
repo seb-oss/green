@@ -13,31 +13,6 @@ import { dateConverter } from '../../utils/helpers/attribute-converters'
 import YearPickerStyles from './year-picker.styles'
 
 /**
- * Used to customize the appearance of a date in the year picker.
- */
-export type YearCustomizedDate = {
-  /**
-   * The date to customize.
-   */
-  date: Date
-
-  /**
-   * The color of the indicator.
-   */
-  color?: string
-
-  /**
-   * The type of indicator.
-   */
-  indicator?: 'dot'
-
-  /**
-   * Whether the date is disabled or not.
-   */
-  disabled: boolean
-}
-
-/**
  * @element gds-year-picker
  * @status beta
  *
