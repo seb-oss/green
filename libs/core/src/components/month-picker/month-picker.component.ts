@@ -131,7 +131,7 @@ export class GdsMonthPicker extends GdsElement {
   size: 'small' | 'large' = 'large'
 
   /**
-   * If the month number should be displayed after the month name
+   * If the month number should be displayed instead of month name
    */
   @property({ type: Boolean, attribute: 'month-number' })
   monthNumber = false

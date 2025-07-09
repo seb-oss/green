@@ -94,8 +94,7 @@ export const ShortAndSmall: Story = {
 }
 
 /**
- * Use the the `month-number` attribute to show parantese
- * with the number of the month in it (1-12).
+ * Use the the `month-number` attribute to show the month number instead of the name.
  */
 export const MonthNumber: Story = {
   ...DefaultParams,
