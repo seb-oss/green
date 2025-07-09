@@ -214,8 +214,7 @@ export class GdsMonthPicker extends GdsElement {
                             : this.#setSelectedMonth(index)}
                         id="monthCell-${index}"
                       >
-                        ${this.shortMonthText ? month.substring(0, 3) : month}
-                        ${this.monthNumber ? ' (' + (index + 1) + ')' : ''}
+                        ${this.#getMonthText(index)}
                       </td>`,
                     () => html`<td inert></td>`,
                   )
@@ -225,6 +224,13 @@ export class GdsMonthPicker extends GdsElement {
         )}
       </tbody>
     </table>`
+  }
+
+  #getMonthText(index: number) {
+    if (this.monthNumber) return index
+    const month = months[index]
+    if (this.shortMonthText) return month.substring(0, 3)
+    return month
   }
 
   #getSelectedMonth(): number {
