@@ -6,12 +6,12 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 import { addMonths, isSameMonth, lastDayOfMonth, subMonths } from 'date-fns'
 
-import { GdsElement } from '../../gds-element'
-import { gdsCustomElement } from '../../scoping'
-import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
-import { watch } from '../../utils/decorators/watch'
-import { dateConverter } from '../../utils/helpers/attribute-converters'
+import { GdsElement } from '../../../gds-element'
+import { gdsCustomElement } from '../../../scoping'
+import { tokens } from '../../../tokens.style'
+import { TransitionalStyles } from '../../../transitional-styles'
+import { watch } from '../../../utils/decorators/watch'
+import { dateConverter } from '../../../utils/helpers/attribute-converters'
 import MonthPickerStyles from './month-picker.styles'
 
 const months = [

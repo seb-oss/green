@@ -4,7 +4,7 @@ import { sendKeys } from '@web/test-runner-commands'
 import { addDays, addMonths, subMonths } from 'date-fns'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { onlyDate } from '../../utils/testing'
+import { onlyDate } from '../../../utils/testing'
 
 import type { GdsMonthPicker } from './month-picker'
 

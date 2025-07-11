@@ -4,12 +4,12 @@ import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
 
-import { GdsElement } from '../../gds-element'
-import { gdsCustomElement } from '../../scoping'
-import { tokens } from '../../tokens.style'
-import { TransitionalStyles } from '../../transitional-styles'
-import { watch } from '../../utils/decorators/watch'
-import { dateConverter } from '../../utils/helpers/attribute-converters'
+import { GdsElement } from '../../../gds-element'
+import { gdsCustomElement } from '../../../scoping'
+import { tokens } from '../../../tokens.style'
+import { TransitionalStyles } from '../../../transitional-styles'
+import { watch } from '../../../utils/decorators/watch'
+import { dateConverter } from '../../../utils/helpers/attribute-converters'
 import YearPickerStyles from './year-picker.styles'
 
 /**

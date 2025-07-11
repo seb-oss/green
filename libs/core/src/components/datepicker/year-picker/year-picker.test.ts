@@ -6,7 +6,7 @@ import { addDays, addYears, subYears } from 'date-fns'
 import type { GdsButton } from '@sebgroup/green-core/components/button'
 
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
-import { onlyDate } from '../../utils/testing'
+import { onlyDate } from '../../../utils/testing'
 
 import type { GdsYearPicker } from './year-picker'
 

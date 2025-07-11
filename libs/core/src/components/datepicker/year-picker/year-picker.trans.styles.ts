@@ -1,4 +1,4 @@
-import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
+import { TransitionalStyles } from '../../../utils/transitional-styles/transitional-styles'
 import styles from './year-picker.trans.styles.scss?inline'
 
 export function register() {
