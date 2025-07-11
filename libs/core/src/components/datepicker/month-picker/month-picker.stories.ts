@@ -10,14 +10,14 @@ import '../../button/index.ts'
 import '../../icon/icons/calendar.ts'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/month-picker)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/datepicker/month-picker)
  *
  * The month picker component is a visual representation of a year that allows users
  * to select a month. Keys to use: arrow-keys, home, and end to focus a month
  * and enter or space to select it.
  */
 const meta: Meta = {
-  title: 'Components/Month picker',
+  title: 'Components/Datepicker/Month picker',
   component: 'gds-month-picker',
   parameters: {
     layout: 'centered',

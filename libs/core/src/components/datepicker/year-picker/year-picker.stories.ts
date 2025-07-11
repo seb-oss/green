@@ -2,7 +2,7 @@ import { html } from 'lit'
 
 import type { Meta, StoryObj } from '@storybook/web-components'
 
-import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
+import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
 
 import './index.ts'
 import '../popover/index.ts'
@@ -13,14 +13,14 @@ import '../icon/icons/chevron-right.ts'
 import '../flex'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/year-picker)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/datepicker/year-picker)
  *
  * The year picker component is a visual representation of a many years that allows users
  * to select a year. Keys to use: arrow-keys, home, and end to focus a year
  * and enter or space to select it.
  */
 const meta: Meta = {
-  title: 'Components/Year picker',
+  title: 'Components/Datepicker/Year picker',
   component: 'gds-year-picker',
   parameters: {
     layout: 'centered',
