@@ -5,9 +5,9 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { argTablePropsFor } from '../../../../.storybook/argTableProps.ts'
 
 import './index.ts'
-import '../../popover/index.ts'
-import '../../button/index.ts'
-import '../../icon/icons/calendar.ts'
+import '../../../popover/index.ts'
+import '../../../button/index.ts'
+import '../../../icon/icons/calendar.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/datepicker/month-picker)
