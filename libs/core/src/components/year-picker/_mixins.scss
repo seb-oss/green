@@ -93,12 +93,6 @@ $today-background: transparent;
       font-weight: $date-weight;
       user-select: none;
 
-      /* weekend */
-      &.sg-date-holiday:not(.disabled) {
-        background: $weekend-background;
-        color: $weekend-color;
-      }
-
       /* today */
       &.today {
         background: $today-background;
