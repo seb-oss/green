@@ -256,7 +256,8 @@ describe('<gds-year-picker>', () => {
       await expect(el.focusedYear).to.equal(2030)
     })
 
-    /*it('should have correct focused year when pressing the previous years button - 9', async () => {
+    /* // Temporarily disabled - doesn't work
+    it('should have correct focused year when pressing the previous years button - 9', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
           .min=${new Date('1900-01-01')}
@@ -300,7 +301,8 @@ describe('<gds-year-picker>', () => {
   })
 
   describe('API', () => {
-    /*it('should handle click on previous years button', async () => {
+    /* // Temporarily disabled - doesn't work
+    it('should handle click on previous years button', async () => {
       const el = await fixture<GdsYearPicker>(
         html`<gds-year-picker
           change-years-controls
