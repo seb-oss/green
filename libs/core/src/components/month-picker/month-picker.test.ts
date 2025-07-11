@@ -250,7 +250,7 @@ describe('<gds-month-picker>', () => {
       expect(el.value).to.equal(undefined)
     })
 
-    it('should show short name', async () => {
+    it('should show month number', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
           .min=${new Date('2024-01-01')}
@@ -259,15 +259,15 @@ describe('<gds-month-picker>', () => {
         ></gds-month-picker>`,
       )
 
-      el.focusedDate = new Date('2024-02-01')
+      el.focusedDate = new Date('2024-11-01')
       await el.updateComplete
 
       expect(
-        el.shadowRoot?.querySelector('#monthCell-1')?.innerHTML,
-      ).to.contain('(2)')
+        el.shadowRoot?.querySelector('#monthCell-10')?.innerHTML,
+      ).to.contain('11')
     })
 
-    it('should show month number', async () => {
+    it('should show short name', async () => {
       const el = await fixture<GdsMonthPicker>(
         html`<gds-month-picker
           .min=${new Date('2024-01-01')}
