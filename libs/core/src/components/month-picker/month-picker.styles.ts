@@ -79,16 +79,6 @@ const style = css`
           line-height: var(--gds-sys-text-line-height-detail-s);
         }
       }
-
-      .indicator-dot {
-        display: flex;
-        position: absolute;
-        width: var(--gds-sys-space-2xs);
-        height: var(--gds-sys-space-2xs);
-        border-radius: var(--gds-sys-space-max);
-        background-color: var(--_color, currentColor);
-        inset: var(--gds-sys-space-2xs) var(--gds-sys-space-2xs) auto auto;
-      }
     }
   }
 `
