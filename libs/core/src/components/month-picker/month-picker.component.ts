@@ -227,7 +227,7 @@ export class GdsMonthPicker extends GdsElement {
   }
 
   #getMonthText(index: number) {
-    if (this.monthNumber) return index
+    if (this.monthNumber) return index + 1
     const month = months[index]
     if (this.shortMonthText) return month.substring(0, 3)
     return month
