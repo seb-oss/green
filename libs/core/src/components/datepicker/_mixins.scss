@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/scss/common';
 
 $background: var(--sg-bg-level-2);
 $dialog-border-color: hsl(var(--sg-hsl-blue-1));
@@ -52,7 +52,7 @@ $today-color: $selected-background;
 $today-border-radius: $selected-border-radius;
 $today-background: transparent;
 
-@mixin month-picker() {
+@mixin date-picker() {
   display: flex;
   justify-content: center;
 
