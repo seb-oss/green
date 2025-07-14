@@ -35,6 +35,7 @@ import { GdsPopover } from '../popover/popover.component'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { styles } from './datepicker.styles'
 import { GdsMonthPicker } from './month-picker'
+import { GdsYearPicker } from './year-picker'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -460,6 +461,19 @@ class Datepicker extends GdsFormControlElement<Date> {
               </gds-button>
               <div style="padding: 1rem 0 0 1.5rem">Month</div>
               <gds-month-picker id="monthp"> </gds-month-picker>
+            </gds-popover>
+            <gds-popover id="popchange">
+              <gds-button rank="secondary" slot="trigger">
+                <span id="selected-year2">Choose a year</span>
+                <gds-icon-calendar slot="trail"></gds-icon-calendar>
+              </gds-button>
+              <gds-year-picker
+                id="yearp"
+                min="1950-01-01"
+                max="2100-01-01"
+                change-years-controls
+              >
+              </gds-year-picker>
             </gds-popover>
           </gds-flex>
 
@@ -911,6 +925,7 @@ class Datepicker extends GdsFormControlElement<Date> {
     IconChevronLeft,
     IconChevronRight,
     GdsMonthPicker,
+    GdsYearPicker,
   ],
 })
 export class GdsDatepicker extends withSizeXProps(
