@@ -34,6 +34,7 @@ import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsPopover } from '../popover/popover.component'
 import { GdsDatePartSpinner } from './date-part-spinner'
 import { styles } from './datepicker.styles'
+import { GdsMonthPicker } from './month-picker'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -444,6 +445,22 @@ class Datepicker extends GdsFormControlElement<Date> {
             >
               <gds-icon-chevron-right></gds-icon-chevron-right>
             </gds-button>
+          </gds-flex>
+
+          <gds-flex
+            align-items="center"
+            justify-content="space-between"
+            gap="s"
+            padding="m m 0 m"
+          >
+            <gds-popover id="pop">
+              <gds-button rank="secondary" slot="trigger">
+                <span id="selected-month">Month</span>
+                <gds-icon-calendar slot="trail"></gds-icon-calendar>
+              </gds-button>
+              <div style="padding: 1rem 0 0 1.5rem">Month</div>
+              <gds-month-picker id="monthp"> </gds-month-picker>
+            </gds-popover>
           </gds-flex>
 
           <gds-calendar
@@ -893,6 +910,7 @@ class Datepicker extends GdsFormControlElement<Date> {
     IconCalenderAdd,
     IconChevronLeft,
     IconChevronRight,
+    GdsMonthPicker,
   ],
 })
 export class GdsDatepicker extends withSizeXProps(
