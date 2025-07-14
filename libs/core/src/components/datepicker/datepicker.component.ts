@@ -460,7 +460,8 @@ class Datepicker extends GdsFormControlElement<Date> {
                 <gds-icon-calendar slot="trail"></gds-icon-calendar>
               </gds-button>
               <div style="padding: 1rem 0 0 1.5rem">Month</div>
-              <gds-month-picker id="monthp"> </gds-month-picker>
+              <gds-month-picker id="monthp" .min=${this.min} .max=${this.max}>
+              </gds-month-picker>
             </gds-popover>
             <gds-popover id="popchange">
               <gds-button rank="secondary" slot="trigger">
@@ -469,8 +470,8 @@ class Datepicker extends GdsFormControlElement<Date> {
               </gds-button>
               <gds-year-picker
                 id="yearp"
-                min="1950-01-01"
-                max="2100-01-01"
+                .min=${this.min}
+                .max=${this.max}
                 change-years-controls
               >
               </gds-year-picker>
