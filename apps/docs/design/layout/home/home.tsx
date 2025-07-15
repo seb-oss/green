@@ -21,6 +21,7 @@ import { useContentContext } from '../../../settings/content'
 import { Link } from '../../atoms/link/link'
 import { Snippet } from '../../atoms/snippet/snippet'
 import { LAYOUT_UTILS } from '../config'
+import Hero from './hero/hero'
 
 import type { PageProps } from '../types'
 
@@ -72,11 +73,15 @@ export function Home({
         >
           {homeContent?.summary}
         </GdsText>
-        {homeContent?.hero && (
+        {/* {homeContent?.hero && (
           <GdsCard height="60vh">
             <Snippet slug={homeContent?.hero} />
           </GdsCard>
-        )}
+        )} */}
+
+        <GdsCard height="70vh">
+          <Hero />
+        </GdsCard>
       </GdsFlex>
 
       <GdsFlex flex-direction="column" gap="xl" align-items="flex-start">
