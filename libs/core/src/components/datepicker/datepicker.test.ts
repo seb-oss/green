@@ -33,23 +33,23 @@ describe('<gds-datepicker>', () => {
   describe('API', () => {
     it('should set the value', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
-      await expect(el.value).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.value).to.deep.equal(new Date('01-01-2024'))
     })
 
     it('should set the min', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker min="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker min="01-01-2024"></gds-datepicker>`,
       )
-      await expect(el.min).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.min).to.deep.equal(new Date('01-01-2024'))
     })
 
     it('should set the max', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker max="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker max="01-01-2024"></gds-datepicker>`,
       )
-      await expect(el.max).to.deep.equal(new Date('2024-01-01'))
+      await expect(el.max).to.deep.equal(new Date('01-01-2024'))
     })
 
     it('should set open', async () => {
@@ -98,7 +98,7 @@ describe('<gds-datepicker>', () => {
 
     it('should dispatch a change event when the value is changed by the user', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-10"></gds-datepicker>`,
+        html`<gds-datepicker value="10-01-2024"></gds-datepicker>`,
       )
       const changeHandler = sinon.fake()
       el.addEventListener('change', changeHandler)
@@ -123,7 +123,7 @@ describe('<gds-datepicker>', () => {
 
     it('should reset when setting value to undefined', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-10"></gds-datepicker>`,
+        html`<gds-datepicker value="10-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -140,7 +140,7 @@ describe('<gds-datepicker>', () => {
     it('should reset when form is reset', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<form>
-          <gds-datepicker id="datepicker" value="2024-01-10"></gds-datepicker>
+          <gds-datepicker id="datepicker" value="10-01-2024"></gds-datepicker>
           <button type="reset">Reset</button>
         </form>`,
       )
@@ -164,18 +164,18 @@ describe('<gds-datepicker>', () => {
 
     it('should return a focused date', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-10" open></gds-datepicker>`,
+        html`<gds-datepicker value="10-01-2024" open></gds-datepicker>`,
       )
       const focusedDate = await el.getFocusedDate()
 
       await expect(onlyDate(focusedDate!)).to.equal(
-        onlyDate(new Date('2024-01-10')),
+        onlyDate(new Date('10-01-2024')),
       )
     })
 
     it('should not return a focused date if the popover is closed', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-10"></gds-datepicker>`,
+        html`<gds-datepicker value="10-01-2024"></gds-datepicker>`,
       )
       const focusedDate = await el.getFocusedDate()
 
@@ -185,7 +185,7 @@ describe('<gds-datepicker>', () => {
     it('Setting `disabled-weekends` should disable weekends', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker
-          value="2024-01-10"
+          value="10-01-2024"
           disabled-weekends
           open
         ></gds-datepicker>`,
@@ -201,8 +201,8 @@ describe('<gds-datepicker>', () => {
     it('Setting `disabled-dates` should disable dates', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker
-          value="2024-01-10"
-          disabled-dates="2024-01-13"
+          value="10-01-2024"
+          disabled-dates="13-01-2024"
           open
         ></gds-datepicker>`,
       )
@@ -245,7 +245,7 @@ describe('<gds-datepicker>', () => {
 
     it('should always return a unique Date instance from the value property', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-31"></gds-datepicker>`,
+        html`<gds-datepicker value="31-01-2024"></gds-datepicker>`,
       )
 
       const date1 = el.value!
@@ -316,7 +316,7 @@ describe('<gds-datepicker>', () => {
     })
     it('should increment the spinner value when pressing the up arrow', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -331,7 +331,7 @@ describe('<gds-datepicker>', () => {
     })
     it('should decrement the spinner value when pressing the down arrow', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -346,7 +346,7 @@ describe('<gds-datepicker>', () => {
     })
     it('should focus the next spinner when pressing the right arrow', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -361,7 +361,7 @@ describe('<gds-datepicker>', () => {
     })
     it('should focus the previous spinner when pressing the left arrow', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -376,7 +376,7 @@ describe('<gds-datepicker>', () => {
     })
     it('should set year to 20 when typing 20 in the year spinner', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -484,7 +484,7 @@ describe('<gds-datepicker>', () => {
     // TODO: Re-enable once we've found a solution to the ResizeObserver error that  cause the test to fail in CI
     // it('should give calendar keyboard focus after opening the popover', async () => {
     //   const el = await fixture<GdsDatepicker>(
-    //     html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+    //     html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
     //   )
 
     //   const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
@@ -500,12 +500,12 @@ describe('<gds-datepicker>', () => {
     //     press: 'Enter',
     //   })
 
-    //   expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('2024-01-01')))
+    //   expect(onlyDate(el.value!)).to.equal(onlyDate(new Date('01-01-2024')))
     // })
 
     it('should set spinners to yyyy, mm and dd when date is undefined', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
@@ -522,7 +522,7 @@ describe('<gds-datepicker>', () => {
     // TODO: Re-enable once we've found a solution to the ResizeObserver error that  cause the test to fail in CI
     // it('should emit input event when navigating with arrow keys in calendar popover', async () => {
     //   const el = await fixture<GdsDatepicker>(
-    //     html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+    //     html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
     //   )
     //   const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
     //     '[aria-controls="calendar-popover"]',
@@ -543,7 +543,7 @@ describe('<gds-datepicker>', () => {
 
     it('should reset to initial value when pressing escape in the popover', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker value="01-01-2024"></gds-datepicker>`,
       )
       const button = el.shadowRoot!.querySelector<HTMLButtonElement>(
         '[aria-controls="calendar-popover"]',
@@ -568,7 +568,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
 
       await expect(onlyDate(el.value!)).to.equal(
-        onlyDate(new Date('2024-01-01')),
+        onlyDate(new Date('01-01-2024')),
       )
     })
 
