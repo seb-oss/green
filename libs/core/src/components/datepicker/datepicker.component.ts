@@ -130,7 +130,7 @@ class Datepicker extends GdsFormControlElement<Date> {
    *
    * This will determine the structure of the input field.
    *
-   * Defaults to `y-m-d`.
+   * Defaults to `d-m-y`.
    */
   @property()
   get dateformat() {
@@ -216,7 +216,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   private _focusedYear = new Date().getFullYear()
 
   @state()
-  private _dateFormatLayout = this.#parseDateFormat('y-m-d')
+  private _dateFormatLayout = this.#parseDateFormat('d-m-y')
 
   @queryAsync('#calendar')
   private _elCalendar!: Promise<GdsCalendar>
