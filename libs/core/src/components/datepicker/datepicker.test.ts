@@ -80,18 +80,18 @@ describe('<gds-datepicker>', () => {
       const separator =
         el.shadowRoot!.querySelector<HTMLSpanElement>('.separator')!
 
-      await expect(spinners[0].getAttribute('aria-label').trim()).to.equal(
+      await expect(spinners[2].getAttribute('aria-label').trim()).to.equal(
         'Day',
       )
-      await expect(spinners[0].length).to.equal(2)
+      await expect(spinners[2].length).to.equal(2)
       await expect(spinners[1].getAttribute('aria-label').trim()).to.equal(
         'Month',
       )
       await expect(spinners[1].length).to.equal(2)
-      await expect(spinners[2].getAttribute('aria-label').trim()).to.equal(
+      await expect(spinners[0].getAttribute('aria-label').trim()).to.equal(
         'Year',
       )
-      await expect(spinners[2].length).to.equal(4)
+      await expect(spinners[0].length).to.equal(4)
       await expect(separator.textContent).to.equal('/')
       await expect(el.dateformat).to.equal('d/m/y')
     })
@@ -106,7 +106,7 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
 
       await sendKeys({
         type: '20',
@@ -129,12 +129,12 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
 
-      await expect(spinners[0].value.toString()).to.equal('2024')
+      await expect(spinners[2].value.toString()).to.equal('2024')
 
       el.value = undefined
       await el.updateComplete
 
-      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[2].value.toString()).to.equal('yyyy')
     })
 
     it('should reset when form is reset', async () => {
@@ -153,13 +153,13 @@ describe('<gds-datepicker>', () => {
           getScopedTagName('gds-date-part-spinner'),
         )!
 
-      await expect(spinners[0].value.toString()).to.equal('2024')
+      await expect(spinners[2].value.toString()).to.equal('2024')
 
       // Trigger reset
       resetButton.click()
       await aTimeout(0)
 
-      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[2].value.toString()).to.equal('yyyy')
     })
 
     it('should return a focused date', async () => {
@@ -254,7 +254,7 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
       await sendKeys({
         press: 'ArrowUp',
       })
@@ -296,7 +296,7 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       const focusHandler = sinon.fake()
-      spinners[0].addEventListener('focus', focusHandler)
+      spinners[2].addEventListener('focus', focusHandler)
       await clickOnElement(label)
       await expect(focusHandler.calledOnce).to.be.true
     })
@@ -308,7 +308,7 @@ describe('<gds-datepicker>', () => {
         getScopedTagName('gds-date-part-spinner'),
       )!
       const focusHandler = sinon.fake()
-      spinners[0].addEventListener('focus', focusHandler)
+      spinners[2].addEventListener('focus', focusHandler)
       await clickOnElement(el)
       await aTimeout(0)
       await el.updateComplete
@@ -321,13 +321,13 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
       await sendKeys({
         press: 'ArrowUp',
       })
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('2025')
+      await expect(spinners[2].value.toString()).to.equal('2025')
     })
     it('should decrement the spinner value when pressing the down arrow', async () => {
       const el = await fixture<GdsDatepicker>(
@@ -336,13 +336,13 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
       await sendKeys({
         press: 'ArrowDown',
       })
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('2023')
+      await expect(spinners[2].value.toString()).to.equal('2023')
     })
     it('should focus the next spinner when pressing the right arrow', async () => {
       const el = await fixture<GdsDatepicker>(
@@ -351,7 +351,7 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
       await sendKeys({
         press: 'ArrowRight',
       })
@@ -372,7 +372,7 @@ describe('<gds-datepicker>', () => {
       })
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('2024')
+      await expect(spinners[2].value.toString()).to.equal('2024')
     })
     it('should set year to 20 when typing 20 in the year spinner', async () => {
       const el = await fixture<GdsDatepicker>(
@@ -381,13 +381,13 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
       await sendKeys({
         type: '20',
       })
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('20')
+      await expect(spinners[2].value.toString()).to.equal('20')
     })
     it('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
       const el = await fixture<GdsDatepicker>(
@@ -396,7 +396,7 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
       await sendKeys({
         type: '1',
       })
@@ -405,7 +405,7 @@ describe('<gds-datepicker>', () => {
       })
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('1900')
+      await expect(spinners[2].value.toString()).to.equal('1900')
     })
 
     // Temporarily disabled
@@ -458,7 +458,7 @@ describe('<gds-datepicker>', () => {
       const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
         getScopedTagName('gds-date-part-spinner'),
       )!
-      spinners[0].focus()
+      spinners[2].focus()
 
       await sendKeys({
         type: '2024',
@@ -513,9 +513,9 @@ describe('<gds-datepicker>', () => {
       el.value = undefined
       await aTimeout(0)
       await el.updateComplete
-      await expect(spinners[0].value.toString()).to.equal('yyyy')
+      await expect(spinners[2].value.toString()).to.equal('yyyy')
       await expect(spinners[1].value.toString()).to.equal('mm')
-      await expect(spinners[2].value.toString()).to.equal('dd')
+      await expect(spinners[0].value.toString()).to.equal('dd')
     })
 
     // Temporarily disabled
