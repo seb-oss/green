@@ -22,7 +22,7 @@ export default function Hero() {
         align-items="center"
         justify-content="center"
         color="positive"
-        data-name="Wide top left card"
+        data-name="signal"
       >
         <Core.GdsSignal />
       </Core.GdsCard>
@@ -33,7 +33,7 @@ export default function Hero() {
         height="100%"
         align-items="center"
         justify-content="center"
-        data-name="Wide top left card"
+        data-name="buttons"
       >
         <Core.GdsFlex gap="s" align-items="center">
           <Core.GdsButton size="small">Primary</Core.GdsButton>
@@ -51,15 +51,13 @@ export default function Hero() {
         grid-column="13 / 17"
         grid-row="1 / 2"
         height="100%"
-        data-name="Small top right card"
+        data-name="checkbox"
         justify-content="center"
         align-items="center"
       >
         <Core.GdsCheckbox checked label="Publish"></Core.GdsCheckbox>
-        {/* <Core.GdsBadge variant="positive">Success</Core.GdsBadge> */}
       </Core.GdsCard>
 
-      {/* Middle section with square logo */}
       <Core.GdsCard
         variant="secondary"
         grid-column="1 / 11"
@@ -67,12 +65,12 @@ export default function Hero() {
         height="100%"
         justify-content="center"
         align-items="center"
-        data-name="Middle section with square logo"
+        data-name="textarea"
       >
         <Core.GdsTextarea
           width="80%"
           rows={12}
-          label="Design System"
+          label="Green for web"
           supportingText="Building blocks for digital experiences"
           showExtendedSupportingText
           clearable
@@ -89,7 +87,7 @@ export default function Hero() {
         grid-column="11 / 17"
         grid-row="2 / 4"
         height="100%"
-        data-main="main brand"
+        data-main="gds"
         justify-content="center"
         align-items="center"
         color="primary"
@@ -132,16 +130,10 @@ export default function Hero() {
         grid-column="15 / 25"
         grid-row="4 / 5"
         height="100%"
-        data-name="Right part of large center"
+        data-name="segmented-control"
         justify-content="center"
         align-items="center"
       >
-        {/* <Core.GdsFlex width="94%">
-          <Core.GdsDropdown open>
-            <Core.GdsOption>Nice init!</Core.GdsOption>
-          </Core.GdsDropdown>
-        </Core.GdsFlex> */}
-
         <Core.GdsSegmentedControl value="2" width="max-content">
           <Core.GdsSegment value="1">
             <Core.GdsFlex
@@ -176,7 +168,6 @@ export default function Hero() {
         </Core.GdsSegmentedControl>
       </Core.GdsCard>
 
-      {/* Right column */}
       <Core.GdsCard
         variant="secondary"
         grid-column="17 / 25"
@@ -184,7 +175,7 @@ export default function Hero() {
         height="100%"
         justify-content="center"
         align-items="center"
-        data-name="tall right card"
+        data-name="colors"
       >
         <Core.GdsFlex gap="m" align-items="center">
           <Core.GdsGrid columns="3" gap="s" width="200px">
@@ -246,7 +237,7 @@ export default function Hero() {
         height="100%"
         justify-content="center"
         align-items="center"
-        data-name="tall right card"
+        data-name="badge"
       >
         <Core.GdsBadge variant="positive" notification size="small">
           999+
@@ -261,7 +252,7 @@ export default function Hero() {
         justify-content="center"
         align-items="center"
         color="primary"
-        data-name="tall right card"
+        data-name="icons"
       >
         <Core.GdsFlex alig-items="center" gap="m">
           <Core.IconAi size="l"></Core.IconAi>
@@ -275,7 +266,7 @@ export default function Hero() {
         grid-column="11 / 15"
         grid-row="4 / 4"
         height="100%"
-        data-name="Wide bottom right card"
+        data-name="spinner"
         position="relative"
         align-items="center"
         justify-content="center"
