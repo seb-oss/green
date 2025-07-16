@@ -1,10 +1,10 @@
 .home-hero {
-  pointer-events: none;
-  user-select: none;
+  /* pointer-events: none; */
+  /* user-select: none; */
 
-  * {
+  /* * {
     pointer-events: none;
-  }
+  } */
 
   [data-name] {
     transition: all 420ms;

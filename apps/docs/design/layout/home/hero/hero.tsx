@@ -13,6 +13,7 @@ export default function Hero() {
       height="100vh"
       padding="0"
       className="home-hero"
+      role="presentation"
     >
       <Core.GdsCard
         variant="secondary"
