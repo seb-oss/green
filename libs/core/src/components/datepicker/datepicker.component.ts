@@ -455,7 +455,12 @@ class Datepicker extends GdsFormControlElement<Date> {
             padding="m m 0 m"
           >
             <gds-popover id="pop-month">
-              <gds-button rank="secondary" slot="trigger">
+              <gds-button
+                rank="secondary"
+                slot="trigger"
+                size="small"
+                aria-label=${msg('Month')}
+              >
                 <span id="selected-month">Month</span>
                 <gds-icon-calendar slot="trail"></gds-icon-calendar>
               </gds-button>
@@ -469,7 +474,12 @@ class Datepicker extends GdsFormControlElement<Date> {
               </gds-month-picker>
             </gds-popover>
             <gds-popover id="pop-year">
-              <gds-button rank="secondary" slot="trigger">
+              <gds-button
+                rank="secondary"
+                slot="trigger"
+                size="small"
+                aria-label=${msg('Year')}
+              >
                 <span id="selected-year">Year</span>
                 <gds-icon-calendar slot="trail"></gds-icon-calendar>
               </gds-button>
@@ -477,7 +487,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 id="yearp"
                 .min=${this.min}
                 .max=${this.max}
-                change-years-controls
+                .change-years-controls=${this.#controlsNeeded}
                 @change=${this.#handleYearChange2}
               >
               </gds-year-picker>
@@ -767,6 +777,20 @@ class Datepicker extends GdsFormControlElement<Date> {
     if (date) this._focusedYear = date.getFullYear()
     const popmonth = document.getElementById('pop-year') as GdsPopover
     if (popmonth) popmonth.open = false
+  }
+
+  #controlsNeeded() {
+    const yearp = document.getElementById('yearp') as GdsYearPicker
+
+    if (
+      yearp &&
+      (this.min.getFullYear() < yearp.getStartYear() ||
+        this.max.getFullYear() >
+          yearp.getStartYear() + yearp.rows * yearp.columns)
+    ) {
+      return true
+    }
+    return false
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
