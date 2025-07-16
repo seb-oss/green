@@ -188,3 +188,17 @@ export const Simplified: Story = {
     ></gds-datepicker>
   `,
 }
+
+/**
+ * The year picker have next and previous years button controls.
+ */
+export const YearPicker: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker
+      label="Show controls in year picker"
+      min="1950-01-01"
+      max="2100-01-01"
+    ></gds-datepicker>
+  `,
+}
