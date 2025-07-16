@@ -12,7 +12,7 @@ import { tokens } from '../../../tokens.style'
 import { TransitionalStyles } from '../../../transitional-styles'
 import { watch } from '../../../utils/decorators/watch'
 import { dateConverter } from '../../../utils/helpers/attribute-converters'
-import MonthPickerStyles from '../datepicker-common.styles'
+import MonthPickerStyles from '../common/datepicker.styles'
 
 const months = [
   msg('January'),

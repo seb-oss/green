@@ -10,7 +10,7 @@ import { tokens } from '../../../tokens.style'
 import { TransitionalStyles } from '../../../transitional-styles'
 import { watch } from '../../../utils/decorators/watch'
 import { dateConverter } from '../../../utils/helpers/attribute-converters'
-import YearPickerStyles from '../datepicker-common.styles'
+import YearPickerStyles from '../common/datepicker.styles'
 
 /**
  * @element gds-year-picker
