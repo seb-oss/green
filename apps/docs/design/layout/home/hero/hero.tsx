@@ -87,7 +87,7 @@ export default function Hero() {
         grid-column="11 / 17"
         grid-row="2 / 4"
         height="100%"
-        data-main="gds"
+        data-name="gds"
         justify-content="center"
         align-items="center"
         color="primary"
@@ -177,58 +177,56 @@ export default function Hero() {
         align-items="center"
         data-name="colors"
       >
-        <Core.GdsFlex gap="m" align-items="center">
-          <Core.GdsGrid columns="3" gap="s" width="200px">
-            <Core.GdsCard
-              level="3"
-              padding="0"
-              variant="primary"
-              border-radius="max"
-              width="100%"
-              height="10px"
-            />
-            <Core.GdsCard
-              level="3"
-              padding="0"
-              variant="notice"
-              border-radius="max"
-              width="100%"
-              height="10px"
-            />
-            <Core.GdsCard
-              level="3"
-              padding="0"
-              variant="warning"
-              border-radius="max"
-              width="100%"
-              height="10px"
-            />
-            <Core.GdsCard
-              level="3"
-              padding="0"
-              variant="positive-secondary"
-              border-radius="max"
-              width="100%"
-              height="10px"
-            />
-            <Core.GdsCard
-              level="3"
-              padding="0"
-              variant="notice-secondary"
-              border-radius="max"
-              width="100%"
-              height="10px"
-            />
-            <Core.GdsCard
-              level="3"
-              padding="0"
-              variant="warning-secondary"
-              border-radius="max"
-              width="100%"
-              height="10px"
-            />
-          </Core.GdsGrid>
-        </Core.GdsFlex>
+        <Core.GdsGrid columns="3" gap="s" width="200px" height="max-content">
+          <Core.GdsCard
+            level="3"
+            padding="0"
+            variant="primary"
+            border-radius="max"
+            width="60px"
+            height="10px"
+          />
+          <Core.GdsCard
+            level="3"
+            padding="0"
+            variant="notice"
+            border-radius="max"
+            width="60px"
+            height="10px"
+          />
+          <Core.GdsCard
+            level="3"
+            padding="0"
+            variant="warning"
+            border-radius="max"
+            width="60px"
+            height="10px"
+          />
+          <Core.GdsCard
+            level="3"
+            padding="0"
+            variant="positive-secondary"
+            border-radius="max"
+            width="60px"
+            height="10px"
+          />
+          <Core.GdsCard
+            level="3"
+            padding="0"
+            variant="notice-secondary"
+            border-radius="max"
+            width="60px"
+            height="10px"
+          />
+          <Core.GdsCard
+            level="3"
+            padding="0"
+            variant="warning-secondary"
+            border-radius="max"
+            width="60px"
+            height="10px"
+          />
+        </Core.GdsGrid>
       </Core.GdsCard>
       <Core.GdsCard
         variant="secondary"
