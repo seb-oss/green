@@ -454,18 +454,23 @@ class Datepicker extends GdsFormControlElement<Date> {
             gap="s"
             padding="m m 0 m"
           >
-            <gds-popover id="pop">
+            <gds-popover id="pop-month">
               <gds-button rank="secondary" slot="trigger">
                 <span id="selected-month">Month</span>
                 <gds-icon-calendar slot="trail"></gds-icon-calendar>
               </gds-button>
               <div style="padding: 1rem 0 0 1.5rem">Month</div>
-              <gds-month-picker id="monthp" .min=${this.min} .max=${this.max}>
+              <gds-month-picker
+                id="monthp"
+                .min=${this.min}
+                .max=${this.max}
+                @change=${this.#handleMonthChange2}
+              >
               </gds-month-picker>
             </gds-popover>
-            <gds-popover id="popchange">
+            <gds-popover id="pop-year">
               <gds-button rank="secondary" slot="trigger">
-                <span id="selected-year2">Choose a year</span>
+                <span id="selected-year">Year</span>
                 <gds-icon-calendar slot="trail"></gds-icon-calendar>
               </gds-button>
               <gds-year-picker
@@ -473,6 +478,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 .min=${this.min}
                 .max=${this.max}
                 change-years-controls
+                @change=${this.#handleYearChange2}
               >
               </gds-year-picker>
             </gds-popover>
@@ -742,9 +748,25 @@ class Datepicker extends GdsFormControlElement<Date> {
     this._focusedMonth = (e.target as GdsDropdown)?.value
   }
 
+  #handleMonthChange2 = (e: CustomEvent) => {
+    e.stopPropagation()
+    const date = (e.target as GdsMonthPicker)?.value
+    if (date) this._focusedMonth = date.getMonth()
+    const popmonth = document.getElementById('pop-month') as GdsPopover
+    if (popmonth) popmonth.open = false
+  }
+
   #handleYearChange = (e: CustomEvent) => {
     e.stopPropagation()
     this._focusedYear = (e.target as GdsDropdown)?.value
+  }
+
+  #handleYearChange2 = (e: CustomEvent) => {
+    e.stopPropagation()
+    const date = (e.target as GdsYearPicker)?.value
+    if (date) this._focusedYear = date.getFullYear()
+    const popmonth = document.getElementById('pop-year') as GdsPopover
+    if (popmonth) popmonth.open = false
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
