@@ -29,6 +29,7 @@ import { GdsCalendar } from '../calendar/calendar.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCalendar } from '../icon/icons/calendar.component'
 import { IconCalenderAdd } from '../icon/icons/calender-add.component'
+import { IconChevronGrabberVertical } from '../icon/icons/chevron-grabber-vertical.component'
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsPopover } from '../popover/popover.component'
@@ -462,7 +463,9 @@ class Datepicker extends GdsFormControlElement<Date> {
                 aria-label=${msg('Month')}
               >
                 <span id="selected-month">Month</span>
-                <gds-icon-calendar slot="trail"></gds-icon-calendar>
+                <gds-icon-chevron-grabber-vertical
+                  slot="trail"
+                ></gds-icon-chevron-grabber-vertical>
               </gds-button>
               <div style="padding: 1rem 0 0 1.5rem">Month</div>
               <gds-month-picker
@@ -481,7 +484,9 @@ class Datepicker extends GdsFormControlElement<Date> {
                 aria-label=${msg('Year')}
               >
                 <span id="selected-year">Year</span>
-                <gds-icon-calendar slot="trail"></gds-icon-calendar>
+                <gds-icon-chevron-grabber-vertical
+                  slot="trail"
+                ></gds-icon-chevron-grabber-vertical>
               </gds-button>
               <gds-year-picker
                 id="yearp"
@@ -971,6 +976,7 @@ class Datepicker extends GdsFormControlElement<Date> {
     IconCalenderAdd,
     IconChevronLeft,
     IconChevronRight,
+    IconChevronGrabberVertical,
     GdsMonthPicker,
     GdsYearPicker,
   ],
