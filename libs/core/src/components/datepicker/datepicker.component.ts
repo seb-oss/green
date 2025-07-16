@@ -467,7 +467,6 @@ class Datepicker extends GdsFormControlElement<Date> {
                   slot="trail"
                 ></gds-icon-chevron-grabber-vertical>
               </gds-button>
-              <div style="padding: 1rem 0 0 1.5rem">Month</div>
               <gds-month-picker
                 id="monthp"
                 .min=${this.min}
