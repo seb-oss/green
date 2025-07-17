@@ -487,7 +487,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 size="small"
                 aria-label=${msg('Year')}
               >
-                <span id="selected-year">Year</span>
+                <span id="selected-year">${this._focusedYear.toString()}</span>
                 <gds-icon-chevron-grabber-vertical
                   slot="trail"
                 ></gds-icon-chevron-grabber-vertical>
