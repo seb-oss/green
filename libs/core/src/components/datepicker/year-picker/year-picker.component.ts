@@ -77,8 +77,8 @@ export class GdsYearPicker extends GdsElement {
   /**
    * Whether to show controls to change visible years (normaly you see 5*5=25 years at the same time).
    */
-  @property({ type: Boolean, attribute: 'change-years-controls' })
-  changeYearsControls = false
+  @property({ reflect: true })
+  controls: 'none' | 'always' | 'ifneeded' = 'ifneeded'
 
   /**
    * The date that is currently focused.
@@ -191,7 +191,7 @@ export class GdsYearPicker extends GdsElement {
     const startYear = this.getStartYear()
 
     return html` <gds-div overflow="auto">
-      ${this.changeYearsControls
+      ${this.#useControls()
         ? html`<gds-flex
             justify-content="space-around"
             align-items="center"
@@ -261,6 +261,18 @@ export class GdsYearPicker extends GdsElement {
         </tbody>
       </table></gds-div
     >`
+  }
+
+  #useControls() {
+    if (this.controls === 'none') return false
+    if (
+      this.controls === 'always' ||
+      this.min.getFullYear() < this.getStartYear() ||
+      this.max.getFullYear() > this.getStartYear() + this.rows * this.columns
+    ) {
+      return true
+    }
+    return false
   }
 
   #getSelectedYear(): number {
