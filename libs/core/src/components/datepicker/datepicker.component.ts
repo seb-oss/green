@@ -466,7 +466,10 @@ class Datepicker extends GdsFormControlElement<Date> {
                 aria-label=${msg('Month')}
               >
                 <span id="selected-month"
-                  >${this._focusedMonth.toString()}</span
+                  >${new Date(2000, this._focusedMonth, 1).toLocaleString(
+                    'default',
+                    { month: 'long' },
+                  )}</span
                 >
                 <gds-icon-chevron-grabber-vertical
                   slot="trail"
