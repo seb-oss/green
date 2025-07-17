@@ -236,6 +236,9 @@ class Datepicker extends GdsFormControlElement<Date> {
   @query('#field')
   private _elField!: HTMLDivElement
 
+  @queryAsync('#selected-month')
+  private _elMonth!: Promise<HTMLSpanElement>
+
   #valueOnOpen?: Date
 
   constructor() {
@@ -462,7 +465,9 @@ class Datepicker extends GdsFormControlElement<Date> {
                 size="small"
                 aria-label=${msg('Month')}
               >
-                <span id="selected-month">Month</span>
+                <span id="selected-month"
+                  >${this._focusedMonth.toString()}</span
+                >
                 <gds-icon-chevron-grabber-vertical
                   slot="trail"
                 ></gds-icon-chevron-grabber-vertical>
@@ -491,7 +496,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 id="yearp"
                 .min=${this.min}
                 .max=${this.max}
-                .change-years-controls=${this.#controlsNeeded}
+                change-years-controls="ifneeded"
                 @change=${this.#handleYearChange2}
               >
               </gds-year-picker>
@@ -765,9 +770,11 @@ class Datepicker extends GdsFormControlElement<Date> {
   #handleMonthChange2 = (e: CustomEvent) => {
     e.stopPropagation()
     const date = (e.target as GdsMonthPicker)?.value
-    if (date) this._focusedMonth = date.getMonth()
-    const popmonth = document.getElementById('pop-month') as GdsPopover
-    if (popmonth) popmonth.open = false
+    if (date) {
+      this._focusedMonth = date.getMonth()
+    }
+    //const popmonth = document.getElementById('pop-month') as GdsPopover
+    //if (popmonth) popmonth.open = false
   }
 
   #handleYearChange = (e: CustomEvent) => {
@@ -781,20 +788,6 @@ class Datepicker extends GdsFormControlElement<Date> {
     if (date) this._focusedYear = date.getFullYear()
     const popmonth = document.getElementById('pop-year') as GdsPopover
     if (popmonth) popmonth.open = false
-  }
-
-  #controlsNeeded() {
-    const yearp = document.getElementById('yearp') as GdsYearPicker
-
-    if (
-      yearp &&
-      (this.min.getFullYear() < yearp.getStartYear() ||
-        this.max.getFullYear() >
-          yearp.getStartYear() + yearp.rows * yearp.columns)
-    ) {
-      return true
-    }
-    return false
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
