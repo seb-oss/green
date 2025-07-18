@@ -483,7 +483,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               >
               </gds-month-picker>
             </gds-popover>
-            <gds-popover id="pop-year">
+            <gds-popover id="pop-year" .placement=${'bottom-end'}>
               <gds-button
                 rank="secondary"
                 slot="trigger"
