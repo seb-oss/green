@@ -1,5 +1,12 @@
 # Changelog
 
+## 6.0.4
+
+### Patch Changes
+
+- 86ea764: Fold out: close fold out on tab
+- 803b81c: Changed height of nggv-dateinput wrapper to match nggv-input wrapper
+
 ## 6.0.3
 
 ### Patch Changes
