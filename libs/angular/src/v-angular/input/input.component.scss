@@ -217,7 +217,8 @@
   }
 
   &.small {
-    label {
+    label:not(.form-control) {
+      line-height: 1rem;
       font-size: 0.875rem;
     }
     label + .form-info {
@@ -231,18 +232,22 @@
     .gds-input-wrapper {
       min-height: 2rem;
 
+      // same difference as used in standard mode
+      $_input_height: calc(2rem - 0.125rem);
+      $_input_min_height: calc(2rem - 0.25rem);
+
       .input-group input {
         padding: 0.38rem 0.5rem;
         line-height: 1rem;
-        height: 2rem;
-        min-height: 2rem;
+        height: $_input_height;
+        min-height: $_input_min_height;
         font-size: 0.875rem;
       }
 
       .input-group-suffix,
       .input-group-prefix {
-        height: 2rem;
-        min-height: 2rem;
+        height: $_input_height;
+        min-height: $_input_min_height;
         min-width: initial;
       }
     }

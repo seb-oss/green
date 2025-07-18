@@ -147,5 +147,9 @@
       padding: 0.38rem 0.5rem;
       min-height: 2rem;
     }
+
+    .gds-form-item__footer:not(:empty) {
+      margin-top: 0.25rem;
+    }
   }
 }

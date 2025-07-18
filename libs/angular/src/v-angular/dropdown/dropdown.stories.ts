@@ -571,8 +571,8 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           label="Dropdown"
           [placeholder]="placeholder"
           [options]="options"
-          [required]="true"
-          [invalid]="true"
+          [required]="required"
+          [invalid]="invalid"
           [size]="size"
           error="This is a permanent error"
           [formControl]="formControl">
@@ -580,7 +580,8 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
         <nggv-input
           label="Input"
           [placeholder]="placeholder"
-          [required]="true"
+          [required]="required"
+          [size]="size"
           style="margin-left: 0.25rem;"
           [formControl]="formControl">
         </nggv-input>
@@ -590,8 +591,8 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           label="Dropdown 2"
           [placeholder]="placeholder"
           [options]="options"
-          [required]="true"
-          [invalid]="true"
+          [required]="required"
+          [invalid]="invalid"
           [size]="size"
           error="This is a permanent error"
           [formControl]="formControl">
@@ -602,6 +603,7 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
           label="Input 2"
           [placeholder]="placeholder"
           [required]="true"
+          [size]="size"
           style="margin-left: 0.25rem;"
           [formControl]="formControl">
         </nggv-input>
@@ -620,6 +622,7 @@ const defaultArgs = {
   placeholder: 'Placeholder text',
   description: 'This. Is. A. Description.',
   ngModel: 'opt2',
+  size: 'large',
   options,
 } as StoryArgs
 
