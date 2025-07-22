@@ -142,6 +142,7 @@ export class NggvFoldOutComponent implements OnDestroy, AfterViewInit {
   private onKeyDown(event: KeyboardEvent): void {
     switch (event.code) {
       case KeyboardKey.Escape:
+      case KeyboardKey.Tab:
         this.setVisibility(false)
         break
       case KeyboardKey.Enter:
