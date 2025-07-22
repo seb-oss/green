@@ -78,7 +78,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   max = new Date(new Date().getFullYear() + 10, 0, 1)
 
   /**
-   * Controls wheter the datepicker popover is open.
+   * Controls whether the datepicker popover is open.
    */
   @property({ type: Boolean })
   open = false
@@ -914,7 +914,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   }
 
   /**
-   * The spinner state keeps track of the spinner values regardless of wheter a complete date has been enter yet.
+   * The spinner state keeps track of the spinner values regardless of whether a complete date has been enter yet.
    */
   #spinnerState = {
     year: 'yyyy',
