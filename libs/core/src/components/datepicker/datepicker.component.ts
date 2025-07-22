@@ -470,7 +470,11 @@ class Datepicker extends GdsFormControlElement<Date> {
             gap="s"
             padding="m m 0 m"
           >
-            <gds-popover id="month-popover" .open=${this.monthOpen}>
+            <gds-popover
+              id="month-popover"
+              .open=${this.monthOpen}
+              @gds-ui-state=${this.#handleMonthPopoverStateChange}
+            >
               <gds-button
                 rank="secondary"
                 slot="trigger"
@@ -500,6 +504,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               .placement=${'bottom-end'}
               .useModalInMobileView=${true}
               .open=${this.yearOpen}
+              @gds-ui-state=${this.#handleYearPopoverStateChange}
             >
               <gds-button
                 rank="secondary"
@@ -889,6 +894,16 @@ class Datepicker extends GdsFormControlElement<Date> {
       this.value = this.#valueOnOpen
       this.#dispatchInputEvent()
     }
+  }
+
+  #handleMonthPopoverStateChange = async (e: CustomEvent) => {
+    if (e.target !== e.currentTarget) return
+    this.monthOpen = e.detail.open
+  }
+
+  #handleYearPopoverStateChange = async (e: CustomEvent) => {
+    if (e.target !== e.currentTarget) return
+    this.yearOpen = e.detail.open
   }
 
   #handleSpinnerKeydown = (e: KeyboardEvent) => {
