@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.88.1
+
+### Patch Changes
+
+- 0edf04f: **Calendar:** Add disabled class on weeknumber
+
 ## 1.88.0
 
 ### Minor Changes
