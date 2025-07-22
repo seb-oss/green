@@ -84,6 +84,18 @@ class Datepicker extends GdsFormControlElement<Date> {
   open = false
 
   /**
+   * Controls whether the month-picker popover is open.
+   */
+  @property({ type: Boolean })
+  monthOpen = false
+
+  /**
+   * Controls whether the year-picker popover is open.
+   */
+  @property({ type: Boolean })
+  yearOpen = false
+
+  /**
    * The supporting text displayed between the label and the field itself
    */
   @property({ attribute: 'supporting-text' })
@@ -458,7 +470,7 @@ class Datepicker extends GdsFormControlElement<Date> {
             gap="s"
             padding="m m 0 m"
           >
-            <gds-popover id="pop-month">
+            <gds-popover id="month-popover" .open=${this.monthOpen}>
               <gds-button
                 rank="secondary"
                 slot="trigger"
@@ -483,7 +495,12 @@ class Datepicker extends GdsFormControlElement<Date> {
               >
               </gds-month-picker>
             </gds-popover>
-            <gds-popover id="pop-year" .placement=${'bottom-end'}>
+            <gds-popover
+              id="year-popover"
+              .placement=${'bottom-end'}
+              .useModalInMobileView=${true}
+              .open=${this.yearOpen}
+            >
               <gds-button
                 rank="secondary"
                 slot="trigger"
@@ -648,6 +665,22 @@ class Datepicker extends GdsFormControlElement<Date> {
     }
   }
 
+  @watch('monthOpen')
+  private _handleMonthOpenChange() {
+    if (this.monthOpen) {
+      //this.#valueOnOpen = this.value
+      //this._elCalendar.then((el) => el.focus())
+    }
+  }
+
+  @watch('yearOpen')
+  private _handleYearOpenChange() {
+    if (this.yearOpen) {
+      //this.#valueOnOpen = this.value
+      //this._elCalendar.then((el) => el.focus())
+    }
+  }
+
   #getSpinnerLabel(name: DatePart) {
     const labels = {
       year: msg('Year'),
@@ -775,9 +808,8 @@ class Datepicker extends GdsFormControlElement<Date> {
     const date = (e.target as GdsMonthPicker)?.value
     if (date) {
       this._focusedMonth = date.getMonth()
+      this.monthOpen = false
     }
-    //const popmonth = document.getElementById('pop-month') as GdsPopover
-    //if (popmonth) popmonth.open = false
   }
 
   #handleYearChange = (e: CustomEvent) => {
@@ -788,9 +820,10 @@ class Datepicker extends GdsFormControlElement<Date> {
   #handleYearChange2 = (e: CustomEvent) => {
     e.stopPropagation()
     const date = (e.target as GdsYearPicker)?.value
-    if (date) this._focusedYear = date.getFullYear()
-    const popmonth = document.getElementById('pop-year') as GdsPopover
-    if (popmonth) popmonth.open = false
+    if (date) {
+      this._focusedYear = date.getFullYear()
+      this.yearOpen = false
+    }
   }
 
   #handleIncrementFocusedMonth = (_e: MouseEvent) => {
