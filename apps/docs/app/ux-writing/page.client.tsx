@@ -1,0 +1,53 @@
+'use client'
+
+import {
+  GdsBreadcrumbs,
+  GdsFlex,
+  GdsText,
+  IconHomeOpen,
+} from '@sebgroup/green-core/react'
+import { Render } from '../../design/atoms/content/render'
+import { Link } from '../../design/atoms/link/link'
+import { useContentContext } from '../../settings/content'
+
+export function UXwritingClient() {
+  const { actions } = useContentContext()
+  const CONTENT = actions.getPage('ux-writing')
+  const imageProvider = {
+    getImage: (slug: string, node: string) => {
+      return undefined
+    },
+  }
+  return (
+    <GdsFlex flex-direction="column" gap="2xl" width="100%">
+      <GdsBreadcrumbs size="small">
+        <Link component="link" href="/">
+          <IconHomeOpen size="m" slot="lead" />
+          Home
+        </Link>
+        <GdsText>UX writing</GdsText>
+      </GdsBreadcrumbs>
+      <GdsFlex flex-direction="column" gap="4xl">
+        <GdsFlex flex-direction="column" gap="s">
+          <GdsText tag="h1">{CONTENT?.title}</GdsText>
+          <GdsText
+            tag="p"
+            font-size="heading-m"
+            color="secondary"
+            text-wrap="pretty"
+            max-width="120ch"
+          >
+            {CONTENT?.summary}
+          </GdsText>
+        </GdsFlex>
+        {CONTENT?.sections && (
+          <Render
+            content={CONTENT.sections}
+            slug="foundation"
+            imageProvider={imageProvider}
+          />
+        )}
+      </GdsFlex>
+    </GdsFlex>
+  )
+}
