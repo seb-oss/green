@@ -197,7 +197,7 @@ export const YearPicker: Story = {
   render: (args) => html`
     <gds-datepicker
       label="Show controls in year picker"
-      min="1950-01-01"
+      min="1850-01-01"
       max="2100-01-01"
     ></gds-datepicker>
   `,
