@@ -85,6 +85,12 @@ export class GdsCalendar extends GdsElement {
   max = new Date(new Date().getFullYear() + 10, 0, 1)
 
   /**
+   * Whether to override the default hour set of mid day (12:00) in utc. Eg. -2 sets time to utc 10:00.
+   */
+  @property({ type: Number, attribute: 'utc-offset' })
+  utcOffset = 0
+
+  /**
    * The date that is currently focused.
    */
   @property()
@@ -119,7 +125,7 @@ export class GdsCalendar extends GdsElement {
       Math.min(this.focusedDate.getDate(), lastOfSelectedMonth.getDate()),
     )
     newFocusedDate.setMonth(month)
-    newFocusedDate.setHours(12, 0, 0, 0)
+    newFocusedDate.setHours(12 + this.utcOffset, 0, 0, 0)
 
     this.focusedDate = newFocusedDate
   }
@@ -342,7 +348,7 @@ export class GdsCalendar extends GdsElement {
 
   #setSelectedDate(date: Date) {
     // Set the time to midday to avoid timezone issues
-    const dateOnMidDay = setHours(date, 12)
+    const dateOnMidDay = setHours(date, 12 + this.utcOffset)
 
     this.value = dateOnMidDay
 
