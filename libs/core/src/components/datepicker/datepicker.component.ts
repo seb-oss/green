@@ -417,59 +417,6 @@ class Datepicker extends GdsFormControlElement<Date> {
             >
               <gds-icon-chevron-left></gds-icon-chevron-left>
             </gds-button>
-            <gds-dropdown
-              .value=${this._focusedMonth.toString()}
-              @change=${this.#handleMonthChange}
-              .maxHeight=${300}
-              label="${msg('Month')}"
-              size="small"
-              class="month"
-              hide-label
-            >
-              <gds-option value="0">${msg('January')}</gds-option>
-              <gds-option value="1">${msg('February')}</gds-option>
-              <gds-option value="2">${msg('March')}</gds-option>
-              <gds-option value="3">${msg('April')}</gds-option>
-              <gds-option value="4">${msg('May')}</gds-option>
-              <gds-option value="5">${msg('June')}</gds-option>
-              <gds-option value="6">${msg('July')}</gds-option>
-              <gds-option value="7">${msg('August')}</gds-option>
-              <gds-option value="8">${msg('September')}</gds-option>
-              <gds-option value="9">${msg('October')}</gds-option>
-              <gds-option value="10">${msg('November')}</gds-option>
-              <gds-option value="11">${msg('December')}</gds-option>
-            </gds-dropdown>
-            <gds-dropdown
-              .value=${this._focusedYear.toString()}
-              @change=${this.#handleYearChange}
-              .maxHeight=${300}
-              label="${msg('Year')}"
-              size="small"
-              class="year"
-              hide-label
-            >
-              ${repeat(
-                this.#years,
-                (year) => year,
-                (year) => html`<gds-option value=${year}>${year}</gds-option>`,
-              )}
-            </gds-dropdown>
-            <gds-button
-              @click=${this.#handleIncrementFocusedMonth}
-              aria-label=${msg('Next month')}
-              rank="tertiary"
-              size="small"
-            >
-              <gds-icon-chevron-right></gds-icon-chevron-right>
-            </gds-button>
-          </gds-flex>
-
-          <gds-flex
-            align-items="center"
-            justify-content="space-between"
-            gap="s"
-            padding="m m 0 m"
-          >
             <gds-popover
               id="month-popover"
               .open=${this.monthOpen}
@@ -526,6 +473,53 @@ class Datepicker extends GdsFormControlElement<Date> {
               >
               </gds-year-picker>
             </gds-popover>
+            <gds-dropdown
+              .value=${this._focusedMonth.toString()}
+              @change=${this.#handleMonthChange}
+              .maxHeight=${300}
+              label="${msg('Month')}"
+              size="small"
+              class="month"
+              hide-label
+              style="display: none"
+            >
+              <gds-option value="0">${msg('January')}</gds-option>
+              <gds-option value="1">${msg('February')}</gds-option>
+              <gds-option value="2">${msg('March')}</gds-option>
+              <gds-option value="3">${msg('April')}</gds-option>
+              <gds-option value="4">${msg('May')}</gds-option>
+              <gds-option value="5">${msg('June')}</gds-option>
+              <gds-option value="6">${msg('July')}</gds-option>
+              <gds-option value="7">${msg('August')}</gds-option>
+              <gds-option value="8">${msg('September')}</gds-option>
+              <gds-option value="9">${msg('October')}</gds-option>
+              <gds-option value="10">${msg('November')}</gds-option>
+              <gds-option value="11">${msg('December')}</gds-option>
+            </gds-dropdown>
+            <gds-dropdown
+              .value=${this._focusedYear.toString()}
+              @change=${this.#handleYearChange}
+              .maxHeight=${300}
+              label="${msg('Year')}"
+              size="small"
+              class="year"
+              hide-label
+              style="display: none"
+            >
+              ${repeat(
+                this.#years,
+                (year) => year,
+                (year) => html`<gds-option value=${year}>${year}</gds-option>`,
+              )}
+            </gds-dropdown>
+            <gds-button
+              @click=${this.#handleIncrementFocusedMonth}
+              aria-label=${msg('Next month')}
+              rank="tertiary"
+              size="small"
+            >
+              <gds-icon-chevron-right></gds-icon-chevron-right>
+            </gds-button>
           </gds-flex>
 
           <gds-calendar
