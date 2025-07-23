@@ -264,6 +264,18 @@ describe('<gds-datepicker>', () => {
 
       expect(onlyDate(date1)).to.not.equal(onlyDate(date2))
     })
+
+    it('Setting `utc-offset` should change the hours of selected dates', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2025-07-23"
+          utc-offset="-2"
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      await expect(el.value).to.equal(new Date('2025-07-23T10:00:00Z'))
+    })
   })
 
   describe('Interactions', () => {
