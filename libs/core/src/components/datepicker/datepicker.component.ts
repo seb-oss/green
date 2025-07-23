@@ -427,6 +427,8 @@ class Datepicker extends GdsFormControlElement<Date> {
                 slot="trigger"
                 size="small"
                 aria-label=${msg('Month')}
+                width="130px"
+                justify-content="space-between"
               >
                 <span id="selected-month"
                   >${new Date(2000, this._focusedMonth, 1).toLocaleString(
@@ -458,6 +460,8 @@ class Datepicker extends GdsFormControlElement<Date> {
                 slot="trigger"
                 size="small"
                 aria-label=${msg('Year')}
+                width="130px"
+                justify-content="space-between"
               >
                 <span id="selected-year">${this._focusedYear.toString()}</span>
                 <gds-icon-chevron-grabber-vertical
