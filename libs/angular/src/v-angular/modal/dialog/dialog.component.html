@@ -27,7 +27,7 @@
       </section>
       <footer class="modal-dialog__actions">
         <button
-          class="danger"
+          class="danger-confirm"
           type="reset"
           [attr.data-thook]="'dialog-' + (_buttons?.negative || 'negative')"
           (click)="onAction($event, 'negative')"
@@ -45,6 +45,16 @@
           *ngIf="_buttons && _buttons.neutral"
         >
           {{ t(_buttons.neutral) }}
+        </button>
+        <button
+          class="danger"
+          type="submit"
+          [attr.data-thook]="'dialog-' + (_buttons?.danger || 'danger')"
+          (click)="onAction($event, 'danger')"
+          (keydown.enter)="onAction($event, 'danger')"
+          *ngIf="_buttons && _buttons.danger"
+        >
+          {{ t(_buttons.danger) }}
         </button>
         <button
           class="submit"

@@ -25,6 +25,18 @@ export default {
         type: 'inline-radio',
       },
     },
+    listWidth: {
+      options: ['fit-content', 'max-content', 'min-content', 'auto'],
+      control: {
+        type: 'select',
+        labels: {
+          'fit-content': 'fit-content',
+          'max-content': 'max-content',
+          'min-content': 'min-content',
+          auto: 'auto',
+        },
+      },
+    },
   },
 } as Meta
 
@@ -33,7 +45,7 @@ const Template: StoryFn<NggvFoldOutComponent> = (args: any) => {
   return {
     template: /* html */ `
     <div class="story-wrapper">
-      <nggv-fold-out [alignOptions]="alignOptions">
+      <nggv-fold-out [alignOptions]="alignOptions" [listWidth]="listWidth">
         <div nggvOption (click)="lastClicked = 'View details'">View details</div>
         <div nggvOption (click)="lastClicked = 'Sign payment'">Sign payment</div>
         <div nggvOption class="delete-option" (click)="lastClicked = 'Delete'">Delete</div>
@@ -50,7 +62,7 @@ const TemplateAlt: StoryFn<NggvFoldOutComponent> = (args: any) => {
   return {
     template: /* html */ `
       <div class="story-wrapper--right-align">
-        <nggv-fold-out [alignOptions]="alignOptions">
+        <nggv-fold-out [alignOptions]="alignOptions" [listWidth]="listWidth">
           <div nggvOption (click)="lastClicked = 'View details'">View details</div>
           <div nggvOption (click)="lastClicked = 'Sign payment'">Sign payment</div>
           <div nggvOption class="delete-option" (click)="lastClicked = 'Delete'">Delete</div>
@@ -67,7 +79,7 @@ const TemplateWithText: StoryFn<NggvFoldOutComponent> = (args: any) => {
   return {
     template: /* html */ `
       <div class="story-wrapper">
-        <nggv-fold-out [text]="text">
+        <nggv-fold-out [text]="text" [listWidth]="listWidth">
           <div nggvOption (click)="lastClicked = 'View details'">View details</div>
           <div nggvOption (click)="lastClicked = 'Sign payment'">Sign payment</div>
           <div nggvOption class="delete-option" (click)="lastClicked = 'Delete'">Delete</div>
@@ -82,6 +94,7 @@ const TemplateWithText: StoryFn<NggvFoldOutComponent> = (args: any) => {
 export const Primary = Template.bind({})
 Primary.args = {
   alignOptions: 'left',
+  listWidth: 'fit-content',
 }
 Primary.parameters = {
   docs: { source: { code: examplePrimary } },
@@ -90,6 +103,7 @@ Primary.parameters = {
 export const Alternative = TemplateAlt.bind({})
 Alternative.args = {
   alignOptions: 'right',
+  listWidth: 'fit-content',
 }
 Alternative.parameters = {
   docs: { source: { code: exampleAlt } },
@@ -98,6 +112,7 @@ Alternative.parameters = {
 export const WithText = TemplateWithText.bind({})
 WithText.args = {
   text: 'More',
+  listWidth: 'fit-content',
 }
 WithText.parameters = {
   docs: { source: { code: exampleAlt } },

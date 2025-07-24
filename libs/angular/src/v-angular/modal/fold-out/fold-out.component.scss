@@ -24,6 +24,21 @@
     right: 0;
   }
 
+  .list-width {
+    &-fit-content {
+      width: fit-content;
+    }
+    &-max-content {
+      width: max-content;
+    }
+    &-min-content {
+      width: min-content;
+    }
+    &-auto {
+      width: auto;
+    }
+  }
+
   .fold-out-button {
     @include button.reset();
     @include button.base();
@@ -44,7 +59,6 @@
 
   .nggv-fold-out__popover {
     @include card.card();
-    width: fit-content;
     display: none;
     padding: 0;
 
