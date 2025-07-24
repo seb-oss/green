@@ -172,6 +172,7 @@ import { TableColumn } from '@sebgroup/nggv-table';
     <nggv-table
       rowId="id"
       [expandable]="expandable"
+      [expandedByDefault]="expandedByDefault"
       [selectable]="false"
       [subItemsProp]="'subItems'"
       [tableColumns]="tableColumns"
