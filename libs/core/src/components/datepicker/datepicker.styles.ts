@@ -34,13 +34,17 @@ export const styles = css`
       outline: none;
       padding-block: var(--gds-sys-space-3xs);
       text-transform: uppercase;
-      line-height: 1;
+      line-height: 2rem;
       text-align: center;
 
       &:focus {
         background-color: var(--gds-sys-color-l2-background-tertiary);
         color: var(--gds-sys-color-l2-content-tertiary);
       }
+    }
+
+    :host([size='small']) .spinner {
+      line-height: 1.5rem;
     }
   }
 `
