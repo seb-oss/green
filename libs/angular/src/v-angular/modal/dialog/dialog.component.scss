@@ -71,8 +71,11 @@
     .secondary {
       @include button.secondary;
     }
-    .danger {
+    .danger-confirm {
       @include button.danger-color;
+    }
+    .danger {
+      @include button.danger-bg;
     }
   }
 }
