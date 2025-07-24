@@ -11,7 +11,7 @@
   --sg-table-cell-padding-x: 0.5rem;
   --sg-table-cell-padding-y: 0.6875rem;
   --sg-table-border-width: 1px;
-  --sg-table-border-color: var(--gds-ref-pallet-base600);
+  --sg-table-border-color: var(--gds-ref-pallet-base300);
   --sg-table-sort-icon-color: var(--gds-ref-pallet-base600);
   --gds-ref-pallet-base500: hsl(0, 0%, 68%);
   --sg-table-sort-icon-color-active: #fff;
@@ -21,6 +21,7 @@
   --gds-sys-shape-corner-small: 0.125rem;
   --gds-sys-color-blue-dark-2: #007ac7;
   --gds-sys-shape-corner-medium: 0.25rem;
+  --sg-table-row-expand-font-weight: 500;
 
   @include table.add-table();
   width: 100%;
@@ -39,7 +40,6 @@
     background-color: var(--gds-ref-pallet-base100);
   }
 
-  .gds-table__numeric-col,
   .gds-table__numeric-col {
     text-align: right;
   }
@@ -69,7 +69,7 @@
   tfoot {
     border-top: 1px solid;
     border-bottom: none;
-    font-weight: 500;
+    font-weight: var(--sg-table-row-expand-font-weight, 500);
 
     ::ng-deep {
       td {
@@ -97,6 +97,7 @@
       label {
         display: inline;
         padding: 0;
+
         &::before {
           top: 0.55rem;
         }
@@ -114,6 +115,7 @@
 
       label {
         padding: 0;
+
         &::before {
           margin: 0;
         }
@@ -145,6 +147,10 @@
           }
         }
       }
+
+      td {
+        font-weight: var(--sg-table-row-expand-font-weight, 500);
+      }
     }
   }
 
@@ -169,6 +175,7 @@
   #thead-checkbox input[type='checkbox']:hover {
     &:not(:checked) ~ i {
       box-shadow: inset 0 0 0 1px #ababab;
+
       &::after {
         border-color: #ababab;
       }
@@ -177,6 +184,7 @@
     &:checked ~ i {
       background-color: var(--gds-comp-checkbox-border-color);
       box-shadow: inset 0 0 0 1px #ababab;
+
       &::after {
         border-color: #ababab;
       }
