@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.29.1
+
+### Patch Changes
+
+- 5526f22: **Button:** Add type to close button
+
 ## 3.29.0
 
 ### Minor Changes
