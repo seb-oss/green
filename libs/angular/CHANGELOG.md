@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.0.5
+
+### Patch Changes
+
+- c031e4a: **V-Angular Input/Dropdown/Textarea**: Fixed styling for small variants; halved spacing underneath dropdown and textarea, and corrected height difference (compared to dropdown) for input field.
+
 ## 6.0.4
 
 ### Patch Changes
