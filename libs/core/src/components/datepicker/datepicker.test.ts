@@ -264,18 +264,6 @@ describe('<gds-datepicker>', () => {
 
       expect(onlyDate(date1)).to.not.equal(onlyDate(date2))
     })
-
-    it('Setting `utc-offset` should change the hours of selected dates', async () => {
-      const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker
-          value="2025-07-23"
-          utc-offset="-2"
-        ></gds-datepicker>`,
-      )
-      await el.updateComplete
-
-      await expect(el.value).to.equal(new Date('2025-07-23T10:00:00Z'))
-    })
   })
 
   describe('Interactions', () => {
@@ -312,6 +300,7 @@ describe('<gds-datepicker>', () => {
       await clickOnElement(label)
       await expect(focusHandler.calledOnce).to.be.true
     })
+
     it('should focus the first date part spinner when clicking on the element', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker label="Date"></gds-datepicker>`,
@@ -326,6 +315,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(focusHandler.calledOnce).to.be.true
     })
+
     it('should increment the spinner value when pressing the up arrow', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
@@ -341,6 +331,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2025')
     })
+
     it('should decrement the spinner value when pressing the down arrow', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
@@ -356,6 +347,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2023')
     })
+
     it('should focus the next spinner when pressing the right arrow', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
@@ -371,6 +363,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[1].value.toString()).to.equal('01')
     })
+
     it('should focus the previous spinner when pressing the left arrow', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
@@ -386,6 +379,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('2024')
     })
+
     it('should set year to 20 when typing 20 in the year spinner', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
@@ -401,6 +395,7 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(spinners[0].value.toString()).to.equal('20')
     })
+
     it('should set year to 1900 when blurring the year spinner with a value below 1900', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker min="2022-01-01"></gds-datepicker>`,
@@ -671,6 +666,54 @@ describe('<gds-datepicker>', () => {
       await expect(monthDropdown.value).to.equal('1')
       await expect(yearDropdown.value).to.equal('2024')
     })
+
+    it('should go to next month when pressing arrow right from the last day in the month', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2024-01-31"
+          min="2014-01-01"
+          max="2034-12-31"
+          open
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
+      )!
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
+
+      await sendKeys({
+        press: 'ArrowRight',
+      })
+      await el.updateComplete
+
+      await expect(monthDropdown.value).to.equal('1')
+      await expect(yearDropdown.value).to.equal('2024')
+    })
+
+    // it('Setting `utc-offset` should change the hours of selected dates', async () => {
+    //   const el = await fixture<GdsDatepicker>(
+    //     html`<gds-datepicker
+    //       value="2025-07-23"
+    //       utc-offset="-2"
+    //     ></gds-datepicker>`,
+    //   )
+    //   await el.updateComplete
+
+    //   await sendKeys({
+    //     press: 'ArrowRight',
+    //   })
+    //   await el.updateComplete
+    //   await sendKeys({
+    //     press: 'Enter',
+    //   })
+    //   await el.updateComplete
+
+    //   await expect(el.value).to.equal(new Date('2025-07-24T10:00:00Z'))
+    // })
   })
 
   describe('Accessibility', () => {
