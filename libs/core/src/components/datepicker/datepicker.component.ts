@@ -431,7 +431,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-button
                 rank="secondary"
                 slot="trigger"
-                size="small"
+                .size=${this.popoverSize == 'small' ? 'xs' : 'small'}
                 aria-label=${msg('Month')}
                 width="130px"
                 justify-content="space-between"
@@ -465,7 +465,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-button
                 rank="secondary"
                 slot="trigger"
-                size="small"
+                .size=${this.popoverSize == 'small' ? 'xs' : 'small'}
                 aria-label=${msg('Year')}
                 width="130px"
                 justify-content="space-between"
