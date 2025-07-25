@@ -301,6 +301,7 @@ export class GdsCalendar extends GdsElement {
                               isDisabled ? undefined : 'gridcell',
                             )}"
                             class="${classMap({
+                              small: this.size == 'small',
                               'custom-date': Boolean(customization),
                               disabled: Boolean(isDisabled),
                               today: isSameDay(currentDate, day),
