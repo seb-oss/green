@@ -104,7 +104,7 @@ export class GdsYearPicker extends GdsElement {
   }
 
   /**
-   * Sets the size of the buttons. Defaults to "large".
+   * Sets the size of the grid. Defaults to "large".
    */
   @property({ reflect: true })
   size: 'small' | 'large' = 'large'
