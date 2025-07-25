@@ -23,6 +23,16 @@ import { watch } from '../../utils/decorators/watch'
 import style from './calendar.styles'
 import { renderMonthGridView } from './functions'
 
+const weekDays = [
+  msg('Mon'),
+  msg('Tue'),
+  msg('Wed'),
+  msg('Thu'),
+  msg('Fri'),
+  msg('Sat'),
+  msg('Sun'),
+]
+
 /**
  * Used to customize the appearance of a date in the calendar.
  */
@@ -223,55 +233,13 @@ export class GdsCalendar extends GdsElement {
           html`<thead role="rowgroup">
             <tr role="row">
               ${when(this.showWeekNumbers, () => html`<th></th>`)}
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Mon')}
-              </th>
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Tue')}
-              </th>
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Wed')}
-              </th>
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Thu')}
-              </th>
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Fri')}
-              </th>
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Sat')}
-              </th>
-              <th
-                class="${classMap({
-                  small: this.size == 'small',
-                })}"
-              >
-                ${msg('Sun')}
-              </th>
+              ${weekDays.map(
+                (day) => html`
+                  <th class="${classMap({ small: this.size == 'small' })}">
+                    ${day}
+                  </th>
+                `,
+              )}
             </tr>
           </thead>`,
       )}
