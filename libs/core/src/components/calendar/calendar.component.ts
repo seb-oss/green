@@ -223,13 +223,55 @@ export class GdsCalendar extends GdsElement {
           html`<thead role="rowgroup">
             <tr role="row">
               ${when(this.showWeekNumbers, () => html`<th></th>`)}
-              <th>${msg('Mon')}</th>
-              <th>${msg('Tue')}</th>
-              <th>${msg('Wed')}</th>
-              <th>${msg('Thu')}</th>
-              <th>${msg('Fri')}</th>
-              <th>${msg('Sat')}</th>
-              <th>${msg('Sun')}</th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Mon')}
+              </th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Tue')}
+              </th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Wed')}
+              </th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Thu')}
+              </th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Fri')}
+              </th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Sat')}
+              </th>
+              <th
+                class="${classMap({
+                  small: this.size == 'small',
+                })}"
+              >
+                ${msg('Sun')}
+              </th>
             </tr>
           </thead>`,
       )}
