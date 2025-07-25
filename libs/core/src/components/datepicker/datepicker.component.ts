@@ -108,6 +108,12 @@ class Datepicker extends GdsFormControlElement<Date> {
   size: 'large' | 'small' = 'large'
 
   /**
+   * Whether to use the small variant of the datepicker popover.
+   */
+  @property({ type: String })
+  popoverSize: 'large' | 'small' = 'large'
+
+  /**
    * Hides the header and the footer, while still keeping the accessible label
    *
    * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
@@ -445,6 +451,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 .min=${this.min}
                 .max=${this.max}
                 @change=${this.#handleMonthChange2}
+                .size=${this.popoverSize}
               >
               </gds-month-picker>
             </gds-popover>
@@ -474,6 +481,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 .max=${this.max}
                 change-years-controls="ifneeded"
                 @change=${this.#handleYearChange2}
+                .size=${this.popoverSize}
               >
               </gds-year-picker>
             </gds-popover>
@@ -538,6 +546,7 @@ class Datepicker extends GdsFormControlElement<Date> {
             .showWeekNumbers=${this.showWeekNumbers}
             .disabledWeekends=${this.disabledWeekends}
             .disabledDates=${this.disabledDates}
+            .size=${this.popoverSize}
           ></gds-calendar>
 
           ${when(

@@ -202,3 +202,17 @@ export const YearPicker: Story = {
     ></gds-datepicker>
   `,
 }
+
+/**
+ * The datepicker popover is small.
+ */
+export const SmallPopover: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker
+      label="Small size on all"
+      size="small"
+      popoverSize="small"
+    ></gds-datepicker>
+  `,
+}
