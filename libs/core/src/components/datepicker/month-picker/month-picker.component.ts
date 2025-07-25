@@ -68,6 +68,12 @@ export class GdsMonthPicker extends GdsElement {
   //@ property({ type: Date })
 
   /**
+   * Whether to override the default hour set of mid day (12:00) in utc. Eg. -2 sets time to utc 10:00.
+   */
+  @property({ type: Number, attribute: 'utc-offset' })
+  utcOffset = 0
+
+  /**
    * Whether to hide extraneous months (that fall ouside of min and max month)
    */
   @property({ type: Boolean, attribute: 'hide-extraneous-months' })
@@ -102,7 +108,7 @@ export class GdsMonthPicker extends GdsElement {
       Math.min(this.focusedDate.getDate(), lastOfSelectedMonth.getDate()),
     )
     newFocusedDate.setMonth(month)
-    newFocusedDate.setHours(12, 0, 0, 0)
+    newFocusedDate.setHours(12 + this.utcOffset, 0, 0, 0)
 
     this.focusedDate = newFocusedDate
   }
@@ -242,7 +248,7 @@ export class GdsMonthPicker extends GdsElement {
   }
 
   #setSelectedMonth(month: number) {
-    this.value = new Date(this.focusedYear, month, 1, 12)
+    this.value = new Date(this.focusedYear, month, 1, 12 + this.utcOffset)
 
     this.dispatchEvent(
       new CustomEvent('change', {

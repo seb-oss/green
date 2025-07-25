@@ -51,6 +51,12 @@ export class GdsYearPicker extends GdsElement {
   //@ property({ type: Date })
 
   /**
+   * Whether to override the default hour set of mid day (12:00) in utc. Eg. -2 sets time to utc 10:00.
+   */
+  @property({ type: Number, attribute: 'utc-offset' })
+  utcOffset = 0
+
+  /**
    * Whether to hide extraneous years (that fall ouside of min and max)
    */
   @property({ type: Boolean, attribute: 'hide-extraneous-years' })
@@ -94,7 +100,7 @@ export class GdsYearPicker extends GdsElement {
     return this.focusedDate.getFullYear()
   }
   set focusedYear(year: number) {
-    this.focusedDate = new Date(year, 0, 1, 12)
+    this.focusedDate = new Date(year, 0, 1, 12 + this.utcOffset)
   }
 
   /**
@@ -285,7 +291,7 @@ export class GdsYearPicker extends GdsElement {
     if (year < this.min.getFullYear() || year > this.max.getFullYear()) {
       return
     }
-    this.value = new Date(year, 1, 1, 12)
+    this.value = new Date(year, 1, 1, 12 + this.utcOffset)
     this.dispatchEvent(
       new CustomEvent('change', {
         detail: this.value,
