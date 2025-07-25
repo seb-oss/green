@@ -467,7 +467,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 slot="trigger"
                 .size=${this.popoverSize == 'small' ? 'xs' : 'small'}
                 aria-label=${msg('Year')}
-                width="130px"
+                .width=${this.popoverSize == 'small' ? '100px' : '130px'}
                 justify-content="space-between"
               >
                 <span id="selected-year">${this._focusedYear.toString()}</span>
