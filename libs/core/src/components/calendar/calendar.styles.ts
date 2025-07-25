@@ -70,6 +70,13 @@ const style = css`
           outline-color: var(--gds-sys-color-l2-content-primary);
           outline-width: var(--gds-sys-space-3xs);
         }
+
+        &.small {
+          padding: 0 6px;
+          height: var(--gds-sys-space-xl);
+          font-size: var(--gds-sys-text-size-detail-s);
+          line-height: var(--gds-sys-text-line-height-detail-s);
+        }
       }
 
       .indicator-dot {

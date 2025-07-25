@@ -161,6 +161,12 @@ export class GdsCalendar extends GdsElement {
   customizedDates?: CustomizedDate[]
 
   /**
+   * Sets the size of the grid. Defaults to "large".
+   */
+  @property({ reflect: true })
+  size: 'small' | 'large' = 'large'
+
+  /**
    * The accessible label for the calendar.
    */
   @property()
