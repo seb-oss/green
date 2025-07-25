@@ -1,3 +1,5 @@
+@use '@sebgroup/chlorophyll/scss/common';
+
 :host {
   .messages-container {
     position: fixed;
@@ -14,6 +16,11 @@
     min-height: 3rem;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     margin-top: 1rem;
+
+    @include common.media-breakpoint-down('sm') {
+      max-width: calc(100vw - 2rem);
+      min-width: calc(100vw - 2rem);
+    }
   }
 
   .content {
@@ -75,6 +82,10 @@
       &:hover {
         background-color: #dedede;
       }
+    }
+
+    @include common.media-breakpoint-down('sm') {
+      min-width: auto;
     }
   }
 
