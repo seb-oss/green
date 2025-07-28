@@ -2,4 +2,4 @@
 '@sebgroup/green-angular': patch
 ---
 
-Improve dropdown dynamic positioning (top/bottom) and height calculation
+**V-Angular:** Improve dropdown dynamic positioning (top/bottom) and height calculation
