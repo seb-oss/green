@@ -94,6 +94,7 @@ export class NggvDialogComponent implements OnInit, OnDestroy {
   @Output() nggvPositiveEvent = new EventEmitter<DialogEvent>()
   @Output() nggvNeutralEvent = new EventEmitter<DialogEvent>()
   @Output() nggvNegativeEvent = new EventEmitter<DialogEvent>()
+  @Output() nggvDangerEvent = new EventEmitter<DialogEvent>()
 
   protected _previous: HTMLElement | undefined
   protected _firstFocusable: HTMLElement | undefined
@@ -136,6 +137,9 @@ export class NggvDialogComponent implements OnInit, OnDestroy {
         break
       case 'negative':
         this.nggvNegativeEvent.emit(emitEvent)
+        break
+      case 'danger':
+        this.nggvDangerEvent.emit(emitEvent)
         break
       // case 'close' is handled by if-statement below with call to this.close()
     }
