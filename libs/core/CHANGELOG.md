@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.88.2
+
+### Patch Changes
+
+- 72be834: **Dropdown:** Fix issue with updating error message via prop
+
 ## 1.88.1
 
 ### Patch Changes
