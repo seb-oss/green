@@ -84,6 +84,10 @@ export class ScopedElementRegistry {
 }
 
 export interface GdsCustomElementOptions {
+  /**
+   * An array of custom element classes that this custom element depends on.
+   * These elements will be automatically defined before this element is defined.
+   */
   dependsOn?: (typeof GdsElement)[]
 }
 
