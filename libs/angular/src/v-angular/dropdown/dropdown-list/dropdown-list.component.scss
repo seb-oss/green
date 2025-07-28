@@ -126,4 +126,14 @@
     padding-inline: 1rem;
     padding-block: 0.5rem;
   }
+
+  &[data-position='top'] {
+    top: auto;
+    bottom: 100%;
+    transform: translateY(-0.5rem);
+  }
+  &[data-position='bottom'] {
+    bottom: 0;
+    transform: translateY(calc(100% + 0.5rem));
+  }
 }
