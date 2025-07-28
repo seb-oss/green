@@ -128,7 +128,7 @@
   }
 
   &[data-position='top'] {
-    top: auto !important;
+    top: auto;
     bottom: 100%;
     transform: translateY(-0.5rem);
   }
