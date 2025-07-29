@@ -40,6 +40,33 @@ export default async function publishSnapshot(
     process.exit(1)
   }
 
+  console.log(`NPM_TOKEN starts with: ${process.env.NPM_TOKEN.slice(0, 4)}...`)
+
+  // Run npm whoami to verify authentication
+  const whoamiProcess = spawn('npm', ['whoami'], {
+    cwd: join('libs', libName),
+    env: { ...process.env, NPM_TOKEN: process.env.NPM_TOKEN },
+    stdio: ['inherit', 'pipe', 'pipe'],
+  })
+
+  let whoamiOutput = ''
+  whoamiProcess.stdout.on('data', (data) => {
+    whoamiOutput += data.toString()
+  })
+  whoamiProcess.stderr.on('data', (data) => {
+    console.error(`npm whoami error: ${data.toString().trim()}`)
+  })
+
+  const whoamiExitCode = await new Promise<number>((resolve) => {
+    whoamiProcess.on('close', resolve)
+  })
+
+  if (whoamiExitCode !== 0) {
+    console.error('npm whoami failed. Check NPM_TOKEN validity.')
+    process.exit(1)
+  }
+  console.log(`Authenticated as: ${whoamiOutput.trim()}`)
+
   // run npm publish
   console.info(`Publishing ${libName} as ${version}...`)
   const npmProcess = spawn(
