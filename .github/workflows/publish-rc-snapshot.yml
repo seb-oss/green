@@ -65,6 +65,12 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: Display npm debug log
+        if: failure()
+        run: cat /home/runner/.npm/_logs/*.log
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Comment status
         uses: actions/github-script@v4
         with:
