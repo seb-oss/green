@@ -59,7 +59,7 @@
     "@swc/helpers": "0.5.13",
     "@vercel/og": "^0.5.20",
     "axios": "^1.8.2",
-    "billboard.js": "^3.7.5",
+    "billboard.js": "^3.15.1",
     "body-scroll-lock": "^3.1.5",
     "browserslist": "^4.20.2",
     "classnames": "^2.3.2",
