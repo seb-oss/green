@@ -61,6 +61,8 @@ jobs:
       - name: Publish snapshots
         id: publish-snapshots
         run: yarn nx affected -t publish-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Comment status
         uses: actions/github-script@v4
