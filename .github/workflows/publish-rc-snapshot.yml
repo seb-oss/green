@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     ## Only run this job if the PR title is "Version Packages"
-    if: contains(github.event.pull_request.title, 'Version Packages')
+    ## if: contains(github.event.pull_request.title, 'Version Packages')
 
     steps:
       - name: Get token
