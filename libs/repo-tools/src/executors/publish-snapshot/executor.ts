@@ -76,6 +76,7 @@ export default async function publishSnapshot(
     {
       cwd: `libs/${libName}`,
       env: { ...process.env, NPM_TOKEN: process.env.NPM_TOKEN },
+      stdio: ['inherit', 'pipe', 'pipe'],
     },
   )
   npmProcess.stdout.on('data', (data) => {
