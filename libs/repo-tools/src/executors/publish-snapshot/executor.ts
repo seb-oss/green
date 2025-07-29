@@ -35,13 +35,26 @@ export default async function publishSnapshot(
     return { success: false }
   }
 
-  // run npm publish
+  // Run npm publish
   console.info(`Publishing ${libName} as ${version}...`)
+
+  // Prepare environment with NPM_TOKEN
+  const env = {
+    ...process.env,
+    NPM_TOKEN: process.env.NPM_TOKEN,
+  }
+
+  // Write .npmrc with auth token in the package directory
+  const npmrcPath = `libs/${libName}/.npmrc`
+  const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NPM_TOKEN}\n`
+  require('fs').writeFileSync(npmrcPath, npmrcContent)
+
   const npmProcess = spawn(
     'npm',
     ['publish', '--tag', label, '--access=public'],
     {
       cwd: `libs/${libName}`,
+      env,
     },
   )
   npmProcess.stdout.on('data', (data) => {
@@ -54,6 +67,9 @@ export default async function publishSnapshot(
   const exitCode = await new Promise((resolve, reject) => {
     npmProcess.on('close', resolve)
   })
+
+  // Clean up .npmrc after publish
+  require('fs').unlinkSync(npmrcPath)
 
   if (exitCode === 0) {
     console.info(`Published ${libName} as ${version}`)
