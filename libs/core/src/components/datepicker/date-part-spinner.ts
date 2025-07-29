@@ -161,11 +161,9 @@ export class GdsDatePartSpinner extends GdsElement {
   }
 
   #dispatchChangeEvent() {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value.toString() },
-      }),
-    )
+    this.dispatchCustomEvent('change', {
+      detail: { value: this.value.toString() },
+    })
   }
 
   #formatNumber(num: number | string, padZeros: number) {

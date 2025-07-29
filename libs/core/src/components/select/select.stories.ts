@@ -16,6 +16,8 @@ import '../icon/icons/brand-green.ts'
 import '../icon/icons/books.ts'
 
 /**
+ * A select enables the user to choose a single option from a list.
+ *
  * `gds-select` is a wrapper component for the native select element.
  *
  * Use this component instead of `<gds-dropdown>` when you need to leverage the inherent behavior of the native select element, for example when native accessibility features, some of which are not currently replicable in custom dropdowns, are required. Usability on mobile devices is also sometimes better with native select elements.

@@ -87,13 +87,35 @@ export class GdsFormControlHeader extends GdsElement {
         : '0',
     )
 
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        bubbles: true,
-        composed: true,
-        detail: this.showExtendedSupportingText,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      bubbles: true,
+      composed: true,
+      detail: this.showExtendedSupportingText,
+    })
+  }
+
+  /**
+   * Handles the resize event to update the max-height of the extended supporting text.
+   * This is necessary to ensure that the extended supporting text doesnt overflow it's container
+   */
+  #handleResize = () => {
+    if (this.showExtendedSupportingText) {
+      // Update max-height to the current height of the slotted content
+      this._extendedSupportingText?.style.setProperty(
+        '--_max-height',
+        `${this._extendedSupportingText.scrollHeight}px`,
+      )
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback()
+    window.addEventListener('resize', this.#handleResize)
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    window.removeEventListener('resize', this.#handleResize)
   }
 
   #renderExtSupTxt() {

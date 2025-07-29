@@ -23,7 +23,7 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="form-info description hide-if-empty" *ngIf="description">
+<div class="form-info description hide-if-empty" *ngIf="description && descriptionIsVisible">
   {{ description }}
 </div>
 
@@ -60,7 +60,7 @@
     [ngClass]="{ 'no-resize': !!rows }"
     [class.nggv-field--error]="invalid"
     [attr.name]="name"
-    [attr.required]="required"
+    [attr.required]="required || null"
     [disabled]="disabled"
     [autofocus]="autofocus"
     [readOnly]="readonly"

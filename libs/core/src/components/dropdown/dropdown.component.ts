@@ -223,16 +223,16 @@ export class GdsDropdown<ValueT = any>
             .reduce(
               (acc: string, cur: ValueT) =>
                 acc +
-                this.options.find((v) => v.value === cur)?.innerHTML +
+                this.options.find((v) => v.value === cur)?.innerText +
                 ', ',
               '',
             )
             .slice(0, -2))
     } else {
-      displayValue = this.options.find((v) => v.selected)?.innerHTML
+      displayValue = this.options.find((v) => v.selected)?.innerText
     }
 
-    return displayValue || this.placeholder?.innerHTML || ''
+    return displayValue || this.placeholder?.innerText || ''
   }
 
   /**
@@ -354,7 +354,10 @@ export class GdsDropdown<ValueT = any>
       ${when(
         this.#shouldShowFooter(),
         () => html`
-          <gds-form-control-footer class="size-${this.size}">
+          <gds-form-control-footer
+            class="size-${this.size}"
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
+          >
             ${
               ``
               // @deprecated
@@ -365,7 +368,7 @@ export class GdsDropdown<ValueT = any>
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage || this.validationMessage}
+              ${this.errorMessage}
             </slot>
           </gds-form-control-footer>
         `,
@@ -374,7 +377,7 @@ export class GdsDropdown<ValueT = any>
   }
 
   #shouldShowFooter() {
-    return !this.plain && this.invalid
+    return !this.plain
   }
 
   protected _getValidityAnchor(): HTMLElement {
@@ -513,14 +516,11 @@ export class GdsDropdown<ValueT = any>
   }
 
   #dispatchUISateEvent = (toState: boolean, reason: UIStateChangeReason) =>
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { reason, open: toState },
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      detail: { reason, open: toState },
+      bubbles: false,
+      composed: false,
+    })
 
   #handlePopoverStateChange = (e: CustomEvent) => {
     if (this.#dispatchUISateEvent(e.detail.open, e.detail.reason)) {
@@ -540,12 +540,9 @@ export class GdsDropdown<ValueT = any>
     e.stopPropagation()
 
     // Emit cancellable filter input event. If cancelled, consumer is expreced to handle filtering and update the options list.
-    const wasCancelled = !this.dispatchEvent(
-      new CustomEvent('gds-filter-input', {
-        detail: { value: (e.currentTarget as HTMLInputElement).value },
-        cancelable: true,
-      }),
-    )
+    const wasCancelled = !this.dispatchCustomEvent('gds-filter-input', {
+      detail: { value: (e.currentTarget as HTMLInputElement).value },
+    })
 
     if (wasCancelled) return
 
@@ -615,24 +612,20 @@ export class GdsDropdown<ValueT = any>
 
   #dispatchInputEvent = () => {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('input', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 
   #dispatchChangeEvent = () => {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchCustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 

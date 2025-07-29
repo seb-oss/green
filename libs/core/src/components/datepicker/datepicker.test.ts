@@ -213,6 +213,57 @@ describe('<gds-datepicker>', () => {
 
       await expect(disabledDatecell).to.have.attribute('disabled')
     })
+
+    // Testing clear and today buttons
+    it('should show the today button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker open></gds-datepicker>`,
+      )
+      expect(el.test_todayButton).to.exist
+    })
+
+    it('should not show the today button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker hide-today-button open></gds-datepicker>`,
+      )
+      expect(el.test_todayButton).to.not.exist
+    })
+
+    it('should show the clear button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker clearable open></gds-datepicker>`,
+      )
+      expect(el.test_clearButton).to.exist
+    })
+
+    it('should not show the clear button', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker open></gds-datepicker>`,
+      )
+      expect(el.test_clearButton).to.not.exist
+    })
+
+    it('should always return a unique Date instance from the value property', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker value="2024-01-31"></gds-datepicker>`,
+      )
+
+      const date1 = el.value!
+
+      // Focus date part spinner and press key up to increment the year
+      const spinners = el.shadowRoot!.querySelectorAll<GdsDatePartSpinner>(
+        getScopedTagName('gds-date-part-spinner'),
+      )!
+      spinners[0].focus()
+      await sendKeys({
+        press: 'ArrowUp',
+      })
+      await el.updateComplete
+
+      const date2 = el.value!
+
+      expect(onlyDate(date1)).to.not.equal(onlyDate(date2))
+    })
   })
 
   describe('Interactions', () => {
@@ -582,33 +633,31 @@ describe('<gds-datepicker>', () => {
       await expect(yearDropdown.value).to.equal('2014')
     })
 
-    // Testing clear and today buttons
-    it('should show the today button', async () => {
+    it('should go to next month when pressing arrow right from the last day in the month', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker open></gds-datepicker>`,
+        html`<gds-datepicker
+          value="2024-01-31"
+          min="2014-01-01"
+          max="2034-12-31"
+          open
+        ></gds-datepicker>`,
       )
-      expect(el.test_todayButton).to.exist
-    })
+      await el.updateComplete
 
-    it('should not show the today button', async () => {
-      const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker hide-today-button open></gds-datepicker>`,
-      )
-      expect(el.test_todayButton).to.not.exist
-    })
+      const monthDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Month"]`,
+      )!
+      const yearDropdown = el.shadowRoot!.querySelector<GdsDropdown>(
+        `${getScopedTagName('gds-dropdown')}[label="Year"]`,
+      )!
 
-    it('should show the clear button', async () => {
-      const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker clearable open></gds-datepicker>`,
-      )
-      expect(el.test_clearButton).to.exist
-    })
+      await sendKeys({
+        press: 'ArrowRight',
+      })
+      await el.updateComplete
 
-    it('should not show the clear button', async () => {
-      const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker open></gds-datepicker>`,
-      )
-      expect(el.test_clearButton).to.not.exist
+      await expect(monthDropdown.value).to.equal('1')
+      await expect(yearDropdown.value).to.equal('2024')
     })
   })
 

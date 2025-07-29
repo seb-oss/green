@@ -9,7 +9,9 @@ import { html } from 'lit'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * `gds-divider` is used to semantically separate content, and has the same meaning as the `<hr>` element in HTML. Add `role="presentation"` to the divider if you only want a visual separation.
+ * Divider creates visual and semantic separation between content.
+ *
+ * Add `role="presentation"` to the divider if you only want a visual separation.
  *
  * The divider can be customized with different properties like color and size.
  *

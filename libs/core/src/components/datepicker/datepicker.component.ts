@@ -56,10 +56,10 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    return this._internalValue
+    return super.value
   }
   set value(value: Date | undefined) {
-    this._internalValue = value as any
+    super.value = value
   }
 
   /**
@@ -245,6 +245,10 @@ class Datepicker extends GdsFormControlElement<Date> {
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     return html`
       ${when(
@@ -344,7 +348,10 @@ class Datepicker extends GdsFormControlElement<Date> {
       ${when(
         this.#shouldShowFooter(),
         () =>
-          html`<gds-form-control-footer class="size-${this.size}">
+          html`<gds-form-control-footer
+            class="size-${this.size}"
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
+          >
             ${
               ``
               // @deprecated
@@ -355,7 +362,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage || this.validationMessage}
+              ${this.errorMessage}
             </slot>
           </gds-form-control-footer>`,
       )}
@@ -504,7 +511,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   }
 
   #shouldShowFooter() {
-    return !this.plain && this.invalid
+    return !this.plain
   }
 
   protected _getValidityAnchor(): HTMLElement {
@@ -610,23 +617,19 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #dispatchChangeEvent() {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('change', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('change', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 
   #dispatchInputEvent() {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('input', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 
@@ -696,7 +699,7 @@ class Datepicker extends GdsFormControlElement<Date> {
 
   #handleCalendarChange = (e: CustomEvent<Date>) => {
     e.stopPropagation()
-    this.value = e.detail
+    this.value = new Date(e.detail)
     this.open = false
     this.#dispatchChangeEvent()
     this.#dispatchInputEvent()
@@ -739,7 +742,7 @@ class Datepicker extends GdsFormControlElement<Date> {
   #handleCalendarFocusChange = async () => {
     this._focusedMonth = (await this._elCalendar).focusedMonth
     this._focusedYear = (await this._elCalendar).focusedYear
-    this.value = (await this._elCalendar).focusedDate
+    this.value = new Date((await this._elCalendar).focusedDate)
     this.requestUpdate()
     this.#dispatchInputEvent()
   }
@@ -750,12 +753,19 @@ class Datepicker extends GdsFormControlElement<Date> {
 
     if (e.detail.reason === 'close') {
       const calValue = (await this._elCalendar).value
+
+      if (!calValue) {
+        this.value = undefined
+        this.#dispatchChangeEvent()
+        return
+      }
+
       const hasChanged = !isSameDay(
         calValue || new Date(0),
         this.#valueOnOpen || new Date(0),
       )
       if (hasChanged) {
-        this.value = calValue
+        this.value = new Date(calValue)
         this.#dispatchChangeEvent()
       }
       if (this.value) {

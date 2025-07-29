@@ -223,13 +223,11 @@ export class GdsSegmentedControl<ValueT = any> extends withLayoutChildProps(
 
       this.#updateIndicator()
 
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { segment: selectedSegment },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('change', {
+        detail: { segment: selectedSegment },
+        bubbles: true,
+        composed: true,
+      })
     }
   }
 

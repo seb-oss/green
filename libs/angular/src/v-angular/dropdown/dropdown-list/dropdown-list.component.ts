@@ -10,6 +10,7 @@ import {
   Optional,
   Output,
   QueryList,
+  Renderer2,
   SimpleChanges,
   TemplateRef,
   ViewChildren,
@@ -56,6 +57,10 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dropdown'
 
+  @HostBinding('attr.data-position') get positionAttr() {
+    return this.dropdownPosition
+  }
+
   @Input() options!: any[]
 
   @Input() textToHighlight?: string
@@ -67,6 +72,19 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * */
   @Input() onlyEmitDistinctChanges = true
 
+  /**
+   * Used to control if the dropdown list should select the current active element, when Space is pressed on the keyboard.
+   * Primary usage is for typeahead, where the should be able to write a filter query containing spaces,
+   * but not select the current active element with Space.
+   */
+  @Input() selectWithSpace = true
+
+  /**
+   * When true, the dropdown will automatically choose to open above or below the input
+   * based on available space in the viewport, and will scale its height to fit if needed.
+   */
+  @Input() dynamicPosition = false
+
   @Output() selectedValueChanged = new EventEmitter<any>()
 
   @Output() closed = new EventEmitter<void>()
@@ -75,6 +93,9 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   public activeIndex = -1
 
   scope: string | undefined
+
+  // Indicates whether the dropdown list should be displayed below ('bottom') or above ('top') the input, based on available space.
+  dropdownPosition: 'bottom' | 'top' = 'bottom'
 
   private dropdownUtils: DropdownUtils<string | null, string, any> =
     new DropdownUtils<string | null, string, any>()
@@ -93,6 +114,8 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
     @Optional()
     @Inject(TRANSLOCO_SCOPE)
     protected translocoScope: TranslocoScope,
+    private renderer: Renderer2,
+    private elRef: ElementRef,
   ) {
     if (this.translocoScope) this.scope = this.translocoScope.toString()
   }
@@ -144,6 +167,9 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
     this._expanded = expanded
 
     if (expanded) {
+      if (this.dynamicPosition) {
+        this.setDropdownPosition()
+      }
       this.refreshSelectedOption()
       this.subscribeToKeyUpEvents()
       this.subscribeToKeyDownEvents()
@@ -212,6 +238,8 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * @param event fired containing which key was pressed.
    */
   onKeyDown(event: KeyboardEvent) {
+    // If space is pressed but it should not select an option, do nothing
+    if (event.key === ' ' && !this.selectWithSpace) return true
     switch (event.key) {
       case ' ': // Space - placed here to ensure the dropdown-list closes after selecting using "Space"
       case 'ArrowUp': // Disable scrolling up
@@ -242,10 +270,12 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   /**
    * @internal
    * Enter toggles the dropdown, home, end, and, arrows change the index.
+   * Space selects the currently active option if `selectWithSpace` is true.
    * @param event fired containing which key was released.
    */
   onKeyUp(event: KeyboardEvent) {
-    if (!this.expanded) return
+    // If space is pressed but it should not select an option, do nothing
+    if (!this.expanded || (event.key === ' ' && !this.selectWithSpace)) return
     let option
 
     switch (event.key) {
@@ -347,5 +377,43 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
         }
       }, 0)
     }
+  }
+
+  /**
+   * Calculates available space above and below the dropdown input,
+   * sets dropdownPosition ('top' or 'bottom') accordingly,
+   * and dynamically sets the max-height of the dropdown list to fit the viewport.
+   */
+  setDropdownPosition() {
+    const dropdown = this.elRef.nativeElement
+    // dropdown trigger
+    const dropdownInput = dropdown.parentElement
+    const dropdownList = dropdown.querySelector('ul[role="listbox"]')
+    const rect = dropdownInput.getBoundingClientRect()
+
+    const viewportHeight = window.innerHeight
+    const spaceBelow = viewportHeight - rect.bottom
+    const spaceAbove = rect.top
+
+    const MARGIN = 10
+    const MIN_HEIGHT = 100
+    const DROPDOWN_MAX_HEIGHT = 500
+    let maxDropdownHeight
+
+    if (spaceBelow >= DROPDOWN_MAX_HEIGHT) {
+      this.dropdownPosition = 'bottom'
+      maxDropdownHeight = DROPDOWN_MAX_HEIGHT
+    } else if (spaceAbove >= DROPDOWN_MAX_HEIGHT) {
+      this.dropdownPosition = 'top'
+      maxDropdownHeight = DROPDOWN_MAX_HEIGHT
+    } else if (spaceBelow > spaceAbove) {
+      this.dropdownPosition = 'bottom'
+      maxDropdownHeight = Math.max(spaceBelow - MARGIN, MIN_HEIGHT) // 10px margin, minimum height 100px
+    } else {
+      this.dropdownPosition = 'top'
+      maxDropdownHeight = Math.max(spaceAbove - MARGIN, MIN_HEIGHT) // 10px margin, minimum height 100px
+    }
+
+    this.renderer.setStyle(dropdownList, 'max-height', `${maxDropdownHeight}px`)
   }
 }

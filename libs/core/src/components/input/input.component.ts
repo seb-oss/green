@@ -187,6 +187,10 @@ class Input extends GdsFormControlElement<string> {
     this.value = ''
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     return html`
       ${when(
@@ -215,19 +219,19 @@ class Input extends GdsFormControlElement<string> {
       ${when(
         this.#shouldShowFooter(),
         () =>
-          html`<gds-form-control-footer
+          html` <gds-form-control-footer
             class="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars &&
-            this.maxlength - (this.value?.length || 0)}
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            .charCounter=${this.#shouldShowRemainingChars
+              ? this.maxlength - (this.value?.length || 0)
+              : undefined}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
   }
 
   #shouldShowFooter() {
-    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+    return !this.plain
   }
 
   _getValidityAnchor() {
@@ -242,12 +246,10 @@ class Input extends GdsFormControlElement<string> {
   #handleOnChange = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
-    this.dispatchEvent(
-      new Event('change', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchStandardEvent('change', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #handleFieldClick = () => {
@@ -256,18 +258,14 @@ class Input extends GdsFormControlElement<string> {
 
   #handleClearBtnClick = () => {
     this.value = ''
-    this.dispatchEvent(
-      new Event('gds-input-cleared', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-input-cleared', {
+      bubbles: true,
+      composed: true,
+    })
+    this.dispatchStandardEvent('input', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #renderFieldContents() {

@@ -16,8 +16,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { DefaultParams as ButtonDefaultParams } from '../button/button.stories.ts'
 
 /**
- * The Floating Action Button is used for functions central to the user experience, such as
- * support and help features that needs to be accessible at all times.
+ * Floating action button persists across screens for constant access to features that needs to be accessible at all times.
  *
  * The button is always floating visible in the users viewport, typically in the lower right
  * corner. This button can be used with an icon only.

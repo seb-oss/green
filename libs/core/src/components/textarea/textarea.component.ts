@@ -180,6 +180,10 @@ class Textarea extends GdsFormControlElement<string> {
     return this.shadowRoot?.querySelector('#field')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   @resizeObserver()
   private _handleResize() {
     if (!this.fieldBase) return
@@ -265,18 +269,19 @@ class Textarea extends GdsFormControlElement<string> {
         this.#shouldShowFooter(),
         () =>
           html`<gds-form-control-footer
-            lass="size-${this.size}"
-            .charCounter=${this.#shouldShowRemainingChars &&
-            this.maxlength - (this.value?.length || 0)}
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            id="footer"
+            class="size-${this.size}"
+            .charCounter=${this.#shouldShowRemainingChars
+              ? this.maxlength - (this.value?.length || 0)
+              : undefined}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
   }
 
   #shouldShowFooter() {
-    return !this.plain && (this.invalid || this.#shouldShowRemainingChars)
+    return !this.plain
   }
 
   protected _getValidityAnchor() {
@@ -291,12 +296,10 @@ class Textarea extends GdsFormControlElement<string> {
   #handleOnChange = (e: Event) => {
     const element = e.target as HTMLInputElement
     this.value = element.value
-    this.dispatchEvent(
-      new Event('change', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchStandardEvent('change', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   #handleOnPaste = (e: ClipboardEvent) => {
@@ -370,19 +373,14 @@ class Textarea extends GdsFormControlElement<string> {
       }
     })
 
-    this.dispatchEvent(
-      new Event('gds-input-cleared', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
-
-    this.dispatchEvent(
-      new Event('input', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-input-cleared', {
+      bubbles: true,
+      composed: true,
+    })
+    this.dispatchStandardEvent('input', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   @watch('rows')
@@ -429,6 +427,7 @@ class Textarea extends GdsFormControlElement<string> {
         class="native-control resize-${this.resizable}"
         aria-label=${(this.plain && this.label) || nothing}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
+        aria-errormessage="footer"
         placeholder=" "
         autocapitalize=${ifDefined(this.autocapitalize)}
         autocomplete=${ifDefined(this.autocomplete)}

@@ -47,7 +47,7 @@ export class NggvTypeaheadDropdownListComponent
     private renderer2: Renderer2,
     private element: ElementRef,
   ) {
-    super(translocoScope)
+    super(translocoScope, renderer2, element)
   }
 
   ngOnInit(): void {

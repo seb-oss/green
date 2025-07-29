@@ -84,6 +84,10 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.removeEventListener('invalid', this._syncRadioStates)
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   protected _getValidityAnchor(): HTMLElement {
     return this._contentElement
   }
@@ -144,20 +148,16 @@ class RadioGroup extends GdsFormControlElement<string> {
 
   #dispatchChangeEvents() {
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('change', {
-          composed: true,
-          bubbles: true,
-        }),
-      ),
+      this.dispatchStandardEvent('change', {
+        composed: true,
+        bubbles: true,
+      }),
     )
     this.updateComplete.then(() =>
-      this.dispatchEvent(
-        new Event('input', {
-          bubbles: true,
-          composed: true,
-        }),
-      ),
+      this.dispatchStandardEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
     )
   }
 
@@ -280,8 +280,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     return html` <gds-form-control-footer
       id="footer"
       class="size-${this.size}"
-      .validationMessage=${this.invalid &&
-      (this.errorMessage || this.validationMessage)}
+      .errorMessage=${this.invalid ? this.errorMessage : undefined}
     >
     </gds-form-control-footer>`
   }

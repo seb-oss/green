@@ -2,10 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="de" source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="sb77f4dce69a005ac">
-  <source>Error message.</source>
-  <target>Fehlermeldung.</target>
-</trans-unit>
 <trans-unit id="s5e8250fb85d64c23">
   <source>Close</source>
   <target>Schließen</target>
@@ -151,7 +147,7 @@
   <target>Nach rechts scrollen</target>
 </trans-unit>
 <trans-unit id="s9af3c72c33088826">
-  <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
+  <source>There are <x id="0" equiv-text="${errorControls.length}"/> errors to correct before you can continue:</source>
   <target>Es gibt <x id="0" equiv-text="${errors.length}"/> Fehler zu beheben, bevor du fortfahren kannst:</target>
 </trans-unit>
 <trans-unit id="sdc42f1da42d6411a">
@@ -169,6 +165,18 @@
 <trans-unit id="s3b8a6245b12fa2ad">
   <source>Breadcrumbs</source>
   <target>Brotkrümelnavigation</target>
+</trans-unit>
+<trans-unit id="s307db9af9905317d">
+  <source>Form error summary</source>
+  <target>Formularfehlerübersicht</target>
+</trans-unit>
+<trans-unit id="s979f38023babd06d">
+  <source>Dismiss alert</source>
+  <target>Benachrichtigung schließen</target>
+</trans-unit>
+<trans-unit id="s39943b8a5733f5d2">
+  <source>Auto-dismiss timer</source>
+  <target>Automatischer Schließ-Timer</target>
 </trans-unit>
 </body>
 </file>

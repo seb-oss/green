@@ -237,7 +237,11 @@ export class GdsCalendar extends GdsElement {
                   ${when(
                     this.showWeekNumbers,
                     () =>
-                      html`<td class="week-number" scope="row">
+                      html`<td
+                        class="week-number disabled"
+                        disabled
+                        scope="row"
+                      >
                         ${getWeek(week.days[0])}
                       </td>`,
                   )}
@@ -342,19 +346,17 @@ export class GdsCalendar extends GdsElement {
 
     this.value = dateOnMidDay
 
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: dateOnMidDay,
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('change', {
+      detail: dateOnMidDay,
+      bubbles: false,
+      composed: false,
+    })
   }
 
   @watch('value')
   private _valueChanged() {
     if (!this.value) return
-    this.focusedDate = this.value
+    this.focusedDate = new Date(this.value)
   }
 
   #handleKeyDown(e: KeyboardEvent) {
@@ -397,14 +399,11 @@ export class GdsCalendar extends GdsElement {
       newFocusedDate.getFullYear() >= this.min.getFullYear() &&
       newFocusedDate.getFullYear() <= this.max.getFullYear()
     ) {
-      const proceed = this.dispatchEvent(
-        new CustomEvent('gds-date-focused', {
-          detail: newFocusedDate,
-          bubbles: false,
-          composed: false,
-          cancelable: true,
-        }),
-      )
+      const proceed = this.dispatchCustomEvent('gds-date-focused', {
+        detail: newFocusedDate,
+        bubbles: false,
+        composed: false,
+      })
       if (proceed) {
         this.focusedDate = newFocusedDate
       }

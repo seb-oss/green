@@ -1,5 +1,115 @@
 # Changelog
 
+## 6.1.0
+
+### Minor Changes
+
+- 79efa1b: **V-Angular:** Changed nggv-toast to full width on smallest breakpoint
+
+### Patch Changes
+
+- 8023ea6: **V-Angular:** Improve dropdown dynamic positioning (top/bottom) and height calculation
+- 4f381d4: **V-Angular:** listWidth property to fold out component - added danger button to dialog component
+- 791dd16: V-Angular: Updated Table component with expanded rows by default attribute
+- Updated dependencies [72be834]
+  - @sebgroup/green-core@1.88.2
+
+## 6.0.5
+
+### Patch Changes
+
+- c031e4a: **V-Angular Input/Dropdown/Textarea**: Fixed styling for small variants; halved spacing underneath dropdown and textarea, and corrected height difference (compared to dropdown) for input field.
+
+## 6.0.4
+
+### Patch Changes
+
+- 86ea764: Fold out: close fold out on tab
+- 803b81c: Changed height of nggv-dateinput wrapper to match nggv-input wrapper
+
+## 6.0.3
+
+### Patch Changes
+
+- bad7bf3: Fix: showing validation message when passing message slot
+- Updated dependencies [27fe9cf]
+  - @sebgroup/green-core@1.88.0
+
+## 6.0.2
+
+### Patch Changes
+
+- e56c76a: V-angular: Updated textarea description logic with descriptionIsVisible property
+- 9abbfb9: Dropdown/Typeahead: Add input that controls if key "Space" should select active element in dropdown-list. Set to false from typeahead
+- Updated dependencies [577fc63]
+- Updated dependencies [f3b8f76]
+- Updated dependencies [eca17f0]
+  - @sebgroup/green-core@1.87.0
+
+## 6.0.1
+
+### Patch Changes
+
+- df15684: V-Angular: Updated the way required attribute is set inside components
+- Updated dependencies [1891932]
+  - @sebgroup/green-core@1.85.3
+
+## 6.0.0
+
+### Major Changes
+
+- ba3268c: Update minimal Angular version to 18
+
+### Patch Changes
+
+- Updated dependencies [60e38d9]
+- Updated dependencies [e4eb1ad]
+  - @sebgroup/green-core@1.85.0
+
+## 5.13.3
+
+### Patch Changes
+
+- 63487db: **V-Angular:** Fix component id collision warnings for toast component
+- Updated dependencies [56d1779]
+- Updated dependencies [55b23da]
+  - @sebgroup/green-core@1.84.0
+
+## 5.13.2
+
+### Patch Changes
+
+- b89a46f: V-Angular: Removed the top line/border from the table header.
+- Updated dependencies [c6833ae]
+  - @sebgroup/green-core@1.83.2
+
+## 5.13.1
+
+### Patch Changes
+
+- 0acbec7: Dragdrop: Prevet overflow for file name
+- Updated dependencies [1aa919a]
+- Updated dependencies [44dff87]
+- Updated dependencies [41b8a90]
+- Updated dependencies [73e0759]
+- Updated dependencies [4d4704b]
+- Updated dependencies [f1ceb54]
+  - @sebgroup/green-core@1.83.0
+
+## 5.13.0
+
+### Minor Changes
+
+- 9d223a7: V-Angular: Adding small variant of Dropdown
+- 9d223a7: V-Angular: Adding small variant of Checkbox
+- 9d223a7: V-Angular: Adding small variant of DateInput
+- 9d223a7: V-Angular: Adding small variant of Textarea
+
+### Patch Changes
+
+- 1829e13: Fixed dropdown selection behaviour when typeahead is used
+- 9d223a7: V-Angular: Fixing icon sizing in Date input
+
 ## 5.12.1
 
 ### Patch Changes

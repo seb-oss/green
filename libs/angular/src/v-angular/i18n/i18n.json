@@ -5,6 +5,7 @@
   "label.defaultlabel": "Label",
   "label.maxlength": "characters left",
   "label.optional": "Optional",
+  "button_delete": "Delete",
   "button_cancel": "Cancel",
   "button_apply": "Apply",
   "button_save": "Save",

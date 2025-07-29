@@ -96,7 +96,7 @@ export class GdsRadio extends GdsElement {
 
     this.checked = true
     this.focus()
-    this.dispatchEvent(new Event('input', { bubbles: true }))
+    this.dispatchStandardEvent('input', { bubbles: true })
   }
 
   #handleKeyDown = (e: KeyboardEvent) => {
@@ -105,7 +105,7 @@ export class GdsRadio extends GdsElement {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       this.checked = true
-      this.dispatchEvent(new Event('input', { bubbles: true }))
+      this.dispatchStandardEvent('input', { bubbles: true })
     }
   }
 

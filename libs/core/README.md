@@ -57,7 +57,7 @@ export class MyApp extends LitElement {
 
 Angular has support for using web components directly in the template. To enable it, you need to do the following:
 
-Add the `CUSTOM_ELEMENTS_SCHEMA` in the module where you plan to use the components. It is recommended to add this as locally as possible, only on the moduls/components where you need it, and not in the app module.
+Add the `CUSTOM_ELEMENTS_SCHEMA` in the module where you plan to use the components. It is recommended to add this as locally as possible, only on the modules/components where you need it, and not in the app module.
 
 You also need the `NggCoreWrapperModule` from `@sebgroup/green-angular`.
 
@@ -86,7 +86,7 @@ import * as ButtonStyles from '@sebgroup/green-core/components/button/button.tra
 ButtonStyles.register()
 ```
 
-Use the webcomponent in your template with the `*nggCoreElement` directive.
+Use the web component in your template with the `*nggCoreElement` directive.
 
 In your template:
 
@@ -94,11 +94,11 @@ In your template:
 <gds-button *nggCoreElement>Click me!</gds-button>
 ```
 
-The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same pupose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
+The `*nggCoreElement` directive comes from the `NggCoreWrapperModule` you imported above. It has the same purpose as the custom html template tag mentioned in the Lit example above: It handles custom element scoping for you.
 
 ### Using React
 
-In most cases, we already exort React wrappers for these components from the `@sebgroup/green-react` package. In those cases you can just use those. But you can also easily create your own wrappers using `@lit/react`.
+In most cases, we already export React wrappers for these components from the `@sebgroup/green-react` package. In those cases you can just use those. But you can also easily create your own wrappers using `@lit/react`.
 
 Here is an example:
 
