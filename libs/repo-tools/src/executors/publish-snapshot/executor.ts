@@ -1,5 +1,5 @@
 import { exec, spawn } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import type { ExecutorContext } from '@nx/devkit'
@@ -36,6 +36,17 @@ export default async function publishSnapshot(
     return { success: false }
   }
 
+  // Create local .npmrc in libs/<libName>
+  const npmrcPath = join('libs', libName, '.npmrc')
+  const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\n`
+  try {
+    writeFileSync(npmrcPath, npmrcContent, { mode: 0o600 })
+    console.log(`Created .npmrc at ${npmrcPath}`)
+  } catch (error) {
+    console.error(`Failed to write .npmrc: ${error.message}`)
+    process.exit(1)
+  }
+
   // Run npm whoami to verify authentication
   const whoamiProcess = spawn('npm', ['whoami'], {
     cwd: join('libs', libName),
@@ -54,6 +65,14 @@ export default async function publishSnapshot(
   const whoamiExitCode = await new Promise<number>((resolve) => {
     whoamiProcess.on('close', resolve)
   })
+
+  // Clean up .npmrc after whoami
+  try {
+    unlinkSync(npmrcPath)
+    console.log(`Cleaned up .npmrc at ${npmrcPath}`)
+  } catch (error) {
+    console.error(`Failed to clean up .npmrc: ${error.message}`)
+  }
 
   if (whoamiExitCode !== 0) {
     console.error('npm whoami failed. Check NPM_TOKEN validity.')
@@ -82,6 +101,14 @@ export default async function publishSnapshot(
   const exitCode = await new Promise((resolve, reject) => {
     npmProcess.on('close', resolve)
   })
+
+  // Clean up .npmrc after publish
+  try {
+    unlinkSync(npmrcPath)
+    console.log(`Cleaned up .npmrc at ${npmrcPath}`)
+  } catch (error) {
+    console.error(`Failed to clean up .npmrc: ${error.message}`)
+  }
 
   if (exitCode === 0) {
     console.info(`Published ${libName} as ${version}`)
