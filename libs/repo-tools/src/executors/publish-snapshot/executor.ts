@@ -42,6 +42,7 @@ export default async function publishSnapshot(
   try {
     writeFileSync(npmrcPath, npmrcContent, { mode: 0o600 })
     console.log(`Created .npmrc at ${npmrcPath}`)
+    console.log(`Content: ${npmrcContent.trim()}`)
   } catch (error) {
     console.error(`Failed to write .npmrc: ${error.message}`)
     process.exit(1)
