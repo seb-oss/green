@@ -38,7 +38,7 @@ export default async function publishSnapshot(
 
   // Create local .npmrc in libs/<libName>
   const npmrcPath = join('libs', libName, '.npmrc')
-  const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\n`
+  const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\nregistry=https://registry.npmjs.org`
   try {
     writeFileSync(npmrcPath, npmrcContent, { mode: 0o600 })
     console.log(`Created .npmrc at ${npmrcPath}`)
@@ -47,6 +47,12 @@ export default async function publishSnapshot(
     console.error(`Failed to write .npmrc: ${error.message}`)
     process.exit(1)
   }
+
+  const npmConfigProcess = spawn('npm', ['config', 'ls'], {
+    cwd: join('libs', libName),
+    env: { ...process.env },
+    stdio: ['inherit', 'pipe', 'pipe'],
+  })
 
   // Run npm whoami to verify authentication
   const whoamiProcess = spawn('npm', ['whoami', '--no-workspaces'], {
