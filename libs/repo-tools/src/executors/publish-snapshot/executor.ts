@@ -57,6 +57,7 @@ export default async function publishSnapshot(
   if (publishConfigDir === '') {
     console.info(`No publishConfig directory specified in package.json`)
   }
+  const publishConfigDirPath = join('libs', libName, publishConfigDir)
 
   // run npm publish
   console.info(`Publishing ${libName} as ${version}...`)
@@ -71,7 +72,7 @@ export default async function publishSnapshot(
       '--dry-run',
     ],
     {
-      cwd: publishConfigDir,
+      cwd: publishConfigDirPath,
       // env: { ...process.env },
       stdio: ['inherit', 'pipe', 'pipe'],
     },
