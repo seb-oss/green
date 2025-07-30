@@ -48,11 +48,39 @@ export default async function publishSnapshot(
     process.exit(1)
   }
 
+  // Log contents of packages.json
+  console.info(`Contents of ${libName}/package.json:`)
+  console.info(JSON.stringify(pkgJson, null, 2))
+
+  // List contents of publishConfig directory from packages.json config
+  const publishConfigDir = pkgJson.publishConfig?.directory || ''
+  if (publishConfigDir) {
+    console.info(`Contents of publishConfig directory (${publishConfigDir}):`)
+    try {
+      const files = readFileSync(join('libs', libName, publishConfigDir), {
+        encoding: 'utf-8',
+      })
+      console.info(files)
+    } catch (error) {
+      console.error(`Failed to read publishConfig directory: ${error.message}`)
+      return { success: false }
+    }
+  } else {
+    console.info(`No publishConfig directory specified in package.json`)
+  }
+
   // run npm publish
   console.info(`Publishing ${libName} as ${version}...`)
   const npmProcess = spawn(
     'npm',
-    ['publish', '--tag', label, '--access=public', '--no-workspaces'],
+    [
+      'publish',
+      '--tag',
+      label,
+      '--access=public',
+      '--no-workspaces',
+      '--dry-run',
+    ],
     {
       cwd: `libs/${libName}`,
       // env: { ...process.env },
