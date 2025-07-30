@@ -52,23 +52,9 @@ export default async function publishSnapshot(
   console.info(`Contents of ${libName}/package.json:`)
   console.info(JSON.stringify(pkgJson, null, 2))
 
-  // List contents of publishConfig directory from packages.json config
+  // Get publishConfig directory if specified
   const publishConfigDir = pkgJson.publishConfig?.directory || ''
-  if (publishConfigDir) {
-    const dirPath = join('libs', libName, publishConfigDir)
-    console.info(`Contents of publishConfig directory (${dirPath}):`)
-    const files = readdirSync(dirPath)
-    try {
-      if (files.length === 0) {
-        console.info('(empty directory)')
-      } else {
-        files.forEach((file) => console.info(file))
-      }
-    } catch (error) {
-      console.error(`Failed to read publishConfig directory: ${error.message}`)
-      return { success: false }
-    }
-  } else {
+  if (publishConfigDir === '') {
     console.info(`No publishConfig directory specified in package.json`)
   }
 
@@ -85,7 +71,7 @@ export default async function publishSnapshot(
       '--dry-run',
     ],
     {
-      cwd: `libs/${libName}`,
+      cwd: publishConfigDir,
       // env: { ...process.env },
       stdio: ['inherit', 'pipe', 'pipe'],
     },
