@@ -44,6 +44,8 @@ jobs:
       - run: npm config get registry
       - run: npm whoami
 
+      - run: npm config ls
+
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
