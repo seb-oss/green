@@ -57,10 +57,32 @@ export default async function publishSnapshot(
     process.exit(1)
   }
 
-  await execAsync(
-    `npm config set //registry.npmjs.org/:_authToken ${process.env.NODE_AUTH_TOKEN}`,
-    { cwd: join('libs', libName) },
+  // await execAsync(
+  //   `npm config set //registry.npmjs.org/:_authToken ${process.env.NODE_AUTH_TOKEN}`,
+  //   { cwd: join('libs', libName) },
+  // )
+
+  const npmConfigSetProcess = spawn(
+    'npm',
+    [
+      'config',
+      'set',
+      '//registry.npmjs.org/:_authToken',
+      process.env.NODE_AUTH_TOKEN,
+    ],
+    {
+      cwd: join('libs', libName),
+      //env: { ...process.env },
+      stdio: ['inherit', 'pipe', 'pipe'],
+    },
   )
+
+  npmConfigSetProcess.stdout.on('data', (data) => {
+    console.log(`npm config set: ${data.toString().trim()}`)
+  })
+  npmConfigSetProcess.stderr.on('data', (data) => {
+    console.error(`npm config set error: ${data.toString().trim()}`)
+  })
 
   const npmConfigProcess = spawn('npm', ['config', 'ls'], {
     cwd: join('libs', libName),
