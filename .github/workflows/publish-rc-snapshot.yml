@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     ## Only run this job if the PR title is "Version Packages"
-    ## if: contains(github.event.pull_request.title, 'Version Packages')
+    if: contains(github.event.pull_request.title, 'Version Packages')
 
     steps:
       - name: Get token
@@ -99,8 +99,8 @@ jobs:
 
               ---
 
-              :test_tube: The latest RC snapshot of Green Core will be tested for visual regressions in the Green Testbed project, which is triggered by this workflow.<br />
-              Check the status here: [![Visual Regression Tests on Browserstack](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml/badge.svg)](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml)
+              :test_tube: The latest RC snapshot of Green Core will be autmatically tested for visual regressions in the Green Testbed project.<br />
+              [![Visual Regression Tests on Browserstack](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml/badge.svg)](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml)
               `
             })
 
