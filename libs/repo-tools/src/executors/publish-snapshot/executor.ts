@@ -85,7 +85,7 @@ export default async function publishSnapshot(
     console.error(`npm config set error: ${data.toString().trim()}`)
   })
 
-  const npmConfigProcess = spawn('npm', ['config', 'ls'], {
+  const npmConfigProcess = spawn('npm', ['config', 'ls', '--no-workspaces'], {
     cwd: join('libs', libName),
     //env: { ...process.env },
     stdio: ['inherit', 'pipe', 'pipe'],
