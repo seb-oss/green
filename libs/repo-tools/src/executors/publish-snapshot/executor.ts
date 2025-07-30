@@ -36,17 +36,10 @@ export default async function publishSnapshot(
     return { success: false }
   }
 
-  if (!process.env.NPM_TOKEN) {
-    console.error('Error: NPM_TOKEN environment variable is not set.')
-    process.exit(1)
-  }
-
-  console.log(`NPM_TOKEN starts with: ${process.env.NPM_TOKEN.slice(0, 4)}...`)
-
   // Run npm whoami to verify authentication
   const whoamiProcess = spawn('npm', ['whoami'], {
     cwd: join('libs', libName),
-    env: { ...process.env, NPM_TOKEN: process.env.NPM_TOKEN },
+    env: { ...process.env },
     stdio: ['inherit', 'pipe', 'pipe'],
   })
 
@@ -75,7 +68,7 @@ export default async function publishSnapshot(
     ['publish', '--tag', label, '--access=public'],
     {
       cwd: `libs/${libName}`,
-      env: { ...process.env, NPM_TOKEN: process.env.NPM_TOKEN },
+      env: { ...process.env },
       stdio: ['inherit', 'pipe', 'pipe'],
     },
   )

@@ -69,7 +69,7 @@ jobs:
         id: publish-snapshots
         run: yarn nx affected -t publish-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Display npm debug log
         if: failure()
