@@ -36,15 +36,6 @@ export default async function publishSnapshot(
     return { success: false }
   }
 
-  if (!process.env.NODE_AUTH_TOKEN) {
-    console.error('NODE_AUTH_TOKEN not set')
-    process.exit(1)
-  }
-
-  console.log(
-    `NODE_AUTH_TOKEN starts: ${process.env.NODE_AUTH_TOKEN.slice(0, 4)}...`,
-  )
-
   // Create local .npmrc in libs/<libName>
   const npmrcPath = join('libs', libName, '.npmrc')
   const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\nregistry=https://registry.npmjs.org\nalways-auth=true`
@@ -56,80 +47,6 @@ export default async function publishSnapshot(
     console.error(`Failed to write .npmrc: ${error.message}`)
     process.exit(1)
   }
-
-  // await execAsync(
-  //   `npm config set //registry.npmjs.org/:_authToken ${process.env.NODE_AUTH_TOKEN}`,
-  //   { cwd: join('libs', libName) },
-  // )
-
-  const npmConfigSetProcess = spawn(
-    'npm',
-    [
-      'config',
-      'set',
-      '//registry.npmjs.org/:_authToken',
-      process.env.NODE_AUTH_TOKEN,
-      '--no-workspaces',
-    ],
-    {
-      cwd: join('libs', libName),
-      //env: { ...process.env },
-      stdio: ['inherit', 'pipe', 'pipe'],
-    },
-  )
-
-  npmConfigSetProcess.stdout.on('data', (data) => {
-    console.log(`npm config set: ${data.toString().trim()}`)
-  })
-  npmConfigSetProcess.stderr.on('data', (data) => {
-    console.error(`npm config set error: ${data.toString().trim()}`)
-  })
-
-  const npmConfigProcess = spawn('npm', ['config', 'ls', '--no-workspaces'], {
-    cwd: join('libs', libName),
-    //env: { ...process.env },
-    stdio: ['inherit', 'pipe', 'pipe'],
-  })
-
-  npmConfigProcess.stdout.on('data', (data) => {
-    console.log(`npm config ls: ${data.toString().trim()}`)
-  })
-  npmConfigProcess.stderr.on('data', (data) => {
-    console.error(`npm config ls error: ${data.toString().trim()}`)
-  })
-
-  // // Run npm whoami to verify authentication
-  // const whoamiProcess = spawn('npm', ['whoami', '--no-workspaces'], {
-  //   cwd: join('libs', libName),
-  //   //env: { ...process.env },
-  //   stdio: ['inherit', 'pipe', 'pipe'],
-  // })
-
-  // let whoamiOutput = ''
-  // whoamiProcess.stdout.on('data', (data) => {
-  //   whoamiOutput += data.toString()
-  // })
-  // whoamiProcess.stderr.on('data', (data) => {
-  //   console.error(`npm whoami error: ${data.toString().trim()}`)
-  // })
-
-  // const whoamiExitCode = await new Promise<number>((resolve) => {
-  //   whoamiProcess.on('close', resolve)
-  // })
-
-  // // Clean up .npmrc after whoami
-  // try {
-  //   unlinkSync(npmrcPath)
-  //   console.log(`Cleaned up .npmrc at ${npmrcPath}`)
-  // } catch (error) {
-  //   console.error(`Failed to clean up .npmrc: ${error.message}`)
-  // }
-
-  // if (whoamiExitCode !== 0) {
-  //   console.error('npm whoami failed. Check NPM_TOKEN validity.')
-  //   process.exit(1)
-  // }
-  // console.log(`Authenticated as: ${whoamiOutput.trim()}`)
 
   // run npm publish
   console.info(`Publishing ${libName} as ${version}...`)
