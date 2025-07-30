@@ -37,7 +37,9 @@ jobs:
         with:
           node-version: lts/*
           registry-url: 'https://registry.npmjs.org'
-      ##- run: npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
+          scope: '@sebgroup'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - run: npm config get registry
       - run: npm whoami
