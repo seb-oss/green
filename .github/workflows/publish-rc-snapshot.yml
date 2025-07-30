@@ -96,6 +96,11 @@ jobs:
                 npm install @sebgroup/package-name@rc
 
               :information_source: Please note that these are intended for testing purposes only.
+
+              ---
+
+              :test_tube: The latest RC snapshot of Green Core will be tested for visual regressions in the Green Testbed project, which is triggered by this workflow.<br />
+              Check the status here: [![Visual Regression Tests on Browserstack](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml/badge.svg)](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml)
               `
             })
 
