@@ -69,6 +69,7 @@ export default async function publishSnapshot(
       'set',
       '//registry.npmjs.org/:_authToken',
       process.env.NODE_AUTH_TOKEN,
+      '--no-workspaces',
     ],
     {
       cwd: join('libs', libName),
