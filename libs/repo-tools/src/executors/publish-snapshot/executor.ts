@@ -98,47 +98,47 @@ export default async function publishSnapshot(
     console.error(`npm config ls error: ${data.toString().trim()}`)
   })
 
-  // Run npm whoami to verify authentication
-  const whoamiProcess = spawn('npm', ['whoami', '--no-workspaces'], {
-    cwd: join('libs', libName),
-    //env: { ...process.env },
-    stdio: ['inherit', 'pipe', 'pipe'],
-  })
+  // // Run npm whoami to verify authentication
+  // const whoamiProcess = spawn('npm', ['whoami', '--no-workspaces'], {
+  //   cwd: join('libs', libName),
+  //   //env: { ...process.env },
+  //   stdio: ['inherit', 'pipe', 'pipe'],
+  // })
 
-  let whoamiOutput = ''
-  whoamiProcess.stdout.on('data', (data) => {
-    whoamiOutput += data.toString()
-  })
-  whoamiProcess.stderr.on('data', (data) => {
-    console.error(`npm whoami error: ${data.toString().trim()}`)
-  })
+  // let whoamiOutput = ''
+  // whoamiProcess.stdout.on('data', (data) => {
+  //   whoamiOutput += data.toString()
+  // })
+  // whoamiProcess.stderr.on('data', (data) => {
+  //   console.error(`npm whoami error: ${data.toString().trim()}`)
+  // })
 
-  const whoamiExitCode = await new Promise<number>((resolve) => {
-    whoamiProcess.on('close', resolve)
-  })
+  // const whoamiExitCode = await new Promise<number>((resolve) => {
+  //   whoamiProcess.on('close', resolve)
+  // })
 
-  // Clean up .npmrc after whoami
-  try {
-    unlinkSync(npmrcPath)
-    console.log(`Cleaned up .npmrc at ${npmrcPath}`)
-  } catch (error) {
-    console.error(`Failed to clean up .npmrc: ${error.message}`)
-  }
+  // // Clean up .npmrc after whoami
+  // try {
+  //   unlinkSync(npmrcPath)
+  //   console.log(`Cleaned up .npmrc at ${npmrcPath}`)
+  // } catch (error) {
+  //   console.error(`Failed to clean up .npmrc: ${error.message}`)
+  // }
 
-  if (whoamiExitCode !== 0) {
-    console.error('npm whoami failed. Check NPM_TOKEN validity.')
-    process.exit(1)
-  }
-  console.log(`Authenticated as: ${whoamiOutput.trim()}`)
+  // if (whoamiExitCode !== 0) {
+  //   console.error('npm whoami failed. Check NPM_TOKEN validity.')
+  //   process.exit(1)
+  // }
+  // console.log(`Authenticated as: ${whoamiOutput.trim()}`)
 
   // run npm publish
   console.info(`Publishing ${libName} as ${version}...`)
   const npmProcess = spawn(
     'npm',
-    ['publish', '--tag', label, '--access=public'],
+    ['publish', '--tag', label, '--access=public', '--no-workspaces'],
     {
       cwd: `libs/${libName}`,
-      env: { ...process.env },
+      // env: { ...process.env },
       stdio: ['inherit', 'pipe', 'pipe'],
     },
   )
