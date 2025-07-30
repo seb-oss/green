@@ -69,7 +69,7 @@ export default async function publishSnapshot(
       label,
       '--access=public',
       '--no-workspaces',
-      '--dry-run',
+      //'--dry-run',
     ],
     {
       cwd: publishConfigDirPath,
