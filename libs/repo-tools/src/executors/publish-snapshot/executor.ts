@@ -1,5 +1,5 @@
 import { exec, spawn } from 'node:child_process'
-import { readFileSync, unlinkSync, writeFileSync } from 'node:fs'
+import { readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 
 import type { ExecutorContext } from '@nx/devkit'
@@ -55,12 +55,15 @@ export default async function publishSnapshot(
   // List contents of publishConfig directory from packages.json config
   const publishConfigDir = pkgJson.publishConfig?.directory || ''
   if (publishConfigDir) {
-    console.info(`Contents of publishConfig directory (${publishConfigDir}):`)
+    const dirPath = join('libs', libName, publishConfigDir)
+    console.info(`Contents of publishConfig directory (${dirPath}):`)
+    const files = readdirSync(dirPath)
     try {
-      const files = readFileSync(join('libs', libName, publishConfigDir), {
-        encoding: 'utf-8',
-      })
-      console.info(files)
+      if (files.length === 0) {
+        console.info('(empty directory)')
+      } else {
+        files.forEach((file) => console.info(file))
+      }
     } catch (error) {
       console.error(`Failed to read publishConfig directory: ${error.message}`)
       return { success: false }
