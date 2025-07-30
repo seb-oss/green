@@ -37,7 +37,7 @@ export default async function publishSnapshot(
   }
 
   // Create local .npmrc in libs/<libName>
-  const npmrcPath = '.npmrc'
+  const npmrcPath = join('libs', libName, '.npmrc')
   const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\n`
   try {
     writeFileSync(npmrcPath, npmrcContent, { mode: 0o600 })
@@ -48,7 +48,7 @@ export default async function publishSnapshot(
   }
 
   // Run npm whoami to verify authentication
-  const whoamiProcess = spawn('npm', ['whoami'], {
+  const whoamiProcess = spawn('npm', ['whoami', '--no-workspaces'], {
     cwd: join('libs', libName),
     env: { ...process.env },
     stdio: ['inherit', 'pipe', 'pipe'],
