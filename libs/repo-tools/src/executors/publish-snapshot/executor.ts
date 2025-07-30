@@ -38,7 +38,7 @@ export default async function publishSnapshot(
 
   // Create local .npmrc in libs/<libName>
   const npmrcPath = join('libs', libName, '.npmrc')
-  const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\nregistry=https://registry.npmjs.org`
+  const npmrcContent = `//registry.npmjs.org/:_authToken=${process.env.NODE_AUTH_TOKEN}\nregistry=https://registry.npmjs.org\nalways-auth=true`
   try {
     writeFileSync(npmrcPath, npmrcContent, { mode: 0o600 })
     console.log(`Created .npmrc at ${npmrcPath}`)
