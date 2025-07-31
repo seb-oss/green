@@ -83,7 +83,8 @@ export class NggSliderComponent
   }
 
   handleChange(): void {
-    this.value = this.value ?? 0
+    this.value =
+      this.value && this.value.toString() !== '' ? this.value : this.min
     this.setTrackBackground()
     this.sliderChange.emit(this.value)
     this.onChangeFn && this.onChangeFn(this.value)
