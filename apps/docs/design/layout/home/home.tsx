@@ -79,7 +79,7 @@ export function Home({
           </GdsCard>
         )} */}
 
-        <GdsCard height="70vh">
+        <GdsCard padding="0; s {m}">
           <Hero />
         </GdsCard>
       </GdsFlex>
