@@ -67,7 +67,8 @@ export function Slider({
 
     let percent = 0
     if (sliderValue !== undefined)
-      percent = ((sliderValue - min) / (max - min)) * 100
+      percent =
+        (Math.round((sliderValue - min) / step) / ((max - min) / step)) * 100
 
     setBackground(getSliderTrackBackground(percent))
   }, [disabled, sliderValue])
