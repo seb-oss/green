@@ -95,7 +95,10 @@ export class NggSliderComponent
       return
     }
 
-    const percent = ((this.value - this.min) / (this.max - this.min)) * 100
+    const percent =
+      (Math.round((this.value - this.min) / this.step) /
+        ((this.max - this.min) / this.step)) *
+      100
     this.style.background = getSliderTrackBackground(percent)
   }
 
