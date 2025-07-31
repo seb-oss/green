@@ -161,6 +161,7 @@ export function Slider({
         step={step}
         disabled={disabled}
         onChange={(e) => handleChange(e.currentTarget.value)}
+        aria-valuenow={sliderValue || 0}
         style={{
           background,
         }}
