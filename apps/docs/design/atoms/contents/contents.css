@@ -1,0 +1,4 @@
+[data-overflow]::part(_button) {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

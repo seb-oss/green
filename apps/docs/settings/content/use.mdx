@@ -1,0 +1,28 @@
+Using icons 
+
+```tsx
+
+// In a component
+const { actions } = useContentContext();
+
+// Get all icons
+const allIcons = actions.getIcons();
+
+// Get a specific icon
+const eyeIcon = actions.getIcon('eye-open');
+
+// Get icons by category
+const generalIcons = actions.getIconsByCategory('General');
+
+// Search icons
+const searchResults = actions.searchIcons('eye');
+
+// Access icon variants
+const regularSvg = eyeIcon?.variants.regular;
+const solidSvg = eyeIcon?.variants.solid;
+
+// Get framework-specific code
+const webComponent = eyeIcon?.framework.web.component;
+
+
+```
