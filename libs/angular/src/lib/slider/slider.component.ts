@@ -83,7 +83,8 @@ export class NggSliderComponent
   }
 
   handleChange(): void {
-    this.value = this.value ?? 0
+    this.value =
+      this.value && this.value.toString() !== '' ? this.value : this.min
     this.setTrackBackground()
     this.sliderChange.emit(this.value)
     this.onChangeFn && this.onChangeFn(this.value)
@@ -95,7 +96,10 @@ export class NggSliderComponent
       return
     }
 
-    const percent = ((this.value - this.min) / (this.max - this.min)) * 100
+    const percent =
+      (Math.round((this.value - this.min) / this.step) /
+        ((this.max - this.min) / this.step)) *
+      100
     this.style.background = getSliderTrackBackground(percent)
   }
 
