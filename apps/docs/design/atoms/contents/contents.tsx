@@ -134,21 +134,17 @@ export function TableOfContents({
     return () => window.removeEventListener('scroll', throttledScroll)
   }, [handleScroll])
 
-  const scrollToSection = useCallback((section: Section) => {
-    const targetId = section.scrollTo || section.id
-    const element = document.getElementById(targetId)
-    if (element) {
-      setActiveSection(section.id)
-      const headerOffset = 100
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = window.scrollY + elementPosition - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      })
+  // effect to scroll to url anchor if present, after content has loaded
+  useEffect(() => {
+    if (sections.length === 0) return
+    const hash = window.location.hash.replace('#', '')
+    if (hash) {
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
     }
-  }, [])
+  }, [sections])
 
   if (sections.length === 0) return null
 
@@ -160,6 +156,8 @@ export function TableOfContents({
       inset="90px auto auto auto"
       grid-column="10/13"
       height="max-content"
+      role="navigation"
+      aria-label="Table of contents"
     >
       <Core.GdsFlex flex-direction="column" gap="s">
         <Core.GdsFlex padding="0 0 0 m">
@@ -171,7 +169,7 @@ export function TableOfContents({
               key={section.id}
               rank={activeSection === section.id ? 'secondary' : 'tertiary'}
               size="xs"
-              onClick={() => scrollToSection(section)}
+              href={`#${section.id}`}
               justify-content="flex-start"
               data-overflow
               data-id={section.id}
