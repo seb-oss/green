@@ -22,6 +22,7 @@
   --gds-sys-color-blue-dark-2: #007ac7;
   --gds-sys-shape-corner-medium: 0.25rem;
   --sg-table-row-expand-font-weight: 500;
+  --sg-table-row-expand-font-weight-light: 400;
 
   @include table.add-table();
   width: 100%;
@@ -144,6 +145,13 @@
 
           &[aria-expanded='true'] svg {
             transform: rotate(-180deg);
+          }
+        }
+
+        .gds-item-field-text {
+          padding-left: 0.2rem;
+          .gds-item-field-extra-label {
+            font-weight: var(--sg-table-row-expand-font-weight-light, 400);
           }
         }
       }

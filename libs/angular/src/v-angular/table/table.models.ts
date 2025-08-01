@@ -45,6 +45,12 @@ export interface TableHeaderOptions {
    * This is useful when the label is hidden on mobile view but the data is still displayed.
    */
   boldTextOnMobile?: boolean
+
+  /**
+   * Used to set extra label for the column.
+   * This is useful when the column has an additional label that needs to be shown.
+   */
+  extraLabel?: string
 }
 
 /** Options applying to table rows */
