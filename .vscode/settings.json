@@ -4,7 +4,7 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "prettier.configPath": "prettier.config.mjs",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "workbench.editor.customLabels.patterns": {
     "**/app/**": "${dirname}/${filename}",
     "**/libs/core/src/components/**": "core/${dirname}/${filename}.${extname}"
