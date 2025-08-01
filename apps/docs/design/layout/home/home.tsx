@@ -93,11 +93,19 @@ export function Home({
             line-height="heading-s"
             color="secondary"
             max-width="80ch"
+            id="featured-subheading"
           >
             Components designed with intention, focused on user experience.
           </GdsText>
         </GdsFlex>
-        <GdsGrid columns="1; l{3}" gap="l" width="100%">
+        <GdsGrid
+          columns="1; l{3}"
+          gap="l"
+          width="100%"
+          role="navigation"
+          aria-label="Featured components"
+          aria-describedby="featured-subheading"
+        >
           {featuredComponents.map((component) => (
             <GdsCard
               min-height="100%"
@@ -147,12 +155,19 @@ export function Home({
             line-height="heading-s"
             color="secondary"
             max-width="80ch"
+            id="get-started-subheading"
           >
             Essential foundations: tokens, color scales, and declarative
             layouts.
           </GdsText>
         </GdsFlex>
-        <GdsGrid columns="1; s{3}" gap="l">
+        <GdsGrid
+          columns="1; s{3}"
+          gap="l"
+          role="navigation"
+          aria-label="Get started"
+          aria-describedby="get-started-subheading"
+        >
           <GdsCard
             gap="m"
             height="240px"
@@ -331,11 +346,18 @@ export function Home({
             line-height="heading-s"
             color="secondary"
             max-width="80ch"
+            id="resources-subheading"
           >
             Design and development resources to help you build with Green.
           </GdsText>
         </GdsFlex>
-        <GdsGrid columns="1; s{3}" gap="l">
+        <GdsGrid
+          columns="1; s{3}"
+          gap="l"
+          role="navigation"
+          aria-label="Resources"
+          aria-describedby="resources-subheading"
+        >
           <GdsCard>
             <IconBrandFigma />
             <Link href="https://figma.com/" isExternal>

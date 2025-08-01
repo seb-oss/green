@@ -18,7 +18,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
     .join(' ')
 
   return (
-    <main className={classes} {...rest}>
+    <div className={classes} {...rest}>
       <GdsFlex
         min-height="100vh"
         flex-direction="column; s{row}"
@@ -37,11 +37,13 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
           margin="0 auto"
           data-content
         >
-          <ViewTransition>{children}</ViewTransition>
+          <main>
+            <ViewTransition>{children}</ViewTransition>
+          </main>
           <Footer />
         </GdsFlex>
       </GdsFlex>
       <Command />
-    </main>
+    </div>
   )
 }

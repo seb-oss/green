@@ -18,6 +18,7 @@ export default function Footer() {
       border-color="primary"
       border-width="4xs 0 0 0"
       margin="0; s{4xl 0 0 0}"
+      role="contentinfo"
     >
       <GdsFlex justify-content="space-between" align-items="center">
         <GdsFlex align-items="center" gap="s" flex="1">

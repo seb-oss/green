@@ -305,6 +305,8 @@ export default function Sidebar() {
       inset="0; s{0px auto auto auto}"
       border-width={menuOpen ? '0 0 4xs 0' : '0'}
       border-color="primary"
+      role="navigation"
+      aria-label="Main"
     >
       <Core.GdsFlex
         display="none; s{flex}"
@@ -327,7 +329,6 @@ export default function Sidebar() {
           </Link>
         )}
       </Core.GdsFlex>
-
       <Core.GdsFlex
         display="flex; s{none}"
         align-items="center"
@@ -358,7 +359,6 @@ export default function Sidebar() {
           )}
         </Link>
       </Core.GdsFlex>
-
       <Core.GdsFlex
         flex-direction="column"
         gap="xs"
@@ -369,7 +369,6 @@ export default function Sidebar() {
       >
         {isOpen || menuOpen ? renderExpandedNav : renderCollapsedNav}
       </Core.GdsFlex>
-
       <Core.GdsFlex
         key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
         padding={isOpen ? '0 0 0 0' : '0'}
