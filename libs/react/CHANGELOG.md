@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.29.2
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+
 ## 3.29.1
 
 ### Patch Changes

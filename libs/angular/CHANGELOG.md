@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.1.1
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+- 921ee52: V-Angular: Updated Table component with extra label
+- b388664: **Dropdown:** Add optional generic type for `DropdownOption`
+
 ## 6.1.0
 
 ### Minor Changes
