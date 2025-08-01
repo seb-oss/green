@@ -55,6 +55,8 @@ export default function Tabs({ slug }: TabsProps) {
       border-color="primary"
       variant="secondary"
       width="100%"
+      role="navigation"
+      aria-label="Component documentation areas"
     >
       <Core.GdsFlex
         justify-content="space-between"
