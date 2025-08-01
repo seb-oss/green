@@ -62,6 +62,8 @@ const CollapsibleSection = ({
         key={isOpen + 'chevron'}
         rank="tertiary"
         data-animation="scroll"
+        label="Toggle sub navigation"
+        gds-aria-expanded={isOpen.toString()}
         onClick={(e) => {
           e.preventDefault()
           onToggle()
