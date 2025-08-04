@@ -88,7 +88,7 @@ export class GdsCheckbox extends GdsFormControlElement {
         ?disabled=${this.disabled}
         ?indeterminate=${this.indeterminate}
         aria-invalid=${this.invalid}
-        aria-describedby="supporting-text"
+        ${this.supportingText ? 'aria-describedby="supporting-text"' : ''}
         id="checkbox-input"
       />
       <gds-toggle-control-base type="checkbox">
