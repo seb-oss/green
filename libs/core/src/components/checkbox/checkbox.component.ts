@@ -64,25 +64,25 @@ export class GdsCheckbox extends GdsFormControlElement {
     this._internalValue = value
   }
 
-  @query('.rbcb')
+  @query('input[type="checkbox"]')
   private _elCheckbox!: HTMLElement
 
   connectedCallback() {
     super.connectedCallback()
-    this.setAttribute('role', 'checkbox')
+    // this.setAttribute('role', 'checkbox')
     this._updateAriaState()
     this.addEventListener('keydown', this.#handleKeyDown)
     this.addEventListener('click', this.#handleClick)
   }
 
   private _updateAriaState() {
-    this.setAttribute(
-      'aria-checked',
-      this.indeterminate ? 'mixed' : this.checked.toString(),
-    )
-    this.setAttribute('aria-disabled', this.disabled.toString())
-    this.setAttribute('tabindex', this.disabled ? '-1' : '0')
-    this.toggleAttribute('aria-invalid', this.invalid)
+    // this.setAttribute(
+    //   'aria-checked',
+    //   this.indeterminate ? 'mixed' : this.checked.toString(),
+    // )
+    // this.setAttribute('aria-disabled', this.disabled.toString())
+    //this.setAttribute('tabindex', this.disabled ? '-1' : '0')
+    // this.toggleAttribute('aria-invalid', this.invalid)
   }
 
   @watch('indeterminate')
@@ -107,11 +107,26 @@ export class GdsCheckbox extends GdsFormControlElement {
 
   render() {
     return html`
-      <gds-toggle-control-base
-        supporting-text=${this.supportingText}
-        label=${this.label}
+      <input
         type="checkbox"
-      >
+        ?checked=${this.checked}
+        ?disabled=${this.disabled}
+        ?indeterminate=${this.indeterminate}
+        aria-invalid=${this.invalid}
+        aria-describedby="supporting-text"
+        id="checkbox-input"
+      />
+      <gds-toggle-control-base type="checkbox">
+        <label for="checkbox-input" slot="label" @click=${this.#handleClick}>
+          ${this.label}
+        </label>
+        <span
+          slot="supporting-text"
+          class="supporting-text"
+          id="supporting-text"
+        >
+          ${this.supportingText}
+        </span>
         ${checkboxToggle({
           checked: this.checked,
           indeterminate: this.indeterminate,
