@@ -69,39 +69,14 @@ export class GdsCheckbox extends GdsFormControlElement {
 
   connectedCallback() {
     super.connectedCallback()
-    // this.setAttribute('role', 'checkbox')
-    this._updateAriaState()
     this.addEventListener('keydown', this.#handleKeyDown)
     this.addEventListener('click', this.#handleClick)
-  }
-
-  private _updateAriaState() {
-    // this.setAttribute(
-    //   'aria-checked',
-    //   this.indeterminate ? 'mixed' : this.checked.toString(),
-    // )
-    // this.setAttribute('aria-disabled', this.disabled.toString())
-    //this.setAttribute('tabindex', this.disabled ? '-1' : '0')
-    // this.toggleAttribute('aria-invalid', this.invalid)
   }
 
   @watch('indeterminate')
   private _handleIndeterminateChange() {
     if (this.indeterminate) {
       this.checked = false
-    }
-  }
-
-  protected updated(changedProperties: Map<string, unknown>) {
-    super.updated(changedProperties)
-
-    if (
-      changedProperties.has('checked') ||
-      changedProperties.has('indeterminate') ||
-      changedProperties.has('disabled') ||
-      changedProperties.has('invalid')
-    ) {
-      this._updateAriaState()
     }
   }
 
