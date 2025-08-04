@@ -27,12 +27,12 @@ export const styles = css`
       justify-content: center;
     }
 
-    .primary-label {
+    slot[name='label']::slotted(*) {
       font-weight: var(--gds-sys-text-weight-book);
       cursor: inherit;
     }
 
-    .supporting-text {
+    slot[name='supporting-text']::slotted(*) {
       font-size: var(--_font-size-supporting-text);
       line-height: var(--_line-height-supporting-text);
       font-weight: var(--gds-sys-text-weight-regular);
