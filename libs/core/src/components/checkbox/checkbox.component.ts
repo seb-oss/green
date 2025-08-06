@@ -8,7 +8,7 @@ import { checkboxToggle } from '../../shared-styles/rbcb-toggle.template'
 import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
-import { IconCheckmark } from '../pure'
+import { IconCheckmark, IconMinusSmall } from '../pure'
 import { styles } from './checkbox.styles'
 
 /**
@@ -19,7 +19,7 @@ import { styles } from './checkbox.styles'
  * @event change - Dispatched when the checkbox is checked or unchecked.
  */
 @gdsCustomElement('gds-checkbox', {
-  dependsOn: [GdsToggleControlBase, IconCheckmark],
+  dependsOn: [GdsToggleControlBase, IconCheckmark, IconMinusSmall],
 })
 export class GdsCheckbox extends GdsFormControlElement {
   static styles = [tokens, rbcbToggleStyles, styles]
