@@ -3,53 +3,149 @@
     "color": {
       "state": {
         "$type": "color",
-        "dark-hover": {
-          "$value": "{ref.color.white}",
-          "alpha": 0.15
+        "brand-01": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.2
         },
-        "dark-pressed": {
+        "brand-02": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.3
+        },
+        "brand-03": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.3
+        },
+        "brand-04": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.7
+        },
+        "brand-05": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.5
+        },
+        "brand-06": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.9
+        },
+        "neutral-01": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.2
+        },
+        "neutral-02": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.35
+        },
+        "neutral-03": {
           "$value": "{ref.color.white}",
           "alpha": 0.2
         },
-        "light-hover": {
-          "$value": "{ref.color.grey.30}",
-          "alpha": 0.06
+        "neutral-04": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.3
         },
-        "light-pressed": {
-          "$value": "{ref.color.grey.30}",
+        "neutral-05": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.12
+        },
+        "neutral-06": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.25
+        },
+        "positive-01": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.12
+        },
+        "positive-02": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.23
+        },
+        "positive-03": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.08
+        },
+        "positive-04": {
+          "$value": "{ref.color.white}",
           "alpha": 0.14
         },
-        "positive-hover": {
+        "positive-05": {
           "$value": "{ref.color.green.23}",
-          "alpha": 0.08
+          "alpha": 0.3
         },
-        "positive-pressed": {
+        "positive-06": {
           "$value": "{ref.color.green.23}",
-          "alpha": 0.16
+          "alpha": 0.5
         },
-        "negative-hover": {
+        "negative-01": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.15
+        },
+        "negative-02": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.3
+        },
+        "negative-03": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.08
+        },
+        "negative-04": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.14
+        },
+        "negative-05": {
           "$value": "{ref.color.red.16}",
-          "alpha": 0.08
+          "alpha": 0.3
         },
-        "negative-pressed": {
+        "negative-06": {
           "$value": "{ref.color.red.16}",
-          "alpha": 0.16
+          "alpha": 0.45
         },
-        "notice-hover": {
+        "notice-01": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.12
+        },
+        "notice-02": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.2
+        },
+        "notice-03": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.06
+        },
+        "notice-04": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.1
+        },
+        "notice-05": {
           "$value": "{ref.color.blue.17}",
+          "alpha": 0.4
+        },
+        "notice-06": {
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.6
+        },
+        "warning-01": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.06
+        },
+        "warning-02": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.14
+        },
+        "warning-03": {
+          "$value": "{ref.color.white}",
           "alpha": 0.08
         },
-        "notice-pressed": {
-          "$value": "{ref.color.blue.17}",
-          "alpha": 0.16
+        "warning-04": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.14
         },
-        "warning-hover": {
-          "$value": "{ref.color.copper.18}",
-          "alpha": 0.08
+        "warning-05": {
+          "$value": "{ref.color.orange.12}",
+          "alpha": 0.12
         },
-        "warning-pressed": {
-          "$value": "{ref.color.copper.18}",
-          "alpha": 0.16
+        "warning-06": {
+          "$value": "{ref.color.orange.12}",
+          "alpha": 0.2
         }
       }
     }

@@ -43,7 +43,7 @@ const style = css`
       background-color: color-mix(
         in srgb,
         transparent,
-        var(--gds-sys-color-state-light-hover)
+        var(--gds-sys-color-state-neutral-05)
       );
     }
 

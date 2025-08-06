@@ -65,45 +65,27 @@
     },
     "shadow": {
       "$type": "shadow",
-      "xs-01": {
-        "$value": {
-          "color": "#0000001a",
-          "offsetX": "0px",
-          "offsetY": "0px",
-          "blur": "1px",
-          "spread": "0px"
-        }
-      },
-      "xs-02": {
-        "$value": {
-          "color": "#0000001a",
-          "offsetX": "0px",
-          "offsetY": "0px",
-          "blur": "1px",
-          "spread": "0px"
-        }
-      },
       "s-01": {
         "$value": {
-          "color": "#0000001a",
+          "color": "#060D1314",
           "offsetX": "0px",
-          "offsetY": "1px",
-          "blur": "3px",
+          "offsetY": "0px",
+          "blur": "2px",
           "spread": "0px"
         }
       },
       "s-02": {
         "$value": {
-          "color": "#00000014",
+          "color": "transparent",
           "offsetX": "0px",
-          "offsetY": "1px",
-          "blur": "2px",
+          "offsetY": "0px",
+          "blur": "0px",
           "spread": "0px"
         }
       },
       "m-01": {
         "$value": {
-          "color": "#0000001a",
+          "color": "#060D131a",
           "offsetX": "0px",
           "offsetY": "4px",
           "blur": "8px",
@@ -112,7 +94,7 @@
       },
       "m-02": {
         "$value": {
-          "color": "#00000014",
+          "color": "#060D130f",
           "offsetX": "0px",
           "offsetY": "2px",
           "blur": "4px",
@@ -121,38 +103,38 @@
       },
       "l-01": {
         "$value": {
-          "color": "#00000014",
-          "offsetX": "0px",
-          "offsetY": "12px",
-          "blur": "16px",
-          "spread": "-4px"
-        }
-      },
-      "l-02": {
-        "$value": {
-          "color": "#00000008",
-          "offsetX": "0px",
-          "offsetY": "4px",
-          "blur": "6px",
-          "spread": "-2px"
-        }
-      },
-      "xl-01": {
-        "$value": {
-          "color": "#00000014",
+          "color": "#060D1314",
           "offsetX": "0px",
           "offsetY": "20px",
           "blur": "24px",
           "spread": "-4px"
         }
       },
-      "xl-02": {
+      "l-02": {
         "$value": {
-          "color": "#00000008",
+          "color": "#060D1308",
           "offsetX": "0px",
           "offsetY": "8px",
           "blur": "8px",
           "spread": "-4px"
+        }
+      },
+      "xl-01": {
+        "$value": {
+          "color": "#060D132e",
+          "offsetX": "0px",
+          "offsetY": "24px",
+          "blur": "48px",
+          "spread": "-12px"
+        }
+      },
+      "xl-02": {
+        "$value": {
+          "color": "transparent",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
         }
       }
     }

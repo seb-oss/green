@@ -17,12 +17,12 @@ export default css`
     --_perimeter-bg-mix: color-mix(
       in srgb,
       var(--gds-sys-color-l3-02),
-      var(--gds-sys-color-state-light-hover)
+      var(--gds-sys-color-state-neutral-03)
     );
     --_perimeter-bg-mix-active: color-mix(
       in srgb,
       var(--gds-sys-color-l3-02),
-      var(--gds-sys-color-state-light-pressed)
+      var(--gds-sys-color-state-neutral-04)
     );
 
     /* -- */
@@ -83,8 +83,8 @@ export default css`
     min-width: var(--_perimeter-size);
     min-height: var(--_perimeter-size);
     position: absolute;
-    left: calc(* 1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
-    top: calc(* 1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
+    left: calc(1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
+    top: calc(1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
     scale: 0.8;
   }
 

@@ -57,7 +57,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-01),
-            var(--gds-sys-color-state-dark-hover)
+            var(--gds-sys-color-state-neutral-01)
           );
         }
       }
@@ -66,7 +66,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-01),
-          var(--gds-sys-color-state-dark-pressed)
+          var(--gds-sys-color-state-neutral-02)
         );
       }
 
@@ -102,7 +102,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-02),
-            var(--gds-sys-color-state-light-hover)
+            var(--gds-sys-color-state-neutral-03)
           );
         }
       }
@@ -111,7 +111,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-02),
-          var(--gds-sys-color-state-light-pressed)
+          var(--gds-sys-color-state-neutral-04)
         );
       }
     }
@@ -125,7 +125,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             transparent,
-            var(--gds-sys-color-state-light-hover)
+            var(--gds-sys-color-state-neutral-05)
           );
         }
       }
@@ -134,7 +134,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-state-light-pressed)
+          var(--gds-sys-color-state-neutral-06)
         );
       }
     }
@@ -177,7 +177,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-brand-01),
-            var(--gds-sys-color-state-dark-hover)
+            var(--gds-sys-color-state-brand-01)
           );
         }
       }
@@ -186,7 +186,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-brand-01),
-          var(--gds-sys-color-state-dark-pressed)
+          var(--gds-sys-color-state-brand-02)
         );
       }
 
@@ -199,7 +199,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               var(--gds-sys-color-l3-02),
-              var(--gds-sys-color-state-light-hover)
+              var(--gds-sys-color-state-brand-03)
             );
           }
         }
@@ -208,7 +208,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-02),
-            var(--gds-sys-color-state-light-pressed)
+            var(--gds-sys-color-state-brand-04)
           );
         }
       }
@@ -222,7 +222,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               transparent,
-              var(--gds-sys-color-state-light-hover)
+              var(--gds-sys-color-state-brand-05)
             );
           }
         }
@@ -231,7 +231,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             transparent,
-            var(--gds-sys-color-state-light-pressed)
+            var(--gds-sys-color-state-brand-06)
           );
         }
       }
@@ -254,7 +254,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-positive-01),
-            var(--gds-sys-color-state-dark-hover)
+            var(--gds-sys-color-state-positive-01)
           );
         }
       }
@@ -263,7 +263,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-positive-01),
-          var(--gds-sys-color-state-dark-pressed)
+          var(--gds-sys-color-state-positive-02)
         );
       }
 
@@ -276,7 +276,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               var(--gds-sys-color-l3-positive-02),
-              var(--gds-sys-color-state-positive-hover)
+              var(--gds-sys-color-state-positive-03)
             );
           }
         }
@@ -285,7 +285,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-positive-02),
-            var(--gds-sys-color-state-positive-pressed)
+            var(--gds-sys-color-state-positive-04)
           );
         }
       }
@@ -299,7 +299,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               transparent,
-              var(--gds-sys-color-state-positive-hover)
+              var(--gds-sys-color-state-positive-05)
             );
           }
         }
@@ -308,7 +308,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             transparent,
-            var(--gds-sys-color-state-positive-pressed)
+            var(--gds-sys-color-state-positive-06)
           );
         }
       }
@@ -330,7 +330,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-negative-01),
-            var(--gds-sys-color-state-dark-hover)
+            var(--gds-sys-color-state-negative-01)
           );
         }
       }
@@ -339,7 +339,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-negative-01),
-          var(--gds-sys-color-state-dark-pressed)
+          var(--gds-sys-color-state-negative-02)
         );
       }
 
@@ -352,7 +352,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               var(--gds-sys-color-l3-negative-02),
-              var(--gds-sys-color-state-negative-hover)
+              var(--gds-sys-color-state-negative-03)
             );
           }
         }
@@ -361,7 +361,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-negative-02),
-            var(--gds-sys-color-state-negative-pressed)
+            var(--gds-sys-color-state-negative-04)
           );
         }
       }
@@ -375,7 +375,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               transparent,
-              var(--gds-sys-color-state-negative-hover)
+              var(--gds-sys-color-state-negative-05)
             );
           }
         }
@@ -384,7 +384,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             transparent,
-            var(--gds-sys-color-state-negative-pressed)
+            var(--gds-sys-color-state-negative-06)
           );
         }
       }
@@ -406,7 +406,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-notice-01),
-            var(--gds-sys-color-state-dark-hover)
+            var(--gds-sys-color-state-notice-01)
           );
         }
       }
@@ -415,7 +415,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-notice-01),
-          var(--gds-sys-color-state-dark-pressed)
+          var(--gds-sys-color-state-notice-02)
         );
       }
 
@@ -428,7 +428,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               var(--gds-sys-color-l3-notice-02),
-              var(--gds-sys-color-state-notice-hover)
+              var(--gds-sys-color-state-notice-03)
             );
           }
         }
@@ -437,7 +437,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-notice-02),
-            var(--gds-sys-color-state-notice-pressed)
+            var(--gds-sys-color-state-notice-04)
           );
         }
       }
@@ -451,7 +451,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               transparent,
-              var(--gds-sys-color-state-notice-hover)
+              var(--gds-sys-color-state-notice-05)
             );
           }
         }
@@ -460,7 +460,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             transparent,
-            var(--gds-sys-color-state-notice-pressed)
+            var(--gds-sys-color-state-notice-06)
           );
         }
       }
@@ -482,7 +482,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-warning-01),
-            var(--gds-sys-color-state-dark-hover)
+            var(--gds-sys-color-state-warning-01)
           );
         }
       }
@@ -491,7 +491,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           var(--gds-sys-color-l3-warning-01),
-          var(--gds-sys-color-state-dark-pressed)
+          var(--gds-sys-color-state-warning-02)
         );
       }
 
@@ -504,7 +504,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               var(--gds-sys-color-l3-warning-02),
-              var(--gds-sys-color-state-warning-hover)
+              var(--gds-sys-color-state-warning-03)
             );
           }
         }
@@ -513,7 +513,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l3-warning-02),
-            var(--gds-sys-color-state-warning-pressed)
+            var(--gds-sys-color-state-warning-04)
           );
         }
       }
@@ -527,7 +527,7 @@ const style = css`
             background-color: color-mix(
               in srgb,
               transparent,
-              var(--gds-sys-color-state-warning-hover)
+              var(--gds-sys-color-state-warning-05)
             );
           }
         }
@@ -536,7 +536,7 @@ const style = css`
           background-color: color-mix(
             in srgb,
             transparent,
-            var(--gds-sys-color-state-warning-pressed)
+            var(--gds-sys-color-state-warning-06)
           );
         }
       }

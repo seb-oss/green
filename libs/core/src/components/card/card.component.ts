@@ -37,22 +37,6 @@ export class GdsCard extends GdsDiv {
   ]
 
   /**
-   * Style Expression Property for the `box-shadow` property.
-   *
-   * Accepts shadow tokens from the design system.
-   *
-   * `xs`, `s`, `m`, `l`, `xl`
-   *
-   * @deprecated Use the `box-shadow` property instead.
-   */
-  @styleExpressionProperty({
-    property: 'box-shadow',
-    valueTemplate: (v) =>
-      `var(--gds-sys-shadow-${v}-01), var(--gds-sys-shadow-${v}-02)`,
-  })
-  shadow?: 'xs' | 's' | 'm' | 'l' | 'xl'
-
-  /**
    * Shortcut for setting the border, background and text color of the card to the specified color variant, such as 'primary', 'secondary', 'tertiary', etc.
    *
    * You can find all available variants in the L2 section of the [Color System documentation page](./?path=/docs/style-colors--docs)

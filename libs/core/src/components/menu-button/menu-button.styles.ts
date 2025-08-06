@@ -70,7 +70,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-state-light-hover)
+          var(--gds-sys-color-state-neutral-05)
         );
         --_color-border: var(--gds-sys-color-border-interactive);
       }
@@ -79,7 +79,7 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-state-light-hover)
+          var(--gds-sys-color-state-neutral-06)
         );
         --_color-border: var(--gds-sys-color-border-strong);
       }
