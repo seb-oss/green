@@ -113,39 +113,28 @@ export const Variants: Story = {
 
 /**
  *
- * @property shadow
+ * @property box-shadow
  *
- * Controls the box-shadow property of the card.
+ * Controls the box-shadow styling of the card.
  *
- * Shadow styles are as specified on the design system that range from xl-2xl, can be used like this:
+ * Shadow styles are as specified on the design system that range from "s" to "xl" and can be used like this:
  *
  * ```html
- * <gds-card shadow="s"
+ * <gds-card box-shadow="s"></gds-card>
  * ```
  *
- * The above example will apply the shadow style of xs for small devices, xs for medium devices, and s for large devices.
- * The shadow styles are predfied on the tokens file and will be applied automativally based on the token value.
+ * The above example will apply the box-shadow style of "s" for small device sizes. The box-shadow style values are predefined in the design tokens.
  *
  */
 
 export const Cardshadow: Story = {
   ...DefaultParams,
-  name: 'Shadow',
+  name: 'Box shadow',
   render: (args) =>
-    html`<gds-grid columns="5" gap="l">
+    html`<gds-grid columns="4" gap="l">
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="xs"
-        border-radius="xs"
-        variant="secondary"
-      >
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          XS
-        </gds-flex>
-      </gds-card>
-      <gds-card
-        padding="s{xs} m{l} l{l}"
-        shadow="s"
+        box-shadow="s"
         border-radius="xs"
         variant="secondary"
       >
@@ -155,7 +144,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="m"
+        box-shadow="m"
         border-radius="xs"
         variant="secondary"
       >
@@ -165,7 +154,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="l"
+        box-shadow="l"
         border-radius="xs"
         variant="secondary"
       >
@@ -175,7 +164,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="xl"
+        box-shadow="xl"
         border-radius="xs"
         variant="secondary"
       >

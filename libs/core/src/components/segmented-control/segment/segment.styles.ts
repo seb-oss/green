@@ -44,8 +44,8 @@ const style = css`
       :host(:not([selected])) button:hover {
         background-color: color-mix(
           in srgb,
-          var(--gds-sys-color-state-light-hover),
-          transparent
+          transparent,
+          var(--gds-sys-color-state-neutral-05)
         );
 
         &:disabled {

@@ -43,11 +43,6 @@ const style = css`
       scale: 0.9;
       opacity: 0;
       pointer-events: none;
-      background-color: color-mix(
-        in srgb,
-        transparent,
-        var(--gds-sys-color-state-light-hover)
-      );
     }
 
     .summary:focus {

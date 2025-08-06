@@ -117,7 +117,7 @@ const style = css`
         background: color-mix(
           in srgb,
           var(--gds-sys-color-l3-02),
-          var(--gds-sys-color-state-light-hover)
+          var(--gds-sys-color-state-neutral-03)
         );
       }
 

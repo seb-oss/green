@@ -87,24 +87,6 @@ export const RanksAndVariants: Story = {
   render: (args) => html`
     <gds-flex flex-direction="column" gap="4xl" padding="4xl">
       <gds-flex flex-direction="column" gap="m">
-        <gds-text>Brand</gds-text>
-        <gds-divider opacity="0.2"></gds-divider>
-        <gds-flex gap="xl">
-          <gds-button variant="brand">
-            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Primary
-          </gds-button>
-          <gds-button variant="brand" rank="secondary">
-            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Secondary
-          </gds-button>
-          <gds-button variant="brand" rank="tertiary">
-            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
-            Tertiary
-          </gds-button>
-        </gds-flex>
-      </gds-flex>
-      <gds-flex flex-direction="column" gap="m">
         <gds-text>Neutral</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex gap="xl">
@@ -117,6 +99,24 @@ export const RanksAndVariants: Story = {
             Secondary
           </gds-button>
           <gds-button variant="neutral" rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Tertiary
+          </gds-button>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text>Brand</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button variant="brand">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary
+          </gds-button>
+          <gds-button variant="brand" rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Secondary
+          </gds-button>
+          <gds-button variant="brand" rank="tertiary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Tertiary
           </gds-button>
