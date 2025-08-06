@@ -47,10 +47,10 @@ export interface TableHeaderOptions {
   boldTextOnMobile?: boolean
 
   /**
-   * Used to set extra label for the column.
-   * This is useful when the column has an additional label that needs to be shown.
+   * Used to set label for the column.
+   * This is useful when the column has an additional information that needs to be shown.
    */
-  extraLabel?: string
+  columnLabel?: string
 }
 
 /** Options applying to table rows */
