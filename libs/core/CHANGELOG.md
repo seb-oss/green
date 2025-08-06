@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.88.3
+
+### Patch Changes
+
+- e480d9f: **Checkbox:** Fix interaction issue with NVDA. Fixes #2199
+- 1331668: **Checkbox:** Add missing dependency of `IconMinusSmall`
+
 ## 1.88.2
 
 ### Patch Changes
