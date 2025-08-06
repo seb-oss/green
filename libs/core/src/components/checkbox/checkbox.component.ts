@@ -1,4 +1,5 @@
-import { property, query } from 'lit/decorators.js'
+import { property, query, queryAsync } from 'lit/decorators.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 
 import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
@@ -64,26 +65,8 @@ export class GdsCheckbox extends GdsFormControlElement {
     this._internalValue = value
   }
 
-  @query('.rbcb')
-  private _elCheckbox!: HTMLElement
-
-  connectedCallback() {
-    super.connectedCallback()
-    this.setAttribute('role', 'checkbox')
-    this._updateAriaState()
-    this.addEventListener('keydown', this.#handleKeyDown)
-    this.addEventListener('click', this.#handleClick)
-  }
-
-  private _updateAriaState() {
-    this.setAttribute(
-      'aria-checked',
-      this.indeterminate ? 'mixed' : this.checked.toString(),
-    )
-    this.setAttribute('aria-disabled', this.disabled.toString())
-    this.setAttribute('tabindex', this.disabled ? '-1' : '0')
-    this.toggleAttribute('aria-invalid', this.invalid)
-  }
+  @query('input[type="checkbox"]')
+  private _elCheckbox!: HTMLInputElement
 
   @watch('indeterminate')
   private _handleIndeterminateChange() {
@@ -92,26 +75,32 @@ export class GdsCheckbox extends GdsFormControlElement {
     }
   }
 
-  protected updated(changedProperties: Map<string, unknown>) {
-    super.updated(changedProperties)
-
-    if (
-      changedProperties.has('checked') ||
-      changedProperties.has('indeterminate') ||
-      changedProperties.has('disabled') ||
-      changedProperties.has('invalid')
-    ) {
-      this._updateAriaState()
-    }
-  }
-
   render() {
     return html`
-      <gds-toggle-control-base
-        supporting-text=${this.supportingText}
-        label=${this.label}
+      <input
         type="checkbox"
-      >
+        ?checked=${this.checked}
+        ?disabled=${this.disabled}
+        ?indeterminate=${this.indeterminate}
+        aria-invalid=${this.invalid}
+        aria-describedby=${ifDefined(
+          this.supportingText ? 'supporting-text' : '',
+        )}
+        id="checkbox-input"
+        @change=${() => {
+          this.checked = this._elCheckbox.checked
+          this.#dispatchChangeEvents()
+        }}
+      />
+      <gds-toggle-control-base type="checkbox" @click=${this.#toggleChecked}>
+        <label for="checkbox-input" slot="label"> ${this.label} </label>
+        <span
+          slot="supporting-text"
+          class="supporting-text"
+          id="supporting-text"
+        >
+          ${this.supportingText}
+        </span>
         ${checkboxToggle({
           checked: this.checked,
           indeterminate: this.indeterminate,
@@ -122,27 +111,19 @@ export class GdsCheckbox extends GdsFormControlElement {
     `
   }
 
-  #handleClick = (e: Event) => {
-    this.focus()
-    this.#toggleChecked()
-  }
+  #toggleChecked(e: MouseEvent) {
+    if (this.disabled || e.target instanceof HTMLLabelElement) return
 
-  #handleKeyDown = (e: KeyboardEvent) => {
-    if (this.disabled) return
-
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      this.#toggleChecked()
-    }
-  }
-
-  #toggleChecked() {
     if (this.indeterminate) {
       this.indeterminate = false
-      this.checked = true
     } else {
       this.checked = !this.checked
     }
+
+    this.#dispatchChangeEvents()
+  }
+
+  #dispatchChangeEvents() {
     this.dispatchStandardEvent('change', {
       bubbles: true,
       composed: true,
