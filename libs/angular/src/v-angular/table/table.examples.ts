@@ -96,7 +96,7 @@ export class TableImplementationComponent implements OnInit {
 
   ngOnInit() {
     this.tableColumns = [
-      { property: 'name', label: 'Name', sortable: true, extraLabel: 'Additional info' },
+      { property: 'name', label: 'Name', sortable: true, columnLabel: 'status' },
       { property: 'currency', label: 'Ccy', sortable: true },
       { property: 'datedBalance', label: 'Value dated balance', valueType: 'numeric', sortable: true },
       { property: 'status', label: 'Booked status', sortable: true }
