@@ -615,6 +615,33 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
   }
 }
 
+const WithCloseOnScrollTemplate: StoryFn<StoryArgs> = (args: any) => {
+  const formControl = new UntypedFormControl({ value: '' })
+  return {
+    template: /*html*/ `
+  <div style="height: 1000px;">
+    <nggv-dropdown
+      [label]="label"
+      [placeholder]="placeholder"
+      [options]="options"
+      [required]="required"
+      [invalid]="invalid"
+      [disabled]="disabled"
+      [error]="error"
+      [size]="size"
+      [closeOnScroll]="closeOnScroll"
+      [formControl]="formControl">
+
+      <ng-template #labelTpl>Custom Label</ng-template>
+
+      <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
+
+    </nggv-dropdown>
+  </div>`,
+    props: { ...args, formControl },
+  }
+}
+
 const defaultArgs = {
   required: false,
   invalid: false,
@@ -684,6 +711,12 @@ WithDisplayDisabledAsLocked.args = {
   locked: false,
   description: undefined,
   displayDisabledAsLocked: true,
+}
+
+export const WithCloseOnScroll = WithCloseOnScrollTemplate.bind({}) as any
+WithCloseOnScroll.args = {
+  ...defaultArgs,
+  closeOnScroll: true,
 }
 
 const TypeaheadTemplate: StoryFn<StoryArgs> = (args: any) => {

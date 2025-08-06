@@ -59,7 +59,10 @@
 
   <!-- INPUT -->
   <ng-container *ngIf="!locked">
-    <div class="gds-input-wrapper dropdown-wrapper">
+    <div
+      class="gds-input-wrapper dropdown-wrapper"
+      [ngClass]="{ 'close-on-scroll': closeOnScroll === true }"
+    >
       <div #input [id]="id + '-input'" class="dropdown">
         <button
           [id]="id + '-toggle'"
