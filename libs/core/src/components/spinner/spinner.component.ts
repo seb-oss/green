@@ -66,7 +66,10 @@ export class GdsSpinner extends withMarginProps(
    * The text to display as a label for the spinner
    */
   @property({ type: String })
-  label = msg('Loading...')
+  label: string = msg('Loading...')
+
+  @property({ type: String, reflect: true, attribute: 'label-position' })
+  labelPosition: 'top' | 'bottom' | 'left' | 'right' = 'bottom'
 
   /**
    * Whether to display the label text visually
@@ -142,10 +145,9 @@ export class GdsSpinner extends withMarginProps(
       <div part="wrapper" class=${classMap(this.#getWrapperClasses())}>
         <span part="spinner" class="spinner"></span>
         ${when(
-          this.label && this.showLabel,
+          this.showLabel,
           () =>
             html`<span part="label" class="spinner-label">${this.label}</span>`,
-          () => null,
         )}
       </div>
     `
@@ -162,6 +164,7 @@ export class GdsSpinner extends withMarginProps(
       'spinner-cover': this.cover,
       'spinner-backdrop': this.cover || this.fullscreen,
       'spinner-animating': this._isAnimating,
+      [`spinner-label-${this.labelPosition}`]: this.labelPosition,
     }
   }
 

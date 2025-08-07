@@ -27,12 +27,12 @@ const style = css`
       justify-content: center;
     }
 
-    .primary-label {
+    slot[name='label']::slotted(*) {
       font: var(--gds-sys-text-detail-book-m);
       cursor: inherit;
     }
 
-    .supporting-text {
+    slot[name='supporting-text']::slotted(*) {
       font: var(--_font-supporting-text);
       font-weight: var(--gds-sys-text-weight-regular);
     }

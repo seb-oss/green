@@ -3,7 +3,7 @@ const fs = require('fs').promises
 const path = require('path')
 
 // Configuration
-const ICONS_API_URL = 'https://api.seb.io/icons/icons.json'
+const ICONS_API_URL = 'https://api.seb.io/components/icon/icon.list.json'
 const regularDir = path.resolve(
   __dirname,
   '../src/components/icon/assets/regular',

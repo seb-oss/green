@@ -110,6 +110,10 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     })
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     const CLASSES = {
       multiple: this.multiple,

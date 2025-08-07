@@ -1,5 +1,30 @@
 # Changelog
 
+## 3.29.2
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+
+## 3.29.1
+
+### Patch Changes
+
+- 5526f22: **Button:** Add type to close button
+
+## 3.29.0
+
+### Minor Changes
+
+- f3b8f76: **Icon:** add new code icons
+
+### Patch Changes
+
+- Updated dependencies [577fc63]
+- Updated dependencies [f3b8f76]
+- Updated dependencies [eca17f0]
+  - @sebgroup/green-core@1.87.0
+
 ## 3.28.4
 
 ### Patch Changes

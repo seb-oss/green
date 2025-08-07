@@ -1,9 +1,6 @@
-import { CommonModule } from '@angular/common'
-
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
-
 import '../modal.globals'
 
+import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, importProvidersFrom } from '@angular/core'
 import {
   applicationConfig,
@@ -12,6 +9,7 @@ import {
   StoryFn,
 } from '@storybook/angular'
 
+import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
 import { DropdownUtils } from '../../core'
 import { NggvDropdownModule } from '../../dropdown/dropdown.module'
 import { NggvI18nModule } from '../../i18n/i18n.module'
@@ -94,6 +92,7 @@ Primary.args = {
     negative: 'button_cancel',
     neutral: 'button_apply',
     positive: 'button_save',
+    danger: 'button_delete',
   },
   content:
     'You can supply the content seen here either through the <code>[content]="string"</code> property or</br>by passing children between the opening and closing tags <code>&lt;c-dialog&gt; ...children &lt;/c-dialog&gt;</code>',

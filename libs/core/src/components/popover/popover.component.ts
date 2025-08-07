@@ -261,6 +261,7 @@ export class GdsPopover extends GdsElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.#unregisterTriggerEvents()
+    window.removeEventListener('scroll', this.#handlePageScroll)
   }
 
   render() {
@@ -326,12 +327,18 @@ export class GdsPopover extends GdsElement {
             ),
           0,
         )
+
+        // Register the scroll listener to close the popover when the page is scrolled
+        window.addEventListener('scroll', this.#handlePageScroll, {
+          passive: true,
+        })
       } else {
         this._elDialog?.close()
         clickOutsideTarget.removeEventListener(
           'click',
           this.#handleClickOutside,
         )
+        window.removeEventListener('scroll', this.#handlePageScroll)
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })
@@ -517,6 +524,12 @@ export class GdsPopover extends GdsElement {
       if (!isInDialog && this.#dispatchUiStateEvent('close')) {
         this.open = false
       }
+    }
+  }
+
+  #handlePageScroll = () => {
+    if (this.open && this.#dispatchUiStateEvent('close')) {
+      this.open = false
     }
   }
 }

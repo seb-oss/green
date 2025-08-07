@@ -111,11 +111,9 @@ export class GdsRadio extends GdsElement {
 
   render() {
     return html`
-      <gds-toggle-control-base
-        supporting-text=${this.supportingText}
-        label=${this.label}
-        type="radio"
-      >
+      <gds-toggle-control-base type="radio">
+        <label slot="label" @click=${this.#handleClick}> ${this.label} </label>
+        <span slot="supporting-text"> ${this.supportingText} </span>
         ${radioToggle({
           checked: this.checked,
           disabled: this.disabled,

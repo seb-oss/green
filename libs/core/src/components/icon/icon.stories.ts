@@ -46,8 +46,10 @@ export const Basic: Story = {
 
 /**
  *Toggle between outline and solid icon styles using the `solid` attribute.
+ *Toggle between outline and solid icon styles using the `solid` attribute.
  */
 
+export const Solid: Story = {
 export const Solid: Story = {
   ...DefaultParams,
   args: {

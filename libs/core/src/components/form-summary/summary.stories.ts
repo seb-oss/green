@@ -9,6 +9,8 @@ import '../datepicker/index.ts'
 import '../dropdown/index.ts'
 import '../input/index.ts'
 import '../icon/icons/rocket.ts'
+import '../checkbox/index.ts'
+import '../radio/index.ts'
 
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/form-summary)
@@ -51,8 +53,51 @@ export const Usage: Story = {
   ...DefaultParams,
   render: (args) =>
     html`<form style="width: 450px" novalidate>
-      <gds-card display="flex" flex-direction="column" gap="m" padding="l">
+      <gds-card
+        display="flex"
+        flex-direction="column"
+        gap="m"
+        variant="secondary"
+        border-color="primary"
+        padding="l"
+      >
         <gds-text tag="h2" font="heading-l">Launch control</gds-text>
+        <gds-checkbox-group
+          direction="row"
+          label="Mission type"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value.length === 0)
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'At least one mission type is required',
+                ]
+            },
+          }}
+        >
+          <gds-checkbox value="exploration" label="Exploration"></gds-checkbox>
+          <gds-checkbox value="research" label="Research"></gds-checkbox>
+          <gds-checkbox value="rescue" label="Rescue"></gds-checkbox>
+          <gds-checkbox value="other" label="Other"></gds-checkbox>
+        </gds-checkbox-group>
+        <gds-radio-group
+          direction="row"
+          label="Rocket type"
+          .validator=${{
+            validate: (el: any) => {
+              if (el.value === undefined)
+                return [
+                  { ...el.validity, valid: false, customError: true },
+                  'A rocket type is required',
+                ]
+            },
+          }}
+        >
+          <gds-radio value="falcon" label="Falcon"></gds-radio>
+          <gds-radio value="starship" label="Starship"></gds-radio>
+          <gds-radio value="saturn" label="Saturn"></gds-radio>
+          <gds-radio value="other" label="Other"></gds-radio>
+        </gds-radio-group>
         <gds-dropdown
           label="Astronaut"
           .validator=${{

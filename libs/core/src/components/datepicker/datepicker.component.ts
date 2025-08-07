@@ -245,6 +245,10 @@ class Datepicker extends GdsFormControlElement<Date> {
     TransitionalStyles.instance.apply(this, 'gds-datepicker')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     return html`
       ${when(

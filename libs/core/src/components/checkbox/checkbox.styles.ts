@@ -17,5 +17,13 @@ const style = css`
   :host(:focus) {
     outline: none;
   }
+
+  input[type='checkbox'] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
 `
 export default style

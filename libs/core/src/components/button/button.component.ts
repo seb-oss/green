@@ -123,6 +123,10 @@ class Button extends GdsFormControlElement<any> {
     TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   get #isLink() {
     return this.href.length > 0
   }

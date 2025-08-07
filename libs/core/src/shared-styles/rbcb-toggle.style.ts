@@ -153,7 +153,8 @@ export default css`
     outline: none;
   }
 
-  :host(:focus-visible) .rbcb__perimeter {
+  :host(:focus-visible) .rbcb__perimeter,
+  :host(:focus-within) .rbcb__perimeter {
     outline-width: var(--gds-sys-space-3xs);
     scale: 1;
   }

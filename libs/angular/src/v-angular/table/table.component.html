@@ -153,7 +153,12 @@
                   />
                 </svg>
               </span>
-                {{ item[column.property] }} ({{ item.subItems.length }})
+              <span class="gds-item-field-text">
+               {{ item[column.property] }} ({{ item.subItems.length }})
+                <div *ngIf="column.columnLabel" class="gds-item-field-extra-label">
+                  {{ item[column.columnLabel] }}
+                </div>
+              </span>
             </div>
           </ng-container>
 

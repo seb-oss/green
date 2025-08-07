@@ -63,6 +63,7 @@ describe('Slider', () => {
       rerender(<Slider value={200} />)
     })
     expect(input.value).toBe('100')
+    expect(input.getAttribute('aria-valuenow')).toEqual('100')
   })
 
   it('should clamp to min value', () => {
@@ -72,6 +73,7 @@ describe('Slider', () => {
       rerender(<Slider value={-10} />)
     })
     expect(input.value).toBe('0')
+    expect(input.getAttribute('aria-valuenow')).toEqual('0')
   })
 
   it('should fire onClamp', () => {
@@ -100,5 +102,25 @@ describe('Slider', () => {
     ) as HTMLInputElement
     fireEvent.blur(inputField, { target: { value: '' } })
     expect(onChange).toBeCalledWith(10)
+  })
+
+  it('should have same aria value when input field is set without following the step', () => {
+    const onChange = jest.fn()
+    const { container } = render(
+      <Slider
+        label={'label'}
+        hasTextbox={true}
+        value={50}
+        min={0}
+        max={1000}
+        step={100}
+        onChange={onChange}
+      />,
+    )
+    const slider = container.querySelector(
+      'input[type=range]',
+    ) as HTMLInputElement
+    expect(slider.getAttribute('aria-valuenow')).toEqual('50')
+    expect(slider.value).toEqual('50')
   })
 })

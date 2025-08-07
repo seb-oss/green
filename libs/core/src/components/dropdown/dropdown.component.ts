@@ -368,7 +368,7 @@ export class GdsDropdown<ValueT = any>
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.validationMessage || this.errorMessage}
+              ${this.errorMessage}
             </slot>
           </gds-form-control-footer>
         `,

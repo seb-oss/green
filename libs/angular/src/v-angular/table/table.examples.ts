@@ -96,7 +96,7 @@ export class TableImplementationComponent implements OnInit {
 
   ngOnInit() {
     this.tableColumns = [
-      { property: 'name', label: 'Name', sortable: true },
+      { property: 'name', label: 'Name', sortable: true, columnLabel: 'status' },
       { property: 'currency', label: 'Ccy', sortable: true },
       { property: 'datedBalance', label: 'Value dated balance', valueType: 'numeric', sortable: true },
       { property: 'status', label: 'Booked status', sortable: true }
@@ -172,6 +172,7 @@ import { TableColumn } from '@sebgroup/nggv-table';
     <nggv-table
       rowId="id"
       [expandable]="expandable"
+      [expandedByDefault]="expandedByDefault"
       [selectable]="false"
       [subItemsProp]="'subItems'"
       [tableColumns]="tableColumns"

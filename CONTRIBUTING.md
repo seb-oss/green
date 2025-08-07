@@ -51,15 +51,15 @@ When the Team feels that enough work has been done on the feature, a PR is opene
 
 The Green Team will do a review of the PR and, if needed, request any additional changes.
 
-When the PR is merged, Greens code packages will be versioned and published. The team can then switch out it's local component or fetaure with the one that is now in Green.
+When the PR is merged, Greens code packages will be versioned and published. The team can then switch out it's local component or feature with the one that is now in Green.
 
 ## Issues and PRs
 
 If you have suggestions for how Green could be improved, or want to report a bug, open an issue! We love all and any contributions. If you have questions, too, we'd love to hear them. Try to have a short but informative title and longer text in the description. Also try to find labels that fits the subject.
 
-Eg: `Button: Fontsize and spacings too big` could be tagged with the `Comp: Button` label.
+Eg: `Button: Font size and spacings too big` could be tagged with the `Comp: Button` label.
 
-**\*Note:** Before you open an issue or PR, condider the classification of information you are about to add in it. Only add information if you are certain that it's classified as open (C1).\*
+**\*Note:** Before you open an issue or PR, consider the classification of information you are about to add in it. Only add information if you are certain that it's classified as open (C1).\*
 
 ### PRs
 
@@ -101,7 +101,7 @@ Draft pull requests are also welcome to get feedback early on, or if there is so
 ## Resources
 
 - Team Green can be found in the Teams Channel `Green`
-- [An introduction to innersource](https://resources.github.com/whitepapers/introduction-to-innersource/)
+- [An introduction to inner source](https://resources.github.com/whitepapers/introduction-to-innersource/)
 - [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
 - [Using Pull Requests](https://help.github.com/articles/about-pull-requests/)
 - [GitHub Help](https://help.github.com)

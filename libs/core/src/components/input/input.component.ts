@@ -187,6 +187,10 @@ class Input extends GdsFormControlElement<string> {
     this.value = ''
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     return html`
       ${when(

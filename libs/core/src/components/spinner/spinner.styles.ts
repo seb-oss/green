@@ -74,6 +74,7 @@ const style = css`
     height: var(--size, 3.75rem);
     width: var(--size, 3.75rem);
     animation: gdsSpinnerRotation 1s linear infinite;
+    aspect-ratio: 1 / 1;
   }
 
   /* Motion preference adjustments */
@@ -115,6 +116,28 @@ const style = css`
   .spinner-wrapper.spinner-backdrop {
     background-color: var(--spinner-backdrop-color);
     backdrop-filter: blur(var(--spinner-backdrop-blur));
+  }
+
+  .spinner-wrapper.spinner-label-top {
+    flex-direction: column-reverse;
+
+    & .spinner-label {
+      margin: 0 0 1rem;
+    }
+  }
+
+  .spinner-wrapper.spinner-label-left {
+    flex-direction: row-reverse;
+    & .spinner-label {
+      margin: 0 1rem 0 0;
+    }
+  }
+
+  .spinner-wrapper.spinner-label-right {
+    flex-direction: row;
+    & .spinner-label {
+      margin: 0 0 0 1rem;
+    }
   }
 
   /* Label styling */
