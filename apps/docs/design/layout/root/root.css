@@ -1,0 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
+main {
+  display: contents;
+}
