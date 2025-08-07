@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.1.2
+
+### Patch Changes
+
+- 46ca765: **V-Angular:** Dropdown - Added "close on scroll" functionality
+
 ## 6.1.1
 
 ### Patch Changes
