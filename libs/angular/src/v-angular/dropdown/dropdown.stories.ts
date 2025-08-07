@@ -615,6 +615,33 @@ const ComboTemplate: StoryFn<StoryArgs> = (args: any) => {
   }
 }
 
+const CloseOnScrollTemplate: StoryFn<StoryArgs> = (args: any) => {
+  const formControl = new UntypedFormControl({ value: '' })
+  return {
+    template: /*html*/ `
+  <div style="height: 1000px;">
+    <nggv-dropdown
+      [label]="label"
+      [placeholder]="placeholder"
+      [options]="options"
+      [required]="required"
+      [invalid]="invalid"
+      [disabled]="disabled"
+      [error]="error"
+      [size]="size"
+      [closeOnScroll]="closeOnScroll"
+      [formControl]="formControl">
+
+      <ng-template #labelTpl>Custom Label</ng-template>
+
+      <ng-template let-option #optionTpl>{{option.label | transloco}} {{option.accountNumber}}</ng-template>
+
+    </nggv-dropdown>
+  </div>`,
+    props: { ...args, formControl },
+  }
+}
+
 const defaultArgs = {
   required: false,
   invalid: false,
@@ -635,6 +662,10 @@ export const Disabled = DisabledTemplate.bind({}) as any
 Disabled.args = {
   ...defaultArgs,
   disabled: true,
+}
+export const CloseOnScroll = CloseOnScrollTemplate.bind({}) as any
+CloseOnScroll.args = {
+  ...defaultArgs,
 }
 export const WithError = Template.bind({}) as any
 WithError.args = {
