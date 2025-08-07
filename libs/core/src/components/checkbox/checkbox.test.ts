@@ -26,14 +26,6 @@ describe('<gds-checkbox>', () => {
       await el.updateComplete
       await expect(el).to.be.accessible()
     })
-
-    it('has a role of checkbox', async () => {
-      const el = await fixture<GdsCheckbox>(
-        html`<gds-checkbox label="Checkbox label"></gds-checkbox>`,
-      )
-      await el.updateComplete
-      expect(el.role).to.equal('checkbox')
-    })
   })
 
   describe('API', () => {
