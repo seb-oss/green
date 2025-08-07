@@ -1,10 +1,4 @@
-import { html, TemplateResult } from 'lit'
-import { literal, html as staticHTML, unsafeStatic } from 'lit/static-html.js'
-
 import type { Meta, StoryObj } from '@storybook/web-components'
-
-import spaceRefTokens from '../../../../tokens/src/tokens/2023/ref/space.ref.json'
-import { deprecatedIcons, DeprecationInfo } from './icon.deprecated'
 
 import './icons'
 import '../grid'
@@ -49,7 +43,6 @@ export const Basic: Story = {
  *Toggle between outline and solid icon styles using the `solid` attribute.
  */
 
-export const Solid: Story = {
 export const Solid: Story = {
   ...DefaultParams,
   args: {
