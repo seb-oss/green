@@ -1,7 +1,7 @@
 // File: gds-spinner.styles.ts
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   /* Host configuration with core variables */
   :host {
     /* Size variables with indexed access using CSS custom properties */
@@ -16,8 +16,8 @@ export const styles = css`
     --track-width-lg: 0.375rem;
 
     /* Default to light mode as fallback */
-    --spinner-track-color: var(--gds-sys-color-l3-background-secondary);
-    --spinner-active-color: var(--gds-sys-color-l3-content-secondary);
+    --spinner-track-color: var(--gds-sys-color-l3-02);
+    --spinner-active-color: var(--gds-sys-color-content-02);
     --spinner-label-color: currentColor;
     --spinner-backdrop-color: rgba(100, 100, 100, 0.4);
 
@@ -154,3 +154,4 @@ export const styles = css`
     }
   }
 `
+export default style

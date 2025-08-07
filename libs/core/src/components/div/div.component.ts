@@ -21,7 +21,7 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import style from './div.style'
+import DivStyles from './div.styles'
 
 /**
  * @element gds-div
@@ -37,7 +37,7 @@ export class GdsDiv extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens, style]
+  static styles = [tokens, DivStyles]
 
   /**
    * Controls the display property.
@@ -143,7 +143,8 @@ export class GdsDiv extends withSizeXProps(
    * `xs`, `s`, `m`, `l`, `xl`
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-sys-shadow-${v})`,
+    valueTemplate: (v) =>
+      `var(--gds-sys-shadow-${v}-01), var(--gds-sys-shadow-${v}-02)`,
   })
   'box-shadow'?: string
 
@@ -176,18 +177,16 @@ export class GdsDiv extends withSizeXProps(
   'z-index'?: string
 
   /**
-   * Style Expression Property that controls the `font-size` property.
-   * Supports all typography size tokens from the design system.
+   * Style Expression Property that controls the `font` property.
+   * Supports all font tokens from the design system.
    */
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
-      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
-      return styleSize + styleLine
+      return `font: var(--gds-sys-text-${size});`
     },
   })
-  'font-size'?: string
+  'font'?: string
 
   /**
    * Style Expression Property that controls the `font-weight` property.

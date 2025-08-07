@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.88.3
+
+### Patch Changes
+
+- e480d9f: **Checkbox:** Fix interaction issue with NVDA. Fixes #2199
+- 1331668: **Checkbox:** Add missing dependency of `IconMinusSmall`
+
+## 1.88.2
+
+### Patch Changes
+
+- 72be834: **Dropdown:** Fix issue with updating error message via prop
+
+## 1.88.1
+
+### Patch Changes
+
+- 0edf04f: **Calendar:** Add disabled class on weeknumber
+
 ## 1.88.0
 
 ### Minor Changes

@@ -6,5 +6,4 @@ const style = css`
     filter: blur(var(--_blur));
   }
 `
-
 export default style

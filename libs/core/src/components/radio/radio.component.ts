@@ -5,7 +5,7 @@ import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/togg
 import { gdsCustomElement, html } from '../../scoping'
 import rbcbToggleStyles from '../../shared-styles/rbcb-toggle.style'
 import { radioToggle } from '../../shared-styles/rbcb-toggle.template'
-import { styles } from './radio.styles'
+import RadioStyles from './radio.styles'
 
 /**
  * @element gds-radio
@@ -15,7 +15,7 @@ import { styles } from './radio.styles'
  */
 @gdsCustomElement('gds-radio', { dependsOn: [GdsToggleControlBase] })
 export class GdsRadio extends GdsElement {
-  static styles = [rbcbToggleStyles, styles]
+  static styles = [rbcbToggleStyles, RadioStyles]
 
   /**
    * The label displayed next to the radio button.
@@ -111,11 +111,9 @@ export class GdsRadio extends GdsElement {
 
   render() {
     return html`
-      <gds-toggle-control-base
-        supporting-text=${this.supportingText}
-        label=${this.label}
-        type="radio"
-      >
+      <gds-toggle-control-base type="radio">
+        <label slot="label" @click=${this.#handleClick}> ${this.label} </label>
+        <span slot="supporting-text"> ${this.supportingText} </span>
         ${radioToggle({
           checked: this.checked,
           disabled: this.disabled,

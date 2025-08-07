@@ -35,6 +35,6 @@ export class GdsMenuItem extends Focusable(GdsElement) {
   }
 
   render() {
-    return html`<div><slot></slot></div>`
+    return html`<div class="item"><slot></slot></div>`
   }
 }

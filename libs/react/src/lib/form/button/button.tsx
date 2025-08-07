@@ -44,6 +44,7 @@ export const Button = forwardRef(
     return variant == 'close' ? (
       <button
         className={buttonClassName}
+        type={type}
         aria-label={props['aria-label'] ?? 'Close'}
         data-testid={testId}
         ref={ref}
