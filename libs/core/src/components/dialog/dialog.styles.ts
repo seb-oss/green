@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host {
@@ -8,7 +8,7 @@ export const styles = css`
     }
 
     dialog {
-      transition: 0.3s;
+      transition: var(--gds-sys-motion-duration-fastest);
       background: transparent;
       padding: 0;
       border-width: 0;
@@ -26,7 +26,7 @@ export const styles = css`
       }
 
       &::backdrop {
-        transition: 0.3s;
+        transition: var(--gds-sys-motion-duration-fastest);
         background: rgba(100, 100, 100, 0.4);
       }
     }
@@ -69,8 +69,8 @@ export const styles = css`
     h2 {
       margin: 0;
       padding: 0;
-      font-size: var(--gds-sys-text-size-heading-s);
-      font-weight: 400;
+      font: var(--gds-sys-text-heading-s);
     }
   }
 `
+export default style

@@ -1,14 +1,13 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     #label-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      line-height: var(--gds-sys-text-line-height-detail-m);
-      color: var(--gds-sys-color-l2-content-primary);
+      color: var(--gds-sys-color-content-01);
 
       & > div {
         display: flex;
@@ -16,15 +15,21 @@ export const styles = css`
       }
     }
 
-    ::slotted(label) {
-      font-weight: var(--gds-sys-text-weight-book);
+    slot[name='label']::slotted(*) {
+      font: var(--gds-sys-text-detail-book-m);
+    }
+    slot[name='supporting-text']::slotted(*) {
+      font: var(--gds-sys-text-detail-regular-s);
     }
 
     :host(.size-small) {
       & slot[name='supporting-text'],
       & ::slotted(label) {
-        font-size: var(--gds-sys-text-size-detail-s);
-        line-height: var(--gds-sys-text-line-height-detail-s);
+        font: var(--gds-sys-text-detail-s);
+      }
+
+      #extended-supporting-text[aria-hidden='false'] {
+        padding: var(--gds-sys-space-xs) var(--gds-sys-space-s);
       }
     }
 
@@ -33,11 +38,10 @@ export const styles = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: all;
-      font-size: var(--gds-sys-text-size-body-s);
-      line-height: var(--gds-sys-text-line-height-body-s);
+      font: var(--gds-sys-text-detail-regular-s);
       border-radius: var(--gds-sys-space-xs);
-      background-color: var(--gds-sys-color-l3-background-secondary);
-      color: var(--gds-sys-color-l3-content-tertiary);
+      background-color: var(--gds-sys-color-l3-02);
+      color: var(--gds-sys-color-content-01);
       max-height: var(--_max-height);
 
       &[aria-hidden='false'] {
@@ -56,3 +60,4 @@ export const styles = css`
     }
   }
 `
+export default style

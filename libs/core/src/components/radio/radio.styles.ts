@@ -1,12 +1,12 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   :host {
     cursor: pointer;
   }
 
   :host([disabled]) {
-    color: var(--gds-sys-color-l3-content-disabled);
+    color: var(--gds-sys-color-content-disabled-01);
     cursor: default;
   }
 
@@ -14,3 +14,4 @@ export const styles = css`
     outline: none;
   }
 `
+export default style

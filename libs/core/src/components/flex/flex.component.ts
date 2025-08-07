@@ -4,7 +4,7 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsDiv } from '../div/div.component'
-import style from './flex.styles'
+import FlexStyles from './flex.styles'
 
 /**
  * @element gds-flex
@@ -14,7 +14,7 @@ import style from './flex.styles'
  */
 @gdsCustomElement('gds-flex')
 export class GdsFlex extends GdsDiv {
-  static styles = [tokens, style]
+  static styles = [tokens, FlexStyles]
 
   render() {
     return html`<slot></slot>`

@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset, transitional-styles;
   @layer base {
     :host(.visually-hidden) {
@@ -23,9 +23,8 @@ export const styles = css`
       align-items: flex-start;
       gap: var(--gds-sys-space-xs);
       margin-top: var(--gds-sys-space-2xs);
-      font-weight: var(--gds-sys-text-weight-book);
-      font-size: var(--gds-sys-text-size-detail-s);
-      color: var(--gds-sys-color-l3-content-negative);
+      font: var(--gds-sys-text-detail-regular-s);
+      color: var(--gds-sys-color-content-negative-01);
     }
 
     [gds-element^='gds-icon'] {
@@ -35,8 +34,7 @@ export const styles = css`
 
     :host(.size-small) {
       & .error-message {
-        font-size: var(--gds-sys-text-size-detail-xs);
-        line-height: var(--gds-sys-text-line-height-detail-s);
+        font: var(--gds-sys-text-detail-xs);
         gap: var(--gds-sys-space-2xs);
       }
       & [gds-element^='gds-icon'] {
@@ -48,3 +46,4 @@ export const styles = css`
     }
   }
 `
+export default style

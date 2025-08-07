@@ -3,26 +3,21 @@ import { css } from 'lit'
 export const styles = css`
   :host {
     /* Font Sizes */
-    --_font-size-label: var(--gds-sys-text-size-detail-m);
-    --_line-height-label: var(--gds-sys-text-line-height-detail-m);
-    --_font-size-supporting-text: var(--gds-sys-text-size-detail-s);
-    --_line-height-supporting-text: var(--gds-sys-text-line-height-detail-s);
-    font-size: var(--_font-size-label);
-    line-height: var(--_line-height-label);
+    --_font-label: var(--gds-sys-text-detail-book-m);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
+    font: var(--_font-label);
 
     /* Color */
     --_checkbox-label-color: var(--gds-sys-color-l3-content-tertiary);
   }
 
   :host(:invalid) {
-    --_checkbox-label-color: var(--gds-sys-color-l3-content-negative);
+    --_checkbox-label-color: var(--gds-sys-color-content-negative-01);
   }
 
   :host([size='small']) {
-    --_font-size-label: var(--gds-sys-text-size-detail-s);
-    --_line-height-label: var(--gds-sys-text-line-height-detail-s);
-    --_font-size-supporting-text: var(--gds-sys-text-size-detail-s);
-    --_line-height-supporting-text: var(--gds-sys-text-line-height-detail-s);
+    --_font-label: var(--gds-sys-text-detail-book-s);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
   }
 
   .checkbox-group {
