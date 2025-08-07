@@ -135,7 +135,7 @@ export class GdsCheckbox extends GdsFormControlElement {
   }
 
   protected _getValidityAnchor(): HTMLElement {
-    return this._elToggleControlBase
+    return this._elCheckbox
   }
 
   protected override formResetCallback() {
