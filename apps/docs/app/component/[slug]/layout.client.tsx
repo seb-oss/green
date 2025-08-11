@@ -107,17 +107,12 @@ export function ComponentLayoutClient({
         section={section}
       />
       <Core.GdsFlex flex-direction="column" gap="m" padding="0">
-        <Core.GdsText tag="h1" font-size="heading-xl" id="component-top">
+        <Core.GdsText tag="h1" font="heading-xl" id="component-top">
           {component.title}
         </Core.GdsText>
 
         {component.summary && (
-          <Core.GdsText
-            tag="p"
-            font-size="body-m"
-            color="secondary"
-            max-width="82ch"
-          >
+          <Core.GdsText tag="p" font="body-book-m" color="02" max-width="82ch">
             {component.summary}
           </Core.GdsText>
         )}
@@ -131,11 +126,15 @@ export function ComponentLayoutClient({
 
           {component.tags && (
             <Core.GdsFlex gap="xs" margin="0 0 2xs 0">
-              <Core.GdsText color="secondary" tag="small">
+              <Core.GdsText color="02" font="detail-book-s">
                 Tags:
               </Core.GdsText>
               {component.tags.map((tag) => (
-                <Link key={tag} href={'/components/' + tag.toLocaleLowerCase()}>
+                <Link
+                  key={tag}
+                  href={'/components/' + tag.toLocaleLowerCase()}
+                  style={{ font: 'var(--gds-sys-text-detail-book-s)' }}
+                >
                   {tag.toLocaleLowerCase()}
                 </Link>
               ))}
@@ -157,9 +156,7 @@ export function ComponentLayoutClient({
               position="relative"
               overflow="hidden"
               padding="0"
-              border-color="primary/0.4"
               variant="secondary"
-              color="primary"
               border-width="4xs"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
@@ -228,7 +225,7 @@ export function ComponentLayoutClient({
                 id="component-overview"
               >
                 {component.preamble && (
-                  <Core.GdsText tag="p" font-size="heading-s" max-width="100ch">
+                  <Core.GdsText tag="p" font="heading-s" max-width="100ch">
                     {component.preamble}
                   </Core.GdsText>
                 )}
@@ -241,7 +238,7 @@ export function ComponentLayoutClient({
                 {component.anatomy && anatomyImage && (
                   <Core.GdsFlex
                     flex-direction="column"
-                    gap="m"
+                    gap="s"
                     id="component-anatomy"
                   >
                     <Core.GdsText tag="h2">Anatomy</Core.GdsText>
@@ -259,10 +256,7 @@ export function ComponentLayoutClient({
                         />
                       </Core.GdsRichText>
                     )}
-                    <Figure
-                      id={anatomyImage.svg}
-                      caption={`Anatomy of ${component.title.toLowerCase()}`}
-                    />
+                    <Figure id={anatomyImage.svg} />
                     {component['anatomy-list']?.anatomyitems && (
                       <Anatomy items={component['anatomy-list'].anatomyitems} />
                     )}
@@ -278,27 +272,20 @@ export function ComponentLayoutClient({
             )}
 
             {isLayoutComponent && section === 'overview' && (
-              <Core.GdsCard variant="secondary" border-color="primary">
-                <Core.GdsFlex flex-direction="column" gap="m" max-width="90ch">
-                  <Core.GdsFlex align-items="center" gap="s">
-                    <Core.GdsCard border-radius="max" padding="s">
-                      <Core.IconBrandGreen size="m" />
-                    </Core.GdsCard>
-                    <Core.GdsText tag="h2">
-                      Declarative layout component
-                    </Core.GdsText>
-                  </Core.GdsFlex>
-                  <Core.GdsText tag="p" max-width="80ch">
-                    A micro-frontend optimized layout system using style
-                    expressions, Generates encapsulated CSS in shadow DOM for
-                    responsive layouts without utility classes.
+              <Core.GdsAlert variant="information" buttonLabel="Learn more">
+                <Core.GdsText font="body-regular-m">
+                  <Core.GdsText
+                    font="body-book-m"
+                    display="inline"
+                    font-weight="bold"
+                  >
+                    This is a declarative layout component!{' '}
                   </Core.GdsText>
-                  <Link component="link" href="/foundation/layout">
-                    Learn more about layouts
-                    <Core.IconArrowRight slot="trail" />
-                  </Link>
-                </Core.GdsFlex>
-              </Core.GdsCard>
+                  A micro-frontend optimized layout system using style
+                  expressions, Generates encapsulated CSS in shadow DOM for
+                  responsive layouts without utility classes.
+                </Core.GdsText>
+              </Core.GdsAlert>
             )}
             {section === 'code' && <ArgsTable componentName={slug} />}
             <Similar tag={firstTag} currentSlug={component.slug} />
@@ -321,9 +308,9 @@ export function ComponentLayoutClient({
             />
 
             {component.platform?.web && (
-              <Core.GdsFlex gap="xs" flex-direction="column" padding="l">
+              <Core.GdsFlex gap="xs" flex-direction="column" padding="m">
                 <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
-                <Core.GdsText tag="small" color="secondary">
+                <Core.GdsText tag="small" color="02">
                   Platform
                 </Core.GdsText>
                 <Core.GdsFlex gap="s">

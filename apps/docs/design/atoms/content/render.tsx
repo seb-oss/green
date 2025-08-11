@@ -80,7 +80,13 @@ export function Render({
           : ''
 
         return (
-          <Core.GdsFlex key={index} flex-direction="column" gap="l">
+          <Core.GdsFlex
+            key={index}
+            flex-direction="column"
+            gap="l"
+            max-width={section['max-width'] ? '80ch' : '100%'}
+            margin={section['max-width'] ? '0 auto' : 'none'}
+          >
             <Core.GdsFlex flex-direction="column" gap="s">
               <Core.GdsFlex
                 position="relative"
@@ -98,6 +104,7 @@ export function Render({
                         ? (section as any)._h2Index
                         : index,
                     )}
+                    width="100%"
                   >
                     {section.title}
                   </Core.GdsText>

@@ -32,8 +32,8 @@ export function UXwritingClient() {
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
           <GdsText
             tag="p"
-            font-size="heading-m"
-            color="secondary"
+            font="preamble-l"
+            color="02"
             text-wrap="pretty"
             max-width="120ch"
           >

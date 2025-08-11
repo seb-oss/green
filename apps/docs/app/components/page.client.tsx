@@ -80,84 +80,64 @@ export function ComponentsClient() {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <Core.GdsFlex
-      flex-direction="column"
-      gap="2xl"
-      width="100%"
-      font-size="body-s"
-    >
+    <Core.GdsFlex flex-direction="column" gap="l" width="100%" font="body-s">
       <Core.GdsFlex
         justify-content="center"
         align-items="flex-start"
         flex-direction="column"
-        gap="2xl"
+        gap="l"
+        min-width="700px"
+        margin="auto"
+        text-align="centers"
+        align-items="center"
       >
-        <Core.GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+        <Core.GdsFlex flex-direction="column" gap="m" padding="xl 0 0 0">
           <Core.GdsFlex gap="s">
-            <Core.GdsText font-size="display-m">Components</Core.GdsText>
-            <Core.GdsText font-size="display-m" color="positive">
+            <Core.GdsText font="display-m">Components</Core.GdsText>
+            <Core.GdsText font="display-m" color="positive">
               ({components.length})
             </Core.GdsText>
           </Core.GdsFlex>
           <Core.GdsText
-            font-size="preamble-m"
-            color="secondary"
+            font="preamble-m"
+            color="02"
             max-width="68ch"
             text-wrap="pretty"
           >
-            Interactive building blocks for creating user interfaces.
+            Building blocks for creating user interfaces.
           </Core.GdsText>
         </Core.GdsFlex>
 
-        <Core.GdsGrid
-          columns="6"
-          gap="l"
-          border-color="primary"
-          border-width="0 0 4xs 0"
-          border-style="solid"
-          padding-block="0 s"
-        >
+        <Core.GdsGrid columns="6" gap="s">
           <Core.GdsInput
             value={query}
             plain
             onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
-            grid-column="1 / span 5"
+            grid-column="1 / span 6"
             clearable
-            flex="1"
           >
-            <Core.IconMagnifyingGlass slot="lead" />
+            <Core.IconMagnifyingGlass slot="lead" size="l" />
           </Core.GdsInput>
 
-          <Core.GdsFlex>
-            <Core.GdsDropdown plain oninput={handleCategoryChange}>
-              <Core.GdsOption value="">All Categories</Core.GdsOption>
-              {categories.map((category) => (
-                <Core.GdsOption key={category} value={category}>
-                  {category}
-                </Core.GdsOption>
-              ))}
-            </Core.GdsDropdown>
-          </Core.GdsFlex>
           <Core.GdsFlex
-            grid-column="1 / span 5"
+            grid-column="1 / span 6"
             height="100%"
             align-items="center"
             justify-content="flex-start"
-            gap="l"
           >
-            <Core.GdsFlex
-              color="secondary"
-              padding="0 2xs"
-              gap="s"
-              align-items="center"
-            >
+            <Core.GdsFlex color="secondary" gap="xs" align-items="center">
               <Core.GdsButton
                 size="small"
                 rank={filter === 'all' ? 'secondary' : 'tertiary'}
                 onClick={() => handleFilterChange('all')}
               >
                 All
-                <Core.GdsBadge slot="trail" variant="none" rounded size="small">
+                <Core.GdsBadge
+                  slot="trail"
+                  variant="information"
+                  rounded
+                  size="small"
+                >
                   {counts.all}
                 </Core.GdsBadge>
               </Core.GdsButton>
@@ -167,28 +147,23 @@ export function ComponentsClient() {
                 onClick={() => handleFilterChange('beta')}
               >
                 Beta
-                <Core.GdsBadge slot="trail" variant="none" rounded size="small">
+                <Core.GdsBadge
+                  slot="trail"
+                  variant="information"
+                  rounded
+                  size="small"
+                >
                   {counts.beta}
                 </Core.GdsBadge>
               </Core.GdsButton>
             </Core.GdsFlex>
-          </Core.GdsFlex>
-          <Core.GdsFlex>
-            <Core.GdsSegmentedControl
-              size="small"
-              value={view}
-              onchange={handleViewChange}
-            >
-              <Core.GdsSegment value="grid">Grid</Core.GdsSegment>
-              <Core.GdsSegment value="list">List</Core.GdsSegment>
-            </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </Core.GdsGrid>
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
         <Core.GdsGrid
-          columns={view === 'grid' ? '1; l{2} xl{3}' : '1'}
+          columns={view === 'grid' ? '1; s{2} xl{3}' : '1'}
           gap="l"
           max-width="180ch"
         >

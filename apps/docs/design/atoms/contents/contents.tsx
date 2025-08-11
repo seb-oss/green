@@ -151,7 +151,7 @@ export function TableOfContents({
   return (
     <Core.GdsCard
       variant="secondary"
-      padding="0 xs m xs"
+      padding="xs 2xs"
       position="sticky"
       inset="90px auto auto auto"
       grid-column="10/13"

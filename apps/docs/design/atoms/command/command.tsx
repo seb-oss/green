@@ -139,17 +139,6 @@ export default function Command() {
 
   return (
     <React.Fragment>
-      <Core.GdsFlex display="none; s{contents}">
-        <Core.GdsFab
-          inset="40px 40px auto auto"
-          rank="secondary"
-          size="small"
-          onClick={handleToggleCommand}
-        >
-          <Core.IconMagnifyingGlass></Core.IconMagnifyingGlass>
-        </Core.GdsFab>
-      </Core.GdsFlex>
-
       {isOpen && (
         <Core.GdsDialog
           onGdsClose={handleClosePanel}

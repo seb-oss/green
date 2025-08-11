@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../../../settings'
@@ -49,105 +50,92 @@ export default function Card({
   const currentTheme = overrideTheme || systemColorScheme
 
   return (
-    <Core.GdsCard
-      key={title}
-      border-color="primary"
-      variant="secondary"
-      border-radius="m"
-      padding={snippet ? '2xs 2xs l 2xs' : 'l'}
-      gap="s"
-      height="100%"
-      max-width="100%"
+    <Core.GdsFlex
+      flex-direction="column;"
       width="100%"
-      min-width="100%"
-      flex-direction={list ? 'row' : 'columns'}
       position="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      z-index="0"
     >
-      {children
-        ? children
-        : snippet && (
-            <Core.GdsTheme color-scheme={currentTheme}>
-              <Core.GdsCard
-                height="240px"
-                overflow="hidden"
-                width="100%"
-                max-width={list ? '50%' : '100%'}
-                align-items="center"
-                justify-content="center"
-                variant="secondary"
-                padding="0"
-              >
-                {snippet && <Snippet slug={snippet} />}
-                {isHovered && (
-                  <Core.GdsFlex
-                    justify-content="space-between"
-                    align-items="center"
-                    width="max-content"
-                    position="absolute"
-                    inset="20px 20px auto auto"
-                  >
-                    <Core.GdsButton
-                      rank="tertiary"
-                      size="xs"
-                      onClick={toggleTheme}
-                    >
-                      {currentTheme === 'light' ? (
-                        <Core.IconMoon size="s" />
-                      ) : (
-                        <Core.IconSun size="s" />
-                      )}
-                    </Core.GdsButton>
-                  </Core.GdsFlex>
-                )}
-              </Core.GdsCard>
-            </Core.GdsTheme>
-          )}
-
-      <Core.GdsFlex
-        flex-direction="column"
-        gap="xs"
-        padding-inline="m"
-        padding-block={!list ? '0' : 'm'}
-        flex="1"
-        height={!list ? '100%' : 'max-content'}
-        margin={!list ? 'none' : 'auto 0'}
+      <Link
+        key={href}
+        href={type === 'template' ? `/template/${href}` : `/component/${href}`}
       >
-        <Core.GdsFlex gap="s" align-items="center">
-          <Core.GdsText font-size="display-xs">{title}</Core.GdsText>
-          {beta && (
-            <Core.GdsBadge size="small" variant="notice">
-              BETA
-            </Core.GdsBadge>
-          )}
-        </Core.GdsFlex>
-
-        {summary && (
-          <Core.GdsText
-            color="secondary"
-            font-size="detail-xs"
-            lines={2}
-            width="40ch"
+        <Core.GdsFlex flex-direction="column;" width="100%">
+          <Core.GdsCard
+            key={title}
+            border-radius="m"
+            padding={snippet ? '2xs' : 'l'}
+            gap="s"
+            width="100%"
+            min-width="100%"
+            flex-direction={list ? 'row' : 'columns'}
+            position="relative"
+            z-index="0"
+            style={{ pointerEvents: 'none' }}
           >
-            {summary}
-          </Core.GdsText>
-        )}
+            {children
+              ? children
+              : snippet && (
+                  <Core.GdsTheme color-scheme={currentTheme}>
+                    <Core.GdsCard
+                      height="240px"
+                      overflow="hidden"
+                      width="100%"
+                      max-width={list ? '50%' : '100%'}
+                      align-items="center"
+                      justify-content="center"
+                      padding="0"
+                    >
+                      {snippet && <Snippet slug={snippet} />}
+                    </Core.GdsCard>
+                  </Core.GdsTheme>
+                )}
+          </Core.GdsCard>
+          <Core.GdsFlex
+            flex-direction="column"
+            gap="xs"
+            padding-inline="m"
+            padding-block="s"
+            flex="1"
+            height={!list ? '100%' : 'max-content'}
+            margin={!list ? 'none' : 'auto 0'}
+          >
+            <Core.GdsFlex gap="s" align-items="center">
+              <Core.GdsText font="heading-s">{title}</Core.GdsText>
+              {beta && (
+                <Core.GdsBadge size="small" variant="notice">
+                  BETA
+                </Core.GdsBadge>
+              )}
+            </Core.GdsFlex>
 
-        <Core.GdsLink
-          key={href}
-          href={
-            type === 'template' ? `/template/${href}` : `/component/${href}`
-          }
-          margin="auto 0 0 0"
+            {summary && (
+              <Core.GdsText color="02" font="preamble-xs" lines={2}>
+                {summary}
+              </Core.GdsText>
+            )}
+            <Core.IconArrowRight size="s" slot="trail" />
+          </Core.GdsFlex>
+        </Core.GdsFlex>
+      </Link>
+      {isHovered && (
+        <Core.GdsFlex
+          justify-content="space-between"
+          align-items="center"
+          width="max-content"
+          position="absolute"
+          inset="20px 20px auto auto"
         >
-          <Core.GdsText color="secondary">
-            View {type === 'template' ? 'template' : 'component'}
-          </Core.GdsText>
-          <Core.IconArrowRight size="s" slot="trail" />
-        </Core.GdsLink>
-      </Core.GdsFlex>
-    </Core.GdsCard>
+          <Core.GdsButton rank="secondary" size="xs" onClick={toggleTheme}>
+            {currentTheme === 'light' ? (
+              <Core.IconMoon size="s" />
+            ) : (
+              <Core.IconSun size="s" />
+            )}
+          </Core.GdsButton>
+        </Core.GdsFlex>
+      )}
+    </Core.GdsFlex>
   )
 }

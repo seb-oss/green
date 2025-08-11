@@ -22,7 +22,7 @@ interface CollapsibleSectionProps {
 }
 
 const foundationPages = [
-  { title: 'Colors', slug: 'colors' },
+  { title: 'Colours', slug: 'colours' },
   { title: 'Typography', slug: 'typography' },
   { title: 'Spacing', slug: 'spacing' },
   { title: 'Layout', slug: 'layout' },
@@ -37,9 +37,8 @@ const CollapsibleSection = ({
   children,
   isActive,
 }: CollapsibleSectionProps) => (
-  <Core.GdsFlex flex-direction="column" width="100%" gap="xs">
+  <Core.GdsFlex flex-direction="column" gap="2xs" width="100%">
     <Core.GdsFlex
-      width="100%"
       align-items="center"
       justify-content="space-between"
       gap="2xs"
@@ -53,26 +52,13 @@ const CollapsibleSection = ({
         size="medium"
         align-items="center"
         data-animation="scroll"
-        flex="1"
+        width="100%"
       >
-        {icon && <Icon name={icon} slot="lead" solid={isActive || isOpen} />}
+        {icon && <Icon name={icon} slot="lead" />}
         <span data-fade>{title}</span>
       </Link>
-      <Core.GdsButton
-        key={isOpen + 'chevron'}
-        rank="tertiary"
-        data-animation="scroll"
-        label="Toggle sub navigation"
-        gds-aria-expanded={isOpen.toString()}
-        onClick={(e) => {
-          e.preventDefault()
-          onToggle()
-        }}
-      >
-        <Icon name={isOpen ? 'IconChevronTop' : 'IconChevronBottom'} />
-      </Core.GdsButton>
     </Core.GdsFlex>
-    {isOpen && children}
+    {isActive && children}
   </Core.GdsFlex>
 )
 
@@ -131,29 +117,32 @@ export default function Sidebar() {
     return (
       <Core.GdsFlex
         flex-direction="column"
-        gap="xs"
+        gap="2xs"
         align-items="center"
-        width="100%"
+        style={{ paddingLeft: '2px' }}
       >
-        {NAV?.links.map((link) => (
-          <Link
-            key={link.slug + isOpen}
-            component="button"
-            href={link.slug.startsWith('/') ? link.slug : `/${link.slug}`}
-            rank={
-              pathName.startsWith(`/${link.slug}`) ? 'secondary' : 'tertiary'
-            }
-            size="medium"
-            justify-content="center"
-            flex="1"
-            data-animation="scroll"
-            width={isOpen ? '100%' : 'initial'}
-          >
-            {link.icon && (
-              <Icon key={isOpen + '' + link.icon} name={link.icon} />
-            )}
-          </Link>
-        ))}
+        {NAV?.links.map((link) => {
+          if (link.slug === 'templates') return
+
+          return (
+            <Link
+              key={link.slug + isOpen}
+              component="button"
+              href={link.slug.startsWith('/') ? link.slug : `/${link.slug}`}
+              rank={
+                pathName.startsWith(`/${link.slug}`) ? 'secondary' : 'tertiary'
+              }
+              size="medium"
+              justify-content="center"
+              flex="1"
+              data-animation="scroll"
+            >
+              {link.icon && (
+                <Icon key={isOpen + '' + link.icon} name={link.icon} />
+              )}
+            </Link>
+          )
+        })}
       </Core.GdsFlex>
     )
   }, [isLoaded, actions, pathName])
@@ -167,6 +156,8 @@ export default function Sidebar() {
     const templates = actions.getTemplates()
 
     return NAV?.links.map((link) => {
+      if (link.slug === 'templates') return
+
       const href = link.slug.startsWith('/') ? link.slug : `/${link.slug}`
 
       if (sectionsWithSubItems.includes(link.slug)) {
@@ -190,6 +181,12 @@ export default function Sidebar() {
           }))
         }
 
+        const isActive =
+          pathName === href ||
+          pathName.split('/')[1] === href.split('/')[1] ||
+          (pathName.split('/')[1].length > 0 &&
+            href.split('/')[1].includes(pathName.split('/')[1]))
+
         return (
           <CollapsibleSection
             key={href}
@@ -198,34 +195,57 @@ export default function Sidebar() {
             href={href}
             isOpen={openSections[link.slug]}
             onToggle={() => toggleSection(link.slug)}
-            isActive={pathName.startsWith(href)}
+            isActive={isActive}
           >
-            <Core.GdsFlex flex-direction="column" gap="xs">
-              {subItems.map((item) => (
-                <Link
-                  key={item.href}
-                  component="button"
-                  href={item.href}
-                  rank={
-                    pathName === item.href ||
-                    pathName.startsWith(`${item.href}/`)
-                      ? 'secondary'
-                      : 'tertiary'
-                  }
-                  justify-content="space-between"
-                  size="small"
-                  data-sub-item
-                  data-animation="scroll"
-                  flex="1"
-                >
-                  <span data-fade>{item.title}</span>
-                  {false && item.beta && (
-                    <Core.GdsBadge variant="notice" slot="trail" size="small">
-                      BETA
-                    </Core.GdsBadge>
-                  )}
-                </Link>
-              ))}
+            <Core.GdsFlex
+              position="relative"
+              style={{ maxHeight: 'calc(100vh - 490px)' }}
+            >
+              <Core.GdsFlex
+                flex-direction="column"
+                gap="2xs"
+                overflow="hidden auto"
+                position="relative"
+                width="100%"
+              >
+                {subItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    component="button"
+                    href={item.href}
+                    rank={
+                      pathName === item.href ||
+                      pathName.startsWith(`${item.href}/`)
+                        ? 'secondary'
+                        : 'tertiary'
+                    }
+                    justify-content="space-between"
+                    size="small"
+                    data-sub-item
+                    data-animation="scroll"
+                    flex="1"
+                  >
+                    <span data-fade>{item.title}</span>
+                    {false && item.beta && (
+                      <Core.GdsBadge variant="notice" slot="trail" size="small">
+                        BETA
+                      </Core.GdsBadge>
+                    )}
+                  </Link>
+                ))}
+              </Core.GdsFlex>
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '0',
+                  left: 0,
+                  right: 0,
+                  pointerEvents: 'none',
+                  height: '24px',
+                  background:
+                    'linear-gradient(0deg, var(--gds-sys-color-l1-01), transparent)',
+                }}
+              ></div>
             </Core.GdsFlex>
           </CollapsibleSection>
         )
@@ -241,47 +261,14 @@ export default function Sidebar() {
           size="medium"
           align-items="center"
           data-animation="scroll"
-          flex="1"
           width="100%"
         >
-          {link.icon && (
-            <Icon
-              name={link.icon}
-              slot="lead"
-              solid={pathName === href ? true : false}
-            />
-          )}
+          {link.icon && <Icon name={link.icon} slot="lead" />}
           <span data-fade>{link.title}</span>
         </Link>
       )
     })
   }, [isLoaded, actions, pathName, openSections])
-
-  const GDS = () => {
-    return (
-      <Core.GdsFlex
-        display="none; s{flex}"
-        padding="l"
-        align-items="center"
-        justify-content="space-between"
-        height="68px"
-        width="100%"
-        gap="s"
-      >
-        {isOpen && (
-          <Link href="/">
-            <Core.GdsText
-              font-weight="book"
-              font-size="detail-m"
-              color="brand-01"
-            >
-              Green Design System
-            </Core.GdsText>
-          </Link>
-        )}
-      </Core.GdsFlex>
-    )
-  }
 
   const handleToggleSidebar = () => {
     SettingsActions.toggle('UI.Panel.Sidebar')
@@ -296,46 +283,26 @@ export default function Sidebar() {
       variant="secondary"
       border-radius="0"
       justify-content="flex-start"
-      align-items={isOpen ? 'flex-start' : 'center'}
+      align-items={'flex-start'}
       gap="xl"
       className={_('sidebar', isOpen ? 'open' : 'closed')}
-      padding={isOpen ? 'xl xs l s' : 'xl xs l m'}
-      min-width={isOpen ? '260px' : '80px'}
-      width={isOpen ? '100%; s{240px}' : 'max-content'}
+      padding={isOpen ? 'xl xs l s' : 'xl xs l l'}
+      width={isOpen ? '100%; s{240px}' : '80px'}
       height="max-content; s{100vh}"
       position="relative; s{sticky}"
       inset="0; s{0px auto auto auto}"
       border-width={menuOpen ? '0 0 4xs 0' : '0'}
-      border-color="primary"
       role="navigation"
       aria-label="Main"
+      style={{
+        transition:
+          'width var(--gds-sys-motion-duration-fast) cubic-bezier(var(--gds-sys-motion-easing-ease-out))',
+      }}
     >
-      <Core.GdsFlex
-        display="none; s{flex}"
-        padding="l"
-        align-items="center"
-        justify-content="space-between"
-        height="68px"
-        width="100%"
-        gap="s"
-      >
-        {isOpen && (
-          <Link href="/">
-            <Core.GdsText
-              font-weight="book"
-              font-size="detail-m"
-              color="brand-01"
-            >
-              Green Design System
-            </Core.GdsText>
-          </Link>
-        )}
-      </Core.GdsFlex>
       <Core.GdsFlex
         display="flex; s{none}"
         align-items="center"
         justify-content="space-between"
-        width="100%"
         padding="0 l"
       >
         <Link href="/">
@@ -363,30 +330,30 @@ export default function Sidebar() {
       </Core.GdsFlex>
       <Core.GdsFlex
         flex-direction="column"
-        gap="xs"
-        width="100%"
-        align-items={isOpen ? 'flex-start' : 'center'}
+        gap="2xs"
+        align-items={'flex-start'}
         display={menuOpen ? 'flex' : 'none; s{flex}'}
         padding={menuOpen ? '0 l 0 0' : '0'}
+        width="100%"
+        margin="auto"
       >
         {isOpen || menuOpen ? renderExpandedNav : renderCollapsedNav}
       </Core.GdsFlex>
       <Core.GdsFlex
         key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
-        padding={isOpen ? '0 0 0 0' : '0'}
-        justify-content={isOpen ? 'flex-start' : 'center'}
-        align-items="center"
+        justify-content={'flex-start'}
+        align-items="flex-start"
         gap="l"
-        width="100%"
         margin="auto 0 0 0"
         display={menuOpen ? 'none' : 'none; s{flex}'}
+        style={isOpen ? {} : { paddingLeft: '2px' }}
+        width="100%"
       >
-        <Link
-          component="button"
+        <Core.GdsButton
           onClick={handleToggleSidebar}
           rank="tertiary"
-          width="max-content"
-          size="medium"
+          justify-content={isOpen ? 'flex-start' : 'center'}
+          width={isOpen ? '100%' : 'max-content'}
         >
           {isOpen ? (
             <>
@@ -396,7 +363,7 @@ export default function Sidebar() {
           ) : (
             <Icon name="IconMenuSidebar" />
           )}
-        </Link>
+        </Core.GdsButton>
       </Core.GdsFlex>
     </Core.GdsCard>
   )

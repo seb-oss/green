@@ -27,14 +27,15 @@ export function AboutClient() {
         </Link>
         <GdsText>About</GdsText>
       </GdsBreadcrumbs>
-      <GdsFlex flex-direction="column" max-width="120ch" gap="4xl">
-        <GdsFlex flex-direction="column" gap="s">
+      <GdsFlex flex-direction="column" max-width="120ch" gap="xl">
+        <GdsFlex flex-direction="column" gap="s" text-align="center">
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
           <GdsText
             tag="p"
-            font-size="heading-m"
-            color="secondary"
+            font="heading-m"
+            color="02"
             max-width="100ch"
+            margin="auto"
           >
             {CONTENT?.summary}
           </GdsText>

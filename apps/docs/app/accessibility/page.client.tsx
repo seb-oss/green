@@ -30,12 +30,7 @@ export function A11yClient() {
       <GdsFlex flex-direction="column" max-width="120ch" gap="4xl">
         <GdsFlex flex-direction="column" gap="s">
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
-          <GdsText
-            tag="p"
-            font-size="heading-m"
-            color="secondary"
-            max-width="100ch"
-          >
+          <GdsText tag="p" font="preamble-l" color="02" max-width="100ch">
             {CONTENT?.summary}
           </GdsText>
         </GdsFlex>

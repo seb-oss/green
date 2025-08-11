@@ -72,6 +72,7 @@ export interface ComponentSection {
   'section-content'?: string
   cols?: '1' | '2' | '3'
   columns?: ComponentColumn[]
+  'max-width'?: boolean
 }
 
 export interface ComponentImage {

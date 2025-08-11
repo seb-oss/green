@@ -5,6 +5,7 @@ import { useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../design/atoms/link/link'
 import Playground from '../../../design/atoms/playgroud/playground'
+import { useContentContext } from '../../../settings/content'
 
 export function TypographyClient() {
   const [textConfig, setTextConfig] = useState({
@@ -116,7 +117,7 @@ export function TypographyClient() {
     >
       <Core.GdsText
         tag={textConfig.tag}
-        font-size={textConfig.fontSize}
+        font={textConfig.fontSize}
         font-weight={textConfig.fontWeight}
         lines={textConfig.lines}
       >
@@ -166,8 +167,17 @@ export function TypographyClient() {
     </Core.GdsFlex>
   )
 
+  const { actions } = useContentContext()
+  const CONTENT = actions.getPage('foundation/typography')
+
+  const imageProvider = {
+    getImage: (slug: string, node: string) => {
+      return undefined
+    },
+  }
+
   return (
-    <Core.GdsFlex flex-direction="column" gap="xl">
+    <Core.GdsFlex flex-direction="column" gap="2xl">
       <Core.GdsBreadcrumbs size="small">
         <Link component="link" href="/">
           <Core.IconHomeOpen size="m" slot="lead" />
@@ -179,11 +189,31 @@ export function TypographyClient() {
         </Link>
         <Core.GdsText>Typography</Core.GdsText>
       </Core.GdsBreadcrumbs>
-
+      <Core.GdsFlex
+        flex-direction="column"
+        justify-content="center"
+        width="100%"
+        gap="s"
+      >
+        <Core.GdsText tag="h1" text-align="center">
+          {CONTENT?.title}
+        </Core.GdsText>
+        <Core.GdsText
+          tag="p"
+          color="02"
+          font="preamble-l"
+          text-align="center"
+          max-width="100ch"
+          margin="auto"
+        >
+          {CONTENT?.summary}
+        </Core.GdsText>
+      </Core.GdsFlex>
       <Playground
         toolbar={toolbarContent}
         previewContent={previewContent}
         inspectContent={inspectContent}
+        height="500px"
       />
     </Core.GdsFlex>
   )

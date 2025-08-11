@@ -10,8 +10,10 @@ import {
   GdsText,
   IconHomeOpen,
 } from '@sebgroup/green-core/react'
+import { Render } from '../../../design/atoms/content/render'
 import { Link } from '../../../design/atoms/link/link'
 import Playground from '../../../design/atoms/playgroud/playground'
+import { useContentContext } from '../../../settings/content'
 
 import './page.css'
 
@@ -289,10 +291,19 @@ export function ColorsClient() {
     )
   }
 
+  const { actions } = useContentContext()
+  const CONTENT = actions.getPage('foundation/colours')
+
+  const imageProvider = {
+    getImage: (slug: string, node: string) => {
+      return undefined
+    },
+  }
+
   // In your main component, replace the inspect view with:
 
   return (
-    <GdsFlex flex-direction="column" gap="xl">
+    <GdsFlex flex-direction="column" gap="2xl">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
           <IconHomeOpen size="m" slot="lead" />
@@ -302,14 +313,41 @@ export function ColorsClient() {
           <Core.IconBrandGreen size="m" slot="lead" />
           Foundation
         </Link>
-        <GdsText>Colors</GdsText>
+        <GdsText>Colours</GdsText>
       </GdsBreadcrumbs>
-
+      <GdsFlex
+        flex-direction="column"
+        justify-content="center"
+        width="100%"
+        gap="s"
+      >
+        <GdsText tag="h1" text-align="center">
+          {CONTENT?.title}
+        </GdsText>
+        <GdsText
+          tag="p"
+          color="02"
+          font="preamble-l"
+          text-align="center"
+          max-width="100ch"
+          margin="auto"
+        >
+          {CONTENT?.summary}
+        </GdsText>
+      </GdsFlex>
       <Playground
         toolbar={toolbarContent}
         previewContent={previewContent}
         inspectContent={inspectContent}
+        height="500px"
       />
+      {CONTENT?.sections && (
+        <Render
+          content={CONTENT.sections}
+          slug="foundation"
+          imageProvider={imageProvider}
+        />
+      )}
     </GdsFlex>
   )
 }

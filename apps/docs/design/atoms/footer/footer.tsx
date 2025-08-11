@@ -8,14 +8,14 @@ import { Link } from '../link/link'
 export default function Footer() {
   const year = new Date().getFullYear()
   const symbol = '\u00A9'
-  const text = `${symbol}  ${year} Green Design System`
+  const text = `${symbol}  ${year} Skandinaviska Enskilda Banken AB`
 
   return (
     <GdsFlex
       flex-direction="column"
       padding="m 0"
       gap="2xl; s{5xl}"
-      border-color="primary"
+      border-color="subtle-01"
       border-width="4xs 0 0 0"
       margin="0; s{4xl 0 0 0}"
       role="contentinfo"
