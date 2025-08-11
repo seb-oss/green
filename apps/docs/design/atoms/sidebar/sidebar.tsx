@@ -22,6 +22,7 @@ interface CollapsibleSectionProps {
 }
 
 const foundationPages = [
+  { title: 'Design tokens', slug: 'design-tokens' },
   { title: 'Colours', slug: 'colours' },
   { title: 'Typography', slug: 'typography' },
   { title: 'Spacing', slug: 'spacing' },

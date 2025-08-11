@@ -27,15 +27,15 @@ export function UXwritingClient() {
         </Link>
         <GdsText>UX writing</GdsText>
       </GdsBreadcrumbs>
-      <GdsFlex flex-direction="column" gap="4xl">
-        <GdsFlex flex-direction="column" gap="s">
+      <GdsFlex flex-direction="column" gap="xl">
+        <GdsFlex flex-direction="column" gap="s" text-align="center">
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
           <GdsText
             tag="p"
-            font="preamble-l"
+            font="heading-m"
             color="02"
-            text-wrap="pretty"
-            max-width="120ch"
+            max-width="100ch"
+            margin="auto"
           >
             {CONTENT?.summary}
           </GdsText>

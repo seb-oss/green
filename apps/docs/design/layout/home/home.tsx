@@ -4,6 +4,7 @@
 import { default as NextLink } from 'next/link'
 
 import {
+  GdsButton,
   GdsCard,
   GdsFlex,
   GdsGrid,
@@ -18,8 +19,10 @@ import {
   IconBrandStorybook,
   IconCloudySun,
   IconCupHot,
+  IconMagnifyingGlass,
   IconSquareGridCircle,
 } from '@sebgroup/green-core/react'
+import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 import { Link } from '../../atoms/link/link'
 import { Snippet } from '../../atoms/snippet/snippet'
@@ -40,6 +43,11 @@ export function Home({
   ...rest
 }: PageProps) {
   const { actions } = useContentContext()
+  const { actions: SettingsActions } = useSettingsContext()
+  const handleToggleCommand = () => {
+    SettingsActions.toggle('UI.Panel.Command')
+  }
+
   const homeContent = actions.getPage('home')
 
   const components = actions.getComponents()
@@ -78,6 +86,21 @@ export function Home({
             </GdsText>
             {homeContent?.summary}
           </GdsText>
+        </GdsFlex>
+
+        <GdsFlex width="100%" justify-content="center" flex-direction="column">
+          <GdsButton
+            rank="secondary"
+            max-width="80ch"
+            width="100%"
+            size="large"
+            justify-content="flex-start"
+            align-self="center"
+            onClick={handleToggleCommand}
+          >
+            <IconMagnifyingGlass slot="lead" />
+            Search...
+          </GdsButton>
         </GdsFlex>
 
         <GdsCard padding="0" style={{ aspectRatio: '16 / ' }} overflow="hidden">
