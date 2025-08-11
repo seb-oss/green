@@ -2,17 +2,16 @@
 
 import { useEffect, useState } from 'react'
 
-import SEBSansSerif from './SEBSansSerif'
+import SEBSansSerifGDS from './SEBSansSerif'
 
 export default function Fonts({ children }: { children: React.ReactNode }) {
   const [stylesheetCreated, setStylesheetCreated] = useState(false)
-  // console.log('SEBSansSerif', SEBSansSerif)
   useEffect(() => {
     if ('adoptedStyleSheets' in document) {
       const sheet = new CSSStyleSheet()
       sheet.replaceSync(`
         :root { 
-            --font: ${SEBSansSerif.style.fontFamily};
+            --font: ${SEBSansSerifGDS.style.fontFamily};
         }`)
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
       setStylesheetCreated(true)
@@ -22,6 +21,12 @@ export default function Fonts({ children }: { children: React.ReactNode }) {
   if (!stylesheetCreated) {
     return null
   }
+
+  // return (
+  //   <div className={`${SEBSansSerifGDS.className} ${SEBSansSerifGDS.variable}`}>
+  //     {children}
+  //   </div>
+  // )
 
   return children
 }
