@@ -80,9 +80,9 @@ export function Home({
           </GdsText>
         </GdsFlex>
 
-        <GdsCard padding="0" style={{ aspectRatio: '16 / ' }} overflow="hidden">
+        <GdsCard padding="0" overflow="hidden">
           <GdsImg
-            src="https://raw.githubusercontent.com/seb-oss/green-content/main/data/assets/launch-hero.jpg"
+            src="https://api.seb.io/assets/launch-hero.jpg"
             object-fit="cover"
             width="100%"
             height="100%"
