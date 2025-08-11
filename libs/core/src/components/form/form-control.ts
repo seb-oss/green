@@ -49,7 +49,7 @@ export abstract class GdsFormControlElement<ValueT = any>
       this.#internals = {
         form: this.closest('form'),
         setFormValue: (value: any) => {
-          this.value = value
+          this._internalValue = value
         },
         setValidity: (validity: ValidityState, validationMessage?: string) => {
           ;(this.#internals.validity as any) = validity
