@@ -166,6 +166,8 @@ export class NggvDropdownComponent<
   public activeIndex = -1
   /** Subscribe if dropdown expanded to listen to click outside to close dropdown. */
   private onClickSubscription: Subscription | undefined
+  /** Subscribe if dropdown expanded to listen to scroll outside to close dropdown. */
+  private onScrollSubscription: Subscription | undefined
 
   public keyEvent: KeyboardEvent = {} as KeyboardEvent
   private _options: OptionBase<T>[] = []
@@ -202,6 +204,7 @@ export class NggvDropdownComponent<
 
   ngOnDestroy(): void {
     this.onClickSubscription?.unsubscribe()
+    this.onScrollSubscription?.unsubscribe()
   }
 
   /** @internal override to correctly set state from form value */
@@ -247,6 +250,19 @@ export class NggvDropdownComponent<
       },
     })
   }
+  subscribeToOutsideScrollEvent() {
+    this.onScrollSubscription = fromEvent(document, 'scroll').subscribe({
+      next: (event: Event) => {
+        if (
+          this.expanded &&
+          !this.inputRef?.nativeElement.contains(event.target)
+        ) {
+          this.toggleDropdown()
+          this.onScrollSubscription?.unsubscribe()
+        }
+      },
+    })
+  }
 
   // ----------------------------------------------------------------------------
   // HELPERS
@@ -275,7 +291,10 @@ export class NggvDropdownComponent<
   setExpanded(state = true) {
     this.expanded = state
     this.expandedChange.emit(this.expanded)
-    if (this.expanded) this.subscribeToOutsideClickEvent()
+    if (this.expanded) {
+      this.subscribeToOutsideClickEvent()
+      this.subscribeToOutsideScrollEvent()
+    }
     if (!this.expanded) this.onTouched()
   }
 
