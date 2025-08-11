@@ -105,7 +105,7 @@ export function Home({
 
         <GdsCard padding="0" style={{ aspectRatio: '16 / ' }} overflow="hidden">
           <GdsImg
-            src="https://raw.githubusercontent.com/seb-oss/green-content/main/data/assets/launch-hero.jpg"
+            src="https://api.seb.io/assets/launch-hero.jpg"
             object-fit="cover"
             width="100%"
             height="100%"
@@ -145,7 +145,10 @@ export function Home({
           aria-describedby="featured-subheading"
         >
           {featuredComponents.map((component) => (
-            <NextLink href={`/component/${component.slug}`}>
+            <NextLink
+              href={`/component/${component.slug}`}
+              key={component.slug}
+            >
               <GdsFlex flex-direction="column" height="318px">
                 <GdsCard
                   width="100%"
@@ -155,7 +158,7 @@ export function Home({
                   align-items="center"
                   justify-content="center"
                   overflow="hidden"
-                  style={{ pointerEvents: 'none' }}
+                  className="no-pointer"
                 >
                   {component.hero_snippet && (
                     <Snippet slug={component.hero_snippet} />
@@ -350,7 +353,11 @@ export function Home({
           aria-label="Resources"
           aria-describedby="resources-subheading"
         >
-          <NextLink href="https://figma.com/" isExternal>
+          <NextLink
+            href="https://figma.com/"
+            key="https://figma.com/"
+            target="_blank"
+          >
             <GdsCard flex-direction="row" align-items="center">
               <IconBrandFigma size="m" />
               <GdsFlex
@@ -364,7 +371,10 @@ export function Home({
             </GdsCard>
           </NextLink>
 
-          <NextLink href="https://storybook.seb.io/">
+          <NextLink
+            href="https://storybook.seb.io/"
+            key="https://storybook.seb.io/"
+          >
             <GdsCard flex-direction="row" align-items="center">
               <IconBrandStorybook size="m" />
               <GdsFlex
@@ -377,7 +387,10 @@ export function Home({
               </GdsFlex>
             </GdsCard>
           </NextLink>
-          <NextLink href="https://github.com/seb-oss/green">
+          <NextLink
+            href="https://github.com/seb-oss/green"
+            key="https://github.com/seb-oss/green"
+          >
             <GdsCard flex-direction="row" align-items="center">
               <IconBrandGithub size="m" />
               <GdsFlex

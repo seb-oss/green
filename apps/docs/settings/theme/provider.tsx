@@ -82,6 +82,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <DynamicGdsTheme color-scheme={colorScheme}>{children}</DynamicGdsTheme>
+    <DynamicGdsTheme color-scheme={colorScheme} designVersion="2023">
+      {children}
+    </DynamicGdsTheme>
   )
 }

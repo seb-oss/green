@@ -2,7 +2,7 @@
 
 import localFont from 'next/font/local'
 
-const SEBSansSerif = localFont({
+const SEBSansSerifGDS = localFont({
   src: [
     {
       path: '../../public/fonts/SEBSansSerifGDS/SEBSansSerifGDS-Bold.woff2',
@@ -57,8 +57,9 @@ const SEBSansSerif = localFont({
   ],
   display: 'block',
   variable: '--gds-font-family',
+  adjustFontFallback: false,
   fallback: ['sans-serif'],
   declarations: [{ prop: 'font-family', value: 'SEB Sans Serif GDS' }],
 })
-export const fontVariable = SEBSansSerif.variable
-export default SEBSansSerif
+export const fontVariable = SEBSansSerifGDS.variable
+export default SEBSansSerifGDS
