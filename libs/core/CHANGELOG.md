@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.88.4
+
+### Patch Changes
+
+- a57784e: **Dropdown:** Fix issue in Safari, where option keyboard focus would not render unless also hovered by mouse
+- 518586e: **GlobalStyles:** Make `GlobalStylesRegistry` version scoped
+
 ## 1.88.3
 
 ### Patch Changes
