@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.29.2
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+
+## 3.29.1
+
+### Patch Changes
+
+- 5526f22: **Button:** Add type to close button
+
 ## 3.29.0
 
 ### Minor Changes
