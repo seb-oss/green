@@ -4,6 +4,8 @@ import { property } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
 import { watch } from '../../utils/decorators'
 
+import './form-request-submit-polyfill'
+
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null
   setFormValue(value: any): void
@@ -70,8 +72,19 @@ export abstract class GdsFormControlElement<ValueT = any>
           valid: true,
         },
         willValidate: true,
-        checkValidity: () => true,
-        reportValidity: () => true,
+        checkValidity: this.checkValidity.bind(this),
+        reportValidity: this.reportValidity.bind(this),
+      }
+    }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    if (typeof this.attachInternals !== 'function') {
+      const form = this.closest('form')
+      if (form) {
+        form.addEventListener('submit', this._handleFormSubmit.bind(this))
+        form.addEventListener('reset', this.formResetCallback.bind(this))
       }
     }
   }
