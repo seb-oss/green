@@ -20,7 +20,6 @@ export const styles = css`
 
     :host([size='small']) .spinners {
       font-size: var(--gds-sys-text-size-detail-s);
-      line-height: var(--gds-sys-text-line-height-detail-s);
     }
 
     .spinner {
@@ -34,7 +33,8 @@ export const styles = css`
       outline: none;
       padding-block: var(--gds-sys-space-3xs);
       text-transform: uppercase;
-      line-height: 2rem;
+      //line-height: 275%;
+      line-height: calc(var(--gds-sys-space-3xl) - 8px);
       text-align: center;
 
       &:focus {
@@ -44,7 +44,8 @@ export const styles = css`
     }
 
     :host([size='small']) .spinner {
-      line-height: 1.5rem;
+      //line-height: 175%;
+      line-height: calc(var(--gds-sys-space-xl) - 8px);
     }
   }
 `
