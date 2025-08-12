@@ -155,6 +155,7 @@ export function TableOfContents({
       position="sticky"
       inset="90px auto auto auto"
       grid-column="10/13"
+      border="none"
       height="max-content"
       role="navigation"
       aria-label="Table of contents"

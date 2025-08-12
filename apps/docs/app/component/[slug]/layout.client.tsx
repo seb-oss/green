@@ -307,7 +307,7 @@ export function ComponentLayoutClient({
               versus={versus}
             />
 
-            {component.platform?.web && (
+            {/* {component.platform?.web && (
               <Core.GdsFlex gap="xs" flex-direction="column" padding="m">
                 <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
                 <Core.GdsText tag="small" color="02">
@@ -334,7 +334,7 @@ export function ComponentLayoutClient({
                   )}
                 </Core.GdsFlex>
               </Core.GdsFlex>
-            )}
+            )} */}
           </Core.GdsFlex>
         )}
       </Core.GdsGrid>
