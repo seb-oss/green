@@ -433,7 +433,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 slot="trigger"
                 .size=${this.popoverSize == 'small' ? 'xs' : 'small'}
                 aria-label=${msg('Month')}
-                .width=${this.popoverSize == 'small' ? '100px' : '130px'}
+                .width=${this.popoverSize == 'small' ? '120px' : '130px'}
                 justify-content="space-between"
               >
                 <span id="selected-month"
@@ -467,7 +467,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                 slot="trigger"
                 .size=${this.popoverSize == 'small' ? 'xs' : 'small'}
                 aria-label=${msg('Year')}
-                .width=${this.popoverSize == 'small' ? '100px' : '130px'}
+                .width=${this.popoverSize == 'small' ? '80px' : '130px'}
                 justify-content="space-between"
               >
                 <span id="selected-year">${this._focusedYear.toString()}</span>
