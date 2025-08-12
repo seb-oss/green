@@ -3,15 +3,39 @@
 import { useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import TypographyTokens from '../../../../../libs/tokens/src/tokens/2023/tokens.typography.json'
+import { Render } from '../../../design/atoms/content/render'
 import { Link } from '../../../design/atoms/link/link'
 import Playground from '../../../design/atoms/playgroud/playground'
 import { useContentContext } from '../../../settings/content'
 
+function RenderTypographyTokens() {
+  return (
+    <Core.GdsCard flex-direction="column" gap="m">
+      <table>
+        {Object.entries(TypographyTokens).map(([key, value]) => (
+          <>
+            <td>
+              <Core.GdsText font={value.font} tag="span">
+                {key}
+              </Core.GdsText>
+            </td>
+            <td>
+              <Core.GdsText font={value.font} tag="span">
+                Sample text for {key}
+              </Core.GdsText>
+            </td>
+          </>
+        ))}
+      </table>
+    </Core.GdsCard>
+  )
+}
+
 export function TypographyClient() {
   const [textConfig, setTextConfig] = useState({
-    tag: 'p',
-    fontSize: 'body-m',
-    fontWeight: 'regular',
+    tag: 'h1',
+    font: 'display-2xl',
     lines: undefined as number | undefined,
   })
 
@@ -42,10 +66,27 @@ export function TypographyClient() {
     { value: 'heading-m', label: 'Heading M (24px)' },
     { value: 'heading-s', label: 'Heading S (20px)' },
     { value: 'heading-xs', label: 'Heading XS (16px)' },
+    // Preamble sizes
+    { value: 'preamble-2xl', label: 'Preamble 2XL (32px)' },
+    { value: 'preamble-xl', label: 'Preamble XL (28px)' },
+    { value: 'preamble-l', label: 'Preamble L (24px)' },
+    { value: 'preamble-m', label: 'Preamble M (20px)' },
+    { value: 'preamble-s', label: 'Preamble S (18px)' },
+    { value: 'preamble-xs', label: 'Preamble XS (16px)' },
+    // Detail sizes
+    { value: 'detail-regular-m', label: 'Detail Regular M (16px)' },
+    { value: 'detail-regular-s', label: 'Detail Regular S (14px)' },
+    { value: 'detail-regular-xs', label: 'Detail Regular XS (12px)' },
+    { value: 'detail-book-m', label: 'Detail Book M (16px)' },
+    { value: 'detail-book-s', label: 'Detail Book S (14px)' },
+    { value: 'detail-book-xs', label: 'Detail Book XS (12px)' },
     // Body sizes
-    { value: 'body-l', label: 'Body L (20px)' },
-    { value: 'body-m', label: 'Body M (16px)' },
-    { value: 'body-s', label: 'Body S (14px)' },
+    { value: 'body-regular-l', label: 'Body Regular L (20px)' },
+    { value: 'body-regular-m', label: 'Body Regular M (16px)' },
+    { value: 'body-regular-s', label: 'Body Regular S (14px)' },
+    { value: 'body-book-l', label: 'Body Book L (20px)' },
+    { value: 'body-book-m', label: 'Body Book M (16px)' },
+    { value: 'body-book-s', label: 'Body Book S (14px)' },
   ]
 
   const weightOptions = [
@@ -77,27 +118,12 @@ export function TypographyClient() {
         label="Size"
         plain
         size="small"
-        value={textConfig.fontSize}
+        value={textConfig.font}
         onchange={(e: any) =>
-          setTextConfig({ ...textConfig, fontSize: e.detail.value })
+          setTextConfig({ ...textConfig, font: e.detail.value })
         }
       >
         {sizeOptions.map((option) => (
-          <Core.GdsOption key={option.value} value={option.value}>
-            {option.label}
-          </Core.GdsOption>
-        ))}
-      </Core.GdsDropdown>
-
-      <Core.GdsDropdown
-        plain
-        size="small"
-        value={textConfig.fontWeight}
-        onchange={(e: any) =>
-          setTextConfig({ ...textConfig, fontWeight: e.detail.value })
-        }
-      >
-        {weightOptions.map((option) => (
           <Core.GdsOption key={option.value} value={option.value}>
             {option.label}
           </Core.GdsOption>
@@ -115,12 +141,7 @@ export function TypographyClient() {
       width="100%"
       padding="xl"
     >
-      <Core.GdsText
-        tag={textConfig.tag}
-        font={textConfig.fontSize}
-        font-weight={textConfig.fontWeight}
-        lines={textConfig.lines}
-      >
+      <Core.GdsText tag={textConfig.tag} font={textConfig.font}>
         {sampleText}
       </Core.GdsText>
     </Core.GdsFlex>
@@ -131,31 +152,21 @@ export function TypographyClient() {
       <Core.GdsCard variant="secondary" padding="l">
         <Core.GdsFlex flex-direction="column" gap="m">
           <Core.GdsText tag="h3">Typography Tokens</Core.GdsText>
-          <Core.GdsText color="secondary">
-            Font Size: {textConfig.fontSize}
-          </Core.GdsText>
-          <Core.GdsText color="secondary">
-            Font Weight: {textConfig.fontWeight}
-          </Core.GdsText>
-          <Core.GdsText color="secondary">
-            Line Height: var(--gds-sys-text-line-height-{textConfig.fontSize})
-          </Core.GdsText>
-
+          <Core.GdsText color="secondary">Font: {textConfig.font}</Core.GdsText>
           <Core.GdsInput
             plain
-            value={`<Core.GdsText
+            value={`<gds-text
   tag="${textConfig.tag}"
-  font-size="${textConfig.fontSize}"
-  font-weight="${textConfig.fontWeight}"
+  font="${textConfig.font}"
 >
   ${sampleText}
-</Core.GdsText>`}
+</gds-text>`}
           />
           <Core.GdsButton
             rank="tertiary"
             onClick={() =>
               navigator.clipboard.writeText(
-                `<Core.GdsText tag="${textConfig.tag}" font-size="${textConfig.fontSize}" font-weight="${textConfig.fontWeight}">${sampleText}</Core.GdsText>`,
+                `<Core.GdsText tag="${textConfig.tag}" font="${textConfig.font}">${sampleText}</Core.GdsText>`,
               )
             }
           >
@@ -215,6 +226,14 @@ export function TypographyClient() {
         inspectContent={inspectContent}
         height="500px"
       />
+      {CONTENT?.sections && (
+        <Render
+          content={CONTENT.sections}
+          slug="foundation"
+          imageProvider={imageProvider}
+        />
+      )}
+      <RenderTypographyTokens />
     </Core.GdsFlex>
   )
 }

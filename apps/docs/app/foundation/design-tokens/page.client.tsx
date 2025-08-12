@@ -38,7 +38,7 @@ export function TokensClient() {
           <Core.IconBrandGreen size="m" slot="lead" />
           Foundation
         </Link>
-        <GdsText>Tokens</GdsText>
+        <GdsText>Design Tokens</GdsText>
       </GdsBreadcrumbs>
       <GdsFlex
         flex-direction="column"

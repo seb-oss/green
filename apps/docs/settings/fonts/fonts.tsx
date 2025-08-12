@@ -14,7 +14,6 @@ export default function Fonts({ children }: { children: React.ReactNode }) {
             --font: ${SEBSansSerif.style.fontFamily};
         }`)
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
-      console.log(document.adoptedStyleSheets)
 
       setStylesheetCreated(true)
     }
