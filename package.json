@@ -78,7 +78,7 @@
     "mdx-mermaid": "^2.0.0",
     "merge": "^2.1.1",
     "mermaid": "^11.5.0",
-    "next": "^15.3.3",
+    "next": "^15.4.6",
     "patch-package": "^8.0.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
