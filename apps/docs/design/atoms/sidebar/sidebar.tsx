@@ -295,16 +295,14 @@ export default function Sidebar() {
       border-width={menuOpen ? '0 0 4xs 0' : '0'}
       role="navigation"
       aria-label="Main"
-      style={{
-        transition:
-          'width var(--gds-sys-motion-duration-fast) cubic-bezier(var(--gds-sys-motion-easing-ease-out))',
-      }}
     >
       <Core.GdsFlex
         display="flex; s{none}"
         align-items="center"
         justify-content="space-between"
         padding="0 l"
+        flex="1"
+        width="100%"
       >
         <Link href="/">
           <Core.GdsText

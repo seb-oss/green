@@ -2,6 +2,8 @@
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
+  transition: width var(--gds-sys-motion-duration-fast)
+    cubic-bezier(var(--gds-sys-motion-easing-ease-out));
 
   [data-backdrop] {
     backdrop-filter: blur(10px);
