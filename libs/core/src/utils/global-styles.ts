@@ -5,7 +5,7 @@ import { supportsConstructedStylesheets } from '../utils/controllers/dynamic-sty
 import { isServer } from './helpers/platform'
 
 declare global {
-  var __gdsGlobalStylesRegistry: { [VER_SUFFIX]: GlobalStylesRegistry } // eslint-disable-line no-var
+  var __gdsGlobalStylesRegistryScoped: { [VER_SUFFIX]: GlobalStylesRegistry } // eslint-disable-line no-var
 }
 
 function getDocumentAdoptedStylesheet() {
@@ -27,13 +27,13 @@ export class GlobalStylesRegistry {
    * Get the global singleton instance of the GlobalStylesRegistry.
    */
   static get instance() {
-    if (!globalThis.__gdsGlobalStylesRegistry?.[VER_SUFFIX])
-      globalThis.__gdsGlobalStylesRegistry = {
-        ...globalThis.__gdsGlobalStylesRegistry,
+    if (!globalThis.__gdsGlobalStylesRegistryScoped?.[VER_SUFFIX])
+      globalThis.__gdsGlobalStylesRegistryScoped = {
+        ...globalThis.__gdsGlobalStylesRegistryScoped,
         [VER_SUFFIX]: new GlobalStylesRegistry(),
       }
 
-    return globalThis.__gdsGlobalStylesRegistry[VER_SUFFIX]
+    return globalThis.__gdsGlobalStylesRegistryScoped[VER_SUFFIX]
   }
 
   /**
