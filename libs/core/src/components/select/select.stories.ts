@@ -184,39 +184,19 @@ export const Disabled: Story = {
 }
 
 /**
- * Select has built-in support for form validation.<br>The validation feature is built on top of the browsers native validation features, using `ElementInternals` and `Constraint Validation API`.
- *
- * Validation is configured by adding a validator to a form element.<br> A validator is an object that implements the `GdsValidator` interface:
- *
- * ```html
- * <gds-select invalid></gds-select>
- * ```
- * **@property invalid** - Indicates that the select field contains an error.
- *
+ * The invalid state can be set either directly using the `invalid` boolean property together with the `error-message` property, or by using a [validator](/docs/components-form-validation--docs).
  */
-export const Validation: Story = {
+export const Invalid: Story = {
   ...DefaultParams,
-  name: 'Validation',
+  name: 'Invalid',
   render: () => html`
     <gds-flex>
       <gds-select
-        .invalid=${true}
+        invalid
         label="Label text"
         supporting-text="Supporting text"
         .required=${true}
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value === '')
-              return [
-                {
-                  ...el.validity,
-                  valid: false,
-                  customError: true,
-                },
-                'Error message.',
-              ]
-          },
-        }}
+        error-message="This field is required"
       >
         <span slot="extended-supporting-text">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

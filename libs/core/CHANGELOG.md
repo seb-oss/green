@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.88.5
+
+### Patch Changes
+
+- b14325b: **Select:** Fix error message rendering issue
+- ab1cb3b: **GlobalStylesRegistry:** Rename singleton so it doesn't interfere with older unscoped versions
+
+## 1.88.4
+
+### Patch Changes
+
+- a57784e: **Dropdown:** Fix issue in Safari, where option keyboard focus would not render unless also hovered by mouse
+- 518586e: **GlobalStyles:** Make `GlobalStylesRegistry` version scoped
+
+## 1.88.3
+
+### Patch Changes
+
+- e480d9f: **Checkbox:** Fix interaction issue with NVDA. Fixes #2199
+- 1331668: **Checkbox:** Add missing dependency of `IconMinusSmall`
+
+## 1.88.2
+
+### Patch Changes
+
+- 72be834: **Dropdown:** Fix issue with updating error message via prop
+
 ## 1.88.1
 
 ### Patch Changes

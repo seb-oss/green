@@ -53,6 +53,7 @@
     max-height: 500px;
     overflow-y: auto;
     width: 100%;
+    overscroll-behavior: none;
 
     @include common.padding-bottom(0);
     @include common.add-border();
@@ -125,5 +126,15 @@
     background-color: #e7e7e7;
     padding-inline: 1rem;
     padding-block: 0.5rem;
+  }
+
+  &[data-position='top'] {
+    top: auto;
+    bottom: 100%;
+    transform: translateY(-0.5rem);
+  }
+  &[data-position='bottom'] {
+    bottom: 0;
+    transform: translateY(calc(100% + 0.5rem));
   }
 }

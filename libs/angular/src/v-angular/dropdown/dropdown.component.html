@@ -59,7 +59,7 @@
 
   <!-- INPUT -->
   <ng-container *ngIf="!locked">
-    <div class="gds-input-wrapper">
+    <div class="gds-input-wrapper dropdown-wrapper">
       <div #input [id]="id + '-input'" class="dropdown">
         <button
           [id]="id + '-toggle'"
@@ -100,6 +100,7 @@
           [textToHighlight]="textToHighlight"
           [onlyEmitDistinctChanges]="onlyHandleDistinctChanges"
           [selectWithSpace]="selectWithSpace"
+          [dynamicPosition]="true"
           (closed)="setExpanded(false)"
           (selectedValueChanged)="onSelectChange($event)"
         >

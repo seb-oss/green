@@ -1,0 +1,118 @@
+name: Publish Release Candidate snapshot to NPM
+
+on:
+  pull_request:
+    branches:
+      - 'main'
+
+jobs:
+  release-snapshot:
+    runs-on: ubuntu-latest
+
+    ## Only run this job if the PR title is "Version Packages"
+    if: contains(github.event.pull_request.title, 'Version Packages')
+
+    steps:
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GREEN_BOT_APP_ID }}
+          private-key: ${{ secrets.GREEN_BOT_PRIVATE_KEY }}
+          repositories: |
+            green
+            green-testbed
+
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify main branch
+        if: github.ref != 'refs/heads/main'
+        run: git rev-parse --verify main || git remote set-branches origin main && git fetch --depth 1 origin main && git branch main origin/main
+
+      - name: Setup Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          registry-url: 'https://registry.npmjs.org'
+          scope: '@sebgroup'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - run: npm config get registry
+      - run: npm whoami
+
+      - run: npm config ls
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --prefer-offline --frozen-lockfile --silent
+
+      - name: Set snapshot versions
+        run: yarn nx affected -t version-as-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
+
+      - name: Build libs
+        run: yarn nx affected -t build --exclude='*,!tag:lib' --base=main --head=HEAD
+
+      - name: Publish snapshots
+        id: publish-snapshots
+        run: yarn nx affected -t publish-snapshot --exclude='*,!tag:lib' --base=main --head=HEAD --label=rc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Comment status
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{ steps.get_token.outputs.token }}
+          script: |
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Hello! New release candidate snapshots published to NPM! :rocket: :package: :tada:
+
+              Version info:
+
+                @sebgroup/green-core: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CORE }}
+                @sebgroup/green-angular: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_ANGULAR }}
+                @sebgroup/green-react: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_REACT }}
+                @sebgroup/chlorophyll: ${{ steps.publish-snapshots.outputs.SNAPSHOT_VERSION_CHLOROPHYLL }}
+
+              Install latest RC snapshot by running:
+
+                npm install @sebgroup/package-name@rc
+
+              :information_source: Please note that these are intended for testing purposes only.
+
+              ---
+
+              :test_tube: The latest RC snapshot of Green Core will be autmatically tested for visual regressions in the Green Testbed project.<br />
+              [![Visual Regression Tests on Browserstack](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml/badge.svg)](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml)
+              `
+            })
+
+      - name: Publish RC testbed
+        run: |
+          # Set the required variables
+          event_type="trigger-workflow"
+
+          curl -L \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${{ steps.get_token.outputs.token }}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/seb-oss/green-testbed/dispatches \
+            -d "{\"event_type\": \"$event_type\", \"client_payload\": {\"npm_tag\": \"rc\", \"source_pr\": \"${{ github.event.pull_request.number }}\"}}"

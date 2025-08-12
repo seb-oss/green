@@ -35,9 +35,9 @@ export interface DropdownTexts {
   selected?: string
   placeholder?: string
 }
-export interface DropdownOption {
+export interface DropdownOption<T = any> {
   label?: string
-  value?: any
+  value?: T
   selected?: boolean
   heading?: boolean
   [key: string]: any
