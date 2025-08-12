@@ -13,6 +13,7 @@ interface CardProps {
   title?: string
   beta?: boolean
   summary?: string
+  layout?: boolean
   snippet?: string
   badge?: string
   href?: string
@@ -25,6 +26,7 @@ export default function Card({
   title,
   summary,
   beta,
+  layout,
   snippet,
   href,
   children,
@@ -71,8 +73,8 @@ export default function Card({
             min-width="100%"
             flex-direction={list ? 'row' : 'columns'}
             position="relative"
+            className="no-pointer"
             z-index="0"
-            style={{ pointerEvents: 'none' }}
           >
             {children
               ? children
@@ -106,6 +108,11 @@ export default function Card({
               {beta && (
                 <Core.GdsBadge size="small" variant="notice">
                   BETA
+                </Core.GdsBadge>
+              )}
+              {layout && (
+                <Core.GdsBadge size="small" variant="information">
+                  Layout
                 </Core.GdsBadge>
               )}
             </Core.GdsFlex>

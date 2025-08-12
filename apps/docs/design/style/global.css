@@ -40,3 +40,7 @@ a {
   color: inherit;
   cursor: pointer;
 }
+
+.no-pointer {
+  pointer-events: none;
+}

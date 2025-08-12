@@ -80,19 +80,18 @@ export function ComponentsClient() {
   if (!isLoaded) return <div>Loading...</div>
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="l" width="100%" font="body-s">
+    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%" font="body-s">
       <Core.GdsFlex
         justify-content="center"
-        align-items="flex-start"
         flex-direction="column"
-        gap="l"
+        gap="2xl"
         min-width="700px"
         margin="auto"
         text-align="centers"
         align-items="center"
       >
         <Core.GdsFlex flex-direction="column" gap="m" padding="xl 0 0 0">
-          <Core.GdsFlex gap="s">
+          <Core.GdsFlex gap="s" justify-content="center">
             <Core.GdsText font="display-m">Components</Core.GdsText>
             <Core.GdsText font="display-m" color="positive">
               ({components.length})
@@ -174,6 +173,11 @@ export function ComponentsClient() {
               href={component.slug}
               summary={component.summary}
               beta={component.beta}
+              layout={
+                Array.isArray(component.category)
+                  ? component.category.includes('Layout')
+                  : component.category === 'Layout'
+              }
               snippet={component.hero_snippet}
               list={view == 'list'}
             />
