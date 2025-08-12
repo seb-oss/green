@@ -33,11 +33,7 @@
       )
   }
 
-  function raise(
-    errorConstructor: any,
-    message: string,
-    name: string = 'Error',
-  ) {
+  function raise(errorConstructor: any, message: string, name = 'Error') {
     throw new errorConstructor(
       "Failed to execute 'requestSubmit' on 'HTMLFormElement': " +
         message +
