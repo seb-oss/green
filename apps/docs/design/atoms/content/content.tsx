@@ -276,8 +276,8 @@ export const RenderColumn = (
                     justify-content="center"
                     align-items="center"
                     variant={column.plain ? 'secondary' : 'secondary'}
-                    border-color="primary/0.4"
                     border-width={column.plain ? '0' : '4xs'}
+                    border-color="subtle-01"
                     data-plain={column.plain}
                     data-snipet={column.plain ? null : 'true'}
                   >
