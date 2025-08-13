@@ -136,7 +136,7 @@ export class GdsFormSummary extends GdsElement {
                       gap="xs"
                       level="3"
                       color="negative"
-                      background="transparent; hover: negative/.2"
+                      background="transparent; hover: negative-01/.1"
                       style="cursor: pointer"
                       border-width="0"
                       border-radius="xs"
