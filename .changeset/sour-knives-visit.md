@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Datepicker icon fix on small
+**Datepicker:** Fix icon line weight for size=small
