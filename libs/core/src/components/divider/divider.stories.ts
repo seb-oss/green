@@ -47,18 +47,16 @@ export const Divider: Story = {
 }
 
 /**
- * The `gds-divider` with different colors
- * The default level on the divider is 2 and based on the level it accepts all border colors of that level colors can be found here:[Color System documentation page](./?path=/docs/style-colors--docs)
+ * The `gds-divider` accepts all the border tokens as color value.
  *
  * Example:
  *
  * ```html
- * <gds-divider color=""></gds-divider>
- * <gds-divider color=""></gds-divider>
- * <gds-divider color=""></gds-divider>
+ * <gds-divider color="subtle-01"></gds-divider>
+ * <gds-divider color="subtle-02"></gds-divider>
+ * <gds-divider color="inverse"></gds-divider>
  * ```
  *
- * The above example will apply the color style of 'primary'.
  */
 export const Color: Story = {
   ...DefaultParams,
@@ -154,75 +152,6 @@ export const Color: Story = {
         <gds-flex flex-direction="column">
           <gds-text>notice-02</gds-text>
           <gds-divider color="notice-02" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-    </gds-flex>`,
-}
-
-/**
- * Custom color
- * In addition to color tokens you can still use custom colors in cases when you need to use a color that is not part of the design system.
- *
- * Example:
- *
- * ```html
- * <gds-divider colorfc0"></gds-divider>
- * ```
- *
- */
-export const Custom: Story = {
-  ...DefaultParams,
-  name: 'Color Custom',
-  render: (args) =>
-    html` <gds-flex flex-direction="column" gap="xl">
-      <gds-card variant="tertiary">
-        <gds-flex flex-direction="column">
-          <gds-text>Custom Color: #fc0</gds-text>
-          <gds-divider colorfc0" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-      <gds-card>
-        <gds-flex flex-direction="column">
-          <gds-text>Custom Color: #2561ad</gds-text>
-          <gds-divider color2561ad" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-    </gds-flex>`,
-}
-
-/**
- * Color property acceps alpha values
- * It can be used with variable colors from the design system or custom colors.
- *
- * Example:
- * ```html
- * <gds-divider color2561ad/0.2"></gds-divider>
- * <gds-divider color="/0.2"></gds-divider>
- * ```
- *
- * The alpha value should be between 0 and 1.
- */
-export const Alpha: Story = {
-  ...DefaultParams,
-  name: 'Color Alpha',
-  render: (args) =>
-    html` <gds-flex flex-direction="column" gap="xl">
-      <gds-card variant="tertiary">
-        <gds-flex flex-direction="column">
-          <gds-text>
-            Token with alpha: <br />
-            <code>primary/0.4</code>
-          </gds-text>
-          <gds-divider color="/0.4" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-      <gds-card>
-        <gds-flex flex-direction="column">
-          <gds-text>
-            Custom color with alpha: <br />
-            <code>#2561ad/0.2</code>
-          </gds-text>
-          <gds-divider color2561ad/0.2" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,
