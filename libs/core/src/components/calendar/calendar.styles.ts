@@ -40,7 +40,6 @@ const style = css`
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-sys-space-2xs);
-        transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
@@ -49,18 +48,14 @@ const style = css`
 
         &:not(.disabled):hover,
         &[aria-selected='true'] {
+          --_background: var(--gds-sys-color-l3-01);
           background: color-mix(
             in srgb,
             var(--_background),
-            var(--gds-sys-color-state-light-hover)
+            var(--gds-sys-color-state-neutral-01)
           );
           cursor: pointer;
-        }
-
-        &[aria-selected='true'] {
-          --_background: var(--gds-sys-color-l3-01);
           color: var(--gds-sys-color-content-inversed);
-          cursor: pointer;
         }
 
         &.today {
