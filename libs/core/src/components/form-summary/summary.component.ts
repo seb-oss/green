@@ -109,9 +109,7 @@ export class GdsFormSummary extends GdsElement {
         html`<gds-card
           id="root"
           role="navigation"
-          border-color="negative"
-          border-radius="xs"
-          border-width="0"
+          variant="negative"
           padding="l"
           background="negative-01"
           color="negative-01"
