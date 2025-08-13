@@ -29,6 +29,8 @@ export default css`
   }
 
   .native-control {
+    display: flex;
+    align-items: center;
     appearance: none;
     background-color: transparent;
     border: 0;
@@ -42,7 +44,6 @@ export default css`
     line-height: var(--gds-sys-text-line-height-detail-m);
     color: currentColor;
     text-align: left;
-    align-items: center;
   }
 
   :host([size='small']) slot[name='lead']::slotted(*) {
