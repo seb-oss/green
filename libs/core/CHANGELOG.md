@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.88.6
+
+### Patch Changes
+
+- 101fed7: **iOS/Safari 15:** Fix issues releated to form controls and styling. Fixes #2225
+
+## 1.88.5
+
+### Patch Changes
+
+- b14325b: **Select:** Fix error message rendering issue
+- ab1cb3b: **GlobalStylesRegistry:** Rename singleton so it doesn't interfere with older unscoped versions
+
 ## 1.88.4
 
 ### Patch Changes
