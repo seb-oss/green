@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.88.6
+
+### Patch Changes
+
+- 101fed7: **iOS/Safari 15:** Fix issues releated to form controls and styling. Fixes #2225
+
 ## 1.88.5
 
 ### Patch Changes
