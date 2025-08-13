@@ -357,7 +357,7 @@ export default function Sidebar() {
           {isOpen ? (
             <>
               <Icon name="IconMenuSidebar" slot="lead" solid />
-              Close menu
+              Minimise menu
             </>
           ) : (
             <Icon name="IconMenuSidebar" />
