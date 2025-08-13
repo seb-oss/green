@@ -9,9 +9,7 @@ const style = css`
   }
 
   hr {
-    border-radius: 200px;
     background: currentColor;
-    font-size: 0;
     border: 0;
     min-height: 1px;
     max-height: 1px;
