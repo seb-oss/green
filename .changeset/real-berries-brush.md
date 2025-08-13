@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Spinner have larger linehight to easier select/scroll
+**Datepicker:** Increase height of date part spinbuttons for larger click target
