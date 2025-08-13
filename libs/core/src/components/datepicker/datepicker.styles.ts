@@ -30,13 +30,10 @@ export const styles = css`
       text-align: center;
       height: 100%;
       box-sizing: border-box;
-      /* border-radius: var(--gds-sys-space-2xs); */
       outline: none;
       padding-block: var(--gds-sys-space-3xs);
       text-transform: uppercase;
       line-height: 1;
-      //line-height: 275%;
-      //line-height: calc(var(--gds-sys-space-3xl) - 8px);
       text-align: center;
 
       &:focus {
@@ -44,10 +41,5 @@ export const styles = css`
         color: var(--gds-sys-color-l2-content-tertiary);
       }
     }
-
-    //:host([size='small']) .spinner {
-    //  line-height: 175%;
-    //  line-height: calc(var(--gds-sys-space-xl) - 8px);
-    //}
   }
 `

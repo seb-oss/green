@@ -42,7 +42,7 @@ export default css`
     line-height: var(--gds-sys-text-line-height-detail-m);
     color: currentColor;
     text-align: left;
-    align-self: stretch;
+    align-items: center;
   }
 
   :host([size='small']) slot[name='lead']::slotted(*) {
