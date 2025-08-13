@@ -337,8 +337,8 @@ class Datepicker extends GdsFormControlElement<Date> {
             this.size === 'small',
             () =>
               html`<gds-icon-calender-add
-                height="16"
-                stroke="2"
+                stroke="1.6"
+                style="line-height: 16px"
               ></gds-icon-calender-add>`,
             () => html`<gds-icon-calender-add></gds-icon-calender-add>`,
           )}
