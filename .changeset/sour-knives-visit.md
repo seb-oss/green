@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Datepicer icon fix on small
+Datepicker icon fix on small
