@@ -196,6 +196,12 @@ export class TableComponent<T extends TableRow>
   @Input() expandable = false
 
   /**
+   * Used to enable/disable the right-side expand icon column.
+   * Defaults to true.
+   */
+  @Input() expandedByDefault = true
+
+  /**
   * Property name used to describe the subItems in the data table.
   */
   @Input() subItemsProp = 'subItems'
@@ -338,6 +344,13 @@ export class TableComponent<T extends TableRow>
     if (this.customFooterTemplate) {
       // set templateRef of table footer to variable
       this.customFooterTemplateRef = this.customFooterTemplate.templateRef
+    }
+
+    // if expandedByDefault is true, then expand all rows
+    if (this.expandedByDefault && this.expandable && this.tableData) {
+      this.tableData.forEach((item) => {
+        this.toggleRowToExpand(item[this.rowId])
+      })
     }
   }
 

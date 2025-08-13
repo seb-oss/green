@@ -61,12 +61,8 @@ export class GdsToggleControlBase extends GdsElement {
           <slot></slot>
         </div>
         <div class="${classMap(classes)}">
-          <label class="primary-label"> ${this.label} </label>
-          ${this.label
-            ? html`
-                <span class="supporting-text"> ${this.supportingText} </span>
-              `
-            : ''}
+          <slot name="label"></slot>
+          <slot name="supporting-text"></slot>
         </div>
       </div>
     `

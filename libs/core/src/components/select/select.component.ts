@@ -158,8 +158,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
         () =>
           html`<gds-form-control-footer
             class="size-${this.size}"
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `

@@ -11,7 +11,6 @@ import {
   Output,
   ViewChild,
 } from '@angular/core'
-
 import { fromEvent, Subscription } from 'rxjs'
 import { filter, takeWhile } from 'rxjs/operators'
 
@@ -36,6 +35,9 @@ export class NggvFoldOutComponent implements OnDestroy, AfterViewInit {
   @Input() text?: string
   /** Aria label for the fold-out button */
   @Input() ariaLabel?: string
+  /** Sets the width property of the list. Default = fit-content */
+  @Input() listWidth: 'fit-content' | 'max-content' | 'min-content' | 'auto' =
+    'fit-content'
   /** Emits when the children container collapses, for components with change detection strategy "OnPush" */
   @Output() actionEmitter = new EventEmitter<void>()
 

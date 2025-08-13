@@ -94,10 +94,13 @@ const Template: StoryFn<NggSliderComponent> = (args) => {
   return {
     template: `
       <ngg-slider
-        label="Slider label text in one line"
-        instruction="Element instruction"
+        [label]="label"
+        [instruction]="instruction"
         placeholder="%"
-        [value]="50"
+        [value]="defaultValue"
+        [min]="min"
+        [max]="max"
+        [step]="step"
         [hasTextbox]="hasTextbox"
         [unitLabel]="unitLabel"
         [disabled]="disabled"
@@ -111,27 +114,43 @@ const Template: StoryFn<NggSliderComponent> = (args) => {
   }
 }
 
+const DefaultArgs = {
+  label: 'Slider label text in one line',
+  instruction: 'Element instruction',
+  defaultValue: 50,
+  min: 0,
+  max: 100,
+  step: 1,
+}
+
 export const Default = Template.bind({})
+Default.args = {
+  ...DefaultArgs,
+}
 
 export const Textbox = Template.bind({})
 Textbox.args = {
   hasTextbox: true,
+  ...DefaultArgs,
 }
 
 export const UnitTextbox = Template.bind({})
 UnitTextbox.args = {
   hasTextbox: true,
   unitLabel: 'kr',
+  ...DefaultArgs,
 }
 
 export const Error = Template.bind({})
 Error.args = {
   hasTextbox: true,
   errorMessage: 'Error text can be quite long',
+  ...DefaultArgs,
 }
 
 export const Disabled = Template.bind({})
 Disabled.args = {
   hasTextbox: true,
   disabled: true,
+  ...DefaultArgs,
 }
