@@ -220,7 +220,7 @@ export function IconContent({ component }: IconContentProps) {
         <Core.GdsGrid
           columns="4"
           gap="l"
-          border-color="primary"
+          border-color="information-02"
           border-width="0 0 4xs 0"
           border-style="solid"
           padding-block="0 s"
@@ -254,7 +254,7 @@ export function IconContent({ component }: IconContentProps) {
             <Core.GdsFlex>
               <Core.GdsDropdown
                 size="small"
-                value="medium"
+                value={selectedSize}
                 plain
                 oninput={handleSizeChange}
               >
