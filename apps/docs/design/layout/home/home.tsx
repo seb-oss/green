@@ -252,7 +252,7 @@ export function Home({
                       align-items="center"
                       justify-content="center"
                     >
-                      <GdsText font-size="display-m">Aa</GdsText>
+                      <GdsText font="display-m">Aa</GdsText>
                     </GdsCard>
                     <GdsCard
                       variant="secondary"
@@ -260,7 +260,7 @@ export function Home({
                       align-items="center"
                       justify-content="center"
                     >
-                      <GdsText font-size="display-s">Aa</GdsText>
+                      <GdsText font="display-s">Aa</GdsText>
                     </GdsCard>
                     <GdsCard
                       variant="secondary"
@@ -268,7 +268,7 @@ export function Home({
                       align-items="center"
                       justify-content="center"
                     >
-                      <GdsText font-size="display-xs">Aa</GdsText>
+                      <GdsText font="display-xs">Aa</GdsText>
                     </GdsCard>
                     <GdsCard
                       padding="0"
@@ -316,27 +316,27 @@ export function Home({
                 flex-direction="column"
                 gap="l"
               >
-                <GdsGrid columns="12" gap="xs" width="60%">
+                <GdsGrid columns="12" gap="2xs" width="60%">
                   <GdsCard
                     grid-column="1/13"
-                    border-radius="xs"
+                    border-radius="2xs"
                     height="l"
                     padding="0"
-                    variant="negative"
+                    variant="secondary"
                   />
                   <GdsCard
                     grid-column="1/4"
-                    border-radius="xs"
+                    border-radius="2xs"
                     height="6xl"
                     padding="0"
-                    variant="positive"
+                    variant="secondary"
                   />
                   <GdsCard
                     grid-column="4/13"
-                    border-radius="xs"
+                    border-radius="2xs"
                     height="6xl"
                     padding="0"
-                    variant="notice"
+                    variant="secondary"
                   />
                 </GdsGrid>
               </GdsFlex>
