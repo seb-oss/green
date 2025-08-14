@@ -21,6 +21,9 @@ export default function Versus({ compare, current }: VersusProps) {
 
   if (!compareComponent || !currentComponent) return null
 
+  console.log(compareComponent)
+  console.log(currentComponent['compare-content'])
+
   return (
     <Core.GdsFlex flex-direction="column" gap="m" id="component-versus">
       <Core.GdsText tag="h2">
@@ -40,9 +43,9 @@ export default function Versus({ compare, current }: VersusProps) {
                 </Core.GdsBadge>
               )}
             </Core.GdsFlex>
-            {compareComponent.summary && (
+            {compareComponent['compare-content'] && (
               <Core.GdsText color="secondary" tag="p">
-                {compareComponent.summary}
+                {compareComponent['compare-content']}
               </Core.GdsText>
             )}
             <Link
@@ -67,9 +70,9 @@ export default function Versus({ compare, current }: VersusProps) {
                 </Core.GdsBadge>
               )}
             </Core.GdsFlex>
-            {currentComponent.summary && (
+            {currentComponent['compare-content'] && (
               <Core.GdsText color="secondary" tag="p">
-                {currentComponent.summary}
+                {currentComponent['compare-content']}
               </Core.GdsText>
             )}
             <Core.GdsText font-weight="book">Current component.</Core.GdsText>
