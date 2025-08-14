@@ -1,5 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { property, query } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -66,6 +67,18 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   @property()
   variant: 'default' | 'slide-out' = 'default'
 
+  /**
+   * The dialog's size.
+   */
+  @property()
+  size: 's' | 'm' | 'l' = 'm'
+
+  /**
+   * The dialog's position.
+   */
+  @property()
+  position: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
+
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
 
@@ -106,7 +119,11 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         () =>
           html`<dialog
             @close=${this.#handleNativeClose}
-            class=${this.variant}
+            class=${classMap({
+              [this.variant]: true,
+              [`size-${this.size}`]: true,
+              [`position-${this.position}`]: true,
+            })}
             aria-describedby="heading"
           >
             <gds-card
@@ -117,6 +134,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
               padding="l"
               gap="l"
               border-radius="s"
+              min-height="min-content"
             >
               <gds-flex
                 justify-content="space-between"
@@ -132,7 +150,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
                   ><gds-icon-cross-small></gds-icon-cross-small
                 ></gds-button>
               </gds-flex>
-              <gds-div id="content" overflow="auto" flex="1">
+              <gds-div id="content" flex="1">
                 <slot></slot>
               </gds-div>
               <gds-flex

@@ -32,9 +32,10 @@ const DefaultParams: Story = {
   },
   args: {
     heading: 'Dialog heading',
-    innerHTML: `<gds-button slot="trigger">Open Dialog</gds-button>
-
-This is the content of the dialog.`,
+    innerHTML: `<gds-button slot="trigger">Open Dialog</gds-button>This is the content of the dialog. You can add any content here, including other components. You can also add buttons to the footer of the dialog by using the slot="footer" attribute on the button. You can also use the slot="footer" attribute to add buttons to the footer of the dialog. The dialog will automatically close when the user clicks outside of it or presses the Escape key. You can also close the dialog programmatically by calling the close() method on the dialog element. The dialog will also emit a gds-close event when it is closed, which you can listen to if you want to perform some action when the dialog is closed.`,
+    variant: 'default',
+    size: 'm',
+    position: 'initial',
   },
 }
 

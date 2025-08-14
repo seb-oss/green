@@ -8,7 +8,8 @@ const style = css`
     }
 
     dialog {
-      transition: var(--gds-sys-motion-duration-fastest);
+      transition: transform var(--gds-sys-motion-duration-fast)
+        cubic-bezier(var(--gds-sys-motion-easing-ease-out));
       background: transparent;
       padding: 0;
       border-width: 0;
@@ -26,7 +27,8 @@ const style = css`
       }
 
       &::backdrop {
-        transition: var(--gds-sys-motion-duration-fastest);
+        transition: all var(--gds-sys-motion-duration-fast)
+          cubic-bezier(var(--gds-sys-motion-easing-ease-out));
         background: rgba(100, 100, 100, 0.4);
       }
     }
@@ -35,21 +37,97 @@ const style = css`
       flex-grow: 1;
     }
 
-    dialog.default {
-      width: 400px;
-      max-height: 400px;
+    dialog.default.size-s {
+      max-width: 300px;
+    }
+
+    dialog.default.size-m {
+      max-width: 400px;
+    }
+
+    dialog.default.size-l {
+      max-width: 700px;
+    }
+
+    dialog.default.position-initial {
+      margin: auto;
+    }
+
+    dialog.default.position-top {
+      margin: var(--gds-sys-space-l) auto auto;
+    }
+
+    dialog.default.position-bottom {
+      margin: auto auto var(--gds-sys-space-l) auto;
+    }
+
+    dialog.default.position-left {
+      margin: auto var(--gds-sys-space-l) auto auto;
+    }
+    dialog.default.position-right {
+      margin: auto auto auto var(--gds-sys-space-l);
     }
 
     dialog.slide-out {
-      --_in: var(--gds-sys-space-l);
-      width: 600px;
+      --_in: var(--gds-sys-space-m);
+
       height: auto;
-      inset: 0 0 0 auto;
-      @starting-style {
-        transform: translateX(96px);
+
+      &.position-initial,
+      &.position-right {
+        inset: var(--_in);
+
+        @media (min-width: 648px) {
+          --_in: var(--gds-sys-space-l);
+          inset: var(--_in) var(--_in) var(--_in) auto;
+        }
+
+        @starting-style {
+          transform: translateX(var(--gds-sys-space-6xl));
+        }
       }
+
+      &.position-left {
+        @starting-style {
+          transform: translateX(calc(-1 * var(--gds-sys-space-6xl)));
+        }
+        inset: var(--_in);
+
+        @media (min-width: 648px) {
+          --_in: var(--gds-sys-space-l);
+          inset: var(--_in) auto var(--_in) var(--_in);
+        }
+      }
+
+      &.position-top {
+        @starting-style {
+          transform: translateY(calc(-1 * var(--gds-sys-space-6xl)));
+        }
+        inset: var(--_in) var(--_in) auto var(--_in);
+      }
+
+      &.position-bottom {
+        @starting-style {
+          transform: translateY(calc(var(--gds-sys-space-6xl)));
+        }
+        inset: auto var(--_in) var(--_in) var(--_in);
+      }
+
       @media (min-width: 648px) {
-        inset: var(--_in) var(--_in) var(--_in) auto;
+        &.position-initial,
+        &.position-left,
+        &.position-right {
+          &.size-s {
+            max-width: 320px;
+          }
+          ,
+          &.size-m {
+            max-width: 600px;
+          }
+          &.size-l {
+            max-width: 800px;
+          }
+        }
       }
     }
 
