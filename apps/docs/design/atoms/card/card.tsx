@@ -75,6 +75,8 @@ export default function Card({
             position="relative"
             className="no-pointer"
             z-index="0"
+            tabIndex={-1}
+            inert
           >
             {children
               ? children

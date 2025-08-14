@@ -103,7 +103,7 @@ export function Home({
           </GdsButton>
         </GdsFlex>
 
-        <GdsCard padding="0" style={{ aspectRatio: '16 / ' }} overflow="hidden">
+        <GdsCard padding="0" overflow="hidden">
           <GdsImg
             src="https://api.seb.io/assets/launch-hero.jpg"
             object-fit="cover"
@@ -149,7 +149,7 @@ export function Home({
               href={`/component/${component.slug}`}
               key={component.slug}
             >
-              <GdsFlex flex-direction="column" height="318px">
+              <GdsFlex flex-direction="column" height="240px">
                 <GdsCard
                   width="100%"
                   padding="m"
@@ -159,6 +159,8 @@ export function Home({
                   justify-content="center"
                   overflow="hidden"
                   className="no-pointer"
+                  tabIndex={-1}
+                  inert
                 >
                   {component.hero_snippet && (
                     <Snippet slug={component.hero_snippet} />
@@ -199,7 +201,13 @@ export function Home({
           aria-describedby="get-started-subheading"
         >
           <NextLink href={`/component/icon`}>
-            <GdsCard gap="m" height="240px" justify-content="space-between">
+            <GdsCard
+              gap="m"
+              height="240px"
+              justify-content="space-between"
+              tabIndex={-1}
+              inert
+            >
               <GdsFlex
                 width="100%"
                 height="100%"
@@ -221,7 +229,13 @@ export function Home({
             </GdsFlex>
           </NextLink>
           <NextLink href="/foundation/tokens">
-            <GdsCard gap="m" height="240px" justify-content="space-between">
+            <GdsCard
+              gap="m"
+              height="240px"
+              justify-content="space-between"
+              tabIndex={-1}
+              inert
+            >
               <GdsFlex
                 width="100%"
                 height="100%"
@@ -287,7 +301,13 @@ export function Home({
             </GdsFlex>
           </NextLink>
           <NextLink href="/foundation/layouts">
-            <GdsCard gap="m" height="240px" justify-content="space-between">
+            <GdsCard
+              gap="m"
+              height="240px"
+              justify-content="space-between"
+              tabIndex={-1}
+              inert
+            >
               <GdsFlex
                 width="100%"
                 height="100%"
