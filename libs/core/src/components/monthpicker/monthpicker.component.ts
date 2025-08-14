@@ -8,11 +8,12 @@ import { addMonths, isSameMonth, lastDayOfMonth, subMonths } from 'date-fns'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
+//import MonthPickerStyles from './monthpicker.styles'
+import GridpickerStyles from '../../shared-styles/gridpicker.styles'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
-import MonthPickerStyles from './monthpicker.styles'
 
 const months = [
   msg('January'),
@@ -41,7 +42,7 @@ const months = [
 @gdsCustomElement('gds-monthpicker')
 @localized()
 export class GdsMonthPicker extends GdsElement {
-  static styles = [tokens, MonthPickerStyles]
+  static styles = [tokens, GridpickerStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

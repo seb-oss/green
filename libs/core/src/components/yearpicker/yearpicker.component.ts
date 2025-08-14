@@ -6,11 +6,12 @@ import { ifDefined } from 'lit/directives/if-defined.js'
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
+//import YearpickerStyles from './yearpicker.styles'
+import GridpickerStyles from '../../shared-styles/gridpicker.styles'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
-import YearpickerStyles from './yearpicker.styles'
 
 /**
  * @element gds-yearpicker
@@ -24,7 +25,8 @@ import YearpickerStyles from './yearpicker.styles'
 @gdsCustomElement('gds-yearpicker')
 @localized()
 export class GdsYearpicker extends GdsElement {
-  static styles = [tokens, YearpickerStyles]
+  //static styles = [tokens, YearpickerStyles]
+  static styles = [tokens, GridpickerStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
