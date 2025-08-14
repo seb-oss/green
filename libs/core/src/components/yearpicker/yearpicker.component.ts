@@ -182,10 +182,10 @@ export class GdsYearpicker extends GdsElement {
     })
   }
 
-  focus() {
-    super.focus()
-    this._elFocusedCell?.focus()
-  }
+  // focus() {
+  //   super.focus()
+  //   this._elFocusedCell?.focus()
+  // }
 
   render() {
     const currentYear = new Date().getFullYear()
@@ -204,7 +204,7 @@ export class GdsYearpicker extends GdsElement {
               label="Previous years"
               @click=${this.#setPreviousYearsClick}
               @focusin=${this.#handleButtonFocus}
-              @focusout=${this.#handleButtonFocus}
+              @focusout=${this.#handleButtonBlur}
             >
               <gds-icon-chevron-left></gds-icon-chevron-left>
             </gds-button>
@@ -215,7 +215,7 @@ export class GdsYearpicker extends GdsElement {
               label="Next years"
               @click=${this.#setNextYearsClick}
               @focusin=${this.#handleButtonFocus}
-              @focusout=${this.#handleButtonFocus}
+              @focusout=${this.#handleButtonBlur}
             >
               <gds-icon-chevron-right></gds-icon-chevron-right>
             </gds-button>
