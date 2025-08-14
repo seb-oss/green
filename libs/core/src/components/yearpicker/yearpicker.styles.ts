@@ -80,21 +80,11 @@ const style = css`
         }
 
         &.small {
-          padding: 0 6px;
+          width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
           font-size: var(--gds-sys-text-size-detail-s);
           line-height: var(--gds-sys-text-line-height-detail-s);
         }
-      }
-
-      .indicator-dot {
-        display: flex;
-        position: absolute;
-        width: var(--gds-sys-space-2xs);
-        height: var(--gds-sys-space-2xs);
-        border-radius: var(--gds-sys-space-max);
-        background-color: var(--_color, currentColor);
-        inset: var(--gds-sys-space-2xs) var(--gds-sys-space-2xs) auto auto;
       }
     }
   }

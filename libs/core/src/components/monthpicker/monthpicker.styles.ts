@@ -73,7 +73,7 @@ const style = css`
         }
 
         &.small {
-          padding: 0 6px;
+          width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
           font-size: var(--gds-sys-text-size-detail-s);
           line-height: var(--gds-sys-text-line-height-detail-s);
