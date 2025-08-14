@@ -1,6 +1,6 @@
 import { localized, msg } from '@lit/localize'
 import { nothing, PropertyValues } from 'lit'
-import { property, query, state } from 'lit/decorators.js'
+import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { createRef, ref, Ref } from 'lit/directives/ref.js'
 import { html as staticHtml, unsafeStatic } from 'lit/static-html.js'
@@ -118,11 +118,21 @@ export class GdsAlert extends GdsElement {
   #progressIntervalId?: number
   #alertRef: Ref<HTMLElement> = createRef()
 
+  #observer?: IntersectionObserver
+  #isVisible = false
+  #remaining = 0
+  #lastTick = 0
+
   #timerController = {
     hostConnected: () => {
-      if (this.timeout > 0) this.#startTimer()
+      if (this.timeout > 0) {
+        this.#setupObserver()
+      }
     },
-    hostDisconnected: () => this.#clearTimers(),
+    hostDisconnected: () => {
+      this.#disconnectObserver()
+      this.#clearTimers()
+    },
   }
 
   constructor() {
@@ -132,28 +142,76 @@ export class GdsAlert extends GdsElement {
 
   protected updated(changed: PropertyValues) {
     if (changed.has('timeout')) {
+      this.#disconnectObserver()
       this.#clearTimers()
-      if (this.timeout > 0) this.#startTimer()
+      // Reset remaining when timeout changes
+      this.#remaining = Math.max(0, this.timeout)
+      this._progress = 100
+      if (this.timeout > 0) this.#setupObserver()
     }
   }
 
-  // Timer management
-  #startTimer() {
-    const start = Date.now()
-    this._progress = 100
+  #setupObserver() {
+    if (this.#observer) return
+    if (!this.#remaining) this.#remaining = Math.max(0, this.timeout)
 
-    this.#progressIntervalId = window.setInterval(() => {
-      const elapsed = Date.now() - start
-      this._progress = Math.max(
-        0,
-        ((this.timeout - elapsed) / this.timeout) * 100,
-      )
-    }, PROGRESS_INTERVAL)
-
-    this.#timeoutId = window.setTimeout(
-      () => this.#dismiss('timeout'),
-      this.timeout,
+    this.#observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        const ratio = entry?.intersectionRatio ?? 0
+        const nowVisible = ratio >= 0.1
+        if (nowVisible && !this.#isVisible) {
+          this.#isVisible = true
+          this.#resumeTimer()
+        } else if (!nowVisible && this.#isVisible) {
+          this.#isVisible = false
+          this.#pauseTimer()
+        }
+      },
+      {
+        root: null,
+        threshold: [0, 0.1, 1],
+      },
     )
+
+    this.#observer.observe(this)
+  }
+
+  #disconnectObserver() {
+    if (this.#observer) {
+      this.#observer.disconnect()
+      this.#observer = undefined
+    }
+    this.#isVisible = false
+  }
+
+  // Timer management (pausable)
+  #startTicking() {
+    this.#lastTick = Date.now()
+    this.#progressIntervalId = window.setInterval(() => {
+      const now = Date.now()
+      const dt = now - this.#lastTick
+      this.#lastTick = now
+      this.#remaining = Math.max(0, this.#remaining - dt)
+      this._progress =
+        this.timeout > 0
+          ? Math.max(0, (this.#remaining / this.timeout) * 100)
+          : 0
+
+      if (this.#remaining <= 0) {
+        this.#dismiss('timeout')
+      }
+    }, PROGRESS_INTERVAL)
+  }
+
+  #resumeTimer() {
+    if (this.#remaining <= 0 || this.#timeoutId || this.#progressIntervalId)
+      return
+    this.#startTicking()
+  }
+
+  #pauseTimer() {
+    this.#clearTimers()
   }
 
   #clearTimers() {
@@ -164,6 +222,7 @@ export class GdsAlert extends GdsElement {
 
   async #dismiss(source: DismissSource) {
     this._isClosing = true
+    this.#disconnectObserver()
     this.#clearTimers()
     await this.updateComplete
 
