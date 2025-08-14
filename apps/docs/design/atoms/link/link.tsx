@@ -23,8 +23,7 @@ export const Link = React.forwardRef<HTMLElement, CustomLinkProps>(
         window.open(href, '_blank')
       } else {
         e.preventDefault()
-        // prevent the scroll thing
-        router.push(href)
+        router.push(href, { scroll: false })
       }
     }
 
