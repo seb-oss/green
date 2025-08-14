@@ -8,6 +8,8 @@ import * as Core from '@sebgroup/green-core/react'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 
+import './style.css'
+
 interface SearchResult {
   title: string
   href: string
@@ -139,36 +141,16 @@ export default function Command() {
 
   return (
     <React.Fragment>
-      <Core.GdsFlex display="none; s{contents}">
-        <Core.GdsFab
-          inset="40px 40px auto auto"
-          rank="secondary"
-          size="small"
-          onClick={handleToggleCommand}
-        >
-          <Core.IconMagnifyingGlass></Core.IconMagnifyingGlass>
-        </Core.GdsFab>
-      </Core.GdsFlex>
-
       {isOpen && (
         <Core.GdsDialog
           onGdsClose={handleClosePanel}
           width="620px"
           min-width="620px"
           heading="Search"
-          min-block-size="80vh"
+          margin-top="10vh"
           open
         >
-          <Core.GdsFlex
-            flex-direction="column"
-            gap="m"
-            height="100%"
-            background="primary"
-            padding="s"
-            border-radius="s"
-            border-color="primary"
-            border-width="4xs"
-          >
+          <Core.GdsFlex flex-direction="column" gap="m" height="100%">
             <Core.GdsInput
               ref={inputRef}
               plain
@@ -184,61 +166,52 @@ export default function Command() {
             </Core.GdsInput>
 
             <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
-              {searchResults.map((result, index) => (
-                <Core.GdsCard
-                  key={result.href}
-                  padding="s"
-                  variant={selectedIndex === index ? 'secondary' : 'primary'}
-                  width="100%"
-                  onClick={() => {
-                    router.push(result.href)
-                    handleClosePanel()
-                  }}
-                  tabIndex={0}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      router.push(result.href)
-                      handleClosePanel()
-                    }
-                  }}
-                >
-                  <Core.GdsFlex flex-direction="column" gap="2xs">
-                    <Core.GdsFlex
-                      justify-content="flex-start"
-                      gap="s"
-                      align-items="center"
-                    >
-                      <Core.GdsText font-weight="book">
-                        {result.title}
-                      </Core.GdsText>
-                      <Core.GdsFlex gap="xs" align-items="center">
-                        {result.beta && (
-                          <Core.GdsBadge variant="notice" size="small">
-                            BETA
+              {query &&
+                searchResults.map((result, index) => (
+                  <a
+                    className={'search-result'}
+                    key={result.href}
+                    padding="s"
+                    width="100%"
+                    href={result.href}
+                  >
+                    <Core.GdsFlex flex-direction="column" gap="2xs">
+                      <Core.GdsFlex
+                        justify-content="flex-start"
+                        gap="s"
+                        align-items="center"
+                      >
+                        <Core.GdsText font-weight="book">
+                          {result.title}
+                        </Core.GdsText>
+                        <Core.GdsFlex gap="xs" align-items="center">
+                          {result.beta && (
+                            <Core.GdsBadge variant="notice" size="small">
+                              BETA
+                            </Core.GdsBadge>
+                          )}
+                          <Core.GdsBadge
+                            variant={
+                              result.type === 'component'
+                                ? 'primary'
+                                : result.type === 'template'
+                                  ? 'notice'
+                                  : 'secondary'
+                            }
+                            size="small"
+                          >
+                            {result.type}
                           </Core.GdsBadge>
-                        )}
-                        <Core.GdsBadge
-                          variant={
-                            result.type === 'component'
-                              ? 'primary'
-                              : result.type === 'template'
-                                ? 'notice'
-                                : 'secondary'
-                          }
-                          size="small"
-                        >
-                          {result.type}
-                        </Core.GdsBadge>
+                        </Core.GdsFlex>
                       </Core.GdsFlex>
+                      {result.summary && (
+                        <Core.GdsText font-size="body-s" color="secondary">
+                          {result.summary}
+                        </Core.GdsText>
+                      )}
                     </Core.GdsFlex>
-                    {result.summary && (
-                      <Core.GdsText font-size="body-s" color="secondary">
-                        {result.summary}
-                      </Core.GdsText>
-                    )}
-                  </Core.GdsFlex>
-                </Core.GdsCard>
-              ))}
+                  </a>
+                ))}
 
               {query && searchResults.length === 0 && (
                 <Core.GdsText color="secondary" text-align="center" padding="l">
@@ -246,7 +219,7 @@ export default function Command() {
                 </Core.GdsText>
               )}
 
-              {!query && searchResults.length === 0 && (
+              {!query && (
                 <Core.GdsText color="secondary" text-align="center" padding="l">
                   Start typing to search...
                 </Core.GdsText>

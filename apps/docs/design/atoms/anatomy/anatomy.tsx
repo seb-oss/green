@@ -20,7 +20,7 @@ export function Anatomy({ items }: AnatomyListProps) {
       {items.map((item, index) => (
         <Core.GdsFlex key={index} align-items="center" gap="xs">
           <Core.GdsBadge size="small">{(index + 1).toString()}</Core.GdsBadge>
-          <Core.GdsText font-size="detail-xs">{item.text}</Core.GdsText>
+          <Core.GdsText font="detail-book-xs">{item.text}</Core.GdsText>
         </Core.GdsFlex>
       ))}
     </Core.GdsFlex>

@@ -8,24 +8,35 @@ import { Link } from '../link/link'
 export default function Footer() {
   const year = new Date().getFullYear()
   const symbol = '\u00A9'
-  const text = `${symbol}  ${year} Green Design System`
+  const text = `${symbol}  ${year} Skandinaviska Enskilda Banken AB`
 
   return (
     <GdsFlex
       flex-direction="column"
-      padding="m 0"
+      padding="l; xs{m 0}"
       gap="2xl; s{5xl}"
-      border-color="primary"
+      border-color="subtle-01"
       border-width="4xs 0 0 0"
-      margin="0; s{4xl 0 0 0}"
+      margin="s; s{4xl 0 0 0}"
       role="contentinfo"
     >
-      <GdsFlex justify-content="space-between" align-items="center">
-        <GdsFlex align-items="center" gap="s" flex="1">
-          <Core.IconBrandSeb color="primary" size="m" />
+      <GdsFlex
+        flex-direction="column; xs{row}"
+        gap="m; xs{0}"
+        justify-content="center"
+        align-items="center"
+      >
+        <GdsFlex align-items="center" gap="xs; xs{s}" flex="0 1 auto">
+          <Core.IconBrandSeb color="primary" size="s; xs{s}" />
           <Core.GdsText tag="small">{text}</Core.GdsText>
         </GdsFlex>
-        <GdsFlex align-items="center" justify-content="flex-end" flex="1">
+        <GdsFlex
+          align-items="center"
+          justify-content="center; s{flex-end}"
+          gap="s"
+          margin="0; xs{0 0 0 auto}"
+          width="max-content"
+        >
           <Link
             component="button"
             href="/settings/consent"
@@ -34,28 +45,31 @@ export default function Footer() {
           >
             Cookie consent
           </Link>
-
-          <Core.GdsFlex display="flex; s{none}">
-            <Link
-              component="button"
-              href="/settings"
-              rank="tertiary"
-              size="small"
-            >
-              <Icon name="IconSettingsGear" />
-            </Link>
-          </Core.GdsFlex>
-          <Core.GdsFlex display="none; s{flex}">
-            <Link
-              component="button"
-              href="/settings"
-              rank="tertiary"
-              size="small"
-            >
-              <Icon name="IconSettingsGear" slot="lead" />
-              <span data-fade>Settings</span>
-            </Link>
-          </Core.GdsFlex>
+          {false && (
+            <>
+              <Core.GdsFlex display="flex; s{none}">
+                <Link
+                  component="button"
+                  href="/settings"
+                  rank="tertiary"
+                  size="small"
+                >
+                  <Icon name="IconSettingsGear" />
+                </Link>
+              </Core.GdsFlex>
+              <Core.GdsFlex display="none; s{flex}">
+                <Link
+                  component="button"
+                  href="/settings"
+                  rank="tertiary"
+                  size="small"
+                >
+                  <Icon name="IconSettingsGear" slot="lead" />
+                  <span data-fade>Settings</span>
+                </Link>
+              </Core.GdsFlex>
+            </>
+          )}
         </GdsFlex>
       </GdsFlex>
     </GdsFlex>

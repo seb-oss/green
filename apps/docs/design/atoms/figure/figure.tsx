@@ -47,7 +47,7 @@ export default function Figure({
   return (
     <GdsFlex
       flex-direction="column"
-      gap="s"
+      gap="xs"
       width="100%"
       data-node={identifier}
     >
@@ -79,7 +79,7 @@ export default function Figure({
         </GdsFlex>
       )}
       {showDontLabel && (
-        <GdsFlex align-items="center" gap="s" padding="0 s">
+        <GdsFlex align-items="center" gap="xs" padding="0 s">
           <GdsDiv
             display="flex"
             background="negative"
@@ -98,7 +98,12 @@ export default function Figure({
         </GdsFlex>
       )}
       {shouldShowCaption && (
-        <GdsText tag="small" padding-inline="s 0" color="secondary">
+        <GdsText
+          tag="small"
+          font="detail-book-xs"
+          padding-inline="s 0"
+          color="02"
+        >
           {caption}
         </GdsText>
       )}

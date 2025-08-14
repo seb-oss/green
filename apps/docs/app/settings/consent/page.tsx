@@ -42,37 +42,28 @@ export default function ConsentPage() {
         align-items="flex-start"
         max-width="100ch"
       >
-        <GdsText tag="h1">Cookie Consent Settings</GdsText>
+        <GdsText tag="h1">Cookie Preferences</GdsText>
         <GdsText tag="p">
-          Manage your cookie preferences and tracking consent
+          We use essential cookies to ensure the proper operation of this
+          website.
         </GdsText>
         <SettingsNav />
       </GdsFlex>
 
-      <GdsCard max-width="80ch" variant="secondary" padding="0">
-        <GdsFlex flex-direction="column" gap="l">
-          <GdsText tag="h2">Cookie Preferences</GdsText>
-          <GdsRichText>
-            We use essential cookies to ensure the proper operation of this
-            website.
-            <br />
-            <br />
-            Additionally, with your consent, we use tracking cookies to
-            understand how you interact with our content and improve your
-            experience.
-          </GdsRichText>
-
-          <GdsFlex flex-direction="column" align-items="flex-start" gap="m">
-            <GdsText tag="strong">
-              Current Status:
-              {consent ? 'Tracking Enabled' : 'Essential Cookies Only'}
-            </GdsText>
-            <GdsButton onClick={() => actions.toggle('UX.Global.Consent')}>
-              {consent ? 'Disable Tracking' : 'Enable Tracking'}
-            </GdsButton>
-          </GdsFlex>
-        </GdsFlex>
-      </GdsCard>
+      <GdsFlex
+        flex-direction="column"
+        align-items="flex-start"
+        gap="l"
+        max-width="80ch"
+      >
+        <GdsText tag="strong">
+          Current Status:
+          {consent ? 'Tracking Enabled' : 'Essential Cookies Only'}
+        </GdsText>
+        <GdsButton onClick={() => actions.toggle('UX.Global.Consent')}>
+          {consent ? 'Disable Tracking' : 'Enable Tracking'}
+        </GdsButton>
+      </GdsFlex>
     </GdsFlex>
   )
 }

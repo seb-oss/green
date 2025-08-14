@@ -37,14 +37,15 @@ export function FoundationClient() {
         </Link>
         <GdsText>Foundation</GdsText>
       </GdsBreadcrumbs>
-      <GdsFlex flex-direction="column" gap="4xl">
-        <GdsFlex flex-direction="column" gap="s">
+      <GdsFlex flex-direction="column" gap="xl">
+        <GdsFlex flex-direction="column" gap="s" text-align="center">
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
           <GdsText
             tag="p"
-            font-size="heading-m"
-            color="secondary"
+            font="heading-m"
+            color="02"
             max-width="100ch"
+            margin="auto"
           >
             {CONTENT?.summary}
           </GdsText>
@@ -57,14 +58,14 @@ export function FoundationClient() {
           />
         )}
       </GdsFlex>
-      <GdsFlex gap="l" flex-direction="column" width="100%">
-        <GdsFlex gap="s" flex-direction="column">
-          <GdsText tag="h2">Core Resources</GdsText>
+      <GdsFlex gap="xl" flex-direction="column" width="100%">
+        <GdsFlex gap="s" flex-direction="column" max-width="80ch" margin="auto">
+          <GdsText tag="h2">Resources</GdsText>
           <GdsText
             tag="p"
-            font-size="heading-s"
+            font="heading-s"
             line-height="heading-s"
-            color="secondary"
+            color="02"
             max-width="80ch"
           >
             The fundamental elements that define our visual language and ensure
@@ -73,287 +74,249 @@ export function FoundationClient() {
         </GdsFlex>
 
         <GdsGrid columns="1; s{3}" gap="l">
-          <GdsCard
-            gap="m"
-            height="240px"
-            justify-content="space-between"
-            background="secondary"
-            border-color="primary"
-          >
-            <GdsFlex
-              width="100%"
-              height="100%"
-              align-items="center"
-              justify-content="center"
-            >
-              <GdsGrid columns="3" width="max-content">
-                <IconArrowRight size="l" />
-                <IconAi size="l" />
-                <IconBank size="l" />
-                <IconCloudySun size="l" />
-                <IconBookmark size="l" />
-                <IconCupHot size="l" />
-              </GdsGrid>
-            </GdsFlex>
-            <Link href={`/component/icon`}>
-              <GdsFlex
-                align-items="center"
-                justify-content="space-between"
-                gap="s"
-                width="100%"
-              >
-                <GdsText color="secondary">Icons</GdsText>
-                <IconArrowRight />
-              </GdsFlex>
-            </Link>
-          </GdsCard>
-          <GdsCard
-            gap="m"
-            height="240px"
-            justify-content="space-between"
-            background="secondary"
-            border-color="primary"
-          >
-            <GdsFlex
-              width="100%"
-              height="100%"
-              align-items="center"
-              justify-content="center"
-              flex-direction="column"
-              gap="l"
-            >
-              {/* Typography Scale */}
-              <GdsFlex gap="m" align-items="center">
-                <GdsGrid columns="3" gap="s">
-                  <GdsCard
-                    variant="secondary"
-                    padding="xs"
-                    align-items="center"
-                    justify-content="center"
-                  >
-                    <GdsText font-size="display-m">Aa</GdsText>
-                  </GdsCard>
-                  <GdsCard
-                    variant="secondary"
-                    padding="xs"
-                    align-items="center"
-                    justify-content="center"
-                  >
-                    <GdsText font-size="display-s">Aa</GdsText>
-                  </GdsCard>
-                  <GdsCard
-                    variant="secondary"
-                    padding="xs"
-                    align-items="center"
-                    justify-content="center"
-                  >
-                    <GdsText font-size="display-xs">Aa</GdsText>
-                  </GdsCard>
-                </GdsGrid>
-              </GdsFlex>
-            </GdsFlex>
-            <Link href="/foundation/typography">
-              <GdsFlex
-                align-items="center"
-                justify-content="space-between"
-                gap="s"
-                width="100%"
-              >
-                <GdsText color="secondary">Typography</GdsText>
-                <IconArrowRight />
-              </GdsFlex>
-            </Link>
-          </GdsCard>
-          <GdsCard
-            gap="m"
-            height="240px"
-            justify-content="space-between"
-            background="secondary"
-            border-color="primary"
-          >
-            <GdsFlex
-              width="100%"
-              height="100%"
-              align-items="center"
-              justify-content="center"
-              flex-direction="column"
-              gap="l"
-            >
-              <GdsFlex gap="m" align-items="center">
-                <GdsGrid columns="3" gap="s" width="200px">
-                  <GdsCard
-                    level="3"
-                    padding="0"
-                    variant="primary"
-                    border-radius="max"
-                    width="100%"
-                    height="10px"
-                  />
-                  <GdsCard
-                    level="3"
-                    padding="0"
-                    variant="notice"
-                    border-radius="max"
-                    width="100%"
-                    height="10px"
-                  />
-                  <GdsCard
-                    level="3"
-                    padding="0"
-                    variant="warning"
-                    border-radius="max"
-                    width="100%"
-                    height="10px"
-                  />
-                  <GdsCard
-                    level="3"
-                    padding="0"
-                    variant="positive-secondary"
-                    border-radius="max"
-                    width="100%"
-                    height="10px"
-                  />
-                  <GdsCard
-                    level="3"
-                    padding="0"
-                    variant="notice-secondary"
-                    border-radius="max"
-                    width="100%"
-                    height="10px"
-                  />
-                  <GdsCard
-                    level="3"
-                    padding="0"
-                    variant="warning-secondary"
-                    border-radius="max"
-                    width="100%"
-                    height="10px"
-                  />
-                </GdsGrid>
-              </GdsFlex>
-            </GdsFlex>
-            <Link href="/foundation/colors">
-              <GdsFlex
-                align-items="center"
-                justify-content="space-between"
-                gap="s"
-                width="100%"
-              >
-                <GdsText color="secondary">Colors</GdsText>
-                <IconArrowRight />
-              </GdsFlex>
-            </Link>
-          </GdsCard>
-          <GdsCard
-            gap="m"
-            height="240px"
-            justify-content="space-between"
-            background="secondary"
-            border-color="primary"
-          >
-            <GdsFlex
-              width="100%"
-              height="100%"
-              align-items="center"
-              justify-content="center"
-              flex-direction="column"
-              gap="l"
-            >
-              <GdsFlex gap="m" align-items="center">
-                <GdsFlex gap="s" align-items="center" width="max-content">
-                  <GdsCard
-                    padding="0"
-                    background="secondary"
-                    border-color="primary"
-                    border-radius="max"
-                    width="l"
-                    height="l"
-                  />
-                  <GdsCard
-                    padding="0"
-                    background="secondary"
-                    border-color="primary"
-                    border-radius="max"
-                    width="2xl"
-                    height="2xl"
-                  />
-                  <GdsCard
-                    padding="0"
-                    background="secondary"
-                    border-color="primary"
-                    border-radius="max"
-                    width="4xl"
-                    height="4xl"
-                  />
+          <Link href={`/component/icon`}>
+            <GdsFlex flex-direction="column" width="100%">
+              <GdsCard gap="m" height="240px" justify-content="space-between">
+                <GdsFlex
+                  width="100%"
+                  height="100%"
+                  align-items="center"
+                  justify-content="center"
+                >
+                  <GdsGrid columns="3" width="max-content">
+                    <IconArrowRight size="l" />
+                    <IconAi size="l" />
+                    <IconBank size="l" />
+                    <IconCloudySun size="l" />
+                    <IconBookmark size="l" />
+                    <IconCupHot size="l" />
+                  </GdsGrid>
                 </GdsFlex>
+              </GdsCard>
+              <GdsFlex align-items="center" width="100%" padding="s">
+                <GdsText font="heading-s">Icons</GdsText>
               </GdsFlex>
             </GdsFlex>
-            <Link href="/foundation/spacing">
+          </Link>
+          <Link href="/foundation/typography">
+            <GdsFlex flex-direction="column" width="100%">
+              <GdsCard gap="m" height="240px" justify-content="space-between">
+                <GdsFlex
+                  width="100%"
+                  height="100%"
+                  align-items="center"
+                  justify-content="center"
+                  flex-direction="column"
+                  gap="l"
+                >
+                  {/* Typography Scale */}
+                  <GdsFlex gap="m" align-items="center">
+                    <GdsGrid columns="3" gap="s">
+                      <GdsCard
+                        variant="secondary"
+                        padding="xs"
+                        align-items="center"
+                        justify-content="center"
+                      >
+                        <GdsText font="display-m">Aa</GdsText>
+                      </GdsCard>
+                      <GdsCard
+                        variant="secondary"
+                        padding="xs"
+                        align-items="center"
+                        justify-content="center"
+                      >
+                        <GdsText font="display-s">Aa</GdsText>
+                      </GdsCard>
+                      <GdsCard
+                        variant="secondary"
+                        padding="xs"
+                        align-items="center"
+                        justify-content="center"
+                      >
+                        <GdsText font="display-xs">Aa</GdsText>
+                      </GdsCard>
+                    </GdsGrid>
+                  </GdsFlex>
+                </GdsFlex>
+              </GdsCard>
               <GdsFlex
                 align-items="center"
                 justify-content="space-between"
                 gap="s"
                 width="100%"
+                padding="s"
               >
-                <GdsText color="secondary">Spacing</GdsText>
-                <IconArrowRight />
+                <GdsText font="heading-s">Typography</GdsText>
               </GdsFlex>
-            </Link>
-          </GdsCard>
-          <GdsCard
-            gap="m"
-            height="240px"
-            justify-content="space-between"
-            background="secondary"
-            border-color="primary"
-          >
-            <GdsFlex
-              width="100%"
-              height="100%"
-              align-items="center"
-              justify-content="center"
-              flex-direction="column"
-              gap="l"
-            >
-              <GdsGrid columns="12" gap="xs" width="60%">
-                <GdsCard
-                  background="secondary"
-                  border-color="primary"
-                  grid-column="1/13"
-                  border-radius="xs"
-                  height="l"
-                  padding="0"
-                />
-                <GdsCard
-                  background="secondary"
-                  border-color="primary"
-                  grid-column="1/4"
-                  border-radius="xs"
-                  height="6xl"
-                  padding="0"
-                />
-                <GdsCard
-                  background="secondary"
-                  border-color="primary"
-                  grid-column="4/13"
-                  border-radius="xs"
-                  height="6xl"
-                  padding="0"
-                />
-              </GdsGrid>
             </GdsFlex>
-            <Link href="/foundation/layouts">
+          </Link>
+          <Link href="/foundation/colours">
+            <GdsFlex flex-direction="column" width="100%">
+              <GdsCard gap="m" height="240px" justify-content="space-between">
+                <GdsFlex
+                  width="100%"
+                  height="100%"
+                  align-items="center"
+                  justify-content="center"
+                  flex-direction="column"
+                  gap="l"
+                >
+                  <GdsFlex gap="m" align-items="center">
+                    <GdsGrid columns="3" gap="s" width="200px">
+                      <GdsCard
+                        level="3"
+                        padding="0"
+                        variant="primary"
+                        border-radius="max"
+                        width="100%"
+                        height="10px"
+                      />
+                      <GdsCard
+                        level="3"
+                        padding="0"
+                        variant="notice"
+                        border-radius="max"
+                        width="100%"
+                        height="10px"
+                      />
+                      <GdsCard
+                        level="3"
+                        padding="0"
+                        variant="warning"
+                        border-radius="max"
+                        width="100%"
+                        height="10px"
+                      />
+                      <GdsCard
+                        level="3"
+                        padding="0"
+                        variant="positive-secondary"
+                        border-radius="max"
+                        width="100%"
+                        height="10px"
+                      />
+                      <GdsCard
+                        level="3"
+                        padding="0"
+                        variant="notice-secondary"
+                        border-radius="max"
+                        width="100%"
+                        height="10px"
+                      />
+                      <GdsCard
+                        level="3"
+                        padding="0"
+                        variant="warning-secondary"
+                        border-radius="max"
+                        width="100%"
+                        height="10px"
+                      />
+                    </GdsGrid>
+                  </GdsFlex>
+                </GdsFlex>
+              </GdsCard>
               <GdsFlex
                 align-items="center"
                 justify-content="space-between"
                 gap="s"
                 width="100%"
+                padding="s"
               >
-                <GdsText color="secondary">Declarative layout</GdsText>
-                <IconArrowRight />
+                <GdsText font="heading-s">Colors</GdsText>
               </GdsFlex>
-            </Link>
-          </GdsCard>
+            </GdsFlex>
+          </Link>
+          <Link href="/foundation/spacing">
+            <GdsFlex flex-direction="column" width="100%">
+              <GdsCard gap="m" height="240px" justify-content="space-between">
+                <GdsFlex
+                  width="100%"
+                  height="100%"
+                  align-items="center"
+                  justify-content="center"
+                  flex-direction="column"
+                  gap="l"
+                >
+                  <GdsFlex gap="m" align-items="center">
+                    <GdsFlex gap="s" align-items="center" width="max-content">
+                      <GdsCard
+                        padding="0"
+                        border-radius="max"
+                        width="l"
+                        height="l"
+                      />
+                      <GdsCard
+                        padding="0"
+                        border-radius="max"
+                        width="2xl"
+                        height="2xl"
+                      />
+                      <GdsCard
+                        padding="0"
+                        border-radius="max"
+                        width="4xl"
+                        height="4xl"
+                      />
+                    </GdsFlex>
+                  </GdsFlex>
+                </GdsFlex>
+              </GdsCard>
+              <GdsFlex
+                align-items="center"
+                justify-content="space-between"
+                gap="s"
+                width="100%"
+                padding="s"
+              >
+                <GdsText font="heading-s">Spacing</GdsText>
+              </GdsFlex>
+            </GdsFlex>
+          </Link>
+          <Link href="/foundation/layouts">
+            <GdsFlex flex-direction="column" width="100%">
+              <GdsCard gap="m" height="240px" justify-content="space-between">
+                <GdsFlex
+                  width="100%"
+                  height="100%"
+                  align-items="center"
+                  justify-content="center"
+                  flex-direction="column"
+                  gap="l"
+                >
+                  <GdsGrid columns="12" gap="xs" width="60%">
+                    <GdsCard
+                      grid-column="1/13"
+                      border-radius="xs"
+                      height="l"
+                      padding="0"
+                    />
+                    <GdsCard
+                      grid-column="1/4"
+                      border-radius="xs"
+                      height="6xl"
+                      padding="0"
+                    />
+                    <GdsCard
+                      grid-column="4/13"
+                      border-radius="xs"
+                      height="6xl"
+                      padding="0"
+                    />
+                  </GdsGrid>
+                </GdsFlex>
+              </GdsCard>
+              <GdsFlex
+                align-items="center"
+                justify-content="space-between"
+                gap="s"
+                width="100%"
+                padding="s"
+              >
+                <GdsText font="heading-s">Declarative layout</GdsText>
+              </GdsFlex>
+            </GdsFlex>
+          </Link>
         </GdsGrid>
       </GdsFlex>
     </GdsFlex>

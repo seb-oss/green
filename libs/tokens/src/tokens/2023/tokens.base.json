@@ -9,16 +9,16 @@
       "easing": {
         "$type": "cubicBezier",
         "ease-in": {
-          "$value": "[0.64, 0, 0.78, 0]"
+          "$value": "0.64, 0, 0.78, 0"
         },
         "ease-in-out": {
-          "$value": "[0.83, 0, 0.17, 1]"
+          "$value": "0.83, 0, 0.17, 1"
         },
         "ease-out": {
-          "$value": "[0.22, 1, 0.36, 1]"
+          "$value": "0.22, 1, 0.36, 1"
         },
         "linear": {
-          "$value": "[0, 0, 1, 1]"
+          "$value": "0, 0, 1, 1"
         }
       },
       "duration": {

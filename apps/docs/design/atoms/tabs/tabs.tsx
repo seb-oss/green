@@ -52,7 +52,6 @@ export default function Tabs({ slug }: TabsProps) {
       margin="0"
       border-radius="0"
       border-width="0 0 4xs 0"
-      border-color="primary"
       variant="secondary"
       width="100%"
       role="navigation"

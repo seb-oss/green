@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://seb.io'),
   title: 'Green Design System',
   description:
-    'Green Design System is more than a polished user interface, its places the user at the very forefront of design, usability and accessibility.',
+    'Green Design System is built to support creating beautiful, consistent financial products for generations to come.',
   alternates: {
     canonical: '/',
   },

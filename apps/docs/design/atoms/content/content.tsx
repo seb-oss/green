@@ -43,7 +43,7 @@ const ListItem = ({
   <Core.GdsFlex gap="xs" align-items="flex-start">
     <Core.GdsDiv
       display="flex"
-      background={variant}
+      background={variant + '-01'}
       min-width="20px"
       max-width="20px"
       min-height="20px"
@@ -55,12 +55,12 @@ const ListItem = ({
       color={variant}
     >
       {variant === 'positive' ? (
-        <Core.IconCheckmark size="s" />
+        <Core.IconCheckmark size="s" color="positive-01" />
       ) : (
-        <Core.IconCrossLarge size="s" />
+        <Core.IconCrossLarge size="s" color="negative-01" />
       )}
     </Core.GdsDiv>
-    <Core.GdsText tag="p" text-wrap="pretty">
+    <Core.GdsText tag="p" text-wrap="pretty" font="body-book-m">
       {text}
     </Core.GdsText>
   </Core.GdsFlex>
@@ -164,7 +164,7 @@ export const RenderColumn = (
         return (
           <Core.GdsFlex
             flex-direction="column"
-            gap="s"
+            gap="xs"
             width="100%"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -178,7 +178,6 @@ export const RenderColumn = (
                 min-height={column.plain ? '100%' : '160px'}
                 position="relative"
                 variant={column.plain ? 'secondary' : 'secondary'}
-                border-color="primary/0.4"
                 border-width={column.plain ? '0' : '4xs'}
                 data-plain={column.plain}
                 data-snipet={column.plain ? null : 'true'}
@@ -248,7 +247,12 @@ export const RenderColumn = (
             </Core.GdsTheme>
 
             {column.caption && (
-              <Core.GdsText tag="small" padding-inline="s 0" color="secondary">
+              <Core.GdsText
+                tag="small"
+                font="detail-book-s"
+                padding-inline="s 0"
+                color="02"
+              >
                 {column.caption}
               </Core.GdsText>
             )}
@@ -272,8 +276,8 @@ export const RenderColumn = (
                     justify-content="center"
                     align-items="center"
                     variant={column.plain ? 'secondary' : 'secondary'}
-                    border-color="primary/0.4"
                     border-width={column.plain ? '0' : '4xs'}
+                    border-color="subtle-01"
                     data-plain={column.plain}
                     data-snipet={column.plain ? null : 'true'}
                   >
@@ -359,8 +363,8 @@ export const RenderColumn = (
     case 'paragraph':
       return (
         <Core.GdsText
-          font-size={column.size ? column.size : 'body-l'}
-          color={column.color ? column.color : 'secondary'}
+          font={column.size ? column.size : 'body-book-l'}
+          color={column.color ? column.color : '02'}
           tag={column.tag}
           max-width="80ch"
           data-paragraph
