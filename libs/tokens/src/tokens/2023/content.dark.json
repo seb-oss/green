@@ -12,6 +12,9 @@
         "03": {
           "$value": "{ref.color.grey.30}"
         },
+        "04": {
+          "$value": "{ref.color.neutral.20}"
+        },
         "inversed": {
           "$value": "{ref.color.grey.3}"
         },

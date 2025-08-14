@@ -23,7 +23,7 @@ type DismissSource = 'timeout' | 'close' | 'escape'
 const VARIANT_CONFIG = {
   positive: { icon: 'circle-check', card: 'positive' },
   warning: {
-    icon: 'triangle-exclamation',
+    icon: 'circle-info',
     card: 'warning',
   },
   negative: {

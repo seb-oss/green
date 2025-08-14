@@ -150,12 +150,7 @@ export default function Command() {
           margin-top="10vh"
           open
         >
-          <Core.GdsFlex
-            flex-direction="column"
-            gap="m"
-            height="100%"
-            background="primary"
-          >
+          <Core.GdsFlex flex-direction="column" gap="m" height="100%">
             <Core.GdsInput
               ref={inputRef}
               plain
