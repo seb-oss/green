@@ -3,8 +3,8 @@
 }
 
 html {
-  color-scheme: light;
-  /* color-scheme: dark light; */
+  /* color-scheme: light; */
+  color-scheme: dark light;
   scrollbar-width: thin;
 }
 
