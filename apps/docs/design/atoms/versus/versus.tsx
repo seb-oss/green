@@ -25,12 +25,23 @@ export default function Versus({ compare, current }: VersusProps) {
   console.log(currentComponent['compare-content'])
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="m" id="component-versus">
+    <Core.GdsFlex
+      flex-direction="column"
+      gap="m"
+      id="component-versus"
+      width="100%"
+    >
       <Core.GdsText tag="h2">
         {compareComponent.title} vs. {currentComponent.title}
       </Core.GdsText>
-      <Core.GdsGrid columns="2" gap="m">
-        <Core.GdsCard variant="primary" padding="l" gap="s" border-radius="s">
+      <Core.GdsGrid columns="1; m{2}" gap="m" width="100%">
+        <Core.GdsCard
+          variant="primary"
+          padding="l"
+          gap="s"
+          border-radius="s"
+          min-width="100%"
+        >
           <Core.GdsFlex flex-direction="column" gap="s" height="100%">
             <Core.GdsFlex
               justify-content="space-between"
@@ -57,7 +68,13 @@ export default function Versus({ compare, current }: VersusProps) {
           </Core.GdsFlex>
         </Core.GdsCard>
 
-        <Core.GdsCard variant="primary" padding="l" gap="s" border-radius="s">
+        <Core.GdsCard
+          variant="primary"
+          padding="l"
+          gap="s"
+          border-radius="s"
+          min-width="100%"
+        >
           <Core.GdsFlex flex-direction="column" gap="s" height="100%">
             <Core.GdsFlex
               justify-content="space-between"
