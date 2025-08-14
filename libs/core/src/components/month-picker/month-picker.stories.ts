@@ -132,7 +132,7 @@ export const Hide: Story = {
 /**
  * Use `focusedYear` or `focusedDate` attributes to show a different year from the
  * current one. Good to use if the dates are limited to other than the current year.
- * Or is used in combination with the year-picker.
+ * Or is used in combination with the yearpicker.
  */
 export const FocusedYearDate: Story = {
   ...DefaultParams,

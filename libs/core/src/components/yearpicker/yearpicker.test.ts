@@ -8,17 +8,17 @@ import type { GdsButton } from '@sebgroup/green-core/components/button'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { onlyDate } from '../../utils/testing'
 
-import type { GdsYearPicker } from './year-picker'
+import type { GdsYearpicker } from './yearpicker'
 
-import '@sebgroup/green-core/components/year-picker'
+import '@sebgroup/green-core/components/yearpicker'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-describe('<gds-year-picker>', () => {
+describe('<gds-yearpicker>', () => {
   describe('Rendering', () => {
     it('should render', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
       expect(el).shadowDom.to.exist
     })
@@ -26,8 +26,8 @@ describe('<gds-year-picker>', () => {
 
   describe('Interactions', () => {
     it('should increment by 1 year when pressing key right', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
       el.focus()
 
@@ -43,8 +43,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should decrement by 1 year when pressing key left', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
       el.focus()
 
@@ -60,8 +60,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should increment by 5 year when pressing key down', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
       el.focus()
 
@@ -77,8 +77,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should decrement by 5 year when pressing key up', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
       el.focus()
 
@@ -94,11 +94,11 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should select min year when pressing home', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('2015-01-01')}
           .max=${new Date('2035-01-01')}
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       el.focus()
 
@@ -112,11 +112,11 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should select max year when pressing end', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('2015-01-01')}
           .max=${new Date('2035-01-01')}
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       el.focus()
 
@@ -130,12 +130,12 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should select total cells more when pressing Page Upn', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('1900-01-01')}
           .max=${new Date('2100-01-01')}
           focusedDate="2025-01-01"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       const totalCells = el.columns * el.rows
       el.focus()
@@ -150,12 +150,12 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should select total cells more when pressing Page Down', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('1900-01-01')}
           .max=${new Date('2100-01-01')}
           focusedDate="2025-01-01"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       const totalCells = el.columns * el.rows
       el.focus()
@@ -170,11 +170,11 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should select the focused date when pressing enter', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('2015-01-01')}
           .max=${new Date('2035-01-01')}
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       el.focus()
 
@@ -189,11 +189,11 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should select the focused date when pressing space', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('2015-01-01')}
           .max=${new Date('2035-01-01')}
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       el.focus()
 
@@ -208,10 +208,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should not select the focused date when pressing enter if it is disabled', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
-          .min=${new Date('2022-01-01')}
-        ></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker .min=${new Date('2022-01-01')}></gds-yearpicker>`,
       )
       el.focus()
 
@@ -227,8 +225,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should update the focused year when value is changed', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
 
       el.value = new Date('2023-01-01')
@@ -238,11 +236,11 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should focus step over change year controls', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           change-years-controls
           focusedDate="2025-01-01"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
       await sendKeys({ press: 'Tab' })
       await aTimeout(0)
@@ -258,13 +256,13 @@ describe('<gds-year-picker>', () => {
 
     /* // Temporarily disabled - doesn't work
     it('should have correct focused year when pressing the previous years button - 9', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .min=${new Date('1900-01-01')}
           .max=${new Date('2100-01-01')}
           focusedDate="2025-01-01"
           change-years-controls
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
 
       const totalCells = el.columns * el.rows
@@ -278,11 +276,11 @@ describe('<gds-year-picker>', () => {
     })*/
 
     /*it('should handle keyboard navigation on buttons', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           change-years-controls
           focusedDate="2025-01-01"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
 
       // Test tab navigation
@@ -303,13 +301,13 @@ describe('<gds-year-picker>', () => {
   describe('API', () => {
     /* // Temporarily disabled - doesn't work
     it('should handle click on previous years button', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           change-years-controls
           .min=${new Date('1950-01-01')}
           .max=${new Date('2100-01-01')}
           focusedDate="2025-01-01"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
 
       // Get initial range text
@@ -328,13 +326,13 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should handle click on next years button', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           change-years-controls
           .min=${new Date('1950-01-01')}
           .max=${new Date('2100-01-01')}
           focusedDate="2025-01-01"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
 
       // Get initial range text
@@ -353,17 +351,15 @@ describe('<gds-year-picker>', () => {
     })*/
 
     it('should default to undefined', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker></gds-yearpicker>`,
       )
       expect(el.value).to.equal(undefined)
     })
 
     it('should respects min date', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
-          .min=${new Date('2024-01-01')}
-        ></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker .min=${new Date('2024-01-01')}></gds-yearpicker>`,
       )
 
       el.focusedDate = new Date('2023-01-01')
@@ -376,10 +372,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should respects max date', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
-          .max=${new Date('2024-01-01')}
-        ></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker .max=${new Date('2024-01-01')}></gds-yearpicker>`,
       )
 
       el.focusedDate = new Date('2025-01-01')
@@ -392,13 +386,13 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should not render extraneous years with hide-extraneous-years', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           .hideExtraneousYears=${true}
           .min=${new Date('2023-01-01')}
           .max=${new Date('2025-01-01')}
           .focusedDate=${new Date('2022-01-01')}
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
 
       expect(
@@ -407,8 +401,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should not have class today with no-current-year', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker no-current-year></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker no-current-year></gds-yearpicker>`,
       )
       //el.focusedDate = new Date()
       //await el.updateComplete
@@ -418,8 +412,8 @@ describe('<gds-year-picker>', () => {
     })
 
     it('should have less cells if comumns and rows are fewer', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker columns="4" rows="3"></gds-year-picker>`,
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker columns="4" rows="3"></gds-yearpicker>`,
       )
       const totalCells = el.columns * el.rows
       expect(totalCells).to.equal(12)
@@ -429,11 +423,11 @@ describe('<gds-year-picker>', () => {
   // Disable for 2023
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      const el = await fixture<GdsYearPicker>(
-        html`<gds-year-picker
+      const el = await fixture<GdsYearpicker>(
+        html`<gds-yearpicker
           focusedDate="2025-06-03"
           label="Year picker"
-        ></gds-year-picker>`,
+        ></gds-yearpicker>`,
       )
 
       // TODO: Remove ignoredRules when color-contrast issues are resolved

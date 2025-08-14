@@ -5,7 +5,7 @@
 @layer transitional-styles {
   @layer _base {
     :host {
-      @include mixins.year-picker();
+      @include mixins.yearpicker();
 
       table {
         flex-grow: 1;

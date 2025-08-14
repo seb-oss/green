@@ -1,8 +1,8 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './year-picker.trans.styles.scss?inline'
+import styles from './yearpicker.trans.styles.scss?inline'
 
 export function register() {
-  TransitionalStyles.instance.register('gds-year-picker', styles.toString())
+  TransitionalStyles.instance.register('gds-yearpicker', styles.toString())
 }
 
 export default register

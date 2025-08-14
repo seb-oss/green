@@ -10,21 +10,21 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
-import YearPickerStyles from './year-picker.styles'
+import YearpickerStyles from './yearpicker.styles'
 
 /**
- * @element gds-year-picker
+ * @element gds-yearpicker
  * @status beta
  *
- * A year-picker is a widget that allows the user to select a year.
+ * A yearpicker is a widget that allows the user to select a year.
  *
  * @event change - Fired when a date is selected.
  * @event gds-date-focused - Fired when focus is changed. Can be cancelled using `event.preventDefault()`.
  */
-@gdsCustomElement('gds-year-picker')
+@gdsCustomElement('gds-yearpicker')
 @localized()
-export class GdsYearPicker extends GdsElement {
-  static styles = [tokens, YearPickerStyles]
+export class GdsYearpicker extends GdsElement {
+  static styles = [tokens, YearpickerStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
@@ -104,7 +104,7 @@ export class GdsYearPicker extends GdsElement {
   size: 'small' | 'large' = 'large'
 
   /**
-   * The accessible label for the year-picker.
+   * The accessible label for the yearpicker.
    */
   @property()
   label?: string
@@ -171,7 +171,7 @@ export class GdsYearPicker extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-year-picker')
+    TransitionalStyles.instance.apply(this, 'gds-yearpicker')
 
     this.addEventListener('keydown', this.#handleKeyDown)
     window.addEventListener('lit-localize-status', (e: CustomEvent) => {

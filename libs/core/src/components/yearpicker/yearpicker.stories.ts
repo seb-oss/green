@@ -10,24 +10,24 @@ import '../button/index.ts'
 import '../icon/icons/calendar.ts'
 import '../icon/icons/chevron-left.ts'
 import '../icon/icons/chevron-right.ts'
-import '../flex'
+import '../flex/index.ts'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/year-picker)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/yearpicker)
  *
  * The year picker component is a visual representation of a many years that allows users
  * to select a year. Keys to use: arrow-keys, home, and end to focus a year
  * and enter or space to select it.
  */
 const meta: Meta = {
-  title: 'Components/Year picker',
-  component: 'gds-year-picker',
+  title: 'Components/Yearpicker',
+  component: 'gds-yearpicker',
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
-    ...argTablePropsFor('gds-year-picker'),
+    ...argTablePropsFor('gds-yearpicker'),
   },
 }
 
@@ -49,7 +49,7 @@ const DefaultParams: Story = {
 export const Default: Story = {
   ...DefaultParams,
   args: {
-    label: 'YearPicker',
+    label: 'Yearpicker',
   },
 }
 
@@ -60,7 +60,7 @@ export const Default: Story = {
 export const NoCurrentMonth: Story = {
   ...DefaultParams,
   name: 'No current month',
-  render: (args) => html` <gds-year-picker no-current-year></gds-year-picker> `,
+  render: (args) => html` <gds-yearpicker no-current-year></gds-yearpicker> `,
 }
 
 /**
@@ -68,7 +68,7 @@ export const NoCurrentMonth: Story = {
  */
 export const Small: Story = {
   ...DefaultParams,
-  render: (args) => html` <gds-year-picker size="small"></gds-year-picker> `,
+  render: (args) => html` <gds-yearpicker size="small"></gds-yearpicker> `,
 }
 
 /**
@@ -80,7 +80,7 @@ export const MinAndMax: Story = {
   ...DefaultParams,
   name: 'Min and max',
   render: (args) => html`
-    <gds-year-picker min="2023-01-01" max="2032-01-01"></gds-year-picker>
+    <gds-yearpicker min="2023-01-01" max="2032-01-01"></gds-yearpicker>
   `,
 }
 
@@ -91,11 +91,11 @@ export const MinAndMax: Story = {
 export const Hide: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-year-picker
+    <gds-yearpicker
       min="2023-01-01"
       max="2032-01-01"
       hide-extraneous-years
-    ></gds-year-picker>
+    ></gds-yearpicker>
   `,
 }
 
@@ -105,7 +105,7 @@ export const Hide: Story = {
 export const LessCells: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-year-picker columns="4" rows="3"></gds-year-picker>
+    <gds-yearpicker columns="4" rows="3"></gds-yearpicker>
   `,
 }
 
@@ -115,15 +115,15 @@ export const LessCells: Story = {
 export const BirthYear: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-year-picker
+    <gds-yearpicker
       min="1900-01-01"
       max="${new Date().toISOString().split('T')[0]}"
-    ></gds-year-picker>
+    ></gds-yearpicker>
   `,
 }
 
 /**
- * Example of a button that opens up the year-picker.
+ * Example of a button that opens up the yearpicker.
  */
 export const Popover: Story = {
   ...DefaultParams,
@@ -134,7 +134,7 @@ export const Popover: Story = {
         <gds-icon-calendar slot="trail"></gds-icon-calendar>
       </gds-button>
       <div style="padding: 1rem 0 0 1.5rem">Choose a year</div>
-      <gds-year-picker id="yearp"> </gds-year-picker>
+      <gds-yearpicker id="yearp"> </gds-yearpicker>
     </gds-popover>
     <script>
       var yearp = document.getElementById('yearp')
@@ -155,13 +155,13 @@ export const Popover: Story = {
 export const ChangeYear: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-year-picker min="1950-01-01" max="2100-01-01" controls="always">
-    </gds-year-picker>
+    <gds-yearpicker min="1950-01-01" max="2100-01-01" controls="always">
+    </gds-yearpicker>
   `,
 }
 
 /**
- * Example of a button that opens up the year-picker.
+ * Example of a button that opens up the yearpicker.
  */
 export const PopoverChange: Story = {
   ...DefaultParams,
@@ -171,13 +171,13 @@ export const PopoverChange: Story = {
         <span id="selected-year2">Choose a year</span>
         <gds-icon-calendar slot="trail"></gds-icon-calendar>
       </gds-button>
-      <gds-year-picker
+      <gds-yearpicker
         id="yearp2"
         min="1950-01-01"
         max="2100-01-01"
         controls="ifneeded"
       >
-      </gds-year-picker>
+      </gds-yearpicker>
     </gds-popover>
     <script>
       var yearp2 = document.getElementById('yearp2')
