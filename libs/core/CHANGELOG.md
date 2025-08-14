@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.88.7
+
+### Patch Changes
+
+- 0b04ce9: **Datepicker:** Increase height of date part spinbuttons for larger click target
+- fc0da67: **Form Control:** Fix broken import
+- c132aa8: **Datepicker:** Fix icon line weight for size=small
+
 ## 1.88.6
 
 ### Patch Changes
