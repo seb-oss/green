@@ -125,6 +125,7 @@ export function IconContent({ component }: IconContentProps) {
   // handle history state for back navigation
   React.useEffect(() => {
     const handlePopState = () => {
+      if (!window || !component.icons) return
       const hash = window.location.hash.replace('#', '')
       if (hash) {
         const iconName = hash.replace(/Icon/, '') // Remove 'Icon' prefix
