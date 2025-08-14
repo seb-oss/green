@@ -7,9 +7,11 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 import './mask'
 import '../card'
 import '../flex'
-import '../container'
+import '../button'
+import '../div'
 import '../theme'
 import '../img'
+import '../theme'
 import '../video'
 import '../text'
 import '../divider'
@@ -18,8 +20,55 @@ import '../icon/icons/arrow-right.js'
 import '../icon/icons/circles-three.js'
 
 /**
+ * The Mask component creates a gradient overlay effect that can be used to improve content visibility
+ * or create visual hierarchy. It's particularly useful when placing text over images or creating
+ * fade effects.
  *
+ *
+ * ### Basic Usage
+ *
+ * The mask component is typically used in combination with images or videos to create gradient overlays:
+ *
+ * ```html
+ * <gds-card position="relative" padding="0" overflow="hidden">
+ *   <gds-img src="path/to/image.jpg"></gds-img>
+ *   <gds-mask
+ *     background="01/0.9"
+ *     mask-image="top"
+ *     position="absolute"
+ *     inset="50% 0 0 0"
+ *     level="3"
+ *   >
+ *     <!-- Content within the mask -->
+ *   </gds-mask>
+ * </gds-card>
+ * ```
+ *
+ * ### Common Use Cases
+ *
+ * 1. Image Overlays: <br>
+ *    Create readable text over images by adding a gradient mask
+ *
+ * 2. Content Fading: <br>
+ *    Add fade effects to content edges
+ *
+ * 3. Visual Hierarchy: <br>
+ *    Draw attention to specific areas using gradient masks
+ *
+ * ### Accessibility
+ *
+ * When using masks over content, ensure sufficient contrast for text readability.
+ * Consider using the dark theme for content within masks over light images.
+ *
+ * ```html
+ * <gds-mask>
+ *   <gds-theme color-scheme="dark">
+ *     <!-- Content -->
+ *   </gds-theme>
+ * </gds-mask>
+ * ```
  */
+
 const meta: Meta = {
   title: 'Components/Mask',
   component: 'gds-mask',
@@ -41,98 +90,34 @@ const DefaultParams: Story = {
   },
 }
 
-export const Card: Story = {
+export const Mask: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-grid columns="xs{1} m{2} l{2}" gap="l">
-      <gds-card overflow="hidden">
-        <gds-flex
-          display="flex"
-          gap="0"
-          flex-direction="column"
-          align-items="stretch"
-        >
-          <gds-div position="relative" border-radius="s" overflow="hidden">
-            <gds-img
-              src="https://github.com/user-attachments/assets/fdbfca17-c5b7-43cc-b846-6e1ab68e5d69"
-              aspect-ratio="1/1"
-              object-fit="cover"
-            ></gds-img>
-            <gds-mask
-              mask-image="top"
-              background-color="tertiary/0.9"
-              z-index="2"
-              position="absolute"
-              inset="50% 0 0 0"
-            >
-              <gds-div position="absolute" inset="auto 20px 20px auto">
-                <gds-button rank="secondary">
-                  <gds-icon-arrow-down></gds-icon-arrow-down>
-                </gds-button>
-              </gds-div>
-            </gds-mask>
-          </gds-div>
-          <gds-flex
-            flex-direction="column"
-            padding="s{xs} m{l} l{l}"
-            align-items="flex-start"
-            gap="l"
-          >
-            <gds-flex gap="s" flex-direction="column">
-              <gds-text font-size="body-l">
-                Sector by sector. Industry by industry.
-              </gds-text>
-              <gds-text tag="p">
-                Together with our clients, we're accelerating the sustainable
-                transition.
-              </gds-text>
-            </gds-flex>
-            <gds-divider opacity="0.2"></gds-divider>
-            <gds-button>Client stories</gds-button>
-          </gds-flex>
+    <gds-card position="relative" padding="0" overflow="hidden">
+      <gds-img src="https://api.seb.io/assets/woods-cabin.jpeg"></gds-img>
+      <gds-mask
+        background="01/0.9"
+        mask-image="top"
+        position="absolute"
+        inset="50% 0 0 0"
+        level="3"
+        color="03"
+        flex-direction="column"
+        justify-content="center"
+        align-items="flex-start"
+        gap="xl"
+        padding="6xl"
+      >
+        <gds-flex flex-direction="column" gap="s">
+          <gds-text font="display-xl">Sustainability</gds-text>
+          <gds-text tag="p">
+            Actively supporting the net zero transition.
+          </gds-text>
         </gds-flex>
-      </gds-card>
-      <gds-card border-radius="s" overflow="hidden">
-        <gds-flex position="relative" height="100%">
-          <gds-video
-            src="https://github.com/user-attachments/assets/f556d859-466a-416c-95fb-ee908ffccfdd"
-            object-fit="cover"
-            aspect-ratio="1/1"
-            pointer-events="none"
-            autoplay
-            muted
-            loop
-          ></gds-video>
-          <gds-mask
-            mask-image="top"
-            background-color="tertiary/0.6"
-            position="absolute"
-          >
-            <gds-flex
-              flex-direction="column"
-              justify-content="flex-end"
-              padding="4xl 2xl 2xl 2xl"
-              gap="l"
-              height="100%"
-              width="100%"
-              color="tertiary"
-            >
-              <gds-div>
-                <gds-text tag="h3"> Sustainable Practices </gds-text>
-                <gds-text font-size="body-m">
-                  Promoting Eco-Friendly Solutions
-                </gds-text>
-              </gds-div>
-              <gds-flex gap="s">
-                <gds-button rank="secondary">Get Involved</gds-button>
-                <gds-theme color-scheme="dark">
-                  <gds-button rank="tertiary">Learn more</gds-button>
-                </gds-theme>
-              </gds-flex>
-            </gds-flex>
-          </gds-mask>
-        </gds-flex>
-      </gds-card>
-    </gds-grid>
+        <gds-theme color-scheme="dark" design-version="2023">
+          <gds-button>Our impact</gds-button>
+        </gds-theme>
+      </gds-mask>
+    </gds-card>
   `,
 }

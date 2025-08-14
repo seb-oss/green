@@ -18,7 +18,7 @@ const style = css`
 
     thead {
       box-shadow: 0 var(--gds-sys-space-4xs) 0 0
-        var(--gds-sys-color-l2-border-primary);
+        var(--gds-sys-color-border-subtle-01);
       th {
         height: var(--gds-sys-space-2xl);
         width: var(--gds-sys-space-2xl);
@@ -40,25 +40,30 @@ const style = css`
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-sys-space-2xs);
-        transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
         outline-offset: var(--gds-sys-space-3xs);
+        --_background: transparent;
 
         &:not(.disabled):hover,
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l2-background-tertiary);
+          --_background: var(--gds-sys-color-l3-01);
+          background: color-mix(
+            in srgb,
+            var(--_background),
+            var(--gds-sys-color-state-neutral-01)
+          );
           cursor: pointer;
-          color: var(--gds-sys-color-l2-content-tertiary);
+          color: var(--gds-sys-color-content-inversed);
         }
 
         &.today {
-          border-color: var(--gds-sys-color-l2-background-tertiary);
+          border-color: var(--gds-sys-color-border-strong);
         }
 
         &.disabled {
-          color: var(--gds-sys-color-l3-content-disabled);
+          color: var(--gds-sys-color-content-disabled-01);
           cursor: not-allowed;
         }
 
@@ -67,7 +72,7 @@ const style = css`
         }
 
         &:focus-visible {
-          outline-color: var(--gds-sys-color-l2-content-primary);
+          outline-color: var(--gds-sys-color-content-01);
           outline-width: var(--gds-sys-space-3xs);
         }
       }
@@ -84,5 +89,4 @@ const style = css`
     }
   }
 `
-
 export default style

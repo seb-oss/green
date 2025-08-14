@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './rich-text'
 import '../divider'
 import '../card'
-import '../container'
+import '../div'
 import '../text'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'

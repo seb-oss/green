@@ -21,11 +21,11 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
-import { styles } from './select.styles'
+import SelectStyles from './select.styles'
 
 @localized()
 class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
-  static styles = [tokens, formControlHostStyles, styles]
+  static styles = [tokens, formControlHostStyles, SelectStyles]
 
   /**
    * The supporting text displayed between the label and the field.

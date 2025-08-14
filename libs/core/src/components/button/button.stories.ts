@@ -34,7 +34,7 @@ const meta: Meta = {
       control: { type: 'select' },
     },
     variant: {
-      options: ['neutral', 'positive', 'negative'],
+      options: ['neutral', 'brand', 'positive', 'negative'],
       control: { type: 'select' },
     },
     size: {
@@ -90,15 +90,33 @@ export const RanksAndVariants: Story = {
         <gds-text>Neutral</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
         <gds-flex gap="xl">
-          <gds-button>
+          <gds-button variant="neutral">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Primary
           </gds-button>
-          <gds-button rank="secondary">
+          <gds-button variant="neutral" rank="secondary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Secondary
           </gds-button>
-          <gds-button rank="tertiary">
+          <gds-button variant="neutral" rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Tertiary
+          </gds-button>
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text>Brand</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button variant="brand">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary
+          </gds-button>
+          <gds-button variant="brand" rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Secondary
+          </gds-button>
+          <gds-button variant="brand" rank="tertiary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Tertiary
           </gds-button>
@@ -135,6 +153,42 @@ export const RanksAndVariants: Story = {
             Secondary</gds-button
           >
           <gds-button variant="negative" rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Tertiary</gds-button
+          >
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text>Notice</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button variant="notice">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary</gds-button
+          >
+          <gds-button variant="notice" rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Secondary</gds-button
+          >
+          <gds-button variant="notice" rank="tertiary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Tertiary</gds-button
+          >
+        </gds-flex>
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-text>Warning</gds-text>
+        <gds-divider opacity="0.2"></gds-divider>
+        <gds-flex gap="xl">
+          <gds-button variant="warning">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Primary</gds-button
+          >
+          <gds-button variant="warning" rank="secondary">
+            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            Secondary</gds-button
+          >
+          <gds-button variant="warning" rank="tertiary">
             <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
             Tertiary</gds-button
           >

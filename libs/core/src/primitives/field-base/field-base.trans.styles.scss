@@ -59,14 +59,14 @@
   }
 
   .field.invalid {
-    border-color: var(--gds-sys-color-l3-border-negative);
-    color: var(--gds-sys-color-l3-content-negative);
+    border-color: var(--gds-sys-color-border-negative-01);
+    color: var(--gds-sys-color-content-negative-01);
     border-bottom-width: 2px;
   }
 
   .field.disabled {
-    background: var(--gds-sys-color-l3-background-disabled);
-    color: var(--gds-sys-color-l3-content-disabled);
+    background: var(--gds-sys-color-l3-disabled-01);
+    color: var(--gds-sys-color-content-disabled-01);
     border-color: transparent;
     pointer-events: none;
   }

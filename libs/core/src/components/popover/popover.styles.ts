@@ -28,21 +28,20 @@ const style = css`
       box-sizing: border-box;
       right: 0;
       margin: 0;
-      box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.2),
-        0 1rem 28px rgba(0, 0, 0, 0.15);
-      border-width: 0;
-      border-radius: 0.5rem;
+      box-shadow: var(--gds-sys-shadow-l-01);
+      border: var(--gds-sys-space-4xs) solid
+        var(--gds-sys-color-border-subtle-01);
+      border-radius: var(--gds-sys-radius-s);
     }
 
     :host([nonmodal]) dialog {
       z-index: 1;
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 576px) {
       dialog.use-modal-in-mobile {
-        border-radius: 1rem 1rem 0 0;
-        transition: all 200ms ease;
+        border-radius: var(--gds-sys-radius-m) var(--gds-sys-radius-m) 0 0;
+        transition: transform var(--gds-sys-motion-duration-fastest) ease;
         min-width: 100vw;
         position: fixed;
         bottom: 0;
@@ -61,7 +60,7 @@ const style = css`
           display: block;
           position: fixed;
           opacity: 1;
-          transition: opacity 200ms ease;
+          transition: opacity var(--gds-sys-motion-duration-fast) ease;
           @starting-style {
             opacity: 0;
           }
@@ -69,7 +68,7 @@ const style = css`
       }
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 577px) {
       header {
         display: none;
       }
@@ -79,7 +78,7 @@ const style = css`
       display: none;
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 577px) {
       dialog:not(.has-backdrop)::backdrop {
         background-color: transparent;
         display: block;
@@ -88,5 +87,4 @@ const style = css`
     }
   }
 `
-
 export default style

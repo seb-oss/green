@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
-import '../container'
+import '../div'
 import '../text'
 import '../link'
 import '../flex'

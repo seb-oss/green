@@ -18,7 +18,7 @@ import { GdsCard } from '../card/card.component'
 import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
-import { styles } from './dialog.styles'
+import DialogStyles from './dialog.styles'
 import {
   lockBodyScrolling,
   registerGlobalScrollLockStyles,
@@ -44,7 +44,7 @@ registerGlobalScrollLockStyles()
 })
 @localized()
 export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
-  static styles = [styles]
+  static styles = [DialogStyles]
   static styleExpressionBaseSelector = 'dialog'
 
   /**

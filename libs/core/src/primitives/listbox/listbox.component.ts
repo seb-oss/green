@@ -10,7 +10,7 @@ import {
 } from '../../utils/controllers/listbox-kb-nav-controller'
 import { watch } from '../../utils/decorators/watch'
 import { unwrap } from '../../utils/helpers/unwrap-slots'
-import style from './listbox.styles'
+import ListboxStyles from './listbox.styles'
 import { GdsOption } from './option.component'
 
 import type { OptionsContainer } from './option.component'
@@ -33,7 +33,7 @@ export class GdsListbox
   extends GdsElement
   implements ListboxKbNavigation, OptionsContainer
 {
-  static styles = style
+  static styles = ListboxStyles
 
   /**
    * Controls whether the listbox allows multiple selection or not.

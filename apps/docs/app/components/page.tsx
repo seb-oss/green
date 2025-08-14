@@ -1,12 +1,17 @@
-'use client'
+// app/components/page.tsx
+import { Metadata } from 'next'
 
-import { GdsFlex } from '$/import/components'
-import ComponentList from 'core/components'
+import { ComponentsClient } from './page.client'
+
+export const metadata: Metadata = {
+  title: 'Components — Green Design System',
+  description: 'Browse all components available in the Green Design System.',
+  openGraph: {
+    title: 'Components — Green Design System',
+    description: 'Browse all components available in the Green Design System.',
+  },
+}
 
 export default function Components() {
-  return (
-    <GdsFlex flex-direction="column" margin="0 auto">
-      <ComponentList title="Components" />
-    </GdsFlex>
-  )
+  return <ComponentsClient />
 }

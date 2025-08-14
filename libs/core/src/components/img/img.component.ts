@@ -12,7 +12,7 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import IMGCSS from './img.style'
+import IMGStyles from './img.styles'
 
 /**
  * @element gds-img
@@ -24,7 +24,7 @@ import IMGCSS from './img.style'
 export class GdsImg extends withPositioningProps(
   withSizeXProps(withSizeYProps(GdsElement)),
 ) {
-  static styles = [tokens, IMGCSS]
+  static styles = [tokens, IMGStyles]
 
   /**
    * Controls the aspect ratio of the image.

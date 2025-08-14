@@ -9,7 +9,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import DividerCSS from './divider.style'
+import DividerStyles from './divider.styles'
 
 /**
  * @element gds-divider
@@ -19,19 +19,7 @@ import DividerCSS from './divider.style'
  */
 @gdsCustomElement('gds-divider')
 export class GdsDivider extends GdsElement {
-  static styles = [tokens, DividerCSS]
-
-  /**
-   * The level of the divider is used to resolve the color tokens from the corresponding level.
-   * Check the [Color System documentation page](./?path=/docs/style-colors--docs) for more information.
-   *
-   * Default value for `gds-divider` is set to `2`.
-   *
-   * @property level
-   *
-   * */
-  @property()
-  level = '2'
+  static styles = [tokens, DividerStyles]
 
   /**
    * Controls the color property of the divider.
@@ -40,7 +28,7 @@ export class GdsDivider extends GdsElement {
    * You can apply color like this:
    *
    * ```html
-   * <gds-divider color="primary"></gds-divider>
+   * <gds-divider color="interactive"></gds-divider>
    * ```
    */
   @styleExpressionProperty(forColorTokens('border'))

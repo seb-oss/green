@@ -18,7 +18,7 @@ import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../icon/icons/checkmark.component'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
-import styles from './dropdown.styles'
+import DropdownStyles from './dropdown.styles'
 
 import type {
   GdsOption,
@@ -60,7 +60,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = [tokens, formControlHostStyle, styles]
+  static styles = [tokens, formControlHostStyle, DropdownStyles]
 
   get type() {
     return 'gds-dropdown'

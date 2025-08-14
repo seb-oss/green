@@ -1,5 +1,4 @@
 import { localized, msg } from '@lit/localize'
-import { PropertyValues } from 'lit'
 import { property, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { when } from 'lit/directives/when.js'
@@ -13,7 +12,7 @@ import {
   withMarginProps,
   withPositioningProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import { styles } from './spinner.styles'
+import styles from './spinner.styles'
 
 /**
  * @element gds-spinner
