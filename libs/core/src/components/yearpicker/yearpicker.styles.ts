@@ -4,7 +4,7 @@ const style = css`
   @layer base, reset;
 
   @layer base {
-    gds-flex {
+    .controls {
       box-shadow: 0 var(--gds-sys-space-4xs) 0 0
         var(--gds-sys-color-l2-border-primary);
       padding-bottom: 0.25rem;
