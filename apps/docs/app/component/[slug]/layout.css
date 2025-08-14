@@ -20,3 +20,17 @@
 .text-pretty {
   text-wrap: pretty;
 }
+
+.l2-state-neutral-03:hover {
+  background: color-mix(
+    in srgb,
+    var(--gds-sys-color-l2-02),
+    var(--gds-sys-color-state-neutral-03)
+  );
+}
+
+.focusable:focus-visible {
+  outline-width: var(--gds-sys-space-3xs);
+  outline-offset: var(--gds-sys-space-3xs);
+  outline-color: currentColor;
+}

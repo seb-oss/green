@@ -102,6 +102,50 @@ export function IconContent({ component }: IconContentProps) {
 
   if (!component.icons) return null
 
+  // If a URL hash is present, find the icon by name and set it as selected
+  React.useEffect(() => {
+    if (!window || !component.icons) return
+
+    const hash = window.location.hash.replace('#', '')
+    if (hash) {
+      const iconName = hash.replace(/Icon/, '') // Remove 'Icon' prefix
+      const icon = Object.values(component.icons).find(
+        (icon) => formatDisplayName(icon.displayName) === iconName,
+      )
+      if (icon) {
+        setSelectedIcon(icon)
+      } else {
+        setSelectedIcon(null)
+      }
+    } else {
+      setSelectedIcon(null)
+    }
+  }, [component.icons])
+
+  // handle history state for back navigation
+  React.useEffect(() => {
+    const handlePopState = () => {
+      const hash = window.location.hash.replace('#', '')
+      if (hash) {
+        const iconName = hash.replace(/Icon/, '') // Remove 'Icon' prefix
+        const icon = Object.values(component.icons).find(
+          (icon) => formatDisplayName(icon.displayName) === iconName,
+        )
+        if (icon) {
+          setSelectedIcon(icon)
+        } else {
+          setSelectedIcon(null)
+        }
+      } else {
+        setSelectedIcon(null)
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [component.icons])
+
   // const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
   //   ([name, icon]) => ({
   //     id: name,
@@ -153,10 +197,15 @@ export function IconContent({ component }: IconContentProps) {
 
   const handleIconClick = (_name: string, icon: IconData) => {
     setSelectedIcon(icon)
+    // set URL hash to the icon name for deep linking
+    const formattedName = formatDisplayName(icon.displayName)
+    window.location.hash = `#${formattedName}`
   }
 
   const handleClosePanel = () => {
     setSelectedIcon(null)
+    // Clear URL hash when closing the panel
+    window.history.pushState({}, '', window.location.pathname)
   }
 
   return (
@@ -264,7 +313,17 @@ export function IconContent({ component }: IconContentProps) {
               height="100%"
               padding={view === 'grid' ? 'm' : 'xs'}
               onClick={() => handleIconClick(name, icon)}
-              className="pointer"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleIconClick(name, icon)
+                  e.preventDefault()
+                  e.stopPropagation()
+                }
+              }}
+              className="pointer l2-state-neutral-03 focusable"
+              role="button"
+              tabindex="0"
+              aria-haspopup="dialog"
             >
               <Core.GdsFlex
                 flex-direction={view === 'grid' ? 'column' : 'row'}
