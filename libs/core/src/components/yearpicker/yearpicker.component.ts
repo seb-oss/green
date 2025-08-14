@@ -180,11 +180,10 @@ export class GdsYearpicker extends GdsElement {
     })
   }
 
-  // focus() {
-  //   console.log('Super Focused')
-  //   super.focus()
-  //   this._elFocusedCell?.focus()
-  // }
+  focus() {
+    super.focus()
+    this._elFocusedCell?.focus()
+  }
 
   render() {
     const currentYear = new Date().getFullYear()
