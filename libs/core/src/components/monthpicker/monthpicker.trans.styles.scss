@@ -5,7 +5,7 @@
 @layer transitional-styles {
   @layer _base {
     :host {
-      @include mixins.month-picker();
+      @include mixins.monthpicker();
 
       table {
         flex-grow: 1;

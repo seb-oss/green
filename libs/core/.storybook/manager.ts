@@ -32,7 +32,7 @@ const betaItems = {
   Link: true,
   Mask: true,
   Media: true,
-  'Month picker': true,
+  Monthpicker: true,
   Radio: true,
   'Rich Text': true,
   Select: true,

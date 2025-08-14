@@ -10,21 +10,21 @@ import '../button/index.ts'
 import '../icon/icons/calendar.ts'
 
 /**
- * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/month-picker)
+ * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/monthpicker)
  *
  * The month picker component is a visual representation of a year that allows users
  * to select a month. Keys to use: arrow-keys, home, and end to focus a month
  * and enter or space to select it.
  */
 const meta: Meta = {
-  title: 'Components/Month picker',
-  component: 'gds-month-picker',
+  title: 'Components/Monthpicker',
+  component: 'gds-monthpicker',
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   argTypes: {
-    ...argTablePropsFor('gds-month-picker'),
+    ...argTablePropsFor('gds-monthpicker'),
   },
 }
 
@@ -46,7 +46,7 @@ const DefaultParams: Story = {
 export const Default: Story = {
   ...DefaultParams,
   args: {
-    label: 'MonthPicker',
+    label: 'Monthpicker',
   },
 }
 
@@ -58,7 +58,7 @@ export const NoCurrentMonth: Story = {
   ...DefaultParams,
   name: 'No current month',
   render: (args) => html`
-    <gds-month-picker no-current-month></gds-month-picker>
+    <gds-monthpicker no-current-month></gds-monthpicker>
   `,
 }
 
@@ -67,7 +67,7 @@ export const NoCurrentMonth: Story = {
  */
 export const Small: Story = {
   ...DefaultParams,
-  render: (args) => html` <gds-month-picker size="small"></gds-month-picker> `,
+  render: (args) => html` <gds-monthpicker size="small"></gds-monthpicker> `,
 }
 
 /**
@@ -77,7 +77,7 @@ export const Small: Story = {
 export const Short: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-month-picker short-month-text></gds-month-picker>
+    <gds-monthpicker short-month-text></gds-monthpicker>
   `,
 }
 
@@ -89,7 +89,7 @@ export const ShortAndSmall: Story = {
   ...DefaultParams,
   name: 'Short and small',
   render: (args) => html`
-    <gds-month-picker size="small" short-month-text></gds-month-picker>
+    <gds-monthpicker size="small" short-month-text></gds-monthpicker>
   `,
 }
 
@@ -99,7 +99,7 @@ export const ShortAndSmall: Story = {
 export const MonthNumber: Story = {
   ...DefaultParams,
   name: 'Month number',
-  render: (args) => html` <gds-month-picker month-number></gds-month-picker> `,
+  render: (args) => html` <gds-monthpicker month-number></gds-monthpicker> `,
 }
 
 /**
@@ -110,7 +110,7 @@ export const MinAndMax: Story = {
   ...DefaultParams,
   name: 'Min and max',
   render: (args) => html`
-    <gds-month-picker min="2025-03-01" max="2025-09-30"></gds-month-picker>
+    <gds-monthpicker min="2025-03-01" max="2025-09-30"></gds-monthpicker>
   `,
 }
 
@@ -121,11 +121,11 @@ export const MinAndMax: Story = {
 export const Hide: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-month-picker
+    <gds-monthpicker
       min="2025-03-01"
       max="2025-09-30"
       hide-extraneous-months
-    ></gds-month-picker>
+    ></gds-monthpicker>
   `,
 }
 
@@ -138,17 +138,17 @@ export const FocusedYearDate: Story = {
   ...DefaultParams,
   name: 'Focused year or date',
   render: (args) => html`
-    <gds-month-picker
+    <gds-monthpicker
       focusedYear="2024"
       focusedDate="2024-06-01"
       min="2024-02-01"
       max="2024-10-30"
-    ></gds-month-picker>
+    ></gds-monthpicker>
   `,
 }
 
 /**
- * Example of a button that opens up the month-picker.
+ * Example of a button that opens up the monthpicker.
  */
 export const Popover: Story = {
   ...DefaultParams,
@@ -159,7 +159,7 @@ export const Popover: Story = {
         <gds-icon-calendar slot="trail"></gds-icon-calendar>
       </gds-button>
       <div style="padding: 1rem 0 0 1.5rem">Choose a month</div>
-      <gds-month-picker id="monthp"> </gds-month-picker>
+      <gds-monthpicker id="monthp"> </gds-monthpicker>
     </gds-popover>
     <script>
       var monthp = document.getElementById('monthp')
@@ -178,18 +178,18 @@ export const Popover: Story = {
   ...DefaultParams,
   name: 'Outside the min max',
   render: (args) => html`
-    <gds-month-picker
+    <gds-monthpicker
       focusedYear="2024"
       focusedDate="2024-12-01"
       min="2024-01-01"
       max="2024-06-01"
-    ></gds-month-picker>
+    ></gds-monthpicker>
   `,
 }*/
 
 // export const Disabled: Story = {
 //   ...DefaultParams,
 //   render: (args) => html`
-//     <gds-month-picker minMonth="2" maxMonth="9"></gds-month-picker>
+//     <gds-monthpicker minMonth="2" maxMonth="9"></gds-monthpicker>
 //   `,
 // }

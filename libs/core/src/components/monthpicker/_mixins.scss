@@ -56,7 +56,7 @@ $today-background: transparent;
 $weekend-color: hsl(var(--sg-hsl-red-2));
 $weekend-background: $background;
 
-@mixin month-picker() {
+@mixin monthpicker() {
   display: flex;
   justify-content: center;
 

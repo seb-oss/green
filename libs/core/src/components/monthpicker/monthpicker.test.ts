@@ -6,17 +6,17 @@ import { addDays, addMonths, subMonths } from 'date-fns'
 import { htmlTemplateTagFactory } from '@sebgroup/green-core/scoping'
 import { onlyDate } from '../../utils/testing'
 
-import type { GdsMonthPicker } from './month-picker'
+import type { GdsMonthpicker } from './monthpicker'
 
-import '@sebgroup/green-core/components/month-picker'
+import '@sebgroup/green-core/components/monthpicker'
 
 const html = htmlTemplateTagFactory(testingHtml)
 
-describe('<gds-month-picker>', () => {
+describe('<gds-monthpicker>', () => {
   describe('Rendering', () => {
     it('should render', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       expect(el).shadowDom.to.exist
     })
@@ -24,8 +24,8 @@ describe('<gds-month-picker>', () => {
 
   describe('Interactions', () => {
     it('should increment by 3 months when pressing key down if september or earlier, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       el.focus()
 
@@ -45,8 +45,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should decrement by 3 months when pressing key down if april or later, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       el.focus()
 
@@ -66,8 +66,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should increment by 1 month when pressing key right if november or earlier, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       el.focus()
 
@@ -87,8 +87,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should decrement by 1 month when pressing key left if february or later, else stay the same', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       el.focus()
 
@@ -108,8 +108,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should select january when pressing home', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       el.focus()
 
@@ -123,8 +123,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should select december when pressing end', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       el.focus()
 
@@ -138,11 +138,11 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should select the focused date when pressing enter', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           min="2025-01-01"
           max="2025-12-31"
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
       el.focus()
 
@@ -158,11 +158,11 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should select the focused date when pressing space', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           min="2025-01-01"
           max="2025-12-31"
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
       el.focus()
 
@@ -178,11 +178,11 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should not select the focused date when pressing enter if it is disabled', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           min="2024-01-01"
           max="2024-06-30"
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
       el.focus()
 
@@ -197,8 +197,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should update the focused date when value is changed', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
 
       el.value = new Date('2023-02-01')
@@ -212,17 +212,17 @@ describe('<gds-month-picker>', () => {
 
   describe('API', () => {
     it('should default to undefined', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker></gds-monthpicker>`,
       )
       expect(el.value).to.equal(undefined)
     })
 
     it('should respects min date', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           .min=${new Date('2024-01-01')}
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
 
       el.focusedDate = new Date('2023-12-01')
@@ -235,10 +235,10 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should respects max date', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           .max=${new Date('2024-01-01')}
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
 
       el.focusedDate = new Date('2024-02-01')
@@ -251,12 +251,12 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should show month number', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           .min=${new Date('2024-01-01')}
           .max=${new Date('2024-12-31')}
           month-number
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
 
       el.focusedDate = new Date('2024-11-01')
@@ -268,12 +268,12 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should show short name', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           .min=${new Date('2024-01-01')}
           .max=${new Date('2024-12-31')}
           short-month-text
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
 
       el.focusedDate = new Date('2024-02-01')
@@ -285,13 +285,13 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should not render extraneous months with hide-extraneous-months', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           .hideExtraneousMonths=${true}
           .min=${new Date('2024-04-01')}
           .max=${new Date('2024-08-01')}
           .focusedDate=${new Date('2024-01-01')}
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
 
       expect(
@@ -300,8 +300,8 @@ describe('<gds-month-picker>', () => {
     })
 
     it('should not have class today with no-current-month', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker no-current-month></gds-month-picker>`,
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker no-current-month></gds-monthpicker>`,
       )
       //el.focusedDate = new Date()
       //await el.updateComplete
@@ -313,11 +313,11 @@ describe('<gds-month-picker>', () => {
   // Disable for 2023
   describe('Accessibility', () => {
     it('is accessible', async () => {
-      const el = await fixture<GdsMonthPicker>(
-        html`<gds-month-picker
+      const el = await fixture<GdsMonthpicker>(
+        html`<gds-monthpicker
           .focusedDate=${new Date('2025-06-03')}
           label="Month picker"
-        ></gds-month-picker>`,
+        ></gds-monthpicker>`,
       )
 
       // TODO: Remove ignoredRules when color-contrast issues are resolved

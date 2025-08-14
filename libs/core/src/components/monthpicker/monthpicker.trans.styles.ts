@@ -1,8 +1,8 @@
 import { TransitionalStyles } from '../../utils/transitional-styles/transitional-styles'
-import styles from './month-picker.trans.styles.scss?inline'
+import styles from './monthpicker.trans.styles.scss?inline'
 
 export function register() {
-  TransitionalStyles.instance.register('gds-month-picker', styles.toString())
+  TransitionalStyles.instance.register('gds-monthpicker', styles.toString())
 }
 
 export default register

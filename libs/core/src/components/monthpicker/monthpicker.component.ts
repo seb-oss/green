@@ -12,7 +12,7 @@ import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
 import { dateConverter } from '../../utils/helpers/attribute-converters'
-import MonthPickerStyles from './month-picker.styles'
+import MonthPickerStyles from './monthpicker.styles'
 
 const months = [
   msg('January'),
@@ -30,15 +30,15 @@ const months = [
 ]
 
 /**
- * @element gds-month-picker
+ * @element gds-monthpicker
  * @status beta
  *
- * A month-picker is a widget that allows the user to select a month.
+ * A monthpicker is a widget that allows the user to select a month.
  *
  * @event change - Fired when a date is selected.
  * @event gds-date-focused - Fired when focus is changed. Can be cancelled using `event.preventDefault()`.
  */
-@gdsCustomElement('gds-month-picker')
+@gdsCustomElement('gds-monthpicker')
 @localized()
 export class GdsMonthPicker extends GdsElement {
   static styles = [tokens, MonthPickerStyles]
@@ -137,7 +137,7 @@ export class GdsMonthPicker extends GdsElement {
   monthNumber = false
 
   /**
-   * The accessible label for the month-picker.
+   * The accessible label for the monthpicker.
    */
   @property()
   label?: string
@@ -157,7 +157,7 @@ export class GdsMonthPicker extends GdsElement {
 
   connectedCallback(): void {
     super.connectedCallback()
-    TransitionalStyles.instance.apply(this, 'gds-month-picker')
+    TransitionalStyles.instance.apply(this, 'gds-monthpicker')
 
     this.addEventListener('keydown', this.#handleKeyDown)
     window.addEventListener('lit-localize-status', (e: CustomEvent) => {

@@ -2,7 +2,7 @@
 
 import { GdsFlex, GdsMask } from '$/import/components'
 
-const MonthPicker = ({ cover }: { cover: boolean }) => (
+const Monthpicker = ({ cover }: { cover: boolean }) => (
   <GdsFlex
     position="relative"
     height={cover ? '200px' : ''}
@@ -24,4 +24,4 @@ const MonthPicker = ({ cover }: { cover: boolean }) => (
   </GdsFlex>
 )
 
-export default MonthPicker
+export default Monthpicker
