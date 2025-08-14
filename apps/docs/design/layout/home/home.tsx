@@ -133,7 +133,7 @@ export function Home({
           </GdsFlex>
           <Link component="button" href="/components" rank="secondary">
             <IconSquareGridCircle slot="trail"></IconSquareGridCircle>
-            View All Components
+            View all components
           </Link>
         </GdsFlex>
         <GdsGrid
