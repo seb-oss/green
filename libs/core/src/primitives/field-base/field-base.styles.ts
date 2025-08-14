@@ -106,6 +106,7 @@ const style = css`
       display: flex;
       gap: var(--gds-sys-space-xs);
       flex: 1;
+      align-self: stretch;
     }
 
     .main-slot-wrap.multiline {

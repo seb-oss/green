@@ -158,8 +158,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
         () =>
           html`<gds-form-control-footer
             class="size-${this.size}"
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
@@ -325,7 +324,9 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   #renderChevron() {
     if (!this.multiple) {
-      return html` <gds-icon-chevron-bottom></gds-icon-chevron-bottom> `
+      return html`
+        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+      `
     }
   }
 }

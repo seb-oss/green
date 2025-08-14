@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './text'
 import '../card'
-import '../container'
+import '../div'
 import '../flex'
 import '../divider'
 

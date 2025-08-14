@@ -49,12 +49,12 @@ const style = css`
 
     :host(:focus-visible) {
       outline: none;
+    }
 
-      .item::before {
-        inset: var(--gds-sys-space-2xs);
-        opacity: 1;
-        visivility: visible;
-      }
+    .item::before {
+      inset: var(--gds-sys-space-2xs);
+      opacity: 1;
+      visivility: visible;
     }
 
     :host([inert]) {

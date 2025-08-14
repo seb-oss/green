@@ -29,6 +29,8 @@ export default css`
 
   .native-control {
     font: var(--gds-sys-text-detail-regular-m);
+    display: flex;
+    align-items: center;
     appearance: none;
     background-color: transparent;
     border: 0;

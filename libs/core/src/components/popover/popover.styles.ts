@@ -28,9 +28,10 @@ const style = css`
       box-sizing: border-box;
       right: 0;
       margin: 0;
-      box-shadow: var(--gds-sys-shadow-m-01), var(--gds-sys-shadow-m-02);
-      border-width: 0;
-      border-radius: 0.5rem;
+      box-shadow: var(--gds-sys-shadow-l-01);
+      border: var(--gds-sys-space-4xs) solid
+        var(--gds-sys-color-border-subtle-01);
+      border-radius: var(--gds-sys-radius-s);
     }
 
     :host([nonmodal]) dialog {
