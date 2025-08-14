@@ -155,7 +155,7 @@ export const Popover: Story = {
 export const ChangeYear: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-year-picker min="1950-01-01" max="2100-01-01" change-years-controls>
+    <gds-year-picker min="1950-01-01" max="2100-01-01" controls="always">
     </gds-year-picker>
   `,
 }
@@ -175,7 +175,7 @@ export const PopoverChange: Story = {
         id="yearp2"
         min="1950-01-01"
         max="2100-01-01"
-        change-years-controls
+        controls="ifneeded"
       >
       </gds-year-picker>
     </gds-popover>
