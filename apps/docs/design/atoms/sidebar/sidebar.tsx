@@ -236,20 +236,6 @@ export default function Sidebar() {
                   </Link>
                 ))}
               </Core.GdsFlex>
-              {false && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: '0',
-                    left: 0,
-                    right: 0,
-                    pointerEvents: 'none',
-                    height: '24px',
-                    background:
-                      'linear-gradient(0deg, var(--gds-sys-color-l1-01), transparent)',
-                  }}
-                ></div>
-              )}
             </Core.GdsFlex>
           </CollapsibleSection>
         )
@@ -285,6 +271,7 @@ export default function Sidebar() {
   return (
     <Core.GdsCard
       variant="secondary"
+      background="none"
       border-radius="0"
       justify-content="flex-start"
       align-items={'flex-start'}
