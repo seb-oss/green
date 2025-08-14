@@ -93,9 +93,6 @@ export function ComponentsClient() {
         <Core.GdsFlex flex-direction="column" gap="m" padding="xl 0 0 0">
           <Core.GdsFlex gap="s" justify-content="center">
             <Core.GdsText font="display-m">Components</Core.GdsText>
-            <Core.GdsText font="display-m" color="positive">
-              ({components.length})
-            </Core.GdsText>
           </Core.GdsFlex>
           <Core.GdsText
             font="preamble-m"
