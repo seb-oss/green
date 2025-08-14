@@ -67,7 +67,7 @@ export default function Card({
           <Core.GdsCard
             key={title}
             border-radius="m"
-            padding={snippet ? '2xs' : 'l'}
+            padding={snippet ? '0' : 'l'}
             gap="s"
             width="100%"
             min-width="100%"
@@ -126,7 +126,7 @@ export default function Card({
           </Core.GdsFlex>
         </Core.GdsFlex>
       </Link>
-      {isHovered && (
+      {false && isHovered && (
         <Core.GdsFlex
           justify-content="space-between"
           align-items="center"
