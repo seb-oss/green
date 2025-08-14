@@ -111,7 +111,7 @@ export const AutoDismiss: Story = {
   args: {
     ...DefaultParams.parameters!.args,
     variant: 'positive',
-    timeout: 3000,
+    timeout: 6400,
     innerHTML: `<strong>Auto Dismiss</strong> This alert disappears automatically after a delay.`,
   },
 }
