@@ -75,13 +75,13 @@ export class GdsMonthPicker extends GdsElement {
   hideExtraneousMonths = false
 
   /**
-   * How many columns that will be displayed (default 5)
+   * How many columns that will be displayed (default 4)
    */
   @property({ type: Number })
   columns = 4
 
   /**
-   * How many rows that will be displayed at max (default 5)
+   * How many rows that will be displayed at max (default 3)
    */
   @property({ type: Number })
   rows = 3
