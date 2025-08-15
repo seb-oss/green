@@ -22,6 +22,10 @@ const style = css`
       flex-grow: 1;
       width: 100%;
       padding: 1ch;
+
+      &.small {
+        border-spacing: var(--gds-sys-space-2xs) var(--gds-sys-space-m);
+      }
     }
 
     thead {
@@ -38,20 +42,15 @@ const style = css`
 
     tbody {
       td {
-        //padding: 0 12px;
-        //padding: 0;
         position: relative;
-        //height: var(--gds-sys-space-3xl);
-        height: var(--gds-sys-space-2xl);
-        //width: var(--gds-sys-space-3xl);
         width: var(--gds-sys-space-5xl);
+        height: var(--gds-sys-space-2xl);
         box-sizing: border-box;
         text-align: center;
         user-select: none;
         border-width: var(--gds-sys-space-3xs);
         border-style: solid;
         border-color: transparent;
-        //border-radius: var(--gds-sys-space-2xs);
         border-radius: var(--gds-sys-space-max);
         transition: background 0.2s;
         outline-style: solid;
@@ -99,12 +98,10 @@ const style = css`
         }
 
         &[aria-selected='false']:active:not(.disabled) {
-          //scale: 0.96;
           background: #dbdbdb; //-14%
         }
 
         &[aria-selected='true']:active:not(.disabled) {
-          //scale: 0.96;
           background-color: color-mix(
             in srgb,
             var(--gds-sys-color-l2-background-tertiary),
@@ -118,7 +115,7 @@ const style = css`
         }
 
         &.small {
-          width: var(--gds-sys-space-xl);
+          width: var(--gds-sys-space-3xl);
           height: var(--gds-sys-space-xl);
           font-size: var(--gds-sys-text-size-detail-s);
           line-height: var(--gds-sys-text-line-height-detail-s);

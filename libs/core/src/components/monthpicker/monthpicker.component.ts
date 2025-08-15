@@ -188,7 +188,13 @@ export class GdsMonthPicker extends GdsElement {
     const currentYear = new Date().getFullYear()
     const currentMonth = new Date().getMonth()
 
-    return html` <table role="grid" aria-label="${ifDefined(this.label)}">
+    return html` <table
+      role="grid"
+      class="${classMap({
+        small: this.size == 'small',
+      })}"
+      aria-label="${ifDefined(this.label)}"
+    >
       <tbody role="rowgroup">
         ${Array.from({ length: this.rows }).map(
           (_, rowIdx) => html`
