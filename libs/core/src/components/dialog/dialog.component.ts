@@ -68,16 +68,10 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   variant: 'default' | 'slide-out' = 'default'
 
   /**
-   * The dialog's size.
+   * The dialog's placement.
    */
   @property()
-  size: 's' | 'm' | 'l' = 'm'
-
-  /**
-   * The dialog's position.
-   */
-  @property()
-  position: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
+  placement: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
 
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
@@ -121,8 +115,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
             @close=${this.#handleNativeClose}
             class=${classMap({
               [this.variant]: true,
-              [`size-${this.size}`]: true,
-              [`position-${this.position}`]: true,
+              [`placement-${this.placement}`]: true,
             })}
             aria-describedby="heading"
           >

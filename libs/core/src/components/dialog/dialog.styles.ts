@@ -5,6 +5,8 @@ const style = css`
   @layer base {
     :host {
       display: contents;
+
+      --_margin: var(--gds-sys-space-l);
     }
 
     dialog {
@@ -14,9 +16,10 @@ const style = css`
       padding: 0;
       border-width: 0;
       overflow: visible;
-      max-width: 100vw;
+      max-width: calc(100vw - var(--_margin));
       max-height: 100vh;
       display: flex;
+      width: 400px;
 
       @starting-style {
         opacity: 0;
@@ -37,44 +40,34 @@ const style = css`
       flex-grow: 1;
     }
 
-    dialog.default.size-s {
-      max-width: 300px;
-    }
-
-    dialog.default.size-m {
-      max-width: 400px;
-    }
-
-    dialog.default.size-l {
-      max-width: 700px;
-    }
-
-    dialog.default.position-initial {
+    dialog.default.placement-initial {
       margin: auto;
+      --_margin: 0px;
     }
 
-    dialog.default.position-top {
+    dialog.default.placement-top {
       margin: var(--gds-sys-space-l) auto auto;
     }
 
-    dialog.default.position-bottom {
+    dialog.default.placement-bottom {
       margin: auto auto var(--gds-sys-space-l) auto;
     }
 
-    dialog.default.position-left {
+    dialog.default.placement-left {
       margin: auto var(--gds-sys-space-l) auto auto;
     }
-    dialog.default.position-right {
+    dialog.default.placement-right {
       margin: auto auto auto var(--gds-sys-space-l);
     }
 
     dialog.slide-out {
       --_in: var(--gds-sys-space-m);
+      --_margin: var(--gds-sys-space-l);
 
       height: auto;
 
-      &.position-initial,
-      &.position-right {
+      &.placement-initial,
+      &.placement-right {
         inset: var(--_in);
 
         @media (min-width: 648px) {
@@ -87,7 +80,7 @@ const style = css`
         }
       }
 
-      &.position-left {
+      &.placement-left {
         @starting-style {
           transform: translateX(calc(-1 * var(--gds-sys-space-6xl)));
         }
@@ -99,35 +92,18 @@ const style = css`
         }
       }
 
-      &.position-top {
+      &.placement-top {
         @starting-style {
           transform: translateY(calc(-1 * var(--gds-sys-space-6xl)));
         }
         inset: var(--_in) var(--_in) auto var(--_in);
       }
 
-      &.position-bottom {
+      &.placement-bottom {
         @starting-style {
           transform: translateY(calc(var(--gds-sys-space-6xl)));
         }
         inset: auto var(--_in) var(--_in) var(--_in);
-      }
-
-      @media (min-width: 648px) {
-        &.position-initial,
-        &.position-left,
-        &.position-right {
-          &.size-s {
-            max-width: 320px;
-          }
-          ,
-          &.size-m {
-            max-width: 600px;
-          }
-          &.size-l {
-            max-width: 800px;
-          }
-        }
       }
     }
 
