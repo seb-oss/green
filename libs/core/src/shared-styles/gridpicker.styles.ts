@@ -59,6 +59,14 @@ const style = css`
         outline-width: 0px;
         outline-offset: var(--gds-sys-space-3xs);
 
+        &short {
+          width: var(--gds-sys-space-4xl);
+        }
+
+        &long {
+          width: var(--gds-sys-space-6xl);
+        }
+
         &:not(.disabled):hover,
         &[aria-selected='true'] {
           cursor: pointer;

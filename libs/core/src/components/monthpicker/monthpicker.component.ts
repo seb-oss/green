@@ -213,6 +213,8 @@ export class GdsMonthPicker extends GdsElement {
                       html`<td
                         class="${classMap({
                           small: this.size == 'small',
+                          short: this.monthNumber,
+                          long: this.longMonthText,
                           today:
                             !this.noCurrentMonth &&
                             currentYear == this.focusedYear &&
