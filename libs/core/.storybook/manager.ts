@@ -32,6 +32,7 @@ const betaItems = {
   Link: true,
   Mask: true,
   Media: true,
+  Monthpicker: true,
   Radio: true,
   'Rich Text': true,
   Select: true,
@@ -43,6 +44,7 @@ const betaItems = {
   Textarea: true,
   Theme: true,
   Video: true,
+  Yearpicker: true,
 }
 
 addons.setConfig({
