@@ -134,8 +134,8 @@ export class GdsMonthPicker extends GdsElement {
   /**
    * If displaying just first 3 characters of the month
    */
-  @property({ type: Boolean, attribute: 'short-month-text' })
-  shortMonthText = false
+  @property({ type: Boolean, attribute: 'long-month-text' })
+  longMonthText = false
 
   /**
    * Sets the size of the grid. Defaults to "large".
@@ -245,7 +245,7 @@ export class GdsMonthPicker extends GdsElement {
   #getMonthText(index: number) {
     if (this.monthNumber) return index + 1
     const month = months[index]
-    if (this.shortMonthText) return month.substring(0, 3)
+    if (!this.longMonthText) return month.substring(0, 3)
     return month
   }
 
