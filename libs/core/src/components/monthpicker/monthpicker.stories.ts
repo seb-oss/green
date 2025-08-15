@@ -88,6 +88,26 @@ export const MonthNumber: Story = {
   render: (args) => html` <gds-monthpicker month-number></gds-monthpicker> `,
 }
 
+// /**
+//  * Use the `small` attribute to use a smaller and condenced styling.
+//  */
+// export const SmallShort: Story = {
+//   ...DefaultParams,
+//   render: (args) => html`
+//     <gds-monthpicker month-number size="small"></gds-monthpicker>
+//   `,
+// }
+
+// /**
+//  * Use the `small` attribute to use a smaller and condenced styling.
+//  */
+// export const SmallLong: Story = {
+//   ...DefaultParams,
+//   render: (args) => html`
+//     <gds-monthpicker long-month-text size="small"></gds-monthpicker>
+//   `,
+// }
+
 /**
  * Use `min` and `max` attributes to limit the months you can choose from.
  * The rest is greyed out. Remember that by default it uses the current year.
