@@ -75,6 +75,18 @@ export class GdsMonthPicker extends GdsElement {
   hideExtraneousMonths = false
 
   /**
+   * How many columns that will be displayed (default 5)
+   */
+  @property({ type: Number })
+  columns = 4
+
+  /**
+   * How many rows that will be displayed at max (default 5)
+   */
+  @property({ type: Number })
+  rows = 3
+
+  /**
    * Whether to hide current month visuals. If true the month right now will not have the outlined ring around it.
    */
   @property({ type: Boolean, attribute: 'no-current-month' })
@@ -178,13 +190,16 @@ export class GdsMonthPicker extends GdsElement {
 
     return html` <table role="grid" aria-label="${ifDefined(this.label)}">
       <tbody role="rowgroup">
-        ${Array.from({ length: 4 }).map(
+        ${Array.from({ length: this.rows }).map(
           (_, rowIdx) => html`
             <tr role="row">
               ${months
-                .slice(rowIdx * 3, rowIdx * 3 + 3)
+                .slice(
+                  rowIdx * this.columns,
+                  rowIdx * this.columns + this.columns,
+                )
                 .map((month, colIdx) => {
-                  const index = rowIdx * 3 + colIdx
+                  const index = rowIdx * this.columns + colIdx
                   if (index >= months.length) return html`<td inert></td>`
                   const cmonth = new Date(this.focusedYear, index, 1)
                   const isOutsideMinMax =
