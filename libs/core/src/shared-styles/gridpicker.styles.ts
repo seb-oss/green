@@ -17,7 +17,8 @@ const style = css`
     }
 
     :host table {
-      border-spacing: var(--gds-sys-space-2xs);
+      //border-spacing: var(--gds-sys-space-2xs);
+      border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
       flex-grow: 1;
       width: 100%;
       padding: 1ch;
@@ -37,17 +38,21 @@ const style = css`
 
     tbody {
       td {
-        padding: 0 12px;
+        //padding: 0 12px;
+        //padding: 0;
         position: relative;
-        height: var(--gds-sys-space-3xl);
-        width: var(--gds-sys-space-3xl);
+        //height: var(--gds-sys-space-3xl);
+        height: var(--gds-sys-space-2xl);
+        //width: var(--gds-sys-space-3xl);
+        width: var(--gds-sys-space-5xl);
         box-sizing: border-box;
         text-align: center;
         user-select: none;
         border-width: var(--gds-sys-space-3xs);
         border-style: solid;
         border-color: transparent;
-        border-radius: var(--gds-sys-space-2xs);
+        //border-radius: var(--gds-sys-space-2xs);
+        border-radius: var(--gds-sys-space-max);
         transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
@@ -56,9 +61,24 @@ const style = css`
 
         &:not(.disabled):hover,
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l2-background-tertiary);
           cursor: pointer;
+        }
+
+        &[aria-selected='true'] {
+          background: var(--gds-sys-color-l2-background-tertiary);
           color: var(--gds-sys-color-l2-content-tertiary);
+        }
+
+        &:not(.disabled):hover {
+          background: var(--gds-sys-color-l2-background-primary);
+        }
+
+        &[aria-selected='true']:not(.disabled):hover {
+          background-color: color-mix(
+            in srgb,
+            var(--gds-sys-color-l2-background-tertiary),
+            var(--gds-sys-color-l3-states-dark-hover)
+          );
         }
 
         &.today {
@@ -70,8 +90,18 @@ const style = css`
           cursor: not-allowed;
         }
 
-        &:active:not(.disabled) {
-          scale: 0.96;
+        &[aria-selected='false']:active:not(.disabled) {
+          //scale: 0.96;
+          background: #dbdbdb; //-14%
+        }
+
+        &[aria-selected='true']:active:not(.disabled) {
+          //scale: 0.96;
+          background-color: color-mix(
+            in srgb,
+            var(--gds-sys-color-l2-background-tertiary),
+            var(--gds-sys-color-l3-states-dark-pressed)
+          );
         }
 
         &:focus-visible {
