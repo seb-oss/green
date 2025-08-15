@@ -59,11 +59,11 @@ const style = css`
         outline-width: 0px;
         outline-offset: var(--gds-sys-space-3xs);
 
-        &short {
+        &.short {
           width: var(--gds-sys-space-4xl);
         }
 
-        &long {
+        &.long {
           width: var(--gds-sys-space-6xl);
         }
 
