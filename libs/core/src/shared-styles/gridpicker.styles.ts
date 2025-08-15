@@ -17,7 +17,6 @@ const style = css`
     }
 
     :host table {
-      //border-spacing: var(--gds-sys-space-2xs);
       border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
       flex-grow: 1;
       width: 100%;
@@ -63,7 +62,7 @@ const style = css`
         }
 
         &.long {
-          width: var(--gds-sys-space-6xl);
+          width: var(--gds-sys-space-7xl);
         }
 
         &:not(.disabled):hover,
@@ -119,6 +118,14 @@ const style = css`
           height: var(--gds-sys-space-xl);
           font-size: var(--gds-sys-text-size-detail-s);
           line-height: var(--gds-sys-text-line-height-detail-s);
+
+          &.short {
+            width: var(--gds-sys-space-2xl);
+          }
+
+          &.long {
+            width: var(--gds-sys-space-6xl);
+          }
         }
       }
     }
