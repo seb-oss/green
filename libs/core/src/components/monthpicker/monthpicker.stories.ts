@@ -71,26 +71,12 @@ export const Small: Story = {
 }
 
 /**
- * Use the `short-month-text` attribute to only disply first
- * three characters of the month.
+ * Use the `long-month-text` attribute to disply
+ * the full name of the month.
  */
-export const Short: Story = {
+export const Long: Story = {
   ...DefaultParams,
-  render: (args) => html`
-    <gds-monthpicker short-month-text></gds-monthpicker>
-  `,
-}
-
-/**
- * Use both `small` and `short-month-text` attributes to get
- * the smallest version.
- */
-export const ShortAndSmall: Story = {
-  ...DefaultParams,
-  name: 'Short and small',
-  render: (args) => html`
-    <gds-monthpicker size="small" short-month-text></gds-monthpicker>
-  `,
+  render: (args) => html` <gds-monthpicker long-month-text></gds-monthpicker> `,
 }
 
 /**
