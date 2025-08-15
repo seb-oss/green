@@ -2,7 +2,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { notFound, usePathname } from 'next/navigation'
+import { notFound, usePathname, useRouter } from 'next/navigation'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -28,6 +28,7 @@ export function ComponentLayoutClient({
   children,
   slug,
 }: ComponentLayoutClientProps) {
+  const router = useRouter()
   const [overrideTheme, setOverrideTheme] = useState<'light' | 'dark' | null>(
     null,
   )
@@ -272,7 +273,11 @@ export function ComponentLayoutClient({
             )}
 
             {isLayoutComponent && section === 'overview' && (
-              <Core.GdsAlert variant="information" buttonLabel="Learn more">
+              <Core.GdsAlert
+                variant="information"
+                buttonLabel="Learn more"
+                onClick={() => router.push('/foundation/layout')}
+              >
                 <Core.GdsText font="body-regular-m">
                   <Core.GdsText
                     font="body-book-m"

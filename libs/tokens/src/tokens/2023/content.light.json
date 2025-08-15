@@ -13,7 +13,7 @@
           "$value": "{ref.color.white}"
         },
         "04": {
-          "$value": "{ref.color.neutral.13}"
+          "$value": "{ref.color.grey.13}"
         },
         "inversed": {
           "$value": "{ref.color.white}"

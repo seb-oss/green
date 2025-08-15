@@ -45,28 +45,31 @@ export default function Footer() {
           >
             Cookie consent
           </Link>
-
-          <Core.GdsFlex display="flex; s{none}">
-            <Link
-              component="button"
-              href="/settings"
-              rank="tertiary"
-              size="small"
-            >
-              <Icon name="IconSettingsGear" />
-            </Link>
-          </Core.GdsFlex>
-          <Core.GdsFlex display="none; s{flex}">
-            <Link
-              component="button"
-              href="/settings"
-              rank="tertiary"
-              size="small"
-            >
-              <Icon name="IconSettingsGear" slot="lead" />
-              <span data-fade>Settings</span>
-            </Link>
-          </Core.GdsFlex>
+          {false && (
+            <>
+              <Core.GdsFlex display="flex; s{none}">
+                <Link
+                  component="button"
+                  href="/settings"
+                  rank="tertiary"
+                  size="small"
+                >
+                  <Icon name="IconSettingsGear" />
+                </Link>
+              </Core.GdsFlex>
+              <Core.GdsFlex display="none; s{flex}">
+                <Link
+                  component="button"
+                  href="/settings"
+                  rank="tertiary"
+                  size="small"
+                >
+                  <Icon name="IconSettingsGear" slot="lead" />
+                  <span data-fade>Settings</span>
+                </Link>
+              </Core.GdsFlex>
+            </>
+          )}
         </GdsFlex>
       </GdsFlex>
     </GdsFlex>

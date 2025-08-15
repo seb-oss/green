@@ -67,7 +67,7 @@ export default function Card({
           <Core.GdsCard
             key={title}
             border-radius="m"
-            padding={snippet ? '2xs' : 'l'}
+            padding={snippet ? '0' : 'l'}
             gap="s"
             width="100%"
             min-width="100%"
@@ -75,6 +75,8 @@ export default function Card({
             position="relative"
             className="no-pointer"
             z-index="0"
+            tabIndex={-1}
+            inert
           >
             {children
               ? children
@@ -96,7 +98,7 @@ export default function Card({
           </Core.GdsCard>
           <Core.GdsFlex
             flex-direction="column"
-            gap="xs"
+            gap="0"
             padding-inline="m"
             padding-block="s"
             flex="1"
@@ -118,15 +120,15 @@ export default function Card({
             </Core.GdsFlex>
 
             {summary && (
-              <Core.GdsText color="02" font="preamble-xs" lines={2}>
+              <Core.GdsText color="02" font="preamble-xs" lines="2">
                 {summary}
               </Core.GdsText>
             )}
-            <Core.IconArrowRight size="s" slot="trail" />
+            {/* <Core.IconArrowRight size="s" slot="trail" /> */}
           </Core.GdsFlex>
         </Core.GdsFlex>
       </Link>
-      {isHovered && (
+      {false && isHovered && (
         <Core.GdsFlex
           justify-content="space-between"
           align-items="center"

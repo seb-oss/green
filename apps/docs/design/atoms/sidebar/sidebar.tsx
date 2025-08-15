@@ -52,7 +52,8 @@ const CollapsibleSection = ({
         justify-content="flex-start"
         size="medium"
         align-items="center"
-        data-animation="scroll"
+        // data-animation="scroll"
+        scroll={false}
         width="100%"
       >
         {icon && <Icon name={icon} slot="lead" />}
@@ -136,7 +137,7 @@ export default function Sidebar() {
               size="medium"
               justify-content="center"
               flex="1"
-              data-animation="scroll"
+              // data-animation="scroll"
             >
               {link.icon && (
                 <Icon key={isOpen + '' + link.icon} name={link.icon} />
@@ -235,18 +236,6 @@ export default function Sidebar() {
                   </Link>
                 ))}
               </Core.GdsFlex>
-              <div
-                style={{
-                  position: 'absolute',
-                  bottom: '0',
-                  left: 0,
-                  right: 0,
-                  pointerEvents: 'none',
-                  height: '24px',
-                  background:
-                    'linear-gradient(0deg, var(--gds-sys-color-l1-01), transparent)',
-                }}
-              ></div>
             </Core.GdsFlex>
           </CollapsibleSection>
         )
@@ -282,6 +271,7 @@ export default function Sidebar() {
   return (
     <Core.GdsCard
       variant="secondary"
+      background="none"
       border-radius="0"
       justify-content="flex-start"
       align-items={'flex-start'}
