@@ -267,12 +267,12 @@ describe('<gds-monthpicker>', () => {
       ).to.contain('11')
     })
 
-    it('should show short name', async () => {
+    it('should show long name', async () => {
       const el = await fixture<GdsMonthpicker>(
         html`<gds-monthpicker
           .min=${new Date('2024-01-01')}
           .max=${new Date('2024-12-31')}
-          short-month-text
+          long-month-text
         ></gds-monthpicker>`,
       )
 
@@ -281,7 +281,7 @@ describe('<gds-monthpicker>', () => {
 
       expect(
         el.shadowRoot?.querySelector('#monthCell-1')?.textContent?.trim(),
-      ).to.equal('Feb')
+      ).to.equal('February')
     })
 
     it('should not render extraneous months with hide-extraneous-months', async () => {
