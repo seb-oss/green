@@ -106,6 +106,7 @@ function formatGdsIconName(name: string): string {
 }
 export function DeprecatedIcons() {
   const [query, setQuery] = useState('')
+  const [selectedSize, setSelectedSize] = useState<'s' | 'm' | 'l'>('l')
 
   const filteredIcons = useMemo(() => {
     if (!query.trim()) return iconMappings
@@ -158,99 +159,106 @@ export function DeprecatedIcons() {
         >
           <Core.IconMagnifyingGlass slot="lead" />
         </Core.GdsInput>
-        <Core.GdsFlex align-items="center" gap="xs">
-          <Core.GdsFlex align-items="center" gap="xs" flex="1" padding="0 xs">
-            <Core.GdsDiv
-              display="flex"
-              background={'negative-01'}
-              min-width="20px"
-              max-width="20px"
-              min-height="20px"
-              max-height="20px"
-              border-radius="max"
-              justify-content="center"
+        {!query && (
+          <Core.GdsFlex align-items="center" gap="xs">
+            <Core.GdsFlex align-items="center" gap="xs" flex="1" padding="0 xs">
+              <Core.GdsDiv
+                display="flex"
+                background={'negative-01'}
+                min-width="20px"
+                max-width="20px"
+                min-height="20px"
+                max-height="20px"
+                border-radius="max"
+                justify-content="center"
+                align-items="center"
+                margin="3xs 0 0 0"
+                color="negative"
+              >
+                <Core.IconCrossLarge size="s" color="negative-01" />
+              </Core.GdsDiv>
+              Old
+            </Core.GdsFlex>
+            <Core.GdsFlex
               align-items="center"
-              margin="3xs 0 0 0"
-              color="negative"
-            >
-              <Core.IconCrossLarge size="s" color="negative-01" />
-            </Core.GdsDiv>
-            Old
-          </Core.GdsFlex>
-          <Core.GdsFlex
-            align-items="center"
-            justify-content="center"
-            width="80px"
-          ></Core.GdsFlex>
-          <Core.GdsFlex align-items="center" gap="xs" flex="1" padding="0 xs">
-            <Core.GdsDiv
-              display="flex"
-              background={'positive-01'}
-              min-width="20px"
-              max-width="20px"
-              min-height="20px"
-              max-height="20px"
-              border-radius="max"
               justify-content="center"
-              align-items="center"
-              margin="3xs 0 0 0"
-              color="positive"
-            >
-              <Core.IconCheckmark size="s" color="positive-01" />
-            </Core.GdsDiv>
-            New
+              width="80px"
+            ></Core.GdsFlex>
+            <Core.GdsFlex align-items="center" gap="xs" flex="1" padding="0 xs">
+              <Core.GdsDiv
+                display="flex"
+                background={'positive-01'}
+                min-width="20px"
+                max-width="20px"
+                min-height="20px"
+                max-height="20px"
+                border-radius="max"
+                justify-content="center"
+                align-items="center"
+                margin="3xs 0 0 0"
+                color="positive"
+              >
+                <Core.IconCheckmark size="s" color="positive-01" />
+              </Core.GdsDiv>
+              New
+            </Core.GdsFlex>
           </Core.GdsFlex>
-        </Core.GdsFlex>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/regular.min.css"
-        />
+        )}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
-        {filteredIcons.length > 0 ? (
-          <Core.GdsFlex gap="l" align-items="center" flex-direction="column">
-            {filteredIcons.map((icon) => (
-              <Core.GdsFlex key={icon.old} gap="m" min-width="100%">
-                <Core.GdsFlex align-items="center" gap="s" flex="1">
-                  <Core.GdsCard variant="negative" padding="m">
-                    <i
-                      className={`fa-solid fa-${formatFaIconName(icon.old)}`}
-                      style={{
-                        fontSize: '16px',
-                      }}
-                    ></i>
-                  </Core.GdsCard>
-                  <Core.GdsText>{icon.old}</Core.GdsText>
+
+        <Core.GdsCard variant="secondary">
+          {filteredIcons.length > 0 ? (
+            <Core.GdsFlex gap="l" align-items="center" flex-direction="column">
+              {filteredIcons.map((icon) => (
+                <Core.GdsFlex key={icon.old} gap="m" min-width="100%">
+                  <Core.GdsFlex align-items="center" gap="s" flex="1">
+                    <Core.GdsCard
+                      variant="negative"
+                      width="28px"
+                      height="28px"
+                      justify-content="center"
+                      align-items="center"
+                    >
+                      <i
+                        className={`fa-solid fa-${formatFaIconName(icon.old)}`}
+                        style={{
+                          fontSize: '14px',
+                        }}
+                      ></i>
+                    </Core.GdsCard>
+                    <Core.GdsText>{icon.old}</Core.GdsText>
+                  </Core.GdsFlex>
+                  <Core.GdsFlex
+                    align-items="center"
+                    justify-content="center"
+                    width="80px"
+                  >
+                    <Core.IconArrowRight />
+                  </Core.GdsFlex>
+                  <Core.GdsFlex align-items="center" gap="s" flex="1">
+                    <Core.GdsCard
+                      variant="positive"
+                      width="28px"
+                      height="28px"
+                      justify-content="center"
+                      align-items="center"
+                    >
+                      <Icon name={formatGdsIconName(icon.new)} size="m" />
+                    </Core.GdsCard>
+                    <Core.GdsText>{icon.new}</Core.GdsText>
+                  </Core.GdsFlex>
                 </Core.GdsFlex>
-                <Core.GdsFlex
-                  align-items="center"
-                  justify-content="center"
-                  width="80px"
-                >
-                  <Core.IconArrowRight />
-                </Core.GdsFlex>
-                <Core.GdsFlex align-items="center" gap="s" flex="1">
-                  <Core.GdsCard variant="positive" padding="m">
-                    <Icon name={formatGdsIconName(icon.new)} size="m" />
-                  </Core.GdsCard>
-                  <Core.GdsText>{icon.new}</Core.GdsText>
-                </Core.GdsFlex>
-              </Core.GdsFlex>
-            ))}
-          </Core.GdsFlex>
-        ) : (
-          <Core.GdsCard
-            align-items="center"
-            justify-content="center"
-            width="100%"
-          >
+              ))}
+            </Core.GdsFlex>
+          ) : (
             <Core.GdsText color="secondary">
               No icons found matching <strong>{query}</strong>
             </Core.GdsText>
-          </Core.GdsCard>
-        )}
+          )}
+        </Core.GdsCard>
       </Core.GdsFlex>
     </Core.GdsFlex>
   )
