@@ -11,6 +11,8 @@ import { useContentContext } from '../../../settings/content'
 
 import './command.css'
 
+type FilterType = 'all' | 'component' | 'page' | 'template'
+
 interface SearchResult {
   title: string
   href: string
@@ -28,6 +30,7 @@ export default function Command() {
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all')
 
   const searchResults = useMemo(() => {
     const results: SearchResult[] = []
@@ -37,12 +40,13 @@ export default function Command() {
       sort: (a, b) => a.title.localeCompare(b.title),
     }).forEach((component) => {
       if (
-        !query ||
-        component.title.toLowerCase().includes(query.toLowerCase()) ||
-        component.summary?.toLowerCase().includes(query.toLowerCase()) ||
-        component.category?.some((cat) =>
-          cat.toLowerCase().includes(query.toLowerCase()),
-        )
+        (activeFilter === 'all' || activeFilter === 'component') &&
+        (!query ||
+          component.title.toLowerCase().includes(query.toLowerCase()) ||
+          component.summary?.toLowerCase().includes(query.toLowerCase()) ||
+          component.category?.some((cat) =>
+            cat.toLowerCase().includes(query.toLowerCase()),
+          ))
       ) {
         results.push({
           title: component.title,
@@ -60,9 +64,10 @@ export default function Command() {
       sort: (a, b) => a.title.localeCompare(b.title),
     }).forEach((page) => {
       if (
-        !query ||
-        page.title.toLowerCase().includes(query.toLowerCase()) ||
-        page.summary?.toLowerCase().includes(query.toLowerCase())
+        (activeFilter === 'all' || activeFilter === 'page') &&
+        (!query ||
+          page.title.toLowerCase().includes(query.toLowerCase()) ||
+          page.summary?.toLowerCase().includes(query.toLowerCase()))
       ) {
         results.push({
           title: page.title,
@@ -78,8 +83,8 @@ export default function Command() {
       sort: (a, b) => a.title.localeCompare(b.title),
     }).forEach((template) => {
       if (
-        !query ||
-        template.title.toLowerCase().includes(query.toLowerCase())
+        (activeFilter === 'all' || activeFilter === 'template') &&
+        (!query || template.title.toLowerCase().includes(query.toLowerCase()))
       ) {
         results.push({
           title: template.title,
@@ -90,7 +95,7 @@ export default function Command() {
     })
 
     return results
-  }, [query, ContentActions])
+  }, [query, ContentActions, activeFilter])
 
   const handleClosePanel = () => {
     SettingsActions.toggle('UI.Panel.All')
@@ -98,6 +103,11 @@ export default function Command() {
 
   const handleToggleCommand = () => {
     SettingsActions.toggle('UI.Panel.Command')
+  }
+
+  const handleFilterChange = (filter: FilterType) => {
+    setActiveFilter(filter)
+    setSelectedIndex(0) // Reset selection when filter changes
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -133,7 +143,7 @@ export default function Command() {
 
       setSelectedIndex(0)
       setQuery('')
-
+      setActiveFilter('all')
       return () => clearTimeout(timeoutId)
     }
   }, [isOpen])
@@ -185,11 +195,29 @@ export default function Command() {
 
             <Core.GdsFlex align-items="center" justify-content="space-between">
               <Core.GdsFilterChips>
-                <Core.GdsFilterChip size="small">All</Core.GdsFilterChip>
-                <Core.GdsFilterChip size="small">Components</Core.GdsFilterChip>
-                <Core.GdsFilterChip size="small">Pages</Core.GdsFilterChip>
+                <Core.GdsFilterChip
+                  size="small"
+                  selected={activeFilter === 'all'}
+                  onClick={() => handleFilterChange('all')}
+                >
+                  All
+                </Core.GdsFilterChip>
+                <Core.GdsFilterChip
+                  size="small"
+                  selected={activeFilter === 'component'}
+                  onClick={() => handleFilterChange('component')}
+                >
+                  Components
+                </Core.GdsFilterChip>
+                <Core.GdsFilterChip
+                  size="small"
+                  selected={activeFilter === 'page'}
+                  onClick={() => handleFilterChange('page')}
+                >
+                  Pages
+                </Core.GdsFilterChip>
               </Core.GdsFilterChips>
-              <Core.GdsText color="secondary" font-size="body-s">
+              <Core.GdsText color="secondary" font="body-s">
                 {query
                   ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
                   : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
@@ -226,10 +254,14 @@ export default function Command() {
                       gap="s"
                       align-items="center"
                     >
-                      <Core.GdsText font-weight="book">
+                      <Core.GdsText font-weight="book" font="heading-xs">
                         {result.title}
                       </Core.GdsText>
-                      <Core.GdsFlex gap="xs" align-items="center">
+                      <Core.GdsFlex
+                        gap="xs"
+                        align-items="center"
+                        display="none"
+                      >
                         {result.beta && (
                           <Core.GdsBadge variant="notice" size="small">
                             BETA
@@ -251,7 +283,7 @@ export default function Command() {
                       </Core.GdsFlex>
                     </Core.GdsFlex>
                     {result.summary && (
-                      <Core.GdsText font-size="body-s" color="secondary">
+                      <Core.GdsText font-size="body-s">
                         {result.summary}
                       </Core.GdsText>
                     )}
