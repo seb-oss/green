@@ -18,10 +18,13 @@
   outline-offset: calc(var(--gds-sys-space-3xs) * -1);
   outline-style: solid;
   outline-width: var(--gds-sys-space-3xs);
+  transition: all 240ms;
 
   &:hover,
-  &:focus-visible {
-    background-color: var(--gds-sys-color-l3-03);
+  &:focus,
+  &.selected {
+    background-color: var(--gds-sys-color-l1-inversed);
+    color: var(--gds-sys-color-content-03);
   }
 
   &:focus {

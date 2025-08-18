@@ -167,7 +167,7 @@ export default function Command() {
             gap="m"
             height="100%"
             background="primary"
-            padding="s"
+            padding="0"
           >
             <Core.GdsInput
               ref={inputRef}
