@@ -12,11 +12,12 @@ export function Topbar() {
         justify-content="center"
         inset="0 0 auto"
         z-index="1000"
-        style={{ background: 'var(--gds-sys-color-l1-01)' }}
+        level="1"
+        background="01"
       >
-        <a href="/">
+        <Link href="/">
           <Core.IconBrandSeb size="l"></Core.IconBrandSeb>
-        </a>
+        </Link>
       </Core.GdsFlex>
     </header>
   )
