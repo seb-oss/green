@@ -2,4 +2,6 @@
 '@sebgroup/green-core': patch
 ---
 
-New component - month picker
+New components:
+Monthpicker
+Yearpicker
