@@ -1,0 +1,34 @@
+.search-result {
+  display: flex;
+  flex-direction: column;
+  padding: var(--gds-sys-space-s);
+  border-radius: var(--gds-sys-radius-s);
+}
+
+.search-result:hover {
+  background-color: color-mix(
+    in srgb,
+    transparent,
+    var(--gds-sys-color-state-neutral-03)
+  );
+}
+
+.search-card {
+  outline-color: transparent;
+  outline-offset: calc(var(--gds-sys-space-3xs) * -1);
+  outline-style: solid;
+  outline-width: var(--gds-sys-space-3xs);
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--gds-sys-color-l3-03);
+  }
+
+  &:focus {
+    outline-color: var(--gds-sys-color-content-01);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
+  }
+}
