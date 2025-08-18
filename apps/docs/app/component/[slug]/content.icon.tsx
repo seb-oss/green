@@ -48,7 +48,7 @@ const fuseOptions = {
 export function IconContent({ component }: IconContentProps) {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedSize, setSelectedSize] = useState<IconSize>('m')
+  const [selectedSize, setSelectedSize] = useState<IconSize>('l')
   const [isSolid, setIsSolid] = useState(false)
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [selectedIcon, setSelectedIcon] = useState<IconData | null>(null)
@@ -348,7 +348,8 @@ export function IconContent({ component }: IconContentProps) {
 
                 <Core.GdsText
                   tag="small"
-                  color="secondary"
+                  color="02"
+                  font="detail-book-s"
                   text-align={view === 'grid' ? 'center' : 'left'}
                 >
                   {icon.displayName}

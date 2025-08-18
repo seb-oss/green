@@ -16,6 +16,7 @@ export {
   LAYOUT_DIMENSIONS,
 } from './config'
 
+export { LayoutEditorial } from './editorial'
 export { Root } from './root/root'
 export { Page } from './page/page'
 export { Home } from './home/home'

@@ -4,15 +4,10 @@
 import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 
+import { GdsTheme } from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../hooks'
 
 import type { ColorScheme } from './types'
-
-// Dynamically import GdsTheme with no SSR
-const DynamicGdsTheme = dynamic(
-  () => import('@sebgroup/green-core/react').then((mod) => mod.GdsTheme),
-  { ssr: false },
-)
 
 const THEME_STYLESHEET = 'theme-stylesheet'
 const styleSheetMap = new WeakMap<CSSStyleSheet, string>()
@@ -42,11 +37,13 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
 
+      console.log(prefersDark)
+
       const updateColorScheme = (scheme: ColorScheme) => {
         const colorSchemeValue = {
           dark: 'only dark',
           light: 'only light',
-          system: 'light dark',
+          auto: 'light dark',
         }[scheme]
 
         sheet.replaceSync(`
@@ -60,8 +57,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       updateColorScheme(colorScheme)
 
       const handleSystemChange = () => {
-        if (colorScheme === 'system') {
-          updateColorScheme('system')
+        if (colorScheme === 'auto') {
+          updateColorScheme('auto')
         }
       }
 
@@ -82,8 +79,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <DynamicGdsTheme color-scheme={colorScheme} designVersion="2023">
+    <GdsTheme color-scheme={colorScheme} designVersion="2023">
       {children}
-    </DynamicGdsTheme>
+    </GdsTheme>
   )
 }

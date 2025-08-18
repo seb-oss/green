@@ -10,6 +10,7 @@ interface CustomLinkProps {
   isExternal?: boolean
   children: React.ReactNode
   component?: 'button' | 'link' | 'menu'
+  target?: string
   [key: string]: any
 }
 

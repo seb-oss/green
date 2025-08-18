@@ -5,15 +5,18 @@ import { Link } from '../link/link'
 
 export function Topbar() {
   return (
-    <header>
+    <header style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
       <Core.GdsFlex
-        padding="2xl m m m"
+        padding="l m"
         align-content="center"
         justify-content="center"
+        inset="0 0 auto"
+        z-index="1000"
+        style={{ background: 'var(--gds-sys-color-l1-01)' }}
       >
-        <Link href="/">
+        <a href="/">
           <Core.IconBrandSeb size="l"></Core.IconBrandSeb>
-        </Link>
+        </a>
       </Core.GdsFlex>
     </header>
   )

@@ -31,7 +31,7 @@ export default function Settings() {
     const target = e.target as HTMLInputElement
     const value = target.value as ColorScheme
 
-    if (['dark', 'light', 'system'].includes(value)) {
+    if (['dark', 'light', 'auto'].includes(value)) {
       actions.setSettings((prev) => ({
         ...prev,
         UI: {
@@ -49,7 +49,7 @@ export default function Settings() {
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
-          <IconHomeOpen slot="lead" />
+          <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
         <GdsText>Settings</GdsText>
@@ -80,7 +80,7 @@ export default function Settings() {
           <GdsRadio value="dark" label="Dark">
             Dark
           </GdsRadio>
-          <GdsRadio value="system" label="System">
+          <GdsRadio value="auto" label="Auto / System">
             System
           </GdsRadio>
         </GdsRadioGroup>

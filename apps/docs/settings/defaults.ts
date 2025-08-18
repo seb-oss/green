@@ -11,7 +11,7 @@ export const EXCLUSIVE_PANELS = [
 ] as const
 
 const DEFAULT_THEME: Theme = {
-  ColorScheme: 'light' satisfies ColorScheme,
+  ColorScheme: 'auto' satisfies ColorScheme,
 }
 
 const DEFAULT_PANEL: Panel = {

@@ -1,9 +1,28 @@
 .sidebar {
   box-sizing: border-box;
+  background: var(--gds-sys-color-l1-01);
   overflow-x: hidden;
   overflow-y: auto;
+  display: flex;
   transition: width var(--gds-sys-motion-duration-fast)
     cubic-bezier(var(--gds-sys-motion-easing-ease-out));
+  flex-direction: column;
+  border-radius: 0;
+  gap: var(--gds-sys-space-xl);
+  height: 100vh;
+  position: relative;
+  inset: 0px auto auto auto;
+  position: sticky;
+  padding: var(--gds-sys-space-m) var(--gds-sys-space-xs) var(--gds-sys-space-l)
+    var(--gds-sys-space-l);
+
+  width: 80px;
+
+  &.open {
+    width: 280px;
+    padding: var(--gds-sys-space-m) var(--gds-sys-space-xs)
+      var(--gds-sys-space-l) var(--gds-sys-space-s);
+  }
 
   [data-backdrop] {
     backdrop-filter: blur(10px);
@@ -19,7 +38,7 @@
   }
 
   [data-sub-item] {
-    padding-left: 42px;
+    padding-left: var(--gds-sys-space-2xl);
   }
 }
 

@@ -23,9 +23,8 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
       <GdsFlex
         min-height="100vh"
         flex-direction="column; s{row}"
-        color="primary"
+        style={{ background: 'var(--gds-sys-color-l1-01)' }}
         width="100%"
-        background="secondary"
         gap="0"
       >
         <Sidebar />

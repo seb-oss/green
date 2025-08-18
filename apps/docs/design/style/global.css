@@ -13,8 +13,6 @@ body {
   scroll-behavior: smooth;
   scroll-padding-top: 160px;
   overscroll-behavior: contain;
-  color-scheme: light;
-  background-color: var(--gds-sys-color-l1-01);
   font-size: 14px;
   font-weight: 300;
   line-height: 1;
