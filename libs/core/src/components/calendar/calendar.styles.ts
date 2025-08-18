@@ -5,8 +5,7 @@ const style = css`
 
   @layer base {
     .controls {
-      box-shadow: 0 var(--gds-sys-space-4xs) 0 0
-        var(--gds-sys-color-l2-border-primary);
+      //box-shadow: 0 var(--gds-sys-space-4xs) 0 0 var(--gds-sys-color-l2-border-primary);
       padding-bottom: 0.25rem;
       margin: 0.5rem 1rem -0.5rem 1rem;
     }
@@ -28,8 +27,7 @@ const style = css`
     }
 
     thead {
-      box-shadow: 0 var(--gds-sys-space-4xs) 0 0
-        var(--gds-sys-color-l2-border-primary);
+      //box-shadow: 0 var(--gds-sys-space-4xs) 0 0 var(--gds-sys-color-l2-border-primary);
       th {
         height: var(--gds-sys-space-2xl);
         width: var(--gds-sys-space-2xl);
@@ -132,11 +130,23 @@ const style = css`
       .indicator-dot {
         display: flex;
         position: absolute;
-        width: var(--gds-sys-space-2xs);
-        height: var(--gds-sys-space-2xs);
+        width: var(--gds-sys-space-xs);
+        height: var(--gds-sys-space-xs);
         border-radius: var(--gds-sys-space-max);
         background-color: var(--_color, currentColor);
-        inset: var(--gds-sys-space-2xs) var(--gds-sys-space-2xs) auto auto;
+        inset: calc(100% + var(--gds-sys-space-xs))
+          calc(50% - var(--gds-sys-space-xs) / 2) auto auto;
+      }
+
+      .indicator-icon {
+        display: flex;
+        position: absolute;
+        width: var(--gds-sys-space-l);
+        height: var(--gds-sys-space-m);
+        border-radius: var(--gds-sys-space-max);
+        background-color: #e6f3ff; /*L3/notice-02*/
+        inset: calc(100% + var(--gds-sys-space-2xs))
+          calc(50% - var(--gds-sys-space-l) / 2) auto auto;
       }
     }
   }

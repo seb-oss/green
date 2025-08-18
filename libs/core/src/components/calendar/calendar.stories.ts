@@ -70,7 +70,7 @@ export const Minimal: Story = {
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div style="width: 320px">
+    <div style="width: 640px">
       <gds-flex gap="m">
         <gds-dropdown id="year" label="Year" size="small">
           <gds-option value="2025">2025</gds-option>
@@ -114,6 +114,11 @@ export const Usage: Story = {
           indicator: 'dot',
         },
         {
+          date: new Date('2025-08-28'),
+          color: 'var(--intent-danger-background)',
+          indicator: 'icon',
+        },
+        {
           date: new Date('2025-08-29'),
           disabled: true,
         },
@@ -125,6 +130,11 @@ export const Usage: Story = {
           date: new Date('2025-09-17'),
           color: 'var(--intent-danger-background)',
           indicator: 'dot',
+        },
+        {
+          date: new Date('2025-09-18'),
+          color: 'var(--intent-danger-background)',
+          indicator: 'icon',
         },
         {
           date: new Date('2025-09-19'),

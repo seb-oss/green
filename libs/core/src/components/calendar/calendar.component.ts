@@ -38,9 +38,10 @@ export type CustomizedDate = {
   color?: string
 
   /**
-   * The type of indicator.
+   * The type of indicator. Common types: `icon` (default)
+   * or `dot` (old default).
    */
-  indicator?: 'dot'
+  indicator?: 'icon'
 
   /**
    * Whether the date is disabled or not.
