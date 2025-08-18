@@ -134,7 +134,7 @@ const style = css`
         width: var(--gds-sys-space-xs);
         height: var(--gds-sys-space-xs);
         border-radius: var(--gds-sys-space-max);
-        background-color: var(--_color, currentColor);
+        background-color: var(--gds-sys-color-l2-background-tertiary);
         inset: calc(100% + var(--gds-sys-space-xs))
           calc(50% - var(--gds-sys-space-xs) / 2) auto auto;
       }
