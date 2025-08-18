@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-Filter chip sizes prop added
+**Filter Chips:** Add `size` prop
