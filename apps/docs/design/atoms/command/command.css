@@ -21,10 +21,10 @@
   transition: all 240ms;
 
   &:hover,
-  &:focus,
   &.selected {
     background-color: var(--gds-sys-color-l1-inversed);
     color: var(--gds-sys-color-content-03);
+    cursor: pointer;
   }
 
   &:focus {
