@@ -1,5 +1,46 @@
 # Changelog
 
+## 6.1.2
+
+### Patch Changes
+
+- 46ca765: **V-Angular:** Dropdown - Added "close on scroll" functionality
+
+## 6.1.1
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+- 921ee52: V-Angular: Updated Table component with extra label
+- b388664: **Dropdown:** Add optional generic type for `DropdownOption`
+
+## 6.1.0
+
+### Minor Changes
+
+- 79efa1b: **V-Angular:** Changed nggv-toast to full width on smallest breakpoint
+
+### Patch Changes
+
+- 8023ea6: **V-Angular:** Improve dropdown dynamic positioning (top/bottom) and height calculation
+- 4f381d4: **V-Angular:** listWidth property to fold out component - added danger button to dialog component
+- 791dd16: V-Angular: Updated Table component with expanded rows by default attribute
+- Updated dependencies [72be834]
+  - @sebgroup/green-core@1.88.2
+
+## 6.0.5
+
+### Patch Changes
+
+- c031e4a: **V-Angular Input/Dropdown/Textarea**: Fixed styling for small variants; halved spacing underneath dropdown and textarea, and corrected height difference (compared to dropdown) for input field.
+
+## 6.0.4
+
+### Patch Changes
+
+- 86ea764: Fold out: close fold out on tab
+- 803b81c: Changed height of nggv-dateinput wrapper to match nggv-input wrapper
+
 ## 6.0.3
 
 ### Patch Changes

@@ -9,11 +9,16 @@
   >
     <ng-container *ngTemplateOutlet="text ? withText : default"> </ng-container>
   </button>
-
   <div
     #childrenContainer
     class="nggv-fold-out__popover"
-    [ngClass]="{ 'flex-right': alignOptions === 'right' }"
+    [ngClass]="{
+      'flex-right': alignOptions === 'right',
+      'list-width-fit-content': listWidth === 'fit-content',
+      'list-width-max-content': listWidth === 'max-content',
+      'list-width-min-content': listWidth === 'min-content',
+      'list-width-auto': listWidth === 'auto',
+    }"
     [class.nggv-fold-out__popover-expanded]="shown"
     (click)="toggleVisibility()"
   >

@@ -237,7 +237,11 @@ export class GdsCalendar extends GdsElement {
                   ${when(
                     this.showWeekNumbers,
                     () =>
-                      html`<td class="week-number" scope="row">
+                      html`<td
+                        class="week-number disabled"
+                        disabled
+                        scope="row"
+                      >
                         ${getWeek(week.days[0])}
                       </td>`,
                   )}

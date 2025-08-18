@@ -1,5 +1,58 @@
 # Changelog
 
+## 1.89.0
+
+### Minor Changes
+
+- d0e44a1: **Alert:** Auto dismiss on viewport only
+
+## 1.88.7
+
+### Patch Changes
+
+- 0b04ce9: **Datepicker:** Increase height of date part spinbuttons for larger click target
+- fc0da67: **Form Control:** Fix broken import
+- c132aa8: **Datepicker:** Fix icon line weight for size=small
+
+## 1.88.6
+
+### Patch Changes
+
+- 101fed7: **iOS/Safari 15:** Fix issues releated to form controls and styling. Fixes #2225
+
+## 1.88.5
+
+### Patch Changes
+
+- b14325b: **Select:** Fix error message rendering issue
+- ab1cb3b: **GlobalStylesRegistry:** Rename singleton so it doesn't interfere with older unscoped versions
+
+## 1.88.4
+
+### Patch Changes
+
+- a57784e: **Dropdown:** Fix issue in Safari, where option keyboard focus would not render unless also hovered by mouse
+- 518586e: **GlobalStyles:** Make `GlobalStylesRegistry` version scoped
+
+## 1.88.3
+
+### Patch Changes
+
+- e480d9f: **Checkbox:** Fix interaction issue with NVDA. Fixes #2199
+- 1331668: **Checkbox:** Add missing dependency of `IconMinusSmall`
+
+## 1.88.2
+
+### Patch Changes
+
+- 72be834: **Dropdown:** Fix issue with updating error message via prop
+
+## 1.88.1
+
+### Patch Changes
+
+- 0edf04f: **Calendar:** Add disabled class on weeknumber
+
 ## 1.88.0
 
 ### Minor Changes

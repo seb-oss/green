@@ -26,6 +26,7 @@
   [disabled]="disabled"
   [(ngModel)]="value"
   [ngStyle]="style"
+  [attr.aria-valuenow]="value"
   (blur)="onBlur()"
   (input)="handleChange()"
 />

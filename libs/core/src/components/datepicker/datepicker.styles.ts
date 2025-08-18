@@ -30,7 +30,6 @@ export const styles = css`
       text-align: center;
       height: 100%;
       box-sizing: border-box;
-      /* border-radius: var(--gds-sys-space-2xs); */
       outline: none;
       padding-block: var(--gds-sys-space-3xs);
       text-transform: uppercase;
