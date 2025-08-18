@@ -273,6 +273,24 @@ await Promise.all(
               },
             ],
           },
+          jvm: {
+            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/jvm/`,
+            sourcePath: swiftSourcePath,
+            transformGroup: 'compose',
+            files: [
+              {
+                destination: 'GdsColor.kt',
+                format: 'jvm/enum-class',
+                filter: 'is-color-no-ref',
+                options: {
+                  objectType: 'enum',
+                  className: 'GdsColor',
+                  import: [],
+                  packageName: ['se.seb.gds'],
+                },
+              },
+            ],
+          },
         },
       }
 
