@@ -73,9 +73,9 @@ export const Usage: Story = {
     <div style="width: 320px">
       <gds-flex gap="m">
         <gds-dropdown id="year" label="Year" size="small">
-          <gds-option value="2024">2024</gds-option>
           <gds-option value="2025">2025</gds-option>
           <gds-option value="2026">2026</gds-option>
+          <gds-option value="2027">2027</gds-option>
         </gds-dropdown>
         <gds-dropdown id="month" max-height="200" label="Month" size="small">
           <gds-option value="0">Jan</gds-option>
@@ -105,16 +105,29 @@ export const Usage: Story = {
 
       var customizedDates = [
         {
-          date: new Date('2024-06-04'),
+          date: new Date('2025-08-25'),
           color: 'var(--intent-danger-background)',
         },
         {
-          date: new Date('2024-06-06'),
+          date: new Date('2025-08-27'),
           color: 'var(--intent-danger-background)',
           indicator: 'dot',
         },
         {
-          date: new Date('2024-07-06'),
+          date: new Date('2025-08-29'),
+          disabled: true,
+        },
+        {
+          date: new Date('2025-09-15'),
+          color: 'var(--intent-danger-background)',
+        },
+        {
+          date: new Date('2025-09-17'),
+          color: 'var(--intent-danger-background)',
+          indicator: 'dot',
+        },
+        {
+          date: new Date('2025-09-19'),
           disabled: true,
         },
       ]
