@@ -111,7 +111,6 @@ export default function Command() {
     setSelectedIndex(0) // Reset selection when filter changes
   }
 
-  // Add a handler for dialog-level keyboard events
   const handleDialogKeyDown = (e: KeyboardEvent) => {
     const numResults = searchResults.length
     if (numResults === 0) return
@@ -152,48 +151,6 @@ export default function Command() {
 
       case 'Escape':
         e.preventDefault()
-        handleClosePanel()
-        break
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    const numResults = searchResults.length
-    if (numResults === 0) return
-
-    switch (e.key) {
-      case 'ArrowDown':
-      case 'ArrowRight':
-        e.preventDefault()
-        setSelectedIndex((prev) => {
-          const nextIndex = prev < numResults - 1 ? prev + 1 : prev
-          const element = document.querySelector(`[data-index="${nextIndex}"]`)
-          element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-          return nextIndex
-        })
-        break
-
-      case 'ArrowUp':
-      case 'ArrowLeft':
-        e.preventDefault()
-        setSelectedIndex((prev) => {
-          const nextIndex = prev > 0 ? prev - 1 : prev
-          // Scroll the selected item into view
-          const element = document.querySelector(`[data-index="${nextIndex}"]`)
-          element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-          return nextIndex
-        })
-        break
-
-      case 'Enter':
-        e.preventDefault()
-        if (searchResults[selectedIndex]) {
-          router.push(searchResults[selectedIndex].href)
-          handleClosePanel()
-        }
-        break
-
-      case 'Escape':
         handleClosePanel()
         break
     }
