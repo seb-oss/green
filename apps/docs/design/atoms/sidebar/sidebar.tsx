@@ -1,5 +1,6 @@
 'use client'
 
+import { create } from 'domain'
 import React, { useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
@@ -11,6 +12,12 @@ import { Link } from '../link/link'
 
 import './sidebar.css'
 
+const createHref = (slug: string) => {
+  if (slug.startsWith('https')) return slug
+
+  return slug.startsWith('/') ? slug : `/${slug}`
+}
+
 interface CollapsibleSectionProps {
   title: string
   icon?: string
@@ -20,14 +27,6 @@ interface CollapsibleSectionProps {
   children?: React.ReactNode
   isActive: boolean
 }
-
-const foundationPages = [
-  { title: 'Design tokens', slug: 'design-tokens' },
-  { title: 'Colours', slug: 'colours' },
-  { title: 'Typography', slug: 'typography' },
-  { title: 'Spacing', slug: 'spacing' },
-  { title: 'Layout', slug: 'layout' },
-]
 
 const CollapsibleSection = ({
   title,
@@ -47,7 +46,7 @@ const CollapsibleSection = ({
       <Link
         key={href + isActive}
         component="button"
-        href={href}
+        href={createHref(href)}
         rank={isActive ? 'secondary' : 'tertiary'}
         justify-content="flex-start"
         size="medium"
@@ -71,7 +70,7 @@ export default function Sidebar() {
   const { isLoaded, actions } = useContentContext()
   const { actions: SettingsActions } = useSettingsContext()
 
-  const sectionsWithSubItems = ['components', 'templates', 'foundation']
+  const sectionsWithSubItems = ['components']
 
   const [openSections, setOpenSections] = useState<Record<string, boolean>>(
     () => {
@@ -116,6 +115,7 @@ export default function Sidebar() {
     if (!isLoaded) return null
 
     const NAV = actions.getNavigation('main')
+
     return (
       <Core.GdsFlex
         flex-direction="column"
@@ -130,9 +130,13 @@ export default function Sidebar() {
             <Link
               key={link.slug + isOpen}
               component="button"
-              href={link.slug.startsWith('/') ? link.slug : `/${link.slug}`}
+              href={createHref(link.slug)}
               rank={
-                pathName.startsWith(`/${link.slug}`) ? 'secondary' : 'tertiary'
+                pathName.startsWith(`/${link.slug}`) ||
+                (pathName.split('/').includes('component') &&
+                  link.slug === 'components')
+                  ? 'secondary'
+                  : 'tertiary'
               }
               size="medium"
               justify-content="center"
@@ -149,7 +153,6 @@ export default function Sidebar() {
     )
   }, [isLoaded, actions, pathName])
 
-  // Separate rendering for expanded state
   const renderExpandedNav = useMemo(() => {
     if (!isLoaded) return null
 
@@ -160,9 +163,12 @@ export default function Sidebar() {
     return NAV?.links.map((link) => {
       if (link.slug === 'templates') return
 
-      const href = link.slug.startsWith('/') ? link.slug : `/${link.slug}`
+      const href = createHref(link.slug)
 
-      if (sectionsWithSubItems.includes(link.slug)) {
+      if (
+        sectionsWithSubItems.includes(link.slug) ||
+        actions.getNavigation(link.slug)
+      ) {
         let subItems: any[] = []
 
         if (link.slug === 'components') {
@@ -176,11 +182,11 @@ export default function Sidebar() {
             title: t.title,
             href: `/template/${t.slug}`,
           }))
-        } else if (link.slug === 'foundation') {
-          subItems = foundationPages.map((p) => ({
-            title: p.title,
-            href: `/foundation/${p.slug}`,
-          }))
+        } else {
+          subItems = actions.getNavigation(link.slug)?.links.map((item) => ({
+            title: item.title,
+            href: createHref(item.slug),
+          })) as any[]
         }
 
         const isActive =
@@ -194,14 +200,14 @@ export default function Sidebar() {
             key={href}
             title={link.title}
             icon={link.icon}
-            href={href}
+            href={createHref(href)}
             isOpen={openSections[link.slug]}
             onToggle={() => toggleSection(link.slug)}
             isActive={isActive}
           >
             <Core.GdsFlex
               position="relative"
-              style={{ maxHeight: 'calc(100vh - 490px)' }}
+              style={{ maxHeight: 'calc(100vh - 700px)' }}
             >
               <Core.GdsFlex
                 flex-direction="column"
@@ -209,6 +215,7 @@ export default function Sidebar() {
                 overflow="hidden auto"
                 position="relative"
                 width="100%"
+                padding="2xs"
               >
                 {subItems.map((item) => (
                   <Link
@@ -245,13 +252,14 @@ export default function Sidebar() {
         <Link
           key={href}
           component="button"
-          href={href}
+          href={createHref(href)}
           rank={pathName === href ? 'secondary' : 'tertiary'}
           justify-content="flex-start"
           size="medium"
           align-items="center"
           data-animation="scroll"
           width="100%"
+          target={href.startsWith('http') ? '_blank' : undefined}
         >
           {link.icon && <Icon name={link.icon} slot="lead" />}
           <span data-fade>{link.title}</span>
@@ -264,58 +272,42 @@ export default function Sidebar() {
     SettingsActions.toggle('UI.Panel.Sidebar')
   }
 
-  const handleMenuToggle = () => {
-    setMenuOpen((prev) => !prev)
+  const handleToggleSearch = () => {
+    SettingsActions.toggle('UI.Panel.Command')
   }
 
   return (
-    <Core.GdsCard
-      variant="secondary"
-      background="none"
-      border-radius="0"
-      justify-content="flex-start"
-      align-items={'flex-start'}
-      gap="xl"
-      className={_('sidebar', isOpen ? 'open' : 'closed')}
-      padding={isOpen ? 'xl xs l s' : 'xl xs l l'}
-      width={isOpen ? '100%; s{240px}' : '80px'}
-      height="max-content; s{100vh}"
-      position="relative; s{sticky}"
-      inset="0; s{0px auto auto auto}"
-      border-width={menuOpen ? '0 0 4xs 0' : '0'}
+    <div
+      className={`sidebar ${isOpen ? 'open' : 'closed'}`}
       role="navigation"
       aria-label="Main"
     >
       <Core.GdsFlex
-        display="flex; s{none}"
-        align-items="center"
-        justify-content="space-between"
-        padding="0 l"
-        flex="1"
+        key={isOpen ? 'top-sidebar-open' : 'top-sidebar-closed'}
+        justify-content={'flex-start'}
+        align-items="flex-start"
+        gap="l"
+        display={menuOpen ? 'none' : 'none; s{flex}'}
+        style={isOpen ? {} : { paddingLeft: '2px' }}
         width="100%"
+        bac
       >
-        <Link href="/">
-          <Core.GdsText
-            font-weight="book"
-            font-size="detail-m"
-            color="brand-01"
-          >
-            Green Design System
-          </Core.GdsText>
-        </Link>
-        <Link
-          component="button"
-          onClick={handleMenuToggle}
+        <Core.GdsButton
+          key={isOpen ? 'sidebar-open' : 'sidebar-closed'}
           rank="tertiary"
-          width="max-content"
-          size="medium"
+          justify-content={isOpen ? 'flex-start' : 'center'}
+          width={isOpen ? '100%' : 'max-content'}
+          onClick={handleToggleSearch}
         >
-          {menuOpen ? (
-            <Icon name="IconCrossLarge" />
+          {isOpen ? (
+            <>
+              <Icon name="IconMagnifyingGlass" slot="lead" />
+              Search
+            </>
           ) : (
-            <Icon name="IconBarsThree" />
+            <Icon name="IconMagnifyingGlass" />
           )}
-        </Link>
+        </Core.GdsButton>
       </Core.GdsFlex>
       <Core.GdsFlex
         flex-direction="column"
@@ -333,7 +325,6 @@ export default function Sidebar() {
         justify-content={'flex-start'}
         align-items="flex-start"
         gap="l"
-        margin="auto 0 0 0"
         display={menuOpen ? 'none' : 'none; s{flex}'}
         style={isOpen ? {} : { paddingLeft: '2px' }}
         width="100%"
@@ -354,6 +345,6 @@ export default function Sidebar() {
           )}
         </Core.GdsButton>
       </Core.GdsFlex>
-    </Core.GdsCard>
+    </div>
   )
 }
