@@ -203,7 +203,7 @@ export default function Command() {
           width="620px"
           min-width="620px"
           heading="Search"
-          min-block-size="80vh"
+          max-height="80vh"
           open
         >
           <Core.GdsFlex
@@ -212,6 +212,7 @@ export default function Command() {
             height="100%"
             background="primary"
             padding="0"
+            slot="dialog"
           >
             <Core.GdsInput
               ref={inputRef}
@@ -258,7 +259,12 @@ export default function Command() {
               </Core.GdsText>
             </Core.GdsFlex>
 
-            <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
+            <Core.GdsFlex
+              flex-direction="column"
+              gap="xs"
+              overflow="auto"
+              className="cmd-results"
+            >
               {searchResults.map((result, index) => (
                 <Core.GdsCard
                   key={result.href}

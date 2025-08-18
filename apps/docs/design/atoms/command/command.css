@@ -13,12 +13,25 @@
   );
 }
 
+.cmd-results {
+  transition: all 420ms;
+  transition-delay: 80ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 -10px;
+    visibility: hidden;
+  }
+}
+
 .search-card {
   outline-color: transparent;
   outline-offset: calc(var(--gds-sys-space-3xs) * -1);
   outline-style: solid;
   outline-width: var(--gds-sys-space-3xs);
-  transition: all 240ms;
+  transition:
+    background 240ms,
+    color 240ms;
 
   &:hover,
   &.selected {
