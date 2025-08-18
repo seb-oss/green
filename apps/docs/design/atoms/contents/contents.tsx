@@ -62,6 +62,10 @@ export function TableOfContents({
           id: 'search-icons',
           title: 'Search Icons',
         })
+        initialSections.push({
+          id: 'migration',
+          title: 'Migration',
+        })
       }
       if (component.compare && versus) {
         initialSections.push({

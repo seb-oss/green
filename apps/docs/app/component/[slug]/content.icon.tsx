@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
+import { DeprecatedIcons } from '../../../design/atoms/deprecated/deprecated'
 import { Icon } from '../../../hooks'
 
 import type {
@@ -205,7 +206,6 @@ export function IconContent({ component }: IconContentProps) {
 
   const handleClosePanel = () => {
     setSelectedIcon(null)
-    // Clear URL hash when closing the panel
     window.history.pushState({}, '', window.location.pathname)
   }
 
@@ -283,28 +283,26 @@ export function IconContent({ component }: IconContentProps) {
             </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </Core.GdsGrid>
-        {!search && false && (
-          <Core.GdsCard
+        {!search && (
+          <Core.GdsAlert
             variant="warning"
-            padding="s xs s m"
-            flex-direction="row"
-            gap="s"
-            justify-content="space-between"
-            align-items="center"
+            buttonLabel="Instruction"
+            onClick={() => {
+              const element = document.getElementById('migration')
+              if (element) {
+                const elementPosition = element.getBoundingClientRect().top
+                const offsetPosition =
+                  elementPosition + window.pageYOffset - 200
+
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth',
+                })
+              }
+            }}
           >
-            <Core.GdsFlex gap="s" align-items="center">
-              <Core.IconWarningSign size="m" />
-              <Core.GdsFlex flex-direction="column" gap="2xs">
-                <Core.GdsText font-size="detail-s" color="secondary">
-                  Font awesome migration
-                </Core.GdsText>
-              </Core.GdsFlex>
-            </Core.GdsFlex>
-            <Core.GdsButton size="small" rank="tertiary">
-              Instructions
-              <Core.IconArrowDown slot="trail" />
-            </Core.GdsButton>
-          </Core.GdsCard>
+            Font awesome migration
+          </Core.GdsAlert>
         )}
 
         <Core.GdsGrid columns={view === 'grid' ? '2; s{4}' : '1; s{3}'} gap="l">
@@ -358,6 +356,21 @@ export function IconContent({ component }: IconContentProps) {
             </Core.GdsCard>
           ))}
         </Core.GdsGrid>
+        <Core.GdsFlex
+          flex-direction="column"
+          id="migration"
+          gap="l"
+          margin="4xl 0 0 0"
+        >
+          <Core.GdsFlex flex-direction="column" gap="xs">
+            <Core.GdsText tag="h2">Migration</Core.GdsText>
+            <Core.GdsText tag="p">
+              Complete mapping of FontAwesome icons to their Green Design System
+              equivalents
+            </Core.GdsText>
+          </Core.GdsFlex>
+          <DeprecatedIcons />
+        </Core.GdsFlex>
       </Core.GdsFlex>
       {selectedIcon && (
         <>
@@ -445,17 +458,6 @@ export function IconContent({ component }: IconContentProps) {
                   />
                 </Core.GdsCard>
               </Core.GdsGrid>
-
-              {/* <Core.GdsFlex flex-direction="column" gap="m">
-                <Core.GdsText tag="h3" font-size="display-xs">
-                  Import
-                </Core.GdsText>
-                <Core.GdsCard variant="secondary" padding="s">
-                  <Core.GdsText font-family="mono">
-                    {selectedIcon.framework.react.import}
-                  </Core.GdsText>
-                </Core.GdsCard>
-              </Core.GdsFlex> */}
 
               <Core.GdsDivider opacity="0.2"></Core.GdsDivider>
 
