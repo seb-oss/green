@@ -1,6 +1,7 @@
 import { localized, msg } from '@lit/localize'
-import { property, query } from 'lit/decorators.js'
+import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -117,7 +118,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
               [this.variant]: true,
               [`placement-${this.placement}`]: true,
             })}
-            aria-describedby="heading"
+            aria-label=${ifDefined(this.heading)}
           >
             <gds-card
               class="card"
@@ -129,41 +130,43 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
               border-radius="s"
               min-height="min-content"
             >
-              <gds-flex
-                justify-content="space-between"
-                background-color="secondary"
-              >
-                <h2 id="heading">${this.heading}</h2>
-                <gds-button
-                  id="close-btn"
-                  rank="secondary"
-                  size="small"
-                  label=${msg('Close')}
-                  @click=${() => this.close('btn-close')}
-                  ><gds-icon-cross-small></gds-icon-cross-small
-                ></gds-button>
-              </gds-flex>
-              <gds-div id="content" flex="1">
-                <slot></slot>
-              </gds-div>
-              <gds-flex
-                class="footer"
-                justify-content="center"
-                gap="s"
-                padding="s 0 0 0"
-              >
-                <slot name="footer">
+              <slot name="dialog">
+                <gds-flex
+                  justify-content="space-between"
+                  background-color="secondary"
+                >
+                  <h2 id="heading">${this.heading}</h2>
                   <gds-button
-                    value="cancel"
-                    @click=${() => this.close('btn-cancel')}
+                    id="close-btn"
                     rank="secondary"
-                    >${msg('Cancel')}</gds-button
-                  >
-                  <gds-button value="ok" @click=${() => this.close('btn-ok')}
-                    >Ok</gds-button
-                  >
-                </slot>
-              </gds-flex>
+                    size="small"
+                    label=${msg('Close')}
+                    @click=${() => this.close('btn-close')}
+                    ><gds-icon-cross-small></gds-icon-cross-small
+                  ></gds-button>
+                </gds-flex>
+                <gds-div id="content" flex="1">
+                  <slot></slot>
+                </gds-div>
+                <gds-flex
+                  class="footer"
+                  justify-content="center"
+                  gap="s"
+                  padding="s 0 0 0"
+                >
+                  <slot name="footer">
+                    <gds-button
+                      value="cancel"
+                      @click=${() => this.close('btn-cancel')}
+                      rank="secondary"
+                      >${msg('Cancel')}</gds-button
+                    >
+                    <gds-button value="ok" @click=${() => this.close('btn-ok')}
+                      >Ok</gds-button
+                    >
+                  </slot>
+                </gds-flex>
+              </slot>
             </gds-card>
           </dialog>`,
       )}`

@@ -122,3 +122,30 @@ export const Events: Story = {
       >
     </gds-dialog>`,
 }
+
+/**
+ * You can customize the dialog completely by putting content in the `dialog` slot.
+ * This will replace the default content of the dialog, including the header and footer.
+ *
+ * When this slot is used, the footer slot will not be rendered, so you need to add a custom footer manually.
+ *
+ * **Important:** Make sure to still use the `heading` property, as it is used to give the dialog an accessible name.
+ */
+export const CustomDialog: Story = {
+  ...DefaultParams,
+  render: () =>
+    html`<gds-dialog
+      @gds-close=${console.log}
+      @gds-show=${console.log}
+      @gds-ui-state=${console.log}
+      heading="Dialog heading"
+      id="my-dialog-events"
+    >
+      <gds-button slot="trigger">Open dialog</gds-button>
+      This is the content of the dialog.
+      <div slot="dialog">
+        If you put stuff here, you can customize the entire dialog, including
+        header and footer.
+      </div>
+    </gds-dialog>`,
+}
