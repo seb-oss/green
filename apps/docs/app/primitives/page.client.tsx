@@ -18,9 +18,9 @@ import { Render } from '../../design/atoms/content/render'
 import { Link } from '../../design/atoms/link/link'
 import { useContentContext } from '../../settings/content'
 
-export function FoundationClient() {
+export function PrimitivesClient() {
   const { actions } = useContentContext()
-  const CONTENT = actions.getPage('foundation')
+  const CONTENT = actions.getPage('primitives')
 
   const imageProvider = {
     getImage: (slug: string, node: string) => {
@@ -35,7 +35,7 @@ export function FoundationClient() {
           <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
-        <GdsText>Foundation</GdsText>
+        <GdsText>Primitives</GdsText>
       </GdsBreadcrumbs>
       <GdsFlex flex-direction="column" gap="xl">
         <GdsFlex flex-direction="column" gap="s" text-align="center">
@@ -53,7 +53,7 @@ export function FoundationClient() {
         {CONTENT?.sections && (
           <Render
             content={CONTENT.sections}
-            slug="foundation"
+            slug="primitives"
             imageProvider={imageProvider}
           />
         )}

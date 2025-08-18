@@ -17,6 +17,8 @@ import { useContentContext } from '../../../settings/content'
 
 import './page.css'
 
+import { LayoutEditorial } from 'apps/docs/design/layout'
+
 type ColorOption = {
   name: string
   variants: {
@@ -77,7 +79,7 @@ const colorOptions: ColorOption[] = [
   },
 ]
 
-export function ColorsClient() {
+function ColorsContent() {
   const [selectedColor, setSelectedColor] = useState(colorOptions[0])
 
   const toolbarContent = (
@@ -304,37 +306,6 @@ export function ColorsClient() {
 
   return (
     <GdsFlex flex-direction="column" gap="2xl">
-      <GdsBreadcrumbs size="small">
-        <Link component="link" href="/">
-          <IconHomeOpen size="m" slot="lead" />
-          Home
-        </Link>
-        <Link component="link" href="/foundation">
-          <Core.IconBrandGreen size="m" slot="lead" />
-          Foundation
-        </Link>
-        <GdsText>Colours</GdsText>
-      </GdsBreadcrumbs>
-      <GdsFlex
-        flex-direction="column"
-        justify-content="center"
-        width="100%"
-        gap="s"
-      >
-        <GdsText tag="h1" text-align="center">
-          {CONTENT?.title}
-        </GdsText>
-        <GdsText
-          tag="p"
-          color="02"
-          font="preamble-l"
-          text-align="center"
-          max-width="100ch"
-          margin="auto"
-        >
-          {CONTENT?.summary}
-        </GdsText>
-      </GdsFlex>
       <Playground
         toolbar={toolbarContent}
         previewContent={previewContent}
@@ -349,5 +320,13 @@ export function ColorsClient() {
         />
       )}
     </GdsFlex>
+  )
+}
+
+export function ColorsClient() {
+  return (
+    <LayoutEditorial slug="primitives/colours">
+      <ColorsContent />
+    </LayoutEditorial>
   )
 }

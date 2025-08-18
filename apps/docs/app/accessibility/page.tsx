@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 
-import { A11yClient } from './page.client'
+import { AccessibilityClient } from './page.client'
 
 export const metadata: Metadata = {
   title: 'Accessibility — Green Design System',
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function A11y() {
-  return <A11yClient />
+  return <AccessibilityClient />
 }

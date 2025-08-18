@@ -25,11 +25,11 @@ export default function ConsentPage() {
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
-          <IconHomeOpen slot="lead" />
+          <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
         <Link component="link" href="/settings">
-          <IconSettingsGear slot="lead" />
+          <IconSettingsGear size="m" slot="lead" />
           Settings
         </Link>
         <GdsText>Consent</GdsText>

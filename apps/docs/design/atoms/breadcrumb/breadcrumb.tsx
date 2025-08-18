@@ -21,7 +21,7 @@ interface BreadcrumbsProps {
 
 const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
   <Link href={item.href!}>
-    {item.iconName && <Icon size="s" name={item.iconName} slot="lead" />}
+    {item.iconName && <Icon size="m" name={item.iconName} slot="lead" />}
     {item.label}
   </Link>
 )

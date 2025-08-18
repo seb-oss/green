@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { LayoutEditorial } from 'apps/docs/design/layout'
 
 import * as Core from '@sebgroup/green-core/react'
 import TypographyTokens from '../../../../../libs/tokens/src/tokens/2023/tokens.typography.json'
@@ -10,29 +11,10 @@ import Playground from '../../../design/atoms/playgroud/playground'
 import { useContentContext } from '../../../settings/content'
 
 function RenderTypographyTokens() {
-  return (
-    <Core.GdsCard flex-direction="column" gap="m">
-      <table>
-        {Object.entries(TypographyTokens).map(([key, value]) => (
-          <>
-            <td>
-              <Core.GdsText font={value.font} tag="span">
-                {key}
-              </Core.GdsText>
-            </td>
-            <td>
-              <Core.GdsText font={value.font} tag="span">
-                Sample text for {key}
-              </Core.GdsText>
-            </td>
-          </>
-        ))}
-      </table>
-    </Core.GdsCard>
-  )
+  return <Core.GdsCard flex-direction="column" gap="m"></Core.GdsCard>
 }
 
-export function TypographyClient() {
+function TypographyContent() {
   const [textConfig, setTextConfig] = useState({
     tag: 'h1',
     font: 'display-2xl',
@@ -233,7 +215,14 @@ export function TypographyClient() {
           imageProvider={imageProvider}
         />
       )}
-      <RenderTypographyTokens />
     </Core.GdsFlex>
+  )
+}
+
+export function TypographyClient() {
+  return (
+    <LayoutEditorial slug="primitives/typography">
+      <TypographyContent />
+    </LayoutEditorial>
   )
 }
