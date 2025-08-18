@@ -2,6 +2,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { Icon } from 'apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 
@@ -47,7 +48,7 @@ const iconMappings: IconMapping[] = [
   { old: 'heart', new: 'heart' },
   { old: 'home', new: 'home-open' },
   { old: 'info-circle', new: 'circle-info' },
-  { old: 'ink', new: 'chain-link' },
+  { old: 'link', new: 'chain-link' },
   { old: 'lock-alt', new: 'lock' },
   { old: 'long-arrow-down', new: 'arrow-down' },
   { old: 'long-arrow-left', new: 'arrow-left' },
@@ -90,6 +91,19 @@ function calculateScore(text: string, query: string): number {
   return normalizedText.includes(normalizedQuery) ? 1 : 0
 }
 
+function formatFaIconName(name: string): string {
+  return name.toLowerCase()
+}
+function formatGdsIconName(name: string): string {
+  // Convert kebab-case to PascalCase
+  return (
+    'Icon' +
+    name
+      .split('-')
+      .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+      .join('')
+  )
+}
 export function DeprecatedIcons() {
   const [query, setQuery] = useState('')
 
@@ -187,11 +201,29 @@ export function DeprecatedIcons() {
             New
           </Core.GdsFlex>
         </Core.GdsFlex>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/regular.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
         {filteredIcons.length > 0 ? (
           <Core.GdsFlex gap="l" align-items="center" flex-direction="column">
             {filteredIcons.map((icon) => (
               <Core.GdsFlex key={icon.old} gap="m" min-width="100%">
-                <Core.GdsCard flex="1">{icon.old}</Core.GdsCard>
+                <Core.GdsFlex align-items="center" gap="s" flex="1">
+                  <Core.GdsCard variant="negative" padding="m">
+                    <i
+                      className={`fa-solid fa-${formatFaIconName(icon.old)}`}
+                      style={{
+                        fontSize: '16px',
+                      }}
+                    ></i>
+                  </Core.GdsCard>
+                  <Core.GdsText>{icon.old}</Core.GdsText>
+                </Core.GdsFlex>
                 <Core.GdsFlex
                   align-items="center"
                   justify-content="center"
@@ -199,14 +231,25 @@ export function DeprecatedIcons() {
                 >
                   <Core.IconArrowRight />
                 </Core.GdsFlex>
-                <Core.GdsCard flex="1">{icon.new}</Core.GdsCard>
+                <Core.GdsFlex align-items="center" gap="s" flex="1">
+                  <Core.GdsCard variant="positive" padding="m">
+                    <Icon name={formatGdsIconName(icon.new)} size="m" />
+                  </Core.GdsCard>
+                  <Core.GdsText>{icon.new}</Core.GdsText>
+                </Core.GdsFlex>
               </Core.GdsFlex>
             ))}
           </Core.GdsFlex>
         ) : (
-          <Core.GdsText color="secondary">
-            No icons found matching <strong>{query}</strong>
-          </Core.GdsText>
+          <Core.GdsCard
+            align-items="center"
+            justify-content="center"
+            width="100%"
+          >
+            <Core.GdsText color="secondary">
+              No icons found matching <strong>{query}</strong>
+            </Core.GdsText>
+          </Core.GdsCard>
         )}
       </Core.GdsFlex>
     </Core.GdsFlex>
