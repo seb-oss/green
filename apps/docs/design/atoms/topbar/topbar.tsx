@@ -1,6 +1,7 @@
 'use client'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Link } from '../link/link'
 
 export function Topbar() {
   return (
