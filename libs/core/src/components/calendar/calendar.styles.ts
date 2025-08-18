@@ -40,7 +40,8 @@ const style = css`
     tbody {
       td {
         position: relative;
-        width: var(--gds-sys-space-5xl);
+        //width: var(--gds-sys-space-5xl);
+        width: var(--gds-sys-space-2xl);
         height: var(--gds-sys-space-2xl);
         box-sizing: border-box;
         text-align: center;

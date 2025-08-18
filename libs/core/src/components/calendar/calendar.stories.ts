@@ -70,7 +70,7 @@ export const Minimal: Story = {
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div style="width: 640px">
+    <div style="width: 362px">
       <gds-flex gap="m">
         <gds-dropdown id="year" label="Year" size="small">
           <gds-option value="2025">2025</gds-option>
