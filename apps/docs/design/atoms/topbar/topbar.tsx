@@ -6,7 +6,11 @@ import { Link } from '../link/link'
 export function Topbar() {
   return (
     <header>
-      <Core.GdsFlex padding="m" align-content="center" justify-content="center">
+      <Core.GdsFlex
+        padding="2xl m m m"
+        align-content="center"
+        justify-content="center"
+      >
         <Link href="/">
           <Core.IconBrandSeb size="l"></Core.IconBrandSeb>
         </Link>

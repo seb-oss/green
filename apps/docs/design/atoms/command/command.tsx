@@ -3,10 +3,13 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { _ } from 'apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
+
+import './command.css'
 
 interface SearchResult {
   title: string
@@ -163,9 +166,6 @@ export default function Command() {
             height="100%"
             background="primary"
             padding="s"
-            border-radius="s"
-            border-color="primary"
-            border-width="4xs"
           >
             <Core.GdsInput
               ref={inputRef}
@@ -181,12 +181,30 @@ export default function Command() {
               <Core.IconMagnifyingGlass slot="lead" />
             </Core.GdsInput>
 
+            <Core.GdsFlex align-items="center" justify-content="space-between">
+              <Core.GdsFilterChips>
+                <Core.GdsFilterChip size="small">All</Core.GdsFilterChip>
+                <Core.GdsFilterChip size="small">Components</Core.GdsFilterChip>
+                <Core.GdsFilterChip size="small">Pages</Core.GdsFilterChip>
+              </Core.GdsFilterChips>
+              <Core.GdsText color="secondary" font-size="body-s">
+                {query
+                  ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
+                  : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
+              </Core.GdsText>
+            </Core.GdsFlex>
+
             <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
               {searchResults.map((result, index) => (
                 <Core.GdsCard
                   key={result.href}
                   padding="s"
-                  variant={selectedIndex === index ? 'secondary' : 'primary'}
+                  // variant={selectedIndex === index ? 'tertiary' : 'primary'}
+                  // rank={selectedIndex === index ? 'secondary' : 'tertiary'}
+                  className={_(
+                    selectedIndex === index && 'selected',
+                    'search-card',
+                  )}
                   width="100%"
                   onClick={() => {
                     router.push(result.href)
@@ -216,13 +234,14 @@ export default function Command() {
                           </Core.GdsBadge>
                         )}
                         <Core.GdsBadge
-                          variant={
-                            result.type === 'component'
-                              ? 'primary'
-                              : result.type === 'template'
-                                ? 'notice'
-                                : 'secondary'
-                          }
+                          // rank="secondary"
+                          // variant={
+                          //   result.type === 'component'
+                          //     ? 'primary'
+                          //     : result.type === 'template'
+                          //       ? 'notice'
+                          //       : 'secondary'
+                          // }
                           size="small"
                         >
                           {result.type}
