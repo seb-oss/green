@@ -148,6 +148,11 @@ export default function Command() {
     }
   }, [isOpen])
 
+  const truncateSummary = (text: string, maxLength: number = 120) => {
+    if (text.length <= maxLength) return text
+    return text.slice(0, maxLength).trim() + '...'
+  }
+
   return (
     <React.Fragment>
       {false && (
@@ -284,7 +289,7 @@ export default function Command() {
                     </Core.GdsFlex>
                     {result.summary && (
                       <Core.GdsText font-size="body-s">
-                        {result.summary}
+                        {truncateSummary(result.summary)}
                       </Core.GdsText>
                     )}
                   </Core.GdsFlex>
