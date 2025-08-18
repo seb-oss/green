@@ -87,11 +87,12 @@ export default function Command() {
         (activeFilter === 'all' || activeFilter === 'template') &&
         (!query || template.title.toLowerCase().includes(query.toLowerCase()))
       ) {
-        results.push({
-          title: template.title,
-          href: `/template/${template.slug}`,
-          type: 'template',
-        })
+        // Disable for the moment
+        // results.push({
+        //   title: template.title,
+        //   href: `/template/${template.slug}`,
+        //   type: 'template',
+        // })
       }
     })
 
