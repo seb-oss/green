@@ -195,8 +195,8 @@ export default function Command() {
       {isOpen && (
         <Core.GdsDialog
           ref={dialogRef}
-          width="620px"
-          min-width="620px"
+          width="90%; m{620px}"
+          min-width="90%; m{620px}"
           heading="Search"
           height="60vh"
           max-height="60vh"
