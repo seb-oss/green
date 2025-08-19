@@ -33,10 +33,25 @@
     background 240ms,
     color 240ms;
 
-  &:hover,
   &.selected {
-    background-color: var(--gds-sys-color-l1-inversed);
-    color: var(--gds-sys-color-content-03);
+    background-color: var(--gds-sys-color-l3-03);
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-03),
+        var(--gds-sys-color-state-neutral-03)
+      );
+    }
+  }
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--gds-sys-color-l2-03),
+      var(--gds-sys-color-state-neutral-01)
+    );
+
     cursor: pointer;
   }
 

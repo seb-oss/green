@@ -99,8 +99,17 @@ export default function Command() {
     return results
   }, [query, ContentActions, activeFilter])
 
-  const handleClosePanel = () => {
-    SettingsActions.toggle('UI.Panel.All')
+  const handleClosePanel = (event: CustomEvent) => {
+    SettingsActions.setSettings((prev) => ({
+      ...prev,
+      UI: {
+        ...prev.UI,
+        Panel: {
+          ...prev.UI.Panel,
+          Command: false,
+        },
+      },
+    }))
   }
 
   const handleToggleCommand = () => {
@@ -183,33 +192,22 @@ export default function Command() {
 
   return (
     <React.Fragment>
-      {false && (
-        <Core.GdsFlex display="none; s{contents}">
-          <Core.GdsFab
-            inset="40px 40px auto auto"
-            rank="secondary"
-            size="small"
-            onClick={handleToggleCommand}
-          >
-            <Core.IconMagnifyingGlass></Core.IconMagnifyingGlass>
-          </Core.GdsFab>
-        </Core.GdsFlex>
-      )}
-
       {isOpen && (
         <Core.GdsDialog
           ref={dialogRef}
-          onGdsClose={handleClosePanel}
           width="620px"
           min-width="620px"
           heading="Search"
           height="60vh"
           max-height="60vh"
+          onGdsClose={(e: CustomEvent) => handleClosePanel(e)}
+          placement="top"
+          padding="xs"
           open
         >
           <Core.GdsFlex
             flex-direction="column"
-            gap="m"
+            gap="xs"
             height="100%"
             background="primary"
             padding="0"
@@ -232,7 +230,7 @@ export default function Command() {
             <Core.GdsFlex align-items="center" justify-content="space-between">
               <Core.GdsFilterChips>
                 <Core.GdsFilterChip
-                  size="small"
+                  size="s"
                   selected={activeFilter === 'all'}
                   onClick={() => handleFilterChange('all')}
                 >
@@ -253,7 +251,7 @@ export default function Command() {
                   Pages
                 </Core.GdsFilterChip>
               </Core.GdsFilterChips>
-              <Core.GdsText color="secondary" font="body-s">
+              <Core.GdsText color="secondary" font="body-s" color="02">
                 {query
                   ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
                   : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
@@ -326,7 +324,7 @@ export default function Command() {
                       </Core.GdsFlex>
                     </Core.GdsFlex>
                     {result.summary && (
-                      <Core.GdsText font-size="body-s">
+                      <Core.GdsText font-size="body-s" color="02">
                         {truncateSummary(result.summary)}
                       </Core.GdsText>
                     )}

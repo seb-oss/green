@@ -1,7 +1,5 @@
 'use client'
 
-import { unstable_ViewTransition as ViewTransition } from 'react'
-
 import { GdsFlex } from '@sebgroup/green-core/react'
 import Command from '../../atoms/command/command'
 import Footer from '../../atoms/footer/footer'

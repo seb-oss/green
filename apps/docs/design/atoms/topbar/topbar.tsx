@@ -23,7 +23,16 @@ export function Topbar() {
             <Core.GdsButton
               rank="tertiary"
               onClick={() => {
-                SettingsActions.toggle('UI.Panel.Command')
+                SettingsActions.setSettings((prev) => ({
+                  ...prev,
+                  UI: {
+                    ...prev.UI,
+                    Panel: {
+                      ...prev.UI.Panel,
+                      Command: !prev.UI.Panel.Command,
+                    },
+                  },
+                }))
               }}
             >
               <Core.IconMagnifyingGlass size="l" />
@@ -51,7 +60,16 @@ export function Topbar() {
           <Core.GdsButton
             rank="tertiary"
             onClick={() => {
-              SettingsActions.toggle('UI.Panel.Command')
+              SettingsActions.setSettings((prev) => ({
+                ...prev,
+                UI: {
+                  ...prev.UI,
+                  Panel: {
+                    ...prev.UI.Panel,
+                    Command: !prev.UI.Panel.Command,
+                  },
+                },
+              }))
             }}
           >
             <Core.IconMagnifyingGlass size="l" />

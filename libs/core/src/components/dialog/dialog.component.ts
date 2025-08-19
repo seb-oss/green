@@ -74,6 +74,12 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   @property()
   placement: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
 
+  /**
+   * The dialog's padding.
+   */
+  @property()
+  padding?: string = 'l'
+
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
 
@@ -125,7 +131,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
               display="flex"
               variant="secondary"
               box-shadow="xl"
-              padding="l"
+              padding=${ifDefined(this.padding)}
               gap="l"
               border-radius="s"
               min-height="min-content"

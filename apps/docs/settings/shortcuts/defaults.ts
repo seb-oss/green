@@ -38,7 +38,11 @@ export const DefaultShortcuts: ShortcutMap = {
     scope: ['global'],
     hint: true,
     allowInInput: true,
-    action: (ctx) => ctx.actions.toggle('UI.Panel.Command'),
+    action: (ctx) => {
+      console.log(ctx)
+
+      ctx.actions.toggle('UI.Panel.Command')
+    },
   },
   'UI.Panel.Shortcuts': {
     label: 'Command Panel',
@@ -61,6 +65,8 @@ export const DefaultShortcuts: ShortcutMap = {
     keys: ['escape'],
     scope: ['global'],
     action: (ctx) => {
+      console.log(ctx.settings.UI.Panel)
+
       ctx.actions.toggle('UI.Panel.All')
       ctx.actions.toast.add({
         title: 'Panels',

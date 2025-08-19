@@ -92,6 +92,7 @@ export default function ExpandedNav({
             <Core.GdsFlex
               position="relative"
               aria-hidden={isActive ? 'false' : 'true'}
+              overflow="hidden"
               style={
                 {
                   height: isActive ? 'auto' : '0',
@@ -107,6 +108,7 @@ export default function ExpandedNav({
                 position="relative"
                 width="100%"
                 padding="2xs"
+                height="max-content"
               >
                 {subItems.map((item) => (
                   <Link
