@@ -5,6 +5,7 @@ import cssShadows from './css-shadows.ts'
 import figmaJson from './figma-json.ts'
 import greenIosSwiftClassTree from './green-ios-swift-class-tree.ts'
 import greenIosSwiftPackage from './green-ios-swift-package.ts'
+import enumClass from './jvm-enum-class.ts'
 import scssMixin from './scss-mixin.ts'
 
 const formats = {
@@ -16,6 +17,7 @@ const formats = {
   'green/ios-swift-class-tree': greenIosSwiftClassTree,
   'compose/class': composeClass,
   'compose/color-scheme': composeColorScheme,
+  'jvm/enum-class': enumClass,
 }
 
 export default formats

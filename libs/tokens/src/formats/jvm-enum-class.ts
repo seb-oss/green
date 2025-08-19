@@ -1,6 +1,6 @@
 import { createPropertyFormatter, fileHeader } from 'style-dictionary/utils'
 
-import EnumClassTemplate from '../templates/jvm/class-enum.template.js'
+import EnumClassTemplate from '../templates/jvm/enum-class.template.js'
 
 const enumClass = {
   name: 'jvm/enum-class',
