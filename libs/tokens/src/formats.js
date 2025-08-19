@@ -13,6 +13,7 @@ import {
 
 import ComposeColorSchemeTemplate from './templates/compose/color-scheme.template.js'
 import ComposeClassTemplate from './templates/compose/data-class.template.js'
+import EnumClassTemplate from './templates/jvm/enum-class.template.js'
 import * as swift from './templates/ios/swift.tokens.js'
 
 /**
@@ -209,6 +210,25 @@ const formats = {
     name: 'compose/color-scheme',
     format: async ({ dictionary, options, file }) => {
       return ComposeColorSchemeTemplate({
+        allTokens: dictionary.allTokens,
+        formatProperty: createPropertyFormatter({
+          outputReferences: options.outputReferences,
+          dictionary,
+          formatting: {
+            prefix: '',
+            suffix: ',',
+            separator: ' =',
+          },
+        }),
+        options,
+        header: await fileHeader({ file }),
+      })
+    },
+  },
+  'jvm/enum-class': {
+    name: 'jvm/enum-class',
+    format: async ({ dictionary, options, file }) => {
+      return EnumClassTemplate({
         allTokens: dictionary.allTokens,
         formatProperty: createPropertyFormatter({
           outputReferences: options.outputReferences,
