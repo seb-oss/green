@@ -187,6 +187,7 @@ export interface PageSummary {
 export interface Page extends BaseContent {
   type: 'page'
   summary?: string
+  parent?: string
   headings: Heading[]
   showInMenu?: boolean
   menuOrder?: number
