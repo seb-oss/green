@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.89.0
+
+### Minor Changes
+
+- d0e44a1: **Alert:** Auto dismiss on viewport only
+
 ## 1.88.7
 
 ### Patch Changes
