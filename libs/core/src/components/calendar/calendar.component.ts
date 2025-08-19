@@ -161,7 +161,7 @@ export class GdsCalendar extends GdsElement {
   hideDayNames = false
 
   /**
-   * Whether to day names with 3 cxharacters instead of just the first.
+   * Whether to day names with 3 characters instead of just the first.
    */
   @property({ type: Boolean })
   longDayNames = false
