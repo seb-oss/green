@@ -2,4 +2,4 @@
 '@sebgroup/green-core': patch
 ---
 
-Calendar got new 23 style
+**Calendar:** Updated 23 style
