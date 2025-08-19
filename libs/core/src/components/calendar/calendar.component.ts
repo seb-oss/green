@@ -137,6 +137,12 @@ export class GdsCalendar extends GdsElement {
   }
 
   /**
+   * Sets the size of the grid. Defaults to "large".
+   */
+  @property({ reflect: true })
+  size: 'small' | 'large' = 'large'
+
+  /**
    * Whether to show week numbers or not.
    */
   @property({ type: Boolean })
@@ -217,7 +223,14 @@ export class GdsCalendar extends GdsElement {
   render() {
     const currentDate = new Date()
 
-    return html`<table role="grid" aria-label="${ifDefined(this.label)}">
+    return html`<table
+      role="grid"
+      aria-label="${ifDefined(this.label)}"
+      class="${classMap({
+        small: Boolean(this.size === 'small'),
+        indicators: Boolean(this.customizedDates),
+      })}"
+    >
       ${when(
         !this.hideDayNames,
         () =>
@@ -314,6 +327,7 @@ export class GdsCalendar extends GdsElement {
                               isDisabled ? undefined : 'gridcell',
                             )}"
                             class="${classMap({
+                              small: Boolean(this.size === 'small'),
                               'custom-date': Boolean(customization),
                               disabled: Boolean(isDisabled),
                               today: isSameDay(currentDate, day),
