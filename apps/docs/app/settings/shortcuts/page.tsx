@@ -15,7 +15,6 @@ import {
   IconSettingsGear,
 } from '@sebgroup/green-core/react'
 import { Link } from '../../../design/atoms/link/link'
-import { useSettingsContext } from '../../../settings/hooks'
 import { useShortcutInfo } from '../../../settings/shortcuts'
 import { SettingsNav } from '../nav'
 
@@ -56,7 +55,7 @@ export default function ShortcutsPage() {
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
-          <IconHomeOpen slot="lead" />
+          <IconHomeOpen slot="lead" size="m" />
           Home
         </Link>
         <Link component="link" href="/settings">

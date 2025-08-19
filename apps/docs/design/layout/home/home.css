@@ -1,5 +1,7 @@
-/* .layout {
+.layout {
   &.home {
-    display: contents;
+    .no-pointer {
+      pointer-events: none;
+    }
   }
-} */
+}

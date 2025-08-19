@@ -7,10 +7,10 @@ export function getNextColorScheme(current: ColorScheme): ColorScheme {
     case 'dark':
       return 'light'
     case 'light':
-      return 'system'
-    case 'system':
+      return 'auto'
+    case 'auto':
       return 'dark'
     default:
-      return 'dark'
+      return 'auto'
   }
 }

@@ -1,6 +1,8 @@
 import { Metadata } from 'next'
 import Script from 'next/script'
 
+import type { Viewport } from 'next'
+
 import { Root } from '../design/layout/root/root'
 import { SettingsProvider as App } from '../settings/provider'
 
@@ -9,8 +11,22 @@ export const metadata: Metadata = {
   description:
     'Green Design System is more than a polished user interface, its places the user at the very forefront of design, usability and accessibility.',
   manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: './favicon.ico', sizes: 'any' },
+      { url: './icons/icon-512x512.png', type: 'image/png', sizes: '512x512' },
+    ],
+    shortcut: ['/favicon.ico'],
+    apple: [
+      { url: './icons/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: './icons/icon-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+  },
+}
+
+export const viewport: Viewport = {
   themeColor: '#003824',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
+  // viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
 }
 
 export default function RootLayout({

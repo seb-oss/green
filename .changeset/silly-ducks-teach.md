@@ -2,4 +2,6 @@
 '@sebgroup/green-core': major
 ---
 
-Using new state color tokens and shadow tokens. Removed shadow prop from gds-card, use box-shadow prop instead.
+**Everything:** Using new state color tokens and shadow tokens.
+
+- **Card:** Removed `shadow` prop from `gds-card`, use `box-shadow` prop instead.

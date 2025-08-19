@@ -62,6 +62,10 @@ export function TableOfContents({
           id: 'search-icons',
           title: 'Search Icons',
         })
+        initialSections.push({
+          id: 'migration',
+          title: 'Migration',
+        })
       }
       if (component.compare && versus) {
         initialSections.push({
@@ -151,10 +155,12 @@ export function TableOfContents({
   return (
     <Core.GdsCard
       variant="secondary"
-      padding="0 xs m xs"
+      padding="xs 2xs"
       position="sticky"
       inset="90px auto auto auto"
       grid-column="10/13"
+      border="none"
+      background="none"
       height="max-content"
       role="navigation"
       aria-label="Table of contents"

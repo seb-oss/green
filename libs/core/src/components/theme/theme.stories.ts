@@ -60,6 +60,12 @@ export const Theme: Story = {
   },
   render: () => html`
     <gds-grid gap="m" columns="2">
+      <gds-flex flex-direction="column" gap="m">
+        <gds-theme color-scheme="auto" design-version="2023">
+          <gds-card variant="primary" align="center">
+            <gds-button>Auto mode button in a card (2023)</gds-button>
+          </gds-card>
+        </gds-theme>
         <gds-theme color-scheme="light" design-version="2023">
           <gds-card variant="primary" align="center">
             <gds-button>Light mode button in a card</gds-button>
@@ -70,7 +76,13 @@ export const Theme: Story = {
             <gds-button>Dark mode button in a card</gds-button>
           </gds-card>
         </gds-theme>
-
+      </gds-flex>
+      <gds-flex flex-direction="column" gap="m">
+        <gds-theme color-scheme="auto" design-version="2016">
+          <gds-card variant="primary" align="center">
+            <gds-button>Auto mode button in a card (2016)</gds-button>
+          </gds-card>
+        </gds-theme>
         <gds-theme color-scheme="light" design-version="2016">
           <gds-card variant="primary" align="center">
             <gds-button>Light mode button in a card (2016)</gds-button>

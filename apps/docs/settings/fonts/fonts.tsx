@@ -6,7 +6,6 @@ import SEBSansSerif from './SEBSansSerif'
 
 export default function Fonts({ children }: { children: React.ReactNode }) {
   const [stylesheetCreated, setStylesheetCreated] = useState(false)
-
   useEffect(() => {
     if ('adoptedStyleSheets' in document) {
       const sheet = new CSSStyleSheet()
@@ -15,6 +14,7 @@ export default function Fonts({ children }: { children: React.ReactNode }) {
             --font: ${SEBSansSerif.style.fontFamily};
         }`)
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
+
       setStylesheetCreated(true)
     }
   }, [])

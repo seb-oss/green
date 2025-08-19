@@ -61,6 +61,14 @@ const style = css`
     max-width: 40ch;
   }
 
+  code {
+    background: var(--gds-sys-color-l3-02);
+    color: var(--gds-sys-color-content-01);
+    border-radius: var(--gds-sys-radius-xs);
+    padding: var(--gds-sys-space-2xs);
+    font: var(--gds-sys-text-body-book-s);
+  }
+
   hr {
     border: none;
     border-top: var(--default-border);

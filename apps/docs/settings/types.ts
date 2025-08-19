@@ -12,13 +12,14 @@ export type SettingsTogglePath =
   | `Device.${keyof DeviceState}`
 
 export interface Theme {
-  ColorScheme: 'dark' | 'light' | 'system'
+  ColorScheme: 'dark' | 'light' | 'auto'
 }
 
 export interface Panel {
   All: boolean
   Settings: boolean
   Sidebar: boolean
+  MobileMenu: boolean
   Command: boolean
   Shortcuts: boolean
 }

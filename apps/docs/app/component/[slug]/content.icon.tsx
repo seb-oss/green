@@ -5,6 +5,7 @@ import React, { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
+import { DeprecatedIcons } from '../../../design/atoms/deprecated/deprecated'
 import { Icon } from '../../../hooks'
 
 import type {
@@ -48,7 +49,7 @@ const fuseOptions = {
 export function IconContent({ component }: IconContentProps) {
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedSize, setSelectedSize] = useState<IconSize>('m')
+  const [selectedSize, setSelectedSize] = useState<IconSize>('l')
   const [isSolid, setIsSolid] = useState(false)
   const [view, setView] = useState<'grid' | 'list'>('grid')
   const [selectedIcon, setSelectedIcon] = useState<IconData | null>(null)
@@ -102,6 +103,51 @@ export function IconContent({ component }: IconContentProps) {
 
   if (!component.icons) return null
 
+  // If a URL hash is present, find the icon by name and set it as selected
+  React.useEffect(() => {
+    if (!window || !component.icons) return
+
+    const hash = window.location.hash.replace('#', '')
+    if (hash) {
+      const iconName = hash.replace(/Icon/, '') // Remove 'Icon' prefix
+      const icon = Object.values(component.icons).find(
+        (icon) => formatDisplayName(icon.displayName) === iconName,
+      )
+      if (icon) {
+        setSelectedIcon(icon)
+      } else {
+        setSelectedIcon(null)
+      }
+    } else {
+      setSelectedIcon(null)
+    }
+  }, [component.icons])
+
+  // handle history state for back navigation
+  React.useEffect(() => {
+    const handlePopState = () => {
+      if (!window || !component.icons) return
+      const hash = window.location.hash.replace('#', '')
+      if (hash) {
+        const iconName = hash.replace(/Icon/, '') // Remove 'Icon' prefix
+        const icon = Object.values(component.icons).find(
+          (icon) => formatDisplayName(icon.displayName) === iconName,
+        )
+        if (icon) {
+          setSelectedIcon(icon)
+        } else {
+          setSelectedIcon(null)
+        }
+      } else {
+        setSelectedIcon(null)
+      }
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => {
+      window.removeEventListener('popstate', handlePopState)
+    }
+  }, [component.icons])
+
   // const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
   //   ([name, icon]) => ({
   //     id: name,
@@ -153,10 +199,14 @@ export function IconContent({ component }: IconContentProps) {
 
   const handleIconClick = (_name: string, icon: IconData) => {
     setSelectedIcon(icon)
+    // set URL hash to the icon name for deep linking
+    const formattedName = formatDisplayName(icon.displayName)
+    window.location.hash = `#${formattedName}`
   }
 
   const handleClosePanel = () => {
     setSelectedIcon(null)
+    window.history.pushState({}, '', window.location.pathname)
   }
 
   return (
@@ -170,7 +220,7 @@ export function IconContent({ component }: IconContentProps) {
         <Core.GdsGrid
           columns="4"
           gap="l"
-          border-color="primary"
+          border-color="information-02"
           border-width="0 0 4xs 0"
           border-style="solid"
           padding-block="0 s"
@@ -204,7 +254,7 @@ export function IconContent({ component }: IconContentProps) {
             <Core.GdsFlex>
               <Core.GdsDropdown
                 size="small"
-                value="medium"
+                value={selectedSize}
                 plain
                 oninput={handleSizeChange}
               >
@@ -233,28 +283,26 @@ export function IconContent({ component }: IconContentProps) {
             </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </Core.GdsGrid>
-        {!search && false && (
-          <Core.GdsCard
+        {!search && (
+          <Core.GdsAlert
             variant="warning"
-            padding="s xs s m"
-            flex-direction="row"
-            gap="s"
-            justify-content="space-between"
-            align-items="center"
+            buttonLabel="Instruction"
+            onClick={() => {
+              const element = document.getElementById('migration')
+              if (element) {
+                const elementPosition = element.getBoundingClientRect().top
+                const offsetPosition =
+                  elementPosition + window.pageYOffset - 200
+
+                window.scrollTo({
+                  top: offsetPosition,
+                  behavior: 'smooth',
+                })
+              }
+            }}
           >
-            <Core.GdsFlex gap="s" align-items="center">
-              <Core.IconWarningSign size="m" />
-              <Core.GdsFlex flex-direction="column" gap="2xs">
-                <Core.GdsText font-size="detail-s" color="secondary">
-                  Font awesome migration
-                </Core.GdsText>
-              </Core.GdsFlex>
-            </Core.GdsFlex>
-            <Core.GdsButton size="small" rank="tertiary">
-              Instructions
-              <Core.IconArrowDown slot="trail" />
-            </Core.GdsButton>
-          </Core.GdsCard>
+            Font awesome migration
+          </Core.GdsAlert>
         )}
 
         <Core.GdsGrid columns={view === 'grid' ? '2; s{4}' : '1; s{3}'} gap="l">
@@ -264,7 +312,17 @@ export function IconContent({ component }: IconContentProps) {
               height="100%"
               padding={view === 'grid' ? 'm' : 'xs'}
               onClick={() => handleIconClick(name, icon)}
-              className="pointer"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleIconClick(name, icon)
+                  e.preventDefault()
+                  e.stopPropagation()
+                }
+              }}
+              className="pointer l2-state-neutral-03 focusable"
+              role="button"
+              tabindex="0"
+              aria-haspopup="dialog"
             >
               <Core.GdsFlex
                 flex-direction={view === 'grid' ? 'column' : 'row'}
@@ -288,7 +346,8 @@ export function IconContent({ component }: IconContentProps) {
 
                 <Core.GdsText
                   tag="small"
-                  color="secondary"
+                  color="02"
+                  font="detail-book-s"
                   text-align={view === 'grid' ? 'center' : 'left'}
                 >
                   {icon.displayName}
@@ -297,6 +356,21 @@ export function IconContent({ component }: IconContentProps) {
             </Core.GdsCard>
           ))}
         </Core.GdsGrid>
+        <Core.GdsFlex
+          flex-direction="column"
+          id="migration"
+          gap="l"
+          margin="4xl 0 0 0"
+        >
+          <Core.GdsFlex flex-direction="column" gap="xs">
+            <Core.GdsText tag="h2">Migration</Core.GdsText>
+            <Core.GdsText tag="p">
+              Complete mapping of FontAwesome icons to their Green Design System
+              equivalents
+            </Core.GdsText>
+          </Core.GdsFlex>
+          <DeprecatedIcons />
+        </Core.GdsFlex>
       </Core.GdsFlex>
       {selectedIcon && (
         <>
@@ -384,17 +458,6 @@ export function IconContent({ component }: IconContentProps) {
                   />
                 </Core.GdsCard>
               </Core.GdsGrid>
-
-              {/* <Core.GdsFlex flex-direction="column" gap="m">
-                <Core.GdsText tag="h3" font-size="display-xs">
-                  Import
-                </Core.GdsText>
-                <Core.GdsCard variant="secondary" padding="s">
-                  <Core.GdsText font-family="mono">
-                    {selectedIcon.framework.react.import}
-                  </Core.GdsText>
-                </Core.GdsCard>
-              </Core.GdsFlex> */}
 
               <Core.GdsDivider opacity="0.2"></Core.GdsDivider>
 

@@ -1,0 +1,50 @@
+.search-result {
+  display: flex;
+  flex-direction: column;
+  padding: var(--gds-sys-space-s);
+  border-radius: var(--gds-sys-radius-s);
+}
+
+.search-result:hover {
+  background-color: color-mix(
+    in srgb,
+    transparent,
+    var(--gds-sys-color-state-neutral-03)
+  );
+}
+
+.cmd-results {
+  transition: all 420ms;
+  transition-delay: 80ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 -10px;
+    visibility: hidden;
+  }
+}
+
+.search-card {
+  outline-color: transparent;
+  outline-offset: calc(var(--gds-sys-space-3xs) * -1);
+  outline-style: solid;
+  outline-width: var(--gds-sys-space-3xs);
+  transition:
+    background 240ms,
+    color 240ms;
+
+  &:hover,
+  &.selected {
+    background-color: var(--gds-sys-color-l1-inversed);
+    color: var(--gds-sys-color-content-03);
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline-color: var(--gds-sys-color-content-01);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
+  }
+}
