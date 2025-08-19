@@ -48,6 +48,9 @@ export const Basic: Story = {
   },
 }
 
+/**
+ * Use the `hideDayNames` and `hideExtraneousDays` attribute for a condenced version.
+ */
 export const Minimal: Story = {
   ...DefaultParams,
   render: (args) => html`
@@ -60,9 +63,20 @@ export const Minimal: Story = {
 }
 
 /**
+ * Use the `size="small` attribute for a smaller version.
+ */
+export const Small: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-calendar label="Pick a day" size="small"></gds-calendar>
+  `,
+}
+
+/**
  * This is an example of a simple inline datepicker using the calendar
  * component. It demonstrates how to control the view in the calendar,
- * how to react to changes and how to customize dates.
+ * how to react to changes and how to customize dates. It has customizedDates
+ * which makes the grid larger to give space for the indicators.
  *
  * This example is written in plain vanilla js/html, but you can adapt it to your
  * framework of choice.

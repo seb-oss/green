@@ -22,6 +22,11 @@ const style = css`
 
       &.small {
         border-spacing: var(--gds-sys-space-2xs);
+
+        thead th {
+          width: var(--gds-sys-space-xl);
+          height: var(--gds-sys-space-xl);
+        }
       }
 
       &.indicators {
@@ -132,13 +137,17 @@ const style = css`
         }
 
         &.small {
-          width: var(--gds-sys-space-3xl);
+          width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
-          font-size: var(--gds-sys-text-size-detail-s);
+          font: var(--gds-sys-text-body-book-s);
           line-height: var(--gds-sys-text-line-height-detail-s);
 
           &.short {
             width: var(--gds-sys-space-2xl);
+          }
+
+          &.wide {
+            width: var(--gds-sys-space-3xl);
           }
 
           &.long {
