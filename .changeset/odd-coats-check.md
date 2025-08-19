@@ -1,5 +1,5 @@
 ---
-'@sebgroup/green-core': patch
+'@sebgroup/green-core': feature
 ---
 
 **Calendar:** Updated 23 style
