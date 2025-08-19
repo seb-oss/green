@@ -188,6 +188,7 @@ export interface Page extends BaseContent {
   type: 'page'
   summary?: string
   parent?: string
+  layout?: 'editorial' | 'collection'
   headings: Heading[]
   showInMenu?: boolean
   menuOrder?: number
