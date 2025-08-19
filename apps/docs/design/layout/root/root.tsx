@@ -39,9 +39,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
             margin="0 auto"
             data-content
           >
-            <main>
-              <ViewTransition>{children}</ViewTransition>
-            </main>
+            <main>{children}</main>
             <Footer />
           </GdsFlex>
         </GdsFlex>
