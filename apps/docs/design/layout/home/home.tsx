@@ -115,9 +115,10 @@ export function Home({
 
       <GdsFlex flex-direction="column" gap="xl">
         <GdsFlex
-          flex-direction="row"
-          align-items="center"
+          flex-direction="column; l{row}"
+          align-items="flex-start; l{center}"
           justify-content="space-between"
+          gap="l"
         >
           <GdsFlex flex-direction="column">
             <GdsText tag="h2">Featured components</GdsText>
