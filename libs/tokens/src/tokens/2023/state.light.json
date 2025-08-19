@@ -1,0 +1,153 @@
+{
+  "sys": {
+    "color": {
+      "state": {
+        "$type": "color",
+        "brand-01": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.2
+        },
+        "brand-02": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.35
+        },
+        "brand-03": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.06
+        },
+        "brand-04": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.14
+        },
+        "brand-05": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.06
+        },
+        "brand-06": {
+          "$value": "{ref.color.green.27}",
+          "alpha": 0.14
+        },
+        "neutral-01": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.2
+        },
+        "neutral-02": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.35
+        },
+        "neutral-03": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.06
+        },
+        "neutral-04": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.14
+        },
+        "neutral-05": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.06
+        },
+        "neutral-06": {
+          "$value": "{ref.color.black}",
+          "alpha": 0.14
+        },
+        "positive-01": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.12
+        },
+        "positive-02": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.23
+        },
+        "positive-03": {
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.08
+        },
+        "positive-04": {
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.16
+        },
+        "positive-05": {
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.08
+        },
+        "positive-06": {
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.16
+        },
+        "negative-01": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.08
+        },
+        "negative-02": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.16
+        },
+        "negative-03": {
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.08
+        },
+        "negative-04": {
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.16
+        },
+        "negative-05": {
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.08
+        },
+        "negative-06": {
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.16
+        },
+        "notice-01": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.2
+        },
+        "notice-02": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.35
+        },
+        "notice-03": {
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.08
+        },
+        "notice-04": {
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.16
+        },
+        "notice-05": {
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.08
+        },
+        "notice-06": {
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.16
+        },
+        "warning-01": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.2
+        },
+        "warning-02": {
+          "$value": "{ref.color.white}",
+          "alpha": 0.35
+        },
+        "warning-03": {
+          "$value": "{ref.color.orange.18}",
+          "alpha": 0.08
+        },
+        "warning-04": {
+          "$value": "{ref.color.orange.18}",
+          "alpha": 0.16
+        },
+        "warning-05": {
+          "$value": "{ref.color.orange.18}",
+          "alpha": 0.08
+        },
+        "warning-06": {
+          "$value": "{ref.color.orange.18}",
+          "alpha": 0.16
+        }
+      }
+    }
+  }
+}

@@ -20,7 +20,7 @@ import { gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
-import style from './calendar.styles'
+import CalendarStyles from './calendar.styles'
 import { renderMonthGridView } from './functions'
 
 /**
@@ -61,7 +61,7 @@ export type CustomizedDate = {
 @gdsCustomElement('gds-calendar')
 @localized()
 export class GdsCalendar extends GdsElement {
-  static styles = [tokens, style]
+  static styles = [tokens, CalendarStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,

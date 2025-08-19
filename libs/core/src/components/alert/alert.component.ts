@@ -14,7 +14,7 @@ import { IconCircleCheck } from '../icon/icons/circle-check.component'
 import { IconCircleInfo } from '../icon/icons/circle-info.component'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { IconTriangleExclamation } from '../icon/icons/triangle-exclamation.component'
-import { alertStyles } from './alert.style'
+import AlertStyles from './alert.styles'
 
 // Type definitions
 type DismissSource = 'timeout' | 'close' | 'escape'
@@ -63,7 +63,7 @@ const PROGRESS_INTERVAL = 100
 })
 @localized()
 export class GdsAlert extends GdsElement {
-  static styles = [tokens, alertStyles]
+  static styles = [tokens, AlertStyles]
 
   /**
    * The variant of the alert, which determines its appearance and icon.
@@ -274,10 +274,9 @@ export class GdsAlert extends GdsElement {
   #renderActionButton(label: string) {
     return html`
       <gds-button
-        class="action-button"
-        variant="neutral"
-        rank="primary"
-        size="small"
+        class="action"
+        .variant=${this.variant}
+        rank="secondary"
         @click=${this.#handleButtonClick}
         aria-describedby="alert-message"
       >
@@ -290,9 +289,9 @@ export class GdsAlert extends GdsElement {
     return this.dismissible
       ? html`
           <gds-button
-            class="close-btn"
-            variant="neutral"
-            rank="tertiary"
+            class="close"
+            .variant=${this.variant}
+            rank="secondary"
             size="small"
             aria-label=${msg('Dismiss alert')}
             @click=${() => this.#dismiss('close')}
@@ -303,11 +302,14 @@ export class GdsAlert extends GdsElement {
       : nothing
   }
 
-  #renderTimerBar() {
+  #renderProgressBar() {
     return this.timeout > 0
       ? html`
           <div
-            class="timer-bar"
+            class=${classMap({
+              'progress-container': true,
+              [this.variant]: true,
+            })}
             role="timer"
             aria-label=${msg('Auto-dismiss timer')}
             aria-valuenow=${this._progress}
@@ -326,6 +328,8 @@ export class GdsAlert extends GdsElement {
     const classes = {
       dismissing: this._isClosing,
       dismissible: this.dismissible,
+      'has-action': this.buttonLabel,
+      timeout: this.timeout > 0,
     }
 
     return html`
@@ -339,11 +343,13 @@ export class GdsAlert extends GdsElement {
         id="alert-message"
         padding="m"
       >
-        ${this.#renderIcon()} ${this.#renderMessage()}
-        ${this.buttonLabel
+        <div class="wrapper">
+          ${this.#renderIcon()} ${this.#renderMessage()}
+        </div>
+        ${!this.timeout && this.buttonLabel
           ? this.#renderActionButton(this.buttonLabel)
           : nothing}
-        ${this.#renderCloseButton()} ${this.#renderTimerBar()}
+        ${this.#renderCloseButton()} ${this.#renderProgressBar()}
       </gds-card>
     `
   }

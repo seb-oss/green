@@ -87,11 +87,11 @@ const style = css`
         }
 
         &.today {
-          border-color: var(--gds-sys-color-l2-background-tertiary);
+          border-color: var(--gds-sys-color-border-strong);
         }
 
         &.disabled {
-          color: var(--gds-sys-color-l3-content-disabled);
+          color: var(--gds-sys-color-content-disabled-01);
           cursor: not-allowed;
         }
 
@@ -108,7 +108,7 @@ const style = css`
         }
 
         &:focus-visible {
-          outline-color: var(--gds-sys-color-l2-content-primary);
+          outline-color: var(--gds-sys-color-content-01);
           outline-width: var(--gds-sys-space-3xs);
         }
 
@@ -152,5 +152,4 @@ const style = css`
     }
   }
 `
-
 export default style

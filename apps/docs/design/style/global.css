@@ -1,0 +1,42 @@
+:root {
+  interpolate-size: allow-keywords;
+}
+
+html {
+  color-scheme: light;
+  /* color-scheme: dark light; */
+  scrollbar-width: thin;
+}
+
+body {
+  letter-spacing: normal;
+  scroll-behavior: smooth;
+  scroll-padding-top: 160px;
+  overscroll-behavior: contain;
+  color-scheme: light;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1;
+  font-family: var(--font);
+  font-variant-numeric: slashed-zero tabular-nums;
+  font-feature-settings: 'zero' 1;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: normal;
+  min-height: 100vh;
+  margin: unset;
+}
+
+[data-section] {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

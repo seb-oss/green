@@ -9,7 +9,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { styles } from './form-control-footer.styles'
+import FormControlFooterStyles from './form-control-footer.styles'
 
 /**
  * @element gds-form-control-footer
@@ -18,7 +18,7 @@ import { styles } from './form-control-footer.styles'
   dependsOn: [GdsBadge, IconTriangleExclamation],
 })
 export class GdsFormControlFooter extends GdsElement {
-  static styles = [styles]
+  static styles = [FormControlFooterStyles]
 
   @property({ type: Number })
   charCounter?: number

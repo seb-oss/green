@@ -7,11 +7,11 @@ const style = css`
     position: absolute;
     z-index: 1060;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: var(--gds-sys-space-m);
     width: 20rem;
-    border-radius: 0.25rem;
-    background-color: #222;
-    color: #fff;
+    border-radius: var(--gds-sys-radius-s);
+    background-color: var(--gds-sys-color-l2-03);
+    color: var(--gds-sys-color-content-inversed);
     opacity: 0;
     transition: opacity 0.3s;
   }
@@ -20,9 +20,9 @@ const style = css`
     box-sizing: border-box;
     z-index: -1;
     position: absolute;
-    height: 1rem;
-    width: 1rem;
-    background-color: #222;
+    height: var(--gds-sys-space-m);
+    width: var(--gds-sys-space-m);
+    background-color: var(--gds-sys-color-l2-03);
     transform: rotate(45deg);
   }
 
@@ -50,5 +50,4 @@ const style = css`
     left: -0.5rem;
   }
 `
-
 export default style

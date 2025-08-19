@@ -59,8 +59,9 @@ export const Usage: Story = {
         gap="m"
         variant="secondary"
         border-color="primary"
+        padding="l"
       >
-        <gds-text tag="h2">Launch control</gds-text>
+        <gds-text tag="h2" font="heading-l">Launch control</gds-text>
         <gds-checkbox-group
           direction="row"
           label="Mission type"

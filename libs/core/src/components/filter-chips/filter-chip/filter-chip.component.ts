@@ -35,6 +35,13 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
   @property()
   value?: ValueT
 
+  /**
+   * The size of the chip
+   * @default 'large'
+   */
+  @property({ reflect: true, type: String })
+  size: 'small' | 'large' = 'large'
+
   connectedCallback(): void {
     super.connectedCallback()
     this.setAttribute('role', 'none')
@@ -47,7 +54,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
     }
     return html`<gds-button
       class="btn"
-      size="small"
+      .size=${this.size === 'large' ? 'medium' : 'small'}
       .rank=${this.selected ? 'primary' : 'secondary'}
       variant=${this._isUsingTransitionalStyles ? 'ghost' : 'default'}
       gds-role="option"
@@ -57,8 +64,7 @@ export class GdsFilterChip<ValueT = any> extends GdsElement {
       <gds-icon-checkmark
         slot="trail"
         style="display: ${this.selected ? 'contents' : 'none'}"
-        width="16"
-        height="16"
+        size="1rem"
         class="icon"
       ></gds-icon-checkmark>
     </gds-button>`

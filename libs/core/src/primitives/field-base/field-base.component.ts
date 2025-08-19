@@ -7,7 +7,7 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch.js'
-import { styles } from './field-base.styles'
+import FieldBaseStyles from './field-base.styles'
 
 /**
  * @element gds-field-base
@@ -24,7 +24,7 @@ import { styles } from './field-base.styles'
 @gdsCustomElement('gds-field-base')
 @localized()
 export class GdsFieldBase extends GdsElement {
-  static styles = [styles]
+  static styles = [FieldBaseStyles]
 
   /**
    * The size of the field.

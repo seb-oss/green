@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import './text'
 import '../card'
-import '../container'
+import '../div'
 import '../flex'
 import '../divider'
 
@@ -109,9 +109,9 @@ export const Detail: Story = {
   name: 'Detail',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="detail-xs">detail-xs</gds-text>
-      <gds-text font-size="detail-s">detail-s</gds-text>
-      <gds-text font-size="detail-m">detail-m"</gds-text>
+      <gds-text font="detail-regular-xs">detail-regular-xs</gds-text>
+      <gds-text font="detail-regular-s">detail-regular-s</gds-text>
+      <gds-text font="detail-regular-m">detail-regular-m</gds-text>
     </gds-flex>
   `,
 }
@@ -120,9 +120,9 @@ export const Body: Story = {
   name: 'Body',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="body-s">body-s</gds-text>
-      <gds-text font-size="body-m">body-m</gds-text>
-      <gds-text font-size="body-l">body-l</gds-text>
+      <gds-text font="body-regular-s">body-s</gds-text>
+      <gds-text font="body-regular-m">body-m</gds-text>
+      <gds-text font="body-regular-l">body-l</gds-text>
     </gds-flex>
   `,
 }
@@ -131,11 +131,11 @@ export const Display: Story = {
   name: 'Display',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="display-s">display-s</gds-text>
-      <gds-text font-size="display-m">display-m</gds-text>
-      <gds-text font-size="display-l">display-l</gds-text>
-      <gds-text font-size="display-xl">display-xl</gds-text>
-      <gds-text font-size="display-2xl">display-2xl</gds-text>
+      <gds-text font="display-s">display-s</gds-text>
+      <gds-text font="display-m">display-m</gds-text>
+      <gds-text font="display-l">display-l</gds-text>
+      <gds-text font="display-xl">display-xl</gds-text>
+      <gds-text font="display-2xl">display-2xl</gds-text>
     </gds-flex>
   `,
 }
@@ -144,12 +144,12 @@ export const Preamble: Story = {
   name: 'Preamble',
   render: (args) => html`
     <gds-flex flex-direction="column" gap="m">
-      <gds-text font-size="preamble-xs">preamble-xs</gds-text>
-      <gds-text font-size="preamble-s">preamble-s</gds-text>
-      <gds-text font-size="preamble-m">preamble-m</gds-text>
-      <gds-text font-size="preamble-l">preamble-l</gds-text>
-      <gds-text font-size="preamble-xl">preamble-xl</gds-text>
-      <gds-text font-size="preamble-2xl">preamble-2xl</gds-text>
+      <gds-text font="preamble-xs">preamble-xs</gds-text>
+      <gds-text font="preamble-s">preamble-s</gds-text>
+      <gds-text font="preamble-m">preamble-m</gds-text>
+      <gds-text font="preamble-l">preamble-l</gds-text>
+      <gds-text font="preamble-xl">preamble-xl</gds-text>
+      <gds-text font="preamble-2xl">preamble-2xl</gds-text>
     </gds-flex>
   `,
 }
