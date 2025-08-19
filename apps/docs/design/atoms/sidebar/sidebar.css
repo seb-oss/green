@@ -4,24 +4,44 @@
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
-  transition: width var(--gds-sys-motion-duration-fast)
-    cubic-bezier(var(--gds-sys-motion-easing-ease-out));
+  transition:
+    width var(--gds-sys-motion-duration-fast)
+      cubic-bezier(var(--gds-sys-motion-easing-ease-out)),
+    transform var(--gds-sys-motion-duration-fast)
+      cubic-bezier(var(--gds-sys-motion-easing-ease-out));
   flex-direction: column;
   border-radius: 0;
   gap: var(--gds-sys-space-xl);
   height: 100vh;
   position: relative;
   inset: 0px auto auto auto;
-  position: sticky;
   padding: var(--gds-sys-space-m) var(--gds-sys-space-xs) var(--gds-sys-space-l)
     var(--gds-sys-space-l);
+  position: fixed;
+  width: 78px;
+  z-index: 9999;
+  box-shadow: var(--gds-sys-shadow-l-01), var(--gds-sys-shadow-l-02);
+  justify-content: space-between;
 
-  width: 80px;
+  @media (min-width: 900px) {
+    position: sticky;
+    box-shadow: none;
+  }
 
   &.open {
     width: 280px;
     padding: var(--gds-sys-space-m) var(--gds-sys-space-xs)
       var(--gds-sys-space-l) var(--gds-sys-space-s);
+  }
+
+  @media (max-width: 899px) {
+    &.mobile-open {
+      transform: translateX(0);
+    }
+
+    &.mobile-closed {
+      transform: translateX(-110%);
+    }
   }
 
   [data-backdrop] {

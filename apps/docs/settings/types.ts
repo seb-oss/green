@@ -19,6 +19,7 @@ export interface Panel {
   All: boolean
   Settings: boolean
   Sidebar: boolean
+  MobileMenu: boolean
   Command: boolean
   Shortcuts: boolean
 }

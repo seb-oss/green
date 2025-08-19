@@ -8,6 +8,7 @@ export const EXCLUSIVE_PANELS = [
   'Settings',
   'Shortcuts',
   'Command',
+  'MobileMenu',
 ] as const
 
 const DEFAULT_THEME: Theme = {
@@ -18,6 +19,7 @@ const DEFAULT_PANEL: Panel = {
   All: false,
   Settings: false,
   Sidebar: true,
+  MobileMenu: false,
   Shortcuts: false,
   Command: false,
 }

@@ -15,7 +15,6 @@ import {
   IconSettingsGear,
 } from '@sebgroup/green-core/react'
 import { Link } from '../../../design/atoms/link/link'
-import { useSettingsContext } from '../../../settings/hooks'
 import { useShortcutInfo } from '../../../settings/shortcuts'
 import { SettingsNav } from '../nav'
 

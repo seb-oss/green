@@ -26,11 +26,7 @@ export default function CollapsibleSection({
 }: CollapsibleSectionProps) {
   return (
     <Core.GdsFlex flex-direction="column" gap="2xs" width="100%">
-      <Core.GdsFlex
-        align-items="center"
-        justify-content="space-between"
-        gap="2xs"
-      >
+      <Core.GdsFlex align-items="center" justify-content="space-between">
         <Link
           key={href + isActive}
           component="button"
