@@ -24,15 +24,7 @@ type ColorOption = {
   variants: {
     button: 'neutral' | 'positive' | 'negative'
     badge: 'information' | 'notice' | 'positive' | 'warning' | 'negative'
-    card:
-      | 'primary'
-      | 'secondary'
-      | 'tertiary'
-      | 'positive'
-      | 'negative'
-      | 'notice'
-      | 'warning'
-      | 'information'
+    background: string
   }
 }
 // Then update the colorOptions array with the type
@@ -42,7 +34,7 @@ const colorOptions: ColorOption[] = [
     variants: {
       button: 'neutral',
       badge: 'information',
-      card: 'primary',
+      background: '02',
     },
   },
   {
@@ -50,7 +42,7 @@ const colorOptions: ColorOption[] = [
     variants: {
       button: 'positive',
       badge: 'positive',
-      card: 'positive',
+      background: 'positive-02',
     },
   },
   {
@@ -58,7 +50,7 @@ const colorOptions: ColorOption[] = [
     variants: {
       button: 'negative',
       badge: 'negative',
-      card: 'negative',
+      background: 'negative-02',
     },
   },
   {
@@ -66,7 +58,7 @@ const colorOptions: ColorOption[] = [
     variants: {
       button: 'neutral',
       badge: 'notice',
-      card: 'notice',
+      background: 'notice-02',
     },
   },
   {
@@ -74,7 +66,7 @@ const colorOptions: ColorOption[] = [
     variants: {
       button: 'neutral',
       badge: 'warning',
-      card: 'warning',
+      background: 'warning-02',
     },
   },
 ]
@@ -87,17 +79,27 @@ function ColorsContent() {
       {colorOptions.map((option) => (
         <Core.GdsCard
           key={option.name}
-          level="2"
-          variant={option.variants.card}
+          level="3"
+          background={option.variants.background}
           width="xl"
           height="xl"
           padding="0"
           className="color-picker"
           border-color={
-            selectedColor.name === option.name ? 'secondary' : 'transparent'
+            selectedColor.name === option.name
+              ? 'secondary'
+              : option.variants.background
           }
-          border-width="2xs"
+          border-width={selectedColor.name === option.name ? '3xs' : '4xs'}
           onClick={() => setSelectedColor(option)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              setSelectedColor(option)
+            }
+          }}
+          role="button"
+          aria-label={`Select color ${option.name}`}
+          tabindex="0"
         />
       ))}
     </Core.GdsFlex>
@@ -111,13 +113,15 @@ function ColorsContent() {
       width="40%"
       gap="xl"
       position="relative"
+      role="presentation"
+      inert
     >
       <Core.GdsBadge variant={selectedColor.variants.badge}>
         <Core.IconCircleInfo slot="lead"></Core.IconCircleInfo>
         Badge
       </Core.GdsBadge>
 
-      <Core.GdsCard variant={selectedColor.variants.card} padding="l">
+      <Core.GdsCard variant={selectedColor.variants.background} padding="l">
         Card
       </Core.GdsCard>
 
@@ -148,14 +152,14 @@ function ColorsContent() {
       </Core.GdsBadge>
       <Core.GdsCard
         flex-direction="row"
-        color={selectedColor.variants.card}
+        color={selectedColor.variants.background}
         padding="0"
       >
         <Core.IconAi size="l"></Core.IconAi>
       </Core.GdsCard>
       <Core.GdsCard
         flex-direction="row"
-        color={selectedColor.variants.card}
+        color={selectedColor.variants.background}
         padding="0"
       >
         <Core.IconRocket size="l"></Core.IconRocket>
@@ -216,11 +220,11 @@ function ColorsContent() {
       {
         name: 'Card',
         component: (
-          <Core.GdsCard variant={selectedColor.variants.card} padding="l">
+          <Core.GdsCard variant={selectedColor.variants.background} padding="l">
             Card
           </Core.GdsCard>
         ),
-        code: `<gds-card variant="${selectedColor.variants.card}"> ... </gds-card>`,
+        code: `<gds-card variant="${selectedColor.variants.background}"> ... </gds-card>`,
       },
       {
         name: 'Button',

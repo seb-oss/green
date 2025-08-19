@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-Added styling for code tag to rich text
+**RichText:** Added styling for code tag to rich text
