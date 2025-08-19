@@ -13,38 +13,49 @@ function calculateScore(text: string, query: string): number {
   return normalizedText.includes(normalizedQuery) ? 1 : 0
 }
 
+type FilterType = 'all' | 'stable' | 'beta' | 'layout'
+
+interface FilterOption {
+  type: FilterType
+  label: string
+}
+
+const filterOptions: FilterOption[] = [
+  { type: 'all', label: 'All' },
+  { type: 'stable', label: 'Stable' },
+  { type: 'layout', label: 'Layout' },
+  { type: 'beta', label: 'Beta' },
+]
+
 export function ComponentsClient() {
   const { isLoaded, actions } = useContentContext()
-  const [view, setView] = useState<'grid' | 'list'>('grid')
   const [query, setQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [filter, setFilter] = useState<'all' | 'beta'>('all')
+  const [filter, setFilter] = useState<FilterType>('all')
 
   const components = actions.getComponents({
     sort: (a, b) => a.title.localeCompare(b.title),
   })
 
-  const categories = useMemo(() => {
-    const allCategories = components
-      .flatMap((component) => component.category || [])
-      .filter(Boolean)
-
-    return [...new Set(allCategories)].sort()
-  }, [components])
-
   const filteredComponents = useMemo(() => {
     return components.filter((component) => {
-      // First check beta filter
-      if (filter === 'beta' && !component.beta) {
-        return false
+      switch (filter) {
+        case 'stable':
+          if (component.beta) return false
+          break
+        case 'beta':
+          if (!component.beta) return false
+          break
+        case 'layout':
+          const isLayout = Array.isArray(component.category)
+            ? component.category.includes('Layout')
+            : component.category === 'Layout'
+          if (!isLayout) return false
+          break
+        case 'all':
+        default:
+          break
       }
 
-      // Then check category filter
-      if (selectedCategory && !component.category?.includes(selectedCategory)) {
-        return false
-      }
-
-      // Finally check search query
       if (!query.trim()) return true
 
       const titleScore = calculateScore(component.title, query)
@@ -54,30 +65,25 @@ export function ComponentsClient() {
 
       return titleScore > 0 || summaryScore > 0
     })
-  }, [components, query, selectedCategory, filter])
-
-  const handleCategoryChange = (e: Event) => {
-    const target = e.target as HTMLSelectElement
-    setSelectedCategory(target.value)
-  }
-
-  const handleViewChange = (e: Event) => {
-    const target = e.target as HTMLSelectElement
-    setView(target.value as 'grid' | 'list')
-  }
-
-  const handleFilterChange = (newFilter: 'all' | 'beta') => {
-    setFilter(newFilter)
-  }
+  }, [components, query, filter])
 
   const counts = useMemo(() => {
     return {
       all: components.length,
+      stable: components.filter((component) => !component.beta).length,
       beta: components.filter((component) => component.beta).length,
+      layout: components.filter((component) =>
+        Array.isArray(component.category)
+          ? component.category.includes('Layout')
+          : component.category === 'Layout',
+      ).length,
     }
   }, [components])
 
-  if (!isLoaded) return <div>Loading...</div>
+  const handleFilterChange = (event: CustomEvent) => {
+    const selectedFilter = event.detail.value as FilterType
+    setFilter(selectedFilter)
+  }
 
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" width="100%" font="body-s">
@@ -121,48 +127,24 @@ export function ComponentsClient() {
             align-items="center"
             justify-content="flex-start"
           >
-            <Core.GdsFlex color="secondary" gap="xs" align-items="center">
-              <Core.GdsButton
-                size="small"
-                rank={filter === 'all' ? 'secondary' : 'tertiary'}
-                onClick={() => handleFilterChange('all')}
-              >
-                All
-                <Core.GdsBadge
-                  slot="trail"
-                  variant="information"
-                  rounded
+            <Core.GdsFilterChips value={filter} onchange={handleFilterChange}>
+              {filterOptions.map((option) => (
+                <Core.GdsFilterChip
+                  key={option.type}
+                  value={option.type}
                   size="small"
+                  selected={filter === option.type}
                 >
-                  {counts.all}
-                </Core.GdsBadge>
-              </Core.GdsButton>
-              <Core.GdsButton
-                size="small"
-                rank={filter === 'beta' ? 'secondary' : 'tertiary'}
-                onClick={() => handleFilterChange('beta')}
-              >
-                Beta
-                <Core.GdsBadge
-                  slot="trail"
-                  variant="information"
-                  rounded
-                  size="small"
-                >
-                  {counts.beta}
-                </Core.GdsBadge>
-              </Core.GdsButton>
-            </Core.GdsFlex>
+                  {option.label} {counts[option.type]}
+                </Core.GdsFilterChip>
+              ))}
+            </Core.GdsFilterChips>
           </Core.GdsFlex>
         </Core.GdsGrid>
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
-        <Core.GdsGrid
-          columns={view === 'grid' ? '1; s{2} xl{3}' : '1'}
-          gap="l"
-          max-width="180ch"
-        >
+        <Core.GdsGrid columns="1; xs{3}" gap="l" max-width="180ch">
           {filteredComponents.map((component) => (
             <Card
               key={component.title}
@@ -176,7 +158,7 @@ export function ComponentsClient() {
                   : component.category === 'Layout'
               }
               snippet={component.hero_snippet}
-              list={view == 'list'}
+              list={false}
             />
           ))}
         </Core.GdsGrid>
