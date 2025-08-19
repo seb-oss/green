@@ -37,8 +37,6 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)')
 
-      console.log(prefersDark)
-
       const updateColorScheme = (scheme: ColorScheme) => {
         const colorSchemeValue = {
           dark: 'only dark',

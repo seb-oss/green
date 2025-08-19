@@ -10,7 +10,7 @@ export function Topbar() {
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
       <Core.GdsFlex
-        padding="l m"
+        padding="m; s{l m}"
         align-content="center"
         justify-content="space-between"
         inset="0 0 auto"
@@ -18,25 +18,44 @@ export function Topbar() {
         level="1"
         background="01"
       >
-        <Core.GdsFlex></Core.GdsFlex>
-        <Link href="/" style={{ display: 'flex' }}>
-          <Core.IconBrandSeb size="l"></Core.IconBrandSeb>
-        </Link>
-        <Core.GdsFlex>
+        <Core.GdsFlex width="40px">
           <Core.GdsFlex display="flex; >899px{none}">
             <Core.GdsButton
               rank="tertiary"
               onClick={() => {
-                SettingsActions.toggle('UI.Panel.MobileMenu')
+                SettingsActions.toggle('UI.Panel.Command')
               }}
             >
-              {settings.UI.Panel.MobileMenu ? (
-                <Core.IconCrossLarge size="m" />
-              ) : (
-                <Core.IconBarsThree size="m" />
-              )}
+              <Core.IconMagnifyingGlass size="l" />
             </Core.GdsButton>
           </Core.GdsFlex>
+        </Core.GdsFlex>
+        <Link href="/" style={{ display: 'flex' }}>
+          <Core.IconBrandSeb size="l"></Core.IconBrandSeb>
+        </Link>
+        <Core.GdsFlex display="flex; >899px{none}">
+          <Core.GdsButton
+            rank="tertiary"
+            onClick={() => {
+              SettingsActions.toggle('UI.Panel.MobileMenu')
+            }}
+          >
+            {settings.UI.Panel.MobileMenu ? (
+              <Core.IconCrossLarge size="l" />
+            ) : (
+              <Core.IconBarsThree size="l" />
+            )}
+          </Core.GdsButton>
+        </Core.GdsFlex>
+        <Core.GdsFlex display="none; >899px{flex}">
+          <Core.GdsButton
+            rank="tertiary"
+            onClick={() => {
+              SettingsActions.toggle('UI.Panel.Command')
+            }}
+          >
+            <Core.IconMagnifyingGlass size="l" />
+          </Core.GdsButton>
         </Core.GdsFlex>
       </Core.GdsFlex>
     </header>

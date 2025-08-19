@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
+import { useSettingsContext } from 'apps/docs/settings/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
@@ -21,6 +22,14 @@ export default function ExpandedNav({
 }: ExpandedNavProps) {
   const pathName = usePathname()
   const { isLoaded, actions } = useContentContext()
+  const {
+    settings: {
+      UI: {
+        Panel: { MobileMenu },
+      },
+    },
+    actions: SettingsActions,
+  } = useSettingsContext()
 
   const content = useMemo(() => {
     if (!isLoaded) return null
@@ -74,7 +83,10 @@ export default function ExpandedNav({
             title={link.title}
             icon={link.icon}
             href={href}
-            onToggle={() => setOpen(link.slug)}
+            onToggle={() => {
+              setOpen(link.slug)
+              MobileMenu ? SettingsActions.toggle('UI.Panel.MobileMenu') : null
+            }}
             isActive={isActive}
           >
             <Core.GdsFlex
@@ -82,7 +94,6 @@ export default function ExpandedNav({
               aria-hidden={isActive ? 'false' : 'true'}
               style={
                 {
-                  maxHeight: 'calc(100vh - 700px)',
                   height: isActive ? 'auto' : '0',
                   transition:
                     'height var(--gds-sys-motion-fast) cubic-bezier(var(--gds-sys-motion-ease-out))',
@@ -113,6 +124,11 @@ export default function ExpandedNav({
                     data-sub-item
                     data-animation="scroll"
                     flex="1"
+                    onClick={() => {
+                      MobileMenu
+                        ? SettingsActions.toggle('UI.Panel.MobileMenu')
+                        : null
+                    }}
                   >
                     <span data-fade>{item.title}</span>
                     {false && item.beta && (
@@ -140,6 +156,9 @@ export default function ExpandedNav({
           data-animation="scroll"
           width="100%"
           target={href.startsWith('http') ? '_blank' : undefined}
+          onClick={() => {
+            MobileMenu ? SettingsActions.toggle('UI.Panel.MobileMenu') : null
+          }}
         >
           {link.icon && <Icon name={link.icon} slot="lead" />}
           <span data-fade>{link.title}</span>

@@ -6,6 +6,5 @@ interface TemplateClientProps {
 }
 
 export function TemplateClient({ slug }: TemplateClientProps) {
-  console.log(slug)
   return null
 }

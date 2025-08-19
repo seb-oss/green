@@ -1,4 +1,5 @@
 .sidebar {
+  --padding-top: 152px;
   box-sizing: border-box;
   background: var(--gds-sys-color-l1-01);
   overflow-x: hidden;
@@ -26,12 +27,17 @@
   @media (min-width: 900px) {
     position: sticky;
     box-shadow: none;
+    padding-top: var(--padding-top);
   }
 
   &.open {
     width: 280px;
     padding: var(--gds-sys-space-m) var(--gds-sys-space-xs)
       var(--gds-sys-space-l) var(--gds-sys-space-s);
+    @media (min-width: 900px) {
+      padding: var(--padding-top) var(--gds-sys-space-xs) var(--gds-sys-space-l)
+        var(--gds-sys-space-s);
+    }
   }
 
   @media (max-width: 899px) {

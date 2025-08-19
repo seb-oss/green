@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import Card from '../../design/atoms/card/card'
+import { Link } from '../../design/atoms/link/link'
 import { useContentContext } from '../../settings/content'
 
 function calculateScore(text: string, query: string): number {
@@ -86,25 +87,34 @@ export function ComponentsClient() {
   }
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="4xl" width="100%" font="body-s">
+    <Core.GdsFlex flex-direction="column" gap="2xl" width="100%" font="body-s">
+      <Core.GdsBreadcrumbs size="small">
+        <Link component="link" href="/">
+          <Core.IconHomeOpen size="m" slot="lead" />
+          Home
+        </Link>
+        <Core.GdsText>Components</Core.GdsText>
+      </Core.GdsBreadcrumbs>
       <Core.GdsFlex
         justify-content="center"
         flex-direction="column"
         gap="2xl"
-        min-width="700px"
         margin="auto"
         text-align="centers"
         align-items="center"
       >
-        <Core.GdsFlex flex-direction="column" gap="m" padding="xl 0 0 0">
+        <Core.GdsFlex flex-direction="column" gap="xs">
           <Core.GdsFlex gap="s" justify-content="center">
-            <Core.GdsText font="display-m">Components</Core.GdsText>
+            <Core.GdsText tag="h1" font="heading-l; s{heading-xl}">
+              Components
+            </Core.GdsText>
           </Core.GdsFlex>
           <Core.GdsText
-            font="preamble-m"
+            font="heading-s"
             color="02"
             max-width="68ch"
             text-wrap="pretty"
+            text-align="center"
           >
             Building blocks for creating user interfaces.
           </Core.GdsText>
@@ -116,6 +126,7 @@ export function ComponentsClient() {
             plain
             onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
             grid-column="1 / span 6"
+            min-width="100%; >900px{700px}"
             clearable
           >
             <Core.IconMagnifyingGlass slot="lead" size="l" />
@@ -135,7 +146,7 @@ export function ComponentsClient() {
                   size="small"
                   selected={filter === option.type}
                 >
-                  {option.label} {counts[option.type]}
+                  {option.label} ({counts[option.type]})
                 </Core.GdsFilterChip>
               ))}
             </Core.GdsFilterChips>
@@ -144,7 +155,7 @@ export function ComponentsClient() {
       </Core.GdsFlex>
 
       {filteredComponents.length > 0 ? (
-        <Core.GdsGrid columns="1; xs{3}" gap="l" max-width="180ch">
+        <Core.GdsGrid columns="1; xs{2}; l{3}" gap="l" max-width="180ch">
           {filteredComponents.map((component) => (
             <Card
               key={component.title}

@@ -36,10 +36,12 @@ export function DynamicPageClient({ slug }: DynamicPageClientProps) {
       </GdsBreadcrumbs>
       <GdsFlex flex-direction="column" gap="xl">
         <GdsFlex flex-direction="column" gap="s" text-align="center">
-          <GdsText tag="h1">{CONTENT?.title}</GdsText>
+          <GdsText tag="h1" font="heading-l; s{heading-xl}">
+            {CONTENT?.title}
+          </GdsText>
           <GdsText
             tag="p"
-            font="heading-m"
+            font="heading-s; s{heading-m}"
             color="02"
             max-width="100ch"
             margin="auto"

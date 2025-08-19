@@ -36,7 +36,7 @@ export function LayoutEditorial(props: {
           <GdsText tag="h1">{CONTENT?.title}</GdsText>
           <GdsText
             tag="p"
-            font="heading-m"
+            font="heading-xs; s{heading-m}"
             color="02"
             max-width="100ch"
             margin="auto"

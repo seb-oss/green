@@ -63,6 +63,27 @@ export default function Sidebar() {
     SettingsActions.toggle('UI.Panel.Command')
   }
 
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 900) {
+        SettingsActions.setSettings((prev) => ({
+          ...prev,
+          UI: {
+            ...prev.UI,
+            Panel: {
+              ...prev.UI.Panel,
+              Sidebar: true,
+            },
+          },
+        }))
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   return (
     <div
       className={`sidebar ${isOpen ? 'open' : 'closed'} ${isMobileMenuOpen ? 'mobile-open' : 'mobile-closed'}`}
@@ -89,7 +110,7 @@ export default function Sidebar() {
         justify-content={'flex-start'}
         align-items="flex-start"
         gap="l"
-        display={menuOpen ? 'none' : 's{flex}'}
+        display={menuOpen ? 'none' : 'none; >900px{flex}'}
         style={isOpen ? undefined : ({ paddingLeft: '2px' } as any)}
         width="100%"
       >
