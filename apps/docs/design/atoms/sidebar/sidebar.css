@@ -33,7 +33,8 @@
   &.open {
     width: 280px;
     padding: var(--gds-sys-space-m) var(--gds-sys-space-xs)
-      var(--gds-sys-space-l) var(--gds-sys-space-s);
+      var(--gds-sys-space-4xl) var(--gds-sys-space-2xs);
+
     @media (min-width: 900px) {
       padding: var(--padding-top) var(--gds-sys-space-xs) var(--gds-sys-space-l)
         var(--gds-sys-space-s);
