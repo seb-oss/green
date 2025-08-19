@@ -37,7 +37,7 @@ export function Similar({ tag, currentSlug }: SimilarProps) {
       gap="xl"
       margin="4xl 0"
       width="100%"
-      border-color="primary"
+      border-color="subtle-01"
       border-width="4xs 0 0 0"
       padding="m 0 0 0"
     >
@@ -47,13 +47,17 @@ export function Similar({ tag, currentSlug }: SimilarProps) {
         width="100%"
         padding="0 2xs"
       >
-        <Core.GdsText color="secondary" font-size="detail-xs">
+        <Core.GdsText color="secondary" font="heading-s">
           Similar components
         </Core.GdsText>
-        <Core.GdsLink href={`/components/${tag.toLowerCase()}`}>
+        <Core.GdsButton
+          rank="secondary"
+          size="small"
+          href={`/components/${tag.toLowerCase()}`}
+        >
           View all
           <Core.IconArrowRight slot="trail" />
-        </Core.GdsLink>
+        </Core.GdsButton>
       </Core.GdsFlex>
 
       <Core.GdsGrid columns="1; l{2}" gap="l" width="100%">

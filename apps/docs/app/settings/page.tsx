@@ -31,7 +31,7 @@ export default function Settings() {
     const target = e.target as HTMLInputElement
     const value = target.value as ColorScheme
 
-    if (['dark', 'light', 'system'].includes(value)) {
+    if (['dark', 'light', 'auto'].includes(value)) {
       actions.setSettings((prev) => ({
         ...prev,
         UI: {
@@ -49,7 +49,7 @@ export default function Settings() {
     <GdsFlex flex-direction="column" gap="l" width="100%">
       <GdsBreadcrumbs size="small">
         <Link component="link" href="/">
-          <IconHomeOpen slot="lead" />
+          <IconHomeOpen size="m" slot="lead" />
           Home
         </Link>
         <GdsText>Settings</GdsText>
@@ -67,38 +67,36 @@ export default function Settings() {
         <SettingsNav />
       </GdsFlex>
 
-      <GdsCard max-width="80ch" padding="0" variant="secondary">
-        <GdsFlex flex-direction="column" gap="l">
-          <GdsText tag="h2">Appearance</GdsText>
-          <GdsRadioGroup
-            label="Theme"
-            value={colorScheme as ColorScheme}
-            onChange={handleThemeChange}
-          >
-            <GdsRadio value="light" label="Light">
-              Light
-            </GdsRadio>
-            <GdsRadio value="dark" label="Dark">
-              Dark
-            </GdsRadio>
-            <GdsRadio value="system" label="System">
-              System
-            </GdsRadio>
-          </GdsRadioGroup>
-        </GdsFlex>
-        {false && (
-          <>
-            <GdsDivider opacity="0.2"></GdsDivider>
-            <GdsFlex flex-direction="column" gap="l">
-              <GdsText tag="h2">Density</GdsText>
-              <GdsRadioGroup label="Density" value="default">
-                <GdsRadio value="default" label="Default" />
-                <GdsRadio value="comfortable" label="Comfortable" />
-              </GdsRadioGroup>
-            </GdsFlex>
-          </>
-        )}
-      </GdsCard>
+      <GdsFlex flex-direction="column" max-width="80ch" gap="l">
+        <GdsText tag="h2">Appearance</GdsText>
+        <GdsRadioGroup
+          label="Theme"
+          value={colorScheme as ColorScheme}
+          onChange={handleThemeChange}
+        >
+          <GdsRadio value="light" label="Light">
+            Light
+          </GdsRadio>
+          <GdsRadio value="dark" label="Dark">
+            Dark
+          </GdsRadio>
+          <GdsRadio value="auto" label="Auto / System">
+            System
+          </GdsRadio>
+        </GdsRadioGroup>
+      </GdsFlex>
+      {false && (
+        <>
+          <GdsDivider opacity="0.2"></GdsDivider>
+          <GdsFlex flex-direction="column" gap="l">
+            <GdsText tag="h2">Density</GdsText>
+            <GdsRadioGroup label="Density" value="default">
+              <GdsRadio value="default" label="Default" />
+              <GdsRadio value="comfortable" label="Comfortable" />
+            </GdsRadioGroup>
+          </GdsFlex>
+        </>
+      )}
     </GdsFlex>
   )
 }

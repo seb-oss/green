@@ -3,10 +3,15 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { _ } from 'apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
+
+import './command.css'
+
+type FilterType = 'all' | 'component' | 'page' | 'template'
 
 interface SearchResult {
   title: string
@@ -19,12 +24,14 @@ interface SearchResult {
 
 export default function Command() {
   const router = useRouter()
+  const dialogRef = useRef<HTMLElement>(null)
   const isOpen = useSettingsValue((settings) => settings.UI.Panel.Command)
   const { actions: SettingsActions } = useSettingsContext()
   const { actions: ContentActions } = useContentContext()
   const [query, setQuery] = useState('')
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all')
 
   const searchResults = useMemo(() => {
     const results: SearchResult[] = []
@@ -34,12 +41,13 @@ export default function Command() {
       sort: (a, b) => a.title.localeCompare(b.title),
     }).forEach((component) => {
       if (
-        !query ||
-        component.title.toLowerCase().includes(query.toLowerCase()) ||
-        component.summary?.toLowerCase().includes(query.toLowerCase()) ||
-        component.category?.some((cat) =>
-          cat.toLowerCase().includes(query.toLowerCase()),
-        )
+        (activeFilter === 'all' || activeFilter === 'component') &&
+        (!query ||
+          component.title.toLowerCase().includes(query.toLowerCase()) ||
+          component.summary?.toLowerCase().includes(query.toLowerCase()) ||
+          component.category?.some((cat) =>
+            cat.toLowerCase().includes(query.toLowerCase()),
+          ))
       ) {
         results.push({
           title: component.title,
@@ -57,9 +65,10 @@ export default function Command() {
       sort: (a, b) => a.title.localeCompare(b.title),
     }).forEach((page) => {
       if (
-        !query ||
-        page.title.toLowerCase().includes(query.toLowerCase()) ||
-        page.summary?.toLowerCase().includes(query.toLowerCase())
+        (activeFilter === 'all' || activeFilter === 'page') &&
+        (!query ||
+          page.title.toLowerCase().includes(query.toLowerCase()) ||
+          page.summary?.toLowerCase().includes(query.toLowerCase()))
       ) {
         results.push({
           title: page.title,
@@ -75,40 +84,73 @@ export default function Command() {
       sort: (a, b) => a.title.localeCompare(b.title),
     }).forEach((template) => {
       if (
-        !query ||
-        template.title.toLowerCase().includes(query.toLowerCase())
+        (activeFilter === 'all' || activeFilter === 'template') &&
+        (!query || template.title.toLowerCase().includes(query.toLowerCase()))
       ) {
-        results.push({
-          title: template.title,
-          href: `/template/${template.slug}`,
-          type: 'template',
-        })
+        // Disable for the moment
+        // results.push({
+        //   title: template.title,
+        //   href: `/template/${template.slug}`,
+        //   type: 'template',
+        // })
       }
     })
 
     return results
-  }, [query, ContentActions])
+  }, [query, ContentActions, activeFilter])
 
-  const handleClosePanel = () => {
-    SettingsActions.toggle('UI.Panel.All')
+  const handleClosePanel = (event: CustomEvent) => {
+    SettingsActions.setSettings((prev) => ({
+      ...prev,
+      UI: {
+        ...prev.UI,
+        Panel: {
+          ...prev.UI.Panel,
+          Command: false,
+        },
+      },
+    }))
   }
 
   const handleToggleCommand = () => {
     SettingsActions.toggle('UI.Panel.Command')
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleFilterChange = (filter: FilterType) => {
+    setActiveFilter(filter)
+    setSelectedIndex(0) // Reset selection when filter changes
+  }
+
+  const handleDialogKeyDown = (e: KeyboardEvent) => {
+    const numResults = searchResults.length
+    if (numResults === 0) return
+
+    // Only handle navigation keys if we're within the dialog
+    if (!dialogRef.current?.contains(e.target as Node)) return
+
     switch (e.key) {
       case 'ArrowDown':
+      case 'ArrowRight':
         e.preventDefault()
-        setSelectedIndex((prev) =>
-          prev < searchResults.length - 1 ? prev + 1 : prev,
-        )
+        setSelectedIndex((prev) => {
+          const nextIndex = prev < numResults - 1 ? prev + 1 : prev
+          const element = document.querySelector(`[data-index="${nextIndex}"]`)
+          element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+          return nextIndex
+        })
         break
+
       case 'ArrowUp':
+      case 'ArrowLeft':
         e.preventDefault()
-        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
+        setSelectedIndex((prev) => {
+          const nextIndex = prev > 0 ? prev - 1 : prev
+          const element = document.querySelector(`[data-index="${nextIndex}"]`)
+          element?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+          return nextIndex
+        })
         break
+
       case 'Enter':
         e.preventDefault()
         if (searchResults[selectedIndex]) {
@@ -116,7 +158,9 @@ export default function Command() {
           handleClosePanel()
         }
         break
+
       case 'Escape':
+        e.preventDefault()
         handleClosePanel()
         break
     }
@@ -124,50 +168,50 @@ export default function Command() {
 
   useEffect(() => {
     if (isOpen) {
+      document.addEventListener('keydown', handleDialogKeyDown)
+
       const timeoutId = setTimeout(() => {
         inputRef.current?.focus()
       }, 0)
 
       setSelectedIndex(0)
       setQuery('')
-
-      return () => clearTimeout(timeoutId)
+      setActiveFilter('all')
+      // return () => clearTimeout(timeoutId)
+      return () => {
+        document.removeEventListener('keydown', handleDialogKeyDown)
+        clearTimeout(timeoutId)
+      }
     }
   }, [isOpen])
 
-  // if (!isOpen) return null
+  const truncateSummary = (text: string, maxLength: number = 120) => {
+    if (text.length <= maxLength) return text
+    return text.slice(0, maxLength).trim() + '...'
+  }
 
   return (
     <React.Fragment>
-      <Core.GdsFlex display="none; s{contents}">
-        <Core.GdsFab
-          inset="40px 40px auto auto"
-          rank="secondary"
-          size="small"
-          onClick={handleToggleCommand}
-        >
-          <Core.IconMagnifyingGlass></Core.IconMagnifyingGlass>
-        </Core.GdsFab>
-      </Core.GdsFlex>
-
       {isOpen && (
         <Core.GdsDialog
-          onGdsClose={handleClosePanel}
-          width="620px"
-          min-width="620px"
+          ref={dialogRef}
+          width="90%; m{620px}"
+          min-width="90%; m{620px}"
           heading="Search"
-          min-block-size="80vh"
+          height="60vh"
+          max-height="60vh"
+          onGdsClose={(e: CustomEvent) => handleClosePanel(e)}
+          placement="top"
+          padding="xs"
           open
         >
           <Core.GdsFlex
             flex-direction="column"
-            gap="m"
+            gap="xs"
             height="100%"
             background="primary"
-            padding="s"
-            border-radius="s"
-            border-color="primary"
-            border-width="4xs"
+            padding="0"
+            slot="dialog"
           >
             <Core.GdsInput
               ref={inputRef}
@@ -177,26 +221,69 @@ export default function Command() {
                 setQuery((e.target as HTMLInputElement).value)
                 setSelectedIndex(0)
               }}
-              onKeyDown={handleKeyDown}
+              // onKeyDown={handleKeyDown}
               autofocus
             >
               <Core.IconMagnifyingGlass slot="lead" />
             </Core.GdsInput>
 
-            <Core.GdsFlex flex-direction="column" gap="xs" overflow="auto">
+            <Core.GdsFlex align-items="center" justify-content="space-between">
+              <Core.GdsFilterChips>
+                <Core.GdsFilterChip
+                  size="s"
+                  selected={activeFilter === 'all'}
+                  onClick={() => handleFilterChange('all')}
+                >
+                  All
+                </Core.GdsFilterChip>
+                <Core.GdsFilterChip
+                  size="small"
+                  selected={activeFilter === 'component'}
+                  onClick={() => handleFilterChange('component')}
+                >
+                  Components
+                </Core.GdsFilterChip>
+                <Core.GdsFilterChip
+                  size="small"
+                  selected={activeFilter === 'page'}
+                  onClick={() => handleFilterChange('page')}
+                >
+                  Pages
+                </Core.GdsFilterChip>
+              </Core.GdsFilterChips>
+              <Core.GdsText color="secondary" font="body-s" color="02">
+                {query
+                  ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
+                  : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
+              </Core.GdsText>
+            </Core.GdsFlex>
+
+            <Core.GdsFlex
+              flex-direction="column"
+              gap="xs"
+              overflow="auto"
+              className="cmd-results"
+              flex="1"
+            >
               {searchResults.map((result, index) => (
                 <Core.GdsCard
                   key={result.href}
                   padding="s"
-                  variant={selectedIndex === index ? 'secondary' : 'primary'}
+                  className={_(
+                    selectedIndex === index && 'selected',
+                    'search-card',
+                  )}
                   width="100%"
                   onClick={() => {
                     router.push(result.href)
                     handleClosePanel()
                   }}
+                  data-index={index}
                   tabIndex={0}
+                  onFocus={() => setSelectedIndex(index)}
                   onKeyDown={(e) => {
                     if (e.key === 'Enter') {
+                      e.preventDefault()
                       router.push(result.href)
                       handleClosePanel()
                     }
@@ -208,23 +295,28 @@ export default function Command() {
                       gap="s"
                       align-items="center"
                     >
-                      <Core.GdsText font-weight="book">
+                      <Core.GdsText font-weight="book" font="heading-xs">
                         {result.title}
                       </Core.GdsText>
-                      <Core.GdsFlex gap="xs" align-items="center">
+                      <Core.GdsFlex
+                        gap="xs"
+                        align-items="center"
+                        display="none"
+                      >
                         {result.beta && (
                           <Core.GdsBadge variant="notice" size="small">
                             BETA
                           </Core.GdsBadge>
                         )}
                         <Core.GdsBadge
-                          variant={
-                            result.type === 'component'
-                              ? 'primary'
-                              : result.type === 'template'
-                                ? 'notice'
-                                : 'secondary'
-                          }
+                          // rank="secondary"
+                          // variant={
+                          //   result.type === 'component'
+                          //     ? 'primary'
+                          //     : result.type === 'template'
+                          //       ? 'notice'
+                          //       : 'secondary'
+                          // }
                           size="small"
                         >
                           {result.type}
@@ -232,8 +324,8 @@ export default function Command() {
                       </Core.GdsFlex>
                     </Core.GdsFlex>
                     {result.summary && (
-                      <Core.GdsText font-size="body-s" color="secondary">
-                        {result.summary}
+                      <Core.GdsText font-size="body-s" color="02">
+                        {truncateSummary(result.summary)}
                       </Core.GdsText>
                     )}
                   </Core.GdsFlex>
@@ -241,9 +333,19 @@ export default function Command() {
               ))}
 
               {query && searchResults.length === 0 && (
-                <Core.GdsText color="secondary" text-align="center" padding="l">
-                  No results found for {`"${query}"`}
-                </Core.GdsText>
+                <Core.GdsCard
+                  min-height="100%"
+                  align-items="center"
+                  justify-content="center"
+                >
+                  <Core.GdsText
+                    color="secondary"
+                    text-align="center"
+                    padding="l"
+                  >
+                    No results found for <strong>{`"${query}"`}</strong>
+                  </Core.GdsText>
+                </Core.GdsCard>
               )}
 
               {!query && searchResults.length === 0 && (

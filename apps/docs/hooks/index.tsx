@@ -32,6 +32,7 @@ export const Icon = ({
     console.warn(`Icon ${name} not found`)
     return null
   }
+
   return <IconComponent slot={slot} size={size} solid={solid} />
 }
 

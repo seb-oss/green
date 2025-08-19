@@ -59,16 +59,28 @@ export class GdsTheme extends GdsElement {
   // TODO: Add prefers-color-scheme media query when `auto` is selected
   @watch('colorScheme')
   private _onColorSchemeChange() {
-    if (this.colorScheme === 'dark') {
-      this._dynamicStylesController.inject(
-        'color-scheme',
-        unsafeCSS(`:host { ${colorsDark}}`),
-      )
-    } else {
-      this._dynamicStylesController.inject(
-        'color-scheme',
-        unsafeCSS(`:host { ${colorsLight}}`),
-      )
+    switch (this.colorScheme) {
+      case 'dark':
+        this._dynamicStylesController.inject(
+          'color-scheme',
+          unsafeCSS(`:host { ${colorsDark}}`),
+        )
+        break
+      case 'light':
+        this._dynamicStylesController.inject(
+          'color-scheme',
+          unsafeCSS(`:host { ${colorsLight}}`),
+        )
+        break
+      case 'auto':
+      default:
+        this._dynamicStylesController.inject(
+          'color-scheme',
+          unsafeCSS(
+            `:host { ${colorsLight}} @media (prefers-color-scheme: dark) { :host { ${colorsDark} } }`,
+          ),
+        )
+        break
     }
 
     this.dispatchCustomEvent('gds-color-scheme-changed', {

@@ -3,8 +3,8 @@
 }
 
 html {
-  color-scheme: light;
-  /* color-scheme: dark light; */
+  /* color-scheme: light; */
+  color-scheme: dark light;
   scrollbar-width: thin;
 }
 
@@ -13,8 +13,6 @@ body {
   scroll-behavior: smooth;
   scroll-padding-top: 160px;
   overscroll-behavior: contain;
-  color-scheme: light;
-  background-color: #fff;
   font-size: 14px;
   font-weight: 300;
   line-height: 1;
@@ -39,4 +37,8 @@ a {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
+}
+
+.no-pointer {
+  pointer-events: none;
 }

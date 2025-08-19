@@ -72,6 +72,7 @@ export interface ComponentSection {
   'section-content'?: string
   cols?: '1' | '2' | '3'
   columns?: ComponentColumn[]
+  'max-width'?: boolean
 }
 
 export interface ComponentImage {
@@ -107,6 +108,7 @@ export interface ComponentContent extends BaseContent {
     android?: boolean
   }
   compare?: string
+  'compare-content'?: string
   // overview?: Array<{ column: ComponentSection[] }>
   overview?: ComponentSection[]
   'ux-text'?: { section: ComponentSection[] }
@@ -185,6 +187,8 @@ export interface PageSummary {
 export interface Page extends BaseContent {
   type: 'page'
   summary?: string
+  parent?: string
+  layout?: 'editorial' | 'collection'
   headings: Heading[]
   showInMenu?: boolean
   menuOrder?: number

@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import './rich-text'
 import '../divider'
 import '../card'
-import '../div'
 import '../text'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
@@ -78,6 +77,7 @@ export const Card: Story = {
             <cite>— Dr. Amelia Carter, Chief Engineer</cite>
           </p>
         </blockquote>
+
         <p>
           For detailed specifications, please refer to the
           <a
@@ -89,7 +89,8 @@ export const Card: Story = {
         </p>
         <p>
           Furthermore, <mark>SS Endeavor</mark> is designed with a modular
-          approach, allowing for easy upgrades and maintenance.
+          approach, allowing for easy <code>upgrades</code> and
+          <code>maintenance</code>.
         </p>
         <h2>Specifications</h2>
         <ul>
