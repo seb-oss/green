@@ -16,6 +16,7 @@ const style = css`
     }
 
     :host table {
+      //border-spacing: var(--gds-sys-space-2xs);
       border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
       flex-grow: 1;
       width: 100%;
@@ -40,7 +41,6 @@ const style = css`
     tbody {
       td {
         position: relative;
-        //width: var(--gds-sys-space-5xl);
         width: var(--gds-sys-space-2xl);
         height: var(--gds-sys-space-2xl);
         box-sizing: border-box;
@@ -50,14 +50,19 @@ const style = css`
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-sys-space-max);
-        transition: background 0.2s;
+        transition: background 0.2s; //might be removed
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
         outline-offset: var(--gds-sys-space-3xs);
+        //--_background: transparent;
 
         &.short {
           width: var(--gds-sys-space-4xl);
+        }
+
+        &.wide {
+          width: var(--gds-sys-space-5xl);
         }
 
         &.long {
@@ -70,19 +75,23 @@ const style = css`
         }
 
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l2-background-tertiary);
-          color: var(--gds-sys-color-l2-content-tertiary);
+          background-color: var(--gds-sys-color-l3-01);
+          color: var(--gds-sys-color-content-03);
         }
 
         &:not(.disabled):hover {
-          background: var(--gds-sys-color-l2-background-primary);
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-sys-color-state-neutral-05)
+          );
         }
 
         &[aria-selected='true']:not(.disabled):hover {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l2-background-tertiary),
-            var(--gds-sys-color-l3-states-dark-hover)
+            var(--gds-sys-color-l3-01),
+            var(--gds-sys-color-state-neutral-01)
           );
         }
 
@@ -91,19 +100,24 @@ const style = css`
         }
 
         &.disabled {
+          background-color: var(--gds-sys-color-l3-disabled-01);
           color: var(--gds-sys-color-content-disabled-01);
           cursor: not-allowed;
         }
 
         &[aria-selected='false']:active:not(.disabled) {
-          background: #dbdbdb; //-14%
+          background-color: color-mix(
+            in srgb,
+            transparent,
+            var(--gds-sys-color-state-neutral-06)
+          );
         }
 
         &[aria-selected='true']:active:not(.disabled) {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l2-background-tertiary),
-            var(--gds-sys-color-l3-states-dark-pressed)
+            var(--gds-sys-color-l3-01),
+            var(--gds-sys-color-state-neutral-02)
           );
         }
 
@@ -134,7 +148,7 @@ const style = css`
         width: var(--gds-sys-space-xs);
         height: var(--gds-sys-space-xs);
         border-radius: var(--gds-sys-space-max);
-        background-color: var(--gds-sys-color-l2-background-tertiary);
+        background-color: var(--gds-sys-color-l3-01);
         inset: calc(100% + var(--gds-sys-space-xs))
           calc(50% - var(--gds-sys-space-xs) / 2) auto auto;
       }
@@ -145,7 +159,7 @@ const style = css`
         width: var(--gds-sys-space-l);
         height: var(--gds-sys-space-m);
         border-radius: var(--gds-sys-space-max);
-        background-color: #e6f3ff; /*L3/notice-02*/
+        background-color: var(--gds-sys-color-l3-notice-02);
         inset: calc(100% + var(--gds-sys-space-2xs))
           calc(50% - var(--gds-sys-space-l) / 2) auto auto;
       }
