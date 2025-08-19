@@ -203,7 +203,8 @@ export default function Command() {
           width="620px"
           min-width="620px"
           heading="Search"
-          max-height="80vh"
+          height="60vh"
+          max-height="60vh"
           open
         >
           <Core.GdsFlex
@@ -264,6 +265,7 @@ export default function Command() {
               gap="xs"
               overflow="auto"
               className="cmd-results"
+              flex="1"
             >
               {searchResults.map((result, index) => (
                 <Core.GdsCard
@@ -333,9 +335,19 @@ export default function Command() {
               ))}
 
               {query && searchResults.length === 0 && (
-                <Core.GdsText color="secondary" text-align="center" padding="l">
-                  No results found for {`"${query}"`}
-                </Core.GdsText>
+                <Core.GdsCard
+                  min-height="100%"
+                  align-items="center"
+                  justify-content="center"
+                >
+                  <Core.GdsText
+                    color="secondary"
+                    text-align="center"
+                    padding="l"
+                  >
+                    No results found for <strong>{`"${query}"`}</strong>
+                  </Core.GdsText>
+                </Core.GdsCard>
               )}
 
               {!query && searchResults.length === 0 && (
