@@ -2,11 +2,11 @@
 
 import React, { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
-import { useSettingsContext } from 'apps/docs/settings/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
 import { useContentContext } from '../../../settings/content'
+import { useSettingsContext } from '../../../settings/hooks'
 import { Link } from '../link/link'
 import CollapsibleSection from './CollapsibleSection'
 import { createHref } from './sidebar.utils'
@@ -85,7 +85,7 @@ export default function ExpandedNav({
             href={href}
             onToggle={() => {
               setOpen(link.slug)
-              MobileMenu ? SettingsActions.toggle('UI.Panel.MobileMenu') : null
+              MobileMenu && SettingsActions.toggle('UI.Panel.MobileMenu')
             }}
             isActive={isActive}
           >
@@ -127,9 +127,8 @@ export default function ExpandedNav({
                     data-animation="scroll"
                     flex="1"
                     onClick={() => {
-                      MobileMenu
-                        ? SettingsActions.toggle('UI.Panel.MobileMenu')
-                        : null
+                      MobileMenu &&
+                        SettingsActions.toggle('UI.Panel.MobileMenu')
                     }}
                   >
                     <span data-fade>{item.title}</span>
@@ -159,7 +158,7 @@ export default function ExpandedNav({
           width="100%"
           target={href.startsWith('http') ? '_blank' : undefined}
           onClick={() => {
-            MobileMenu ? SettingsActions.toggle('UI.Panel.MobileMenu') : null
+            MobileMenu && SettingsActions.toggle('UI.Panel.MobileMenu')
           }}
         >
           {link.icon && <Icon name={link.icon} slot="lead" />}

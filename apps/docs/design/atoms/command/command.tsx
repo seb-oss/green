@@ -3,9 +3,9 @@
 
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { _ } from 'apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
+import { _ } from '../../../hooks'
 import { useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 
@@ -185,7 +185,7 @@ export default function Command() {
     }
   }, [isOpen])
 
-  const truncateSummary = (text: string, maxLength: number = 120) => {
+  const truncateSummary = (text: string, maxLength = 120) => {
     if (text.length <= maxLength) return text
     return text.slice(0, maxLength).trim() + '...'
   }
@@ -251,7 +251,7 @@ export default function Command() {
                   Pages
                 </Core.GdsFilterChip>
               </Core.GdsFilterChips>
-              <Core.GdsText color="secondary" font="body-s" color="02">
+              <Core.GdsText font="body-s" color="02">
                 {query
                   ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
                   : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}

@@ -2,9 +2,9 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { Icon } from 'apps/docs/hooks'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Icon } from '../../../hooks'
 
 interface IconMapping {
   old: string

@@ -46,12 +46,13 @@ export function ComponentsClient() {
         case 'beta':
           if (!component.beta) return false
           break
-        case 'layout':
+        case 'layout': {
           const isLayout = Array.isArray(component.category)
             ? component.category.includes('Layout')
             : component.category === 'Layout'
           if (!isLayout) return false
           break
+        }
         case 'all':
         default:
           break
