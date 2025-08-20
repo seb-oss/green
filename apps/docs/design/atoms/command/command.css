@@ -48,8 +48,8 @@
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--gds-sys-color-l2-03),
-      var(--gds-sys-color-state-neutral-01)
+      var(--gds-sys-color-l3-03),
+      var(--gds-sys-color-state-neutral-03)
     );
 
     cursor: pointer;

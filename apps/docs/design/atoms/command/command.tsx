@@ -201,7 +201,7 @@ export default function Command() {
           height="60vh"
           max-height="60vh"
           onGdsClose={(e: CustomEvent) => handleClosePanel(e)}
-          placement="top"
+          placement="center"
           padding="xs"
           open
         >

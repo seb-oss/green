@@ -56,7 +56,7 @@ export function Topbar() {
             )}
           </Core.GdsButton>
         </Core.GdsFlex>
-        <Core.GdsFlex display="none; >899px{flex}">
+        <Core.GdsFlex display="none; >899px{flex}" padding="0 l 0 0">
           <Core.GdsButton
             rank="tertiary"
             onClick={() => {
