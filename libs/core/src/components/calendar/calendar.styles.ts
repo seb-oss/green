@@ -92,12 +92,12 @@ const style = css`
         }
 
         &[aria-selected='true'] {
-          background-color: var(--gds-sys-color-l3-01);
+          background: var(--gds-sys-color-l3-01);
           color: var(--gds-sys-color-content-03);
         }
 
         &:not(.disabled):hover {
-          background-color: color-mix(
+          background: color-mix(
             in srgb,
             transparent,
             var(--gds-sys-color-state-neutral-05)
@@ -105,7 +105,7 @@ const style = css`
         }
 
         &[aria-selected='true']:not(.disabled):hover {
-          background-color: color-mix(
+          background: color-mix(
             in srgb,
             var(--gds-sys-color-l3-01),
             var(--gds-sys-color-state-neutral-01)
@@ -117,13 +117,13 @@ const style = css`
         }
 
         &.disabled {
-          background-color: var(--gds-sys-color-l3-disabled-01);
+          background: var(--gds-sys-color-l3-disabled-01);
           color: var(--gds-sys-color-content-disabled-01);
           cursor: not-allowed;
         }
 
         &[aria-selected='false']:active:not(.disabled) {
-          background-color: color-mix(
+          background: color-mix(
             in srgb,
             transparent,
             var(--gds-sys-color-state-neutral-06)
@@ -131,7 +131,7 @@ const style = css`
         }
 
         &[aria-selected='true']:active:not(.disabled) {
-          background-color: color-mix(
+          background: color-mix(
             in srgb,
             var(--gds-sys-color-l3-01),
             var(--gds-sys-color-state-neutral-02)
@@ -169,7 +169,7 @@ const style = css`
         width: var(--gds-sys-space-xs);
         height: var(--gds-sys-space-xs);
         border-radius: var(--gds-sys-space-max);
-        background-color: var(--gds-sys-color-l3-01);
+        background: var(--gds-sys-color-l3-01);
         inset: calc(100% + var(--gds-sys-space-xs))
           calc(50% - var(--gds-sys-space-xs) / 2) auto auto;
       }
@@ -180,7 +180,7 @@ const style = css`
         width: var(--gds-sys-space-l);
         height: var(--gds-sys-space-m);
         border-radius: var(--gds-sys-space-max);
-        background-color: var(--gds-sys-color-l3-notice-02);
+        background: var(--gds-sys-color-l3-notice-02);
         inset: calc(100% + var(--gds-sys-space-2xs))
           calc(50% - var(--gds-sys-space-l) / 2) auto auto;
       }
