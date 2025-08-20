@@ -38,9 +38,10 @@ export type CustomizedDate = {
   color?: string
 
   /**
-   * The type of indicator.
+   * The type of indicator. Common types: `icon` (default)
+   * or `dot` (old default).
    */
-  indicator?: 'dot'
+  indicator?: 'icon'
 
   /**
    * Whether the date is disabled or not.
@@ -136,6 +137,12 @@ export class GdsCalendar extends GdsElement {
   }
 
   /**
+   * Sets the size of the grid. Defaults to "large".
+   */
+  @property({ reflect: true })
+  size: 'small' | 'large' = 'large'
+
+  /**
    * Whether to show week numbers or not.
    */
   @property({ type: Boolean })
@@ -152,6 +159,12 @@ export class GdsCalendar extends GdsElement {
    */
   @property({ type: Boolean })
   hideDayNames = false
+
+  /**
+   * Whether to day names with 3 characters instead of just the first.
+   */
+  @property({ type: Boolean })
+  longDayNames = false
 
   /**
    * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
@@ -210,20 +223,39 @@ export class GdsCalendar extends GdsElement {
   render() {
     const currentDate = new Date()
 
-    return html`<table role="grid" aria-label="${ifDefined(this.label)}">
+    return html`<table
+      role="grid"
+      aria-label="${ifDefined(this.label)}"
+      class="${classMap({
+        small: Boolean(this.size === 'small'),
+        indicators: Boolean(this.customizedDates),
+      })}"
+    >
       ${when(
         !this.hideDayNames,
         () =>
           html`<thead role="rowgroup">
             <tr role="row">
               ${when(this.showWeekNumbers, () => html`<th></th>`)}
-              <th>${msg('Mon')}</th>
-              <th>${msg('Tue')}</th>
-              <th>${msg('Wed')}</th>
-              <th>${msg('Thu')}</th>
-              <th>${msg('Fri')}</th>
-              <th>${msg('Sat')}</th>
-              <th>${msg('Sun')}</th>
+              ${when(
+                this.longDayNames,
+                () =>
+                  html`<th>${msg('Mon')}</th>
+                    <th>${msg('Tue')}</th>
+                    <th>${msg('Wed')}</th>
+                    <th>${msg('Thu')}</th>
+                    <th>${msg('Fri')}</th>
+                    <th>${msg('Sat')}</th>
+                    <th>${msg('Sun')}</th>`,
+                () =>
+                  html`<th>${msg('Mon').substring(0, 1)}</th>
+                    <th>${msg('Tue').substring(0, 1)}</th>
+                    <th>${msg('Wed').substring(0, 1)}</th>
+                    <th>${msg('Thu').substring(0, 1)}</th>
+                    <th>${msg('Fri').substring(0, 1)}</th>
+                    <th>${msg('Sat').substring(0, 1)}</th>
+                    <th>${msg('Sun').substring(0, 1)}</th>`,
+              )}
             </tr>
           </thead>`,
       )}
@@ -295,6 +327,7 @@ export class GdsCalendar extends GdsElement {
                               isDisabled ? undefined : 'gridcell',
                             )}"
                             class="${classMap({
+                              small: Boolean(this.size === 'small'),
                               'custom-date': Boolean(customization),
                               disabled: Boolean(isDisabled),
                               today: isSameDay(currentDate, day),
