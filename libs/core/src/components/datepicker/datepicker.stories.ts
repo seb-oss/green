@@ -128,7 +128,7 @@ export const Disabled: Story = {
 }
 
 /**
- * The date picker has two sizes: `small` and `medium`. The default size is `medium`.
+ * The date picker has two sizes: `small` and `large`. The default size is `large`.
  *
  * Optionally, the label can be hidden by using the `hide-label` attribute.
  */
@@ -185,6 +185,19 @@ export const Simplified: Story = {
     <gds-datepicker
       label="A no today buttom datepicker"
       hide-today-button
+    ></gds-datepicker>
+  `,
+}
+
+/**
+ * Use `calendarSize="small"` attribute for a smaller popover version.
+ */
+export const Small: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker
+      label="A smaller calendar popover"
+      calendarSize="small"
     ></gds-datepicker>
   `,
 }
