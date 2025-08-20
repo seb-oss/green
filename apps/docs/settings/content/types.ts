@@ -57,6 +57,7 @@ export interface ComponentColumn {
   Snippet?: string
   plain?: boolean
   replay?: boolean
+  variant?: string
   caption?: string
   node?: string
   width?: string

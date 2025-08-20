@@ -246,7 +246,7 @@ export const RenderColumn = (
               </Core.GdsCard>
             </Core.GdsTheme>
 
-            {column.caption && (
+            {!column.variant && column.caption && (
               <Core.GdsText
                 tag="small"
                 font="detail-book-s"
@@ -255,6 +255,43 @@ export const RenderColumn = (
               >
                 {column.caption}
               </Core.GdsText>
+            )}
+
+            {column.variant?.toLocaleLowerCase() === 'do' && (
+              <Core.GdsFlex align-items="center" gap="xs">
+                <Core.GdsCard
+                  variant="positive"
+                  border-radius="max"
+                  justify-content="center"
+                  align-items="center"
+                  border="none"
+                  padding="0"
+                  width="24px"
+                  height="24px"
+                >
+                  <Core.IconCheckmark size="s" />
+
+                  {/* <Core.IconCrossLarge size="s" color="negative-01" /> */}
+                </Core.GdsCard>
+                <Core.GdsText font="details-xs">Do</Core.GdsText>
+              </Core.GdsFlex>
+            )}
+            {column.variant?.toLocaleLowerCase() === 'dont' && (
+              <Core.GdsFlex align-items="center" gap="xs">
+                <Core.GdsCard
+                  variant="negative"
+                  border-radius="max"
+                  justify-content="center"
+                  align-items="center"
+                  border="none"
+                  padding="0"
+                  width="24px"
+                  height="24px"
+                >
+                  <Core.IconCrossLarge size="s" />
+                </Core.GdsCard>
+                <Core.GdsText font="details-xs">{`Don't`}</Core.GdsText>
+              </Core.GdsFlex>
             )}
 
             {selectedSnippet && snippetCode && (
