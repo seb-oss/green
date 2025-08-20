@@ -14,7 +14,7 @@ const style = css`
       justify-content: flex-start;
       inline-size: 12ch;
       gap: var(--gds-sys-space-4xs);
-      font: var(--gds-sys-text-detail-book-s);
+      font: var(--gds-sys-text-detail-book-m);
     }
 
     :host([size='small']) .spinners {

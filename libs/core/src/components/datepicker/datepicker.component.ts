@@ -473,7 +473,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-flex
                 align-items="center"
                 justify-content="space-between"
-                padding="0 m m m"
+                padding="m m m m"
               >
                 ${when(
                   this.clearable,
