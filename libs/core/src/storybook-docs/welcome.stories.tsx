@@ -8,6 +8,7 @@ import '../components/text/text'
 import '../components/divider/divider'
 import '../components/icon/icons/brand-green'
 import '../components/icon/icons/brand-seb'
+import '../components/icon/icons/square-arrow-top-right'
 import '../components/grid/grid'
 import '../components/card/card'
 import '../components/link/link'
@@ -29,13 +30,13 @@ export const GreenDesignSystem: Story = {
   name: 'Green Design System',
   render: (args, context) => {
     return html`
-      <gds-flex
-        flex-direction="column"
-        gap="4xl"
-        max-width="1200px"
-        margin="4xl auto"
-      >
-        <gds-flex padding="0 l">
+      <gds-flex flex-direction="column" min-height="90vh">
+        <gds-flex
+          padding="0 l"
+          align-items="center"
+          justify-content="center"
+          flex="1"
+        >
           <gds-flex
             min-width="100%"
             justify-content="center"
@@ -44,53 +45,67 @@ export const GreenDesignSystem: Story = {
             padding="0 l"
             gap="xl"
           >
-            <gds-icon-brand-green width="80" height="80"></gds-icon-brand-green>
+            <gds-icon-brand-green size="2xl"></gds-icon-brand-green>
             <gds-text tag="code" font-size="display-s">
               @sebgroup/green-core
             </gds-text>
             <gds-text
-              font-size="display-xs"
+              font="heading-s"
               text-align="center"
+              font-weight="regular"
               text-wrap="balance"
+              max-width="90ch"
             >
               Green Core is a carefully crafted set of Web Components that lays
               the foundation for the Green Design System.
             </gds-text>
-            <gds-flex gap="s">
-              <a
-                target="_blank"
-                href="https://github.com/seb-oss/green/blob/main/LICENSE"
+            <gds-flex gap="m" justify-content="center">
+              <gds-button
+                href="https://storybook.seb.io/latest/core/?path=/docs/get-started--docs"
+                rank="primary"
               >
-                <img
-                  src="https://img.shields.io/badge/license-Apache2.0-005FAC"
-                />
-              </a>
-              <a target="_blank" href="https://semver.org/">
-                <img
-                  src="https://img.shields.io/badge/semantic%20versioning-006D31"
-                />
-              </a>
-              <a target="_blank" href="https://nx.dev/">
-                <img
-                  src="https://img.shields.io/badge/maintained%20with-nx-006D31"
-                />
-              </a>
-              <a
-                target="_blank"
-                href="https://github.com/seb-oss/green/blob/main/CONTRIBUTING.md"
+                Get Started
+              </gds-button>
+              <gds-button
+                href="https://storybook.seb.io/latest/core/?path=/docs/components-alert--docs"
+                rank="secondary"
               >
-                <img src="https://img.shields.io/badge/PRs-welcome-006D31" />
-              </a>
+                View Components
+              </gds-button>
             </gds-flex>
             <gds-flex gap="s" align-items="center">
               <gds-text>Built by:</gds-text>
               <gds-icon-brand-seb size="m"></gds-icon-brand-seb>
             </gds-flex>
+
+            <gds-card
+              variant="primary"
+              flex-direction="column"
+              align-items="flex-start"
+              padding="l"
+              width="70%"
+              gap="m"
+              margin="xl 0 0 0"
+              border-radius="m"
+            >
+              <gds-flex flex-direction="column">
+                <gds-text font="heading-s" font-weight="regular"
+                  >Guidelines & Foundation</gds-text
+                >
+                <gds-text max-width="100%" opacity="0.6" text-wrap="pretty">
+                  For comprehensive design guidelines and implementation
+                  details, visit:
+                </gds-text>
+              </gds-flex>
+              <gds-link href="https://seb.io" target="_blank">
+                <gds-icon-square-arrow-top-right
+                  slot="trail"
+                  size="s"
+                ></gds-icon-square-arrow-top-right>
+                seb.io
+              </gds-link>
+            </gds-card>
           </gds-flex>
-        </gds-flex>
-        <gds-divider opacity="0.2"></gds-divider>
-        <gds-flex flex-direction="column" gap="xl">
-          <gds-text tag="h2" font-size="xl">Components</gds-text>
         </gds-flex>
       </gds-flex>
     `
