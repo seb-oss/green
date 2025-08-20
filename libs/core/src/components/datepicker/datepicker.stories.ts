@@ -203,6 +203,7 @@ export const Full: Story = {
       label="Label"
       supporting-text="Supporting text"
       clearable
+      disabled-weekends
       show-week-numbers
     ></gds-datepicker>
   `,
@@ -218,6 +219,7 @@ export const FullSmall: Story = {
       label="Label"
       supporting-text="Supporting text"
       clearable
+      disabled-weekends
       show-week-numbers
       size="small"
       calendarSize="small"
