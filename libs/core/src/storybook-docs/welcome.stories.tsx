@@ -16,9 +16,21 @@ import '../components/link/link'
 const meta = {
   title: 'Green Design System',
   parameters: {
-    docsOnly: true,
+    controls: { disable: true },
+    actions: { disable: true },
     previewTabs: {
       canvas: { hidden: true },
+      'storybook/docs/panel': { hidden: true },
+    },
+    options: {
+      showPanel: false,
+      showToolbar: false,
+    },
+    addons: { hidden: true },
+    docs: {
+      story: { inline: true },
+      canvas: { hidden: true },
+      controls: { disable: true },
     },
   },
 } satisfies Meta
