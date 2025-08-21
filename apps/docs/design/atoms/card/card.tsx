@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../../../settings'
@@ -31,6 +32,7 @@ export default function Card({
   href,
   children,
 }: CardProps) {
+  const router = useRouter()
   const [overrideTheme, setOverrideTheme] = useState<'light' | 'dark' | null>(
     null,
   )
@@ -62,6 +64,13 @@ export default function Card({
       <Link
         key={href}
         href={type === 'template' ? `/template/${href}` : `/component/${href}`}
+        onClick={(e) => {
+          e.preventDefault()
+          const path =
+            type === 'template' ? `/template/${href}` : `/component/${href}`
+          window.scrollTo({ top: 0, behavior: 'auto' })
+          router.push(path)
+        }}
       >
         <Core.GdsFlex flex-direction="column;" width="100%">
           <Core.GdsCard
@@ -124,7 +133,6 @@ export default function Card({
                 {summary}
               </Core.GdsText>
             )}
-            {/* <Core.IconArrowRight size="s" slot="trail" /> */}
           </Core.GdsFlex>
         </Core.GdsFlex>
       </Link>
