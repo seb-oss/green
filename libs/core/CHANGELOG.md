@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.89.1
+
+### Patch Changes
+
+- cfe9104: **Dropdown:** Fix text overflow regression
+
 ## 1.89.0
 
 ### Minor Changes
