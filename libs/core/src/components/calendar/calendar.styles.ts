@@ -116,10 +116,15 @@ const style = css`
           border-color: var(--gds-sys-color-border-strong);
         }
 
-        &.disabled {
+        &.disabled:not(.week-number) {
           background: var(--gds-sys-color-l3-disabled-01);
           color: var(--gds-sys-color-content-disabled-01);
           cursor: not-allowed;
+        }
+
+        &.disabled.week-number {
+          color: var(--gds-sys-color-content-02);
+          cursor: default;
         }
 
         &[aria-selected='false']:active:not(.disabled) {
