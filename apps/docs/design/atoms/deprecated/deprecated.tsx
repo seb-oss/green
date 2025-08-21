@@ -74,7 +74,7 @@ const iconMappings: IconMapping[] = [
   { old: 'star', new: 'star' },
   { old: 'sync', new: 'arrow-rotate-right-left' },
   { old: 'tablet', new: 'devices' },
-  { old: 'cross', new: 'cross-small' },
+  { old: 'times', new: 'cross-small' },
   { old: 'trash-alt', new: 'trash-can' },
   { old: 'undo', new: 'arrow-rotate-counter-clockwise' },
   { old: 'unlock-alt', new: 'unlocked' },
