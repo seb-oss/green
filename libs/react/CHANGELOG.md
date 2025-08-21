@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.30.0
+
+### Minor Changes
+
+- 0910e52: **Icon:** React: add mic-on & mic-off
+
+### Patch Changes
+
+- Updated dependencies [0910e52]
+  - @sebgroup/green-core@1.90.0
+
 ## 3.29.2
 
 ### Patch Changes
