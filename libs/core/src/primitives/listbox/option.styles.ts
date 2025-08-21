@@ -51,7 +51,7 @@ const style = css`
       outline: none;
     }
 
-    .item::before {
+    :host(:focus-visible) div::before {
       inset: var(--gds-sys-space-2xs);
       opacity: 1;
       visivility: visible;
