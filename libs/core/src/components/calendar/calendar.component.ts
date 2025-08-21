@@ -161,12 +161,6 @@ export class GdsCalendar extends GdsElement {
   hideDayNames = false
 
   /**
-   * Whether to day names with 3 characters instead of just the first.
-   */
-  @property({ type: Boolean })
-  longDayNames = false
-
-  /**
    * An array of `CustomizedDate` objects that can be used customize the appearance of dates.
    * This can only be set through the property, not through an attribute.
    */
@@ -237,25 +231,13 @@ export class GdsCalendar extends GdsElement {
           html`<thead role="rowgroup">
             <tr role="row">
               ${when(this.showWeekNumbers, () => html`<th></th>`)}
-              ${when(
-                this.longDayNames,
-                () =>
-                  html`<th>${msg('Mon')}</th>
-                    <th>${msg('Tue')}</th>
-                    <th>${msg('Wed')}</th>
-                    <th>${msg('Thu')}</th>
-                    <th>${msg('Fri')}</th>
-                    <th>${msg('Sat')}</th>
-                    <th>${msg('Sun')}</th>`,
-                () =>
-                  html`<th>${msg('Mon').substring(0, 1)}</th>
-                    <th>${msg('Tue').substring(0, 1)}</th>
-                    <th>${msg('Wed').substring(0, 1)}</th>
-                    <th>${msg('Thu').substring(0, 1)}</th>
-                    <th>${msg('Fri').substring(0, 1)}</th>
-                    <th>${msg('Sat').substring(0, 1)}</th>
-                    <th>${msg('Sun').substring(0, 1)}</th>`,
-              )}
+              <th>${msg('Mon').substring(0, 1)}</th>
+              <th>${msg('Tue').substring(0, 1)}</th>
+              <th>${msg('Wed').substring(0, 1)}</th>
+              <th>${msg('Thu').substring(0, 1)}</th>
+              <th>${msg('Fri').substring(0, 1)}</th>
+              <th>${msg('Sat').substring(0, 1)}</th>
+              <th>${msg('Sun').substring(0, 1)}</th>
             </tr>
           </thead>`,
       )}
