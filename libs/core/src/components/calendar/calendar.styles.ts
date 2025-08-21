@@ -179,18 +179,6 @@ const style = css`
         inset: calc(100% + var(--gds-sys-space-xs))
           calc(50% - var(--gds-sys-space-xs) / 2) auto auto;
       }
-
-      .indicator-icon {
-        display: flex;
-        position: absolute;
-        width: var(--gds-sys-space-l);
-        height: var(--gds-sys-space-m);
-        border-radius: var(--gds-sys-space-max);
-        background: var(--gds-sys-color-l3-notice-02);
-        inset: calc(100% + var(--gds-sys-space-2xs))
-          calc(50% - var(--gds-sys-space-l) / 2) auto auto;
-        z-index: -1;
-      }
     }
   }
 `
