@@ -400,8 +400,8 @@ export const RenderColumn = (
     case 'paragraph':
       return (
         <Core.GdsText
-          font={column.size ? column.size : 'body-book-l'}
-          color={column.color ? column.color : '02'}
+          font={column.size ? column.size : 'body-book-m'}
+          color={column.color ? column.color : '01'}
           tag={column.tag}
           max-width="80ch"
           data-paragraph

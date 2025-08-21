@@ -16,6 +16,7 @@ import {
   IconBookmark,
   IconBrandFigma,
   IconBrandGithub,
+  IconBrandGreen,
   IconBrandStorybook,
   IconCloudySun,
   IconCupHot,
@@ -180,20 +181,32 @@ export function Home({
           ))}
         </GdsGrid>
       </GdsFlex>
-      <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
-        <GdsFlex flex-direction="column">
-          <GdsText tag="h2">Get started</GdsText>
-          <GdsText
-            tag="p"
-            font="heading-s"
-            color="02"
-            max-width="80ch"
-            id="get-started-subheading"
-          >
-            Essential foundations: tokens, color scales, and declarative
-            layouts.
-          </GdsText>
+      <GdsFlex flex-direction="column" gap="m">
+        <GdsFlex
+          flex-direction="column; l{row}"
+          align-items="flex-start; l{center}"
+          justify-content="space-between"
+          gap="l"
+        >
+          <GdsFlex flex-direction="column">
+            <GdsText tag="h2">Primitives</GdsText>
+            <GdsText
+              tag="p"
+              font="heading-s"
+              color="02"
+              max-width="80ch"
+              id="featured-subheading"
+            >
+              Essential foundations: tokens, color scales, and declarative
+              layouts.
+            </GdsText>
+          </GdsFlex>
+          <Link component="button" href="/primitives" rank="secondary">
+            <IconBrandGreen slot="trail"></IconBrandGreen>
+            View all primitives
+          </Link>
         </GdsFlex>
+
         <GdsGrid
           columns="1; s{3}"
           gap="l"
@@ -201,7 +214,7 @@ export function Home({
           aria-label="Get started"
           aria-describedby="get-started-subheading"
         >
-          <NextLink href={`/component/icon`}>
+          <NextLink href={`/primitives/icons`}>
             <GdsCard
               gap="m"
               height="240px"
@@ -229,7 +242,7 @@ export function Home({
               <GdsText font="heading-s">Icons</GdsText>
             </GdsFlex>
           </NextLink>
-          <NextLink href="/foundation/tokens">
+          <NextLink href="/primitives/design-tokens">
             <GdsCard
               gap="m"
               height="240px"
@@ -301,7 +314,7 @@ export function Home({
               <GdsText font="heading-s">Tokens</GdsText>
             </GdsFlex>
           </NextLink>
-          <NextLink href="/foundation/layouts">
+          <NextLink href="/primitives/declarative-layout">
             <GdsCard
               gap="m"
               height="240px"
