@@ -4,10 +4,6 @@ const style = css`
   @layer base, reset;
 
   @layer base {
-    ::part(_button) {
-      outline-offset: -1px;
-    }
-
     .spinners {
       display: flex;
       align-items: center;
