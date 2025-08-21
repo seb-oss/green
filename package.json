@@ -69,7 +69,6 @@
     "eslint-plugin-tailwindcss": "^3.13.0",
     "fuse.js": "^7.0.0",
     "globby": "^14.0.0",
-    "highlight.js": "^11.11.1",
     "html-react-parser": "^5.2.5",
     "idb": "^8.0.2",
     "imask": "^6.5.0",

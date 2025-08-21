@@ -1,9 +1,7 @@
 // design/atoms/content/content-renderer.tsx
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import hljs from 'highlight.js/lib/core'
-import xml from 'highlight.js/lib/languages/xml'
+import React, { useState } from 'react'
 import { marked } from 'marked'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -16,12 +14,6 @@ import {
 import { RenderColumn } from './content'
 
 import './render.css'
-
-import { unsafeCSS } from 'lit'
-import highlightStyles from '!!raw-loader!highlight.js/styles/github-dark.css'
-
-// Then register the languages you need
-hljs.registerLanguage('html', xml)
 
 interface ContentRendererProps {
   content: ComponentSection[] | null
@@ -71,20 +63,6 @@ export function Render({
     const url = `${window.location.origin}${window.location.pathname}#${sectionId}`
     navigator.clipboard.writeText(url)
   }
-
-  useEffect(() => {
-    setTimeout(() => {
-      const richTextElements = document.querySelectorAll(
-        '[gds-element=gds-rich-text]',
-      )
-      const hljsCssResult = unsafeCSS(highlightStyles)
-      richTextElements.forEach((element: any) => {
-        // Bit of hacky use of the private _dynamicStylesController to inject the highlight.js CSS into GdsRichText
-        element._dynamicStylesController.inject('hljs', hljsCssResult)
-      })
-      hljs.highlightAll()
-    }, 100)
-  }, [content])
 
   if (!content || !Array.isArray(content)) return null
   const sections = getContentSections(content)
