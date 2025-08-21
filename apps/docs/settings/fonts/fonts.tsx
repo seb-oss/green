@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
+import Code from './code'
 import SEBSansSerif from './SEBSansSerif'
 
 export default function Fonts({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,7 @@ export default function Fonts({ children }: { children: React.ReactNode }) {
       sheet.replaceSync(`
         :root { 
             --font: ${SEBSansSerif.style.fontFamily};
+            --font-code: ${Code.style.fontFamily};
         }`)
       document.adoptedStyleSheets = [...document.adoptedStyleSheets, sheet]
 
