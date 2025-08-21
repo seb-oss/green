@@ -41,7 +41,7 @@ export class GdsTheme extends GdsElement {
    * The design version to use. Can be `16` or `23`.
    */
   @property({ reflect: true, attribute: 'design-version' })
-  designVersion: '2016' | '2023' = '2016'
+  designVersion: '2016' | '2023' = '2023'
 
   connectedCallback(): void {
     super.connectedCallback()
