@@ -6,7 +6,7 @@ const style = css`
     box-sizing: border-box;
     border-style: solid;
     border-width: 0;
-    border-color: var(--gds-sys-color-l2-border-primary);
+    border-color: var(--gds-sys-color-border-subtle-01);
   }
   :host(:focus-visible) {
     outline-color: color-mix(in srgb, currentcolor, #000 100%);

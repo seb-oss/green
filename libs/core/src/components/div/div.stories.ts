@@ -7,6 +7,8 @@ import '../flex'
 import '../grid'
 import '../card'
 
+import { background } from '@storybook/theming'
+
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
@@ -39,6 +41,14 @@ const DefaultParams: Story = {
 
 export const Default: Story = {
   ...DefaultParams,
+  args: {
+    background: '01',
+    border: '4xs',
+    'border-radius': 's',
+    'border-color': 'subtle-01',
+    width: '4xl',
+    height: '4xl',
+  },
 }
 
 /**
@@ -55,13 +65,13 @@ export const Example: Story = {
       align-items="center"
     >
       <!-- Some properties, like 'width' and 'height', accepts either tokens or arbitrary values -->
-      <gds-div width="4xl" height="4xl" background="primary"></gds-div>
+      <gds-div width="4xl" height="4xl" background="01"></gds-div>
 
       <!-- All style expressions properties accepts multi-viewport expressions -->
       <gds-div
         width="4xl; l{ 6xl }"
         height="4xl; l{ 6xl }"
-        background="secondary"
+        background="02"
         border="4xs"
       ></gds-div>
 
@@ -70,7 +80,7 @@ export const Example: Story = {
       <gds-div
         width="4xl"
         height="4xl"
-        background="tertiary"
+        background="03"
         border-radius="s"
       ></gds-div>
     </gds-div>
@@ -80,7 +90,7 @@ export const Example: Story = {
 /**
  * Border styling follows the same patterns as CSS and can be controlled using the shorthand properties `border`, `border-width`, `border-style`, `border-color`
  *
- * - `border-color` defaults to level 2 primary
+ * - `border-color` defaults to subtle-01
  * - `border-width` defaults to 0
  * - `border-style` defaults to solid
  *
@@ -99,7 +109,7 @@ export const Example: Story = {
  * To add a 1px secodary color border on the bottom:
  *
  * ```html
- * <gds-div border-width="0 0 4xs 0" border-color="secondary"></gds-div>
+ * <gds-div border-width="0 0 4xs 0" border-color="subtle-01"></gds-div>
  * ```
  */
 export const CardBorder: Story = {
@@ -110,24 +120,24 @@ export const CardBorder: Story = {
       <gds-card
         variant="primary"
         border-radius="0 0 m m"
-        border-width="4xs 0 0 0"
-        border-color="secondary"
+        border-width="2xs 0 0 0"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center"> Top </gds-flex>
       </gds-card>
       <gds-card
         variant="primary"
         border-radius="m 0 0 m"
-        border-width="0 4xs 0 0"
-        border-color="secondary"
+        border-width="0 2xs 0 0"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center">Right</gds-flex>
       </gds-card>
       <gds-card
         variant="primary"
         border-radius="m m 0 0"
-        border-width="0 0 4xs 0"
-        border-color="secondary"
+        border-width="0 0 2xs 0"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center">
           Bottom
@@ -136,8 +146,8 @@ export const CardBorder: Story = {
       <gds-card
         variant="primary"
         border-radius="0 m m 0"
-        border-width="0 0 0 4xs"
-        border-color="secondary"
+        border-width="0 0 0 2xs"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center">
           Left
@@ -146,8 +156,8 @@ export const CardBorder: Story = {
       <gds-card
         variant="primary"
         border-radius="m"
-        border="4xs"
-        border-color="secondary"
+        border="2xs"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center"> All </gds-flex>
       </gds-card>
