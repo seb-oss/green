@@ -46,6 +46,8 @@ export interface ComponentColumn {
     | 'details'
     | 'do'
     | 'dont'
+    | 'code'
+    | 'related'
   title?: string
   tag?: string
   content?: string
@@ -55,6 +57,7 @@ export interface ComponentColumn {
   color?: string
   size?: string
   Snippet?: string
+  code?: string
   plain?: boolean
   replay?: boolean
   variant?: string

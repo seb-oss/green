@@ -96,6 +96,7 @@ export const GreenDesignSystem: Story = {
               align-items="flex-start"
               padding="l"
               width="70%"
+              max-width="800px"
               gap="m"
               margin="xl 0 0 0"
               border-radius="m"

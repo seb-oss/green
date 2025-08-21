@@ -8,6 +8,7 @@ import { marked } from 'marked'
 import * as Core from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../../../settings'
 import { ComponentColumn, ImageProvider } from '../../../settings/content/types'
+import Code from '../code/code'
 import Figure from '../figure/figure'
 import { Snippet } from '../snippet/snippet'
 
@@ -366,7 +367,36 @@ export const RenderColumn = (
         )
       }
       return null
-
+    case 'code':
+      if (column.code) {
+        return (
+          <Core.GdsFlex flex-direction="column" gap="s" width="100%">
+            <Core.GdsCard
+              padding="l"
+              justify-content="flex-start"
+              align-items="flex-start"
+              position="relative"
+              border-color="transparent"
+              background="03"
+              width="100%"
+            >
+              <Code>{column.code}</Code>
+            </Core.GdsCard>
+            {column.caption && (
+              <Core.GdsFlex
+                flex-direction="row"
+                gap="s"
+                align-items="center"
+                padding="0 0 0 s"
+              >
+                <Core.GdsText tag="p" font-size="detail-s" color="secondary">
+                  {column.caption}
+                </Core.GdsText>
+              </Core.GdsFlex>
+            )}
+          </Core.GdsFlex>
+        )
+      }
     case 'image':
       if (column.src) {
         return (
