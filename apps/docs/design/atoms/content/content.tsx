@@ -367,6 +367,7 @@ export const RenderColumn = (
         )
       }
       return null
+
     case 'code':
       if (column.code) {
         return (
@@ -397,6 +398,8 @@ export const RenderColumn = (
           </Core.GdsFlex>
         )
       }
+      return null
+
     case 'image':
       if (column.src) {
         return (
