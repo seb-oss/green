@@ -19,7 +19,7 @@ export default css`
   }
 
   :host([size='small']) .native-control {
-    font: var(--gds-sys-text-detail-s);
+    font: var(--gds-sys-text-detail-regular-s);
   }
 
   :host([disabled]) {
@@ -29,8 +29,8 @@ export default css`
 
   .native-control {
     font: var(--gds-sys-text-detail-regular-m);
-    display: flex;
     align-items: center;
+    align-self: center;
     appearance: none;
     background-color: transparent;
     border: 0;

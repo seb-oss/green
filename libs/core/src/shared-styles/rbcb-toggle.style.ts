@@ -65,7 +65,7 @@ export default css`
     transition: scale 150ms;
     will-change: scale;
     scale: 1;
-    color: var(--gds-sys-color-content-inversed);
+    color: var(--gds-sys-color-content-03);
   }
 
   .rbcb__perimeter {

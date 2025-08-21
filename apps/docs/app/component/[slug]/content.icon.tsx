@@ -101,8 +101,6 @@ export function IconContent({ component }: IconContentProps) {
     )
   }, [search, selectedCategory, component.icons, fuse])
 
-  if (!component.icons) return null
-
   // If a URL hash is present, find the icon by name and set it as selected
   React.useEffect(() => {
     if (!window || !component.icons) return
@@ -148,28 +146,6 @@ export function IconContent({ component }: IconContentProps) {
     }
   }, [component.icons])
 
-  // const fuseItems: FuseIconItem[] = Object.entries(component.icons || {}).map(
-  //   ([name, icon]) => ({
-  //     id: name,
-  //     searchName: name,
-  //     searchDisplayName: icon.displayName,
-  //     searchCategories: icon.meta.categories,
-  //     searchTags: icon.meta.tags,
-  //     searchDescription: icon.meta.description,
-  //     originalIcon: icon,
-  //   }),
-  // )
-
-  // const fuse = new Fuse(fuseItems, fuseOptions)
-
-  // const categories = Array.from(
-  //   new Set(
-  //     Object.values(component.icons)
-  //       .map((icon) => icon.meta.categories)
-  //       .flat(),
-  //   ),
-  // ).sort()
-
   const handleCategoryChange = (e: Event) => {
     const target = e.target as HTMLSelectElement
     setSelectedCategory(target.value)
@@ -189,6 +165,8 @@ export function IconContent({ component }: IconContentProps) {
     const target = e.target as HTMLInputElement
     setIsSolid(target.checked)
   }
+
+  if (!component.icons) return null
 
   const totalIcons = Object.keys(component.icons).length
   const filteredCount = iconList.length
@@ -321,7 +299,7 @@ export function IconContent({ component }: IconContentProps) {
               }}
               className="pointer l2-state-neutral-03 focusable"
               role="button"
-              tabindex="0"
+              tabIndex={0}
               aria-haspopup="dialog"
             >
               <Core.GdsFlex
