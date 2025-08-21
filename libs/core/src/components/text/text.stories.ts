@@ -158,7 +158,7 @@ export const Preamble: Story = {
  *
  * The `color` property that will change the text color based on the specified color token.
  *
- * e.g. `<gds-text level="1" color="primary"></gds-text>`
+ * e.g. `<gds-text level="1" color="01"></gds-text>`
  *
  */
 
@@ -169,14 +169,14 @@ export const Color: Story = {
       <gds-theme color-scheme="dark">
         <gds-flex
           level="1"
-          background="primary"
+          background="01"
           border-radius="xs"
           padding="xl"
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="primary" font-size="body-s">
-            Color: Content Primary
+          <gds-text level="1" color="01" font-size="body-s">
+            Color: Content 01
           </gds-text>
         </gds-flex>
         <gds-flex

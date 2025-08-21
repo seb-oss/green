@@ -20,7 +20,7 @@ const style = css`
       outline-offset: var(--gds-sys-space-2xs);
       outline-color: currentColor;
       transition: all 120ms;
-      color: var(--gds-sys-color-l2-content-primary);
+      color: var(--gds-sys-color-content-01);
     }
 
     .summary-icon {

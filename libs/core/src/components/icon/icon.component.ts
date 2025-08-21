@@ -67,7 +67,7 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-icon-ai color="primary/0.2"></gds-icon-ai>
+   * <gds-icon-ai color="01/0.2"></gds-icon-ai>
    * ```
    */
   @styleExpressionProperty(forColorTokens('content'))

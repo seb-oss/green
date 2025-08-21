@@ -237,7 +237,7 @@ export const ThemeModes: Story = {
             <gds-button
               id="theme-toggle"
               padding="s m"
-              background-color="primary"
+              background-color="01"
               color="white"
               border="none"
               border-radius="xs"
@@ -283,7 +283,7 @@ export const ThemeModes: Story = {
                 background="surface"
                 margin-bottom="m"
               >
-              <gds-text margin="0" color="primary">Content</gds-text>
+              <gds-text margin="0" color="01">Content</gds-text>
                 <gds-spinner size="md" cover></gds-spinner>
               </gds-div>
             </gds-card>

@@ -61,7 +61,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div color="primary/0.2"></gds-div>
+   * <gds-div color="01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('content'))
@@ -72,7 +72,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div background="primary/0.2"></gds-div>
+   * <gds-div background="01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('background'))
@@ -83,7 +83,7 @@ export class GdsDiv extends withSizeXProps(
    * Accepts a string of the same format as the CSS border property.
    *
    * ```html
-   * <gds-div border="4xs solid primary/0.2"></gds-div>
+   * <gds-div border="4xs solid subtle-01/0.2"></gds-div>
    * ```
    *
    * Where the size value accepts space tokens and the color value accepts color tokens and an optional transparency value.
@@ -94,7 +94,7 @@ export class GdsDiv extends withSizeXProps(
       const [
         size,
         style = this_['border-style'] || 'solid',
-        color = this_['border-color'] || 'primary',
+        color = this_['border-color'] || 'subtle-01',
       ] = values
       const sizeCss = `var(--gds-sys-space-${size})`
       const colorCss = parseColorValue(color, 'border', this_.level)
@@ -108,7 +108,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div border-color="primary/0.2"></gds-div>
+   * <gds-div border-color="subtle-01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('border'))

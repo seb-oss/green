@@ -280,8 +280,7 @@ const style = css`
   * Iframe
   */
   iframe {
-    border: var(--gds-sys-space-4xs) solid
-      var(--gds-sys-color-l2-border-primary);
+    border: var(--gds-sys-space-4xs) solid var(--gds-sys-color-border-subtle-01);
     border-radius: var(--gds-sys-space-xs);
     min-width: 100%;
     margin-bottom: var(--gds-sys-space-l);
