@@ -184,6 +184,7 @@ const style = css`
         background: var(--gds-sys-color-l3-notice-02);
         inset: calc(100% + var(--gds-sys-space-2xs))
           calc(50% - var(--gds-sys-space-l) / 2) auto auto;
+        z-index: -1;
       }
     }
   }
