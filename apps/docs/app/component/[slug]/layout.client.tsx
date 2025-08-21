@@ -276,7 +276,7 @@ export function ComponentLayoutClient({
               <Core.GdsAlert
                 variant="information"
                 buttonLabel="Learn more"
-                onClick={() => router.push('/foundation/layout')}
+                onClick={() => router.push('/primitives/declarative-layout')}
               >
                 <Core.GdsText font="body-regular-m">
                   <Core.GdsText

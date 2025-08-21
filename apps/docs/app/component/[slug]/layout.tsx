@@ -46,6 +46,19 @@ export async function generateMetadata(
     openGraph: {
       title: `${component.title} — Green Design System`,
       description: component.summary || '',
+      images: [
+        {
+          url:
+            'https://api.seb.io/components/' +
+            component.slug +
+            '/' +
+            component.slug +
+            '.og.png',
+          width: 1200,
+          height: 630,
+          alt: component.title,
+        },
+      ],
     },
     keywords: [...(component.tags || []), ...(component.category || [])].join(
       ', ',

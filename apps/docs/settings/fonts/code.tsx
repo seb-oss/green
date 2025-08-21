@@ -8,7 +8,7 @@ import localFont from 'next/font/local'
 const Code = localFont({
   src: [
     {
-      path: '../../public/fonts/code/code.woff2',
+      path: '../../public/fonts/Code/code.woff2',
       style: 'normal',
       weight: '400',
     },
