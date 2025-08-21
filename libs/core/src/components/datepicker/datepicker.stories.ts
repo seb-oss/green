@@ -184,17 +184,7 @@ export const Simplified: Story = {
 }
 
 /**
- * Use `calendarSize="small"` attribute for a smaller popover version.
- */
-export const Small: Story = {
-  ...DefaultParams,
-  render: (args) => html`
-    <gds-datepicker label="Small popover" calendarSize="small"></gds-datepicker>
-  `,
-}
-
-/**
- * Most things on.
+ * An example with things turned on.
  */
 export const Full: Story = {
   ...DefaultParams,
@@ -205,24 +195,6 @@ export const Full: Story = {
       clearable
       disabled-weekends
       show-week-numbers
-    ></gds-datepicker>
-  `,
-}
-
-/**
- * Most things on but small size.
- */
-export const FullSmall: Story = {
-  ...DefaultParams,
-  render: (args) => html`
-    <gds-datepicker
-      label="Label"
-      supporting-text="Supporting text"
-      clearable
-      disabled-weekends
-      show-week-numbers
-      size="small"
-      calendarSize="small"
     ></gds-datepicker>
   `,
 }

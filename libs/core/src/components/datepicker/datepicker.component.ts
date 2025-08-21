@@ -93,12 +93,6 @@ class Datepicker extends GdsFormControlElement<Date> {
   size: 'large' | 'small' = 'large'
 
   /**
-   * Whether to use the small variant of the calendar popover.
-   */
-  @property({ type: String })
-  calendarSize: 'large' | 'small' = 'large'
-
-  /**
    * Hides the header and the footer, while still keeping the accessible label
    *
    * Always set the `label` attribute, and if you need to hide it, add this attribute and keep `label` set.
@@ -456,7 +450,6 @@ class Datepicker extends GdsFormControlElement<Date> {
             id="calendar"
             @change=${this.#handleCalendarChange}
             @gds-date-focused=${this.#handleCalendarFocusChange}
-            .size=${this.calendarSize}
             .focusedMonth=${this._focusedMonth}
             .focusedYear=${this._focusedYear}
             .value=${this.value}
