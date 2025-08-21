@@ -19,7 +19,7 @@ export default css`
   }
 
   :host([size='small']) .native-control {
-    font: var(--gds-sys-text-detail-s);
+    font: var(--gds-sys-text-detail-regular-s);
   }
 
   :host([disabled]) {
