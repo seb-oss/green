@@ -105,7 +105,7 @@ jobs:
 
       - name: Clear folder except CNAME
         run: |
-          find . -mindepth 1 -maxdepth 1 ! -name 'CNAME' -exec rm -rf {} +
+          find . -mindepth 1 -maxdepth 1 ! -name 'CNAME' ! -name '.git' ! -name '.github' -exec rm -rf {} +
 
       - name: Get build artifact
         uses: actions/download-artifact@v4
