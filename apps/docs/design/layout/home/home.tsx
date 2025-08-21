@@ -387,11 +387,7 @@ export function Home({
           aria-label="Resources"
           aria-describedby="resources-subheading"
         >
-          <NextLink
-            href="https://figma.com/"
-            key="https://figma.com/"
-            target="_blank"
-          >
+          <NextLink href="https://seb.io/figma" key="https://seb.io/figma">
             <GdsCard flex-direction="row" align-items="center">
               <IconBrandFigma size="m" />
               <GdsFlex

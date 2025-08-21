@@ -24,6 +24,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
         style={{ background: 'var(--gds-sys-color-l1-01)' }}
         width="100%"
         gap="0"
+        color="01"
       >
         <Sidebar />
         <GdsFlex flex-direction="column" width="100%">
