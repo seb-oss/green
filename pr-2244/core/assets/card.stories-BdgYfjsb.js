@@ -1,0 +1,341 @@
+import{x as n}from"./lit-element-Bx14lxc-.js";import{a as B}from"./argTableProps-DKL_mzwu.js";import"./card-QshsQ8Tz.js";import"./img-BY7Bi3mN.js";import"./video-B5wCVy3B.js";import"./div-C1vvXmnE.js";import"./mask-CR9i34Sz.js";import"./flex-DLGEEWp7.js";import"./text-Cr36fYWN.js";import"./divider-CkUWOY9s.js";import"./arrow-down-CUO1uex2.js";import"./arrow-right-DXgJPYuD.js";import"./circles-three-Csu74ibQ.js";import"./custom-elements-BasR93Qa.js";import"./card.component-CHcv557n.js";import"./tokens.style-B41Dpirr.js";import"./gds-element-DJNCW3iR.js";import"./Reflect-DJ7r0WLU.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./declarative-layout-mixins-CquYcIh8.js";import"./div.component-BL4QQsYF.js";import"./img.component-B-YzZTK_.js";import"./video.component-CawQXpsV.js";import"./query-p8xgzTDt.js";import"./mask.component-DKJ0RPjX.js";import"./static-B8S6DEnV.js";import"./flex.component-C7Ornwwu.js";import"./text.component-Z1EVQ77F.js";import"./divider.component-Cx8iHpM0.js";import"./arrow-down.component-DhiV4FJc.js";import"./icon-DdzZnqx5.js";import"./unsafe-html-CYO4avEf.js";import"./directive-CF8sV3Lr.js";import"./arrow-right.component-DEGzaL9p.js";import"./circles-three.component-BOH5p8mJ.js";const id={title:"Components/Card",component:"gds-card",tags:["autodocs"],argTypes:{...B("gds-card")},parameters:{docs:{description:{component:`The card groups related content into a single container.
+
+\`gds-card\` inherits all properties from \`gds-div\`, but comes with some predefined defaults
+and a shortcut property for specifiying different card variants.
+
+@status beta
+
+@extends \`gds-div\``}}}},r={parameters:{docs:{source:{format:!0,type:"dynamic"}},controls:{disable:!0}}},s={...r,args:{innerHTML:"Card content",style:"max-width: 200px"}},d={...r,render:t=>n`
+    <gds-flex gap="l" flex-direction="column">
+      <gds-card variant="secondary">
+        <gds-flex gap="l" flex-direction="column">
+          <gds-text tag="h3">Light mode</gds-text>
+          <gds-grid columns="2" gap="l">
+            <gds-card variant="primary">Primary</gds-card>
+            <gds-card variant="secondary">Secondary</gds-card>
+            <gds-card variant="brand-01">Brand-01</gds-card>
+            <gds-card variant="brand-02">Brand-02</gds-card>
+          </gds-grid>
+          <gds-grid columns="1" gap="l">
+            <gds-card variant="positive">Positive</gds-card>
+            <gds-card variant="negative">Negative</gds-card>
+            <gds-card variant="notice">Notice</gds-card>
+            <gds-card variant="warning">Warning</gds-card>
+            <gds-card variant="information">Information</gds-card>
+          </gds-grid>
+          <gds-grid columns="1" gap="l">
+            <gds-card>Default</gds-card>
+          </gds-grid>
+        </gds-flex>
+      </gds-card>
+      <gds-theme color-scheme="dark">
+        <gds-card>
+          <gds-flex gap="l" flex-direction="column">
+            <gds-text tag="h3">Dark mode</gds-text>
+            <gds-grid columns="2" gap="l">
+              <gds-card variant="primary">Primary</gds-card>
+              <gds-card variant="secondary">Secondary</gds-card>
+              <gds-card variant="brand-01">Brand-01</gds-card>
+              <gds-card variant="brand-02">Brand-02</gds-card>
+            </gds-grid>
+            <gds-grid columns="1" gap="l">
+              <gds-card variant="positive">Positive</gds-card>
+              <gds-card variant="negative">Negative</gds-card>
+              <gds-card variant="notice">Notice</gds-card>
+              <gds-card variant="warning">Warning</gds-card>
+              <gds-card variant="information">Information</gds-card>
+            </gds-grid>
+            <gds-grid columns="1" gap="l">
+              <gds-card>Default</gds-card>
+            </gds-grid>
+          </gds-flex>
+        </gds-card>
+      </gds-theme>
+    </gds-flex>
+  `},a={...r,name:"Box shadow",render:t=>n`<gds-grid columns="4" gap="l">
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="s"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          S
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="m"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          M
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="l"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          L
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="xl"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          xl
+        </gds-flex>
+      </gds-card>
+    </gds-grid>`},e={...r,name:"Using with Grid",render:t=>n` <gds-grid columns="4" gap="l">
+      <gds-div>
+        <gds-card border-radius="xs">
+          <gds-flex gap="m" flex-direction="column" align-items="flex-start">
+            <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
+              Sidebar
+            </gds-text>
+            <gds-text text-wrap="balance">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-flex>
+        </gds-card>
+      </gds-div>
+      <gds-div grid-column="2 / -1" grid-row="1 / -1" display="flex">
+        <gds-card border-radius="xs">
+          <gds-flex
+            flex-direction="column"
+            align-items="flex-start"
+            justify-content="center"
+            gap="m"
+          >
+            <gds-text font-size="heading-s"> Span Columns: [2 / -1]</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-text font-size="body-m">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-flex>
+        </gds-card>
+      </gds-div>
+      <gds-div grid-column="1 / -1">
+        <gds-card border-radius="xs">
+          <gds-flex
+            flex-direction="column"
+            align-items="flex-start"
+            justify-content="center"
+            gap="m"
+          >
+            <gds-text font-size="heading-s">Span all columns [1 / -1]</gds-text>
+            <gds-text text-wrap="balance" lines="3">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-flex>
+        </gds-card>
+      </gds-div>
+    </gds-grid>`};var i,o,g;s.parameters={...s.parameters,docs:{...(i=s.parameters)==null?void 0:i.docs,source:{originalSource:`{
+  ...DefaultParams,
+  args: {
+    innerHTML: 'Card content',
+    style: 'max-width: 200px'
+  }
+}`,...(g=(o=s.parameters)==null?void 0:o.docs)==null?void 0:g.source}}};var c,l,m,u,p;d.parameters={...d.parameters,docs:{...(c=d.parameters)==null?void 0:c.docs,source:{originalSource:`{
+  ...DefaultParams,
+  render: args => html\`
+    <gds-flex gap="l" flex-direction="column">
+      <gds-card variant="secondary">
+        <gds-flex gap="l" flex-direction="column">
+          <gds-text tag="h3">Light mode</gds-text>
+          <gds-grid columns="2" gap="l">
+            <gds-card variant="primary">Primary</gds-card>
+            <gds-card variant="secondary">Secondary</gds-card>
+            <gds-card variant="brand-01">Brand-01</gds-card>
+            <gds-card variant="brand-02">Brand-02</gds-card>
+          </gds-grid>
+          <gds-grid columns="1" gap="l">
+            <gds-card variant="positive">Positive</gds-card>
+            <gds-card variant="negative">Negative</gds-card>
+            <gds-card variant="notice">Notice</gds-card>
+            <gds-card variant="warning">Warning</gds-card>
+            <gds-card variant="information">Information</gds-card>
+          </gds-grid>
+          <gds-grid columns="1" gap="l">
+            <gds-card>Default</gds-card>
+          </gds-grid>
+        </gds-flex>
+      </gds-card>
+      <gds-theme color-scheme="dark">
+        <gds-card>
+          <gds-flex gap="l" flex-direction="column">
+            <gds-text tag="h3">Dark mode</gds-text>
+            <gds-grid columns="2" gap="l">
+              <gds-card variant="primary">Primary</gds-card>
+              <gds-card variant="secondary">Secondary</gds-card>
+              <gds-card variant="brand-01">Brand-01</gds-card>
+              <gds-card variant="brand-02">Brand-02</gds-card>
+            </gds-grid>
+            <gds-grid columns="1" gap="l">
+              <gds-card variant="positive">Positive</gds-card>
+              <gds-card variant="negative">Negative</gds-card>
+              <gds-card variant="notice">Notice</gds-card>
+              <gds-card variant="warning">Warning</gds-card>
+              <gds-card variant="information">Information</gds-card>
+            </gds-grid>
+            <gds-grid columns="1" gap="l">
+              <gds-card>Default</gds-card>
+            </gds-grid>
+          </gds-flex>
+        </gds-card>
+      </gds-theme>
+    </gds-flex>
+  \`
+}`,...(m=(l=d.parameters)==null?void 0:l.docs)==null?void 0:m.source},description:{story:"Examples of different color variants",...(p=(u=d.parameters)==null?void 0:u.docs)==null?void 0:p.description}}};var x,f,v,b,h;a.parameters={...a.parameters,docs:{...(x=a.parameters)==null?void 0:x.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Box shadow',
+  render: args => html\`<gds-grid columns="4" gap="l">
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="s"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          S
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="m"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          M
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="l"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          L
+        </gds-flex>
+      </gds-card>
+      <gds-card
+        padding="s{xs} m{l} l{l}"
+        box-shadow="xl"
+        border-radius="xs"
+        variant="secondary"
+      >
+        <gds-flex display="flex" align-items="center" justify-content="center">
+          xl
+        </gds-flex>
+      </gds-card>
+    </gds-grid>\`
+}`,...(v=(f=a.parameters)==null?void 0:f.docs)==null?void 0:v.source},description:{story:`@property box-shadow
+
+Controls the box-shadow styling of the card.
+
+Shadow styles are as specified on the design system that range from "s" to "xl" and can be used like this:
+
+\`\`\`html
+<gds-card box-shadow="s"></gds-card>
+\`\`\`
+
+The above example will apply the box-shadow style of "s" for small device sizes. The box-shadow style values are predefined in the design tokens.`,...(h=(b=a.parameters)==null?void 0:b.docs)==null?void 0:h.description}}};var y,w,q,L,S;e.parameters={...e.parameters,docs:{...(y=e.parameters)==null?void 0:y.docs,source:{originalSource:`{
+  ...DefaultParams,
+  name: 'Using with Grid',
+  render: args => html\` <gds-grid columns="4" gap="l">
+      <gds-div>
+        <gds-card border-radius="xs">
+          <gds-flex gap="m" flex-direction="column" align-items="flex-start">
+            <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
+              Sidebar
+            </gds-text>
+            <gds-text text-wrap="balance">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-flex>
+        </gds-card>
+      </gds-div>
+      <gds-div grid-column="2 / -1" grid-row="1 / -1" display="flex">
+        <gds-card border-radius="xs">
+          <gds-flex
+            flex-direction="column"
+            align-items="flex-start"
+            justify-content="center"
+            gap="m"
+          >
+            <gds-text font-size="heading-s"> Span Columns: [2 / -1]</gds-text>
+            <gds-text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-text font-size="body-m">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-flex>
+        </gds-card>
+      </gds-div>
+      <gds-div grid-column="1 / -1">
+        <gds-card border-radius="xs">
+          <gds-flex
+            flex-direction="column"
+            align-items="flex-start"
+            justify-content="center"
+            gap="m"
+          >
+            <gds-text font-size="heading-s">Span all columns [1 / -1]</gds-text>
+            <gds-text text-wrap="balance" lines="3">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
+              ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum
+              dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+              amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </gds-text>
+            <gds-button>Button</gds-button>
+          </gds-flex>
+        </gds-card>
+      </gds-div>
+    </gds-grid>\`
+}`,...(q=(w=e.parameters)==null?void 0:w.docs)==null?void 0:q.source},description:{story:'Using `gds-card` with `gds-grid`\nThe `gds-card` can be used with the `gds-grid` to create a card layout with multiple cards.\nThe `gds-card` and `gds-div` accept properties like `column` and `row` where you can specify the number of columns specified on the grid to span or rows to span in vertical axis like on this example:\n\n```html\n<gds-div grid-column="2 / -1" grid-row="1 / -1"></gds-div>\n```',...(S=(L=e.parameters)==null?void 0:L.docs)==null?void 0:S.description}}};const od=["Card","Variants","Cardshadow","CardGrid"];export{s as Card,e as CardGrid,a as Cardshadow,d as Variants,od as __namedExportsOrder,id as default};
