@@ -193,7 +193,7 @@ export const Color: Story = {
     <gds-flex height="300px">
       <gds-fab inset="auto 48px 48px auto" rank="primary">
         Secondary
-        <gds-signal slot="trail" level="3" color="positive"></gds-signal>
+        <gds-signal slot="trail" level="3" color="positive-01"></gds-signal>
       </gds-fab>
     </gds-flex>
   `,

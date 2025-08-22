@@ -84,7 +84,7 @@ export const Example_menu_bar: Story = {
       display="flex"
       height="70px"
       width="700px"
-      border-color="secondary"
+      border-color="strong"
       border-width="0 0 4xs 0"
     >
       <div style="flex-basis:50%;">

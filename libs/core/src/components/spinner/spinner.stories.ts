@@ -237,7 +237,6 @@ export const ThemeModes: Story = {
             <gds-button
               id="theme-toggle"
               padding="s m"
-              background-color="01"
               color="white"
               border="none"
               border-radius="xs"

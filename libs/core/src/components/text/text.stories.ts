@@ -181,25 +181,25 @@ export const Color: Story = {
         </gds-flex>
         <gds-flex
           level="1"
-          background="secondary"
+          background="02"
           border-radius="xs"
           padding="xl"
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="secondary" font-size="body-m">
+          <gds-text level="1" color="02" font-size="body-m">
             Color: Content Secondary
           </gds-text>
         </gds-flex>
         <gds-flex
           level="1"
-          background="tertiary"
+          background="03"
           border-radius="xs"
           padding="xl"
           display="flex"
           flex-direction="column"
         >
-          <gds-text level="1" color="tertiary" font-size="body-l">
+          <gds-text level="1" color="03" font-size="body-l">
             Color: Content Tertiary
           </gds-text>
         </gds-flex>

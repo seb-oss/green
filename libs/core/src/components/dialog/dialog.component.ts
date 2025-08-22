@@ -137,10 +137,7 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
               min-height="min-content"
             >
               <slot name="dialog">
-                <gds-flex
-                  justify-content="space-between"
-                  background-color="secondary"
-                >
+                <gds-flex justify-content="space-between">
                   <h2 id="heading">${this.heading}</h2>
                   <gds-button
                     id="close-btn"

@@ -96,7 +96,7 @@ export const Stroke: Story = {
  * ```html
  * <!-- Basic color tokens -->
  * <gds-icon-ai color="primary"></gds-icon-ai>
- * <gds-icon-ai color="negative"></gds-icon-ai>
+ * <gds-icon-ai color="negative-01"></gds-icon-ai>
  *
  * <!-- With transparency -->
  * <gds-icon-ai color="primary/0.2"></gds-icon-ai>
