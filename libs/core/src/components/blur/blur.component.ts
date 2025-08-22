@@ -20,6 +20,6 @@ export class GdsBlur extends GdsElement {
   static styles = BlurStyles
 
   render() {
-    return html`<slot></slot>`
+    return html`<div class="blur"><slot></slot></div>`
   }
 }
