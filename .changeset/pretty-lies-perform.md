@@ -2,4 +2,4 @@
 '@sebgroup/green-core': minor
 ---
 
-GDS23 design for calendar and datepicker
+**Calendar & Datepicker:** Add correct GDS23 design
