@@ -2,4 +2,4 @@
 '@sebgroup/chlorophyll': patch
 ---
 
-Adjust font-size on small buttons
+**Button:** Adjust font-size on small buttons
