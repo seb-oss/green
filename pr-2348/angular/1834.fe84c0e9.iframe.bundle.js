@@ -380,6 +380,7 @@
       display: flex;
       flex-direction: column;
       overflow: auto;
+      overscroll-behavior: contain;
     }
   }
 `,checkmark_component=__webpack_require__("./dist/libs/core/src/components/icon/icons/checkmark.component.js"),focusable=__webpack_require__("./dist/libs/core/src/utils/mixins/focusable.js"),option_styles=__webpack_require__("./dist/libs/core/src/primitives/listbox/option.styles.js");let GdsOption=class extends((0,focusable.z)(gds_element.j)){constructor(){super(),(0,chunk_QTSIPXV3.VK)(this,_emitSelect),(0,chunk_QTSIPXV3.VK)(this,_hidden,!1),this.selected=!1,this.isPlaceholder=!1,this.addEventListener("click",(0,chunk_QTSIPXV3.jq)(this,_emitSelect,emitSelect_fn)),this.addEventListener("keydown",(e=>{"Enter"!==e.key&&" "!==e.key||(e.preventDefault(),(0,chunk_QTSIPXV3.jq)(this,_emitSelect,emitSelect_fn).call(this,e))}))}get hidden(){return(0,chunk_QTSIPXV3.S7)(this,_hidden)}set hidden(value){const strValue=value.toString();(0,chunk_QTSIPXV3.OV)(this,_hidden,"true"===strValue),(0,chunk_QTSIPXV3.S7)(this,_hidden)?this.setAttribute("inert",""):this.removeAttribute("inert")}connectedCallback(){super.connectedCallback(),this.setAttribute("role","option"),this.updateComplete.then((()=>{this.isPlaceholder&&(this.hidden=!0),transitional_styles.n.instance.apply(this,"gds-option")}))}get parentElement(){return super.parentElement}_handlePlaceholderStatusChange(){this.isPlaceholder?this.hidden=!0:this.hidden=!1}render(){const isMultiple=this.parentElement?.multiple,checkbox=custom_element_scoping.qy`
@@ -644,4 +645,4 @@
     display: flex;
   }
 `}}]);
-//# sourceMappingURL=1834.a9e3f39f.iframe.bundle.js.map
+//# sourceMappingURL=1834.fe84c0e9.iframe.bundle.js.map
