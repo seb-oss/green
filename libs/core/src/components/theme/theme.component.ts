@@ -28,6 +28,7 @@ export class GdsTheme extends GdsElement {
     css`
       :host {
         display: contents;
+        color: var(--gds-sys-color-content-neutral-01);
       }
     `,
   ]
