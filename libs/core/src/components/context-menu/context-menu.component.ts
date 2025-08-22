@@ -124,6 +124,7 @@ export class GdsContextMenu extends withMarginProps(
         aria-haspopup="menu"
         aria-controls="menu"
         aria-expanded=${this.open}
+        label=${this.buttonLabel}
         @click=${() => (this.open = true)}
       >
         ${this.showLabel
