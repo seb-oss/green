@@ -9,12 +9,14 @@ const style = css`
   }
 
   hr {
-    background: var(--_color, currentColor);
     border: 0;
     min-height: 1px;
     max-height: 1px;
     height: 1px;
     width: 100%;
+    margin: unset;
+    background: var(--_color, currentColor);
+    box-sizing: border-box;
   }
 `
 export default style
