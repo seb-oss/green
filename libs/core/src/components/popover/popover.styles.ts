@@ -32,6 +32,7 @@ const style = css`
       border: var(--gds-sys-space-4xs) solid
         var(--gds-sys-color-border-subtle-01);
       border-radius: var(--gds-sys-radius-s);
+      overscroll-behavior: contain;
     }
 
     :host([nonmodal]) dialog {
