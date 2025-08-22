@@ -46,8 +46,7 @@ describe('<gds-alert>', () => {
       )
       await el.updateComplete
       const closeBtn =
-        el.shadowRoot?.querySelector('.close-btn') ||
-        el.querySelector('.close-btn')
+        el.shadowRoot?.querySelector('.close') || el.querySelector('.close')
       expect(closeBtn).to.exist
     })
 
@@ -56,7 +55,7 @@ describe('<gds-alert>', () => {
         html`<gds-alert button-label="Action">With action</gds-alert>`,
       )
       await el.updateComplete
-      const btn = el.shadowRoot?.querySelector('.action-button')
+      const btn = el.shadowRoot?.querySelector('.action')
       expect(btn).to.exist
       expect(btn?.textContent?.trim()).to.equal('Action')
     })
@@ -68,7 +67,7 @@ describe('<gds-alert>', () => {
         html`<gds-alert dismissible>Dismiss me</gds-alert>`,
       )
       await el.updateComplete
-      const closeBtn = el.shadowRoot?.querySelector('.close-btn')
+      const closeBtn = el.shadowRoot?.querySelector('.close')
       const closeSpy = sinon.spy()
       el.addEventListener('gds-close', closeSpy)
       closeBtn.focus()
@@ -82,7 +81,7 @@ describe('<gds-alert>', () => {
         html`<gds-alert button-label="Action">With action</gds-alert>`,
       )
       await el.updateComplete
-      const btn = el.shadowRoot?.querySelector('.action-button')
+      const btn = el.shadowRoot?.querySelector('.action')
       const actionSpy = sinon.spy()
       el.addEventListener('gds-action', actionSpy)
       btn.focus()
