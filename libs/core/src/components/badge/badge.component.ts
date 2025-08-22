@@ -94,7 +94,7 @@ export class GdsBadge extends withSizeXProps(
           break
         case 'positive':
           background = 'positive-03'
-          color = 'positive-01'
+          color = 'positive-03'
           break
         case 'warning':
           background = 'warning-03'
