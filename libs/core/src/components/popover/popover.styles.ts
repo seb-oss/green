@@ -33,6 +33,7 @@ const style = css`
         0 1rem 28px rgba(0, 0, 0, 0.15);
       border-width: 0;
       border-radius: 0.5rem;
+      overscroll-behavior: contain;
     }
 
     :host([nonmodal]) dialog {
