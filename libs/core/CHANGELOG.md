@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.90.1
+
+### Patch Changes
+
+- d213f1d: **Popover:** Don't close on scroll on small viewports
+
 ## 1.90.0
 
 ### Minor Changes
