@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.21
+
+### Patch Changes
+
+- 69c0cd0: **Button:** Adjust font-size on small buttons
+
 ## 3.6.20
 
 ### Patch Changes
