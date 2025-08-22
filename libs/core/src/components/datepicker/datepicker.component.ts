@@ -466,7 +466,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-flex
                 align-items="center"
                 justify-content="space-between"
-                padding="0 m m m"
+                padding="m m m m"
               >
                 ${when(
                   this.clearable,
@@ -492,7 +492,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   () =>
                     html` <gds-button
                       id="today-button"
-                      rank="tertiary"
+                      rank="primary"
                       size="small"
                       @click=${(e: MouseEvent) => {
                         e.stopPropagation()

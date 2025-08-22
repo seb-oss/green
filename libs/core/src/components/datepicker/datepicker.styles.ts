@@ -4,7 +4,7 @@ const style = css`
   @layer base, reset;
 
   @layer base {
-    ::part(_button) {
+    #calendar-button::part(_button) {
       outline-offset: -1px;
     }
 
@@ -14,11 +14,11 @@ const style = css`
       justify-content: flex-start;
       inline-size: 12ch;
       gap: var(--gds-sys-space-4xs);
-      font: var(--gds-sys-text-detail-book-s);
+      font: var(--gds-sys-text-detail-regular-m);
     }
 
     :host([size='small']) .spinners {
-      font: var(--gds-sys-text-detail-book-s);
+      font: var(--gds-sys-text-detail-regular-s);
     }
 
     .spinner {
