@@ -1,7 +1,7 @@
 .sidebar {
   --padding-top: 152px;
   box-sizing: border-box;
-  background: var(--gds-sys-color-l1-01);
+  background: var(--gds-sys-color-l1-neutral-01);
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;

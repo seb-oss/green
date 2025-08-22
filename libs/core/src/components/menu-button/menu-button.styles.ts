@@ -11,7 +11,7 @@ const style = css`
       --_padding-block: var(--gds-sys-space-xs);
 
       --_color-bg: transparent;
-      --_color-text: var(--gds-sys-color-content-01);
+      --_color-text: var(--gds-sys-color-content-neutral-01);
       --_color-border: transparent;
 
       --_font-size: 1rem;

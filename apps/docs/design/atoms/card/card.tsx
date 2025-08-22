@@ -129,7 +129,7 @@ export default function Card({
             </Core.GdsFlex>
 
             {summary && (
-              <Core.GdsText color="02" font="preamble-xs" lines="2">
+              <Core.GdsText color="neutral-02" font="preamble-xs" lines="2">
                 {summary}
               </Core.GdsText>
             )}

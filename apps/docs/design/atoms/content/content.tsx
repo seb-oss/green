@@ -252,7 +252,7 @@ export const RenderColumn = (
                 tag="small"
                 font="detail-book-s"
                 padding-inline="s 0"
-                color="02"
+                color="neutral-02"
               >
                 {column.caption}
               </Core.GdsText>
@@ -378,7 +378,7 @@ export const RenderColumn = (
               align-items="flex-start"
               position="relative"
               border-color="transparent"
-              background="03"
+              background="neutral-03"
               width="100%"
             >
               <Code>{column.code}</Code>

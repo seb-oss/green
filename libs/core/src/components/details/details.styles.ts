@@ -7,7 +7,7 @@ const style = css`
       border-bottom: solid var(--gds-sys-space-4xs)
         var(--gds-sys-color-border-subtle-01);
       font: var(--gds-sys-text-body-regular-m);
-      color: var(--gds-sys-color-content-01);
+      color: var(--gds-sys-color-content-neutral-01);
       transition: border-color 240ms linear;
     }
 
@@ -20,7 +20,7 @@ const style = css`
       outline-offset: var(--gds-sys-space-2xs);
       outline-color: currentColor;
       transition: all 120ms;
-      color: var(--gds-sys-color-content-01);
+      color: var(--gds-sys-color-content-neutral-01);
     }
 
     .summary-icon {
@@ -46,7 +46,7 @@ const style = css`
     }
 
     .summary:focus {
-      outline-color: var(--gds-sys-color-content-01);
+      outline-color: var(--gds-sys-color-content-neutral-01);
 
       &:not(:focus-visible) {
         outline-color: transparent;

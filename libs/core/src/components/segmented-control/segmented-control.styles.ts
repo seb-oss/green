@@ -3,7 +3,7 @@ import { css } from 'lit'
 const style = css`
   @layer base {
     :host {
-      background-color: var(--gds-sys-color-l3-02);
+      background-color: var(--gds-sys-color-l3-neutral-02);
       border: 0.25rem solid transparent;
       border-radius: var(--gds-sys-space-max);
       box-sizing: border-box;
@@ -44,8 +44,8 @@ const style = css`
       aspect-ratio: 1;
       border-radius: var(--gds-sys-space-max);
       border-width: 0;
-      background-color: var(--gds-sys-color-l3-02);
-      color: var(--gds-sys-color-content-01);
+      background-color: var(--gds-sys-color-l3-neutral-02);
+      color: var(--gds-sys-color-content-neutral-01);
       cursor: pointer;
       display: flex;
       font-size: 1rem;
@@ -60,7 +60,7 @@ const style = css`
         &:hover {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l3-02),
+            var(--gds-sys-color-l3-neutral-02),
             var(--gds-sys-color-state-neutral-03)
           );
         }
@@ -96,7 +96,7 @@ const style = css`
     }
 
     #indicator {
-      background-color: var(--gds-sys-color-l3-04);
+      background-color: var(--gds-sys-color-l3-neutral-04);
       border-radius: var(--gds-sys-space-max);
       height: 100%;
       left: 0;

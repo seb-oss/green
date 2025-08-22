@@ -10,7 +10,7 @@ const style = css`
     padding: var(--gds-sys-space-m);
     width: 20rem;
     border-radius: var(--gds-sys-radius-s);
-    background-color: var(--gds-sys-color-l2-03);
+    background-color: var(--gds-sys-color-l2-neutral-03);
     color: var(--gds-sys-color-content-inversed);
     opacity: 0;
     transition: opacity 0.3s;
@@ -22,7 +22,7 @@ const style = css`
     position: absolute;
     height: var(--gds-sys-space-m);
     width: var(--gds-sys-space-m);
-    background-color: var(--gds-sys-color-l2-03);
+    background-color: var(--gds-sys-color-l2-neutral-03);
     transform: rotate(45deg);
   }
 

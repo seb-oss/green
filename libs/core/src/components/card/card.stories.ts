@@ -85,7 +85,7 @@ export const Variants: Story = {
         </gds-flex>
       </gds-card>
       <gds-theme color-scheme="dark">
-        <gds-card>
+        <gds-card style="background(var--gds-sys-color-l1-neutral-01)">
           <gds-flex gap="l" flex-direction="column">
             <gds-text tag="h3">Dark mode</gds-text>
             <gds-grid columns="2" gap="l">

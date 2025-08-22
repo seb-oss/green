@@ -29,8 +29,8 @@ const style = css`
       outline-style: solid;
       outline-width: 0;
       border-radius: var(--gds-sys-space-xs);
-      background: var(--gds-sys-color-l3-02);
-      color: var(--gds-sys-color-content-01);
+      background: var(--gds-sys-color-l3-neutral-02);
+      color: var(--gds-sys-color-content-neutral-01);
       border: var(--gds-sys-space-4xs) solid
         var(--gds-sys-color-border-interactive);
       cursor: text;
@@ -117,7 +117,7 @@ const style = css`
       .field:hover {
         background: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-02),
+          var(--gds-sys-color-l3-neutral-02),
           var(--gds-sys-color-state-neutral-03)
         );
       }

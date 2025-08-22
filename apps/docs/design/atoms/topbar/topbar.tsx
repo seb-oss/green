@@ -16,7 +16,7 @@ export function Topbar() {
         inset="0 0 auto"
         z-index="1000"
         level="1"
-        background="01"
+        background="neutral-01"
       >
         <Core.GdsFlex width="40px">
           <Core.GdsFlex display="flex; >899px{none}">

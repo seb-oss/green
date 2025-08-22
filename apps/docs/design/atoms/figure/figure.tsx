@@ -104,7 +104,7 @@ export default function Figure({
             tag="small"
             font="detail-book-xs"
             padding-inline="s 0"
-            color="02"
+            color="neutral-02"
           >
             {caption}
           </GdsText>

@@ -24,7 +24,7 @@
 .l2-state-neutral-03:hover {
   background: color-mix(
     in srgb,
-    var(--gds-sys-color-l2-02),
+    var(--gds-sys-color-l2-neutral-02),
     var(--gds-sys-color-state-neutral-03)
   );
 }

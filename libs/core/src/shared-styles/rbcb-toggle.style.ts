@@ -16,12 +16,12 @@ export default css`
 
     --_perimeter-bg-mix: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-02),
+      var(--gds-sys-color-l3-neutral-02),
       var(--gds-sys-color-state-neutral-03)
     );
     --_perimeter-bg-mix-active: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-02),
+      var(--gds-sys-color-l3-neutral-02),
       var(--gds-sys-color-state-neutral-04)
     );
 
@@ -46,8 +46,9 @@ export default css`
     width: var(--_toggle-size);
     height: var(--_toggle-size);
     border-radius: var(--_toggle-radius);
-    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs) var(--gds-sys-color-l3-01);
-    background-color: var(--gds-sys-color-l1-01);
+    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+      var(--gds-sys-color-l3-neutral-01);
+    background-color: var(--gds-sys-color-l1-neutral-01);
     box-sizing: border-box;
     transition-property: box-shadow;
     transition-duration: var(--gds-sys-motion-duration-fastest);
@@ -65,7 +66,7 @@ export default css`
     transition: scale 150ms;
     will-change: scale;
     scale: 1;
-    color: var(--gds-sys-color-content-03);
+    color: var(--gds-sys-color-content-neutral-03);
   }
 
   .rbcb__perimeter {
@@ -78,7 +79,7 @@ export default css`
     outline-style: solid;
     outline-offset: calc(-1 * var(--gds-sys-space-3xs));
     outline-width: 0;
-    outline-color: var(--gds-sys-color-content-01);
+    outline-color: var(--gds-sys-color-content-neutral-01);
     border-radius: calc(var(--_toggle-radius) + 4px);
     min-width: var(--_perimeter-size);
     min-height: var(--_perimeter-size);
@@ -94,7 +95,7 @@ export default css`
 
   .--checked .rbcb__toggle {
     box-shadow: inset 0 0 0 var(--_toggle-border-width-checked)
-      var(--gds-sys-color-l3-01);
+      var(--gds-sys-color-l3-neutral-01);
   }
 
   .--indeterminate .rbcb__toggle {

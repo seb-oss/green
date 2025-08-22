@@ -38,7 +38,7 @@ const style = css`
       border-radius: var(--gds-sys-radius-2xs);
 
       &:focus-visible {
-        background-color: var(--gds-sys-color-l3-01);
+        background-color: var(--gds-sys-color-l3-neutral-01);
         color: var(--gds-sys-color-content-inversed);
       }
     }

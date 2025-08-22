@@ -34,12 +34,12 @@
     color 240ms;
 
   &.selected {
-    background-color: var(--gds-sys-color-l3-03);
+    background-color: var(--gds-sys-color-l3-neutral-03);
 
     &:hover {
       background-color: color-mix(
         in srgb,
-        var(--gds-sys-color-l3-03),
+        var(--gds-sys-color-l3-neutral-03),
         var(--gds-sys-color-state-neutral-03)
       );
     }
@@ -48,7 +48,7 @@
   &:hover {
     background-color: color-mix(
       in srgb,
-      var(--gds-sys-color-l3-03),
+      var(--gds-sys-color-l3-neutral-03),
       var(--gds-sys-color-state-neutral-03)
     );
 
@@ -56,7 +56,7 @@
   }
 
   &:focus {
-    outline-color: var(--gds-sys-color-content-01);
+    outline-color: var(--gds-sys-color-content-neutral-01);
 
     &:not(:focus-visible) {
       outline-color: transparent;

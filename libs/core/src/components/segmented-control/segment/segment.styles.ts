@@ -12,7 +12,7 @@ const style = css`
       background: transparent;
       border-radius: var(--gds-sys-space-max);
       border-width: 0;
-      color: var(--gds-sys-color-content-01);
+      color: var(--gds-sys-color-content-neutral-01);
       cursor: pointer;
       flex-grow: 1;
       flex-shrink: 0;

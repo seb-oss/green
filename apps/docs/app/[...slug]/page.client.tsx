@@ -42,7 +42,7 @@ export function DynamicPageClient({ slug }: DynamicPageClientProps) {
           <GdsText
             tag="p"
             font="heading-s; s{heading-m}"
-            color="02"
+            color="neutral-02"
             max-width="100ch"
             margin="auto"
           >

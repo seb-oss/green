@@ -65,13 +65,13 @@ export const Example: Story = {
       align-items="center"
     >
       <!-- Some properties, like 'width' and 'height', accepts either tokens or arbitrary values -->
-      <gds-div width="4xl" height="4xl" background="01"></gds-div>
+      <gds-div width="4xl" height="4xl" background="neutral-01"></gds-div>
 
       <!-- All style expressions properties accepts multi-viewport expressions -->
       <gds-div
         width="4xl; l{ 6xl }"
         height="4xl; l{ 6xl }"
-        background="02"
+        background="neutral-02"
         border="4xs"
       ></gds-div>
 

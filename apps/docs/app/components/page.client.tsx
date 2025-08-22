@@ -112,7 +112,7 @@ export function ComponentsClient() {
           </Core.GdsFlex>
           <Core.GdsText
             font="heading-s"
-            color="02"
+            color="neutral-02"
             max-width="68ch"
             text-wrap="pretty"
             text-align="center"

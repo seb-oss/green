@@ -32,7 +32,7 @@ import '../icon/icons/circles-three.js'
  * <gds-card position="relative" padding="0" overflow="hidden">
  *   <gds-img src="path/to/image.jpg"></gds-img>
  *   <gds-mask
- *     background="01/0.9"
+ *     background="neutral-01/0.9"
  *     mask-image="top"
  *     position="absolute"
  *     inset="50% 0 0 0"
@@ -95,7 +95,7 @@ export const Mask: Story = {
     <gds-card position="relative" padding="0" overflow="hidden">
       <gds-img src="https://api.seb.io/assets/woods-cabin.jpeg"></gds-img>
       <gds-mask
-        background="01/0.9"
+        background="neutral-01/0.9"
         mask-image="top"
         position="absolute"
         inset="50% 0 0 0"

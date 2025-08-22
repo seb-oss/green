@@ -3,10 +3,10 @@
     "color": {
       "$type": "color",
       "L1": {
-        "01": {
+        "neutral-01": {
           "$value": "{ref.color.white}"
         },
-        "02": {
+        "neutral-02": {
           "$value": "{ref.color.grey.6}"
         },
         "brand-01": {
@@ -17,13 +17,13 @@
         }
       },
       "L2": {
-        "01": {
+        "neutral-01": {
           "$value": "{ref.color.grey.3}"
         },
-        "02": {
+        "neutral-02": {
           "$value": "{ref.color.white}"
         },
-        "03": {
+        "neutral-03": {
           "$value": "{ref.color.grey.30}"
         },
         "brand-01": {
@@ -58,16 +58,16 @@
         "brand-03": {
           "$value": "{ref.color.copper.7}"
         },
-        "01": {
+        "neutral-01": {
           "$value": "{ref.color.grey.30}"
         },
-        "02": {
+        "neutral-02": {
           "$value": "{ref.color.grey.6}"
         },
-        "03": {
+        "neutral-03": {
           "$value": "{ref.color.grey.8}"
         },
-        "04": {
+        "neutral-04": {
           "$value": "{ref.color.white}"
         },
         "positive-01": {

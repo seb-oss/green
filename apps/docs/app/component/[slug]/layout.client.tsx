@@ -113,7 +113,12 @@ export function ComponentLayoutClient({
         </Core.GdsText>
 
         {component.summary && (
-          <Core.GdsText tag="p" font="body-book-m" color="02" max-width="82ch">
+          <Core.GdsText
+            tag="p"
+            font="body-book-m"
+            color="neutral-02"
+            max-width="82ch"
+          >
             {component.summary}
           </Core.GdsText>
         )}
@@ -127,7 +132,7 @@ export function ComponentLayoutClient({
 
           {component.tags && (
             <Core.GdsFlex gap="xs" margin="0 0 2xs 0">
-              <Core.GdsText color="02" font="detail-book-s">
+              <Core.GdsText color="neutral-02" font="detail-book-s">
                 Tags:
               </Core.GdsText>
               {component.tags.map((tag) => (
@@ -315,7 +320,7 @@ export function ComponentLayoutClient({
             {/* {component.platform?.web && (
               <Core.GdsFlex gap="xs" flex-direction="column" padding="m">
                 <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
-                <Core.GdsText tag="small" color="02">
+                <Core.GdsText tag="small" color="neutral-02">
                   Platform
                 </Core.GdsText>
                 <Core.GdsFlex gap="s">

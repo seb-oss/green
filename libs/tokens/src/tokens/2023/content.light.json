@@ -3,16 +3,16 @@
     "color": {
       "content": {
         "$type": "color",
-        "01": {
+        "neutral-01": {
           "$value": "{ref.color.grey.30}"
         },
-        "02": {
+        "neutral-02": {
           "$value": "{ref.color.grey.19}"
         },
-        "03": {
+        "neutral-03": {
           "$value": "{ref.color.white}"
         },
-        "04": {
+        "neutral-04": {
           "$value": "{ref.color.grey.13}"
         },
         "inversed": {

@@ -251,7 +251,7 @@ export default function Command() {
                   Pages
                 </Core.GdsFilterChip>
               </Core.GdsFilterChips>
-              <Core.GdsText font="body-s" color="02">
+              <Core.GdsText font="body-s" color="neutral-02">
                 {query
                   ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
                   : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
@@ -324,7 +324,7 @@ export default function Command() {
                       </Core.GdsFlex>
                     </Core.GdsFlex>
                     {result.summary && (
-                      <Core.GdsText font-size="body-s" color="02">
+                      <Core.GdsText font-size="body-s" color="neutral-02">
                         {truncateSummary(result.summary)}
                       </Core.GdsText>
                     )}

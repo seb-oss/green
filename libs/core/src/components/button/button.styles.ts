@@ -26,8 +26,8 @@ const style = css`
       border: none;
       cursor: pointer;
       block-size: var(--_block-size);
-      background-color: var(--gds-sys-color-l3-01);
-      color: var(--gds-sys-color-content-03);
+      background-color: var(--gds-sys-color-l3-neutral-01);
+      color: var(--gds-sys-color-content-neutral-03);
       border-radius: var(--gds-sys-space-max);
       font-family: inherit;
       font: var(--gds-sys-text-detail-book-m);
@@ -45,7 +45,7 @@ const style = css`
       flex: 1;
 
       &:focus {
-        outline-color: var(--gds-sys-color-content-01);
+        outline-color: var(--gds-sys-color-content-neutral-01);
 
         &:not(:focus-visible) {
           outline-color: transparent;
@@ -56,7 +56,7 @@ const style = css`
         &:hover {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l3-01),
+            var(--gds-sys-color-l3-neutral-01),
             var(--gds-sys-color-state-neutral-01)
           );
         }
@@ -65,7 +65,7 @@ const style = css`
       &:active {
         background-color: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-01),
+          var(--gds-sys-color-l3-neutral-01),
           var(--gds-sys-color-state-neutral-02)
         );
       }
@@ -94,14 +94,14 @@ const style = css`
 
   @layer ranks {
     :host([rank*='secondary']) .button {
-      background-color: var(--gds-sys-color-l3-02);
-      color: var(--gds-sys-color-content-01);
+      background-color: var(--gds-sys-color-l3-neutral-02);
+      color: var(--gds-sys-color-content-neutral-01);
 
       @media (pointer: fine) {
         &:hover {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l3-02),
+            var(--gds-sys-color-l3-neutral-02),
             var(--gds-sys-color-state-neutral-03)
           );
         }
@@ -110,7 +110,7 @@ const style = css`
       &:active {
         background-color: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-02),
+          var(--gds-sys-color-l3-neutral-02),
           var(--gds-sys-color-state-neutral-04)
         );
       }
@@ -118,7 +118,7 @@ const style = css`
 
     :host([rank*='tertiary']) .button {
       background-color: transparent;
-      color: var(--gds-sys-color-content-01);
+      color: var(--gds-sys-color-content-neutral-01);
 
       @media (pointer: fine) {
         &:hover {
@@ -191,14 +191,14 @@ const style = css`
       }
 
       &.secondary {
-        background-color: var(--gds-sys-color-l3-02);
-        color: var(--gds-sys-color-content-01);
+        background-color: var(--gds-sys-color-l3-neutral-02);
+        color: var(--gds-sys-color-content-neutral-01);
 
         @media (pointer: fine) {
           &:hover {
             background-color: color-mix(
               in srgb,
-              var(--gds-sys-color-l3-02),
+              var(--gds-sys-color-l3-neutral-02),
               var(--gds-sys-color-state-brand-03)
             );
           }
@@ -207,7 +207,7 @@ const style = css`
         &:active {
           background-color: color-mix(
             in srgb,
-            var(--gds-sys-color-l3-02),
+            var(--gds-sys-color-l3-neutral-02),
             var(--gds-sys-color-state-brand-04)
           );
         }
@@ -215,7 +215,7 @@ const style = css`
 
       &.tertiary {
         background-color: transparent;
-        color: var(--gds-sys-color-content-01);
+        color: var(--gds-sys-color-content-neutral-01);
 
         @media (pointer: fine) {
           &:hover {
@@ -468,7 +468,7 @@ const style = css`
 
     .warning {
       background-color: var(--gds-sys-color-l3-warning-01);
-      color: var(--gds-sys-color-content-03);
+      color: var(--gds-sys-color-content-neutral-03);
 
       &:focus {
         outline-color: var(--gds-sys-color-content-warning-01);

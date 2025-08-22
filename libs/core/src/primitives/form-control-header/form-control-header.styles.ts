@@ -7,7 +7,7 @@ const style = css`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: var(--gds-sys-color-content-01);
+      color: var(--gds-sys-color-content-neutral-01);
     }
 
     #label-row > div {
@@ -34,8 +34,8 @@ const style = css`
       transition-property: all;
       font: var(--gds-sys-text-detail-regular-s);
       border-radius: var(--gds-sys-space-xs);
-      background-color: var(--gds-sys-color-l3-02);
-      color: var(--gds-sys-color-content-01);
+      background-color: var(--gds-sys-color-l3-neutral-02);
+      color: var(--gds-sys-color-content-neutral-01);
       max-height: var(--_max-height);
     }
 

@@ -53,7 +53,7 @@ const style = css`
 
       &:focus {
         border-color: var(--gds-sys-color-border-interactive);
-        color: var(--gds-sys-color-content-01);
+        color: var(--gds-sys-color-content-neutral-01);
       }
 
       &::placeholder {

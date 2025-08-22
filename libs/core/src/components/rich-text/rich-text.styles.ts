@@ -62,8 +62,8 @@ const style = css`
   }
 
   code {
-    background: var(--gds-sys-color-l3-02);
-    color: var(--gds-sys-color-content-01);
+    background: var(--gds-sys-color-l3-neutral-02);
+    color: var(--gds-sys-color-content-neutral-01);
     border-radius: var(--gds-sys-radius-xs);
     padding: var(--gds-sys-space-2xs);
     font: var(--gds-sys-text-body-book-s);

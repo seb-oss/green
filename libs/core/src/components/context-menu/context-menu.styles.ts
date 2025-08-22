@@ -10,7 +10,7 @@ const style = css`
     button {
       display: flex;
       border-width: 0;
-      background-color: var(--gds-sys-color-l3-02);
+      background-color: var(--gds-sys-color-l3-neutral-02);
       border-radius: calc(1px * infinity);
       padding: 0.4rem 0.8rem;
       font-family: inherit;
@@ -22,14 +22,14 @@ const style = css`
         outline-offset: var(--gds-sys-space-3xs);
         outline-style: solid;
         outline-width: var(--gds-sys-space-3xs);
-        outline-color: var(--gds-sys-color-content-01);
+        outline-color: var(--gds-sys-color-content-neutral-01);
       }
     }
 
     button:hover {
       background-color: color-mix(
         in srgb,
-        var(--gds-sys-color-l3-02),
+        var(--gds-sys-color-l3-neutral-02),
         var(--gds-sys-color-state-neutral-03)
       );
     }

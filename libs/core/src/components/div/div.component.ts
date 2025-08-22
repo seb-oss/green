@@ -61,7 +61,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div color="01/0.2"></gds-div>
+   * <gds-div color="neutral-01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('content'))
@@ -72,7 +72,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div background="01/0.2"></gds-div>
+   * <gds-div background="neutral-01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('background'))

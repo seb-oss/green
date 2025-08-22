@@ -324,7 +324,7 @@ export function IconContent({ component }: IconContentProps) {
 
                 <Core.GdsText
                   tag="small"
-                  color="02"
+                  color="neutral-02"
                   font="detail-book-s"
                   text-align={view === 'grid' ? 'center' : 'left'}
                 >

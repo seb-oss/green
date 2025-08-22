@@ -282,7 +282,7 @@ export const ThemeModes: Story = {
                 background="surface"
                 margin-bottom="m"
               >
-              <gds-text margin="0" color="01">Content</gds-text>
+              <gds-text margin="0" color="neutral-01">Content</gds-text>
                 <gds-spinner size="md" cover></gds-spinner>
               </gds-div>
             </gds-card>

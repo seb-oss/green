@@ -78,11 +78,11 @@ export function Home({
           <GdsText
             tag="h1"
             font="heading-m; s{heading-l}"
-            color="02"
+            color="neutral-02"
             max-width="800px"
             text-align="center"
           >
-            <GdsText display="inline" color="01">
+            <GdsText display="inline" color="neutral-01">
               {homeContent?.title + ' '}
             </GdsText>
             {homeContent?.summary}
@@ -126,7 +126,7 @@ export function Home({
             <GdsText
               tag="p"
               font="heading-s"
-              color="02"
+              color="neutral-02"
               max-width="80ch"
               id="featured-subheading"
             >
@@ -193,7 +193,7 @@ export function Home({
             <GdsText
               tag="p"
               font="heading-s"
-              color="02"
+              color="neutral-02"
               max-width="80ch"
               id="featured-subheading"
             >
@@ -373,7 +373,7 @@ export function Home({
             tag="p"
             font="heading-s"
             line-height="heading-s"
-            color="02"
+            color="neutral-02"
             max-width="80ch"
             id="resources-subheading"
           >

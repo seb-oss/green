@@ -92,8 +92,8 @@ const style = css`
         }
 
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l3-01);
-          color: var(--gds-sys-color-content-03);
+          background: var(--gds-sys-color-l3-neutral-01);
+          color: var(--gds-sys-color-content-neutral-03);
         }
 
         &:not(.disabled):hover {
@@ -107,7 +107,7 @@ const style = css`
         &[aria-selected='true']:not(.disabled):hover {
           background: color-mix(
             in srgb,
-            var(--gds-sys-color-l3-01),
+            var(--gds-sys-color-l3-neutral-01),
             var(--gds-sys-color-state-neutral-01)
           );
         }
@@ -123,7 +123,7 @@ const style = css`
         }
 
         &.disabled.week-number {
-          color: var(--gds-sys-color-content-02);
+          color: var(--gds-sys-color-content-neutral-02);
           cursor: default;
         }
 
@@ -138,13 +138,13 @@ const style = css`
         &[aria-selected='true']:active:not(.disabled) {
           background: color-mix(
             in srgb,
-            var(--gds-sys-color-l3-01),
+            var(--gds-sys-color-l3-neutral-01),
             var(--gds-sys-color-state-neutral-02)
           );
         }
 
         &:focus-visible {
-          outline-color: var(--gds-sys-color-content-01);
+          outline-color: var(--gds-sys-color-content-neutral-01);
           outline-width: var(--gds-sys-space-3xs);
           outline-offset: 3.75px;
         }
@@ -175,7 +175,7 @@ const style = css`
         width: var(--gds-sys-space-xs);
         height: var(--gds-sys-space-xs);
         border-radius: var(--gds-sys-space-max);
-        background: var(--gds-sys-color-l3-01);
+        background: var(--gds-sys-color-l3-neutral-01);
         inset: calc(100% + var(--gds-sys-space-xs))
           calc(50% - var(--gds-sys-space-xs) / 2) auto auto;
       }
