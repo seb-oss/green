@@ -51,13 +51,13 @@ export class GdsCard extends GdsDiv {
       switch (variant[0]) {
         case 'primary':
           border = 'transparent'
-          background = `var(--gds-sys-color-l${(this as GdsCard).level}-01)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
 
         case 'secondary':
           border = 'var(--gds-sys-color-border-subtle-01)'
-          background = `var(--gds-sys-color-l${(this as GdsCard).level}-02)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-02)`
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
 
@@ -85,7 +85,7 @@ export class GdsCard extends GdsDiv {
 
         default:
           border = 'transparent'
-          background = `var(--gds-sys-color-l${(this as GdsCard).level}-01)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
           color = 'var(--gds-sys-color-content-neutral-01)'
           break
       }
