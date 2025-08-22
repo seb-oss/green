@@ -69,6 +69,7 @@ export default function Welcome() {
               padding="l"
               width="70%"
               max-width="800px"
+              min-width="320px"
               gap="m"
               margin="xl 0 0 0"
               border-radius="m"

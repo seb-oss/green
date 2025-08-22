@@ -31,7 +31,10 @@ export class GdsDivider extends GdsElement {
    * <gds-divider color="interactive"></gds-divider>
    * ```
    */
-  @styleExpressionProperty(forColorTokens('border'))
+  @styleExpressionProperty({
+    ...forColorTokens('border'),
+    property: '--_color',
+  })
   color?: string
 
   /**

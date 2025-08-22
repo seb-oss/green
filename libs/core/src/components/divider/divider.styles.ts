@@ -9,7 +9,7 @@ const style = css`
   }
 
   hr {
-    background: currentColor;
+    background: var(--_color, currentColor);
     border: 0;
     min-height: 1px;
     max-height: 1px;
