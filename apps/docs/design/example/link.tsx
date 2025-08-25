@@ -1,7 +1,7 @@
 'use client'
 
 import { GdsLink } from '$/import/components'
-import { IconChainLink } from '$/import/icons'
+import { IconCainLink } from '$/import/icons'
 
 const Link = () => (
   <GdsLink>
