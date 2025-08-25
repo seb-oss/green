@@ -527,7 +527,11 @@ export class GdsPopover extends GdsElement {
   }
 
   #handlePageScroll = () => {
-    if (this.open && this.#dispatchUiStateEvent('close')) {
+    if (
+      this.open &&
+      window.innerWidth > 767 &&
+      this.#dispatchUiStateEvent('close')
+    ) {
       this.open = false
     }
   }
