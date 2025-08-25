@@ -220,6 +220,7 @@ export class GdsMonthPicker extends GdsElement {
                         class="${classMap({
                           small: this.size == 'small',
                           short: this.monthNumber,
+                          wide: !this.longMonthText,
                           long: this.longMonthText,
                           today:
                             !this.noCurrentMonth &&

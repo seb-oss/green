@@ -239,7 +239,7 @@ export class GdsYearpicker extends GdsElement {
                         small: this.size == 'small',
                         today: !this.noCurrentYear && currentYear == year,
                         disabled: isDisabled,
-                      })}"
+                      })} wide"
                       ?disabled=${isDisabled}
                       tabindex="${this.focusedYear == year && !isDisabled
                         ? 0
