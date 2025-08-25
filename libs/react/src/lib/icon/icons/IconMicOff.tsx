@@ -1,0 +1,1 @@
+export { IconMicOff } from '@sebgroup/green-core/react';
