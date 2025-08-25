@@ -25,7 +25,7 @@ $greyScale: map-get(newTokens.$grey, light);
   border-radius: 0.25rem 0.25rem 0 0;
   border-left: $_border-width solid transparent;
   border-top: $_border-width solid transparent;
-  border-right: $_border-width solid transparent;  
+  border-right: $_border-width solid transparent;
 
   .gds-tabs--fluid & {
     flex: 1;
@@ -60,7 +60,7 @@ $greyScale: map-get(newTokens.$grey, light);
   overflow-x: auto;
   padding: 0.25rem;
   margin: -0.25rem;
-  --sg-border-color: var(--gds-ref-pallet-base600);
+  --sg-border-color: var(--gds-sys-color-base-600);
 
   // hide scrollbar
   &::-webkit-scrollbar {

@@ -15,7 +15,7 @@ import '../icon/icons/people.js'
 import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 import '../icon/icons/arrow-right.js'
-import '../icon/icons/cain-link.js'
+import '../icon/icons/chain-link.js'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 
@@ -61,7 +61,7 @@ export const Lead: Story = {
   name: 'Icon: Lead',
   render: () =>
     html` <gds-link>
-      <gds-icon-cain-link slot="lead"></gds-icon-cain-link>
+      <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
       Link text
     </gds-link>`,
 }
