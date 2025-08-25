@@ -13,10 +13,10 @@ $track-width-sm: 0.275rem;
   height: $size;
   width: $size;
   animation: $rotation-animation 1s infinite linear;
-  border-left: $border-width solid var(--gds-ref-pallet-base400);
-  border-right: $border-width solid var(--gds-ref-pallet-base400);
-  border-bottom: $border-width solid var(--gds-ref-pallet-base400);
-  border-top: $border-width solid var(--gds-ref-pallet-base800);
+  border-left: $border-width solid var(--gds-sys-color-base-400);
+  border-right: $border-width solid var(--gds-sys-color-base-400);
+  border-bottom: $border-width solid var(--gds-sys-color-base-400);
+  border-top: $border-width solid var(--gds-sys-color-base-800);
   border-radius: 50%;
   display: block;
 }
