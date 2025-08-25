@@ -143,10 +143,14 @@ export function TableOfContents({
     if (sections.length === 0) return
     const hash = window.location.hash.replace('#', '')
     if (hash) {
-      const element = document.getElementById(hash)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
+      setTimeout(() => {
+        setActiveSection(hash)
+        const element = document.getElementById(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' })
+        }
+        // TODO: Find more reliable way to run after content has finished rendering & animating
+      }, 100)
     }
   }, [sections])
 
