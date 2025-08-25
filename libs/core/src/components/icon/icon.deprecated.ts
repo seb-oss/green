@@ -44,6 +44,7 @@ const DEPRECATED_NAMES: string[] = [
   'square-grid-circle',
   'focus-square',
   'maintenance',
+  'cain-link',
 ]
 
 export const deprecatedIcons: Record<string, DeprecationInfo> =
