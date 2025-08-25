@@ -184,7 +184,7 @@
   .gds-form-item__backdrop {
     position: absolute;
     inset: 0;
-    background: var(--gds-ref-pallet-base100);
+    background: var(--gds-sys-color-base-100);
     border-radius: 2px;
     z-index: -1;
     margin: -1rem;
@@ -200,7 +200,7 @@
   &:has([aria-expanded='true']) .gds-form-item__backdrop {
     opacity: 1;
     border-radius: 0.25rem;
-    border-color: var(--gds-ref-pallet-base600);
+    border-color: var(--gds-sys-color-base-600);
   }
 
   .gds-form-item__footer:not(:empty) {
