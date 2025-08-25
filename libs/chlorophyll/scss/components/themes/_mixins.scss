@@ -103,7 +103,7 @@ Values for light mode are used by default.
     control-bg-disabled: $form-control-bg-disabled,
   )
   /* border */,
-  $border-color: var(--gds-ref-pallet-base600),
+  $border-color: var(--gds-sys-color-base-600),
   // color.adjust($black, $alpha: -0.83),
   // #CECECE against white
   $border-width: 1px,
