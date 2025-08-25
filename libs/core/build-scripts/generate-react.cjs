@@ -36,7 +36,6 @@ for (const component of filteredComponents) {
 
   // We allow the use of react as an extraneous dependency here because we expect any consumer
   // that imports React components from Green Core to already have React as a dependency.
-  // TODO: List react as an optional peer dependency in package.json in the next major version.
   prettier
     .format(
       `

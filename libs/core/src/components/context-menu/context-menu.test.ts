@@ -3,6 +3,7 @@ import { aTimeout, fixture, html as testingHtml } from '@open-wc/testing'
 import { sendKeys } from '@web/test-runner-commands'
 import sinon from 'sinon'
 
+import type { GdsButton } from '@sebgroup/green-core/components/button'
 import type {
   GdsContextMenu,
   GdsMenuItem,
@@ -101,10 +102,9 @@ describe('<gds-context-menu>', () => {
       const menu = el.shadowRoot!.querySelector<GdsMenu>(
         getScopedTagName('gds-menu'),
       )!
-      const button =
-        el.shadowRoot!.querySelector<HTMLButtonElement>('#trigger')!
+      const button = el.shadowRoot!.querySelector<GdsButton>('#trigger')!
 
-      await expect(button.getAttribute('aria-label')).to.equal('Button label')
+      await expect(button.getAttribute('label')).to.equal('Button label')
       await expect(popover.label).to.equal('Context label')
       await expect(menu.getAttribute('aria-label')).to.equal('Context label')
     })

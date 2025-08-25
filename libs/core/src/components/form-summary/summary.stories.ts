@@ -58,9 +58,10 @@ export const Usage: Story = {
         flex-direction="column"
         gap="m"
         variant="secondary"
-        border-color="primary"
+        border-color="subtle-01"
+        padding="l"
       >
-        <gds-text tag="h2">Launch control</gds-text>
+        <gds-text tag="h2" font="heading-l">Launch control</gds-text>
         <gds-checkbox-group
           direction="row"
           label="Mission type"

@@ -13,7 +13,7 @@ import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconArrowUp } from '../icon/icons/arrow-up.component'
-import styles from './summary.styles'
+import SummaryStyles from './summary.styles'
 
 /**
  * @element gds-form-summary
@@ -26,7 +26,7 @@ import styles from './summary.styles'
   dependsOn: [GdsCard, GdsFlex, GdsDiv, GdsButton, IconArrowUp],
 })
 export class GdsFormSummary extends GdsElement {
-  static styles = [tokens, styles]
+  static styles = [tokens, SummaryStyles]
 
   /**
    * Whether to hide the error messages under the labels.
@@ -109,22 +109,16 @@ export class GdsFormSummary extends GdsElement {
         html`<gds-card
           id="root"
           role="navigation"
-          border-color="negative"
-          border-radius="xs"
-          border-width="0"
+          variant="negative"
           padding="l"
-          background="negative"
-          color="negative"
+          background="negative-01"
+          color="negative-01"
           overflow="hidden"
           aria-describedby="description"
           aria-label=${msg(`Form error summary`)}
         >
           <gds-flex gap="0" flex-direction="column">
-            <gds-text
-              font-size="heading-xs"
-              font-weight="book"
-              id="description"
-            >
+            <gds-text font="heading-xs" font-weight="book" id="description">
               ${msg(
                 str`There are ${errorControls.length} errors to correct before you can continue:`,
               )}
@@ -141,8 +135,8 @@ export class GdsFormSummary extends GdsElement {
                       justify-content="space-between"
                       gap="xs"
                       level="3"
-                      color="negative"
-                      background="transparent; hover: negative/.2"
+                      color="negative-01"
+                      background="transparent; hover: negative-01/.1"
                       style="cursor: pointer"
                       border-width="0"
                       border-radius="xs"
@@ -161,7 +155,7 @@ export class GdsFormSummary extends GdsElement {
                         ${when(
                           !this.hideErrors,
                           () =>
-                            html`<gds-div font-size="body-s">
+                            html`<gds-div font="body-regular-s">
                               ${el.dataset.errormessage ||
                               el.errorMessage ||
                               (el as any).ariaErrorMessage}

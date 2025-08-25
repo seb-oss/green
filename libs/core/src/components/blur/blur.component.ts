@@ -1,6 +1,6 @@
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import styles from './blur.styles'
+import BlurStyles from './blur.styles'
 
 /**
  * @element gds-blur
@@ -17,9 +17,9 @@ import styles from './blur.styles'
  */
 @gdsCustomElement('gds-blur')
 export class GdsBlur extends GdsElement {
-  static styles = styles
+  static styles = BlurStyles
 
   render() {
-    return html`<slot></slot>`
+    return html`<div class="blur"><slot></slot></div>`
   }
 }

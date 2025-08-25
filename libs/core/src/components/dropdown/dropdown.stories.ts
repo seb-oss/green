@@ -182,7 +182,7 @@ export const Size: Story = {
 export const HiddenLabel: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" hide-label>
+    <gds-dropdown label="Select tech" hide-label>
       <gds-option value="">Select tech</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>

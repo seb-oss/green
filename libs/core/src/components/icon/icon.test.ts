@@ -29,8 +29,6 @@ describe('IconAi', () => {
 
   it('should render the regular SVG with correct attributes', async () => {
     const svg = element.shadowRoot?.querySelector('svg')
-    expect(svg).to.have.attribute('width', '24')
-    expect(svg).to.have.attribute('height', '24')
     expect(svg).to.have.attribute('viewBox', '0 0 24 24')
     expect(svg).to.have.attribute('role', 'presentation')
     expect(svg?.innerHTML.trim()).to.equal(

@@ -1,10 +1,10 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset;
 
   @layer base {
-    ::part(_button) {
+    #calendar-button::part(_button) {
       outline-offset: -1px;
     }
 
@@ -12,15 +12,13 @@ export const styles = css`
       display: flex;
       align-items: center;
       justify-content: flex-start;
-      inline-size: 11ch;
+      inline-size: 12ch;
       gap: var(--gds-sys-space-4xs);
-      font-size: var(--gds-sys-text-size-detail-s);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-detail-regular-m);
     }
 
     :host([size='small']) .spinners {
-      font-size: var(--gds-sys-text-size-detail-s);
-      line-height: var(--gds-sys-text-line-height-detail-s);
+      font: var(--gds-sys-text-detail-regular-s);
     }
 
     .spinner {
@@ -35,11 +33,15 @@ export const styles = css`
       text-transform: uppercase;
       line-height: 1;
       text-align: center;
+      padding: var(--gds-sys-space-3xs);
+      margin: calc(-1 * var(--gds-sys-space-3xs));
+      border-radius: var(--gds-sys-radius-2xs);
 
-      &:focus {
-        background-color: var(--gds-sys-color-l2-background-tertiary);
-        color: var(--gds-sys-color-l2-content-tertiary);
+      &:focus-visible {
+        background-color: var(--gds-sys-color-l3-neutral-01);
+        color: var(--gds-sys-color-content-inversed);
       }
     }
   }
 `
+export default style

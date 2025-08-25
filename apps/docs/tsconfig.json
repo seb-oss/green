@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "incremental": true,
-    "types": ["jest", "node"],
+    "types": ["raw-loader.d.ts", "jest", "node"],
     "plugins": [
       {
         "name": "next"
@@ -44,7 +44,8 @@
       "@sebgroup/green-react-charts": ["libs/react-charts/src/index.ts"],
       "@sebgroup/green-tokens": ["dist/libs/tokens"],
       "@sebgroup/green-tokens/*": ["dist/libs/tokens/*"],
-      "@sebgroup/repo-tools": ["dist/repo-tools/src/index.ts"]
+      "@sebgroup/repo-tools": ["dist/repo-tools/src/index.ts"],
+      "@sebgroup/green-core/metadata": ["libs/core/custom-elements.json"]
     }
   },
   "include": [

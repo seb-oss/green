@@ -1,7 +1,7 @@
 import { gdsCustomElement } from '../../scoping'
 import { withPositioningProps } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button'
-import styles from './fab.styles'
+import FABStyles from './fab.styles'
 
 /**
  * @element gds-fab
@@ -19,6 +19,6 @@ import styles from './fab.styles'
 export class GdsFab extends withPositioningProps(GdsButton) {
   connectedCallback() {
     super.connectedCallback()
-    this._dynamicStylesController.inject('FAB_styles', styles)
+    this._dynamicStylesController.inject('FAB_styles', FABStyles)
   }
 }

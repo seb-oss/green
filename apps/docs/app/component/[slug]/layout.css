@@ -1,0 +1,36 @@
+.icon-slide-out {
+  transition: all 240ms;
+  @starting-style {
+    opacity: 0;
+    translate: 10px 0;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+[data-pattern] {
+  --color: color-mix(in srgb, currentColor, transparent 90%);
+  background-image: radial-gradient(var(--color) 10%, transparent 0);
+  background-size: 1em 1em;
+  background-position: center;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+.l2-state-neutral-03:hover {
+  background: color-mix(
+    in srgb,
+    var(--gds-sys-color-l2-neutral-02),
+    var(--gds-sys-color-state-neutral-03)
+  );
+}
+
+.focusable:focus-visible {
+  outline-width: var(--gds-sys-space-3xs);
+  outline-offset: var(--gds-sys-space-3xs);
+  outline-color: currentColor;
+}

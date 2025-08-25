@@ -115,7 +115,7 @@ export const Size: Story = {
       <gds-flex flex-direction="column" gap="m">
         <gds-flex align-items="center" gap="m">
           <gds-text width="200px">Default(large)</gds-text>
-          <gds-card flex="1" background="secondary">
+          <gds-card flex="1" background="neutral-02">
             <gds-breadcrumbs>
               <gds-link href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
@@ -139,7 +139,7 @@ export const Size: Story = {
 
         <gds-flex align-items="center" gap="m">
           <gds-text width="200px">Small</gds-text>
-          <gds-card background="secondary" flex="1">
+          <gds-card background="neutral-02" flex="1">
             <gds-breadcrumbs size="small">
               <gds-link href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
@@ -176,7 +176,7 @@ export const Mobile: Story = {
       <gds-flex flex-direction="column" gap="m">
         <gds-flex align-items="center" gap="m">
           <gds-text width="200px">Desktop</gds-text>
-          <gds-card flex="1" background="secondary">
+          <gds-card flex="1" background="neutral-02">
             <gds-breadcrumbs>
               <gds-link href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
@@ -200,7 +200,7 @@ export const Mobile: Story = {
 
         <gds-flex align-items="center" gap="m">
           <gds-text width="200px">Mobile</gds-text>
-          <gds-card background="secondary" width="400px">
+          <gds-card background="neutral-02" width="400px">
             <gds-breadcrumbs>
               <gds-link href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
@@ -288,7 +288,7 @@ export const Label: Story = {
       <gds-flex flex-direction="column" gap="m">
         <gds-flex align-items="center" gap="m">
           <gds-text width="200px">Default label</gds-text>
-          <gds-card flex="1" background="secondary">
+          <gds-card flex="1" background="neutral-02">
             <gds-breadcrumbs>
               <gds-link href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>
@@ -302,7 +302,7 @@ export const Label: Story = {
 
         <gds-flex align-items="center" gap="m">
           <gds-text width="200px">Custom label</gds-text>
-          <gds-card background="secondary" flex="1">
+          <gds-card background="neutral-02" flex="1">
             <gds-breadcrumbs label="Site Navigation">
               <gds-link href="/home">
                 <gds-icon-home-open slot="lead"></gds-icon-home-open>

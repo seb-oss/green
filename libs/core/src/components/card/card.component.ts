@@ -37,21 +37,6 @@ export class GdsCard extends GdsDiv {
   ]
 
   /**
-   * Style Expression Property for the `box-shadow` property.
-   *
-   * Accepts shadow tokens from the design system.
-   *
-   * `xs`, `s`, `m`, `l`, `xl`
-   *
-   * @deprecated Use the `box-shadow` property instead.
-   */
-  @styleExpressionProperty({
-    property: 'box-shadow',
-    valueTemplate: (v) => `var(--gds-sys-shadow-${v})`,
-  })
-  shadow?: string
-
-  /**
    * Shortcut for setting the border, background and text color of the card to the specified color variant, such as 'primary', 'secondary', 'tertiary', etc.
    *
    * You can find all available variants in the L2 section of the [Color System documentation page](./?path=/docs/style-colors--docs)
@@ -60,11 +45,55 @@ export class GdsCard extends GdsDiv {
    *
    */
   @styleExpressionProperty({
-    styleTemplate: function (_prop, v) {
+    styleTemplate: function (_prop, variant) {
+      let border, background, color
+
+      switch (variant[0]) {
+        case 'primary':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
+        case 'secondary':
+          border = 'var(--gds-sys-color-border-subtle-01)'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-02)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+
+        case 'brand-01':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-brand-01)`
+          color = 'var(--gds-sys-color-content-inversed)'
+          break
+
+        case 'brand-02':
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-brand-02)`
+          color = 'var(--gds-sys-color-content-brand-02)'
+          break
+
+        case 'positive':
+        case 'negative':
+        case 'warning':
+        case 'information':
+        case 'notice':
+          border = `var(--gds-sys-color-border-${variant[0]}-02)`
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-${variant[0]}-01)`
+          color = `var(--gds-sys-color-content-${variant[0]}-01)`
+          break
+
+        default:
+          border = 'transparent'
+          background = `var(--gds-sys-color-l${(this as GdsCard).level}-neutral-01)`
+          color = 'var(--gds-sys-color-content-neutral-01)'
+          break
+      }
+
       return `
-      --_border-color: var(--gds-sys-color-l${(this as GdsCard).level}-background-${v});
-      --_background-color: var(--gds-sys-color-l${(this as GdsCard).level}-background-${v});
-      --_color: var(--gds-sys-color-l${(this as GdsCard).level}-content-${v});
+      --_border-color: ${border};
+      --_background-color: ${background};
+      --_color: ${color};
       `
     },
   })
@@ -72,7 +101,6 @@ export class GdsCard extends GdsDiv {
 
   constructor() {
     super()
-
     this.padding = 's;m{l}'
     this['border-radius'] = 'xs;m{s}'
     this['gap'] = 's;m{l}'

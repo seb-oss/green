@@ -33,12 +33,13 @@ export const SEBIO = () => {
     <GdsTheme designVersion="2023">
       <GdsCard
         margin="0 0 2xl 0"
-        flex-direction="row"
+        flex-direction="column; s{row}"
         justify-content="space-between"
-        align-items="center"
+        align-items="flex-start; s{center}"
         padding="l l l xl"
+        gap="l"
       >
-        <GdsFlex align-items="center" gap="l">
+        <GdsFlex align-items="center" gap="m">
           <IconBrandGreen size="xl" />
           <GdsText>View {componentName} on seb.io</GdsText>
         </GdsFlex>
