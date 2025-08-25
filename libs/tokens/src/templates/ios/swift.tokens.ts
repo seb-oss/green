@@ -57,12 +57,19 @@ export const uiKitColorReferencePropertyFormatter = (
     const path =
       token.path
         .slice(0, token.path.length - 1)
+        .filter(
+          (pathComponent) =>
+            pathComponent.toLowerCase() !== 'sys' &&
+            pathComponent.toLowerCase() !== 'color',
+        )
         .map((pathComponent) => {
           return pathComponent[0].toUpperCase() + pathComponent.slice(1)
         })
         .join('.') +
       '.' +
       token.name
+
+    console.log(path)
 
     return (
       indent +
@@ -94,6 +101,20 @@ export const uiKitColorReferencePropertyFormatter = (
   }
 }
 
+export const typographyPropertyFormatter = (options) => {
+  return function (token, indent) {
+    let value = token.token.value
+    return (
+      indent +
+      options.accessControl +
+      ' static let ' +
+      token.name +
+      ' = ' +
+      value
+    )
+  }
+}
+
 /// Structures a list of tokens into a tree by the token paths.
 export const treeFromTokens = (tokens, ignorePathUpToValue) => {
   let tree = null
@@ -121,8 +142,10 @@ export const treeFromTokens = (tokens, ignorePathUpToValue) => {
       }
       return result
     })
+
     tree = placeTokenInTree(token, usablePath, usablePath, tree)
   })
+
   return tree
 }
 
@@ -168,6 +191,18 @@ const swiftObjectFromTree = (tree, options, propertyFormatter, indent) => {
     } else {
       name = branch.name.toUpperCase()
     }
+
+    if (['Sys', 'Color'].includes(name)) {
+      // Skip this level and just continue with the next recursion
+      result += swiftObjectFromTree(
+        branch.tree,
+        options,
+        propertyFormatter,
+        indent,
+      )
+      return
+    }
+
     result +=
       indentString +
       options.accessControl +

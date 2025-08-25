@@ -80,7 +80,7 @@ export const Example: Story = {
       <gds-div
         width="4xl"
         height="4xl"
-        background="03"
+        background="neutral-03"
         border-radius="s"
       ></gds-div>
     </gds-div>
