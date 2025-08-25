@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.90.2
+
+### Patch Changes
+
+- 33e4314: **Icon:** cain-link depricated (use chain-link instead)
+- 7429b8d: **GdsTheme**: fixing import of 2016 tokens
+
+## 1.90.1
+
+### Patch Changes
+
+- d213f1d: **Popover:** Don't close on scroll on small viewports
+
+## 1.90.0
+
+### Minor Changes
+
+- 0910e52: **Icon:** Core: add mic-on and mic-off
+
+## 1.89.1
+
+### Patch Changes
+
+- cfe9104: **Dropdown:** Fix text overflow regression
+
 ## 1.89.0
 
 ### Minor Changes

@@ -48,6 +48,7 @@ $button-danger-border-color: $button-danger-bg;
   &.small {
     min-height: 2rem;
     padding: 0.4375rem 0.75rem;
+    font-size: 0.875rem;
     line-height: 1rem;
   }
 
@@ -149,7 +150,7 @@ $button-danger-border-color: $button-danger-bg;
   height: 2.75rem;
   width: 2.75rem;
   min-width: auto;
-  --color: var(--gds-ref-pallet-base800);
+  --color: var(--gds-sys-color-base-800);
 
   .form-group & {
     margin-top: -0.625rem;
@@ -174,8 +175,8 @@ $button-danger-border-color: $button-danger-bg;
   ellipse,
   polyline,
   text {
-    fill: var(--gds-ref-pallet-base800);
-    stroke: var(--gds-ref-pallet-base800);
+    fill: var(--gds-sys-color-base-800);
+    stroke: var(--gds-sys-color-base-800);
     transition: all tokens.$transition-time;
   }
 

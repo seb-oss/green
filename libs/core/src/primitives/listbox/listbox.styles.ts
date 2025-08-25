@@ -7,6 +7,7 @@ const style = css`
       display: flex;
       flex-direction: column;
       overflow: auto;
+      overscroll-behavior: contain;
     }
   }
 `

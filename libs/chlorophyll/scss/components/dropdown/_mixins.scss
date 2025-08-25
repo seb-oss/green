@@ -126,11 +126,11 @@ $highlighted-background: var(--grey-1000);
 
     &:hover,
     &:focus-visible {
-      background-color: var(--gds-ref-pallet-base200);
+      background-color: var(--gds-sys-color-base-200);
     }
 
     &:active {
-      background-color: var(--gds-ref-pallet-base300);
+      background-color: var(--gds-sys-color-base-300);
     }
 
     &:focus {

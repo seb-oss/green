@@ -29,8 +29,8 @@ export default css`
   }
 
   .native-control {
-    display: flex;
     align-items: center;
+    align-self: center;
     appearance: none;
     background-color: transparent;
     border: 0;
