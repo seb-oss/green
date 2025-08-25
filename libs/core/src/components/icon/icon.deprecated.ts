@@ -32,6 +32,7 @@ const DEPRECATED_NAMES: string[] = [
   'page-text',
   'phone-dynamic-island',
   'flag',
+  'cain-link',
   'chart-one',
   'chart-presentation',
   'vertical-alignment-right',
