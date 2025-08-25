@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.6.22
+
+### Patch Changes
+
+- 7429b8d: Switching to correct css variables.
+
 ## 3.6.21
 
 ### Patch Changes
