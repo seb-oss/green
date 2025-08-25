@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.90.2
+
+### Patch Changes
+
+- 33e4314: **Icon:** cain-link depricated (use chain-link instead)
+- 7429b8d: **GdsTheme**: fixing import of 2016 tokens
+
 ## 1.90.1
 
 ### Patch Changes
