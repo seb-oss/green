@@ -69,7 +69,19 @@ export class GdsCalendar extends GdsElement {
    * The currently selected date.
    */
   @property()
-  value?: Date
+  get value() {
+    return this.#value
+  }
+  set value(value: Date | undefined) {
+    if (!value) {
+      this.#value = undefined
+      return
+    }
+    const newDate = new Date(value)
+    newDate.setUTCHours(this.utcHours, 0, 0, 0)
+    this.#value = newDate
+  }
+  #value?: Date
 
   /**
    * The minimum date that can be selected.
@@ -89,7 +101,14 @@ export class GdsCalendar extends GdsElement {
    * Eg. 10 sets time to UTC 10:00 (which is 11:00 in Sweden).
    */
   @property({ type: Number, attribute: 'utc-hours' })
-  utcHours = 12
+  get utcHours() {
+    return this.#utcHours
+  }
+  set utcHours(value: number) {
+    this.#value?.setUTCHours(value)
+    this.#utcHours = value
+  }
+  #utcHours = 12
 
   /**
    * The date that is currently focused.
@@ -402,16 +421,21 @@ export class GdsCalendar extends GdsElement {
       }
       handled = true
     } else if (e.key === 'Home') {
-      newFocusedDate = new Date(this.focusedYear, this.focusedMonth, 1)
+      newFocusedDate = new Date(
+        Date.UTC(this.focusedYear, this.focusedMonth, 1),
+      )
       handled = true
     } else if (e.key === 'End') {
-      newFocusedDate = new Date(this.focusedYear, this.focusedMonth + 1, 0)
+      newFocusedDate = new Date(
+        Date.UTC(this.focusedYear, this.focusedMonth + 1, 0),
+      )
       handled = true
     } else if (e.key === 'PageUp') {
       newFocusedDate = subMonths(this.focusedDate, 1)
       handled = true
     } else if (e.key === 'PageDown') {
       newFocusedDate = addMonths(this.focusedDate, 1)
+
       handled = true
     }
 

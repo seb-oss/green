@@ -33,7 +33,10 @@ describe('<gds-datepicker>', () => {
   describe('API', () => {
     it('should set the value', async () => {
       const el = await fixture<GdsDatepicker>(
-        html`<gds-datepicker value="2024-01-01"></gds-datepicker>`,
+        html`<gds-datepicker
+          value="2024-01-01"
+          utc-hours="0"
+        ></gds-datepicker>`,
       )
       await expect(el.value).to.deep.equal(new Date('2024-01-01'))
     })
@@ -694,26 +697,24 @@ describe('<gds-datepicker>', () => {
       await expect(yearDropdown.value).to.equal('2024')
     })
 
-    // it('Setting `utc-offset` should change the hours of selected dates', async () => {
-    //   const el = await fixture<GdsDatepicker>(
-    //     html`<gds-datepicker
-    //       value="2025-07-23"
-    //       utc-offset="-2"
-    //     ></gds-datepicker>`,
-    //   )
-    //   await el.updateComplete
+    it('Setting `utc-hours` should change the hours of selected dates', async () => {
+      const el = await fixture<GdsDatepicker>(
+        html`<gds-datepicker
+          value="2025-07-23"
+          utc-hours="10"
+        ></gds-datepicker>`,
+      )
+      await el.updateComplete
+      await expect(el.value.toISOString()).to.equal(
+        new Date('2025-07-23T10:00:00Z').toISOString(),
+      )
 
-    //   await sendKeys({
-    //     press: 'ArrowRight',
-    //   })
-    //   await el.updateComplete
-    //   await sendKeys({
-    //     press: 'Enter',
-    //   })
-    //   await el.updateComplete
-
-    //   await expect(el.value).to.equal(new Date('2025-07-24T10:00:00Z'))
-    // })
+      el.utcHours = 14
+      await el.updateComplete
+      await expect(el.value.toISOString()).to.equal(
+        new Date('2025-07-23T14:00:00Z').toISOString(),
+      )
+    })
   })
 
   describe('Accessibility', () => {

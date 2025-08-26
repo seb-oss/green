@@ -56,10 +56,16 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    return super.value
+    return this._internalValue
   }
   set value(value: Date | undefined) {
-    super.value = value
+    if (!value) {
+      this._internalValue = undefined
+      return
+    }
+    const newDate = new Date(value)
+    newDate.setUTCHours(this.utcHours, 0, 0, 0)
+    this._internalValue = newDate
   }
 
   /**
@@ -130,7 +136,14 @@ class Datepicker extends GdsFormControlElement<Date> {
    * Eg. 10 sets time to UTC 10:00 (which is 11:00 in Sweden).
    */
   @property({ type: Number, attribute: 'utc-hours' })
-  utcHours = 12
+  get utcHours() {
+    return this.#utcHours
+  }
+  set utcHours(value) {
+    this.#utcHours = value
+    this._internalValue?.setUTCHours(value, 0, 0, 0)
+  }
+  #utcHours = 12
 
   /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
