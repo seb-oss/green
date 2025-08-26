@@ -324,7 +324,7 @@ export default function Command() {
                       </Core.GdsFlex>
                     </Core.GdsFlex>
                     {result.summary && (
-                      <Core.GdsText font-size="body-s" color="neutral-02">
+                      <Core.GdsText font="body-s" color="neutral-02">
                         {truncateSummary(result.summary)}
                       </Core.GdsText>
                     )}

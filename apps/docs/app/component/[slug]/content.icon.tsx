@@ -440,7 +440,7 @@ export function IconContent({ component }: IconContentProps) {
               <Core.GdsDivider opacity="0.2"></Core.GdsDivider>
 
               <Core.GdsFlex flex-direction="column" gap="xs">
-                <Core.GdsText tag="h3" font-size="display-xs" color="secondary">
+                <Core.GdsText tag="h3" font="display-xs" color="secondary">
                   Category
                 </Core.GdsText>
                 <Core.GdsFlex gap="s" flex-wrap="wrap">
@@ -455,7 +455,7 @@ export function IconContent({ component }: IconContentProps) {
               <Core.GdsDivider opacity="0.2"></Core.GdsDivider>
 
               <Core.GdsFlex flex-direction="column" gap="xs">
-                <Core.GdsText tag="h3" font-size="display-xs" color="secondary">
+                <Core.GdsText tag="h3" font="display-xs" color="secondary">
                   Tags
                 </Core.GdsText>
                 <Core.GdsFlex gap="s" flex-wrap="wrap">
@@ -467,7 +467,7 @@ export function IconContent({ component }: IconContentProps) {
 
               {selectedIcon.meta.description && (
                 <Core.GdsFlex flex-direction="column" gap="m">
-                  <Core.GdsText tag="h3" font-size="display-xs">
+                  <Core.GdsText tag="h3" font="display-xs">
                     Description
                   </Core.GdsText>
                   <Core.GdsText>{selectedIcon.meta.description}</Core.GdsText>

@@ -390,7 +390,7 @@ export const RenderColumn = (
                 align-items="center"
                 padding="0 0 0 s"
               >
-                <Core.GdsText tag="p" font-size="detail-s" color="secondary">
+                <Core.GdsText tag="p" font="detail-s" color="secondary">
                   {column.caption}
                 </Core.GdsText>
               </Core.GdsFlex>
@@ -417,11 +417,7 @@ export const RenderColumn = (
               border-radius="xs"
             />
             {column.caption && (
-              <Core.GdsText
-                tag="figcaption"
-                font-size="detail-s"
-                color="secondary"
-              >
+              <Core.GdsText tag="figcaption" font="detail-s" color="secondary">
                 {column.caption}
               </Core.GdsText>
             )}

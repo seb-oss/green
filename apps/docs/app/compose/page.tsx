@@ -203,7 +203,7 @@ const getNodeContent = (node: any): string => {
 }
 
 const initialCode = `<gds-card padding="l" variant="secondary">
-  <gds-text tag="h1" font-size="heading-xl">Hello World</gds-text>
+  <gds-text tag="h1" font="heading-xl">Hello World</gds-text>
   <gds-text color="secondary">Start editing to see live preview</gds-text>
 </gds-card>`
 
@@ -302,7 +302,7 @@ export default function Compose() {
         <Core.GdsCard variant="negative" padding="l">
           <Core.GdsFlex flex-direction="column" gap="s">
             <Core.GdsText tag="h4">Error parsing code</Core.GdsText>
-            <Core.GdsText font-family="mono" font-size="detail-m">
+            <Core.GdsText font-family="mono" font="detail-m">
               {errorMessage}
             </Core.GdsText>
           </Core.GdsFlex>
