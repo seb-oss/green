@@ -12,7 +12,7 @@ import {
   withMarginProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import style from './link.styles'
+import LinkStyles from './link.styles'
 
 /**
  * @element gds-link
@@ -29,7 +29,7 @@ import style from './link.styles'
 export class GdsLink extends withMarginProps(
   withSizeXProps(withLayoutChildProps(GdsElement)),
 ) {
-  static styles = [tokens, unsafeCSS(style)]
+  static styles = [tokens, unsafeCSS(LinkStyles)]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',

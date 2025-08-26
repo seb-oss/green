@@ -1,6 +1,0 @@
-{
-  "extends": "../story-project.json",
-  "files": {
-    "index.html": {}
-  }
-}

@@ -1,0 +1,79 @@
+.sidebar {
+  --padding-top: 152px;
+  box-sizing: border-box;
+  background: var(--gds-sys-color-l1-neutral-01);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  transition:
+    width var(--gds-sys-motion-duration-fast)
+      cubic-bezier(var(--gds-sys-motion-easing-ease-out)),
+    transform var(--gds-sys-motion-duration-fast)
+      cubic-bezier(var(--gds-sys-motion-easing-ease-out));
+  flex-direction: column;
+  border-radius: 0;
+  gap: var(--gds-sys-space-xl);
+  height: 100vh;
+  position: relative;
+  inset: 0px auto auto auto;
+  padding: var(--gds-sys-space-m) var(--gds-sys-space-xs) var(--gds-sys-space-l)
+    var(--gds-sys-space-l);
+  position: fixed;
+  width: 78px;
+  z-index: 9999;
+  box-shadow: var(--gds-sys-shadow-l-01), var(--gds-sys-shadow-l-02);
+  justify-content: space-between;
+
+  @media (min-width: 900px) {
+    position: sticky;
+    box-shadow: none;
+    padding-top: var(--padding-top);
+  }
+
+  &.open {
+    width: 280px;
+    padding: var(--gds-sys-space-m) var(--gds-sys-space-xs)
+      var(--gds-sys-space-4xl) var(--gds-sys-space-2xs);
+
+    @media (min-width: 900px) {
+      padding: var(--padding-top) var(--gds-sys-space-xs) var(--gds-sys-space-l)
+        var(--gds-sys-space-s);
+    }
+  }
+
+  @media (max-width: 899px) {
+    &.mobile-open {
+      transform: translateX(0);
+    }
+
+    &.mobile-closed {
+      transform: translateX(-110%);
+    }
+  }
+
+  [data-backdrop] {
+    backdrop-filter: blur(10px);
+  }
+
+  [data-fade] {
+    transition: all 250ms;
+
+    @starting-style {
+      opacity: 0;
+      translate: 10px 0;
+    }
+  }
+
+  [data-sub-item] {
+    padding-left: var(--gds-sys-space-2xl);
+  }
+}
+
+@keyframes ROW_SCROLL {
+  0% {
+    filter: blur(10px);
+    opacity: 0;
+    pointer-events: none;
+    scale: 0.96;
+  }
+}

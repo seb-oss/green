@@ -9,7 +9,7 @@ import { tokens } from '../../tokens.style'
 import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark, IconMinusSmall } from '../pure'
-import { styles } from './checkbox.styles'
+import CheckboxStyles from './checkbox.styles'
 
 /**
  * @element gds-checkbox
@@ -22,7 +22,7 @@ import { styles } from './checkbox.styles'
   dependsOn: [GdsToggleControlBase, IconCheckmark, IconMinusSmall],
 })
 export class GdsCheckbox extends GdsFormControlElement {
-  static styles = [tokens, rbcbToggleStyles, styles]
+  static styles = [tokens, rbcbToggleStyles, CheckboxStyles]
 
   /**
    * The label displayed next to the checkbox button.
@@ -135,7 +135,7 @@ export class GdsCheckbox extends GdsFormControlElement {
   }
 
   protected _getValidityAnchor(): HTMLElement {
-    return this._elCheckbox || this
+    return this._elCheckbox
   }
 
   protected override formResetCallback() {
