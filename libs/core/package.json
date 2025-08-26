@@ -1,7 +1,7 @@
 {
   "name": "@sebgroup/green-core",
   "description": "A carefully crafted set of Web Components, laying the foundation of the Green Design System.",
-  "version": "1.90.2",
+  "version": "2.0.0",
   "main": "index.js",
   "module": "index.js",
   "type": "module",
@@ -27,6 +27,14 @@
     "date-fns": "^2.28.0",
     "reflect-metadata": "^0.1.13",
     "lit": "^3.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
   },
   "exports": {
     ".": "./index.js",

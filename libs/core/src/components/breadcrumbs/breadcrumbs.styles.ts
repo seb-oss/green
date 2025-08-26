@@ -12,14 +12,11 @@ const style = css`
       align-items: center;
       width: max-content;
       gap: var(--gds-sys-space-s);
-      font-size: var(--gds-sys-text-size-detail-m);
-      line-height: var(--gds-sys-text-line-height-detail-m);
-      font-weight: var(--gds-sys-text-weight-regular);
+      font: var(--gds-sys-text-detail-book-m);
     }
 
     .size-small {
-      font-size: var(--gds-sys-text-size-detail-s);
-      line-height: var(--gds-sys-text-line-height-detail-s);
+      font: var(--gds-sys-text-detail-book-s);
       gap: var(--gds-sys-space-xs);
     }
 
@@ -55,7 +52,7 @@ const style = css`
     }
 
     li:last-child {
-      color: var(--gds-sys-color-l3-content-secondary);
+      color: var(--gds-sys-color-content-neutral-02);
     }
 
     .separator {
@@ -89,5 +86,4 @@ const style = css`
     }
   }
 `
-
 export default style

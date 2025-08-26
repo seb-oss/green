@@ -1,9 +1,12 @@
 {
   "name": "@sebgroup/green-tokens",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "dependencies": {},
   "description": "Design tokens for Green Design System",
   "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/seb-oss/green.git"

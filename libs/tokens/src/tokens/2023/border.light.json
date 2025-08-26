@@ -1,0 +1,59 @@
+{
+  "sys": {
+    "color": {
+      "border": {
+        "$type": "color",
+        "interactive": {
+          "$value": "{ref.color.grey.17}"
+        },
+        "subtle-01": {
+          "$value": "{ref.color.grey.7}"
+        },
+        "subtle-02": {
+          "$value": "{ref.color.grey.5}"
+        },
+        "strong": {
+          "$value": "{ref.color.grey.30}"
+        },
+        "inverse": {
+          "$value": "{ref.color.white}"
+        },
+        "information-01": {
+          "$value": "{ref.color.grey.30}"
+        },
+        "positive-01": {
+          "$value": "{ref.color.green.23}"
+        },
+        "negative-01": {
+          "$value": "{ref.color.red.16}"
+        },
+        "warning-01": {
+          "$value": "{ref.color.orange.18}"
+        },
+        "notice-01": {
+          "$value": "{ref.color.blue.17}"
+        },
+        "information-02": {
+          "$value": "{ref.color.grey.30}",
+          "alpha": 0.4
+        },
+        "positive-02": {
+          "$value": "{ref.color.green.23}",
+          "alpha": 0.4
+        },
+        "negative-02": {
+          "$value": "{ref.color.red.16}",
+          "alpha": 0.4
+        },
+        "warning-02": {
+          "$value": "{ref.color.orange.18}",
+          "alpha": 0.4
+        },
+        "notice-02": {
+          "$value": "{ref.color.blue.17}",
+          "alpha": 0.4
+        }
+      }
+    }
+  }
+}

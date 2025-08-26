@@ -1,26 +1,28 @@
-import { Link } from 'next-view-transitions'
-import { GdsDiv, GdsFlex, GdsText } from '$/import/components'
+// app/not-found.tsx
+'use client'
 
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  metadataBase: new URL('https://seb.io'),
-  title: '404 - Green Design System',
-  description:
-    'Green Design System is more than a polished user interface, its places the user at the very forefront of design, usability and accessibility.',
-  alternates: {
-    canonical: '/',
-  },
-}
+import * as Core from '@sebgroup/green-core/react'
 
 export default function NotFound() {
   return (
-    <GdsFlex flex-direction="column" gap="4xl">
-      <GdsDiv>
-        <GdsText font-size="display-2xl">404</GdsText>
-        <GdsText tag="h1">Page Not Found</GdsText>
-      </GdsDiv>
-      <Link href={'/'}>Go back</Link>
-    </GdsFlex>
+    <Core.GdsCard
+      justify-content="center"
+      align-items="center"
+      min-height="100%"
+      flex-direction="column"
+      gap="l"
+    >
+      <Core.GdsText text-align="center" font="display-xl">
+        404
+      </Core.GdsText>
+      <Core.GdsFlex flex-direction="column" gap="0">
+        <Core.GdsText text-align="center" tag="h1">
+          Page Not Found
+        </Core.GdsText>
+        <Core.GdsText text-align="center" tag="p">
+          {`The page you're looking for doesn't exist.`}
+        </Core.GdsText>
+      </Core.GdsFlex>
+    </Core.GdsCard>
   )
 }

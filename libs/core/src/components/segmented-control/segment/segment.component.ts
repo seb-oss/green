@@ -1,4 +1,3 @@
-import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 
 import { GdsElement } from '../../../gds-element'
@@ -6,14 +5,14 @@ import { gdsCustomElement, html } from '../../../scoping'
 import { tokens } from '../../../tokens.style'
 import { TransitionalStyles } from '../../../transitional-styles'
 import { withSizeXProps } from '../../../utils/mixins/declarative-layout-mixins'
-import style from './segment.style.css?inline'
+import SegmentStyles from './segment.styles'
 
 /**
  * @element gds-segment
  */
 @gdsCustomElement('gds-segment')
 export class GdsSegment<ValueT = any> extends withSizeXProps(GdsElement) {
-  static styles = [...tokens, unsafeCSS(style)]
+  static styles = [...tokens, SegmentStyles]
 
   /**
    * Whether the segment is selected
