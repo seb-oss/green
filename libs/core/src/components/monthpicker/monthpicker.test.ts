@@ -23,7 +23,7 @@ describe('<gds-monthpicker>', () => {
   })
 
   describe('Interactions', () => {
-    it('should increment by 3 months when pressing key down if september or earlier, else stay the same', async () => {
+    it('should increment by column months when pressing key down if september or earlier, else stay the same', async () => {
       const el = await fixture<GdsMonthpicker>(
         html`<gds-monthpicker></gds-monthpicker>`,
       )
@@ -35,16 +35,16 @@ describe('<gds-monthpicker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      if (new Date().getMonth() < 9) {
+      if (new Date().getMonth() < 12 - el.getColumns()) {
         await expect(el.value?.getMonth()).to.equal(
-          addMonths(new Date(), 3).getMonth(),
+          addMonths(new Date(), el.getColumns()).getMonth(),
         )
       } else {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
       }
     })
 
-    it('should decrement by 3 months when pressing key down if april or later, else stay the same', async () => {
+    it('should decrement by column months when pressing key down if april or later, else stay the same', async () => {
       const el = await fixture<GdsMonthpicker>(
         html`<gds-monthpicker></gds-monthpicker>`,
       )
@@ -56,9 +56,9 @@ describe('<gds-monthpicker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      if (new Date().getMonth() > 2) {
+      if (new Date().getMonth() > el.getColumns() - 1) {
         await expect(el.value?.getMonth()).to.equal(
-          subMonths(new Date(), 3).getMonth(),
+          subMonths(new Date(), el.getColumns()).getMonth(),
         )
       } else {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
