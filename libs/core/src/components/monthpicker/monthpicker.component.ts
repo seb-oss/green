@@ -297,11 +297,11 @@ export class GdsMonthPicker extends GdsElement {
       handled = true
     } else if (e.key === 'ArrowUp') {
       if (this.focusedMonth > 2 && this.focusedDate > addMonths(this.min, 3))
-        this.focusedMonth -= 3
+        this.focusedMonth -= this.columns
       handled = true
     } else if (e.key === 'ArrowDown') {
       if (this.focusedMonth < 9 && this.focusedDate < subMonths(this.max, 3))
-        this.focusedMonth += 3
+        this.focusedMonth += this.columns
       handled = true
     } else if (e.key === 'Home') {
       if (new Date(this.focusedYear, 0, 1) > this.min) this.focusedMonth = 0
