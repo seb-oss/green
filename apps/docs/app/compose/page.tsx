@@ -329,6 +329,8 @@ export default function Compose() {
       height="calc(100vh - 40px)"
       className="layout-compose"
       padding="0"
+      margin="0 2xl 0 0"
+      width="100%"
     >
       <Core.GdsFlex flex-direction="column" gap="m" position="relative">
         <Core.GdsCard

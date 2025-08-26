@@ -42,6 +42,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
             min-height="100vh"
             width="100%"
             margin="0 auto"
+            gap="2xl; l{0}"
             data-content
           >
             <main>{children}</main>
