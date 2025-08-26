@@ -1,8 +1,8 @@
 'use client'
 
-import { GdsFlex, GdsMask, GdsMonthpicker } from '$/import/components'
+import { GdsFlex, GdsMask, GdsYearpicker } from '$/import/components'
 
-const Monthpicker = ({ cover }: { cover: boolean }) => (
+const Yearpicker = ({ cover }: { cover: boolean }) => (
   <GdsFlex
     position="relative"
     height={cover ? '200px' : ''}
@@ -20,8 +20,8 @@ const Monthpicker = ({ cover }: { cover: boolean }) => (
         pointer-events="none"
       ></GdsMask>
     )}
-    <GdsMonthpicker />
+    <GdsYearpicker />
   </GdsFlex>
 )
 
-export default Monthpicker
+export default Yearpicker
