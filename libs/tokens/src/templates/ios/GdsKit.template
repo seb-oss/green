@@ -1,4 +1,0 @@
-<%= header %>
-<%= options.imports && options.imports.map(function(item) {
-            return `@_exported import ${item}`;
-    }).join('') %>
