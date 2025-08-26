@@ -8,7 +8,7 @@ export default function Playground() {
       width="100%"
       height="80vh"
       flex-direction="row"
-      gap="xl"
+      gap="s"
       border-color="subtle-01"
       background="none"
       data-pattern
@@ -52,8 +52,37 @@ export default function Playground() {
         </Core.GdsFlex>
         <Core.GdsDivider color="subtle-01" />
       </Core.GdsCard>
-      <Core.GdsFlex padding="s">
-        <span>playground contents</span>
+      <Core.GdsFlex
+        padding="0"
+        flex-direction="column"
+        justify-content="space-between"
+        align-items="center"
+        gap="s"
+        flex="1"
+      >
+        <Core.GdsDiv flex="1" width="100%">
+          <Core.GdsGrid columns="4" gap="m" width="100%">
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+            <Core.GdsCard></Core.GdsCard>
+          </Core.GdsGrid>
+        </Core.GdsDiv>
+        <Core.GdsCard variant="secondary" width="100%">
+          toolbar
+        </Core.GdsCard>
       </Core.GdsFlex>
     </Core.GdsCard>
   )
