@@ -193,7 +193,7 @@ export const CardGrid: Story = {
       <gds-div>
         <gds-card border-radius="xs">
           <gds-flex gap="m" flex-direction="column" align-items="flex-start">
-            <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
+            <gds-text font="l{heading-s} m{heading-s} s{heading-s}">
               Sidebar
             </gds-text>
             <gds-text text-wrap="balance">
@@ -212,12 +212,12 @@ export const CardGrid: Story = {
             justify-content="center"
             gap="m"
           >
-            <gds-text font-size="heading-s"> Span Columns: [2 / -1]</gds-text>
+            <gds-text font="heading-s"> Span Columns: [2 / -1]</gds-text>
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
-            <gds-text font-size="body-m">
+            <gds-text font="body-m">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -235,7 +235,7 @@ export const CardGrid: Story = {
             justify-content="center"
             gap="m"
           >
-            <gds-text font-size="heading-s">Span all columns [1 / -1]</gds-text>
+            <gds-text font="heading-s">Span all columns [1 / -1]</gds-text>
             <gds-text text-wrap="balance" lines="3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
