@@ -170,6 +170,7 @@ export const RenderColumn = (
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             data-column
+            overflow="hidden"
           >
             <Core.GdsTheme color-scheme={currentTheme}>
               <Core.GdsCard
@@ -184,6 +185,8 @@ export const RenderColumn = (
                 data-snipet={column.plain ? null : 'true'}
                 data-replay={column.replay}
                 onClick={() => handleReplay()}
+                min-width="100%"
+                overflow="auto"
               >
                 <Snippet slug={column.Snippet || ''} key={snippetKey} />
 
