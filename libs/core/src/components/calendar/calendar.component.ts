@@ -11,7 +11,6 @@ import {
   isSameDay,
   isSameMonth,
   lastDayOfMonth,
-  setHours,
   subMonths,
 } from 'date-fns'
 
@@ -127,7 +126,7 @@ export class GdsCalendar extends GdsElement {
       Math.min(this.focusedDate.getDate(), lastOfSelectedMonth.getDate()),
     )
     newFocusedDate.setMonth(month)
-    newFocusedDate.setHours(this.utcHours, 0, 0, 0)
+    newFocusedDate.setUTCHours(this.utcHours, 0, 0, 0)
 
     this.focusedDate = newFocusedDate
   }
@@ -349,8 +348,8 @@ export class GdsCalendar extends GdsElement {
   }
 
   #setSelectedDate(date: Date) {
-    const dateOnMidDay = setHours(date, this.utcHours)
-
+    date.setUTCHours(this.utcHours, 0, 0, 0)
+    const dateOnMidDay = date
     this.value = dateOnMidDay
 
     this.dispatchCustomEvent('change', {
