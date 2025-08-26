@@ -1,5 +1,29 @@
 # Changelog
 
+## 3.30.1
+
+### Patch Changes
+
+- d9b0006: **FormItem:** Compatibility fix for Core 2.0
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+  - @sebgroup/green-core@2.0.0
+
 ## 3.30.0
 
 ### Minor Changes

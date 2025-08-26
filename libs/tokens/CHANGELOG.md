@@ -1,5 +1,22 @@
 # Changelog
 
+## 2.0.0
+
+### Major Changes
+
+- d9b0006: New token structure. New names and new color values.
+- d9b0006: New state and shadow tokens, removing some of the old ones.
+
+### Minor Changes
+
+- d9b0006: Adding content-04 token
+
+### Patch Changes
+
+- d9b0006: fixing l2-02, l2-brand-02 darkmode values
+- d9b0006: Tokens: content-02 to use grey.19
+- d9b0006: Fixed l3-04 dark mode color
+
 ## 1.1.0
 
 ### Minor Changes
