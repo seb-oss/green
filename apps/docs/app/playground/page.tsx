@@ -80,8 +80,24 @@ export default function Playground() {
             <Core.GdsCard></Core.GdsCard>
           </Core.GdsGrid>
         </Core.GdsDiv>
-        <Core.GdsCard variant="secondary" width="100%">
-          toolbar
+        <Core.GdsCard
+          variant="secondary"
+          width="100%"
+          flex-direction="row"
+          align-items="center"
+        >
+          <Core.GdsFlex flex="1" align-items="center" gap="s">
+            <Core.IconOther size="l" />
+            Toolbar
+          </Core.GdsFlex>
+          <Core.GdsFlex>
+            <Core.GdsButton rank="tertiary" size="small">
+              <Core.IconMoon />
+            </Core.GdsButton>
+            <Core.GdsButton rank="tertiary" size="small">
+              <Core.IconOther />
+            </Core.GdsButton>
+          </Core.GdsFlex>
         </Core.GdsCard>
       </Core.GdsFlex>
     </Core.GdsCard>
