@@ -36,6 +36,4 @@ export {
   GdsTheme,
   GdsRadio,
   GdsRadioGroup,
-  GdsMonthpicker,
-  GdsYearpicker,
 } from '@sebgroup/green-core/react'
