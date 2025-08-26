@@ -643,10 +643,10 @@ describe('<gds-datepicker>', () => {
       await expect(yearDropdown.value).to.equal('2014')
     })
 
-    it('should go to next month when pressing arrow right from the last day in the month', async () => {
+    it('should go to previous month when pressing arrow left from the first day in the month', async () => {
       const el = await fixture<GdsDatepicker>(
         html`<gds-datepicker
-          value="2024-01-31"
+          value="2024-02-01"
           min="2014-01-01"
           max="2034-12-31"
           open
@@ -662,7 +662,7 @@ describe('<gds-datepicker>', () => {
       )!
 
       await sendKeys({
-        press: 'ArrowRight',
+        press: 'ArrowLeft',
       })
       await el.updateComplete
 
@@ -713,6 +713,12 @@ describe('<gds-datepicker>', () => {
       await el.updateComplete
       await expect(el.value.toISOString()).to.equal(
         new Date('2025-07-23T14:00:00Z').toISOString(),
+      )
+
+      el.value = new Date('2025-07-20')
+      await el.updateComplete
+      await expect(el.value.toISOString()).to.equal(
+        new Date('2025-07-20T14:00:00Z').toISOString(),
       )
     })
   })
