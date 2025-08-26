@@ -49,6 +49,14 @@ export default function Playground() {
             <Core.IconSquareGridCircle slot="lead" />
             Grid
           </Core.GdsButton>
+          <Core.GdsButton
+            size="small"
+            rank="tertiary"
+            justify-content="flex-start"
+          >
+            <Core.IconPencilSparkle slot="lead" />
+            Compose
+          </Core.GdsButton>
         </Core.GdsFlex>
         <Core.GdsDivider color="subtle-01" />
       </Core.GdsCard>
@@ -87,16 +95,30 @@ export default function Playground() {
           align-items="center"
         >
           <Core.GdsFlex flex="1" align-items="center" gap="s">
-            <Core.IconOther size="l" />
             Toolbar
           </Core.GdsFlex>
-          <Core.GdsFlex>
+          <Core.GdsFlex align-items="center" gap="s">
             <Core.GdsButton rank="tertiary" size="small">
               <Core.IconMoon />
             </Core.GdsButton>
-            <Core.GdsButton rank="tertiary" size="small">
-              <Core.IconOther />
-            </Core.GdsButton>
+            <Core.GdsSegmentedControl
+              size="small"
+              value="edit"
+              width="max-content"
+            >
+              <Core.GdsSegment value="edit">
+                <Core.GdsFlex align-items="center" gap="xs">
+                  <Core.IconPencilSign size="m" />
+                  Edit
+                </Core.GdsFlex>
+              </Core.GdsSegment>
+              <Core.GdsSegment>
+                <Core.GdsFlex align-items="center" gap="xs">
+                  <Core.IconEyeOpen size="m" />
+                  Preview
+                </Core.GdsFlex>
+              </Core.GdsSegment>
+            </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </Core.GdsCard>
       </Core.GdsFlex>
