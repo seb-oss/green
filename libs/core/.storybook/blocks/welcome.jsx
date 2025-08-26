@@ -31,7 +31,7 @@ export default function Welcome() {
             gap="xl"
           >
             <IconBrandGreen size="2xl"></IconBrandGreen>
-            <GdsText tag="code" font-size="display-s">
+            <GdsText tag="code" font="display-s">
               @sebgroup/green-core
             </GdsText>
             <GdsText
