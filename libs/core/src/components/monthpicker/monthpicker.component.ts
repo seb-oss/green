@@ -297,7 +297,7 @@ export class GdsMonthPicker extends GdsElement {
       handled = true
     } else if (e.key === 'ArrowUp') {
       if (
-        this.focusedMonth > 2 &&
+        this.focusedMonth > this.columns - 1 &&
         this.focusedDate > addMonths(this.min, this.columns)
       )
         this.focusedMonth -= this.columns
@@ -321,9 +321,9 @@ export class GdsMonthPicker extends GdsElement {
       const isUp = e.key === 'PageUp'
       let newMonth = this.focusedMonth
 
-      // Try moving up to 3 steps up or down in the same column
-      for (let i = 0; i < 3; i++) {
-        const next = newMonth + (isUp ? -3 : 3)
+      // Try moving up to one column steps up or down in the same column
+      for (let i = 0; i < this.columns; i++) {
+        const next = newMonth + (isUp ? -this.columns : this.columns)
         if (next < 0 || next > 11) break
         const candidate = new Date(this.focusedYear, next, 1)
         if (isUp && candidate < this.min && !isSameMonth(candidate, this.min))
