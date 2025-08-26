@@ -92,7 +92,18 @@ const MonacoEditor = dynamic<MonacoEditorProps>(
             }, [value])
 
             return (
-              <div ref={editorRef} style={{ height: '100%', width: '100%' }} />
+              <div
+                ref={editorRef}
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  top: 20,
+                  left: 10,
+                  right: 10,
+                  bottom: 10,
+                }}
+              />
             )
           }
 
@@ -299,7 +310,7 @@ export default function Compose() {
       const errorMessage = err instanceof Error ? err.message : 'Unknown error'
       setError(errorMessage)
       return (
-        <Core.GdsCard variant="negative" padding="l">
+        <Core.GdsCard variant="negative" padding="l" data-pattern>
           <Core.GdsFlex flex-direction="column" gap="s">
             <Core.GdsText tag="h4">Error parsing code</Core.GdsText>
             <Core.GdsText font-family="mono" font="detail-m">
@@ -312,25 +323,49 @@ export default function Compose() {
   }
 
   return (
-    <Core.GdsGrid columns="2" gap="l" height="calc(100vh - 90px)" width="100%">
-      <Core.GdsFlex flex-direction="column" gap="m">
+    <Core.GdsGrid
+      columns="1; l{2}"
+      gap="l"
+      height="calc(100vh - 40px)"
+      className="layout-compose"
+      padding="0"
+    >
+      <Core.GdsFlex flex-direction="column" gap="m" position="relative">
         <Core.GdsCard
           variant="secondary"
-          height="60vh"
-          padding="0"
+          height="80vh"
           overflow="hidden"
-          border-color="primary"
+          border-color="subtle-01"
+          padding="l 0"
+          border-radius="m"
+          position="relative"
         >
           <MonacoEditor value={code} onChange={(newCode) => setCode(newCode)} />
         </Core.GdsCard>
-        <Core.GdsFlex justify-content="flex-end">
-          <Core.GdsButton onClick={handleSave} rank="primary" size="small">
-            Preview Changes (⌘ + S)
-          </Core.GdsButton>
-        </Core.GdsFlex>
+        <Core.GdsFab
+          onClick={handleSave}
+          rank="primary"
+          size="small"
+          z-index="10"
+          inset="auto 15px 15px auto"
+          position="absolute"
+        >
+          Preview
+          <Core.IconEyeOpen slot="lead" />
+        </Core.GdsFab>
       </Core.GdsFlex>
 
-      <Core.GdsCard variant="primary" height="100%" padding="l" overflow="auto">
+      <Core.GdsCard
+        variant="primary"
+        height="100%"
+        padding="l"
+        border-radius="m"
+        overflow="auto"
+        background="transparent"
+        border-color="subtle-01"
+        min-width="max-content"
+        data-pattern
+      >
         {error ? (
           <Core.GdsText color="negative">{error}</Core.GdsText>
         ) : (
