@@ -271,7 +271,8 @@ const style = css`
     margin-bottom: var(--gds-sys-space-xl);
   }
 
-  a {
+  a,
+  a:visited {
     color: currentColor;
     text-decoration-color: currentColor;
   }
