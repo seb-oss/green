@@ -9,7 +9,7 @@ import {
   withMarginProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { defaultStyles } from '../text/default-typography.styles'
-import { styles } from './rich-text.styles'
+import styles from './rich-text.styles'
 
 /**
  * `gds-rich-text` can be used to wrap generic HTML content and apply typography styles.

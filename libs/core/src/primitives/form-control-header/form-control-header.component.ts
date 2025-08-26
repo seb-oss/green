@@ -10,7 +10,7 @@ import {
   gdsCustomElement,
   html,
 } from '../../utils/helpers/custom-element-scoping'
-import { styles } from './form-control-header.styles'
+import FormControlHeaderStyles from './form-control-header.styles'
 
 /**
  * @element gds-form-control-header
@@ -24,7 +24,7 @@ import { styles } from './form-control-header.styles'
 })
 @localized()
 export class GdsFormControlHeader extends GdsElement {
-  static styles = [styles]
+  static styles = [FormControlHeaderStyles]
 
   /**
    * Whether the supporting text should be displayed or not.

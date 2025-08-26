@@ -1,5 +1,35 @@
 # Changelog
 
+## 2.0.0
+
+### Major Changes
+
+- d9b0006: **GdsTheme:** Change the default design-version to '2023'
+- d9b0006: **Everything:** Updated all components to use the new token structure and names
+- d9b0006: **Theme:** `gds-theme` now sets the `color` CSS property by default.
+- d9b0006: **Removd deprecations:** `gds-container` and `gds-spacer`. Use `gds-div` instead.
+- d9b0006: **Everything:** Using new state color tokens and shadow tokens.
+
+  - **Card:** Removed `shadow` prop from `gds-card`, use `box-shadow` prop instead.
+
+### Minor Changes
+
+- d9b0006: **Alert:** Change from triang-exlamation to circle-info in alert warning variant.
+- d9b0006: **RichText:** Added styling for code tag to rich text
+- d9b0006: **Dialog:** Add `dialog` slot that can be used to override header, footer and content of the dialog.
+- d9b0006: **Calendar & Datepicker:** Add correct GDS23 design
+- d9b0006: **Dialog:** Add `placement` property to control placement on the screen.
+- d9b0006: **Theme:** Add 'auto' mode
+- d9b0006: **Filter Chips:** Add `size` prop
+
+### Patch Changes
+
+- d9b0006: **Form Control:** Add server-side check to `requestSubmit` polyfill for SSR compat
+- d9b0006: **Divider:** Use variable to apply the color, fixing the safari issue
+- d9b0006: **Form Summary:** Use standard `negative` variant of Card
+- d9b0006: **Utils:** Platform navigator check when is Server
+- d9b0006: **Blur:** Fix the blurring issue on safari, now wraps the content and set blur on container instead
+
 ## 1.90.2
 
 ### Patch Changes

@@ -7,7 +7,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 import './card'
 import '../img'
 import '../video'
-import '../container'
+import '../div'
 import '../mask/index.js'
 import '../flex'
 import '../text'
@@ -63,65 +63,46 @@ export const Variants: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-flex gap="l" flex-direction="column">
-      <gds-card variant="secondary" border-color="primary">
+      <gds-card variant="secondary">
         <gds-flex gap="l" flex-direction="column">
           <gds-text tag="h3">Light mode</gds-text>
-          <gds-grid columns="3" gap="l">
+          <gds-grid columns="2" gap="l">
             <gds-card variant="primary">Primary</gds-card>
-            <gds-card variant="secondary" border-color="secondary"
-              >Secondary</gds-card
-            >
-            <gds-card variant="tertiary">Tertiary</gds-card>
+            <gds-card variant="secondary">Secondary</gds-card>
+            <gds-card variant="brand-01">Brand-01</gds-card>
+            <gds-card variant="brand-02">Brand-02</gds-card>
           </gds-grid>
-          <gds-grid columns="5" gap="l">
+          <gds-grid columns="1" gap="l">
             <gds-card variant="positive">Positive</gds-card>
             <gds-card variant="negative">Negative</gds-card>
             <gds-card variant="notice">Notice</gds-card>
             <gds-card variant="warning">Warning</gds-card>
             <gds-card variant="information">Information</gds-card>
           </gds-grid>
-          <gds-grid columns="4" gap="l">
-            <gds-card variant="copper-01">Copper 01</gds-card>
-            <gds-card variant="copper-02">Copper 02</gds-card>
-            <gds-card variant="purple-01">Purple 01</gds-card>
-            <gds-card variant="purple-02">Purple 02</gds-card>
-            <gds-card variant="green-01">Green 01</gds-card>
-            <gds-card variant="green-02">Green 02</gds-card>
-            <gds-card variant="blue-01">Blue 01</gds-card>
-            <gds-card variant="blue-02">Blue 02</gds-card>
+          <gds-grid columns="1" gap="l">
+            <gds-card>Default</gds-card>
           </gds-grid>
         </gds-flex>
       </gds-card>
       <gds-theme color-scheme="dark">
-        <gds-card>
+        <gds-card level="1">
           <gds-flex gap="l" flex-direction="column">
             <gds-text tag="h3">Dark mode</gds-text>
-            <gds-grid columns="3" gap="l">
-              <!-- If the backgrouns has the same color as the card, it will be necessary to set the border-color -->
-              <gds-card variant="primary" border-color="primary"
-                >Primary</gds-card
-              >
-              <gds-card variant="secondary" border-color="secondary"
-                >Secondary</gds-card
-              >
-              <gds-card variant="tertiary">Tertiary</gds-card>
+            <gds-grid columns="2" gap="l">
+              <gds-card variant="primary">Primary</gds-card>
+              <gds-card variant="secondary">Secondary</gds-card>
+              <gds-card variant="brand-01">Brand-01</gds-card>
+              <gds-card variant="brand-02">Brand-02</gds-card>
             </gds-grid>
-            <gds-grid columns="5" gap="l">
+            <gds-grid columns="1" gap="l">
               <gds-card variant="positive">Positive</gds-card>
               <gds-card variant="negative">Negative</gds-card>
               <gds-card variant="notice">Notice</gds-card>
               <gds-card variant="warning">Warning</gds-card>
               <gds-card variant="information">Information</gds-card>
             </gds-grid>
-            <gds-grid columns="4" gap="l">
-              <gds-card variant="copper-01">Copper 01</gds-card>
-              <gds-card variant="copper-02">Copper 02</gds-card>
-              <gds-card variant="purple-01">Purple 01</gds-card>
-              <gds-card variant="purple-02">Purple 02</gds-card>
-              <gds-card variant="green-01">Green 01</gds-card>
-              <gds-card variant="green-02">Green 02</gds-card>
-              <gds-card variant="blue-01">Blue 01</gds-card>
-              <gds-card variant="blue-02">Blue 02</gds-card>
+            <gds-grid columns="1" gap="l">
+              <gds-card>Default</gds-card>
             </gds-grid>
           </gds-flex>
         </gds-card>
@@ -131,169 +112,29 @@ export const Variants: Story = {
 }
 
 /**
- * Advanced example
- */
-export const CardAdvancedExample: Story = {
-  ...DefaultParams,
-  render: (args) => html`
-    <gds-grid columns="xs{1} m{3} l{3}" gap="l">
-      <gds-card
-        shadow="s{xs} m{xs} l{s}"
-        border-radius="xs"
-        overflow="hidden"
-        padding="0"
-        background="secondary"
-      >
-        <gds-flex gap="0" flex-direction="column" align-items="stretch">
-          <gds-div position="relative">
-            <gds-img
-              src="https://github.com/seb-oss/green/assets/2398447/cd458a77-13f1-495c-960c-ce23a18e5d9f"
-              aspect-ratio="1/1"
-            ></gds-img>
-            <gds-div position="absolute" inset="20px 20px auto auto">
-              <gds-button>
-                <gds-icon-arrow-down></gds-icon-arrow-down>
-              </gds-button>
-            </gds-div>
-          </gds-div>
-          <gds-flex
-            flex-direction="column"
-            padding="s{xs} m{l} l{l}"
-            align-items="flex-start"
-            gap="l"
-          >
-            <gds-flex gap="s" flex-direction="column">
-              <gds-text font-size="body-l">James Doe</gds-text>
-              <gds-text tag="p">
-                Passionate software engineer with a love for coding and
-                problem-solving.
-              </gds-text>
-            </gds-flex>
-            <gds-divider opacity="0.2"></gds-divider>
-            <gds-button>
-              Follow
-              <gds-icon-circles-three slot="lead"></gds-icon-circles-three>
-            </gds-button>
-          </gds-flex>
-        </gds-flex>
-      </gds-card>
-      <gds-card
-        shadow="l"
-        border-radius="m"
-        border="3xs/primary"
-        overflow="hidden"
-        padding="0"
-        background="secondary"
-      >
-        <gds-flex gap="m" flex-direction="column" padding="s">
-          <gds-div position="relative">
-            <gds-img
-              src="https://github.com/seb-oss/green/assets/2398447/dff488cc-700e-47f9-b7f7-3788eb742c11"
-              aspect-ratio="1/1"
-              border-radius="xs"
-            ></gds-img>
-            <gds-div position="absolute" inset="20px 20px auto auto">
-              <gds-button>
-                <gds-icon-arrow-down></gds-icon-arrow-down>
-              </gds-button>
-            </gds-div>
-          </gds-div>
-          <gds-flex
-            flex-direction="column"
-            padding="s{xs} m{s} l{s}"
-            align-items="flex-start"
-            gap="l"
-          >
-            <gds-flex gap="s" flex-direction="column">
-              <gds-text font-size="body-l">Lorem Ipsum</gds-text>
-              <gds-text tag="p">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt.
-              </gds-text>
-            </gds-flex>
-            <gds-button>
-              Button
-              <gds-icon-arrow-right slot="trail"></gds-icon-arrow-right>
-            </gds-button>
-          </gds-flex>
-        </gds-flex>
-      </gds-card>
-      <gds-card border-radius="m" overflow="hidden" padding="0">
-        <gds-flex position="relative" height="100%">
-          <gds-video
-            src="https://github.com/seb-oss/green/assets/2398447/d77a95d0-e4d7-4c49-bd95-50d0f72f1a7a"
-            object-fit="cover"
-            aspect-ratio="1/1"
-            pointer-events="none"
-            autoplay
-            muted
-            loop
-          ></gds-video>
-          <gds-mask
-            mask-image="top"
-            background-color="tertiary/0.4"
-            position="absolute"
-          >
-            <gds-flex
-              flex-direction="column"
-              justify-content="flex-end"
-              padding="4xl 2xl 2xl 2xl"
-              gap="l"
-              height="100%"
-              width="100%"
-              color="tertiary"
-            >
-              <gds-div>
-                <gds-text font-size="body-l">Jane Doe</gds-text>
-                <gds-text font-size="body-m">UX Designer</gds-text>
-              </gds-div>
-              <gds-flex gap="s">
-                <gds-button rank="secondary">Message</gds-button>
-                <gds-button rank="secondary">Follow</gds-button>
-              </gds-flex>
-            </gds-flex>
-          </gds-mask>
-        </gds-flex>
-      </gds-card>
-    </gds-grid>
-  `,
-}
-
-/**
  *
- * @property shadow
+ * @property box-shadow
  *
- * Controls the box-shadow property of the card.
+ * Controls the box-shadow styling of the card.
  *
- * Shadow styles are as specified on the design system that range from xl-2xl, can be used like this:
+ * Shadow styles are as specified on the design system that range from "s" to "xl" and can be used like this:
  *
  * ```html
- * <gds-card shadow="s{xs} m{xs} l{s}"></gds-card>
+ * <gds-card box-shadow="s"></gds-card>
  * ```
  *
- * The above example will apply the shadow style of xs for small devices, xs for medium devices, and s for large devices.
- * The shadow styles are predfied on the tokens file and will be applied automativally based on the token value.
+ * The above example will apply the box-shadow style of "s" for small device sizes. The box-shadow style values are predefined in the design tokens.
  *
  */
 
 export const Cardshadow: Story = {
   ...DefaultParams,
-  name: 'Shadow',
+  name: 'Box shadow',
   render: (args) =>
-    html`<gds-grid columns="5" gap="l">
+    html`<gds-grid columns="4" gap="l">
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="s{xs} m{xs} l{xs}"
-        border-radius="xs"
-        variant="secondary"
-      >
-        <gds-flex display="flex" align-items="center" justify-content="center">
-          XS
-        </gds-flex>
-      </gds-card>
-      <gds-card
-        padding="s{xs} m{l} l{l}"
-        shadow="s{s} m{s} l{s}"
+        box-shadow="s"
         border-radius="xs"
         variant="secondary"
       >
@@ -303,7 +144,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="s{m} m{m} l{m}"
+        box-shadow="m"
         border-radius="xs"
         variant="secondary"
       >
@@ -313,7 +154,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="s{l} m{l} l{l}"
+        box-shadow="l"
         border-radius="xs"
         variant="secondary"
       >
@@ -323,7 +164,7 @@ export const Cardshadow: Story = {
       </gds-card>
       <gds-card
         padding="s{xs} m{l} l{l}"
-        shadow="s{xl} m{xl} l{xl}"
+        box-shadow="xl"
         border-radius="xs"
         variant="secondary"
       >
@@ -352,7 +193,7 @@ export const CardGrid: Story = {
       <gds-div>
         <gds-card border-radius="xs">
           <gds-flex gap="m" flex-direction="column" align-items="flex-start">
-            <gds-text font-size="l{heading-s} m{heading-s} s{heading-s}">
+            <gds-text font="l{heading-s} m{heading-s} s{heading-s}">
               Sidebar
             </gds-text>
             <gds-text text-wrap="balance">
@@ -371,12 +212,12 @@ export const CardGrid: Story = {
             justify-content="center"
             gap="m"
           >
-            <gds-text font-size="heading-s"> Span Columns: [2 / -1]</gds-text>
+            <gds-text font="heading-s"> Span Columns: [2 / -1]</gds-text>
             <gds-text>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </gds-text>
-            <gds-text font-size="body-m">
+            <gds-text font="body-m">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem
               ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -394,7 +235,7 @@ export const CardGrid: Story = {
             justify-content="center"
             gap="m"
           >
-            <gds-text font-size="heading-s">Span all columns [1 / -1]</gds-text>
+            <gds-text font="heading-s">Span all columns [1 / -1]</gds-text>
             <gds-text text-wrap="balance" lines="3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua lorem

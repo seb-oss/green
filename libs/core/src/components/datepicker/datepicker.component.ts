@@ -33,7 +33,7 @@ import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsPopover } from '../popover/popover.component'
 import { GdsDatePartSpinner } from './date-part-spinner'
-import { styles } from './datepicker.styles'
+import DatepickerStyles from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -44,7 +44,7 @@ type DateFormatLayout = {
 
 @localized()
 class Datepicker extends GdsFormControlElement<Date> {
-  static styles = [tokens, formControlHostStyle, styles]
+  static styles = [tokens, formControlHostStyle, DatepickerStyles]
 
   get type() {
     return 'gds-datepicker'
@@ -475,7 +475,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-flex
                 align-items="center"
                 justify-content="space-between"
-                padding="0 m m m"
+                padding="m m m m"
               >
                 ${when(
                   this.clearable,
@@ -501,7 +501,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                   () =>
                     html` <gds-button
                       id="today-button"
-                      rank="tertiary"
+                      rank="primary"
                       size="small"
                       @click=${(e: MouseEvent) => {
                         e.stopPropagation()

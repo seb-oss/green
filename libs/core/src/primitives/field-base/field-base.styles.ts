@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, a11y;
 
   @layer a11y {
@@ -29,10 +29,10 @@ export const styles = css`
       outline-style: solid;
       outline-width: 0;
       border-radius: var(--gds-sys-space-xs);
-      background: var(--gds-sys-color-l3-background-secondary);
-      color: var(--gds-sys-color-l3-content-tertiary);
+      background: var(--gds-sys-color-l3-neutral-02);
+      color: var(--gds-sys-color-content-neutral-01);
       border: var(--gds-sys-space-4xs) solid
-        var(--gds-sys-color-l3-border-secondary);
+        var(--gds-sys-color-border-interactive);
       cursor: text;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
@@ -86,16 +86,16 @@ export const styles = css`
     }
 
     .field.disabled {
-      background: var(--gds-sys-color-l3-background-disabled);
-      color: var(--gds-sys-color-l3-content-disabled);
+      background: var(--gds-sys-color-l3-disabled-01);
+      color: var(--gds-sys-color-content-disabled-01);
       border-color: transparent;
       pointer-events: none;
     }
 
     .field.invalid {
-      background: var(--gds-sys-color-l3-background-negative-secondary);
-      border-color: var(--gds-sys-color-l3-border-negative);
-      color: var(--gds-sys-color-l3-content-negative);
+      background: var(--gds-sys-color-l3-negative-02);
+      border-color: var(--gds-sys-color-border-negative-01);
+      color: var(--gds-sys-color-content-negative-01);
     }
 
     slot:not([name])::slotted(*) {
@@ -117,16 +117,16 @@ export const styles = css`
       .field:hover {
         background: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-background-secondary),
-          var(--gds-sys-color-l3-states-light-hover)
+          var(--gds-sys-color-l3-neutral-02),
+          var(--gds-sys-color-state-neutral-03)
         );
       }
 
       .field.invalid:hover {
         background: color-mix(
           in srgb,
-          var(--gds-sys-color-l3-background-negative-secondary),
-          var(--gds-sys-color-l3-states-negative-hover)
+          var(--gds-sys-color-l3-negative-02),
+          var(--gds-sys-color-state-negative-hover)
         );
       }
     }
@@ -144,3 +144,4 @@ export const styles = css`
     }
   }
 `
+export default style

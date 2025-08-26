@@ -20,6 +20,10 @@ const meta: Meta = {
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-filter-chip'),
+    size: {
+      options: ['small', 'large'],
+      control: { type: 'select' },
+    },
   },
 }
 

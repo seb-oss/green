@@ -1,9 +1,8 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   :host {
-    font-size: var(--gds-sys-text-size-body-m);
-    line-height: var(--gds-sys-text-line-height-body-m);
+    font: var(--gds-sys-text-body-regular-m);
     --default-border: 1px solid
       color-mix(in srgb, currentColor, transparent 80%);
     letter-spacing: 0.0125rem;
@@ -60,6 +59,14 @@ export const styles = css`
     border-left: 0.2rem solid currentColor;
     padding-left: 2ch;
     max-width: 40ch;
+  }
+
+  code {
+    background: var(--gds-sys-color-l3-neutral-02);
+    color: var(--gds-sys-color-content-neutral-01);
+    border-radius: var(--gds-sys-radius-xs);
+    padding: var(--gds-sys-space-2xs);
+    font: var(--gds-sys-text-body-book-s);
   }
 
   hr {
@@ -194,16 +201,14 @@ export const styles = css`
   details {
     border-top: solid var(--gds-sys-space-4xs)
       color-mix(in srgb, currentColor, transparent 90%);
-    font-size: var(--gds-sys-text-size-body-m);
-    line-height: var(--gds-sys-text-line-height-body-m);
+    font: var(--gds-sys-text-body-regular-m);
   }
 
   summary {
     font-weight: var(--gds-sys-text-weight-regular);
     list-style: none;
     padding: 0.4lh 0.2ch;
-    font-size: var(--gds-sys-text-size-body-l);
-    line-height: var(--gds-sys-text-line-height-body-l);
+    font: var(--gds-sys-text-body-regular-l);
     color: currentColor;
     display: flex;
     justify-content: space-between;
@@ -234,8 +239,7 @@ export const styles = css`
     justify-content: center;
     width: 24px;
     height: 24px;
-    font-weight: var(--gds-sys-text-weight-regular);
-    font-size: var(--gds-sys-text-size-body-l);
+    font: var(--gds-sys-text-body-regular-l);
   }
 
   details[open] summary::after {
@@ -267,7 +271,8 @@ export const styles = css`
     margin-bottom: var(--gds-sys-space-xl);
   }
 
-  a {
+  a,
+  a:visited {
     color: currentColor;
     text-decoration-color: currentColor;
   }
@@ -276,10 +281,10 @@ export const styles = css`
   * Iframe
   */
   iframe {
-    border: var(--gds-sys-space-4xs) solid
-      var(--gds-sys-color-l2-border-primary);
+    border: var(--gds-sys-space-4xs) solid var(--gds-sys-color-border-subtle-01);
     border-radius: var(--gds-sys-space-xs);
     min-width: 100%;
     margin-bottom: var(--gds-sys-space-l);
   }
 `
+export default style

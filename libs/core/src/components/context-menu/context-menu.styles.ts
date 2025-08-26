@@ -6,22 +6,33 @@ const style = css`
     :host {
       display: inline-block;
     }
+
     button {
       display: flex;
       border-width: 0;
-      background-color: #ededed;
+      background-color: var(--gds-sys-color-l3-neutral-02);
       border-radius: calc(1px * infinity);
       padding: 0.4rem 0.8rem;
       font-family: inherit;
       cursor: pointer;
       align-items: center;
       gap: 0.5rem;
+
+      &:focus-visible {
+        outline-offset: var(--gds-sys-space-3xs);
+        outline-style: solid;
+        outline-width: var(--gds-sys-space-3xs);
+        outline-color: var(--gds-sys-color-content-neutral-01);
+      }
     }
 
     button:hover {
-      background-color: #dcdcdc;
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-neutral-02),
+        var(--gds-sys-color-state-neutral-03)
+      );
     }
   }
 `
-
 export default style
