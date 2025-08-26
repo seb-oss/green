@@ -3,7 +3,9 @@ import composeColorScheme from './compose-color-scheme.ts'
 import cssOnlyVariables from './css-only-variables.ts'
 import cssShadows from './css-shadows.ts'
 import figmaJson from './figma-json.ts'
+import greenIosGdsKit from './green-ios-gdskit.ts'
 import greenIosSwiftClassTree from './green-ios-swift-class-tree.ts'
+import greenIosSwiftExtension from './green-ios-swift-extension.ts'
 import greenIosSwiftPackage from './green-ios-swift-package.ts'
 import enumClass from './jvm-enum-class.ts'
 import scssMixin from './scss-mixin.ts'
@@ -15,6 +17,8 @@ const formats = {
   'scss/mixin': scssMixin,
   'green/ios-swift-package': greenIosSwiftPackage,
   'green/ios-swift-class-tree': greenIosSwiftClassTree,
+  'green/ios-swift-gdskit': greenIosGdsKit,
+  'green/ios-swift-extension': greenIosSwiftExtension,
   'compose/class': composeClass,
   'compose/color-scheme': composeColorScheme,
   'jvm/enum-class': enumClass,

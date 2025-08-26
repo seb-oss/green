@@ -1,6 +1,7 @@
-import fs from 'fs'
+import fs, { access } from 'fs'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { use } from 'react'
 import StyleDictionary from 'style-dictionary'
 
 import actions from './src/actions/index.ts'
@@ -8,7 +9,21 @@ import filters from './src/filters/index.ts'
 import formats from './src/formats/index.ts'
 import transforms from './src/transforms/index.ts'
 
-const swiftPackageName = 'GdsTokens'
+const swiftPackageName = 'GdsKit'
+const swiftTargets = [
+  {
+    name: swiftPackageName,
+    dependencies: [],
+    path: '',
+    resources: [],
+  },
+  {
+    name: 'GdsColours',
+    dependencies: [swiftPackageName],
+    path: `Sources/GdsColours`,
+    resources: ['Resources'],
+  },
+]
 const swiftSourcePath = 'Sources/' + swiftPackageName + '/'
 
 /**
@@ -227,65 +242,42 @@ await Promise.all(
                 packageName: swiftPackageName,
                 options: {
                   platformVersion: '15',
-                  targets: [swiftPackageName],
+                  targets: swiftTargets,
                 },
               },
               {
-                destination: `Colors/${capitalize(colorScheme)}ModeColors.swift`,
+                destination: `Sources/GdsColours/${capitalize(colorScheme)}Mode.swift`,
                 format: 'green/ios-swift-class-tree',
                 filter: 'is-color-no-ref',
                 options: {
                   import: ['UIKit'],
-                  objectType: 'struct',
-                  className: `${capitalize(colorScheme)}ModeColors`,
+                  objectType: 'enum',
+                  className: `${capitalize(colorScheme)}Mode`,
+                  accessControl: 'internal',
                 },
               },
               {
-                destination: 'Colors/UIColors.swift',
-                format: 'green/ios-swift-class-tree',
+                destination: 'Sources/GdsColours/GdsColours.swift',
+                format: 'green/ios-swift-extension',
                 filter: 'is-color-no-ref',
                 options: {
                   import: ['UIKit'],
-                  objectType: 'struct',
-                  className: 'UIColors',
-                  colorType: 'uiKitDynamicProvider',
-                  lightModeObjectName: 'LightModeColors',
-                  darkModeObjectName: 'DarkModeColors',
+                  objectType: 'enum',
+                  className: 'GdsColours',
+                  outputType: 'uiKitDynamicProvider',
+                  lightModeObjectName: 'LightMode',
+                  darkModeObjectName: 'DarkMode',
                 },
               },
               {
-                destination: 'Colors/Colors.swift',
-                format: 'green/ios-swift-class-tree',
-                filter: 'is-color-no-ref',
+                destination: 'Sources/GdsKit/GdsKit.swift',
+                format: 'green/ios-swift-gdskit',
                 options: {
-                  objectType: 'struct',
-                  import: ['SwiftUI'],
-                  uiKitObjectName: 'UIColors',
-                  className: 'Colors',
-                  colorType: 'swiftUiReferenceToUiKit',
-                },
-              },
-              {
-                destination: 'Dimensions.swift',
-                format: 'ios-swift/any.swift',
-                filter: 'is-dimension',
-                options: {
-                  import: ['UIKit'],
-                  objectType: 'struct',
-                  className: 'Dimensions',
-                },
-              },
-              {
-                destination: 'Shape.swift',
-                format: 'ios-swift/any.swift',
-                filter: 'is-shape',
-                options: {
-                  import: ['UIKit'],
-                  objectType: 'struct',
-                  className: 'Shape',
+                  imports: ['GdsColours'],
                 },
               },
             ],
+            actions: [`color-set-${colorScheme}`],
           },
           android: {
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/android/`,

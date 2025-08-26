@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra'
 
 export default {
-  name: 'copy_package_json',
+  name: 'copy-package-json',
   do: function (dictionary, config) {
     console.log('Copying package.json')
     console.log(config)
