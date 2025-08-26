@@ -35,7 +35,7 @@ export function Similar({ tag, currentSlug }: SimilarProps) {
     <Core.GdsFlex
       flex-direction="column"
       gap="xl"
-      margin="0; m{4xl 0}"
+      margin="xl 0 0 0; m{4xl 0}"
       width="100%"
       border-color="subtle-01"
       border-width="4xs 0 0 0"
