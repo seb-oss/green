@@ -202,7 +202,7 @@ export default function Command() {
           max-height="60vh"
           onGdsClose={(e: CustomEvent) => handleClosePanel(e)}
           placement="center"
-          padding="xs"
+          padding="s"
           open
         >
           <Core.GdsFlex
@@ -221,13 +221,17 @@ export default function Command() {
                 setQuery((e.target as HTMLInputElement).value)
                 setSelectedIndex(0)
               }}
-              // onKeyDown={handleKeyDown}
               autofocus
             >
               <Core.IconMagnifyingGlass slot="lead" />
             </Core.GdsInput>
 
-            <Core.GdsFlex align-items="center" justify-content="space-between">
+            <Core.GdsFlex
+              flex-direction="column; m{row}"
+              align-items="center"
+              justify-content="space-between"
+              gap="s"
+            >
               <Core.GdsFilterChips>
                 <Core.GdsFilterChip
                   size="s"
@@ -308,17 +312,7 @@ export default function Command() {
                             BETA
                           </Core.GdsBadge>
                         )}
-                        <Core.GdsBadge
-                          // rank="secondary"
-                          // variant={
-                          //   result.type === 'component'
-                          //     ? 'primary'
-                          //     : result.type === 'template'
-                          //       ? 'notice'
-                          //       : 'secondary'
-                          // }
-                          size="small"
-                        >
+                        <Core.GdsBadge size="small">
                           {result.type}
                         </Core.GdsBadge>
                       </Core.GdsFlex>
@@ -355,7 +349,6 @@ export default function Command() {
               )}
             </Core.GdsFlex>
           </Core.GdsFlex>
-          <span slot="footer"></span>
         </Core.GdsDialog>
       )}
     </React.Fragment>
