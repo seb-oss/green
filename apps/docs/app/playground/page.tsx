@@ -99,6 +99,9 @@ export default function Playground() {
           </Core.GdsFlex>
           <Core.GdsFlex align-items="center" gap="s">
             <Core.GdsButton rank="tertiary" size="small">
+              <Core.IconCodeBrackets />
+            </Core.GdsButton>
+            <Core.GdsButton rank="tertiary" size="small">
               <Core.IconMoon />
             </Core.GdsButton>
             <Core.GdsSegmentedControl
