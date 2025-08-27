@@ -15,15 +15,13 @@ const style = css`
     }
 
     :host table {
-      border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
-      //border-spacing: var(--gds-sys-space-xs);
+      border-spacing: var(--gds-sys-space-xs);
       flex-grow: 1;
       width: 100%;
       padding: 1ch;
 
       &.small {
-        border-spacing: var(--gds-sys-space-2xs) var(--gds-sys-space-m);
-        //border-spacing: var(--gds-sys-space-2xs);
+        border-spacing: var(--gds-sys-space-2xs);
 
         thead th {
           width: var(--gds-sys-space-xl);

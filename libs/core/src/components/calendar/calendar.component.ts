@@ -17,10 +17,10 @@ import {
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement } from '../../scoping'
+import GridpickerStyles from '../../shared-styles/gridpicker.styles'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch'
-import CalendarStyles from './calendar.styles'
 import { renderMonthGridView } from './functions'
 
 /**
@@ -60,7 +60,7 @@ export type CustomizedDate = {
 @gdsCustomElement('gds-calendar')
 @localized()
 export class GdsCalendar extends GdsElement {
-  static styles = [tokens, CalendarStyles]
+  static styles = [tokens, GridpickerStyles]
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',
     delegatesFocus: true,
