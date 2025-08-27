@@ -17,6 +17,7 @@ import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../icon/icons/checkmark.component'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
 import DropdownStyles from './dropdown.styles'
 
@@ -53,6 +54,7 @@ export * from '../../primitives/listbox/option.component'
     GdsPopover,
     IconCheckmark,
     IconChevronBottom,
+    IconCrossLarge,
   ],
 })
 @localized()
@@ -91,6 +93,12 @@ export class GdsDropdown<ValueT = any>
    */
   @property({ type: Boolean, reflect: true })
   multiple = false
+
+  /**
+   * Whether the dropdown should be clearable.
+   */
+  @property({ type: Boolean, reflect: true })
+  clearable = false
 
   /**
    * Whether the dropdown should be rendered as a combobox.
@@ -321,6 +329,17 @@ export class GdsDropdown<ValueT = any>
           id="field"
         >
           <slot name="lead" slot="lead"></slot>
+          ${this.clearable && this.value && !this.disabled
+            ? html`<gds-button
+                rank="tertiary"
+                size=${this.size === 'small' ? 'xs' : 'small'}
+                label="${msg('Clear selection')}"
+                @click=${this.#handleClearButton}
+                slot="trail"
+              >
+                <gds-icon-cross-large></gds-icon-cross-large>
+              </gds-button>`
+            : ''}
           ${this.combobox && !this.multiple
             ? this.#renderCombobox()
             : this.#renderTriggerButton()}
@@ -526,6 +545,12 @@ export class GdsDropdown<ValueT = any>
     if (this.#dispatchUISateEvent(e.detail.open, e.detail.reason)) {
       this.open = e.detail.open
     }
+  }
+
+  #handleClearButton = (e: MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.value = undefined
   }
 
   /**
