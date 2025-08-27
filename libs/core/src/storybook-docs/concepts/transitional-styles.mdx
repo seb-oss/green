@@ -21,6 +21,8 @@ import * as ButtonStyles from '@sebgroup/green-core/components/button/button.tra
 ButtonStyles.register()
 ```
 
+Transitional styles are available for some, but not all, components. If it's not available, you can simply use the 23 style along older 16 styles during the transition period.
+
 ### Granular control
 
 When transitional styles have been loaded for a component, it will apply to all instances of that component in the document. However, let's say you are adopting the new style for buttons in your application, but for some legacy reason, you still need some buttons to use the 2016 style. In that case, you can use `gds-theme` to override the transitional styles for that specific button:
@@ -31,7 +33,7 @@ When transitional styles have been loaded for a component, it will apply to all 
 </gds-theme>
 ````
 
-`gds-theme` gives you granual control over which parts of the application should use the 2023 design and which should use the 2016 design.
+`gds-theme` gives you granual control over which parts of the application should use the 2023 design and which should use the 2016 design. Since Core 2.0, the default design version is `2023`.
 
 ***Note:** The 2016 styles expects some CSS variables from Chlorophyll to be present. In many cases, Chlorophyll is already used in the document, but in case it isn't, you can add these variables by using wrapping in `<gds-theme>`. You also need to import and register transitional styles for the gds-theme component in that case.*
 
