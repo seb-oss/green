@@ -35,9 +35,9 @@ describe('<gds-monthpicker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      if (new Date().getMonth() < 12 - el.getColumns()) {
+      if (new Date().getMonth() < 12 - el.columns) {
         await expect(el.value?.getMonth()).to.equal(
-          addMonths(new Date(), el.getColumns()).getMonth(),
+          addMonths(new Date(), el.columns).getMonth(),
         )
       } else {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
@@ -56,9 +56,9 @@ describe('<gds-monthpicker>', () => {
       await sendKeys({ press: 'Enter' })
       await aTimeout(0)
 
-      if (new Date().getMonth() > el.getColumns() - 1) {
+      if (new Date().getMonth() > el.columns - 1) {
         await expect(el.value?.getMonth()).to.equal(
-          subMonths(new Date(), el.getColumns()).getMonth(),
+          subMonths(new Date(), el.columns).getMonth(),
         )
       } else {
         await expect(el.value?.getMonth()).to.equal(new Date().getMonth())
