@@ -178,6 +178,10 @@
   <source>Auto-dismiss timer</source>
   <target>Automatisk afvisningstimer</target>
 </trans-unit>
+<trans-unit id="s8f18916860db5d80">
+  <source>Clear selection</source>
+  <target>Ryd valg</target>
+</trans-unit>
 </body>
 </file>
 </xliff>
