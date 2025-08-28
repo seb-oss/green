@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.2
+
+### Patch Changes
+
+- cd905fe: **Context menu:** Button should inherit transitional styles if enabled for the Context menu
+- 61c2bfe: **Icon:** focus svg generated
+
 ## 2.0.1
 
 ### Patch Changes
