@@ -49,7 +49,6 @@ export default function Playground({
         >
           {view === 'preview' ? previewContent : inspectContent}
         </Core.GdsCard>
-
         <Core.GdsCard
           position="absolute"
           variant="secondary"
@@ -94,6 +93,7 @@ export default function Playground({
             </Core.GdsSegmentedControl>
           </Core.GdsFlex>
         </Core.GdsCard>
+        full screen
       </Core.GdsCard>
     </Core.GdsTheme>
   )
