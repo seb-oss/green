@@ -468,7 +468,6 @@ class Textarea extends GdsFormControlElement<string> {
 
 /**
  * @summary A custom input element that can be used in forms.
- * @status beta
  *
  * @element gds-textarea
  *.
