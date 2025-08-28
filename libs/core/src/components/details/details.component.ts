@@ -23,7 +23,6 @@ export type DetailsSize = 'large' | 'small'
  * Details component that provides collapsible content sections.
  *
  * @element gds-details
- * @status beta
  *
  * @slot - Default slot for details content
  * @event gds-ui-state - Fired when details opens or closes
