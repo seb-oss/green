@@ -6,6 +6,11 @@ import { NggDropdownButtonDirective } from './dropdown-button.directive'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownComponent } from './dropdown.component'
 
+/**
+ * @deprecated
+ * NggDropdown is deprecated in favor of GdsDropdown found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-dropdown--docs
+ */
 @NgModule({
   declarations: [
     NggDropdownComponent,
