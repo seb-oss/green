@@ -45,7 +45,6 @@ const PROGRESS_INTERVAL = 100
  *
  * Alert component with responsive layout, optional icon, dismiss functionality,
  * auto-dismiss timer, and action button support.
- * @status beta
  *
  * @slot - Alert message content
  * @fires gds-close - Fired when alert is dismissed
