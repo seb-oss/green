@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.2
+
+### Patch Changes
+
+- cd905fe: **Context menu:** Button should inherit transitional styles if enabled for the Context menu
+- 61c2bfe: **Icon:** focus svg generated
+
+## 2.0.1
+
+### Patch Changes
+
+- b740210: **Icon:** `gds-icon-focus` update design for solid and regular
+
 ## 2.0.0
 
 ### Major Changes
