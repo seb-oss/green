@@ -331,6 +331,7 @@ export class GdsDropdown<ValueT = any>
           <slot name="lead" slot="lead"></slot>
           ${this.clearable && this.value && !this.disabled
             ? html`<gds-button
+                id="clear-btn"
                 rank="tertiary"
                 size=${this.size === 'small' ? 'xs' : 'small'}
                 label="${msg('Clear selection')}"
