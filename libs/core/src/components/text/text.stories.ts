@@ -15,7 +15,6 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
  *
  * Style expression properties apply to the outer element unless otherwise specified.
  *
- * @beta
  */
 const meta: Meta = {
   title: 'Components/Text',
