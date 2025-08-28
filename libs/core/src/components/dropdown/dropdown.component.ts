@@ -31,7 +31,6 @@ export * from '../../primitives/listbox/option.component'
  * @element gds-dropdown
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
  *
- * @status beta
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
