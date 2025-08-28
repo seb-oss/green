@@ -58,10 +58,6 @@
   <source>Open calendar modal</source>
   <target>Åbn kalender-popup</target>
 </trans-unit>
-<trans-unit id="s62931b2a50168976">
-  <source>Previous month</source>
-  <target>Forrige måned</target>
-</trans-unit>
 <trans-unit id="sb47daaf9e1c4a905">
   <source>Month</source>
   <target>Måned</target>
@@ -118,10 +114,6 @@
   <source>Year</source>
   <target>År</target>
 </trans-unit>
-<trans-unit id="s46d6587089bd0356">
-  <source>Next month</source>
-  <target>Næste måned</target>
-</trans-unit>
 <trans-unit id="sb4f1dffbb6be6302">
   <source>Clear</source>
   <target>Ryd</target>
@@ -177,6 +169,22 @@
 <trans-unit id="s39943b8a5733f5d2">
   <source>Auto-dismiss timer</source>
   <target>Automatisk afvisningstimer</target>
+</trans-unit>
+<trans-unit id="sf1f100572e888a9d">
+  <source>Switch to previous month</source>
+  <target>Skift til forrige måned</target>
+</trans-unit>
+<trans-unit id="s88365264d8a05b05">
+  <source>Switch to next month</source>
+  <target>Skift til næste måned</target>
+</trans-unit>
+<trans-unit id="s98dfb7a8cd8ec342">
+  <source>Select today's date</source>
+  <target>Vælg dagens dato</target>
+</trans-unit>
+<trans-unit id="s1727e353c65eba61">
+  <source>Clear selected date</source>
+  <target>Ryd valgt dato</target>
 </trans-unit>
 </body>
 </file>
