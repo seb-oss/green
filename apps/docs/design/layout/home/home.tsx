@@ -64,7 +64,7 @@ export function Home({
   return (
     <GdsFlex
       flex-direction="column"
-      gap="8xl"
+      gap="2xl; l{8xl}"
       max-width="1200px"
       width="100%"
       className={classes}
@@ -73,7 +73,7 @@ export function Home({
       margin="0 auto"
       data-template-home
     >
-      <GdsFlex flex-direction="column" gap="xl">
+      <GdsFlex flex-direction="column" gap="l; l{xl}">
         <GdsFlex justify-content="center" padding="l 0 0">
           <GdsText
             tag="h1"
@@ -366,7 +366,7 @@ export function Home({
           </NextLink>
         </GdsGrid>
       </GdsFlex>
-      <GdsFlex flex-direction="column" gap="m" align-items="flex-start">
+      <GdsFlex flex-direction="column" gap="s; l{m}" align-items="flex-start">
         <GdsFlex flex-direction="column">
           <GdsText tag="h2">Resources</GdsText>
           <GdsText
@@ -382,7 +382,7 @@ export function Home({
         </GdsFlex>
         <GdsGrid
           columns="1; s{3}"
-          gap="l"
+          gap="s; l{l}"
           role="navigation"
           aria-label="Resources"
           aria-describedby="resources-subheading"
