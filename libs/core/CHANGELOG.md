@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+
+### Patch Changes
+
+- b740210: **Icon:** `gds-icon-focus` update design for solid and regular
+
 ## 2.0.0
 
 ### Major Changes
