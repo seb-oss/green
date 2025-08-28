@@ -56,10 +56,16 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ converter: dateConverter })
   get value(): Date | undefined {
-    return super.value
+    return this._internalValue
   }
   set value(value: Date | undefined) {
-    super.value = value
+    if (!value) {
+      this._internalValue = undefined
+      return
+    }
+    const newDate = new Date(value)
+    newDate.setUTCHours(this.utcHours, 0, 0, 0)
+    this._internalValue = newDate
   }
 
   /**
@@ -123,6 +129,21 @@ class Datepicker extends GdsFormControlElement<Date> {
    */
   @property({ type: Boolean, attribute: 'hide-today-button' })
   hideTodayButton = false
+
+  /**
+   * Whether to override the default hour set of mid day (12:00) in UTC.
+   * This is to avoid timezone issues as the actual hours does not matter when using the datepicker.
+   * Eg. 10 sets time to UTC 10:00 (which is 11:00 in Sweden).
+   */
+  @property({ type: Number, attribute: 'utc-hours' })
+  get utcHours() {
+    return this.#utcHours
+  }
+  set utcHours(value) {
+    this.#utcHours = value
+    this._internalValue?.setUTCHours(value, 0, 0, 0)
+  }
+  #utcHours = 12
 
   /**
    * The date format to use. Accepts a string with the characters `y`, `m` and `d` in any order, separated by a delimiter.
@@ -458,6 +479,7 @@ class Datepicker extends GdsFormControlElement<Date> {
             .showWeekNumbers=${this.showWeekNumbers}
             .disabledWeekends=${this.disabledWeekends}
             .disabledDates=${this.disabledDates}
+            .utcHours=${this.utcHours}
           ></gds-calendar>
 
           ${when(
@@ -825,7 +847,7 @@ class Datepicker extends GdsFormControlElement<Date> {
     newDate.setFullYear(parseInt(this.#spinnerState.year))
     newDate.setMonth(parseInt(this.#spinnerState.month) - 1)
     newDate.setDate(parseInt(this.#spinnerState.day))
-    newDate.setHours(12, 0, 0, 0)
+    newDate.setUTCHours(this.utcHours, 0, 0, 0)
 
     if (newDate.toString() === 'Invalid Date') return
 
