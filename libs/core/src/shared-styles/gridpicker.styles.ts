@@ -139,9 +139,8 @@ const style = css`
         }
 
         &:focus-visible {
-          /outline-color: var(--gds-sys-color-content-neutral-01);
+          outline-color: var(--gds-sys-color-content-neutral-01);
           outline-width: var(--gds-sys-space-3xs);
-          outline-offset: 3.75px;
         }
 
         &.small {
