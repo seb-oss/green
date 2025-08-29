@@ -3,6 +3,7 @@ import {
   ɵAnimationRendererFactory as AnimationRendererFactory,
 } from '@angular/animations/browser'
 import {
+  inject,
   Injectable,
   NgZone,
   Renderer2,
@@ -13,12 +14,18 @@ import {
 import { ɵDomRendererFactory2 as DomRendererFactory2 } from '@angular/platform-browser'
 
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
+import { SCOPE_RESOLVER, ScopeResolver } from '../scope-resolver'
 
 export class NggCoreRenderer implements Renderer2 {
-  constructor(private delegate: Renderer2) {}
+  constructor(
+    private delegate: Renderer2,
+    private scopeResolver: ScopeResolver,
+  ) {}
 
   createElement(name: string, namespace?: string | null): any {
-    const scopedName = name.startsWith('gds-') ? getScopedTagName(name) : name
+    const scopedName = name.startsWith('gds-')
+      ? this.scopeResolver.getScopedTagName(name)
+      : name
     return this.delegate.createElement(scopedName, namespace)
   }
 
@@ -120,11 +127,13 @@ export class NggCoreRenderer implements Renderer2 {
 
 @Injectable()
 export class NggCoreRendererFactory implements RendererFactory2 {
+  private readonly scopeResolver = inject(SCOPE_RESOLVER)
+
   constructor(private delegate: DomRendererFactory2) {}
 
   createRenderer(element: any, type: RendererType2 | null): Renderer2 {
     const renderer = this.delegate.createRenderer(element, type)
-    return new NggCoreRenderer(renderer)
+    return new NggCoreRenderer(renderer, this.scopeResolver)
   }
 }
 
@@ -153,10 +162,16 @@ export function animationsCoreRendererFactory(
  * export class AppModule {}
  * ```
  */
-export const provideCoreRenderer = () => ({
-  provide: RendererFactory2,
-  useClass: NggCoreRendererFactory,
-})
+export const provideCoreRenderer = (resolver = getScopedTagName) => [
+  {
+    provide: RendererFactory2,
+    useClass: NggCoreRendererFactory,
+  },
+  {
+    provide: SCOPE_RESOLVER,
+    useValue: { getScopedTagName: resolver },
+  },
+]
 
 /**
  * Provide the NggCoreRendererFactory to use <gds-*> elements without any extra directives.
@@ -175,8 +190,16 @@ export const provideCoreRenderer = () => ({
  * export class AppModule {}
  * ```
  */
-export const provideCoreRendererWithAnimations = () => ({
-  provide: RendererFactory2,
-  useFactory: animationsCoreRendererFactory,
-  deps: [DomRendererFactory2, AnimationEngine, NgZone],
-})
+export const provideCoreRendererWithAnimations = (
+  resolver = getScopedTagName,
+) => [
+  {
+    provide: RendererFactory2,
+    useFactory: animationsCoreRendererFactory,
+    deps: [DomRendererFactory2, AnimationEngine, NgZone],
+  },
+  {
+    provide: SCOPE_RESOLVER,
+    useValue: { getScopedTagName: resolver },
+  },
+]
