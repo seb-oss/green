@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.0
+
+### Minor Changes
+
+- a76694d: **Dropdown:** Add `clearable` option
+- a76694d: **Dropdown:** Add counter badge for multiple select
+
 ## 2.0.2
 
 ### Patch Changes
