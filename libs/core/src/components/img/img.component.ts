@@ -16,7 +16,6 @@ import IMGStyles from './img.styles'
 
 /**
  * @element gds-img
- * @status beta
  *
  * `gds-img` is a custom element that make it possible to use some Style Expression Properties to style images.
  */

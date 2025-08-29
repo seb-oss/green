@@ -18,7 +18,6 @@ import styles from './rich-text.styles'
  * default typography styles and standard element styles defined in the Green Design System.
  *
  * @element gds-rich-text
- * @status beta
  *
  */
 @gdsCustomElement('gds-rich-text')

@@ -21,7 +21,6 @@ import BreadcrumbStyles from './breadcrumbs.styles'
  * @summary The `gds-breadcrumbs` component is a navigation element
  * It helps users understand their current * location within a hierarchical structure of a website or application.
  *
- * @status beta
  */
 @gdsCustomElement('gds-breadcrumbs', {
   dependsOn: [IconChevronLeft],
