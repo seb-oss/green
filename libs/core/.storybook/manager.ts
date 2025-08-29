@@ -6,7 +6,6 @@ import '../../../.storybook/manager'
 import { addons } from '@storybook/manager-api'
 
 const betaItems = {
-  Alert: true,
   Blur: true,
   Card: true,
   Coachmark: true,
