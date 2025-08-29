@@ -16,4 +16,4 @@ ${allTokens
       `    ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''}${camelToUpperSnake(token.name.replace('sysColor', ''))},`,
   )
   .join('\n')}
-)\n`
+}\n`
