@@ -11,7 +11,7 @@ ${options.accessControl ? `${options.accessControl} ` : ''}${
 ${allTokens
   .map(
     (token) =>
-      `  ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''} ${formatProperty({ ...token, name: token.name })}`,
+      `  ${token.comment ? `/** ${token.comment} */\n  ` : ''}${options.accessControl ? `${options.accessControl} ` : ''} ${formatProperty({ ...token, name: token.name.replace('sysColor', '') })}`,
   )
   .join('\n')}
 )\n`
