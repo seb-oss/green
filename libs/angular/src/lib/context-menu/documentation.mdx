@@ -1,10 +1,17 @@
 import { Canvas, Story, ArgsTable, Meta, Markdown } from '@storybook/addon-docs'
 import { NggContextMenuComponent } from './context-menu.component'
 import * as Stories from './context-menu.stories.ts'
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 <Meta of={Stories} />
 
 # Context Menu
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This wrapper for GdsContextMenu is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-context-menu--docs) directly instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 [Source code](https://github.com/seb-oss/green/tree/main/libs/angular/src/lib/context-menu)
 &nbsp;|&nbsp;

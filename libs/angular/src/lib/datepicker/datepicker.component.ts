@@ -43,6 +43,11 @@ export interface DatepickerOptions {
   onChange?: (selectedDate: Date) => void
 }
 
+/**
+ * @deprecated
+ * NggDatepicker is deprecated in favor of GdsDatepicker found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-datepicker--docs
+ */
 @Component({
   selector: 'ngg-datepicker',
   templateUrl: 'datepicker.component.html',
