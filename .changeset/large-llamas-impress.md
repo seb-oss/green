@@ -3,3 +3,4 @@
 ---
 
 **Pagination:** Selected color fix
+**Alert:** Success color fix
