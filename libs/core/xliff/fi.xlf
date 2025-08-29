@@ -14,10 +14,6 @@
   <source>Show more information</source>
   <target>Näytä lisää tietoja</target>
 </trans-unit>
-<trans-unit id="s58bfb494feb8eb02">
-  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
-  <target><x id="0" equiv-text="${this.value.length}"/> valittua</target>
-</trans-unit>
 <trans-unit id="sd898d99fd9c13de6">
   <source>Filter available options</source>
   <target>Suodata saatavilla olevia vaihtoehtoja</target>
@@ -185,6 +181,13 @@
 <trans-unit id="s1727e353c65eba61">
   <source>Clear selected date</source>
   <target>Tyhjennä valittu päivämäärä</target>
+<trans-unit id="s8f18916860db5d80">
+  <source>Clear selection</source>
+  <target>Tyhjennä valinta</target>
+</trans-unit>
+<trans-unit id="s1910f3ebccaec414">
+  <source><x id="0" equiv-text="${(this.value as Array&lt;unknown&gt;).length}"/> options selected</source>
+  <target><x id="0" equiv-text="${(this.value as Array&lt;unknown&gt;).length}"/> valittu</target>
 </trans-unit>
 </body>
 </file>

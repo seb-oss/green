@@ -15,7 +15,6 @@ import { GdsDiv } from '../div/div.component'
  * and a shortcut property for specifiying different card variants.
  *
  * @element gds-card
- * @status beta
  *
  */
 @gdsCustomElement('gds-card')

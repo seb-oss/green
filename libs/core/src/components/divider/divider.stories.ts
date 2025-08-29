@@ -15,7 +15,6 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
  *
  * The divider can be customized with different properties like color and size.
  *
- * @status beta
  *
  * > Divider should not be used as a border for a container. In that case, use the border property of the container instead.
  */

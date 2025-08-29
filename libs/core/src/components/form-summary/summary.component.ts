@@ -17,6 +17,7 @@ import SummaryStyles from './summary.styles'
 
 /**
  * @element gds-form-summary
+ * @status beta
  *
  * When a user attempts to submit a form with errors, this component displays a summary of those errors.
  * Including an error summary greatly assists users in promptly identifying and addressing multiple errors

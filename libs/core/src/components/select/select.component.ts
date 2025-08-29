@@ -333,7 +333,6 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
 
 /**
  * @element gds-select
- * @status beta
  *
  * `gds-select` is a wrapper component for the native select element.
  *

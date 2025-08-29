@@ -875,7 +875,6 @@ class Datepicker extends GdsFormControlElement<Date> {
  * @element gds-datepicker
  * A form control that allows the user to select a date.
  *
- * @status beta
  *
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
  * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.

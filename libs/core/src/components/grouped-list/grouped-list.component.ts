@@ -13,7 +13,7 @@ export { GdsListItem }
 
 /**
  * @element gds-grouped-list
- * @status stable
+ * @status beta
  *
  * Grouped lists are used to list many datapoints with labels in a structured way.
  */

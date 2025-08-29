@@ -6,7 +6,6 @@ import { gdsCustomElement, html } from '../../scoping'
 
 /**
  * @element gds-backdrop
- * @status beta
  */
 @gdsCustomElement('gds-backdrop')
 export class GdsBackdrop extends GdsElement {

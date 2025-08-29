@@ -25,7 +25,6 @@ import DivStyles from './div.styles'
 
 /**
  * @element gds-div
- * @status beta
  *
  * `gds-div` is the base element in the declarative layout system.
  */
