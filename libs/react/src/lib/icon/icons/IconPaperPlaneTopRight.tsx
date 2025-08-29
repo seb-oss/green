@@ -1,0 +1,1 @@
+export { IconPaperPlaneTopRight } from '@sebgroup/green-core/react';
