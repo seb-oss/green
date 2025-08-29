@@ -13,8 +13,10 @@ const betaItems = {
   'Form summary': true,
   'Formatted text': true,
   Mask: true,
+  Monthpicker: true,
   Spinner: true,
   Video: true,
+  Yearpicker: true,
 }
 
 addons.setConfig({
