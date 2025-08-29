@@ -39,6 +39,7 @@ registerGlobalScrollLockStyles()
  * @slot - The content of the dialog
  * @slot trigger - The trigger button for the dialog
  * @slot footer - The footer of the dialog
+ * @slot dialog - Complete override of the dialog content, including header and footer
  */
 @gdsCustomElement('gds-dialog', {
   dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],
