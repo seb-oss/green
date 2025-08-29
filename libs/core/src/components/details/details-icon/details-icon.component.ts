@@ -9,7 +9,6 @@ import { styles } from './details-icon.style'
 
 /**
  * @element gds-icon-details
- * @status beta
  */
 @gdsCustomElement('gds-icon-details')
 export class GdsIconDetails extends GdsElement {

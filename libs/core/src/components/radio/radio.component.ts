@@ -9,7 +9,6 @@ import RadioStyles from './radio.styles'
 
 /**
  * @element gds-radio
- * @status beta
  *
  * @event input - Dispatched when the radio button is checked.
  */

@@ -29,7 +29,6 @@ export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
 
 /**
  * @element gds-context-menu
- * @status stable
  *
  * The context menu is presented in-context to the related data, so users don’t lose
  * their place in the app. It appears upon interaction with the 3 dot button and

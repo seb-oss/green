@@ -13,7 +13,6 @@ import { styles } from './filter-chip.styles'
 
 /**
  * @element gds-filter-chip
- * @status stable
  *
  * * @slot Content of the Filter chip
  */
