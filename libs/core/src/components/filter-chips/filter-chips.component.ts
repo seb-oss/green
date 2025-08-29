@@ -16,7 +16,6 @@ export { GdsFilterChip }
 
 /**
  * @element gds-filter-chips
- * @status stable
  *
  * @slot - The filter chips to display
  *

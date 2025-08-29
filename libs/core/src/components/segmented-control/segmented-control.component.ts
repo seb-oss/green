@@ -27,7 +27,6 @@ const debounce = (fn: () => void, delay: number) => {
 
 /**
  * @element gds-segmented-control
- * @status stable
  *
  * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  *
