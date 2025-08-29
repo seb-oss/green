@@ -54,10 +54,6 @@
   <source>Open calendar modal</source>
   <target>Avaa kalenteri-modal</target>
 </trans-unit>
-<trans-unit id="s62931b2a50168976">
-  <source>Previous month</source>
-  <target>Edellinen kuukausi</target>
-</trans-unit>
 <trans-unit id="sb47daaf9e1c4a905">
   <source>Month</source>
   <target>Kuukausi</target>
@@ -113,10 +109,6 @@
 <trans-unit id="sa6f2645578b2d2bc">
   <source>Year</source>
   <target>Vuosi</target>
-</trans-unit>
-<trans-unit id="s46d6587089bd0356">
-  <source>Next month</source>
-  <target>Seuraava kuukausi</target>
 </trans-unit>
 <trans-unit id="sb4f1dffbb6be6302">
   <source>Clear</source>
@@ -174,6 +166,21 @@
   <source>Auto-dismiss timer</source>
   <target>Automaattinen sulkeutumisaika</target>
 </trans-unit>
+<trans-unit id="sf1f100572e888a9d">
+  <source>Switch to previous month</source>
+  <target>Vaihda edelliseen kuukauteen</target>
+</trans-unit>
+<trans-unit id="s88365264d8a05b05">
+  <source>Switch to next month</source>
+  <target>Vaihda seuraavaan kuukauteen</target>
+</trans-unit>
+<trans-unit id="s98dfb7a8cd8ec342">
+  <source>Select today's date</source>
+  <target>Valitse tämän päivän päivämäärä</target>
+</trans-unit>
+<trans-unit id="s1727e353c65eba61">
+  <source>Clear selected date</source>
+  <target>Tyhjennä valittu päivämäärä</target>
 <trans-unit id="s8f18916860db5d80">
   <source>Clear selection</source>
   <target>Tyhjennä valinta</target>
