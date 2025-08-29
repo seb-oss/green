@@ -1,0 +1,1 @@
+export { IconGift } from '@sebgroup/green-core/react';

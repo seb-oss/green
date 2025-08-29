@@ -1,0 +1,1 @@
+export { IconEmojiSad } from '@sebgroup/green-core/react';

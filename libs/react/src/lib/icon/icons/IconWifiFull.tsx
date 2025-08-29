@@ -1,0 +1,1 @@
+export { IconWifiFull } from '@sebgroup/green-core/react';

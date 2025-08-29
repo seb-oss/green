@@ -1,0 +1,1 @@
+export { IconPostcard } from '@sebgroup/green-core/react';

@@ -1,0 +1,1 @@
+export { IconTargetArrow } from '@sebgroup/green-core/react';

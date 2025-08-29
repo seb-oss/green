@@ -1,0 +1,1 @@
+export { IconPdf } from '@sebgroup/green-core/react';

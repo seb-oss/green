@@ -1,0 +1,1 @@
+export { IconCircleBan } from '@sebgroup/green-core/react';

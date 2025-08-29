@@ -1,0 +1,1 @@
+export { IconCarussel } from '@sebgroup/green-core/react';

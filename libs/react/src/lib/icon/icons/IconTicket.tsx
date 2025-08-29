@@ -1,0 +1,1 @@
+export { IconTicket } from '@sebgroup/green-core/react';

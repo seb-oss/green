@@ -1,0 +1,1 @@
+export { IconBasket } from '@sebgroup/green-core/react';
