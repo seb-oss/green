@@ -4,7 +4,9 @@ import { ReactNode, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { NavItem, Page } from './settings/studio.types'
-import { Spacing, Typography } from './tools'
+import { Color, Spacing, Typography } from './tools'
+import { colorTokens } from './tools/color/color.tokens'
+import { ColorSubGroup, ColorToken } from './tools/color/color.types'
 import { spacingTokens } from './tools/spacing/spacing'
 import { typographyTokens } from './tools/typography/typography.tokens'
 
@@ -17,15 +19,23 @@ export default function Studio() {
       id: 'color',
       title: 'Color',
       icon: <Core.IconBrush slot="lead" />,
-      content: (
-        <Core.GdsGrid columns="4" gap="m" width="100%">
-          {Array(16)
-            .fill(null)
-            .map((_, i) => (
-              <Core.GdsCard key={i}></Core.GdsCard>
-            ))}
-        </Core.GdsGrid>
-      ),
+      content: <Color />,
+      tokens: colorTokens.map((group) => ({
+        title: group.title,
+        tokens: group.hasSubGroups
+          ? (group.tokens as ColorSubGroup[]).flatMap((subGroup) =>
+              subGroup.tokens.map((token) => ({
+                name: token.name,
+                value: `${token.lightValue.$value} / ${token.darkValue.$value}`,
+                type: `${subGroup.category}/${token.category}`,
+              })),
+            )
+          : (group.tokens as ColorToken[]).map((token) => ({
+              name: token.name,
+              value: `${token.lightValue.$value} / ${token.darkValue.$value}`,
+              type: token.category,
+            })),
+      })),
     },
     {
       id: 'typography',
