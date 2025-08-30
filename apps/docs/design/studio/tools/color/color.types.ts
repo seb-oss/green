@@ -23,3 +23,27 @@ export interface ColorGroup {
   tokens: ColorToken[] | ColorSubGroup[]
   hasSubGroups?: boolean
 }
+
+export interface RefColor {
+  $type: string
+  $value: string
+}
+
+// export interface ColorRefs {
+//   [key: string]: {
+//     [shade: string]: RefColor
+//   }
+// }
+
+// export interface RefColor {
+//   $type: string
+//   $value: string
+// }
+
+export interface ColorRefs {
+  [key: string]:
+    | {
+        [shade: string]: RefColor
+      }
+    | RefColor // Allow both nested shades and direct color values
+}

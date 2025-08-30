@@ -5,13 +5,22 @@ import borderDark from '@sebgroup/green-tokens/src/tokens/2023/border.dark.json'
 import borderLight from '@sebgroup/green-tokens/src/tokens/2023/border.light.json'
 import contentDark from '@sebgroup/green-tokens/src/tokens/2023/content.dark.json'
 import contentLight from '@sebgroup/green-tokens/src/tokens/2023/content.light.json'
+import blueRef from '@sebgroup/green-tokens/src/tokens/2023/ref/blue.ref.json'
+import copperRef from '@sebgroup/green-tokens/src/tokens/2023/ref/copper.ref.json'
+import greenRef from '@sebgroup/green-tokens/src/tokens/2023/ref/green.ref.json'
+import neutralRef from '@sebgroup/green-tokens/src/tokens/2023/ref/neutral.ref.json'
+import orangeRef from '@sebgroup/green-tokens/src/tokens/2023/ref/orange.ref.json'
+import redRef from '@sebgroup/green-tokens/src/tokens/2023/ref/red.ref.json'
+import yellowRef from '@sebgroup/green-tokens/src/tokens/2023/ref/yellow.ref.json'
 import stateDark from '@sebgroup/green-tokens/src/tokens/2023/state.dark.json'
 import stateLight from '@sebgroup/green-tokens/src/tokens/2023/state.light.json'
 import {
   ColorGroup,
+  ColorRefs,
   ColorSubGroup,
   ColorToken,
   ColorValue,
+  RefColor,
 } from './color.types'
 
 const filterTokens = (obj: Record<string, any>): Record<string, ColorValue> => {
@@ -24,6 +33,33 @@ const filterTokens = (obj: Record<string, any>): Record<string, ColorValue> => {
   return result
 }
 
+const resolveColorRef = (refValue: string): string => {
+  const refMatch = refValue.match(/\{ref\.color\.([^.]+)\.?([^}]*)\}/)
+  if (!refMatch) return refValue
+
+  const [_, color, shade] = refMatch
+  const colorRefs: ColorRefs = {
+    blue: blueRef.ref.color.blue,
+    red: redRef.ref.color.red,
+    green: greenRef.ref.color.green,
+    orange: orangeRef.ref.color.orange,
+    yellow: yellowRef.ref.color.yellow,
+    copper: copperRef.ref.color.copper,
+    black: neutralRef.ref.color.black,
+    white: neutralRef.ref.color.white,
+    grey: neutralRef.ref.color.grey,
+  }
+
+  // Handle direct color values (black and white)
+  if (!shade && colorRefs[color] && '$value' in colorRefs[color]) {
+    return (colorRefs[color] as RefColor).$value
+  }
+
+  // Handle shaded colors
+  const colorGroup = colorRefs[color] as { [shade: string]: RefColor }
+  return colorGroup?.[shade]?.$value || refValue
+}
+
 const processColorGroup = (
   lightTokens: Record<string, any>,
   darkTokens: Record<string, any>,
@@ -34,8 +70,14 @@ const processColorGroup = (
 
   return Object.entries(filteredLightTokens).map(([name, lightValue]) => ({
     name,
-    lightValue,
-    darkValue: filteredDarkTokens[name],
+    lightValue: {
+      ...lightValue,
+      $value: resolveColorRef(lightValue.$value),
+    },
+    darkValue: {
+      ...filteredDarkTokens[name],
+      $value: resolveColorRef(filteredDarkTokens[name].$value),
+    },
     category,
   }))
 }
