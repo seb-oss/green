@@ -4,7 +4,7 @@ import { ReactNode, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { NavItem, Page } from './settings/studio.types'
-import { Color, Spacing, Typography } from './tools'
+import { Color, Compose, Spacing, Typography } from './tools'
 import { colorTokens } from './tools/color/color.tokens'
 import { ColorSubGroup, ColorToken } from './tools/color/color.types'
 import { spacingTokens } from './tools/spacing/spacing'
@@ -61,7 +61,7 @@ export default function Studio() {
       id: 'compose',
       title: 'Compose',
       icon: <Core.IconPencilSparkle slot="lead" />,
-      content: <div>Compose Content</div>,
+      content: <Compose />,
     },
   ]
 
@@ -78,6 +78,79 @@ export default function Studio() {
     const currentPage = navigation.find((nav) => nav.id === activePage)
     if (!currentPage?.tokens) return null
 
+    if (currentPage.id === 'color') {
+      return (
+        <Core.GdsFlex flex-direction="column" gap="m">
+          {currentPage.tokens.map((group, index) => (
+            <Core.GdsFlex
+              key={index}
+              flex-direction="column"
+              gap="m"
+              padding="m"
+            >
+              <Core.GdsText color="subtle-02" font="detail-regular-m">
+                {group.title}
+              </Core.GdsText>
+              {group.tokens.reduce((acc: ReactNode[], token, tokenIndex) => {
+                // Create category groups based on token.type
+                const category = token.type.split('/')[0]
+                const prevToken =
+                  tokenIndex > 0 ? group.tokens[tokenIndex - 1] : null
+                const prevCategory = prevToken?.type.split('/')[0]
+
+                if (category !== prevCategory) {
+                  acc.push(
+                    <Core.GdsText
+                      key={`category-${category}`}
+                      color="subtle-02"
+                      font="detail-regular-s"
+                      padding="s 0"
+                    >
+                      {category}
+                    </Core.GdsText>,
+                  )
+                }
+
+                acc.push(
+                  <Core.GdsFlex
+                    key={tokenIndex}
+                    width="100%"
+                    align-items="center"
+                    justify-content="space-between"
+                    gap="xs"
+                    padding="2xs 0"
+                  >
+                    <Core.GdsFlex gap="s" align-items="center">
+                      <Core.GdsDiv
+                        width="16px"
+                        height="16px"
+                        border-radius="max"
+                        border-color="subtle-01"
+                        border-width="4xs"
+                        border-style="solid"
+                        style={{
+                          background: token.value.split(' / ')[0],
+                        }}
+                      />
+                      <Core.GdsText font="detail-xs" width="max-content">
+                        {token.name}
+                      </Core.GdsText>
+                    </Core.GdsFlex>
+                    <Core.GdsText opacity="0.4" font="detail-xs">
+                      {token.value.split(' / ')[0]}
+                    </Core.GdsText>
+                  </Core.GdsFlex>,
+                )
+
+                return acc
+              }, [])}
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
+      )
+    }
+
+    // Default rendering for other token types
     return (
       <Core.GdsFlex flex-direction="column" gap="m">
         {currentPage.tokens.map((group, index) => (
