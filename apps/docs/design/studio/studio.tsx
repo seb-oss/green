@@ -4,8 +4,9 @@ import { ReactNode, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { NavItem, Page } from './settings/studio.types'
-import { Spacing } from './tools'
+import { Spacing, Typography } from './tools'
 import { spacingTokens } from './tools/spacing/spacing'
+import { typographyTokens } from './tools/typography/typography.tokens'
 
 export default function Studio() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
@@ -30,7 +31,8 @@ export default function Studio() {
       id: 'typography',
       title: 'Typography',
       icon: <Core.IconTextEdit slot="lead" />,
-      content: <div>Typography Content</div>,
+      content: <Typography />,
+      tokens: typographyTokens,
     },
     {
       id: 'spacing',
@@ -79,11 +81,7 @@ export default function Studio() {
                 justify-content="space-between"
                 gap="xs"
               >
-                <Core.GdsText
-                  text-transform="uppercase"
-                  font="detail-xs"
-                  width="max-content"
-                >
+                <Core.GdsText font="detail-xs" width="max-content">
                   {token.name}
                 </Core.GdsText>
                 <Core.GdsText opacity="0.4">
@@ -152,7 +150,7 @@ export default function Studio() {
           gap="s"
           flex="1"
         >
-          <Core.GdsDiv flex="1" width="100%">
+          <Core.GdsDiv flex="1" width="100%" height="100%" overflow="auto">
             {renderPageContent()}
           </Core.GdsDiv>
           <Core.GdsFlex width="100%" align-items="center" padding="s">
