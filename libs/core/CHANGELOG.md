@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.3.0
+
+### Minor Changes
+
+- 798af05: **Icon:** Add feedback emoji/icons
+
+### Patch Changes
+
+- 3b18c2d: Datepicker: Improved screen reader text for the buttons
+
 ## 2.2.0
 
 ### Minor Changes

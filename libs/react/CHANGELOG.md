@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.32.0
+
+### Minor Changes
+
+- 798af05: **Icon:** React wrapper for feedback emoji/icons
+
+### Patch Changes
+
+- Updated dependencies [798af05]
+- Updated dependencies [3b18c2d]
+  - @sebgroup/green-core@2.3.0
+
 ## 3.31.0
 
 ### Minor Changes
