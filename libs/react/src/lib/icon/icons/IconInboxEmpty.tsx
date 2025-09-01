@@ -1,0 +1,1 @@
+export { IconInboxEmpty } from '@sebgroup/green-core/react';

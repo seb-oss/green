@@ -29,6 +29,7 @@ const DEPRECATED_NAMES: string[] = [
   'invite',
   'light-bulb',
   'maintenance',
+  'other',
   'page-text',
   'pencel-line',
   'phone-dynamic-island',
