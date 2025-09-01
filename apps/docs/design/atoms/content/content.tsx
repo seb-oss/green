@@ -418,6 +418,7 @@ export const RenderColumn = (
               aspect-ratio={column.ratio || 'auto'}
               object-fit="cover"
               border-radius="xs"
+              data-fade
             />
             {column.caption && (
               <Core.GdsText tag="figcaption" font="detail-s" color="secondary">
