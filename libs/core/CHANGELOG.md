@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** Add 28 new icons
+
 ## 2.1.0
 
 ### Minor Changes
