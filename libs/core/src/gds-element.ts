@@ -44,6 +44,11 @@ export class GdsElement extends LitElement {
   static styleExpressionBaseSelector = ':host'
 
   /**
+   * The semantic version of this element. Can be used for troubleshooting to verify the version being used.
+   */
+  static readonly semanticVersion = '__GDS_SEM_VER__'
+
+  /**
    * The unscoped name of this element. This attribute is set automatically by the element and is inteded to be read-only.
    *
    * @attribute gds-element
