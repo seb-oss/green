@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.31.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** React wrappers for 28 new icons
+
+### Patch Changes
+
+- Updated dependencies [0339d24]
+  - @sebgroup/green-core@2.2.0
+
 ## 3.30.1
 
 ### Patch Changes
