@@ -122,14 +122,6 @@
   <source>Today</source>
   <target>Idag</target>
 </trans-unit>
-<trans-unit id="s62931b2a50168976">
-  <source>Previous month</source>
-  <target>Föregående månad</target>
-</trans-unit>
-<trans-unit id="s46d6587089bd0356">
-  <source>Next month</source>
-  <target>Nästa månad</target>
-</trans-unit>
 <trans-unit id="se4129fd6b9d7b4c2">
   <source>Last available date</source>
   <target>Sista tillgängliga datum</target>
@@ -174,6 +166,21 @@
   <source>Auto-dismiss timer</source>
   <target>Automatisk stängningstimer</target>
 </trans-unit>
+<trans-unit id="sf1f100572e888a9d">
+  <source>Switch to previous month</source>
+  <target>Växla till föregående månad</target>
+</trans-unit>
+<trans-unit id="s88365264d8a05b05">
+  <source>Switch to next month</source>
+  <target>Växla till nästa månad</target>
+</trans-unit>
+<trans-unit id="s98dfb7a8cd8ec342">
+  <source>Select today's date</source>
+  <target>Välj dagens datum</target>
+</trans-unit>
+<trans-unit id="s1727e353c65eba61">
+  <source>Clear selected date</source>
+  <target>Rensa valt datum</target>
 <trans-unit id="s8f18916860db5d80">
   <source>Clear selection</source>
   <target>Rensa val</target>
