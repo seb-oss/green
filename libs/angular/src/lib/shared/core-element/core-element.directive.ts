@@ -10,7 +10,6 @@ import {
   ViewContainerRef,
 } from '@angular/core'
 
-import { NggCoreRenderer } from '../core-renderer'
 import { SCOPE_RESOLVER } from '../scope-resolver'
 
 @Directive({
@@ -26,19 +25,19 @@ export class NggCoreElementDirective implements OnInit {
   private readonly scopeResolver = inject(SCOPE_RESOLVER)
 
   ngOnInit() {
-    if (!(this.renderer instanceof NggCoreRenderer)) {
-      this.vcr.clear()
+    console.log('Initializing core element directive')
+    console.log(this.scopeResolver)
+    this.vcr.clear()
 
-      const originalCreateElement = this.renderer.createElement
-      this.renderer.createElement = (name: string, _namespace: string) => {
-        return this.document.createElement(
-          this.scopeResolver.getScopedTagName(name),
-        )
-      }
-
-      this.cdr.markForCheck()
-      this.viewRef = this.vcr.createEmbeddedView(this.template)
-      this.renderer.createElement = originalCreateElement
+    const originalCreateElement = this.renderer.createElement
+    this.renderer.createElement = (name: string, _namespace: string) => {
+      return this.document.createElement(
+        this.scopeResolver.getScopedTagName(name),
+      )
     }
+
+    this.cdr.markForCheck()
+    this.viewRef = this.vcr.createEmbeddedView(this.template)
+    this.renderer.createElement = originalCreateElement
   }
 }
