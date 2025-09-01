@@ -1,5 +1,16 @@
 # Changelog
 
+## 6.2.0
+
+### Minor Changes
+
+- 1969060: **Scoping:** Add scope resolver provider:
+
+### Patch Changes
+
+- Updated dependencies [1969060]
+  - @sebgroup/green-core@2.4.0
+
 ## 6.1.3
 
 ### Patch Changes
