@@ -160,7 +160,7 @@ export class GdsDropdown<ValueT = any>
    * Size of the dropdown. Supports `medium` and `small`. There is no `large` size for dropdowns.
    * `medium` is the default size.
    */
-  @property()
+  @property({ reflect: true })
   size: 'medium' | 'small' = 'medium'
 
   /**
@@ -336,6 +336,8 @@ export class GdsDropdown<ValueT = any>
               (this.value as Array<unknown>).length > 0,
             () =>
               html`<gds-badge
+                rounded
+                size=${this.size === 'small' ? 'small' : 'default'}
                 slot="lead"
                 aria-label=${msg(
                   str`${(this.value as Array<unknown>).length} options selected`,
