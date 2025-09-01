@@ -2,17 +2,16 @@ import { gdsCustomElement } from '../../../scoping'
 import { GdsIcon } from '../icon'
 
 /**
- * @element gds-icon-other
- * @deprecated This icon is deprecated
+ * @element gds-icon-shapes
  */
-@gdsCustomElement('gds-icon-other')
-export class IconOther extends GdsIcon {
+@gdsCustomElement('gds-icon-shapes')
+export class IconShapes extends GdsIcon {
   /** @private */
   static _regularSVG = `<path d="M17.1073 17.1577C17.1073 18.8655 15.7213 20.25 14.0116 20.25C12.3019 20.25 10.9159 18.8655 10.9159 17.1577C10.9159 15.4499 12.3019 14.0654 14.0116 14.0654C15.7213 14.0654 17.1073 15.4499 17.1073 17.1577Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M4.99145 6.98598L10.4681 11.5764L3.75 14.0189L4.99145 6.98598Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M14.2695 3.5L20.25 5.1007L18.6475 11.0746L12.6671 9.47388L14.2695 3.5Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`
   /** @private */
   static _solidSVG = `<path d="M14.4635 2.77544C14.0635 2.66839 13.6524 2.90571 13.5452 3.30563L11.9427 9.27951C11.8912 9.4717 11.9181 9.6765 12.0176 9.84882C12.1171 10.0211 12.281 10.1469 12.4732 10.1983L18.4536 11.799C18.8536 11.9061 19.2647 11.6687 19.3719 11.2688L20.9744 5.29495C21.026 5.10276 20.999 4.89796 20.8995 4.72564C20.8 4.55331 20.6362 4.42759 20.4439 4.37614L14.4635 2.77544Z" fill="currentColor"/><path d="M5.47325 6.41113C5.26797 6.23907 4.98651 6.18954 4.73483 6.2812C4.48315 6.37285 4.29945 6.59177 4.25289 6.85554L3.01144 13.8884C2.96486 14.1523 3.06257 14.4209 3.26777 14.5932C3.47297 14.7655 3.75448 14.8152 4.00628 14.7237L10.7244 12.2812C10.9763 12.1896 11.1602 11.9705 11.2067 11.7065C11.2533 11.4425 11.1553 11.1737 10.9499 11.0015L5.47325 6.41113Z" fill="currentColor"/><path d="M14.0116 13.3153C11.8884 13.3153 10.1659 15.0348 10.1659 17.1576C10.1659 19.2805 11.8884 20.9999 14.0116 20.9999C16.1347 20.9999 17.8573 19.2805 17.8573 17.1576C17.8573 15.0348 16.1347 13.3153 14.0116 13.3153Z" fill="currentColor"/>`
   /** @private */
-  static _name = 'other'
+  static _name = 'shapes'
   /** @private */
   static _width = 24
   /** @private */
