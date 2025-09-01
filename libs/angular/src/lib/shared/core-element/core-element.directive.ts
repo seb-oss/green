@@ -25,8 +25,6 @@ export class NggCoreElementDirective implements OnInit {
   private readonly scopeResolver = inject(SCOPE_RESOLVER)
 
   ngOnInit() {
-    console.log('Initializing core element directive')
-    console.log(this.scopeResolver)
     this.vcr.clear()
 
     const originalCreateElement = this.renderer.createElement
