@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.23
+
+### Patch Changes
+
+- 60d6bed: **Pagination:** Selected color fix
+  **Alert:** Success color fix
+
 ## 3.6.22
 
 ### Patch Changes
