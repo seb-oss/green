@@ -159,7 +159,7 @@ export function ComponentsClient() {
         <Core.GdsGrid columns="1; xs{2}; l{3}" gap="l" max-width="180ch">
           {filteredComponents.map((component) => (
             <Card
-              key={filteredComponents + component.title}
+              key={component.title}
               title={component.title}
               href={component.slug}
               summary={component.summary}
