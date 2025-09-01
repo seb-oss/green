@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
 
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import {
+  NggCoreWrapperModule,
+  SCOPE_RESOLVER,
+} from '@sebgroup/green-angular/src/lib/shared'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { NggDropdownButtonDirective } from './dropdown-button.directive'
 import { NggDropdownOptionDirective } from './dropdown-option.directive'
 import { NggDropdownComponent } from './dropdown.component'
@@ -17,6 +21,12 @@ import { NggDropdownComponent } from './dropdown.component'
     NggDropdownComponent,
     NggDropdownOptionDirective,
     NggDropdownButtonDirective,
+  ],
+  providers: [
+    {
+      provide: SCOPE_RESOLVER,
+      useValue: { getScopedTagName },
+    },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
