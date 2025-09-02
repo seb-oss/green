@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { _ } from '../../../hooks'
-import { useSettingsContext, useSettingsValue } from '../../../settings'
+import { useSet, useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 
+// import { useSet, useSettingsValue } from "@/settings"
 import './command.css'
 
 type FilterType = 'all' | 'component' | 'page' | 'template'
@@ -32,6 +33,7 @@ export default function Command() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const SET = useSet()
 
   const searchResults = useMemo(() => {
     const results: SearchResult[] = []
@@ -99,21 +101,25 @@ export default function Command() {
     return results
   }, [query, ContentActions, activeFilter])
 
-  const handleClosePanel = (event: CustomEvent) => {
-    SettingsActions.setSettings((prev) => ({
-      ...prev,
-      UI: {
-        ...prev.UI,
-        Panel: {
-          ...prev.UI.Panel,
-          Command: false,
-        },
-      },
-    }))
-  }
+  // const handleClosePanel = (event: CustomEvent) => {
+  //   SettingsActions.setSettings((prev) => ({
+  //     ...prev,
+  //     UI: {
+  //       ...prev.UI,
+  //       Panel: {
+  //         ...prev.UI.Panel,
+  //         Command: false,
+  //       },
+  //     },
+  //   }))
+  // }
 
-  const handleToggleCommand = () => {
-    SettingsActions.toggle('UI.Panel.Command')
+  // const handleToggleCommand = () => {
+  //   SettingsActions.toggle('UI.Panel.Command')
+  // }
+
+  const CLOSE_PANEL = () => {
+    SET('UI.Panel.Command', false)
   }
 
   const handleFilterChange = (filter: FilterType) => {
@@ -155,13 +161,13 @@ export default function Command() {
         e.preventDefault()
         if (searchResults[selectedIndex]) {
           router.push(searchResults[selectedIndex].href)
-          handleClosePanel()
+          CLOSE_PANEL()
         }
         break
 
       case 'Escape':
         e.preventDefault()
-        handleClosePanel()
+        CLOSE_PANEL()
         break
     }
   }
@@ -200,8 +206,8 @@ export default function Command() {
           heading="Search"
           height="60vh"
           max-height="60vh"
-          onGdsClose={(e: CustomEvent) => handleClosePanel(e)}
-          placement="center"
+          onGdsClose={() => CLOSE_PANEL()}
+          placement="initial"
           padding="s"
           open
         >
@@ -234,7 +240,7 @@ export default function Command() {
               >
                 <Core.GdsFilterChips>
                   <Core.GdsFilterChip
-                    size="s"
+                    size="small"
                     selected={activeFilter === 'all'}
                     onClick={() => handleFilterChange('all')}
                   >
@@ -283,7 +289,7 @@ export default function Command() {
                   width="100%"
                   onClick={() => {
                     router.push(result.href)
-                    handleClosePanel()
+                    CLOSE_PANEL()
                   }}
                   data-index={index}
                   tabIndex={0}
@@ -292,7 +298,7 @@ export default function Command() {
                     if (e.key === 'Enter') {
                       e.preventDefault()
                       router.push(result.href)
-                      handleClosePanel()
+                      CLOSE_PANEL()
                     }
                   }}
                 >
