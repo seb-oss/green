@@ -223,12 +223,13 @@ export default function Studio() {
             ))}
           </Core.GdsFlex>
           <Core.GdsDivider color="subtle-01" />
-          <Core.GdsFlex padding="0 l">
+          <Core.GdsFlex padding="0 l" display="none">
             <Core.GdsInput size="small">
               <Core.IconMagnifyingGlass slot="lead" />
             </Core.GdsInput>
           </Core.GdsFlex>
           <Core.GdsFlex
+            display="none"
             padding="m"
             flex-direction="column"
             gap="m"
