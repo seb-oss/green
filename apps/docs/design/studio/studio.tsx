@@ -229,7 +229,6 @@ export default function Studio() {
             </Core.GdsInput>
           </Core.GdsFlex>
           <Core.GdsFlex
-            display="none"
             padding="m"
             flex-direction="column"
             gap="m"
