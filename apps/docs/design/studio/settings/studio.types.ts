@@ -1,6 +1,12 @@
 import { ReactNode } from 'react'
 
-export type Page = 'color' | 'typography' | 'spacing' | 'grid' | 'compose'
+export type Page =
+  | 'color'
+  | 'typography'
+  | 'spacing'
+  | 'icons'
+  | 'grid'
+  | 'compose'
 
 export interface NavItem {
   id: Page

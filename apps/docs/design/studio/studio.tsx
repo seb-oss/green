@@ -58,6 +58,13 @@ export default function Studio({ page }: StudioProps) {
       tokens: spacingTokens,
     },
     {
+      id: 'icons',
+      title: 'Icons',
+      icon: <Core.IconShapes slot="lead" />,
+      content: <Spacing />,
+      tokens: spacingTokens,
+    },
+    {
       id: 'grid',
       title: 'Grid',
       icon: <Core.IconSquareGridCircle slot="lead" />,
@@ -188,12 +195,8 @@ export default function Studio({ page }: StudioProps) {
       flex-direction="row"
       align-items="flex-start"
       padding="0"
+      background="none"
       gap="s"
-      // border-color="subtle-01"
-      background="secondary"
-      // data-pattern
-      // padding="xs"
-      // border-radius="m"
     >
       <Core.GdsCard
         variant="secondary"
@@ -202,6 +205,7 @@ export default function Studio({ page }: StudioProps) {
         padding="0"
         position="sticky"
         inset="16px 0 0 0"
+        min-height="90vh"
       >
         <Core.GdsFlex
           flex-direction="column"
@@ -209,19 +213,6 @@ export default function Studio({ page }: StudioProps) {
           gap="s"
           aria-label="Sidebar"
         >
-          {/* {navigation.map((nav) => (
-              <Core.GdsButton
-                key={nav.id}
-                size="small"
-                width="max-content"
-                rank={activePage === nav.id ? 'secondary' : 'tertiary'}
-                justify-content="flex-start"
-              >
-                {nav.icon}
-                {nav.title}
-              </Core.GdsButton>
-            ))} */}
-
           {navigation.map((nav) => (
             <Link
               key={nav.id}
@@ -232,15 +223,8 @@ export default function Studio({ page }: StudioProps) {
               rank={activePage === nav.id ? 'secondary' : 'tertiary'}
               justify-content="flex-start"
             >
-              {/* <Core.GdsButton
-                  size="small"
-                  width="max-content"
-                  rank={activePage === nav.id ? 'secondary' : 'tertiary'}
-                  justify-content="flex-start"
-                > */}
               {nav.icon}
               {nav.title}
-              {/* </Core.GdsButton> */}
             </Link>
           ))}
         </Core.GdsFlex>
@@ -258,6 +242,19 @@ export default function Studio({ page }: StudioProps) {
           height="max-content"
         >
           {renderTokensList()}
+        </Core.GdsFlex>
+
+        <Core.GdsFlex margin="auto 0 0 0" padding="m">
+          <Link
+            component="button"
+            href="/"
+            width="max-content"
+            size="small"
+            rank="tertiary"
+          >
+            <Core.IconArrowLeft slot="lead" />
+            Docs
+          </Link>
         </Core.GdsFlex>
       </Core.GdsCard>
 

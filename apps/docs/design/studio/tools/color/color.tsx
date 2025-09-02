@@ -44,7 +44,7 @@ const ColorSwatch = ({
       border-color="subtle-01"
     >
       <Core.GdsGrid columns="5" align-items="center" gap="xl">
-        {level && <Core.GdsText>{level}</Core.GdsText>}
+        {level ? <Core.GdsText>{level}</Core.GdsText> : <div></div>}
         <Core.GdsFlex align-items="center" gap="s">
           <Core.GdsDiv
             width="32px"
@@ -152,7 +152,11 @@ export default function Color() {
   }, 0)
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
+    <Core.GdsFlex
+      flex-direction="column"
+      gap={search ? 'xl' : '4xl'}
+      padding="xl"
+    >
       <Core.GdsFlex gap="s" justify-content="space-between">
         <Core.GdsFlex gap="s">
           <Core.GdsText tag="h1">Colors</Core.GdsText>
@@ -190,67 +194,86 @@ export default function Color() {
 
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (
-          <Core.GdsFlex key={index} flex-direction="column" gap="4xl">
+          <Core.GdsFlex
+            key={index}
+            flex-direction="column"
+            gap={search ? 'xl' : '4xl'}
+          >
             <Core.GdsFlex flex-direction="column" gap="m">
               <Core.GdsText tag="h2">{group.title}</Core.GdsText>
-              {group.title == 'Background' && (
-                <Core.GdsText color="neutral-02" font="preamble-m">
-                  Background tokens are grouped by their level in the interface:
-                  <br />
-                  L1 – the base layer of the screen, <br />
-                  L2 – structural layers like cards and modals,
-                  <br />
-                  L3 – backgrounds for components like buttons and inputs.
-                  <br /> This structure supports clarity, consistency, and a
-                  clear visual hierarchy.
-                </Core.GdsText>
-              )}
-
-              {group.title == 'Border' && (
-                <Core.GdsFlex color="neutral-02" font="preamble-m" width="60ch">
-                  Border tokens are used to define the edges of components and
-                  layout sections. They help separate content and add structure
-                  to the interface.
-                </Core.GdsFlex>
-              )}
-              {group.title == 'Content' && (
-                <Core.GdsFlex color="neutral-02" font="preamble-m" width="60ch">
-                  Content tokens are used for text, icons, and other foreground
-                  elements. They ensure readability and clear contrast against
-                  background roles like document, surface, and container.
-                </Core.GdsFlex>
-              )}
-              {group.title == 'State' && (
-                <Core.GdsFlex gap="xl" flex="1" width="100%">
-                  <Core.GdsFlex
-                    color="neutral-02"
-                    font="preamble-m"
-                    width="60ch"
-                  >
-                    State tokens provide visual feedback for interactions,
-                    ensuring consistency across components in both light and
-                    dark mode. We have defined an extensive set of tokens to
-                    support customisation across primary, secondary, and
-                    tertiary components. <br />
-                    <br /> Buttons were the base components used to define these
-                    states. For all other components (e.g. inputs, list items),
-                    we mostly use 03 and 04 for hover and pressed.
-                  </Core.GdsFlex>
-                  <Core.GdsCard width="max-content">
-                    <Core.GdsText font="preamble-m">
-                      01 = Hover (Primary) <br />
-                      02 = Pressed (Primary) <br />
-                      03 = Hover (Secondary) <br />
-                      04 = Pressed (Secondary) <br />
-                      05 = Hover (Tertiary) <br />
-                      06 = Pressed (Tertiary)
+              {!search && (
+                <>
+                  {group.title == 'Background' && (
+                    <Core.GdsText color="neutral-02" font="preamble-m">
+                      Background tokens are grouped by their level in the
+                      interface:
+                      <br />
+                      L1 – the base layer of the screen, <br />
+                      L2 – structural layers like cards and modals,
+                      <br />
+                      L3 – backgrounds for components like buttons and inputs.
+                      <br /> This structure supports clarity, consistency, and a
+                      clear visual hierarchy.
                     </Core.GdsText>
-                  </Core.GdsCard>
-                </Core.GdsFlex>
+                  )}
+
+                  {group.title == 'Border' && (
+                    <Core.GdsFlex
+                      color="neutral-02"
+                      font="preamble-m"
+                      width="60ch"
+                    >
+                      Border tokens are used to define the edges of components
+                      and layout sections. They help separate content and add
+                      structure to the interface.
+                    </Core.GdsFlex>
+                  )}
+                  {group.title == 'Content' && (
+                    <Core.GdsFlex
+                      color="neutral-02"
+                      font="preamble-m"
+                      width="60ch"
+                    >
+                      Content tokens are used for text, icons, and other
+                      foreground elements. They ensure readability and clear
+                      contrast against background roles like document, surface,
+                      and container.
+                    </Core.GdsFlex>
+                  )}
+                  {group.title == 'State' && (
+                    <Core.GdsFlex gap="xl" flex="1" width="100%">
+                      <Core.GdsFlex
+                        color="neutral-02"
+                        font="preamble-m"
+                        width="60ch"
+                      >
+                        State tokens provide visual feedback for interactions,
+                        ensuring consistency across components in both light and
+                        dark mode. We have defined an extensive set of tokens to
+                        support customisation across primary, secondary, and
+                        tertiary components. <br />
+                        <br /> Buttons were the base components used to define
+                        these states. For all other components (e.g. inputs,
+                        list items), we mostly use 03 and 04 for hover and
+                        pressed.
+                      </Core.GdsFlex>
+                      <Core.GdsCard width="max-content">
+                        <Core.GdsText font="preamble-m">
+                          01 = Hover (Primary) <br />
+                          02 = Pressed (Primary) <br />
+                          03 = Hover (Secondary) <br />
+                          04 = Pressed (Secondary) <br />
+                          05 = Hover (Tertiary) <br />
+                          06 = Pressed (Tertiary)
+                        </Core.GdsText>
+                      </Core.GdsCard>
+                    </Core.GdsFlex>
+                  )}
+                </>
               )}
             </Core.GdsFlex>
             {group.hasSubGroups ? (
-              <Core.GdsFlex flex-direction="column" gap="6xl">
+              <Core.GdsFlex flex-direction="column" gap={search ? 'xl' : '6xl'}>
                 {(group.tokens as ColorSubGroup[]).map((subGroup, subIndex) => (
                   <Core.GdsFlex
                     key={subIndex}
@@ -288,6 +311,18 @@ export default function Color() {
               </Core.GdsFlex>
             ) : (
               <Core.GdsGrid columns="1" gap="m">
+                <Core.GdsCard
+                  flex-direction="row"
+                  justify-content="space-between"
+                >
+                  <Core.GdsGrid columns="5" align-items="center" gap="xl">
+                    <Core.GdsText></Core.GdsText>
+                    <Core.GdsText>Example</Core.GdsText>
+                    <Core.GdsText>Variable name</Core.GdsText>
+                    <Core.GdsText>Light</Core.GdsText>
+                    <Core.GdsText>Dark</Core.GdsText>
+                  </Core.GdsGrid>
+                </Core.GdsCard>
                 {(group.tokens as ColorToken[]).map((token, tokenIndex) => (
                   <ColorSwatch
                     key={tokenIndex}

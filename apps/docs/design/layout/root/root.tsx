@@ -35,7 +35,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
       >
         {!Studio && <Sidebar />}
         <GdsFlex flex-direction="column" width="100%">
-          <Topbar />
+          {!Studio && <Topbar />}
           <GdsFlex
             flex-direction="column"
             max-width={Composer || Studio ? '100%' : '1200px'}
