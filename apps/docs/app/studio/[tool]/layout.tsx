@@ -2,7 +2,14 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
-const validTools = ['color', 'typography', 'spacing', 'grid', 'compose']
+const validTools = [
+  'color',
+  'typography',
+  'spacing',
+  'icons',
+  'grid',
+  'compose',
+]
 
 interface Props {
   params: { tool: string }

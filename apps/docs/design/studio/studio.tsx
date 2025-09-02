@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../atoms/link/link'
 import { NavItem, Page } from './settings/studio.types'
-import { Color, Compose, Spacing, Typography } from './tools'
+import * as Tool from './tools'
 import { colorTokens } from './tools/color/color.tokens'
 import { ColorSubGroup, ColorToken } from './tools/color/color.types'
 import { spacingTokens } from './tools/spacing/spacing'
@@ -25,7 +25,7 @@ export default function Studio({ page }: StudioProps) {
       id: 'color',
       title: 'Color',
       icon: <Core.IconBrush slot="lead" />,
-      content: <Color />,
+      content: <Tool.Color />,
       tokens: colorTokens.map((group) => ({
         title: group.title,
         tokens: group.hasSubGroups
@@ -47,22 +47,21 @@ export default function Studio({ page }: StudioProps) {
       id: 'typography',
       title: 'Typography',
       icon: <Core.IconTextEdit slot="lead" />,
-      content: <Typography />,
+      content: <Tool.Typography />,
       tokens: typographyTokens,
     },
     {
       id: 'spacing',
       title: 'Spacing',
       icon: <Core.IconFullscreen slot="lead" />,
-      content: <Spacing />,
+      content: <Tool.Spacing />,
       tokens: spacingTokens,
     },
     {
       id: 'icons',
       title: 'Icons',
       icon: <Core.IconShapes slot="lead" />,
-      content: <Spacing />,
-      tokens: spacingTokens,
+      content: <Tool.Icons />,
     },
     {
       id: 'grid',
@@ -74,7 +73,7 @@ export default function Studio({ page }: StudioProps) {
       id: 'compose',
       title: 'Compose',
       icon: <Core.IconPencilSparkle slot="lead" />,
-      content: <Compose />,
+      content: <Tool.Compose />,
     },
   ]
 

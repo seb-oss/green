@@ -158,9 +158,11 @@ export default function Color() {
       padding="xl"
     >
       <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsFlex gap="s">
+        <Core.GdsFlex gap="s" align-items="center">
           <Core.GdsText tag="h1">Colors</Core.GdsText>
-          <Core.GdsText>{totalTokens}</Core.GdsText>
+          <Core.GdsText tag="h1" color="positive-03">
+            {totalTokens}
+          </Core.GdsText>
         </Core.GdsFlex>
         <Core.GdsFlex width="max-content" gap="s">
           <Core.GdsInput
@@ -323,13 +325,15 @@ export default function Color() {
                     <Core.GdsText>Dark</Core.GdsText>
                   </Core.GdsGrid>
                 </Core.GdsCard>
-                {(group.tokens as ColorToken[]).map((token, tokenIndex) => (
-                  <ColorSwatch
-                    key={tokenIndex}
-                    token={token}
-                    group={group.title}
-                  />
-                ))}
+                <Core.GdsFlex flex-direction="column">
+                  {(group.tokens as ColorToken[]).map((token, tokenIndex) => (
+                    <ColorSwatch
+                      key={tokenIndex}
+                      token={token}
+                      group={group.title}
+                    />
+                  ))}
+                </Core.GdsFlex>
               </Core.GdsGrid>
             )}
           </Core.GdsFlex>
