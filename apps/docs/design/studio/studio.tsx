@@ -200,7 +200,7 @@ export default function Studio() {
           gap="s"
           padding="0"
           position="sticky"
-          inset="20px 0 0 0"
+          inset="16px 0 0 0"
         >
           <Core.GdsFlex
             flex-direction="column"
