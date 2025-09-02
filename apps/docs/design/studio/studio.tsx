@@ -183,16 +183,25 @@ export default function Studio() {
     <Core.GdsTheme color-scheme={theme}>
       <Core.GdsCard
         width="100%"
-        height="80vh"
+        height="max-content"
         flex-direction="row"
+        align-items="flex-start"
+        padding="0"
         gap="s"
-        border-color="subtle-01"
+        // border-color="subtle-01"
         background="secondary"
-        data-pattern
-        padding="xs"
-        border-radius="m"
+        // data-pattern
+        // padding="xs"
+        // border-radius="m"
       >
-        <Core.GdsCard variant="secondary" width="280px" gap="s" padding="0">
+        <Core.GdsCard
+          variant="secondary"
+          width="280px"
+          gap="s"
+          padding="0"
+          position="sticky"
+          inset="20px 0 0 0"
+        >
           <Core.GdsFlex
             flex-direction="column"
             padding="l m"
@@ -223,8 +232,7 @@ export default function Studio() {
             padding="m"
             flex-direction="column"
             gap="m"
-            height="100%"
-            overflow="auto"
+            height="max-content"
           >
             {renderTokensList()}
           </Core.GdsFlex>

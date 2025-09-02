@@ -29,72 +29,91 @@ const ColorSwatch = ({
 
   return (
     <Core.GdsFlex
-      flex-direction="column"
-      gap="xs"
-      padding="m"
-      border="1px solid var(--gds-ref-pallet-base-grey-200)"
-      border-radius="m"
+      flex-direction="row"
+      align-items="center"
+      padding="s l"
+      border-width="0 0 4xs 0"
+      border-color="subtle-01"
     >
-      <Core.GdsFlex gap="m">
-        <Core.GdsDiv
-          width="48px"
-          height="48px"
-          border-radius="max"
-          border-color="subtle-01"
-          border-width="4xs"
-          border-style="solid"
-          style={{
-            background: getColorMix(
-              token.lightValue.$value,
-              token.lightValue.alpha,
-            ),
-          }}
-        />
-        <Core.GdsDiv
-          width="48px"
-          height="48px"
-          border-radius="max"
-          border-color="subtle-01"
-          border-width="4xs"
-          border-style="solid"
-          style={{
-            background: getColorMix(
-              token.darkValue.$value,
-              token.darkValue.alpha,
-            ),
-          }}
-        />
-      </Core.GdsFlex>
-      <Core.GdsText>{token.name}</Core.GdsText>
-      <Core.GdsFlex gap="m">
-        <Core.GdsText color="subtle-02">{getVarName('light')}</Core.GdsText>
-      </Core.GdsFlex>
-      <Core.GdsFlex gap="m">
+      <Core.GdsGrid columns="5" align-items="center" gap="xl">
+        {level && <Core.GdsText>{level}</Core.GdsText>}
+        <Core.GdsFlex align-items="center" gap="s">
+          <Core.GdsDiv
+            width="32px"
+            height="32px"
+            border-radius="max"
+            border-color="inverse"
+            border-width="3xs"
+            border-style="solid"
+            box-shadow="m"
+            style={{
+              background: getColorMix(
+                token.lightValue.$value,
+                token.lightValue.alpha,
+              ),
+            }}
+          />
+          <Core.GdsDiv
+            width="32px"
+            height="32px"
+            border-radius="max"
+            border-color="inverse"
+            border-width="3xs"
+            border-style="solid"
+            box-shadow="m"
+            style={{
+              background: getColorMix(
+                token.darkValue.$value,
+                token.darkValue.alpha,
+              ),
+            }}
+          />
+        </Core.GdsFlex>
+        <Core.GdsText>{token.name}</Core.GdsText>
         <Core.GdsText color="subtle-02">
-          Light: {token.lightValue.$value}
-          {token.lightValue.alpha ? ` (${token.lightValue.alpha})` : ''}
+          {token.lightValue.$value}
+          {token.lightValue.alpha ? ` / ${token.lightValue.alpha}` : ''}
         </Core.GdsText>
         <Core.GdsText color="subtle-02">
-          Dark: {token.darkValue.$value}
-          {token.darkValue.alpha ? ` (${token.darkValue.alpha})` : ''}
+          {token.darkValue.$value}
+          {token.darkValue.alpha ? ` / ${token.darkValue.alpha}` : ''}
         </Core.GdsText>
-      </Core.GdsFlex>
+      </Core.GdsGrid>
     </Core.GdsFlex>
   )
 }
 
 export default function Color() {
   return (
-    <Core.GdsFlex flex-direction="column" gap="xl" padding="xl">
+    <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
       {colorTokens.map((group, index) => (
-        <Core.GdsFlex key={index} flex-direction="column" gap="l">
+        <Core.GdsFlex key={index} flex-direction="column" gap="4xl">
           <Core.GdsText>{group.title}</Core.GdsText>
           {group.hasSubGroups ? (
-            <Core.GdsFlex flex-direction="column" gap="m">
+            <Core.GdsFlex flex-direction="column" gap="6xl">
               {(group.tokens as ColorSubGroup[]).map((subGroup, subIndex) => (
-                <Core.GdsFlex key={subIndex} flex-direction="column" gap="s">
-                  <Core.GdsText>{subGroup.category}</Core.GdsText>
-                  <Core.GdsGrid columns="4" gap="m">
+                <Core.GdsFlex
+                  key={subIndex}
+                  flex-direction="column"
+                  gap="xl"
+                  data-level={subGroup.category}
+                >
+                  <Core.GdsCard
+                    flex-direction="row"
+                    justify-content="space-between"
+                  >
+                    <Core.GdsGrid columns="5" align-items="center" gap="xl">
+                      <Core.GdsText>Level</Core.GdsText>
+                      <Core.GdsText>Example</Core.GdsText>
+                      <Core.GdsText>Variable name</Core.GdsText>
+                      <Core.GdsText>Light</Core.GdsText>
+                      <Core.GdsText>Dark</Core.GdsText>
+                    </Core.GdsGrid>
+                  </Core.GdsCard>
+                  <Core.GdsFlex
+                    flex-direction="column"
+                    data-subgroup={subGroup.category}
+                  >
                     {subGroup.tokens.map((token, tokenIndex) => (
                       <ColorSwatch
                         key={tokenIndex}
@@ -103,12 +122,12 @@ export default function Color() {
                         level={subGroup.category}
                       />
                     ))}
-                  </Core.GdsGrid>
+                  </Core.GdsFlex>
                 </Core.GdsFlex>
               ))}
             </Core.GdsFlex>
           ) : (
-            <Core.GdsGrid columns="4" gap="m">
+            <Core.GdsGrid columns="1" gap="m">
               {(group.tokens as ColorToken[]).map((token, tokenIndex) => (
                 <ColorSwatch
                   key={tokenIndex}

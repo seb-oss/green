@@ -21,7 +21,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
 
   const PATH = usePathname()
   const Composer = PATH === '/compose'
-  const PLAYGROUND = PATH === '/studio'
+  const Studio = PATH === '/studio'
 
   return (
     <div className={classes} {...rest}>
@@ -33,12 +33,12 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
         color="01"
         className={_('root-flex', Composer && 'root-composer')}
       >
-        <Sidebar />
+        {!Studio && <Sidebar />}
         <GdsFlex flex-direction="column" width="100%">
-          <Topbar />
+          {!Studio && <Topbar />}
           <GdsFlex
             flex-direction="column"
-            max-width={Composer || PLAYGROUND ? '100%' : '1200px'}
+            max-width={Composer || Studio ? '100%' : '1200px'}
             padding="m"
             width="100%"
             margin="0 auto"
@@ -46,7 +46,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
             data-content
           >
             <main>{children}</main>
-            {!PLAYGROUND && <Footer />}
+            {!Studio && <Footer />}
           </GdsFlex>
         </GdsFlex>
       </GdsFlex>
