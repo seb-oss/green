@@ -1,7 +1,7 @@
 'use client'
 
 import * as Core from '@sebgroup/green-core/react'
-import { useSettingsContext, useSettingsValue } from '../../../settings/hooks'
+import { useSettingsContext } from '../../../settings/hooks'
 import { Link } from '../link/link'
 
 export function Topbar() {
@@ -50,21 +50,7 @@ export function Topbar() {
           </Core.GdsButton>
         </Core.GdsFlex>
         <Core.GdsFlex display="none; >899px{flex}" padding="0 l 0 0">
-          <Core.GdsButton
-            rank="tertiary"
-            onClick={() => {
-              SET.setSettings((prev) => ({
-                ...prev,
-                UI: {
-                  ...prev.UI,
-                  Panel: {
-                    ...prev.UI.Panel,
-                    Command: !prev.UI.Panel.Command,
-                  },
-                },
-              }))
-            }}
-          >
+          <Core.GdsButton rank="tertiary" onClick={() => handleCommandToggle()}>
             <Core.IconMagnifyingGlass size="l" />
           </Core.GdsButton>
         </Core.GdsFlex>

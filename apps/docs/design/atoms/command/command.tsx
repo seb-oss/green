@@ -228,7 +228,6 @@ export default function Command() {
               </Core.GdsInput>
 
               <Core.GdsFlex
-                flex-direction="column; m{row}"
                 align-items="center"
                 justify-content="space-between"
                 gap="s"
@@ -256,11 +255,13 @@ export default function Command() {
                     Pages
                   </Core.GdsFilterChip>
                 </Core.GdsFilterChips>
-                <Core.GdsText font="body-s" color="neutral-02">
-                  {query
-                    ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
-                    : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
-                </Core.GdsText>
+                <Core.GdsFlex display="none; m{flex}">
+                  <Core.GdsText font="body-s" color="neutral-02">
+                    {query
+                      ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
+                      : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
+                  </Core.GdsText>
+                </Core.GdsFlex>
               </Core.GdsFlex>
             </Core.GdsFlex>
 
