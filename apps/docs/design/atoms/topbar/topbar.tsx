@@ -5,7 +5,11 @@ import { useSettingsContext, useSettingsValue } from '../../../settings/hooks'
 import { Link } from '../link/link'
 
 export function Topbar() {
-  const { actions: SettingsActions, settings } = useSettingsContext()
+  const { actions: SET, settings } = useSettingsContext()
+
+  const handleCommandToggle = () => {
+    SET.toggle('UI.Panel.Command')
+  }
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 1000 }}>
@@ -22,18 +26,7 @@ export function Topbar() {
           <Core.GdsFlex display="flex; >899px{none}">
             <Core.GdsButton
               rank="tertiary"
-              onClick={() => {
-                SettingsActions.setSettings((prev) => ({
-                  ...prev,
-                  UI: {
-                    ...prev.UI,
-                    Panel: {
-                      ...prev.UI.Panel,
-                      Command: !prev.UI.Panel.Command,
-                    },
-                  },
-                }))
-              }}
+              onClick={() => handleCommandToggle()}
             >
               <Core.IconMagnifyingGlass size="l" />
             </Core.GdsButton>
@@ -46,7 +39,7 @@ export function Topbar() {
           <Core.GdsButton
             rank="tertiary"
             onClick={() => {
-              SettingsActions.toggle('UI.Panel.MobileMenu')
+              SET.toggle('UI.Panel.MobileMenu')
             }}
           >
             {settings.UI.Panel.MobileMenu ? (
@@ -60,7 +53,7 @@ export function Topbar() {
           <Core.GdsButton
             rank="tertiary"
             onClick={() => {
-              SettingsActions.setSettings((prev) => ({
+              SET.setSettings((prev) => ({
                 ...prev,
                 UI: {
                   ...prev.UI,

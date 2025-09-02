@@ -218,7 +218,7 @@ export function useSettings() {
   }, [settings, isLoaded])
 
   const toggle = useCallback((path: SettingsTogglePath) => {
-    console.log(path)
+    // console.log(path)
 
     setSettings((prev) => {
       const newSettings = toggleSetting(prev, path)

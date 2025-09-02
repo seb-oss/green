@@ -213,60 +213,62 @@ export default function Command() {
             padding="0"
             slot="dialog"
           >
-            <Core.GdsInput
-              ref={inputRef}
-              plain
-              value={query}
-              onInput={(e) => {
-                setQuery((e.target as HTMLInputElement).value)
-                setSelectedIndex(0)
-              }}
-              autofocus
-            >
-              <Core.IconMagnifyingGlass slot="lead" />
-            </Core.GdsInput>
+            <Core.GdsFlex flex-direction="column" gap="xs" className="cmd-fade">
+              <Core.GdsInput
+                ref={inputRef}
+                plain
+                value={query}
+                onInput={(e) => {
+                  setQuery((e.target as HTMLInputElement).value)
+                  setSelectedIndex(0)
+                }}
+                autofocus
+              >
+                <Core.IconMagnifyingGlass slot="lead" />
+              </Core.GdsInput>
 
-            <Core.GdsFlex
-              flex-direction="column; m{row}"
-              align-items="center"
-              justify-content="space-between"
-              gap="s"
-            >
-              <Core.GdsFilterChips>
-                <Core.GdsFilterChip
-                  size="s"
-                  selected={activeFilter === 'all'}
-                  onClick={() => handleFilterChange('all')}
-                >
-                  All
-                </Core.GdsFilterChip>
-                <Core.GdsFilterChip
-                  size="small"
-                  selected={activeFilter === 'component'}
-                  onClick={() => handleFilterChange('component')}
-                >
-                  Components
-                </Core.GdsFilterChip>
-                <Core.GdsFilterChip
-                  size="small"
-                  selected={activeFilter === 'page'}
-                  onClick={() => handleFilterChange('page')}
-                >
-                  Pages
-                </Core.GdsFilterChip>
-              </Core.GdsFilterChips>
-              <Core.GdsText font="body-s" color="neutral-02">
-                {query
-                  ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
-                  : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
-              </Core.GdsText>
+              <Core.GdsFlex
+                flex-direction="column; m{row}"
+                align-items="center"
+                justify-content="space-between"
+                gap="s"
+              >
+                <Core.GdsFilterChips>
+                  <Core.GdsFilterChip
+                    size="s"
+                    selected={activeFilter === 'all'}
+                    onClick={() => handleFilterChange('all')}
+                  >
+                    All
+                  </Core.GdsFilterChip>
+                  <Core.GdsFilterChip
+                    size="small"
+                    selected={activeFilter === 'component'}
+                    onClick={() => handleFilterChange('component')}
+                  >
+                    Components
+                  </Core.GdsFilterChip>
+                  <Core.GdsFilterChip
+                    size="small"
+                    selected={activeFilter === 'page'}
+                    onClick={() => handleFilterChange('page')}
+                  >
+                    Pages
+                  </Core.GdsFilterChip>
+                </Core.GdsFilterChips>
+                <Core.GdsText font="body-s" color="neutral-02">
+                  {query
+                    ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
+                    : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
+                </Core.GdsText>
+              </Core.GdsFlex>
             </Core.GdsFlex>
 
             <Core.GdsFlex
               flex-direction="column"
               gap="xs"
               overflow="auto"
-              className="cmd-results"
+              className="cmd-fade"
               flex="1"
             >
               {searchResults.map((result, index) => (
@@ -302,11 +304,7 @@ export default function Command() {
                       <Core.GdsText font-weight="book" font="heading-xs">
                         {result.title}
                       </Core.GdsText>
-                      <Core.GdsFlex
-                        gap="xs"
-                        align-items="center"
-                        display="none"
-                      >
+                      <Core.GdsFlex gap="xs" align-items="center">
                         {result.beta && (
                           <Core.GdsBadge variant="notice" size="small">
                             BETA
