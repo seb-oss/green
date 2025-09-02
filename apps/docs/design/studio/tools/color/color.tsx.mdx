@@ -1,3 +1,4 @@
+```tsx
 // color.tsx
 import { useMemo, useState } from 'react'
 
@@ -154,10 +155,7 @@ export default function Color() {
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
       <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsFlex gap="s">
-          <Core.GdsText tag="h1">Colors</Core.GdsText>
-          <Core.GdsText>{totalTokens}</Core.GdsText>
-        </Core.GdsFlex>
+        <Core.GdsText tag="h1">Colors</Core.GdsText>
         <Core.GdsFlex width="max-content" gap="s">
           <Core.GdsInput
             plain
@@ -243,18 +241,70 @@ export default function Color() {
           </Core.GdsFlex>
         ))
       ) : (
-        <Core.GdsCard
+        <Core.GdsFlex
           justify-content="center"
           align-items="center"
-          height="40vh"
           padding="2xl"
         >
-          <Core.IconMagnifyingGlass size="xl" />
           <Core.GdsText color="subtle-02">
             No colors found matching your search
           </Core.GdsText>
-        </Core.GdsCard>
+        </Core.GdsFlex>
       )}
+
+      {/* {colorTokens.map((group, index) => (
+        <Core.GdsFlex key={index} flex-direction="column" gap="4xl">
+          <Core.GdsText>{group.title}</Core.GdsText>
+          {group.hasSubGroups ? (
+            <Core.GdsFlex flex-direction="column" gap="6xl">
+              {(group.tokens as ColorSubGroup[]).map((subGroup, subIndex) => (
+                <Core.GdsFlex
+                  key={subIndex}
+                  flex-direction="column"
+                  gap="xl"
+                  data-level={subGroup.category}
+                >
+                  <Core.GdsCard
+                    flex-direction="row"
+                    justify-content="space-between"
+                  >
+                    <Core.GdsGrid columns="5" align-items="center" gap="xl">
+                      <Core.GdsText>Level</Core.GdsText>
+                      <Core.GdsText>Example</Core.GdsText>
+                      <Core.GdsText>Variable name</Core.GdsText>
+                      <Core.GdsText>Light</Core.GdsText>
+                      <Core.GdsText>Dark</Core.GdsText>
+                    </Core.GdsGrid>
+                  </Core.GdsCard>
+                  <Core.GdsFlex
+                    flex-direction="column"
+                    data-subgroup={subGroup.category}
+                  >
+                    {subGroup.tokens.map((token, tokenIndex) => (
+                      <ColorSwatch
+                        key={tokenIndex}
+                        token={token}
+                        group={group.title}
+                        level={subGroup.category}
+                      />
+                    ))}
+                  </Core.GdsFlex>
+                </Core.GdsFlex>
+              ))}
+            </Core.GdsFlex>
+          ) : (
+            <Core.GdsGrid columns="1" gap="m">
+              {(group.tokens as ColorToken[]).map((token, tokenIndex) => (
+                <ColorSwatch
+                  key={tokenIndex}
+                  token={token}
+                  group={group.title}
+                />
+              ))}
+            </Core.GdsGrid>
+          )}
+        </Core.GdsFlex>
+      ))} */}
     </Core.GdsFlex>
   )
 }
