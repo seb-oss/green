@@ -1,8 +1,15 @@
 import { NggButtonComponent } from './button.component'
 import { Canvas, Story, Meta } from '@storybook/addon-docs'
 import * as Stories from './button.stories.ts'
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 <Meta of={Stories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Button is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-button--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 <style>{`
     div[id^=story--] > div{
