@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { NgModule } from '@angular/core'
 
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import {
+  NggCoreWrapperModule,
+  SCOPE_RESOLVER,
+} from '@sebgroup/green-angular/src/lib/shared'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { NggvAlertModule } from './alert'
 import { NggvBaseControlValueAccessorModule } from './base-control-value-accessor'
 import { NggvBreadcrumbsModule } from './breadcrumbs'
@@ -58,6 +62,12 @@ import { NggvTooltipModule } from './tooltip'
     NggvToastModule,
     NggvTooltipModule,
     NggvTypeaheadModule,
+  ],
+  providers: [
+    {
+      provide: SCOPE_RESOLVER,
+      useValue: { getScopedTagName },
+    },
   ],
 })
 export class NggvModule {}

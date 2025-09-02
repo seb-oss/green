@@ -2,41 +2,70 @@ import { Meta, Markdown } from '@storybook/addon-docs'
 
 <Meta title="Contributing/Code Splitting" />
 
-# Code splitting
+# Code Splitting
 
-Since a consumer of Green Core may not need all of the components every time, it needs to be possible to import them one by one, so that only used code gets included in the application bundle.
+This document describes how to build components in a tree-shakable way.
 
-Often, you import stuff from a main export like this, for example:
+## Dead code elimination
+
+Dead code elimination works by statically analyzing the code in the application, and figuring out which code paths are actually being called, and then removing the stuff that is never reached.
+
+This kind of elimination can only be done for code that is free of side-effects. If there are side-effects, such as setting a cookie or writing to `localStorage`, the code cannot be eliminated, because the analyzer doesn't know what else relies on the side-effect. The same thing is true when a web component is defined in the browser's `CustomElementRegistry`.
+
+To get around this, Green Core exports both side-effect components that are defined automatically on import, and pure components that needs to be manually defined.
+
+Currently, side-effect exports are exposed though the package root:
 
 ```ts
 import { GdsDropdown } from '@sebgroup/green-core'
 ```
 
-This resolves to an `index.js` file at the root of the package, containing all the exported modules. Normally, this is perfectly fine, as most bundlers have some form of dead code elimination built in, which removes anything that isn't actually used in the end.
+This imports all components in a non-tree-shakable way, meaning that even unused components will be included in the final bundle.
 
-Dead code elimination works by statically analyzing the code in the application, and figuring out which code paths are actually being called, and then removing the stuff that is never reached.
-
-This kind of elimination can only be done for code that is free of side-effects. If there are side-effects, such as setting a cookie or writing to `localStorage`, the code cannot be eliminated, because the analyzer doesn't know what else relies on the side-effect. The same thing is true when a Web Component is registered in the browsers `CustomElementRegistry`.
-
-Since each component in Green Core is automatically registered with the `CustomElementRegistry`, each component can also be said to have a side-effect. This means that when you `import { GdsDropdown } from '@sebgroup/green-core'` you're not just getting the `GdsDropdown` component. You're getting ALL of the components, because they all have side-effects.
-
-## Sub-path exports
-
-We can improve the situation by making the package more granular. Intead of all modules being exported from a main root export, we can split it up into separate exports for each component. Importing an individual component now looks like this:
+The pure components are exposed through a sub-path:
 
 ```ts
-import '@sebgroup/green-core/components/dropdown/index.js'
+import { GdsDropdown } from '@sebgroup/green-core/pure'
+
+GdsDropdown.define()
 ```
 
-Now we have sort of flipped the problem of dead code elimition on its head. Instead of starting at the end, when an application is built, we start at the begininng, when the component is built. By treating each component as a separate entry-point in the build process, we automatically elimitate all the things that are never imported by that component.
+This will import only `GdsDropdown`, allowing for tree-shaking and reducing the final bundle size.
 
-So by the time the statical analyzer in your bundler gets to it, there's nothing more to eliminate, and the side-effectfulness of Web Components becomes a non-issue.
+In a future major release, this is likely to change in order to make the pure components the default export.
 
 ## Library coding guidelines
 
-It's important to keep this in mind when writing a component. You should never rely on the consumer to import some vital depency on their end. If component A relies on component B for its internal structure, then component A needs to import component B.
+The file structure of a components should look roughly something like this:
 
-Also in the cases where you know that a component needs to be used with a particular child-component, it makes sense for the parent component to import that child component. Often, it will also be a good idea to forward the export of that child-component.
+- my-component/
+  - index.ts
+  - my-component.ts
+  - my-component.component.ts
+  - my-component.styles.ts
+  - my-component.test.ts
+
+The important parts here are the `my-component.ts` and the `my-component.component.ts`.
+
+The actual implementation of the component should be in `my-component.component.ts`, while `my-component.ts` should import the component, call `MyComponent.define()` and then re-export.
+
+Example from `dropdown.ts`:
+
+```ts
+import { GdsDropdown } from './dropdown.component'
+
+GdsDropdown.define()
+
+export { GdsDropdown }
+```
+
+This way, the side-effect of defining the component is contained within the `my-component.ts` file, keeping the `.component.ts` file pure.
+
+### Sub-dependencies
+
+You should never rely on the consumer to import some vital depency on their end. If component A relies on component B for its internal structure, then component A needs to import component B.
+
+Also in the cases where you know that a component needs to be used with a particular child-component, it makes sense for the parent component to import that child component.
 
 ### Examples
 
@@ -45,7 +74,8 @@ Here's some consumer code using a `gds-dropdown`:
 JS:
 
 ```js
-import '@sebgroup/green-core/components/dropdown/index.js'
+import { GdsDropdown } from '@sebgroup/green-core/pure'
+GdsDropdown.define()
 ```
 
 HTML:
@@ -70,11 +100,20 @@ export * from '../../primitives/listbox/option'
 
 Internally, the dropdown also use other components, such as `gds-popover` and `gds-listbox`. These are also imported by the component.
 
-In the source code for `gds-dropdown` it looks like this:
+All the dependencies should be registered in the `gdsCustomElement` decorator. This makes sure that all of them are defined in the `CustomElementRegistry` when the dependant is defined.
+
+For `gds-dropdown`, it looks like this:
 
 ```ts
-import '../../primitives/listbox'
-import type { GdsListbox } from '../../primitives/listbox'
+@gdsCustomElement('gds-dropdown', {
+  dependsOn: [
+    GdsFormControlHeader,
+    GdsFormControlFooter,
+    GdsFieldBase,
+    GdsListbox,
+    GdsPopover,
+    IconCheckmark,
+    IconChevronBottom,
+  ],
+})
 ```
-
-In this case, using simply `import { GdsListbox } from '../../primitives/listbox'` won't work, because Typescript will strip out the actual code if it thinks we're only using the type. It can't tell if we're using the element in the template, and in this particular case, we're only using it for type inference, so the code would get stripped. To get around that, we import the code and the type separately.

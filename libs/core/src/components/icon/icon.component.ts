@@ -18,7 +18,6 @@ import IconStyles from './icon.styles'
 
 /**
  * @element gds-icon
- * @status stable
  *
  * @part icon - The icon SVG element.
  */

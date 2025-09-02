@@ -31,7 +31,6 @@ registerGlobalScrollLockStyles()
 
 /**
  * @element gds-dialog
- * @status beta
  *
  * @event gds-ui-state - Fired when the dialog is opened or closed. Can be cancelled to prevent the dialog from closing.
  * @event gds-close - Fired when the dialog is closed
@@ -40,6 +39,7 @@ registerGlobalScrollLockStyles()
  * @slot - The content of the dialog
  * @slot trigger - The trigger button for the dialog
  * @slot footer - The footer of the dialog
+ * @slot dialog - Complete override of the dialog content, including header and footer
  */
 @gdsCustomElement('gds-dialog', {
   dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],

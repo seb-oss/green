@@ -1,0 +1,1 @@
+export { IconChevronDownSmall } from '@sebgroup/green-core/react';

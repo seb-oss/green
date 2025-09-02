@@ -1,5 +1,47 @@
 # Changelog
 
+## 2.4.0
+
+### Minor Changes
+
+- 1969060: **GdsElement:** Add `semanticVersion` debug property
+
+## 2.3.0
+
+### Minor Changes
+
+- 798af05: **Icon:** Add feedback emoji/icons
+
+### Patch Changes
+
+- 3b18c2d: Datepicker: Improved screen reader text for the buttons
+
+## 2.2.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** Add 28 new icons
+
+## 2.1.0
+
+### Minor Changes
+
+- a76694d: **Dropdown:** Add `clearable` option
+- a76694d: **Dropdown:** Add counter badge for multiple select
+
+## 2.0.2
+
+### Patch Changes
+
+- cd905fe: **Context menu:** Button should inherit transitional styles if enabled for the Context menu
+- 61c2bfe: **Icon:** focus svg generated
+
+## 2.0.1
+
+### Patch Changes
+
+- b740210: **Icon:** `gds-icon-focus` update design for solid and regular
+
 ## 2.0.0
 
 ### Major Changes

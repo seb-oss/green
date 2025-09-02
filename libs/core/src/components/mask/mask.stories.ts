@@ -98,22 +98,24 @@ export const Mask: Story = {
         background="neutral-01/0.9"
         mask-image="top"
         position="absolute"
-        inset="50% 0 0 0"
+        inset="0; m{50% 0 0 0}"
         level="3"
         color="03"
         flex-direction="column"
-        justify-content="center"
+        justify-content="flex-end"
         align-items="flex-start"
         gap="xl"
-        padding="6xl"
+        padding="xl; s{2xl} m{6xl}"
       >
-        <gds-flex flex-direction="column" gap="s">
-          <gds-text font="display-xl">Sustainability</gds-text>
-          <gds-text tag="p">
-            Actively supporting the net zero transition.
-          </gds-text>
-        </gds-flex>
         <gds-theme color-scheme="dark" design-version="2023">
+          <gds-flex flex-direction="column" gap="s" width="100%">
+            <gds-text font="display-s; m{display-xl}" font-weight="light">
+              Sustainability
+            </gds-text>
+            <gds-text font="body-xs; body-s">
+              Actively supporting the net zero transition.
+            </gds-text>
+          </gds-flex>
           <gds-button>Our impact</gds-button>
         </gds-theme>
       </gds-mask>

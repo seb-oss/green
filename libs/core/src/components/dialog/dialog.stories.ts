@@ -103,7 +103,6 @@ export const CustomButtons: Story = {
  * close the dialog, the event will be emitted with the parameter as the event detail.
  *
  * All the emitted events will have a `detail` object with a reason property that can be used to determine the reason for the event.
- * The `gds-ui-state` event can also be cancelled to prevent the dialog from closing.
  *
  * Possible reasons are:
  * - `btn-close`: The dialog was closed by the user clicking the close button.
@@ -114,6 +113,9 @@ export const CustomButtons: Story = {
  * - `slotted-trigger`: The dialog was opened by the user clicking the slotted trigger button.
  *
  * The reason can also be a custom string supplied when calling the `close()` or `show()` methods.
+ *
+ * ### Preventing close
+ * The `gds-ui-state` event can be cancelled by calling `preventDefault()` on the event to prevent the dialog from closing. Presently, only the `gds-ui-state` event can be cancelled in this way.
  */
 export const Events: Story = {
   ...DefaultParams,

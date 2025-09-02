@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import { TestBed } from '@angular/core/testing'
 
+import { SCOPE_RESOLVER } from '../scope-resolver'
 import { NggCoreElementDirective } from './core-element.directive'
 
 @Component({
@@ -19,6 +20,30 @@ describe('NggCoreElementDirective', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [TestComponent, NggCoreElementDirective],
+    })
+    const fixture = TestBed.createComponent(TestComponent)
+    parent = fixture.debugElement.nativeElement
+    fixture.detectChanges()
+  })
+
+  it('should create an element with the scoped tag name', () => {
+    expect(parent.querySelector('div-scoped')).toBeTruthy()
+  })
+})
+
+describe('NggCoreElementDirective with scope resolver', () => {
+  let component: TestComponent
+  let parent: HTMLElement
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      declarations: [TestComponent, NggCoreElementDirective],
+      providers: [
+        {
+          provide: SCOPE_RESOLVER,
+          useValue: { getScopedTagName: (t: string) => 'div-scoped' },
+        },
+      ],
     })
     const fixture = TestBed.createComponent(TestComponent)
     parent = fixture.debugElement.nativeElement

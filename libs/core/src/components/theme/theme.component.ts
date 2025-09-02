@@ -9,7 +9,6 @@ import { watch } from '../../utils/decorators'
 
 /**
  * @element gds-theme
- * @status beta
  *
  * A component that provides CSS variables for a part of the DOM tree.
  * Every descendant of this component will inherit the CSS variables
