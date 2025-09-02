@@ -1,7 +1,8 @@
+// app/studio/page.tsx
 'use client'
 
-import Studio from '../../design/studio/studio'
+import { redirect } from 'next/navigation'
 
-export default function Playground() {
-  return <Studio />
+export default function StudioPage() {
+  redirect('/studio/color')
 }

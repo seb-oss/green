@@ -90,7 +90,12 @@ export default function Typography() {
                   border-color="subtle-01"
                 >
                   <Core.GdsText style={token.style}>
-                    <span contentEditable>{token.name}</span>
+                    <span
+                      contentEditable="plaintext-only"
+                      suppressContentEditableWarning
+                    >
+                      {token.name}
+                    </span>
                   </Core.GdsText>
                   <Core.GdsFlex
                     gap="xl"

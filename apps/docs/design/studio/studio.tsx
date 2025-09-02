@@ -1,8 +1,10 @@
 'use client'
 
 import { ReactNode, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Link } from '../atoms/link/link'
 import { NavItem, Page } from './settings/studio.types'
 import { Color, Compose, Spacing, Typography } from './tools'
 import { colorTokens } from './tools/color/color.tokens'
@@ -10,9 +12,13 @@ import { ColorSubGroup, ColorToken } from './tools/color/color.types'
 import { spacingTokens } from './tools/spacing/spacing'
 import { typographyTokens } from './tools/typography/typography.tokens'
 
-export default function Studio() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
-  const [activePage, setActivePage] = useState<Page>('color')
+interface StudioProps {
+  page: Page
+}
+
+export default function Studio({ page }: StudioProps) {
+  const pathname = usePathname()
+  const activePage = (pathname.split('/').pop() as Page) || page
 
   const navigation: NavItem[] = [
     {
@@ -64,10 +70,6 @@ export default function Studio() {
       content: <Compose />,
     },
   ]
-
-  const handleThemeToggle = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light')
-  }
 
   const renderPageContent = () => {
     const currentPage = navigation.find((nav) => nav.id === activePage)
@@ -180,117 +182,137 @@ export default function Studio() {
   }
 
   return (
-    <Core.GdsTheme color-scheme={theme}>
+    <Core.GdsCard
+      width="100%"
+      height="max-content"
+      flex-direction="row"
+      align-items="flex-start"
+      padding="0"
+      gap="s"
+      // border-color="subtle-01"
+      background="secondary"
+      // data-pattern
+      // padding="xs"
+      // border-radius="m"
+    >
       <Core.GdsCard
-        width="100%"
-        height="max-content"
-        flex-direction="row"
-        align-items="flex-start"
-        padding="0"
+        variant="secondary"
+        width="280px"
         gap="s"
-        // border-color="subtle-01"
-        background="secondary"
-        // data-pattern
-        // padding="xs"
-        // border-radius="m"
+        padding="0"
+        position="sticky"
+        inset="16px 0 0 0"
       >
-        <Core.GdsCard
-          variant="secondary"
-          width="280px"
+        <Core.GdsFlex
+          flex-direction="column"
+          padding="l m"
           gap="s"
-          padding="0"
-          position="sticky"
-          inset="16px 0 0 0"
+          aria-label="Sidebar"
         >
-          <Core.GdsFlex
-            flex-direction="column"
-            padding="l m"
-            gap="s"
-            aria-label="Sidebar"
-          >
-            {navigation.map((nav) => (
+          {/* {navigation.map((nav) => (
               <Core.GdsButton
                 key={nav.id}
                 size="small"
                 width="max-content"
                 rank={activePage === nav.id ? 'secondary' : 'tertiary'}
                 justify-content="flex-start"
-                onClick={() => setActivePage(nav.id)}
               >
                 {nav.icon}
                 {nav.title}
               </Core.GdsButton>
-            ))}
-          </Core.GdsFlex>
-          <Core.GdsDivider color="subtle-01" />
-          <Core.GdsFlex padding="0 l" display="none">
-            <Core.GdsInput size="small">
-              <Core.IconMagnifyingGlass slot="lead" />
-            </Core.GdsInput>
-          </Core.GdsFlex>
-          <Core.GdsFlex
-            padding="m"
-            flex-direction="column"
-            gap="m"
-            height="max-content"
-          >
-            {renderTokensList()}
-          </Core.GdsFlex>
-        </Core.GdsCard>
+            ))} */}
 
-        <Core.GdsFlex
-          padding="0"
-          flex-direction="column"
-          justify-content="space-between"
-          align-items="center"
-          gap="s"
-          flex="1"
-        >
-          <Core.GdsDiv flex="1" width="100%" height="100%" overflow="auto">
-            {renderPageContent()}
-          </Core.GdsDiv>
-          {false && (
-            <Core.GdsFlex width="100%" align-items="center" padding="s">
-              <Core.GdsFlex flex="1" align-items="center" gap="s">
-                Toolbar
-              </Core.GdsFlex>
-              <Core.GdsFlex align-items="center" gap="s">
-                <Core.GdsButton rank="tertiary" size="small">
-                  <Core.IconCodeBrackets />
-                </Core.GdsButton>
-                <Core.GdsButton rank="tertiary" size="small">
-                  <Core.IconFullscreen />
-                </Core.GdsButton>
-                <Core.GdsButton
-                  rank="tertiary"
+          {navigation.map((nav) => (
+            <Link
+              key={nav.id}
+              href={`/studio/${nav.id}`}
+              component="button"
+              size="small"
+              width="max-content"
+              rank={activePage === nav.id ? 'secondary' : 'tertiary'}
+              justify-content="flex-start"
+            >
+              {/* <Core.GdsButton
                   size="small"
-                  onClick={handleThemeToggle}
-                >
-                  {theme === 'light' ? <Core.IconMoon /> : <Core.IconSun />}
-                </Core.GdsButton>
-                <Core.GdsSegmentedControl
-                  size="small"
-                  value="edit"
                   width="max-content"
-                >
-                  <Core.GdsSegment value="edit">
-                    <Core.GdsFlex align-items="center" gap="xs">
-                      <Core.IconPencilSign size="m" />
-                      Edit
-                    </Core.GdsFlex>
-                  </Core.GdsSegment>
-                  <Core.GdsSegment>
-                    <Core.GdsFlex align-items="center" gap="xs">
-                      <Core.IconEyeOpen size="m" />
-                      Preview
-                    </Core.GdsFlex>
-                  </Core.GdsSegment>
-                </Core.GdsSegmentedControl>
-              </Core.GdsFlex>
-            </Core.GdsFlex>
-          )}
+                  rank={activePage === nav.id ? 'secondary' : 'tertiary'}
+                  justify-content="flex-start"
+                > */}
+              {nav.icon}
+              {nav.title}
+              {/* </Core.GdsButton> */}
+            </Link>
+          ))}
+        </Core.GdsFlex>
+        <Core.GdsDivider color="subtle-01" />
+        <Core.GdsFlex padding="0 l" display="none">
+          <Core.GdsInput size="small">
+            <Core.IconMagnifyingGlass slot="lead" />
+          </Core.GdsInput>
+        </Core.GdsFlex>
+        <Core.GdsFlex
+          display="none"
+          padding="m"
+          flex-direction="column"
+          gap="m"
+          height="max-content"
+        >
+          {renderTokensList()}
         </Core.GdsFlex>
       </Core.GdsCard>
-    </Core.GdsTheme>
+
+      <Core.GdsFlex
+        padding="0"
+        flex-direction="column"
+        justify-content="space-between"
+        align-items="center"
+        gap="s"
+        flex="1"
+      >
+        <Core.GdsDiv flex="1" width="100%" height="100%" overflow="auto">
+          {renderPageContent()}
+        </Core.GdsDiv>
+        {false && (
+          <Core.GdsFlex width="100%" align-items="center" padding="s">
+            <Core.GdsFlex flex="1" align-items="center" gap="s">
+              Toolbar
+            </Core.GdsFlex>
+            <Core.GdsFlex align-items="center" gap="s">
+              <Core.GdsButton rank="tertiary" size="small">
+                <Core.IconCodeBrackets />
+              </Core.GdsButton>
+              <Core.GdsButton rank="tertiary" size="small">
+                <Core.IconFullscreen />
+              </Core.GdsButton>
+              {/* <Core.GdsButton
+                rank="tertiary"
+                size="small"
+                onClick={handleThemeToggle}
+              >
+                {theme === 'light' ? <Core.IconMoon /> : <Core.IconSun />}
+              </Core.GdsButton> */}
+              <Core.GdsSegmentedControl
+                size="small"
+                value="edit"
+                width="max-content"
+              >
+                <Core.GdsSegment value="edit">
+                  <Core.GdsFlex align-items="center" gap="xs">
+                    <Core.IconPencilSign size="m" />
+                    Edit
+                  </Core.GdsFlex>
+                </Core.GdsSegment>
+                <Core.GdsSegment>
+                  <Core.GdsFlex align-items="center" gap="xs">
+                    <Core.IconEyeOpen size="m" />
+                    Preview
+                  </Core.GdsFlex>
+                </Core.GdsSegment>
+              </Core.GdsSegmentedControl>
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+        )}
+      </Core.GdsFlex>
+    </Core.GdsCard>
   )
 }
