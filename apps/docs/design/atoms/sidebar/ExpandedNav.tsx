@@ -161,7 +161,13 @@ export default function ExpandedNav({
             MobileMenu && SettingsActions.toggle('UI.Panel.MobileMenu')
           }}
         >
-          {link.icon && <Icon name={link.icon} slot="lead" />}
+          {link.icon && (
+            <Icon
+              name={link.icon}
+              slot="lead"
+              solid={pathName === href ? true : false}
+            />
+          )}
           <span data-fade>{link.title}</span>
         </Link>
       )
