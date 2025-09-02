@@ -11,6 +11,9 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 GdsFilterChips.define()
 registerTranistionalStyles()
 
+/**
+ * @deprecated Please use the `gds-filter-chips` web component from green-core instead
+ */
 export const FilterChips = createComponent({
   tagName: getScopedTagName('gds-filter-chips'),
   elementClass: GdsFilterChips,

@@ -10,6 +10,9 @@ import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-st
 CoreSegmentedControl.define()
 registerTransitionalStyles()
 
+/**
+ * @deprecated - Use the `gds-segmented-control` web component from green-core instead.
+ */
 export const GdsSegementedControl = createComponent({
   tagName: getScopedTagName('gds-segmented-control'),
   elementClass: CoreSegmentedControl,
@@ -17,6 +20,9 @@ export const GdsSegementedControl = createComponent({
   react: React,
 })
 
+/**
+ * @deprecated - Use the `gds-segmented-control` web component from green-core instead.
+ */
 export const GdsSegment = createComponent({
   tagName: getScopedTagName('gds-segment'),
   elementClass: CoreSegment,
@@ -43,7 +49,7 @@ export interface SegmentProps {
   segMinWidth?: number
 }
 
-/** @deprecated - Use `GdsSegmentedControl` instead */
+/** @deprecated - Use the `gds-segmented-control` web component from green-core instead. */
 export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   onChange,
   className,
@@ -58,7 +64,7 @@ export const SegmentedControl: React.FC<SegmentedControlProps> = ({
   )
 }
 
-/** @deprecated - Use `GdsSegmented` instead */
+/** @deprecated - Use the `gds-segmented-control` web component from green-core instead. */
 export const Segment: React.FC<SegmentProps> = ({
   className,
   minWidth,
