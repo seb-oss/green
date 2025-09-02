@@ -9,7 +9,6 @@ import { _ } from '../../../hooks'
 import { useSet, useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 
-// import { useSet, useSettingsValue } from "@/settings"
 import './command.css'
 
 type FilterType = 'all' | 'component' | 'page' | 'template'
@@ -101,23 +100,6 @@ export default function Command() {
     return results
   }, [query, ContentActions, activeFilter])
 
-  // const handleClosePanel = (event: CustomEvent) => {
-  //   SettingsActions.setSettings((prev) => ({
-  //     ...prev,
-  //     UI: {
-  //       ...prev.UI,
-  //       Panel: {
-  //         ...prev.UI.Panel,
-  //         Command: false,
-  //       },
-  //     },
-  //   }))
-  // }
-
-  // const handleToggleCommand = () => {
-  //   SettingsActions.toggle('UI.Panel.Command')
-  // }
-
   const CLOSE_PANEL = () => {
     SET('UI.Panel.Command', false)
   }
@@ -131,7 +113,6 @@ export default function Command() {
     const numResults = searchResults.length
     if (numResults === 0) return
 
-    // Only handle navigation keys if we're within the dialog
     if (!dialogRef.current?.contains(e.target as Node)) return
 
     switch (e.key) {
@@ -183,7 +164,6 @@ export default function Command() {
       setSelectedIndex(0)
       setQuery('')
       setActiveFilter('all')
-      // return () => clearTimeout(timeoutId)
       return () => {
         document.removeEventListener('keydown', handleDialogKeyDown)
         clearTimeout(timeoutId)
