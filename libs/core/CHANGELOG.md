@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.1
+
+### Patch Changes
+
+- 04734c3: **Dropdown:** Fix small variant font-size and change to rounded counter badge
+
 ## 2.4.0
 
 ### Minor Changes
