@@ -269,37 +269,39 @@ export default function Studio({ page }: StudioProps) {
           {renderPageContent()}
         </Core.GdsDiv>
 
-        <Core.GdsFlex
-          width="100%"
-          align-items="center"
-          padding="xl"
-          position="sticky"
-          inset="auto 0px 40px 0px"
-        >
-          <Core.GdsFlex flex="1" align-items="center" gap="s">
-            <span></span>
+        {false && (
+          <Core.GdsFlex
+            width="100%"
+            align-items="center"
+            padding="xl"
+            position="sticky"
+            inset="auto 0px 40px 0px"
+          >
+            <Core.GdsFlex flex="1" align-items="center" gap="s">
+              <span></span>
+            </Core.GdsFlex>
+            <Core.GdsFlex align-items="center" gap="s">
+              <Core.GdsSegmentedControl
+                size="small"
+                value="edit"
+                width="max-content"
+              >
+                <Core.GdsSegment value="edit">
+                  <Core.GdsFlex align-items="center" gap="xs">
+                    <Core.IconPencilSign size="m" />
+                    Tokens
+                  </Core.GdsFlex>
+                </Core.GdsSegment>
+                <Core.GdsSegment>
+                  <Core.GdsFlex align-items="center" gap="xs">
+                    <Core.IconCursor size="m" />
+                    Playground
+                  </Core.GdsFlex>
+                </Core.GdsSegment>
+              </Core.GdsSegmentedControl>
+            </Core.GdsFlex>
           </Core.GdsFlex>
-          <Core.GdsFlex align-items="center" gap="s">
-            <Core.GdsSegmentedControl
-              size="small"
-              value="edit"
-              width="max-content"
-            >
-              <Core.GdsSegment value="edit">
-                <Core.GdsFlex align-items="center" gap="xs">
-                  <Core.IconPencilSign size="m" />
-                  Tokens
-                </Core.GdsFlex>
-              </Core.GdsSegment>
-              <Core.GdsSegment>
-                <Core.GdsFlex align-items="center" gap="xs">
-                  <Core.IconCursor size="m" />
-                  Playground
-                </Core.GdsFlex>
-              </Core.GdsSegment>
-            </Core.GdsSegmentedControl>
-          </Core.GdsFlex>
-        </Core.GdsFlex>
+        )}
       </Core.GdsFlex>
     </Core.GdsCard>
   )
