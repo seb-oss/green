@@ -10,6 +10,11 @@ import { Observable, Subscription } from 'rxjs'
 
 import { NggAccordionListItemComponent } from './accordion-list-item.component'
 
+/**
+ * @deprecated
+ * NggAccordion is deprecated in favor of GdsDetails found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-details--docs
+ */
 @Component({
   selector: 'ngg-accordion',
   templateUrl: './accordion.component.html',

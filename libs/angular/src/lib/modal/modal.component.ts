@@ -29,6 +29,9 @@ import { ModalType, Size } from '@sebgroup/extract'
 import { NggModalFooterDirective } from './modal-footer.directive'
 import { NggModalHeaderDirective } from './modal-header.directive'
 
+/**
+ * @deprecated use <gds-dialog> from green-core instead.
+ */
 @Component({
   selector: 'ngg-modal',
   styleUrls: ['./modal.component.scss'],
@@ -91,7 +94,7 @@ import { NggModalHeaderDirective } from './modal-header.directive'
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
   @Input() public header?: string
-  @Input() public closeText = "Close Modal"
+  @Input() public closeText = 'Close Modal'
   @Input() public confirmLabel?: string
   @Input() public dismissLabel?: string
   @Input() public size?: Size

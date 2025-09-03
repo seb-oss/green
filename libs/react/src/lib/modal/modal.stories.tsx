@@ -35,6 +35,9 @@ const Template: Story<ModalProps> = (props) => {
   )
 }
 
+/**
+ * **Note**: This version of Modal is deprecated! Please use the `gds-dialog` web component from green-core instead.
+ */
 export const ModalDefault: Story<ModalProps> = Template.bind({})
 
 ModalDefault.args = {

@@ -23,6 +23,9 @@ export interface ButtonProps
   testId?: string
 }
 
+/**
+ * @deprecated Please use the `gds-button` web component from green-core instead
+ */
 export const Button = forwardRef(
   (
     {
