@@ -1,5 +1,7 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
 
@@ -22,6 +24,10 @@ export default function Header({
   filter,
   extra,
 }: HeaderProps) {
+  const pathname = usePathname()
+  const segments = pathname.split('/')
+  const isMigration = segments[segments.length - 1] === 'migration'
+
   return (
     <Core.GdsFlex flex-direction="column" gap="l">
       <Core.GdsFlex flex-direction="column" gap="l">
@@ -40,7 +46,19 @@ export default function Header({
             <Core.IconBrandGreen slot="lead" size="m" />
             Studio
           </Link>
-          <Core.GdsText>{title}</Core.GdsText>
+          {isMigration ? (
+            <>
+              <Link component="link" href="/studio/icons">
+                <Core.IconShapes slot="lead" size="m" />
+                Icons
+              </Link>
+              <Core.GdsText>Migration</Core.GdsText>
+            </>
+          ) : (
+            <>
+              <Core.GdsText>{title}</Core.GdsText>
+            </>
+          )}
         </Core.GdsBreadcrumbs>
       </Core.GdsFlex>
       <Core.GdsDivider color="subtle-01" />

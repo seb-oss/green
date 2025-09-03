@@ -9,7 +9,7 @@ import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
 import { Link } from '../../../atoms/link/link'
 import * as Part from '../../parts'
-import Migration from './icons.migration'
+import Deprecated from './deprecated/deprecated'
 import IconDetail from './icons.sub'
 
 import './icons.css'
@@ -69,13 +69,19 @@ export default function Icons({ selected }: { selected?: string }) {
     router.push(`/studio/icons/${name}`)
   }
 
+  const isMigrationPage = selected === 'migration'
+
   if (!isLoaded || !component?.icons) return null
 
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
       <Part.Header
-        title="Icons"
-        description="icons description"
+        title={isMigrationPage ? 'Migration' : 'Icons'}
+        description={
+          isMigrationPage
+            ? 'Complete mapping of FontAwesome icons to their Green Design System equivalent'
+            : 'Icons description'
+        }
         count={totalIcons}
         search={
           <Core.GdsInput
@@ -124,59 +130,65 @@ export default function Icons({ selected }: { selected?: string }) {
       />
 
       <Core.GdsFlex gap="4xl" align-items="flex-start" width="100%">
-        {iconList.length > 0 ? (
-          <Core.GdsGrid
-            columns={selected ? '4' : '6'}
-            gap="l"
-            height="max-content"
-          >
-            {iconList.map(([name, icon]) => (
+        {isMigrationPage ? (
+          <Deprecated />
+        ) : (
+          <>
+            {iconList.length > 0 ? (
+              <Core.GdsGrid
+                columns={selected ? '4' : '6'}
+                gap="l"
+                height="max-content"
+              >
+                {iconList.map(([name, icon]) => (
+                  <Core.GdsCard
+                    key={name}
+                    padding="m"
+                    min-height="200px"
+                    justify-content="center"
+                    align-items="center"
+                    variant="secondary"
+                    className="icon-card"
+                    background={selected === icon.id ? 'neutral-01' : 'none'}
+                    border-radius="m"
+                    onClick={() => handleIconClick(name)}
+                    tabIndex={0}
+                  >
+                    <Core.GdsFlex
+                      justify-content="center"
+                      align-items="center"
+                      height="48px"
+                      color="neutral-01"
+                    >
+                      <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
+                    </Core.GdsFlex>
+                    <Core.GdsText
+                      color="neutral-02"
+                      font="detail-book-xs"
+                      text-align="center"
+                    >
+                      {icon.displayName}
+                    </Core.GdsText>
+                  </Core.GdsCard>
+                ))}
+              </Core.GdsGrid>
+            ) : (
               <Core.GdsCard
-                key={name}
-                padding="m"
-                min-height="200px"
                 justify-content="center"
                 align-items="center"
-                variant="secondary"
-                className="icon-card"
-                background={selected === icon.id ? 'neutral-01' : 'none'}
-                border-radius="m"
-                onClick={() => handleIconClick(name)}
-                tabIndex={0}
+                height="40vh"
+                padding="2xl"
+                flex="1"
               >
-                <Core.GdsFlex
-                  justify-content="center"
-                  align-items="center"
-                  height="48px"
-                  color="neutral-01"
-                >
-                  <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
-                </Core.GdsFlex>
-                <Core.GdsText
-                  color="neutral-02"
-                  font="detail-book-xs"
-                  text-align="center"
-                >
-                  {icon.displayName}
+                <Core.IconMagnifyingGlass size="xl" />
+                <Core.GdsText color="subtle-02">
+                  No icons found matching your search
                 </Core.GdsText>
               </Core.GdsCard>
-            ))}
-          </Core.GdsGrid>
-        ) : (
-          <Core.GdsCard
-            justify-content="center"
-            align-items="center"
-            height="40vh"
-            padding="2xl"
-            flex="1"
-          >
-            <Core.IconMagnifyingGlass size="xl" />
-            <Core.GdsText color="subtle-02">
-              No icons found matching your search
-            </Core.GdsText>
-          </Core.GdsCard>
+            )}
+            {selected && <IconDetail ID={selected} />}
+          </>
         )}
-        {selected && <IconDetail ID={selected} />}
       </Core.GdsFlex>
     </Core.GdsFlex>
   )

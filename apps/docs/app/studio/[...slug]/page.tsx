@@ -26,18 +26,20 @@ export async function generateStaticParams() {
     'compose',
   ]
 
-  // Generate base tool paths
   const toolPaths = validTools.map((tool) => ({
     slug: [tool],
   }))
 
-  // Generate icon detail paths
   const iconPaths = Object.keys(icons).map((iconId) => ({
     slug: ['icons', iconId],
   }))
 
+  const migrationPath = {
+    slug: ['icons', 'migration'],
+  }
+
   // Combine all paths
-  return [...toolPaths, ...iconPaths]
+  return [...toolPaths, ...iconPaths, migrationPath]
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

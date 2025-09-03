@@ -104,7 +104,7 @@ function formatGdsIconName(name: string): string {
       .join('')
   )
 }
-export function DeprecatedIcons() {
+export default function DeprecatedIcons() {
   const [query, setQuery] = useState('')
 
   const filteredIcons = useMemo(() => {
