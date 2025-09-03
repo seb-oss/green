@@ -124,6 +124,7 @@ export default function Icons({ selected }: { selected?: string }) {
                 align-items="center"
                 variant="secondary"
                 className="icon-card"
+                background={selected === icon.id ? 'neutral-01' : 'none'}
                 border-radius="m"
                 onClick={() => handleIconClick(name)}
                 tabIndex={0}

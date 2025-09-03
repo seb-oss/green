@@ -100,7 +100,7 @@ export default function IconDetail({ ID }: { ID: string }) {
       )}
 
       {/* Categories */}
-      <Core.GdsFlex flex-direction="column" gap="m">
+      <Core.GdsFlex flex-direction="column" gap="xs">
         <Core.GdsText font="heading-s">Categories</Core.GdsText>
         <Core.GdsFlex gap="s" flex-wrap="wrap">
           {iconData.meta.categories.map((category) => (
@@ -112,13 +112,13 @@ export default function IconDetail({ ID }: { ID: string }) {
       </Core.GdsFlex>
 
       {/* Tags */}
-      <Core.GdsFlex flex-direction="column" gap="m">
+      <Core.GdsFlex flex-direction="column" gap="xs">
         <Core.GdsText font="heading-s">Tags</Core.GdsText>
-        <Core.GdsFlex gap="s" flex-wrap="wrap">
+        <Core.GdsFlex gap="xs" flex-wrap="wrap">
           {iconData.meta.tags[0].split(',').map((tag) => (
-            <Core.GdsText key={tag} color="subtle-02">
+            <Core.GdsBadge key={tag} color="subtle-02">
               {tag.trim()}
-            </Core.GdsText>
+            </Core.GdsBadge>
           ))}
         </Core.GdsFlex>
       </Core.GdsFlex>
