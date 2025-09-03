@@ -2,11 +2,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
-import { Link } from '../../../atoms/link/link'
 import IconDetail from './icons.sub'
 
 import './icons.css'
@@ -15,6 +15,7 @@ export default function Icons({ selected }: { selected?: string }) {
   const { isLoaded, actions } = useContent()
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const router = useRouter()
   const component = actions.getComponent('icon')
 
   const { categories, iconList, totalIcons } = useMemo(() => {
@@ -61,6 +62,10 @@ export default function Icons({ selected }: { selected?: string }) {
     return name.replace(/\s+/g, '')
   }
 
+  const handleIconClick = (name: string) => {
+    router.push(`/studio/icons/${name}`)
+  }
+
   if (!isLoaded || !component?.icons) return null
 
   return (
@@ -105,7 +110,11 @@ export default function Icons({ selected }: { selected?: string }) {
 
       <Core.GdsFlex gap="4xl" align-items="flex-start" width="100%">
         {iconList.length > 0 ? (
-          <Core.GdsGrid columns="4" gap="l" height="max-content">
+          <Core.GdsGrid
+            columns={selected ? '4' : '6'}
+            gap="l"
+            height="max-content"
+          >
             {iconList.map(([name, icon]) => (
               <Core.GdsCard
                 key={name}
@@ -115,6 +124,8 @@ export default function Icons({ selected }: { selected?: string }) {
                 align-items="center"
                 variant="secondary"
                 border-radius="m"
+                onClick={() => handleIconClick(name)}
+                tabIndex={0}
               >
                 <Core.GdsFlex
                   justify-content="center"
