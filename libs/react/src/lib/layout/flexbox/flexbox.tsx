@@ -18,6 +18,9 @@ export interface FlexboxProps extends HTMLProps<HTMLDivElement> {
   className?: string
 }
 
+/**
+ * @deprecated Please use the `gds-flex` web component from green-core instead
+ */
 export const Flexbox = ({
   alignContent,
   alignItems,

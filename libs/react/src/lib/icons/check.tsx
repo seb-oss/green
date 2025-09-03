@@ -6,7 +6,7 @@ import { IconProps } from '../../types/props'
 /**
  *
  * @deprecated
- * This component is deprecated. Use `Check` instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use `gds-icon-check` instead from `@sebgroup/green-core`.
  */
 export const Check = ({ focusable = false, title }: IconProps) => {
   let id
