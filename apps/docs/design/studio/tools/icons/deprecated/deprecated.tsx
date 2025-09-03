@@ -7,6 +7,10 @@ import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../../hooks'
 import { Variable } from '../../../parts'
 
+interface DeprecatedIconsProps {
+  searchQuery?: string
+}
+
 interface IconMapping {
   old: string
   new: string
@@ -106,17 +110,16 @@ function formatGdsIconName(name: string): string {
   )
 }
 
-interface DeprecatedIconsProps {
-  searchQuery: string
-}
-
-export default function DeprecatedIcons({ searchQuery }: DeprecatedIconsProps) {
+export default function DeprecatedIcons({
+  searchQuery = '',
+}: DeprecatedIconsProps) {
   const filteredIcons = useMemo(() => {
-    if (!searchQuery.trim()) return iconMappings
+    const query = searchQuery || '' // Extra safety
+    if (!query.trim()) return iconMappings
 
     return iconMappings.filter((icon) => {
-      const oldNameScore = calculateScore(icon.old, searchQuery)
-      const newNameScore = calculateScore(icon.new, searchQuery)
+      const oldNameScore = calculateScore(icon.old, query)
+      const newNameScore = calculateScore(icon.new, query)
       return oldNameScore > 0 || newNameScore > 0
     })
   }, [searchQuery])
@@ -198,7 +201,9 @@ export default function DeprecatedIcons({ searchQuery }: DeprecatedIconsProps) {
         >
           <Core.IconMagnifyingGlass size="xl" />
           <Core.GdsText color="subtle-02">
-            No icons found matching for: {searchQuery}
+            {searchQuery
+              ? `No migration matches found for "${searchQuery}"`
+              : 'No icons found'}
           </Core.GdsText>
         </Core.GdsCard>
       )}

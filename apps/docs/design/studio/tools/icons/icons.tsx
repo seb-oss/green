@@ -21,6 +21,7 @@ export default function Icons({ selected }: { selected?: string }) {
   const router = useRouter()
   const component = actions.getComponent('icon')
   const [migrationSearch, setMigrationSearch] = useState('')
+  const isMigrationPage = selected === 'migration'
 
   const { categories, iconList, totalIcons } = useMemo(() => {
     if (!component?.icons)
@@ -70,8 +71,6 @@ export default function Icons({ selected }: { selected?: string }) {
     router.push(`/studio/icons/${name}`)
   }
 
-  const isMigrationPage = selected === 'migration'
-
   if (!isLoaded || !component?.icons) return null
 
   return (
@@ -83,18 +82,17 @@ export default function Icons({ selected }: { selected?: string }) {
             ? 'Complete mapping of FontAwesome icons to their Green Design System equivalent'
             : 'Icons description'
         }
-        count={totalIcons}
+        count={!isMigrationPage ? totalIcons : undefined}
         search={
           <Core.GdsInput
             plain
             width="100%"
             clearable
             value={isMigrationPage ? migrationSearch : search}
-            onInput={(e) =>
-              isMigrationPage
-                ? setMigrationSearch((e.target as HTMLInputElement).value)
-                : setSearch((e.target as HTMLInputElement).value)
-            }
+            onInput={(e) => {
+              const value = (e.target as HTMLInputElement).value
+              isMigrationPage ? setMigrationSearch(value) : setSearch(value)
+            }}
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
@@ -144,14 +142,16 @@ export default function Icons({ selected }: { selected?: string }) {
             {iconList.length > 0 ? (
               <Core.GdsGrid
                 columns={selected ? '4' : '6'}
+                // auto-columns="200"
                 gap="l"
                 height="max-content"
+                width="100%"
               >
                 {iconList.map(([name, icon]) => (
                   <Core.GdsCard
                     key={name}
                     padding="m"
-                    min-height="200px"
+                    height="auto"
                     justify-content="center"
                     align-items="center"
                     variant="secondary"
@@ -160,6 +160,7 @@ export default function Icons({ selected }: { selected?: string }) {
                     border-radius="m"
                     onClick={() => handleIconClick(name)}
                     tabIndex={0}
+                    width="100%"
                   >
                     <Core.GdsFlex
                       justify-content="center"
