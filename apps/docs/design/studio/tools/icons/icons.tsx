@@ -107,9 +107,9 @@ export default function Icons() {
         </Core.GdsFlex>
       </Core.GdsFlex>
 
-      <Core.GdsFlex gap="4xl" align-items="flex-start" flex="1">
+      <Core.GdsFlex gap="4xl" align-items="flex-start" width="100%">
         {iconList.length > 0 ? (
-          <Core.GdsGrid columns="4" gap="l">
+          <Core.GdsGrid columns="4" gap="l" height="max-content">
             {iconList.map(([name, icon]) => (
               <Core.GdsCard
                 key={name}
@@ -119,7 +119,6 @@ export default function Icons() {
                 align-items="center"
                 variant="secondary"
                 border-radius="m"
-                className="icon-card"
               >
                 <Core.GdsFlex
                   justify-content="center"

@@ -62,6 +62,8 @@ export default function IconDetail({ ID }: { ID: string }) {
       gap="xl"
       padding="0"
       min-width="400px"
+      width="400px"
+      max-width="400px"
     >
       {/* Preview Section */}
       <Core.GdsCard
@@ -82,18 +84,20 @@ export default function IconDetail({ ID }: { ID: string }) {
       </Core.GdsCard>
 
       {/* Variants */}
-      <Core.GdsFlex flex-direction="column" gap="m">
-        <Core.GdsText font="heading-s">Variants</Core.GdsText>
-        <Core.GdsSegmentedControl
-          value={isSolid ? 'solid' : 'regular'}
-          onchange={(e: Event) =>
-            setIsSolid((e.target as HTMLSelectElement).value === 'solid')
-          }
-        >
-          <Core.GdsSegment value="regular">Regular</Core.GdsSegment>
-          <Core.GdsSegment value="solid">Solid</Core.GdsSegment>
-        </Core.GdsSegmentedControl>
-      </Core.GdsFlex>
+      {false && (
+        <Core.GdsFlex flex-direction="column" gap="m">
+          <Core.GdsText font="heading-s">Variants</Core.GdsText>
+          <Core.GdsSegmentedControl
+            value={isSolid ? 'solid' : 'regular'}
+            onchange={(e: Event) =>
+              setIsSolid((e.target as HTMLSelectElement).value === 'solid')
+            }
+          >
+            <Core.GdsSegment value="regular">Regular</Core.GdsSegment>
+            <Core.GdsSegment value="solid">Solid</Core.GdsSegment>
+          </Core.GdsSegmentedControl>
+        </Core.GdsFlex>
+      )}
 
       {/* Categories */}
       <Core.GdsFlex flex-direction="column" gap="m">
