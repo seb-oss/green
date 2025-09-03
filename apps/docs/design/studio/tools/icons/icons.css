@@ -1,0 +1,10 @@
+.icon-card {
+  --staggering: calc((sibling-index() - 1) * 14ms);
+  transition: all 240ms linear var(--staggering);
+  cursor: pointer;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}

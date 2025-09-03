@@ -7,6 +7,8 @@ import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
 
+import './icons.css'
+
 export default function Icons() {
   const { isLoaded, actions } = useContent()
   const [search, setSearch] = useState('')
@@ -14,8 +16,11 @@ export default function Icons() {
 
   const component = actions.getComponent('icon')
 
-  const { categories, iconList } = useMemo(() => {
-    if (!component?.icons) return { categories: [], iconList: [] }
+  const { categories, iconList, totalIcons } = useMemo(() => {
+    if (!component?.icons)
+      return { categories: [], iconList: [], totalIcons: 0 }
+
+    const totalIcons = Object.keys(component.icons).length
 
     // Get unique categories
     const cats = Array.from(
@@ -50,6 +55,7 @@ export default function Icons() {
       iconList: icons.sort((a, b) =>
         a[1].displayName.localeCompare(b[1].displayName),
       ),
+      totalIcons,
     }
   }, [component?.icons, search, selectedCategory])
 
@@ -60,9 +66,14 @@ export default function Icons() {
   if (!isLoaded || !component?.icons) return null
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
+    <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
       <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsText tag="h1">Icons</Core.GdsText>
+        <Core.GdsFlex gap="s" align-items="center">
+          <Core.GdsText tag="h1">Icons</Core.GdsText>
+          <Core.GdsText tag="h1" color="positive-03">
+            {totalIcons}
+          </Core.GdsText>
+        </Core.GdsFlex>
         <Core.GdsFlex width="max-content" gap="s">
           <Core.GdsInput
             plain
@@ -89,35 +100,55 @@ export default function Icons() {
               ))}
             </Core.GdsDropdown>
           </Core.GdsFlex>
+
+          <div>Migration, solid, size</div>
         </Core.GdsFlex>
       </Core.GdsFlex>
 
-      <Core.GdsGrid columns="6" gap="l">
-        {iconList.map(([name, icon]) => (
-          <Core.GdsCard
-            key={name}
-            padding="m"
-            min-height="200px"
-            justify-content="center"
-            align-items="center"
-          >
-            <Core.GdsFlex
+      {iconList.length > 0 ? (
+        <Core.GdsGrid columns="6" gap="l">
+          {iconList.map(([name, icon]) => (
+            <Core.GdsCard
+              key={name}
+              padding="m"
+              min-height="200px"
               justify-content="center"
               align-items="center"
-              height="48px"
+              variant="secondary"
+              border-radius="m"
+              className="icon-card"
             >
-              <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
-            </Core.GdsFlex>
-            <Core.GdsText
-              color="neutral-02"
-              font="detail-book-s"
-              text-align="center"
-            >
-              {icon.displayName}
-            </Core.GdsText>
-          </Core.GdsCard>
-        ))}
-      </Core.GdsGrid>
+              <Core.GdsFlex
+                justify-content="center"
+                align-items="center"
+                height="48px"
+                color="neutral-01"
+              >
+                <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
+              </Core.GdsFlex>
+              <Core.GdsText
+                color="neutral-02"
+                font="detail-book-xs"
+                text-align="center"
+              >
+                {icon.displayName}
+              </Core.GdsText>
+            </Core.GdsCard>
+          ))}
+        </Core.GdsGrid>
+      ) : (
+        <Core.GdsCard
+          justify-content="center"
+          align-items="center"
+          height="40vh"
+          padding="2xl"
+        >
+          <Core.IconMagnifyingGlass size="xl" />
+          <Core.GdsText color="subtle-02">
+            No icons found matching your search
+          </Core.GdsText>
+        </Core.GdsCard>
+      )}
     </Core.GdsFlex>
   )
 }

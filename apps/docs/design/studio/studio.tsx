@@ -22,10 +22,10 @@ export default function Studio({ page }: StudioProps) {
 
   const navigation: NavItem[] = [
     {
-      id: 'color',
-      title: 'Color',
+      id: 'colors',
+      title: 'Colors',
       icon: <Core.IconBrush slot="lead" />,
-      content: <Tool.Color />,
+      content: <Tool.Colors />,
       tokens: colorTokens.map((group) => ({
         title: group.title,
         tokens: group.hasSubGroups

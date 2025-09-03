@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 
 const validTools = [
-  'color',
+  'colors',
   'typography',
   'spacing',
   'icons',
