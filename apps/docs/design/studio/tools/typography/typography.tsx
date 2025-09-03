@@ -123,24 +123,7 @@ export default function Typography() {
                         </Core.GdsText>
                       )}
                     </Core.GdsFlex>
-
-                    <Core.GdsFlex
-                      flex-direction="row"
-                      align-items="center"
-                      padding="2xs 2xs 2xs m"
-                      gap="s"
-                    >
-                      <Core.GdsText color="neutral-01">
-                        {token.name}
-                      </Core.GdsText>
-                      <Core.GdsButton
-                        size="xs"
-                        rank="secondary"
-                        onClick={() => handleCopyClick(token)}
-                      >
-                        <Core.IconCopy size="s" />
-                      </Core.GdsButton>
-                    </Core.GdsFlex>
+                    <Part.Variable name={token.name} />
                   </Core.GdsFlex>
                 </Core.GdsFlex>
               ))}
