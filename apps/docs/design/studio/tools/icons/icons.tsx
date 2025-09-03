@@ -7,12 +7,12 @@ import { useRouter } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
+import { Link } from '../../../atoms/link/link'
 import * as Part from '../../parts'
+import Migration from './icons.migration'
 import IconDetail from './icons.sub'
 
 import './icons.css'
-
-import Migration from './icons.migration'
 
 export default function Icons({ selected }: { selected?: string }) {
   const { isLoaded, actions } = useContent()
@@ -105,17 +105,21 @@ export default function Icons({ selected }: { selected?: string }) {
           </Core.GdsDropdown>
         }
         extra={
-          <Core.GdsDialog placement="center">
-            <Core.GdsFlex align-items="center" gap="s" slot="trigger">
-              <Core.GdsText color="warning-01">
-                Font awesome migration
-              </Core.GdsText>
-              <Core.GdsButton rank="secondary" variant="warning" size="small">
-                Instruction
-              </Core.GdsButton>
-            </Core.GdsFlex>
-            <Migration />
-          </Core.GdsDialog>
+          <Core.GdsFlex align-items="center" gap="s">
+            <Core.GdsText color="warning-01">
+              Font awesome migration
+            </Core.GdsText>
+            <Link
+              component="button"
+              href="/studio/icons/migration"
+              rank="secondary"
+              variant="warning"
+              size="small"
+            >
+              Instruction
+              <Core.IconCircleQuestionmark slot="trail" />
+            </Link>
+          </Core.GdsFlex>
         }
       />
 
