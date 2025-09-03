@@ -95,7 +95,6 @@ export default function Studio({ page, icon }: StudioProps) {
 
   const renderPageContent = () => {
     const currentPage = navigation.find((nav) => nav.id === activePage)
-    // console.log('currentPage:', currentPage?.id)
     return currentPage?.content
   }
 

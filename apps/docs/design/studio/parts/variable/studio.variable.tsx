@@ -28,7 +28,7 @@ export default function Variable({ name }: { name?: string }) {
       flex-direction="row"
       justify-content="space-between"
       align-items="center"
-      padding="xs xs xs m"
+      padding="2xs 2xs 2xs m"
       height="max-content"
       variant={copied ? 'positive' : 'secondary'}
     >

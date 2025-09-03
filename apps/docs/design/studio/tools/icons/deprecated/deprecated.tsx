@@ -130,34 +130,28 @@ export default function DeprecatedIcons({ searchQuery }: DeprecatedIconsProps) {
         <Core.GdsGrid columns="4" gap="xl">
           <Core.GdsText>Old</Core.GdsText>
           <Core.GdsText>New</Core.GdsText>
-          <Core.GdsFlex>Copy</Core.GdsFlex>
+          <Core.GdsFlex></Core.GdsFlex>
           <Core.GdsFlex></Core.GdsFlex>
         </Core.GdsGrid>
       </Core.GdsCard>
 
-      <Core.GdsFlex>
-        {filteredIcons.length > 0 ? (
-          <Core.GdsFlex
-            gap="l"
-            align-items="center"
-            flex-direction="column"
-            width="100%"
-          >
-            {filteredIcons.map((icon) => (
-              <Core.GdsGrid
-                columns="4"
-                key={icon.old}
-                gap="xl"
-                min-width="100%"
-              >
+      {filteredIcons.length > 0 ? (
+        <Core.GdsFlex align-items="center" flex-direction="column" width="100%">
+          {filteredIcons.map((icon) => (
+            <Core.GdsFlex
+              padding="m l"
+              border-width="0 0 4xs 0"
+              border-color="subtle-01"
+              key={icon.old}
+              width="100%"
+            >
+              <Core.GdsGrid columns="4" gap="l" width="100%">
                 <Core.GdsFlex
                   align-items="center"
                   gap="s"
                   flex="1"
                   flex-direction="row"
-                  padding="s"
                   border-radius="m"
-                  width="280px"
                 >
                   <Core.GdsCard
                     variant="negative"
@@ -188,26 +182,26 @@ export default function DeprecatedIcons({ searchQuery }: DeprecatedIconsProps) {
                   </Core.GdsCard>
                   <Core.GdsText>{icon.new}</Core.GdsText>
                 </Core.GdsFlex>
+                <div>{``}</div>
                 <Variable name={icon.new} />
-                <div></div>
               </Core.GdsGrid>
-            ))}
-          </Core.GdsFlex>
-        ) : (
-          <Core.GdsCard
-            justify-content="center"
-            align-items="center"
-            height="40vh"
-            padding="2xl"
-            width="100%"
-          >
-            <Core.IconMagnifyingGlass size="xl" />
-            <Core.GdsText color="subtle-02">
-              No icons found matching for: {searchQuery}
-            </Core.GdsText>
-          </Core.GdsCard>
-        )}
-      </Core.GdsFlex>
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
+      ) : (
+        <Core.GdsCard
+          justify-content="center"
+          align-items="center"
+          height="40vh"
+          padding="2xl"
+          width="100%"
+        >
+          <Core.IconMagnifyingGlass size="xl" />
+          <Core.GdsText color="subtle-02">
+            No icons found matching for: {searchQuery}
+          </Core.GdsText>
+        </Core.GdsCard>
+      )}
     </Core.GdsFlex>
   )
 }

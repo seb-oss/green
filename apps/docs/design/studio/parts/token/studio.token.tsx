@@ -31,7 +31,7 @@ export default function StudioToken({
         {preview && preview}
         {light && <Core.GdsText color="neutral-02">{light}</Core.GdsText>}
         {dark && <Core.GdsText color="neutral-02">{dark}</Core.GdsText>}
-        {name && <Core.GdsText>{name}</Core.GdsText>}
+        {name}
       </Core.GdsGrid>
     </Core.GdsFlex>
   )
