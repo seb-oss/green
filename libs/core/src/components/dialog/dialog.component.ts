@@ -1,4 +1,5 @@
 import { localized, msg } from '@lit/localize'
+import { nothing } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -155,7 +156,7 @@ export class GdsDialog extends withSizeXProps(
                 <gds-div
                   id="content"
                   flex="1"
-                  overflow=${ifDefined(this.scrollable) ? 'auto' : ''}
+                  overflow=${ifDefined(this.scrollable) ? 'auto' : nothing}
                 >
                   <slot></slot>
                 </gds-div>
