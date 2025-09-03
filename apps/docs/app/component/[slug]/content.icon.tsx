@@ -5,7 +5,7 @@ import React, { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
-import { DeprecatedIcons } from '../../../design/atoms/deprecated/deprecated'
+import { DeprecatedIcons } from '../../../design/studio/tools/icons/deprecated/deprecated'
 import { Icon } from '../../../hooks'
 
 import type {

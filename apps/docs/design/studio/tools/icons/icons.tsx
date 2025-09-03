@@ -12,6 +12,8 @@ import IconDetail from './icons.sub'
 
 import './icons.css'
 
+import Migration from './icons.migration'
+
 export default function Icons({ selected }: { selected?: string }) {
   const { isLoaded, actions } = useContent()
   const [search, setSearch] = useState('')
@@ -101,6 +103,19 @@ export default function Icons({ selected }: { selected?: string }) {
               </Core.GdsOption>
             ))}
           </Core.GdsDropdown>
+        }
+        extra={
+          <Core.GdsDialog placement="center">
+            <Core.GdsFlex align-items="center" gap="s" slot="trigger">
+              <Core.GdsText color="warning-01">
+                Font awesome migration
+              </Core.GdsText>
+              <Core.GdsButton rank="secondary" variant="warning" size="small">
+                Instruction
+              </Core.GdsButton>
+            </Core.GdsFlex>
+            <Migration />
+          </Core.GdsDialog>
         }
       />
 

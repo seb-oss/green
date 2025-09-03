@@ -4,7 +4,7 @@
 import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Icon } from '../../../hooks'
+import { Icon } from '../../../../../hooks'
 
 interface IconMapping {
   old: string
@@ -178,7 +178,7 @@ export function DeprecatedIcons() {
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       />
 
-      <Core.GdsCard variant="secondary">
+      <Core.GdsFlex overflow="auto" flex-direction="column" max-height="100%">
         {filteredIcons.length > 0 ? (
           <Core.GdsFlex gap="l" align-items="center" flex-direction="column">
             {filteredIcons.map((icon) => (
@@ -227,7 +227,7 @@ export function DeprecatedIcons() {
             No icons found matching <strong>{query}</strong>
           </Core.GdsText>
         )}
-      </Core.GdsCard>
+      </Core.GdsFlex>
     </Core.GdsFlex>
   )
 }

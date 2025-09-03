@@ -10,6 +10,7 @@ interface HeaderProps {
   count?: number
   search?: React.ReactNode
   filter?: React.ReactNode
+  extra?: React.ReactNode
 }
 
 export default function Header({
@@ -19,6 +20,7 @@ export default function Header({
   count,
   search,
   filter,
+  extra,
 }: HeaderProps) {
   return (
     <Core.GdsFlex flex-direction="column" gap="l">
@@ -42,11 +44,20 @@ export default function Header({
         </Core.GdsBreadcrumbs>
       </Core.GdsFlex>
       <Core.GdsDivider color="subtle-01" />
-      <Core.GdsFlex align-items="center" justify-content="space-between">
+      <Core.GdsFlex
+        align-items="center"
+        justify-content="space-between"
+        gap="xl"
+      >
         <Core.GdsFlex align-items="center" gap="s">
           <Core.GdsFlex width="400px">{search}</Core.GdsFlex>
           <Core.GdsFlex width="200px">{filter}</Core.GdsFlex>
         </Core.GdsFlex>
+        {extra && (
+          <Core.GdsDiv width="max-content" height="max-content">
+            {extra}
+          </Core.GdsDiv>
+        )}
         {false && count !== undefined && (
           <Core.GdsText color="positive-03">
             {count} {title.toLowerCase()}
