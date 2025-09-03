@@ -6,6 +6,7 @@ export type Page =
   | 'spacing'
   | 'radius'
   | 'shadows'
+  | 'viewport'
   | 'icons'
   | 'grid'
   | 'compose'
@@ -32,4 +33,28 @@ export interface Token {
 export interface SpaceToken {
   $type: string
   $value: number
+}
+
+export interface ShadowValue {
+  spread: string
+  offsetX: string
+  blur: string
+  offsetY: string
+  color: string
+}
+
+export interface ShadowToken {
+  $value: ShadowValue
+  $type?: string
+}
+
+export interface RadiusToken {
+  $value: string | number
+  $type?: string
+}
+
+export interface TokenBase {
+  name: string
+  value: string | number | ShadowValue
+  type?: string
 }

@@ -21,6 +21,7 @@ export async function generateStaticParams() {
     'spacing',
     'radius',
     'shadows',
+    'viewport',
     'icons',
     'grid',
     'compose',

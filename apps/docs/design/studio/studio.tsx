@@ -79,6 +79,12 @@ export default function Studio({ page, icon }: StudioProps) {
       icon: <Core.IconSolar slot="lead" solid={page === 'shadows'} />,
       content: <Tool.Shadows />,
     },
+    {
+      id: 'viewport',
+      title: 'Viewport',
+      icon: <Core.IconDevices slot="lead" solid={page === 'viewport'} />,
+      content: <Tool.Viewport />,
+    },
     // {
     //   id: 'grid',
     //   title: 'Grid',
