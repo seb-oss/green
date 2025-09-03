@@ -64,7 +64,7 @@ export default function Spacing() {
   }
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
+    <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
       <Part.Header
         title="Spacing"
         description="spacing description"

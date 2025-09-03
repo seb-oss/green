@@ -20,6 +20,7 @@ export default function Icons({ selected }: { selected?: string }) {
   const [selectedCategory, setSelectedCategory] = useState('')
   const router = useRouter()
   const component = actions.getComponent('icon')
+  const [migrationSearch, setMigrationSearch] = useState('')
 
   const { categories, iconList, totalIcons } = useMemo(() => {
     if (!component?.icons)
@@ -88,27 +89,33 @@ export default function Icons({ selected }: { selected?: string }) {
             plain
             width="100%"
             clearable
-            value={search}
-            onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
+            value={isMigrationPage ? migrationSearch : search}
+            onInput={(e) =>
+              isMigrationPage
+                ? setMigrationSearch((e.target as HTMLInputElement).value)
+                : setSearch((e.target as HTMLInputElement).value)
+            }
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
         }
         filter={
-          <Core.GdsDropdown
-            plain
-            value={selectedCategory}
-            oninput={(e: Event) =>
-              setSelectedCategory((e.target as HTMLSelectElement).value)
-            }
-          >
-            <Core.GdsOption value="">All Categories</Core.GdsOption>
-            {categories.map((category) => (
-              <Core.GdsOption key={category} value={category}>
-                {category}
-              </Core.GdsOption>
-            ))}
-          </Core.GdsDropdown>
+          !isMigrationPage && (
+            <Core.GdsDropdown
+              plain
+              value={selectedCategory}
+              oninput={(e: Event) =>
+                setSelectedCategory((e.target as HTMLSelectElement).value)
+              }
+            >
+              <Core.GdsOption value="">All Categories</Core.GdsOption>
+              {categories.map((category) => (
+                <Core.GdsOption key={category} value={category}>
+                  {category}
+                </Core.GdsOption>
+              ))}
+            </Core.GdsDropdown>
+          )
         }
         extra={
           <Core.GdsFlex align-items="center" gap="s">
@@ -131,7 +138,7 @@ export default function Icons({ selected }: { selected?: string }) {
 
       <Core.GdsFlex gap="4xl" align-items="flex-start" width="100%">
         {isMigrationPage ? (
-          <Deprecated />
+          <Deprecated searchQuery={migrationSearch} />
         ) : (
           <>
             {iconList.length > 0 ? (

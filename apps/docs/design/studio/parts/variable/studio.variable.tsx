@@ -29,6 +29,7 @@ export default function Variable({ name }: { name?: string }) {
       justify-content="space-between"
       align-items="center"
       padding="xs xs xs m"
+      height="max-content"
       variant={copied ? 'positive' : 'secondary'}
     >
       <Core.GdsText>{copied ? 'Copied!' : name}</Core.GdsText>

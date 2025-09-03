@@ -43,7 +43,7 @@ export default function Typography() {
   }
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
+    <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
       <Part.Header
         title="Typography"
         description="typography description"
