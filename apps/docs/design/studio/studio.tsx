@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -268,46 +268,38 @@ export default function Studio({ page }: StudioProps) {
         <Core.GdsDiv flex="1" width="100%" height="100%" overflow="auto">
           {renderPageContent()}
         </Core.GdsDiv>
-        {false && (
-          <Core.GdsFlex width="100%" align-items="center" padding="s">
-            <Core.GdsFlex flex="1" align-items="center" gap="s">
-              Toolbar
-            </Core.GdsFlex>
-            <Core.GdsFlex align-items="center" gap="s">
-              <Core.GdsButton rank="tertiary" size="small">
-                <Core.IconCodeBrackets />
-              </Core.GdsButton>
-              <Core.GdsButton rank="tertiary" size="small">
-                <Core.IconFullscreen />
-              </Core.GdsButton>
-              {/* <Core.GdsButton
-                rank="tertiary"
-                size="small"
-                onClick={handleThemeToggle}
-              >
-                {theme === 'light' ? <Core.IconMoon /> : <Core.IconSun />}
-              </Core.GdsButton> */}
-              <Core.GdsSegmentedControl
-                size="small"
-                value="edit"
-                width="max-content"
-              >
-                <Core.GdsSegment value="edit">
-                  <Core.GdsFlex align-items="center" gap="xs">
-                    <Core.IconPencilSign size="m" />
-                    Edit
-                  </Core.GdsFlex>
-                </Core.GdsSegment>
-                <Core.GdsSegment>
-                  <Core.GdsFlex align-items="center" gap="xs">
-                    <Core.IconEyeOpen size="m" />
-                    Preview
-                  </Core.GdsFlex>
-                </Core.GdsSegment>
-              </Core.GdsSegmentedControl>
-            </Core.GdsFlex>
+
+        <Core.GdsFlex
+          width="100%"
+          align-items="center"
+          padding="xl"
+          position="sticky"
+          inset="auto 0px 40px 0px"
+        >
+          <Core.GdsFlex flex="1" align-items="center" gap="s">
+            <span></span>
           </Core.GdsFlex>
-        )}
+          <Core.GdsFlex align-items="center" gap="s">
+            <Core.GdsSegmentedControl
+              size="small"
+              value="edit"
+              width="max-content"
+            >
+              <Core.GdsSegment value="edit">
+                <Core.GdsFlex align-items="center" gap="xs">
+                  <Core.IconPencilSign size="m" />
+                  Tokens
+                </Core.GdsFlex>
+              </Core.GdsSegment>
+              <Core.GdsSegment>
+                <Core.GdsFlex align-items="center" gap="xs">
+                  <Core.IconCursor size="m" />
+                  Playground
+                </Core.GdsFlex>
+              </Core.GdsSegment>
+            </Core.GdsSegmentedControl>
+          </Core.GdsFlex>
+        </Core.GdsFlex>
       </Core.GdsFlex>
     </Core.GdsCard>
   )

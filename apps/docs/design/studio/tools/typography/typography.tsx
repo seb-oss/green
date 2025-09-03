@@ -4,6 +4,8 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { typographyTokens } from './typography.tokens'
 
+import './typography.css'
+
 function calculateScore(token: any, query: string): boolean {
   const searchString =
     `${token.name} ${token.style.fontSize} ${token.style.lineHeight} ${token.style.fontWeight}`.toLowerCase()
@@ -36,7 +38,7 @@ export default function Typography() {
   }
 
   const handleCopyClick = (token: any) => {
-    navigator.clipboard.writeText(`var(--gds-sys-text-${token.name})`)
+    navigator.clipboard.writeText(`${token.name}`)
   }
 
   return (
@@ -76,16 +78,14 @@ export default function Typography() {
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (
           <Core.GdsFlex key={index} flex-direction="column" gap="l">
-            <Core.GdsText text-transform="uppercase" color="neutral-02">
-              {group.title}
-            </Core.GdsText>
+            <Core.GdsText tag="h2">{group.title}</Core.GdsText>
             <Core.GdsFlex flex-direction="column" gap="m">
               {group.tokens.map((token: any, tokenIndex) => (
                 <Core.GdsFlex
                   key={tokenIndex}
                   flex-direction="column"
                   gap="s"
-                  padding="0"
+                  padding="0 0 m 0"
                   border-width="0 0 4xs 0"
                   border-color="subtle-01"
                 >
@@ -93,6 +93,8 @@ export default function Typography() {
                     <span
                       contentEditable="plaintext-only"
                       suppressContentEditableWarning
+                      className="editable"
+                      spellCheck="false"
                     >
                       {token.name}
                     </span>
