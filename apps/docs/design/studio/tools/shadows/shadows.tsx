@@ -22,10 +22,10 @@ const SpaceVisualizer = ({ value }: { value: number }) => (
       />
     ) : (
       <Core.GdsDiv
-        width={`${value}px`}
-        height="24px"
-        background="neutral-03"
-        border-radius="s"
+        width="40px"
+        height="40px"
+        background="neutral-02"
+        box-shadow="l"
       />
     )}
   </Core.GdsFlex>

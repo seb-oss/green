@@ -46,8 +46,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: icon
-      ? `${icon} Icon — Studio — Green Design System`
-      : `${title} — Studio — Green Design System`,
+      ? `${icon} Icon - Studio - Green Design System`
+      : `${title} - Studio - Green Design System`,
     description: `Design System ${title} tokens and configuration`,
   }
 }
