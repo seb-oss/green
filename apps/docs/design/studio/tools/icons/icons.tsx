@@ -9,6 +9,8 @@ import { useContent } from '../../../../settings/content'
 
 import './icons.css'
 
+import IconDetail from './icons.sub'
+
 export default function Icons() {
   const { isLoaded, actions } = useContent()
   const [search, setSearch] = useState('')
@@ -105,50 +107,54 @@ export default function Icons() {
         </Core.GdsFlex>
       </Core.GdsFlex>
 
-      {iconList.length > 0 ? (
-        <Core.GdsGrid columns="6" gap="l">
-          {iconList.map(([name, icon]) => (
-            <Core.GdsCard
-              key={name}
-              padding="m"
-              min-height="200px"
-              justify-content="center"
-              align-items="center"
-              variant="secondary"
-              border-radius="m"
-              className="icon-card"
-            >
-              <Core.GdsFlex
+      <Core.GdsFlex gap="4xl" align-items="flex-start" flex="1">
+        {iconList.length > 0 ? (
+          <Core.GdsGrid columns="4" gap="l">
+            {iconList.map(([name, icon]) => (
+              <Core.GdsCard
+                key={name}
+                padding="m"
+                min-height="200px"
                 justify-content="center"
                 align-items="center"
-                height="48px"
-                color="neutral-01"
+                variant="secondary"
+                border-radius="m"
+                className="icon-card"
               >
-                <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
-              </Core.GdsFlex>
-              <Core.GdsText
-                color="neutral-02"
-                font="detail-book-xs"
-                text-align="center"
-              >
-                {icon.displayName}
-              </Core.GdsText>
-            </Core.GdsCard>
-          ))}
-        </Core.GdsGrid>
-      ) : (
-        <Core.GdsCard
-          justify-content="center"
-          align-items="center"
-          height="40vh"
-          padding="2xl"
-        >
-          <Core.IconMagnifyingGlass size="xl" />
-          <Core.GdsText color="subtle-02">
-            No icons found matching your search
-          </Core.GdsText>
-        </Core.GdsCard>
-      )}
+                <Core.GdsFlex
+                  justify-content="center"
+                  align-items="center"
+                  height="48px"
+                  color="neutral-01"
+                >
+                  <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
+                </Core.GdsFlex>
+                <Core.GdsText
+                  color="neutral-02"
+                  font="detail-book-xs"
+                  text-align="center"
+                >
+                  {icon.displayName}
+                </Core.GdsText>
+              </Core.GdsCard>
+            ))}
+          </Core.GdsGrid>
+        ) : (
+          <Core.GdsCard
+            justify-content="center"
+            align-items="center"
+            height="40vh"
+            padding="2xl"
+            flex="1"
+          >
+            <Core.IconMagnifyingGlass size="xl" />
+            <Core.GdsText color="subtle-02">
+              No icons found matching your search
+            </Core.GdsText>
+          </Core.GdsCard>
+        )}
+        <IconDetail ID="arrow-left" />
+      </Core.GdsFlex>
     </Core.GdsFlex>
   )
 }
