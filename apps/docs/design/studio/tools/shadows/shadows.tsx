@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { ref } from '@sebgroup/green-tokens/src/tokens/2023/ref/space.ref.json'
+import * as Part from '../../parts'
 import { TokenGroup } from '../../settings/studio.types'
 
 function calculateScore(token: any, query: string): boolean {
@@ -64,20 +65,20 @@ export default function Radius() {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
-      <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsText tag="h1">Radius</Core.GdsText>
-        <Core.GdsFlex width="max-content">
+      <Part.Header
+        title="Shadows"
+        description="shadows description"
+        search={
           <Core.GdsInput
             plain
-            min-width="420px"
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
             clearable
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
+        }
+      />
 
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (

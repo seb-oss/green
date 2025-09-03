@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { ref } from '@sebgroup/green-tokens/src/tokens/2023/ref/space.ref.json'
+import * as Part from '../../parts'
 import { TokenGroup } from '../../settings/studio.types'
 
 function calculateScore(token: any, query: string): boolean {
@@ -13,11 +14,6 @@ function calculateScore(token: any, query: string): boolean {
 
 const SpaceVisualizer = ({ value }: { value: number }) => (
   <Core.GdsFlex align-items="center" gap="m">
-    {/* <Core.GdsFlex width="60px" justify-content="flex-end">
-      <Core.GdsText color="subtle-02" font="detail-xs">
-        {value}px
-      </Core.GdsText>
-    </Core.GdsFlex> */}
     {value === 999 ? (
       <Core.GdsDiv
         width="100%"
@@ -69,21 +65,20 @@ export default function Spacing() {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
-      <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsText tag="h1">Spacing Scale</Core.GdsText>
-        <Core.GdsFlex width="max-content">
+      <Part.Header
+        title="Spacing"
+        description="spacing description"
+        search={
           <Core.GdsInput
             plain
-            min-width="420px"
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
             clearable
-            placeholder="Search by token name or size..."
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
+        }
+      />
 
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (

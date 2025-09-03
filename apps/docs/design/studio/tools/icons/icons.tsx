@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
+import * as Part from '../../parts'
 import IconDetail from './icons.sub'
 
 import './icons.css'
@@ -70,43 +71,37 @@ export default function Icons({ selected }: { selected?: string }) {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
-      <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsFlex gap="s" align-items="center">
-          <Core.GdsText tag="h1">Icons</Core.GdsText>
-          <Core.GdsText tag="h1" color="positive-03">
-            {totalIcons}
-          </Core.GdsText>
-        </Core.GdsFlex>
-        <Core.GdsFlex width="max-content" gap="s">
+      <Part.Header
+        title="Icons"
+        description="icons description"
+        count={totalIcons}
+        search={
           <Core.GdsInput
             plain
-            min-width="420px"
             clearable
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
-          <Core.GdsFlex width="240px">
-            <Core.GdsDropdown
-              plain
-              value={selectedCategory}
-              oninput={(e: Event) =>
-                setSelectedCategory((e.target as HTMLSelectElement).value)
-              }
-            >
-              <Core.GdsOption value="">All Categories</Core.GdsOption>
-              {categories.map((category) => (
-                <Core.GdsOption key={category} value={category}>
-                  {category}
-                </Core.GdsOption>
-              ))}
-            </Core.GdsDropdown>
-          </Core.GdsFlex>
-
-          <div>Migration, solid, size</div>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
+        }
+        filter={
+          <Core.GdsDropdown
+            plain
+            value={selectedCategory}
+            oninput={(e: Event) =>
+              setSelectedCategory((e.target as HTMLSelectElement).value)
+            }
+          >
+            <Core.GdsOption value="">All Categories</Core.GdsOption>
+            {categories.map((category) => (
+              <Core.GdsOption key={category} value={category}>
+                {category}
+              </Core.GdsOption>
+            ))}
+          </Core.GdsDropdown>
+        }
+      />
 
       <Core.GdsFlex gap="4xl" align-items="flex-start" width="100%">
         {iconList.length > 0 ? (

@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import * as Part from '../../parts'
 import { typographyTokens } from './typography.tokens'
 
 import './typography.css'
@@ -43,37 +44,38 @@ export default function Typography() {
 
   return (
     <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
-      <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsText tag="h1">Typography</Core.GdsText>
-        <Core.GdsFlex width="max-content" gap="s">
+      <Part.Header
+        title="Typography"
+        description="typography description"
+        count={220}
+        search={
           <Core.GdsInput
             plain
-            min-width="420px"
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
             clearable
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
-          <Core.GdsFlex width="240px">
-            <Core.GdsDropdown
-              plain
-              value={selectedCategory}
-              oninput={handleCategoryChange}
-            >
-              <Core.GdsOption value="">All Categories</Core.GdsOption>
-              {typographyTokens.map((group) => (
-                <Core.GdsOption
-                  key={group.title}
-                  value={group.title.toLowerCase()}
-                >
-                  {group.title}
-                </Core.GdsOption>
-              ))}
-            </Core.GdsDropdown>
-          </Core.GdsFlex>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
+        }
+        filter={
+          <Core.GdsDropdown
+            plain
+            value={selectedCategory}
+            oninput={handleCategoryChange}
+          >
+            <Core.GdsOption value="">All Categories</Core.GdsOption>
+            {typographyTokens.map((group) => (
+              <Core.GdsOption
+                key={group.title}
+                value={group.title.toLowerCase()}
+              >
+                {group.title}
+              </Core.GdsOption>
+            ))}
+          </Core.GdsDropdown>
+        }
+      />
 
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (

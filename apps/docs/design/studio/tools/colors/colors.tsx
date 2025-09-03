@@ -158,43 +158,38 @@ export default function Color() {
       gap={search ? 'xl' : '4xl'}
       padding="xl"
     >
-      <Part.Header></Part.Header>
-      <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsFlex gap="s" align-items="center">
-          <Core.GdsText tag="h1">Colors</Core.GdsText>
-          <Core.GdsText tag="h1" color="positive-03">
-            {totalTokens}
-          </Core.GdsText>
-        </Core.GdsFlex>
-        <Core.GdsFlex width="max-content" gap="s">
+      <Part.Header
+        title="Color"
+        description="Color description"
+        count={totalTokens}
+        search={
           <Core.GdsInput
             plain
-            min-width="420px"
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
             clearable
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
-          <Core.GdsFlex width="240px">
-            <Core.GdsDropdown
-              plain
-              value={selectedCategory}
-              oninput={handleCategoryChange}
-            >
-              <Core.GdsOption value="">All Categories</Core.GdsOption>
-              {colorTokens.map((group) => (
-                <Core.GdsOption
-                  key={group.title}
-                  value={group.title.toLowerCase()}
-                >
-                  {group.title}
-                </Core.GdsOption>
-              ))}
-            </Core.GdsDropdown>
-          </Core.GdsFlex>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
+        }
+        filter={
+          <Core.GdsDropdown
+            plain
+            value={selectedCategory}
+            oninput={handleCategoryChange}
+          >
+            <Core.GdsOption value="">All Categories</Core.GdsOption>
+            {colorTokens.map((group) => (
+              <Core.GdsOption
+                key={group.title}
+                value={group.title.toLowerCase()}
+              >
+                {group.title}
+              </Core.GdsOption>
+            ))}
+          </Core.GdsDropdown>
+        }
+      />
 
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (
