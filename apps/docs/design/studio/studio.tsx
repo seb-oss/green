@@ -111,15 +111,20 @@ export default function Studio({ page, icon }: StudioProps) {
       <Core.GdsCard
         variant="secondary"
         width="280px"
-        gap="s"
+        gap="l"
         padding="0"
         position="sticky"
         inset="16px 0 0 0"
-        min-height="90vh"
+        min-height="96vh"
       >
+        <Core.GdsFlex align-items="center" gap="m" padding="l l 0 l">
+          <Core.IconBrandGreen size="l" />
+          <Core.GdsText font="heading-xs">Green Studio</Core.GdsText>
+        </Core.GdsFlex>
+        <Core.GdsDivider color="subtle-01" />
         <Core.GdsFlex
           flex-direction="column"
-          padding="l m"
+          padding="0 s"
           gap="s"
           aria-label="Sidebar"
         >
@@ -138,7 +143,7 @@ export default function Studio({ page, icon }: StudioProps) {
             </Link>
           ))}
         </Core.GdsFlex>
-        <Core.GdsDivider color="subtle-01" />
+
         <Core.GdsFlex padding="0 l" display="none">
           <Core.GdsInput size="small">
             <Core.IconMagnifyingGlass slot="lead" />

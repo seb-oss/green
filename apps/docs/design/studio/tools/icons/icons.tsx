@@ -123,6 +123,7 @@ export default function Icons({ selected }: { selected?: string }) {
                 justify-content="center"
                 align-items="center"
                 variant="secondary"
+                className="icon-card"
                 border-radius="m"
                 onClick={() => handleIconClick(name)}
                 tabIndex={0}
