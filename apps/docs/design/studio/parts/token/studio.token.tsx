@@ -7,7 +7,7 @@ import * as Core from '@sebgroup/green-core/react'
 interface TokenProps {
   level?: string
   preview?: React.ReactNode
-  name?: string
+  name?: string | React.ReactNode
   light?: string
   dark?: string
 }
@@ -26,12 +26,12 @@ export default function StudioToken({
       border-width="0 0 4xs 0"
       border-color="subtle-01"
     >
-      <Core.GdsGrid columns="5" gap="xl">
+      <Core.GdsGrid columns="5" gap="xl" align-items="center">
         {level ? <Core.GdsText>{level}</Core.GdsText> : <div></div>}
         {preview && preview}
-        {name && <Core.GdsText>{name}</Core.GdsText>}
         {light && <Core.GdsText color="neutral-02">{light}</Core.GdsText>}
         {dark && <Core.GdsText color="neutral-02">{dark}</Core.GdsText>}
+        {name && <Core.GdsText>{name}</Core.GdsText>}
       </Core.GdsGrid>
     </Core.GdsFlex>
   )

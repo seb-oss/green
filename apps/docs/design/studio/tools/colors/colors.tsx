@@ -48,7 +48,7 @@ const ColorSwatch = ({
   return (
     <Part.Token
       level={level}
-      name={token.name}
+      name={<Part.Variable name={token.name} />}
       light={formatValue(token.lightValue.$value, token.lightValue.alpha)}
       dark={formatValue(token.darkValue.$value, token.darkValue.alpha)}
       data-variable={getVarName('light')}
@@ -258,9 +258,9 @@ export default function Color() {
                       <Core.GdsGrid columns="5" align-items="center" gap="xl">
                         <Core.GdsText>Level</Core.GdsText>
                         <Core.GdsText>Example</Core.GdsText>
-                        <Core.GdsText>Variable name</Core.GdsText>
                         <Core.GdsText>Light</Core.GdsText>
                         <Core.GdsText>Dark</Core.GdsText>
+                        <Core.GdsText>Variable name</Core.GdsText>
                       </Core.GdsGrid>
                     </Core.GdsCard>
                     <Core.GdsFlex

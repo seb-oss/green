@@ -1,0 +1,45 @@
+'use client'
+
+import { useState } from 'react'
+
+import * as Core from '@sebgroup/green-core/react'
+
+export default function Variable({ name }: { name?: string }) {
+  const [copied, setCopied] = useState(false)
+
+  const handleCopy = async () => {
+    if (!name) return
+
+    try {
+      await navigator.clipboard.writeText(name)
+      setCopied(true)
+
+      // Reset state after 2 seconds
+      setTimeout(() => {
+        setCopied(false)
+      }, 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+
+  return (
+    <Core.GdsCard
+      flex-direction="row"
+      justify-content="space-between"
+      align-items="center"
+      padding="xs xs xs m"
+      variant={copied ? 'positive' : 'secondary'}
+    >
+      <Core.GdsText>{copied ? 'Copied!' : name}</Core.GdsText>
+      <Core.GdsButton
+        size="small"
+        rank={copied ? 'secondary' : 'tertiary'}
+        variant={copied ? 'positive' : 'neutral'}
+        onClick={handleCopy}
+      >
+        <Core.IconCopy size="s" />
+      </Core.GdsButton>
+    </Core.GdsCard>
+  )
+}
