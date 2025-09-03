@@ -2,6 +2,7 @@
 import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import * as Part from '../../parts'
 import { colorTokens } from './colors.tokens'
 import { ColorSubGroup, ColorToken } from './colors.types'
 
@@ -157,6 +158,7 @@ export default function Color() {
       gap={search ? 'xl' : '4xl'}
       padding="xl"
     >
+      <Part.Header></Part.Header>
       <Core.GdsFlex gap="s" justify-content="space-between">
         <Core.GdsFlex gap="s" align-items="center">
           <Core.GdsText tag="h1">Colors</Core.GdsText>
