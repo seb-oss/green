@@ -1,6 +1,5 @@
 'use client'
 
-import { ReactNode } from 'react'
 import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -14,12 +13,13 @@ import { typographyTokens } from './tools/typography/typography.tokens'
 
 interface StudioProps {
   page: Page
+  icon?: string
 }
 
-export default function Studio({ page }: StudioProps) {
+export default function Studio({ page, icon }: StudioProps) {
   const pathname = usePathname()
-  const activePage = (pathname.split('/').pop() as Page) || page
-
+  // const activePage = (pathname.split('/').pop() as Page) || page
+  const activePage = (pathname.split('/')[2] as Page) || page
   const navigation: NavItem[] = [
     {
       id: 'colors',
@@ -43,148 +43,59 @@ export default function Studio({ page }: StudioProps) {
             })),
       })),
     },
+
     {
       id: 'typography',
       title: 'Typography',
-      icon: <Core.IconTextEdit slot="lead" />,
+      icon: <Core.IconTextEdit slot="lead" solid={page === 'typography'} />,
       content: <Tool.Typography />,
       tokens: typographyTokens,
     },
     {
+      id: 'icons',
+      title: 'Icons',
+      icon: <Core.IconShapes slot="lead" solid={page === 'icons'} />,
+      content: <Tool.Icons selected={icon} />,
+    },
+    {
       id: 'spacing',
       title: 'Spacing',
-      icon: <Core.IconFullscreen slot="lead" />,
+      icon: <Core.IconFullscreen slot="lead" solid={page === 'spacing'} />,
       content: <Tool.Spacing />,
       tokens: spacingTokens,
     },
     {
-      id: 'icons',
-      title: 'Icons',
-      icon: <Core.IconShapes slot="lead" />,
-      content: <Tool.Icons />,
+      id: 'radius',
+      title: 'Radius',
+      icon: (
+        <Core.IconCirclePlaceholderOn slot="lead" solid={page === 'radius'} />
+      ),
+      content: <Tool.Radius />,
     },
     {
-      id: 'grid',
-      title: 'Grid',
-      icon: <Core.IconSquareGridCircle slot="lead" />,
-      content: <div>Grid Content</div>,
+      id: 'shadows',
+      title: 'Shadows',
+      icon: <Core.IconSolar slot="lead" solid={page === 'shadows'} />,
+      content: <Tool.Shadows />,
     },
+    // {
+    //   id: 'grid',
+    //   title: 'Grid',
+    //   icon: <Core.IconSquareGridCircle slot="lead" solid={page === 'grid'} />,
+    //   content: <div>Grid Content</div>,
+    // },
     {
       id: 'compose',
       title: 'Compose',
-      icon: <Core.IconPencilSparkle slot="lead" />,
+      icon: <Core.IconPencilSparkle slot="lead" solid={page === 'compose'} />,
       content: <Tool.Compose />,
     },
   ]
 
   const renderPageContent = () => {
     const currentPage = navigation.find((nav) => nav.id === activePage)
+    // console.log('currentPage:', currentPage?.id)
     return currentPage?.content
-  }
-
-  const renderTokensList = () => {
-    const currentPage = navigation.find((nav) => nav.id === activePage)
-    if (!currentPage?.tokens) return null
-
-    if (currentPage.id === 'color') {
-      return (
-        <Core.GdsFlex flex-direction="column" gap="m">
-          {currentPage.tokens.map((group, index) => (
-            <Core.GdsFlex
-              key={index}
-              flex-direction="column"
-              gap="m"
-              padding="m"
-            >
-              <Core.GdsText color="subtle-02" font="detail-regular-m">
-                {group.title}
-              </Core.GdsText>
-              {group.tokens.reduce((acc: ReactNode[], token, tokenIndex) => {
-                // Create category groups based on token.type
-                const category = token.type.split('/')[0]
-                const prevToken =
-                  tokenIndex > 0 ? group.tokens[tokenIndex - 1] : null
-                const prevCategory = prevToken?.type.split('/')[0]
-
-                if (category !== prevCategory) {
-                  acc.push(
-                    <Core.GdsText
-                      key={`category-${category}`}
-                      color="subtle-02"
-                      font="detail-regular-s"
-                      padding="s 0"
-                    >
-                      {category}
-                    </Core.GdsText>,
-                  )
-                }
-
-                acc.push(
-                  <Core.GdsFlex
-                    key={tokenIndex}
-                    width="100%"
-                    align-items="center"
-                    justify-content="space-between"
-                    gap="xs"
-                    padding="2xs 0"
-                  >
-                    <Core.GdsFlex gap="s" align-items="center">
-                      <Core.GdsDiv
-                        width="16px"
-                        height="16px"
-                        border-radius="max"
-                        border-color="subtle-01"
-                        border-width="4xs"
-                        border-style="solid"
-                        style={{
-                          background: token.value.split(' / ')[0],
-                        }}
-                      />
-                      <Core.GdsText font="detail-xs" width="max-content">
-                        {token.name}
-                      </Core.GdsText>
-                    </Core.GdsFlex>
-                    <Core.GdsText opacity="0.4" font="detail-xs">
-                      {token.value.split(' / ')[0]}
-                    </Core.GdsText>
-                  </Core.GdsFlex>,
-                )
-
-                return acc
-              }, [])}
-            </Core.GdsFlex>
-          ))}
-        </Core.GdsFlex>
-      )
-    }
-
-    // Default rendering for other token types
-    return (
-      <Core.GdsFlex flex-direction="column" gap="m">
-        {currentPage.tokens.map((group, index) => (
-          <Core.GdsFlex key={index} flex-direction="column" gap="m" padding="m">
-            <Core.GdsText color="subtle-02">{group.title}</Core.GdsText>
-            {group.tokens.map((token, tokenIndex) => (
-              <Core.GdsFlex
-                key={tokenIndex}
-                width="100%"
-                align-items="center"
-                justify-content="space-between"
-                gap="xs"
-              >
-                <Core.GdsText font="detail-xs" width="max-content">
-                  {token.name}
-                </Core.GdsText>
-                <Core.GdsText opacity="0.4">
-                  {token.value}
-                  {typeof token.value === 'number' ? 'px' : ''}
-                </Core.GdsText>
-              </Core.GdsFlex>
-            ))}
-          </Core.GdsFlex>
-        ))}
-      </Core.GdsFlex>
-    )
   }
 
   return (
@@ -233,15 +144,6 @@ export default function Studio({ page }: StudioProps) {
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
         </Core.GdsFlex>
-        <Core.GdsFlex
-          display="none"
-          padding="m"
-          flex-direction="column"
-          gap="m"
-          height="max-content"
-        >
-          {renderTokensList()}
-        </Core.GdsFlex>
 
         <Core.GdsFlex margin="auto 0 0 0" padding="m">
           <Link
@@ -268,40 +170,6 @@ export default function Studio({ page }: StudioProps) {
         <Core.GdsDiv flex="1" width="100%" height="100%" overflow="auto">
           {renderPageContent()}
         </Core.GdsDiv>
-
-        {false && (
-          <Core.GdsFlex
-            width="100%"
-            align-items="center"
-            padding="xl"
-            position="sticky"
-            inset="auto 0px 40px 0px"
-          >
-            <Core.GdsFlex flex="1" align-items="center" gap="s">
-              <span></span>
-            </Core.GdsFlex>
-            <Core.GdsFlex align-items="center" gap="s">
-              <Core.GdsSegmentedControl
-                size="small"
-                value="edit"
-                width="max-content"
-              >
-                <Core.GdsSegment value="edit">
-                  <Core.GdsFlex align-items="center" gap="xs">
-                    <Core.IconPencilSign size="m" />
-                    Tokens
-                  </Core.GdsFlex>
-                </Core.GdsSegment>
-                <Core.GdsSegment>
-                  <Core.GdsFlex align-items="center" gap="xs">
-                    <Core.IconCursor size="m" />
-                    Playground
-                  </Core.GdsFlex>
-                </Core.GdsSegment>
-              </Core.GdsSegmentedControl>
-            </Core.GdsFlex>
-          </Core.GdsFlex>
-        )}
       </Core.GdsFlex>
     </Core.GdsCard>
   )

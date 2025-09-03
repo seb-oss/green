@@ -4,6 +4,8 @@ export type Page =
   | 'colors'
   | 'typography'
   | 'spacing'
+  | 'radius'
+  | 'shadows'
   | 'icons'
   | 'grid'
   | 'compose'

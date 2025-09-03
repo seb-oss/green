@@ -6,16 +6,15 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
+import { Link } from '../../../atoms/link/link'
+import IconDetail from './icons.sub'
 
 import './icons.css'
 
-import IconDetail from './icons.sub'
-
-export default function Icons() {
+export default function Icons({ selected }: { selected?: string }) {
   const { isLoaded, actions } = useContent()
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
-
   const component = actions.getComponent('icon')
 
   const { categories, iconList, totalIcons } = useMemo(() => {
@@ -24,7 +23,6 @@ export default function Icons() {
 
     const totalIcons = Object.keys(component.icons).length
 
-    // Get unique categories
     const cats = Array.from(
       new Set(
         Object.values(component.icons)
@@ -33,10 +31,8 @@ export default function Icons() {
       ),
     ).sort()
 
-    // Create icon list
     let icons = Object.entries(component.icons)
 
-    // Filter by search
     if (search) {
       icons = icons.filter(([name, icon]) => {
         const searchString =
@@ -152,7 +148,7 @@ export default function Icons() {
             </Core.GdsText>
           </Core.GdsCard>
         )}
-        <IconDetail ID="arrow-left" />
+        {selected && <IconDetail ID={selected} />}
       </Core.GdsFlex>
     </Core.GdsFlex>
   )

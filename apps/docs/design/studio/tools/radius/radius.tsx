@@ -13,11 +13,6 @@ function calculateScore(token: any, query: string): boolean {
 
 const SpaceVisualizer = ({ value }: { value: number }) => (
   <Core.GdsFlex align-items="center" gap="m">
-    {/* <Core.GdsFlex width="60px" justify-content="flex-end">
-      <Core.GdsText color="subtle-02" font="detail-xs">
-        {value}px
-      </Core.GdsText>
-    </Core.GdsFlex> */}
     {value === 999 ? (
       <Core.GdsDiv
         width="100%"
@@ -38,7 +33,7 @@ const SpaceVisualizer = ({ value }: { value: number }) => (
 
 export const spacingTokens: TokenGroup[] = [
   {
-    title: 'Spacing',
+    title: 'Radius',
     tokens: Object.entries(ref.space)
       .sort((a, b) => a[1].$value - b[1].$value)
       .map(([name, token]) => ({
@@ -49,7 +44,7 @@ export const spacingTokens: TokenGroup[] = [
   },
 ]
 
-export default function Spacing() {
+export default function Radius() {
   const [search, setSearch] = useState('')
 
   const filteredTokens = useMemo(() => {
@@ -70,7 +65,7 @@ export default function Spacing() {
   return (
     <Core.GdsFlex flex-direction="column" gap="6xl" padding="xl">
       <Core.GdsFlex gap="s" justify-content="space-between">
-        <Core.GdsText tag="h1">Spacing Scale</Core.GdsText>
+        <Core.GdsText tag="h1">Radius</Core.GdsText>
         <Core.GdsFlex width="max-content">
           <Core.GdsInput
             plain
@@ -78,7 +73,6 @@ export default function Spacing() {
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
             clearable
-            placeholder="Search by token name or size..."
           >
             <Core.IconMagnifyingGlass slot="lead" />
           </Core.GdsInput>
@@ -163,7 +157,7 @@ export default function Spacing() {
         >
           <Core.IconMagnifyingGlass size="xl" />
           <Core.GdsText color="subtle-02">
-            No spacing tokens found matching your search
+            No radius tokens found matching your search
           </Core.GdsText>
         </Core.GdsCard>
       )}
