@@ -19,7 +19,6 @@ interface StudioProps {
 
 export default function Studio({ page, icon }: StudioProps) {
   const pathname = usePathname()
-  // const activePage = (pathname.split('/').pop() as Page) || page
   const activePage = (pathname.split('/')[2] as Page) || page
   const navigation: NavItem[] = [
     {

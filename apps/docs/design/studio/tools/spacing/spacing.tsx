@@ -60,7 +60,7 @@ export default function Spacing() {
   }, [search])
 
   const handleCopyClick = (token: any) => {
-    navigator.clipboard.writeText(`var(--gds-ref-space-${token.name})`)
+    navigator.clipboard.writeText(`${token.name}`)
   }
 
   return (
@@ -86,7 +86,7 @@ export default function Spacing() {
           <Core.GdsFlex key={index} flex-direction="column" gap="0">
             <Core.GdsCard padding="l">
               <Core.GdsGrid
-                columns="4"
+                columns="5"
                 gap="l"
                 align-items="center"
                 justify-content="flex-start"
@@ -94,6 +94,7 @@ export default function Spacing() {
                 <Core.GdsText>Variable</Core.GdsText>
                 <Core.GdsText>Value</Core.GdsText>
                 <Core.GdsText>Preview</Core.GdsText>
+                <Core.GdsText></Core.GdsText>
                 <Core.GdsText></Core.GdsText>
               </Core.GdsGrid>
             </Core.GdsCard>
@@ -106,7 +107,7 @@ export default function Spacing() {
                 border-color="subtle-01"
               >
                 <Core.GdsGrid
-                  columns="4"
+                  columns="5"
                   gap="l"
                   align-items="center"
                   justify-content="flex-start"
@@ -132,19 +133,8 @@ export default function Spacing() {
                     {token.value}px
                   </Core.GdsText>
                   <SpaceVisualizer value={token.value as number} />
-                  <Core.GdsFlex
-                    align-items="center"
-                    gap="s"
-                    margin="0 0 0 auto"
-                  >
-                    <Core.GdsButton
-                      size="xs"
-                      rank="tertiary"
-                      onClick={() => handleCopyClick(token)}
-                    >
-                      <Core.IconCopy size="s" />
-                    </Core.GdsButton>
-                  </Core.GdsFlex>
+                  <div></div>
+                  <Part.Variable name={token.name} />
                 </Core.GdsGrid>
               </Core.GdsFlex>
             ))}

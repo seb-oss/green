@@ -260,7 +260,7 @@ export default function Color() {
                         <Core.GdsText>Example</Core.GdsText>
                         <Core.GdsText>Light</Core.GdsText>
                         <Core.GdsText>Dark</Core.GdsText>
-                        <Core.GdsText>Variable name</Core.GdsText>
+                        <Core.GdsText></Core.GdsText>
                       </Core.GdsGrid>
                     </Core.GdsCard>
                     <Core.GdsFlex

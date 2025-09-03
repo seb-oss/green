@@ -7,43 +7,23 @@ import * as Core from '@sebgroup/green-core/react'
 import tokens from '@sebgroup/green-tokens/src/tokens/2023/tokens.base.json'
 import * as Part from '../../parts'
 
-interface ShadowValue {
-  color: string
-  offsetX: string
-  offsetY: string
-  blur: string
-  spread: string
-}
+function getShadowSizes(): string[] {
+  const shadowKeys = Object.keys(tokens.sys.shadow).filter(
+    (key) => key !== '$type',
+  )
+  const uniqueSizes = new Set(shadowKeys.map((key) => key.split('-')[0]))
 
-interface ShadowToken {
-  name: string
-  value: {
-    primary: ShadowValue
-    secondary: ShadowValue
-  }
-}
-
-function formatShadowTokens(): ShadowToken[] {
-  const shadows = tokens.sys.shadow
-  const sizes = ['s', 'm', 'l', 'xl']
-
-  return sizes.map((size) => ({
-    name: size,
-    value: {
-      primary: shadows[`${size}-01`].$value as ShadowValue,
-      secondary: shadows[`${size}-02`].$value as ShadowValue,
-    },
-  }))
+  return Array.from(uniqueSizes).sort()
 }
 
 export default function Shadows() {
   const [search, setSearch] = useState('')
-  const shadowTokens = useMemo(() => formatShadowTokens(), [])
+  const shadowTokens = useMemo(() => getShadowSizes(), [])
 
   const filteredTokens = useMemo(() => {
     if (!search) return shadowTokens
     return shadowTokens.filter((token) =>
-      token.name.toLowerCase().includes(search.toLowerCase()),
+      token.toLowerCase().includes(search.toLowerCase()),
     )
   }, [shadowTokens, search])
 
@@ -66,7 +46,7 @@ export default function Shadows() {
       />
 
       <Core.GdsFlex flex-direction="column" gap="0">
-        <Core.GdsCard>
+        <Core.GdsCard padding="l">
           <Core.GdsGrid columns="5" gap="xl">
             <Core.GdsText>Token</Core.GdsText>
             <Core.GdsText>Preview</Core.GdsText>
@@ -75,31 +55,20 @@ export default function Shadows() {
             <Core.GdsText></Core.GdsText>
           </Core.GdsGrid>
         </Core.GdsCard>
+
         {filteredTokens.map((token) => (
           <Core.GdsFlex
-            key={token.name}
+            key={token}
             padding="m l"
             border-width="0 0 4xs 0"
             border-color="subtle-01"
           >
             <Core.GdsGrid columns="5" gap="xl" align-items="center">
-              <Core.GdsText text-transform="uppercase">
-                {token.name}
-              </Core.GdsText>
-              <Core.GdsCard variant="secondary" box-shadow={token.name} />
+              <Core.GdsText text-transform="uppercase">{token}</Core.GdsText>
+              <Core.GdsCard variant="secondary" box-shadow={token} />
               <div></div>
               <div></div>
-              {false && (
-                <>
-                  <Core.GdsText color="neutral-02">
-                    {`${token.value.primary.offsetX} ${token.value.primary.offsetY} ${token.value.primary.blur} ${token.value.primary.spread} ${token.value.primary.color}`}
-                  </Core.GdsText>
-                  <Core.GdsText color="neutral-02">
-                    {`${token.value.secondary.offsetX} ${token.value.secondary.offsetY} ${token.value.secondary.blur} ${token.value.secondary.spread} ${token.value.secondary.color}`}
-                  </Core.GdsText>
-                </>
-              )}
-              <Part.Variable name={token.name} />
+              <Part.Variable name={token} />
             </Core.GdsGrid>
           </Core.GdsFlex>
         ))}

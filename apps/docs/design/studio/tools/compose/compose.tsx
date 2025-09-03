@@ -343,17 +343,21 @@ export default function Compose() {
         >
           <MonacoEditor value={code} onChange={(newCode) => setCode(newCode)} />
         </Core.GdsCard>
-        <Core.GdsFab
-          onClick={handleSave}
-          rank="primary"
-          size="small"
+        <Core.GdsFlex
           z-index="10"
-          inset="auto 15px 15px auto"
+          inset="auto 24px 24px auto"
           position="absolute"
+          align-items="center"
+          gap="xs"
         >
-          Preview
-          <Core.IconEyeOpen slot="lead" />
-        </Core.GdsFab>
+          <Core.GdsText tag="small" color="neutral-02" opacity="0.4">
+            <code style={{ fontFamily: 'sans-serif' }}>{`⌘ × S`}</code>
+          </Core.GdsText>
+          <Core.GdsButton onClick={handleSave} rank="primary" size="small">
+            Preview
+            <Core.IconEyeOpen slot="lead" />
+          </Core.GdsButton>
+        </Core.GdsFlex>
       </Core.GdsFlex>
 
       <Core.GdsCard
