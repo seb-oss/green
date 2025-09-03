@@ -6,6 +6,7 @@ import './dialog'
 import '../index.js'
 
 import { html } from 'lit'
+import { he } from 'date-fns/locale'
 
 import type { GdsDialog } from './dialog'
 
@@ -72,6 +73,20 @@ export const SlideOut: Story = {
   args: {
     ...DefaultParams.args,
     variant: 'slide-out',
+  },
+}
+
+/**
+ * To enable scroll for overflowing content, you can set the `scrollable` property to `true`.
+ *
+ * This only has an effect of the default content slot.
+ */
+export const Scrollable: Story = {
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.args,
+    height: '400px',
+    scrollable: true,
   },
 }
 
