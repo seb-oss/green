@@ -24,7 +24,7 @@ export default function Studio({ page, icon }: StudioProps) {
     {
       id: 'colors',
       title: 'Colors',
-      icon: <Core.IconBrush slot="lead" />,
+      icon: <Core.IconBrush slot="lead" solid={page === 'colors'} />,
       content: <Tool.Colors />,
       tokens: colorTokens.map((group) => ({
         title: group.title,
