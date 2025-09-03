@@ -118,8 +118,10 @@ export default function Studio({ page, icon }: StudioProps) {
         min-height="96vh"
       >
         <Core.GdsFlex align-items="center" gap="m" padding="l l 0 l">
-          <Core.IconBrandGreen size="l" />
-          <Core.GdsText font="heading-xs">Green Studio</Core.GdsText>
+          <Link href="/studio/colors">
+            <Core.IconBrandGreen size="l" />
+            <Core.GdsText font="heading-xs">Green Studio</Core.GdsText>
+          </Link>
         </Core.GdsFlex>
         <Core.GdsDivider color="subtle-01" />
         <Core.GdsFlex

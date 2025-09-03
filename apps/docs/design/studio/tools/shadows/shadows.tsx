@@ -71,6 +71,7 @@ export default function Radius() {
         search={
           <Core.GdsInput
             plain
+            width="100%"
             value={search}
             onInput={(e) => setSearch((e.target as HTMLInputElement).value)}
             clearable
