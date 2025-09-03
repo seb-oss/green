@@ -1,58 +1,17 @@
 // design/studio/tools/icons/icons.sub.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
-
-interface IconData {
-  id: string
-  displayName: string
-  variants: {
-    regular: string
-    solid: string
-  }
-  static: {
-    regular: string
-    solid: string
-  }
-  meta: {
-    description: string
-    categories: string[]
-    tags: string[]
-    width: number
-    height: number
-    viewBox: string
-  }
-  framework: {
-    web: {
-      path: string
-      import: string
-      component: string
-    }
-    react: {
-      path: string
-      import: string
-      component: string
-    }
-    angular: {
-      path: string
-      import: string
-      component: string
-    }
-  }
-}
+import { useContent } from '../../../../settings/content'
 
 export default function IconDetail({ ID }: { ID: string }) {
-  const [iconData, setIconData] = useState<IconData | null>(null)
+  const { actions } = useContent()
   const [isSolid, setIsSolid] = useState(false)
 
-  useEffect(() => {
-    fetch('https://api.seb.io/components/icon/icon.list.json')
-      .then((res) => res.json())
-      .then((data) => setIconData(data[ID]))
-  }, [ID])
+  const iconData = useMemo(() => actions.getIcon(ID), [actions, ID])
 
   if (!iconData) return null
 
