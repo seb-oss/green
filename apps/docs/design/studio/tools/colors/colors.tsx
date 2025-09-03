@@ -29,66 +29,36 @@ const ColorSwatch = ({
     return `--gds-sys-color-${group.toLowerCase()}-${token.name}`
   }
 
-  const getColorMix = (value: string, alpha?: number) => {
+  const MIX = (value: string, alpha?: number) => {
     if (!alpha) return value
-    // Convert alpha decimal to percentage
     const percentage = Math.round((1 - alpha) * 100)
     return `color-mix(in srgb, ${value}, transparent ${percentage}%)`
   }
 
+  const formatValue = (value: string, alpha?: number) => {
+    return alpha ? `${value} / ${alpha}` : value
+  }
+
+  const LIGHT = token.lightValue.$value
+  const LIGHT_ALPHA = token.lightValue.alpha
+
+  const DARK = token.darkValue.$value
+  const DARK_ALPHA = token.darkValue.alpha
+
   return (
-    <Core.GdsFlex
-      flex-direction="row"
-      align-items="center"
-      padding="s l"
-      border-width="0 0 4xs 0"
-      border-color="subtle-01"
-    >
-      <Core.GdsGrid columns="5" align-items="center" gap="xl">
-        {level ? <Core.GdsText>{level}</Core.GdsText> : <div></div>}
+    <Part.Token
+      level={level}
+      name={token.name}
+      light={formatValue(token.lightValue.$value, token.lightValue.alpha)}
+      dark={formatValue(token.darkValue.$value, token.darkValue.alpha)}
+      data-variable={getVarName('light')}
+      preview={
         <Core.GdsFlex align-items="center" gap="s">
-          <Core.GdsDiv
-            width="32px"
-            height="32px"
-            border-radius="max"
-            border-color="inverse"
-            border-width="3xs"
-            border-style="solid"
-            box-shadow="m"
-            style={{
-              background: getColorMix(
-                token.lightValue.$value,
-                token.lightValue.alpha,
-              ),
-            }}
-          />
-          <Core.GdsDiv
-            width="32px"
-            height="32px"
-            border-radius="max"
-            border-color="inverse"
-            border-width="3xs"
-            border-style="solid"
-            box-shadow="m"
-            style={{
-              background: getColorMix(
-                token.darkValue.$value,
-                token.darkValue.alpha,
-              ),
-            }}
-          />
+          <Part.Color color={MIX(LIGHT, LIGHT_ALPHA)} />
+          <Part.Color color={MIX(DARK, DARK_ALPHA)} />
         </Core.GdsFlex>
-        <Core.GdsText title={getVarName('light')}>{token.name}</Core.GdsText>
-        <Core.GdsText color="subtle-02">
-          {token.lightValue.$value}
-          {token.lightValue.alpha ? ` / ${token.lightValue.alpha}` : ''}
-        </Core.GdsText>
-        <Core.GdsText color="subtle-02">
-          {token.darkValue.$value}
-          {token.darkValue.alpha ? ` / ${token.darkValue.alpha}` : ''}
-        </Core.GdsText>
-      </Core.GdsGrid>
-    </Core.GdsFlex>
+      }
+    />
   )
 }
 
