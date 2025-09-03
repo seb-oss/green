@@ -326,16 +326,15 @@ export default function Compose() {
     <Core.GdsGrid
       columns="1; l{2}"
       gap="l"
-      height="calc(100vh - 40px)"
+      min-height="96vh"
       className="layout-compose"
       padding="0"
-      margin="0 2xl 0 0"
       width="100%"
     >
       <Core.GdsFlex flex-direction="column" gap="m" position="relative">
         <Core.GdsCard
           variant="secondary"
-          height="80vh"
+          height="100%"
           overflow="hidden"
           border-color="subtle-01"
           padding="l 0"
