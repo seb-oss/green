@@ -94,6 +94,9 @@ export interface DropdownProps extends DropdownArgs {
   required?: boolean
 }
 
+/**
+ * @deprecated Please use the `gds-dropdown` web component from green-core instead
+ */
 export const Dropdown = ({
   compareWith,
   display = 'label',

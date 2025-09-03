@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.32.1
+
+### Patch Changes
+
+- 43c34a3: **Deprecations:** Add inline deprecation warnings to outdated components
+
 ## 3.32.0
 
 ### Minor Changes

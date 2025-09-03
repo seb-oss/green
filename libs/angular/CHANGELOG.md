@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.2.1
+
+### Patch Changes
+
+- 43c34a3: **Deprecations:** Add inline deprecation warnings to outdated components
+
 ## 6.2.0
 
 ### Minor Changes

@@ -1,12 +1,18 @@
 import React from 'react'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { GdsDatePicker } from '@sebgroup/green-core'
+import { GdsAlert } from '../../../../../dist/libs/core/src/components/alert/alert.component.js'
 import Datepicker from './datepicker'
+
+try {
+  window.customElements.define('gds-alert', GdsAlert)
+} catch (e) {}
 
 type Story = StoryObj<typeof Datepicker>
 
 /**
+ * <gds-alert variant="notice">**Note:** This version of Datepicker is deprecated. Please use the `gds-datepicker` web component from green-core instead.</gds-alert>
+ *
  * Date pickers are used when users need to enter a date. The user can enter the date as text, but the date picker also allows the user to select the date in a visual representation of a calendar.
  */
 const meta: Meta<typeof Datepicker> = {

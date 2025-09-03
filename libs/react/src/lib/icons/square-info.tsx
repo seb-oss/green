@@ -3,7 +3,7 @@ import { IconProps } from '../../types/props'
 
 /**
  * @deprecated
- * This component is deprecated. Use `SquareInfo` instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use `gds-icon-square-info` instead from `@sebgroup/green-core`.
  */
 export const SquareInfo = ({
   focusable = false,

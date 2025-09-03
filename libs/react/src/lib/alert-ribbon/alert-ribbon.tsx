@@ -16,6 +16,9 @@ export interface AlertRibbonProps {
   closeAriaLabel?: string
 }
 
+/**
+ * @deprecated Please use the `gds-alert` web component from green-core instead
+ */
 export function AlertRibbon({
   type,
   header,
