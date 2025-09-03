@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../atoms/link/link'
+import Toggle from '../atoms/toggle/toggle.theme'
 import { NavItem, Page } from './settings/studio.types'
 import * as Tool from './tools'
 import { colorTokens } from './tools/colors/colors.tokens'
@@ -152,17 +153,23 @@ export default function Studio({ page, icon }: StudioProps) {
           </Core.GdsInput>
         </Core.GdsFlex>
 
-        <Core.GdsFlex margin="auto 0 0 0" padding="m">
+        <Core.GdsFlex
+          margin="auto 0 0 0"
+          padding="l"
+          justify-content="space-between"
+          align-items="center"
+        >
           <Link
-            component="button"
+            component="link"
             href="/"
             width="max-content"
-            size="small"
             rank="tertiary"
+            size="small"
           >
-            <Core.IconArrowLeft slot="lead" />
+            <Core.IconChevronLeft slot="lead" size="m" />
             Docs
           </Link>
+          <Toggle />
         </Core.GdsFlex>
       </Core.GdsCard>
 

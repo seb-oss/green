@@ -291,16 +291,18 @@ export default function Command() {
                       <Core.GdsText font-weight="book" font="heading-xs">
                         {result.title}
                       </Core.GdsText>
-                      <Core.GdsFlex gap="xs" align-items="center">
-                        {result.beta && (
-                          <Core.GdsBadge variant="notice" size="small">
-                            BETA
+                      {false && (
+                        <Core.GdsFlex gap="xs" align-items="center">
+                          {result.beta && (
+                            <Core.GdsBadge variant="notice" size="small">
+                              BETA
+                            </Core.GdsBadge>
+                          )}
+                          <Core.GdsBadge size="small">
+                            {result.type}
                           </Core.GdsBadge>
-                        )}
-                        <Core.GdsBadge size="small">
-                          {result.type}
-                        </Core.GdsBadge>
-                      </Core.GdsFlex>
+                        </Core.GdsFlex>
+                      )}
                     </Core.GdsFlex>
                     {result.summary && (
                       <Core.GdsText font="body-s" color="neutral-02">

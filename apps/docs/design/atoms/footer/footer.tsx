@@ -3,31 +3,13 @@
 import { GdsFlex } from '@sebgroup/green-core/react'
 import * as Core from '@sebgroup/green-core/react'
 import { _, Icon } from '../../../hooks'
-import { useSettingsContext, useSettingsValue } from '../../../settings/hooks'
 import { Link } from '../link/link'
+import Toggle from '../toggle/toggle.theme'
 
 export default function Footer() {
-  const THEME = useSettingsValue((s) => s.UI.Theme.ColorScheme)
-  const { actions: SET } = useSettingsContext()
-
   const year = new Date().getFullYear()
   const symbol = '\u00A9'
   const text = `${symbol}  ${year} Skandinaviska Enskilda Banken AB`
-
-  const handleThemeToggle = () => {
-    SET.toggle('UI.Theme.ColorScheme')
-  }
-
-  const THEME_ICON = () => {
-    switch (THEME) {
-      case 'light':
-        return <Icon name="IconSun" size="m" />
-      case 'dark':
-        return <Icon name="IconMoon" size="m" />
-      case 'auto':
-        return <Icon name="IconTelevision" size="m" />
-    }
-  }
 
   return (
     <GdsFlex
@@ -80,16 +62,7 @@ export default function Footer() {
             >
               <Icon name="IconSettingsGear" size="m" />
             </Link>
-
-            <Link
-              component="button"
-              rank="tertiary"
-              size="small"
-              onClick={() => handleThemeToggle()}
-              data-theme={THEME}
-            >
-              {THEME_ICON()}
-            </Link>
+            <Toggle />
           </Core.GdsFlex>
         </GdsFlex>
       </GdsFlex>
