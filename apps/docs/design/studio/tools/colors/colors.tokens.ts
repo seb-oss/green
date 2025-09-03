@@ -21,7 +21,7 @@ import {
   ColorToken,
   ColorValue,
   RefColor,
-} from './color.types'
+} from './colors.types'
 
 const filterTokens = (obj: Record<string, any>): Record<string, ColorValue> => {
   const result: Record<string, ColorValue> = {}

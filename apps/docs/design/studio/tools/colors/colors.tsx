@@ -2,8 +2,8 @@
 import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { colorTokens } from './color.tokens'
-import { ColorSubGroup, ColorToken } from './color.types'
+import { colorTokens } from './colors.tokens'
+import { ColorSubGroup, ColorToken } from './colors.types'
 
 function calculateScore(token: ColorToken, query: string): boolean {
   const searchString =

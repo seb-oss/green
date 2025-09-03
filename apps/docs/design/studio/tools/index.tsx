@@ -1,4 +1,4 @@
-export { default as Color } from './color/color'
+export { default as Colors } from './colors/colors'
 export { default as Compose } from './compose/compose'
 export { default as Grid } from './grid/grid'
 export { default as Spacing } from './spacing/spacing'

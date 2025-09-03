@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
 export type Page =
-  | 'color'
+  | 'colors'
   | 'typography'
   | 'spacing'
   | 'icons'
