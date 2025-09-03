@@ -12,6 +12,7 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { isIOS } from '../../utils/helpers/platform'
 import {
+  withPaddingProps,
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
@@ -45,9 +46,11 @@ registerGlobalScrollLockStyles()
   dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],
 })
 @localized()
-export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
+export class GdsDialog extends withSizeXProps(
+  withSizeYProps(withPaddingProps(GdsElement)),
+) {
   static styles = [DialogStyles]
-  static styleExpressionBaseSelector = 'dialog'
+  static styleExpressionBaseSelector = '.card'
 
   /**
    * Whether the dialog is open. The state of the dialog can be controlled either
@@ -75,10 +78,14 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
   placement: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
 
   /**
-   * The dialog's padding.
+   * Whether the inner content of the dialog should have scrollable overflow. Scroll will appear if
+   * the content exceeds the dialog's height, which can be controlled using the `height` property.
+   *
+   * This property have no effect if the `dialog` slot is used. In that case, you need to add overflow
+   * styles to the content inside the `dialog` slot.
    */
-  @property()
-  padding?: string = 'l'
+  @property({ type: Boolean })
+  scrollable = false
 
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
@@ -128,13 +135,10 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
           >
             <gds-card
               class="card"
-              display="flex"
               variant="secondary"
               box-shadow="xl"
-              padding=${ifDefined(this.padding)}
               gap="l"
               border-radius="s"
-              min-height="min-content"
             >
               <slot name="dialog">
                 <gds-flex justify-content="space-between">
@@ -148,7 +152,11 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
                     ><gds-icon-cross-small></gds-icon-cross-small
                   ></gds-button>
                 </gds-flex>
-                <gds-div id="content" flex="1">
+                <gds-div
+                  id="content"
+                  flex="1"
+                  overflow=${ifDefined(this.scrollable) ? 'auto' : ''}
+                >
                   <slot></slot>
                 </gds-div>
                 <gds-flex
