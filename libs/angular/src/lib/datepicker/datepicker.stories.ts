@@ -83,7 +83,7 @@ const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
     <ngg-datepicker
       formControlName="date"
       label="Date"
-      [isValid]="validationForm.get('date').valid"
+      [isValid]="ngForm.submitted ? validationForm.get('date').valid : null"
       [options]="options"
       [errorMessage]="!ngForm['submitted'] ? 'Select date' : 'Enter valid date'"
     >
