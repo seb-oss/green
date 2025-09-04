@@ -73,8 +73,9 @@ export default function Radius() {
 
         {filteredTokens.map((group) => (
           <Core.GdsFlex key={group.title} flex-direction="column" gap="0">
-            {group.tokens.map((token) => (
+            {group.tokens.map((token, index) => (
               <Table.Row
+                key={token.name + index}
                 name={token.name}
                 columns={[
                   { type: 'name' },

@@ -95,8 +95,9 @@ export default function Spacing() {
               ]}
             />
 
-            {group.tokens.map((token, tokenIndex) => (
+            {group.tokens.map((token, index) => (
               <Table.Row
+                key={token.name + index}
                 name={token.name}
                 columns={[
                   { type: 'name' },

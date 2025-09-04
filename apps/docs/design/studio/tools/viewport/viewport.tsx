@@ -62,8 +62,9 @@ export default function Viewport() {
           ]}
         />
 
-        {filteredTokens.map((token) => (
+        {filteredTokens.map((token, index) => (
           <Table.Row
+            key={token.name + index}
             name={token.name}
             columns={[
               { type: 'name', content: token.name },

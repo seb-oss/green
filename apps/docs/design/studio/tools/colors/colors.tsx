@@ -48,6 +48,7 @@ const ColorSwatch = ({
 
   return (
     <Table.Row
+      key={token.name + level}
       name={token.name}
       data-variable={getVarName('light')}
       columns={[

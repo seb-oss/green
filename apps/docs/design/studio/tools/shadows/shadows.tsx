@@ -59,6 +59,7 @@ export default function Shadows() {
 
         {filteredTokens.map((token) => (
           <Table.Row
+            key={token + 'shadow'}
             name={token}
             columns={[
               { type: 'name' },
