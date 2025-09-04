@@ -31,7 +31,7 @@ const rewriteImports: esbuild.Plugin = {
         .replace(/from\s+['"](\..*?)['"]/g, (match, importPath) => {
           if (
             path.extname(importPath) &&
-            !['.component', '.styles', '.style'].includes(
+            !['.component', '.styles', '.style', '.template'].includes(
               path.extname(importPath),
             )
           )
@@ -98,6 +98,40 @@ const rewriteImports: esbuild.Plugin = {
             return match
           },
         )
+        // Handle side-effect imports: import "..."
+        .replace(/import\s+['"](\..*?)['"]/g, (match, importPath) => {
+          if (
+            path.extname(importPath) &&
+            !['.component', '.styles', '.style', '.template'].includes(
+              path.extname(importPath),
+            )
+          )
+            return match // Skip if it already has an extension
+          const fullPath = path.resolve(path.dirname(args.path), importPath)
+          try {
+            const stats = fs.statSync(fullPath)
+            if (stats.isDirectory()) {
+              return `import '${importPath}/index.js'` // Directory -> /index.js
+            } else if (stats.isFile()) {
+              return `import '${importPath}.js'` // File -> .js
+            }
+          } catch {
+            // Check for .ts/.tsx files
+            const possibleExtensions = ['.ts', '.tsx']
+            for (const ext of possibleExtensions) {
+              const filePath = `${fullPath}${ext}`
+              try {
+                fs.statSync(filePath)
+                return `import '${importPath}.js'` // File exists with .ts/.tsx -> .js
+              } catch {
+                // Continue to next extension
+              }
+            }
+            // Fallback: assume it’s a file without extension in source
+            return `import '${importPath}.js'`
+          }
+          return match
+        })
 
       // Step 2: Handle CSS/SCSS imports
       transformed = transformed.replace(

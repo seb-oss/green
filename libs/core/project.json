@@ -4,6 +4,7 @@
   "sourceRoot": "libs/core/src",
   "projectType": "library",
   "implicitDependencies": ["tokens"],
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "nx:run-commands",
@@ -96,6 +97,18 @@
         "command": "node libs/core/build-scripts/icons-generate.cjs"
       }
     },
+    "icons-figma-connect-generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node libs/core/build-scripts/icons-figma-connect.cjs"
+      }
+    },
+    "icons-figma-connect-publish": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx figma connect publish --exit-on-unreadable-files"
+      }
+    },
     "icons-react": {
       "executor": "nx:run-commands",
       "options": {
@@ -146,7 +159,14 @@
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
       "options": {}
+    },
+    "version-as-snapshot": {
+      "executor": "@sebgroup/repo-tools:version-as-snapshot",
+      "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
+      "options": {}
     }
-  },
-  "tags": []
+  }
 }

@@ -15,14 +15,17 @@
     </div>
     <div style="flex: 1"></div>
   </gds-flex>
+
   <gds-flex gap="l" max-width="1000px" margin="0 auto">
     <gds-card
-      variant="primary"
+      variant="secondary"
+      border-color="primary"
       flex="1"
       [class.card]="designVersion === '2016'"
     >
       <form [formGroup]="simpleForm">
         <gds-flex flex-direction="column" gap="m">
+          <gds-form-summary reactive></gds-form-summary>
           <!-- Because we've imported the NggCoreFormsModule, we can use the Green Core form controls
              just like regular HTML controls. Just set the formControlName to the matching field in
              your reactive form object.
@@ -30,7 +33,7 @@
              Additionally, we can supply the error message to the `errorMessage` property of the form control.
              This will render in red underneath the input field if the control is invalid.
 
-             Other than that, not much is differnt from using regular HTML controls. -->
+             Other than that, not much is different from using regular HTML controls. -->
           <gds-input
             formControlName="name"
             label="Name"
@@ -96,6 +99,28 @@
               supporting-text="Supporting text"
             ></gds-radio>
           </gds-radio-group>
+          <gds-checkbox-group
+            formControlName="checkboxGroup"
+            label="Checkbox group"
+            supporting-text="Supporting text"
+            [errorMessage]="getError(simpleForm.get('checkboxGroup'))"
+          >
+            <gds-checkbox
+              label="Option 1"
+              value="1"
+              supporting-text="Supporting text"
+            ></gds-checkbox>
+            <gds-checkbox
+              label="Option 2"
+              value="2"
+              supporting-text="Supporting text"
+            ></gds-checkbox>
+            <gds-checkbox
+              label="Option 3"
+              value="3"
+              supporting-text="Supporting text"
+            ></gds-checkbox>
+          </gds-checkbox-group>
           <gds-datepicker
             formControlName="date"
             label="Date"
@@ -105,9 +130,15 @@
             formControlName="description"
             label="Description"
             [errorMessage]="getError(simpleForm.get('description'))"
-            clearable
-          >
-          </gds-textarea>
+          ></gds-textarea>
+          <gds-checkbox
+            formControlName="singleCheckbox"
+            label="Accept terms and conditions"
+            supporting-text="Supporting text"
+            value="terms"
+            [errorMessage]="getError(simpleForm.get('singleCheckbox'))"
+          ></gds-checkbox>
+          <gds-form-summary></gds-form-summary>
           <gds-flex gap="m">
             <gds-button type="submit">Submit</gds-button>
             <gds-button type="reset" rank="secondary">Reset</gds-button>
@@ -120,79 +151,173 @@
     <gds-flex flex="1">
       <gds-rich-text>
         <table>
-          <tr>
-            <th>Name</th>
-            <td>
-              {{ simpleForm.get('name')?.value }}
-              <gds-text *ngIf="simpleForm.get('name')?.invalid" color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
-          <tr>
-            <th>Email</th>
-            <td>
-              {{ simpleForm.get('email')?.value }}
-              <gds-text
-                *ngIf="simpleForm.get('email')?.invalid"
-                color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
-          <tr>
-            <th>Dropdown</th>
-            <td>
-              {{ simpleForm.get('dropdown')?.value }}
-              <gds-text
-                *ngIf="simpleForm.get('dropdown')?.invalid"
-                color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
-          <tr>
-            <th>Select</th>
-            <td>
-              {{ simpleForm.get('select')?.value }}
-              <gds-text
-                *ngIf="simpleForm.get('select')?.invalid"
-                color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
-          <tr>
-            <th>Radio</th>
-            <td>
-              {{ simpleForm.get('radio')?.value }}
-              <gds-text
-                *ngIf="simpleForm.get('radio')?.invalid"
-                color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
-          <tr>
-            <th>Date</th>
-            <td>
-              {{ simpleForm.get('date')?.value }}
-              <gds-text *ngIf="simpleForm.get('date')?.invalid" color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
-          <tr>
-            <th>Description</th>
-            <td>
-              {{ simpleForm.get('description')?.value }}
-              <gds-text
-                *ngIf="simpleForm.get('description')?.invalid"
-                color="negative"
-                >(invalid)</gds-text
-              >
-            </td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Control name</th>
+              <th>Value</th>
+              <th>Touched</th>
+              <th>Dirty</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <td>
+                {{ simpleForm.get('name')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('name')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('name')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('name')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Email</th>
+              <td>
+                {{ simpleForm.get('email')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('email')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('email')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('email')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Dropdown</th>
+              <td>
+                {{ simpleForm.get('dropdown')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('dropdown')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('dropdown')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('dropdown')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Select</th>
+              <td>
+                {{ simpleForm.get('select')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('select')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('select')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('select')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Radio</th>
+              <td>
+                {{ simpleForm.get('radio')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('radio')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('radio')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('radio')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Checkbox group</th>
+              <td>
+                {{ simpleForm.get('checkboxGroup')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('checkboxGroup')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{
+                  simpleForm.get('checkboxGroup')?.touched ? 'true' : 'false'
+                }}
+              </td>
+              <td>
+                {{ simpleForm.get('checkboxGroup')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Date</th>
+              <td>
+                {{ simpleForm.get('date')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('date')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('date')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('date')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td>
+                {{ simpleForm.get('description')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('description')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{ simpleForm.get('description')?.touched ? 'true' : 'false' }}
+              </td>
+              <td>
+                {{ simpleForm.get('description')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+            <tr>
+              <th>Accept terms and conditions</th>
+              <td>
+                {{ simpleForm.get('singleCheckbox')?.value }}
+                <gds-text
+                  *ngIf="simpleForm.get('singleCheckbox')?.invalid"
+                  color="negative"
+                  >(invalid)</gds-text
+                >
+              </td>
+              <td>
+                {{
+                  simpleForm.get('singleCheckbox')?.touched ? 'true' : 'false'
+                }}
+              </td>
+              <td>
+                {{ simpleForm.get('singleCheckbox')?.dirty ? 'true' : 'false' }}
+              </td>
+            </tr>
+          </tbody>
         </table>
       </gds-rich-text>
     </gds-flex>

@@ -1,7 +1,2 @@
-/*!
- *  @deprecated
- */
-
-@use 'SEB-SansSerif' as fonts;
-
-@include fonts.add-fonts();
+@forward 'variables';
+@use 'SEB-SansSerif';

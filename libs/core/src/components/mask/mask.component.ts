@@ -2,24 +2,36 @@ import { html } from 'lit/static-html.js'
 
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { GdsColorLevel, parseColorValue } from '../../utils/helpers'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsFlex } from '../flex/flex.component'
-import MaskCSS from './mask.style'
+import MaskStyles from './mask.styles'
 
 /**
  * @element gds-mask
  * @status beta
+ *
+ * The `gds-mask` component is a container that applies gradient background for contrast. This component is experimental, and may change name or be removed in the future.
  */
 @gdsCustomElement('gds-mask')
 export class GdsMask extends GdsFlex {
-  static styles = [tokens, MaskCSS]
+  static styles = [tokens, MaskStyles]
 
   @styleExpressionProperty({
     selector: '[part="mask"]',
+    valueTemplate: function (value) {
+      const this_ = this as { level: GdsColorLevel }
+      return parseColorValue(value, 'background', this_.level)
+    },
+  })
+  override background?: string
+
+  @styleExpressionProperty({
     valueTemplate: (v) => {
       const [direction] = v.split('/')
       return `linear-gradient(to ${direction}, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%)`
     },
+    selector: '[part="mask"]',
   })
   'mask-image'?: string
 
@@ -40,18 +52,6 @@ export class GdsMask extends GdsFlex {
     selector: '[part="mask"]',
   })
   'mask-position' = 'center'
-
-  @styleExpressionProperty({
-    selector: '[part="mask"]',
-    valueTemplate: function (v) {
-      const [backgroundColor, backgroundColorAlpha] = v.split('/')
-      const background = backgroundColorAlpha
-        ? `color-mix(in srgb, var(--gds-color-${'l' + (this as GdsFlex).level}-background-${backgroundColor}) ${parseFloat(backgroundColorAlpha) * 100}%, transparent 0%)`
-        : `var(--gds-color-${'l' + (this as GdsFlex).level}-background-${backgroundColor})`
-      return background
-    },
-  })
-  'background-color'?: string
 
   /**
    * Controls the backdrop-filter property of the container.
@@ -80,11 +80,12 @@ export class GdsMask extends GdsFlex {
   constructor() {
     super()
     this.position = 'relative'
+    this.display = 'flex'
     this.inset = '0'
   }
 
   render() {
     return html`<div part="mask"></div>
-      <div part="content"><slot></slot></div>`
+      <slot></slot>`
   }
 }

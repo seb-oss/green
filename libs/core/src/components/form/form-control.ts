@@ -4,6 +4,8 @@ import { property } from 'lit/decorators.js'
 import { GdsElement } from '../../gds-element'
 import { watch } from '../../utils/decorators'
 
+import './form-request-submit-polyfill'
+
 interface ElementInternalsPolyfill {
   form: HTMLFormElement | null
   setFormValue(value: any): void
@@ -29,6 +31,8 @@ export interface GdsValidator {
  * other common form control functionality that all Green Core form controls share.
  *
  * @internal
+ *
+ * @event gds-validity-state - Dispatched when the validity state of the form control is changed by a validator.
  */
 export abstract class GdsFormControlElement<ValueT = any>
   extends GdsElement
@@ -47,7 +51,7 @@ export abstract class GdsFormControlElement<ValueT = any>
       this.#internals = {
         form: this.closest('form'),
         setFormValue: (value: any) => {
-          this.value = value
+          this._internalValue = value
         },
         setValidity: (validity: ValidityState, validationMessage?: string) => {
           ;(this.#internals.validity as any) = validity
@@ -68,8 +72,19 @@ export abstract class GdsFormControlElement<ValueT = any>
           valid: true,
         },
         willValidate: true,
-        checkValidity: () => true,
-        reportValidity: () => true,
+        checkValidity: this.checkValidity.bind(this),
+        reportValidity: this.reportValidity.bind(this),
+      }
+    }
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    if (typeof this.attachInternals !== 'function') {
+      const form = this.closest('form')
+      if (form) {
+        form.addEventListener('submit', this._handleFormSubmit.bind(this))
+        form.addEventListener('reset', this.formResetCallback.bind(this))
       }
     }
   }
@@ -101,21 +116,17 @@ export abstract class GdsFormControlElement<ValueT = any>
   @property({
     type: Boolean,
     reflect: true,
-    attribute: 'aria-invalid',
-    converter: {
-      fromAttribute: Boolean,
-      toAttribute: (value: boolean) => value?.toString(),
-    },
   })
   set invalid(value: boolean) {
     const oldValue = this.invalid
+
     this.#internals.setValidity(
       {
         ...this.#internals.validity,
         customError: value,
         valid: !value,
       },
-      this.validationMessage || msg(`Error message.`),
+      this.errorMessage || this.validationMessage || '   ',
       // @ts-expect-error - setValidity actually takes an element as the third argument, but the type definition is wrong.
       this._getValidityAnchor() || undefined,
     )
@@ -141,6 +152,7 @@ export abstract class GdsFormControlElement<ValueT = any>
   }
   set value(value: ValueT | undefined) {
     this._internalValue = value
+    this.#internals.setFormValue(value as any)
   }
   protected _internalValue?: ValueT
 
@@ -187,6 +199,8 @@ export abstract class GdsFormControlElement<ValueT = any>
       '',
     ]
 
+    this.errorMessage = validity[1] || this.errorMessage
+
     this.#internals.setValidity(
       validity[0],
       validity[1],
@@ -194,7 +208,16 @@ export abstract class GdsFormControlElement<ValueT = any>
       this._getValidityAnchor(),
     )
 
-    if (oldValue !== this.invalid) this.requestUpdate()
+    if (oldValue !== this.invalid) {
+      this.requestUpdate('invalid', oldValue)
+      this.dispatchCustomEvent('gds-validity-state', {
+        detail: {
+          valid: this.validity.valid,
+          message: this.validationMessage,
+        },
+        composed: true,
+      })
+    }
 
     return this.#internals.checkValidity()
   }
@@ -203,18 +226,18 @@ export abstract class GdsFormControlElement<ValueT = any>
     return this.#internals.reportValidity()
   }
 
-  @watch('value')
+  @watch('value', { waitUntilFirstUpdate: true })
   private __handleValueChange() {
-    this.#internals.setFormValue(this.value as any)
     this.checkValidity()
   }
 
-  formResetCallback() {
+  protected formResetCallback() {
     if (typeof this.value === 'string') (this.value as string) = ''
+    else if (Array.isArray(this.value)) (this.value as Array<string>) = []
     else this.value = undefined
   }
 
-  formAssociatedCallback(form?: HTMLFormElement) {
+  protected formAssociatedCallback(form?: HTMLFormElement) {
     form?.addEventListener('submit', this._handleFormSubmit.bind(this))
   }
 
@@ -223,12 +246,10 @@ export abstract class GdsFormControlElement<ValueT = any>
     if (!this.validity.valid) e.preventDefault()
   }
 
-  focus(options?: FocusOptions | undefined): void {
-    this._getValidityAnchor().focus(options)
-  }
-
   /**
-   * This should return a reference to the HTML element that will recive the focus when the form control is invalid.
+   * This should return a reference to the HTML element that the browser will refer to when the form control is invalid.
+   * The reference is used when setting the validity state in ElementInternals.
+   * For reference: https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals/setValidity#anchor
    */
   protected abstract _getValidityAnchor(): HTMLElement
 }

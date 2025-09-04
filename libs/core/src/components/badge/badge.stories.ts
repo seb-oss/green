@@ -18,7 +18,7 @@ import '../icon/icons/triangle-exclamation.js'
 import '../icon/icons/plus-small.ts'
 
 /**
- * A badge is a small status or notification indicator that can be used to display a message or status.
+ * A compact visual indicator for status, counts and notifications.
  *
  * Features:
  * - **Variants**: The badge supports multiple variants including `information`, `notice`, `positive`, `warning`, and `negative`, allowing for different contextual uses.
@@ -86,7 +86,7 @@ export const Variants: Story = {
             </gds-icon-triangle-exclamation>
             Negative
           </gds-badge>
-          <gds-badge variant="negative" disabled>
+          <gds-badge variant="disabled">
             <gds-icon-triangle-exclamation slot="lead">
             </gds-icon-triangle-exclamation>
             Disabled
@@ -104,7 +104,7 @@ export const Variants: Story = {
           <gds-badge variant="positive"> Positive </gds-badge>
           <gds-badge variant="warning"> Warning </gds-badge>
           <gds-badge variant="negative"> Negative </gds-badge>
-          <gds-badge variant="negative" disabled> Disabled </gds-badge>
+          <gds-badge variant="disabled"> Disabled </gds-badge>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
@@ -118,7 +118,7 @@ export const Variants: Story = {
           <gds-badge size="small" variant="positive"> 32 </gds-badge>
           <gds-badge size="small" variant="warning"> 602 </gds-badge>
           <gds-badge size="small" variant="negative"> 537 </gds-badge>
-          <gds-badge size="small" variant="negative" disabled> 982 </gds-badge>
+          <gds-badge size="small" variant="disabled"> 982 </gds-badge>
         </gds-flex>
       </gds-flex>
       <gds-flex flex-direction="column" gap="m">
@@ -127,17 +127,9 @@ export const Variants: Story = {
           <gds-divider opacity="0.2"></gds-divider>
         </gds-flex>
         <gds-flex gap="xl" align-items="center">
-          <gds-badge variant="positive" notification></gds-badge>
-          <gds-badge variant="positive" notification>9</gds-badge>
-          <gds-badge variant="positive" notification>
-            999
-            <gds-icon-plus-small slot="trail"></gds-icon-plus-small
-          ></gds-badge>
-          <gds-badge variant="negative" notification></gds-badge>
-          <gds-badge variant="negative" notification>9</gds-badge>
-          <gds-badge variant="negative" notification>
-            999 <gds-icon-plus-small slot="trail"></gds-icon-plus-small
-          ></gds-badge>
+          <gds-badge notification></gds-badge>
+          <gds-badge notification>9</gds-badge>
+          <gds-badge notification>999+</gds-badge>
         </gds-flex>
       </gds-flex>
     </gds-flex>
@@ -245,34 +237,6 @@ export const Size: Story = {
 }
 
 /**
- * Indicates whether the badge is disabled.
- * When set to `true`, the badge will appear in a disabled state and will not be interactive.
- *
- * @property {boolean} disabled - Controls the disabled state of the badge.
- *
- * ```html
- * <gds-badge disabled>...</gds-badge>
- * <gds-badge disabled>...</gds-badge>
- * ```
- */
-export const Disabled: Story = {
-  name: 'Disabled',
-  render: (args) => html`
-    <gds-flex gap="xl">
-      <gds-badge variant="positive" disabled>
-        <gds-icon-rocket slot="lead"></gds-icon-rocket>
-        Launch
-      </gds-badge>
-      <gds-badge variant="warning" disabled>
-        <gds-icon-arrow-rotate-counter-clockwise slot="lead">
-        </gds-icon-arrow-rotate-counter-clockwise>
-        Discard
-      </gds-badge>
-    </gds-flex>
-  `,
-}
-
-/**
  * The `Notification` story demonstrates the use of the `gds-badge` component in notification mode.
  * In this mode, the badge acts as a notification indicator with only two possible variants: `positive` or `negative`.
  *
@@ -330,15 +294,9 @@ export const Notification: Story = {
   },
   render: (args) => html`
     <gds-flex gap="xl" align-items="center">
-      <gds-badge variant="positive" notification></gds-badge>
-      <gds-badge variant="positive" notification>9</gds-badge>
-      <gds-badge variant="positive" notification>
-        999
-        <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
-      </gds-badge>
-      <gds-badge variant="negative" notification></gds-badge>
-      <gds-badge variant="negative" notification>9</gds-badge>
-      <gds-badge variant="negative" notification>
+      <gds-badge notification></gds-badge>
+      <gds-badge notification>9</gds-badge>
+      <gds-badge notification>
         999
         <gds-icon-plus-small slot="trail"></gds-icon-plus-small>
       </gds-badge>

@@ -47,7 +47,7 @@ export class NggvTypeaheadDropdownListComponent
     private renderer2: Renderer2,
     private element: ElementRef,
   ) {
-    super(translocoScope)
+    super(translocoScope, renderer2, element)
   }
 
   ngOnInit(): void {
@@ -98,13 +98,6 @@ export class NggvTypeaheadDropdownListComponent
         if (!this.state) this.hostComponent.nggvInput.emit('')
         this.setExpanded(true)
         this.subscribeToOutsideClickEvent()
-      })
-
-    this.hostComponent.nggvBlur
-      .asObservable()
-      .pipe(takeUntil(this._destroy$))
-      .subscribe(() => {
-        this.setExpanded(false)
       })
   }
 

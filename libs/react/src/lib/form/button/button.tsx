@@ -23,6 +23,9 @@ export interface ButtonProps
   testId?: string
 }
 
+/**
+ * @deprecated Please use the `gds-button` web component from green-core instead
+ */
 export const Button = forwardRef(
   (
     {
@@ -44,6 +47,7 @@ export const Button = forwardRef(
     return variant == 'close' ? (
       <button
         className={buttonClassName}
+        type={type}
         aria-label={props['aria-label'] ?? 'Close'}
         data-testid={testId}
         ref={ref}

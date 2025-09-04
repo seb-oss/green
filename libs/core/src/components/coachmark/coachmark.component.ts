@@ -15,7 +15,7 @@ import {
 
 import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
-import styles from './coachmark.styles'
+import CoachmarkStyles from './coachmark.styles'
 
 /**
  * @element gds-coachmark
@@ -31,7 +31,7 @@ import styles from './coachmark.styles'
  */
 @gdsCustomElement('gds-coachmark')
 export class GdsCoachmark extends GdsElement {
-  static styles = styles
+  static styles = CoachmarkStyles
 
   /**
    * The placement of the popover relative to the trigger.
@@ -125,13 +125,11 @@ export class GdsCoachmark extends GdsElement {
     this._isVisible = false
     this.#cardRef.value?.remove()
     this.#autoUpdateCleanupFn?.()
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open: this._isVisible, reason: 'closed' },
-        bubbles: false,
-        composed: false,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      detail: { open: this._isVisible, reason: 'closed' },
+      bubbles: false,
+      composed: false,
+    })
   }
 
   #findTarget(selectors: string[]): HTMLElement | undefined {

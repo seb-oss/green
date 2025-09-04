@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 
 import { argTablePropsFor } from '../../../../.storybook/argTableProps'
 import { GdsFormattedNumber } from './formatted-number.component'
+import { numberFormats } from './number-formatter'
 
 import './formatted-number'
 import '../../flex'
@@ -16,11 +17,15 @@ import '../../flex'
  * @beta
  */
 const meta: Meta = {
-  title: 'Components/Formatted Text/Number',
+  title: 'Components/Formatted text/Number',
   component: 'gds-formatted-number',
   tags: ['autodocs'],
   argTypes: {
     ...argTablePropsFor('gds-formatted-number'),
+    format: {
+      control: { type: 'select' },
+      options: Object.keys(numberFormats),
+    },
     currency: {
       type: 'string',
     },

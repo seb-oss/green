@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use '../../common';
 
-
 @mixin tab {
   @include common.add-border($sides: 'bottom');
   @include common.add-border-color;
@@ -45,7 +44,6 @@
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
   border-bottom: 1px transparent;
-
 }
 
 @mixin tabs-bar {

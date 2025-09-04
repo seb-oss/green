@@ -32,6 +32,25 @@ export interface TableHeaderOptions {
    * it will instruct the table to sort the data based on this specific column.
    */
   order?: SortingOrder
+
+  /**
+   * Dynamically hide or show the label and data on mobile view.
+   * This is useful when the table is displayed on a small screen and the data is not relevant.
+   */
+  hideLabelOnMobile?: boolean
+  hidePropertyOnMobile?: boolean
+
+  /**
+   * Set to true to make the text bold on mobile view.
+   * This is useful when the label is hidden on mobile view but the data is still displayed.
+   */
+  boldTextOnMobile?: boolean
+
+  /**
+   * Used to set label for the column.
+   * This is useful when the column has an additional information that needs to be shown.
+   */
+  columnLabel?: string
 }
 
 /** Options applying to table rows */

@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/chlorophyll/src",
   "projectType": "library",
+  "tags": ["lib"],
   "targets": {
     "build": {
       "executor": "@sebgroup/repo-tools:build-chlorophyll",
@@ -85,6 +86,14 @@
     },
     "update-dependencies": {
       "executor": "@sebgroup/repo-tools:update-lib-deps",
+      "options": {}
+    },
+    "version-as-snapshot": {
+      "executor": "@sebgroup/repo-tools:version-as-snapshot",
+      "options": {}
+    },
+    "publish-snapshot": {
+      "executor": "@sebgroup/repo-tools:publish-snapshot",
       "options": {}
     }
   }

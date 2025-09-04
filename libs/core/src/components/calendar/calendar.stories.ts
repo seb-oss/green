@@ -11,7 +11,7 @@ import '../dropdown'
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/calendar)
  *
- * The calendar component is a visual representation of a calendar that allows users to select a date.
+ * The calendar displays a grid of selectable dates.
  */
 const meta: Meta = {
   title: 'Components/Calendar',
@@ -48,6 +48,9 @@ export const Basic: Story = {
   },
 }
 
+/**
+ * Use the `hideDayNames` and `hideExtraneousDays` attribute for a condenced version.
+ */
 export const Minimal: Story = {
   ...DefaultParams,
   render: (args) => html`
@@ -60,9 +63,25 @@ export const Minimal: Story = {
 }
 
 /**
+ * Use the `size="small` attribute for a smaller version and `showWeekNumbers` to show
+ * the week numbers on the left side.
+ */
+export const Small: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-calendar
+      label="Pick a day"
+      size="small"
+      showWeekNumbers
+    ></gds-calendar>
+  `,
+}
+
+/**
  * This is an example of a simple inline datepicker using the calendar
  * component. It demonstrates how to control the view in the calendar,
- * how to react to changes and how to customize dates.
+ * how to react to changes and how to customize dates. It has customizedDates
+ * which makes the grid larger to give space for the indicators.
  *
  * This example is written in plain vanilla js/html, but you can adapt it to your
  * framework of choice.
@@ -70,12 +89,12 @@ export const Minimal: Story = {
 export const Usage: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <div style="width: 320px">
+    <div style="width: 362px">
       <gds-flex gap="m">
         <gds-dropdown id="year" label="Year" size="small">
-          <gds-option value="2024">2024</gds-option>
           <gds-option value="2025">2025</gds-option>
           <gds-option value="2026">2026</gds-option>
+          <gds-option value="2027">2027</gds-option>
         </gds-dropdown>
         <gds-dropdown id="month" max-height="200" label="Month" size="small">
           <gds-option value="0">Jan</gds-option>
@@ -99,22 +118,45 @@ export const Usage: Story = {
       </div>
     </div>
     <script>
-      const cal = document.getElementById('cal')
-      const year = document.getElementById('year')
-      const month = document.getElementById('month')
+      var cal = document.getElementById('cal')
+      var year = document.getElementById('year')
+      var month = document.getElementById('month')
 
-      const customizedDates = [
+      var customizedDates = [
         {
-          date: new Date('2024-06-04'),
+          date: new Date('2025-08-25'),
           color: 'var(--intent-danger-background)',
         },
         {
-          date: new Date('2024-06-06'),
+          date: new Date('2025-08-27'),
           color: 'var(--intent-danger-background)',
           indicator: 'dot',
         },
         {
-          date: new Date('2024-07-06'),
+          date: new Date('2025-08-28'),
+          color: 'var(--intent-danger-background)',
+          indicator: 'icon',
+        },
+        {
+          date: new Date('2025-08-29'),
+          disabled: true,
+        },
+        {
+          date: new Date('2025-09-15'),
+          color: 'var(--intent-danger-background)',
+        },
+        {
+          date: new Date('2025-09-17'),
+          color: 'var(--intent-danger-background)',
+          indicator: 'dot',
+        },
+        {
+          date: new Date('2025-09-18'),
+          color: 'var(--intent-danger-background)',
+          indicator: 'icon',
+        },
+        {
+          date: new Date('2025-09-19'),
           disabled: true,
         },
       ]

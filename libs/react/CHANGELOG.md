@@ -1,5 +1,143 @@
 # Changelog
 
+## 3.32.1
+
+### Patch Changes
+
+- 43c34a3: **Deprecations:** Add inline deprecation warnings to outdated components
+
+## 3.32.0
+
+### Minor Changes
+
+- 798af05: **Icon:** React wrapper for feedback emoji/icons
+
+### Patch Changes
+
+- Updated dependencies [798af05]
+- Updated dependencies [3b18c2d]
+  - @sebgroup/green-core@2.3.0
+
+## 3.31.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** React wrappers for 28 new icons
+
+### Patch Changes
+
+- Updated dependencies [0339d24]
+  - @sebgroup/green-core@2.2.0
+
+## 3.30.1
+
+### Patch Changes
+
+- d9b0006: **FormItem:** Compatibility fix for Core 2.0
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+  - @sebgroup/green-core@2.0.0
+
+## 3.30.0
+
+### Minor Changes
+
+- 0910e52: **Icon:** React: add mic-on & mic-off
+
+### Patch Changes
+
+- Updated dependencies [0910e52]
+  - @sebgroup/green-core@1.90.0
+
+## 3.29.2
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+
+## 3.29.1
+
+### Patch Changes
+
+- 5526f22: **Button:** Add type to close button
+
+## 3.29.0
+
+### Minor Changes
+
+- f3b8f76: **Icon:** add new code icons
+
+### Patch Changes
+
+- Updated dependencies [577fc63]
+- Updated dependencies [f3b8f76]
+- Updated dependencies [eca17f0]
+  - @sebgroup/green-core@1.87.0
+
+## 3.28.4
+
+### Patch Changes
+
+- 24069a6: Fixing how error messages are read by NVDA
+
+## 3.28.3
+
+### Patch Changes
+
+- 7e585f8: **Datepicker:** Fix internal change handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
+## 3.28.2
+
+### Patch Changes
+
+- e26efba: **Dropdown:** Adding icon to validation message
+- e26efba: **Checkbox:** Adding icons to validation message
+- Updated dependencies [c2980e1]
+- Updated dependencies [59b22ed]
+  - @sebgroup/green-core@1.78.1
+  - @sebgroup/extract@3.0.3
+
+## 3.28.1
+
+### Patch Changes
+
+- 6846a6c: Datepicker option to not use Clear and Today button
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
+## 3.28.0
+
+### Minor Changes
+
+- 30d27ef: **Icon:** Add 27 new icons
+
+### Patch Changes
+
+- Updated dependencies [30d27ef]
+  - @sebgroup/green-core@1.75.0
+
 ## 3.27.1
 
 ### Patch Changes

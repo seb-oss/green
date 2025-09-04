@@ -1,14 +1,13 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, reset;
   @layer base {
     .details {
-      border-bottom: solid var(--gds-space-4xs)
-        var(--gds-color-l2-border-primary);
-      font-size: var(--gds-text-size-body-m);
-      line-height: var(--gds-text-line-height-body-m);
-      color: var(--gds-color-l2-content-secondary);
+      border-bottom: solid var(--gds-sys-space-4xs)
+        var(--gds-sys-color-border-subtle-01);
+      font: var(--gds-sys-text-body-regular-m);
+      color: var(--gds-sys-color-content-neutral-01);
       transition: border-color 240ms linear;
     }
 
@@ -18,24 +17,36 @@ export const styles = css`
       align-items: center;
       list-style: none;
       user-select: none;
-      outline-offset: var(--gds-space-2xs);
+      outline-offset: var(--gds-sys-space-2xs);
       outline-color: currentColor;
       transition: all 120ms;
-      color: var(--gds-color-l2-content-primary);
+      color: var(--gds-sys-color-content-neutral-01);
     }
 
     .summary-icon {
-      border-radius: var(--gds-space-max);
+      border-radius: var(--gds-sys-radius-max);
       background-color: transparent;
       transition: all 280ms;
       aspect-ratio: 1;
       width: max-content;
       height: max-content;
       line-height: 1;
+      position: relative;
+    }
+
+    .summary-icon::after {
+      content: '';
+      position: absolute;
+      border-radius: var(--gds-sys-radius-max);
+      transition: all 280ms;
+      inset: 0;
+      scale: 0.9;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .summary:focus {
-      outline-color: var(--gds-color-l3-content-tertiary);
+      outline-color: var(--gds-sys-color-content-neutral-01);
 
       &:not(:focus-visible) {
         outline-color: transparent;
@@ -43,59 +54,50 @@ export const styles = css`
     }
 
     @media (pointer: fine) {
-      .summary:is(:hover, :focus-within) .summary-icon {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-light-hover)
-        );
+      .summary:hover .summary-icon::after,
+      .summary:focus-visible .summary-icon::after {
+        opacity: 1;
+        scale: 1;
       }
 
-      .summary:active .summary-icon {
-        background-color: color-mix(
-          in srgb,
-          transparent,
-          var(--gds-color-l3-states-light-pressed)
-        );
+      .summary:active .summary-icon::after {
+        opacity: 1;
+        scale: 1;
       }
 
       .details:hover,
       .details:focus-within {
-        border-color: var(--gds-color-l2-border-quaternary);
+        border-color: var(--gds-sys-color-border-strong);
       }
     }
 
     .summary-label {
-      font-size: var(--gds-text-size-heading-xs);
-      line-height: var(--gds-text-line-height-heading-xs);
-      font-weight: var(--gds-text-weight-regular);
-      padding-block: var(--gds-space-m);
+      font: var(--gds-sys-text-heading-xs);
+      padding-block: var(--gds-sys-space-m);
       cursor: pointer;
       flex: 1;
       outline: none;
     }
 
     .details.small .summary-label {
-      font-size: var(--gds-text-size-heading-2xs);
-      line-height: var(--gds-text-line-height-heading-2xs);
-      padding-block: var(--gds-space-s);
+      font: var(--gds-sys-text-heading-2xs);
+      padding-block: var(--gds-sys-space-s);
     }
 
     .details.small .content {
-      font-size: var(--gds-text-size-heading-2xs);
-      line-height: var(--gds-text-line-height-heading-2xs);
+      font: var(--gds-sys-text-heading-2xs);
     }
 
     .details:focus-visible {
-      border-radius: var(--gds-space-2xs);
+      border-radius: var(--gds-sys-radius-2xs);
     }
 
     .details.open .content {
-      padding-block-end: var(--gds-space-l);
+      padding-block-end: var(--gds-sys-space-l);
     }
 
     .details.small.open .content {
-      padding-block-end: var(--gds-space-s);
+      padding-block-end: var(--gds-sys-space-s);
     }
 
     .content {
@@ -104,13 +106,16 @@ export const styles = css`
       transition:
         height 0.35s ease,
         padding-block-end 0.35s ease;
-      overflow-y: clip;
+      overflow: hidden;
       outline: none;
+      scrollbar-width: none;
     }
 
     .content.open {
+      overflow: auto;
       height: max-content;
       max-height: 100vh;
     }
   }
 `
+export default style

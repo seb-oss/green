@@ -23,24 +23,32 @@
 </label>
 
 <!-- DESCRIPTION -->
-<div class="form-info description hide-if-empty" *ngIf="description">
+<div class="form-info description hide-if-empty" *ngIf="description && descriptionIsVisible">
   {{ description }}
 </div>
 
 <!-- LOCKED INPUT -->
 <ng-container *ngIf="locked">
-  <div
-    [id]="id + '-textarea'"
-    class="nggv-field--locked"
-    [attr.name]="name"
-    [attr.value]="state"
-    [attr.role]="role"
-  >
-    <span *ngIf="!state" class="unset-state">-</span>
-    <ng-container *ngIf="state">
-      {{ state }}
-    </ng-container>
-  </div>
+  <ng-template
+    *ngTemplateOutlet="
+      lockedTpl || defaultLockedTpl;
+      context: { $implicit: state }
+    "
+  ></ng-template>
+  <ng-template #defaultLockedTpl>
+    <div
+      [id]="id + '-textarea'"
+      class="nggv-field--locked"
+      [attr.name]="name"
+      [attr.value]="state"
+      [attr.role]="role"
+    >
+      <span *ngIf="!state" class="unset-state">-</span>
+      <ng-container *ngIf="state">
+        {{ state }}
+      </ng-container>
+    </div>
+  </ng-template>
 </ng-container>
 
 <!-- INPUT FIELD -->
@@ -52,7 +60,7 @@
     [ngClass]="{ 'no-resize': !!rows }"
     [class.nggv-field--error]="invalid"
     [attr.name]="name"
-    [attr.required]="required"
+    [attr.required]="required || null"
     [disabled]="disabled"
     [autofocus]="autofocus"
     [readOnly]="readonly"

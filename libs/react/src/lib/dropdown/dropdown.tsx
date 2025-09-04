@@ -8,6 +8,7 @@ import {
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 import { CoreMenuHeading } from '../context-menu/context-menu'
+import { IconTriangleExclamation } from '../icon/icons/IconTriangleExclamation'
 
 export type CompareWith<T = any> = (o1: T, o2: T) => boolean
 export type SearchFilter<T = any> = (search: string, value: T) => boolean
@@ -93,6 +94,9 @@ export interface DropdownProps extends DropdownArgs {
   required?: boolean
 }
 
+/**
+ * @deprecated Please use the `gds-dropdown` web component from green-core instead
+ */
 export const Dropdown = ({
   compareWith,
   display = 'label',
@@ -154,7 +158,14 @@ export const Dropdown = ({
         onGdsUiState={(e: Event) => onGdsUiState?.(e as CustomEvent)}
       >
         {informationLabel && <span slot="sub-label">{informationLabel}</span>}
-        {validator && <span slot="message">{validator.message}</span>}
+        {validator && (
+          <div slot="message" style={{ display: 'flex', gap: '0.25rem' }}>
+            {validator.indicator === 'error' && (
+              <IconTriangleExclamation></IconTriangleExclamation>
+            )}
+            {validator.message}
+          </div>
+        )}
         <CoreOption isPlaceholder aria-hidden>
           {texts?.placeholder || 'Select'}
         </CoreOption>

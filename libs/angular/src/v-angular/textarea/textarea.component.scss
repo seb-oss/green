@@ -92,4 +92,31 @@
       border-radius: 0.5rem;
     }
   }
+
+  &.small {
+    label:not(.gds-field-notice):not(.form-control) {
+      font-size: 0.875rem;
+      line-height: 1rem;
+    }
+
+    label + textarea {
+      margin-top: 0.25rem;
+    }
+
+    textarea {
+      padding: 0.38rem 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .error-wrapper,
+    .form-info {
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+      line-height: 1rem;
+    }
+
+    .gds-form-item__footer:not(:empty) {
+      margin-top: 0rem;
+    }
+  }
 }

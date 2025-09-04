@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-square-check
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-square-check')
 export class IconSquareCheck extends GdsIcon {
@@ -12,4 +13,10 @@ export class IconSquareCheck extends GdsIcon {
   static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M3 3.75C3 3.33579 3.33579 3 3.75 3H20.25C20.6642 3 21 3.33579 21 3.75V20.25C21 20.6642 20.6642 21 20.25 21H3.75C3.33579 21 3 20.6642 3 20.25V3.75ZM16.0271 10.4445C16.32 10.1516 16.32 9.67676 16.0271 9.38386C15.7342 9.09097 15.2593 9.09097 14.9664 9.38386L10.9968 13.3535L9.52711 11.8839C9.23421 11.591 8.75934 11.591 8.46645 11.8839C8.17355 12.1768 8.17355 12.6516 8.46645 12.9445L10.4664 14.9445C10.7593 15.2374 11.2342 15.2374 11.5271 14.9445L16.0271 10.4445Z" fill="currentColor"/>`
   /** @private */
   static _name = 'square-check'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

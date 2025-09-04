@@ -15,6 +15,32 @@ describe('ToastMessageService', () => {
     expect(service).toBeTruthy()
   })
 
+  describe('add', () => {
+    const defaultMsg: ToastMessage = {
+      type: MessageType.Success,
+      translocoScope: 'reg',
+      titleText: 'Great job!',
+    }
+    it('should add new message to the messages list', () => {
+      service.add({ ...defaultMsg })
+
+      expect(service['messages'].length).toBe(1)
+      expect(service['messages'][0]).toEqual({
+        type: MessageType.Success,
+        translocoScope: 'reg',
+        titleText: 'Great job!',
+        timeout: undefined,
+      })
+    })
+
+    it('should not have two duplicated messages in the messages list', () => {
+      service.add({ ...defaultMsg, bodyText: '', timeout: 3 })
+      service.add({ ...defaultMsg })
+
+      expect(service['messages'].length).toBe(1)
+    })
+  })
+
   describe('addMessage', () => {
     it('should add new message to the messages list', () => {
       service.addMessage(MessageType.Success, 'reg', 'Great job!')

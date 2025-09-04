@@ -4,8 +4,6 @@ import { Meta, Markdown } from '@storybook/addon-docs'
 
 # Declarative layout
 
-**Note:** The declarative layout system is still in beta, and API may change in breaking ways.
-
 ## Why?
 
 One of the main reasons we are building Green Core using web components is style encapsulation. The use
@@ -81,8 +79,8 @@ Media queries can also be expressed as CSS units and as ranges, for example:
 - `>500px, <1000px { ... }` - Above 500px, below 1000px
 
 The value that goes in the media query is usually resolved to a css variable. In the padding example, it would
-resolve to `var(--gds-space-m)`. This is then transformed into a CSS property, typically of the same name as the
-property used on the component. So, here it would be `padding: var(--gds-space-m)`. That means you can also use
+resolve to `var(--gds-sys-space-m)`. This is then transformed into a CSS property, typically of the same name as the
+property used on the component. So, here it would be `padding: var(--gds-sys-space-m)`. That means you can also use
 regular CSS shorthand patterns, like `padding: 1em 2em 3em 4em` by adding more values. They will each resolve to\
 a CSS variable. For example: `padding="xs; l {m xl m xl}"`
 
@@ -101,26 +99,20 @@ Psudeo selectors can be added to any media query as a separate value sequence. F
 
 In the above example, the padding will be `xs` by default, `s` on hover, `m` in `l` viewports, and `m` on hover in `l` viewports.
 
-For more examples, see the stories under Components/Layout.
+## Other components
 
-## Conslusion
+Style expression properties are not limited to the declarative layout components. In fact, they are a central part of the Green Core architecture, and is available in many components, wherever it makes sense. For example, on `<gds-button>` you can set the width using style expression syntax.
+
+In the API-tables in Storybook, you can find more information about the available style expression properties for each component under a separate section.
+
+## Conclusion
 
 In conclusion, this system solves the conflict issue by injecting the CSS directly into the shadow DOM of the component,
 and it solves the payload size issue by generating the CSS that is needed on the fly on the client side. It also solves
 the version lock-in by using the same version scoping mechanism as the rest of the components in Green Core.
 
 Internally, the style expression properties are using a custom property decorator which can be configured for different
-needs on a per-property basis. This keeps the code size in the implementation to a minumum, while still allowing for a
+needs on a per-property basis. This keeps the code size in the implementation to a minimum, while still allowing for a
 sufficient level of flexibility.
 
-## Work in progress
-
-The declarative layout system is still in beta, and may seem both limited and a bit confusing at this point. There is
-still quite a bit that needs to be irnoed out before it can be considered stable. But we are working on it, and we
-welcome any feedback you may have!
-
-One thing to note is that this system is not intended to be a complete CSS replacement at the same level as something
-like Tailwind. It is more geared towards filling the most common layout and positioning needs for a typical micro-frontend
-application, in a way that makes it easy to follow the guidelines of the design system.
-
-Other, more specific, styling needs will still need to be handled by regular CSS.
+To learn more about Declarative layout, and the syntax for style expression properties, head over to the [Declarative layout section on seb.io](https://seb.io/primitives/declarative-layout).

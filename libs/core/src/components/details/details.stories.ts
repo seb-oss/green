@@ -6,10 +6,21 @@ import './details'
 import '../text/text'
 import '../card/card'
 import '../flex/flex'
+import '../link/link'
 import '../rich-text/rich-text'
 import '../icon/icons/chevron-top'
 import '../icon/icons/chevron-bottom'
 
+/**
+ * The details component is a collapsible section that helps organize and hide content until needed.
+ *
+ * Features
+ * - Expandable/collapsible content sections with smooth animations
+ * - Group behavior: detailss with the same name will close each other automatically
+ * - Two size variants: large and small
+ * - Accessible by default
+ * - Keyboard navigation support
+ */
 const meta: Meta = {
   title: 'Components/Details',
   component: 'gds-details',
@@ -45,30 +56,6 @@ const meta: Meta = {
       table: {
         type: { summary: '"large" | "small"' },
         defaultValue: { summary: 'large' },
-      },
-    },
-  },
-  parameters: {
-    docs: {
-      description: {
-        component: `
-## Overview
-The \`gds-details\` component is a collapsible section that helps organize and hide content until needed.
-It provides smooth animations, grouping behavior.
-
-## Features
-- Expandable/collapsible content sections with smooth animations
-- Group behavior: detailss with the same name will close each other automatically
-- Two size variants: large and small
-- Accessible by default
-- Keyboard navigation support
-
-\`\`\`html
-<gds-details summary="Click to expand">
-  Content here
-</gds-details>
-\`\`\`
-        `,
       },
     },
   },
@@ -113,7 +100,7 @@ In this example, all detailss are grouped together with the name attribute set t
 
 \`\`\`html
 <gds-details name="group-1"> ... </gds-details>
-\`\`\`  
+\`\`\`
 
 `,
       },
@@ -122,13 +109,28 @@ In this example, all detailss are grouped together with the name attribute set t
   render: () => html`
     <gds-flex flex-direction="column">
       <gds-details name="group-1" summary="First Details">
-        Content of first details
+        <gds-rich-text>
+          <gds-text tag="h4">Heading Inside Details</gds-text>
+          <gds-link href="#">
+            <gds-text>Linked content</gds-text>
+          </gds-link>
+        </gds-rich-text>
       </gds-details>
       <gds-details name="group-1" summary="Second Details">
-        Content of second details
+        <gds-rich-text>
+          <gds-text tag="h4">Heading Inside Details</gds-text>
+          <gds-link href="#">
+            <gds-text>Linked content</gds-text>
+          </gds-link>
+        </gds-rich-text>
       </gds-details>
       <gds-details name="group-1" summary="Third Details">
-        Content of third details
+        <gds-rich-text>
+          <gds-text tag="h4">Heading Inside Details</gds-text>
+          <gds-link href="#">
+            <gds-text>Linked content</gds-text>
+          </gds-link>
+        </gds-rich-text>
       </gds-details>
     </gds-flex>
   `,
@@ -144,12 +146,12 @@ export const Sizes: Story = {
     docs: {
       description: {
         story: `
-The details component supports two sizes: large(default) and small.        
-        
+The details component supports two sizes: large(default) and small.
+
 \`\`\`html
 <gds-details size="small"> ... </gds-details>
-\`\`\`        
-        
+\`\`\`
+
         `,
       },
     },
@@ -158,7 +160,9 @@ The details component supports two sizes: large(default) and small.
     <gds-flex gap="xl">
       <gds-flex flex-direction="column" flex="1">
         <gds-text tag="small" color="secondary">Large Size (Default)</gds-text>
-        <gds-details summary="Summary example"> Content goes here </gds-details>
+        <gds-details summary="Summary example">
+          <gds-text margin="xl">test</gds-text>
+        </gds-details>
         <gds-details summary="Summary example"> Content goes here </gds-details>
         <gds-details summary="Summary example"> Content goes here </gds-details>
       </gds-flex>
@@ -244,8 +248,8 @@ Detailss can be initially opened using the open attribute.
 
 \`\`\`html
  <gds-details open> ... </gds-details>
-\`\`\`  
-        
+\`\`\`
+
         `,
       },
     },

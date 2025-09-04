@@ -73,3 +73,8 @@ migrations.json
 storybook-migration-summary.md
 
 vite.config.*.timestamp*
+
+# Figma
+figma-connect
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md

@@ -126,6 +126,9 @@ const IS_ENTERING = 'is-entering'
 const ENTERED = 'entered'
 const IS_EXITING = 'is-exiting'
 
+/**
+ * @deprecated Please use the `gds-dialog` web component from green-core instead
+ */
 export const Modal = ({
   type = 'default',
   id = randomId(),

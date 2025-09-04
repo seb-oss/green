@@ -28,15 +28,13 @@ export class GdsMenuItem extends Focusable(GdsElement) {
   }
 
   #handleOnClick = () => {
-    this.dispatchEvent(
-      new CustomEvent('gds-menu-item-click', {
-        bubbles: true,
-        composed: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-menu-item-click', {
+      bubbles: true,
+      composed: true,
+    })
   }
 
   render() {
-    return html`<div><slot></slot></div>`
+    return html`<div class="item"><slot></slot></div>`
   }
 }

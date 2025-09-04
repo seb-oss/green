@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/web-components'
 import { html } from '../../scoping.ts'
 
 import './index.ts'
-import '../container'
+import '../div'
 import '../text'
 import '../link'
 import '../flex'
@@ -16,8 +16,7 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { DefaultParams as ButtonDefaultParams } from '../button/button.stories.ts'
 
 /**
- * The Floating Action Button is used for functions central to the user experience, such as
- * support and help features that needs to be accessible at all times.
+ * Floating action button persists across screens for constant access to features that needs to be accessible at all times.
  *
  * The button is always floating visible in the users viewport, typically in the lower right
  * corner. This button can be used with an icon only.
@@ -194,7 +193,7 @@ export const Color: Story = {
     <gds-flex height="300px">
       <gds-fab inset="auto 48px 48px auto" rank="primary">
         Secondary
-        <gds-signal slot="trail" level="3" color="positive"></gds-signal>
+        <gds-signal slot="trail" level="3" color="positive-01"></gds-signal>
       </gds-fab>
     </gds-flex>
   `,

@@ -1,7 +1,7 @@
 // File: gds-spinner.styles.ts
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   /* Host configuration with core variables */
   :host {
     /* Size variables with indexed access using CSS custom properties */
@@ -16,10 +16,10 @@ export const styles = css`
     --track-width-lg: 0.375rem;
 
     /* Default to light mode as fallback */
-    --spinner-track-color: var(--gds-color-l3-background-secondary);
-    --spinner-active-color: var(--gds-color-l3-content-secondary);
+    --spinner-track-color: var(--gds-sys-color-l3-neutral-02);
+    --spinner-active-color: var(--gds-sys-color-content-neutral-02);
     --spinner-label-color: currentColor;
-    --spinner-backdrop-color: rgba(0, 0, 0, 0.8);
+    --spinner-backdrop-color: rgba(100, 100, 100, 0.4);
 
     --spinner-backdrop-blur: 2px;
 
@@ -74,6 +74,7 @@ export const styles = css`
     height: var(--size, 3.75rem);
     width: var(--size, 3.75rem);
     animation: gdsSpinnerRotation 1s linear infinite;
+    aspect-ratio: 1 / 1;
   }
 
   /* Motion preference adjustments */
@@ -115,9 +116,28 @@ export const styles = css`
   .spinner-wrapper.spinner-backdrop {
     background-color: var(--spinner-backdrop-color);
     backdrop-filter: blur(var(--spinner-backdrop-blur));
-    --spinner-label-color: #fff;
-    --spinner-track-color: var(--gds-color-l3-content-secondary);
-    --spinner-active-color: var(--gds-color-l3-background-secondary);
+  }
+
+  .spinner-wrapper.spinner-label-top {
+    flex-direction: column-reverse;
+
+    & .spinner-label {
+      margin: 0 0 1rem;
+    }
+  }
+
+  .spinner-wrapper.spinner-label-left {
+    flex-direction: row-reverse;
+    & .spinner-label {
+      margin: 0 1rem 0 0;
+    }
+  }
+
+  .spinner-wrapper.spinner-label-right {
+    flex-direction: row;
+    & .spinner-label {
+      margin: 0 0 0 1rem;
+    }
   }
 
   /* Label styling */
@@ -134,3 +154,4 @@ export const styles = css`
     }
   }
 `
+export default style

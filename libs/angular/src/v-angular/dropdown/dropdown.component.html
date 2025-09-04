@@ -4,7 +4,7 @@
     [id]="id + '-label'"
     class="gds-field-label hide-if-empty"
     [attr.for]="id + '-toggle'"
-    *ngIf="labelContentTpl || basicLabelContentTpl || label"
+    *ngIf="labelContentTpl || label"
   >
     <ng-template
       *ngTemplateOutlet="labelContentTpl || basicLabelContentTpl"
@@ -28,30 +28,38 @@
 
   <!-- LOCKED INPUT -->
   <ng-container *ngIf="locked">
-    <div
-      [id]="id + '-input'"
-      class="nggv-field--locked"
-      [attr.name]="name"
-      [attr.value]="state"
-      [attr.role]="role"
-      [attr.aria-labelledby]="id + '-label ' + id + '-input'"
-    >
-      <span *ngIf="!state" class="unset-state">-</span>
-      <ng-container *ngIf="state">
-        <ng-template
-          *ngTemplateOutlet="
-            selectedContentTpl || defaultSelectedContentTpl;
-            context: { $implicit: state }
-          "
-        >
-        </ng-template>
-      </ng-container>
-    </div>
+    <ng-template
+      *ngTemplateOutlet="
+        lockedTpl || defaultLockedTpl;
+        context: { $implicit: state }
+      "
+    ></ng-template>
+    <ng-template #defaultLockedTpl>
+      <div
+        [id]="id + '-input'"
+        class="nggv-field--locked"
+        [attr.name]="name"
+        [attr.value]="state"
+        [attr.role]="role"
+        [attr.aria-labelledby]="id + '-label ' + id + '-input'"
+      >
+        <span *ngIf="!state" class="unset-state">-</span>
+        <ng-container *ngIf="state">
+          <ng-template
+            *ngTemplateOutlet="
+              selectedContentTpl || defaultSelectedContentTpl;
+              context: { $implicit: state }
+            "
+          >
+          </ng-template>
+        </ng-container>
+      </div>
+    </ng-template>
   </ng-container>
 
   <!-- INPUT -->
   <ng-container *ngIf="!locked">
-    <div class="gds-input-wrapper">
+    <div class="gds-input-wrapper dropdown-wrapper">
       <div #input [id]="id + '-input'" class="dropdown">
         <button
           [id]="id + '-toggle'"
@@ -59,7 +67,10 @@
           type="button"
           class="nggv-field-dropdown__label toggle"
           [class.nggv-field--error]="invalid"
+          role="combobox"
+          aria-owns="listbox"
           aria-haspopup="listbox"
+          aria-controls="listbox"
           [attr.data-thook]="thook + '-toggle'"
           [attr.aria-expanded]="expanded"
           [attr.aria-labelledby]="
@@ -87,6 +98,9 @@
           [optionContentTpl]="optionContentTpl"
           [groupLabelTpl]="groupLabelTpl"
           [textToHighlight]="textToHighlight"
+          [onlyEmitDistinctChanges]="onlyHandleDistinctChanges"
+          [selectWithSpace]="selectWithSpace"
+          [dynamicPosition]="true"
           (closed)="setExpanded(false)"
           (selectedValueChanged)="onSelectChange($event)"
         >

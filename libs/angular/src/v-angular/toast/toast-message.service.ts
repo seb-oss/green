@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core'
+import { Injectable, TemplateRef } from '@angular/core'
 import { Observable, Subject } from 'rxjs'
 
 import { MessageType, ToastMessage } from './toast.models'
@@ -10,12 +10,40 @@ export class ToastMessageService {
   private messages: ToastMessage[] = []
   private messageSubject = new Subject<ToastMessage[]>()
 
+  add(message: ToastMessage): void {
+    const {
+      type,
+      translocoScope,
+      titleText,
+      template,
+      templateContext,
+      bodyText,
+      timeout,
+    } = message
+    const newMessage: ToastMessage = {
+      type: type ? type : MessageType.Information,
+      translocoScope,
+      titleText: titleText ?? '',
+      bodyText,
+      timeout,
+      template,
+      templateContext,
+    }
+
+    this.removeMessage(newMessage)
+    this.messages.push(newMessage)
+    this.messageSubject.next([...this.messages])
+    this.setMessageRemoveTimeout(newMessage)
+  }
+
   addMessage(
     type: 'success' | 'information' | 'error' | 'warning',
     translocoScope: string,
     titleText: string,
     bodyText?: string,
     timeout?: number,
+    template?: TemplateRef<any>,
+    templateContext?: any,
   ): void
   addMessage(
     type: MessageType,
@@ -23,6 +51,8 @@ export class ToastMessageService {
     titleText: string,
     bodyText?: string,
     timeout?: number,
+    template?: TemplateRef<any>,
+    templateContext?: any,
   ): void {
     const newMessage: ToastMessage = {
       type,
@@ -30,6 +60,8 @@ export class ToastMessageService {
       titleText,
       bodyText,
       timeout,
+      template,
+      templateContext,
     }
 
     this.removeMessage(newMessage)
@@ -39,7 +71,7 @@ export class ToastMessageService {
   }
 
   removeMessage(message: ToastMessage): void {
-    const index = this.getDuplicateMessageIndex(message.titleText)
+    const index = this.getDuplicateMessageIndex(message.titleText ?? '')
     this.removeMessageByIndex(index)
   }
 

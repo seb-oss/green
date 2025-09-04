@@ -14,7 +14,7 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import VideoCSS from './video.style'
+import VideoStyles from './video.styles'
 
 /**
  * `gds-video` is a custom video element that provides configurable .mp4 video playback that can be used as background or hero video without controls.
@@ -30,7 +30,7 @@ export class GdsVideo extends withSizeXProps(
     withMarginProps(withLayoutChildProps(withPositioningProps(GdsElement))),
   ),
 ) {
-  static styles = [tokens, VideoCSS]
+  static styles = [tokens, VideoStyles]
 
   /**
    * Controls the aspect ratio of the image.
@@ -133,7 +133,7 @@ export class GdsVideo extends withSizeXProps(
    * @property radius
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-space-${v})`,
+    valueTemplate: (v) => `var(--gds-sys-space-${v})`,
   })
   'border-radius'?: string
 

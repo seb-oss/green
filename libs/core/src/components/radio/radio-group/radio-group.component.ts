@@ -84,6 +84,10 @@ class RadioGroup extends GdsFormControlElement<string> {
     this.removeEventListener('invalid', this._syncRadioStates)
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   protected _getValidityAnchor(): HTMLElement {
     return this._contentElement
   }
@@ -143,30 +147,32 @@ class RadioGroup extends GdsFormControlElement<string> {
   }
 
   #dispatchChangeEvents() {
-    this.dispatchEvent(
-      new CustomEvent('change', {
-        detail: { value: this.value },
+    this.updateComplete.then(() =>
+      this.dispatchStandardEvent('change', {
+        composed: true,
         bubbles: true,
       }),
     )
-    this.dispatchEvent(new Event('input', { bubbles: true }))
+    this.updateComplete.then(() =>
+      this.dispatchStandardEvent('input', {
+        bubbles: true,
+        composed: true,
+      }),
+    )
   }
 
   #handleRadioChange(e: Event) {
+    e.stopPropagation()
     const radio = e.target as GdsRadio
-    if (radio.hasAttribute('value')) {
-      this.value = radio.value
-      this._syncRadioStates()
-      this.#dispatchChangeEvents()
-    }
+    this.value = radio.value
+    this._syncRadioStates()
+    this.#dispatchChangeEvents()
   }
 
   #handleKeyDown(e: KeyboardEvent) {
     if (!this._isConnected) return
 
-    const radios = this.radios.filter(
-      (radio) => !radio.hasAttribute('disabled'),
-    )
+    const radios = this.radios.filter((radio) => !radio.disabled)
     if (radios.length === 0) return
 
     let currentIndex = radios.findIndex(
@@ -225,6 +231,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       class=${classMap(classes)}
       aria-labelledby="group-label"
       aria-describedby="supporting-text extended-supporting-text footer"
+      aria-invalid=${this.invalid}
     >
       ${this.#renderRadioGroupContents()}
     </div>`
@@ -242,7 +249,10 @@ class RadioGroup extends GdsFormControlElement<string> {
 
   #renderFieldControlHeader() {
     if (this.label) {
-      return html` <gds-form-control-header class="size-${this.size}">
+      return html` <gds-form-control-header
+        class="size-${this.size}"
+        .showExtendedSupportingText="${this.showExtendedSupportingText}"
+      >
         <label id="group-label" slot="label">${this.label}</label>
         <span slot="supporting-text" id="supporting-text">
           ${this.supportingText}
@@ -262,7 +272,7 @@ class RadioGroup extends GdsFormControlElement<string> {
       @keydown=${this.#handleKeyDown}
       @focus=${this.#handleFocus}
     >
-      <slot @gds-radio-change=${this.#handleRadioChange}></slot>
+      <slot @input=${this.#handleRadioChange}></slot>
     </div>`
   }
 
@@ -270,8 +280,7 @@ class RadioGroup extends GdsFormControlElement<string> {
     return html` <gds-form-control-footer
       id="footer"
       class="size-${this.size}"
-      .validationMessage=${this.invalid &&
-      (this.errorMessage || this.validationMessage)}
+      .errorMessage=${this.invalid ? this.errorMessage : undefined}
     >
     </gds-form-control-footer>`
   }
@@ -279,7 +288,6 @@ class RadioGroup extends GdsFormControlElement<string> {
 
 /**
  * @summary A form control component for grouping radio buttons.
- * @status beta
  *
  * @element gds-radio-group
  *

@@ -7,6 +7,9 @@ export interface CardProps {
   footer?: ReactNode
 }
 
+/**
+ * @deprecated Please use the `gds-card` web component from green-core instead
+ */
 export function Card({ children, header, footer }: CardProps) {
   return (
     <section className="gds-card">

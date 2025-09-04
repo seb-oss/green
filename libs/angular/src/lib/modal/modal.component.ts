@@ -29,6 +29,9 @@ import { ModalType, Size } from '@sebgroup/extract'
 import { NggModalFooterDirective } from './modal-footer.directive'
 import { NggModalHeaderDirective } from './modal-header.directive'
 
+/**
+ * @deprecated use <gds-dialog> from green-core instead.
+ */
 @Component({
   selector: 'ngg-modal',
   styleUrls: ['./modal.component.scss'],

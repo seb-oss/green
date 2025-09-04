@@ -15,6 +15,9 @@ import '../icon/icons/people.js'
 import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 
+/**
+ * A menu button combines button and link behaviors for navigation menus.
+ */
 const meta: Meta = {
   title: 'Components/Menu button',
   component: 'gds-menu-button',
@@ -81,7 +84,7 @@ export const Example_menu_bar: Story = {
       display="flex"
       height="70px"
       width="700px"
-      border-color="secondary"
+      border-color="strong"
       border-width="0 0 4xs 0"
     >
       <div style="flex-basis:50%;">
@@ -123,8 +126,8 @@ export const Compact_menu_bar: Story = {
   render: () =>
     html`<gds-flex
       width="700px"
-      background="primary"
-      border="0 0 3xs/secondary 0"
+      background="neutral-01"
+      border="0 0 3xs/subtle-01 0"
       align-items="center"
     >
       <gds-flex flex="1">
@@ -171,7 +174,7 @@ export const Dark: Story = {
       <gds-theme color-scheme="dark">
         <gds-flex
           width="700px"
-          background="primary"
+          background="neutral-01"
           height="80px"
           border="0 0 3xs/secondary 0"
         >
@@ -211,7 +214,7 @@ export const Dark: Story = {
       <gds-theme color-scheme="light">
         <gds-flex
           width="700px"
-          background="primary"
+          background="neutral-01"
           height="80px"
           border="0 0 3xs/secondary 0"
         >

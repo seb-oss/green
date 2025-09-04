@@ -3,31 +3,44 @@ import { property } from 'lit/decorators.js'
 import { unsafeHTML } from 'lit/directives/unsafe-html.js'
 
 import { GdsElement } from '../../gds-element'
-import IconCSS from './icon.style'
+import { tokens } from '../../tokens.style'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import {
+  forColorTokens,
+  forSpaceTokensAndCustomValues,
+  GdsColorLevel,
+} from '../../utils/helpers'
+import {
+  withLayoutChildProps,
+  withMarginProps,
+} from '../../utils/mixins/declarative-layout-mixins'
+import IconStyles from './icon.styles'
 
 /**
  * @element gds-icon
- * @status stable
  *
  * @part icon - The icon SVG element.
  */
-export abstract class GdsIcon extends GdsElement {
-  static styles = [IconCSS]
+
+export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
+  static styles = [tokens, IconStyles]
 
   /**
-   * This property allow you to set the width of the icon. If not provided, the default width is 24px.
+   * This property allow you to set the size of the icon with the token and custom values.
+   * If not provided, uses the icon's default size.
+   *
+   * The size is a shorthand for setting both width and height at once.
    */
-  @property({ type: Number })
-  width?: number
+  @styleExpressionProperty({
+    ...forSpaceTokensAndCustomValues,
+    property: 'height',
+    selector: 'svg',
+  })
+  size?: string
 
   /**
-   * This property allow you to set the height of the icon. If not provided, the default height is 24px.
-   */
-  @property({ type: Number })
-  height?: number
-
-  /**
-   * When set to true, the solid version of the icon is displayed. When set to false or not provided, the regular version of the icon is displayed.
+   * When set to true, the solid version of the icon is displayed.
+   * When set to false or not provided, the regular version of the icon is displayed.
    */
   @property({ type: Boolean })
   solid = false
@@ -39,55 +52,111 @@ export abstract class GdsIcon extends GdsElement {
   stroke?: number
 
   /**
-   * When viewbox is defined it will override the default viewbox of the icon.
+   * The level of the icon is used to resolve the color tokens from the corresponding level.
+   * Check the [Color System documentation page](./?path=/docs/style-colors--docs) for more information.
+   *
+   * Default for `gds-icon-*` is level 2.
+   *
    */
-  @property({ type: String })
-  box = false
+  @property()
+  level: GdsColorLevel = '2'
 
   /**
-   * This property allow you to set the accessible label of the icon. If not provided, the default label is the name of the icon.
+   * Style Expression Property that controls the `color` property.
+   * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
+   *
+   * ```html
+   * <gds-icon-ai color="neutral-01/0.2"></gds-icon-ai>
+   * ```
+   */
+  @styleExpressionProperty(forColorTokens('content'))
+  color?: string
+
+  /**
+   * This property allow you to set the accessible label of the icon.
+   * If not provided, the icon will be presentational.
    */
   @property({ type: String })
   label = ''
 
+  // Static properties
   protected static _name: string
   protected static _regularSVG?: string
   protected static _solidSVG?: string
+  protected static _viewBox: string
 
-  render() {
-    const isSebIcon = (this.constructor as typeof GdsIcon)._name === 'brand-seb'
-
-    const width = isSebIcon
-      ? '55px'
-      : this.width !== undefined
-        ? `${this.width.toString()}px`
-        : undefined
-    const height = isSebIcon
-      ? '24px'
-      : this.height !== undefined
-        ? `${this.height.toString()}px`
-        : '1lh'
-    const viewBox = isSebIcon ? '0 0 55 24' : this.box || '0 0 24 24'
-
-    let svgContent = `<svg
-      style="height:${height};${width ? `width:${width};` : ''}"
-      viewBox="${viewBox}"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      ${this.label ? `aria-label="${this.label}"` : `aria-label="${(this.constructor as typeof GdsIcon)._name}"`}
-      role="graphics-symbol"
-      part="icon"
-    >
-      ${this.solid ? (this.constructor as typeof GdsIcon)._solidSVG : (this.constructor as typeof GdsIcon)._regularSVG}
-    </svg>`
-
-    if (this.stroke) {
-      svgContent = svgContent.replace(
-        /<(path|rect|circle|ellipse|line|polyline|polygon)/g,
-        `<$1 stroke-width="${this.stroke}"`,
-      )
+  /**
+   * Generates the SVG attributes for the icon
+   * @private
+   */
+  private get svgAttributes() {
+    const constructor = this.constructor as typeof GdsIcon
+    const baseAttrs = {
+      fill: 'none',
+      xmlns: 'http://www.w3.org/2000/svg',
+      viewBox: constructor._viewBox,
+      part: 'icon',
     }
 
-    return html`${unsafeHTML(svgContent)}`
+    if (this.label) {
+      return {
+        ...baseAttrs,
+        'aria-label': this.label,
+      }
+    } else {
+      return {
+        ...baseAttrs,
+        role: 'presentation',
+      }
+    }
+  }
+
+  /**
+   * Gets the appropriate SVG content based on the solid property
+   * @private
+   */
+  private get svgContent() {
+    const constructor = this.constructor as typeof GdsIcon
+    return this.solid ? constructor._solidSVG : constructor._regularSVG
+  }
+
+  /**
+   * Applies stroke width to SVG paths if stroke property is set
+   * @private
+   */
+  private applyStroke(content: string): string {
+    if (!this.stroke) return content
+
+    return content.replace(
+      /<(path|rect|circle|ellipse|line|polyline|polygon)/g,
+      `<$1 stroke-width="${this.stroke}"`,
+    )
+  }
+
+  /**
+   * Generates the SVG attributes string
+   * @private
+   */
+  private generateAttributesString(attrs: Record<string, any>): string {
+    return Object.entries(attrs)
+      .filter(([_, value]) => value !== undefined)
+      .map(([key, value]) => `${key}="${value}"`)
+      .join('\n      ')
+  }
+
+  render() {
+    const attrs = this.svgAttributes
+    let content = this.svgContent || ''
+
+    if (this.stroke) {
+      content = this.applyStroke(content)
+    }
+
+    const svg = `
+      <svg ${this.generateAttributesString(attrs)}>
+        ${content}
+      </svg>
+    `
+    return html`${unsafeHTML(svg)}`
   }
 }

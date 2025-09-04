@@ -10,8 +10,7 @@ import {
   ViewContainerRef,
 } from '@angular/core'
 
-import { getScopedTagName } from '@sebgroup/green-core/scoping'
-import { NggCoreRenderer } from '../core-renderer'
+import { SCOPE_RESOLVER } from '../scope-resolver'
 
 @Directive({
   selector: '[nggCoreElement]',
@@ -23,19 +22,20 @@ export class NggCoreElementDirective implements OnInit {
   private readonly vcr = inject(ViewContainerRef)
   private readonly cdr = inject(ChangeDetectorRef)
   private readonly template = inject(TemplateRef<any>)
+  private readonly scopeResolver = inject(SCOPE_RESOLVER)
 
   ngOnInit() {
-    if (!(this.renderer instanceof NggCoreRenderer)) {
-      this.vcr.clear()
+    this.vcr.clear()
 
-      const originalCreateElement = this.renderer.createElement
-      this.renderer.createElement = (name: string, _namespace: string) => {
-        return this.document.createElement(getScopedTagName(name))
-      }
-
-      this.cdr.markForCheck()
-      this.viewRef = this.vcr.createEmbeddedView(this.template)
-      this.renderer.createElement = originalCreateElement
+    const originalCreateElement = this.renderer.createElement
+    this.renderer.createElement = (name: string, _namespace: string) => {
+      return this.document.createElement(
+        this.scopeResolver.getScopedTagName(name),
+      )
     }
+
+    this.cdr.markForCheck()
+    this.viewRef = this.vcr.createEmbeddedView(this.template)
+    this.renderer.createElement = originalCreateElement
   }
 }

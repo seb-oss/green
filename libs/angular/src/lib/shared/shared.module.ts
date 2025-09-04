@@ -9,3 +9,5 @@ import { NggOnScrollDirective } from './on-scroll.directive'
   exports: [NggOnScrollDirective],
 })
 export class NggSharedModule {}
+
+export { SCOPE_RESOLVER } from './scope-resolver'

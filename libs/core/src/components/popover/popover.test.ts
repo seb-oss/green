@@ -265,5 +265,20 @@ describe('<gds-popover>', () => {
       await sendKeys({ press: 'Escape' })
       await waitUntil(() => !el.open)
     })
+
+    it('should close when page scrolls', async () => {
+      const el = await fixture<GdsPopover>(
+        html`<gds-popover open>
+          <div slot="trigger">Trigger</div>
+          <div>Content</div>
+        </gds-popover>`,
+      )
+      await el.updateComplete
+
+      window.dispatchEvent(new Event('scroll'))
+      await aTimeout(100) // Allow time for the scroll event to propagate
+
+      expect(el.open).to.be.false
+    })
   })
 })

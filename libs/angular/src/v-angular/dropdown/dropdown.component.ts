@@ -58,9 +58,24 @@ export class NggvDropdownComponent<
     | TemplateRef<OptionBase<any>>
     | undefined
 
-  /** Special property used for selecting DOM elements during automated UI testing. */
+  /**
+   * Special property used for selecting DOM elements during automated UI testing.
+   */
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dropdown'
+
+  @HostBinding('class.small') get isSmall(): boolean {
+    return this.size === 'small'
+  }
+
+  @HostBinding('class.large') get isLarge(): boolean {
+    return this.size === 'large'
+  }
+
+  /**
+   * Sets the displayed size of the dropdown.
+   */
+  @Input() size: 'small' | 'large' = 'large'
 
   /** Text shown before an option is selected. */
   @Input() placeholder?: string
@@ -121,6 +136,21 @@ export class NggvDropdownComponent<
   @Input() selectOnSingleOption = true
 
   /**
+   * Used to control if the dropdown list should select the current active element, when Space is pressed on the keyboard.
+   * Primary usage is for typeahead, where the should be able to write a filter query containing spaces,
+   * but not select the current active element with Space.
+   */
+  @Input() selectWithSpace = true
+
+  /**
+   * Used to determine which changes should be handled by the dropdown.
+   * If set to false, all changes will be handled by the dropdown.
+   * If set to true, only changes that are distinct from the current value will be handled.
+   * Defaults to true.
+   */
+  @Input() onlyHandleDistinctChanges = true
+
+  /**
    * Emits changes of the expanded state of the dropdown
    */
   @Output() expandedChange = new EventEmitter<boolean>()
@@ -136,6 +166,8 @@ export class NggvDropdownComponent<
   public activeIndex = -1
   /** Subscribe if dropdown expanded to listen to click outside to close dropdown. */
   private onClickSubscription: Subscription | undefined
+  /** Subscribe if dropdown expanded to listen to scroll outside to close dropdown. */
+  private onScrollSubscription: Subscription | undefined
 
   public keyEvent: KeyboardEvent = {} as KeyboardEvent
   private _options: OptionBase<T>[] = []
@@ -172,6 +204,7 @@ export class NggvDropdownComponent<
 
   ngOnDestroy(): void {
     this.onClickSubscription?.unsubscribe()
+    this.onScrollSubscription?.unsubscribe()
   }
 
   /** @internal override to correctly set state from form value */
@@ -217,6 +250,19 @@ export class NggvDropdownComponent<
       },
     })
   }
+  subscribeToOutsideScrollEvent() {
+    this.onScrollSubscription = fromEvent(document, 'scroll').subscribe({
+      next: (event: Event) => {
+        if (
+          this.expanded &&
+          !this.inputRef?.nativeElement.contains(event.target)
+        ) {
+          this.toggleDropdown()
+          this.onScrollSubscription?.unsubscribe()
+        }
+      },
+    })
+  }
 
   // ----------------------------------------------------------------------------
   // HELPERS
@@ -245,7 +291,10 @@ export class NggvDropdownComponent<
   setExpanded(state = true) {
     this.expanded = state
     this.expandedChange.emit(this.expanded)
-    if (this.expanded) this.subscribeToOutsideClickEvent()
+    if (this.expanded) {
+      this.subscribeToOutsideClickEvent()
+      this.subscribeToOutsideScrollEvent()
+    }
     if (!this.expanded) this.onTouched()
   }
 

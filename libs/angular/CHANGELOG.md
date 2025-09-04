@@ -1,5 +1,261 @@
 # Changelog
 
+## 6.2.1
+
+### Patch Changes
+
+- 43c34a3: **Deprecations:** Add inline deprecation warnings to outdated components
+
+## 6.2.0
+
+### Minor Changes
+
+- 1969060: **Scoping:** Add scope resolver provider:
+
+### Patch Changes
+
+- Updated dependencies [1969060]
+  - @sebgroup/green-core@2.4.0
+
+## 6.1.3
+
+### Patch Changes
+
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+  - @sebgroup/green-core@2.0.0
+
+## 6.1.2
+
+### Patch Changes
+
+- 46ca765: **V-Angular:** Dropdown - Added "close on scroll" functionality
+
+## 6.1.1
+
+### Patch Changes
+
+- 13e6435: **Slider:** Fix accessibility issue when text input is not following the steps.
+- 921ee52: V-Angular: Updated Table component with extra label
+- b388664: **Dropdown:** Add optional generic type for `DropdownOption`
+
+## 6.1.0
+
+### Minor Changes
+
+- 79efa1b: **V-Angular:** Changed nggv-toast to full width on smallest breakpoint
+
+### Patch Changes
+
+- 8023ea6: **V-Angular:** Improve dropdown dynamic positioning (top/bottom) and height calculation
+- 4f381d4: **V-Angular:** listWidth property to fold out component - added danger button to dialog component
+- 791dd16: V-Angular: Updated Table component with expanded rows by default attribute
+- Updated dependencies [72be834]
+  - @sebgroup/green-core@1.88.2
+
+## 6.0.5
+
+### Patch Changes
+
+- c031e4a: **V-Angular Input/Dropdown/Textarea**: Fixed styling for small variants; halved spacing underneath dropdown and textarea, and corrected height difference (compared to dropdown) for input field.
+
+## 6.0.4
+
+### Patch Changes
+
+- 86ea764: Fold out: close fold out on tab
+- 803b81c: Changed height of nggv-dateinput wrapper to match nggv-input wrapper
+
+## 6.0.3
+
+### Patch Changes
+
+- bad7bf3: Fix: showing validation message when passing message slot
+- Updated dependencies [27fe9cf]
+  - @sebgroup/green-core@1.88.0
+
+## 6.0.2
+
+### Patch Changes
+
+- e56c76a: V-angular: Updated textarea description logic with descriptionIsVisible property
+- 9abbfb9: Dropdown/Typeahead: Add input that controls if key "Space" should select active element in dropdown-list. Set to false from typeahead
+- Updated dependencies [577fc63]
+- Updated dependencies [f3b8f76]
+- Updated dependencies [eca17f0]
+  - @sebgroup/green-core@1.87.0
+
+## 6.0.1
+
+### Patch Changes
+
+- df15684: V-Angular: Updated the way required attribute is set inside components
+- Updated dependencies [1891932]
+  - @sebgroup/green-core@1.85.3
+
+## 6.0.0
+
+### Major Changes
+
+- ba3268c: Update minimal Angular version to 18
+
+### Patch Changes
+
+- Updated dependencies [60e38d9]
+- Updated dependencies [e4eb1ad]
+  - @sebgroup/green-core@1.85.0
+
+## 5.13.3
+
+### Patch Changes
+
+- 63487db: **V-Angular:** Fix component id collision warnings for toast component
+- Updated dependencies [56d1779]
+- Updated dependencies [55b23da]
+  - @sebgroup/green-core@1.84.0
+
+## 5.13.2
+
+### Patch Changes
+
+- b89a46f: V-Angular: Removed the top line/border from the table header.
+- Updated dependencies [c6833ae]
+  - @sebgroup/green-core@1.83.2
+
+## 5.13.1
+
+### Patch Changes
+
+- 0acbec7: Dragdrop: Prevet overflow for file name
+- Updated dependencies [1aa919a]
+- Updated dependencies [44dff87]
+- Updated dependencies [41b8a90]
+- Updated dependencies [73e0759]
+- Updated dependencies [4d4704b]
+- Updated dependencies [f1ceb54]
+  - @sebgroup/green-core@1.83.0
+
+## 5.13.0
+
+### Minor Changes
+
+- 9d223a7: V-Angular: Adding small variant of Dropdown
+- 9d223a7: V-Angular: Adding small variant of Checkbox
+- 9d223a7: V-Angular: Adding small variant of DateInput
+- 9d223a7: V-Angular: Adding small variant of Textarea
+
+### Patch Changes
+
+- 1829e13: Fixed dropdown selection behaviour when typeahead is used
+- 9d223a7: V-Angular: Fixing icon sizing in Date input
+
+## 5.12.1
+
+### Patch Changes
+
+- a4252f9: **NggCoreControl:** Update selectors to only apply when controls are used with reactive forms (when `formControlName` is present)
+- Updated dependencies [4c000b4]
+  - @sebgroup/green-core@1.81.0
+
+## 5.12.0
+
+### Minor Changes
+
+- 45a6303: **V-Angular Dropdown/Typeahead**: Keyboard select dropdown with nvda screen-reader.
+
+### Patch Changes
+
+- 2a3e532: Resolved V-Angular table a11y warnings
+- Updated dependencies [2edbe83]
+- Updated dependencies [5f775b4]
+- Updated dependencies [461504b]
+- Updated dependencies [2edbe83]
+  - @sebgroup/green-core@1.80.0
+  - @sebgroup/chlorophyll@3.6.20
+
+## 5.11.2
+
+### Patch Changes
+
+- 7e585f8: **NggDatepicker:** Fix error in change event handler
+- Updated dependencies [ce1b0d4]
+  - @sebgroup/green-core@1.79.0
+
+## 5.11.1
+
+### Patch Changes
+
+- 728c620: **V-Angular:** Updated table component
+
+## 5.11.0
+
+### Minor Changes
+
+- 318de75: **V-Angular Inputs:** Support for custom locked template for input fields.
+
+### Patch Changes
+
+- 766cbe6: Adding export of checkbox directive to fix build error
+- Updated dependencies [657e0a3]
+- Updated dependencies [0a3ac2c]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [9075450]
+- Updated dependencies [6846a6c]
+  - @sebgroup/green-core@1.78.0
+
+## 5.10.0
+
+### Minor Changes
+
+- 7d86c93: **Forms:** Add ControlValueAccessor support for `gds-checkbox`
+
+### Patch Changes
+
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+- Updated dependencies [7d86c93]
+  - @sebgroup/green-core@1.77.0
+
+## 5.9.0
+
+### Minor Changes
+
+- 8616efe: Updated v-angular table for mobile view
+
+## 5.8.1
+
+### Patch Changes
+
+- 0f2c59f: **V-Angular Dropdown/Typeahead:** Enable keyboard navigation with NVDA screen-reader.
+- Updated dependencies [441260e]
+- Updated dependencies [ba27ca9]
+  - @sebgroup/green-core@1.76.2
+
+## 5.8.0
+
+### Minor Changes
+
+- a9cde91: **V-Angular Toast:** Support input of custom template to render inside of toast.
+
 ## 5.7.1
 
 ### Patch Changes

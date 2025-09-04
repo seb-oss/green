@@ -7,8 +7,7 @@ import './index.ts'
 /**
  * [Source code](https://github.com/seb-oss/green/tree/main/libs/core/src/components/coachmark)
  *
- * Coachmarks are contextual tips that focus on making the user
- * aware of a new feature, the benefits of an existing one or a moved feature within an interface.
+ * Coachmarks guide users through interface features.
  *
  * The component is primarily a container that follows the targeted element.
  * The coachmark will be invisible and disabled if another element covered the targeted element or its simply out of view.

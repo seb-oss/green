@@ -16,6 +16,8 @@ import '../icon/icons/brand-green.ts'
 import '../icon/icons/books.ts'
 
 /**
+ * A select enables the user to choose a single option from a list.
+ *
  * `gds-select` is a wrapper component for the native select element.
  *
  * Use this component instead of `<gds-dropdown>` when you need to leverage the inherent behavior of the native select element, for example when native accessibility features, some of which are not currently replicable in custom dropdowns, are required. Usability on mobile devices is also sometimes better with native select elements.
@@ -60,9 +62,6 @@ export const Default: Story = {
     supportingText: 'Supporting text',
     value: '',
     innerHTML: `
-      <span slot="extended-supporting-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </span>
       <gds-icon-books slot="lead"></gds-icon-books>
       <select>
         <option value="">Select a value</option>
@@ -170,8 +169,8 @@ export const Disabled: Story = {
   render: () => html`
     <gds-flex>
       <gds-select disabled label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-lightning slot="lead"></gds-icon-lightning>
@@ -185,47 +184,77 @@ export const Disabled: Story = {
 }
 
 /**
- * Select has built-in support for form validation.<br>The validation feature is built on top of the browsers native validation features, using `ElementInternals` and `Constraint Validation API`.
- *
- * Validation is configured by adding a validator to a form element.<br> A validator is an object that implements the `GdsValidator` interface:
- *
- * ```html
- * <gds-select invalid></gds-select>
- * ```
- * **@property invalid** - Indicates that the select field contains an error.
- *
+ * The invalid state can be set either directly using the `invalid` boolean property together with the `error-message` property, or by using a [validator](/docs/components-form-validation--docs).
  */
-export const Validation: Story = {
+export const Invalid: Story = {
   ...DefaultParams,
-  name: 'Validation',
+  name: 'Invalid',
   render: () => html`
     <gds-flex>
       <gds-select
-        .invalid=${true}
+        invalid
         label="Label text"
         supporting-text="Supporting text"
         .required=${true}
-        .validator=${{
-          validate: (el: any) => {
-            if (el.value === '')
-              return [
-                {
-                  ...el.validity,
-                  valid: false,
-                  customError: true,
-                },
-                'Error message.',
-              ]
-          },
-        }}
+        error-message="This field is required"
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-rocket slot="lead"></gds-icon-rocket>
         <select>
           <option value="">Incorrect Value</option>
+          <optgroup label="Propulsion">
+            <option value="ion-thrusters">Ion Thrusters</option>
+            <option value="chemical-rockets">Chemical Rockets</option>
+          </optgroup>
+          <optgroup label="Communication">
+            <option value="satellite-communication">
+              Satellite Communication
+            </option>
+            <option value="deep-space-network">Deep Space Network</option>
+          </optgroup>
+        </select>
+      </gds-select>
+    </gds-flex>
+  `,
+}
+
+/**
+ * The `extended-supporting-text` slot can be used to provide extended information about the select field.<br>
+ * The slot will show by default when the `show-extended-supporting-text` property is set.<br>
+ * If not specified, the slot will be hidden and a companion icon will be displayed to indicate that more information is available.
+ *
+ * ```html
+ *<gds-select show-extended-supporting-text>
+ *  <span slot="extended-supporting-text">...</span>
+ *  <select><option value="">...</option></select>
+ *</gds-select>
+ * ```
+ */
+export const ExtendedSupportingText: Story = {
+  ...DefaultParams,
+  name: 'Extended Supporting Text',
+  render: () => html`
+    <gds-flex
+      gap="xl"
+      align-items="center"
+      justify-content="center"
+      width="100%"
+    >
+      <gds-select
+        label="Label text"
+        supporting-text="Supporting text"
+        show-extended-supporting-text
+      >
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </span>
+        <gds-icon-rocket slot="lead"></gds-icon-rocket>
+        <select>
+          <option value="">First option</option>
           <optgroup label="Propulsion">
             <option value="ion-thrusters">Ion Thrusters</option>
             <option value="chemical-rockets">Chemical Rockets</option>
@@ -260,8 +289,8 @@ export const Size: Story = {
         label="Label text"
         supporting-text="Supporting text"
       >
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        <span slot="extended-supporting-text">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </span>
         <gds-icon-bank slot="lead"></gds-icon-bank>
@@ -273,101 +302,6 @@ export const Size: Story = {
           <optgroup label="National">
             <option value="isro">ISRO</option>
             <option value="cnsa">CNSA</option>
-          </optgroup>
-        </select>
-      </gds-select>
-    </gds-flex>
-  `,
-}
-
-/**
- * The `multiple` attribute can be set to allow multiple options to be selected on the native `<select>` element.
- *
- * However, it is not recommended to use the native select element in multi-select mode. The native select element does not provide a good user experience for multi-select, especially when there are many options. Prefer to use checkbox groups or the `<gds-dropdown>` component for multi-select functionality instead.
- */
-export const Multiple: Story = {
-  ...DefaultParams,
-  name: 'Multiple',
-  render: () => html`
-    <gds-flex>
-      <gds-select label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </span>
-        <gds-icon-sun slot="lead"></gds-icon-sun>
-        <select multiple>
-          <option value="black-holes">Black Holes</option>
-          <option value="neutron-stars">Neutron Stars</option>
-          <option value="supernovae">Supernovae</option>
-          <option value="galaxies">Galaxies</option>
-          <option value="exoplanets">Exoplanets</option>
-          <option value="dark-matter">Dark Matter</option>
-        </select>
-      </gds-select>
-    </gds-flex>
-  `,
-}
-
-/**
- * The native `<select size="...">` to not be confused with property `size` <br> it is the native attribute that sets the number of visible options in a select element.
- *
- * ```html
- *  <gds-select>
- *  <select multiple size="14">
- *    ...
- *  </select>
- * </gds-select>
- * ```
- */
-
-export const SelectSize: Story = {
-  ...DefaultParams,
-  name: 'Select Size',
-  render: () => html`
-    <gds-flex>
-      <gds-select label="Label text" supporting-text="Supporting text">
-        <span slot="extended-supporting-text"
-          >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </span>
-        <gds-icon-compass-round slot="lead"></gds-icon-compass-round>
-        <select multiple size="14">
-          <optgroup label="Mars Missions">
-            <option value="curiosity">Curiosity</option>
-            <option value="perseverance">Perseverance</option>
-            <option value="spirit">Spirit</option>
-            <option value="opportunity">Opportunity</option>
-          </optgroup>
-          <optgroup label="Moon Missions">
-            <option value="apollo-11">Apollo 11</option>
-            <option value="luna-2">Luna 2</option>
-            <option value="chang-e-4">Chang'e 4</option>
-            <option value="artemis-1">Artemis 1</option>
-          </optgroup>
-          <optgroup label="Jupiter Missions">
-            <option value="galileo">Galileo</option>
-            <option value="juno">Juno</option>
-          </optgroup>
-          <optgroup label="Saturn Missions">
-            <option value="cassini">Cassini</option>
-            <option value="huygens">Huygens</option>
-          </optgroup>
-          <optgroup label="Asteroid Missions">
-            <option value="hayabusa">Hayabusa</option>
-            <option value="osiris-rex">OSIRIS-REx</option>
-          </optgroup>
-          <optgroup label="Comet Missions">
-            <option value="rosetta">Rosetta</option>
-            <option value="deep-impact">Deep Impact</option>
-          </optgroup>
-          <optgroup label="Venus Missions">
-            <option value="magellan">Magellan</option>
-            <option value="akatsuki">Akatsuki</option>
-          </optgroup>
-          <optgroup label="Mercury Missions">
-            <option value="messenger">MESSENGER</option>
-            <option value="bepi-colombo">BepiColombo</option>
           </optgroup>
         </select>
       </gds-select>

@@ -7,7 +7,7 @@ import { GdsElement } from '../../gds-element'
 import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch } from '../../utils/decorators/watch.js'
-import { styles } from './field-base.styles'
+import FieldBaseStyles from './field-base.styles'
 
 /**
  * @element gds-field-base
@@ -24,7 +24,7 @@ import { styles } from './field-base.styles'
 @gdsCustomElement('gds-field-base')
 @localized()
 export class GdsFieldBase extends GdsElement {
-  static styles = [styles]
+  static styles = [FieldBaseStyles]
 
   /**
    * The size of the field.
@@ -117,26 +117,17 @@ export class GdsFieldBase extends GdsElement {
   }
 
   #renderFieldContents() {
-    if (
-      this.multiline &&
-      (this._trailSlotOccupied || this._actionSlotOccupied)
-    ) {
-      return html`
-        ${this.#renderSlotLead()} ${this.#renderSlotMain()}
-        <div class="right">
-          ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
-        </div>
-      `
-    } else {
-      const elements = [
-        this.#renderSlotLead(),
-        this.#renderSlotMain(),
-        this.#renderSlotAction(),
-        this.#renderSlotTrail(),
-      ]
-
-      return html`${map(elements, (el) => el)}`
+    const rightSlotsWrapClasses = {
+      right: true,
+      'as-flex':
+        this.multiline && (this._trailSlotOccupied || this._actionSlotOccupied),
     }
+    return html`
+      ${this.#renderSlotLead()} ${this.#renderSlotMain()}
+      <div class="${classMap(rightSlotsWrapClasses)}">
+        ${this.#renderSlotAction()} ${this.#renderSlotTrail()}
+      </div>
+    `
   }
 
   #renderSlotLead() {

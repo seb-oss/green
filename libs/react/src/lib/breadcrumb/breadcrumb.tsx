@@ -7,6 +7,9 @@ export type BreadcrumbProps = {
 
 export type BreadcrumItembProps = JSX.IntrinsicElements['li']
 
+/**
+ * @deprecated Please use the `gds-breadcrumbs` web component from green-core instead
+ */
 export const Breadcrumb: React.FC<PropsWithChildren<BreadcrumbProps>> = ({
   children,
   className,

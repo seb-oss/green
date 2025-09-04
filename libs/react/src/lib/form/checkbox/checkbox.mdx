@@ -1,10 +1,17 @@
 import { Controls, Meta, Story, Canvas } from '@storybook/blocks'
 import { Checkbox } from './checkbox'
 import * as CheckboxStories from './checkbox.stories';
+import * as Core from '../../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const CheckboxTemplate = ({ ...props }) => <Checkbox {...props} />
 
 <Meta of={CheckboxStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Checkbox is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-checkbox--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Checkbox
 

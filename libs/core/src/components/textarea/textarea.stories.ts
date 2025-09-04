@@ -12,22 +12,10 @@ import '../divider/index.ts'
 import '../icon/icons/credit-card.ts'
 import '../icon/icons/magnifying-glass.ts'
 
+import { GdsFormControlElement } from '../form/form-control.ts'
+
 /**
- *
- * Textareas are used for longer multiline text inputs, such as comments or descriptions.<br>
- * They can be used in forms, dialogs, and data tables.
- * The `gds-textarea` component is a wrapper around the native textarea element and provides a consistent look and feel across browsers. It has 4 rows by default and it resizes vertically to fit the content as the user types.
- *
- * Some features of the Textarea include:
- * - Built-in support for form validation
- * - Slots for `lead` and `trail` icons
- * - `Supporting` and `Extended` text
- * - `Clearable` input fields
- * - `Length` validation
- * - `Disabled` state
- * - Custom number of `Rows`
- *
- * @status beta
+ * A textarea enables multi-line text input from users.
  *
  */
 const meta: Meta = {
@@ -454,7 +442,7 @@ export const Validation: Story = {
                     valid: false,
                     customError: true,
                   },
-                  'Error message.',
+                  'You need to enter a value.',
                 ]
               else if (el.value.length !== 12 || isNaN(el.value))
                 return [
@@ -480,8 +468,10 @@ export const Validation: Story = {
           value="Incorrect value"
           maxLength="12"
           clearable
+          .invalid=${true}
+          error-message="This is explicitly set error message."
           .validator=${{
-            validate: (el: any) => {
+            validate: (el: GdsFormControlElement) => {
               if (el.value === '')
                 return [
                   {
@@ -507,6 +497,29 @@ export const Validation: Story = {
           <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
         </gds-textarea>
       </gds-flex>
+    </gds-flex>
+  `,
+}
+
+/**
+ * Most standard attributes are supported, and will be forwarded to the internal textarea element.
+ */
+export const StandardAttributes: Story = {
+  ...DefaultParams,
+  name: 'Standard Attributes',
+  render: () => html`
+    <gds-flex flex-direction="column" gap="xl" width="320px">
+      <gds-input
+        label="Label"
+        supporting-text="Using standard attributes"
+        autocapitalize="on"
+        autocomplete="on"
+        autocorrect="on"
+        spellcheck="true"
+        inputmode="numeric"
+        autofocus
+        enterkeyhint="enter"
+      ></gds-input>
     </gds-flex>
   `,
 }

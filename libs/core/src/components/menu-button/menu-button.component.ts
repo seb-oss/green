@@ -1,4 +1,3 @@
-import { unsafeCSS } from 'lit'
 import { property } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import { ifDefined } from 'lit/directives/if-defined.js'
@@ -11,11 +10,10 @@ import {
   withLayoutChildProps,
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import MenuButtonCSS from './menu-button.styles'
+import MenuButtonStyles from './menu-button.styles'
 
 /**
  * @element gds-menu-button
- * @status stable
  *
  * @slot - Content to be displayed as the button label.
  * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.
@@ -29,7 +27,7 @@ import MenuButtonCSS from './menu-button.styles'
 export class GdsMenuButton extends withSizeXProps(
   withLayoutChildProps(GdsElement),
 ) {
-  static styles = [tokens, unsafeCSS(MenuButtonCSS)]
+  static styles = [tokens, MenuButtonStyles]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',

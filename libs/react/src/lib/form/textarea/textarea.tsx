@@ -42,6 +42,9 @@ export interface ITextAreaProps
   value?: string
 }
 
+/**
+ * @deprecated Please use the `gds-textarea` web component from green-core instead
+ */
 export const TextArea = forwardRef(
   (
     {

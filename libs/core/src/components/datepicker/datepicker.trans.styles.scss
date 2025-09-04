@@ -10,7 +10,7 @@
     width: 100%;
     contain: layout;
     isolation: isolate;
-    gap: var(--gds-space-xs);
+    gap: var(--gds-sys-space-xs);
   }
 
   [role='spinbutton'] {

@@ -1,0 +1,26 @@
+@font-palette-values --kung-fury {
+  font-family: 'Code';
+  override-colors:
+    0 hsl(188 100% 75%),
+    /* curlies and tags */ 1 hsl(250 100% 80%),
+    /* ? */ 2 hsl(188 100% 75%),
+    /* function */ 3 hsl(188 100% 75%),
+    /* ? */ 4 hsl(250 100% 80%),
+    /* () */ 5 hsl(210 40% 98%),
+    /* property name */ 6 hsl(210 40% 80%),
+    /* ? */ 7 hsl(300 100% 80%) /* numbers */;
+}
+
+.code {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+
+  code {
+    font-family: 'Code', monospace;
+    font-palette: --kung-fury;
+  }
+}

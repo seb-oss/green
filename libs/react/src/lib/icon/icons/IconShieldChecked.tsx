@@ -1,0 +1,1 @@
+export { IconShieldChecked } from '@sebgroup/green-core/react';

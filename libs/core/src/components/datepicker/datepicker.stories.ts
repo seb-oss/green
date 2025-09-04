@@ -11,8 +11,9 @@ import './index.ts'
  * &nbsp;|&nbsp;
  * [Usage guidelines](https://designlibrary.sebgroup.com/components/datepicker)
  *
- * Date pickers simplify the task of selecting a date in a visual representation of a calendar.
- * The date picker in Green Core mimics the behaviour of the native date input element as it is
+ * The datepicker allows users to select a date.
+ *
+ * The datepicker in Green Core mimics the behaviour of the native date input element as it is
  * implemented in Chromium browsers.
  *
  * The input field shows three parts of the date: the day, the month and the year. The user can
@@ -85,15 +86,12 @@ export const Usage: Story = {
 export const WeekNumbers: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-datepicker
-      label="With week numbers"
-      show-week-numbers
-    ></gds-datepicker>
+    <gds-datepicker label="Week numbers" show-week-numbers></gds-datepicker>
   `,
 }
 
 /**
- * Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
+ * Setting `min` and `max` date you can choose.
  */
 export const MinMaxDates: Story = {
   ...DefaultParams,
@@ -127,7 +125,7 @@ export const Disabled: Story = {
 }
 
 /**
- * The date picker has two sizes: `small` and `medium`. The default size is `medium`.
+ * The date picker has two sizes: `small` and `large`. The default size is `large`.
  *
  * Optionally, the label can be hidden by using the `hide-label` attribute.
  */
@@ -135,7 +133,7 @@ export const InputFieldSize: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-datepicker
-      label="A small datepicker"
+      label="A small input"
       hide-label
       size="small"
     ></gds-datepicker>
@@ -161,6 +159,42 @@ export const DisabledField: Story = {
       min="2022-11-11"
       max="2024-02-20"
       disabled
+    ></gds-datepicker>
+  `,
+}
+
+/**
+ * The selected date can be clearable by using the 'clearable` attribute (was default on before).
+ */
+export const Clearable: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker label="Clearable on" clearable></gds-datepicker>
+  `,
+}
+
+/**
+ * The today button can be hidden by using the `hide-today-button` attribute.
+ */
+export const Simplified: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker label="Today hidden" hide-today-button></gds-datepicker>
+  `,
+}
+
+/**
+ * An example with things turned on.
+ */
+export const Full: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-datepicker
+      label="Label"
+      supporting-text="Supporting text"
+      clearable
+      disabled-weekends
+      show-week-numbers
     ></gds-datepicker>
   `,
 }

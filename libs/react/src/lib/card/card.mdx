@@ -3,6 +3,7 @@ import Card from './card'
 import Button from '../form/button/button'
 import Link from '../link/link'
 import * as CardStories from './card.stories';
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const Template = ({ children, ...props }) => (
   <Card {...props}>{children}</Card>
@@ -29,6 +30,12 @@ export const Footer = () => (
 )
 
 <Meta of={CardStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Card is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-card--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Cards
 

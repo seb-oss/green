@@ -13,7 +13,6 @@ import '@sebgroup/green-core/components/input/index.js'
 import '@sebgroup/green-core/components/textarea/index.js'
 import '@sebgroup/green-core/components/dropdown/index.js'
 import '@sebgroup/green-core/components/datepicker/index.js'
-import '@sebgroup/green-core/components/form/summary/index.js'
 import '@sebgroup/green-core/components/flex/index.js'
 import '@sebgroup/green-core/components/card/index.js'
 import '@sebgroup/green-core/components/rich-text/index.js'
@@ -22,6 +21,8 @@ import '@sebgroup/green-core/components/theme/index.js'
 import '@sebgroup/green-core/components/segmented-control/index.js'
 import '@sebgroup/green-core/components/select/index.js'
 import '@sebgroup/green-core/components/radio/index.js'
+import '@sebgroup/green-core/components/checkbox/index.js'
+import '@sebgroup/green-core/components/form-summary/index.js'
 
 import { registerTransitionalStyles } from '@sebgroup/green-core/transitional-styles'
 
@@ -49,6 +50,8 @@ export class FormComponent {
     dropdown: ['', Validators.required],
     select: ['', Validators.required],
     radio: ['', Validators.required],
+    checkboxGroup: [[], Validators.required],
+    singleCheckbox: [false, Validators.requiredTrue],
     date: [undefined as Date | undefined, Validators.required],
   })
 
@@ -60,5 +63,9 @@ export class FormComponent {
     if (control?.hasError('maxlength')) return 'Field is too long'
     if (control?.hasError('email')) return 'Invalid email'
     return ''
+  }
+
+  consoleLog(val: any) {
+    console.log(val)
   }
 }

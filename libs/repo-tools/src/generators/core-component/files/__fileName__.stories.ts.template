@@ -5,7 +5,7 @@ import './<%= toKebabCase(name) %>'
 import { html } from 'lit'
 
 const meta: Meta = {
-  title: 'Components/<%= name %>',
+  title: 'Components/<%= toBritishTitleCase(name) %>',
   component: 'gds-<%= toKebabCase(name) %>',
   tags: ['autodocs'],
 }
@@ -23,9 +23,12 @@ const DefaultParams: Story = {
 }
 
 /**
- * TODO: Add documentation
+ * TODO: Add documentation here. Also add the beta
+ * flag in green/libs/core/.storybook/manager.ts to
+ * mark the component as beta in the menu of the
+ * core storybook.
  */
-export const <%= name %>: Story = {
+export const <%= toPascalCase(name) %>: Story = {
   ...DefaultParams,
   name: '<%= name %>',
 }

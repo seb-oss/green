@@ -1,0 +1,82 @@
+import { Meta, Markdown } from '@storybook/addon-docs'
+
+<Meta title="Components/Form/Validation" />
+
+<h1>Form validation</h1>
+
+Green Core components have built-in support for form validation. The validation feature is built on top of the
+browsers native validation features, using ElementInternals and Constraint Validation API.
+
+## Usage
+
+Validation is configured by adding a validator to a form element. A validator is an object that implements the
+`GdsValidator` interface:
+
+```typescript
+export interface GdsValidator {
+  /**
+   * Validate the form control element. Should return the validity state and an optional validation message.
+   */
+  validate(element: GdsFormControlElement): [ValidityState, string] | undefined
+}
+```
+
+Here is how you can use it in a component in a Lit element:
+
+```html
+<gds-dropdown
+  label="Pick a pet"
+  .validator=${{
+    validate: (el: GdsDropdown) => {
+      if (el.value !== 'cat')
+        return [
+          { ...el.validity, valid: false, customError: true },
+          'Only cats are allowed!',
+        ]
+    },
+  }}
+>
+  <gds-option>Pick favorite</gds-option>
+  <gds-option value="dog">Dog</gds-option>
+  <gds-option value="cat">Cat</gds-option>
+  <gds-option value="fish">Fish</gds-option>
+</gds-dropdown>
+```
+
+The return value of the `validate` method should be a tuple of the validity state (as a
+[`ValidityState`](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) object) and a validation message.
+The `ValidityState` object communicates the cause of the validation failure to the user agent. If the control was
+initially in a valid state, setting it to invalid will also cause it to emit a `invalid` event.
+
+Additionally, if the validity state changes due to the validate method, a `gds-validity-state` event will be dispatched. This event is not emitted when validity is explicitly set.
+
+The validator is executed when the value of the form control changes, and when the form emits a submit event.
+
+## Using other validation methods
+
+The validity state can also be explicitly set by setting the property `invalid` to `true`, or setting the `aria-invalid`
+attribute to `true`. This is useful when working with other validation libraries, such as Angular reactive forms.
+
+In this case the validation message can be supplied via the `message` slot (usually, but depends on the component),
+for example:
+
+```html
+<gds-dropdown *nggCoreElement label="Pick a pet" [invalid]="isInvalid">
+  <span slot="message">{{ invalidMessage }}</span>
+  ...options...
+</gds-dropdown>
+```
+
+## Displaying a validation summary
+
+To display a validation summary, you can use the `gds-form-summary` component. This component automatically subscribes to
+changes in its parent form and displays a list of validation issues. This only needs the `invalid` state to be true, so it
+should work with any validation framework, as long as both the summary component and form components are children of a form
+element.
+
+```html
+<form>
+  <!-- Form controls here -->
+  <gds-form-summary></gds-form-summary>
+</form>
+```

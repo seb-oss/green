@@ -1,19 +1,19 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import { css, unsafeCSS } from 'lit'
 
-import colorsDark from '../../../dist/libs/tokens/internal/dark.css?inline'
-import colorsLight from '../../../dist/libs/tokens/internal/light.css?inline'
-import motionTokens from '../../../dist/libs/tokens/internal/motion.css?inline'
-import shadowTokens from '../../../dist/libs/tokens/internal/shadow.css?inline'
-import sizeTokens from '../../../dist/libs/tokens/internal/size.css?inline'
-import textTokens from '../../../dist/libs/tokens/internal/text.css?inline'
+import base from '../../../dist/libs/tokens/2023/internal/variables.base.css?inline'
+import colorsDark from '../../../dist/libs/tokens/2023/internal/variables.dark.css?inline'
+import colorsLight from '../../../dist/libs/tokens/2023/internal/variables.light.css?inline'
+import shadows from '../../../dist/libs/tokens/2023/internal/variables.shadows.css?inline'
 import { GlobalStylesRegistry } from './utils/global-styles'
 
 const tokens = [
-  unsafeCSS(sizeTokens),
-  unsafeCSS(textTokens),
-  unsafeCSS(motionTokens),
-  unsafeCSS(shadowTokens),
+  css`
+    :host {
+      ${unsafeCSS(base)}
+      ${unsafeCSS(shadows)}
+    }
+  `,
 ]
 
 // Apply a set of default tokens to the root element
@@ -22,6 +22,8 @@ GlobalStylesRegistry.instance.injectGlobalStyles(
   css`
     :root,
     :root[gds-theme='light'] {
+      ${unsafeCSS(base)}
+      ${unsafeCSS(shadows)}
       ${unsafeCSS(colorsLight)}
     }
     :root[gds-theme='dark'] {

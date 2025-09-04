@@ -1,10 +1,17 @@
 import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
 import { TextArea } from './textarea'
 import * as TextareaStories from './textarea.stories';
+import * as Core from '../../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const TextAreaTemplate = ({ ...props }) => <TextArea {...props} />
 
 <Meta of={TextareaStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Text area is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-text-area--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Text Area
 

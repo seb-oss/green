@@ -3,6 +3,7 @@ import { GdsIcon } from '../icon'
 
 /**
  * @element gds-icon-cain-link
+ * @deprecated This icon is deprecated
  */
 @gdsCustomElement('gds-icon-cain-link')
 export class IconCainLink extends GdsIcon {
@@ -12,4 +13,10 @@ export class IconCainLink extends GdsIcon {
   static _solidSVG = `<path fill-rule="evenodd" clip-rule="evenodd" d="M18.9125 5.08755C16.7957 2.97082 13.3638 2.97082 11.2471 5.08755L9.75027 6.58437L8.68961 5.52371L10.1864 4.02689C12.889 1.32437 17.2706 1.32437 19.9731 4.02689C22.6756 6.7294 22.6756 11.111 19.9731 13.8136L18.4742 15.3125L17.4135 14.2519L18.9125 12.7529C21.0292 10.6362 21.0292 7.20428 18.9125 5.08755ZM15.5607 9.5L9.5 15.5607L8.43934 14.5L14.5 8.43934L15.5607 9.5ZM6.58952 9.74513L5.08755 11.2471C2.97082 13.3638 2.97082 16.7957 5.08755 18.9125C7.20428 21.0292 10.6362 21.0292 12.7529 18.9125L14.2478 17.4176L15.3084 18.4782L13.8136 19.9731C11.1111 22.6756 6.72941 22.6756 4.02689 19.9731C1.32437 17.2706 1.32437 12.889 4.02689 10.1864L5.52886 8.68446L6.58952 9.74513Z" fill="currentColor"/>`
   /** @private */
   static _name = 'cain-link'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
 }

@@ -2,10 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
 <file target-language="nl" source-language="en" original="lit-localize-inputs" datatype="plaintext">
 <body>
-<trans-unit id="sb77f4dce69a005ac">
-  <source>Error message.</source>
-  <target>Foutmelding.</target>
-</trans-unit>
 <trans-unit id="s5e8250fb85d64c23">
   <source>Close</source>
   <target>Sluiten</target>
@@ -17,10 +13,6 @@
 <trans-unit id="s83c436ed1bc16dfb">
   <source>Show more information</source>
   <target>Toon meer informatie</target>
-</trans-unit>
-<trans-unit id="s58bfb494feb8eb02">
-  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
-  <target><x id="0" equiv-text="${this.value.length}"/> geselecteerd</target>
 </trans-unit>
 <trans-unit id="sd898d99fd9c13de6">
   <source>Filter available options</source>
@@ -61,10 +53,6 @@
 <trans-unit id="s17e3edbe032f79ec">
   <source>Open calendar modal</source>
   <target>Open kalenderpop-up</target>
-</trans-unit>
-<trans-unit id="s62931b2a50168976">
-  <source>Previous month</source>
-  <target>Vorige maand</target>
 </trans-unit>
 <trans-unit id="sb47daaf9e1c4a905">
   <source>Month</source>
@@ -122,10 +110,6 @@
   <source>Year</source>
   <target>Jaar</target>
 </trans-unit>
-<trans-unit id="s46d6587089bd0356">
-  <source>Next month</source>
-  <target>Volgende maand</target>
-</trans-unit>
 <trans-unit id="sb4f1dffbb6be6302">
   <source>Clear</source>
   <target>Wis</target>
@@ -151,7 +135,7 @@
   <target>Scroll rechts</target>
 </trans-unit>
 <trans-unit id="s9af3c72c33088826">
-  <source>There are <x id="0" equiv-text="${errors.length}"/> errors to correct before you can continue:</source>
+  <source>There are <x id="0" equiv-text="${errorControls.length}"/> errors to correct before you can continue:</source>
   <target>Er zijn <x id="0" equiv-text="${errors.length}"/> fouten die gecorrigeerd moeten worden voordat je verder kunt gaan:</target>
 </trans-unit>
 <trans-unit id="sdc42f1da42d6411a">
@@ -166,9 +150,44 @@
   <source>Loading...</source>
   <target>Laden...</target>
 </trans-unit>
-<trans-unit id="s3b151ca64eb26ec1">
-  <source>Expand</source>
-  <target>Uitbreiden</target>
+<trans-unit id="s3b8a6245b12fa2ad">
+  <source>Breadcrumbs</source>
+  <target>Kruimelpad</target>
+</trans-unit>
+<trans-unit id="s307db9af9905317d">
+  <source>Form error summary</source>
+  <target>Formulierfoutoverzicht</target>
+</trans-unit>
+<trans-unit id="s979f38023babd06d">
+  <source>Dismiss alert</source>
+  <target>Waarschuwing sluiten</target>
+</trans-unit>
+<trans-unit id="s39943b8a5733f5d2">
+  <source>Auto-dismiss timer</source>
+  <target>Automatisch sluiten timer</target>
+</trans-unit>
+<trans-unit id="sf1f100572e888a9d">
+  <source>Switch to previous month</source>
+  <target>Schakel naar vorige maand</target>
+</trans-unit>
+<trans-unit id="s88365264d8a05b05">
+  <source>Switch to next month</source>
+  <target>Schakel naar volgende maand</target>
+</trans-unit>
+<trans-unit id="s98dfb7a8cd8ec342">
+  <source>Select today's date</source>
+  <target>Selecteer de datum van vandaag</target>
+</trans-unit>
+<trans-unit id="s1727e353c65eba61">
+  <source>Clear selected date</source>
+  <target>Wis geselecteerde datum</target>
+<trans-unit id="s8f18916860db5d80">
+  <source>Clear selection</source>
+  <target>Wis selectie</target>
+</trans-unit>
+<trans-unit id="s1910f3ebccaec414">
+  <source><x id="0" equiv-text="${(this.value as Array&lt;unknown&gt;).length}"/> options selected</source>
+  <target><x id="0" equiv-text="${(this.value as Array&lt;unknown&gt;).length}"/> geselecteerd</target>
 </trans-unit>
 </body>
 </file>

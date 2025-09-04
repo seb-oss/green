@@ -39,16 +39,16 @@ Here is a rough diagram of how all of this fits together:
     style CP opacity:0.5,color:#888
     style E opacity:0.5,color:#888
     style APP fill:#fff,stroke:#666
-    CP[<b>Chlorophyll</b><br><i><small>@sebgroup/chlorophyll</small></i>]-.->A
-    E[<b>Extract</b><br><i><small>@sebgroup/extract</small></i>]-.->A
+    CP[<b>Chlorophyll</b><br><i><small>#64;sebgroup/chlorophyll</small></i>]-.->A
+    E[<b>Extract</b><br><i><small>#64;sebgroup/extract</small></i>]-.->A
     E-.->R
     CP-.->R
-    F[<b>Fonts</b><br><i><small>@sebgroup/fonts</small></i>]---->APP
-    WC[<b>Green Core</b><br><i><small>@sebgroup/green-core</small></i>]-->APP
-    DT[<b>Design Tokens</b><br><i><small>@sebgroup/green-tokens</small></i>]-->WC
+    F[<b>Fonts</b><br><i><small>#64;sebgroup/fonts</small></i>]---->APP
+    WC[<b>Green Core</b><br><i><small>#64;sebgroup/green-core</small></i>]-->APP
+    DT[<b>Design Tokens</b><br><i><small>#64;sebgroup/green-tokens</small></i>]-->WC
     DT-.->CP
-    WC-->A[<b>Angular</b><br><i><small>@sebgroup/green-angular</small></i>]-->APP
-    WC-->R[<b>React</b><br><i><small>@sebgroup/green-react</small></i>]-->APP
+    WC-->A[<b>Angular</b><br><i><small>#64;sebgroup/green-angular</small></i>]-->APP
+    WC-->R[<b>React</b><br><i><small>#64;sebgroup/green-react</small></i>]-->APP
     APP(<b>Your app</b><br><i><small>Using Angular, React, Other or no framework</small></i>)
 `}
 ></SBMermaid>

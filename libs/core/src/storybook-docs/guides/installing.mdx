@@ -21,7 +21,7 @@ Web components needs to be defined in the custom elements registry before they c
   ```ts
   import '@sebgroup/green-core/components/button/index.js'
   ```
-  This will automatically register the component in the custom elements registry, and you can use it immediately, but it will not be tree-shakable, so it will be included in your bundle wheter you use it or not.
+  This will automatically register the component in the custom elements registry, and you can use it immediately, but it will not be tree-shakable, so it will be included in your bundle whether you use it or not.
 
 - Use a pure import and define separately:
   ```ts
@@ -69,10 +69,11 @@ Below is a minimal example using the renderer.
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
     // Provides `NggCoreRenderer` as a custom renderer
-    providers: [provideCoreRenderer()],
+    providers: [provideCoreRenderer(getScopedTagName)],
     // CUSTOM_ELEMENTS_SCHEMA is still needed
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

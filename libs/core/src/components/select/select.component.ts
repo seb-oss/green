@@ -21,11 +21,11 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
-import { styles } from './select.styles'
+import SelectStyles from './select.styles'
 
 @localized()
 class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
-  static styles = [tokens, formControlHostStyles, styles]
+  static styles = [tokens, formControlHostStyles, SelectStyles]
 
   /**
    * The supporting text displayed between the label and the field.
@@ -33,6 +33,16 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   @property({ attribute: 'supporting-text' })
   supportingText = ''
+
+  /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
 
   /**
    * Controls the font-size of texts and height of the field.
@@ -100,6 +110,10 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     })
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   render() {
     const CLASSES = {
       multiple: this.multiple,
@@ -111,13 +125,20 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
       ${when(
         !this.plain,
         () =>
-          html`<gds-form-control-header class="size-${this.size}">
-            <label for="select" slot="label" id="label-text"
-              >${this.label}</label
-            >
+          html`<gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText=${this.showExtendedSupportingText}
+          >
+            <label for="select" slot="label" id="label-text">
+              ${this.label}
+            </label>
             <span slot="supporting-text" id="supporting-text">
               ${this.supportingText}
             </span>
+            <slot
+              name="extended-supporting-text"
+              slot="extended-supporting-text"
+            ></slot>
           </gds-form-control-header>`,
       )}
 
@@ -137,8 +158,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
         () =>
           html`<gds-form-control-footer
             class="size-${this.size}"
-            .validationMessage=${this.invalid &&
-            (this.errorMessage || this.validationMessage)}
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
           ></gds-form-control-footer>`,
       )}
     `
@@ -179,7 +199,8 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
 
         // If this is the initial render, set the value from the select element
         // Otherwise we set the select element value from the component value, so that it still reflects the value prop in case it was rerendered
-        if (!this.#isValueInitialized) this.value = clone.value as ValueT
+        if (!this.#isValueInitialized)
+          this._internalValue = clone.value as ValueT
         else clone.value = this.value as string
 
         return clone
@@ -217,21 +238,16 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
     this.#setValueFromSelectElement()
 
     requestAnimationFrame(() => {
-      this.dispatchEvent(
-        new CustomEvent('input', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
-
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('input', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      })
+      this.dispatchCustomEvent('change', {
+        detail: { value: this.value },
+        bubbles: true,
+        composed: true,
+      })
     })
   }
 
@@ -308,14 +324,15 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
    */
   #renderChevron() {
     if (!this.multiple) {
-      return html` <gds-icon-chevron-bottom></gds-icon-chevron-bottom> `
+      return html`
+        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+      `
     }
   }
 }
 
 /**
  * @element gds-select
- * @status beta
  *
  * `gds-select` is a wrapper component for the native select element.
  *

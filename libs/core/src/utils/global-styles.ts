@@ -1,10 +1,11 @@
 import { CSSResult } from 'lit'
 
+import { VER_SUFFIX } from '../scoping'
 import { supportsConstructedStylesheets } from '../utils/controllers/dynamic-styles-controller'
-import { isServer } from './helpers/is-server'
+import { isServer } from './helpers/platform'
 
 declare global {
-  var __gdsGlobalStylesRegistry: GlobalStylesRegistry // eslint-disable-line no-var
+  var __gdsGlobalStylesRegistryScoped: { [VER_SUFFIX]: GlobalStylesRegistry } // eslint-disable-line no-var
 }
 
 function getDocumentAdoptedStylesheet() {
@@ -12,6 +13,10 @@ function getDocumentAdoptedStylesheet() {
   return document.adoptedStyleSheets || []
 }
 
+/**
+ * GlobalStylesRegistry is a singleton class that manages global stylesheets in the document.
+ * The singleton is used to inject global styles that are not scoped to specific components.
+ */
 export class GlobalStylesRegistry {
   #useLegacyStylesheets = !supportsConstructedStylesheets()
   #styleSheets = new Map<string, CSSStyleSheet>()
@@ -22,10 +27,13 @@ export class GlobalStylesRegistry {
    * Get the global singleton instance of the GlobalStylesRegistry.
    */
   static get instance() {
-    if (!globalThis.__gdsGlobalStylesRegistry)
-      globalThis.__gdsGlobalStylesRegistry = new GlobalStylesRegistry()
+    if (!globalThis.__gdsGlobalStylesRegistryScoped?.[VER_SUFFIX])
+      globalThis.__gdsGlobalStylesRegistryScoped = {
+        ...globalThis.__gdsGlobalStylesRegistryScoped,
+        [VER_SUFFIX]: new GlobalStylesRegistry(),
+      }
 
-    return globalThis.__gdsGlobalStylesRegistry
+    return globalThis.__gdsGlobalStylesRegistryScoped[VER_SUFFIX]
   }
 
   /**

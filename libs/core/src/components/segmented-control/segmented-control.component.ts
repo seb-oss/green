@@ -1,5 +1,4 @@
 import { localized, msg } from '@lit/localize'
-import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 
 import { GdsElement } from '../../gds-element'
@@ -16,7 +15,7 @@ import {
 import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsSegment } from './segment/segment.component'
-import style from './segmented-control.style.css?inline'
+import SegmentedControlStyles from './segmented-control.styles'
 
 const debounce = (fn: () => void, delay: number) => {
   let timeoutId: NodeJS.Timeout
@@ -28,7 +27,6 @@ const debounce = (fn: () => void, delay: number) => {
 
 /**
  * @element gds-segmented-control
- * @status stable
  *
  * A segmented control is a group of 2-5 buttons that lets the user switch views or sort elements.
  *
@@ -43,7 +41,7 @@ const debounce = (fn: () => void, delay: number) => {
 export class GdsSegmentedControl<ValueT = any> extends withLayoutChildProps(
   withSizeXProps(withMarginProps(GdsElement)),
 ) {
-  static styles = [tokens, unsafeCSS(style)]
+  static styles = [tokens, SegmentedControlStyles]
 
   /**
    * Size of the segmented control
@@ -223,13 +221,11 @@ export class GdsSegmentedControl<ValueT = any> extends withLayoutChildProps(
 
       this.#updateIndicator()
 
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { segment: selectedSegment },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('change', {
+        detail: { segment: selectedSegment },
+        bubbles: true,
+        composed: true,
+      })
     }
   }
 

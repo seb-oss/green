@@ -1,8 +1,12 @@
+import { TemplateRef } from '@angular/core'
+
 export interface ToastMessage {
-  type: MessageType
-  translocoScope: string
-  titleText: string
+  type: MessageType | 'success' | 'information' | 'error' | 'warning'
+  translocoScope?: string
+  titleText?: string
   bodyText?: string
+  template?: TemplateRef<any>
+  templateContext?: any
   timeout?: number
   timeoutId?: number
   timeoutStartTime?: number

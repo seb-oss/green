@@ -15,10 +15,8 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
 import { GdsRadioGroup } from './radio-group/radio-group'
 
 /**
- * Radio buttons are form controls that allow users to select a single option from a set of mutually exclusive choices.<br/>
+ * A radio button is a form element that allows users to select one of the predefined set of choices.<br/>
  * They are grouped using a radio group component which manages selection, keyboard navigation, and validation.
- *
- * Radio groups provide validation and selection management and implements the ElementInternals `formAssociated` API.
  *
  * Groups support vertical and horizontal layouts, and can be sized to fit different space requirements.
  */
@@ -109,7 +107,6 @@ export const Validation: Story = {
           <gds-radio
             label="Radio Label"
             value="1"
-            .invalid=${true}
             supporting-text="Example support text"
           ></gds-radio>
           <gds-radio
@@ -126,7 +123,7 @@ export const Validation: Story = {
 
 export const DosAndDonts: Story = {
   ...DefaultParams,
-  name: "Do's and dont's",
+  name: "Do's and don'ts",
   render: () => html`
     <gds-flex gap="xl">
       <gds-flex gap="l" flex-direction="column" flex="1">

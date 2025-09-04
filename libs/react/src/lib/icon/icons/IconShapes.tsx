@@ -1,0 +1,1 @@
+export { IconShapes } from '@sebgroup/green-core/react';

@@ -5,7 +5,7 @@ import './img'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * The `gds-img`
+ * An image displays media with configurable dimensions and styling properties.
  */
 const meta: Meta = {
   title: 'Components/Image',
@@ -32,8 +32,9 @@ const DefaultParams: Story = {
     inset: '0',
     position: 'relative',
     opacity: '1',
-    src: 'https://placehold.co/600x400',
+    src: 'https://api.seb.io/components/image/img.jpg',
     alt: 'Placeholder',
+    'border-radius': 's',
   },
 }
 

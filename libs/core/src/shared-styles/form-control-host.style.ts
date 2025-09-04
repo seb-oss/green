@@ -11,24 +11,26 @@ export default css`
     width: 100%;
     contain: layout;
     isolation: isolate;
-    gap: var(--gds-space-xs);
+    gap: var(--gds-sys-space-xs);
   }
 
   :host([size='small']) {
-    gap: var(--gds-space-2xs);
+    gap: var(--gds-sys-space-2xs);
   }
 
   :host([size='small']) .native-control {
-    font-size: var(--gds-text-size-detail-s);
-    line-height: var(--gds-text-line-height-detail-s);
+    font: var(--gds-sys-text-detail-regular-s);
   }
 
   :host([disabled]) {
-    color: var(--gds-color-l3-content-disabled);
+    color: var(--gds-sys-color-content-disabled-01);
     pointer-events: none;
   }
 
   .native-control {
+    font: var(--gds-sys-text-detail-regular-m);
+    align-items: center;
+    align-self: center;
     appearance: none;
     background-color: transparent;
     border: 0;
@@ -38,25 +40,23 @@ export default css`
     overflow: hidden;
     padding: unset;
     width: 100%;
-    font-size: var(--gds-text-size-detail-m);
-    line-height: var(--gds-text-line-height-detail-m);
     color: currentColor;
     text-align: left;
   }
 
   :host([size='small']) slot[name='lead']::slotted(*) {
     line-height: 18px;
-    width: var(--gds-space-m);
+    width: var(--gds-sys-space-m);
   }
 
   :host([size='small']) slot[name='lead']::slotted(*) {
-    min-width: var(--gds-space-m);
-    max-width: var(--gds-space-m);
+    min-width: var(--gds-sys-space-m);
+    max-width: var(--gds-sys-space-m);
     display: flex;
   }
 
   slot[name='lead']::slotted(*) {
-    min-width: var(--gds-space-l);
+    min-width: var(--gds-sys-space-l);
     display: flex;
   }
 `

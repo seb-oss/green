@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -8,6 +9,7 @@ import {
   Inject,
   Injector,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
@@ -33,14 +35,19 @@ export interface DropdownTexts {
   selected?: string
   placeholder?: string
 }
-export interface DropdownOption {
+export interface DropdownOption<T = any> {
   label?: string
-  value?: any
+  value?: T
   selected?: boolean
   heading?: boolean
   [key: string]: any
 }
 
+/**
+ * @deprecated
+ * NggDropdown is deprecated in favor of GdsDropdown found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-dropdown--docs
+ */
 @Component({
   selector: 'ngg-dropdown',
   templateUrl: 'dropdown.component.html',
@@ -54,7 +61,11 @@ export interface DropdownOption {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NggDropdownComponent implements ControlValueAccessor, OnInit {
+export class NggDropdownComponent
+  implements ControlValueAccessor, OnInit, OnDestroy, AfterViewInit
+{
+  errorMessage?: string
+  errorMessageObserver?: MutationObserver
   @Input() id?: string
   @Input() loop?: boolean = false
   @Input() display = 'label'
@@ -70,7 +81,6 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @Input() maxHeight?: number = 500
   @Input() disableMobileStyles?: boolean
 
-  //
   @Input() set options(value: DropdownOption[] | undefined) {
     this._options = value
     this.texts = {
@@ -149,6 +159,8 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
   @ContentChild(NggDropdownButtonDirective)
   customButton?: NggDropdownButtonDirective
 
+  @ViewChild('formInfo', { static: false }) formInfoContent?: ElementRef
+
   @ViewChild('gdsDropdown', { static: false }) gdsDropdown?: ElementRef
 
   public onValueChange: (event: Event) => void = (event) => {
@@ -199,6 +211,26 @@ export class NggDropdownComponent implements ControlValueAccessor, OnInit {
       placeholder: this.texts?.placeholder ?? 'Select',
       selected: this.texts?.selected ?? 'selected',
       select: this.displayTextByValue(this._value),
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.formInfoContent) {
+      // Example: observe changes to the formInfoContent element
+      this.errorMessageObserver = new MutationObserver(() => {
+        this.errorMessage = this.formInfoContent?.nativeElement.textContent
+        this._cdr.detectChanges()
+      })
+      this.errorMessageObserver.observe(this.formInfoContent.nativeElement, {
+        childList: true,
+        subtree: true,
+      })
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.errorMessageObserver) {
+      this.errorMessageObserver.disconnect()
     }
   }
 

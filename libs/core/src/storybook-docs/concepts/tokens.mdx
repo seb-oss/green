@@ -24,11 +24,11 @@ languagues and tools may have other names for the same concept.
 Tokens in Green are grouped in the following collections:
 
 - Colors\
-  Green uses a three-level color system, which you can read more about under [Style/Colors](/docs/style-colors--docs)
+  Green uses a three-level color system, which you can read more about under [https://seb.io/primitives/colours](https://seb.io/primitives/colours)
 - Text\
-  Text tokens include font sizes, line heights, and font weights. Read more under [Style/Typography](/docs/style-typography--docs)
-- Sizes\
-  Size tokens define the spacing values used for paddings, margins, gaps and other spaces in the design. Read more under [Style/Size](/docs/style-size--docs)
+  Text tokens include font sizes, line heights, and font weights. Read more under [https://seb.io/primitives/typography](https://seb.io/primitives/typography)
+- Spacing\
+  Spacing tokens define the spacing values used for paddings, margins, gaps and other spaces in the design. Read more under [https://seb.io/primitives/spacing](https://seb.io/primitives/spacing)
 - Viewports\
   Viewport tokens define the breakpoints used in the design system.
 - Shadows\
@@ -38,7 +38,7 @@ Tokens in Green are grouped in the following collections:
 
 In most cases you don't need to use variables directly. They are already used in
 the design of the components, and if you are using [Declarative Layout](/docs/concepts-declarative-layout--docs), you have a
-simplified way of using the tokens. You can read more on this under [Style/Colors](/docs/style-colors--docs).
+simplified way of using the tokens. You can read more on this on [https://seb.io/primitives/colours](https://seb.io/primitives/colours).
 
 However, in some cases you will need to use CSS variables directly in your code, so
 let's briefly go over how to access them.
@@ -60,11 +60,11 @@ between light and dark mode, as well as setting the design version to be used by
 Here is an example of using the theme component to get access to variables:
 
 <gds-theme design-version="2023">
-  <div style={{backgroundColor: `var(--gds-color-l2-background-primary)`, color: `var(--gds-color-l2-content-primary)`, padding: `var(--gds-space-l)`}}>Hello world</div>
+  <div style={{backgroundColor: `var(--gds-sys-color-l2-neutral-02)`, color: `var(--gds-sys-color-content-neutral-01)`, padding: `var(--gds-sys-space-l)`}}>Hello world</div>
 </gds-theme>
 ```html
 <gds-theme design-version="2023">
-  <div style="background-color: var(--gds-color-l2-background-primary); color: var(--gds-color-l2-content-primary); padding: var(--gds-space-l);">
+  <div style="background-color: var(--gds-sys-color-l2-neutral-02); color: var(--gds-sys-color-content-neutral-01); padding: var(--gds-sys-space-l);">
     Hello world
   </div>
 </gds-theme>

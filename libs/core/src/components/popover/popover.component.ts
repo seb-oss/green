@@ -1,5 +1,4 @@
 import { localized, msg } from '@lit/localize'
-import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import {
@@ -16,7 +15,7 @@ import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
-import styles from './popover.styles'
+import PopoverStyles from './popover.styles'
 
 import type { GdsBackdrop } from './backdrop'
 
@@ -24,7 +23,6 @@ export type UIStateChangeReason = 'show' | 'close' | 'cancel'
 
 /**
  * @element gds-popover
- * @status stable
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
@@ -40,7 +38,7 @@ export type UIStateChangeReason = 'show' | 'close' | 'cancel'
 @gdsCustomElement('gds-popover', { dependsOn: [IconCrossSmall] })
 @localized()
 export class GdsPopover extends GdsElement {
-  static styles = unsafeCSS(styles)
+  static styles = PopoverStyles
 
   /**
    * The default set of middleware for Floating UI positioning used by GdsPopover.
@@ -244,12 +242,16 @@ export class GdsPopover extends GdsElement {
     // This should be removed in the future if/when the VirtualKeyboard API is suported on Safari.
     this.addEventListener('focusin', (e: FocusEvent) => {
       const t = e.target as HTMLElement
+
+      if (t === this) return
+
       if (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') {
         this._isVirtKbVisible = true
       } else {
         this._isVirtKbVisible = false
       }
     })
+
     this.addEventListener('blurin', (_) => {
       this._isVirtKbVisible = false
     })
@@ -258,6 +260,7 @@ export class GdsPopover extends GdsElement {
   disconnectedCallback(): void {
     super.disconnectedCallback()
     this.#unregisterTriggerEvents()
+    window.removeEventListener('scroll', this.#handlePageScroll)
   }
 
   render() {
@@ -323,12 +326,18 @@ export class GdsPopover extends GdsElement {
             ),
           0,
         )
+
+        // Register the scroll listener to close the popover when the page is scrolled
+        window.addEventListener('scroll', this.#handlePageScroll, {
+          passive: true,
+        })
       } else {
         this._elDialog?.close()
         clickOutsideTarget.removeEventListener(
           'click',
           this.#handleClickOutside,
         )
+        window.removeEventListener('scroll', this.#handlePageScroll)
         if (this.#backdropEl) this.#backdropEl.show = false
       }
     })
@@ -352,14 +361,12 @@ export class GdsPopover extends GdsElement {
 
   #dispatchUiStateEvent = (reason: UIStateChangeReason) => {
     const toState = reason === 'show' ? true : false
-    return this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { open: toState, reason },
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-      }),
-    )
+    return this.dispatchCustomEvent('gds-ui-state', {
+      detail: { open: toState, reason },
+      bubbles: false,
+      composed: false,
+      cancelable: true,
+    })
   }
 
   #handleCloseButton = (e: MouseEvent) => {
@@ -367,11 +374,6 @@ export class GdsPopover extends GdsElement {
     e.preventDefault()
     if (this.#dispatchUiStateEvent('close')) {
       this.open = false
-
-      // The timeout here is to work around a strange default behaviour in VoiceOver on iOS, where when you close
-      // a dialog, the focus gets moved to the element that is visually closest to where the focus was in the
-      // dialog (close button in this case.)
-      // The timeout waits for VoiceOver to do its thing, then moves focus back to the trigger.
       setTimeout(() => this._trigger?.focus(), 250)
     }
   }
@@ -420,6 +422,7 @@ export class GdsPopover extends GdsElement {
       this._elDialog?.style.removeProperty('left')
       this._elDialog?.style.removeProperty('top')
       this._elDialog?.style.removeProperty('minWidth')
+      this._elDialog?.style.removeProperty('min-width')
 
       this.updateComplete.then(() => {
         if (this.open) this._elDialog?.showModal()
@@ -457,6 +460,7 @@ export class GdsPopover extends GdsElement {
         minHeight: this.calcMinHeight(referenceEl),
         maxHeight: this.calcMaxHeight(referenceEl),
       })
+
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
         middleware: this.floatingUIMiddleware,
@@ -519,6 +523,16 @@ export class GdsPopover extends GdsElement {
       if (!isInDialog && this.#dispatchUiStateEvent('close')) {
         this.open = false
       }
+    }
+  }
+
+  #handlePageScroll = () => {
+    if (
+      this.open &&
+      window.innerWidth > 767 &&
+      this.#dispatchUiStateEvent('close')
+    ) {
+      this.open = false
     }
   }
 }

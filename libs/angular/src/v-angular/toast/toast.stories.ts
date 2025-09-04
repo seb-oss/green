@@ -3,6 +3,7 @@ import {
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
   importProvidersFrom,
+  TemplateRef,
 } from '@angular/core'
 import {
   BrowserAnimationsModule,
@@ -37,7 +38,11 @@ import { MessageType } from './toast.models'
     </button>
     <button (click)="addMessage(MessageType.Information, '', 'Information')">
       Information
-    </button>`,
+    </button>
+    <ng-template #customToast>
+      Custom content with <a href="#">Link!</a>
+    </ng-template>
+    <button (click)="addCustomMessage(customToast)">Custom content</button>`,
 })
 class NggvToastStoryComponent {
   constructor(public toastMessageService: ToastMessageService) {}
@@ -58,6 +63,13 @@ class NggvToastStoryComponent {
       bodyText,
       timeout,
     )
+  }
+
+  addCustomMessage(template: TemplateRef<any>) {
+    this.toastMessageService.add({
+      template,
+      type: MessageType.Information,
+    })
   }
 }
 

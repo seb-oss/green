@@ -16,24 +16,24 @@
 
   border-bottom: none;
 
+  .web-view {
+    display: table-cell;
+  }
+
+  .mobile-view {
+    display: none;
+  }
+
   tr:hover td {
     background-color: var(--gds-sys-color-base-100);
   }
 
-  .gds-table__numeric-col,
   .gds-table__numeric-col {
     text-align: right;
   }
 
   thead tr th.gds-table__numeric-col .gds-table-sort {
     justify-content: end;
-  }
-
-  th,
-  td {
-    &.gds-table__numeric-col + :not(.gds-table__numeric-col) {
-      padding-left: 1rem;
-    }
   }
 
   th button {
@@ -46,6 +46,11 @@
     cursor: pointer;
   }
 
+  tbody {
+    border-bottom: var(--sg-table-border-width) solid
+      var(--sg-table-border-color);
+  }
+
   td {
     cursor: pointer;
   }
@@ -53,7 +58,7 @@
   tfoot {
     border-top: 1px solid;
     border-bottom: none;
-    font-weight: 500;
+    font-weight: var(--sg-table-row-expand-font-weight, 500);
 
     ::ng-deep {
       td {
@@ -81,6 +86,7 @@
       label {
         display: inline;
         padding: 0;
+
         &::before {
           top: 0.55rem;
         }
@@ -98,6 +104,7 @@
 
       label {
         padding: 0;
+
         &::before {
           margin: 0;
         }
@@ -113,6 +120,10 @@
         display: flex;
         flex-wrap: nowrap;
 
+        &.no-sub-items {
+          padding-left: 1.5rem;
+        }
+
         .chevron-field {
           width: 1.5rem;
 
@@ -124,6 +135,17 @@
             transform: rotate(-180deg);
           }
         }
+
+        .gds-item-field-text {
+          padding-left: 0.2rem;
+          .gds-item-field-extra-label {
+            font-weight: var(--sg-table-row-expand-font-weight-light, 400);
+          }
+        }
+      }
+
+      td {
+        font-weight: var(--sg-table-row-expand-font-weight, 500);
       }
     }
   }
@@ -152,6 +174,7 @@
   #thead-checkbox input[type='checkbox']:hover {
     &:not(:checked) ~ i {
       box-shadow: inset 0 0 0 1px #ababab;
+
       &::after {
         border-color: #ababab;
       }
@@ -159,8 +182,84 @@
 
     &:checked ~ i {
       box-shadow: inset 0 0 0 1px #ababab;
+
       &::after {
         border-color: #ababab;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .gds-table {
+    thead {
+      display: none;
+    }
+
+    .row__expand td:not(:first-child) {
+      display: none;
+    }
+
+    .row__expand td {
+      display: table-cell;
+    }
+
+    .web-view {
+      display: none;
+    }
+
+    .mobile-view {
+      display: flex;
+      align-items: center;
+
+      .mobile-view-field-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 100%;
+
+        .mobile-view-field {
+          display: flex;
+          flex-direction: column;
+          padding-bottom: 0.3rem;
+
+          &:nth-child(2n + 1) {
+            justify-self: start;
+            align-items: start;
+            text-align: start;
+          }
+
+          &:nth-child(2n) {
+            align-items: end;
+            justify-self: end;
+            text-align: end;
+          }
+        }
+      }
+
+      .nav-chevron-field {
+        width: 1.5rem;
+        padding-left: 0.5rem;
+
+        svg {
+          transition: transform 0.3s ease;
+        }
+
+        &[aria-expanded='true'] svg {
+          transform: rotate(-90deg);
+        }
+      }
+
+      .settings-field {
+        width: 1.5rem;
+        padding: 0 1rem;
+
+        svg {
+          transition: all 0.3s ease;
+        }
+
+        &:hover svg {
+          fill: var(--gds-sys-color-blue-dark-2);
+        }
       }
     }
   }

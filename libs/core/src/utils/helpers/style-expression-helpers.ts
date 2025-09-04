@@ -26,7 +26,15 @@ export function parseColorValue(
     return value
   }
   const [colorName, transparency] = value.split('/')
-  const colorVar = `var(--gds-color-l${level}-${context}-${colorName})`
+
+  let colorVar: string
+
+  if (level && context === 'background') {
+    colorVar = `var(--gds-sys-color-l${level}-${colorName})`
+  } else {
+    colorVar = `var(--gds-sys-color-${context}-${colorName})`
+  }
+
   return transparency
     ? `color-mix(in srgb, ${colorVar} ${parseFloat(transparency) * 100}%, transparent 0%)`
     : colorVar
@@ -51,7 +59,14 @@ export function forColorTokens(
  * Create options for style expression properties that expect space tokens.
  */
 export const forSpaceTokens: StyleExpressionPropertyOptions = {
-  valueTemplate: (value: string) => `var(--gds-space-${value}, 0)`,
+  valueTemplate: (value: string) => `var(--gds-sys-space-${value}, 0)`,
+}
+
+/**
+ * Create options for style expression properties that expect radius tokens.
+ */
+export const forRadiusTokens: StyleExpressionPropertyOptions = {
+  valueTemplate: (value: string) => `var(--gds-sys-radius-${value}, 0)`,
 }
 
 /**
@@ -59,7 +74,7 @@ export const forSpaceTokens: StyleExpressionPropertyOptions = {
  */
 export const forSpaceTokensAndCustomValues: StyleExpressionPropertyOptions = {
   valueTemplate: (value: string) =>
-    `var(--gds-space-${sanitizeVariableName(value)}, ${value})`,
+    `var(--gds-sys-space-${sanitizeVariableName(value)}, ${value})`,
 }
 
 /**
@@ -72,8 +87,8 @@ export const forSpaceTokensSupportingNegative: StyleExpressionPropertyOptions =
       const sign = v.startsWith('-') ? 'neg' : 'pos'
       const val =
         sign == 'pos'
-          ? `var(--gds-space-${v})`
-          : `calc(var(--gds-space-${v.substring(1)}) * -1)`
+          ? `var(--gds-sys-space-${v})`
+          : `calc(var(--gds-sys-space-${v.substring(1)}) * -1)`
       return v === 'auto' ? 'auto' : val
     },
     styleTemplate: (prop, values) => {

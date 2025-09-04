@@ -10,6 +10,7 @@ import { html as customElementHtml, gdsCustomElement } from '../../scoping'
 import { tokens } from '../../tokens.style'
 import { TransitionalStyles } from '../../transitional-styles'
 import { observeLightDOM } from '../../utils/decorators'
+import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import { forwardAttributes } from '../../utils/directives'
 import { stripWhitespace } from '../../utils/helpers/strip-white-space'
 import {
@@ -18,7 +19,7 @@ import {
   withSizeXProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsFormControlElement } from '../form/form-control'
-import style from './button.style.css?inline'
+import ButtonStyles from './button.styles'
 
 const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 
@@ -26,7 +27,7 @@ const ariaForwards = ['aria-label', 'aria-haspopup', 'aria-expanded']
 const html = stripWhitespace(customElementHtml)
 
 class Button extends GdsFormControlElement<any> {
-  static styles = [tokens, unsafeCSS(style)]
+  static styles = [tokens, ButtonStyles]
 
   /**
    * @internal
@@ -41,6 +42,15 @@ class Button extends GdsFormControlElement<any> {
    */
   @property({ type: Boolean, reflect: true })
   disabled = false
+
+  /**
+   * Spread the contents of the button
+   */
+
+  @styleExpressionProperty({
+    selector: '.button',
+  })
+  'justify-content'?: string
 
   /**
    * The type of the button.
@@ -58,7 +68,13 @@ class Button extends GdsFormControlElement<any> {
    * Defines which variant the button belongs to. Defaults to "neutral".
    */
   @property({ reflect: true })
-  variant: 'neutral' | 'positive' | 'negative' = 'neutral'
+  variant:
+    | 'brand'
+    | 'neutral'
+    | 'positive'
+    | 'negative'
+    | 'notice'
+    | 'warning' = 'neutral'
 
   /**
    * Sets the size of the button. Defaults to "small".
@@ -107,6 +123,10 @@ class Button extends GdsFormControlElement<any> {
     TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
   get #isLink() {
     return this.href.length > 0
   }
@@ -123,8 +143,11 @@ class Button extends GdsFormControlElement<any> {
       xs: this.size === 'xs',
       small: this.size === 'small',
       large: this.size === 'large',
+      brand: this.variant === 'brand',
       positive: this.variant === 'positive',
       negative: this.variant === 'negative',
+      notice: this.variant === 'notice',
+      warning: this.variant === 'warning',
       primary: this.rank === 'primary',
       secondary: this.rank === 'secondary',
       tertiary: this.rank === 'tertiary',
@@ -172,21 +195,18 @@ class Button extends GdsFormControlElement<any> {
 
     this.#isIconButton =
       assignedElements.length === 1 &&
-      assignedElements.some((element) =>
-        element.tagName.toLowerCase().startsWith('gds-icon'),
-      )
+      (assignedElements[0].tagName.toLowerCase().startsWith('gds-icon') ||
+        assignedElements[0].getAttribute('name') === 'icon')
 
     this.requestUpdate()
   }
 
   #handleClick = (e: MouseEvent) => {
-    this.dispatchEvent(
-      new CustomEvent('gds-click', {
-        bubbles: true,
-        composed: true,
-        detail: e,
-      }),
-    )
+    this.dispatchCustomEvent('gds-click', {
+      bubbles: true,
+      composed: true,
+      detail: e,
+    })
 
     if (this.form && !this.#isLink) {
       if (this.type === 'submit') {
@@ -211,7 +231,6 @@ class Button extends GdsFormControlElement<any> {
 /**
  * @element gds-button
  * @summary A custom button element that can display a label, lead and trail icons, and a ripple effect on click.
- * @status stable
  *
  * @slot - Content to be displayed as the button label.
  * @slot lead - An optional slot that allows a `gds-icon-[ICON_NAME]` element to be placed before the label.

@@ -15,10 +15,13 @@ import '../icon/icons/people.js'
 import '../icon/icons/globus.js'
 import '../icon/icons/square-arrow-top-right.js'
 import '../icon/icons/arrow-right.js'
-import '../icon/icons/cain-link.js'
+import '../icon/icons/chain-link.js'
 
 import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
 
+/**
+ * A link navigates users to other pages or sections of content.
+ */
 const meta: Meta = {
   title: 'Components/Link',
   component: 'gds-link',
@@ -58,7 +61,7 @@ export const Lead: Story = {
   name: 'Icon: Lead',
   render: () =>
     html` <gds-link>
-      <gds-icon-cain-link slot="lead"></gds-icon-cain-link>
+      <gds-icon-chain-link slot="lead"></gds-icon-chain-link>
       Link text
     </gds-link>`,
 }
@@ -124,5 +127,38 @@ export const TextDecoration: Story = {
         </gds-flex>
       </gds-flex>
     </gds-flex>
+  `,
+}
+
+/**
+ * On the `gds-link` component, the `label` attribute is used to provide an accessible name for the link.
+ *
+ * It will be forwarded to the `aria-label` attribute of the underlying anchor element.
+ *
+ *
+ * Use this when:
+ * - The link contains only an icon
+ * - The visual text needs a different description for screen readers
+ * - Additional context is needed for accessibility
+ *
+ *```html
+ *<!-- Icon-only link -->
+ *<gds-link href="/settings" label="Open settings">
+ *  <gds-icon-settings></gds-icon-settings>
+ *</gds-link>
+ *
+ *<!-- Different screen reader text -->
+ *<gds-link href="/article" label="Read full article about climate change">
+ *  Read more
+ *</gds-link>
+ *```
+ */
+export const Label: Story = {
+  ...DefaultParams,
+  name: 'Label',
+  render: () => html`
+    <gds-link href="#" label="Aria label is used">
+      Link with aria-label
+    </gds-link>
   `,
 }

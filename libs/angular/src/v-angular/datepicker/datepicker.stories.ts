@@ -93,6 +93,16 @@ export default {
         type: 'radio',
       },
     },
+    size: {
+      options: ['small', 'large'],
+      control: {
+        type: 'select',
+        labels: {
+          large: 'Large',
+          small: 'Small',
+        },
+      },
+    },
   },
 } as Meta
 
@@ -134,6 +144,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
       [firstDayOfWeek]="firstDayOfWeek"
       [formControl]="formControl"
       [locked]="locked"
+      [size]="size"
       [displayDisabledAsLocked]="displayDisabledAsLocked"
       [closeCalendarOnEscape]="closeCalendarOnEscape"
       >
@@ -393,6 +404,43 @@ const TemplateWithTwoInputs: StoryFn<DateStoryArgs> = (args) => {
   }
 }
 
+const CustomLockedTemplate: StoryFn<DateStoryArgs & any> = (args) => {
+  const dateFc = new UntypedFormControl(args.ngModel)
+
+  dateFc.valueChanges.subscribe((val) => {
+    console.log('control value:', val)
+  })
+
+  // remove non-input args
+  return {
+    template: /*html*/ `
+    <nggv-dateinput
+      [label]="label"
+      [locale]="locale"
+      [dateLocale]="dateLocale"
+      [disableDates]="disableDates"
+      [disableWeekDays]="disableWeekDays"
+      [required]="required"
+      [invalid]="invalid"
+      [error]="error"
+      [errorList]="errorList"
+      [withErrorIcon]="withErrorIcon"
+      [firstDayOfWeek]="firstDayOfWeek"
+      [formControl]="formControl"
+      [locked]="locked"
+      [displayDisabledAsLocked]="displayDisabledAsLocked"
+      [closeCalendarOnEscape]="closeCalendarOnEscape"
+      >
+      <ng-template #lockedTpl let-state>Today ({{ state | date: 'shortDate' }})</ng-template>
+    </nggv-dateinput>
+    `,
+    props: {
+      ...args,
+      formControl: dateFc,
+    },
+  }
+}
+
 export const Primary = PrimaryTemplate.bind({})
 Primary.args = {
   label: 'Date label',
@@ -409,6 +457,7 @@ Primary.args = {
   dateCharacters: { year: 'å', month: 'm', day: 'd' },
   errorList: [],
   withErrorIcon: false,
+  size: 'large',
 }
 
 export const WithFormControl = TemplateWithFormControl.bind({})
@@ -498,6 +547,15 @@ WithTwoControls.args = {
 export const WithLockedInput = PrimaryTemplate.bind({})
 WithLockedInput.args = {
   ...Primary.args,
+  locked: true,
+  description: undefined,
+  displayDisabledAsLocked: false,
+}
+
+export const WithCustomLockedTemplate = CustomLockedTemplate.bind({})
+WithCustomLockedTemplate.args = {
+  ...Primary.args,
+  ngModel: new Date(),
   locked: true,
   description: undefined,
   displayDisabledAsLocked: false,

@@ -1,5 +1,44 @@
 # Changelog
 
+## 2.0.1
+
+### Patch Changes
+
+- 0c50d22: Fix bad syntax in enum-class template
+- d31d7f4: Update naming of color tokens for compose distribution
+- d31d7f4: Fix wrong path used when deploying JVM tokens
+
+## 2.0.0
+
+### Major Changes
+
+- d9b0006: New token structure. New names and new color values.
+- d9b0006: New state and shadow tokens, removing some of the old ones.
+
+### Minor Changes
+
+- d9b0006: Adding content-04 token
+
+### Patch Changes
+
+- d9b0006: fixing l2-02, l2-brand-02 darkmode values
+- d9b0006: Tokens: content-02 to use grey.19
+- d9b0006: Fixed l3-04 dark mode color
+
+## 1.1.0
+
+### Minor Changes
+
+- f0c94cf: Adding android/compose/kotlin as platform
+- a25abee: Adding scss variables output
+
+## 1.0.0
+
+### Major Changes
+
+- 56552ef: **L3 Background Primary:** Changing the l3 background primary to be Green Senior
+- 56552ef: Migrating to Style Dictionary v4 and rewriting token structure and output for a more scaleable implementation.
+
 ## 0.10.3
 
 ### Patch Changes

@@ -7,6 +7,9 @@ interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   variant?: 'blue' | 'white' | 'black'
 }
 
+/**
+ * @deprecated Please use the `gds-link` web component from green-core instead
+ */
 export const Link = ({
   button,
   secondary,

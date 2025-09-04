@@ -9,7 +9,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "nx run tokens:build-style-dictionary",
+          "node --experimental-strip-types libs/tokens/style-dictionary.build.ts ",
           "nx run tokens:copy-package-json",
           "nx run tokens:copy-readme"
         ],

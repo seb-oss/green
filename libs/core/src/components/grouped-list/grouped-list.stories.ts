@@ -20,7 +20,7 @@ registerTransitionalStyles()
 const meta: Meta = {
   title: 'Components/Grouped List',
   component: 'gds-grouped-list',
-  subcomponents: { ListItem: 'gds-list-item' },
+  subcomponents: { GdsListItem: 'gds-list-item' },
   parameters: {
     layout: 'centered',
   },

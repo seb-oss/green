@@ -9,7 +9,7 @@ import {
   withMarginProps,
 } from '../../utils/mixins/declarative-layout-mixins'
 import { defaultStyles } from '../text/default-typography.styles'
-import { styles } from './rich-text.styles'
+import styles from './rich-text.styles'
 
 /**
  * `gds-rich-text` can be used to wrap generic HTML content and apply typography styles.
@@ -18,7 +18,6 @@ import { styles } from './rich-text.styles'
  * default typography styles and standard element styles defined in the Green Design System.
  *
  * @element gds-rich-text
- * @status beta
  *
  */
 @gdsCustomElement('gds-rich-text')

@@ -9,7 +9,7 @@
     @include common.add-border-color();
     @include common.add-focus('within');
     align-items: stretch;
-    gap: var(--gds-space-xs);
+    gap: var(--gds-sys-space-xs);
     background-color: var(--gds-sys-color-background-primary);
     box-sizing: border-box;
     color: var(--gds-sys-color-text-primary);
@@ -17,8 +17,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-xs)
-      calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+    padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs)
+      calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-m);
     min-block-size: 44px;
   }
 
@@ -33,21 +33,21 @@
 
   .field.multiline {
     align-items: flex-start;
-    padding: calc(var(--gds-space-s) - 1px) var(--gds-space-s)
-      calc(var(--gds-space-s) - 1px) var(--gds-space-m);
+    padding: calc(var(--gds-sys-space-s) - 1px) var(--gds-sys-space-s)
+      calc(var(--gds-sys-space-s) - 1px) var(--gds-sys-space-m);
     height: max-content;
   }
 
   .field.action-slot-occupied:not(.trail-slot-occupied) {
-    padding-right: var(--gds-space-xs);
+    padding-right: var(--gds-sys-space-xs);
   }
 
   .field.lead-slot-occupied {
-    padding-left: var(--gds-space-xs);
+    padding-left: var(--gds-sys-space-xs);
   }
 
   .field.trail-slot-occupied {
-    padding: calc(var(--gds-space-xs) - 1px) var(--gds-space-m);
+    padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-m);
   }
 
   .field slot[name='action']::slotted(*) {
@@ -59,14 +59,14 @@
   }
 
   .field.invalid {
-    border-color: var(--gds-color-l3-border-negative);
-    color: var(--gds-color-l3-content-negative);
+    border-color: var(--gds-sys-color-border-negative-01);
+    color: var(--gds-sys-color-content-negative-01);
     border-bottom-width: 2px;
   }
 
   .field.disabled {
-    background: var(--gds-color-l3-background-disabled);
-    color: var(--gds-color-l3-content-disabled);
+    background: var(--gds-sys-color-l3-disabled-01);
+    color: var(--gds-sys-color-content-disabled-01);
     border-color: transparent;
     pointer-events: none;
   }
@@ -84,6 +84,6 @@
     align-items: center;
     justify-content: center;
     display: flex;
-    min-width: var(--gds-space-l);
+    min-width: var(--gds-sys-space-l);
   }
 }

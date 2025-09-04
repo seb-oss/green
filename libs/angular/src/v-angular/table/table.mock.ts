@@ -73,32 +73,41 @@ export const columns: {
     {
       property: 'name',
       label: 'header.name',
-    },
-    {
-      property: 'currency',
-      label: 'header.currency',
+      hideLabelOnMobile: true,
+      boldTextOnMobile: true,
     },
     {
       property: 'status',
       label: 'header.status',
+      hideLabelOnMobile: true,
+      boldTextOnMobile: true,
+    },
+    {
+      property: 'currency',
+      label: 'header.currency',
+      boldTextOnMobile: true,
     },
     {
       property: 'bookedBalance',
+      hidePropertyOnMobile: true,
       label: 'header.bookedbalance',
       valueType: 'numeric',
     },
     {
       property: 'datedBalance',
       label: 'header.datedbalance',
+      hidePropertyOnMobile: true,
       valueType: 'numeric',
     },
     {
       property: 'limit',
       label: 'header.limit',
       valueType: 'numeric',
+      boldTextOnMobile: true,
     },
     {
       property: 'unauthorizedUsage',
+      hidePropertyOnMobile: true,
       label: 'header.unauthorizedusage',
       valueType: 'numeric',
     },

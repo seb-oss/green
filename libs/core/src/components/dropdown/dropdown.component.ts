@@ -17,8 +17,9 @@ import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../icon/icons/checkmark.component'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
-import styles from './dropdown.styles'
+import DropdownStyles from './dropdown.styles'
 
 import type {
   GdsOption,
@@ -31,7 +32,6 @@ export * from '../../primitives/listbox/option.component'
  * @element gds-dropdown
  * A dropdown consist of a trigger button and a list of selectable options. It is used to select a single value from a list of options.
  *
- * @status beta
  *
  * @slot - Options for the dropdown. Accepts `gds-option` and `gds-menu-heading` elements.
  * @slot trigger - Custom content for the trigger button can be assigned through this slot.
@@ -53,6 +53,7 @@ export * from '../../primitives/listbox/option.component'
     GdsPopover,
     IconCheckmark,
     IconChevronBottom,
+    IconCrossLarge,
   ],
 })
 @localized()
@@ -60,7 +61,7 @@ export class GdsDropdown<ValueT = any>
   extends GdsFormControlElement<ValueT | ValueT[]>
   implements OptionsContainer
 {
-  static styles = [tokens, formControlHostStyle, styles]
+  static styles = [tokens, formControlHostStyle, DropdownStyles]
 
   get type() {
     return 'gds-dropdown'
@@ -91,6 +92,12 @@ export class GdsDropdown<ValueT = any>
    */
   @property({ type: Boolean, reflect: true })
   multiple = false
+
+  /**
+   * Whether the dropdown should be clearable.
+   */
+  @property({ type: Boolean, reflect: true })
+  clearable = false
 
   /**
    * Whether the dropdown should be rendered as a combobox.
@@ -153,7 +160,7 @@ export class GdsDropdown<ValueT = any>
    * Size of the dropdown. Supports `medium` and `small`. There is no `large` size for dropdowns.
    * `medium` is the default size.
    */
-  @property()
+  @property({ reflect: true })
   size: 'medium' | 'small' = 'medium'
 
   /**
@@ -177,6 +184,16 @@ export class GdsDropdown<ValueT = any>
    */
   @property({ type: Boolean })
   disableMobileStyles = false
+
+  /**
+   * Whether the supporting text should be displayed or not.
+   */
+  @property({
+    attribute: 'show-extended-supporting-text',
+    type: Boolean,
+    reflect: true,
+  })
+  showExtendedSupportingText = false
 
   /**
    * Get the options of the dropdown.
@@ -207,22 +224,24 @@ export class GdsDropdown<ValueT = any>
     let displayValue: string | undefined
 
     if (Array.isArray(this.value)) {
-      this.value.length > 2
-        ? (displayValue = msg(str`${this.value.length} selected`))
-        : (displayValue = this.value
-            .reduce(
-              (acc: string, cur: ValueT) =>
-                acc +
-                this.options.find((v) => v.value === cur)?.innerHTML +
-                ', ',
-              '',
-            )
-            .slice(0, -2))
+      displayValue = this.value
+        // Limit to max 5 displayed
+        .slice(0, 5)
+        // Join with comma
+        .reduce(
+          (acc: string, cur: ValueT) =>
+            acc + this.options.find((v) => v.value === cur)?.innerText + ', ',
+          '',
+        )
+        // Remove trailing comma and space
+        .slice(0, -2)
+        // Truncate with ...
+        .replace(/(.{25})(.*)/, '$1...')
     } else {
-      displayValue = this.options.find((v) => v.selected)?.innerHTML
+      displayValue = this.options.find((v) => v.selected)?.innerText
     }
 
-    return displayValue || this.placeholder?.innerHTML || ''
+    return displayValue || this.placeholder?.innerText || ''
   }
 
   /**
@@ -267,7 +286,10 @@ export class GdsDropdown<ValueT = any>
       ${when(
         !this.plain && !this.hideLabel,
         () => html`
-          <gds-form-control-header class="size-${this.size}">
+          <gds-form-control-header
+            class="size-${this.size}"
+            .showExtendedSupportingText="${this.showExtendedSupportingText}"
+          >
             <label id="label" for="trigger" slot="label">${this.label}</label>
             ${when(
               this.supportingText.length > 0,
@@ -308,13 +330,41 @@ export class GdsDropdown<ValueT = any>
           id="field"
         >
           <slot name="lead" slot="lead"></slot>
-          ${this.combobox && !this.multiple
-            ? this.#renderCombobox()
-            : this.#renderTriggerButton()}
-          <gds-icon-chevron-bottom
-            slot="trail"
-            label=${msg('Expand')}
-          ></gds-icon-chevron-bottom>
+          ${when(
+            this.value &&
+              this.multiple &&
+              (this.value as Array<unknown>).length > 0,
+            () =>
+              html`<gds-badge
+                rounded
+                size=${this.size === 'small' ? 'small' : 'default'}
+                slot="lead"
+                aria-label=${msg(
+                  str`${(this.value as Array<unknown>).length} options selected`,
+                )}
+              >
+                ${(this.value as Array<unknown>).length}</gds-badge
+              >`,
+          )}
+          ${when(
+            this.clearable && this.value && !this.disabled,
+            () =>
+              html`<gds-button
+                id="clear-btn"
+                rank="tertiary"
+                size=${this.size === 'small' ? 'xs' : 'small'}
+                label="${msg('Clear selection')}"
+                @click=${this.#handleClearButton}
+                slot="trail"
+              >
+                <gds-icon-cross-large></gds-icon-cross-large>
+              </gds-button>`,
+          )}
+          ${when(this.combobox && !this.multiple, () => this.#renderCombobox())}
+          ${when(!this.combobox || this.multiple, () =>
+            this.#renderTriggerButton(),
+          )}
+          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(
@@ -344,7 +394,10 @@ export class GdsDropdown<ValueT = any>
       ${when(
         this.#shouldShowFooter(),
         () => html`
-          <gds-form-control-footer class="size-${this.size}">
+          <gds-form-control-footer
+            class="size-${this.size}"
+            .errorMessage=${this.invalid ? this.errorMessage : undefined}
+          >
             ${
               ``
               // @deprecated
@@ -355,7 +408,7 @@ export class GdsDropdown<ValueT = any>
               <gds-icon-triangle-exclamation
                 solid
               ></gds-icon-triangle-exclamation>
-              ${this.errorMessage || this.validationMessage}
+              ${this.errorMessage}
             </slot>
           </gds-form-control-footer>
         `,
@@ -364,7 +417,7 @@ export class GdsDropdown<ValueT = any>
   }
 
   #shouldShowFooter() {
-    return !this.plain && this.invalid
+    return !this.plain
   }
 
   protected _getValidityAnchor(): HTMLElement {
@@ -503,19 +556,22 @@ export class GdsDropdown<ValueT = any>
   }
 
   #dispatchUISateEvent = (toState: boolean, reason: UIStateChangeReason) =>
-    this.dispatchEvent(
-      new CustomEvent('gds-ui-state', {
-        detail: { reason, open: toState },
-        bubbles: false,
-        composed: false,
-        cancelable: true,
-      }),
-    )
+    this.dispatchCustomEvent('gds-ui-state', {
+      detail: { reason, open: toState },
+      bubbles: false,
+      composed: false,
+    })
 
   #handlePopoverStateChange = (e: CustomEvent) => {
     if (this.#dispatchUISateEvent(e.detail.open, e.detail.reason)) {
       this.open = e.detail.open
     }
+  }
+
+  #handleClearButton = (e: MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    this.value = undefined
   }
 
   /**
@@ -530,12 +586,9 @@ export class GdsDropdown<ValueT = any>
     e.stopPropagation()
 
     // Emit cancellable filter input event. If cancelled, consumer is expreced to handle filtering and update the options list.
-    const wasCancelled = !this.dispatchEvent(
-      new CustomEvent('gds-filter-input', {
-        detail: { value: (e.currentTarget as HTMLInputElement).value },
-        cancelable: true,
-      }),
-    )
+    const wasCancelled = !this.dispatchCustomEvent('gds-filter-input', {
+      detail: { value: (e.currentTarget as HTMLInputElement).value },
+    })
 
     if (wasCancelled) return
 
@@ -604,8 +657,8 @@ export class GdsDropdown<ValueT = any>
   }
 
   #dispatchInputEvent = () => {
-    this.dispatchEvent(
-      new Event('input', {
+    this.updateComplete.then(() =>
+      this.dispatchStandardEvent('input', {
         bubbles: true,
         composed: true,
       }),
@@ -613,8 +666,8 @@ export class GdsDropdown<ValueT = any>
   }
 
   #dispatchChangeEvent = () => {
-    this.dispatchEvent(
-      new CustomEvent('change', {
+    this.updateComplete.then(() =>
+      this.dispatchCustomEvent('change', {
         detail: { value: this.value },
         bubbles: true,
         composed: true,

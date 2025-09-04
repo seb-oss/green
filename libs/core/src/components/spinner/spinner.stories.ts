@@ -17,7 +17,7 @@ import '../divider'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * A loading indicator component that supports various sizes and display modes.
+ * A spinner is an indeterminate progress indicator.
  *
  * @status beta
  *
@@ -93,14 +93,22 @@ export const Sizes: Story = {
 }
 
 /**
- * The label is hidden by default, but can also be shown visually.
- *
- * A label should always be provided for accessibility reasons.
+ * The label is hidden by default, but can also be shown visually. A label should always be provided for accessibility reasons.
+ * The position of the label can also be customized to appear on top, left, or right of the spinner. this is done with the `label-position` attribute.
  */
 export const LabelOptions: Story = {
   name: 'Label Options',
   render: () => html`
-    <gds-flex gap="4xl" align-items="stretch">
+    <gds-grid gap="4xl" columns=">0{2}">
+      <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
+        <gds-text tag="h4">Hidden Label</gds-text>
+        <gds-card>
+          <gds-spinner
+            size="md"
+            label="With hidden label (for screen readers)"
+          ></gds-spinner>
+        </gds-card>
+      </gds-flex>
       <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
         <gds-text tag="h4">Visible Label</gds-text>
         <gds-card>
@@ -112,15 +120,39 @@ export const LabelOptions: Story = {
         </gds-card>
       </gds-flex>
       <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
-        <gds-text tag="h4">Hidden Label</gds-text>
+        <gds-text tag="h4">Label top</gds-text>
         <gds-card>
           <gds-spinner
             size="md"
-            label="With hidden label (for screen readers)"
+            label="With label on top"
+            label-position="top"
+            showLabel
           ></gds-spinner>
         </gds-card>
       </gds-flex>
-    </gds-flex>
+      <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
+        <gds-text tag="h4">Label left</gds-text>
+        <gds-card>
+          <gds-spinner
+            size="md"
+            label="With label on left"
+            label-position="left"
+            showLabel
+          ></gds-spinner>
+        </gds-card>
+      </gds-flex>
+      <gds-flex text-align="center" flex-direction="column" gap="m" flex="1">
+        <gds-text tag="h4">Label right</gds-text>
+        <gds-card>
+          <gds-spinner
+            size="md"
+            label="With label on right"
+            label-position="right"
+            showLabel
+          ></gds-spinner>
+        </gds-card>
+      </gds-flex>
+    </gds-grid>
   `,
 }
 
@@ -205,7 +237,6 @@ export const ThemeModes: Story = {
             <gds-button
               id="theme-toggle"
               padding="s m"
-              background-color="primary"
               color="white"
               border="none"
               border-radius="xs"
@@ -251,7 +282,7 @@ export const ThemeModes: Story = {
                 background="surface"
                 margin-bottom="m"
               >
-              <gds-text margin="0" color="primary">Content</gds-text>
+              <gds-text margin="0" color="neutral-01">Content</gds-text>
                 <gds-spinner size="md" cover></gds-spinner>
               </gds-div>
             </gds-card>

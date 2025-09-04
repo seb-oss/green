@@ -1,0 +1,1 @@
+export { IconRefund } from '@sebgroup/green-core/react';

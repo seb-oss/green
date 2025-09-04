@@ -10,13 +10,12 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsFormControlElement } from '../form/form-control'
 import { GdsFilterChip } from './filter-chip/filter-chip.component'
-import { styles } from './filter-chips.styles'
+import FilterChipsStyles from './filter-chips.styles'
 
 export { GdsFilterChip }
 
 /**
  * @element gds-filter-chips
- * @status stable
  *
  * @slot - The filter chips to display
  *
@@ -26,7 +25,7 @@ export { GdsFilterChip }
 export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
   ValueT | ValueT[]
 > {
-  static styles = [styles]
+  static styles = [FilterChipsStyles]
 
   /**
    * The value of the currently selected chip or chips. This will be an array
@@ -95,8 +94,12 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
     </div>`
   }
 
+  focus(options?: FocusOptions): void {
+    this.chips[0]?.focus(options)
+  }
+
   protected _getValidityAnchor(): HTMLElement {
-    return this
+    return this.shadowRoot?.querySelector('div') as HTMLElement
   }
 
   #handleChipClick = (event: Event) => {
@@ -116,13 +119,11 @@ export class GdsFilterChips<ValueT = any> extends GdsFormControlElement<
         this.value = clickedChip.value
       }
 
-      this.dispatchEvent(
-        new CustomEvent('change', {
-          detail: { clickedChip, value: this.value },
-          bubbles: true,
-          composed: true,
-        }),
-      )
+      this.dispatchCustomEvent('change', {
+        detail: { clickedChip, value: this.value },
+        bubbles: true,
+        composed: true,
+      })
     }
   }
 

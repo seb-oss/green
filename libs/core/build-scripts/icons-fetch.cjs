@@ -2,101 +2,97 @@ const axios = require('axios')
 const fs = require('fs').promises
 const path = require('path')
 
-const figmaAccessKey = process.env.FIGMA_ACCESS_KEY
-const figmaProjectId = process.env.FIGMA_PROJECT_ID
-const figmaRegularNodeID = process.env.FIGMA_REGULAR_NODE_ID
-const figmaSolidNodeID = process.env.FIGMA_SOLID_NODE_ID
-const figmaSaveToRegular = path.resolve(
+// Configuration
+const ICONS_API_URL = 'https://api.seb.io/components/icon/icon.list.json'
+const regularDir = path.resolve(
   __dirname,
   '../src/components/icon/assets/regular',
 )
-const figmaSaveToSolid = path.resolve(
-  __dirname,
-  '../src/components/icon/assets/solid',
-)
+const solidDir = path.resolve(__dirname, '../src/components/icon/assets/solid')
 
-console.log('Starting script...')
-
-async function fetchAndSaveFigmaIcons(nodeId, savePath) {
-  console.log(`Fetching and saving Figma icons for node ${nodeId}...`)
+async function ensureDirectoryExists(directory) {
   try {
-    console.log('Sending request to Figma API...')
-    const docResponse = await axios.get(
-      `https://api.figma.com/v1/files/${figmaProjectId}`,
-      {
-        headers: {
-          'X-Figma-Token': figmaAccessKey,
-        },
-      },
-    )
-    console.log('Received response from Figma API.')
-
-    const nodes = []
-    const traverse = (node) => {
-      if (node.id === nodeId) {
-        console.log('Found node:', node.name)
-        if (node.children) {
-          node.children.forEach((child) =>
-            nodes.push({ id: child.id, name: child.name }),
-          )
-        }
-      } else if (node.children) {
-        node.children.forEach(traverse)
-      }
-    }
-    console.log('Traversing document...')
-    traverse(docResponse.data.document)
-
-    const batchSize = 40
-    for (let i = 0; i < nodes.length; i += batchSize) {
-      const batch = nodes.slice(i, i + batchSize)
-      const fetchPromises = batch.map(async (node) => {
-        console.log(`Fetching image for node ${node.id}...`)
-        const imagesResponse = await axios.get(
-          `https://api.figma.com/v1/images/${figmaProjectId}/?ids=${node.id}&format=svg`,
-          {
-            headers: {
-              'X-Figma-Token': figmaAccessKey,
-            },
-          },
-        )
-
-        const images = imagesResponse.data.images
-        const imageUrl = images[node.id]
-        if (imageUrl) {
-          console.log(`Fetching SVG from ${imageUrl}...`)
-          const response = await axios.get(imageUrl)
-          let nodeName = node.name.split(',')[0]
-          let fileName = `${nodeName}.svg`
-          const svg = response.data
-          console.log(`Writing SVG to ${path.join(savePath, fileName)}...`)
-          await fs.writeFile(path.join(savePath, fileName), svg)
-          console.log(`Fetched Figma SVG for ${nodeName}`)
-        }
-      })
-
-      console.log('Waiting for all fetch promises to resolve...')
-      await Promise.all(fetchPromises)
-      console.log('All fetch promises resolved.')
-
-      if (i + batchSize < nodes.length) {
-        console.log('Waiting for 1 minute before fetching the next batch...')
-        await new Promise((resolve) => setTimeout(resolve, 60 * 1000)) // Wait for 1 minute
-      }
-    }
-  } catch (error) {
-    console.error('Error processing Figma SVGS:', error)
+    await fs.access(directory)
+  } catch {
+    await fs.mkdir(directory, { recursive: true })
+    console.log(`📁 Created directory: ${directory}`)
   }
 }
 
-async function main() {
-  console.log('Fetching regular icons...')
-  await fetchAndSaveFigmaIcons(figmaRegularNodeID, figmaSaveToRegular)
-  console.log('Fetching solid icons...')
-  await fetchAndSaveFigmaIcons(figmaSolidNodeID, figmaSaveToSolid)
-  console.log('Script finished.')
+async function writeSvgFile(content, fileName, directory, meta) {
+  const filePath = path.join(directory, fileName)
+  // Use meta data for SVG attributes
+  const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" width="${meta.width}" height="${meta.height}" viewBox="${meta.viewBox}">${content}</svg>`
+  await fs.writeFile(filePath, svgContent)
+  console.log(`✅ Generated: ${fileName} in ${path.basename(directory)}`)
 }
 
-main().catch((error) => {
-  console.error('Error in main:', error)
-})
+async function main() {
+  try {
+    console.log('🚀 Starting SVG generation from API...')
+
+    // Ensure directories exist
+    await ensureDirectoryExists(regularDir)
+    await ensureDirectoryExists(solidDir)
+
+    // Fetch icons data
+    console.log('📡 Fetching icons data from API...')
+    const { data: icons } = await axios.get(ICONS_API_URL)
+
+    console.log(`\n📦 Found ${Object.keys(icons).length} icons to process`)
+
+    // Process each icon
+    for (const [key, icon] of Object.entries(icons)) {
+      const fileName = icon.fileName
+
+      console.log(`\n🔄 Processing icon: ${fileName}`)
+      console.table({
+        Name: fileName,
+        Width: icon.meta.width,
+        Height: icon.meta.height,
+        ViewBox: icon.meta.viewBox,
+        Category: icon.meta.categories[0],
+      })
+
+      // Generate regular variant
+      if (icon.variants.regular) {
+        await writeSvgFile(
+          icon.variants.regular,
+          fileName,
+          regularDir,
+          icon.meta,
+        )
+      } else {
+        console.warn(`⚠️  No regular variant for: ${fileName}`)
+      }
+
+      // Generate solid variant
+      if (icon.variants.solid) {
+        await writeSvgFile(icon.variants.solid, fileName, solidDir, icon.meta)
+      } else {
+        console.warn(`⚠️  No solid variant for: ${fileName}`)
+      }
+    }
+
+    // Final summary
+    console.log('\n📊 Generation Summary')
+    const regularFiles = await fs.readdir(regularDir)
+    const solidFiles = await fs.readdir(solidDir)
+    console.table({
+      'Regular SVGs': regularFiles.length,
+      'Solid SVGs': solidFiles.length,
+      'Total Icons Processed': Object.keys(icons).length,
+    })
+
+    console.log('\n✨ SVG generation completed successfully!')
+  } catch (error) {
+    console.error('❌ Error:', error.message)
+    if (error.response) {
+      console.error('Response status:', error.response.status)
+      console.error('Response data:', error.response.data)
+    }
+    process.exit(1)
+  }
+}
+
+main()

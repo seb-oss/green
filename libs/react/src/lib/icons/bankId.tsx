@@ -3,7 +3,7 @@ import { IconProps } from '../../types/props'
 
 /**
  * @deprecated
- * This component is deprecated. Use the `gds-icon-bankid` component instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use the `gds-icon-bankid` component instead from `@sebgroup/green-core`.
  */
 export const BankId = ({ fill, focusable, title, ...props }: IconProps) => {
   let id
