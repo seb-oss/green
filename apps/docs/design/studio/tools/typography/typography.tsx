@@ -7,6 +7,8 @@ import { typographyTokens } from './typography.tokens'
 
 import './typography.css'
 
+import { Copy } from '../../table'
+
 function calculateScore(token: any, query: string): boolean {
   const searchString =
     `${token.name} ${token.style.fontSize} ${token.style.lineHeight} ${token.style.fontWeight}`.toLowerCase()
@@ -123,7 +125,7 @@ export default function Typography() {
                         </Core.GdsText>
                       )}
                     </Core.GdsFlex>
-                    <Part.Variable name={token.name} />
+                    <Copy name={token.name} />
                   </Core.GdsFlex>
                 </Core.GdsFlex>
               ))}

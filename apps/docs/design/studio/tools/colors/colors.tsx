@@ -264,7 +264,7 @@ export default function Color() {
                     gap="xl"
                     data-level={subGroup.category}
                   >
-                    <Part.Head
+                    <Table.Head
                       columns={[
                         { label: 'Level' },
                         { label: 'Example' },

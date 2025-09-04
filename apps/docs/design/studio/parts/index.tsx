@@ -1,6 +1,2 @@
-export { default as Toolbar } from './toolbar/studio.toolbar'
-export { default as Sidebar } from './sidebar/studio.sidebar'
 export { default as Header } from './header/studio.header'
-export { default as Token } from './token/studio.token'
 export { default as Color } from './color/studio.color'
-export { default as Variable } from './variable/studio.variable'
