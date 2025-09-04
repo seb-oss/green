@@ -13,7 +13,6 @@ import type { GdsDialog } from './dialog'
 /**
  * A dialog appears in front of content to provide critical information or ask for a decision.
  *
- * @beta
  */
 const meta: Meta = {
   title: 'Components/Dialog',

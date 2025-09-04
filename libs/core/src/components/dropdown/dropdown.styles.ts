@@ -33,7 +33,7 @@ const style = css`
     }
 
     input[type='text'] {
-      border-radius: var(--gds-sys-space-xs);
+      border-radius: var(--gds-sys-radius-xs);
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       font-size: inherit;
