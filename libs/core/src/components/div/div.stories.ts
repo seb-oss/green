@@ -7,12 +7,9 @@ import '../flex'
 import '../grid'
 import '../card'
 
-import { background } from '@storybook/theming'
-
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * @status beta
  *
  * `gds-div` is a base element in the declarative layout system.
  *
