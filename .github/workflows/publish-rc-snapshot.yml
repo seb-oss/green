@@ -115,7 +115,6 @@ jobs:
             })
 
       - name: Publish RC testbed
-        if: github.event_name == 'pull_request'
         run: |
           # Set the required variables
           event_type="trigger-workflow"
