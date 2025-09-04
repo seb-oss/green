@@ -9,12 +9,11 @@ import * as Part from '../../parts'
 import * as Table from '../../table'
 
 function getShadowSizes(): string[] {
-  const shadowKeys = Object.keys(tokens.sys.shadow).filter(
-    (key) => key !== '$type',
-  )
-  const uniqueSizes = new Set(shadowKeys.map((key) => key.split('-')[0]))
+  const shadowKeys = Object.entries(tokens.sys.shadow)
+    .filter(([key]) => key !== '$type')
+    .map(([key]) => key.split('-')[0])
 
-  return Array.from(uniqueSizes).sort()
+  return Array.from(new Set(shadowKeys))
 }
 
 export default function Shadows() {
@@ -46,37 +45,40 @@ export default function Shadows() {
         }
       />
 
-      <Core.GdsFlex flex-direction="column" gap="0">
-        <Table.Head
-          columns={[
-            { label: 'Token' },
-            { label: 'Preview' },
-            { label: '' },
-            { label: '' },
-            { label: '' },
-          ]}
-        />
-
-        {filteredTokens.map((token) => (
-          <Table.Row
-            key={token + 'shadow'}
-            name={token}
+      {filteredTokens.length > 0 ? (
+        <Core.GdsFlex flex-direction="column" gap="0">
+          <Table.Head
             columns={[
-              { type: 'name' },
-              {
-                type: 'preview',
-                content: (
-                  <Core.GdsCard variant="secondary" box-shadow={token} />
-                ),
-              },
-              { type: 'empty' },
-              { type: 'empty' },
-              { type: 'variable' },
+              { label: 'Token' },
+              { label: 'Preview' },
+              { label: '' },
+              { label: '' },
+              { label: '' },
             ]}
           />
-        ))}
+
+          {filteredTokens.map((token) => (
+            <Table.Row
+              key={token + 'shadow'}
+              name={token}
+              columns={[
+                { type: 'name' },
+                {
+                  type: 'preview',
+                  content: (
+                    <Core.GdsCard variant="secondary" box-shadow={token} />
+                  ),
+                },
+                { type: 'empty' },
+                { type: 'empty' },
+                { type: 'variable' },
+              ]}
+            />
+          ))}
+        </Core.GdsFlex>
+      ) : (
         <Part.Empty query="shadow" />
-      </Core.GdsFlex>
+      )}
     </Core.GdsFlex>
   )
 }

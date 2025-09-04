@@ -50,36 +50,36 @@ export default function Viewport() {
           </Core.GdsInput>
         }
       />
-
-      <Core.GdsFlex flex-direction="column" gap="0">
-        <Table.Head
-          columns={[
-            { label: 'Token' },
-            { label: 'Value' },
-            { label: ' ' },
-            { label: '' },
-            { label: '' },
-          ]}
-        />
-
-        {filteredTokens.map((token, index) => (
-          <Table.Row
-            key={token.name + index}
-            name={token.name}
+      {filteredTokens.length > 0 ? (
+        <Core.GdsFlex flex-direction="column" gap="0">
+          <Table.Head
             columns={[
-              { type: 'name', content: token.name },
-              { type: 'value', content: `${token.value}px` },
-              {
-                type: 'empty',
-              },
-              { type: 'empty' },
-              { type: 'variable' },
+              { label: 'Token' },
+              { label: 'Value' },
+              { label: '' },
+              { label: '' },
+              { label: '' },
             ]}
           />
-        ))}
-
+          {filteredTokens.map((token, index) => (
+            <Table.Row
+              key={token.name + index}
+              name={token.name}
+              columns={[
+                { type: 'name', content: token.name },
+                { type: 'value', content: `${token.value}px` },
+                {
+                  type: 'empty',
+                },
+                { type: 'empty' },
+                { type: 'variable' },
+              ]}
+            />
+          ))}
+        </Core.GdsFlex>
+      ) : (
         <Part.Empty query="viewport" />
-      </Core.GdsFlex>
+      )}
     </Core.GdsFlex>
   )
 }

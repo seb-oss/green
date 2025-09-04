@@ -69,7 +69,7 @@ export default function Radius() {
           </Core.GdsInput>
         }
       />
-      {filteredTokens.length !== 0 && (
+      {filteredTokens.length > 0 ? (
         <Core.GdsFlex flex-direction="column" gap="0">
           <Table.Head
             columns={[
@@ -109,8 +109,9 @@ export default function Radius() {
             />
           ))}
         </Core.GdsFlex>
+      ) : (
+        <Part.Empty query="radius" />
       )}
-      {filteredTokens.length === 0 && <Part.Empty query="radius" />}
     </Core.GdsFlex>
   )
 }
