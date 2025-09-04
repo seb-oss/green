@@ -125,7 +125,6 @@ const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
   <code>
     <div *ngFor="let f of validationForm?.controls | keyvalue">
       {{ f.key }}:{{ f.value.errors | json }}
-       <strong>isValid {{ validationForm.get('date').valid }}</strong>
     </div>
   </code>
 </form>
