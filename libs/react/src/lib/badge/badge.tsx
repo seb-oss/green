@@ -14,6 +14,8 @@ export interface BadgeProps extends HTMLProps<HTMLSpanElement> {
 /**
  * Renders a badge component.
  *
+ * @deprecated Please use the `gds-badge` web component from green-core instead
+ *
  * @param {React.ReactNode} props.children - The content of the badge.
  * @param {string} props.badgeType - The type of the badge.
  * @param {boolean} props.isCloseable - Indicates if the badge is closeable.

@@ -5,7 +5,7 @@ import { IconProps } from '../../types/props'
 
 /**
  * @deprecated
- * This component is deprecated. Use `ChevronDown` instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use `gds-icon-chevron-down` instead from `@sebgroup/green-core`.
  *
  * */
 export const ChevronDown = ({ focusable = false, title }: IconProps) => {

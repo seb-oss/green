@@ -12,7 +12,7 @@ const style = css`
     position: relative;
     width: 6px;
     height: 6px;
-    border-radius: var(--gds-sys-space-max);
+    border-radius: var(--gds-sys-radius-max);
     background-color: currentColor;
     transition: all 0.4s;
 

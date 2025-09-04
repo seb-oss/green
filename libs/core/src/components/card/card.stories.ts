@@ -22,7 +22,6 @@ import '../icon/icons/circles-three.js'
  * `gds-card` inherits all properties from `gds-div`, but comes with some predefined defaults
  * and a shortcut property for specifiying different card variants.
  *
- * @status beta
  *
  * @extends `gds-div`
  */

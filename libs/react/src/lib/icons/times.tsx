@@ -1,6 +1,10 @@
 import { randomId } from '@sebgroup/extract'
 import { IconProps } from '../../types/props'
 
+/**
+ * @deprecated
+ * This component is deprecated. Use `gds-icon-cross` instead from `@sebgroup/green-core`.
+ */
 export const Times = ({ focusable = false, title }: IconProps) => {
   let id
   if (title) id = randomId()
