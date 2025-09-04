@@ -87,7 +87,7 @@ export default function Typography() {
                 <Core.GdsFlex
                   key={tokenIndex}
                   flex-direction="column"
-                  gap="s"
+                  gap="m"
                   padding="0 0 m 0"
                   border-width="0 0 4xs 0"
                   border-color="subtle-01"

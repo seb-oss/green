@@ -11,4 +11,8 @@
   &:focus-visible {
     outline-color: currentColor;
   }
+
+  &:empty {
+    outline-color: currentColor;
+  }
 }
