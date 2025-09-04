@@ -153,12 +153,11 @@ export default function Icons({ selected }: { selected?: string }) {
         {isMigrationPage ? (
           <Deprecated searchQuery={migrationSearch} />
         ) : (
-          <>
+          <Core.GdsFlex align-items="flex-start" width="100%" gap="4xl">
             {iconList.length > 0 ? (
               <Core.GdsGrid
-                columns={selected ? '5' : '6'}
-                gap="l"
-                height="max-content"
+                columns={selected ? '5' : '1; s{2} m{4} l{5} 2xl{6}'}
+                gap="s; m{l}"
                 width="100%"
               >
                 {iconList.map(([name, icon]) => (
@@ -206,7 +205,7 @@ export default function Icons({ selected }: { selected?: string }) {
               </Core.GdsCard>
             )}
             {selected && <IconDetail ID={selected} />}
-          </>
+          </Core.GdsFlex>
         )}
       </Core.GdsFlex>
     </Core.GdsFlex>
