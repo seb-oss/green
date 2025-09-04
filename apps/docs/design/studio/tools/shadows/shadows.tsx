@@ -75,6 +75,7 @@ export default function Shadows() {
             ]}
           />
         ))}
+        <Part.Empty query="shadow" />
       </Core.GdsFlex>
     </Core.GdsFlex>
   )

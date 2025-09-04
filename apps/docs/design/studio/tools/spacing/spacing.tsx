@@ -114,17 +114,7 @@ export default function Spacing() {
           </Core.GdsFlex>
         ))
       ) : (
-        <Core.GdsCard
-          justify-content="center"
-          align-items="center"
-          height="40vh"
-          padding="2xl"
-        >
-          <Core.IconMagnifyingGlass size="xl" />
-          <Core.GdsText color="subtle-02">
-            No spacing tokens found matching your search
-          </Core.GdsText>
-        </Core.GdsCard>
+        <Part.Empty query="spacing" />
       )}
     </Core.GdsFlex>
   )

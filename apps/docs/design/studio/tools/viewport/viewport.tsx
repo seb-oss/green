@@ -77,6 +77,8 @@ export default function Viewport() {
             ]}
           />
         ))}
+
+        <Part.Empty query="viewport" />
       </Core.GdsFlex>
     </Core.GdsFlex>
   )

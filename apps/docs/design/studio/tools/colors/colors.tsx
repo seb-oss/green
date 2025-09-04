@@ -315,17 +315,7 @@ export default function Color() {
           </Core.GdsFlex>
         ))
       ) : (
-        <Core.GdsCard
-          justify-content="center"
-          align-items="center"
-          height="40vh"
-          padding="2xl"
-        >
-          <Core.IconMagnifyingGlass size="xl" />
-          <Core.GdsText color="subtle-02">
-            No colors found matching your search
-          </Core.GdsText>
-        </Core.GdsCard>
+        <Part.Empty query="colors" />
       )}
     </Core.GdsFlex>
   )

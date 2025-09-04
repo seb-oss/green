@@ -98,6 +98,7 @@ export default function Radius() {
             ))}
           </Core.GdsFlex>
         ))}
+        <Part.Empty query="radius" />
       </Core.GdsFlex>
     </Core.GdsFlex>
   )
