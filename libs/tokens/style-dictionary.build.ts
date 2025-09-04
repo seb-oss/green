@@ -19,7 +19,7 @@ const swiftTargets = [
   },
   {
     name: 'GdsColours',
-    dependencies: [swiftPackageName],
+    dependencies: [],
     path: `Sources/GdsColours`,
     resources: ['Resources'],
   },
@@ -246,35 +246,21 @@ await Promise.all(
                 },
               },
               {
-                destination: `Sources/GdsColours/${capitalize(colorScheme)}Mode.swift`,
-                format: 'green/ios-swift-class-tree',
-                filter: 'is-color-no-ref',
-                options: {
-                  import: ['UIKit'],
-                  objectType: 'enum',
-                  className: `${capitalize(colorScheme)}Mode`,
-                  accessControl: 'internal',
-                },
-              },
-              {
-                destination: 'Sources/GdsColours/GdsColours.swift',
-                format: 'green/ios-swift-extension',
-                filter: 'is-color-no-ref',
-                options: {
-                  import: ['UIKit'],
-                  objectType: 'enum',
-                  className: 'GdsColours',
-                  outputType: 'uiKitDynamicProvider',
-                  lightModeObjectName: 'LightMode',
-                  darkModeObjectName: 'DarkMode',
-                },
-              },
-              {
                 destination: 'Sources/GdsKit/GdsKit.swift',
                 format: 'green/ios-swift-gdskit',
                 options: {
                   imports: ['GdsColours'],
                 },
+              },
+              {
+                destination: 'Sources/GdsColours/GdsColours.swift',
+                format: 'green/ios-swift-colours',
+                filter: 'is-color-no-ref',
+              },
+              {
+                destination: 'Sources/GdsTypography/GdsTypography.swift',
+                format: 'green/ios-swift-typography',
+                filter: 'is-typography',
               },
             ],
             actions: [`color-set-${colorScheme}`],

@@ -1,17 +1,11 @@
 type TemplateOptions = {
   header: string
   imports?: string[]
-  formatProperty: (token: any) => string
   options?: any
   allTokens: any[]
 }
 
-export default ({
-  allTokens,
-  header,
-  options,
-  formatProperty,
-}: TemplateOptions): string => `
+export default ({ allTokens, header }: TemplateOptions): string => `
 ${header}
 
 import UIKit

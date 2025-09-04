@@ -57,7 +57,7 @@ export default {
         )
       })
       .forEach((token) => {
-        const colorsetPath = `${assetPath}/${token.name.replace('sysColor', 'gds')}.colorset`
+        const colorsetPath = `${assetPath}/${token.name.replace('sysColor', '')}.colorset`
         const contentsJsonPath = path.join(colorsetPath, 'Contents.json')
 
         const originalValue = resolveReferences(

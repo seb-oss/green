@@ -1,0 +1,106 @@
+import { lowercaseFirstLetter } from '../utils/index.ts'
+
+type Token = {
+  $type: 'typography'
+  $value: {
+    fontFamily: string
+    fontWeight: number
+    fontSize: number
+    lineHeight: number
+  }
+  filePath: string
+  isSource: boolean
+  original: {
+    $type: 'typography'
+    $value: {
+      fontFamily: string
+      fontWeight: number
+      fontSize: number
+      lineHeight: number
+    }
+  }
+  name: string
+  attributes: {
+    category: string
+    type: string
+    item: string
+  }
+  path: string[]
+  key: string
+}
+
+const groupByWeight = (tokens: Token[]) => {
+  const grouped: Record<number, Token[]> = {
+    700: [],
+    500: [],
+    450: [],
+    400: [],
+    300: [],
+  }
+
+  tokens.forEach((token) => {
+    const weight: number = token['$value'].fontWeight
+    if (weight) {
+      grouped[weight].push(token)
+    }
+  })
+
+  return {
+    bold: grouped[700],
+    medium: grouped[500],
+    book: grouped[450],
+    regular: grouped[400],
+    light: grouped[300],
+  }
+}
+
+export default ({ file, header, options, allTokens }: any) => `
+${console.log(allTokens)}
+import SwiftUI
+import UIKit
+
+public enum Typography {
+${allTokens.map((token: any) => `    case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}`).join('\n')}
+}
+
+extension Typography {
+    var size: CGFloat {
+        switch self {
+${allTokens.map((token: any) => `            case .${lowercaseFirstLetter(token.name.replace('sysText', ''))}: ${token['$value'].fontSize}`).join('\n')}
+        }
+    }
+
+    var textStyle: Font.TextStyle {
+        switch self {
+${allTokens.map((token: any) => `            case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}: .largeTitle`).join('\n')}
+        }
+    }
+
+  var weight: Typography.Weight {
+    switch self {
+${Object.entries(groupByWeight(allTokens))
+  .map(([weight, arr]) =>
+    arr.length
+      ? `       case ${arr.map((token: any) => lowercaseFirstLetter(token.name.replace('sysText', ''))).join(', ')}:
+            return .${weight}\n`
+      : '',
+  )
+  .join('')}    }
+  }
+}
+
+extension Typography: CaseIterable {}
+
+#if DEBUG
+#Preview {
+    ScrollView {
+        ForEach(Typography.allCases, id: \.self) {
+            Text("\($0)")
+                .typography($0)
+                .padding(.bottom, 4)
+        }
+        .previewByRegisteringFonts()
+    }
+}
+#endif
+`
