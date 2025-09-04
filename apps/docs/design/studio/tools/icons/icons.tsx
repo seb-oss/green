@@ -103,22 +103,20 @@ export default function Icons({ selected }: { selected?: string }) {
         }
         filter={
           !isMigrationPage && (
-            <Core.GdsFlex align-items="center" gap="s" width="max-content">
-              <Core.GdsDropdown
-                plain
-                value={selectedCategory}
-                oninput={(e: Event) =>
-                  setSelectedCategory((e.target as HTMLSelectElement).value)
-                }
-              >
-                <Core.GdsOption value="">Categories</Core.GdsOption>
-                {categories.map((category) => (
-                  <Core.GdsOption key={category} value={category}>
-                    {category}
-                  </Core.GdsOption>
-                ))}
-              </Core.GdsDropdown>
-            </Core.GdsFlex>
+            <Core.GdsDropdown
+              plain
+              value={selectedCategory}
+              oninput={(e: Event) =>
+                setSelectedCategory((e.target as HTMLSelectElement).value)
+              }
+            >
+              <Core.GdsOption value="">Categories</Core.GdsOption>
+              {categories.map((category) => (
+                <Core.GdsOption key={category} value={category}>
+                  {category}
+                </Core.GdsOption>
+              ))}
+            </Core.GdsDropdown>
           )
         }
         extra={
