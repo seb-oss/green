@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.js'
+
 import './dialog'
+import '../index.js'
 
 import { html } from 'lit'
+import { he } from 'date-fns/locale'
 
 import type { GdsDialog } from './dialog'
 
@@ -14,6 +18,9 @@ const meta: Meta = {
   title: 'Components/Dialog',
   component: 'gds-dialog',
   tags: ['autodocs'],
+  argTypes: {
+    ...argTablePropsFor('gds-dialog'),
+  },
   parameters: {
     layout: 'centered',
   },
@@ -32,19 +39,18 @@ const DefaultParams: Story = {
   args: {
     heading: 'Dialog heading',
     innerHTML: `<gds-button slot="trigger">Open Dialog</gds-button>
-   <p> This is the content of the dialog.</p>
+    <gds-rich-text>
+      <p>You can add any content here, including other components. It's a good idea to wrap the content in <code>gds-rich-text</code> to get the correct typography styles.</p>
 
-   <p>You can add any content here, including other components.</p>
+      <p>You can also add buttons to the footer of the dialog by using the <code>slot="footer"</code> attribute on the button.</p>
 
-    <p>You can also add buttons to the footer of the dialog by using the slot="footer" attribute on the button.</p>
+      <p>The dialog will automatically close when the user clicks outside of it or presses the Escape key.</p>
 
-    <p>You can also use the slot="footer" attribute to add buttons to the footer of the dialog.</p>
+      <p>You can also close the dialog programmatically by calling the close() method on the dialog element.</p>
 
-    <p>The dialog will automatically close when the user clicks outside of it or presses the Escape key.</p>
-
-    <p>You can also close the dialog programmatically by calling the close() method on the dialog element.</p>
-
-    <p>The dialog will also emit a gds-close event when it is closed, which you can listen to if you want to perform some action when the dialog is closed.</p>`,
+      <p>A <code>gds-close</code> event is emitted when it is closed, which you can listen to if you want to perform some action when the dialog is closed.</p>
+    </gds-rich-text>
+    `,
     variant: 'default',
     placement: 'initial',
   },
@@ -66,6 +72,20 @@ export const SlideOut: Story = {
   args: {
     ...DefaultParams.args,
     variant: 'slide-out',
+  },
+}
+
+/**
+ * To enable scroll for overflowing content, you can set the `scrollable` property to `true`.
+ *
+ * This only has an effect of the default content slot.
+ */
+export const Scrollable: Story = {
+  ...DefaultParams,
+  args: {
+    ...DefaultParams.args,
+    height: '400px',
+    scrollable: true,
   },
 }
 

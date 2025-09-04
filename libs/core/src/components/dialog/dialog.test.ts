@@ -38,7 +38,6 @@ describe('<gds-dialog>', () => {
   })
 
   describe('API', () => {
-    // Add actual API tests here!
     it('should emit events when show() and close() are called with a parameter', async () => {
       const showSpy = sinon.spy()
       const closeSpy = sinon.spy()
@@ -89,6 +88,13 @@ describe('<gds-dialog>', () => {
       )
       const heading = el.shadowRoot?.querySelector('h2')
       expect(heading?.textContent).to.equal('Test')
+    })
+
+    it('should support the `scrollable` prop', async () => {
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog scrollable heading="Test">Content</gds-dialog>`,
+      )
+      expect(el.scrollable).to.be.true
     })
   })
 
