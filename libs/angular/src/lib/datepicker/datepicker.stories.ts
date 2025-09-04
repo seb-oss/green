@@ -121,7 +121,7 @@ const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
   </button>
   <br/>
   <code>{{validationForm.value | json}}</code>
-  <h5 class="mb-0">Errors here</h5>
+  <h5 class="mb-0">Errors</h5>
   <code>
     <div *ngFor="let f of validationForm?.controls | keyvalue">
       {{ f.key }}:{{ f.value.errors | json }}
