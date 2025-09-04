@@ -600,7 +600,7 @@ describe('<gds-datepicker>', () => {
         `${getScopedTagName('gds-dropdown')}[label="Year"]`,
       )!
       const nextMonthButton = el.shadowRoot!.querySelector<GdsButton>(
-        `${getScopedTagName('gds-button')}[aria-label="Next month"]`,
+        `${getScopedTagName('gds-button')}[aria-label="Switch to next month"]`,
       )!
 
       nextMonthButton.click()
@@ -630,7 +630,7 @@ describe('<gds-datepicker>', () => {
         `${getScopedTagName('gds-dropdown')}[label="Year"]`,
       )!
       const prevMonthButton = el.shadowRoot!.querySelector<GdsButton>(
-        `${getScopedTagName('gds-button')}[aria-label="Previous month"]`,
+        `${getScopedTagName('gds-button')}[aria-label="Switch to previous month"]`,
       )!
 
       prevMonthButton.click()

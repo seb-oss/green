@@ -1,0 +1,1 @@
+export { IconJpg } from '@sebgroup/green-core/react';

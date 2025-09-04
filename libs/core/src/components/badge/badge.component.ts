@@ -16,7 +16,6 @@ import BadgeStyles from './badge.styles'
  * `gds-badge`
  *
  * @element gds-badge
- * @status beta
  *
  */
 @gdsCustomElement('gds-badge', { dependsOn: [GdsFlex] })

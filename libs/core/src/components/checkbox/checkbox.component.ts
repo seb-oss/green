@@ -13,7 +13,6 @@ import CheckboxStyles from './checkbox.styles'
 
 /**
  * @element gds-checkbox
- * @status beta
  *
  * @event input - Dispatched when the checkbox is checked or unchecked.
  * @event change - Dispatched when the checkbox is checked or unchecked.

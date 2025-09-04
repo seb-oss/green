@@ -57,3 +57,23 @@ describe('NggCoreRenderer (with animations)', () => {
     expect(parent.querySelector('gds-button-scoped')).toBeTruthy()
   })
 })
+
+describe('NggCoreRenderer with scope resolver', () => {
+  let component: TestComponent
+  let parent: HTMLElement
+
+  beforeEach(async () => {
+    TestBed.configureTestingModule({
+      declarations: [TestComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [provideCoreRenderer((t: string) => 'test-tag')],
+    })
+    const fixture = TestBed.createComponent(TestComponent)
+    parent = fixture.debugElement.nativeElement
+    fixture.detectChanges()
+  })
+
+  it('should create an element with the scoped tag name', () => {
+    expect(parent.querySelector('test-tag')).toBeTruthy()
+  })
+})

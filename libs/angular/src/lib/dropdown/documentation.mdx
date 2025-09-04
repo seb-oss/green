@@ -1,10 +1,17 @@
 import { NggDropdownComponent } from './dropdown.component'
 import { Story, Meta, Markdown, Canvas } from '@storybook/addon-docs'
 import * as Stories from './dropdown.stories.ts'
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 <Meta of={Stories} />
 
 # Dropdown
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This wrapper for GdsDropdown is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-dropdown--docs) directly instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 ## Importing module
 
@@ -242,7 +249,7 @@ const searchFilter: (search, value) => ['kitchen', 'id'].some((key) => value[key
 
 Below is an example of how the component can be used with reactive forms and validations.
 
-<Canvas of={Stories.Form}/>
+<Canvas of={Stories.FormWithValidation}/>
 
 ### Markup
 

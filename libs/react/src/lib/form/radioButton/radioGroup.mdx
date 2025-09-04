@@ -2,6 +2,7 @@ import { Meta, Story, Canvas, ArgTypes, Markdown } from '@storybook/blocks'
 import { RadioButton } from './radioButton'
 import { RadioGroup } from './radioGroup'
 import * as RadioGroupStories from './radioGroup.stories';
+import * as Core from '../../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const RadioButtonTemplate = ({ ...props }) => <RadioButton {...props} />
 
@@ -13,6 +14,12 @@ export const RadioGroupTemplate = ({ ...props }) => (
 )
 
 <Meta of={RadioGroupStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Radio group is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-radio-group--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 ## RadioGroup and RadioButton Components
 

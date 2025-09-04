@@ -13,7 +13,6 @@ import DividerStyles from './divider.styles'
 
 /**
  * @element gds-divider
- * @status beta
  *
  * The `gds-divider` component is a horizontal rule that separates content in a layout. It is equivalent to the `<hr>` element in HTML, and provides the same semantic meaning.
  */

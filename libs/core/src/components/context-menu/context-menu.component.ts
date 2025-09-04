@@ -22,14 +22,12 @@ import {
 import { GdsButton } from '../button/button.component'
 import { IconDotGridOneHorizontal } from '../icon/icons/dot-grid-one-horizontal'
 import { GdsPopover } from '../popover/popover.component'
-import ContextMenuStyles from './context-menu.styles'
 
 export { GdsMenuItem }
 export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
 
 /**
  * @element gds-context-menu
- * @status stable
  *
  * The context menu is presented in-context to the related data, so users don’t lose
  * their place in the app. It appears upon interaction with the 3 dot button and
@@ -53,7 +51,7 @@ export { GdsMenuHeading } from '../../primitives/menu/menu-heading.component'
 export class GdsContextMenu extends withMarginProps(
   withLayoutChildProps(GdsElement),
 ) {
-  static styles = [tokens, ContextMenuStyles]
+  static styles = [tokens]
 
   static shadowRootOptions: ShadowRootInit = {
     mode: 'open',

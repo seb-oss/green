@@ -1,10 +1,17 @@
 import { Meta, Story, Canvas, Markdown } from '@storybook/blocks'
 import Accordion from './accordion'
 import * as AccordionStories from './accordion.stories';
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const Template = (args) => <Accordion {...args} />
 
 <Meta of={AccordionStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Accordion is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-details--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Accordion
 

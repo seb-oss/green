@@ -18,8 +18,6 @@ import { html } from '../../scoping'
  *
  * It supports out of the box all heading styles, paragraphs, lists, blockquotes, figures, tables, and more.
  *
- * @status beta
- *
  */
 const meta: Meta = {
   title: 'Components/Rich Text',

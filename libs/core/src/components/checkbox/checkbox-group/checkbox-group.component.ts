@@ -205,7 +205,6 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
 
 /**
  * @summary A form control component for grouping checkbox buttons.
- * @status beta
  *
  * @element gds-checkbox-group
  *

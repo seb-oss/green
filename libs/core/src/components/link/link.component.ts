@@ -16,7 +16,6 @@ import LinkStyles from './link.styles'
 
 /**
  * @element gds-link
- * @status beta
  *
  * @slot main - Content to be displayed as the link string.
  * @slot lead - An optional slot that allows a `gds-icon` element to be placed before the label.
