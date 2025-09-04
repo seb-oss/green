@@ -1,5 +1,5 @@
 import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
-import { Overlay, OverlayRef, FlexibleConnectedPositionStrategy, ConnectedPosition, ScrollStrategyOptions, ScrollStrategy } from '@angular/cdk/overlay';
+import { Overlay, OverlayRef, ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
 import {
   ChangeDetectorRef,
   Component,
@@ -269,20 +269,6 @@ export class NggvDropdownComponent<
       },
     })
   }
-  
-  // subscribeToOutsideScrollEvent() {
-  //   this.onScrollSubscription = fromEvent(document, 'scroll').subscribe({
-  //     next: (event: Event) => {
-  //       if (
-  //         this.expanded &&
-  //         !this.inputRef?.nativeElement.contains(event.target)
-  //       ) {
-  //         this.toggleDropdown()
-  //         this.onScrollSubscription?.unsubscribe()
-  //       }
-  //     },
-  //   })
-  // }
 
   // ----------------------------------------------------------------------------
   // HELPERS
@@ -314,9 +300,7 @@ export class NggvDropdownComponent<
     if (this.expanded) {
       this.openDropdownOverlay();
       this.subscribeToOutsideClickEvent()
-      // this.subscribeToOutsideScrollEvent()
-    } 
-    if (!this.expanded) {
+    } else {
       this.closeDropdownOverlay();
       this.onTouched();
     } 
@@ -326,6 +310,7 @@ export class NggvDropdownComponent<
     this.detachOldOverlayRef();
     this.attachNewOverlayRef();
     this.updateOverlayWidth();
+    this.listenOverlayDetachments();
   }
 
   detachOldOverlayRef(): void {
@@ -357,15 +342,15 @@ export class NggvDropdownComponent<
     });
   }
 
-  // TODO: this one is not working.
+  // used to catch when overlay is detached after scroll with list expanded
   listenOverlayDetachments() {
-    // Listen for overlay detachments (including scrollStrategy.close())
-    console.log(this.overlayRef?.detachments())
-    this.overlayRef?.detachments().subscribe(() => {
-      if (this.expanded) {
-        this.setExpanded(false); // or this.toggleDropdown(), if you want to toggle
-      }
-    });
+    if (this.overlayRef) {
+      this.overlayRef.detachments().subscribe(() => {
+        if (this.expanded) {
+          this.setExpanded(false);
+        }
+      });
+    }
   }
 
   getDropdownListPositionsArray(): ConnectedPosition[] {
@@ -375,15 +360,18 @@ export class NggvDropdownComponent<
         originY: 'bottom',
         overlayX: 'start',
         overlayY: 'top',
+        offsetY: 8, // 0.5rem gap below the trigger
       },
       {
         originX: 'start',
         originY: 'top',
         overlayX: 'start',
         overlayY: 'bottom',
+        offsetY: -8, // 0.5rem gap above the trigger
       }
     ];
   }
+
   getScrollStrategy(): ScrollStrategy {
     return this.closeDropdownListOnScroll
       ? this.overlay.scrollStrategies.close()

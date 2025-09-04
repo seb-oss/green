@@ -91,11 +91,6 @@
           </span>
         </button>
         <ng-template #dropdownTemplate>
-          <!-- <ul>
-            <li>Option 1</li>
-            <li>Option 2</li>
-            <li>Option 3</li>
-          </ul> -->
           <nggv-dropdown-list
             #dropDownList
             [options]="options"
@@ -107,7 +102,6 @@
             [textToHighlight]="textToHighlight"
             [onlyEmitDistinctChanges]="onlyHandleDistinctChanges"
             [selectWithSpace]="selectWithSpace"
-            [dynamicPosition]="true"
             (closed)="setExpanded(false)"
             (selectedValueChanged)="onSelectChange($event)"
           >
