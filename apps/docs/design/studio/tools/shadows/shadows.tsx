@@ -66,7 +66,12 @@ export default function Shadows() {
                 {
                   type: 'preview',
                   content: (
-                    <Core.GdsCard variant="secondary" box-shadow={token} />
+                    <Core.GdsCard
+                      padding="0"
+                      min-height="2xl"
+                      variant="secondary"
+                      box-shadow={token}
+                    />
                   ),
                 },
                 { type: 'empty' },

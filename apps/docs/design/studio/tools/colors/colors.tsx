@@ -163,7 +163,7 @@ export default function Color() {
             value={selectedCategory}
             oninput={handleCategoryChange}
           >
-            <Core.GdsOption value="">All Categories</Core.GdsOption>
+            <Core.GdsOption value="">Categories</Core.GdsOption>
             {colorTokens.map((group) => (
               <Core.GdsOption
                 key={group.title}

@@ -41,6 +41,8 @@ export default function IconDetail({ ID }: { ID: string }) {
           <Core.GdsText font="heading-m">{iconData.displayName}</Core.GdsText>
         </Core.GdsFlex>
       </Core.GdsCard>
+      <span>color variant</span>
+      <span>solid or not </span>
 
       {/* Variants */}
       {false && (

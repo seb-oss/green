@@ -67,7 +67,7 @@ export default function Typography() {
             value={selectedCategory}
             oninput={handleCategoryChange}
           >
-            <Core.GdsOption value="">All Categories</Core.GdsOption>
+            <Core.GdsOption value="">Categories</Core.GdsOption>
             {typographyTokens.map((group) => (
               <Core.GdsOption
                 key={group.title}
