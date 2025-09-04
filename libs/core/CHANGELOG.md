@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.5.0
+
+### Minor Changes
+
+- 79fc2dd: **Dialog:** Add `scrollable` prop
+
+### Patch Changes
+
+- bfdb344: **Div:** Chage `border-radius` tokens from spacing to radius.
+
 ## 2.4.1
 
 ### Patch Changes

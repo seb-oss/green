@@ -28,7 +28,7 @@ const style = css`
       block-size: var(--_block-size);
       background-color: var(--gds-sys-color-l3-neutral-01);
       color: var(--gds-sys-color-content-neutral-03);
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       font-family: inherit;
       font: var(--gds-sys-text-detail-book-m);
       gap: var(--gds-sys-space-s);
