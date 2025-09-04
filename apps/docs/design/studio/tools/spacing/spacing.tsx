@@ -95,29 +95,19 @@ export default function Spacing() {
             />
 
             {group.tokens.map((token, tokenIndex) => (
-              <Core.GdsFlex
-                key={tokenIndex}
-                padding="m l"
-                border-width="0 0 4xs 0"
-                border-color="subtle-01"
-              >
-                <Core.GdsGrid
-                  columns="5"
-                  gap="l"
-                  align-items="center"
-                  justify-content="flex-start"
-                >
-                  <Core.GdsText text-transform="uppercase">
-                    {token.name}
-                  </Core.GdsText>
-                  <Core.GdsText color="neutral-02">
-                    {token.value}px
-                  </Core.GdsText>
-                  <SpaceVisualizer value={token.value as number} />
-                  <div></div>
-                  <Part.Variable name={token.name} />
-                </Core.GdsGrid>
-              </Core.GdsFlex>
+              <Part.Row
+                name={token.name}
+                columns={[
+                  { type: 'name' },
+                  { type: 'value', content: `${token.value}px` },
+                  {
+                    type: 'preview',
+                    content: <SpaceVisualizer value={token.value as number} />,
+                  },
+                  { type: 'empty' },
+                  { type: 'variable' },
+                ]}
+              />
             ))}
           </Core.GdsFlex>
         ))

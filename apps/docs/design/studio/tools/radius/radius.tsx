@@ -73,27 +73,26 @@ export default function Radius() {
         {filteredTokens.map((group) => (
           <Core.GdsFlex key={group.title} flex-direction="column" gap="0">
             {group.tokens.map((token) => (
-              <Core.GdsFlex
-                key={token.name}
-                padding="m l"
-                border-width="0 0 4xs 0"
-                border-color="subtle-01"
-              >
-                <Core.GdsGrid columns="5" gap="xl" align-items="center">
-                  <Core.GdsText text-transform="uppercase">
-                    {token.name}
-                  </Core.GdsText>
-                  <Core.GdsText>{token.value}px</Core.GdsText>
-                  <Core.GdsCard
-                    width="64px"
-                    height="64px"
-                    variant="secondary"
-                    border-radius={token.name}
-                  />
-                  <div></div>
-                  <Part.Variable name={token.name} />
-                </Core.GdsGrid>
-              </Core.GdsFlex>
+              <Part.Row
+                name={token.name}
+                columns={[
+                  { type: 'name' },
+                  { type: 'value', content: `${token.value}px` },
+                  {
+                    type: 'preview',
+                    content: (
+                      <Core.GdsCard
+                        width="64px"
+                        height="64px"
+                        variant="secondary"
+                        border-radius={token.name}
+                      />
+                    ),
+                  },
+                  { type: 'empty' },
+                  { type: 'variable' },
+                ]}
+              />
             ))}
           </Core.GdsFlex>
         ))}

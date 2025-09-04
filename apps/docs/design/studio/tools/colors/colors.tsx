@@ -46,19 +46,36 @@ const ColorSwatch = ({
   const DARK_ALPHA = token.darkValue.alpha
 
   return (
-    <Part.Token
-      level={level}
-      name={<Part.Variable name={token.name} />}
-      light={formatValue(token.lightValue.$value, token.lightValue.alpha)}
-      dark={formatValue(token.darkValue.$value, token.darkValue.alpha)}
-      data-variable={getVarName('light')}
-      preview={
-        <Core.GdsFlex align-items="center" gap="s">
-          <Part.Color color={MIX(LIGHT, LIGHT_ALPHA)} />
-          <Part.Color color={MIX(DARK, DARK_ALPHA)} />
-        </Core.GdsFlex>
-      }
-    />
+    <>
+      <Part.Row
+        name={token.name}
+        data-variable={getVarName('light')}
+        columns={[
+          { type: 'level', content: level },
+          {
+            type: 'preview',
+            content: (
+              <Core.GdsFlex align-items="center" gap="s">
+                <Part.Color color={MIX(LIGHT, LIGHT_ALPHA)} />
+                <Part.Color color={MIX(DARK, DARK_ALPHA)} />
+              </Core.GdsFlex>
+            ),
+          },
+          {
+            type: 'light',
+            content: formatValue(
+              token.lightValue.$value,
+              token.lightValue.alpha,
+            ),
+          },
+          {
+            type: 'dark',
+            content: formatValue(token.darkValue.$value, token.darkValue.alpha),
+          },
+          { type: 'variable' },
+        ]}
+      />
+    </>
   )
 }
 

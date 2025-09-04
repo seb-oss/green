@@ -57,20 +57,21 @@ export default function Shadows() {
         />
 
         {filteredTokens.map((token) => (
-          <Core.GdsFlex
-            key={token}
-            padding="m l"
-            border-width="0 0 4xs 0"
-            border-color="subtle-01"
-          >
-            <Core.GdsGrid columns="5" gap="xl" align-items="center">
-              <Core.GdsText text-transform="uppercase">{token}</Core.GdsText>
-              <Core.GdsCard variant="secondary" box-shadow={token} />
-              <div></div>
-              <div></div>
-              <Part.Variable name={token} />
-            </Core.GdsGrid>
-          </Core.GdsFlex>
+          <Part.Row
+            name={token}
+            columns={[
+              { type: 'name' },
+              {
+                type: 'preview',
+                content: (
+                  <Core.GdsCard variant="secondary" box-shadow={token} />
+                ),
+              },
+              { type: 'empty' },
+              { type: 'empty' },
+              { type: 'variable' },
+            ]}
+          />
         ))}
       </Core.GdsFlex>
     </Core.GdsFlex>

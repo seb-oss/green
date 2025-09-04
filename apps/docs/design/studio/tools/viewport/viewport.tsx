@@ -18,7 +18,7 @@ function getViewportTokens(): ViewportToken[] {
       name,
       value: token.$value,
     }))
-    .sort((a, b) => Number(a.value) - Number(b.value)) // Sort by viewport size
+    .sort((a, b) => Number(a.value) - Number(b.value))
 }
 
 export default function Viewport() {
