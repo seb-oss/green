@@ -62,6 +62,7 @@
     <div class="gds-input-wrapper dropdown-wrapper">
       <div #input [id]="id + '-input'" class="dropdown">
         <button
+          #toggleButton
           [id]="id + '-toggle'"
           [disabled]="disabled"
           type="button"
@@ -89,22 +90,29 @@
             </ng-template>
           </span>
         </button>
-        <nggv-dropdown-list
-          #dropDownList
-          [options]="options"
-          [scrollOffset]="scrollOffset"
-          [state]="state"
-          [expanded]="expanded"
-          [optionContentTpl]="optionContentTpl"
-          [groupLabelTpl]="groupLabelTpl"
-          [textToHighlight]="textToHighlight"
-          [onlyEmitDistinctChanges]="onlyHandleDistinctChanges"
-          [selectWithSpace]="selectWithSpace"
-          [dynamicPosition]="true"
-          (closed)="setExpanded(false)"
-          (selectedValueChanged)="onSelectChange($event)"
-        >
-        </nggv-dropdown-list>
+        <ng-template #dropdownTemplate>
+          <!-- <ul>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 3</li>
+          </ul> -->
+          <nggv-dropdown-list
+            #dropDownList
+            [options]="options"
+            [scrollOffset]="scrollOffset"
+            [state]="state"
+            [expanded]="expanded"
+            [optionContentTpl]="optionContentTpl"
+            [groupLabelTpl]="groupLabelTpl"
+            [textToHighlight]="textToHighlight"
+            [onlyEmitDistinctChanges]="onlyHandleDistinctChanges"
+            [selectWithSpace]="selectWithSpace"
+            [dynamicPosition]="true"
+            (closed)="setExpanded(false)"
+            (selectedValueChanged)="onSelectChange($event)"
+          >
+          </nggv-dropdown-list>
+        </ng-template>
       </div>
       <!-- ERRORS -->
       <div class="gds-form-item__footer error-wrapper">
