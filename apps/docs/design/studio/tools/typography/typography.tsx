@@ -133,17 +133,7 @@ export default function Typography() {
           </Core.GdsFlex>
         ))
       ) : (
-        <Core.GdsCard
-          justify-content="center"
-          align-items="center"
-          height="40vh"
-          padding="2xl"
-        >
-          <Core.IconMagnifyingGlass size="xl" />
-          <Core.GdsText color="subtle-02">
-            No typography tokens found matching your search
-          </Core.GdsText>
-        </Core.GdsCard>
+        <Part.Empty query="typography" />
       )}
     </Core.GdsFlex>
   )
