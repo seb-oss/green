@@ -5,6 +5,7 @@ import * as Core from '@sebgroup/green-core/react'
 import { ref } from '@sebgroup/green-tokens/src/tokens/2023/ref/space.ref.json'
 import * as Part from '../../parts'
 import { TokenGroup } from '../../settings/studio.types'
+import * as Table from '../../table'
 
 function calculateScore(token: any, query: string): boolean {
   const searchString =
@@ -84,7 +85,7 @@ export default function Spacing() {
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (
           <Core.GdsFlex key={index} flex-direction="column" gap="0">
-            <Part.Head
+            <Table.Head
               columns={[
                 { label: 'Token' },
                 { label: 'Value' },
@@ -95,7 +96,7 @@ export default function Spacing() {
             />
 
             {group.tokens.map((token, tokenIndex) => (
-              <Part.Row
+              <Table.Row
                 name={token.name}
                 columns={[
                   { type: 'name' },

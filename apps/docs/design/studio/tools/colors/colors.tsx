@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import * as Part from '../../parts'
+import * as Table from '../../table'
 import { colorTokens } from './colors.tokens'
 import { ColorSubGroup, ColorToken } from './colors.types'
 
@@ -46,36 +47,31 @@ const ColorSwatch = ({
   const DARK_ALPHA = token.darkValue.alpha
 
   return (
-    <>
-      <Part.Row
-        name={token.name}
-        data-variable={getVarName('light')}
-        columns={[
-          { type: 'level', content: level },
-          {
-            type: 'preview',
-            content: (
-              <Core.GdsFlex align-items="center" gap="s">
-                <Part.Color color={MIX(LIGHT, LIGHT_ALPHA)} />
-                <Part.Color color={MIX(DARK, DARK_ALPHA)} />
-              </Core.GdsFlex>
-            ),
-          },
-          {
-            type: 'light',
-            content: formatValue(
-              token.lightValue.$value,
-              token.lightValue.alpha,
-            ),
-          },
-          {
-            type: 'dark',
-            content: formatValue(token.darkValue.$value, token.darkValue.alpha),
-          },
-          { type: 'variable' },
-        ]}
-      />
-    </>
+    <Table.Row
+      name={token.name}
+      data-variable={getVarName('light')}
+      columns={[
+        { type: 'level', content: level },
+        {
+          type: 'preview',
+          content: (
+            <Core.GdsFlex align-items="center" gap="s">
+              <Part.Color color={MIX(LIGHT, LIGHT_ALPHA)} />
+              <Part.Color color={MIX(DARK, DARK_ALPHA)} />
+            </Core.GdsFlex>
+          ),
+        },
+        {
+          type: 'light',
+          content: formatValue(token.lightValue.$value, token.lightValue.alpha),
+        },
+        {
+          type: 'dark',
+          content: formatValue(token.darkValue.$value, token.darkValue.alpha),
+        },
+        { type: 'variable' },
+      ]}
+    />
   )
 }
 
@@ -295,7 +291,7 @@ export default function Color() {
               </Core.GdsFlex>
             ) : (
               <Core.GdsGrid columns="1" gap="m">
-                <Part.Head
+                <Table.Head
                   columns={[
                     { label: '' },
                     { label: 'Example' },

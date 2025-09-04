@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import tokens from '@sebgroup/green-tokens/src/tokens/2023/tokens.base.json'
 import * as Part from '../../parts'
+import * as Table from '../../table'
 
 function getShadowSizes(): string[] {
   const shadowKeys = Object.keys(tokens.sys.shadow).filter(
@@ -46,7 +47,7 @@ export default function Shadows() {
       />
 
       <Core.GdsFlex flex-direction="column" gap="0">
-        <Part.Head
+        <Table.Head
           columns={[
             { label: 'Token' },
             { label: 'Preview' },
@@ -57,7 +58,7 @@ export default function Shadows() {
         />
 
         {filteredTokens.map((token) => (
-          <Part.Row
+          <Table.Row
             name={token}
             columns={[
               { type: 'name' },

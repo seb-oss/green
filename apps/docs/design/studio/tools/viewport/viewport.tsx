@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import tokens from '@sebgroup/green-tokens/src/tokens/2023/tokens.base.json'
 import * as Part from '../../parts'
+import * as Table from '../../table'
 
 interface ViewportToken {
   name: string
@@ -51,7 +52,7 @@ export default function Viewport() {
       />
 
       <Core.GdsFlex flex-direction="column" gap="0">
-        <Part.Head
+        <Table.Head
           columns={[
             { label: 'Token' },
             { label: 'Value' },
@@ -62,22 +63,18 @@ export default function Viewport() {
         />
 
         {filteredTokens.map((token) => (
-          <Core.GdsFlex
-            key={token.name}
-            padding="m l"
-            border-width="0 0 4xs 0"
-            border-color="subtle-01"
-          >
-            <Core.GdsGrid columns="5" gap="xl" align-items="center">
-              <Core.GdsText text-transform="uppercase">
-                {token.name}
-              </Core.GdsText>
-              <Core.GdsText>{token.value}px</Core.GdsText>
-              <div></div>
-              <div></div>
-              <Part.Variable name={token.name} />
-            </Core.GdsGrid>
-          </Core.GdsFlex>
+          <Table.Row
+            name={token.name}
+            columns={[
+              { type: 'name', content: token.name },
+              { type: 'value', content: `${token.value}px` },
+              {
+                type: 'empty',
+              },
+              { type: 'empty' },
+              { type: 'variable' },
+            ]}
+          />
         ))}
       </Core.GdsFlex>
     </Core.GdsFlex>

@@ -2,7 +2,7 @@
 'use client'
 
 import * as Core from '@sebgroup/green-core/react'
-import Variable from '../variable/studio.variable'
+import Copy from './table.copy'
 
 interface Column {
   type:
@@ -61,7 +61,7 @@ export default function Row({ columns, name, copyValue }: TokenRowProps) {
                 </Core.GdsText>
               )
             case 'variable':
-              return <Variable key={index} name={copyValue || name} />
+              return <Copy key={index} name={copyValue || name} />
             case 'empty':
               return <div key={index}></div>
             default:
