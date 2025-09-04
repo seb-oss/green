@@ -1,56 +1,45 @@
+@use 'variables' as *;
+
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Light.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Light.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Light.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Light.woff') format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Light.woff2')
+    format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Regular.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Regular.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Regular.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Regular.woff')
-      format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Regular.woff2')
+    format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.woff')
-      format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Book.woff2')
+    format('woff2');
+  font-weight: 450;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Medium.woff2')
+    format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Bold.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Bold.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Bold.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Bold.woff') format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-Bold.woff2')
+    format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -61,60 +50,45 @@
 */
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-LightItalic.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-LightItalic.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-LightItalic.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-LightItalic.woff')
-      format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-LightItalic.woff2')
+    format('woff2');
   font-weight: 300;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-RegularItalic.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-RegularItalic.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-RegularItalic.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-RegularItalic.woff')
-      format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-RegularItalic.woff2')
+    format('woff2');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-MediumItalic.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-MediumItalic.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-MediumItalic.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-MediumItalic.woff')
-      format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-BookItalic.woff2')
+    format('woff2');
+  font-weight: 450;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-MediumItalic.woff2')
+    format('woff2');
   font-weight: 500;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'SEBSansSerif';
-  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-BoldItalic.eot');
-  src:
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-BoldItalic.eot?#iefix')
-      format('embedded-opentype'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-BoldItalic.woff2')
-      format('woff2'),
-    url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-BoldItalic.woff')
-      format('woff');
+  font-family: 'SEB SansSerif';
+  src: url('#{$seb-font-path}/SEBSansSerif/SEBSansSerif-BoldItalic.woff2')
+    format('woff2');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
