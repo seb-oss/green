@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.6.24
+
+### Patch Changes
+
+- 3c7eee0: **Typography:** Add 'SEB SansSerif' to font-famliy
+- Updated dependencies [3c7eee0]
+  - @sebgroup/fonts@3.0.0
+
 ## 3.6.23
 
 ### Patch Changes

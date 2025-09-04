@@ -28,6 +28,7 @@ export class GdsTheme extends GdsElement {
       :host {
         display: contents;
         color: var(--gds-sys-color-content-neutral-01);
+        font-family: var(--gds-sys-text-family);
       }
     `,
   ]
