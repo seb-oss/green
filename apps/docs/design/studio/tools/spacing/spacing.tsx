@@ -84,20 +84,15 @@ export default function Spacing() {
       {filteredTokens.length > 0 ? (
         filteredTokens.map((group, index) => (
           <Core.GdsFlex key={index} flex-direction="column" gap="0">
-            <Core.GdsCard padding="l">
-              <Core.GdsGrid
-                columns="5"
-                gap="l"
-                align-items="center"
-                justify-content="flex-start"
-              >
-                <Core.GdsText>Variable</Core.GdsText>
-                <Core.GdsText>Value</Core.GdsText>
-                <Core.GdsText>Preview</Core.GdsText>
-                <Core.GdsText></Core.GdsText>
-                <Core.GdsText></Core.GdsText>
-              </Core.GdsGrid>
-            </Core.GdsCard>
+            <Part.Head
+              columns={[
+                { label: 'Token' },
+                { label: 'Value' },
+                { label: 'Preview' },
+                { label: '' },
+                { label: '' },
+              ]}
+            />
 
             {group.tokens.map((token, tokenIndex) => (
               <Core.GdsFlex
@@ -112,23 +107,9 @@ export default function Spacing() {
                   align-items="center"
                   justify-content="flex-start"
                 >
-                  <Core.GdsCard
-                    justify-content="center"
-                    align-items="center"
-                    padding="0"
-                    border-radius="xs"
-                    height="40px"
-                    width="40px"
-                    variant="secondary"
-                  >
-                    <Core.GdsText
-                      width="6ch"
-                      text-align="center"
-                      text-transform="uppercase"
-                    >
-                      {token.name}
-                    </Core.GdsText>
-                  </Core.GdsCard>
+                  <Core.GdsText text-transform="uppercase">
+                    {token.name}
+                  </Core.GdsText>
                   <Core.GdsText color="neutral-02">
                     {token.value}px
                   </Core.GdsText>

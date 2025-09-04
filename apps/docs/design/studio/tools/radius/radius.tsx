@@ -60,15 +60,15 @@ export default function Radius() {
       />
 
       <Core.GdsFlex flex-direction="column" gap="0">
-        <Core.GdsCard padding="l">
-          <Core.GdsGrid columns="5" gap="xl">
-            <Core.GdsText>Token</Core.GdsText>
-            <Core.GdsText>Value</Core.GdsText>
-            <Core.GdsText>Preview</Core.GdsText>
-            <Core.GdsText></Core.GdsText>
-            <Core.GdsText></Core.GdsText>
-          </Core.GdsGrid>
-        </Core.GdsCard>
+        <Part.Head
+          columns={[
+            { label: 'Token' },
+            { label: 'Value' },
+            { label: 'Preview' },
+            { label: '' },
+            { label: '' },
+          ]}
+        />
 
         {filteredTokens.map((group) => (
           <Core.GdsFlex key={group.title} flex-direction="column" gap="0">

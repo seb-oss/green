@@ -251,18 +251,15 @@ export default function Color() {
                     gap="xl"
                     data-level={subGroup.category}
                   >
-                    <Core.GdsCard
-                      flex-direction="row"
-                      justify-content="space-between"
-                    >
-                      <Core.GdsGrid columns="5" align-items="center" gap="xl">
-                        <Core.GdsText>Level</Core.GdsText>
-                        <Core.GdsText>Example</Core.GdsText>
-                        <Core.GdsText>Light</Core.GdsText>
-                        <Core.GdsText>Dark</Core.GdsText>
-                        <Core.GdsText></Core.GdsText>
-                      </Core.GdsGrid>
-                    </Core.GdsCard>
+                    <Part.Head
+                      columns={[
+                        { label: 'Level' },
+                        { label: 'Example' },
+                        { label: 'Light' },
+                        { label: 'Dark' },
+                        { label: '' },
+                      ]}
+                    />
                     <Core.GdsFlex
                       flex-direction="column"
                       data-subgroup={subGroup.category}
@@ -281,18 +278,15 @@ export default function Color() {
               </Core.GdsFlex>
             ) : (
               <Core.GdsGrid columns="1" gap="m">
-                <Core.GdsCard
-                  flex-direction="row"
-                  justify-content="space-between"
-                >
-                  <Core.GdsGrid columns="5" align-items="center" gap="xl">
-                    <Core.GdsText></Core.GdsText>
-                    <Core.GdsText>Example</Core.GdsText>
-                    <Core.GdsText>Variable name</Core.GdsText>
-                    <Core.GdsText>Light</Core.GdsText>
-                    <Core.GdsText>Dark</Core.GdsText>
-                  </Core.GdsGrid>
-                </Core.GdsCard>
+                <Part.Head
+                  columns={[
+                    { label: '' },
+                    { label: 'Example' },
+                    { label: 'Light' },
+                    { label: 'Dark' },
+                    { label: '' },
+                  ]}
+                />
                 <Core.GdsFlex flex-direction="column">
                   {(group.tokens as ColorToken[]).map((token, tokenIndex) => (
                     <ColorSwatch

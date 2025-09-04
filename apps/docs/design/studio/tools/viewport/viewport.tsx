@@ -51,15 +51,15 @@ export default function Viewport() {
       />
 
       <Core.GdsFlex flex-direction="column" gap="0">
-        <Core.GdsCard padding="l">
-          <Core.GdsGrid columns="5" gap="xl">
-            <Core.GdsText>Token</Core.GdsText>
-            <Core.GdsText>Value</Core.GdsText>
-            <Core.GdsText></Core.GdsText>
-            <Core.GdsText></Core.GdsText>
-            <Core.GdsText></Core.GdsText>
-          </Core.GdsGrid>
-        </Core.GdsCard>
+        <Part.Head
+          columns={[
+            { label: 'Token' },
+            { label: 'Value' },
+            { label: ' ' },
+            { label: '' },
+            { label: '' },
+          ]}
+        />
 
         {filteredTokens.map((token) => (
           <Core.GdsFlex
