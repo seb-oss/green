@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.5.1
+
+### Patch Changes
+
+- 1b85201: **Typography:** Add fallbacks to `font-family`
+
 ## 2.5.0
 
 ### Minor Changes
