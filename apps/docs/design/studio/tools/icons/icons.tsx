@@ -18,6 +18,8 @@ export default function Icons({ selected }: { selected?: string }) {
   const { isLoaded, actions } = useContent()
   const [search, setSearch] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedSize, setSelectedSize] = useState('l')
+  const [isSolid, setIsSolid] = useState(false)
   const router = useRouter()
   const component = actions.getComponent('icon')
   const [migrationSearch, setMigrationSearch] = useState('')
@@ -71,6 +73,8 @@ export default function Icons({ selected }: { selected?: string }) {
     router.push(`/studio/icons/${name}`)
   }
 
+  const iconSizes = ['xs', 's', 'm', 'l', 'xl', '2xl']
+
   if (!isLoaded || !component?.icons) return null
 
   return (
@@ -98,8 +102,8 @@ export default function Icons({ selected }: { selected?: string }) {
           </Core.GdsInput>
         }
         filter={
-          <>
-            {!isMigrationPage && (
+          !isMigrationPage && (
+            <Core.GdsFlex align-items="center" gap="s" width="max-content">
               <Core.GdsDropdown
                 plain
                 value={selectedCategory}
@@ -114,28 +118,35 @@ export default function Icons({ selected }: { selected?: string }) {
                   </Core.GdsOption>
                 ))}
               </Core.GdsDropdown>
-            )}
-            <Core.GdsDropdown>
-              <Core.GdsOption value="">Size</Core.GdsOption>
-            </Core.GdsDropdown>
-            <Core.GdsCheckbox value="Solid" label="Solid" />
-          </>
+            </Core.GdsFlex>
+          )
         }
         extra={
-          <Core.GdsFlex align-items="center" gap="s">
-            <Core.GdsText color="warning-01">
-              Font awesome migration
-            </Core.GdsText>
-            <Link
-              component="button"
-              href="/studio/icons/migration"
-              rank="secondary"
-              variant="warning"
-              size="small"
-            >
-              Instruction
-              <Core.IconCircleQuestionmark slot="trail" />
-            </Link>
+          <Core.GdsFlex gap="xl" align-items="center">
+            <Core.GdsCheckbox
+              value="solid"
+              label="Solid"
+              checked={isSolid}
+              onchange={(e: Event) =>
+                setIsSolid((e.target as HTMLInputElement).checked)
+              }
+            />
+            <Core.GdsFlex width="80px">
+              <Core.GdsDropdown
+                plain
+                size="small"
+                value={selectedSize}
+                oninput={(e: Event) =>
+                  setSelectedSize((e.target as HTMLSelectElement).value)
+                }
+              >
+                {iconSizes.map((size) => (
+                  <Core.GdsOption key={size} value={size}>
+                    {size.toUpperCase()}
+                  </Core.GdsOption>
+                ))}
+              </Core.GdsDropdown>
+            </Core.GdsFlex>
           </Core.GdsFlex>
         }
       />
@@ -147,8 +158,7 @@ export default function Icons({ selected }: { selected?: string }) {
           <>
             {iconList.length > 0 ? (
               <Core.GdsGrid
-                columns={selected ? '4' : '6'}
-                // auto-columns="200"
+                columns={selected ? '5' : '6'}
                 gap="l"
                 height="max-content"
                 width="100%"
@@ -156,8 +166,7 @@ export default function Icons({ selected }: { selected?: string }) {
                 {iconList.map(([name, icon]) => (
                   <Core.GdsCard
                     key={name}
-                    padding="m"
-                    height="auto"
+                    padding="0"
                     justify-content="center"
                     align-items="center"
                     variant="secondary"
@@ -168,14 +177,12 @@ export default function Icons({ selected }: { selected?: string }) {
                     tabIndex={0}
                     width="100%"
                   >
-                    <Core.GdsFlex
-                      justify-content="center"
-                      align-items="center"
-                      height="48px"
-                      color="neutral-01"
-                    >
-                      <Icon name={`Icon` + NAME(icon.displayName)} size="l" />
-                    </Core.GdsFlex>
+                    <Icon
+                      name={`Icon` + NAME(icon.displayName)}
+                      size={selectedSize}
+                      solid={isSolid}
+                    />
+
                     <Core.GdsText
                       color="neutral-02"
                       font="detail-book-xs"

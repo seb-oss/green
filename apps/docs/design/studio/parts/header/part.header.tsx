@@ -37,29 +37,46 @@ export default function Header({
             {description}
           </Core.GdsText>
         </Core.GdsFlex>
-        <Core.GdsBreadcrumbs size="small">
-          <Link component="link" href="/">
-            <Core.IconHomeOpen slot="lead" size="m" />
-            Home
-          </Link>
-          <Link component="link" href="/studio">
-            <Core.IconBrandGreen slot="lead" size="m" />
-            Studio
-          </Link>
-          {isMigration ? (
-            <>
-              <Link component="link" href="/studio/icons">
-                <Core.IconShapes slot="lead" size="m" />
-                Icons
-              </Link>
-              <Core.GdsText>Migration</Core.GdsText>
-            </>
-          ) : (
-            <>
-              <Core.GdsText>{title}</Core.GdsText>
-            </>
-          )}
-        </Core.GdsBreadcrumbs>
+        <Core.GdsFlex align-items="center" justify-content="space-between">
+          <Core.GdsBreadcrumbs size="small" width="100%" flex="1">
+            <Link component="link" href="/">
+              <Core.IconHomeOpen slot="lead" size="m" />
+              Home
+            </Link>
+            <Link component="link" href="/studio">
+              <Core.IconBrandGreen slot="lead" size="m" />
+              Studio
+            </Link>
+            {isMigration ? (
+              <>
+                <Link component="link" href="/studio/icons">
+                  <Core.IconShapes slot="lead" size="m" />
+                  Icons
+                </Link>
+                <Core.GdsText>Migration</Core.GdsText>
+              </>
+            ) : (
+              <>
+                <Core.GdsText>{title}</Core.GdsText>
+              </>
+            )}
+          </Core.GdsBreadcrumbs>
+          <Core.GdsFlex align-items="center" gap="s" width="max-content">
+            <Core.GdsText color="warning-01">
+              Font awesome migration
+            </Core.GdsText>
+            <Link
+              component="button"
+              href="/studio/icons/migration"
+              rank="secondary"
+              variant="warning"
+              size="small"
+            >
+              Instruction
+              <Core.IconCircleQuestionmark slot="trail" />
+            </Link>
+          </Core.GdsFlex>
+        </Core.GdsFlex>
       </Core.GdsFlex>
       <Core.GdsDivider color="subtle-01" />
       <Core.GdsFlex
@@ -69,7 +86,7 @@ export default function Header({
       >
         <Core.GdsFlex align-items="center" gap="s">
           <Core.GdsFlex width="400px">{search}</Core.GdsFlex>
-          <Core.GdsFlex width="200px">{filter}</Core.GdsFlex>
+          <Core.GdsFlex min-width="200px">{filter}</Core.GdsFlex>
         </Core.GdsFlex>
         {extra && (
           <Core.GdsDiv width="max-content" height="max-content">
