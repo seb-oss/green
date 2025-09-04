@@ -4,43 +4,53 @@
 import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import density from '@sebgroup/green-tokens/src/tokens/2023/density.comfortable.json'
 import { ref } from '@sebgroup/green-tokens/src/tokens/2023/ref/space.ref.json'
 import * as Part from '../../parts'
-import { TokenGroup } from '../../settings/studio.types'
+import { Token } from '../../settings/studio.types'
 import * as Table from '../../table'
 
-function calculateScore(token: any, query: string): boolean {
-  const searchString =
-    `${token.name} ${token.value}px ${token.type}`.toLowerCase()
-  return searchString.includes(query.toLowerCase())
+interface RadiusToken {
+  $value: string
 }
 
-export const radiusTokens: TokenGroup[] = [
-  {
-    title: 'Radius',
-    tokens: Object.entries(ref.space)
-      .sort((a, b) => a[1].$value - b[1].$value)
-      .map(([name, token]) => ({
+interface SpaceRefToken {
+  $value: number
+  $type: string
+}
+
+interface SpaceTokens {
+  [key: string]: SpaceRefToken
+}
+
+function getRadiusTokens(): Token[] {
+  return Object.entries(density.sys.radius)
+    .filter(([key]) => key !== '$type')
+    .map(([name, token]) => {
+      const spaceKey = (token as RadiusToken).$value
+        .replace('{ref.space.', '')
+        .replace('}', '')
+
+      const spaceValue = (ref.space as SpaceTokens)[spaceKey].$value
+
+      return {
         name,
-        value: token.$value,
-        type: token.$type,
-      })),
-  },
-]
+        value: spaceValue,
+        type: 'dimension',
+      }
+    })
+}
 
 export default function Radius() {
   const [search, setSearch] = useState('')
+  const radiusTokens = useMemo(() => getRadiusTokens(), [])
 
   const filteredTokens = useMemo(() => {
     if (!search) return radiusTokens
-
-    return radiusTokens
-      .map((group) => ({
-        ...group,
-        tokens: group.tokens.filter((token) => calculateScore(token, search)),
-      }))
-      .filter((group) => group.tokens.length > 0)
-  }, [search])
+    return radiusTokens.filter((token) =>
+      token.name.toLowerCase().includes(search.toLowerCase()),
+    )
+  }, [radiusTokens, search])
 
   return (
     <Core.GdsFlex flex-direction="column" gap="4xl" padding="xl">
@@ -59,47 +69,48 @@ export default function Radius() {
           </Core.GdsInput>
         }
       />
+      {filteredTokens.length !== 0 && (
+        <Core.GdsFlex flex-direction="column" gap="0">
+          <Table.Head
+            columns={[
+              { label: 'Token' },
+              { label: 'Value' },
+              { label: 'Preview' },
+              { label: '' },
+              { label: '' },
+            ]}
+          />
 
-      <Core.GdsFlex flex-direction="column" gap="0">
-        <Table.Head
-          columns={[
-            { label: 'Token' },
-            { label: 'Value' },
-            { label: 'Preview' },
-            { label: '' },
-            { label: '' },
-          ]}
-        />
-
-        {filteredTokens.map((group) => (
-          <Core.GdsFlex key={group.title} flex-direction="column" gap="0">
-            {group.tokens.map((token, index) => (
-              <Table.Row
-                key={token.name + index}
-                name={token.name}
-                columns={[
-                  { type: 'name' },
-                  { type: 'value', content: `${token.value}px` },
-                  {
-                    type: 'preview',
-                    content: (
-                      <Core.GdsCard
-                        width="64px"
-                        height="64px"
-                        variant="secondary"
-                        border-radius={token.name}
-                      />
-                    ),
-                  },
-                  { type: 'empty' },
-                  { type: 'variable' },
-                ]}
-              />
-            ))}
-          </Core.GdsFlex>
-        ))}
-        <Part.Empty query="radius" />
-      </Core.GdsFlex>
+          {filteredTokens.map((token, index) => (
+            <Table.Row
+              key={token.name + index}
+              name={token.name}
+              columns={[
+                { type: 'name' },
+                { type: 'value', content: `${token.value}px` },
+                {
+                  type: 'preview',
+                  content: (
+                    <Core.GdsCard
+                      width="40px"
+                      min-height="40px"
+                      border="2xs"
+                      border-width="2xs 0 0 2xs"
+                      padding="0"
+                      variant="secondary"
+                      border-color="strong "
+                      border-radius={`${token.name} 0 0 0`}
+                    />
+                  ),
+                },
+                { type: 'empty' },
+                { type: 'variable' },
+              ]}
+            />
+          ))}
+        </Core.GdsFlex>
+      )}
+      {filteredTokens.length === 0 && <Part.Empty query="radius" />}
     </Core.GdsFlex>
   )
 }

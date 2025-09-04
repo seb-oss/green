@@ -268,7 +268,7 @@ export default function Color() {
                     <Table.Head
                       columns={[
                         { label: 'Level' },
-                        { label: 'Example' },
+                        { label: 'Preview' },
                         { label: 'Light' },
                         { label: 'Dark' },
                         { label: '' },
@@ -295,7 +295,7 @@ export default function Color() {
                 <Table.Head
                   columns={[
                     { label: '' },
-                    { label: 'Example' },
+                    { label: 'Preview' },
                     { label: 'Light' },
                     { label: 'Dark' },
                     { label: '' },
