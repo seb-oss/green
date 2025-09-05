@@ -204,7 +204,7 @@ export default function Icons({ selected }: { selected?: string }) {
                 </Core.GdsText>
               </Core.GdsCard>
             )}
-            {selected && <IconDetail ID={selected} />}
+            {/* {selected && <IconDetail ID={selected} />} */}
           </Core.GdsFlex>
         )}
       </Core.GdsFlex>
