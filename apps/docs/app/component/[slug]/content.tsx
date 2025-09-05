@@ -8,7 +8,6 @@ import * as Core from '@sebgroup/green-core/react'
 import { Render } from '../../../design/atoms/content/render'
 import { useContent } from '../../../settings/content'
 import { ComponentSection } from '../../../settings/content/types'
-import { IconContent } from './content.icon'
 
 interface ContentSectionProps {
   slug: string
@@ -56,15 +55,6 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
     getImage: (slug: string, node: string) => {
       return actions.getComponentImage?.(slug, node)
     },
-  }
-
-  if (slug === 'icon' && contentKey === 'overview') {
-    return (
-      <Core.GdsFlex flex-direction="column" gap="4xl">
-        <IconContent component={component} />
-        <Render content={content} slug={slug} imageProvider={imageProvider} />
-      </Core.GdsFlex>
-    )
   }
 
   return (

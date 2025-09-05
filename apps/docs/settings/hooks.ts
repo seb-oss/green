@@ -218,7 +218,7 @@ export function useSettings() {
   }, [settings, isLoaded])
 
   const toggle = useCallback((path: SettingsTogglePath) => {
-    console.log(path)
+    // console.log(path)
 
     setSettings((prev) => {
       const newSettings = toggleSetting(prev, path)
@@ -393,17 +393,82 @@ export function useTransition({ isAudioEnabled }: UseTransitionProps) {
 }
 
 // set a single setting
+// export function useSet() {
+//   const { actions } = useSettingsContext()
+
+//   const set = useCallback(
+//     (path: SettingsTogglePath, value: unknown) => {
+//       actions.setSettings((prev) => ({
+//         ...prev,
+//         UX: {
+//           ...prev.UX,
+//         },
+//       }))
+//     },
+//     [actions],
+//   )
+
+//   return set
+// }
+
 export function useSet() {
   const { actions } = useSettingsContext()
 
   const set = useCallback(
-    (path: SettingsTogglePath, value: unknown) => {
-      actions.setSettings((prev) => ({
-        ...prev,
-        UX: {
-          ...prev.UX,
-        },
-      }))
+    (path: SettingsTogglePath, value: boolean) => {
+      actions.setSettings((prev) => {
+        const [section, category, key] = path.split('.')
+
+        switch (section) {
+          case 'UI': {
+            const section = prev.UI[category as keyof UIState]
+            if (typeof section === 'object' && key in section) {
+              return {
+                ...prev,
+                UI: {
+                  ...prev.UI,
+                  [category]: {
+                    ...section,
+                    [key]: value,
+                  },
+                },
+              }
+            }
+            return prev
+          }
+          case 'UX': {
+            const section = prev.UX[category as keyof UXState]
+            if (typeof section === 'object' && key in section) {
+              return {
+                ...prev,
+                UX: {
+                  ...prev.UX,
+                  [category]: {
+                    ...section,
+                    [key]: value,
+                  },
+                },
+              }
+            }
+            return prev
+          }
+          case 'Device': {
+            if (key in prev.Device) {
+              return {
+                ...prev,
+                Device: {
+                  ...prev.Device,
+                  [key]: value,
+                },
+              }
+            }
+            return prev
+          }
+
+          default:
+            return prev
+        }
+      })
     },
     [actions],
   )

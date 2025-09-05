@@ -1,0 +1,8 @@
+.icon-card {
+  cursor: pointer;
+  aspect-ratio: 3/2;
+}
+
+[data-variant] {
+  cursor: pointer;
+}

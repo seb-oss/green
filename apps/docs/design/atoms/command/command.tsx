@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { _ } from '../../../hooks'
-import { useSettingsContext, useSettingsValue } from '../../../settings'
+import { useSet, useSettingsContext, useSettingsValue } from '../../../settings'
 import { useContentContext } from '../../../settings/content'
 
 import './command.css'
@@ -32,6 +32,7 @@ export default function Command() {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const [activeFilter, setActiveFilter] = useState<FilterType>('all')
+  const SET = useSet()
 
   const searchResults = useMemo(() => {
     const results: SearchResult[] = []
@@ -99,21 +100,8 @@ export default function Command() {
     return results
   }, [query, ContentActions, activeFilter])
 
-  const handleClosePanel = (event: CustomEvent) => {
-    SettingsActions.setSettings((prev) => ({
-      ...prev,
-      UI: {
-        ...prev.UI,
-        Panel: {
-          ...prev.UI.Panel,
-          Command: false,
-        },
-      },
-    }))
-  }
-
-  const handleToggleCommand = () => {
-    SettingsActions.toggle('UI.Panel.Command')
+  const CLOSE_PANEL = () => {
+    SET('UI.Panel.Command', false)
   }
 
   const handleFilterChange = (filter: FilterType) => {
@@ -125,7 +113,6 @@ export default function Command() {
     const numResults = searchResults.length
     if (numResults === 0) return
 
-    // Only handle navigation keys if we're within the dialog
     if (!dialogRef.current?.contains(e.target as Node)) return
 
     switch (e.key) {
@@ -155,13 +142,13 @@ export default function Command() {
         e.preventDefault()
         if (searchResults[selectedIndex]) {
           router.push(searchResults[selectedIndex].href)
-          handleClosePanel()
+          CLOSE_PANEL()
         }
         break
 
       case 'Escape':
         e.preventDefault()
-        handleClosePanel()
+        CLOSE_PANEL()
         break
     }
   }
@@ -177,7 +164,6 @@ export default function Command() {
       setSelectedIndex(0)
       setQuery('')
       setActiveFilter('all')
-      // return () => clearTimeout(timeoutId)
       return () => {
         document.removeEventListener('keydown', handleDialogKeyDown)
         clearTimeout(timeoutId)
@@ -200,8 +186,8 @@ export default function Command() {
           heading="Search"
           height="60vh"
           max-height="60vh"
-          onGdsClose={(e: CustomEvent) => handleClosePanel(e)}
-          placement="center"
+          onGdsClose={() => CLOSE_PANEL()}
+          placement="initial"
           padding="s"
           open
         >
@@ -213,60 +199,63 @@ export default function Command() {
             padding="0"
             slot="dialog"
           >
-            <Core.GdsInput
-              ref={inputRef}
-              plain
-              value={query}
-              onInput={(e) => {
-                setQuery((e.target as HTMLInputElement).value)
-                setSelectedIndex(0)
-              }}
-              autofocus
-            >
-              <Core.IconMagnifyingGlass slot="lead" />
-            </Core.GdsInput>
+            <Core.GdsFlex flex-direction="column" gap="xs" className="cmd-fade">
+              <Core.GdsInput
+                ref={inputRef}
+                plain
+                value={query}
+                onInput={(e) => {
+                  setQuery((e.target as HTMLInputElement).value)
+                  setSelectedIndex(0)
+                }}
+                autofocus
+              >
+                <Core.IconMagnifyingGlass slot="lead" />
+              </Core.GdsInput>
 
-            <Core.GdsFlex
-              flex-direction="column; m{row}"
-              align-items="center"
-              justify-content="space-between"
-              gap="s"
-            >
-              <Core.GdsFilterChips>
-                <Core.GdsFilterChip
-                  size="s"
-                  selected={activeFilter === 'all'}
-                  onClick={() => handleFilterChange('all')}
-                >
-                  All
-                </Core.GdsFilterChip>
-                <Core.GdsFilterChip
-                  size="small"
-                  selected={activeFilter === 'component'}
-                  onClick={() => handleFilterChange('component')}
-                >
-                  Components
-                </Core.GdsFilterChip>
-                <Core.GdsFilterChip
-                  size="small"
-                  selected={activeFilter === 'page'}
-                  onClick={() => handleFilterChange('page')}
-                >
-                  Pages
-                </Core.GdsFilterChip>
-              </Core.GdsFilterChips>
-              <Core.GdsText font="body-s" color="neutral-02">
-                {query
-                  ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
-                  : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
-              </Core.GdsText>
+              <Core.GdsFlex
+                align-items="center"
+                justify-content="space-between"
+                gap="s"
+              >
+                <Core.GdsFilterChips>
+                  <Core.GdsFilterChip
+                    size="small"
+                    selected={activeFilter === 'all'}
+                    onClick={() => handleFilterChange('all')}
+                  >
+                    All
+                  </Core.GdsFilterChip>
+                  <Core.GdsFilterChip
+                    size="small"
+                    selected={activeFilter === 'component'}
+                    onClick={() => handleFilterChange('component')}
+                  >
+                    Components
+                  </Core.GdsFilterChip>
+                  <Core.GdsFilterChip
+                    size="small"
+                    selected={activeFilter === 'page'}
+                    onClick={() => handleFilterChange('page')}
+                  >
+                    Pages
+                  </Core.GdsFilterChip>
+                </Core.GdsFilterChips>
+                <Core.GdsFlex display="none; m{flex}">
+                  <Core.GdsText font="body-s" color="neutral-02">
+                    {query
+                      ? `Found ${searchResults.length} result${searchResults.length !== 1 ? 's' : ''}`
+                      : `Total ${searchResults.length} item${searchResults.length !== 1 ? 's' : ''}`}
+                  </Core.GdsText>
+                </Core.GdsFlex>
+              </Core.GdsFlex>
             </Core.GdsFlex>
 
             <Core.GdsFlex
               flex-direction="column"
               gap="xs"
               overflow="auto"
-              className="cmd-results"
+              className="cmd-fade"
               flex="1"
             >
               {searchResults.map((result, index) => (
@@ -280,7 +269,7 @@ export default function Command() {
                   width="100%"
                   onClick={() => {
                     router.push(result.href)
-                    handleClosePanel()
+                    CLOSE_PANEL()
                   }}
                   data-index={index}
                   tabIndex={0}
@@ -289,7 +278,7 @@ export default function Command() {
                     if (e.key === 'Enter') {
                       e.preventDefault()
                       router.push(result.href)
-                      handleClosePanel()
+                      CLOSE_PANEL()
                     }
                   }}
                 >
@@ -302,20 +291,18 @@ export default function Command() {
                       <Core.GdsText font-weight="book" font="heading-xs">
                         {result.title}
                       </Core.GdsText>
-                      <Core.GdsFlex
-                        gap="xs"
-                        align-items="center"
-                        display="none"
-                      >
-                        {result.beta && (
-                          <Core.GdsBadge variant="notice" size="small">
-                            BETA
+                      {false && (
+                        <Core.GdsFlex gap="xs" align-items="center">
+                          {result.beta && (
+                            <Core.GdsBadge variant="notice" size="small">
+                              BETA
+                            </Core.GdsBadge>
+                          )}
+                          <Core.GdsBadge size="small">
+                            {result.type}
                           </Core.GdsBadge>
-                        )}
-                        <Core.GdsBadge size="small">
-                          {result.type}
-                        </Core.GdsBadge>
-                      </Core.GdsFlex>
+                        </Core.GdsFlex>
+                      )}
                     </Core.GdsFlex>
                     {result.summary && (
                       <Core.GdsText font="body-s" color="neutral-02">
