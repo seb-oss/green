@@ -1,7 +1,6 @@
 @use '../../tokens' as tokens;
-
-$font-path: tokens.$font-path !default;
-
-@use '@sebgroup/fonts/scss/_SEB-SansSerif' as fonts with (
-  $seb-font-path: $font-path
+@use '@sebgroup/fonts/scss/_variables' as fonts-vars with (
+  $seb-font-path: tokens.$font-path
 );
+
+@use '@sebgroup/fonts/scss/_SEB-SansSerif';
