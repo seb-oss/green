@@ -44,7 +44,7 @@ export const Checkbox = forwardRef(
 
     const validationClassName = validateClassName(validator?.indicator)
 
-    const labelClassNames = classNames('form-control', {
+    const labelClassNames = classNames('gds-form-control', {
       [validationClassName]: validator,
     })
 
@@ -58,7 +58,7 @@ export const Checkbox = forwardRef(
     })
 
     return (
-      <div className="form-group">
+      <div className="gds-form-group">
         <label htmlFor={uuid} className={labelClassNames}>
           {label}
           <input
@@ -77,7 +77,7 @@ export const Checkbox = forwardRef(
         </label>
         {validator && (
           <span
-            className="form-info"
+            className="gds-form-info"
             id={`${uuid}_message`}
             style={{ display: 'flex', gap: '0.25rem' }}
           >

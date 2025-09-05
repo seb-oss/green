@@ -1,0 +1,9 @@
+@use 'mixins';
+@import './ripple';
+
+.gds-filter-chip {
+  @include mixins.base;
+}
+
+@include mixins.user-preferences;
+@include ripple-effect;

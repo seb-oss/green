@@ -1,0 +1,261 @@
+@use 'sass:map';
+@use '../../common';
+
+@mixin calendar() {
+  /**
+   * Use full width on small screens
+   */
+  @include common.media-breakpoint-down(sm) {
+    width: 100%;
+    max-height: stretch;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    @include common.padding-top(3);
+    @include common.padding-horizontal(3);
+    > * {
+      @include common.margin-horizontal(2);
+      min-width: auto;
+      &.link {
+        flex: 1 1;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    @include common.media-breakpoint-down(sm) {
+      flex-wrap: wrap;
+      overflow-y: auto;
+    }
+    @include common.padding-horizontal(3);
+    @include common.margin-vertical(3);
+
+    table {
+      /**
+       * Use full width on small screens
+       */
+      @include common.media-breakpoint-down(sm) {
+        width: 100%;
+      }
+      /**
+       * General
+       */
+      border-spacing: 0;
+      tr {
+        th,
+        td {
+          height: 2.5rem;
+          width: 2.5rem;
+          text-align: center;
+        }
+      }
+      thead {
+        /**
+         * Days
+         */
+        th {
+          font-weight: 400;
+          border-bottom: solid 1px var(--gds-sys-color-base-300);
+          background: var(--gds-sys-color-background-primary);
+          @include common.media-breakpoint-down(sm) {
+            position: sticky;
+          }
+          top: 0;
+        }
+      }
+
+      tbody {
+        /**
+         * Week numbers
+         */
+        tr th {
+          font-weight: 400;
+        }
+        /**
+         * Dates
+         */
+        tr td {
+          font-weight: 500;
+          border: solid 1px transparent;
+          user-select: none;
+          transition: all 200ms ease-in-out;
+
+          /**
+           * Weekend
+           */
+          &.sg-date-holiday:not(.disabled) {
+            background: var(--gds-sys-color-background-primary);
+            color: var(--gds-sys-color-text-error);
+          }
+
+          /**
+           * Today
+           */
+          &.sg-date-today {
+            background: transparent;
+            box-shadow: inset 0 0 0 2px var(--gds-sys-color-dark-blue-2);
+            border-radius: 4px;
+            color: var(--gds-sys-color-dark-blue-2);
+          }
+
+          /**
+           * Hover
+           */
+          &:hover:not(.disabled) {
+            background: var(--gds-sys-color-blue);
+            border-radius: 4px;
+            border: solid 1px var(--gds-sys-color-background-primary);
+            color: var(--gds-sys-color-text-inverted);
+            cursor: pointer;
+          }
+
+          /**
+           * Focus
+           */
+          &:focus-visible:not(.disabled) {
+            @include common.add-focus();
+            background: var(--gds-sys-color-blue);
+            border-radius: 4px;
+            border: solid 1px var (--gds-sys-color-background-primary);
+            color: var(--gds-sys-color-text-inverted);
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+          }
+
+          /**
+           * Selected
+           */
+          &[aria-selected='true'] {
+            background: var(--gds-sys-color-dark-blue-2);
+            border-radius: 4px;
+            border: solid 1px var(--gds-sys-color-background-primary);
+            color: var(--gds-sys-color-text-inverted);
+          }
+
+          /**
+           * Highlighted
+           */
+          &[tabindex='0'] {
+            background: var(--gds-sys-color-dark-blue-2);
+            border-radius: 4px;
+            border: solid 1px var(--gds-sys-color-background-primary);
+            color: var(--gds-sys-color-text-inverted);
+          }
+
+          /**
+           * Active (pressed)
+           */
+          &:hover:active:not(.disabled) {
+            background: var(--gds-sys-color-dark-blue-2);
+            border-radius: 4px;
+            border: solid 1px var(--gds-sys-color-background-primary);
+            color: var(--gds-sys-color-text-inverted);
+          }
+
+          /**
+           * Disabled
+           */
+          &.disabled {
+            background: var(--gds-sys-color-base-100);
+            font-weight: 400;
+            color: var(--gds-sys-color-text-disabled);
+            cursor: not-allowed;
+            &.sg-date-holiday {
+              color: var(--gds-sys-color-base-300);
+            }
+          }
+        }
+      }
+    }
+  }
+  footer {
+    display: flex;
+    justify-content: space-between;
+    border-top: solid 1px var(--gds-sys-color-base-300);
+    @include common.padding-vertical(4);
+    @include common.padding-horizontal(5);
+  }
+}
+
+@mixin calendar-range() {
+  main {
+    /**
+     * Dates
+     */
+    table tbody tr td {
+      /**
+       * Selected
+       */
+      &[aria-selected='true'] {
+        &.sg-first-date,
+        &.sg-first-date:hover:not(.disabled) {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-right-width: 0;
+        }
+
+        &.sg-last-date,
+        &.sg-last-date:hover:not(.disabled) {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-left: 0;
+        }
+      }
+
+      /**
+       * Selection
+       */
+      &.sg-date-selection {
+        border: solid 1px var(--gds-sys-color-background-primary);
+        border-left-width: 0;
+        border-right-width: 0;
+        border-radius: 0;
+        background: color-mix(
+          in srgb,
+          var(--gds-sys-color-dark-blue-2) 50%,
+          transparent
+        );
+        color: var(--gds-sys-color-text-inverted);
+
+        /**
+         * Hover
+         */
+        &:hover:not(.disabled) {
+          border-radius: 0;
+          border-left-width: 0;
+          border-right-width: 0;
+        }
+
+        /**
+         * Range
+         */
+        &.sg-first-date:not(:hover),
+        &.sg-last-date:not(:hover) {
+          background: var(--gds-sys-color-dark-blue-2);
+        }
+      }
+
+      /**
+       * Other-month
+       */
+      &.sg-other-month {
+        color: var(--gds-sys-color-base-100);
+      }
+    }
+    @include common.media-breakpoint-only(xs) {
+      table + table {
+        @include common.margin-top(4);
+      }
+    }
+    @include common.media-breakpoint-up(sm) {
+      table + table {
+        @include common.margin-start(4);
+      }
+    }
+  }
+}

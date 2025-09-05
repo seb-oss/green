@@ -1,11 +1,10 @@
 import { HTMLProps, PropsWithChildren } from 'react'
 import classNames from 'classnames'
 
-import { ButtonVariant } from '@sebgroup/extract'
-
 interface LinkProps extends HTMLProps<HTMLAnchorElement> {
-  button?: boolean | ButtonVariant
+  button?: boolean | string
   secondary?: boolean
+  variant?: 'blue' | 'white' | 'black'
 }
 
 /**
@@ -17,18 +16,23 @@ export const Link = ({
   children,
   className,
   role,
-  ...otherProps
+  variant = 'blue',
+  ...props
 }: PropsWithChildren<LinkProps>) => {
-  const linkClassName = classNames(className, { button: button }, button, {
-    'link gds-link-arrow': secondary,
-  })
+  const linkClassName = classNames(
+    className,
+    {
+      'gds-link': !button,
+      'gds-button': button,
+      'gds-link-arrow': secondary,
+      'gds-link--white': variant === 'white',
+      'gds-link--black': variant === 'black',
+    },
+    button,
+  )
 
   return (
-    <a
-      className={linkClassName}
-      role={button ? 'button' : role}
-      {...otherProps}
-    >
+    <a className={linkClassName} role={button ? 'button' : role} {...props}>
       {children}
     </a>
   )
