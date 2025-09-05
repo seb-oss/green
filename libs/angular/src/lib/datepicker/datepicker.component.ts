@@ -67,6 +67,7 @@ export class NggDatepickerComponent
   @Input() hideLabel?: boolean
   @Input() disabledWeekends?: boolean
   @Input() disabledDates?: Date[]
+  @Input() errorMessage?: string
 
   @Input()
   get options(): DatepickerOptions {
