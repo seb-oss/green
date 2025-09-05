@@ -194,6 +194,8 @@ export default function Icons({ selected }: { selected?: string }) {
                       color="neutral-02"
                       font="detail-book-xs"
                       text-align="center"
+                      flex-wrap="pretty"
+                      width="90%"
                     >
                       {icon.displayName}
                     </Core.GdsText>
