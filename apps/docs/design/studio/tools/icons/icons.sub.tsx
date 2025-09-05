@@ -6,13 +6,14 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
+import { useIcons } from './icons.context'
 
 type TabValue = 'code' | 'details'
 type CardVariant = 'neutral' | 'positive' | 'negative' | 'notice' | 'warning'
 
 export default function IconDetail({ ID }: { ID: string }) {
   const { actions } = useContent()
-  const [isSolid, setIsSolid] = useState(false)
+  const { isSolid, selectedSize } = useIcons()
   const [activeTab, setActiveTab] = useState<TabValue>('details')
   const [cardVariant, setCardVariant] = useState<CardVariant>('neutral')
 
@@ -30,86 +31,88 @@ export default function IconDetail({ ID }: { ID: string }) {
       max-width="400px"
     >
       <Core.GdsCard
-        padding="s"
+        padding="l"
         variant={cardVariant}
         height="280px"
-        justify-content="center"
+        justify-content="space-between"
         align-items="center"
         border-radius="m"
         position="relative"
       >
-        <Icon
-          name={`Icon${iconData.displayName.replace(/\s+/g, '')}`}
-          size="2xl"
-          solid={isSolid}
-        />
-        <Core.GdsText font="heading-s">{iconData.displayName}</Core.GdsText>
+        <Core.GdsFlex flex="1" align-items="center" justify-content="center">
+          <Icon
+            name={`Icon${iconData.displayName.replace(/\s+/g, '')}`}
+            size={selectedSize ? selectedSize : '2xl'}
+            solid={isSolid}
+          />
+        </Core.GdsFlex>
 
         <Core.GdsFlex
           align-items="center"
           gap="xs"
-          position="absolute"
-          inset="auto 20px 20px auto"
+          width="100%"
+          // position="absolute"
+          // inset="auto 20px 20px 20px"
+          justify-content="space-between"
         >
-          <Core.GdsDiv
-            level="3"
-            width="m"
-            height="m"
-            border-color="strong"
-            background={cardVariant === 'neutral' ? 'neutral-01' : 'secondary'}
-            border-width="2xs"
-            border-radius="max"
-            data-variant="neutral"
-            onClick={() => setCardVariant('neutral')}
-          />
-          <Core.GdsDiv
-            level="3"
-            width="m"
-            height="m"
-            border-color="positive-01"
-            background={
-              cardVariant === 'positive' ? 'positive-01' : 'secondary'
-            }
-            border-width="2xs"
-            border-radius="max"
-            data-variant="positive"
-            onClick={() => setCardVariant('positive')}
-          />
-          <Core.GdsDiv
-            level="3"
-            width="m"
-            height="m"
-            border-color="notice-01"
-            background={cardVariant === 'notice' ? 'notice-01' : 'secondary'}
-            border-width="2xs"
-            border-radius="max"
-            data-variant="notice"
-            onClick={() => setCardVariant('notice')}
-          />
-          <Core.GdsDiv
-            level="3"
-            width="m"
-            height="m"
-            border-color="negative-01"
-            background={
-              cardVariant === 'negative' ? 'negative-01' : 'secondary'
-            }
-            border-width="2xs"
-            border-radius="max"
-            data-variant="negative"
-            onClick={() => setCardVariant('negative')}
-          />
-          <Core.GdsDiv
-            level="3"
-            width="m"
-            height="m"
-            border-color="warning-01"
-            background={cardVariant === 'warning' ? 'warning-01' : 'secondary'}
-            border-width="2xs"
-            border-radius="max"
-            data-variant="warning"
-            onClick={() => setCardVariant('warning')}
-          />
+          <Core.GdsText font="body-xs">{iconData.displayName}</Core.GdsText>
+          <Core.GdsFlex>
+            <Core.GdsDiv
+              level="3"
+              width="m"
+              height="m"
+              border-color="strong"
+              background={cardVariant !== 'neutral' ? 'neutral-01' : 'none'}
+              border-width="2xs"
+              border-radius="s 0 0 s"
+              data-variant="neutral"
+              onClick={() => setCardVariant('neutral')}
+            />
+            <Core.GdsDiv
+              level="3"
+              width="m"
+              height="m"
+              border-color="positive-01"
+              background={cardVariant !== 'positive' ? 'positive-01' : 'none'}
+              border-width="2xs"
+              border-radius="0"
+              data-variant="positive"
+              onClick={() => setCardVariant('positive')}
+            />
+            <Core.GdsDiv
+              level="3"
+              width="m"
+              height="m"
+              border-color="notice-01"
+              background={cardVariant !== 'notice' ? 'notice-01' : 'none'}
+              border-width="2xs"
+              border-radius="0"
+              data-variant="notice"
+              onClick={() => setCardVariant('notice')}
+            />
+            <Core.GdsDiv
+              level="3"
+              width="m"
+              height="m"
+              border-color="negative-01"
+              background={cardVariant !== 'negative' ? 'negative-01' : 'none'}
+              border-width="2xs"
+              border-radius="0"
+              data-variant="negative"
+              onClick={() => setCardVariant('negative')}
+            />
+            <Core.GdsDiv
+              level="3"
+              width="m"
+              height="m"
+              border-color="warning-01"
+              background={cardVariant !== 'warning' ? 'warning-01' : 'none'}
+              border-width="2xs"
+              border-radius="0 s s 0"
+              data-variant="warning"
+              onClick={() => setCardVariant('warning')}
+            />
+          </Core.GdsFlex>
         </Core.GdsFlex>
       </Core.GdsCard>
 
@@ -135,13 +138,6 @@ export default function IconDetail({ ID }: { ID: string }) {
             </Core.GdsFlex>
           </Core.GdsSegment>
         </Core.GdsSegmentedControl>
-        <Core.GdsButton
-          rank="secondary"
-          size="small"
-          onClick={() => setIsSolid(!isSolid)}
-        >
-          {isSolid ? 'Regular' : 'Solid'}
-        </Core.GdsButton>
       </Core.GdsFlex>
       <Core.GdsCard variant="secondary" border-radius="m" padding="xs">
         {activeTab === 'code' ? (

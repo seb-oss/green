@@ -7,22 +7,31 @@ import { useRouter } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
-import { Link } from '../../../atoms/link/link'
 import * as Part from '../../parts'
 import Deprecated from './deprecated/deprecated'
 import IconDetail from './icons.sub'
 
 import './icons.css'
 
+import { useIcons } from './icons.context'
+
 export default function Icons({ selected }: { selected?: string }) {
   const { isLoaded, actions } = useContent()
-  const [search, setSearch] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('')
-  const [selectedSize, setSelectedSize] = useState('l')
-  const [isSolid, setIsSolid] = useState(false)
+  const {
+    search,
+    setSearch,
+    selectedSize,
+    setSelectedSize,
+    isSolid,
+    setIsSolid,
+    selectedCategory,
+    setSelectedCategory,
+    migrationSearch,
+    setMigrationSearch,
+  } = useIcons()
+
   const router = useRouter()
   const component = actions.getComponent('icon')
-  const [migrationSearch, setMigrationSearch] = useState('')
   const isMigrationPage = selected === 'migration'
 
   const { categories, iconList, totalIcons } = useMemo(() => {
@@ -73,7 +82,7 @@ export default function Icons({ selected }: { selected?: string }) {
     router.push(`/studio/icons/${name}`)
   }
 
-  const iconSizes = ['xs', 's', 'm', 'l', 'xl', '2xl']
+  const iconSizes = ['s', 'm', 'l', 'xl']
 
   if (!isLoaded || !component?.icons) return null
 
@@ -129,7 +138,7 @@ export default function Icons({ selected }: { selected?: string }) {
                 setIsSolid((e.target as HTMLInputElement).checked)
               }
             />
-            <Core.GdsFlex width="80px">
+            <Core.GdsFlex width="120px">
               <Core.GdsDropdown
                 plain
                 size="small"
@@ -138,6 +147,7 @@ export default function Icons({ selected }: { selected?: string }) {
                   setSelectedSize((e.target as HTMLSelectElement).value)
                 }
               >
+                <Core.IconSettingsSliderHor slot="lead" />
                 {iconSizes.map((size) => (
                   <Core.GdsOption key={size} value={size}>
                     {size.toUpperCase()}
@@ -204,7 +214,7 @@ export default function Icons({ selected }: { selected?: string }) {
                 </Core.GdsText>
               </Core.GdsCard>
             )}
-            {/* {selected && <IconDetail ID={selected} />} */}
+            {selected && <IconDetail ID={selected} />}
           </Core.GdsFlex>
         )}
       </Core.GdsFlex>
