@@ -11,7 +11,15 @@ export default function StudioSearch() {
           </Core.GdsDropdown>
         </Core.GdsFlex>
       </Core.GdsFlex>
-      <Core.GdsFlex>Extra</Core.GdsFlex>
+      <Core.GdsFlex align-items="center" gap="m">
+        <Core.GdsCheckbox value="solid" label="Solid" />
+        <Core.GdsFlex width="120px">
+          <Core.GdsDropdown plain size="small">
+            <Core.IconSettingsSliderHor slot="lead" />
+            <Core.GdsOption value="">Size</Core.GdsOption>
+          </Core.GdsDropdown>
+        </Core.GdsFlex>
+      </Core.GdsFlex>
     </Core.GdsFlex>
   )
 }

@@ -5,9 +5,9 @@ import * as Part from '../parts'
 
 export default function StudioHeader() {
   return (
-    <Core.GdsFlex flex-direction="column" gap="m">
+    <Core.GdsFlex flex-direction="column" gap="l">
       <Part.Meta title="Page" description="page" />
-      <Part.Breadcrumbs />
+      <Part.Breadcrumbs current="Icons" />
       <Core.GdsDivider color="subtle-01" />
       <Part.Search />
     </Core.GdsFlex>
