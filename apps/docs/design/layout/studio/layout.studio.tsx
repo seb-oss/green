@@ -3,6 +3,8 @@
 import * as Core from '@sebgroup/green-core/react'
 import * as Part from './parts'
 
+import './layout.studio.css'
+
 export function Studio({
   children,
   aside,
@@ -18,6 +20,7 @@ export function Studio({
       padding="m"
       max-width="100%"
       box-sizing="border-box"
+      className="studio"
     >
       <Part.Sidebar />
       <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="4 / 13">
@@ -27,11 +30,16 @@ export function Studio({
             flex-direction="column"
             grid-column={aside ? '1 / 9' : '1 / 13'}
             variant="secondary"
+            className="studio-page"
           >
             {children}
           </Core.GdsCard>
           {aside && (
-            <Core.GdsCard variant="secondary" grid-column="9 / 13">
+            <Core.GdsCard
+              variant="secondary"
+              grid-column="9 / 13"
+              className="studio-aside"
+            >
               {aside}
             </Core.GdsCard>
           )}

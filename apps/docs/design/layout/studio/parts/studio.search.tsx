@@ -2,7 +2,11 @@ import * as Core from '@sebgroup/green-core/react'
 
 export default function StudioSearch() {
   return (
-    <Core.GdsFlex align-items="center" justify-content="space-between">
+    <Core.GdsFlex
+      align-items="center"
+      justify-content="space-between"
+      className="studio-search"
+    >
       <Core.GdsFlex align-items="center" width="100%" gap="s">
         <Core.GdsInput width="400px" plain />
         <Core.GdsFlex>

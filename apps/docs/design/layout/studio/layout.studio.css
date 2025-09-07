@@ -1,0 +1,51 @@
+.studio {
+  --motion: all 640ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.studio-sidebar {
+  transition: var(--motion);
+
+  @starting-style {
+    opacity: 0;
+    translate: -10px 0;
+  }
+}
+
+.studio-header {
+  transition: var(--motion);
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+.studio-search {
+  transition: var(--motion);
+  transition-delay: 80ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+.studio-page {
+  transition: var(--motion);
+  transition-delay: 120ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+.studio-aside {
+  transition: var(--motion);
+  transition-delay: 240ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 10px 0;
+  }
+}

@@ -8,6 +8,7 @@ export default function StudioSidebar({ pages }: { pages?: string }) {
       flex-direction="column"
       grid-column="1 / 4"
       padding="0"
+      className="studio-sidebar"
     >
       <Core.GdsFlex align-items="center" gap="m" padding="l l 0 l">
         <Link href="/studio/colors">

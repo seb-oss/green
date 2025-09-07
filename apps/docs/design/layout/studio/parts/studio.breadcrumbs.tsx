@@ -15,7 +15,6 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
         </Link>
         <Core.GdsText>{current}</Core.GdsText>
       </Core.GdsBreadcrumbs>
-
       <Core.GdsFlex align-items="center" gap="s" width="max-content">
         <Core.GdsText color="warning-01">Font awesome migration</Core.GdsText>
         <Link
