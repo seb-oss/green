@@ -7,6 +7,7 @@ import greenIosSwiftClassTree from './green-ios-swift-class-tree.ts'
 import greenIosSwiftPackage from './green-ios-swift-package.ts'
 import enumClass from './jvm-enum-class.ts'
 import scssMixin from './scss-mixin.ts'
+import studioTokens from './studio-tokens.ts'
 
 const formats = {
   'css/only-variables': cssOnlyVariables,
@@ -18,6 +19,7 @@ const formats = {
   'compose/class': composeClass,
   'compose/color-scheme': composeColorScheme,
   'jvm/enum-class': enumClass,
+  'json/studio-tokens': studioTokens,
 }
 
 export default formats
