@@ -88,6 +88,23 @@ jobs:
               ? inputs.pr_number 
               : context.issue.number;
 
+            console.log(`PR Number: ${prNumber}`);
+
+            if (!prNumber) {
+              throw new Error('PR number is undefined. Ensure the workflow is triggered with a valid PR number.');
+            }
+
+            // Validate the PR number
+            const { data: pr } = await github.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber
+            });
+
+            if (!pr) {
+              throw new Error(`Pull request #${prNumber} does not exist in the repository.`);
+            }
+
             github.issues.createComment({
               issue_number: prNumber,
               owner: context.repo.owner,
@@ -112,7 +129,7 @@ jobs:
               :test_tube: The latest RC snapshot of Green Core will be autmatically tested for visual regressions in the Green Testbed project.<br />
               [![Visual Regression Tests on Browserstack](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml/badge.svg)](https://github.com/seb-oss/green-testbed/actions/workflows/run-tests.yml)
               `
-            })
+            });
 
       - name: Publish RC testbed
         run: |
