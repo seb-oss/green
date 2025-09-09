@@ -57,10 +57,6 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dropdown'
 
-  // @HostBinding('attr.data-position') get positionAttr() {
-  //   return this.dropdownPosition
-  // }
-
   @Input() options!: any[]
 
   @Input() textToHighlight?: string
@@ -78,15 +74,12 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
    * but not select the current active element with Space.
    */
   @Input() selectWithSpace = true
-  
-  // TODO: add comment
-  @Input() triggerRect?: DOMRect
 
   /**
-   * When true, the dropdown will automatically choose to open above or below the input
-   * based on available space in the viewport, and will scale its height to fit if needed.
+   * Stores the bounding rectangle of the dropdown trigger element,
+   * used for positioning the dropdown list overlay.
    */
-  // @Input() dynamicPosition = false
+  @Input() triggerRect?: DOMRect
 
   @Output() selectedValueChanged = new EventEmitter<any>()
 
@@ -96,9 +89,6 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   public activeIndex = -1
 
   scope: string | undefined
-
-  // Indicates whether the dropdown list should be displayed below ('bottom') or above ('top') the input, based on available space.
-  // dropdownPosition: 'bottom' | 'top' = 'bottom'
 
   private dropdownUtils: DropdownUtils<string | null, string, any> =
     new DropdownUtils<string | null, string, any>()
@@ -170,11 +160,9 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
     this._expanded = expanded
 
     if (expanded) {
-      // if (this.dynamicPosition) {
       setTimeout(() => {
-        this.setDropdownHeight();
-      }, 0);
-      // }
+        this.setDropdownHeight()
+      }, 0)
       this.refreshSelectedOption()
       this.subscribeToKeyUpEvents()
       this.subscribeToKeyDownEvents()
@@ -386,36 +374,35 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
   /**
    * Calculates available space above and below the dropdown input,
-   * sets dropdownPosition ('top' or 'bottom') accordingly,
    * and dynamically sets the max-height of the dropdown list to fit the viewport.
    */
   setDropdownHeight() {
-    const dropdown = this.elRef.nativeElement;
-    const dropdownList = dropdown.querySelector('ul[role="listbox"]');
-    const rect = this.triggerRect;
+    const dropdown = this.elRef.nativeElement
+    const dropdownList = dropdown.querySelector('ul[role="listbox"]')
+    const rect = this.triggerRect
 
-    if (!rect || !dropdownList) return;
+    if (!rect || !dropdownList) return
 
-    const viewportHeight = window.innerHeight;
-    const spaceBelow = viewportHeight - rect.bottom;
-    const spaceAbove = rect.top;
+    const viewportHeight = window.innerHeight
+    const spaceBelow = viewportHeight - rect.bottom
+    const spaceAbove = rect.top
 
-    const MARGIN = 10;
-    const MIN_HEIGHT = 100;
-    const DROPDOWN_MAX_HEIGHT = 500;
-    let maxDropdownHeight;
+    const MARGIN = 10
+    const MIN_HEIGHT = 100
+    const DROPDOWN_MAX_HEIGHT = 500
+    let maxDropdownHeight
 
     if (spaceBelow >= DROPDOWN_MAX_HEIGHT) {
-      maxDropdownHeight = DROPDOWN_MAX_HEIGHT;
+      maxDropdownHeight = DROPDOWN_MAX_HEIGHT
     } else if (spaceAbove >= DROPDOWN_MAX_HEIGHT) {
-      maxDropdownHeight = DROPDOWN_MAX_HEIGHT;
+      maxDropdownHeight = DROPDOWN_MAX_HEIGHT
     } else if (spaceBelow > spaceAbove) {
-      maxDropdownHeight = Math.max(spaceBelow - MARGIN, MIN_HEIGHT);
+      maxDropdownHeight = Math.max(spaceBelow - MARGIN, MIN_HEIGHT)
     } else {
-      maxDropdownHeight = Math.max(spaceAbove - MARGIN, MIN_HEIGHT);
+      maxDropdownHeight = Math.max(spaceAbove - MARGIN, MIN_HEIGHT)
     }
 
-    this.renderer.setStyle(dropdownList, 'max-height', `${maxDropdownHeight}px`);
-    this.renderer.setStyle(dropdownList, 'overflow-y', 'auto');
+    this.renderer.setStyle(dropdownList, 'max-height', `${maxDropdownHeight}px`)
+    this.renderer.setStyle(dropdownList, 'overflow-y', 'auto')
   }
 }

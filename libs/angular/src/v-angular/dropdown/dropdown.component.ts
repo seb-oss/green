@@ -1,5 +1,12 @@
 import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
-import { Overlay, OverlayRef, ConnectedPosition, ScrollStrategy } from '@angular/cdk/overlay';
+
+import {
+  ConnectedPosition,
+  Overlay,
+  OverlayRef,
+  ScrollStrategy,
+} from '@angular/cdk/overlay'
+import { TemplatePortal } from '@angular/cdk/portal'
 import {
   ChangeDetectorRef,
   Component,
@@ -31,7 +38,6 @@ import {
   OptionBase,
   OptionGroup,
 } from '@sebgroup/green-angular/src/v-angular/core'
-import { TemplatePortal } from '@angular/cdk/portal';
 
 /**
  * A dropdown allows the user to select an option from a list.
@@ -75,12 +81,12 @@ export class NggvDropdownComponent<
   @HostBinding('class.large') get isLarge(): boolean {
     return this.size === 'large'
   }
-  
-  // TODO: add comments
-  @ViewChild('dropdownTemplate') dropdownTemplate!: TemplateRef<any>;
-  @ViewChild('toggleButton', { read: ElementRef }) toggleButton!: ElementRef;
-  private overlayRef?: OverlayRef;
-  triggerRect: DOMRect | null = null;
+
+  /** Reference to the dropdown list template used for rendering the dropdown in an overlay. */
+  @ViewChild('dropdownTemplate') dropdownTemplate!: TemplateRef<any>
+  // Used for positioning and sizing the dropdown overlay relative to the trigger button.
+  @ViewChild('toggleButton', { read: ElementRef }) toggleButton!: ElementRef
+
   /**
    * Sets the displayed size of the dropdown.
    */
@@ -163,7 +169,7 @@ export class NggvDropdownComponent<
    * If true (default), the dropdown list will close when any scrollable ancestor is scrolled.
    * If false, the dropdown list will reposition itself instead of closing.
    */
-  @Input() closeDropdownListOnScroll = true;
+  @Input() closeDropdownListOnScroll = true
 
   /**
    * Emits changes of the expanded state of the dropdown
@@ -179,15 +185,24 @@ export class NggvDropdownComponent<
   public expanded = false
   /** The current option selected based on numeric index. */
   public activeIndex = -1
+  /**
+   * Stores the bounding rectangle of the dropdown trigger element,
+   * used for positioning the dropdown list overlay.
+   */
+  public triggerRect: DOMRect | null = null
   /** Subscribe if dropdown expanded to listen to click outside to close dropdown. */
   private onClickSubscription: Subscription | undefined
   /** Subscribe if dropdown expanded to listen to scroll outside to close dropdown. */
   private onScrollSubscription: Subscription | undefined
-    /** Subscribe to get dropdown width size changes for a dropdown list width to match. */
+  /** Subscribe to get dropdown width size changes for a dropdown list width to match. */
   private resizeSubscription: Subscription | undefined
+  /** Subscription to dropdown list overlay detachments. */
+  private overlayDetachSubscription: Subscription | undefined
 
   public keyEvent: KeyboardEvent = {} as KeyboardEvent
   private _options: OptionBase<T>[] = []
+  /** Reference to the currently attached dropdown list overlay. Used for opening/closing and positioning. */
+  private overlayRef?: OverlayRef
 
   constructor(
     @Self() @Optional() public ngControl: NgControl,
@@ -197,7 +212,7 @@ export class NggvDropdownComponent<
     protected cdr: ChangeDetectorRef,
     protected dropdownUtils: DropdownUtils<K, V, T>,
     protected overlay: Overlay,
-    protected vcr: ViewContainerRef
+    protected vcr: ViewContainerRef,
   ) {
     super(ngControl, translocoScope, cdr)
   }
@@ -225,6 +240,7 @@ export class NggvDropdownComponent<
     this.onClickSubscription?.unsubscribe()
     this.onScrollSubscription?.unsubscribe()
     this.resizeSubscription?.unsubscribe()
+    this.overlayDetachSubscription?.unsubscribe()
   }
 
   /** @internal override to correctly set state from form value */
@@ -299,62 +315,70 @@ export class NggvDropdownComponent<
     this.expanded = state
     this.expandedChange.emit(this.expanded)
     if (this.expanded) {
-      this.openDropdownOverlay();
+      this.openDropdownOverlay()
       this.subscribeToOutsideClickEvent()
     } else {
-      this.closeDropdownOverlay();
-      this.onTouched();
-    } 
+      this.closeDropdownOverlay()
+      this.onTouched()
+    }
   }
 
+  /**
+   * Opens the dropdown overlay by detaching any existing overlay reference,
+   * attaching a new overlay, updating its width, and setting up listeners for overlay detachments.
+   * This method ensures the dropdown overlay is properly initialized and displayed.
+   */
   openDropdownOverlay() {
-    this.detachOldOverlayRef();
-    this.attachNewOverlayRef();
-    this.updateOverlayWidth();
-    this.listenOverlayDetachments();
+    this.detachOldOverlayRef()
+    this.attachNewOverlayRef()
+    this.updateOverlayWidth()
+    this.listenOverlayDetachments()
   }
 
   detachOldOverlayRef(): void {
     if (this.overlayRef) {
-      this.overlayRef.detach();
+      this.overlayRef.detach()
     }
   }
 
   attachNewOverlayRef(): void {
-    const positionStrategy = this.overlay.position()
-    .flexibleConnectedTo(this.toggleButton)
-    .withPositions(this.getDropdownListPositionsArray())
-    .withPush(false) // Prevent overlay from overlapping the trigger
+    const positionStrategy = this.overlay
+      .position()
+      .flexibleConnectedTo(this.toggleButton)
+      .withPositions(this.getDropdownListPositionsArray())
+      .withPush(false) // Prevent overlay from overlapping the trigger
 
     this.overlayRef = this.overlay.create({
       positionStrategy,
-      scrollStrategy: this.getScrollStrategy()
-    });
+      scrollStrategy: this.getScrollStrategy(),
+    })
 
     // Get trigger rect and pass to dropdown-list
-    this.triggerRect = this.toggleButton.nativeElement.getBoundingClientRect();
+    this.triggerRect = this.toggleButton.nativeElement.getBoundingClientRect()
 
-    this.overlayRef.attach(new TemplatePortal(this.dropdownTemplate, this.vcr));
+    this.overlayRef.attach(new TemplatePortal(this.dropdownTemplate, this.vcr))
   }
 
   updateOverlayWidth(): void {
     // sets initial width to match trigger element
-    this.setOverlayWidth();
-    
+    this.setOverlayWidth()
+
     // Listen for window resize and update overlay width
     this.resizeSubscription = fromEvent(window, 'resize').subscribe(() => {
-      this.setOverlayWidth();
-    });
+      this.setOverlayWidth()
+    })
   }
 
   // used to catch when overlay is detached after scroll with list expanded
   listenOverlayDetachments() {
     if (this.overlayRef) {
-      this.overlayRef.detachments().subscribe(() => {
-        if (this.expanded) {
-          this.setExpanded(false);
-        }
-      });
+      this.overlayDetachSubscription = this.overlayRef
+        .detachments()
+        .subscribe(() => {
+          if (this.expanded) {
+            this.setExpanded(false)
+          }
+        })
     }
   }
 
@@ -373,28 +397,29 @@ export class NggvDropdownComponent<
         overlayX: 'start',
         overlayY: 'bottom',
         offsetY: -8, // 0.5rem gap above the trigger
-      }
-    ];
+      },
+    ]
   }
 
   getScrollStrategy(): ScrollStrategy {
     return this.closeDropdownListOnScroll
       ? this.overlay.scrollStrategies.close()
-      : this.overlay.scrollStrategies.reposition();
+      : this.overlay.scrollStrategies.reposition()
   }
 
   setOverlayWidth() {
     if (this.overlayRef && this.toggleButton) {
-      const buttonWidth = this.toggleButton.nativeElement.offsetWidth;
-      const pane = this.overlayRef.overlayElement as HTMLElement;
+      const buttonWidth = this.toggleButton.nativeElement.offsetWidth
+      const pane = this.overlayRef.overlayElement as HTMLElement
 
-      pane.style.width = `${buttonWidth}px`;
+      pane.style.width = `${buttonWidth}px`
     }
   }
 
   closeDropdownOverlay() {
-    this.overlayRef?.detach();
-    this.resizeSubscription?.unsubscribe();
+    this.overlayRef?.detach()
+    this.resizeSubscription?.unsubscribe()
+    this.overlayDetachSubscription?.unsubscribe()
   }
 
   /* TYPE CASTS */
