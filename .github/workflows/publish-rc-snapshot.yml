@@ -85,7 +85,7 @@ jobs:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
             const prNumber = context.eventName === 'workflow_dispatch' 
-              ? inputs.pr_number 
+              ? ${{ inputs.pr_number }}
               : context.issue.number;
 
             console.log(`PR Number: ${prNumber}`);
