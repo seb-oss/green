@@ -1,152 +1,6 @@
 export default {
   name: 'json/studio-tokens',
-  format: function ({ dictionary }) {
-    const getTheme = (filePath: string) => {
-      if (filePath.includes('.dark.')) return 'dark'
-      if (filePath.includes('.light.')) return 'light'
-      if (filePath.includes('.ref.')) return 'ref'
-      return 'base'
-    }
-
-    const tokenMap = new Map()
-
-    // Process reference tokens first
-    dictionary.allTokens
-      .filter((token) => getTheme(token.filePath) === 'ref')
-      .forEach((token) => {
-        const path = token.path
-        const tokenKey = path.join('.')
-
-        tokenMap.set(tokenKey, {
-          token: path[path.length - 1],
-          variable: `var(--gds-${token.name})`,
-          path,
-          value: token.$value,
-          isReference: true,
-        })
-      })
-
-    // Process theme tokens
-    dictionary.allTokens
-      .filter((token) => ['light', 'dark'].includes(getTheme(token.filePath)))
-      .forEach((token) => {
-        const path = token.path
-        const theme = getTheme(token.filePath)
-        const tokenKey = path.join('.')
-
-        if (!tokenMap.has(tokenKey)) {
-          tokenMap.set(tokenKey, {
-            token: path[path.length - 1],
-            variable: `var(--gds-${token.name})`,
-            path,
-            value: {
-              light: undefined,
-              dark: undefined,
-            },
-            isReference: false,
-          })
-        }
-
-        const tokenData = tokenMap.get(tokenKey)
-        if (!tokenData.isReference) {
-          tokenData.value[theme] = token.$value
-        }
-      })
-
-    // Ensure both light and dark values exist
-    tokenMap.forEach((token) => {
-      if (!token.isReference) {
-        if (!token.value.light) token.value.light = token.value.dark
-        if (!token.value.dark) token.value.dark = token.value.light
-      }
-    })
-
-    const groupTokensByCategory = (tokens) => {
-      const grouped = {
-        colors: {
-          background: {
-            L1: [],
-            L2: [],
-            L3: [],
-          },
-          border: [],
-          content: [],
-          state: [],
-        },
-        typography: [],
-        spacing: [],
-        radius: [],
-        shadows: [],
-        viewport: [],
-        motion: [],
-      }
-
-      tokens.forEach((token) => {
-        const [category, type, subCategory, ...rest] = token.path
-        const tokenData = {
-          token: token.token,
-          variable: token.variable,
-          value: token.value,
-        }
-
-        if (category === 'sys') {
-          if (type === 'color') {
-            if (['L1', 'L2', 'L3'].includes(subCategory)) {
-              grouped.colors.background[subCategory].push(tokenData)
-            } else if (subCategory === 'border') {
-              grouped.colors.border.push(tokenData)
-            } else if (subCategory === 'content') {
-              grouped.colors.content.push(tokenData)
-            } else if (subCategory === 'state') {
-              grouped.colors.state.push(tokenData)
-            }
-          } else {
-            switch (type) {
-              case 'text':
-                grouped.typography.push(tokenData)
-                break
-              case 'space':
-                grouped.spacing.push(tokenData)
-                break
-              case 'radius':
-                grouped.radius.push(tokenData)
-                break
-              case 'shadow':
-                grouped.shadows.push(tokenData)
-                break
-              case 'viewport':
-                grouped.viewport.push(tokenData)
-                break
-              case 'motion':
-                grouped.motion.push(tokenData)
-                break
-            }
-          }
-        }
-      })
-
-      // Clean up empty arrays
-      Object.keys(grouped).forEach((key) => {
-        if (Array.isArray(grouped[key]) && grouped[key].length === 0) {
-          delete grouped[key]
-        } else if (typeof grouped[key] === 'object') {
-          Object.keys(grouped[key]).forEach((subKey) => {
-            if (
-              Array.isArray(grouped[key][subKey]) &&
-              grouped[key][subKey].length === 0
-            ) {
-              delete grouped[key][subKey]
-            }
-          })
-          if (Object.keys(grouped[key]).length === 0) {
-            delete grouped[key]
-          }
-        }
-      })
-
-      return grouped
-    }
-
+  format: function () {
     const output = {
       $metadata: {
         tokenSetOrder: [
@@ -159,7 +13,133 @@ export default {
           'motion',
         ],
       },
-      tokens: groupTokensByCategory(Array.from(tokenMap.values())),
+      tokens: {
+        colors: {
+          background: {
+            L1: [
+              {
+                token: 'neutral-01',
+                variable: 'var(--gds-sys-color-l1-neutral-01)',
+                value: {
+                  light: {
+                    value: '#ffffff',
+                    alpha: 1,
+                  },
+                  dark: {
+                    value: '#0a0b0b',
+                    alpha: 1,
+                  },
+                },
+              },
+              {
+                token: 'neutral-02',
+                variable: 'var(--gds-sys-color-l1-neutral-02)',
+                value: {
+                  light: '#eaebeb',
+                  dark: '#282a29',
+                },
+              },
+            ],
+            L2: [
+              {
+                token: 'neutral-01',
+                variable: 'var(--gds-sys-color-l2-neutral-01)',
+                value: {
+                  light: '#f5f5f5',
+                  dark: '#1c1d1d',
+                },
+              },
+            ],
+          },
+          border: [
+            {
+              token: 'neutral-01',
+              variable: 'var(--gds-sys-color-border-neutral-01)',
+              value: {
+                light: '#d1d3d3',
+                dark: '#404040',
+              },
+            },
+          ],
+          state: [
+            {
+              token: 'hover-01',
+              variable: 'var(--gds-sys-color-state-hover-01)',
+              value: {
+                light: '#00000033',
+                dark: '#ffffff33',
+                alpha: '',
+              },
+            },
+          ],
+        },
+        typography: [
+          {
+            token: 'heading-xl',
+            variable: 'var(--gds-sys-text-heading-xl)',
+            value: {
+              fontFamily: 'SEB Sans Serif',
+              fontSize: '32px',
+              lineHeight: '44px',
+              fontWeight: '450',
+            },
+          },
+        ],
+        spacing: [
+          {
+            token: 'xs',
+            variable: 'var(--gds-sys-space-xs)',
+            value: '4px',
+          },
+          {
+            token: 's',
+            variable: 'var(--gds-sys-space-s)',
+            value: '8px',
+          },
+        ],
+        radius: [
+          {
+            token: 'none',
+            variable: 'var(--gds-sys-radius-none)',
+            value: '0',
+          },
+          {
+            token: 's',
+            variable: 'var(--gds-sys-radius-s)',
+            value: '4px',
+          },
+        ],
+        shadows: [
+          {
+            token: 's',
+            variable: 'var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02)',
+            value: '0px 0px 2px 0px #060D1314',
+          },
+        ],
+        viewport: [
+          {
+            token: 's',
+            variable: 'var(--gds-sys-viewport-s)',
+            value: '430px',
+          },
+        ],
+        motion: {
+          duration: [
+            {
+              token: 'fastest',
+              variable: 'var(--gds-sys-motion-duration-fastest)',
+              value: '0.2s',
+            },
+          ],
+          easing: [
+            {
+              token: 'ease-in',
+              variable: 'var(--gds-sys-motion-easing-ease-in)',
+              value: 'cubic-bezier(0.64, 0, 0.78, 0)',
+            },
+          ],
+        },
+      },
     }
 
     return JSON.stringify(output, null, 2)
