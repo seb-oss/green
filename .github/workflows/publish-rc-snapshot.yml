@@ -88,10 +88,6 @@ jobs:
               ? ${{ inputs.pr_number }}
               : context.issue.number;
 
-            console.log(`PR Number: ${prNumber}`);
-            console.log(context);
-            console.log(inputs);
-
             if (!prNumber) {
               throw new Error('PR number is undefined. Ensure the workflow is triggered with a valid PR number.');
             }
