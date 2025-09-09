@@ -357,6 +357,9 @@ await Promise.all(
               {
                 destination: `tokens.json`,
                 format: 'json/studio-tokens',
+                options: {
+                  colorSchemes: ['light', 'dark'],
+                },
               },
             ],
           },
