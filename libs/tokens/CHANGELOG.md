@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.2
+
+### Patch Changes
+
+- 3c7eee0: **Typography:** Change primary font-family name to `SEB SansSerif` and keep `SEB SansSerif GDS` as a fallback
+
 ## 2.0.1
 
 ### Patch Changes

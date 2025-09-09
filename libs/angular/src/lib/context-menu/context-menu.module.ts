@@ -8,6 +8,11 @@ import {
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { NggContextMenuComponent } from './context-menu.component'
 
+/**
+ * @deprecated
+ * NggContextMenu is deprecated in favor of GdsContextMenu found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-context-menu--docs
+ */
 @NgModule({
   declarations: [NggContextMenuComponent],
   imports: [CommonModule, NggCoreWrapperModule],

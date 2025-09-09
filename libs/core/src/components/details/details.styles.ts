@@ -24,7 +24,7 @@ const style = css`
     }
 
     .summary-icon {
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       background-color: transparent;
       transition: all 280ms;
       aspect-ratio: 1;
@@ -37,7 +37,7 @@ const style = css`
     .summary-icon::after {
       content: '';
       position: absolute;
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       transition: all 280ms;
       inset: 0;
       scale: 0.9;
@@ -89,7 +89,7 @@ const style = css`
     }
 
     .details:focus-visible {
-      border-radius: var(--gds-sys-space-2xs);
+      border-radius: var(--gds-sys-radius-2xs);
     }
 
     .details.open .content {

@@ -1,10 +1,17 @@
 import { Meta, Story, Canvas, ArgTypes } from '@storybook/blocks'
 import Badge from './badge'
 import * as BadgeStories from './badge.stories';
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const Template = ({ ...props }) => <Badge {...props} />
 
 <Meta of={BadgeStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Badge is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-badge--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Badge
 

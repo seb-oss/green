@@ -39,7 +39,9 @@ export default function CollapsibleSection({
           width="100%"
           onClick={onToggle}
         >
-          {icon && <Icon name={icon} slot="lead" />}
+          {icon && (
+            <Icon name={icon} slot="lead" solid={isActive ? true : false} />
+          )}
           <span data-fade>{title}</span>
         </Link>
       </Core.GdsFlex>

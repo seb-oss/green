@@ -2,7 +2,7 @@
   "sys": {
     "text": {
       "family": {
-        "$value": "SEB SansSerif GDS",
+        "$value": "SEB SansSerif, SEB SansSerif GDS, SEBSansSerif",
         "$type": "fontFamily"
       },
       "weight": {
