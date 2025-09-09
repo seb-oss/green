@@ -76,10 +76,11 @@ export class NggvDropdownComponent<
     return this.size === 'large'
   }
   
+  // TODO: add comments
   @ViewChild('dropdownTemplate') dropdownTemplate!: TemplateRef<any>;
   @ViewChild('toggleButton', { read: ElementRef }) toggleButton!: ElementRef;
   private overlayRef?: OverlayRef;
-  
+  triggerRect: DOMRect | null = null;
   /**
    * Sets the displayed size of the dropdown.
    */
@@ -322,12 +323,16 @@ export class NggvDropdownComponent<
   attachNewOverlayRef(): void {
     const positionStrategy = this.overlay.position()
     .flexibleConnectedTo(this.toggleButton)
-    .withPositions(this.getDropdownListPositionsArray());
+    .withPositions(this.getDropdownListPositionsArray())
+    .withPush(false) // Prevent overlay from overlapping the trigger
 
     this.overlayRef = this.overlay.create({
       positionStrategy,
       scrollStrategy: this.getScrollStrategy()
     });
+
+    // Get trigger rect and pass to dropdown-list
+    this.triggerRect = this.toggleButton.nativeElement.getBoundingClientRect();
 
     this.overlayRef.attach(new TemplatePortal(this.dropdownTemplate, this.vcr));
   }
