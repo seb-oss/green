@@ -43,6 +43,11 @@ export interface DropdownOption<T = any> {
   [key: string]: any
 }
 
+/**
+ * @deprecated
+ * NggDropdown is deprecated in favor of GdsDropdown found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-dropdown--docs
+ */
 @Component({
   selector: 'ngg-dropdown',
   templateUrl: 'dropdown.component.html',

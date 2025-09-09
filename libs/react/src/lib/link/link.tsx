@@ -8,6 +8,9 @@ interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   secondary?: boolean
 }
 
+/**
+ * @deprecated Please use the `gds-link` web component from green-core instead
+ */
 export const Link = ({
   button,
   secondary,

@@ -1,0 +1,18 @@
+.editable {
+  min-height: 1lh;
+  min-width: 100%;
+  display: flex;
+  cursor: text;
+  width: 100%;
+  outline: 2px solid transparent;
+  outline-offset: 8px;
+  border-radius: 4px;
+
+  &:focus-visible {
+    outline-color: currentColor;
+  }
+
+  &:empty {
+    outline-color: currentColor;
+  }
+}

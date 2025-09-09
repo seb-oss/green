@@ -23,6 +23,9 @@ export interface CheckboxProps extends HTMLProps<HTMLInputElement> {
   onChange?: FormEventHandler<HTMLInputElement>
 }
 
+/**
+ * @deprecated Please use the `gds-checkbox` web component from green-core instead
+ */
 export const Checkbox = forwardRef(
   (
     {

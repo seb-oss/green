@@ -129,6 +129,9 @@ export type DatepickerOptions = {
   currentDate?: Date
 }
 
+/**
+ * @deprecated Please use the `gds-datepicker` web component from green-core instead
+ */
 export const Datepicker = forwardRef(
   (
     {

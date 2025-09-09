@@ -5,6 +5,10 @@ export interface SegmentedControl {
   url: string
   text: Observable<string> | string
 }
+
+/**
+ * @deprecated use <gds-segmented-control> from green-core instead.
+ */
 @Component({
   selector: 'ngg-segmented-control',
   template: `

@@ -8,6 +8,11 @@ import {
 import { getScopedTagName } from '@sebgroup/green-core/scoping'
 import { NggDatepickerComponent } from './datepicker.component'
 
+/**
+ * @deprecated
+ * NggDatepicker is deprecated in favor of GdsDatepicker found in the Core package
+ * https://storybook.seb.io/latest/core/?path=/docs/components-datepicker--docs
+ */
 @NgModule({
   declarations: [NggDatepickerComponent],
   imports: [CommonModule, NggCoreWrapperModule],

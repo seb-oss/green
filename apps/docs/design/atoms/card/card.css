@@ -1,0 +1,21 @@
+.card {
+  --staggering: calc((sibling-index() - 1) * 64ms);
+  transition: all 1s cubic-bezier(0.65, 0.05, 0.36, 1) var(--staggering);
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 40px;
+  }
+}
+
+.card-snippet {
+  & > * {
+    transition: all 420ms;
+    transition-delay: 64ms;
+
+    @starting-style {
+      opacity: 0;
+      translate: 0 -8px;
+    }
+  }
+}
