@@ -6,6 +6,7 @@ import { useMemo, useState } from 'react'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../../hooks'
 import { Variable } from '../../../parts'
+import { Copy } from '../../../table'
 
 interface DeprecatedIconsProps {
   searchQuery?: string
@@ -186,7 +187,7 @@ export default function DeprecatedIcons({
                   <Core.GdsText>{icon.new}</Core.GdsText>
                 </Core.GdsFlex>
                 <div>{``}</div>
-                <Variable name={icon.new} />
+                <Copy name={icon.new} />
               </Core.GdsGrid>
             </Core.GdsFlex>
           ))}
