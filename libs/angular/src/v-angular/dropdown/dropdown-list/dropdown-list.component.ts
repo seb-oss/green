@@ -57,6 +57,10 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   @HostBinding('attr.data-thook') @Input() thook: string | null | undefined =
     'dropdown'
 
+  /**
+   * @deprecated This attribute is no longer used. The dropdown position is now handled by Angular CDK Overlay.
+   * Will be removed in a future release.
+   */
   @HostBinding('attr.data-position') get positionAttr() {
     return this.dropdownPosition
   }
@@ -80,10 +84,24 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
   @Input() selectWithSpace = true
 
   /**
-   * When true, the dropdown will automatically choose to open above or below the input
-   * based on available space in the viewport, and will scale its height to fit if needed.
+   * @deprecated This input is no longer used. The dropdown now always chooses position dynamically.
+   * Will be removed in a future release.
    */
   @Input() dynamicPosition = false
+
+  /**
+   * Stores the bounding rectangle of the dropdown trigger element,
+   * used for positioning the dropdown list overlay.
+   */
+  @Input() triggerRect?: DOMRect
+
+  /**
+   * Controls whether the dropdown list should have a vertical margin.
+   * Set to false when the dropdown list is rendered in a CDK overlay and spacing is handled by overlay offset.
+   * Set to true when the dropdown list is used standalone or in other micro frontends, so it maintains visual spacing.
+   * Defaults to true.
+   */
+  @Input() useMargin = true
 
   @Output() selectedValueChanged = new EventEmitter<any>()
 
@@ -94,7 +112,10 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
   scope: string | undefined
 
-  // Indicates whether the dropdown list should be displayed below ('bottom') or above ('top') the input, based on available space.
+  /**
+   * @deprecated This attribute is no longer used. The dropdown position is now handled by Angular CDK Overlay.
+   * Will be removed in a future release.
+   */
   dropdownPosition: 'bottom' | 'top' = 'bottom'
 
   private dropdownUtils: DropdownUtils<string | null, string, any> =
@@ -167,9 +188,9 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
     this._expanded = expanded
 
     if (expanded) {
-      if (this.dynamicPosition) {
-        this.setDropdownPosition()
-      }
+      setTimeout(() => {
+        this.setDropdownHeight()
+      }, 0)
       this.refreshSelectedOption()
       this.subscribeToKeyUpEvents()
       this.subscribeToKeyDownEvents()
@@ -381,15 +402,14 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
 
   /**
    * Calculates available space above and below the dropdown input,
-   * sets dropdownPosition ('top' or 'bottom') accordingly,
    * and dynamically sets the max-height of the dropdown list to fit the viewport.
    */
-  setDropdownPosition() {
+  setDropdownHeight() {
     const dropdown = this.elRef.nativeElement
-    // dropdown trigger
-    const dropdownInput = dropdown.parentElement
     const dropdownList = dropdown.querySelector('ul[role="listbox"]')
-    const rect = dropdownInput.getBoundingClientRect()
+    const rect = this.triggerRect
+
+    if (!rect || !dropdownList) return
 
     const viewportHeight = window.innerHeight
     const spaceBelow = viewportHeight - rect.bottom
@@ -401,19 +421,16 @@ export class NggvDropdownListComponent implements OnInit, OnChanges {
     let maxDropdownHeight
 
     if (spaceBelow >= DROPDOWN_MAX_HEIGHT) {
-      this.dropdownPosition = 'bottom'
       maxDropdownHeight = DROPDOWN_MAX_HEIGHT
     } else if (spaceAbove >= DROPDOWN_MAX_HEIGHT) {
-      this.dropdownPosition = 'top'
       maxDropdownHeight = DROPDOWN_MAX_HEIGHT
     } else if (spaceBelow > spaceAbove) {
-      this.dropdownPosition = 'bottom'
-      maxDropdownHeight = Math.max(spaceBelow - MARGIN, MIN_HEIGHT) // 10px margin, minimum height 100px
+      maxDropdownHeight = Math.max(spaceBelow - MARGIN, MIN_HEIGHT)
     } else {
-      this.dropdownPosition = 'top'
-      maxDropdownHeight = Math.max(spaceAbove - MARGIN, MIN_HEIGHT) // 10px margin, minimum height 100px
+      maxDropdownHeight = Math.max(spaceAbove - MARGIN, MIN_HEIGHT)
     }
 
     this.renderer.setStyle(dropdownList, 'max-height', `${maxDropdownHeight}px`)
+    this.renderer.setStyle(dropdownList, 'overflow-y', 'auto')
   }
 }
