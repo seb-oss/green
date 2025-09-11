@@ -53,6 +53,10 @@
     width: 100%;
     overscroll-behavior: none;
 
+    &.use-margin {
+      margin-top: 0.5rem 0rem;
+    }
+
     @include common.padding-bottom(0);
     @include common.add-border();
     @include common.add-border-color(var(--text-primary-color));

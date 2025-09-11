@@ -141,6 +141,9 @@ const Template: StoryFn<NggvDropdownComponent> = (args: any) => {
         <div style="margin-top: 1rem">
           <button type="button" class="gds-button" (click)="disableFn()">Toggle disable control</button>
         </div>
+        <div style="margin-top: 1rem; background: #fff3cd; color: #856404; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+          ⚠️ <b>Note:</b> For a dropdown list to work correctly in your app or MFE, you must import <code>&#64;angular/cdk/overlay-prebuilt.css</code> in your global stylesheet.
+        </div>
       </div>`,
     props: {
       ...args,

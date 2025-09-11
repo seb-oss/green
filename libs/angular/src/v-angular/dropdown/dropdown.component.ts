@@ -1,43 +1,25 @@
-import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
-import {
-  ConnectedPosition,
-  Overlay,
-  OverlayRef,
-  ScrollStrategy,
-} from '@angular/cdk/overlay'
-import { TemplatePortal } from '@angular/cdk/portal'
-import {
-  ChangeDetectorRef,
-  Component,
-  ContentChild,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Optional,
-  Output,
-  Self,
-  SimpleChanges,
-  TemplateRef,
-  ViewChild,
-  ViewContainerRef,
-} from '@angular/core'
-import { NgControl } from '@angular/forms'
-import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco'
-import { fromEvent, Subscription } from 'rxjs'
 
-import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor'
-import {
-  DropdownUtils,
-  Option,
-  OptionBase,
-  OptionGroup,
-} from '@sebgroup/green-angular/src/v-angular/core'
+
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js';
+
+
+
+import { ConnectedPosition, Overlay, OverlayRef, ScrollStrategy } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import { ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, HostBinding, HostListener, Inject, Input, OnChanges, OnDestroy, Optional, Output, Self, SimpleChanges, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
+import { NgControl } from '@angular/forms';
+import { TRANSLOCO_SCOPE, TranslocoScope } from '@jsverse/transloco';
+import { fromEvent, Subscription } from 'rxjs';
+
+
+
+import { NggvBaseControlValueAccessorComponent } from '@sebgroup/green-angular/src/v-angular/base-control-value-accessor';
+import { DropdownUtils, Option, OptionBase, OptionGroup } from '@sebgroup/green-angular/src/v-angular/core';
+
+
+
+
 
 /**
  * A dropdown allows the user to select an option from a list.
@@ -189,7 +171,7 @@ export class NggvDropdownComponent<
    * Stores the bounding rectangle of the dropdown trigger element,
    * used for positioning the dropdown list overlay.
    */
-  public triggerRect: DOMRect | null = null
+  public triggerRect: DOMRect | undefined = undefined
   /** Subscribe if dropdown expanded to listen to click outside to close dropdown. */
   private onClickSubscription: Subscription | undefined
   /** Subscribe if dropdown expanded to listen to scroll outside to close dropdown. */

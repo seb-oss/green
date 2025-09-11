@@ -2,3 +2,6 @@
 @use '@sebgroup/chlorophyll/scss' with (
   $font-path: '@sebgroup/fonts/fonts'
 );
+
+// used for v-angular dropdown
+@import '@angular/cdk/overlay-prebuilt.css';
