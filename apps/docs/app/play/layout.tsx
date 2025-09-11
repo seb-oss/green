@@ -5,5 +5,9 @@ export default function PlayLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <Studio aside="hello">{children}</Studio>
+  return (
+    <Studio page="icons" aside="hello" title="Title" description="hello">
+      {children}
+    </Studio>
+  )
 }

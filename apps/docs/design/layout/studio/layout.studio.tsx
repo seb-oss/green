@@ -8,9 +8,13 @@ import './layout.studio.css'
 export function Studio({
   children,
   aside,
+  title,
+  description,
 }: {
   children?: React.ReactNode
   aside?: React.ReactNode
+  title: string
+  description: string
 }) {
   return (
     <Core.GdsGrid
@@ -24,7 +28,7 @@ export function Studio({
     >
       <Part.Sidebar />
       <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="4 / 13">
-        <Part.Header />
+        <Part.Header title={title} description={description} />
         <Core.GdsGrid columns="12">
           <Core.GdsCard
             flex-direction="column"

@@ -1,7 +1,3 @@
-export default function StudioPage() {
-  return (
-    <div>
-      <span>Main page contents</span>
-    </div>
-  )
+export default function nullified() {
+  return null
 }
