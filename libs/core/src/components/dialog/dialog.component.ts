@@ -166,6 +166,7 @@ export class GdsDialog extends withSizeXProps(
                   justify-content="center"
                   gap="s"
                   padding="s 0 0 0"
+                  flex-wrap="wrap"
                 >
                   <slot name="footer">
                     <gds-button
