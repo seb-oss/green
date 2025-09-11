@@ -51,7 +51,7 @@ export class GdsDialog extends withSizeXProps(
   withSizeYProps(withPaddingProps(GdsElement)),
 ) {
   static styles = [DialogStyles]
-  static styleExpressionBaseSelector = '.card'
+  static styleExpressionBaseSelector = 'dialog'
 
   /**
    * Whether the dialog is open. The state of the dialog can be controlled either
