@@ -6,11 +6,13 @@ import * as Part from './parts'
 import './layout.studio.css'
 
 export function Studio({
+  page,
   children,
   aside,
   title,
   description,
 }: {
+  page: string
   children?: React.ReactNode
   aside?: React.ReactNode
   title: string
