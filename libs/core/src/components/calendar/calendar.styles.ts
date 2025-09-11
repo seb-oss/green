@@ -24,7 +24,7 @@ const style = css`
         border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
       }
 
-      @media (max-width: 400px) {
+      @media (max-width: 364px) {
         border-spacing: var(--gds-sys-space-2xs);
 
         thead th {
@@ -169,7 +169,7 @@ const style = css`
           outline-offset: 3.75px;
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 364px) {
           width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
           font: var(--gds-sys-text-body-book-s);
