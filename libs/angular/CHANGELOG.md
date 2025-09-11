@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.3.0
+
+### Minor Changes
+
+- bfda3a6: V-Angular Dropdown: move dropdown list to CDK portal
+
+### Patch Changes
+
+- Updated dependencies [33b3aa0]
+- Updated dependencies [33b3aa0]
+  - @sebgroup/green-core@2.5.2
+
 ## 6.2.1
 
 ### Patch Changes
