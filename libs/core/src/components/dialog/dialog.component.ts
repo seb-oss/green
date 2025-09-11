@@ -228,17 +228,23 @@ export class GdsDialog extends withSizeXProps(
   }
 
   #dispatchCloseEvent = (reason?: string) => {
-    this.dispatchCustomEvent('gds-close', {
-      detail: reason,
-    })
-    return this.#dispatchUiStateEvent(reason)
+    if (this.#dispatchUiStateEvent(reason)) {
+      this.dispatchCustomEvent('gds-close', {
+        detail: reason,
+      })
+      return true
+    }
+    return false
   }
 
   #dispatchShowEvent = (reason?: string) => {
-    this.dispatchCustomEvent('gds-show', {
-      detail: reason,
-    })
-    return this.#dispatchUiStateEvent(reason)
+    if (this.#dispatchUiStateEvent(reason)) {
+      this.dispatchCustomEvent('gds-show', {
+        detail: reason,
+      })
+      return true
+    }
+    return false
   }
 
   #dispatchUiStateEvent = (reason?: string) => {
