@@ -140,6 +140,7 @@ export class GdsDialog extends withSizeXProps(
               box-shadow="xl"
               gap="l"
               border-radius="s"
+              max-width="100%"
             >
               <slot name="dialog">
                 <gds-flex justify-content="space-between">
