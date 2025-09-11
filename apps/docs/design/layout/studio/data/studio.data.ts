@@ -1,13 +1,22 @@
 import * as Core from '@sebgroup/green-core/react'
 
+interface Content {
+  key: string
+  title: string
+  description: string
+  value: string
+}
+
 export interface StudioPage {
   key: string
+  type: string
   slug: string
   label: string
   title: string
   description: string
   icon: keyof typeof Core
   category: string
+  content?: Content[]
 }
 
 export interface StudioCategory {
@@ -27,6 +36,7 @@ export const studioData: StudioCategory[] = [
         key: 'icons',
         slug: '/play/icons',
         label: 'Icons',
+        type: 'assets',
         title: 'Icon Library',
         description: 'Browse and use our collection of icons',
         icon: 'IconShapes',
@@ -34,6 +44,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'compose',
+        type: 'tool',
         slug: '/play/compose',
         label: 'Compose',
         title: 'Component Composer',
@@ -50,6 +61,7 @@ export const studioData: StudioCategory[] = [
     pages: [
       {
         key: 'colors',
+        type: 'tokens',
         slug: '/play/colors',
         label: 'Colors',
         title: 'Color System',
@@ -59,6 +71,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'spacing',
+        type: 'tokens',
         slug: '/play/spacing',
         label: 'Spacing',
         title: 'Spacing System',
@@ -68,6 +81,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'typography',
+        type: 'tokens',
         slug: '/play/typography',
         label: 'Typography',
         title: 'Typography System',
@@ -77,6 +91,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'radius',
+        type: 'tokens',
         slug: '/play/radius',
         label: 'Radius',
         title: 'Border Radius',
@@ -86,6 +101,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'shadows',
+        type: 'tokens',
         slug: '/play/shadows',
         label: 'Shadows',
         title: 'Shadow System',
@@ -95,6 +111,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'viewport',
+        type: 'tokens',
         slug: '/play/viewport',
         label: 'Viewport',
         title: 'Viewport Breakpoints',
@@ -104,6 +121,7 @@ export const studioData: StudioCategory[] = [
       },
       {
         key: 'motion',
+        type: 'tokens',
         slug: '/play/motion',
         label: 'Motion',
         title: 'Motion System',
