@@ -12,6 +12,10 @@ Before you begin, make sure you have the latest feature/patch version of your cu
 
 ## 1.90.2 to 2.x.x
 
+This release contains several updates and refinements related to the design tokens and declarative layout system. A lot of work has gone into aligning things between code and design (Figma), in order to make the design and development process as seamless as possible for everyone.
+
+Many of the breaking changes relates to how tokens are named and used, but we also took the opporutinity to remove some old deprecations and implement some much needed refactorings.
+
 - **Badge:** Removed disabled property in favor for making it a variant.
   - **Migration step:** use `<gds-badge variant="disabled">` instead of `<gds-badge disabled>`
 - **Badge:** There is no positive variant of the notification property of the badge
@@ -23,20 +27,22 @@ Before you begin, make sure you have the latest feature/patch version of your cu
 - **Colors:** Overhaul of color tokens structure and naming conventions.
   - **Migration step:** Many of the color tokens used for `color`, `background`, `border-color`, and similar properties that accepts color tokens, have changed names. Refer to cheat sheet below for how to update the most commonly used colors.
 - **Container:** Removed `gds-container`
-   - **Migration step:** Use `gds-div` instead.
+  - **Migration step:** Use `gds-div` instead.
+- **Dialog:** Removed overflow style by default.
+  - **Migration step:** If you were relying on the overflow behavior for long content to be scrollable, you now need to add overflow styles to the slotted element instead. For example, wrap the content in a `<gds-div>` with overflow and height set.
 - **Divider:** Removed levels from Divider since it's no longer relevant due to border lot being a part of the levels structure.
   - **Migration step:** If you have been using the levels prop to control the color you should now insted use the color prop to set the possible colors on the divider. See color documentation to see possible border colors.
 - **Font:** `font-size` changed to `font`, and font tokens updated.
   - **Migration step:** Change all occurences of the `font-size` style expression property and replace with font. Add font-weight to token name. Example: `<gds-text font-size="body-m">` --> `<gds-text font="body-regular-m">`
-  - **Note:** Because the `font` shorthand property includes the `font-family` property, components now expect the `Seb SansSerif GDS` font-family to be present, whereas before they just inherited `font-family` from higher in the document. Make sure you import the `Seb SansSerif GDS` font from the `@sebgroup/fonts` package and include the font declaration CSS from there.
+  - **Note:** Because the `font` shorthand property includes the `font-family` property, components now expect the `SEB SansSerif GDS` font-family to be present, whereas before they just inherited `font-family` from higher in the document. Make sure you import the `SEB SansSerif GDS` font from the `@sebgroup/fonts` package and include the font declaration CSS from there.
 - **Icon:** Removed deprecated `width` and `height` properties.
-   - **Migration step:** Use the `size` property instead.
+  - **Migration step:** Use the `size` property instead.
 - **Spacer:** Removed `gds-spacer`
-   - **Migration step:** Use `gds-div` instead, and set height using the `height` property.
+  - **Migration step:** Use `gds-div` instead, and set height using the `height` property.
 - **Theme:** Default design-version of `gds-theme` is changed to `2023`
-   - **Migration step:** To keep 2016 style, set the design-version attribute to "2016" explicitly.
+  - **Migration step:** To keep 2016 style, set the design-version attribute to "2016" explicitly.
 - **Theme:** `gds-theme` now sets the `color` CSS property by default.
-    - **Migration step:** If you were relying on inheriting `color` from higher in the document, you need to override this now by setting the `color` CSS property explicitly.
+  - **Migration step:** If you were relying on inheriting `color` from higher in the document, you need to override this now by setting the `color` CSS property explicitly.
 
 ### Color token migration cheat-sheet for the most commonly used colors
 

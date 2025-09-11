@@ -63,6 +63,13 @@ export const forSpaceTokens: StyleExpressionPropertyOptions = {
 }
 
 /**
+ * Create options for style expression properties that expect radius tokens.
+ */
+export const forRadiusTokens: StyleExpressionPropertyOptions = {
+  valueTemplate: (value: string) => `var(--gds-sys-radius-${value}, 0)`,
+}
+
+/**
  * Create options for style expression properties that expect space tokens.
  */
 export const forSpaceTokensAndCustomValues: StyleExpressionPropertyOptions = {

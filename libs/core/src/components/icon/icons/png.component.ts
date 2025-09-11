@@ -1,0 +1,21 @@
+import { gdsCustomElement } from '../../../scoping'
+import { GdsIcon } from '../icon'
+
+/**
+ * @element gds-icon-png
+ */
+@gdsCustomElement('gds-icon-png')
+export class IconPng extends GdsIcon {
+  /** @private */
+  static _regularSVG = `<path d="M4.75 11.25V3.75H15L19.25 8V11.25" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.75 20.25V14.75H5.5C6.32843 14.75 7 15.4216 7 16.25C7 17.0784 6.32843 17.75 5.5 17.75H4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.5 20.25V14.75H10L13.25 20.25H13.75V14.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.6961 15.2215C19.3191 14.8448 18.6504 14.7533 18.251 14.7782C17.1463 14.8473 16.1554 15.9981 16.1554 17.5608C16.1554 19.1236 17.0973 20.2499 18.4001 20.2499C19.0459 20.2418 19.8065 20.0485 20.25 19.5537V17.8333H19.1961" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.75 4.25V9.25H18.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`
+  /** @private */
+  static _solidSVG = `<path d="M13 3H4.75C4.33579 3 4 3.33579 4 3.75V12H20V10H13.75C13.3358 10 13 9.66421 13 9.25V3Z" fill="currentColor"/><path d="M20 8.5V8C20 7.80109 19.921 7.61032 19.7803 7.46967L15.5303 3.21967C15.3897 3.07902 15.1989 3 15 3H14.5V8.5H20Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M18.798 15.5765C18.614 15.5299 18.4251 15.5189 18.2978 15.5269C17.7041 15.564 16.9054 16.2667 16.9054 17.561C16.9054 18.8392 17.6295 19.4975 18.3957 19.5C18.8281 19.4938 19.2307 19.3873 19.5 19.2133V18.5834H19.1961C18.7819 18.5834 18.4461 18.2476 18.4461 17.8334C18.4461 17.4192 18.7819 17.0834 19.1961 17.0834H20.25C20.6642 17.0834 21 17.4192 21 17.8334V19.5538C21 19.7386 20.9318 19.9168 20.8085 20.0544C20.1617 20.7761 19.1466 20.9908 18.4095 20.9999L18.4001 21.0001C16.5623 21.0001 15.4054 19.4058 15.4054 17.561C15.4054 15.7297 16.5885 14.1308 18.2043 14.0298C18.4763 14.0128 18.8215 14.0351 19.1659 14.1223C19.5045 14.2079 19.9079 14.373 20.2262 14.691C20.5192 14.9837 20.5195 15.4586 20.2267 15.7516C19.934 16.0447 19.4591 16.0449 19.166 15.7522C19.1074 15.6935 18.9879 15.6245 18.798 15.5765Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3 14.75C3 14.3358 3.33579 14 3.75 14H5.5C6.74264 14 7.75 15.0074 7.75 16.25C7.75 17.4926 6.74264 18.5 5.5 18.5H4.5V20.25C4.5 20.6642 4.16421 21 3.75 21C3.33579 21 3 20.6642 3 20.25V14.75ZM4.5 17H5.5C5.91421 17 6.25 16.6642 6.25 16.25C6.25 15.8358 5.91421 15.5 5.5 15.5H4.5V17Z" fill="currentColor"/><path fill-rule="evenodd" clip-rule="evenodd" d="M8.75 14.75C8.75 14.3358 9.08579 14 9.5 14H10C10.2652 14 10.5108 14.1401 10.6457 14.3685L13 18.3527V14.75C13 14.3358 13.3358 14 13.75 14C14.1642 14 14.5 14.3358 14.5 14.75V20.25C14.5 20.6642 14.1642 21 13.75 21H13.25C12.9848 21 12.7392 20.8599 12.6043 20.6315L10.25 16.6473V20.25C10.25 20.6642 9.91421 21 9.5 21C9.08579 21 8.75 20.6642 8.75 20.25V14.75Z" fill="currentColor"/>`
+  /** @private */
+  static _name = 'png'
+  /** @private */
+  static _width = 24
+  /** @private */
+  static _height = 24
+  /** @private */
+  static _viewBox = '0 0 24 24'
+}

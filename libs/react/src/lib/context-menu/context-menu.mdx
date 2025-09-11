@@ -1,8 +1,15 @@
 import { Meta, Canvas, Markdown } from '@storybook/blocks'
 import { ContextMenu, MenuItem } from './context-menu'
 import * as ContextMenuStories from './context-menu.stories'
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 <Meta of={ContextMenuStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Context Menu is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-context-menu--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Context Menu
 

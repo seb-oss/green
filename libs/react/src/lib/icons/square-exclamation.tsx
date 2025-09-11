@@ -5,7 +5,7 @@ import { IconProps } from '../../types/props'
 
 /**
  * @deprecated
- * This component is deprecated. Use `SquareExclamation` instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use `gds-icon-square-exclamation` instead from `@sebgroup/green-core`.
  */
 export const SquareExclamation = ({
   focusable = false,

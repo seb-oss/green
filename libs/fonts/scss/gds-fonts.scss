@@ -1,6 +1,6 @@
 /*!
- *  SEB SansSerif GDS
+ *  @deprecated
  */
 
-@import 'variables';
-@import 'SEB-SansSerif-GDS';
+@forward 'variables';
+@use 'SEB-SansSerif';

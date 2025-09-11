@@ -1,9 +1,20 @@
 const path = require('node:path')
 const { hashElement } = require('folder-hash')
 const replace = require('replace-in-file')
+const packageJson = require(path.join(__dirname, '../package.json'))
 
 const options = {
   encoding: 'hex',
+}
+
+console.log('Setting semanticVersion...')
+const results = replace.sync({
+  files: 'dist/libs/core/src/**/*.js',
+  from: /__GDS_SEM_VER__/g,
+  to: packageJson.version,
+})
+if (process.env.NX_VERBOSE_LOGGING == 'true') {
+  console.log('Replacement results:', results)
 }
 
 console.log('Generating scope suffix...')

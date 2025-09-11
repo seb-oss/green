@@ -143,7 +143,7 @@ const style = css`
   */
   img {
     display: block;
-    border-radius: var(--gds-sys-space-xs);
+    border-radius: var(--gds-sys-radius-xs);
   }
 
   figure {
@@ -166,7 +166,7 @@ const style = css`
     border-spacing: 0;
     width: 100%;
     border: var(--default-border);
-    border-radius: var(--gds-sys-space-s);
+    border-radius: var(--gds-sys-radius-s);
     margin-top: var(--gds-sys-space-xl);
   }
 
@@ -225,7 +225,7 @@ const style = css`
   }
 
   summary:focus-visible {
-    border-radius: var(--gds-sys-space-2xs);
+    border-radius: var(--gds-sys-radius-2xs);
   }
 
   details:hover summary {
@@ -282,7 +282,7 @@ const style = css`
   */
   iframe {
     border: var(--gds-sys-space-4xs) solid var(--gds-sys-color-border-subtle-01);
-    border-radius: var(--gds-sys-space-xs);
+    border-radius: var(--gds-sys-radius-xs);
     min-width: 100%;
     margin-bottom: var(--gds-sys-space-l);
   }

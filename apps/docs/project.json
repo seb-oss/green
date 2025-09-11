@@ -14,9 +14,9 @@
         "staticExport": true,
         "assets": [
           {
-            "input": "libs/fonts/fonts/SEBSansSerifGDS",
+            "input": "libs/fonts/fonts/SEBSansSerif",
             "glob": "**/*.woff2",
-            "output": "./fonts/SEBSansSerifGDS"
+            "output": "./fonts/SEBSansSerif"
           }
         ]
       },

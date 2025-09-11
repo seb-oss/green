@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, Controls } from '@storybook/blocks'
 import { Select, Option, OptionGroup } from './select'
 import * as SelectStories from './select.stories';
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const Template = ({ children, ...props }) => (
   <Select {...props}>{children}</Select>
@@ -11,6 +12,12 @@ export const Template = ({ children, ...props }) => (
 Select component.
 
 <Meta of={SelectStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Select is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-select--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 <Canvas of={SelectStories.WithOptions} />
 

@@ -1,5 +1,49 @@
 # Changelog
 
+## 2.5.1
+
+### Patch Changes
+
+- 1b85201: **Typography:** Add fallbacks to `font-family`
+
+## 2.5.0
+
+### Minor Changes
+
+- 79fc2dd: **Dialog:** Add `scrollable` prop
+
+### Patch Changes
+
+- bfdb344: **Div:** Chage `border-radius` tokens from spacing to radius.
+
+## 2.4.1
+
+### Patch Changes
+
+- 04734c3: **Dropdown:** Fix small variant font-size and change to rounded counter badge
+
+## 2.4.0
+
+### Minor Changes
+
+- 1969060: **GdsElement:** Add `semanticVersion` debug property
+
+## 2.3.0
+
+### Minor Changes
+
+- 798af05: **Icon:** Add feedback emoji/icons
+
+### Patch Changes
+
+- 3b18c2d: Datepicker: Improved screen reader text for the buttons
+
+## 2.2.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** Add 28 new icons
+
 ## 2.1.0
 
 ### Minor Changes

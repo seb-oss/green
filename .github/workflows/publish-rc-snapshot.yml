@@ -4,13 +4,18 @@ on:
   pull_request:
     branches:
       - 'main'
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull Request number to comment on when manually triggered'
+        required: true
+        type: string
 
 jobs:
   release-snapshot:
+    # Only run this job when manually triggered, or when a PR titled "Version Packages" targets main
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && contains(github.event.pull_request.title, 'Version Packages'))
     runs-on: ubuntu-latest
-
-    ## Only run this job if the PR title is "Version Packages"
-    if: contains(github.event.pull_request.title, 'Version Packages')
 
     steps:
       - name: Get token
@@ -74,12 +79,17 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Comment status
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request'
         uses: actions/github-script@v4
         with:
           github-token: ${{ steps.get_token.outputs.token }}
           script: |
+            const prNumber = github.event_name === 'workflow_dispatch' 
+              ? inputs.pr_number 
+              : context.issue.number;
+
             github.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: prNumber,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `Hello! New release candidate snapshots published to NPM! :rocket: :package: :tada:

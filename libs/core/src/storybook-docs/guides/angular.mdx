@@ -19,6 +19,8 @@ In addition to the schema, you also need a way to handle Green Core's [element n
 
 The renderer is the most convenient way to use Green Core components with Angular, but the directive can provide more explicit control when needed, or should the renderer conflict with other custom renderers, or cause any other unexpected side effects.
 
+With both the renderer and the directive, you can provide a local reference of the `getScopedTagName` function from `@sebgroup/green-core/scoping`. By doing that, you ensure that the scope resolver comes from the same package version that you import the components from.
+
 ### Using `NggCoreRenderer`
 
 The `NggCoreRenderer` is a custom renderer that automatically applies scoping to all Green Core elements in your template. It does this by overriding the call to `document.createElement()` and applying the scoping suffix to the element names before creation. This is the easiest way to use Green Core components in your Angular application.
@@ -28,10 +30,11 @@ The `NggCoreRenderer` is a custom renderer that automatically applies scoping to
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { provideCoreRenderer } from '@sebgroup/green-angular/src/lib/shared'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
-    // Provides `NggCoreRenderer` as a custom renderer
-    providers: [provideCoreRenderer()],
+    // Provides `NggCoreRenderer` as a custom renderer, with a local reference to the `getScopedTagName` function
+    providers: [provideCoreRenderer(getScopedTagName)],
     // CUSTOM_ELEMENTS_SCHEMA is still needed
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -42,7 +45,7 @@ Or, if you are only using standalone components, you can either create a root ap
 ```ts
 // app.config.ts
 const appConfig: ApplicationConfig = {
-  providers: [...other providers..., provideCoreRenderer()]
+  providers: [...other providers..., provideCoreRenderer(getScopedTagName)],
 };
 
 // main.ts
@@ -66,10 +69,11 @@ All you need to do on your end is to use `provideCoreRendererWithAnimations()` i
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { provideCoreRendererWithAnimations } from '@sebgroup/green-angular/src/lib/shared'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
     imports: [BrowserAnimationsModule] // You also need to make sure you have imported the `BrowserAnimationsModule` module
-    providers: [provideCoreRendererWithAnimations()],
+    providers: [provideCoreRendererWithAnimations(getScopedTagName)],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 ```
@@ -82,11 +86,19 @@ The `NggCoreWrapperModule` is a module that provides a directive, `*nggCoreEleme
 
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
-import { NggCoreWrapperModule } from '@sebgroup/green-angular/src/lib/shared'
+import { NggCoreWrapperModule, SCOPE_RESOLVER } from '@sebgroup/green-angular/src/lib/shared'
+import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 @NgModule({
     // Add the NggCoreWrapperModule to the `imports` array
     imports: [NggCoreWrapperModule],
+    // Optional, but recommended, provide a local reference to the `getScopedTagName` function
+    providers: [
+        {
+          provide: SCOPE_RESOLVER,
+          useValue: { getScopedTagName },
+        },
+      ],
     // Add the CUSTOM_ELEMENTS_SCHEMA to the `schemas` array
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

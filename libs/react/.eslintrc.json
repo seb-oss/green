@@ -1,6 +1,6 @@
 {
   "extends": ["plugin:@nx/react", "../../.eslintrc.json"],
-  "ignorePatterns": ["!**/*", "storybook-static"],
+  "ignorePatterns": ["!**/*", "**/*.stories.*", "storybook-static"],
   "rules": {
     "no-console": "error"
   },

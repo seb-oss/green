@@ -1,5 +1,34 @@
 # Changelog
 
+## 3.32.1
+
+### Patch Changes
+
+- 43c34a3: **Deprecations:** Add inline deprecation warnings to outdated components
+
+## 3.32.0
+
+### Minor Changes
+
+- 798af05: **Icon:** React wrapper for feedback emoji/icons
+
+### Patch Changes
+
+- Updated dependencies [798af05]
+- Updated dependencies [3b18c2d]
+  - @sebgroup/green-core@2.3.0
+
+## 3.31.0
+
+### Minor Changes
+
+- 0339d24: **Icon:** React wrappers for 28 new icons
+
+### Patch Changes
+
+- Updated dependencies [0339d24]
+  - @sebgroup/green-core@2.2.0
+
 ## 3.30.1
 
 ### Patch Changes

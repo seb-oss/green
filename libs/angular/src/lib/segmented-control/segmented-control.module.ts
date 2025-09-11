@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router'
 
 import { NggSegmentedControlComponent } from './segmented-control.component'
 
+/**
+ * @deprecated use the segmented control from green-core instead.
+ */
 @NgModule({
   declarations: [NggSegmentedControlComponent],
   imports: [RouterModule, CommonModule],

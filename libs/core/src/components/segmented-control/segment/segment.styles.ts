@@ -10,7 +10,7 @@ const style = css`
     button {
       appearance: none;
       background: transparent;
-      border-radius: var(--gds-sys-space-max);
+      border-radius: var(--gds-sys-radius-max);
       border-width: 0;
       color: var(--gds-sys-color-content-neutral-01);
       cursor: pointer;

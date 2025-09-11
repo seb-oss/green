@@ -62,7 +62,7 @@ const style = css`
         border-width: var(--gds-sys-space-3xs);
         border-style: solid;
         border-color: transparent;
-        border-radius: var(--gds-sys-space-max);
+        border-radius: var(--gds-sys-radius-max);
         transition: background 0.2s;
         outline-style: solid;
         outline-color: transparent;
@@ -168,7 +168,7 @@ const style = css`
         position: absolute;
         width: var(--gds-sys-space-xs);
         height: var(--gds-sys-space-xs);
-        border-radius: var(--gds-sys-space-max);
+        border-radius: var(--gds-sys-radius-max);
         background: var(--gds-sys-color-l3-neutral-01);
         inset: calc(100% + var(--gds-sys-space-xs))
           calc(50% - var(--gds-sys-space-xs) / 2) auto auto;

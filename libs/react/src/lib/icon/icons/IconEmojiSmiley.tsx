@@ -1,0 +1,1 @@
+export { IconEmojiSmiley } from '@sebgroup/green-core/react';
