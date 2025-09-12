@@ -120,6 +120,8 @@ const notTomorrowValidator = (control: AbstractControl) => {
 const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
   const dateFc = new UntypedFormControl(args.ngModel)
 
+  console.log(args)
+
   dateFc.valueChanges.subscribe((val) => {
     console.log('control value:', val)
   })
@@ -130,6 +132,7 @@ const PrimaryTemplate: StoryFn<DateStoryArgs & any> = (args) => {
     <nggv-dateinput
       [label]="label"
       [locale]="locale"
+      [dateFormat]="dateFormat"
       [dateLocale]="dateLocale"
       [disableDates]="disableDates"
       [disableWeekDays]="disableWeekDays"
@@ -165,6 +168,7 @@ const TemplateWithSelected: StoryFn<DateStoryArgs> = (args) => {
     <nggv-dateinput
       [label]="label"
       [dateLocale]="dateLocale"
+      [dateFormat]="dateFormat"
       [locale]="locale"
       [disableDates]="disableDates"
       [disableWeekDays]="disableWeekDays"
@@ -211,6 +215,7 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
         <nggv-dateinput
           [label]="label"
           [locale]="locale"
+          [dateFormat]="dateFormat"
           [disableDates]="disableDates"
           [disableWeekDays]="disableWeekDays"
           [required]="required"
@@ -230,6 +235,7 @@ const TemplateWithFormControl: StoryFn<DateStoryArgs & any> = (
       <div style="display: flex; justify-items: space-between; margin-top: 1rem">
         <button class="gds-button gds-button-alternative" type="button" (click)="resetCtrl()">Reset input</button>
         <button class="gds-button" type="button" (click)="disableFn()">Toggle disable control</button>
+        {{ formControl.value | json }}
       </div>
     `,
     props: {
@@ -265,6 +271,8 @@ const TemplateWithFormGroup: StoryFn<DateStoryArgs & any> = (
         <nggv-dateinput formControlName="dateControl"
           [label]="label"
           [disableDates]="disableDates"
+          [dateFormat]="dateFormat"
+          [defaultValue]="defaultValue"
           [disableWeekDays]="disableWeekDays"
           [required]="required"
           [invalid]="invalid"
@@ -276,6 +284,7 @@ const TemplateWithFormGroup: StoryFn<DateStoryArgs & any> = (
           >
         </nggv-dateinput>
       </div>
+      {{ formGroup.controls.dateControl.value | json }}
       <div style="margin-bottom: 0.5rem" [formGroup]="formGroup">
         <label class="gds-field-label">Other input label</label>
         <input class="gds-field" formControlName="textControl">
@@ -454,13 +463,14 @@ Primary.args = {
 export const WithFormControl = TemplateWithFormControl.bind({})
 WithFormControl.args = {
   ...Primary.args,
-  defaultValue: new Date().toISOString(),
+  dateFormat: 'dd/mm/yyyy',
 }
 
 export const WithFormGroup = TemplateWithFormGroup.bind({})
 WithFormGroup.args = {
   ...Primary.args,
   defaultValue: new Date().toISOString(),
+  dateFormat: 'dd/mm/yyyy',
 }
 
 export const InEnglish = AltTemplate.bind({})
@@ -563,4 +573,10 @@ export const DoNotCloseCalendarOnEscClick = PrimaryTemplate.bind({})
 DoNotCloseCalendarOnEscClick.args = {
   ...Primary.args,
   closeCalendarOnEscape: false,
+}
+
+export const CustomDateFormat = PrimaryTemplate.bind({})
+CustomDateFormat.args = {
+  ...Primary.args,
+  dateFormat: 'dd/mm/yyyy',
 }

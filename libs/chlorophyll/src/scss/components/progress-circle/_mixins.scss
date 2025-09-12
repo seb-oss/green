@@ -1,0 +1,55 @@
+$variants: (
+  'success': (
+    background: var(--gds-sys-color-dark-green-1),
+  ),
+  'warning': (
+    background: var(--gds-sys-color-yellow),
+  ),
+  'info': (
+    background: var(--gds-sys-color-blue),
+  ),
+  'danger': (
+    background: var(--gds-sys-color-dark-red-2),
+  ),
+  'light': (
+    background: var(--gds-sys-color-base-200),
+  ),
+  'dark': (
+    background: var(--gds-sys-color-base-800),
+  ),
+  'disabled': (
+    background: var(--gds-sys-color-base-500),
+  ),
+);
+
+@mixin background-variant($background) {
+  background: #{$background};
+}
+
+@mixin use-circle($input, $absolute: true) {
+  width: $input;
+  height: $input;
+  border-radius: 50%;
+
+  @if ($absolute) {
+    position: absolute;
+  }
+}
+
+@mixin use-animation() {
+  animation: progressing ease-out 0.7s;
+  transform: rotate(var(--end-value));
+  transition:
+    transform ease-out 0.7s,
+    background-color 0.7s;
+
+  @keyframes progressing {
+    0% {
+      transform: rotate(var(--start-value));
+    }
+
+    100% {
+      transform: rotate(var(--end-value));
+    }
+  }
+}

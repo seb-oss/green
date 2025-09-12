@@ -1,0 +1,5 @@
+@use './mixins';
+
+.gds-breadcrumb {
+  @include mixins.add-breadcrumb;
+}

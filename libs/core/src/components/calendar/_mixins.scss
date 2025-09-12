@@ -1,11 +1,10 @@
 @use 'sass:map';
-@use '../../../../chlorophyll/scss/common';
+@use '../../../../chlorophyll/src/scss/common';
 
-$background: var(--sg-bg-level-2);
-$dialog-border-color: hsl(var(--sg-hsl-blue-1));
-$border-color: var(--sg-grey-300);
-$box-shadow: var(--sg-modal-box-shadow);
-$z-index: var(--sg-z-index-datepicker);
+$background: var(--gds-sys-color-background-primary);
+$border-color: var(--gds-sys-color-base-300);
+$box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
+$z-index: var(--gds-z-index-datepicker);
 
 $border-radius: 4px;
 $date-border-radius: $border-radius;
@@ -16,8 +15,8 @@ $day-weight: 400; /* regular */
 $disabled-weight: 400; /* regular */
 
 /* hover */
-$hover-color: var(--gds-sys-color-font);
-$hover-background: var(--grey-500);
+$hover-color: var(--gds-sys-color-text-primary);
+$hover-background: var(--gds-sys-color-base-300);
 $hover-border-radius: $border-radius;
 
 /* focus */
@@ -26,15 +25,12 @@ $focus-background: $hover-background;
 $focus-border-radius: $hover-border-radius;
 
 /* selected */
-$selected-color: hsl(var(--sg-hsl-white));
-$selected-background: var(--grey-1000);
-$selected-range-background: hsla(var(--sg-hsl-blue-2), 0.5);
+$selected-color: var(--gds-sys-color-text-inverted);
+$selected-background: var(--gds-sys-color-base-800);
 $selected-border-radius: $border-radius;
 $selected-range-border-radius: 0;
 
 /* highlighted */
-$highlighted-color: hsl(var(--sg-hsl-white));
-$highlighted-background: hsl(var(--sg-hsl-blue-2));
 $highlighted-border-radius: $border-radius;
 
 /* active */
@@ -43,9 +39,9 @@ $active-background: $selected-background;
 $active-border-radius: $selected-border-radius;
 
 /* disabled */
-$disabled-color: hsl(var(--sg-hsl-disabled-color));
-$disabled-weekend-color: hsla(var(--sg-hsl-red-2), 0.25);
-$disabled-background: hsl(var(--sg-hsl-disabled-background));
+$disabled-color: var(--gds-sys-color-text-disabled);
+$disabled-weekend-color: var(--gds-sys-color-text-error);
+$disabled-background: var(--gds-sys-color-base-200);
 
 /* today */
 $today-color: $selected-background;
@@ -53,7 +49,7 @@ $today-border-radius: $selected-border-radius;
 $today-background: transparent;
 
 /* weekend */
-$weekend-color: hsl(var(--sg-hsl-red-2));
+$weekend-color: var(--gds-sys-color-text-error);
 $weekend-background: $background;
 
 @mixin calendar() {

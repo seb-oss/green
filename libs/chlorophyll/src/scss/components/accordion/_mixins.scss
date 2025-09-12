@@ -1,0 +1,107 @@
+@use '../../tokens';
+
+@mixin add-accordion() {
+  border-bottom: 0.0625rem solid var(--gds-sys-color-base-400);
+
+  & > div {
+    border-top: 0.0625rem solid var(--gds-sys-color-base-400);
+
+    svg {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    &:has(button[aria-expanded='true']) {
+      background-color: var(--gds-sys-color-base-100);
+
+      & button:hover {
+        background-color: var(--gds-sys-color-base-300);
+      }
+
+      svg {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+
+  & > div > :is(h1, h2, h3, h4, h5, h6, [role='heading']) {
+    margin: 0;
+    padding: 0;
+
+    > button {
+      width: 100%;
+      border: none;
+      text-align: left;
+      flex-direction: column;
+      background-color: transparent;
+      padding: 1rem 5rem 1rem 1rem;
+      border-radius: var(--gds-sys-shape-corner-none);
+      color: var(--gds-sys-color-text-primary);
+      position: relative;
+
+      > span {
+        display: block;
+        width: 100%;
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+
+      > span + span {
+        font-weight: 400;
+      }
+
+      svg {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        transition: transform var(--gds-sys-transition);
+        path {
+          fill: currentColor;
+        }
+      }
+
+      &:not([aria-expanded='true']):hover {
+        background-color: var(--gds-sys-color-base-200);
+        color: var(--gds-sys-color-base-800);
+      }
+    }
+  }
+
+  [role='region'] {
+    overflow: hidden;
+    line-height: 1.5rem;
+    transition: height var(--gds-sys-transition);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
+    > div {
+      padding: 0 1rem 1rem 1rem;
+      max-width: 75ch;
+
+      > *:not(:last-child) {
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  @supports (-moz-appearance: none) {
+    > h1,
+    > h2,
+    > h3,
+    > h4,
+    > h5,
+    > h6,
+    > [role='heading'] {
+      margin: 0;
+      padding: 0;
+
+      > button {
+        width: 100%;
+        border: none;
+        text-align: left;
+      }
+    }
+  }
+}

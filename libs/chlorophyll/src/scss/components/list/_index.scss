@@ -1,0 +1,28 @@
+@use 'mixins';
+
+ul.gds-list {
+  @include mixins.base-list();
+  &.bullet-list {
+    @include mixins.bullet-list();
+  }
+  &.check-list {
+    @include mixins.check-list(green);
+
+    &.primary {
+      @include mixins.check-list(black);
+    }
+  }
+}
+
+ol.gds-list {
+  @include mixins.base-list();
+  @include mixins.ordered-list();
+}
+
+.gds-table-list-caption {
+  @include mixins.table-list-caption();
+}
+
+.gds-table-list {
+  @include mixins.table-list();
+}

@@ -13,6 +13,9 @@ GdsContextMenu.define()
 GdsMenuHeading.define()
 registerTransitionalStyles()
 
+/**
+ * @deprecated Please use the `gds-context-menu` web component from green-core instead
+ */
 export const ContextMenu = createComponent({
   tagName: getScopedTagName('gds-context-menu'),
   elementClass: GdsContextMenu,

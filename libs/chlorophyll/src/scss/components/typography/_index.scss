@@ -1,0 +1,56 @@
+@use 'sass:map';
+@use 'mixins';
+@use '../../tokens/typography' as tokens;
+
+.display-01 {
+  @include mixins.add-heading-style(tokens.$display-01);
+}
+
+.gds-heading-xxl {
+  @include mixins.add-heading-style(map.get(tokens.$headings, 1));
+}
+
+.gds-rich-text h1,
+.gds-h1,
+.gds-heading-xl {
+  @include mixins.add-heading-style(map.get(tokens.$headings, 2));
+}
+
+.gds-rich-text h2,
+.gds-h2,
+.gds-heading-l {
+  @include mixins.add-heading-style(map.get(tokens.$headings, 3));
+}
+
+.gds-rich-text h3,
+.gds-h3,
+.gds-heading-m {
+  @include mixins.add-heading-style(map.get(tokens.$headings, 4));
+}
+
+.gds-rich-text h4,
+.gds-h4,
+.gds-heading-sm {
+  @include mixins.add-heading-style(map.get(tokens.$headings, 5));
+}
+
+.gds-rich-text h5,
+.gds-h5,
+.gds-rich-text h6,
+.gds-h6,
+.gds-heading-xs {
+  @include mixins.add-heading-style(map.get(tokens.$headings, 6));
+}
+
+.gds-rich-text p {
+  line-height: 1.5rem;
+}
+
+.gds-rich-text p.small,
+.gds-rich-text small {
+  @include mixins.properties(tokens.$body-02);
+}
+
+.gds-rich-text strong {
+  font-weight: tokens.font-weight('medium');
+}

@@ -5,9 +5,9 @@
   </div>
   <ng-container *ngIf="hasTextbox">
     <ng-container *ngIf="!!unitLabel">
-      <div class="group group-border group-focus">
+      <div class="gds-group gds-group--small gds-group-border gds-group-focus">
         <ng-container *ngTemplateOutlet="inputField"></ng-container>
-        <span class="form-text">{{ unitLabel }}</span>
+        <span class="gds-form-text">{{ unitLabel }}</span>
       </div>
     </ng-container>
     <ng-container *ngIf="!unitLabel">
@@ -41,6 +41,7 @@
     inputmode="numeric"
     pattern="[0-9]*"
     [(ngModel)]="value"
+    class="gds-input small"
     [class.is-invalid]="!!errorMessage"
     [attr.name]="name"
     [attr.id]="name + '-textbox'"

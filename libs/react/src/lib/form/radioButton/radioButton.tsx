@@ -23,7 +23,7 @@ export const RadioButton = forwardRef(
     )
 
     return (
-      <label htmlFor={id} className="form-control">
+      <label htmlFor={id} className="gds-form-control">
         <input
           id={id}
           type="radio"

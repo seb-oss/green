@@ -10,7 +10,6 @@ import '../card'
 import { argTablePropsFor } from '../../../.storybook/argTableProps'
 
 /**
- * @status beta
  *
  * `gds-div` is a base element in the declarative layout system.
  *
@@ -39,6 +38,14 @@ const DefaultParams: Story = {
 
 export const Default: Story = {
   ...DefaultParams,
+  args: {
+    background: '01',
+    border: '2xs',
+    'border-radius': 'm',
+    'border-color': 'subtle-01',
+    width: '4xl',
+    height: '4xl',
+  },
 }
 
 /**
@@ -55,13 +62,13 @@ export const Example: Story = {
       align-items="center"
     >
       <!-- Some properties, like 'width' and 'height', accepts either tokens or arbitrary values -->
-      <gds-div width="4xl" height="4xl" background="primary"></gds-div>
+      <gds-div width="4xl" height="4xl" background="neutral-01"></gds-div>
 
       <!-- All style expressions properties accepts multi-viewport expressions -->
       <gds-div
         width="4xl; l{ 6xl }"
         height="4xl; l{ 6xl }"
-        background="secondary"
+        background="neutral-02"
         border="4xs"
       ></gds-div>
 
@@ -70,7 +77,7 @@ export const Example: Story = {
       <gds-div
         width="4xl"
         height="4xl"
-        background="tertiary"
+        background="03"
         border-radius="s"
       ></gds-div>
     </gds-div>
@@ -80,8 +87,8 @@ export const Example: Story = {
 /**
  * Border styling follows the same patterns as CSS and can be controlled using the shorthand properties `border`, `border-width`, `border-style`, `border-color`
  *
- * - `border-color` defaults to level 2 primary
- * - `border-width` defaults to 0
+ * - `border-color` defaults to subtle-01
+ * - `border-width` defaults to 0 (supports all spacing tokens)
  * - `border-style` defaults to solid
  *
  * To add a 1px primary border around the element:
@@ -99,35 +106,35 @@ export const Example: Story = {
  * To add a 1px secodary color border on the bottom:
  *
  * ```html
- * <gds-div border-width="0 0 4xs 0" border-color="secondary"></gds-div>
+ * <gds-div border-width="0 0 4xs 0" border-color="subtle-01"></gds-div>
  * ```
  */
 export const CardBorder: Story = {
   ...DefaultParams,
   name: 'Border Style',
   render: (args) =>
-    html`<gds-grid columns="5" gap="l">
+    html`<gds-grid columns="5" gap="4xl">
       <gds-card
         variant="primary"
-        border-radius="0 0 m m"
-        border-width="4xs 0 0 0"
-        border-color="secondary"
+        border-radius="0"
+        border-width="2xs 0 0 0"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center"> Top </gds-flex>
       </gds-card>
       <gds-card
         variant="primary"
-        border-radius="m 0 0 m"
-        border-width="0 4xs 0 0"
-        border-color="secondary"
+        border-radius="0"
+        border-width="0 2xs 0 0"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center">Right</gds-flex>
       </gds-card>
       <gds-card
         variant="primary"
-        border-radius="m m 0 0"
-        border-width="0 0 4xs 0"
-        border-color="secondary"
+        border-radius="0"
+        border-width="0 0 2xs 0"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center">
           Bottom
@@ -135,9 +142,9 @@ export const CardBorder: Story = {
       </gds-card>
       <gds-card
         variant="primary"
-        border-radius="0 m m 0"
-        border-width="0 0 0 4xs"
-        border-color="secondary"
+        border-radius="0"
+        border-width="0 0 0 2xs"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center">
           Left
@@ -145,11 +152,41 @@ export const CardBorder: Story = {
       </gds-card>
       <gds-card
         variant="primary"
-        border-radius="m"
-        border="4xs"
-        border-color="secondary"
+        border-radius="0"
+        border="2xs"
+        border-color="strong"
       >
         <gds-flex align-items="center" justify-content="center"> All </gds-flex>
       </gds-card>
     </gds-grid>`,
+}
+
+/**
+ *
+ * Values are mapped directly from our radius tokens to maintain proportional scaling. <br />
+ * View all available radius tokens and their values in Green Studio:
+ * https://seb.io/studio/radius
+ *
+ *
+ * ##### Single value
+ * ```html
+ * <gds-div border-radius="m">...</gds-div>
+ * ```
+ *
+ * ##### Multiple corners / (top-left, top-right, bottom-right, bottom-left)
+ * ```html
+ * <gds-div border-radius="s m l xl">...</gds-div>
+ * ```
+ *
+ */
+export const BorderRadius: Story = {
+  ...DefaultParams,
+  args: {
+    background: 'neutral-02',
+    border: '2xs',
+    'border-radius': 'm',
+    'border-color': 'strong',
+    width: '8xl',
+    height: '4xl',
+  },
 }

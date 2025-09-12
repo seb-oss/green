@@ -1,6 +1,6 @@
-@use '@sebgroup/chlorophyll/scss/components/form/common/mixins' as form-group;
-@use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
-@use '@sebgroup/chlorophyll/scss/common';
+@use '@sebgroup/chlorophyll/src/scss/components/form/mixins' as form-group;
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins' as button;
+@use '@sebgroup/chlorophyll/src/scss/common';
 @use '../date-mixins' as ngv;
 
 :host {

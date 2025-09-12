@@ -21,11 +21,11 @@ import {
 import { GdsButton } from '../button/button.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossLarge } from '../icon/icons/cross-large.component'
-import { styles } from './textarea.styles'
+import TextareaStyles from './textarea.styles'
 
 @localized()
 class Textarea extends GdsFormControlElement<string> {
-  static styles = [tokens, formControlHostStyle, styles]
+  static styles = [tokens, formControlHostStyle, TextareaStyles]
 
   private _initialRows?: number
   private _defaultRows = 4
@@ -468,7 +468,6 @@ class Textarea extends GdsFormControlElement<string> {
 
 /**
  * @summary A custom input element that can be used in forms.
- * @status beta
  *
  * @element gds-textarea
  *.

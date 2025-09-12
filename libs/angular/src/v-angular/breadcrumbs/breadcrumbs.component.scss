@@ -1,7 +1,12 @@
-@use '../../../../chlorophyll/scss/components/breadcrumb/mixins' as mixins;
-@use '../../../../chlorophyll/scss/components/list/mixins' as list;
-@use '../../../../chlorophyll/scss/components/link/mixins' as link;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '../../../../chlorophyll/src/scss/components/breadcrumb/mixins' as mixins;
+@use '../../../../chlorophyll/src/scss/components/list/mixins' as list;
+@use '../../../../chlorophyll/src/scss/components/link/mixins' as link;
 
+:host {
+  @include light-tokens.add-variables();
+}
 :host ol {
   @include list.base-list();
   @include mixins.add-breadcrumb();

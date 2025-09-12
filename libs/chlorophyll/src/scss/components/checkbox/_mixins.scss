@@ -1,0 +1,150 @@
+@use '../../common';
+
+$valid-color: var(--gds-sys-color-dark-green-2);
+$invalid-color: var(--gds-sys-color-text-error);
+
+@mixin add-checkbox(
+  $selector: 'label.gds-form-control',
+  $checkbox-selector: 'input[type="checkbox"]',
+  $validated-selector: '.was-validated'
+) {
+  /**
+   * Hide the browser's default checkbox
+   */
+  #{$selector} #{$checkbox-selector} {
+    cursor: pointer;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+    z-index: -1;
+  }
+
+  #{$selector} {
+    align-items: flex-start;
+  }
+
+  /**
+   * Add focus to form-control field
+   */
+  #{$selector}:has(#{$checkbox-selector}) {
+    padding: 0.6875rem 1rem 0.5625rem;
+  }
+
+  #{$selector}:has(#{$checkbox-selector}:focus-visible) {
+    @include common.add-focus('within');
+  }
+
+  /**
+   * Style for custom checkbox
+   */
+  #{$selector} #{$checkbox-selector} ~ i {
+    @include common.margin-end(4);
+    margin-top: 0.0625rem;
+    flex-shrink: 0;
+    box-shadow: inset 0 0 0 1px var(--gds-sys-color-text-primary);
+    position: relative;
+    border-radius: var(--gds-sys-shape-corner-small);
+    background-color: transparent;
+    flex: 0 0 auto;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  #{$selector} #{$checkbox-selector}:not(:checked):focus-visible ~ i {
+    box-shadow: inset 0 0 0 1px var(--gds-sys-color-base-900);
+  }
+
+  #{$selector}:hover
+    #{$checkbox-selector}:not(.disabled, :disabled, :checked, :indeterminate)
+    ~ i {
+    background-color: var(--gds-sys-color-base-200);
+  }
+
+  #{$selector} #{$checkbox-selector}:checked ~ i {
+    background-color: var(--gds-sys-color-base-900);
+  }
+
+  #{$selector} #{$checkbox-selector}:indeterminate ~ i {
+    background-color: var(--gds-sys-color-base-900);
+  }
+
+  #{$selector} #{$checkbox-selector}:indeterminate ~ i::after {
+    border-bottom: 2px solid var(--gds-sys-color-background-primary);
+    box-sizing: border-box;
+    border-left: none;
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+
+  /**
+   * Invalid state
+   */
+  #{$selector}:has(#{$checkbox-selector}.is-invalid) {
+    border: 0.0625rem solid $invalid-color;
+    @include common.margin-bottom(3);
+  }
+
+  .is-invalid #{$selector}:has(#{$checkbox-selector}.is-invalid) {
+    border: none;
+    margin: 0;
+  }
+
+  @supports (-moz-appearance: none) {
+    #{$selector}.is-invalid {
+      border: 0.0625rem solid $invalid-color;
+      @include common.margin-bottom(3);
+    }
+
+    .is-invalid #{$selector}.is-invalid {
+      border: none;
+      margin: 0;
+    }
+  }
+
+  /**
+   * Disabled state
+   */
+  #{$selector} #{$checkbox-selector}:disabled,
+  #{$selector} #{$checkbox-selector}.disabled {
+    ~ i {
+      @include common.add-disable(true, false, true);
+      box-shadow: inset 0 0 0 1px var(--border-disabled-color);
+    }
+
+    &:checked ~ i {
+      @include common.add-disable(true, false, true);
+      box-shadow: inset 0 0 0 1px var(--border-disabled-color);
+
+      &:after {
+        border-color: var(--border-disabled-color);
+      }
+    }
+
+    ~ span {
+      @include common.add-disable(false, true, false);
+    }
+  }
+
+  #{$selector} #{$checkbox-selector} ~ i::after {
+    box-sizing: border-box;
+    content: '';
+    opacity: 0;
+    position: absolute;
+  }
+
+  #{$selector} #{$checkbox-selector} ~ i::after {
+    border-bottom: 3px solid var(--gds-sys-color-text-inverted);
+    border-left: 3px solid var(--gds-sys-color-text-inverted);
+    height: 0.5rem;
+    width: 1rem;
+    left: 0;
+    top: 0.1875rem;
+    transform: scale(0.601) rotate(-45deg);
+    transform-origin: center;
+  }
+
+  #{$selector} #{$checkbox-selector}:checked ~ i::after {
+    opacity: 1;
+  }
+}

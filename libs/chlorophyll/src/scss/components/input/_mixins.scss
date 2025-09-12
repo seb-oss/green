@@ -1,0 +1,65 @@
+@use '../../common';
+@use '../validation/mixins' as validation;
+@use '../../tokens';
+
+$_color: var(--gds-sys-color-text-primary);
+$background: var(--gds-sys-color-background-primary);
+
+@mixin add-text-input() {
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.add-border-radius();
+  @include common.add-border();
+  @include common.add-border-color();
+  @include common.add-focus();
+  background-color: $background;
+  color: $_color;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.small {
+    min-height: 2rem;
+    padding: 0.25rem 0.75rem;
+    line-height: 1rem;
+  }
+
+  @media screen and (-ms-high-contrast: active) {
+    border: 2px solid currentcolor;
+  }
+
+  &:disabled,
+  &.disabled,
+  &[aria-disabled='true'] {
+    @include common.add-disable(true, true, true);
+  }
+
+  &:hover {
+    background-color: var(--gds-sys-color-base-100);
+  }
+
+  &[type='number'] {
+    appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+}
+
+@mixin add-input-wrapper() {
+  display: flex;
+  flex-direction: column;
+
+  @include validation.add-feedback-element(false);
+
+  &:before {
+    bottom: 0;
+  }
+
+  .is-invalid & {
+    @include validation.add-feedback(var(--gds-sys-color-text-error));
+  }
+}

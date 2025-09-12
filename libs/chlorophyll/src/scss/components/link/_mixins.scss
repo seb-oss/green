@@ -1,0 +1,120 @@
+@use 'sass:map';
+@use '../../common';
+
+@mixin base {
+  @include common.add-outline-focus-state();
+  color: var(--gds-sys-color-text-link);
+  font-weight: 500;
+  border: none;
+  border-radius: 0.125rem;
+
+  &.gds-link--white {
+    color: var(--gds-sys-color-text-white);
+  }
+
+  &.gds-link--black {
+    color: var(--gds-sys-color-text-primary);
+  }
+
+  &:focus {
+    &:not([aria-disabled]) {
+      color: var(--gds-sys-color-blue);
+    }
+  }
+
+  &.link-history:visited {
+    color: var(--gds-sys-color-dark-blue-2);
+  }
+
+  &.link-history:visited {
+    color: var(--gds-sys-color-dark-blue-2);
+  }
+}
+
+@mixin disabled {
+  font-weight: 500;
+  @include common.add-disable(false, true, false);
+}
+
+@mixin button {
+  text-decoration: none;
+}
+
+@mixin underline {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+
+  &:hover {
+    text-underline-offset: 2px;
+    text-decoration-thickness: 2px;
+  }
+
+  &:active {
+    text-underline-offset: 1px;
+  }
+}
+
+@mixin icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 468ms;
+  transition-timing-function: cubic-bezier(0, 0.25, 0.5, 1);
+
+  svg,
+  [gds-element*='gds-icon'] {
+    fill: none;
+    height: 17px;
+    transition: transform 0.2s ease-in-out;
+    path {
+      fill: currentColor;
+    }
+  }
+}
+
+/** 
+ * TODO: Convert this to a "Secondary link" and add full support for icons in the link component.
+ */
+@mixin arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--gds-sys-color-text-primary);
+  font-weight: 500;
+  text-decoration: none;
+  --arrow-transition: transform 0.2s ease-in-out;
+  --arrow-translate: translate3d(5px, 0, 0);
+
+  svg,
+  [gds-element*='gds-icon'] {
+    display: block;
+    fill: none;
+    height: 17px;
+    transition: var(--arrow-transition);
+    path {
+      fill: currentColor;
+    }
+  }
+
+  &.link:focus {
+    color: var(--gds-sys-color-text-primary);
+  }
+
+  &:visited {
+    color: var(--gds-sys-color-text-secondary);
+  }
+
+  &:hover svg,
+  &:hover [gds-element*='gds-icon'] {
+    transform: var(--arrow-translate);
+  }
+
+  @media (prefers-reduced-motion) {
+    --arrow-transition: none;
+
+    &:hover svg,
+    &:hover [gds-element*='gds-icon'] {
+      --arrow-translate: none;
+    }
+  }
+}

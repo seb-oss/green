@@ -1,0 +1,19 @@
+[data-snipet='true'] {
+  --color: color-mix(in srgb, currentColor, transparent 90%);
+  background-image: radial-gradient(var(--color) 10%, transparent 0);
+  background-size: 1em 1em;
+  background-position: center;
+}
+
+[data-fade] {
+  transition: all 460ms;
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}

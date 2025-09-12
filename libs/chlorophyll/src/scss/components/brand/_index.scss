@@ -1,0 +1,5 @@
+@use 'mixins';
+
+.gds-brand {
+  @include mixins.add-brand();
+}

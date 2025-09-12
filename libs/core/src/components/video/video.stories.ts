@@ -32,12 +32,13 @@ const DefaultParams: Story = {
     inset: '0',
     position: 'relative',
     opacity: '1',
-    src: 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    src: 'https://api.seb.io/components/video/video.mp4',
     autoplay: true,
     muted: true,
     playsinline: true,
     loop: true,
     events: 'none',
+    'border-radius': 's',
   },
 }
 

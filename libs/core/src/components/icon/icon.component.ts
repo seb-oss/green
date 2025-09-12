@@ -14,17 +14,16 @@ import {
   withLayoutChildProps,
   withMarginProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import IconCSS from './icon.style'
+import IconStyles from './icon.styles'
 
 /**
  * @element gds-icon
- * @status stable
  *
  * @part icon - The icon SVG element.
  */
 
 export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
-  static styles = [tokens, IconCSS]
+  static styles = [tokens, IconStyles]
 
   /**
    * This property allow you to set the size of the icon with the token and custom values.
@@ -38,30 +37,6 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
     selector: 'svg',
   })
   size?: string
-
-  /**
-   * This property allow you to set the width of the icon. If not provided, the default width is auto.
-   *
-   * @deprecated Use the `size` property instead.
-   *
-   * ```html
-   * <gds-icon size="m"></gds-icon>
-   * ```
-   */
-  @property({ type: Number })
-  width?: number
-
-  /**
-   * This property allow you to set the height of the icon. If not provided, the default height is 1lh.
-   *
-   *@deprecated Use the `size` property instead.
-   *
-   * ```html
-   * <gds-icon size="m"></gds-icon>
-   * ```
-   */
-  @property({ type: Number })
-  height?: number
 
   /**
    * When set to true, the solid version of the icon is displayed.
@@ -91,20 +66,11 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-icon-ai color="primary/0.2"></gds-icon-ai>
+   * <gds-icon-ai color="neutral-01/0.2"></gds-icon-ai>
    * ```
    */
   @styleExpressionProperty(forColorTokens('content'))
   color?: string
-
-  /**
-   * When viewbox is defined it will override the default viewbox of the icon.
-   *
-   * @deprecated this prop will be removed on the next major release
-   *
-   */
-  @property({ type: String })
-  box = false
 
   /**
    * This property allow you to set the accessible label of the icon.
@@ -117,8 +83,6 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
   protected static _name: string
   protected static _regularSVG?: string
   protected static _solidSVG?: string
-  protected static _width: number
-  protected static _height: number
   protected static _viewBox: string
 
   /**
@@ -130,14 +94,7 @@ export class GdsIcon extends withMarginProps(withLayoutChildProps(GdsElement)) {
     const baseAttrs = {
       fill: 'none',
       xmlns: 'http://www.w3.org/2000/svg',
-      // TODO: Remove in 2.0.0
-      // (deprecated)
-      ...((this.size === undefined && {
-        width: this.width || constructor._width,
-        height: this.width || constructor._height,
-      }) ||
-        {}),
-      viewBox: this.box || constructor._viewBox,
+      viewBox: constructor._viewBox,
       part: 'icon',
     }
 

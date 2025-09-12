@@ -26,6 +26,9 @@ const EXPORTS = [
   NggModalFooterDirective,
 ]
 
+/**
+ * @deprecated use the dialog from green-core instead.
+ */
 @NgModule({
   imports: [A11yModule, CommonModule],
   exports: EXPORTS,

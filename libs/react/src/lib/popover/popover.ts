@@ -8,6 +8,9 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 GdsPopover.define()
 PopoverTransitionalStyles.register()
 
+/**
+ * @deprecated Please use the `gds-popover` web component from green-core instead
+ */
 export const Popover = createComponent({
   tagName: getScopedTagName('gds-popover'),
   elementClass: GdsPopover,

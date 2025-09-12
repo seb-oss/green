@@ -1,5 +1,5 @@
 import { localized } from '@lit/localize'
-import { property } from 'lit/decorators.js'
+import { property, query } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 
 import { GdsFormControlFooter } from '../../../primitives/form-control-footer/form-control-footer.component'
@@ -58,6 +58,9 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     this._internalValue = value
   }
 
+  @query('#checkboxgroup')
+  private _elCheckboxGroup!: HTMLElement
+
   /**
    * Returns an array of `<gds-checkbox>` elements in the checkbox group.
    *
@@ -70,7 +73,7 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
   }
 
   protected _getValidityAnchor(): HTMLElement {
-    return this.checkboxes.pop()!
+    return this._elCheckboxGroup
   }
 
   @watch('value', { waitUntilFirstUpdate: true })
@@ -78,6 +81,15 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
     this.checkboxes.forEach((checkbox) => {
       checkbox.checked = this.value.includes(checkbox.value) || false
     })
+  }
+
+  /*
+   * Listened to the invalid property and calls the #handleInvalidChange method
+   * to update the invalid state of the checkboxes in the group.
+   */
+  @watch('invalid')
+  private _handleGroupInvalidChange() {
+    this.#handleInvalidChange()
   }
 
   focus() {
@@ -193,7 +205,6 @@ class CheckboxGroup extends GdsFormControlElement<string[]> {
 
 /**
  * @summary A form control component for grouping checkbox buttons.
- * @status beta
  *
  * @element gds-checkbox-group
  *

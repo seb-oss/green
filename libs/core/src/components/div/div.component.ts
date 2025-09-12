@@ -5,6 +5,7 @@ import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
 import {
   forColorTokens,
+  forRadiusTokens,
   forSpaceTokens,
   GdsColorLevel,
   parseColorValue,
@@ -21,11 +22,10 @@ import {
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
-import style from './div.style'
+import DivStyles from './div.styles'
 
 /**
  * @element gds-div
- * @status beta
  *
  * `gds-div` is the base element in the declarative layout system.
  */
@@ -37,7 +37,7 @@ export class GdsDiv extends withSizeXProps(
     ),
   ),
 ) {
-  static styles = [tokens, style]
+  static styles = [tokens, DivStyles]
 
   /**
    * Controls the display property.
@@ -61,7 +61,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div color="primary/0.2"></gds-div>
+   * <gds-div color="neutral-01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('content'))
@@ -72,7 +72,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div background="primary/0.2"></gds-div>
+   * <gds-div background="neutral-01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('background'))
@@ -83,7 +83,7 @@ export class GdsDiv extends withSizeXProps(
    * Accepts a string of the same format as the CSS border property.
    *
    * ```html
-   * <gds-div border="4xs solid primary/0.2"></gds-div>
+   * <gds-div border="4xs solid subtle-01/0.2"></gds-div>
    * ```
    *
    * Where the size value accepts space tokens and the color value accepts color tokens and an optional transparency value.
@@ -94,7 +94,7 @@ export class GdsDiv extends withSizeXProps(
       const [
         size,
         style = this_['border-style'] || 'solid',
-        color = this_['border-color'] || 'primary',
+        color = this_['border-color'] || 'subtle-01',
       ] = values
       const sizeCss = `var(--gds-sys-space-${size})`
       const colorCss = parseColorValue(color, 'border', this_.level)
@@ -108,7 +108,7 @@ export class GdsDiv extends withSizeXProps(
    * Only accepts color tokens and an optional transparency value, in the format tokenName/transparency.
    *
    * ```html
-   * <gds-div border-color="primary/0.2"></gds-div>
+   * <gds-div border-color="subtle-01/0.2"></gds-div>
    * ```
    */
   @styleExpressionProperty(forColorTokens('border'))
@@ -132,7 +132,7 @@ export class GdsDiv extends withSizeXProps(
    * Style Expression Property that controls the `border-radius` property.
    * Only accepts space tokens.
    */
-  @styleExpressionProperty(forSpaceTokens)
+  @styleExpressionProperty(forRadiusTokens)
   'border-radius'?: string
 
   /**
@@ -143,7 +143,8 @@ export class GdsDiv extends withSizeXProps(
    * `xs`, `s`, `m`, `l`, `xl`
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-sys-shadow-${v})`,
+    valueTemplate: (v) =>
+      `var(--gds-sys-shadow-${v}-01), var(--gds-sys-shadow-${v}-02)`,
   })
   'box-shadow'?: string
 
@@ -176,18 +177,16 @@ export class GdsDiv extends withSizeXProps(
   'z-index'?: string
 
   /**
-   * Style Expression Property that controls the `font-size` property.
-   * Supports all typography size tokens from the design system.
+   * Style Expression Property that controls the `font` property.
+   * Supports all font tokens from the design system.
    */
   @styleExpressionProperty({
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
-      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
-      return styleSize + styleLine
+      return `font: var(--gds-sys-text-${size});`
     },
   })
-  'font-size'?: string
+  'font'?: string
 
   /**
    * Style Expression Property that controls the `font-weight` property.

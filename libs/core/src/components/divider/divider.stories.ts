@@ -15,7 +15,6 @@ import { argTablePropsFor } from '../../../.storybook/argTableProps'
  *
  * The divider can be customized with different properties like color and size.
  *
- * @status beta
  *
  * > Divider should not be used as a border for a container. In that case, use the border property of the container instead.
  */
@@ -43,23 +42,20 @@ const DefaultParams: Story = {
 export const Divider: Story = {
   ...DefaultParams,
   name: 'Divider',
-  render: (args) =>
-    html` <gds-divider color="primary" size="2xl"></gds-divider>`,
+  render: (args) => html` <gds-divider color="" size="2xl"></gds-divider>`,
 }
 
 /**
- * The `gds-divider` with different colors
- * The default level on the divider is 2 and based on the level it accepts all border colors of that level colors can be found here:[Color System documentation page](./?path=/docs/style-colors--docs)
+ * The `gds-divider` accepts all the border tokens as color value.
  *
  * Example:
  *
  * ```html
- * <gds-divider color="primary"></gds-divider>
- * <gds-divider color="secondary"></gds-divider>
- * <gds-divider color="inversed"></gds-divider>
+ * <gds-divider color="subtle-01"></gds-divider>
+ * <gds-divider color="subtle-02"></gds-divider>
+ * <gds-divider color="inverse"></gds-divider>
  * ```
  *
- * The above example will apply the color style of 'primary'.
  */
 export const Color: Story = {
   ...DefaultParams,
@@ -68,101 +64,93 @@ export const Color: Story = {
     html` <gds-flex flex-direction="column" gap="xl">
       <gds-card>
         <gds-flex flex-direction="column">
-          <gds-text>Primary</gds-text>
-          <gds-divider color="primary" size="2xl"></gds-divider>
+          <gds-text>interactive</gds-text>
+          <gds-divider color="interactive" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card>
         <gds-flex flex-direction="column">
-          <gds-text>Secondary</gds-text>
-          <gds-divider color="secondary" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-      <gds-card variant="tertiary">
-        <gds-flex flex-direction="column">
-          <gds-text>Tertiary</gds-text>
-          <gds-divider color="tertiary" size="2xl"></gds-divider>
+          <gds-text>subtle-01</gds-text>
+          <gds-divider color="subtle-01" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card>
         <gds-flex flex-direction="column">
-          <gds-text>Quarternary</gds-text>
-          <gds-divider color="quarternary" size="2xl"></gds-divider>
+          <gds-text>subtle-02</gds-text>
+          <gds-divider color="subtle-02" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>Inversed</gds-text>
-          <gds-divider color="inversed" size="2xl"></gds-divider>
+          <gds-text>strong</gds-text>
+          <gds-divider color="strong" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
-    </gds-flex>`,
-}
+      <gds-card>
+        <gds-flex flex-direction="column">
+          <gds-text>inverse</gds-text>
+          <gds-divider color="inverse" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>information-01</gds-text>
+          <gds-divider color="information-01" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>information-02</gds-text>
+          <gds-divider color="information-02" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>positive-01</gds-text>
+          <gds-divider color="positive-01" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
 
-/**
- * Custom color
- * In addition to color tokens you can still use custom colors in cases when you need to use a color that is not part of the design system.
- *
- * Example:
- *
- * ```html
- * <gds-divider color="#fc0"></gds-divider>
- * ```
- *
- */
-export const Custom: Story = {
-  ...DefaultParams,
-  name: 'Color Custom',
-  render: (args) =>
-    html` <gds-flex flex-direction="column" gap="xl">
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>Custom Color: #fc0</gds-text>
-          <gds-divider color="#fc0" size="2xl"></gds-divider>
+          <gds-text>positive-02</gds-text>
+          <gds-divider color="positive-02" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
-      <gds-card>
-        <gds-flex flex-direction="column">
-          <gds-text>Custom Color: #2561ad</gds-text>
-          <gds-divider color="#2561ad" size="2xl"></gds-divider>
-        </gds-flex>
-      </gds-card>
-    </gds-flex>`,
-}
-
-/**
- * Color property acceps alpha values
- * It can be used with variable colors from the design system or custom colors.
- *
- * Example:
- * ```html
- * <gds-divider color="#2561ad/0.2"></gds-divider>
- * <gds-divider color="primary/0.2"></gds-divider>
- * ```
- *
- * The alpha value should be between 0 and 1.
- */
-export const Alpha: Story = {
-  ...DefaultParams,
-  name: 'Color Alpha',
-  render: (args) =>
-    html` <gds-flex flex-direction="column" gap="xl">
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>
-            Token with alpha: <br />
-            <code>primary/0.4</code>
-          </gds-text>
-          <gds-divider color="primary/0.4" size="2xl"></gds-divider>
+          <gds-text>negative-01</gds-text>
+          <gds-divider color="negative-01" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
-      <gds-card>
+      <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
-          <gds-text>
-            Custom color with alpha: <br />
-            <code>#2561ad/0.2</code>
-          </gds-text>
-          <gds-divider color="#2561ad/0.2" size="2xl"></gds-divider>
+          <gds-text>negative-02</gds-text>
+          <gds-divider color="negative-02" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>warning-01</gds-text>
+          <gds-divider color="warning-01" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>warning-02</gds-text>
+          <gds-divider color="warning-02" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>notice-01</gds-text>
+          <gds-divider color="notice-01" size="2xl"></gds-divider>
+        </gds-flex>
+      </gds-card>
+      <gds-card variant="tertiary">
+        <gds-flex flex-direction="column">
+          <gds-text>notice-02</gds-text>
+          <gds-divider color="notice-02" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,
@@ -188,19 +176,19 @@ export const Opacity: Story = {
       <gds-card>
         <gds-flex flex-direction="column">
           <gds-text>Opacity: 0.6</gds-text>
-          <gds-divider color="primary" size="2xl" opacity="0.6"></gds-divider>
+          <gds-divider color="" size="2xl" opacity="0.6"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card>
         <gds-flex flex-direction="column">
           <gds-text>Opacity: 0.3</gds-text>
-          <gds-divider color="secondary" size="4xl" opacity="0.4"></gds-divider>
+          <gds-divider color="" size="4xl" opacity="0.4"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
           <gds-text>Opacity: 0.2</gds-text>
-          <gds-divider color="tertiary" size="6xl" opacity="0.2"></gds-divider>
+          <gds-divider color="" size="6xl" opacity="0.2"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,
@@ -230,19 +218,19 @@ export const Size: Story = {
       <gds-card>
         <gds-flex flex-direction="column">
           <gds-text>Size: 2xl</gds-text>
-          <gds-divider color="primary" size="2xl"></gds-divider>
+          <gds-divider color="" size="2xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card>
         <gds-flex flex-direction="column">
           <gds-text>Size: 4xl</gds-text>
-          <gds-divider color="secondary" size="4xl"></gds-divider>
+          <gds-divider color="" size="4xl"></gds-divider>
         </gds-flex>
       </gds-card>
       <gds-card variant="tertiary">
         <gds-flex flex-direction="column">
           <gds-text>Size: 6xl</gds-text>
-          <gds-divider color="tertiary" size="6xl"></gds-divider>
+          <gds-divider color="" size="6xl"></gds-divider>
         </gds-flex>
       </gds-card>
     </gds-flex>`,

@@ -1,40 +1,14 @@
-@use '../../../../chlorophyll/scss/components/form/radio/mixins' as mixins;
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as common;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '@sebgroup/chlorophyll/src/scss/tokens/z-index';
+@use '@sebgroup/chlorophyll/src/scss/tokens/shape';
+@use '../../../../chlorophyll/src/scss/components/radio/mixins' as mixins;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as common;
 
 :host {
-  --gds-ref-pallet-base200: hsl(0, 0%, 91%);
-  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
-  --gds-ref-pallet-base600: hsl(0, 0%, 53%);
-  --gds-comp-checkbox-container-height: 1rem;
-  --gds-comp-checkbox-container-width: 1rem;
-  --gds-comp-checkbox-container-color: var(#fff);
-  --gds-comp-checkbox-container-color-disabled: var(--gds-ref-pallet-base200);
-  --gds-comp-checkbox-border-color: #333;
-  --gds-comp-checkbox-border-radius: 2px;
-  --gds-comp-checkbox-hover-border-color: var(--gds-ref-pallet-base600);
-  --gds-comp-checkbox-container-color-selected: #333;
-  --gds-comp-checkbox-border-color-selected: var(#fff);
-  --gds-comp-checkbox-border-color-focus: var(--gds-sys-color-blue-dark-2);
-  --gds-comp-radio-container-height: 1rem;
-  --gds-comp-radio-container-width: 1rem;
-  --gds-comp-radio-border-radius: 50%;
-  --gds-comp-radio-ring-width: 0.1875rem;
-  --gds-comp-radio-container-background-disabled: var(--gds-ref-pallet-base200);
-  --gds-comp-radio-border: #333;
-  --gds-comp-radio-border-checked: #333;
-  --gds-comp-radio-border-hover: var(--gds-ref-pallet-base600);
-  --gds-comp-radio-border-checked-hover: var(--gds-ref-pallet-base600);
-  --gds-comp-radio-border-disabled: var(--gds-ref-pallet-base500);
-  --gds-comp-radio-ring: var(#fff);
-  --gds-comp-radio-ring-checked: var(#fff);
-  --gds-comp-radio-ring-hover: var(#fff);
-  --gds-comp-radio-ring-checked-hover: var(#fff);
-  --gds-comp-radio-ring-disabled: var(#fff);
-  --gds-comp-radio-dot: transparent;
-  --gds-comp-radio-dot-checked: #333;
-  --gds-comp-radio-dot-hover: var(--gds-ref-pallet-base600);
-  --gds-comp-radio-dot-checked-hover: var(--gds-ref-pallet-base600);
-  --gds-comp-radio-dot-disabled: var(--gds-ref-pallet-base600);
+  @include light-tokens.add-variables();
+  @include shape.add-tokens();
+  @include z-index.add-tokens();
 
   .nggv-field--locked {
     display: inline-block;
@@ -44,7 +18,7 @@
     padding: 0.5em 0.75em 0.5em 0em;
   }
 
-  .form-control {
+  .gds-form-control {
     @include common.add-form-control();
   }
 

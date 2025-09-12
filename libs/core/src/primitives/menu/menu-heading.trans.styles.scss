@@ -2,8 +2,8 @@
 
 @layer transitional-styles {
   :host {
-    background-color: var(--gds-ref-pallet-base300);
-    color: var(--gds-ref-pallet-base800);
+    background-color: var(--gds-sys-color-base-300);
+    color: var(--gds-sys-color-base-800);
     display: flex;
     font-size: 0.875rem;
     font-weight: 500;

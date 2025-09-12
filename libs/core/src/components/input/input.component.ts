@@ -20,11 +20,11 @@ import { GdsButton } from '../button/button.component'
 import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCrossLarge } from '../icon/icons/cross-large.component'
-import { styles } from './input.styles'
+import InputStyles from './input.styles'
 
 @localized()
 class Input extends GdsFormControlElement<string> {
-  static styles = [tokens, formControlHostStyles, styles]
+  static styles = [tokens, formControlHostStyles, InputStyles]
 
   /**
    * The supporting text displayed between the label and the field.
@@ -340,7 +340,6 @@ class Input extends GdsFormControlElement<string> {
 
 /**
  * @summary A custom input element that can be used in forms.
- * @status beta
  *
  * @element gds-input
  *.

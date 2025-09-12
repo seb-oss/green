@@ -1,4 +1,4 @@
-// // load global styles used by storybook
-@use '@sebgroup/chlorophyll/scss' with (
-  $font-path: '/dist/fonts'
+// load global styles used by storybook
+@use '@sebgroup/chlorophyll/src/scss' with (
+  $font-path: '@sebgroup/fonts/fonts'
 );

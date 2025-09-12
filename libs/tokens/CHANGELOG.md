@@ -1,5 +1,36 @@
 # Changelog
 
+## 2.0.2
+
+### Patch Changes
+
+- 3c7eee0: **Typography:** Change primary font-family name to `SEB SansSerif` and keep `SEB SansSerif GDS` as a fallback
+
+## 2.0.1
+
+### Patch Changes
+
+- 0c50d22: Fix bad syntax in enum-class template
+- d31d7f4: Update naming of color tokens for compose distribution
+- d31d7f4: Fix wrong path used when deploying JVM tokens
+
+## 2.0.0
+
+### Major Changes
+
+- d9b0006: New token structure. New names and new color values.
+- d9b0006: New state and shadow tokens, removing some of the old ones.
+
+### Minor Changes
+
+- d9b0006: Adding content-04 token
+
+### Patch Changes
+
+- d9b0006: fixing l2-02, l2-brand-02 darkmode values
+- d9b0006: Tokens: content-02 to use grey.19
+- d9b0006: Fixed l3-04 dark mode color
+
 ## 1.1.0
 
 ### Minor Changes

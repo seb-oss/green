@@ -1,0 +1,11 @@
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  display: contents;
+}
+
+.root-flex {
+  background: var(--gds-sys-color-l1-neutral-01);
+}

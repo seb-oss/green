@@ -65,6 +65,9 @@ export interface InputProps
   'aria-live'?: React.AriaAttributes['aria-live']
 }
 
+/**
+ * @deprecated Please use the `gds-input` web component from green-core instead
+ */
 export const Input = forwardRef(
   (
     {
@@ -129,7 +132,7 @@ export const Input = forwardRef(
       [`gds-expandable-info-${uuid}`]: !showSimpleInput && expandableInfo,
     })
 
-    const inputClassName = classNames(className, {
+    const inputClassName = classNames('gds-input', className, {
       [validateClassName(validator?.indicator)]: validator,
     })
 

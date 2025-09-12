@@ -14,10 +14,6 @@
   <source>Show more information</source>
   <target>Mostra più informazioni</target>
 </trans-unit>
-<trans-unit id="s58bfb494feb8eb02">
-  <source><x id="0" equiv-text="${this.value.length}"/> selected</source>
-  <target><x id="0" equiv-text="${this.value.length}"/> selezionato</target>
-</trans-unit>
 <trans-unit id="sd898d99fd9c13de6">
   <source>Filter available options</source>
   <target>Filtra le opzioni disponibili</target>
@@ -57,10 +53,6 @@
 <trans-unit id="s17e3edbe032f79ec">
   <source>Open calendar modal</source>
   <target>Apri la finestra del calendario</target>
-</trans-unit>
-<trans-unit id="s62931b2a50168976">
-  <source>Previous month</source>
-  <target>Mese precedente</target>
 </trans-unit>
 <trans-unit id="sb47daaf9e1c4a905">
   <source>Month</source>
@@ -118,10 +110,6 @@
   <source>Year</source>
   <target>Anno</target>
 </trans-unit>
-<trans-unit id="s46d6587089bd0356">
-  <source>Next month</source>
-  <target>Mese successivo</target>
-</trans-unit>
 <trans-unit id="sb4f1dffbb6be6302">
   <source>Clear</source>
   <target>Pulisci</target>
@@ -177,6 +165,29 @@
 <trans-unit id="s39943b8a5733f5d2">
   <source>Auto-dismiss timer</source>
   <target>Timer di chiusura automatica</target>
+</trans-unit>
+<trans-unit id="sf1f100572e888a9d">
+  <source>Switch to previous month</source>
+  <target>Passa al mese precedente</target>
+</trans-unit>
+<trans-unit id="s88365264d8a05b05">
+  <source>Switch to next month</source>
+  <target>Passa al mese successivo</target>
+</trans-unit>
+<trans-unit id="s98dfb7a8cd8ec342">
+  <source>Select today's date</source>
+  <target>Seleziona la data odierna</target>
+</trans-unit>
+<trans-unit id="s1727e353c65eba61">
+  <source>Clear selected date</source>
+  <target>Pulisci la data selezionata</target>
+<trans-unit id="s8f18916860db5d80">
+  <source>Clear selection</source>
+  <target>Rimuovi selezione</target>
+</trans-unit>
+<trans-unit id="s1910f3ebccaec414">
+  <source><x id="0" equiv-text="${(this.value as Array&lt;unknown&gt;).length}"/> options selected</source>
+  <target><x id="0" equiv-text="${(this.value as Array&lt;unknown&gt;).length}"/> opzioni selezionate</target>
 </trans-unit>
 </body>
 </file>

@@ -6,11 +6,10 @@ import { styleExpressionProperty } from '../../utils/decorators/style-expression
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import { GdsDiv } from '../div/div.component'
 import { defaultStyles } from './default-typography.styles'
-import textStyles from './text.style'
+import TextStyles from './text.styles'
 
 /**
  * @element gds-text
- * @status beta
  *
  * `gds-text` extends `gds-div` and adds the ability to set an internal tag name, such as `h1`, `h2`, etc. It also adds line clamping and text decoration properties.
  *
@@ -18,7 +17,7 @@ import textStyles from './text.style'
  */
 @gdsCustomElement('gds-text')
 export class GdsText extends GdsDiv {
-  static styles = [tokens, defaultStyles, textStyles]
+  static styles = [tokens, defaultStyles, TextStyles]
 
   /**
    * Controls the tag of the text.
@@ -28,19 +27,17 @@ export class GdsText extends GdsDiv {
   tag = 'span'
 
   /**
-   * Style Expression Property that controls the `font-size` property.
-   * Supports all typography size tokens from the design system.
+   * Style Expression Property that controls the `font` property.
+   * Supports all font tokens from the design system.
    */
   @styleExpressionProperty({
     selector: '[tag]',
     styleTemplate: (_prop, values) => {
       const size = values[0]
-      const styleSize = `font-size: var(--gds-sys-text-size-${size});`
-      const styleLine = `line-height: var(--gds-sys-text-line-height-${size});`
-      return styleSize + styleLine
+      return `font: var(--gds-sys-text-${size});`
     },
   })
-  'font-size'?: string
+  'font'?: string
 
   /**
    * Style Expression Property that controls the `font-weight` property.

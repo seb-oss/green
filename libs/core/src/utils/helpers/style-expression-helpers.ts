@@ -26,7 +26,15 @@ export function parseColorValue(
     return value
   }
   const [colorName, transparency] = value.split('/')
-  const colorVar = `var(--gds-sys-color-l${level}-${context}-${colorName})`
+
+  let colorVar: string
+
+  if (level && context === 'background') {
+    colorVar = `var(--gds-sys-color-l${level}-${colorName})`
+  } else {
+    colorVar = `var(--gds-sys-color-${context}-${colorName})`
+  }
+
   return transparency
     ? `color-mix(in srgb, ${colorVar} ${parseFloat(transparency) * 100}%, transparent 0%)`
     : colorVar
@@ -52,6 +60,13 @@ export function forColorTokens(
  */
 export const forSpaceTokens: StyleExpressionPropertyOptions = {
   valueTemplate: (value: string) => `var(--gds-sys-space-${value}, 0)`,
+}
+
+/**
+ * Create options for style expression properties that expect radius tokens.
+ */
+export const forRadiusTokens: StyleExpressionPropertyOptions = {
+  valueTemplate: (value: string) => `var(--gds-sys-radius-${value}, 0)`,
 }
 
 /**

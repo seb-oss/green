@@ -11,7 +11,7 @@ const style = css`
       --_padding-block: var(--gds-sys-space-xs);
 
       --_color-bg: transparent;
-      --_color-text: var(--gds-sys-color-l3-content-tertiary);
+      --_color-text: var(--gds-sys-color-content-neutral-01);
       --_color-border: transparent;
 
       --_font-size: 1rem;
@@ -28,26 +28,25 @@ const style = css`
   @layer core {
     .button {
       align-items: center;
-
       background-color: var(--_color-bg);
-
-      border-color: var(--_color-border);
-      border-style: none;
-      border-bottom-style: solid;
       border-bottom-width: 2px;
-
+      border-style: none;
+      border-color: var(--_color-border);
+      border-bottom-style: solid;
       box-sizing: border-box;
-      color: var(--_color-text);
       color-scheme: dark light;
+      color: var(--_color-text);
       cursor: pointer;
-
       display: inline-flex;
+      font-family: inherit;
+      font-size: var(--_font-size);
+      font-weight: var(--_font-weight);
       gap: var(--_gap);
       height: 100%;
-
       inline-size: 100%;
       justify-content: space-between;
       justify-items: center;
+      line-height: var(--_line-height);
       outline-color: transparent;
       outline-offset: -2px;
       outline-style: solid;
@@ -55,18 +54,14 @@ const style = css`
       padding-block: var(--_padding-block);
       padding-inline: var(--_padding-inline);
       position: relative;
-      font-family: inherit;
-      font-size: var(--_font-size);
-      font-weight: var(--_font-weight);
-      line-height: var(--_line-height);
       transition-property: color, border-color;
-      transition: all 0.4s;
+      transition: all var(--gds-sys-motion-duration-fastest);
 
       &:focus-visible {
-        outline-color: currentColor;
-        border-radius: 6px;
-        overflow: visible;
         border-color: transparent;
+        border-radius: 6px;
+        outline-color: currentColor;
+        overflow: visible;
       }
 
       &:hover,
@@ -75,18 +70,18 @@ const style = css`
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-l3-states-light-hover)
+          var(--gds-sys-color-state-neutral-05)
         );
-        --_color-border: var(--gds-sys-color-l3-border-secondary);
+        --_color-border: var(--gds-sys-color-border-interactive);
       }
 
       &.selected {
         background-color: color-mix(
           in srgb,
           transparent,
-          var(--gds-sys-color-l3-states-light-hover)
+          var(--gds-sys-color-state-neutral-06)
         );
-        --_color-border: var(--gds-sys-color-l3-border-primary);
+        --_color-border: var(--gds-sys-color-border-strong);
       }
 
       slot:not([name]) {
@@ -120,7 +115,7 @@ const style = css`
 
   :disabled {
     border-color: var(--_color-bg);
-    color: var(--gds-sys-color-l3-content-disabled);
+    color: var(--gds-sys-color-content-disabled-01);
     pointer-events: none;
   }
 

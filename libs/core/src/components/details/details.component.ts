@@ -15,7 +15,7 @@ import {
 } from '../../utils/mixins/declarative-layout-mixins'
 import { GdsButton } from '../button/button.component'
 import { GdsIconDetails } from './details-icon/details-icon.component'
-import { styles } from './details.styles'
+import DetailsStyles from './details.styles'
 
 export type DetailsSize = 'large' | 'small'
 
@@ -23,7 +23,6 @@ export type DetailsSize = 'large' | 'small'
  * Details component that provides collapsible content sections.
  *
  * @element gds-details
- * @status beta
  *
  * @slot - Default slot for details content
  * @event gds-ui-state - Fired when details opens or closes
@@ -39,7 +38,7 @@ export type DetailsSize = 'large' | 'small'
 export class GdsDetails extends withSizeXProps(
   withMarginProps(withLayoutChildProps(GdsElement)),
 ) {
-  static styles = [tokens, styles]
+  static styles = [tokens, DetailsStyles]
 
   /**
    * The summary text displayed in the details header

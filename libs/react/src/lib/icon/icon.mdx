@@ -3,6 +3,7 @@ import * as Icons from './icons/index'
 import { useState } from 'react'
 import { IconBank, IconRocket } from './icons/index'
 import * as IconStories from './icon.stories';
+import * as Core from '../../../../../dist/libs/core/src/generated/react/index.js'
 
 export const Template = (props) => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -85,6 +86,12 @@ export const Styles = () => (
 )
 
 <Meta of={IconStories} />
+
+<Core.GdsTheme>
+  <Core.GdsDiv margin="xl 0">
+    <Core.GdsAlert variant="notice">**Note:** This version of Icon is deprecated! Please use the [web component from Green Core](https://storybook.seb.io/latest/core/?path=/docs/components-icon--docs) instead.</Core.GdsAlert>
+  </Core.GdsDiv>
+</Core.GdsTheme>
 
 # Icon
 

@@ -5,7 +5,7 @@ import { IconProps } from '../../types/props'
 
 /**
  * @deprecated
- * This component is deprecated. Use `Edit` instead from `@sebgroup/green-react`.
+ * This component is deprecated. Use `gds-icon-edit` instead from `@sebgroup/green-core`.
  */
 export const Edit = ({
   focusable = false,

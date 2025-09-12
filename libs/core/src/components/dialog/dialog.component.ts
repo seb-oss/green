@@ -1,5 +1,8 @@
 import { localized, msg } from '@lit/localize'
-import { property, query } from 'lit/decorators.js'
+import { nothing } from 'lit'
+import { property, query, state } from 'lit/decorators.js'
+import { classMap } from 'lit/directives/class-map.js'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { when } from 'lit/directives/when.js'
 
 import { GdsElement } from '../../gds-element'
@@ -10,6 +13,7 @@ import {
 } from '../../utils/helpers/custom-element-scoping'
 import { isIOS } from '../../utils/helpers/platform'
 import {
+  withPaddingProps,
   withSizeXProps,
   withSizeYProps,
 } from '../../utils/mixins/declarative-layout-mixins'
@@ -18,7 +22,7 @@ import { GdsCard } from '../card/card.component'
 import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
-import { styles } from './dialog.styles'
+import DialogStyles from './dialog.styles'
 import {
   lockBodyScrolling,
   registerGlobalScrollLockStyles,
@@ -29,7 +33,6 @@ registerGlobalScrollLockStyles()
 
 /**
  * @element gds-dialog
- * @status beta
  *
  * @event gds-ui-state - Fired when the dialog is opened or closed. Can be cancelled to prevent the dialog from closing.
  * @event gds-close - Fired when the dialog is closed
@@ -38,14 +41,17 @@ registerGlobalScrollLockStyles()
  * @slot - The content of the dialog
  * @slot trigger - The trigger button for the dialog
  * @slot footer - The footer of the dialog
+ * @slot dialog - Complete override of the dialog content, including header and footer
  */
 @gdsCustomElement('gds-dialog', {
   dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],
 })
 @localized()
-export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
-  static styles = [styles]
-  static styleExpressionBaseSelector = 'dialog'
+export class GdsDialog extends withSizeXProps(
+  withSizeYProps(withPaddingProps(GdsElement)),
+) {
+  static styles = [DialogStyles]
+  static styleExpressionBaseSelector = '.card'
 
   /**
    * Whether the dialog is open. The state of the dialog can be controlled either
@@ -65,6 +71,22 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
    */
   @property()
   variant: 'default' | 'slide-out' = 'default'
+
+  /**
+   * The dialog's placement.
+   */
+  @property()
+  placement: 'initial' | 'top' | 'bottom' | 'left' | 'right' = 'initial'
+
+  /**
+   * Whether the inner content of the dialog should have scrollable overflow. Scroll will appear if
+   * the content exceeds the dialog's height, which can be controlled using the `height` property.
+   *
+   * This property have no effect if the `dialog` slot is used. In that case, you need to add overflow
+   * styles to the content inside the `dialog` slot.
+   */
+  @property({ type: Boolean })
+  scrollable = false
 
   @query('dialog')
   private _elDialog: HTMLDialogElement | undefined
@@ -106,53 +128,57 @@ export class GdsDialog extends withSizeXProps(withSizeYProps(GdsElement)) {
         () =>
           html`<dialog
             @close=${this.#handleNativeClose}
-            class=${this.variant}
-            aria-describedby="heading"
+            class=${classMap({
+              [this.variant]: true,
+              [`placement-${this.placement}`]: true,
+            })}
+            aria-label=${ifDefined(this.heading)}
           >
             <gds-card
               class="card"
-              display="flex"
               variant="secondary"
               box-shadow="xl"
-              padding="l"
               gap="l"
               border-radius="s"
             >
-              <gds-flex
-                justify-content="space-between"
-                background-color="secondary"
-              >
-                <h2 id="heading">${this.heading}</h2>
-                <gds-button
-                  id="close-btn"
-                  rank="secondary"
-                  size="small"
-                  label=${msg('Close')}
-                  @click=${() => this.close('btn-close')}
-                  ><gds-icon-cross-small></gds-icon-cross-small
-                ></gds-button>
-              </gds-flex>
-              <gds-div id="content" overflow="auto" flex="1">
-                <slot></slot>
-              </gds-div>
-              <gds-flex
-                class="footer"
-                justify-content="center"
-                gap="s"
-                padding="s 0 0 0"
-              >
-                <slot name="footer">
+              <slot name="dialog">
+                <gds-flex justify-content="space-between">
+                  <h2 id="heading">${this.heading}</h2>
                   <gds-button
-                    value="cancel"
-                    @click=${() => this.close('btn-cancel')}
+                    id="close-btn"
                     rank="secondary"
-                    >${msg('Cancel')}</gds-button
-                  >
-                  <gds-button value="ok" @click=${() => this.close('btn-ok')}
-                    >Ok</gds-button
-                  >
-                </slot>
-              </gds-flex>
+                    size="small"
+                    label=${msg('Close')}
+                    @click=${() => this.close('btn-close')}
+                    ><gds-icon-cross-small></gds-icon-cross-small
+                  ></gds-button>
+                </gds-flex>
+                <gds-div
+                  id="content"
+                  flex="1"
+                  overflow=${ifDefined(this.scrollable) ? 'auto' : nothing}
+                >
+                  <slot></slot>
+                </gds-div>
+                <gds-flex
+                  class="footer"
+                  justify-content="center"
+                  gap="s"
+                  padding="s 0 0 0"
+                >
+                  <slot name="footer">
+                    <gds-button
+                      value="cancel"
+                      @click=${() => this.close('btn-cancel')}
+                      rank="secondary"
+                      >${msg('Cancel')}</gds-button
+                    >
+                    <gds-button value="ok" @click=${() => this.close('btn-ok')}
+                      >Ok</gds-button
+                    >
+                  </slot>
+                </gds-flex>
+              </slot>
             </gds-card>
           </dialog>`,
       )}`

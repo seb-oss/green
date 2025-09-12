@@ -86,15 +86,12 @@ export const Usage: Story = {
 export const WeekNumbers: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-datepicker
-      label="With week numbers"
-      show-week-numbers
-    ></gds-datepicker>
+    <gds-datepicker label="Week numbers" show-week-numbers></gds-datepicker>
   `,
 }
 
 /**
- * Use the `show-week-numbers` attribute to show a week numbers column in the calendar view.
+ * Setting `min` and `max` date you can choose.
  */
 export const MinMaxDates: Story = {
   ...DefaultParams,
@@ -128,7 +125,7 @@ export const Disabled: Story = {
 }
 
 /**
- * The date picker has two sizes: `small` and `medium`. The default size is `medium`.
+ * The date picker has two sizes: `small` and `large`. The default size is `large`.
  *
  * Optionally, the label can be hidden by using the `hide-label` attribute.
  */
@@ -136,7 +133,7 @@ export const InputFieldSize: Story = {
   ...DefaultParams,
   render: (args) => html`
     <gds-datepicker
-      label="A small datepicker"
+      label="A small input"
       hide-label
       size="small"
     ></gds-datepicker>
@@ -172,7 +169,7 @@ export const DisabledField: Story = {
 export const Clearable: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-datepicker label="A clearable datepicker" clearable></gds-datepicker>
+    <gds-datepicker label="Clearable on" clearable></gds-datepicker>
   `,
 }
 
@@ -182,9 +179,22 @@ export const Clearable: Story = {
 export const Simplified: Story = {
   ...DefaultParams,
   render: (args) => html`
+    <gds-datepicker label="Today hidden" hide-today-button></gds-datepicker>
+  `,
+}
+
+/**
+ * An example with things turned on.
+ */
+export const Full: Story = {
+  ...DefaultParams,
+  render: (args) => html`
     <gds-datepicker
-      label="A no today buttom datepicker"
-      hide-today-button
+      label="Label"
+      supporting-text="Supporting text"
+      clearable
+      disabled-weekends
+      show-week-numbers
     ></gds-datepicker>
   `,
 }

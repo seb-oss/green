@@ -6,18 +6,17 @@ import {
   html,
 } from '../../utils/helpers/custom-element-scoping'
 import { GdsDiv } from '../div/div.component'
-import GridCSS from './grid.style'
+import GridStyles from './grid.styles'
 
 /**
  * The `gds-grid` is a custom element that provides a flexible grid system. It uses CSS grid layout to arrange its child elements into columns. This component is highly customizable and responsive, allowing you to specify the number of `columns`, `gap`, `padding`, and fluidity for different devices with automated column size based on the content using the `auto-columns` attribute.
  *
  * @element gds-grid
- * @status beta
  *
  */
 @gdsCustomElement('gds-grid')
 export class GdsGrid extends GdsDiv {
-  static styles = [tokens, GridCSS]
+  static styles = [tokens, GridStyles]
 
   /**
    * The number of columns for the grid. This can be a single value that applies to all breakpoints, or a string of three space-separated tokens in the format "l:desktop m:tablet s:mobile", each token specifying the number of columns for that device type respectively.

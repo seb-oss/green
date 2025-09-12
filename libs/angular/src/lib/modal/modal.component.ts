@@ -29,6 +29,9 @@ import { ModalType, Size } from '@sebgroup/extract'
 import { NggModalFooterDirective } from './modal-footer.directive'
 import { NggModalHeaderDirective } from './modal-header.directive'
 
+/**
+ * @deprecated use <gds-dialog> from green-core instead.
+ */
 @Component({
   selector: 'ngg-modal',
   styleUrls: ['./modal.component.scss'],
@@ -91,7 +94,7 @@ import { NggModalHeaderDirective } from './modal-header.directive'
 export class NggModalComponent implements OnDestroy, OnInit {
   @Input() public modalType?: ModalType
   @Input() public header?: string
-  @Input() public closeText = "Close Modal"
+  @Input() public closeText = 'Close Modal'
   @Input() public confirmLabel?: string
   @Input() public dismissLabel?: string
   @Input() public size?: Size
@@ -233,7 +236,7 @@ export class NggModalComponent implements OnDestroy, OnInit {
     <h3 data-testid="modal-header-text">{{ header }}</h3>
     <button
       data-testid="modal-close-button"
-      class="close"
+      class="gds-close"
       [attr.aria-label]="closeText"
       (click)="this.handleClose($event)"
     >
@@ -267,7 +270,7 @@ export class NggModalBodyComponent {}
     <button
       data-testid="modal-dismiss-button"
       *ngIf="dismissLabel"
-      class="secondary"
+      class="gds-button secondary"
       (click)="this.handleDismiss($event)"
     >
       {{ dismissLabel }}
@@ -275,7 +278,7 @@ export class NggModalBodyComponent {}
     <button
       data-testid="modal-confirm-button"
       *ngIf="confirmLabel"
-      class="primary"
+      class="gds-button primary"
       (click)="this.handleConfirm($event)"
     >
       {{ confirmLabel }}

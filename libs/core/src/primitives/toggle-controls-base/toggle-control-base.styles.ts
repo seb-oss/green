@@ -1,6 +1,6 @@
 import { css } from 'lit'
 
-export const styles = css`
+const style = css`
   @layer base, a11y;
 
   @layer a11y {
@@ -28,14 +28,14 @@ export const styles = css`
     }
 
     slot[name='label']::slotted(*) {
-      font-weight: var(--gds-sys-text-weight-book);
+      font: var(--gds-sys-text-detail-book-m);
       cursor: inherit;
     }
 
     slot[name='supporting-text']::slotted(*) {
-      font-size: var(--_font-size-supporting-text);
-      line-height: var(--_line-height-supporting-text);
+      font: var(--_font-supporting-text);
       font-weight: var(--gds-sys-text-weight-regular);
     }
   }
 `
+export default style

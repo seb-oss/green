@@ -8,10 +8,9 @@ const style = css`
     inset: auto var(--gds-sys-space-3xl) var(--gds-sys-space-3xl) auto;
   }
   .button {
-    box-shadow: var(--gds-shadow-m);
+    box-shadow: var(--gds-sys-shadow-m-01), var(--gds-sys-shadow-m-02);
     block-size: calc(var(--_block-size) + var(--gds-sys-space-xs));
     width: max-content;
   }
 `
-
 export default style

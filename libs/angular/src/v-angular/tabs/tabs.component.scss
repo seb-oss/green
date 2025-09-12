@@ -1,13 +1,12 @@
-@use '@sebgroup/chlorophyll/scss/components/tabs-bar/mixins' as tabs;
-@use '@sebgroup/chlorophyll/scss/components/button/mixins' as button;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '@sebgroup/chlorophyll/src/scss/components/tabs-bar/mixins' as tabs;
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins' as button;
 
 :host {
-  --sg-border-width: 1px;
-  --sg-border-color: #868686;
-  --gds-ref-pallet-base600: #868686;
-  --text-primary-color: #333;
+  @include light-tokens.add-variables();
 
-  .gds-tabs__tablist {
+  .gds-tabs {
     @include tabs.tabs-bar;
   }
 

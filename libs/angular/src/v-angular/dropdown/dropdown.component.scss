@@ -1,28 +1,14 @@
-@use '../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
-@use '../../../../chlorophyll/scss/components/button/mixins' as button;
-@use '../../../../chlorophyll/scss/components/form/input/mixins' as input;
-@use '../../../../chlorophyll/scss/components/form/common/mixins' as form-group;
-@use '../../../../chlorophyll/scss/components/form/validation/mixins' as
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '../../../../chlorophyll/src/scss/components/dropdown/mixins' as dropdown;
+@use '../../../../chlorophyll/src/scss/components/button/mixins' as button;
+@use '../../../../chlorophyll/src/scss/components/input/mixins' as input;
+@use '../../../../chlorophyll/src/scss/components/form/mixins' as form-group;
+@use '../../../../chlorophyll/src/scss/components/validation/mixins' as
   validation;
-@use '../../../../chlorophyll/scss/tokens' as tokens;
 
 :host {
-  --sg-border-radius: 0.25rem;
-  --sg-border-width: 1px;
-  --sg-border-color: #868686;
-  --text-primary-color: #333;
-  --sg-form-control-bg: #fff;
-  --grey-000: hsl(0 0% 100%);
-  --grey-100: hsl(0, 0%, 97%);
-  --grey-200: hsl(0, 0%, 91%);
-  --grey-300: hsl(0, 0%, 87%);
-  --grey-400: hsl(0, 0%, 81%);
-  --grey-500: hsl(0, 0%, 68%);
-  --grey-600: hsl(0, 0%, 53%);
-  --grey-700: hsl(0, 0%, 29%);
-  --grey-800: hsl(0, 0%, 20%);
-  --grey-900: hsl(0, 0%, 10%);
-  --grey-1000: hsl(0 0% 0%);
+  @include light-tokens.add-variables();
 
   label {
     display: block;
@@ -75,7 +61,7 @@
     }
 
     &:hover {
-      background: #e7e7e7;
+      background: var(--gds-sys-color-base-200);
     }
 
     &:active {

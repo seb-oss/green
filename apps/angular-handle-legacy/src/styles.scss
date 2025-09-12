@@ -8,10 +8,10 @@
 @use '@sebgroup/bootstrap/scss/bootstrap';
 
 /* import all of green */
-/* @use './libs/chlorophyll/scss' with ( $font-path: '../fonts'); */
+/* @use './libs/chlorophyll/src/scss' with ( $font-path: '../fonts'); */
 
 /* add use-green scope i.e. ability to use (`.use-green`) */
-@use './libs/chlorophyll/scss/components/use-green-scope';
+@use './libs/chlorophyll/src/scss/components/use-green-scope';
 
 /* add color palettes for charts, temporary workaround for https://github.com/seb-oss/green/issues/357  */
 @use './libs/charts/scss/mixins' as chart-mixins;
@@ -21,5 +21,5 @@
 .use-green {
   // declare parts to include in a separate file that you import (to scope it to .use-green)
   @import './green'; // custom import of green
-  // @import './libs/chlorophyll/scss'; // if you need to scope green and want everything
+  // @import './libs/chlorophyll/src/scss'; // if you need to scope green and want everything
 }

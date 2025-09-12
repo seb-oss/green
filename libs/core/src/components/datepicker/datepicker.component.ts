@@ -33,7 +33,7 @@ import { IconChevronLeft } from '../icon/icons/chevron-left.component'
 import { IconChevronRight } from '../icon/icons/chevron-right.component'
 import { GdsPopover } from '../popover/popover.component'
 import { GdsDatePartSpinner } from './date-part-spinner'
-import { styles } from './datepicker.styles'
+import DatepickerStyles from './datepicker.styles'
 
 type DatePart = 'year' | 'month' | 'day'
 
@@ -44,7 +44,7 @@ type DateFormatLayout = {
 
 @localized()
 class Datepicker extends GdsFormControlElement<Date> {
-  static styles = [tokens, formControlHostStyle, styles]
+  static styles = [tokens, formControlHostStyle, DatepickerStyles]
 
   get type() {
     return 'gds-datepicker'
@@ -393,7 +393,7 @@ class Datepicker extends GdsFormControlElement<Date> {
           >
             <gds-button
               @click=${this.#handleDecrementFocusedMonth}
-              aria-label=${msg('Previous month')}
+              aria-label=${msg('Switch to previous month')}
               rank="tertiary"
               size="small"
             >
@@ -438,7 +438,7 @@ class Datepicker extends GdsFormControlElement<Date> {
             </gds-dropdown>
             <gds-button
               @click=${this.#handleIncrementFocusedMonth}
-              aria-label=${msg('Next month')}
+              aria-label=${msg('Switch to next month')}
               rank="tertiary"
               size="small"
             >
@@ -466,7 +466,7 @@ class Datepicker extends GdsFormControlElement<Date> {
               <gds-flex
                 align-items="center"
                 justify-content="space-between"
-                padding="0 m m m"
+                padding="m m m m"
               >
                 ${when(
                   this.clearable,
@@ -482,6 +482,7 @@ class Datepicker extends GdsFormControlElement<Date> {
                         this.#dispatchInputEvent()
                         this.#dispatchChangeEvent()
                       }}
+                      aria-label=${msg('Clear selected date')}
                     >
                       ${msg('Clear')}
                     </gds-button>`,
@@ -492,12 +493,13 @@ class Datepicker extends GdsFormControlElement<Date> {
                   () =>
                     html` <gds-button
                       id="today-button"
-                      rank="tertiary"
+                      rank="primary"
                       size="small"
                       @click=${(e: MouseEvent) => {
                         e.stopPropagation()
                         this.#focusDate(new Date())
                       }}
+                      aria-label=${msg("Select today's date")}
                     >
                       ${msg('Today')}
                     </gds-button>`,
@@ -873,7 +875,6 @@ class Datepicker extends GdsFormControlElement<Date> {
  * @element gds-datepicker
  * A form control that allows the user to select a date.
  *
- * @status beta
  *
  * @slot extended-supporting-text - A longer supporting text can be placed here. It will be displayed in a panel when the user clicks the info button.
  * @slot message - ***(deprecated - use `errorMessage` property instead)*** Error message to show below the input field whem there is a validation error.

@@ -1,0 +1,21 @@
+@use './spacing';
+@use '../common/functions';
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36em /*     576px   */,
+  md: 48em /*     768px   */,
+  lg: 62em /*     992px   */,
+  xl: 75em /*     1200px  */,
+  xxl: 87.5em /*  1400px  */,
+);
+$grid-columns: 12;
+$grid-gutter-width: 1rem;
+$grid-row-columns: 6;
+$gutters: spacing.$spacing;
+
+@include functions.assert-ascending($grid-breakpoints, '$grid-breakpoints');
+@include functions.assert-starts-at-zero(
+  $grid-breakpoints,
+  '$grid-breakpoints'
+);

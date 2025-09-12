@@ -35,6 +35,9 @@ export interface SelectProps
   labelInformation?: string
 }
 
+/**
+ * @deprecated Use the `gds-select` web component from green-core instead.
+ */
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
     {

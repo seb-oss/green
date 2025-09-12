@@ -227,7 +227,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: jvmtokens
-          path: src/main/kotlin/se/seb/gds/
+          path: src/commonMain/kotlin/se/seb/gds/
 
       - name: Update version
         run: |

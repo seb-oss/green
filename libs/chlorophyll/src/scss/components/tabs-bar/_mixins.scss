@@ -1,0 +1,81 @@
+@use 'sass:map';
+@use '../../common';
+
+@mixin tab {
+  @include common.add-border($sides: 'bottom');
+  @include common.add-border-color;
+  @include common.padding-horizontal(5);
+  @include common.padding-vertical(4);
+  @include common.font-weight('medium');
+  @include common.add-hover-state(var(--gds-sys-color-base-800));
+  @include common.add-focus;
+
+  display: flex;
+  justify-content: center;
+  color: var(--gds-sys-color-text-primary);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: 0.25rem 0.25rem 0 0;
+  border-left: 1px solid transparent;
+  border-top: 1px solid transparent;
+  border-right: 1px solid transparent;
+
+  .gds-tabs--fluid & {
+    flex: 1;
+  }
+
+  svg > * {
+    fill: currentColor;
+  }
+}
+
+@mixin tab--selected {
+  @include common.add-border(
+    $sides: (
+      'top',
+      'right',
+      'left',
+    )
+  );
+
+  @include common.add-hover-state(var(--gds-sys-color-base-800));
+
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+  border-bottom: 1px transparent;
+}
+
+@mixin tabs-bar {
+  display: flex;
+  overflow-x: auto;
+  padding: 0.25rem;
+  margin: -0.25rem;
+  --border-color: var(--gds-sys-color-base-600);
+
+  // hide scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:not(.gds-tabs--fluid)::after {
+    @include common.add-border(
+      $sides: (
+        'bottom',
+      )
+    );
+    @include common.add-border-color();
+    //border-color: var(--gds-ref-pallets-base-600);
+    content: '';
+    display: block;
+    flex-grow: 1;
+  }
+}
+
+@mixin tabs-panel {
+  display: none;
+}
+
+@mixin tabs-panel--selected {
+  display: block;
+}

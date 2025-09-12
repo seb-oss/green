@@ -23,6 +23,9 @@ export interface ButtonProps
   testId?: string
 }
 
+/**
+ * @deprecated Please use the `gds-button` web component from green-core instead
+ */
 export const Button = forwardRef(
   (
     {
@@ -37,7 +40,7 @@ export const Button = forwardRef(
     ref: ForwardedRef<HTMLButtonElement>,
   ) => {
     const buttonClassName =
-      classNames(className, variant, size, {
+      classNames('gds-button', className, variant, size, {
         active: active,
       }) || undefined
 

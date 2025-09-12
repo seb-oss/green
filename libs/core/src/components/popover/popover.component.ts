@@ -1,5 +1,4 @@
 import { localized, msg } from '@lit/localize'
-import { unsafeCSS } from 'lit'
 import { property, query, state } from 'lit/decorators.js'
 import { classMap } from 'lit/directives/class-map.js'
 import {
@@ -16,7 +15,7 @@ import { gdsCustomElement, html } from '../../scoping'
 import { TransitionalStyles } from '../../transitional-styles'
 import { watch, watchMediaQuery } from '../../utils/decorators'
 import { IconCrossSmall } from '../icon/icons/cross-small.component'
-import styles from './popover.styles'
+import PopoverStyles from './popover.styles'
 
 import type { GdsBackdrop } from './backdrop'
 
@@ -24,7 +23,6 @@ export type UIStateChangeReason = 'show' | 'close' | 'cancel'
 
 /**
  * @element gds-popover
- * @status stable
  *
  * A popover is a transient view that appears above other content. It is used by components such as dropdowns.
  *
@@ -40,7 +38,7 @@ export type UIStateChangeReason = 'show' | 'close' | 'cancel'
 @gdsCustomElement('gds-popover', { dependsOn: [IconCrossSmall] })
 @localized()
 export class GdsPopover extends GdsElement {
-  static styles = unsafeCSS(styles)
+  static styles = PopoverStyles
 
   /**
    * The default set of middleware for Floating UI positioning used by GdsPopover.
@@ -424,6 +422,7 @@ export class GdsPopover extends GdsElement {
       this._elDialog?.style.removeProperty('left')
       this._elDialog?.style.removeProperty('top')
       this._elDialog?.style.removeProperty('minWidth')
+      this._elDialog?.style.removeProperty('min-width')
 
       this.updateComplete.then(() => {
         if (this.open) this._elDialog?.showModal()
@@ -461,6 +460,7 @@ export class GdsPopover extends GdsElement {
         minHeight: this.calcMinHeight(referenceEl),
         maxHeight: this.calcMaxHeight(referenceEl),
       })
+
       computePosition(referenceEl, floatingEl, {
         placement: this.placement,
         middleware: this.floatingUIMiddleware,

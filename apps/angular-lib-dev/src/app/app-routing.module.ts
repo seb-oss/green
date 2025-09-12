@@ -76,6 +76,14 @@ const routes: Routes = [
     data: { name: 'Form' },
     loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
   },
+  {
+    path: 'nggv-date-input',
+    data: { name: 'NGGV Input' },
+    loadChildren: () =>
+      import('./nggv-date-input/nggv-date-input.module').then(
+        (m) => m.InputModule,
+      ),
+  },
   { path: '**', redirectTo: 'buttons' },
 ]
 

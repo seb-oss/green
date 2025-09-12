@@ -1,0 +1,21 @@
+.layout {
+  &.page {
+    display: flex;
+    flex-direction: column;
+    padding-block: 24vh;
+    padding-inline: 80px;
+    gap: 10vh;
+  }
+
+  &.narrow {
+    margin: 0 auto;
+    max-width: 960px;
+  }
+
+  &.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+}

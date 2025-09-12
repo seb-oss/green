@@ -1,7 +1,9 @@
-@use '@sebgroup/chlorophyll/scss/components/button/mixins' as buttons;
-@use '@sebgroup/chlorophyll/scss/common';
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as light2016;
+@use '@sebgroup/chlorophyll/src/scss/components/button/mixins' as buttons;
+@use '@sebgroup/chlorophyll/src/scss/common';
 
 :host {
+  @include light2016.add-variables();
   display: flex;
   padding: 0.25rem;
   justify-content: space-between;
@@ -9,9 +11,6 @@
   gap: 0.25rem;
 
   .nggv-calendar-select {
-    --sg-border-radius: 4px;
-    --sg-border-width: 1px;
-    --sg-border-color: #868686;
     @include common.padding-horizontal(5);
     @include common.padding-vertical(4);
     @include common.add-border-radius();
@@ -40,9 +39,6 @@
 
   button.nggv-prev-button,
   button.nggv-next-button {
-    --sg-border-radius: 4px;
-    --sg-border-width: 0;
-    --sg-border-color: transparent;
     @include buttons.reset;
     @include buttons.base;
     border: none;

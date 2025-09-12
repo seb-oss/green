@@ -126,6 +126,9 @@ const IS_ENTERING = 'is-entering'
 const ENTERED = 'entered'
 const IS_EXITING = 'is-exiting'
 
+/**
+ * @deprecated Please use the `gds-dialog` web component from green-core instead
+ */
 export const Modal = ({
   type = 'default',
   id = randomId(),
@@ -134,7 +137,7 @@ export const Modal = ({
   enableBodyScrollLock = true,
   ...props
 }: ModalProps) => {
-  const [uuid, _] = useState(id)
+  const [uuid] = useState(id)
   const [status, setStatus] = useState<string>(UNMOUNTED)
   const [shouldRender, setShouldRender] = useState<boolean | undefined>(false)
 

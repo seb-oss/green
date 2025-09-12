@@ -288,7 +288,6 @@ class RadioGroup extends GdsFormControlElement<string> {
 
 /**
  * @summary A form control component for grouping radio buttons.
- * @status beta
  *
  * @element gds-radio-group
  *

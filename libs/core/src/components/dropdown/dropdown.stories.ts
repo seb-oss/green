@@ -182,7 +182,7 @@ export const Size: Story = {
 export const HiddenLabel: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown size="small" label="Select tech" hide-label>
+    <gds-dropdown label="Select tech" hide-label>
       <gds-option value="">Select tech</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
@@ -204,6 +204,24 @@ export const PlaceholderOptions: Story = {
   render: (args) => html`
     <gds-dropdown label="Select tech">
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
+      <gds-option value="warp">Warp Drive</gds-option>
+      <gds-option value="cybernetics">Cybernetics</gds-option>
+      <gds-option value="nanotechnology">Nanotechnology</gds-option>
+      <gds-option value="cloning">Cloning</gds-option>
+      <gds-option value="cryonics">Cryonics</gds-option>
+      <gds-option value="teleportation">Teleportation</gds-option>
+    </gds-dropdown>
+  `,
+}
+
+/**
+ * To make it easy for users to clear a field, an x-icon button can be placed at the end of the field. This is commonly used in search/filter forms.
+ */
+export const Clearable: Story = {
+  ...DefaultParams,
+  render: (args) => html`
+    <gds-dropdown label="Select tech" value="teleportation" clearable>
+      <gds-option isplaceholder>None</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>
       <gds-option value="nanotechnology">Nanotechnology</gds-option>

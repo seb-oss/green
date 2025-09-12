@@ -9,7 +9,6 @@ import { watch } from '../../utils/decorators'
 
 /**
  * @element gds-theme
- * @status beta
  *
  * A component that provides CSS variables for a part of the DOM tree.
  * Every descendant of this component will inherit the CSS variables
@@ -28,6 +27,8 @@ export class GdsTheme extends GdsElement {
     css`
       :host {
         display: contents;
+        color: var(--gds-sys-color-content-neutral-01);
+        font-family: var(--gds-sys-text-family);
       }
     `,
   ]
@@ -41,7 +42,7 @@ export class GdsTheme extends GdsElement {
    * The design version to use. Can be `16` or `23`.
    */
   @property({ reflect: true, attribute: 'design-version' })
-  designVersion: '2016' | '2023' = '2016'
+  designVersion: '2016' | '2023' = '2023'
 
   connectedCallback(): void {
     super.connectedCallback()
@@ -59,16 +60,28 @@ export class GdsTheme extends GdsElement {
   // TODO: Add prefers-color-scheme media query when `auto` is selected
   @watch('colorScheme')
   private _onColorSchemeChange() {
-    if (this.colorScheme === 'dark') {
-      this._dynamicStylesController.inject(
-        'color-scheme',
-        unsafeCSS(`:host { ${colorsDark}}`),
-      )
-    } else {
-      this._dynamicStylesController.inject(
-        'color-scheme',
-        unsafeCSS(`:host { ${colorsLight}}`),
-      )
+    switch (this.colorScheme) {
+      case 'dark':
+        this._dynamicStylesController.inject(
+          'color-scheme',
+          unsafeCSS(`:host { ${colorsDark}}`),
+        )
+        break
+      case 'light':
+        this._dynamicStylesController.inject(
+          'color-scheme',
+          unsafeCSS(`:host { ${colorsLight}}`),
+        )
+        break
+      case 'auto':
+      default:
+        this._dynamicStylesController.inject(
+          'color-scheme',
+          unsafeCSS(
+            `:host { ${colorsLight}} @media (prefers-color-scheme: dark) { :host { ${colorsDark} } }`,
+          ),
+        )
+        break
     }
 
     this.dispatchCustomEvent('gds-color-scheme-changed', {

@@ -1,5 +1,45 @@
 # Changelog
 
+## 6.2.1
+
+### Patch Changes
+
+- 43c34a3: **Deprecations:** Add inline deprecation warnings to outdated components
+
+## 6.2.0
+
+### Minor Changes
+
+- 1969060: **Scoping:** Add scope resolver provider:
+
+### Patch Changes
+
+- Updated dependencies [1969060]
+  - @sebgroup/green-core@2.4.0
+
+## 6.1.3
+
+### Patch Changes
+
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+- Updated dependencies [d9b0006]
+  - @sebgroup/green-core@2.0.0
+
 ## 6.1.2
 
 ### Patch Changes

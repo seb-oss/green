@@ -1,0 +1,1 @@
+export { IconRecord } from '@sebgroup/green-core/react';

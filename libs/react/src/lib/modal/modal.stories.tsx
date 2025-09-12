@@ -1,11 +1,12 @@
 /* eslint no-console: "off" */
 import React from 'react'
 import { useArgs } from '@storybook/preview-api'
-import { Meta, Story } from '@storybook/react/types-6-0'
+
+import type { Meta, StoryFn } from '@storybook/react'
 
 import Modal, { ModalProps } from './modal'
 
-const Template: Story<ModalProps> = (props) => {
+const Template: StoryFn<ModalProps> = (props) => {
   const [{ isOpen }, updateArgs] = useArgs()
   const handleClose = () => {
     updateArgs({ isOpen: false })
@@ -35,6 +36,9 @@ const Template: Story<ModalProps> = (props) => {
   )
 }
 
+/**
+ * **Note**: This version of Modal is deprecated! Please use the `gds-dialog` web component from green-core instead.
+ */
 export const ModalDefault: Story<ModalProps> = Template.bind({})
 
 ModalDefault.args = {
@@ -46,7 +50,7 @@ ModalDefault.args = {
   dismiss: 'Nope',
 }
 
-export const SlideOutSmall: Story<ModalProps> = Template.bind({})
+export const SlideOutSmall: StoryFn<ModalProps> = Template.bind({})
 SlideOutSmall.args = {
   type: 'slideout',
   header: 'SlideOut Modal - Small',
@@ -57,7 +61,7 @@ SlideOutSmall.args = {
   size: 'sm',
 }
 
-export const SlideOutMedium: Story<ModalProps> = Template.bind({})
+export const SlideOutMedium: StoryFn<ModalProps> = Template.bind({})
 SlideOutMedium.args = {
   type: 'slideout',
   header: 'SlideOut Modal - Medium',
@@ -68,7 +72,7 @@ SlideOutMedium.args = {
   size: 'md',
 }
 
-export const SlideOutLarge: Story<ModalProps> = Template.bind({})
+export const SlideOutLarge: StoryFn<ModalProps> = Template.bind({})
 SlideOutLarge.args = {
   type: 'slideout',
   header: 'SlideOut Modal - Large',
@@ -79,7 +83,7 @@ SlideOutLarge.args = {
   size: 'lg',
 }
 
-export const TakeOver: Story<ModalProps> = Template.bind({})
+export const TakeOver: StoryFn<ModalProps> = Template.bind({})
 TakeOver.args = {
   type: 'takeover',
   header: 'TakeOver Modal',

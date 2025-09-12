@@ -1,0 +1,7 @@
+.layout {
+  &.home {
+    .no-pointer {
+      pointer-events: none;
+    }
+  }
+}

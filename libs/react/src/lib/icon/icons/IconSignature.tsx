@@ -1,0 +1,1 @@
+export { IconSignature } from '@sebgroup/green-core/react';

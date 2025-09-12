@@ -13,6 +13,8 @@ import {
   ViewChild,
 } from '@angular/core'
 
+import '@sebgroup/green-core/components/icon/icons/dot-grid-two.js'
+
 export interface SortableListItem {
   id: any
   name: string

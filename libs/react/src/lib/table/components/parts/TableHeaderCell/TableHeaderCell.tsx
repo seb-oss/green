@@ -102,14 +102,14 @@ const TableHeaderCell = React.forwardRef(
 
     return (
       <th
-        className={classnames(className, { 'sg-sortable': sortable })}
+        className={classnames(className, { 'gds-sortable': sortable })}
         onClick={sortable ? onSort : onClick}
         ref={ref}
         aria-sort={getCurrentSortValue()}
         {...props}
       >
         {sortable ? (
-          <button className="sg-table-sort">{children}</button>
+          <button className="gds-table-sort"> {children}</button>
         ) : (
           children
         )}

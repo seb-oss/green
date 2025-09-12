@@ -1,0 +1,64 @@
+.search-result {
+  display: flex;
+  flex-direction: column;
+  padding: var(--gds-sys-space-s);
+  border-radius: var(--gds-sys-radius-s);
+}
+
+.search-result:hover {
+  background-color: color-mix(
+    in srgb,
+    transparent,
+    var(--gds-sys-color-state-neutral-03)
+  );
+}
+
+.cmd-fade {
+  --staggering: calc(sibling-index() * 142ms);
+  transition: all 420ms cubic-bezier(0.65, 0.05, 0.36, 1) var(--staggering);
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 -4px;
+  }
+}
+
+.search-card {
+  outline-color: transparent;
+  outline-offset: calc(var(--gds-sys-space-3xs) * -1);
+  outline-style: solid;
+  outline-width: var(--gds-sys-space-3xs);
+  transition:
+    background 240ms,
+    color 240ms;
+
+  &.selected {
+    background-color: var(--gds-sys-color-l3-neutral-03);
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--gds-sys-color-l3-neutral-03),
+        var(--gds-sys-color-state-neutral-03)
+      );
+    }
+  }
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--gds-sys-color-l3-neutral-03),
+      var(--gds-sys-color-state-neutral-03)
+    );
+
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline-color: var(--gds-sys-color-content-neutral-01);
+
+    &:not(:focus-visible) {
+      outline-color: transparent;
+    }
+  }
+}

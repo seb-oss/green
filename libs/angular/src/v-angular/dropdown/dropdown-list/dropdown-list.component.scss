@@ -1,24 +1,18 @@
-@use '../../../../../chlorophyll/scss/common';
-@use '../../../../../chlorophyll/scss/components/list/mixins' as list;
-@use '../../../../../chlorophyll/scss/components/dropdown/mixins' as dropdown;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as light2016;
+@use '@sebgroup/chlorophyll/src/scss/tokens/z-index';
+@use '../../../../../chlorophyll/src/scss/common';
+@use '../../../../../chlorophyll/src/scss/components/list/mixins' as list;
+@use '../../../../../chlorophyll/src/scss/components/dropdown/mixins' as
+  dropdown;
 
 :host {
-  --gds-ref-pallet-base300: hsl(0, 0%, 87%);
-  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
-  --gds-ref-pallet-base400: hsl(0, 0%, 81%);
-  --gds-ref-pallet-base500: hsl(0, 0%, 68%);
-  --sg-z-index-dropdown: ;
-  --sg-z-index-popover: 1060;
-  --sg-z-index-dropdown-backdrop: 990;
-  --sg-z-index-dropdown: 2000;
-  --sg-popover-background: #fff;
-  --sg-popover-box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
-  --text-primary-color: #333;
+  @include light2016.add-variables();
+  @include z-index.add-tokens();
 
   position: absolute;
   bottom: 0;
   transform: translateY(calc(100% + 0.5rem));
-  z-index: var(--sg-z-index-dropdown);
+  z-index: var(--gds-z-index-dropdown);
 
   .visually-hidden:not(:focus):not(:active) {
     clip-path: inset(50%);
@@ -41,14 +35,14 @@
 
   // dropdown select
   ul[role='listbox'] {
-    --z-index: var(--sg-z-index-popover);
-    background-color: var(--sg-popover-background);
+    --z-index: 1060;
+    background-color: var(--gds-sys-color-background-primary);
     flex-direction: column;
     justify-content: flex-end;
     inset: auto;
     z-index: var(--z-index);
-    box-shadow: var(--sg-popover-box-shadow);
-    color: var(--text-primary-color);
+    box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
+    color: var(--gds-sys-color-text-primary);
     padding: 0;
     max-height: 500px;
     overflow-y: auto;
@@ -57,7 +51,7 @@
 
     @include common.padding-bottom(0);
     @include common.add-border();
-    @include common.add-border-color(var(--text-primary-color));
+    @include common.add-border-color(var(--gds-sys-color-text-primary));
     @include common.add-border-radius();
 
     @include dropdown.select();
@@ -92,16 +86,13 @@
     }
   }
 
-  .gds-dropdown__options__label:hover {
-    background-color: var(--gds-ref-pallet-base400);
-  }
-  .gds-dropdown__options__label:focus-visible,
-  .gds-dropdown__options__label[aria-focus='true'] {
-    background-color: var(--gds-ref-pallet-base300);
+  .gds-dropdown__options__label:hover,
+  .gds-dropdown__options__label:focus-visible {
+    background-color: var(--gds-sys-color-base-200);
   }
 
   .gds-dropdown__options__label:active {
-    background-color: var(--gds-ref-pallet-base500);
+    background-color: var(--gds-sys-color-base-300);
   }
 
   .gds-dropdown__options__label:focus-visible {
