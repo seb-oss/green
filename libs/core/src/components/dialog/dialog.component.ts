@@ -51,7 +51,7 @@ export class GdsDialog extends withSizeXProps(
   withSizeYProps(withPaddingProps(GdsElement)),
 ) {
   static styles = [DialogStyles]
-  static styleExpressionBaseSelector = '.card'
+  static styleExpressionBaseSelector = 'dialog'
 
   /**
    * Whether the dialog is open. The state of the dialog can be controlled either
@@ -140,6 +140,7 @@ export class GdsDialog extends withSizeXProps(
               box-shadow="xl"
               gap="l"
               border-radius="s"
+              max-width="100%"
             >
               <slot name="dialog">
                 <gds-flex justify-content="space-between">
@@ -165,6 +166,7 @@ export class GdsDialog extends withSizeXProps(
                   justify-content="center"
                   gap="s"
                   padding="s 0 0 0"
+                  flex-wrap="wrap"
                 >
                   <slot name="footer">
                     <gds-button
@@ -228,17 +230,23 @@ export class GdsDialog extends withSizeXProps(
   }
 
   #dispatchCloseEvent = (reason?: string) => {
-    this.dispatchCustomEvent('gds-close', {
-      detail: reason,
-    })
-    return this.#dispatchUiStateEvent(reason)
+    if (this.#dispatchUiStateEvent(reason)) {
+      this.dispatchCustomEvent('gds-close', {
+        detail: reason,
+      })
+      return true
+    }
+    return false
   }
 
   #dispatchShowEvent = (reason?: string) => {
-    this.dispatchCustomEvent('gds-show', {
-      detail: reason,
-    })
-    return this.#dispatchUiStateEvent(reason)
+    if (this.#dispatchUiStateEvent(reason)) {
+      this.dispatchCustomEvent('gds-show', {
+        detail: reason,
+      })
+      return true
+    }
+    return false
   }
 
   #dispatchUiStateEvent = (reason?: string) => {
