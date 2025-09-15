@@ -8,6 +8,8 @@ import * as Core from '@sebgroup/green-core/react'
 import { useSettingsValue } from '../../../settings'
 import { Snippet } from '../snippet/snippet'
 
+import './card.css'
+
 interface CardProps {
   type?: 'component' | 'template'
   list?: boolean
@@ -60,6 +62,7 @@ export default function Card({
       position="relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      className="card"
     >
       <Link
         key={href}
@@ -98,6 +101,7 @@ export default function Card({
                       max-width={list ? '50%' : '100%'}
                       align-items="center"
                       justify-content="center"
+                      className="card-snippet"
                       padding="0"
                     >
                       {snippet && <Snippet slug={snippet} />}

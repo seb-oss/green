@@ -15,6 +15,7 @@ export { SettingsContext } from './context'
 export { DEFAULT_SETTINGS, EXCLUSIVE_PANELS } from './defaults'
 export { SettingsProvider } from './provider'
 export {
+  useSet,
   useSettings,
   useSettingsContext,
   useSettingsValue,

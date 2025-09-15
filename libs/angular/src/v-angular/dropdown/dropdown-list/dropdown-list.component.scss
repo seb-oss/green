@@ -15,16 +15,14 @@
   --sg-popover-box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.15);
   --text-primary-color: #333;
 
-  position: absolute;
   bottom: 0;
-  transform: translateY(calc(100% + 0.5rem));
+  width: 100%; 
   z-index: var(--sg-z-index-dropdown);
 
   .visually-hidden:not(:focus):not(:active) {
     clip-path: inset(50%);
     height: 1px;
     overflow: hidden;
-    position: absolute;
     white-space: nowrap;
     width: 1px;
   }
@@ -54,6 +52,10 @@
     overflow-y: auto;
     width: 100%;
     overscroll-behavior: none;
+
+    &.use-margin {
+      margin-top: 0.5rem 0rem;
+    }
 
     @include common.padding-bottom(0);
     @include common.add-border();
@@ -126,15 +128,5 @@
     background-color: #e7e7e7;
     padding-inline: 1rem;
     padding-block: 0.5rem;
-  }
-
-  &[data-position='top'] {
-    top: auto;
-    bottom: 100%;
-    transform: translateY(-0.5rem);
-  }
-  &[data-position='bottom'] {
-    bottom: 0;
-    transform: translateY(calc(100% + 0.5rem));
   }
 }

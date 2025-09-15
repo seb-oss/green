@@ -48,7 +48,17 @@ export default function CollapsedNav({ isOpen }: CollapsedNavProps) {
               flex="1"
             >
               {link.icon && (
-                <Icon key={String(isOpen) + link.icon} name={link.icon} />
+                <Icon
+                  key={String(isOpen) + link.icon}
+                  name={link.icon}
+                  solid={
+                    pathName.startsWith(`/${link.slug}`) ||
+                    (pathName.split('/').includes('component') &&
+                      link.slug === 'components')
+                      ? true
+                      : false
+                  }
+                />
               )}
             </Link>
           )

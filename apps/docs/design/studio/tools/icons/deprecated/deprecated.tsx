@@ -4,7 +4,12 @@
 import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Icon } from '../../../hooks'
+import { Icon } from '../../../../../hooks'
+import { Variable } from '../../../parts'
+
+interface DeprecatedIconsProps {
+  searchQuery?: string
+}
 
 interface IconMapping {
   old: string
@@ -104,10 +109,12 @@ function formatGdsIconName(name: string): string {
       .join('')
   )
 }
-export function DeprecatedIcons() {
-  const [query, setQuery] = useState('')
 
+export default function DeprecatedIcons({
+  searchQuery = '',
+}: DeprecatedIconsProps) {
   const filteredIcons = useMemo(() => {
+    const query = searchQuery || '' // Extra safety
     if (!query.trim()) return iconMappings
 
     return iconMappings.filter((icon) => {
@@ -115,75 +122,40 @@ export function DeprecatedIcons() {
       const newNameScore = calculateScore(icon.new, query)
       return oldNameScore > 0 || newNameScore > 0
     })
-  }, [query])
-
+  }, [searchQuery])
   return (
-    <Core.GdsFlex flex-direction="column" gap="l">
-      <Core.GdsInput
-        value={query}
-        plain
-        onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
-        grid-column="1 / span 6"
-        clearable
-      >
-        <Core.IconMagnifyingGlass slot="lead" />
-      </Core.GdsInput>
-      {!query && (
-        <Core.GdsFlex align-items="center" gap="xs">
-          <Core.GdsFlex align-items="center" gap="xs" flex="1" padding="0 xs">
-            <Core.GdsDiv
-              display="flex"
-              background={'negative-01'}
-              min-width="20px"
-              max-width="20px"
-              min-height="20px"
-              max-height="20px"
-              border-radius="max"
-              justify-content="center"
-              align-items="center"
-              margin="3xs 0 0 0"
-              color="negative"
-            >
-              <Core.IconCrossLarge size="s" color="negative-01" />
-            </Core.GdsDiv>
-            Old
-          </Core.GdsFlex>
-          <Core.GdsFlex
-            align-items="center"
-            justify-content="center"
-            width="80px"
-          ></Core.GdsFlex>
-          <Core.GdsFlex align-items="center" gap="xs" flex="1" padding="0 xs">
-            <Core.GdsDiv
-              display="flex"
-              background={'positive-01'}
-              min-width="20px"
-              max-width="20px"
-              min-height="20px"
-              max-height="20px"
-              border-radius="max"
-              justify-content="center"
-              align-items="center"
-              margin="3xs 0 0 0"
-              color="positive"
-            >
-              <Core.IconCheckmark size="s" color="positive-01" />
-            </Core.GdsDiv>
-            New
-          </Core.GdsFlex>
-        </Core.GdsFlex>
-      )}
+    <Core.GdsFlex flex-direction="column" gap="l" width="100%">
       <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       />
+      <Core.GdsCard align-items="center" gap="xs" min-width="100%">
+        <Core.GdsGrid columns="4" gap="xl">
+          <Core.GdsText>Old</Core.GdsText>
+          <Core.GdsText>New</Core.GdsText>
+          <Core.GdsFlex></Core.GdsFlex>
+          <Core.GdsFlex></Core.GdsFlex>
+        </Core.GdsGrid>
+      </Core.GdsCard>
 
-      <Core.GdsCard variant="secondary">
-        {filteredIcons.length > 0 ? (
-          <Core.GdsFlex gap="l" align-items="center" flex-direction="column">
-            {filteredIcons.map((icon) => (
-              <Core.GdsFlex key={icon.old} gap="m" min-width="100%">
-                <Core.GdsFlex align-items="center" gap="s" flex="1">
+      {filteredIcons.length > 0 ? (
+        <Core.GdsFlex align-items="center" flex-direction="column" width="100%">
+          {filteredIcons.map((icon) => (
+            <Core.GdsFlex
+              padding="m l"
+              border-width="0 0 4xs 0"
+              border-color="subtle-01"
+              key={icon.old}
+              width="100%"
+            >
+              <Core.GdsGrid columns="4" gap="l" width="100%">
+                <Core.GdsFlex
+                  align-items="center"
+                  gap="s"
+                  flex="1"
+                  flex-direction="row"
+                  border-radius="m"
+                >
                   <Core.GdsCard
                     variant="negative"
                     width="28px"
@@ -200,13 +172,7 @@ export function DeprecatedIcons() {
                   </Core.GdsCard>
                   <Core.GdsText>{icon.old}</Core.GdsText>
                 </Core.GdsFlex>
-                <Core.GdsFlex
-                  align-items="center"
-                  justify-content="center"
-                  width="80px"
-                >
-                  <Core.IconArrowRight />
-                </Core.GdsFlex>
+
                 <Core.GdsFlex align-items="center" gap="s" flex="1">
                   <Core.GdsCard
                     variant="positive"
@@ -219,15 +185,28 @@ export function DeprecatedIcons() {
                   </Core.GdsCard>
                   <Core.GdsText>{icon.new}</Core.GdsText>
                 </Core.GdsFlex>
-              </Core.GdsFlex>
-            ))}
-          </Core.GdsFlex>
-        ) : (
-          <Core.GdsText color="secondary">
-            No icons found matching <strong>{query}</strong>
+                <div>{``}</div>
+                <Variable name={icon.new} />
+              </Core.GdsGrid>
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
+      ) : (
+        <Core.GdsCard
+          justify-content="center"
+          align-items="center"
+          height="40vh"
+          padding="2xl"
+          width="100%"
+        >
+          <Core.IconMagnifyingGlass size="xl" />
+          <Core.GdsText color="subtle-02">
+            {searchQuery
+              ? `No migration matches found for "${searchQuery}"`
+              : 'No icons found'}
           </Core.GdsText>
-        )}
-      </Core.GdsCard>
+        </Core.GdsCard>
+      )}
     </Core.GdsFlex>
   )
 }
