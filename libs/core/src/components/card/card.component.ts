@@ -100,9 +100,9 @@ export class GdsCard extends GdsDiv {
 
   constructor() {
     super()
-    this.padding = 's;m{l}'
-    this['border-radius'] = 'xs;m{s}'
-    this['gap'] = 's;m{l}'
+    this.padding = 'm;m{l}'
+    this['border-radius'] = 's'
+    this['gap'] = 'm;m{l}'
   }
 
   render() {
