@@ -20,9 +20,9 @@ const style = css`
       //width: 100%;
       padding: 1ch;
 
-      &.indicators {
+      /* &.indicators {
         border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
-      }
+      } */
 
       @media (max-width: 364px) {
         border-spacing: var(--gds-sys-space-2xs);
