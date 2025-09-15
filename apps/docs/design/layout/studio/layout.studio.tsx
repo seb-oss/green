@@ -8,6 +8,8 @@ import * as Part from './parts'
 
 import './layout.studio.css'
 
+import { getPageBySlug } from './data/studio.data'
+
 export const metadata: Metadata = {
   title: 'Studio · Green Design System',
   description: 'Design tokens and tools',
@@ -27,6 +29,7 @@ export function Studio({
   description: string
 }) {
   const PATH = usePathname()
+  const PAGE = getPageBySlug(PATH)
 
   return (
     <Core.GdsGrid
@@ -48,7 +51,57 @@ export function Studio({
             variant="secondary"
             className="studio-page"
           >
-            {children}
+            {PAGE?.content ? (
+              <Core.GdsFlex flex-direction="column" gap="xl">
+                {PAGE.content.map((group) => (
+                  <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
+                    <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
+                    <Core.GdsText color="neutral-02">
+                      {group.description}
+                    </Core.GdsText>
+                    <Core.GdsGrid columns="3" gap="l">
+                      {group.items.map((item) => (
+                        <Core.GdsCard key={item.key} padding="l">
+                          {item.preview && (
+                            <div className="preview-container">
+                              {item.component ? (
+                                <div>icons</div>
+                              ) : (
+                                // For colors, spacing, etc
+                                <div
+                                  className="preview-box"
+                                  style={{
+                                    background: item.cssVariable
+                                      ? `var(${item.cssVariable})`
+                                      : item.value,
+                                  }}
+                                />
+                              )}
+                            </div>
+                          )}
+                          <Core.GdsText font="heading-xs">
+                            {item.name}
+                          </Core.GdsText>
+                          <Core.GdsText color="neutral-02" font="body-s">
+                            {item.description}
+                          </Core.GdsText>
+                          {item.cssVariable && (
+                            <Core.GdsText
+                              font="detail-regular-s"
+                              color="neutral-03"
+                            >
+                              {item.cssVariable}
+                            </Core.GdsText>
+                          )}
+                        </Core.GdsCard>
+                      ))}
+                    </Core.GdsGrid>
+                  </Core.GdsFlex>
+                ))}
+              </Core.GdsFlex>
+            ) : (
+              children
+            )}
           </Core.GdsCard>
           {aside && (
             <Core.GdsCard
