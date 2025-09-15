@@ -6,11 +6,27 @@ export default function PlayPage() {
 }
 
 export function generateStaticParams() {
-  const paths = studioData.flatMap((category) =>
-    category.pages.map((page) => ({
-      slug: page.slug.replace('/play/', '').split('/'),
-    })),
-  )
+  const paths: { slug: string[] }[] = []
+
+  studioData.forEach((category) => {
+    category.pages.forEach((page) => {
+      // Add main page route
+      paths.push({
+        slug: [page.slug.replace('/play/', '')],
+      })
+
+      // Add sub-routes for items if page has content
+      if (page.content) {
+        page.content.forEach((group) => {
+          group.items.forEach((item) => {
+            paths.push({
+              slug: [page.slug.replace('/play/', ''), item.key],
+            })
+          })
+        })
+      }
+    })
+  })
 
   return paths
 }
