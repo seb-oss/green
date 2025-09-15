@@ -3,7 +3,7 @@ import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
 import { studioData } from '../data/studio.data'
 
-export default function StudioSidebar() {
+export default function StudioSidebar({ current }: { current?: string }) {
   return (
     <Core.GdsCard
       variant="secondary"
@@ -40,6 +40,8 @@ export default function StudioSidebar() {
 
               {category.pages.map((page) => {
                 const IconComponent = Core[page.icon]
+                const isActive = current === page.slug
+
                 return (
                   <Link
                     key={page.key}
@@ -47,7 +49,7 @@ export default function StudioSidebar() {
                     component="button"
                     size="small"
                     width="max-content"
-                    rank="tertiary"
+                    rank={isActive ? 'secondary' : 'tertiary'}
                     justify-content="flex-start"
                   >
                     <IconComponent slot="lead" />

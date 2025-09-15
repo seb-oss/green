@@ -1,9 +1,17 @@
 'use client'
 
+import { Metadata } from 'next'
+import { usePathname } from 'next/navigation'
+
 import * as Core from '@sebgroup/green-core/react'
 import * as Part from './parts'
 
 import './layout.studio.css'
+
+export const metadata: Metadata = {
+  title: 'Studio · Green Design System',
+  description: 'Design tokens and tools',
+}
 
 export function Studio({
   page,
@@ -18,6 +26,8 @@ export function Studio({
   title: string
   description: string
 }) {
+  const PATH = usePathname()
+
   return (
     <Core.GdsGrid
       columns="12"
@@ -28,7 +38,7 @@ export function Studio({
       box-sizing="border-box"
       className="studio"
     >
-      <Part.Sidebar />
+      <Part.Sidebar current={PATH} />
       <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="4 / 13">
         <Part.Header title={title} description={description} />
         <Core.GdsGrid columns="12">
