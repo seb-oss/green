@@ -48,6 +48,7 @@ export function Studio({
             className="studio-page"
             padding="0"
             border="none"
+            background="none"
           >
             {PAGE?.content ? (
               <Core.GdsFlex flex-direction="column" gap="2xl">

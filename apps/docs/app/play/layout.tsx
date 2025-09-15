@@ -30,7 +30,7 @@ export default function PlayLayout({
   return (
     <Studio
       page={activePage.key}
-      title={activePage.title}
+      title={activePage.label}
       description={activePage.description}
       aside={
         activeItem && (

@@ -1,12 +1,10 @@
 // studio.sidebar.tsx
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
+import Toggle from '../../../atoms/toggle/toggle.theme'
 import { studioData } from '../data/studio.data'
 
 export default function StudioSidebar({ current }: { current?: string }) {
-  // Get the main path for sub-routes
-  const mainPath = current?.split('/').slice(0, 3).join('/')
-
   return (
     <Core.GdsCard
       variant="secondary"
@@ -26,7 +24,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
         flex-direction="column"
         gap="s"
         aria-label="Sidebar"
-        padding="0 0 m 0"
+        padding="0"
       >
         {studioData.map((category, categoryIndex) => (
           <Core.GdsFlex key={category.key} flex-direction="column" gap="s">
@@ -68,6 +66,25 @@ export default function StudioSidebar({ current }: { current?: string }) {
             )}
           </Core.GdsFlex>
         ))}
+        <Core.GdsDivider color="subtle-01" />
+        <Core.GdsFlex
+          margin="auto 0 0 0"
+          padding="m l l m"
+          justify-content="space-between"
+          align-items="center"
+        >
+          <Link
+            href="/"
+            component="button"
+            size="small"
+            width="max-content"
+            rank="tertiary"
+          >
+            <Core.IconChevronLeft slot="lead" />
+            Docs
+          </Link>
+          <Toggle />
+        </Core.GdsFlex>
       </Core.GdsFlex>
     </Core.GdsCard>
   )

@@ -16,7 +16,7 @@ export async function generateMetadata({
   const page = getPageBySlug(mainPath)
 
   return {
-    title: page ? `${page.title} · Green Design System` : 'Green Design System',
+    title: page ? `${page.label} · Green Design System` : 'Green Design System',
     description: page?.description || 'Design tokens and tools',
   }
 }
