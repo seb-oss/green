@@ -117,22 +117,26 @@ class Button extends GdsFormControlElement<any> {
 
   #isIconButton = false
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    this.setAttribute('role', 'none')
-    TransitionalStyles.instance.apply(this, 'gds-button')
-  }
-
-  focus(options?: FocusOptions): void {
-    this._getValidityAnchor()?.focus(options)
-  }
-
   get #isLink() {
     return this.href.length > 0
   }
 
   get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
+  }
+
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
+  click(): void {
+    this._getValidityAnchor()?.click()
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.setAttribute('role', 'none')
+    TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
   render() {
