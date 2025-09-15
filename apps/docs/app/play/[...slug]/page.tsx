@@ -1,5 +1,25 @@
 // play/[...slug]/page.tsx
-import { studioData } from '../../../design/layout/studio/data/studio.data'
+import { Metadata } from 'next'
+
+import {
+  getPageBySlug,
+  studioData,
+} from '../../../design/layout/studio/data/studio.data'
+
+// Generate static metadata based on the current path
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string[] }
+}): Promise<Metadata> {
+  const mainPath = `/play/${params.slug[0]}`
+  const page = getPageBySlug(mainPath)
+
+  return {
+    title: page ? `${page.title} · Green Design System` : 'Green Design System',
+    description: page?.description || 'Design tokens and tools',
+  }
+}
 
 export default function PlayPage() {
   return null
