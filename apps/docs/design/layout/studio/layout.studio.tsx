@@ -1,20 +1,13 @@
 'use client'
 
-import { Metadata } from 'next'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Icon } from '../../../hooks'
+import { getPageBySlug } from './data/studio.data'
 import * as Part from './parts'
 
 import './layout.studio.css'
-
-import { Link } from '../../atoms/link/link'
-import { getPageBySlug } from './data/studio.data'
-
-export const metadata: Metadata = {
-  title: 'Studio · Green Design System',
-  description: 'Design tokens and tools',
-}
 
 export function Studio({
   page,
@@ -32,6 +25,7 @@ export function Studio({
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = getPageBySlug(MAIN)
+  const ROUT = useRouter()
 
   return (
     <Core.GdsGrid
@@ -52,52 +46,65 @@ export function Studio({
             grid-column={aside ? '1 / 9' : '1 / 13'}
             variant="secondary"
             className="studio-page"
+            padding="0"
+            border="none"
           >
             {PAGE?.content ? (
-              <Core.GdsFlex flex-direction="column" gap="xl">
+              <Core.GdsFlex flex-direction="column" gap="2xl">
                 {PAGE.content.map((group) => (
                   <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
-                    <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
-                    <Core.GdsText color="neutral-02">
-                      {group.description}
-                    </Core.GdsText>
-                    <Core.GdsGrid columns="3" gap="l">
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="heading-s">
+                        {group.title}
+                      </Core.GdsText>
+                      <Core.GdsText color="neutral-02">
+                        {group.description}
+                      </Core.GdsText>
+                    </Core.GdsFlex>
+                    <Core.GdsGrid columns="4" gap="l">
                       {group.items.map((item) => (
-                        <Link key={item.key} href={`${PAGE.slug}/${item.key}`}>
-                          <Core.GdsCard padding="l">
-                            {item.preview && (
-                              <div className="preview-container">
-                                {item.component ? (
-                                  <div>icons</div>
-                                ) : (
-                                  // For colors, spacing, etc
-                                  <div
-                                    className="preview-box"
-                                    style={{
-                                      background: item.cssVariable
-                                        ? `var(${item.cssVariable})`
-                                        : item.value,
-                                    }}
-                                  />
-                                )}
-                              </div>
-                            )}
-                            <Core.GdsText font="heading-xs">
-                              {item.name}
-                            </Core.GdsText>
-                            <Core.GdsText color="neutral-02" font="body-s">
-                              {item.description}
-                            </Core.GdsText>
-                            {item.cssVariable && (
-                              <Core.GdsText
-                                font="detail-regular-s"
-                                color="neutral-03"
-                              >
-                                {item.cssVariable}
-                              </Core.GdsText>
-                            )}
-                          </Core.GdsCard>
-                        </Link>
+                        <Core.GdsCard
+                          padding="l"
+                          key={item.key}
+                          onClick={() => ROUT.push(`${PAGE.slug}/${item.key}`)}
+                          justify-content="space-between"
+                          align-items="center"
+                          variant="secondary"
+                          border-radius="m"
+                        >
+                          {item.component && (
+                            <Core.GdsFlex
+                              flex="1"
+                              height="100%"
+                              min-height="100px"
+                              align-items="center"
+                              className="icon-preview"
+                            >
+                              <Icon name={item.component} size="l" />
+                            </Core.GdsFlex>
+                          )}
+                          {/* {item.preview && (
+                            <div className="preview-container">
+                              {item.component ? (
+                                <>
+                                <div>icons</div>
+                                </>
+                              ) : ( 
+                                <div
+                                  className="preview-box"
+                                  style={{
+                                    background: item.cssVariable
+                                      ? `var(${item.cssVariable})`
+                                      : item.value,
+                                  }}
+                                />
+                              )}
+                            </div>
+                          )} */}
+                          <Core.GdsText font="detail-xs">
+                            {item.name}
+                          </Core.GdsText>
+                        </Core.GdsCard>
                       ))}
                     </Core.GdsGrid>
                   </Core.GdsFlex>
