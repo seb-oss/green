@@ -112,8 +112,8 @@ const style = css`
         }
 
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l3-neutral-01);
           color: var(--gds-sys-color-content-neutral-03);
+          background: var(--gds-sys-color-l3-neutral-01);
         }
 
         &:not(.disabled):hover {
