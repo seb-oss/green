@@ -30,7 +30,8 @@ export function Studio({
   description: string
 }) {
   const PATH = usePathname()
-  const PAGE = getPageBySlug(PATH)
+  const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
+  const PAGE = getPageBySlug(MAIN)
 
   return (
     <Core.GdsGrid
@@ -111,7 +112,17 @@ export function Studio({
               variant="secondary"
               grid-column="9 / 13"
               className="studio-aside"
+              position="relative"
             >
+              <Core.GdsFlex
+                align-items="center"
+                justify-content="space-between"
+              >
+                <Core.GdsText font="detail-s">Title</Core.GdsText>
+                <Core.GdsButton size="small" rank="secondary">
+                  <Core.IconCrossSmall />
+                </Core.GdsButton>
+              </Core.GdsFlex>
               {aside}
             </Core.GdsCard>
           )}
