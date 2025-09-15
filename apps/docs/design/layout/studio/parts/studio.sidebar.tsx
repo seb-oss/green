@@ -4,6 +4,9 @@ import { Link } from '../../../atoms/link/link'
 import { studioData } from '../data/studio.data'
 
 export default function StudioSidebar({ current }: { current?: string }) {
+  // Get the main path for sub-routes
+  const mainPath = current?.split('/').slice(0, 3).join('/')
+
   return (
     <Core.GdsCard
       variant="secondary"
@@ -40,7 +43,9 @@ export default function StudioSidebar({ current }: { current?: string }) {
 
               {category.pages.map((page) => {
                 const IconComponent = Core[page.icon]
-                const isActive = current === page.slug
+                // Check if current path matches page slug or starts with page slug (for sub-routes)
+                const isActive =
+                  current === page.slug || current?.startsWith(`${page.slug}/`)
 
                 return (
                   <Link

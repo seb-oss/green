@@ -44,7 +44,7 @@ export function Studio({
     >
       <Part.Sidebar current={PATH} />
       <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="4 / 13">
-        <Part.Header title={title} description={description} />
+        <Part.Header title={title} description={description} page={page} />
         <Core.GdsGrid columns="12">
           <Core.GdsCard
             flex-direction="column"

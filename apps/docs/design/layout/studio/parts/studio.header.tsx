@@ -6,13 +6,14 @@ import * as Part from '../parts'
 interface Types {
   title: string
   description: string
+  page: string
 }
 
-export default function StudioHeader({ title, description }: Types) {
+export default function StudioHeader({ title, description, page }: Types) {
   return (
     <Core.GdsFlex flex-direction="column" gap="l" className="studio-header">
       <Part.Meta title={title} description={description} />
-      <Part.Breadcrumbs current={title} />
+      <Part.Breadcrumbs current={page} />
       <Core.GdsDivider color="subtle-01" />
       <Part.Search />
     </Core.GdsFlex>
