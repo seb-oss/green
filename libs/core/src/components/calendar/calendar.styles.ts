@@ -137,8 +137,8 @@ const style = css`
         }
 
         &.disabled:not(.week-number) {
-          background: var(--gds-sys-color-l3-disabled-01);
           color: var(--gds-sys-color-content-disabled-01);
+          background: var(--gds-sys-color-l3-disabled-01);
           cursor: not-allowed;
         }
 
@@ -166,7 +166,6 @@ const style = css`
         &:focus-visible {
           outline-color: var(--gds-sys-color-content-neutral-01);
           outline-width: var(--gds-sys-space-3xs);
-          outline-offset: 3.75px;
         }
 
         @media (max-width: 364px) {
