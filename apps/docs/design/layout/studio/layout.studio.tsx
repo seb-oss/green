@@ -6,6 +6,7 @@ import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
 import { getPageBySlug } from './data/studio.data'
 import * as Part from './parts'
+import * as Table from './table'
 
 import './layout.studio.css'
 
@@ -62,6 +63,15 @@ export function Studio({
                         {group.description}
                       </Core.GdsText>
                     </Core.GdsFlex>
+                    <Table.Head
+                      columns={[
+                        { label: 'Level' },
+                        { label: 'Preview' },
+                        { label: 'Light' },
+                        { label: 'Dark' },
+                        { label: '' },
+                      ]}
+                    ></Table.Head>
                     <Core.GdsGrid columns="4" gap="l">
                       {group.items.map((item) => (
                         <Core.GdsCard
@@ -84,24 +94,6 @@ export function Studio({
                               <Icon name={item.component} size="l" />
                             </Core.GdsFlex>
                           )}
-                          {/* {item.preview && (
-                            <div className="preview-container">
-                              {item.component ? (
-                                <>
-                                <div>icons</div>
-                                </>
-                              ) : ( 
-                                <div
-                                  className="preview-box"
-                                  style={{
-                                    background: item.cssVariable
-                                      ? `var(${item.cssVariable})`
-                                      : item.value,
-                                  }}
-                                />
-                              )}
-                            </div>
-                          )} */}
                           <Core.GdsText font="detail-xs">
                             {item.name}
                           </Core.GdsText>
