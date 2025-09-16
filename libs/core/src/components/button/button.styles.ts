@@ -31,7 +31,7 @@ const style = css`
       border-radius: var(--gds-sys-radius-max);
       font-family: inherit;
       font: var(--gds-sys-text-detail-book-m);
-      gap: var(--gds-sys-space-s);
+      gap: var(--gds-sys-space-xs);
       outline-color: transparent;
       outline-offset: var(--gds-sys-space-3xs);
       outline-style: solid;
@@ -143,13 +143,13 @@ const style = css`
   @layer sizes {
     :host([size='xs']) .button {
       --_block-size: var(--gds-sys-space-l);
+      gap: var(--gds-sys-space-2xs);
       font: var(--gds-sys-text-detail-book-xs);
       padding-inline: var(--gds-sys-space-s);
     }
 
     :host([size='small']) .button {
       --_block-size: var(--gds-sys-space-2xl);
-      gap: var(--gds-sys-space-xs);
       font: var(--gds-sys-text-detail-book-s);
       padding-block: var(--gds-sys-space-2xs);
       padding-inline: var(--gds-sys-space-m);

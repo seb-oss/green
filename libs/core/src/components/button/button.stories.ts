@@ -89,9 +89,9 @@ export const RanksAndVariants: Story = {
       <gds-flex flex-direction="column" gap="m">
         <gds-text>Neutral</gds-text>
         <gds-divider opacity="0.2"></gds-divider>
-        <gds-flex gap="xl">
+        <gds-flex gap="xl" align-items="center">
           <gds-button variant="neutral">
-            <gds-icon-credit-card slot="lead"></gds-icon-credit-card>
+            <gds-icon-credit-card slot="lead" size="xl"></gds-icon-credit-card>
             Primary
           </gds-button>
           <gds-button variant="neutral" rank="secondary">
@@ -208,19 +208,39 @@ export const Sizes: Story = {
     controls: { include: ['rank', 'variant'] },
   },
   render: (args) => html`
-    <gds-flex gap="l" align-items="center">
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
-        X-Small
-      </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
-        Small
-      </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant}>
-        Medium
-      </gds-button>
-      <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
-        Large
-      </gds-button>
+    <gds-flex flex-direction="column" gap="2xl">
+      <gds-flex gap="l" align-items="center">
+        <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
+          Large
+        </gds-button>
+        <gds-button .rank=${args.rank} .variant=${args.variant}>
+          Medium
+        </gds-button>
+        <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
+          Small
+        </gds-button>
+        <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+          X-Small
+        </gds-button>
+      </gds-flex>
+      <gds-flex gap="l" align-items="center">
+        <gds-button .rank=${args.rank} .variant=${args.variant} size="large">
+          <gds-icon-credit-card slot="lead" size="xl"></gds-icon-credit-card>
+          Large
+        </gds-button>
+        <gds-button .rank=${args.rank} .variant=${args.variant}>
+          <gds-icon-credit-card slot="lead" size="l"></gds-icon-credit-card>
+          Medium
+        </gds-button>
+        <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
+          <gds-icon-credit-card slot="lead" size="m"></gds-icon-credit-card>
+          Small
+        </gds-button>
+        <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
+          <gds-icon-credit-card slot="lead" size="s"></gds-icon-credit-card>
+          X-Small
+        </gds-button>
+      </gds-flex>
     </gds-flex>
   `,
 }
@@ -286,7 +306,7 @@ export const IconButton: Story = {
         size="xs"
         label="Next step 1"
       >
-        <gds-icon-arrow-right />
+        <gds-icon-arrow-right size="s" />
       </gds-button>
       <gds-button
         .rank=${args.rank}
@@ -294,14 +314,14 @@ export const IconButton: Story = {
         size="small"
         label="Next step 2"
       >
-        <gds-icon-arrow-right />
+        <gds-icon-arrow-right size="m" />
       </gds-button>
       <gds-button
         .rank=${args.rank}
         .variant=${args.variant}
         label="Next step 3"
       >
-        <gds-icon-arrow-right />
+        <gds-icon-arrow-right size="l" />
       </gds-button>
       <gds-button
         .rank=${args.rank}
@@ -309,7 +329,7 @@ export const IconButton: Story = {
         size="large"
         label="Next step 4"
       >
-        <gds-icon-arrow-right />
+        <gds-icon-arrow-right size="xl" />
       </gds-button>
     </gds-flex>
   `,
