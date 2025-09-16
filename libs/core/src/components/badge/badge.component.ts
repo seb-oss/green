@@ -118,8 +118,11 @@ export class GdsBadge extends withSizeXProps(
     }
 
     const padding = (() => {
-      const isSmall = this.size === 'small' || this.notification
       const paddings = {
+        notification: {
+          occupied: '3xs xs',
+          default: '3xs 2xs',
+        },
         small: {
           occupied: '3xs 2xs 3xs xs',
           default: '3xs 2xs',
@@ -129,6 +132,14 @@ export class GdsBadge extends withSizeXProps(
           default: '3xs xs',
         },
       }
+
+      if (this.notification) {
+        return paddings.notification[
+          this.mainSlotOccupied ? 'occupied' : 'default'
+        ]
+      }
+
+      const isSmall = this.size === 'small'
       return paddings[isSmall ? 'small' : 'default'][
         this.leadSlotOccupied ? 'occupied' : 'default'
       ]
