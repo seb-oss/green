@@ -68,7 +68,6 @@ const style = css`
         outline-color: transparent;
         outline-width: 0px;
         outline-offset: var(--gds-sys-space-3xs);
-        //--_background: transparent;
 
         &.short {
           width: var(--gds-sys-space-4xl);
