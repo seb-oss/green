@@ -5,10 +5,148 @@ import { usePathname, useRouter } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
 import { getPageBySlug } from './data/studio.data'
+import { ContentGroup, ContentItem, StudioPage } from './data/studio.types'
 import * as Part from './parts'
 import * as Table from './table'
+import * as Tool from './tools'
 
 import './layout.studio.css'
+
+interface StudioProps {
+  page: string
+  children?: React.ReactNode
+  aside?: React.ReactNode
+  title: string
+  description: string
+}
+
+const TOOL_COMPONENTS = {
+  compose: Tool.Compose,
+} as const
+
+const CONTENT = (page: StudioPage, router: any) => {
+  if (page.type === 'tool') {
+    const TOOL = TOOL_COMPONENTS[page.key as keyof typeof TOOL_COMPONENTS]
+    return TOOL ? (
+      <TOOL />
+    ) : (
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="l"
+        align-items="center"
+        justify-content="center"
+        padding="4xl"
+      >
+        <Core.GdsText font="heading-l">Coming Soon</Core.GdsText>
+        <Core.GdsText color="neutral-02">
+          This tool is currently in development
+        </Core.GdsText>
+      </Core.GdsFlex>
+    )
+  }
+
+  if (!page?.content) return null
+
+  switch (page.type) {
+    case 'asset':
+      // Icons Grid View
+      return (
+        <Core.GdsFlex flex-direction="column" gap="2xl">
+          {page.content.map((group: ContentGroup) => (
+            <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
+              <Core.GdsFlex flex-direction="column" gap="3xs">
+                <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
+                <Core.GdsText color="neutral-02">
+                  {group.description}
+                </Core.GdsText>
+              </Core.GdsFlex>
+              <Core.GdsGrid columns="4" gap="l">
+                {group.items.map((item: ContentItem) => (
+                  <Core.GdsCard
+                    padding="l"
+                    key={item.key}
+                    onClick={() => router.push(`${page.slug}/${item.key}`)}
+                    justify-content="space-between"
+                    align-items="center"
+                    variant="secondary"
+                    border-radius="m"
+                  >
+                    {item.component && (
+                      <Core.GdsFlex
+                        flex="1"
+                        height="100%"
+                        min-height="100px"
+                        align-items="center"
+                        className="icon-preview"
+                      >
+                        <Icon name={item.component} size="l" />
+                      </Core.GdsFlex>
+                    )}
+                    <Core.GdsText font="detail-xs">{item.name}</Core.GdsText>
+                  </Core.GdsCard>
+                ))}
+              </Core.GdsGrid>
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
+      )
+
+    case 'token':
+      // Tokens View
+      return (
+        <Core.GdsFlex flex-direction="column" gap="2xl">
+          {page.content.map((group: ContentGroup) => (
+            <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
+              <Core.GdsFlex flex-direction="column" gap="3xs">
+                <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
+                <Core.GdsText color="neutral-02">
+                  {group.description}
+                </Core.GdsText>
+              </Core.GdsFlex>
+              <Core.GdsGrid columns="3" gap="l">
+                {group.items.map((item: ContentItem) => (
+                  <Core.GdsCard
+                    padding="l"
+                    key={item.key}
+                    onClick={() => router.push(`${page.slug}/${item.key}`)}
+                    variant="secondary"
+                    border-radius="m"
+                  >
+                    <Core.GdsText font="heading-xs">{item.name}</Core.GdsText>
+                    <Core.GdsText color="neutral-02">{item.value}</Core.GdsText>
+                    {item.cssVariable && (
+                      <Core.GdsText font="detail-xs" color="neutral-03">
+                        {item.cssVariable}
+                      </Core.GdsText>
+                    )}
+                  </Core.GdsCard>
+                ))}
+              </Core.GdsGrid>
+            </Core.GdsFlex>
+          ))}
+        </Core.GdsFlex>
+      )
+
+    // case 'tool':
+    //   return (
+    //     <Core.GdsFlex
+    //       flex-direction="column"
+    //       gap="l"
+    //       align-items="center"
+    //       justify-content="center"
+    //       padding="4xl"
+    //     >
+    //       <Core.GdsText font="heading-l">Coming Soon</Core.GdsText>
+    //       <Core.GdsText color="neutral-02">
+    //         This tool is currently in development
+    //       </Core.GdsText>
+    //     </Core.GdsFlex>
+    //   )
+
+    default:
+      return null
+  }
+}
 
 export function Studio({
   page,
@@ -16,13 +154,7 @@ export function Studio({
   aside,
   title,
   description,
-}: {
-  page: string
-  children?: React.ReactNode
-  aside?: React.ReactNode
-  title: string
-  description: string
-}) {
+}: StudioProps) {
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = getPageBySlug(MAIN)
@@ -51,61 +183,7 @@ export function Studio({
             border="none"
             background="none"
           >
-            {PAGE?.content ? (
-              <Core.GdsFlex flex-direction="column" gap="2xl">
-                {PAGE.content.map((group) => (
-                  <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
-                    <Core.GdsFlex flex-direction="column" gap="3xs">
-                      <Core.GdsText font="heading-s">
-                        {group.title}
-                      </Core.GdsText>
-                      <Core.GdsText color="neutral-02">
-                        {group.description}
-                      </Core.GdsText>
-                    </Core.GdsFlex>
-                    <Table.Head
-                      columns={[
-                        { label: 'Level' },
-                        { label: 'Preview' },
-                        { label: 'Light' },
-                        { label: 'Dark' },
-                        { label: '' },
-                      ]}
-                    ></Table.Head>
-                    <Core.GdsGrid columns="4" gap="l">
-                      {group.items.map((item) => (
-                        <Core.GdsCard
-                          padding="l"
-                          key={item.key}
-                          onClick={() => ROUT.push(`${PAGE.slug}/${item.key}`)}
-                          justify-content="space-between"
-                          align-items="center"
-                          variant="secondary"
-                          border-radius="m"
-                        >
-                          {item.component && (
-                            <Core.GdsFlex
-                              flex="1"
-                              height="100%"
-                              min-height="100px"
-                              align-items="center"
-                              className="icon-preview"
-                            >
-                              <Icon name={item.component} size="l" />
-                            </Core.GdsFlex>
-                          )}
-                          <Core.GdsText font="detail-xs">
-                            {item.name}
-                          </Core.GdsText>
-                        </Core.GdsCard>
-                      ))}
-                    </Core.GdsGrid>
-                  </Core.GdsFlex>
-                ))}
-              </Core.GdsFlex>
-            ) : (
-              children
-            )}
+            {PAGE ? CONTENT(PAGE, ROUT) : children}
           </Core.GdsCard>
           {aside && (
             <Core.GdsCard
