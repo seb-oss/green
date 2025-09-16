@@ -20,10 +20,6 @@ const style = css`
       width: 100%;
       padding: 1ch;
 
-      &.indicators {
-        border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
-      }
-
       &.small {
         border-spacing: var(--gds-sys-space-2xs);
 
@@ -92,8 +88,8 @@ const style = css`
         }
 
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l3-neutral-01);
           color: var(--gds-sys-color-content-neutral-03);
+          background: var(--gds-sys-color-l3-neutral-01);
         }
 
         &:not(.disabled):hover {
@@ -146,7 +142,6 @@ const style = css`
         &:focus-visible {
           outline-color: var(--gds-sys-color-content-neutral-01);
           outline-width: var(--gds-sys-space-3xs);
-          outline-offset: 3.75px;
         }
 
         &.small {
