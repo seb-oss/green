@@ -298,7 +298,7 @@ export const Size: Story = {
             <gds-checkbox
               label="Checkbox Label"
               value="1"
-              supporting-text="Example support text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+              supporting-text="Example support text."
             ></gds-checkbox>
             <gds-checkbox
               label="Checkbox Label"
@@ -420,6 +420,13 @@ export const GroupLabel: Story = {
   render: () => html`
     <div class="checkbox-group">
       <gds-checkbox-group>
+        <gds-checkbox label="Checkbox Label" value="1"></gds-checkbox>
+        <gds-checkbox label="Checkbox Label" value="2"></gds-checkbox>
+      </gds-checkbox-group>
+      <br />
+      <br />
+      <br />
+      <gds-checkbox-group size="small">
         <gds-checkbox label="Checkbox Label" value="1"></gds-checkbox>
         <gds-checkbox label="Checkbox Label" value="2"></gds-checkbox>
       </gds-checkbox-group>

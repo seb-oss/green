@@ -16,7 +16,7 @@ const style = css`
     }
 
     slot[name='label']::slotted(*) {
-      font: var(--gds-sys-text-detail-book-m);
+      font: var(--_font-label, var(--gds-sys-text-detail-book-m));
     }
 
     slot[name='supporting-text']::slotted(*) {
@@ -25,7 +25,7 @@ const style = css`
 
     :host(.size-small) slot[name='supporting-text'],
     :host(.size-small) ::slotted(label) {
-      font: var(--gds-sys-text-detail-s);
+      font: var(--_font-label, var(--gds-sys-text-detail-book-s));
     }
 
     #extended-supporting-text {
@@ -33,7 +33,7 @@ const style = css`
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       transition-duration: 368ms;
       transition-property: all;
-      font: var(--gds-sys-text-detail-regular-s);
+      font: var(--_font-supporting-text, var(--gds-sys-text-detail-regular-s));
       border-radius: var(--gds-sys-space-xs);
       background-color: var(--gds-sys-color-l3-neutral-02);
       color: var(--gds-sys-color-content-neutral-01);

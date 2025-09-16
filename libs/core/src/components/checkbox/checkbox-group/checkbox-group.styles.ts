@@ -9,6 +9,10 @@ export const styles = css`
 
     /* Color */
     --_checkbox-label-color: var(--gds-sys-color-l3-content-tertiary);
+
+    /* Perimiter */
+    --_perimeter-size: var(--gds-sys-space-2xl);
+    --_container-gap: var(--gds-sys-space-s);
   }
 
   :host(:invalid) {
@@ -18,6 +22,8 @@ export const styles = css`
   :host([size='small']) {
     --_font-label: var(--gds-sys-text-detail-book-s);
     --_font-supporting-text: var(--gds-sys-text-detail-regular-xs);
+    --_perimeter-size: var(--gds-sys-space-xl);
+    --_container-gap: var(--gds-sys-space-xs);
   }
 
   .checkbox-group {
@@ -41,7 +47,11 @@ export const styles = css`
 
   .direction-column .content {
     flex-direction: column;
-    gap: var(--gds-sys-space-m);
+    gap: var(--gds-sys-space-s);
+  }
+
+  :host([size='small']) .direction-column .content {
+    gap: var(--gds-sys-space-xs);
   }
 
   :host([size='small']) slot[name='label'] {

@@ -18,7 +18,7 @@ const style = css`
 
     .container {
       display: flex;
-      gap: var(--gds-sys-space-s);
+      gap: var(--_container-gap, var(--gds-sys-space-s));
     }
 
     .label {
