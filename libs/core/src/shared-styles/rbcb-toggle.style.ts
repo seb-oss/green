@@ -11,7 +11,7 @@ export default css`
   .rbcb {
     --_toggle-size: var(--gds-sys-space-m);
     --_toggle-radius: var(--gds-sys-space-2xs);
-    --_perimeter-size: var(--gds-sys-space-xl);
+    --_perimeter-size: var(--gds-sys-space-2xl);
     --_toggle-border-width-checked: var(--gds-sys-space-s);
 
     --_perimeter-bg-mix: color-mix(
@@ -80,7 +80,7 @@ export default css`
     outline-offset: calc(-1 * var(--gds-sys-space-3xs));
     outline-width: 0;
     outline-color: var(--gds-sys-color-content-neutral-01);
-    border-radius: calc(var(--_toggle-radius) + 4px);
+    border-radius: var(--gds-sys-radius-xs);
     min-width: var(--_perimeter-size);
     min-height: var(--_perimeter-size);
     position: absolute;

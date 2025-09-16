@@ -28,7 +28,7 @@ const style = css`
     }
 
     slot[name='label']::slotted(*) {
-      font: var(--gds-sys-text-detail-book-m);
+      font: var(--_font-label, var(--gds-sys-text-detail-book-m));
       cursor: inherit;
     }
 

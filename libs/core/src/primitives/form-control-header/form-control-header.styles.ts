@@ -18,8 +18,9 @@ const style = css`
     slot[name='label']::slotted(*) {
       font: var(--gds-sys-text-detail-book-m);
     }
+
     slot[name='supporting-text']::slotted(*) {
-      font: var(--gds-sys-text-detail-regular-s);
+      font: var(--_font-supporting-text, var(--gds-sys-text-detail-regular-s));
     }
 
     :host(.size-small) slot[name='supporting-text'],

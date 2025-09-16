@@ -17,7 +17,7 @@ export const styles = css`
 
   :host([size='small']) {
     --_font-label: var(--gds-sys-text-detail-book-s);
-    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-xs);
   }
 
   .checkbox-group {
@@ -36,11 +36,15 @@ export const styles = css`
   .direction-row .content {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--gds-sys-space-l);
+    gap: var(--gds-sys-space-s);
   }
 
   .direction-column .content {
     flex-direction: column;
-    gap: var(--gds-sys-space-xs);
+    gap: var(--gds-sys-space-m);
+  }
+
+  :host([size='small']) slot[name='label'] {
+    font: var(--gds-sys-text-detail-book-xs);
   }
 `

@@ -298,7 +298,7 @@ export const Size: Story = {
             <gds-checkbox
               label="Checkbox Label"
               value="1"
-              supporting-text="Example support text"
+              supporting-text="Example support text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
             ></gds-checkbox>
             <gds-checkbox
               label="Checkbox Label"
