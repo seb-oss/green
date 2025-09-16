@@ -28,7 +28,7 @@ const style = css`
       block-size: var(--gds-sys-space-3xl);
       outline-style: solid;
       outline-width: 0;
-      border-radius: var(--gds-sys-space-xs);
+      border-radius: var(--gds-sys-radius-xs);
       background: var(--gds-sys-color-l3-neutral-02);
       color: var(--gds-sys-color-content-neutral-01);
       border: var(--gds-sys-space-4xs) solid
@@ -74,8 +74,9 @@ const style = css`
     .field.small {
       gap: var(--gds-sys-space-2xs);
       padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs);
-      min-block-size: var(--gds-sys-space-xl);
-      block-size: var(--gds-sys-space-xl);
+      min-block-size: var(--gds-sys-space-2xl);
+      block-size: var(--gds-sys-space-2xl);
+      border-radius: var(--gds-sys-radius-2xs);
     }
 
     .field.multiline {
