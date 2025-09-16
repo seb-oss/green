@@ -120,12 +120,12 @@ export class GdsBadge extends withSizeXProps(
     const padding = (() => {
       const paddings = {
         notification: {
-          occupied: '3xs xs',
-          default: '3xs 2xs',
+          occupied: '4xs 2xs',
+          default: '3xs',
         },
         small: {
-          occupied: '3xs 2xs 3xs xs',
-          default: '3xs 2xs',
+          occupied: '4xs 3xs',
+          default: '4xs 3xs',
         },
         default: {
           occupied: '3xs xs 3xs 2xs',
@@ -177,7 +177,7 @@ export class GdsBadge extends withSizeXProps(
       level="3"
       background=${background}
       color=${color}
-      gap="${this.notification ? '' : '2xs'}"
+      gap="${this.notification ? '' : '3xs'}"
       align-items="center"
       justify-content="${this.notification ? 'center' : 'flex-start'}"
       padding="${padding}"
