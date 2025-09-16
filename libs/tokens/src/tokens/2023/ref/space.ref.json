@@ -1,16 +1,20 @@
 {
   "ref": {
     "space": {
-      "4xs": {
+      "5xs": {
         "$value": 1,
         "$type": "dimension"
       },
-      "3xs": {
+      "4xs": {
         "$value": 2,
         "$type": "dimension"
       },
-      "2xs": {
+      "3xs": {
         "$value": 4,
+        "$type": "dimension"
+      },
+      "2xs": {
+        "$value": 6,
         "$type": "dimension"
       },
       "xs": {

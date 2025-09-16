@@ -27,7 +27,7 @@ export class GdsCard extends GdsDiv {
         border-color: var(--_border-color);
         background-color: var(--_background-color);
         color: var(--_color);
-        border-width: var(--gds-sys-space-4xs);
+        border-width: var(--gds-sys-space-5xs);
         border-style: solid;
         display: flex;
         flex-direction: column;

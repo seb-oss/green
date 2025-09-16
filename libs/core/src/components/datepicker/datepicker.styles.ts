@@ -4,16 +4,6 @@ const style = css`
   @layer base, reset;
 
   @layer base {
-    :host {
-      --_font-label: var(--gds-sys-text-detail-book-m);
-      --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
-    }
-
-    :host([size='small']) {
-      --_font-label: var(--gds-sys-text-detail-book-s);
-      --_font-supporting-text: var(--gds-sys-text-detail-regular-xs);
-    }
-
     #calendar-button::part(_button) {
       outline-offset: -1px;
     }
@@ -23,7 +13,7 @@ const style = css`
       align-items: center;
       justify-content: flex-start;
       inline-size: 12ch;
-      gap: var(--gds-sys-space-4xs);
+      gap: var(--gds-sys-space-5xs);
       font: var(--gds-sys-text-detail-regular-m);
     }
 
@@ -39,13 +29,13 @@ const style = css`
       height: 100%;
       box-sizing: border-box;
       outline: none;
-      padding-block: var(--gds-sys-space-3xs);
+      padding-block: var(--gds-sys-space-4xs);
       text-transform: uppercase;
       line-height: 1;
       text-align: center;
-      padding: var(--gds-sys-space-3xs);
-      margin: calc(-1 * var(--gds-sys-space-3xs));
-      border-radius: var(--gds-sys-radius-2xs);
+      padding: var(--gds-sys-space-4xs);
+      margin: calc(-1 * var(--gds-sys-space-4xs));
+      border-radius: var(--gds-sys-radius-3xs);
 
       &:focus-visible {
         background-color: var(--gds-sys-color-l3-neutral-01);

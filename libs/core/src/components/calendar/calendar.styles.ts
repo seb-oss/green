@@ -25,7 +25,7 @@ const style = css`
       }
 
       &.small {
-        border-spacing: var(--gds-sys-space-2xs);
+        border-spacing: var(--gds-sys-space-3xs);
 
         thead th {
           width: var(--gds-sys-space-xl);
@@ -63,7 +63,7 @@ const style = css`
         box-sizing: border-box;
         text-align: center;
         user-select: none;
-        border-width: var(--gds-sys-space-3xs);
+        border-width: var(--gds-sys-space-4xs);
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-sys-radius-max);
@@ -71,7 +71,7 @@ const style = css`
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
-        outline-offset: var(--gds-sys-space-3xs);
+        outline-offset: var(--gds-sys-space-4xs);
         //--_background: transparent;
 
         &.short {
@@ -145,7 +145,7 @@ const style = css`
 
         &:focus-visible {
           outline-color: var(--gds-sys-color-content-neutral-01);
-          outline-width: var(--gds-sys-space-3xs);
+          outline-width: var(--gds-sys-space-4xs);
           outline-offset: 3.75px;
         }
 

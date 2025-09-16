@@ -65,7 +65,7 @@ const style = css`
     background: var(--gds-sys-color-l3-neutral-02);
     color: var(--gds-sys-color-content-neutral-01);
     border-radius: var(--gds-sys-radius-xs);
-    padding: var(--gds-sys-space-2xs);
+    padding: var(--gds-sys-space-3xs);
     font: var(--gds-sys-text-body-book-s);
   }
 
@@ -199,7 +199,7 @@ const style = css`
   * -----------------------------------------------------------
   */
   details {
-    border-top: solid var(--gds-sys-space-4xs)
+    border-top: solid var(--gds-sys-space-5xs)
       color-mix(in srgb, currentColor, transparent 90%);
     font: var(--gds-sys-text-body-regular-m);
   }
@@ -215,7 +215,7 @@ const style = css`
     align-items: center;
     cursor: pointer;
     user-select: none;
-    outline-offset: var(--gds-sys-space-2xs);
+    outline-offset: var(--gds-sys-space-3xs);
     outline-color: currentColor;
     padding-inline: var(--gds-sys-space-m);
   }
@@ -247,7 +247,7 @@ const style = css`
   }
 
   details[open] {
-    border-bottom: var(--gds-sys-space-4xs) solid
+    border-bottom: var(--gds-sys-space-5xs) solid
       color-mix(in srgb, currentColor, transparent 95%);
     padding-bottom: 0.4lh;
     background: color-mix(in srgb, currentColor, transparent 95%);
@@ -266,7 +266,7 @@ const style = css`
   }
 
   details:last-of-type {
-    border-bottom: var(--gds-sys-space-4xs) solid
+    border-bottom: var(--gds-sys-space-5xs) solid
       color-mix(in srgb, currentColor, transparent 90%);
     margin-bottom: var(--gds-sys-space-xl);
   }
@@ -281,7 +281,7 @@ const style = css`
   * Iframe
   */
   iframe {
-    border: var(--gds-sys-space-4xs) solid var(--gds-sys-color-border-subtle-01);
+    border: var(--gds-sys-space-5xs) solid var(--gds-sys-color-border-subtle-01);
     border-radius: var(--gds-sys-radius-xs);
     min-width: 100%;
     margin-bottom: var(--gds-sys-space-l);

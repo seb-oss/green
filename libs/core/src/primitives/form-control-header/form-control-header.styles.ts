@@ -41,7 +41,7 @@ const style = css`
     }
 
     #extended-supporting-text[aria-hidden='false'] {
-      margin: var(--gds-sys-space-2xs) 0 0 0;
+      margin: var(--gds-sys-space-3xs) 0 0 0;
       padding: var(--gds-sys-space-s) var(--gds-sys-space-m);
     }
 

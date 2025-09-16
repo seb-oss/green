@@ -2,6 +2,9 @@
   "sys": {
     "space": {
       "$type": "dimension",
+      "5xs": {
+        "$value": "{ref.space.5xs}"
+      },
       "4xs": {
         "$value": "{ref.space.4xs}"
       },
@@ -61,6 +64,9 @@
       "$type": "dimension",
       "none": {
         "$value": "{ref.space.0}"
+      },
+      "5xs": {
+        "$value": "{ref.space.5xs}"
       },
       "4xs": {
         "$value": "{ref.space.4xs}"

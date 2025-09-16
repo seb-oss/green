@@ -31,7 +31,7 @@ const style = css`
       border-radius: var(--gds-sys-radius-xs);
       background: var(--gds-sys-color-l3-neutral-02);
       color: var(--gds-sys-color-content-neutral-01);
-      border: var(--gds-sys-space-4xs) solid
+      border: var(--gds-sys-space-5xs) solid
         var(--gds-sys-color-border-interactive);
       cursor: text;
       transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -65,14 +65,14 @@ const style = css`
     }
 
     .field:focus-within {
-      outline-width: var(--gds-sys-space-3xs);
-      outline-offset: var(--gds-sys-space-3xs);
+      outline-width: var(--gds-sys-space-4xs);
+      outline-offset: var(--gds-sys-space-4xs);
       outline-color: currentColor;
       border-color: currentColor;
     }
 
     .field.small {
-      gap: var(--gds-sys-space-2xs);
+      gap: var(--gds-sys-space-3xs);
       padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs);
       min-block-size: var(--gds-sys-space-2xl);
       block-size: var(--gds-sys-space-2xl);

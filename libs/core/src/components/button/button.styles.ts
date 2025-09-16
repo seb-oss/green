@@ -33,9 +33,9 @@ const style = css`
       font: var(--gds-sys-text-detail-book-m);
       gap: var(--gds-sys-space-xs);
       outline-color: transparent;
-      outline-offset: var(--gds-sys-space-3xs);
+      outline-offset: var(--gds-sys-space-4xs);
       outline-style: solid;
-      outline-width: var(--gds-sys-space-3xs);
+      outline-width: var(--gds-sys-space-4xs);
       padding-block: var(--gds-sys-space-s);
       padding-inline: var(--gds-sys-space-xl);
       position: relative;
@@ -143,7 +143,7 @@ const style = css`
   @layer sizes {
     :host([size='xs']) .button {
       --_block-size: var(--gds-sys-space-l);
-      gap: var(--gds-sys-space-2xs);
+      gap: var(--gds-sys-space-3xs);
       font: var(--gds-sys-text-detail-book-xs);
       padding-inline: var(--gds-sys-space-s);
     }
@@ -151,7 +151,7 @@ const style = css`
     :host([size='small']) .button {
       --_block-size: var(--gds-sys-space-2xl);
       font: var(--gds-sys-text-detail-book-s);
-      padding-block: var(--gds-sys-space-2xs);
+      padding-block: var(--gds-sys-space-3xs);
       padding-inline: var(--gds-sys-space-m);
     }
 
