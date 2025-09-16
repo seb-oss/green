@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.5.3
+
+### Patch Changes
+
+- da0ab9a: **Button:** Explicitly add `click()` method on Button, to allow simulated clicks to work same way on iOS Safari as on other browsers
+- 2ba96f6: **Calendar:** Focus outline distance fix
+
 ## 2.5.2
 
 ### Patch Changes
