@@ -18,7 +18,7 @@ const style = css`
     }
 
     .button {
-      --_block-size: var(--gds-sys-space-3xl);
+      --_block-size: var(--gds-sys-space-4xl);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -37,7 +37,7 @@ const style = css`
       outline-style: solid;
       outline-width: var(--gds-sys-space-3xs);
       padding-block: var(--gds-sys-space-s);
-      padding-inline: var(--gds-sys-space-l);
+      padding-inline: var(--gds-sys-space-xl);
       position: relative;
       text-decoration: none;
       transition-property: color, border-colorm, background;
@@ -143,20 +143,22 @@ const style = css`
   @layer sizes {
     :host([size='xs']) .button {
       --_block-size: var(--gds-sys-space-l);
-      font: var(--gds-sys-text-detail-book-s);
-      padding-inline: var(--gds-sys-space-m);
+      font: var(--gds-sys-text-detail-book-xs);
+      padding-inline: var(--gds-sys-space-s);
     }
 
     :host([size='small']) .button {
-      --_block-size: var(--gds-sys-space-xl);
+      --_block-size: var(--gds-sys-space-2xl);
+      gap: var(--gds-sys-space-xs);
       font: var(--gds-sys-text-detail-book-s);
       padding-block: var(--gds-sys-space-2xs);
       padding-inline: var(--gds-sys-space-m);
     }
 
     :host([size='medium']) .button {
-      --_block-size: var(--gds-sys-space-2xl);
+      --_block-size: var(--gds-sys-space-3xl);
       font: var(--gds-sys-text-detail-book-m);
+      padding-inline: var(--gds-sys-space-l);
     }
   }
 

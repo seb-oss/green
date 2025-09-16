@@ -210,7 +210,7 @@ export const Sizes: Story = {
   render: (args) => html`
     <gds-flex gap="l" align-items="center">
       <gds-button .rank=${args.rank} .variant=${args.variant} size="xs">
-        XS
+        X-Small
       </gds-button>
       <gds-button .rank=${args.rank} .variant=${args.variant} size="small">
         Small
