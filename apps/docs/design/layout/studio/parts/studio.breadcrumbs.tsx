@@ -62,7 +62,11 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
   }
 
   return (
-    <Core.GdsFlex justify-content="space-between" align-items="center">
+    <Core.GdsFlex
+      justify-content="space-between"
+      align-items="center"
+      min-block-size="xl"
+    >
       <Core.GdsBreadcrumbs size="small" width="100%" flex="1">
         {breadcrumbs.map((item, index) =>
           item.href ? (
@@ -78,19 +82,26 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
           ),
         )}
       </Core.GdsBreadcrumbs>
-      <Core.GdsFlex align-items="center" gap="s" width="max-content">
-        <Core.GdsText color="warning-01">Font awesome migration</Core.GdsText>
-        <Link
-          component="button"
-          href="/studio/icons/migration"
-          rank="secondary"
-          variant="warning"
-          size="small"
+      {current === 'icons' && (
+        <Core.GdsFlex
+          align-items="center"
+          gap="s"
+          width="max-content"
+          className="studio-cta"
         >
-          Instruction
-          <Core.IconCircleQuestionmark slot="trail" />
-        </Link>
-      </Core.GdsFlex>
+          <Core.GdsText color="warning-01">Font awesome migration</Core.GdsText>
+          <Link
+            component="button"
+            href="/studio/icons/migration"
+            rank="secondary"
+            variant="warning"
+            size="small"
+          >
+            Instruction
+            <Core.IconCircleQuestionmark slot="trail" />
+          </Link>
+        </Core.GdsFlex>
+      )}
     </Core.GdsFlex>
   )
 }

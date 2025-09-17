@@ -20,7 +20,6 @@ export default function Main() {
     <Core.GdsFlex
       flex-direction="column"
       gap="4xl"
-      padding="xl"
       width="100%"
       className="studio-page"
     >

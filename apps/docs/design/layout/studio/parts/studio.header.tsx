@@ -10,6 +10,7 @@ interface Types {
 }
 
 export default function StudioHeader({ title, description, page }: Types) {
+  if (page === 'studio') return null
   return (
     <Core.GdsFlex flex-direction="column" gap="l" className="studio-header">
       <Part.Meta title={title} description={description} />

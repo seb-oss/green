@@ -44,7 +44,7 @@ export const studioData: StudioCategory[] = [
             slug: '/studio/icons/migration',
             title: 'Icon Migration',
             description: 'Guide for migrating from Font Awesome to Green icons',
-            component: 'IconMigration',
+            component: 'Migration',
           },
         ],
         content: [

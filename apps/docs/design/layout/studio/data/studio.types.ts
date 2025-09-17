@@ -9,7 +9,7 @@ export interface ContentItem {
   description: string
   cssVariable?: string
   component?: string
-  pages?: Interactive[]
+  // pages?: Interactive[]
 }
 
 export interface Interactive {

@@ -24,7 +24,7 @@ interface StudioProps {
 const COMPONENTS = {
   compose: Tool.Compose,
   Main: Part.Main,
-  migration: Interactive.Migration,
+  Migration: Interactive.Migration,
 } as const
 
 const CONTENT = (page: StudioPage, router: any, path: string) => {
@@ -168,8 +168,6 @@ export function Studio({
   const PAGE = getPageBySlug(MAIN)
   const ROUT = useRouter()
   const ITEM = PATH.split('/')[3]
-  const LAND = PATH === '/studio'
-  const INTE = PAGE?.pages?.some((p) => p.slug === PATH)
 
   return (
     <Core.GdsGrid
@@ -183,27 +181,21 @@ export function Studio({
     >
       <Part.Sidebar current={PATH} />
       <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="4 / 13">
-        {!LAND && (
-          <Part.Header title={title} description={description} page={page} />
-        )}
-        {INTE && 'hello interactive page'}
-        {LAND && <Part.Main />}
-        {!LAND && (
-          <Core.GdsGrid columns="12">
-            <Core.GdsCard
-              flex-direction="column"
-              grid-column={ITEM && PAGE ? '1 / 9' : '1 / 13'}
-              variant="secondary"
-              className="studio-page"
-              padding="0"
-              border="none"
-              background="none"
-            >
-              {PAGE ? CONTENT(PAGE, ROUT, PATH) : children}
-            </Core.GdsCard>
-            {ITEM && PAGE && <Part.Aside page={PAGE} itemKey={ITEM} />}
-          </Core.GdsGrid>
-        )}
+        <Part.Header title={title} description={description} page={page} />
+        <Core.GdsGrid columns="12">
+          <Core.GdsCard
+            flex-direction="column"
+            grid-column={ITEM && PAGE ? '1 / 9' : '1 / 13'}
+            variant="secondary"
+            className="studio-page"
+            padding="0"
+            border="none"
+            background="none"
+          >
+            {PAGE ? CONTENT(PAGE, ROUT, PATH) : children}
+          </Core.GdsCard>
+          {ITEM && PAGE && <Part.Aside page={PAGE} itemKey={ITEM} />}
+        </Core.GdsGrid>
       </Core.GdsFlex>
     </Core.GdsGrid>
   )
