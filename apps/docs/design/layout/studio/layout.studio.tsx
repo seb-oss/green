@@ -54,12 +54,14 @@ const CONTENT = (page: StudioPage, router: any) => {
         <Core.GdsFlex flex-direction="column" gap="2xl">
           {page.content.map((group: ContentGroup) => (
             <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
-              <Core.GdsFlex flex-direction="column" gap="3xs">
-                <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
-                <Core.GdsText color="neutral-02">
-                  {group.description}
-                </Core.GdsText>
-              </Core.GdsFlex>
+              {group.title && (
+                <Core.GdsFlex flex-direction="column" gap="3xs">
+                  <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
+                  <Core.GdsText color="neutral-02">
+                    {group.description}
+                  </Core.GdsText>
+                </Core.GdsFlex>
+              )}
               <Core.GdsGrid columns="4" gap="l">
                 {group.items.map((item: ContentItem) => (
                   <Core.GdsCard

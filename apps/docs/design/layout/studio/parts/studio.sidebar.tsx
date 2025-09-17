@@ -13,6 +13,8 @@ export default function StudioSidebar({ current }: { current?: string }) {
       padding="0"
       border-radius="m"
       className="studio-sidebar"
+      position="sticky"
+      inset="40px 0 0 0"
     >
       <Core.GdsFlex align-items="center" gap="m" padding="xl l 0 xl">
         <Link href="/studio">
@@ -25,6 +27,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
         gap="s"
         aria-label="Sidebar"
         padding="0"
+        flex="1"
       >
         {studioData.map((category, categoryIndex) => (
           <Core.GdsFlex key={category.key} flex-direction="column" gap="s">
@@ -66,24 +69,25 @@ export default function StudioSidebar({ current }: { current?: string }) {
             )}
           </Core.GdsFlex>
         ))}
-        <Core.GdsDivider color="subtle-01" />
-        <Core.GdsFlex
-          margin="auto 0 0 0"
-          padding="m l l m"
-          justify-content="space-between"
-          align-items="center"
-        >
-          <Link
-            href="/"
-            component="button"
-            size="small"
-            width="max-content"
-            rank="tertiary"
+        <Core.GdsFlex margin="auto 0 0 0" flex-direction="column">
+          <Core.GdsDivider color="subtle-01" />
+          <Core.GdsFlex
+            padding="m l m m"
+            justify-content="space-between"
+            align-items="center"
           >
-            <Core.IconChevronLeft slot="lead" />
-            Docs
-          </Link>
-          <Toggle />
+            <Link
+              href="/"
+              component="button"
+              size="small"
+              width="max-content"
+              rank="tertiary"
+            >
+              <Core.IconChevronLeft slot="lead" />
+              Docs
+            </Link>
+            <Toggle />
+          </Core.GdsFlex>
         </Core.GdsFlex>
       </Core.GdsFlex>
     </Core.GdsCard>
