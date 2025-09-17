@@ -49,7 +49,7 @@ const style = css`
 
   p {
     margin: 0;
-    margin-bottom: var(--gds-sys-space-xs);
+    margin-bottom: var(--gds-sys-space-m);
     max-width: 80ch;
   }
 
