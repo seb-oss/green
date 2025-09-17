@@ -15,6 +15,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
       className="studio-sidebar"
       position="sticky"
       inset="40px 0 0 0"
+      height="90vh"
     >
       <Core.GdsFlex align-items="center" gap="m" padding="xl l 0 xl">
         <Link href="/studio">

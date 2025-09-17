@@ -86,7 +86,9 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                         <Icon name={item.component} size="l" />
                       </Core.GdsFlex>
                     )}
-                    <Core.GdsText font="detail-xs">{item.name}</Core.GdsText>
+                    <Core.GdsText font="detail-regular-xs" color="neutral-02">
+                      {item.name}
+                    </Core.GdsText>
                   </Core.GdsCard>
                 ))}
               </Core.GdsGrid>
@@ -165,7 +167,7 @@ export function Studio({
         <Core.GdsGrid columns="12">
           <Core.GdsCard
             flex-direction="column"
-            grid-column={aside ? '1 / 9' : '1 / 13'}
+            grid-column={ITEM && PAGE ? '1 / 9' : '1 / 13'}
             variant="secondary"
             className="studio-page"
             padding="0"

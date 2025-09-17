@@ -1,9 +1,11 @@
 .studio {
-  --motion: all 640ms cubic-bezier(0.165, 0.84, 0.44, 1);
+  --e: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --a: all 640ms var(--e);
+  --s: opacity 640ms var(--e), translate 640ms var(--e);
 }
 
 .studio-sidebar {
-  transition: var(--motion);
+  transition: var(--a);
 
   @starting-style {
     opacity: 0;
@@ -12,7 +14,7 @@
 }
 
 .studio-header {
-  transition: var(--motion);
+  transition: var(--a);
 
   @starting-style {
     opacity: 0;
@@ -21,7 +23,7 @@
 }
 
 .studio-search {
-  transition: var(--motion);
+  transition: var(--a);
   transition-delay: 80ms;
 
   @starting-style {
@@ -31,7 +33,7 @@
 }
 
 .studio-page {
-  transition: var(--motion);
+  transition: var(--a);
   transition-delay: 120ms;
 
   @starting-style {
@@ -41,11 +43,11 @@
 }
 
 .studio-aside {
-  transition: var(--motion);
+  transition: var(--s);
   transition-delay: 240ms;
 
   @starting-style {
     opacity: 0;
-    translate: 10px 0;
+    translate: 20px 0;
   }
 }
