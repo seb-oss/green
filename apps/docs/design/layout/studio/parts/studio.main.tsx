@@ -79,16 +79,18 @@ export default function Main() {
         </Core.GdsFlex>
       ))}
 
-      <Core.GdsFlex justify-content="flex-end" padding="l">
-        <Core.GdsButton
-          onClick={() => router.push('/')}
-          rank="secondary"
-          size="small"
-        >
-          <Core.IconChevronLeft slot="lead" />
-          Back to Docs
-        </Core.GdsButton>
-      </Core.GdsFlex>
+      {false && (
+        <Core.GdsFlex justify-content="flex-end" padding="l">
+          <Core.GdsButton
+            onClick={() => router.push('/')}
+            rank="secondary"
+            size="small"
+          >
+            <Core.IconChevronLeft slot="lead" />
+            Back to Docs
+          </Core.GdsButton>
+        </Core.GdsFlex>
+      )}
     </Core.GdsFlex>
   )
 }
