@@ -17,7 +17,7 @@ import { watch } from '../../utils/decorators/watch'
 import { GdsFormControlElement } from '../form/form-control'
 import { IconCheckmark } from '../icon/icons/checkmark.component'
 import { IconChevronBottom } from '../icon/icons/chevron-bottom.component'
-import { IconCrossLarge } from '../icon/icons/cross-large.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import { GdsPopover, UIStateChangeReason } from '../popover/popover.component'
 import DropdownStyles from './dropdown.styles'
 
@@ -53,7 +53,7 @@ export * from '../../primitives/listbox/option.component'
     GdsPopover,
     IconCheckmark,
     IconChevronBottom,
-    IconCrossLarge,
+    IconCrossSmall,
   ],
 })
 @localized()
@@ -355,16 +355,16 @@ export class GdsDropdown<ValueT = any>
                 size=${this.size === 'small' ? 'xs' : 'small'}
                 label="${msg('Clear selection')}"
                 @click=${this.#handleClearButton}
-                slot="trail"
+                slot="action"
               >
-                <gds-icon-cross-large></gds-icon-cross-large>
+                <gds-icon-cross-small></gds-icon-cross-small>
               </gds-button>`,
           )}
           ${when(this.combobox && !this.multiple, () => this.#renderCombobox())}
           ${when(!this.combobox || this.multiple, () =>
             this.#renderTriggerButton(),
           )}
-          <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+          <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
         </gds-field-base>
 
         ${when(
