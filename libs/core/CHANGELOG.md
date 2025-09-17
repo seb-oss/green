@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.5.3
+
+### Patch Changes
+
+- da0ab9a: **Button:** Explicitly add `click()` method on Button, to allow simulated clicks to work same way on iOS Safari as on other browsers
+- 2ba96f6: **Calendar:** Focus outline distance fix
+
+## 2.5.2
+
+### Patch Changes
+
+- 33b3aa0: **Dialog:** Fix some sizing and overflow issues
+- 33b3aa0: **Dialog:** Correct order of events, so that `gds-close` does not fire if `gds-ui-state` was cancelled to prevent the dialog from closing.
+
 ## 2.5.1
 
 ### Patch Changes

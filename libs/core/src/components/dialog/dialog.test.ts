@@ -82,6 +82,67 @@ describe('<gds-dialog>', () => {
       expect(closeSpy).to.not.have.been.called
     })
 
+    it('should fire the close event before the gds-ui-state event', async () => {
+      const closeSpy = sinon.spy()
+      const uiStateSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog
+          open
+          heading="Test"
+          @gds-close=${closeSpy}
+          @gds-ui-state=${uiStateSpy}
+        >
+          Content
+        </gds-dialog>`,
+      )
+
+      el.close('test')
+
+      await aTimeout(100)
+
+      expect(uiStateSpy.calledBefore(closeSpy)).to.be.true
+    })
+
+    it('should not fire the close event if the gds-ui-state event is cancelled', async () => {
+      const closeSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog
+          open
+          heading="Test"
+          @gds-close=${closeSpy}
+          @gds-ui-state=${(e: any) => e.preventDefault()}
+        >
+          Content
+        </gds-dialog>`,
+      )
+
+      el.close('test')
+
+      await aTimeout(100)
+
+      expect(closeSpy).to.not.have.been.called
+    })
+
+    it('should not fire the show event if the gds-ui-state event is cancelled', async () => {
+      const showSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog
+          open
+          heading="Test"
+          @gds-show=${showSpy}
+          @gds-ui-state=${(e: any) => e.preventDefault()}
+        >
+          Content
+        </gds-dialog>`,
+      )
+
+      el.show('test')
+
+      await aTimeout(100)
+
+      expect(showSpy).to.not.have.been.called
+    })
+
     it('should set the heading when the heading attribute is set', async () => {
       const el = await fixture<GdsDialog>(
         html`<gds-dialog heading="Test" open>Content</gds-dialog>`,
