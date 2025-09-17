@@ -133,10 +133,10 @@ for (const variant of ['default'] as const) {
             step="1"
             autocapitalize="on"
             autocomplete="on"
-            autocorrect="on"
             spellcheck="true"
             inputmode="numeric"
             autofocus
+            autocorrect
             enterkeyhint="enter"
           ></gds-input>`,
         )
@@ -147,7 +147,7 @@ for (const variant of ['default'] as const) {
         expect(inputEl?.getAttribute('step')).to.equal('1')
         expect(inputEl?.getAttribute('autocapitalize')).to.equal('on')
         expect(inputEl?.getAttribute('autocomplete')).to.equal('on')
-        expect(inputEl?.getAttribute('autocorrect')).to.equal('on')
+        expect(inputEl?.getAttribute('autocorrect')).to.equal(true)
         expect(inputEl?.getAttribute('spellcheck')).to.equal('true')
         expect(inputEl?.getAttribute('inputmode')).to.equal('numeric')
         expect(inputEl?.getAttribute('autofocus')).to.equal('')
