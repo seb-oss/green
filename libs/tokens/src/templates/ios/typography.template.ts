@@ -53,9 +53,28 @@ const groupByWeight = (tokens: Token[]) => {
     light: grouped[300],
   }
 }
+const validateTokens = (tokens: Token[]) => {
+  tokens.forEach((token, idx) => {
+    if (
+      !token.name ||
+      !token.$value ||
+      typeof token.$value.fontSize !== 'number' ||
+      typeof token.$value.fontWeight !== 'number' ||
+      typeof token.$value.fontFamily !== 'string' ||
+      typeof token.$value.lineHeight !== 'number' ||
+      !token.attributes ||
+      typeof token.attributes['ios-text-style'] !== 'string'
+    ) {
+      throw new Error(
+        `Invalid token at index ${idx}: Missing required properties.`,
+      )
+    }
+  })
+}
 
-export default ({ file, header, options, allTokens }: any) => `
-${console.log(allTokens)}
+export default ({ file, header, options, allTokens }: any) => {
+  validateTokens(allTokens)
+  return `
 import SwiftUI
 import UIKit
 
@@ -72,7 +91,7 @@ ${allTokens.map((token: any) => `            case .${lowercaseFirstLetter(token.
 
     var textStyle: Font.TextStyle {
         switch self {
-${allTokens.map((token: any) => `            case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}: .largeTitle`).join('\n')}
+${allTokens.map((token: any) => `            case ${lowercaseFirstLetter(token.name.replace('sysText', ''))}: .${token.attributes['ios-text-style']}`).join('\n')}
         }
     }
 
@@ -104,3 +123,4 @@ extension Typography: CaseIterable {}
 }
 #endif
 `
+}
