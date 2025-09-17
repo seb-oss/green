@@ -48,7 +48,7 @@ const style = css`
         bottom: 0;
         left: 0;
 
-        max-height: 50svh;
+        //max-height: 50svh;
         padding-bottom: 0;
 
         transform: translateY(0);
