@@ -33,7 +33,7 @@ export const styles = css`
   }
 
   :host([size='small']) .checkbox-group {
-    gap: var(--gds-sys-space-s);
+    gap: var(--gds-sys-space-xs);
   }
 
   .content {
@@ -60,9 +60,5 @@ export const styles = css`
 
   :host([size='small']) .direction-row .content {
     gap: var(--gds-sys-space-xs) var(--gds-sys-space-m);
-  }
-
-  :host([size='small']) slot[name='label'] {
-    font: var(--gds-sys-text-detail-book-xs);
   }
 `
