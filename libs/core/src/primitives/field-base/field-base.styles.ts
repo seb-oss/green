@@ -46,30 +46,10 @@ const style = css`
         display: flex;
         position: absolute;
         gap: var(--gds-sys-space-xs);
-        right: var(--gds-sys-space-s);
+        right: var(--gds-sys-space-xs);
         top: var(--gds-sys-space-xs);
         block-size: max-content;
       }
-    }
-
-    .field.lead-slot-occupied {
-      padding-inline-start: var(--gds-sys-space-s);
-    }
-
-    .field.trail-slot-occupied {
-      padding-inline-end: var(--gds-sys-space-xs);
-    }
-
-    .field.small.trail-slot-occupied {
-      padding-inline-end: var(--gds-sys-space-2xs);
-    }
-
-    .field.action-slot-occupied:not(.trail-slot-occupied) {
-      padding-inline-end: var(--gds-sys-space-s);
-    }
-
-    .field.small.action-slot-occupied:not(.trail-slot-occupied) {
-      padding-inline-end: var(--gds-sys-space-2xs);
     }
 
     .field:focus-within {
@@ -105,6 +85,26 @@ const style = css`
       background: var(--gds-sys-color-l3-negative-02);
       border-color: var(--gds-sys-color-border-negative-01);
       color: var(--gds-sys-color-content-negative-01);
+    }
+
+    .field.lead-slot-occupied {
+      padding-inline-start: var(--gds-sys-space-s);
+    }
+
+    .field.trail-slot-occupied {
+      padding-inline-end: var(--gds-sys-space-xs);
+    }
+
+    .field.small.trail-slot-occupied {
+      padding-inline-end: var(--gds-sys-space-2xs);
+    }
+
+    .field.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-sys-space-s);
+    }
+
+    .field.small.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-sys-space-2xs);
     }
 
     slot:not([name])::slotted(*) {
