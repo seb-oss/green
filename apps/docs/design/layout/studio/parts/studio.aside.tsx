@@ -6,19 +6,18 @@ import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
-import { ContentItem, StudioPage } from '../data/studio.types'
+import { StudioPage } from '../data/studio.types'
 
 interface AsideProps {
-  item: ContentItem
   page: StudioPage
+  itemKey: string
 }
 
-export default function Aside({ item, page }: AsideProps) {
+export default function Aside({ page, itemKey }: AsideProps) {
   const router = useRouter()
-
-  // Get all items from the page for navigation
   const allItems = page.content?.flatMap((group) => group.items) || []
-  const currentIndex = allItems.findIndex((i) => i.key === item.key)
+  const currentItem = allItems.find((item) => item.key === itemKey)
+  const currentIndex = allItems.findIndex((item) => item.key === itemKey)
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -44,8 +43,82 @@ export default function Aside({ item, page }: AsideProps) {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [currentIndex, allItems, page.slug, router])
 
+  if (!currentItem) return null
+
   const handleClose = () => {
     router.push(page.slug)
+  }
+
+  const renderContent = () => {
+    switch (page.type) {
+      case 'asset':
+        return (
+          <Core.GdsFlex flex-direction="column" gap="m">
+            {currentItem.component && (
+              <Core.GdsFlex
+                flex="1"
+                height="200px"
+                align-items="center"
+                justify-content="center"
+                className="preview"
+              >
+                <Icon name={currentItem.component} size="xl" />
+              </Core.GdsFlex>
+            )}
+            <Core.GdsFlex flex-direction="column" gap="s">
+              <Core.GdsText font="heading-s">{currentItem.name}</Core.GdsText>
+              <Core.GdsText color="neutral-02">
+                {currentItem.description}
+              </Core.GdsText>
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+        )
+
+      case 'token':
+        return (
+          <Core.GdsFlex flex-direction="column" gap="m">
+            {currentItem.preview && (
+              <Core.GdsFlex
+                flex="1"
+                height="100px"
+                align-items="center"
+                justify-content="center"
+                className="preview"
+              >
+                <div
+                  style={{
+                    background: currentItem.cssVariable
+                      ? `var(${currentItem.cssVariable})`
+                      : currentItem.value,
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: 'var(--gds-radius-m)',
+                  }}
+                />
+              </Core.GdsFlex>
+            )}
+            <Core.GdsFlex flex-direction="column" gap="s">
+              <Core.GdsText font="heading-s">{currentItem.name}</Core.GdsText>
+              <Core.GdsText color="neutral-02">
+                {currentItem.description}
+              </Core.GdsText>
+              {currentItem.cssVariable && (
+                <>
+                  <Core.GdsText font="detail-regular-s" font-family="mono">
+                    {currentItem.cssVariable}
+                  </Core.GdsText>
+                  <Core.GdsText font="detail-regular-s" font-family="mono">
+                    Value: {currentItem.value}
+                  </Core.GdsText>
+                </>
+              )}
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+        )
+
+      default:
+        return null
+    }
   }
 
   return (
@@ -57,44 +130,13 @@ export default function Aside({ item, page }: AsideProps) {
     >
       <Core.GdsFlex flex-direction="column" gap="l" padding="l">
         <Core.GdsFlex align-items="center" justify-content="space-between">
-          <Core.GdsText font="detail-s">{item.name}</Core.GdsText>
+          <Core.GdsText font="detail-s">{currentItem.name}</Core.GdsText>
           <Core.GdsButton size="small" rank="secondary" onClick={handleClose}>
             <Core.IconCrossSmall />
           </Core.GdsButton>
         </Core.GdsFlex>
 
-        <Core.GdsFlex flex-direction="column" gap="m">
-          {item.component && (
-            <Core.GdsFlex
-              flex="1"
-              height="200px"
-              align-items="center"
-              justify-content="center"
-              className="preview"
-            >
-              <Icon name={item.component} size="xl" />
-            </Core.GdsFlex>
-          )}
-
-          <Core.GdsFlex flex-direction="column" gap="s">
-            <Core.GdsText font="heading-s">{item.name}</Core.GdsText>
-            <Core.GdsText color="neutral-02">{item.description}</Core.GdsText>
-          </Core.GdsFlex>
-
-          {item.cssVariable && (
-            <Core.GdsFlex flex-direction="column" gap="s">
-              <Core.GdsText font="detail-s" color="neutral-03">
-                CSS Variable
-              </Core.GdsText>
-              <Core.GdsText font="detail-regular-s" font-family="mono">
-                {item.cssVariable}
-              </Core.GdsText>
-              <Core.GdsText font="detail-regular-s" font-family="mono">
-                Value: {item.value}
-              </Core.GdsText>
-            </Core.GdsFlex>
-          )}
-        </Core.GdsFlex>
+        {renderContent()}
 
         <Core.GdsFlex gap="s" justify-content="space-between">
           {currentIndex > 0 && (

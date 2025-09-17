@@ -147,6 +147,7 @@ export function Studio({
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = getPageBySlug(MAIN)
   const ROUT = useRouter()
+  const ITEM = PATH.split('/')[3]
 
   return (
     <Core.GdsGrid
@@ -173,25 +174,7 @@ export function Studio({
           >
             {PAGE ? CONTENT(PAGE, ROUT, PATH) : children}
           </Core.GdsCard>
-          {aside && (
-            <Core.GdsCard
-              variant="secondary"
-              grid-column="9 / 13"
-              className="studio-aside"
-              position="relative"
-            >
-              <Core.GdsFlex
-                align-items="center"
-                justify-content="space-between"
-              >
-                <Core.GdsText font="detail-s">Title</Core.GdsText>
-                <Core.GdsButton size="small" rank="secondary">
-                  <Core.IconCrossSmall />
-                </Core.GdsButton>
-              </Core.GdsFlex>
-              {aside}
-            </Core.GdsCard>
-          )}
+          {ITEM && PAGE && <Part.Aside page={PAGE} itemKey={ITEM} />}
         </Core.GdsGrid>
       </Core.GdsFlex>
     </Core.GdsGrid>
