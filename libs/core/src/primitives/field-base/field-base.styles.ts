@@ -56,6 +56,15 @@ const style = css`
       padding-inline-start: var(--gds-sys-space-s);
     }
 
+    .field.trail-slot-occupied {
+      padding-inline-end: var(--gds-sys-space-xs);
+    }
+
+    .field.small.trail-slot-occupied {
+      padding-inline-end: var(--gds-sys-space-2xs);
+    }
+
+    /*
     .field.action-slot-occupied:not(.trail-slot-occupied) {
       padding-inline-end: var(--gds-sys-space-s);
 
@@ -63,6 +72,8 @@ const style = css`
         padding-inline-end: var(--gds-sys-space-xs);
       }
     }
+
+    */
 
     .field:focus-within {
       outline-width: var(--gds-sys-space-4xs);

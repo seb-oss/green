@@ -19,7 +19,7 @@ import {
 import { GdsButton } from '../button/button.component'
 import { GdsFlex } from '../flex/flex.component'
 import { GdsFormControlElement } from '../form/form-control'
-import { IconCrossLarge } from '../icon/icons/cross-large.component'
+import { IconCrossSmall } from '../icon/icons/cross-small.component'
 import InputStyles from './input.styles'
 
 @localized()
@@ -328,7 +328,7 @@ class Input extends GdsFormControlElement<string> {
         id="clear-button"
         slot="action"
       >
-        <gds-icon-cross-large />
+        <gds-icon-cross-small></gds-icon-cross-small>
       </gds-button>`
     else return nothing
   }
@@ -356,7 +356,7 @@ class Input extends GdsFormControlElement<string> {
     GdsFieldBase,
     GdsFlex,
     GdsButton,
-    IconCrossLarge,
+    IconCrossSmall,
   ],
 })
 export class GdsInput extends withSizeXProps(

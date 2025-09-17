@@ -129,7 +129,7 @@ export class GdsBadge extends withSizeXProps(
         },
         default: {
           occupied: '3xs xs 3xs 2xs',
-          default: '3xs xs',
+          default: '4xs xs',
         },
       }
 
@@ -173,6 +173,18 @@ export class GdsBadge extends withSizeXProps(
         : sizes.default
     })()
 
+    const borderRadius = (() => {
+      const radiuses = {
+        small: '3xs',
+        notification: 'max',
+        default: '2xs',
+      }
+
+      if (this.rounded) return 'max'
+      if (this.notification) return radiuses.notification
+      return this.size === 'small' ? radiuses.small : radiuses.default
+    })()
+
     return html`<gds-flex
       level="3"
       background=${background}
@@ -182,7 +194,7 @@ export class GdsBadge extends withSizeXProps(
       justify-content="${this.notification ? 'center' : 'flex-start'}"
       padding="${padding}"
       min-height="${blockSize}"
-      border-radius="${this.notification || this.rounded ? 'max' : '2xs'}"
+      border-radius="${borderRadius}"
       width="100%"
       min-width="${inlineSize}"
       font="${this.size === 'small' || this.notification

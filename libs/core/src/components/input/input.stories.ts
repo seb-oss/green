@@ -169,7 +169,18 @@ export const Trail: Story = {
         value="10,000.00"
         clearable
       >
-        <gds-badge variant="information" slot="trail">USD</gds-badge>
+        <gds-badge slot="trail" variant="notice"> USD </gds-badge>
+      </gds-input>
+    </gds-flex>
+    <gds-flex flex-direction="column" gap="xl" width="320px">
+      <gds-input
+        label="Label"
+        supporting-text="Label support text"
+        value="10,000.00"
+        size="small"
+        clearable
+      >
+        <gds-badge slot="trail" variant="notice" size="small"> USD </gds-badge>
       </gds-input>
     </gds-flex>
   `,
