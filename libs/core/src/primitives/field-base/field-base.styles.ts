@@ -31,12 +31,14 @@ const style = css`
       border-radius: var(--gds-sys-radius-xs);
       background: var(--gds-sys-color-l3-neutral-02);
       color: var(--gds-sys-color-content-neutral-01);
+      outline-offset: 0;
       border: var(--gds-sys-space-5xs) solid
         var(--gds-sys-color-border-interactive);
       cursor: text;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 368ms;
-      transition-property: background-color;
+      transition-property: background-color, outline-offset;
+      backface-visibility: hidden;
+      transition-duration: var(--gds-sys-motion-duration-fastest);
+      transition-timing-function: var(--gds-sys-motion-easing-linear);
 
       .right {
         display: contents;
