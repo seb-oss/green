@@ -61,7 +61,7 @@ const style = css`
   .wrapper {
     grid-area: wrapper;
     display: flex;
-    gap: var(--gds-sys-space-s);
+    gap: var(--gds-sys-space-xs);
 
     .message {
       max-width: 80ch;

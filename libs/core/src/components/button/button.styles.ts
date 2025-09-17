@@ -143,7 +143,7 @@ const style = css`
   @layer sizes {
     :host([size='xs']) .button {
       --_block-size: var(--gds-sys-space-l);
-      gap: var(--gds-sys-space-3xs);
+      gap: var(--gds-sys-space-4xs);
       font: var(--gds-sys-text-detail-book-xs);
       padding-inline: var(--gds-sys-space-s);
     }
@@ -151,12 +151,14 @@ const style = css`
     :host([size='small']) .button {
       --_block-size: var(--gds-sys-space-2xl);
       font: var(--gds-sys-text-detail-book-s);
+      gap: var(--gds-sys-space-3xs);
       padding-block: var(--gds-sys-space-3xs);
       padding-inline: var(--gds-sys-space-m);
     }
 
     :host([size='medium']) .button {
       --_block-size: var(--gds-sys-space-3xl);
+      gap: var(--gds-sys-space-2xs);
       font: var(--gds-sys-text-detail-book-m);
       padding-inline: var(--gds-sys-space-l);
     }

@@ -32,6 +32,10 @@ export const styles = css`
     gap: var(--gds-sys-space-m);
   }
 
+  :host([size='small']) .checkbox-group {
+    gap: var(--gds-sys-space-s);
+  }
+
   .content {
     display: flex;
     position: relative;
@@ -42,7 +46,7 @@ export const styles = css`
   .direction-row .content {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--gds-sys-space-s);
+    gap: var(--gds-sys-space-s) var(--gds-sys-space-xl);
   }
 
   .direction-column .content {
@@ -52,6 +56,10 @@ export const styles = css`
 
   :host([size='small']) .direction-column .content {
     gap: var(--gds-sys-space-xs);
+  }
+
+  :host([size='small']) .direction-row .content {
+    gap: var(--gds-sys-space-xs) var(--gds-sys-space-m);
   }
 
   :host([size='small']) slot[name='label'] {
