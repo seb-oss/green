@@ -64,16 +64,13 @@ const style = css`
       padding-inline-end: var(--gds-sys-space-2xs);
     }
 
-    /*
     .field.action-slot-occupied:not(.trail-slot-occupied) {
       padding-inline-end: var(--gds-sys-space-s);
-
-      &.small {
-        padding-inline-end: var(--gds-sys-space-xs);
-      }
     }
 
-    */
+    .field.small.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-sys-space-2xs);
+    }
 
     .field:focus-within {
       outline-width: var(--gds-sys-space-4xs);
