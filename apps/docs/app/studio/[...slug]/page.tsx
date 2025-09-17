@@ -35,6 +35,15 @@ export function generateStaticParams() {
         slug: [page.slug.replace('/studio/', '')],
       })
 
+      // Interactive pages
+      if (page.pages) {
+        page.pages.forEach((specialPage) => {
+          paths.push({
+            slug: specialPage.slug.replace('/studio/', '').split('/'),
+          })
+        })
+      }
+
       // Add sub-routes for items if page has content
       if (page.content) {
         page.content.forEach((group) => {

@@ -8,7 +8,16 @@ export interface ContentItem {
   preview?: string
   description: string
   cssVariable?: string
-  component?: string // for icons
+  component?: string
+  pages?: Interactive[]
+}
+
+export interface Interactive {
+  key: string
+  slug: string
+  title: string
+  description: string
+  component: string
 }
 
 export interface ContentGroup {
@@ -29,6 +38,7 @@ export interface StudioPage {
   category: string
   content?: ContentGroup[]
   component?: string
+  pages?: Interactive[]
 }
 
 export interface StudioCategory {

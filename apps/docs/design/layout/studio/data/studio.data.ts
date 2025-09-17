@@ -38,6 +38,15 @@ export const studioData: StudioCategory[] = [
         description: 'Browse and use our collection of icons',
         icon: 'IconShapes',
         category: 'tools',
+        pages: [
+          {
+            key: 'migration',
+            slug: '/studio/icons/migration',
+            title: 'Icon Migration',
+            description: 'Guide for migrating from Font Awesome to Green icons',
+            component: 'IconMigration',
+          },
+        ],
         content: [
           {
             key: 'navigation',

@@ -6,6 +6,7 @@ import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
 import { getPageBySlug } from './data/studio.data'
 import { ContentGroup, ContentItem, StudioPage } from './data/studio.types'
+import * as Interactive from './interactive'
 import * as Part from './parts'
 import * as Table from './table'
 import * as Tool from './tools'
@@ -23,10 +24,21 @@ interface StudioProps {
 const COMPONENTS = {
   compose: Tool.Compose,
   Main: Part.Main,
+  migration: Interactive.Migration,
 } as const
 
 const CONTENT = (page: StudioPage, router: any, path: string) => {
   const ACTIVE = path.split('/')[3]
+
+  // Show interactive pages first
+  if (page.pages) {
+    const INTERACTIVE = page.pages.find((p) => p.slug === path)
+    if (INTERACTIVE) {
+      const CONTENT =
+        COMPONENTS[INTERACTIVE.component as keyof typeof COMPONENTS]
+      return CONTENT ? <CONTENT /> : null
+    }
+  }
 
   if (page.type === 'landing') {
     const LANDING = COMPONENTS[page.component as keyof typeof COMPONENTS]
@@ -157,6 +169,7 @@ export function Studio({
   const ROUT = useRouter()
   const ITEM = PATH.split('/')[3]
   const LAND = PATH === '/studio'
+  const INTE = PAGE?.pages?.some((p) => p.slug === PATH)
 
   return (
     <Core.GdsGrid
@@ -173,6 +186,7 @@ export function Studio({
         {!LAND && (
           <Part.Header title={title} description={description} page={page} />
         )}
+        {INTE && 'hello interactive page'}
         {LAND && <Part.Main />}
         {!LAND && (
           <Core.GdsGrid columns="12">
