@@ -16,7 +16,7 @@ export default function StudioHeader({ title, description, page }: Types) {
       <Part.Meta title={title} description={description} />
       <Part.Breadcrumbs current={page} />
       <Core.GdsDivider color="subtle-01" />
-      <Part.Search />
+      <Part.Search page={page} />
     </Core.GdsFlex>
   )
 }

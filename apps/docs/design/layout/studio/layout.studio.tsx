@@ -22,9 +22,10 @@ interface StudioProps {
 }
 
 const COMPONENTS = {
-  compose: Tool.Compose,
+  Compose: Tool.Compose,
   Main: Part.Main,
   Migration: Interactive.Migration,
+  Radius: Interactive.Radius,
 } as const
 
 const CONTENT = (page: StudioPage, router: any, path: string) => {
@@ -46,7 +47,8 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
   }
 
   if (page.type === 'tool') {
-    const TOOL = COMPONENTS[page.key as keyof typeof COMPONENTS]
+    // const TOOL = COMPONENTS[page.key as keyof typeof COMPONENTS]
+    const TOOL = COMPONENTS[page.component as keyof typeof COMPONENTS]
     return TOOL ? (
       <TOOL />
     ) : (

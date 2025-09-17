@@ -1,6 +1,6 @@
 import * as Core from '@sebgroup/green-core/react'
 
-export default function StudioSearch() {
+export default function StudioSearch({ page }: { page?: string }) {
   return (
     <Core.GdsFlex
       align-items="center"
@@ -15,15 +15,17 @@ export default function StudioSearch() {
           </Core.GdsDropdown>
         </Core.GdsFlex>
       </Core.GdsFlex>
-      <Core.GdsFlex align-items="center" gap="m">
-        <Core.GdsCheckbox value="solid" label="Solid" />
-        <Core.GdsFlex width="120px">
-          <Core.GdsDropdown plain size="small">
-            <Core.IconSettingsSliderHor slot="lead" />
-            <Core.GdsOption value="">Size</Core.GdsOption>
-          </Core.GdsDropdown>
+      {page === 'icons' && (
+        <Core.GdsFlex align-items="center" gap="m">
+          <Core.GdsCheckbox value="solid" label="Solid" />
+          <Core.GdsFlex width="120px">
+            <Core.GdsDropdown plain size="small">
+              <Core.IconSettingsSliderHor slot="lead" />
+              <Core.GdsOption value="">Size</Core.GdsOption>
+            </Core.GdsDropdown>
+          </Core.GdsFlex>
         </Core.GdsFlex>
-      </Core.GdsFlex>
+      )}
     </Core.GdsFlex>
   )
 }

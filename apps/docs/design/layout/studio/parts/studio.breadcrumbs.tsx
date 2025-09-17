@@ -102,6 +102,25 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
           </Link>
         </Core.GdsFlex>
       )}
+      {current === 'radius' && (
+        <Core.GdsFlex
+          align-items="center"
+          gap="s"
+          width="max-content"
+          className="studio-cta"
+        >
+          <Core.GdsText>Explore radius-padding relationships</Core.GdsText>
+          <Link
+            component="button"
+            href="/studio/radius/nested"
+            rank="secondary"
+            size="small"
+          >
+            Interactive Tool
+            <Core.IconPencilSparkle slot="trail" />
+          </Link>
+        </Core.GdsFlex>
+      )}
     </Core.GdsFlex>
   )
 }

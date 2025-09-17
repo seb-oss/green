@@ -105,6 +105,7 @@ export const studioData: StudioCategory[] = [
         description: 'Build and preview component combinations',
         icon: 'IconPencilSparkle',
         category: 'tools',
+        component: 'Compose',
         // No content for tools
       },
     ],
@@ -258,6 +259,16 @@ export const studioData: StudioCategory[] = [
         description: 'Corner radius tokens and usage',
         icon: 'IconCirclePlaceholderOn',
         category: 'tokens',
+        pages: [
+          {
+            key: 'nested',
+            slug: '/studio/radius/nested',
+            title: 'Nested Radii',
+            description:
+              'Calculate and visualize nested border radius relationships',
+            component: 'Radius',
+          },
+        ],
         content: [
           {
             key: 'base',
