@@ -28,6 +28,7 @@ export interface StudioPage {
   icon: keyof typeof Core
   category: string
   content?: ContentGroup[]
+  component?: string
 }
 
 export interface StudioCategory {

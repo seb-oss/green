@@ -11,17 +11,17 @@ export default function PlayLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const pathname = usePathname()
-  const mainPath = `/${pathname.split('/').slice(1, 3).join('/')}`
-  const activePage = getPageBySlug(mainPath)
+  const PATH = usePathname()
+  const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
+  const ACTIVE = getPageBySlug(MAIN)
 
-  if (!activePage) return null
+  if (!ACTIVE) return null
 
   return (
     <Studio
-      page={activePage.key}
-      title={activePage.label}
-      description={activePage.description}
+      page={ACTIVE.key}
+      title={ACTIVE.label}
+      description={ACTIVE.description}
     >
       {children}
     </Studio>

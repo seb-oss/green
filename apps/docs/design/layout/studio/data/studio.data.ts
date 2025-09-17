@@ -7,6 +7,24 @@ import {
 
 export const studioData: StudioCategory[] = [
   {
+    key: 'landing',
+    title: 'Studio',
+    description: 'Design tokens, tools, and assets for building with Green',
+    pages: [
+      {
+        key: 'studio',
+        type: 'landing', // new type
+        slug: '/studio',
+        label: 'Studio',
+        title: 'Green Studio',
+        description: 'Design tokens, tools, and assets for building with Green',
+        icon: 'IconBrandGreen',
+        category: 'landing',
+        component: 'Main',
+      },
+    ],
+  },
+  {
     key: 'tools',
     title: 'Tools & Assets',
     description: 'Utilities and assets for building with Green',

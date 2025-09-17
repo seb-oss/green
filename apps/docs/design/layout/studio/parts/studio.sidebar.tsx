@@ -5,6 +5,8 @@ import Toggle from '../../../atoms/toggle/toggle.theme'
 import { studioData } from '../data/studio.data'
 
 export default function StudioSidebar({ current }: { current?: string }) {
+  const DATA = studioData.filter((category) => category.key !== 'landing')
+
   return (
     <Core.GdsCard
       variant="secondary"
@@ -30,7 +32,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
         padding="0"
         flex="1"
       >
-        {studioData.map((category, categoryIndex) => (
+        {DATA.map((category, categoryIndex) => (
           <Core.GdsFlex key={category.key} flex-direction="column" gap="s">
             <Core.GdsFlex flex-direction="column" gap="s" padding="m">
               <Core.GdsFlex padding="0 m">
@@ -65,7 +67,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
                 )
               })}
             </Core.GdsFlex>
-            {categoryIndex < studioData.length - 1 && (
+            {categoryIndex < DATA.length - 1 && (
               <Core.GdsDivider color="subtle-01" />
             )}
           </Core.GdsFlex>
