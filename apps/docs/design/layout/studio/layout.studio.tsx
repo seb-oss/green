@@ -24,7 +24,9 @@ const TOOL_COMPONENTS = {
   compose: Tool.Compose,
 } as const
 
-const CONTENT = (page: StudioPage, router: any) => {
+const CONTENT = (page: StudioPage, router: any, path: string) => {
+  const ACTIVE = path.split('/')[3]
+
   if (page.type === 'tool') {
     const TOOL = TOOL_COMPONENTS[page.key as keyof typeof TOOL_COMPONENTS]
     return TOOL ? (
@@ -70,7 +72,7 @@ const CONTENT = (page: StudioPage, router: any) => {
                     onClick={() => router.push(`${page.slug}/${item.key}`)}
                     justify-content="space-between"
                     align-items="center"
-                    variant="secondary"
+                    variant={ACTIVE === item.key ? 'primary' : 'secondary'}
                     border-radius="m"
                   >
                     {item.component && (
@@ -129,22 +131,6 @@ const CONTENT = (page: StudioPage, router: any) => {
         </Core.GdsFlex>
       )
 
-    // case 'tool':
-    //   return (
-    //     <Core.GdsFlex
-    //       flex-direction="column"
-    //       gap="l"
-    //       align-items="center"
-    //       justify-content="center"
-    //       padding="4xl"
-    //     >
-    //       <Core.GdsText font="heading-l">Coming Soon</Core.GdsText>
-    //       <Core.GdsText color="neutral-02">
-    //         This tool is currently in development
-    //       </Core.GdsText>
-    //     </Core.GdsFlex>
-    //   )
-
     default:
       return null
   }
@@ -185,7 +171,7 @@ export function Studio({
             border="none"
             background="none"
           >
-            {PAGE ? CONTENT(PAGE, ROUT) : children}
+            {PAGE ? CONTENT(PAGE, ROUT, PATH) : children}
           </Core.GdsCard>
           {aside && (
             <Core.GdsCard
