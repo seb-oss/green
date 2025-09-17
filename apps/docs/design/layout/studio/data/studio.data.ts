@@ -14,7 +14,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'icons',
         type: 'asset',
-        slug: '/play/icons',
+        slug: '/studio/icons',
         label: 'Icons',
         title: 'Icon Library',
         description: 'Browse and use our collection of icons',
@@ -72,7 +72,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'compose',
         type: 'tool',
-        slug: '/play/compose',
+        slug: '/studio/compose',
         label: 'Compose',
         title: 'Component Composer',
         description: 'Build and preview component combinations',
@@ -90,7 +90,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'colors',
         type: 'token',
-        slug: '/play/colors',
+        slug: '/studio/colors',
         label: 'Colors',
         title: 'Color System',
         description: 'Color palette and usage guidelines',
@@ -140,7 +140,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'spacing',
         type: 'token',
-        slug: '/play/spacing',
+        slug: '/studio/spacing',
         label: 'Spacing',
         title: 'Spacing System',
         description: 'Spacing scales and layout metrics',
@@ -190,7 +190,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'typography',
         type: 'token',
-        slug: '/play/typography',
+        slug: '/studio/typography',
         label: 'Typography',
         title: 'Typography System',
         description: 'Font styles and text treatments',
@@ -225,7 +225,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'radius',
         type: 'token',
-        slug: '/play/radius',
+        slug: '/studio/radius',
         label: 'Radius',
         title: 'Border Radius',
         description: 'Corner radius tokens and usage',
@@ -252,7 +252,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'shadows',
         type: 'token',
-        slug: '/play/shadows',
+        slug: '/studio/shadows',
         label: 'Shadows',
         title: 'Shadow System',
         description: 'Elevation and shadow styles',
@@ -279,7 +279,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'viewport',
         type: 'token',
-        slug: '/play/viewport',
+        slug: '/studio/viewport',
         label: 'Viewport',
         title: 'Viewport Breakpoints',
         description: 'Responsive design breakpoints',
@@ -306,7 +306,7 @@ export const studioData: StudioCategory[] = [
       {
         key: 'motion',
         type: 'token',
-        slug: '/play/motion',
+        slug: '/studio/motion',
         label: 'Motion',
         title: 'Motion System',
         description: 'Animation and transition tokens',
