@@ -57,8 +57,7 @@ export const Color: Story = {
 }
 
 /**
- * A signal is used to draw attention to notifications and new content.<br/>
- * The signal's style matches the button's rank and variant by default.
+ * Signal can be used on the FAB by setting it as trail slot element.
  */
 export const Usage: Story = {
   ...DefaultParams,
