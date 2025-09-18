@@ -14,23 +14,6 @@ export default function StudioSearch({ page }: { page?: string }) {
             <Core.GdsOption value="">Categories</Core.GdsOption>
           </Core.GdsDropdown>
         </Core.GdsFlex>
-        <Core.GdsFlex>
-          <Core.GdsDropdown plain>
-            <Core.GdsOption value="">Size</Core.GdsOption>
-          </Core.GdsDropdown>
-        </Core.GdsFlex>
-        <Core.GdsSegmentedControl
-          value="regular"
-          size="small"
-          width="max-content"
-        >
-          <Core.GdsSegment value="regular">
-            <Core.GdsText font="body-book-s">Regular</Core.GdsText>
-          </Core.GdsSegment>
-          <Core.GdsSegment value="solid">
-            <Core.GdsText font="body-book-s">Solid</Core.GdsText>
-          </Core.GdsSegment>
-        </Core.GdsSegmentedControl>
       </Core.GdsFlex>
       {page === 'icons' && (
         <Core.GdsFlex align-items="center" gap="m">
