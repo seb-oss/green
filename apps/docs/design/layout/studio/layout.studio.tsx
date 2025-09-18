@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
-import { getPageBySlug } from './data/studio.data'
+import { getPageBySlug, studioData } from './data/studio.data'
 import { ContentGroup, ContentItem, StudioPage } from './data/studio.types'
 import * as Interactive from './interactive'
 import * as Part from './parts'
@@ -12,6 +12,8 @@ import * as Table from './table'
 import * as Tool from './tools'
 
 import './layout.studio.css'
+
+import { useStudioPage } from './data/studio.use'
 
 interface StudioProps {
   page: string
@@ -84,7 +86,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                   </Core.GdsText>
                 </Core.GdsFlex>
               )}
-              <Core.GdsGrid columns="4" gap="l">
+              <Core.GdsGrid columns="5" gap="l">
                 {group.items.map((item: ContentItem) => (
                   <Core.GdsCard
                     padding="l"
@@ -103,7 +105,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                         align-items="center"
                         className="icon-preview"
                       >
-                        <Icon name={item.component} size="l" />
+                        <Icon name={item.component} size="xl" />
                       </Core.GdsFlex>
                     )}
                     <Core.GdsText font="detail-regular-xs" color="neutral-02">
@@ -167,7 +169,11 @@ export function Studio({
 }: StudioProps) {
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
-  const PAGE = getPageBySlug(MAIN)
+  // const PAGE = getPageBySlug(MAIN)
+  // const PAGE = studioData
+  //   .flatMap((category) => category.pages)
+  //   .find((page) => page.slug === MAIN)
+  const PAGE = useStudioPage(MAIN)
   const ROUT = useRouter()
   const ITEM = PATH.split('/')[3]
 

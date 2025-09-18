@@ -13,7 +13,7 @@ export const studioData: StudioCategory[] = [
     pages: [
       {
         key: 'studio',
-        type: 'landing', // new type
+        type: 'landing',
         slug: '/studio',
         label: 'Studio',
         title: 'Green Studio',
@@ -47,54 +47,55 @@ export const studioData: StudioCategory[] = [
             component: 'Migration',
           },
         ],
-        content: [
-          {
-            key: 'navigation',
-            title: 'Navigation Icons',
-            description: 'Icons for navigation and direction',
-            items: [
-              {
-                key: 'arrow-right',
-                name: 'Arrow Right',
-                value: '<svg>...</svg>',
-                preview: '<svg>...</svg>',
-                description: 'Used for forward navigation',
-                component: 'IconArrowRight',
-              },
-              {
-                key: 'arrow-left',
-                name: 'Arrow Left',
-                value: '<svg>...</svg>',
-                preview: '<svg>...</svg>',
-                description: 'Used for backward navigation',
-                component: 'IconArrowLeft',
-              },
-            ],
-          },
-          {
-            key: 'actions',
-            title: 'Action Icons',
-            description: 'Icons for common actions',
-            items: [
-              {
-                key: 'edit',
-                name: 'Edit',
-                value: '<svg>...</svg>',
-                preview: '<svg>...</svg>',
-                description: 'Used for edit actions',
-                component: 'IconEdit',
-              },
-              {
-                key: 'delete',
-                name: 'Delete',
-                value: '<svg>...</svg>',
-                preview: '<svg>...</svg>',
-                description: 'Used for delete actions',
-                component: 'IconDelete',
-              },
-            ],
-          },
-        ],
+        content: [],
+        // content: [
+        //   {
+        //     key: 'navigation',
+        //     title: 'Navigation Icons',
+        //     description: 'Icons for navigation and direction',
+        //     items: [
+        //       {
+        //         key: 'arrow-right',
+        //         name: 'Arrow Right',
+        //         value: '<svg>...</svg>',
+        //         preview: '<svg>...</svg>',
+        //         description: 'Used for forward navigation',
+        //         component: 'IconArrowRight',
+        //       },
+        //       {
+        //         key: 'arrow-left',
+        //         name: 'Arrow Left',
+        //         value: '<svg>...</svg>',
+        //         preview: '<svg>...</svg>',
+        //         description: 'Used for backward navigation',
+        //         component: 'IconArrowLeft',
+        //       },
+        //     ],
+        //   },
+        //   {
+        //     key: 'actions',
+        //     title: 'Action Icons',
+        //     description: 'Icons for common actions',
+        //     items: [
+        //       {
+        //         key: 'edit',
+        //         name: 'Edit',
+        //         value: '<svg>...</svg>',
+        //         preview: '<svg>...</svg>',
+        //         description: 'Used for edit actions',
+        //         component: 'IconEdit',
+        //       },
+        //       {
+        //         key: 'delete',
+        //         name: 'Delete',
+        //         value: '<svg>...</svg>',
+        //         preview: '<svg>...</svg>',
+        //         description: 'Used for delete actions',
+        //         component: 'IconDelete',
+        //       },
+        //     ],
+        //   },
+        // ],
       },
       {
         key: 'compose',

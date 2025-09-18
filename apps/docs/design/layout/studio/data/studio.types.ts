@@ -1,4 +1,5 @@
 import * as Core from '@sebgroup/green-core/react'
+import { IconData } from '../../../../settings/content/types'
 
 // Unified content structure
 export interface ContentItem {
@@ -9,7 +10,12 @@ export interface ContentItem {
   description: string
   cssVariable?: string
   component?: string
-  // pages?: Interactive[]
+  iconData?: IconData
+}
+
+export interface IconContentGroup extends ContentGroup {
+  type: 'icon'
+  icons: { [key: string]: IconData }
 }
 
 export interface Interactive {
@@ -39,6 +45,7 @@ export interface StudioPage {
   content?: ContentGroup[]
   component?: string
   pages?: Interactive[]
+  icons?: { [key: string]: IconData }
 }
 
 export interface StudioCategory {

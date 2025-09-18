@@ -159,6 +159,7 @@ export interface IconData {
   id: string
   nodeId: string
   displayName: string
+  reactName: string
   fileName: string
   urlPath: string
   variants: IconVariants
