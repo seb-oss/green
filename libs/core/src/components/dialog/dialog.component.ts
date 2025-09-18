@@ -96,6 +96,8 @@ export class GdsDialog extends withSizeXProps(
 
   #returnValue: any
 
+  #clickStartedInside = false
+
   /**
    * Opens the dialog.
    */
@@ -127,6 +129,7 @@ export class GdsDialog extends withSizeXProps(
         this.open,
         () =>
           html`<dialog
+            closedby="closerequest"
             @close=${this.#handleNativeClose}
             class=${classMap({
               [this.variant]: true,
@@ -141,6 +144,7 @@ export class GdsDialog extends withSizeXProps(
               gap="l"
               border-radius="s"
               max-width="100%"
+              @mousedown=${() => (this.#clickStartedInside = true)}
             >
               <slot name="dialog">
                 <gds-flex justify-content="space-between">
@@ -194,9 +198,9 @@ export class GdsDialog extends withSizeXProps(
         this._elDialog?.showModal()
         lockBodyScrolling(this)
 
-        document.removeEventListener('click', this.#handleClickOutside)
+        this.removeEventListener('click', this.#handleClickOutside)
         requestAnimationFrame(() =>
-          document.addEventListener('click', this.#handleClickOutside),
+          this.addEventListener('click', this.#handleClickOutside),
         )
 
         // VoiceOver on iOS fails to move focus to the dialog in some cases.
@@ -216,17 +220,18 @@ export class GdsDialog extends withSizeXProps(
 
   #handleNativeClose = (e: Event) => {
     const dialog = e.target as HTMLDialogElement
-    const returnValue = dialog.returnValue
+    let returnValue = dialog.returnValue
 
     if (returnValue !== 'prop-change') {
+      returnValue = returnValue || 'native-close'
       if (!this.#dispatchCloseEvent(returnValue)) {
         return
       }
-      this.close(returnValue || 'native-close')
+      this.close(returnValue)
       return
     }
 
-    this.close(returnValue || 'native-close')
+    this.close(returnValue)
   }
 
   #dispatchCloseEvent = (reason?: string) => {
@@ -272,7 +277,7 @@ export class GdsDialog extends withSizeXProps(
     const dialog = this._elDialog
     const isNotEnterKey = e.clientX > 0 || e.clientY > 0
 
-    if (isNotEnterKey && dialog && this.open) {
+    if (isNotEnterKey && e.target === this && dialog && this.open) {
       const rect = dialog.getBoundingClientRect()
 
       const isInDialog =
@@ -282,9 +287,15 @@ export class GdsDialog extends withSizeXProps(
         e.clientX <= rect.left + rect.width
 
       const closeReason = 'click-outside'
-      if (!isInDialog && this.#dispatchCloseEvent(closeReason)) {
+      if (
+        !isInDialog &&
+        !this.#clickStartedInside &&
+        this.#dispatchCloseEvent(closeReason)
+      ) {
         this.close(closeReason)
       }
     }
+
+    this.#clickStartedInside = false
   }
 }
