@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.1
+
+### Patch Changes
+
+- a617652: **Checkbox:** Fix tree-shaking issue that sometimes happens with Angular
+
 ## 2.6.0
 
 ### Minor Changes
