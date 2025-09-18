@@ -69,78 +69,123 @@ export default function Aside({ page, itemKey }: AsideProps) {
             padding="0 2xs"
             width="100%"
           >
-            <Core.GdsFlex flex-direction="column" gap="xs" width="100%">
-              <Core.GdsCard
-                padding="s"
-                flex-direction="column"
-                align-items="flex-start"
-                variant="secondary"
-                gap="0"
+            <Core.GdsFlex gap="0" flex-direction="column" padding="0 2xs">
+              <Core.GdsDetails
+                summary="Web Component"
+                size="small"
+                name="frameworks"
               >
-                <Core.GdsFlex
-                  flex-direction="row"
-                  justify-content="space-between"
-                  align-items="center"
-                  width="100%"
+                <Core.GdsCard
+                  padding="s"
+                  flex-direction="column"
+                  align-items="flex-start"
+                  variant="secondary"
+                  gap="0"
                 >
-                  <Core.GdsText font="detail-regular-xs">React</Core.GdsText>
-                  <Core.GdsButton
-                    rank="tertiary"
-                    size="small"
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        `import { ${currentItem.component} } from '@sebgroup/green-react'`,
-                      )
-                    }}
+                  <Core.GdsFlex
+                    flex-direction="row"
+                    justify-content="space-between"
+                    align-items="center"
+                    width="100%"
                   >
-                    <Core.IconCopy size="s" />
-                  </Core.GdsButton>
-                </Core.GdsFlex>
-                <Core.GdsText
-                  font="detail-regular-xs"
-                  font-family="mono"
-                  color="neutral-02"
-                >
-                  {`import { ${currentItem.component} } ...`}
-                </Core.GdsText>
-              </Core.GdsCard>
-
-              <Core.GdsCard
-                padding="s"
-                flex-direction="column"
-                align-items="flex-start"
-                variant="secondary"
-                gap="0"
-              >
-                <Core.GdsFlex
-                  flex-direction="row"
-                  justify-content="space-between"
-                  align-items="center"
-                  width="100%"
-                >
-                  <Core.GdsText font="detail-regular-xs">
-                    Web Component
+                    <Core.GdsText font="detail-regular-xs">
+                      Web Component
+                    </Core.GdsText>
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="small"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `import '@sebgroup/green-core/${currentItem.key}'`,
+                        )
+                      }}
+                    >
+                      <Core.IconCopy size="s" />
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                  <Core.GdsText
+                    font="detail-regular-xs"
+                    font-family="mono"
+                    color="neutral-02"
+                  >
+                    {`import ...`}
                   </Core.GdsText>
-                  <Core.GdsButton
-                    rank="tertiary"
-                    size="small"
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        `import '@sebgroup/green-core/${currentItem.key}'`,
-                      )
-                    }}
-                  >
-                    <Core.IconCopy size="s" />
-                  </Core.GdsButton>
-                </Core.GdsFlex>
-                <Core.GdsText
-                  font="detail-regular-xs"
-                  font-family="mono"
-                  color="neutral-02"
+                </Core.GdsCard>
+              </Core.GdsDetails>
+              <Core.GdsDetails summary="React" size="small" name="frameworks">
+                <Core.GdsCard
+                  padding="s"
+                  flex-direction="column"
+                  align-items="flex-start"
+                  variant="secondary"
+                  gap="0"
                 >
-                  {`import ...`}
-                </Core.GdsText>
-              </Core.GdsCard>
+                  <Core.GdsFlex
+                    flex-direction="row"
+                    justify-content="space-between"
+                    align-items="center"
+                    width="100%"
+                  >
+                    <Core.GdsText font="detail-regular-xs">React</Core.GdsText>
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="small"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `import { ${currentItem.component} } from '@sebgroup/green-react'`,
+                        )
+                      }}
+                    >
+                      <Core.IconCopy size="s" />
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                  <Core.GdsText
+                    font="detail-regular-xs"
+                    font-family="mono"
+                    color="neutral-02"
+                  >
+                    {`import { ${currentItem.component} } ...`}
+                  </Core.GdsText>
+                </Core.GdsCard>
+              </Core.GdsDetails>
+              <Core.GdsDetails summary="Angular" size="small" name="frameworks">
+                <Core.GdsCard
+                  padding="s"
+                  flex-direction="column"
+                  align-items="flex-start"
+                  variant="secondary"
+                  gap="0"
+                >
+                  <Core.GdsFlex
+                    flex-direction="row"
+                    justify-content="space-between"
+                    align-items="center"
+                    width="100%"
+                  >
+                    <Core.GdsText font="detail-regular-xs">
+                      Angular
+                    </Core.GdsText>
+                    <Core.GdsButton
+                      rank="tertiary"
+                      size="small"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `import '@sebgroup/green-core/${currentItem.key}'`,
+                        )
+                      }}
+                    >
+                      <Core.IconCopy size="s" />
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
+                  <Core.GdsText
+                    font="detail-regular-xs"
+                    font-family="mono"
+                    color="neutral-02"
+                  >
+                    {`import ...`}
+                  </Core.GdsText>
+                </Core.GdsCard>
+              </Core.GdsDetails>
             </Core.GdsFlex>
           </Core.GdsCard>
         )
@@ -156,67 +201,31 @@ export default function Aside({ page, itemKey }: AsideProps) {
             padding="0 2xs"
             width="100%"
           >
-            <Core.GdsFlex flex-direction="column" gap="xs" width="100%">
+            <Core.GdsFlex gap="xs" width="100%" flex-direction="row">
               <Core.GdsCard
-                padding="xs s"
-                flex-direction="row"
-                justify-content="space-between"
-                align-items="center"
+                padding="xl l"
+                gap="2xs"
                 variant="secondary"
-                gap="xs"
-                width="100%"
+                align-items="center"
+                flex="1"
               >
-                <Core.GdsFlex
-                  flex-direction="row"
-                  align-items="center"
-                  justify-content="flex-start"
-                  gap="s"
-                >
-                  <Core.GdsFlex
-                    width="xl"
-                    height="xl"
-                    align-items="center"
-                    justify-content="center"
-                  >
-                    {currentItem.component && (
-                      <Icon name={currentItem.component} size="l" solid />
-                    )}
-                  </Core.GdsFlex>
-                  <Core.GdsText font="detail-regular-xs">Solid</Core.GdsText>
-                </Core.GdsFlex>
-                <Core.GdsButton rank="tertiary" size="small">
-                  <Core.IconCloudDownload size="s" />
-                </Core.GdsButton>
+                {currentItem.component && (
+                  <Icon name={currentItem.component} size="l" solid />
+                )}
+                <Core.GdsText font="detail-regular-xs">Solid</Core.GdsText>
               </Core.GdsCard>
               <Core.GdsCard
-                padding="xs s"
-                flex-direction="row"
-                justify-content="space-between"
-                align-items="center"
+                padding="xl l"
+                gap="2xs"
                 variant="secondary"
-                gap="xs"
+                align-items="center"
+                flex="1"
               >
-                <Core.GdsFlex
-                  flex-direction="row"
-                  align-items="center"
-                  justify-content="flex-start"
-                  gap="s"
-                >
-                  <Core.GdsFlex
-                    width="xl"
-                    height="xl"
-                    align-items="center"
-                    justify-content="center"
-                  >
-                    {currentItem.component && (
-                      <Icon name={currentItem.component} size="l" />
-                    )}
-                  </Core.GdsFlex>
-                  <Core.GdsText font="detail-regular-xs">Regular</Core.GdsText>
-                </Core.GdsFlex>
-                <Core.GdsButton rank="tertiary" size="small">
-                  <Core.IconCloudDownload size="s" />
-                </Core.GdsButton>
+                {currentItem.component && (
+                  <Icon name={currentItem.component} size="l" />
+                )}
+
+                <Core.GdsText font="detail-regular-xs">Regular</Core.GdsText>
               </Core.GdsCard>
             </Core.GdsFlex>
           </Core.GdsCard>
