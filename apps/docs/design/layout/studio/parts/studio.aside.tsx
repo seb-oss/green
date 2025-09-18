@@ -66,15 +66,16 @@ export default function Aside({ page, itemKey }: AsideProps) {
             variant="primary"
             background="none"
             border="none"
-            padding="xs"
+            padding="0 2xs"
             width="100%"
           >
             <Core.GdsFlex flex-direction="column" gap="xs" width="100%">
               <Core.GdsCard
-                padding="xs s"
+                padding="s"
                 flex-direction="column"
+                align-items="flex-start"
                 variant="secondary"
-                gap="xs"
+                gap="0"
               >
                 <Core.GdsFlex
                   flex-direction="row"
@@ -87,7 +88,6 @@ export default function Aside({ page, itemKey }: AsideProps) {
                     rank="tertiary"
                     size="small"
                     onClick={() => {
-                      // Add copy to clipboard functionality
                       navigator.clipboard.writeText(
                         `import { ${currentItem.component} } from '@sebgroup/green-react'`,
                       )
@@ -101,15 +101,16 @@ export default function Aside({ page, itemKey }: AsideProps) {
                   font-family="mono"
                   color="neutral-02"
                 >
-                  {`import { ${currentItem.component} } from '@sebgroup/green-react'`}
+                  {`import { ${currentItem.component} } ...`}
                 </Core.GdsText>
               </Core.GdsCard>
 
               <Core.GdsCard
-                padding="xs s"
+                padding="s"
                 flex-direction="column"
+                align-items="flex-start"
                 variant="secondary"
-                gap="xs"
+                gap="0"
               >
                 <Core.GdsFlex
                   flex-direction="row"
@@ -137,7 +138,7 @@ export default function Aside({ page, itemKey }: AsideProps) {
                   font-family="mono"
                   color="neutral-02"
                 >
-                  {`import '@sebgroup/green-core/${currentItem.key}'`}
+                  {`import ...`}
                 </Core.GdsText>
               </Core.GdsCard>
             </Core.GdsFlex>
@@ -152,7 +153,7 @@ export default function Aside({ page, itemKey }: AsideProps) {
             variant="primary"
             background="none"
             border="none"
-            padding="xs"
+            padding="0 2xs"
             width="100%"
           >
             <Core.GdsFlex flex-direction="column" gap="xs" width="100%">
@@ -165,7 +166,12 @@ export default function Aside({ page, itemKey }: AsideProps) {
                 gap="xs"
                 width="100%"
               >
-                <Core.GdsFlex flex-direction="row" align-items="center" gap="s">
+                <Core.GdsFlex
+                  flex-direction="row"
+                  align-items="center"
+                  justify-content="flex-start"
+                  gap="s"
+                >
                   <Core.GdsFlex
                     width="xl"
                     height="xl"
@@ -190,7 +196,12 @@ export default function Aside({ page, itemKey }: AsideProps) {
                 variant="secondary"
                 gap="xs"
               >
-                <Core.GdsFlex flex-direction="row" align-items="center" gap="s">
+                <Core.GdsFlex
+                  flex-direction="row"
+                  align-items="center"
+                  justify-content="flex-start"
+                  gap="s"
+                >
                   <Core.GdsFlex
                     width="xl"
                     height="xl"
@@ -244,14 +255,14 @@ export default function Aside({ page, itemKey }: AsideProps) {
               gap="2xl"
               align-items="flex-start"
               justify-content="space-between"
-              padding-inline="s"
+              padding-inline="0"
               flex-direction="column"
             >
               <Core.GdsFlex
                 flex-direction="column"
                 align-items="flex-start"
                 width="100%"
-                padding-inline="xs 0"
+                padding="0 xs 0 xs"
               >
                 <Core.GdsFlex justify-content="space-between" width="100%">
                   <Core.GdsText font="detail-book-s">
