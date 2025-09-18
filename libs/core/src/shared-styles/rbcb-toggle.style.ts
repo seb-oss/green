@@ -10,8 +10,8 @@ import { css } from 'lit'
 export default css`
   .rbcb {
     --_toggle-size: var(--gds-sys-space-m);
-    --_toggle-radius: var(--gds-sys-space-2xs);
-    --_perimeter-size: var(--gds-sys-space-xl);
+    --_toggle-radius: var(--gds-sys-space-3xs);
+    --_perimeter-radius: var(--gds-sys-space-xs);
     --_toggle-border-width-checked: var(--gds-sys-space-s);
 
     --_perimeter-bg-mix: color-mix(
@@ -25,28 +25,27 @@ export default css`
       var(--gds-sys-color-state-neutral-04)
     );
 
-    /* -- */
-
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     width: var(--_toggle-size);
     height: var(--_toggle-size);
-    margin-block-start: calc(var(--gds-sys-space-4xs) * 2);
+    margin-block-start: calc(var(--gds-sys-space-5xs) * 2);
     cursor: pointer;
   }
 
   .rbcb--radio {
     --_toggle-radius: var(--gds-sys-space-max);
-    --_toggle-border-width-checked: var(--gds-sys-space-2xs);
+    --_perimeter-radius: var(--gds-sys-space-max);
+    --_toggle-border-width-checked: var(--gds-sys-space-3xs);
   }
 
   .rbcb__toggle {
     width: var(--_toggle-size);
     height: var(--_toggle-size);
     border-radius: var(--_toggle-radius);
-    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+    box-shadow: inset 0 0 0 var(--gds-sys-space-5xs)
       var(--gds-sys-color-l3-neutral-01);
     background-color: var(--gds-sys-color-l1-neutral-01);
     box-sizing: border-box;
@@ -77,12 +76,12 @@ export default css`
     transition-duration: var(--gds-sys-motion-duration-fastest);
     transition-timing-function: var(--gds-sys-motion-easing-linear);
     outline-style: solid;
-    outline-offset: calc(-1 * var(--gds-sys-space-3xs));
+    outline-offset: calc(-1 * var(--gds-sys-space-4xs));
     outline-width: 0;
     outline-color: var(--gds-sys-color-content-neutral-01);
-    border-radius: calc(var(--_toggle-radius) + 4px);
-    min-width: var(--_perimeter-size);
-    min-height: var(--_perimeter-size);
+    border-radius: var(--_perimeter-radius);
+    min-width: var(--_perimeter-size, var(--gds-sys-space-2xl));
+    min-height: var(--_perimeter-size, var(--gds-sys-space-2xl));
     position: absolute;
     left: calc(1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
     top: calc(1 - calc((var(--_perimeter-size) - var(--_toggle-size)) / 2));
@@ -104,7 +103,7 @@ export default css`
   }
 
   .--invalid.--indeterminate .rbcb__toggle {
-    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+    box-shadow: inset 0 0 0 var(--gds-sys-space-5xs)
       var(--gds-sys-color-border-negative-01);
   }
 
@@ -119,12 +118,12 @@ export default css`
 
   .--invalid .rbcb__toggle {
     background-color: var(--gds-sys-color-l3-negative-02);
-    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+    box-shadow: inset 0 0 0 var(--gds-sys-space-5xs)
       var(--gds-sys-color-border-negative-01);
   }
 
   .--invalid.--checked .rbcb__toggle {
-    box-shadow: inset 0 0 0 var(--gds-sys-space-4xs)
+    box-shadow: inset 0 0 0 var(--gds-sys-space-5xs)
       var(--gds-sys-color-l3-negative-01);
   }
 
@@ -156,7 +155,7 @@ export default css`
 
   :host(:focus-visible) .rbcb__perimeter,
   :host(:focus-within) .rbcb__perimeter {
-    outline-width: var(--gds-sys-space-3xs);
+    outline-width: var(--gds-sys-space-4xs);
     scale: 1;
   }
 

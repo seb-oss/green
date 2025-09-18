@@ -160,9 +160,7 @@ The details component supports two sizes: large(default) and small.
     <gds-flex gap="xl">
       <gds-flex flex-direction="column" flex="1">
         <gds-text tag="small" color="secondary">Large Size (Default)</gds-text>
-        <gds-details summary="Summary example">
-          <gds-text margin="xl">test</gds-text>
-        </gds-details>
+        <gds-details summary="Summary example"> Content goes here </gds-details>
         <gds-details summary="Summary example"> Content goes here </gds-details>
         <gds-details summary="Summary example"> Content goes here </gds-details>
       </gds-flex>

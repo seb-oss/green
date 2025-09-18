@@ -3,6 +3,7 @@ import { html } from 'lit/static-html.js'
 import { GdsElement } from '../../gds-element'
 import { tokens } from '../../tokens.style'
 import { styleExpressionProperty } from '../../utils/decorators/style-expression-property'
+import { forColorTokens } from '../../utils/helpers'
 import { gdsCustomElement } from '../../utils/helpers/custom-element-scoping'
 import SignalStyles from './signal.styles'
 
@@ -16,10 +17,9 @@ export class GdsSignal extends GdsElement {
   /**
    * Change signal color based on variant.
    * The color can be customized using the `color` property.
-   * The value needs to be the ending of a valid `design token` of type color that starts with `--gds-sys-color-`.
    */
   @styleExpressionProperty({
-    valueTemplate: (v) => `var(--gds-sys-color-${v})`,
+    ...forColorTokens('content'),
     selector: '[part="signal"]',
   })
   color?: string

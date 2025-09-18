@@ -21,7 +21,7 @@ import { GdsButton } from '../button/button.component'
 import { GdsCard } from '../card/card.component'
 import { GdsDiv } from '../div/div.component'
 import { GdsFlex } from '../flex/flex.component'
-import { IconCrossSmall } from '../icon/icons/cross-small.component'
+import { IconCrossLarge } from '../icon/icons/cross-large.component'
 import DialogStyles from './dialog.styles'
 import {
   lockBodyScrolling,
@@ -44,7 +44,7 @@ registerGlobalScrollLockStyles()
  * @slot dialog - Complete override of the dialog content, including header and footer
  */
 @gdsCustomElement('gds-dialog', {
-  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossSmall],
+  dependsOn: [GdsButton, GdsCard, GdsDiv, GdsFlex, IconCrossLarge],
 })
 @localized()
 export class GdsDialog extends withSizeXProps(
@@ -139,10 +139,10 @@ export class GdsDialog extends withSizeXProps(
           >
             <gds-card
               class="card"
+              padding="xl"
               variant="secondary"
               box-shadow="xl"
-              gap="l"
-              border-radius="s"
+              border-radius="m"
               max-width="100%"
               @mousedown=${() => (this.#clickStartedInside = true)}
             >
@@ -151,12 +151,16 @@ export class GdsDialog extends withSizeXProps(
                   <h2 id="heading">${this.heading}</h2>
                   <gds-button
                     id="close-btn"
-                    rank="secondary"
+                    rank="tertiary"
                     size="small"
                     label=${msg('Close')}
                     @click=${() => this.close('btn-close')}
-                    ><gds-icon-cross-small></gds-icon-cross-small
-                  ></gds-button>
+                  >
+                    <gds-icon-cross-large
+                      size="m"
+                      stroke="2"
+                    ></gds-icon-cross-large>
+                  </gds-button>
                 </gds-flex>
                 <gds-div
                   id="content"
@@ -179,9 +183,9 @@ export class GdsDialog extends withSizeXProps(
                       rank="secondary"
                       >${msg('Cancel')}</gds-button
                     >
-                    <gds-button value="ok" @click=${() => this.close('btn-ok')}
-                      >Ok</gds-button
-                    >
+                    <gds-button value="ok" @click=${() => this.close('btn-ok')}>
+                      Ok
+                    </gds-button>
                   </slot>
                 </gds-flex>
               </slot>
