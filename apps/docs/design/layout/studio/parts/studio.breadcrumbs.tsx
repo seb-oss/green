@@ -1,7 +1,7 @@
 // studio.breadcrumbs.tsx
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
-import { getPageBySlug, studioData } from '../data/studio.data'
+import { studioData } from '../data/studio.data'
 import { StudioPage } from '../data/studio.types'
 
 interface BreadcrumbItem {
