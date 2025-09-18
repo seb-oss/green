@@ -28,15 +28,17 @@ const style = css`
       block-size: var(--gds-sys-space-3xl);
       outline-style: solid;
       outline-width: 0;
-      border-radius: var(--gds-sys-space-xs);
+      border-radius: var(--gds-sys-radius-xs);
       background: var(--gds-sys-color-l3-neutral-02);
       color: var(--gds-sys-color-content-neutral-01);
-      border: var(--gds-sys-space-4xs) solid
+      outline-offset: 0;
+      border: var(--gds-sys-space-5xs) solid
         var(--gds-sys-color-border-interactive);
       cursor: text;
-      transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-      transition-duration: 368ms;
-      transition-property: background-color;
+      transition-property: background-color, outline-offset;
+      backface-visibility: hidden;
+      transition-duration: var(--gds-sys-motion-duration-fastest);
+      transition-timing-function: var(--gds-sys-motion-easing-linear);
 
       .right {
         display: contents;
@@ -46,36 +48,25 @@ const style = css`
         display: flex;
         position: absolute;
         gap: var(--gds-sys-space-xs);
-        right: var(--gds-sys-space-s);
+        right: var(--gds-sys-space-xs);
         top: var(--gds-sys-space-xs);
         block-size: max-content;
       }
     }
 
-    .field.lead-slot-occupied {
-      padding-inline-start: var(--gds-sys-space-s);
-    }
-
-    .field.action-slot-occupied:not(.trail-slot-occupied) {
-      padding-inline-end: var(--gds-sys-space-s);
-
-      &.small {
-        padding-inline-end: var(--gds-sys-space-xs);
-      }
-    }
-
     .field:focus-within {
-      outline-width: var(--gds-sys-space-3xs);
-      outline-offset: var(--gds-sys-space-3xs);
+      outline-width: var(--gds-sys-space-4xs);
+      outline-offset: var(--gds-sys-space-4xs);
       outline-color: currentColor;
       border-color: currentColor;
     }
 
     .field.small {
-      gap: var(--gds-sys-space-2xs);
+      gap: var(--gds-sys-space-3xs);
       padding: calc(var(--gds-sys-space-xs) - 1px) var(--gds-sys-space-xs);
-      min-block-size: var(--gds-sys-space-xl);
-      block-size: var(--gds-sys-space-xl);
+      min-block-size: var(--gds-sys-space-2xl);
+      block-size: var(--gds-sys-space-2xl);
+      border-radius: var(--gds-sys-radius-2xs);
     }
 
     .field.multiline {
@@ -96,6 +87,26 @@ const style = css`
       background: var(--gds-sys-color-l3-negative-02);
       border-color: var(--gds-sys-color-border-negative-01);
       color: var(--gds-sys-color-content-negative-01);
+    }
+
+    .field.lead-slot-occupied {
+      padding-inline-start: var(--gds-sys-space-s);
+    }
+
+    .field.trail-slot-occupied {
+      padding-inline-end: var(--gds-sys-space-xs);
+    }
+
+    .field.small.trail-slot-occupied {
+      padding-inline-end: var(--gds-sys-space-2xs);
+    }
+
+    .field.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-sys-space-s);
+    }
+
+    .field.small.action-slot-occupied:not(.trail-slot-occupied) {
+      padding-inline-end: var(--gds-sys-space-2xs);
     }
 
     slot:not([name])::slotted(*) {
