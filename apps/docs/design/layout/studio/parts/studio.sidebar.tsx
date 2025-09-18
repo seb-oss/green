@@ -11,7 +11,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
     <Core.GdsCard
       variant="secondary"
       flex-direction="column"
-      grid-column="1 / 4"
+      grid-column="1 / 3"
       padding="0"
       border-radius="m"
       className="studio-sidebar"
@@ -61,7 +61,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
                     rank={isActive ? 'secondary' : 'tertiary'}
                     justify-content="flex-start"
                   >
-                    <IconComponent slot="lead" />
+                    <IconComponent slot="lead" size="m" />
                     {page.label}
                   </Link>
                 )

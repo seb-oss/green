@@ -17,13 +17,21 @@ export default function StudioSearch({ page }: { page?: string }) {
       </Core.GdsFlex>
       {page === 'icons' && (
         <Core.GdsFlex align-items="center" gap="m">
-          <Core.GdsCheckbox value="solid" label="Solid" />
           <Core.GdsFlex width="120px">
             <Core.GdsDropdown plain size="small">
               <Core.IconSettingsSliderHor slot="lead" />
               <Core.GdsOption value="">Size</Core.GdsOption>
             </Core.GdsDropdown>
           </Core.GdsFlex>
+          <Core.GdsSegmentedControl
+            value="regular"
+            size="small"
+            width="max-content"
+          >
+            <Core.GdsSegment value="regular">Regular</Core.GdsSegment>
+            <Core.GdsSegment value="solid">Solid</Core.GdsSegment>
+          </Core.GdsSegmentedControl>
+          {/* <Core.GdsCheckbox value="solid" label="Solid" /> */}
         </Core.GdsFlex>
       )}
     </Core.GdsFlex>

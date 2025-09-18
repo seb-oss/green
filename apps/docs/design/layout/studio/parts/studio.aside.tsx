@@ -55,15 +55,15 @@ export default function Aside({ page, itemKey }: AsideProps) {
         return (
           <Core.GdsFlex flex-direction="column" gap="m">
             {currentItem.component && (
-              <Core.GdsFlex
+              <Core.GdsCard
                 flex="1"
-                height="200px"
+                min-height="200px"
                 align-items="center"
                 justify-content="center"
                 className="preview"
               >
                 <Icon name={currentItem.component} size="xl" />
-              </Core.GdsFlex>
+              </Core.GdsCard>
             )}
             <Core.GdsFlex flex-direction="column" gap="s">
               <Core.GdsText font="heading-s">{currentItem.name}</Core.GdsText>
@@ -122,49 +122,51 @@ export default function Aside({ page, itemKey }: AsideProps) {
   }
 
   return (
-    <Core.GdsCard
-      variant="secondary"
-      grid-column="9 / 13"
+    <Core.GdsFlex
+      flex-direction="column"
+      grid-column="10 / 13"
       className="studio-aside"
       position="relative"
     >
-      <Core.GdsFlex flex-direction="column" gap="l" padding="l">
-        <Core.GdsFlex align-items="center" justify-content="space-between">
-          <Core.GdsText font="detail-s">{currentItem.name}</Core.GdsText>
-          <Core.GdsButton size="small" rank="secondary" onClick={handleClose}>
-            <Core.IconCrossSmall />
-          </Core.GdsButton>
-        </Core.GdsFlex>
-
-        {renderContent()}
-
-        <Core.GdsFlex gap="s" justify-content="space-between">
-          {currentIndex > 0 && (
-            <Core.GdsButton
-              size="small"
-              rank="secondary"
-              onClick={() =>
-                router.push(`${page.slug}/${allItems[currentIndex - 1].key}`)
-              }
-            >
-              <Core.IconArrowLeft slot="lead" />
-              Previous
-            </Core.GdsButton>
-          )}
-          {currentIndex < allItems.length - 1 && (
-            <Core.GdsButton
-              size="small"
-              rank="secondary"
-              onClick={() =>
-                router.push(`${page.slug}/${allItems[currentIndex + 1].key}`)
-              }
-            >
-              Next
-              <Core.IconArrowRight slot="trail" />
-            </Core.GdsButton>
-          )}
-        </Core.GdsFlex>
+      <Core.GdsFlex
+        flex-direction="row"
+        align-items="center"
+        justify-content="space-between"
+        min-width="100%"
+        padding="0 xs s s"
+      >
+        <Core.GdsText font="detail-s">{currentItem.name}</Core.GdsText>
+        <Core.GdsButton size="xs" rank="secondary" onClick={handleClose}>
+          <Core.IconCrossSmall />
+        </Core.GdsButton>
       </Core.GdsFlex>
-    </Core.GdsCard>
+
+      {renderContent()}
+
+      <Core.GdsFlex gap="s" justify-content="space-between">
+        {currentIndex > 0 && (
+          <Core.GdsButton
+            size="small"
+            rank="secondary"
+            onClick={() =>
+              router.push(`${page.slug}/${allItems[currentIndex - 1].key}`)
+            }
+          >
+            <Core.IconChevronLeft size="m" />
+          </Core.GdsButton>
+        )}
+        {currentIndex < allItems.length - 1 && (
+          <Core.GdsButton
+            size="small"
+            rank="secondary"
+            onClick={() =>
+              router.push(`${page.slug}/${allItems[currentIndex + 1].key}`)
+            }
+          >
+            <Core.IconChevronRight size="m" />
+          </Core.GdsButton>
+        )}
+      </Core.GdsFlex>
+    </Core.GdsFlex>
   )
 }

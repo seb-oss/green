@@ -174,7 +174,7 @@ export function Studio({
   return (
     <Core.GdsGrid
       columns="12"
-      gap="xl"
+      gap="2xl"
       width="100%"
       padding="m"
       max-width="100%"
@@ -182,12 +182,12 @@ export function Studio({
       className="studio"
     >
       <Part.Sidebar current={PATH} />
-      <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="4 / 13">
+      <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="3 / 13">
         <Part.Header title={title} description={description} page={page} />
         <Core.GdsGrid columns="12">
           <Core.GdsCard
             flex-direction="column"
-            grid-column={ITEM && PAGE ? '1 / 9' : '1 / 13'}
+            grid-column={ITEM && PAGE ? '1 / 10' : '1 / 13'}
             variant="secondary"
             className="studio-page"
             padding="0"
