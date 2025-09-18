@@ -6,14 +6,13 @@ import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
 import { getPageBySlug, studioData } from './data/studio.data'
 import { ContentGroup, ContentItem, StudioPage } from './data/studio.types'
+import { useStudioPage } from './data/studio.use'
 import * as Interactive from './interactive'
 import * as Part from './parts'
 import * as Table from './table'
 import * as Tool from './tools'
 
 import './layout.studio.css'
-
-import { useStudioPage } from './data/studio.use'
 
 interface StudioProps {
   page: string
