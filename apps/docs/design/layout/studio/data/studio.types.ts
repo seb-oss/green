@@ -29,7 +29,7 @@ export interface Interactive {
 export interface ContentGroup {
   key: string
   title: string
-  description: string
+  description?: string
   items: ContentItem[]
 }
 
@@ -51,6 +51,6 @@ export interface StudioPage {
 export interface StudioCategory {
   key: string
   title: string
-  description: string
+  description?: string
   pages: StudioPage[]
 }

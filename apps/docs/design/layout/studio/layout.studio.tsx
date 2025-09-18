@@ -75,18 +75,24 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
     case 'asset':
       // Icons Grid View
       return (
-        <Core.GdsFlex flex-direction="column" gap="2xl">
+        <Core.GdsFlex flex-direction="column" gap="6xl">
           {page.content.map((group: ContentGroup) => (
             <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
               {group.title && (
-                <Core.GdsFlex flex-direction="column" gap="3xs">
+                <Core.GdsFlex
+                  flex-direction="column"
+                  gap="3xs"
+                  padding-inline="xs"
+                >
                   <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
-                  <Core.GdsText color="neutral-02">
-                    {group.description}
-                  </Core.GdsText>
+                  {group.description && (
+                    <Core.GdsText color="neutral-02">
+                      {group.description}
+                    </Core.GdsText>
+                  )}
                 </Core.GdsFlex>
               )}
-              <Core.GdsGrid columns="5" gap="l">
+              <Core.GdsGrid columns={ACTIVE ? '4' : '5'} gap="l">
                 {group.items.map((item: ContentItem) => (
                   <Core.GdsCard
                     padding="l"
@@ -96,6 +102,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                     align-items="center"
                     variant={ACTIVE === item.key ? 'primary' : 'secondary'}
                     border-radius="m"
+                    className="icon-card"
                   >
                     {item.component && (
                       <Core.GdsFlex
@@ -179,7 +186,7 @@ export function Studio({
 
   return (
     <Core.GdsGrid
-      columns="12"
+      columns="24"
       gap="2xl"
       width="100%"
       padding="m"
@@ -188,9 +195,9 @@ export function Studio({
       className="studio"
     >
       <Part.Sidebar current={PATH} />
-      <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="3 / 13">
+      <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="6 / 25">
         <Part.Header title={title} description={description} page={page} />
-        <Core.GdsGrid columns="12">
+        <Core.GdsGrid columns="12" align-items="flex-start">
           <Core.GdsCard
             flex-direction="column"
             grid-column={ITEM && PAGE ? '1 / 10' : '1 / 13'}

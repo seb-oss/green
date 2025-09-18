@@ -48,11 +48,12 @@
 
   @starting-style {
     opacity: 0;
-    translate: 20px 0;
+    translate: 0 8px;
   }
 }
 
-.studio-cta {
+.studio-cta,
+.icon-card {
   transition: var(--s);
   transition-delay: 240ms;
 
@@ -60,4 +61,8 @@
     opacity: 0;
     translate: 0 4px;
   }
+}
+
+.icon-card {
+  cursor: pointer;
 }

@@ -38,7 +38,7 @@ export function useStudioPage(slug: string) {
           .map((category) => ({
             key: category,
             title: category.charAt(0).toUpperCase() + category.slice(1),
-            description: `${category} related icons`,
+            // description: `${category} related icons`,
             items: Object.values(icons)
               .filter((icon) => icon.meta.categories.includes(category))
               .map((icon) => ({

@@ -15,7 +15,7 @@ export default function StudioSearch({ page }: { page?: string }) {
           </Core.GdsDropdown>
         </Core.GdsFlex>
       </Core.GdsFlex>
-      {page === 'icons' && (
+      {false && page === 'icons' && (
         <Core.GdsFlex align-items="center" gap="m">
           <Core.GdsFlex width="120px">
             <Core.GdsDropdown plain size="small">

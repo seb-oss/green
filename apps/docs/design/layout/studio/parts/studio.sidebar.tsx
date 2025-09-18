@@ -11,7 +11,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
     <Core.GdsCard
       variant="secondary"
       flex-direction="column"
-      grid-column="1 / 3"
+      grid-column="1 / 6"
       padding="0"
       border-radius="m"
       className="studio-sidebar"
