@@ -198,7 +198,7 @@ export default function Aside({ page, itemKey }: AsideProps) {
             variant="primary"
             background="none"
             border="none"
-            padding="0 2xs"
+            padding="0"
             width="100%"
           >
             <Core.GdsFlex gap="xs" width="100%" flex-direction="row">
