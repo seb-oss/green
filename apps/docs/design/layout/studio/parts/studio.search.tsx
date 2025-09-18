@@ -28,10 +28,13 @@ export default function StudioSearch({ page }: { page?: string }) {
             size="small"
             width="max-content"
           >
-            <Core.GdsSegment value="regular">Regular</Core.GdsSegment>
-            <Core.GdsSegment value="solid">Solid</Core.GdsSegment>
+            <Core.GdsSegment value="regular">
+              <Core.GdsText font="body-book-s">Regular</Core.GdsText>
+            </Core.GdsSegment>
+            <Core.GdsSegment value="solid">
+              <Core.GdsText font="body-book-s">Solid</Core.GdsText>
+            </Core.GdsSegment>
           </Core.GdsSegmentedControl>
-          {/* <Core.GdsCheckbox value="solid" label="Solid" /> */}
         </Core.GdsFlex>
       )}
     </Core.GdsFlex>
