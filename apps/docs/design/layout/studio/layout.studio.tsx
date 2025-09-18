@@ -137,25 +137,61 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                   {group.description}
                 </Core.GdsText>
               </Core.GdsFlex>
-              <Core.GdsGrid columns="3" gap="l">
-                {group.items.map((item: ContentItem) => (
-                  <Core.GdsCard
-                    padding="l"
-                    key={item.key}
-                    onClick={() => router.push(`${page.slug}/${item.key}`)}
-                    variant="secondary"
-                    border-radius="m"
-                  >
-                    <Core.GdsText font="heading-xs">{item.name}</Core.GdsText>
-                    <Core.GdsText color="neutral-02">{item.value}</Core.GdsText>
-                    {item.cssVariable && (
-                      <Core.GdsText font="detail-xs" color="neutral-03">
-                        {item.cssVariable}
-                      </Core.GdsText>
-                    )}
-                  </Core.GdsCard>
+              <Table.Head
+                columns={[
+                  { label: 'Level' },
+                  { label: 'Token' },
+                  { label: 'Preview' },
+                  { label: 'Light' },
+                  { label: 'Dark' },
+                  { label: '' },
+                ]}
+              />
+              <Core.GdsFlex flex-direction="column" gap="0">
+                {group.items.map((item: ContentItem, index) => (
+                  <Table.Row
+                    key={item.name + index}
+                    name={item.name}
+                    columns={[
+                      { type: 'level', content: 'L1' },
+                      { type: 'value', content: item.key },
+                      {
+                        type: 'preview',
+                        content: (
+                          <Core.GdsFlex align-items="center" gap="s">
+                            Preview
+                          </Core.GdsFlex>
+                        ),
+                      },
+                      {
+                        type: 'light',
+                        content: '#000',
+                      },
+                      {
+                        type: 'dark',
+                        content: '#000',
+                      },
+                      {
+                        type: 'variable',
+                        content: item.key,
+                      },
+                      // {
+                      //   type: 'action',
+                      //   content: (
+                      //     <Core.GdsButton
+                      //       onClick={() =>
+                      //         router.push(`${page.slug}/${item.key}`)
+                      //       }
+                      //       rank="tertiary"
+                      //     >
+                      //       <Core.IconChevronRight />
+                      //     </Core.GdsButton>
+                      //   ),
+                      // },
+                    ]}
+                  />
                 ))}
-              </Core.GdsGrid>
+              </Core.GdsFlex>
             </Core.GdsFlex>
           ))}
         </Core.GdsFlex>
