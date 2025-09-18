@@ -108,8 +108,8 @@ class Input extends GdsFormControlElement<string> {
     'off'
 
   /** Indicates whether the browser's autocorrect feature is on or off. */
-  @property()
-  autocorrect?: 'off' | 'on'
+  @property({ type: Boolean })
+  autocorrect = false
 
   /**
    * Specifies what permission the browser has to provide assistance in filling out form field values. Refer to
