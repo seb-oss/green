@@ -1,7 +1,7 @@
 // src/formats/studio-tokens.ts
 
 export default {
-  name: 'json/studio-tokens',
+  name: 'json/studio',
   format: function ({ dictionary }) {
     const getResolvedValue = (token) => {
       if (!token.original.value) return undefined
