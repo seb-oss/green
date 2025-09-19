@@ -114,7 +114,11 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                         <Icon name={item.component} size="xl" />
                       </Core.GdsFlex>
                     )}
-                    <Core.GdsText font="detail-regular-xs" color="neutral-02">
+                    <Core.GdsText
+                      font="detail-regular-xs"
+                      color="neutral-02"
+                      text-align="center"
+                    >
                       {item.name}
                     </Core.GdsText>
                   </Core.GdsCard>
