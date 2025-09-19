@@ -356,7 +356,7 @@ await Promise.all(
             files: [
               {
                 destination: `tokens.json`,
-                format: 'json/studio-tokens',
+                format: 'json/studio',
               },
             ],
           },
