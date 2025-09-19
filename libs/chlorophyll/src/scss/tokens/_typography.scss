@@ -1,0 +1,237 @@
+@use 'sass:map';
+
+$font-path: '../fonts' !default;
+
+$font-size: (
+  's': 0.75rem,
+  'm': 1rem,
+  'l': 1.25rem,
+  'xl': 2rem,
+  'xxl': 3rem,
+);
+
+$font-sizes: (
+  0: map.get($font-size, 's'),
+  1: map.get($font-size, 'm'),
+  2: map.get($font-size, 'l'),
+  3: map.get($font-size, 'xl'),
+  4: map.get($font-size, 'xxl'),
+);
+
+$font-scale: (
+  1: 0.875rem,
+  2: 1rem,
+  3: 1.25rem,
+  4: 1.5rem,
+  5: 2rem,
+  6: 2.5rem,
+  7: 3rem,
+  8: 4rem,
+  9: 6rem,
+);
+
+@function font-scale($step) {
+  @return map.get($font-scale, $step);
+}
+
+$line-height-scale: (
+  1: 1rem,
+  2: 1.25rem,
+  3: 1.5rem,
+  4: 1.75rem,
+  5: 2rem,
+  6: 2.5rem,
+  7: 3rem,
+  8: 3.5rem,
+  9: 4.5rem,
+  10: 6.25rem,
+);
+
+@function line-height-scale($step) {
+  @return map.get($line-height-scale, $step);
+}
+
+$font-weights: (
+  'light': 300,
+  'regular': 400,
+  'medium': 500,
+  'bold': 800,
+);
+
+@function font-weight($weight) {
+  @return map.get($font-weights, $weight);
+}
+
+$line-height-sm: 1;
+$line-height-base: 1.25;
+$line-height-lg: 1.3;
+
+$display-01: (
+  desktop: (
+    font-size: font-scale(9),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(10),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(8),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(9),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(7),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(8),
+    letter-spacing: 0,
+  ),
+);
+
+$heading-01: (
+  desktop: (
+    font-size: font-scale(5),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(6),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(4),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(5),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(4),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(5),
+    letter-spacing: 0,
+  ),
+);
+
+$heading-02: (
+  desktop: (
+    font-size: font-scale(5),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(6),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(4),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(5),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(4),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(5),
+    letter-spacing: 0,
+  ),
+);
+
+$heading-03: (
+  desktop: (
+    font-size: font-scale(4),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(5),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(3),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(4),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(3),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(5),
+    letter-spacing: 0,
+  ),
+);
+
+$heading-04: (
+  desktop: (
+    font-size: font-scale(3),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(4),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(3),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(4),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(3),
+    font-weight: font-weight('regular'),
+    line-height: line-height-scale(4),
+    letter-spacing: 0,
+  ),
+);
+
+$heading-05: (
+  desktop: (
+    font-size: font-scale(2),
+    font-weight: font-weight('medium'),
+    line-height: line-height-scale(3),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(2),
+    font-weight: font-weight('medium'),
+    line-height: line-height-scale(3),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(2),
+    font-weight: font-weight('medium'),
+    line-height: line-height-scale(3),
+    letter-spacing: 0,
+  ),
+);
+
+$heading-06: (
+  desktop: (
+    font-size: font-scale(1),
+    font-weight: font-weight('medium'),
+    line-height: line-height-scale(2),
+    letter-spacing: 0,
+  ),
+  tablet: (
+    font-size: font-scale(1),
+    font-weight: font-weight('medium'),
+    line-height: line-height-scale(2),
+    letter-spacing: 0,
+  ),
+  mobile: (
+    font-size: font-scale(1),
+    font-weight: font-weight('medium'),
+    line-height: line-height-scale(2),
+    letter-spacing: 0,
+  ),
+);
+
+$body-01: (
+  font-size: font-scale(2),
+  font-weight: font-weight('regular'),
+  line-height: line-height-scale(3),
+  letter-spacing: 0,
+);
+
+$body-02: (
+  font-size: font-scale(1),
+  font-weight: font-weight('regular'),
+  line-height: line-height-scale(3),
+  letter-spacing: 0,
+);
+
+$headings: (
+  1: $heading-01,
+  2: $heading-02,
+  3: $heading-03,
+  4: $heading-04,
+  5: $heading-05,
+  6: $heading-06,
+);

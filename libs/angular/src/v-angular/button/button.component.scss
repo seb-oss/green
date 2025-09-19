@@ -1,15 +1,15 @@
-@use '../../../../chlorophyll/scss/components/button/mixins' as mixins;
+@use '@sebgroup/chlorophyll/src/scss/tokens/mixin-sys-light-2016' as
+  light-tokens;
+@use '../../../../chlorophyll/src/scss/components/button/mixins' as mixins;
 
 :host {
-  --sg-border-radius: 0.25rem;
-  --sg-border-width: 1px;
-  --sg-border-color: #868686;
-  --gds-sys-color-focus-outline: #1a1a1a;
+  @include light-tokens.add-variables();
 
   button,
   a {
     @include mixins.reset();
     @include mixins.base;
+    box-sizing: border-box;
     font-size: 1rem;
     font-family: inherit;
   }

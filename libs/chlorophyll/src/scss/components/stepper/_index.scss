@@ -1,0 +1,14 @@
+@use '../../common';
+@use 'mixins';
+
+.gds-stepper-wrapper {
+  width: fit-content;
+
+  .gds-group-stepper {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.gds-group-stepper {
+  @include mixins.add-stepper;
+}
