@@ -3,22 +3,67 @@
 export default {
   name: 'json/studio-tokens',
   format: function ({ dictionary }) {
-    // Helper function to get resolved value
     const getResolvedValue = (token) => {
       if (!token.original.value) return undefined
 
-      // If it's a direct value
       if (token.original.value.$value) {
-        return token.original.value.$value
-      }
-
-      // If it's a reference
-      if (typeof token.value === 'string') {
         return token.value
       }
 
-      return token.original.value
+      return token.value
     }
+
+    const getBackgroundColors = (level) => {
+      return dictionary.allTokens
+        .filter(
+          (token) =>
+            token.path[0] === 'sys' &&
+            token.path[1] === 'color' &&
+            token.path[2] === level,
+        )
+        .map((token) => ({
+          token: token.path[token.path.length - 1],
+          variable: `var(--gds-sys-color-${level.toLowerCase()}-${token.path[token.path.length - 1]})`,
+          value: {
+            light: getResolvedValue(token),
+            dark: getResolvedValue(token),
+          },
+        }))
+    }
+
+    const getBorderColors = () => {
+      return dictionary.allTokens
+        .filter(
+          (token) =>
+            token.path[0] === 'sys' &&
+            token.path[1] === 'color' &&
+            token.path[2] === 'border',
+        )
+        .map((token) => ({
+          token: token.path[token.path.length - 1],
+          variable: `var(--gds-sys-color-border-${token.path[token.path.length - 1]})`,
+          value: {
+            light: getResolvedValue(token),
+            dark: getResolvedValue(token),
+          },
+        }))
+    }
+
+    console.log(
+      'Background L1 tokens:',
+      dictionary.allTokens
+        .filter(
+          (token) =>
+            token.path[0] === 'sys' &&
+            token.path[1] === 'color' &&
+            token.path[2] === 'L1',
+        )
+        .map((token) => ({
+          path: token.path,
+          original: token.original.value,
+          resolved: getResolvedValue(token),
+        })),
+    )
 
     const output = {
       $metadata: {
@@ -35,15 +80,15 @@ export default {
       tokens: {
         colors: {
           background: {
-            L1: [],
-            L2: [],
-            L3: [],
+            L1: getBackgroundColors('L1'),
+            L2: getBackgroundColors('L2'),
+            L3: getBackgroundColors('L3'),
           },
-          border: [],
+          border: getBorderColors(),
           state: dictionary.allTokens
             .filter(
               (token) =>
-                (token.path[0] === 'sys' || token.path[0] === 'ref') &&
+                token.path[0] === 'sys' &&
                 token.path[1] === 'color' &&
                 token.path[2] === 'state',
             )
@@ -145,12 +190,14 @@ export default {
 
     // Debug logging
     console.log(
-      'Processing tokens:',
-      dictionary.allTokens.map((token) => ({
-        path: token.path,
-        value: token.original.value,
-        resolved: getResolvedValue(token),
-      })),
+      'All color tokens:',
+      dictionary.allTokens
+        .filter((token) => token.path[1] === 'color')
+        .map((token) => ({
+          path: token.path,
+          value: token.original.value,
+          resolved: getResolvedValue(token),
+        })),
     )
 
     return JSON.stringify(output, null, 2)
