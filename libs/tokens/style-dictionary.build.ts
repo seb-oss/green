@@ -352,10 +352,11 @@ await Promise.all(
               'color/mix-blend',
               'color/alpha',
             ],
-            buildPath: __dirname + `/../../dist/libs/tokens/${theme}/studio/`,
+            buildPath:
+              __dirname + `/../../apps/docs/design/layout/studio/data/`,
             files: [
               {
-                destination: `tokens.json`,
+                destination: `studio.tokens.json`,
                 format: 'json/studio',
               },
             ],
