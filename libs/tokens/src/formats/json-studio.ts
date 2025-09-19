@@ -1,71 +1,85 @@
 // src/formats/studio-tokens.ts
 
+interface TokenInterface {
+  path: string[]
+  name: string
+  value: any
+  $value?: any
+  $type?: string
+  type?: string
+  original: {
+    value: any
+  }
+}
+
+interface Dictionary {
+  allTokens: TokenInterface[]
+}
+
 export default {
   name: 'json/studio',
   format: function ({ dictionary }) {
-    const getResolvedValue = (token) => {
-      if (!token.original.value) return undefined
+    // First, separate tokens by type like Figma does
+    const shadowTokens = dictionary.allTokens.filter((token) => {
+      return token.$type === 'shadow' || token.type === 'shadow'
+    })
 
-      if (token.original.value.$value) {
-        return token.value
+    const typographyTokens = dictionary.allTokens.filter((token) => {
+      return token.$type === 'typography' || token.type === 'typography'
+    })
+
+    const colorTokens = dictionary.allTokens.filter((token) => {
+      return token.path[1] === 'color'
+    })
+
+    const dimensionTokens = dictionary.allTokens.filter((token) => {
+      return ['space', 'radius', 'viewport'].includes(token.path[1])
+    })
+
+    const motionTokens = dictionary.allTokens.filter((token) => {
+      return token.path[1] === 'motion'
+    })
+
+    // Helper function to resolve token values
+    const resolveTokenValue = (token: TokenInterface) => {
+      const value = token.$value || token.value || token.original.value
+
+      if (typeof value === 'object' && value !== null) {
+        // Handle direct color with alpha
+        if (value.$value && value.alpha !== undefined) {
+          return {
+            value: value.$value,
+            alpha: value.alpha * 100, // Convert to percentage
+          }
+        }
+
+        // Handle theme variants
+        if (value.light || value.dark) {
+          return {
+            light: value.light?.$value || value.light,
+            dark: value.dark?.$value || value.dark,
+            ...(value.alpha && { alpha: value.alpha * 100 }), // Convert to percentage
+          }
+        }
+
+        // Handle typography object
+        if (value.$type === 'typography') {
+          return {
+            fontFamily: value.fontFamily,
+            fontSize: value.fontSize,
+            lineHeight: value.lineHeight,
+            fontWeight: value.fontWeight,
+          }
+        }
+
+        if (value.$value) return value.$value
+        return value
       }
-
-      return token.value
+      return value
     }
 
-    const getBackgroundColors = (level) => {
-      return dictionary.allTokens
-        .filter(
-          (token) =>
-            token.path[0] === 'sys' &&
-            token.path[1] === 'color' &&
-            token.path[2] === level,
-        )
-        .map((token) => ({
-          token: token.path[token.path.length - 1],
-          variable: `var(--gds-sys-color-${level.toLowerCase()}-${token.path[token.path.length - 1]})`,
-          value: {
-            light: getResolvedValue(token),
-            dark: getResolvedValue(token),
-          },
-        }))
-    }
-
-    const getBorderColors = () => {
-      return dictionary.allTokens
-        .filter(
-          (token) =>
-            token.path[0] === 'sys' &&
-            token.path[1] === 'color' &&
-            token.path[2] === 'border',
-        )
-        .map((token) => ({
-          token: token.path[token.path.length - 1],
-          variable: `var(--gds-sys-color-border-${token.path[token.path.length - 1]})`,
-          value: {
-            light: getResolvedValue(token),
-            dark: getResolvedValue(token),
-          },
-        }))
-    }
-
-    console.log(
-      'Background L1 tokens:',
-      dictionary.allTokens
-        .filter(
-          (token) =>
-            token.path[0] === 'sys' &&
-            token.path[1] === 'color' &&
-            token.path[2] === 'L1',
-        )
-        .map((token) => ({
-          path: token.path,
-          original: token.original.value,
-          resolved: getResolvedValue(token),
-        })),
-    )
-
-    const output = {
+    // Process tokens according to your schema
+    const processedTokens = {
       $metadata: {
         tokenSetOrder: [
           'colors',
@@ -80,126 +94,133 @@ export default {
       tokens: {
         colors: {
           background: {
-            L1: getBackgroundColors('L1'),
-            L2: getBackgroundColors('L2'),
-            L3: getBackgroundColors('L3'),
+            L1: colorTokens
+              .filter((token) => token.path[2] === 'L1')
+              .map((token) => ({
+                token: token.path[token.path.length - 1],
+                variable: `var(--gds-sys-color-l1-${token.path[token.path.length - 1]})`,
+                value: resolveTokenValue(token),
+              })),
+            L2: colorTokens
+              .filter((token) => token.path[2] === 'L2')
+              .map((token) => ({
+                token: token.path[token.path.length - 1],
+                variable: `var(--gds-sys-color-l2-${token.path[token.path.length - 1]})`,
+                value: resolveTokenValue(token),
+              })),
+            L3: colorTokens
+              .filter((token) => token.path[2] === 'L3')
+              .map((token) => ({
+                token: token.path[token.path.length - 1],
+                variable: `var(--gds-sys-color-l3-${token.path[token.path.length - 1]})`,
+                value: resolveTokenValue(token),
+              })),
           },
-          border: getBorderColors(),
-          state: dictionary.allTokens
-            .filter(
-              (token) =>
-                token.path[0] === 'sys' &&
-                token.path[1] === 'color' &&
-                token.path[2] === 'state',
-            )
+          border: colorTokens
+            .filter((token) => token.path[2] === 'border')
             .map((token) => ({
               token: token.path[token.path.length - 1],
-              variable: `var(--gds-sys-color-state-${token.path[token.path.length - 1]})`,
-              value: {
-                light: getResolvedValue(token),
-                dark: getResolvedValue(token),
-                alpha: token.original.value?.alpha || '',
-              },
+              variable: `var(--gds-sys-color-border-${token.path[token.path.length - 1]})`,
+              value: resolveTokenValue(token),
             })),
+          state: colorTokens
+            .filter((token) => token.path[2] === 'state')
+            .map((token) => {
+              const resolvedValue = resolveTokenValue(token)
+              return {
+                token: token.path[token.path.length - 1],
+                variable: `var(--gds-sys-color-state-${token.path[token.path.length - 1]})`,
+                value:
+                  typeof resolvedValue === 'object'
+                    ? {
+                        value:
+                          resolvedValue.value ||
+                          resolvedValue.light ||
+                          resolvedValue,
+                        alpha:
+                          resolvedValue.alpha !== undefined
+                            ? `${resolvedValue.alpha}%`
+                            : undefined,
+                      }
+                    : {
+                        value: resolvedValue,
+                      },
+              }
+            }),
         },
-        typography: dictionary.allTokens
-          .filter(
-            (token) =>
-              token.path[0] === 'sys' &&
-              token.path[1] === 'text' &&
-              token.original.value?.$type === 'typography',
-          )
-          .map((token) => ({
+        typography: typographyTokens.map((token) => {
+          const resolvedValue = resolveTokenValue(token)
+          return {
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-text-${token.path[token.path.length - 1]})`,
             value: {
-              fontFamily: getResolvedValue(token)?.fontFamily,
-              fontSize: `${getResolvedValue(token)?.fontSize}px`,
-              lineHeight: `${getResolvedValue(token)?.lineHeight}px`,
-              fontWeight: getResolvedValue(token)?.fontWeight,
+              fontFamily: resolvedValue.fontFamily,
+              fontSize: resolvedValue.fontSize
+                ? `${resolvedValue.fontSize}px`
+                : undefined,
+              lineHeight: resolvedValue.lineHeight
+                ? `${resolvedValue.lineHeight}px`
+                : undefined,
+              fontWeight: resolvedValue.fontWeight,
             },
-          })),
-        spacing: dictionary.allTokens
-          .filter(
-            (token) =>
-              (token.path[0] === 'sys' || token.path[0] === 'ref') &&
-              token.path[1] === 'space',
-          )
+          }
+        }),
+        spacing: dimensionTokens
+          .filter((token) => token.path[1] === 'space')
           .map((token) => ({
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-space-${token.path[token.path.length - 1]})`,
-            value: `${getResolvedValue(token)}px`,
+            value: `${resolveTokenValue(token)}px`,
           })),
-        radius: dictionary.allTokens
-          .filter(
-            (token) =>
-              (token.path[0] === 'sys' || token.path[0] === 'ref') &&
-              token.path[1] === 'radius',
-          )
+        radius: dimensionTokens
+          .filter((token) => token.path[1] === 'radius')
           .map((token) => ({
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-radius-${token.path[token.path.length - 1]})`,
-            value: `${getResolvedValue(token)}px`,
+            value: `${resolveTokenValue(token)}px`,
           })),
-        shadows: dictionary.allTokens
-          .filter(
-            (token) => token.path[0] === 'sys' && token.path[1] === 'shadow',
-          )
-          .map((token) => ({
-            token: token.path[token.path.length - 1],
-            variable: `var(--gds-sys-shadow-${token.path[token.path.length - 1]})`,
-            value: getResolvedValue(token),
-          })),
-        viewport: dictionary.allTokens
-          .filter(
-            (token) => token.path[0] === 'sys' && token.path[1] === 'viewport',
-          )
+        shadows: shadowTokens.map((token) => ({
+          token: token.path[token.path.length - 1],
+          variable: `var(--gds-sys-shadow-${token.path[token.path.length - 1]})`,
+          value: resolveTokenValue(token),
+        })),
+        viewport: dimensionTokens
+          .filter((token) => token.path[1] === 'viewport')
           .map((token) => ({
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-viewport-${token.path[token.path.length - 1]})`,
-            value: `${getResolvedValue(token)}px`,
+            value: `${resolveTokenValue(token)}px`,
           })),
         motion: {
-          duration: dictionary.allTokens
-            .filter(
-              (token) =>
-                token.path[0] === 'sys' &&
-                token.path[1] === 'motion' &&
-                token.path[2] === 'duration',
-            )
+          duration: motionTokens
+            .filter((token) => token.path[2] === 'duration')
             .map((token) => ({
               token: token.path[token.path.length - 1],
               variable: `var(--gds-sys-motion-duration-${token.path[token.path.length - 1]})`,
-              value: getResolvedValue(token),
+              value: resolveTokenValue(token),
             })),
-          easing: dictionary.allTokens
-            .filter(
-              (token) =>
-                token.path[0] === 'sys' &&
-                token.path[1] === 'motion' &&
-                token.path[2] === 'easing',
-            )
+          easing: motionTokens
+            .filter((token) => token.path[2] === 'easing')
             .map((token) => ({
               token: token.path[token.path.length - 1],
               variable: `var(--gds-sys-motion-easing-${token.path[token.path.length - 1]})`,
-              value: `cubic-bezier(${getResolvedValue(token)})`,
+              value: `cubic-bezier(${resolveTokenValue(token)})`,
             })),
         },
       },
     }
 
     // Debug logging
-    console.log(
-      'All color tokens:',
-      dictionary.allTokens
-        .filter((token) => token.path[1] === 'color')
-        .map((token) => ({
-          path: token.path,
-          value: token.original.value,
-          resolved: getResolvedValue(token),
+    if (process.env.DEBUG) {
+      console.log('Tokens Debug:', {
+        typography: typographyTokens.map((t) => ({
+          path: t.path,
+          original: t.original.value,
+          resolved: resolveTokenValue(t),
         })),
-    )
+      })
+    }
 
-    return JSON.stringify(output, null, 2)
+    return JSON.stringify(processedTokens, null, 2)
   },
 }
