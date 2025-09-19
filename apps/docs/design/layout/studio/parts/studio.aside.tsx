@@ -77,39 +77,26 @@ export default function Aside({ page, itemKey }: AsideProps) {
               >
                 <Core.GdsCard
                   padding="s"
-                  flex-direction="column"
-                  align-items="flex-start"
-                  variant="secondary"
+                  flex-direction="row"
+                  align-items="center"
+                  justify-content="space-between"
+                  variant="primary"
                   gap="0"
                 >
-                  <Core.GdsFlex
-                    flex-direction="row"
-                    justify-content="space-between"
-                    align-items="center"
-                    width="100%"
-                  >
-                    <Core.GdsText font="detail-regular-xs">
-                      Web Component
-                    </Core.GdsText>
-                    <Core.GdsButton
-                      rank="tertiary"
-                      size="small"
-                      onClick={() => {
-                        navigator.clipboard.writeText(
-                          `import '@sebgroup/green-core/${currentItem.key}'`,
-                        )
-                      }}
-                    >
-                      <Core.IconCopy size="s" />
-                    </Core.GdsButton>
-                  </Core.GdsFlex>
-                  <Core.GdsText
-                    font="detail-regular-xs"
-                    font-family="mono"
-                    color="neutral-02"
-                  >
-                    {`import ...`}
+                  <Core.GdsText font="detail-regular-xs">
+                    {`<Icon${currentItem.key}`}
                   </Core.GdsText>
+                  <Core.GdsButton
+                    rank="tertiary"
+                    size="small"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `import '@sebgroup/green-core/${currentItem.key}'`,
+                      )
+                    }}
+                  >
+                    <Core.IconCopy size="s" />
+                  </Core.GdsButton>
                 </Core.GdsCard>
               </Core.GdsDetails>
               <Core.GdsDetails summary="React" size="small" name="frameworks">
