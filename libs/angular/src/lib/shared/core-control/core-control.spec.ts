@@ -27,6 +27,11 @@ import { NggCoreFormsModule } from './core-control.module'
         required
       ></gds-input>
       <gds-input name="nonReactive" required></gds-input>
+      <gds-input
+        name="formControl"
+        [formControl]="formControl"
+        required
+      ></gds-input>
     </form>
   `,
 })
@@ -36,6 +41,8 @@ class TestComponent {
     email: new FormControl(''),
     password: new FormControl(''),
   })
+
+  formControl = new FormControl('')
 }
 
 describe('NggCoreControlDirective', () => {
@@ -147,6 +154,16 @@ describe('NggCoreControlDirective', () => {
 
   it('should not apply controlValueAccessor to non-reactive input', async () => {
     const control = component.form.get('nonReactive')
+    control?.markAsDirty()
+    fixture.detectChanges()
+
+    await fixture.whenStable()
+
+    expect(nonReactiveInputEl.nativeElement.invalid).toBe(false)
+  })
+
+  it('should work with [formControl] directive', async () => {
+    const control = component.form.get('formControl')
     control?.markAsDirty()
     fixture.detectChanges()
 
