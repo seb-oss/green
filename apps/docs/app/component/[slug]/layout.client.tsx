@@ -56,16 +56,11 @@ export function ComponentLayoutClient({
     if (pathname.includes('/ux-text')) return 'ux-text'
     if (pathname.includes('/accessibility')) return 'accessibility'
     if (pathname.includes('/code')) return 'code'
+    if (pathname.includes('/faq')) return 'faq'
     return 'overview'
   }
 
   const section = getSection(pathname)
-
-  // const section = pathname.includes('/ux-text')
-  //   ? 'ux-text'
-  //   : pathname.includes('/accessibility')
-  //     ? 'accessibility'
-  //     : 'overview'
 
   if (!isLoaded) return null
 

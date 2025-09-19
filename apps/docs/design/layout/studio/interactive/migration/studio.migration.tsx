@@ -5,8 +5,7 @@ import { useMemo, useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../../hooks'
-import { Variable } from '../../../parts'
-import { Copy } from '../../../table'
+import { Copy } from '../../table'
 
 interface DeprecatedIconsProps {
   searchQuery?: string

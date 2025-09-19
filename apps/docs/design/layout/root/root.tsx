@@ -21,7 +21,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
 
   const PATH = usePathname()
   const Composer = PATH === '/compose'
-  const Studio = PATH.startsWith('/studio')
+  const Studio = PATH.startsWith('/studio') || PATH.startsWith('/play')
 
   return (
     <div className={classes} {...rest}>

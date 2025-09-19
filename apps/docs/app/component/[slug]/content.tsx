@@ -11,7 +11,7 @@ import { ComponentSection } from '../../../settings/content/types'
 
 interface ContentSectionProps {
   slug: string
-  contentKey: 'overview' | 'ux-text' | 'accessibility' | 'code'
+  contentKey: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
 }
 
 export function ContentSection({ slug, contentKey }: ContentSectionProps) {
@@ -43,6 +43,12 @@ export function ContentSection({ slug, contentKey }: ContentSectionProps) {
           return component['code']
         }
         return component['code']?.section || null
+      }
+      case 'faq': {
+        if (Array.isArray(component['faq'])) {
+          return component['faq']
+        }
+        return component['faq']?.section || null
       }
       default:
         return null

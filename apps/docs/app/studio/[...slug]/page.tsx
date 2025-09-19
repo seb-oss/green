@@ -1,61 +1,84 @@
-// app/studio/[...slug]/page.tsx
+// page.tsx
 import { Metadata } from 'next'
 
-import StudioClient from './page.client'
+import {
+  getPageBySlug,
+  studioData,
+} from '../../../design/layout/studio/data/studio.data'
 
-interface Props {
+// Function to fetch icons from API during build time
+async function fetchIconList() {
+  try {
+    const response = await fetch(
+      'https://api.seb.io/components/icon/icon.list.json',
+    )
+    const icons = await response.json()
+    return Object.keys(icons) // Just need the icon keys for paths
+  } catch (error) {
+    console.error('Failed to fetch icon list:', error)
+    return []
+  }
+}
+
+export async function generateMetadata({
+  params,
+}: {
   params: { slug: string[] }
+}): Promise<Metadata> {
+  const mainPath = `/studio/${params.slug[0]}`
+  const page = getPageBySlug(mainPath)
+
+  return {
+    title: page ? `${page.label} · Green Design System` : 'Green Design System',
+    description: page?.description || 'Design tokens and tools',
+  }
+}
+
+export default function PlayPage() {
+  return null
 }
 
 export async function generateStaticParams() {
-  // Fetch icons list for generating icon detail paths
-  const response = await fetch(
-    'https://api.seb.io/components/icon/icon.list.json',
-  )
-  const icons = await response.json()
+  const paths: { slug: string[] }[] = []
+  const iconList = await fetchIconList()
 
-  // Define valid tools
-  const validTools = [
-    'colors',
-    'typography',
-    'spacing',
-    'radius',
-    'shadows',
-    'viewport',
-    'icons',
-    'grid',
-    'compose',
-  ]
+  studioData.forEach((category) => {
+    category.pages.forEach((page) => {
+      // Add main page route
+      paths.push({
+        slug: [page.slug.replace('/studio/', '')],
+      })
 
-  const toolPaths = validTools.map((tool) => ({
-    slug: [tool],
-  }))
+      // Interactive pages
+      if (page.pages) {
+        page.pages.forEach((specialPage) => {
+          paths.push({
+            slug: specialPage.slug.replace('/studio/', '').split('/'),
+          })
+        })
+      }
 
-  const iconPaths = Object.keys(icons).map((iconId) => ({
-    slug: ['icons', iconId],
-  }))
+      // For icons page, use the API data to generate paths
+      if (page.key === 'icons') {
+        iconList.forEach((iconKey) => {
+          paths.push({
+            slug: [page.slug.replace('/studio/', ''), iconKey],
+          })
+        })
+      }
 
-  const migrationPath = {
-    slug: ['icons', 'migration'],
-  }
+      // For other pages with content, use the existing structure
+      else if (page.content) {
+        page.content.forEach((group) => {
+          group.items.forEach((item) => {
+            paths.push({
+              slug: [page.slug.replace('/studio/', ''), item.key],
+            })
+          })
+        })
+      }
+    })
+  })
 
-  // Combine all paths
-  return [...toolPaths, ...iconPaths, migrationPath]
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const [tool, icon] = params.slug
-  const title = tool.charAt(0).toUpperCase() + tool.slice(1)
-
-  return {
-    title: icon
-      ? `${icon} Icon - Studio - Green Design System`
-      : `${title} - Studio - Green Design System`,
-    description: `Design System ${title} tokens and configuration`,
-  }
-}
-
-export default function StudioPage({ params }: Props) {
-  const [tool, icon] = params.slug
-  return <StudioClient tool={tool} selectedIcon={icon} />
+  return paths
 }

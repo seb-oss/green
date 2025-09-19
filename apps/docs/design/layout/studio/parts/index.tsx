@@ -1,0 +1,7 @@
+export { default as Aside } from './studio.aside'
+export { default as Sidebar } from './studio.sidebar'
+export { default as Meta } from './studio.meta'
+export { default as Breadcrumbs } from './studio.breadcrumbs'
+export { default as Header } from './studio.header'
+export { default as Search } from './studio.search'
+export { default as Main } from './studio.main'

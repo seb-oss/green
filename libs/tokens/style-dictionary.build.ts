@@ -341,6 +341,26 @@ await Promise.all(
               },
             ],
           },
+          studio: {
+            transforms: [
+              'attribute/cti',
+              'time/seconds',
+              'html/icon',
+              'size/px',
+              'color/css',
+              'name/kebab',
+              'color/mix-blend',
+              'color/alpha',
+            ],
+            buildPath:
+              __dirname + `/../../apps/docs/design/layout/studio/data/`,
+            files: [
+              {
+                destination: `studio.tokens.json`,
+                format: 'json/studio',
+              },
+            ],
+          },
         },
       }
 
