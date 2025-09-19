@@ -45,20 +45,38 @@ export default {
       const value = token.$value || token.value || token.original.value
 
       if (typeof value === 'object' && value !== null) {
-        // Handle direct color with alpha
-        if (value.$value && value.alpha !== undefined) {
+        // Handle color with alpha
+        if (value.$value) {
+          const baseColor = value.$value
+          const alpha =
+            value.alpha !== undefined ? value.alpha * 100 : undefined
           return {
-            value: value.$value,
-            alpha: value.alpha * 100, // Convert to percentage
+            light: {
+              value: baseColor,
+              ...(alpha !== undefined && { alpha: `${alpha}%` }),
+            },
+            dark: {
+              value: baseColor,
+              ...(alpha !== undefined && { alpha: `${alpha}%` }),
+            },
           }
         }
 
-        // Handle theme variants
+        // Handle existing light/dark variants
         if (value.light || value.dark) {
           return {
-            light: value.light?.$value || value.light,
-            dark: value.dark?.$value || value.dark,
-            ...(value.alpha && { alpha: value.alpha * 100 }), // Convert to percentage
+            light: {
+              value: value.light?.$value || value.light,
+              ...(value.alpha !== undefined && {
+                alpha: `${value.alpha * 100}%`,
+              }),
+            },
+            dark: {
+              value: value.dark?.$value || value.dark,
+              ...(value.alpha !== undefined && {
+                alpha: `${value.alpha * 100}%`,
+              }),
+            },
           }
         }
 
@@ -72,10 +90,21 @@ export default {
           }
         }
 
-        if (value.$value) return value.$value
         return value
       }
       return value
+    }
+
+    const createColorToken = (token: TokenInterface) => {
+      const resolvedValue = resolveTokenValue(token)
+      return {
+        token: token.path[token.path.length - 1],
+        variable: `var(--gds-sys-color-${token.path[2].toLowerCase()}-${token.path[token.path.length - 1]})`,
+        value: {
+          light: resolvedValue.light || { value: resolvedValue },
+          dark: resolvedValue.dark || { value: resolvedValue },
+        },
+      }
     }
 
     // Process tokens according to your schema
@@ -96,57 +125,20 @@ export default {
           background: {
             L1: colorTokens
               .filter((token) => token.path[2] === 'L1')
-              .map((token) => ({
-                token: token.path[token.path.length - 1],
-                variable: `var(--gds-sys-color-l1-${token.path[token.path.length - 1]})`,
-                value: resolveTokenValue(token),
-              })),
+              .map(createColorToken),
             L2: colorTokens
               .filter((token) => token.path[2] === 'L2')
-              .map((token) => ({
-                token: token.path[token.path.length - 1],
-                variable: `var(--gds-sys-color-l2-${token.path[token.path.length - 1]})`,
-                value: resolveTokenValue(token),
-              })),
+              .map(createColorToken),
             L3: colorTokens
               .filter((token) => token.path[2] === 'L3')
-              .map((token) => ({
-                token: token.path[token.path.length - 1],
-                variable: `var(--gds-sys-color-l3-${token.path[token.path.length - 1]})`,
-                value: resolveTokenValue(token),
-              })),
+              .map(createColorToken),
           },
           border: colorTokens
             .filter((token) => token.path[2] === 'border')
-            .map((token) => ({
-              token: token.path[token.path.length - 1],
-              variable: `var(--gds-sys-color-border-${token.path[token.path.length - 1]})`,
-              value: resolveTokenValue(token),
-            })),
+            .map(createColorToken),
           state: colorTokens
             .filter((token) => token.path[2] === 'state')
-            .map((token) => {
-              const resolvedValue = resolveTokenValue(token)
-              return {
-                token: token.path[token.path.length - 1],
-                variable: `var(--gds-sys-color-state-${token.path[token.path.length - 1]})`,
-                value:
-                  typeof resolvedValue === 'object'
-                    ? {
-                        value:
-                          resolvedValue.value ||
-                          resolvedValue.light ||
-                          resolvedValue,
-                        alpha:
-                          resolvedValue.alpha !== undefined
-                            ? `${resolvedValue.alpha}%`
-                            : undefined,
-                      }
-                    : {
-                        value: resolvedValue,
-                      },
-              }
-            }),
+            .map(createColorToken),
         },
         typography: typographyTokens.map((token) => {
           const resolvedValue = resolveTokenValue(token)
@@ -170,14 +162,14 @@ export default {
           .map((token) => ({
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-space-${token.path[token.path.length - 1]})`,
-            value: `${resolveTokenValue(token)}px`,
+            value: `${resolveTokenValue(token)}`,
           })),
         radius: dimensionTokens
           .filter((token) => token.path[1] === 'radius')
           .map((token) => ({
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-radius-${token.path[token.path.length - 1]})`,
-            value: `${resolveTokenValue(token)}px`,
+            value: `${resolveTokenValue(token)}`,
           })),
         shadows: shadowTokens.map((token) => ({
           token: token.path[token.path.length - 1],
@@ -189,7 +181,7 @@ export default {
           .map((token) => ({
             token: token.path[token.path.length - 1],
             variable: `var(--gds-sys-viewport-${token.path[token.path.length - 1]})`,
-            value: `${resolveTokenValue(token)}px`,
+            value: `${resolveTokenValue(token)}`,
           })),
         motion: {
           duration: motionTokens
