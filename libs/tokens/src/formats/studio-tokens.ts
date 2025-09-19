@@ -1,6 +1,25 @@
+// src/formats/studio-tokens.ts
+
 export default {
   name: 'json/studio-tokens',
-  format: function () {
+  format: function ({ dictionary }) {
+    // Helper function to get resolved value
+    const getResolvedValue = (token) => {
+      if (!token.original.value) return undefined
+
+      // If it's a direct value
+      if (token.original.value.$value) {
+        return token.original.value.$value
+      }
+
+      // If it's a reference
+      if (typeof token.value === 'string') {
+        return token.value
+      }
+
+      return token.original.value
+    }
+
     const output = {
       $metadata: {
         tokenSetOrder: [
@@ -16,131 +35,123 @@ export default {
       tokens: {
         colors: {
           background: {
-            L1: [
-              {
-                token: 'neutral-01',
-                variable: 'var(--gds-sys-color-l1-neutral-01)',
-                value: {
-                  light: {
-                    value: '#ffffff',
-                    alpha: 1,
-                  },
-                  dark: {
-                    value: '#0a0b0b',
-                    alpha: 1,
-                  },
-                },
-              },
-              {
-                token: 'neutral-02',
-                variable: 'var(--gds-sys-color-l1-neutral-02)',
-                value: {
-                  light: '#eaebeb',
-                  dark: '#282a29',
-                },
-              },
-            ],
-            L2: [
-              {
-                token: 'neutral-01',
-                variable: 'var(--gds-sys-color-l2-neutral-01)',
-                value: {
-                  light: '#f5f5f5',
-                  dark: '#1c1d1d',
-                },
-              },
-            ],
+            L1: [],
+            L2: [],
+            L3: [],
           },
-          border: [
-            {
-              token: 'neutral-01',
-              variable: 'var(--gds-sys-color-border-neutral-01)',
+          border: [],
+          state: dictionary.allTokens
+            .filter(
+              (token) =>
+                (token.path[0] === 'sys' || token.path[0] === 'ref') &&
+                token.path[1] === 'color' &&
+                token.path[2] === 'state',
+            )
+            .map((token) => ({
+              token: token.path[token.path.length - 1],
+              variable: `var(--gds-sys-color-state-${token.path[token.path.length - 1]})`,
               value: {
-                light: '#d1d3d3',
-                dark: '#404040',
+                light: getResolvedValue(token),
+                dark: getResolvedValue(token),
+                alpha: token.original.value?.alpha || '',
               },
-            },
-          ],
-          state: [
-            {
-              token: 'hover-01',
-              variable: 'var(--gds-sys-color-state-hover-01)',
-              value: {
-                light: '#00000033',
-                dark: '#ffffff33',
-                alpha: '',
-              },
-            },
-          ],
+            })),
         },
-        typography: [
-          {
-            token: 'heading-xl',
-            variable: 'var(--gds-sys-text-heading-xl)',
+        typography: dictionary.allTokens
+          .filter(
+            (token) =>
+              token.path[0] === 'sys' &&
+              token.path[1] === 'text' &&
+              token.original.value?.$type === 'typography',
+          )
+          .map((token) => ({
+            token: token.path[token.path.length - 1],
+            variable: `var(--gds-sys-text-${token.path[token.path.length - 1]})`,
             value: {
-              fontFamily: 'SEB Sans Serif',
-              fontSize: '32px',
-              lineHeight: '44px',
-              fontWeight: '450',
+              fontFamily: getResolvedValue(token)?.fontFamily,
+              fontSize: `${getResolvedValue(token)?.fontSize}px`,
+              lineHeight: `${getResolvedValue(token)?.lineHeight}px`,
+              fontWeight: getResolvedValue(token)?.fontWeight,
             },
-          },
-        ],
-        spacing: [
-          {
-            token: 'xs',
-            variable: 'var(--gds-sys-space-xs)',
-            value: '4px',
-          },
-          {
-            token: 's',
-            variable: 'var(--gds-sys-space-s)',
-            value: '8px',
-          },
-        ],
-        radius: [
-          {
-            token: 'none',
-            variable: 'var(--gds-sys-radius-none)',
-            value: '0',
-          },
-          {
-            token: 's',
-            variable: 'var(--gds-sys-radius-s)',
-            value: '4px',
-          },
-        ],
-        shadows: [
-          {
-            token: 's',
-            variable: 'var(--gds-sys-shadow-s-01), var(--gds-sys-shadow-s-02)',
-            value: '0px 0px 2px 0px #060D1314',
-          },
-        ],
-        viewport: [
-          {
-            token: 's',
-            variable: 'var(--gds-sys-viewport-s)',
-            value: '430px',
-          },
-        ],
+          })),
+        spacing: dictionary.allTokens
+          .filter(
+            (token) =>
+              (token.path[0] === 'sys' || token.path[0] === 'ref') &&
+              token.path[1] === 'space',
+          )
+          .map((token) => ({
+            token: token.path[token.path.length - 1],
+            variable: `var(--gds-sys-space-${token.path[token.path.length - 1]})`,
+            value: `${getResolvedValue(token)}px`,
+          })),
+        radius: dictionary.allTokens
+          .filter(
+            (token) =>
+              (token.path[0] === 'sys' || token.path[0] === 'ref') &&
+              token.path[1] === 'radius',
+          )
+          .map((token) => ({
+            token: token.path[token.path.length - 1],
+            variable: `var(--gds-sys-radius-${token.path[token.path.length - 1]})`,
+            value: `${getResolvedValue(token)}px`,
+          })),
+        shadows: dictionary.allTokens
+          .filter(
+            (token) => token.path[0] === 'sys' && token.path[1] === 'shadow',
+          )
+          .map((token) => ({
+            token: token.path[token.path.length - 1],
+            variable: `var(--gds-sys-shadow-${token.path[token.path.length - 1]})`,
+            value: getResolvedValue(token),
+          })),
+        viewport: dictionary.allTokens
+          .filter(
+            (token) => token.path[0] === 'sys' && token.path[1] === 'viewport',
+          )
+          .map((token) => ({
+            token: token.path[token.path.length - 1],
+            variable: `var(--gds-sys-viewport-${token.path[token.path.length - 1]})`,
+            value: `${getResolvedValue(token)}px`,
+          })),
         motion: {
-          duration: [
-            {
-              token: 'fastest',
-              variable: 'var(--gds-sys-motion-duration-fastest)',
-              value: '0.2s',
-            },
-          ],
-          easing: [
-            {
-              token: 'ease-in',
-              variable: 'var(--gds-sys-motion-easing-ease-in)',
-              value: 'cubic-bezier(0.64, 0, 0.78, 0)',
-            },
-          ],
+          duration: dictionary.allTokens
+            .filter(
+              (token) =>
+                token.path[0] === 'sys' &&
+                token.path[1] === 'motion' &&
+                token.path[2] === 'duration',
+            )
+            .map((token) => ({
+              token: token.path[token.path.length - 1],
+              variable: `var(--gds-sys-motion-duration-${token.path[token.path.length - 1]})`,
+              value: getResolvedValue(token),
+            })),
+          easing: dictionary.allTokens
+            .filter(
+              (token) =>
+                token.path[0] === 'sys' &&
+                token.path[1] === 'motion' &&
+                token.path[2] === 'easing',
+            )
+            .map((token) => ({
+              token: token.path[token.path.length - 1],
+              variable: `var(--gds-sys-motion-easing-${token.path[token.path.length - 1]})`,
+              value: `cubic-bezier(${getResolvedValue(token)})`,
+            })),
         },
       },
     }
+
+    // Debug logging
+    console.log(
+      'Processing tokens:',
+      dictionary.allTokens.map((token) => ({
+        path: token.path,
+        value: token.original.value,
+        resolved: getResolvedValue(token),
+      })),
+    )
 
     return JSON.stringify(output, null, 2)
   },
