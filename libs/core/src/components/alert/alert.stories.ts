@@ -24,6 +24,15 @@ const meta: Meta<GdsAlert> = {
       options: ['alert', 'status'],
     },
   },
+  render: (args) => html`
+    <gds-alert
+      variant="${args.variant}"
+      role="alert"
+      ?dismissible="${args.dismissible}"
+    >
+      ${args.innerHTML}
+    </gds-alert>
+  `,
 }
 
 export default meta
@@ -41,10 +50,9 @@ export const DefaultParams: Story = {
     variant: 'information',
     role: 'alert',
     dismissible: true,
-    timeout: 0,
     buttonLabel: '',
-    innerHTML: `<strong>Information</strong> Body text starts on the same row as heading.
-    A link (optional) always ends the message.`,
+    innerHTML: html`<strong>Information</strong> Body text starts on the same
+      row as heading. A link (optional) always ends the message.`,
   },
 }
 
