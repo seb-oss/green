@@ -55,6 +55,22 @@ const jsonStudio = {
       return acc
     }, {})
 
+    // Helper function to process pixel values
+    const processValue = (token) => {
+      const value = token.$value !== undefined ? token.$value : token.value
+      const tokenPath = token.path.join('.')
+
+      // Check if token is a viewport token
+      if (tokenPath.includes('viewport')) {
+        return typeof value === 'number' || !isNaN(value) ? `${value}px` : value
+      }
+
+      // Handle other pixel-based tokens (spacing, radius)
+      const shouldAddPx =
+        token.path[1] === 'space' || token.path[1] === 'radius'
+      return shouldAddPx && typeof value === 'number' ? `${value}px` : value
+    }
+
     // Group tokens by category
     const groupedTokens = newDictionary.reduce((acc, token) => {
       const category = token.path[2]
@@ -65,24 +81,31 @@ const jsonStudio = {
         }
         acc.background[category].push({
           name: token.path[token.path.length - 1],
-          value: token.$value !== undefined ? token.$value : token.value,
+          value: processValue(token),
         })
       } else {
-        if (!acc[category]) {
-          acc[category] = []
+        const tokenCategory =
+          token.path[1] === 'viewport' ? token.path[1] : category
+        if (!acc[tokenCategory]) {
+          acc[tokenCategory] = []
         }
-        acc[category].push({
+        acc[tokenCategory].push({
           name: token.path[token.path.length - 1],
-          value: token.$value !== undefined ? token.$value : token.value,
+          value: processValue(token),
         })
       }
 
       return acc
     }, {})
 
-    // Merge typography groups into the final output
+    // Return final JSON with typography only if it has content
     return JSON.stringify(
-      { ...groupedTokens, typography: typographyGroups },
+      {
+        ...groupedTokens,
+        ...(Object.keys(typographyGroups).length > 0
+          ? { typography: typographyGroups }
+          : {}),
+      },
       null,
       2,
     )

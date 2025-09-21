@@ -209,8 +209,7 @@ await Promise.all(
             ],
           },
           studio: {
-            buildPath:
-              __dirname + `/../../apps/docs/design/layout/studio/data/tokens/`,
+            buildPath: __dirname + `/../../dist/libs/tokens/studio/`,
             transforms: ['name/studio', 'color/alpha', 'size/px'],
             files: [
               {

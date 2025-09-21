@@ -2,6 +2,6 @@
 export default {
   name: 'is-viewport',
   filter: async (token) => {
-    return token.path[1] === 'viewport'
+    return token.path[1] === 'viewport' && !token.path.includes('ref')
   },
 }
