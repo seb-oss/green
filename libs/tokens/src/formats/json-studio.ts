@@ -135,7 +135,8 @@ const jsonStudio = {
           acc.background = { L1: [], L2: [], L3: [] }
         }
         acc.background[category].push({
-          name: token.path[token.path.length - 1],
+          token: token.path[token.path.length - 1],
+          variable: `var(--gds-sys-color-${token.path[token.path.length - 2]}-${token.path[token.path.length - 1]})`,
           value: token.$value !== undefined ? token.$value : token.value,
         })
       } else {
@@ -143,7 +144,8 @@ const jsonStudio = {
           acc[category] = []
         }
         acc[category].push({
-          name: token.path[token.path.length - 1],
+          token: token.path[token.path.length - 1],
+          variable: `var(--gds-sys-color-${category}-${token.path[token.path.length - 1]})`,
           value: token.$value !== undefined ? token.$value : token.value,
         })
       }
