@@ -75,6 +75,9 @@ export class GdsBadge extends withSizeXProps(
   @state()
   mainSlotOccupied = false
 
+  @state()
+  leadSlotOccupied = false
+
   render() {
     let background: string
     let color: string
@@ -114,54 +117,124 @@ export class GdsBadge extends withSizeXProps(
       }
     }
 
-    const padding = this.size === 'small' || this.notification ? '2xs' : 'xs'
+    const padding = (() => {
+      const paddings = {
+        notification: {
+          occupied: '4xs 2xs',
+          default: '3xs',
+        },
+        small: {
+          occupied: '4xs 3xs',
+          default: '4xs 3xs',
+        },
+        default: {
+          occupied: '3xs xs 3xs 2xs',
+          default: '4xs xs',
+        },
+      }
 
-    const blockSize = this.mainSlotOccupied
-      ? this.size === 'small' || this.notification
-        ? 'm'
-        : 'l'
-      : 'xs'
+      if (this.notification) {
+        return paddings.notification[
+          this.mainSlotOccupied ? 'occupied' : 'default'
+        ]
+      }
+
+      const isSmall = this.size === 'small'
+      return paddings[isSmall ? 'small' : 'default'][
+        this.leadSlotOccupied ? 'occupied' : 'default'
+      ]
+    })()
+
+    const blockSize = (() => {
+      const sizes = {
+        occupied: {
+          small: 'm',
+          default: 'l',
+        },
+        default: 'xs',
+      }
+      return this.mainSlotOccupied
+        ? sizes.occupied[
+            this.size === 'small' || this.notification ? 'small' : 'default'
+          ]
+        : sizes.default
+    })()
+
+    const inlineSize = (() => {
+      const sizes = {
+        notification: {
+          occupied: 'l',
+          default: '0',
+        },
+        default: 'l',
+      }
+      return this.notification
+        ? sizes.notification[this.mainSlotOccupied ? 'occupied' : 'default']
+        : sizes.default
+    })()
+
+    const borderRadius = (() => {
+      const radiuses = {
+        small: '3xs',
+        notification: 'max',
+        default: '2xs',
+      }
+
+      if (this.rounded) return 'max'
+      if (this.notification) return radiuses.notification
+      return this.size === 'small' ? radiuses.small : radiuses.default
+    })()
 
     return html`<gds-flex
       level="3"
       background=${background}
       color=${color}
-      gap="${this.notification ? '' : '2xs'}"
+      gap="${this.notification ? '' : '3xs'}"
       align-items="center"
-      justify-content="flex-start"
-      padding-inline="${padding}"
-      border-radius="${this.notification || this.rounded ? 'max' : '2xs'}"
-      block-size="${blockSize}"
+      justify-content="${this.notification ? 'center' : 'flex-start'}"
+      padding="${padding}"
+      min-height="${blockSize}"
+      border-radius="${borderRadius}"
       width="100%"
+      min-width="${inlineSize}"
       font="${this.size === 'small' || this.notification
-        ? 'detail-regular-xs'
-        : 'detail-regular-s'}"
+        ? 'detail-book-xs'
+        : 'detail-book-s'}"
     >
       ${this.#renderLeadSlot()} ${this.#renderMainSlot()}
       ${this.#renderTrailSlot()}
     </gds-flex>`
   }
 
-  #renderLeadSlot() {
-    if (this.size !== 'small' || !this.notification) {
-      return html`<slot name="lead"></slot>`
-    }
-  }
-
-  #renderMainSlot() {
-    return html`<slot @slotchange=${this.#handleSlotChange}></slot>`
-  }
-
-  #handleSlotChange(event: Event) {
+  #handleSlotChange(
+    event: Event,
+    stateProperty: 'mainSlotOccupied' | 'leadSlotOccupied',
+  ) {
     const slot = event.target as HTMLSlotElement
     const assignedNodes = slot.assignedNodes({ flatten: true })
-    this.mainSlotOccupied =
+    this[stateProperty] =
       assignedNodes.length > 0 &&
       assignedNodes.some(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE ||
           (node.nodeType === Node.TEXT_NODE && node.textContent?.trim() !== ''),
       )
+  }
+
+  #renderLeadSlot() {
+    if (this.size !== 'small' || !this.notification) {
+      return html`<slot
+        name="lead"
+        @slotchange=${(e: Event) =>
+          this.#handleSlotChange(e, 'leadSlotOccupied')}
+      ></slot>`
+    }
+  }
+
+  #renderMainSlot() {
+    return html`<slot
+      @slotchange=${(e: Event) => this.#handleSlotChange(e, 'mainSlotOccupied')}
+    ></slot>`
   }
 
   #renderTrailSlot() {
