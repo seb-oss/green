@@ -124,6 +124,7 @@ const style = css`
       margin: 0;
       padding: 0;
       font: var(--gds-sys-text-heading-s);
+      margin-block-start: var(--gds-sys-space-4xs);
     }
   }
 `

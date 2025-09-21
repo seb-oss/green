@@ -15,7 +15,7 @@ export default css`
   }
 
   :host([size='small']) {
-    gap: var(--gds-sys-space-2xs);
+    gap: var(--gds-sys-space-3xs);
   }
 
   :host([size='small']) .native-control {

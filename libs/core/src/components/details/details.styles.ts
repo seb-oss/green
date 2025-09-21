@@ -4,7 +4,7 @@ const style = css`
   @layer base, reset;
   @layer base {
     .details {
-      border-bottom: solid var(--gds-sys-space-4xs)
+      border-bottom: solid var(--gds-sys-space-5xs)
         var(--gds-sys-color-border-subtle-01);
       font: var(--gds-sys-text-body-regular-m);
       color: var(--gds-sys-color-content-neutral-01);
@@ -17,7 +17,7 @@ const style = css`
       align-items: center;
       list-style: none;
       user-select: none;
-      outline-offset: var(--gds-sys-space-2xs);
+      outline-offset: var(--gds-sys-space-3xs);
       outline-color: currentColor;
       transition: all 120ms;
       color: var(--gds-sys-color-content-neutral-01);

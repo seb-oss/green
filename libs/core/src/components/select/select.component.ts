@@ -325,7 +325,7 @@ class Select<ValueT = string> extends GdsFormControlElement<ValueT | ValueT[]> {
   #renderChevron() {
     if (!this.multiple) {
       return html`
-        <gds-icon-chevron-bottom slot="trail"></gds-icon-chevron-bottom>
+        <gds-icon-chevron-bottom slot="action"></gds-icon-chevron-bottom>
       `
     }
   }

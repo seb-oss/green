@@ -1,16 +1,20 @@
 {
   "ref": {
     "space": {
-      "4xs": {
+      "5xs": {
         "$value": 1,
         "$type": "dimension"
       },
-      "3xs": {
+      "4xs": {
         "$value": 2,
         "$type": "dimension"
       },
-      "2xs": {
+      "3xs": {
         "$value": 4,
+        "$type": "dimension"
+      },
+      "2xs": {
+        "$value": 6,
         "$type": "dimension"
       },
       "xs": {
@@ -26,38 +30,42 @@
         "$type": "dimension"
       },
       "l": {
-        "$value": 24,
+        "$value": 20,
         "$type": "dimension"
       },
       "xl": {
-        "$value": 32,
+        "$value": 24,
         "$type": "dimension"
       },
       "2xl": {
-        "$value": 40,
+        "$value": 32,
         "$type": "dimension"
       },
       "3xl": {
-        "$value": 48,
+        "$value": 40,
         "$type": "dimension"
       },
       "4xl": {
-        "$value": 64,
+        "$value": 48,
         "$type": "dimension"
       },
       "5xl": {
-        "$value": 80,
+        "$value": 64,
         "$type": "dimension"
       },
       "6xl": {
-        "$value": 96,
+        "$value": 80,
         "$type": "dimension"
       },
       "7xl": {
-        "$value": 112,
+        "$value": 96,
         "$type": "dimension"
       },
       "8xl": {
+        "$value": 112,
+        "$type": "dimension"
+      },
+      "9xl": {
         "$value": 120,
         "$type": "dimension"
       },

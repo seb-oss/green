@@ -97,7 +97,7 @@ export const Variants: Story = {
 export const WithAction: Story = {
   args: {
     variant: 'information',
-    dismissible: true,
+    dismissible: false,
     buttonLabel: 'Take Action',
     innerHTML: html`<strong>Actionable</strong> Alert with a button for quick
       user interaction.`,

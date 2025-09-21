@@ -24,9 +24,9 @@ const style = css`
       &::before {
         content: ' ';
         display: flex;
-        inset: var(--gds-sys-space-2xs);
+        inset: var(--gds-sys-space-3xs);
         position: absolute;
-        border: var(--gds-sys-space-3xs) solid currentColor;
+        border: var(--gds-sys-space-4xs) solid currentColor;
         border-radius: var(--gds-sys-space-xs);
         opacity: 0;
         visitility: hidden;
@@ -52,7 +52,7 @@ const style = css`
     }
 
     :host(:focus-visible) div::before {
-      inset: var(--gds-sys-space-2xs);
+      inset: var(--gds-sys-space-3xs);
       opacity: 1;
       visivility: visible;
     }
