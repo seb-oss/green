@@ -211,6 +211,13 @@ await Promise.all(
           studio: {
             buildPath: __dirname + `/../../dist/libs/tokens/studio/`,
             transforms: ['name/studio', 'color/alpha', 'size/px'],
+            source: [
+              __dirname + `/src/tokens/2023/**/*.ref.json`,
+              __dirname + `/src/tokens/2023/**/tokens.base.json`,
+              __dirname + `/src/tokens/2023/**/*.typography.json`,
+              __dirname + `/src/tokens/2023/**/*.comfortable.json`,
+              __dirname + `/src/tokens/2023/**/*.${colorScheme}.json`,
+            ],
             files: [
               {
                 format: 'json/studio',
