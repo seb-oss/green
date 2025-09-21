@@ -2,115 +2,116 @@
   "0": [
     {
       "name": "0",
-      "value": 0
+      "value": "0px"
     }
   ],
   "5xs": [
     {
       "name": "5xs",
-      "value": 1
+      "value": "1px"
     }
   ],
   "4xs": [
     {
       "name": "4xs",
-      "value": 2
+      "value": "2px"
     }
   ],
   "3xs": [
     {
       "name": "3xs",
-      "value": 4
+      "value": "4px"
     }
   ],
   "2xs": [
     {
       "name": "2xs",
-      "value": 6
+      "value": "6px"
     }
   ],
   "xs": [
     {
       "name": "xs",
-      "value": 8
+      "value": "8px"
     }
   ],
   "s": [
     {
       "name": "s",
-      "value": 12
+      "value": "12px"
     }
   ],
   "m": [
     {
       "name": "m",
-      "value": 16
+      "value": "16px"
     }
   ],
   "l": [
     {
       "name": "l",
-      "value": 20
+      "value": "20px"
     }
   ],
   "xl": [
     {
       "name": "xl",
-      "value": 24
+      "value": "24px"
     }
   ],
   "2xl": [
     {
       "name": "2xl",
-      "value": 32
+      "value": "32px"
     }
   ],
   "3xl": [
     {
       "name": "3xl",
-      "value": 40
+      "value": "40px"
     }
   ],
   "4xl": [
     {
       "name": "4xl",
-      "value": 48
+      "value": "48px"
     }
   ],
   "5xl": [
     {
       "name": "5xl",
-      "value": 64
+      "value": "64px"
     }
   ],
   "6xl": [
     {
       "name": "6xl",
-      "value": 80
+      "value": "80px"
     }
   ],
   "7xl": [
     {
       "name": "7xl",
-      "value": 96
+      "value": "96px"
     }
   ],
   "8xl": [
     {
       "name": "8xl",
-      "value": 112
+      "value": "112px"
     }
   ],
   "9xl": [
     {
       "name": "9xl",
-      "value": 120
+      "value": "120px"
     }
   ],
   "max": [
     {
       "name": "max",
-      "value": 999
+      "value": "999px"
     }
-  ]
+  ],
+  "typography": {}
 }

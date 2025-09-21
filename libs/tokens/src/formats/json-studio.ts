@@ -4,7 +4,6 @@ import tinycolor from 'tinycolor2'
 const jsonStudio = {
   name: 'json/studio',
   format: async ({ dictionary }) => {
-    // Collect all tokens
     const shadowTokens = dictionary.allTokens.filter((token) => {
       return token.$type === 'shadow' || token.type === 'shadow'
     })
@@ -37,23 +36,24 @@ const jsonStudio = {
       })
     })
 
-    // Process typography tokens
-    typographyTokens.map((token) => {
-      const { $value, ...rest } = token
-      const value = $value || token.value
+    // Process typography tokens by groups
+    const typographyGroups = typographyTokens.reduce((acc, token) => {
+      const name = token.path[token.path.length - 1]
+      const value = token.$value || token.value
+      const type = name.split('-')[0]
 
-      Object.keys(value).forEach((key) => {
-        if (key !== 'fontFamily') {
-          const newToken = {
-            ...rest,
-            value: value[key].value || value[key].hex || value[key],
-            name: token.path[token.path.length - 1],
-            $type: typeof value[key] === 'number' ? 'float' : 'string',
-          }
-          newDictionary.push(newToken)
-        }
-      })
-    })
+      if (!acc[type]) {
+        acc[type] = {}
+      }
+
+      acc[type][name] = {
+        'font-weight': value.fontWeight.toString(),
+        'font-size': `${value.fontSize}px`,
+        'line-height': `${value.lineHeight}px`,
+      }
+
+      return acc
+    }, {})
 
     // Group tokens by category
     const groupedTokens = newDictionary.reduce((acc, token) => {
@@ -80,7 +80,12 @@ const jsonStudio = {
       return acc
     }, {})
 
-    return JSON.stringify(groupedTokens, null, 2)
+    // Merge typography groups into the final output
+    return JSON.stringify(
+      { ...groupedTokens, typography: typographyGroups },
+      null,
+      2,
+    )
   },
 }
 

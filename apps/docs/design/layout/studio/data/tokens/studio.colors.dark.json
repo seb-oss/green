@@ -444,5 +444,6 @@
       "name": "warning-06",
       "value": "rgba(241, 158, 56, 0.2)"
     }
-  ]
+  ],
+  "typography": {}
 }
