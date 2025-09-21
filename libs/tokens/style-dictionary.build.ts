@@ -208,6 +208,48 @@ await Promise.all(
               },
             ],
           },
+          studio: {
+            buildPath:
+              __dirname + `/../../apps/docs/design/layout/studio/data/tokens/`,
+            transforms: ['name/figma', 'color/alpha'],
+            files: [
+              {
+                format: 'json/studio',
+                destination: `studio.colors.${colorScheme}.json`,
+                filter: 'is-color-no-ref',
+              },
+              {
+                format: 'json/studio',
+                destination: `studio.shadows.json`,
+                filter: 'is-shadow',
+              },
+              {
+                format: 'json/studio',
+                destination: `studio.typography.json`,
+                filter: 'is-typography',
+              },
+              {
+                format: 'json/studio',
+                destination: `studio.viewport.json`,
+                filter: 'is-viewport',
+              },
+              {
+                format: 'json/studio',
+                destination: `studio.radius.json`,
+                filter: 'is-radius',
+              },
+              {
+                format: 'json/studio',
+                destination: `studio.spacing.json`,
+                filter: 'is-spacing',
+              },
+              {
+                format: 'json/studio',
+                destination: `studio.motion.json`,
+                filter: 'is-motion',
+              },
+            ],
+          },
           ios: {
             buildPath: __dirname + `/../../dist/libs/tokens/${theme}/ios/`,
             sourcePath: swiftSourcePath,
@@ -338,26 +380,6 @@ await Promise.all(
                   import: [],
                   packageName: ['se.seb.gds'],
                 },
-              },
-            ],
-          },
-          studio: {
-            transforms: [
-              'attribute/cti',
-              'time/seconds',
-              'html/icon',
-              'size/px',
-              'color/css',
-              'name/kebab',
-              'color/mix-blend',
-              'color/alpha',
-            ],
-            buildPath:
-              __dirname + `/../../apps/docs/design/layout/studio/data/`,
-            files: [
-              {
-                destination: `studio.tokens.json`,
-                format: 'json/studio',
               },
             ],
           },

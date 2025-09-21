@@ -1,25 +1,74 @@
-// src/formats/studio-tokens.ts
+// src/formats/json-studio.ts
+import tinycolor from 'tinycolor2'
 
-interface TokenInterface {
-  path: string[]
-  name: string
-  value: any
-  $value?: any
-  $type?: string
-  type?: string
-  original: {
-    value: any
-  }
-}
-
-interface Dictionary {
-  allTokens: TokenInterface[]
-}
-
-export default {
+const jsonStudio = {
   name: 'json/studio',
-  format: function ({ dictionary }) {
-    // First, separate tokens by type like Figma does
+  format: async ({ dictionary, file }) => {
+    const filterType = file.filter || 'is-color-no-ref'
+
+    switch (filterType) {
+      case 'is-radius': {
+        const radiusTokens = dictionary.allTokens.filter(
+          (token) => token.path[1] === 'radius',
+        )
+
+        return (
+          '[\n  ' +
+          radiusTokens
+            .map((token) => {
+              return JSON.stringify({
+                name: token.path[token.path.length - 1],
+                value: token.value,
+                type: 'FLOAT',
+              })
+            })
+            .join(',\n  ') +
+          '\n]\n'
+        )
+      }
+
+      case 'is-spacing': {
+        const spacingTokens = dictionary.allTokens.filter(
+          (token) => token.path[1] === 'space',
+        )
+
+        return (
+          '[\n  ' +
+          spacingTokens
+            .map((token) => {
+              return JSON.stringify({
+                name: token.path[token.path.length - 1],
+                value: token.value,
+                type: 'FLOAT',
+              })
+            })
+            .join(',\n  ') +
+          '\n]\n'
+        )
+      }
+
+      case 'is-viewport': {
+        const viewportTokens = dictionary.allTokens.filter(
+          (token) => token.path[1] === 'viewport',
+        )
+
+        return (
+          '[\n  ' +
+          viewportTokens
+            .map((token) => {
+              return JSON.stringify({
+                name: token.path[token.path.length - 1],
+                value: token.value,
+                type: 'FLOAT',
+              })
+            })
+            .join(',\n  ') +
+          '\n]\n'
+        )
+      }
+    }
+
+    // Collect all tokens
     const shadowTokens = dictionary.allTokens.filter((token) => {
       return token.$type === 'shadow' || token.type === 'shadow'
     })
@@ -28,191 +77,79 @@ export default {
       return token.$type === 'typography' || token.type === 'typography'
     })
 
-    const colorTokens = dictionary.allTokens.filter((token) => {
-      return token.path[1] === 'color'
+    // Start with all tokens and filter out what we process separately
+    const newDictionary = dictionary.allTokens.filter((token) => {
+      return !['shadow', 'typography'].includes(token.$type || token.type)
     })
 
-    const dimensionTokens = dictionary.allTokens.filter((token) => {
-      return ['space', 'radius', 'viewport'].includes(token.path[1])
-    })
+    // Process shadow tokens
+    shadowTokens.map((token) => {
+      const { $value, ...rest } = token
+      const value = $value || token.value
 
-    const motionTokens = dictionary.allTokens.filter((token) => {
-      return token.path[1] === 'motion'
-    })
-
-    // Helper function to resolve token values
-    const resolveTokenValue = (token: TokenInterface) => {
-      const value = token.$value || token.value || token.original.value
-
-      if (typeof value === 'object' && value !== null) {
-        // Handle color with alpha
-        if (value.$value) {
-          const baseColor = value.$value
-          const alpha =
-            value.alpha !== undefined ? value.alpha * 100 : undefined
-          return {
-            light: {
-              value: baseColor,
-              ...(alpha !== undefined && { alpha: `${alpha}%` }),
-            },
-            dark: {
-              value: baseColor,
-              ...(alpha !== undefined && { alpha: `${alpha}%` }),
-            },
-          }
+      Object.keys(value).forEach((key) => {
+        const newToken = {
+          ...rest,
+          value: value[key].value || value[key].hex || value[key],
+          name: `${token.name}-${key}`,
         }
-
-        // Handle existing light/dark variants
-        if (value.light || value.dark) {
-          return {
-            light: {
-              value: value.light?.$value || value.light,
-              ...(value.alpha !== undefined && {
-                alpha: `${value.alpha * 100}%`,
-              }),
-            },
-            dark: {
-              value: value.dark?.$value || value.dark,
-              ...(value.alpha !== undefined && {
-                alpha: `${value.alpha * 100}%`,
-              }),
-            },
-          }
-        }
-
-        // Handle typography object
-        if (value.$type === 'typography') {
-          return {
-            fontFamily: value.fontFamily,
-            fontSize: value.fontSize,
-            lineHeight: value.lineHeight,
-            fontWeight: value.fontWeight,
-          }
-        }
-
-        return value
-      }
-      return value
-    }
-
-    const createColorToken = (token: TokenInterface) => {
-      const resolvedValue = resolveTokenValue(token)
-      return {
-        token: token.path[token.path.length - 1],
-        variable: `var(--gds-sys-color-${token.path[2].toLowerCase()}-${token.path[token.path.length - 1]})`,
-        value: {
-          light: resolvedValue.light || { value: resolvedValue },
-          dark: resolvedValue.dark || { value: resolvedValue },
-        },
-      }
-    }
-
-    // Process tokens according to your schema
-    const processedTokens = {
-      $metadata: {
-        tokenSetOrder: [
-          'colors',
-          'typography',
-          'spacing',
-          'radius',
-          'shadows',
-          'viewport',
-          'motion',
-        ],
-      },
-      tokens: {
-        colors: {
-          background: {
-            L1: colorTokens
-              .filter((token) => token.path[2] === 'L1')
-              .map(createColorToken),
-            L2: colorTokens
-              .filter((token) => token.path[2] === 'L2')
-              .map(createColorToken),
-            L3: colorTokens
-              .filter((token) => token.path[2] === 'L3')
-              .map(createColorToken),
-          },
-          border: colorTokens
-            .filter((token) => token.path[2] === 'border')
-            .map(createColorToken),
-          state: colorTokens
-            .filter((token) => token.path[2] === 'state')
-            .map(createColorToken),
-        },
-        typography: typographyTokens.map((token) => {
-          const resolvedValue = resolveTokenValue(token)
-          return {
-            token: token.path[token.path.length - 1],
-            variable: `var(--gds-sys-text-${token.path[token.path.length - 1]})`,
-            value: {
-              fontFamily: resolvedValue.fontFamily,
-              fontSize: resolvedValue.fontSize
-                ? `${resolvedValue.fontSize}px`
-                : undefined,
-              lineHeight: resolvedValue.lineHeight
-                ? `${resolvedValue.lineHeight}px`
-                : undefined,
-              fontWeight: resolvedValue.fontWeight,
-            },
-          }
-        }),
-        spacing: dimensionTokens
-          .filter((token) => token.path[1] === 'space')
-          .map((token) => ({
-            token: token.path[token.path.length - 1],
-            variable: `var(--gds-sys-space-${token.path[token.path.length - 1]})`,
-            value: `${resolveTokenValue(token)}`,
-          })),
-        radius: dimensionTokens
-          .filter((token) => token.path[1] === 'radius')
-          .map((token) => ({
-            token: token.path[token.path.length - 1],
-            variable: `var(--gds-sys-radius-${token.path[token.path.length - 1]})`,
-            value: `${resolveTokenValue(token)}`,
-          })),
-        shadows: shadowTokens.map((token) => ({
-          token: token.path[token.path.length - 1],
-          variable: `var(--gds-sys-shadow-${token.path[token.path.length - 1]})`,
-          value: resolveTokenValue(token),
-        })),
-        viewport: dimensionTokens
-          .filter((token) => token.path[1] === 'viewport')
-          .map((token) => ({
-            token: token.path[token.path.length - 1],
-            variable: `var(--gds-sys-viewport-${token.path[token.path.length - 1]})`,
-            value: `${resolveTokenValue(token)}`,
-          })),
-        motion: {
-          duration: motionTokens
-            .filter((token) => token.path[2] === 'duration')
-            .map((token) => ({
-              token: token.path[token.path.length - 1],
-              variable: `var(--gds-sys-motion-duration-${token.path[token.path.length - 1]})`,
-              value: resolveTokenValue(token),
-            })),
-          easing: motionTokens
-            .filter((token) => token.path[2] === 'easing')
-            .map((token) => ({
-              token: token.path[token.path.length - 1],
-              variable: `var(--gds-sys-motion-easing-${token.path[token.path.length - 1]})`,
-              value: `cubic-bezier(${resolveTokenValue(token)})`,
-            })),
-        },
-      },
-    }
-
-    // Debug logging
-    if (process.env.DEBUG) {
-      console.log('Tokens Debug:', {
-        typography: typographyTokens.map((t) => ({
-          path: t.path,
-          original: t.original.value,
-          resolved: resolveTokenValue(t),
-        })),
+        newDictionary.push(newToken)
       })
-    }
+    })
 
-    return JSON.stringify(processedTokens, null, 2)
+    // Process typography tokens
+    typographyTokens.map((token) => {
+      const { $value, ...rest } = token
+      const value = $value || token.value
+
+      Object.keys(value).forEach((key) => {
+        if (key !== 'fontFamily') {
+          const newToken = {
+            ...rest,
+            value: value[key].value || value[key].hex || value[key],
+            name: `${token.name}-${key}`,
+          }
+          newDictionary.push(newToken)
+        }
+      })
+    })
+
+    // Add viewport tokens
+    dictionary.allTokens
+      .filter((token) => token.path[1] === 'viewport')
+      .forEach((token) => {
+        newDictionary.push({
+          ...token,
+          name: `viewport-${token.path[token.path.length - 1]}`,
+          value: token.value,
+        })
+      })
+
+    // Add motion tokens
+    dictionary.allTokens
+      .filter((token) => token.path[1] === 'motion')
+      .forEach((token) => {
+        const isEasing = token.path[2] === 'easing'
+        newDictionary.push({
+          ...token,
+          name: `${token.path[2]}-${token.path[token.path.length - 1]}`,
+          value: isEasing ? token.value : token.value,
+        })
+      })
+
+    return (
+      '[\n  ' +
+      newDictionary
+        .map((token) => {
+          return JSON.stringify({
+            name: token.name.replace('color/', ''),
+            value: token.$value !== undefined ? token.$value : token.value,
+          })
+        })
+        .join(',\n  ') +
+      '\n]\n'
+    )
   },
 }
+
+export default jsonStudio

@@ -1,0 +1,16 @@
+[
+  {"name":"viewport/xs","value":"375"},
+  {"name":"viewport/s","value":"430"},
+  {"name":"viewport/m","value":"768"},
+  {"name":"viewport/l","value":"1024"},
+  {"name":"viewport/xl","value":"1440"},
+  {"name":"viewport/2xl","value":"2560"},
+  {"name":"viewport/3xl","value":"3840"},
+  {"name":"viewport-xs","value":"375"},
+  {"name":"viewport-s","value":"430"},
+  {"name":"viewport-m","value":"768"},
+  {"name":"viewport-l","value":"1024"},
+  {"name":"viewport-xl","value":"1440"},
+  {"name":"viewport-2xl","value":"2560"},
+  {"name":"viewport-3xl","value":"3840"}
+]

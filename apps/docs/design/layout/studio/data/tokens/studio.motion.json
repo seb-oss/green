@@ -1,0 +1,20 @@
+[
+  {"name":"motion/easing/ease-in","value":"0.64, 0, 0.78, 0"},
+  {"name":"motion/easing/ease-in-out","value":"0.83, 0, 0.17, 1"},
+  {"name":"motion/easing/ease-out","value":"0.22, 1, 0.36, 1"},
+  {"name":"motion/easing/linear","value":"0, 0, 1, 1"},
+  {"name":"motion/duration/fastest","value":".2s"},
+  {"name":"motion/duration/fast","value":".4s"},
+  {"name":"motion/duration/default","value":".5s"},
+  {"name":"motion/duration/slow","value":"1s"},
+  {"name":"motion/duration/slowest","value":"1.5s"},
+  {"name":"easing-ease-in","value":"0.64, 0, 0.78, 0"},
+  {"name":"easing-ease-in-out","value":"0.83, 0, 0.17, 1"},
+  {"name":"easing-ease-out","value":"0.22, 1, 0.36, 1"},
+  {"name":"easing-linear","value":"0, 0, 1, 1"},
+  {"name":"duration-fastest","value":".2s"},
+  {"name":"duration-fast","value":".4s"},
+  {"name":"duration-default","value":".5s"},
+  {"name":"duration-slow","value":"1s"},
+  {"name":"duration-slowest","value":"1.5s"}
+]
