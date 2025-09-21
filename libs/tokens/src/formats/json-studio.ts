@@ -24,10 +24,18 @@ const jsonStudio = {
       return token.path[1] === 'radius' && !token.path.includes('ref')
     })
 
+    // const newDictionary = dictionary.allTokens.filter((token) => {
+    //   return (
+    //     !['shadow', 'typography'].includes(token.$type || token.type) &&
+    //     !['viewport', 'space', 'radius'].includes(token.path[1])
+    //   )
+    // })
+
     const newDictionary = dictionary.allTokens.filter((token) => {
       return (
         !['shadow', 'typography'].includes(token.$type || token.type) &&
-        !['viewport', 'space', 'radius'].includes(token.path[1])
+        !['viewport', 'space', 'radius'].includes(token.path[1]) &&
+        !token.path[1].includes('shadow') // Add this condition
       )
     })
 
@@ -50,6 +58,23 @@ const jsonStudio = {
         newDictionary.push(newToken)
       })
     })
+
+    // Process shadow tokens
+    const shadowGroups = shadowTokens.reduce((acc, token) => {
+      const tokenName = token.path[token.path.length - 1]
+      const size = tokenName.split('-')[0] // This will get 's', 'm', 'l', 'xl'
+
+      if (!acc.shadows) {
+        acc.shadows = {}
+      }
+
+      acc.shadows[size] = {
+        token: size,
+        variable: `var(--gds-sys-shadow-${size}-01), var(--gds-sys-shadow-${size}-02)`,
+      }
+
+      return acc
+    }, {})
 
     // Process typography tokens by groups
     const typographyGroups = typographyTokens.reduce((acc, token) => {
@@ -128,6 +153,10 @@ const jsonStudio = {
 
     // Group other tokens by category
     const groupedTokens = newDictionary.reduce((acc, token) => {
+      if (token.path.some((p) => p.includes('shadow'))) {
+        return acc
+      }
+
       const category = token.path[2]
 
       if (['L1', 'L2', 'L3'].includes(category)) {
@@ -156,6 +185,7 @@ const jsonStudio = {
     // Return final JSON with properly structured groups
     return JSON.stringify(
       {
+        ...shadowGroups,
         ...groupedTokens,
         ...viewportGroups,
         ...spacingGroups,
