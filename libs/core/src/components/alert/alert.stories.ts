@@ -1,3 +1,5 @@
+import { nothing } from 'lit'
+import { ifDefined } from 'lit/directives/if-defined.js'
 import { Meta, StoryObj } from '@storybook/web-components'
 
 import { html } from '../../utils/helpers/custom-element-scoping'
@@ -23,12 +25,25 @@ const meta: Meta<GdsAlert> = {
       control: 'select',
       options: ['alert', 'status'],
     },
+    timeout: {
+      control: 'number',
+      description:
+        'Time in milliseconds before the alert is automatically dismissed',
+    },
+  },
+  args: {
+    variant: 'information',
+    role: 'alert',
+    buttonLabel: '',
+    innerHTML: html`<strong>Information</strong> Body text starts on the same
+      row as heading. A link (optional) always ends the message.`,
   },
   render: (args) => html`
     <gds-alert
       variant="${args.variant}"
       role="alert"
       ?dismissible="${args.dismissible}"
+      timeout="${ifDefined(args.timeout)}"
     >
       ${args.innerHTML}
     </gds-alert>
@@ -39,20 +54,12 @@ export default meta
 
 type Story = StoryObj<GdsAlert>
 
-export const DefaultParams: Story = {
+export const Default: Story = {
   parameters: {
     docs: {
       source: { format: true, type: 'dynamic' },
     },
     controls: { expanded: true },
-  },
-  args: {
-    variant: 'information',
-    role: 'alert',
-    dismissible: true,
-    buttonLabel: '',
-    innerHTML: html`<strong>Information</strong> Body text starts on the same
-      row as heading. A link (optional) always ends the message.`,
   },
 }
 
@@ -88,13 +95,12 @@ export const Variants: Story = {
  * Alerts can have a action button to allow users to take an immediate action.
  */
 export const WithAction: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'information',
     dismissible: true,
     buttonLabel: 'Take Action',
-    innerHTML: `<strong>Actionable</strong> Alert with a button for quick user interaction.`,
+    innerHTML: html`<strong>Actionable</strong> Alert with a button for quick
+      user interaction.`,
   },
 }
 
@@ -102,12 +108,10 @@ export const WithAction: Story = {
  * Alerts can be dismissed by the user, either by pressing the close button, or by using the Escape key while the alert is focused.
  */
 export const Dismissible: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'information',
     dismissible: true,
-    innerHTML: `<strong>Dismissible</strong> User can dismiss this alert.`,
+    innerHTML: html`<strong>Dismissible</strong> User can dismiss this alert.`,
   },
 }
 
@@ -115,12 +119,11 @@ export const Dismissible: Story = {
  * Alerts can automatically dismiss themselves after a specified timeout.
  */
 export const AutoDismiss: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'positive',
     timeout: 6400,
-    innerHTML: `<strong>Auto Dismiss</strong> This alert disappears automatically after a delay.`,
+    innerHTML: html`<strong>Auto Dismiss</strong> This alert disappears
+      automatically after a delay.`,
   },
 }
 
@@ -128,13 +131,14 @@ export const AutoDismiss: Story = {
  * Alerts can contain rich content in the main slot.
  */
 export const RichContent: Story = {
-  ...DefaultParams,
   args: {
-    ...DefaultParams.parameters!.args,
     variant: 'information',
     role: 'alert',
     dismissible: true,
     buttonLabel: 'Learn More',
-    innerHTML: `<gds-rich-text><strong>Rich Content</strong> Includes <a href="#">a link</a>, <em>emphasis</em>, and <code>code</code>.</gds-rich-text>`,
+    innerHTML: html`<gds-rich-text
+      ><strong>Rich Content</strong> Includes <a href="#">a link</a>,
+      <em>emphasis</em>, and <code>code</code>.</gds-rich-text
+    >`,
   },
 }
