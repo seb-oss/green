@@ -24,8 +24,8 @@ const jsonStudio = {
       Object.keys(value).forEach((key) => {
         const newToken = {
           ...rest,
+          token: token.path[token.path.length - 1],
           value: value[key].value || value[key].hex || value[key],
-          name: token.path[token.path.length - 1],
           $type: tinycolor(
             value[key].value || value[key].hex || value[key],
           ).isValid()
@@ -47,6 +47,8 @@ const jsonStudio = {
       }
 
       acc[type][name] = {
+        token: name,
+        variable: `var(--gds-sys-text-${name})`,
         'font-weight': value.fontWeight.toString(),
         'font-size': `${value.fontSize}px`,
         'line-height': `${value.lineHeight}px`,
@@ -80,7 +82,7 @@ const jsonStudio = {
           acc.background = { L1: [], L2: [], L3: [] }
         }
         acc.background[category].push({
-          name: token.path[token.path.length - 1],
+          token: token.path[token.path.length - 1],
           value: processValue(token),
         })
       } else {
@@ -90,7 +92,7 @@ const jsonStudio = {
           acc[tokenCategory] = []
         }
         acc[tokenCategory].push({
-          name: token.path[token.path.length - 1],
+          token: token.path[token.path.length - 1],
           value: processValue(token),
         })
       }
