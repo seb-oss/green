@@ -12,8 +12,15 @@ const jsonStudio = {
       return token.$type === 'typography' || token.type === 'typography'
     })
 
+    const viewportTokens = dictionary.allTokens.filter((token) => {
+      return token.path[1] === 'viewport' && !token.path.includes('ref')
+    })
+
     const newDictionary = dictionary.allTokens.filter((token) => {
-      return !['shadow', 'typography'].includes(token.$type || token.type)
+      return (
+        !['shadow', 'typography'].includes(token.$type || token.type) &&
+        token.path[1] !== 'viewport'
+      )
     })
 
     // Process shadow tokens
@@ -24,8 +31,8 @@ const jsonStudio = {
       Object.keys(value).forEach((key) => {
         const newToken = {
           ...rest,
-          token: token.path[token.path.length - 1],
           value: value[key].value || value[key].hex || value[key],
+          name: token.path[token.path.length - 1],
           $type: tinycolor(
             value[key].value || value[key].hex || value[key],
           ).isValid()
@@ -57,23 +64,25 @@ const jsonStudio = {
       return acc
     }, {})
 
-    // Helper function to process pixel values
-    const processValue = (token) => {
+    // Process viewport tokens
+    const viewportGroups = viewportTokens.reduce((acc, token) => {
+      const name = token.path[token.path.length - 1]
       const value = token.$value !== undefined ? token.$value : token.value
-      const tokenPath = token.path.join('.')
 
-      // Check if token is a viewport token
-      if (tokenPath.includes('viewport')) {
-        return typeof value === 'number' || !isNaN(value) ? `${value}px` : value
+      if (!acc.viewport) {
+        acc.viewport = {}
       }
 
-      // Handle other pixel-based tokens (spacing, radius)
-      const shouldAddPx =
-        token.path[1] === 'space' || token.path[1] === 'radius'
-      return shouldAddPx && typeof value === 'number' ? `${value}px` : value
-    }
+      acc.viewport[name] = {
+        token: name,
+        variable: `var(--gds-sys-viewport-${name})`,
+        value: `${value}px`,
+      }
 
-    // Group tokens by category
+      return acc
+    }, {})
+
+    // Group other tokens by category
     const groupedTokens = newDictionary.reduce((acc, token) => {
       const category = token.path[2]
 
@@ -82,28 +91,27 @@ const jsonStudio = {
           acc.background = { L1: [], L2: [], L3: [] }
         }
         acc.background[category].push({
-          token: token.path[token.path.length - 1],
-          value: processValue(token),
+          name: token.path[token.path.length - 1],
+          value: token.$value !== undefined ? token.$value : token.value,
         })
       } else {
-        const tokenCategory =
-          token.path[1] === 'viewport' ? token.path[1] : category
-        if (!acc[tokenCategory]) {
-          acc[tokenCategory] = []
+        if (!acc[category]) {
+          acc[category] = []
         }
-        acc[tokenCategory].push({
-          token: token.path[token.path.length - 1],
-          value: processValue(token),
+        acc[category].push({
+          name: token.path[token.path.length - 1],
+          value: token.$value !== undefined ? token.$value : token.value,
         })
       }
 
       return acc
     }, {})
 
-    // Return final JSON with typography only if it has content
+    // Return final JSON with properly structured groups
     return JSON.stringify(
       {
         ...groupedTokens,
+        ...viewportGroups,
         ...(Object.keys(typographyGroups).length > 0
           ? { typography: typographyGroups }
           : {}),
