@@ -16,10 +16,18 @@ const jsonStudio = {
       return token.path[1] === 'viewport' && !token.path.includes('ref')
     })
 
+    const spacingTokens = dictionary.allTokens.filter((token) => {
+      return token.path[1] === 'space' && !token.path.includes('ref')
+    })
+
+    const radiusTokens = dictionary.allTokens.filter((token) => {
+      return token.path[1] === 'radius' && !token.path.includes('ref')
+    })
+
     const newDictionary = dictionary.allTokens.filter((token) => {
       return (
         !['shadow', 'typography'].includes(token.$type || token.type) &&
-        token.path[1] !== 'viewport'
+        !['viewport', 'space', 'radius'].includes(token.path[1])
       )
     })
 
@@ -82,6 +90,42 @@ const jsonStudio = {
       return acc
     }, {})
 
+    // Process spacing tokens
+    const spacingGroups = spacingTokens.reduce((acc, token) => {
+      const name = token.path[token.path.length - 1]
+      const value = token.$value !== undefined ? token.$value : token.value
+
+      if (!acc.spacing) {
+        acc.spacing = {}
+      }
+
+      acc.spacing[name] = {
+        token: name,
+        variable: `var(--gds-sys-space-${name})`,
+        value: `${value}`,
+      }
+
+      return acc
+    }, {})
+
+    // Process radius tokens
+    const radiusGroups = radiusTokens.reduce((acc, token) => {
+      const name = token.path[token.path.length - 1]
+      const value = token.$value !== undefined ? token.$value : token.value
+
+      if (!acc.radius) {
+        acc.radius = {}
+      }
+
+      acc.radius[name] = {
+        token: name,
+        variable: `var(--gds-sys-radius-${name})`,
+        value: `${value}`,
+      }
+
+      return acc
+    }, {})
+
     // Group other tokens by category
     const groupedTokens = newDictionary.reduce((acc, token) => {
       const category = token.path[2]
@@ -112,6 +156,8 @@ const jsonStudio = {
       {
         ...groupedTokens,
         ...viewportGroups,
+        ...spacingGroups,
+        ...radiusGroups,
         ...(Object.keys(typographyGroups).length > 0
           ? { typography: typographyGroups }
           : {}),
