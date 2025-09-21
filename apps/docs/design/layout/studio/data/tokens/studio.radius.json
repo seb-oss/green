@@ -1,18 +1,98 @@
 [
-  {"name":"radius/0","value":0},
-  {"name":"radius/none","value":0},
-  {"name":"radius/5xs","value":1},
-  {"name":"radius/4xs","value":2},
-  {"name":"radius/3xs","value":4},
-  {"name":"radius/2xs","value":6},
-  {"name":"radius/xs","value":8},
-  {"name":"radius/s","value":12},
-  {"name":"radius/m","value":16},
-  {"name":"radius/l","value":20},
-  {"name":"radius/xl","value":24},
-  {"name":"radius/2xl","value":32},
-  {"name":"radius/3xl","value":40},
-  {"name":"radius/4xl","value":48},
-  {"name":"radius/5xl","value":64},
-  {"name":"radius/max","value":999}
+  {
+    "name": "radius/0",
+    "value": 0,
+    "collection": "colors",
+    "category": "0"
+  },
+  {
+    "name": "radius/none",
+    "value": 0,
+    "collection": "colors",
+    "category": "none"
+  },
+  {
+    "name": "radius/5xs",
+    "value": 1,
+    "collection": "colors",
+    "category": "5xs"
+  },
+  {
+    "name": "radius/4xs",
+    "value": 2,
+    "collection": "colors",
+    "category": "4xs"
+  },
+  {
+    "name": "radius/3xs",
+    "value": 4,
+    "collection": "colors",
+    "category": "3xs"
+  },
+  {
+    "name": "radius/2xs",
+    "value": 6,
+    "collection": "colors",
+    "category": "2xs"
+  },
+  {
+    "name": "radius/xs",
+    "value": 8,
+    "collection": "colors",
+    "category": "xs"
+  },
+  {
+    "name": "radius/s",
+    "value": 12,
+    "collection": "colors",
+    "category": "s"
+  },
+  {
+    "name": "radius/m",
+    "value": 16,
+    "collection": "colors",
+    "category": "m"
+  },
+  {
+    "name": "radius/l",
+    "value": 20,
+    "collection": "colors",
+    "category": "l"
+  },
+  {
+    "name": "radius/xl",
+    "value": 24,
+    "collection": "colors",
+    "category": "xl"
+  },
+  {
+    "name": "radius/2xl",
+    "value": 32,
+    "collection": "colors",
+    "category": "2xl"
+  },
+  {
+    "name": "radius/3xl",
+    "value": 40,
+    "collection": "colors",
+    "category": "3xl"
+  },
+  {
+    "name": "radius/4xl",
+    "value": 48,
+    "collection": "colors",
+    "category": "4xl"
+  },
+  {
+    "name": "radius/5xl",
+    "value": 64,
+    "collection": "colors",
+    "category": "5xl"
+  },
+  {
+    "name": "radius/max",
+    "value": 999,
+    "collection": "colors",
+    "category": "max"
+  }
 ]

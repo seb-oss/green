@@ -3,71 +3,7 @@ import tinycolor from 'tinycolor2'
 
 const jsonStudio = {
   name: 'json/studio',
-  format: async ({ dictionary, file }) => {
-    const filterType = file.filter || 'is-color-no-ref'
-
-    switch (filterType) {
-      case 'is-radius': {
-        const radiusTokens = dictionary.allTokens.filter(
-          (token) => token.path[1] === 'radius',
-        )
-
-        return (
-          '[\n  ' +
-          radiusTokens
-            .map((token) => {
-              return JSON.stringify({
-                name: token.path[token.path.length - 1],
-                value: token.value,
-                type: 'FLOAT',
-              })
-            })
-            .join(',\n  ') +
-          '\n]\n'
-        )
-      }
-
-      case 'is-spacing': {
-        const spacingTokens = dictionary.allTokens.filter(
-          (token) => token.path[1] === 'space',
-        )
-
-        return (
-          '[\n  ' +
-          spacingTokens
-            .map((token) => {
-              return JSON.stringify({
-                name: token.path[token.path.length - 1],
-                value: token.value,
-                type: 'FLOAT',
-              })
-            })
-            .join(',\n  ') +
-          '\n]\n'
-        )
-      }
-
-      case 'is-viewport': {
-        const viewportTokens = dictionary.allTokens.filter(
-          (token) => token.path[1] === 'viewport',
-        )
-
-        return (
-          '[\n  ' +
-          viewportTokens
-            .map((token) => {
-              return JSON.stringify({
-                name: token.path[token.path.length - 1],
-                value: token.value,
-                type: 'FLOAT',
-              })
-            })
-            .join(',\n  ') +
-          '\n]\n'
-        )
-      }
-    }
-
+  format: async ({ dictionary }) => {
     // Collect all tokens
     const shadowTokens = dictionary.allTokens.filter((token) => {
       return token.$type === 'shadow' || token.type === 'shadow'
@@ -77,7 +13,6 @@ const jsonStudio = {
       return token.$type === 'typography' || token.type === 'typography'
     })
 
-    // Start with all tokens and filter out what we process separately
     const newDictionary = dictionary.allTokens.filter((token) => {
       return !['shadow', 'typography'].includes(token.$type || token.type)
     })
@@ -91,7 +26,12 @@ const jsonStudio = {
         const newToken = {
           ...rest,
           value: value[key].value || value[key].hex || value[key],
-          name: `${token.name}-${key}`,
+          name: `${token.path[2]}/${token.path[token.path.length - 1]}`,
+          $type: tinycolor(
+            value[key].value || value[key].hex || value[key],
+          ).isValid()
+            ? 'color'
+            : 'float',
         }
         newDictionary.push(newToken)
       })
@@ -107,48 +47,30 @@ const jsonStudio = {
           const newToken = {
             ...rest,
             value: value[key].value || value[key].hex || value[key],
-            name: `${token.name}-${key}`,
+            name: `${token.path[2]}/${token.path[token.path.length - 1]}`,
+            $type: typeof value[key] === 'number' ? 'float' : 'string',
           }
           newDictionary.push(newToken)
         }
       })
     })
 
-    // Add viewport tokens
-    dictionary.allTokens
-      .filter((token) => token.path[1] === 'viewport')
-      .forEach((token) => {
-        newDictionary.push({
-          ...token,
-          name: `viewport-${token.path[token.path.length - 1]}`,
-          value: token.value,
-        })
-      })
+    // Process all tokens with additional properties
+    const processedTokens = newDictionary.map((token) => {
+      const pathParts = token.path
+      const category = pathParts[2]
+      const level = ['L1', 'L2', 'L3'].includes(category) ? category : undefined
 
-    // Add motion tokens
-    dictionary.allTokens
-      .filter((token) => token.path[1] === 'motion')
-      .forEach((token) => {
-        const isEasing = token.path[2] === 'easing'
-        newDictionary.push({
-          ...token,
-          name: `${token.path[2]}-${token.path[token.path.length - 1]}`,
-          value: isEasing ? token.value : token.value,
-        })
-      })
+      return {
+        name: token.name.replace('color/', ''),
+        value: token.$value !== undefined ? token.$value : token.value,
+        collection: 'colors',
+        category: level ? 'background' : category,
+        ...(level && { level }),
+      }
+    })
 
-    return (
-      '[\n  ' +
-      newDictionary
-        .map((token) => {
-          return JSON.stringify({
-            name: token.name.replace('color/', ''),
-            value: token.$value !== undefined ? token.$value : token.value,
-          })
-        })
-        .join(',\n  ') +
-      '\n]\n'
-    )
+    return JSON.stringify(processedTokens, null, 2)
   },
 }
 

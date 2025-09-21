@@ -1,21 +1,116 @@
 [
-  {"name":"space/0","value":0},
-  {"name":"space/5xs","value":1},
-  {"name":"space/4xs","value":2},
-  {"name":"space/3xs","value":4},
-  {"name":"space/2xs","value":6},
-  {"name":"space/xs","value":8},
-  {"name":"space/s","value":12},
-  {"name":"space/m","value":16},
-  {"name":"space/l","value":20},
-  {"name":"space/xl","value":24},
-  {"name":"space/2xl","value":32},
-  {"name":"space/3xl","value":40},
-  {"name":"space/4xl","value":48},
-  {"name":"space/5xl","value":64},
-  {"name":"space/6xl","value":80},
-  {"name":"space/7xl","value":96},
-  {"name":"space/8xl","value":112},
-  {"name":"space/9xl","value":120},
-  {"name":"space/max","value":999}
+  {
+    "name": "space/0",
+    "value": 0,
+    "collection": "colors",
+    "category": "0"
+  },
+  {
+    "name": "space/5xs",
+    "value": 1,
+    "collection": "colors",
+    "category": "5xs"
+  },
+  {
+    "name": "space/4xs",
+    "value": 2,
+    "collection": "colors",
+    "category": "4xs"
+  },
+  {
+    "name": "space/3xs",
+    "value": 4,
+    "collection": "colors",
+    "category": "3xs"
+  },
+  {
+    "name": "space/2xs",
+    "value": 6,
+    "collection": "colors",
+    "category": "2xs"
+  },
+  {
+    "name": "space/xs",
+    "value": 8,
+    "collection": "colors",
+    "category": "xs"
+  },
+  {
+    "name": "space/s",
+    "value": 12,
+    "collection": "colors",
+    "category": "s"
+  },
+  {
+    "name": "space/m",
+    "value": 16,
+    "collection": "colors",
+    "category": "m"
+  },
+  {
+    "name": "space/l",
+    "value": 20,
+    "collection": "colors",
+    "category": "l"
+  },
+  {
+    "name": "space/xl",
+    "value": 24,
+    "collection": "colors",
+    "category": "xl"
+  },
+  {
+    "name": "space/2xl",
+    "value": 32,
+    "collection": "colors",
+    "category": "2xl"
+  },
+  {
+    "name": "space/3xl",
+    "value": 40,
+    "collection": "colors",
+    "category": "3xl"
+  },
+  {
+    "name": "space/4xl",
+    "value": 48,
+    "collection": "colors",
+    "category": "4xl"
+  },
+  {
+    "name": "space/5xl",
+    "value": 64,
+    "collection": "colors",
+    "category": "5xl"
+  },
+  {
+    "name": "space/6xl",
+    "value": 80,
+    "collection": "colors",
+    "category": "6xl"
+  },
+  {
+    "name": "space/7xl",
+    "value": 96,
+    "collection": "colors",
+    "category": "7xl"
+  },
+  {
+    "name": "space/8xl",
+    "value": 112,
+    "collection": "colors",
+    "category": "8xl"
+  },
+  {
+    "name": "space/9xl",
+    "value": 120,
+    "collection": "colors",
+    "category": "9xl"
+  },
+  {
+    "name": "space/max",
+    "value": 999,
+    "collection": "colors",
+    "category": "max"
+  }
 ]

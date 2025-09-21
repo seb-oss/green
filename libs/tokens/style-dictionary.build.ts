@@ -217,6 +217,11 @@ await Promise.all(
                 format: 'json/studio',
                 destination: `studio.colors.${colorScheme}.json`,
                 filter: 'is-color-no-ref',
+                options: {
+                  usesDtcg: true,
+                  theme: '2023',
+                  colorScheme: colorScheme,
+                },
               },
               {
                 format: 'json/studio',

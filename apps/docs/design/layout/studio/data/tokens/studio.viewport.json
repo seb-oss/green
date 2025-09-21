@@ -1,16 +1,44 @@
 [
-  {"name":"viewport/xs","value":"375"},
-  {"name":"viewport/s","value":"430"},
-  {"name":"viewport/m","value":"768"},
-  {"name":"viewport/l","value":"1024"},
-  {"name":"viewport/xl","value":"1440"},
-  {"name":"viewport/2xl","value":"2560"},
-  {"name":"viewport/3xl","value":"3840"},
-  {"name":"viewport-xs","value":"375"},
-  {"name":"viewport-s","value":"430"},
-  {"name":"viewport-m","value":"768"},
-  {"name":"viewport-l","value":"1024"},
-  {"name":"viewport-xl","value":"1440"},
-  {"name":"viewport-2xl","value":"2560"},
-  {"name":"viewport-3xl","value":"3840"}
+  {
+    "name": "viewport/xs",
+    "value": "375",
+    "collection": "colors",
+    "category": "xs"
+  },
+  {
+    "name": "viewport/s",
+    "value": "430",
+    "collection": "colors",
+    "category": "s"
+  },
+  {
+    "name": "viewport/m",
+    "value": "768",
+    "collection": "colors",
+    "category": "m"
+  },
+  {
+    "name": "viewport/l",
+    "value": "1024",
+    "collection": "colors",
+    "category": "l"
+  },
+  {
+    "name": "viewport/xl",
+    "value": "1440",
+    "collection": "colors",
+    "category": "xl"
+  },
+  {
+    "name": "viewport/2xl",
+    "value": "2560",
+    "collection": "colors",
+    "category": "2xl"
+  },
+  {
+    "name": "viewport/3xl",
+    "value": "3840",
+    "collection": "colors",
+    "category": "3xl"
+  }
 ]

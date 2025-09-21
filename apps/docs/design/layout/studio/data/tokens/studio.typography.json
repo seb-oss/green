@@ -1,101 +1,596 @@
 [
-  {"name":"text/heading-xl-fontWeight","value":450},
-  {"name":"text/heading-xl-fontSize","value":32},
-  {"name":"text/heading-xl-lineHeight","value":44},
-  {"name":"text/heading-l-fontWeight","value":450},
-  {"name":"text/heading-l-fontSize","value":28},
-  {"name":"text/heading-l-lineHeight","value":40},
-  {"name":"text/heading-m-fontWeight","value":450},
-  {"name":"text/heading-m-fontSize","value":24},
-  {"name":"text/heading-m-lineHeight","value":32},
-  {"name":"text/heading-s-fontWeight","value":450},
-  {"name":"text/heading-s-fontSize","value":20},
-  {"name":"text/heading-s-lineHeight","value":28},
-  {"name":"text/heading-xs-fontWeight","value":450},
-  {"name":"text/heading-xs-fontSize","value":16},
-  {"name":"text/heading-xs-lineHeight","value":24},
-  {"name":"text/heading-2xs-fontWeight","value":450},
-  {"name":"text/heading-2xs-fontSize","value":14},
-  {"name":"text/heading-2xs-lineHeight","value":20},
-  {"name":"text/detail-book-m-fontWeight","value":450},
-  {"name":"text/detail-book-m-fontSize","value":16},
-  {"name":"text/detail-book-m-lineHeight","value":20},
-  {"name":"text/detail-book-s-fontWeight","value":450},
-  {"name":"text/detail-book-s-fontSize","value":14},
-  {"name":"text/detail-book-s-lineHeight","value":20},
-  {"name":"text/detail-book-xs-fontWeight","value":450},
-  {"name":"text/detail-book-xs-fontSize","value":12},
-  {"name":"text/detail-book-xs-lineHeight","value":16},
-  {"name":"text/detail-regular-m-fontWeight","value":400},
-  {"name":"text/detail-regular-m-fontSize","value":16},
-  {"name":"text/detail-regular-m-lineHeight","value":20},
-  {"name":"text/detail-regular-s-fontWeight","value":400},
-  {"name":"text/detail-regular-s-fontSize","value":14},
-  {"name":"text/detail-regular-s-lineHeight","value":20},
-  {"name":"text/detail-regular-xs-fontWeight","value":400},
-  {"name":"text/detail-regular-xs-fontSize","value":12},
-  {"name":"text/detail-regular-xs-lineHeight","value":16},
-  {"name":"text/body-book-l-fontWeight","value":450},
-  {"name":"text/body-book-l-fontSize","value":20},
-  {"name":"text/body-book-l-lineHeight","value":26},
-  {"name":"text/body-book-m-fontWeight","value":450},
-  {"name":"text/body-book-m-fontSize","value":16},
-  {"name":"text/body-book-m-lineHeight","value":24},
-  {"name":"text/body-book-s-fontWeight","value":450},
-  {"name":"text/body-book-s-fontSize","value":14},
-  {"name":"text/body-book-s-lineHeight","value":20},
-  {"name":"text/body-regular-l-fontWeight","value":400},
-  {"name":"text/body-regular-l-fontSize","value":20},
-  {"name":"text/body-regular-l-lineHeight","value":26},
-  {"name":"text/body-regular-m-fontWeight","value":400},
-  {"name":"text/body-regular-m-fontSize","value":16},
-  {"name":"text/body-regular-m-lineHeight","value":24},
-  {"name":"text/body-regular-s-fontWeight","value":400},
-  {"name":"text/body-regular-s-fontSize","value":14},
-  {"name":"text/body-regular-s-lineHeight","value":20},
-  {"name":"text/body-italic-l-fontWeight","value":400},
-  {"name":"text/body-italic-l-fontStyle","value":"italic"},
-  {"name":"text/body-italic-l-fontSize","value":20},
-  {"name":"text/body-italic-l-lineHeight","value":26},
-  {"name":"text/body-italic-m-fontWeight","value":400},
-  {"name":"text/body-italic-m-fontStyle","value":"italic"},
-  {"name":"text/body-italic-m-fontSize","value":16},
-  {"name":"text/body-italic-m-lineHeight","value":24},
-  {"name":"text/body-italic-s-fontWeight","value":400},
-  {"name":"text/body-italic-s-fontStyle","value":"italic"},
-  {"name":"text/body-italic-s-fontSize","value":14},
-  {"name":"text/body-italic-s-lineHeight","value":20},
-  {"name":"text/display-2xl-fontWeight","value":450},
-  {"name":"text/display-2xl-fontSize","value":82},
-  {"name":"text/display-2xl-lineHeight","value":90},
-  {"name":"text/display-xl-fontWeight","value":450},
-  {"name":"text/display-xl-fontSize","value":64},
-  {"name":"text/display-xl-lineHeight","value":72},
-  {"name":"text/display-l-fontWeight","value":450},
-  {"name":"text/display-l-fontSize","value":48},
-  {"name":"text/display-l-lineHeight","value":56},
-  {"name":"text/display-m-fontWeight","value":450},
-  {"name":"text/display-m-fontSize","value":36},
-  {"name":"text/display-m-lineHeight","value":44},
-  {"name":"text/display-s-fontWeight","value":450},
-  {"name":"text/display-s-fontSize","value":32},
-  {"name":"text/display-s-lineHeight","value":40},
-  {"name":"text/preamble-2xl-fontWeight","value":450},
-  {"name":"text/preamble-2xl-fontSize","value":32},
-  {"name":"text/preamble-2xl-lineHeight","value":40},
-  {"name":"text/preamble-xl-fontWeight","value":450},
-  {"name":"text/preamble-xl-fontSize","value":28},
-  {"name":"text/preamble-xl-lineHeight","value":36},
-  {"name":"text/preamble-l-fontWeight","value":450},
-  {"name":"text/preamble-l-fontSize","value":24},
-  {"name":"text/preamble-l-lineHeight","value":32},
-  {"name":"text/preamble-m-fontWeight","value":450},
-  {"name":"text/preamble-m-fontSize","value":20},
-  {"name":"text/preamble-m-lineHeight","value":28},
-  {"name":"text/preamble-s-fontWeight","value":450},
-  {"name":"text/preamble-s-fontSize","value":18},
-  {"name":"text/preamble-s-lineHeight","value":26},
-  {"name":"text/preamble-xs-fontWeight","value":450},
-  {"name":"text/preamble-xs-fontSize","value":16},
-  {"name":"text/preamble-xs-lineHeight","value":24}
+  {
+    "name": "heading-xl/heading-xl",
+    "value": 450,
+    "collection": "colors",
+    "category": "heading-xl"
+  },
+  {
+    "name": "heading-xl/heading-xl",
+    "value": 32,
+    "collection": "colors",
+    "category": "heading-xl"
+  },
+  {
+    "name": "heading-xl/heading-xl",
+    "value": 44,
+    "collection": "colors",
+    "category": "heading-xl"
+  },
+  {
+    "name": "heading-l/heading-l",
+    "value": 450,
+    "collection": "colors",
+    "category": "heading-l"
+  },
+  {
+    "name": "heading-l/heading-l",
+    "value": 28,
+    "collection": "colors",
+    "category": "heading-l"
+  },
+  {
+    "name": "heading-l/heading-l",
+    "value": 40,
+    "collection": "colors",
+    "category": "heading-l"
+  },
+  {
+    "name": "heading-m/heading-m",
+    "value": 450,
+    "collection": "colors",
+    "category": "heading-m"
+  },
+  {
+    "name": "heading-m/heading-m",
+    "value": 24,
+    "collection": "colors",
+    "category": "heading-m"
+  },
+  {
+    "name": "heading-m/heading-m",
+    "value": 32,
+    "collection": "colors",
+    "category": "heading-m"
+  },
+  {
+    "name": "heading-s/heading-s",
+    "value": 450,
+    "collection": "colors",
+    "category": "heading-s"
+  },
+  {
+    "name": "heading-s/heading-s",
+    "value": 20,
+    "collection": "colors",
+    "category": "heading-s"
+  },
+  {
+    "name": "heading-s/heading-s",
+    "value": 28,
+    "collection": "colors",
+    "category": "heading-s"
+  },
+  {
+    "name": "heading-xs/heading-xs",
+    "value": 450,
+    "collection": "colors",
+    "category": "heading-xs"
+  },
+  {
+    "name": "heading-xs/heading-xs",
+    "value": 16,
+    "collection": "colors",
+    "category": "heading-xs"
+  },
+  {
+    "name": "heading-xs/heading-xs",
+    "value": 24,
+    "collection": "colors",
+    "category": "heading-xs"
+  },
+  {
+    "name": "heading-2xs/heading-2xs",
+    "value": 450,
+    "collection": "colors",
+    "category": "heading-2xs"
+  },
+  {
+    "name": "heading-2xs/heading-2xs",
+    "value": 14,
+    "collection": "colors",
+    "category": "heading-2xs"
+  },
+  {
+    "name": "heading-2xs/heading-2xs",
+    "value": 20,
+    "collection": "colors",
+    "category": "heading-2xs"
+  },
+  {
+    "name": "detail-book-m/detail-book-m",
+    "value": 450,
+    "collection": "colors",
+    "category": "detail-book-m"
+  },
+  {
+    "name": "detail-book-m/detail-book-m",
+    "value": 16,
+    "collection": "colors",
+    "category": "detail-book-m"
+  },
+  {
+    "name": "detail-book-m/detail-book-m",
+    "value": 20,
+    "collection": "colors",
+    "category": "detail-book-m"
+  },
+  {
+    "name": "detail-book-s/detail-book-s",
+    "value": 450,
+    "collection": "colors",
+    "category": "detail-book-s"
+  },
+  {
+    "name": "detail-book-s/detail-book-s",
+    "value": 14,
+    "collection": "colors",
+    "category": "detail-book-s"
+  },
+  {
+    "name": "detail-book-s/detail-book-s",
+    "value": 20,
+    "collection": "colors",
+    "category": "detail-book-s"
+  },
+  {
+    "name": "detail-book-xs/detail-book-xs",
+    "value": 450,
+    "collection": "colors",
+    "category": "detail-book-xs"
+  },
+  {
+    "name": "detail-book-xs/detail-book-xs",
+    "value": 12,
+    "collection": "colors",
+    "category": "detail-book-xs"
+  },
+  {
+    "name": "detail-book-xs/detail-book-xs",
+    "value": 16,
+    "collection": "colors",
+    "category": "detail-book-xs"
+  },
+  {
+    "name": "detail-regular-m/detail-regular-m",
+    "value": 400,
+    "collection": "colors",
+    "category": "detail-regular-m"
+  },
+  {
+    "name": "detail-regular-m/detail-regular-m",
+    "value": 16,
+    "collection": "colors",
+    "category": "detail-regular-m"
+  },
+  {
+    "name": "detail-regular-m/detail-regular-m",
+    "value": 20,
+    "collection": "colors",
+    "category": "detail-regular-m"
+  },
+  {
+    "name": "detail-regular-s/detail-regular-s",
+    "value": 400,
+    "collection": "colors",
+    "category": "detail-regular-s"
+  },
+  {
+    "name": "detail-regular-s/detail-regular-s",
+    "value": 14,
+    "collection": "colors",
+    "category": "detail-regular-s"
+  },
+  {
+    "name": "detail-regular-s/detail-regular-s",
+    "value": 20,
+    "collection": "colors",
+    "category": "detail-regular-s"
+  },
+  {
+    "name": "detail-regular-xs/detail-regular-xs",
+    "value": 400,
+    "collection": "colors",
+    "category": "detail-regular-xs"
+  },
+  {
+    "name": "detail-regular-xs/detail-regular-xs",
+    "value": 12,
+    "collection": "colors",
+    "category": "detail-regular-xs"
+  },
+  {
+    "name": "detail-regular-xs/detail-regular-xs",
+    "value": 16,
+    "collection": "colors",
+    "category": "detail-regular-xs"
+  },
+  {
+    "name": "body-book-l/body-book-l",
+    "value": 450,
+    "collection": "colors",
+    "category": "body-book-l"
+  },
+  {
+    "name": "body-book-l/body-book-l",
+    "value": 20,
+    "collection": "colors",
+    "category": "body-book-l"
+  },
+  {
+    "name": "body-book-l/body-book-l",
+    "value": 26,
+    "collection": "colors",
+    "category": "body-book-l"
+  },
+  {
+    "name": "body-book-m/body-book-m",
+    "value": 450,
+    "collection": "colors",
+    "category": "body-book-m"
+  },
+  {
+    "name": "body-book-m/body-book-m",
+    "value": 16,
+    "collection": "colors",
+    "category": "body-book-m"
+  },
+  {
+    "name": "body-book-m/body-book-m",
+    "value": 24,
+    "collection": "colors",
+    "category": "body-book-m"
+  },
+  {
+    "name": "body-book-s/body-book-s",
+    "value": 450,
+    "collection": "colors",
+    "category": "body-book-s"
+  },
+  {
+    "name": "body-book-s/body-book-s",
+    "value": 14,
+    "collection": "colors",
+    "category": "body-book-s"
+  },
+  {
+    "name": "body-book-s/body-book-s",
+    "value": 20,
+    "collection": "colors",
+    "category": "body-book-s"
+  },
+  {
+    "name": "body-regular-l/body-regular-l",
+    "value": 400,
+    "collection": "colors",
+    "category": "body-regular-l"
+  },
+  {
+    "name": "body-regular-l/body-regular-l",
+    "value": 20,
+    "collection": "colors",
+    "category": "body-regular-l"
+  },
+  {
+    "name": "body-regular-l/body-regular-l",
+    "value": 26,
+    "collection": "colors",
+    "category": "body-regular-l"
+  },
+  {
+    "name": "body-regular-m/body-regular-m",
+    "value": 400,
+    "collection": "colors",
+    "category": "body-regular-m"
+  },
+  {
+    "name": "body-regular-m/body-regular-m",
+    "value": 16,
+    "collection": "colors",
+    "category": "body-regular-m"
+  },
+  {
+    "name": "body-regular-m/body-regular-m",
+    "value": 24,
+    "collection": "colors",
+    "category": "body-regular-m"
+  },
+  {
+    "name": "body-regular-s/body-regular-s",
+    "value": 400,
+    "collection": "colors",
+    "category": "body-regular-s"
+  },
+  {
+    "name": "body-regular-s/body-regular-s",
+    "value": 14,
+    "collection": "colors",
+    "category": "body-regular-s"
+  },
+  {
+    "name": "body-regular-s/body-regular-s",
+    "value": 20,
+    "collection": "colors",
+    "category": "body-regular-s"
+  },
+  {
+    "name": "body-italic-l/body-italic-l",
+    "value": 400,
+    "collection": "colors",
+    "category": "body-italic-l"
+  },
+  {
+    "name": "body-italic-l/body-italic-l",
+    "value": "italic",
+    "collection": "colors",
+    "category": "body-italic-l"
+  },
+  {
+    "name": "body-italic-l/body-italic-l",
+    "value": 20,
+    "collection": "colors",
+    "category": "body-italic-l"
+  },
+  {
+    "name": "body-italic-l/body-italic-l",
+    "value": 26,
+    "collection": "colors",
+    "category": "body-italic-l"
+  },
+  {
+    "name": "body-italic-m/body-italic-m",
+    "value": 400,
+    "collection": "colors",
+    "category": "body-italic-m"
+  },
+  {
+    "name": "body-italic-m/body-italic-m",
+    "value": "italic",
+    "collection": "colors",
+    "category": "body-italic-m"
+  },
+  {
+    "name": "body-italic-m/body-italic-m",
+    "value": 16,
+    "collection": "colors",
+    "category": "body-italic-m"
+  },
+  {
+    "name": "body-italic-m/body-italic-m",
+    "value": 24,
+    "collection": "colors",
+    "category": "body-italic-m"
+  },
+  {
+    "name": "body-italic-s/body-italic-s",
+    "value": 400,
+    "collection": "colors",
+    "category": "body-italic-s"
+  },
+  {
+    "name": "body-italic-s/body-italic-s",
+    "value": "italic",
+    "collection": "colors",
+    "category": "body-italic-s"
+  },
+  {
+    "name": "body-italic-s/body-italic-s",
+    "value": 14,
+    "collection": "colors",
+    "category": "body-italic-s"
+  },
+  {
+    "name": "body-italic-s/body-italic-s",
+    "value": 20,
+    "collection": "colors",
+    "category": "body-italic-s"
+  },
+  {
+    "name": "display-2xl/display-2xl",
+    "value": 450,
+    "collection": "colors",
+    "category": "display-2xl"
+  },
+  {
+    "name": "display-2xl/display-2xl",
+    "value": 82,
+    "collection": "colors",
+    "category": "display-2xl"
+  },
+  {
+    "name": "display-2xl/display-2xl",
+    "value": 90,
+    "collection": "colors",
+    "category": "display-2xl"
+  },
+  {
+    "name": "display-xl/display-xl",
+    "value": 450,
+    "collection": "colors",
+    "category": "display-xl"
+  },
+  {
+    "name": "display-xl/display-xl",
+    "value": 64,
+    "collection": "colors",
+    "category": "display-xl"
+  },
+  {
+    "name": "display-xl/display-xl",
+    "value": 72,
+    "collection": "colors",
+    "category": "display-xl"
+  },
+  {
+    "name": "display-l/display-l",
+    "value": 450,
+    "collection": "colors",
+    "category": "display-l"
+  },
+  {
+    "name": "display-l/display-l",
+    "value": 48,
+    "collection": "colors",
+    "category": "display-l"
+  },
+  {
+    "name": "display-l/display-l",
+    "value": 56,
+    "collection": "colors",
+    "category": "display-l"
+  },
+  {
+    "name": "display-m/display-m",
+    "value": 450,
+    "collection": "colors",
+    "category": "display-m"
+  },
+  {
+    "name": "display-m/display-m",
+    "value": 36,
+    "collection": "colors",
+    "category": "display-m"
+  },
+  {
+    "name": "display-m/display-m",
+    "value": 44,
+    "collection": "colors",
+    "category": "display-m"
+  },
+  {
+    "name": "display-s/display-s",
+    "value": 450,
+    "collection": "colors",
+    "category": "display-s"
+  },
+  {
+    "name": "display-s/display-s",
+    "value": 32,
+    "collection": "colors",
+    "category": "display-s"
+  },
+  {
+    "name": "display-s/display-s",
+    "value": 40,
+    "collection": "colors",
+    "category": "display-s"
+  },
+  {
+    "name": "preamble-2xl/preamble-2xl",
+    "value": 450,
+    "collection": "colors",
+    "category": "preamble-2xl"
+  },
+  {
+    "name": "preamble-2xl/preamble-2xl",
+    "value": 32,
+    "collection": "colors",
+    "category": "preamble-2xl"
+  },
+  {
+    "name": "preamble-2xl/preamble-2xl",
+    "value": 40,
+    "collection": "colors",
+    "category": "preamble-2xl"
+  },
+  {
+    "name": "preamble-xl/preamble-xl",
+    "value": 450,
+    "collection": "colors",
+    "category": "preamble-xl"
+  },
+  {
+    "name": "preamble-xl/preamble-xl",
+    "value": 28,
+    "collection": "colors",
+    "category": "preamble-xl"
+  },
+  {
+    "name": "preamble-xl/preamble-xl",
+    "value": 36,
+    "collection": "colors",
+    "category": "preamble-xl"
+  },
+  {
+    "name": "preamble-l/preamble-l",
+    "value": 450,
+    "collection": "colors",
+    "category": "preamble-l"
+  },
+  {
+    "name": "preamble-l/preamble-l",
+    "value": 24,
+    "collection": "colors",
+    "category": "preamble-l"
+  },
+  {
+    "name": "preamble-l/preamble-l",
+    "value": 32,
+    "collection": "colors",
+    "category": "preamble-l"
+  },
+  {
+    "name": "preamble-m/preamble-m",
+    "value": 450,
+    "collection": "colors",
+    "category": "preamble-m"
+  },
+  {
+    "name": "preamble-m/preamble-m",
+    "value": 20,
+    "collection": "colors",
+    "category": "preamble-m"
+  },
+  {
+    "name": "preamble-m/preamble-m",
+    "value": 28,
+    "collection": "colors",
+    "category": "preamble-m"
+  },
+  {
+    "name": "preamble-s/preamble-s",
+    "value": 450,
+    "collection": "colors",
+    "category": "preamble-s"
+  },
+  {
+    "name": "preamble-s/preamble-s",
+    "value": 18,
+    "collection": "colors",
+    "category": "preamble-s"
+  },
+  {
+    "name": "preamble-s/preamble-s",
+    "value": 26,
+    "collection": "colors",
+    "category": "preamble-s"
+  },
+  {
+    "name": "preamble-xs/preamble-xs",
+    "value": 450,
+    "collection": "colors",
+    "category": "preamble-xs"
+  },
+  {
+    "name": "preamble-xs/preamble-xs",
+    "value": 16,
+    "collection": "colors",
+    "category": "preamble-xs"
+  },
+  {
+    "name": "preamble-xs/preamble-xs",
+    "value": 24,
+    "collection": "colors",
+    "category": "preamble-xs"
+  }
 ]

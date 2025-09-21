@@ -1,42 +1,242 @@
 [
-  {"name":"shadow/s-01-color","value":"#060D1314"},
-  {"name":"shadow/s-01-offsetX","value":"0px"},
-  {"name":"shadow/s-01-offsetY","value":"0px"},
-  {"name":"shadow/s-01-blur","value":"2px"},
-  {"name":"shadow/s-01-spread","value":"0px"},
-  {"name":"shadow/s-02-color","value":"transparent"},
-  {"name":"shadow/s-02-offsetX","value":"0px"},
-  {"name":"shadow/s-02-offsetY","value":"0px"},
-  {"name":"shadow/s-02-blur","value":"0px"},
-  {"name":"shadow/s-02-spread","value":"0px"},
-  {"name":"shadow/m-01-color","value":"#060D131a"},
-  {"name":"shadow/m-01-offsetX","value":"0px"},
-  {"name":"shadow/m-01-offsetY","value":"4px"},
-  {"name":"shadow/m-01-blur","value":"8px"},
-  {"name":"shadow/m-01-spread","value":"-2px"},
-  {"name":"shadow/m-02-color","value":"#060D130f"},
-  {"name":"shadow/m-02-offsetX","value":"0px"},
-  {"name":"shadow/m-02-offsetY","value":"2px"},
-  {"name":"shadow/m-02-blur","value":"4px"},
-  {"name":"shadow/m-02-spread","value":"-2px"},
-  {"name":"shadow/l-01-color","value":"#060D1314"},
-  {"name":"shadow/l-01-offsetX","value":"0px"},
-  {"name":"shadow/l-01-offsetY","value":"20px"},
-  {"name":"shadow/l-01-blur","value":"24px"},
-  {"name":"shadow/l-01-spread","value":"-4px"},
-  {"name":"shadow/l-02-color","value":"#060D1308"},
-  {"name":"shadow/l-02-offsetX","value":"0px"},
-  {"name":"shadow/l-02-offsetY","value":"8px"},
-  {"name":"shadow/l-02-blur","value":"8px"},
-  {"name":"shadow/l-02-spread","value":"-4px"},
-  {"name":"shadow/xl-01-color","value":"#060D132e"},
-  {"name":"shadow/xl-01-offsetX","value":"0px"},
-  {"name":"shadow/xl-01-offsetY","value":"24px"},
-  {"name":"shadow/xl-01-blur","value":"48px"},
-  {"name":"shadow/xl-01-spread","value":"-12px"},
-  {"name":"shadow/xl-02-color","value":"transparent"},
-  {"name":"shadow/xl-02-offsetX","value":"0px"},
-  {"name":"shadow/xl-02-offsetY","value":"0px"},
-  {"name":"shadow/xl-02-blur","value":"0px"},
-  {"name":"shadow/xl-02-spread","value":"0px"}
+  {
+    "name": "s-01/s-01",
+    "value": "#060D1314",
+    "collection": "colors",
+    "category": "s-01"
+  },
+  {
+    "name": "s-01/s-01",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-01"
+  },
+  {
+    "name": "s-01/s-01",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-01"
+  },
+  {
+    "name": "s-01/s-01",
+    "value": "2px",
+    "collection": "colors",
+    "category": "s-01"
+  },
+  {
+    "name": "s-01/s-01",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-01"
+  },
+  {
+    "name": "s-02/s-02",
+    "value": "transparent",
+    "collection": "colors",
+    "category": "s-02"
+  },
+  {
+    "name": "s-02/s-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-02"
+  },
+  {
+    "name": "s-02/s-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-02"
+  },
+  {
+    "name": "s-02/s-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-02"
+  },
+  {
+    "name": "s-02/s-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "s-02"
+  },
+  {
+    "name": "m-01/m-01",
+    "value": "#060D131a",
+    "collection": "colors",
+    "category": "m-01"
+  },
+  {
+    "name": "m-01/m-01",
+    "value": "0px",
+    "collection": "colors",
+    "category": "m-01"
+  },
+  {
+    "name": "m-01/m-01",
+    "value": "4px",
+    "collection": "colors",
+    "category": "m-01"
+  },
+  {
+    "name": "m-01/m-01",
+    "value": "8px",
+    "collection": "colors",
+    "category": "m-01"
+  },
+  {
+    "name": "m-01/m-01",
+    "value": "-2px",
+    "collection": "colors",
+    "category": "m-01"
+  },
+  {
+    "name": "m-02/m-02",
+    "value": "#060D130f",
+    "collection": "colors",
+    "category": "m-02"
+  },
+  {
+    "name": "m-02/m-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "m-02"
+  },
+  {
+    "name": "m-02/m-02",
+    "value": "2px",
+    "collection": "colors",
+    "category": "m-02"
+  },
+  {
+    "name": "m-02/m-02",
+    "value": "4px",
+    "collection": "colors",
+    "category": "m-02"
+  },
+  {
+    "name": "m-02/m-02",
+    "value": "-2px",
+    "collection": "colors",
+    "category": "m-02"
+  },
+  {
+    "name": "l-01/l-01",
+    "value": "#060D1314",
+    "collection": "colors",
+    "category": "l-01"
+  },
+  {
+    "name": "l-01/l-01",
+    "value": "0px",
+    "collection": "colors",
+    "category": "l-01"
+  },
+  {
+    "name": "l-01/l-01",
+    "value": "20px",
+    "collection": "colors",
+    "category": "l-01"
+  },
+  {
+    "name": "l-01/l-01",
+    "value": "24px",
+    "collection": "colors",
+    "category": "l-01"
+  },
+  {
+    "name": "l-01/l-01",
+    "value": "-4px",
+    "collection": "colors",
+    "category": "l-01"
+  },
+  {
+    "name": "l-02/l-02",
+    "value": "#060D1308",
+    "collection": "colors",
+    "category": "l-02"
+  },
+  {
+    "name": "l-02/l-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "l-02"
+  },
+  {
+    "name": "l-02/l-02",
+    "value": "8px",
+    "collection": "colors",
+    "category": "l-02"
+  },
+  {
+    "name": "l-02/l-02",
+    "value": "8px",
+    "collection": "colors",
+    "category": "l-02"
+  },
+  {
+    "name": "l-02/l-02",
+    "value": "-4px",
+    "collection": "colors",
+    "category": "l-02"
+  },
+  {
+    "name": "xl-01/xl-01",
+    "value": "#060D132e",
+    "collection": "colors",
+    "category": "xl-01"
+  },
+  {
+    "name": "xl-01/xl-01",
+    "value": "0px",
+    "collection": "colors",
+    "category": "xl-01"
+  },
+  {
+    "name": "xl-01/xl-01",
+    "value": "24px",
+    "collection": "colors",
+    "category": "xl-01"
+  },
+  {
+    "name": "xl-01/xl-01",
+    "value": "48px",
+    "collection": "colors",
+    "category": "xl-01"
+  },
+  {
+    "name": "xl-01/xl-01",
+    "value": "-12px",
+    "collection": "colors",
+    "category": "xl-01"
+  },
+  {
+    "name": "xl-02/xl-02",
+    "value": "transparent",
+    "collection": "colors",
+    "category": "xl-02"
+  },
+  {
+    "name": "xl-02/xl-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "xl-02"
+  },
+  {
+    "name": "xl-02/xl-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "xl-02"
+  },
+  {
+    "name": "xl-02/xl-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "xl-02"
+  },
+  {
+    "name": "xl-02/xl-02",
+    "value": "0px",
+    "collection": "colors",
+    "category": "xl-02"
+  }
 ]
