@@ -1,116 +1,116 @@
-[
-  {
-    "name": "space/0",
-    "value": 0,
-    "collection": "colors",
-    "category": "0"
-  },
-  {
-    "name": "space/5xs",
-    "value": 1,
-    "collection": "colors",
-    "category": "5xs"
-  },
-  {
-    "name": "space/4xs",
-    "value": 2,
-    "collection": "colors",
-    "category": "4xs"
-  },
-  {
-    "name": "space/3xs",
-    "value": 4,
-    "collection": "colors",
-    "category": "3xs"
-  },
-  {
-    "name": "space/2xs",
-    "value": 6,
-    "collection": "colors",
-    "category": "2xs"
-  },
-  {
-    "name": "space/xs",
-    "value": 8,
-    "collection": "colors",
-    "category": "xs"
-  },
-  {
-    "name": "space/s",
-    "value": 12,
-    "collection": "colors",
-    "category": "s"
-  },
-  {
-    "name": "space/m",
-    "value": 16,
-    "collection": "colors",
-    "category": "m"
-  },
-  {
-    "name": "space/l",
-    "value": 20,
-    "collection": "colors",
-    "category": "l"
-  },
-  {
-    "name": "space/xl",
-    "value": 24,
-    "collection": "colors",
-    "category": "xl"
-  },
-  {
-    "name": "space/2xl",
-    "value": 32,
-    "collection": "colors",
-    "category": "2xl"
-  },
-  {
-    "name": "space/3xl",
-    "value": 40,
-    "collection": "colors",
-    "category": "3xl"
-  },
-  {
-    "name": "space/4xl",
-    "value": 48,
-    "collection": "colors",
-    "category": "4xl"
-  },
-  {
-    "name": "space/5xl",
-    "value": 64,
-    "collection": "colors",
-    "category": "5xl"
-  },
-  {
-    "name": "space/6xl",
-    "value": 80,
-    "collection": "colors",
-    "category": "6xl"
-  },
-  {
-    "name": "space/7xl",
-    "value": 96,
-    "collection": "colors",
-    "category": "7xl"
-  },
-  {
-    "name": "space/8xl",
-    "value": 112,
-    "collection": "colors",
-    "category": "8xl"
-  },
-  {
-    "name": "space/9xl",
-    "value": 120,
-    "collection": "colors",
-    "category": "9xl"
-  },
-  {
-    "name": "space/max",
-    "value": 999,
-    "collection": "colors",
-    "category": "max"
-  }
-]
+{
+  "0": [
+    {
+      "name": "0",
+      "value": 0
+    }
+  ],
+  "5xs": [
+    {
+      "name": "5xs",
+      "value": 1
+    }
+  ],
+  "4xs": [
+    {
+      "name": "4xs",
+      "value": 2
+    }
+  ],
+  "3xs": [
+    {
+      "name": "3xs",
+      "value": 4
+    }
+  ],
+  "2xs": [
+    {
+      "name": "2xs",
+      "value": 6
+    }
+  ],
+  "xs": [
+    {
+      "name": "xs",
+      "value": 8
+    }
+  ],
+  "s": [
+    {
+      "name": "s",
+      "value": 12
+    }
+  ],
+  "m": [
+    {
+      "name": "m",
+      "value": 16
+    }
+  ],
+  "l": [
+    {
+      "name": "l",
+      "value": 20
+    }
+  ],
+  "xl": [
+    {
+      "name": "xl",
+      "value": 24
+    }
+  ],
+  "2xl": [
+    {
+      "name": "2xl",
+      "value": 32
+    }
+  ],
+  "3xl": [
+    {
+      "name": "3xl",
+      "value": 40
+    }
+  ],
+  "4xl": [
+    {
+      "name": "4xl",
+      "value": 48
+    }
+  ],
+  "5xl": [
+    {
+      "name": "5xl",
+      "value": 64
+    }
+  ],
+  "6xl": [
+    {
+      "name": "6xl",
+      "value": 80
+    }
+  ],
+  "7xl": [
+    {
+      "name": "7xl",
+      "value": 96
+    }
+  ],
+  "8xl": [
+    {
+      "name": "8xl",
+      "value": 112
+    }
+  ],
+  "9xl": [
+    {
+      "name": "9xl",
+      "value": 120
+    }
+  ],
+  "max": [
+    {
+      "name": "max",
+      "value": 999
+    }
+  ]
+}

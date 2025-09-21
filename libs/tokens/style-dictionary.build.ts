@@ -211,7 +211,7 @@ await Promise.all(
           studio: {
             buildPath:
               __dirname + `/../../apps/docs/design/layout/studio/data/tokens/`,
-            transforms: ['name/figma', 'color/alpha'],
+            transforms: ['name/studio', 'color/alpha'],
             files: [
               {
                 format: 'json/studio',

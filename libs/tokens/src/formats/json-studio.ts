@@ -26,7 +26,7 @@ const jsonStudio = {
         const newToken = {
           ...rest,
           value: value[key].value || value[key].hex || value[key],
-          name: `${token.path[2]}/${token.path[token.path.length - 1]}`,
+          name: token.path[token.path.length - 1],
           $type: tinycolor(
             value[key].value || value[key].hex || value[key],
           ).isValid()
@@ -47,7 +47,7 @@ const jsonStudio = {
           const newToken = {
             ...rest,
             value: value[key].value || value[key].hex || value[key],
-            name: `${token.path[2]}/${token.path[token.path.length - 1]}`,
+            name: token.path[token.path.length - 1],
             $type: typeof value[key] === 'number' ? 'float' : 'string',
           }
           newDictionary.push(newToken)
@@ -55,22 +55,32 @@ const jsonStudio = {
       })
     })
 
-    // Process all tokens with additional properties
-    const processedTokens = newDictionary.map((token) => {
-      const pathParts = token.path
-      const category = pathParts[2]
-      const level = ['L1', 'L2', 'L3'].includes(category) ? category : undefined
+    // Group tokens by category
+    const groupedTokens = newDictionary.reduce((acc, token) => {
+      const category = token.path[2]
 
-      return {
-        name: token.name.replace('color/', ''),
-        value: token.$value !== undefined ? token.$value : token.value,
-        collection: 'colors',
-        category: level ? 'background' : category,
-        ...(level && { level }),
+      if (['L1', 'L2', 'L3'].includes(category)) {
+        if (!acc.background) {
+          acc.background = { L1: [], L2: [], L3: [] }
+        }
+        acc.background[category].push({
+          name: token.path[token.path.length - 1],
+          value: token.$value !== undefined ? token.$value : token.value,
+        })
+      } else {
+        if (!acc[category]) {
+          acc[category] = []
+        }
+        acc[category].push({
+          name: token.path[token.path.length - 1],
+          value: token.$value !== undefined ? token.$value : token.value,
+        })
       }
-    })
 
-    return JSON.stringify(processedTokens, null, 2)
+      return acc
+    }, {})
+
+    return JSON.stringify(groupedTokens, null, 2)
   },
 }
 
