@@ -172,9 +172,21 @@ const jsonStudio = {
         if (!acc[category]) {
           acc[category] = []
         }
+        // acc[category].push({
+        //   token: token.path[token.path.length - 1],
+        //   variable: `var(--gds-sys-color-${category}-${token.path[token.path.length - 1]})`,
+        //   value: token.$value !== undefined ? token.$value : token.value,
+        // })
+
+        // Check if this is a motion/easing token
+        const isMotion =
+          token.path.some((p) => p.includes('motion')) ||
+          category === 'easing' ||
+          token.path[1] === 'motion'
+
         acc[category].push({
           token: token.path[token.path.length - 1],
-          variable: `var(--gds-sys-color-${category}-${token.path[token.path.length - 1]})`,
+          variable: `var(--gds-sys-${isMotion ? 'motion' : 'color'}-${category}-${token.path[token.path.length - 1]})`,
           value: token.$value !== undefined ? token.$value : token.value,
         })
       }
