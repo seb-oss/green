@@ -136,7 +136,7 @@ const jsonStudio = {
         }
         acc.background[category].push({
           token: token.path[token.path.length - 1],
-          variable: `var(--gds-sys-color-${token.path[token.path.length - 2]}-${token.path[token.path.length - 1]})`,
+          variable: `var(--gds-sys-color-${token.path[token.path.length - 2].toLowerCase()}-${token.path[token.path.length - 1]})`,
           value: token.$value !== undefined ? token.$value : token.value,
         })
       } else {
