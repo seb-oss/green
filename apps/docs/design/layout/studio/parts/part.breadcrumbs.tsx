@@ -1,8 +1,7 @@
 // studio.breadcrumbs.tsx
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
-import { studioData } from '../data/studio.data'
-import { StudioPage } from '../data/studio.data.types'
+import { useStudioPage } from '../data/studio.data.use'
 
 interface BreadcrumbItem {
   label: string
@@ -27,12 +26,12 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
   const pathSegments = current?.split('/').filter(Boolean) || []
 
   if (pathSegments.length > 0) {
-    const mainPage = studioData
-      .flatMap((category) => category.pages)
-      .find((page) => page.key === pathSegments[0]) as StudioPage | undefined
+    // Get the main studio page data
+    const mainPath = `/studio/${pathSegments[0]}`
+    const mainPage = useStudioPage(mainPath)
 
     if (mainPage) {
-      // Add main page with href only if there's a sub-item
+      // Add main page
       breadcrumbs.push({
         label: mainPage.label,
         href: pathSegments.length > 1 ? mainPage.slug : undefined,
@@ -41,23 +40,57 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
           : undefined,
       })
 
-      // If we have a sub-item, find its details from the page content
-      // if (pathSegments[1]) {
-      //   const subItem = mainPage.content
-      //     ?.flatMap((group) => group.items)
-      //     .find((item) => item.key === pathSegments[1])
+      // Add remaining segments
+      for (let i = 1; i < pathSegments.length; i++) {
+        const isLastSegment = i === pathSegments.length - 1
+        const segment = pathSegments[i]
+        let label = segment
 
-      //   if (subItem) {
-      //     breadcrumbs.push({
-      //       label: subItem.name,
-      //     })
-      //   } else {
-      //     // If no matching item found, use the segment as is
-      //     breadcrumbs.push({
-      //       label: pathSegments[1],
-      //     })
-      //   }
-      // }
+        // Check for sub-pages first
+        const subPage = mainPage.pages?.find((p) => p.key === segment)
+        if (subPage) {
+          breadcrumbs.push({
+            label: subPage.title,
+            href: isLastSegment ? undefined : subPage.slug,
+          })
+          continue
+        }
+
+        // For token pages, look for the token value
+        if (mainPage.type === 'token' && mainPage.tokens) {
+          const token = mainPage.tokens
+            .flatMap((group) => group.items)
+            .find((item) => item.token === segment)
+
+          if (token) {
+            label = token.token
+          }
+        }
+
+        // For icon pages, look for the icon ID
+        if (mainPage.type === 'asset' && mainPage.icons) {
+          const icon = mainPage.icons
+            .flatMap((group) => group.items)
+            .find((item) => item.key === segment)
+
+          if (icon) {
+            label = icon.name
+          }
+        }
+
+        // Format the label to be more readable if it's not a token
+        if (mainPage.type !== 'token') {
+          label = label
+            .split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(' ')
+        }
+
+        breadcrumbs.push({
+          label,
+          href: isLastSegment ? undefined : `${mainPage.slug}/${segment}`,
+        })
+      }
     }
   }
 
@@ -76,7 +109,6 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
             </Link>
           ) : (
             <Core.GdsFlex key={index} align-items="center" gap="2xs">
-              {item.icon && <item.icon size="m" />}
               {item.label}
             </Core.GdsFlex>
           ),
