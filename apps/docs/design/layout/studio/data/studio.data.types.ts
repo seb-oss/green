@@ -123,3 +123,27 @@ export interface MotionTokens {
   easing: MotionToken[]
   duration: MotionToken[]
 }
+
+// Base tokens
+
+export interface BaseToken {
+  token: string
+  variable: string
+  value: string
+}
+
+export interface SpacingTokens {
+  spacing: Record<string, BaseToken>
+}
+
+export interface RadiusTokens {
+  radius: Record<string, BaseToken>
+}
+
+export interface ViewportTokens {
+  viewport: Record<string, BaseToken>
+}
+
+export interface ShadowsTokens {
+  shadows: Record<string, BaseToken>
+}

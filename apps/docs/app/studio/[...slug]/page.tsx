@@ -5,9 +5,12 @@ import { studioData } from '../../../design/layout/studio/data/studio.data'
 import { getPageBySlug } from '../../../design/layout/studio/data/studio.data.hooks'
 import * as Tokens from '../../../design/layout/studio/data/studio.data.tokens'
 import {
-  BackgroundLevel,
-  ColorCategory,
   ColorTokens,
+  MotionTokens,
+  RadiusTokens,
+  ShadowsTokens,
+  SpacingTokens,
+  ViewportTokens,
 } from '../../../design/layout/studio/data/studio.data.types'
 
 // Function to fetch icons from API during build time
@@ -44,8 +47,13 @@ export default function PlayPage() {
 
 export async function generateStaticParams() {
   const paths: { slug: string[] }[] = []
-  const iconList = await fetchIconList()
+  const ICONS = await fetchIconList()
   const COLORS = Tokens.Light as ColorTokens
+  const SPACING = Tokens.Spacing as SpacingTokens
+  const RADIUS = Tokens.Radius as RadiusTokens
+  const VIEWPORT = Tokens.Viewport as ViewportTokens
+  const SHADOWS = Tokens.Shadows as ShadowsTokens
+  const MOTION = Tokens.Motion as MotionTokens
 
   studioData.forEach((category) => {
     category.pages.forEach((page) => {
@@ -63,48 +71,86 @@ export async function generateStaticParams() {
         })
       }
 
-      // For icons page, use the API data to generate paths
-      if (page.key === 'icons') {
-        iconList.forEach((iconKey) => {
-          paths.push({
-            slug: [page.slug.replace('/studio/', ''), iconKey],
-          })
-        })
-      }
-
-      // For color tokens
-      if (page.key === 'colors') {
-        // Background colors with levels
-        const backgroundLevels: ('L1' | 'L2' | 'L3')[] = ['L1', 'L2', 'L3']
-        backgroundLevels.forEach((level) => {
-          COLORS.background[level].forEach((token) => {
+      switch (page.key) {
+        case 'icons': {
+          ICONS.forEach((iconKey) => {
             paths.push({
-              slug: ['colors', level.toLowerCase(), token.token],
+              slug: [page.slug.replace('/studio/', ''), iconKey],
             })
           })
-        })
+          break
+        }
 
-        // Other color categories
-        const colorCategories = ['content', 'border', 'state'] as const
-        colorCategories.forEach((category) => {
-          COLORS[category].forEach((token) => {
-            paths.push({
-              slug: ['colors', category, token.token],
+        case 'colors': {
+          // Background colors with levels
+          const backgroundLevels: ('L1' | 'L2' | 'L3')[] = ['L1', 'L2', 'L3']
+          backgroundLevels.forEach((level) => {
+            COLORS.background[level].forEach((token) => {
+              paths.push({
+                slug: ['colors', level.toLowerCase(), token.token],
+              })
             })
           })
-        })
-      }
 
-      // For other pages with content, use the existing structure
-      // else if (page.content) {
-      //   page.content.forEach((group) => {
-      //     group.items.forEach((item) => {
-      //       paths.push({
-      //         slug: [page.slug.replace('/studio/', ''), item.key],
-      //       })
-      //     })
-      //   })
-      // }
+          // Other color categories
+          const colorCategories = ['content', 'border', 'state'] as const
+          colorCategories.forEach((category) => {
+            COLORS[category].forEach((token) => {
+              paths.push({
+                slug: ['colors', category, token.token],
+              })
+            })
+          })
+          break
+        }
+
+        case 'spacing': {
+          Object.entries(SPACING.spacing).forEach(([_, token]) => {
+            paths.push({
+              slug: ['spacing', token.token],
+            })
+          })
+          break
+        }
+
+        case 'radius': {
+          Object.entries(RADIUS.radius).forEach(([_, token]) => {
+            paths.push({
+              slug: ['radius', token.token],
+            })
+          })
+          break
+        }
+
+        case 'viewport': {
+          Object.entries(VIEWPORT.viewport).forEach(([_, token]) => {
+            paths.push({
+              slug: ['viewport', token.token],
+            })
+          })
+          break
+        }
+
+        case 'shadows': {
+          Object.entries(SHADOWS.shadows).forEach(([_, token]) => {
+            paths.push({
+              slug: ['shadows', token.token],
+            })
+          })
+          break
+        }
+
+        case 'motion': {
+          ;['easing', 'duration'].forEach((category) => {
+            MOTION[category].forEach((token) => {
+              paths.push({
+                slug: ['motion', category, token.token],
+              })
+            })
+          })
+          break
+        }
+      }
     })
   })
 

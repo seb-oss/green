@@ -71,6 +71,7 @@ const jsonStudio = {
       acc.shadows[size] = {
         token: size,
         variable: `var(--gds-sys-shadow-${size}-01), var(--gds-sys-shadow-${size}-02)`,
+        value: size,
       }
 
       return acc

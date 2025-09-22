@@ -42,22 +42,22 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
       })
 
       // If we have a sub-item, find its details from the page content
-      if (pathSegments[1]) {
-        const subItem = mainPage.content
-          ?.flatMap((group) => group.items)
-          .find((item) => item.key === pathSegments[1])
+      // if (pathSegments[1]) {
+      //   const subItem = mainPage.content
+      //     ?.flatMap((group) => group.items)
+      //     .find((item) => item.key === pathSegments[1])
 
-        if (subItem) {
-          breadcrumbs.push({
-            label: subItem.name,
-          })
-        } else {
-          // If no matching item found, use the segment as is
-          breadcrumbs.push({
-            label: pathSegments[1],
-          })
-        }
-      }
+      //   if (subItem) {
+      //     breadcrumbs.push({
+      //       label: subItem.name,
+      //     })
+      //   } else {
+      //     // If no matching item found, use the segment as is
+      //     breadcrumbs.push({
+      //       label: pathSegments[1],
+      //     })
+      //   }
+      // }
     }
   }
 

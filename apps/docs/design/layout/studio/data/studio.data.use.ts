@@ -178,7 +178,7 @@ export function useStudioPage(slug: string) {
               ([key, value]: [string, any]) => ({
                 token: key,
                 variable: value.variable,
-                value: value.variable,
+                value: value.value,
               }),
             ),
           })
