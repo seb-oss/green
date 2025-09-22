@@ -4,7 +4,7 @@ export const styles = css`
   :host {
     /* Font Sizes */
     --_font-label: var(--gds-sys-text-detail-book-m);
-    --_font-supporting-text: var(--gds-sys-text-detail-s);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
     font: var(--_font-label);
 
     /* Color */
@@ -17,13 +17,19 @@ export const styles = css`
 
   :host([size='small']) {
     --_font-label: var(--gds-sys-text-detail-book-s);
-    --_font-supporting-text: var(--gds-sys-text-detail-regular-s);
+    --_font-supporting-text: var(--gds-sys-text-detail-regular-xs);
+    --_perimeter-size: var(--gds-sys-space-xl);
+    --_container-gap: var(--gds-sys-space-xs);
   }
 
   .radio-group {
     display: flex;
     flex-direction: column;
     gap: var(--gds-sys-space-m);
+  }
+
+  :host([size='small']) .radio-group {
+    gap: var(--gds-sys-space-xs);
   }
 
   .content {
@@ -36,11 +42,19 @@ export const styles = css`
   .direction-row .content {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--gds-sys-space-l);
+    gap: var(--gds-sys-space-s) var(--gds-sys-space-xl);
   }
 
   .direction-column .content {
     flex-direction: column;
+    gap: var(--gds-sys-space-s);
+  }
+
+  :host([size='small']) .direction-column .content {
     gap: var(--gds-sys-space-xs);
+  }
+
+  :host([size='small']) .direction-row .content {
+    gap: var(--gds-sys-space-xs) var(--gds-sys-space-m);
   }
 `

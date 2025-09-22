@@ -84,7 +84,7 @@ export const WithAction: Story = {
   args: {
     ...DefaultParams.parameters!.args,
     variant: 'information',
-    dismissible: true,
+    dismissible: false,
     buttonLabel: 'Take Action',
     innerHTML: `<strong>Actionable</strong> Alert with a button for quick user interaction.`,
   },

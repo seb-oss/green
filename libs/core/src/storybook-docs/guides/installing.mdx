@@ -85,10 +85,6 @@ If you need animations, use `provideCoreRendererWithAnimations()` instead, and m
 
 ```ts
 import '@sebgroup/green-core/components/button/index.js'
-
-// Transitional styles, only if you need the 2016 design
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
-ButtonStyles.register()
 ```
 
 **In your template:**
@@ -129,11 +125,6 @@ import { css, customElement, LitElement } from 'lit'
 
 // This custom `html` template literal tag from Green Core extends the default `lit-html` tag to handle element version scoping.
 import { html } from '@sebgroup/green-core/scoping'
-
-// Transitional styles applies the current 2016 design language to the components
-// These two linies imports and registers the transitional styles for the button component
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
-ButtonStyles.register()
 
 // Import the components that you need
 import '@sebgroup/green-core/components/button/index.js'

@@ -53,6 +53,12 @@ bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
 ```
 
+**In your component:**
+
+```ts
+import '@sebgroup/green-core/components/button/index.js'
+```
+  
 Now you can use Green Core components in your template like any other elements:
 
 ```html
@@ -108,10 +114,6 @@ import { getScopedTagName } from '@sebgroup/green-core/scoping'
 
 ```ts
 import '@sebgroup/green-core/components/button/index.js'
-
-// Transitional styles
-import * as ButtonStyles from '@sebgroup/green-core/components/button/button.trans.styles.js'
-ButtonStyles.register()
 ```
 
 Use the web component in your template with the `*nggCoreElement` directive.
