@@ -99,7 +99,7 @@ export class DateInputComponent
    */
   @Input() size: 'small' | 'large' = 'large'
 
-  @Input() dynamicPosition: boolean = false
+  @Input() dynamicPosition = false
 
   /** @internal */
   // calendarIcon: IconDefinition = faCalendarDays;
