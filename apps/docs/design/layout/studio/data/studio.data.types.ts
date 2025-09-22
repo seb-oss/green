@@ -30,6 +30,7 @@ export interface TokenItem {
   token: string
   variable: string
   value: string
+  dark?: string
 }
 
 export interface TokenGroup {
@@ -99,6 +100,11 @@ export interface ColorTokens {
   border: ColorToken[]
   content: ColorToken[]
   state: ColorToken[]
+}
+
+export interface ColorPreviewProps {
+  token: ColorToken
+  mode: 'light' | 'dark'
 }
 
 // Motion tokens

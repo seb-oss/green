@@ -14,13 +14,12 @@ import typographyJson from '../../../../../../dist/libs/tokens/studio/studio.typ
 import viewportJson from '../../../../../../dist/libs/tokens/studio/studio.viewport.json'
 import { useContent } from '../../../../settings/content'
 import { studioData } from './studio.data'
+import * as Tokens from './studio.data.tokens'
 
 import type {
   ColorTokens,
   IconGroup,
   IconPage,
-  MotionTokens,
-  StudioPage,
   TokenGroup,
   TokenPage,
 } from './studio.data.types'
@@ -74,50 +73,66 @@ export function useStudioPage(slug: string) {
       const tokenGroups: TokenGroup[] = []
 
       switch (page.key) {
+        // studio.data.use.ts
         case 'colors': {
-          // Background colors with levels
-          tokenGroups.push({
-            key: 'background',
-            title: 'Background',
-            description: 'Background color tokens',
-            items: [
-              ...colorsLightJson.background.L1.map((token) => ({
-                level: 'L1',
-                token: token.token,
-                variable: token.variable,
-                value: token.value,
-              })),
-              ...colorsLightJson.background.L2.map((token) => ({
-                level: 'L2',
-                token: token.token,
-                variable: token.variable,
-                value: token.value,
-              })),
-              ...colorsLightJson.background.L3.map((token) => ({
-                level: 'L3',
-                token: token.token,
-                variable: token.variable,
-                value: token.value,
-              })),
-            ],
-          })
-
-          // Other color categories
-          const colorCategories = ['content', 'border', 'state'] as const
-          colorCategories.forEach((category) => {
-            tokenGroups.push({
-              key: category,
-              title: category.charAt(0).toUpperCase() + category.slice(1),
-              description: `${category} color tokens`,
-              items: (colorsLightJson as ColorTokens)[category].map(
-                (token) => ({
+          // Helper function to map color tokens
+          const mapColorTokens = (colorData: ColorTokens) => {
+            // Background colors with levels
+            const backgroundGroup = {
+              key: 'background',
+              title: 'Background',
+              description: 'Background color tokens',
+              items: [
+                ...colorData.background.L1.map((token) => ({
+                  level: 'L1',
                   token: token.token,
                   variable: token.variable,
                   value: token.value,
-                }),
-              ),
-            })
-          })
+                  dark: colorsDarkJson.background.L1.find(
+                    (t) => t.token === token.token,
+                  )?.value,
+                })),
+                ...colorData.background.L2.map((token) => ({
+                  level: 'L2',
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                  dark: colorsDarkJson.background.L2.find(
+                    (t) => t.token === token.token,
+                  )?.value,
+                })),
+                ...colorData.background.L3.map((token) => ({
+                  level: 'L3',
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                  dark: colorsDarkJson.background.L3.find(
+                    (t) => t.token === token.token,
+                  )?.value,
+                })),
+              ],
+            }
+
+            // Other color categories
+            const colorCategories = ['content', 'border', 'state'] as const
+            const otherGroups = colorCategories.map((category) => ({
+              key: category,
+              title: category.charAt(0).toUpperCase() + category.slice(1),
+              description: `${category} color tokens`,
+              items: colorData[category].map((token) => ({
+                token: token.token,
+                variable: token.variable,
+                value: token.value,
+                dark: colorsDarkJson[category].find(
+                  (t) => t.token === token.token,
+                )?.value,
+              })),
+            }))
+
+            return [backgroundGroup, ...otherGroups]
+          }
+
+          tokenGroups.push(...mapColorTokens(colorsLightJson))
           break
         }
 

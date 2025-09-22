@@ -1,0 +1,8 @@
+export { default as Light } from '../../../../../../dist/libs/tokens/studio/studio.colors.light.json'
+export { default as Dark } from '../../../../../../dist/libs/tokens/studio/studio.colors.dark.json'
+export { default as Motion } from '../../../../../../dist/libs/tokens/studio/studio.motion.json'
+export { default as Radius } from '../../../../../../dist/libs/tokens/studio/studio.radius.json'
+export { default as Shadows } from '../../../../../../dist/libs/tokens/studio/studio.shadows.json'
+export { default as Spacing } from '../../../../../../dist/libs/tokens/studio/studio.spacing.json'
+export { default as Typography } from '../../../../../../dist/libs/tokens/studio/studio.typography.json'
+export { default as Viewport } from '../../../../../../dist/libs/tokens/studio/studio.viewport.json'

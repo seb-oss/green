@@ -193,8 +193,16 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                   >
                     <Core.GdsText>{item.token}</Core.GdsText>
                     <Preview type="color" token={item} />
-                    {/* <Core.GdsText>{item.variable}</Core.GdsText> */}
-                    <Core.GdsText>{item.value}</Core.GdsText>
+                    {item.dark && (
+                      <Preview
+                        type="color"
+                        token={{
+                          token: item.token,
+                          variable: item.variable,
+                          value: item.dark,
+                        }}
+                      />
+                    )}
                   </Core.GdsGrid>
                 ))}
               </Core.GdsFlex>
