@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -319,7 +319,33 @@ export function Studio({
   const PART = PATH.split('/')
   const ITEM = PART[PART.length - 1]
   const LEVEL = PART[PART.length - 2]?.toUpperCase()
-  const NARROW = PATH.split('/')[3] && PAGE && LEVEL
+  // const NARROW = PATH.split('/')[3] && PAGE && LEVEL
+
+  const isDetailView =
+    PART.length > 4 || // For nested paths like colors/l1/token
+    (PART.length > 3 &&
+      ![
+        'l1',
+        'l2',
+        'l3',
+        'content',
+        'border',
+        'state',
+        'heading',
+        'body',
+        'easing',
+        'duration',
+      ].includes(ITEM.toLowerCase()))
+
+  const NARROW = PATH.split('/')[3] && PAGE && LEVEL && isDetailView
+
+  const { setQuery, setCategory } = useSearch()
+
+  // Clear search when main page changes
+  useEffect(() => {
+    setQuery('')
+    setCategory('')
+  }, [MAIN, setQuery, setCategory])
 
   const filteredPage = PAGE ? useSearchContent(PAGE) : null
   const { query } = useSearch()
@@ -332,7 +358,7 @@ export function Studio({
       block-size="58vh"
     >
       <Core.GdsText>
-        No results found for "{query}" in {PAGE?.label}
+        No results found for {`"${query}"`} in {PAGE?.label}
       </Core.GdsText>
     </Core.GdsCard>
   )

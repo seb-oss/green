@@ -84,9 +84,12 @@ export async function generateStaticParams() {
         }
 
         case 'colors': {
-          // Background colors with levels
+          // Add paths for category-level routes first
           const backgroundLevels: ('L1' | 'L2' | 'L3')[] = ['L1', 'L2', 'L3']
           backgroundLevels.forEach((level) => {
+            paths.push({
+              slug: ['colors', level.toLowerCase()],
+            })
             COLORS.background[level].forEach((token) => {
               paths.push({
                 slug: ['colors', level.toLowerCase(), token.token],
@@ -97,6 +100,9 @@ export async function generateStaticParams() {
           // Other color categories
           const colorCategories = ['content', 'border', 'state'] as const
           colorCategories.forEach((category) => {
+            paths.push({
+              slug: ['colors', category],
+            })
             COLORS[category].forEach((token) => {
               paths.push({
                 slug: ['colors', category, token.token],
@@ -134,6 +140,13 @@ export async function generateStaticParams() {
         }
 
         case 'typography': {
+          Object.keys(TYPOGRAPHY.typography).forEach((group) => {
+            paths.push({
+              slug: ['typography', group],
+            })
+          })
+
+          // Then add paths for individual tokens
           Object.entries(TYPOGRAPHY.typography).forEach(([group, tokens]) => {
             Object.entries(tokens).forEach(([key, _]) => {
               paths.push({
@@ -154,6 +167,11 @@ export async function generateStaticParams() {
         }
 
         case 'motion': {
+          ;['easing', 'duration'].forEach((category) => {
+            paths.push({
+              slug: ['motion', category],
+            })
+          })
           ;(Object.keys(MOTION) as Array<keyof MotionTokens>).forEach(
             (category) => {
               MOTION[category].forEach((token) => {

@@ -41,7 +41,7 @@ export default function StudioSearch({ page }: { page?: string }) {
           <Core.IconMagnifyingGlass slot="lead" size="m" />
         </Core.GdsInput>
         {categories.length > 0 && (
-          <Core.GdsFlex>
+          <Core.GdsFlex width="160px">
             <Core.GdsDropdown
               plain
               value={category}
