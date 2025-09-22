@@ -1,4 +1,4 @@
-import { StudioCategory, StudioPage } from './studio.data.types'
+import { StudioCategory } from './studio.data.types'
 
 export const studioData: StudioCategory[] = [
   {

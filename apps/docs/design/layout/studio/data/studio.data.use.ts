@@ -1,17 +1,7 @@
-// hooks/useStudioContent.ts
 'use client'
 
 import { useMemo } from 'react'
 
-// Import token JSONs
-import colorsDarkJson from '../../../../../../dist/libs/tokens/studio/studio.colors.dark.json'
-import colorsLightJson from '../../../../../../dist/libs/tokens/studio/studio.colors.light.json'
-import motionJson from '../../../../../../dist/libs/tokens/studio/studio.motion.json'
-import radiusJson from '../../../../../../dist/libs/tokens/studio/studio.radius.json'
-import shadowsJson from '../../../../../../dist/libs/tokens/studio/studio.shadows.json'
-import spacingJson from '../../../../../../dist/libs/tokens/studio/studio.spacing.json'
-import typographyJson from '../../../../../../dist/libs/tokens/studio/studio.typography.json'
-import viewportJson from '../../../../../../dist/libs/tokens/studio/studio.viewport.json'
 import { useContent } from '../../../../settings/content'
 import { studioData } from './studio.data'
 import * as Tokens from './studio.data.tokens'
@@ -88,7 +78,7 @@ export function useStudioPage(slug: string) {
                   token: token.token,
                   variable: token.variable,
                   value: token.value,
-                  dark: colorsDarkJson.background.L1.find(
+                  dark: Tokens.Dark.background.L1.find(
                     (t) => t.token === token.token,
                   )?.value,
                 })),
@@ -97,7 +87,7 @@ export function useStudioPage(slug: string) {
                   token: token.token,
                   variable: token.variable,
                   value: token.value,
-                  dark: colorsDarkJson.background.L2.find(
+                  dark: Tokens.Dark.background.L2.find(
                     (t) => t.token === token.token,
                   )?.value,
                 })),
@@ -106,7 +96,7 @@ export function useStudioPage(slug: string) {
                   token: token.token,
                   variable: token.variable,
                   value: token.value,
-                  dark: colorsDarkJson.background.L3.find(
+                  dark: Tokens.Dark.background.L3.find(
                     (t) => t.token === token.token,
                   )?.value,
                 })),
@@ -123,21 +113,20 @@ export function useStudioPage(slug: string) {
                 token: token.token,
                 variable: token.variable,
                 value: token.value,
-                dark: colorsDarkJson[category].find(
-                  (t) => t.token === token.token,
-                )?.value,
+                dark: Tokens.Dark[category].find((t) => t.token === token.token)
+                  ?.value,
               })),
             }))
 
             return [backgroundGroup, ...otherGroups]
           }
 
-          tokenGroups.push(...mapColorTokens(colorsLightJson))
+          tokenGroups.push(...mapColorTokens(Tokens.Light))
           break
         }
 
         case 'typography': {
-          Object.entries(typographyJson.typography).forEach(
+          Object.entries(Tokens.Typography.typography).forEach(
             ([group, tokens]) => {
               tokenGroups.push({
                 key: group,
@@ -160,9 +149,9 @@ export function useStudioPage(slug: string) {
         case 'radius':
         case 'viewport': {
           const tokenData = {
-            spacing: spacingJson.spacing,
-            radius: radiusJson.radius,
-            viewport: viewportJson.viewport,
+            spacing: Tokens.Spacing.spacing,
+            radius: Tokens.Radius.radius,
+            viewport: Tokens.Viewport.viewport,
           }[page.key]
 
           tokenGroups.push({
@@ -185,7 +174,7 @@ export function useStudioPage(slug: string) {
             key: 'shadows',
             title: 'Tokens',
             description: 'Shadow values',
-            items: Object.entries(shadowsJson.shadows).map(
+            items: Object.entries(Tokens.Shadows.shadows).map(
               ([key, value]: [string, any]) => ({
                 token: key,
                 variable: value.variable,
@@ -201,7 +190,7 @@ export function useStudioPage(slug: string) {
           type MotionCategory = (typeof motionCategories)[number]
 
           motionCategories.forEach((category: MotionCategory) => {
-            const tokens = motionJson[category]
+            const tokens = Tokens.Motion[category]
             if (tokens) {
               tokenGroups.push({
                 key: category,

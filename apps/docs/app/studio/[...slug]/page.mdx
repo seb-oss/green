@@ -1,14 +1,9 @@
+```tsx
 // page.tsx
 import { Metadata } from 'next'
 
 import { studioData } from '../../../design/layout/studio/data/studio.data'
 import { getPageBySlug } from '../../../design/layout/studio/data/studio.data.hooks'
-import * as Tokens from '../../../design/layout/studio/data/studio.data.tokens'
-import {
-  BackgroundLevel,
-  ColorCategory,
-  ColorTokens,
-} from '../../../design/layout/studio/data/studio.data.types'
 
 // Function to fetch icons from API during build time
 async function fetchIconList() {
@@ -45,7 +40,6 @@ export default function PlayPage() {
 export async function generateStaticParams() {
   const paths: { slug: string[] }[] = []
   const iconList = await fetchIconList()
-  const COLORS = Tokens.Light as ColorTokens
 
   studioData.forEach((category) => {
     category.pages.forEach((page) => {
@@ -68,29 +62,6 @@ export async function generateStaticParams() {
         iconList.forEach((iconKey) => {
           paths.push({
             slug: [page.slug.replace('/studio/', ''), iconKey],
-          })
-        })
-      }
-
-      // For color tokens
-      if (page.key === 'colors') {
-        // Background colors with levels
-        const backgroundLevels: ('L1' | 'L2' | 'L3')[] = ['L1', 'L2', 'L3']
-        backgroundLevels.forEach((level) => {
-          COLORS.background[level].forEach((token) => {
-            paths.push({
-              slug: ['colors', level.toLowerCase(), token.token],
-            })
-          })
-        })
-
-        // Other color categories
-        const colorCategories = ['content', 'border', 'state'] as const
-        colorCategories.forEach((category) => {
-          COLORS[category].forEach((token) => {
-            paths.push({
-              slug: ['colors', category, token.token],
-            })
           })
         })
       }

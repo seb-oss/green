@@ -184,26 +184,44 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                   </Core.GdsText>
                 )}
               </Core.GdsFlex>
-              <Core.GdsFlex flex-direction="column" gap="m">
+              <Core.GdsFlex flex-direction="column" gap="0">
                 {group.items.map((item) => (
-                  <Core.GdsGrid
-                    columns="4"
-                    key={item.token}
-                    align-items="center"
-                  >
-                    <Core.GdsText>{item.token}</Core.GdsText>
-                    <Preview type="color" token={item} />
-                    {item.dark && (
-                      <Preview
-                        type="color"
-                        token={{
-                          token: item.token,
-                          variable: item.variable,
-                          value: item.dark,
-                        }}
-                      />
-                    )}
-                  </Core.GdsGrid>
+                  <Core.GdsFlex key={item.token} align-items="center" gap="s">
+                    <Core.GdsGrid
+                      columns="4"
+                      align-items="center"
+                      border-style="solid"
+                      border-width="0 0 5xs 0"
+                      border-color="subtle-01"
+                      padding="s 0"
+                    >
+                      <Core.GdsText>{item.token}</Core.GdsText>
+                      <Preview type="color" token={item} />
+                      {item.dark && (
+                        <Preview
+                          type="color"
+                          token={{
+                            token: item.token,
+                            variable: item.variable,
+                            value: item.dark,
+                          }}
+                        />
+                      )}
+                      <Part.Copy token={item.token} />
+                    </Core.GdsGrid>
+                    <Core.GdsButton
+                      onClick={() => {
+                        const path = item.level
+                          ? `${page.slug}/${item.level.toLocaleLowerCase()}/${item.token}`
+                          : `${page.slug}/${group.key}/${item.token}`
+                        router.push(path)
+                      }}
+                      size="small"
+                      rank="tertiary"
+                    >
+                      <Core.IconChevronRight />
+                    </Core.GdsButton>
+                  </Core.GdsFlex>
                 ))}
               </Core.GdsFlex>
             </Core.GdsFlex>

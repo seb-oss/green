@@ -85,6 +85,10 @@ export interface StudioCategory {
 }
 
 //  Tokens
+
+export type BackgroundLevel = 'L1' | 'L2' | 'L3'
+export type ColorCategory = 'content' | 'border' | 'state'
+
 export interface ColorToken {
   token: string
   variable: string
