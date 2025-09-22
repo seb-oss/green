@@ -310,7 +310,7 @@ export function Studio({
   title,
   description,
 }: StudioProps) {
-  const { query } = useSearch()
+  const { query, setQuery, setCategory } = useSearch()
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
@@ -320,6 +320,8 @@ export function Studio({
   const ITEM = PART[PART.length - 1]
   const LEVEL = PART[PART.length - 2]?.toUpperCase()
   // const NARROW = PATH.split('/')[3] && PAGE && LEVEL
+
+  // const searchContent = useSearchContent(PAGE || null)
   const filteredPage = PAGE ? useSearchContent(PAGE) : null
 
   const isDetailView =
@@ -340,7 +342,7 @@ export function Studio({
 
   const NARROW = PATH.split('/')[3] && PAGE && LEVEL && isDetailView
 
-  const { setQuery, setCategory } = useSearch()
+  // const { setQuery, setCategory } = useSearch()
 
   // Clear search when main page changes
   useEffect(() => {
