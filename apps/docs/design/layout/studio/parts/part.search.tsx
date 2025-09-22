@@ -8,7 +8,9 @@ export default function StudioSearch({ page }: { page?: string }) {
       className="studio-search"
     >
       <Core.GdsFlex align-items="center" width="100%" gap="s">
-        <Core.GdsInput width="400px" plain />
+        <Core.GdsInput width="400px" plain>
+          <Core.IconMagnifyingGlass slot="lead" size="m" />
+        </Core.GdsInput>
         <Core.GdsFlex>
           <Core.GdsDropdown plain>
             <Core.GdsOption value="">Categories</Core.GdsOption>
