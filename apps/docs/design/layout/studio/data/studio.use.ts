@@ -17,23 +17,6 @@ import { studioData } from './studio.data'
 
 import type { StudioPage } from './studio.types'
 
-interface TokenValue {
-  token: string
-  variable: string
-  value: string
-}
-
-interface ColorTokens {
-  background: {
-    L1: TokenValue[]
-    L2: TokenValue[]
-    L3: TokenValue[]
-  }
-  border: TokenValue[]
-  content: TokenValue[]
-  state: TokenValue[]
-}
-
 export function useStudioPage(slug: string) {
   const { isLoaded, actions } = useContent()
 
@@ -79,48 +62,69 @@ export function useStudioPage(slug: string) {
       return dynamicPage
     }
 
-    // Handle token pages
     if (basePage.type === 'token') {
       switch (basePage.key) {
         case 'colors': {
-          // Combine light and dark theme colors
-          const colorGroups = new Set([
-            ...Object.keys(colorsLightJson),
-            ...Object.keys(colorsDarkJson),
-          ])
-
-          const content = Array.from(colorGroups).map((groupKey) => {
-            const lightColors = colorsLightJson[groupKey] || {}
-            const darkColors = colorsDarkJson[groupKey] || {}
-
-            // Get all unique color keys from both themes
-            const colorKeys = new Set([
-              ...Object.keys(lightColors),
-              ...Object.keys(darkColors),
-            ])
-
-            return {
-              key: groupKey,
-              title: groupKey.charAt(0).toUpperCase() + groupKey.slice(1),
-              description: `${groupKey} color tokens`,
-              items: Array.from(colorKeys).map((colorKey) => ({
-                key: colorKey,
-                name: colorKey,
-                value: lightColors[colorKey]?.value || 'N/A',
-                darkValue: darkColors[colorKey]?.value || 'N/A',
-                preview:
-                  lightColors[colorKey]?.value || darkColors[colorKey]?.value,
-                description: `${groupKey} color token`,
-                cssVariable:
-                  lightColors[colorKey]?.variable ||
-                  darkColors[colorKey]?.variable,
-              })),
-            }
-          })
-
           return {
             ...basePage,
-            content,
+            content: [
+              {
+                key: 'background',
+                title: 'Background',
+                description: 'Background color tokens',
+                items: [
+                  ...colorsLightJson.background.L1.map((token) => ({
+                    level: 'L1',
+                    token: token.token,
+                    variable: token.variable,
+                    value: token.value,
+                  })),
+                  ...colorsLightJson.background.L2.map((token) => ({
+                    level: 'L2',
+                    token: token.token,
+                    variable: token.variable,
+                    value: token.value,
+                  })),
+                  ...colorsLightJson.background.L3.map((token) => ({
+                    level: 'L3',
+                    token: token.token,
+                    variable: token.variable,
+                    value: token.value,
+                  })),
+                ],
+              },
+              {
+                key: 'content',
+                title: 'Content',
+                description: 'Content color tokens',
+                items: colorsLightJson.content.map((token) => ({
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                })),
+              },
+              {
+                key: 'border',
+                title: 'Border',
+                description: 'Content color tokens',
+                items: colorsLightJson.content.map((token) => ({
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                })),
+              },
+              {
+                key: 'state',
+                title: 'State',
+                description: 'Content color tokens',
+                items: colorsLightJson.content.map((token) => ({
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                })),
+              },
+              // Add other color categories similarly
+            ],
           }
         }
 
@@ -134,12 +138,9 @@ export function useStudioPage(slug: string) {
                 description: `${group} typography styles`,
                 items: Object.entries(tokens).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
-                    value: value.variable,
-                    preview: `${value['font-size']}/${value['line-height']}`,
-                    description: `Font size: ${value['font-size']}, Line height: ${value['line-height']}, Weight: ${value['font-weight']}`,
-                    cssVariable: value.variable,
+                    token: key,
+                    variable: value.variable,
+                    value: `${value['font-size']}/${value['line-height']}/${value['font-weight']}`,
                   }),
                 ),
               }),
@@ -153,16 +154,13 @@ export function useStudioPage(slug: string) {
             content: [
               {
                 key: 'spacing',
-                title: 'Spacing Scale',
+                title: 'Tokens',
                 description: 'Core spacing values',
                 items: Object.entries(spacingJson.spacing).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
+                    token: key,
+                    variable: value.variable,
                     value: value.value,
-                    preview: value.value,
-                    description: 'Spacing token',
-                    cssVariable: value.variable,
                   }),
                 ),
               },
@@ -176,16 +174,13 @@ export function useStudioPage(slug: string) {
             content: [
               {
                 key: 'shadows',
-                title: 'Shadow Scale',
+                title: 'Tokens',
                 description: 'Elevation shadows',
                 items: Object.entries(shadowsJson.shadows).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
+                    token: key,
+                    variable: value.variable,
                     value: value.variable,
-                    preview: 'shadow-preview',
-                    description: `Shadow elevation ${key}`,
-                    cssVariable: value.variable,
                   }),
                 ),
               },
@@ -199,16 +194,13 @@ export function useStudioPage(slug: string) {
             content: [
               {
                 key: 'radius',
-                title: 'Border Radius',
+                title: 'Tokens',
                 description: 'Corner radius values',
                 items: Object.entries(radiusJson.radius).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
+                    token: key,
+                    variable: value.variable,
                     value: value.value,
-                    preview: value.value,
-                    description: 'Border radius token',
-                    cssVariable: value.variable,
                   }),
                 ),
               },
@@ -226,12 +218,9 @@ export function useStudioPage(slug: string) {
                 description: 'Screen size breakpoints',
                 items: Object.entries(viewportJson.viewport).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
+                    token: key,
+                    variable: value.variable,
                     value: value.value,
-                    preview: value.value,
-                    description: 'Viewport breakpoint',
-                    cssVariable: value.variable,
                   }),
                 ),
               },
@@ -249,12 +238,9 @@ export function useStudioPage(slug: string) {
                 description: 'Animation easing curves',
                 items: Object.entries(motionJson.easing).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
+                    token: key,
+                    variable: value.variable,
                     value: value.value,
-                    preview: 'easing-preview',
-                    description: 'Easing function',
-                    cssVariable: value.variable,
                   }),
                 ),
               },
@@ -264,12 +250,9 @@ export function useStudioPage(slug: string) {
                 description: 'Animation durations',
                 items: Object.entries(motionJson.duration || {}).map(
                   ([key, value]: [string, any]) => ({
-                    key,
-                    name: key,
+                    token: key,
+                    variable: value.variable,
                     value: value.value,
-                    preview: value.value,
-                    description: 'Animation duration',
-                    cssVariable: value.variable,
                   }),
                 ),
               },

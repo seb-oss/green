@@ -54,3 +54,19 @@ export interface StudioCategory {
   description?: string
   pages: StudioPage[]
 }
+
+// Token stuff
+
+export interface TokenItem {
+  level?: string // Optional, only for colors
+  token: string
+  variable: string
+  value: string
+}
+
+export interface TokenGroup {
+  key: string
+  title: string
+  description?: string
+  items: TokenItem[]
+}
