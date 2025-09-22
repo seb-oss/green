@@ -2,7 +2,7 @@
 import { Metadata } from 'next'
 
 import { studioData } from '../../../design/layout/studio/data/studio.data'
-import { getPageBySlug } from '../../../design/layout/studio/data/studio.hooks'
+import { getPageBySlug } from '../../../design/layout/studio/data/studio.data.hooks'
 
 // Function to fetch icons from API during build time
 async function fetchIconList() {

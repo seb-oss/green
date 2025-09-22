@@ -10,13 +10,15 @@ import {
   StudioPage,
   TokenGroup,
   TokenPage,
-} from './data/studio.types'
-import { useStudioPage } from './data/studio.use'
+} from './data/studio.data.types'
+import { useStudioPage } from './data/studio.data.use'
 import * as Interactive from './interactive'
 import * as Part from './parts'
 import * as Tool from './tools'
 
 import './layout.studio.css'
+
+import { Preview } from './parts/preview'
 
 interface StudioProps {
   page: string
@@ -184,18 +186,16 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
               </Core.GdsFlex>
               <Core.GdsFlex flex-direction="column" gap="m">
                 {group.items.map((item) => (
-                  <Core.GdsCard
+                  <Core.GdsGrid
+                    columns="4"
                     key={item.token}
-                    padding="l"
-                    variant="secondary"
-                    border-radius="m"
+                    align-items="center"
                   >
-                    <Core.GdsFlex flex-direction="column" gap="s">
-                      <Core.GdsText>{item.token}</Core.GdsText>
-                      <Core.GdsText>{item.variable}</Core.GdsText>
-                      <Core.GdsText>{item.value}</Core.GdsText>
-                    </Core.GdsFlex>
-                  </Core.GdsCard>
+                    <Core.GdsText>{item.token}</Core.GdsText>
+                    <Preview type="color" token={item} />
+                    {/* <Core.GdsText>{item.variable}</Core.GdsText> */}
+                    <Core.GdsText>{item.value}</Core.GdsText>
+                  </Core.GdsGrid>
                 ))}
               </Core.GdsFlex>
             </Core.GdsFlex>

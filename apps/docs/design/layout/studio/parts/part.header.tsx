@@ -1,7 +1,7 @@
 'use client'
 
 import * as Core from '@sebgroup/green-core/react'
-import * as Part from '../parts'
+import * as Part from '.'
 
 interface Types {
   title: string

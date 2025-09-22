@@ -3,7 +3,7 @@
 
 import { usePathname } from 'next/navigation'
 
-import { getPageBySlug } from '../../design/layout/studio/data/studio.hooks'
+import { getPageBySlug } from '../../design/layout/studio/data/studio.data.hooks'
 import { Studio } from '../../design/layout/studio/layout.studio'
 
 export default function PlayLayout({

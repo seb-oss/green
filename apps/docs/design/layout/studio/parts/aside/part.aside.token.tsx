@@ -2,7 +2,7 @@
 'use client'
 
 import * as Core from '@sebgroup/green-core/react'
-import { TokenPage } from '../../data/studio.types'
+import { TokenPage } from '../../data/studio.data.types'
 
 interface TokenAsideProps {
   page: TokenPage

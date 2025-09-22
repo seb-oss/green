@@ -11,9 +11,9 @@ import {
   StudioPage,
   TokenItem,
   TokenPage,
-} from '../../data/studio.types'
-import { IconAside } from './aside.icon'
-import { TokenAside } from './aside.token'
+} from '../../data/studio.data.types'
+import { IconAside } from './part.aside.icon'
+import { TokenAside } from './part.aside.token'
 
 interface AsideProps {
   page: StudioPage

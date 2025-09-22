@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../../hooks'
-import { IconItem, IconPage } from '../../data/studio.types'
+import { IconItem, IconPage } from '../../data/studio.data.types'
 
 interface IconAsideProps {
   page: IconPage

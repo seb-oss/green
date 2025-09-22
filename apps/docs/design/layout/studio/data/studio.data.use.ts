@@ -23,7 +23,7 @@ import type {
   StudioPage,
   TokenGroup,
   TokenPage,
-} from './studio.types'
+} from './studio.data.types'
 
 export function useStudioPage(slug: string) {
   const { isLoaded, actions } = useContent()

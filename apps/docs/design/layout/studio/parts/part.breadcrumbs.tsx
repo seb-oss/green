@@ -2,7 +2,7 @@
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
 import { studioData } from '../data/studio.data'
-import { StudioPage } from '../data/studio.types'
+import { StudioPage } from '../data/studio.data.types'
 
 interface BreadcrumbItem {
   label: string
