@@ -17,10 +17,12 @@ import { TokenAside } from './part.aside.token'
 
 interface AsideProps {
   page: StudioPage
-  itemKey: string
+  KEY: string
+  level?: string
 }
 
-export default function Aside({ page, itemKey }: AsideProps) {
+// studio/parts/aside/aside.tsx
+export default function Aside({ page, KEY, level }: AsideProps) {
   const router = useRouter()
 
   // Get items based on page type with proper typing
@@ -31,15 +33,49 @@ export default function Aside({ page, itemKey }: AsideProps) {
     }
     if (page.type === 'token') {
       const tokenPage = page as TokenPage
-      return tokenPage.tokens?.flatMap((group) => group.items) || []
+      if (level) {
+        // If level is provided, only get items from that level
+        return (
+          tokenPage.tokens?.flatMap((group) =>
+            group.items.filter(
+              (item) => item.level?.toLowerCase() === level.toLowerCase(),
+            ),
+          ) || []
+        )
+      }
+      // If no level, get items from non-leveled groups
+      return (
+        tokenPage.tokens?.flatMap((group) =>
+          group.items.filter((item) => !item.level),
+        ) || []
+      )
     }
     return []
   }
 
   const allItems = getAllItems()
   const currentIndex = allItems.findIndex((item) =>
-    'component' in item ? item.key === itemKey : item.token === itemKey,
+    'component' in item ? item.key === KEY : item.token === KEY,
   )
+
+  // Helper function to create the correct path
+  const createPath = (item: IconItem | TokenItem) => {
+    if ('component' in item) {
+      return `${page.slug}/${item.key}`
+    }
+
+    // Handle token items
+    if (item.level) {
+      return `${page.slug}/${item.level.toLowerCase()}/${item.token}`
+    }
+
+    // For non-leveled tokens, find their group
+    const tokenPage = page as TokenPage
+    const group = tokenPage.tokens?.find((g) =>
+      g.items.some((i) => i.token === item.token),
+    )
+    return `${page.slug}/${group?.key}/${item.token}`
+  }
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -56,15 +92,14 @@ export default function Aside({ page, itemKey }: AsideProps) {
 
         const newItem = allItems[newIndex]
         if (newItem) {
-          const newKey = 'component' in newItem ? newItem.key : newItem.token
-          router.push(`${page.slug}/${newKey}`)
+          router.push(createPath(newItem))
         }
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [currentIndex, allItems, page.slug, router])
+  }, [currentIndex, allItems, page.slug, router, level])
 
   return (
     <Core.GdsFlex
@@ -78,13 +113,13 @@ export default function Aside({ page, itemKey }: AsideProps) {
       {page.type === 'asset' && (
         <IconAside
           page={page as IconPage}
-          itemKey={itemKey}
+          itemKey={KEY}
           currentIndex={currentIndex}
-          allItems={getAllItems() as IconItem[]} // Type assertion here is safe because we know it's an IconPage
+          allItems={getAllItems() as IconItem[]}
         />
       )}
       {page.type === 'token' && (
-        <TokenAside page={page as TokenPage} itemKey={itemKey} />
+        <TokenAside page={page as TokenPage} itemKey={KEY} level={level} />
       )}
     </Core.GdsFlex>
   )

@@ -246,7 +246,11 @@ export function Studio({
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
   const ROUT = useRouter()
-  const ITEM = PATH.split('/')[3]
+  // const ITEM = PATH.split('/')[3]
+  const PART = PATH.split('/')
+  const ITEM = PART[PART.length - 1]
+  const LEVEL = PART[PART.length - 2]?.toUpperCase()
+  const NARROW = PATH.split('/')[3] && PAGE && LEVEL
 
   return (
     <Core.GdsGrid
@@ -264,7 +268,7 @@ export function Studio({
         <Core.GdsGrid columns="12" align-items="flex-start">
           <Core.GdsCard
             flex-direction="column"
-            grid-column={ITEM && PAGE ? '1 / 10' : '1 / 13'}
+            grid-column={NARROW ? '1 / 10' : '1 / 13'}
             variant="secondary"
             className="studio-page"
             padding="0"
@@ -273,7 +277,7 @@ export function Studio({
           >
             {PAGE ? CONTENT(PAGE, ROUT, PATH) : children}
           </Core.GdsCard>
-          {ITEM && PAGE && <Part.Aside page={PAGE} itemKey={ITEM} />}
+          {ITEM && PAGE && <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />}
         </Core.GdsGrid>
       </Core.GdsFlex>
     </Core.GdsGrid>
