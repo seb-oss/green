@@ -4,12 +4,16 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
-import { getPageBySlug, studioData } from './data/studio.data'
-import { ContentGroup, ContentItem, StudioPage } from './data/studio.types'
+import {
+  IconGroup,
+  IconPage,
+  StudioPage,
+  TokenGroup,
+  TokenPage,
+} from './data/studio.types'
 import { useStudioPage } from './data/studio.use'
 import * as Interactive from './interactive'
 import * as Part from './parts'
-import * as Table from './table'
 import * as Tool from './tools'
 
 import './layout.studio.css'
@@ -67,14 +71,17 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
     )
   }
 
-  if (!page?.content) return null
+  // if (!page?.content) return null
 
   switch (page.type) {
-    case 'asset':
+    case 'asset': {
+      const iconPage = page as IconPage
+      if (!iconPage.icons) return null
+
       // Icons Grid View
       return (
         <Core.GdsFlex flex-direction="column" gap="6xl">
-          {page.content.map((group: ContentGroup) => (
+          {iconPage.icons.map((group: IconGroup) => (
             <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
               {group.title && (
                 <Core.GdsFlex
@@ -91,7 +98,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                 </Core.GdsFlex>
               )}
               <Core.GdsGrid columns={ACTIVE ? '4' : '5'} gap="l">
-                {group.items.map((item: ContentItem) => (
+                {group.items.map((item) => (
                   <Core.GdsCard
                     padding="l"
                     key={item.key}
@@ -127,12 +134,16 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
           ))}
         </Core.GdsFlex>
       )
+    }
 
-    case 'token':
+    case 'token': {
+      const tokenPage = page as TokenPage
+      if (!tokenPage.tokens) return null
+
       // Tokens View
       return (
         <Core.GdsFlex flex-direction="column" gap="2xl">
-          {page.content.map((group: ContentGroup) => (
+          {tokenPage.tokens.map((group: TokenGroup) => (
             <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
               <Core.GdsFlex flex-direction="column" gap="3xs">
                 <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
@@ -167,6 +178,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
           ))}
         </Core.GdsFlex>
       )
+    }
 
     default:
       return null

@@ -1,9 +1,4 @@
-import {
-  ContentGroup,
-  ContentItem,
-  StudioCategory,
-  StudioPage,
-} from './studio.types'
+import { StudioCategory, StudioPage } from './studio.types'
 
 export const studioData: StudioCategory[] = [
   {
@@ -47,7 +42,6 @@ export const studioData: StudioCategory[] = [
             component: 'Migration',
           },
         ],
-        content: [],
       },
       {
         key: 'compose',
@@ -76,7 +70,6 @@ export const studioData: StudioCategory[] = [
         description: 'Color palette and usage guidelines',
         icon: 'IconBrush',
         category: 'tokens',
-        content: [],
       },
       {
         key: 'spacing',
@@ -87,7 +80,6 @@ export const studioData: StudioCategory[] = [
         description: 'Spacing scales and layout metrics',
         icon: 'IconFullscreen',
         category: 'tokens',
-        content: [],
       },
       {
         key: 'typography',
@@ -98,7 +90,6 @@ export const studioData: StudioCategory[] = [
         description: 'Font styles and text treatments',
         icon: 'IconTextEdit',
         category: 'tokens',
-        content: [],
       },
       {
         key: 'radius',
@@ -119,7 +110,6 @@ export const studioData: StudioCategory[] = [
             component: 'Radius',
           },
         ],
-        content: [],
       },
       {
         key: 'shadows',
@@ -130,7 +120,6 @@ export const studioData: StudioCategory[] = [
         description: 'Elevation and shadow styles',
         icon: 'IconSolar',
         category: 'tokens',
-        content: [],
       },
       {
         key: 'viewport',
@@ -141,7 +130,6 @@ export const studioData: StudioCategory[] = [
         description: 'Responsive design breakpoints',
         icon: 'IconDevices',
         category: 'tokens',
-        content: [],
       },
       {
         key: 'motion',
@@ -152,35 +140,7 @@ export const studioData: StudioCategory[] = [
         description: 'Animation and transition tokens',
         icon: 'IconZap',
         category: 'tokens',
-        content: [],
       },
     ],
   },
 ]
-
-// Utility functions
-export const getPageBySlug = (slug: string): StudioPage | undefined => {
-  return studioData
-    .flatMap((category) => category.pages)
-    .find((page) => page.slug === slug)
-}
-
-export const getCategoryByKey = (key: string): StudioCategory | undefined => {
-  return studioData.find((category) => category.key === key)
-}
-
-export const getContentGroupByKey = (
-  page: StudioPage,
-  groupKey: string,
-): ContentGroup | undefined => {
-  return page.content?.find((group) => group.key === groupKey)
-}
-
-export const getContentItemByKey = (
-  page: StudioPage,
-  itemKey: string,
-): ContentItem | undefined => {
-  return page.content
-    ?.flatMap((group) => group.items)
-    .find((item) => item.key === itemKey)
-}

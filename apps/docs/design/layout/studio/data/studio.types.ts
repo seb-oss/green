@@ -1,23 +1,7 @@
+// studio.types.ts
 import * as Core from '@sebgroup/green-core/react'
-import { IconData } from '../../../../settings/content/types'
 
-// Unified content structure
-export interface ContentItem {
-  key: string
-  name: string
-  value: string
-  preview?: string
-  description: string
-  cssVariable?: string
-  component?: string
-  iconData?: IconData
-}
-
-export interface IconContentGroup extends ContentGroup {
-  type: 'icon'
-  icons: { [key: string]: IconData }
-}
-
+// Base interfaces
 export interface Interactive {
   key: string
   slug: string
@@ -26,39 +10,23 @@ export interface Interactive {
   component: string
 }
 
-export interface ContentGroup {
+// Base page interface
+export interface BasePage {
   key: string
-  title: string
-  description?: string
-  items: ContentItem[]
-}
-
-export interface StudioPage {
-  key: string
-  type: string // 'token' | 'asset' | 'tool'
+  type: 'landing' | 'tool' | 'asset' | 'token'
   slug: string
   label: string
   title: string
   description: string
   icon: keyof typeof Core
   category: string
-  content?: ContentGroup[]
-  component?: string
   pages?: Interactive[]
-  icons?: { [key: string]: IconData }
+  component?: string
 }
 
-export interface StudioCategory {
-  key: string
-  title: string
-  description?: string
-  pages: StudioPage[]
-}
-
-// Token stuff
-
+// Token specific interfaces
 export interface TokenItem {
-  level?: string // Optional, only for colors
+  level?: string
   token: string
   variable: string
   value: string
@@ -69,4 +37,79 @@ export interface TokenGroup {
   title: string
   description?: string
   items: TokenItem[]
+}
+
+// Icon specific interfaces
+export interface IconItem {
+  key: string
+  name: string
+  component: string
+  value: string
+}
+
+export interface IconGroup {
+  key: string
+  title: string
+  description?: string
+  items: IconItem[]
+}
+
+// Page type interfaces
+export interface TokenPage extends BasePage {
+  type: 'token'
+  tokens?: TokenGroup[]
+}
+
+export interface IconPage extends BasePage {
+  type: 'asset'
+  icons?: IconGroup[]
+}
+
+export interface ToolPage extends BasePage {
+  type: 'tool'
+}
+
+export interface LandingPage extends BasePage {
+  type: 'landing'
+}
+
+// Combined types
+export type StudioPage = TokenPage | IconPage | ToolPage | LandingPage
+
+export interface StudioCategory {
+  key: string
+  title: string
+  description?: string
+  pages: StudioPage[]
+}
+
+//  Tokens
+export interface ColorToken {
+  token: string
+  variable: string
+  value: string
+}
+
+export interface ColorTokens {
+  background: {
+    L1: ColorToken[]
+    L2: ColorToken[]
+    L3: ColorToken[]
+  }
+  border: ColorToken[]
+  content: ColorToken[]
+  state: ColorToken[]
+}
+
+// Motion tokens
+
+export interface MotionToken {
+  token: string
+  variable: string
+  value: string
+}
+
+export interface MotionTokens {
+  easing: MotionToken[]
+  duration: MotionToken[]
 }

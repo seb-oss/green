@@ -1,10 +1,8 @@
 // page.tsx
 import { Metadata } from 'next'
 
-import {
-  getPageBySlug,
-  studioData,
-} from '../../../design/layout/studio/data/studio.data'
+import { studioData } from '../../../design/layout/studio/data/studio.data'
+import { getPageBySlug } from '../../../design/layout/studio/data/studio.hooks'
 
 // Function to fetch icons from API during build time
 async function fetchIconList() {
@@ -68,15 +66,15 @@ export async function generateStaticParams() {
       }
 
       // For other pages with content, use the existing structure
-      else if (page.content) {
-        page.content.forEach((group) => {
-          group.items.forEach((item) => {
-            paths.push({
-              slug: [page.slug.replace('/studio/', ''), item.key],
-            })
-          })
-        })
-      }
+      // else if (page.content) {
+      //   page.content.forEach((group) => {
+      //     group.items.forEach((item) => {
+      //       paths.push({
+      //         slug: [page.slug.replace('/studio/', ''), item.key],
+      //       })
+      //     })
+      //   })
+      // }
     })
   })
 

@@ -3,7 +3,7 @@
 
 import { useMemo } from 'react'
 
-// Import your generated token JSON files
+// Import token JSONs
 import colorsDarkJson from '../../../../../../dist/libs/tokens/studio/studio.colors.dark.json'
 import colorsLightJson from '../../../../../../dist/libs/tokens/studio/studio.colors.light.json'
 import motionJson from '../../../../../../dist/libs/tokens/studio/studio.motion.json'
@@ -15,7 +15,15 @@ import viewportJson from '../../../../../../dist/libs/tokens/studio/studio.viewp
 import { useContent } from '../../../../settings/content'
 import { studioData } from './studio.data'
 
-import type { StudioPage } from './studio.types'
+import type {
+  ColorTokens,
+  IconGroup,
+  IconPage,
+  MotionTokens,
+  StudioPage,
+  TokenGroup,
+  TokenPage,
+} from './studio.types'
 
 export function useStudioPage(slug: string) {
   const { isLoaded, actions } = useContent()
@@ -27,112 +35,96 @@ export function useStudioPage(slug: string) {
 
     if (!basePage || !isLoaded) return basePage
 
-    // Handle icons page
-    if (basePage.key === 'icons') {
+    // Handle icons
+    if (basePage.type === 'asset' && basePage.key === 'icons') {
       const iconComponent = actions.getComponent('icon')
       const icons = iconComponent?.icons || {}
 
-      const dynamicPage: StudioPage = {
-        ...basePage,
-        content: Array.from(
-          new Set(
-            Object.values(icons)
-              .map((icon) => icon.meta.categories)
-              .flat(),
-          ),
-        )
-          .sort()
-          .map((category) => ({
-            key: category,
-            title: category.charAt(0).toUpperCase() + category.slice(1),
-            items: Object.values(icons)
-              .filter((icon) => icon.meta.categories.includes(category))
-              .map((icon) => ({
-                key: icon.id,
-                name: icon.displayName,
-                component: icon.reactName,
-                description: icon.meta.description,
-                value: icon.variants.regular,
-                preview: icon.variants.regular,
-              }))
-              .sort((a, b) => a.name.localeCompare(b.name)),
-          })),
-      }
+      const iconGroups: IconGroup[] = Array.from(
+        new Set(
+          Object.values(icons)
+            .map((icon) => icon.meta.categories)
+            .flat(),
+        ),
+      )
+        .sort()
+        .map((category) => ({
+          key: category,
+          title: category.charAt(0).toUpperCase() + category.slice(1),
+          items: Object.values(icons)
+            .filter((icon) => icon.meta.categories.includes(category))
+            .map((icon) => ({
+              key: icon.id,
+              name: icon.displayName,
+              component: icon.reactName,
+              value: icon.variants.regular,
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name)),
+        }))
 
-      return dynamicPage
+      return {
+        ...basePage,
+        icons: iconGroups,
+      } as IconPage
     }
 
+    // Handle tokens
     if (basePage.type === 'token') {
-      switch (basePage.key) {
+      const page = basePage as TokenPage
+      const tokenGroups: TokenGroup[] = []
+
+      switch (page.key) {
         case 'colors': {
-          return {
-            ...basePage,
-            content: [
-              {
-                key: 'background',
-                title: 'Background',
-                description: 'Background color tokens',
-                items: [
-                  ...colorsLightJson.background.L1.map((token) => ({
-                    level: 'L1',
-                    token: token.token,
-                    variable: token.variable,
-                    value: token.value,
-                  })),
-                  ...colorsLightJson.background.L2.map((token) => ({
-                    level: 'L2',
-                    token: token.token,
-                    variable: token.variable,
-                    value: token.value,
-                  })),
-                  ...colorsLightJson.background.L3.map((token) => ({
-                    level: 'L3',
-                    token: token.token,
-                    variable: token.variable,
-                    value: token.value,
-                  })),
-                ],
-              },
-              {
-                key: 'content',
-                title: 'Content',
-                description: 'Content color tokens',
-                items: colorsLightJson.content.map((token) => ({
-                  token: token.token,
-                  variable: token.variable,
-                  value: token.value,
-                })),
-              },
-              {
-                key: 'border',
-                title: 'Border',
-                description: 'Content color tokens',
-                items: colorsLightJson.content.map((token) => ({
-                  token: token.token,
-                  variable: token.variable,
-                  value: token.value,
-                })),
-              },
-              {
-                key: 'state',
-                title: 'State',
-                description: 'Content color tokens',
-                items: colorsLightJson.content.map((token) => ({
-                  token: token.token,
-                  variable: token.variable,
-                  value: token.value,
-                })),
-              },
-              // Add other color categories similarly
+          // Background colors with levels
+          tokenGroups.push({
+            key: 'background',
+            title: 'Background',
+            description: 'Background color tokens',
+            items: [
+              ...colorsLightJson.background.L1.map((token) => ({
+                level: 'L1',
+                token: token.token,
+                variable: token.variable,
+                value: token.value,
+              })),
+              ...colorsLightJson.background.L2.map((token) => ({
+                level: 'L2',
+                token: token.token,
+                variable: token.variable,
+                value: token.value,
+              })),
+              ...colorsLightJson.background.L3.map((token) => ({
+                level: 'L3',
+                token: token.token,
+                variable: token.variable,
+                value: token.value,
+              })),
             ],
-          }
+          })
+
+          // Other color categories
+          const colorCategories = ['content', 'border', 'state'] as const
+          colorCategories.forEach((category) => {
+            tokenGroups.push({
+              key: category,
+              title: category.charAt(0).toUpperCase() + category.slice(1),
+              description: `${category} color tokens`,
+              items: (colorsLightJson as ColorTokens)[category].map(
+                (token) => ({
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                }),
+              ),
+            })
+          })
+          break
         }
 
         case 'typography': {
-          return {
-            ...basePage,
-            content: Object.entries(typographyJson.typography).map(
-              ([group, tokens]) => ({
+          Object.entries(typographyJson.typography).forEach(
+            ([group, tokens]) => {
+              tokenGroups.push({
                 key: group,
                 title: group.charAt(0).toUpperCase() + group.slice(1),
                 description: `${group} typography styles`,
@@ -143,125 +135,78 @@ export function useStudioPage(slug: string) {
                     value: `${value['font-size']}/${value['line-height']}/${value['font-weight']}`,
                   }),
                 ),
-              }),
-            ),
-          }
+              })
+            },
+          )
+          break
         }
 
-        case 'spacing': {
-          return {
-            ...basePage,
-            content: [
-              {
-                key: 'spacing',
-                title: 'Tokens',
-                description: 'Core spacing values',
-                items: Object.entries(spacingJson.spacing).map(
-                  ([key, value]: [string, any]) => ({
-                    token: key,
-                    variable: value.variable,
-                    value: value.value,
-                  }),
-                ),
-              },
-            ],
-          }
+        case 'spacing':
+        case 'radius':
+        case 'viewport': {
+          const tokenData = {
+            spacing: spacingJson.spacing,
+            radius: radiusJson.radius,
+            viewport: viewportJson.viewport,
+          }[page.key]
+
+          tokenGroups.push({
+            key: page.key,
+            title: 'Tokens',
+            description: `${page.key} values`,
+            items: Object.entries(tokenData).map(
+              ([key, value]: [string, any]) => ({
+                token: key,
+                variable: value.variable,
+                value: value.value,
+              }),
+            ),
+          })
+          break
         }
 
         case 'shadows': {
-          return {
-            ...basePage,
-            content: [
-              {
-                key: 'shadows',
-                title: 'Tokens',
-                description: 'Elevation shadows',
-                items: Object.entries(shadowsJson.shadows).map(
-                  ([key, value]: [string, any]) => ({
-                    token: key,
-                    variable: value.variable,
-                    value: value.variable,
-                  }),
-                ),
-              },
-            ],
-          }
-        }
-
-        case 'radius': {
-          return {
-            ...basePage,
-            content: [
-              {
-                key: 'radius',
-                title: 'Tokens',
-                description: 'Corner radius values',
-                items: Object.entries(radiusJson.radius).map(
-                  ([key, value]: [string, any]) => ({
-                    token: key,
-                    variable: value.variable,
-                    value: value.value,
-                  }),
-                ),
-              },
-            ],
-          }
-        }
-
-        case 'viewport': {
-          return {
-            ...basePage,
-            content: [
-              {
-                key: 'viewport',
-                title: 'Viewport Breakpoints',
-                description: 'Screen size breakpoints',
-                items: Object.entries(viewportJson.viewport).map(
-                  ([key, value]: [string, any]) => ({
-                    token: key,
-                    variable: value.variable,
-                    value: value.value,
-                  }),
-                ),
-              },
-            ],
-          }
+          tokenGroups.push({
+            key: 'shadows',
+            title: 'Tokens',
+            description: 'Shadow values',
+            items: Object.entries(shadowsJson.shadows).map(
+              ([key, value]: [string, any]) => ({
+                token: key,
+                variable: value.variable,
+                value: value.variable,
+              }),
+            ),
+          })
+          break
         }
 
         case 'motion': {
-          return {
-            ...basePage,
-            content: [
-              {
-                key: 'easing',
-                title: 'Easing Functions',
-                description: 'Animation easing curves',
-                items: Object.entries(motionJson.easing).map(
-                  ([key, value]: [string, any]) => ({
-                    token: key,
-                    variable: value.variable,
-                    value: value.value,
-                  }),
-                ),
-              },
-              {
-                key: 'duration',
-                title: 'Duration',
-                description: 'Animation durations',
-                items: Object.entries(motionJson.duration || {}).map(
-                  ([key, value]: [string, any]) => ({
-                    token: key,
-                    variable: value.variable,
-                    value: value.value,
-                  }),
-                ),
-              },
-            ],
-          }
-        }
+          const motionCategories = ['easing', 'duration'] as const
+          type MotionCategory = (typeof motionCategories)[number]
 
-        default:
-          return basePage
+          motionCategories.forEach((category: MotionCategory) => {
+            const tokens = motionJson[category]
+            if (tokens) {
+              tokenGroups.push({
+                key: category,
+                title: category.charAt(0).toUpperCase() + category.slice(1),
+                description: `${category} tokens`,
+                items: tokens.map((token) => ({
+                  token: token.token,
+                  variable: token.variable,
+                  value: token.value,
+                })),
+              })
+            }
+          })
+          break
+        }
+      }
+
+      return {
+        ...page,
+        tokens: tokenGroups,
       }
     }
 

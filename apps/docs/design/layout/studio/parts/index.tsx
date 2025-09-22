@@ -1,4 +1,4 @@
-export { default as Aside } from './studio.aside'
+export { default as Aside } from './aside/aside.core'
 export { default as Sidebar } from './studio.sidebar'
 export { default as Meta } from './studio.meta'
 export { default as Breadcrumbs } from './studio.breadcrumbs'

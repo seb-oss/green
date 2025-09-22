@@ -1,3 +1,4 @@
+```tsx
 // studio/parts/aside.tsx
 'use client'
 
@@ -6,20 +7,40 @@ import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../hooks'
-import { Link } from '../../../atoms/link/link'
-import { StudioPage } from '../data/studio.types'
+import { IconItem, IconPage, StudioPage, TokenPage } from '../data/studio.types'
 
-interface AsideProps {
+export default function Aside({
+  page,
+  itemKey,
+}: {
   page: StudioPage
   itemKey: string
-}
-
-export default function Aside({ page, itemKey }: AsideProps) {
+}) {
   const router = useRouter()
-  const allItems = page.content?.flatMap((group) => group.items) || []
-  const currentItem = allItems.find((item) => item.key === itemKey)
-  const currentIndex = allItems.findIndex((item) => item.key === itemKey)
   const [activeTab, setActiveTab] = useState<'code' | 'download'>('code')
+  // const allItems = page.content?.flatMap((group) => group.items) || []
+  // const currentItem = allItems.find((item) => item.key === itemKey)
+  // const currentIndex = allItems.findIndex((item) => item.key === itemKey)
+
+  // Get items based on page type
+  const getAllItems = () => {
+    switch (page.type) {
+      case 'asset':
+        return (page as IconPage).icons?.flatMap((group) => group.items) || []
+      case 'token':
+        return (page as TokenPage).tokens?.flatMap((group) => group.items) || []
+      default:
+        return []
+    }
+  }
+
+  const allItems = getAllItems()
+  const currentItem = allItems.find((item) =>
+    'component' in item ? item.key === itemKey : item.token === itemKey,
+  )
+  const currentIndex = allItems.findIndex((item) =>
+    'component' in item ? item.key === itemKey : item.token === itemKey,
+  )
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -36,7 +57,8 @@ export default function Aside({ page, itemKey }: AsideProps) {
 
         const newItem = allItems[newIndex]
         if (newItem) {
-          router.push(`${page.slug}/${newItem.key}`)
+          const newKey = 'component' in newItem ? newItem.key : newItem.token
+          router.push(`${page.slug}/${newKey}`)
         }
       }
     }
@@ -57,6 +79,8 @@ export default function Aside({ page, itemKey }: AsideProps) {
   }
 
   const TabContent = () => {
+    if (page.type !== 'asset') return null
+    const iconItem = currentItem as IconItem
     switch (activeTab) {
       case 'code':
         return (
@@ -83,16 +107,12 @@ export default function Aside({ page, itemKey }: AsideProps) {
                   variant="primary"
                   gap="0"
                 >
-                  <Core.GdsText font="detail-regular-xs">
-                    {`<Icon${currentItem.key}`}
-                  </Core.GdsText>
+                  <Core.GdsText font="detail-regular-xs">icon</Core.GdsText>
                   <Core.GdsButton
                     rank="tertiary"
                     size="small"
                     onClick={() => {
-                      navigator.clipboard.writeText(
-                        `import '@sebgroup/green-core/${currentItem.key}'`,
-                      )
+                      navigator.clipboard.writeText('Test')
                     }}
                   >
                     <Core.IconCopy size="s" />
@@ -114,25 +134,7 @@ export default function Aside({ page, itemKey }: AsideProps) {
                     width="100%"
                   >
                     <Core.GdsText font="detail-regular-xs">React</Core.GdsText>
-                    <Core.GdsButton
-                      rank="tertiary"
-                      size="small"
-                      onClick={() => {
-                        navigator.clipboard.writeText(
-                          `import { ${currentItem.component} } from '@sebgroup/green-react'`,
-                        )
-                      }}
-                    >
-                      <Core.IconCopy size="s" />
-                    </Core.GdsButton>
                   </Core.GdsFlex>
-                  <Core.GdsText
-                    font="detail-regular-xs"
-                    font-family="mono"
-                    color="neutral-02"
-                  >
-                    {`import { ${currentItem.component} } ...`}
-                  </Core.GdsText>
                 </Core.GdsCard>
               </Core.GdsDetails>
               <Core.GdsDetails summary="Angular" size="small" name="frameworks">
@@ -156,9 +158,7 @@ export default function Aside({ page, itemKey }: AsideProps) {
                       rank="tertiary"
                       size="small"
                       onClick={() => {
-                        navigator.clipboard.writeText(
-                          `import '@sebgroup/green-core/${currentItem.key}'`,
-                        )
+                        navigator.clipboard.writeText('test')
                       }}
                     >
                       <Core.IconCopy size="s" />
