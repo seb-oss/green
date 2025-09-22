@@ -52,19 +52,16 @@ const Token = ({
 
   return (
     <Core.GdsFlex
-      align-items="center"
       gap="s"
+      align-items="center"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      border-style="solid"
+      border-width="0 0 5xs 0"
+      border-color="subtle-01"
+      padding="0 0 0 xl"
     >
-      <Core.GdsGrid
-        columns="4"
-        align-items="center"
-        border-style="solid"
-        border-width="0 0 5xs 0"
-        border-color="subtle-01"
-        padding="s 0"
-      >
+      <Core.GdsGrid columns="4" gap="s" align-items="center" padding="s 0">
         <Core.GdsText>{item.token}</Core.GdsText>
         <Preview type="color" token={item} />
         {item.dark && (
@@ -77,22 +74,27 @@ const Token = ({
             }}
           />
         )}
-        <Part.Copy token={item.token} />
+        <Core.GdsFlex align-items="center" gap="s">
+          <Part.Copy token={item.token} />
+          <Core.GdsFlex width="3xl">
+            {isHovered && (
+              <Core.GdsButton
+                onClick={() => {
+                  const path = item.level
+                    ? `${pageSlug}/${item.level.toLowerCase()}/${item.token}`
+                    : `${pageSlug}/${group.key}/${item.token}`
+                  router.push(path)
+                }}
+                size="small"
+                rank="tertiary"
+                className="studio-cta"
+              >
+                <Core.IconChevronRight />
+              </Core.GdsButton>
+            )}
+          </Core.GdsFlex>
+        </Core.GdsFlex>
       </Core.GdsGrid>
-      {isHovered && (
-        <Core.GdsButton
-          onClick={() => {
-            const path = item.level
-              ? `${pageSlug}/${item.level.toLowerCase()}/${item.token}`
-              : `${pageSlug}/${group.key}/${item.token}`
-            router.push(path)
-          }}
-          size="small"
-          rank="tertiary"
-        >
-          <Core.IconChevronRight />
-        </Core.GdsButton>
-      )}
     </Core.GdsFlex>
   )
 }
@@ -247,6 +249,13 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                 )}
               </Core.GdsFlex>
               <Core.GdsFlex flex-direction="column" gap="0">
+                <Core.GdsCard>
+                  <Core.GdsGrid columns="4" gap="s">
+                    <Core.GdsText>Token</Core.GdsText>
+                    <Core.GdsText>Light</Core.GdsText>
+                    <Core.GdsText>Dark</Core.GdsText>
+                  </Core.GdsGrid>
+                </Core.GdsCard>
                 {group.items.map((item) => (
                   <Token
                     key={item.token}

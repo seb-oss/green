@@ -66,3 +66,14 @@
 .icon-card {
   cursor: pointer;
 }
+
+/* .studio-cta {
+  transition: var(--s);
+  position: absolute;
+  right: -20px;
+
+  @starting-style {
+    opacity: 0;
+    translate: -10px 0;
+  }
+} */

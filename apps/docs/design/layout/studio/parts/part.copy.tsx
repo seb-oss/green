@@ -30,6 +30,7 @@ export default function Copy({ token }: { token?: string }) {
       padding="2xs 2xs 2xs m"
       height="max-content"
       variant={copied ? 'positive' : 'secondary'}
+      flex="1"
     >
       <Core.GdsText>{copied ? 'Copied!' : token}</Core.GdsText>
       <Core.GdsButton

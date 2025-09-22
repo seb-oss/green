@@ -14,10 +14,10 @@ export default function StudioSidebar({ current }: { current?: string }) {
       grid-column="1 / 6"
       padding="0"
       border-radius="m"
-      className="studio-sidebar"
       position="sticky"
-      inset="40px 0 0 0"
+      inset="32px 0 0 0"
       height="90vh"
+      className="studio-sidebar"
     >
       <Core.GdsFlex align-items="center" gap="m" padding="xl l 0 xl">
         <Link href="/studio">
