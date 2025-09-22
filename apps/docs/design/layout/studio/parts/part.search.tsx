@@ -1,6 +1,29 @@
+// studio/parts/part.search.tsx
+import { useRouter } from 'next/navigation'
+
 import * as Core from '@sebgroup/green-core/react'
+import { useSearch } from '../context/search.context'
 
 export default function StudioSearch({ page }: { page?: string }) {
+  const router = useRouter()
+  const { query, category, setQuery, setCategory, getCategories } = useSearch()
+  const categories = page ? getCategories(page) : []
+
+  const handleSearch = (value: string) => {
+    setQuery(value)
+    // Search just updates the query, no route change
+  }
+
+  const handleCategoryChange = (e: Event) => {
+    const target = e.target as HTMLSelectElement
+    setCategory(target.value)
+    if (target.value) {
+      router.push(`/studio/${page}/${target.value.toLowerCase()}`)
+    } else {
+      router.push(`/studio/${page}`)
+    }
+  }
+
   return (
     <Core.GdsFlex
       align-items="center"
@@ -8,37 +31,32 @@ export default function StudioSearch({ page }: { page?: string }) {
       className="studio-search"
     >
       <Core.GdsFlex align-items="center" width="100%" gap="s">
-        <Core.GdsInput width="400px" plain>
+        <Core.GdsInput
+          width="400px"
+          plain
+          value={query}
+          onInput={(e) => handleSearch((e.target as HTMLInputElement).value)}
+          clearable
+        >
           <Core.IconMagnifyingGlass slot="lead" size="m" />
         </Core.GdsInput>
-        <Core.GdsFlex>
-          <Core.GdsDropdown plain>
-            <Core.GdsOption value="">Categories</Core.GdsOption>
-          </Core.GdsDropdown>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
-      {false && page === 'icons' && (
-        <Core.GdsFlex align-items="center" gap="m">
-          <Core.GdsFlex width="120px">
-            <Core.GdsDropdown plain size="small">
-              <Core.IconSettingsSliderHor slot="lead" />
-              <Core.GdsOption value="">Size</Core.GdsOption>
+        {categories.length > 0 && (
+          <Core.GdsFlex>
+            <Core.GdsDropdown
+              plain
+              value={category}
+              onchange={handleCategoryChange}
+            >
+              <Core.GdsOption value="">All Categories</Core.GdsOption>
+              {categories.map((cat) => (
+                <Core.GdsOption key={cat} value={cat}>
+                  {cat}
+                </Core.GdsOption>
+              ))}
             </Core.GdsDropdown>
           </Core.GdsFlex>
-          <Core.GdsSegmentedControl
-            value="regular"
-            size="small"
-            width="max-content"
-          >
-            <Core.GdsSegment value="regular">
-              <Core.GdsText font="body-book-s">Regular</Core.GdsText>
-            </Core.GdsSegment>
-            <Core.GdsSegment value="solid">
-              <Core.GdsText font="body-book-s">Solid</Core.GdsText>
-            </Core.GdsSegment>
-          </Core.GdsSegmentedControl>
-        </Core.GdsFlex>
-      )}
+        )}
+      </Core.GdsFlex>
     </Core.GdsFlex>
   )
 }

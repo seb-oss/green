@@ -3,6 +3,7 @@
 
 import { usePathname } from 'next/navigation'
 
+import { SearchProvider } from '../../design/layout/studio/context/search.context'
 import { getPageBySlug } from '../../design/layout/studio/data/studio.data.hooks'
 import { Studio } from '../../design/layout/studio/layout.studio'
 
@@ -18,12 +19,14 @@ export default function PlayLayout({
   if (!ACTIVE) return null
 
   return (
-    <Studio
-      page={ACTIVE.key}
-      title={ACTIVE.label}
-      description={ACTIVE.description}
-    >
-      {children}
-    </Studio>
+    <SearchProvider>
+      <Studio
+        page={ACTIVE.key}
+        title={ACTIVE.label}
+        description={ACTIVE.description}
+      >
+        {children}
+      </Studio>
+    </SearchProvider>
   )
 }

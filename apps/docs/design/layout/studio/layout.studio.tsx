@@ -22,6 +22,9 @@ import * as Tool from './tools'
 
 import './layout.studio.css'
 
+import { SearchProvider, useSearch } from './context/search.context'
+import { useSearchContent } from './data/studio.data.hooks'
+
 interface StudioProps {
   page: string
   children?: React.ReactNode
@@ -318,6 +321,37 @@ export function Studio({
   const LEVEL = PART[PART.length - 2]?.toUpperCase()
   const NARROW = PATH.split('/')[3] && PAGE && LEVEL
 
+  const filteredPage = PAGE ? useSearchContent(PAGE) : null
+  const { query } = useSearch()
+
+  const NoResults = () => (
+    <Core.GdsCard
+      padding="xl"
+      align-items="center"
+      justify-content="center"
+      block-size="58vh"
+    >
+      <Core.GdsText>
+        No results found for "{query}" in {PAGE?.label}
+      </Core.GdsText>
+    </Core.GdsCard>
+  )
+
+  const hasSearchResults = (page: StudioPage | null): boolean => {
+    if (!page) return false
+
+    switch (page.type) {
+      case 'asset':
+        return !!page.icons && page.icons.length > 0
+      case 'token':
+        return !!page.tokens && page.tokens.length > 0
+      default:
+        return false
+    }
+  }
+
+  const hasResults = hasSearchResults(filteredPage)
+
   return (
     <Core.GdsGrid
       columns="24"
@@ -341,7 +375,15 @@ export function Studio({
             border="none"
             background="none"
           >
-            {PAGE ? CONTENT(PAGE, ROUT, PATH) : children}
+            {query && !hasResults ? (
+              <NoResults />
+            ) : filteredPage ? (
+              CONTENT(filteredPage, ROUT, PATH)
+            ) : (
+              children
+            )}
+
+            {/* {PAGE ? CONTENT(PAGE, ROUT, PATH) : children} */}
           </Core.GdsCard>
           {ITEM && PAGE && <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />}
         </Core.GdsGrid>
