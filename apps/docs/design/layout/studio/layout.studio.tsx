@@ -144,7 +144,11 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
       return (
         <Core.GdsFlex flex-direction="column" gap="2xl">
           {tokenPage.tokens.map((group: TokenGroup) => (
-            <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
+            <Core.GdsFlex
+              key={group.key + group.items}
+              flex-direction="column"
+              gap="l"
+            >
               <Core.GdsFlex flex-direction="column" gap="3xs">
                 <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
                 {group.description && (
@@ -156,7 +160,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
               <Core.GdsFlex flex-direction="column" gap="m">
                 {group.items.map((item) => (
                   <Core.GdsCard
-                    key={item.token}
+                    key={item.token + item.level}
                     padding="l"
                     variant="secondary"
                     border-radius="m"
