@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -15,13 +16,11 @@ import {
 import { useStudioPage } from './data/studio.data.use'
 import * as Interactive from './interactive'
 import * as Part from './parts'
+import { Preview } from './parts/preview'
+import { PreviewType } from './parts/preview/part.preview.types'
 import * as Tool from './tools'
 
 import './layout.studio.css'
-
-import { useState } from 'react'
-
-import { Preview } from './parts/preview'
 
 interface StudioProps {
   page: string
@@ -42,7 +41,9 @@ const Token = ({
   item,
   group,
   pageSlug,
+  type,
 }: {
+  type: PreviewType
   item: TokenItem
   group: TokenGroup
   pageSlug: string
@@ -63,10 +64,11 @@ const Token = ({
     >
       <Core.GdsGrid columns="4" gap="s" align-items="center" padding="s 0">
         <Core.GdsText>{item.token}</Core.GdsText>
-        <Preview type="color" token={item} />
+        {type !== 'colors' && item.value}
+        <Preview type={type} token={item} />
         {item.dark && (
           <Preview
-            type="color"
+            type={type}
             token={{
               token: item.token,
               variable: item.variable,
@@ -250,11 +252,20 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
               </Core.GdsFlex>
               <Core.GdsFlex flex-direction="column" gap="0">
                 <Core.GdsCard>
-                  <Core.GdsGrid columns="4" gap="s">
-                    <Core.GdsText>Token</Core.GdsText>
-                    <Core.GdsText>Light</Core.GdsText>
-                    <Core.GdsText>Dark</Core.GdsText>
-                  </Core.GdsGrid>
+                  {page.key === 'colors' ? (
+                    <Core.GdsGrid columns="4" gap="s">
+                      <Core.GdsText>Token</Core.GdsText>
+                      <Core.GdsText>Light</Core.GdsText>
+                      <Core.GdsText>Dark</Core.GdsText>
+                    </Core.GdsGrid>
+                  ) : (
+                    <Core.GdsGrid columns="4" gap="s">
+                      <Core.GdsText>Token</Core.GdsText>
+                      <Core.GdsText>Value</Core.GdsText>
+                      <Core.GdsText></Core.GdsText>
+                      <Core.GdsText></Core.GdsText>
+                    </Core.GdsGrid>
+                  )}
                 </Core.GdsCard>
                 {group.items.map((item) => (
                   <Token
@@ -262,6 +273,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                     item={item}
                     group={group}
                     pageSlug={page.slug}
+                    type={page.key as PreviewType}
                   />
                 ))}
               </Core.GdsFlex>

@@ -3,11 +3,11 @@ import { PreviewProps } from './part.preview.types'
 
 export default function Preview({ type, token }: PreviewProps) {
   const Previews = {
-    color: Component.Color,
-    space: Component.Space,
+    colors: Component.Colors,
+    spacing: Component.Spacing,
     radius: Component.Radius,
     typography: Component.Typography,
-    shadow: Component.Shadow,
+    shadows: Component.Shadows,
     motion: Component.Motion,
     viewport: Component.Viewport,
   }[type]

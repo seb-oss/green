@@ -3,18 +3,15 @@ import { ColorPreviewProps } from '../part.preview.types'
 
 export default function Radius({ token }: ColorPreviewProps) {
   return (
-    <Core.GdsFlex flex-direction="column" gap="s">
-      <Core.GdsFlex gap="m">
-        <div
-          style={{
-            background: token.value,
-            width: '100px',
-            height: '100px',
-            borderRadius: 'var(--gds-radius-m)',
-          }}
-        />
-      </Core.GdsFlex>
-      <Core.GdsText>{token.value}</Core.GdsText>
-    </Core.GdsFlex>
+    <Core.GdsCard
+      width="xl"
+      min-height="xl"
+      border="2xs"
+      border-width="2xs 0 0 2xs"
+      padding="0"
+      variant="secondary"
+      border-color="subtle-01"
+      border-radius={`${token.token} 0 0 0`}
+    />
   )
 }

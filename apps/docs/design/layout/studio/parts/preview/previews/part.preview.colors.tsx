@@ -1,7 +1,7 @@
 import * as Core from '@sebgroup/green-core/react'
 import { ColorPreviewProps } from '../part.preview.types'
 
-export default function Color({ token }: ColorPreviewProps) {
+export default function Colors({ token }: ColorPreviewProps) {
   return (
     <Core.GdsFlex align-items="center" gap="s">
       <Core.GdsDiv

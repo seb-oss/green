@@ -2,11 +2,11 @@
 import { TokenItem } from '../../data/studio.data.types'
 
 export type PreviewType =
-  | 'color'
-  | 'space'
+  | 'colors'
+  | 'spacing'
   | 'radius'
   | 'typography'
-  | 'shadow'
+  | 'shadows'
   | 'motion'
   | 'viewport'
 
