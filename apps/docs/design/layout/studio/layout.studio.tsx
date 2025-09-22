@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../hooks'
+import { useSearch } from './context/search.context'
+import { useSearchContent } from './data/studio.data.hooks'
 import {
   IconGroup,
   IconPage,
@@ -21,9 +23,6 @@ import { PreviewType } from './parts/preview/part.preview.types'
 import * as Tool from './tools'
 
 import './layout.studio.css'
-
-import { SearchProvider, useSearch } from './context/search.context'
-import { useSearchContent } from './data/studio.data.hooks'
 
 interface StudioProps {
   page: string
@@ -311,6 +310,7 @@ export function Studio({
   title,
   description,
 }: StudioProps) {
+  const { query } = useSearch()
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
@@ -320,6 +320,7 @@ export function Studio({
   const ITEM = PART[PART.length - 1]
   const LEVEL = PART[PART.length - 2]?.toUpperCase()
   // const NARROW = PATH.split('/')[3] && PAGE && LEVEL
+  const filteredPage = PAGE ? useSearchContent(PAGE) : null
 
   const isDetailView =
     PART.length > 4 || // For nested paths like colors/l1/token
@@ -346,9 +347,6 @@ export function Studio({
     setQuery('')
     setCategory('')
   }, [MAIN, setQuery, setCategory])
-
-  const filteredPage = PAGE ? useSearchContent(PAGE) : null
-  const { query } = useSearch()
 
   const NoResults = () => (
     <Core.GdsCard
