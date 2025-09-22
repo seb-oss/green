@@ -51,6 +51,21 @@ const Token = ({
   const [isHovered, setIsHovered] = useState(false)
   const router = useRouter()
 
+  const getTokenPath = (
+    type: PreviewType,
+    pageSlug: string,
+    item: TokenItem,
+    group: TokenGroup,
+  ) => {
+    if (item.level) {
+      return `${pageSlug}/${item.level.toLowerCase()}/${item.token}`
+    }
+    if (type === 'typography' || type === 'motion') {
+      return `${pageSlug}/${group.key}/${item.token}`
+    }
+    return `${pageSlug}/${item.token}`
+  }
+
   return (
     <Core.GdsFlex
       gap="s"
@@ -82,12 +97,9 @@ const Token = ({
           <Core.GdsFlex width="3xl">
             {isHovered && (
               <Core.GdsButton
-                onClick={() => {
-                  const path = item.level
-                    ? `${pageSlug}/${item.level.toLowerCase()}/${item.token}`
-                    : `${pageSlug}/${group.key}/${item.token}`
-                  router.push(path)
-                }}
+                onClick={() =>
+                  router.push(getTokenPath(type, pageSlug, item, group))
+                }
                 size="small"
                 rank="tertiary"
                 className="studio-cta"

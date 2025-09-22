@@ -10,6 +10,7 @@ import {
   RadiusTokens,
   ShadowsTokens,
   SpacingTokens,
+  TypographyTokens,
   ViewportTokens,
 } from '../../../design/layout/studio/data/studio.data.types'
 
@@ -54,6 +55,7 @@ export async function generateStaticParams() {
   const VIEWPORT = Tokens.Viewport as ViewportTokens
   const SHADOWS = Tokens.Shadows as ShadowsTokens
   const MOTION = Tokens.Motion as MotionTokens
+  const TYPOGRAPHY = Tokens.Typography as TypographyTokens
 
   studioData.forEach((category) => {
     category.pages.forEach((page) => {
@@ -131,6 +133,17 @@ export async function generateStaticParams() {
           break
         }
 
+        case 'typography': {
+          Object.entries(TYPOGRAPHY.typography).forEach(([group, tokens]) => {
+            Object.entries(tokens).forEach(([key, _]) => {
+              paths.push({
+                slug: ['typography', group, key],
+              })
+            })
+          })
+          break
+        }
+
         case 'shadows': {
           Object.entries(SHADOWS.shadows).forEach(([_, token]) => {
             paths.push({
@@ -141,13 +154,15 @@ export async function generateStaticParams() {
         }
 
         case 'motion': {
-          ;['easing', 'duration'].forEach((category) => {
-            MOTION[category].forEach((token) => {
-              paths.push({
-                slug: ['motion', category, token.token],
+          ;(Object.keys(MOTION) as Array<keyof MotionTokens>).forEach(
+            (category) => {
+              MOTION[category].forEach((token) => {
+                paths.push({
+                  slug: ['motion', category, token.token],
+                })
               })
-            })
-          })
+            },
+          )
           break
         }
       }

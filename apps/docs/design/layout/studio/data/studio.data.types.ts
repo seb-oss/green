@@ -147,3 +147,7 @@ export interface ViewportTokens {
 export interface ShadowsTokens {
   shadows: Record<string, BaseToken>
 }
+
+export interface TypographyTokens {
+  typography: Record<string, BaseToken>
+}
