@@ -1,4 +1,6 @@
 import '../../datepicker.globals'
+import '@sebgroup/green-core/components/icon/icons/calendar.js'
+import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 import { WeekDay } from '@angular/common'
 import {
@@ -26,9 +28,6 @@ import { startWith, takeUntil } from 'rxjs/operators'
 import { DateControlValueAccessorComponent } from '../../date-control-value-accessor/date-control-value-accessor.component'
 
 import type { CalendarType } from '../../datepicker.models'
-
-import '@sebgroup/green-core/components/icon/icons/calendar.js'
-import '@sebgroup/green-core/components/icon/icons/triangle-exclamation.js'
 
 /**
  * Date pickers simplify the task of selecting a date in a visual representation of a calendar.
@@ -100,6 +99,8 @@ export class DateInputComponent
    */
   @Input() size: 'small' | 'large' = 'large'
 
+  @Input() dynamicPosition: boolean = false
+
   /** @internal */
   // calendarIcon: IconDefinition = faCalendarDays;
 
@@ -109,6 +110,8 @@ export class DateInputComponent
   /** @internal */
   showInput$ = this.showInputDateSrc.asObservable().pipe(startWith(true))
 
+  /** Observable for listening to scrolls when the datepicker is open */
+  private documentScroll$: Observable<Event> = fromEvent(document, 'scroll')
   /** Observable for listening to clicks outside of the datepicker. */
   private documentClick$: Observable<Event> = fromEvent(document, 'click')
   /** Subject used for unsubscribe pattern on above observable. */
@@ -203,6 +206,15 @@ export class DateInputComponent
     }
     // if shown is set to true, reset unsubscribe variable
     this.datepickerClosed$.next(false)
+
+    // start listen to scroll
+    this.documentScroll$.pipe(takeUntil(this.datepickerClosed$)).subscribe({
+      next: () => {
+        // if document starts scrolling, close datepicker
+        return this.setShown(false)
+      },
+    })
+
     // start listening for clicks outside the component
     this.documentClick$.pipe(takeUntil(this.datepickerClosed$)).subscribe({
       next: (event: Event) => {

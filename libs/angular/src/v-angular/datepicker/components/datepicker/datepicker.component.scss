@@ -48,4 +48,19 @@
     display: flex;
     padding: 0.5rem;
   }
+
+  &[data-position='top'] {
+    top: auto;
+    bottom: 100%;
+    &[data-size='large'] {
+      transform: translateY(calc(-0.5rem - 45px));
+    }
+    &[data-size='small'] {
+      transform: translateY(calc(-0.5rem - 35px));
+    }
+  }
+  &[data-position='bottom'] {
+    bottom: 0;
+    transform: translateY(100%);
+  }
 }
