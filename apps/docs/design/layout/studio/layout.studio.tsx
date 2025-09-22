@@ -140,15 +140,40 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
       const tokenPage = page as TokenPage
       if (!tokenPage.tokens) return null
 
+      const groupByLevel = (group: TokenGroup) => {
+        if (!group.items.some((item) => item.level)) {
+          return [{ ...group }]
+        }
+
+        // Get unique levels
+        const levels = Array.from(
+          new Set(
+            group.items.filter((item) => item.level).map((item) => item.level),
+          ),
+        )
+
+        // Create groups for each level
+        return levels.map((level) => ({
+          key: `${group.key}-${level}`,
+          title: `${group.title} · ${level}`,
+          description: group.description,
+          items: group.items.filter((item) => item.level === level),
+        }))
+      }
+
+      // Flatten and process all groups
+      const processedGroups = tokenPage.tokens.flatMap((group) => {
+        if (group.key === 'background') {
+          return groupByLevel(group)
+        }
+        return [group]
+      })
+
       // Tokens View
       return (
-        <Core.GdsFlex flex-direction="column" gap="2xl">
-          {tokenPage.tokens.map((group: TokenGroup) => (
-            <Core.GdsFlex
-              key={group.key + group.items}
-              flex-direction="column"
-              gap="l"
-            >
+        <Core.GdsFlex flex-direction="column" gap="6xl">
+          {processedGroups.map((group) => (
+            <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
               <Core.GdsFlex flex-direction="column" gap="3xs">
                 <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
                 {group.description && (
@@ -160,20 +185,15 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
               <Core.GdsFlex flex-direction="column" gap="m">
                 {group.items.map((item) => (
                   <Core.GdsCard
-                    key={item.token + item.level}
+                    key={item.token}
                     padding="l"
                     variant="secondary"
                     border-radius="m"
                   >
                     <Core.GdsFlex flex-direction="column" gap="s">
-                      {item.level && (
-                        <Core.GdsText color="neutral-02">
-                          Level: {item.level}
-                        </Core.GdsText>
-                      )}
-                      <Core.GdsText>Token: {item.token}</Core.GdsText>
-                      <Core.GdsText>Variable: {item.variable}</Core.GdsText>
-                      <Core.GdsText>Value: {item.value}</Core.GdsText>
+                      <Core.GdsText>{item.token}</Core.GdsText>
+                      <Core.GdsText>{item.variable}</Core.GdsText>
+                      <Core.GdsText>{item.value}</Core.GdsText>
                     </Core.GdsFlex>
                   </Core.GdsCard>
                 ))}
