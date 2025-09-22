@@ -278,7 +278,7 @@ export const Searchable: Story = {
 export const Multiple: Story = {
   ...DefaultParams,
   render: (args) => html`
-    <gds-dropdown label="Select tech" searchable multiple>
+    <gds-dropdown label="Select tech" searchable multiple clearable>
       <gds-option value="" isplaceholder>This is a placeholder</gds-option>
       <gds-option value="warp">Warp Drive</gds-option>
       <gds-option value="cybernetics">Cybernetics</gds-option>

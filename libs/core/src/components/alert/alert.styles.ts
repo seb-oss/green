@@ -61,7 +61,7 @@ const style = css`
   .wrapper {
     grid-area: wrapper;
     display: flex;
-    gap: var(--gds-sys-space-s);
+    gap: var(--gds-sys-space-xs);
 
     .message {
       max-width: 80ch;
@@ -69,7 +69,7 @@ const style = css`
   }
 
   .dismissible .wrapper {
-    margin-top: var(--gds-sys-space-2xs);
+    margin-top: var(--gds-sys-space-3xs);
   }
 
   .has-action {
@@ -81,7 +81,7 @@ const style = css`
   }
 
   .has-action.dismissible .close {
-    margin-top: var(--gds-sys-space-2xs);
+    margin-top: var(--gds-sys-space-3xs);
   }
 
   .message {

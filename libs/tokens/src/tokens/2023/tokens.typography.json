@@ -96,7 +96,7 @@
           "fontFamily": "{sys.text.family}",
           "fontWeight": "{sys.text.weight.book}",
           "fontSize": 14,
-          "lineHeight": 18
+          "lineHeight": 20
         }
       },
       "detail-book-xs": {
@@ -123,7 +123,7 @@
           "fontFamily": "{sys.text.family}",
           "fontWeight": "{sys.text.weight.regular}",
           "fontSize": 14,
-          "lineHeight": 18
+          "lineHeight": 20
         }
       },
       "detail-regular-xs": {

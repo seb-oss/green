@@ -29,7 +29,7 @@ const style = css`
       right: 0;
       margin: 0;
       box-shadow: var(--gds-sys-shadow-l-01);
-      border: var(--gds-sys-space-4xs) solid
+      border: var(--gds-sys-space-5xs) solid
         var(--gds-sys-color-border-subtle-01);
       border-radius: var(--gds-sys-radius-s);
       overscroll-behavior: contain;

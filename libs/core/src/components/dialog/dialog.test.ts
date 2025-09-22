@@ -227,5 +227,21 @@ describe('<gds-dialog>', () => {
       await sendKeys({ press: 'Escape' })
       await waitUntil(() => !el.open)
     })
+
+    it('should emit gds-ui-state with reason `native-close` when closed with ESC', async () => {
+      const uiStateSpy = sinon.spy()
+      const el = await fixture<GdsDialog>(
+        html`<gds-dialog open heading="Test" @gds-ui-state=${uiStateSpy}
+          >Content</gds-dialog
+        >`,
+      )
+
+      await sendKeys({ press: 'Escape' })
+      await waitUntil(() => !el.open)
+
+      expect(uiStateSpy).to.have.been.calledWithMatch({
+        detail: { reason: 'native-close' },
+      })
+    })
   })
 })
