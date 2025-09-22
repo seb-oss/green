@@ -64,8 +64,9 @@ const Token = ({
     >
       <Core.GdsGrid columns="4" gap="s" align-items="center" padding="s 0">
         <Core.GdsText>{item.token}</Core.GdsText>
-        {type !== 'colors' && item.value}
-        <Preview type={type} token={item} />
+        {type !== 'colors' && type !== 'shadows' && item.value}
+        {type !== 'viewport' && <Preview type={type} token={item} />}
+        {(type === 'viewport' || type === 'shadows') && <div></div>}
         {item.dark && (
           <Preview
             type={type}
@@ -243,8 +244,8 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
           {processedGroups.map((group) => (
             <Core.GdsFlex key={group.key} flex-direction="column" gap="l">
               <Core.GdsFlex flex-direction="column" gap="3xs">
-                <Core.GdsText font="heading-s">{group.title}</Core.GdsText>
-                {group.description && (
+                <Core.GdsText tag="h2">{group.title}</Core.GdsText>
+                {false && group.description && (
                   <Core.GdsText color="neutral-02">
                     {group.description}
                   </Core.GdsText>

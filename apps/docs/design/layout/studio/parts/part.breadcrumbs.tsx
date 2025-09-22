@@ -65,7 +65,7 @@ export default function StudioBreadcrumbs({ current }: { current?: string }) {
     <Core.GdsFlex
       justify-content="space-between"
       align-items="center"
-      min-block-size="xl"
+      min-block-size="2xl"
     >
       <Core.GdsBreadcrumbs size="small" width="100%" flex="1">
         {breadcrumbs.map((item, index) =>
