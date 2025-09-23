@@ -16,35 +16,9 @@ const style = css`
 
     :host table {
       border-spacing: var(--gds-sys-space-xs);
-      //flex-grow: 1;
-      //width: 100%;
       padding: 1ch;
 
-      /* &.indicators {
-        border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
-      } */
-
-      @media (max-width: 364px) {
-        border-spacing: var(--gds-sys-space-2xs);
-
-        thead th {
-          width: var(--gds-sys-space-xl);
-          height: var(--gds-sys-space-xl);
-        }
-
-        tbody tr .week-number {
-          width: var(--gds-sys-space-xl);
-          height: var(--gds-sys-space-xl);
-          font: var(--gds-sys-text-body-book-s);
-          line-height: var(--gds-sys-text-line-height-detail-s);
-        }
-
-        &.indicators {
-          border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
-        }
-      }
-
-      &.small {
+      @media (max-width: 364px), &.small {
         border-spacing: var(--gds-sys-space-3xs);
 
         thead th {
@@ -167,26 +141,7 @@ const style = css`
           outline-width: var(--gds-sys-space-4xs);
         }
 
-        @media (max-width: 364px) {
-          width: var(--gds-sys-space-xl);
-          height: var(--gds-sys-space-xl);
-          font: var(--gds-sys-text-body-book-s);
-          line-height: var(--gds-sys-text-line-height-detail-s);
-
-          &.short {
-            width: var(--gds-sys-space-2xl);
-          }
-
-          &.wide {
-            width: var(--gds-sys-space-3xl);
-          }
-
-          &.long {
-            width: var(--gds-sys-space-6xl);
-          }
-        }
-
-        &.small {
+        @media (max-width: 364px), &.small {
           width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
           font: var(--gds-sys-text-body-book-s);
