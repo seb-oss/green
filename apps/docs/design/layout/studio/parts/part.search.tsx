@@ -1,11 +1,12 @@
 // studio/parts/part.search.tsx
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSearch } from '../context/search.context'
 
 export default function StudioSearch({ page }: { page?: string }) {
   const router = useRouter()
+  const pathName = usePathname()
   const { query, category, setQuery, setCategory, getCategories } = useSearch()
   const categories = page ? getCategories(page) : []
 
@@ -23,6 +24,8 @@ export default function StudioSearch({ page }: { page?: string }) {
       router.push(`/studio/${page}`)
     }
   }
+
+  if (pathName?.includes('compose')) return null
 
   return (
     <Core.GdsFlex

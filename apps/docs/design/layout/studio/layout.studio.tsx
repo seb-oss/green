@@ -310,7 +310,7 @@ export function Studio({
   title,
   description,
 }: StudioProps) {
-  const { query, setQuery, setCategory } = useSearch()
+  const { query, setQuery, setCategory, takeover } = useSearch()
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
@@ -388,9 +388,15 @@ export function Studio({
       box-sizing="border-box"
       className="studio"
     >
-      <Part.Sidebar current={PATH} />
-      <Core.GdsFlex flex-direction="column" gap="4xl" grid-column="6 / 25">
-        <Part.Header title={title} description={description} page={page} />
+      {!takeover && <Part.Sidebar current={PATH} />}
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="4xl"
+        grid-column={takeover ? '1 / 25' : '6 / 25'}
+      >
+        {!takeover && (
+          <Part.Header title={title} description={description} page={page} />
+        )}
         <Core.GdsGrid columns="12" align-items="flex-start">
           <Core.GdsCard
             flex-direction="column"
@@ -411,7 +417,9 @@ export function Studio({
 
             {/* {PAGE ? CONTENT(PAGE, ROUT, PATH) : children} */}
           </Core.GdsCard>
-          {ITEM && PAGE && <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />}
+          {ITEM && PAGE && !PATH?.includes('compose') && (
+            <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />
+          )}
         </Core.GdsGrid>
       </Core.GdsFlex>
     </Core.GdsGrid>

@@ -1,12 +1,18 @@
 'use client'
 
-// studio/context/search.context.tsx
-import { createContext, ReactNode, useContext, useState } from 'react'
-import { useRouter } from 'next/navigation'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 interface SearchContextType {
+  takeover: boolean
   query: string
   category: string
+  setTakeover: (takeover: boolean) => void
   setQuery: (query: string) => void
   setCategory: (category: string) => void
   getCategories: (pageType: string) => string[]
@@ -17,7 +23,31 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined)
 export function SearchProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('')
-  const router = useRouter()
+  const [takeover, setTakeover] = useState(false)
+
+  // Handle keyboard shortcut
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Check for Ctrl + /
+      if (event.ctrlKey && event.key === '/') {
+        event.preventDefault() // Prevent default browser behavior
+        setTakeover((prev) => !prev) // Toggle takeover state
+      }
+
+      // Also handle Escape key to exit takeover mode
+      if (event.key === 'Escape' && takeover) {
+        setTakeover(false)
+      }
+    }
+
+    // Add event listener
+    window.addEventListener('keydown', handleKeyDown)
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [takeover])
 
   const getCategories = (pageType: string) => {
     switch (pageType) {
@@ -35,6 +65,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
   return (
     <SearchContext.Provider
       value={{
+        takeover,
+        setTakeover,
         query,
         category,
         setQuery,

@@ -326,12 +326,17 @@ export default function Compose() {
     <Core.GdsGrid
       columns="1; l{2}"
       gap="l"
-      min-height="96vh"
+      min-height="92vh"
       className="layout-compose"
       padding="0"
       width="100%"
     >
-      <Core.GdsFlex flex-direction="column" gap="m" position="relative">
+      <Core.GdsFlex
+        flex-direction="column"
+        gap="m"
+        position="relative"
+        min-width="100%"
+      >
         <Core.GdsCard
           variant="secondary"
           height="100%"
@@ -340,6 +345,7 @@ export default function Compose() {
           padding="l 0"
           border-radius="m"
           position="relative"
+          width="100%"
         >
           <MonacoEditor value={code} onChange={(newCode) => setCode(newCode)} />
         </Core.GdsCard>
@@ -348,7 +354,7 @@ export default function Compose() {
           inset="auto 24px 24px auto"
           position="absolute"
           align-items="center"
-          gap="xs"
+          gap="s"
         >
           <Core.GdsText tag="small" color="neutral-02" opacity="0.4">
             <code style={{ fontFamily: 'sans-serif' }}>{`⌘ × S`}</code>
@@ -368,8 +374,8 @@ export default function Compose() {
         overflow="auto"
         background="transparent"
         border-color="subtle-01"
-        min-width="max-content"
         position="relative"
+        max-width="100%"
         data-pattern
       >
         {error ? (
@@ -385,8 +391,12 @@ export default function Compose() {
           align-items="center"
           gap="xs"
         >
-          <Core.IconFullscreen />
-          <Core.IconCodeBrackets />
+          <Core.GdsButton rank="tertiary" size="small">
+            <Core.IconFullscreen size="m" />
+          </Core.GdsButton>
+          <Core.GdsButton rank="tertiary" size="small">
+            <Core.IconCodeBrackets size="m" />
+          </Core.GdsButton>
         </Core.GdsFlex>
       </Core.GdsCard>
     </Core.GdsGrid>
