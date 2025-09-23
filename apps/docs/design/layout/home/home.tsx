@@ -114,7 +114,12 @@ export function Home({
         </GdsFlex>
 
         <div className="hero-animated">
-          <GdsCard padding="0" overflow="hidden" background="none">
+          <GdsCard
+            padding="0"
+            overflow="hidden"
+            background="none"
+            margin="2xl 0 0 0"
+          >
             <GdsImg
               className="hero-img"
               src="https://api.seb.io/assets/launch-hero.jpg"
