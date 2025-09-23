@@ -320,9 +320,10 @@ export function Studio({
   const ITEM = PART[PART.length - 1]
   const LEVEL = PART[PART.length - 2]?.toUpperCase()
   // const NARROW = PATH.split('/')[3] && PAGE && LEVEL
-
   // const searchContent = useSearchContent(PAGE || null)
-  const filteredPage = PAGE ? useSearchContent(PAGE) : null
+  const searchContent = useSearchContent(PAGE || null)
+  // Then derive filteredPage
+  const filteredPage = PAGE ? searchContent : null
 
   const isDetailView =
     PART.length > 4 || // For nested paths like colors/l1/token

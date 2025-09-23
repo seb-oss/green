@@ -12,10 +12,12 @@ export const getPageBySlug = (slug: string): StudioPage | undefined => {
 }
 
 // Search contents
-export function useSearchContent(page: StudioPage) {
+export function useSearchContent(page: StudioPage | null) {
   const { query, category } = useSearch()
 
   return useMemo(() => {
+    if (!page) return null
+
     if (!query && !category) return page
 
     if (page.type === 'asset' && 'icons' in page) {
