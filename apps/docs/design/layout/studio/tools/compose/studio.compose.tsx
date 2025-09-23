@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useSearch } from '../../context/search.context'
 
 declare global {
   interface Window {
@@ -224,6 +225,9 @@ export default function Compose() {
   const [componentsReady, setComponentsReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const { setTakeover, takeover } = useSearch()
+  const [showCode, setShowCode] = useState(true)
+
   const options = {
     replace: (node: any) => {
       if (node.type !== 'tag') return undefined
@@ -324,7 +328,7 @@ export default function Compose() {
 
   return (
     <Core.GdsGrid
-      columns="1; l{2}"
+      columns={!showCode ? '1' : '1; l{2}'}
       gap="l"
       min-height="92vh"
       className="layout-compose"
@@ -332,6 +336,7 @@ export default function Compose() {
       width="100%"
     >
       <Core.GdsFlex
+        display={showCode ? 'flex' : 'none'}
         flex-direction="column"
         gap="m"
         position="relative"
@@ -391,10 +396,20 @@ export default function Compose() {
           align-items="center"
           gap="xs"
         >
-          <Core.GdsButton rank="tertiary" size="small">
+          <Core.GdsButton
+            rank="tertiary"
+            size="small"
+            onClick={() => {
+              setTakeover(!takeover)
+            }}
+          >
             <Core.IconFullscreen size="m" />
           </Core.GdsButton>
-          <Core.GdsButton rank="tertiary" size="small">
+          <Core.GdsButton
+            rank="tertiary"
+            size="small"
+            onClick={() => setShowCode(!showCode)}
+          >
             <Core.IconCodeBrackets size="m" />
           </Core.GdsButton>
         </Core.GdsFlex>
