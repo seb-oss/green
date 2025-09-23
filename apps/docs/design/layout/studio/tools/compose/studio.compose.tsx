@@ -345,6 +345,7 @@ export default function Compose() {
         <Core.GdsCard
           variant="secondary"
           height="100%"
+          min-height="50vh"
           overflow="hidden"
           border-color="subtle-01"
           padding="l 0"
