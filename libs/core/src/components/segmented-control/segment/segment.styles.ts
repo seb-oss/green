@@ -29,7 +29,7 @@ const style = css`
         background-color var(--gds-sys-motion-fast),
         border-color var(--gds-sys-motion-fast),
         color var(--gds-sys-motion-fast);
-      outline-width: var(--gds-sys-space-3xs);
+      outline-width: var(--gds-sys-space-4xs);
       outline-style: solid;
       outline-offset: -2px;
       outline-color: transparent;

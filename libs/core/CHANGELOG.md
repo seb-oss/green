@@ -1,5 +1,52 @@
 # Changelog
 
+## 2.6.1
+
+### Patch Changes
+
+- a617652: **Checkbox:** Fix tree-shaking issue that sometimes happens with Angular
+
+## 2.6.0
+
+### Minor Changes
+
+- e5f21f0: **Input:** Update size small variables
+
+### Patch Changes
+
+- 69b2ee7: **Dialog:** Only close top-most dialog on click outside. Fixes #2423
+- e5f21f0: **Checkbox:** Small size aligment
+- e5f21f0: **FCH:** Add grouping default spacing variables for small size with fallback
+- e5f21f0: **Button:** Spacing and sizes
+- e5f21f0: **Card:** Update defaults
+- e5f21f0: **Input:** Icon and spacing for smaller size
+- e5f21f0: **Signal:** Use content color mixin for the signal
+- 69b2ee7: **Dialog:** Fix missing reason in `gds-ui-state` event under certain conditions
+- e5f21f0: **Dropdown:** Move chevron to action slot to fix spacing, update cross small icon when clearable
+- 69b2ee7: **Input:** Fix incorrect type declaration of the `autocorrect` property
+- e5f21f0: **Textarea:** Align spacing with textarea for trail and action
+- e5f21f0: **Select:** Chevron move to action slot same as dropdown spacing fix
+- e5f21f0: **Dialog:** Heading block start marin, dialog padding and radius update
+- 69b2ee7: **Dialog:** Only close if a click starts and ends outside
+- e5f21f0: **Radio:** Align spacing and sizes same as checkbox
+- e5f21f0: **Badge:** Inline and block size fixes and padding
+- e5f21f0: **Datepicker:** Add sizing variables for label, support text
+- f0da6d2: **Calendar:** Remove the commented style
+
+## 2.5.3
+
+### Patch Changes
+
+- da0ab9a: **Button:** Explicitly add `click()` method on Button, to allow simulated clicks to work same way on iOS Safari as on other browsers
+- 2ba96f6: **Calendar:** Focus outline distance fix
+
+## 2.5.2
+
+### Patch Changes
+
+- 33b3aa0: **Dialog:** Fix some sizing and overflow issues
+- 33b3aa0: **Dialog:** Correct order of events, so that `gds-close` does not fire if `gds-ui-state` was cancelled to prevent the dialog from closing.
+
 ## 2.5.1
 
 ### Patch Changes
