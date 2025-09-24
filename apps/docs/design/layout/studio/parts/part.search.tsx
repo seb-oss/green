@@ -12,7 +12,6 @@ export default function StudioSearch({ page }: { page?: string }) {
 
   const handleSearch = (value: string) => {
     setQuery(value)
-    // Search just updates the query, no route change
   }
 
   const handleCategoryChange = (e: Event) => {
@@ -43,7 +42,7 @@ export default function StudioSearch({ page }: { page?: string }) {
         >
           <Core.IconMagnifyingGlass slot="lead" size="m" />
         </Core.GdsInput>
-        {categories.length > 0 && (
+        {/* {categories.length > 0 && (
           <Core.GdsFlex width="160px">
             <Core.GdsDropdown
               plain
@@ -58,7 +57,7 @@ export default function StudioSearch({ page }: { page?: string }) {
               ))}
             </Core.GdsDropdown>
           </Core.GdsFlex>
-        )}
+        )} */}
       </Core.GdsFlex>
     </Core.GdsFlex>
   )
