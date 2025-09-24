@@ -18,6 +18,8 @@ export default function StudioSidebar({ current }: { current?: string }) {
       inset="32px 0 0 0"
       height="max-content"
       className="studio-sidebar"
+      overflow="auto"
+      max-height="90vh"
     >
       <Core.GdsFlex align-items="center" gap="m" padding="xl l 0 xl">
         <Link href="/studio">
@@ -44,10 +46,8 @@ export default function StudioSidebar({ current }: { current?: string }) {
                   {category.title}
                 </Core.GdsText>
               </Core.GdsFlex>
-
               {category.pages.map((page) => {
                 const IconComponent = Core[page.icon]
-                // Check if current path matches page slug or starts with page slug (for sub-routes)
                 const isActive =
                   current === page.slug || current?.startsWith(`${page.slug}/`)
 
