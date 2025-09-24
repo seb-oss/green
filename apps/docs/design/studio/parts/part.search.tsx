@@ -24,7 +24,8 @@ export default function StudioSearch({ page }: { page?: string }) {
     }
   }
 
-  if (pathName?.includes('compose')) return null
+  if (pathName?.includes('compose') || pathName?.includes('playground'))
+    return null
 
   return (
     <Core.GdsFlex

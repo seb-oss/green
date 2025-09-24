@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react'
 import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Icon } from '../../../../../hooks'
+import { Icon } from '../../../../hooks'
 import { useSearch } from '../../context/search.context'
 import { Copy } from '../../table'
 import { iconMappings } from './studio.migration.icons'

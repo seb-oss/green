@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react'
 
-import { useContent } from '../../../../settings/content'
+import { useContent } from '../../../settings/content'
 import { studioData } from './studio.data'
 import * as Tokens from './studio.data.tokens'
 
@@ -25,31 +25,62 @@ export function useStudioPage(slug: string) {
     if (!basePage || !isLoaded) return basePage
 
     // Handle icons
-    if (basePage.type === 'asset' && basePage.key === 'icons') {
-      const iconComponent = actions.getComponent('icon')
-      const icons = iconComponent?.icons || {}
+    // if (basePage.type === 'asset' && basePage.key === 'icons') {
+    //   const iconComponent = actions.getComponent('icon')
+    //   const icons = iconComponent?.icons || {}
 
-      const iconGroups: IconGroup[] = Array.from(
-        new Set(
-          Object.values(icons)
-            .map((icon) => icon.meta.categories)
-            .flat(),
-        ),
-      )
-        .sort()
-        .map((category) => ({
-          key: category,
-          title: category.charAt(0).toUpperCase() + category.slice(1),
-          items: Object.values(icons)
-            .filter((icon) => icon.meta.categories.includes(category))
-            .map((icon) => ({
-              key: icon.id,
-              name: icon.displayName,
-              component: icon.reactName,
-              value: icon.variants.regular,
-            }))
-            .sort((a, b) => a.name.localeCompare(b.name)),
-        }))
+    //   const iconGroups: IconGroup[] = Array.from(
+    //     new Set(
+    //       Object.values(icons)
+    //         .map((icon) => icon.meta.categories)
+    //         .flat(),
+    //     ),
+    //   )
+    //     .sort()
+    //     .map((category) => ({
+    //       key: category,
+    //       // title: category.charAt(0).toUpperCase() + category.slice(1),
+    //       title: category,
+    //       items: Object.values(icons)
+    //         .filter((icon) => icon.meta.categories.includes(category))
+    //         .map((icon) => ({
+    //           key: icon.id,
+    //           name: icon.displayName,
+    //           component: icon.reactName,
+    //           value: icon.variants.regular,
+    //         }))
+    //         .sort((a, b) => a.name.localeCompare(b.name)),
+    //     }))
+
+    //   return {
+    //     ...basePage,
+    //     icons: iconGroups,
+    //   } as IconPage
+    // }
+
+    // Handle icons
+    if (basePage.type === 'asset' && basePage.key === 'icons') {
+      const icons = actions.getIcons()
+
+      // Get unique categories from all icons
+      const categories = Array.from(
+        new Set(icons.flatMap((icon) => icon.meta.categories)),
+      ).sort()
+
+      // Create icon groups by category
+      const iconGroups: IconGroup[] = categories.map((category) => ({
+        key: category,
+        title: category.charAt(0).toUpperCase() + category.slice(1),
+        items: icons
+          .filter((icon) => icon.meta.categories.includes(category))
+          .map((icon) => ({
+            key: icon.id,
+            name: icon.displayName,
+            component: icon.reactName,
+            value: icon.variants.regular,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name)),
+      }))
 
       return {
         ...basePage,

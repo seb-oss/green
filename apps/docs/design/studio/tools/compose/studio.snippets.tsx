@@ -5,10 +5,10 @@ import { useRouter } from 'next/navigation'
 import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Snippet } from '../../../../../design/atoms/snippet/snippet'
-import { useContent } from '../../../../../settings/content'
+import { useContent } from '../../../../settings/content'
+import { Snippet } from '../../../atoms/snippet/snippet'
 
-import type { ComponentContent } from '../../../../../settings/content/types'
+import type { ComponentContent } from '../../../../settings/content/types'
 
 interface SnippetItem {
   slug: string

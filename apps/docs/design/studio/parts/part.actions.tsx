@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Link } from '../../../atoms/link/link'
+import { Link } from '../../atoms/link/link'
 import { studioData } from '../data/studio.data'
 
 export default function PageActions() {

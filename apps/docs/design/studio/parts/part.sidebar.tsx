@@ -1,7 +1,7 @@
 // studio.sidebar.tsx
 import * as Core from '@sebgroup/green-core/react'
-import { Link } from '../../../atoms/link/link'
-import Toggle from '../../../atoms/toggle/toggle.theme'
+import { Link } from '../../atoms/link/link'
+import Toggle from '../../atoms/toggle/toggle.theme'
 import { studioData } from '../data/studio.data'
 
 export default function StudioSidebar({ current }: { current?: string }) {

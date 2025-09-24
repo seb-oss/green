@@ -1,9 +1,9 @@
 // page.tsx
 import { Metadata } from 'next'
 
-import { studioData } from '../../../design/layout/studio/data/studio.data'
-import { getPageBySlug } from '../../../design/layout/studio/data/studio.data.hooks'
-import * as Tokens from '../../../design/layout/studio/data/studio.data.tokens'
+import { studioData } from '../../../design/studio/data/studio.data'
+import { getPageBySlug } from '../../../design/studio/data/studio.data.hooks'
+import * as Tokens from '../../../design/studio/data/studio.data.tokens'
 import {
   ColorTokens,
   MotionTokens,
@@ -12,7 +12,7 @@ import {
   SpacingTokens,
   TypographyTokens,
   ViewportTokens,
-} from '../../../design/layout/studio/data/studio.data.types'
+} from '../../../design/studio/data/studio.data.types'
 
 // Function to fetch icons from API during build time
 async function fetchIconList() {

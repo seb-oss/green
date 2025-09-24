@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
-import { Icon } from '../../../hooks'
+import { Icon } from '../../hooks'
 import { useSearch } from './context/search.context'
 import { useSearchContent } from './data/studio.data.hooks'
 import {
@@ -34,6 +34,7 @@ interface StudioProps {
 
 const COMPONENTS = {
   Compose: Tool.Compose,
+  Playground: Tool.Playground,
   Main: Part.Main,
   Migration: Interactive.Migration,
   Radius: Interactive.Radius,

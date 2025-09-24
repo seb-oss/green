@@ -2,8 +2,8 @@
 import { usePathname } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
-import { useContent } from '../../../../settings/content'
-import { Link } from '../../../atoms/link/link'
+import { useContent } from '../../../settings/content'
+import { Link } from '../../atoms/link/link'
 import { studioData } from '../data/studio.data'
 import { useStudioPage } from '../data/studio.data.use'
 
@@ -14,6 +14,7 @@ interface LinkItem {
   isLast?: boolean
 }
 
+// part.breadcrumbs.tsx
 export default function StudioBreadcrumbs() {
   const pathname = usePathname()
   const segments = pathname?.split('/').filter(Boolean) || []
@@ -70,7 +71,6 @@ export default function StudioBreadcrumbs() {
         })
       }
     } else {
-      // Regular route handling
       links.push({
         label: currentPage.label,
         href: segments.length > 2 ? currentPage.slug : undefined,
@@ -80,9 +80,60 @@ export default function StudioBreadcrumbs() {
         isLast: segments.length === 2,
       })
 
-      // Rest of your existing logic for other routes...
+      // Handle sub-pages, icons, or tokens
       if (segments.length > 2) {
-        // ... (keep your existing sub-page handling)
+        // Check for interactive pages first
+        const interactivePage = currentPage.pages?.find(
+          (p) => p.key === segments[2],
+        )
+
+        if (interactivePage) {
+          links.push({
+            label: interactivePage.title,
+            isLast: true,
+          })
+        } else if (currentPage.type === 'asset' && currentPage.icons) {
+          // Find icon in groups
+          const iconId = segments[2]
+          const icon = actions.getIcon(iconId)
+
+          if (icon) {
+            links.push({
+              label: icon.displayName,
+              isLast: true,
+            })
+          }
+        } else if (currentPage.type === 'token' && currentPage.tokens) {
+          // Find token in groups
+          const token = currentPage.tokens
+            .flatMap((group) => group.items)
+            .find((item) => item.token === segments[2])
+
+          if (token) {
+            links.push({
+              label: token.token,
+              isLast: true,
+            })
+          } else {
+            // Might be a category like L1, L2, etc.
+            links.push({
+              label: segments[2].toUpperCase(),
+              isLast: segments.length === 3,
+              href:
+                segments.length > 3
+                  ? `${currentPage.slug}/${segments[2]}`
+                  : undefined,
+            })
+
+            // Add token if there's one more segment
+            if (segments.length > 3) {
+              links.push({
+                label: segments[3],
+                isLast: true,
+              })
+            }
+          }
+        }
       }
     }
   }

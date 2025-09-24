@@ -3,9 +3,9 @@
 
 import { usePathname } from 'next/navigation'
 
-import { SearchProvider } from '../../design/layout/studio/context/search.context'
-import { getPageBySlug } from '../../design/layout/studio/data/studio.data.hooks'
-import { Studio } from '../../design/layout/studio/layout.studio'
+import { SearchProvider } from '../../design/studio/context/search.context'
+import { getPageBySlug } from '../../design/studio/data/studio.data.hooks'
+import { Studio } from '../../design/studio/layout.studio'
 
 export default function PlayLayout({
   children,

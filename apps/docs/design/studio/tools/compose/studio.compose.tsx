@@ -6,8 +6,8 @@ import { notFound, usePathname, useRouter } from 'next/navigation'
 import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
-import { useSettings, useSettingsValue } from '../../../../../settings'
-import { useContent } from '../../../../../settings/content'
+import { useSettings, useSettingsValue } from '../../../../settings'
+import { useContent } from '../../../../settings/content'
 import { useSearch } from '../../context/search.context'
 import {
   convertAttributes,
