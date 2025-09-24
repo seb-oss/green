@@ -6,7 +6,7 @@
 
 import { inspect } from 'util'
 
-import { parse, toCss, tokenize } from './style-expression-parser.ts'
+import { parse, toCss, tokenize } from './style-expression-parser'
 
 const inspectConfig = { showHidden: false, depth: null, colors: true }
 
