@@ -8,6 +8,7 @@ export interface Interactive {
   title: string
   description: string
   component: string
+  // searchQuery?: string
 }
 
 // Base page interface

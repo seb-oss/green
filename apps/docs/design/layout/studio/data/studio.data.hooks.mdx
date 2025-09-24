@@ -1,4 +1,4 @@
-// studio.data.hooks.ts
+```ts
 import { useMemo } from 'react'
 import Fuse from 'fuse.js'
 
@@ -13,6 +13,7 @@ export const getPageBySlug = (slug: string): StudioPage | undefined => {
     .find((page) => page.slug === slug)
 }
 
+// Search contents
 export function useSearchContent(page: StudioPage | null) {
   const { query, category } = useSearch()
 
@@ -29,21 +30,14 @@ export function useSearchContent(page: StudioPage | null) {
           (group) =>
             !category || group.key.toLowerCase() === category.toLowerCase(),
         )
-        .map((group) => {
-          const fuse = new Fuse(group.items, {
-            keys: ['name', 'component'],
-            threshold: 0.3,
-          })
-
-          const filteredItems = query
-            ? fuse.search(query).map((result) => result.item)
-            : group.items
-
-          return {
-            ...group,
-            items: filteredItems,
-          }
-        })
+        .map((group) => ({
+          ...group,
+          items: group.items.filter(
+            (item) =>
+              item.name.toLowerCase().includes(query.toLowerCase()) ||
+              item.component.toLowerCase().includes(query.toLowerCase()),
+          ),
+        }))
         .filter((group) => group.items.length > 0)
 
       return {
@@ -61,21 +55,14 @@ export function useSearchContent(page: StudioPage | null) {
           (group) =>
             !category || group.key.toLowerCase() === category.toLowerCase(),
         )
-        .map((group) => {
-          const fuse = new Fuse(group.items, {
-            keys: ['token', 'value'],
-            threshold: 0.3,
-          })
-
-          const filteredItems = query
-            ? fuse.search(query).map((result) => result.item)
-            : group.items
-
-          return {
-            ...group,
-            items: filteredItems,
-          }
-        })
+        .map((group) => ({
+          ...group,
+          items: group.items.filter(
+            (item) =>
+              item.token.toLowerCase().includes(query.toLowerCase()) ||
+              item.value.toLowerCase().includes(query.toLowerCase()),
+          ),
+        }))
         .filter((group) => group.items.length > 0)
 
       return {
@@ -83,6 +70,16 @@ export function useSearchContent(page: StudioPage | null) {
         tokens: filteredGroups,
       }
     }
+
+    // if (page.pages) {
+    //   return {
+    //     ...page,
+    //     pages: page.pages.map((subPage) => ({
+    //       ...subPage,
+    //       searchQuery: query,
+    //     })),
+    //   }
+    // }
 
     return page
   }, [page, query, category])

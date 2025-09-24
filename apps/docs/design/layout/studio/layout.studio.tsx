@@ -117,6 +117,7 @@ const Token = ({
 }
 
 const CONTENT = (page: StudioPage, router: any, path: string) => {
+  // const CONTENT = (page: StudioPage, router: NextRouter, path: string) => {
   const ACTIVE = path.split('/')[3]
 
   // Show interactive pages first
@@ -125,6 +126,7 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
     if (INTERACTIVE) {
       const CONTENT =
         COMPONENTS[INTERACTIVE.component as keyof typeof COMPONENTS]
+      // return CONTENT ? <CONTENT searchQuery={INTERACTIVE.searchQuery} /> : null
       return CONTENT ? <CONTENT /> : null
     }
   }

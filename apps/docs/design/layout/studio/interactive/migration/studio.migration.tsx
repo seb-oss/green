@@ -2,93 +2,17 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import Fuse from 'fuse.js'
 
 import * as Core from '@sebgroup/green-core/react'
 import { Icon } from '../../../../../hooks'
+import { useSearch } from '../../context/search.context'
 import { Copy } from '../../table'
+import { iconMappings } from './studio.migration.icons'
 
 interface DeprecatedIconsProps {
   searchQuery?: string
 }
-
-interface IconMapping {
-  old: string
-  new: string
-}
-
-const iconMappings: IconMapping[] = [
-  { old: 'archive', new: 'archive' },
-  { old: 'arrow-down', new: 'arrow-down' },
-  { old: 'arrow-left', new: 'arrow-left' },
-  { old: 'arrow-right', new: 'arrow-right' },
-  { old: 'arrow-up', new: 'arrow-up' },
-  { old: 'arrow-to-down', new: 'arrow-wall-down' },
-  { old: 'at', new: 'at' },
-  { old: 'balance-scale', new: 'law' },
-  { old: 'bars', new: 'bars-three' },
-  { old: 'bell', new: 'bell' },
-  { old: 'book', new: 'book' },
-  { old: 'bookmark', new: 'bookmark' },
-  { old: 'briefcase', new: 'bag' },
-  { old: 'calculator', new: 'calculator' },
-  { old: 'calendar-alt', new: 'calendar' },
-  { old: 'check', new: 'checkmark' },
-  { old: 'chevron-down', new: 'chevron-bottom' },
-  { old: 'chevron-left', new: 'chevron-left' },
-  { old: 'chevron-right', new: 'chevron-right' },
-  { old: 'chevron-up', new: 'chevron-top' },
-  { old: 'clock', new: 'clock' },
-  { old: 'cog', new: 'settings-gear' },
-  { old: 'comment-dots', new: 'bubble-annotation' },
-  { old: 'comments', new: 'bubbles' },
-  { old: 'copy', new: 'files' },
-  { old: 'credit-card', new: 'credit-card' },
-  { old: 'desktop-alt', new: 'television' },
-  { old: 'edit', new: 'text-edit' },
-  { old: 'envelope', new: 'email' },
-  { old: 'exclamation-triangle', new: 'triangle-exclamation' },
-  { old: 'external-link-square', new: 'square-arrow-top-right' },
-  { old: 'file', new: 'file-bend' },
-  { old: 'filter', new: 'settings-slider-hor' },
-  { old: 'heart', new: 'heart' },
-  { old: 'home', new: 'home-open' },
-  { old: 'info-circle', new: 'circle-info' },
-  { old: 'link', new: 'chain-link' },
-  { old: 'lock-alt', new: 'lock' },
-  { old: 'long-arrow-down', new: 'arrow-down' },
-  { old: 'long-arrow-left', new: 'arrow-left' },
-  { old: 'long-arrow-right', new: 'arrow-right' },
-  { old: 'long-arrow-up', new: 'arrow-up' },
-  { old: 'minus', new: 'minus-small' },
-  { old: 'mobile', new: 'phone' },
-  { old: 'percent', new: 'percent' },
-  { old: 'phone', new: 'call' },
-  { old: 'plus', new: 'plus-small' },
-  { old: 'print', new: 'printer' },
-  { old: 'question-square', new: 'circle-questionmark' },
-  { old: 'reply', new: 'arrow-share-left' },
-  { old: 'reply-all', new: 'arrow-share-left' },
-  { old: 'save', new: 'floppy-disk' },
-  { old: 'search', new: 'magnifying-glass' },
-  { old: 'share-alt', new: 'share' },
-  { old: 'sign-in', new: 'arrow-box-right' },
-  { old: 'sign-out', new: 'arrow-box-left' },
-  { old: 'sliders-h', new: 'settings-slider-hor' },
-  { old: 'sliders-v', new: 'settings-slider-hor' },
-  { old: 'square', new: 'square-placeholder' },
-  { old: 'star', new: 'star' },
-  { old: 'sync', new: 'arrow-rotate-right-left' },
-  { old: 'tablet', new: 'devices' },
-  { old: 'times', new: 'cross-small' },
-  { old: 'trash-alt', new: 'trash-can' },
-  { old: 'undo', new: 'arrow-rotate-counter-clockwise' },
-  { old: 'unlock-alt', new: 'unlocked' },
-  { old: 'upload', new: 'arrow-out-of-box' },
-  { old: 'user-alt', new: 'people' },
-  { old: 'ellipsis-h', new: 'dot-grid-one-horizontal' },
-  { old: 'globe', new: 'globus' },
-  { old: 'user-friends', new: 'group' },
-]
 
 function calculateScore(text: string, query: string): number {
   const normalizedText = text.toLowerCase()
@@ -109,20 +33,26 @@ function formatGdsIconName(name: string): string {
       .join('')
   )
 }
+const fuseOptions = {
+  keys: ['old', 'new'],
+  threshold: 0.3,
+  includeScore: true,
+}
+
+const fuse = new Fuse(iconMappings, fuseOptions)
 
 export default function DeprecatedIcons({
   searchQuery = '',
 }: DeprecatedIconsProps) {
-  const filteredIcons = useMemo(() => {
-    const query = searchQuery || '' // Extra safety
-    if (!query.trim()) return iconMappings
+  const { query } = useSearch()
 
-    return iconMappings.filter((icon) => {
-      const oldNameScore = calculateScore(icon.old, query)
-      const newNameScore = calculateScore(icon.new, query)
-      return oldNameScore > 0 || newNameScore > 0
-    })
-  }, [searchQuery])
+  const filteredIcons = useMemo(() => {
+    if (!query?.trim()) return iconMappings
+
+    const results = fuse.search(query)
+    return results.map((result) => result.item)
+  }, [query])
+
   return (
     <Core.GdsFlex flex-direction="column" gap="l" width="100%">
       <link
