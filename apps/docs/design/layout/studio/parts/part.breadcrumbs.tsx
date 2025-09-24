@@ -56,7 +56,17 @@ export default function StudioBreadcrumbs() {
 
     // Handle sub-pages, icons, or tokens
     if (segments.length > 2) {
-      if (currentPage.type === 'asset' && currentPage.icons) {
+      // Check for interactive pages first
+      const interactivePage = currentPage.pages?.find(
+        (p) => p.key === segments[2],
+      )
+
+      if (interactivePage) {
+        links.push({
+          label: interactivePage.title,
+          isLast: true,
+        })
+      } else if (currentPage.type === 'asset' && currentPage.icons) {
         // Find icon in groups
         const icon = currentPage.icons
           .flatMap((group) => group.items)
