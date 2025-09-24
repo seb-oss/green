@@ -378,7 +378,7 @@ export function Studio({
   const filteredPage = PAGE ? searchContent : null
   const isInteractivePage = PAGE?.pages?.some((p) => p.slug === PATH)
   const isDetailView =
-    PART.length > 4 || // For nested paths like colors/l1/token
+    PART.length > 4 ||
     (PART.length > 3 &&
       ![
         'l1',
@@ -394,7 +394,12 @@ export function Studio({
       ].includes(ITEM.toLowerCase()))
 
   const NARROW =
-    !isInteractivePage && PATH.split('/')[3] && PAGE && LEVEL && isDetailView
+    !isInteractivePage &&
+    PATH.split('/')[3] &&
+    !PATH.includes('compose') &&
+    PAGE &&
+    LEVEL &&
+    isDetailView
 
   // const { setQuery, setCategory } = useSearch()
 

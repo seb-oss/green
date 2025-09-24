@@ -57,6 +57,24 @@ export async function generateStaticParams() {
   const MOTION = Tokens.Motion as MotionTokens
   const TYPOGRAPHY = Tokens.Typography as TypographyTokens
 
+  paths.push({
+    slug: ['compose'],
+  })
+
+  try {
+    const response = await fetch('https://api.seb.io/snippets/snippets.json')
+    const snippetsList = await response.json()
+
+    // Add paths for each snippet
+    snippetsList.snippets.forEach((snippet: { slug: string }) => {
+      paths.push({
+        slug: ['compose', snippet.slug],
+      })
+    })
+  } catch (error) {
+    console.error('Failed to fetch snippets list:', error)
+  }
+
   studioData.forEach((category) => {
     category.pages.forEach((page) => {
       // Add main page route

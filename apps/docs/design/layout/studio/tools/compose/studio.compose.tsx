@@ -6,6 +6,7 @@ import { notFound, usePathname, useRouter } from 'next/navigation'
 import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useContent } from '../../../../../settings/content'
 import { useSearch } from '../../context/search.context'
 import {
   convertAttributes,
@@ -21,9 +22,9 @@ const initialCode = `<gds-card padding="l" variant="secondary">
 </gds-card>`
 
 export default function Compose() {
-  // const { actions } = useContent()
-  const [code, setCode] = useState(initialCode)
-  // const [code, setCode] = useState(initialCode)
+  const { actions } = useContent()
+  const pathname = usePathname()
+  const [code, setCode] = useState('')
   const [activeTab, setActiveTab] = useState<'code' | 'snippets'>('code')
   const [previewCode, setPreviewCode] = useState(initialCode)
   const [componentsReady, setComponentsReady] = useState(false)
@@ -31,6 +32,25 @@ export default function Compose() {
 
   const { setTakeover, takeover } = useSearch()
   const [showCode, setShowCode] = useState(true)
+
+  useEffect(() => {
+    const paths = pathname.split('/')
+    const snippetSlug = paths[paths.length - 1]
+
+    if (paths.includes('compose') && snippetSlug !== 'compose') {
+      const snippet = actions.getSnippet(snippetSlug)
+      if (snippet) {
+        setCode(snippet.code)
+        setPreviewCode(snippet.code)
+      } else {
+        setCode(initialCode)
+        setPreviewCode(initialCode)
+      }
+    } else {
+      setCode(initialCode)
+      setPreviewCode(initialCode)
+    }
+  }, [pathname, actions])
 
   const options = {
     replace: (node: any) => {

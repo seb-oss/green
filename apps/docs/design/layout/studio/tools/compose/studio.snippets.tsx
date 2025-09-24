@@ -55,7 +55,7 @@ export default function Snippets() {
   }, [actions])
 
   // Get all snippets from all components
-  const allComponentSnippets = useMemo(() => {
+  const ALL_COMP = useMemo(() => {
     return componentsWithSnippets.flatMap((component) => {
       if (!component.overview || !component.title) return []
 
@@ -89,15 +89,15 @@ export default function Snippets() {
 
   // Setup Fuse.js search
   const fuse = useMemo(() => {
-    return new Fuse(allComponentSnippets, {
+    return new Fuse(ALL_COMP, {
       keys: ['title', 'componentTitle'],
       threshold: 0.3,
       ignoreLocation: true,
     })
-  }, [allComponentSnippets])
+  }, [ALL_COMP])
 
   // Get filtered snippets based on search and/or selected component
-  const filteredSnippets = useMemo(() => {
+  const FILSNIP = useMemo(() => {
     if (searchQuery) {
       // If searching, ignore component selection
       const results = fuse.search(searchQuery)
@@ -106,7 +106,7 @@ export default function Snippets() {
 
     if (selectedComponent) {
       // If component selected, filter by component
-      return allComponentSnippets.filter(
+      return ALL_COMP.filter(
         (snippet) =>
           snippet.componentTitle ===
           componentsWithSnippets.find((c) => c.slug === selectedComponent)
@@ -115,14 +115,8 @@ export default function Snippets() {
     }
 
     // If neither searching nor component selected, show all snippets
-    return allComponentSnippets
-  }, [
-    searchQuery,
-    selectedComponent,
-    allComponentSnippets,
-    componentsWithSnippets,
-    fuse,
-  ])
+    return ALL_COMP
+  }, [searchQuery, selectedComponent, ALL_COMP, componentsWithSnippets, fuse])
 
   const handleEdit = (slug: string) => {
     router.push(`/studio/compose/${slug}`)
@@ -134,6 +128,8 @@ export default function Snippets() {
       flex-direction="column"
       gap="m"
       border-radius="m"
+      max-height="100vh"
+      overflow="auto"
     >
       <Core.GdsFlex flex-direction="column" gap="xs" z-index="3">
         <Core.GdsFlex gap="s">
@@ -159,7 +155,7 @@ export default function Snippets() {
                 setSearchQuery('') // Clear search when selecting component
               }}
             >
-              <Core.GdsOption value="">Component</Core.GdsOption>
+              <Core.GdsOption value="">All snippets</Core.GdsOption>
               {componentsWithSnippets.map((component) => (
                 <Core.GdsOption key={component.slug} value={component.slug}>
                   {component.title}
@@ -176,16 +172,16 @@ export default function Snippets() {
         >
           <Core.GdsText font="detail-regular-xs" color="neutral-02">
             {searchQuery
-              ? `Found ${filteredSnippets.length} snippet${filteredSnippets.length !== 1 ? 's' : ''}`
+              ? `Found ${FILSNIP.length} snippet${FILSNIP.length !== 1 ? 's' : ''}`
               : selectedComponent
-                ? `Showing ${filteredSnippets.length} snippet${filteredSnippets.length !== 1 ? 's' : ''}`
-                : `${allComponentSnippets.length} total snippets`}
+                ? `Showing ${FILSNIP.length} snippet${FILSNIP.length !== 1 ? 's' : ''}`
+                : `${ALL_COMP.length} total snippets`}
           </Core.GdsText>
         </Core.GdsFlex>
       </Core.GdsFlex>
 
       <Core.GdsFlex flex-direction="column" gap="2xl">
-        {filteredSnippets.length === 0 && (
+        {FILSNIP.length === 0 && (
           <Core.GdsText color="neutral-02" text-align="center" padding="xl">
             {searchQuery
               ? `No snippets found matching "${searchQuery}"`
@@ -193,7 +189,7 @@ export default function Snippets() {
           </Core.GdsText>
         )}
 
-        {filteredSnippets.map((snippet, index) => (
+        {FILSNIP.map((snippet, index) => (
           <Core.GdsFlex
             key={snippet.slug + index}
             flex-direction="column"
