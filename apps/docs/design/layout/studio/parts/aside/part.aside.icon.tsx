@@ -3,11 +3,11 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useContent } from 'apps/docs/settings/content'
 
 import * as Core from '@sebgroup/green-core/react'
 import * as Part from '../'
 import { Icon } from '../../../../../hooks'
+import { useContent } from '../../../../../settings/content'
 import { IconItem, IconPage } from '../../data/studio.data.types'
 
 interface IconAsideProps {

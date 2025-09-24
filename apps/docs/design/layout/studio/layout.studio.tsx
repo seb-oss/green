@@ -77,41 +77,86 @@ const Token = ({
       border-style="solid"
       border-width="0 0 5xs 0"
       border-color="subtle-01"
-      padding="0 0 0 xl"
+      padding={type === 'typography' ? '0' : '0 0 0 xl'}
+      className={type === 'typography' ? 'token-typography' : ''}
     >
-      <Core.GdsGrid columns="4" gap="s" align-items="center" padding="s 0">
-        <Core.GdsText>{item.token}</Core.GdsText>
-        {type !== 'colors' && type !== 'shadows' && item.value}
-        {type !== 'viewport' && <Preview type={type} token={item} />}
-        {(type === 'viewport' || type === 'shadows') && <div></div>}
-        {item.dark && (
-          <Preview
-            type={type}
-            token={{
-              token: item.token,
-              variable: item.variable,
-              value: item.dark,
-            }}
-          />
-        )}
-        <Core.GdsFlex align-items="center" gap="s">
-          <Part.Copy token={item.token} />
-          <Core.GdsFlex width="3xl">
-            {isHovered && (
-              <Core.GdsButton
-                onClick={() =>
-                  router.push(getTokenPath(type, pageSlug, item, group))
-                }
-                size="small"
-                rank="tertiary"
-                className="studio-cta"
+      {type === 'typography' ? (
+        <Core.GdsFlex
+          width="100%"
+          flex-direction="column"
+          gap="s"
+          padding="s 0 s 0"
+        >
+          <Core.GdsText font={item.token} width="100%">
+            <span
+              contentEditable="plaintext-only"
+              suppressContentEditableWarning
+              className="editable"
+              spellCheck="false"
+            >
+              {item.token}
+            </span>
+          </Core.GdsText>
+          {(() => {
+            const [fontSize, lineHeight, fontWeight] = item.value.split('/')
+            return (
+              <Core.GdsFlex
+                justify-content="space-between"
+                align-items="center"
               >
-                <Core.IconChevronRight />
-              </Core.GdsButton>
-            )}
-          </Core.GdsFlex>
+                <Core.GdsFlex gap="xl">
+                  <Core.GdsText color="neutral-02" font="detail-book-xs">
+                    Font size: {fontSize}
+                  </Core.GdsText>
+                  <Core.GdsText color="neutral-02" font="detail-book-xs">
+                    Line height: {lineHeight}
+                  </Core.GdsText>
+                  <Core.GdsText color="neutral-02" font="detail-book-xs">
+                    Weight: {fontWeight}
+                  </Core.GdsText>
+                </Core.GdsFlex>
+                <Core.GdsFlex width="280px">
+                  <Part.Copy token={item.token} />
+                </Core.GdsFlex>
+              </Core.GdsFlex>
+            )
+          })()}
         </Core.GdsFlex>
-      </Core.GdsGrid>
+      ) : (
+        <Core.GdsGrid columns="4" gap="s" align-items="center" padding="s 0">
+          <Core.GdsText>{item.token}</Core.GdsText>
+          {type !== 'colors' && type !== 'shadows' && item.value}
+          {type !== 'viewport' && <Preview type={type} token={item} />}
+          {(type === 'viewport' || type === 'shadows') && <div></div>}
+          {item.dark && (
+            <Preview
+              type={type}
+              token={{
+                token: item.token,
+                variable: item.variable,
+                value: item.dark,
+              }}
+            />
+          )}
+          <Core.GdsFlex align-items="center" gap="s">
+            <Part.Copy token={item.token} />
+            <Core.GdsFlex width="3xl">
+              {false && isHovered && (
+                <Core.GdsButton
+                  onClick={() =>
+                    router.push(getTokenPath(type, pageSlug, item, group))
+                  }
+                  size="small"
+                  rank="tertiary"
+                  className="studio-cta"
+                >
+                  <Core.IconChevronRight />
+                </Core.GdsButton>
+              )}
+            </Core.GdsFlex>
+          </Core.GdsFlex>
+        </Core.GdsGrid>
+      )}
     </Core.GdsFlex>
   )
 }
@@ -267,23 +312,28 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                   </Core.GdsText>
                 )}
               </Core.GdsFlex>
-              <Core.GdsFlex flex-direction="column" gap="0">
-                <Core.GdsCard>
-                  {page.key === 'colors' ? (
-                    <Core.GdsGrid columns="4" gap="s">
-                      <Core.GdsText>Token</Core.GdsText>
-                      <Core.GdsText>Light</Core.GdsText>
-                      <Core.GdsText>Dark</Core.GdsText>
-                    </Core.GdsGrid>
-                  ) : (
-                    <Core.GdsGrid columns="4" gap="s">
-                      <Core.GdsText>Token</Core.GdsText>
-                      <Core.GdsText>Value</Core.GdsText>
-                      <Core.GdsText></Core.GdsText>
-                      <Core.GdsText></Core.GdsText>
-                    </Core.GdsGrid>
-                  )}
-                </Core.GdsCard>
+              <Core.GdsFlex
+                flex-direction="column"
+                gap={page.key === 'typography' ? 'l' : '0'}
+              >
+                {page.key !== 'typography' && (
+                  <Core.GdsCard>
+                    {page.key === 'colors' ? (
+                      <Core.GdsGrid columns="4" gap="s">
+                        <Core.GdsText>Token</Core.GdsText>
+                        <Core.GdsText>Light</Core.GdsText>
+                        <Core.GdsText>Dark</Core.GdsText>
+                      </Core.GdsGrid>
+                    ) : (
+                      <Core.GdsGrid columns="4" gap="s">
+                        <Core.GdsText>Token</Core.GdsText>
+                        <Core.GdsText>Value</Core.GdsText>
+                        <Core.GdsText></Core.GdsText>
+                        <Core.GdsText></Core.GdsText>
+                      </Core.GdsGrid>
+                    )}
+                  </Core.GdsCard>
+                )}
                 {group.items.map((item) => (
                   <Token
                     key={item.token}
