@@ -431,6 +431,41 @@ const CustomLockedTemplate: StoryFn<DateStoryArgs & any> = (args) => {
     },
   }
 }
+const LargeBodyTemplate: StoryFn<DateStoryArgs & any> = (args) => {
+  const dateFc = new UntypedFormControl(args.ngModel)
+
+  return {
+    template: /*html*/ `
+    <div style="height: 2000px; padding-top:800px;">
+    <nggv-dateinput
+      [label]="label"
+      [locale]="locale"
+      [dateLocale]="dateLocale"
+      [disableDates]="disableDates"
+      [disableWeekDays]="disableWeekDays"
+      [required]="required"
+      [invalid]="invalid"
+      [error]="error"
+      [errorList]="errorList"
+      [withErrorIcon]="withErrorIcon"
+      [firstDayOfWeek]="firstDayOfWeek"
+      [formControl]="formControl"
+      [locked]="locked"
+      [size]="size"
+      [displayDisabledAsLocked]="displayDisabledAsLocked"
+      [closeCalendarOnEscape]="closeCalendarOnEscape"
+      [dynamicPosition]="dynamicPosition"
+      >
+    </nggv-dateinput>
+
+    </div>
+    `,
+    props: {
+      ...args,
+      formControl: dateFc,
+    },
+  }
+}
 
 export const Primary = PrimaryTemplate.bind({})
 Primary.args = {
@@ -563,4 +598,10 @@ export const DoNotCloseCalendarOnEscClick = PrimaryTemplate.bind({})
 DoNotCloseCalendarOnEscClick.args = {
   ...Primary.args,
   closeCalendarOnEscape: false,
+}
+
+export const DynamicPosition = LargeBodyTemplate.bind({})
+DynamicPosition.args = {
+  ...Primary.args,
+  dynamicPosition: true,
 }

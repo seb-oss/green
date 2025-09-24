@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.2
+
+### Patch Changes
+
+- 90751c6: **Button:** Update wording to be `XS` everywhere, spacing and sizes on storybook
+- 5991ecf: Fixing import/exports in /components & /pure
+
 ## 2.6.1
 
 ### Patch Changes
