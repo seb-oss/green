@@ -112,7 +112,7 @@ export default function StudioBreadcrumbs() {
               {item.label}
             </Link>
           ) : (
-            <Core.GdsText>{item.label}</Core.GdsText>
+            <Core.GdsText color="neutral-02">{item.label}</Core.GdsText>
           )}
           {index < links.length - 1 && (
             <Core.GdsText color="neutral-02">/</Core.GdsText>
