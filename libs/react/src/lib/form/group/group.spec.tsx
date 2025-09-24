@@ -11,7 +11,7 @@ describe('Group', () => {
 
   it('Should have groupBorder', () => {
     render(<Group groupBorder> Hello World </Group>)
-    expect(screen.getByText('Hello World')).toHaveClass('group-border')
+    expect(screen.getByText('Hello World')).toHaveClass('gds-group-border')
   })
 
   it('Should render error message (string)', () => {
