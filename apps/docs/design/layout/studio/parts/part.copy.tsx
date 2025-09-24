@@ -32,12 +32,10 @@ export default function Copy({ token }: { token?: string }) {
       variant={copied ? 'positive' : 'secondary'}
       flex="1"
     >
-      <Core.GdsText
-        font="detail-regular-s"
-        width="100%"
-        lines="1"
-        text-wrap="no-wrap"
-      >
+      {/* width="100%"
+      lines="1"
+      text-wrap="no-wrap" */}
+      <Core.GdsText font="detail-regular-s">
         {copied ? 'Copied!' : token}
       </Core.GdsText>
       <Core.GdsButton
