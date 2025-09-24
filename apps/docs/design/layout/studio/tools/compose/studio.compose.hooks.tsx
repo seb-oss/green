@@ -20,6 +20,7 @@ declare global {
 interface MonacoEditorProps {
   value: string
   onChange: (value: string) => void
+  theme: 'light' | 'dark'
 }
 
 export const MonacoEditor = dynamic<MonacoEditorProps>(
@@ -46,6 +47,7 @@ export const MonacoEditor = dynamic<MonacoEditorProps>(
           const MonacoEditorComponent: ComponentType<MonacoEditorProps> = ({
             value,
             onChange,
+            theme,
           }) => {
             const editorRef = useRef<HTMLDivElement>(null)
             const editorInstanceRef = useRef<any>(null)
@@ -57,13 +59,15 @@ export const MonacoEditor = dynamic<MonacoEditorProps>(
                 const editor = window.monaco.editor.create(editorRef.current, {
                   value,
                   language: 'html',
-                  theme: 'vs-light',
+                  inset: 0,
+                  // theme: 'vs-light',
+                  theme: theme === 'dark' ? 'vs-dark' : 'vs-light',
                   minimap: { enabled: false },
                   automaticLayout: true,
                   fontSize: 14,
                   lineNumbers: 'on',
-                  scrollBeyondLastLine: true,
-                  wordWrap: 'on',
+                  scrollBeyondLastLine: false,
+                  wordWrap: 'false',
                   padding: { top: 16, bottom: 16 },
                   formatOnPaste: true,
                   formatOnType: true,
@@ -92,6 +96,14 @@ export const MonacoEditor = dynamic<MonacoEditorProps>(
                 }
               }
             }, [])
+
+            useEffect(() => {
+              if (editorInstanceRef.current) {
+                window.monaco.editor.setTheme(
+                  theme === 'dark' ? 'vs-dark' : 'vs-light',
+                )
+              }
+            }, [theme])
 
             useEffect(() => {
               if (editorInstanceRef.current) {

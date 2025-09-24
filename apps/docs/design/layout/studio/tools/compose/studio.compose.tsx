@@ -6,6 +6,7 @@ import { notFound, usePathname, useRouter } from 'next/navigation'
 import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
+import { useSettings, useSettingsValue } from '../../../../../settings'
 import { useContent } from '../../../../../settings/content'
 import { useSearch } from '../../context/search.context'
 import {
@@ -21,8 +22,22 @@ const initialCode = `<gds-card padding="l" variant="secondary">
   <gds-text color="secondary">Start editing to see live preview</gds-text>
 </gds-card>`
 
+function getSystemTheme(): 'light' | 'dark' {
+  if (typeof window !== 'undefined') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light'
+  }
+  return 'light' // default fallback
+}
+
 export default function Compose() {
   const { actions } = useContent()
+  const THEME = useSettingsValue((s) => s.UI.Theme.ColorScheme)
+  const [systemTheme, setSystemTheme] = useState<'light' | 'dark'>(
+    getSystemTheme(),
+  )
+
   const pathname = usePathname()
   const [code, setCode] = useState('')
   const [activeTab, setActiveTab] = useState<'code' | 'snippets'>('code')
@@ -32,6 +47,19 @@ export default function Compose() {
 
   const { setTakeover, takeover } = useSearch()
   const [showCode, setShowCode] = useState(true)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setSystemTheme(e.matches ? 'dark' : 'light')
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
+  const effectiveTheme = THEME === 'auto' ? systemTheme : THEME
 
   useEffect(() => {
     const paths = pathname.split('/')
@@ -209,7 +237,11 @@ export default function Compose() {
           position="relative"
           width="100%"
         >
-          <MonacoEditor value={code} onChange={(newCode) => setCode(newCode)} />
+          <MonacoEditor
+            value={code}
+            onChange={(newCode) => setCode(newCode)}
+            theme={effectiveTheme}
+          />
         </Core.GdsCard>
       </Core.GdsCard>
 
