@@ -3,6 +3,7 @@ import * as Core from '@sebgroup/green-core/react'
 
 // Base interfaces
 export interface Interactive {
+  interactive: boolean
   key: string
   slug: string
   title: string
