@@ -437,7 +437,7 @@ export function Studio({
       columns="24"
       gap="2xl"
       width="100%"
-      padding="m"
+      padding={takeover ? '0' : 'm'}
       max-width="100%"
       box-sizing="border-box"
       className="studio"

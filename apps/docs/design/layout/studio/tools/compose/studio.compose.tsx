@@ -1,218 +1,17 @@
-// app/compose/page.tsx
+// studio/tools/compose/studio.compose.tsx
 'use client'
 
-import React, { ComponentType, useEffect, useRef, useState } from 'react'
-import dynamic from 'next/dynamic'
+import React, { useEffect, useState } from 'react'
 import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
 import { useSearch } from '../../context/search.context'
-
-declare global {
-  interface Window {
-    monaco: any
-    require: any
-  }
-}
-
-interface MonacoEditorProps {
-  value: string
-  onChange: (value: string) => void
-}
-
-const MonacoEditor = dynamic<MonacoEditorProps>(
-  () =>
-    new Promise<ComponentType<MonacoEditorProps>>((resolve) => {
-      const script = document.createElement('script')
-      script.src =
-        'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/loader.min.js'
-
-      script.onload = () => {
-        window.require.config({
-          paths: {
-            vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs',
-          },
-        })
-
-        const link = document.createElement('link')
-        link.rel = 'stylesheet'
-        link.href =
-          'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.45.0/min/vs/editor/editor.main.min.css'
-        document.head.appendChild(link)
-
-        window.require(['vs/editor/editor.main'], () => {
-          const MonacoEditorComponent: ComponentType<MonacoEditorProps> = ({
-            value,
-            onChange,
-          }) => {
-            const editorRef = useRef<HTMLDivElement>(null)
-            const editorInstanceRef = useRef<any>(null)
-
-            useEffect(() => {
-              if (!editorRef.current) return
-
-              if (!editorInstanceRef.current) {
-                const editor = window.monaco.editor.create(editorRef.current, {
-                  value,
-                  language: 'html',
-                  theme: 'vs-light',
-                  minimap: { enabled: false },
-                  automaticLayout: true,
-                  fontSize: 14,
-                  lineNumbers: 'on',
-                  scrollBeyondLastLine: false,
-                  wordWrap: 'on',
-                  padding: { top: 16, bottom: 16 },
-                  formatOnPaste: true,
-                  formatOnType: true,
-                })
-
-                editor.onDidChangeModelContent(() => {
-                  const newValue = editor.getValue()
-                  onChange(newValue)
-                })
-
-                editorInstanceRef.current = editor
-              }
-
-              return () => {
-                if (editorInstanceRef.current) {
-                  editorInstanceRef.current.dispose()
-                  editorInstanceRef.current = null
-                }
-              }
-            }, [])
-
-            useEffect(() => {
-              if (editorInstanceRef.current) {
-                const currentValue = editorInstanceRef.current.getValue()
-                if (currentValue !== value) {
-                  editorInstanceRef.current.setValue(value)
-                }
-              }
-            }, [value])
-
-            return (
-              <div
-                ref={editorRef}
-                style={{
-                  height: '100%',
-                  width: '100%',
-                  position: 'absolute',
-                  top: 20,
-                  left: 10,
-                  right: 10,
-                  bottom: 10,
-                }}
-              />
-            )
-          }
-
-          resolve(MonacoEditorComponent)
-        })
-      }
-      document.head.appendChild(script)
-    }),
-  {
-    ssr: false,
-    loading: () => (
-      <Core.GdsFlex height="100%" justify-content="center" align-items="center">
-        <Core.GdsText>Loading editor...</Core.GdsText>
-      </Core.GdsFlex>
-    ),
-  },
-)
-
-const convertAttributes = (
-  attribs: { [key: string]: string },
-  tagName: string,
-) => {
-  const props: { [key: string]: any } = {}
-
-  if (tagName === 'gds-text' && 'lines' in attribs) {
-    props.lines = Number(attribs.lines)
-  }
-
-  for (const [key, value] of Object.entries(attribs)) {
-    if (key === 'lines' && tagName === 'gds-text') continue
-
-    if (key.startsWith('.')) {
-      const propName = key.substring(1)
-      const cleanValue = value.replace(/\${(.+)}/, '$1')
-      try {
-        props[propName] = cleanValue.startsWith('[')
-          ? JSON.parse(cleanValue)
-          : cleanValue
-      } catch {
-        console.debug(`Failed to parse value for ${propName}:`, cleanValue)
-        props[propName] = cleanValue
-      }
-    } else if (value === '' || value === 'true') {
-      props[key] = true
-    } else if (value === 'false') {
-      props[key] = false
-    } else if (key === 'class') {
-      props.className = value
-      props.class = value
-    } else {
-      props[key] = value
-    }
-  }
-
-  if (tagName === 'gds-text' && (Core as any).GdsText?.define) {
-    try {
-      ;(Core as any).GdsText.define()
-    } catch {
-      console.debug('Failed to define GdsText component')
-    }
-  }
-
-  return props
-}
-
-const getComponent = (tagName: string) => {
-  if (!tagName.startsWith('gds-')) return null
-
-  if (tagName.startsWith('gds-icon-')) {
-    const iconName =
-      'Icon' +
-      tagName
-        .replace('gds-icon-', '')
-        .split('-')
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join('')
-    return (Core as any)[iconName]
-  }
-
-  const componentName =
-    'Gds' +
-    tagName
-      .split('-')
-      .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-      .join('')
-      .replace('Gds', '')
-
-  return (Core as any)[componentName]
-}
-
-const getNodeContent = (node: any): string => {
-  if (!node) return ''
-  if (typeof node === 'string') return node
-  if (node.type === 'text') return node.data || ''
-
-  if (node.type === 'tag') {
-    const attrs = Object.entries(node.attribs || {})
-      .map(([key, value]) => `${key}="${value}"`)
-      .join(' ')
-
-    const attrsStr = attrs ? ` ${attrs}` : ''
-    const content = node.children?.map(getNodeContent).join('') || ''
-
-    return `<${node.name}${attrsStr}>${content}</${node.name}>`
-  }
-
-  return ''
-}
+import {
+  convertAttributes,
+  getComponent,
+  getNodeContent,
+  MonacoEditor,
+} from './studio.compose.hooks'
 
 const initialCode = `<gds-card padding="l" variant="secondary">
   <gds-text tag="h1" font="heading-xl">Hello World</gds-text>
@@ -328,75 +127,84 @@ export default function Compose() {
 
   return (
     <Core.GdsGrid
-      columns={!showCode ? '1' : '1; l{2}'}
-      gap="l"
-      min-height="92vh"
+      columns={!showCode ? '1' : '1; m{2}'}
+      gap={takeover ? '0' : 'xs'}
+      min-height="100vh"
       className="layout-compose"
       padding="0"
       width="100%"
     >
-      <Core.GdsFlex
+      <Core.GdsCard
         display={showCode ? 'flex' : 'none'}
         flex-direction="column"
-        gap="m"
+        gap={takeover ? '3xs' : '2xs'}
         position="relative"
         min-width="100%"
+        padding={takeover ? '3xs' : 'xs'}
+        border-radius={takeover ? '0' : 'l'}
       >
+        <Core.GdsFlex
+          align-items="center"
+          gap="s"
+          width="100%"
+          height="3xl"
+          padding={takeover ? '0' : '0'}
+          justify-content="space-between"
+        >
+          <Core.GdsSegmentedControl
+            width="max-content"
+            value="edit"
+            size="small"
+          >
+            <Core.GdsSegment value="edit">Edit</Core.GdsSegment>
+            <Core.GdsSegment value="snippets">Snippets</Core.GdsSegment>
+          </Core.GdsSegmentedControl>
+          {/* <Core.GdsText tag="small" color="neutral-02" opacity="0.4">
+            <code style={{ fontFamily: 'sans-serif' }}>{`⌘ × S`}</code>
+          </Core.GdsText> */}
+          <Core.GdsButton onClick={handleSave} rank="tertiary" size="small">
+            Save
+            <Core.IconFloppyDisk slot="lead" size="m" />
+          </Core.GdsButton>
+        </Core.GdsFlex>
+
         <Core.GdsCard
           variant="secondary"
           height="100%"
           min-height="50vh"
           overflow="hidden"
           border-color="subtle-01"
-          padding="l 0"
-          border-radius="m"
+          padding="0"
+          border-radius={takeover ? 'xs' : 'm'}
           position="relative"
           width="100%"
         >
           <MonacoEditor value={code} onChange={(newCode) => setCode(newCode)} />
         </Core.GdsCard>
-        <Core.GdsFlex
-          z-index="10"
-          inset="auto 24px 24px auto"
-          position="absolute"
-          align-items="center"
-          gap="s"
-        >
-          <Core.GdsText tag="small" color="neutral-02" opacity="0.4">
-            <code style={{ fontFamily: 'sans-serif' }}>{`⌘ × S`}</code>
-          </Core.GdsText>
-          <Core.GdsButton onClick={handleSave} rank="primary" size="small">
-            Preview
-            <Core.IconEyeOpen slot="lead" />
-          </Core.GdsButton>
-        </Core.GdsFlex>
-      </Core.GdsFlex>
+      </Core.GdsCard>
 
       <Core.GdsCard
-        variant="primary"
-        height="100%"
-        padding="l"
-        border-radius="m"
-        overflow="auto"
-        background="transparent"
-        border-color="subtle-01"
-        position="relative"
-        max-width="100%"
-        data-pattern
+        align-items="center"
+        gap={takeover ? '3xs' : '2xs'}
+        padding={takeover ? '3xs' : 'xs'}
+        border-radius={takeover ? '0' : 'l'}
       >
-        {error ? (
-          <Core.GdsText color="negative">{error}</Core.GdsText>
-        ) : (
-          PREVIEW()
-        )}
-
         <Core.GdsFlex
-          z-index="10"
-          inset="auto 24px 24px auto"
-          position="absolute"
+          flex-direction="row"
           align-items="center"
-          gap="xs"
+          gap={takeover ? '0' : 's'}
+          justify-content="flex-start"
+          width="100%"
+          height="3xl"
+          padding={takeover ? '0' : '0 m'}
         >
+          <Core.GdsButton
+            rank="tertiary"
+            size="small"
+            onClick={() => setShowCode(!showCode)}
+          >
+            <Core.IconCodeBrackets size="m" />
+          </Core.GdsButton>
           <Core.GdsButton
             rank="tertiary"
             size="small"
@@ -406,14 +214,26 @@ export default function Compose() {
           >
             <Core.IconFullscreen size="m" />
           </Core.GdsButton>
-          <Core.GdsButton
-            rank="tertiary"
-            size="small"
-            onClick={() => setShowCode(!showCode)}
-          >
-            <Core.IconCodeBrackets size="m" />
-          </Core.GdsButton>
         </Core.GdsFlex>
+        <Core.GdsCard
+          variant="primary"
+          height="100%"
+          width="100%"
+          padding="l"
+          border-radius={takeover ? 'xs' : 'm'}
+          overflow="auto"
+          background="neutral-02"
+          border-color="subtle-01"
+          position="relative"
+          max-width="100%"
+          data-pattern
+        >
+          {error ? (
+            <Core.GdsText color="negative">{error}</Core.GdsText>
+          ) : (
+            PREVIEW()
+          )}
+        </Core.GdsCard>
       </Core.GdsCard>
     </Core.GdsGrid>
   )
