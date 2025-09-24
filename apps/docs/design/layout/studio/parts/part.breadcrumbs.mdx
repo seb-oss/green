@@ -1,0 +1,170 @@
+```tsx
+// studio.breadcrumbs.tsx
+import * as Core from '@sebgroup/green-core/react'
+import { Link } from '../../../atoms/link/link'
+import { useStudioPage } from '../data/studio.data.use'
+
+interface BreadcrumbItem {
+  label: string
+  href?: string
+  icon?: React.ComponentType
+}
+
+export default function StudioBreadcrumbs({ current }: { current?: string }) {
+  // Move hooks to the top level
+  const pathSegments = current?.split('/').filter(Boolean) || []
+  const mainPath =
+    pathSegments.length > 0 ? `/studio/${pathSegments[0]}` : '/studio'
+  const mainPage = useStudioPage(mainPath)
+
+  const breadcrumbs: BreadcrumbItem[] = [
+    {
+      label: 'Home',
+      href: '/',
+      icon: Core.IconHomeOpen,
+    },
+    {
+      label: 'Studio',
+      href: '/studio',
+      icon: Core.IconBrandGreen,
+    },
+  ]
+
+  // Handle the rest of the breadcrumbs
+  if (mainPage && pathSegments.length > 0) {
+    // Add main page
+    breadcrumbs.push({
+      label: mainPage.label,
+      href: pathSegments.length > 1 ? mainPage.slug : undefined,
+      icon: mainPage.icon
+        ? (Core[mainPage.icon] as React.ComponentType)
+        : undefined,
+    })
+
+    // Add remaining segments
+    for (let i = 1; i < pathSegments.length; i++) {
+      const isLastSegment = i === pathSegments.length - 1
+      const segment = pathSegments[i]
+      let label = segment
+
+      // Check for sub-pages first
+      const subPage = mainPage.pages?.find((p) => p.key === segment)
+      if (subPage) {
+        breadcrumbs.push({
+          label: subPage.title,
+          href: isLastSegment ? undefined : subPage.slug,
+        })
+        continue
+      }
+
+      // For token pages, look for the token value
+      if (mainPage.type === 'token' && mainPage.tokens) {
+        const token = mainPage.tokens
+          .flatMap((group) => group.items)
+          .find((item) => item.token === segment)
+
+        if (token) {
+          label = token.token
+        }
+      }
+
+      // For icon pages, look for the icon ID
+      if (mainPage.type === 'asset' && mainPage.icons) {
+        const icon = mainPage.icons
+          .flatMap((group) => group.items)
+          .find((item) => item.key === segment)
+
+        if (icon) {
+          label = icon.name
+        }
+      }
+
+      // Format the label to be more readable if it's not a token
+      if (mainPage.type !== 'token') {
+        label = label
+          .split('-')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+      }
+
+      breadcrumbs.push({
+        label,
+        href: isLastSegment ? undefined : `${mainPage.slug}/${segment}`,
+      })
+    }
+  }
+  return (
+    <Core.GdsFlex
+      justify-content="space-between"
+      align-items="center"
+      min-block-size="2xl"
+    >
+      {/* {breadcrumbs.map((item, index) =>
+        item.href ? (
+          <Link key={index} component="link" href={item.href}>
+            {item.icon && <item.icon slot="lead" size="m" />}
+            {item.label}
+          </Link>
+        ) : (
+          <Core.GdsFlex key={index} align-items="center" gap="2xs">
+            {item.label}
+          </Core.GdsFlex>
+        ),
+      )} */}
+
+      {/* <Core.GdsBreadcrumbs size="small" width="100%" flex="1">
+        {breadcrumbs.map((item, index) =>
+          item.href ? (
+            <Link key={index} component="link" href={item.href}>
+              {item.icon && <item.icon slot="lead" size="m" />}
+              {item.label}
+            </Link>
+          ) : (
+            <Core.GdsFlex key={index} align-items="center" gap="2xs">
+              {item.label}
+            </Core.GdsFlex>
+          ),
+        )}
+      </Core.GdsBreadcrumbs> */}
+      {current === 'icons' && (
+        <Core.GdsFlex
+          align-items="center"
+          gap="s"
+          width="max-content"
+          className="studio-cta"
+        >
+          <Core.GdsText color="warning-01">Font awesome migration</Core.GdsText>
+          <Link
+            component="button"
+            href="/studio/icons/migration"
+            rank="secondary"
+            variant="warning"
+            size="small"
+          >
+            Instruction
+            <Core.IconCircleQuestionmark slot="trail" />
+          </Link>
+        </Core.GdsFlex>
+      )}
+      {current === 'radius' && (
+        <Core.GdsFlex
+          align-items="center"
+          gap="s"
+          width="max-content"
+          className="studio-cta"
+        >
+          <Core.GdsText>Explore radius-padding relationships</Core.GdsText>
+          <Link
+            component="button"
+            href="/studio/radius/nested"
+            rank="secondary"
+            size="small"
+          >
+            Interactive Tool
+            <Core.IconPencilSparkle slot="trail" />
+          </Link>
+        </Core.GdsFlex>
+      )}
+    </Core.GdsFlex>
+  )
+}
