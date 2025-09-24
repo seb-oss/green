@@ -2,6 +2,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { notFound, usePathname, useRouter } from 'next/navigation'
 import parse from 'html-react-parser'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -12,6 +13,7 @@ import {
   getNodeContent,
   MonacoEditor,
 } from './studio.compose.hooks'
+import Snippets from './studio.snippets'
 
 const initialCode = `<gds-card padding="l" variant="secondary">
   <gds-text tag="h1" font="heading-xl">Hello World</gds-text>
@@ -19,7 +21,10 @@ const initialCode = `<gds-card padding="l" variant="secondary">
 </gds-card>`
 
 export default function Compose() {
+  // const { actions } = useContent()
   const [code, setCode] = useState(initialCode)
+  // const [code, setCode] = useState(initialCode)
+  const [activeTab, setActiveTab] = useState<'code' | 'snippets'>('code')
   const [previewCode, setPreviewCode] = useState(initialCode)
   const [componentsReady, setComponentsReady] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -135,12 +140,13 @@ export default function Compose() {
       width="100%"
     >
       <Core.GdsCard
+        background="none"
         display={showCode ? 'flex' : 'none'}
         flex-direction="column"
         gap={takeover ? '3xs' : '2xs'}
         position="relative"
         min-width="100%"
-        padding={takeover ? '3xs' : 'xs'}
+        padding="0"
         border-radius={takeover ? '0' : 'l'}
       >
         <Core.GdsFlex
@@ -153,22 +159,26 @@ export default function Compose() {
         >
           <Core.GdsSegmentedControl
             width="max-content"
-            value="edit"
+            value={activeTab}
             size="small"
+            onchange={(e: Event) => {
+              const target = e.target as HTMLSelectElement
+              setActiveTab(target.value as 'code' | 'snippets')
+            }}
           >
-            <Core.GdsSegment value="edit">Edit</Core.GdsSegment>
+            <Core.GdsSegment value="code">Edit</Core.GdsSegment>
             <Core.GdsSegment value="snippets">Snippets</Core.GdsSegment>
           </Core.GdsSegmentedControl>
-          {/* <Core.GdsText tag="small" color="neutral-02" opacity="0.4">
-            <code style={{ fontFamily: 'sans-serif' }}>{`⌘ × S`}</code>
-          </Core.GdsText> */}
-          <Core.GdsButton onClick={handleSave} rank="tertiary" size="small">
-            Save
-            <Core.IconFloppyDisk slot="lead" size="m" />
-          </Core.GdsButton>
+          {activeTab !== 'snippets' && (
+            <Core.GdsButton onClick={handleSave} rank="tertiary" size="small">
+              Save
+              <Core.IconFloppyDisk slot="lead" size="m" />
+            </Core.GdsButton>
+          )}
         </Core.GdsFlex>
-
+        {activeTab === 'snippets' && <Snippets />}
         <Core.GdsCard
+          display={activeTab === 'snippets' ? 'none' : 'flex'}
           variant="secondary"
           height="100%"
           min-height="50vh"
@@ -184,9 +194,10 @@ export default function Compose() {
       </Core.GdsCard>
 
       <Core.GdsCard
+        background="none"
         align-items="center"
         gap={takeover ? '3xs' : '2xs'}
-        padding={takeover ? '3xs' : 'xs'}
+        padding="0"
         border-radius={takeover ? '0' : 'l'}
       >
         <Core.GdsFlex

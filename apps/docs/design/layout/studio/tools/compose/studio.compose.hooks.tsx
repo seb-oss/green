@@ -62,11 +62,19 @@ export const MonacoEditor = dynamic<MonacoEditorProps>(
                   automaticLayout: true,
                   fontSize: 14,
                   lineNumbers: 'on',
-                  scrollBeyondLastLine: false,
+                  scrollBeyondLastLine: true,
                   wordWrap: 'on',
                   padding: { top: 16, bottom: 16 },
                   formatOnPaste: true,
                   formatOnType: true,
+
+                  // scrollBeyondLastLine: true, // Allow scrolling past the last line
+                  // automaticLayout: true, // Enable automatic layout updates
+                  overviewRulerBorder: false, // Optional: removes right border
+                  scrollbar: {
+                    vertical: 'visible', // Always show vertical scrollbar
+                    horizontalSlidePosition: 'visible',
+                  },
                 })
 
                 editor.onDidChangeModelContent(() => {
