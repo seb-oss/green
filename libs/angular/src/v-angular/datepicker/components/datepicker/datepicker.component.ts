@@ -1,12 +1,15 @@
 import { WeekDay } from '@angular/common'
 import {
   Component,
+  ElementRef,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  Renderer2,
   SimpleChanges,
   TemplateRef,
   ViewChild,
@@ -50,6 +53,21 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() lastValid: Date | undefined
   /** Sets a closing time for today to toggle availability for today's date. */
   @Input() closingTime: Date | undefined
+  /**
+   * When true, the datepicker will automatically choose to open above or below the input
+   * based on available space in the viewport, and will scale its height to fit if needed.
+   */
+  @Input() dynamicPosition = false
+  /** Needed to determent where to place datepicker if dropdownPosition === 'top' */
+  @Input() size: 'small' | 'large' = 'large'
+
+  @HostBinding('attr.data-position') get positionAttr() {
+    return this.datepickerPosition
+  }
+
+  @HostBinding('attr.data-size') get sizeAttr() {
+    return this.size
+  }
 
   /** @internal */
   activeCalendar!: CalendarMonth /*  = new CalendarMonth(new Date()) */
@@ -61,7 +79,15 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy {
   /** @internal */
   disabledDatesForActiveMonth: Date[] = []
 
+  // Indicates whether the datepicker should be displayed below ('bottom') or above ('top') the input, based on available space.
+  datepickerPosition: 'bottom' | 'top' = 'bottom'
+
   private subs: Subscription[] = []
+
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (
@@ -94,6 +120,8 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy {
         ? new Date(this.selected)
         : new Date()
     this.activeCalendar = new CalendarMonth(initDate)
+
+    if (this.dynamicPosition) this.setDropdownPosition()
   }
 
   ngOnDestroy() {
@@ -160,5 +188,36 @@ export class DatepickerComponent implements OnInit, OnChanges, OnDestroy {
     // else, change active calendar to match the date clicked
     this.selected = date
     this.changeActiveCalendar(new CalendarMonth(date))
+  }
+
+  setDropdownPosition() {
+    const datePicker = this.elementRef.nativeElement
+    const parent = datePicker.parentElement
+
+    const rect = parent.getBoundingClientRect()
+
+    const viewportHeight = window.innerHeight
+    const spaceBelow = viewportHeight - rect.bottom
+    const spaceAbove = rect.top
+
+    const MARGIN = 10
+    const DATEPICKER_HEIGHT = 362 // 6 ROWS OF DATES, TO BE SURE
+    let maxDatepickerHeight: number
+
+    if (spaceBelow >= DATEPICKER_HEIGHT) {
+      this.datepickerPosition = 'bottom'
+      maxDatepickerHeight = DATEPICKER_HEIGHT
+    } else if (spaceAbove >= DATEPICKER_HEIGHT) {
+      this.datepickerPosition = 'top'
+      maxDatepickerHeight = DATEPICKER_HEIGHT
+    } else if (spaceBelow > spaceAbove) {
+      this.datepickerPosition = 'bottom'
+      maxDatepickerHeight = Math.max(spaceBelow - MARGIN, DATEPICKER_HEIGHT) // 10px margin, height 362px
+    } else {
+      this.datepickerPosition = 'top'
+      maxDatepickerHeight = Math.max(spaceAbove - MARGIN, DATEPICKER_HEIGHT) // 10px margin, height 362px
+    }
+
+    this.renderer.setStyle(datePicker, 'max-height', `${maxDatepickerHeight}px`)
   }
 }
