@@ -158,7 +158,7 @@ export function ComponentLayoutClient({
               overflow="hidden"
               padding="0"
               variant="secondary"
-              border-width="4xs"
+              border-width="5xs"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               data-pattern

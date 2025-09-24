@@ -452,7 +452,7 @@ export function Studio({
         flex-direction="column"
         gap={PATH?.includes('compose') ? 'm' : '4xl'}
         grid-column={takeover ? '1 / 25' : '6 / 25'}
-        padding="l l 0 0"
+        padding={takeover ? 'xs' : 'l l 0 0'}
       >
         {!takeover && (
           <Part.Header title={title} description={description} page={page} />
