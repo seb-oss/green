@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation'
 import * as Core from '@sebgroup/green-core/react'
 import { Link } from '../../../atoms/link/link'
 import { studioData } from '../data/studio.data'
+import { useStudioPage } from '../data/studio.data.use'
 
 interface LinkItem {
   label: string
@@ -15,6 +16,8 @@ interface LinkItem {
 export default function StudioBreadcrumbs() {
   const pathname = usePathname()
   const segments = pathname?.split('/').filter(Boolean) || []
+  const mainPath = segments.length > 0 ? `/studio/${segments[1]}` : '/studio'
+  const currentPage = useStudioPage(mainPath)
 
   const links: LinkItem[] = [
     {
@@ -40,39 +43,60 @@ export default function StudioBreadcrumbs() {
     })
   }
 
-  // Process remaining segments
-  if (segments.length > 1) {
-    const currentPage = studioData
-      .flatMap((category) => category.pages)
-      .find((page) => page.key === segments[1])
+  // Add current page and its details
+  if (currentPage && segments.length > 1) {
+    links.push({
+      label: currentPage.label,
+      href: segments.length > 2 ? currentPage.slug : undefined,
+      icon: currentPage.icon
+        ? (Core[currentPage.icon] as React.ComponentType)
+        : undefined,
+      isLast: segments.length === 2,
+    })
 
-    if (currentPage) {
-      links.push({
-        label: currentPage.label,
-        href: segments.length > 2 ? currentPage.slug : undefined,
-        icon: currentPage.icon
-          ? (Core[currentPage.icon] as React.ComponentType)
-          : undefined,
-        isLast: segments.length === 2,
-      })
+    // Handle sub-pages, icons, or tokens
+    if (segments.length > 2) {
+      if (currentPage.type === 'asset' && currentPage.icons) {
+        // Find icon in groups
+        const icon = currentPage.icons
+          .flatMap((group) => group.items)
+          .find((item) => item.key === segments[2])
 
-      // Handle sub-pages or tokens
-      if (segments.length > 2) {
-        // Check for sub-pages first
-        const subPage = currentPage.pages?.find((p) => p.key === segments[2])
-        if (subPage) {
+        if (icon) {
           links.push({
-            label: subPage.title,
+            label: icon.name,
+            isLast: true,
+          })
+        }
+      } else if (currentPage.type === 'token' && currentPage.tokens) {
+        // Find token in groups
+        const token = currentPage.tokens
+          .flatMap((group) => group.items)
+          .find((item) => item.token === segments[2])
+
+        if (token) {
+          links.push({
+            label: token.token,
             isLast: true,
           })
         } else {
-          // It's a token or icon
-          const label =
-            segments[2].charAt(0).toUpperCase() + segments[2].slice(1)
+          // Might be a category like L1, L2, etc.
           links.push({
-            label,
-            isLast: true,
+            label: segments[2].toUpperCase(),
+            isLast: segments.length === 3,
+            href:
+              segments.length > 3
+                ? `${currentPage.slug}/${segments[2]}`
+                : undefined,
           })
+
+          // Add token if there's one more segment
+          if (segments.length > 3) {
+            links.push({
+              label: segments[3],
+              isLast: true,
+            })
+          }
         }
       }
     }
