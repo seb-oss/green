@@ -445,8 +445,9 @@ export function Studio({
       {!takeover && <Part.Sidebar current={PATH} />}
       <Core.GdsFlex
         flex-direction="column"
-        gap="4xl"
+        gap={PATH?.includes('compose') ? 'm' : '4xl'}
         grid-column={takeover ? '1 / 25' : '6 / 25'}
+        padding="l l 0 0"
       >
         {!takeover && (
           <Part.Header title={title} description={description} page={page} />

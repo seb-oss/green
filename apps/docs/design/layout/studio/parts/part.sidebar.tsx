@@ -16,7 +16,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
       border-radius="m"
       position="sticky"
       inset="32px 0 0 0"
-      height="90vh"
+      height="max-content"
       className="studio-sidebar"
     >
       <Core.GdsFlex align-items="center" gap="m" padding="xl l 0 xl">
