@@ -326,7 +326,7 @@ export function Studio({
   const searchContent = useSearchContent(PAGE || null)
   // Then derive filteredPage
   const filteredPage = PAGE ? searchContent : null
-
+  const isInteractivePage = PAGE?.pages?.some((p) => p.slug === PATH)
   const isDetailView =
     PART.length > 4 || // For nested paths like colors/l1/token
     (PART.length > 3 &&
@@ -343,7 +343,8 @@ export function Studio({
         'duration',
       ].includes(ITEM.toLowerCase()))
 
-  const NARROW = PATH.split('/')[3] && PAGE && LEVEL && isDetailView
+  const NARROW =
+    !isInteractivePage && PATH.split('/')[3] && PAGE && LEVEL && isDetailView
 
   // const { setQuery, setCategory } = useSearch()
 
@@ -417,10 +418,8 @@ export function Studio({
             ) : (
               children
             )}
-
-            {/* {PAGE ? CONTENT(PAGE, ROUT, PATH) : children} */}
           </Core.GdsCard>
-          {ITEM && PAGE && !PATH?.includes('compose') && (
+          {ITEM && PAGE && !isInteractivePage && !PATH?.includes('compose') && (
             <Part.Aside KEY={ITEM} page={PAGE} level={LEVEL} />
           )}
         </Core.GdsGrid>

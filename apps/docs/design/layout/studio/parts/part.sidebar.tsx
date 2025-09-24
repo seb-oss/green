@@ -86,7 +86,7 @@ export default function StudioSidebar({ current }: { current?: string }) {
               width="max-content"
               rank="tertiary"
             >
-              <Core.IconChevronLeft slot="lead" />
+              <Core.IconChevronLeft slot="lead" size="m" />
               Docs
             </Link>
             <Toggle />

@@ -36,6 +36,7 @@ export const studioData: StudioCategory[] = [
         pages: [
           {
             key: 'migration',
+            interactive: true,
             slug: '/studio/icons/migration',
             title: 'Icon Migration',
             description: 'Guide for migrating from Font Awesome to Green icons',
@@ -103,6 +104,7 @@ export const studioData: StudioCategory[] = [
         pages: [
           {
             key: 'nested',
+            interactive: true,
             slug: '/studio/radius/nested',
             title: 'Nested Radii',
             description:

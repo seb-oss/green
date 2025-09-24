@@ -14,7 +14,7 @@ export default function StudioHeader({ title, description, page }: Types) {
   return (
     <Core.GdsFlex flex-direction="column" gap="l" className="studio-header">
       <Part.Meta title={title} description={description} />
-      <Core.GdsFlex justify-content="space-between" height="5xl">
+      <Core.GdsFlex justify-content="space-between" height="xl">
         <Part.Breadcrumbs key={page} />
         <Part.Actions />
       </Core.GdsFlex>
