@@ -3,8 +3,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useContent } from 'apps/docs/settings/content'
 
 import * as Core from '@sebgroup/green-core/react'
+import * as Part from '../'
 import { Icon } from '../../../../../hooks'
 import { IconItem, IconPage } from '../../data/studio.data.types'
 
@@ -23,9 +25,39 @@ export function IconAside({
 }: IconAsideProps) {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState<'code' | 'download'>('code')
+  const { actions } = useContent()
 
-  const currentItem = allItems.find((item) => item.key === itemKey) as IconItem
-  if (!currentItem) return null
+  const iconComponent = actions.getComponent('icon')
+  const fullIconData = iconComponent?.icons?.[itemKey]
+
+  const currentItem = allItems.find((item) => item.key === itemKey)
+  if (!currentItem || !fullIconData) return null
+
+  // const currentItem = allItems.find((item) => item.key === itemKey) as IconItem
+  // if (!currentItem) return null
+  const iconCategory = page.icons?.find((group) =>
+    group.items.some((item) => item.key === itemKey),
+  )?.title
+
+  const handleSvgDownload = async (variant: 'regular' | 'solid') => {
+    const url = fullIconData.static[variant]
+    const response = await fetch(url)
+    const blob = await response.blob()
+
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = `${currentItem.key}-${variant}.svg`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
+  const handleSvgCopy = async (variant: 'regular' | 'solid') => {
+    const url = fullIconData.static[variant]
+    const response = await fetch(url)
+    const text = await response.text()
+    navigator.clipboard.writeText(text)
+  }
 
   return (
     <Core.GdsFlex flex-direction="column" gap="m">
@@ -66,7 +98,6 @@ export function IconAside({
         >
           <Core.GdsFlex justify-content="space-between" width="100%">
             <Core.GdsText font="detail-book-s">{currentItem.name}</Core.GdsText>
-
             <Core.GdsFlex gap="s" justify-content="center" align-items="center">
               {currentIndex > 0 && (
                 <Core.GdsButton
@@ -97,8 +128,11 @@ export function IconAside({
             </Core.GdsFlex>
           </Core.GdsFlex>
           <Core.GdsText color="neutral-02" font="detail-book-s">
-            Category
+            {iconCategory}
           </Core.GdsText>
+          {/* {fullIconData.meta.tags.map((tag) => (
+            <Core.GdsBadge key={tag}>{tag}</Core.GdsBadge>
+          ))} */}
         </Core.GdsFlex>
 
         {/* Tabs and Content */}
@@ -143,145 +177,186 @@ export function IconAside({
                   name="frameworks"
                 >
                   <Core.GdsCard
-                    padding="s"
-                    flex-direction="row"
-                    align-items="center"
-                    justify-content="space-between"
-                    variant="primary"
-                    gap="0"
+                    flex-direction="column"
+                    justify-content="stretch"
+                    align-content="stretch"
+                    align-items="stretch"
+                    gap="m"
+                    border-width="5xs"
+                    padding="s m"
                   >
-                    <Core.GdsText font="detail-regular-xs">
-                      {`<Icon${currentItem.key}`}
-                    </Core.GdsText>
-                    <Core.GdsButton
-                      rank="tertiary"
-                      size="small"
-                      onClick={() => {
-                        navigator.clipboard.writeText(
-                          `import '@sebgroup/green-core/${currentItem.key}'`,
-                        )
-                      }}
-                    >
-                      <Core.IconCopy size="s" />
-                    </Core.GdsButton>
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="detail-book-xs">
+                        Component
+                      </Core.GdsText>
+                      <Part.Copy token={fullIconData.framework.web.component} />
+                    </Core.GdsFlex>
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="detail-book-xs">Import</Core.GdsText>
+                      <Part.Copy token={fullIconData.framework.web.import} />
+                    </Core.GdsFlex>
                   </Core.GdsCard>
                 </Core.GdsDetails>
-
                 <Core.GdsDetails summary="React" size="small" name="frameworks">
                   <Core.GdsCard
-                    padding="s"
                     flex-direction="column"
-                    align-items="flex-start"
-                    variant="secondary"
-                    gap="0"
+                    justify-content="stretch"
+                    align-content="stretch"
+                    align-items="stretch"
+                    gap="m"
+                    border-width="5xs"
+                    padding="s m"
                   >
-                    <Core.GdsFlex
-                      flex-direction="row"
-                      justify-content="space-between"
-                      align-items="center"
-                      width="100%"
-                    >
-                      <Core.GdsText font="detail-regular-xs">
-                        React
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="detail-book-xs">
+                        Component
                       </Core.GdsText>
-                      <Core.GdsButton
-                        rank="tertiary"
-                        size="small"
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `import { ${currentItem.component} } from '@sebgroup/green-react'`,
-                          )
-                        }}
-                      >
-                        <Core.IconCopy size="s" />
-                      </Core.GdsButton>
+                      <Part.Copy
+                        token={fullIconData.framework.react.component}
+                      />
                     </Core.GdsFlex>
-                    <Core.GdsText
-                      font="detail-regular-xs"
-                      font-family="mono"
-                      color="neutral-02"
-                    >
-                      {`import { ${currentItem.component} } ...`}
-                    </Core.GdsText>
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="detail-book-xs">Import</Core.GdsText>
+                      <Part.Copy token={fullIconData.framework.react.import} />
+                    </Core.GdsFlex>
                   </Core.GdsCard>
                 </Core.GdsDetails>
-
                 <Core.GdsDetails
                   summary="Angular"
                   size="small"
                   name="frameworks"
                 >
                   <Core.GdsCard
-                    padding="s"
                     flex-direction="column"
-                    align-items="flex-start"
-                    variant="secondary"
-                    gap="0"
+                    justify-content="stretch"
+                    align-content="stretch"
+                    align-items="stretch"
+                    gap="m"
+                    border-width="5xs"
+                    padding="s m"
                   >
-                    <Core.GdsFlex
-                      flex-direction="row"
-                      justify-content="space-between"
-                      align-items="center"
-                      width="100%"
-                    >
-                      <Core.GdsText font="detail-regular-xs">
-                        Angular
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="detail-book-xs">
+                        Component
                       </Core.GdsText>
-                      <Core.GdsButton
-                        rank="tertiary"
-                        size="small"
-                        onClick={() => {
-                          navigator.clipboard.writeText(
-                            `import '@sebgroup/green-core/${currentItem.key}'`,
-                          )
-                        }}
-                      >
-                        <Core.IconCopy size="s" />
-                      </Core.GdsButton>
+                      <Part.Copy
+                        token={fullIconData.framework.angular.component}
+                      />
                     </Core.GdsFlex>
-                    <Core.GdsText
-                      font="detail-regular-xs"
-                      font-family="mono"
-                      color="neutral-02"
-                    >
-                      {`import ...`}
-                    </Core.GdsText>
+                    <Core.GdsFlex flex-direction="column" gap="3xs">
+                      <Core.GdsText font="detail-book-xs">Import</Core.GdsText>
+                      <Part.Copy
+                        token={fullIconData.framework.angular.import}
+                      />
+                    </Core.GdsFlex>
                   </Core.GdsCard>
                 </Core.GdsDetails>
               </Core.GdsFlex>
             </Core.GdsCard>
           ) : (
             <Core.GdsCard
-              flex-direction="column"
               gap="s"
+              flex-direction=""
               variant="primary"
               background="none"
               border="none"
               padding="0"
               width="100%"
             >
-              <Core.GdsFlex gap="xs" width="100%" flex-direction="row">
+              <Core.GdsCard
+                variant="primary"
+                flex-direction="row"
+                align-items="center"
+                padding="xs"
+                border-radius="l"
+                flex="1"
+              >
                 <Core.GdsCard
-                  padding="xl l"
+                  padding="xl"
                   gap="2xs"
                   variant="secondary"
                   align-items="center"
-                  flex="1"
+                  width="120px"
                 >
                   <Icon name={currentItem.component} size="l" solid />
                   <Core.GdsText font="detail-regular-xs">Solid</Core.GdsText>
                 </Core.GdsCard>
+                <Core.GdsFlex
+                  gap="4xs"
+                  padding="4xs"
+                  flex-direction="column"
+                  align-items="flex-start"
+                  justify-content="flex-start"
+                >
+                  <Core.GdsButton
+                    size="xs"
+                    rank="tertiary"
+                    onClick={() => handleSvgDownload('solid')}
+                    align-items="flex-start"
+                    width="max-content"
+                  >
+                    <Core.IconCloudDownload slot="lead" />
+                    Download
+                  </Core.GdsButton>
+                  <Core.GdsButton
+                    size="xs"
+                    rank="tertiary"
+                    onClick={() => handleSvgCopy('solid')}
+                    align-items="flex-start"
+                    width="max-content"
+                  >
+                    <Core.IconCopy slot="lead" />
+                    Copy
+                  </Core.GdsButton>
+                </Core.GdsFlex>
+              </Core.GdsCard>
+              <Core.GdsCard
+                variant="primary"
+                flex-direction="row"
+                align-items="center"
+                padding="xs"
+                border-radius=";"
+                flex="1"
+              >
                 <Core.GdsCard
-                  padding="xl l"
+                  padding="xl"
                   gap="2xs"
                   variant="secondary"
                   align-items="center"
-                  flex="1"
+                  width="120px"
                 >
                   <Icon name={currentItem.component} size="l" />
                   <Core.GdsText font="detail-regular-xs">Regular</Core.GdsText>
                 </Core.GdsCard>
-              </Core.GdsFlex>
+                <Core.GdsFlex
+                  gap="4xs"
+                  padding="4xs"
+                  flex-direction="column"
+                  align-items="flex-start"
+                  justify-content="flex-start"
+                >
+                  <Core.GdsButton
+                    size="xs"
+                    rank="tertiary"
+                    onClick={() => handleSvgDownload('regular')}
+                    align-items="flex-start"
+                    width="max-content"
+                  >
+                    <Core.IconCloudDownload slot="lead" />
+                    Download
+                  </Core.GdsButton>
+                  <Core.GdsButton
+                    size="xs"
+                    rank="tertiary"
+                    onClick={() => handleSvgCopy('regular')}
+                    align-items="flex-start"
+                    width="max-content"
+                  >
+                    <Core.IconCopy slot="lead" />
+                    Copy
+                  </Core.GdsButton>
+                </Core.GdsFlex>
+              </Core.GdsCard>
             </Core.GdsCard>
           )}
         </Core.GdsFlex>
