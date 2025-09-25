@@ -59,7 +59,13 @@ export default function Main() {
               {category.description}
             </Core.GdsText>
           </Core.GdsFlex>
-          <Core.GdsGrid columns="4" gap="l" width="100%">
+          <Core.GdsGrid
+            columns="4"
+            gap="l"
+            width="100%"
+            auto-columns="150"
+            className="test"
+          >
             {category.pages.map((page) => {
               const IconComponent = Core[
                 page.icon
@@ -70,8 +76,16 @@ export default function Main() {
                   padding="l"
                   variant="primary"
                   onClick={() => router.push(page.slug)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      router.push(page.slug)
+                    }
+                  }}
                   border-radius="m"
                   role="link"
+                  tabindex="0"
+                  className="linked-card"
                 >
                   <Core.GdsFlex
                     gap="m"

@@ -21,7 +21,12 @@ export default function StudioSidebar({ current }: { current?: string }) {
       overflow="auto"
       max-height="90vh"
     >
-      <Core.GdsFlex align-items="center" gap="m" padding="xl l 0 xl">
+      <Core.GdsFlex
+        align-items="center"
+        gap="m"
+        padding="xl l 0 xl"
+        margin="0 0 0 xs"
+      >
         <Link href="/studio">
           <Core.IconBrandGreen size="l" />
           <Core.GdsText font="heading-xs">Green Studio</Core.GdsText>

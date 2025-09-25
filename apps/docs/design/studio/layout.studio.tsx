@@ -255,11 +255,19 @@ const CONTENT = (
                     padding="l"
                     key={item.key}
                     onClick={() => router.push(`${page.slug}/${item.key}`)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        router.push(`${page.slug}/${item.key}`)
+                      }
+                    }}
                     justify-content="space-between"
                     align-items="center"
                     variant={ACTIVE === item.key ? 'primary' : 'secondary'}
                     border-radius="m"
-                    className="icon-card"
+                    className="icon-card linked-card"
+                    role="link"
+                    tabindex="0"
                   >
                     {item.component && (
                       <Core.GdsFlex
