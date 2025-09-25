@@ -69,7 +69,8 @@ export default function Playground() {
           </Core.GdsButton>
         </Core.GdsCard>
 
-        <Core.GdsFlex flex-direction="column" gap="s">
+        <Core.GdsCard variant="secondary" border-radius="l" flex="1">
+          <Core.GdsText tag="h2">Button</Core.GdsText>
           <Core.GdsSegmentedControl
             size="small"
             width="max-content"
@@ -83,10 +84,8 @@ export default function Playground() {
             <Core.GdsSegment value="api">Public API</Core.GdsSegment>
           </Core.GdsSegmentedControl>
           {activeTab === 'component' ? (
-            <Core.GdsCard variant="secondary" border-radius="l" flex="1">
-              <Core.GdsText tag="h2">Button</Core.GdsText>
-              <Core.GdsDivider color="subtle-01" />
-              <Core.GdsFlex gap="s">
+            <Core.GdsFlex flex-direction="column" gap="l" flex="1">
+              <Core.GdsFlex gap="l">
                 <Core.GdsInput
                   size="small"
                   label="Label"
@@ -102,7 +101,7 @@ export default function Playground() {
                 >
                   <Core.IconPencilSign slot="lead" />
                 </Core.GdsInput>
-                <Core.GdsFlex width="180px">
+                <Core.GdsFlex width="240px">
                   <Core.GdsDropdown
                     label="Size"
                     size="small"
@@ -128,7 +127,7 @@ export default function Playground() {
                 </Core.GdsFlex>
               </Core.GdsFlex>
               {/* Icon Selection */}
-              <Core.GdsFlex gap="s">
+              <Core.GdsFlex gap="l">
                 <Core.GdsDropdown
                   size="small"
                   label="Icon"
@@ -166,7 +165,7 @@ export default function Playground() {
                   })}
                 </Core.GdsDropdown>
 
-                <Core.GdsFlex width="180px">
+                <Core.GdsFlex width="240px">
                   <Core.GdsDropdown
                     label="Slot"
                     size="small"
@@ -186,7 +185,7 @@ export default function Playground() {
                 </Core.GdsFlex>
               </Core.GdsFlex>
 
-              <Core.GdsFlex gap="s">
+              <Core.GdsFlex gap="l">
                 <Core.GdsDropdown
                   label="Rank"
                   size="small"
@@ -235,16 +234,16 @@ export default function Playground() {
                 onClick={() => handleReset()}
                 rank="secondary"
               >
-                <Core.IconArrowRotateCounterClockwise slot="lead" />
+                <Core.IconArrow slot="lead" />
                 Reset
               </Core.GdsButton>
-            </Core.GdsCard>
+            </Core.GdsFlex>
           ) : (
             <Core.GdsCard variant="secondary" border-radius="l" flex="1">
               <ArgsTable componentName="button" plain />
             </Core.GdsCard>
           )}
-        </Core.GdsFlex>
+        </Core.GdsCard>
       </Core.GdsGrid>
     </Core.GdsFlex>
   )
