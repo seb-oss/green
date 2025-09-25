@@ -3,12 +3,13 @@
 import { useState } from 'react'
 
 import * as Core from '@sebgroup/green-core/react'
+import { Icon } from '../../../../hooks'
 import { useContent } from '../../../../settings/content'
 import { ArgsTable } from '../../../atoms/props/props'
 
 interface ButtonConfig {
   text: string
-  icon?: string
+  icon?: string // Keep as string to store the icon name
   iconSlot: 'lead' | 'trail'
   size: 'xs' | 'small' | 'medium' | 'large'
   width?: string
@@ -19,14 +20,20 @@ interface ButtonConfig {
 export default function Playground() {
   const { actions } = useContent()
   const [activeTab, setActiveTab] = useState<'component' | 'api'>('component')
+  const icons = actions.getIcons()
 
   const [buttonConfig, setButtonConfig] = useState<ButtonConfig>({
-    text: 'Button',
+    text: 'Love it!',
+    icon: 'IconHeart',
     iconSlot: 'lead',
     size: 'medium',
     rank: 'primary',
-    variant: 'neutral',
+    variant: 'brand',
   })
+
+  const IconComponent = buttonConfig.icon
+    ? Core[buttonConfig.icon as keyof typeof Core]
+    : null
 
   return (
     <Core.GdsFlex flex-direction="column" gap="xl">
@@ -48,13 +55,13 @@ export default function Playground() {
             rank={buttonConfig.rank}
             variant={buttonConfig.variant}
           >
-            {/* {buttonConfig.icon && buttonConfig.iconSlot === 'lead' && (
-                  <Core[buttonConfig.icon] slot="lead" />
-                )} */}
+            {IconComponent && buttonConfig.iconSlot === 'lead' && (
+              <IconComponent slot="lead" />
+            )}
             {buttonConfig.text}
-            {/* {buttonConfig.icon && buttonConfig.iconSlot === 'trail' && (
-                  <Core[buttonConfig.icon] slot="trail" />
-                )} */}
+            {IconComponent && buttonConfig.iconSlot === 'trail' && (
+              <IconComponent slot="trail" />
+            )}
           </Core.GdsButton>
         </Core.GdsCard>
 
@@ -75,17 +82,20 @@ export default function Playground() {
             <Core.GdsCard variant="secondary" border-radius="l" flex="1">
               <Core.GdsFlex gap="s">
                 <Core.GdsInput
-                  label="Label"
                   size="small"
+                  label="Label"
                   value={buttonConfig.text}
-                  onchange={(e: Event) => {
+                  oninput={(e: Event) => {
                     const target = e.target as HTMLInputElement
                     setButtonConfig((prev) => ({
                       ...prev,
                       text: target.value,
                     }))
                   }}
-                />
+                  // onInput={(e) => handleSearch((e.target as HTMLInputElement).value)}
+                >
+                  <Core.IconPencilSign slot="lead" />
+                </Core.GdsInput>
 
                 <Core.GdsDropdown
                   label="Size"
@@ -99,6 +109,7 @@ export default function Playground() {
                     }))
                   }}
                 >
+                  <Core.IconDotGridOneVertical slot="lead" />
                   <Core.GdsOption value="xs">XS</Core.GdsOption>
                   <Core.GdsOption value="small">Small</Core.GdsOption>
                   <Core.GdsOption value="medium">Medium</Core.GdsOption>
@@ -110,6 +121,8 @@ export default function Playground() {
                 <Core.GdsDropdown
                   size="small"
                   label="Icon"
+                  searchable
+                  clearable
                   value={buttonConfig.icon}
                   onchange={(e: Event) => {
                     const target = e.target as HTMLSelectElement
@@ -119,14 +132,29 @@ export default function Playground() {
                     }))
                   }}
                 >
-                  <Core.GdsOption value="">No icon</Core.GdsOption>
-                  {actions.getIcons().map((icon) => (
-                    <Core.GdsOption key={icon.id} value={icon.reactName}>
-                      {icon.displayName}
-                    </Core.GdsOption>
-                  ))}
+                  {IconComponent && buttonConfig.iconSlot === 'lead' && (
+                    <IconComponent slot="lead" />
+                  )}
+                  {IconComponent && buttonConfig.iconSlot === 'trail' && (
+                    <IconComponent slot="lead" />
+                  )}
+                  <Core.GdsOption value="">
+                    <Core.GdsFlex align-items="center" gap="s">
+                      No icon
+                    </Core.GdsFlex>
+                  </Core.GdsOption>
+                  {actions.getIcons().map((icon) => {
+                    const IconComp = Core[icon.reactName as keyof typeof Core]
+                    return (
+                      <Core.GdsOption key={icon.id} value={icon.reactName}>
+                        <Core.GdsFlex align-items="center" gap="s">
+                          {IconComp && <IconComp />}
+                          {icon.displayName}
+                        </Core.GdsFlex>
+                      </Core.GdsOption>
+                    )
+                  })}
                 </Core.GdsDropdown>
-
                 <Core.GdsDropdown
                   label="Slot"
                   size="small"
@@ -139,12 +167,13 @@ export default function Playground() {
                     }))
                   }}
                 >
+                  <Core.IconArrowLeftRight slot="lead" />
                   <Core.GdsOption value="lead">Lead</Core.GdsOption>
                   <Core.GdsOption value="trail">Trail</Core.GdsOption>
                 </Core.GdsDropdown>
               </Core.GdsFlex>
 
-              <Core.GdsFlex gap="s">
+              <Core.GdsFlex gap="s" flex-direction="column">
                 <Core.GdsDropdown
                   label="Rank"
                   size="small"
@@ -160,6 +189,7 @@ export default function Playground() {
                     }))
                   }}
                 >
+                  <Core.IconChevronDoubleUp slot="lead" />
                   <Core.GdsOption value="primary">Primary</Core.GdsOption>
                   <Core.GdsOption value="secondary">Secondary</Core.GdsOption>
                   <Core.GdsOption value="tertiary">Tertiary</Core.GdsOption>
@@ -177,6 +207,7 @@ export default function Playground() {
                     }))
                   }}
                 >
+                  <Core.IconCirclesThree slot="lead" />
                   <Core.GdsOption value="brand">Brand</Core.GdsOption>
                   <Core.GdsOption value="neutral">Neutral</Core.GdsOption>
                   <Core.GdsOption value="positive">Positive</Core.GdsOption>
@@ -185,33 +216,7 @@ export default function Playground() {
                   <Core.GdsOption value="warning">Warning</Core.GdsOption>
                 </Core.GdsDropdown>
               </Core.GdsFlex>
-
-              <Core.GdsFlex gap="s">
-                <Core.GdsInput
-                  label="Width"
-                  size="small"
-                  value={buttonConfig.width}
-                  onchange={(e: Event) => {
-                    const target = e.target as HTMLInputElement
-                    setButtonConfig((prev) => ({
-                      ...prev,
-                      width: target.value,
-                    }))
-                  }}
-                />
-                <Core.GdsInput
-                  label="Margin"
-                  size="small"
-                  value={buttonConfig.width}
-                  onchange={(e: Event) => {
-                    const target = e.target as HTMLInputElement
-                    setButtonConfig((prev) => ({
-                      ...prev,
-                      width: target.value,
-                    }))
-                  }}
-                />
-              </Core.GdsFlex>
+              <Core.GdsButton width="max-content">Reset</Core.GdsButton>
             </Core.GdsCard>
           ) : (
             <Core.GdsCard variant="secondary" border-radius="l" flex="1">
