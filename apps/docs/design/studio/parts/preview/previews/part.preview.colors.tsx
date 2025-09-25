@@ -15,7 +15,8 @@ export default function Colors({ token }: ColorPreviewProps) {
         border-style="solid"
         box-shadow="m"
         style={
-          { background: token.value } as CSSProperties & CSSStyleDeclaration
+          // { background: token.value } as CSSProperties & CSSStyleDeclaration
+          { background: token.variable } as CSSProperties & CSSStyleDeclaration
         }
       />
       <Core.GdsText>{token.value}</Core.GdsText>

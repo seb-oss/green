@@ -4,6 +4,8 @@
 import { useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
+import Footer from '../../atoms/footer/footer'
+import { Link } from '../../atoms/link/link'
 import { studioData } from '../data/studio.data'
 
 // Define the icon props type
@@ -22,12 +24,26 @@ export default function Main() {
       gap="4xl"
       width="100%"
       className="studio-page"
+      padding="xl 0 0 0"
     >
-      <Core.GdsFlex flex-direction="column" gap="m">
-        <Core.GdsText font="heading-2xl">Green Studio</Core.GdsText>
-        <Core.GdsText color="neutral-02" font="body-l">
-          Design tokens, tools, and assets for building with Green
+      <Core.GdsFlex flex-direction="column" gap="s">
+        <Core.GdsText tag="h1" font="heading-l">
+          Green Studio
         </Core.GdsText>
+        <Core.GdsFlex flex-direction="column" gap="s">
+          <Core.GdsText font="body-regular-l">
+            Design tokens, tools, and assets for building with Green.
+          </Core.GdsText>
+          <Core.GdsFlex gap="4xs" flex-direction="row" align-items="center">
+            <Core.GdsText font="body-regular-m">
+              {'For full documentation, please go to the '}
+              <Link href="/" component="link" text-decoration="underline">
+                docs page
+              </Link>
+              {'.'}
+            </Core.GdsText>
+          </Core.GdsFlex>
+        </Core.GdsFlex>
       </Core.GdsFlex>
 
       {categories.map((category) => (
@@ -55,6 +71,7 @@ export default function Main() {
                   variant="primary"
                   onClick={() => router.push(page.slug)}
                   border-radius="m"
+                  role="link"
                 >
                   <Core.GdsFlex
                     gap="m"
@@ -78,18 +95,7 @@ export default function Main() {
         </Core.GdsFlex>
       ))}
 
-      {false && (
-        <Core.GdsFlex justify-content="flex-end" padding="l">
-          <Core.GdsButton
-            onClick={() => router.push('/')}
-            rank="secondary"
-            size="small"
-          >
-            <Core.IconChevronLeft slot="lead" />
-            Back to Docs
-          </Core.GdsButton>
-        </Core.GdsFlex>
-      )}
+      <Footer />
     </Core.GdsFlex>
   )
 }
