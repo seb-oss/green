@@ -7,7 +7,15 @@ import { useSearch } from '../context/search.context'
 export default function StudioSearch({ page }: { page?: string }) {
   const router = useRouter()
   const pathName = usePathname()
-  const { query, category, setQuery, setCategory, getCategories } = useSearch()
+  const {
+    query,
+    category,
+    setQuery,
+    setCategory,
+    getCategories,
+    previewText,
+    setPreviewText,
+  } = useSearch()
   const categories = page ? getCategories(page) : []
 
   const handleSearch = (value: string) => {
@@ -43,6 +51,19 @@ export default function StudioSearch({ page }: { page?: string }) {
         >
           <Core.IconMagnifyingGlass slot="lead" size="m" />
         </Core.GdsInput>
+        {page === 'typography' && (
+          <Core.GdsInput
+            width="100%"
+            plain
+            value={previewText}
+            oninput={(e) =>
+              setPreviewText((e.target as HTMLInputElement).value)
+            }
+            clearable
+          >
+            <Core.IconPencilWave slot="lead" size="m" />
+          </Core.GdsInput>
+        )}
         {/* {categories.length > 0 && (
           <Core.GdsFlex width="160px">
             <Core.GdsDropdown

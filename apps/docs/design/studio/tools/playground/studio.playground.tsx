@@ -40,7 +40,7 @@ export default function Playground() {
   }
 
   return (
-    <Core.GdsFlex flex-direction="column" gap="xl">
+    <Core.GdsFlex flex-direction="column" gap="xl" className="studio-page">
       <Core.GdsGrid columns="2" gap="l">
         <Core.GdsCard
           justify-content="center"
@@ -69,20 +69,28 @@ export default function Playground() {
           </Core.GdsButton>
         </Core.GdsCard>
 
-        <Core.GdsCard variant="secondary" border-radius="l" flex="1">
-          <Core.GdsText tag="h2">Button</Core.GdsText>
-          <Core.GdsSegmentedControl
-            size="small"
-            width="max-content"
-            value={activeTab}
-            onchange={(e: Event) => {
-              const target = e.target as HTMLSelectElement
-              setActiveTab(target.value as 'component' | 'api')
-            }}
+        <Core.GdsCard variant="secondary" border-radius="l" flex="1" gap="m">
+          <Core.GdsFlex
+            gap="s"
+            justify-content="space-between"
+            align-items="center"
           >
-            <Core.GdsSegment value="component">Properties</Core.GdsSegment>
-            <Core.GdsSegment value="api">Public API</Core.GdsSegment>
-          </Core.GdsSegmentedControl>
+            <Core.GdsText font="heading-s">Button</Core.GdsText>
+            <Core.GdsSegmentedControl
+              size="small"
+              width="max-content"
+              value={activeTab}
+              onchange={(e: Event) => {
+                const target = e.target as HTMLSelectElement
+                setActiveTab(target.value as 'component' | 'api')
+              }}
+            >
+              <Core.GdsSegment value="component">Properties</Core.GdsSegment>
+              <Core.GdsSegment value="api">Public API</Core.GdsSegment>
+            </Core.GdsSegmentedControl>
+          </Core.GdsFlex>
+          <Core.GdsDivider color="subtle-01" />
+
           {activeTab === 'component' ? (
             <Core.GdsFlex flex-direction="column" gap="l" flex="1">
               <Core.GdsFlex gap="l">
@@ -237,11 +245,12 @@ export default function Playground() {
                 <Core.IconArrow slot="lead" />
                 Reset
               </Core.GdsButton>
+              <Core.GdsAlert variant="notice" dismissible>
+                This is experimental feature, more components will be added!
+              </Core.GdsAlert>
             </Core.GdsFlex>
           ) : (
-            <Core.GdsCard variant="secondary" border-radius="l" flex="1">
-              <ArgsTable componentName="button" plain />
-            </Core.GdsCard>
+            <ArgsTable componentName="button" plain />
           )}
         </Core.GdsCard>
       </Core.GdsGrid>

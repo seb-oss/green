@@ -45,14 +45,25 @@ const Token = ({
   group,
   pageSlug,
   type,
+  previewText,
 }: {
   type: PreviewType
   item: TokenItem
   group: TokenGroup
   pageSlug: string
+  previewText?: string
 }) => {
   const [isHovered, setIsHovered] = useState(false)
   const router = useRouter()
+  // const [localText, setLocalText] = useState<string>(previewText || item.token)
+  // useEffect(() => {
+  //   if (type === 'typography') {
+  //     if (previewText !== undefined) {
+  //       setLocalText(previewText || item.token)
+  //     }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [previewText, type, item.token])
 
   const getTokenPath = (
     type: PreviewType,
@@ -94,8 +105,13 @@ const Token = ({
               suppressContentEditableWarning
               className="editable"
               spellCheck="false"
+              // onInput={(e) => {
+              //   const v = (e.target as HTMLSpanElement).textContent || ''
+              //   setLocalText(v)
+              // }}
             >
-              {item.token}
+              {/* {item.token} */}
+              {previewText ? previewText : item.token}
             </span>
           </Core.GdsText>
           {(() => {
@@ -162,7 +178,12 @@ const Token = ({
   )
 }
 
-const CONTENT = (page: StudioPage, router: any, path: string) => {
+const CONTENT = (
+  page: StudioPage,
+  router: any,
+  path: string,
+  previewText: string,
+) => {
   // const CONTENT = (page: StudioPage, router: NextRouter, path: string) => {
   const ACTIVE = path.split('/')[3]
 
@@ -342,6 +363,9 @@ const CONTENT = (page: StudioPage, router: any, path: string) => {
                     group={group}
                     pageSlug={page.slug}
                     type={page.key as PreviewType}
+                    previewText={
+                      page.key === 'typography' ? previewText : undefined
+                    }
                   />
                 ))}
               </Core.GdsFlex>
@@ -363,7 +387,14 @@ export function Studio({
   title,
   description,
 }: StudioProps) {
-  const { query, setQuery, setCategory, takeover } = useSearch()
+  const {
+    query,
+    setQuery,
+    setCategory,
+    takeover,
+    previewText,
+    setPreviewText,
+  } = useSearch()
   const PATH = usePathname()
   const MAIN = `/${PATH.split('/').slice(1, 3).join('/')}`
   const PAGE = useStudioPage(MAIN)
@@ -471,7 +502,7 @@ export function Studio({
             {query && !hasResults ? (
               <NoResults />
             ) : filteredPage ? (
-              CONTENT(filteredPage, ROUT, PATH)
+              CONTENT(filteredPage, ROUT, PATH, previewText)
             ) : (
               children
             )}

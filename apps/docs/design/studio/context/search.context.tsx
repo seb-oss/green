@@ -11,9 +11,11 @@ import {
 interface SearchContextType {
   takeover: boolean
   query: string
+  previewText: string
   category: string
   setTakeover: (takeover: boolean) => void
   setQuery: (query: string) => void
+  setPreviewText: (query: string) => void
   setCategory: (category: string) => void
   getCategories: (pageType: string) => string[]
 }
@@ -23,6 +25,7 @@ const SearchContext = createContext<SearchContextType | undefined>(undefined)
 export function SearchProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('')
+  const [previewText, setPreviewText] = useState('')
   const [takeover, setTakeover] = useState(false)
 
   // Handle keyboard shortcut
@@ -68,6 +71,8 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         takeover,
         setTakeover,
         query,
+        previewText,
+        setPreviewText,
         category,
         setQuery,
         setCategory,
