@@ -74,7 +74,11 @@ export function Home({
       data-template-home
     >
       <GdsFlex flex-direction="column" gap="l; l{xl}">
-        <GdsFlex justify-content="center" padding="l 0 0">
+        <GdsFlex
+          justify-content="center"
+          padding="l 0 0"
+          className="hero-intro"
+        >
           <GdsText
             tag="h1"
             font="heading-m; s{heading-l}"
@@ -89,7 +93,12 @@ export function Home({
           </GdsText>
         </GdsFlex>
 
-        <GdsFlex width="100%" justify-content="center" flex-direction="column">
+        <GdsFlex
+          width="100%"
+          justify-content="center"
+          flex-direction="column"
+          className="hero-search"
+        >
           <GdsButton
             rank="secondary"
             max-width="80ch"
@@ -104,14 +113,22 @@ export function Home({
           </GdsButton>
         </GdsFlex>
 
-        <GdsCard padding="0" overflow="hidden">
-          <GdsImg
-            src="https://api.seb.io/assets/launch-hero.jpg"
-            object-fit="cover"
-            width="100%"
-            height="100%"
-          ></GdsImg>
-        </GdsCard>
+        <div className="hero-animated">
+          <GdsCard
+            padding="0"
+            overflow="hidden"
+            background="none"
+            margin="2xl 0 0 0"
+          >
+            <GdsImg
+              className="hero-img"
+              src="https://api.seb.io/assets/launch-hero.jpg"
+              object-fit="cover"
+              width="100%"
+              height="100%"
+            ></GdsImg>
+          </GdsCard>
+        </div>
       </GdsFlex>
 
       <GdsFlex flex-direction="column" gap="xl">

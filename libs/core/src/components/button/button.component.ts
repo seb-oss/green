@@ -77,7 +77,7 @@ class Button extends GdsFormControlElement<any> {
     | 'warning' = 'neutral'
 
   /**
-   * Sets the size of the button. Defaults to "small".
+   * Sets the size of the button. Defaults to "medium".
    */
   @property({ reflect: true })
   size: 'xs' | 'small' | 'medium' | 'large' = 'medium'
@@ -117,22 +117,26 @@ class Button extends GdsFormControlElement<any> {
 
   #isIconButton = false
 
-  connectedCallback(): void {
-    super.connectedCallback()
-    this.setAttribute('role', 'none')
-    TransitionalStyles.instance.apply(this, 'gds-button')
-  }
-
-  focus(options?: FocusOptions): void {
-    this._getValidityAnchor()?.focus(options)
-  }
-
   get #isLink() {
     return this.href.length > 0
   }
 
   get #defaultRel() {
     return this.target === '_blank' ? 'noreferrer noopener' : undefined
+  }
+
+  focus(options?: FocusOptions): void {
+    this._getValidityAnchor()?.focus(options)
+  }
+
+  click(): void {
+    this._getValidityAnchor()?.click()
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback()
+    this.setAttribute('role', 'none')
+    TransitionalStyles.instance.apply(this, 'gds-button')
   }
 
   render() {

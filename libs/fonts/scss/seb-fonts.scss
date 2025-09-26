@@ -1,6 +1,2 @@
-/*!
- *  @deprecated
- */
-
-@import 'variables';
-@import 'SEB-SansSerif';
+@forward 'variables';
+@use 'SEB-SansSerif';

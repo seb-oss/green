@@ -20,12 +20,8 @@ const style = css`
       width: 100%;
       padding: 1ch;
 
-      &.indicators {
-        border-spacing: var(--gds-sys-space-xs) var(--gds-sys-space-l);
-      }
-
       &.small {
-        border-spacing: var(--gds-sys-space-2xs);
+        border-spacing: var(--gds-sys-space-3xs);
 
         thead th {
           width: var(--gds-sys-space-xl);
@@ -63,7 +59,7 @@ const style = css`
         box-sizing: border-box;
         text-align: center;
         user-select: none;
-        border-width: var(--gds-sys-space-3xs);
+        border-width: var(--gds-sys-space-4xs);
         border-style: solid;
         border-color: transparent;
         border-radius: var(--gds-sys-radius-max);
@@ -71,8 +67,7 @@ const style = css`
         outline-style: solid;
         outline-color: transparent;
         outline-width: 0px;
-        outline-offset: var(--gds-sys-space-3xs);
-        //--_background: transparent;
+        outline-offset: var(--gds-sys-space-4xs);
 
         &.short {
           width: var(--gds-sys-space-4xl);
@@ -92,8 +87,8 @@ const style = css`
         }
 
         &[aria-selected='true'] {
-          background: var(--gds-sys-color-l3-neutral-01);
           color: var(--gds-sys-color-content-neutral-03);
+          background: var(--gds-sys-color-l3-neutral-01);
         }
 
         &:not(.disabled):hover {
@@ -145,8 +140,7 @@ const style = css`
 
         &:focus-visible {
           outline-color: var(--gds-sys-color-content-neutral-01);
-          outline-width: var(--gds-sys-space-3xs);
-          outline-offset: 3.75px;
+          outline-width: var(--gds-sys-space-4xs);
         }
 
         &.small {

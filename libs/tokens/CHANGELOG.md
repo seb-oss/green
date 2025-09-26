@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.2.0
+
+### Minor Changes
+
+- 8cdf051: **Studio:** Studio tokens
+- 8cdf051: **Tokens:** Viewport tokens match the style expression bp
+
+## 2.1.0
+
+### Minor Changes
+
+- e5f21f0: **2XS:** Change value to 6 and add 5xs = 1
+- e5f21f0: **Tokens:** Spacing and radius tokens update
+
+### Patch Changes
+
+- e5f21f0: **Tokens:** typography fix for detail-s
+
+## 2.0.2
+
+### Patch Changes
+
+- 3c7eee0: **Typography:** Change primary font-family name to `SEB SansSerif` and keep `SEB SansSerif GDS` as a fallback
+
 ## 2.0.1
 
 ### Patch Changes

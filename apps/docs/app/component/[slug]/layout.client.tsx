@@ -56,16 +56,11 @@ export function ComponentLayoutClient({
     if (pathname.includes('/ux-text')) return 'ux-text'
     if (pathname.includes('/accessibility')) return 'accessibility'
     if (pathname.includes('/code')) return 'code'
+    if (pathname.includes('/faq')) return 'faq'
     return 'overview'
   }
 
   const section = getSection(pathname)
-
-  // const section = pathname.includes('/ux-text')
-  //   ? 'ux-text'
-  //   : pathname.includes('/accessibility')
-  //     ? 'accessibility'
-  //     : 'overview'
 
   if (!isLoaded) return null
 
@@ -163,7 +158,7 @@ export function ComponentLayoutClient({
               overflow="hidden"
               padding="0"
               variant="secondary"
-              border-width="4xs"
+              border-width="5xs"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
               data-pattern
@@ -224,6 +219,24 @@ export function ComponentLayoutClient({
           <Tabs slug={component.slug} />
 
           <Core.GdsFlex flex-direction="column" id="component-content" gap="xl">
+            {component.slug === 'icon' && (
+              <Core.GdsAlert
+                variant="notice"
+                buttonLabel="View all icons"
+                onClick={() => router.push('/studio/icons')}
+              >
+                <Core.GdsText
+                  font="body-book-m"
+                  display="inline"
+                  font-weight="bold"
+                >
+                  Explore our icon library!
+                </Core.GdsText>
+                {` `}
+                Discover our searchable icon library with regular and solid
+                variants.
+              </Core.GdsAlert>
+            )}
             {section === 'overview' && (component.preamble || anatomyImage) && (
               <Core.GdsFlex
                 flex-direction="column"
@@ -270,7 +283,9 @@ export function ComponentLayoutClient({
                 )}
               </Core.GdsFlex>
             )}
+
             {children}
+
             {component.soon && (
               <Core.GdsAlert variant="notice">
                 {component.title} documentation is in progress.
@@ -316,35 +331,6 @@ export function ComponentLayoutClient({
               section={section}
               versus={versus}
             />
-
-            {/* {component.platform?.web && (
-              <Core.GdsFlex gap="xs" flex-direction="column" padding="m">
-                <Core.GdsDiv height="1px" background="primary"></Core.GdsDiv>
-                <Core.GdsText tag="small" color="neutral-02">
-                  Platform
-                </Core.GdsText>
-                <Core.GdsFlex gap="s">
-                  {component.platform.web && (
-                    <Core.GdsFlex align-items="center" gap="4xs">
-                      <Core.IconCompassRound></Core.IconCompassRound>
-                      Web
-                    </Core.GdsFlex>
-                  )}
-                  {component.platform.ios && (
-                    <Core.GdsFlex align-items="center" gap="4xs">
-                      <Core.IconPhoneDynamicIsland></Core.IconPhoneDynamicIsland>
-                      iOS
-                    </Core.GdsFlex>
-                  )}
-                  {component.platform.android && (
-                    <Core.GdsFlex align-items="center" gap="4xs">
-                      <Core.IconRobot></Core.IconRobot>
-                      Android
-                    </Core.GdsFlex>
-                  )}
-                </Core.GdsFlex>
-              </Core.GdsFlex>
-            )} */}
           </Core.GdsFlex>
         )}
       </Core.GdsGrid>

@@ -50,8 +50,8 @@ $font-weight-normal: 400;
 $font-weight-bold: 500;
 $font-weight-bolder: 800;
 
-$font-family-sans-serif: 'SEB SansSerif GDS', 'SEBSansSerif', sans-serif,
-  'Helvetica Neue', Helvetica, Arial !default;
+$font-family-sans-serif: 'SEB SansSerif', 'SEB SansSerif GDS', 'SEBSansSerif',
+  sans-serif, 'Helvetica Neue', Helvetica, Arial !default;
 $root-font-size: 16px !default;
 $base-font-size: 1rem !default; // relative to root element font size (html)
 $font-path: '../fonts' !default;

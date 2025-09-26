@@ -1,5 +1,38 @@
 # Changelog
 
+## 6.4.1
+
+### Patch Changes
+
+- 4b6a253: **V-Angular:** Date input: Added Close on scroll and Dynamic positioning
+- Updated dependencies [90751c6]
+- Updated dependencies [5991ecf]
+  - @sebgroup/green-core@2.6.2
+
+## 6.4.0
+
+### Minor Changes
+
+- a69c3e1: Revert moving v-angular dropdown-list to CDK portal
+
+### Patch Changes
+
+- Updated dependencies [da0ab9a]
+- Updated dependencies [2ba96f6]
+  - @sebgroup/green-core@2.5.3
+
+## 6.3.0
+
+### Minor Changes
+
+- bfda3a6: V-Angular Dropdown: move dropdown list to CDK portal
+
+### Patch Changes
+
+- Updated dependencies [33b3aa0]
+- Updated dependencies [33b3aa0]
+  - @sebgroup/green-core@2.5.2
+
 ## 6.2.1
 
 ### Patch Changes
