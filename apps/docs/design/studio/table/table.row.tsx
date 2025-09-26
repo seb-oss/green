@@ -13,6 +13,7 @@ interface Column {
     | 'light'
     | 'dark'
     | 'variable'
+    | 'action'
     | 'empty'
   content?: React.ReactNode
 }
@@ -64,6 +65,8 @@ export default function Row({ columns, name, copyValue }: TokenRowProps) {
               return <Copy key={index} name={copyValue || name} />
             case 'empty':
               return <div key={index}></div>
+            case 'action':
+              return <div key={index}>{column.content}</div>
             default:
               return <div key={index}>{column.content}</div>
           }
