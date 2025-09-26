@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.5.0
+
+### Minor Changes
+
+- fd6856f: **NggCoreFormsModule:** Add support for standalone [formControl] directive. Fixes #2410
+
 ## 6.4.1
 
 ### Patch Changes
