@@ -73,15 +73,16 @@ export function styleExpressionProperty(
         return this['__' + String(descriptor)]
       },
       set: async function (newValue) {
-        if (!newValue) {
-          if (options?.reflect) this.removeAttribute(attributeName)
-          return
-        }
+        newValue = newValue?.toString().trim() ?? ''
 
         this['__' + String(descriptor)] = newValue
 
         if (options?.reflect) {
-          this.setAttribute(attributeName, String(newValue))
+          if (!newValue) {
+            this.removeAttribute(attributeName)
+          } else {
+            this.setAttribute(attributeName, String(newValue))
+          }
         }
 
         await this.updateComplete
