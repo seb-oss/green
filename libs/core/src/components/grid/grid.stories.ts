@@ -4,7 +4,6 @@ import './grid'
 import '../card'
 import '../flex'
 import '../div'
-import './grid.stories.css'
 
 import { html } from 'lit'
 

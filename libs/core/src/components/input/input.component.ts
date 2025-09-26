@@ -59,7 +59,7 @@ class Input extends GdsFormControlElement<string> {
   /**
    * Controls the font-size of texts and height of the field.
    */
-  @property({ type: String })
+  @property({ reflect: true })
   size: 'large' | 'small' = 'large'
 
   /**

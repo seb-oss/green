@@ -21,7 +21,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
 
   const PATH = usePathname()
   const Composer = PATH === '/compose'
-  const Studio = PATH.startsWith('/studio')
+  const Studio = PATH.startsWith('/studio') || PATH.startsWith('/play')
 
   return (
     <div className={classes} {...rest}>
@@ -39,7 +39,7 @@ export function Root({ children, className, fluid, ...rest }: RootProps) {
           <GdsFlex
             flex-direction="column"
             max-width={Composer || Studio ? '100%' : '1200px'}
-            padding="m"
+            padding={Studio ? '0' : 'm'}
             width="100%"
             margin="0 auto"
             gap="2xl; l{0}"

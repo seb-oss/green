@@ -1,0 +1,86 @@
+// studio/parts/part.search.tsx
+import { usePathname, useRouter } from 'next/navigation'
+
+import * as Core from '@sebgroup/green-core/react'
+import { useSearch } from '../context/search.context'
+
+export default function StudioSearch({ page }: { page?: string }) {
+  const router = useRouter()
+  const pathName = usePathname()
+  const {
+    query,
+    category,
+    setQuery,
+    setCategory,
+    getCategories,
+    previewText,
+    setPreviewText,
+  } = useSearch()
+  const categories = page ? getCategories(page) : []
+
+  const handleSearch = (value: string) => {
+    setQuery(value)
+  }
+
+  const handleCategoryChange = (e: Event) => {
+    const target = e.target as HTMLSelectElement
+    setCategory(target.value)
+    if (target.value) {
+      router.push(`/studio/${page}/${target.value.toLowerCase()}`)
+    } else {
+      router.push(`/studio/${page}`)
+    }
+  }
+
+  if (pathName?.includes('compose') || pathName?.includes('playground'))
+    return null
+
+  return (
+    <Core.GdsFlex
+      align-items="center"
+      justify-content="space-between"
+      className="studio-search"
+    >
+      <Core.GdsFlex align-items="center" width="100%" gap="s">
+        <Core.GdsInput
+          width="400px"
+          plain
+          value={query}
+          onInput={(e) => handleSearch((e.target as HTMLInputElement).value)}
+          clearable
+        >
+          <Core.IconMagnifyingGlass slot="lead" size="m" />
+        </Core.GdsInput>
+        {page === 'typography' && (
+          <Core.GdsInput
+            width="100%"
+            plain
+            value={previewText}
+            oninput={(e) =>
+              setPreviewText((e.target as HTMLInputElement).value)
+            }
+            clearable
+          >
+            <Core.IconPencilWave slot="lead" size="m" />
+          </Core.GdsInput>
+        )}
+        {/* {categories.length > 0 && (
+          <Core.GdsFlex width="160px">
+            <Core.GdsDropdown
+              plain
+              value={category}
+              onchange={handleCategoryChange}
+            >
+              <Core.GdsOption value="">All Categories</Core.GdsOption>
+              {categories.map((cat) => (
+                <Core.GdsOption key={cat} value={cat}>
+                  {cat}
+                </Core.GdsOption>
+              ))}
+            </Core.GdsDropdown>
+          </Core.GdsFlex>
+        )} */}
+      </Core.GdsFlex>
+    </Core.GdsFlex>
+  )
+}
