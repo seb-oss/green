@@ -83,14 +83,15 @@ const FormControlTemplate: StoryFn<NggDatepickerComponent> = (args) => {
     <ngg-datepicker
       formControlName="date"
       label="Date"
-      [isValid]="ngForm.submitted ? date.valid : null"
+      [isValid]="ngForm.submitted ? validationForm.get('date').valid : null"
       [options]="options"
+      [errorMessage]="!ngForm['submitted'] ? 'Select date' : 'Enter valid date'"
     >
       <!-- Hint text when not submitted -->
-      <ng-container data-form-info *ngIf="!ngForm['submitted']"
+      <ng-container data-form-infoX *ngIf="!ngForm['submitted']"
         >Select date</ng-container
       >
-      <ng-container data-form-info *ngIf="ngForm['submitted']">
+      <ng-container data-form-infoX *ngIf="ngForm['submitted']">
         <!-- Text when form control contains one or more errors -->
         <ng-container *ngIf="date.errors as errors">
           <!-- Text for each error (only one will be displayed at a time) -->

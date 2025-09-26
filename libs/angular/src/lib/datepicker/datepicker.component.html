@@ -14,9 +14,6 @@
     [hideLabel]="hideLabel"
     [disabledWeekends]="disabledWeekends"
     [disabledDates]="disabledDates"
-  >
-    <span slot="message">
-      <ng-content select="[data-form-info]"></ng-content>
-    </span>
-  </gds-datepicker>
+    [errorMessage]="errorMessage"
+  ></gds-datepicker>
 </div>
