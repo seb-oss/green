@@ -1,7 +1,6 @@
 // tabs.tsx
 'use client'
 
-import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import * as Core from '@sebgroup/green-core/react'
@@ -24,6 +23,7 @@ export default function Tabs({ slug }: TabsProps) {
   const OVERVIEW = currentPath === `/component/${slug}`
   const UXTEXT = currentPath === `/component/${slug}/ux-text`
   const A11Y = currentPath === `/component/${slug}/accessibility`
+  const FAQ = currentPath === `/component/${slug}/faq`
 
   const InternalLink = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
@@ -43,7 +43,12 @@ export default function Tabs({ slug }: TabsProps) {
         component.accessibility.section.length > 0),
   )
 
-  if (!hasUXText && !hasAccessibility) return null
+  const hasFAQ = Boolean(
+    (Array.isArray(component.faq) && component.faq.length > 0) ||
+      (component.faq?.section && component.faq.section.length > 0),
+  )
+
+  if (!hasUXText && !hasAccessibility && !hasFAQ) return null
 
   return (
     <Core.GdsCard
@@ -88,6 +93,15 @@ export default function Tabs({ slug }: TabsProps) {
               selected={A11Y}
             >
               Accessibility
+            </Core.GdsMenuButton>
+          )}
+          {hasFAQ && (
+            <Core.GdsMenuButton
+              onClick={InternalLink}
+              href={`/component/${slug}/faq`}
+              selected={FAQ}
+            >
+              FAQ
             </Core.GdsMenuButton>
           )}
         </Core.GdsFlex>

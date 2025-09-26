@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.6.3
+
+### Patch Changes
+
+- 8cdf051: **Grid:** Remove unused storybook style
+- 8cdf051: **Input:** Reflect size so it gets applied, fixing the gap on host for field base host
+
+## 2.6.2
+
+### Patch Changes
+
+- 90751c6: **Button:** Update wording to be `XS` everywhere, spacing and sizes on storybook
+- 5991ecf: Fixing import/exports in /components & /pure
+
 ## 2.6.1
 
 ### Patch Changes

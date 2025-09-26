@@ -341,6 +341,59 @@ await Promise.all(
               },
             ],
           },
+          ...(theme === '2023'
+            ? {
+                studio: {
+                  buildPath: __dirname + `/../../dist/libs/tokens/studio/`,
+                  transforms: ['name/studio', 'color/alpha', 'size/px'],
+                  source: [
+                    __dirname + `/src/tokens/2023/**/*.ref.json`,
+                    __dirname + `/src/tokens/2023/**/tokens.base.json`,
+                    __dirname + `/src/tokens/2023/**/*.typography.json`,
+                    __dirname + `/src/tokens/2023/**/*.comfortable.json`,
+                    __dirname + `/src/tokens/2023/**/*.${colorScheme}.json`,
+                  ],
+                  files: [
+                    {
+                      format: 'json/studio',
+                      destination: `studio.colors.${colorScheme}.json`,
+                      filter: 'is-color-no-ref',
+                      options: { usesDtcg: true, theme: '2023', colorScheme },
+                    },
+                    {
+                      format: 'json/studio',
+                      destination: `studio.shadows.json`,
+                      filter: 'is-shadow',
+                    },
+                    {
+                      format: 'json/studio',
+                      destination: `studio.typography.json`,
+                      filter: 'is-typography',
+                    },
+                    {
+                      format: 'json/studio',
+                      destination: `studio.viewport.json`,
+                      filter: 'is-viewport',
+                    },
+                    {
+                      format: 'json/studio',
+                      destination: `studio.radius.json`,
+                      filter: 'is-radius',
+                    },
+                    {
+                      format: 'json/studio',
+                      destination: `studio.spacing.json`,
+                      filter: 'is-spacing',
+                    },
+                    {
+                      format: 'json/studio',
+                      destination: `studio.motion.json`,
+                      filter: 'is-motion',
+                    },
+                  ],
+                },
+              }
+            : {}),
         },
       }
 

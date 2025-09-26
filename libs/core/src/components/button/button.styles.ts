@@ -142,8 +142,8 @@ const style = css`
 
   @layer sizes {
     :host([size='xs']) .button {
-      --_block-size: var(--gds-sys-space-l);
-      gap: var(--gds-sys-space-4xs);
+      --_block-size: var(--gds-sys-space-xl);
+      gap: var(--gds-sys-space-3xs);
       font: var(--gds-sys-text-detail-book-xs);
       padding-inline: var(--gds-sys-space-s);
     }

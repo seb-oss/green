@@ -8,11 +8,20 @@ import { inspect } from 'util'
 
 import { parse, toCss, tokenize } from './style-expression-parser'
 
-const expression = 'block; hover:flex; xl { focus:block; flex }'
-const ast = parse(tokenize(expression))
-const css = toCss(':host', 'background', ast)
-console.log(
-  'AST',
-  inspect(ast, { showHidden: false, depth: null, colors: true }),
-)
-console.log(inspect(css, { showHidden: false, depth: null, colors: true }))
+const inspectConfig = { showHidden: false, depth: null, colors: true }
+
+const expression = 's; m { l }'
+
+const tokenArray = tokenize(expression)
+
+const ast = parse(tokenArray)
+
+const css = toCss(':host', 'padding', ast, (v) => `var(--gds-sys-space-${v})`)
+
+console.log('---- TOKENS ----')
+console.log(inspect(tokenArray, inspectConfig))
+console.log('---- AST ----')
+console.log(inspect(ast, inspectConfig))
+console.log('---- CSS ----')
+console.log(inspect(css, inspectConfig))
+console.log('-------------')
