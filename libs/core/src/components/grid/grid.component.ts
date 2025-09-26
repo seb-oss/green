@@ -43,6 +43,7 @@ export class GdsGrid extends GdsDiv {
    * Defines the minimum column width. If set, the grid adjusts column size based on content and available width, even without other attributes. Accepts any valid CSS units.
    */
   @styleExpressionProperty({
+    reflect: true,
     property: '--_col-width',
     valueTemplate: (v) => `${isNaN(v as any) ? v : `${v}px`}`,
   })
