@@ -15,12 +15,26 @@ import {
 
 @Directive({
   selector: `gds-input[formControlName]:not([ngDefaultControl]),
+      gds-input[formControl]:not([ngDefaultControl]),
+
      gds-textarea[formControlName]:not([ngDefaultControl]),
+     gds-textarea[formControl]:not([ngDefaultControl]),
+
      gds-dropdown[formControlName]:not([ngDefaultControl]),
+     gds-dropdown[formControl]:not([ngDefaultControl]),
+
      gds-datepicker[formControlName]:not([ngDefaultControl]),
+     gds-datepicker[formControl]:not([ngDefaultControl]),
+
      gds-select[formControlName]:not([ngDefaultControl]),
+     gds-select[formControl]:not([ngDefaultControl]),
+
      gds-radio-group[formControlName]:not([ngDefaultControl]),
+     gds-radio-group[formControl]:not([ngDefaultControl]),
+
      gds-checkbox-group[formControlName]:not([ngDefaultControl]),
+     gds-checkbox-group[formControl]:not([ngDefaultControl]),
+
      [nggCoreControl]`,
   providers: [
     {
