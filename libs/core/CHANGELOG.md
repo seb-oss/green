@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.3
+
+### Patch Changes
+
+- 8cdf051: **Grid:** Remove unused storybook style
+- 8cdf051: **Input:** Reflect size so it gets applied, fixing the gap on host for field base host
+
 ## 2.6.2
 
 ### Patch Changes
