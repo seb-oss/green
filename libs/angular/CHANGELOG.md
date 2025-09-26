@@ -1,5 +1,14 @@
 # Changelog
 
+## 6.4.1
+
+### Patch Changes
+
+- 4b6a253: **V-Angular:** Date input: Added Close on scroll and Dynamic positioning
+- Updated dependencies [90751c6]
+- Updated dependencies [5991ecf]
+  - @sebgroup/green-core@2.6.2
+
 ## 6.4.0
 
 ### Minor Changes

@@ -4,10 +4,12 @@ import fontCss from './font-css.ts'
 import greenColorCompose from './green-color-compose.ts'
 import greenColorUIColorSwift from './green-color-UIColorSwift.ts'
 import nameFigma from './name-figma.ts'
+import nameStudio from './name-studio.ts'
 import shadowCss from './shadow-css.ts'
 
 const transforms = {
   'name/figma': nameFigma,
+  'name/studio': nameStudio,
   'color/mix-blend': colorMixBlend,
   'color/alpha': colorAlpha,
   'green/color/UIColorSwift': greenColorUIColorSwift,

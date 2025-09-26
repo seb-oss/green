@@ -16,7 +16,7 @@ interface BreadcrumbItem {
 interface BreadcrumbsProps {
   slug: string
   title: string
-  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
 }
 
 const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
@@ -29,7 +29,7 @@ const BreadcrumbLink = ({ item }: { item: BreadcrumbItem }) => (
 const LastItem = ({
   section,
 }: {
-  section: 'overview' | 'ux-text' | 'accessibility' | 'code'
+  section: 'overview' | 'ux-text' | 'accessibility' | 'code' | 'faq'
 }) => {
   if (section === 'overview') return null
 
@@ -37,6 +37,7 @@ const LastItem = ({
     'ux-text': 'UX text',
     accessibility: 'Accessibility',
     code: 'Code',
+    faq: 'FAQ',
     overview: null,
   }[section]
 
