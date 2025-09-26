@@ -33,6 +33,11 @@ export type StyleExpressionPropertyOptions = {
    * components with different style or value templates.
    */
   cacheOverrideKey?: string
+
+  /**
+   * If true, mirror the property value to a DOM attribute (for CSS selectors).
+   */
+  reflect?: boolean
 }
 
 const styleCache = new Map<string, CSSResult>()
@@ -53,12 +58,14 @@ export function styleExpressionProperty(
     const valueTemplate = options?.valueTemplate
     const styleTemplate = options?.styleTemplate
     const cacheKey = options?.cacheOverrideKey ?? `0`
+    const attributeName = options?.attribute ?? String(descriptor)
 
     // Jack into Lits property decorator
-    property({ attribute: options?.attribute, noAccessor: true })(
-      proto,
-      descriptor,
-    )
+    property({
+      attribute: attributeName,
+      reflect: options?.reflect,
+      noAccessor: true,
+    })(proto, descriptor)
 
     // Define the getter and setter for the property
     Object.defineProperty(proto, descriptor, {
@@ -66,8 +73,16 @@ export function styleExpressionProperty(
         return this['__' + String(descriptor)]
       },
       set: async function (newValue) {
-        if (!newValue) return
+        if (!newValue) {
+          if (options?.reflect) this.removeAttribute(attributeName)
+          return
+        }
+
         this['__' + String(descriptor)] = newValue
+
+        if (options?.reflect) {
+          this.setAttribute(attributeName, String(newValue))
+        }
 
         await this.updateComplete
 

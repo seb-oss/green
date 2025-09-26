@@ -59,13 +59,7 @@ export default function Main() {
               {category.description}
             </Core.GdsText>
           </Core.GdsFlex>
-          <Core.GdsGrid
-            columns="4"
-            gap="l"
-            width="100%"
-            auto-columns="150"
-            className="test"
-          >
+          <Core.GdsGrid columns="4" gap="l" width="100%" auto-columns="150">
             {category.pages.map((page) => {
               const IconComponent = Core[
                 page.icon
