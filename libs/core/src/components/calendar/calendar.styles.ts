@@ -16,11 +16,9 @@ const style = css`
 
     :host table {
       border-spacing: var(--gds-sys-space-xs);
-      flex-grow: 1;
-      width: 100%;
       padding: 1ch;
 
-      &.small {
+      @media (max-width: 364px), &.small {
         border-spacing: var(--gds-sys-space-3xs);
 
         thead th {
@@ -112,8 +110,8 @@ const style = css`
         }
 
         &.disabled:not(.week-number) {
-          background: var(--gds-sys-color-l3-disabled-01);
           color: var(--gds-sys-color-content-disabled-01);
+          background: var(--gds-sys-color-l3-disabled-01);
           cursor: not-allowed;
         }
 
@@ -143,7 +141,7 @@ const style = css`
           outline-width: var(--gds-sys-space-4xs);
         }
 
-        &.small {
+        @media (max-width: 364px), &.small {
           width: var(--gds-sys-space-xl);
           height: var(--gds-sys-space-xl);
           font: var(--gds-sys-text-body-book-s);
