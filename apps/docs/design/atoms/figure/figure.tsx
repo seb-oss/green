@@ -46,13 +46,13 @@ export default function Figure({
   const shouldShowCaption = !captionType && caption
 
   return (
-    <GdsTheme>
-      <GdsFlex
-        flex-direction="column"
-        gap="xs"
-        width="100%"
-        data-node={identifier}
-      >
+    <GdsFlex
+      flex-direction="column"
+      gap="xs"
+      width="100%"
+      data-node={identifier}
+    >
+      <GdsTheme>
         <GdsCard
           padding="xs"
           dangerouslySetInnerHTML={{ __html: id || '' }}
@@ -61,55 +61,55 @@ export default function Figure({
           justify-content="center"
           align-items="center"
         />
-        {showDoLabel && (
-          <GdsFlex align-items="center" gap="xs" padding="0 s">
-            <GdsDiv
-              display="flex"
-              background="positive"
-              min-width="20px"
-              max-width="20px"
-              min-height="20px"
-              max-height="20px"
-              border-radius="max"
-              justify-content="center"
-              align-items="center"
-              color="positive"
-            >
-              <IconCheckmark size="s" />
-            </GdsDiv>
-            <GdsText tag="p" color="positive">{`Do`}</GdsText>
-          </GdsFlex>
-        )}
-        {showDontLabel && (
-          <GdsFlex align-items="center" gap="xs" padding="0 s">
-            <GdsDiv
-              display="flex"
-              background="negative"
-              min-width="20px"
-              max-width="20px"
-              min-height="20px"
-              max-height="20px"
-              border-radius="max"
-              justify-content="center"
-              align-items="center"
-              color="negative"
-            >
-              <IconCrossLarge size="s" />
-            </GdsDiv>
-            <GdsText tag="p" color="negative">{`Don't`}</GdsText>
-          </GdsFlex>
-        )}
-        {shouldShowCaption && (
-          <GdsText
-            tag="small"
-            font="detail-book-xs"
-            padding-inline="s 0"
-            color="neutral-02"
+      </GdsTheme>
+      {showDoLabel && (
+        <GdsFlex align-items="center" gap="xs" padding="0 s">
+          <GdsDiv
+            display="flex"
+            background="positive"
+            min-width="20px"
+            max-width="20px"
+            min-height="20px"
+            max-height="20px"
+            border-radius="max"
+            justify-content="center"
+            align-items="center"
+            color="positive-01"
           >
-            {caption}
-          </GdsText>
-        )}
-      </GdsFlex>
-    </GdsTheme>
+            <IconCheckmark size="s" />
+          </GdsDiv>
+          <GdsText font="detail-regular-s">{`Do`}</GdsText>
+        </GdsFlex>
+      )}
+      {showDontLabel && (
+        <GdsFlex align-items="center" gap="xs" padding="0 s">
+          <GdsDiv
+            display="flex"
+            background="negative"
+            min-width="20px"
+            max-width="20px"
+            min-height="20px"
+            max-height="20px"
+            border-radius="max"
+            justify-content="center"
+            align-items="center"
+            color="negative-01"
+          >
+            <IconCrossLarge size="s" />
+          </GdsDiv>
+          <GdsText font="detail-regular-s">{`Don't`}</GdsText>
+        </GdsFlex>
+      )}
+      {shouldShowCaption && (
+        <GdsText
+          tag="small"
+          font="detail-book-xs"
+          padding-inline="s 0"
+          color="neutral-02"
+        >
+          {caption}
+        </GdsText>
+      )}
+    </GdsFlex>
   )
 }
