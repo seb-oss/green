@@ -35,6 +35,7 @@ interface StudioProps {
 const COMPONENTS = {
   Compose: Tool.Compose,
   Playground: Tool.Playground,
+  Templates: Tool.Templates,
   Main: Part.Main,
   Migration: Interactive.Migration,
   Radius: Interactive.Radius,

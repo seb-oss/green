@@ -66,6 +66,17 @@ export const studioData: StudioCategory[] = [
         category: 'tools',
         component: 'Compose',
       },
+      {
+        key: 'templates',
+        type: 'tool',
+        slug: '/studio/templates',
+        label: 'Templates',
+        title: 'Templates',
+        description: 'Curated list of templates.',
+        icon: 'IconStore',
+        category: 'tools',
+        component: 'Templates',
+      },
     ],
   },
   {
