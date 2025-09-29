@@ -220,6 +220,7 @@ class Input extends GdsFormControlElement<string> {
         this.#shouldShowFooter(),
         () =>
           html` <gds-form-control-footer
+            id="message"
             class="size-${this.size}"
             .charCounter=${this.#shouldShowRemainingChars
               ? this.maxlength - (this.value?.length || 0)
@@ -298,6 +299,7 @@ class Input extends GdsFormControlElement<string> {
         ?disabled=${this.disabled}
         aria-describedby="supporting-text extended-supporting-text sub-label message"
         aria-invalid=${this.invalid}
+        aria-errormessage="message"
         aria-label=${(this.plain && this.label) || nothing}
         placeholder=" "
         type=${this.type}
