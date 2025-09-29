@@ -45,33 +45,14 @@ export class GdsBreadcrumbs extends withLayoutChildProps(
   label: string = msg('Breadcrumbs')
 
   render() {
-    const elements = Array.from(this.children)
-    const secondToLastIndex = elements.length - 2
-
     return html`
       <nav
         role="navigation"
         aria-label=${this.label}
         class=${classMap({ 'size-small': this.size === 'small' })}
       >
-        <div class="mobile-return">
-          <gds-icon-chevron-left></gds-icon-chevron-left>
-        </div>
         <ol>
-          ${elements.map(
-            (element, index) => html`
-              <li
-                class=${classMap({
-                  'show-on-mobile': index === secondToLastIndex,
-                })}
-              >
-                ${element}
-              </li>
-              ${index < elements.length - 1
-                ? html`<span class="separator" aria-hidden="true">/</span>`
-                : null}
-            `,
-          )}
+          <slot></slot>
         </ol>
       </nav>
     `
