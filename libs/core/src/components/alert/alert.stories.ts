@@ -1,7 +1,6 @@
-import { nothing } from 'lit'
-import { ifDefined } from 'lit/directives/if-defined.js'
 import { Meta, StoryObj } from '@storybook/web-components'
 
+import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 import { html } from '../../utils/helpers/custom-element-scoping'
 import { GdsAlert } from './alert.component'
 
@@ -9,8 +8,6 @@ import './index.ts'
 import '../card/card.ts'
 import '../button/button.ts'
 import '../rich-text/rich-text.ts'
-
-import { argTablePropsFor } from '../../../.storybook/argTableProps.ts'
 
 /**
  * Alert is a message used to inform or update the user about the state of a system, page or function. Icons and color indicate the type and urgency of the information within the message.
