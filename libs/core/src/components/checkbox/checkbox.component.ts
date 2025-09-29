@@ -1,5 +1,5 @@
-import { property, query, queryAsync } from 'lit/decorators.js'
-import { ifDefined } from 'lit/directives/if-defined.js'
+import { property, query } from 'lit/decorators.js'
+import { when } from 'lit/directives/when.js'
 
 import { GdsToggleControlBase } from '../../primitives/toggle-controls-base/toggle-control-base.component'
 import { gdsCustomElement, html } from '../../scoping'
@@ -83,15 +83,18 @@ export class GdsCheckbox extends GdsFormControlElement {
         ?disabled=${this.disabled}
         ?indeterminate=${this.indeterminate}
         aria-invalid=${this.invalid}
-        aria-describedby=${ifDefined(
-          this.supportingText ? 'supporting-text' : '',
-        )}
+        aria-describedby="message supporting-text"
+        aria-errormessage="message"
         id="checkbox-input"
         @change=${() => {
           this.checked = this._elCheckbox.checked
           this.#dispatchChangeEvents()
         }}
       />
+      ${when(
+        this.errorMessage,
+        () => html`<span id="message">${this.errorMessage}</span>`,
+      )}
       <gds-toggle-control-base type="checkbox" @click=${this.#toggleChecked}>
         <label for="checkbox-input" slot="label"> ${this.label} </label>
         <span
