@@ -75,6 +75,10 @@ export class GdsCheckbox extends GdsFormControlElement {
     }
   }
 
+  focus(options?: FocusOptions): void {
+    this._elCheckbox.focus(options)
+  }
+
   render() {
     return html`
       <input
